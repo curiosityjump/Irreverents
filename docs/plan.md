@@ -267,7 +267,7 @@ Full text: `docs/plan/step-4.md`
 
 ## Step 5 — Comfortable on an iPhone, easy to play together
 
-**Status: open, unclaimed — queued behind Step 1.** (Opens when Step 1 closes.)
+**Status: open, unclaimed.** (Opened 2026-11-23 09:00 UTC, Step 1 closed. Before the owner's morning only its "Owed by Step 1" essentials, one worker; the orchestrator has asked Step 1's lead to claim it.)
 
 Full text: `docs/plan/step-5.md`
 
@@ -285,7 +285,7 @@ Full text: `docs/plan/step-7.md`
 
 ## Step 8 — What you see and hear
 
-**Status: open, unclaimed — queued behind Step 1.** (Opens when Step 1 closes.)
+**Status: open, unclaimed — queued behind Step 5.** (Step 1 closed 08:55 UTC; held by the orchestrator for the usage allowance until Step 5's essentials land.)
 
 Full text: `docs/plan/step-8.md`
 
@@ -297,7 +297,7 @@ Full text: `docs/plan/step-9.md`
 
 ## Step 10 — The first ten minutes, played end to end
 
-**Status: open, unclaimed — queued behind Step 1.** (Opens when Step 1's second gate lands: two players on the real page.)
+**Status: open, unclaimed — queued behind Step 4.** (Step 1 closed 08:55 UTC; held by the orchestrator for the usage allowance until Step 2's touch check and Step 4's street people report.)
 
 Full text: `docs/plan/step-10.md`
 
