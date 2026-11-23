@@ -210,11 +210,25 @@ changed without touching code; don't grade the feel yourself.
   a push with a build step and dependencies, how long that takes, what a
   failed build does to the live site, whether WebSockets pass through.
 
-*(The lead's measurements follow, each with its command.)*
+- **Railway runs `npm run build`, keeps dev packages, and deploys a
+  build in 25 s** (lead, 2026-11-23). Probe commit f4c5ea3 pushed
+  04:02:23 UTC; `curl -s …/healthz` at 04:02:48 returned
+  `"probe":{"built":{…,"node":"v22.23.4","devDepAtBuild":true},"devDepAtRuntime":true}`.
+  Railway accepted a committed `package-lock.json`. Still not measured:
+  what a *failed* build does to the live site.
+- **WebSockets pass through Railway and through the sandbox's proxy**
+  (lead, 04:05 UTC). Headless Chromium as Playwright's `iPhone 14
+  landscape` (viewport 750×340, touch on): page in 437 ms, `wss://…/ws`
+  open in 450 ms, ten echo round trips 106–136 ms. So `check:live` can
+  run from a session's container.
+- **Node 22.23.5 here runs `.ts` directly** (`node t.ts`, no flag);
+  registry today: typescript 7.0.2, esbuild 0.28.2, ws 8.23.0; Playwright
+  1.63.0 preinstalled at `/opt/node-tools/node_modules`.
 
 ## Briefs
 
-*(One line per brief.)*
+- `handoff-prompts/step-1-gate-1-skeleton.md` — Gate 1: skeleton, sim
+  core, scenarios, architecture doc. Worker and commit: see handoff notes.
 
 ## Open with the owner
 
