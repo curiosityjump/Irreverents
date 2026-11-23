@@ -157,3 +157,7 @@ actually read (questions for the owner go through
 
 **Flag:** rung 5 was by eye, on hand-made records pushed into the page's world; nothing scripted covers the drawing, and the real path (detector → pedestal → page, two devices) has not been seen. Text follows `draw/npcs.ts` (`fillText`, 8 px): readable, soft on a phone; a shared pixel font would be Step 5's or 8's call.
 
+
+### step-7-a-store-and-pedestal.md, 2026-11-23 (after both parts)
+
+**Note:** your 04:50 message (Step 1's two notes for the paste comment in `store.ts`) reached me after both pushes. The comment already says "where the world is created" and "where a tick's events are handled", which matches; it does not say that worlds are made per room name on demand and all read the one store. I did not push a comment-only change to `src/`, because it would take the live game down for a minute. Add those words when the wiring edit touches the file anyway.
