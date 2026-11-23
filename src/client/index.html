@@ -8,55 +8,68 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <title>Irreverents</title>
 <style>
+  /* DRAFT: the surround, in the art contract's night ramp (docs/mechanisms/art-pipeline.md): dark, quiet and deliberate, never a dead black page. */
+  :root { --night0: #141228; --night1: #221f44; --night2: #343066; --night3: #4c4890; --pale: #d2cfe0; --cream: #ffe2c0; }
   html, body {
     margin: 0; padding: 0; width: 100%; height: 100%;
     position: fixed; top: 0; right: 0; bottom: 0; left: 0; overflow: hidden;
-    background: #0f0f1c; color: #f4f1de; font: 14px/1.4 system-ui, -apple-system, sans-serif;
+    background-color: var(--night0);
+    background-image: radial-gradient(rgba(76, 72, 144, .22) 1px, transparent 1.5px), linear-gradient(180deg, var(--night1) 0%, var(--night0) 55%, var(--night1) 100%);
+    background-size: 8px 8px, 100% 100%;
+    color: var(--pale); font: 600 11px/1.3 ui-rounded, "SF Pro Rounded", "Nunito", system-ui, -apple-system, sans-serif; letter-spacing: .04em;
     overscroll-behavior: none; touch-action: none;
     -webkit-user-select: none; user-select: none;
     -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent;
     -webkit-text-size-adjust: 100%;
   }
-  /* 320x180, sized by src/client/shell.ts to a whole number of device pixels per game pixel. */
-  #game { position: absolute; left: 0; top: 0; image-rendering: pixelated; image-rendering: crisp-edges; background: #1b1b2f; display: block; touch-action: none; }
-  #status { position: absolute; left: 0; right: 0; top: 6px; top: max(6px, env(safe-area-inset-top)); text-align: center; pointer-events: none; }
-  #status span { display: inline-block; padding: 3px 10px; border-radius: 10px; background: rgba(15, 15, 28, .8); }
+  /* Sized by src/client/shell.ts (view.w x view.h game pixels) to a whole number of device pixels per game pixel. The thin pale frame is outside it, so it never covers a game pixel. */
+  #game { position: absolute; left: 0; top: 0; image-rendering: pixelated; image-rendering: crisp-edges; background: #1b1b2f; display: block; touch-action: none; box-shadow: 0 0 0 1px rgba(210, 207, 224, .55), 0 0 0 4px var(--night0), 0 6px 24px 4px rgba(10, 8, 24, .7); }
+  #status { position: absolute; left: 0; right: 0; top: 6px; top: max(6px, env(safe-area-inset-top)); text-align: center; pointer-events: none; text-transform: uppercase; letter-spacing: .12em; }
+  #status span { display: inline-block; padding: 4px 12px; border-radius: 999px; background: rgba(20, 18, 40, .85); border: 1px solid rgba(210, 207, 224, .4); }
   #status[hidden], #touch[hidden] { display: none; }
 
   /* Read by src/client/shell.ts to learn the notch and home-bar insets. */
   #safe { position: fixed; visibility: hidden; pointer-events: none; padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); }
 
-  /* DRAFT: the touch layout: a left/right pad under the left thumb, one button per action under the right. src/client/shell.ts places the two zones beside the view (sideways) or below it (upright), or over its bottom corners where a 16:9 phone leaves no room (.over), and sizes everything.
-     Quiet on purpose (docs/plan/step-5.md, "Controls never hide the game"): a control paints only its picture (the delivered U08-01 art, assets/ui/touch/) or, with no picture, a faint label or arrow; the touch area is much larger than what is painted; a press lights it up under the thumb. */
+  /* DRAFT: the touch layout, a game pad: a left/right stick under the left thumb, the actions in an arc under the right. src/client/shell.ts sizes everything and places each button: below the view upright, in the bars beside it sideways, or over its lower corners where bars would cost a step of scale (.over).
+     Quiet over the view on purpose (docs/plan/step-5.md, "Controls never hide the game"): there a control paints only its picture (assets/ui/touch/) or a faint label; the touch area is much larger than what is painted; a press lights it up under the thumb. */
   #touch { position: absolute; top: 0; right: 0; bottom: 0; left: 0; pointer-events: none; }
-  #pad, #actions button { pointer-events: auto; touch-action: none; box-sizing: border-box; border: 0; background: transparent; color: rgba(244, 241, 222, .7); }
+  #pad, #actions button { pointer-events: auto; touch-action: none; box-sizing: border-box; border: 0; background: transparent; color: rgba(244, 241, 222, .75); }
   #pad { position: absolute; left: var(--lz-left, 14px); width: var(--lz-width, 156px); bottom: var(--bottom, 14px); height: var(--pad-h, 76px); display: flex; }
   #pad i { flex: 1; position: relative; display: flex; align-items: center; justify-content: center; border-radius: 14px; }
   #pad i::before { content: ""; border: 9px solid transparent; opacity: .6; filter: drop-shadow(0 0 1px #0f0f1c); }
   #pad i.l::before { border-right-color: rgba(244, 241, 222, .8); margin-right: 9px; }
   #pad i.r::before { border-left-color: rgba(244, 241, 222, .8); margin-left: 9px; }
   #pad i.art::before { display: none; }
-  #pad i.on, #actions button.on { background: rgba(244, 241, 222, .25); color: #fff; }
+  /* The stick pushes up when the thumb slides up off it (touch.ts): a small chevron above the pad says so, lit while pushed. Not over the view. */
+  #touch:not(.over) #pad::after { content: ""; position: absolute; left: 50%; top: -14px; width: 10px; height: 10px; margin-left: -6px; border: solid rgba(210, 207, 224, .45); border-width: 2px 0 0 2px; transform: rotate(45deg); pointer-events: none; }
+  #touch:not(.over) #pad.up::after { border-color: var(--cream); }
+  #pad i.on, #actions button.on { background: rgba(244, 241, 222, .2); color: #fff; }
   #pad i.on::before { opacity: 1; }
-  #actions { position: absolute; left: var(--rz-left, auto); width: var(--rz-width, 180px); bottom: var(--bottom, 14px); display: flex; flex-wrap: wrap-reverse; flex-direction: row-reverse; gap: var(--gap, 8px); }
-  #actions button { position: relative; width: var(--btn, 76px); height: var(--btn, 76px); border-radius: 14px; font: 600 12px/1 system-ui, -apple-system, sans-serif; text-shadow: 0 0 2px #0f0f1c, 0 1px 1px #0f0f1c; margin: 0; padding: 0; -webkit-appearance: none; appearance: none; overflow: hidden; }
+  #actions { position: absolute; top: 0; right: 0; bottom: 0; left: 0; pointer-events: none; }
+  #actions button { position: absolute; left: -200px; top: 0; width: var(--btn, 64px); height: var(--btn, 64px); border-radius: 50%; font: 700 11px/1 ui-rounded, "SF Pro Rounded", "Nunito", system-ui, -apple-system, sans-serif; letter-spacing: .08em; text-transform: uppercase; text-shadow: 0 0 2px #0f0f1c, 0 1px 1px #0f0f1c; margin: 0; padding: 0; -webkit-appearance: none; appearance: none; overflow: hidden; }
+  /* A button with no picture yet still looks like a button where it is not over the view: a round night plate with a pale rim and its word. */
+  #touch:not(.over) #actions button:not(.art) { background: radial-gradient(circle at 50% 38%, var(--night2), var(--night1) 70%); box-shadow: inset 0 0 0 2px rgba(210, 207, 224, .55), inset 0 -3px 0 2px rgba(20, 18, 40, .6); color: var(--cream); }
+  #touch:not(.over) #actions button:not(.art).on { background: radial-gradient(circle at 50% 45%, var(--night3), var(--night2) 70%); }
   #actions button.art, #actions button.art.on { color: transparent; text-shadow: none; }
   /* The picture: a 48x24 strip (normal, pressed) shown one half at a time, at a whole number of device pixels per art pixel (shell.ts). It takes no touches: the control under it does. */
   .icon { display: none; position: absolute; left: var(--icon-off, 0); top: var(--icon-off, 0); width: var(--icon, 48px); height: var(--icon, 48px); background-repeat: no-repeat; background-size: 200% 100%; background-position: 0 0; image-rendering: pixelated; image-rendering: crisp-edges; pointer-events: none; opacity: .85; }
+  #touch:not(.over) .icon { opacity: 1; }
   #pad .icon { left: var(--pad-icon-x, 0); top: var(--pad-icon-y, 0); }
   .art > .icon { display: block; }
   .on > .icon { background-position: 100% 0; opacity: 1; }
 
-  #hint { position: absolute; left: 0; right: 0; top: var(--hint-top, 200px); padding: 0 12px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 13px; opacity: .85; text-align: center; }
+  #hint { position: absolute; left: 0; right: 0; top: var(--hint-top, 200px); padding: 0 16px; display: flex; align-items: center; justify-content: flex-start; gap: 8px; text-transform: uppercase; letter-spacing: .12em; text-align: center; color: rgba(210, 207, 224, .8); }
   #hint[hidden] { display: none; }
-  #hint button { pointer-events: auto; touch-action: manipulation; width: 32px; height: 32px; flex: none; border: 1px solid rgba(244, 241, 222, .45); border-radius: 50%; background: transparent; color: #f4f1de; font-size: 16px; line-height: 1; padding: 0; }
+  #hint button { pointer-events: auto; touch-action: manipulation; width: 28px; height: 28px; flex: none; border: 1px solid rgba(210, 207, 224, .45); border-radius: 50%; background: var(--night1); color: var(--pale); font: 600 14px/1 ui-rounded, system-ui, sans-serif; padding: 0; }
 </style>
 </head>
 <body>
 <canvas id="game"></canvas>
 <div id="touch" hidden></div>
 <div id="status" hidden><span></span></div>
-<div id="hint" hidden><span>Better sideways. If turning does nothing, switch off rotation lock.</span><button type="button" aria-label="Dismiss">&times;</button></div>
+<!-- DRAFT: the one dismissible line shown upright. It used to advise turning the phone ("Better sideways"); the owner, 2026-11-23: "It should play well in portrait too", so it no longer does. Left-aligned so it never crowds the top button of the arc. -->
+<div id="hint" hidden><span>Plays either way up</span><button type="button" aria-label="Dismiss">&times;</button></div>
 <div id="safe"></div>
 <!-- INTENT: this script comes first and stands alone, in syntax every iPhone Safari reads, so that it still works when game.js fails to load or to parse (an older iOS), which is exactly when nobody could otherwise tell us what happened. It sends what went wrong to the server (GET /debug/errors lists it; src/server/errors.ts): the error, this page's build, the screen, the user-agent. INTENT: no personal data: never the player id, a name, or the room (anything after a "?" is cut from every string, since the room is in the address). DRAFT: at most 20 reports per page load. -->
 <script>

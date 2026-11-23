@@ -5,7 +5,8 @@ import { report } from './report.ts';
 /**
  * The touch controls: produces the same Input the keyboard does.
  *
- * DRAFT: the layout (a left/right pad bottom-left, one button per action
+ * DRAFT: the layout (a left/right pad bottom-left that also pushes up when
+ * the thumb slides up off it, one button per action in an arc
  * bottom-right; src/client/shell.ts places and sizes them).
  * INTENT: the buttons are built from the action list (content/actions/), one
  * element with `data-action="<id>"` each, so "every action has a touch
@@ -40,6 +41,7 @@ function addIcon(el: HTMLElement, file: string): void {
 
 export function watchTouch(content: Content, host: HTMLElement): () => Input {
   let x = 0;
+  let y = 0;
   const held = new Set<string>();
 
   const pad = document.createElement('div');
@@ -56,15 +58,24 @@ export function watchTouch(content: Content, host: HTMLElement): () => Input {
   const aim = (e: PointerEvent): void => {
     const box = pad.getBoundingClientRect();
     x = e.clientX < box.left + box.width / 2 ? -1 : 1;
+    // INTENT: the stick also pushes up and down: slide the thumb up off the
+    // pad (or down off it) and keep holding. Entering a doorway is a fresh
+    // push up (docs/mechanisms/rooms-and-doors.md); without this a touch
+    // player could never use one (D-093: every action works by touch).
+    // DRAFT: the thresholds (the pad's own top and bottom edges).
+    y = e.clientY < box.top ? -1 : e.clientY > box.bottom ? 1 : 0;
     l.classList.toggle('on', x < 0);
     r.classList.toggle('on', x > 0);
+    pad.classList.toggle('up', y < 0);
   };
   const release = (e: PointerEvent): void => {
     if (e.pointerId !== padPointer) return;
     padPointer = null;
     x = 0;
+    y = 0;
     l.classList.remove('on');
     r.classList.remove('on');
+    pad.classList.remove('up');
   };
   pad.addEventListener('pointerdown', (e) => {
     e.preventDefault();
@@ -115,12 +126,14 @@ export function watchTouch(content: Content, host: HTMLElement): () => Input {
   // everything so a character cannot be left running on its own.
   const clear = (): void => {
     x = 0;
+    y = 0;
     padPointer = null;
     held.clear();
+    pad.classList.remove('up');
     for (const el of host.querySelectorAll('.on')) el.classList.remove('on');
   };
   window.addEventListener('blur', clear);
   document.addEventListener('visibilitychange', clear);
 
-  return () => ({ x, y: 0, held: [...held].sort() });
+  return () => ({ x, y, held: [...held].sort() });
 }

@@ -14,6 +14,8 @@ import { drawRoomParts } from './draw/room-parts.ts';
 /** DRAFT: the internal resolution the art on order assumes (docs/plan/step-1.md). */
 export const VIEW_W = 320;
 export const VIEW_H = 180;
+export const view = { w: VIEW_W, h: VIEW_H };
+const viewSize = view;
 const SKY = '#1b1b2f';
 
 /**
@@ -25,13 +27,13 @@ const SKY = '#1b1b2f';
  */
 export function render(g: CanvasRenderingContext2D, world: World, content: Content, roomId: string, view?: PlayerView): { x: number; y: number } {
   g.fillStyle = SKY;
-  g.fillRect(0, 0, VIEW_W, VIEW_H);
+  g.fillRect(0, 0, viewSize.w, viewSize.h);
   const room = content.rooms[roomId];
   if (!room) return { x: 0, y: 0 };
   const mine = view ? world.entities.find((e) => e.id === view.me) : undefined;
   const box = mine ? content.characters[mine.kind]?.box : undefined;
   const focus = mine ? { x: mine.x + (box?.w ?? 0) / 2, y: mine.y + (box?.h ?? 0) / 2 } : undefined;
-  const { ox, oy } = roomOrigin(room, VIEW_W, VIEW_H, focus);
+  const { ox, oy } = roomOrigin(room, viewSize.w, viewSize.h, focus);
   drawRoom(g, room, ox, oy, content);
   drawRoomParts(g, world, room, ox, oy);
   drawEntities(g, world, content, roomId, ox, oy, view);
