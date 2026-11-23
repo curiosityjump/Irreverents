@@ -187,7 +187,7 @@ is fun; whether the shopkeeper being pleased to be robbed is funny.
 
 ## Measure
 
-*(Lead `session_017WiGzG4WzuJfHAu3XWoUhc`, 2026-11-23 04:45 UTC, at `b3a419e`.)*
+*(Lead `session_017WiGzG4WzuJfHAu3XWoUhc`, 2026-11-23 04:33 UTC, at `b3a419e`.)*
 
 - **Baseline:** `npm run check` green with 3 scenarios, none about
   people; `npm run gates` 0 of 6. No NPC code or data exists.
@@ -202,7 +202,7 @@ is fun; whether the shopkeeper being pleased to be robbed is funny.
 - **State must ride on entities.** Step 1's server replicates entities
   generically; a new `World` field might not travel. All of this step's
   state is `entity.c.*`, the area alert included.
-- **Seams** (messages sent to both leads 04:35 UTC): Step 2 emits `hit`,
+- **Seams** (messages sent to both leads 04:30 UTC): Step 2 emits `hit`,
   `grabbed`, `thrown`; this step maps event types to deeds in data.
   Step 2 creates `content/placements/` and `populateRoom` (its push 1)
   and hands the kind over; this step extends it with `npc`, `routine`
@@ -244,7 +244,7 @@ for later, as the step suggests.
 
 ## Briefs
 
-- `handoff-prompts/step-4-slice-1-moods.md` (written 04:45 UTC).
+- `handoff-prompts/step-4-slice-1-moods.md` (written 04:35 UTC).
 
 ## Open with the owner
 

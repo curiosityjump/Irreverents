@@ -1,6 +1,6 @@
 # Step 4, slice 1: people with three moods (build gate C)
 
-Brief for one cold session. Written 2026-11-23 04:45 UTC by the Step 4
+Brief for one cold session. Written 2026-11-23 04:35 UTC by the Step 4
 lead (`session_017WiGzG4WzuJfHAu3XWoUhc`). The step is
 `docs/plan/step-4.md`; this brief is self-contained, you do not need the
 design library or `docs/vision.md`.
@@ -58,7 +58,7 @@ moment part 1 is on `main`, so part 1 is the foundation and nothing else:
   `hero` body: a 12×26 box, runs 96 px/s. Tiles are 16 px; one screen is
   20×11 tiles.
 
-### The seams with the other steps (agreed by message, 04:35–04:50 UTC)
+### The seams with the other steps (agreed by message, 04:30–04:35 UTC)
 
 Read `docs/plan/step-4.md`, "Every body is Step 2's, player or not",
 and "Names other steps are now building against" in
