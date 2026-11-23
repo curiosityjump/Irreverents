@@ -176,21 +176,3 @@ actually read (questions for the owner go through
 **Flag:** the banner's "new" means "not in the first frame that had a world in it". If Step 1's network layer delivers the world over several frames, or re-delivers it after a reconnect, check that old records are not announced (several arriving in one frame are already ignored).
 
 **Flag:** rung 5 was by eye, on hand-made records pushed into the page's world; nothing scripted covers the drawing, and the real path (detector → pedestal → page, two devices) has not been seen. Text follows `draw/npcs.ts` (`fillText`, 8 px): readable, soft on a phone; a shared pixel font would be Step 5's or 8's call.
-
-### step-6-a-king-and-speech.md, 2026-11-23 (Step 6)
-
-**Flag:** at phone size the throne room's floor row is cut off at the bottom of the view on the first frame: the room is 256 px tall, the view 180, and the camera does not follow the player down. The king, throne and ribbon are all visible; the player's own feet are not. Seen in my browser look (844×390). Step 3's (`src/client/draw/room.ts`), not touched.
-
-**Flag:** the ribbon can cover the lowest balcony when the king is lifted (it sits over his head, two rows). `DRAFT:` look; fine to my eye, the owner's to judge.
-
-**Note:** the repeat check covers exactly the owner's three hours (1,800 lines at 6 s). Past it, lines with a number never repeat; the genealogy's pairs come round after 437 passes (about four and a half hours). Longer lists push that out; no code.
-
-**Note:** the check is stricter than the brief's 56 letters: a line must also wrap into two rows of 28, the way it is drawn. Three of my own first lines failed it.
-
-**Note:** my scenarios pin ticks to `speechLineTime` 6 and `startLine` 4 (line changes at ticks 360, 720, 1080), and scenario 3 to the grappler's tuning and to `throne-crate-2` standing where the thrown king lands (he hits it, and it knocks `throne-crate-1` out of the east door into the street: unplanned, kept). Changing the placements or those numbers moves them; `node scripts/trace.ts` shows where.
-
-**Note:** bodies do not block walking, so the crates near the spawn tiles are in nobody's way. The throne is weight 400: nobody lifts it, a hit barely shifts it.
-
-**Note:** `content/game.json` not touched; the brief file is left for you to delete after review.
-
-**Flag:** Step 3's room controls (landed while I worked) run the content check with every room and placements file removed, so a kind that points at a placement fails all eight. Mine now checks its `speaker` only when the content has placements (`INTENT:` in `src/content/kinds/audience.ts`). The next kind that refers to a placed id will hit the same thing; worth a line in Step 3's or the content-validation writeup (theirs).

@@ -145,7 +145,7 @@ Lead `session_017WiGzH9B4usC2uz4woP8Sa`, 04:53–05:00 UTC, `main` at 1ab71d9:
 
 ## Briefs
 
-- **Slice A** (`handoff-prompts/step-6-a-king-and-speech.md`): the king,
+- **Slice A, shipped 1b9a2bc, reviewed 08:45 UTC** (durable record: `docs/mechanisms/royal-audience.md`): the king,
   a throne and a few crates placed by data; the speech as data; the
   speech clock; the ribbon. Signals 1 (its scripted half) and 4.
 - **Slice B (not written):** the window (asked of the Step 3 lead,
@@ -178,3 +178,24 @@ Nothing blocking. Taste, in the morning: the speech's words.
   slice B waits until told. The Step 3 lead confirmed the window (a
   `breakable` with `"look": "window"` in the west wall above the dais,
   landing in the hidden passage and the undercroft) is in its slice B.
+- **Lead, 08:45 UTC. Slice A reviewed and closed (1b9a2bc).** Re-run by
+  me on a fresh pull: build and check green; my own control (the clock
+  skipping a held or flying body) fails `step6-king-thrown-still-talking`
+  and nothing else; the page at 844×390 with the start room set to the
+  throne room locally shows the king, throne and ribbon on the first
+  frame and the line changing after six seconds, no page errors. Read:
+  the opening and samples of the tail to line 5000. Not verified: two
+  devices, a real iPhone, touch, the ribbon while he is carried (the
+  worker saw it; I did not repeat it). Worker's notes kept here:
+  scenarios pin ticks to `speechLineTime` 6, `startLine` 4 and to
+  `throne-crate-2` standing where the thrown king lands, so moving the
+  throne room's placements moves them (`node scripts/trace.ts`); the
+  genealogy's pairs come round after about four and a half hours, longer
+  lists push that out. Flags routed to the Step 3 lead (the view cuts off
+  the throne room's floor row; a content kind that points at a placed id
+  fails the room controls unless it skips the check when there are no
+  placements). **Holding on slice B by the orchestrator's order.** For
+  whoever writes it: the window is Step 3's (`breakable`,
+  `"look": "window"`), the court is Step 4's people, scenarios stop at
+  five minutes so the three-hour proof needs its own fast runner.
+
