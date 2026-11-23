@@ -209,6 +209,12 @@ bottom-centred over an entrance; `level-pie-0`..`4` 12x12 (none, a quarter, half
 - **The depot's decor follows its room:** Step 16 slice 3 (5ae2ac0, 9dd3561) put ground under four far/back items in
   `content/decor/quarry-depot.json`; `selfcheck.py` failed on the stale file, so push 2 re-ran `make.py` and the four
   items are gone (the placing rules, not a choice).
+- **Props follow rooms, again (after Step 3 puzzles 6475497/4204f68 and the depot's 2x1 `depot-door-hide`):** `make.py`
+  adds `hide-2x1`/`hide-front-2x1` (drawn curtain, as every non-1x1 hide) and re-packs `parts.png` (every existing
+  look pixel-identical at its new rectangle); the depot loses one back item and the undercroft about eight around
+  columns 8-20, row 12 (where the hidden pocket now is). **Doubt, for the lead:** a bare patch of floor among the
+  undercroft's barrels and lantern posts could point at the pocket (`INTENT:` "Nothing points" above). The rule is
+  the same everywhere and was not hand-tuned; if it reads as a hint, shift the barrel hash seed in `place.py`.
 
 ## Deviations from the contract
 
