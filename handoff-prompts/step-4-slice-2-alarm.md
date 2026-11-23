@@ -14,7 +14,7 @@ you). Where that file and this brief disagree about a *shape*, the file
 wins; about a *rule*, this brief wins: tell the lead.
 
 **Since this was written: the foundation is on `main` at `a501061`**
-(re-run by the lead at 04:50 UTC: build and check green, and making the
+(re-run by the lead at 04:47 UTC: build and check green, and making the
 villain's polite purchase "expected" fails `step4-villain-buys-politely`
 as it should). What it settled, where this brief was guessing: a hero's
 or a routine's act is a `did` event that the witness pass turns into

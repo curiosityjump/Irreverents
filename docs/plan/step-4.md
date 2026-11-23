@@ -250,7 +250,8 @@ for later, as the step suggests.
   `session_017WiGzFBg5B72dx48zdiZh9`, launched 04:35 UTC; its part 1
   (the foundation) is due about 05:20, the rest about 06:45.
 - `handoff-prompts/step-4-slice-2-alarm.md`: the bell, the call, the
-  alert, responders, hiding and cooling; gate D. Launched 04:52 UTC,
+  alert, responders, hiding and cooling; gate D. Worker
+  `session_017WiGzHFR7FTJpj44ENRzvm`, launched 04:47 UTC,
   after slice 1's part 1 landed at `a501061` (04:46) and the lead
   re-ran it: build and check green; control: the villain's polite
   purchase made "expected" fails `step4-villain-buys-politely`. Not
