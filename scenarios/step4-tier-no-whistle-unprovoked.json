@@ -1,0 +1,84 @@
+{
+  "id": "step4-tier-no-whistle-unprovoked",
+  "proves": "Step 4's town tiers, D-063 (seeing is not calling): at alert 1 in the castle street the guard comes, sees the hero and swings at them, but the hero only stands in his view and does nothing more: he never whistles, the alert stays 1 and nobody walks in. Control (watched to fail): the whistle's 'something more since his last report' rule off (he blows on sight), and he whistles",
+  "room": "castle-street",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "brawler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 60,
+      "to": 200,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 1500,
+      "to": 1505,
+      "hold": [
+        "interact"
+      ]
+    }
+  ],
+  "ticks": 3600,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "hit",
+      "where": {
+        "by": "street-guard",
+        "target": "p:a"
+      },
+      "between": [
+        2700,
+        3600
+      ],
+      "count": [
+        2,
+        99
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "call-started",
+      "where": {
+        "by": "street-guard"
+      },
+      "between": [
+        0,
+        3600
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "alert",
+      "area": "castle-street",
+      "between": [
+        2130,
+        3600
+      ],
+      "is": 1
+    },
+    {
+      "fact": "event",
+      "event": "dispatch-arrived",
+      "between": [
+        0,
+        3600
+      ],
+      "count": [
+        0,
+        0
+      ]
+    }
+  ]
+}

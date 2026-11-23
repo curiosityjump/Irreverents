@@ -1,0 +1,145 @@
+{
+  "id": "step4-tier-both-doors",
+  "proves": "Step 4's town tiers: help comes by both street doors. In the castle street the guard's whistle brings level 2's row (two: one by the west door, one by the east) and the shopkeeper's next bell call brings level 3's (three, in turn: west, east, west, the second by the west door a tile further in); each stands beside its door, inside the room, as it walks in. Control (watched to fail): the dispatch file lists only the west door, and every arrival comes in by it",
+  "room": "castle-street",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "brawler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 60,
+      "to": 200,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 1500,
+      "to": 1505,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 2700,
+      "to": 2704,
+      "hold": [
+        "attack"
+      ]
+    }
+  ],
+  "ticks": 3400,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "dispatch-arrived",
+      "where": {
+        "area": "castle-street",
+        "row": 1,
+        "people": [
+          "castle-street:help0:0",
+          "castle-street:help0:1"
+        ]
+      },
+      "between": [
+        2890,
+        2940
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "people",
+      "room": "castle-street",
+      "at": 2918,
+      "x": [
+        16,
+        40
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "people",
+      "room": "castle-street",
+      "at": 2918,
+      "x": [
+        728,
+        752
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "dispatch-arrived",
+      "where": {
+        "area": "castle-street",
+        "row": 2,
+        "people": [
+          "castle-street:help1:0",
+          "castle-street:help1:1",
+          "castle-street:help1:2"
+        ]
+      },
+      "between": [
+        3300,
+        3400
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "alert",
+      "area": "castle-street",
+      "at": 3400,
+      "is": 3
+    },
+    {
+      "fact": "people",
+      "room": "castle-street",
+      "between": [
+        3340,
+        3345
+      ],
+      "x": [
+        16,
+        56
+      ],
+      "count": [
+        2,
+        2
+      ]
+    },
+    {
+      "fact": "people",
+      "room": "castle-street",
+      "between": [
+        3340,
+        3345
+      ],
+      "x": [
+        712,
+        752
+      ],
+      "count": [
+        1,
+        1
+      ]
+    }
+  ]
+}

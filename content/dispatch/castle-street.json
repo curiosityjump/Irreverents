@@ -1,0 +1,12 @@
+{
+  "//": "DRAFT (Step 4, the town's tiers; docs/decisions-log.md, 'Step 4: dispatch'): who the town sends to the castle street. Help walks in by the two street doors, in turn. Level 1's row is empty: the placed guard answers the bell, as before. Level 2 brings two guards (one by each door), level 3 three; at level 3 each further completed call brings the last row again, while the street holds at most 8 people (the camp's bound; the shopkeeper, the villain and the guard are 3 of them). Doc 26's ladder is 'finite illustrative design': every number here is a first guess. The banners are the words shown when a level is reached (no digits).",
+  "id": "castle-street",
+  "doors": ["to-throne-room", "to-courtyard"],
+  "cap": 8,
+  "rows": [
+    [],
+    [{ "character": "guard", "npc": "guard" }, { "character": "guard", "npc": "guard" }],
+    [{ "character": "guard", "npc": "guard" }, { "character": "guard", "npc": "guard" }, { "character": "guard", "npc": "guard" }]
+  ],
+  "banners": ["The watch is called", "More of the watch", "The whole watch is out"]
+}

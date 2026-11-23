@@ -1,0 +1,457 @@
+{
+  "id": "step4-tier-cap-holds",
+  "proves": "Step 4's town tiers (doc 24, bounded crowds): a dispatch row waits while it would take the street past its cap. In the castle street the hero fights on for ninety seconds and the whistles and the bell are let finish: after level 3's row (8 people: 3 placed and 5 arrived) calls keep completing, but no further row walks in and the street never holds more than 8. Control (watched to fail): the cap off (npcDispatchCapOn 0), and the last row walks in again past it",
+  "room": "castle-street",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "brawler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 60,
+      "to": 200,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 1500,
+      "to": 1505,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 2700,
+      "to": 2704,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 3400,
+      "to": 3404,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 3520,
+      "to": 3524,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 3640,
+      "to": 3644,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 3760,
+      "to": 3764,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 3880,
+      "to": 3884,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 4000,
+      "to": 4004,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 4120,
+      "to": 4124,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 4240,
+      "to": 4244,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 4360,
+      "to": 4364,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 4480,
+      "to": 4484,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 4600,
+      "to": 4604,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 4720,
+      "to": 4724,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 4840,
+      "to": 4844,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 4960,
+      "to": 4964,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 5080,
+      "to": 5084,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 5200,
+      "to": 5204,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 5320,
+      "to": 5324,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 5440,
+      "to": 5444,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 5560,
+      "to": 5564,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 5680,
+      "to": 5684,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 5800,
+      "to": 5804,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 5920,
+      "to": 5924,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 6040,
+      "to": 6044,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 6160,
+      "to": 6164,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 6280,
+      "to": 6284,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 6400,
+      "to": 6404,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 6520,
+      "to": 6524,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 6640,
+      "to": 6644,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 6760,
+      "to": 6764,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 6880,
+      "to": 6884,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 7000,
+      "to": 7004,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 7120,
+      "to": 7124,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 7240,
+      "to": 7244,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 7360,
+      "to": 7364,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 7480,
+      "to": 7484,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 7600,
+      "to": 7604,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 7720,
+      "to": 7724,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 7840,
+      "to": 7844,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 7960,
+      "to": 7964,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 8080,
+      "to": 8084,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 8200,
+      "to": 8204,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 8320,
+      "to": 8324,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 8440,
+      "to": 8444,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 8560,
+      "to": 8564,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 8680,
+      "to": 8684,
+      "hold": [
+        "attack"
+      ]
+    }
+  ],
+  "ticks": 8800,
+  "expect": [
+    {
+      "fact": "people",
+      "room": "castle-street",
+      "between": [
+        0,
+        8800
+      ],
+      "count": [
+        0,
+        8
+      ]
+    },
+    {
+      "fact": "people",
+      "room": "castle-street",
+      "at": 3400,
+      "count": [
+        8,
+        8
+      ]
+    },
+    {
+      "fact": "alert",
+      "area": "castle-street",
+      "between": [
+        3340,
+        8800
+      ],
+      "is": 3
+    },
+    {
+      "fact": "event-where",
+      "event": "call-completed",
+      "where": {
+        "area": "castle-street"
+      },
+      "between": [
+        3400,
+        8800
+      ],
+      "count": [
+        4,
+        99
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "dispatch-arrived",
+      "between": [
+        0,
+        8800
+      ],
+      "count": [
+        2,
+        2
+      ]
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-import { alertOf, raiseAlert } from '../npc/alert.ts';
+import { completeCall } from '../npc/alert.ts';
 import { canSee } from '../npc/sight.ts';
 import { centre, drive, isOut, npcKind, seconds, thingDef } from '../npc/state.ts';
 import type { Entity, StepContext, System } from '../types.ts';
@@ -73,7 +73,7 @@ const system: System = {
         delete e.c.call;
         continue;
       }
-      // DRAFT: the villain calling at his own horn (D-070) and a struck guard whistling are not built; someone answering a call does not make one.
+      // DRAFT: the villain calling at his own horn (D-070) is not built; someone answering a call does not ring a bell (a guard on duty whistles instead: systems/alert-whistle.ts).
       if (kind.side !== 'good' || e.c.respond) continue;
       // DRAFT (docs/decisions-log.md): a report names the heroes, so only someone upset by a hero goes to call.
       if (!n.offenders.some((id) => findEntity(world, id)?.player != null)) continue;
@@ -124,14 +124,8 @@ const system: System = {
       call.bell = null;
       call.stall = 0;
       call.reported = n.dissonance;
-      ctx.emit('call-completed', { by: e.id, area: e.room, x: at.x, y: at.y });
-      // INTENT (D-063, D-075): only a completed call raises the alert. This is the one call of raiseAlert().
-      raiseAlert(ctx, e.room);
-      const alert = alertOf(world, e.room);
-      if (alert) {
-        alert.x = at.x;
-        alert.y = at.y;
-      }
+      // INTENT (D-063, D-075): only a completed call raises the alert, by bell or whistle; completeCall() is the one site.
+      completeCall(ctx, e.id, e.room, at);
     }
   },
 };

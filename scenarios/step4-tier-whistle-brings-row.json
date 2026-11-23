@@ -1,0 +1,173 @@
+{
+  "id": "step4-tier-whistle-brings-row",
+  "proves": "Step 4's town tiers: in the castle street at alert 1 (the shopkeeper's bell, the guard come to the place reported and swinging at the hero), the hero hits the guard once in his view; once up, he blows his whistle for two seconds and it completes: the street's alert is 2, and the dispatch table's level-2 row walks in, one guard by each street door, both walking toward the place reported. Control (watched to fail): with no dispatch file for the street, no whistle, the alert stays 1 and nobody comes",
+  "room": "castle-street",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "brawler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 60,
+      "to": 200,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 1500,
+      "to": 1505,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 2700,
+      "to": 2704,
+      "hold": [
+        "attack"
+      ]
+    }
+  ],
+  "ticks": 3150,
+  "expect": [
+    {
+      "fact": "alert",
+      "area": "castle-street",
+      "between": [
+        2130,
+        2916
+      ],
+      "is": 1
+    },
+    {
+      "fact": "event-where",
+      "event": "call-started",
+      "where": {
+        "by": "street-guard"
+      },
+      "between": [
+        2710,
+        2800
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "call-completed",
+      "where": {
+        "by": "street-guard",
+        "area": "castle-street"
+      },
+      "between": [
+        2890,
+        2940
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "alert",
+      "area": "castle-street",
+      "between": [
+        2940,
+        3150
+      ],
+      "is": 2
+    },
+    {
+      "fact": "event-where",
+      "event": "dispatch-arrived",
+      "where": {
+        "area": "castle-street",
+        "row": 1,
+        "people": [
+          "castle-street:help0:0",
+          "castle-street:help0:1"
+        ]
+      },
+      "between": [
+        2890,
+        2940
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "people",
+      "room": "castle-street",
+      "between": [
+        2940,
+        3150
+      ],
+      "count": [
+        5,
+        5
+      ]
+    },
+    {
+      "fact": "people",
+      "room": "castle-street",
+      "at": 3000,
+      "x": [
+        40,
+        120
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "people",
+      "room": "castle-street",
+      "at": 3100,
+      "x": [
+        120,
+        175
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "people",
+      "room": "castle-street",
+      "at": 3000,
+      "x": [
+        640,
+        720
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "people",
+      "room": "castle-street",
+      "at": 3100,
+      "x": [
+        580,
+        660
+      ],
+      "count": [
+        1,
+        1
+      ]
+    }
+  ]
+}

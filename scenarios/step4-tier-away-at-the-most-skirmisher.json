@@ -1,0 +1,195 @@
+{
+  "id": "step4-tier-away-at-the-most-skirmisher",
+  "proves": "Step 4's town tiers, there is always a way out (CLAUDE.md; D-019): solo, the skirmisher takes goods in the shopkeeper's view, the bell brings the guard, the skirmisher hits him and the fight brings the alert to 3, level 3's row walks in and the street at its cap of 8; then the skirmisher runs west, jumping, and gets out of the street by the west door; no blow lands on them from tick 3605 on, nobody keeps them in view, the alert cools to 0 and every guard the rows brought walks out and is gone. Control (watched to fail): the guards' runSpeed (the arrivals' body) above the skirmisher's",
+  "room": "castle-street",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "skirmisher",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 60,
+      "to": 148,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 1500,
+      "to": 1505,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 2706,
+      "to": 2710,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 2962,
+      "to": 2966,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 3400,
+      "to": 3700,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 3400,
+      "to": 3414,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 3440,
+      "to": 3454,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 3480,
+      "to": 3494,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 3520,
+      "to": 3534,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 3560,
+      "to": 3574,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 3600,
+      "to": 3614,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 3640,
+      "to": 3654,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 3680,
+      "to": 3694,
+      "hold": [
+        "jump"
+      ]
+    }
+  ],
+  "ticks": 10700,
+  "expect": [
+    {
+      "fact": "event",
+      "event": "dispatch-arrived",
+      "between": [
+        3276,
+        3276
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "alert",
+      "area": "castle-street",
+      "at": 3277,
+      "is": 3
+    },
+    {
+      "fact": "people",
+      "room": "castle-street",
+      "at": 3277,
+      "count": [
+        8,
+        8
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "changed-room",
+      "where": {
+        "entity": "p:a",
+        "fromRoom": "castle-street",
+        "fromDoor": "to-throne-room"
+      },
+      "between": [
+        3605,
+        3605
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "hit",
+      "where": {
+        "target": "p:a"
+      },
+      "between": [
+        3605,
+        10700
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "alert",
+      "area": "castle-street",
+      "at": 10700,
+      "is": 0
+    },
+    {
+      "fact": "people",
+      "arrivals": true,
+      "between": [
+        10600,
+        10700
+      ],
+      "count": [
+        0,
+        0
+      ]
+    }
+  ]
+}

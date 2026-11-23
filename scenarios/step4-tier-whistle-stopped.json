@@ -1,0 +1,121 @@
+{
+  "id": "step4-tier-whistle-stopped",
+  "proves": "Step 4's town tiers, D-066: a struck guard's whistle is interceptable. At alert 1 in the castle street the hero hits the guard; once he is up and blowing, the hero hits him again before the two seconds are out: call-stopped (here knocked-out: the second hit floors him), nothing is sent, the alert is still 1 and nobody walks in. Control (watched to fail): the hero stands back instead of the second hit, and the whistle completes",
+  "room": "castle-street",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "brawler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 60,
+      "to": 200,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 1500,
+      "to": 1505,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 2700,
+      "to": 2704,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 2780,
+      "to": 2862,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 2862,
+      "to": 2866,
+      "hold": [
+        "attack"
+      ]
+    }
+  ],
+  "ticks": 3000,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "call-started",
+      "where": {
+        "by": "street-guard"
+      },
+      "between": [
+        2710,
+        2800
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "call-stopped",
+      "where": {
+        "by": "street-guard",
+        "why": "knocked-out"
+      },
+      "between": [
+        2860,
+        2890
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "call-completed",
+      "where": {
+        "by": "street-guard"
+      },
+      "between": [
+        0,
+        3000
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "alert",
+      "area": "castle-street",
+      "between": [
+        2130,
+        3000
+      ],
+      "is": 1
+    },
+    {
+      "fact": "event",
+      "event": "dispatch-arrived",
+      "between": [
+        0,
+        3000
+      ],
+      "count": [
+        0,
+        0
+      ]
+    }
+  ]
+}

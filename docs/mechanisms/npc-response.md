@@ -3,9 +3,10 @@
 **Reference.** Open before touching `src/sim/npc/`, the `npc-*` systems,
 `content/npcs/`, `content/rules/`, the `npc`, `routine` and `things`
 fields of `content/placements/`, or `src/sim/npc/alert.ts` and the
-`npc-call` / `alert-*` systems. Built by Step 4: slice 1 (the three
-moods) and slice 2 (calling for help, the area alert, responders,
-cooling), both 2026-11-23.
+`npc-call` / `alert-*` systems, or `content/dispatch/`. Built by Step 4:
+slice 1 (the three moods) and slice 2 (calling for help, the area alert,
+responders, cooling), both 2026-11-23; the town's tiers (the guard's
+whistle and the dispatch rows) the same night.
 
 ## Why it exists
 
@@ -65,6 +66,8 @@ in a `World` field or a module variable.
 | 50 | `npc-act` | Runs the behaviour the person's kind names for their mood and writes `c.input`. A routine's `do` step emits `did`. |
 | 55 | `npc-call` | An upset good person pleads, walks to a bell and rings it; overlays the input `npc-act` wrote. A completed call is the only thing that raises the alert. |
 | 56 | `alert-respond` | Guards answer a completed call: go to the reported place, search, chase a hero they see, go back at alert 0. Overlays input too. |
+| 57 | `alert-whistle` | A guard on duty who sees a hero do something more blows his whistle; finished, it is a completed call (the town's tiers, below). Overlays input. |
+| 58 | `alert-dispatch` | Each time an area's alert goes up, walks that level's row of its dispatch table in by its doors, under its cap; at alert 0 walks them out and removes them. |
 | 60 | `npc-interact` | A player's fresh press of `interact` uses the nearest thing within `npcInteractReach`: emits `did` with the thing's deed; a `once` thing is marked taken. A thing with a `keeper` works only while the keeper stands within `npcKeeperReach` of it. Which thing, and whether, is the Use arbiter's (`useHere`, `src/sim/use.ts`; its `thing` entry, `src/sim/use/thing.ts`); this system does the deed. A body standing in an enter doorway gets nothing here: the arbiter's door entry asks first. |
 | 100 | `verbs` (Step 2) | Bodies act on their input. |
 | 500 | `physics` | |
@@ -255,8 +258,9 @@ The owner's rules, each marked `INTENT:` with its D-number at its site:
    witnesses and an alert of 0 is a normal state of the world.
 2. **Only a completed call raises the alert (D-063, D-075).** The number
    has **exactly one line that raises it**, in `raiseAlert()`
-   (`src/sim/npc/alert.ts`), and exactly one caller, `npc-call`, on a
-   completed call. Not rage, a hit, a sighting, a body or a timer.
+   (`src/sim/npc/alert.ts`, not exported), and exactly one caller,
+   `completeCall()` in the same file, which a completed call by bell
+   (`npc-call`) or by whistle (`alert-whistle`) goes through. Not rage, a hit, a sighting, a body or a timer.
    **Never add a second raise**; `step4-rage-without-a-call` and the
    chase in `step4-catastrophe-and-escape` are the checks.
 3. **Who calls (D-064, D-071):** a `good` person in mood 2 or 3.
@@ -360,9 +364,79 @@ looks `bell`, `bell-ringing`, `bell-broken`, `alert-pip` and
 `alert-pip-off` replace the plain shapes when present
 (`docs/mechanisms/art-pipeline.md`).
 
-**Not built yet** (the brief's later pushes): more help arriving at
-levels 2 and 3; finding a knocked-out person; the villain's horn
-(D-070).
+**Not built yet:** the pips following the party from room to room and
+the whistle's gauge on screen (the town's tiers, push 2); a follower
+whistling in another room; the armoured guard (push 3); finding a
+knocked-out person; the villain's horn (D-070).
+
+## The town's tiers: the whistle and the dispatch rows
+
+`DRAFT:` throughout (doc 27's whistle and doc 26's ladder are proposals,
+not the owner's; `docs/decisions-log.md`, "Step 4: whistle" and "Step 4:
+dispatch"). Brief `loop-town-tiers.md`.
+
+**The switch is data.** Only an area with `content/dispatch/<area>.json`
+(`src/content/kinds/dispatch.ts`) has a whistle and rows. Tonight that is
+`castle-street`; `test-street`, `test-shop` and the camp behave as slice 2
+built them.
+
+**The whistle (`alert-whistle`, 57).** On a good person answering a call
+(`c.respond`) whose home area has a dispatch file, in his home room:
+- He comes on duty with `c.whistle.reported` set to his dissonance then
+  (what he had witnessed is already reported by whoever called him).
+- In the `chase` phase (a hero in sight), standing, with
+  `dissonance > reported` and no wait left, he starts: `call-started`.
+  Seeing adds no dissonance, so standing in view never starts one (D-063).
+- He blows for `npcWhistleTime` (2.5 s): `c.whistle.progress` counts up
+  on his own entity (so every page in the room is sent it), and he stands
+  still (`drive` idle, overlaying alert-respond's chase and swing).
+- Anything that leaves him unable to act stops it (`cannotBlow()`): out
+  cold (`knocked-out`), held (`grabbed`), flying or in a hit's beat
+  (`knocked-down`); also going off duty (`stood-down`). `call-stopped`
+  is emitted, `reported` becomes his dissonance and he waits
+  `npcWhistleAgain` (4 s). He starts again only for something new.
+- Finished: `completeCall()`, exactly as the bell's (`call-completed`
+  with `x, y` his `lastSeen`, one level, the place reported on the alert
+  entity), then the same wait.
+- `alert-respond` (56) reads `call-completed` before the whistle (57)
+  runs, so a whistle calls no other placed guard on its own tick; the
+  rows it brings get their own heading (`DRAFT:`).
+
+**The dispatch (`alert-dispatch`, 58).** For each area with a file:
+- An `alert-changed` up to level k queues `rows[k-1]`; a completed call
+  with the alert already at its most queues the last row again, only
+  when nothing is queued (`DRAFT:` no banked flood). At alert 0 the queue
+  is dropped.
+- A queued row walks in while the room's people (bodies with `c.npc`,
+  out cold or not) plus the row fit under `cap`
+  (`npcDispatchCapOn`, a control switch). An empty row sends nobody.
+- Person i comes by `doors[i % doors.length]`, a walk door on the west or
+  east edge, on the tile beside it inside the room (a later one by the
+  same door one tile further in), facing in. Ids are
+  `<area>:help<n>:<i>`, n counting rows walked in (on `c.dispatch.sent`
+  of the alert entity; deterministic). Each gets `c.npc` (home the area),
+  `c.arrival { area, door }`, `c.respond` heading to the alert entity's
+  `x` (the place reported, D-065) and mood 2 (`called`). Event
+  `dispatch-arrived { area, row, people }`.
+- From then they are ordinary responders: they search, chase, swing,
+  follow through doors (two at most per door, `chase-cap`), and whistle.
+- At alert 0 `alert-respond` stands them down (they have no placement, so
+  where they are); `alert-dispatch` then walks each one out by the door
+  he came in by and removes him a few pixels short of it (a walk door
+  would carry him to the next room). One not in his area, or stuck for
+  45 ticks, is removed where he stands.
+
+**The castle street's table:** doors `to-throne-room` and `to-courtyard`,
+cap 8, rows: level 1 nobody, level 2 two guards, level 3 three.
+
+**Checks** (`scenarios/step4-tier-*.json`, all in the real street):
+`-whistle-brings-row`, `-whistle-stopped`, `-no-whistle-unprovoked`,
+`-both-doors`, `-cap-holds`, `-cools-and-leaves`, and
+`-away-at-the-most-<hero>` once per roster hero (solo, the street at its
+cap: out by the west door, no blow after, cooled to 0, every arrival
+gone). The `people` fact counts people in a room (optionally within an
+`x` range, or only `arrivals`). Their controls, watched to fail, are in
+`docs/plan/step-4.md`, "Builder notes".
 
 ## Adding things
 

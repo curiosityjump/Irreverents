@@ -497,3 +497,44 @@ for later, as the step suggests.
     the worker's note that none was reachable predates Step 3's push).
     Not tried by anyone on the page.
 - **2026-11-23, Step 2 feel:** `step4-hero-hits-shopkeeper`'s hit window widened for Step 2's attack wind-up (hit and deed 100–115, mood 2 from 116; granted by the Step 2 lead), 252e5ce.
+
+## Builder notes (the town's tiers, `loop-town-tiers.md`)
+
+Builder `session_017WiGzFxZZnM2VcdqhXnrNu`. Push 1 (the sim), 2026-11-23.
+
+- **Controls watched to fail** (each restored and re-run green):
+  `-whistle-brings-row`: the dispatch file removed (no guard whistle, alert
+  stays 1). `-whistle-stopped`: the second hit removed (the whistle
+  completes). `-no-whistle-unprovoked`: the "something more" rule removed
+  (he whistles three times on sight). `-both-doors`: the file's doors cut to
+  the west one. `-cap-holds`: `npcDispatchCapOn` 0 (11 people). 
+  `-cools-and-leaves`: the walk-out off (8 people remain).
+  `-away-at-the-most-*`: the arrivals given a body with runSpeed 140 (a
+  control character, the placed guard unchanged): all five fail, **but on
+  the tick-pinned facts** (the leaving tick, the row's tick). With fast
+  arrivals the brawler is still being hit and the alert never cools; the
+  infiltrator (and others) still get away, because the way out there is
+  height and doors (the throne room's platforms; nobody follows who did not
+  see them leave), not only speed. So the claim these check is "a way out
+  exists at the cap", not "speed is the way out".
+- **The probe the brief asked for before choosing the cap:** done at cap 8
+  for all five roster heroes, solo, between rows from both doors (the
+  scenarios). None stuck.
+- **Not re-timed:** no `step4-*` scenario changed. No `step3-`, `step11-`,
+  `step12-`, `step14-`, `step18-`, `step19-` scenario went red.
+- **Outside my paths, one word each:** `scripts/lib/room-controls.ts` leaves
+  `dispatch/` out of the room controls' content (as it does `outposts/`),
+  or every room control refuses on "no room castle-street". A new fact
+  `src/scenarios/facts/people.ts` (self-registering; arrivals' ids cannot
+  be named ahead in a scenario).
+- **Cost:** `npm run check` went from about 1 m 30 s to 2 m 15 s; the five
+  per-hero scenarios run 8,000–10,700 ticks each.
+- **Seen, not mine, left as they are** (`docs/deliberate-designs.md` read;
+  could be design): a raging shopkeeper charges east and hits the villain,
+  then rings the bell again because her offenders still include the hero
+  (skirmisher run: alert 1 → 2 at 7135 with the hero long gone); the villain
+  knocked through the east door stays in the courtyard; guards searching
+  press against a hidden hero's body in the awning curtain without seeing
+  him (they cannot); arrivals hit each other (friendly fire stays).
+- **Not verified:** anything on a page (push 2 draws the gauge and pips);
+  `check:live` exercises nothing of this push.

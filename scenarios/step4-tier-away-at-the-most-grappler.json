@@ -1,0 +1,187 @@
+{
+  "id": "step4-tier-away-at-the-most-grappler",
+  "proves": "Step 4's town tiers, there is always a way out (CLAUDE.md; D-019): solo, the grappler takes goods in the shopkeeper's view, the bell brings the guard, the grappler hits him and the fight brings the alert to 3, level 3's row walks in and the street at its cap of 8; then the grappler runs west, jumping, and gets out of the street by the west door; no blow lands on them from tick 3526 on, nobody keeps them in view, the alert cools to 0 and every guard the rows brought walks out and is gone. Control (watched to fail): the guards' runSpeed (the arrivals' body) above the grappler's",
+  "room": "castle-street",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 60,
+      "to": 186,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 1500,
+      "to": 1505,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 2706,
+      "to": 2710,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 3400,
+      "to": 3700,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 3400,
+      "to": 3414,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 3440,
+      "to": 3454,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 3480,
+      "to": 3494,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 3520,
+      "to": 3534,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 3560,
+      "to": 3574,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 3600,
+      "to": 3614,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 3640,
+      "to": 3654,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 3680,
+      "to": 3694,
+      "hold": [
+        "jump"
+      ]
+    }
+  ],
+  "ticks": 8000,
+  "expect": [
+    {
+      "fact": "event",
+      "event": "dispatch-arrived",
+      "between": [
+        3340,
+        3340
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "alert",
+      "area": "castle-street",
+      "at": 3341,
+      "is": 3
+    },
+    {
+      "fact": "people",
+      "room": "castle-street",
+      "at": 3341,
+      "count": [
+        8,
+        8
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "changed-room",
+      "where": {
+        "entity": "p:a",
+        "fromRoom": "castle-street",
+        "fromDoor": "to-throne-room"
+      },
+      "between": [
+        3526,
+        3526
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "hit",
+      "where": {
+        "target": "p:a"
+      },
+      "between": [
+        3526,
+        8000
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "alert",
+      "area": "castle-street",
+      "at": 8000,
+      "is": 0
+    },
+    {
+      "fact": "people",
+      "arrivals": true,
+      "between": [
+        7900,
+        8000
+      ],
+      "count": [
+        0,
+        0
+      ]
+    }
+  ]
+}

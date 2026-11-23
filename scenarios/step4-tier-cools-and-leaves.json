@@ -1,0 +1,116 @@
+{
+  "id": "step4-tier-cools-and-leaves",
+  "proves": "Step 4's town tiers, D-068: the pips go out only by hiding and waiting, and then the town's help goes home. In the castle street the whistle and the bell bring the alert to 3 and five guards walk in; the hero hides in the awning's curtain and nobody sees them: the alert cools one level each 20 s to 0, every arrival walks out by the door they came in by and is gone, and the street's own guard walks back to his beat and his routine. Control (watched to fail): arrivals who never walk out (the walk-out off), and the street still holds eight",
+  "room": "castle-street",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "brawler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 60,
+      "to": 200,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 1500,
+      "to": 1505,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 2700,
+      "to": 2704,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 2760,
+      "to": 2830,
+      "x": -1
+    }
+  ],
+  "ticks": 8400,
+  "expect": [
+    {
+      "fact": "alert",
+      "area": "castle-street",
+      "at": 3400,
+      "is": 3
+    },
+    {
+      "fact": "people",
+      "room": "castle-street",
+      "at": 6900,
+      "count": [
+        8,
+        8
+      ]
+    },
+    {
+      "fact": "alert",
+      "area": "castle-street",
+      "between": [
+        6937,
+        8400
+      ],
+      "is": 0
+    },
+    {
+      "fact": "people",
+      "room": "castle-street",
+      "between": [
+        8100,
+        8400
+      ],
+      "count": [
+        3,
+        3
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "mood-changed",
+      "where": {
+        "entity": "street-guard",
+        "from": 2,
+        "to": 1,
+        "cause": "stood-down",
+        "offender": "p:a"
+      },
+      "between": [
+        6937,
+        8100
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "mood",
+      "npc": "street-guard",
+      "at": 8400,
+      "is": 1
+    },
+    {
+      "fact": "position",
+      "entity": "street-guard",
+      "at": 8400,
+      "x": [
+        592,
+        690
+      ]
+    }
+  ]
+}

@@ -33,6 +33,33 @@ declare module '../types.ts' {
     };
     /** On a bell while someone rings it: ticks done and ticks needed, for the page to draw. */
     ringing?: { ticks: number; of: number };
+    /**
+     * On a guard on duty who blows, or has blown, his whistle (Step 4, the
+     * town's tiers). Owned by systems/alert-whistle.ts. On his own entity so
+     * every page in his room is sent the gauge, as a bell's `ringing` is.
+     * DRAFT: doc 27's whistle is "a suggested reconciliation", not a decision.
+     */
+    whistle?: {
+      /** Ticks blown so far; 0 while not blowing. */
+      progress: number;
+      /** Ticks a whistle takes (for the page to draw the gauge). */
+      of: number;
+      /** Ticks before he may start again (after a whistle stopped or sent). */
+      wait: number;
+      /** His dissonance when he last sent (or was stopped in) a whistle: he blows again only for something new. */
+      reported: number;
+    };
+    /**
+     * On a person a dispatch row walked in (systems/alert-dispatch.ts): the
+     * area they answer to and the door they came by, which is the door they
+     * leave by when the alert is over (and are then removed).
+     */
+    arrival?: {
+      area: string;
+      door: string;
+      /** How long the walk out has made no headway (read with a default: a kept game may lack it). */
+      stall?: number;
+    };
     /** On a person answering a call. Owned by systems/alert-respond.ts. */
     respond?: {
       phase: 'go' | 'search' | 'chase' | 'return';
@@ -79,12 +106,13 @@ export function alertLevel(world: World, area: string): number {
 /**
  * A completed call raises its area's alert by one.
  * INTENT (D-063, D-075; the one invariant of slice 2): this function holds
- * THE ONLY LINE THAT RAISES AN ALERT, and only systems/npc-call.ts calls it,
- * on a completed call. Not rage, not a hit, not a sighting, not a body on
- * the floor, not a timer. Do not add a second raise anywhere
+ * THE ONLY LINE THAT RAISES AN ALERT, and only completeCall() below calls it,
+ * on a completed call, by bell or whistle (systems/npc-call.ts and
+ * systems/alert-whistle.ts). Not rage, not a hit, not a sighting, not a body
+ * on the floor, not a timer. Do not add a second raise anywhere
  * (scenario step4-rage-without-a-call is the check).
  */
-export function raiseAlert(ctx: StepContext, area: string): void {
+function raiseAlert(ctx: StepContext, area: string): void {
   let e = alertOf(ctx.world, area);
   if (!e) {
     // INTENT: THING_KIND, like a placed thing, so physics and the drawers skip it; it has no `c.thing`.
@@ -107,4 +135,23 @@ export function lowerAlert(ctx: StepContext, area: string): void {
   a.level = from - 1;
   a.quiet = 0;
   ctx.emit('alert-changed', { area, from, to: a.level });
+}
+
+/**
+ * A call for help is sent: by bell (systems/npc-call.ts) or by whistle
+ * (systems/alert-whistle.ts). Emits `call-completed`, raises the area's
+ * alert one level and records the place reported on the alert entity, which
+ * is where help is sent (D-065).
+ * INTENT (D-063, D-075): the one site that raises an alert. A completed
+ * call, by bell or whistle, is the only thing that does; both kinds of call
+ * come here so there stays exactly one raising line and one calling site.
+ */
+export function completeCall(ctx: StepContext, by: string, area: string, at: { x: number; y: number }): void {
+  ctx.emit('call-completed', { by, area, x: at.x, y: at.y });
+  raiseAlert(ctx, area);
+  const alert = alertOf(ctx.world, area);
+  if (alert) {
+    alert.x = at.x;
+    alert.y = at.y;
+  }
 }

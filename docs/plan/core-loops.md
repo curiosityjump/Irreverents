@@ -430,7 +430,16 @@ knocks a power or a prize loose.
 two seconds under a gauge (interruptible, or it breaks D-063); a finished
 whistle lights the next pip and the next row of a dispatch table walks in by
 both street doors; the pips follow you from room to room. Step 4, its "rest".
-Step 18 slice A is on `main`, so nothing but a free builder holds it.
+Briefed (`handoff-prompts/loop-town-tiers.md`). **Push 1 landed (the sim):**
+a guard on duty whistles for 2.5 s (measured: 2 s was too short to run back
+and stop him) after he sees a hero do something more; knocked down, out,
+grabbed or carried, nothing is sent; finished, it is a completed call like
+the bell's. `content/dispatch/castle-street.json` walks level 2's row (two)
+and level 3's (three) in by both street doors, under a cap of 8 people;
+at the top each further call brings the last row again; at alert 0 they walk
+out and are gone. Every hero, solo, gets out of the street at the cap
+(`step4-tier-away-at-the-most-*`). Waits: push 2 (the gauge, the pips that
+follow you, `world.alerts`), push 3 (the armoured guard).
 **Part 1b, waits: the Hall's lasting store** for the world everyone shares
 (wire `src/server/store.ts`, give each record its lasting number on the
 server, dedupe on load), by a builder given the `src/server` edits by name.

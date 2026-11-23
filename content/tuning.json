@@ -3,7 +3,7 @@
   "world": {
     "gravity": 900,
     "maxFallSpeed": 360,
-    "//": "DRAFT (Step 4, people): how far a person sees, how much oddness makes rage, how long distress and rage last, how near a hero must be to use a thing. Every one is a first guess.",
+    "//": "DRAFT (Step 4, people): how far a person sees, how much oddness makes rage, how long distress and rage last, how near a hero must be to use a thing. Every one is a first guess. DRAFT (Step 4, the town's tiers; docs/decisions-log.md, \"Step 4: whistle\"): npcWhistleTime and npcWhistleAgain, how long a guard on duty blows his whistle and how long he waits before he may blow again; npcDispatchCapOn is a control switch for scenarios only.",
     "npcSightRange": 112,
     "npcSightHeight": 40,
     "npcRageAt": 3,
@@ -19,6 +19,9 @@
     "npcSearchRange": 48,
     "npcStruckMemory": 15,
     "npcAlertCoolTime": 20,
+    "npcWhistleTime": 2.5,
+    "npcWhistleAgain": 4,
+    "npcDispatchCapOn": 1,
     "maxLaunchSpeed": 520,
     "attackLift": 0.55,
     "throwLift": 0.3,
