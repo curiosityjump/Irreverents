@@ -1,0 +1,28 @@
+{
+  "//": "DRAFT: stand-in drawn by tools/art/props/make.py; a delivered sheet replaces it by editing this file.",
+  "id": "treasure",
+  "image": "props/treasure.png",
+  "looks": {
+    "chest-closed": {"src": [0, 0, 24, 26]},
+    "chest-open": {"src": [24, 0, 24, 26]},
+    "chest-empty": {"src": [48, 0, 24, 26]},
+    "chest-iron-closed": {"src": [72, 0, 24, 26]},
+    "chest-iron-open": {"src": [96, 0, 24, 26]},
+    "chest-iron-empty": {"src": [120, 0, 24, 26]},
+    "door-wood-shut": {"src": [0, 26, 32, 32]},
+    "door-wood-open": {"src": [32, 26, 32, 32]},
+    "door-barred": {"src": [64, 26, 32, 32]},
+    "door-barred-raised": {"src": [96, 26, 32, 32]},
+    "door-locked": {"src": [128, 26, 32, 32]},
+    "door-bars": {"src": [160, 26, 32, 32]},
+    "key": {"src": [0, 58, 14, 12]},
+    "gold-coin": {"src": [14, 58, 12, 12], "frames": 2, "fps": 4},
+    "gold-sack": {"src": [38, 58, 14, 16]},
+    "gold-pile": {"src": [52, 58, 22, 10]},
+    "gem": {"src": [74, 58, 10, 14]},
+    "gem-pedestal": {"src": [84, 58, 20, 22]},
+    "hoard": {"src": [0, 80, 32, 16]},
+    "hoard-taken": {"src": [32, 80, 32, 16]},
+    "vault-cave": {"src": [64, 80, 64, 30]}
+  }
+}

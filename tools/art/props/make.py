@@ -137,6 +137,19 @@ def looks_sheets():
     s.newrow()
     s.add('fx-poof', lo.poof(), frames=3, fps=12)
     out.append(('powers', 'props/powers.png', s))
+    # ---- the core loops' treasure (loops.py: P07 vibrant chests, doors, key, gold; P04 coin heap, gem; P05 doors, cave)
+    s = Sheet(192)
+    for which in lo.CHESTS:
+        s.add(which, lo.chest(which))
+    s.newrow()
+    for which in list(lo.DOORS) + list(lo.P05DOORS):
+        s.add(which, lo.door(which))
+    s.newrow()
+    s.add('key', lo.key()); s.add('gold-coin', lo.coin(), frames=2, fps=4); s.add('gold-sack', lo.gold_sack())
+    s.add('gold-pile', lo.gold_pile()); s.add('gem', lo.gem()); s.add('gem-pedestal', lo.gem_pedestal())
+    s.newrow()
+    s.add('hoard', lo.hoard(False)); s.add('hoard-taken', lo.hoard(True)); s.add('vault-cave', lo.vault_cave())
+    out.append(('treasure', 'props/treasure.png', s))
     # ---- people
     s = Sheet(96)
     # round 3: moods bold enough for any hat or plume (a white '?' and a sweat drop; a red mark rimmed white)

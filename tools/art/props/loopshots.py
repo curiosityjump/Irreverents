@@ -82,7 +82,25 @@ def powers():
     return scene
 
 
-SCENES = {'rides': rides, 'powers': powers}
+def treasure():
+    """a vault: the doors along the top ledge, chests and gold on the middle one, the cave and hoard below"""
+    img, L = looks('treasure')
+    scene, floors = shelves(3, sky=NIGHT)
+    for i, k in enumerate(('door-wood-shut', 'door-wood-open', 'door-barred', 'door-barred-raised', 'door-locked',
+                           'door-bars')):
+        place(scene, frame(img, L[k]), 26 + i * 54, floors[0])
+    for i, k in enumerate(('chest-closed', 'chest-open', 'chest-empty', 'chest-iron-closed', 'chest-iron-open',
+                           'chest-iron-empty', 'gold-sack', 'gold-pile', 'gem', 'gem-pedestal', 'key')):
+        place(scene, frame(img, L[k]), 14 + i * 28, floors[1])
+    place(scene, frame(img, L['vault-cave']), 40, floors[2])
+    place(scene, frame(img, L['hoard']), 120, floors[2])
+    place(scene, frame(img, L['hoard-taken']), 160, floors[2])
+    for n in range(2):
+        place(scene, frame(img, L['gold-coin'], n), 200 + n * 16, floors[2])
+    return scene
+
+
+SCENES = {'rides': rides, 'powers': powers, 'treasure': treasure}
 
 if __name__ == '__main__':
     os.makedirs(OUT, exist_ok=True)

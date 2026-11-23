@@ -173,6 +173,13 @@ bottom-centred over an entrance; `level-pie-0`..`4` 12x12 (none, a quarter, half
   x3, once: the hit spark, the stars, the orb flying off on its swoosh), `fx-poof` (24x14 x3: the plate's poof, then
   smaller twice; the shrinking is this lane's, the plate has one cloud). Ids name what the plate paints, not a power's
   name in the game.
+- **Treasure** (group `treasure`, `assets/props/treasure.png`): `chest-{closed,open,empty}` and
+  `chest-iron-{closed,open,empty}` on a 24x26 cell (P07 vibrant row 1, scale 0.17, bottom-centred);
+  `door-wood-shut`, `door-wood-open`, `door-barred`, `door-barred-raised` (P07 row 2) and `door-locked`, `door-bars`
+  (P05 secrets row 1, no ivy) on 32x32, bottom-centred; `key` 14x12; `gold-coin` 12x12 x2 (plain, glinting);
+  `gold-sack`; `gold-pile` (P04 tavern coin heap: P05's vault heap sits on the cave floor and does not cut clean);
+  `gem` (P04 crystal), `gem-pedestal` (P07); `hoard` / `hoard-taken` 32x16 for Step 16's depot-hoard (the sack on the
+  heap; a few coins left); `vault-cave` 64x30, the P05 cave whole (lantern, crystals, gold), a back-layer picture.
 - **No approved source:** an empty machine or an empty saddle: every cell has the same goggled rider baked in, so a
   hero cannot be drawn riding one without that rider showing (for the Drive's missing-assets list).
 - **Not verified in the game:** no code draws a ride yet; seen in the mock scene only.

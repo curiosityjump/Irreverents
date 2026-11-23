@@ -6,6 +6,7 @@ Groups (content/looks/<group>.json):
 - rides: P04 chibi-vehicle-and-mount-sprite-sheet ('vehicle'), four machines/mounts, five cells a row.
 - powers: P05 rare-powers-pickups ('powers'): power orbs, loose pieces, fixtures, the pickup glow and get, the
   "lost" pop, a cloud poof.
+- treasure: chests, doors (shut, open, locked, barred), a key, gold, gems, the hoard, the vault cave.
 """
 from PIL import Image
 
@@ -147,4 +148,88 @@ def poof():
     """3 frames: the plate's cloud poof, then the same cut smaller twice (the cloud shrinking away)."""
     cut = lambda w, h: _fx((POOF[0], 430, POOF[1], 512), (w, h), ramps('cloud', 'purple', 'sky'))
     return _row([cut(24, 14), cut(18, 10), cut(12, 7)], 24, 14)
+
+
+# ---- treasure: P07 vibrant-platformer-interactables ('vibrant') chests, doors, keys, gold; P05 secrets ('secrets')
+# the vault cave; P04 interactables ('interact') the gem; P04 tavern ('tavern') the coin heap. All transparent but P05 (key=).
+P05PALE = (247, 247, 247)
+LOOT = ramps('wood', 'gold', 'orange', 'metal', 'stone', 'castle', 'red', 'night', 'teal', 'blue', 'purple', 'pink',
+             'foliage', 'grass', 'cloud', 'earth')
+CHESTS = {  # P07 row 1: wooden then iron-bound; closed, open and full (the shine rays are their own blob, dropped)
+    'chest-closed': (195, 95, 330, 215), 'chest-open': (370, 70, 505, 215), 'chest-empty': (545, 95, 670, 215),
+    'chest-iron-closed': (800, 95, 935, 215), 'chest-iron-open': (975, 70, 1110, 215),
+    'chest-iron-empty': (1150, 95, 1290, 215)}
+DOORS = {  # P07 row 2: the ring-handled door shut and open, the portcullis down and raised
+    'door-wood-shut': (35, 240, 212, 415), 'door-wood-open': (212, 240, 390, 415),
+    'door-barred': (410, 240, 595, 415), 'door-barred-raised': (600, 240, 785, 415)}
+P05DOORS = {  # P05 secrets row 1: the padlocked door and the barred door (no plants on them)
+    'door-locked': (102, 68, 200, 172), 'door-bars': (424, 68, 524, 172)}
+
+
+def chest(which):
+    g = grab('vibrant', CHESTS[which], 0.17, LOOT)  # DRAFT: about 22 px wide: a chest you can stand behind
+    out = new(24, 26)
+    paste(out, g, (24 - g.width) // 2, 26 - g.height)
+    return out
+
+
+def door(which):
+    """32 x 32: a doorway two tiles tall, two wide (the arch included)."""
+    if which in P05DOORS:
+        g = grab('secrets', P05DOORS[which], 0, LOOT, key=P05PALE, size=(28, 30))
+    else:
+        g = grab('vibrant', DOORS[which], 0, LOOT, size=(30, 30))
+    out = new(32, 32)
+    paste(out, g, (32 - g.width) // 2, 32 - g.height)
+    return out
+
+
+def key():
+    return grab('vibrant', (30, 980, 130, 1065), 0, LOOT, size=(14, 12))
+
+
+def coin():
+    """2 frames: the coin, then the same with its shine (the plate's glinting coin, rays dropped)"""
+    a = grab('vibrant', (1005, 985, 1080, 1065), 0, LOOT, size=(10, 10))
+    b = grab('vibrant', (1085, 985, 1165, 1065), 0, LOOT, size=(10, 10))
+    return _row([a, b], 12, 12, align='middle')
+
+
+def gold_sack():
+    return grab('vibrant', (780, 960, 875, 1075), 0, LOOT, size=(14, 16))
+
+
+def gold_pile():
+    """P04 cantina-tavern-hub, the coin heap (P05's vault heap sits on the cave floor and does not cut clean)"""
+    return grab('tavern', (566, 1040, 643, 1075), 0, LOOT, size=(22, 10))
+
+
+def gem():
+    """P04 interactables row 2: the blue crystal (its pedestal and halo left on the plate)"""
+    return grab('interact', (240, 380, 320, 470), 0, LOOT, size=(10, 14))
+
+
+def gem_pedestal():
+    """P07 row 5: the violet gem on its stone post"""
+    return grab('vibrant', (610, 795, 745, 935), 0, LOOT, size=(20, 22))
+
+
+def vault_cave():
+    """P05 secrets bottom right: the vault cave, lantern, crystals and gold, whole (a back-layer picture, 64 x 32)"""
+    return grab('secrets', (526, 372, 758, 482), 0, LOOT, key=P05PALE, size=(64, 30))
+
+
+def hoard(taken):
+    """The depot's hoard (Step 16 slice 3's depot-hoard): the sack on the P05 gold heap; taken, the heap's last
+    coins only. DRAFT: 32 x 16, bottom-centred on its tile."""
+    out = new(32, 16)
+    pile = gold_pile()
+    if taken:
+        bit = pile.crop((0, 4, pile.width, pile.height))
+        paste(out, bit.crop((0, 0, 10, bit.height)), 4, 16 - bit.height)
+        return out
+    paste(out, pile, 1, 16 - pile.height)
+    sack = gold_sack()
+    paste(out, sack, 23 - sack.width // 2, 16 - sack.height)
+    return out
 
