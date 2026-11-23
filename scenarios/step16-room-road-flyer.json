@@ -1,0 +1,88 @@
+{
+  "id": "step16-room-road-flyer",
+  "proves": "Step 16, push 1: the flyer alone crosses the quarry-road room from the doorway at its west end up every ledge and over every dip to the opening onto the ridge, by running and jumping (the main way works for every hero)",
+  "room": "quarry-road",
+  "players": [
+    {
+      "id": "a",
+      "character": "flyer",
+      "spawn": 2
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 853,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 45,
+      "to": 63,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 129,
+      "to": 147,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 233,
+      "to": 251,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 306,
+      "to": 324,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 421,
+      "to": 439,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 588,
+      "to": 606,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 692,
+      "to": 710,
+      "hold": [
+        "jump"
+      ]
+    }
+  ],
+  "ticks": 883,
+  "expect": [
+    {
+      "fact": "standing-on-tile",
+      "player": "a",
+      "at": 883,
+      "tile": [
+        82,
+        10
+      ]
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "id": "step16-room-depot-grappler",
+  "proves": "Step 16, push 1: the grappler alone crosses the quarry-depot room from its west opening over the yard, through the strongroom front and back (over the shaft in its floor), to the far side, by running and jumping (the main way works for every hero)",
+  "room": "quarry-depot",
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 734,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 105,
+      "to": 123,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 219,
+      "to": 237,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 437,
+      "to": 455,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 528,
+      "to": 546,
+      "hold": [
+        "jump"
+      ]
+    }
+  ],
+  "ticks": 764,
+  "expect": [
+    {
+      "fact": "standing-on-tile",
+      "player": "a",
+      "at": 764,
+      "tile": [
+        62,
+        14
+      ]
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "id": "step16-room-cave-infiltrator",
+  "proves": "Step 16, push 1: the infiltrator alone climbs the cave's steps from its floor to the ledge by the east wall",
+  "room": "quarry-cave",
+  "players": [
+    {
+      "id": "a",
+      "character": "infiltrator",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 260,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 10,
+      "to": 28,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 60,
+      "to": 78,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 110,
+      "to": 128,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 160,
+      "to": 178,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 210,
+      "to": 228,
+      "hold": [
+        "jump"
+      ]
+    }
+  ],
+  "ticks": 300,
+  "expect": [
+    {
+      "fact": "standing-on-tile",
+      "player": "a",
+      "at": 300,
+      "tile": [
+        28,
+        7
+      ]
+    }
+  ]
+}

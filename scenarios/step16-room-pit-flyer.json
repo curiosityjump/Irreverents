@@ -1,0 +1,32 @@
+{
+  "id": "step16-room-pit-flyer",
+  "proves": "Step 16, push 1: the flyer alone crosses the quarry-pit room along its floor from the west end to the opening into the cellar, by running and jumping (the main way works for every hero)",
+  "room": "quarry-pit",
+  "players": [
+    {
+      "id": "a",
+      "character": "flyer",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 425,
+      "x": 1
+    }
+  ],
+  "ticks": 455,
+  "expect": [
+    {
+      "fact": "standing-on-tile",
+      "player": "a",
+      "at": 455,
+      "tile": [
+        38,
+        19
+      ]
+    }
+  ]
+}

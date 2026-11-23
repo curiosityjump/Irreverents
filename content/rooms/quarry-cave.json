@@ -1,0 +1,38 @@
+{
+  "//": "DRAFT (Step 16 slice 1): the level's refuge (slice 3 decides what that means). The layout is a first pass; the id, the door ids, the part ids and the area ids are permanent. In from the pit at the east wall's foot (column 29, rows 10-12, an opening on this side). Steps up to a ledge by the east wall (columns 25-28, its top row 7) where, in the east wall above it, a hidden opening (column 29, rows 4-6, painted as wall here) leads the long way home into the undercroft's vault. Hiding place `cave-dark` (column 10).",
+  "id": "quarry-cave",
+  "name": "The Cave",
+  "tile": 16,
+  "hidden": true,
+  "legend": {
+    "#": "solid",
+    ".": "empty",
+    "1": "spawn",
+    "2": "spawn",
+    "H": {
+      "part": "cave-dark"
+    }
+  },
+  "rows": [
+    "##############################",
+    "#............................#",
+    "#............................#",
+    "#............................#",
+    "#............................#",
+    "#............................#",
+    "#............................#",
+    "#........................#####",
+    "#........................#####",
+    "#.....................########",
+    "#.....................###....#",
+    "#.................#######....#",
+    "######....H.1.....#######..2.#",
+    "##############################"
+  ],
+  "parts": [
+    {
+      "id": "cave-dark",
+      "kind": "hide"
+    }
+  ]
+}

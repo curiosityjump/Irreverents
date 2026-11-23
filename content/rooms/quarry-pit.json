@@ -1,0 +1,59 @@
+{
+  "//": "DRAFT (Step 16 slice 1): the layout is a first pass; the id, the door ids, the part ids and the area ids are permanent. Below the ridge and the depot. A body that misses a jump on the ridge falls in through the ceiling (columns 20-21; the pocket's drop at columns 26-27) and lands on the floor; nothing is under the arrival but the floor. Ways out: the doorway back up to the ridge (columns 30-31), east into the depot's cellar (column 39, rows 16-18: the path from the lower pit loops back to the depot), and west a hidden opening (column 0, rows 16-18, painted as wall here) into the cave. Over the west end, eleven tiles up with nothing to stand on, a ledge (area `out-of-reach`, not hidden: in plain sight) that none of the three heroes reaches alone: it waits for a power or a hero to come (Steps 9 and 13). Hiding place `pit-shadow` (column 12).",
+  "id": "quarry-pit",
+  "name": "The Pit",
+  "tile": 16,
+  "hidden": false,
+  "legend": {
+    "#": "solid",
+    ".": "empty",
+    "1": "spawn",
+    "2": "spawn",
+    "3": "spawn",
+    "H": {
+      "part": "pit-shadow"
+    }
+  },
+  "rows": [
+    "########################################",
+    "#......................................#",
+    "#......................................#",
+    "#......................................#",
+    "#......................................#",
+    "#......................................#",
+    "#......................................#",
+    "#......................................#",
+    "#...#####..............................#",
+    "#......................................#",
+    "#......................................#",
+    "#......................................#",
+    "#......................................#",
+    "#......................................#",
+    "#......................................#",
+    "#......................................#",
+    "#......................................#",
+    "#......................................#",
+    "#..3........H...1...................2..#",
+    "########################################"
+  ],
+  "areas": [
+    {
+      "id": "out-of-reach",
+      "hidden": false,
+      "at": [
+        4,
+        6
+      ],
+      "size": [
+        5,
+        2
+      ]
+    }
+  ],
+  "parts": [
+    {
+      "id": "pit-shadow",
+      "kind": "hide"
+    }
+  ]
+}

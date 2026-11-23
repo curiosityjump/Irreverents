@@ -1,0 +1,9 @@
+{
+  "//": "DRAFT (Step 16 slice 1): loose rocks on the road to pick up and throw, clear of the doorway (columns 2-4) and the spawn (column 6). The ids are permanent; the columns are first guesses.",
+  "id": "quarry-road",
+  "room": "quarry-road",
+  "place": [
+    { "id": "road-rock-1", "character": "crate", "tile": [10, 16] },
+    { "id": "road-rock-2", "character": "crate", "tile": [45, 12] }
+  ]
+}

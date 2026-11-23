@@ -1,0 +1,84 @@
+{
+  "id": "step16-not-yet-flyer",
+  "proves": "Step 16 signal 3, the \"not yet\": the flyer alone, jumping (and flapping, if it can) from the floor right under it, never lands on the pit's ledge eleven tiles up",
+  "room": "quarry-pit",
+  "players": [
+    {
+      "id": "a",
+      "character": "flyer",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 30,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 30,
+      "to": 46,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 52,
+      "to": 60,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 68,
+      "to": 76,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 84,
+      "to": 92,
+      "hold": [
+        "jump"
+      ]
+    }
+  ],
+  "ticks": 240,
+  "expect": [
+    {
+      "fact": "event",
+      "event": "landed",
+      "player": "a",
+      "between": [
+        0,
+        240
+      ],
+      "count": [
+        0,
+        0
+      ],
+      "where": {
+        "ty": 8
+      }
+    },
+    {
+      "fact": "event",
+      "event": "jumped",
+      "player": "a",
+      "between": [
+        30,
+        31
+      ],
+      "count": [
+        1,
+        1
+      ]
+    }
+  ]
+}

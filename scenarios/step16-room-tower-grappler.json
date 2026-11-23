@@ -1,0 +1,134 @@
+{
+  "id": "step16-room-tower-grappler",
+  "proves": "Step 16, push 1: the grappler alone climbs the tower from its foot, ledge by ledge by jumping on the spot, to the top floor and its east end",
+  "room": "quarry-tower",
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 1
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 71,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 60,
+      "to": 78,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 120,
+      "to": 138,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 180,
+      "to": 198,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 240,
+      "to": 258,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 300,
+      "to": 318,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 360,
+      "to": 378,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 420,
+      "to": 438,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 480,
+      "to": 498,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 540,
+      "to": 558,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 600,
+      "to": 618,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 660,
+      "to": 678,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 720,
+      "to": 738,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 780,
+      "to": 940,
+      "x": 1
+    }
+  ],
+  "ticks": 980,
+  "expect": [
+    {
+      "fact": "standing-on-tile",
+      "player": "a",
+      "at": 980,
+      "tile": [
+        18,
+        5
+      ]
+    }
+  ]
+}

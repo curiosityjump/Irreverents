@@ -1,0 +1,8 @@
+{
+  "//": "DRAFT (Step 16 slice 1): the depot's things; slice 3 adds its people and its hoard. A heavy rock in the cellar (column 12, in from the pit): only the grappler can lift it, and thrown at the cellar wall (column 35) it breaks it (step16-secret-cellar-wall-*). INTENT: no light crate in the cellar, so the wall is the grappler's alone (or a friend thrown by a friend: the other way in). The id is permanent; the column is a first guess.",
+  "id": "quarry-depot",
+  "room": "quarry-depot",
+  "place": [
+    { "id": "cellar-rock", "character": "crate-heavy", "tile": [12, 18] }
+  ]
+}

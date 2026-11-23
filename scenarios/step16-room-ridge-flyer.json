@@ -1,0 +1,72 @@
+{
+  "id": "step16-room-ridge-flyer",
+  "proves": "Step 16, push 1: the flyer alone crosses the quarry-ridge room from its west opening over both dips and the chasm to the opening into the tower, without falling, by running and jumping (the main way works for every hero)",
+  "room": "quarry-ridge",
+  "players": [
+    {
+      "id": "a",
+      "character": "flyer",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 832,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 45,
+      "to": 63,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 150,
+      "to": 168,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 233,
+      "to": 251,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 421,
+      "to": 439,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 567,
+      "to": 585,
+      "hold": [
+        "jump"
+      ]
+    }
+  ],
+  "ticks": 862,
+  "expect": [
+    {
+      "fact": "standing-on-tile",
+      "player": "a",
+      "at": 862,
+      "tile": [
+        78,
+        10
+      ]
+    }
+  ]
+}

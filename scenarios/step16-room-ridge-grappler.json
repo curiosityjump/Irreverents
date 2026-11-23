@@ -1,0 +1,72 @@
+{
+  "id": "step16-room-ridge-grappler",
+  "proves": "Step 16, push 1: the grappler alone crosses the quarry-ridge room from its west opening over both dips and the chasm to the opening into the tower, without falling, by running and jumping (the main way works for every hero)",
+  "room": "quarry-ridge",
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 905,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 48,
+      "to": 66,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 162,
+      "to": 180,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 254,
+      "to": 272,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 459,
+      "to": 477,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 619,
+      "to": 637,
+      "hold": [
+        "jump"
+      ]
+    }
+  ],
+  "ticks": 935,
+  "expect": [
+    {
+      "fact": "standing-on-tile",
+      "player": "a",
+      "at": 935,
+      "tile": [
+        78,
+        10
+      ]
+    }
+  ]
+}

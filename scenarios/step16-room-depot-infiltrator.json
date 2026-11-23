@@ -1,0 +1,64 @@
+{
+  "id": "step16-room-depot-infiltrator",
+  "proves": "Step 16, push 1: the infiltrator alone crosses the quarry-depot room from its west opening over the yard, through the strongroom front and back (over the shaft in its floor), to the far side, by running and jumping (the main way works for every hero)",
+  "room": "quarry-depot",
+  "players": [
+    {
+      "id": "a",
+      "character": "infiltrator",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 502,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 72,
+      "to": 90,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 147,
+      "to": 165,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 289,
+      "to": 307,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 349,
+      "to": 367,
+      "hold": [
+        "jump"
+      ]
+    }
+  ],
+  "ticks": 532,
+  "expect": [
+    {
+      "fact": "standing-on-tile",
+      "player": "a",
+      "at": 532,
+      "tile": [
+        62,
+        14
+      ]
+    }
+  ]
+}

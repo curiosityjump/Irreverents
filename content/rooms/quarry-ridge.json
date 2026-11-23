@@ -1,0 +1,58 @@
+{
+  "//": "DRAFT (Step 16 slice 1): the layout is a first pass; the id, the door ids and the area ids are permanent. A ridge crossing over drops, west to east. The chasm (columns 28-29) falls through a hole in the last row into the pit: a missed jump drops you, nothing kills or reloads, and the pit's doorway comes back up here (the arch at columns 70-71). From the dip at columns 46-47 a crawl exactly one tile high (row 8, columns 37-45) runs west under the main way into a pocket (area `crawl-pocket`, columns 31-36): only a body at most a tile tall fits. INTENT: the pocket's floor has a hole (columns 33-34) dropping into the pit, so any body that ends up in it can leave; do not close it. Under the ceiling at the east end, a shelf (area `ridge-shelf`, columns 64-78, six tiles over the floor) that the tower's top comes out on through a hidden opening (column 79, rows 1-3, not hidden on this side). The opening into the tower is column 79, rows 7-9.",
+  "id": "quarry-ridge",
+  "name": "The Ridge",
+  "tile": 16,
+  "hidden": false,
+  "legend": {
+    "#": "solid",
+    ".": "empty",
+    "1": "spawn",
+    "2": "spawn",
+    "3": "spawn"
+  },
+  "rows": [
+    "################################################################################",
+    "#..............................................................................#",
+    "#..............................................................................#",
+    "#..............................................................................#",
+    "#...............................................................################",
+    "#..............................................................................#",
+    "#..............................................................................#",
+    "#...1...............########..################....2............................#",
+    "##########..################..#.................######.........................#",
+    "##########..################..#......#######################..............3....#",
+    "############################..#......#######################..##################",
+    "############################..###..#############################################",
+    "############################..###..#############################################",
+    "############################..###..#############################################",
+    "############################..###..#############################################",
+    "############################..###..#############################################"
+  ],
+  "areas": [
+    {
+      "id": "crawl-pocket",
+      "hidden": true,
+      "at": [
+        31,
+        8
+      ],
+      "size": [
+        6,
+        3
+      ]
+    },
+    {
+      "id": "ridge-shelf",
+      "hidden": true,
+      "at": [
+        64,
+        1
+      ],
+      "size": [
+        15,
+        3
+      ]
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "id": "step16-room-road-infiltrator",
+  "proves": "Step 16, push 1: the infiltrator alone crosses the quarry-road room from the doorway at its west end up every ledge and over every dip to the opening onto the ridge, by running and jumping (the main way works for every hero)",
+  "room": "quarry-road",
+  "players": [
+    {
+      "id": "a",
+      "character": "infiltrator",
+      "spawn": 2
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 630,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 34,
+      "to": 52,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 94,
+      "to": 112,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 169,
+      "to": 187,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 222,
+      "to": 240,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 304,
+      "to": 322,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 424,
+      "to": 442,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 499,
+      "to": 517,
+      "hold": [
+        "jump"
+      ]
+    }
+  ],
+  "ticks": 660,
+  "expect": [
+    {
+      "fact": "standing-on-tile",
+      "player": "a",
+      "at": 660,
+      "tile": [
+        82,
+        10
+      ]
+    }
+  ]
+}

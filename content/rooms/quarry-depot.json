@@ -1,0 +1,106 @@
+{
+  "//": "DRAFT (Step 16 slice 1): the shape of the guarded place only; slice 3 adds its people and its hoard. The layout is a first pass; the id, the door ids, the part ids and the area ids are permanent. In from the tower over the yard (column 0, rows 11-13) and across to the far side (columns 48-62). The strongroom (columns 36-47, rows 9-13) has its front (column 36, rows 12-13) and back (column 47) on the main way, and three other ways in: under, a crawl exactly one tile high (row 15, columns 45-50) from the dip at columns 51-52 to the shaft up through its floor (columns 42-44); over, the roof (row 8, six tiles over the yard: flaps or a throw) and its hole (columns 41-42); through, the cellar from the pit (column 0, rows 16-18) and its cracked wall (`cellar-wall`, column 35), which breaks when something heavy is thrown into it, and the ledges up the shaft beyond. Hiding places: `yard-stack` (column 20), `roof-chimney` (column 38, on the roof), `cellar-alcove` (column 8).",
+  "id": "quarry-depot",
+  "name": "The Depot",
+  "tile": 16,
+  "hidden": false,
+  "legend": {
+    "#": "solid",
+    "=": "oneway",
+    ".": "empty",
+    "1": "spawn",
+    "2": "spawn",
+    "3": "spawn",
+    "4": "spawn",
+    "B": {
+      "part": "cellar-wall"
+    },
+    "H": {
+      "part": "yard-stack"
+    },
+    "K": {
+      "part": "roof-chimney"
+    },
+    "L": {
+      "part": "cellar-alcove"
+    }
+  },
+  "rows": [
+    "################################################################",
+    "#..............................................................#",
+    "#..............................................................#",
+    "#..............................................................#",
+    "#..............................................................#",
+    "#..............................................................#",
+    "#..............................................................#",
+    "#.....................................K........................#",
+    "#...................................#####..#####...............#",
+    "#...................................#..........#...............#",
+    "#...................................#..........#...............#",
+    "#...................................#..........#...............#",
+    "#.............####.............................................#",
+    "#..1..........####..H...##.............................4....2..#",
+    "##########################################...######..###########",
+    "####################################......===........###########",
+    "#..................................B.........###################",
+    "#..................................B....=====###################",
+    "#...3...L..........................B.........###################",
+    "################################################################"
+  ],
+  "areas": [
+    {
+      "id": "strongroom",
+      "hidden": false,
+      "at": [
+        37,
+        9
+      ],
+      "size": [
+        10,
+        5
+      ]
+    },
+    {
+      "id": "cellar",
+      "hidden": true,
+      "at": [
+        1,
+        16
+      ],
+      "size": [
+        34,
+        3
+      ]
+    },
+    {
+      "id": "under-the-strongroom",
+      "hidden": true,
+      "at": [
+        36,
+        16
+      ],
+      "size": [
+        9,
+        3
+      ]
+    }
+  ],
+  "parts": [
+    {
+      "id": "cellar-wall",
+      "kind": "breakable"
+    },
+    {
+      "id": "yard-stack",
+      "kind": "hide"
+    },
+    {
+      "id": "roof-chimney",
+      "kind": "hide"
+    },
+    {
+      "id": "cellar-alcove",
+      "kind": "hide"
+    }
+  ]
+}

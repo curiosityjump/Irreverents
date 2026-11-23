@@ -1,0 +1,72 @@
+{
+  "id": "step16-room-ridge-infiltrator",
+  "proves": "Step 16, push 1: the infiltrator alone crosses the quarry-ridge room from its west opening over both dips and the chasm to the opening into the tower, without falling, by running and jumping (the main way works for every hero)",
+  "room": "quarry-ridge",
+  "players": [
+    {
+      "id": "a",
+      "character": "infiltrator",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 615,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 34,
+      "to": 52,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 109,
+      "to": 127,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 169,
+      "to": 187,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 304,
+      "to": 322,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 409,
+      "to": 427,
+      "hold": [
+        "jump"
+      ]
+    }
+  ],
+  "ticks": 645,
+  "expect": [
+    {
+      "fact": "standing-on-tile",
+      "player": "a",
+      "at": 645,
+      "tile": [
+        78,
+        10
+      ]
+    }
+  ]
+}
