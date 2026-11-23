@@ -174,7 +174,7 @@ Taken 2026-11-23 by the lead at 17d8c1b (`npm run check` green): friends hit but
 
 ## Briefs
 
-- **Slice A, the brawl** (`handoff-prompts/step-11-a-brawl.md`, briefed 2026-11-23 by lead `session_017WiGzFy3MD6ecvM7QMvQGd`): roster, two new characters, the cantina room and its street door (castle street column 20), regulars, the brawl, out-and-back with a counter. Signals 1-5, half of 6, plus a real-server check that `move` brings a player back. Slice B (the tap, the row, the swap, the chase lock, signal 8) waits for it.
+- **Slice A, the brawl** (`handoff-prompts/step-11-a-brawl.md`, briefed 2026-11-23 by lead `session_017WiGzFy3MD6ecvM7QMvQGd`): roster, two new characters, the cantina room and its street door (castle street column 20), regulars, the brawl, out-and-back with a counter. Signals 1-5, half of 6, plus a real-server check that `move` brings a player back. Slice B (the tap, the row, the swap, the chase lock, signal 8, and the cantina's look: a `ROOM_THEME` entry in `tools/art/tiles/make.py` with its atlas and backdrop data, per `tools/art/tiles/README.md`, flagged by Step 8's ground lane at ec49eb5) waits for it.
 
 ## Open with the owner
 
