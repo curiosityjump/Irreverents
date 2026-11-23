@@ -27,3 +27,9 @@ changed>` as its heading. The first one in a new project is the genesis
 entry: "first vision written; no plan exists yet", naming the sections.
 
 ## Entries
+
+### Vision · Music and sound (new frontier)
+- **Answer:** "Something that was not in any of the google drive stuff was music. I think you can figure out what the music and sound effects should be like from what's in there though. Do it."
+- **Recorded in:** `docs/audio-design.md` "Where this comes from"; linked from `docs/vision.md` "Frontiers"
+- **Action for:** orchestrator (vision-level): audio is in scope tonight. `docs/audio-design.md` is the direction (Vision Partner's reading of the library, owner-delegated). Requests A01-01 (SFX) and A02-01 (layered music) are filed with ChatGPT; build with Web Audio synthesised placeholders, unlock audio on first tap (iPhone), and swap files in when they land.
+

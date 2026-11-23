@@ -200,6 +200,13 @@ Detail: docs 08, 09.
 Detail: docs 10, 13, 14, 32. Only the look of "Pixel aesthetic reference —
 approved direction" is approved; no sprite or tile is production art yet.
 
+### Music and sound
+**Owner, 2026-11-23, to Vision Partner, first-hand:**
+> Something that was not in any of the google drive stuff was music. I think you can figure out what the music and sound effects should be like from what's in there though. Do it.
+
+Detail: `docs/audio-design.md` (Vision Partner's reading of the library, to
+be judged by ear).
+
 ### Making it buildable
 *(Framing:)* the library's own build strategy, explicitly marked by the
 owner as a proposal, not a commitment: **Owner, 2026-11-22 (Drive, doc 11):**
