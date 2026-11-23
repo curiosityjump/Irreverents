@@ -9,8 +9,7 @@ per answer saying where it went.
 
 ## Current sessions
 
-- **Vision Partner:** *(none yet — the first Vision Partner writes its
-  session id here)*
+- **Vision Partner:** session_017WiGzHC3CvjTNZqCuxa8Ex (genesis, started 2026-11-23)
 - **Orchestrator:** *(none yet — each orchestrator sets this at pickup)*.
   This line is the one address every session uses to reach the current
   orchestrator; Vision Partner's doorbell goes only here.
