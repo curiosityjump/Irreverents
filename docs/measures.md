@@ -9,7 +9,7 @@ label (M1, M2, ...). A number with no command here is a claim, not a
 measurement — `CLAUDE.md`'s "never answer a coverage question from memory"
 applied to the plan itself.
 
-**Last run:** 2026-11-23 at `7b8dc09`, by the first orchestrator (M1 only; M2 and M3 cannot run until Step 1 lands their commands). Ideally re-run cold by a
+**Last run:** 2026-11-23 08:45 UTC at `4678680` (live) / `cdede03` (main), by the Step 1 lead: M1 `check:deployed` ok (main ahead by documents only), M2 `check:live` exit 0, M3 `npm run gates` 4 of 6 (A, B, C, F). Ideally re-run cold by a
 fresh session (a subagent is enough) with the same answers before the table
 relies on it.
 

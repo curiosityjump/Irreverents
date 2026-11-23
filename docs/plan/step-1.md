@@ -460,3 +460,29 @@ changed without touching code; don't grade the feel yourself.
   worker on the same brief. Live is still the keyboard-only page
   (4a13056). The 06:30 budget is void; the orchestrator's stopping
   condition (finished work only from 10:00 UTC) still stands.
+
+- **Lead `session_017WiGzEwLs3ng2ZPpRZgctn`, 08:50 UTC: Gate 2's main push
+  reviewed at 4678680; live.** Re-run by the lead. `npm run check:live`
+  from the lead's checkout: exit 0 against the live address (each page
+  draws the other; a move shows 183 ms later; two-finger run and jump on
+  the phone-sized page; touch controls for all five actions, none over
+  the play field; a cut socket back in 1.5 s, no reload, no duplicate).
+  Fresh clone at cdede03: `npm ci`, build, `npm run check` (61 lines ok,
+  includes booting the built server and the two-client check), `npm run
+  gates` 4 of 6 with F passing, `npm run e2e` exit 0 for facts (a)–(h)
+  including upright play, 150 ms injected delay (own character moves 15
+  ms after the key), `?room=` isolation, 75 s server outage, one reload
+  on a new commit. Lead's control: server snapshots switched off
+  (`src/server/game.ts`, `const snap = false`) → `check: FAILED` with six
+  named facts; restored → passes. Screenshots read: sideways, the room
+  is centred with the pad left and five round buttons right, nothing over
+  the room; upright, the room across the top, the rotation-lock line with
+  its dismiss button, controls at the bottom. **Not verified:** a real
+  iPhone or Safari; a hit, grab or throw between two devices (no scripted
+  fact yet); `hold`, `release`, `move` across devices (nothing emits them
+  yet). **Not in yet (worker's next push):** inputs for every tick, so a
+  tap between two reports reaches the server exactly once; server-written
+  state on a player's entity surviving reports. Known limits are in
+  `docs/mechanisms/network.md`. Step 1 stays open until that push is
+  reviewed; the delivered touch-button art is not wired in (owed to
+  Step 5).
