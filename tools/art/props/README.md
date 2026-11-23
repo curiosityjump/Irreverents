@@ -51,6 +51,17 @@ outline. The `test-*` rooms get none.
 point and no bell; whatever stands has ground under it and whatever hangs has ground over it; nothing reaches
 the room's rim.
 
+### Round 2 (2026-11-23, `handoff-prompts/look2-props.md`)
+
+| File | Role |
+|---|---|
+| `import_p01.py` | the one import of the art desk's P01 pieces: optional box-filter scale, hard alpha, every colour snapped to the nearest master-palette colour (no dither), light edge fringe stripped, outline re-applied (ink; a soft shade on far pieces, which are also greyed 35% toward `far`). Run alone it writes `preview/p01-<piece>.png`, before and after. |
+| `round2.py` | `fx-hit` (32x32 x5, the imported star filled, cored and outlined, then shrinking and sparks), `fx-swing-grappler` (32x32 x3 punch burst), `fx-slash` (32x32 x5 from the imported slash), `fx-dust` (24x24 x5, outlined, shaded), the font strips, stepped-ring glows (three alpha levels), `hide-front-<w>x<h>` |
+| `font.py` | the pixel font: 95 hand-drawn glyphs, 5 wide on a 6x10 cell, mixed case, descenders |
+| `shots.mjs` | real-game screenshots: a punch on a dummy (6 frames), the throne room, the undercroft, the street; upright and sideways |
+
+New looks: `fx-swing-grappler`, `hide-front-1x2`, `hide-front-2x2`; `font-dark`/`font-light` in `content/looks/font.json` + `assets/ui/font.png` (held back, see Flags). Resized: `fx-hit` 32, `fx-slash` 32, `fx-dust` 24. Cracks get a light edge beside the dark line. Decor: P01 barrels (street, undercroft, dimmed toward night there), P01 lantern posts (every other street lamp; undercroft lower floor every 10th column from 9), P01 ruin arch and broken column (courtyard, `far`); a `blend: "lighter"` glow on every torch in the five rooms that have them and on the undercroft's lantern posts.
+
 ## Deviations from the contract
 
 - `ui-use`'s `src` is the whole 48×24 picture (normal then pressed), with no `frames`: that is how
@@ -63,6 +74,17 @@ the room's rim.
   `night`), as the palette section allows. No new hue.
 
 ## Decisions
+
+- **Round 2: no light shaft at the throne room's stained-glass window.** That window is the face of a
+  secret way out, and the room file says "Do not thin the wall, decorate it or point at it"; a shaft
+  would point at it. The back wall's own painted windows (ground lane) carry the shafts instead. The
+  gallery has no window part at all. Undo: add a glow item in `throne_room()` in `place.py`.
+- **Round 2: lantern posts outdoors have no glow.** Added light on a bright sky turns it white.
+  Undo: the `castle-street` condition in `Room.glows()`.
+- **Round 2: P01 scales.** Barrels 0.5 (18x20, 15x18: under a person's height), lantern post 0.75
+  (29x49, three tiles), column 0.8, arch 1.0, star 0.94, slash 30/42. `PIECES` in `import_p01.py`.
+- **Round 2: the hide fold is the curtain with its outer edge cleared** (2 px a side on a one-tile
+  curtain, 4 on a wider one): the body behind shows only at the edges. Undo: `hide_front` in `round2.py`.
 
 Each is `DRAFT:`, made without asking, and undone by deleting lines in `place.py` (or a function in
 `decor_draw.py`) and running `make.py`.
@@ -99,6 +121,13 @@ result, because the first seed happened to pile the most barrels in the vault; t
 Cracks are a thin dark line with no highlight.
 
 ## Flags for the lead
+
+- **Round 2: the font is held back.** `src/content/kinds/looks.ts` caps a strip at 64 frames; the
+  contract's font is a 95-frame strip. `make.py --no-font` leaves `font.json` out; asked of the
+  orchestrator (who raises the cap, or should it be two strips). Run `make.py` without the flag
+  once the cap allows 95.
+- **Round 2: the punch burst and the big star are only seen once the actors lane's renderer reads
+  `fx-swing-<id>` and sizes from the look**; at the time of this push the grappler still swings `fx-slash`.
 
 - **Cracks are near-invisible on a very dark wall.** `crack-1/2` are ink on transparent; on the preview's
   night-coloured ground they barely show. Whether that is right depends on the undercroft tiles, which had not

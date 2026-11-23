@@ -169,6 +169,13 @@ def crack(n):
     else:
         pts(im, INK, (5, 12), (4, 13))
         pts(im, SOFT, (6, 11), (8, 5), (8, 9), (3, 14))
+    # round 2: a light edge beside the dark core, so a crack shows on a dark wall too
+    lit = col('stone', 3)
+    src = im.copy()
+    for y in range(16):
+        for x in range(16):
+            if src.getpixel((x, y)) == INK and src.getpixel((min(15, x + 1), y))[3] == 0:
+                put(im, x + 1, y, lit)
     return im
 
 

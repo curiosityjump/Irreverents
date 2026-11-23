@@ -42,8 +42,30 @@ class Room:
         """A plain cell with ground right under it."""
         return self.plain(tx, ty) and self.kind(tx, ty + 1) == 'solid'
 
-    def add(self, sheet, name, tx, ty, dx=0, dy=0, layer='back', flip=False, support='floor'):
-        self.items.append({'sheet': sheet, 'name': name, 'tx': tx, 'ty': ty, 'dx': dx, 'dy': dy, 'layer': layer, 'flip': flip, 'support': support})
+    def add(self, sheet, name, tx, ty, dx=0, dy=0, layer='back', flip=False, support='floor', blend=None):
+        it = {'sheet': sheet, 'name': name, 'tx': tx, 'ty': ty, 'dx': dx, 'dy': dy, 'layer': layer, 'flip': flip, 'support': support}
+        if blend:
+            it['blend'] = blend
+        self.items.append(it)
+
+    def glow(self, sheet, name, r, cx, cy, layer):
+        """A glow (blend: lighter) centred on the room pixel (cx, cy): round 2, on a light that is already
+        there (INTENT: placed by the same rule as the light it sits on, never as a hint)."""
+        tx, ty = cx // T, cy // T
+        self.add(sheet, name, tx, ty, dx=cx - r - tx * T, dy=cy + r - (ty + 1) * T, layer=layer, support='glow', blend='lighter')
+
+    def glows(self):
+        """A glow on every torch and lantern post this room already has."""
+        for it in list(self.items):
+            left = it['tx'] * T + it['dx']
+            bottom = (it['ty'] + 1) * T + it['dy']
+            if it['name'] == 'torch':
+                dark = it['sheet'] == 'undercroft'
+                self.glow(it['sheet'], 'glow-torch', 18, left + 5, bottom - 22 + (7 if dark else 6), it['layer'])
+            elif it['name'] == 'lantern-post' and self.id != 'castle-street':
+                # DRAFT: no glow on a lantern in daylight: added light on a bright sky only bleaches it
+                cx = left + (29 - 24 if it['flip'] else 24)
+                self.glow(it['sheet'], 'glow-lantern', 16, cx, bottom - 49 + 31, it['layer'])
 
     def column(self, tx, top, bottom):
         """A far-layer column from row `top` down to stand on row `bottom`."""
@@ -69,9 +91,13 @@ def castle_street(R):
     R.add('town', 'stall', 11, 10, dx=-2)
     R.add('town', 'cloth', 13, 10)
     # --- street lamps, one rule: every 13th column from 6
-    for tx in range(6, R.w - 1, 13):
+    # round 2: every other one is the art desk's lantern post (imported), with a glow
+    for i, tx in enumerate(range(6, R.w - 1, 13)):
         if R.floor(tx, 10):
-            R.add('town', 'lamp', tx, 10)
+            if i % 2 and R.floor(tx + 1, 10):
+                R.add('town', 'lantern-post', tx, 10, dx=-2)
+            else:
+                R.add('town', 'lamp', tx, 10)
     # --- things standing about
     R.add('town', 'barrels', 22, 10, dx=-2)
     R.add('town', 'barrel', 1, 10, dx=1)
@@ -169,6 +195,14 @@ def undercroft(R):
                     R.add('undercroft', 'barrel', tx, ty, dx=1)
 
 
+def undercroft_posts(R):
+    # round 2: lantern posts on the lower floor, one rule: every 10th column from 9, wherever three
+    # open cells above the floor and the next column give them room
+    for tx in range(9, R.w - 2, 10):
+        if R.floor(tx, 12) and R.floor(tx + 1, 12) and all(R.plain(tx + k, 12 - j) for j in range(3) for k in (0, 1)):
+            R.add('undercroft', 'lantern-post', tx, 12, dx=0)
+
+
 def graybox_hall(R):
     for tx in range(3, R.w - 1, 6):
         if R.plain(tx, 7) and R.plain(tx, 6):
@@ -183,11 +217,20 @@ PLACERS = {
 }
 
 
+# round 2: rooms whose torches and lantern posts get a glow (the brief's list, plus the street's posts and
+# its one torch in the upper room)
+GLOW_ROOMS = ('throne-room', 'hall-gallery', 'undercroft', 'graybox-hall', 'castle-street')
+
+
 def place_all():
     out = {}
     all_rooms = load_rooms()
     for rid, fn in PLACERS.items():
         R = Room(all_rooms[rid])
         fn(R)
+        if rid == 'undercroft':
+            undercroft_posts(R)
+        if rid in GLOW_ROOMS:
+            R.glows()
         out[rid] = R
     return out

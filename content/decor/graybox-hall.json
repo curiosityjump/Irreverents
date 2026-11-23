@@ -7,6 +7,9 @@
     {"image": "decor/castle.png", "src": [50, 0, 12, 22], "tx": 15, "ty": 7, "dx": 2, "dy": 0, "layer": "far", "flip": false},
     {"image": "decor/castle.png", "src": [16, 0, 16, 44], "tx": 6, "ty": 3, "dx": 0, "dy": -4, "layer": "far", "flip": false},
     {"image": "decor/castle.png", "src": [16, 0, 16, 44], "tx": 12, "ty": 3, "dx": 0, "dy": -4, "layer": "far", "flip": false},
-    {"image": "decor/castle.png", "src": [16, 0, 16, 44], "tx": 18, "ty": 3, "dx": 0, "dy": -4, "layer": "far", "flip": false}
+    {"image": "decor/castle.png", "src": [16, 0, 16, 44], "tx": 18, "ty": 3, "dx": 0, "dy": -4, "layer": "far", "flip": false},
+    {"image": "decor/castle.png", "src": [62, 0, 36, 36], "tx": 3, "ty": 7, "dx": -11, "dy": 2, "layer": "far", "flip": false, "blend": "lighter"},
+    {"image": "decor/castle.png", "src": [62, 0, 36, 36], "tx": 9, "ty": 7, "dx": -11, "dy": 2, "layer": "far", "flip": false, "blend": "lighter"},
+    {"image": "decor/castle.png", "src": [62, 0, 36, 36], "tx": 15, "ty": 7, "dx": -11, "dy": 2, "layer": "far", "flip": false, "blend": "lighter"}
   ]
 }

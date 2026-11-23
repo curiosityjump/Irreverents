@@ -59,7 +59,9 @@ def main():
     want = ['plate-up', 'plate-down', 'gate-closed', 'gate-open', 'crack-1', 'crack-2', 'rubble', 'bell', 'bell-ringing',
             'bell-broken', 'shop-counter', 'shop-goods', 'alert-pip', 'alert-pip-off', 'mood-2', 'mood-3', 'bark',
             'bark-tail', 'ribbon', 'away-dots', 'player-mark', 'shadow-s', 'shadow-m', 'shadow-l', 'fx-slash', 'fx-hit',
-            'fx-dust', 'fx-land', 'ui-use', 'part:throne-room:window', 'part:throne-room:window:broken']
+            'fx-dust', 'fx-land', 'ui-use', 'part:throne-room:window', 'part:throne-room:window:broken',
+            'fx-swing-grappler', 'font-dark', 'font-light']  # round 2 adds the last three (and hide-front-*)
+    want += ['hide-front-%dx%d' % s for s in sz['hide']]
     want += ['door-enter-%dx%d' % s for s in sz['door-enter']] + ['hide-%dx%d' % s for s in sz['hide']]
     want += ['window-%dx%d' % s for s in sz['window']] + ['window-broken-%dx%d' % s for s in sz['window']]
     for w in want:
@@ -69,7 +71,8 @@ def main():
                 'crack-2': (16, 16), 'rubble': (16, 16), 'bell': (16, 32), 'bell-ringing': (16, 32), 'bell-broken': (16, 32),
                 'shop-counter': (16, 16), 'shop-goods': (8, 8), 'alert-pip': (10, 10), 'alert-pip-off': (10, 10), 'mood-2': (12, 12),
                 'mood-3': (12, 12), 'bark': (12, 12), 'bark-tail': (6, 4), 'ribbon': (12, 12), 'away-dots': (12, 6), 'player-mark': (8, 8),
-                'shadow-s': (12, 4), 'shadow-m': (18, 5), 'shadow-l': (26, 6), 'fx-slash': (24, 24), 'fx-hit': (16, 16), 'fx-dust': (16, 16),
+                'shadow-s': (12, 4), 'shadow-m': (18, 5), 'shadow-l': (26, 6), 'fx-slash': (32, 32), 'fx-hit': (32, 32), 'fx-dust': (24, 24), 'fx-swing-grappler': (32, 32),
+                'font-dark': (6, 10), 'font-light': (6, 10),
                 'fx-land': (24, 8), 'ui-use': (48, 24), 'part:throne-room:window': (16, 48), 'part:throne-room:window:broken': (16, 48)}
     for f in sorted(glob.glob(os.path.join(ROOT, 'content', 'looks', '*.json'))):
         for lid, look in json.load(open(f))['looks'].items():
@@ -109,6 +112,8 @@ def main():
                 if t.get('look') == 'bell':
                     tx, ty = t['tile']; keep.append((tx * 16, (ty - 1) * 16, (tx + 1) * 16, (ty + 1) * 16, 'the bell'))
         src_items = placed[j['id']].items
+        if 'outside' not in json.load(open(os.path.join(ROOT, 'content', 'backdrops', 'courtyard.json'))):
+            src_items = [it for it in src_items if not it.get('blend')]
         if len(src_items) != len(j['items']):
             fail('%s: not what place.py makes now (run make.py)' % name)
         for i, it in enumerate(j['items']):
@@ -122,6 +127,15 @@ def main():
             if it['layer'] not in ('far', 'back', 'front'):
                 fail('%s item %d: layer %s' % (name, i, it['layer']))
             x0 = it['tx'] * 16 + it['dx']; y1 = (it['ty'] + 1) * 16 + it['dy']; x1 = x0 + w; y0 = y1 - h
+            if it.get('blend') == 'lighter':
+                # round 2: a glow is light, not a thing: it may reach the rim and fall over a door. It must be
+                # stepped rings (at most three alpha levels) and sit on a torch or a lantern post.
+                levels = set(im.crop((x, y, x + w, y + h)).getchannel('A').tobytes()) - {0} if im else set()
+                if len(levels) > 3:
+                    fail('%s item %d: a glow with %d alpha levels' % (name, i, len(levels)))
+                if src_items[i]['support'] != 'glow':
+                    fail('%s item %d: blend on something that is not a glow' % (name, i))
+                continue
             if x0 < 16 or x1 > (R.w - 1) * 16 or y0 < 0 or y1 > R.h * 16:
                 fail('%s item %d (%s): reaches the room\'s rim' % (name, i, src_items[i]['name']))
             what = src_items[i]['name'] if i < len(src_items) else '?'

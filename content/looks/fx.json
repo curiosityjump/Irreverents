@@ -3,9 +3,10 @@
   "id": "fx",
   "image": "fx/fx.png",
   "looks": {
-    "fx-slash": {"src": [0, 0, 24, 24], "frames": 5, "fps": 20},
-    "fx-hit": {"src": [0, 24, 16, 16], "frames": 5, "fps": 20},
-    "fx-dust": {"src": [0, 40, 16, 16], "frames": 5, "fps": 15},
-    "fx-land": {"src": [0, 56, 24, 8], "frames": 4, "fps": 15}
+    "fx-hit": {"src": [0, 0, 32, 32], "frames": 5, "fps": 18},
+    "fx-slash": {"src": [0, 32, 32, 32], "frames": 5, "fps": 20},
+    "fx-swing-grappler": {"src": [0, 64, 32, 32], "frames": 3, "fps": 16},
+    "fx-land": {"src": [0, 96, 24, 8], "frames": 4, "fps": 15},
+    "fx-dust": {"src": [0, 104, 24, 24], "frames": 5, "fps": 15}
   }
 }

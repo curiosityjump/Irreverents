@@ -57,7 +57,17 @@ def sheet_contact(s, path, k=4, bg='#807b96'):
     out.convert('RGB').save(path)
 
 
-def room_scene(rid, R, sheets, looks, all_rooms):
+def add_light(im, pic, x0, y0):
+    """blend "lighter": the glow's colour times its alpha is added to what is under it."""
+    for y in range(pic.height):
+        for x in range(pic.width):
+            r, g, b, a = pic.getpixel((x, y))
+            if a and 0 <= x0 + x < im.width and 0 <= y0 + y < im.height:
+                R_, G_, B_, A_ = im.getpixel((x0 + x, y0 + y))
+                im.putpixel((x0 + x, y0 + y), (min(255, R_ + r * a // 255), min(255, G_ + g * a // 255), min(255, B_ + b * a // 255), A_))
+
+
+def room_scene(rid, R, sheets, looks, all_rooms, glows=True):
     r = all_rooms[rid]
     rows = r['rows']; W, H = len(rows[0]) * 16, len(rows) * 16
     sky, wall, body, lip = THEME[rid]
@@ -91,13 +101,16 @@ def room_scene(rid, R, sheets, looks, all_rooms):
 
     def draw_items(layer):
         for it in R.items:
-            if it['layer'] != layer:
+            if it['layer'] != layer or (it.get('blend') and not glows):
                 continue
             s = sheets[it['sheet']]
             x, y, w, h = s.rects[it['name']]
             pic = s.image().crop((x, y, x + w, y + h))
             if it['flip']:
                 pic = flip(pic)
+            if it.get('blend') == 'lighter':
+                add_light(im, pic, it['tx'] * 16 + it['dx'], (it['ty'] + 1) * 16 + it['dy'] - h)
+                continue
             im.alpha_composite(pic, (it['tx'] * 16 + it['dx'], (it['ty'] + 1) * 16 + it['dy'] - h)) if 0 <= it['tx'] * 16 + it['dx'] and it['tx'] * 16 + it['dx'] + w <= W and (it['ty'] + 1) * 16 + it['dy'] - h >= 0 else paste(im, pic, it['tx'] * 16 + it['dx'], (it['ty'] + 1) * 16 + it['dy'] - h)
 
     draw_items('far')
@@ -178,6 +191,7 @@ def main():
     from sizes import rooms
     all_rooms = rooms()
     for rid, R in place_all().items():
+        scale(room_scene(rid, R, sheets, looks, all_rooms, glows=False), 2).convert('RGB').save(os.path.join(OUT, 'room-%s-whole-2x-noglow.png' % rid))
         im = room_scene(rid, R, sheets, looks, all_rooms)
         scale(im, 2).convert('RGB').save(os.path.join(OUT, 'room-%s-whole-2x.png' % rid))
         W, H = im.size
@@ -191,6 +205,28 @@ def main():
                 view.paste(im.crop((x, y, x + 320, y + 180)), (0, 0))
                 scale(view, 4).convert('RGB').save(os.path.join(OUT, 'room-%s-view%d.png' % (rid, n)))
                 n += 1
+    # round 2: the font as a pangram, both colours, at 1x and 4x, on paper and on the ribbon's dark
+    import round2 as r2
+    lines = ['The quick brown fox jumps over the lazy dog.', 'SEIZE THEM!! "Who?" - 0123456789, (ok) ...',
+             'Our astronomers call it the Unlidding.']
+    for dark, bg in ((True, '#fff1a0'), (False, '#2b2140')):
+        st = r2.font_strip(dark)
+        pg = Image.new('RGBA', (6 * max(len(l) for l in lines) + 8, 12 * len(lines) + 6), rgb(bg))
+        for j, line in enumerate(lines):
+            for i, ch in enumerate(line):
+                k = ord(ch) - 32
+                pg.alpha_composite(st.crop((k * 6, 0, k * 6 + 6, 10)), (4 + i * 6, 3 + j * 12))
+        tag = 'dark' if dark else 'light'
+        pg.convert('RGB').save(os.path.join(OUT, 'font-%s-1x.png' % tag))
+        scale(pg, 4).convert('RGB').save(os.path.join(OUT, 'font-%s-4x.png' % tag))
+    # the effect strips, frame by frame at 6x on a castle wall colour
+    for name, strip_, n in (('fx-hit', r2.fx_hit(), 5), ('fx-swing-grappler', r2.fx_swing_grappler(), 3),
+                            ('fx-slash', r2.fx_slash(), 5), ('fx-dust', r2.fx_dust(), 5)):
+        bg = Image.new('RGBA', (strip_.width + 4 * n, strip_.height), rgb('#5c5690'))
+        fw = strip_.width // n
+        for i in range(n):
+            bg.alpha_composite(strip_.crop((i * fw, 0, (i + 1) * fw, strip_.height)), (i * (fw + 4), 0))
+        scale(bg, 6).convert('RGB').save(os.path.join(OUT, 'fx-%s.png' % name))
     print('previews written to', OUT)
 
 
