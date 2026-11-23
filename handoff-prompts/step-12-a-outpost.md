@@ -64,7 +64,7 @@ first enemy fight a player can walk into.
 - **People get `c.npc` only from a placements entry** (`npc-setup.ts`, by
   placed id). A wave person spawned at runtime has no entry: give it
   `c.npc` yourself when you spawn it (copy the literal at
-  `npc-setup.ts:25`, `home` = the outpost room). **Measure what
+  `npc-setup.ts:23`, `home` = the outpost room). **Measure what
   `routine()` (`src/sim/npc/behaviours.ts:31-74`) does for a person with
   no placement entry** before relying on mood 1's routine for them; if it
   throws or walks off, have your fight overlay cover them every tick.
