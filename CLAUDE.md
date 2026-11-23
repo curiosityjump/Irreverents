@@ -103,8 +103,9 @@ born"), gets its own line here. The dispositions below apply to every role.
 
 **Every session, including this one, is disposable — the repository is
 what persists.** **Never run long enough to compact your own memory** (an
-orchestrator hands off at about 250k tokens of context; a builder takes
-another brief only under about 400k): a fresh session reasoning from these
+orchestrator keeps going until about 800k tokens of context and then
+starts its own successor, because the owner won't babysit handoffs; a builder
+takes another brief only under about 400k): a fresh session reasoning from these
 docs beats an old one reasoning from an aging summary of itself. Record
 continuously, then stop. `docs/roles/README.md` indexes who exists to do a
 kind of job and how a new role is spun up.

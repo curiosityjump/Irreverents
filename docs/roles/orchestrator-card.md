@@ -44,10 +44,10 @@ One status line per step in `docs/plan.md`, in the exact forms of its "How a lea
 
 ## Handing off
 
-- **When:** about **250k tokens** (`get_session`, no id: `external_metadata.context_usage.used_tokens`), or sooner (a compaction marker, the same mistake twice).
+- **When:** about **800k tokens** (`get_session`, no id: `external_metadata.context_usage.used_tokens`; autocompact is near 900k), or sooner only on a compaction marker or the same mistake twice. `DRAFT:` the owner, 2026-11-23 ~16:20 UTC, first-hand to the orchestrator: *"Just keep going i can't be babysitting handoffs all the time"*. It was 250k until then. Don't stop to hand off sooner, and don't make the owner start your successor.
 - Bring the repo current: status lines, the directive's three sections, `docs/vision-gaps.md`'s status column, the inbox and outbox.
 - **The efficiency row** in `docs/measures.md`, taken as its "M4" says (`external_metadata.usage.cost_usd` of every session in your tenure, over commits on `origin/main` that touched the game). One row (`DRAFT:`).
 - The handoff entry at the end of `docs/for-the-orchestrator.md`, in its format. Commit, push, check it landed on `main`; that commit goes on the header's Orchestrator line.
-- One `send_message` to Vision Partner: "Orchestrator <id> handed off at <commit>; the next orchestrator is the owner's to start." One line to the owner saying the same.
-- **Never spawn your successor:** the owner starts every orchestrator, at lineage depth 0 (`docs/orchestrator-role.md`, "Handing off to a fresh successor").
+- **Spawn your successor yourself** with the canonical call (card, "The loop" 4), title "Orchestrator (ongoing)", prompt "You are the orchestrator. Read CLAUDE.md first." (`DRAFT:`, same owner words; it was "the owner starts every orchestrator" until then). Each self-spawned successor is one lineage step deeper (limit 8, `get_session` `lineage`): at depth 6 or more, tell the owner in one line that the next one should be started by them.
+- One `send_message` to Vision Partner: "Orchestrator <id> handed off at <commit> to <successor id>." One line to the owner saying the same.
 - **After your handoff commit you only forward:** what reaches you goes to the successor in one message, unchanged, with one line to the owner. No commits, no spawns.

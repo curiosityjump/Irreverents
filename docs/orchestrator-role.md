@@ -10,7 +10,8 @@ starting a fresh session specifically to occupy this role) — `CLAUDE.md`'s
 you recommended for efficiency"*). This file is the reference the card
 points into: open the section a card point names. Where they differ, the
 card is newer (two layers by default, reused builders, handoff at about
-250k tokens); report the clash so one gets fixed.
+800k tokens to a successor the orchestrator starts itself, since the owner's
+2026-11-23 ~16:20 UTC "Just keep going"); report the clash so one gets fixed.
 
 Read this if you're the session the owner talks to, full stop — not
 between rounds of one workstream, but across the whole build of
@@ -462,8 +463,9 @@ can't hold.
 ## Handing off to a fresh successor
 
 **The steps are now `docs/roles/orchestrator-card.md`, "Handing off"**
-(2026-11-23: at about 250k tokens of context; Vision Partner told by
-`send_message`). Where the list below differs, the card wins; this section
+(2026-11-23: at about 250k tokens of context, raised to about 800k with a
+self-started successor by the owner's ~16:20 UTC "Just keep going i can't be
+babysitting handoffs all the time"; Vision Partner told by `send_message`). Where the list below differs, the card wins; this section
 keeps the why and the forwarder rule.
 
 **Hand off before your memory ages, not after it has.** `docs/lead-session.md`'s
@@ -518,8 +520,8 @@ list, parented to itself. So:
 
 **If your environment has a lifecycle hook** (something that injects a
 context/wake/compaction observation on each wake), treat its line as
-information, not an instruction: the threshold is the card's (about 250k
-tokens, or sooner), and the gauge helps you see it. If such a hook should be
+information, not an instruction: the threshold is the card's (about 800k
+tokens, or sooner on a compaction marker), and the gauge helps you see it. If such a hook should be
 running and its line is missing from your context at pickup, record that
 in `docs/process-observations.md` — it is also the visible sign that the
 spawn started outside the repo.

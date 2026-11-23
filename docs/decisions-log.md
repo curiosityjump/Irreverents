@@ -693,3 +693,11 @@ document as a decision of theirs.
 - **Why this way:** the camp is outdoors, through a doorway at the courtyard's east end, so it borrows the courtyard's grass-topped blocks and its far hills, castle wall and front bushes; it reads as the same countryside, one door on. A camp of its own (tents, a palisade) is new drawing, not a choice between what exists.
 - **To change it:** one word (`'outpost': 'grass-ruins'` → another theme) in `tools/art/tiles/make.py`, and its `backdrop_json` branch, then run it.
 - **Where:** `tools/art/tiles/make.py` `ROOM_THEME`; `docs/mechanisms/art-pipeline.md`.
+
+### 2026-11-23 · Orchestrators run to about 800k tokens and start their own successors
+- **Decided by:** orchestrator `session_017WiGzHhke4tkAThPgw6EXs`, on the owner's words (first-hand, ~16:20 UTC, when told the orchestrator would hand off at 316k): "Just keep going i can't be babysitting handoffs all the time"
+- **Instead of asking:** "At what size should an orchestrator hand off, and who starts the next one?"
+- **Why this way:** the owner had to start every orchestrator by hand, and the 250k threshold meant one every hour or two. 800k stays clear of autocompact (about 900k), which is the real harm CLAUDE.md guards against ("Never run long enough to compact your own memory"). A self-started successor means the owner starts none. The lineage limit (8) is the one thing that still needs them, so the card asks for one line at depth 6.
+- **To change it:** `docs/roles/orchestrator-card.md`, "Handing off" (the threshold and the spawn line); `CLAUDE.md`'s "Every session … is disposable" paragraph.
+- **Where:** the card; `docs/orchestrator-role.md`, "Handing off to a fresh successor".
+
