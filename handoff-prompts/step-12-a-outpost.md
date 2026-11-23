@@ -84,9 +84,9 @@ first enemy fight a player can walk into.
   escape the zone).
 - **Where it joins:** agreed with Step 11's lead (cantina goes off
   `castle-street`, not here): **one new `enter` doorway in
-  `content/rooms/courtyard.json`, ground row 7, column 9, legend `o`,
+  `content/rooms/courtyard.json`, ground row 7, column 23 (not 1-13: kept for Step 7; not 15 or 17-19), legend `o`,
   door id `to-outpost`**. Row 7 today is `W..1.2........3.P...4.Q..G...E`
-  (column 9 is `.`). That one character, the legend entry and the door
+  (column 23 is `.`). That one character, the legend entry and the door
   entry are the only edits to an existing room. `git pull --rebase` right
   before pushing it.
 - **Scenarios:** `scenarios/<id>.json` (type `src/scenarios/types.ts:20-42`;

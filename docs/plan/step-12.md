@@ -156,11 +156,11 @@ List these; don't grade them.
 
 ## Measure
 
-2026-11-23 14:40 UTC, lead session_017WiGzJTXQVCWQYDDmC2UiY, at 5fb514f (`npm run check` green, 64 s): the seams are measured into the slice A brief's "Measured for you". The ones that shape the step: calls are good-side only (`npc-call.ts:77`), so the horn is this step's own system and never raises Step 4's alert (`DRAFT:`); a bell can't be hit, so the horn is a heavy body like the throne; the people cap is parse-time only (`MAX_NPCS_PER_ROOM` 8), so the bound is new data; no cap exists on guards crossing doors (`alert-follow.ts`), slice B's. The outpost joins by an `enter` doorway at courtyard column 9, row 7 (agreed with Step 11's lead, whose cantina goes off `castle-street`); `enter` doorways only, so nobody of the camp is carried out and no fight shuts a door.
+2026-11-23 14:40 UTC, lead session_017WiGzJTXQVCWQYDDmC2UiY, at 5fb514f (`npm run check` green, 64 s): the seams are measured into the slice A brief's "Measured for you". The ones that shape the step: calls are good-side only (`npc-call.ts:77`), so the horn is this step's own system and never raises Step 4's alert (`DRAFT:`); a bell can't be hit, so the horn is a heavy body like the throne; the people cap is parse-time only (`MAX_NPCS_PER_ROOM` 8), so the bound is new data; no cap exists on guards crossing doors (`alert-follow.ts`), slice B's. The outpost joins by an `enter` doorway at courtyard column 23, row 7 (moved 15:05 UTC from column 9: columns 1-13 are kept empty for Step 7's machine, 15 for the undercroft's doorway, 17-19 of rows 6-7 are Step 16's) (agreed with Step 11's lead, whose cantina goes off `castle-street`); `enter` doorways only, so nobody of the camp is carried out and no fight shuts a door.
 
 ## Briefs
 
-- Slice A, the outpost (signals 1–4 and 7, the room and its door): `handoff-prompts/step-12-a-outpost.md`, hard stop 16:05 UTC. Slice B, the chase and the clash (signals 5–6), is briefed after A's review.
+- Slice A, the outpost (signals 1–4 and 7, the room and its door): `handoff-prompts/step-12-a-outpost.md`, hard stop 16:05 UTC. Added to slice A by message 15:05 UTC: `outpost-fight` widened so a hostile person fights wherever it is placed (Step 16 places these kinds in ordinary rooms; tell its lead when it lands). Slice B, the chase and the clash (signals 5–6), is briefed after A's review.
 
 ## Open with the owner
 
