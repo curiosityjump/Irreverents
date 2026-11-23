@@ -95,6 +95,8 @@ SEED_X = {('infiltrator', 7): 772, ('flyer', 7): 780}  # rows above this in col 
 
 _sheet = None
 METHOD = 'box'
+INK_AT = 0.4  # DRAFT: share of a target pixel's footprint that must be line work to draw ink
+SMOOTH = 5  # DRAFT: 0 turns the mode filter off
 
 
 def sheet():
@@ -203,25 +205,37 @@ def native(src, scale, hero, ink_weight=1.7, cover=0.42):
     return out
 
 
-def native_box(src, scale, hero, cover=0.42):
-    """Area-average the source (opaque pixels only), then snap to the palette."""
+def native_box(src, scale, hero, cover=0.42, ink_at=None):
+    """Area-average the source, lines and fills apart: a target pixel is ink when
+    enough of its footprint is the source's dark line work (`ink_at`), else the
+    average of its non-line pixels snapped to the palette. Keeping the lines out
+    of the fills' average is what keeps the fills clean at native size."""
+    if ink_at is None:
+        ink_at = INK_AT
     pal = palette(hero)
     H, W = src.shape[:2]
     h = max(1, int(round(H * scale)))
     w = max(1, int(round(W * scale)))
-    m = (src[:, :, 3] > 0).astype(np.float64)
-    rgb = src[:, :, :3].astype(np.float64) * m[:, :, None]
+    m = (src[:, :, 3] > 0)
+    dark = m & (src[:, :, :3].sum(2) < 170)
+    fill = (m & ~dark).astype(np.float64)
+
     def box(x):
         im = Image.fromarray(x.astype(np.float32), mode='F')
         return np.array(im.resize((w, h), Image.BOX), dtype=np.float64)
-    cov = box(m)
+    cov = box(m.astype(np.float64))
+    cink = box(dark.astype(np.float64))
+    cfill = box(fill)
+    rgb = src[:, :, :3].astype(np.float64) * fill[:, :, None]
     acc = np.stack([box(rgb[:, :, i]) for i in range(3)], 2)
-    col = acc / np.maximum(cov, 1e-6)[:, :, None]
+    col = acc / np.maximum(cfill, 1e-6)[:, :, None]
     idx = _nearest(pal, col)
     out = np.zeros((h, w, 4), np.uint8)
     on = cov >= cover
     out[on, :3] = pal[idx[on]]
     out[on, 3] = 255
+    inky = on & ((cink >= ink_at * cov) | (cfill < 0.15 * cov))
+    out[inky, :3] = INK
     return out
 
 
@@ -247,6 +261,24 @@ def despeckle(a, passes=1):
                     b[y, x] = c[0][0]
         a = b
     return a
+
+
+def smooth(a, need=5):
+    """Mode filter for the inside: a non-ink pixel whose 8 neighbours hold `need`
+    or more of one other non-ink colour takes it (flattens the source's noise
+    into readable masses; outlines and eyes are ink and stay)."""
+    from collections import Counter
+    h, w = a.shape[:2]
+    b = a.copy()
+    for y in range(1, h - 1):
+        for x in range(1, w - 1):
+            if a[y, x, 3] == 0 or tuple(a[y, x, :3]) == INK:
+                continue
+            nb = [tuple(a[y + dy, x + dx]) for dy in (-1, 0, 1) for dx in (-1, 0, 1) if dy or dx]
+            c = Counter(n for n in nb if n[3] and n[:3] != INK).most_common(1)
+            if c and c[0][1] >= need and c[0][0] != tuple(a[y, x]):
+                b[y, x] = c[0][0]
+    return b
 
 
 def outline(a, color=INK):
@@ -275,6 +307,8 @@ def pose(hero, col, height):
     a = native_box(src, scale, hero) if METHOD == 'box' else native(src, scale, hero)
     a = darks_to_ink(a)
     a = despeckle(a)
+    if SMOOTH:
+        a = smooth(a, SMOOTH)
     a = outline(a)
     # trim
     ys, xs = np.nonzero(a[:, :, 3])

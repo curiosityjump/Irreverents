@@ -86,8 +86,11 @@ round 1 and 2 puppets below are history for the plain `hero` only.
   `pixel-heroes-action-sprite-sheet.png` as one connected piece (the "!!",
   swirls and sweat marks are separate pieces and drop out; the punch burst,
   the rock, the chest and the coin are cut by rectangle; the blue slash by
-  colour), drops the ground shadow, area-averages it down to native size,
-  snaps every pixel to the master palette (the faces use two in-between
+  colour), drops the ground shadow, area-averages it down to native size
+  with the line work kept apart from the fills (a pixel is `ink` when 40% of
+  what it covers is the source's dark lines, `INK_AT`; the fills are averaged
+  without the lines, so they stay clean), flattens noise with a mode filter
+  (`SMOOTH`), snaps every pixel to the master palette (the faces use two in-between
   shades of the cream and gold hues), hardens alpha to 0/255, despeckles,
   and re-inks a 1 px `ink` outline. Same bytes every run.
 - `canon.py` builds the three sheets from the 13 canon columns (0 idle,
