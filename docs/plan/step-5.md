@@ -43,6 +43,13 @@ instructions longer than a glance.
   reload. While mending, the screen says so.
 - **There is always a way out:** a small menu, reachable by touch, with at
   least "I'm stuck" (back to the room's entrance) and a way to leave.
+- **What goes wrong on a real iPhone reaches us.** Nobody here can run
+  Safari, so the page reports its own errors (an uncaught error, a failed
+  load, a socket that will not open) to the server, which keeps the last
+  few hundred where a session can read them (for example `/debug/errors`).
+  It is how the morning's first real-iPhone minute gets debugged without
+  the owner describing a blank screen. No personal data: the error, the
+  page's build, the screen size.
 - **No accounts, no sign-in.** A name is optional and remembered on the
   device.
 - **Home-screen install is allowed** (the library leaves it open): iPhone

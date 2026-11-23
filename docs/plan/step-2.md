@@ -52,6 +52,17 @@ and a player can switch between them.
   (attack when free, grab when next to something grabbable, throw when
   holding) over three buttons.
 
+## How to cut it (a suggestion, not a rule)
+
+Two slices that touch different parts and can run at once under one
+lead: **the body** (running and jumping with the usual platformer
+forgiveness, the three character functions, switching, getting unstuck)
+and **the hit** (attack, grab, carry, throw, knockback, slamming into
+walls and each other, the held beat). The hit can be built against
+plain dummies; it does not need Step 4's people. If the night runs
+short: never cut attack and grab/throw; the flyer is the first thing to
+leave for later.
+
 ## What's open (the lead's to measure and decide)
 
 - Exactly which moves each character has, within the library's rules:
@@ -97,6 +108,11 @@ them. Not the touch layout (Step 5), not rooms (Step 3), not NPC moods
 Whether running and jumping feel superb; whether a throw makes them say
 "OHH!"; whether the three characters feel different enough; the placeholder
 character functions themselves. Don't grade these; list them.
+
+Worth building once the signals are green, because it turns the owner's
+taste into numbers without a session in between: a tuning panel on the
+phone (behind `?tune` in the address) with sliders for the feel numbers
+and a "copy these values" button.
 
 ## Measure
 

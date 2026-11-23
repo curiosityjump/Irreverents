@@ -115,6 +115,13 @@ may overrule one with a measurement, recording why here.
   check against the live URL), `npm run gates` (prints which of the design
   library's build gates A–F have a passing scenario; see
   `docs/measures.md`, M3), `npm start`, `npm run dev`.
+- **A live check never lands in the players' world.** `npm run
+  check:live` joins a private world of its own (a `?room=` name kept for
+  checks, removed when empty), so it can run while the owner is playing
+  without a scripted stranger appearing beside them.
+- **Red on live means revert first, diagnose after.** If a push leaves the
+  live game broken, the next push is the revert; nobody debugs on the
+  owner's game.
 - **`/healthz` keeps reporting the deployed commit**, as the probe does.
 - **A push that only changes documents must not restart the game**
   (added by the orchestrator, 2026-11-23 04:10 UTC). Measured: every push

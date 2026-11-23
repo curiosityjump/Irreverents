@@ -57,6 +57,17 @@ plan was.
   geometry (Step 3). Until Step 3's castle street exists, use a scratch
   room of your own; move the people over when it lands.
 
+## How to cut it (a suggestion, not a rule)
+
+This is the most rule-dense step and the likeliest to slip. Build the
+rules against small test rooms of your own first, driven by made-up
+events, so nothing waits on Step 2's hits or Step 3's map; then place
+the people in the real street. If the night runs short, ship fewer
+*kinds* of people (shopkeeper, guard, a call bell) rather than a person
+with the wrong number of moods: **never ship someone with fewer or more
+than the three.** Reinforcement waves and the villain's outpost horn are
+the first things to leave for later.
+
 ## What's open (the lead's to measure and decide)
 
 - The rule tables themselves. Read, in `docs/design-library/02-gameplay-systems/`:
