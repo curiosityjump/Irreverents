@@ -17,6 +17,9 @@
     "bell-gauge": {"src": [40, 40, 20, 6]},
     "bark-edge": {"src": [60, 40, 16, 12]},
     "unseen": {"src": [76, 40, 14, 12]},
-    "seen-mark": {"src": [0, 52, 12, 12]}
+    "seen-mark": {"src": [0, 52, 12, 12]},
+    "hud-condition-fine": {"src": [12, 52, 11, 12]},
+    "hud-condition-hurt": {"src": [23, 52, 11, 12]},
+    "hud-condition-down": {"src": [34, 52, 11, 12]}
   }
 }

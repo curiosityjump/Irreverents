@@ -339,3 +339,14 @@ def cage(open_):
             if c[3] and (c[:3] == INK[:3] or 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2] < 78):
                 im.putpixel((x, y), (0, 0, 0, 0))
     return im
+
+
+CONDITION = {'fine': (482, 370, 558, 442), 'hurt': (568, 365, 648, 442), 'down': (662, 365, 748, 442)}
+
+
+def condition(which):
+    """The risk builder's condition marks (Step 21, the HUD plate's condition slot): P05 HUD sheet's shield badges,
+    which the plate itself escalates grey, gold, red-with-alarm-rays (rays left on the plate). No digits, hearts or
+    bars. fine = grey, hurt = gold, down (at the edge: about to be knocked flat) = red. 11 x 12."""
+    return grab('hud', CONDITION[which], 0, ramps('gold', 'orange', 'red', 'pink', 'metal', 'stone', 'castle'),
+                key=(245, 245, 244), size=(11, 12))

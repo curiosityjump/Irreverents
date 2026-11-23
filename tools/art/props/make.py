@@ -207,6 +207,8 @@ def looks_sheets():
     s.add('alert-pip', dv.alert_pip(True)); s.add('alert-pip-off', dv.alert_pip(False))  # P07 UI atlas
     s.add('bell-gauge', r3.bell_gauge()); s.add('bark-edge', r3.bark_edge())
     s.add('unseen', lo.unseen()); s.add('seen-mark', lo.seen_mark())  # the heists builder's asks (P07 UI atlas)
+    for which in lo.CONDITION:  # the risk builder's condition marks (P05 HUD shields)
+        s.add('hud-condition-' + which, lo.condition(which))
     out.append(('ui', 'ui/hud.png', s))
     return out
 
