@@ -67,8 +67,11 @@ minutes).** The sibling worker needs these files to exist.
 7. A room for the checks, `content/rooms/test-body.json`: a floor, a
    one-tile-high crawlspace with something on the far side, and a
    ledge 5 tiles above the floor with no stepping stones. Step 3's
-   lead has been told rooms named `test-` are ours and are not part of
-   the kingdom. Do not edit `graybox-hall.json`.
+   lead's validator treats a room with no doors as standalone, so
+   give it none (spawns on ground and equal row widths still apply).
+   Do not edit `graybox-hall.json`. Step 3's secret is a crawl one
+   tile high and its validator will run its way-out check for every
+   member of `content/party.json`.
 8. Drawing: `src/client/draw/entities.ts` already draws each kind's
    box and colour from data. Make the three tell apart at a glance at
    phone size if they do not already (colour and box are data; a small

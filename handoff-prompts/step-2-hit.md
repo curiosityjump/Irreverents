@@ -91,6 +91,42 @@ Then tell me push 1 is on `main` (see "Where your questions go").
     creates the file; see "Working beside the other worker") lifts
     `crate-heavy` and `dummy-heavy`; `infiltrator` and `flyer` cannot.
 
+## Names other steps are now building against (added 04:36 UTC)
+
+Agreed by message with the Step 1, 3 and 4 leads; use these exactly.
+
+- **Events**, each naming entity ids, the target possibly a non-player:
+  `hit { by, target }`, `grabbed { by, target }`, `thrown { by,
+  target }`, `released { by, target }`, `flattened { target, by }`
+  (`by` may be null), `recovered { target }`, and your `impact`. Add
+  `player` beside them where a scenario needs to match one. Step 4's
+  people react to these (its worker adds a readable
+  `StepContext.events` to `src/sim/types.ts` and `step.ts`; expect it
+  when you rebase).
+- **Out cold is `entity.c.flattened`**, present on any entity (player
+  or not) exactly while it is out, with at least `{ ticksLeft }`.
+  Step 4 reads it. A flattened body stays in the world, lying where it
+  fell.
+- **Bodies you did not make.** Step 4 adds character kinds with
+  `"verbs": []` and an empty tuning set (`shopkeeper`, `guard`,
+  `villain`). Hitting, grabbing and throwing must work on them: where
+  a kind has no weight or toughness number, your systems use a default
+  (a world number), never skip the body or crash.
+- **`populateRoom`** keeps that exact name and signature; Step 1's
+  server and solo page will call it.
+- **Scenarios with a room's placements:** an optional scenario field
+  `"placements": true` makes the runner call `populateRoom` for the
+  scenario's room (default off, so existing scenarios are unchanged).
+  Step 3's worker will use it. Scenario `entities` items also take
+  optional `"vx"`, `"vy"` starting speeds.
+- **`content/actions/interact.json` is Step 4's**; leave the id alone.
+- **Test rooms:** give `test-hit.json` no doors; Step 3's validator
+  treats a doorless room as standalone.
+- **Step 1 will publish "Effects on a player" in
+  `docs/architecture.md`** (pushed with a velocity, held by a body,
+  released, moved to a room and place). When it appears, emit those
+  for players as well; until then, change the entity directly.
+
 ## The derivation, already done
 
 Everything measured is in `docs/plan/step-2.md`, "Measure". What it
