@@ -22,9 +22,16 @@ that could trap someone.
 
 ```
  undercroft ──[behind the throne]── throne-room ── castle-street ── courtyard ──[plate gate]── hall-gallery
- (hidden)                                │    └──────── over the roofs (hidden) ───────────────┘ (balcony)
+ (hidden)                                │    │    └──────── over the roofs (hidden) ──────────┘ (balcony)
       └── cellar doorway ── up into the street's west end (DRAFT: meant for the courtyard, column 15)
+                                              └── doorway, column 20 ── cantina (Step 11)
 ```
+
+- **The cantina** (Step 11, `DRAFT:` layout): the street's enter doorway
+  `to-cantina` (column 20, rows 9-10, between the two buildings) and the
+  cantina's `to-street` (column 3, at the west end of its floor). Push up
+  to go through either way. What happens inside is
+  `docs/mechanisms/cantina.md`.
 
 - **Behind the throne.** The throne room's west wall is three tiles
   thick. At dais level columns 1-2 are a `false-wall` part and column 0

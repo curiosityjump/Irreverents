@@ -1,0 +1,42 @@
+{
+  "//": "DRAFT (Step 11): the cantina, off the castle street (doc 31's cheap layout): one stage floor a little wider than a screen, a raised side platform, a gutter of open air one tile lower past each end of the floor, and the way back to the street in a doorway at the west end of the floor, away from the pads and the fighting. The ring-out edge, the pads and the regulars' loops are in content/cantina/cantina.json, not here. The id and the door id are permanent; the layout is a first pass.",
+  "id": "cantina",
+  "name": "The Cantina",
+  "tile": 16,
+  "legend": {
+    "#": "solid",
+    "=": "oneway",
+    ".": "empty",
+    "1": "spawn",
+    "2": "spawn",
+    "3": "spawn",
+    "4": "spawn",
+    "s": {
+      "door": "to-street"
+    }
+  },
+  "rows": [
+    "##########################",
+    "..........................",
+    "..........................",
+    "..........................",
+    "..........................",
+    "..........................",
+    "..........................",
+    ".................======...",
+    "...s......................",
+    "...s....1...2...3...4.....",
+    "..######################..",
+    "##########################"
+  ],
+  "doors": [
+    {
+      "id": "to-street",
+      "use": "enter",
+      "to": {
+        "room": "castle-street",
+        "door": "to-cantina"
+      }
+    }
+  ]
+}

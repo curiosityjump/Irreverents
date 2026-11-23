@@ -1,0 +1,101 @@
+{
+  "id": "step11-door-in-and-out",
+  "proves": "the castle street's doorway at column 20 (to-cantina) takes a player who pushes up in it into the cantina, standing in its west doorway, and a push up there takes them back to the street",
+  "room": "castle-street",
+  "players": [
+    {
+      "id": "a",
+      "spawn": 1
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 168,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 220,
+      "to": 230,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 300,
+      "to": 310,
+      "y": -1
+    }
+  ],
+  "ticks": 360,
+  "expect": [
+    {
+      "fact": "event",
+      "event": "changed-room",
+      "between": [
+        0,
+        219
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "changed-room",
+      "where": {
+        "entity": "p:a",
+        "fromDoor": "to-cantina",
+        "toRoom": "cantina",
+        "toDoor": "to-street"
+      },
+      "between": [
+        220,
+        220
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "standing-on-tile",
+      "player": "a",
+      "at": 260,
+      "tile": [
+        3,
+        10
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "changed-room",
+      "where": {
+        "entity": "p:a",
+        "fromRoom": "cantina",
+        "fromDoor": "to-street",
+        "toRoom": "castle-street",
+        "toDoor": "to-cantina"
+      },
+      "between": [
+        300,
+        300
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "standing-on-tile",
+      "player": "a",
+      "at": 360,
+      "tile": [
+        20,
+        11
+      ]
+    }
+  ]
+}
