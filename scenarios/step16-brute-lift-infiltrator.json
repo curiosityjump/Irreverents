@@ -1,0 +1,51 @@
+{
+  "id": "step16-brute-lift-infiltrator",
+  "proves": "Step 16 signal 4: the infiltrator tries to pick up the brute (weight 140): too heavy for the infiltrator (lift 60)",
+  "room": "test-hit",
+  "players": [
+    {
+      "id": "a",
+      "character": "infiltrator",
+      "spawn": 0
+    }
+  ],
+  "entities": [
+    {
+      "id": "b",
+      "character": "brute",
+      "tile": [
+        3,
+        6
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 5,
+      "to": 8,
+      "hold": [
+        "grab"
+      ]
+    }
+  ],
+  "ticks": 40,
+  "expect": [
+    {
+      "fact": "event",
+      "event": "grab-refused",
+      "player": "a",
+      "between": [
+        5,
+        5
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "where": {
+        "target": "b"
+      }
+    }
+  ]
+}

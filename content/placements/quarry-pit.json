@@ -1,0 +1,41 @@
+{
+  "//": "DRAFT (Step 16 slice 2): a heavy (column 10) and a fighter (column 26) on the pit's floor, clear of where a fall from the ridge lands (columns 20-21). Columns are first guesses; ids are permanent.",
+  "id": "quarry-pit",
+  "room": "quarry-pit",
+  "place": [
+    {
+      "id": "pit-heavy",
+      "character": "heavy-fighter",
+      "tile": [
+        10,
+        18
+      ],
+      "npc": "heavy-fighter",
+      "routine": [
+        {
+          "face": "right"
+        },
+        {
+          "wait": 5
+        }
+      ]
+    },
+    {
+      "id": "pit-fighter",
+      "character": "outpost-fighter",
+      "tile": [
+        26,
+        18
+      ],
+      "npc": "outpost-fighter",
+      "routine": [
+        {
+          "face": "left"
+        },
+        {
+          "wait": 5
+        }
+      ]
+    }
+  ]
+}

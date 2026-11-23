@@ -1,9 +1,87 @@
 {
-  "//": "DRAFT (Step 16 slice 1): loose rocks on the road to pick up and throw, clear of the doorway (columns 2-4) and the spawn (column 6). The ids are permanent; the columns are first guesses.",
+  "//": "DRAFT (Step 16 slices 1-2): loose rocks on the road to pick up and throw, clear of the doorway (columns 2-4) and the spawn (column 6); and the bad guys' toll post on the flat at columns 40-46: a counter (column 42) kept by a toll keeper who cannot swing (column 43, facing west, towards whoever comes up the road), with a second fighter (column 40, facing east) watching the counter. Paying the toll is the one deed that troubles a bad guy (content/rules/quarry.json). A heavy (column 58) further up. Every column is a first guess; the ids are permanent.",
   "id": "quarry-road",
   "room": "quarry-road",
   "place": [
-    { "id": "road-rock-1", "character": "crate", "tile": [10, 16] },
-    { "id": "road-rock-2", "character": "crate", "tile": [45, 12] }
+    {
+      "id": "road-rock-1",
+      "character": "crate",
+      "tile": [
+        10,
+        16
+      ]
+    },
+    {
+      "id": "road-rock-2",
+      "character": "crate",
+      "tile": [
+        45,
+        12
+      ]
+    },
+    {
+      "id": "road-toll-keeper",
+      "character": "toll-keeper",
+      "tile": [
+        43,
+        12
+      ],
+      "npc": "toll-keeper",
+      "routine": [
+        {
+          "face": "left"
+        },
+        {
+          "wait": 5
+        }
+      ]
+    },
+    {
+      "id": "road-toll-watcher",
+      "character": "outpost-fighter",
+      "tile": [
+        40,
+        12
+      ],
+      "npc": "outpost-fighter",
+      "routine": [
+        {
+          "face": "right"
+        },
+        {
+          "wait": 5
+        }
+      ]
+    },
+    {
+      "id": "road-heavy",
+      "character": "heavy-fighter",
+      "tile": [
+        58,
+        10
+      ],
+      "npc": "heavy-fighter",
+      "routine": [
+        {
+          "face": "left"
+        },
+        {
+          "wait": 5
+        }
+      ]
+    }
+  ],
+  "things": [
+    {
+      "//": "DRAFT (Step 16 slice 2): the toll: a counter like the shop's, kept by a bad guy.",
+      "id": "road-toll",
+      "tile": [
+        42,
+        12
+      ],
+      "deed": "buy",
+      "keeper": "road-toll-keeper",
+      "look": "counter"
+    }
   ]
 }

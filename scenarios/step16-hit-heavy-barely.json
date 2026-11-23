@@ -1,0 +1,44 @@
+{
+  "id": "step16-hit-heavy-barely",
+  "proves": "Step 16 signal 4: the grappler's same punch barely moves a heavy (weight 120)",
+  "room": "test-hit",
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "entities": [
+    {
+      "id": "f",
+      "character": "heavy-fighter",
+      "tile": [
+        3,
+        6
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 10,
+      "to": 13,
+      "hold": [
+        "attack"
+      ]
+    }
+  ],
+  "ticks": 120,
+  "expect": [
+    {
+      "fact": "position",
+      "entity": "f",
+      "at": 120,
+      "x": [
+        70,
+        100
+      ]
+    }
+  ]
+}

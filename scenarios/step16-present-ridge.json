@@ -1,0 +1,35 @@
+{
+  "id": "step16-present-ridge",
+  "proves": "Step 16 signal 4: the quarry-ridge room places its bad guys (ridge-fighter-1, ridge-fighter-2, ridge-brute), in the room",
+  "room": "quarry-ridge",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [],
+  "ticks": 2,
+  "expect": [
+    {
+      "fact": "in-room",
+      "entity": "ridge-fighter-1",
+      "at": 1,
+      "room": "quarry-ridge"
+    },
+    {
+      "fact": "in-room",
+      "entity": "ridge-fighter-2",
+      "at": 1,
+      "room": "quarry-ridge"
+    },
+    {
+      "fact": "in-room",
+      "entity": "ridge-brute",
+      "at": 1,
+      "room": "quarry-ridge"
+    }
+  ]
+}

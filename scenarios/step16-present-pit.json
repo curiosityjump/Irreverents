@@ -1,0 +1,29 @@
+{
+  "id": "step16-present-pit",
+  "proves": "Step 16 signal 4: the quarry-pit room places its bad guys (pit-heavy, pit-fighter), in the room",
+  "room": "quarry-pit",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [],
+  "ticks": 2,
+  "expect": [
+    {
+      "fact": "in-room",
+      "entity": "pit-heavy",
+      "at": 1,
+      "room": "quarry-pit"
+    },
+    {
+      "fact": "in-room",
+      "entity": "pit-fighter",
+      "at": 1,
+      "room": "quarry-pit"
+    }
+  ]
+}

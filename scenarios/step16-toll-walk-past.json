@@ -1,0 +1,42 @@
+{
+  "id": "step16-toll-walk-past",
+  "proves": "Step 16 signal 4, the toll's control: the same hero walks to the same counter and does not pay: keeper and fighter stay in business as usual (mood 1)",
+  "room": "quarry-road",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 1
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 62,
+      "x": -1
+    }
+  ],
+  "ticks": 120,
+  "expect": [
+    {
+      "fact": "mood",
+      "npc": "road-toll-keeper",
+      "between": [
+        0,
+        120
+      ],
+      "is": 1
+    },
+    {
+      "fact": "mood",
+      "npc": "road-toll-watcher",
+      "between": [
+        0,
+        120
+      ],
+      "is": 1
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "id": "step16-no-waves-on-the-road",
+  "proves": "Step 16 (D-063): a fighter on the road who sees a hero brings no wave: no outpost's call reaches the quarry outside the depot, and nothing is sent for 20 s",
+  "room": "quarry-road",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 1
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 62,
+      "x": -1
+    }
+  ],
+  "ticks": 1200,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "hit",
+      "where": {
+        "by": "road-toll-watcher",
+        "target": "p:a"
+      },
+      "between": [
+        0,
+        1200
+      ],
+      "count": [
+        1,
+        99
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "outpost-wave",
+      "between": [
+        0,
+        1200
+      ],
+      "count": [
+        0,
+        0
+      ]
+    }
+  ]
+}

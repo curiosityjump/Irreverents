@@ -1,0 +1,9 @@
+{
+  "//": "DRAFT (Step 16 slice 2): the graybox body of the bad guys' toll keeper on the quarry road. It walks but cannot swing (no attack verb), so Step 12's fighter system leaves it at its post and a hero can pay. Shares the shopkeeper's walking numbers. Who the person is lives in content/npcs/toll-keeper.json.",
+  "id": "toll-keeper",
+  "name": "Toll Keeper",
+  "box": { "w": 14, "h": 26 },
+  "color": "#7a4a2e",
+  "verbs": ["move"],
+  "tuning": "shopkeeper"
+}

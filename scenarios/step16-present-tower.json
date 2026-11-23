@@ -1,0 +1,29 @@
+{
+  "id": "step16-present-tower",
+  "proves": "Step 16 signal 4: the quarry-tower room places its bad guys (tower-fighter-1, tower-fighter-2), in the room",
+  "room": "quarry-tower",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 1
+    }
+  ],
+  "inputs": [],
+  "ticks": 2,
+  "expect": [
+    {
+      "fact": "in-room",
+      "entity": "tower-fighter-1",
+      "at": 1,
+      "room": "quarry-tower"
+    },
+    {
+      "fact": "in-room",
+      "entity": "tower-fighter-2",
+      "at": 1,
+      "room": "quarry-tower"
+    }
+  ]
+}

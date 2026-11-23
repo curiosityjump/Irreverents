@@ -512,3 +512,15 @@ Slice 1, 2026-11-23 16:10 UTC: the main way (road, ridge, tower, depot) is **248
 **For the owner to judge by playing** (not asked): whether the run is fun, whether the secrets are findable and satisfying (the ledge, the crawl, the rock and the cellar wall, the hidden openings in the tower and the pit), whether a quarry is the right place.
 
 **Traps met:** spawn numbers in a room file are read in reading order, not by digit; a body nobody plays keeps sliding on landing (the flyer's ledge has a lip so a thrown friend stays on it); the grappler's throw of the heavy rock arrives at 205.7 px/s against the wall's 200.
+
+### Slice 2 (`step-16-b-quarry-enemies.md`), 2026-11-23 17:15 UTC, builder `session_017WiGzFnkhyrpJqJ6xa9vTr`
+
+**Landed:** the kinds `heavy-fighter`, `brute` and `toll-keeper` (data only), their tuning sets, bad guys in every room but the cave (`content/placements/quarry-*.json`), the toll on the road (`road-toll`, `content/rules/quarry.json`), scenarios `step16-present-*`, `step16-toll-*`, `step16-hit-*`, `step16-heavy-*`, `step16-brute-lift-*`, `step16-thrown-fighter-fells-heavy`, `step16-mood-*-hit`, `step16-no-waves-on-the-road`. Measured: the grappler's punch sends a fighter 284 px and a heavy 26 px; the heavy goes down on the eighth punch.
+
+**Measured, worth knowing:** fighters do follow through doors: on the tower top the grappler's punches send both fighters through the hidden top-west opening onto the ridge's shelf, and a hero is followed. The watching fighter at the toll also hits the toll keeper (its swing reaches everything in front of it) and flattens it again and again in `step16-no-waves-on-the-road`. Fight code is Step 12's; not changed.
+
+**Not done:** ranged bad guys (out of scope); the e2e road crossing by touch with longer jump holds (see the commit for whether it was tried).
+
+**Sprites wanted (Step 8):** `heavy-fighter`, `brute`, `toll-keeper`; the toll counter reuses the shop's `counter` look.
+
+**For the owner to judge by playing** (not asked): whether the kinds feel different, whether sending one flying into another is an "OHHHH", whether paying the toll is funny.

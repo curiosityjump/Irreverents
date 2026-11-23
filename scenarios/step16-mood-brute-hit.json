@@ -1,0 +1,75 @@
+{
+  "id": "step16-mood-brute-hit",
+  "proves": "Step 16 signal 4: the grappler punches the ridge's brute again and again; it stays in business as usual (mood 1), fighting heroes is what bad guys do (D-060). Control: step4-hero-hits-shopkeeper (the same hit upsets a good person)",
+  "room": "quarry-ridge",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 2
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 5,
+      "to": 8,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 30,
+      "to": 33,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 55,
+      "to": 58,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 80,
+      "to": 83,
+      "hold": [
+        "attack"
+      ]
+    }
+  ],
+  "ticks": 200,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "hit",
+      "where": {
+        "by": "p:a",
+        "target": "ridge-brute"
+      },
+      "between": [
+        0,
+        200
+      ],
+      "count": [
+        1,
+        9
+      ]
+    },
+    {
+      "fact": "mood",
+      "npc": "ridge-brute",
+      "between": [
+        0,
+        200
+      ],
+      "is": 1
+    }
+  ]
+}

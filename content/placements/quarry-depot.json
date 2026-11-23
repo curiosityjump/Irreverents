@@ -1,8 +1,49 @@
 {
-  "//": "DRAFT (Step 16 slice 1): the depot's things; slice 3 adds its people and its hoard. A heavy rock in the cellar (column 12, in from the pit): only the grappler can lift it, and thrown at the cellar wall (column 35) it breaks it (step16-secret-cellar-wall-*). INTENT: no light crate in the cellar, so the wall is the grappler's alone (or a friend thrown by a friend: the other way in). The id is permanent; the column is a first guess.",
+  "//": "DRAFT (Step 16 slice 1): the depot's things; slice 3 adds its people and its hoard. A heavy rock in the cellar (column 12, in from the pit): only the grappler can lift it, and thrown at the cellar wall (column 35) it breaks it (step16-secret-cellar-wall-*). INTENT: no light crate in the cellar, so the wall is the grappler's alone (or a friend thrown by a friend: the other way in). The id is permanent; the column is a first guess. DRAFT (Step 16 slice 2): two plain fighters at the yard's far east end (columns 57 and 59), placeholders: slice 3 replaces them with the depot's own people.",
   "id": "quarry-depot",
   "room": "quarry-depot",
   "place": [
-    { "id": "cellar-rock", "character": "crate-heavy", "tile": [12, 18] }
+    {
+      "id": "cellar-rock",
+      "character": "crate-heavy",
+      "tile": [
+        12,
+        18
+      ]
+    },
+    {
+      "id": "depot-fighter-1",
+      "character": "outpost-fighter",
+      "tile": [
+        57,
+        13
+      ],
+      "npc": "outpost-fighter",
+      "routine": [
+        {
+          "face": "left"
+        },
+        {
+          "wait": 5
+        }
+      ]
+    },
+    {
+      "id": "depot-fighter-2",
+      "character": "outpost-fighter",
+      "tile": [
+        59,
+        13
+      ],
+      "npc": "outpost-fighter",
+      "routine": [
+        {
+          "face": "left"
+        },
+        {
+          "wait": 5
+        }
+      ]
+    }
   ]
 }

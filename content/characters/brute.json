@@ -1,0 +1,9 @@
+{
+  "//": "DRAFT (Step 16 slice 2): the graybox body of a brute: bigger than the grappler (26 by 32), slow, hits very hard, takes a great deal. Heavier than the infiltrator or the flyer can lift (60); the grappler (150) can, just. Who the person is lives in content/npcs/brute.json.",
+  "id": "brute",
+  "name": "Brute",
+  "box": { "w": 26, "h": 32 },
+  "color": "#4a2a22",
+  "verbs": ["move", "attack", "body"],
+  "tuning": "brute"
+}

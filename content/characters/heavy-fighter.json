@@ -1,0 +1,9 @@
+{
+  "//": "DRAFT (Step 16 slice 2): the graybox body of a heavy bad guy: three times a fighter's weight, so a punch barely moves it and only the grappler can lift it; many punches drop it. Who the person is lives in content/npcs/heavy-fighter.json.",
+  "id": "heavy-fighter",
+  "name": "Heavy",
+  "box": { "w": 20, "h": 28 },
+  "color": "#6b3a2a",
+  "verbs": ["move", "attack", "body"],
+  "tuning": "heavy-fighter"
+}

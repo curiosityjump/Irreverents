@@ -1,0 +1,35 @@
+{
+  "id": "step16-present-road",
+  "proves": "Step 16 signal 4: the quarry-road room places its bad guys (road-toll-watcher, road-heavy, road-toll-keeper), in the room",
+  "room": "quarry-road",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 3
+    }
+  ],
+  "inputs": [],
+  "ticks": 2,
+  "expect": [
+    {
+      "fact": "in-room",
+      "entity": "road-toll-watcher",
+      "at": 1,
+      "room": "quarry-road"
+    },
+    {
+      "fact": "in-room",
+      "entity": "road-heavy",
+      "at": 1,
+      "room": "quarry-road"
+    },
+    {
+      "fact": "in-room",
+      "entity": "road-toll-keeper",
+      "at": 1,
+      "room": "quarry-road"
+    }
+  ]
+}

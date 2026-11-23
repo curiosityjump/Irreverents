@@ -1,0 +1,11 @@
+{
+  "//": "DRAFT (Step 16 slice 2): a bad guy who keeps the toll post on the quarry road. A hero politely paying is odd to a bad guy (content/rules/quarry.json): confusion, then rage. Barks are placeholders (D-057).",
+  "id": "toll-keeper",
+  "role": "toll-keeper",
+  "side": "bad",
+  "moods": { "1": "routine", "2": "plead", "3": "charge" },
+  "barks": {
+    "distress": "You... paid?",
+    "rage": "STOP PAYING!"
+  }
+}

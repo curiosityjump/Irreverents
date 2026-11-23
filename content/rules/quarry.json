@@ -1,0 +1,17 @@
+{
+  "//": "Step 16 slice 2 (DRAFT, the lead's pick after doc 23 and D-050): a hero politely paying the bad guys' toll (buying from the toll keeper) is odd in a bad guy's eyes. Only from the toll keeper: a bad guy who sees a hero buy at a shop is untouched (Step 4's step4-hero-buys). More conditions than Step 4's 'hero buy expected' row, so it wins.",
+  "id": "quarry",
+  "deeds": [],
+  "expect": [
+    {
+      "actor": "hero",
+      "deed": "buy",
+      "targetRole": "toll-keeper",
+      "witnessSide": "bad",
+      "verdict": "odd",
+      "weight": 1
+    }
+  ],
+  "reactions": [],
+  "events": []
+}

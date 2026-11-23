@@ -1,0 +1,29 @@
+{
+  "id": "step16-present-depot",
+  "proves": "Step 16 signal 4: the quarry-depot room places its bad guys (depot-fighter-1, depot-fighter-2), in the room",
+  "room": "quarry-depot",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 3
+    }
+  ],
+  "inputs": [],
+  "ticks": 2,
+  "expect": [
+    {
+      "fact": "in-room",
+      "entity": "depot-fighter-1",
+      "at": 1,
+      "room": "quarry-depot"
+    },
+    {
+      "fact": "in-room",
+      "entity": "depot-fighter-2",
+      "at": 1,
+      "room": "quarry-depot"
+    }
+  ]
+}

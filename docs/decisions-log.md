@@ -729,3 +729,10 @@ document as a decision of theirs.
 - **To change it:** `src/sim/systems/room-doors.ts` (what counts as asking), the Use button's door state in `src/client/touch.ts`/`shell.ts`, the arrow in `src/client/draw/door-hint.ts`. A separate "Go in" button would be a new action file in `content/actions/`.
 - **Where:** `docs/mechanisms/rooms-and-doors.md`, "The two kinds of door".
 
+
+### 2026-11-23 · The quarry's bad guys: three kinds, where they stand, and the toll
+- **Decided by:** Step 16 slice 2 builder (`handoff-prompts/step-16-b-quarry-enemies.md`), for the Step 16 lead `session_017WiGzHt9iJy3caBLkT1Ef4`
+- **Instead of asking:** how heavy and how tough each kind is, where they stand, and how paying a toll can work when the bad guys fight on sight.
+- **Why this way:** three kinds that feel different under the same punch: a light fighter (Step 12's) flies about 18 tiles; a heavy (three times its weight) moves under two tiles and goes down on the eighth punch; a brute is bigger than the grappler, slow, hits very hard, and only the grappler can lift it. A slam wears a body by its speed, and a heavy thrown by the grappler is too slow for a slam to beat a punch, so the heavy is dropped by many punches, not by one throw (the nearest the current wear rules allow). Bad guys stand in every room but the cave, two or three to a place; one brute on the ridge's east stretch. The toll on the road: a toll keeper who cannot swing (otherwise a hostile keeper punches whoever comes to pay) keeps a counter, and a fighter watches; paying once troubles them both, three times enrages them. Only buying from the toll keeper troubles a bad guy: one who sees a hero buy at a shop is untouched.
+- **To change it:** weights and toughness are in `content/tuning.json` (`heavy-fighter`, `brute`); people in `content/placements/quarry-*.json`; the toll's rule in `content/rules/quarry.json`.
+- **Where:** `docs/plan/step-16.md`, handoff notes.

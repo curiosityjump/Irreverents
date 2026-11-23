@@ -291,6 +291,40 @@
       "attackWindup": 0.033,
       "attackStrikeTime": 0.05,
       "attackRecovery": 0.067
+    },
+    "heavy-fighter": {
+      "//": "DRAFT (Step 16 slice 2): a heavy bad guy. Weight 120, three times a fighter's (world default 40): the grappler's punch launches it at about 117 px/s against a fighter's 350. Toughness 240: eight of the grappler's punches (34 wear each) drop it. A slam wears by speed (impactWear), and a grappler's throw of it only reaches about 217 px/s, so a throw wears less than a punch: no throw drops it alone (docs/decisions-log.md).",
+      "runSpeed": 36,
+      "runAccel": 300,
+      "runDecel": 500,
+      "airAccel": 200,
+      "airDecel": 100,
+      "attackStrength": 12000,
+      "attackReach": 12,
+      "attackTime": 1.0,
+      "attackWear": 24,
+      "attackWindup": 0.35,
+      "attackStrikeTime": 0.067,
+      "attackRecovery": 0.2,
+      "weight": 120,
+      "toughness": 240
+    },
+    "brute": {
+      "//": "DRAFT (Step 16 slice 2): a brute. Slow (28 px/s), a long wind-up, a hit that launches the grappler at 400 px/s and wears 45; weight 140 (only the grappler lifts it), toughness 480 (fifteen of the grappler's punches).",
+      "runSpeed": 28,
+      "runAccel": 200,
+      "runDecel": 400,
+      "airAccel": 200,
+      "airDecel": 100,
+      "attackStrength": 24000,
+      "attackReach": 16,
+      "attackTime": 1.4,
+      "attackWear": 45,
+      "attackWindup": 0.5,
+      "attackStrikeTime": 0.067,
+      "attackRecovery": 0.4,
+      "weight": 140,
+      "toughness": 480
     }
   }
 }

@@ -1,0 +1,65 @@
+{
+  "id": "step16-mood-fighter-hit",
+  "proves": "Step 16 signal 4: the grappler punches a fighter on the tower top; it stays in mood 1 (D-060). Control: step4-hero-hits-shopkeeper; both fighters are knocked west through the tower's hidden top opening onto the ridge's shelf",
+  "room": "quarry-tower",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 8,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 10,
+      "to": 13,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 40,
+      "to": 43,
+      "hold": [
+        "attack"
+      ]
+    }
+  ],
+  "ticks": 200,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "hit",
+      "where": {
+        "by": "p:a",
+        "target": "tower-fighter-2"
+      },
+      "between": [
+        0,
+        200
+      ],
+      "count": [
+        1,
+        9
+      ]
+    },
+    {
+      "fact": "mood",
+      "npc": "tower-fighter-2",
+      "between": [
+        0,
+        200
+      ],
+      "is": 1
+    }
+  ]
+}

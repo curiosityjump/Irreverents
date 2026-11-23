@@ -1,0 +1,15 @@
+{
+  "//": "DRAFT (Step 16 slice 2): a brute scattered through the quarry. Fighting heroes is business as usual (D-060), so mood 1 covers it (Step 12's outpost-fight drives any bad person whose body can attack); the three moods are Step 4's (D-048). Barks are placeholders (D-057).",
+  "id": "brute",
+  "role": "brute",
+  "side": "bad",
+  "moods": {
+    "1": "routine",
+    "2": "plead",
+    "3": "charge"
+  },
+  "barks": {
+    "distress": "Hrm?",
+    "rage": "SMASH!"
+  }
+}

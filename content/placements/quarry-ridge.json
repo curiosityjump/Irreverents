@@ -1,0 +1,58 @@
+{
+  "//": "DRAFT (Step 16 slice 2): two fighters on the flat past the chasm (columns 36 and 40), and the brute alone on the ridge's east stretch (column 75), between the doorway down to the pit and the opening into the tower. Columns are first guesses; ids are permanent.",
+  "id": "quarry-ridge",
+  "room": "quarry-ridge",
+  "place": [
+    {
+      "id": "ridge-fighter-1",
+      "character": "outpost-fighter",
+      "tile": [
+        36,
+        6
+      ],
+      "npc": "outpost-fighter",
+      "routine": [
+        {
+          "face": "left"
+        },
+        {
+          "wait": 5
+        }
+      ]
+    },
+    {
+      "id": "ridge-fighter-2",
+      "character": "outpost-fighter",
+      "tile": [
+        40,
+        6
+      ],
+      "npc": "outpost-fighter",
+      "routine": [
+        {
+          "face": "left"
+        },
+        {
+          "wait": 5
+        }
+      ]
+    },
+    {
+      "id": "ridge-brute",
+      "character": "brute",
+      "tile": [
+        75,
+        9
+      ],
+      "npc": "brute",
+      "routine": [
+        {
+          "face": "left"
+        },
+        {
+          "wait": 5
+        }
+      ]
+    }
+  ]
+}

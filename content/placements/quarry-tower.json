@@ -1,0 +1,41 @@
+{
+  "//": "DRAFT (Step 16 slice 2): two fighters on the tower's top floor (columns 13 and 15), waiting for whoever climbs up. Columns are first guesses; ids are permanent.",
+  "id": "quarry-tower",
+  "room": "quarry-tower",
+  "place": [
+    {
+      "id": "tower-fighter-1",
+      "character": "outpost-fighter",
+      "tile": [
+        13,
+        4
+      ],
+      "npc": "outpost-fighter",
+      "routine": [
+        {
+          "face": "left"
+        },
+        {
+          "wait": 5
+        }
+      ]
+    },
+    {
+      "id": "tower-fighter-2",
+      "character": "outpost-fighter",
+      "tile": [
+        15,
+        4
+      ],
+      "npc": "outpost-fighter",
+      "routine": [
+        {
+          "face": "left"
+        },
+        {
+          "wait": 5
+        }
+      ]
+    }
+  ]
+}
