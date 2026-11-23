@@ -22,7 +22,7 @@ hitting people in a guard's sight does not. The owner asked for enemies;
 this is what makes the camp and the town one world (D-069). Moves no
 M-row.
 
-## Measured for you (at 365a40d; `npm run check` and `npm run e2e` green, re-run by the lead)
+## Measured for you (by the lead: `npm run check` green at c889a47, `npm run e2e` green at a0debfa; tip when written 365a40d)
 
 - **Following through a door exists**: `src/sim/systems/alert-follow.ts`
   (605) sets `c.respond.door = ev.fromDoor` on a `changed-room` for a
