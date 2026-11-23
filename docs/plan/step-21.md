@@ -216,3 +216,42 @@ and jump timing; the grappler reaches column 19.9 the same way. The brawler
 rows above were measured by putting it at column 9. It may be deliberate
 (a place only some heroes enter); nobody owns that room file until the
 vehicles slice. Sent to the orchestrator; left as it is.
+
+### Push 2 (the rule): stopped before pushing; five other steps' scenarios turn red
+
+Built locally and not pushed (the brief: "If any other step's scenario goes
+red, stop and report"): `content/defeat/{outpost,castle-street}.json`,
+`src/content/kinds/defeat.ts`, `src/sim/defeat.ts`,
+`src/sim/systems/defeat-{seize,throw}.ts` (585, 590), facts `signaler` and
+`prize`, scenario `step21-camp-thrown-out` (green: flattened 1009, seized,
+thrown at 1068 into the courtyard's camp doorway, up at 1248; the post still
+broken; the wave's fighter still inside), and `defeat` added to the room
+controls' left-out list (`scripts/lib/room-controls.ts:56`, as each slice
+before did).
+
+With it, `npm run check` fails exactly five scenarios of other steps. In
+each the hero is knocked flat in the camp or the alerted street while a
+fighter or guard stands within reach, which until now was an incidental
+three-second nap, and is now a throw-out to the courtyard:
+
+| Scenario | Owner | Thrown out at | What then fails |
+|---|---|---|---|
+| `step11-chase-blink` | Step 11 (cantina) | 2991, by `street-guard` | `in-room` castle-street at 3000 |
+| `step4-tier-away-at-the-most-skirmisher` | town tiers | 3385, by `street-guard` | its run west out by `to-throne-room` at 3605 |
+| `step4-tier-cap-holds` | town tiers | 3577, by `castle-street:help1:0` | calls after 3400 (the hero is gone) |
+| `step7-caller-tries-again` | waves | 1280, by `camp-fighter-1` | the lookout's later calls and a second wave |
+| `step7-waves-reach-the-hero` | waves | 1226, by `outpost:w0:0` | waves 2 and 3 never come (the hero is gone) |
+
+Ways on, for the orchestrator to choose: (a) each owner re-times its
+scenario so the hero is not beaten where it does not mean to be (or expects
+the throw); (b) a world tuning switch `defeatOn` (default 1, "a control for
+the scenarios only" like `outpostSendOn`) does not help, since a scenario
+cannot set tuning; (c) the throw only after more than one knock-down in a
+row in the place (a data field, `downs`), which keeps a single incidental
+nap as it was. My lean is (a): the throw is what Step 21 is for, and these
+five were written before it.
+
+Also seen: Step 7's `hall-detect` hangs a "narrow escape" legend on a
+throw-out (the hero is gone from the camp with a wave standing, though not
+on its own feet). The waves builder's session is inactive; asked through the
+orchestrator.
