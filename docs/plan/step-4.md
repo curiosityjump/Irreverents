@@ -475,4 +475,4 @@ for later, as the step suggests.
     a hiding place (`grep -l '"hide"' content/rooms/*.json`, 10:03 UTC;
     the worker's note that none was reachable predates Step 3's push).
     Not tried by anyone on the page.
-- **2026-11-23, Step 2 feel:** `step4-hero-hits-shopkeeper`'s hit window widened for Step 2's attack wind-up (hit and deed 100–115, mood 2 from 116; granted by the Step 2 lead), COMMIT.
+- **2026-11-23, Step 2 feel:** `step4-hero-hits-shopkeeper`'s hit window widened for Step 2's attack wind-up (hit and deed 100–115, mood 2 from 116; granted by the Step 2 lead), 252e5ce.
