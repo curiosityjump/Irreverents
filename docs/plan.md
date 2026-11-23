@@ -411,6 +411,6 @@ Full text: `docs/plan/step-20.md`
 
 ## Step 21 — What being beaten costs
 
-**Status: open, unclaimed.** (No brief yet: waits for Step 9's knock-loose push and Step 19's cargo and HUD plate.)
+**Status: open, claimed by orchestrator session_017WiGzJzo6aZqH4kYxxJsiV (builders: session_017WiGzJWYyVWtYnjFXHko1S), 2026-11-23.** (Brief `handoff-prompts/loop-risk.md`, started 23:14 UTC; only its power parts wait for Step 9's knock-loose push.)
 
 Full text: `docs/plan/step-21.md`
