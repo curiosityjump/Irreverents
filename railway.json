@@ -1,7 +1,17 @@
 {
   "$schema": "https://railway.com/railway.schema.json",
   "build": {
-    "watchPatterns": ["**", "!docs/**", "!handoff-prompts/**", "!tools/**", "!*.md"]
+    "watchPatterns": [
+      "src/**",
+      "content/**",
+      "scripts/**",
+      "assets/**",
+      "package.json",
+      "package-lock.json",
+      "tsconfig.json",
+      "tsconfig.pure.json",
+      "railway.json"
+    ]
   },
   "deploy": {
     "healthcheckPath": "/healthz",

@@ -10,13 +10,30 @@ import { root } from './lib/registries.ts';
 const base = (process.argv[2] ?? 'https://irreverents-production.up.railway.app').replace(/\/$/, '');
 const git = (...args: string[]): string => execFileSync('git', args, { cwd: root, encoding: 'utf8' }).trim();
 
-let health: { ok?: boolean; commit?: string; startedAt?: string };
-try {
-  const res = await fetch(`${base}/healthz`, { signal: AbortSignal.timeout(15000) });
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  health = (await res.json()) as typeof health;
-} catch (err) {
-  console.error(`check:deployed: FAILED, ${base}/healthz did not answer (${(err as Error).message})`);
+// INTENT: keep trying for up to three minutes. With a storage volume
+// attached, Railway stops the old server before the new one answers, so
+// every deploy has a gap (about a minute, measured 2026-11-23) in which
+// the address returns Railway's own 404; that gap is not a failure.
+const WAIT_MS = Number(process.env.CHECK_DEPLOYED_WAIT_MS ?? 180000);
+type Health = { ok?: boolean; commit?: string; startedAt?: string };
+let answer: Health | null = null;
+let lastError = '';
+const deadline = Date.now() + WAIT_MS;
+for (;;) {
+  try {
+    const res = await fetch(`${base}/healthz`, { signal: AbortSignal.timeout(10000) });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    answer = (await res.json()) as Health;
+    break;
+  } catch (err) {
+    lastError = (err as Error).message;
+    if (Date.now() >= deadline) break;
+    await new Promise((resolve) => setTimeout(resolve, 5000));
+  }
+}
+const health = answer as Health | null;
+if (!health) {
+  console.error(`check:deployed: FAILED, ${base}/healthz did not answer within ${Math.round(WAIT_MS / 1000)} s (${lastError})`);
   process.exit(1);
 }
 
