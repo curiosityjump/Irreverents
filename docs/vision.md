@@ -202,6 +202,13 @@ to real credits) is doc 03, D-032–D-034.
 
 Detail: docs 07, 22, 23, 26, 27 (D-041–D-051, D-059–D-077).
 
+**Owner, 2026-11-23 ~16:05 UTC, to the orchestrator, first-hand (relayed to Vision Partner by session_017WiGzHhke4tkAThPgw6EXs):**
+> Enemies or provoked good guys need to be able to fight too.
+
+*(Framing:)* the people of the world fight back: enemies, and townspeople
+or guards once provoked, within the scripted three-mode rules (no NPC AI).
+The orchestrator made this plan Step 18.
+
 ### Heroes, roster, powers and co-op
 **Owner, 2026-11-22 (Drive, doc 11, D-007, D-010, D-012–D-013):**
 > Unlockable and permanently expanding roster … Only a LIMITED selection of roster members is carried/switchable during an expedition. … Online co-op is a required mode. … A SINGLE SHARED PARTY is used for cooperative play.
