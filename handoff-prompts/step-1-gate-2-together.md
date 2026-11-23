@@ -145,6 +145,21 @@ By the lead, 2026-11-23 04:02–04:10 UTC, in a container like yours.
 
 ## 3 · Traps
 
+- **Two requests from the Step 7 lead (Hall of Legends), 04:45 UTC; small,
+  and they shape the server.** (1) **One place where a room's world is
+  created**, a single function in the server (where `createWorld` and
+  `populateRoom` are called), and **one place where the server receives
+  each tick's events from `step()`**. Step 7's worker will add a few
+  additive lines at each after you land (load stored records into a new
+  world; save a record on a `hall-legend` event) and one new file,
+  `src/server/store.ts`. Name both places in the network mechanism
+  writeup. (2) **An entity whose `kind` is not a character kind, with a
+  few hundred bytes in `c`, must replicate to clients like any other and
+  be skipped harmlessly by drawing and physics on the client.** Make the
+  throwaway-entity test in item 1 exactly that case (unknown kind, about
+  500 bytes in `c`), and print the snapshot size with it present as a
+  fact.
+
 - **Last batch from the plan review, against the owner's phone spec
   (added 04:36 UTC; each is in `docs/plan/step-1.md` "What's decided",
   read those items). In the order to protect them if time runs short;
