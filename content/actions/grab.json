@@ -1,5 +1,6 @@
 {
   "id": "grab",
   "label": "Grab",
-  "keys": ["KeyC", "KeyK"]
+  "keys": ["KeyC", "KeyK"],
+  "icon": "ui/touch/grab.png"
 }

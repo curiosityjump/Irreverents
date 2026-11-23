@@ -459,3 +459,10 @@ document as a decision of theirs.
 - **Why this way:** your rule that controls never hide the game. Shrinking the game a step leaves strips too thin for a thumb, so the game stays full size and each button is only a small faint word (and two small arrows for moving) in the bottom corners, with a large invisible area to touch; it lights up while your thumb is on it. Before, five discs and a box covered about a seventh of the room, including a crate and a ledge. On wider iPhones (12 and later) nothing changes: the buttons sit beside the game.
 - **To change it:** the block marked `DRAFT:` under `over` in `src/client/shell.ts` and the `#touch.over` rules in `src/client/index.html`; delete both to get the discs back.
 - **Where:** `docs/mechanisms/network.md`, "The page shell"; `scripts/e2e/phone.ts`.
+
+### 2026-11-23 · The delivered button pictures are on the touch controls; "Switch" wears the "special" picture and "Use" is a word
+- **Decided by:** brief-worker, Step 5 slice A (the mapping is the Step 5 lead's, in the brief)
+- **Instead of asking:** "Six button pictures were delivered (left, right, jump, attack, grab/throw, special) and the game has five buttons (Hit, Grab, Use, Jump, Switch). Which picture goes on Switch and on Use?"
+- **Why this way:** the art was delivered for immediate use (D-096). Left and right are the two halves of the move pad; jump, attack and grab are as delivered. There is no "special" move yet, so its picture stands in on Switch rather than sit unused; Use has no picture, so it stays a quiet word. The pictures are small (a third of the touch area) and the old discs and box are gone on every phone, so beside the game, below it and over it the controls look the same.
+- **To change it:** one line per button: `"icon"` in `content/actions/<name>.json` (remove the line to get the word back; point it at another file under `assets/ui/touch/` to change the picture).
+- **Where:** `docs/mechanisms/network.md`, "The page shell"; `docs/architecture.md`, "The action list".

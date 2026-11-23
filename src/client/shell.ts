@@ -71,7 +71,7 @@ export function setUpShell(canvas: HTMLCanvasElement, touch: HTMLElement, hint: 
       // DRAFT: a 16:9 phone (iPhone SE, 6/7/8 and Plus) has no bars, and
       // giving up a size step leaves bars too narrow to use, so the
       // controls sit over the view and are made see-through: only a small
-      // faint mark is painted, the touch area stays large, and they hug
+      // picture or faint label is painted, the touch area stays large, and they hug
       // the bottom corners (docs/plan/step-5.md, "Controls never hide the
       // game"; index.html `#touch.over`; e2e facts i-667x375, i-736x414).
       // To reconsider: the camera keeping the player clear of them (Step 3).
@@ -87,13 +87,29 @@ export function setUpShell(canvas: HTMLCanvasElement, touch: HTMLElement, hint: 
       button = Math.max(44, Math.min(84, rz.width >= 180 ? 84 : Math.floor((rz.width - gap) / 2)));
     }
     const set = (name: string, px: number): void => touch.style.setProperty(name, `${px}px`);
+    const snap = (px: number): number => Math.round(px * dpr) / dpr;
+    const padH = over ? 64 : 76;
+    button = Math.floor(button);
+    lz.width = Math.floor(lz.width / 2) * 2;
+    lz.left = snap(lz.left);
+    // INTENT: the button pictures are 24x24 pixel art, drawn at a whole
+    // number of DEVICE pixels per art pixel and starting on a whole device
+    // pixel, for the same reason as the canvas: nothing blurred. DRAFT: the
+    // sizes aimed for (about 34 CSS px over the view, 48 beside or below it).
+    let k = Math.max(1, Math.round(((over ? 34 : 48) * dpr) / 24));
+    while (k > 1 && (24 * k) / dpr > Math.min(button, padH, lz.width / 2)) k--;
+    const icon = (24 * k) / dpr;
+    set('--icon', icon);
+    set('--icon-off', snap((button - icon) / 2));
+    set('--pad-icon-x', snap((lz.width / 2 - icon) / 2));
+    set('--pad-icon-y', snap((padH - icon) / 2));
     set('--lz-left', lz.left);
     set('--lz-width', lz.width);
-    set('--rz-left', rz.left);
+    set('--rz-left', snap(rz.left));
     set('--rz-width', rz.width);
     set('--btn', button);
-    set('--bottom', over ? Math.max(4, inset.bottom) : Math.max(12, inset.bottom + 6));
-    set('--pad-h', over ? 64 : 76);
+    set('--bottom', snap(over ? Math.max(4, inset.bottom) : Math.max(12, inset.bottom + 6)));
+    set('--pad-h', padH);
     set('--gap', over ? 4 : 8);
     touch.classList.toggle('over', over);
     hint.style.setProperty('--hint-top', `${top + ch + 8}px`);

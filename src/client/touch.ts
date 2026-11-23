@@ -4,14 +4,37 @@ import type { Input } from '../sim/types.ts';
 /**
  * The touch controls: produces the same Input the keyboard does.
  *
- * DRAFT: the layout (a left/right pad bottom-left, one round button per
- * action bottom-right) and its looks are a first pass; Step 5 owns the real
- * layout and the delivered button art.
+ * DRAFT: the layout (a left/right pad bottom-left, one button per action
+ * bottom-right; src/client/shell.ts places and sizes them).
  * INTENT: the buttons are built from the action list (content/actions/), one
  * element with `data-action="<id>"` each, so "every action has a touch
  * control" can be checked by script and a new action needs no change here.
- * The stick is `data-stick`.
+ * An action with no `icon`, or whose picture fails to load, still gets its
+ * button, showing its label. The stick is `data-stick`.
  */
+/** DRAFT: the stick's two pictures; the stick is not an action, so they are named here. */
+const STICK_ICONS = { l: 'ui/touch/left.png', r: 'ui/touch/right.png' };
+
+/**
+ * Puts a picture on a control once it has loaded: a 48x24 strip, normal
+ * then pressed (index.html `.icon`). Until then, and for good if it never
+ * loads, the control keeps what it showed before (a label, or the arrow).
+ * The picture is a background on a child that takes no touches: a
+ * pointerdown on an <img> starts a drag or a long-press menu on iPhone Safari.
+ */
+function addIcon(el: HTMLElement, file: string): void {
+  const url = `assets/${file}`;
+  const icon = document.createElement('span');
+  icon.className = 'icon';
+  el.append(icon);
+  const probe = new Image();
+  probe.onload = () => {
+    icon.style.backgroundImage = `url("${url}")`;
+    el.classList.add('art');
+  };
+  probe.src = url;
+}
+
 export function watchTouch(content: Content, host: HTMLElement): () => Input {
   let x = 0;
   const held = new Set<string>();
@@ -24,6 +47,8 @@ export function watchTouch(content: Content, host: HTMLElement): () => Input {
   const r = document.createElement('i');
   r.className = 'r';
   pad.append(l, r);
+  addIcon(l, STICK_ICONS.l);
+  addIcon(r, STICK_ICONS.r);
   let padPointer: number | null = null;
   const aim = (e: PointerEvent): void => {
     const box = pad.getBoundingClientRect();
@@ -62,6 +87,7 @@ export function watchTouch(content: Content, host: HTMLElement): () => Input {
     b.type = 'button';
     b.dataset.action = action.id;
     b.textContent = action.label;
+    if (action.icon) addIcon(b, action.icon);
     const up = (): void => {
       held.delete(action.id);
       b.classList.remove('on');

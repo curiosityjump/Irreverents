@@ -136,10 +136,14 @@ nobody here can run; whether anything is too small to read; sound.
 Left by the Step 1 Gate 2 worker (2026-11-23); each is `DRAFT:` at its
 site.
 
-- **A 16:9 phone held sideways** has no bars beside the view, so the
-  touch controls overlap the view's bottom corners (`src/client/shell.ts`).
-- **The delivered touch-button art** (U08-01) is not wired in; the
-  controls are plain shapes built from `content/actions/`.
+- ~~**A 16:9 phone held sideways** has no bars beside the view, so the
+  touch controls overlap the view's bottom corners.~~ Closed by slice A
+  part 1 (2026-11-23): there the controls are see-through and hug the
+  corners (`docs/mechanisms/network.md`, "The page shell"). The camera
+  keeping the player clear of them is still not built.
+- ~~**The delivered touch-button art** (U08-01) is not wired in.~~ Closed
+  by slice A part 2: in use from `assets/ui/touch/`; `interact` has no
+  picture and shows its label.
 - **Two tabs on one device are one player** (the id is in
   `localStorage`); the newer tab takes the character and the older one
   keeps retrying.

@@ -155,11 +155,20 @@ into an error page.
   view; the view gives up one step of scale when that is what makes them
   fit (5× to 4× on an iPhone 14).
 - **On a 16:9 phone** (iPhone SE 2/3, 6/7/8 and Plus) there are no bars,
-  so the controls sit over the view and are see-through (`DRAFT:`;
-  `#touch.over` in `index.html`, set by `shell.ts`): only a faint label
-  or arrow is painted, the touch area is 60 px (the stick 136×64), they
-  hug the bottom corners, and a press lights the control under the
-  thumb. The camera keeping the player clear of them is not built.
+  so the controls sit over the view (`DRAFT:`; `shell.ts` sets
+  `#touch.over`): the touch area is 60 px (the stick 136×64) and they
+  hug the bottom corners. The camera keeping the player clear of them is
+  not built.
+- **What a control paints** is small and its touch area large,
+  everywhere: its picture, or with no picture a faint label (the stick:
+  two arrows); a press lights it under the thumb. The pictures are the
+  delivered U08-01 art, copied to `assets/ui/touch/` as 48×24 strips
+  (normal, pressed). Which action shows which is data: the optional
+  `icon` on the action file; the stick's two are named in `touch.ts`. A
+  picture is drawn at a whole number of device pixels per art pixel
+  (`INTENT:` in `shell.ts`), as a background on a child that takes no
+  touches (an `<img>` under a finger starts a drag on iPhone Safari). It
+  is applied only once it has loaded, so a missing file leaves the label.
 - **Upright** (`INTENT:` there is always a way out: rotation lock) the
   view is across the top, the controls below, with one dismissible line.
 - The touch layer builds one button per file in `content/actions/`
@@ -192,7 +201,8 @@ it back. **Checks assert on `drawn`, never on server state.**
   stick has a control, on screen, 44 px or more, reachable at its centre,
   clear of a notch and home bar (headless Chromium has no insets, so the
   script sets `#safe`'s padding and re-runs the layout), two fingers run
-  and jump, and the controls paint over at most 3% of the view. The
+  and jump, and the controls paint over at most 3% of the view (2.62% and 0.90%
+  with the pictures). The
   painted share is measured: the view's box photographed with and without
   `#touch`, the game hidden both times, compared pixel by pixel.
 - **`npm run check:live`**: the same file with `--live`: first `npm run

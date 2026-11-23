@@ -26,27 +26,26 @@
   /* Read by src/client/shell.ts to learn the notch and home-bar insets. */
   #safe { position: fixed; visibility: hidden; pointer-events: none; padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); }
 
-  /* DRAFT: the whole touch layout (Step 5 is working on it; the button art is next): a left/right pad under the left thumb, one button per action under the right. src/client/shell.ts places the two zones beside the view (sideways) or below it (upright), never over it where the screen allows. */
+  /* DRAFT: the touch layout: a left/right pad under the left thumb, one button per action under the right. src/client/shell.ts places the two zones beside the view (sideways) or below it (upright), or over its bottom corners where a 16:9 phone leaves no room (.over), and sizes everything.
+     Quiet on purpose (docs/plan/step-5.md, "Controls never hide the game"): a control paints only its picture (the delivered U08-01 art, assets/ui/touch/) or, with no picture, a faint label or arrow; the touch area is much larger than what is painted; a press lights it up under the thumb. */
   #touch { position: absolute; top: 0; right: 0; bottom: 0; left: 0; pointer-events: none; }
-  #pad, #actions button { pointer-events: auto; touch-action: none; box-sizing: border-box; border: 2px solid rgba(244, 241, 222, .45); background: rgba(244, 241, 222, .12); color: #f4f1de; }
-  #pad { position: absolute; left: var(--lz-left, 14px); width: var(--lz-width, 156px); bottom: var(--bottom, 14px); height: var(--pad-h, 76px); border-radius: 16px; display: flex; }
-  #pad i { flex: 1; display: flex; align-items: center; justify-content: center; }
-  #pad i::before { content: ""; border: 12px solid transparent; }
-  #pad i.l::before { border-right-color: rgba(244, 241, 222, .8); margin-right: 12px; }
-  #pad i.r::before { border-left-color: rgba(244, 241, 222, .8); margin-left: 12px; }
-  #pad i.on, #actions button.on { background: rgba(244, 241, 222, .35); }
-  #pad i.l { border-radius: 14px 0 0 14px; border-right: 1px solid rgba(244, 241, 222, .25); }
-  #pad i.r { border-radius: 0 14px 14px 0; }
+  #pad, #actions button { pointer-events: auto; touch-action: none; box-sizing: border-box; border: 0; background: transparent; color: rgba(244, 241, 222, .7); }
+  #pad { position: absolute; left: var(--lz-left, 14px); width: var(--lz-width, 156px); bottom: var(--bottom, 14px); height: var(--pad-h, 76px); display: flex; }
+  #pad i { flex: 1; position: relative; display: flex; align-items: center; justify-content: center; border-radius: 14px; }
+  #pad i::before { content: ""; border: 9px solid transparent; opacity: .6; filter: drop-shadow(0 0 1px #0f0f1c); }
+  #pad i.l::before { border-right-color: rgba(244, 241, 222, .8); margin-right: 9px; }
+  #pad i.r::before { border-left-color: rgba(244, 241, 222, .8); margin-left: 9px; }
+  #pad i.art::before { display: none; }
+  #pad i.on, #actions button.on { background: rgba(244, 241, 222, .25); color: #fff; }
+  #pad i.on::before { opacity: 1; }
   #actions { position: absolute; left: var(--rz-left, auto); width: var(--rz-width, 180px); bottom: var(--bottom, 14px); display: flex; flex-wrap: wrap-reverse; flex-direction: row-reverse; gap: var(--gap, 8px); }
-  #actions button { width: var(--btn, 76px); height: var(--btn, 76px); border-radius: 50%; font: 600 13px/1 system-ui, -apple-system, sans-serif; margin: 0; padding: 0; -webkit-appearance: none; appearance: none; overflow: hidden; }
-
-  /* DRAFT: over the view (a 16:9 phone has no bars; src/client/shell.ts sets .over): see-through. Only a small faint mark is painted; the touch area keeps its size; a press lights it up under the thumb. */
-  #touch.over #pad, #touch.over #actions button { border-color: transparent; background: transparent; }
-  #touch.over #pad i.l { border-right-color: transparent; }
-  #touch.over #pad i::before { border-width: 9px; opacity: .6; filter: drop-shadow(0 0 1px #0f0f1c); }
-  #touch.over #actions button { font-size: 11px; color: rgba(244, 241, 222, .7); text-shadow: 0 0 2px #0f0f1c, 0 1px 1px #0f0f1c; border-radius: 14px; }
-  #touch.over #pad i.on, #touch.over #actions button.on { background: rgba(244, 241, 222, .25); color: #fff; }
-  #touch.over #pad i.on::before { opacity: 1; }
+  #actions button { position: relative; width: var(--btn, 76px); height: var(--btn, 76px); border-radius: 14px; font: 600 12px/1 system-ui, -apple-system, sans-serif; text-shadow: 0 0 2px #0f0f1c, 0 1px 1px #0f0f1c; margin: 0; padding: 0; -webkit-appearance: none; appearance: none; overflow: hidden; }
+  #actions button.art, #actions button.art.on { color: transparent; text-shadow: none; }
+  /* The picture: a 48x24 strip (normal, pressed) shown one half at a time, at a whole number of device pixels per art pixel (shell.ts). It takes no touches: the control under it does. */
+  .icon { display: none; position: absolute; left: var(--icon-off, 0); top: var(--icon-off, 0); width: var(--icon, 48px); height: var(--icon, 48px); background-repeat: no-repeat; background-size: 200% 100%; background-position: 0 0; image-rendering: pixelated; image-rendering: crisp-edges; pointer-events: none; opacity: .85; }
+  #pad .icon { left: var(--pad-icon-x, 0); top: var(--pad-icon-y, 0); }
+  .art > .icon { display: block; }
+  .on > .icon { background-position: 100% 0; opacity: 1; }
 
   #hint { position: absolute; left: 0; right: 0; top: var(--hint-top, 200px); padding: 0 12px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 13px; opacity: .85; text-align: center; }
   #hint[hidden] { display: none; }

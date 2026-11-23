@@ -1,5 +1,6 @@
 {
   "id": "jump",
   "label": "Jump",
-  "keys": ["Space", "KeyZ", "ArrowUp", "KeyW"]
+  "keys": ["Space", "KeyZ", "ArrowUp", "KeyW"],
+  "icon": "ui/touch/jump.png"
 }

@@ -38,8 +38,9 @@ const INSET = { left: 47, right: 47, bottom: 21 };
  * when they sit on it. Measured 2026-11-23 with paintedShare below: the
  * first layout (five 76 px discs and a boxed pad) painted 14.76% at
  * 667x375 and 9.71% at 736x414 and fails this fact; the see-through one
- * paints 0.89% and 0.41%. DRAFT: pinned at 3%, which leaves room for small
- * art and none for a disc.
+ * paints 0.89% and 0.41% as labels, 2.62% and 0.90% with the delivered
+ * pictures (36 and 32 CSS px). DRAFT: pinned at 3%, which leaves room for
+ * small art and none for a disc.
  */
 const PAINT_LIMIT = 0.03;
 /** Less than this and the controls are not really shown at all. */

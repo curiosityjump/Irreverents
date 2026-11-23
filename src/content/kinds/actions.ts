@@ -12,6 +12,13 @@ export interface Action {
   label: string;
   /** KeyboardEvent.code values that hold this action down. */
   keys: string[];
+  /**
+   * Optional (Step 5): the picture a touch button shows instead of the
+   * label, a file under assets/ (served at /assets/): a 48x24 PNG strip,
+   * normal then pressed, 24x24 each. With none, or when the file fails to
+   * load, the button shows the label.
+   */
+  icon?: string;
 }
 
 declare module '../types.ts' {
@@ -26,12 +33,13 @@ const kind: ContentKind = {
   parse(raw, read) {
     const o = read.object(raw, '');
     if (!o) return null;
-    read.only(o, ['id', 'label', 'keys'], '');
+    read.only(o, ['id', 'label', 'keys', 'icon'], '');
     const out: Action = {
       id: read.string(o, 'id', ''),
       label: read.string(o, 'label', ''),
       keys: read.stringList(o, 'keys', ''),
     };
+    if ('icon' in o) out.icon = read.string(o, 'icon', '');
     return out;
   },
 };

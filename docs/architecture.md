@@ -173,7 +173,11 @@ speak those ids, and a script can enumerate them by listing the directory
 `grab` (Step 2) and `interact` (Step 4: use the nearest thing; read by
 the `npc-interact` system, not a verb) exist today; `special` is a name
 a later step is expected to add (a file each; Step 5 checks every entry
-has a touch control).
+has a touch control). An action file may carry an optional `icon` (Step
+5): the picture its touch button shows, a path under `assets/`; with
+none, or if the file fails to load, the button shows `label`. `DRAFT:`
+`switch` shows the delivered "special" picture until a `special` action
+exists.
 
 ## Deploying
 
@@ -223,7 +227,7 @@ extends from its own file with `declare module '../types.ts' { … }`
 | **tuning number** | Declare it in the `tuning` of the verb (per character) or system (world) that reads it, with its range; put the value in `content/tuning.json`. `npm run check` names any number missing, out of range or unread. | Only the reader |
 | **asset** | The image under `assets/`, plus `content/sprites/<character id>.json` or `content/atlases/<room id>.json`. See "Where art plugs in". | No |
 | **thing that moves a player from outside** (a hit, a hold, a door) | `emitEffect(ctx, entity, effect)`; see "Effects on a player". | No network code |
-| **touch control** | Nothing: every file in `content/actions/` gets a button (`data-action="<id>"`). The layout is Step 5's. | No |
+| **touch control** | Nothing: every file in `content/actions/` gets a button (`data-action="<id>"`). For a picture instead of the label, the optional `icon` on the action file: a path under `assets/` to a 48×24 PNG strip (normal, pressed). The layout is Step 5's. | No |
 | **network number** | `content/net.json`. | No |
 | **check that needs a real server** | `scripts/checks/<id>.ts` default-exporting a `ScriptCheck`. | One new file |
 | **kind of content** | `src/content/kinds/<kind>.ts` default-exporting a `ContentKind` (`source`, `parse`, optional cross-reference `check`) and extending `Content`. | One new file |
