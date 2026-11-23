@@ -81,7 +81,20 @@ Deliver, all on `main`:
    pattern worth copying under "What is already right" in `docs/plan.md`;
    your measurements appended under "Measure" in `docs/plan/step-1.md`.
 
-**Path ownership to write into the architecture doc.** The queued steps,
+**The abstract action list is part of the contract** (added 04:12 UTC;
+Steps 2 and 5 are written against it). A player's input for a tick is
+expressed in named, device-independent actions (for example a horizontal
+move axis, `jump`, and reserved names later steps fill in such as
+`attack`, `grab`, `special`, `interact`), declared in one list (data or
+one small file) that keyboard, touch and scenarios all speak. Step 2
+adds actions to that list; Step 5 checks by script that every entry has
+a touch control. So: one place that enumerates the actions, readable by
+a script, and inputs in scenarios written in those names.
+
+**Path ownership to write into the architecture doc.** Each queued step's
+file now has an "Owns" section (`docs/plan/step-2.md` … `step-5.md`;
+read those four sections, they are a few lines each) and assigns "exact
+paths as `docs/architecture.md` assigns them". The queued steps,
 from `docs/current-directive.md`: Step 2 movement feel, attack, grab and
 throw, three character kinds; Step 3 a small kingdom of connected rooms
 with hidden routes; Step 4 NPC response logic (three moods, witnesses,

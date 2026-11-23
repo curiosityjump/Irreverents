@@ -228,7 +228,7 @@ changed without touching code; don't grade the feel yourself.
 ## Briefs
 
 - `handoff-prompts/step-1-gate-1-skeleton.md` — Gate 1: skeleton, sim
-  core, scenarios, architecture doc. Worker and commit: see handoff notes.
+  core, scenarios, architecture doc. Worker `session_017WiGzHGmyESjXPtM3zXt19`, launched 04:04 UTC.
 
 ## Open with the owner
 
