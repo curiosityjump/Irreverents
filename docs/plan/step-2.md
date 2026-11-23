@@ -71,8 +71,15 @@ and a player can switch between them.
   possible to make a last stand losable later.
 - **Tuning is data:** every speed, height, force and timing in one data
   file a non-programmer could edit.
-- **Actions are entries in the abstract action list** Step 1 created; the
-  touch layout (Step 5) and the keyboard read that list. Keep the count
+- **An action is not finished until a phone can press it** (D-093).
+  Actions are entries in the abstract action list Step 1 created
+  (`content/actions/`); the keyboard and the touch layer both read that
+  list, and Step 1's touch layer (its second gate, about 06:30 UTC) shows
+  a control for every action there without being told. Once it has
+  landed, add to `npm run e2e`, on the phone-sized page, one touch per
+  action you added and see the character do it (control: an action the
+  layer does not show fails). If the layer does not show yours unaided,
+  tell Step 1's lead the same hour; do not leave it for Step 5. Keep the count
   small: "a small reusable set of context-sensitive controls, not a dozen
   tiny virtual buttons" (doc 33). The controls themselves are open in the
   library (D-095), so the mapping is `DRAFT:`: for example one action
@@ -113,7 +120,11 @@ leave for later.
 ## Feedback signal
 
 Scenario scripts in `npm run check`, each with a control watched to fail,
-and `npm run gates` reporting gate A as passing:
+named `step2-*.json` and tagged `"gate": "A"`. **One tagged scenario
+passing is not gate A:** `npm run gates` calls a gate passing as soon as
+any tagged scenario exists and none fails, so gate A counts for this step
+only when its line lists a scenario for each of signals 1–5. Write that
+list under Measure.
 1. A thrown object that hits an enemy sends both flying (speeds over a
    stated threshold) and records an impact.
 2. An enemy knocked into a wall records a wall impact and the held beat.
@@ -128,12 +139,15 @@ and `npm run gates` reporting gate A as passing:
    while held. Prove it headless first (two players in one simulation,
    `npm run check`); the both-screens version needs `npm run e2e`, which
    lands with Step 1's second gate (about 06:30 UTC), so add it then.
-6. Nothing in the screenshots of a fight shows a damage number.
+6. What the page drew during a scripted fight contains no number over a
+   hit (read from the page's own record of what it drew; control: a test
+   build that draws one fails). Looking at the screenshot as well is your
+   rung 5, not this signal.
 
 ## Stopping condition
 
 The six signals pass on `main` and live (`/healthz` at your commit, `npm
-run check:live` still green), the three characters and the tuning file are
+run check:deployed` exits 0 with your code in what is running), the three characters and the tuning file are
 described in `docs/architecture.md`'s "I need to add…" table, and the
 taste list below is in your closing report. **Budget:** closed by about
 08:45 UTC, 2026-11-23; report what is in the way if it will slip.
@@ -145,6 +159,17 @@ data, the tuning data and throwable objects; exact paths as
 `docs/architecture.md` assigns them ("Which paths each plan step owns"). Not the touch layout (Step 5), not rooms (Step 3), not NPC moods
 (Step 4): an enemy here is a body to hit and throw.
 
+
+**Every body is Step 2's, player or not** (added 2026-11-23 04:35 UTC,
+from the plan review): how it runs, is hit, held, thrown and knocked
+out, and the events that say so. Step 4 never moves a body itself: its
+systems decide what a person wants and hand that body the same input a
+player's device would (walk left, attack), and its rules read Step 2's
+events. The two leads write the event names into `docs/architecture.md`
+(hit, grabbed, thrown, impact, knocked out, recovered; each says who did
+it to whom) before the code that depends on them. Step 4's made-up test
+events use exactly those names, so swapping in the real ones is a
+deletion.
 
 **Four files are shared between steps** (`docs/architecture.md`, "Files
 two steps must both touch"): `src/sim/types.ts`,

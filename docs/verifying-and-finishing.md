@@ -72,14 +72,21 @@ from a fresh clone at 04:17 UTC on 2026-11-23, Node v22.23.5.
   or after it deploys.
 
 **The pre-push gate, because a push goes live:** `npm run build && npm run
-check`, plus `npm run e2e` when the client or the network changed; then
-`git fetch origin main && git rebase origin/main`, re-run the gate if
-anything came in, push, then `npm run check:deployed` (it waits up to
-three minutes through the deploy gap and exits 0 once the live address
-runs what `main` needs). If it fails, the previous deploy is still
-serving or the game is down: revert first, tell your lead, diagnose
-after. **A push that changes only documents does not deploy** and does
-not need this (`docs/mechanisms/deploy.md`).
+check`, plus `npm run e2e` when the client or the network changed (until
+Step 1's second gate lands it, `e2e` is a stub that exits 1 on purpose:
+skip it and say so in the commit). Then `git fetch origin main && git
+rebase origin/main`, re-run the gate if anything but documents came in,
+push, then `npm run check:deployed` (it waits up to three minutes through
+the deploy gap and exits 0 once the live address runs what `main` needs).
+**A code push takes the live address down for about a minute** (Railway
+stops the old server before starting the new one, now that a storage
+volume is attached): it answers Railway's own "Application not found"
+meanwhile, which is not a failed deploy. The running commit need not be
+yours: a later push by someone else reads as fine. If `check:deployed`
+fails after its wait, the previous deploy is still serving or the game
+is down: revert first, tell your lead, diagnose after. **A push that
+changes only documents does not deploy** and does not need this
+(`docs/mechanisms/deploy.md`).
 
 ---
 

@@ -84,9 +84,16 @@ npm run gates          # real since Step 1 Gate 1; one line per gate: passing, f
 | C | "shopkeeper + villain demonstration supports normal robbery as comfortable conflict, polite villain transaction as distress, persistent violation as rage, and quick reset" | 4 | none yet |
 | D | "same location supports a zero-alarm intrusion AND a catastrophe that becomes enjoyable combat/pursuit with a credible escape" | 4 | none yet |
 | E | "simple Hall captures a real highlight, without scripting the event itself" | 7 | none yet |
-| F | "2-player same-party online works reliably" | 1, 5 | none yet |
+| F | "2-player same-party online works reliably" | 1 lands it, 5 hardens it (rejoin) | none yet |
 
 **What this measured and what it didn't.**
+- `npm run gates` calls a gate passing as soon as one scenario tagged with
+  its letter exists and none tagged fails. So the count is only as good
+  as the tags: each step file says which of its signals must have a
+  tagged scenario before its gate counts, and anyone quoting M3 (the
+  morning report above all) reads the scenario names on each gate's line
+  against that list, never the bare "N of 6". Checks that live in `npm
+  run e2e` are invisible to it.
 - A gate "passing" means its scripted scenarios pass: the thing exists and
   behaves as written. It never means the gate's own adjectives ("joyful",
   "enjoyable") are met; those are the owner's to judge by playing.

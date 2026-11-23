@@ -54,8 +54,9 @@ not a count to chase tonight.
 | **Vision** | Written (`docs/vision.md`); the owner's full design is mirrored at `docs/design-library/` (38 documents: `git ls-files docs/design-library | grep -c '\.md$'`). |
 | **Procedure** | `docs/sop.md` + `docs/briefs.md`; every doc declares its kind. First plan; no step closed yet. |
 | **Deploy** | Railway serves `main` at https://irreverents-production.up.railway.app automatically; measured 37 s from push to live for the probe (Step 1, "Measure"). **A push to `main` is the deploy.** |
-| **Codebase** | No game. `server.js` + `package.json` are a deploy probe that Step 1 replaces. No tests, no CI, no hooks (`docs/git-workflow.md`, "This project's environment"). |
-| **Mechanisms indexed** | 1 (`grep -cE '^- ' docs/mechanisms/README.md`): the design-library sync. |
+| **Codebase** | Re-measured 04:35 UTC at Step 1's first gate: one Node + TypeScript package; a shared simulation core with one graybox room and three scenarios passing (`npm run check`); the page draws the room and moves a character by keyboard; no touch, no second player on screen yet (Step 1's second gate). Layout: `docs/architecture.md`. No CI, no hooks. |
+| **Storage** | A Railway volume the owner attached (04:24 UTC): `/healthz` reports it mounted and writable. Nothing is written to it yet (Step 7). |
+| **Mechanisms indexed** | Count the lines under the `## Index` heading: `awk '/^## Index/{f=1} f&&/^- /' docs/mechanisms/README.md \| wc -l`. |
 
 ---
 
@@ -111,11 +112,13 @@ was handed one by name):**
    to the minute, so the claim still names one session.
 2. Commit and push *immediately*, before any Measure or Brief work. This
    is the whole mechanism, not a formality.
-3. **If the push is rejected** (a race: another lead claimed first),
-   `git fetch` and `git rebase`, re-read that step's status. If it now
-   shows someone else's claim, you lost the race: pick the *next*
-   unclaimed step and restart from 1. Never overwrite another session's
-   claim line.
+3. **If the push is rejected** (a race: another lead claimed first), your
+   claim commit is dead. Don't rebase it: both claims edit the same line,
+   so the rebase stops on a conflict that is easy to resolve the wrong
+   way. Run `git fetch origin main && git reset --hard origin/main` (your
+   only local commit is the claim), re-read the status lines, and restart
+   from 1 on the first step that still reads `Status: open, unclaimed.`
+   Never overwrite another session's claim line.
 4. If no step carries `Status: open, unclaimed.`, don't invent work or
    guess at a future step. Write to `docs/for-the-orchestrator.md` that
    the plan has no open, actionable element right now (a real, reportable
@@ -193,11 +196,15 @@ verbatim into `docs/plan-archive.md` under a matching `## Step N`
 heading, delete the step file, and replace the pointer here with a short
 closing summary: what shipped, in plain terms, plus one pointer to the
 archive section and one to whichever reference or mechanism doc is the
-step's durable technical record. **A step with any unresolved owner
-question left inside it is not closed, no matter how much of it
-shipped.** Trust the step's own content, not another step's summary of
-it, before archiving anything. Closing a step also checks that every Open
-entry in `docs/questions-for-the-owner.md` naming the step is answered.
+step's durable technical record. **A step with an owner question that still blocks it is not
+closed, no matter how much of it shipped.** A question marked `Blocking:
+no` in `docs/questions-for-the-owner.md`, or a choice decided and logged
+in `docs/decisions-log.md` under the owner's rule of 2026-11-23 (never
+stall on the owner), does not hold a step open: the closing summary names
+each `Q-NNN` and each logged decision, so the answer still has somewhere
+to land. Trust the step's own content, not another step's summary of it,
+before archiving anything. Closing a step also checks that no Open entry
+naming the step is marked blocking.
 
 **Exception: a step blocked on the owner may be archived while still
 open** once its history outgrows what a lead can read. Move its full text

@@ -162,7 +162,8 @@ A step adds files freely in its own paths and avoids editing others'.
 | 5 (opens when Step 1 closes) | touch and keyboard input, on-screen controls, presence, joining and rejoining, the menu, the page shell | `src/client/**` except `draw/`, `src/server/**` |
 | 6 | the throne room's people and props, the speech text, the speech clock and credits | `content/audience/**` and its kind file, `src/sim/systems/` files named `audience-*`, a new `src/client/draw/audience.ts` |
 | 7 | the legend detector, Hall records and their display, the machine and the roadblock | `content/hall/**`, `content/machines/**` and their kind files, `src/sim/systems/` files named `hall-*`, `machine-*`, a new `src/client/draw/hall.ts` |
-| everyone | their own checks | `scenarios/<own-prefix>-*.json`, new files in `src/scenarios/facts/` |
+| 8 (opens when Step 1 closes) | the game's asset list and assets, how things are drawn beyond plain shapes, mood marks, sound | `assets/**`, `content/atlases/**`, `content/sprites/**` and their kind files, sound files and the code that plays them, a new `src/client/draw/sprites.ts` |
+| everyone | their own checks | `scenarios/step<N>-*.json` (N is your plan step; Step 1's first three predate the rule), new files in `src/scenarios/facts/` |
 
 Anything that draws is one file in `src/client/draw/`, called from
 `src/client/render.ts` in one line: a step adds its file and its line.

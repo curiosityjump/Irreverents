@@ -72,16 +72,18 @@ instructions longer than a glance.
    (control: an action with none fails).
 2. `npm run e2e`, iPhone-sized landscape viewports (at least 667×375 and
    844×390): no control sits under a safe-area inset or off-screen; run
-   and jump at once by two touches; screenshots read back by the lead and
-   compared against each other (rung 5 of
-   `docs/verifying-and-finishing.md`).
+   and jump at once by two touches. (Reading the screenshots back and
+   comparing them is your rung 5 of `docs/verifying-and-finishing.md`,
+   and the owner's taste; it is not this signal.)
 3. Mending: the script cuts the socket, and separately hides and shows the
    page; each time the player is back in the world within ten seconds as
    the same character, with no reload.
 4. With 150 ms of delay each way and a few dropped messages injected, two
    players still see each other move without teleporting across the room.
-5. `npm run check:live` passes and `npm run gates` reports gate F as
-   passing.
+5. `npm run check:live` and gate F (landed by Step 1) stay green after
+   every push of yours, and this step adds its own gate F scenario: a
+   client whose connection is cut comes back as the same character
+   (control: with rejoin switched off it fails).
 
 ## Stopping condition
 

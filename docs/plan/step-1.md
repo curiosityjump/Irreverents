@@ -225,8 +225,10 @@ may overrule one with a measurement, recording why here.
    landscape, driven by touch) join a local server; when A moves, B sees A at the new place within half
    a second; with 150 ms of delay injected each way, A's own character
    still starts moving within 50 ms of the key press.
-3. `npm run check:live` passes against the live URL, and `/healthz` there
-   reports the commit at the tip of `main`.
+3. `npm run check:live` passes against the live URL, `npm run
+   check:deployed` exits 0 (what is running has every code change on
+   `main`), and `npm run gates` reports gate F as passing (the headless
+   two-player scenario).
 
 ## Stopping condition
 

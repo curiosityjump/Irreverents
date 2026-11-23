@@ -63,7 +63,10 @@ each other again, each with their own view on their own screen.
 - **The rooms' working parts are this step's too:** doors, a breakable
   wall that hides a route, pressure plates and the gate they open, a
   place to hide (the place; what hiding does to being seen is Step 4's).
-  Each is a kind of object described in data and placed by data.
+  Each is described in the room's own file and run by this step's
+  `room-*` systems; they are not `content/objects/**` (Step 2's
+  throwables) and are not placed through `content/placements/**`
+  (Step 4's people).
 - **One honest co-op gate** (golden scenario G-04, doc 12: "Solo player is
   not hard-blocked by player count and may discover physical
   workaround"): a gate held open by two plates. Two players stand on
@@ -80,7 +83,12 @@ each other again, each with their own view on their own screen.
   into another room too. Whether a room is one fixed screen or scrolls
   is yours to pick, also `DRAFT:`. Doc 24 warns that fully independent
   cameras are "harder later features": keep it to the simple thing each
-  phone already does.
+  phone already does. **Step 1's second-gate worker is writing the first
+  follow camera right now** (due about 06:30 UTC). Do not write a second
+  one. Until it lands, build the headless parts: rooms, doors, the
+  validator. From the moment it lands the camera is yours, in
+  `src/client/draw/room.ts`: what it does at a room's edges and when its
+  player changes room.
 - **"Unadvertised" means no arrow, no glow, no text.** A route is found by
   curiosity (a wall that sounds different, a ledge just in reach).
 - **Tiles are drawn from data too:** graybox now, and a 16 px tile atlas
@@ -94,17 +102,23 @@ each other again, each with their own view on their own screen.
 - The layouts. Read `docs/design-library/02-gameplay-systems/04-world-structure-secrets-and-revisiting.md`
   and doc 24's kingdom section; the level anthologies (docs 25 and 28)
   are proposals to borrow shapes from.
-- How a player learns where their friend went (an edge marker, a door
-  that shows who is beyond it). Step 5 owns the on-screen part; agree it
-  through `docs/architecture.md`.
+- How a player learns where their friend went. Step 5 draws it (an edge
+  marker, a door that shows who is beyond it), and Step 5 has no lead
+  until Step 1 closes: don't wait for one and don't draw it yourself.
+  This step's half is the fact it will be drawn from: what each player's
+  device knows about every other party member (which room they are in,
+  and which door of the current room leads toward them). Write that into
+  `docs/architecture.md` under your row; Step 5 builds on it.
 
 ## Feedback signal
 
 1. `npm run check` validates every room: all reachable, doors resolve,
    spawn points stand on ground, no inescapable pocket (control: a room
    with a sealed pit fails the check).
-2. Two scenario scripts each walk one unadvertised route from the throne
-   room to somewhere the obvious doors don't lead as directly.
+2. Two scenarios each reach a room from the throne room through a
+   connection the room data marks hidden (control: with that connection
+   made solid, the scenario fails), and the validator refuses a hidden
+   connection that carries a sign or marker.
 3. The secret: the intended character reaches it by its own moves; each
    of the others, using only their own moves, does not (control). A
    second scenario gets another character in by being thrown or by
@@ -120,7 +134,17 @@ each other again, each with their own view on their own screen.
 5. The plate gate opens for two scripted players standing on the plates,
    and for one scripted player using a thrown weight (control: one player
    and no weight leaves it shut).
-6. `npm run gates` reports gate B as passing.
+6. `npm run gates` reports gate B as passing, with a scenario for each
+   of signals 1–5 on its line (scenarios named `step3-*.json`, tagged
+   `"gate": "B"`; one tagged scenario passing is not gate B). Write the
+   list under Measure.
+
+Signals 3 and 5 need Step 2's character kinds, its throw and one heavy
+throwable. Don't wait and don't make your own: build the secret and the
+plates against a body's size, reach and weight with a stand-in body in
+the scenario, then switch those scenarios to Step 2's real characters and
+throw when they land. Ask Step 2's lead for the weight; say in your
+handoff note which scenarios are still on the stand-in.
 
 ## Stopping condition
 

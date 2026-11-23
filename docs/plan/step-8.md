@@ -80,10 +80,13 @@ within the hour.
    sizes and frame counts match the file, every entry is marked
    provisional with where it came from (control: an entry pointing at a
    missing file fails).
-2. `npm run e2e` at iPhone size, screenshots read back: each kind of
-   character and person in a test room is told apart; one person shown in
-   each of the three moods looks different each time; nothing important
-   is under the touch controls.
+2. `npm run e2e` at iPhone size: one person drawn in each of the three
+   moods differs from the other two by at least a stated number of
+   pixels (control: with the mood marks switched off, it fails); nothing
+   the game marks as important is under a touch control. (Whether each
+   kind of character can be told apart at a glance is read off the
+   screenshots by you, rung 5, and judged by the owner; it is not this
+   signal.)
 3. A delivered sprite sheet replaces a plain shape by a data change only
    (`git show --stat` on that commit lists the asset files and the asset
    list, no code).

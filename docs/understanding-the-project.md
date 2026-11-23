@@ -148,8 +148,8 @@ content at volume, briefed.
 
 Night one (2026-11-23). The owner's current goal is in
 `docs/current-directive.md`. No step is done. **Step 1** (a live room two
-people can play in together) is the critical path; every other step is
-queued behind its first gate. Open steps, their status lines and what each
+people can play in together) is the critical path; every other step
+waits on it, and `docs/plan.md` says on what. Open steps, their status lines and what each
 waits on are in `docs/plan.md`; recount there, not here.
 
 Nothing has been stopped by the owner.

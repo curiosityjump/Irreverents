@@ -17,9 +17,11 @@ If the brief leaves a *measurable* question open, it isn't ready. Go measure it.
 
 **This is a bar for the brief writer, never a ceiling on the executing
 session.** It does not mean a good brief leaves you with no questions, and it
-does not mean asking is a sign the brief failed. **The owner wants to be
-asked.** A brief is written by someone who could not see everything; where it
-turns out to be wrong, thin, or silent, *ask*. The only questions worth
+does not mean asking is a sign the brief failed. **Ask whoever launched
+you; for what only the owner could answer, decide and log** (`docs/sop.md`
+phase 4; the owner's rule of 2026-11-23). A brief is written by someone who
+could not see everything; where it turns out to be wrong, thin, or silent,
+*ask*. The only questions worth
 suppressing are the ones you could answer yourself by measuring.
 
 Its "Decided vs. open" section is likewise a starting position, not a closed

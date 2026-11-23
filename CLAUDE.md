@@ -57,10 +57,11 @@ sentences, **the one measure** progress is read by — a number a session can
 check, not a feeling. (`docs/measures.md` holds the measures the plan is
 built on, and how to take them.)
 
-**The measure (provisional: Q-003 is open with the owner):** how many of
-the design library's six build gates, A–F, pass their scripted player-view
-checks in the live build. `docs/plan.md`'s table holds the count and
-`docs/measures.md` the commands. Whether a gate *feels* right (joyful,
+**The measure** (from the owner's answer on how to read progress,
+`docs/vision.md` "The measure"): is the live game up (M1), can two people
+play it together there (M2), and how many of the design library's six
+build gates, A–F, pass their scripted checks (M3). `docs/plan.md`'s table
+holds the numbers and `docs/measures.md` the commands. Whether a gate *feels* right (joyful,
 weighty, funny) is the owner's to judge by playing, never a script's.
 
 ---

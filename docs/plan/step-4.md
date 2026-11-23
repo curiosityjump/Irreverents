@@ -118,7 +118,11 @@ the first things to leave for later.
 
 ## Feedback signal
 
-Scenario scripts in `npm run check`, each with a control watched to fail:
+Scenario scripts in `npm run check`, each with a control watched to fail,
+named `step4-*.json` and tagged with their gate: signals 1, 1b and 2 are
+gate C; 3, 4 and 5 are gate D. **One tagged scenario passing is not a
+gate:** a gate counts for this step only when `npm run gates` lists a
+scenario for each of its signals. Write that list under Measure.
 1. The villain robs the shopkeeper: the shopkeeper stays in business as
    usual (this is the expected story), and does not call.
 1b. The same villain comes back and politely buys a potion: the
@@ -156,6 +160,17 @@ hiding, calling for help, the area alert; exact paths as
 `docs/architecture.md` assigns them.
 
 
+**Every body is Step 2's, player or not** (added 2026-11-23 04:35 UTC,
+from the plan review): how it runs, is hit, held, thrown and knocked
+out, and the events that say so. Step 4 never moves a body itself: its
+systems decide what a person wants and hand that body the same input a
+player's device would (walk left, attack), and its rules read Step 2's
+events. The two leads write the event names into `docs/architecture.md`
+(hit, grabbed, thrown, impact, knocked out, recovered; each says who did
+it to whom) before the code that depends on them. Step 4's made-up test
+events use exactly those names, so swapping in the real ones is a
+deletion.
+
 **Four files are shared between steps** (`docs/architecture.md`, "Files
 two steps must both touch"): `src/sim/types.ts`,
 `src/sim/systems/physics.ts`, `src/client/render.ts` (Step 1 is in it
@@ -176,6 +191,7 @@ is fun; whether the shopkeeper being pleased to be robbed is funny.
 
 ## Open with the owner
 
-- Q-005 (stale rules in the library; the newer rule is being built).
+- Q-005 (stale rules in the library; the newer rule is being built). Not
+  blocking: it does not hold this step open.
 
 ## Handoff notes

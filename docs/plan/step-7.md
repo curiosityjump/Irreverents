@@ -122,4 +122,7 @@ ramming the roadblock earns the "OHH!".
 
 ## Open with the owner
 
+- Q-011 (lasting storage): answered by the owner's own action,
+  2026-11-23; see "Records are kept on the volume the owner added" above.
+
 ## Handoff notes
