@@ -108,6 +108,13 @@ Deliver, all on `main`:
    command into `docs/measures.md` under M1 (replace the two-line command
    there; keep the label).
 
+11. **`/healthz` also says whether lasting storage is mounted** (added
+   04:17 UTC from the step file). The owner is adding a Railway volume at
+   `/data`; Railway then sets `RAILWAY_VOLUME_MOUNT_PATH` and
+   `RAILWAY_VOLUME_NAME` at runtime. Add one field (keep `ok`, `commit`,
+   `startedAt` as they are) reporting whether that path is set and
+   writable, and nothing more. Using the storage is Step 7's, not yours.
+
 **The abstract action list is part of the contract** (added 04:12 UTC;
 Steps 2 and 5 are written against it). A player's input for a tick is
 expressed in named, device-independent actions (for example a horizontal
@@ -183,6 +190,11 @@ All run by the lead on 2026-11-23, 04:02–04:08 UTC.
   `/healthz` and `/`. After every push, poll `/healthz` until it reports
   your commit; if it has not within ten minutes, stop pushing and message
   the lead.
+- **Red on live means the next push is the revert.** If, after your
+  push is live, the live address is broken (the page does not load, a
+  check that passed locally fails there), `git revert` your commit and
+  push at once, then find out why locally. Nobody debugs on the owner's
+  game (`docs/plan/step-1.md`, "What's decided").
 - **Push the bare skeleton early** (build + start + `/healthz` + the
   notice page), confirm it is live, then build on it. Do not make the
   first real-build deploy also the first push of everything.
