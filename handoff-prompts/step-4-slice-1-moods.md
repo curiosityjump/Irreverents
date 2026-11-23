@@ -20,7 +20,7 @@ the count you report is whatever `npm run gates` prints.)
 **Push in two parts, the first one early.** Slice 2's worker starts the
 moment part 1 is on `main`, so part 1 is the foundation and nothing else:
 
-- **Part 1 (aim: within 45 minutes):** the content kinds, `c.drive`,
+- **Part 1 (aim: within 45 minutes):** the content kinds, `c.input`,
   seeing, the deed list, the mood machine, the first two scenarios green,
   and the shapes written into `docs/mechanisms/npc-response.md`. When it
   is pushed, message the lead: `send_message` to
@@ -65,12 +65,13 @@ and "Names other steps are now building against" in
 `handoff-prompts/step-2-hit.md`. In short:
 
 - **A body is Step 2's; what a person wants is yours.** Your systems
-  never set `vx` or `vy`. They write `entity.c.drive`, an `Input` (`x`,
-  `y`, `held`), and the body's own verbs act on it. Nothing does this
-  yet: **you add one additive rule to `src/sim/systems/verbs.ts`**: a
-  non-player entity that has `c.drive` runs its kind's verbs with that
-  input; one without it is skipped exactly as today (Step 2's crates and
-  dummies must be untouched: prove it, their scenarios still pass).
+  never set `vx` or `vy`. They write `entity.c.input`, an `Input` (`x`,
+  `y`, `held`), and the body's own verbs act on it
+  (`docs/architecture.md`, "Bodies: the events and state other steps
+  read"). **Do not edit `src/sim/systems/verbs.ts` and do not declare
+  `Components.input`:** Step 2's hit worker makes that change in its
+  first push. If it is not on `main` yet when you need it, your people
+  stand still; test the rest and pull again.
 - **So your people are ordinary character kinds**: add
   `content/characters/{shopkeeper,guard,villain}.json` listing `move`
   (Step 2's directory; announced), each with its own tuning set in
@@ -184,7 +185,7 @@ and every choice labelled DRAFT below `DRAFT:`.
   walk at the offender while seen (to where they were last seen, never to
   where they are), and, once its body lists Step 2's `attack`, hold
   `attack` when in reach. Until then it only charges. All of it through
-  `c.drive`. Ordinary people stay ordinary fighters (D-046): that is
+  `c.input`. Ordinary people stay ordinary fighters (D-046): that is
   Step 2's numbers on the shopkeeper's body, not a rule of yours.
 - **What a hero can do tonight:** a fresh press of `interact` acts on the
   nearest thing within `npcInteractReach` (DRAFT 20 px): at a shop
@@ -238,7 +239,7 @@ solid wall to get out of sight behind, and three pieces of goods.
   directory of your own, `src/sim/npc/`.
 - **System order.** Deeds emitted by other steps' systems must already
   exist when your witness pass runs: give the witness and mood systems an
-  `order` of 600 or more; the system that writes `c.drive` and the
+  `order` of 600 or more; the system that writes `c.input` and the
   `interact` reader under 100 (the `verbs` system runs at 100).
 - **Reading events.** Add `events` (this tick's events so far) to
   `StepContext` in `src/sim/types.ts` and fill it in `step.ts`: two

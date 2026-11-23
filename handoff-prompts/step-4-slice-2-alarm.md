@@ -100,7 +100,7 @@ When done, message the lead (`send_message` to
   chases: toward the last place it saw them, holding `attack` in reach
   if its body lists Step 2's `attack` verb. Losing sight, it walks to
   the last place seen and searches there. At alert 0 it walks back to
-  its post and its routine. All movement through `c.drive`; **your
+  its post and its routine. All movement through `c.input`; **your
   systems never set `vx`**. A responder's mood is 2 on arrival and 3
   once it has seen a hero while the alert is above 0.
 - **More help at levels 2 and 3** (cut this first if time is short; the

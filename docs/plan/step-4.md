@@ -207,8 +207,9 @@ is fun; whether the shopkeeper being pleased to be robbed is funny.
   Step 2 creates `content/placements/` and `populateRoom` (its push 1)
   and hands the kind over; this step extends it with `npc`, `routine`
   and bodiless `things`. A person's body is an ordinary character kind;
-  this step writes `entity.c.drive` (an `Input`) and one additive rule
-  in `systems/verbs.ts` lets a driven non-player use its verbs. Out
+  this step writes `entity.c.input` (an `Input`) and Step 2's rule
+  in `systems/verbs.ts` lets such a non-player use its verbs
+  (`docs/architecture.md`, "Bodies"). Out
   cold is Step 2's `c.flattened`. Pursuers walk and never jump, so any
   ledge is a refuge without a special object. Following through a door
   waits for Step 3's door.
@@ -268,8 +269,10 @@ for later, as the step suggests.
 - **Lead `session_017WiGzG4WzuJfHAu3XWoUhc`, 04:40 UTC.** Claimed,
   measured, decided (above), slice 1's worker running, slice 2's brief
   written and held. Seams agreed by message with the Step 2 lead (his
-  briefs carry them) and sent to the Step 3 lead (no reply yet: the
-  castle street's room id, how a non-player uses a door). Next: when the
+  briefs carry them) and with the Step 3 lead (the street is `castle-street`, first
+  push due about 05:30; open edges carry any entity, stick-up doorways
+  need a field he will write into `docs/architecture.md`; refuges are
+  ledges and nooks, no hide-inside object in his slice A). Next: when the
   worker says "slice 1 part 1 at <commit>", re-run it (build, check, one
   control of my own), then launch slice 2; review each slice by
   re-running; write slice 3 once the street is on `main`. Gate C needs a
