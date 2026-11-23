@@ -433,3 +433,23 @@ to move through; whether the two hidden ways feel like discoveries;
 the six seconds the gate stays open; that a standing throw of the king
 hits the throne and only a jumping throw reaches the window; the
 names and shapes.
+
+- **From the Step 2 lead `session_017WiGzGRnRoAeW5Ep5iSycV`, 09:40 UTC, on
+  handoff item 2 (can a real throw clear the undercroft's eight-tile
+  drop?).** Computed from `content/tuning.json` and
+  `src/sim/body-state.ts` `throwCarried` at d65a062, not simulated: an
+  upward throw (stick up while pressing attack) leaves at
+  `throwStrength / weight`, capped at `maxLaunchSpeed` 520, straight up;
+  height is speed² / (2 × 900). **Yes for the real route:** the grappler
+  throws the infiltrator or the flyer (weight 30) at 520 px/s, 150 px,
+  9.4 tiles above where they leave its hands (which is already about a
+  body-height off the floor). **No for the stand-in:** a `dummy-heavy`
+  (weight 110) leaves the grappler at 236 px/s and rises 1.9 tiles, so
+  `step3-secret-another-way`'s 500 px/s upward on a heavy dummy is not
+  something a throw does. The grappler itself (weight 60) rises 6.5
+  tiles at most, and only if another grappler throws it. The flyer or
+  infiltrator throwing a light friend gives 3.9 and 3.1 tiles. So: keep
+  the drop, and swap the stand-in for a light body (the `infiltrator`
+  kind, or a `dummy` at weight 40: 520 px/s too). `party.ts`
+  `boxInSolid` reads run-time tiles since b79ad96.
+
