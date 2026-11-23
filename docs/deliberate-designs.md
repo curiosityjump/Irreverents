@@ -69,6 +69,9 @@ words.
 **The store swallows every error: a damaged or unwritable records file never stops the server, it just starts that collection empty.**
 → Intended. With the storage volume attached, a server that fails to start leaves the owner and their friends with no game at all, which is worse than a Hall that is empty for one evening. So `src/server/store.ts` never throws: a file that does not parse, or is a newer version than the code knows, is renamed aside whole (`<name>.unreadable-<n>.json`, recoverable by hand, never deleted or written over), a failed write leaves the records in memory, and each is listed in `store.problems`. Do not turn a `try`/`catch` there into a throw. Decided by the Step 7 lead, 2026-11-23 (`handoff-prompts/step-7-a-store-and-pedestal.md`); the owner may overrule. `INTENT:` at `openStore` in `src/server/store.ts`. Proven by `node scripts/check-store.ts`.
 
+**A Hall pedestal's card has no button to open or close it, and no way to keep it open.**
+→ Intended. Standing at a pedestal shows its card; walking away hides it. On an iPhone that costs no extra control (iPhone first, D-093), and it is the "always a way out" principle: the card takes no input, holds nobody and covers only the top half of the screen. The new-legend banner is the same: it goes by itself after three seconds and stops nothing. Decided by the Step 7 lead, 2026-11-23 (`docs/decisions-log.md`, "You read a pedestal by walking up to it"); the owner may overrule. `INTENT:` at `drawHall` in `src/client/draw/hall.ts`.
+
 ---
 
 ## Where these live in the code
@@ -80,6 +83,7 @@ Keep this table in step with the entries:
 |---|---|
 | Switch refused or skips a member in a tight space | `src/sim/verbs/switch.ts` |
 | The store never throws; an unreadable file is set aside | `src/server/store.ts` (`openStore`, `load`) |
+| The pedestal's card has no button | `src/client/draw/hall.ts` (`drawHall`) |
 
 **Still unmarked:** list entries that have no `INTENT:` at their site yet.
 Add the marker when you next touch one.

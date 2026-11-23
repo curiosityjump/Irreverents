@@ -372,3 +372,11 @@ document as a decision of theirs.
 - **Why this way:** the mood rules needed the acts of buying and taking, not an economy, so buying is free and what you take is only marked as yours. Buying needs the shopkeeper standing by the counter, and still counts as buying when they are furious with you (it just does not help). The glance behind (a second and a half in every six and a half) makes "behind their back" a matter of timing rather than a free shelf. These are in a test room only; the street gets its own.
 - **To change it:** the glance is the shopkeeper's routine in a data file; money and carrying are real work for a later slice.
 - **Where:** `content/placements/test-shop.json`; `src/sim/systems/npc-interact.ts` (marked `DRAFT:`).
+
+### 2026-11-23 · What a pedestal, its card and a new legend look like for now
+- **Decided by:** brief-worker, Step 7 slice A, `session_017WiGzFwud41UiryQTtHH52`
+- **Instead of asking:** "How should the picture, the card and the announcement look, and what should the card say when records are not being kept?"
+- **Why this way:** plain stand-ins until real art. The picture is a small gold frame on the pedestal with everyone as a tiny coloured block; whoever was knocked out lies on their side, and the players who earned it have a bright dot over their heads. Stand at it and a card opens across the top of the screen: the title, what kind of feat and where it ranks ("escape · 2nd of 5"), who was there, up to four of its numbers. A new legend shows "A new legend" with its picture and title at the top for three seconds, then goes. If the game has nowhere to keep records, the card says "Not saved: gone when the game restarts". Until the game knows which character is yours, anyone standing at a pedestal opens its card on every screen showing that room.
+- **To change it:** small; all of it is one file, and the words are one line each.
+- **Where:** `docs/mechanisms/hall-of-legends.md`, "On screen".
+

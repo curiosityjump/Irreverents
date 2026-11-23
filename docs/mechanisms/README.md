@@ -75,3 +75,9 @@ groups) whenever you add one — never update the number from memory.
 **Combat and impact** (`docs/mechanisms/combat-and-impact.md`)
 - `src/sim/body-state.ts` + verbs `attack`, `grab`, `body` + systems `combat-*`, `carry-*`, `impact-*` — hitting, picking up, carrying and throwing any body; flying bodies record wall and body impacts with a held beat; hidden toughness, flattened and back; a body that cannot act runs no verb (Step 2).
 - `content/placements/<room id>.json` + `populateRoom` — who and what stands in a room, as bodies nobody plays; scenarios get them with `"placements": true` or their own `entities` (Step 2; Step 4 owns the kind from here).
+
+**The Hall of Legends** (`docs/mechanisms/hall-of-legends.md`)
+- `src/client/draw/hall.ts` — each pedestal's record redrawn as a small framed picture, a card with no button when a player stands at it, and a three-second banner for a newly hung one (Step 7).
+
+**Lasting records** (`docs/architecture.md`, "Lasting records: the store")
+- `src/server/store.ts` — named collections of JSON records on the owner's storage volume, in memory where there is none; never throws, sets unreadable files aside, proven by `node scripts/check-store.ts` (Step 7).
