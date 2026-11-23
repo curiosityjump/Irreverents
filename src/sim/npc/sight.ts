@@ -29,10 +29,13 @@ export function lineClear(room: Room, a: { x: number; y: number }, b: { x: numbe
  * thing that makes sneaking a choice. Same room; the target is in front,
  * the way the watcher faces; within npcSightRange across and npcSightHeight
  * up or down, measured between the middles of the two bodies; and no solid
- * tile on the straight line between them. Someone out cold sees nothing.
+ * tile on the straight line between them. Someone out cold sees nothing,
+ * and nobody sees a body that is hiding in a hiding place.
  */
 export function canSee(content: Content, watcher: Entity, target: Entity): boolean {
   if (watcher.room !== target.room || isOut(watcher)) return false;
+  // INTENT (slice 2; Step 3 sets `c.roomHide` and leaves its meaning to Step 4): a body hiding (standing still in a hiding place) is not seen.
+  if (target.c.roomHide) return false;
   const room = content.rooms[watcher.room];
   if (!room) return false;
   const { npcSightRange, npcSightHeight } = content.tuning.world;

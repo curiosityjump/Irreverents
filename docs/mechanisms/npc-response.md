@@ -104,7 +104,10 @@ faces); within `npcSightRange` (112 px, 7 tiles) across and
 bodies; and no **solid** tile on the straight line between them
 (one-way platforms do not block). **The one a deed is done to always
 perceives it**, facing or not. Someone out cold (`c.flattened`, Step
-2's) sees nothing.
+2's) sees nothing. **Nobody sees a body that is hiding**
+(`c.roomHide`, Step 3's: standing still, doing nothing, inside a `hide`
+part; slice 2 gave it this meaning). Moving or pressing anything ends
+the hiding on that tick, before the witness pass.
 
 ## The tables (`content/rules/`)
 
@@ -284,8 +287,7 @@ stop the call); broken, a grey stump. The area's alert is up to three
 red marks in the top-left corner; nothing at 0.
 
 **Not built yet** (the brief's later pushes): more help arriving at
-levels 2 and 3; hiding places
-counting as unseen; finding a knocked-out person; the villain's horn
+levels 2 and 3; finding a knocked-out person; the villain's horn
 (D-070).
 
 ## Adding things
@@ -335,7 +337,7 @@ the placements file and re-trace it. `scripts/trace.ts` prints bodies only (thin
 
 Slice 2's scenarios (`"gate": "D"`) are in `content/rooms/test-street.json`
 with its placements: a ledge at the left (the refuge), the shop at
-columns 10-14, a bell at 17, a guard's post at 30. The `alert` fact
+columns 10-14, a bell at 17, a hiding place at 22, a guard's post at 30. The `alert` fact
 reads an area's level. A recorded tick shows the world *before* that
 tick's step, so an event at tick 505 shows in the `alert` fact from 506.
 `step4-street-call`, `step4-guard-follows-seen`,

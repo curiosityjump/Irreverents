@@ -1,0 +1,25 @@
+{
+  "id": "step4-hiding-is-unseen",
+  "gate": "D",
+  "proves": "hiding counts as unseen: a hero takes goods in the shopkeeper's view, walks to the hiding place at column 22 and stands still in it (Step 3 marks them hiding). The call completes and the guard walks right past the hero to the reported place and searches there, looking the hero's way from four tiles off, and never sees them: no pursuit, and after 20 s the alert falls to 0 and the guard goes back to their post",
+  "room": "test-street",
+  "placements": true,
+  "players": [{"id": "a", "character": "hero", "spawn": 0}],
+  "inputs": [
+    {"player": "a", "from": 20, "to": 25, "hold": ["interact"]},
+    {"player": "a", "from": 40, "to": 121, "x": 1}
+  ],
+  "ticks": 2600,
+  "expect": [
+    {"fact": "body-state", "player": "a", "at": 400, "is": ["roomHide"]},
+    {"fact": "body-state", "player": "a", "at": 1700, "is": ["roomHide"]},
+    {"fact": "event-where", "event": "call-completed", "where": {"by": "ts-shopkeeper"}, "between": [505, 505], "count": [1, 1]},
+    {"fact": "alert", "area": "test-street", "between": [506, 1704], "is": 1},
+    {"fact": "position", "entity": "ts-guard", "at": 1000, "x": [230, 328]},
+    {"fact": "event-where", "event": "mood-changed", "where": {"entity": "ts-guard", "cause": "pursuit"}, "between": [0, 2600], "count": [0, 0]},
+    {"fact": "event-where", "event": "alert-changed", "where": {"area": "test-street", "from": 1, "to": 0}, "between": [1704, 1704], "count": [1, 1]},
+    {"fact": "alert", "area": "test-street", "between": [1705, 2600], "is": 0},
+    {"fact": "position", "entity": "ts-guard", "at": 2600, "x": [484, 492]},
+    {"fact": "mood", "npc": "ts-guard", "at": 2600, "is": 1}
+  ]
+}

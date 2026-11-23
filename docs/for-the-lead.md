@@ -170,3 +170,11 @@ A chasing guard follows a hero they saw leave through a door, and comes home whe
 **Flag (play):** sight is 7 tiles and a hero runs 2.4 times as fast as a guard walks, so a guard only "sees you leave" when the door is within about a second's run of where they caught up with you. Leaving by a far door is nearly always unseen.
 
 **Flag:** a guard with no way home (`doorToward` null) or one a wall blocks stands down where they are and their routine's `walk-to` columns then apply to the wrong room. No such room exists tonight.
+
+## Step 4, slice 2, push 3 (brief-worker, 2026-11-23 ~09:50 UTC)
+
+Hiding counts as unseen: one line in `src/sim/npc/sight.ts`, a `hide` part at column 22 of `test-street`, `step4-hiding-is-unseen` and its partner `step4-standing-in-view-is-seen`.
+
+**Flag (play):** the rule is as plain as the brief gave it: a guard who watches a hero step into a hiding place stops seeing them the moment they stand still. Nothing remembers "I saw you go in there". The guard then walks to where they last saw the hero, which is the hiding place, and searches around it without finding them. Funny or broken is the owner's to judge by playing.
+
+**Flag:** no room a player can reach has a `hide` part yet (only `test-parts` and `test-street`), so this cannot be played tonight.
