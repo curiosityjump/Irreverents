@@ -1,0 +1,9 @@
+{
+  "//": "DRAFT (Step 12 slice B): a town guard and a camp fighter five tiles apart, the fighter looking away for 3 s, then back, then away, and no hero in sight: they see each other and fight (content/hostility.json).",
+  "id": "test-clash",
+  "room": "test-clash",
+  "place": [
+    { "id": "tcl-guard", "character": "guard", "tile": [8, 5], "npc": "guard", "routine": [{ "face": "right" }, { "wait": 5 }] },
+    { "id": "tcl-fighter", "character": "outpost-fighter", "tile": [13, 5], "npc": "outpost-fighter", "routine": [{ "face": "right" }, { "wait": 3 }, { "face": "left" }, { "wait": 3 }] }
+  ]
+}

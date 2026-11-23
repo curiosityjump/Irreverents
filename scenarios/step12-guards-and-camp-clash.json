@@ -1,0 +1,90 @@
+{
+  "id": "step12-guards-and-camp-clash",
+  "gate": null,
+  "proves": "sides that meet fight (D-069, content/hostility.json, by role and side): in a plain room with no hero, a camp fighter looking away turns, sees a town guard, walks up and hits it, again and again; neither's mood changes, nobody calls, and the room's alert stays 0 (only a finished call raises it). The guard's body lists no attack yet (Step 18 adds it; three step4 scenarios are pinned to guards that cannot hit), so it stands. Control: hostility.json's pairs emptied, no hit",
+  "room": "test-clash",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "hero",
+      "spawn": 0,
+      "room": "test-fight"
+    }
+  ],
+  "inputs": [],
+  "ticks": 600,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "hit",
+      "where": {
+        "by": "tcl-fighter",
+        "target": "tcl-guard"
+      },
+      "between": [
+        180,
+        300
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "hit",
+      "where": {
+        "by": "tcl-fighter",
+        "target": "tcl-guard"
+      },
+      "between": [
+        0,
+        600
+      ],
+      "count": [
+        1,
+        99
+      ]
+    },
+    {
+      "fact": "mood",
+      "npc": "tcl-guard",
+      "between": [
+        1,
+        600
+      ],
+      "is": 1
+    },
+    {
+      "fact": "mood",
+      "npc": "tcl-fighter",
+      "between": [
+        1,
+        600
+      ],
+      "is": 1
+    },
+    {
+      "fact": "event",
+      "event": "call-started",
+      "between": [
+        0,
+        600
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "alert",
+      "area": "test-clash",
+      "between": [
+        0,
+        600
+      ],
+      "is": 0
+    }
+  ]
+}

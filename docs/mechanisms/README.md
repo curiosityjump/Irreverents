@@ -79,6 +79,7 @@ groups) whenever you add one — never update the number from memory.
 
 **Hostile outposts** (`docs/mechanisms/outposts.md`)
 - `content/outposts/` + `src/sim/outpost/state.ts` + the `outpost-*` systems + `src/client/draw/outpost.ts` — a camp's lookout who sees a hero runs to a horn post and sounds it; each finished call brings a wave (rows of a table, the last repeating for ever, capped by a bound on bodies); stopped by staying unseen, knocking out or grabbing the caller, breaking the post with hits or a throw, or walking out (Step 12, slice A).
+- `chase-cap` + `content/hostility.json` + `clash-fight` — a chase follows a hero into the camp, the nearest two at most; guards and bad-side people fight on sight, moods unchanged (Step 12, slice B; "Chase and clash").
 
 **Rooms and doors** (`docs/mechanisms/rooms-and-doors.md`)
 - `content/rooms/*.json` doors, areas and parts + `src/sim/systems/room-doors.ts` — rooms joined by walk and enter doors that carry any body, tiles that change while the game runs (`src/sim/room-state.ts`), working-part kinds declared by their system (`plate`, `gate`, `breakable`, `false-wall`, `hide`: `src/sim/systems/room-<kind>.ts`, shared helpers in `src/sim/room-parts.ts`, drawn by `src/client/draw/room-parts.ts`), and the checks and controls (`controls/rooms/`) that refuse a broken map (Step 3).

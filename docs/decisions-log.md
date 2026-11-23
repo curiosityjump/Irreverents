@@ -790,3 +790,10 @@ document as a decision of theirs.
 - **To change it:** `docs/verifying-and-finishing.md`, "The pre-push gate".
 - **Where:** that section.
 
+### 2026-11-23 · Guards and the camp fight on sight, the street villain excepted
+- **Decided by:** Step 12 slice B builder `session_017WiGzFLgKMowRCLNbRRYiE`, for the Step 12 lead `session_017WiGzJTXQVCWQYDDmC2UiY` (keyed by role and side at the lead's word)
+- **Instead of asking:** "Who fights whom when the town's people and the camp's meet, and does it upset anyone?"
+- **Why this way:** the owner wants the camp and the town to be one world (D-069) and enemies who fight. Guards against every bad-side person, so Step 16's new enemy kinds join in with no edit; not the street villain, whose robbing is the street's business as usual (D-049). Nobody's mood changes and nobody calls: a brawl between sides is their business as usual, and only a finished call raises the alert. A hero in sight comes first. In a meeting the one who closes first swings first.
+- **To change it:** `content/hostility.json` (a pair per line); the order of priorities is in `src/sim/systems/clash-fight.ts`.
+- **Where:** `docs/mechanisms/outposts.md`, "Chase and clash".
+

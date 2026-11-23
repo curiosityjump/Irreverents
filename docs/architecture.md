@@ -241,6 +241,7 @@ extends from its own file with `declare module '../types.ts' { … }`
 | **kind of scenario fact** | `src/scenarios/facts/<id>.ts` default-exporting a `Fact`. | One new file |
 | **event** | Extend `EventMap` beside the code that emits it; `ctx.emit('name', {...})`. | In your own file |
 | **outpost** (a hostile camp: a horn, waves) | `content/outposts/<id>.json` naming its room, the placed horn post (a body listing `body`, like `signal-post`), the placed people who may call, the wave `entry` tile, the `bound`, the times and the `waves` table; the people and post in `content/placements/<room>.json`. See "How to add an outpost" below and `docs/mechanisms/outposts.md`. | No |
+| **hostile pair** (two sets of people who fight on sight) | one entry in `content/hostility.json`'s `pairs`: `{ "a": { "role" and/or "side", "notRoles" }, "b": … }`, by `content/npcs/` role and side, so a new kind of the same side is covered with no edit; only bodies listing `attack` swing (`clash-fight`; `docs/mechanisms/outposts.md`, "Chase and clash"). | No |
 | **speech / an audience** (a body that talks on and on) | `content/audience/<id>.json`: `speaker` (a placed body's id), `startLine`, `opening` (lines said once), `lists` and `tail` (digressions that go round for ever). The check refuses a line that repeats within three hours or does not fit two rows of 28 letters. Format and slots: `docs/mechanisms/royal-audience.md`. | No |
 
 ## How to add an outpost (Step 12)

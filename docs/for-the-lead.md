@@ -155,3 +155,12 @@ actually read (questions for the owner go through
 **Note:** not verified: the `no-fit` refusal of a self-swap (no spot in the cantina where a body would not fit); a real iPhone; a real guard chase across two real pages (the real-server check stands a throwaway system in for the guard). The refusal sign was looked at by setting `c.doorRefused` by hand in a page.
 
 **Note:** the brief's effect `become { kind }` is `{ to, x, y }`: `kind` already names the effect.
+
+### step-12-b-chase-and-clash.md, 2026-11-23, push 3 (slice B builder session_017WiGzFLgKMowRCLNbRRYiE)
+
+**Push 3 landed without the guard's swing.** With `attack` in `guard.json`, three Step 4 scenarios go red only because a guard now hits the hero in its charge: `step4-guard-follows-seen` (the chase's door ticks and positions), `step4-standing-in-view-is-seen` (ts-guard at x 205.67 at tick 1000, expected 335-360), `step4-street-call` (street-guard at x 168 at tick 3600, expected 200-250). My two chase scenarios moved too (the hero knocked off the route); they are mine to re-time once guards swing. To add it: `"verbs": ["move", "attack"]` and attack numbers under `tuning.json` `characters.guard` (I used the fighter's: strength 9000, reach 12, time 0.8, wear 20, windup 0.25, strike 0.067, recovery 0.2). Watch: in an even meeting the faster fighter lands first and cuts the guard's wind-up off every time, so a guard may need a quicker wind-up to ever win.
+
+**Flag: `clash-cool` was not added; it would change nothing.** `alert-cool` already holds `quiet` at 0 whenever any conscious person of the area sees any hero, and a hit "in a guard's view" means the guard sees the hero. The brief's premise (a wanted hero brawling with bandits in view cools normally) does not hold, so `step12-hit-in-view-keeps-alert` was not written.
+
+**Flag:** the optional extra guards on the route (to make `step12-chase-cap` checkable) were not placed: no time.
+

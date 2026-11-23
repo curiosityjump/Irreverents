@@ -1,0 +1,16 @@
+{
+  "//": "DRAFT (Step 12 slice B): a plain doorless check room for sides that meet (content/placements/test-clash.json); no player reaches it.",
+  "id": "test-clash",
+  "name": "Test: clash",
+  "tile": 16,
+  "legend": { "#": "solid", ".": "empty", "1": "spawn" },
+  "rows": [
+    "####################",
+    "#..................#",
+    "#..................#",
+    "#..................#",
+    "#..................#",
+    "#.1................#",
+    "####################"
+  ]
+}

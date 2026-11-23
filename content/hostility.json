@@ -1,0 +1,6 @@
+{
+  "//": "DRAFT (Step 12 slice B, D-069): who fights whom on sight, wherever they meet (src/sim/systems/clash-fight.ts). Each pair is two sets of people, either way round; a set names a content/npcs/ role and/or side, and roles it leaves out. Tonight the town's guards against every bad-side person (the camp's, and Step 16's) except Step 4's street villain, whose robbing is the street's business as usual (D-049). A body swings only if its content/characters/ entry lists attack.",
+  "pairs": [
+    { "a": { "role": "guard" }, "b": { "side": "bad", "notRoles": ["villain"] } }
+  ]
+}
