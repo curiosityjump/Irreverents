@@ -58,7 +58,7 @@ no connector: any session can run `python3 -I tools/drive_sync.py` whenever
 it wants the latest art (ChatGPT itself only processes requests hourly, so
 that, not Vision Partner's check, is the real pace).
 
-### Handoff state (2026-11-23 ~13:30 UTC; picked up by session_017WiGzGHxdLq71CDUoQZz9Z, which runs its own hourly check)
+### Handoff state (2026-11-23 ~13:30 UTC; picked up by session_017WiGzGHxdLq71CDUoQZz9Z; its hourly self-check was refused by the permission check at 13:3x UTC, so Drive is checked only when the owner or a session wakes Vision Partner until the owner allows it)
 
 - The genesis Vision Partner's hourly Drive-check task (`trig_01B6h7mKw47J36oxJaxWf2NU`)
   was **disabled** at 09:52 UTC for the usage limit and stays off: it fires
