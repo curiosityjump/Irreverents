@@ -228,6 +228,14 @@ cantina hub and endless brawl, D-083–D-090).
 > World between and among level-regions is fully playable and secret-bearing, with interconnected exploration, not a static selector hub. …
 > The project owner specifically likes finding HIDDEN COMPONENTS that assemble into a final object whose identity is UNKNOWN to the player while collecting pieces.
 
+**Owner, 2026-11-23 ~18:10 UTC, after playing (relayed by the orchestrator):**
+> Big delay between swing and actual impact. Not finding clear "level entries" with discovered indicators etc
+
+*(Framing:)* both are gaps against what's already decided here and in the
+library (impact first; levels you can find, with completion shown), not
+new direction. Being fixed: instant hit on the hitter's screen; Step 14's
+level entrances with discovered indicators.
+
 Detail: docs 04, 29; level proposals 25, 28 (not canon).
 
 ### Combat impact and the Hall of Legends
