@@ -362,3 +362,27 @@ Shared by both briefs; a brief points here rather than repeating it.
   `docs/mechanisms/party-and-switching.md`. Taste list for the owner is
   in the first and in "Taste, for the owner in the morning" above.
 
+- **Lead, 09:20 UTC: the touch and both-screens checks reviewed at
+  306ed82; worker archived, brief deleted by it.** Re-run by the lead:
+  build, check, and the whole `npm run e2e` (13 new facts `t-*` / `s-*`
+  in `scripts/lib/e2e-touch.ts`, all ok); control: `E2E_TOUCH_BREAK=grab`
+  failed six of them. **Proven on two phone-sized pages by touch, read
+  from what each page drew:** grab a crate, carry, throw, hit a body
+  away, switch; grab a friend, the friend breaks free with Jump, grab
+  again and throw them; the second page sees each, and a thrown player
+  flies on their own page and walks again after. **Known gaps:**
+  (1) `switch` can land on a hero a friend is playing (printed `todo
+  (t-switch-free)` on every e2e run): the page decides the switch and
+  holds only its own character (`docs/mechanisms/network.md`, "Who owns
+  which part"); the fix is in the network layer, Step 5's now. (2) A
+  friend thrown out through a doorway vanishes from the thrower's
+  screen at once (they change room); a drawing question, not chased.
+  (3) "Hits a dummy" is proven as "hits a crate": the start room is the
+  throne room and has no dummy. **Not verified:** a real iPhone or
+  Safari; the live address (`check:live` does not run these facts);
+  feel. At the brief's commit nothing of the hit worked on the real
+  page; Step 1's 2a7fd98 fixed it, no Step 2 file changed.
+  **Left in this step:** the switch gap above; signal 6 as a script;
+  the `?tune` panel; `docs/architecture.md`'s "I need to add…" rows
+  re-read. All held by the orchestrator's lean rule.
+
