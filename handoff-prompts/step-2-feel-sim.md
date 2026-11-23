@@ -51,7 +51,7 @@ Before every code push: read `https://irreverents-production.up.railway.app/debu
 
 ## 7 · Done
 
-All `step2-feel-*` scenarios and every existing scenario pass on `main` and live; `npm run e2e` green; `docs/mechanisms/combat-and-impact.md` updated (new numbers, phases, exposed states); `docs/decisions-log.md` lines; a short "what to try, and which number changes it" list appended to `docs/plan/step-2.md`'s "Taste, for the owner in the morning". Push in small green pieces (movement first, then attack phases, then beat and bounce, then exposed states). SOP phase 6 rows: mechanism doc, decisions log. Delete this brief in your last commit.
+All `step2-feel-*` scenarios and every existing scenario pass on `main` and live; `npm run e2e` green; `docs/mechanisms/combat-and-impact.md` updated (new numbers, phases, exposed states); `docs/decisions-log.md` lines; a short "what to try, and which number changes it" list appended to `docs/plan/step-2.md`'s "Taste, for the owner in the morning". **At most two code pushes** (the orchestrator, 11:45 UTC: each restarts the world for players; a whole piece green each time, not a trickle): movement first, then attack phases, beat, bounce and exposed states together. Documents may push any time. SOP phase 6 rows: mechanism doc, decisions log. Delete this brief in your last commit.
 
 ## 8 · Questions
 

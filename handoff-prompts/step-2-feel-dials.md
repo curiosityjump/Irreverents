@@ -42,7 +42,7 @@ Before every code push: read `https://irreverents-production.up.railway.app/debu
 
 ## 7 · Done
 
-Panel live behind `?tune`, both effects proven on two pages, the e2e fact and its control in the commit message. A new mechanism doc `docs/mechanisms/tuning-panel.md` with its one-line index entry in `docs/mechanisms/README.md`. One line in `docs/plan/step-2.md` "Taste, for the owner in the morning" saying how to open it and how to send the numbers back. Delete this brief in your last commit.
+Panel live behind `?tune`, both effects proven on two pages, the e2e fact and its control in the commit message. A new mechanism doc `docs/mechanisms/tuning-panel.md` with its one-line index entry in `docs/mechanisms/README.md`. One line in `docs/plan/step-2.md` "Taste, for the owner in the morning" saying how to open it and how to send the numbers back. **At most two code pushes** (the orchestrator, 11:45 UTC: each restarts the world for players); one when the panel is whole and green is best. Documents may push any time. Delete this brief in your last commit.
 
 ## 8 · Questions
 
