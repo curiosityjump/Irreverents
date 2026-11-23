@@ -62,8 +62,14 @@ must poll through the gap (three minutes) before calling a push red.
   documents pushed in the first seconds after a new `railway.json` went
   live were still deployed; later ones were not. Test with a documents
   push made a minute after the config's own deploy is live.
-- **Whether the health check is honoured is not proven.** No build that
-  fails to start has been pushed to find out, deliberately.
+- **The health check does not protect a running game.** Whether Railway
+  honours it is not proven (no build that fails to start has been pushed
+  to find out, deliberately), and with the storage volume attached the
+  old server is stopped *before* the new one starts, so a build that
+  fails to start leaves nothing serving until a revert is live. The
+  protection is on our side: the built server is started once before
+  every code push (`docs/plan/step-1.md`, "What's decided"; Gate 2 puts
+  it inside `npm run check`).
 - **Railway's own documentation could not be opened from a session**
   (its hosts are outside the sandbox's network; 2026-11-23). The key
   names come from a web search's summary of that documentation, which

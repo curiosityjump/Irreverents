@@ -388,3 +388,18 @@ changed without touching code; don't grade the feel yourself.
   self-registering files and declaration merging: they are what lets
   Steps 2–4 add verbs, systems and content kinds without editing a
   common file. The live page is keyboard-only until Gate 2.
+
+- **Lead `session_017WiGzEwLs3ng2ZPpRZgctn`, 04:38 UTC: Gate 1 items 9–11
+  reviewed, Gate 1 brief closed and deleted.** The worker's proof is in
+  `docs/mechanisms/deploy.md`. Lead's own check: `npm run check:deployed`
+  exited 1 at 04:36 while Step 2's code push 99fb6f9 was still deploying
+  (it named the eight undeployed files), and exited 0 at 04:37 with
+  "main is 2 commit(s) ahead, all documents-only … which do not
+  redeploy": the running server (started 04:36:32) had not restarted for
+  those two pushes. Live `/healthz` shows the storage volume mounted,
+  writable, on its own device. Not verified: that Railway honours the
+  health check (deliberately untested; `deploy.md` says why it no longer
+  matters). Gate 2 brief extended from the plan review (upright play,
+  built server boots inside `npm run check`, player count in `/healthz`,
+  party seat on join, id kept on the device); anything that does not fit
+  06:30 UTC is to be written into `docs/plan/step-5.md` as owed.
