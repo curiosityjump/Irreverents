@@ -15,7 +15,7 @@ import { setUpTune, tuneWanted } from './tune.ts';
 import { takeWords } from './draw/fx.ts';
 import { drawnSignalers } from './draw/outpost.ts';
 import { drawnCantina } from './draw/cantina.ts';
-import { setUpMenu, showStart } from './start.ts';
+import { setUpMenu, showGone, showStart } from './start.ts';
 import type { StartRecord } from './start.ts';
 
 const content = __CONTENT__;
@@ -151,6 +151,8 @@ function play(worldName: string): void {
         })
         .catch(() => {});
     },
+    // Step 17: the server set this world aside; say why and offer the way back.
+    onGone: (why) => showGone({ content, why, tab: stored }),
   });
 
   const keys = watchKeyboard(content, window);
@@ -237,7 +239,7 @@ function play(worldName: string): void {
 
     const status = net.status();
     // DRAFT: the words. Shown only while not connected; the player can still move.
-    const text = status === 'online' ? '' : status === 'reconnecting' ? 'Reconnecting…' : 'Connecting…';
+    const text = status === 'online' || status === 'gone' ? '' : status === 'reconnecting' ? 'Reconnecting…' : 'Connecting…';
     if (statusText.textContent !== text) statusText.textContent = text;
     statusBox.hidden = text === '';
 

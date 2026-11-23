@@ -101,7 +101,7 @@ function words(content: Content, text: string, cssPerPixel: number): HTMLElement
 
 const CSS = `
 /* DRAFT (Step 17): the start screen and the in-play menu, in the surround's night ramp (index.html). Big tap targets: every choice is at least 52 px tall. */
-#start, #game-menu { position: fixed; inset: 0; z-index: 20; overflow-y: auto; touch-action: pan-y; -webkit-overflow-scrolling: touch;
+#start, #game-menu, #gone { position: fixed; inset: 0; z-index: 20; overflow-y: auto; touch-action: pan-y; -webkit-overflow-scrolling: touch;
   padding: max(12px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(12px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
   box-sizing: border-box; background: rgba(20, 18, 40, .96); display: flex; flex-direction: column; align-items: center; }
 #start[hidden], #game-menu[hidden], #menu-btn[hidden] { display: none; }
@@ -131,7 +131,9 @@ const CSS = `
 #menu-btn i { position: absolute; left: 13px; width: 18px; height: 2px; background: rgba(244, 241, 222, .7); box-shadow: 0 0 0 1px rgba(15, 15, 28, .55); }
 #menu-btn i:nth-child(1) { top: 15px; } #menu-btn i:nth-child(2) { top: 21px; } #menu-btn i:nth-child(3) { top: 27px; }
 #menu-btn:active { background: rgba(244, 241, 222, .2); }
-#game-menu { justify-content: center; }
+#game-menu, #gone { justify-content: center; }
+#gone .st-col { display: flex; flex-direction: column; gap: 14px; width: 100%; max-width: 330px; }
+#gone .st-say { font-size: 16px; line-height: 1.4; }
 #game-menu .st-col { display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 330px; align-items: stretch; }
 #game-menu .st-code { align-self: center; margin: 4px 0 8px; }
 `;
@@ -380,4 +382,30 @@ export function setUpMenu(opts: MenuOptions): void {
   panel.append(col);
   btn.addEventListener('click', () => (panel.hidden = false));
   document.body.append(btn, panel);
+}
+
+// ---- A world the server set aside ----------------------------------------
+
+/**
+ * The server set this page's world aside (it threw; src/server/game.ts,
+ * setAside) and the page has stopped reconnecting to it. INTENT: there is
+ * always a way out: the reason, and the way back to the start screen.
+ */
+export function showGone(opts: { content: Content; why: string; tab: Kept }): void {
+  styleOnce();
+  if (document.getElementById('gone')) return;
+  // A reload must not go straight back into the world that was set aside.
+  opts.tab.set(PLAYING_KEY, '');
+  const panel = el('div', { id: 'gone' });
+  const col = el('div', { class: 'st-col' });
+  const back = el('button', { type: 'button', class: 'st-btn', 'data-gone': 'back', 'aria-label': 'Back to the start screen' }, words(opts.content, 'Back to the start screen', 2));
+  back.addEventListener('click', () => {
+    location.href = location.pathname;
+  });
+  const lines = el('div', { class: 'st-say' });
+  // Plain text as well as pixels: the reason can be long, and it must be readable whole.
+  lines.textContent = opts.why || 'This world is not available right now.';
+  col.append(lines, back);
+  panel.append(col);
+  document.body.append(panel);
 }

@@ -44,7 +44,12 @@ with a throwaway entity kind on every `npm run check`).
   second, with the simulation's events since the last one), `fx` (an
   effect), `pong`; and page → server `ack`. Step 2 added `tune` (page →
   server, only from a `?tune` page) and `tuning` (server → page: the
-  world's tuning numbers); `docs/mechanisms/tuning-panel.md`. Measured with two players and
+  world's tuning numbers); `docs/mechanisms/tuning-panel.md`. Step 17
+  added `gone` (server → page: this world was set aside after it threw,
+  or is a kept game set aside earlier; the page stops reconnecting, its
+  status becomes `gone`, and it shows the reason and the way back to the
+  start screen; `docs/mechanisms/saves.md`, "A world that throws").
+  Measured with two players and
   the start room's placed bodies: a page sends about 10 kB/s and receives
   a few tens of kB/s (the e2e `rate` fact prints it). A page is sent every
   player, and everything else **in the content room its own character is

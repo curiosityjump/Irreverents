@@ -106,7 +106,7 @@ const server = http.createServer((req, res) => {
   // DRAFT: answers only that; anyone may ask (friends, no accounts).
   if (url.pathname.startsWith('/game/') && req.method === 'GET') {
     const code = url.pathname.slice('/game/'.length).toUpperCase();
-    send(res, 200, 'application/json', JSON.stringify({ code, valid: isGameCode(code), exists: !!game?.gameExists(code) }));
+    send(res, 200, 'application/json', JSON.stringify({ code, valid: isGameCode(code), exists: !!game?.gameExists(code), savedAt: game?.gameSavedAt(code) ?? null }));
     return;
   }
   if (url.pathname === '/debug/errors') {
@@ -170,10 +170,15 @@ game = attachGame(server, { content: __CONTENT__, commit, startedAt, store, prob
 // Step 17: a deploy stops this process (SIGTERM) before the new one starts:
 // every game being played is saved first, so nothing since the last
 // 30-second save is lost. Then the process ends as it would have.
+// INTENT: the signal must reach THIS process: package.json's start script
+// `exec`s node, so `npm start` -> sh -> node becomes npm -> node, and npm
+// passes SIGTERM on. Without `exec` the shell kept it and nothing was
+// saved (scripts/checks/step17-stop-save.ts proves it, and reads the line below).
 for (const signal of ['SIGTERM', 'SIGINT'] as const) {
   process.once(signal, () => {
     try {
-      game?.saveAll();
+      const n = game?.saveAll() ?? 0;
+      console.log(`irreverents stopping on ${signal}: saved ${n} kept game(s)`);
     } finally {
       process.exit(0);
     }

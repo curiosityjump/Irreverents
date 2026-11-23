@@ -64,7 +64,14 @@ export type ServerMessage =
    * content/tuning.json. Sent after `welcome` only when the world has been
    * tuned, and to every page in the world after each change.
    */
-  | { t: 'tuning'; diff: TuningDiff };
+  | { t: 'tuning'; diff: TuningDiff }
+  /**
+   * Step 17 (additive): this page's world was set aside after it threw
+   * (src/server/game.ts, setAside), or is a kept game set aside earlier.
+   * `why` is shown to the player. The page stops reconnecting to it and
+   * offers the way back to the start screen.
+   */
+  | { t: 'gone'; why: string };
 
 export function playerEntityId(player: string): string {
   return `p:${player}`;

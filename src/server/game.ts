@@ -52,6 +52,8 @@ export interface GameWorld {
   game?: string;
   /** Step 17: when this game was last saved (ms). */
   savedAt?: number;
+  /** Step 17 (hardening): set aside after a throw; never stepped, saved or joined again (see setAside). */
+  broken?: boolean;
 }
 
 export interface GameOptions {
@@ -94,14 +96,51 @@ export function attachGame(server: http.Server, opts: GameOptions) {
   const rules = tuningRules(content);
   const saves = opts.store ? createSaves(opts.store, { content, commit: opts.commit, problem: opts.problem ?? ((m) => console.error(`saves: ${m}`)) }) : null;
   const saveEveryMs = opts.saveEveryMs ?? SAVE_EVERY_MS;
+  const report = opts.problem ?? ((m: string) => console.error(`game: ${m}`));
   const saveGame = (gw: GameWorld): void => {
-    if (!saves || !gw.game) return;
+    // INTENT: a world set aside after a throw is never written over its save (see setAside).
+    if (!saves || !gw.game || gw.broken) return;
     saves.save(gw.game, gw.world);
     gw.savedAt = Date.now();
   };
 
   const send = (sock: WebSocket | null, m: ServerMessage | string): void => {
     if (sock && sock.readyState === sock.OPEN) sock.send(typeof m === 'string' ? m : JSON.stringify(m));
+  };
+
+  /** Step 17 (hardening): kept games set aside since this server started. Joining one is refused until a restart (a new build may run it). */
+  const setAsideGames = new Set<string>();
+  /** DRAFT: the words a player is shown when their world is set aside. */
+  const whyGone = (code: string | null | undefined): string =>
+    code ? 'This saved game could not run on this version. It was kept as it was.' : 'Something went wrong in this world, so it was started again.';
+  const tellGone = (sock: WebSocket | null, code: string | null | undefined): void => {
+    send(sock, { t: 'gone', why: whyGone(code) });
+    sock?.close(4002, 'set aside');
+  };
+  const describe = (err: unknown): string => {
+    const e = err instanceof Error ? err : new Error(String(err));
+    const at = (e.stack ?? '').split('\n').find((l) => l.trim().startsWith('at '))?.trim() ?? '';
+    return `${e.name}: ${e.message}${at ? ` (${at})` : ''}`;
+  };
+  /**
+   * INTENT: nothing one world does may take the server down: a throw while
+   * stepping it or handling one of its messages sets THAT world aside (a
+   * save from an older build whose bodies lack a field a later system
+   * reads did exactly this, and took `main` down with it, again on every
+   * reconnect). Said once in /debug/errors (no code, no name: errors.ts's
+   * rule); its players are told and sent back to the start screen, never
+   * left reconnecting into it; a kept game is never written over its save
+   * and is not loaded again until the server restarts. `main` or a `?room=`
+   * world starts fresh at the next join.
+   */
+  const setAside = (gw: GameWorld, err: unknown, during: string): void => {
+    if (gw.broken) return;
+    gw.broken = true;
+    if (gw.game) setAsideGames.add(gw.game);
+    const what = gw.game ? 'a kept game' : gw.name === DEFAULT_WORLD ? "everyone's kingdom" : 'a private world';
+    report(`${what} was set aside (its players sent to the start screen${gw.game ? ', its save left as it was' : ''}) after ${during} threw: ${describe(err)}`);
+    for (const p of gw.players.values()) tellGone(p.sock, gw.game);
+    if (worlds.get(gw.name) === gw) worlds.delete(gw.name);
   };
 
   /**
@@ -194,9 +233,15 @@ export function attachGame(server: http.Server, opts: GameOptions) {
     return true;
   };
 
+  const worldNameOf = (m: { world?: unknown }): string => (typeof m.world === 'string' && m.world.length > 0 ? m.world.slice(0, 64) : DEFAULT_WORLD);
   const join = (sock: WebSocket, m: Extract<ClientMessage, { t: 'join' }>): { gw: GameWorld; p: Player } | null => {
     if (typeof m.player !== 'string' || m.player.length < 1 || m.player.length > 64) return null;
-    const name = typeof m.world === 'string' && m.world.length > 0 ? m.world.slice(0, 64) : DEFAULT_WORLD;
+    const name = worldNameOf(m);
+    const code = gameCode(name);
+    if (code && setAsideGames.has(code)) {
+      tellGone(sock, code);
+      return null;
+    }
     let gw = worlds.get(name);
     if (!gw) worlds.set(name, (gw = makeWorld(name)));
     let p = gw.players.get(m.player);
@@ -266,6 +311,23 @@ export function attachGame(server: http.Server, opts: GameOptions) {
         return;
       }
       if (!m || typeof m !== 'object') return;
+      // INTENT: a throw here would end the process (see setAside).
+      try {
+        handle(m);
+      } catch (err) {
+        const gw = here?.gw ?? (m.t === 'join' ? worlds.get(worldNameOf(m)) : undefined);
+        if (gw) setAside(gw, err, `a ${String(m.t).slice(0, 12)} message`);
+        else {
+          // A world that threw while being made (a save that cannot even be loaded).
+          const code = m.t === 'join' ? gameCode(worldNameOf(m)) : null;
+          if (code) setAsideGames.add(code);
+          report(`${code ? 'a kept game' : 'a world'} could not be made${code ? ' (its save left as it was)' : ''}: ${describe(err)}`);
+          tellGone(sock, code);
+        }
+        here = null;
+      }
+    });
+    const handle = (m: ClientMessage): void => {
       if (m.t === 'ping') return send(sock, { t: 'pong', n: m.n });
       if (m.t === 'join') {
         here = join(sock, m);
@@ -290,7 +352,7 @@ export function attachGame(server: http.Server, opts: GameOptions) {
         here = null;
         sock.close(1000, 'bye');
       }
-    });
+    };
     const gone = (): void => {
       if (!here || here.p.sock !== sock) return;
       here.p.sock = null;
@@ -377,10 +439,22 @@ export function attachGame(server: http.Server, opts: GameOptions) {
     const snap = now - lastSnap >= 1000 / net.snapshotRate - 2;
     if (snap) lastSnap = now;
     for (const gw of [...worlds.values()]) {
+      // INTENT: one world's throw never stops the others or the server (see setAside).
+      try {
+        stepAndSend(gw, now, elapsed, snap);
+      } catch (err) {
+        setAside(gw, err, 'a tick');
+      }
+    }
+  }, 1000 / 120);
+
+  /** One world's share of a timer beat: forget stale players, save, step, send. */
+  function stepAndSend(gw: GameWorld, now: number, elapsed: number, snap: boolean): void {
+    {
       for (const p of [...gw.players.values()]) {
         if (!p.sock && p.staleAt !== null && now >= p.staleAt) removePlayer(gw, p);
       }
-      if (!worlds.has(gw.name)) continue;
+      if (!worlds.has(gw.name)) return;
       // DRAFT (Step 17): a kept game is saved every saveEveryMs while anyone is in it.
       if (gw.game && gw.players.size > 0 && now - (gw.savedAt ?? 0) >= saveEveryMs) saveGame(gw);
       gw.owed += elapsed;
@@ -388,7 +462,7 @@ export function attachGame(server: http.Server, opts: GameOptions) {
         tickWorld(gw, now);
         gw.owed -= DT;
       }
-      if (!snap) continue;
+      if (!snap) return;
       const stamps: Record<string, number> = {};
       for (const p of gw.players.values()) stamps[playerEntityId(p.id)] = p.ct;
       // DRAFT: a page is sent every player (wherever they are, so friends can
@@ -408,7 +482,7 @@ export function attachGame(server: http.Server, opts: GameOptions) {
       }
       gw.events = [];
     }
-  }, 1000 / 120);
+  }
 
   return {
     /** The live worlds by name. For /healthz counts and the in-process check; treat as read-only elsewhere. */
@@ -423,10 +497,18 @@ export function attachGame(server: http.Server, opts: GameOptions) {
       };
     },
     /** Step 17: whether a kept game with this code exists (being played now, or saved). */
+    /** Step 17: when the kept game's save was last written (ISO time), or null. For GET /game/<CODE>: how a session proves the save at a deploy ran. */
+    gameSavedAt: (code: string): string | null => (isGameCode(code) && saves ? saves.savedAt(code) : null),
     gameExists: (code: string): boolean => isGameCode(code) && (worlds.has(GAME_PREFIX + code) || !!saves?.has(code)),
     /** Step 17: save every kept game being played now (the server is being stopped). */
-    saveAll: (): void => {
-      for (const gw of worlds.values()) if (gw.game) saveGame(gw);
+    saveAll: (): number => {
+      let n = 0;
+      for (const gw of worlds.values()) {
+        if (!gw.game || gw.broken) continue;
+        saveGame(gw);
+        n++;
+      }
+      return n;
     },
     close(): void {
       clearInterval(timer);

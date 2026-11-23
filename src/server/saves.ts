@@ -45,6 +45,8 @@ const collectionName = (code: string): string => `save-${code.toLowerCase()}`;
 export interface Saves {
   /** Whether a game with this code has a save. */
   has(code: string): boolean;
+  /** When the game's save was written (ISO time), or null when it has none. */
+  savedAt(code: string): string | null;
   /**
    * The saved world of a game, fitted to this build's content (with the
    * rooms the save never knew, to be populated as new), or null when
@@ -66,6 +68,12 @@ export interface SavesOptions {
 export function createSaves(store: Store, opts: SavesOptions): Saves {
   const { content } = opts;
   return {
+    savedAt(code) {
+      if (!isGameCode(code)) return null;
+      const records = store.collection<SaveRecord>(collectionName(code)).all();
+      const at = records[records.length - 1]?.savedAt;
+      return typeof at === 'string' ? at : null;
+    },
     has(code) {
       if (!isGameCode(code)) return false;
       return store.collection<SaveRecord>(collectionName(code)).all().length > 0;

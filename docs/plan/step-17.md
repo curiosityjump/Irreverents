@@ -118,3 +118,11 @@ Step 17 builder `session_017WiGzGw7XaQ6tZNddFaa8s`, 2026-11-23.
   the menu is unreachable there until the panel is moved. Dev page only.
 - `start-back.png` in `e2e-out/` can catch the plain-text fallback for a
   moment after the reload, before the font image loads; intended fallback.
+- **Hardening push A** (`handoff-prompts/step-17-saves-hardening.md`).
+  Not settled: Railway's time between SIGTERM and SIGKILL. railway.com and
+  docs.railway.com do not resolve from the builder's container, so the
+  draining key was not verified and nothing unverified went into
+  `railway.json`; asked the orchestrator. The stop-save is measured on live
+  after the push through `GET /game/<CODE>` `savedAt`.
+- The set-aside report carries the throw's first stack line, a path inside
+  the built server (`dist/server.cjs:<line>`): code, not personal data.

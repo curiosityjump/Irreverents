@@ -72,6 +72,12 @@ words.
 **A Hall pedestal's card has no button to open or close it, and no way to keep it open.**
 → Intended. Standing at a pedestal shows its card; walking away hides it. On an iPhone that costs no extra control (iPhone first, D-093), and it is the "always a way out" principle: the card takes no input, holds nobody and covers only the top half of the screen. The new-legend banner is the same: it goes by itself after three seconds and stops nothing. Decided by the Step 7 lead, 2026-11-23 (`docs/decisions-log.md`, "You read a pedestal by walking up to it"); the owner may overrule. `INTENT:` at `drawHall` in `src/client/draw/hall.ts`.
 
+**The start script says `exec node dist/server.cjs`, and the server prints how many games it saved as it stops.**
+→ Intended (Step 17, 2026-11-23). Railway stops the old server with SIGTERM at every deploy, and the server saves every game being played when it gets it. Railway starts `npm start`; without `exec` the shell between npm and node kept the signal and nothing was saved. The line it prints is what `scripts/checks/step17-stop-save.ts` reads. `INTENT:` in `src/server/main.ts`. Don't drop the `exec`.
+
+**When one world throws, the server sets it aside and tells its players to go back to the start screen, and refuses that saved game until the next restart.**
+→ Intended (Step 17, 2026-11-23). A save from an older build crashed the whole server, `main` included, again on every reconnect. One world's trouble must never take the others down, and a game that cannot run must never be written over its own save. `INTENT:` at `setAside` in `src/server/game.ts`.
+
 ---
 
 ## Where these live in the code

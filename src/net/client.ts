@@ -36,9 +36,12 @@ export interface NetClientOptions {
   connect(handlers: TransportHandlers): Transport;
   /** Called on every (re)join with the commit the server runs. */
   onWelcome?(commit: string): void;
+  /** Step 17: the server set this world aside (`why` is for the player). The client has stopped reconnecting. */
+  onGone?(why: string): void;
 }
 
-export type NetStatus = 'connecting' | 'online' | 'reconnecting';
+/** `gone` (Step 17, additive): the server set this world aside; nothing reconnects. */
+export type NetStatus = 'connecting' | 'online' | 'reconnecting' | 'gone';
 
 export function createNetClient(opts: NetClientOptions) {
   const { content, player, now } = opts;
@@ -77,6 +80,8 @@ export function createNetClient(opts: NetClientOptions) {
   let last = now();
   let owed = 0;
   let left = false;
+  /** Step 17: the server said this world is gone; no reconnecting to it, not even on kick(). */
+  let gone = false;
   let latest: { tick: number; events: SimEvent[] } = { tick: 0, events: [] };
   /** The newest effect applied; effect ids only ever grow, so a resent copy is recognised. */
   let lastFx = 0;
@@ -136,6 +141,16 @@ export function createNetClient(opts: NetClientOptions) {
     lastHeard = now();
     stats.msgsIn++;
     stats.bytesIn += text.length;
+    if (m.t === 'gone') {
+      // INTENT: the server set this world aside. Retrying would only meet the
+      // same refusal, so the page stops here and shows the way out (onGone).
+      gone = true;
+      left = true;
+      drop();
+      status = 'gone';
+      opts.onGone?.(typeof m.why === 'string' ? m.why : '');
+      return;
+    }
     if (m.t === 'welcome') {
       if (looksLikeEntity(m.e)) {
         const mine = me();
@@ -288,6 +303,7 @@ export function createNetClient(opts: NetClientOptions) {
     },
     /** Drop the socket (if any) and try again at once: the page became visible, the network changed. */
     kick(): void {
+      if (gone) return;
       left = false;
       backoff = net.reconnectFirstMs;
       drop();
@@ -306,6 +322,10 @@ export function createNetClient(opts: NetClientOptions) {
       for (const c of changes) applyChange(content.tuning, shipped, c);
       stats.tunesOut++;
       send({ t: 'tune', changes, reset });
+    },
+    /** Step 17: whether the server set this world aside (and the client stopped reconnecting). */
+    isGone(): boolean {
+      return gone;
     },
     /** Leave on purpose: the character is removed from the world at once. */
     leave(): void {

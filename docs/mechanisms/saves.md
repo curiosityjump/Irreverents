@@ -42,7 +42,7 @@ use. A game is a world like any other on the server (`docs/mechanisms/network.md
   state of a room that is gone. The drop is said once per load, as a
   `server` line in `GET /debug/errors` (no code in it: no personal data).
   A player character in an old record is never loaded.
-- **Does it exist?** `GET /game/<CODE>` answers `{ code, valid, exists }`
+- **Does it exist?** `GET /game/<CODE>` answers `{ code, valid, exists, savedAt }`
   (the code upper-cased): `exists` is true while it is being played or when
   it has a save. For the start screen's "Join a friend".
 - **`/healthz` `store`** is `store.status()`: whether records last, where,
@@ -52,6 +52,63 @@ use. A game is a world like any other on the server (`docs/mechanisms/network.md
   "Lasting records: the store"): on the Railway volume when
   `storage.mounted`, else in memory (a local `npm run dev` keeps games until
   it stops).
+
+## A world that throws (`setAside`, `src/server/game.ts`)
+
+A save from an older build can lack a field a later system reads (the
+review's case: an NPC's `c.npc` with no `offenders`, which `npc-setup`
+never fills in because `c.npc` is there). That threw in `npc-mood` on the
+first tick and, with nothing to catch it in the server's timer, ended the
+process, `main` included, again at every reconnect. Now (`INTENT:`):
+
+- Each world's beat (forget stale players, save, step, send) and each
+  message's handling are wrapped. A throw sets **that world** aside: one
+  `server` line in `/debug/errors` (what kind of world, what threw and
+  where; no code or name), its players are sent `gone` and their sockets
+  closed, and it leaves the live worlds.
+- A **kept game** set aside is never saved again (`saveGame` and `saveAll`
+  skip it) and joining it is refused with `gone` until the server restarts,
+  when a new build may run it. A game whose save throws while being *made*
+  is treated the same way.
+- **`main` or a `?room=` world** set aside starts fresh at the next join.
+- The page (`src/net/client.ts`, `onGone`): status `gone`, no more
+  reconnecting (not even on a wake or a network change), and
+  `showGone` in `src/client/start.ts` shows the reason with **Back to the
+  start screen** (`INTENT:` the way out). The tab forgets it was playing
+  that world, so a reload shows the start screen.
+- This contains the crash; it does not make an old save run. Making later
+  builds keep old saves working is the hardening brief's push B.
+
+Proof: `scripts/checks/step17-set-aside.ts` (about 2 s; harness in
+`scripts/lib/save-harness.ts`). A real game is saved, made "old" by
+deleting one NPC's `offenders`, and joined on a new server while someone is
+in `main`: the player is told and stops reconnecting; one report, without
+the code; the save is unchanged byte for byte, also after a second join and
+after `saveAll`; `main` keeps ticking and takes a new player. Control
+watched to fail (2026-11-23): the timer's try/catch removed, the check
+process died with the review's `TypeError: n.offenders is not iterable`.
+
+## At a deploy (SIGTERM)
+
+Railway stops the old server with SIGTERM and starts `npm start`. npm runs
+a script through `sh -c`, and the shell (dash) does not pass the signal
+on, so with `"start": "node dist/server.cjs"` node never heard it and no
+game was saved. The start script is now `exec node dist/server.cjs`
+(`INTENT:`): npm → node, and npm forwards SIGTERM. The server prints
+`irreverents stopping on SIGTERM: saved N kept game(s)`.
+`GET /game/<CODE>` also answers `savedAt`, which is how to see on live that
+the stop-save ran (it falls just before the new server's `startedAt`).
+
+Proof: `scripts/checks/step17-stop-save.ts` (under 1 s): `npm start` in its
+own process group, one player in a kept game, SIGTERM to npm, and the line
+must say 1 game saved. Control watched to fail (2026-11-23): without `exec`
+the line never came, npm exited and node was left running.
+
+Not settled: Railway's time between SIGTERM and SIGKILL (said to default
+to 0 s). The save is synchronous and takes milliseconds, so it may finish
+anyway; the live `savedAt` measurement says. If it does not, a draining
+window must be set in Railway (key not verified from here; see Builder
+notes in `docs/plan/step-17.md`).
 
 ## What a save does not keep (`DRAFT:`, the owner decides by playing)
 

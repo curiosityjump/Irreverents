@@ -9,7 +9,7 @@
     "build": "node scripts/build.ts",
     "check": "node scripts/check.ts",
     "gates": "node scripts/gates.ts",
-    "start": "node dist/server.cjs",
+    "start": "exec node dist/server.cjs",
     "dev": "node scripts/dev.ts",
     "e2e": "NODE_PATH=/opt/node-tools/node_modules node scripts/e2e.ts",
     "check:live": "NODE_PATH=/opt/node-tools/node_modules node scripts/e2e.ts --live",
