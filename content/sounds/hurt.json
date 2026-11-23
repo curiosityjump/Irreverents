@@ -1,0 +1,10 @@
+{
+  "id": "hurt",
+  "files": [
+    "audio/hurt.wav"
+  ],
+  "volume": 0.6,
+  "pitch": 0.03,
+  "gapMs": 150,
+  "distance": false
+}

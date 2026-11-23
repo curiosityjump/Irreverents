@@ -1,0 +1,10 @@
+{
+  "id": "flap",
+  "files": [
+    "audio/jump.wav"
+  ],
+  "volume": 0.28,
+  "pitch": 0.06,
+  "gapMs": 60,
+  "rate": 1.3
+}

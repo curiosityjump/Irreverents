@@ -1,0 +1,24 @@
+{
+  "id": "tune-outdoors",
+  "rooms": ["castle-street", "courtyard"],
+  "bpm": 126,
+  "stepsPerBeat": 2,
+  "volume": 0.5,
+  "tracks": [
+    {
+      "wave": "square",
+      "volume": 0.32,
+      "notes": "E5 - G5 - E5 D5 C5 - | A4 - C5 - E5 - D5 - | F5 - E5 D5 C5 - A4 - | G4 - B4 D5 G5 - - - | E5 - G5 - A5 G5 E5 - | C5 - E5 - A5 - G5 - | F5 E5 D5 - D5 - B4 - | C5 - - - . . . ."
+    },
+    {
+      "wave": "triangle",
+      "volume": 0.8,
+      "notes": "C3 - - - G3 - - - | A2 - - - E3 - - - | F2 - - - C3 - - - | G2 - - - D3 - - - | C3 - - - G3 - - - | A2 - - - E3 - - - | F2 - - - G2 - - - | C3 - - - C3 - . ."
+    },
+    {
+      "wave": "noise",
+      "volume": 0.18,
+      "notes": "x . o . . . o . | x . o . . . o . | x . o . . . o . | x . o . x . o . | x . o . . . o . | x . o . . . o . | x . o . x . o . | x . o . . . . ."
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "id": "grab",
+  "files": [
+    "audio/grab.wav"
+  ],
+  "volume": 0.5,
+  "pitch": 0.04,
+  "gapMs": 60
+}

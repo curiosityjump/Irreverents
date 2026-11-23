@@ -1,0 +1,11 @@
+{
+  "id": "impact",
+  "files": [
+    "audio/land.wav"
+  ],
+  "volume": 0.45,
+  "pitch": 0.08,
+  "gapMs": 50,
+  "range": 300,
+  "rate": 0.85
+}

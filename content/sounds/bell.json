@@ -1,0 +1,11 @@
+{
+  "id": "bell",
+  "files": [
+    "audio/bell_clang.wav"
+  ],
+  "volume": 0.8,
+  "pitch": 0,
+  "gapMs": 400,
+  "distance": false,
+  "otherRooms": true
+}

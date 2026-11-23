@@ -1,0 +1,10 @@
+{
+  "id": "footstep",
+  "files": [
+    "audio/footstep.wav"
+  ],
+  "volume": 0.22,
+  "pitch": 0.08,
+  "gapMs": 90,
+  "range": 180
+}

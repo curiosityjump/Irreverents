@@ -1,0 +1,11 @@
+{
+  "id": "plate-up",
+  "files": [
+    "audio/menu_open.wav"
+  ],
+  "volume": 0.3,
+  "pitch": 0,
+  "gapMs": 120,
+  "range": 300,
+  "rate": 0.9
+}

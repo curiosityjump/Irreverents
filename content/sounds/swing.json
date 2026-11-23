@@ -1,0 +1,9 @@
+{
+  "id": "swing",
+  "files": [
+    "audio/swing.wav"
+  ],
+  "volume": 0.4,
+  "pitch": 0.06,
+  "gapMs": 60
+}

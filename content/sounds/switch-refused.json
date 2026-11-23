@@ -1,0 +1,11 @@
+{
+  "id": "switch-refused",
+  "files": [
+    "audio/menu_close.wav"
+  ],
+  "volume": 0.35,
+  "pitch": 0,
+  "gapMs": 200,
+  "distance": false,
+  "rate": 0.8
+}

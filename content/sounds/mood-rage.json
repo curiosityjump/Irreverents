@@ -1,0 +1,10 @@
+{
+  "id": "mood-rage",
+  "files": [
+    "audio/mode3_rage_buzz.wav"
+  ],
+  "volume": 0.55,
+  "pitch": 0.04,
+  "gapMs": 120,
+  "range": 360
+}

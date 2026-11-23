@@ -1,0 +1,11 @@
+{
+  "id": "break-window",
+  "files": [
+    "audio/break_crack.wav"
+  ],
+  "volume": 0.9,
+  "pitch": 0.02,
+  "gapMs": 200,
+  "range": 600,
+  "rate": 1.15
+}

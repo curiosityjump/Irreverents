@@ -1,0 +1,11 @@
+{
+  "id": "gate-open",
+  "files": [
+    "audio/door_open.wav"
+  ],
+  "volume": 0.6,
+  "pitch": 0,
+  "gapMs": 200,
+  "range": 480,
+  "rate": 0.75
+}

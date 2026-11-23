@@ -1,0 +1,13 @@
+{
+  "id": "voice",
+  "files": [
+    "audio/gibberish_voice_blip_1.wav",
+    "audio/gibberish_voice_blip_2.wav",
+    "audio/gibberish_voice_blip_3.wav",
+    "audio/gibberish_voice_blip_4.wav"
+  ],
+  "volume": 0.28,
+  "pitch": 0.1,
+  "gapMs": 70,
+  "range": 300
+}

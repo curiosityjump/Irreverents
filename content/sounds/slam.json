@@ -1,0 +1,11 @@
+{
+  "id": "slam",
+  "files": [
+    "audio/suplex_slam.wav"
+  ],
+  "volume": 1,
+  "pitch": 0.03,
+  "gapMs": 120,
+  "range": 600,
+  "minSpeed": 420
+}

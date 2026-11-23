@@ -1,0 +1,10 @@
+{
+  "id": "switch",
+  "files": [
+    "audio/party_swap.wav"
+  ],
+  "volume": 0.5,
+  "pitch": 0,
+  "gapMs": 100,
+  "distance": false
+}

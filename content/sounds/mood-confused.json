@@ -1,0 +1,10 @@
+{
+  "id": "mood-confused",
+  "files": [
+    "audio/mode2_confused_warble.wav"
+  ],
+  "volume": 0.5,
+  "pitch": 0.04,
+  "gapMs": 120,
+  "range": 320
+}

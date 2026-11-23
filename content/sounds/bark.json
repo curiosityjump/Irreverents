@@ -1,0 +1,13 @@
+{
+  "id": "bark",
+  "files": [
+    "audio/gibberish_voice_blip_1.wav",
+    "audio/gibberish_voice_blip_2.wav",
+    "audio/gibberish_voice_blip_3.wav",
+    "audio/gibberish_voice_blip_4.wav"
+  ],
+  "volume": 0.3,
+  "pitch": 0.14,
+  "gapMs": 70,
+  "range": 280
+}

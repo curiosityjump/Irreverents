@@ -1,0 +1,24 @@
+{
+  "id": "tune-castle",
+  "rooms": ["throne-room", "hall-gallery", "undercroft", "graybox-hall"],
+  "bpm": 92,
+  "stepsPerBeat": 2,
+  "volume": 0.5,
+  "tracks": [
+    {
+      "wave": "triangle",
+      "volume": 0.75,
+      "notes": "A4 - - - C5 - A4 - | G4 - - - E4 - G4 - | F4 - A4 - D5 - - - | D5 - C5 - Bb4 - - - | A4 - C5 - F5 - - - | E5 - D5 - C5 - - - | Bb4 - D5 - C5 - E4 - | F4 - - - - - . ."
+    },
+    {
+      "wave": "square",
+      "volume": 0.16,
+      "notes": "F2 - C3 - F2 - C3 - | C2 - G2 - C2 - G2 - | D2 - A2 - D2 - A2 - | Bb1 - F2 - Bb1 - F2 - | F2 - C3 - F2 - C3 - | C2 - G2 - C2 - G2 - | Bb1 - F2 - C2 - G2 - | F2 - C3 - F2 - - -"
+    },
+    {
+      "wave": "noise",
+      "volume": 0.1,
+      "notes": "x . . . o . . . | x . . . o . . . | x . . . o . . . | x . . . o . . . | x . . . o . . . | x . . . o . . . | x . . . o . . . | x . . . o . . ."
+    }
+  ]
+}

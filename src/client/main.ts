@@ -11,6 +11,7 @@ import { report } from './report.ts';
 import type { Drawn } from './draw/entities.ts';
 import { isTouchDevice, setUpShell } from './shell.ts';
 import { watchTouch } from './touch.ts';
+import { createAudio } from './audio/index.ts'; // audio hook (Step 8)
 
 const content = __CONTENT__;
 const canvas = document.getElementById('game') as HTMLCanvasElement;
@@ -167,6 +168,7 @@ const debug = {
   },
 };
 (window as unknown as { irreverents: unknown }).irreverents = debug;
+const audio = createAudio(content, player); // audio hook (Step 8)
 
 /** DRAFT: how long without a connection before the page reports it. */
 const SOCKET_REPORT_MS = 20000;
@@ -174,13 +176,14 @@ let offlineSince: number | null = null;
 let offlineReported = false;
 let frameNo = 0;
 function frame(): void {
-  net.update(readInput());
+  const simEvents = net.update(readInput()); // audio hook (Step 8)
   const me = net.me();
   // What this player sees: everyone else as received, their own character
   // last (drawn on top), on this page's clock.
   const seen: Drawn[] = [];
   const camera = render(g, { ...net.world, entities: [...net.others(), me] }, content, me.room, { me: me.id, frame: frameNo, drawn: seen });
   const result = { camera, drawn: seen };
+  audio.frame(simEvents, net.latest(), me, net.others()); // audio hook (Step 8)
 
   const status = net.status();
   // DRAFT: the words. Shown only while not connected; the player can still move.

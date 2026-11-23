@@ -1,0 +1,10 @@
+{
+  "id": "land",
+  "files": [
+    "audio/land.wav"
+  ],
+  "volume": 0.35,
+  "pitch": 0.06,
+  "gapMs": 80,
+  "range": 200
+}

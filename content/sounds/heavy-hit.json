@@ -1,0 +1,11 @@
+{
+  "id": "heavy-hit",
+  "files": [
+    "audio/heavy_hit.wav"
+  ],
+  "volume": 0.8,
+  "pitch": 0.05,
+  "gapMs": 60,
+  "range": 420,
+  "minSpeed": 260
+}

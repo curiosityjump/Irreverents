@@ -1,0 +1,10 @@
+{
+  "id": "call-windup",
+  "files": [
+    "audio/call_windup.wav"
+  ],
+  "volume": 0.55,
+  "pitch": 0,
+  "gapMs": 600,
+  "range": 400
+}

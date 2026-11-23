@@ -1,0 +1,11 @@
+{
+  "id": "alarm-rising",
+  "files": [
+    "audio/horn_blast.wav"
+  ],
+  "volume": 0.75,
+  "pitch": 0,
+  "gapMs": 800,
+  "distance": false,
+  "otherRooms": true
+}

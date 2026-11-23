@@ -1,0 +1,10 @@
+{
+  "id": "hit",
+  "files": [
+    "audio/hit.wav"
+  ],
+  "volume": 0.6,
+  "pitch": 0.05,
+  "gapMs": 40,
+  "range": 320
+}

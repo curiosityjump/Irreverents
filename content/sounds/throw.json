@@ -1,0 +1,9 @@
+{
+  "id": "throw",
+  "files": [
+    "audio/throw.wav"
+  ],
+  "volume": 0.55,
+  "pitch": 0.05,
+  "gapMs": 60
+}

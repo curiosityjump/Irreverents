@@ -1,0 +1,9 @@
+{
+  "id": "jump",
+  "files": [
+    "audio/jump.wav"
+  ],
+  "volume": 0.4,
+  "pitch": 0.04,
+  "gapMs": 60
+}

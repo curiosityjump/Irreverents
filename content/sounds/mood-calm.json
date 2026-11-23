@@ -1,0 +1,10 @@
+{
+  "id": "mood-calm",
+  "files": [
+    "audio/mode1_happy_blip.wav"
+  ],
+  "volume": 0.35,
+  "pitch": 0.05,
+  "gapMs": 120,
+  "range": 260
+}

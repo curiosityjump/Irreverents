@@ -1,0 +1,10 @@
+{
+  "id": "break-wall",
+  "files": [
+    "audio/crumble.wav"
+  ],
+  "volume": 0.9,
+  "pitch": 0.03,
+  "gapMs": 200,
+  "range": 600
+}

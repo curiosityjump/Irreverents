@@ -1,0 +1,10 @@
+{
+  "id": "door",
+  "files": [
+    "audio/door_open.wav"
+  ],
+  "volume": 0.4,
+  "pitch": 0.05,
+  "gapMs": 200,
+  "range": 300
+}

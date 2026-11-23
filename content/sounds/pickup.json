@@ -1,0 +1,9 @@
+{
+  "id": "pickup",
+  "files": [
+    "audio/pickup.wav"
+  ],
+  "volume": 0.45,
+  "pitch": 0.04,
+  "gapMs": 60
+}

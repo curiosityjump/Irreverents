@@ -1,0 +1,11 @@
+{
+  "id": "grab-refused",
+  "files": [
+    "audio/door_locked.wav"
+  ],
+  "volume": 0.35,
+  "pitch": 0.03,
+  "gapMs": 250,
+  "range": 200,
+  "rate": 1.2
+}

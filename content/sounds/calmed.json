@@ -1,0 +1,10 @@
+{
+  "id": "calmed",
+  "files": [
+    "audio/just_as_expected_jingle.wav"
+  ],
+  "volume": 0.55,
+  "pitch": 0,
+  "gapMs": 1500,
+  "range": 360
+}

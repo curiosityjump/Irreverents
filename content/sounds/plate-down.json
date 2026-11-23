@@ -1,0 +1,10 @@
+{
+  "id": "plate-down",
+  "files": [
+    "audio/menu_close.wav"
+  ],
+  "volume": 0.4,
+  "pitch": 0,
+  "gapMs": 120,
+  "range": 300
+}
