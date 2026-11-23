@@ -22,19 +22,30 @@ const startedAt = new Date().toISOString();
  * path sits on a different device than "/". A variable typed in by hand
  * (`variableSet` true, `mounted` false) must not read as storage: files
  * written there would vanish on the next deploy.
+ * The raw facts are each their own field too (variableSet + path, nameSet +
+ * name, writable, differentDevice), so a reader can judge for themselves.
  * INTENT: report only. Nothing is stored yet; Step 7's Hall records are the
  * first user.
  */
-function storageStatus(): { mounted: boolean; writable: boolean; variableSet: boolean; path: string | null; name: string | null } {
+function storageStatus(): {
+  mounted: boolean;
+  writable: boolean;
+  variableSet: boolean;
+  path: string | null;
+  nameSet: boolean;
+  name: string | null;
+  differentDevice: boolean;
+} {
   const dir = process.env.RAILWAY_VOLUME_MOUNT_PATH || null;
   const name = process.env.RAILWAY_VOLUME_NAME || null;
-  const status = { mounted: false, writable: false, variableSet: dir !== null, path: dir, name };
+  const status = { mounted: false, writable: false, variableSet: dir !== null, path: dir, nameSet: name !== null, name, differentDevice: false };
   if (!dir) return status;
   try {
-    status.mounted = name !== null && fs.statSync(dir).dev !== fs.statSync('/').dev;
+    status.differentDevice = fs.statSync(dir).dev !== fs.statSync('/').dev;
   } catch {
-    status.mounted = false;
+    status.differentDevice = false;
   }
+  status.mounted = status.nameSet && status.differentDevice;
   try {
     const probe = path.join(dir, `.write-check-${process.pid}`);
     fs.writeFileSync(probe, startedAt);

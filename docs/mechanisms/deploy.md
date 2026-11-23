@@ -29,7 +29,8 @@ evidence of what happened.
   `mounted` is true only for a real Railway volume (both of Railway's own
   variables set and the path on a different device than `/`);
   `variableSet` true with `mounted` false means a variable typed in by
-  hand, which is not storage.
+  hand, which is not storage. The raw facts are fields too: `variableSet`
+  and `path`, `nameSet` and `name`, `writable`, `differentDevice`.
 - **`npm run check:deployed`** exits 0 when the running commit is the tip
   of `main` or everything since it is off the list. It retries for up to
   three minutes, to wait through the deploy gap below.
