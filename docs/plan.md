@@ -308,7 +308,7 @@ Full text: `docs/plan/step-6.md`
 
 ## Step 7 — A Hall that remembers, and a machine to steal
 
-**Status: open, claimed by orchestrator session_017WiGzJzo6aZqH4kYxxJsiV (builders: session_017WiGzHvGxLQnLUErw7teAo), 2026-11-23.** (Reopened 2026-11-23 19:40 UTC by the core-loops re-plan: brief `handoff-prompts/loop-waves.md`; the machine is now Step 20.)
+**Status: open, claimed by orchestrator session_017WiGzJzo6aZqH4kYxxJsiV (builders: session_017WiGzG8kVY45SeGrghiZ34), 2026-11-23.** (Reopened 2026-11-23 19:40 UTC by the core-loops re-plan: brief `handoff-prompts/loop-waves.md`; the machine is now Step 20.)
 
 Full text: `docs/plan/step-7.md`
 
@@ -405,7 +405,7 @@ Full text: `docs/plan/step-19.md`
 
 ## Step 20 — A machine to steal, and things to crash it through
 
-**Status: open, claimed by orchestrator session_017WiGzJzo6aZqH4kYxxJsiV (builders: session_017WiGzGBREdxtzPBSo4mcca), 2026-11-23.** (Briefs `handoff-prompts/loop-vehicles-a.md`, the machine in a test room, started 22:00 UTC; `loop-vehicles-b.md`, the camp run, held until `loop-waves.md` pushes 1 and 2 are on `main`.)
+**Status: open, claimed by orchestrator session_017WiGzJzo6aZqH4kYxxJsiV (builders: A session_017WiGzGBREdxtzPBSo4mcca, B session_017WiGzEvHsdz7Z8fr6XuECe), 2026-11-23.** (Briefs `handoff-prompts/loop-vehicles-a.md`, the machine in a test room, started 22:00 UTC; `loop-vehicles-b.md`, the camp run, released and started 23:19 UTC.)
 
 Full text: `docs/plan/step-20.md`
 
