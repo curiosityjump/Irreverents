@@ -244,7 +244,17 @@ for later, as the step suggests.
 
 ## Briefs
 
-- `handoff-prompts/step-4-slice-1-moods.md` (written 04:35 UTC).
+- `handoff-prompts/step-4-slice-1-moods.md`: people with three moods,
+  seeing, the rule table, routines, `interact`; gate C. Worker
+  `session_017WiGzFBg5B72dx48zdiZh9`, launched 04:35 UTC; its part 1
+  (the foundation) is due about 05:20, the rest about 06:45.
+- `handoff-prompts/step-4-slice-2-alarm.md`: the bell, the call, the
+  alert, responders, hiding and cooling; gate D. **Held** until slice
+  1's part 1 is on `main` and re-run by the lead; then launched with the
+  canonical spawn call (`docs/lead-session.md`).
+- Slice 3, not yet written: the people into Step 3's castle street and
+  live, following through a door, the knocked-out-caller and door
+  controls, the guard's whistle.
 
 ## Open with the owner
 
@@ -252,3 +262,16 @@ for later, as the step suggests.
   blocking: it does not hold this step open.
 
 ## Handoff notes
+
+*(Newest last.)*
+
+- **Lead `session_017WiGzG4WzuJfHAu3XWoUhc`, 04:40 UTC.** Claimed,
+  measured, decided (above), slice 1's worker running, slice 2's brief
+  written and held. Seams agreed by message with the Step 2 lead (his
+  briefs carry them) and sent to the Step 3 lead (no reply yet: the
+  castle street's room id, how a non-player uses a door). Next: when the
+  worker says "slice 1 part 1 at <commit>", re-run it (build, check, one
+  control of my own), then launch slice 2; review each slice by
+  re-running; write slice 3 once the street is on `main`. Gate C needs a
+  scenario per signal 1, 1b, 2; gate D per signal 3, 4, 5: read the
+  gate lines by scenario name.
