@@ -4,13 +4,14 @@
 import { TILE } from '../content/kinds/rooms.ts';
 import type { Room } from '../content/kinds/rooms.ts';
 import type { Content } from '../content/types.ts';
+import { tileAt } from './room-state.ts';
 import { cellAt } from './systems/physics.ts';
 import type { World } from './types.ts';
 
 const EPS = 1e-6;
 
-/** Whether a box (top-left x,y; size w,h; pixels) overlaps any solid tile of the room. One-way platforms never count. */
-export function boxInSolid(room: Room, x: number, y: number, w: number, h: number): boolean {
+/** Whether a box (top-left x,y; size w,h; pixels) overlaps any solid tile of the room. One-way platforms never count. Pass `world` whenever there is one. */
+export function boxInSolid(room: Room, x: number, y: number, w: number, h: number, world?: World): boolean {
   const T = room.tile;
   const left = Math.floor(x / T);
   const right = Math.floor((x + w - EPS) / T);
@@ -18,7 +19,8 @@ export function boxInSolid(room: Room, x: number, y: number, w: number, h: numbe
   const bottom = Math.floor((y + h - EPS) / T);
   for (let ty = top; ty <= bottom; ty++) {
     for (let tx = left; tx <= right; tx++) {
-      if (cellAt(room, tx, ty) === TILE.solid) return true;
+      // With `world`, the run-time tiles (a shut gate is solid, a broken wall is not); without, the room file's.
+      if ((world ? tileAt(world, room, tx, ty) : cellAt(room, tx, ty)) === TILE.solid) return true;
     }
   }
   return false;

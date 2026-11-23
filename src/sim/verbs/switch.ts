@@ -69,8 +69,8 @@ const verb: Verb = {
       const reach = Math.max(0, Math.ceil((next.box.w - old.box.w) / 2));
       let dx: number | null = null;
       for (let k = 0; k <= reach && dx === null; k++) {
-        if (!boxInSolid(room, x + k, y, next.box.w, next.box.h)) dx = k;
-        else if (k > 0 && !boxInSolid(room, x - k, y, next.box.w, next.box.h)) dx = -k;
+        if (!boxInSolid(room, x + k, y, next.box.w, next.box.h, ctx.world)) dx = k;
+        else if (k > 0 && !boxInSolid(room, x - k, y, next.box.w, next.box.h, ctx.world)) dx = -k;
       }
       // INTENT: there is always a way out. A body that would stand inside a
       // wall here (a tall one in a crawlspace) is never switched to; the

@@ -192,7 +192,7 @@ export function release(
     const tries = [...spots, { x: target.x, y: target.y }];
     const cbox = carrier && carrier.room === target.room ? ctx.content.characters[carrier.kind]?.box : undefined;
     if (carrier && cbox) tries.push({ x: carrier.x + (cbox.w - box.w) / 2, y: carrier.y + cbox.h - box.h });
-    const spot = tries.find((s) => !boxInSolid(room, s.x, s.y, box.w, box.h));
+    const spot = tries.find((s) => !boxInSolid(room, s.x, s.y, box.w, box.h, ctx.world));
     if (spot && (spot.x !== target.x || spot.y !== target.y)) emitEffect(ctx, target, { kind: 'move', room: target.room, x: spot.x, y: spot.y });
   }
   target.onGround = false;
