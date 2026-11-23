@@ -9,6 +9,8 @@ section, "What's decided" and slice A's notes. Read
 `docs/mechanisms/art-pipeline.md` ("Approved Drive assets first") before
 writing anything.
 
+**Landed so far (2026-11-23 20:14 UTC): push 1 at 02455d2** by `session_017WiGzFeeJgj8z2SUAFyu5J`, which stopped at its context limit: pieces as data, `world.found`, completion-find, the glint, pop and found row; town-1 over the awning, town-2 the shop's special good, two street crates. **You do pushes 2 and 3**; what is left is in `docs/plan/step-14.md`, "Slice B" (read its notes first). The art builder has `piece-grey`, `piece-gold` (12x12) and `goods-special` live at 8d15d9c: wire them in place of the stand-ins (the first builder's later ask named it `shop-special`; use what exists, or ask the art builder `session_017WiGzEN1QbSnHzXNqV4XSt` by message). No chime is wired yet.
+
 **Reports:** `send_message` to the session on the Orchestrator line of
 `docs/questions-for-the-owner.md`, after each push, with the commit. Notes:
 `docs/plan/step-14.md`, "Builder notes", a "Slice B" heading.
