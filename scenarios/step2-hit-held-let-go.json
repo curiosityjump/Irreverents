@@ -1,0 +1,22 @@
+{
+  "id": "step2-hit-held-let-go",
+  "gate": "A",
+  "proves": "a held player who presses nothing is let go by itself after a moment, and stands on the floor again",
+  "room": "test-hit",
+  "players": [
+    {"id": "a", "character": "grappler", "spawn": 0},
+    {"id": "b", "character": "infiltrator", "spawn": 1}
+  ],
+  "entities": [],
+  "inputs": [
+    {"player": "a", "from": 0, "to": 14, "x": 1},
+    {"player": "a", "from": 20, "to": 23, "hold": ["grab"]}
+  ],
+  "ticks": 240,
+  "expect": [
+    {"fact": "body-state", "player": "b", "at": 100, "is": ["held"]},
+    {"fact": "event", "event": "released", "between": [160, 175], "where": {"target": "p:b", "how": "let-go"}},
+    {"fact": "body-state", "player": "b", "at": 176, "not": ["held"]},
+    {"fact": "position", "player": "b", "at": 240, "y": [112, 112]}
+  ]
+}

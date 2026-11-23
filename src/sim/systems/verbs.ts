@@ -1,3 +1,4 @@
+import { canAct } from '../body-state.ts';
 import { verbs } from '../registry.ts';
 import type { Input, System } from '../types.ts';
 import { NO_INPUT } from '../world.ts';
@@ -25,6 +26,10 @@ const system: System = {
     for (const entity of ctx.world.entities) {
       const kind = ctx.content.characters[entity.kind];
       if (!kind || kind.verbs.length === 0) continue;
+      // A body that is flying, carried, in a held beat or flattened is moved
+      // by what happened to it: none of its verbs run, so no verb (move would
+      // pull a knockback back to the stick's speed) needs its own test.
+      if (!canAct(entity)) continue;
       const input = (entity.player === null ? entity.c.input : ctx.inputs[entity.player]) ?? NO_INPUT;
       const tuning = ctx.content.tuning.characters[kind.tuning] ?? {};
       for (const verb of verbs) {

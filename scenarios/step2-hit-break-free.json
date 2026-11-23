@@ -1,0 +1,25 @@
+{
+  "id": "step2-hit-break-free",
+  "gate": "A",
+  "proves": "a held player who presses jump is free on the next tick, and the carrier, still holding the grab button down, does not pick them straight back up",
+  "room": "test-hit",
+  "players": [
+    {"id": "a", "character": "grappler", "spawn": 0},
+    {"id": "b", "character": "infiltrator", "spawn": 1}
+  ],
+  "entities": [],
+  "inputs": [
+    {"player": "a", "from": 0, "to": 14, "x": 1},
+    {"player": "a", "from": 20, "to": 80, "hold": ["grab"]},
+    {"player": "b", "from": 50, "to": 53, "hold": ["jump"]}
+  ],
+  "ticks": 120,
+  "expect": [
+    {"fact": "body-state", "player": "b", "at": 50, "is": ["held"]},
+    {"fact": "event", "event": "released", "between": [50, 50], "where": {"target": "p:b", "how": "broke-free"}},
+    {"fact": "body-state", "player": "b", "at": 51, "not": ["held"]},
+    {"fact": "body-state", "player": "a", "at": 51, "not": ["carrying"]},
+    {"fact": "event", "event": "grabbed", "between": [0, 120], "count": [1, 1]},
+    {"fact": "body-state", "player": "b", "at": 120, "not": ["held", "flying"]}
+  ]
+}

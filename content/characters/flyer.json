@@ -8,7 +8,10 @@
     "move",
     "jump",
     "switch",
-    "flap"
+    "flap",
+    "body",
+    "attack",
+    "grab"
   ],
   "tuning": "flyer"
 }

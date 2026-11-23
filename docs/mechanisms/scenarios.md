@@ -71,7 +71,8 @@ build gates A–F (`docs/measures.md`, M3) from the scenarios' `gate` tags.
 | `character` | at tick `at`, `player` is the character kind `is`, and/or a different kind from player `differentFrom` |
 | `clear-of-solid` | on every tick within `between`, `player`'s whole box is outside every solid tile |
 | `in-room` | at tick `at`, `player` (or `entity`) is in room `room` |
-| `event` | event `event` happened (for `player`, if given) on a tick within `between`; optional `count: [min, max]`, and `[0, 0]` means "must not happen" |
+| `event` | event `event` happened (for `player`, if given) on a tick within `between`; optional `count: [min, max]`, and `[0, 0]` means "must not happen"; optional `where: { "target": "dummy-1" }` also requires those fields of the event to have exactly those values |
+| `body-state` | at tick `at`, the body has every state in `is` and none in `not` (names of `entity.c` fields: `flying`, `held`, `carrying`, `beat`, `flattened`…), and its hidden wear is within `worn: [min, max]`; give at least one of the three |
 
 Every fact that names a `player` accepts `"entity": "<id>"` instead (one
 of the scenario's `entities`, or of the room's placements when

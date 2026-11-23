@@ -158,6 +158,11 @@ was derived from, a review found that one had, four times out of four.
 Add a line whenever a review names something as the model to copy;
 remove it when it stops being true.
 
+- **A state that stops a body acting is tested in one place**: `canAct`
+  in `src/sim/body-state.ts`, applied by `src/sim/systems/verbs.ts`, so a
+  new verb cannot forget it (`docs/mechanisms/combat-and-impact.md`).
+- **A control for a scenario is one number in `content/tuning.json`**:
+  switches such as `bodyImpactOn` make "watch it fail" a one-line edit.
 - **Self-registering files instead of shared lists**: a verb, system,
   content kind or scenario fact is one new file, picked up by
   `scripts/lib/registries.ts` (`docs/architecture.md`).

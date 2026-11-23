@@ -12,7 +12,33 @@
     "npcInteractReach": 20,
     "npcKeeperReach": 40,
     "npcBarkTime": 1.5,
-    "npcChargeReach": 14
+    "npcChargeReach": 14,
+    "maxLaunchSpeed": 520,
+    "attackLift": 0.55,
+    "throwLift": 0.3,
+    "hitBeatTime": 0.05,
+    "beatTime": 0.085,
+    "groundFriction": 500,
+    "airDrag": 60,
+    "restSpeed": 20,
+    "footingSpeed": 200,
+    "wallImpactSpeed": 120,
+    "wallBounce": 0.35,
+    "bodyImpactOn": 1,
+    "bodyImpactSpeed": 100,
+    "shoveBounce": 0.8,
+    "shovePop": 90,
+    "impactWear": 0.08,
+    "flattenTime": 3,
+    "flyMaxTime": 3,
+    "defaultWeight": 40,
+    "defaultToughness": 100,
+    "holdPlayerTime": 2.5,
+    "breakFreeOn": 1,
+    "breakFreeHop": 160,
+    "friendAttackLaunch": 0,
+    "friendAttackWear": 0,
+    "friendThrowWear": 0
   },
   "characters": {
     "shopkeeper": {
@@ -58,7 +84,16 @@
       "jumpSpeed": 315,
       "jumpCutMultiplier": 0.45,
       "coyoteTime": 0.1,
-      "jumpBufferTime": 0.1
+      "jumpBufferTime": 0.1,
+      "weight": 60,
+      "toughness": 160,
+      "attackStrength": 14000,
+      "attackReach": 14,
+      "attackTime": 0.35,
+      "attackWear": 34,
+      "liftStrength": 150,
+      "throwStrength": 26000,
+      "grabReach": 10
     },
     "infiltrator": {
       "//": "DRAFT: quick and twitchy, with a lower jump.",
@@ -70,7 +105,16 @@
       "jumpSpeed": 310,
       "jumpCutMultiplier": 0.45,
       "coyoteTime": 0.1,
-      "jumpBufferTime": 0.1
+      "jumpBufferTime": 0.1,
+      "weight": 30,
+      "toughness": 80,
+      "attackStrength": 8000,
+      "attackReach": 10,
+      "attackTime": 0.22,
+      "attackWear": 18,
+      "liftStrength": 60,
+      "throwStrength": 9000,
+      "grabReach": 8
     },
     "flyer": {
       "//": "DRAFT: light: a weak jump from the ground, good steering in the air.",
@@ -84,7 +128,16 @@
       "coyoteTime": 0.1,
       "jumpBufferTime": 0.1,
       "flapSpeed": 220,
-      "flaps": 3
+      "flaps": 3,
+      "weight": 30,
+      "toughness": 90,
+      "attackStrength": 9000,
+      "attackReach": 12,
+      "attackTime": 0.3,
+      "attackWear": 22,
+      "liftStrength": 60,
+      "throwStrength": 10000,
+      "grabReach": 8
     },
     "crate": {
       "weight": 20,

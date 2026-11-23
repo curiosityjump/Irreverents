@@ -1,6 +1,7 @@
 import type { Content } from '../content/types.ts';
 import type { World } from '../sim/types.ts';
 import { drawEntities } from './draw/entities.ts';
+import { drawImpact } from './draw/impact.ts';
 import { drawRoom, roomOrigin } from './draw/room.ts';
 
 /** DRAFT: the internal resolution the art on order assumes (docs/plan/step-1.md). */
@@ -17,4 +18,5 @@ export function render(g: CanvasRenderingContext2D, world: World, content: Conte
   const { ox, oy } = roomOrigin(room, VIEW_W, VIEW_H);
   drawRoom(g, room, ox, oy);
   drawEntities(g, world, content, roomId, ox, oy);
+  drawImpact(g, world, roomId, ox, oy);
 }

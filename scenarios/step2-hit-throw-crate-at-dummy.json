@@ -1,0 +1,27 @@
+{
+  "id": "step2-hit-throw-crate-at-dummy",
+  "gate": "A",
+  "proves": "a crate thrown at a dummy strikes it: an impact is recorded for each, and both leave the contact moving (the dummy onward faster than 150 px/s, the crate knocked back faster than 50 px/s)",
+  "room": "test-hit",
+  "players": [
+    {"id": "a", "character": "grappler", "spawn": 0}
+  ],
+  "entities": [
+    {"id": "crate-1", "character": "crate", "tile": [3, 6]},
+    {"id": "dummy-1", "character": "dummy", "tile": [9, 6]}
+  ],
+  "inputs": [
+    {"player": "a", "from": 5, "to": 8, "hold": ["grab"]},
+    {"player": "a", "from": 20, "to": 23, "hold": ["attack"]}
+  ],
+  "ticks": 120,
+  "expect": [
+    {"fact": "event", "event": "grabbed", "between": [5, 5], "where": {"target": "crate-1"}},
+    {"fact": "event", "event": "thrown", "between": [20, 20], "where": {"target": "crate-1"}},
+    {"fact": "event", "event": "impact", "between": [25, 35], "entity": "crate-1", "where": {"other": "dummy-1"}, "count": [1, 1]},
+    {"fact": "event", "event": "impact", "between": [25, 35], "entity": "dummy-1", "where": {"other": "crate-1"}, "count": [1, 1]},
+    {"fact": "body-state", "entity": "dummy-1", "at": 36, "is": ["flying"]},
+    {"fact": "velocity", "entity": "dummy-1", "at": 36, "vx": [150, 520]},
+    {"fact": "velocity", "entity": "crate-1", "at": 36, "vx": [-520, -50]}
+  ]
+}

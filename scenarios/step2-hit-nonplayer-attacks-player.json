@@ -1,0 +1,22 @@
+{
+  "id": "step2-hit-nonplayer-attacks-player",
+  "gate": "A",
+  "proves": "a body nobody plays, acting through entity.c.input, attacks a player: the hit launches the player and wears them down (the friend rule is only player on player)",
+  "room": "test-hit",
+  "players": [
+    {"id": "b", "character": "infiltrator", "spawn": 1}
+  ],
+  "entities": [
+    {"id": "brute", "character": "grappler", "tile": [3, 6]}
+  ],
+  "inputs": [
+    {"entity": "brute", "from": 2, "to": 4, "x": 1},
+    {"entity": "brute", "from": 10, "to": 13, "hold": ["attack"]}
+  ],
+  "ticks": 90,
+  "expect": [
+    {"fact": "event", "event": "hit", "between": [10, 10], "where": {"by": "brute", "target": "p:b"}},
+    {"fact": "body-state", "player": "b", "at": 14, "is": ["flying"], "worn": [1, 1000]},
+    {"fact": "velocity", "player": "b", "at": 14, "vx": [200, 520]}
+  ]
+}

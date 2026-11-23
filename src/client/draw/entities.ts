@@ -9,15 +9,40 @@ export function drawEntities(g: CanvasRenderingContext2D, world: World, content:
     if (!kind) continue;
     const x = ox + Math.round(e.x);
     const y = oy + Math.round(e.y);
+    const { w, h } = kind.box;
+    if (e.c.flattened) {
+      // DRAFT: knocked out reads as lying down: the same box on its side at
+      // the body's feet, dimmed, eye shut. No bar, no number, no countdown.
+      const lx = x + Math.round((w - h) / 2);
+      const ly = y + h - w;
+      g.globalAlpha = 0.6;
+      g.fillStyle = kind.color;
+      g.fillRect(lx, ly, h, w);
+      g.globalAlpha = 1;
+      g.fillStyle = DARK;
+      g.fillRect(e.facing > 0 ? lx + h - 6 : lx + 2, ly + Math.min(3, w - 2), 4, 1);
+      continue;
+    }
     g.fillStyle = kind.color;
-    g.fillRect(x, y, kind.box.w, kind.box.h);
-    g.fillStyle = '#1b1b2f';
-    g.fillRect(e.facing > 0 ? x + kind.box.w - 4 : x + 2, y + 5, 2, 3);
-    MARKS[kind.id]?.(g, x, y, kind.box.w, kind.box.h, e);
+    g.fillRect(x, y, w, h);
+    // DRAFT: an eye on anything that can be knocked out (a creature); a
+    // thing that cannot (a crate: toughness 0) gets a plank line instead.
+    g.fillStyle = DARK;
+    if (content.tuning.characters[kind.tuning]?.toughness === 0) g.fillRect(x + 2, y + Math.floor(h / 2), w - 4, 1);
+    else g.fillRect(e.facing > 0 ? x + w - 4 : x + 2, y + Math.min(5, h - 4), 2, 3);
+    MARKS[kind.id]?.(g, x, y, w, h, e);
+    // DRAFT: the swing of an attack, shown for a few ticks in front of the body.
+    const since = world.tick - (e.c.attack?.swung ?? -1000);
+    if (since >= 0 && since < SWING_TICKS) {
+      const reach = (content.tuning.characters[kind.tuning]?.attackReach ?? 10) * (1 - since / (SWING_TICKS * 2));
+      g.fillStyle = '#fdf6e3';
+      g.fillRect(e.facing > 0 ? x + w : x - Math.round(reach), y + Math.floor(h / 3), Math.round(reach), Math.max(2, Math.floor(h / 4)));
+    }
   }
 }
 
 const DARK = '#1b1b2f';
+const SWING_TICKS = 7;
 
 /**
  * DRAFT: one small mark per party member so the three tell apart at a glance

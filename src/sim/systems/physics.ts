@@ -1,6 +1,7 @@
 import { TILE } from '../../content/kinds/rooms.ts';
 import type { Room } from '../../content/kinds/rooms.ts';
 import { tileAt } from '../room-state.ts';
+import { takesNoPhysics } from '../body-state.ts';
 import { DT } from '../types.ts';
 import type { System } from '../types.ts';
 
@@ -41,6 +42,8 @@ const system: System = {
       const room = ctx.content.rooms[e.room];
       const kind = ctx.content.characters[e.kind];
       if (!room || !kind) continue;
+      // A carried body rides its carrier; a body in a held beat holds still (Step 2, src/sim/body-state.ts).
+      if (takesNoPhysics(e)) continue;
       const T = room.tile;
       const { w, h } = kind.box;
 

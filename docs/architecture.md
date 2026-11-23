@@ -100,8 +100,8 @@ name. A player's `Input` for a tick is the stick (`x`, `y`) plus `held`,
 the ids of the actions held down. Keyboard, touch and scenario files all
 speak those ids, and a script can enumerate them by listing the directory
 (or `content.actions` after loading). Only `jump` exists today; `attack`,
-`grab`, `special` and `interact` are the names later steps are expected to
-add (Step 2 adds a file each; Step 5 checks every entry has a touch control).
+`grab` exist too (Step 2); `special` and `interact` are names later steps are expected to
+add (a file each; Step 5 checks every entry has a touch control).
 
 ## Deploying
 
@@ -138,8 +138,9 @@ extends from its own file with `declare module '../types.ts' { … }`
 | **kind of working part** (a plate, a gate, a breakable wall) | One system file `src/sim/systems/room-<kind>.ts` that declares the kind in its `parts: { "<kind>": { what, check? } }` and drives it in `run`: read the placed parts from `content.rooms[id].parts` (`id`, `kind`, `tiles`, `params`), keep their memory with `partState(world, roomId, partId)`, make tiles solid or open with `setTile(world, room, tx, ty, TILE.solid \| null)` (`src/sim/room-state.ts`). A room places one with an entry in `parts` (`id`, `kind`, `params`) and a legend letter `{ "part": "<id>" }`. A kind no system declares is refused, listing the known kinds. | One new file |
 | **character kind** | `content/characters/<id>.json` (box up to 32×32, colour, the verbs it can do one per line, a tuning set name) plus that set under `characters` in `content/tuning.json`, holding exactly the numbers its verbs declare. Kinds today: `hero` (Step 1's stand-in, not in the party), the three party members `grappler` (18×30, heavy), `infiltrator` (10×12, quick, fits a one-tile gap), `flyer` (14×20, flaps), and the hit's crates and dummies. A mark for it on screen is optional, in `src/client/draw/entities.ts` (`MARKS`). | No |
 | **party member** | A character kind that lists the `switch` verb, added to `members` in `content/party.json` (its place in the list is its place in the seating and switching order). `docs/mechanisms/party-and-switching.md`. | No |
-| **NPC** | Not built yet (Step 4). The place: an NPC kind is data in `content/npcs/<id>.json` read by a new `src/content/kinds/npcs.ts`; its body is a character kind; who stands where is `content/placements/<room id>.json` (a new kind), never the room file; its response logic is a system in `src/sim/systems/`. An NPC in the world is an `Entity` with `player: null`. | Step 4 adds the kind files and systems |
-| **object** | Not built yet (Step 2 for throwables, Step 7 for the machine). The place: `content/objects/<id>.json` + `src/content/kinds/objects.ts`; placed through the same placements files; in the world it is an `Entity`. | The step adds the kind file |
+| **NPC** | Its body is built: a character kind, placed by `content/placements/<room id>.json` (`{ id, room, place: [{ id, character, tile }] }`, kind file `src/content/kinds/placements.ts`) and put in the world by `populateRoom(world, content, roomId)` as an `Entity` with `player: null`. It acts by having another system write an `Input` to `entity.c.input`; its kind's verbs do the rest. The NPC kind data (`content/npcs/`) and its response logic (systems named `npc-*`) are Step 4's. | Step 4 adds the kind files and systems |
+| **object** (a thing to pick up and throw) | A character kind listing the verb `body`, with `weight` and `toughness` (0 = cannot be knocked out) in its tuning set: see `crate`, `crate-heavy`. Place it with a line in `content/placements/<room id>.json`. There is no separate objects kind. Step 7's machine is still to come. | No |
+| **throwable or hittable body** | The same: any character kind can be hit, grabbed and thrown; one with no `weight` or `toughness` gets the world defaults. To make a character able to hit or lift, list `attack` and/or `grab` in its `verbs` and add their numbers (`docs/mechanisms/combat-and-impact.md`). | No |
 | **verb** (an action a character can take) | `src/sim/verbs/<id>.ts` default-exporting a `Verb` (its `order`, the tuning numbers and action ids it reads, `update`). If it needs a button, `content/actions/<id>.json`. List the verb id in each character that can do it and add its numbers to their tuning sets. | One new file, no edits |
 | **rule** (a thing the world does every tick, or an "event → reaction" mapping) | A system: `src/sim/systems/<id>.ts` with an `order` (verbs run at 100, physics at 500; leave gaps). Step 4's authored event/role mappings should be data in `content/rules/` read by one such system. | One new file |
 | **scenario** | `scenarios/<id>.json` (`docs/mechanisms/scenarios.md`). Find the numbers with `node scripts/trace.ts <id>`. Tag it `"gate": "A"`…`"F"` when it is evidence for a build gate. | No |
@@ -205,6 +206,23 @@ The party's events (`docs/mechanisms/party-and-switching.md`):
 | `switched` | `entity`, `player`, `from`, `to` | a player's entity changed character kind, in place; its id did not change |
 | `switch-refused` | `entity`, `player`, `reason` | switch pressed and nothing changed: `no-fit` (no free member's body fits there) or `none-free` (every other member is being played) |
 | `flapped` | `entity`, `player`, `left` | the flyer flapped in the air; `left` flaps remain before it must land |
+
+Built by Step 2's hit slice, with these additions: `released` also has
+`how` (`set-down`, `broke-free`, `let-go`, `dropped`); `attacked` (`by`,
+`player`) is every swing, landed or not; `grab-refused` (`by`,
+`target`, `player`, `reason: "too-heavy"`) is a grab that found only
+bodies too heavy. `speed` in `impact` is pixels per second. A hit that
+moves nothing (a friend's) still emits `hit`.
+
+State on a body that other steps may read (never write; all optional,
+present only while true): `c.flying` (`by`: the entity that started the
+flight), `c.held` (`by`: the carrier), `c.carrying` (`id`: the carried
+body), `c.beat` (in a held beat), `c.flattened` (`ticksLeft`, `by`),
+`c.worn` (`amount`: wear so far, against the kind's `toughness`),
+`c.impact` (`x`, `y`, `speed`, `tick` of the last impact or hit, for
+drawing). `canAct(entity)` in `src/sim/body-state.ts` says whether a
+body may do anything this tick; the verbs system runs no verb for one
+that may not.
 
 - **Knocked out is `entity.c.flattened`**, present on any entity exactly
   while it is out (at least `{ ticksLeft }`). The body stays in the

@@ -1,0 +1,22 @@
+{
+  "id": "step2-hit-flyer-cannot-lift-heavy",
+  "gate": "A",
+  "proves": "the flyer, with the same inputs as the grappler, cannot pick up the heavy crate: the grab is refused and the crate stays on the floor",
+  "room": "test-hit",
+  "players": [
+    {"id": "a", "character": "flyer", "spawn": 0}
+  ],
+  "entities": [
+    {"id": "crate-heavy-1", "character": "crate-heavy", "tile": [3, 6]}
+  ],
+  "inputs": [
+    {"player": "a", "from": 5, "to": 8, "hold": ["grab"]}
+  ],
+  "ticks": 60,
+  "expect": [
+    {"fact": "event", "event": "grab-refused", "between": [5, 5], "where": {"target": "crate-heavy-1", "reason": "too-heavy"}},
+    {"fact": "event", "event": "grabbed", "between": [0, 60], "count": [0, 0]},
+    {"fact": "body-state", "entity": "crate-heavy-1", "at": 30, "not": ["held"]},
+    {"fact": "standing-on-tile", "entity": "crate-heavy-1", "at": 60, "tile": [3, 7]}
+  ]
+}

@@ -104,3 +104,17 @@ still a question.
 `INTENT:` at the code site — both, same day** (`docs/sop.md` phase 6). That
 is what keeps this page worth reading, and it is cheaper than the next
 session rediscovering it the expensive way.
+
+---
+
+- *A friend carrying you loses you the instant you press jump, and drops
+  you after a couple of seconds even if you press nothing; and a body
+  knocked flying gets its controls back after a few seconds whatever
+  happens* → **there is always a way out.** A held player is never stuck
+  in someone's hands and a launched player is never a passenger for
+  ever (`INTENT:` in `src/sim/systems/carry-hold.ts` and
+  `src/sim/systems/combat-clock.ts`). Do not remove the break-free, the
+  `holdPlayerTime` release or the `flyMaxTime` limit to make carrying a
+  friend "reliable". This is the lead's reading of the owner's design
+  principle (`CLAUDE.md`, "There is always a way out";
+  `docs/plan/step-2.md`), not yet the owner's own word on carrying.

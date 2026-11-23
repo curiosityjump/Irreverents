@@ -1,0 +1,25 @@
+{
+  "id": "step2-hit-dummy-into-dummy",
+  "gate": "A",
+  "proves": "a dummy knocked into a second dummy sends the second flying too, with an impact recorded for each, and both hold still for the held beat first",
+  "room": "test-hit",
+  "players": [
+    {"id": "a", "character": "grappler", "spawn": 0}
+  ],
+  "entities": [
+    {"id": "dummy-1", "character": "dummy", "tile": [3, 6]},
+    {"id": "dummy-2", "character": "dummy", "tile": [6, 6]}
+  ],
+  "inputs": [
+    {"player": "a", "from": 5, "to": 8, "hold": ["attack"]}
+  ],
+  "ticks": 90,
+  "expect": [
+    {"fact": "event", "event": "impact", "between": [15, 15], "entity": "dummy-1", "where": {"other": "dummy-2"}, "count": [1, 1]},
+    {"fact": "event", "event": "impact", "between": [15, 15], "entity": "dummy-2", "where": {"other": "dummy-1"}, "count": [1, 1]},
+    {"fact": "event", "event": "impact", "between": [16, 31], "where": {"other": "dummy-2"}, "count": [0, 0]},
+    {"fact": "position", "entity": "dummy-2", "at": 21, "x": [104, 104], "y": [112, 112]},
+    {"fact": "body-state", "entity": "dummy-2", "at": 24, "is": ["flying"]},
+    {"fact": "velocity", "entity": "dummy-2", "at": 24, "vx": [200, 520], "vy": [-400, -50]}
+  ]
+}

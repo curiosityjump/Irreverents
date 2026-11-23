@@ -8,14 +8,19 @@ import type { Fact } from '../types.ts';
  * once, and [0, 0] means "it must not happen". "player" may be left out to
  * count the event for anyone, or replaced by "entity" (the id of one of the
  * scenario's `entities`) to match the event's `entity` field.
+ * Optional "where": { "target": "dummy-1" } also requires those fields of the
+ * event to have exactly those values.
  */
 const fact: Fact = {
   id: 'event',
   validate(spec, scenario, content) {
     const out: string[] = [];
-    checkOnly(spec, ['event', 'player', 'entity', 'between', 'count'], out);
+    checkOnly(spec, ['event', 'player', 'entity', 'where', 'between', 'count'], out);
     if (typeof spec.event !== 'string' || spec.event === '') out.push(`event: must name an event type, but is ${JSON.stringify(spec.event)}`);
     if (spec.player !== undefined || spec.entity !== undefined) checkBody(spec, scenario, out, content);
+    if (spec.where !== undefined && (typeof spec.where !== 'object' || spec.where === null || Array.isArray(spec.where))) {
+      out.push(`where: must be an object of event fields and the values they must have, but is ${JSON.stringify(spec.where)}`);
+    }
     const b = spec.between;
     if (!isRange(b) || !isTick(b[0], scenario) || !isTick(b[1], scenario)) {
       out.push(`between: must be [first tick, last tick] within 0 to ${scenario.ticks}, but is ${JSON.stringify(b)}`);
@@ -27,14 +32,16 @@ const fact: Fact = {
     const [from, to] = spec.between as [number, number];
     const [min, max] = (spec.count as [number, number] | undefined) ?? [1, Infinity];
     const who = spec.player !== undefined || spec.entity !== undefined ? bodyName(spec) : undefined;
+    const where = Object.entries((spec.where as Record<string, unknown> | undefined) ?? {}).filter(([key]) => key !== '//');
     const mine = (e: { player?: unknown; entity?: unknown }): boolean =>
-      spec.entity !== undefined ? e.entity === spec.entity : spec.player === undefined || e.player === spec.player;
+      (spec.entity !== undefined ? e.entity === spec.entity : spec.player === undefined || e.player === spec.player) &&
+      where.every(([key, value]) => (e as Record<string, unknown>)[key] === value);
     const all = rec.events.filter((e) => e.type === spec.event && mine(e as { player?: unknown; entity?: unknown }));
     const n = all.filter((e) => e.tick >= from && e.tick <= to).length;
     if (n >= min && n <= max) return null;
     const when = all.length ? `it happened at tick(s) ${all.map((e) => e.tick).join(', ')}` : 'it never happened in this run';
     const want = max === Infinity ? `at least ${min}` : min === max ? `exactly ${min}` : `${min} to ${max}`;
-    return `event "${spec.event}"${who ? ` for ${who}` : ''} happened ${n} time(s) between ticks ${from} and ${to}, expected ${want}; ${when}`;
+    return `event "${spec.event}"${who ? ` for ${who}` : ''}${where.length ? ` with ${JSON.stringify(spec.where)}` : ''} happened ${n} time(s) between ticks ${from} and ${to}, expected ${want}; ${when}`;
   },
 };
 export default fact;

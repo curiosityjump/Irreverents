@@ -1,0 +1,67 @@
+import { clamp, markImpact, ticksOf, wear } from '../body-state.ts';
+import { DT } from '../types.ts';
+import type { Entity, StepContext, System } from '../types.ts';
+
+/** Whether the launcher of a flight and the body it hurts are both players (the friend rule). */
+export function friendly(ctx: StepContext, by: string | null, victim: Entity): boolean {
+  if (victim.player === null || by === null) return false;
+  if (by === victim.id) return true;
+  const who = ctx.world.entities.find((e) => e.id === by);
+  return who !== undefined && who.player !== null;
+}
+
+/**
+ * Just after physics: a flying body that a wall, the floor or a ceiling
+ * stopped, faster than world.wallImpactSpeed, records an impact: the event,
+ * the held beat, wear, and a bounce off walls and ceilings.
+ */
+const system: System = {
+  id: 'impact-walls',
+  order: 510,
+  tuning: {
+    wallImpactSpeed: { min: 0, max: 900, what: 'the slowest a flying body can hit a wall, floor or ceiling and still count as an impact, pixels per second' },
+    wallBounce: { min: 0, max: 1, what: 'share of its speed a body keeps, reversed, off a wall or ceiling (0 = it stops dead)' },
+    beatTime: { min: 0, max: 1, what: 'the held beat: seconds the bodies of an impact hold still before they move on (0 = none)' },
+    impactWear: { min: 0, max: 100, what: 'how much an impact wears a body down, per pixel-per-second of impact speed' },
+    friendThrowWear: { min: 0, max: 1, what: "share of an impact's wear a player takes from a flight another player started (0 = a friend's throw does not wear you down)" },
+  },
+  run(ctx) {
+    const world = ctx.content.tuning.world;
+    const limit = world.wallImpactSpeed!;
+    for (const e of ctx.world.entities) {
+      const f = e.c.flying;
+      if (!f || f.at !== ctx.world.tick || e.c.beat || e.c.held) continue;
+      const box = ctx.content.characters[e.kind]?.box;
+      if (!box) continue;
+      const fall = Math.min(f.pvy + world.gravity! * DT, world.maxFallSpeed!);
+      let speed = 0;
+      let x = 0;
+      let y = 0;
+      // INTENT: one impact per stop. Physics leaves vx (or vy) at exactly 0
+      // only on the tick it stopped the body, and a body resting on the
+      // floor was already on it (pGround), so a body lying against a wall
+      // does not record an impact every tick.
+      if (f.pvx !== 0 && e.vx === 0 && Math.abs(f.pvx) >= limit) {
+        speed = Math.abs(f.pvx);
+        x = f.pvx > 0 ? e.x + box.w : e.x;
+        y = e.y + box.h / 2;
+        e.vx = clamp(-f.pvx * world.wallBounce!, 900);
+      }
+      if (!f.pGround && e.onGround && fall >= limit && fall > speed) {
+        speed = fall;
+        x = e.x + box.w / 2;
+        y = e.y + box.h;
+      } else if (fall < 0 && e.vy === 0 && !e.onGround && -fall >= limit && -fall > speed) {
+        speed = -fall;
+        x = e.x + box.w / 2;
+        y = e.y;
+        e.vy = clamp(-fall * world.wallBounce!, 900);
+      }
+      if (speed === 0) continue;
+      markImpact(ctx, e, x, y, speed, ticksOf(world.beatTime));
+      ctx.emit('impact', { entity: e.id, player: e.player, other: null, speed });
+      wear(ctx, e, speed * world.impactWear! * (friendly(ctx, f.by, e) ? world.friendThrowWear! : 1), f.by);
+    }
+  },
+};
+export default system;

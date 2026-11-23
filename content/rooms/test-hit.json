@@ -1,0 +1,22 @@
+{
+  "//": "DRAFT: a flat test room for the hit scenarios (step2-hit-*): a floor, two side walls, a ceiling, no doors. Not part of the game's map.",
+  "id": "test-hit",
+  "name": "Hit Test Room",
+  "tile": 16,
+  "legend": {
+    "#": "solid",
+    ".": "empty",
+    "1": "spawn",
+    "2": "spawn"
+  },
+  "rows": [
+    "########################",
+    "#......................#",
+    "#......................#",
+    "#......................#",
+    "#......................#",
+    "#......................#",
+    "#.1.2..................#",
+    "########################"
+  ]
+}

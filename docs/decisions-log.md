@@ -303,3 +303,38 @@ document as a decision of theirs.
 - **To change it:** small either way (a button; a fixed pedestal).
 - **Where:** `docs/plan/step-7.md`; `handoff-prompts/step-7-a-store-and-pedestal.md`.
 
+
+### 2026-11-23 · Hitting is one button and lands the instant you press; holding up while you hit sends the thing upward
+- **Decided by:** brief-worker, Step 2 "the hit", `session_017WiGzHbbov1AymyWrXuvge`
+- **Instead of asking:** "What shape is the basic attack: a wind-up, a combo, a charge?"
+- **Why this way:** your library asks for impact over numbers (D-020) and leaves the move list open. The simplest thing that can feel good is a short hit in front that sends what it lands on flying, further the lighter it is, with a brief freeze at the moment of contact. Up plus hit is a launcher because knocking something into the ceiling is half the fun.
+- **To change it:** reach, strength, the pause between hits and the freeze are numbers per hero in the tuning file; a wind-up or a combo is real work.
+- **Where:** `src/sim/verbs/attack.ts`, `content/tuning.json`; `docs/mechanisms/combat-and-impact.md`.
+
+### 2026-11-23 · You carry things over your head; a throw goes forward from chest height, or straight up, or down at the floor, by where the stick points
+- **Decided by:** brief-worker, Step 2 "the hit", `session_017WiGzHbbov1AymyWrXuvge`
+- **Instead of asking:** "How is a throw aimed, and from where does the thing leave your hands?"
+- **Why this way:** a forward throw from overhead sailed over the head of an enemy standing right in front, which felt wrong, so it leaves from in front of the chest and hits what is there. Anything you pick up drops what it was itself carrying, and someone being carried cannot pick things up, so there are no stacks of people (simplest; a tower of friends could be allowed later).
+- **To change it:** the arcs are a few numbers; allowing stacks is real work.
+- **Where:** `src/sim/body-state.ts` (`throwCarried`), `src/sim/verbs/grab.ts`.
+
+### 2026-11-23 · Getting hit or thrown takes your controls away until you land and slow down; a friend can hold you for two and a half seconds at most
+- **Decided by:** brief-worker, Step 2 "the hit", `session_017WiGzHbbov1AymyWrXuvge`
+- **Instead of asking:** "When a friend throws you, when do you get your character back?"
+- **Why this way:** if you could steer straight away a throw would not carry you anywhere, and if you had to wait for the slide to stop you would be a passenger too long. So: no control in the air, control back once you are on the ground and under a certain speed, and never more than three seconds whatever happens. Pressing jump while carried gets you out at once, with a hop. Nothing a friend does to you (their hit, their throw, a crate they threw) wears you down; an enemy's does.
+- **To change it:** each of those is one number or switch in the tuning file (`footingSpeed`, `flyMaxTime`, `holdPlayerTime`, `breakFreeOn`, the three `friend…` numbers).
+- **Where:** `content/tuning.json` ("world"); `src/sim/systems/carry-hold.ts`, `combat-rest.ts`.
+
+### 2026-11-23 · Enemies (and you) have a hidden toughness: enough hits and slams and they lie flat for three seconds, then get up where they fell; crates never break
+- **Decided by:** brief-worker, Step 2 "the hit", `session_017WiGzHbbov1AymyWrXuvge`
+- **Instead of asking:** "What happens to a body that has taken enough, and to you?"
+- **Why this way:** the lead's rule for tonight is that being beaten never ends the game (S-007: "avoid hard game-over for ordinary experimentation"). Nothing is shown as a bar or a number; a flattened body is drawn lying on its side, dimmed, cannot be hit or picked up, and comes back fresh. A plain dummy goes down after about two good hits and a wall; the big one takes about three times as much. Getting up exactly where it fell is the simplest "close by".
+- **To change it:** `flattenTime`, each kind's `toughness`, and how much hits and slams wear (`attackWear`, `impactWear`) are numbers; being able to grab a flattened body, or a come-back place somewhere else, is a small code change.
+- **Where:** `src/sim/body-state.ts` (`wear`), `src/sim/systems/combat-clock.ts`, `content/tuning.json`.
+
+### 2026-11-23 · What the hit looks like for now: a white flash where bodies strike, puffs of dust, a short shake of the whole screen for hard hits
+- **Decided by:** brief-worker, Step 2 "the hit", `session_017WiGzHbbov1AymyWrXuvge`
+- **Instead of asking:** "How should an impact look before there is any art?"
+- **Why this way:** placeholders (D-096) that make the moment of contact readable on a phone: everything freezes for a few frames, flashes, shakes and puffs. The crates got a plank line instead of an eye so things and creatures tell apart.
+- **To change it:** sizes and lengths are constants at the top of one drawing file; art replaces it.
+- **Where:** `src/client/draw/impact.ts`, `src/client/draw/entities.ts`.

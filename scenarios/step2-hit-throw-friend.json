@@ -1,0 +1,27 @@
+{
+  "id": "step2-hit-throw-friend",
+  "gate": "A",
+  "proves": "one player picks up another and throws them: the thrown player flies, lands and slides into the far wall, and none of it wears them down",
+  "room": "test-hit",
+  "players": [
+    {"id": "a", "character": "grappler", "spawn": 0},
+    {"id": "b", "character": "infiltrator", "spawn": 1}
+  ],
+  "entities": [],
+  "inputs": [
+    {"player": "a", "from": 0, "to": 14, "x": 1},
+    {"player": "a", "from": 20, "to": 23, "hold": ["grab"]},
+    {"player": "a", "from": 40, "to": 43, "hold": ["attack"]}
+  ],
+  "ticks": 200,
+  "expect": [
+    {"fact": "event", "event": "grabbed", "between": [20, 20], "where": {"target": "p:b"}},
+    {"fact": "body-state", "player": "b", "at": 30, "is": ["held"]},
+    {"fact": "position", "player": "b", "at": 30, "y": [82, 82]},
+    {"fact": "event", "event": "thrown", "between": [40, 40], "where": {"target": "p:b"}},
+    {"fact": "body-state", "player": "b", "at": 45, "is": ["flying"], "not": ["held"]},
+    {"fact": "velocity", "player": "b", "at": 45, "vx": [300, 520]},
+    {"fact": "event", "event": "impact", "between": [41, 200], "player": "b"},
+    {"fact": "body-state", "player": "b", "at": 200, "not": ["flying", "flattened"], "worn": [0, 0]}
+  ]
+}
