@@ -39,7 +39,7 @@ Step 8 round 3 builders: heroes `session_017WiGzEv3ESfjNHm7u3Tk8v`, cast
 `session_017WiGzJxBqVvizcghgHk5NG`, actors `session_017WiGzFsVDWWZc7nVHbv82A`. Step 17 builder
 `session_017WiGzGw7XaQ6tZNddFaa8s` (hardening B, D, C). Step 18 builder
 `session_017WiGzHwmFZe9AdG3KMHsa4`. Switch-gap builder `session_017WiGzJujVWWDboh12zWhNR` (it also
-did doorways by Use). Step 3 builder `session_017WiGzK3hTpzPypD5R9DVit` idle, waiting on the
+did doorways by Use). Hit-prediction builder `session_017WiGzGPRoCXeC3TG8HFyxh` (`handoff-prompts/step-5-hit-lands-at-once.md`, the owner's "Big delay between swing and actual impact") and Step 14 slice A builder `session_017WiGzFeeJgj8z2SUAFyu5J` (level entrances with discovered indicators), both spawned 18:21 UTC on Opus. Step 3 builder `session_017WiGzK3hTpzPypD5R9DVit` idle, waiting on the
 differential test of its fix. Step 16 lead `session_017WiGzHt9iJy3caBLkT1Ef4` with one builder.
 Step 5's lead `session_017WiGzJfkNbzJfpRVPhWoeK` holds Step 5 (idle since the morning). Vision
 Partner `session_017WiGzGHxdLq71CDUoQZz9Z`; the orchestrator runs `python3 -I tools/drive_sync.py`
@@ -91,6 +91,7 @@ builder, the Step 11 and Step 12 leads. Past orchestrators `session_017WiGzFWfLi
   Before any code push read `/debug/errors` (a deploy empties it) and
   `/healthz`'s `players`. Documents push freely: they do not redeploy
   (`docs/mechanisms/deploy.md`).
+- **The weekly limit is at warning** (seen 18:21 UTC on every session: `rateLimitType` `seven_day`, `allowed_warning`, resets 2026-11-30 about 13:00 UTC). The owner was told and asked how hard to push; until they answer: the owner's named priorities go ahead, review workflows stay small, finished sessions are archived at once, and new builders are spawned with `model: "claude-opus-5-5"` (the orchestrator's own session was switched to Fable by the owner at ~17:45 UTC, and a spawn inherits the caller's model).
 - **Capacity:** the account's five-hour limit is shared with the owner's other
   projects. With about fourteen Irreverents sessions working it reached
   `allowed_warning` at 18:02 UTC, eighteen minutes before its 18:20 reset

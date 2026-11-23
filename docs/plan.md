@@ -340,7 +340,7 @@ Full text: `docs/plan-archive.md`, "Step 11". Durable record: `docs/mechanisms/c
 
 ## Step 14 — Things to find, and knowing there is more
 
-**Status: open, claimed by orchestrator session_017WiGzHhke4tkAThPgw6EXs (builders: spawning after the 18:20 UTC limit reset), 2026-11-23.** (Opened 18:18 UTC for slice A, the owner's "Not finding clear 'level entries' with discovered indicators".) (Drafted from the library by an agent; its independent review did not run before the usage limit stopped it at 04:58 UTC. 2 of its 2 quoted pieces were found verbatim by script. Check its D-numbers and its "What's decided" against the library before briefing from it.)
+**Status: open, claimed by orchestrator session_017WiGzHhke4tkAThPgw6EXs (builders: session_017WiGzFeeJgj8z2SUAFyu5J), 2026-11-23.** (Opened 18:18 UTC for slice A, the owner's "Not finding clear 'level entries' with discovered indicators".) (Drafted from the library by an agent; its independent review did not run before the usage limit stopped it at 04:58 UTC. 2 of its 2 quoted pieces were found verbatim by script. Check its D-numbers and its "What's decided" against the library before briefing from it.)
 
 Full text: `docs/plan/step-14.md`
 
