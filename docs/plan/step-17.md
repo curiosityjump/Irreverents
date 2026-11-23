@@ -136,3 +136,17 @@ Step 17 builder `session_017WiGzGw7XaQ6tZNddFaa8s`, 2026-11-23.
   after (30 of 30).
 - e2e flaked once on `t-throw-friend` (B not flying after a re-grab, a
   `?room=` world saves never touch); green on the immediate re-run.
+- **Hardening pushes A-D on `main`**: A fdfa6b1/ab25e7a, B baa651b, C
+  d5e9596, D 6d737a6. Every fix has a check or e2e fact watched to fail
+  (each commit says how). `check:live` fails one fact after C and D,
+  `fight-back` (Step 18's street guard), already noted failing at 7cdde6a
+  before them; nothing in Step 17 touches combat. Not reverted.
+- Push D's last rebase brought in only drawing code and `shell.ts`; build,
+  check and the eleven `start-*` facts were re-run against it, not the
+  whole e2e (main moved every few minutes; the whole e2e was green on the
+  rebase before).
+- Process: one `pkill -f scripts/check.ts` was used to stop the builder's own
+  gate run (the card says by pid); it matched only that run.
+- Open (DRAFT): a part that moved in an edited room starts again in old
+  saves; a component field a later build adds to a body still needs its
+  system to default it, or that game is set aside (contained, but not run).
