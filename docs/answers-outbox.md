@@ -33,3 +33,32 @@ entry: "first vision written; no plan exists yet", naming the sections.
 - **Recorded in:** `docs/vision.md` "Principles that decide most questions", under the build-first principle
 - **Action for:** orchestrator (process, vision-level): make it routine, and cheap per the build-first principle, to compare the live game (screenshots and play, phone size) with `docs/vision.md`, the design library and the named inspirations, rank the biggest gaps, and drive the plan from that list. The owner should not be the one finding omissions. Today's known gaps raised by the owner: levels, enemies, cantina; look; feel.
 
+### Q-008 · How do you leave the endless cantina brawl?
+- **Answer:** "There is a bell in the middle of the cantina player can use to stop fights"
+- **Recorded in:** `docs/vision.md` "Heroes, roster, powers and co-op"
+- **Action for:** Step 11's lead
+
+### Q-013 · A friend takes the hero you need to get back out
+- **Answer:** "If you are in a small tunnel, you can't switch to a big character that doesn't fit there." (confirms the existing refusal; the friend case is the lead's call)
+- **Recorded in:** `docs/plan/step-2.md` "What's decided"
+- **Action for:** Step 2's lead
+
+### Q-012 · Railway "Watch Paths" before 1 December
+- **Answer:** "What's the doc in the repo? Can't we just change that rule? All play is just playtesting right now anyway" (read: not setting it by hand; restarts are fine while playtesting)
+- **Recorded in:** `docs/mechanisms/deploy.md` "Traps"
+- **Action for:** none
+
+### Q-010 · Is this the right build order?
+- **Answer:** "Just build according to the vision in the way that gets it playable according to the vision as soon as possible."
+- **Recorded in:** `docs/current-directive.md` "Current directive"
+- **Action for:** orchestrator: the directive is approved in that form; order is yours
+
+### Q-005 · Stale rules in Drive docs
+- **Answer:** "Later decisions trump earlier ones"
+- **Recorded in:** `docs/vision.md` "Principles that decide most questions"
+- **Action for:** none (whoever builds a rule uses the latest decision)
+
+### Q-006 · "Current" art boards that fail the art gate
+- **Answer:** "Many of the visuals are there to establish direction. Chat has been organizing the drive to be usable. Just review it's documentation." (boards stay; use ChatGPT's asset library docs to judge usability)
+- **Recorded in:** `docs/vision.md` "Visual direction"
+- **Action for:** Step 8

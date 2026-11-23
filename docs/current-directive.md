@@ -72,6 +72,13 @@ heading:
 
 ## Current directive
 
+**Owner, 2026-11-23 ~15:00 UTC, to Vision Partner, first-hand, answering Q-010 [is this the right build order?]:**
+> Just build according to the vision in the way that gets it playable according to the vision as soon as possible.
+
+*(Vision Partner's reading:)* the order below is the orchestrator's to
+change freely; the measure is the vision playable soonest (see
+`docs/vision.md` "Principles": build-first and find-the-gaps).
+
 **Draft — awaiting the owner's approval.** The owner gave the orchestrator
 free rein over what to build first ("Orchestrator has free reign.",
 2026-11-23, `docs/vision.md` "The measure"), so work runs on this list

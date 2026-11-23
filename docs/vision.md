@@ -177,6 +177,9 @@ team compares the live game with this document and the design library
 closes them in order without waiting to be told. What the owner raises
 should be taste, not omissions.
 
+**Later decisions win.** **Owner, 2026-11-23 ~15:00 UTC, to Vision Partner, first-hand, answering Q-005 [several Drive docs still state rules your later decisions replaced; does the newer rule win?]:**
+> Later decisions trump earlier ones
+
 ## Frontiers
 
 *(Framing: one line each on what the owner wants built, pointing at the
@@ -205,6 +208,9 @@ Detail: docs 07, 22, 23, 26, 27 (D-041–D-051, D-059–D-077).
 
 Detail: docs 05, 06, 30 (rare, losable powers, D-080–D-082), 31 (the
 cantina hub and endless brawl, D-083–D-090).
+
+**Owner, 2026-11-23 ~15:00 UTC, to Vision Partner, first-hand, answering Q-008 [how do you leave the endless cantina brawl?]:**
+> There is a bell in the middle of the cantina player can use to stop fights
 
 ### World structure, secrets and completion
 **Owner, 2026-11-22 (Drive, doc 11, D-003, D-078):**
@@ -235,6 +241,14 @@ that game, with designs that stay original (`CLAUDE.md`: keep it original).
 Folded in from the orchestrator's record. Vision Partner hasn't yet
 confirmed it with the owner directly.
 
+**Owner, 2026-11-23 ~15:00 UTC, to Vision Partner, first-hand, answering Q-006 [four "current" pixel-art boards fail your own art gate; move them out of "current"?]:**
+> Many of the visuals are there to establish direction. Chat has been organizing the drive to be usable. Just review it's documentation.
+
+*(Framing:)* so the boards stay where they are, as direction; which images
+are usable is read from ChatGPT's own Drive documentation ("ASSET LIBRARY —
+START HERE (Claude)", mirrored at `docs/design-library/asset-library-start-here-claude.md`,
+and its visual quality gate), not decided by the team.
+
 Detail: docs 10, 13, 14, 32. Only the look of "Pixel aesthetic reference —
 approved direction" is approved; no sprite or tile is production art yet.
 
@@ -254,9 +268,6 @@ Detail: doc 24 (build gates A–F), doc 12 (golden scenarios).
 
 ## Still open
 
-- **Stale rules inside the Drive library** (Q-005), **"current" art boards
-  that fail the art gate** (Q-006), **how you leave the cantina brawl**
-  (Q-008).
 - The library's own OPEN list (doc 11, O-001–O-015: camera, party size,
   player cap, save ownership, power rules, persistence, …) stays open
   until the owner settles each.

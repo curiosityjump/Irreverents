@@ -49,6 +49,13 @@ must poll through the gap (three minutes) before calling a push red.
 
 ## Traps
 
+- **Owner, 2026-11-23 ~15:00 UTC, to Vision Partner, first-hand, answering Q-012 [Railway may stop reading `railway.json`'s watch paths for existing services on 2026-12-01; set "Watch Paths" by hand?]:**
+  > What's the doc in the repo? Can't we just change that rule? All play is just playtesting right now anyway
+
+  *(Vision Partner's reading:)* the owner is not setting it by hand; a
+  restart from a document push is acceptable while all play is playtesting.
+  The date is Railway's rule, not ours, so if document pushes start
+  restarting the game after 1 December, that is expected, not a bug.
 - **A new top-level code path does not deploy until it is on the list.**
   If the running game ever needs a file outside the listed paths, add the
   path to `railway.json` *and* `scripts/lib/deploy-paths.ts` in the same

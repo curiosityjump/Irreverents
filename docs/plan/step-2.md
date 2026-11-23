@@ -26,6 +26,13 @@ and a player can switch between them.
 
 ## What's decided
 
+- **Owner, 2026-11-23 ~15:00 UTC, to Vision Partner, first-hand, answering Q-013 [when a friend takes the hero you need to get back out of a tiny gap]:**
+  > If you are in a small tunnel, you can't switch to a big character that doesn't fit there.
+
+  *(Vision Partner's reading:)* this confirms the existing refusal
+  (`step2-body-switch-refused-in-gap`). The friend-occupies-your-hero case
+  was not ruled on; the owner's standing answer is to build what gets the
+  vision playable soonest, so it's the lead's call (`DRAFT:`).
 - **Impact is physical, never a number on screen** (`docs/vision.md`,
   "What it is not": "Do not simplify combat down to damage numbers;
   collision force and consequence are essential").
