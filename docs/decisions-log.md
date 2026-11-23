@@ -665,3 +665,10 @@ document as a decision of theirs.
 - **Why this way:** a four-letter code (no I, L, O) is easy to say across a room and type on a phone, and a `?game=CODE` link can be sent from the phone's share sheet. A save keeps what was done to the world (rooms, every body that is not a player), every 30 s and when the last player leaves; players come back in as they join today. Anyone with the code can continue or join (friends, no accounts). `main` and `?room=` are unchanged, so every scripted check and today's shared kingdom keep working.
 - **To change it:** the alphabet, interval and record live in `src/server/saves.ts`; the start screen's choices in `src/client/start.ts`. Keeping each player's own position is a field added to the record.
 - **Where:** `docs/plan/step-17.md`.
+
+### 2026-11-23 · How the cantina's party swap and door lock work at first
+- **Decided by:** Step 11 lead `session_017WiGzFy3MD6ecvM7QMvQGd`
+- **Instead of asking:** the parts doc 31 and D-084/D-088 leave open: what tapping a hero already in the party does, whether you can swap mid-brawl, what replacing your own character does, when the party row closes, and what "being chased" means for the door.
+- **Why this way:** tap a wandering hero who is not in the party and your party appears across the screen; tap the one to replace. Replace someone nobody is playing and they swap; replace yourself and you become the newcomer; a friend's character is never taken (doc 06). No swapping while a brawl is on, so a tap mid-fight is never a surprise. The row closes when you move, tap elsewhere, or after a few seconds. The door refuses only while a good-side guard is actively chasing you, not merely because an alarm was raised (D-088 says a raised alert alone is open).
+- **To change it:** each is one rule in the cantina's systems (`docs/mechanisms/cantina.md`); the row's timing is a number in `content/cantina/cantina.json`.
+- **Where:** `docs/plan/step-11.md`; `handoff-prompts/step-11-b-hub.md` while it runs.

@@ -174,6 +174,7 @@ Taken 2026-11-23 by the lead at 17d8c1b (`npm run check` green): friends hit but
 
 ## Briefs
 
+- **Slice B, the hub** (`handoff-prompts/step-11-b-hub.md`, briefed ~16:15 UTC to the same worker): the cantina's tiles and backdrop; tap a regular → party row → tap the member to replace (new `Input.tap`, `World.party`, effect `become`); the street door refusing a player a good guard is chasing (`World.chased`, door `refuse`); the phone e2e (signal 8). Edits agreed or announced in Steps 2, 3, 5 and 8's files, additive.
 - **Slice A, the brawl** (`handoff-prompts/step-11-a-brawl.md`, briefed 2026-11-23 by lead `session_017WiGzFy3MD6ecvM7QMvQGd`): roster, two new characters, the cantina room and its street door (castle street column 20), regulars, the brawl, out-and-back with a counter. Signals 1-5, half of 6, plus a real-server check that `move` brings a player back. Slice B (the tap, the row, the swap, the chase lock, signal 8, and the cantina's look: a `ROOM_THEME` entry in `tools/art/tiles/make.py` with its atlas and backdrop data, per `tools/art/tiles/README.md`, flagged by Step 8's ground lane at ec49eb5) waits for it.
 
 ## Open with the owner
