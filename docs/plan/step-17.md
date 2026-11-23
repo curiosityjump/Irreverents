@@ -91,4 +91,4 @@ leave, `src/server/main.ts` opening the store, `src/client/index.html`.
 ## Briefs
 
 - `handoff-prompts/step-17-start-and-saves.md` (written 2026-11-23 16:00 UTC by orchestrator
-  `session_017WiGzHhke4tkAThPgw6EXs`).
+  `session_017WiGzHhke4tkAThPgw6EXs`), held by builder `session_017WiGzGw7XaQ6tZNddFaa8s` (spawned 15:51 UTC).

@@ -11,62 +11,54 @@ feature.
 
 ## Status
 
-*(Orchestrator `session_017WiGzGp8auJceLEAAh9Aqx`, 2026-11-23 15:10 UTC, at its
-handoff; the "Since 15:10" line added 15:40 UTC by the owner-directed structure
-fix. Re-check with `git log --oneline 058772f..origin/main`.)*
+*(Orchestrator `session_017WiGzHhke4tkAThPgw6EXs`, 2026-11-23 15:55 UTC, at pickup.
+Re-check with `git log --oneline ee7df86..origin/main`.)*
 
-- **Live:** everything from the night, plus Step 8 round 1's look (all nine lanes: real sprites for
-  heroes and cast, tiles, backdrops, props, the phone shell, sound), round 2's ground lane (ec49eb5)
-  and frame push 1 (2d34418); Step 2's feel round (per-hero arcs, wind-up, impact-scaled freeze,
-  floor bounce, the `?tune` panel; 06a07f4); the cantina room and its doorway, with the owner's bell
-  ending the brawl (Step 11); the outpost's horn and waves in a test room (Step 12, 1bdd143).
-- **Not yet:** round 2's frame (rest), actors, heroes and props lanes are building; no real level or
-  enemies through the world yet (Step 16 just opened); nobody has played it end to end on two real
-  iPhones; the tunes are unheard.
-- **The gap list** is `docs/vision-gaps.md` (first audit 7454fd9; Step 16 added at 43556ba).
-- **Since 15:10:** frame push 2 (06180df), props pushes 1–2 (70299ee, 992647b:
-  hits, light in the castle, the ruins kit, the pixel font), actors push 1
-  (646f83d) and heroes push 2 (d426771) are live; the frame, props and heroes
-  lanes await review, actors push 2 is building. Step 11's endless brawl is
-  live (fb619f5). Step 16 slice 1 is briefed (f0a2d90). Since c659b20 the
-  start-up reads are `docs/roles/*-card.md`.
+- **Live** (or deploying): everything from the night; Step 8 round 1's look and round 2's ground,
+  frame, props, heroes and the villain, actors push 1–2 (ea44201); Step 2's feel round; the
+  cantina's endless brawl with the bell and counter (Step 11); the Bandit Camp with its horn (Step
+  12); the quarry's six rooms, not yet joined to the kingdom (Step 16, 9f59f97).
+- **Not yet:** a start screen and saved games (Step 17, just briefed); the quarry joined, with
+  enemies; round 3 of the look; nobody has played it end to end on two real iPhones.
+- **The gap list** is `docs/vision-gaps.md` (refreshed cdfd3fa against bee74fd).
+- `main` at 3733ad6: `npm run build` and `npm run check` green (158 ok). Live `/healthz`: volume
+  mounted and writable at `/data`, 3 errors logged.
 
 ## Sessions
 
-*(15:10 UTC; all report to the session on the Orchestrator line of `docs/questions-for-the-owner.md`.)*
-Step 8 round 2 builders (the orchestrator runs Step 8 itself): frame then actors
-`session_017WiGzGaGuR297NUCFSpVDU`, heroes `session_017WiGzFWVvNJrmXZ81rABuv`, ground then props
-`session_017WiGzHanC1tecHKJbjuyCf`. Step 11 (cantina) lead `session_017WiGzFy3MD6ecvM7QMvQGd`;
-Step 12 (outpost) lead `session_017WiGzJTXQVCWQYDDmC2UiY`; Step 16 (first real level) lead
-`session_017WiGzHt9iJy3caBLkT1Ef4`, spawned 15:04; each lead runs one reused worker. Step 2's lead
-`session_017WiGzGN9egot3JUvSMBBA9` is idle, holding (a) panel polish and (b) the no-numbers check, to
-be rung after round 2 lands. Vision Partner `session_017WiGzHC3CvjTNZqCuxa8Ex`'s successor
-`session_017WiGzGHxdLq71CDUoQZz9Z`; its hourly Drive check was refused by a permission check, so the
-orchestrator runs `python3 -I tools/drive_sync.py` at check-ins. Step 5's lead
-`session_017WiGzJfkNbzJfpRVPhWoeK` holds Step 5. Past orchestrators `session_017WiGzFWfLir1ATiSP7c5E5`,
-`session_017WiGzJeh7Tuov59d8XYmru`, `session_017WiGzHX8g2sXimNRnqp2oZ` and
-`session_017WiGzGp8auJceLEAAh9Aqx` only forward; never archive them.
+*(15:55 UTC; all report to the session on the Orchestrator line of `docs/questions-for-the-owner.md`.)*
+Step 8 (the orchestrator runs it): actors lane builder `session_017WiGzGaGuR297NUCFSpVDU` (push 2
+landed, finishing); heroes builder `session_017WiGzFWVvNJrmXZ81rABuv` idle for round 3; the
+ground/props builder was archived 15:52 (402k tokens, both lanes done). Step 17 builder
+`session_017WiGzGw7XaQ6tZNddFaa8s`, spawned 15:51. Leads: Step 11 `session_017WiGzFy3MD6ecvM7QMvQGd`,
+Step 12 `session_017WiGzJTXQVCWQYDDmC2UiY`, Step 16 `session_017WiGzHt9iJy3caBLkT1Ef4`, each with one
+reused worker and its own backstop trigger. Step 2's lead `session_017WiGzGN9egot3JUvSMBBA9` idle,
+holding (a) panel polish and (b) the no-numbers check for after round 2. Step 5's lead
+`session_017WiGzJfkNbzJfpRVPhWoeK` holds Step 5 (Step 17 makes agreed additive edits in its paths).
+Vision Partner `session_017WiGzGHxdLq71CDUoQZz9Z`; its hourly Drive check is not armed, so the
+orchestrator runs `python3 -I tools/drive_sync.py` at check-ins. Past orchestrators
+`session_017WiGzFWfLir1ATiSP7c5E5`, `session_017WiGzJeh7Tuov59d8XYmru`,
+`session_017WiGzHX8g2sXimNRnqp2oZ`, `session_017WiGzGp8auJceLEAAh9Aqx` only forward; never archive them.
 
 ## Owed next
 
-*(In order, 15:10 UTC; item 1a added 15:40 UTC.)*
+*(In order, 15:55 UTC.)*
 1. Whatever the owner says first.
-1a. The outbox's entry (4294051): a start screen and saved games a friend can
-   join. No step covers it yet: a new step file.
-2. Step 8 round 2: review each lane as it reports (re-run build and check), delete its brief, note it
-   in `docs/plan/step-8.md` "Briefs"; when all five land, round 3 = the same capture, review and
-   synthesize as round 2 (its script: `docs/mechanisms/orchestrator-workflows.md`). When the frame lane lands,
-   update `docs/plan/step-5.md`'s "Controls never hide the game". Route the P01 1–5 ratings in
-   step-8.md's Round 2 to Vision Partner for the asset desk. Delete branch
-   `claude/gallant-keller-1gpm2y` once the heroes lane lands.
-3. Ring Step 2's lead to brief (a)+(b) once round 2's lanes have landed (Q-013 goes with it).
-4. Refresh `docs/vision-gaps.md` whenever a step closes; open the next uncovered gap as capacity
-   frees: Step 13 (a roster you grow by recruiting, gap 12, never drafted), the community swarm
-   (gap 11), objects with surprising uses.
-5. From before, still owed: Step 3 item (a), two phones by touch through the kingdom (most of Step
-   10's tour); the switch gap (two players on one hero; Step 5's network layer; the thrower's
-   predicted swing is noted in step-5.md); Step 4 slice 2 push 4; Step 7 (detector, then wiring,
-   gate E; CLAUDE.md's "Nothing is persisted" line changes then); Step 6 slice B; Step 9.
+2. Step 17: check the builder started; review push 1 (saves) and push 2 (start screen) by
+   re-running build, check and e2e. When push 1 lands, edit `CLAUDE.md`'s "Nothing is persisted"
+   line (Step 7 lead's suggested wording in `docs/for-the-orchestrator.md`).
+3. Step 8: review the actors lane when it reports (ea44201 and anything after), delete
+   `handoff-prompts/look2-actors.md`; then round 3 = the same capture, review and synthesize as
+   round 2 (`docs/mechanisms/orchestrator-workflows.md`), the heroes builder reusable. Update
+   `docs/plan/step-5.md`'s "Controls never hide the game" for the frame lane. Route the P01 1–5
+   ratings in step-8.md's Round 2 to Vision Partner. Branch `claude/gallant-keller-1gpm2y` is
+   to be deleted; the delete was refused by a permission check (15:50), so it waits on the owner.
+4. Ring Step 2's lead for (a)+(b) once round 2 closes (Q-013 goes with it).
+5. Refresh `docs/vision-gaps.md` when a step closes; next uncovered gaps: Step 13 (a roster you grow
+   by recruiting, gap 12, never drafted), the community swarm (gap 11), objects with surprising uses.
+6. From before, still owed: Step 3 item (a), two phones by touch through the kingdom; the switch gap
+   (Step 5); Step 4 slice 2 push 4; Step 7 (detector, then wiring; it opens the same store Step 17
+   opens); Step 6 slice B; Step 9.
 
 ## Rules in force now
 

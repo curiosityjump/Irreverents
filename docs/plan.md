@@ -299,7 +299,7 @@ Full text: `docs/plan/step-7.md`
 
 ## Step 8 — What you see and hear
 
-**Status: open, claimed by orchestrator session_017WiGzHhke4tkAThPgw6EXs (builders: session_017WiGzGaGuR297NUCFSpVDU, session_017WiGzFWVvNJrmXZ81rABuv, session_017WiGzHanC1tecHKJbjuyCf), 2026-11-23.** (Put first by the owner at 11:11 UTC; re-claimed 15:50 UTC at pickup.)
+**Status: open, claimed by orchestrator session_017WiGzHhke4tkAThPgw6EXs (builders: session_017WiGzGaGuR297NUCFSpVDU, session_017WiGzFWVvNJrmXZ81rABuv), 2026-11-23.** (Put first by the owner at 11:11 UTC; re-claimed 15:50 UTC at pickup.)
 
 Full text: `docs/plan/step-8.md`
 
@@ -347,7 +347,7 @@ Full text: `docs/plan/step-16.md`
 
 ## Step 17 — A start screen, and saved games a friend can join
 
-**Status: open, claimed by orchestrator session_017WiGzHhke4tkAThPgw6EXs (builders: spawning), 2026-11-23.** (Opened 2026-11-23 16:00 UTC from the owner's words of ~15:10 UTC, outbox entry at 4294051.)
+**Status: open, claimed by orchestrator session_017WiGzHhke4tkAThPgw6EXs (builders: session_017WiGzGw7XaQ6tZNddFaa8s), 2026-11-23.** (Opened 2026-11-23 16:00 UTC from the owner's words of ~15:10 UTC, outbox entry at 4294051.)
 
 Full text: `docs/plan/step-17.md`
 
