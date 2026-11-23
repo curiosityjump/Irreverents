@@ -311,7 +311,7 @@ live game in the same way.
 
 Round 1 of the look (2026-11-23): `handoff-prompts/look-foundation.md`, `look-heroes.md`, `look-cast.md`, `look-tiles.md`, `look-props.md`, `look-world.md`, `look-actors.md`, `look-shell.md`, `look-sound.md`. Delete each when its lane is reviewed. Reviewed by re-running build and check, and deleted 13:35 UTC: foundation (61f7676), heroes (59de45d), world (82fe89b), actors (f92a447), shell (ac6509b), sound (fdcfec9). Then tiles (ebcf79e) and props (a4040f4), deleted 13:41 UTC, and cast (cae8f46), deleted 13:44 UTC. Round 1 is complete.
 
-Round 2 of the look (2026-11-23, "Round 2" above): `handoff-prompts/look2-heroes.md`, `look2-ground.md`, `look2-props.md`, `look2-frame.md`, `look2-actors.md`. Delete each when its lane is reviewed.
+Round 2 of the look (2026-11-23, "Round 2" above): `handoff-prompts/look2-heroes.md`, `look2-ground.md`, `look2-props.md`, `look2-frame.md`, `look2-actors.md`. Delete each when its lane is reviewed. Workers: frame then actors `session_017WiGzGaGuR297NUCFSpVDU`; heroes `session_017WiGzFWVvNJrmXZ81rABuv`; ground then props `session_017WiGzHanC1tecHKJbjuyCf`. Reviewed (build and check re-run) and deleted: ground (ec49eb5), 15:01 UTC.
 
 ## Open with the owner
 
