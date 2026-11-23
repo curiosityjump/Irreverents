@@ -10,7 +10,7 @@ per answer saying where it went.
 ## Current sessions
 
 - **Vision Partner:** session_017WiGzGHxdLq71CDUoQZz9Z (second; started by the orchestrator 2026-11-23 13:29 UTC, succeeding genesis session_017WiGzHC3CvjTNZqCuxa8Ex, which handed off ~13:30 UTC, context long)
-- **Orchestrator:** session_017WiGzGp8auJceLEAAh9Aqx (fourth; Opus; started by the owner 11:15 UTC as backup, took over 2026-11-23 12:01 UTC from session_017WiGzHX8g2sXimNRnqp2oZ, which stopped at 11:58 UTC on its Fable usage limit)
+- **Orchestrator:** session_017WiGzGp8auJceLEAAh9Aqx (handed off 2026-11-23 at 058772f; the owner starts the next)
   This line is the one address every session uses to reach the current
   orchestrator; Vision Partner's doorbell goes only here.
 - **Questions per message the owner wants:** 3 (the default; record the
