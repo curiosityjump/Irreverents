@@ -314,6 +314,28 @@ anything on a screen were not re-run by the lead. Events relayed to the
 Step 6 and Step 4 leads. None of the parts is placed in a kingdom room
 yet. Worker `session_017WiGzGm447aaoT1b3PWamZ` is on push 2.
 
+**Slice B, push 2 reviewed (lead, 09:02 UTC).** `5b7e319`: behind the
+throne. A false wall in the west wall behind the dais leads through a
+hidden opening to a small `undercroft`, whose doorway comes up in the
+street at column 7 for now; above it, a window (part `window`, a
+`breakable` with `look: window`) that a fast body breaks and falls
+through into the same passage. Re-run by the lead: build and check
+green; gate B's line now has 5 scenarios including
+`step3-behind-the-throne` (signal 2, one of its two). Looked at the
+built page at 844×390: the window is drawn in the wall above the dais;
+the false wall reads as wall. **One small tell, not fixed:** the wall
+tile under the false wall is drawn with the lighter "top edge" line, a
+two-pixel ledge in an otherwise flat wall (`DRAFT:`; the owner may like
+it as the hint, or want it gone). Not verified: walking through the
+false wall on the page (the lead's walk stopped at the dais step);
+a real grab-and-throw through the window (the scenario uses a crate
+with a starting speed; whether Step 2's throw reaches the 200 px/s
+break speed at window height is unmeasured); another player's plate
+may flicker between server snapshots (the worker's flag, unseen).
+Remaining: push 3 (courtyard, plate gate, gallery, roofs: signals 5 and
+the second half of 2), push 4 (the secret: signal 3; `hide` parts
+placed).
+
 ## Open with the owner
 
 ## Handoff notes
