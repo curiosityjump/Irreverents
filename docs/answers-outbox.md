@@ -58,3 +58,18 @@ entry: "first vision written; no plan exists yet", naming the sections.
 - **Recorded in:** `docs/vision.md` "The measure"
 - **Action for:** orchestrator (vision-level): the first plan step is a playable build live at irreverents-production.up.railway.app by the owner's morning (2026-11-23 local). The owner is asleep while you work, so anything needing their approval waits; see the ledger for what they pre-answered.
 
+### Q-009 · Is the Railway service connected to this repo, so a push to `main` goes live?
+- **Answer:** "It's setup to deploy automatically from main yes."
+- **Recorded in:** `docs/vision.md` "The measure"
+- **Action for:** orchestrator (process): a push to `main` IS the deploy to irreverents-production.up.railway.app; fill `CLAUDE.md`'s Git section and `{{DEPLOY_TARGET}}` accordingly.
+
+### Q-007 · Which first slice?
+- **Answer:** "Orchestrator has free reign."
+- **Recorded in:** `docs/vision.md` "The measure"
+- **Action for:** orchestrator (vision-level): choose the slice yourself; no owner approval needed tonight.
+
+### Q-003 · How should we measure that the game is moving the right way?
+- **Answer:** "Focus on getting things playable asap. I want as much of the vision in playable form as possible by the time i wake up tomorrow. I want to be playing the game having fun with it with my brother in law tomorrow morning."
+- **Recorded in:** `docs/vision.md` "The measure"
+- **Action for:** orchestrator (vision-level): the morning measure is two people playing together, having fun, at the live URL, in browsers (phone or computer). That puts 2-player online co-op (one shared party) in tonight's scope, not later.
+

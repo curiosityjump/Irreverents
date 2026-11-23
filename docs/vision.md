@@ -112,12 +112,17 @@ by D-055 below.
 **The first deadline.** **Owner, 2026-11-23, to Vision Partner, first-hand:**
 > I want this game to be playable by the time I wake up in the morning. Once you are ready, I will start the orchestrator session and let you all work through the night on this.
 
-*(Framing:)* "playable" at the address above, in a phone or computer
-browser. Which slice, and how its quality is judged, is Q-003 / Q-007.
+**Owner, 2026-11-23 ~03:50 UTC, to Vision Partner, first-hand, answering Q-009 [is Railway deploying from `main`?], Q-007 [which first slice?] and Q-003 [how to measure progress]:**
+> It's setup to deploy automatically from main yes.
+> Orchestrator has free reign.
+> Focus on getting things playable asap. I want as much of the vision in playable form as possible by the time i wake up tomorrow. I want to be playing the game having fun with it with my brother in law tomorrow morning.
 
-*(Not yet chosen: Q-003. The library offers two candidates, both the
-owner's words: doc 24's ordered build gates A–F, and doc 12's sixteen
-golden scenarios G-01–G-16 with a pass line each.)*
+*(Framing:)* so the first measure is the morning itself: the owner and
+their brother-in-law, together in the game at the address above, having
+fun. Two people playing together means online co-op with one shared party
+(D-012, D-013), not only a solo build. "As much of the vision as possible"
+is the orchestrator's call ("free reign"); doc 24's gates and doc 12's
+golden scenarios remain the owner's own yardsticks for what to add next.
 
 ## Principles that decide most questions
 
@@ -204,11 +209,9 @@ Detail: doc 24 (build gates A–F), doc 12 (golden scenarios).
 
 ## Still open
 
-- **The measure** (Q-003): build gates, golden scenarios, or other.
-- **Is a push to `main` the deploy?** with the orchestrator (outbox).
 - **Stale rules inside the Drive library** (Q-005), **"current" art boards
-  that fail the art gate** (Q-006), **which first slice** (Q-007), **how
-  you leave the cantina brawl** (Q-008).
+  that fail the art gate** (Q-006), **how you leave the cantina brawl**
+  (Q-008).
 - The library's own OPEN list (doc 11, O-001–O-015: camera, party size,
   player cap, save ownership, power rules, persistence, …) stays open
   until the owner settles each.

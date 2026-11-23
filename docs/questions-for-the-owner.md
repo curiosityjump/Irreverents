@@ -71,27 +71,7 @@ entries group them; they are not entries.
 
 ---
 
-## Open (6)
-
-**Blocking the plan**
-
-### Q-009 · Is the Railway service connected to this repo, so a push to `main` goes live?
-- **Asked by:** Vision Partner, `session_017WiGzHC3CvjTNZqCuxa8Ex`, 2026-11-23 UTC, parent none
-- **Question:** irreverents-production.up.railway.app currently answers Railway's own "Application not found", so nothing is deployed there yet. Sessions here have no Railway login; they can only push to GitHub. Options: (1) the Railway service already deploys from `curiosityjump/Irreverents` branch `main` automatically, so a push is the deploy; (2) you will connect it before bed; (3) you deploy by hand in the morning.
-- **Unblocks:** a build you can actually open in the morning, and how carefully every session finishes (a push to `main` = going live).
-- **Recommendation:** (Vision Partner's) 2 if not already 1: in Railway, make the `irreverents-production` service deploy from this repo's `main`.
-- **Answer goes to:** `docs/vision.md` "The long-term direction"
-- **Source:** this entry
-- **Blocking:** yes
-
-### Q-003 · How should we measure that the game is moving the right way?
-- **Asked by:** Vision Partner, genesis, `session_017WiGzHC3CvjTNZqCuxa8Ex`, 2026-11-23 UTC, parent none
-- **Question:** The plan needs one number a session can check. Your library already has 16 "golden scenarios" with pass lines, e.g. G-04 "Solo player is not hard-blocked by player count" and G-08 "player says 'OHH!' without relying on giant text damage numbers". Options: (1) the count of golden scenarios (G-01 to G-16, doc 12) that pass in a playable build, judged by you playing it; (2) doc 24's six build gates in order (A: "movement + jump + attack + grab/throw are joyful in a graybox test" … F: "2-player same-party online works reliably"); (3) something else you'd judge by.
-- **Unblocks:** `docs/plan.md` "The destination, and the measure"; the orchestrator's first plan.
-- **Recommendation:** (Vision Partner's) 2 first, then 1: the gates say what to build in order, the scenarios say when the whole thing works.
-- **Answer goes to:** `docs/vision.md` "The measure"
-- **Source:** `docs/design-library/04-decisions-and-prototyping/12-golden-scenarios-and-prototype-acceptance-tests.md`; `docs/design-library/02-gameplay-systems/24-feasible-game-architecture-making-irreverents-playable.md` ("Decision gates")
-- **Blocking:** yes
+## Open (3)
 
 **Fixes for the Drive library (non-blocking; the newer rule wins until you say otherwise)**
 
@@ -113,15 +93,6 @@ entries group them; they are not entries.
 - **Source:** `docs/design-library/04-decisions-and-prototyping/32-verified-drive-audit-and-art-curation-gate.md`; `docs/design-library/03-visual-direction-and-assets/current-pixel-art-explorations/`
 - **Blocking:** no
 - **Note (Vision Partner, 2026-11-23):** the E01 tilekit also has small defects (3 duplicate tiles per atlas, e.g. "wall_torch" draws as plain wall; its 384×224 screen size is neither of doc 14's options, 240×160 or 320×180). It is labelled experimental, so this only matters if someone builds on it.
-
-### Q-007 · Which first slice?
-- **Asked by:** Vision Partner, genesis, `session_017WiGzHC3CvjTNZqCuxa8Ex`, 2026-11-23 UTC, parent none
-- **Question:** Four docs each propose a near-identical first playable slice, none approved by you: doc 12 ("compact explorable castle-town/royal audience and connected secret undercroft"), doc 05, doc 18, doc 25; doc 27 proposes a smaller one ("a town/shop, transition passage and forest bandit outpost"); doc 24 proposes "5–6 rooms, 3 characters, 2 powers, 4 archetypes, 1 hijackable machine and 1 Hall pedestal". Options: (1) let the orchestrator propose one from these for you to approve; (2) you pick one now.
-- **Unblocks:** the first real step of `docs/plan.md`.
-- **Recommendation:** (Vision Partner's) 1.
-- **Answer goes to:** `docs/vision.md` "Frontiers"
-- **Source:** `docs/design-library/04-decisions-and-prototyping/12-golden-scenarios-and-prototype-acceptance-tests.md` and the others named
-- **Blocking:** no
 
 ### Q-008 · How does someone leave the endless cantina brawl?
 - **Asked by:** Vision Partner, genesis, `session_017WiGzHC3CvjTNZqCuxa8Ex`, 2026-11-23 UTC, parent none
