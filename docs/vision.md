@@ -157,6 +157,14 @@ measure, not as acceptable placeholders.
 **Promotion needs the owner.** **Owner, 2026-11-22 (Drive, doc 00):**
 > Only the Decision Register authorizes a brainstorm example as a firm requirement. If a speculative example appears in a doc, it must remain labeled accordingly.
 
+**The effort goes into the game; the process is only a guard rail.** **Owner, 2026-11-23 ~14:40 UTC, to Vision Partner, first-hand, after hearing that most usage had gone on coordinating sessions (and two stops on the account limit) rather than visible game:**
+> I want as much as possible to go into actually building the game. The structure is just meant to prevent wasteful work drifting from the vision or stepping on eachothers toes, fixing things that arent broken, etc. if things can be done more efficiently to get much more resukts for less tokens, the team has full license to do that
+
+*(Framing:)* so any procedure, document, role or check that costs more than
+the drift, collisions or needless "fixes" it prevents may be trimmed, merged
+or dropped by the team without asking. Results visible in the game, per
+token, are what the process is judged by.
+
 ## Frontiers
 
 *(Framing: one line each on what the owner wants built, pointing at the
