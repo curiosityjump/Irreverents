@@ -1,3 +1,4 @@
+import { drawRecruitCalls, drawRecruits } from './draw/recruits.ts';
 import type { Content } from '../content/types.ts';
 import type { World } from '../sim/types.ts';
 import { drawAlert, drawBells } from './draw/alert.ts';
@@ -85,6 +86,8 @@ export function render(g: CanvasRenderingContext2D, world: World, content: Conte
   // Step 19: every person's sight, faint, behind the bodies (draw/sight.ts).
   drawSight(g, world, content, roomId, ox, oy);
   drawEntities(g, world, content, roomId, ox, oy, pv);
+  // Step 13: a captive in a cage, the bars over them (src/client/draw/recruits.ts).
+  drawRecruits(g, world, content, roomId, ox, oy, pv);
   drawSignalers(g, world, content, roomId, ox, oy);
   drawAway(g, world, content, roomId, ox, oy, pv);
   // Round 2: backdrop layers marked `front` (foreground foliage along the bottom or top edge).
@@ -98,6 +101,7 @@ export function render(g: CanvasRenderingContext2D, world: World, content: Conte
   if (pv && mine && mine.room === roomId) drawUseHint(g, useHere(world, content, mine), ox, oy, pv.frame, mine.y);
   drawNpcs(g, world, content, roomId, ox, oy);
   drawUnseenMarks(g, roomId, ox, oy);
+  drawRecruitCalls(g, world, content, roomId, ox, oy);
   drawAlert(g, world, content, roomId, ox, oy);
   drawAudience(g, world, content, roomId, ox, oy);
   drawHall(g, world, content, roomId, ox, oy);

@@ -24,7 +24,7 @@ const LOOKS = {
 } as const;
 
 /** A short text in a little box, centred on cx with its bottom at y, kept inside the screen. */
-function label(g: CanvasRenderingContext2D, text: string, cx: number, bottom: number, fill: string, color: string): void {
+export function label(g: CanvasRenderingContext2D, text: string, cx: number, bottom: number, fill: string, color: string): void {
   g.font = 'bold 8px monospace';
   g.textBaseline = 'top';
   const lh = lineHeight('dark', 8);
@@ -44,7 +44,7 @@ function label(g: CanvasRenderingContext2D, text: string, cx: number, bottom: nu
  * at the speaker, centred on cx with the tail's tip at `bottom`, kept
  * inside the screen. Returns false when the look is missing.
  */
-function bubble(g: CanvasRenderingContext2D, text: string, cx: number, bottom: number): boolean {
+export function bubble(g: CanvasRenderingContext2D, text: string, cx: number, bottom: number): boolean {
   if (!look('bark')) return false;
   const tail = look('bark-tail');
   g.font = 'bold 8px monospace';
@@ -76,7 +76,7 @@ function bubble(g: CanvasRenderingContext2D, text: string, cx: number, bottom: n
  * beside it, level with where their head is (kept on screen). With no `bark-edge` look, the
  * same bubble with a small plain arrow. DRAFT: the layout.
  */
-function edgeBark(g: CanvasRenderingContext2D, content: Content, e: Entity, text: string, side: number, top: number): void {
+export function edgeBark(g: CanvasRenderingContext2D, content: Content, e: Entity, text: string, side: number, top: number): void {
   const W = g.canvas.width;
   const H = g.canvas.height;
   const chip = look('bark-edge');

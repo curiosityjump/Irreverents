@@ -49,3 +49,36 @@ ids never change.
   a new kept game and `main` start with the list on the server and on the
   joining page, a `?room=` world has none; control: the `makeWorld` line
   off).
+
+## The captive (push 2)
+
+- **`content/recruits/<id>.json`** (kind `src/content/kinds/recruits.ts`):
+  `character` (a roster character outside `start`, one place each),
+  `room`, `tile` (the cage's bottom-left, on solid floor), `w` (tiles
+  wide, default 2), `look` / `openLook` (optional; left out, plain drawn
+  bars), `hold` (seconds of Use, push 3), `call` (the words), `callEvery`,
+  `callFor` (seconds). `DRAFT:` tonight one file, `camp-captive`: the
+  skirmisher at the Bandit Camp's columns 33-34, row 10, inside the second
+  fighter's look east, clear of the waves' entry at column 41.
+- **The entity** `recruit:<id>` (`INTENT:` a contract once pushed; kept
+  games hold it), kind `~thing`, `c.recruit = { id, character, open,
+  hold }`, at the cage's bottom-left in pixels. **`INTENT:` a thing, never
+  a body**: nothing hits, grabs or throws it, sight never sees it, an
+  outpost's `bound` never counts it (`step13-captive-caged`; control: made
+  a skirmisher body, the swing hits it).
+- **Placed by `populateRoom`** (`placeRecruits`, `src/sim/recruits.ts`),
+  like the cantina's entity, so only a world that is made (the server's
+  `makeWorld`, a kept game's load, a scenario with `placements`) has one,
+  never a page's own world. Not placed when the world's roster names the
+  hero (`step13-captive-already-found`). **`DRAFT:` a world with no
+  roster of its own (a `?room=` world, a game saved before Step 13) still
+  gets the captive**, so the rescue is played there too; freeing them adds
+  nobody new there.
+- **On screen** (`src/client/draw/recruits.ts`): the captive drawn with
+  their own sprite in the cage's middle, facing the viewer, the bars over
+  them; every `callEvery` seconds for `callFor`, their call in a bubble
+  over the cage, or at the screen's edge (`edgeBark`, the `bark-edge` chip
+  with their head) when the cage is off screen. `drawn.recruits = { cages,
+  calls }`. The cage is `cage-shut` / `cage-open` (P04's barred gate, cut
+  by the core-loop art builder, `content/looks/outpost.json`); a recruit
+  file without looks gets plain drawn bars (`drawBars`).

@@ -1,0 +1,17 @@
+{
+  "//": "DRAFT (Step 13): the skirmisher, caged on the Bandit Camp's floor two rooms from the start, inside the second fighter's look east (he faces east 7 s, west 3 s). Cage columns 33-34, row 10: clear of the waves' entry at column 41 (nothing at 39-42). Hold Use 2.5 s, a little less than his 3 s look away. The cage: P04's barred gate, cut by the core-loop art builder (content/looks/outpost.json).",
+  "id": "camp-captive",
+  "character": "skirmisher",
+  "room": "outpost",
+  "tile": [
+    33,
+    10
+  ],
+  "w": 2,
+  "look": "cage-shut",
+  "openLook": "cage-open",
+  "hold": 2.5,
+  "call": "Psst! Over here! Get me out!",
+  "callEvery": 6,
+  "callFor": 2.5
+}

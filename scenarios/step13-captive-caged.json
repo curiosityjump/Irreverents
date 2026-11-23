@@ -1,0 +1,21 @@
+{
+  "id": "step13-captive-caged",
+  "proves": "in a new game (the roster's start list) the camp holds the skirmisher caged at columns 33-34 as a bodiless thing: present and shut throughout, never unlocked by being there, and a hero swinging at the cage and trying to grab it beside it lands no hit, no grab and no impact on the captive (it is not a body). Control (watched to fail): the captive made a skirmisher body in src/sim/recruits.ts, and the swing hits it",
+  "room": "outpost",
+  "placements": true,
+  "world": { "roster": ["grappler", "infiltrator", "flyer", "brawler"] },
+  "players": [{ "id": "a", "character": "grappler", "spawn": 0 }],
+  "entities": [{ "id": "z-swinger", "character": "grappler", "tile": [32, 10] }],
+  "inputs": [
+    { "entity": "z-swinger", "from": 0, "to": 4, "x": 1 },
+    { "entity": "z-swinger", "from": 10, "to": 14, "hold": ["attack"] },
+    { "entity": "z-swinger", "from": 40, "to": 44, "hold": ["attack"] },
+    { "entity": "z-swinger", "from": 70, "to": 74, "hold": ["grab"] }
+  ],
+  "ticks": 180,
+  "expect": [
+    { "fact": "recruit", "id": "camp-captive", "between": [0, 180], "present": true, "open": false, "unlocked": false },
+    { "fact": "event-where", "event": "hit", "where": { "target": "recruit:camp-captive" }, "between": [0, 180], "count": [0, 0] },
+    { "fact": "event-where", "event": "grabbed", "where": { "target": "recruit:camp-captive" }, "between": [0, 180], "count": [0, 0] }
+  ]
+}

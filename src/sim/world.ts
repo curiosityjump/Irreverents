@@ -1,6 +1,7 @@
 import type { Content } from '../content/types.ts';
 import { cantinaEntity, cantinaId } from './cantina.ts';
 import { firstFreeMember } from './party.ts';
+import { placeRecruits } from './recruits.ts';
 import type { Entity, Input, World } from './types.ts';
 
 export const NO_INPUT: Input = { x: 0, y: 0, held: [] };
@@ -104,6 +105,8 @@ export function populateRoom(world: World, content: Content, roomId: string): vo
   // Step 11: a cantina room starts with the bodiless entity its brawl runs on
   // (src/sim/cantina.ts); its regulars are added by systems/cantina-regulars.ts.
   if (content.cantina?.[roomId] && !findEntity(world, cantinaId(roomId))) addEntity(world, cantinaEntity(roomId));
+  // Step 13: a captive hero in their cage (src/sim/recruits.ts), bodiless like the cantina's.
+  placeRecruits(world, content, roomId);
   const placed = content.placements?.[roomId];
   if (!placed) return;
   for (const p of placed.place) {

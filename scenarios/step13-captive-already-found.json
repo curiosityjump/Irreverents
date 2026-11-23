@@ -1,0 +1,13 @@
+{
+  "id": "step13-captive-already-found",
+  "proves": "a world whose roster already names the skirmisher (freed before, kept with the game) has no captive in the camp; a world with no roster of its own (a ?room= world, an old save) still has one, everyone being unlocked there",
+  "room": "outpost",
+  "placements": true,
+  "world": { "roster": ["grappler", "infiltrator", "flyer", "brawler", "skirmisher"] },
+  "players": [{ "id": "a", "character": "grappler", "spawn": 0 }],
+  "inputs": [],
+  "ticks": 30,
+  "expect": [
+    { "fact": "recruit", "id": "camp-captive", "between": [0, 30], "present": false, "unlocked": true }
+  ]
+}
