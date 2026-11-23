@@ -401,3 +401,13 @@ OWNER CONFIRMED — CENTRAL ASSET DISCOVERY AND ROUTING 23 NOV 2026
 D-096 The ROOT asset library index provides functional routing to ALL CURRENT significant game art, not merely newly delivered items. Before an assistant creates, requests or integrates an asset, it must inspect relevant earlier assets (especially rich original pixel character/scene references) and prefer reuse or conversion to inferior replacements. The user explicitly reported valuable prior assets being lost/overlooked. INDEX each new deliverable with exact Drive file/folder links, name, asset ID/category, status (visual reference vs importable prototype vs rejected), version, source request and integration usage BEFORE closing the request. Update current preferred version and changelog when superseded; no owner approval gate is added. A rejected asset stays rejected. This is discovery/routing governance, not a new canonical game mechanic.
 
 ASSET INDEX: https://docs.google.com/document/d/1bnr7GUgrYBVVY0BMkwx4qRPvW45Nk4grn-Tk6THcoY8/edit
+
+OWNER VISUAL DIRECTION — EXPRESSIVE CHARACTER FACES (2026-11-23, UNNUMBERED TO AVOID HISTORICAL DUPLICATE D-IDS)
+
+The owner explicitly likes the A00 artwork and currently separated P01 prototype art direction, but now requests SIGNIFICANTLY MORE EXPRESSIVE CHARACTER FACES, in the emotional/animation spirit of Kirby while preserving original designs. Characters should change eyes/mouth/head expression across joy, sneaking, focus, surprise, attack exertion, injury and win states, legibly at iPhone gameplay resolution; faces cannot remain fixed dots through all action poses. Facial variation and character-specific personality are a visual production REQUIREMENT for future character/NPC artwork. No new NPC AI or rewritten NPC behavior. P01 remains an importable prototype until separately QA-validated expression upgrades exist; don't claim existing sprite files have been replaced. No owner preapproval gate.
+
+Preferred controlling reference and implementation spec: https://docs.google.com/document/d/1W1rOej7YL6MGcvwZfbpBTBqMyMz9Q_O2zpLNCZ2XNL8/edit
+
+Owner-endorsed six-image corpus: https://drive.google.com/drive/folders/1ejWvlQBo85YiC_5dsTxZFZugwFxKS1pB
+
+P01 current game-usable prototype art: https://drive.google.com/drive/folders/1sXUTCyW2FTt0xuBauWfgSrUpfVw3ET43

@@ -2,6 +2,18 @@
 
 ---
 
+OWNER-ENDORSED ART COMPS + FIRST USABLE PACK (2026-11-23)
+
+A00 exact six positive-but-not-perfect images: https://drive.google.com/drive/folders/1ejWvlQBo85YiC_5dsTxZFZugwFxKS1pB
+
+P01 usable proto PNGs/props/VFX/terrain/hero states/atlas/demo/manifest: https://drive.google.com/drive/folders/1sXUTCyW2FTt0xuBauWfgSrUpfVw3ET43
+
+P02 newly generated but extraction-required visual source plates: https://drive.google.com/drive/folders/1XQc2TZEkYJA2ZF9KvDOMHRPcEo_Q8msv
+
+Reproduce/validate/future-route per controlling Art Production SOP: https://docs.google.com/document/d/1SinRhkiHFGlbZfsvYziXlSlVxerQG7J2vSgl3KxlWVo/edit.
+
+Use P01 (or a genuinely better later version) for browser implementation, P02 and A00 for art direction, do not re-use rejected C02 rectangles as final looks.
+
 CURRENT ASSET ROUTER — READ THIS FIRST (23 NOV 2026)
 
 Use the ROOT ASSET LIBRARY INDEX for best-existing asset by character/level/tiles/NPC/UI/audio, all 55 files with links, two recovered earlier strong visual references, version/status, direct deliveries, and handoff rules: https://docs.google.com/document/d/1bnr7GUgrYBVVY0BMkwx4qRPvW45Nk4grn-Tk6THcoY8/edit

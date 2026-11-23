@@ -146,14 +146,61 @@
    "id": "1reKfubHb_S6mSyn89kTSm8T2bSRd67E2MptsL24skL8",
    "drive_path": "/03 Visual Direction and Assets/00 Asset Production Plan and Style Lock/13 — Art Asset Production Plan — Ordered Generation Backlog",
    "repo_path": "03-visual-direction-and-assets/00-asset-production-plan-and-style-lock/13-art-asset-production-plan-ordered-generation-backlog.md",
-   "sha256": "312ebe143f4793aee9d4b5b397bdf747c136b0526aa37fecd92ba0521a777356"
+   "sha256": "ab4b311871f2dd19ffb2f1400b3dbc6a40147290716babc7b003b4718b43552f"
   },
   {
    "kind": "doc",
    "id": "1TYZcSUJ6pRxWCp76f2mrvwAAz90PRCYVRAWiejmJFFI",
    "drive_path": "/03 Visual Direction and Assets/00 Asset Production Plan and Style Lock/14 — Visual Style Lock — Amazing Mirror-Era Pixel-Art Contract",
    "repo_path": "03-visual-direction-and-assets/00-asset-production-plan-and-style-lock/14-visual-style-lock-amazing-mirror-era-pixel-art-contract.md",
-   "sha256": "b18ec4e26cfccb3d117148209e5836c157515200c9ad193d9c6f29107c286a8a"
+   "sha256": "7d39d16c66ebaa081c0a942fba1ff552f96701f68053daf2b6f8048d0760193d"
+  },
+  {
+   "kind": "folder",
+   "id": "1ejWvlQBo85YiC_5dsTxZFZugwFxKS1pB",
+   "drive_path": "/03 Visual Direction and Assets/00 OWNER-ENDORSED STYLE COMPS — A00"
+  },
+  {
+   "kind": "file",
+   "id": "1P21VRQFcVSMoKP0hx3RRVy5C9lzC1iTy",
+   "drive_path": "/03 Visual Direction and Assets/00 OWNER-ENDORSED STYLE COMPS — A00/A00-01 — Castle vault stealth states and readable gameplay.jpeg",
+   "repo_path": "03-visual-direction-and-assets/00-owner-endorsed-style-comps-a00/a00-01-castle-vault-stealth-states-and-readable-gameplay.jpeg",
+   "sha256": "b98e55b44564e8bc8679e0a4cbde9d1cd9f63dc812d4a8c8a6e7d1273eab0352"
+  },
+  {
+   "kind": "file",
+   "id": "12dykuEr3C7-Wi_73Sa8SZS3WQwDxYy1G",
+   "drive_path": "/03 Visual Direction and Assets/00 OWNER-ENDORSED STYLE COMPS — A00/A00-02 — Acquired powers, enemies, guards and NPC reactions.jpeg",
+   "repo_path": "03-visual-direction-and-assets/00-owner-endorsed-style-comps-a00/a00-02-acquired-powers-enemies-guards-and-npc-reactions.jpeg",
+   "sha256": "618043e5785ee7b4dd3083d4ab98211bdd680ca7021388a63b4b64e472f63c73"
+  },
+  {
+   "kind": "file",
+   "id": "1l3v1P34IyDFD__62pfCdQgjJEtFr2NAP",
+   "drive_path": "/03 Visual Direction and Assets/00 OWNER-ENDORSED STYLE COMPS — A00/A00-03 — Co-op adventure, world map, HUD and gameplay moments.jpeg",
+   "repo_path": "03-visual-direction-and-assets/00-owner-endorsed-style-comps-a00/a00-03-co-op-adventure-world-map-hud-and-gameplay-moments.jpeg",
+   "sha256": "5a2f962072f3bfc0407230f2a6889d7b41f82aad87fbf6c72d9d114fc4df2544"
+  },
+  {
+   "kind": "file",
+   "id": "15hT8ORwyDGnZpJ-tkIEOPyT5eqzazPE2",
+   "drive_path": "/03 Visual Direction and Assets/00 OWNER-ENDORSED STYLE COMPS — A00/A00-04 — Playable character expressiveness and pose study.jpeg",
+   "repo_path": "03-visual-direction-and-assets/00-owner-endorsed-style-comps-a00/a00-04-playable-character-expressiveness-and-pose-study.jpeg",
+   "sha256": "9f23c7c679417547775162efa4c2c998d4e27c455c3d37a088c6d9d4f020c9e6"
+  },
+  {
+   "kind": "file",
+   "id": "14WR_z8jpH8pUbbaOJ14EZqq4z_RZUzFy",
+   "drive_path": "/03 Visual Direction and Assets/00 OWNER-ENDORSED STYLE COMPS — A00/A00-05 — Game art coverage and environment variety.jpeg",
+   "repo_path": "03-visual-direction-and-assets/00-owner-endorsed-style-comps-a00/a00-05-game-art-coverage-and-environment-variety.jpeg",
+   "sha256": "9858a6536d2a4d664d94e431e79bcf179f5f98a7d2e05f3586784285c067a39a"
+  },
+  {
+   "kind": "file",
+   "id": "1Tp-1nw25b6h0KhqT5diryEj0uNBta6G9",
+   "drive_path": "/03 Visual Direction and Assets/00 OWNER-ENDORSED STYLE COMPS — A00/A00-06 — Grass, stone, ruins and reusable terrain parts.jpeg",
+   "repo_path": "03-visual-direction-and-assets/00-owner-endorsed-style-comps-a00/a00-06-grass-stone-ruins-and-reusable-terrain-parts.jpeg",
+   "sha256": "b924062868aaf99f9e4e5ff9d72adfd5015907dd3000d769d3bc9eff0c636363"
   },
   {
    "kind": "folder",
@@ -185,6 +232,18 @@
    "drive_path": "/03 Visual Direction and Assets/Audio/A01-01 — First SFX Pack/README.txt",
    "repo_path": "03-visual-direction-and-assets/audio/a01-01-first-sfx-pack/readme.txt",
    "sha256": "b8f23003e6e8c86a5911a9399e51389809243d9da691056b584cab4de0792bca"
+  },
+  {
+   "kind": "folder",
+   "id": "1czssq_XVJgBYyk1XwqHPuWNXR5tFJzQu",
+   "drive_path": "/03 Visual Direction and Assets/C02 — Hero Revision Source Studies"
+  },
+  {
+   "kind": "file",
+   "id": "187I-8MxxZ_5JW24Jegyqzp1LHYMl6p3C",
+   "drive_path": "/03 Visual Direction and Assets/C02 — Hero Revision Source Studies/C02-REV-source-24poses-NOT_NATIVE_ATLAS.png",
+   "repo_path": "03-visual-direction-and-assets/c02-hero-revision-source-studies/c02-rev-source-24poses-not-native-atlas.png",
+   "sha256": "f8cce8f6e532b172faa508e65d8b0dd0ca02cd740595adc07f73b7e49ddbf161"
   },
   {
    "kind": "folder",
@@ -710,6 +769,53 @@
   },
   {
    "kind": "folder",
+   "id": "1XQc2TZEkYJA2ZF9KvDOMHRPcEo_Q8msv",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P02 — Reviewed Sprite Visual Sources (Extract Before Import)"
+  },
+  {
+   "kind": "file",
+   "id": "19965AHohBmHfSI_gQ66OAKalby0HzhKk",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P02 — Reviewed Sprite Visual Sources (Extract Before Import)/manifest.json",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p02-reviewed-sprite-visual-sources-extract-before-import/manifest.json",
+   "sha256": "00cde20beb071909323c5d84fd7f218a772ba85b9c62ba79ea962910c68de6f5"
+  },
+  {
+   "kind": "file",
+   "id": "1TxUAQkasnag5dbc1_GQ8zVKtnNhgmRNR",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P02 — Reviewed Sprite Visual Sources (Extract Before Import)/pixel_art_effects_and_pickup_spritesheet.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p02-reviewed-sprite-visual-sources-extract-before-import/pixel-art-effects-and-pickup-spritesheet.png",
+   "sha256": "67cf68f77f3076ae107881f8cce4d4e010160ac00b755491654634c2fd8da21d"
+  },
+  {
+   "kind": "file",
+   "id": "1Orv8j0zozWPrT4LN89cjR52PKNquoPV9",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P02 — Reviewed Sprite Visual Sources (Extract Before Import)/pixel_art_ruin_and_woodland_prop_sprite_sheet.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p02-reviewed-sprite-visual-sources-extract-before-import/pixel-art-ruin-and-woodland-prop-sprite-sheet.png",
+   "sha256": "6d43a5201a818d054e982b3611b10e6be0c91fd524918ec5f04a73563deea39e"
+  },
+  {
+   "kind": "file",
+   "id": "1lJofvbX0BGdgGCEjllZjTAmYsQNKlbow",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P02 — Reviewed Sprite Visual Sources (Extract Before Import)/pixel_art_terrain_prefab_spritesheet.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p02-reviewed-sprite-visual-sources-extract-before-import/pixel-art-terrain-prefab-spritesheet.png",
+   "sha256": "fc879e681aeeca06870f411b9c664bda0ad75df45cfce181a967bb47be2d03bf"
+  },
+  {
+   "kind": "file",
+   "id": "1ERdLW9mxX0GN0-fgYv3jhH03ti92uBrc",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P02 — Reviewed Sprite Visual Sources (Extract Before Import)/README_FOR_CLAUDE.md",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p02-reviewed-sprite-visual-sources-extract-before-import/readme-for-claude.md",
+   "sha256": "fc92f80af20d5ff22a2f82b5e8b7418eba2414dd1c09f9e492a93068ca7aa90b"
+  },
+  {
+   "kind": "file",
+   "id": "1t1WGMXQR8fzSqpPHtA2qXvkfxOtbsGpI",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P02 — Reviewed Sprite Visual Sources (Extract Before Import)/retro_scout_and_rogue_sprite_sheet.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p02-reviewed-sprite-visual-sources-extract-before-import/retro-scout-and-rogue-sprite-sheet.png",
+   "sha256": "88af762c5e235dfd8dce2c087716966bfaf0a163f9a754b42d336ea2c19ed02b"
+  },
+  {
+   "kind": "folder",
    "id": "11Wli0oy1WAtgIHT4ZUPX5Nprs0nM3RBD",
    "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/Quiet pixel-art environment studies — reduced visual noise"
   },
@@ -1058,7 +1164,7 @@
    "id": "1VJOvGqbT3wcqgD8-PaXpftODBr42ChGmqdBYHvx7_i0",
    "drive_path": "/03 Visual Direction and Assets/10 — Visual Direction, Asset Index and Art Brief",
    "repo_path": "03-visual-direction-and-assets/10-visual-direction-asset-index-and-art-brief.md",
-   "sha256": "26b34ef99bfa30288c1ca8e8610049904f90a195f2e66a4446b067d8257599fe"
+   "sha256": "d73b356a94fdd72b416d3d0beaefe9a8d63196fe3c4bef7fddcb39975c001915"
   },
   {
    "kind": "folder",
@@ -1070,7 +1176,7 @@
    "id": "1vlwf5VZgwT0E0cKqYF4o0EI5LhuR4iiZxCyVUUreytU",
    "drive_path": "/04 Decisions and Prototyping/11 — Decision Register, Boundaries and Open Questions",
    "repo_path": "04-decisions-and-prototyping/11-decision-register-boundaries-and-open-questions.md",
-   "sha256": "cf393e8b7fd172d8ef46ce653a34771244062b9cc3794198145241349d3e7896"
+   "sha256": "63591eb48263e485079ad11bc313a74468f24234b542fb4ebb154acefc3efa8b"
   },
   {
    "kind": "doc",
@@ -1190,14 +1296,14 @@
    "id": "1velYJklnMai16cH12kYu-BIlyhx_p-6NlSpO41vfuKw",
    "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/01 REQUESTS — Claude to ChatGPT/REQ — C02-02/C02-03 REVISION — More expressive heroes with real animation",
    "repo_path": "06-asset-collaboration-claude-chatgpt/01-requests-claude-to-chatgpt/req-c02-02-c02-03-revision-more-expressive-heroes-with-real-animation.md",
-   "sha256": "f248779a7e06058ac767d562a3a12dd9efe1d6ed90522fd6f1b3d5f17a1d18ec"
+   "sha256": "84230354ec768ab0923022dc4fdda6485395e3043ee10024c00e16057aea181e"
   },
   {
    "kind": "doc",
    "id": "1fNd5TuX7J6ANSNDyUqPXZlo-2wu35OPzvkgFxLhfnA4",
    "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/01 REQUESTS — Claude to ChatGPT/REQ — C02-04 + N03-05/N03-06 — Third hero (flyer), the king and the villain; plus priority order for everything pending",
    "repo_path": "06-asset-collaboration-claude-chatgpt/01-requests-claude-to-chatgpt/req-c02-04-n03-05-n03-06-third-hero-flyer-the-king-and-the-villain-plus-priority-order-for-everything-pending.md",
-   "sha256": "09a1e2523352d3b86fa5734cd32b0168b80bc69605b1d8c5cc83883c1bd8d8a7"
+   "sha256": "b6110b0b9df585c0af1c9a1967b8375f429c72cccef8a4f21dc53935ad74f15e"
   },
   {
    "kind": "doc",
@@ -1249,42 +1355,56 @@
    "id": "1oBpJKI2P7v7rwoMku-TbcFuVQe2iajddK6v2i5Ro0G0",
    "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/00 START HERE — Claude ↔ ChatGPT Asset Request Protocol",
    "repo_path": "06-asset-collaboration-claude-chatgpt/00-start-here-claude-chatgpt-asset-request-protocol.md",
-   "sha256": "694d1fa747908f0ddbd97fc2aef3c7927eed4418085257e2c98172aa26ca5608"
+   "sha256": "278e104f2705aa028492662005b68eff093e2ed01d9a25a91d2233b1689c39fb"
   },
   {
    "kind": "doc",
    "id": "1ntJHj5rYYi59_o4-0c5Pf-rFYKcJvX1ZlUP43nCJaUw",
    "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/01 COPY THIS — Asset Request Template (Claude)",
    "repo_path": "06-asset-collaboration-claude-chatgpt/01-copy-this-asset-request-template-claude.md",
-   "sha256": "1703e718b809542fad3f4d9a7e83f1e765f13277914d925c784a150c4072fa4e"
+   "sha256": "7dc9f6b53f9e017dddc3952bb2fa50bf99815af153ad3a80b07669fbdabe0237"
   },
   {
    "kind": "doc",
    "id": "17OlSfBfTnUEUTmbo-zcsl4VrSn1mPny-zAP6kZaiodU",
    "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/02 VISUAL QUALITY GATE — Art-first asset production and acceptance",
    "repo_path": "06-asset-collaboration-claude-chatgpt/02-visual-quality-gate-art-first-asset-production-and-acceptance.md",
-   "sha256": "2d84cb7776e9e20d73f9975b453d10e2391fce29b3e2b6bab0e83ea8b7e9f5fe"
+   "sha256": "0179b8f1efae35a30b7b7ecbe1132b72c438f025ebe0be3ae6fce5cc07e4c1b4"
   },
   {
    "kind": "doc",
    "id": "1-ASnTbCLAXSi_WCOl_7KNuUgelLXLmiZFKiN6APao2s",
    "drive_path": "/00 START HERE — Irreverents",
    "repo_path": "00-start-here-irreverents.md",
-   "sha256": "b147d9ba2fcb52d3ee9174f8e2ce8f9bfe62aadd730f02009f9a06e54640fa9c"
+   "sha256": "028a16472aaef91ab17916a28d9125471fb854c3ca721afee131b66ff65380db"
+  },
+  {
+   "kind": "doc",
+   "id": "1SinRhkiHFGlbZfsvYziXlSlVxerQG7J2vSgl3KxlWVo",
+   "drive_path": "/34 — Art Production SOP — Reproduce the Owner-Endorsed Pixel Look",
+   "repo_path": "34-art-production-sop-reproduce-the-owner-endorsed-pixel-look.md",
+   "sha256": "15ad3a25fab3737721cf863804c18ab7edf33009b6d4a6144c4e748c99d58e4a"
+  },
+  {
+   "kind": "doc",
+   "id": "1W1rOej7YL6MGcvwZfbpBTBqMyMz9Q_O2zpLNCZ2XNL8",
+   "drive_path": "/35 — Character Facial Expressions and Acting: Production Standard",
+   "repo_path": "35-character-facial-expressions-and-acting-production-standard.md",
+   "sha256": "a6ed30b4618077c8a34003f08bd5251507b04519a1c8898dcf2c14c688872603"
   },
   {
    "kind": "doc",
    "id": "1bnr7GUgrYBVVY0BMkwx4qRPvW45Nk4grn-Tk6THcoY8",
    "drive_path": "/ASSET LIBRARY — START HERE (Claude)",
    "repo_path": "asset-library-start-here-claude.md",
-   "sha256": "5a7b3212a5f4fffffc24f95d197e0be14cbfefa713b2fed09940691dac453423"
+   "sha256": "74ddbbc480f623140eb9e212325e922a217b17de194e4a83081fae796b628c9d"
   },
   {
    "kind": "doc",
    "id": "17R7aKkqDxQwRk-cmywQbvQ_CcEzz4UqHz37YYYRnADs",
    "drive_path": "/changelog",
    "repo_path": "changelog.md",
-   "sha256": "c820b49a0710c31c27f5b263092daf00ec1a65e0d6bb50309d5d34cc3042b5ae"
+   "sha256": "854722bb4658bee578fae9fc428d88a141868a9b89e8290b3433d8d1503c7837"
   }
  ]
 }

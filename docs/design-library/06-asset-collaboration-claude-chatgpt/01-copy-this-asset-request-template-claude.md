@@ -2,6 +2,8 @@
 
 ---
 
+BEFORE ANY NEW REQUEST (2026-11-23): Check six owner-endorsed style comps https://drive.google.com/drive/folders/1ejWvlQBo85YiC_5dsTxZFZugwFxKS1pB, existing P01 usable sprites https://drive.google.com/drive/folders/1sXUTCyW2FTt0xuBauWfgSrUpfVw3ET43, P02 source sheets https://drive.google.com/drive/folders/1XQc2TZEkYJA2ZF9KvDOMHRPcEo_Q8msv, and required production SOP https://docs.google.com/document/d/1SinRhkiHFGlbZfsvYziXlSlVxerQG7J2vSgl3KxlWVo/edit. State which existing file(s) already cover your need, and ask for a named extraction/revision rather than a low-grade re-creation. Deliverable must be a valid separate transparent PNG set with manifest and phone-scale review, not just a pretty generated sheet.
+
 MANDATORY — CHECK THE ASSET CATALOG BEFORE SUBMITTING A REQUEST
 
 https://docs.google.com/document/d/1bnr7GUgrYBVVY0BMkwx4qRPvW45Nk4grn-Tk6THcoY8/edit

@@ -2,6 +2,22 @@
 
 ---
 
+LATEST CHARACTER ART IMPROVEMENT — EXPRESSIVE FACES (23 NOV 2026)
+
+Owner requests MUCH MORE EXPRESSIVE FACES, like the emotional immediacy of Kirby, WITHOUT copying Kirby's art. No generic dot-eyes reused unchanged for every action: communicate delight, focus, surprise, effort, hurt, stealth and comic reactions with small legible eye/mouth/head variations at iPhone gameplay scale. The existing P01 hero frames are usable prototypes, but need a face-acting improvement pass. Controlling NEW character facial expression guide: https://docs.google.com/document/d/1W1rOej7YL6MGcvwZfbpBTBqMyMz9Q_O2zpLNCZ2XNL8/edit
+
+Endorsed visual references: https://drive.google.com/drive/folders/1ejWvlQBo85YiC_5dsTxZFZugwFxKS1pB ; current prototype: https://drive.google.com/drive/folders/1sXUTCyW2FTt0xuBauWfgSrUpfVw3ET43 . Production SOP 34 remains controlling for technical delivery. All art can be used immediately and iterated; no owner preapproval bottleneck.
+
+CURRENT GAME ART — OWNER-ENDORSED COMPS + REPRODUCIBLE RECIPE (2026-11-23)
+
+The exact six owner-provided visual comparisons were SAVED in A00 (good directionally, not perfect/final): https://drive.google.com/drive/folders/1ejWvlQBo85YiC_5dsTxZFZugwFxKS1pB
+
+The ACTUAL usable P01 starter pack (not merely the concept sheet) is in Drive: https://drive.google.com/drive/folders/1sXUTCyW2FTt0xuBauWfgSrUpfVw3ET43 ; ZIP https://drive.google.com/file/d/1C48df-GK_259dtgqWW34BSKDjsgFOHp9/view ; JSON manifest https://drive.google.com/file/d/1aAVGla1M0OSP0V-j5HzpBdZ2e1P9o0Kj/view ; preview https://drive.google.com/file/d/1-5bp9vfdDCD_2EHaz8dlSpfsUHQrBR2N/view . Contains 14 individual character-state PNGs, 2 seven-state strips, 12 props, 8 terrain prefabs, 4 VFX, atlas and browser demo. STATUS: GAME-USABLE PROTOTYPE; frames limited, terrain is prefabs not seamless autotiles.
+
+Four additional recent generated source sheets are in P02: https://drive.google.com/drive/folders/1XQc2TZEkYJA2ZF9KvDOMHRPcEo_Q8msv . STATUS: SOURCE-ONLY / EXTRACTION REQUIRED (variable alpha, dark/checker remnants; 1448×1086 panels NOT engine-ready atlas). Use as art-direction source, never claim those sheets are native sprites.
+
+CONTROLLING DETAILED ART-PRODUCTION RECIPE: https://docs.google.com/document/d/1SinRhkiHFGlbZfsvYziXlSlVxerQG7J2vSgl3KxlWVo/edit . Open exact A00 refs and P01 assets, reproduce compact expressive navy-outlined GBA-like visual grammar (not copied franchise characters), extract clean separate transparent PNGs, validate animation, use phone-scale preview, upload in functional folder and update root asset index + changelog before closing requests. Owner permission to USE is automatic but quality/technical validation still required.
+
 ASSET DISCOVERY — REQUIRED FIRST STEP FOR CLAUDE AND CHATGPT (23 NOV 2026)
 
 Open the ROOT ASSET LIBRARY INDEX before creating, requesting or integrating art. It routes by use-case to the earlier strong visual references, newer usable prototypes, source archives, rejected material, and direct file links, and contains a full 55-file audit locator: https://docs.google.com/document/d/1bnr7GUgrYBVVY0BMkwx4qRPvW45Nk4grn-Tk6THcoY8/edit

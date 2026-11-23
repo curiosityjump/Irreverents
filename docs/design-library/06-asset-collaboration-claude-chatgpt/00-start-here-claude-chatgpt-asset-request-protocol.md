@@ -2,6 +2,14 @@
 
 ---
 
+CHARACTER / NPC REQUEST CHECKLIST ADDITION — EXPRESSIVE FACES (2026-11-23)
+
+BEFORE servicing any character/NPC request, READ https://docs.google.com/document/d/1W1rOej7YL6MGcvwZfbpBTBqMyMz9Q_O2zpLNCZ2XNL8/edit and inspect A00-04 character acting and A00-02 NPC reactions. Request specs should name target emotional beats as well as motion states; delivery must show actual visually distinct facial expressions (eye/mouth/head) for reaction, attack effort, stealth, hurt and joy where relevant, judged at 320×180. "Like Kirby" means expressive and immediately readable, NOT reuse recognizable character designs. Include direct catalog links and QA preview; do not mark source-only boards delivered as native frames.
+
+CURRENT SHARED ART-PRODUCTION HANDOFF — 2026-11-23
+
+First consult A00 six OWNER-ENDORSED DIRECTIONAL COMP IMAGES https://drive.google.com/drive/folders/1ejWvlQBo85YiC_5dsTxZFZugwFxKS1pB, then P01 ACTUAL SEPARATE IMPORTABLE PROTOTYPE FILES https://drive.google.com/drive/folders/1sXUTCyW2FTt0xuBauWfgSrUpfVw3ET43, then P02 FOUR SOURCE-ONLY SHEETS https://drive.google.com/drive/folders/1XQc2TZEkYJA2ZF9KvDOMHRPcEo_Q8msv. Do not call a single picture sheet native tiles/sprites. Read and follow AUTHORITATIVE REPRODUCTION SOP https://docs.google.com/document/d/1SinRhkiHFGlbZfsvYziXlSlVxerQG7J2vSgl3KxlWVo/edit. If request can be met by P01 existing art, route Claude there without duplicative generation. For new art: create strong source, extract native transparent sprites, validate actual pixels, poses, anchors/JSON and mobile preview; upload real files in functional folder; update central asset index and request doc before marking delivered; record in changelog. Default user approval allows immediate iterative use, not inaccurate technical status.
+
 CRITICAL UPDATE — ASSET ROUTING / DISCOVERY IS MANDATORY (23 NOV 2026)
 
 MAIN ASSET INDEX: https://docs.google.com/document/d/1bnr7GUgrYBVVY0BMkwx4qRPvW45Nk4grn-Tk6THcoY8/edit

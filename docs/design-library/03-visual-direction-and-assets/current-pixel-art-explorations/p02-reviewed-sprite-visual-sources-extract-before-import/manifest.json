@@ -1,0 +1,64 @@
+{
+  "asset_batch": "P02",
+  "date": "2026-11-23",
+  "status": "STYLE_SOURCE_EXTRACTION_REQUIRED",
+  "engine_ready": false,
+  "owner_use_policy": "Can use and iterate without sign-off; technical QA remains necessary",
+  "visual_style": "bright compact GBA-era side-view, original character identities, navy outlines, vivid clustered pixel shading, calm background",
+  "source_files": [
+    {
+      "filename": "retro_scout_and_rogue_sprite_sheet.png",
+      "role": "Scout and rogue, seven expressive pose examples each; key pose source only",
+      "dimensions_px": [
+        1448,
+        1086
+      ],
+      "mode": "RGBA",
+      "sha256": "88af762c5e235dfd8dce2c087716966bfaf0a163f9a754b42d336ea2c19ed02b",
+      "transparent_fraction": 0.077,
+      "partial_alpha_fraction": 0.923,
+      "warning": "Unnormalized alpha; visual sheet, not a clean sprite atlas"
+    },
+    {
+      "filename": "pixel_art_terrain_prefab_spritesheet.png",
+      "role": "Terrain, grass-and-stone platform prefab visual source only",
+      "dimensions_px": [
+        1448,
+        1086
+      ],
+      "mode": "RGBA",
+      "sha256": "fc879e681aeeca06870f411b9c664bda0ad75df45cfce181a967bb47be2d03bf",
+      "transparent_fraction": 0.521,
+      "partial_alpha_fraction": 0.479,
+      "warning": "Unnormalized alpha; visual sheet, not a clean sprite atlas"
+    },
+    {
+      "filename": "pixel_art_effects_and_pickup_spritesheet.png",
+      "role": "Combat VFX and pickup effects; visual source only",
+      "dimensions_px": [
+        1448,
+        1086
+      ],
+      "mode": "RGBA",
+      "sha256": "67cf68f77f3076ae107881f8cce4d4e010160ac00b755491654634c2fd8da21d",
+      "transparent_fraction": 0.613,
+      "partial_alpha_fraction": 0.387,
+      "warning": "Unnormalized alpha; visual sheet, not a clean sprite atlas"
+    },
+    {
+      "filename": "pixel_art_ruin_and_woodland_prop_sprite_sheet.png",
+      "role": "Ruin architecture and woodland props; visual source only",
+      "dimensions_px": [
+        1448,
+        1086
+      ],
+      "mode": "RGBA",
+      "sha256": "6d43a5201a818d054e982b3611b10e6be0c91fd524918ec5f04a73563deea39e",
+      "transparent_fraction": 0.756,
+      "partial_alpha_fraction": 0.243,
+      "warning": "Unnormalized alpha; visual sheet, not a clean sprite atlas"
+    }
+  ],
+  "recommended_existing_game_ready_pack": "P01 \u2014 Ruins Starter Kit",
+  "notes": "Check P01 assets for implementation; do not import P02 raw full sheets as native atlases."
+}

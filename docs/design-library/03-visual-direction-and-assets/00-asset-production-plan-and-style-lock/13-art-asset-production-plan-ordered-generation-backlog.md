@@ -2,6 +2,14 @@
 
 ---
 
+CHARACTER PRODUCTION NEXT-PASS — EXPRESSIVE FACES (2026-11-23)
+
+Current P01 heroes are importable, but owner requests a stronger KIRBY-LIKE facial expressiveness in ORIGINAL pixel art. Put face acting into C02 hero revisions and new NPC batches: legible changing eyes/mouth/head/body expressing delight, stealth, determination, shock, exertion, hurt and victory, not same two-dot face copied to every state. P01→P03 recommended expression frames/overlay approach; spec https://docs.google.com/document/d/1W1rOej7YL6MGcvwZfbpBTBqMyMz9Q_O2zpLNCZ2XNL8/edit. Check A00 references https://drive.google.com/drive/folders/1ejWvlQBo85YiC_5dsTxZFZugwFxKS1pB first; keep status prototype until actual improved PNG frames, manifest and 320×180 QA are produced. Continue without owner review gate.
+
+AVAILABLE ART BASELINE / PRODUCTION ROUTE — 2026-11-23
+
+A00 owner-endorsed six comps: https://drive.google.com/drive/folders/1ejWvlQBo85YiC_5dsTxZFZugwFxKS1pB . The P01 starter set https://drive.google.com/drive/folders/1sXUTCyW2FTt0xuBauWfgSrUpfVw3ET43 is already uploaded as individual sprites, terrain prefabs, props, VFX, atlas, manifest, preview, demo and complete ZIP. It can be imported and refined now; do not hold it awaiting owner approval. P02 https://drive.google.com/drive/folders/1XQc2TZEkYJA2ZF9KvDOMHRPcEo_Q8msv contains four recently generated improved visual SOURCE sheets, not validated sprite atlases. New batches should first compare to these and follow https://docs.google.com/document/d/1SinRhkiHFGlbZfsvYziXlSlVxerQG7J2vSgl3KxlWVo/edit, including separate RGBA PNG extraction/repair, genuine motion, iPhone gameplay check and catalog routing before completion. P01 is a prototype, not a seamless tile library or full animation system.
+
 CURRENT ASSET CATALOG OVERRIDES DISCOVERY GAPS (23 NOV 2026)
 
 Before continuing any production gate, browse this ROOT INDEX: https://docs.google.com/document/d/1bnr7GUgrYBVVY0BMkwx4qRPvW45Nk4grn-Tk6THcoY8/edit

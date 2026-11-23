@@ -2,6 +2,28 @@
 
 ---
 
+C02 REVISION — NEW 24-POSE SOURCE STUDY (2026-11-23)
+
+CATEGORY: playable heroes / grappler and quick infiltrator. ASSET ID: C02-REV-SOURCE-01. Source REQ: https://docs.google.com/document/d/1velYJklnMai16cH12kYu-BIlyhx_p-6NlSpO41vfuKw/edit . 2×12 original expressive poses; file PNG large art sheet, not 32px atlas. STATUS: SOURCE-ONLY / NOT GAME READY / NOT APPROVED REPLACEMENT. Differentiated faces and action silhouettes; missing true 6-phase run and native alpha/cell/pivot QA, potential over-detail versus approved small-game reference. DO NOT supersede existing P01 playable prototype or use rejected C02 v1. File: https://drive.google.com/file/d/187I-8MxxZ_5JW24Jegyqzp1LHYMl6p3C/view ; folder: https://drive.google.com/drive/folders/1czssq_XVJgBYyk1XwqHPuWNXR5tFJzQu
+
+CHARACTER ART UPGRADE / FACE ACTING — READ BEFORE HERO OR NPC WORK (23 NOV 2026)
+
+Owner wants KIRBY-LIKE EXPRESSIVENESS (emotionally vivid, not copied character design) as the NEXT improvement beyond P01. Distinct joyful, mischievous, focused, surprised, hurt, delighted and effort faces should be tied to each character's actual motion and identity; idle, run, jump, attack and hit cannot all wear the same frozen expression. Dedicated production specification and P01→P03 migration guide: https://docs.google.com/document/d/1W1rOej7YL6MGcvwZfbpBTBqMyMz9Q_O2zpLNCZ2XNL8/edit
+
+Positive source A00-04 faces/actions: https://drive.google.com/file/d/15hT8ORwyDGnZpJ-tkIEOPyT5eqzazPE2/view ; A00-02 NPC emotional reactions: https://drive.google.com/file/d/12dykuEr3C7-Wi_73Sa8SZS3WQwDxYy1G/view ; current importable P01 hero strips: https://drive.google.com/drive/folders/1sXUTCyW2FTt0xuBauWfgSrUpfVw3ET43
+
+STATUS: PRODUCTION DIRECTION / NEXT-PASS ART REQUIREMENT, NOT A CLAIM THAT THE P01 FILES HAVE BEEN REDRAWN. Keep P01 current until better transparent frames are actually QA validated and the catalog preferred version is updated.
+
+CURRENT GAME ART — OWNER-ENDORSED COMPS + REPRODUCIBLE RECIPE (2026-11-23)
+
+The exact six owner-provided visual comparisons were SAVED in A00 (good directionally, not perfect/final): https://drive.google.com/drive/folders/1ejWvlQBo85YiC_5dsTxZFZugwFxKS1pB
+
+The ACTUAL usable P01 starter pack (not merely the concept sheet) is in Drive: https://drive.google.com/drive/folders/1sXUTCyW2FTt0xuBauWfgSrUpfVw3ET43 ; ZIP https://drive.google.com/file/d/1C48df-GK_259dtgqWW34BSKDjsgFOHp9/view ; JSON manifest https://drive.google.com/file/d/1aAVGla1M0OSP0V-j5HzpBdZ2e1P9o0Kj/view ; preview https://drive.google.com/file/d/1-5bp9vfdDCD_2EHaz8dlSpfsUHQrBR2N/view . Contains 14 individual character-state PNGs, 2 seven-state strips, 12 props, 8 terrain prefabs, 4 VFX, atlas and browser demo. STATUS: GAME-USABLE PROTOTYPE; frames limited, terrain is prefabs not seamless autotiles.
+
+Four additional recent generated source sheets are in P02: https://drive.google.com/drive/folders/1XQc2TZEkYJA2ZF9KvDOMHRPcEo_Q8msv . STATUS: SOURCE-ONLY / EXTRACTION REQUIRED (variable alpha, dark/checker remnants; 1448×1086 panels NOT engine-ready atlas). Use as art-direction source, never claim those sheets are native sprites.
+
+CONTROLLING DETAILED ART-PRODUCTION RECIPE: https://docs.google.com/document/d/1SinRhkiHFGlbZfsvYziXlSlVxerQG7J2vSgl3KxlWVo/edit . Open exact A00 refs and P01 assets, reproduce compact expressive navy-outlined GBA-like visual grammar (not copied franchise characters), extract clean separate transparent PNGs, validate animation, use phone-scale preview, upload in functional folder and update root asset index + changelog before closing requests. Owner permission to USE is automatic but quality/technical validation still required.
+
 H07-03 — HALL OF LEGENDS / MODULAR TERRAIN EXPERIMENT — QUALITY FAIL (2026-11-23)
 
 CATEGORY: Hall of Legends / terrain tiles and parallax. SOURCE: H07-01 scene; follows H07-02 frame props. 24 16×16 source-derived tile images in 128×48 RGBA atlas; JSON tile coordinates, 44 placed tiles/collision rectangles, separate foreground terrain, midground stone wall, and far stained-glass/window strip. Includes 320×180 QA preview and README in ZIP. STATUS: IMPORTABLE TECHNICAL PROTOTYPE ONLY — FAILED VISUAL QUALITY GATE. QA preview shows duplicated background architectural elements, poor frame placement/occlusion, nonseamless tile edges and clutter; DO NOT use as preferred art or present as game-ready. Retain approved H07-01 scene as stronger aesthetic reference; rebuild manually curated tiles, mask/clean parallax and recompose at 320×180 before promotion. No REQ closed, no source superseded.

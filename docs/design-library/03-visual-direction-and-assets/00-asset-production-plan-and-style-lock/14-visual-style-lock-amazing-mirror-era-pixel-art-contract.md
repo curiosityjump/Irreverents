@@ -2,6 +2,12 @@
 
 ---
 
+OVERRIDING FACE EXPRESSIVENESS DIRECTIVE — 23 NOV 2026
+
+Beyond correct palette and pixel outlines, every hero should have delightfully EXPRESSIVE game-scale FACES: eyes and mouths must change with jump, stealth, attack, surprise, injury and wins, in the expressive spirit of Kirby but original art. Eye squints, open gasps, determined grins and winces should be clear at 320×180 without over-detailed anime facial features. Different characters respond differently; NPC expressions show confirmed 3 modes without adding AI or lore. P01 current hero art is prototype quality and needs greater facial acting. Controlling spec: https://docs.google.com/document/d/1W1rOej7YL6MGcvwZfbpBTBqMyMz9Q_O2zpLNCZ2XNL8/edit
+
+STYLE ANCHOR UPDATE (2026-11-23): The user explicitly judged SIX recent gameplay/asset comps good DIRECTIONALLY (not final/perfect); all six are in A00 https://drive.google.com/drive/folders/1ejWvlQBo85YiC_5dsTxZFZugwFxKS1pB . Use all relevant examples, not one generic image. P01 https://drive.google.com/drive/folders/1sXUTCyW2FTt0xuBauWfgSrUpfVw3ET43 is the working sprite example; P02 https://drive.google.com/drive/folders/1XQc2TZEkYJA2ZF9KvDOMHRPcEo_Q8msv provides four newer source sheets requiring extraction. Follow controlling recipe https://docs.google.com/document/d/1SinRhkiHFGlbZfsvYziXlSlVxerQG7J2vSgl3KxlWVo/edit. This overrides any implication that unrelated oversimplified C02 boxes meet the visual standard. User preapproval remains unnecessary.
+
 ART STYLE / ACCEPTANCE OVERRIDE (22 NOV 2026)
 
 Owner's most recent feedback: crude boxy sprites and frames with negligible motion are UNACCEPTABLE despite technical PNG validity. The visual target remains the earlier image-rich original GBA pixel example in this document; compare images directly, not via a style label. Stage authentic character design and keyframes before programmatic atlas packaging, visual-inspect both 1× sprites and 320×180 scene, and require lively run/attack/throw motion. No mandatory owner sign-off: continue production autonomously, but NEVER classify inadequate placeholders as successful production art. https://docs.google.com/document/d/17OlSfBfTnUEUTmbo-zcsl4VrSn1mPny-zAP6kZaiodU/edit

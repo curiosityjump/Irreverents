@@ -2,6 +2,30 @@
 
 ---
 
+2026-11-23 · 9:00 AM EST — C02-REV-SOURCE-01 NEW SOURCE POSES
+
+Created and uploaded a 24-pose expressive grappler/quick hero source sheet, cataloged as SOURCE ONLY, NOT native 32px game sprites; C02 remains open for QA rework. File: https://drive.google.com/file/d/187I-8MxxZ_5JW24Jegyqzp1LHYMl6p3C/view ; request: https://docs.google.com/document/d/1velYJklnMai16cH12kYu-BIlyhx_p-6NlSpO41vfuKw/edit ; catalog: https://docs.google.com/document/d/1bnr7GUgrYBVVY0BMkwx4qRPvW45Nk4grn-Tk6THcoY8/edit
+
+2026-11-23 · 9:16 AM EST · ChatGPT — OWNER VISUAL UPGRADE: EXPRESSIVE FACES / ROUTING CONFIRMED
+
+Created Doc 35, a character facial-expression and acting production standard, at project root. Owner wants considerably more expressive eyes, mouths and reaction faces—Kirby-like emotional immediacy, not copyrighted Kirby designs—than current usable P01 prototype heroes. Linked the new guide from top of 00 START HERE, central asset catalog, Art SOP 34, Visual Style Lock, Visual Quality Gate, Asset Production Plan, Claude request protocol and active C02 hero revision; hourly asset desk instructions updated and enabled. Six exact owner-endorsed A00 comps and P01/P02 status remain the visual source-of-truth; this entry does NOT claim new face frames have been produced or shipped.
+
+Changed / routing:
+
+- Face Acting Standard 35: https://docs.google.com/document/d/1W1rOej7YL6MGcvwZfbpBTBqMyMz9Q_O2zpLNCZ2XNL8/edit
+
+- A00 six owner-endorsed comparisons: https://drive.google.com/drive/folders/1ejWvlQBo85YiC_5dsTxZFZugwFxKS1pB
+
+- P01 current importable art prototype: https://drive.google.com/drive/folders/1sXUTCyW2FTt0xuBauWfgSrUpfVw3ET43
+
+- Root asset catalog: https://docs.google.com/document/d/1bnr7GUgrYBVVY0BMkwx4qRPvW45Nk4grn-Tk6THcoY8/edit
+
+- Art Production SOP 34: https://docs.google.com/document/d/1SinRhkiHFGlbZfsvYziXlSlVxerQG7J2vSgl3KxlWVo/edit
+
+- Active hero revision C02: https://docs.google.com/document/d/1velYJklnMai16cH12kYu-BIlyhx_p-6NlSpO41vfuKw/edit
+
+- 00 START HERE: https://docs.google.com/document/d/1-ASnTbCLAXSi_WCOl_7KNuUgelLXLmiZFKiN6APao2s/edit
+
 2026-11-23 · 8:48 AM EST · ChatGPT — H07-03 TERRAIN PROTOTYPE, VISUAL QA FAILED
 
 Uploaded 16px source-derived terrain atlas, separate parallax/foreground layers, collision JSON and 320×180 assembled QA scene. Visually inspected and rejected assembled composition for clutter, duplicate structures, occlusion and tile seams. Labeled technical prototype only in catalog; H07-01 remains preferred visual reference. No request marked delivered. ZIP: https://drive.google.com/file/d/127bAjtwen8TV0gUErZM8BujB_ZFTDlQh/view ; QA: https://drive.google.com/file/d/1eQYnRi06x9Q8BY6YawMggqtJ_Q8XZ_98/view ; catalog: https://docs.google.com/document/d/1bnr7GUgrYBVVY0BMkwx4qRPvW45Nk4grn-Tk6THcoY8/edit

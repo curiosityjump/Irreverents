@@ -2,6 +2,20 @@
 
 ---
 
+NEW MANDATORY CHARACTER QUALITY CHECK — FACE ACTING (23 NOV 2026)
+
+Owner wants MORE EXPRESSIVE faces like the emotional readability of Kirby (not copied designs). Inspect the actual eyes/mouth/head acting in each delivered sprite and verify real differences between idle, dash, attack, sneak, jump, hurt, triumph etc. Static same-face-in-every-frame art does not meet upgraded target even if outlines/animations/grid/alpha pass. Test in actual 320×180 gameplay at 1× and inspect native PNG transparency. Current P01 hero art remains an IMPORTABLE PROTOTYPE, but should be refined with expressive faces; P02 sheets require extraction. Controlling detailed acceptance spec: https://docs.google.com/document/d/1W1rOej7YL6MGcvwZfbpBTBqMyMz9Q_O2zpLNCZ2XNL8/edit . Explicit owner consent to use by default still applies; no user approval holds.
+
+LATEST OWNER-ENDORSED QUALITY SOURCES — 2026-11-23
+
+SIX DIRECT COMPS (user says all good DIRECTIONALLY, not perfect): https://drive.google.com/drive/folders/1ejWvlQBo85YiC_5dsTxZFZugwFxKS1pB
+
+LIVE PRECEDENT FOR ACTUAL GAME-IMPORTABLE FILES: P01 https://drive.google.com/drive/folders/1sXUTCyW2FTt0xuBauWfgSrUpfVw3ET43, with separable PNGs, manifest and browser demo.
+
+FOUR ADDITIONAL HIGH-DETAIL SOURCE SHEETS: P02 https://drive.google.com/drive/folders/1XQc2TZEkYJA2ZF9KvDOMHRPcEo_Q8msv — retain as art sources only; image-gen sheets may contain variable-alpha checker/black artifacts and must be cleaned/cropped/resized and inspected before being marked engine-ready.
+
+Authoritative reproducible step-by-step SOP: https://docs.google.com/document/d/1SinRhkiHFGlbZfsvYziXlSlVxerQG7J2vSgl3KxlWVo/edit. QA both art quality and file technicals, no owner preapproval gate. When request is delivered, update the central asset index with exact links and status.
+
 MANDATORY VISUAL SOURCE / ASSET ROUTING (23 NOV 2026)
 
 The up-to-date asset catalog is in the Drive ROOT: https://docs.google.com/document/d/1bnr7GUgrYBVVY0BMkwx4qRPvW45Nk4grn-Tk6THcoY8/edit

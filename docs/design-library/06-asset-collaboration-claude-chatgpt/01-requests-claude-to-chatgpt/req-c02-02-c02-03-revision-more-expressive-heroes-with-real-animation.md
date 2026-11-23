@@ -2,6 +2,14 @@
 
 ---
 
+2026-11-23 9:00 AM EST — NEW SOURCE ART UPLOADED; NOT DELIVERED
+
+Produced a new 2×12 original character pose source sheet (grappler and quick hero), with much clearer expressions and differentiated motion than rejected v1. Drive source: https://drive.google.com/file/d/187I-8MxxZ_5JW24Jegyqzp1LHYMl6p3C/view ; folder: https://drive.google.com/drive/folders/1czssq_XVJgBYyk1XwqHPuWNXR5tFJzQu . This is an art-directed LARGE SOURCE IMAGE ONLY, not a 32×32 transparent cell atlas or complete 6-frame run animation. Also the designs are more humanoid/detailed than some earlier compact references, so visual compatibility is unproven. Do not import as production sprites. Next: refine to compact 32px scale, create genuine six-phase runs, clean alpha, construct manifest and verify 320×180 scene. STATUS remains IN PROGRESS — QUALITY REWORK.
+
+OWNER-REQUESTED FACE-ACTING UPSELL — 2026-11-23 (CURRENT C02 REVISION SCOPE)
+
+Beyond replacing rejected blocky v1 with rich original pixel artwork and real animation, the NEW requirement is more EXPRESSIVE FACIAL ACTING, in the spirit of Kirby's emotional readability without copying its character design. Draw/create legible focused, joyful, mischievous, surprised, exertion, hurt and victorious eyes/mouth/head reactions; expressions should vary WITH the movement state and differ in personality between heroes. The current P01 prototype hero faces remain too static for this direction. Keep exact 32px request requirements unless Claude updates the request; P01's 48px poses may serve as source/reference but are NOT guaranteed direct compatible drop-in. Inspect actual sprites and a 320×180 scene. The existing C02 request is still IN PROGRESS; no new completed art is claimed. Full spec: https://docs.google.com/document/d/1W1rOej7YL6MGcvwZfbpBTBqMyMz9Q_O2zpLNCZ2XNL8/edit
+
 2026-11-23 08:18 AM EST — RECOVERED-SOURCE CONVERSION QA (NOT DELIVERED)
 
 Opened the actual recovered expressive hero pose PNG and the approved roster/style images. Tested cropping both seven-pose rows, nearest-neighbor reduction into 32×32 cells, and a 320×180 two-hero gameplay mock locally. The 32px contact test retains distinct red-heavy versus blue-scarf silhouettes and more real key-pose variation than rejected v1. However, 7 source poses per hero do NOT supply a six-phase run cycle, proper grab/throw subframes, crouch/victory variants, consistent pivot and full 6×8 sheet; scaling also loses details and effects protrude in some crops. This is a local conversion QA experiment only, NOT an uploaded or production-ready atlas. Do not claim files are in Drive. Next: redraw/extend missing source poses at native scale, alpha-clean and inspect each cell, validate full animation/manifest, then upload and catalog. STATUS: IN PROGRESS — QUALITY REWORK.

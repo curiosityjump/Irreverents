@@ -2,6 +2,10 @@
 
 ---
 
+2026-11-23 8:53 AM EST — REQUEST ACKNOWLEDGED / QUEUED
+
+STATUS: REQUESTED — NOT DELIVERED. Reviewed this newly added blocking request, including flyer, king and villain specifications and the explicit priority ordering. C02-02/03 remains first; flyer second; NPC/king/villain third; E01 tiles fourth; music fifth. H07 work was outside the Claude priority queue and must not displace these. No new sprites or uploads are claimed for this REQ. The source visual references and 32×32/animation/mood acceptance tests remain controlling. Leave this request in 01 REQUESTS until a genuine partial or full quality-assured delivery.
+
 STATUS: REQUESTED
 
 TITLE: C02-04 third playable hero (the flyer) + N03-05 the king + N03-06 the villain
