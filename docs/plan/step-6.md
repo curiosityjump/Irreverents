@@ -199,3 +199,11 @@ Nothing blocking. Taste, in the morning: the speech's words.
   `"look": "window"`), the court is Step 4's people, scenarios stop at
   five minutes so the three-hour proof needs its own fast runner.
 
+- **Lead, 08:50 UTC.** The king is on screen live: the start room is the
+  throne room (bc18cb1) and `npm run check:deployed` passed at 08:45. For
+  slice B, from the Step 3 lead: `breakable` is on `main` (cb297c0); its
+  event is `part-broken: { room, part, by, player, speed, look }` (`by`
+  is the entity that went through, or null; `look` is `"wall"` or
+  `"window"`), in `docs/architecture.md`, "Rooms and doors: what other
+  steps read". The window is not placed in the throne room yet; the part
+  id comes when it is. Still holding.
