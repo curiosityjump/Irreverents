@@ -252,6 +252,18 @@ and its visual quality gate), not decided by the team.
 Detail: docs 10, 13, 14, 32. Only the look of "Pixel aesthetic reference —
 approved direction" is approved; no sprite or tile is production art yet.
 
+### Start screen and saved games
+**Owner, 2026-11-23 ~15:10 UTC, to Vision Partner, first-hand:**
+> The game needs a start screen where players can start a new game, continue, join the same game, etc.
+> If I hav ea saved game, i should be able to load it and have a friend join me in my saved game.
+
+*(Framing:)* this settles part of the library's open O-004 ("shared
+progression/save ownership … session drop-in/out"): a saved game is loaded
+by one player and friends join it. Who else may continue that save, and
+what a joining friend keeps afterwards, is still open. "Etc." leaves room
+for other start-screen choices. The king's speech still starts the game
+once play begins (Step 6); the start screen comes before it.
+
 ### Music and sound
 **Owner, 2026-11-23, to Vision Partner, first-hand:**
 > Something that was not in any of the google drive stuff was music. I think you can figure out what the music and sound effects should be like from what's in there though. Do it.

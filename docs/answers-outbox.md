@@ -27,3 +27,9 @@ changed>` as its heading. The first one in a new project is the genesis
 entry: "first vision written; no plan exists yet", naming the sections.
 
 ## Entries
+
+### Vision · Start screen and saved games (new frontier)
+- **Answer:** "The game needs a start screen where players can start a new game, continue, join the same game, etc. If I hav ea saved game, i should be able to load it and have a friend join me in my saved game." (the owner, first-hand, ~15:10 UTC)
+- **Recorded in:** `docs/vision.md` "Frontiers" → "Start screen and saved games"
+- **Action for:** orchestrator (vision-level): no plan step covers this yet. It needs a start screen (new game, continue, join) and saves that persist (the Railway volume at `/data`, Step 7's store) and can be loaded with a friend joining. Settles part of library O-004.
+
