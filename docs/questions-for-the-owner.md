@@ -71,27 +71,9 @@ entries group them; they are not entries.
 
 ---
 
-## Open (8)
+## Open (5)
 
-**Before the vision can be written**
-
-### Q-001 · Can the Drive library's "CONFIRMED" lines count as your own words?
-- **Asked by:** Vision Partner, genesis, `session_017WiGzHC3CvjTNZqCuxa8Ex`, 2026-11-23 UTC, parent none
-- **Question:** The vision file (`docs/vision.md`) may only state something as decided if it quotes you. Your Drive library is written in ChatGPT's words, not yours: e.g. Decision Register D-055 reads "NO NPCS WILL HAVE AI. This includes shopkeepers, villains, guards, champions, pets and crowds." Options: (1) treat every entry the library labels CONFIRMED / "owner-confirmed" as your decision, quoted as "Owner, via the Drive Decision Register (ChatGPT's wording), 22 Nov 2026"; (2) same, but you skim the list I build and strike anything that isn't really yours; (3) none of it counts until you say it to me directly.
-- **Unblocks:** writing `docs/vision.md` at all (genesis), and therefore the first plan.
-- **Recommendation:** (Vision Partner's) 2. You get a one-page list of the ~90 confirmed decisions to strike from; nothing ChatGPT inferred gets promoted silently.
-- **Answer goes to:** `docs/vision.md` "Reading this document"
-- **Source:** `docs/design-library/04-decisions-and-prototyping/11-decision-register-boundaries-and-open-questions.md`
-- **Blocking:** yes
-
-### Q-002 · Who is Irreverents for, and what is it for you?
-- **Asked by:** Vision Partner, genesis, `session_017WiGzHC3CvjTNZqCuxa8Ex`, 2026-11-23 UTC, parent none
-- **Question:** The library says in detail what the game *is*, but never who it is for or what success means outside the game: it lists "release platforms… business scope, monetization, and engine" as "Not fixed" (doc 01). Is this (1) a game you want to ship and sell; (2) a personal / friends project played online together; (3) a prototype to find out whether the idea is fun before deciding? And who is the first person besides you who should play it?
-- **Unblocks:** `docs/vision.md` "Who this is for, and why" and "The long-term direction"; how ambitious the first plan step is.
-- **Recommendation:** none: only you know this.
-- **Answer goes to:** `docs/vision.md` "Who this is for, and why"
-- **Source:** `docs/design-library/01-vision-and-narrative/01-creative-north-star-and-player-experience.md` ("Confirmed versus undecided")
-- **Blocking:** yes
+**Blocking the plan**
 
 ### Q-003 · How should we measure that the game is moving the right way?
 - **Asked by:** Vision Partner, genesis, `session_017WiGzHC3CvjTNZqCuxa8Ex`, 2026-11-23 UTC, parent none
@@ -101,16 +83,6 @@ entries group them; they are not entries.
 - **Answer goes to:** `docs/vision.md` "The measure"
 - **Source:** `docs/design-library/04-decisions-and-prototyping/12-golden-scenarios-and-prototype-acceptance-tests.md`; `docs/design-library/02-gameplay-systems/24-feasible-game-architecture-making-irreverents-playable.md` ("Decision gates")
 - **Blocking:** yes
-
-### Q-004 · What does it run on, and how is it played?
-- **Asked by:** Vision Partner, genesis, `session_017WiGzHC3CvjTNZqCuxa8Ex`, 2026-11-23 UTC, parent none
-- **Question:** No doc names an engine, language or device. The cantina spec says you "TAP the desired roaming cantina character", which suggests a touchscreen; the rest reads like a controller game in the GBA tradition. Options: (1) browser game (PC and phone, keyboard/controller + touch); (2) desktop PC with controller; (3) phone/tablet first; (4) a console target later. Also: any engine you want or don't want?
-- **Unblocks:** the orchestrator's first build step and `CLAUDE.md`'s build/deploy placeholders.
-- **Recommendation:** (Vision Partner's) 1: easiest to share with a friend for online co-op tests, and it lets "tap" and controller both be real.
-- **Answer goes to:** `docs/vision.md` "The long-term direction"
-- **Source:** `docs/design-library/02-gameplay-systems/31-cantina-party-roster-hub-and-endless-brawl.md`
-- **Blocking:** yes
-- **Note (Vision Partner, 2026-11-23):** you've since said the game "will be playable" at irreverents-production.up.railway.app (Railway), quoted in `docs/vision.md` "The long-term direction". That makes it a web-served game; what's left to answer is which devices and controls (touch, keyboard, controller) and whether you have an engine preference.
 
 **Fixes for the Drive library (non-blocking; the newer rule wins until you say otherwise)**
 
