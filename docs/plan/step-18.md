@@ -545,3 +545,16 @@ scenarios-only runner (content load plus every scenario: 1 min 48 s):
   still listening on its port and served the old build. Start a check's
   server on a port nothing holds (or stop it by pid) before trusting a
   control.
+- **Pushed and live:** push 1 1458d57 + 06085fa; push 2 c1b5b54; the
+  fight-back fix 608ccef. `check:live` on aad28c3 (contains all): ok,
+  `fight-back` true (7 taps, rage, his blow 11.4 s later).
+- **Not mine, seen in the gate:** two full local `npm run e2e` runs on
+  push 2 failed one Step 11 cantina fact each, a different one each time
+  (`cantina-swap` + `cantina-switch`, then `cantina-row`: a tap that
+  missed). Run on their own, all cantina facts pass both with Step 18's
+  commits and on 18f7c48 without them; Step 18 changes nothing in the
+  cantina. Looks like a timing flake under load: for the orchestrator.
+- **Not re-run after the last rebases:** the full local e2e on the final
+  tree (only client start-screen/shell code and Step 16 content came in
+  after the last full run; build, check, 201 scenarios and fight-back
+  re-run green).
