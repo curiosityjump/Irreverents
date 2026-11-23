@@ -34,13 +34,12 @@ M-row.
   The courtyard has no guard; the chase reaches the camp street →
   courtyard → camp, two doors.
 - **Guards cannot swing:** `content/characters/guard.json` verbs are
-  `["move"]` only. Step 4's charge holds `attack` only if the body lists
-  it. Adding `attack` to `guard.json` is another step's file and changes
-  what Step 4's guards do to heroes: do it only if every `step4-*`
-  scenario still passes, say so in the commit, and log it `DRAFT:`;
-  otherwise give the clash its own blow (a Step 2 `hit` via the existing
-  attack path on a guard-only body variant, or `emitEffect` push) —
-  your call, logged.
+  `["move"]` only. **Decided 16:16 UTC by the orchestrator (Step 18 wants
+  it):** add the real `attack` verb to `guard.json` (additive, `DRAFT:`,
+  logged); no clash-only blow. If a `step4-*` scenario goes red only
+  because a guard now really hits, don't weaken or re-time it and don't
+  push it red: message the lead the scenario names and why (Step 18
+  re-times them), and carry on with the rest.
 - **Camp people fight heroes only**: `src/sim/systems/outpost-fight.ts`
   (58) targets player characters. Note from slice A: Step 2's attack
   swings on a fresh press, so it pulses `attack` every other tick; copy
