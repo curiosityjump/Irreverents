@@ -5,6 +5,9 @@
   "description": "Irreverents: a browser-played 2D action-adventure. See CLAUDE.md.",
   "engines": { "node": ">=22" },
   "scripts": {
+    "build": "node -e \"require('fs').writeFileSync('built.json', JSON.stringify({builtAt:new Date().toISOString(), node:process.version, devDepAtBuild:(()=>{try{require.resolve('typescript');return true}catch{return false}})()}))\"",
     "start": "node server.js"
-  }
+  },
+  "dependencies": { "ws": "8.23.0" },
+  "devDependencies": { "typescript": "7.0.2" }
 }
