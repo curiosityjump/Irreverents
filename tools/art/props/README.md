@@ -109,6 +109,11 @@ re-cut from P03 grassy ruins' clean vine arch (`round3.ruin_arch`) with `srcimpo
   from the look.
 - **Process:** push 1 (76791bf) was reverted (2527611) after ten minutes not live; Railway was only slow (it then
   deployed a later commit), so the revert was premature and push 1 was re-applied with push 2.
+- **Deploy (flag for the orchestrator):** 040bc8f (push 1 re-applied plus push 2) was not live 30 minutes after
+  its push; `/healthz` answered healthy on 12aa2b8 throughout, and no other code push was queued behind or
+  ahead of it. Not reverted (`docs/verifying-and-finishing.md`, "Do not revert"); `check:live` not yet run
+  against it. If it never goes live, look at Railway's build log for 040bc8f: locally `npm run build`,
+  `check` and `e2e` are green on it.
 
 ## Deviations from the contract
 
