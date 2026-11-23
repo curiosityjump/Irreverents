@@ -1,0 +1,9 @@
+{
+  "//": "DRAFT: the graybox stand-in. The box fits the 32x32 sprite cell the art on order assumes (characters about 24-28 px tall).",
+  "id": "hero",
+  "name": "Graybox Hero",
+  "box": { "w": 12, "h": 26 },
+  "color": "#e07a5f",
+  "verbs": ["move", "jump"],
+  "tuning": "hero"
+}

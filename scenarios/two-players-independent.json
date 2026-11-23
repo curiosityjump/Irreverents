@@ -1,0 +1,143 @@
+{
+  "id": "two-players-independent",
+  "proves": "two players share one room, each is moved only by their own input, and a wall stops a runner",
+  "room": "graybox-hall",
+  "players": [
+    {
+      "id": "a",
+      "character": "hero",
+      "spawn": 0
+    },
+    {
+      "id": "b",
+      "character": "hero",
+      "spawn": 1
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 10,
+      "to": 40,
+      "x": -1
+    },
+    {
+      "player": "b",
+      "from": 20,
+      "to": 45,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "b",
+      "from": 60,
+      "to": 120,
+      "x": 1
+    }
+  ],
+  "ticks": 180,
+  "expect": [
+    {
+      "fact": "position",
+      "player": "a",
+      "at": 0,
+      "x": [
+        40,
+        40
+      ]
+    },
+    {
+      "fact": "position",
+      "player": "b",
+      "at": 0,
+      "x": [
+        88,
+        88
+      ]
+    },
+    {
+      "fact": "position",
+      "player": "a",
+      "at": 40,
+      "x": [
+        22,
+        22
+      ],
+      "y": [
+        160,
+        160
+      ]
+    },
+    {
+      "fact": "position",
+      "player": "b",
+      "at": 40,
+      "x": [
+        88,
+        88
+      ],
+      "y": [
+        100,
+        110
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "jumped",
+      "player": "b",
+      "between": [
+        20,
+        20
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "jumped",
+      "player": "a",
+      "between": [
+        0,
+        180
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "landed",
+      "player": "b",
+      "between": [
+        55,
+        65
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "standing-on-tile",
+      "player": "a",
+      "at": 180,
+      "tile": [
+        1,
+        10
+      ]
+    },
+    {
+      "fact": "standing-on-tile",
+      "player": "b",
+      "at": 180,
+      "tile": [
+        11,
+        10
+      ]
+    }
+  ]
+}

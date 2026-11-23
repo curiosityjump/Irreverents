@@ -1,0 +1,97 @@
+{
+  "id": "run-and-stop",
+  "proves": "holding right runs the character up to top speed along the floor, and letting go stops it",
+  "room": "graybox-hall",
+  "players": [
+    {
+      "id": "a",
+      "character": "hero",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 10,
+      "to": 70,
+      "x": 1
+    }
+  ],
+  "ticks": 180,
+  "expect": [
+    {
+      "fact": "standing-on-tile",
+      "player": "a",
+      "at": 10,
+      "tile": [
+        2,
+        10
+      ]
+    },
+    {
+      "fact": "velocity",
+      "player": "a",
+      "at": 70,
+      "vx": [
+        95.9,
+        96.1
+      ]
+    },
+    {
+      "fact": "position",
+      "player": "a",
+      "at": 70,
+      "x": [
+        131,
+        132.5
+      ]
+    },
+    {
+      "fact": "standing-on-tile",
+      "player": "a",
+      "at": 180,
+      "tile": [
+        8,
+        10
+      ]
+    },
+    {
+      "fact": "velocity",
+      "player": "a",
+      "at": 180,
+      "vx": [
+        0,
+        0
+      ],
+      "vy": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "position",
+      "player": "a",
+      "at": 180,
+      "x": [
+        134,
+        135.5
+      ],
+      "y": [
+        160,
+        160
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "jumped",
+      "between": [
+        0,
+        180
+      ],
+      "count": [
+        0,
+        0
+      ]
+    }
+  ]
+}

@@ -214,11 +214,23 @@ code site and the line in `docs/deliberate-designs.md`.
 
 ## Architecture at a glance
 
-> **Placeholder.** Five or six bullets, once there is code: where the
-> layers are, where state lives, what is persisted and how, which external
-> services are called and from where. Point at the one file that holds the
-> full layout and an "I need to add…" table, and keep the detail there —
-> this section is the short version only.
+The full layout, the "I need to add…" table, which paths each plan step
+owns and the rules for changing a shared shape are in
+**`docs/architecture.md`**. The short version:
+
+- **`content/` is data, `src/` is code.** Rooms, characters, actions and
+  every tuning number are JSON, validated at check and build time.
+- **`src/sim/` is the one simulation core**: `step(world, inputs, content)`
+  at a fixed 60 ticks, deterministic, plain TypeScript with no DOM or Node.
+  The browser, the server and the scenario harness all run it.
+- **Layers:** `src/content` ← `src/sim` ← `src/client`, `src/server`,
+  `src/scenarios`. `npm run check` enforces the imports.
+- **Verbs, systems, content kinds and scenario facts are self-registering
+  files**: add one file, edit no list.
+- **State** is the `World` object only. Nothing is persisted; no external
+  services; one Node process serves the client, `/healthz` and `/ws`.
+- **Shared shapes change additively only**; never rename or remove an id
+  or a field once pushed.
 
 ---
 
@@ -250,14 +262,15 @@ noise in chat.
 
 ## Working locally
 
-> **Placeholder until plan Step 1 lands** (`docs/plan/step-1.md`): three or
-> four bullets on setup, from `docs/architecture.md`. Today the repository
-> holds only a deploy probe (`server.js`); `npm start` runs it.
-
-- **Static gates:** `npm run build` and `npm run check`. No CI: nothing
-  runs them for you, before or after a push, and the push deploys. Until
-  Step 1 lands them, these commands do not exist. The verification
-  ladder, the traps and the definition of done are in
+- **Setup:** `npm ci`. Node 22 or later; it runs the `.ts` scripts directly.
+- **Run it:** `npm run dev` (build, serve on `PORT` or 3000, rebuild on
+  change), or `npm run build && npm start`.
+- **Static gates:** `npm run build` and `npm run check` (types, layer
+  rule, content validation, every scenario). `npm run gates` prints build
+  gates A–F. No CI: nothing runs them for you, and the push deploys.
+- `npm run e2e` and `npm run check:live` fail on purpose until Step 1
+  Gate 2 lands them.
+- The verification ladder, the traps and the definition of done are in
   `docs/verifying-and-finishing.md`, which is SOP phase 7. **"The code
   looks right" is not a verification.**
 

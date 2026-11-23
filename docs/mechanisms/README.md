@@ -53,3 +53,9 @@ groups) whenever you add one — never update the number from memory.
 
 **Asset requests** (`docs/mechanisms/asset-requests.md`)
 - Drive folder "01 REQUESTS" — Claude asks ChatGPT for art by creating a `REQ — …` Google Doc there; ChatGPT checks hourly and delivers into Drive; needs the Google Drive connector to write (2026-11-23).
+
+**Scenario harness** (`docs/mechanisms/scenarios.md`)
+- `scenarios/*.json` + `src/scenarios/` — scripted play-throughs as data (room, players, timed inputs, expected facts) run headlessly by `npm run check`; `npm run gates` reports build gates A–F from their `gate` tags (Step 1).
+
+**Content** (`docs/mechanisms/content-validation.md`)
+- `src/content/kinds/` + `src/sim/check-content.ts` — every `content/` file is validated at check and build time, naming the exact file and field; tuning numbers are declared by the verb or system that reads them (Step 1).

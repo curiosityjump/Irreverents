@@ -1,8 +1,21 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Irreverents</title>
-<style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#1b1b2f;color:#f4f1de;font:16px/1.5 system-ui,sans-serif;text-align:center;padding:16px}</style>
-</head><body><main><h1>Irreverents</h1>
-<p>The build crew is working through the night.<br>This page will become the game.</p>
-</main></body></html>
+<style>
+  html, body { margin: 0; height: 100%; background: #0f0f1c; color: #f4f1de; font: 14px/1.4 system-ui, sans-serif; }
+  body { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
+  /* 320x180 scaled up crisp, as large as fits. */
+  #game { width: min(100vw, calc((100vh - 48px) * 16 / 9)); aspect-ratio: 16 / 9; image-rendering: pixelated; image-rendering: crisp-edges; background: #1b1b2f; display: block; }
+  #note { margin: 0; padding: 0 12px; opacity: .7; text-align: center; }
+</style>
+</head>
+<body>
+<canvas id="game"></canvas>
+<!-- DRAFT: interim note until Step 1 Gate 2 lands touch controls and two-player play. -->
+<p id="note">Arrow keys or A / D to run, Space to jump. Touch controls and playing together are being built tonight.</p>
+<script src="game.js"></script>
+</body>
+</html>

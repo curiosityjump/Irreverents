@@ -69,7 +69,7 @@ gates, in order") have a scripted player-view check passing?** 2026-11-23:
 0 of 6.
 
 ```bash
-npm run gates          # lands with plan Step 1; prints one line per gate: passing, failing, or no scenario yet
+npm run gates          # real since Step 1 Gate 1; one line per gate: passing, failing, or no scenario yet; exit 1 if any is failing, 2 if content or a scenario file is invalid
 ```
 
 | Gate | In the owner's library's words | Plan step | Scripted check |

@@ -1,0 +1,170 @@
+# Architecture
+
+**Reference.** Open it before adding code or content: it says where each
+kind of thing goes, who owns which paths, and how a shared shape may
+change. Written by Step 1 Gate 1 (2026-11-23); the choices are `DRAFT:`
+mechanics unless marked `INTENT:` in the code.
+
+## The layout
+
+```
+content/            the game's data: what exists and how it feels
+  tuning.json         every feel number (speeds, jump, gravity), one file
+  game.json           where a player starts, and as whom
+  rooms/<id>.json     one room's geometry, rows of characters + a legend
+  characters/<id>.json  one kind of body: box, colour, verbs, tuning set
+  actions/<id>.json   one pressable action: label and keyboard keys
+scenarios/<id>.json  scripted play-throughs with the facts expected
+src/
+  content/          pure: content shapes and validators
+    kinds/<kind>.ts   one content kind each (self-registering)
+  sim/              pure: the simulation core
+    types.ts          World, Entity, Input, events, Verb, System
+    step.ts           step(world, inputs, content) -> events
+    world.ts          createWorld, spawnPlayer, add/remove entity
+    verbs/<id>.ts     one thing a character can do (self-registering)
+    systems/<id>.ts   one pass over the world per tick (self-registering)
+    check-content.ts  content checked against the verbs and systems
+  scenarios/        pure: the scenario runner
+    facts/<id>.ts     one kind of expectation (self-registering)
+  client/           the browser page: canvas, keyboard, render
+  server/           the one Node process: static files, /healthz, /ws
+scripts/            build, check, gates, dev, trace; lib/ reads the disk
+dist/               build output (git-ignored): server.cjs, public/
+```
+
+`tools/` and `docs/design-library/` belong to the design-library sync
+(`docs/mechanisms/design-library-sync.md`): never bundled, linted or moved.
+
+## Layers: who may import whom
+
+| Layer | May import | Must not use |
+|---|---|---|
+| `src/content` | `src/content` | DOM, Node, packages |
+| `src/sim` | `src/sim`, `src/content` | DOM, Node, packages, clocks, `Math.random` |
+| `src/scenarios` | itself, `src/sim`, `src/content` | DOM, Node, packages |
+| `src/client` | itself, `src/sim`, `src/content` | Node; never `src/server` |
+| `src/server` | itself, `src/sim`, `src/content` | DOM; never `src/client` |
+| `scripts` | anything | — |
+
+`npm run check` enforces this twice: `tsconfig.pure.json` type-checks the
+three pure layers with no DOM and no Node types, and
+`scripts/lib/boundaries.ts` reads every import line. (The sim imports
+content *types* and the small pure constants beside them, such as `TILE`.)
+
+## The simulation core
+
+- **One function:** `step(world, inputsByPlayerId, content)` advances the
+  world one tick **in place** and returns that tick's events. A caller
+  that needs a copy takes one; the world is plain JSON data.
+- **Fixed timestep:** 60 ticks a second (`TICK_RATE`). Tuning numbers are
+  per second; code multiplies by `DT`. Units are pixels at 320×180.
+- **Deterministic:** same world + inputs + content gives the same bytes.
+  No clock, no randomness, nothing outside the arguments. Entities stay
+  sorted by id; verbs and systems run in `(order, id)` order. Every
+  scenario runs twice and compares, which is what catches a slip.
+- **N players:** each is an entity with `player` set; `inputs` is keyed by
+  player id. A player with no input that tick holds nothing.
+- **Rooms:** every entity carries its `room`, so one world can hold
+  several rooms. Today everything outside a room's grid is solid.
+
+## Where state lives
+
+- **World state** is the `World` object and nothing else: `tick` and
+  `entities`. Per-entity memory a verb or system needs lives in
+  `entity.c.<its id>` (see `src/sim/verbs/jump.ts`).
+- **Content** is validated once (`scripts/lib/content-files.ts`) and baked
+  into both bundles as `__CONTENT__` at build time. It never changes while
+  the game runs, and the deploy reads nothing from `content/` at run time.
+- **Nothing is persisted.** No database, no files written, no accounts.
+- **No external services.** The server is one process on Railway; `/ws`
+  is a hello-and-echo until Step 1 Gate 2 owns the protocol.
+
+## Self-registering files (the rule that lets steps work in parallel)
+
+Four directories are registries: `src/content/kinds/`, `src/sim/verbs/`,
+`src/sim/systems/`, `src/scenarios/facts/`. **Every `.ts` file in one
+default-exports one thing and is picked up automatically**:
+`scripts/lib/registries.ts` writes a git-ignored `index.gen.ts` beside
+them, run first by build, check, gates, trace and dev. There is no list
+to edit. Do not put helper files in those four directories.
+
+The shared shapes grow the same way. `Content`, `Components` (per-entity
+state) and `EventMap` (event types) are empty interfaces that each file
+extends from its own file with `declare module '../types.ts' { … }`
+(examples: `kinds/rooms.ts`, `verbs/jump.ts`, `systems/physics.ts`).
+
+## I need to add…
+
+| …a | Do this | Engine change? |
+|---|---|---|
+| **room** | `content/rooms/<id>.json`: `rows` of characters and a `legend` mapping each to `solid`, `oneway`, `empty` or `spawn`. Point `content/game.json` at it to start there. | No |
+| **character kind** | `content/characters/<id>.json` (box, colour, the verbs it can do, a tuning set name) plus that set under `characters` in `content/tuning.json`. | No |
+| **NPC** | Not built yet (Step 4). The place: an NPC kind is data in `content/npcs/<id>.json` read by a new `src/content/kinds/npcs.ts`; its body is a character kind; who stands where is `content/placements/<room id>.json` (a new kind), never the room file; its response logic is a system in `src/sim/systems/`. An NPC in the world is an `Entity` with `player: null`. | Step 4 adds the kind files and systems |
+| **object** | Not built yet (Step 2 for throwables, Step 7 for the machine). The place: `content/objects/<id>.json` + `src/content/kinds/objects.ts`; placed through the same placements files; in the world it is an `Entity`. | The step adds the kind file |
+| **verb** (an action a character can take) | `src/sim/verbs/<id>.ts` default-exporting a `Verb` (its `order`, the tuning numbers and action ids it reads, `update`). If it needs a button, `content/actions/<id>.json`. List the verb id in each character that can do it and add its numbers to their tuning sets. | One new file, no edits |
+| **rule** (a thing the world does every tick, or an "event → reaction" mapping) | A system: `src/sim/systems/<id>.ts` with an `order` (verbs run at 100, physics at 500; leave gaps). Step 4's authored event/role mappings should be data in `content/rules/` read by one such system. | One new file |
+| **scenario** | `scenarios/<id>.json` (`docs/mechanisms/scenarios.md`). Find the numbers with `node scripts/trace.ts <id>`. Tag it `"gate": "A"`…`"F"` when it is evidence for a build gate. | No |
+| **tuning number** | Declare it in the `tuning` of the verb (per character) or system (world) that reads it, with its range; put the value in `content/tuning.json`. `npm run check` names any number missing, out of range or unread. | Only the reader |
+| **asset** | See "Where art plugs in". | Not yet built |
+| **kind of content** | `src/content/kinds/<kind>.ts` default-exporting a `ContentKind` (`source`, `parse`, optional cross-reference `check`) and extending `Content`. | One new file |
+| **kind of scenario fact** | `src/scenarios/facts/<id>.ts` default-exporting a `Fact`. | One new file |
+| **event** | Extend `EventMap` beside the code that emits it; `ctx.emit('name', {...})`. | In your own file |
+
+## Where art plugs in
+
+Nothing is drawn from images yet; `src/client/render.ts` draws rectangles.
+The intended shape, so art arriving tonight drops in as data:
+
+- The game keeps its own copies under `assets/` (the design-library mirror
+  is reference, never runtime); the build copies them to `dist/public/assets/`.
+- A **tile atlas** is named by the room (`"atlas": "<id>"`, additive) and
+  described by `content/atlases/<id>.json`: image path, tile size, and
+  which atlas cell draws each legend meaning.
+- A **sprite sheet** is named by the character kind (`"sprite": "<id>"`,
+  additive) and described by `content/sprites/<id>.json`: image path, the
+  32×32 cell size, and frame lists per animation state.
+- Collision never depends on art: the box in the character file and the
+  legend in the room file stay the truth.
+
+## Which paths each plan step owns
+
+A step adds files freely in its own paths and avoids editing others'.
+
+| Step | Owns |
+|---|---|
+| 1 (Gate 2: client, touch, netcode) | `src/client/**`, `src/server/**`, `scripts/**`, `package.json`, the build |
+| 2 (feel, attack, grab, throw, three kinds) | `src/sim/verbs/**`, `content/characters/**`, `content/actions/**`, `content/tuning.json`, `content/objects/**` |
+| 3 (the map, hidden routes) | `content/rooms/**`, `content/game.json`, room-travel systems `src/sim/systems/room-*.ts`, exits in `src/content/kinds/rooms.ts` |
+| 4 (NPC response logic) | `content/npcs/**`, `content/placements/**`, `content/rules/**`, their kind files, `src/sim/systems/npc-*.ts` |
+| 5 (phone comfort, joining) | `src/client/**` and `src/server/**` after Step 1 closes |
+| 6 (the talking king) | its own `content/` directory and kind file, `src/sim/systems/audience-*.ts` |
+| 7 (Hall, hijackable machine) | its own `content/` directories and kind files, `src/sim/systems/hall-*.ts`, `machine-*.ts` |
+| everyone | `scenarios/<own-prefix>-*.json`, `src/scenarios/facts/<new>.ts` |
+
+**Files two steps must both touch** (keep each edit additive and small,
+`git pull --rebase` right before): `src/sim/types.ts` (`Entity`, `Input`,
+`World`), `src/sim/systems/physics.ts` (Steps 2 and 3 both want it:
+knockback, exits), `src/client/render.ts` (anything newly visible),
+`content/tuning.json` (one section per character; add sections, don't
+reorder).
+
+## Changing a shared contract
+
+The contracts: the **world-state shape** (`World`, `Entity`,
+`Components`), the **input shape** (`Input`), the **event list**
+(`EventMap`), the **content schemas** (`src/content/kinds/*`), the
+**scenario format** and fact vocabulary, the **tile codes** (`TILE`), and
+every **id** in `content/` and `scenarios/`.
+
+1. **Additive only.** Add an optional field, a new event, a new id, a new
+   tile code. Never rename, remove, renumber or change the meaning of one
+   once pushed: other sessions' code and data, and soon other players'
+   devices, already depend on it.
+2. **New fields are optional with a default**, so existing content,
+   scenarios and worlds stay valid.
+3. **Retire, don't delete:** stop using an id and say so; leave it readable.
+4. **Say it in the commit** when a contract grew: which one, what was added.
+5. **Run `npm run check` before the push**; every scenario of every step
+   must still pass. A scenario that must change because behaviour changed
+   on purpose is its owner's call, not yours: ask.

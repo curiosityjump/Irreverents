@@ -1,0 +1,72 @@
+# The scenario harness
+
+**Reference.** Open before writing a scenario, adding a kind of fact, or
+touching `src/scenarios/` or `scripts/check.ts` / `scripts/gates.ts`.
+
+## Why it exists
+
+Nobody on the team can see or play the game; the scenarios are how a
+session knows a mechanic behaves as written (`docs/plan/step-1.md`, "One
+simulation core"). A scenario is data: a room, the players, timed inputs,
+and the facts expected. `npm run check` runs every one headlessly through
+the same `step()` the browser and server run. `npm run gates` reports the
+build gates A–F (`docs/measures.md`, M3) from the scenarios' `gate` tags.
+
+## The format (`scenarios/<id>.json`)
+
+```json
+{
+  "id": "jump-onto-platform",
+  "gate": "A",
+  "proves": "one sentence: what passing this proves",
+  "room": "graybox-hall",
+  "players": [{ "id": "a", "character": "hero", "spawn": 0 }],
+  "inputs": [
+    { "player": "a", "from": 0, "to": 54, "x": 1 },
+    { "player": "a", "from": 41, "to": 65, "hold": ["jump"] }
+  ],
+  "ticks": 180,
+  "expect": [{ "fact": "standing-on-tile", "player": "a", "at": 180, "tile": [8, 7] }]
+}
+```
+
+- `id` must equal the file name. `gate` is optional: `A`–`F`.
+- An input span holds the stick (`x`, `y` from -1 to 1) and/or actions
+  (`hold`, ids from `content/actions/`) from tick `from` up to but not
+  including `to`. Overlapping spans merge.
+- **Ticks:** 60 a second. "At tick N" means after N steps; tick 0 is the
+  start. An event's tick is the step it happened in.
+- Positions are measured at **the middle of the character's feet**, in
+  pixels; tiles are `[column, row]` from 0 at the room's top-left.
+
+## The facts (`src/scenarios/facts/`, one file each)
+
+| `fact` | Says |
+|---|---|
+| `standing-on-tile` | at tick `at`, `player` is on the ground with tile `tile` under their feet |
+| `position` | at tick `at`, `player`'s feet are within `x` and/or `y` `[min, max]` |
+| `velocity` | at tick `at`, `player`'s `vx` and/or `vy` (pixels per second) are within `[min, max]` |
+| `event` | event `event` happened (for `player`, if given) on a tick within `between`; optional `count: [min, max]`, and `[0, 0]` means "must not happen" |
+
+Add a fact by adding a file there that default-exports a `Fact`
+(`validate` names what is wrong with how a scenario wrote it; `test`
+returns what was true instead). It registers itself.
+
+## Rules that are deliberate
+
+- **Every scenario runs twice and the two runs must match byte for byte.**
+  This is the determinism check for the whole simulation.
+- **A scenario with an empty `expect` is refused**: it could not fail.
+- **`npm run gates` exits 2 when content or a scenario file is invalid**
+  rather than printing "no scenario yet", which would hide the breakage;
+  it exits 1 when any gate is `failing`.
+- **A new scenario needs a failing control** watched once
+  (`docs/verifying-and-finishing.md`, rung 3): break what it checks, see
+  `npm run check` name the broken fact, restore.
+
+## Authoring
+
+`node scripts/trace.ts <scenario id> [every N ticks]` prints each
+player's feet, tile, speed and ground state as the scenario runs, and
+every event. Write the inputs, give it one placeholder fact, trace it,
+then write the real facts from what you see and judge to be right.

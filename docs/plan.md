@@ -155,6 +155,19 @@ was derived from, a review found that one had, four times out of four.
 Add a line whenever a review names something as the model to copy;
 remove it when it stops being true.
 
+- **Self-registering files instead of shared lists**: a verb, system,
+  content kind or scenario fact is one new file, picked up by
+  `scripts/lib/registries.ts` (`docs/architecture.md`).
+- **Shared shapes extended from your own file**: `Content`, `Components`
+  and `EventMap` grow by declaration merging; copy `src/sim/verbs/jump.ts`.
+- **Numbers declared by their reader**: a verb or system lists the tuning
+  numbers it reads, with ranges; the validator does the rest
+  (`docs/mechanisms/content-validation.md`).
+- **Scenarios as data, traced then pinned**: `node scripts/trace.ts`, then
+  facts, then a watched failing control (`docs/mechanisms/scenarios.md`).
+- **Validator messages that name the file and field**: copy
+  `src/content/reader.ts`'s wording when adding a check.
+
 ---
 
 # Keeping this plan honest

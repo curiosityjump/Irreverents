@@ -269,6 +269,25 @@ changed without touching code; don't grade the feel yourself.
   feedback signal 2 must be injected by a delaying relay in the script;
   `iPhone 14 landscape` is 750×340 CSS px at ratio 3, so 320×180 fits 5×
   in device pixels.
+- **Gate 1 skeleton deploys and runs** (Gate 1 worker, 2026-11-23).
+  Bare skeleton f001057 pushed 04:07:21 UTC; `/healthz` reported it at
+  04:08:01 (40 s), `startedAt` 04:07:57. The first deploy built with
+  esbuild on Railway, serving from a bundled `dist/server.cjs`.
+- **From a fresh clone, 04:17 UTC:** `npm ci`, `npm run build`,
+  `npm run check` each exit 0, each under a second; `npm run gates`
+  prints six `no scenario yet` lines and `gates passing: 0 of 6`;
+  `npm run e2e` and `npm run check:live` exit 1 with their one line. The
+  built server ran with `node_modules` deleted.
+- **Scenarios: 3, each with a watched failing control** (run speed 0;
+  jump speed 0, platform removed, one-way made solid; every player given
+  player a's input, wall collision off; `Math.random` in physics for the
+  run-twice determinism check). Validator controls watched: tuning
+  reference typo, verb typo, tuning number typo, ragged room row, start
+  room typo, unknown action in a scenario, a Node import in `src/sim`.
+- **The canvas page, looked at** in headless Chromium at 1280×720 and as
+  Playwright's `iPhone 14 landscape`: holding right then space moved the
+  character from the spawn onto the first platform; no page errors.
+  Keyboard only; touch is Gate 2. Not tried: Safari, a real phone.
 
 ## Briefs
 

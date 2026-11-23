@@ -18,34 +18,56 @@ block.
 
 ## This project's setup
 
-**Status, 2026-11-23 04:00 UTC: partly real.** The repository holds a
-deploy probe, not the game. Plan Step 1 (`docs/plan/step-1.md`) makes the
-commands below real and must rewrite this section with what is true and
-when each command was last run end to end. Until it does, a line marked
-*(Step 1)* is the contract, not yet a fact.
+**Status, 2026-11-23 04:17 UTC: build, check, gates, start and dev are
+real** (Step 1 Gate 1). `e2e` and `check:live` are stubs that exit
+non-zero with "lands with Step 1 Gate 2"; a line marked *(Gate 2)* is the
+contract, not yet a fact. Every other command below was run end to end
+from a fresh clone at 04:17 UTC on 2026-11-23, Node v22.23.5.
 
-- **Build:** `npm run build` *(Step 1)*.
-- **Static checks:** `npm run check` *(Step 1)*: type-checking, content
-  validation, and the headless simulation scenarios. No browser, no
-  network; fast enough to run before every push.
-- **The real page, two players:** `npm run e2e` *(Step 1)*: headless
+- **From a fresh container:** `npm ci` (under 1 s here), then
+  `npm run build` (under 1 s), then `npm start`; stop it with Ctrl-C, or
+  by the pid you recorded when starting it in the background
+  (`node dist/server.cjs & echo $! > server.pid`, then
+  `kill $(cat server.pid)`). Start `node dist/server.cjs` directly when
+  you need the pid: `npm start &` gives you npm's pid, not the server's.
+- **Build:** `npm run build` writes `dist/server.cjs` (the server, bundled
+  with `ws`) and `dist/public/` (`index.html`, `game.js`). It validates
+  `content/` first and exits 1, building nothing, if anything is wrong.
+  The built server needs no `node_modules` (run with them deleted).
+- **Static checks:** `npm run check` (about half a second): type-checking
+  twice (everything, then the pure layers with no DOM or Node types), the
+  layer rule, content validation, and every scenario in `scenarios/`,
+  each run twice for determinism. No browser, no network. Exit 1 on any
+  failure, naming the file and field or the scenario's broken fact.
+- **Build gates:** `npm run gates` prints one line per gate A–F and the
+  count (`docs/measures.md`, M3). 0 of 6 today: no scenario is tagged.
+- **Develop:** `npm run dev` builds, serves on `PORT` (default 3000) and
+  rebuilds and restarts when `src/` or `content/` changes. *Started once
+  by hand; not otherwise exercised.*
+- **The real page, two players:** `npm run e2e` *(Gate 2)*: headless
   browsers against a local server, one of them phone-sized with touch.
-- **The live site:** `npm run check:live` *(Step 1)*: the same two-player
+- **The live site:** `npm run check:live` *(Gate 2)*: the same two-player
   check against the live address. Which commit is live:
-  `curl -s https://irreverents-production.up.railway.app/healthz` (real
-  today; run 2026-11-23 03:56 UTC).
-- **Get it running locally:** `npm start` serves on `PORT` (default 3000).
-  Real today for the probe; *(Step 1)* writes the full sequence from a
-  fresh container (`npm ci`, build, start, stop).
-- **What "it started" looks like:** *(Step 1)*.
+  `curl -s https://irreverents-production.up.railway.app/healthz`.
+- **What "it started" looks like:** the line `irreverents listening on
+  0.0.0.0:<port> commit=<sha or unknown>`; `GET /healthz` returns
+  `{"ok":true,"commit":…,"startedAt":…}`; `GET /` returns the page (200);
+  a WebSocket to `/ws` receives `{"type":"hello",…}` and echoes.
+- **Looking at the page:** Playwright and Chromium are preinstalled
+  (`NODE_PATH=/opt/node-tools/node_modules`, `require('playwright')`;
+  never run `playwright install`). The page exposes `window.irreverents`
+  (`world`, `content`) for scripted reads.
 - **Where it deploys:** Railway, at
   https://irreverents-production.up.railway.app. **A push to `main` is the
   deploy**, automatically, with no staging (the owner, 2026-11-23: "It's
-  setup to deploy automatically from main yes."). Measured: 37 s from push
-  to live for a no-build app. Nobody here can see Railway's logs; the live
-  address is the only evidence.
-- **Is there a test suite?** Not yet. *(Step 1)* lands the scenario
-  harness; until then "it passed" can mean nothing.
+  setup to deploy automatically from main yes."). Railway runs
+  `npm run build` then `npm start`. Measured: 25 to 40 s from push to
+  live. Nobody here can see Railway's logs; the live address is the only
+  evidence.
+- **Is there a test suite?** The scenarios (`docs/mechanisms/scenarios.md`):
+  3 today, covering running, jumping onto a one-way platform, walls and
+  two players in one room. They check the simulation, not the page:
+  nothing scripted checks what the screen shows until Gate 2's `e2e`.
 - **CI:** none, by absence, not by decision. Nothing checks a push before
   or after it deploys.
 
@@ -202,8 +224,16 @@ and the kinds of project-specific ones worth documenting:
   missing. You can "verify" a change that way and have tested **nothing**. If
   your project has one, name it here, name the fallback text, and say: set a
   key or don't claim it works.
-- **No test suite yet.** Until plan Step 1 lands the scenario harness, "it
-  passed" can only mean the rungs above, and a session must not imply more.
+- **`npm run check` passing says nothing about the screen.** The
+  scenarios drive the simulation headlessly; a broken page or renderer
+  passes them. Anything a player sees still needs rung 5.
+- **Generated registries.** `index.gen.ts` files are written by build,
+  check, gates, trace and dev and are git-ignored. Running `tsc` or a
+  script by hand in a fresh clone before any of those fails on a missing
+  `index.gen.ts`: run `npm run check` once first.
+- **Content is baked in at build time.** Editing `content/` changes
+  nothing in a running server until `npm run build` and a restart
+  (`npm run dev` does both).
 - **A push is a deploy.** Pushing to `main` ships to the owner and their
   friends within about a minute. **There is no "push it to see."** A push
   whose build fails on Railway is invisible from here except that

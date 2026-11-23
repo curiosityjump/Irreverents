@@ -1,0 +1,5 @@
+{
+  "id": "jump",
+  "label": "Jump",
+  "keys": ["Space", "KeyZ", "ArrowUp", "KeyW"]
+}

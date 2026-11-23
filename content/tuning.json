@@ -1,0 +1,20 @@
+{
+  "//": "DRAFT: every feel number in the game lives in this one file, so the owner can change how it plays without touching code. Units: pixels (at the 320x180 scale) and seconds. Each number is declared, with its allowed range, by the verb or system that reads it (src/sim/verbs/, src/sim/systems/); npm run check names any number that is missing, out of range or unread.",
+  "world": {
+    "gravity": 900,
+    "maxFallSpeed": 360
+  },
+  "characters": {
+    "hero": {
+      "runSpeed": 96,
+      "runAccel": 900,
+      "runDecel": 1200,
+      "airAccel": 600,
+      "airDecel": 300,
+      "jumpSpeed": 320,
+      "jumpCutMultiplier": 0.45,
+      "coyoteTime": 0.1,
+      "jumpBufferTime": 0.1
+    }
+  }
+}

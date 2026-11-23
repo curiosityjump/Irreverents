@@ -1,0 +1,93 @@
+{
+  "id": "jump-onto-platform",
+  "proves": "a running jump rises through a one-way platform from below and lands on top of it",
+  "room": "graybox-hall",
+  "players": [
+    {
+      "id": "a",
+      "character": "hero",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 54,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 41,
+      "to": 65,
+      "hold": [
+        "jump"
+      ]
+    }
+  ],
+  "ticks": 180,
+  "expect": [
+    {
+      "fact": "event",
+      "event": "jumped",
+      "player": "a",
+      "between": [
+        41,
+        41
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "position",
+      "player": "a",
+      "at": 48,
+      "y": [
+        113,
+        159
+      ]
+    },
+    {
+      "fact": "position",
+      "player": "a",
+      "at": 60,
+      "y": [
+        100,
+        111.9
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "landed",
+      "player": "a",
+      "between": [
+        60,
+        80
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "standing-on-tile",
+      "player": "a",
+      "at": 180,
+      "tile": [
+        8,
+        7
+      ]
+    },
+    {
+      "fact": "position",
+      "player": "a",
+      "at": 180,
+      "y": [
+        112,
+        112
+      ]
+    }
+  ]
+}
