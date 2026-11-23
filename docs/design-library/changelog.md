@@ -30,6 +30,74 @@ For EVERY MATERIAL CHANGE in this project folder, AFTER the changed Drive files 
 
 ## 
 
+## 2026-11-22 · 11:16 PM EST · ChatGPT — C02-02/C02-03 two playable hero PROTOTYPE sprite sheets delivered
+
+## Fulfilled Claude's BLOCKING request with two original 192×256 transparent PNG sheets (32px grid, 8 animation rows), JSON animation manifests, previews, README and ZIP. The frames are simple programmatically drawn prototype pixel art, not polished final character animation; motion and expressiveness require refinement. Edited request with direct file links and limitations, marked delivered and moved to Delivered queue. No GitHub changes or deployment.
+
+## - Request: https://docs.google.com/document/d/1bxtTcbU6dvD0j5KrSs12ozIIg35gh7xcXwQ663vQbPA/edit
+
+## - Asset folder: https://drive.google.com/drive/folders/1D34ZytHeo2RUD2un9ox20sB4TD3bajpn
+
+## - Complete ZIP: https://drive.google.com/file/d/1OjxxRTvbDK0fqmpilySx-tkvFWTD3EmO/view
+
+## 
+
+## 2026-11-22 · 11:03 PM EST · ChatGPT — ASSET REQUEST DESK END-TO-END TEST PASSED (U08-01)
+
+## Ran the asset-desk task immediately, read Claude’s four requests, fulfilled the explicitly designated small process test, generated six original native 24×24 touch controls with normal/pressed states (12 single frames packaged in ZIP, six 48×24 strips, one 144×48 atlas), and uploaded 11 usable files including JSON manifest and handoff README. Edited U08-01 request to DELIVERED, moved it from 01 REQUESTS to 02 DELIVERED, and verified Drive upload and destination. Other three requests remain pending for follow-up; none have been falsely marked fulfilled. No GitHub commits or Railway deploys were performed.
+
+## Changed / routing:
+
+## - Fulfilled request U08-01: https://docs.google.com/document/d/1cegULlSJ3XUm76aTF53YAHTkmYSl9isw1VkSZ57d1c0/edit
+
+## - Deliverable asset folder: https://drive.google.com/drive/folders/1oMoNDVw0NXnUvMnBAclxga7SwfWja7XI
+
+## - 144×48 atlas: https://drive.google.com/file/d/1TV9iop2_wZHgKDXaEbr7yjPMTVA8wIiF/view
+
+## - ZIP all individual PNGs: https://drive.google.com/file/d/1tYfTaMAhR2Dv25-E_yMuSyw7VJz48KPT/view
+
+## - JSON manifest: https://drive.google.com/file/d/1gLE-I7V7MijtloWGJzGQaMOGNEwrcv7p/view
+
+## - Completed queue: https://drive.google.com/drive/folders/15X6uq3YK-NdKbQQt0FqaXY46msSW38Jm
+
+## - Pending queue: https://drive.google.com/drive/folders/1m2vTlbSVoPJg5TwESbcWH4xoCcSOIKCp
+
+## 
+
+## 11/22/2026, 10:53 PM EST · ChatGPT — Claude/ChatGPT asset request workflow clarified and default-use gate removed
+
+## Confirmed owner policy: newly generated/created game assets are allowed to be used immediately and revised later, without waiting for owner sign-off. Created a Drive-native request hub (Claude submits one REQ Google Doc per asset; ChatGPT checks the folder hourly, completes feasible requests, posts actual output links and limitations, and moves the request to Delivered or Needs Clarification). Added a copyable template and a quick-start at the top of both the collaboration protocol and 00 START HERE. Renamed S00-01 from UNAPPROVED to USE NOW / REVISE LATER, replaced its current manifest and handoff with approved-for-use-by-default versions and retained prior copies under ARCHIVE names. The automated scheduled check was created and enabled; actual fulfillment depends on available tools and pending requests; none have been processed yet.
+
+## Links:
+
+## - Collaboration hub: https://drive.google.com/drive/folders/1W_H99UY0Xne85PWK8Lb4QcKK2q2tSncu
+
+## - Copyable request template: https://docs.google.com/document/d/1ntJHj5rYYi59_o4-0c5Pf-rFYKcJvX1ZlUP43nCJaUw/edit
+
+## - Full request protocol: https://docs.google.com/document/d/1oBpJKI2P7v7rwoMku-TbcFuVQe2iajddK6v2i5Ro0G0/edit
+
+## - Incoming requests: https://drive.google.com/drive/folders/1m2vTlbSVoPJg5TwESbcWH4xoCcSOIKCp
+
+## - Delivered requests: https://drive.google.com/drive/folders/15X6uq3YK-NdKbQQt0FqaXY46msSW38Jm
+
+## - Needs clarification: https://drive.google.com/drive/folders/1qQW5tJo27wjAwZMHi8mGEJa8HRa7xoLz
+
+## - Art plan 13: https://docs.google.com/document/d/1reKfubHb_S6mSyn89kTSm8T2bSRd67E2MptsL24skL8/edit
+
+## - Style lock 14: https://docs.google.com/document/d/1TYZcSUJ6pRxWCp76f2mrvwAAz90PRCYVRAWiejmJFFI/edit
+
+## - Visual direction 10: https://docs.google.com/document/d/1VJOvGqbT3wcqgD8-PaXpftODBr42ChGmqdBYHvx7_i0/edit
+
+## - Decision register 11: https://docs.google.com/document/d/1vlwf5VZgwT0E0cKqYF4o0EI5LhuR4iiZxCyVUUreytU/edit
+
+## - 00 START HERE: https://docs.google.com/document/d/1-ASnTbCLAXSi_WCOl_7KNuUgelLXLmiZFKiN6APao2s/edit
+
+## - Asset audit 32: https://docs.google.com/document/d/1W09Tzw4sRLsy9zCQJGj9vPoiI8F01sjSCLyVpF54Xzs/edit
+
+## - S00-01 use-now art folder: https://drive.google.com/drive/folders/1BCT_Sao2sZNCygUCv0qSQcECtIlsmc2j
+
+## 
+
 ## 2026-11-22 · 10:47 PM EST · ChatGPT — S00-01 pixel-art style candidates for Claude (UNAPPROVED)
 
 ## Generated two focused side-view grassy-ruins game-screen concepts, made 320×180 phone-scale previews, and uploaded six files including a status/asset manifest and Claude handoff note. Kept them in an explicitly UNAPPROVED style-candidate folder; no bad/rejected old boards were imported. Variant B is a recommended test; neither image is a production-ready sprite/tilemap, and the owner style gate remains open.

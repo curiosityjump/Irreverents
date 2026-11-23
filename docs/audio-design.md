@@ -45,6 +45,34 @@ a decision until they react to it.
    speaker (no sub-bass-only cues), and has music and effects volume plus
    mute. Never block play on audio loading.
 
+## The owner's influences, and the idea that ties them together
+
+**Owner, 2026-11-23 ~04:15 UTC, to Vision Partner, first-hand:**
+> I'd like the other game influences to come through in the music as well: need for speed, gta, farcry, super smash bros, etc. the music with be GBA kirbyesque, but with very different influences in many cases.
+
+So: **every track is GBA-era chiptune; what changes per situation is the
+genre and energy borrowed from one of the reference games** (doc 01's
+"Reference DNA"), re-voiced for the GBA.
+
+| Situation | Borrowed from | Sounds like (as GBA chiptune) |
+|---|---|---|
+| Exploring | Kirby & the Amazing Mirror | light, curious, bouncy, singable |
+| Sneaking | Splinter Cell (doc 26's unconscious-NPC reference) | low pulse bass, ticking hats, melody only hinted |
+| Alarm / wanted pursuit | Need for Speed Most Wanted, GTA police chases | driving chiptune rock / breakbeat, one more layer per heat level |
+| Villain outpost | Far Cry 5 | tense drone while scouting, then a proud hymn-like villain anthem once the alarm rings |
+| Cantina brawl | Super Smash Bros. | high-energy fighting theme, KO and home-run stings |
+| Hijacked vehicle | GTA radio | short "radio station" loops in different genres (funk, hip-hop beat, synth-pop) |
+| Mobbed by a whole town | The Matrix Reloaded, Neo vs the Smiths | relentless industrial/techno |
+| Hall of Legends | "Valhalla-like memorial" (D-024) | reverent hall, chanting fanfare when a legend is recorded |
+
+**Vision Partner's proposal (not the owner's words; owner to judge):** the
+music is the world's voice, so it is **sincere**, not wacky, and it reacts
+like an NPC: plays the theme confidently in business as usual; *stumbles*
+(sour note, tempo wobble) when the heroes go off-script; *snaps back* with a
+resolving flourish on "Yup! Just as expected!"; turns the same melody into
+the frantic chase version in rage and pursuit. One melody per area, many
+moods, built from the same stems.
+
 ## Music, by situation
 
 | Situation | Feel | Source rule |

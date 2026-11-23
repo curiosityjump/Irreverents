@@ -1,0 +1,75 @@
+{
+  "id": "C02-03",
+  "hero": "B",
+  "description": "small quick adventurer",
+  "sheet": "hero_B_sheet.png",
+  "cellWidth": 32,
+  "cellHeight": 32,
+  "columns": 6,
+  "rows": 8,
+  "facing": "right",
+  "footPivot": {
+    "x": 16,
+    "y": 31
+  },
+  "rendering": "pixelated nearest-neighbor",
+  "animations": {
+    "idle": {
+      "row": 0,
+      "firstFrame": 0,
+      "frameCount": 3,
+      "fps": 5,
+      "loop": true
+    },
+    "run": {
+      "row": 1,
+      "firstFrame": 0,
+      "frameCount": 6,
+      "fps": 12,
+      "loop": true
+    },
+    "jump_up": {
+      "row": 2,
+      "firstFrame": 0,
+      "frameCount": 2,
+      "fps": 8,
+      "loop": true
+    },
+    "fall": {
+      "row": 3,
+      "firstFrame": 0,
+      "frameCount": 2,
+      "fps": 8,
+      "loop": true
+    },
+    "attack": {
+      "row": 4,
+      "firstFrame": 0,
+      "frameCount": 4,
+      "fps": 12,
+      "loop": false
+    },
+    "grab_hold": {
+      "row": 5,
+      "firstFrame": 0,
+      "frameCount": 2,
+      "fps": 6,
+      "loop": true
+    },
+    "throw": {
+      "row": 6,
+      "firstFrame": 0,
+      "frameCount": 3,
+      "fps": 12,
+      "loop": false
+    },
+    "hurt": {
+      "row": 7,
+      "firstFrame": 0,
+      "frameCount": 2,
+      "fps": 8,
+      "loop": false
+    }
+  },
+  "status": "prototype art; needs game integration and playtesting"
+}

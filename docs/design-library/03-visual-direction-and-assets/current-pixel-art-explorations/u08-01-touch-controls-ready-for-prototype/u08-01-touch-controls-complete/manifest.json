@@ -1,0 +1,163 @@
+{
+  "package": "Irreverents U08-01 Touch Controls",
+  "status": "usable prototype / auto-approved for iteration",
+  "native_cell_size": [
+    24,
+    24
+  ],
+  "sheets": {
+    "all_buttons": {
+      "file": "U08-01_all_buttons_atlas_144x48.png",
+      "width": 144,
+      "height": 48,
+      "cell_size": 24,
+      "columns": 6,
+      "rows": 2,
+      "row_0": "normal",
+      "row_1": "pressed",
+      "order": [
+        "left",
+        "right",
+        "jump",
+        "attack",
+        "grab_throw",
+        "special"
+      ]
+    }
+  },
+  "icons": {
+    "left": {
+      "normal": "left_normal_24.png",
+      "pressed": "left_pressed_24.png",
+      "strip": "left_states_48x24.png",
+      "strip_rects": {
+        "normal": [
+          0,
+          0,
+          24,
+          24
+        ],
+        "pressed": [
+          24,
+          0,
+          24,
+          24
+        ]
+      },
+      "atlas_col": 0
+    },
+    "right": {
+      "normal": "right_normal_24.png",
+      "pressed": "right_pressed_24.png",
+      "strip": "right_states_48x24.png",
+      "strip_rects": {
+        "normal": [
+          0,
+          0,
+          24,
+          24
+        ],
+        "pressed": [
+          24,
+          0,
+          24,
+          24
+        ]
+      },
+      "atlas_col": 1
+    },
+    "jump": {
+      "normal": "jump_normal_24.png",
+      "pressed": "jump_pressed_24.png",
+      "strip": "jump_states_48x24.png",
+      "strip_rects": {
+        "normal": [
+          0,
+          0,
+          24,
+          24
+        ],
+        "pressed": [
+          24,
+          0,
+          24,
+          24
+        ]
+      },
+      "atlas_col": 2
+    },
+    "attack": {
+      "normal": "attack_normal_24.png",
+      "pressed": "attack_pressed_24.png",
+      "strip": "attack_states_48x24.png",
+      "strip_rects": {
+        "normal": [
+          0,
+          0,
+          24,
+          24
+        ],
+        "pressed": [
+          24,
+          0,
+          24,
+          24
+        ]
+      },
+      "atlas_col": 3
+    },
+    "grab_throw": {
+      "normal": "grab_throw_normal_24.png",
+      "pressed": "grab_throw_pressed_24.png",
+      "strip": "grab_throw_states_48x24.png",
+      "strip_rects": {
+        "normal": [
+          0,
+          0,
+          24,
+          24
+        ],
+        "pressed": [
+          24,
+          0,
+          24,
+          24
+        ]
+      },
+      "atlas_col": 4
+    },
+    "special": {
+      "normal": "special_normal_24.png",
+      "pressed": "special_pressed_24.png",
+      "strip": "special_states_48x24.png",
+      "strip_rects": {
+        "normal": [
+          0,
+          0,
+          24,
+          24
+        ],
+        "pressed": [
+          24,
+          0,
+          24,
+          24
+        ]
+      },
+      "atlas_col": 5
+    }
+  },
+  "frame_order": [
+    "normal",
+    "pressed"
+  ],
+  "render_mode": "pixelated / nearest-neighbor only",
+  "placement": "Use CSS touch buttons above the game canvas in an iPhone landscape layout. Visual PNGs do not implement input events.",
+  "implementation_notes": [
+    "Buttons have semitransparent background and dark outline.",
+    "Each symbol has independent files and horizontal 2-frame sprite strip.",
+    "Use pointerdown/pointerup/pointercancel; prevent accidental page scrolling and provide pressed-state feedback.",
+    "Do not force exact positions or six simultaneously displayed touch controls; app layout is adaptable.",
+    "Default-approved for use and replacement after testing."
+  ]
+}

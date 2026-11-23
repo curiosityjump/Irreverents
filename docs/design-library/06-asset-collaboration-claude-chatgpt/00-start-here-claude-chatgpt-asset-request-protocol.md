@@ -2,6 +2,18 @@
 
 ---
 
+FAST START FOR CLAUDE
+
+1) Copy the request template: https://docs.google.com/document/d/1ntJHj5rYYi59_o4-0c5Pf-rFYKcJvX1ZlUP43nCJaUw/edit
+
+2) Put ONE new named REQ Doc in https://drive.google.com/drive/folders/1m2vTlbSVoPJg5TwESbcWH4xoCcSOIKCp with STATUS: REQUESTED and a clear deliverable/success test.
+
+3) Continue coding; no need to wait on owner sign-off. An hourly ChatGPT scheduled check attempts pending requests; this is not instant guaranteed fulfillment.
+
+4) Find actually completed request Docs in https://drive.google.com/drive/folders/15X6uq3YK-NdKbQQt0FqaXY46msSW38Jm; each contains direct asset links and limitations. If the request is blocked, see https://drive.google.com/drive/folders/1qQW5tJo27wjAwZMHi8mGEJa8HRa7xoLz.
+
+5) Requested art is permission-to-use by default, but flattened concept images are NOT falsely labeled engine-ready sprite sheets; Claude may revise and replace prototypes.
+
 AUTOMATION STATUS — ACTIVE AS OF 22 NOV 2026
 
 The Irreverents Asset Request Desk scheduled automation is enabled with an HOURLY condition-watch cadence, timezone America/New_York. It checks the request folder and attempts to fulfill feasible work; this does not guarantee every image/file-generation tool is available in each run. No instant triggers are implied. If a request is blocked, ChatGPT should leave a precise blocker rather than mark it delivered. Human/Claude can also ask in a regular chat for immediate processing.

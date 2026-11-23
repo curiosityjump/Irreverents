@@ -146,7 +146,7 @@
    "id": "1reKfubHb_S6mSyn89kTSm8T2bSRd67E2MptsL24skL8",
    "drive_path": "/03 Visual Direction and Assets/00 Asset Production Plan and Style Lock/13 — Art Asset Production Plan — Ordered Generation Backlog",
    "repo_path": "03-visual-direction-and-assets/00-asset-production-plan-and-style-lock/13-art-asset-production-plan-ordered-generation-backlog.md",
-   "sha256": "4a55adaa2114226af7f24be565a4f3c2b378007f1289a878fb1f82ec77058cb3"
+   "sha256": "3ed24f8155fa9676d3f8b0ede644123324f6ffa5cfc1cfdc6bb4073af4532c15"
   },
   {
    "kind": "doc",
@@ -159,6 +159,67 @@
    "kind": "folder",
    "id": "1keZSTY0jaKXupkZ8TXZMW11c9e5s__C2",
    "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations"
+  },
+  {
+   "kind": "folder",
+   "id": "1D34ZytHeo2RUD2un9ox20sB4TD3bajpn",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/C02 — Playable Heroes Prototype"
+  },
+  {
+   "kind": "file",
+   "id": "1OjxxRTvbDK0fqmpilySx-tkvFWTD3EmO",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/C02 — Playable Heroes Prototype/C02_heroes_COMPLETE.zip",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/c02-playable-heroes-prototype/c02-heroes-complete/",
+   "sha256": "dcec4acbb9ea19b6c24b4795bba38c90a1fe755a961d409d16cbfa19141351fe"
+  },
+  {
+   "kind": "file",
+   "id": "1_wcNKKk07A5RD6clVclIRtdsNVqkp1QZ",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/C02 — Playable Heroes Prototype/hero_A_manifest.json",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/c02-playable-heroes-prototype/hero-a-manifest.json",
+   "sha256": "06b45b05bfddcd4134927aba963cdae7ae448604cbf10f7fc60a917eb1a10781"
+  },
+  {
+   "kind": "file",
+   "id": "1q0GyeLDSfqdt77tQxX__3_5sR4l_-Gur",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/C02 — Playable Heroes Prototype/hero_A_preview_3x.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/c02-playable-heroes-prototype/hero-a-preview-3x.png",
+   "sha256": "1652c6caf6c3afde33f80f023b383a4f455c9c0801b2e234ed0b4cef180b681e"
+  },
+  {
+   "kind": "file",
+   "id": "1_ISaUe2uS16woABXMBIsVzQM-d5Mq-nu",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/C02 — Playable Heroes Prototype/hero_A_sheet.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/c02-playable-heroes-prototype/hero-a-sheet.png",
+   "sha256": "5832c66b1ae4476e7ca2300cd657efa6ca2ddb2959133de036a29c3b72f240f8"
+  },
+  {
+   "kind": "file",
+   "id": "1EPUsl98AaEwyOJlv82i8u0sDovep2i6J",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/C02 — Playable Heroes Prototype/hero_B_manifest.json",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/c02-playable-heroes-prototype/hero-b-manifest.json",
+   "sha256": "b1f523a56e26f9e49216f8bc646bc1058e8bf196bd99cf1287e22615bf64c6fd"
+  },
+  {
+   "kind": "file",
+   "id": "15H627DOqrex_3Uze_SEgwl4GyBXpX1rV",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/C02 — Playable Heroes Prototype/hero_B_preview_3x.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/c02-playable-heroes-prototype/hero-b-preview-3x.png",
+   "sha256": "4e64a8f2bad5052d51675a8bb32f3c37ad77c3a05f8e395dc566a5b17055c3da"
+  },
+  {
+   "kind": "file",
+   "id": "1kP_w4leYbxoNZLOtN65ZrivkEUVj2vyA",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/C02 — Playable Heroes Prototype/hero_B_sheet.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/c02-playable-heroes-prototype/hero-b-sheet.png",
+   "sha256": "e6f628edc73ef7739a09e74e62d358051d70d14da1c0a56916159055d2182bd9"
+  },
+  {
+   "kind": "file",
+   "id": "1BSZulqzKkIGETfXcRCFYPVX5p-fWjYrY",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/C02 — Playable Heroes Prototype/README.txt",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/c02-playable-heroes-prototype/readme.txt",
+   "sha256": "aa7d9f189837fda4af81ac0266118642d991ea1ff0d5c8989fbcffe6a05f97b2"
   },
   {
    "kind": "folder",
@@ -328,6 +389,88 @@
    "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/S00-01 — Gameplay References (USE NOW, REVISE LATER)/S00-01B_grass_ruins_quiet_route_phone_320x180_preview.png",
    "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/s00-01-gameplay-references-use-now-revise-later/s00-01b-grass-ruins-quiet-route-phone-320x180-preview.png",
    "sha256": "f38a1029b63fc5a84b24e38af1629b78e55b81be2c9ecca3a6bedb180eba22c8"
+  },
+  {
+   "kind": "folder",
+   "id": "1oMoNDVw0NXnUvMnBAclxga7SwfWja7XI",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/U08-01 — Touch Controls (READY FOR PROTOTYPE)"
+  },
+  {
+   "kind": "file",
+   "id": "1W77jS2YFrX07xTUiVngMe6bxDyXRVAb1",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/U08-01 — Touch Controls (READY FOR PROTOTYPE)/attack_states_48x24.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/u08-01-touch-controls-ready-for-prototype/attack-states-48x24.png",
+   "sha256": "996f2c07fcc9462df45cc90d573a689e243981dd2307a1f9dd2d446b8bcffeb5"
+  },
+  {
+   "kind": "file",
+   "id": "1kSnKMlfrbBYLg74y0Kf9Qk6W9MWwx2Yt",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/U08-01 — Touch Controls (READY FOR PROTOTYPE)/grab_throw_states_48x24.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/u08-01-touch-controls-ready-for-prototype/grab-throw-states-48x24.png",
+   "sha256": "03c046b1822202bf167dc38253a6fe91964b3f8ec8aa1fd380bb6eb360b64a96"
+  },
+  {
+   "kind": "file",
+   "id": "18pR4HryQLyTXF1D-ZfdH3kVOy-BDTajQ",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/U08-01 — Touch Controls (READY FOR PROTOTYPE)/jump_states_48x24.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/u08-01-touch-controls-ready-for-prototype/jump-states-48x24.png",
+   "sha256": "bcb4067ed375a751ddc91c42e9996efcb7381b2874fa2f149967c09cee105a80"
+  },
+  {
+   "kind": "file",
+   "id": "1OmGAWrbIRR3uZXHNDCnFQzJs8foyS_0B",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/U08-01 — Touch Controls (READY FOR PROTOTYPE)/left_states_48x24.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/u08-01-touch-controls-ready-for-prototype/left-states-48x24.png",
+   "sha256": "a0bdcd3bd21d587805895f3234eda93f3f986a19888ee484fb54c87dfbb452a1"
+  },
+  {
+   "kind": "file",
+   "id": "1gLE-I7V7MijtloWGJzGQaMOGNEwrcv7p",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/U08-01 — Touch Controls (READY FOR PROTOTYPE)/manifest.json",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/u08-01-touch-controls-ready-for-prototype/manifest.json",
+   "sha256": "c71b8d2764f31176d1eeedc780539e85c65fa21c991bcb57ae22fea04778bec2"
+  },
+  {
+   "kind": "file",
+   "id": "1mhzcC8arpmiy87z_TLEOenLiQpN2L9rR",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/U08-01 — Touch Controls (READY FOR PROTOTYPE)/README_FOR_CLAUDE.txt",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/u08-01-touch-controls-ready-for-prototype/readme-for-claude.txt",
+   "sha256": "37dd921beb4c2d3da76e3adb912b3c3004825de5a1bd33f0688b63dc17ea4d09"
+  },
+  {
+   "kind": "file",
+   "id": "1om6M4XGIHVyYdtmwsVndviIkpN3fHqU2",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/U08-01 — Touch Controls (READY FOR PROTOTYPE)/review_4x_nearest_neighbor.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/u08-01-touch-controls-ready-for-prototype/review-4x-nearest-neighbor.png",
+   "sha256": "fdb42a8a041937712ee72d737e775ea6ffd0bd4315dbcd4a709a2d9c6c8ec80d"
+  },
+  {
+   "kind": "file",
+   "id": "1jtGJkBxDTebxSvpQSqPa5iqqceNpizRq",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/U08-01 — Touch Controls (READY FOR PROTOTYPE)/right_states_48x24.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/u08-01-touch-controls-ready-for-prototype/right-states-48x24.png",
+   "sha256": "d63f8e9bf2a2ec78bca93fdd429772b7f3d4f09dc385f0773aa1fe1e03314b9b"
+  },
+  {
+   "kind": "file",
+   "id": "1Vqe4BkdsAyebkWUH3Kfq4zpXQN53evL2",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/U08-01 — Touch Controls (READY FOR PROTOTYPE)/special_states_48x24.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/u08-01-touch-controls-ready-for-prototype/special-states-48x24.png",
+   "sha256": "5b582f0a65c5b31dfe093a5d857cbb39a3eff9b19892713cc7631f356403b817"
+  },
+  {
+   "kind": "file",
+   "id": "1TV9iop2_wZHgKDXaEbr7yjPMTVA8wIiF",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/U08-01 — Touch Controls (READY FOR PROTOTYPE)/U08-01_all_buttons_atlas_144x48.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/u08-01-touch-controls-ready-for-prototype/u08-01-all-buttons-atlas-144x48.png",
+   "sha256": "8a6c42b0ea132cc6b2ff1cfaa63d1d2ba97c989c849a0672c48c53ddde739949"
+  },
+  {
+   "kind": "file",
+   "id": "1tYfTaMAhR2Dv25-E_yMuSyw7VJz48KPT",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/U08-01 — Touch Controls (READY FOR PROTOTYPE)/U08-01_touch_controls_COMPLETE.zip",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/u08-01-touch-controls-ready-for-prototype/u08-01-touch-controls-complete/",
+   "sha256": "c12eb09569bd41b03844098edbcd47d24830752e5971e7a0f8494cd19099e8cf"
   },
   {
    "kind": "file",
@@ -523,9 +666,51 @@
    "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/01 REQUESTS — Claude to ChatGPT"
   },
   {
+   "kind": "doc",
+   "id": "13982Ar8l96vxxHNBLAjCZMQwutOvuaXTq8P4YLFY7R8",
+   "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/01 REQUESTS — Claude to ChatGPT/REQ — A01-01 — First sound-effects pack (chiptune, phone-friendly)",
+   "repo_path": "06-asset-collaboration-claude-chatgpt/01-requests-claude-to-chatgpt/req-a01-01-first-sound-effects-pack-chiptune-phone-friendly.md",
+   "sha256": "ddb9cb86a3f88843d3de6268ccedd2ac1ada637f76f551d7773d2529680b43b7"
+  },
+  {
+   "kind": "doc",
+   "id": "1cvf_rCrdY7rSDc78_tA75-ZL-Xm9QlVRPWmNiLSKrLY",
+   "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/01 REQUESTS — Claude to ChatGPT/REQ — A02-01 — Music: GBA chiptune with each game's influence (replaces earlier A02-01)",
+   "repo_path": "06-asset-collaboration-claude-chatgpt/01-requests-claude-to-chatgpt/req-a02-01-music-gba-chiptune-with-each-game-s-influence-replaces-earlier-a02-01.md",
+   "sha256": "90e38b2edaf5a8033636def282b82265cb42f1220bf5e57aeb427ac198f096cd"
+  },
+  {
+   "kind": "doc",
+   "id": "1KlKA9opw3zNbzDKwTOuOfM0BfJMjLDzxSQH4k2cV-GU",
+   "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/01 REQUESTS — Claude to ChatGPT/REQ — E01-02/E01-03 — Production 16px tilesets: grassy ruins, castle, town street",
+   "repo_path": "06-asset-collaboration-claude-chatgpt/01-requests-claude-to-chatgpt/req-e01-02-e01-03-production-16px-tilesets-grassy-ruins-castle-town-street.md",
+   "sha256": "36821d32636400a59d672185f79b591bc7e1d9cc30bb70e0ecde6faf4b592126"
+  },
+  {
+   "kind": "doc",
+   "id": "1uI3eVhW39udTZZLcQws9A5rF4T44MyQ2MhGdETzodrY",
+   "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/01 REQUESTS — Claude to ChatGPT/REQ — N03-01/N03-02/N03-04 — Town NPCs with 3 modes, guard, two basic enemies",
+   "repo_path": "06-asset-collaboration-claude-chatgpt/01-requests-claude-to-chatgpt/req-n03-01-n03-02-n03-04-town-npcs-with-3-modes-guard-two-basic-enemies.md",
+   "sha256": "abd99d71c8a70a741b40387b7c03faa2d95a529358af4fa0f91f3cf4a44f478c"
+  },
+  {
    "kind": "folder",
    "id": "15X6uq3YK-NdKbQQt0FqaXY46msSW38Jm",
    "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/02 DELIVERED — ChatGPT to Claude"
+  },
+  {
+   "kind": "doc",
+   "id": "1bxtTcbU6dvD0j5KrSs12ozIIg35gh7xcXwQ663vQbPA",
+   "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/02 DELIVERED — ChatGPT to Claude/REQ — C02-02/C02-03 — Two playable heroes, sprite sheets for co-op",
+   "repo_path": "06-asset-collaboration-claude-chatgpt/02-delivered-chatgpt-to-claude/req-c02-02-c02-03-two-playable-heroes-sprite-sheets-for-co-op.md",
+   "sha256": "543c2579416901e996725c6f58451531c4080c9caeca8c5f97687dc23c94ac64"
+  },
+  {
+   "kind": "doc",
+   "id": "1cegULlSJ3XUm76aTF53YAHTkmYSl9isw1VkSZ57d1c0",
+   "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/02 DELIVERED — ChatGPT to Claude/REQ — U08-01 — Touch control buttons (small, process test)",
+   "repo_path": "06-asset-collaboration-claude-chatgpt/02-delivered-chatgpt-to-claude/req-u08-01-touch-control-buttons-small-process-test.md",
+   "sha256": "b203acf1dc74d822ee97c32d55be5f28279f4d898a0c42935e85a4a64fc5701b"
   },
   {
    "kind": "folder",
@@ -537,21 +722,28 @@
    "id": "1oBpJKI2P7v7rwoMku-TbcFuVQe2iajddK6v2i5Ro0G0",
    "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/00 START HERE — Claude ↔ ChatGPT Asset Request Protocol",
    "repo_path": "06-asset-collaboration-claude-chatgpt/00-start-here-claude-chatgpt-asset-request-protocol.md",
-   "sha256": "34a4a80cb089e009994ff867ebe65a7e2e6e039ae9fd72f0f913945ad370f725"
+   "sha256": "eab76eecebad4969c207c29b89a6e1233811b1c82e0addf7a7bc0b200c91d0ea"
+  },
+  {
+   "kind": "doc",
+   "id": "1ntJHj5rYYi59_o4-0c5Pf-rFYKcJvX1ZlUP43nCJaUw",
+   "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/01 COPY THIS — Asset Request Template (Claude)",
+   "repo_path": "06-asset-collaboration-claude-chatgpt/01-copy-this-asset-request-template-claude.md",
+   "sha256": "e0a8eff5a8e5a289fae4726d53d300f6776acfb73719f381c743eab3e28b1195"
   },
   {
    "kind": "doc",
    "id": "1-ASnTbCLAXSi_WCOl_7KNuUgelLXLmiZFKiN6APao2s",
    "drive_path": "/00 START HERE — Irreverents",
    "repo_path": "00-start-here-irreverents.md",
-   "sha256": "02ce3ec649c2e8dd7e2b375c13223c201810b689d6f42b660c7d2ec45f4b8a5b"
+   "sha256": "93c69db1f70e74f1598227dc2c9c28fe0cd1367c9f585b32de07d526d00c3c42"
   },
   {
    "kind": "doc",
    "id": "17R7aKkqDxQwRk-cmywQbvQ_CcEzz4UqHz37YYYRnADs",
    "drive_path": "/changelog",
    "repo_path": "changelog.md",
-   "sha256": "35f7178bc82b3a07e23487acb31e758b9091916390f4f0c86acba2ca672f3216"
+   "sha256": "812720af6355e936809a3c95059f6571ce8fe45922c6ff937fe59f04e47f6489"
   }
  ]
 }

@@ -62,12 +62,13 @@ that, not Vision Partner's check, is the real pace).
 
 | Filed (UTC) | REQ doc | Priority |
 |---|---|---|
-| 2026-11-23 03:58 | C02-02/C02-03 — two playable heroes, sprite sheets for co-op (32×32 cells, ~24–28 px tall, idle/run/jump/fall/attack/grab/throw/hurt, JSON manifest) | BLOCKING |
+| 2026-11-23 03:58 | C02-02/C02-03 — two playable heroes — **DELIVERED ~04:15**: `docs/design-library/03-visual-direction-and-assets/current-pixel-art-explorations/c02-playable-heroes-prototype/` (plain; placeholder quality) | BLOCKING |
 | 2026-11-23 03:58 | N03-01/02/04 — shopkeeper, guard, cat with 3 modes; grunt + brute enemies; alarm signaler prop | SOON |
 | 2026-11-23 03:58 | E01-02/E01-03 — 16×16 tile atlases (grassy ruins, castle, town street) with solid/one-way/decor/breakable flags; parallax layers | SOON |
-| 2026-11-23 04:00 | U08-01 — six 24×24 touch buttons (left, right, jump, attack, grab/throw, special) + pressed states; the owner's end-to-end process test | SOON |
+| 2026-11-23 04:00 | U08-01 — six 24×24 touch buttons (left, right, jump, attack, grab/throw, special) + pressed states; the owner's end-to-end process test — **DELIVERED ~04:10**: `.../current-pixel-art-explorations/u08-01-touch-controls-ready-for-prototype/` | SOON |
 | 2026-11-23 04:07 | A01-01 — first sound-effects pack (hero, NPC mode cues, "Just as expected!" jingle, bell/horn signals, world, cat, UI), OGG/WAV + manifest | SOON |
-| 2026-11-23 04:07 | A02-01 — music: layered area theme (melody/bass/drums/counter-line), cantina + brawl variant, royal audience march, 2 stingers | SOON |
+| 2026-11-23 04:20 | A02-01 (replaced 04:07 version) — music: layered area theme + stumble/snap-back, stealth, NFS/GTA pursuit layers, Far Cry outpost, Smash cantina brawl, GTA radio, Matrix mob, royal march, Hall | SOON |
+| 2026-11-23 04:25 | C02-02/03 REVISION — heroes v2: distinct grappler/quick silhouettes, real animation, crouch, victory | SOON |
 
 All assume 320×180 internal resolution and a 16 px tile grid (doc 14
 option B; S00-01's phone previews). A build that chooses otherwise tells
