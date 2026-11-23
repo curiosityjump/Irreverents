@@ -124,7 +124,7 @@ def looks_sheets():
     s.add('fx-dust', r2.fx_dust(), frames=5, fps=15)
     s.newrow()
     # round 3: a tumble, a dizzy landing, a ringing bell
-    s.add('fx-speed', r3.fx_speed(), frames=3, fps=15); s.add('fx-dizzy', r3.fx_dizzy(), frames=4, fps=8)
+    s.add('fx-speed', dv.fx_speed(), frames=3, fps=15); s.add('fx-dizzy', dv.fx_dizzy(), frames=4, fps=8)  # P05 brawl
     s.newrow()
     s.add('fx-clang', r3.fx_clang(), frames=3, fps=12)
     out.append(('fx', 'fx/fx.png', s))
@@ -139,13 +139,13 @@ def looks_sheets():
     # assets/ui/use.png is still written, as content/actions/interact.json's icon.
     s = Sheet(96)
     s.add('ui-use', lq.ui_use())
-    s.add('hud-plate', r3.hud_plate())
+    s.add('hud-plate', r3.hud_plate(40, 20))
     s.newrow()
-    for who in r3.FACES:
-        s.add('hud-face-' + who, r3.hud_face(who))
+    for who in r3.FACES:  # Drive-first: each face cut from its own sprite (drive.hud_face)
+        s.add('hud-face-' + who, dv.hud_face(who))
     s.newrow()
-    s.add('hud-ko', r3.hud_ko()); s.add('hud-fall', r3.hud_fall())
-    s.add('alert-pip', r3.alert_pip(True)); s.add('alert-pip-off', r3.alert_pip(False))
+    s.add('hud-ko', dv.hud_ko()); s.add('hud-fall', dv.hud_fall())  # P05 brawl skull badges
+    s.add('alert-pip', dv.alert_pip(True)); s.add('alert-pip-off', dv.alert_pip(False))  # P07 UI atlas
     s.add('bell-gauge', r3.bell_gauge()); s.add('bark-edge', r3.bark_edge())
     out.append(('ui', 'ui/hud.png', s))
     return out

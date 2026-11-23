@@ -103,11 +103,23 @@ def grab(name, box, scale, pal, largest=True, dark_ink=60, edge=INK, majority=Tr
     mask = [px[i % w, i // w][3] >= 150 for i in range(w * h)]
     if key:
         # a plate painted on an opaque pale ground (P03 grassy ruins): pixels near that ground are empty
+        # only ground connected to the crop's edge goes, so a white inside the piece (a skull) stays
         kr, kg, kb = key
-        for i in range(w * h):
-            r, g, b, _ = px[i % w, i // w]
-            if abs(r - kr) + abs(g - kg) + abs(b - kb) < 60:
-                mask[i] = False
+        near = [abs(px[i % w, i // w][0] - kr) + abs(px[i % w, i // w][1] - kg) + abs(px[i % w, i // w][2] - kb) < 60
+                for i in range(w * h)]
+        stack = [i for i in range(w * h) if near[i] and (i % w in (0, w - 1) or i // w in (0, h - 1))]
+        gone = set(stack)
+        while stack:
+            i = stack.pop()
+            mask[i] = False
+            x, y = i % w, i // w
+            for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+                xx, yy = x + dx, y + dy
+                if 0 <= xx < w and 0 <= yy < h:
+                    j = yy * w + xx
+                    if near[j] and j not in gone:
+                        gone.add(j)
+                        stack.append(j)
     if grid:
         # the plate's own cell grid: a dark line running most of the crop's height or width. Its pixels go
         # wherever the line crosses empty ground (beside it, 3 px out, is empty), so the piece keeps its outline.

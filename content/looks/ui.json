@@ -4,17 +4,17 @@
   "image": "ui/hud.png",
   "looks": {
     "ui-use": {"src": [0, 0, 48, 24]},
-    "hud-plate": {"src": [48, 0, 34, 16]},
-    "hud-face-grappler": {"src": [0, 24, 12, 12]},
-    "hud-face-infiltrator": {"src": [12, 24, 12, 12]},
-    "hud-face-flyer": {"src": [24, 24, 12, 12]},
-    "hud-face-brawler": {"src": [36, 24, 12, 12]},
-    "hud-face-skirmisher": {"src": [48, 24, 12, 12]},
-    "hud-ko": {"src": [0, 36, 10, 10]},
-    "hud-fall": {"src": [10, 36, 10, 10]},
-    "alert-pip": {"src": [20, 36, 10, 10]},
-    "alert-pip-off": {"src": [30, 36, 10, 10]},
-    "bell-gauge": {"src": [40, 36, 20, 6]},
-    "bark-edge": {"src": [60, 36, 16, 12]}
+    "hud-plate": {"src": [48, 0, 40, 20]},
+    "hud-face-grappler": {"src": [0, 24, 16, 16]},
+    "hud-face-infiltrator": {"src": [16, 24, 16, 16]},
+    "hud-face-flyer": {"src": [32, 24, 16, 16]},
+    "hud-face-brawler": {"src": [48, 24, 16, 16]},
+    "hud-face-skirmisher": {"src": [64, 24, 16, 16]},
+    "hud-ko": {"src": [0, 40, 10, 10]},
+    "hud-fall": {"src": [10, 40, 10, 10]},
+    "alert-pip": {"src": [20, 40, 10, 10]},
+    "alert-pip-off": {"src": [30, 40, 10, 10]},
+    "bell-gauge": {"src": [40, 40, 20, 6]},
+    "bark-edge": {"src": [60, 40, 16, 12]}
   }
 }

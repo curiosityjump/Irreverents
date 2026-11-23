@@ -99,3 +99,100 @@ def horn_idle():
 
 def horn_blast():
     return grab('vibrant', (448, 450, 605, 595), 0, ramps('gold', 'orange', 'wood', 'red'), size=(17, 15))
+
+
+# ---- HUD faces: each one's own head, cut from its sprite's first idle frame (the heroes lane's canon sheet
+# cut from P03/doc 36; the cast lane's regulars cut from P04's cantina NPCs), shrunk by majority to 16 x 16.
+# DRAFT: 12 x 12 lost the eyes of all three heroes; 16 x 16 keeps them (the renderer reads the size).
+import json
+import os
+from collections import Counter
+
+from sizes import ROOT
+from srcimport import reink
+
+HEAD = {'grappler': (13, 14, 38, 34), 'infiltrator': (19, 22, 35, 38), 'flyer': (15, 19, 37, 37),
+        'brawler': (16, 15, 37, 34), 'skirmisher': (16, 19, 38, 37)}
+
+
+def _shrink(im, w, h):
+    out = new(w, h)
+    sw, sh = im.size
+    for oy in range(h):
+        for ox in range(w):
+            cnt, e = Counter(), 0
+            for y in range(oy * sh // h, max(oy * sh // h + 1, (oy + 1) * sh // h)):
+                for x in range(ox * sw // w, max(ox * sw // w + 1, (ox + 1) * sw // w)):
+                    p = im.getpixel((x, y))
+                    if p[3]:
+                        cnt[p] += 1
+                    else:
+                        e += 1
+            if cnt and sum(cnt.values()) >= e:
+                out.putpixel((ox, oy), cnt.most_common(1)[0][0])
+    return out
+
+
+def hud_face(who):
+    spr = json.load(open(os.path.join(ROOT, 'content', 'sprites', who + '.json')))
+    cw, ch = spr['cell']['w'], spr['cell']['h']
+    sheet_im = Image.open(os.path.join(ROOT, 'assets', spr['image'])).convert('RGBA')
+    f = spr['frames']['idle'][0]
+    cols = sheet_im.width // cw
+    fx, fy = (f % cols) * cw, (f // cols) * ch
+    x0, y0, x1, y1 = HEAD[who]
+    head = sheet_im.crop((fx + x0, fy + y0, fx + x1, fy + y1))
+    for y in range(head.height):
+        for x in range(head.width):
+            if head.getpixel((x, y))[3] and head.getpixel((x, y))[3] < 255:
+                head.putpixel((x, y), head.getpixel((x, y))[:3] + (255,))
+    return reink(_shrink(head, 16, 16))
+
+
+# ---- effects and icons from P05 brawl-hit-ko-respawn (a plate on an opaque pale ground: keyed out)
+P05KEY = (247, 245, 243)
+FXR = ramps('gold', 'orange', 'blue', 'sky', 'metal', 'red', 'purple')
+
+
+def _strip(frames, w, h, align='center'):
+    out = new(w * len(frames), h)
+    for i, f in enumerate(frames):
+        out.paste(fit(f, w, h, align), (i * w, 0))
+    return out
+
+
+def fx_dizzy():
+    """P05 row 3: three dizzy-star frames (stars on a swirl), 24 x 12 each; the fourth repeats the second."""
+    boxes = [(8, 268, 92, 340), (112, 262, 218, 340), (222, 266, 328, 342)]
+    fr = [grab('brawl', b, 0, FXR, key=P05KEY, largest=False, size=(22, 12), edge=None, dark_ink=40) for b in boxes]
+    return _strip(fr + [fr[1]], 24, 12)
+
+
+def fx_speed():
+    """P05 row 6: the blue swoosh streaks behind a flying body, 24 x 24 each (three frames)."""
+    boxes = [(78, 436, 155, 488), (160, 430, 250, 490), (256, 425, 350, 492)]
+    fr = [grab('brawl', b, 0, FXR, key=P05KEY, largest=False, size=(22, 12), edge=None, dark_ink=40) for b in boxes]
+    return _strip(fr, 24, 24)
+
+
+def hud_ko():
+    return grab('brawl', (4, 356, 64, 414), 0, ramps('red', 'metal', 'pink', 'night'), key=P05KEY, size=(10, 10))
+
+
+def hud_fall():
+    return grab('brawl', (176, 356, 238, 414), 0, ramps('blue', 'metal', 'sky', 'night'), key=P05KEY, size=(10, 10))
+
+
+# ---- alert pips: P07 irreverents-pixel-ui-atlas, the red '!' speech badge; off is the same cut, dimmed
+def alert_pip(on):
+    im = grab('ui', (1158, 915, 1245, 1005), 0, ramps('red', 'metal', 'gold', 'pink'), size=(10, 10))
+    if on:
+        return im
+    from px import col, mix
+    out = new(10, 10)
+    for y in range(10):
+        for x in range(10):
+            c = im.getpixel((x, y))
+            if c[3]:
+                out.putpixel((x, y), c if c[:3] == INK[:3] else mix(c, col('night', 2), 0.65))
+    return out

@@ -124,6 +124,22 @@ chibi-pixel-interactables, bell posts row 3-4), `plate-up`/`plate-down` (P04 row
 curtain hides, cracks, the tents/palisade/rack/fire/flag, rock piles and scaffolds, the HUD faces and icons,
 the moods, fx-speed/dizzy/clang. Crates are the cast lane's sprites.
 
+**Drive-first, step 2.** `hud-face-*` (16x16 now: 12x12 lost the heroes' eyes) are each one's own head cut from
+its sprite (the heroes lane's canon P03 cut; the cast lane's P04 regulars); `hud-plate` is 40x20 to hold one.
+`fx-dizzy`, `fx-speed`, `hud-ko`, `hud-fall` from P05 brawl-hit-ko-respawn (dizzy stars on a swirl; the blue
+swoosh; the red and the blue skull badges); `alert-pip`/`-off` from the P07 UI atlas's red "!" badge (off is
+the same cut, dimmed). `srcimport.grab(key=...)` now keys out only ground connected to the crop's edge, so a
+white inside a piece stays.
+
+**No approved source found (for the Drive's missing-assets list):**
+- `fx-clang` (clang lines beside a ringing bell) - drawn here.
+- `mood-2`, `mood-3` (marks over a head, bold enough for any hat) - drawn here; P07's mood heads are whole faces.
+- `bell-gauge`, `bark-edge`, `hud-plate` - drawn here in the P07 UI atlas's frame style, not cut from it.
+- the camp: tents, palisade, weapons rack, campfire, the camp's flag - drawn here (no tent or palisade plate).
+- the quarry: rock piles and scaffolds - drawn here (P03 grassy ruins' rock piles sit on an opaque ground; next).
+- windows, the stained glass, curtain hides (`hide-1x2`, `hide-2x2`), cracks, `away-dots`, `bark`, `ribbon`,
+  `player-mark`, shadows, `fx-land` - round 1-2 drawings, not yet checked against the plates.
+
 ## Deviations from the contract
 
 - `ui-use`'s `src` is the whole 48×24 picture (normal then pressed), with no `frames`: that is how
