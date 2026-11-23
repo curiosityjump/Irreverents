@@ -212,3 +212,36 @@ written into a charter (one incident).
 
 ### 2026-11-23 · A lead's inbox cleanup deleted another step's unread entries (Step 4 lead)
 Six leads share `docs/for-the-lead.md`. Step 7's lead routed its own flags (6fe5d2b) and reset the Entries section, removing eight entries Step 4's worker had added one commit earlier (15cea88). The rule already exists (`docs/lead-session.md`, step 3: "Leave other steps' entries alone"). Caught only because the worker's message said it had written there and the file was empty; recovered with `git show 15cea88 -- docs/for-the-lead.md`. Cheap fix worth considering: one inbox file per step, or delete by heading, never by resetting the section.
+
+### 2026-11-23 · usage · orchestrator, first night
+
+**Observed:** At about 04:58 UTC every Irreverents session (the orchestrator,
+six leads, about ten workers, Vision Partner, and the orchestrator's own
+drafting agents) was refused by the account's shared five-hour usage limit:
+"You've hit your monthly spend limit · your 5-hour limit resets 8:20am (UTC)".
+Nothing ran until the orchestrator's pre-armed wake at 08:26 UTC. The limit's
+warning state was seen at 04:57, about a minute before the refusal.
+**Surfaced at:** a lead's report (rate_limit_info "allowed_warning"), then the
+orchestrator's own session reading "rejected"; three agents of two workflows
+failed with the limit message.
+**Impact:** about three hours and twenty-five minutes of a night whose
+deadline was the owner's morning. Step 1's second gate (touch, two players on
+the real page) was mid-flight and did not land, so at 08:27 the live game was
+still the keyboard-only page.
+**Evidence:** last commit before the stop f7b87fb (04:57:30); first after it is
+the commit carrying this entry. The orchestrator's own session at 04:57:
+683k of context, 135M cache-read tokens, `cost_usd` 140.4. Subagent tokens of
+its five workflows: 1.44M, 1.11M, 1.10M, 0.99M and the first aborted one.
+Fan-out at the stop: six leads opened within thirty minutes (04:25 to 04:53).
+**Cause:** known: the window that began about 03:20 UTC was spent in roughly
+one hour forty minutes. Suspected shares: the orchestrator's own turns (a
+very large context re-read on every tool call), its workflows, and sixteen
+build sessions at once. No session can read how much allowance is left; the
+warning arrives too late to act on.
+**Improvement:** tactical fix applied: after the reset, a fresh orchestrator
+with a small context, no orchestrator workflows, four leads with one worker
+each, and the rest held (`docs/for-the-orchestrator.md`, handoff entry of
+08:35 UTC). Possibly: budget a window before fanning out (the previous
+window's burn is the only yardstick), and hand an orchestrator off on context
+size, not on a count of check-ins.
+

@@ -283,3 +283,28 @@ Full text: `docs/plan/step-9.md`
 
 Full text: `docs/plan/step-10.md`
 
+## Step 11 — The cantina: an endless brawl and the place you change your party
+
+**Status: open, unclaimed — queued behind Step 2.** (Drafted from the library by an agent; its independent review did not run before the usage limit stopped it at 04:58 UTC. 4 of its 4 quoted pieces were found verbatim by script. Check its D-numbers and its "What's decided" against the library before briefing from it.)
+
+Full text: `docs/plan/step-11.md`
+
+## Step 12 — The outpost and the chase
+
+**Status: open, unclaimed — queued behind Step 4.** (Drafted from the library by an agent; its independent review did not run before the usage limit stopped it at 04:58 UTC. 2 of its 2 quoted pieces were found verbatim by script. Check its D-numbers and its "What's decided" against the library before briefing from it.)
+
+Full text: `docs/plan/step-12.md`
+
+## Step 14 — Things to find, and knowing there is more
+
+**Status: open, unclaimed — queued behind Step 3.** (Drafted from the library by an agent; its independent review did not run before the usage limit stopped it at 04:58 UTC. 2 of its 2 quoted pieces were found verbatim by script. Check its D-numbers and its "What's decided" against the library before briefing from it.)
+
+Full text: `docs/plan/step-14.md`
+
+## Step 15 — A second place, worth coming back to
+
+**Status: open, unclaimed — queued behind Step 3.** (Drafted from the library by an agent; its independent review did not run before the usage limit stopped it at 04:58 UTC. 3 of its 3 quoted pieces were found verbatim by script. Check its D-numbers and its "What's decided" against the library before briefing from it.)
+
+Full text: `docs/plan/step-15.md`
+
+*(Step 13, "Heroes you find and keep" — the discoverable permanent roster, D-007 — was to be drafted the same way; its drafter was stopped by the usage limit. The number is reserved.)*

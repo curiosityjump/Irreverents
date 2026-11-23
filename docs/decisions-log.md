@@ -394,3 +394,17 @@ document as a decision of theirs.
 - **To change it:** rewrite the text file; any line can be replaced without touching anything else.
 - **Where:** `content/audience/royal-audience.json` once slice A lands.
 
+### 2026-11-23 · After the team was stopped for three and a half hours in the night, a smaller team finishes the essentials first
+- **Decided by:** orchestrator, `session_017WiGzFWfLir1ATiSP7c5E5`
+- **Instead of asking:** "Your usage allowance ran out at about 1am Eastern and came back at 3:20am. Spend the new allowance fast on everything, or carefully on what you need to play?"
+- **Why this way:** the allowance is shared with your other projects, the extra-usage limit for the month is spent, and the next refill is at 8:20am Eastern, after you are likely up. Running the full team again would empty it in under two hours and leave nobody to fix anything when you wake. So four leads with one worker each, in this order: two phones in one world with touch; starting in the throne room; hitting, grabbing and throwing; the king. The people who react and the Hall of Legends wait their turn; pick-up powers, the cantina and the rest are written down and waiting.
+- **To change it:** tell Vision Partner you would rather it all ran at once.
+- **Where:** `docs/for-the-orchestrator.md`, the handoff entry of 08:35 UTC; `docs/process-observations.md`.
+
+### 2026-11-23 · The orchestrator started its own replacement
+- **Decided by:** orchestrator, `session_017WiGzFWfLir1ATiSP7c5E5`
+- **Instead of asking:** "Your kit says only you start a new orchestrator. May this one start its successor while you sleep?" (Asked at about 04:12 UTC as one of four things to confirm; you answered other things and said not to be a bottleneck on permissions.)
+- **Why this way:** this session's memory had grown so large that each small action cost as much as a worker's whole turn, which was a real share of why the allowance ran out. A fresh one reads the repository and costs a tenth as much. The old one answers its questions and does nothing else.
+- **To change it:** start an orchestrator yourself whenever you like ("You are the orchestrator. Read CLAUDE.md first."); it picks up from the repository.
+- **Where:** `docs/for-the-orchestrator.md`, the handoff entry.
+
