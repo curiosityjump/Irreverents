@@ -132,3 +132,32 @@ document as a decision of theirs.
 - **Why this way:** something had to be there to play. The jump also forgives a press that is a tenth of a second early or late at an edge, which is common in platformers and easy to switch off.
 - **To change it:** numbers in one data file (`content/tuning.json`); no code.
 - **Where:** `content/tuning.json`; `docs/plan/step-1.md`, "Taste, for the owner in the morning".
+
+### 2026-11-23 · The first kingdom is five rooms: a throne room, a castle street, a courtyard, an undercroft beneath them and a Hall gallery, with a way behind the throne and a way over the roofs that nothing points at
+- **Decided by:** lead, Step 3, `session_017WiGzGUAnvQfWco5vTcMX4`
+- **Instead of asking:** "What is the first map, what are the rooms called, and where do the hidden routes go?"
+- **Why this way:** your doc 24 lists these five for a buildable ten-minute kingdom; your register gives "secret behind throne" as an example (E-002); doc 25 proposes rooftop routes and tunnels under a gate. The undercroft skips the street where the guarded target will be, so sneaking has a real route; the roofs skip the two-plate gate.
+- **To change it:** names and layouts are room data files, each replaceable in minutes. Only the rooms' internal ids stay.
+- **Where:** `docs/plan/step-3.md`, "Measure" (the map)
+
+### 2026-11-23 · You go between rooms by walking through openings, or by pushing up in a doorway; no button
+- **Decided by:** lead, Step 3, `session_017WiGzGUAnvQfWco5vTcMX4`
+- **Instead of asking:** "How should a door work on a phone?"
+- **Why this way:** iPhone first, "a few context-sensitive controls" (D-093, doc 33): neither kind needs a new button. An opening carries anything that passes through it, so a guard can chase you and a friend can be thrown into the next room (D-077: guards may follow between regions).
+- **To change it:** each door says in the room's data which kind it is; adding a button-press kind is a small addition.
+- **Where:** `docs/plan/step-3.md`; `docs/mechanisms/rooms-and-doors.md` once slice A lands
+
+### 2026-11-23 · Rooms can be wider than the screen, and each phone's view follows its own character, into another room too
+- **Decided by:** lead, Step 3, `session_017WiGzGUAnvQfWco5vTcMX4`
+- **Instead of asking:** "Fixed single-screen rooms or scrolling, and one shared camera or one each?" (open in your library, O-001)
+- **Why this way:** you wrote that players can "separate geographically online where practical" (S-006) and that you like friends "not being constantly tethered to one camera" (doc 06). A street to chase along needs more than one screen.
+- **To change it:** a room one screen in size simply does not scroll; a shared camera would be real work.
+- **Where:** `docs/plan/step-3.md`, "What's decided" (each player has their own camera)
+
+### 2026-11-23 · The game will start in the throne room instead of the grey test hall
+- **Decided by:** lead, Step 3, `session_017WiGzGUAnvQfWco5vTcMX4`
+- **Instead of asking:** "Where should you appear when you open the game?"
+- **Why this way:** the king's speech and "ordinary quest acceptance" are in the throne room (doc 24); it is where the story thinks you should be. The test hall stays in the game's data for the scripted checks.
+- **To change it:** one line in `content/game.json`.
+- **Where:** `content/game.json`, switched only once the new rooms are verified
+

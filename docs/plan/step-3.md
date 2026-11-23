@@ -158,7 +158,54 @@ routes feel like discoveries; the room names and shapes themselves.
 
 ## Measure
 
+Taken by the lead, 2026-11-23 04:30 UTC, at `368e1b9`:
+
+- `npm run check`: ok, 3 scenarios, all in `graybox-hall`. `npm run
+  gates`: 0 of 6, gate B "no scenario yet".
+- One room exists and nothing can leave it: outside a room's grid is
+  solid (`src/sim/systems/physics.ts`, `cellAt`). The page always draws
+  the start room (`src/client/main.ts:34`); no camera.
+- The scenario runner spawns only players, all in one room: no scripted
+  non-player body, no fact for "which room".
+- The only character: box 12×26 px, jump rises 56.9 px (3.55 tiles) and
+  crosses 68 px (4.3 tiles) on the flat (jumpSpeed 320, gravity 900,
+  runSpeed 96). A one-tile (16 px) gap already keeps it out and lets in
+  any body 16 px tall or less, with no code: the secret is geometry.
+
+**The map, decided by the lead (`DRAFT:`, in `docs/decisions-log.md`):**
+
+```
+ throne-room ── castle-street ── courtyard ──[plate gate]── hall-gallery
+      │               └── rooftops (unadvertised) ─────────────┘ (balcony)
+      └── behind the throne (unadvertised) ── undercroft ── courtyard well
+```
+
+- Obvious way: throne room, street, courtyard, through the two-plate
+  gate, gallery.
+- Unadvertised route 1: a passage behind the throne (the library's own
+  example, E-002 "secret behind throne") down to the undercroft, which
+  comes up in the courtyard without crossing the street, where Step 4
+  puts its guarded target: the quiet way round.
+- Unadvertised route 2: the street's awnings and roofs to the gallery's
+  balcony, past the plate gate.
+- The secret: a one-tile-high crawl in the undercroft to a small hidden
+  chamber; the tiny character fits by its size, nobody else does unless
+  they find a way (Step 2 must keep the tiny one's box 16 px tall or
+  less: asked).
+- Two kinds of door: walk-through openings (edges and drops; they carry
+  anything, a thrown crate or a guard) and doorways entered with
+  stick-up. Rooms may be wider than a screen; each screen follows its
+  own character.
+
 ## Briefs
+
+- **Slice A** (`handoff-prompts/step-3-a-rooms-and-doors.md`): the room
+  format, doors for anybody, the first two rooms, the camera, the
+  way-out validator, the start room. Running from 04:35 UTC.
+- **Slice B** (not yet written; from A's first push): the other three
+  rooms, plates and the gate, the breakable and false walls, hiding
+  places, both routes, the secret. Needs Step 2's characters and thrown
+  objects for signals 3 and 5's solo half.
 
 ## Open with the owner
 
