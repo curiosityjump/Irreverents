@@ -200,6 +200,6 @@ questions.
 
 ## Step 1 — A live room two people can play in together
 
-**Status: open, unclaimed.**
+**Status: open, claimed by session_017WiGzEwLs3ng2ZPpRZgctn, 2026-11-23.**
 
 Full text: `docs/plan/step-1.md`
