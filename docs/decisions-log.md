@@ -816,3 +816,18 @@ document as a decision of theirs.
 - **Why this way:** the brief rules out a turned standing figure ("never a rotation"). P07's king row has one, lying on his front in his robe with his crown still on; face down, the missing beard does not show.
 - **To change it:** the `cut('p07npc', ...)` line in `king()` in `tools/art/cast/cut3.py`. `DRAFT:`
 - **Where:** `tools/art/cast/cut3.py`, `king()`.
+
+### 2026-11-23 · Step 14 slice A: level entrances and their discovered indicators
+- **Decided by:** orchestrator `session_017WiGzHhke4tkAThPgw6EXs`, on the owner's words (first-hand, ~18:10 UTC, playing): "Not finding clear 'level entries' with discovered indicators etc"
+- **Instead of asking:** "What is a level, what does its entrance look like, and what does 'discovered' show?"
+- **Why this way:** the owner's P05 sheets already draw it: ornate doors, a portal and a mine entrance for ways in, and completion pies that fill to gold. D-078 and D-079 ask for clear measures of completion that never say which or where, so the entrance shows an empty ring until someone has been in, then the level's name and a pie of how much has been explored (hidden places counted from the start). Four levels tonight as data: castle town, the Bandit Camp, the Iron Quarry, the cantina.
+- **To change it:** `content/levels/*.json` (which rooms make a level, its name, its entrance art); the pie's steps and the banner in `src/client/draw/levels.ts`.
+- **Where:** `docs/plan/step-14.md`, "Slice A"; `docs/mechanisms/levels.md` once built.
+
+### 2026-11-23 · Your own hits are shown at once on your own screen
+- **Decided by:** orchestrator `session_017WiGzHhke4tkAThPgw6EXs`, on the owner's words (first-hand, ~18:10 UTC, playing): "Big delay between swing and actual impact."
+- **Instead of asking:** "Should the wind-up be shorter, or the network faster?"
+- **Why this way:** measured on live, the star came about 555 ms after the press, and only 100 ms of that is the grappler's wind-up; the rest is the trip to the server and back (reports 30/s, snapshots 20/s, 100 ms of smoothing), because a phone simulates only its own hero. So the page predicts its own hit: star, beat and the struck body's first movement on the tick the swing lands, then hands back to the server. The wind-up numbers stay the owner's to tune.
+- **To change it:** `handoff-prompts/step-5-hit-lands-at-once.md` while it is being built; then `docs/mechanisms/network.md`, "Predicted hits".
+- **Where:** `docs/plan/step-5.md` handoff notes.
+

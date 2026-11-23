@@ -15,6 +15,21 @@ assembly as proposed or unresolved. No build gate covers this; golden
 scenario G-03 (doc 12) is the bar: "revisiting feels like rediscovery,
 not backtracking for an icon collectible."
 
+## Slice A, first (the owner, 2026-11-23 ~18:10 UTC, first-hand, playing on a phone)
+
+> Not finding clear "level entries" with discovered indicators etc
+
+So before the pieces: every way into a level is drawn as an entrance (from
+the owner's P05 doors: the ornate gem door, the swirl portal, the mine
+entrance), and it shows whether the level is discovered and how much of it
+has been explored, as a completion pie from the P05 HUD sheet (D-078, D-079),
+never a list and never "which or where". `DRAFT:` four levels tonight
+(castle town, the Bandit Camp, the Iron Quarry, the cantina), as data in
+`content/levels/`; discovered and explored state is the world's and is kept
+with a kept game. This amends "Shown in the menu, never over the play view"
+below: the indicator is part of the world at the doorway, and also in the
+menu. Brief: `handoff-prompts/step-14-a-level-entrances.md`.
+
 ## Goal
 
 A few odd pieces of something are hidden around the kingdom. Find them
