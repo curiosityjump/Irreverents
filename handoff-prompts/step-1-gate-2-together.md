@@ -9,6 +9,28 @@ may change (additively). **Budget: live and proven by about 06:30 UTC.**
 Three other leads are building on the same tree right now; section 3 says
 how not to collide.
 
+## 0 · Read this first: the order to land it in (added 08:33 UTC)
+
+Every session was stopped by the account's usage limit from 04:57 to
+08:20 UTC, and none of Gate 2 reached `main`. The allowance is tight until
+13:20 UTC and the owner wakes inside it. So **land this brief in small
+green pushes, each through the pre-push gate and checked live, in this
+order**, and message the lead after each:
+
+1. Two players seeing each other move on the real page, with touch,
+   upright or sideways. **This alone is the morning's minimum.**
+2. The server fills a room with its people and things when a player
+   enters (`populateRoom`), each player's held actions reach the server,
+   and every action in `content/actions/` is pressable by touch.
+3. Rejoin after a drop, a reload or a deploy.
+4. The built-server boot inside `npm run check`, the player count in
+   `/healthz`, `e2e`, `check:live`, gate F.
+
+Everything below still describes the finished thing; where it conflicts
+with this order, the order wins. No subagents; short messages; do not
+re-read documents you already hold. Whatever is not reached is written
+under "Owed by Step 1" in `docs/plan/step-5.md`.
+
 ## 1 · The task, and the measure rows
 
 At https://irreverents-production.up.railway.app two people on separate
