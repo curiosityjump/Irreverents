@@ -163,6 +163,38 @@ no; 844×390 no; 932×430 no. `npm run e2e` is green meanwhile: it looks
 only at 750×340 and upright 390×664. No error reporting exists; the
 button art is in the library mirror, not in `assets/`.
 
+- **Hit lands at once, builder (`session_017WiGzGPRoCXeC3TG8HFyxh`),
+  2026-11-23 (brief `handoff-prompts/step-5-hit-lands-at-once.md`), push 1:**
+  - Built: `src/net/predict.ts` (`docs/mechanisms/network.md`, "Predicted
+    hits"). Measured with 150 ms added each way: the star went from 716 ms
+    to 103–136 ms after the press, and the crate's first movement from
+    833 ms to 251–283 ms. Both pages draw it at rest 0.0 px apart. The e2e
+    ran three times green after the last code change (two of them after the
+    throw guard), and the control `E2E_NO_PREDICT=1` fails `hit-star` and
+    `hit-moves`.
+  - The brief's movement target "wind-up + the beat + 50" is read as the
+    beat **as held**: `combat-clock` lets a beat of N ticks go on tick N+1,
+    on the server as here. With N it would be 283 ms, which is exactly where
+    the page lands.
+  - The first version left out `impact-bodies`. The crate then slid 90 px
+    past where the server's stopped against another crate, and jumped back
+    at the hand-back. Bodies around the lent one are now in its scratch
+    world, and its path matched the server's to the pixel in every run seen.
+  - `t-throw-friend` failed once (A's page drew B 23 px), on the run before
+    the throw guard. The page predicts a plain swing on a throw press
+    because it never learns it carries. B was held, so B could not have been
+    lent; the failure matches the known flake. After the guard it passed
+    twice. The cause of the flake is not found.
+  - `src/client/main.ts`: one additive field, `drawn.impacts`, and a
+    variable for the drawn bodies (the switch-gap builder's file). In
+    `src/client/draw/entities.ts`, one line: the actors lane's cosmetic
+    `predictHits` (851eda9) runs only when `predictHitMs` is 0. That was
+    asked by the orchestrator, because it could star a body the server never
+    hit, and agreed with the actors lane by message.
+  - Not done: throws and the grab's lift (item 3), `interpDelayMs` 66
+    (item 4). Not verified: the ease back when the server disagrees, and a
+    brawl hit on a friend.
+
 ## Briefs
 
 - `handoff-prompts/step-5-a-phone-essentials.md` (running from 09:00

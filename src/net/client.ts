@@ -12,6 +12,7 @@ import { applyChange, applyTuningDiff } from '../sim/tuning-rules.ts';
 import type { TuningChange } from '../sim/tuning-rules.ts';
 import { clone, looksLikeEntity, playerEntityId } from './protocol.ts';
 import type { ClientMessage, ServerMessage } from './protocol.ts';
+import { createPredictor } from './predict.ts';
 import { createSmoother } from './smooth.ts';
 
 /** A socket, as little of one as this needs; the host supplies it (a browser WebSocket, or `ws` in Node). */
@@ -64,6 +65,8 @@ export function createNetClient(opts: NetClientOptions) {
   const me = (): Entity => world.entities.find((e) => e.id === myId)!;
 
   const smoother = createSmoother(net);
+  // Step 5: this page's own hits drawn at once on what they strike (src/net/predict.ts).
+  const predictor = createPredictor(content, myId);
   let transport: Transport | null = null;
   let token = 0;
   let open = false;
@@ -167,6 +170,7 @@ export function createNetClient(opts: NetClientOptions) {
       // impact) reads about right on every screen. DRAFT: about, not exactly.
       if (typeof m.tick === 'number' && Math.abs(world.tick - m.tick) > 20) world.tick = m.tick;
       smoother.clear();
+      predictor.clear();
       // A server that restarted has forgotten every dial; if this world is
       // still tuned, its `tuning` follows this message.
       applyTuningDiff(content.tuning, shipped, {});
@@ -277,8 +281,10 @@ export function createNetClient(opts: NetClientOptions) {
         if (input.x !== 0 || input.y !== 0 || input.held.length) played = true;
         // A held character is not simulated here (see 'snap' above); offline, nothing can be holding it.
         if (heldBy(me()) && status !== 'online') applyEffect(me(), { kind: 'release' });
-        if (!heldBy(me())) events.push(...step(world, { [player]: input }, content));
-        else world.tick++;
+        if (!heldBy(me())) {
+          events.push(...step(world, { [player]: input }, content));
+          predictor.afterStep(world, me(), input, () => smoother.view(t), t);
+        } else world.tick++;
         ticked.push(input);
         if (ticked.length > 12) ticked.shift();
         owed -= DT;
@@ -305,8 +311,11 @@ export function createNetClient(opts: NetClientOptions) {
     },
     /** Everything in the world that is not this player's character, as it should be drawn now. */
     others(): Entity[] {
-      return smoother.view(now());
+      const t = now();
+      return predictor.view(smoother.view(t), t);
     },
+    /** Step 5 (for checks): how many bodies this page is drawing from its own prediction right now. */
+    lent: (): number => predictor.lent(),
     /** Drop the socket (if any) and try again at once: the page became visible, the network changed. */
     kick(): void {
       if (gone) return;

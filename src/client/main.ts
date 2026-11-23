@@ -121,6 +121,8 @@ const debug = {
     signalers: [] as ReturnType<typeof drawnSignalers>,
     /** Step 2, signal 6: every string drawn into the game picture this frame (draw/fx.ts, takeWords); the tuning panel and the page shell are HTML, not in it. */
     words: [] as string[],
+    /** Step 5: the impacts drawn this frame (dust, star, shake read them): which body, its tick and age on this page's clock, whether in its held beat, whether the page predicted it. */
+    impacts: [] as { id: string; tick: number; age: number; beat: boolean; predicted: boolean }[],
     /** Step 11: the open party row's chips and the brawl's counter, as drawn (src/client/draw/cantina.ts); the row in CSS pixels of the page, so a check can tap it. */
     cantina: null as { row: { kind: string; slot: number; x: number; y: number; w: number; h: number; taken: boolean }[] | null; counter: { player: string; ko: number; falls: number }[] | null } | null,
   },
@@ -238,7 +240,8 @@ function play(worldName: string): void {
     // What this player sees: everyone else as received, their own character
     // last (drawn on top), on this page's clock.
     const seen: Drawn[] = [];
-    const camera = render(g, { ...net.world, entities: [...net.others(), me] }, content, me.room, { me: me.id, frame: frameNo, drawn: seen });
+    const drawnBodies = [...net.others(), me];
+    const camera = render(g, { ...net.world, entities: drawnBodies }, content, me.room, { me: me.id, frame: frameNo, drawn: seen });
     const result = { camera, drawn: seen };
     lastCamera = camera;
     showGoIn(touchHost, inEnterDoorway(content, me)); // the Use button says "Go in" in a doorway (touch.ts)
@@ -276,6 +279,8 @@ function play(worldName: string): void {
     d.me = result.drawn.find((e) => e.mine) ?? null;
     d.signalers = drawnSignalers();
     d.words = takeWords();
+    // Step 5 (docs/mechanisms/network.md, "Predicted hits"): each impact this frame drew from, on this page's clock.
+    d.impacts = drawnBodies.filter((e) => e.c.impact && e.room === me.room).map((e) => ({ id: e.id, tick: e.c.impact!.tick, age: net.world.tick - e.c.impact!.tick, beat: !!e.c.beat, predicted: !!e.c.predicted }));
     {
       const c = drawnCantina();
       const r = canvas.getBoundingClientRect();
