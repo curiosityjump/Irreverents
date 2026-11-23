@@ -83,9 +83,7 @@ gates, start and dev were run end to end from a fresh clone at 04:17 UTC
   or after it deploys.
 
 **The pre-push gate, because a push goes live:** `npm run build && npm run
-check`, plus `npm run e2e` when the client or the network changed (until
-Step 1's second gate lands it, `e2e` is a stub that exits 1 on purpose:
-skip it and say so in the commit). Then `git fetch origin main && git
+check`, plus `npm run e2e` when the client or the network changed. Then `git fetch origin main && git
 rebase origin/main`, re-run the gate if anything but documents came in,
 push, then `npm run check:deployed` (it waits up to three minutes through
 the deploy gap and exits 0 once the live address runs what `main` needs).

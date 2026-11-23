@@ -163,6 +163,12 @@ remove it when it stops being true.
   new verb cannot forget it (`docs/mechanisms/combat-and-impact.md`).
 - **A control for a scenario is one number in `content/tuning.json`**:
   switches such as `bodyImpactOn` make "watch it fail" a one-line edit.
+- **The network layer copies the whole world, so new state needs no
+  network code**: add a field or an entity kind and it arrives; move a
+  player from outside with `emitEffect` (`docs/mechanisms/network.md`).
+- **A check that reads what the page drew**: `scripts/e2e.ts` asserts on
+  the renderer's own debug record, with relative facts, locally and
+  against the live address; copy it for a new two-player fact.
 - **Self-registering files instead of shared lists**: a verb, system,
   content kind or scenario fact is one new file, picked up by
   `scripts/lib/registries.ts` (`docs/architecture.md`).
@@ -225,9 +231,21 @@ questions.
 
 ## Step 1 — A live room two people can play in together
 
-**Status: open, claimed by session_017WiGzEwLs3ng2ZPpRZgctn, 2026-11-23.**
-
-Full text: `docs/plan/step-1.md`
+**Closed 2026-11-23, 08:55 UTC.** The game is live and two people can
+play it together on phones: everyone who opens the address is in one
+shared world, each with a party character, touch controls for every
+action sideways or upright, and a page that rejoins by itself after a
+drop, a reload or a deploy. The project has its skeleton, one shared
+simulation, content and scripted checks as data, and a deploy that
+documents-only pushes no longer restart. Proven by script against the
+live address (`npm run check:live`); **not tried on a real iPhone**, and
+no hit, grab, throw or "Use" has been run between two devices. What it
+left for Step 5 is in `docs/plan/step-5.md`, "Owed by Step 1". One
+question for the owner came out of it and lives with the deploy
+mechanism, not here (Railway's "Watch Paths" setting,
+`docs/questions-inbox.md`). Full text: `docs/plan-archive.md`, "Step 1".
+Durable record: `docs/architecture.md`, `docs/mechanisms/network.md`,
+`docs/mechanisms/deploy.md`.
 
 ## Step 2 — Moving, hitting, grabbing and throwing
 

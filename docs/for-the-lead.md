@@ -51,26 +51,6 @@ question for the owner, blocking or not, goes to
 *(Append below.)*
 
 
-### step-1-gate-2-together.md, 2026-11-23
-
-**Flag:** the brief changed five times while I was building from the 04:20 version, and I only saw it on my first rebase (my whole first version, patches instead of effects and a turn-your-phone screen, passed e2e against the old text before I knew). A one-line `send_message` when a running worker's brief changes would have saved the rework. Also in `docs/process-observations.md`.
-
-**Flag:** for Steps 2 and 3: only `push` has crossed two devices. `hold`, `release` and `move` use the same delivery, and the held page following the server is written, but nothing emits them yet, so they are untried. Limits are listed in `docs/mechanisms/network.md` ("Known limits"). The two that will bite first: **`switch` on a page cannot see which members other players hold** (the page's local world holds only its own character), and **a change to a player's entity without `emitEffect` is undone on the next tick**.
-
-**Flag:** Step 2's hit work moved onto `emitEffect` at d430dba, after I had flagged that it did not use it. Nobody has yet run a hit, grab or throw between two devices: my e2e only runs, jumps and reconnects. That is the next thing worth a scripted fact.
-
-**Flag (second push):** the server now keeps its own `c` for each player (the page owns only the top-level motion fields) and steps it with one reported input per tick; this is what makes `c.interact` survive and a tap count once. Consequence for Steps 2 and 4: a player's own page does not receive the server's `c` for its own character, and `switch` is still decided on the page. Written up in `docs/mechanisms/network.md`, "Who owns which part".
-
-**Flag:** a page receives about 30 kB/s with six placed bodies in the room: every body is sent whole 20 times a second, moving or not. Fine for tonight on Wi-Fi; it grows with every NPC Step 4 places. First trim: send only what changed.
-
-**Note:** the brief suggested a delaying relay for fact (d); I used Playwright's `page.routeWebSocket` (same effect, measured from the page's own round trip: 4 → 305 ms; it also cuts the socket for (e) and works against the live address). The desktop page's socket passes through the script in e2e; the phone page's is direct.
-
-**Note:** art as data is keyed by file name (`content/sprites/<character id>.json`, `content/atlases/<room id>.json`), not by a new field in the character or room file, so adding art touches nobody else's kind file. Tried once with throwaway images. The delivered touch-button art (optional item) is not wired in. `scripts/not-yet.ts` is now unused; I left it.
-
-**Note:** `content/net.json` holds the network numbers, not `content/tuning.json` (Step 2's file; its validator wants every number read by a verb or system). The pages' local world does not call `populateRoom` (the server's world does, for every room): the crates would be drawn twice. Alone with no server there are no crates.
-
-**Note:** I did not update `docs/measures.md` (M2, M3) since it is to change together with `docs/plan.md`'s table, which is yours.
-
 ## Format
 
 One entry per item, appended, never edited or deleted by the session that

@@ -92,7 +92,10 @@ not").
 
 ## 3 · Where it has been
 
-No plan step has closed yet. Before the plan: the owner installed this
+**Step 1 closed 2026-11-23 08:55 UTC**: the game is live, two people
+play together on phones, and every step builds on one simulation, data
+for content and checks, and a network layer that copies the whole world
+(`docs/plan.md` has the summary). Before the plan: the owner installed this
 operating system (2026-11-23), Vision Partner mirrored their Drive design
 library and wrote the vision, and the first orchestrator measured the
 deploy (a push to `main` is live on Railway in under a minute) and wrote
@@ -109,6 +112,14 @@ this operating system, from the project it was derived from:
 3. **Measure a race before fixing it** — under real concurrency, the
    suspected path may lose nothing while a different one loses most of its
    writes. Measure which, then fix that one.
+
+4. **A brief changed under a running worker is not read until its next
+   rebase, and messages queue behind its work** (Step 1: a worker built
+   a whole first version against superseded text). Batch changes, mark
+   them at the top of the brief, and expect delivery to be late.
+5. **Push small and often when the allowance is shared**: a usage limit
+   stopped every session mid-task for three hours with a finished,
+   tested change sitting unpushed in one container.
 
 Add this project's own as they happen; drop one when it stops changing
 decisions.
@@ -147,9 +158,11 @@ content at volume, briefed.
 ## 5 · Where it stands now
 
 Night one (2026-11-23). The owner's current goal is in
-`docs/current-directive.md`. No step is done. **Step 1** (a live room two
-people can play in together) is the critical path; every other step
-waits on it, and `docs/plan.md` says on what. Open steps, their status lines and what each
+`docs/current-directive.md`. Step 1 is done and live; the other steps build on it in
+parallel. The account's usage limit stopped every session from 04:57 to
+08:20 UTC, so the night is short: finished work only from 10:00 UTC
+(`docs/current-directive.md`). Untried by anyone: a real iPhone, and a
+hit, grab, throw or "Use" between two devices. Open steps, their status lines and what each
 waits on are in `docs/plan.md`; recount there, not here.
 
 Nothing has been stopped by the owner.

@@ -276,8 +276,10 @@ noise in chat.
 - **Static gates:** `npm run build` and `npm run check` (types, layer
   rule, content validation, every scenario). `npm run gates` prints build
   gates A–F. No CI: nothing runs them for you, and the push deploys.
-- `npm run e2e` and `npm run check:live` fail on purpose until Step 1
-  Gate 2 lands them.
+- `npm run e2e` drives two real pages (one phone-sized, by touch)
+  against a local server; `npm run check:live` does it against the live
+  address in a private world; `npm run check:deployed` says whether live
+  is current.
 - The verification ladder, the traps and the definition of done are in
   `docs/verifying-and-finishing.md`, which is SOP phase 7. **"The code
   looks right" is not a verification.**

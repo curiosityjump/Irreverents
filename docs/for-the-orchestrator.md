@@ -243,3 +243,17 @@ included).
   do nothing else (`docs/orchestrator-role.md`, "After your own handoff
   commit, you are only a forwarder").
 
+### Step 1 lead, 2026-11-23 08:55 UTC
+
+**Flag:** Step 1 is closed (`docs/plan.md`); Step 5 can open. Three
+things from the network layer reach beyond it
+(`docs/mechanisms/network.md`, "Known limits" and "Who owns which
+part"): a player's own page does not receive the server's per-verb state
+for its own character, and `switch` is decided on the page without
+seeing which members others hold (Steps 2 and 4); a page receives about
+35 kB/s with five or six placed bodies, every body sent whole 20 times a
+second, which grows with each NPC Step 4 places (first trim: send only
+what changed); and no hit, grab, throw or "Use" has been run between two
+devices, so the most valuable next scripted fact is one of those in
+`scripts/e2e.ts`.
+
