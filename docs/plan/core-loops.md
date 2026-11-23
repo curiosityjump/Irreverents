@@ -454,6 +454,15 @@ the same again hangs nothing; a real-server check that a page in the camp gets
 the legend's event and a page in the gallery the pedestal; phone e2e: the
 gallery's pedestal card. **Status: briefed, `handoff-prompts/loop-waves.md`.**
 
+**Landed, push 1 (the waves; see `docs/mechanisms/outposts.md`, "Step 7: waves
+that really come").** At the camp a wave walks to where its caller saw you; the
+lookout and camp fighter 1 may call, one at a time, 6 s apart, and a caller
+knocked down tries again once up; beaten waves walk off so the next fits; rows
+1, 2, then a fighter and the heavy, for ever; the post breaks from a body
+flung at 450 px/s (was 300). Measured: each hero, striking, reaches the third
+wave (23 to 59 s). The depot is unchanged, but its waves now drop into the
+floor's gap at columns 51-52 on the way west: flagged.
+
 ## 6 · Vehicle hijacking
 
 **The library.** DECIDED: D-017 (steal or hijack vehicles), D-020 (roadblock

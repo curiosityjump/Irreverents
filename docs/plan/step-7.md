@@ -328,3 +328,53 @@ edit touches `store.ts`, its paste comment should also say worlds are
 made per room name on demand and all read the one store). Slice A's
 brief can be deleted: both parts shipped and were reviewed. The machine
 is untouched.
+
+## Builder notes
+
+### 2026-11-23, Step 7 waves-and-legends builder (`session_017WiGzHvGxLQnLUErw7teAo`), push 1: the waves
+
+- **Step 12 scenarios re-timed (Step 12 is closed; the brief gives them to
+  this slice):** `step12-waves-never-pass-bound` (the hero on the test
+  room's low platform is now reached by the waves sent to it, knocked off
+  and out of sight, so calls stopped after three: a one-tile solid block on
+  the floor at column 11, a tiles override, keeps the waves east of it; every
+  tick and count unchanged; control `outpostBoundOn` 0 still fails) and
+  `step12-walk-out-ends-it` (by the third call a standing hero has been
+  knocked out of the lookout's view by the first two waves: the walk out is
+  now during the second call, 540 ticks earlier; control `outpostZoneEndOn`
+  0 still fails). The other nine `step12-*` and all 65 `step16-*` pass
+  unchanged.
+- **The depot's waves fall into a pocket (flag, not fixed: the depot's data
+  is not this slice's).** Sent west toward the lookout's sighting, a depot
+  wave drops through the floor's gap at columns 51-52 (row 14) and stands in
+  the pocket under it (feet on row 16, column 51) for ever, counting against
+  the bound. Before this push they stood at the entry instead; both are out
+  of play. A hero can be reached there only at columns 53-60, and there is no
+  timing in which a hero seen by the lookout gets there before the wave
+  passes, so `step7-waves-reach-the-hero-depot` pins only that the wave
+  leaves the entry (control: `outpostSendOn` 0). Ways out for the depot's
+  owner: fill or narrow the gap, move the entry west of it, or give the depot
+  `leaveIdle` (they walk off after 10 s with nobody to fight) and
+  `tryAgain`, which this slice leaves to them.
+- **The camp's own people still flatten each other** (a fighter's swing hits
+  whoever is in reach): in the 60 s caller scenario the lookout was knocked
+  down by its own side about a dozen times. Not changed; it sends the lookout
+  flying, which reads as mayhem. Owed with Step 18's impact slice if unwanted.
+- **Risk is still low for a hero who keeps striking:** none of the three
+  heroes, pressing attack every 0.4 s facing the waves, was knocked down once
+  in 90 s (each blow launches the fighter before its 0.25 s wind-up lands).
+  A hero who never strikes is flattened in about 20 s. For the owner to
+  judge by playing; the numbers are the fighters' (`content/tuning.json`).
+- **Fighter 2 is not a caller (the brief said both fighters).** Step 19's
+  camp job landed while this was built: `step19-camp-clean-control` and the
+  `step19-heist` check have fighter 2 see the thief without the horn
+  sounding, and with fighter 2 a caller both failed. Only the lookout and
+  fighter 1 call; one line in `content/outposts/outpost.json` adds fighter 2
+  once the heist slice agrees. The per-hero numbers were re-measured after
+  and did not change.
+- **Screenshot:** `docs/plan/step-7-shots/push1-wave-arriving-phone-sideways.png`
+  (the e2e's phone, sideways): a fighter of the first wave walking in from
+  the east toward the hero, the lookout with its horn between them.
+- **Not verified:** how a wave arriving looks on a phone beyond the e2e
+  screenshot (`e2e-outpost-wave.png`); push 3 takes the iPhone-size
+  screenshots of a wave arriving.

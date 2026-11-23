@@ -1,7 +1,7 @@
 {
   "id": "step12-waves-never-pass-bound",
   "gate": null,
-  "proves": "signal 3: the hero stands on the low platform in the lookout's sight and out of every fighter's reach, and the lookout calls again and again: more finished calls (8) than the table has rows (2), a wave for each of the first five (the last row coming again), then the room is at its bound of 8 people and the next waves wait; the room never holds more than 8 (doc 24: no cap on waves, a cap on bodies). Control: outpostBoundOn set to 0 in content/tuning.json, the room passes 8",
+  "proves": "signal 3: the hero stands on the low platform in the lookout's sight and out of every fighter's reach (re-timed by Step 7: waves now walk to where the lookout saw the hero, so a one-tile block on the floor at column 11, a tiles override, keeps them east of it; the ticks are unchanged), and the lookout calls again and again: more finished calls (8) than the table has rows (2), a wave for each of the first five (the last row coming again), then the room is at its bound of 8 people and the next waves wait; the room never holds more than 8 (doc 24: no cap on waves, a cap on bodies). Control: outpostBoundOn set to 0 in content/tuning.json, the room passes 8",
   "room": "test-outpost",
   "placements": true,
   "players": [
@@ -16,5 +16,8 @@
     {"fact": "event-where", "event": "outpost-wave", "where": {}, "between": [1406, 2400], "count": [0, 0]},
     {"fact": "people-count", "room": "test-outpost", "between": [1, 2400], "count": [3, 8]},
     {"fact": "people-count", "room": "test-outpost", "between": [1406, 2400], "count": [8, 8]}
+  ],
+  "tiles": [
+    {"room": "test-outpost", "tile": [11, 8], "is": "solid"}
   ]
 }

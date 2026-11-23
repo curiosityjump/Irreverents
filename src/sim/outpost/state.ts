@@ -23,6 +23,11 @@ declare module '../types.ts' {
       done: boolean;
       /** Ticks the walk to the post has made no headway. */
       stall: number;
+      /**
+       * Step 7 (DRAFT): where this caller last saw a hero, during this call (centre, room pixels).
+       * Read with a default: a caller saved before this field has none.
+       */
+      seen?: { x: number; y: number } | null;
     };
     /** On an outpost's post (the signaler). */
     signaler?: {
@@ -37,7 +42,20 @@ declare module '../types.ts' {
       queued: number;
       /** Waves that have walked in so far (the next wave's row, and its ids). */
       sent: number;
+      /**
+       * Step 7 (DRAFT): where the caller of the last finished call saw a hero. A wave walks
+       * there (D-065: the lookout told them). Read with a default: a post saved before this has none.
+       */
+      seen?: { x: number; y: number } | null;
+      /** Step 7 (DRAFT, outposts with `tryAgain`): ticks before any caller may go for the horn again. */
+      rest?: number;
     };
+    /**
+     * Step 7 (DRAFT): on a person who walked in with a wave of an outpost with `leaveCold`/`leaveIdle`.
+     * `cold`: ticks lain out cold so far; `idle`: ticks in a row with nobody to fight;
+     * `going`: walking back off to the entry, where they are gone.
+     */
+    outpostWave?: { outpost: string; cold: number; idle: number; going: boolean };
     /** On a person of an outpost while fighting: where a hero was last seen. */
     outpostFight?: { x: number; y: number } | null;
   }

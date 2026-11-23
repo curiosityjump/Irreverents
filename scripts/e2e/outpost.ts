@@ -3,6 +3,8 @@
 // courtyard, up through its doorway into the outpost, and breaks the horn
 // post with the attack button; the page's own record of what it drew
 // (`drawn.signalers`) shows the post working first and broken after.
+// Step 7: on the way, standing in the lookout's view, the horn is drawn
+// sounding and a wave walks in (more of the camp's people drawn after).
 // docs/mechanisms/outposts.md.
 //
 // DRAFT: every limit below is a first pass with room to spare.
@@ -108,12 +110,28 @@ export async function outpostFacts(kit: Kit): Promise<void> {
         await sleep(300);
       }
       try {
-        await ph.page.waitForFunction((x: number) => (window as any).irreverents.drawn.me.x >= x, content.postX - 40, { polling: 'raf', timeout: 6000 });
+        // Step 7: stop first in the lookout's view, six tiles short of the post.
+        await ph.page.waitForFunction((x: number) => (window as any).irreverents.drawn.me.x >= x, content.postX - 6 * content.tile, { polling: 'raf', timeout: 6000 });
       } catch {
         // reported below
       }
       await ph.cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
     }
+    // Step 7 (docs/plan/step-7.md, push 1): no fight to win. Stand in the lookout's view: the page
+    // draws the horn's bar filling (the post "sounding"), and afterwards more people in the room
+    // than before (a wave walked in). Control: the count read before the call, not after.
+    await settle(ph);
+    const people = (): Promise<number> => ph.page.evaluate(() => ((window as any).irreverents.drawn.entities as any[]).filter((e) => e.player === null && ['outpost-lookout', 'outpost-fighter', 'heavy-fighter'].includes(e.kind)).length);
+    const peopleBefore = await people();
+    let sounded = false;
+    let peopleAfter = peopleBefore;
+    for (let i = 0; i < 100 && peopleAfter <= peopleBefore; i++) {
+      await sleep(250);
+      sounded ||= ((await ph.page.evaluate(() => (window as any).irreverents.e2eSeen)) as string[]).includes('sounding');
+      if (sounded) peopleAfter = await people();
+    }
+    await ph.page.screenshot({ path: path.join(kit.out, 'e2e-outpost-wave.png') });
+    fact('outpost-wave', sounded && peopleAfter > peopleBefore, `by touch, standing in the lookout's view (at x ${Math.round((await me(ph))?.x ?? -1)}): the page drew the horn sounding (${sounded}) and then ${peopleAfter} of the camp's people, ${peopleBefore} before the call (expected more after)`);
     let state = 'working';
     for (let i = 0; i < 12 && state !== 'broken'; i++) {
       await standAt(ph, content.postX - w - 2, 1);

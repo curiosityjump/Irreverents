@@ -37,6 +37,22 @@ export interface Outpost {
    * count"): after the last row, the last row comes again, for ever.
    */
   waves: { character: string; npc: string }[][];
+  /**
+   * Step 7 (DRAFT, optional, default false): a caller stopped mid-call by a
+   * knock-out or a grab tries again once up (after `callAgain`), instead of
+   * never calling again; only one caller goes for the horn at a time; and
+   * after any call ends, finished or stopped, nobody goes for `callAgain`
+   * seconds. Stopping a caller buys time; breaking the post is the real stop (D-061).
+   */
+  tryAgain: boolean;
+  /**
+   * Step 7 (DRAFT, optional, default 0 = never): seconds a wave's person may
+   * lie out cold in all before they walk back off at the entry and are gone,
+   * so beaten waves make room under `bound` for the next.
+   */
+  leaveCold: number;
+  /** Step 7 (DRAFT, optional, default 0 = never): seconds in a row a wave's person may stand with nobody to fight before they walk off. */
+  leaveIdle: number;
 }
 
 declare module '../types.ts' {
@@ -51,7 +67,7 @@ const kind: ContentKind = {
   parse(raw, read) {
     const o = read.object(raw, '');
     if (!o) return null;
-    read.only(o, ['id', 'room', 'signaler', 'callers', 'entry', 'bound', 'callTime', 'callAgain', 'breakHits', 'breakSpeed', 'waves'], '');
+    read.only(o, ['id', 'room', 'signaler', 'callers', 'entry', 'bound', 'callTime', 'callAgain', 'breakHits', 'breakSpeed', 'waves', 'tryAgain', 'leaveCold', 'leaveIdle'], '');
     const out: Outpost = {
       id: read.string(o, 'id', ''),
       room: read.string(o, 'room', ''),
@@ -64,7 +80,11 @@ const kind: ContentKind = {
       breakHits: read.number(o, 'breakHits', '', { min: 1, max: 1000, integer: true }),
       breakSpeed: read.number(o, 'breakSpeed', '', { min: 0, max: 2000 }),
       waves: [],
+      tryAgain: o.tryAgain === true,
+      leaveCold: o.leaveCold === undefined ? 0 : read.number(o, 'leaveCold', '', { min: 0, max: 600 }),
+      leaveIdle: o.leaveIdle === undefined ? 0 : read.number(o, 'leaveIdle', '', { min: 0, max: 600 }),
     };
+    if (o.tryAgain !== undefined && typeof o.tryAgain !== 'boolean') read.fail('tryAgain', `must be true or false, but is ${describe(o.tryAgain)}`);
     const e = o.entry;
     if (Array.isArray(e) && e.length === 2 && e.every((n) => Number.isInteger(n))) out.entry = [e[0] as number, e[1] as number];
     else read.fail('entry', `must be [column, row], but is ${describe(e)}`);

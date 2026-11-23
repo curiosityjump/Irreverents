@@ -1,7 +1,7 @@
 {
   "id": "step12-walk-out-ends-it",
   "gate": null,
-  "proves": "signal 4, second half, in the real room: a hero walks in along the floor and stands in the lookout's view; two calls complete and two waves walk in (1 fighter, then 2); during the third call the hero walks back over the step and out through the doorway to the courtyard: the call stops (no-hero) before it is sent, and no call starts or completes and no wave comes after; the people who came stay (D-061: escape the zone; the doorway is an enter doorway nobody of the camp uses, so no fight can shut it). Control: outpostZoneEndOn set to 0 in content/tuning.json, the third call completes",
+  "proves": "signal 4, second half, in the real room: a hero walks in along the floor and stands in the lookout's view; the first call completes and the first wave (1 fighter) walks in; during the second call the hero walks back over the step and out through the doorway to the courtyard: the call stops (no-hero) before it is sent, and no call starts or completes and no wave comes after; the one who came stays (D-061: escape the zone; the doorway is an enter doorway nobody of the camp uses, so no fight can shut it). Re-timed by Step 7 (waves now walk to where the lookout saw the hero, so by the third call a standing hero has been knocked out of the lookout's view): the walk out is during the second call, 540 ticks earlier. Control: outpostZoneEndOn set to 0 in content/tuning.json, the second call completes",
   "room": "outpost",
   "placements": true,
   "players": [
@@ -10,20 +10,20 @@
   "inputs": [
     {"player": "a", "from": 0, "to": 150, "x": 1},
     {"player": "a", "from": 20, "to": 40, "hold": ["jump"]},
-    {"player": "a", "from": 1229, "to": 1379, "x": -1},
-    {"player": "a", "from": 1290, "to": 1310, "hold": ["jump"]},
-    {"player": "a", "from": 1380, "to": 1390, "y": -1}
+    {"player": "a", "from": 689, "to": 839, "x": -1},
+    {"player": "a", "from": 750, "to": 770, "hold": ["jump"]},
+    {"player": "a", "from": 840, "to": 850, "y": -1}
   ],
   "ticks": 1800,
   "expect": [
-    {"fact": "event-where", "event": "outpost-wave", "where": {"wave": 1, "row": 1}, "between": [867, 867], "count": [1, 1]},
-    {"fact": "event-where", "event": "outpost-call-started", "where": {"by": "camp-lookout"}, "between": [1228, 1228], "count": [1, 1]},
-    {"fact": "event", "event": "changed-room", "player": "a", "where": {"toRoom": "courtyard", "toDoor": "to-outpost"}, "between": [1380, 1380], "count": [1, 1]},
-    {"fact": "event-where", "event": "outpost-call-stopped", "where": {"by": "camp-lookout", "why": "no-hero"}, "between": [1381, 1381], "count": [1, 1]},
-    {"fact": "event-where", "event": "outpost-call-completed", "where": {}, "between": [1229, 1800], "count": [0, 0]},
-    {"fact": "event-where", "event": "outpost-call-started", "where": {}, "between": [1229, 1800], "count": [0, 0]},
-    {"fact": "event-where", "event": "outpost-wave", "where": {}, "between": [868, 1800], "count": [0, 0]},
+    {"fact": "event-where", "event": "outpost-wave", "where": {"wave": 0, "row": 0}, "between": [327, 327], "count": [1, 1]},
+    {"fact": "event-where", "event": "outpost-call-started", "where": {"by": "camp-lookout"}, "between": [688, 688], "count": [1, 1]},
+    {"fact": "event", "event": "changed-room", "player": "a", "where": {"toRoom": "courtyard", "toDoor": "to-outpost"}, "between": [840, 840], "count": [1, 1]},
+    {"fact": "event-where", "event": "outpost-call-stopped", "where": {"by": "camp-lookout", "why": "no-hero"}, "between": [841, 841], "count": [1, 1]},
+    {"fact": "event-where", "event": "outpost-call-completed", "where": {}, "between": [689, 1800], "count": [0, 0]},
+    {"fact": "event-where", "event": "outpost-call-started", "where": {}, "between": [689, 1800], "count": [0, 0]},
+    {"fact": "event-where", "event": "outpost-wave", "where": {}, "between": [328, 1800], "count": [0, 0]},
     {"fact": "in-room", "player": "a", "at": 1800, "room": "courtyard"},
-    {"fact": "people-count", "room": "outpost", "between": [868, 1800], "count": [6, 6]}
+    {"fact": "people-count", "room": "outpost", "between": [328, 1800], "count": [4, 4]}
   ]
 }

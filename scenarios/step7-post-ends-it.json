@@ -1,0 +1,32 @@
+{
+  "id": "step7-post-ends-it",
+  "gate": null,
+  "proves": "Step 7 push 1: with callers who try again (the camp's tryAgain), breaking the post is still the real stop (D-061): the grappler stands in the lookout's view, the first call brings the first wave, then the grappler walks up to the horn post and strikes it until it breaks; no call completes and no wave comes in the 50 s after, though the camp's people still see them. Control (watched to fail): the strikes left out, the second call completes and the second wave comes",
+  "room": "outpost",
+  "placements": true,
+  "players": [
+    {"id": "a", "character": "grappler", "spawn": 0}
+  ],
+  "inputs": [
+    {"player": "a", "from": 0, "to": 135, "x": 1},
+    {"player": "a", "from": 20, "to": 45, "hold": ["jump"]},
+    {"player": "a", "from": 340, "to": 420, "x": 1},
+    {"player": "a", "from": 420, "to": 423, "hold": ["attack"]},
+    {"player": "a", "from": 450, "to": 453, "hold": ["attack"]},
+    {"player": "a", "from": 480, "to": 483, "hold": ["attack"]},
+    {"player": "a", "from": 510, "to": 513, "hold": ["attack"]},
+    {"player": "a", "from": 540, "to": 543, "hold": ["attack"]},
+    {"player": "a", "from": 570, "to": 573, "hold": ["attack"]},
+    {"player": "a", "from": 600, "to": 603, "hold": ["attack"]},
+    {"player": "a", "from": 630, "to": 633, "hold": ["attack"]},
+    {"player": "a", "from": 660, "to": 663, "hold": ["attack"]},
+    {"player": "a", "from": 690, "to": 693, "hold": ["attack"]}
+  ],
+  "ticks": 3600,
+  "expect": [
+    {"fact": "event-where", "event": "outpost-wave", "where": {"wave": 0, "row": 0}, "between": [327, 327], "count": [1, 1]},
+    {"fact": "event-where", "event": "signaler-broken", "where": {"outpost": "outpost", "by": "p:a"}, "between": [486, 486], "count": [1, 1]},
+    {"fact": "event-where", "event": "outpost-call-completed", "where": {}, "between": [328, 3600], "count": [0, 0]},
+    {"fact": "event-where", "event": "outpost-wave", "where": {}, "between": [328, 3600], "count": [0, 0]}
+  ]
+}

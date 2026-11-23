@@ -55,6 +55,7 @@
     "outpostCallReach": 12,
     "outpostZoneEndOn": 1,
     "outpostBoundOn": 1,
+    "outpostSendOn": 1,
     "chaseCrossCap": 2
   },
   "characters": {

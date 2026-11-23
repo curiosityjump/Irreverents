@@ -1,0 +1,31 @@
+{
+  "id": "step7-waves-reach-the-hero-depot",
+  "gate": null,
+  "proves": "Step 7 push 1, the same in quarry-depot: the flyer walks in from the west door into the lookout's view (column 5) and is seen; the lookout sounds the horn while the flyer flaps away east over the stack; the first wave (two fighters) walks in at the far east end (column 61) and, told where the lookout saw the flyer, walks west from the entry: 5 s after it came both are more than five tiles west of it. DRAFT, flagged in docs/plan/step-7.md 'Builder notes': walking west they drop through the floor's gap at columns 51-52 into the pocket below and stay there, so a depot wave reaches a hero only at columns 53-60; the depot's data is not this step's to change (the brief: 'Edit nothing of the depot's'), and this scenario pins only that they leave the entry. Control (watched to fail): outpostSendOn set to 0 in content/tuning.json, both stand at the entry",
+  "room": "quarry-depot",
+  "placements": true,
+  "players": [
+    {"id": "a", "character": "flyer", "spawn": 0}
+  ],
+  "inputs": [
+    {"player": "a", "from": 0, "to": 3, "x": 1},
+    {"player": "a", "from": 181, "to": 201, "x": 1},
+    {"player": "a", "from": 240, "to": 400, "x": 1},
+    {"player": "a", "from": 215, "to": 220, "hold": ["jump"]},
+    {"player": "a", "from": 227, "to": 232, "hold": ["jump"]},
+    {"player": "a", "from": 239, "to": 244, "hold": ["jump"]},
+    {"player": "a", "from": 251, "to": 256, "hold": ["jump"]},
+    {"player": "a", "from": 263, "to": 268, "hold": ["jump"]},
+    {"player": "a", "from": 275, "to": 280, "hold": ["jump"]},
+    {"player": "a", "from": 287, "to": 292, "hold": ["jump"]},
+    {"player": "a", "from": 299, "to": 304, "hold": ["jump"]},
+    {"player": "a", "from": 311, "to": 316, "hold": ["jump"]},
+    {"player": "a", "from": 323, "to": 328, "hold": ["jump"]}
+  ],
+  "ticks": 900,
+  "expect": [
+    {"fact": "event-where", "event": "outpost-wave", "where": {"wave": 0, "row": 0}, "between": [381, 381], "count": [1, 1]},
+    {"fact": "people-at", "room": "quarry-depot", "at": 381, "ids": "quarry-depot:w0:", "count": [0, 0]},
+    {"fact": "people-at", "room": "quarry-depot", "at": 681, "ids": "quarry-depot:w0:", "x": [0, 896], "count": [2, 2]}
+  ]
+}

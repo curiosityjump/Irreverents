@@ -2,7 +2,7 @@
 
 **Reference.** Open before touching `content/outposts/`,
 `src/content/kinds/outposts.ts`, `src/sim/outpost/`, the `outpost-*`
-systems, `src/client/draw/outpost.ts`, or the outpost room
+systems (Step 7 added `outpost-leave`), `src/client/draw/outpost.ts`, or the outpost room
 (`content/rooms/outpost.json` and its placements). Built by Step 12, slice
 A, 2026-11-23 (`docs/plan-archive.md`, "Step 12").
 
@@ -23,10 +23,10 @@ is edited.
 
 | Piece | Where | What it is |
 |---|---|---|
-| An outpost | `content/outposts/<id>.json` | `room`, `signaler` (the placed id of the horn post), `callers` (placed people who may sound it), `entry` ([column, row] where waves walk in; not a door), `bound` (most people in the room at once), `callTime`, `callAgain` (seconds), `breakHits`, `breakSpeed` (px/s), `waves` (rows of `{ character, npc }`). The validator names file and field; the cross-check refuses a room, post, caller or kind that does not exist. |
+| An outpost | `content/outposts/<id>.json` | `room`, `signaler` (the placed id of the horn post), `callers` (placed people who may sound it), `entry` ([column, row] where waves walk in; not a door), `bound` (most people in the room at once), `callTime`, `callAgain` (seconds), `breakHits`, `breakSpeed` (px/s), `waves` (rows of `{ character, npc }`); optional (Step 7, left out = as before): `tryAgain` (true/false), `leaveCold`, `leaveIdle` (seconds; 0 = never). The validator names file and field; the cross-check refuses a room, post, caller or kind that does not exist. |
 | The horn post | a placed body, e.g. `signal-post` | Verbs `["body"]`, weight 1000 (the most a body may be: a hit barely moves it), toughness 0 (never knocked out). A body, not a `things` entry, because only bodies can be hit or have things thrown into them. |
 | The camp's people | `content/characters/outpost-*.json`, `content/npcs/outpost-*.json` | Step 4's people: side `bad`, three moods. The fighter's body lists `attack`; the lookout's lists `body` with toughness 30, so one good blow stops a call. |
-| The numbers | `content/tuning.json` `world` | `outpostCallReach` (12 px), and two switches for the scenarios' controls, `outpostZoneEndOn`, `outpostBoundOn` (both 1). |
+| The numbers | `content/tuning.json` `world` | `outpostCallReach` (12 px), and three switches for the scenarios' controls, `outpostZoneEndOn`, `outpostBoundOn`, `outpostSendOn` (all 1). |
 
 ## State: all on entities
 
@@ -38,9 +38,19 @@ Declared in `src/sim/outpost/state.ts` (declaration merging):
   the next ids).
 - `c.outpostCall` on a caller: `phase` (`idle`, `going`, `sounding`),
   `progress`, `wait` (after a finished call), `done` (stopped by a
-  knock-out or a grab: never calls again), `stall`.
+  knock-out or a grab: never calls again, unless the outpost has
+  `tryAgain`), `stall`, `seen` (Step 7: where they saw a hero during this
+  call).
+- `c.signaler` also has (Step 7) `seen` (the last finished call's
+  sighting, which the next wave is told) and `rest` (ticks before any
+  caller may go, with `tryAgain`). New fields are read with a default.
 - `c.outpostFight` on a person of the outpost: where a hero was last
-  seen, or null.
+  seen, or null. A wave's people start with it set to their caller's
+  sighting (Step 7).
+- `c.outpostWave` (Step 7) on a wave's person of an outpost with
+  `leaveCold`/`leaveIdle`: `cold` (ticks out cold so far), `idle` (ticks
+  in a row with nobody to fight; while leaving, ticks with no headway),
+  `going`.
 
 A wave's people are spawned bodies (`spawnBody`) with ids
 `<outpost id>:w<wave>:<i>`, deterministic, and given `c.npc` with `home` =
@@ -53,7 +63,8 @@ routine is standing still). The network copies them with no network code.
 |---|---|---|
 | 57 | `outpost-call` | A caller not out, not held, who `canSee`s a hero, walks to the post (within `outpostCallReach`), then sounds it for `callTime`, holding still. Overlays `c.input`. |
 | 58 | `outpost-fight` | Any person of the `bad` side whose body lists `attack`, in any room (`DRAFT:`, widened for Step 16's rooms), who sees a hero walks at where they saw them and swings in `npcChargeReach` (a fresh press every other tick; the attack's own cooldown sets the pace); losing sight, goes to the last place seen and stands. Callers going to call are left alone. Mood stays 1 (D-060: business as usual). **Who they fight** is the NPC kind's `fights` (Step 18): `on-sight` (left out) is any hero seen; `when-struck` (the villain) keeps only heroes in the person's `c.struck`, written by `fight-struck` (101), and still only one it sees. **A new fighting kind keeps the way out** (`INTENT:`, `docs/deliberate-designs.md`): no `jump` in its body, and a `runSpeed` below the slowest hero's 76. |
-| 59 | `outpost-wave` | Walks queued waves in at `entry` while the room's people plus the wave fit under `bound`; otherwise the wave waits. |
+| 59 | `outpost-wave` | Walks queued waves in at `entry` while the room's people plus the wave fit under `bound`; otherwise the wave waits. Each of a wave's people starts walking to where the caller of the last finished call saw a hero (Step 7; `outpostSendOn`). |
+| 61 | `outpost-leave` | Step 7, only for outposts with `leaveCold`/`leaveIdle`: a wave's person who has lain out cold `leaveCold` seconds in all, or stood `leaveIdle` seconds in a row with nobody to fight, walks back to the entry once up and is removed there (`outpost-left { outpost, entity }`); one who makes no headway for 1.5 s is removed where they stand. Placed people never leave. |
 | 540 | `outpost-signaler` | After physics and `impact-bodies` (520): each `hit` on the post counts one; `breakHits` of them, or one `impact` naming the post as `other` at `breakSpeed` or more, breaks it. |
 
 Events: `outpost-call-started { by, outpost }`, then
@@ -61,7 +72,8 @@ Events: `outpost-call-started { by, outpost }`, then
 outpost, why }` (`knocked-out`, `grabbed`, `signaler-broken`, `no-hero`,
 `left-the-signaler`: knocked away from the post while not out, or a post
 they could not walk to); `outpost-wave { outpost, wave, row, people }`;
-`signaler-broken { outpost, signaler, by }`.
+`signaler-broken { outpost, signaler, by }`; `outpost-left { outpost,
+entity }` (Step 7).
 
 ## The owner's rules, at their sites (`INTENT:`)
 
@@ -70,8 +82,13 @@ they could not walk to); `outpost-wave { outpost, wave, row, people }`;
    stopped on the way or while sounding.
 2. **One player can stop it every way D-061 lists:** unseen (the ledge;
    sight is Step 4's), knock out or grab the caller (`DRAFT:` they never
-   call again), break the post (a hit or a throw, **no new button**,
-   D-093), or walk out.
+   call again; with `tryAgain`, as at the camp since Step 7, it buys
+   time: they try again once up), break the post (a hit or a throw, **no
+   new button**, D-093; the real stop), or walk out.
+2a. **A wave is told only its caller's sighting** (D-065, Step 7): the
+   caller keeps where they saw a hero, under `canSee`, during the call;
+   the wave walks there; from there `outpost-fight` reads heroes only
+   under `canSee`.
 3. **No cap on waves, a cap on bodies** (doc 24): the last row repeats for
    ever; `bound` counts people (bodies with `c.npc`, out cold or not), never
    the post or a hero.
@@ -160,6 +177,48 @@ that cannot hit), so tonight a guard who meets a fighter stands and is hit
 step: `alert-cool` holds the wait at 0 while any conscious person of the
 area sees any hero, so a hero hitting anyone in a guard's sight is seen.
 The brief's `clash-cool` would have changed nothing and was not added.
+
+## Step 7: waves that really come (`DRAFT:`, docs/decisions-log.md "Step 7: waves")
+
+Measured before (brief `loop-waves.md`): in the real camp, waves after the
+second never came (everyone who ever walked in stays, so the room sat at
+its bound), the ones who came stood at the entry, and one hit on the only
+caller ended the calls for that game. Now, at the camp only
+(`content/outposts/outpost.json`; the depot and `test-outpost` leave the
+new fields out):
+
+- `callers` are the lookout and fighter 1 (not fighter 2: Step 19's camp job, `step19-camp-clean-control` and the `step19-heist` check, counts on fighter 2 seeing the thief without calling; the brief asked for both); `tryAgain`: one goes
+  for the horn at a time, nobody goes for `callAgain` after any call ends,
+  and a caller stopped mid-call tries again once up.
+- `leaveCold` 5, `leaveIdle` 10: beaten waves walk off, so the waves keep
+  coming under the bound of 8.
+- Rows: 1 fighter; 2; a fighter and the `heavy-fighter` (the new toy),
+  the last row for ever (3 placed + 1 + 2 + 2 = 8, so three waves always
+  fit even before anyone leaves).
+- `breakSpeed` 450 (was 300): a grappler's punch flings the lookout at
+  about 350, and an ordinary grappler fight broke the post by accident
+  within 15 s; a thrown body (520) still breaks it at once.
+
+Measured at the camp with these numbers (scripts in the scratchpad, 90 s,
+the hero striking east every 0.4 s from column 13-14, not walking up to
+the post): the infiltrator reached the third wave at 52 s, the flyer at
+23 s, the grappler at 59 s; none of the three was knocked down once while
+striking like that, and they felled 15 to 24 of the camp. A hero who never
+strikes is knocked flat in about 20 s. Where a wave comes to rest is
+wherever the hero was seen (and, after 10 s with nobody to fight, the
+entry, where it is gone), never a fixed spot.
+
+**The depot (`quarry-depot`) is not changed, but its waves now walk west
+from the entry and drop through the floor's gap at columns 51-52 into the
+pocket below, where they stay** (`step7-waves-reach-the-hero-depot` pins
+only that they leave the entry). Flagged for its owner.
+
+Scenarios: `step7-waves-reach-the-hero`, `step7-waves-reach-the-hero-depot`,
+`step7-caller-tries-again`, `step7-post-ends-it`; the `people-at` fact
+counts a room's people by id prefix and span of feet. Re-timed:
+`step12-waves-never-pass-bound` (a one-tile block on the floor keeps the
+waves off the hero's platform) and `step12-walk-out-ends-it` (the walk
+out is during the second call).
 
 ## Not built yet
 

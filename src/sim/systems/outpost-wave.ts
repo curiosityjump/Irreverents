@@ -19,10 +19,11 @@ const system: System = {
   order: 59,
   tuning: {
     outpostBoundOn: { min: 0, max: 1, what: 'switch: 1 = a wave waits while it would take the outpost room past its bound on people; 0 = no bound (a control for the scenarios only)' },
+    outpostSendOn: { min: 0, max: 1, what: 'switch: 1 = a wave walks to where its caller saw a hero; 0 = it stands at the entry (a control for the scenarios only)' },
   },
   run(ctx) {
     const { world, content } = ctx;
-    const { outpostBoundOn, outpostZoneEndOn } = content.tuning.world;
+    const { outpostBoundOn, outpostZoneEndOn, outpostSendOn } = content.tuning.world;
     for (const op of outposts(content)) {
       const post = postOf(world, op);
       if (!post) continue;
@@ -45,6 +46,12 @@ const system: System = {
           // `home` is the outpost room; with no placement entry, mood 1's routine is standing still.
           e.c.npc = { kind: p.npc, home: op.room, mood: 1, dissonance: 0, offenders: [], quiet: 0, cool: 0, lastSeen: null, step: 0, stepTicks: 0, stall: 0, bark: null };
           e.facing = -1;
+          // Step 7 (DRAFT): the wave walks to where its caller saw a hero.
+          // INTENT (D-065, "Escalation is not omniscient"): that sighting, kept with the call, is the
+          // only place a wave is told; outpost-fight takes it from there under canSee.
+          const seen = sig.seen ?? null;
+          if (seen && outpostSendOn! >= 1) e.c.outpostFight = { x: seen.x, y: seen.y };
+          if (op.leaveCold > 0 || op.leaveIdle > 0) e.c.outpostWave = { outpost: op.id, cold: 0, idle: 0, going: false };
           ids.push(id);
         });
         ctx.emit('outpost-wave', { outpost: op.id, wave: sig.sent, row, people: ids });
