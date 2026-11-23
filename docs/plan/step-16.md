@@ -541,3 +541,4 @@ Slice 1, 2026-11-23 16:10 UTC: the main way (road, ridge, tower, depot) is **248
 
 **For the owner to judge by playing** (not asked): whether the quiet way over the roof makes you proud, whether getting caught is a better time than not, what the hoard should look like.
 
+**Landed (push 2, loud):** `step16-caught-fight` (seen, the call finishes and a wave walks in; the grappler throws the patrol it holds at the lookout mid-call, which knocks the lookout out and breaks the horn; no call for 20 s; control: no throw) and `step16-caught-escape` (seen, a wave walks in, out by the tower door; no wave after and nobody follows; control: the door made solid). The escape is by the tower door, not the cellar (`docs/for-the-lead.md`).

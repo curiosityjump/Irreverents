@@ -1,0 +1,128 @@
+{
+ "id": "step16-caught-fight",
+ "proves": "Step 16 signal 6 (a), caught then fight: the grappler walks in from the tower door and the lookout sees them at once; the grappler grabs patrol 1 when it comes swinging and holds it while the call is sounded to the end, and the first wave (two fighters) walks in at the far east end; when the lookout starts its second call the grappler throws patrol 1 at it: the lookout is knocked out mid-call (it never calls again) and the thrown body goes on into the horn post and breaks it, and no call starts or completes in the 20 s after. Nothing reloads. Control (watched to fail): without the throw, the second call completes",
+ "room": "quarry-depot",
+ "placements": true,
+ "players": [
+  {
+   "id": "a",
+   "character": "grappler",
+   "spawn": 0
+  }
+ ],
+ "inputs": [
+  {
+   "player": "a",
+   "from": 0,
+   "to": 3,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 90,
+   "to": 92,
+   "hold": [
+    "grab"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 600,
+   "to": 603,
+   "hold": [
+    "attack"
+   ]
+  }
+ ],
+ "ticks": 1810,
+ "expect": [
+  {
+   "fact": "event-where",
+   "event": "outpost-call-completed",
+   "where": {
+    "by": "depot-lookout"
+   },
+   "between": [
+    222,
+    222
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "event-where",
+   "event": "outpost-wave",
+   "where": {
+    "wave": 0,
+    "row": 0
+   },
+   "between": [
+    222,
+    222
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "event-where",
+   "event": "outpost-call-stopped",
+   "where": {
+    "by": "depot-lookout",
+    "why": "knocked-out"
+   },
+   "between": [
+    600,
+    640
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "event-where",
+   "event": "signaler-broken",
+   "where": {
+    "signaler": "depot-horn-post"
+   },
+   "between": [
+    600,
+    700
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "event-where",
+   "event": "outpost-call-started",
+   "where": {},
+   "between": [
+    610,
+    1810
+   ],
+   "count": [
+    0,
+    0
+   ]
+  },
+  {
+   "fact": "event-where",
+   "event": "outpost-call-completed",
+   "where": {},
+   "between": [
+    223,
+    1810
+   ],
+   "count": [
+    0,
+    0
+   ]
+  }
+ ]
+}
