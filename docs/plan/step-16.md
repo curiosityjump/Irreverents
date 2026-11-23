@@ -483,6 +483,7 @@ List these; don't grade them.
 
 ## Briefs
 
+- Slice 2, the enemies (signal 4; ranged left out, first to drop): `handoff-prompts/step-16-b-quarry-enemies.md`, written 16:15 UTC, sent to slice 1's builder once slice 1 is joined. Step 12 widened `outpost-fight` to any room at 2027994.
 - Slice 1, the rooms and their secrets (signals 1–3 and 7's first half): `handoff-prompts/step-16-a-quarry-rooms.md`, hard stop 16:45 UTC; worker `session_017WiGzFnkhyrpJqJ6xa9vTr` (launched 15:11 UTC).
 
 ## Open with the owner
