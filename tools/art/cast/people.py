@@ -456,68 +456,92 @@ def shopkeeper(P):
 # red lining, swept-up dark hair, a pointed beard, white gloves.
 
 def villain(P):
+    """DRAFT (round 2, handoff-prompts/look2-heroes.md 3.4): 44-46 px tall with
+    a tall hat over his 14x28 box, a flared purple cape with red lining and
+    gold trim, a pale face clear of hair, bright eyes, the curled moustache
+    and white gloves. Nothing of the night ramp, so he never sinks into a
+    dark room."""
     F = Frame()
     b, s = P.bob, P.sq
     hx, hy = P.head
     c = P.cape
     upper = []
-    hcx, hcy = 0.5 + hx, -22 + b + s + hy
-    # cape: lining first (it shows at the trailing edge), then the outside
-    out = poly([(-6, -19 + b), (6, -19 + b), (7, -2), (-9 - c * 2, -2 - max(0, c - 1)), (-9 - c, -10 + b)])
-    lining = poly([(-6, -16 + b), (-11 - c * 2.4, -2 - max(0, c)), (-4, -2)])
-    upper.append(F.add(lining, 'red', base=1, shade='edge', depth=2, hl=False))
-    upper.append(F.add(out, 'purple', base=2, shade='edge', depth=3))
-    # high collar
-    colL = poly([(-8, -17 + b + s), (-9, -27 + b + s), (-3, -19 + b + s)])
-    colR = poly([(8, -17 + b + s), (10, -26 + b + s), (4, -19 + b + s)])
-    upper.append(F.add(colL | colR, 'purple', base=3, shade='edge', depth=1))
-    # legs and feet
-    F.add(capsule(-2, -8, -2.5 + P.fb[0], -4 + P.fb[1], 1.6) | ell(-2 + P.fb[0], -2.9 + P.fb[1], 3.2, 1.9), 'dark', base=2)
-    F.add(capsule(2, -8, 2.5 + P.ff[0], -4 + P.ff[1], 1.6) | ell(3 + P.ff[0], -2.9 + P.ff[1], 3.2, 1.9), 'dark', base=2)
+    hcx, hcy = 0.5 + hx, -23 + b + s + hy
+    # cape: lining first (it shows at the flared trailing edge), then the outside
+    out = poly([(-6, -20 + b), (6, -20 + b), (9, -2), (-12 - c * 1.8, -2 - max(0, c - 1)), (-10 - c, -12 + b)])
+    lining = poly([(-6, -17 + b), (-13 - c * 1.9, -2 - max(0, c)), (-4, -2)])
+    upper.append(F.add(lining, 'red', base=2, shade='edge', depth=1, hl=False))
+    co = F.add(out, 'purple', base=2, shade='edge', depth=2)
+    # gold trim along the hem
+    for x in range(-14 - c * 2, 10):
+        for y in range(-5, -1):
+            if (x, y) in out and (x, y + 1) not in out:
+                co.dot(x, y, RAMP['gold'][2] if x % 3 else RAMP['gold'][1])
+    upper.append(co)
+    # a high flared collar, gold-edged, rising beside the head
+    colL = poly([(-7, -18 + b + s), (-11, -31 + b + s), (-3, -20 + b + s)])
+    colR = poly([(7, -18 + b + s), (10, -30 + b + s), (4, -20 + b + s)])
+    cl = F.add(colL | colR, 'red', base=1, shade='edge', depth=1)
+    for (x, y) in list(colL | colR):
+        if (x, y - 1) not in (colL | colR) and y < -21 + b + s:
+            cl.dot(x, y, RAMP['gold'][2])
+    upper.append(cl)
+    # legs and boots
+    F.add(capsule(-2, -8, -2.5 + P.fb[0], -4 + P.fb[1], 1.6) | ell(-2 + P.fb[0], -2.9 + P.fb[1], 3.2, 1.9), 'purple', base=0)
+    F.add(capsule(2, -8, 2.5 + P.ff[0], -4 + P.ff[1], 1.6) | ell(3 + P.ff[0], -2.9 + P.ff[1], 3.2, 1.9), 'purple', base=1)
     # back arm
     hbx, hby = -7 + P.hb[0], -10 + b + P.hb[1]
-    upper.append(F.add(capsule(-4, -16 + b + s, hbx, hby - 1, 1.7), 'dark', base=2))
+    upper.append(F.add(capsule(-4, -16 + b + s, hbx, hby - 1, 1.7), 'purple', base=1))
     upper.append(F.add(ell(hbx, hby + 0.5, 2.1, 2.1), 'white', base=3))
-    # body
+    # body: a plum coat with a gold sash and a red jewel
     by = -12 + b + s / 2
     body = ell(0, by, 4.8 + s * 0.4, 7.4 - s / 2)
-    bd = F.add(body, 'dark', base=3, ball=(0, by, 5.5, 8))
+    bd = F.add(body, 'purple', base=1, ball=(0, by, 5.5, 8))
     for x in range(-5, 5):
         if (x, r(by) + 3) in body:
             bd.dot(x, r(by) + 3, RAMP['gold'][2 if x < 2 else 1])
     bd.dot(0, r(by) - 5, RAMP['gold'][3]).dot(1, r(by) - 5, RAMP['gold'][2]).dot(0, r(by) - 4, RAMP['red'][2]).dot(1, r(by) - 4, RAMP['red'][1])
     upper.append(bd)
-    # head
+    # head: a pale face, clear of hair
     sk = skin_of(P)
     h0 = len(F.parts)
-    upper.append(F.add(ell(hcx, hcy, 6, 5.6), sk))
-    ex = eyes(F, r(hcx - 0.5), r(hcy) - 1, P, gap=4, skin=sk)
+    upper.append(F.add(ell(hcx, hcy, 5.6, 5.6), sk))
+    ex = eyes(F, r(hcx - 1.5), r(hcy) - 1, P, gap=4, skin=sk)
     upper.append(F.parts[-1])
     fc = F.px([], INK)
     if P.eyes not in ('angry',) and P.brow is None:
-        fc.dots([(ex - 1, r(hcy) - 3), (ex, r(hcy) - 2), (ex + 6, r(hcy) - 3), (ex + 5, r(hcy) - 2)], INK)
-    # moustache with curled tips, and the pointed beard
+        # arched, scheming brows
+        fc.dots([(ex - 1, r(hcy) - 2), (ex, r(hcy) - 3), (ex + 1, r(hcy) - 3), (ex + 4, r(hcy) - 3), (ex + 5, r(hcy) - 3), (ex + 6, r(hcy) - 2)], INK)
     my = r(hcy) + 3
-    fc.dots([(ex + 1, my), (ex + 2, my), (ex + 4, my), (ex + 5, my), (ex, my - 1), (ex + 6, my - 1)], INK)
-    fc.dots([(ex + 3, my + 2), (ex + 3, my + 3), (ex + 2, my + 2), (ex + 4, my + 2), (ex + 3, my + 4)], INK)
+    fc.dots([(ex + 1, my), (ex + 2, my), (ex + 4, my), (ex + 5, my), (ex, my - 1), (ex + 6, my - 1), (ex - 1, my - 2), (ex + 7, my - 2)], INK)
+    fc.dots([(ex + 3, my + 3), (ex + 3, my + 4)], INK)
     upper.append(fc)
     upper.append(mouth(F, ex + 2, my + 1, P, w=2))
-    # hair
-    kdx, kdy, kt = P.hat
+    # a slick of dark hair behind the ear only
     n = len(F.parts)
-    top = r(hcy) - 2
-    hair = clip(ell(hcx, hcy - 1, 6.6, 5.4), y1=top)
-    hair |= poly([(hcx - 3, top - 2), (hcx - 6 + kdx, top - 10 + kdy), (hcx + 1, top - 7), (hcx + 5, top - 3)])
-    hair |= poly([(hcx - 7, top + 2), (hcx - 11 + kdx, top - 5 + kdy), (hcx - 3, top - 3)])
-    hr = F.add(hair, 'dark', base=2, shade='edge', depth=1)
-    hr.dot(r(hcx) + 2, top, RAMP['dark'][2]).dot(r(hcx) + 3, top, RAMP['dark'][2]).dot(r(hcx) + 2, top + 1, RAMP['dark'][2])
-    hr.dot(r(hcx) - 2, top - 3, RAMP['purple'][2]).dot(r(hcx) - 1, top - 3, RAMP['purple'][2]).dot(r(hcx) - 3, top - 2, RAMP['purple'][1])
+    F.add(clip(ell(hcx - 4, hcy - 1, 2.6, 4.2), x1=hcx - 3), 'purple', base=0, shade='flat')
+    # the tall hat: brim, crown and a red band; it lags and tilts like the king's crown
+    kdx, kdy, kt = P.hat
+    if not P.hatoff:
+        top = r(hcy) - 6 + kdy
+        bx = hcx + kdx
+        brim = ell(bx, top, 7.0, 1.4)
+        crown = poly([(bx - 4.0, top), (bx - 4.8, top - 14), (bx + 4.8, top - 14), (bx + 4.0, top)])
+        hat = F.add(crown, 'purple', base=1, shade='edge', depth=2)
+        for x in range(r(bx) - 5, r(bx) + 6):
+            for y in (top - 3, top - 2):
+                if (x, y) in crown:
+                    hat.dot(x, y, RAMP['red'][1] if x > bx else RAMP['red'][2])
+        hat.dot(r(bx) + 2, top - 3, RAMP['gold'][2]).dot(r(bx) + 2, top - 2, RAMP['gold'][1])
+        F.add(brim, 'purple', base=1, shade='edge', depth=1)
+        if kt:
+            F.shear(kt, 10, parts=F.parts[n + 1:], y0=top)
     upper += F.parts[n:]
     for p in F.parts[h0:]:
         p.ly = hcy
     # front arm
     hfx, hfy = 7 + P.hf[0], -12 + b + P.hf[1]
-    upper.append(F.add(capsule(4, -16 + b + s, hfx - 0.5, hfy - 0.5, 1.7), 'dark', base=3))
+    upper.append(F.add(capsule(4, -16 + b + s, hfx - 0.5, hfy - 0.5, 1.7), 'purple', base=2))
     upper.append(F.add(ell(hfx, hfy + 0.5, 2.2, 2.2), 'white', base=3))
     if P.lean:
         F.lean(P.lean, 22, parts=upper)

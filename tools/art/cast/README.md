@@ -61,6 +61,18 @@ to their homes.
 - **Cells.** 48×48 for the four people, the heavy dummy and the throne;
   32×32 for both crates and the dummy.
 
+### Round 2: the villain (2026-11-23, `handoff-prompts/look2-heroes.md` 3.4)
+
+Redrawn by the round-2 heroes brief-worker at the orchestrator's request.
+44 px tall in idle (his box is 14x28): a tall purple top hat with a red
+band overhangs the box's top by 16 px; a high red collar edged in gold
+flares up beside his head; a purple cape with a red lining and a gold hem
+flares wide behind him (a theatrical triangle, unlike the guard's post and
+spear); a plum coat and boots. His face is pale, 11 px wide and clear of
+hair (a slick of hair behind the ear only), with arched brows, the curled
+moustache and the white gloves kept. No colour of the night ramp, so he
+does not sink into the undercroft.
+
 ## Deviations from the contract
 
 - **The shopkeeper's cell is 48×48**, though its body would fit 32×32:
@@ -103,7 +115,16 @@ to their homes.
 - **To change it:** the `hatoff` branch at the end of `king()` in `tools/art/cast/people.py`.
 - **Where:** `tools/art/cast/people.py`.
 
+- **2026-11-23 (round 2): the villain wears a tall top hat and flares a
+  purple cape.** A player sees a tall, theatrical showman in purple, red and
+  gold, the tallest person in a room. Why: the round-2 review found him
+  shorter than the guard and lost in dark rooms; the brief asks for 44-48 px
+  with a tall hat or collar. To undo: `villain()` in `people.py`. `DRAFT:`
+
 ## Flags for the lead
+
+- (Round 2) The villain's `held` frames were not redrawn with legs kicking
+  above the hands (the brief's "if time allows").
 
 - **The king's speech ribbon covers his crown** in the throne room,
   sideways view (seen in a local screenshot at 844×390): the ribbon sits
