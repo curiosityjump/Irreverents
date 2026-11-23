@@ -1,9 +1,12 @@
 # Brief: the look, round 2, lane "actors": the punch lands, the words are pixels, the hoist, the rage and the hiding read
 
-**Scratch.** Delete this file when the lane has shipped. Written
-2026-11-23 by the orchestrator `session_017WiGzGp8auJceLEAAh9Aqx`, who
-leads Step 8 (`docs/plan/step-8.md`, "The look" and "Round 2
-(2026-11-23)").
+Written 2026-11-23 by the orchestrator, which runs Step 8 itself
+(`docs/plan/step-8.md`, "The look" and "Round 2 (2026-11-23)").
+The reviewer deletes it after review.
+
+**Landed so far** (2026-11-23 15:40 UTC; held by builder
+`session_017WiGzGaGuR297NUCFSpVDU`): push 1, 646f83d (the `carryAt` validator). Check
+`git log --oneline origin/main --grep 'round 2, actors lane'` before building.
 
 ## 1. The task, and the measure
 
@@ -113,7 +116,7 @@ by the owner (`docs/plan/step-8.md`, "Feedback signal for the look").
 
 ## 3. What to build
 
-**Push 1, first and early (the heroes lane waits on it):** the validator
+**Push 1, first and early (the heroes lane waits on it; landed 646f83d):** the validator
 for `carryAt` in `src/content/kinds/sprites.ts`, exactly as the contract
 defines it, proven with a throwaway file watched to pass and a malformed
 one watched to fail, plus everything below that reads a look's size
@@ -212,13 +215,13 @@ game) and after screenshots at iPhone size, upright (390×664, Playwright's `iPh
 room's ribbon, a carried crate and a carried friend, an enraged guard and
 the hidden infiltrator, looked at, kept in `e2e-out/` (git-ignored) and
 described in your notes. SOP phase 6 rows: a changed mechanism (your notes
-file), decisions made without asking (notes). Do not delete this brief.
+file), decisions made without asking (notes). Leave this brief; the reviewer deletes it.
 
 ## 8. Where questions go
 
-A blocking question goes to the orchestrator, session
-`session_017WiGzGp8auJceLEAAh9Aqx` (the address in the header of
-`docs/questions-for-the-owner.md`), with `send_message`; carry on with
+A blocking question goes to the orchestrator: the session on the
+**Orchestrator:** line in the header of `docs/questions-for-the-owner.md`,
+read after `git pull` when you send, with `send_message`; carry on with
 everything else. Nothing goes to the owner. Flags go in your notes. When
 the lane is pushed and live, send the orchestrator one message,
 **"look2 lane actors done at <commit>"**, plus at most three lines on what

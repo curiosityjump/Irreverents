@@ -1,7 +1,9 @@
 # For the lead
 
-**Standing.** Run per `docs/sop.md`. Written by executing sessions, read
-and cleared by the lead; questions for the owner go to
+**Standing.** Run per `docs/sop.md` (builders: `docs/roles/builder-card.md`,
+section 7). Written by executing sessions a lead briefed, read and cleared by
+the lead (a builder the orchestrator briefs writes `docs/for-the-orchestrator.md`
+or its brief's notes file instead); questions for the owner go to
 `docs/questions-inbox.md`, not here. Empty between rounds is the healthy
 steady state — same convention as `handoff-prompts/`.
 

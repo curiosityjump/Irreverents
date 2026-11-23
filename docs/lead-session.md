@@ -83,7 +83,8 @@ for less tokens, the team has full license to do that"*. So, by default
   paths don't overlap and that gets something in front of the owner sooner.
 - **Paperwork is what a cold successor needs, nothing more:** the status line
   at claim and release, the brief, and a handoff note when you release. A report
-  that a message already carried needs no file entry as well.
+  that a message already carried needs no file entry as well; flags, doubts
+  and skipped checks still go in a file (`docs/roles/builder-card.md`, section 7).
 - **What stays:** briefs before builds, review by re-running, path ownership,
   `DRAFT:`/`INTENT:` markers. Those are what stop drift, collisions and fixing
   what isn't broken.
@@ -440,6 +441,11 @@ Spinning one up directly doesn't relax anything else in this file:
   first sees that status schedules a one-shot wake into the stopped session a
   couple of minutes after the stated reset, saying what was in flight and what
   to relaunch. Confirm it is listed, like any backstop.
+- **At `allowed_warning`, start nothing new.** Read
+  `external_metadata.rate_limit_info` on your own `get_session` before each
+  spawn; at `allowed_warning`, spawn nothing and let in-flight work finish
+  (the account's limit is shared; `docs/roles/orchestrator-card.md`,
+  "Capacity and permissions").
 - **Confirm the backstop actually armed.** A lead in the source project went
   idle three times with a shipped slice unreviewed, having said "next check in
   ~25m" each time; no wake ever fired. Right after scheduling one, list your

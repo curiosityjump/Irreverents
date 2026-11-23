@@ -9,6 +9,81 @@ feature.
 
 ---
 
+## Status
+
+*(Orchestrator `session_017WiGzGp8auJceLEAAh9Aqx`, 2026-11-23 15:10 UTC, at its
+handoff; the "Since 15:10" line added 15:40 UTC by the owner-directed structure
+fix. Re-check with `git log --oneline 058772f..origin/main`.)*
+
+- **Live:** everything from the night, plus Step 8 round 1's look (all nine lanes: real sprites for
+  heroes and cast, tiles, backdrops, props, the phone shell, sound), round 2's ground lane (ec49eb5)
+  and frame push 1 (2d34418); Step 2's feel round (per-hero arcs, wind-up, impact-scaled freeze,
+  floor bounce, the `?tune` panel; 06a07f4); the cantina room and its doorway, with the owner's bell
+  ending the brawl (Step 11); the outpost's horn and waves in a test room (Step 12, 1bdd143).
+- **Not yet:** round 2's frame (rest), actors, heroes and props lanes are building; no real level or
+  enemies through the world yet (Step 16 just opened); nobody has played it end to end on two real
+  iPhones; the tunes are unheard.
+- **The gap list** is `docs/vision-gaps.md` (first audit 7454fd9; Step 16 added at 43556ba).
+- **Since 15:10:** frame push 2 (06180df), props pushes 1–2 (70299ee, 992647b:
+  hits, light in the castle, the ruins kit, the pixel font), actors push 1
+  (646f83d) and heroes push 2 (d426771) are live; the frame, props and heroes
+  lanes await review, actors push 2 is building. Step 11's endless brawl is
+  live (fb619f5). Step 16 slice 1 is briefed (f0a2d90). Since c659b20 the
+  start-up reads are `docs/roles/*-card.md`.
+
+## Sessions
+
+*(15:10 UTC; all report to the session on the Orchestrator line of `docs/questions-for-the-owner.md`.)*
+Step 8 round 2 builders (the orchestrator runs Step 8 itself): frame then actors
+`session_017WiGzGaGuR297NUCFSpVDU`, heroes `session_017WiGzFWVvNJrmXZ81rABuv`, ground then props
+`session_017WiGzHanC1tecHKJbjuyCf`. Step 11 (cantina) lead `session_017WiGzFy3MD6ecvM7QMvQGd`;
+Step 12 (outpost) lead `session_017WiGzJTXQVCWQYDDmC2UiY`; Step 16 (first real level) lead
+`session_017WiGzHt9iJy3caBLkT1Ef4`, spawned 15:04; each lead runs one reused worker. Step 2's lead
+`session_017WiGzGN9egot3JUvSMBBA9` is idle, holding (a) panel polish and (b) the no-numbers check, to
+be rung after round 2 lands. Vision Partner `session_017WiGzHC3CvjTNZqCuxa8Ex`'s successor
+`session_017WiGzGHxdLq71CDUoQZz9Z`; its hourly Drive check was refused by a permission check, so the
+orchestrator runs `python3 -I tools/drive_sync.py` at check-ins. Step 5's lead
+`session_017WiGzJfkNbzJfpRVPhWoeK` holds Step 5. Past orchestrators `session_017WiGzFWfLir1ATiSP7c5E5`,
+`session_017WiGzJeh7Tuov59d8XYmru`, `session_017WiGzHX8g2sXimNRnqp2oZ` and
+`session_017WiGzGp8auJceLEAAh9Aqx` only forward; never archive them.
+
+## Owed next
+
+*(In order, 15:10 UTC; item 1a added 15:40 UTC.)*
+1. Whatever the owner says first.
+1a. The outbox's entry (4294051): a start screen and saved games a friend can
+   join. No step covers it yet: a new step file.
+2. Step 8 round 2: review each lane as it reports (re-run build and check), delete its brief, note it
+   in `docs/plan/step-8.md` "Briefs"; when all five land, round 3 = the same capture, review and
+   synthesize as round 2 (its script: `docs/mechanisms/orchestrator-workflows.md`). When the frame lane lands,
+   update `docs/plan/step-5.md`'s "Controls never hide the game". Route the P01 1–5 ratings in
+   step-8.md's Round 2 to Vision Partner for the asset desk. Delete branch
+   `claude/gallant-keller-1gpm2y` once the heroes lane lands.
+3. Ring Step 2's lead to brief (a)+(b) once round 2's lanes have landed (Q-013 goes with it).
+4. Refresh `docs/vision-gaps.md` whenever a step closes; open the next uncovered gap as capacity
+   frees: Step 13 (a roster you grow by recruiting, gap 12, never drafted), the community swarm
+   (gap 11), objects with surprising uses.
+5. From before, still owed: Step 3 item (a), two phones by touch through the kingdom (most of Step
+   10's tour); the switch gap (two players on one hero; Step 5's network layer; the thrower's
+   predicted swing is noted in step-5.md); Step 4 slice 2 push 4; Step 7 (detector, then wiring,
+   gate E; CLAUDE.md's "Nothing is persisted" line changes then); Step 6 slice B; Step 9.
+
+## Rules in force now
+
+- **Pushes:** free until the owner says they are playing again: *"Don't worry.
+  I'n not playing that shit right now. Redeploy all you want"* (the owner to
+  Vision Partner, first-hand, ~11:40 UTC; receipt in `docs/answers-archive.md`).
+  Before any code push read `/debug/errors` (a deploy empties it) and
+  `/healthz`'s `players`. Documents push freely: they do not redeploy
+  (`docs/mechanisms/deploy.md`).
+- **Capacity:** the account's five-hour limit is shared with the owner's other
+  projects; about ten sessions at once hit it at 12:36 UTC
+  (`docs/process-observations.md`), and its window resets 18:20 UTC. At
+  `allowed_warning` on any session's `external_metadata.rate_limit_info`,
+  start nothing new and let in-flight work finish.
+
+---
+
 ## Why this file exists
 
 The Becoming Flow's own step 3: *"Add this ultraprompt to the appropriate
@@ -99,8 +174,8 @@ to sleep:**
 > Going to sleep now. Realize as much of the vision as possible. Don't stop until you have realized as much as you can.
 
 So the list below does not end at seven, and nobody waits with time in
-hand: a lead whose step closes claims the next open one, and the
-orchestrator keeps more steps open and written than there are free leads.
+hand: a builder or lead whose work closes takes the next, and the
+orchestrator keeps more steps written than there are free hands.
 
 **Desired results, in priority order** (each is a plan step; the order is
 what to protect if the night runs short):
@@ -129,51 +204,20 @@ what to protect if the night runs short):
    coming back to (Step 15). Steps 11–15 are being written from the
    library now.
 
-**Goal.** By the owner's morning (they are on US Eastern time; working
-deadline 11:00 UTC = 06:00 Eastern, 2026-11-23),
-https://irreverents-production.up.railway.app is a game the owner and
-their brother-in-law can open on their own iPhones and play together, with
-as many of results 2–7 in it as were finished and verified, and nothing in
-it half-working.
-
 **Feedback signal.** `docs/measures.md`: M1 (`npm run check:deployed`: the
 live address runs what `main` needs), M2 (`npm run check:live`: two scripted players share the
 live world), M3 (`npm run gates`: build gates with a passing scripted
 check). Each step's own file names its scenarios. None of these says
 whether it is fun; that is the owner's, in the morning.
 
-**Stopping condition.** The owner's morning. Before it, in order:
-- **From 10:00 UTC, `main` only takes finished, verified work.** Anything
-  not done by then is left out behind a `DRAFT:` note or reverted, not
-  pushed half-working. A push is the deploy, and the owner may open the
-  game at any moment after that.
-- **By 10:30 UTC** the orchestrator re-measures M1–M3 on the live address
-  and writes the morning report: what is playable, how to play it with a
-  second person, what to try, and what is the owner's to judge.
-- **From the morning report on, no code push while anyone is in the
-  default world**, except a revert or a fix for something broken on live.
-  Each code push is about a minute of Railway's "Application not found"
-  and a fresh world (measured 04:22 UTC, since the owner's storage volume
-  was attached). `/healthz` says how many players are in the default
-  world, so look before pushing. Documents push freely: they do not
-  redeploy (proven, `docs/mechanisms/deploy.md`).
-
 **Constraints.** The owner's rules in `docs/vision.md` ("What it is not",
 "Principles that decide most questions"); `CLAUDE.md`'s tie-breakers and
 design principles, iPhone-first above all (D-093); the design library's
-labels (a proposal used tonight is in use, not canon: D-096). Art comes
-through Vision Partner (`docs/mechanisms/asset-requests.md`); nothing
-waits for it. The usage limit is shared with the owner's other projects.
-The owner was told "about five leads at once, each with one or two
-workers" and then said not to stop; since 04:53 UTC six leads are
-running, because the king's first half is small and says most about what
-the game is. Hold there until a step closes: at each check-in read
-`rate_limit_info` on a running session, and at any warning stop opening
-steps and let workers finish what is in flight. If the limit is hit,
-everything pauses until about 08:20 UTC and the orchestrator's 08:26 wake
-relaunches what stopped.
+labels (a proposal in use is not canon: D-096). Art comes through Vision
+Partner (`docs/mechanisms/asset-requests.md`); nothing waits for it.
+Pushes and capacity: "Rules in force now", above.
 
-**Escalation.** None to the owner tonight: *"I don't want anything being
+**Escalation.** None to the owner: *"I don't want anything being
 bottlenecked by permissions issues or design decisions from me. … Use your
 own judgment and document the decisions and reasoning whenever you are
 tempted to stop to ask me."* (the owner, 2026-11-23 ~04:11 UTC, to the
@@ -184,52 +228,10 @@ orchestrator when it can answer faster than they can decide. Only what
 the owner alone can supply goes to `docs/questions-inbox.md`, and nothing
 waits on it.
 
-**Status (orchestrator session_017WiGzGp8auJceLEAAh9Aqx, 2026-11-23 15:10 UTC, at its handoff):**
-- **Live:** everything from the night, plus Step 8 round 1's look (all nine lanes: real sprites for
-  heroes and cast, tiles, backdrops, props, the phone shell, sound), round 2's ground lane (ec49eb5)
-  and frame push 1 (2d34418); Step 2's feel round (per-hero arcs, wind-up, impact-scaled freeze,
-  floor bounce, the `?tune` panel; 06a07f4); the cantina room and its doorway, with the owner's bell
-  ending the brawl (Step 11); the outpost's horn and waves in a test room (Step 12, 1bdd143).
-- **Not yet:** round 2's frame (rest), actors, heroes and props lanes are building; no real level or
-  enemies through the world yet (Step 16 just opened); nobody has played it end to end on two real
-  iPhones; the tunes are unheard.
-- **The gap list** is `docs/vision-gaps.md` (first audit 7454fd9; Step 16 added at 43556ba).
-
-**The allowance.** **Owner, 2026-11-23 ~11:30 UTC, to the orchestrator,
-first-hand:** "Ignore the usage limits. Use opus instead of fable if
-needed. We have quite a bit left before we run out of opus. I just started
-a backup orchestrator session running opus. He'll take over if you hit a
-usage limit." So the earlier "one worker at a time" rule is gone. The
-weekly allowance on the session's own model read `allowed_warning` at
-11:32 UTC and resets about 13:00 UTC; work that can run on Opus does.
-**Since 12:01 UTC the orchestrator is `session_017WiGzGp8auJceLEAAh9Aqx`** (the backup, on Opus; it took over when this tenure's Fable limit stopped it at 11:58 UTC; pickup entry at the end of `docs/for-the-orchestrator.md`).
-
 **The look is first** (the owner, 11:11 UTC, `docs/plan/step-8.md`): Step
-8 runs now and its lanes push as they are ready, even with players in the
-world, each fully checked (`docs/decisions-log.md`). For anything else,
-too, pushes and redeploys are free until the owner says they are playing
-again: *"Don't worry. I'n not playing that shit right now. Redeploy all you
-want"* (the owner to Vision Partner, first-hand, ~11:40 UTC; receipt in
-`docs/answers-archive.md`). Read `/debug/errors` before any code push (a
-deploy empties it). Game feel (movement, hits,
-knockback) is second (`docs/answers-archive.md`, "second deadline"), ahead
-of new systems.
-
-**Sessions (15:10 UTC; all report to the orchestrator named in `docs/questions-for-the-owner.md`):**
-Step 8 round 2 workers (the orchestrator leads Step 8 itself): frame then actors
-`session_017WiGzGaGuR297NUCFSpVDU`, heroes `session_017WiGzFWVvNJrmXZ81rABuv`, ground then props
-`session_017WiGzHanC1tecHKJbjuyCf`. Step 11 (cantina) lead `session_017WiGzFy3MD6ecvM7QMvQGd`;
-Step 12 (outpost) lead `session_017WiGzJTXQVCWQYDDmC2UiY`; Step 16 (first real level) lead
-`session_017WiGzHt9iJy3caBLkT1Ef4`, spawned 15:04; each lead runs one reused worker. Step 2's lead
-`session_017WiGzGN9egot3JUvSMBBA9` is idle, holding (a) panel polish and (b) the no-numbers check, to
-be rung after round 2 lands. Vision Partner `session_017WiGzHC3CvjTNZqCuxa8Ex`'s successor
-`session_017WiGzGHxdLq71CDUoQZz9Z`; its hourly Drive check was refused by a permission check, so the
-orchestrator runs `python3 -I tools/drive_sync.py` at check-ins. Step 5's lead
-`session_017WiGzJfkNbzJfpRVPhWoeK` holds Step 5. Past orchestrators `session_017WiGzFWfLir1ATiSP7c5E5`,
-`session_017WiGzJeh7Tuov59d8XYmru`, `session_017WiGzHX8g2sXimNRnqp2oZ` and
-`session_017WiGzGp8auJceLEAAh9Aqx` only forward; never archive them.
-**Capacity:** about ten sessions at once hit the account's five-hour limit at 12:36 UTC
-(`docs/process-observations.md`); its window resets 18:20 UTC. At `allowed_warning`, start nothing new.
+8 runs now and its lanes push as they are ready, each fully checked
+(`docs/decisions-log.md`). Game feel (movement, hits, knockback) is second
+(`docs/answers-archive.md`, "second deadline"), ahead of new systems.
 
 **Owner, 2026-11-23 ~14:30 UTC, to Vision Partner, first-hand, after being told what is live (five small rooms, a king, one guard, one shopkeeper, one villain; no enemies, no cantina, no outpost):**
 > I haven't seen any levels being built, enemies, the cantina, etc. there is a bunch of stuff I haven't seen yet
@@ -240,7 +242,7 @@ look. They didn't say to reorder.
 
 **Breadth runs beside the look (orchestrator session_017WiGzGp8auJceLEAAh9Aqx, 14:25 UTC), in answer to
 the owner's words above.** `DRAFT:` Step 8's look keeps going (round 2), and
-two more leads start now, each running one worker at a time: **Step 11, the
+two more leads start now, each running one reused worker: **Step 11, the
 cantina** (an endless brawl, the room where the party changes: enemies to
 hit, and a new place) and **Step 12, the outpost and the chase** (hostile
 guards who call for help, a new place, a chase through doors). More rooms in
@@ -250,24 +252,21 @@ more leads beside the look. At ten sessions at once it stopped everything at
 12:36 UTC (`docs/process-observations.md`). To undo: release the two claims.
 Q-010 was answered since: the order is the orchestrator's.
 
-**Owed next, in order (15:10 UTC):**
-1. Whatever the owner says first.
-2. Step 8 round 2: review each lane as it reports (re-run build and check), delete its brief, note it
-   in `docs/plan/step-8.md` "Briefs"; when all five land, round 3 = the same capture, review and
-   synthesize as round 2 (its workflow is recorded in the handoff entry). When the frame lane lands,
-   update `docs/plan/step-5.md`'s "Controls never hide the game". Route the P01 1–5 ratings in
-   step-8.md's Round 2 to Vision Partner for the asset desk. Delete branch
-   `claude/gallant-keller-1gpm2y` once the heroes lane lands.
-3. Ring Step 2's lead to brief (a)+(b) once round 2's lanes have landed (Q-013 goes with it).
-4. Refresh `docs/vision-gaps.md` whenever a step closes; open the next uncovered gap as capacity
-   frees: Step 13 (a roster you grow by recruiting, gap 12, never drafted), the community swarm
-   (gap 11), objects with surprising uses.
-5. From before, still owed: Step 3 item (a), two phones by touch through the kingdom (most of Step
-   10's tour); the switch gap (two players on one hero; Step 5's network layer; the thrower's
-   predicted swing is noted in step-5.md); Step 4 slice 2 push 4; Step 7 (detector, then wiring,
-   gate E; CLAUDE.md's "Nothing is persisted" line changes then); Step 6 slice B; Step 9.
-
 ## History
 
 *(One line per replaced directive: date, what it chased, where it
 landed.)*
+
+- 2026-11-23 03:23–11:00 UTC: "playable by the time I wake up": the live game
+  playable by the owner and their brother-in-law on iPhones by 11:00 UTC, with
+  `main` taking only finished work from 10:00 and no code push while anyone was
+  in the default world after the morning report. Landed: Step 1 closed 08:55
+  UTC (two players share the live world); the owner's ~11:40 "Redeploy all you
+  want" ended the push rules, and Q-010 (~15:00) replaced the goal.
+- 2026-11-23 ~11:30 UTC, the owner: *"Ignore the usage limits. Use opus instead
+  of fable if needed. We have quite a bit left before we run out of opus. I just
+  started a backup orchestrator session running opus. He'll take over if you hit
+  a usage limit."* It ended the night's "one worker at a time" rule and moved
+  work to Opus; the backup took over at 12:01 UTC. The `allowed_warning` rule
+  under "Rules in force now" came after ten sessions at once stopped everything
+  at 12:36 UTC.

@@ -49,7 +49,10 @@ recording their decisions where they govern — that is your job, not
 theirs, for every lead running on this project. The owner does the
 identical thing to you, one level further up, periodically.
 
-The chain is four deep:
+The chain is four deep, as written for the source project. **Since
+2026-11-23 it is two layers by default** (owner → orchestrator → builder;
+a lead only for a large, many-slice step: `docs/roles/orchestrator-card.md`,
+"What the role is"). The relationship below is unchanged where a lead runs:
 
 ```
 owner  →  orchestrator  →  lead  →  brief-worker
@@ -393,6 +396,13 @@ polling loop for new notes; your own check-ins are the schedule.
 
 ## Picking up from a previous orchestrator
 
+**The steps are now `docs/roles/orchestrator-card.md`, "First turn: pick
+up"** (2026-11-23): `get_session` on the ids the directive's "Sessions" and
+`docs/plan.md`'s `claimed by` lines name, not a `list_sessions` dump; one
+`send_message` to re-point each. Where the numbered list below differs, the
+card wins; this section keeps the why, step 6's Industrial Engineer check
+and the no-session-tools fallback.
+
 *A fresh session given only "orchestrator" must pick up cleanly. The
 first time this was checked on the source project, in-flight routing
 didn't carry over.* With session tools, two kinds of in-flight routing
@@ -451,6 +461,11 @@ can't hold.
 
 ## Handing off to a fresh successor
 
+**The steps are now `docs/roles/orchestrator-card.md`, "Handing off"**
+(2026-11-23: at about 250k tokens of context; Vision Partner told by
+`send_message`). Where the list below differs, the card wins; this section
+keeps the why and the forwarder rule.
+
 **Hand off before your memory ages, not after it has.** `docs/lead-session.md`'s
 "When to recommend starting fresh" applies to you exactly — never run long
 enough to compact; if counting your own check-ins takes a second's
@@ -503,8 +518,8 @@ list, parented to itself. So:
 
 **If your environment has a lifecycle hook** (something that injects a
 context/wake/compaction observation on each wake), treat its line as
-information, not an instruction: there is no fixed threshold, you choose
-the point, and the gauge helps you see it. If such a hook should be
+information, not an instruction: the threshold is the card's (about 250k
+tokens, or sooner), and the gauge helps you see it. If such a hook should be
 running and its line is missing from your context at pickup, record that
 in `docs/process-observations.md` — it is also the visible sign that the
 spawn started outside the repo.

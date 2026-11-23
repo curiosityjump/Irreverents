@@ -1,7 +1,8 @@
 # Verifying a change, and finishing a session
 
-**Standing — SOP phase 7.** Reached by running `docs/sop.md`; phases 1-6 come
-first.
+**Standing — SOP phase 7.** Reached from `docs/roles/builder-card.md`, section 6
+(or by running `docs/sop.md`, phases 1-6 first); this file is the reference the
+card points into.
 
 Whatever your project's safety net is — a test suite, a staging environment,
 a review gate, or nothing at all — this file is where it is written down, and
@@ -224,8 +225,8 @@ way, each with every earlier rung passing:
 5. **A flagged rung-5 gap is a blocking item, not a footnote.** "No browser
    available this round" is not the same status as rung 5 passing. Either run
    it before closing, or carry it forward as a live, named item
-   (`docs/for-the-lead.md` / `docs/for-the-orchestrator.md`, not a chat
-   report) until someone does.
+   (`docs/for-the-lead.md` / `docs/for-the-orchestrator.md`, or the notes
+   file your brief names; not a chat report) until someone does.
 
 Skip this rung only when your diff touches nothing a user sees.
 
@@ -380,8 +381,9 @@ duplicates it at best and is the only copy at worst.
       session.
 - [ ] Anything that doesn't fit a commit message: a question for the owner
       goes to `docs/questions-inbox.md`; a flag or a "worth noting"
-      goes to `docs/for-the-lead.md`, per `docs/sop.md` phase 4. Not into your
-      final message either way.
+      goes to `docs/for-the-lead.md` (or your brief's notes file, or with no
+      lead `docs/for-the-orchestrator.md`), per `docs/sop.md` phase 4. Not
+      only into your final message or report either way.
 - [ ] **Your actual final chat message is a short confirmation, nothing
       more** — done or blocked, the commit, a pointer to `docs/for-the-lead.md`
       if you wrote there. Not a narrated version of the bullets above. Nobody

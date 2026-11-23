@@ -119,7 +119,7 @@ prose (`docs/roles/orchestrator-card.md`, "Handing off").
 **How:**
 - **Spend:** `get_session` on every session of the tenure (the
   orchestrator itself with no id, Vision Partner, every lead and builder
-  it or its leads ran) and sum `cost_usd`. For a session that spans two
+  it or its leads ran) and sum `external_metadata.usage.cost_usd`. For a session that spans two
   tenures, count only its spend since the last row. Read it when the
   session is done, not a figure recorded at its close (those have run
   low; `docs/orchestrator-role.md`).

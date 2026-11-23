@@ -38,7 +38,8 @@ wrong: say so.
    measured answer: the launch prompt was only ever `work <handoff-prompts/file.md>`,
    two words and a path, and every session ran the SOP anyway, because
    `CLAUDE.md` (loaded automatically) routes a session handed a brief to
-   `docs/sop.md`. **What this item protects:** a brief supplies the *material*
+   its start-up read (`docs/roles/builder-card.md` since 2026-11-23;
+   `docs/sop.md` before). **What this item protects:** a brief supplies the *material*
    for SOP phase 2, and the session needs the *file's location* to find it.
 
 1. **The task, and which row of the measure table it moves.** `docs/plan.md`'s
@@ -112,8 +113,12 @@ wrong: say so.
    goes to `docs/questions-inbox.md` (its header says how; only Vision
    Partner writes `docs/questions-for-the-owner.md`); a flag or
    finding that is not a question goes to `docs/for-the-lead.md`, which the
-   lead reads every round. See `docs/sop.md` phase 4 for the full split and
-   `docs/for-the-lead.md` for the format.
+   lead reads every round, or to the notes file the brief names (with no
+   lead, `docs/for-the-orchestrator.md`). See `docs/sop.md` phase 4 for the
+   full split and `docs/for-the-lead.md` for the format. **Name the
+   report-to by role:** a lead by its id; the orchestrator as "the session
+   on the Orchestrator line of `docs/questions-for-the-owner.md`", never by
+   an orchestrator's id (orchestrators hand off) and never as "@parent".
 
    **The final message itself should say almost nothing**: a short
    confirmation (done or blocked, the commit, and a pointer to

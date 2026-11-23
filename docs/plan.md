@@ -299,7 +299,7 @@ Full text: `docs/plan/step-7.md`
 
 ## Step 8 — What you see and hear
 
-**Status: open, claimed by session_017WiGzHX8g2sXimNRnqp2oZ, 2026-11-23.** (Put first by the owner at 11:11 UTC: "don't stop working on it until it looks similar to that". Run by the orchestrator itself as workflow rounds; see the step file, "The look".)
+**Status: open, claimed by orchestrator session_017WiGzGp8auJceLEAAh9Aqx (builders: session_017WiGzGaGuR297NUCFSpVDU, session_017WiGzFWVvNJrmXZ81rABuv, session_017WiGzHanC1tecHKJbjuyCf), 2026-11-23.** (Put first by the owner at 11:11 UTC; that orchestrator has handed off, so the next one re-claims it at pickup.)
 
 Full text: `docs/plan/step-8.md`
 

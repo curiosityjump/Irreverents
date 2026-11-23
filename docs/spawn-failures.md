@@ -89,6 +89,22 @@ them blindly — platforms change.
   `send_message` was correctly refused — a message from another session is
   not the user's instruction. A new brief goes to a new session through its
   spawn prompt; `send_message` carries information, not work.
+  **2026-11-23 ~15:40 UTC: no longer the default; this is now the fallback.**
+  The owner asked for reused builders ("Implement the structural changes
+  you recommended for efficiency"; `docs/decisions-log.md`, "Two layers,
+  reused builders…"), so the orchestrator sends a builder its next brief by
+  message. What makes that work and not a peer's say-so: the task is the
+  brief file on `main`, written by the orchestrator under the owner's
+  standing permission (`CLAUDE.md`, "Git: one branch"), and the message
+  only names it; the builder pulls and re-reads the file
+  (`docs/roles/builder-card.md`, "7 · Report, then wait"). A message that
+  asks for work no brief file holds is still information only. A builder
+  that refuses gets a fresh spawn on the same brief and an entry here.
+  Measured so far: two Step 8 round-2 builders each pushed a second lane
+  (`session_017WiGzGaGuR297NUCFSpVDU`: frame 06180df, then actors 646f83d;
+  `session_017WiGzHanC1tecHKJbjuyCf`: ground ec49eb5, then props 70299ee),
+  but whether the second came by message or in the spawn prompt was not
+  recorded, so the step file's "Briefs" line now says which. `DRAFT:`
 - **Spawn chains have a depth limit.** When orchestrators each spawn their own
   successor, depth accumulates until leads can no longer spawn workers or
   workers can't wake their leads. An orchestrator started by the owner resets

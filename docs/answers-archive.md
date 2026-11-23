@@ -11,13 +11,14 @@ and that commit's message names what was done. Nothing is appended here
 any more; the lines below stay as history, still worth grepping. `DRAFT:`
 
 Vision Partner and the orchestrator grep this file before asking anything
-(`docs/questions-inbox.md`, step 2), so a question answered once is never
-asked again.
+(`docs/questions-inbox.md`, step 2). It covers answers up to 2026-11-23
+~15:20 UTC; for later ones, grep `git log` for the outbox commits (and the
+governing documents, which hold every answer).
 
-## Format
+## Format (historical)
 
-One line per answer, appended by the orchestrator when it cuts the entry
-from `docs/answers-outbox.md`:
+Until 2026-11-23, one line per answer, appended by the orchestrator when
+it cut the entry from `docs/answers-outbox.md`:
 
 ```markdown
 - Q-NNN · <title> → <file> "<section>", <commit>; acted on by orchestrator <date>: <what it did, or "none">.

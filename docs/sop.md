@@ -140,7 +140,9 @@ keep going — you always keep going.**
   reads it to the owner. **Never put it in your final message:** an
   executing session's chat is typically deleted once its brief ships,
   unread. A flag or finding that is not a question for the owner goes to
-  `docs/for-the-lead.md` — format and full reasoning there.
+  `docs/for-the-lead.md` — format and full reasoning there — or to the
+  notes file your brief names, or, with no lead, to
+  `docs/for-the-orchestrator.md` (`docs/roles/builder-card.md`, section 7).
 
 **A flag or finding with nowhere obvious to go follows the same fork.**
 Nothing you found gets *decided* by you if it was the owner's to decide —
@@ -161,7 +163,8 @@ nothing needs restating in chat.
 every decision you made in their place has an entry in
 `docs/decisions-log.md` and a `DRAFT:` at its site; every question that
 truly needs them is in `docs/questions-inbox.md` and every flag in
-`docs/for-the-lead.md`, not in your final message; your final message is a
+`docs/for-the-lead.md` (or your brief's notes file, or with no lead
+`docs/for-the-orchestrator.md`), not only in your final message; your final message is a
 short confirmation, not a narrated report; nothing that might be
 deliberate got "fixed".
 
@@ -205,10 +208,10 @@ fill the rows you triggered. Every fact has **exactly one** home.
 | A principle that decides many *unrelated* questions | `CLAUDE.md`, one bullet — and something else should come out |
 | Where a kind of code belongs | the architecture layout file `CLAUDE.md` points to |
 | A measured number | the doc that makes a claim from it; how the measure is taken lives in `docs/measures.md` |
-| A handoff prompt whose slice shipped | **delete the file.** They are scratch; an empty `handoff-prompts/` is the healthy steady state |
+| A handoff prompt whose slice shipped | **the reviewer (lead or orchestrator) deletes the file** after review; the builder leaves it. They are scratch; an empty `handoff-prompts/` is the healthy steady state |
 | **A decision you made in the owner's place instead of stopping to ask** | `docs/decisions-log.md` (one entry, in the owner's terms) **and** a `DRAFT:` at the site **and** the governing doc as usual — see phase 4 |
 | **Something only the owner can supply** (a fact, an action on a service, their taste after playing) | `docs/questions-inbox.md` (its header says how) — never your final message, and nothing waits on it. The Vision Partner moves it into `docs/questions-for-the-owner.md` and reads it to the owner |
-| **A flag/finding with no home above** | `docs/for-the-lead.md` — never your final message. The lead reads it every round |
+| **A flag/finding with no home above** | `docs/for-the-lead.md`, or the notes file your brief names, or (no lead) `docs/for-the-orchestrator.md` — never only your final message or a report. The reviewer reads it |
 | **A session-spawn failure** (rate limit, empty/malformed launch, anything else that keeps a session from starting) | `docs/spawn-failures.md` — the moment you recover from it, not batched for later |
 | **The process itself cost or saved something unusual**: a brief missing what you needed, work that had to be redone, conflicting instructions, a check that lied, clearly wasted model work, or an approach that worked unusually well | `docs/process-observations.md`: a few lines on what you already saw, then keep working. Only when it was exceptional. Routine work writes nothing |
 | **A `docs/plan.md` step that just closed in full** (every item done, no unresolved owner question left inside it) | its full text moves verbatim to `docs/plan-archive.md`, replaced in `plan.md` with a short closing summary — see `plan.md`'s own "Keeping this plan honest" for the exact rule (and `docs/plan/README.md` if the step lives in its own file) |

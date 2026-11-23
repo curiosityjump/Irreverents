@@ -20,7 +20,9 @@ the record; `docs/answers-archive.md` holds receipts up to 2026-11-23).
 
 ## How to feed this file
 
-**Don't append here — only Vision Partner writes this file.** New
+**Don't append here — only Vision Partner writes this file** (except the
+header's **Orchestrator** line, which each orchestrator sets at pickup and
+handoff, `docs/roles/orchestrator-card.md`). New
 questions go to `docs/questions-inbox.md` (its
 header says how, and holds the entry format). Vision Partner moves each
 one into **Open** below. Answers leave through `docs/answers-outbox.md`;

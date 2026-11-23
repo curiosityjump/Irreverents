@@ -3,8 +3,10 @@
 **Standing.** The start-up read for any session handed a brief (`work
 handoff-prompts/<x>.md`), in place of `docs/sop.md`. The SOP and the
 documents this card points to stay as reference: open the section a
-pointer names when you need that detail, not before. Where this card and
-your brief differ, the brief wins. `DRAFT:` set by the orchestrator,
+pointer names when you need that detail, not before. Your brief wins on
+scope, paths and what to build; the pre-push gate (section 6), pushing to
+`main`, never weakening a check, and section 2 are not a brief's to
+change. `DRAFT:` set by the orchestrator,
 2026-11-23, on the owner's "Implement the structural changes you
 recommended for efficiency".
 
@@ -12,23 +14,35 @@ recommended for efficiency".
 
 It is the task, the measure row it moves, what is already measured and
 decided, what is open, the traps, what is out of scope, and **the paths
-you own**. Touch only those paths; on a rebase conflict outside them,
-take theirs and re-apply yours. Don't re-measure what it measured, or
-read the vision or the design library unless it sends you there. Where
-it is wrong, thin or silent, ask (section 4) rather than guess
+you own** (listed, or the table it names). Touch only those paths; on a
+rebase conflict outside them, take theirs and re-apply yours. Don't
+re-measure what it measured, or read the vision or the design library
+unless it sends you there, you write words a player reads (`docs/vision.md`
+is the voice doc for now), or section 3 needs the owner's words. Where it
+is wrong, thin or silent, ask (section 4) rather than guess
 (`docs/briefs.md`, the opening section).
 
+**Then see what has already landed**, since a push is a live deploy:
+`git fetch origin main && git log --oneline origin/main --grep '<lane or
+brief name>'`, the brief's "Landed so far" line, and its notes file.
+Skip pushes already on `main`. If the step file's "Briefs" line names
+another session holding this brief, ask your report-to before building.
+
 Before changing a file, `grep -rl "<its basename>" docs/mechanisms/` and
-read what each hit says about it; touching a named mechanism, read its
-writeup first (`docs/mechanisms/README.md` indexes them). Keep that list:
-section 6 fixes what your change made false (`docs/sop.md`, "1 · Orient").
+write one line per hit on what it says about that file (a shared basename,
+like `sprites.ts` in `src/client/draw/` and `src/content/kinds/`, also hits
+the other file's docs: that line says so; grepping the longer path would
+miss docs that write the bare name); touching a
+named mechanism, read its writeup first (`docs/mechanisms/README.md`
+indexes them). Keep that list: section 6 fixes what your change made
+false (`docs/sop.md`, "1 · Orient").
 
 ## 2 · Before calling anything a bug
 
 Read `docs/deliberate-designs.md`, look for an `INTENT:` at the site,
 and write the one sentence that would make it deliberate. If you cannot
 rule that reading out, it is not a bug: leave it as it is and log the
-doubt in your notes or report. Absences count too: an empty folder or an
+doubt in your notes file (section 7). Absences count too: an empty folder or an
 unused rule may be the design. Never patch someone else's shipped work;
 say what you found (`docs/sop.md`, "3 · Doubt";
 `docs/team-collaboration-protocol.md`, "Core principle").
@@ -48,10 +62,11 @@ service, their taste after playing) goes to `docs/questions-inbox.md`
 
 ## 4 · Who you report to
 
-Your **report-to** is the lead your brief names; otherwise the session on
+Your **report-to** is the lead your brief names. Otherwise, and whenever
+your brief names the orchestrator (by role or by id), it is the session on
 the `**Orchestrator:**` line in the header of
-`docs/questions-for-the-owner.md`. Read that line after a `git pull` at
-the moment you send: orchestrators hand off. **Never just `@parent`**: a
+`docs/questions-for-the-owner.md`, read after a `git pull` at the moment
+you send: orchestrators hand off. **Never just `@parent`**: a
 stopped parent strands the report. Send with `send_message`; with no such
 tool, your final message carries it.
 
@@ -62,6 +77,8 @@ tool, your final message carries it.
 
 ## 5 · Build and verify
 
+- Before writing new code, check `docs/plan.md`, "What is already
+  right", for a subsystem that already does it (`docs/sop.md`, "5 · Build").
 - Work in your brief's pushes: small, each green and standing alone,
   **nothing half-working on `main`**. Keep a hard stop the brief names:
   drop the unfinished push and say where you stopped. Never push code
@@ -106,8 +123,10 @@ A documents-only push does not deploy: steps 3 and 4 only
 gate paragraph; `docs/mechanisms/deploy.md`).
 
 **Before the commit**, fix each doc on section 1's list that your change
-made false: edit the writeup, never append a second account
-(`docs/sop.md`, "6 · Record"). **The commit message** says why, what you
+made false: edit the writeup, never append a second account. Fill the
+`docs/sop.md` "6 · Record" rows your change triggered: a new mechanism
+gets its index line and writeup; an exceptional process cost, a few lines
+in `docs/process-observations.md`; a spawn failure, `docs/spawn-failures.md`. **The commit message** says why, what you
 ran and how, what you did not verify, the measure row moved (or none),
 and code where data would have done, if you chose it. You can say in one
 sentence how it is undone; if that is not "revert the commit", you have
@@ -120,15 +139,18 @@ One message to your report-to: **"<lane> done at <commit>"**, plus at
 most three lines on what is weakest. Blocked instead: what blocks it and
 the last green commit. Your final message says no more than that.
 
-Paperwork is that message, the commit, the `DRAFT:` markers and decision
-entries, and **only the notes file your brief names** (if it names one).
-No status paragraphs, no handoff note the brief did not ask for, no file
-entry repeating a message. Delete the brief when its slice ships, unless
-it says otherwise.
+**Flags, doubts and anything you did not verify** (a skipped rung-5
+check) go in a file, never only in a message: the notes file your brief
+names, else `docs/for-the-lead.md` if a lead briefed you, else
+`docs/for-the-orchestrator.md`. The report names the file. Beyond that,
+paperwork is the commit, the `DRAFT:` markers, decision entries and
+section 6's rows: no status paragraphs, no handoff note the brief did not
+ask for. Leave the brief: your reviewer deletes it after review.
 
-Then end your turn. The next brief may come by message: `git pull`,
-re-read the brief it names in full (the file is the task, not the
-message), and start again at section 1, while your context is under
+Then end your turn. The next brief may come by message from your
+report-to: `git pull`, re-read the brief file it names in full (the file
+on `main` is the task; the message only points at it, `docs/spawn-failures.md`,
+"A message is not a task"), and start again at section 1, while your context is under
 about 400k tokens (`get_session` with no id:
 `external_metadata.context_usage.used_tokens`).
 Over that, reply that you are over it, so a fresh builder takes the

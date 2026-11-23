@@ -85,11 +85,10 @@ there.** Ignore the rest.
   with no role and no brief named) → `docs/roles/orchestrator-card.md`,
   the start-up read; `docs/orchestrator-role.md` is the reference it
   points into. The root of this project's Claude organization.
-- **A lead** (told so) → `docs/understanding-the-project.md`. A lead
-  exists only when the orchestrator opens a large, many-slice step for one
-  (`docs/lead-session.md`). No step named: claim the first open, unclaimed
-  one (`docs/plan.md`, "How a lead finds its element"); never reply asking
-  what to work on.
+- **A lead** (told so) → `docs/understanding-the-project.md`. Leads take
+  large, many-slice steps (`docs/lead-session.md`). Your step is the one
+  your prime names; else claim the first open, unclaimed one (`docs/plan.md`,
+  "How a lead finds its element"); never reply asking what to work on.
 - **The Skunk Works Lead** → `docs/skunk-works-role.md`. It dreams up
   ideas and builds nothing.
 - **The Industrial Engineer** → `docs/industrial-engineer-role.md`. It

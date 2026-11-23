@@ -1,9 +1,12 @@
 # Brief: the look, round 2, lane "heroes": a grappler and an infiltrator you can read at phone size
 
-**Scratch.** Delete this file when the lane has shipped. Written
-2026-11-23 by the orchestrator `session_017WiGzGp8auJceLEAAh9Aqx`, who
-leads Step 8 (`docs/plan/step-8.md`, "The look" and "Round 2
-(2026-11-23)").
+Written 2026-11-23 by the orchestrator, which runs Step 8 itself
+(`docs/plan/step-8.md`, "The look" and "Round 2 (2026-11-23)").
+The reviewer deletes it after review.
+
+**Landed so far** (2026-11-23 15:40 UTC; held by builder
+`session_017WiGzFWVvNJrmXZ81rABuv`): da8424a (grappler and infiltrator redrawn); d426771 (the grappler's `carryAt`). Check
+`git log --oneline origin/main --grep 'round 2, heroes lane'` before building.
 
 ## 1. The task, and the measure
 
@@ -259,9 +262,9 @@ orchestrator does once the lane is reviewed.
 
 ## 8. Where questions go
 
-A blocking question goes to the orchestrator, session
-`session_017WiGzGp8auJceLEAAh9Aqx` (the address in the header of
-`docs/questions-for-the-owner.md`), directly with `send_message` on the
+A blocking question goes to the orchestrator: the session on the
+**Orchestrator:** line in the header of `docs/questions-for-the-owner.md`,
+read after `git pull` when you send, directly with `send_message` on the
 claude-code-remote tools; carry on with everything that does not depend
 on the answer. Nothing goes to the owner. Flags go in your notes file,
 not your final message. When the lane is pushed and live, send the

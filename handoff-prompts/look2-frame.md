@@ -1,9 +1,12 @@
 # Brief: the look, round 2, lane "frame": the game fills the phone, sky above, ground below, light and depth
 
-**Scratch.** Delete this file when the lane has shipped. Written
-2026-11-23 by the orchestrator `session_017WiGzGp8auJceLEAAh9Aqx`, who
-leads Step 8 (`docs/plan/step-8.md`, "The look" and "Round 2
-(2026-11-23)").
+Written 2026-11-23 by the orchestrator, which runs Step 8 itself
+(`docs/plan/step-8.md`, "The look" and "Round 2 (2026-11-23)").
+The reviewer deletes it after review.
+
+**Landed so far** (2026-11-23 15:40 UTC; held by builder
+`session_017WiGzGaGuR297NUCFSpVDU`): push 1, 2d34418; push 2, 06180df. Check
+`git log --oneline origin/main --grep 'round 2, frame lane'` before building.
 
 ## 1. The task, and the measure
 
@@ -243,13 +246,13 @@ game) and after screenshots of all six rooms at iPhone size, upright
 667×375), looked at, kept in `e2e-out/` (git-ignored), and described in
 your notes (share of the picture that is the room, sky and ground; scale);
 notes updated. SOP phase 6 rows: a changed mechanism (your notes files),
-decisions made without asking (notes). Do not delete this brief.
+decisions made without asking (notes). Leave this brief; the reviewer deletes it.
 
 ## 8. Where questions go
 
-A blocking question goes to the orchestrator, session
-`session_017WiGzGp8auJceLEAAh9Aqx` (the address in the header of
-`docs/questions-for-the-owner.md`), with `send_message`; carry on with
+A blocking question goes to the orchestrator: the session on the
+**Orchestrator:** line in the header of `docs/questions-for-the-owner.md`,
+read after `git pull` when you send, with `send_message`; carry on with
 everything else. Nothing goes to the owner. Flags go in your notes. When
 the lane is pushed and live, send the orchestrator one message,
 **"look2 lane frame done at <commit>"**, plus at most three lines on what

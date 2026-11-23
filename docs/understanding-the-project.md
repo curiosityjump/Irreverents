@@ -131,8 +131,10 @@ by re-running, records decisions where they belong. Executing sessions
 run `docs/sop.md` and see one brief — method in `docs/lead-session.md`.
 
 **Above the lead, the orchestrator** (`docs/orchestrator-role.md`) — the
-one session the owner talks to about the build, spinning up a lead per plan
-element; leads report to it. `docs/roles/README.md` lists every role.
+one session the owner talks to about the build; leads report to it. Since
+2026-11-23 it briefs builders directly and opens a lead only for a large,
+many-slice step (`docs/roles/orchestrator-card.md`); builders start from
+`docs/roles/builder-card.md`. `docs/roles/README.md` lists every role.
 
 **Vision → Plan → Briefs.** `docs/vision.md` — the owner's own words on
 where this is going — is upstream of `docs/plan.md`. The owner and the
