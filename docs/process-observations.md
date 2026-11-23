@@ -266,3 +266,9 @@ Step 1 Gate 2 worker (`session_017WiGzGmZK2vRuZTfKA24QD`). The Gate 2 brief was 
   brief; three were live 24 minutes after launch, so an earlier stop
   from the orchestrator cost nothing.
 
+
+### Orchestrator (4), 2026-11-23 13:27 UTC: a backup on another model covers a model limit, not the account limit
+
+**What happened:** the owner started an Opus backup orchestrator (`session_017WiGzGp8auJceLEAAh9Aqx`) at 11:15 UTC because the Fable orchestrator's weekly allowance read `allowed_warning`. Fable stopped at 11:58 ("your Fable limit resets 1pm"); the backup took over at 12:01 and relaunched two lanes on Opus. Then, from about 12:36 to 13:20 UTC, the account-wide five-hour limit ("your 5-hour limit resets 1:20pm") stopped every session on every model, the backup included. Its 13:02 wake was delivered at 13:25, and the owner had to say "Resume all".
+**Suspected cause:** about ten sessions running at once (nine look lanes plus a feel lead and its workers) on one account. Moving work to a second model spreads the per-model cap but not the shared five-hour one. Every Opus session read `allowed_warning` on the five-hour window from 12:02, and the backup opened two more sessions anyway.
+**Disposition:** none yet (one incident). Tactical: at a five-hour `allowed_warning`, start nothing new. Arm every wake for after the latest reset any limit names, not for the first.
