@@ -12,7 +12,8 @@ import type { System } from '../types.ts';
  * DRAFT (the Step 12 lead, 15:05 UTC, for Step 16): who fights is any
  * person of the `bad` side whose body lists `attack`, wherever they are
  * placed or walked in, not only in an outpost's room. Today that is the
- * outpost fighter; Step 4's villain and guard bodies do not list attack.
+ * outpost fighter and Step 16's kinds, and (Step 18) the villain, whose
+ * kind fights only a hero who struck him (`"fights": "when-struck"`).
  *
  * INTENT (D-065, "Escalation is not omniscient"): the only read of a hero's
  * position is under canSee on the same tick. Losing sight, a fighter walks
@@ -33,7 +34,10 @@ const system: System = {
         if (e.c.outpostCall?.phase === 'going' || e.c.outpostCall?.phase === 'sounding') continue;
         if (isOut(e) || !canAct(e)) continue;
         if (!content.characters[e.kind]?.verbs.includes('attack')) continue;
-        const heroes = heroesIn(world, e.room);
+        // Step 18: a kind that fights only when struck narrows the heroes to those who struck it
+        // (src/sim/systems/fight-struck.ts); it still fights only one it sees, below.
+        const struck = npcKind(content, e)?.fights === 'when-struck' ? (e.c.struck ?? {}) : null;
+        const heroes = heroesIn(world, e.room).filter((h) => struck === null || h.id in struck);
         const me = centre(content, e);
         let seen: { x: number; y: number } | null = null;
         let best = Infinity;

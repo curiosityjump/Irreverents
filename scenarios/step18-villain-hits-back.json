@@ -1,0 +1,19 @@
+{
+  "id": "step18-villain-hits-back",
+  "proves": "Step 18 signal 4: the villain fights only once a hero has struck him (his kind's \"fights\": \"when-struck\", src/sim/systems/fight-struck.ts and outpost-fight). An infiltrator waits until he is back resting after his first robbery, walks to his right, turns and swings once; he hits the hero back within 15 s. Control 1: no swing, and he never hits the hero in 1800 ticks. Control 2: \"on-sight\" turns 7 more scenarios red (he fights every hero he sees)",
+  "room": "test-shop",
+  "placements": true,
+  "players": [{"id": "a", "character": "infiltrator", "spawn": 0}],
+  "inputs": [
+    {"player": "a", "from": 420, "to": 450, "x": 1},
+    {"player": "a", "from": 451, "to": 452, "x": -0.01},
+    {"player": "a", "from": 453, "to": 454, "hold": ["attack"]}
+  ],
+  "ticks": 1800,
+  "expect": [
+    {"fact": "event-where", "event": "hit", "where": {"by": "p:a", "target": "villain-1"}, "between": [455, 455], "count": [1, 1]},
+    {"fact": "event-where", "event": "hit", "where": {"by": "p:a"}, "between": [0, 1800], "count": [1, 1]},
+    {"fact": "event-where", "event": "hit", "where": {"by": "villain-1", "target": "p:a"}, "between": [0, 454], "count": [0, 0]},
+    {"fact": "event-where", "event": "hit", "where": {"by": "villain-1", "target": "p:a"}, "between": [455, 1355], "count": [1, 99]}
+  ]
+}

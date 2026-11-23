@@ -19,7 +19,20 @@ export interface NpcKind {
   moods: Record<Mood, Behaviour>;
   /** What they say, by cue (a mood cue or a reaction id). A cue with no entry says nothing. */
   barks: Record<string, string>;
+  /**
+   * Step 18: when a `bad` person whose body lists `attack` fights a hero
+   * (src/sim/systems/outpost-fight.ts). `on-sight` (left out): any hero they
+   * see, as Step 12's camp and Step 16's quarry kinds do. `when-struck`:
+   * only a hero who hit, grabbed or threw them in the last
+   * `npcStruckMemory` seconds (src/sim/systems/fight-struck.ts).
+   * DRAFT (Step 18): the villain is `when-struck`, so gate C's rob and
+   * buy-politely loop stays; recognising a threat is OPEN (D-062, D-070).
+   */
+  fights: Fights;
 }
+
+export const FIGHTS = ['on-sight', 'when-struck'] as const;
+export type Fights = (typeof FIGHTS)[number];
 
 /**
  * INTENT (D-048): exactly three moods. 1 business as usual, 2 confusion /
@@ -57,14 +70,19 @@ const kind: ContentKind = {
   parse(raw, read) {
     const o = read.object(raw, '');
     if (!o) return null;
-    read.only(o, ['id', 'role', 'side', 'moods', 'barks'], '');
+    read.only(o, ['id', 'role', 'side', 'moods', 'barks', 'fights'], '');
     const out: NpcKind = {
       id: read.string(o, 'id', ''),
       role: read.string(o, 'role', ''),
       side: 'good',
       moods: { 1: 'routine', 2: 'plead', 3: 'charge' },
       barks: {},
+      fights: 'on-sight',
     };
+    if (o.fights !== undefined) {
+      if (FIGHTS.includes(o.fights as Fights)) out.fights = o.fights as Fights;
+      else read.fail('fights', `must be one of ${FIGHTS.join(', ')}, or left out (on-sight), but is ${describe(o.fights)}`);
+    }
     if (out.role === HERO_ROLE) read.fail('role', `"${HERO_ROLE}" is the role of the players' characters; a person needs another`);
     if (SIDES.includes(o.side as Side)) out.side = o.side as Side;
     else read.fail('side', `must be one of ${SIDES.join(', ')}, but is ${describe(o.side)}`);

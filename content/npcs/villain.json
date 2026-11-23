@@ -3,6 +3,7 @@
   "id": "villain",
   "role": "villain",
   "side": "bad",
+  "fights": "when-struck",
   "moods": { "1": "routine", "2": "plead", "3": "charge" },
   "barks": {
     "distress": "...What?",

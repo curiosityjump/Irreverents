@@ -508,3 +508,23 @@ scenarios-only runner (content load plus every scenario: 1 min 48 s):
   brief's (seen coming on a phone); a quicker guard wind-up, or a
   clash-only number, is the orchestrator's call. `step12-guards-and-camp-clash`
   stays green with these numbers.
+
+### Slice A, push 2 (same builder)
+
+- **Measured:** 194 of 194 scenarios pass. `step18-villain-hits-back`:
+  the infiltrator waits until `villain-1` is back resting after his first
+  robbery (the hero's walk starts at 420), steps to his right (15 px),
+  turns and swings at 453: the hit lands at 455 on the villain only (not
+  the guard beside him); the villain hits back at 512 (57 ticks later).
+- **Control 1:** no swing: 0 villain hits on the hero in 1800 ticks.
+- **Control 2:** `"fights": "on-sight"` turns 14 red, the brief's 7
+  among them (`step4-villain-robs`, `-villain-buys-politely`,
+  `-street-people`, `-unseen-take`, `-door-and-back-alert-unchanged`,
+  `-leaves-unseen-guard-stays`, `step12-unseen-not-followed-to-camp`);
+  the other seven are `step4-guard-follows-seen`, `-hero-persists-rage`,
+  `-street-call`, `step12-guard-follows-into-camp`, Step 11's
+  `step11-chase-locks-door` and `-door-no-chase` (which landed since),
+  and `step18-villain-hits-back` itself.
+- **Friendly fire seen:** the villain's swing at the hero also moved
+  `guard-1` (from his post at x 184 to 78 by tick 900, in the probe). Left as it is (`DRAFT:`, the
+  step's list).

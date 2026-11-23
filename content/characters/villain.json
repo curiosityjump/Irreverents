@@ -4,6 +4,6 @@
   "name": "Graybox Villain",
   "box": { "w": 14, "h": 28 },
   "color": "#6a4c93",
-  "verbs": ["move"],
+  "verbs": ["move", "attack"],
   "tuning": "villain"
 }

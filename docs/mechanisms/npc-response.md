@@ -193,9 +193,22 @@ too."* Built by Step 18 slice A (`docs/plan/step-18.md`).
   wind-up, knockback and wear (`docs/mechanisms/combat-and-impact.md`).
   Its body must list `attack` and its tuning set must carry the seven
   attack numbers. Today: `guard` and `shopkeeper` (Step 18), and the
-  camp's `outpost-fighter` and Step 16's kinds (Step 12's system). Not
-  the lookout, the king, the toll keeper or the villain (push 2 gives the
-  villain a swing once struck).
+  camp's `outpost-fighter` and Step 16's kinds (Step 12's system), and
+  the villain once struck (below). Not the lookout, the king or the toll
+  keeper.
+- **The villain hits back once struck** (`DRAFT:`). His NPC kind says
+  `"fights": "when-struck"` (`src/content/kinds/npcs.ts`; left out, a kind
+  is `on-sight`). `fight-struck` (order 101, after the verbs) writes
+  `c.struck[hero id] = tick` on a person whenever a player's `hit`,
+  `grabbed` or `thrown` names them, and forgets an entry after
+  `npcStruckMemory` (15 s; each new deed restarts it) or once that id is
+  gone from the world. `outpost-fight` then narrows the heroes he may
+  fight to those, and still fights only one he sees (D-065). A body a
+  hero throws into him is not a strike (its `impact` names no hero). His
+  mood is untouched: fighting is business as usual (D-060). Gate C's rob
+  and buy-politely loop needs him not to fight on sight: `"on-sight"`
+  turns 14 scenarios red (measured on push 2).
+  `scenarios/step18-villain-hits-back.json` is the check.
 - **The pulse.** `charge()` and the chase press `attack` on even ticks
   only (`world.tick % 2 === 0`), as `outpost-fight` does: Step 2's verb
   starts a swing only on a fresh press (`attack.ts`), so a held input

@@ -17,6 +17,7 @@
     "npcCallTime": 2.5,
     "npcCallReach": 10,
     "npcSearchRange": 48,
+    "npcStruckMemory": 15,
     "npcAlertCoolTime": 20,
     "maxLaunchSpeed": 520,
     "attackLift": 0.55,
@@ -96,11 +97,19 @@
       "attackRecovery": 0.2
     },
     "villain": {
+      "//": "INTENT (Step 18, there is always a way out): no jump, and slower than every hero runs; a person who runs or jumps needs another way out first. DRAFT (Step 18): the guard's attack numbers, a melee swing once struck (docs/plan/step-18.md).",
       "runSpeed": 40,
       "runAccel": 400,
       "runDecel": 600,
       "airAccel": 200,
-      "airDecel": 100
+      "airDecel": 100,
+      "attackStrength": 9000,
+      "attackReach": 12,
+      "attackTime": 0.8,
+      "attackWear": 20,
+      "attackWindup": 0.4,
+      "attackStrikeTime": 0.067,
+      "attackRecovery": 0.2
     },
     "hero": {
       "runSpeed": 96,

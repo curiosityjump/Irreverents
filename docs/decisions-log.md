@@ -909,3 +909,12 @@ document as a decision of theirs.
 - **Why this way:** adding beats changing what someone chose (the guard's walk is slice 3's and the roof route depends on it). Sight is 40 px up and down, so a one-way shelf at row 11 over the guard's inner stand (49 px over its middle) lets a hero wait while the guard walks back under it, then slip behind it. The ledge is at row 8, not lower, because the roof flyer's arcs land on anything lower; the steps start at column 3 because a grappler on a step at column 2 is pinned against the door's wall and cannot get down. `step16-zero-alarm-ledge`; control: the ledge's tiles emptied and the same inputs are seen.
 - **To change it:** tiles in `content/rooms/quarry-depot.json` (rows 8, 10, 11, 12); the scenario's inputs are timed to them. The infiltrator on the shelf is exactly 40 px over the guard's middle, which counts as seen: raise the shelf or leave it as the grappler's.
 - **Where:** `docs/plan/step-16.md`, slice 3 push 3; the room's `//`.
+
+- **Where:** `scenarios/step4-*.json`, `scenarios/step12-guard-follows-into-camp.json`.
+
+### 2026-11-23 · Step 18: the villain hits you back, but only once you have hit, grabbed or thrown him
+- **Decided by:** Step 18 slice A builder `session_017WiGzHwmFZe9AdG3KMHsa4`, on the step's design (`docs/plan/step-18.md`, "`DRAFT:` choices")
+- **Instead of asking:** "Should the villain start a fight as soon as he sees a hero?"
+- **Why this way:** the library: fighting villains in the expected hero-versus-villain way is business as usual for them (D-060), and the robbery and the polite purchase in the shop (gate C) need a villain who does not attack every hero he sees. So he swings back at a hero who struck him, for 15 seconds after the latest blow, grab or throw, with a guard's blow. A guard thrown into him does not count as that hero striking him. Whether he should fight on sight is left for the owner to say after playing.
+- **To change it:** one word, `"fights"` in `content/npcs/villain.json` (`"on-sight"`; that also breaks the shop's rob and buy-politely checks, which would need re-timing); the 15 s is `npcStruckMemory` in `content/tuning.json`.
+- **Where:** `docs/mechanisms/npc-response.md`, "Who fights".
