@@ -1,0 +1,22 @@
+{
+  "//": "DRAFT: stand-in drawn by tools/art/tiles/make.py (round 2). Notes: tools/art/tiles/README.md. Round 3 first pass: the cellar's vaulted back wall; underground, so the ground under the floor is painted deep.",
+  "id": "quarry-cave",
+  "sky": [
+    "#1c1a39",
+    "#1c1a39"
+  ],
+  "layers": [
+    {
+      "image": "backdrops/cellar-vault.png",
+      "parallax": 0.75,
+      "y": "top",
+      "offsetY": -12,
+      "repeatX": true,
+      "parallaxY": 0.75
+    }
+  ],
+  "outside": {
+    "above": "fill",
+    "below": "deep"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "//": "DRAFT: stand-in drawn by tools/art/tiles/make.py (round 2). Notes: tools/art/tiles/README.md. Round 3 first pass: the far hills are pinned to the room so they stay behind it at any height; the front strip sits in the ground under the lowest floor.",
+  "id": "quarry-ridge",
+  "sky": [
+    "#5fb4f0",
+    "#c4e9ff"
+  ],
+  "layers": [
+    {
+      "image": "backdrops/sky-clouds.png",
+      "parallax": 0.1,
+      "y": "top",
+      "offsetY": 4,
+      "repeatX": true
+    },
+    {
+      "image": "backdrops/far-hills.png",
+      "parallax": 0.25,
+      "y": "bottom",
+      "offsetY": -64,
+      "repeatX": true,
+      "pin": "room"
+    },
+    {
+      "image": "backdrops/front-foliage.png",
+      "parallax": 1,
+      "y": "bottom",
+      "offsetY": 16,
+      "repeatX": true,
+      "pin": "room",
+      "front": true
+    }
+  ],
+  "outside": {
+    "above": "sky",
+    "below": "deep"
+  }
+}

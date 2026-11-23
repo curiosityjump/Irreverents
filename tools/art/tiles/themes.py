@@ -691,6 +691,21 @@ class Cellar(Theme):
     def oneway(self, kind):
         return plank_ledge(kind, [mix(WD[0], INK, 0.3), WD[0], WD[1], WD[2]])
 
+    def deep(self):
+        """Round 3: bedrock under a cellar floor (the quarry's cave and pit): big blocks two steps
+        darker than the wall, nearly ink, almost no marks."""
+        R = Ramp(mix(NI[0], INK, 0.6), mix(NI[0], INK, 0.2), mix(NI[0], NI[1], 0.45), mix(NI[1], NI[2], 0.2), mix(NI[1], NI[2], 0.5))
+        out = []
+        for v in range(4):
+            img = new_tile()
+            block(img, 0, 0, 16 if v % 2 else 9, 9, R, seed=v + 30, specks=1)
+            if v % 2 == 0:
+                block(img, 9, 0, 16, 9, R, seed=v + 35, specks=0)
+            block(img, -7, 9, 7, 18, R, seed=41, specks=0)
+            block(img, 7, 9, 23, 18, R, seed=42 + v, specks=1)
+            out.append(img)
+        return out
+
     def walls(self):
         out = []
         line = mix(NI[0], INK, 0.2)

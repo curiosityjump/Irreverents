@@ -37,6 +37,10 @@ REGIONS = {
 # secrets are (handoff-prompts/look2-ground.md, "Traps"). [x, y, w, h] in room tiles.
 ROOM_REGIONS = {
     'courtyard': [('canopy', [0, 0, 30, 1])],
+    # DRAFT (round 3): the quarry's outdoor rooms have a solid top row too; drawn as overhanging leaves.
+    'quarry-road': [('canopy', [0, 0, 84, 1])],
+    'quarry-ridge': [('canopy', [0, 0, 80, 1])],
+    'quarry-depot': [('canopy', [0, 0, 64, 1])],
     'castle-street': [('eave', [0, 0, 48, 1]), ('roof-red', [24, 3, 10, 1]), ('roof-blue', [10, 5, 8, 2]),
                       ('street', [0, 11, 48, 1])],
 }
@@ -54,6 +58,15 @@ ROOM_THEME = {
     # DRAFT (Step 12 slice B): the Bandit Camp is outdoors past the courtyard, so it takes the courtyard's
     # grass-ruins blocks and its far hills, castle wall and front foliage (backdrop_json); one word each.
     'outpost': 'grass-ruins',
+    # DRAFT (look round 3, first pass; handoff-prompts/look3-ground.md): the quarry's six rooms. Outdoors
+    # (road, ridge, depot) the courtyard's grass on stone under a sky; underground (cave, pit) and the
+    # tower the cellar's night stone and plank ledges. The second pass gives them a quarry sheet of their own.
+    'quarry-road': 'grass-ruins',
+    'quarry-ridge': 'grass-ruins',
+    'quarry-depot': 'grass-ruins',
+    'quarry-cave': 'cellar',
+    'quarry-pit': 'cellar',
+    'quarry-tower': 'cellar',
 }
 
 # How often each fill is picked (cells may repeat to weight them): plain blocks most often.
@@ -188,7 +201,27 @@ def backdrop_json(room, by_name):
             d['layers'].append(layer('backdrops/front-foliage.png', 1, 'bottom', 16, 'room', True))
             d['outside'] = outdoor
         return d
+    if room in ('quarry-road', 'quarry-ridge', 'quarry-depot'):
+        # DRAFT (round 3, first pass): sky and far hills, no castle wall (the quarry is out of the kingdom).
+        d = {'//': note + ' Round 3 first pass: the far hills are pinned to the room so they stay behind it at any height; the front strip sits in the ground under the lowest floor.',
+             'id': room, 'sky': sky, 'layers': [
+                 layer('backdrops/sky-clouds.png', 0.1, 'top', 4),
+                 layer('backdrops/far-hills.png', 0.25, 'bottom', -64, 'room'),
+             ]}
+        if ROUND2:
+            d['layers'].append(layer('backdrops/front-foliage.png', 1, 'bottom', 16, 'room', True))
+            d['outside'] = outdoor
+        return d
     castle, cellar = by_name['castle'], by_name['cellar']
+    if room in ('quarry-cave', 'quarry-pit', 'quarry-tower'):
+        c = hexs(cellar.wall_body)
+        d = {'//': note + ' Round 3 first pass: the cellar\'s vaulted back wall; underground, so the ground under the floor is painted deep.',
+             'id': room, 'sky': [c, c], 'layers': [
+                 layer('backdrops/cellar-vault.png', 0.75, 'top', -12, parallaxY=0.75),
+             ]}
+        if ROUND2:
+            d['outside'] = {'above': 'fill', 'below': 'deep'}
+        return d
     if room in ('throne-room', 'hall-gallery'):
         c = hexs(castle.wall_body)
         return {'//': note + ' DRAFT: no "wall" here on purpose: the one layer is the back wall itself, with windows and pillars, moving slower than the room; add "wall" (cells [0,6]..[3,6] of tiles/castle.png) to go back to a flat wall that moves with the room.',
