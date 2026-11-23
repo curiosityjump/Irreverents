@@ -290,6 +290,11 @@ and the kinds of project-specific ones worth documenting:
 - **Periodic refreshes hide lost writes.** A client that polls can show a
   write as succeeded and then quietly revert it. Check the store, not the
   screen.
+- **A failing control that edits `content/` leaves `dist/` built from
+  the broken content.** `npm run check` rebuilds when `dist/` is stale;
+  restoring the file does not. Run `npm run build` after restoring a
+  control and before looking at any page (Step 4 slice 3 looked at a
+  villain whose polite purchase troubled nobody for a minute).
 - **"The code looks right" is not a verification.** It is the thing that was
   true every previous time something shipped broken.
 

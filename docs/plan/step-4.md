@@ -268,12 +268,27 @@ for later, as the step suggests.
   re-ran it: build and check green; control: the villain's polite
   purchase made "expected" fails `step4-villain-buys-politely`. Not
   re-verified by the lead: sight through walls, anything on screen.
-- `handoff-prompts/step-4-slice-3-street.md` (written 05:00 UTC):
-  the people into `castle-street`, a chasing guard following through a
-  door, hiding places unseen, gate D's signals in the real street, the
-  first phone-sized look. **Held** until slice 2 is on `main` and
-  reviewed (it builds on the responders). Left for later still: the
-  guard's whistle, the villain's horn, waves.
+- **Slice 3 (cut down), shipped and reviewed** (worker
+  `session_017WiGzFdtAuDTrQyWoR9cD6`, `a873218`, 08:57 UTC; brief
+  deleted). A shopkeeper with a counter and three goods, the villain's
+  loop (about 53 s a round) and a pacing guard are in `castle-street`,
+  one door east of where players start; `step4-street-people`. Lead's
+  review, 09:02 UTC, on a fresh pull and **on the live address at
+  `a873218`**: build and check green (68 ok). Two separate browser
+  players in one private live world: one walked from the throne room to
+  the goods and pressed Use once; **the other player's screen** showed
+  the goods gone and the shopkeeper's "W-what?!" (screenshots read
+  back). So take-by-Use works between two players on live. This
+  **contradicts the worker's flag** ("Use does nothing on the real
+  page"): its nine tries were on a local build, most likely from before
+  Step 1's fix (`2a7fd98`). **Not verified by me:** Use by a finger
+  (I pressed the key; the worker saw the touch control on screen), a
+  purchase calming him across two players, the `!` mark and rage on the
+  live page, a real iPhone.
+- **Not built:** treating a body with `c.roomHide` as unseen (one line
+  in `src/sim/npc/sight.ts`; the component is on `main` since cb297c0,
+  no hiding place is placed in the street yet); following through
+  doors; the street's gate D scenarios. All wait with slice 2.
 
 ## Open with the owner
 
@@ -351,3 +366,17 @@ for later, as the step suggests.
   touch; `c.roomHide` unseen only if it has landed. Following through
   doors and the street's gate D scenarios wait for slice 2, still held.
   Worker due done or stopped by 10:00 UTC.
+- **Lead, 09:05 UTC.** Slice 3 is live and reviewed (see Briefs).
+  Slice 2 (`handoff-prompts/step-4-slice-2-alarm.md`: the bell, the
+  call, the alert, responders, hiding; gate D) is **still held by the
+  orchestrator** and has no worker; gate D has no scenario from this
+  step. Slice 3's flags, routed: the stale-`dist` trap is in
+  `docs/verifying-and-finishing.md`; `scripts/trace.ts` crashes in a
+  room that has `things` (it reads the box of kind `~thing`; `scripts/`
+  is not this step's: sent to the orchestrator); Step 3's hiding place
+  under building 1's overhang will share columns 10-17 with the shop
+  (every column is `DRAFT:`; moving the shop needs `step4-street-people`
+  re-traced). For the morning: the villain's first robbery is about 5 s
+  after the world starts, his polite purchase at about 19 s and every
+  53 s after; a hit knocks the shopkeeper out (Step 2's default
+  toughness).
