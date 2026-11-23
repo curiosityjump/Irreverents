@@ -56,8 +56,8 @@ growing, something in it has stopped earning its place.
 ## 1 · What this is, and who it is for
 
 Irreverents is a 2D side-scrolling action-adventure played in a browser,
-on phones and computers, **for the owner and their friends** (a known
-group, not strangers). A shared party of gleefully curious heroes ignores
+**primarily on iPhones with touch** (computers second), **for the owner
+and their friends** (a known group, not strangers). A shared party of gleefully curious heroes ignores
 the world-saving quest; the world, which has made a religion of the
 Hero's Journey, reacts when they do. The owner has designed it in depth:
 `docs/vision.md` is the short version in their words, `docs/design-library/`
@@ -66,8 +66,8 @@ labels are literal). **Read `docs/vision.md` early.**
 
 What decides real questions here: gameplay before joke; NPCs are scripted,
 never AI; getting caught opens play; impact over numbers; solo never
-locked out; nothing generated is canon; built for friends, not strangers
-(`CLAUDE.md` has each in a line). And one that is about us, not the game:
+locked out; iPhone first; use by default and revise later; built for
+friends, not strangers (`CLAUDE.md` has each in a line). And one that is about us, not the game:
 **how it feels is the owner's to judge by playing**, so the job is to get
 playable things in front of them, not to grade our own work.
 

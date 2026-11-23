@@ -102,9 +102,10 @@ what to protect if the night runs short):
 7. A Hall of Legends that remembers something the players really did, and
    a machine to steal and crash through a roadblock (Step 7).
 
-**Goal.** By the owner's morning (working deadline 11:00 UTC, 2026-11-23),
+**Goal.** By the owner's morning (they are on US Eastern time; working
+deadline 11:00 UTC = 06:00 Eastern, 2026-11-23),
 https://irreverents-production.up.railway.app is a game the owner and
-their brother-in-law can open on their own devices and play together, with
+their brother-in-law can open on their own iPhones and play together, with
 as many of results 2–7 in it as were finished and verified, and nothing in
 it half-working.
 
@@ -124,9 +125,11 @@ whether it is fun; that is the owner's, in the morning.
   second person, what to try, and what is the owner's to judge.
 
 **Constraints.** The owner's rules in `docs/vision.md` ("What it is not",
-"Principles that decide most questions"); `CLAUDE.md`'s design principles;
-the design library's labels (a proposal used tonight stays a labelled
-placeholder). The usage limit is shared with the owner's other projects:
+"Principles that decide most questions"); `CLAUDE.md`'s tie-breakers and
+design principles, iPhone-first above all (D-093); the design library's
+labels (a proposal used tonight is in use, not canon: D-096). Art comes
+through Vision Partner (`docs/mechanisms/asset-requests.md`); nothing
+waits for it. The usage limit is shared with the owner's other projects:
 at most about four leads at once, each with one or two workers.
 
 **Escalation.** Every question goes to `docs/questions-inbox.md`;
@@ -134,7 +137,7 @@ nothing waits in a chat. The owner is asleep: a question that would stop
 a step gets the asker's own best reading, built so that either answer is a
 small change, marked `DRAFT:`.
 
-**Status (orchestrator session_017WiGzFWfLir1ATiSP7c5E5, 2026-11-23 04:05
+**Status (orchestrator session_017WiGzFWfLir1ATiSP7c5E5, 2026-11-23 04:00
 UTC):** nothing achieved yet beyond the deploy being proven (M1 serves a
 probe). Step 1 open, about to be claimed. Steps 2–7 queued.
 

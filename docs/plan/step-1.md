@@ -11,7 +11,10 @@
 >
 > Focus on getting things playable asap. I want as much of the vision in playable form as possible by the time i wake up tomorrow. I want to be playing the game having fun with it with my brother in law tomorrow morning.
 
-Two people, each in a browser on a phone or a computer, in the game
+**Owner (Drive, doc 11, D-093; doc 33 is the full platform spec):**
+> D-093 IRREVERENTS IS PRIMARILY AN IPHONE BROWSER / WEBAPP GAME. Desktop COMPUTER BROWSER play is a secondary possible target. … Mobile touch ergonomics, legible pixels and actual phone performance are top-level requirements.
+
+Two people, each in a browser (most likely iPhones), in the game
 together, by the owner's morning. The repository holds no game yet (only a
 deploy probe, `server.js`), so nothing else in the plan can be built or
 checked until this step lands. **Every other step is queued behind it; it
@@ -21,8 +24,9 @@ is the critical path of the night.**
 
 At https://irreverents-production.up.railway.app two people on separate
 devices open the page and, with no setup, are in the same graybox room,
-each running and jumping with their own controls (touch on a phone,
-keyboard on a computer) and each seeing the other move smoothly. And the
+each running and jumping with their own controls (**touch on an iPhone
+first**; keyboard on a computer too) and each seeing the other move
+smoothly. And the
 repository has the commands and the written layout every later session
 builds and verifies with.
 
@@ -78,9 +82,22 @@ may overrule one with a measurement, recording why here.
 - **Joining needs nothing.** Everyone who opens the URL is in the same
   shared world by default; a `?room=<name>` in the address makes a private
   one. No accounts (it is for friends).
-- **Rendering is a plain canvas at a low internal resolution, scaled up
-  crisp, with graybox shapes.** No approved art exists; anything drawn is a
-  placeholder.
+- **Rendering is a plain canvas at 320×180 internal resolution on a 16 px
+  tile grid, scaled up crisp; characters fit 32×32 cells (about 24–28 px
+  tall).** These are the numbers the art already on order assumes
+  (`docs/mechanisms/asset-requests.md`, "Requests in flight"; library
+  doc 14, option B). Start with graybox shapes and **build so sprite
+  sheets and tile atlases drop in as data when they arrive** (below).
+- **Touch first, landscape.** Design the controls for two thumbs on an
+  iPhone held sideways: a few context-sensitive controls, "not a dozen
+  tiny virtual buttons" (doc 33). Orientation and the exact layout are
+  open in the library (landscape is "a promising test"), so they are
+  `DRAFT:`; a portrait phone must at least get a clear "turn your phone"
+  screen, never a broken one.
+- **A phone that sleeps or changes network comes back.** A suspended tab,
+  a lock screen or a Wi-Fi to cellular switch must end in the player back
+  in the world on their own, not a dead page (doc 33, "browser state
+  resilience").
 - **The commands, by these exact names** (other docs cite them):
   `npm run build`, `npm run check` (types, content validation, and the
   headless simulation scenarios; fast, no browser), `npm run e2e` (the real
@@ -120,17 +137,30 @@ may overrule one with a measurement, recording why here.
 - **A check that passes on a broken build proves nothing.** Each scenario
   needs a control watched to fail once (`docs/verifying-and-finishing.md`,
   rung 3).
-- **Phones:** no hover, no keyboard, a notch, a browser bar that eats
-  height, and a second finger. The phone-sized e2e client must drive the
-  touch controls, not the keyboard.
+- **iPhone Safari is the real target and nobody here can run it.** Only
+  headless Chromium is installed (never run `playwright install`), so the
+  phone-sized e2e client is Chromium pretending: touch events and an
+  iPhone-sized landscape viewport. That proves the touch path, not
+  Safari. So stay on boring, long-supported web features, and handle what
+  Safari is known for: no hover, the notch and home-indicator safe areas,
+  browser chrome that eats height, double-tap zoom and pull-to-refresh
+  inside the game surface, multi-touch (move and jump at once), and sound
+  that stays silent until the first tap. Say in the closing report that a
+  real iPhone has not been tried; that is the owner's first minute.
+- **Art arrives during the night.** The owner has ChatGPT making assets on
+  request; Vision Partner files the requests and syncs deliveries into
+  `docs/design-library/` (`docs/mechanisms/asset-requests.md`; read it
+  before asking for anything). Two hero sprite sheets, some NPCs and tile
+  atlases are already on order. The game keeps its own copy of what it
+  uses, in its own assets folder; the mirror is reference, not runtime.
 
 ## Feedback signal
 
 1. `npm run build && npm run check` exit 0 from a fresh clone
    (`npm ci` first), and `npm run check` runs at least one simulation
    scenario whose control you watched fail.
-2. `npm run e2e` passes: two headless browsers (one phone-sized, touch)
-   join a local server; when A moves, B sees A at the new place within half
+2. `npm run e2e` passes: two headless browsers (at least one iPhone-sized,
+   landscape, driven by touch) join a local server; when A moves, B sees A at the new place within half
    a second; with 150 ms of delay injected each way, A's own character
    still starts moving within 50 ms of the key press.
 3. `npm run check:live` passes against the live URL, and `/healthz` there

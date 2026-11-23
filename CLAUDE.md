@@ -11,9 +11,9 @@ If you add to this file, something else should usually come out.
 
 ## What Irreverents is
 
-A 2D side-scrolling action-adventure played in a browser, on phones and
-computers, made for **the owner and their friends** — a known group, not
-strangers. Its heroes are gleefully curious and ignore the world-saving
+A 2D side-scrolling action-adventure played in a browser, **primarily on
+iPhones with touch** (computers second), made for **the owner and their
+friends** — a known group, not strangers. Its heroes are gleefully curious and ignore the world-saving
 quest; the world takes its story very seriously and reacts when they
 don't. The owner's standard for it working: the "OHHHHH" of spectacular
 physical impact, the satisfaction of a zero-alarm infiltration, and a
@@ -35,8 +35,14 @@ Tie-breakers a session can apply, each the owner's own rule (quoted in
   bad outcome: it starts a fight, a last stand or an escape.
 - **Impact over numbers.** Knockback, throws and collisions carry combat.
 - **Solo is never locked out by headcount.**
-- **Nothing generated is canon.** Placeholder art, names and counts are
-  `DRAFT:` until the owner approves them.
+- **iPhone first.** Every action must work with touch on an iPhone
+  browser, through a few context-sensitive controls; never require a
+  keyboard, hover or a controller (D-093, library doc 33).
+- **Use by default, revise later.** New art, mechanics and implementation
+  choices are approved for immediate use; never wait on the owner's
+  sign-off to proceed (D-096). In use is not canon: mark what is
+  provisional `DRAFT:` so it is easy to replace, and never revive a
+  rejected style.
 - **It is for friends, not strangers.** Don't build accounts, anti-cheat,
   scale or monetisation unasked; what the owner can see and try beats
   robustness they can't.
