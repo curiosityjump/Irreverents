@@ -1,6 +1,6 @@
 {
  "id": "step16-caught-fight",
- "proves": "Step 16 signal 6 (a), caught then fight: the grappler walks in from the tower door and the lookout sees them at once; the grappler grabs patrol 1 when it comes swinging and holds it while the call is sounded to the end, and the first wave (two fighters) walks in at the far east end; when the lookout starts its second call the grappler throws patrol 1 at it: the lookout is knocked out mid-call (it never calls again) and the thrown body goes on into the horn post and breaks it, and no call starts or completes in the 20 s after. Nothing reloads. Control (watched to fail): without the throw, the second call completes",
+ "proves": "Step 16 signal 6 (a), caught then fight: the grappler walks in from the tower door, past it to column 5, and the lookout (column 11) sees them when it turns west; the grappler grabs patrol 1 when it comes swinging and holds it while the call is sounded to the end, and the first wave (two fighters) walks in at the far east end; when the lookout starts its second call the grappler throws patrol 1 at it: the lookout is knocked out mid-call (it never calls again) and the thrown body goes on into the horn post just behind it (column 12) and breaks it, and no call starts or completes in the 20 s after. Nothing reloads. Control (watched to fail): without the throw, the second call completes",
  "room": "quarry-depot",
  "placements": true,
  "players": [
@@ -19,22 +19,28 @@
   },
   {
    "player": "a",
-   "from": 90,
-   "to": 92,
+   "from": 181,
+   "to": 201,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 360,
+   "to": 362,
    "hold": [
     "grab"
    ]
   },
   {
    "player": "a",
-   "from": 600,
-   "to": 603,
+   "from": 761,
+   "to": 764,
    "hold": [
     "attack"
    ]
   }
  ],
- "ticks": 1810,
+ "ticks": 1975,
  "expect": [
   {
    "fact": "event-where",
@@ -43,8 +49,8 @@
     "by": "depot-lookout"
    },
    "between": [
-    222,
-    222
+    383,
+    383
    ],
    "count": [
     1,
@@ -59,8 +65,8 @@
     "row": 0
    },
    "between": [
-    222,
-    222
+    383,
+    383
    ],
    "count": [
     1,
@@ -75,8 +81,8 @@
     "why": "knocked-out"
    },
    "between": [
-    600,
-    640
+    761,
+    800
    ],
    "count": [
     1,
@@ -90,8 +96,8 @@
     "signaler": "depot-horn-post"
    },
    "between": [
-    600,
-    700
+    761,
+    860
    ],
    "count": [
     1,
@@ -103,8 +109,8 @@
    "event": "outpost-call-started",
    "where": {},
    "between": [
-    610,
-    1810
+    775,
+    1975
    ],
    "count": [
     0,
@@ -116,8 +122,8 @@
    "event": "outpost-call-completed",
    "where": {},
    "between": [
-    223,
-    1810
+    384,
+    1975
    ],
    "count": [
     0,

@@ -506,6 +506,10 @@ Slice 1, 2026-11-23 16:10 UTC: the main way (road, ridge, tower, depot) is **248
 - **Depot, at the strongroom's front:** the heavy guard is beside you; the strongroom shows only as a hanging stone stub over the floor (its front pillar, rows 8-11); its roof is above the view and **the hoard (column 45) is out of view** until you are inside. The cellar's cracked wall shows as a crack in the dirt below: findable.
 - **Wave in:** not caught on camera (in no run did the horn's call finish while the page stood in the depot; once the hero was punched back through the tower door and a depot person followed onto the tower top).
 
+2026-11-23 20:20 UTC, the depot made findable (`step-16-f-depot-findable.md`), builder `session_017WiGzFw42cUL6BQ27o3iz7`, shots from `npm run e2e`'s quarry block (`e2e-out/quarry/`, 844×390):
+- **Door view** (`depot-door-side.png`): the hero stands unseen just inside the door; the lookout and its big horn are mid-screen five tiles ahead, the stack behind them. **Danger visible: yes. A way over visible: yes**, the first two ledge steps sit over the hero's head (the high ledge itself is at the view's top edge). **Hoard visible: no** (column 45, about 30 tiles east).
+- **Strongroom front**: not reached in this run. The page, seen while walking in, was chased up onto the stack by the lookout and patrol 1 (`depot-strongroom-side.png` shows it there, with both of them and the horn below). **Hoard visible: no**: the hoard did not move (see the handoff note).
+
 ## Briefs
 
 - The depot findable (arrive unseen with the danger in view, a hide by the door, the hoard visible): `handoff-prompts/step-16-f-depot-findable.md`, 20:10 UTC, to the phone slice's builder `session_017WiGzFw42cUL6BQ27o3iz7`. Lead's reason: at b0a7d5e a first-time player is seen the moment they enter, so the zero-alarm infiltration is reachable only by script; that is Step 16's own data.
@@ -587,3 +591,21 @@ Slice 1, 2026-11-23 16:10 UTC: the main way (road, ridge, tower, depot) is **248
 - Wave in: never photographed; a scripted shot needs the page to survive in the depot for the call (a sideways hide spot near the door would do, Step 16 data).
 
 **Flag, not this slice's:** the first full `npm run e2e` here failed one Step 17 fact, `start-continue-gone` (the list read `["ZZZZ"]`, no message); alone it passed three times (twice with this change, once without), and the next full run was green. A timing flake under the full run's load. After rebasing onto 4022fd6, one full run failed `h1`/`h2` (the server-down facts; the page did not come back within 10 s) and the next was green: the e2e flakes already owed a look (b9cf87c).
+
+### The depot made findable (`step-16-f-depot-findable.md`), 2026-11-23 20:20 UTC, builder `session_017WiGzFw42cUL6BQ27o3iz7`
+
+**Landed:** the lookout moved from column 6 to 11 and now looks east first (3 s), then west (4 s). The horn is just behind it (12), and patrol 1 walks 11-13. A hide `depot-door-hide` sits just inside the door (row 13, columns 1-2). New `step16-door-unseen`: the grappler walks in and stands at column 4 for 7 s, a whole look each way, unseen. Its control, the lookout back at 6, starts a call at tick 274. Re-timed:
+- `step16-caught-escape` and `step16-caught-fight`: walk in to column 5 when the lookout turns west; the call completes at 383, not 222.
+- `step16-caught-escape-cave`: 160 ticks later from tick 1440, and the flyer turns back as soon as it is seen.
+- `step16-zero-alarm-roof`: new control. The old one (walk in 20 ticks early) no longer fails, by design. The new one is the lookout's old look order, which sees the flyer on the stack at tick 390.
+
+Every control was watched to fail: the tower door made solid, no throw, the hole made solid, the ledge emptied, the lookout's turn, the lookout back at 6. All `step16-*` scenarios are green.
+
+**Not done: the hoard stays at column 45.** Every route that takes it (roof, ledge, cave escape) does so from the shaft's foot (columns 42-44). Each column from 38 to 43 broke all three, so moving it means re-scripting those routes' takes and their way out. That is a slice of its own, or a Step 8 window/glint.
+
+**Measured, worth knowing:**
+- Sight is centre to centre (`src/sim/npc/sight.ts`).
+- The door being out of the lookout's sight and the stack's top being out of its east sight cannot both hold. So the roof route now depends on the lookout looking west while the flyer launches from the stack.
+- With the horn west of the lookout, a held patrol thrown east hits the horn first, and the call stops as `signaler-broken`, not `knocked-out`. So the horn sits east of the lookout.
+- Patrol 1's swings at a hero near the stack also hit the horn, and three hits break it.
+

@@ -1,0 +1,32 @@
+{
+ "id": "step16-door-unseen",
+ "proves": "Step 16, the depot made findable (DRAFT, docs/decisions-log.md): the grappler walks in from the tower and stands just inside the door, on the floor at column 3 (outside the door's hiding place, so distance alone keeps them unseen), for 7 s, a whole turn of the lookout's look both ways: the lookout (column 11) and its horn (column 12) and patrol 1 (columns 11-13) are in a phone's view from there, and nobody sees them: no call starts, no blow lands and every person in the depot stays in mood 1. Control (watched to fail): the lookout put back at its old place, column 6, the same inputs, and a call starts.",
+ "room": "quarry-depot",
+ "placements": true,
+ "players": [
+  {
+   "id": "a",
+   "character": "grappler",
+   "room": "quarry-tower",
+   "spawn": 0
+  }
+ ],
+ "inputs": [
+  {
+   "player": "a",
+   "from": 0,
+   "to": 62,
+   "x": 1
+  }
+ ],
+ "ticks": 540,
+ "expect": [
+  {"fact": "in-room", "player": "a", "at": 540, "room": "quarry-depot"},
+  {"fact": "event-where", "event": "outpost-call-started", "where": {}, "between": [0, 540], "count": [0, 0]},
+  {"fact": "event-where", "event": "hit", "where": {"target": "p:a"}, "between": [0, 540], "count": [0, 0]},
+  {"fact": "mood", "npc": "depot-lookout", "between": [1, 540], "is": 1},
+  {"fact": "mood", "npc": "depot-fighter-1", "between": [1, 540], "is": 1},
+  {"fact": "mood", "npc": "depot-fighter-2", "between": [1, 540], "is": 1},
+  {"fact": "mood", "npc": "depot-guard", "between": [1, 540], "is": 1}
+ ]
+}

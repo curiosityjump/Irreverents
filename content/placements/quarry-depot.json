@@ -1,5 +1,5 @@
 {
-  "//": "DRAFT (Step 16 slice 1): the depot's things; slice 3 adds its people and its hoard. A heavy rock in the cellar (column 12, in from the pit): only the grappler can lift it, and thrown at the cellar wall (column 35) it breaks it (step16-secret-cellar-wall-*). INTENT: no light crate in the cellar, so the wall is the grappler's alone (or a friend thrown by a friend: the other way in). The id is permanent; the column is a first guess. DRAFT (Step 16 slice 2): two plain fighters at the yard's far east end (columns 57 and 59), placeholders: slice 3 replaces them with the depot's own people. DRAFT (Step 16 slice 3): the depot's people and its hoard, replacing slice 2's two yard fighters (their ids carry on as the two patrols). On the west stretch, the lookout (column 6) watches the way in from the tower and glances east, with the horn post beside it (column 9); patrol 1 walks that stretch (columns 4-9), turning straight back at its east end and waiting at its west end facing back into the yard (the lookout is the one who watches the door), patrol 2 the far yard behind the strongroom (54-61), watching its back door and the dip to the crawl; the middle stretch by the yard stack is hidden from everyone; a heavy guard stands at the strongroom's front (column 34) and now and then walks in to look over the hoard (column 45, east of the shaft). Columns and timings are a first pass (docs/decisions-log.md, Step 16 slice 3); no route uses columns 0-2, so nobody of the depot is walked through a west door.",
+  "//": "DRAFT (Step 16 slice 1): the depot's things; slice 3 adds its people and its hoard. A heavy rock in the cellar (column 12, in from the pit): only the grappler can lift it, and thrown at the cellar wall (column 35) it breaks it (step16-secret-cellar-wall-*). INTENT: no light crate in the cellar, so the wall is the grappler's alone (or a friend thrown by a friend: the other way in). The id is permanent; the column is a first guess. DRAFT (Step 16 slice 2): two plain fighters at the yard's far east end (columns 57 and 59), placeholders: slice 3 replaces them with the depot's own people. DRAFT (Step 16 slice 3): the depot's people and its hoard, replacing slice 2's two yard fighters (their ids carry on as the two patrols). On the west stretch, the lookout (column 6) watches the way in from the tower and glances east, with the horn post beside it (column 9); patrol 1 walks that stretch (columns 4-9), turning straight back at its east end and waiting at its west end facing back into the yard (the lookout is the one who watches the door), patrol 2 the far yard behind the strongroom (54-61), watching its back door and the dip to the crawl; the middle stretch by the yard stack is hidden from everyone; a heavy guard stands at the strongroom's front (column 34) and now and then walks in to look over the hoard (column 45, east of the shaft). Columns and timings are a first pass (docs/decisions-log.md, Step 16 slice 3); no route uses columns 0-2, so nobody of the depot is walked through a west door. DRAFT (Step 16, the depot made findable, docs/decisions-log.md): the lookout moved to column 11 with its horn just behind it (column 12) and looks east first (3 s) then west (4 s); patrol 1 walks columns 11-13. From the tower door a phone's view (about 15 tiles) shows them, the horn and the ledge's first step, and none of them sees a hero just inside the door (`step16-door-unseen`); walking on along the floor past column 4 is seen when the lookout turns west. The hoard stays at column 45: every route that takes it does so from the shaft's foot (columns 42-44), so moving it west means re-scripting three routes.",
   "id": "quarry-depot",
   "room": "quarry-depot",
   "place": [
@@ -15,22 +15,22 @@
       "id": "depot-lookout",
       "character": "outpost-lookout",
       "tile": [
-        6,
+        11,
         13
       ],
       "npc": "outpost-lookout",
       "routine": [
         {
-          "face": "left"
-        },
-        {
-          "wait": 4
-        },
-        {
           "face": "right"
         },
         {
           "wait": 3
+        },
+        {
+          "face": "left"
+        },
+        {
+          "wait": 4
         }
       ]
     },
@@ -38,7 +38,7 @@
       "id": "depot-horn-post",
       "character": "signal-post",
       "tile": [
-        9,
+        12,
         13
       ]
     },
@@ -46,13 +46,13 @@
       "id": "depot-fighter-1",
       "character": "outpost-fighter",
       "tile": [
-        9,
+        13,
         13
       ],
       "npc": "outpost-fighter",
       "routine": [
         {
-          "walk-to": 4
+          "walk-to": 11
         },
         {
           "face": "right"
@@ -61,7 +61,7 @@
           "wait": 2
         },
         {
-          "walk-to": 9
+          "walk-to": 13
         }
       ]
     },

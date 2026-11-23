@@ -975,3 +975,11 @@ document as a decision of theirs.
 - **Why this way:** the owner, after playing: "There are no ... characters to unlock"; doc 05 "Players begin with a subset"; doc 36 (the canon three are the start); D-085 wants the cantina brawl full, so the brawler starts unlocked and the cantina always has someone to hit and to swap. Who is unlocked now belongs to each game and is kept with it (D-082). A game saved before tonight, and every private test world (`?room=`), keeps all five heroes: nobody loses anyone they had.
 - **To change it:** the `start` list in `content/roster.json`; whether test worlds get it is one line in `makeWorld` (`src/server/game.ts`).
 - **Where:** `docs/mechanisms/recruits.md`; `docs/plan/step-13.md`.
+
+### 2026-11-23 · At the depot's door you see the lookout and its horn before they see you, and there is a place to hide
+- **Decided by:** Step 16 builder `session_017WiGzFw42cUL6BQ27o3iz7`, on the Step 16 lead's brief
+- **Instead of asking:** where should the lookout stand so that a first-time player can see the danger and choose a quiet way?
+- **Why this way:** the owner: each core loop "must be findable and recognisable without being told where it is", and the zero-alarm infiltration is one of their three standards. At the old place the lookout saw you the instant you came in. Now it stands five tiles further in (column 11) with its horn just behind it: on a phone's screen from the door, out of its sight. Walking straight on along the floor still gets you seen ("getting caught opens play"). It looks east first, so the flyer's way over the roof still works.
+- **To change it:** the lookout's `tile`, its `routine` order, the horn's `tile` and patrol 1's walk in `content/placements/quarry-depot.json`; the hide is two `C` tiles in `content/rooms/quarry-depot.json`. Any move re-times the depot's scenarios (`docs/plan/step-16.md`, the handoff note).
+- **Where:** `docs/plan/step-16.md`, "The depot made findable"; `step16-door-unseen`.
+

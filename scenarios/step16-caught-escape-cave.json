@@ -1,6 +1,6 @@
 {
  "id": "step16-caught-escape-cave",
- "proves": "Step 16 signal 6 (b), caught then the planned escape: the flyer robs the strongroom over the roof as in step16-zero-alarm-roof (the same inputs to tick 1440), then walks west off the stack in front of the lookout, is seen and runs back east; the call is sounded to its end and the first wave (two fighters) walks in at the far east end; meanwhile the flyer, walking east into the step at columns 24-25, drops through the one-tile hole at column 23 into the cellar, walks out by the pit door and along the pit floor into the cave. No wave comes after they left the depot and nobody of the depot is outside it (D-061: escape the zone). Nothing reloads. DRAFT: the hole is one tile wide (the lead's call): the flyer and the infiltrator fit, the grappler does not and escapes by the tower door (step16-caught-escape). Control (watched to fail): the hole's two tiles (column 23, rows 14-15) made solid by a tiles override, and the flyer never leaves the depot.",
+ "proves": "Step 16 signal 6 (b), caught then the planned escape: the flyer robs the strongroom over the roof as in step16-zero-alarm-roof (the same inputs to tick 1440), then walks west off the stack in front of the lookout, is seen and runs back east; the call is sounded to its end and the first wave (two fighters) walks in at the far east end; meanwhile the flyer, walking east into the step at columns 24-25, drops through the one-tile hole at column 23 into the cellar, walks out by the pit door and along the pit floor into the cave. No wave comes after they left the depot and nobody of the depot is outside it (D-061: escape the zone). Nothing reloads. DRAFT: the hole is one tile wide (the lead's call): the flyer and the infiltrator fit, the grappler does not and escapes by the tower door (step16-caught-escape). Control (watched to fail): the hole's two tiles (column 23, rows 14-15) made solid by a tiles override, and the flyer never leaves the depot. DRAFT (the depot made findable): everything from tick 1440 on is 160 ticks later than at first, so the flyer comes off the stack in the lookout's eastward look; it turns back east as soon as it is seen, before patrol 1 reaches it (patrol 1's swings would otherwise break the horn post, now beside the lookout).",
  "room": "quarry-depot",
  "placements": true,
  "players": [
@@ -234,40 +234,40 @@
   },
   {
    "player": "a",
-   "from": 1440,
-   "to": 1556,
+   "from": 1600,
+   "to": 1700,
    "x": -1
   },
   {
    "player": "a",
-   "from": 1484,
-   "to": 1492,
+   "from": 1644,
+   "to": 1652,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 1592,
-   "to": 1720,
+   "from": 1705,
+   "to": 1833,
    "x": 1
   },
   {
    "player": "a",
-   "from": 1600,
-   "to": 1608,
+   "from": 1713,
+   "to": 1721,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 1800,
-   "to": 2700,
+   "from": 1960,
+   "to": 2860,
    "x": -1
   }
  ],
- "ticks": 2800,
+ "ticks": 2960,
  "expect": [
   {
    "fact": "event-where",
@@ -291,8 +291,8 @@
    "event": "outpost-call-completed",
    "where": {},
    "between": [
-    1700,
-    1800
+    1860,
+    1960
    ],
    "count": [
     1,
@@ -307,8 +307,8 @@
     "row": 0
    },
    "between": [
-    1700,
-    1800
+    1860,
+    1960
    ],
    "count": [
     1,
@@ -324,8 +324,8 @@
     "toDoor": "to-depot-cellar"
    },
    "between": [
-    1900,
-    2100
+    2060,
+    2260
    ],
    "count": [
     1,
@@ -341,8 +341,8 @@
     "toDoor": "to-pit"
    },
    "between": [
-    2100,
-    2800
+    2260,
+    2960
    ],
    "count": [
     1,
@@ -352,7 +352,7 @@
   {
    "fact": "in-room",
    "player": "a",
-   "at": 2800,
+   "at": 2960,
    "room": "quarry-cave"
   },
   {
@@ -360,8 +360,8 @@
    "event": "outpost-wave",
    "where": {},
    "between": [
-    2040,
-    2800
+    2200,
+    2960
    ],
    "count": [
     0,
@@ -372,8 +372,8 @@
    "fact": "people-count",
    "room": "quarry-pit",
    "between": [
-    2040,
-    2800
+    2200,
+    2960
    ],
    "count": [
     0,
@@ -384,8 +384,8 @@
    "fact": "people-count",
    "room": "quarry-cave",
    "between": [
-    2040,
-    2800
+    2200,
+    2960
    ],
    "count": [
     0,
