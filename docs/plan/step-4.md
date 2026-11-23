@@ -406,3 +406,30 @@ for later, as the step suggests.
   bell. **Not verified by me:** hiding until the alert clears on the
   live page, touch, a real iPhone. Still to come from the worker before
   its 10:15 stop: following through doors, hiding unseen.
+- **Lead, 09:48 UTC. Slice 2 push 2 reviewed** (`ade2616`): a chasing
+  guard follows a hero he saw leave through a door (system
+  `alert-follow`, order 605), never one he did not see leave; a door
+  alone never changes the alert; the guard goes home through the doors
+  when the alert is over. The worker also found and fixed a real bug on
+  rebase (a searching guard pacing into a walk door was carried back
+  and forth for ever). Gate D now lists 9 scenarios: the 6 of push 1
+  plus `step4-guard-follows-seen`, `step4-leaves-unseen-guard-stays`,
+  `step4-door-and-back-alert-unchanged` (the step's door control).
+  Review: fresh pull, build and check green (91 ok), `npm run gates`
+  5 of 6, `check:deployed` ok; my control (a guard follows anyone who
+  leaves, seen or not) fails `step4-leaves-unseen-guard-stays`. Not
+  looked at on the live page.
+- **Lead, 09:48 UTC. STOPPED for the night** on the orchestrator's
+  word (the account is near its weekly limit): the worker was told not
+  to start push 3. **What is left of Step 4, for a fresh lead:**
+  (1) hiding places count as unseen: one line in `src/sim/npc/sight.ts`
+  (a body with `entity.c.roomHide` is not seen; Step 3 has placed hide
+  parts in `castle-street` and `throne-room`), a scenario, a control;
+  (2) the step's own signal-3 control, the caller knocked out before
+  finishing (Step 2's `attack` is on `main`), and its partner rule:
+  the blow that knocks someone out is perceived by them, and someone
+  who finds a knocked-out person may call (rule 7 in the slice 2
+  brief); (3) a real iPhone check of Use, the marks and the alarm.
+  Gates C and D are passing with a scenario for every signal except
+  (2). The slice 2 brief stays in `handoff-prompts/` until (1) and (2)
+  are done; its first section says what is left.
