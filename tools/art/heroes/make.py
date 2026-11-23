@@ -16,6 +16,7 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)  # python3 -I does not add the script's folder
+sys.dont_write_bytecode = True  # leave no __pycache__ in the repository
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(HERE)))
 
 import build  # noqa: E402

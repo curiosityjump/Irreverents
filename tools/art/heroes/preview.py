@@ -17,6 +17,7 @@ import tempfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)  # python3 -I does not add the script's folder
+sys.dont_write_bytecode = True  # leave no __pycache__ in the repository
 
 from PIL import Image, ImageDraw, ImageFont  # noqa: E402
 
