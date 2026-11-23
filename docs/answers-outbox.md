@@ -27,8 +27,3 @@ changed>` as its heading. The first one in a new project is the genesis
 entry: "first vision written; no plan exists yet", naming the sections.
 
 ## Entries
-
-### Vision · Visual direction (the owner's 11:11 UTC "blocky" verdict folded in)
-- **Answer:** the owner, to the orchestrator: "Compare to kirby and the amazing mirror and don't stop working on it until it looks similar to that. There are assets provided and you have the ability to get more." Quoted under `docs/vision.md` "Visual direction", with framing that the designs stay original.
-- **Recorded in:** `docs/vision.md` "Visual direction" (this commit); the source is `docs/plan/step-8.md`
-- **Action for:** orchestrator (vision-level): nothing new beyond Step 8, which already carries it. The asset desk filed the matching Drive request (third hero, king, villain, and a priority order across all pending requests), `docs/mechanisms/asset-requests.md`.
