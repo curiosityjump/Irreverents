@@ -958,6 +958,69 @@
    "sha256": "ebfe3fe81941fb833209c68bc6404b7b0a5dfcb99d2b25df32c60c9416d0f8d4"
   },
   {
+   "kind": "file",
+   "id": "1ogP8w7as9pLnylpDXCyV8rzxpfTVaizi",
+   "drive_path": "/03 Visual Direction and Assets/H07 — Hall of Legends Concept Studies/H07-02_320x180_preview.png",
+   "repo_path": "03-visual-direction-and-assets/h07-hall-of-legends-concept-studies/h07-02-320x180-preview.png",
+   "sha256": "3f39315cd71670924c40e776ac69cc575c25f3b663d944a237562ea10366b41e"
+  },
+  {
+   "kind": "file",
+   "id": "15TMftjYHNoQcvANGgPJdHHud1PlDTSr6",
+   "drive_path": "/03 Visual Direction and Assets/H07 — Hall of Legends Concept Studies/H07-02_grand_center.png",
+   "repo_path": "03-visual-direction-and-assets/h07-hall-of-legends-concept-studies/h07-02-grand-center.png",
+   "sha256": "47645ccb435e548315890cddea8ebd199f05f7a2880ad56dc26179d1b44bb40a"
+  },
+  {
+   "kind": "file",
+   "id": "17iUCMAJiBthS_JKorhHvMHuwNuwGttB6",
+   "drive_path": "/03 Visual Direction and Assets/H07 — Hall of Legends Concept Studies/H07-02_memorial_frames_atlas.png",
+   "repo_path": "03-visual-direction-and-assets/h07-hall-of-legends-concept-studies/h07-02-memorial-frames-atlas.png",
+   "sha256": "4be66e731952d3aa609ccc9753aca6377b9dea27c26ba0d777b20405885ac6b5"
+  },
+  {
+   "kind": "file",
+   "id": "1USBn4Dv7Y7wLUyGwy4nSo6xy6OAKdAlS",
+   "drive_path": "/03 Visual Direction and Assets/H07 — Hall of Legends Concept Studies/H07-02_memorial_frames_importable_prototype.zip",
+   "repo_path": "03-visual-direction-and-assets/h07-hall-of-legends-concept-studies/h07-02-memorial-frames-importable-prototype/",
+   "sha256": "77f57b59375f5d6c24e9811e4acfb87571d611b0d8d4f879b0b782c7226c7685"
+  },
+  {
+   "kind": "file",
+   "id": "1hmUi1bRMYotL3Q99sx5vRKrGehiIOZ_D",
+   "drive_path": "/03 Visual Direction and Assets/H07 — Hall of Legends Concept Studies/H07-02_small_left.png",
+   "repo_path": "03-visual-direction-and-assets/h07-hall-of-legends-concept-studies/h07-02-small-left.png",
+   "sha256": "0c20a8968f26a6fae488b3b1d5b5219c2500cee72cddd46d5965d703d6defa35"
+  },
+  {
+   "kind": "file",
+   "id": "1SZsM05xv9qri521lhgSd5WPiUGKPXrbu",
+   "drive_path": "/03 Visual Direction and Assets/H07 — Hall of Legends Concept Studies/H07-02_small_right.png",
+   "repo_path": "03-visual-direction-and-assets/h07-hall-of-legends-concept-studies/h07-02-small-right.png",
+   "sha256": "2681ba65b065062720e856a374a3b2c483a951c1515ebed4de9b13af73453958"
+  },
+  {
+   "kind": "file",
+   "id": "1otUSbk1nuGCjLiXpU_oXJJcmp6ztDJZ5",
+   "drive_path": "/03 Visual Direction and Assets/H07 — Hall of Legends Concept Studies/H07-03_16px_atlas.png",
+   "repo_path": "03-visual-direction-and-assets/h07-hall-of-legends-concept-studies/h07-03-16px-atlas.png",
+   "sha256": "8081752878b8680b34b65be7c1bfe12e9723d7d4f4382a04904fe051694510a0"
+  },
+  {
+   "kind": "file",
+   "id": "1eQYnRi06x9Q8BY6YawMggqtJ_Q8XZ_98",
+   "drive_path": "/03 Visual Direction and Assets/H07 — Hall of Legends Concept Studies/H07-03_320x180_QA_preview.png",
+   "repo_path": "03-visual-direction-and-assets/h07-hall-of-legends-concept-studies/h07-03-320x180-qa-preview.png",
+   "sha256": "10b79fce8bbafd2a215b6fd61937fb880d5c0b479862edff718325de472dcbdc"
+  },
+  {
+   "kind": "file",
+   "id": "127bAjtwen8TV0gUErZM8BujB_ZFTDlQh",
+   "drive_path": "/03 Visual Direction and Assets/H07 — Hall of Legends Concept Studies/H07-03_modular_terrain_PROTOTYPE.zip",
+   "repo_path": "03-visual-direction-and-assets/h07-hall-of-legends-concept-studies/h07-03-modular-terrain-prototype/",
+   "sha256": "3d64a28a230a7349e4bb934574c7f8369d432690676266d42841ce9774fe20c9"
+  },
+  {
    "kind": "folder",
    "id": "1BSIak5-a3FUlsJ6RW7mqrGLobOB53Erl",
    "drive_path": "/03 Visual Direction and Assets/Superseded Style Explorations"
@@ -1214,14 +1277,14 @@
    "id": "1bnr7GUgrYBVVY0BMkwx4qRPvW45Nk4grn-Tk6THcoY8",
    "drive_path": "/ASSET LIBRARY — START HERE (Claude)",
    "repo_path": "asset-library-start-here-claude.md",
-   "sha256": "8dca68a62b2cbe8b987ea680dd474b7622ae5289eead1658f020e7d72fce4244"
+   "sha256": "5a7b3212a5f4fffffc24f95d197e0be14cbfefa713b2fed09940691dac453423"
   },
   {
    "kind": "doc",
    "id": "17R7aKkqDxQwRk-cmywQbvQ_CcEzz4UqHz37YYYRnADs",
    "drive_path": "/changelog",
    "repo_path": "changelog.md",
-   "sha256": "8c52023814af395e84cc4a4ca6271a5d9919964b03e929a095f2f1439b878184"
+   "sha256": "c820b49a0710c31c27f5b263092daf00ec1a65e0d6bb50309d5d34cc3042b5ae"
   }
  ]
 }

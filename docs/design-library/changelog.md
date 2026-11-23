@@ -2,6 +2,14 @@
 
 ---
 
+2026-11-23 · 8:48 AM EST · ChatGPT — H07-03 TERRAIN PROTOTYPE, VISUAL QA FAILED
+
+Uploaded 16px source-derived terrain atlas, separate parallax/foreground layers, collision JSON and 320×180 assembled QA scene. Visually inspected and rejected assembled composition for clutter, duplicate structures, occlusion and tile seams. Labeled technical prototype only in catalog; H07-01 remains preferred visual reference. No request marked delivered. ZIP: https://drive.google.com/file/d/127bAjtwen8TV0gUErZM8BujB_ZFTDlQh/view ; QA: https://drive.google.com/file/d/1eQYnRi06x9Q8BY6YawMggqtJ_Q8XZ_98/view ; catalog: https://docs.google.com/document/d/1bnr7GUgrYBVVY0BMkwx4qRPvW45Nk4grn-Tk6THcoY8/edit
+
+2026-11-23 · 8:40 AM EST · ChatGPT — H07-02 IMPORTABLE MEMORIAL FRAME PROTOTYPE
+
+Converted the H07-01 scene's three memorial frames into separate transparent prop PNGs, a 256×80 atlas, JSON manifest and 320×180 preview, bundled in ZIP. Verified Drive upload, atlas alpha and visible preview. Classified IMPORTABLE PROTOTYPE, not game-ready visual QA: extraction/edge cleanup and integration still required. Catalog updated by category; no REQ closed. Files: https://drive.google.com/drive/folders/1ziNuvVtP8yvDr-\_7Yg4-g7xc-FcxpPfr ; catalog: https://docs.google.com/document/d/1bnr7GUgrYBVVY0BMkwx4qRPvW45Nk4grn-Tk6THcoY8/edit
+
 2026-11-23 · 8:37 AM EST · ChatGPT — H07 HALL OF LEGENDS NEW CONCEPT REFERENCE
 
 Created and uploaded an original H07-01 side-on Hall of Legends corridor visual exploration into 03 Visual Direction and Assets. Indexed it by functional category in the central catalog with direct file/folder links and explicit CONCEPT ONLY status. This is a flattened scene, NOT modular tiles or validated gameplay art; no existing art was superseded and no REQ was closed. Catalog: https://docs.google.com/document/d/1bnr7GUgrYBVVY0BMkwx4qRPvW45Nk4grn-Tk6THcoY8/edit ; image: https://drive.google.com/file/d/1TSgZ9J5JeBs6CCTA1gFCdvpeUMBi-GXf/view ; folder: https://drive.google.com/drive/folders/1ziNuvVtP8yvDr-\_7Yg4-g7xc-FcxpPfr

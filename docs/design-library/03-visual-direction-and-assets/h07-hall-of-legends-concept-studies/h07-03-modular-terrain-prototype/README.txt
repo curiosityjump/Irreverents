@@ -1,0 +1,1 @@
+H07-03 modular terrain prototype. Tile atlas 8 columns x 3 rows, 16px per tile. Layer PNGs are separate. Scene preview at 320x180. JSON contains collision and placements. Importable geometry, not visually signed-off. Source-derived textures may exhibit seams. Do not replace approved artwork as quality target.

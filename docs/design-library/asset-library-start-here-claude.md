@@ -2,6 +2,30 @@
 
 ---
 
+H07-03 — HALL OF LEGENDS / MODULAR TERRAIN EXPERIMENT — QUALITY FAIL (2026-11-23)
+
+CATEGORY: Hall of Legends / terrain tiles and parallax. SOURCE: H07-01 scene; follows H07-02 frame props. 24 16×16 source-derived tile images in 128×48 RGBA atlas; JSON tile coordinates, 44 placed tiles/collision rectangles, separate foreground terrain, midground stone wall, and far stained-glass/window strip. Includes 320×180 QA preview and README in ZIP. STATUS: IMPORTABLE TECHNICAL PROTOTYPE ONLY — FAILED VISUAL QUALITY GATE. QA preview shows duplicated background architectural elements, poor frame placement/occlusion, nonseamless tile edges and clutter; DO NOT use as preferred art or present as game-ready. Retain approved H07-01 scene as stronger aesthetic reference; rebuild manually curated tiles, mask/clean parallax and recompose at 320×180 before promotion. No REQ closed, no source superseded.
+
+ZIP: https://drive.google.com/file/d/127bAjtwen8TV0gUErZM8BujB_ZFTDlQh/view
+
+ATLAS: https://drive.google.com/file/d/1otUSbk1nuGCjLiXpU_oXJJcmp6ztDJZ5/view
+
+QA PREVIEW: https://drive.google.com/file/d/1eQYnRi06x9Q8BY6YawMggqtJ_Q8XZ_98/view
+
+FOLDER: https://drive.google.com/drive/folders/1ziNuvVtP8yvDr-\_7Yg4-g7xc-FcxpPfr
+
+H07-02 — HALL OF LEGENDS / INTERACTIVE MEMORY FRAME PROPS (2026-11-23)
+
+CATEGORY: Hall of Legends / memorial frames / dynamic screenshot display. Source: H07-01 concept reference; no request Doc. STATUS: IMPORTABLE PROTOTYPE — NOT ART QUALITY VERIFIED / NOT FINAL GAME READY. Three distinct transparent RGBA PNG props (80×64, 96×80, 80×64), atlas 256×80, ZIP with manifest.json (atlas rectangles, anchors, display openings), and 320×180 preview. Openings are transparent so live screenshot textures can render behind the prop. Actual alpha, atlas dimensions, and 320×180 composite inspected. Limitations: source-image extraction has rough/contaminated edge pixels, reduced pixel fidelity, no complete playable Hall terrain or parallax; needs artist cleanup and integration test. No earlier art superseded.
+
+ZIP: https://drive.google.com/file/d/1USBn4Dv7Y7wLUyGwy4nSo6xy6OAKdAlS/view
+
+ATLAS: https://drive.google.com/file/d/17iUCMAJiBthS_JKorhHvMHuwNuwGttB6/view
+
+PREVIEW: https://drive.google.com/file/d/1ogP8w7as9pLnylpDXCyV8rzxpfTVaizi/view
+
+FOLDER (includes three separate PNG props): https://drive.google.com/drive/folders/1ziNuvVtP8yvDr-\_7Yg4-g7xc-FcxpPfr
+
 H07 — HALL OF LEGENDS / CONCEPT REFERENCE (2026-11-23)
 
 Asset ID: H07-01 exploratory corridor composition. Functional category: Hall of Legends / level art and dynamic memory display. Source: 13 Art Production Plan, Gate 7 (no Claude REQ yet). Format: 1648×928 PNG, flattened scene with three blank monument frames, side-on floor, doorways and upper route. Status: CONCEPT REFERENCE ONLY — NOT A TILESET, NOT GAME-READY. Use as architectural/composition direction, NOT a direct importable room. Visual limitations: too dense for quiet gameplay baseline, illustrative pixels not validated to 16px grid; character design not canonical. Requires separated 16px terrain, parallax, collision, blank dynamic screenshot frame masks and a 320×180 test before integration. This does not supersede any approved environment references.

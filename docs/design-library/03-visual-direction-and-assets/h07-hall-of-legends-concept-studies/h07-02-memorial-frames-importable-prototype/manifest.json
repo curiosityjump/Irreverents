@@ -1,0 +1,92 @@
+{
+  "asset_id": "H07-02",
+  "version": "0.1",
+  "status": "IMPORTABLE PROTOTYPE \u2014 VISUAL QA NOT PASSED",
+  "source": "H07-01 flattened hall concept",
+  "atlas": "h07_frames_atlas.png",
+  "pixel_filter": "nearest",
+  "display_content_order": "render screenshot below transparent frame",
+  "objects": [
+    {
+      "id": "small_left",
+      "file": "small_left.png",
+      "size": [
+        80,
+        64
+      ],
+      "anchor": [
+        40,
+        53
+      ],
+      "display_rect": [
+        24,
+        19,
+        40,
+        21
+      ],
+      "collision": false,
+      "atlas_rect": [
+        0,
+        0,
+        80,
+        64
+      ]
+    },
+    {
+      "id": "grand_center",
+      "file": "grand_center.png",
+      "size": [
+        96,
+        80
+      ],
+      "anchor": [
+        48,
+        57
+      ],
+      "display_rect": [
+        23,
+        23,
+        49,
+        28
+      ],
+      "collision": false,
+      "atlas_rect": [
+        80,
+        0,
+        96,
+        80
+      ]
+    },
+    {
+      "id": "small_right",
+      "file": "small_right.png",
+      "size": [
+        80,
+        64
+      ],
+      "anchor": [
+        40,
+        53
+      ],
+      "display_rect": [
+        23,
+        19,
+        40,
+        21
+      ],
+      "collision": false,
+      "atlas_rect": [
+        176,
+        0,
+        80,
+        64
+      ]
+    }
+  ],
+  "limitations": [
+    "Image-extracted source has imprecise silhouette masks and background contamination",
+    "Frame sizes exceed 32px character cell (these are props, not characters)",
+    "Requires hand cleanup and artist review before production quality acceptance",
+    "Visual source extraction may retain a few background pixels; art cleanup remains required"
+  ]
+}

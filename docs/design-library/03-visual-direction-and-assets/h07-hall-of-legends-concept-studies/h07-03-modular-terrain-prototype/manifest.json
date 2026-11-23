@@ -1,0 +1,738 @@
+{
+  "id": "H07-03",
+  "status": "IMPORTABLE PROTOTYPE - VISUAL QA NOT PASSED",
+  "tileSize": 16,
+  "atlas": "h07_terrain_atlas_16px.png",
+  "atlasColumns": 8,
+  "atlasRows": 3,
+  "tiles": [
+    {
+      "id": "wall_a",
+      "atlasRect": [
+        0,
+        0,
+        16,
+        16
+      ]
+    },
+    {
+      "id": "wall_b",
+      "atlasRect": [
+        16,
+        0,
+        16,
+        16
+      ]
+    },
+    {
+      "id": "wall_c",
+      "atlasRect": [
+        32,
+        0,
+        16,
+        16
+      ]
+    },
+    {
+      "id": "wall_d",
+      "atlasRect": [
+        48,
+        0,
+        16,
+        16
+      ]
+    },
+    {
+      "id": "floor_top_a",
+      "atlasRect": [
+        64,
+        0,
+        16,
+        16
+      ]
+    },
+    {
+      "id": "floor_top_b",
+      "atlasRect": [
+        80,
+        0,
+        16,
+        16
+      ]
+    },
+    {
+      "id": "floor_top_c",
+      "atlasRect": [
+        96,
+        0,
+        16,
+        16
+      ]
+    },
+    {
+      "id": "floor_top_d",
+      "atlasRect": [
+        112,
+        0,
+        16,
+        16
+      ]
+    },
+    {
+      "id": "floor_body_a",
+      "atlasRect": [
+        0,
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "id": "floor_body_b",
+      "atlasRect": [
+        16,
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "id": "floor_body_c",
+      "atlasRect": [
+        32,
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "id": "floor_body_d",
+      "atlasRect": [
+        48,
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "id": "arch_a",
+      "atlasRect": [
+        64,
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "id": "arch_b",
+      "atlasRect": [
+        80,
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "id": "arch_c",
+      "atlasRect": [
+        96,
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "id": "arch_d",
+      "atlasRect": [
+        112,
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "id": "platform_a",
+      "atlasRect": [
+        0,
+        32,
+        16,
+        16
+      ]
+    },
+    {
+      "id": "platform_b",
+      "atlasRect": [
+        16,
+        32,
+        16,
+        16
+      ]
+    },
+    {
+      "id": "platform_c",
+      "atlasRect": [
+        32,
+        32,
+        16,
+        16
+      ]
+    },
+    {
+      "id": "platform_d",
+      "atlasRect": [
+        48,
+        32,
+        16,
+        16
+      ]
+    },
+    {
+      "id": "stone_a",
+      "atlasRect": [
+        64,
+        32,
+        16,
+        16
+      ]
+    },
+    {
+      "id": "stone_b",
+      "atlasRect": [
+        80,
+        32,
+        16,
+        16
+      ]
+    },
+    {
+      "id": "stone_c",
+      "atlasRect": [
+        96,
+        32,
+        16,
+        16
+      ]
+    },
+    {
+      "id": "stone_d",
+      "atlasRect": [
+        112,
+        32,
+        16,
+        16
+      ]
+    }
+  ],
+  "layers": [
+    {
+      "file": "parallax_far_windows_320x94.png",
+      "scrollFactor": 0.15,
+      "collision": false
+    },
+    {
+      "file": "parallax_mid_stonewall_320x180.png",
+      "scrollFactor": 0.5,
+      "collision": false
+    },
+    {
+      "file": "foreground_tiles_320x180.png",
+      "scrollFactor": 1.0,
+      "collision": true
+    }
+  ],
+  "collisionRects": [
+    {
+      "x": 0,
+      "y": 144,
+      "w": 16,
+      "h": 16
+    },
+    {
+      "x": 0,
+      "y": 160,
+      "w": 16,
+      "h": 16
+    },
+    {
+      "x": 16,
+      "y": 144,
+      "w": 16,
+      "h": 16
+    },
+    {
+      "x": 16,
+      "y": 160,
+      "w": 16,
+      "h": 16
+    },
+    {
+      "x": 32,
+      "y": 144,
+      "w": 16,
+      "h": 16
+    },
+    {
+      "x": 32,
+      "y": 160,
+      "w": 16,
+      "h": 16
+    },
+    {
+      "x": 48,
+      "y": 144,
+      "w": 16,
+      "h": 16
+    },
+    {
+      "x": 48,
+      "y": 160,
+      "w": 16,
+      "h": 16
+    },
+    {
+      "x": 64,
+      "y": 144,
+      "w": 16,
+      "h": 16
+    },
+    {
+      "x": 64,
+      "y": 160,
+      "w": 16,
+      "h": 16
+    },
+    {
+      "x": 80,
+      "y": 144,
+      "w": 16,
+      "h": 16
+    },
+    {
+      "x": 80,
+      "y": 160,
+      "w": 16,
+      "h": 16
+    },
+    {
+      "x": 96,
+      "y": 144,
+      "w": 16,
+      "h": 16
+    },
+    {
+      "x": 96,
+      "y": 160,
+      "w": 16,
+      "h": 16
+    },
+    {
+      "x": 112,
+      "y": 144,
+      "w": 16,
+      "h": 16
+    },
+    {
+      "x": 112,
+      "y": 160,
+      "w": 16,
+      "h": 16
+    },
+    {
+      "x": 128,
+      "y": 144,
+      "w": 16,
+      "h": 16
+    },
+    {
+      "x": 128,
+      "y": 160,
+      "w": 16,
+      "h": 16
+    },
+    {
+      "x": 144,
+      "y": 144,
+      "w": 16,
+      "h": 16
+    },
+    {
+      "x": 144,
+      "y": 160,
+      "w": 16,
+      "h": 16
+    },
+    {
+      "x": 160,
+      "y": 144,
+      "w": 16,
+      "h": 16
+    },
+    {
+      "x": 160,
+      "y": 160,
+      "w": 16,
+      "h": 16
+    },
+    {
+      "x": 176,
+      "y": 144,
+      "w": 16,
+      "h": 16
+    },
+    {
+      "x": 176,
+      "y": 160,
+      "w": 16,
+      "h": 16
+    },
+    {
+      "x": 192,
+      "y": 144,
+      "w": 16,
+      "h": 16
+    },
+    {
+      "x": 192,
+      "y": 160,
+      "w": 16,
+      "h": 16
+    },
+    {
+      "x": 208,
+      "y": 144,
+      "w": 16,
+      "h": 16
+    },
+    {
+      "x": 208,
+      "y": 160,
+      "w": 16,
+      "h": 16
+    },
+    {
+      "x": 224,
+      "y": 144,
+      "w": 16,
+      "h": 16
+    },
+    {
+      "x": 224,
+      "y": 160,
+      "w": 16,
+      "h": 16
+    },
+    {
+      "x": 240,
+      "y": 144,
+      "w": 16,
+      "h": 16
+    },
+    {
+      "x": 240,
+      "y": 160,
+      "w": 16,
+      "h": 16
+    },
+    {
+      "x": 256,
+      "y": 144,
+      "w": 16,
+      "h": 16
+    },
+    {
+      "x": 256,
+      "y": 160,
+      "w": 16,
+      "h": 16
+    },
+    {
+      "x": 272,
+      "y": 144,
+      "w": 16,
+      "h": 16
+    },
+    {
+      "x": 272,
+      "y": 160,
+      "w": 16,
+      "h": 16
+    },
+    {
+      "x": 288,
+      "y": 144,
+      "w": 16,
+      "h": 16
+    },
+    {
+      "x": 288,
+      "y": 160,
+      "w": 16,
+      "h": 16
+    },
+    {
+      "x": 304,
+      "y": 144,
+      "w": 16,
+      "h": 16
+    },
+    {
+      "x": 304,
+      "y": 160,
+      "w": 16,
+      "h": 16
+    },
+    {
+      "x": 224,
+      "y": 96,
+      "w": 16,
+      "h": 16
+    },
+    {
+      "x": 240,
+      "y": 96,
+      "w": 16,
+      "h": 16
+    },
+    {
+      "x": 256,
+      "y": 96,
+      "w": 16,
+      "h": 16
+    },
+    {
+      "x": 272,
+      "y": 96,
+      "w": 16,
+      "h": 16
+    }
+  ],
+  "placements": [
+    {
+      "tile": "floor_top_a",
+      "x": 0,
+      "y": 144
+    },
+    {
+      "tile": "floor_body_a",
+      "x": 0,
+      "y": 160
+    },
+    {
+      "tile": "floor_top_b",
+      "x": 16,
+      "y": 144
+    },
+    {
+      "tile": "floor_body_b",
+      "x": 16,
+      "y": 160
+    },
+    {
+      "tile": "floor_top_c",
+      "x": 32,
+      "y": 144
+    },
+    {
+      "tile": "floor_body_c",
+      "x": 32,
+      "y": 160
+    },
+    {
+      "tile": "floor_top_d",
+      "x": 48,
+      "y": 144
+    },
+    {
+      "tile": "floor_body_d",
+      "x": 48,
+      "y": 160
+    },
+    {
+      "tile": "floor_top_a",
+      "x": 64,
+      "y": 144
+    },
+    {
+      "tile": "floor_body_a",
+      "x": 64,
+      "y": 160
+    },
+    {
+      "tile": "floor_top_b",
+      "x": 80,
+      "y": 144
+    },
+    {
+      "tile": "floor_body_b",
+      "x": 80,
+      "y": 160
+    },
+    {
+      "tile": "floor_top_c",
+      "x": 96,
+      "y": 144
+    },
+    {
+      "tile": "floor_body_c",
+      "x": 96,
+      "y": 160
+    },
+    {
+      "tile": "floor_top_d",
+      "x": 112,
+      "y": 144
+    },
+    {
+      "tile": "floor_body_d",
+      "x": 112,
+      "y": 160
+    },
+    {
+      "tile": "floor_top_a",
+      "x": 128,
+      "y": 144
+    },
+    {
+      "tile": "floor_body_a",
+      "x": 128,
+      "y": 160
+    },
+    {
+      "tile": "floor_top_b",
+      "x": 144,
+      "y": 144
+    },
+    {
+      "tile": "floor_body_b",
+      "x": 144,
+      "y": 160
+    },
+    {
+      "tile": "floor_top_c",
+      "x": 160,
+      "y": 144
+    },
+    {
+      "tile": "floor_body_c",
+      "x": 160,
+      "y": 160
+    },
+    {
+      "tile": "floor_top_d",
+      "x": 176,
+      "y": 144
+    },
+    {
+      "tile": "floor_body_d",
+      "x": 176,
+      "y": 160
+    },
+    {
+      "tile": "floor_top_a",
+      "x": 192,
+      "y": 144
+    },
+    {
+      "tile": "floor_body_a",
+      "x": 192,
+      "y": 160
+    },
+    {
+      "tile": "floor_top_b",
+      "x": 208,
+      "y": 144
+    },
+    {
+      "tile": "floor_body_b",
+      "x": 208,
+      "y": 160
+    },
+    {
+      "tile": "floor_top_c",
+      "x": 224,
+      "y": 144
+    },
+    {
+      "tile": "floor_body_c",
+      "x": 224,
+      "y": 160
+    },
+    {
+      "tile": "floor_top_d",
+      "x": 240,
+      "y": 144
+    },
+    {
+      "tile": "floor_body_d",
+      "x": 240,
+      "y": 160
+    },
+    {
+      "tile": "floor_top_a",
+      "x": 256,
+      "y": 144
+    },
+    {
+      "tile": "floor_body_a",
+      "x": 256,
+      "y": 160
+    },
+    {
+      "tile": "floor_top_b",
+      "x": 272,
+      "y": 144
+    },
+    {
+      "tile": "floor_body_b",
+      "x": 272,
+      "y": 160
+    },
+    {
+      "tile": "floor_top_c",
+      "x": 288,
+      "y": 144
+    },
+    {
+      "tile": "floor_body_c",
+      "x": 288,
+      "y": 160
+    },
+    {
+      "tile": "floor_top_d",
+      "x": 304,
+      "y": 144
+    },
+    {
+      "tile": "floor_body_d",
+      "x": 304,
+      "y": 160
+    },
+    {
+      "tile": "platform_a",
+      "x": 224,
+      "y": 96
+    },
+    {
+      "tile": "platform_b",
+      "x": 240,
+      "y": 96
+    },
+    {
+      "tile": "platform_c",
+      "x": 256,
+      "y": 96
+    },
+    {
+      "tile": "platform_d",
+      "x": 272,
+      "y": 96
+    }
+  ],
+  "source": "H07-01 source art",
+  "limitations": [
+    "source-derived crops retain artifacts and edge seams",
+    "source window parallax is a flattened source strip",
+    "visual finish requires artist cleanup",
+    "room is an importable layout prototype, not final game-ready art"
+  ]
+}
