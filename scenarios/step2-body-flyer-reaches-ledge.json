@@ -1,5 +1,5 @@
 {
-  "id": "body-flyer-reaches-ledge",
+  "id": "step2-body-flyer-reaches-ledge",
   "gate": "A",
   "proves": "the flyer jumps, flaps three times and stands on the ledge 5 tiles above the floor; one press is a take-off or a flap, never both; holding does not flap again; a fourth press has no flap left",
   "room": "test-body",

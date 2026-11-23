@@ -1,7 +1,7 @@
 {
-  "id": "body-grappler-misses-ledge",
+  "id": "step2-body-grappler-misses-ledge",
   "gate": "A",
-  "proves": "with the same inputs as body-flyer-reaches-ledge, the grappler never flaps and ends on the floor, not on the ledge",
+  "proves": "with the same inputs as step2-body-flyer-reaches-ledge, the grappler never flaps and ends on the floor, not on the ledge",
   "room": "test-body",
   "players": [
     {"id": "a", "character": "grappler", "spawn": 0}

@@ -64,7 +64,7 @@ Once the owner confirms one, move it into its area's section with their
 words.
 
 **Pressing switch in a tight space sometimes does nothing, or skips a member.**
-→ Intended. A member whose body would stand inside solid tiles where you are (the grappler or the flyer inside a one-tile-high crawlspace) is never switched to; the next member is tried, and if none fits the switch is refused with a `switch-refused` event and nothing changes. This is the project's "there is always a way out" principle (`CLAUDE.md`): a player is never left inside a wall. Decided by the Step 2 lead, 2026-11-23 (`docs/plan/step-2.md`); the owner may overrule. `INTENT:` at `src/sim/verbs/switch.ts`. Proven by `scenarios/body-switch-refused-in-gap.json`.
+→ Intended. A member whose body would stand inside solid tiles where you are (the grappler or the flyer inside a one-tile-high crawlspace) is never switched to; the next member is tried, and if none fits the switch is refused with a `switch-refused` event and nothing changes. This is the project's "there is always a way out" principle (`CLAUDE.md`): a player is never left inside a wall. Decided by the Step 2 lead, 2026-11-23 (`docs/plan/step-2.md`); the owner may overrule. `INTENT:` at `src/sim/verbs/switch.ts`. Proven by `scenarios/step2-body-switch-refused-in-gap.json`.
 
 ---
 

@@ -1,5 +1,5 @@
 {
-  "id": "body-switch-two-players",
+  "id": "step2-body-switch-two-players",
   "gate": "A",
   "proves": "A switches and becomes the one member neither player was playing; B is not moved off theirs and does not change; when no other member is free the switch is refused",
   "room": "test-body",

@@ -1,7 +1,7 @@
 {
-  "id": "body-flyer-stopped-by-gap",
+  "id": "step2-body-flyer-stopped-by-gap",
   "gate": "A",
-  "proves": "with the same inputs as body-infiltrator-fits-gap, the flyer is stopped at the mouth of the crawlspace and stays on the near side",
+  "proves": "with the same inputs as step2-body-infiltrator-fits-gap, the flyer is stopped at the mouth of the crawlspace and stays on the near side",
   "room": "test-body",
   "players": [
     {"id": "a", "character": "flyer", "spawn": 0}

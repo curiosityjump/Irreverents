@@ -31,6 +31,9 @@ const verb: Verb = {
   order: 5,
   actions: ['switch'],
   update(ctx, e, input) {
+    // INTENT: only a player switches. Bodies nobody plays also run verbs
+    // (from entity.c.input); a party seat is a player's, never theirs.
+    if (e.player === null) return;
     const s = (e.c.switch ??= { held: false });
     const down = input.held.includes('switch');
     const fresh = down && !s.held;

@@ -1,5 +1,5 @@
 {
-  "id": "body-infiltrator-fits-gap",
+  "id": "step2-body-infiltrator-fits-gap",
   "gate": "A",
   "proves": "the infiltrator runs through the one-tile-high crawlspace and stands in the chamber on the far side (its own move is its body)",
   "room": "test-body",

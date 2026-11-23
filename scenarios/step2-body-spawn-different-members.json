@@ -1,5 +1,5 @@
 {
-  "id": "body-spawn-different-members",
+  "id": "step2-body-spawn-different-members",
   "gate": "A",
   "proves": "two players spawned with no character named are two different party members, the first two in party order",
   "room": "test-body",

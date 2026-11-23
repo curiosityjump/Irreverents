@@ -1,5 +1,5 @@
 {
-  "id": "body-switch-refused-in-gap",
+  "id": "step2-body-switch-refused-in-gap",
   "gate": "A",
   "proves": "inside the crawlspace the taller bodies do not fit, so the infiltrator's switch is refused and nothing changes (never left inside a wall); out in the chamber the same press works",
   "room": "test-body",

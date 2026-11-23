@@ -1,5 +1,5 @@
 {
-  "id": "body-flyer-coyote-jump-not-flap",
+  "id": "step2-body-flyer-coyote-jump-not-flap",
   "gate": "A",
   "proves": "a flyer that walks off a ledge and presses jump within coyote time gets its jump, not a flap (one press is never both); the next press in the air is a flap",
   "room": "test-body",

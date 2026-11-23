@@ -1,5 +1,5 @@
 {
-  "id": "body-switch-solo",
+  "id": "step2-body-switch-solo",
   "gate": "A",
   "proves": "one player presses switch three times and is each party member in order, back to the first, feet at the same place each time; holding the button switches once",
   "room": "test-body",

@@ -1,5 +1,5 @@
 {
-  "id": "body-switch-midair-no-flaps",
+  "id": "step2-body-switch-midair-no-flaps",
   "gate": "A",
   "proves": "a body that becomes the flyer in mid-air has no flaps until it lands (switching in the air is not endless flight), and a flyer that switches away in mid-air keeps falling; after landing the flyer flaps again",
   "room": "test-body",

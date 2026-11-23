@@ -64,7 +64,7 @@ art can change), switching in place, and what only each can do.
   later in the same tick, takes the press). It keeps its own "was held"
   because `jump` overwrites its own at the end of its update. If you
   reorder either verb or change how coyote time counts, re-run
-  `body-flyer-reaches-ledge` and `body-flyer-coyote-jump-not-flap`.
+  `step2-body-flyer-reaches-ledge` and `step2-body-flyer-coyote-jump-not-flap`.
 - **Becoming the flyer in mid-air gives no flaps until landing**
   (`DRAFT:`). `flap` notices it did not run for this entity last tick
   (`c.flap.tick`) and starts it spent. Without this, cycling `switch` in
@@ -99,6 +99,32 @@ art can change), switching in place, and what only each can do.
 
 ## Checks
 
-`scenarios/body-*.json` (room `test-body`: a crawlspace at columns 5-7
-of row 9, a ledge 5 tiles up at columns 15-18). Each names its control in
-the commit that added it.
+`scenarios/step2-body-*.json`, all tagged gate A, in room `test-body` (a
+crawlspace at columns 5-7 of row 9, a ledge 5 tiles up at columns
+15-18). Each names its control in the commit that added it (792b0aa,
+75da7ee). Against the feedback signals of `docs/plan/step-2.md`:
+
+**Signal 3** (one thing each character can do that the other two cannot):
+
+- The infiltrator: `step2-body-infiltrator-fits-gap` passes;
+  `step2-body-grappler-stopped-by-gap` and
+  `step2-body-flyer-stopped-by-gap` show the other two stopped by the
+  same inputs.
+- The flyer: `step2-body-flyer-reaches-ledge` passes;
+  `step2-body-grappler-misses-ledge` and
+  `step2-body-infiltrator-misses-ledge` show the other two on the floor
+  after the same inputs. `step2-body-flyer-coyote-jump-not-flap` and
+  `step2-body-switch-midair-no-flaps` cover the flap's two rules.
+- The grappler (lifting heavy bodies): the hit's scenarios, not these.
+
+**Signal 4** (a player switches and the other player sees it), the
+headless half: `step2-body-switch-two-players` (A becomes the member
+neither was playing, B is unchanged, and the `switched` event is in the
+one event list every player's screen is fed from). Supporting:
+`step2-body-switch-solo` (cycles all three, feet kept),
+`step2-body-switch-refused-in-gap` (never left inside a wall),
+`step2-body-spawn-different-members` (two joiners are different
+members). The two-screens half needs `npm run e2e` and is not done.
+
+A player only switches: `switch` returns at once for an entity with
+`player: null`, since bodies nobody plays also run verbs.
