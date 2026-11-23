@@ -56,6 +56,7 @@ orchestrator runs `python3 -I tools/drive_sync.py` at check-ins. Past orchestrat
 4. Ring Step 2's lead for (a)+(b) once round 2 closes (Q-013 goes with it).
 5. Refresh `docs/vision-gaps.md` when a step closes; next uncovered gaps: Step 13 (a roster you grow
    by recruiting, gap 12, never drafted), the community swarm (gap 11), objects with surprising uses.
+5b. Before 2026-12-01: Railway stops reading `railway.json` (watch paths, health check, draining seconds). Migrate to `.railway/railway.ts` by a code-only brief if Railway reads it from the repo (`docs/mechanisms/deploy.md`, Traps).
 6. From before, still owed: Step 3 item (a), two phones by touch through the kingdom; the switch gap
    (Step 5); Step 4 slice 2 push 4; Step 7 (detector, then wiring; it opens the same store Step 17
    opens); Step 6 slice B; Step 9.

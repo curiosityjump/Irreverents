@@ -56,6 +56,18 @@ must poll through the gap (three minutes) before calling a push red.
   restart from a document push is acceptable while all play is playtesting.
   The date is Railway's rule, not ours, so if document pushes start
   restarting the game after 1 December, that is expected, not a bug.
+  **Also lost on 2026-12-01** (orchestrator, 17:40 UTC, from Railway's docs
+  via search; docs.railway.com does not resolve from cloud sessions): every
+  other `railway.json` key, i.e. the health check and, from Step 17's
+  hardening, `deploy.drainingSeconds` (the seconds between SIGTERM and
+  SIGKILL, default 0, so the server's save-on-stop gets no time). The
+  replacement is "Infrastructure as Code", a `.railway/railway.ts` file
+  (`railway config migrate` writes it; "do not push a deletion of
+  railway.json until after cutover"). The variable
+  `RAILWAY_DEPLOYMENT_DRAINING_SECONDS` is the by-hand alternative. `DRAFT:`
+  owed before 12-01: a builder writes `.railway/railway.ts` from this file,
+  if Railway reads it from the repo without the owner's login. Otherwise
+  it is a one-line question for the owner.
 - **A new top-level code path does not deploy until it is on the list.**
   If the running game ever needs a file outside the listed paths, add the
   path to `railway.json` *and* `scripts/lib/deploy-paths.ts` in the same
