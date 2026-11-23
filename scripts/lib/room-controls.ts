@@ -49,9 +49,11 @@ export function runRoomControls(content: Content): { problems: string[]; count: 
     // The real content plus this control's rooms. A control that brings its
     // own `game` is a whole map of its own: the real rooms, and what is
     // placed in them, are left out so only the control's rooms are judged.
+    // The art named after real rooms goes too: it never changes a room's
+    // logic (collision never depends on art; docs/mechanisms/art-pipeline.md).
     const files = { ...base };
     if (raw.game !== undefined) {
-      for (const rel of Object.keys(files)) if (rel.startsWith('rooms/') || rel.startsWith('placements/')) delete files[rel];
+      for (const rel of Object.keys(files)) if (/^(rooms|placements|atlases|backdrops|decor|looks)\//.test(rel)) delete files[rel];
       files['game.json'] = raw.game;
     }
     for (const [id, room] of Object.entries(raw.rooms)) files[`rooms/${id}.json`] = room;

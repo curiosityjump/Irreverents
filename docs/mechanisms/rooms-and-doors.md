@@ -289,8 +289,8 @@ tiles are reported once ("and 9 more tile(s) beside it").
 "rooms": { "<id>": <room file> } }`. `npm run check` ("room controls")
 lays each over the real content and requires the check to refuse it with
 one problem line containing every `expect` text. A control with its own
-`"game"` is a whole map of its own (the real rooms and placements are
-left out), which is how the way-out controls work: `sealed-pit` (four
+`"game"` is a whole map of its own (the real rooms and placements, and
+the art files named after rooms, are left out), which is how the way-out controls work: `sealed-pit` (four
 tiles deep, no door), `one-way-drop-no-way-back`,
 `one-way-drop-into-a-loop` (a door is reachable, the start never again),
 `room-not-reachable-from-start`, `start-room-has-no-doors`. A control
