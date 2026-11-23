@@ -27,3 +27,9 @@ changed>` as its heading. The first one in a new project is the genesis
 entry: "first vision written; no plan exists yet", naming the sections.
 
 ## Entries
+
+### Owner feedback · "a bunch of stuff I haven't seen yet" (levels, enemies, the cantina)
+- **Answer:** "I haven't seen any levels being built, enemies, the cantina, etc. there is a bunch of stuff I haven't seen yet" (the owner, first-hand, ~14:30 UTC). Not an answer to Q-010 (still open), and no reorder was asked for.
+- **Recorded in:** `docs/current-directive.md` "Current directive", above "Owed next"
+- **Action for:** orchestrator (process): decide whether breadth (Steps 3/14/15 more rooms, enemies as in the N03 grunt/brute request, Step 11 cantina) runs beside Step 8's look rather than behind it, and tell the owner through the directive.
+

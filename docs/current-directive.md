@@ -217,6 +217,13 @@ woken: it did not delete another step's entries (Step 4's lead withdrew
 the claim). Past orchestrators `session_017WiGzFWfLir1ATiSP7c5E5` and
 `session_017WiGzJeh7Tuov59d8XYmru` only forward; never archive them.
 
+**Owner, 2026-11-23 ~14:30 UTC, to Vision Partner, first-hand, after being told what is live (five small rooms, a king, one guard, one shopkeeper, one villain; no enemies, no cantina, no outpost):**
+> I haven't seen any levels being built, enemies, the cantina, etc. there is a bunch of stuff I haven't seen yet
+
+*(Vision Partner's reading, not the owner's decision:)* the owner is
+noticing breadth missing: more levels, enemies and the cantina, beside the
+look. They didn't say to reorder. Q-010 (the build order) is still open.
+
 **Owed next, in the order I would take it, after the owner has played:**
 1. Whatever the owner says first.
 2. Step 3 item (a): two phone-sized pages by touch through the kingdom
