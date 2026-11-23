@@ -31,6 +31,9 @@ build gates A–F (`docs/measures.md`, M3) from the scenarios' `gate` tags.
 ```
 
 - `id` must equal the file name. `gate` is optional: `A`–`F`.
+- A player's `character` is optional: left out, the player gets the first
+  party member nobody is playing, exactly as a new player does
+  (`docs/mechanisms/party-and-switching.md`).
 - `entities` is optional: bodies nobody plays (a crate, a dummy), each
   `{ "id": "dummy-1", "character": "<character kind id>", "tile": [col, row] }`,
   put in the room before tick 0 with their feet on the floor of that tile,
@@ -59,6 +62,8 @@ build gates A–F (`docs/measures.md`, M3) from the scenarios' `gate` tags.
 | `standing-on-tile` | at tick `at`, `player` is on the ground with tile `tile` under their feet |
 | `position` | at tick `at`, `player`'s feet are within `x` and/or `y` `[min, max]` |
 | `velocity` | at tick `at`, `player`'s `vx` and/or `vy` (pixels per second) are within `[min, max]` |
+| `character` | at tick `at`, `player` is the character kind `is`, and/or a different kind from player `differentFrom` |
+| `clear-of-solid` | on every tick within `between`, `player`'s whole box is outside every solid tile |
 | `event` | event `event` happened (for `player`, if given) on a tick within `between`; optional `count: [min, max]`, and `[0, 0]` means "must not happen" |
 
 Every fact that names a `player` accepts `"entity": "<id>"` instead (one

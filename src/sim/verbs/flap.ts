@@ -1,3 +1,4 @@
+import { heldBy } from '../effects.ts';
 import type { Verb } from '../types.ts';
 
 declare module '../types.ts' {
@@ -52,6 +53,8 @@ const verb: Verb = {
     const fresh = down && !f.held;
     f.held = down;
     if (!fresh || e.onGround) return;
+    // DRAFT: a held or carried player does not flap away (jump breaks free instead).
+    if (heldBy(e) !== null) return;
     // The jump verb, later this tick, takes this press itself while its
     // coyote time has more than one tick left.
     if ((e.c.jump?.coyote ?? 0) >= 2) return;

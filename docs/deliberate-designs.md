@@ -55,16 +55,6 @@ Group entries under `##` headings by area of the system as they accumulate
 sentence, an arrow, and what it actually is — with the owner's words quoted
 where they exist, the date, and the code site.
 
-*Example of the shape (fake — delete when the first real entry lands):*
-
-**Dropping the widget in the archive room leaves it there instead of
-returning it home.**
-→ Intended. The owner: *"I want it to persist where it was dropped, and only
-go home if nobody is around for thirty seconds."* The cost of leaving it is
-still real, but there is a chance to go back for it. `INTENT:` at
-`<path/to/the/site>`. Don't revert without asking; the owner overturned the
-prior design on their own authority.
-
 ### Decisions made on the owner's behalf
 
 Calls a lead or the orchestrator made from recommendations while the owner
@@ -73,7 +63,8 @@ overrule"** and reversible. Until the owner does, don't "fix" them back.
 Once the owner confirms one, move it into its area's section with their
 words.
 
-*(none yet)*
+**Pressing switch in a tight space sometimes does nothing, or skips a member.**
+→ Intended. A member whose body would stand inside solid tiles where you are (the grappler or the flyer inside a one-tile-high crawlspace) is never switched to; the next member is tried, and if none fits the switch is refused with a `switch-refused` event and nothing changes. This is the project's "there is always a way out" principle (`CLAUDE.md`): a player is never left inside a wall. Decided by the Step 2 lead, 2026-11-23 (`docs/plan/step-2.md`); the owner may overrule. `INTENT:` at `src/sim/verbs/switch.ts`. Proven by `scenarios/body-switch-refused-in-gap.json`.
 
 ---
 
@@ -84,7 +75,7 @@ Keep this table in step with the entries:
 
 | Entry | Site |
 |---|---|
-| *(none yet)* | |
+| Switch refused or skips a member in a tight space | `src/sim/verbs/switch.ts` |
 
 **Still unmarked:** list entries that have no `INTENT:` at their site yet.
 Add the marker when you next touch one.

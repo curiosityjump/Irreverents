@@ -13,6 +13,7 @@ content/            the game's data: what exists and how it feels
   game.json           where a player starts, and as whom
   rooms/<id>.json     one room's geometry, rows of characters + a legend
   characters/<id>.json  one kind of body: box, colour, verbs, tuning set
+  party.json          the shared party: member character ids, in order
   actions/<id>.json   one pressable action: label and keyboard keys
 scenarios/<id>.json  scripted play-throughs with the facts expected
 src/
@@ -121,7 +122,8 @@ extends from its own file with `declare module '../types.ts' { … }`
 | …a | Do this | Engine change? |
 |---|---|---|
 | **room** | `content/rooms/<id>.json`: `rows` of characters and a `legend` mapping each to `solid`, `oneway`, `empty` or `spawn`. Point `content/game.json` at it to start there. | No |
-| **character kind** | `content/characters/<id>.json` (box, colour, the verbs it can do, a tuning set name) plus that set under `characters` in `content/tuning.json`. | No |
+| **character kind** | `content/characters/<id>.json` (box up to 32×32, colour, the verbs it can do one per line, a tuning set name) plus that set under `characters` in `content/tuning.json`, holding exactly the numbers its verbs declare. Kinds today: `hero` (Step 1's stand-in, not in the party), the three party members `grappler` (18×30, heavy), `infiltrator` (10×12, quick, fits a one-tile gap), `flyer` (14×20, flaps), and the hit's crates and dummies. A mark for it on screen is optional, in `src/client/draw/entities.ts` (`MARKS`). | No |
+| **party member** | A character kind that lists the `switch` verb, added to `members` in `content/party.json` (its place in the list is its place in the seating and switching order). `docs/mechanisms/party-and-switching.md`. | No |
 | **NPC** | Not built yet (Step 4). The place: an NPC kind is data in `content/npcs/<id>.json` read by a new `src/content/kinds/npcs.ts`; its body is a character kind; who stands where is `content/placements/<room id>.json` (a new kind), never the room file; its response logic is a system in `src/sim/systems/`. An NPC in the world is an `Entity` with `player: null`. | Step 4 adds the kind files and systems |
 | **object** | Not built yet (Step 2 for throwables, Step 7 for the machine). The place: `content/objects/<id>.json` + `src/content/kinds/objects.ts`; placed through the same placements files; in the world it is an `Entity`. | The step adds the kind file |
 | **verb** (an action a character can take) | `src/sim/verbs/<id>.ts` default-exporting a `Verb` (its `order`, the tuning numbers and action ids it reads, `update`). If it needs a button, `content/actions/<id>.json`. List the verb id in each character that can do it and add its numbers to their tuning sets. | One new file, no edits |
@@ -153,6 +155,14 @@ Ids are entity ids; `by` is who did it, `target` whom it was done to.
 In `hit`, `grabbed`, `thrown` and `released`, `player` is the player id
 of `by` (null when a non-player did it); in `impact` it is the player id
 of `entity`.
+
+The party's events (`docs/mechanisms/party-and-switching.md`):
+
+| Event | Fields | Means |
+|---|---|---|
+| `switched` | `entity`, `player`, `from`, `to` | a player's entity changed character kind, in place; its id did not change |
+| `switch-refused` | `entity`, `player`, `reason` | switch pressed and nothing changed: `no-fit` (no free member's body fits there) or `none-free` (every other member is being played) |
+| `flapped` | `entity`, `player`, `left` | the flyer flapped in the air; `left` flaps remain before it must land |
 
 - **Knocked out is `entity.c.flattened`**, present on any entity exactly
   while it is out (at least `{ ticksLeft }`). The body stays in the

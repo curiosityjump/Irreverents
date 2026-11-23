@@ -246,3 +246,24 @@ document as a decision of theirs.
 - **To change it:** tell Vision Partner you don't mind interruptions.
 - **Where:** `docs/current-directive.md`, "Stopping condition".
 
+
+### 2026-11-23 · How the three heroes look and feel for now: a big slow orange one, a tiny quick green one, a light blue one with wings
+- **Decided by:** brief-worker, Step 2 "the body", `session_017WiGzEqGVmbgjJyorj73iV`
+- **Instead of asking:** "How big, how fast and what colour is each of the three, and who does the first person to join get?"
+- **Why this way:** they are placeholders until art arrives (D-096), so the aim was only that you can tell them apart at a glance on a phone and feel a difference in your thumbs. The grappler is the biggest (about a tile wide, two tall), slower to start and stop, with shoulders and a belt drawn on. The infiltrator is under a tile tall, runs about a third faster than the others, jumps a little lower and wears a headband. The flyer is in between, jumps weakest from the ground and has two small wings. The first person in is the grappler, the second the infiltrator, the third the flyer; the switch button goes round in that same order.
+- **To change it:** numbers in the tuning file, sizes and colours in each hero's file, the order in the party file; the drawn marks are a few lines of drawing code and go away when sprites arrive.
+- **Where:** `content/tuning.json`, `content/characters/`, `content/party.json`, `src/client/draw/entities.ts`; `docs/mechanisms/party-and-switching.md`.
+
+### 2026-11-23 · The flyer gets three flaps per time in the air, and switching to the flyer in mid-air gives none until you land
+- **Decided by:** brief-worker, Step 2 "the body", `session_017WiGzEqGVmbgjJyorj73iV`
+- **Instead of asking:** "How much can the flyer fly?" (your library gives flight no limits: "not stated".)
+- **Why this way:** each flap is a weaker push than a jump, and three of them carry the flyer to a ledge five tiles up that the other two cannot reach, which is what makes it the flyer. Without the mid-air rule, tapping switch round and round in the air would refill the flaps for ever and every high place in the game would be reachable by anyone, with nothing left for the rooms to hide.
+- **To change it:** two numbers (how many flaps, how strong); the mid-air rule is one line.
+- **Where:** `src/sim/verbs/flap.ts`, `content/tuning.json` ("flyer"); `docs/mechanisms/party-and-switching.md`.
+
+### 2026-11-23 · Switching hero happens on the spot; where the new body would be inside a wall it skips to one that fits, or does nothing
+- **Decided by:** brief-worker, Step 2 "the body", `session_017WiGzEqGVmbgjJyorj73iV`
+- **Instead of asking:** "What should the switch button do when the bigger hero would not fit where you are standing?"
+- **Why this way:** nobody should ever end up stuck inside a wall, so in a crawlspace the tiny one stays tiny when you press switch. Standing right against a wall is different: there the wider hero is simply nudged a few pixels clear, so the button does not feel broken beside walls.
+- **To change it:** the nudge is one small block of code; the refusal should stay unless something else guarantees a way out.
+- **Where:** `src/sim/verbs/switch.ts`; `docs/deliberate-designs.md`.

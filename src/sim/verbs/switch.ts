@@ -1,3 +1,4 @@
+import { heldBy } from '../effects.ts';
 import { boxInSolid, memberTaken } from '../party.ts';
 import type { Verb } from '../types.ts';
 
@@ -35,6 +36,9 @@ const verb: Verb = {
     const fresh = down && !s.held;
     s.held = down;
     if (!fresh) return;
+    // DRAFT: a player someone is holding or carrying may not switch (the
+    // press is ignored; break free first, with jump).
+    if (heldBy(e) !== null) return;
 
     const members = ctx.content.party.members;
     const at = members.indexOf(e.kind);

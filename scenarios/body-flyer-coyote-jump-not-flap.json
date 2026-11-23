@@ -1,0 +1,28 @@
+{
+  "id": "body-flyer-coyote-jump-not-flap",
+  "gate": "A",
+  "proves": "a flyer that walks off a ledge and presses jump within coyote time gets its jump, not a flap (one press is never both); the next press in the air is a flap",
+  "room": "test-body",
+  "players": [
+    {"id": "a", "character": "flyer", "spawn": 0}
+  ],
+  "inputs": [
+    {"player": "a", "from": 0, "to": 33, "x": 1},
+    {"player": "a", "from": 50, "to": 60, "hold": ["jump"]},
+    {"player": "a", "from": 72, "to": 76, "hold": ["jump"]},
+    {"player": "a", "from": 88, "to": 92, "hold": ["jump"]},
+    {"player": "a", "from": 104, "to": 108, "hold": ["jump"]},
+    {"player": "a", "from": 112, "to": 114, "hold": ["jump"], "//": "a fourth press in the air: no flaps left"},
+    {"player": "a", "from": 100, "to": 150, "x": 1},
+    {"player": "a", "from": 200, "to": 300, "x": -1},
+    {"player": "a", "from": 245, "to": 248, "hold": ["jump"], "//": "3 ticks after leaving the ledge at tick 242"},
+    {"player": "a", "from": 262, "to": 265, "hold": ["jump"]}
+  ],
+  "ticks": 300,
+  "expect": [
+    {"fact": "standing-on-tile", "player": "a", "at": 200, "tile": [18, 5]},
+    {"fact": "event", "event": "jumped", "player": "a", "between": [245, 245], "count": [1, 1]},
+    {"fact": "event", "event": "flapped", "player": "a", "between": [200, 261], "count": [0, 0]},
+    {"fact": "event", "event": "flapped", "player": "a", "between": [262, 262], "count": [1, 1]}
+  ]
+}
