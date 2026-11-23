@@ -2,6 +2,27 @@
 
 **Reference.** Plan step; its status line is in docs/plan.md.
 
+## 2026-11-23 19:40 UTC, the owner's verdict after playing: a puzzle slice (waits)
+
+**Owner, 2026-11-23 ~18:30 UTC, to Vision Partner, first-hand, after playing
+on a phone** (`docs/vision.md`, "The measure"):
+> Remember the original intentions for the game and make sure things align with it. I want to play it as I described it.
+> There are no heists or stealth yet, no puzzles, no hidden places to explore, no characters to unlock, no escalating combats or chases, no power/item stealing,  no vehicle hijacking, no risk. Virtually everything described in the vision docs that would make the game genuinely fun to play is yet to be seen at all
+
+The re-plan from these words is `docs/plan/core-loops.md`. This step's part is
+its **playable 8, "The Hall's gate and the counterweight"** (section 8): the
+courtyard gate gets a reason (a piece behind its bars, the Hall beyond) and
+solo weights nearby (two crates on the street, placed by Step 14 slice B), and
+the undercroft gets a stone plate that needs about 80 of weight (the grappler
+and either friend together, the heavy crate, the king thrown through the
+window, or the boost of Step 9). **No brief yet: it waits** for Step 14 slice
+B (`handoff-prompts/loop-glints.md`), and only one builder at a time edits
+`content/rooms/undercroft.json` (this, or Step 16's deferred way home: the
+orchestrator says which). The plate's params live in
+`src/sim/systems/room-plate.ts`'s own parts declaration. Before any part is
+added the builder shows the pocket's tiles and the green `step3-*` and way-out
+results.
+
 ## Why
 
 **Owner (Drive, doc 11, D-003), via `docs/vision.md`:**

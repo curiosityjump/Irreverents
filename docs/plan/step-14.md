@@ -2,6 +2,32 @@
 
 **Reference.** Plan step; its status line is in docs/plan.md.
 
+## 2026-11-23 19:40 UTC, the owner's verdict after playing: slice B, the pieces
+
+**Owner, 2026-11-23 ~18:30 UTC, to Vision Partner, first-hand, after playing
+on a phone** (`docs/vision.md`, "The measure"):
+> Remember the original intentions for the game and make sure things align with it. I want to play it as I described it.
+> There are no heists or stealth yet, no puzzles, no hidden places to explore, no characters to unlock, no escalating combats or chases, no power/item stealing,  no vehicle hijacking, no risk. Virtually everything described in the vision docs that would make the game genuinely fun to play is yet to be seen at all
+
+The re-plan from these words is `docs/plan/core-loops.md`. This step's part is
+its **playable 1, "Glints: pieces you can see before you can reach them"**
+(section 1). **Brief: `handoff-prompts/loop-glints.md`.** What it amends below:
+
+- **Pieces are seen before they are reached** (a glint), and a hidden place
+  found is a moment of its own (the pie ticks at the top with a chime). "What's
+  decided" said a piece is unmarked and nothing is shown over the play view:
+  the owner's words (findable without being told) are read as allowing a glint
+  on the piece and a short flash, never a mark on a way, a wall or a door.
+- **What the pieces build is a real object** cut from the approved sheets, one
+  per level, that does one thing; never a stand-in. It is still never named in
+  an id, a log or a report.
+- **D-089 is built here, with D-090** (the chasers follow into the cantina and
+  the alert does not drop), or held back and logged.
+- Progress is the world's top-level `world.found`, kept with a kept game (Step
+  17), not a collection in Step 7's store.
+- The first glint is over the street's awning, not on its roofs (that room's
+  `INTENT:` is that nothing points at them).
+
 ## Why
 
 **Owner (Drive, doc 11, D-078, D-079):**

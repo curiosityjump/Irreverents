@@ -31,9 +31,3 @@ entry: "first vision written; no plan exists yet", naming the sections.
 ## Entries
 
 *(empty)*
-
-### Vision · "I want to play it as I described it" (the measure, after playing)
-- **Answer:** "Remember the original intentions for the game and make sure things align with it. I want to play it as I described it. There are no heists or stealth yet, no puzzles, no hidden places to explore, no characters to unlock, no escalating combats or chases, no power/item stealing,  no vehicle hijacking, no risk. Virtually everything described in the vision docs that would make the game genuinely fun to play is yet to be seen at all" (the owner, first-hand, ~18:30 UTC)
-- **Recorded in:** `docs/vision.md` "The measure", above "Principles"
-- **Action for:** orchestrator (vision-level, top priority): re-plan around the core loops the owner names, each playable start to payoff on a phone and findable without being told: heist/stealth infiltration, puzzles, hidden places, unlockable characters, escalating combat and chases (wanted levels, reinforcements), stealing powers/items, vehicle hijacking, real risk. What exists only as a script doesn't count. Use the library (docs 02, 05–09, 21–31) as the spec, not new invention.
-

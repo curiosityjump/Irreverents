@@ -2,6 +2,20 @@
 
 **Reference.** Plan step; its status line is in docs/plan.md.
 
+## 2026-11-23 19:40 UTC, the owner's verdict after playing: nothing here is briefed
+
+**Owner, 2026-11-23 ~18:30 UTC, to Vision Partner, first-hand, after playing
+on a phone** (`docs/vision.md`, "The measure"):
+> Remember the original intentions for the game and make sure things align with it. I want to play it as I described it.
+> There are no heists or stealth yet, no puzzles, no hidden places to explore, no characters to unlock, no escalating combats or chases, no power/item stealing,  no vehicle hijacking, no risk. Virtually everything described in the vision docs that would make the game genuinely fun to play is yet to be seen at all
+
+The re-plan from these words is `docs/plan/core-loops.md`. It puts the eight
+loops the owner names into the three places that exist (the castle town, the
+Bandit Camp, the quarry's depot) before any new room, so **this step is not
+briefed and waits** behind the eight first playables. When it opens, its
+"one thing out of everyone's reach" should be reached by a power of Step 9 or
+a hero of Step 13, as the quarry pit's ledge is.
+
 ## Why
 
 **Owner (Drive, doc 11, D-003, D-005):**

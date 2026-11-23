@@ -2,6 +2,27 @@
 
 **Reference.** Plan step; its status line is in docs/plan.md.
 
+## 2026-11-23 19:40 UTC, the owner's verdict after playing: the town's tiers (waits)
+
+**Owner, 2026-11-23 ~18:30 UTC, to Vision Partner, first-hand, after playing
+on a phone** (`docs/vision.md`, "The measure"):
+> Remember the original intentions for the game and make sure things align with it. I want to play it as I described it.
+> There are no heists or stealth yet, no puzzles, no hidden places to explore, no characters to unlock, no escalating combats or chases, no power/item stealing,  no vehicle hijacking, no risk. Virtually everything described in the vision docs that would make the game genuinely fun to play is yet to be seen at all
+
+The re-plan from these words is `docs/plan/core-loops.md`. This step's part is
+the second half of its **playable 5, "escalating combat and chases"**
+(section 5, "Part 2, waits: the town"): a guard who sees you fight on blows a
+whistle under a gauge (a real, interruptible call, or it breaks D-063); a
+finished whistle lights the next pip and the next row of a dispatch table
+walks in by both street doors; the pips follow you from room to room; an
+armoured guard from the approved P08 enemy atlas. Doc 27's whistle and doc
+26's wanted ladder are PROPOSED: `DRAFT:`. **No brief yet: it waits** for a
+free builder; Step 18 slice A, which it sits beside, is on `main` and
+reviewed. New files `content/dispatch/**`, `src/sim/systems/alert-dispatch.ts`,
+`alert-whistle.ts`, `scenarios/step4-tier-*.json`. Its sight is drawn by Step
+19 (`handoff-prompts/loop-heist.md`), which edits one export in
+`src/sim/npc/sight.ts` and the Use selection in `npc-interact.ts`.
+
 ## Why
 
 **Owner (Drive, doc 11, D-048, D-063, D-073), via `docs/vision.md`:**

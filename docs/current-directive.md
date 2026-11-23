@@ -57,7 +57,8 @@ them.
 
 *(In order, 19:15 UTC.)*
 1. Whatever the owner says first.
-1a. **The core loops** (the owner's verdict): when `docs/plan/core-loops.md` and
+1a. Brief the core-loop playables in `docs/plan/core-loops.md`'s order: spawn a builder per brief in `handoff-prompts/loop-*.md` (model `claude-opus-5-5`), claim each step.
+1b. **The core loops** (the owner's verdict): when `docs/plan/core-loops.md` and
    `handoff-prompts/loop-*.md` are on `main` (the re-plan's own commit; if it has not landed by
    about 19:45 UTC, ask the previous orchestrator by message, then write the plan yourself from
    `docs/answers-outbox.md`'s entry and the library), spawn one builder per brief plus one for
@@ -165,6 +166,12 @@ heading:
   it.
 
 ## Current directive
+
+**Owner, 2026-11-23 ~18:30 UTC, to Vision Partner, first-hand, after playing the live game on a phone** (`docs/vision.md`, "The measure"):
+> Remember the original intentions for the game and make sure things align with it. I want to play it as I described it.
+> There are no heists or stealth yet, no puzzles, no hidden places to explore, no characters to unlock, no escalating combats or chases, no power/item stealing,  no vehicle hijacking, no risk. Virtually everything described in the vision docs that would make the game genuinely fun to play is yet to be seen at all
+
+*(Added 2026-11-23 19:40 UTC by the core-loops re-plan.)* The order of work is now `docs/plan/core-loops.md`'s ranking.
 
 **Owner, 2026-11-23 ~15:00 UTC, to Vision Partner, first-hand, answering Q-010 [is this the right build order?]:**
 > Just build according to the vision in the way that gets it playable according to the vision as soon as possible.

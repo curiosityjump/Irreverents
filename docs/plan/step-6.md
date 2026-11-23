@@ -2,6 +2,20 @@
 
 **Reference.** Plan step; its status line is in docs/plan.md.
 
+## 2026-11-23 19:40 UTC, the owner's verdict after playing: nothing here is briefed
+
+**Owner, 2026-11-23 ~18:30 UTC, to Vision Partner, first-hand, after playing
+on a phone** (`docs/vision.md`, "The measure"):
+> Remember the original intentions for the game and make sure things align with it. I want to play it as I described it.
+> There are no heists or stealth yet, no puzzles, no hidden places to explore, no characters to unlock, no escalating combats or chases, no power/item stealing,  no vehicle hijacking, no risk. Virtually everything described in the vision docs that would make the game genuinely fun to play is yet to be seen at all
+
+The re-plan from these words is `docs/plan/core-loops.md`. None of the eight
+loops the owner names is this step's, so slice B (the court) is **not briefed
+and waits** behind the eight first playables. One thing from that plan touches
+it: playable 8's stone plate can be pressed by the king thrown down through
+the throne room's stained-glass window, which is the kind of thing the court
+should one day see.
+
 ## Why
 
 **Owner (Drive, doc 01), via `docs/vision.md`** lists it among the

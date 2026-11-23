@@ -2,6 +2,28 @@
 
 **Reference.** Plan step; its status line is in docs/plan.md.
 
+## 2026-11-23 19:40 UTC, the owner's verdict after playing: briefed
+
+**Owner, 2026-11-23 ~18:30 UTC, to Vision Partner, first-hand, after playing
+on a phone** (`docs/vision.md`, "The measure"):
+> Remember the original intentions for the game and make sure things align with it. I want to play it as I described it.
+> There are no heists or stealth yet, no puzzles, no hidden places to explore, no characters to unlock, no escalating combats or chases, no power/item stealing,  no vehicle hijacking, no risk. Virtually everything described in the vision docs that would make the game genuinely fun to play is yet to be seen at all
+
+The re-plan from these words is `docs/plan/core-loops.md`. This step is its
+**playable 3, "Knock it out of him, keep it if you can"** (section 3).
+**Brief: `handoff-prompts/loop-powers.md`.** What changes in this file's plan:
+
+- Step 2 closed at 17:30 UTC, so this step is no longer queued. Its "Owns"
+  said it edits none of Step 2's verbs; the overlay needs the four places a
+  character's numbers are read (`src/sim/systems/verbs.ts:34` and `:36`,
+  `src/sim/body-state.ts:107`, `src/sim/systems/physics.ts:63`), by agreement.
+- **The common power is a boost above every hero's own numbers**, because
+  player one is given the grappler, who already lifts and throws everything a
+  plain strength power would allow.
+- **A power travels to its holder's phone as an effect**, or wings do not work
+  there.
+- The 90-minute budget and the 10:00 UTC cut-off below are history.
+
 ## Why
 
 **Owner (Drive, doc 01), via `docs/vision.md`,** lists it among the

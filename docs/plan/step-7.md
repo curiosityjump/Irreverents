@@ -2,6 +2,36 @@
 
 **Reference.** Plan step; its status line is in docs/plan.md.
 
+## 2026-11-23 19:40 UTC, the owner's verdict after playing: waves that really come, then the Hall
+
+**Owner, 2026-11-23 ~18:30 UTC, to Vision Partner, first-hand, after playing
+on a phone** (`docs/vision.md`, "The measure"):
+> Remember the original intentions for the game and make sure things align with it. I want to play it as I described it.
+> There are no heists or stealth yet, no puzzles, no hidden places to explore, no characters to unlock, no escalating combats or chases, no power/item stealing,  no vehicle hijacking, no risk. Virtually everything described in the vision docs that would make the game genuinely fun to play is yet to be seen at all
+
+The re-plan from these words is `docs/plan/core-loops.md`. This step's part is
+its **playable 5, "Waves that really come, and a last stand the Hall
+remembers"** (section 5). **Brief: `handoff-prompts/loop-waves.md`.** What
+changes in this file's plan:
+
+- **The waves first.** Measured in the real camp and depot, waves stall under
+  the bound and stand at the entry, and one hit on the only caller ends them
+  for good. The slice's first push fixes that in Step 12's closed files, by
+  agreement.
+- **The detector is written against today's events**, not the made-up ones of
+  `handoff-prompts/step-7-b-detector.md` and its working-copy patch (kept for
+  ideas until this ships). A legend is announced by a world event, because a
+  page is sent only the entities of its own room.
+- **The picture is drawn with the real sprites** in a frame from the approved
+  P04 Hall atlas.
+- **Kept:** in a kept game the pedestals live in the saved world. Wiring the
+  store for the shared world ("Slice 2, not yet written", below) is still
+  owed, by a builder given the `src/server` edits by name. Note that the store
+  is now opened (`src/server/main.ts:68`, for Step 17's saves); no Hall
+  collection is read or written.
+- **The machine is now Step 20** (`docs/plan/step-20.md`), as this file's
+  "What's open" allowed.
+
 ## Why
 
 **Owner (Drive, doc 11, D-024, D-026), via `docs/vision.md`:**

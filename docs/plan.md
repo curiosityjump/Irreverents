@@ -243,6 +243,8 @@ questions.
 
 # Steps
 
+**Since the owner's verdict after playing (2026-11-23 ~18:30 UTC) the order of work is `docs/plan/core-loops.md`'s ranking**, not the step numbers: Steps 14 (slice B), 19, 9, 13 and 7 are briefed; 20, 21, a Step 3 slice and Step 4's town tiers wait.
+
 ## Step 1 — A live room two people can play in together
 
 **Closed 2026-11-23, 08:55 UTC.** The game is live and two people can
@@ -288,7 +290,7 @@ Full text: `docs/plan/step-3.md`
 
 ## Step 4 — People who react
 
-**Status: open, unclaimed — queued behind Step 5.** (Released 2026-11-23 10:40 UTC by orchestrator session_017WiGzHX8g2sXimNRnqp2oZ: its first lead session_017WiGzG4WzuJfHAu3XWoUhc is idle with a large context and is not to be reused; a fresh lead starts from the step file's handoff notes. Held, like Steps 3 and 8, for the usage allowance (resets about 13:00 UTC) and the owner's first play. Earlier: Opened 2026-11-23 04:26 UTC: Step 1's Gate 1 is on `main` and verified; `docs/architecture.md` is the contract.)
+**Status: open, unclaimed.** (Reopened 2026-11-23 19:40 UTC by the core-loops re-plan: its next slice is the town's tiers, not yet briefed, `docs/plan/core-loops.md` section 5. A fresh lead starts from the step file's handoff notes.)
 
 Full text: `docs/plan/step-4.md`
 
@@ -306,7 +308,7 @@ Full text: `docs/plan/step-6.md`
 
 ## Step 7 — A Hall that remembers, and a machine to steal
 
-**Status: open, unclaimed — queued behind Step 5.** (Released 2026-11-23 10:40 UTC by orchestrator session_017WiGzHX8g2sXimNRnqp2oZ: its first lead session_017WiGzF4QGboHBQtunwprhk is idle with a large context and is not to be reused; a fresh lead starts from the step file's handoff notes. Held, like Steps 3 and 8, for the usage allowance (resets about 13:00 UTC) and the owner's first play. Earlier: Opened early, 2026-11-23 04:45 UTC: the store, the detector and the record wait on nobody; see its "How to cut it".)
+**Status: open, unclaimed.** (Reopened 2026-11-23 19:40 UTC by the core-loops re-plan: brief `handoff-prompts/loop-waves.md`; the machine is now Step 20.)
 
 Full text: `docs/plan/step-7.md`
 
@@ -318,7 +320,7 @@ Full text: `docs/plan/step-8.md`
 
 ## Step 9 — Powers you pick up, and can lose
 
-**Status: open, unclaimed — queued behind Step 2.**
+**Status: open, unclaimed.** (Step 2 closed 17:30 UTC. Brief `handoff-prompts/loop-powers.md`.)
 
 Full text: `docs/plan/step-9.md`
 
@@ -337,6 +339,12 @@ Full text: `docs/plan-archive.md`, "Step 11". Durable record: `docs/mechanisms/c
 ## Step 12 — The outpost and the chase
 
 **Closed 2026-11-23, 18:05 UTC.** A bandit camp behind a doorway in the courtyard: a lookout who sees you runs to a horn, and every finished call brings a wave of fighters (never more than 8 people in the room); you can sneak past on a high ledge, stop the lookout mid-call, break the horn or walk out. Its fighters fight heroes in any room. Guards who saw you go in follow you into the camp, two at most, and guards and the camp's people fight each other on sight. Guards' own swing (and re-timing four scenarios) is Step 18's; the camp's sprites are Step 8's. No owner question open; decisions in `docs/decisions-log.md`. Full text: `docs/plan-archive.md`, "Step 12". Durable record: `docs/mechanisms/outposts.md`, `docs/architecture.md` ("How to add an outpost").
+
+## Step 13 — Heroes you find and keep
+
+**Status: open, unclaimed.** (Brief `handoff-prompts/loop-rescue.md`; spawn its builder when Step 19's first push, the Use arbiter, is on `main`.)
+
+Full text: `docs/plan/step-13.md`
 
 ## Step 14 — Things to find, and knowing there is more
 
@@ -368,4 +376,20 @@ Full text: `docs/plan/step-17.md`
 
 Full text: `docs/plan/step-18.md`
 
-*(Step 13, "Heroes you find and keep" — the discoverable permanent roster, D-007 — was to be drafted the same way; its drafter was stopped by the usage limit. The number is reserved.)*
+## Step 19 — Stealth you can read, and a prize you carry out
+
+**Status: open, unclaimed.** (Brief `handoff-prompts/loop-heist.md`; its first two pushes unblock Steps 9, 13, 7 and 20.)
+
+Full text: `docs/plan/step-19.md`
+
+## Step 20 — A machine to steal, and things to crash it through
+
+**Status: open, unclaimed.** (No brief yet: waits for Step 19's and Step 7's first pushes; two builders; never beside Step 13 in the camp's files.)
+
+Full text: `docs/plan/step-20.md`
+
+## Step 21 — What being beaten costs
+
+**Status: open, unclaimed.** (No brief yet: waits for Step 9's knock-loose push and Step 19's cargo and HUD plate.)
+
+Full text: `docs/plan/step-21.md`
