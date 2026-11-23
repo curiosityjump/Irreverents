@@ -55,6 +55,7 @@ Which procedure governs this kind of work?
 | deciding what happens next, and reviewing what came back | `docs/understanding-the-project.md`, then `docs/lead-session.md` |
 | flagging something non-blocking for whoever you report to, or a finding with no home in phase 6's table | `docs/for-the-lead.md` (a brief-worker → its lead) or `docs/for-the-orchestrator.md` (a lead → the orchestrator) — not your final message, see phase 4 |
 | whether a role already exists for a recurring kind of job, or whether to spin up another session at all | `docs/roles/README.md` |
+| a choice you would otherwise stop and ask the owner about | `docs/decisions-log.md` — decide, log, keep going (phase 4) |
 
 Add a row whenever a project-specific procedure (an authoring guide, a
 troubleshooting note for one recurring failure) earns its own document.
@@ -87,48 +88,52 @@ without having considered it.
 
 ## 4 · Ask
 
-**The owner wants to be asked.** Asking is the cheapest tool available and the
-recurring failure is treating it as a last resort
-(`docs/working-on-the-project.md`, section 2). Batching is about *timing*,
-never a reason to drop a question — one short list beats nine interruptions,
-and beats silence by much more.
+**The owner is never the bottleneck.** The owner, 2026-11-23, first-hand:
+*"I don't want anything being bottlenecked by permissions issues or design
+decisions from me. … Use your own judgment and document the decisions and
+reasoning whenever you are tempted to stop to ask me."* So a question for
+the owner is no longer a reason to stop: **decide and log**
+(`docs/decisions-log.md` says how). Asking is still the cheapest tool when
+somebody can answer *now*, which means your lead or the orchestrator, and
+the recurring failure is treating it as a last resort
+(`docs/working-on-the-project.md`, section 2).
 
-- Every question **names what it unblocks.** If the honest answer is
-  "nothing," it is a note to hand over, not a question.
-- **Intent is the owner's; mechanics are yours.** *"Is this deliberate?"* →
-  ask. *"Should this be a transaction?"* → decide.
-- **Attach a recommendation**, so "yes" is a complete answer.
-- **Ask in the owner's terms, not the code's.** Assume they do not read the
-  codebase: a question phrased in field names and function names is one they
-  have to decode before they can answer it — which makes asking expensive
-  instead of cheap. Say what changes for them: what they would see, what they
-  could do, what would get harder. If a question can't be put that way, it is
-  probably a mechanics question you should be deciding yourself.
-- A **repeated** question means you got it wrong. Go measure something rather
-  than restate it more confidently.
+- **Mechanics were always yours.** *"Should this be a transaction?"* →
+  decide, no entry.
+- **Intent used to be the owner's to answer; now it is yours to read.**
+  Find their words first (`docs/vision.md`, the design library,
+  `docs/deliberate-designs.md`, earlier entries in the decisions log).
+  Then decide, build it so the other answer is a small change, mark it
+  `DRAFT:`, and write the entry: what a player would see, why, how to undo
+  it. In the owner's terms, not the code's.
+- **What still needs the owner goes to `docs/questions-inbox.md`, and
+  nothing waits on it:** a fact only they have, something only they can
+  do (an account, a setting on a service), or their taste on something
+  they have to play to judge. Attach a recommendation so "yes" is a
+  complete answer.
+- **A doubt about something that might be deliberate is not a decision to
+  "fix" it** (phase 3). Leave it as it is and log the doubt.
+- A **repeated** question means you got it wrong. Go measure something
+  rather than restate it more confidently.
 
-**Blocking vs. non-blocking is the fork that decides where a question goes —
-get this right before anything else in this phase.**
+**Blocking vs. non-blocking decides what you do next, not whether you
+keep going — you always keep going.**
 
-- **Blocking — you cannot finish this brief without an answer.** Ask the
-  owner directly, in the moment — and append it to
-  `docs/questions-inbox.md` too, so a message they miss is not a
-  question lost (only Vision Partner writes
-  `docs/questions-for-the-owner.md`; it moves your entry there). **When you can't ask** — working from a brief with nobody
-  watching — do every part that doesn't depend on the answer, then **leave
-  the dependent part undone** and hand the question back with your
-  recommendation. Deciding an intent question yourself because waiting felt
-  worse than guessing is the most expensive thing that happens. An
-  unfinished slice is cheap; a confidently wrong one deletes working
-  behaviour.
-- **Non-blocking — you can finish the brief either way, but it's still
-  the owner's to decide eventually.** **Do not put this in your final
-  message.** An executing session's chat is typically deleted once its brief
-  ships, unread; questions reach the owner through the roles above you, not
-  through a chat nobody opens. Write it to `docs/questions-inbox.md`
-  (its header says how) instead; the Vision Partner moves it into
-  `docs/questions-for-the-owner.md` and reads it to the owner. A
-  flag or finding that is not a question for the owner goes to
+- **Blocking — you cannot finish this brief without an answer.** If your
+  lead or the orchestrator can answer, ask them. If only the owner could:
+  decide and log, as above, and finish the brief on your decision. The
+  old rule here was to leave the dependent part undone; the owner has
+  replaced it. What has not changed is the caution behind it: an
+  unfinished slice is cheap and a confidently wrong one that *deletes
+  working behaviour* is not, so a decision made for the owner adds or
+  chooses, and is built to be reversed.
+- **Non-blocking — you can finish either way.** If it is yours to decide
+  now, decide and log. If it needs the owner (a fact, an action, their
+  taste), write it to `docs/questions-inbox.md` (its header says how);
+  the Vision Partner moves it into `docs/questions-for-the-owner.md` and
+  reads it to the owner. **Never put it in your final message:** an
+  executing session's chat is typically deleted once its brief ships,
+  unread. A flag or finding that is not a question for the owner goes to
   `docs/for-the-lead.md` — format and full reasoning there.
 
 **A flag or finding with nowhere obvious to go follows the same fork.**
@@ -146,11 +151,13 @@ message. The honest report lives in the commit
 (`docs/verifying-and-finishing.md`); the record lives in phase 6's table;
 nothing needs restating in chat.
 
-**Gate:** every blocking question named what it unblocks and reached the
-owner directly; every question for them is in
-`docs/questions-inbox.md` and every flag in `docs/for-the-lead.md`,
-not in your final message; your final message is a short confirmation, not a
-narrated report; nothing that was the owner's to decide got decided by you.
+**Gate:** nothing in your brief is left undone waiting on the owner;
+every decision you made in their place has an entry in
+`docs/decisions-log.md` and a `DRAFT:` at its site; every question that
+truly needs them is in `docs/questions-inbox.md` and every flag in
+`docs/for-the-lead.md`, not in your final message; your final message is a
+short confirmation, not a narrated report; nothing that might be
+deliberate got "fixed".
 
 ## 5 · Build
 
@@ -193,8 +200,8 @@ fill the rows you triggered. Every fact has **exactly one** home.
 | Where a kind of code belongs | the architecture layout file `CLAUDE.md` points to |
 | A measured number | the doc that makes a claim from it; how the measure is taken lives in `docs/measures.md` |
 | A handoff prompt whose slice shipped | **delete the file.** They are scratch; an empty `handoff-prompts/` is the healthy steady state |
-| **A blocking question for the owner** | **your message to them**, in the moment — see phase 4. The one row whose home is a person, not a file, and only for the kind you cannot finish without answering — and an entry in `docs/questions-inbox.md` as well, so a message they miss is not a question lost |
-| **A non-blocking question for the owner** | `docs/questions-inbox.md` (its header says how) — never your final message. The Vision Partner moves it into `docs/questions-for-the-owner.md` and reads it to the owner |
+| **A decision you made in the owner's place instead of stopping to ask** | `docs/decisions-log.md` (one entry, in the owner's terms) **and** a `DRAFT:` at the site **and** the governing doc as usual — see phase 4 |
+| **Something only the owner can supply** (a fact, an action on a service, their taste after playing) | `docs/questions-inbox.md` (its header says how) — never your final message, and nothing waits on it. The Vision Partner moves it into `docs/questions-for-the-owner.md` and reads it to the owner |
 | **A flag/finding with no home above** | `docs/for-the-lead.md` — never your final message. The lead reads it every round |
 | **A session-spawn failure** (rate limit, empty/malformed launch, anything else that keeps a session from starting) | `docs/spawn-failures.md` — the moment you recover from it, not batched for later |
 | **The process itself cost or saved something unusual**: a brief missing what you needed, work that had to be redone, conflicting instructions, a check that lied, clearly wasted model work, or an approach that worked unusually well | `docs/process-observations.md`: a few lines on what you already saw, then keep working. Only when it was exceptional. Routine work writes nothing |

@@ -573,8 +573,14 @@ or a brief.
 
 ## 5 · Ask
 
-`docs/sop.md` phase 4 governs the how: the owner's terms, a recommendation
-attached, named for what it unblocks. Four additions the lead learns the hard
+`docs/sop.md` phase 4 governs the how. **Since 2026-11-23 the owner is
+never the bottleneck** (their words are at the top of
+`docs/decisions-log.md`): a design or permission question for them is
+decided by you from their own words, built to be reversed, marked
+`DRAFT:` and logged there, and your workers do the same. What still goes
+to the owner (a fact, an action only they can take, their taste after
+playing) is in their terms, with a recommendation, named for what it
+unblocks, and nothing waits on it. Four additions the lead learns the hard
 way:
 
 - **A repeated question means you got it wrong.** Asked twice whether a

@@ -326,6 +326,14 @@ and go from there.**
 
 ## Asking the owner a question
 
+**First: does it need asking at all?** The owner, 2026-11-23, to the
+orchestrator, first-hand: *"I don't want anything being bottlenecked by
+permissions issues or design decisions from me. … Use your own judgment
+and document the decisions and reasoning whenever you are tempted to stop
+to ask me."* A design or permission question is decided and logged
+(`docs/decisions-log.md`; `docs/sop.md` phase 4), by you and by every
+session below you. What is left to ask is what only the owner can supply.
+
 Questions get buried in status updates, and an owner who can't see a
 question or its context can't answer it. So every question you put to
 them:

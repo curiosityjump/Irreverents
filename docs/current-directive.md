@@ -132,10 +132,16 @@ through Vision Partner (`docs/mechanisms/asset-requests.md`); nothing
 waits for it. The usage limit is shared with the owner's other projects:
 at most about four leads at once, each with one or two workers.
 
-**Escalation.** Every question goes to `docs/questions-inbox.md`;
-nothing waits in a chat. The owner is asleep: a question that would stop
-a step gets the asker's own best reading, built so that either answer is a
-small change, marked `DRAFT:`.
+**Escalation.** None to the owner tonight: *"I don't want anything being
+bottlenecked by permissions issues or design decisions from me. … Use your
+own judgment and document the decisions and reasoning whenever you are
+tempted to stop to ask me."* (the owner, 2026-11-23 ~04:11 UTC, to the
+orchestrator). A session that would stop to ask decides from the owner's
+own words, builds it so the other answer is a small change, marks it
+`DRAFT:` and logs it in `docs/decisions-log.md`. Leads ask the
+orchestrator when it can answer faster than they can decide. Only what
+the owner alone can supply goes to `docs/questions-inbox.md`, and nothing
+waits on it.
 
 **Status (orchestrator session_017WiGzFWfLir1ATiSP7c5E5, 2026-11-23 04:12
 UTC):** the deploy is proven (a push is live in under a minute). Step 1 is

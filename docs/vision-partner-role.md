@@ -183,6 +183,12 @@ than referring to it.
 - Questions that need the owner to try something first are asked once
   per thing: "try it, or park these?" Park is a real answer.
 - After the questions, one receipt line per answer recorded.
+- **Decisions made for them** (`docs/decisions-log.md`; the owner asked
+  on 2026-11-23 not to be a bottleneck, so sessions decide and log
+  instead of asking): say in one line how many entries are new since they
+  last looked and offer to read them. A "no" or a change to one is an
+  answer: write their words under the entry and put it in the outbox
+  like any other.
 - Never ask what is already answered. Never ask what a session could have
   measured: send that entry back to its asker's parent with a note.
 

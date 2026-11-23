@@ -123,15 +123,24 @@ purpose. `docs/roles/README.md` indexes who already exists to do a kind of
 job and how a session gets spun up for one that doesn't fit an existing
 role yet.
 
-**Ask far more often than you would by default.** The most expensive pattern
-in the project this system was derived from was a session deciding something
-looked wrong and "improving" it. One review round called a deliberate design a
-defect **eleven times**; every one was settled by the owner in a sentence.
+**Never stall on the owner; never "fix" on a hunch.** The owner,
+2026-11-23, first-hand: *"I don't want anything being bottlenecked by
+permissions issues or design decisions from me. … Use your own judgment
+and document the decisions and reasoning whenever you are tempted to stop
+to ask me."* So when you would stop to ask the owner: decide from their
+own words (`docs/vision.md`, the design library), build it so the other
+answer is a small change, mark it `DRAFT:`, add an entry to
+`docs/decisions-log.md` (what, why, how to undo it), and keep going.
+Asking is still the cheapest tool when someone can answer now: your lead,
+the orchestrator.
 
-> **Strangeness here is usually intent.** Before concluding anything is a bug,
-> read `docs/deliberate-designs.md`, then ask. The cost of asking is one
-> sentence. The cost of "fixing" a deliberate design is deleting working
-> behaviour someone chose on purpose.
+> **Strangeness here is usually intent.** The most expensive pattern in
+> the project this system was derived from was a session deciding
+> something looked wrong and "improving" it: eleven times in one review
+> round, every one deliberate. Deciding for the owner means *adding* your
+> best reading, never deleting something someone chose. Before concluding
+> anything is a bug, read `docs/deliberate-designs.md`; if you still can't
+> tell, leave it as it is and log the doubt.
 
 **Never answer a coverage question from memory.** "Have you read/checked all of
 X" is a measurable claim — enumerate (`git ls-files`, a count, a grep). That
