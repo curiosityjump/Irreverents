@@ -284,7 +284,7 @@ the throw's drawing (Step 8 round 3, actors), the occasional
 
 ## Step 3 — A small kingdom to explore
 
-**Status: open, unclaimed.** (The way-out check's speed fix, a700081, is reviewed and done, 2026-11-23 18:45 UTC: build 5 s, check 35 s; a differential test of old against new on 1,204 mutated and random maps found no difference. Still owed: item (a) of the step file's handoff note, two phones by touch through the kingdom; and the camp's way out depends on less than a 10% jump margin, last note in the step file.)
+**Status: open, claimed by orchestrator session_017WiGzJzo6aZqH4kYxxJsiV (builders: session_017WiGzFt1yTaqTXe7DVDi4B), 2026-11-23.** (Brief `handoff-prompts/loop-puzzles.md`, the stone plate under the castle.) (The way-out check's speed fix, a700081, is reviewed and done, 2026-11-23 18:45 UTC: build 5 s, check 35 s; a differential test of old against new on 1,204 mutated and random maps found no difference. Still owed: item (a) of the step file's handoff note, two phones by touch through the kingdom; and the camp's way out depends on less than a 10% jump margin, last note in the step file.)
 
 Full text: `docs/plan/step-3.md`
 
