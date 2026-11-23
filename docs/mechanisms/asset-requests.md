@@ -65,6 +65,7 @@ that, not Vision Partner's check, is the real pace).
 | 2026-11-23 03:58 | C02-02/C02-03 — two playable heroes, sprite sheets for co-op (32×32 cells, ~24–28 px tall, idle/run/jump/fall/attack/grab/throw/hurt, JSON manifest) | BLOCKING |
 | 2026-11-23 03:58 | N03-01/02/04 — shopkeeper, guard, cat with 3 modes; grunt + brute enemies; alarm signaler prop | SOON |
 | 2026-11-23 03:58 | E01-02/E01-03 — 16×16 tile atlases (grassy ruins, castle, town street) with solid/one-way/decor/breakable flags; parallax layers | SOON |
+| 2026-11-23 04:00 | U08-01 — six 24×24 touch buttons (left, right, jump, attack, grab/throw, special) + pressed states; the owner's end-to-end process test | SOON |
 
 All assume 320×180 internal resolution and a 16 px tile grid (doc 14
 option B; S00-01's phone previews). A build that chooses otherwise tells
