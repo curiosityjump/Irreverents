@@ -173,3 +173,26 @@ forwards from now on; never archive it.
   continue; re-pointed here. Opus's five-hour allowance reads `allowed_warning`, resetting
   13:20 UTC, so nothing else is opened before then.
 
+
+### Handoff, orchestrator `session_017WiGzGp8auJceLEAAh9Aqx`, 2026-11-23 15:15 UTC
+
+Picked up at 12:01 UTC as the owner's backup when the Fable orchestrator stopped on its usage
+limit (entry above). Handing off at about 510k tokens of context, by the owner's principle
+"I want as much as possible to go into actually building the game" (`docs/vision.md`): a fresh
+orchestrator costs far less per turn. **Everything in flight is in `docs/current-directive.md`'s
+"Status", "Sessions" and "Owed next" (rewritten 15:10 UTC); read those first.**
+
+- **Running:** Step 8 round 2, three reused workers, one per lane pair (ground landed ec49eb5 and
+  heroes' first push da8424a). Leads for Step 11 (cantina), Step 12 (outpost) and Step 16 (first
+  real level, claimed ace2816). Step 2's lead is idle, holding two small items for after round 2.
+  All of them report to the orchestrator in the ledger header. Their parent is this session, so
+  until you re-point them (pickup step 2), their messages land here and are forwarded to you unchanged.
+- **Armed into this session:** heartbeat `trig_01ADJduhWYtaLBcYBtcyJdiK` at 15:20 UTC. Delete it at
+  pickup; arm your own.
+- **Re-runnable tools:** `docs/mechanisms/orchestrator-workflows.md` keeps, verbatim, the look-review
+  script (round 3 = round 2 re-run once round 2's lanes land) and the vision-gap audit.
+- **Waiting on the owner:** nothing blocks. Vision Partner's hourly Drive check needs a permission
+  rule for `create_trigger` (it asked the owner). Until then the orchestrator runs
+  `python3 -I tools/drive_sync.py` at check-ins.
+- **Watch:** the account's five-hour limit (resets 18:20 UTC). About ten sessions at once hit it at
+  12:36. Seven are running now.

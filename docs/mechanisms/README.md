@@ -55,6 +55,7 @@ groups) whenever you add one — never update the number from memory.
 - **[Rendering actors](rendering-actors.md)**: how bodies, people, moods, marks, effects and speech are drawn from the simulation's state (Step 8).
 - **[The page around the game](phone-shell-look.md)**: the shell, upright and sideways, the controls and how the view's size is chosen (Step 8).
 - **[Sound](sound.md)**: sound effects and music as data, wired to moments of play; silent until the first tap (Step 8; direction in `docs/audio-design.md`).
+- **[Orchestrator workflows](orchestrator-workflows.md)**: the look-review and vision-gap-audit scripts for the Workflow tool, kept verbatim so they are re-run, not re-derived.
 - `tools/drive_sync.py` — mirrors the owner's Google Drive design library into `docs/design-library/` and reports what changed by hash (first import 2026-11-23).
 
 **Asset requests** (`docs/mechanisms/asset-requests.md`)

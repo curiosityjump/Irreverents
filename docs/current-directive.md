@@ -184,18 +184,16 @@ orchestrator when it can answer faster than they can decide. Only what
 the owner alone can supply goes to `docs/questions-inbox.md`, and nothing
 waits on it.
 
-**Status (orchestrator session_017WiGzHX8g2sXimNRnqp2oZ, 2026-11-23 10:40 UTC, picked up from
-session_017WiGzJeh7Tuov59d8XYmru; nothing is building):** results 1 to 6
-are on the live game (84c1b92; `main` is ahead by documents only) by
-scripted check: two players together with touch and reconnect; phone-sized
-controls; hit, grab, carry, throw and three heroes; a five-room kingdom
-with a two-player gate, two unmarked routes and a secret; townspeople with
-moods, a bell, an alarm, a guard who chases through doors, and hiding
-places; the king, mid-speech and throwable through his window. Gates: 5 of
-6 at the last run (09:55 UTC; E, the Hall, is not on the page; result 7).
-Result 8 (the end-to-end tour) was not run: nobody, human or script, has
-played the whole thing through, and no real iPhone has been tried. Live at
-10:38 UTC: players 0, error log empty.
+**Status (orchestrator session_017WiGzGp8auJceLEAAh9Aqx, 2026-11-23 15:10 UTC, at its handoff):**
+- **Live:** everything from the night, plus Step 8 round 1's look (all nine lanes: real sprites for
+  heroes and cast, tiles, backdrops, props, the phone shell, sound), round 2's ground lane (ec49eb5)
+  and frame push 1 (2d34418); Step 2's feel round (per-hero arcs, wind-up, impact-scaled freeze,
+  floor bounce, the `?tune` panel; 06a07f4); the cantina room and its doorway, with the owner's bell
+  ending the brawl (Step 11); the outpost's horn and waves in a test room (Step 12, 1bdd143).
+- **Not yet:** round 2's frame (rest), actors, heroes and props lanes are building; no real level or
+  enemies through the world yet (Step 16 just opened); nobody has played it end to end on two real
+  iPhones; the tunes are unheard.
+- **The gap list** is `docs/vision-gaps.md` (first audit 7454fd9; Step 16 added at 43556ba).
 
 **The allowance.** **Owner, 2026-11-23 ~11:30 UTC, to the orchestrator,
 first-hand:** "Ignore the usage limits. Use opus instead of fable if
@@ -217,15 +215,21 @@ deploy empties it). Game feel (movement, hits,
 knockback) is second (`docs/answers-archive.md`, "second deadline"), ahead
 of new systems.
 
-**Sessions.** No lead is working. Step 5's lead
-`session_017WiGzJfkNbzJfpRVPhWoeK` is fresh and holds Step 5 for after the
-owner has played. The first leads of Steps 2, 4, 6 and 7 are idle with
-large contexts and were not woken or re-pointed (a wake at that size costs
-allowance and they have nothing in flight); their claims were released in
-`docs/plan.md`. The Step 7 lead is still owed one correction if it is ever
-woken: it did not delete another step's entries (Step 4's lead withdrew
-the claim). Past orchestrators `session_017WiGzFWfLir1ATiSP7c5E5` and
-`session_017WiGzJeh7Tuov59d8XYmru` only forward; never archive them.
+**Sessions (15:10 UTC; all report to the orchestrator named in `docs/questions-for-the-owner.md`):**
+Step 8 round 2 workers (the orchestrator leads Step 8 itself): frame then actors
+`session_017WiGzGaGuR297NUCFSpVDU`, heroes `session_017WiGzFWVvNJrmXZ81rABuv`, ground then props
+`session_017WiGzHanC1tecHKJbjuyCf`. Step 11 (cantina) lead `session_017WiGzFy3MD6ecvM7QMvQGd`;
+Step 12 (outpost) lead `session_017WiGzJTXQVCWQYDDmC2UiY`; Step 16 (first real level) lead
+`session_017WiGzHt9iJy3caBLkT1Ef4`, spawned 15:04; each lead runs one reused worker. Step 2's lead
+`session_017WiGzGN9egot3JUvSMBBA9` is idle, holding (a) panel polish and (b) the no-numbers check, to
+be rung after round 2 lands. Vision Partner `session_017WiGzHC3CvjTNZqCuxa8Ex`'s successor
+`session_017WiGzGHxdLq71CDUoQZz9Z`; its hourly Drive check was refused by a permission check, so the
+orchestrator runs `python3 -I tools/drive_sync.py` at check-ins. Step 5's lead
+`session_017WiGzJfkNbzJfpRVPhWoeK` holds Step 5. Past orchestrators `session_017WiGzFWfLir1ATiSP7c5E5`,
+`session_017WiGzJeh7Tuov59d8XYmru`, `session_017WiGzHX8g2sXimNRnqp2oZ` and
+`session_017WiGzGp8auJceLEAAh9Aqx` only forward; never archive them.
+**Capacity:** about ten sessions at once hit the account's five-hour limit at 12:36 UTC
+(`docs/process-observations.md`); its window resets 18:20 UTC. At `allowed_warning`, start nothing new.
 
 **Owner, 2026-11-23 ~14:30 UTC, to Vision Partner, first-hand, after being told what is live (five small rooms, a king, one guard, one shopkeeper, one villain; no enemies, no cantina, no outpost):**
 > I haven't seen any levels being built, enemies, the cantina, etc. there is a bunch of stuff I haven't seen yet
@@ -246,23 +250,22 @@ more leads beside the look. At ten sessions at once it stopped everything at
 12:36 UTC (`docs/process-observations.md`). To undo: release the two claims.
 Q-010 was answered since: the order is the orchestrator's.
 
-**Owed next, in the order I would take it, after the owner has played:**
+**Owed next, in order (15:10 UTC):**
 1. Whatever the owner says first.
-2. Step 3 item (a): two phone-sized pages by touch through the kingdom
-   (the two-plate gate, roofs, the secret, the window). Nobody has played
-   it. This is most of Step 10's tour; consider doing them as one.
-3. The switch gap: two players can become the same hero (the page decides
-   the switch without seeing friends' heroes); the owner's rule is one
-   person per hero. Fix is in the network layer (Step 5's lead knows it).
-4. Step 4 slice 2 push 4 only (push 3, hiding counts as unseen, is live at
-   f164e0c): the blow that knocks someone out being noticed, someone
-   finding a knocked-out person calling, and the
-   `step4-caller-knocked-out` control; from the held brief and
-   `docs/plan/step-4.md`, "Handoff notes".
-5. Step 7: relaunch the detector, then the wiring slice (gate E).
-   `CLAUDE.md`'s "Nothing is persisted" line changes then (entry above).
-6. Step 6 slice B, Step 8 (the sound pack is in the repo; hero art v2,
-   townspeople, tiles and music still in ChatGPT's queue), then 9, 11-15.
+2. Step 8 round 2: review each lane as it reports (re-run build and check), delete its brief, note it
+   in `docs/plan/step-8.md` "Briefs"; when all five land, round 3 = the same capture, review and
+   synthesize as round 2 (its workflow is recorded in the handoff entry). When the frame lane lands,
+   update `docs/plan/step-5.md`'s "Controls never hide the game". Route the P01 1–5 ratings in
+   step-8.md's Round 2 to Vision Partner for the asset desk. Delete branch
+   `claude/gallant-keller-1gpm2y` once the heroes lane lands.
+3. Ring Step 2's lead to brief (a)+(b) once round 2's lanes have landed (Q-013 goes with it).
+4. Refresh `docs/vision-gaps.md` whenever a step closes; open the next uncovered gap as capacity
+   frees: Step 13 (a roster you grow by recruiting, gap 12, never drafted), the community swarm
+   (gap 11), objects with surprising uses.
+5. From before, still owed: Step 3 item (a), two phones by touch through the kingdom (most of Step
+   10's tour); the switch gap (two players on one hero; Step 5's network layer; the thrower's
+   predicted swing is noted in step-5.md); Step 4 slice 2 push 4; Step 7 (detector, then wiring,
+   gate E; CLAUDE.md's "Nothing is persisted" line changes then); Step 6 slice B; Step 9.
 
 ## History
 
