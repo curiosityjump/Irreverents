@@ -219,19 +219,19 @@ Full text: `docs/plan/step-1.md`
 
 ## Step 2 — Moving, hitting, grabbing and throwing
 
-**Status: open, unclaimed — queued behind Step 1.** (Opens at Step 1's Gate 1, the contract, not its close.)
+**Status: open, unclaimed.** (Opened 2026-11-23 04:26 UTC: Step 1's Gate 1 is on `main` and verified; `docs/architecture.md` is the contract.)
 
 Full text: `docs/plan/step-2.md`
 
 ## Step 3 — A small kingdom to explore
 
-**Status: open, unclaimed — queued behind Step 1.** (Opens at Step 1's Gate 1.)
+**Status: open, unclaimed.** (Opened 2026-11-23 04:26 UTC: Step 1's Gate 1 is on `main` and verified; `docs/architecture.md` is the contract.)
 
 Full text: `docs/plan/step-3.md`
 
 ## Step 4 — People who react
 
-**Status: open, unclaimed — queued behind Step 1.** (Opens at Step 1's Gate 1.)
+**Status: open, unclaimed.** (Opened 2026-11-23 04:26 UTC: Step 1's Gate 1 is on `main` and verified; `docs/architecture.md` is the contract.)
 
 Full text: `docs/plan/step-4.md`
 
