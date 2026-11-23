@@ -1,0 +1,261 @@
+{
+  "id": "step4-tier-pips-cross-a-door",
+  "proves": "Step 4's town tiers: the pips follow you. In the castle street the guard's whistle brings the alert to 2; the hero runs east, jumping, out by the to-courtyard door: in the courtyard the world still shows the street's alert as 2 (world.alerts, which every page is sent whatever room it is in, where the street's alert entity is not), and no more than two guards come through after them (here none saw them go). Control (watched to fail): world.alerts never written, and the shown alert is 0",
+  "room": "castle-street",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "brawler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 60,
+      "to": 200,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 1500,
+      "to": 1505,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 2700,
+      "to": 2704,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 2930,
+      "to": 3900,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 2930,
+      "to": 2944,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 2970,
+      "to": 2984,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 3010,
+      "to": 3024,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 3050,
+      "to": 3064,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 3090,
+      "to": 3104,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 3130,
+      "to": 3144,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 3170,
+      "to": 3184,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 3210,
+      "to": 3224,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 3250,
+      "to": 3264,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 3290,
+      "to": 3304,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 3330,
+      "to": 3344,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 3370,
+      "to": 3384,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 3410,
+      "to": 3424,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 3450,
+      "to": 3464,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 3490,
+      "to": 3504,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 3530,
+      "to": 3544,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 3570,
+      "to": 3584,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 3610,
+      "to": 3624,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 3650,
+      "to": 3664,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 3690,
+      "to": 3704,
+      "hold": [
+        "jump"
+      ]
+    }
+  ],
+  "ticks": 4200,
+  "expect": [
+    {
+      "fact": "alert",
+      "area": "castle-street",
+      "shown": true,
+      "between": [
+        2130,
+        2916
+      ],
+      "is": 1
+    },
+    {
+      "fact": "event-where",
+      "event": "changed-room",
+      "where": {
+        "entity": "p:a",
+        "fromRoom": "castle-street",
+        "fromDoor": "to-courtyard"
+      },
+      "between": [
+        3300,
+        3450
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "in-room",
+      "player": "a",
+      "at": 4200,
+      "room": "courtyard"
+    },
+    {
+      "fact": "alert",
+      "area": "castle-street",
+      "shown": true,
+      "between": [
+        2918,
+        4200
+      ],
+      "is": 2
+    },
+    {
+      "fact": "people",
+      "room": "courtyard",
+      "between": [
+        3300,
+        4200
+      ],
+      "count": [
+        0,
+        2
+      ]
+    }
+  ]
+}

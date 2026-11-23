@@ -1,7 +1,9 @@
 import type { Content } from '../../content/types.ts';
 import { MAX_ALERT } from '../../sim/npc/alert.ts';
 import type { World } from '../../sim/types.ts';
+import { queueBanner } from './banner.ts';
 import { drawFrame, frameOf, look, safeView } from './fx.ts';
+import { drawnHud } from './hud.ts';
 import { drawLookIn, lookDef } from './room-parts.ts';
 
 // DRAFT: plain stand-ins (Step 8 and Step 5 own the final look of marks and
@@ -18,8 +20,43 @@ const PAPER = '#f8f9fa';
 /** Round 3: the area's alert level last drawn and the tick it last rose (the newest pip glows). DRAFT: GLOW_TICKS. */
 let lastLevel = 0;
 /** Round 3 (gap 12): the pips' corner, clear of a notch the picture now runs under. */
-const PX = (): number => 5 + safeView.left;
-const PY = (): number => 5 + safeView.top;
+// Step 4, the town's tiers: the pips sit just below the party plate (draw/hud.ts) when it is up, so the two
+// never overlap; the plate's box is last frame's, which is where it is drawn this frame too.
+const PX = (): number => drawnHud()?.box.x ?? 5 + safeView.left;
+const PY = (): number => {
+  const box = drawnHud()?.box;
+  return box ? box.y + box.h + 3 : 5 + safeView.top;
+};
+/** Step 4, the town's tiers: what was drawn last frame, for the page's drawn record (drawn.alert). */
+let shown: { level: number; whistle: number | null } = { level: 0, whistle: null };
+/** No banner for the level a page finds when it first draws (joining a game mid-alert is not the moment). */
+let drawnOnce = false;
+
+/** The highest alert of any area (world.alerts, which follows the party), or the room's own entity's. */
+function shownLevel(world: World, roomId: string): { level: number; area: string | null } {
+  let best = { level: world.entities.find((e) => e.room === roomId && e.c.alert)?.c.alert?.level ?? 0, area: roomId as string | null };
+  for (const [area, level] of Object.entries(world.alerts ?? {})) if (level > best.level) best = { level, area };
+  return best;
+}
+
+/** The pips and the whistle's gauge drawn on the last frame: `level` (0 to 3) and `whistle`, a whistling guard's progress 0..1 in this room, or null. */
+export function drawnAlert(): { level: number; whistle: number | null } {
+  return shown;
+}
+
+/** A gauge (the `bell-gauge` look, else a bar) filling with `progress`, centred at cx with its foot at `foot`. */
+function drawGauge(g: CanvasRenderingContext2D, progress: number, cx: number, foot: number): void {
+  const gauge = look('bell-gauge');
+  if (gauge) {
+    const f = Math.min(gauge.frames - 1, Math.floor(progress * gauge.frames));
+    drawFrame(g, gauge, f, Math.round(cx - gauge.w / 2), foot - gauge.h);
+    return;
+  }
+  g.fillStyle = INK;
+  g.fillRect(cx - 9, foot - 4, 18, 4);
+  g.fillStyle = ALARM;
+  g.fillRect(cx - 8, foot - 3, Math.round(16 * progress), 2);
+}
 let litAt = -1e9;
 const GLOW_TICKS = 40;
 
@@ -101,9 +138,27 @@ export function drawAlert(g: CanvasRenderingContext2D, world: World, content: Co
     g.fillStyle = ALARM;
     g.fillRect(cx - 8, base - 39, Math.round((16 * Math.min(ring.ticks, ring.of)) / Math.max(1, ring.of)), 2);
   }
-  const level = world.entities.find((e) => e.room === roomId && e.c.alert)?.c.alert?.level ?? 0;
-  if (level > lastLevel) litAt = world.tick;
+  // Step 4, the town's tiers: a guard blowing his whistle, a gauge over his head filling (the time left to stop him).
+  let whistle: number | null = null;
+  for (const e of world.entities) {
+    const w = e.c.whistle;
+    const box = content.characters[e.kind]?.box;
+    if (e.room !== roomId || !w || w.progress <= 0 || !box) continue;
+    const progress = Math.min(1, w.progress / Math.max(1, w.of));
+    whistle = Math.max(whistle ?? 0, progress);
+    drawGauge(g, progress, ox + e.x + box.w / 2, oy + e.y - 12);
+  }
+  // Step 4, the town's tiers: the pips follow the party (world.alerts), the highest area's level.
+  const { level, area } = shownLevel(world, roomId);
+  if (level > lastLevel) {
+    litAt = world.tick;
+    // DRAFT (docs/decisions-log.md, "Step 4: pips"): a new pip queues one banner, the dispatch file's words for that level.
+    const words = area ? content.dispatch?.[area]?.banners[level - 1] : undefined;
+    if (drawnOnce && words) queueBanner({ key: `alert:${level}`, text: words });
+  }
+  drawnOnce = true;
   lastLevel = level;
+  shown = { level, whistle };
   if (level <= 0) return;
   if (lookDef(content, 'alert-pip')) {
     let drawn = true;

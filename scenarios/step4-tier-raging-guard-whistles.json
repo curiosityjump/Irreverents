@@ -1,0 +1,282 @@
+{
+  "id": "step4-tier-raging-guard-whistles",
+  "proves": "Step 4's town tiers: the usual fight. The skirmisher punches the street's guard until he rages; with the hero out of sight he rings the bell himself (alert 1), so he is the caller and not a responder; he comes back, the hero hits him once more in his view, and he whistles: he stands without swinging for the two and a half seconds, the call completes, the alert is 2 and level 2's row walks in. Control (watched to fail): the whistle only for responders (the raging-guard branch off), and the alert stays 1",
+  "room": "castle-street",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "skirmisher",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 60,
+      "to": 330,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 340,
+      "to": 344,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 376,
+      "to": 380,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 412,
+      "to": 416,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 448,
+      "to": 452,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 484,
+      "to": 488,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 520,
+      "to": 524,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 556,
+      "to": 560,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 592,
+      "to": 596,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 628,
+      "to": 632,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 664,
+      "to": 668,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 700,
+      "to": 704,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 736,
+      "to": 740,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 772,
+      "to": 776,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 808,
+      "to": 812,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 844,
+      "to": 848,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 880,
+      "to": 884,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 916,
+      "to": 920,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 952,
+      "to": 956,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 988,
+      "to": 992,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 2800,
+      "to": 2850,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 2986,
+      "to": 2990,
+      "hold": [
+        "attack"
+      ]
+    }
+  ],
+  "ticks": 3300,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "call-completed",
+      "where": {
+        "by": "street-guard",
+        "area": "castle-street"
+      },
+      "between": [
+        2700,
+        2900
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "alert",
+      "area": "castle-street",
+      "between": [
+        2800,
+        3153
+      ],
+      "is": 1
+    },
+    {
+      "fact": "event-where",
+      "event": "call-started",
+      "where": {
+        "by": "street-guard"
+      },
+      "between": [
+        2995,
+        3015
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "hit",
+      "where": {
+        "by": "street-guard"
+      },
+      "between": [
+        3006,
+        3153
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "call-completed",
+      "where": {
+        "by": "street-guard",
+        "area": "castle-street"
+      },
+      "between": [
+        3140,
+        3170
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "alert",
+      "area": "castle-street",
+      "between": [
+        3155,
+        3300
+      ],
+      "is": 2
+    },
+    {
+      "fact": "event",
+      "event": "dispatch-arrived",
+      "between": [
+        3140,
+        3170
+      ],
+      "count": [
+        1,
+        1
+      ]
+    }
+  ]
+}
