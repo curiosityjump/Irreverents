@@ -12,6 +12,7 @@ import type { Drawn } from './draw/entities.ts';
 import { isTouchDevice, setUpShell } from './shell.ts';
 import { watchTouch } from './touch.ts';
 import { createAudio } from './audio/index.ts'; // audio hook (Step 8)
+import { setUpTune, tuneWanted } from './tune.ts';
 
 const content = __CONTENT__;
 const canvas = document.getElementById('game') as HTMLCanvasElement;
@@ -112,6 +113,8 @@ const shell = setUpShell(canvas, touchHost, hint);
 // The touch controls appear on a touch screen, or at the first touch on anything else.
 if (isTouchDevice()) touchHost.hidden = false;
 window.addEventListener('touchstart', () => (touchHost.hidden = false), { passive: true });
+// Step 2: the feel dials, only with ?tune in the address (src/client/tune.ts).
+if (tuneWanted(location.search)) setUpTune({ content, net, canvas, touchHost });
 
 function readInput(): Input {
   const k = keys();

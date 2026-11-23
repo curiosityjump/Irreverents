@@ -9,6 +9,7 @@ import type { ClientMessage, ServerMessage } from '../net/protocol.ts';
 import { heldBy } from '../sim/effects.ts';
 import type { Effect } from '../sim/effects.ts';
 import { step } from '../sim/step.ts';
+import { applyChange, applyTuningDiff, refuseChange, tuningDiff, tuningRules } from '../sim/tuning-rules.ts';
 import { DT } from '../sim/types.ts';
 import type { Entity, Input, SimEvent, World } from '../sim/types.ts';
 import { createWorld, findEntity, NO_INPUT, populateRoom, removeEntity, spawnPlayer } from '../sim/world.ts';
@@ -39,6 +40,12 @@ export interface GameWorld {
   players: Map<string, Player>;
   owed: number;
   events: SimEvent[];
+  /**
+   * Step 2 (?tune): this world's own content, made the first time someone
+   * tunes it, with its own copy of the tuning numbers; until then the
+   * shared content. INTENT: one world's dials never move another's.
+   */
+  content?: Content;
 }
 
 export interface GameOptions {
@@ -60,6 +67,7 @@ export function attachGame(server: http.Server, opts: GameOptions) {
   const { content } = opts;
   const net = content.net;
   const worlds = new Map<string, GameWorld>();
+  const rules = tuningRules(content);
 
   const send = (sock: WebSocket | null, m: ServerMessage | string): void => {
     if (sock && sock.readyState === sock.OPEN) sock.send(typeof m === 'string' ? m : JSON.stringify(m));
@@ -172,7 +180,33 @@ export function attachGame(server: http.Server, opts: GameOptions) {
       e.c.net = { slot: p.slot };
     }
     send(sock, { t: 'welcome', commit: opts.commit, startedAt: opts.startedAt, player: p.id, e: findEntity(gw.world, id)!, tick: gw.world.tick });
+    // Someone joining a world that was tuned plays by its numbers, not the shipped ones.
+    if (gw.content) send(sock, { t: 'tuning', diff: tuningDiff(content.tuning, gw.content.tuning) });
     return { gw, p };
+  };
+
+  /**
+   * A page's `?tune` change (docs/mechanisms/tuning-panel.md). INTENT: a
+   * page is not trusted to send sane numbers (friends, but a bug is not):
+   * an unknown set or name, a non-number or a number outside its declared
+   * range refuses the whole message, and nothing in it is applied.
+   * DRAFT: a change applies to the whole world it was made in, for
+   * everyone in it, until the server restarts (every code push restarts
+   * it); nothing is kept anywhere (docs/decisions-log.md).
+   */
+  const tune = (gw: GameWorld, p: Player, m: Extract<ClientMessage, { t: 'tune' }>): void => {
+    const changes: unknown[] = Array.isArray(m.changes) ? m.changes : [];
+    const ok = Array.isArray(m.changes) && changes.length <= 500 && changes.every((c) => refuseChange(rules, c) === null);
+    if (ok) {
+      const own = (gw.content ??= { ...content, tuning: clone(content.tuning) });
+      if (m.reset === true) applyTuningDiff(own.tuning, content.tuning, {});
+      for (const c of changes as Parameters<typeof applyChange>[2][]) applyChange(own.tuning, content.tuning, c);
+    }
+    const msg: ServerMessage = { t: 'tuning', diff: gw.content ? tuningDiff(content.tuning, gw.content.tuning) : {} };
+    // A refused change is answered to its sender alone, so its page puts its own numbers back.
+    if (!ok) return send(p.sock, msg);
+    const text = JSON.stringify(msg);
+    for (const q of gw.players.values()) send(q.sock, text);
   };
 
   const wss = new WebSocketServer({ server, path: '/ws' });
@@ -201,6 +235,8 @@ export function attachGame(server: http.Server, opts: GameOptions) {
         if (here.p.queue.length > 12) here.p.queue.splice(0, here.p.queue.length - 12);
         here.p.inputAt = Date.now();
         here.p.ct = typeof m.ct === 'number' ? m.ct : here.p.ct;
+      } else if (m.t === 'tune') {
+        tune(here.gw, here.p, m);
       } else if (m.t === 'ack') {
         here.p.pending = here.p.pending.filter((f) => f.id !== m.id);
       } else if (m.t === 'bye') {
@@ -252,7 +288,7 @@ export function attachGame(server: http.Server, opts: GameOptions) {
       inputs[p.id] = p.input;
       if (!serverMoves(gw, p)) puppets.push({ id, before: clone(e) });
     }
-    const events = step(gw.world, inputs, content);
+    const events = step(gw.world, inputs, gw.content ?? content);
     onEvents(gw, events);
     const hit = new Set<string>();
     for (const ev of events) {

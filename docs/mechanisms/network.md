@@ -40,7 +40,9 @@ with a throwaway entity kind on every `npm run check`).
   page → server `join`, `me` (own entity, held input, own tick count, 30 a
   second), `ping`, `bye`; server → page `welcome`, `snap` (the world, 20 a
   second, with the simulation's events since the last one), `fx` (an
-  effect), `pong`; and page → server `ack`. Measured with two players and
+  effect), `pong`; and page → server `ack`. Step 2 added `tune` (page →
+  server, only from a `?tune` page) and `tuning` (server → page: the
+  world's tuning numbers); `docs/mechanisms/tuning-panel.md`. Measured with two players and
   the start room's placed bodies: a page sends about 10 kB/s and receives
   a few tens of kB/s (the e2e `rate` fact prints it). A page is sent every
   player, and everything else **in the content room its own character is
@@ -234,7 +236,8 @@ count as `errors`.
 
 `window.irreverents` (read-only by convention): `content`, `world` (the
 local world), `player`, `worldName`, `builtFrom`, `net` (counters:
-`connects`, `rttMs`, messages and bytes, `effects`) and **`drawn`**,
+`connects`, `rttMs`, messages and bytes, `effects`, `tunesOut`,
+`tuningsIn`) and **`drawn`**,
 which the frame loop fills each frame with what it just put on screen:
 `entities` (`id`, `player`, `kind`, `x`,`y` as read, `px`,`py` the pixel
 drawn, `color`, `mine`), `me`, `room`, `camera`, `scale`, `status`,

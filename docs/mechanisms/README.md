@@ -74,6 +74,9 @@ groups) whenever you add one — never update the number from memory.
 **Rooms and doors** (`docs/mechanisms/rooms-and-doors.md`)
 - `content/rooms/*.json` doors, areas and parts + `src/sim/systems/room-doors.ts` — rooms joined by walk and enter doors that carry any body, tiles that change while the game runs (`src/sim/room-state.ts`), working-part kinds declared by their system (`plate`, `gate`, `breakable`, `false-wall`, `hide`: `src/sim/systems/room-<kind>.ts`, shared helpers in `src/sim/room-parts.ts`, drawn by `src/client/draw/room-parts.ts`), and the checks and controls (`controls/rooms/`) that refuse a broken map (Step 3).
 
+**The feel dials** (`docs/mechanisms/tuning-panel.md`)
+- `?tune` + `src/client/tune.ts` + `src/sim/tuning-rules.ts` + messages `tune` / `tuning` — a panel listing every declared tuning number (per character, and the world's) with sliders, reset and copy-out as tuning-file JSON; a change is checked by the server and applied to that whole world, every page included, until it restarts (Step 2).
+
 **Combat and impact** (`docs/mechanisms/combat-and-impact.md`)
 - `src/sim/body-state.ts` + verbs `attack`, `grab`, `body` + systems `combat-*`, `carry-*`, `impact-*` — hitting, picking up, carrying and throwing any body; flying bodies record wall and body impacts with a held beat; hidden toughness, flattened and back; a body that cannot act runs no verb (Step 2).
 - `content/placements/<room id>.json` + `populateRoom` — who and what stands in a room, as bodies nobody plays; scenarios get them with `"placements": true` or their own `entities` (Step 2; Step 4 owns the kind from here).

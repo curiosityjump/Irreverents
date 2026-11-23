@@ -356,6 +356,8 @@ async function main(): Promise<void> {
     if (!LIVE) {
       // Step 2's facts (t-*, s-*): hit, grab, carry, throw and switch by touch, and what the other phone's screen shows (docs/mechanisms/combat-and-impact.md, "Across two phones").
       await (await import('./lib/e2e-touch.ts')).touchAndThrows({ browser, devices, base, out, fact, errors });
+      // Step 2's ?tune facts (tune-*): the feel dials by touch, and play following them on two pages (docs/mechanisms/tuning-panel.md).
+      await (await import('./e2e/tune.ts')).tuneFacts({ browser, devices, base, out, fact, errors });
       // (f) another world does not see them.
       const ctxC = await browser.newContext({ viewport: { width: 800, height: 450 } });
       const C = await ctxC.newPage();

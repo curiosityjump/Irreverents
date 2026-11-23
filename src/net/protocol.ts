@@ -9,6 +9,7 @@
 // whole World, so a later step that adds an NPC, an object or a component
 // writes no network code (docs/plan/step-1.md, "What's decided").
 import type { Effect } from '../sim/effects.ts';
+import type { TuningChange, TuningDiff } from '../sim/tuning-rules.ts';
 import type { Entity, Input, SimEvent, World } from '../sim/types.ts';
 
 declare module '../sim/types.ts' {
@@ -39,7 +40,14 @@ export type ClientMessage =
   | { t: 'ack'; id: number }
   | { t: 'ping'; n: number }
   /** Leaving on purpose (tab closed, a scripted client done): remove my character now. */
-  | { t: 'bye' };
+  | { t: 'bye' }
+  /**
+   * Step 2 (additive), sent only by a page opened with `?tune`: change tuning
+   * numbers for this whole world (`reset`: every number back to shipped
+   * first). The server checks each against the declared ranges
+   * (src/sim/tuning-rules.ts) and answers every page in the world with `tuning`.
+   */
+  | { t: 'tune'; changes: TuningChange[]; reset?: boolean };
 
 export type ServerMessage =
   | { t: 'welcome'; commit: string; startedAt: string; player: string; e: Entity; tick: number }
@@ -50,7 +58,13 @@ export type ServerMessage =
    * with the server's copy of the character just after it. Resent until acknowledged.
    */
   | { t: 'fx'; id: number; effect: Effect; e: Entity }
-  | { t: 'pong'; n: number };
+  | { t: 'pong'; n: number }
+  /**
+   * Step 2 (additive): this world's tuning, as what differs from the shipped
+   * content/tuning.json. Sent after `welcome` only when the world has been
+   * tuned, and to every page in the world after each change.
+   */
+  | { t: 'tuning'; diff: TuningDiff };
 
 export function playerEntityId(player: string): string {
   return `p:${player}`;

@@ -8,6 +8,8 @@ import { DT } from '../sim/types.ts';
 import type { Entity, Input, SimEvent, World } from '../sim/types.ts';
 import { createWorld, spawnPlayer } from '../sim/world.ts';
 import { applyEffect, heldBy } from '../sim/effects.ts';
+import { applyChange, applyTuningDiff } from '../sim/tuning-rules.ts';
+import type { TuningChange } from '../sim/tuning-rules.ts';
 import { clone, looksLikeEntity, playerEntityId } from './protocol.ts';
 import type { ClientMessage, ServerMessage } from './protocol.ts';
 import { createSmoother } from './smooth.ts';
@@ -80,7 +82,14 @@ export function createNetClient(opts: NetClientOptions) {
   let lastFx = 0;
   /** What was held on each local tick since the last report. */
   let ticked: Input[] = [];
-  const stats = { connects: 0, rttMs: null as number | null, msgsIn: 0, bytesIn: 0, msgsOut: 0, bytesOut: 0, effects: 0 };
+  const stats = { connects: 0, rttMs: null as number | null, msgsIn: 0, bytesIn: 0, msgsOut: 0, bytesOut: 0, effects: 0, tunesOut: 0, tuningsIn: 0 };
+  // INTENT (Step 2, ?tune): the world's tuning numbers are the server's, and
+  // this page plays by them: `tuning` messages are laid over the shipped
+  // numbers IN PLACE in `content.tuning`, the very object this page's step
+  // and drawing read, so a dial turned by anyone in the world moves this
+  // page's own running and jumping too. The shipped numbers are kept here
+  // to lay each one over. (docs/mechanisms/tuning-panel.md)
+  const shipped = clone(content.tuning);
   const adopt = (e: Entity): void => {
     const mine = me();
     for (const key of Object.keys(mine)) delete (mine as unknown as Record<string, unknown>)[key];
@@ -142,6 +151,9 @@ export function createNetClient(opts: NetClientOptions) {
       // impact) reads about right on every screen. DRAFT: about, not exactly.
       if (typeof m.tick === 'number' && Math.abs(world.tick - m.tick) > 20) world.tick = m.tick;
       smoother.clear();
+      // A server that restarted has forgotten every dial; if this world is
+      // still tuned, its `tuning` follows this message.
+      applyTuningDiff(content.tuning, shipped, {});
       status = 'online';
       everWelcomed = true;
       backoff = net.reconnectFirstMs;
@@ -185,6 +197,9 @@ export function createNetClient(opts: NetClientOptions) {
         stats.effects++;
       }
       send({ t: 'ack', id: m.id });
+    } else if (m.t === 'tuning') {
+      if (m.diff && typeof m.diff === 'object') applyTuningDiff(content.tuning, shipped, m.diff);
+      stats.tuningsIn++;
     } else if (m.t === 'pong') {
       const at = pingSent.get(m.n);
       if (at !== undefined) stats.rttMs = now() - at;
@@ -277,6 +292,20 @@ export function createNetClient(opts: NetClientOptions) {
       backoff = net.reconnectFirstMs;
       drop();
       nextAttemptAt = now();
+    },
+    /** The shipped tuning numbers (content/tuning.json as built), never changed. */
+    shippedTuning: shipped,
+    /**
+     * Step 2 (?tune): change tuning numbers for this whole world. Applied
+     * here at once, so play follows the thumb; the server checks them and
+     * answers every page with the world's numbers (this one's included,
+     * which puts back anything it refused). Offline, only this page changes.
+     */
+    tune(changes: TuningChange[], reset = false): void {
+      if (reset) applyTuningDiff(content.tuning, shipped, {});
+      for (const c of changes) applyChange(content.tuning, shipped, c);
+      stats.tunesOut++;
+      send({ t: 'tune', changes, reset });
     },
     /** Leave on purpose: the character is removed from the world at once. */
     leave(): void {

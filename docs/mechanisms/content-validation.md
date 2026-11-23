@@ -39,6 +39,11 @@ so broken content cannot deploy (Railway keeps serving the previous build).
   so a new verb brings its own numbers and nobody edits a common file.
 - **An unread tuning number is an error**: a typo in a name would
   otherwise silently fall back to nothing.
+- **The `?tune` panel and the server read the same declarations**
+  (`src/sim/tuning-rules.ts`, `docs/mechanisms/tuning-panel.md`), and
+  repeat the one narrowing made here (no speed across a whole tile in a
+  tick). A new narrowing here belongs there too, or a dial could set a
+  number the build refuses.
 
 ## Controls that stay alive
 

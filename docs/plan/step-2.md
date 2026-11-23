@@ -191,6 +191,13 @@ taste into numbers without a session in between: a tuning panel on the
 phone (behind `?tune` in the address) with sliders for the feel numbers
 and a "copy these values" button.
 
+**Built (2026-11-23):** open the game with `?tune` in the address (e.g.
+`https://irreverents-production.up.railway.app/?tune`), tap **Tune** at
+the top left, and change any number; everyone in your world feels it at
+once, until the next restart. To send the numbers back, tap **Copy** and
+paste what it gives into any session with "make these the defaults"
+(`docs/mechanisms/tuning-panel.md`).
+
 ## Measure
 
 Lead `session_017WiGzGRnRoAeW5Ep5iSycV`, 2026-11-23 04:30 UTC, on `main`

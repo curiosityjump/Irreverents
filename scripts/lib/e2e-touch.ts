@@ -25,7 +25,7 @@ export interface Kit {
   fact: (id: string, ok: boolean, text: string) => void;
   errors: string[];
 }
-interface Phone {
+export interface Phone {
   name: string;
   ctx: any;
   page: Page;
@@ -39,12 +39,12 @@ interface Pt {
   y: number;
 }
 /** Which drawn thing: by entity id, or the character of a player. */
-type Key = { id: string } | { player: string };
+export type Key = { id: string } | { player: string };
 
 const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
 const n = (v: number | null | undefined): string => (v === null || v === undefined ? '?' : v.toFixed(0));
 
-async function phone(kit: Kit, url: string, name: string): Promise<Phone> {
+export async function phone(kit: Kit, url: string, name: string): Promise<Phone> {
   const ctx = await kit.browser.newContext({ ...kit.devices['iPhone 14 landscape'] });
   const page = await ctx.newPage();
   page.on('pageerror', (e: Error) => kit.errors.push(`${name}: ${e.message}`));
@@ -56,7 +56,7 @@ async function phone(kit: Kit, url: string, name: string): Promise<Phone> {
 }
 
 /** The middle of a control as the page lays it out (`fx`: how far across), or null when it is not there to touch. */
-const pointOn = (ph: Phone, selector: string, fx = 0.5): Promise<{ x: number; y: number } | null> =>
+export const pointOn = (ph: Phone, selector: string, fx = 0.5): Promise<{ x: number; y: number } | null> =>
   ph.page.evaluate(
     ([s, f]: [string, number]) => {
       const el = document.querySelector(s);
@@ -73,7 +73,7 @@ const pointOn = (ph: Phone, selector: string, fx = 0.5): Promise<{ x: number; y:
   );
 
 /** One finger down on an action's button and up again. False when the button could not be touched. */
-async function tap(ph: Phone, action: string, ms = 130): Promise<boolean> {
+export async function tap(ph: Phone, action: string, ms = 130): Promise<boolean> {
   // The control for every fact here: E2E_TOUCH_BREAK=<action> takes that
   // button off the page, as a broken layout would, and its facts must fail.
   if (process.env.E2E_TOUCH_BREAK === action) await ph.page.addStyleTag({ content: `[data-action="${action}"] { display: none !important; }` });
@@ -85,7 +85,7 @@ async function tap(ph: Phone, action: string, ms = 130): Promise<boolean> {
   return true;
 }
 
-const me = (ph: Phone): Promise<any> => ph.page.evaluate(() => (window as any).irreverents.drawn.me);
+export const me = (ph: Phone): Promise<any> => ph.page.evaluate(() => (window as any).irreverents.drawn.me);
 const find = (ph: Phone, key: Key): Promise<any> =>
   ph.page.evaluate((k: any) => (window as any).irreverents.drawn.entities.find((d: any) => (k.id ? d.id === k.id : d.player === k.player)) ?? null, key);
 /**
@@ -95,7 +95,7 @@ const find = (ph: Phone, key: Key): Promise<any> =>
  * The room is whatever the game starts players in (content/game.json and
  * content/placements/ are other steps'), so nothing here names one.
  */
-const floor = (ph: Phone): Promise<{ bodies: { id: string; kind: string; x: number; w: number }[]; left: number; right: number; doorLeft: boolean; doorRight: boolean }> =>
+export const floor = (ph: Phone): Promise<{ bodies: { id: string; kind: string; x: number; w: number }[]; left: number; right: number; doorLeft: boolean; doorRight: boolean }> =>
   ph.page.evaluate(() => {
     const irr = (window as any).irreverents;
     const d = irr.drawn;
@@ -118,7 +118,7 @@ const floor = (ph: Phone): Promise<{ bodies: { id: string; kind: string; x: numb
     return { bodies, left: c0 * t, right: (c1 + 1) * t, doorLeft: door(c0 - 1), doorRight: door(c1 + 1) };
   });
 /** Waits until the page's own character is drawn in the same place for six frames. */
-const settle = (ph: Phone): Promise<void> =>
+export const settle = (ph: Phone): Promise<void> =>
   ph.page.evaluate(
     () =>
       new Promise<void>((resolve) => {
@@ -140,7 +140,7 @@ const settle = (ph: Phone): Promise<void> =>
   );
 
 /** A thumb on the stick, left (-1) or right (1), until the page draws its own character past `untilX`. */
-async function steer(ph: Phone, dir: number, untilX: number, ms = 6000): Promise<void> {
+export async function steer(ph: Phone, dir: number, untilX: number, ms = 6000): Promise<void> {
   const p = await pointOn(ph, '[data-stick]', dir > 0 ? 0.75 : 0.25);
   if (!p) return;
   await ph.cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ ...p, id: 1 }] });
@@ -159,7 +159,7 @@ async function steer(ph: Phone, dir: number, untilX: number, ms = 6000): Promise
   await ph.cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
 }
 /** Walks by the stick to within a few pixels of x, and ends facing `face` (1 right, -1 left). */
-async function standAt(ph: Phone, goal: number, face = 1): Promise<void> {
+export async function standAt(ph: Phone, goal: number, face = 1): Promise<void> {
   for (let i = 0; i < 5; i++) {
     const x = (await me(ph)).x as number;
     if (Math.abs(x - goal) <= 3) break;
@@ -177,7 +177,7 @@ async function standAt(ph: Phone, goal: number, face = 1): Promise<void> {
 }
 
 /** Records where a page draws one thing, every frame, for `ms`. Start it, act, then await it. */
-const track = (ph: Phone, key: Key, ms: number): Promise<Pt[]> =>
+export const track = (ph: Phone, key: Key, ms: number): Promise<Pt[]> =>
   ph.page.evaluate(
     ([k, dur]: [any, number]) =>
       new Promise<any[]>((resolve) => {
@@ -199,7 +199,7 @@ const track = (ph: Phone, key: Key, ms: number): Promise<Pt[]> =>
  * where it started, and the most it covered in any 250 ms (no character runs
  * faster than 128 px a second, so more than 32 px in 250 ms is not walking).
  */
-function flight(pts: Pt[]): { far: number; burst: number; rose: number } {
+export function flight(pts: Pt[]): { far: number; burst: number; rose: number } {
   if (pts.length === 0) return { far: 0, burst: 0, rose: 0 };
   const p0 = pts[0]!;
   let far = 0;
