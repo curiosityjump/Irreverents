@@ -273,7 +273,7 @@ for later, as the step suggests.
   deleted). A shopkeeper with a counter and three goods, the villain's
   loop (about 53 s a round) and a pacing guard are in `castle-street`,
   one door east of where players start; `step4-street-people`. Lead's
-  review, 09:02 UTC, on a fresh pull and **on the live address at
+  review, 09:00 UTC, on a fresh pull and **on the live address at
   `a873218`**: build and check green (68 ok). Two separate browser
   players in one private live world: one walked from the throne room to
   the goods and pressed Use once; **the other player's screen** showed
@@ -366,7 +366,7 @@ for later, as the step suggests.
   touch; `c.roomHide` unseen only if it has landed. Following through
   doors and the street's gate D scenarios wait for slice 2, still held.
   Worker due done or stopped by 10:00 UTC.
-- **Lead, 09:05 UTC.** Slice 3 is live and reviewed (see Briefs).
+- **Lead, 09:01 UTC.** Slice 3 is live and reviewed (see Briefs).
   Slice 2 (`handoff-prompts/step-4-slice-2-alarm.md`: the bell, the
   call, the alert, responders, hiding; gate D) is **still held by the
   orchestrator** and has no worker; gate D has no scenario from this
