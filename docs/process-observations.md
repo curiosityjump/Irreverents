@@ -245,3 +245,6 @@ each, and the rest held (`docs/for-the-orchestrator.md`, handoff entry of
 window's burn is the only yardstick), and hand an orchestrator off on context
 size, not on a count of check-ins.
 
+### 2026-11-23 · A brief that changes under a running worker reaches them only at their next rebase
+Step 1 Gate 2 worker (`session_017WiGzGmZK2vRuZTfKA24QD`). The Gate 2 brief was amended at least five times in the twenty minutes after launch (effects with acknowledgement, upright play, the party seat, the built server in check). I built and proved a whole first version against the launch text, and found the changes only when a rebase conflicted. Cost: a second pass over the network protocol, the layout, e2e and the docs. What would have saved it: a one-line message to the worker each time its brief changes, or the worker re-reading its brief at every fetch (I do now).
+

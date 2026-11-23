@@ -4,5 +4,5 @@
     "lib": ["ES2023"],
     "types": []
   },
-  "include": ["src/content", "src/sim", "src/scenarios"]
+  "include": ["src/content", "src/sim", "src/scenarios", "src/net"]
 }

@@ -1,0 +1,315 @@
+// The server's half of the network layer: one World per named world, the
+// players in it, the tick and the snapshots (docs/mechanisms/network.md).
+import type http from 'node:http';
+import { WebSocketServer } from 'ws';
+import type { WebSocket } from 'ws';
+import type { Content } from '../content/types.ts';
+import { clone, DEFAULT_WORLD, looksLikeEntity, playerEntityId } from '../net/protocol.ts';
+import type { ClientMessage, ServerMessage } from '../net/protocol.ts';
+import { heldBy } from '../sim/effects.ts';
+import type { Effect } from '../sim/effects.ts';
+import { step } from '../sim/step.ts';
+import { DT } from '../sim/types.ts';
+import type { Entity, Input, SimEvent, World } from '../sim/types.ts';
+import { createWorld, findEntity, NO_INPUT, populateRoom, removeEntity, spawnPlayer } from '../sim/world.ts';
+
+interface Player {
+  id: string;
+  sock: WebSocket | null;
+  slot: number;
+  input: Input;
+  inputAt: number;
+  /** The page's own tick count at its latest report. */
+  ct: number;
+  /** When a character whose page went away is removed. */
+  staleAt: number | null;
+  /** Effects on this player's character that their page has not acknowledged yet, oldest first. */
+  pending: { id: number; effect: Effect; sentAt: number }[];
+}
+
+/** DRAFT: how long before an unacknowledged effect is sent again. */
+const RESEND_MS = 300;
+
+export interface GameWorld {
+  name: string;
+  world: World;
+  players: Map<string, Player>;
+  owed: number;
+  events: SimEvent[];
+}
+
+export interface GameOptions {
+  content: Content;
+  commit: string;
+  startedAt: string;
+}
+
+function cleanInput(raw: unknown): Input {
+  const i = (raw ?? {}) as Partial<Input>;
+  const axis = (v: unknown): number => (typeof v === 'number' && Number.isFinite(v) ? Math.max(-1, Math.min(1, v)) : 0);
+  return { x: axis(i.x), y: axis(i.y), held: Array.isArray(i.held) ? i.held.filter((a) => typeof a === 'string').slice(0, 32) : [] };
+}
+
+export function attachGame(server: http.Server, opts: GameOptions) {
+  const { content } = opts;
+  const net = content.net;
+  const worlds = new Map<string, GameWorld>();
+
+  const send = (sock: WebSocket | null, m: ServerMessage | string): void => {
+    if (sock && sock.readyState === sock.OPEN) sock.send(typeof m === 'string' ? m : JSON.stringify(m));
+  };
+
+  /**
+   * THE one place a world is created (docs/mechanisms/network.md). Anything
+   * a new world should start with goes here.
+   */
+  const makeWorld = (name: string): GameWorld => {
+    const gw: GameWorld = { name, world: createWorld(), players: new Map(), owed: 0, events: [] };
+    // Whatever content/placements/ puts in each room (crates, dummies, people).
+    for (const roomId of Object.keys(content.rooms)) populateRoom(gw.world, content, roomId);
+    return gw;
+  };
+
+  /**
+   * THE one place the server receives each tick's events from step()
+   * (docs/mechanisms/network.md). Anything the server itself does about an
+   * event (beyond sending it to the pages) goes here.
+   */
+  const onEvents = (gw: GameWorld, events: SimEvent[]): void => {
+    gw.events.push(...events);
+    if (gw.events.length > 500) gw.events.splice(0, gw.events.length - 500);
+  };
+
+  const removePlayer = (gw: GameWorld, p: Player): void => {
+    removeEntity(gw.world, playerEntityId(p.id));
+    gw.players.delete(p.id);
+    // INTENT: a PRIVATE world is forgotten when its last player is gone, so
+    // one made for a check (`?room=check-...`) leaves nothing behind.
+    // INTENT: the world everyone shares is never forgotten while the server
+    // runs: what players did to its rooms stays done when the last one
+    // leaves (World.rooms is "never reset when a room empties", D-077).
+    // DRAFT: it keeps being simulated while empty.
+    if (gw.players.size === 0 && gw.name !== DEFAULT_WORLD) worlds.delete(gw.name);
+  };
+
+  // INTENT: "while a character is held or flying from a hit, the server's
+  // word wins" (docs/plan/step-1.md). Held, or with an effect its page has
+  // not acknowledged, a player's character is simulated here and the page's
+  // reports of it are set aside; once free and acknowledged, the page's own
+  // simulation is the truth again. Without this a report sent just before
+  // the effect arrived would undo it (and a door could fire twice).
+  const serverMoves = (gw: GameWorld, p: Player): boolean => {
+    if (p.pending.length > 0) return true;
+    const e = findEntity(gw.world, playerEntityId(p.id));
+    return !!e && heldBy(e) !== null;
+  };
+
+  /** Puts what a page says about its own character into the world, keeping what is the server's to say. */
+  const adopt = (gw: GameWorld, p: Player, raw: unknown): boolean => {
+    if (!looksLikeEntity(raw)) return false;
+    if (!content.rooms[raw.room] || !content.characters[raw.kind]) return false;
+    if (serverMoves(gw, p)) return true;
+    const e = clone(raw);
+    e.id = playerEntityId(p.id);
+    e.player = p.id;
+    e.c.net = { slot: p.slot };
+    const i = gw.world.entities.findIndex((x) => x.id === e.id);
+    if (i >= 0) gw.world.entities[i] = e;
+    else {
+      // Sorted by id, as World requires.
+      let at = 0;
+      while (at < gw.world.entities.length && gw.world.entities[at]!.id < e.id) at++;
+      gw.world.entities.splice(at, 0, e);
+    }
+    return true;
+  };
+
+  const join = (sock: WebSocket, m: Extract<ClientMessage, { t: 'join' }>): { gw: GameWorld; p: Player } | null => {
+    if (typeof m.player !== 'string' || m.player.length < 1 || m.player.length > 64) return null;
+    const name = typeof m.world === 'string' && m.world.length > 0 ? m.world.slice(0, 64) : DEFAULT_WORLD;
+    let gw = worlds.get(name);
+    if (!gw) worlds.set(name, (gw = makeWorld(name)));
+    let p = gw.players.get(m.player);
+    if (p) {
+      // INTENT: the same player id coming back takes its character over; it
+      // never spawns a second one. The older socket, if still there, is let go.
+      const old = p.sock;
+      p.sock = sock;
+      if (old && old !== sock) old.close(4001, 'taken over');
+    } else {
+      let slot = 0;
+      const used = new Set([...gw.players.values()].map((q) => q.slot));
+      while (used.has(slot)) slot++;
+      p = { id: m.player, sock, slot, input: NO_INPUT, inputAt: 0, ct: 0, staleAt: null, pending: [] };
+      gw.players.set(p.id, p);
+    }
+    p.staleAt = null;
+    const id = playerEntityId(p.id);
+    // A page that has played keeps its own place; a new one is placed by the server.
+    if (!m.fresh) adopt(gw, p, m.e);
+    if (!findEntity(gw.world, id)) {
+      // INTENT: joining seats you in the one shared party. No character is
+      // passed: the simulation picks a member nobody is playing (and the
+      // first again when all are taken; nobody is turned away). Leaving is
+      // removeEntity; coming back while the character exists calls nothing.
+      const e = spawnPlayer(gw.world, content, { player: p.id, room: content.game.startRoom, spawn: p.slot });
+      e.c.net = { slot: p.slot };
+    }
+    send(sock, { t: 'welcome', commit: opts.commit, startedAt: opts.startedAt, player: p.id, e: findEntity(gw.world, id)!, tick: gw.world.tick });
+    return { gw, p };
+  };
+
+  const wss = new WebSocketServer({ server, path: '/ws' });
+  wss.on('connection', (sock) => {
+    let here: { gw: GameWorld; p: Player } | null = null;
+    sock.on('message', (data) => {
+      let m: ClientMessage;
+      try {
+        m = JSON.parse(data.toString()) as ClientMessage;
+      } catch {
+        return;
+      }
+      if (!m || typeof m !== 'object') return;
+      if (m.t === 'ping') return send(sock, { t: 'pong', n: m.n });
+      if (m.t === 'join') {
+        here = join(sock, m);
+        if (!here) sock.close(4000, 'bad join');
+        return;
+      }
+      if (!here || here.p.sock !== sock) return;
+      if (m.t === 'me') {
+        if (!adopt(here.gw, here.p, m.e)) return;
+        here.p.input = cleanInput(m.i);
+        here.p.inputAt = Date.now();
+        here.p.ct = typeof m.ct === 'number' ? m.ct : here.p.ct;
+      } else if (m.t === 'ack') {
+        here.p.pending = here.p.pending.filter((f) => f.id !== m.id);
+      } else if (m.t === 'bye') {
+        removePlayer(here.gw, here.p);
+        here = null;
+        sock.close(1000, 'bye');
+      }
+    });
+    const gone = (): void => {
+      if (!here || here.p.sock !== sock) return;
+      here.p.sock = null;
+      here.p.input = NO_INPUT;
+      // DRAFT: how long a character waits for its page to come back
+      // (content/net.json staleSeconds). Step 5 owns what the others see meanwhile.
+      here.p.staleAt = Date.now() + net.staleSeconds * 1000;
+    };
+    sock.on('close', gone);
+    sock.on('error', gone);
+  });
+
+  // Effect ids only ever grow, across restarts too, so a page can tell a resent copy from a new effect.
+  let nextFx = Date.now();
+
+  const tickWorld = (gw: GameWorld, now: number): void => {
+    // INTENT: a character a page owns is a puppet here: its state is the
+    // page's latest report, put back after every tick. The world is still
+    // stepped with that character in it and its player's input, so whatever
+    // the server simulates can see it and act on it. What the world does TO
+    // it is an effect (src/sim/effects.ts): sent to its page, numbered,
+    // resent until acknowledged; until then (and while it is held) the
+    // character is not a puppet but simulated here.
+    const inputs: Record<string, Input> = {};
+    const puppets: { id: string; before: Entity }[] = [];
+    for (const p of gw.players.values()) {
+      const id = playerEntityId(p.id);
+      const e = findEntity(gw.world, id);
+      if (!e) continue;
+      inputs[p.id] = p.sock && now - p.inputAt <= net.inputHoldMs ? p.input : NO_INPUT;
+      if (!serverMoves(gw, p)) puppets.push({ id, before: clone(e) });
+    }
+    const events = step(gw.world, inputs, content);
+    onEvents(gw, events);
+    const hit = new Set<string>();
+    for (const ev of events) {
+      if (ev.type !== 'effect' || ev.player === null) continue;
+      const p = gw.players.get(ev.player);
+      const e = findEntity(gw.world, ev.entity);
+      if (!p || !e) continue;
+      hit.add(ev.entity);
+      const fx = { id: ++nextFx, effect: ev.effect, sentAt: now };
+      p.pending.push(fx);
+      send(p.sock, { t: 'fx', id: fx.id, effect: fx.effect, e });
+    }
+    for (const o of puppets) {
+      if (hit.has(o.id)) continue;
+      const i = gw.world.entities.findIndex((x) => x.id === o.id);
+      if (i >= 0) gw.world.entities[i] = o.before;
+    }
+    for (const p of gw.players.values()) {
+      const e = findEntity(gw.world, playerEntityId(p.id));
+      for (const fx of p.pending) {
+        if (!e || now - fx.sentAt < RESEND_MS) continue;
+        fx.sentAt = now;
+        send(p.sock, { t: 'fx', id: fx.id, effect: fx.effect, e });
+      }
+    }
+  };
+
+  // INTENT: a fixed timestep fed by real time with a cap on catching up: a
+  // slow moment costs a few dropped ticks, never a spiral, and the
+  // simulation itself never reads a clock.
+  let last = Date.now();
+  let lastSnap = last;
+  const timer = setInterval(() => {
+    const now = Date.now();
+    const elapsed = Math.min((now - last) / 1000, net.maxCatchUpTicks * DT);
+    last = now;
+    const snap = now - lastSnap >= 1000 / net.snapshotRate - 2;
+    if (snap) lastSnap = now;
+    for (const gw of [...worlds.values()]) {
+      for (const p of [...gw.players.values()]) {
+        if (!p.sock && p.staleAt !== null && now >= p.staleAt) removePlayer(gw, p);
+      }
+      if (!worlds.has(gw.name)) continue;
+      gw.owed += elapsed;
+      while (gw.owed >= DT) {
+        tickWorld(gw, now);
+        gw.owed -= DT;
+      }
+      if (!snap) continue;
+      const stamps: Record<string, number> = {};
+      for (const p of gw.players.values()) stamps[playerEntityId(p.id)] = p.ct;
+      // DRAFT: a page is sent every player (wherever they are, so friends can
+      // be found) and everything else in the content room its own character
+      // is in; whole, 20 times a second, moved or not. Still the first thing
+      // to trim when a room fills up (send only what changed).
+      const byRoom = new Map<string, string>();
+      for (const p of gw.players.values()) {
+        if (!p.sock) continue;
+        const room = findEntity(gw.world, playerEntityId(p.id))?.room ?? '';
+        let text = byRoom.get(room);
+        if (text === undefined) {
+          const w: World = { ...gw.world, entities: gw.world.entities.filter((e) => e.player !== null || e.room === room) };
+          byRoom.set(room, (text = JSON.stringify({ t: 'snap', w, stamps, ev: gw.events } satisfies ServerMessage)));
+        }
+        send(p.sock, text);
+      }
+      gw.events = [];
+    }
+  }, 1000 / 120);
+
+  return {
+    /** The live worlds by name. For /healthz counts and the in-process check; treat as read-only elsewhere. */
+    worlds,
+    /** `players`: connected to the world everyone shares (look before pushing code). `playersEverywhere` counts private worlds too. */
+    counts: (): { players: number; worlds: number; playersEverywhere: number } => {
+      const connected = (gw: GameWorld | undefined): number => (gw ? [...gw.players.values()].filter((p) => p.sock).length : 0);
+      return {
+        players: connected(worlds.get(DEFAULT_WORLD)),
+        worlds: worlds.size,
+        playersEverywhere: [...worlds.values()].reduce((n, gw) => n + connected(gw), 0),
+      };
+    },
+    close(): void {
+      clearInterval(timer);
+      for (const c of wss.clients) c.terminate();
+      wss.close();
+    },
+  };
+}
+export type Game = ReturnType<typeof attachGame>;

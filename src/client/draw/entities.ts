@@ -1,14 +1,50 @@
 import type { Content } from '../../content/types.ts';
 import type { Entity, World } from '../../sim/types.ts';
+import { drawSprite } from './sprites.ts';
+
+/** One thing the renderer put on screen this frame, in room pixels. Part of the debug object (docs/mechanisms/network.md). */
+export interface Drawn {
+  id: string;
+  player: string | null;
+  kind: string;
+  /** Where the renderer read it to be (remote characters: after smoothing). */
+  x: number;
+  y: number;
+  /** The whole pixel it was drawn at. */
+  px: number;
+  py: number;
+  /** For a player's character: that player's own colour (the dot above it). Otherwise the kind's colour. */
+  color: string;
+  mine: boolean;
+}
+
+/** Whose view this is, and where to record what was drawn. */
+export interface PlayerView {
+  me: string;
+  frame: number;
+  drawn: Drawn[];
+}
 
 /** DRAFT: every entity is its character kind's box in a flat colour, with an eye so facing reads. Sprite sheets replace this as data. */
-export function drawEntities(g: CanvasRenderingContext2D, world: World, content: Content, roomId: string, ox: number, oy: number): void {
+export function drawEntities(g: CanvasRenderingContext2D, world: World, content: Content, roomId: string, ox: number, oy: number, view?: PlayerView): void {
   for (const e of world.entities) {
     if (e.room !== roomId) continue;
     const kind = content.characters[e.kind];
     if (!kind) continue;
     const x = ox + Math.round(e.x);
     const y = oy + Math.round(e.y);
+    // Step 1 Gate 2 (one small edit; Step 2 owns this file): each PLAYER has
+    // a dot above the head in their own colour, by join order, so two people
+    // playing the same member can be told apart; and what was drawn is
+    // recorded for the scripted checks.
+    const dot = e.c.net ? content.net.playerColors[e.c.net.slot % content.net.playerColors.length]! : null;
+    if (dot) {
+      g.fillStyle = dot;
+      g.fillRect(x + Math.floor(kind.box.w / 2) - 2, y - 7, 4, 4);
+    }
+    view?.drawn.push({ id: e.id, player: e.player, kind: e.kind, x: e.x, y: e.y, px: Math.round(e.x), py: Math.round(e.y), color: dot ?? kind.color, mine: e.id === view.me });
+    // Art as data: a kind with a file in content/sprites/ is drawn from its sheet.
+    if (drawSprite(g, content, e, x, y, view?.frame ?? world.tick)) continue;
     const { w, h } = kind.box;
     if (e.c.flattened) {
       // DRAFT: knocked out reads as lying down: the same box on its side at

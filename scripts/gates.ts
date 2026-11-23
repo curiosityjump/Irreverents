@@ -18,18 +18,23 @@ if (broken.length) {
   process.exit(2);
 }
 
+const { loadScriptChecks } = await import('./lib/script-checks.ts');
+const scriptChecks = await loadScriptChecks();
+
 let passing = 0;
 let failing = 0;
 for (const gate of GATES) {
   const mine = scenarios.filter((s) => s.gate === gate);
-  if (mine.length === 0) {
+  const checks = scriptChecks.filter((c) => c.gate === gate);
+  if (mine.length === 0 && checks.length === 0) {
     console.log(`${gate}: no scenario yet`);
     continue;
   }
-  const failed = mine.map((s) => runScenario(s, loaded.content)).filter((r) => r.failures.length > 0);
+  const failed: { id: string }[] = mine.map((s) => runScenario(s, loaded.content)).filter((r) => r.failures.length > 0);
+  for (const c of checks) if ((await c.run(loaded.content)).length > 0) failed.push({ id: c.id });
   if (failed.length === 0) {
     passing++;
-    console.log(`${gate}: passing (${mine.length} scenario(s): ${mine.map((s) => s.id).join(', ')})`);
+    console.log(`${gate}: passing (${mine.length + checks.length} scenario(s): ${[...mine, ...checks].map((s) => s.id).join(', ')})`);
   } else {
     failing++;
     console.log(`${gate}: failing (${failed.map((r) => r.id).join(', ')}; npm run check says why)`);

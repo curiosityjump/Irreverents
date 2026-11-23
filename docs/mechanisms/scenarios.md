@@ -12,6 +12,14 @@ and the facts expected. `npm run check` runs every one headlessly through
 the same `step()` the browser and server run. `npm run gates` reports the
 build gates A–F (`docs/measures.md`, M3) from the scenarios' `gate` tags.
 
+**Scripted checks.** The scenario layer is pure (no sockets), so a check
+that needs a real server is a file in `scripts/checks/` default-exporting
+a `ScriptCheck` (`scripts/lib/script-checks.ts`: `id`, `gate`, `proves`,
+`run(content)` returning what failed). `npm run check` runs each after the
+scenarios and `npm run gates` counts its `gate` tag like a scenario's. Add
+a file, edit no list. The first is `together` (gate F,
+`docs/mechanisms/network.md`).
+
 ## The format (`scenarios/<id>.json`)
 
 ```json

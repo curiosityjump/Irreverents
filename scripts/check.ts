@@ -1,5 +1,6 @@
 // npm run check: type-check, layer rule, content validation, every scenario.
-// No browser, no network. Exit code 0 only when all of it passes.
+// plus the scripted checks in scripts/checks/ (a local server on a free port).
+// No browser, nothing outside this machine. Exit code 0 only when all of it passes.
 import { spawnSync } from 'node:child_process';
 import path from 'node:path';
 import { generateRegistries, root } from './lib/registries.ts';
@@ -46,6 +47,9 @@ if (loaded.problems.length === 0) {
     const result = runScenario(s, loaded.content);
     section(`scenario ${s.id}`, result.failures, s.proves);
   }
+  // Checks that need a real server (scripts/checks/); a few seconds, no browser.
+  const { loadScriptChecks } = await import('./lib/script-checks.ts');
+  for (const c of await loadScriptChecks()) section(`check ${c.id}`, await c.run(loaded.content), c.proves);
 } else {
   console.log('skip  scenarios: not run, because the content is not valid');
 }

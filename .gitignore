@@ -5,3 +5,5 @@ dist/
 built.json
 # Registries written by scripts/lib/registries.ts from the files beside them.
 *.gen.ts
+# Screenshots saved by npm run e2e and npm run check:live.
+e2e-out/

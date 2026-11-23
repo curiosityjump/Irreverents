@@ -58,6 +58,9 @@ export async function build(): Promise<boolean> {
   });
 
   fs.copyFileSync(path.join(root, 'src/client/index.html'), path.join(dist, 'public/index.html'));
+  // Art the game uses lives in assets/ (the design-library mirror is reference, never runtime).
+  const assets = path.join(root, 'assets');
+  if (fs.existsSync(assets)) fs.cpSync(assets, path.join(dist, 'public/assets'), { recursive: true });
   return true;
 }
 

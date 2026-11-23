@@ -8,11 +8,12 @@ const MAY_IMPORT: Record<string, string[]> = {
   'src/content': ['src/content'],
   'src/sim': ['src/sim', 'src/content'],
   'src/scenarios': ['src/scenarios', 'src/sim', 'src/content'],
-  'src/client': ['src/client', 'src/sim', 'src/content'],
-  'src/server': ['src/server', 'src/sim', 'src/content'],
+  'src/net': ['src/net', 'src/sim', 'src/content'],
+  'src/client': ['src/client', 'src/net', 'src/sim', 'src/content'],
+  'src/server': ['src/server', 'src/net', 'src/sim', 'src/content'],
 };
 /** Layers that must stay free of packages and Node built-ins (they run in the browser too). */
-const PURE = ['src/content', 'src/sim', 'src/scenarios'];
+const PURE = ['src/content', 'src/sim', 'src/scenarios', 'src/net'];
 
 function tsFiles(dir: string): string[] {
   if (!fs.existsSync(dir)) return [];

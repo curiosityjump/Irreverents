@@ -1,0 +1,16 @@
+{
+  "//": "DRAFT: every number of the network layer (docs/mechanisms/network.md). The lead's first suggestions, never tuned against a real phone on cellular. Rates are per second.",
+  "reportRate": 30,
+  "snapshotRate": 20,
+  "interpDelayMs": 100,
+  "remoteMaxSpeed": 600,
+  "inputHoldMs": 250,
+  "staleSeconds": 15,
+  "maxCatchUpTicks": 15,
+  "reconnectFirstMs": 250,
+  "reconnectMaxMs": 4000,
+  "silenceMs": 3000,
+  "pingMs": 1000,
+  "//colors": "DRAFT: graybox player colours, by the order players joined a world.",
+  "playerColors": ["#e07a5f", "#81b29a", "#f2cc8f", "#6fa8dc", "#c38d9e", "#b5e48c", "#f4a261", "#9d8df1"]
+}

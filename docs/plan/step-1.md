@@ -348,6 +348,32 @@ changed without touching code; don't grade the feel yourself.
   writable at `/data`. `npm run check:deployed` is M1's command. Record
   and traps: `docs/mechanisms/deploy.md`. Not proven: the health check.
 
+- **Gate 2, local** (Gate 2 worker, 2026-11-23, headless Chromium,
+  server on localhost; numbers from the run before the push, see the
+  commit). `npm run e2e`, all facts pass: (a) each page draws both
+  players, each in their own colour, seated as different party members;
+  (b) the phone page drew the desktop player at their new place 104 ms
+  after they stopped; (c) two fingers at once ran and jumped in the same
+  frame; a control for every action, none over the play field, game
+  pixels 4 device pixels on `iPhone 14 landscape` (5 would leave no room
+  beside the view); rate, two players and six placed bodies: a page sends
+  31 messages/s (10 kB/s) and receives 22 (31 kB/s); (d) with 150 ms
+  added each way (round trip measured from the page: 4 ms → 305 ms) the
+  player's own character started moving 14 ms after the key press; (e)
+  865 ms from a cut socket to the other page drawing the player at a new
+  place, no reload, no duplicate; (f) passes; (g) an upright `iPhone 14`
+  ran and jumped by touch with every control below the view; (h) the
+  server down for 75 s, the page still trying and the player still
+  moving, back in the world 1.4 s after its return; restarted as
+  another commit, exactly one reload. `npm run check` about 6 s with the
+  gate F check (an effect delivered, its first copy lost, resent, applied
+  once, acknowledged) and the built server started as its own process;
+  `npm run gates`: F passing (4 of 6 with the other steps' scenarios). One snapshot of the check's world is 1.4 kB, 2.1 kB with an unknown-kind entity carrying 500 bytes. Controls watched to fail are listed in
+  `docs/mechanisms/network.md`. A throwaway sprite sheet and tile atlas
+  added as data only were drawn by the page (screenshot read), then
+  removed. **Not tried: Safari, a real iPhone, a real cellular network;
+  the `hold`, `release` and `move` effects across two devices.**
+
 ## Briefs
 
 - `handoff-prompts/step-1-gate-1-skeleton.md` — Gate 1: skeleton, sim

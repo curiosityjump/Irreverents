@@ -10,6 +10,9 @@ mechanics unless marked `INTENT:` in the code.
 ```
 content/            the game's data: what exists and how it feels
   tuning.json         every feel number (speeds, jump, gravity), one file
+  net.json            the network layer's rates, timeouts, player colours
+  sprites/<character id>.json   a sprite sheet for that character kind
+  atlases/<room id>.json        a tile image for that room
   game.json           where a player starts, and as whom; `mapStart`: where
                       the kingdom is entered from, for the map checks
   rooms/<id>.json     one room: rows of characters + a legend, its doors,
@@ -38,10 +41,16 @@ src/
     room-routes.ts    doorToward: which door leads toward another room
   scenarios/        pure: the scenario runner
     facts/<id>.ts     one kind of expectation (self-registering)
-  client/           the browser page: canvas, keyboard, render
-  server/           the one Node process: static files, /healthz, /ws
+  net/              pure: the network layer both ends share (protocol,
+                    one player's client, smoothing)
+  client/           the browser page: shell, keyboard, touch, render
+    draw/<layer>.ts   one drawing layer each (room, entities)
+  server/           the one Node process: static files, /healthz;
+    game.ts           worlds, players, the tick, snapshots (/ws)
     store.ts          lasting records: named collections on the volume
-scripts/            build, check, gates, dev, trace; lib/ reads the disk
+scripts/            build, check, gates, dev, trace, e2e; lib/ reads the disk
+  checks/<id>.ts      checks needing a real server (self-registering)
+assets/             art the game uses, copied to dist/public/assets/
 dist/               build output (git-ignored): server.cjs, public/
 ```
 
@@ -55,12 +64,13 @@ dist/               build output (git-ignored): server.cjs, public/
 | `src/content` | `src/content` | DOM, Node, packages |
 | `src/sim` | `src/sim`, `src/content` | DOM, Node, packages, clocks, `Math.random` |
 | `src/scenarios` | itself, `src/sim`, `src/content` | DOM, Node, packages |
-| `src/client` | itself, `src/sim`, `src/content` | Node; never `src/server` |
-| `src/server` | itself, `src/sim`, `src/content` | DOM; never `src/client` |
+| `src/net` | itself, `src/sim`, `src/content` | DOM, Node, packages, clocks (time and the socket are passed in) |
+| `src/client` | itself, `src/net`, `src/sim`, `src/content` | Node; never `src/server` |
+| `src/server` | itself, `src/net`, `src/sim`, `src/content` | DOM; never `src/client` |
 | `scripts` | anything | — |
 
 `npm run check` enforces this twice: `tsconfig.pure.json` type-checks the
-three pure layers with no DOM and no Node types, and
+pure layers (the three above and `src/net`) with no DOM and no Node types, and
 `scripts/lib/boundaries.ts` reads every import line. (The sim imports
 content *types* and the small pure constants beside them, such as `TILE`.)
 
@@ -102,7 +112,9 @@ content *types* and the small pure constants beside them, such as `TILE`.)
   exists and nothing opens it yet; the Hall's records are its first user
   once it is wired into the server (`docs/plan/step-7.md`).
 - **No external services.** The server is one process on Railway; `/ws`
-  is a hello-and-echo until Step 1 Gate 2 owns the protocol.
+  is the network layer (`docs/mechanisms/network.md`): one `World` per
+  named world on the server, and on each page a local world holding that
+  player's own character.
 
 ## Lasting records: the store
 
@@ -209,7 +221,11 @@ extends from its own file with `declare module '../types.ts' { … }`
 | **rule** (a thing the world does every tick, or an "event → reaction" mapping) | A system: `src/sim/systems/<id>.ts` with an `order` (verbs run at 100, physics at 500; leave gaps). Step 4's authored role/deed mappings are data: add a row to `expect` or `reactions` in `content/rules/` (`docs/mechanisms/npc-response.md`), no code. | One new file |
 | **scenario** | `scenarios/<id>.json` (`docs/mechanisms/scenarios.md`). Find the numbers with `node scripts/trace.ts <id>`. Tag it `"gate": "A"`…`"F"` when it is evidence for a build gate. | No |
 | **tuning number** | Declare it in the `tuning` of the verb (per character) or system (world) that reads it, with its range; put the value in `content/tuning.json`. `npm run check` names any number missing, out of range or unread. | Only the reader |
-| **asset** | See "Where art plugs in". | Not yet built |
+| **asset** | The image under `assets/`, plus `content/sprites/<character id>.json` or `content/atlases/<room id>.json`. See "Where art plugs in". | No |
+| **thing that moves a player from outside** (a hit, a hold, a door) | `emitEffect(ctx, entity, effect)`; see "Effects on a player". | No network code |
+| **touch control** | Nothing: every file in `content/actions/` gets a button (`data-action="<id>"`). The layout is Step 5's. | No |
+| **network number** | `content/net.json`. | No |
+| **check that needs a real server** | `scripts/checks/<id>.ts` default-exporting a `ScriptCheck`. | One new file |
 | **kind of content** | `src/content/kinds/<kind>.ts` default-exporting a `ContentKind` (`source`, `parse`, optional cross-reference `check`) and extending `Content`. | One new file |
 | **kind of scenario fact** | `src/scenarios/facts/<id>.ts` default-exporting a `Fact`. | One new file |
 | **event** | Extend `EventMap` beside the code that emits it; `ctx.emit('name', {...})`. | In your own file |
@@ -303,17 +319,22 @@ that may not.
 
 ## Where art plugs in
 
-Nothing is drawn from images yet; `src/client/render.ts` draws rectangles.
-The intended shape, so art arriving tonight drops in as data:
+`src/client/render.ts` draws a rectangle for anything that has no art
+file, and the image for anything that has one. Art arrives as data
+(Step 1 Gate 2; tried once with throwaway images, 2026-11-23, not yet
+with delivered art):
 
 - The game keeps its own copies under `assets/` (the design-library mirror
   is reference, never runtime); the build copies them to `dist/public/assets/`.
-- A **tile atlas** is named by the room (`"atlas": "<id>"`, additive) and
-  described by `content/atlases/<id>.json`: image path, tile size, and
-  which atlas cell draws each legend meaning.
-- A **sprite sheet** is named by the character kind (`"sprite": "<id>"`,
-  additive) and described by `content/sprites/<id>.json`: image path, the
-  32×32 cell size, and frame lists per animation state.
+- A **tile atlas** is `content/atlases/<room id>.json`, named after the
+  room it draws: image path under `assets/`, cell size, and the
+  `[column, row]` for `solid`, `solidTop` and `oneway`.
+- A **sprite sheet** is `content/sprites/<character id>.json`, named after
+  the character kind it draws: image path, cell size, where the collision
+  box sits in a cell (`anchor`), `fps`, and frame lists for `idle`, `run`
+  and `air`. Sprites face right; the renderer mirrors them.
+- `DRAFT:` both are keyed by file name rather than by a field in the room
+  or character file, so adding art edits nobody else's file.
 - Collision never depends on art: the box in the character file and the
   legend in the room file stay the truth.
 
@@ -327,7 +348,8 @@ records an `effect` event. In one world (a scenario; any body the server
 simulates) that is all there is. Across devices the network layer sends
 each effect on a player's character to that player's page, which applies
 it with the same `applyEffect` and acknowledges it; the server resends
-until it does. **A verb or system that emits an effect writes no network
+until it does (`docs/mechanisms/network.md`, "Effects"; only `push` has
+been run across two devices so far). **A verb or system that emits an effect writes no network
 code. One that changes a player's `x`, `vx`, `room`… directly works in a
 scenario and is lost between two devices.**
 

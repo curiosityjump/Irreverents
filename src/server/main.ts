@@ -4,7 +4,8 @@
 import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
-import { WebSocketServer } from 'ws';
+import { attachGame } from './game.ts';
+import type { Game } from './game.ts';
 
 // INTENT: /healthz keeps exactly these three field names (ok, commit,
 // startedAt). docs/measures.md M1 reads them to tell which push is live;
@@ -84,10 +85,11 @@ function send(res: http.ServerResponse, status: number, type: string, body: stri
   res.end(body);
 }
 
+let game: Game | null = null;
 const server = http.createServer((req, res) => {
   const url = new URL(req.url ?? '/', 'http://x');
   if (url.pathname === '/healthz') {
-    send(res, 200, 'application/json', JSON.stringify({ ok: true, commit, startedAt, storage }));
+    send(res, 200, 'application/json', JSON.stringify({ ok: true, commit, startedAt, storage, ...game?.counts() }));
     return;
   }
   if (req.method !== 'GET' && req.method !== 'HEAD') {
@@ -112,17 +114,19 @@ const server = http.createServer((req, res) => {
       send(res, 404, 'text/plain; charset=utf-8', 'not found');
       return;
     }
+    // The page learns which commit served it, so that after a deploy it can
+    // tell it is talking to a newer server and reload once (src/client/main.ts).
+    if (path.basename(file) === 'index.html') {
+      send(res, 200, MIME['.html']!, data.toString('utf8').replace('%COMMIT%', commit));
+      return;
+    }
     send(res, 200, MIME[path.extname(file)] ?? 'application/octet-stream', data);
   });
 });
 
-// DRAFT: a hello and an echo only. Step 1 Gate 2 owns the real protocol;
-// the echo is what the lead's live WebSocket measurement used.
-const wss = new WebSocketServer({ server, path: '/ws' });
-wss.on('connection', (sock) => {
-  sock.send(JSON.stringify({ type: 'hello', commit, startedAt }));
-  sock.on('message', (data) => sock.send(`echo:${data.toString()}`));
-});
+// The network layer (docs/mechanisms/network.md). /healthz adds its counts
+// (worlds, players) beside the fields above; additive.
+game = attachGame(server, { content: __CONTENT__, commit, startedAt });
 
 const port = Number(process.env.PORT) || 3000;
 server.listen(port, '0.0.0.0', () => {

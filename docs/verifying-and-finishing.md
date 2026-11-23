@@ -18,11 +18,9 @@ block.
 
 ## This project's setup
 
-**Status, 2026-11-23 04:17 UTC: build, check, gates, start and dev are
-real** (Step 1 Gate 1). `e2e` and `check:live` are stubs that exit
-non-zero with "lands with Step 1 Gate 2"; a line marked *(Gate 2)* is the
-contract, not yet a fact. Every other command below was run end to end
-from a fresh clone at 04:17 UTC on 2026-11-23, Node v22.23.5.
+**Status, 2026-11-23: every command below is real.** build, check,
+gates, start and dev were run end to end from a fresh clone at 04:17 UTC
+(Step 1 Gate 1); `e2e` and `check:live` with the Gate 2 push (Step 1 Gate 2), Node v22.23.5.
 
 - **From a fresh container:** `npm ci` (under 1 s here), then
   `npm run build` (under 1 s), then `npm start`; stop it with Ctrl-C, or
@@ -34,29 +32,42 @@ from a fresh clone at 04:17 UTC on 2026-11-23, Node v22.23.5.
   with `ws`) and `dist/public/` (`index.html`, `game.js`). It validates
   `content/` first and exits 1, building nothing, if anything is wrong.
   The built server needs no `node_modules` (run with them deleted).
-- **Static checks:** `npm run check` (about half a second): type-checking
+- **Static checks:** `npm run check` (about 6 seconds): type-checking
   twice (everything, then the pure layers with no DOM or Node types), the
-  layer rule, content validation, and every scenario in `scenarios/`,
-  each run twice for determinism. No browser, no network. Exit 1 on any
+  layer rule, content validation, every scenario in `scenarios/`, each
+  run twice for determinism, and the scripted checks in `scripts/checks/`
+  (two headless players against a server on a free local port, and
+  the built `dist/server.cjs` started as its own process; it builds
+  first when `dist/` is stale). No browser, nothing outside the machine. Exit 1 on any
   failure, naming the file and field or the scenario's broken fact.
 - **Build gates:** `npm run gates` prints one line per gate A–F and the
-  count (`docs/measures.md`, M3). 0 of 6 today: no scenario is tagged.
+  count (`docs/measures.md`, M3). F passes by the scripted check
+  `together`.
 - **Develop:** `npm run dev` builds, serves on `PORT` (default 3000) and
   rebuilds and restarts when `src/` or `content/` changes. *Started once
   by hand; not otherwise exercised.*
-- **The real page, two players:** `npm run e2e` *(Gate 2)*: headless
-  browsers against a local server, one of them phone-sized with touch.
-- **The live site:** `npm run check:live` *(Gate 2)*: the same two-player
-  check against the live address. Which commit is live:
+- **The real page, two players:** `npm run e2e` (about 100 s, 75 of them
+  a deliberate outage; it builds first): headless Chromium against the built server on a free port, a
+  desktop page driven by keys and Playwright's `iPhone 14 landscape`
+  driven by touch. One fact per line, exit 1 on any failure, screenshots
+  in `e2e-out/` (git-ignored): **open them**, that is rung 5. What each
+  fact reads and the controls watched: `docs/mechanisms/network.md`.
+- **The live site:** `npm run check:live`: `check:deployed` first, then
+  the same two-player walk (facts a–c, e, rate) against the live address
+  in a private world of its own. Which commit is live:
   `curl -s https://irreverents-production.up.railway.app/healthz`.
 - **What "it started" looks like:** the line `irreverents listening on
   0.0.0.0:<port> commit=<sha or unknown>`; `GET /healthz` returns
   `{"ok":true,"commit":…,"startedAt":…}`; `GET /` returns the page (200);
-  a WebSocket to `/ws` receives `{"type":"hello",…}` and echoes.
+  a WebSocket to `/ws` answers a `join` message with `{"t":"welcome",…}`
+  (`docs/mechanisms/network.md`); `/healthz` also says `players` (connected
+  to the world everyone shares: **look before pushing code**), `worlds`
+  and `playersEverywhere`.
 - **Looking at the page:** Playwright and Chromium are preinstalled
   (`NODE_PATH=/opt/node-tools/node_modules`, `require('playwright')`;
   never run `playwright install`). The page exposes `window.irreverents`
-  (`world`, `content`) for scripted reads.
+  for scripted reads; its `drawn` is what the page put on screen that
+  frame (`docs/mechanisms/network.md`).
 - **Where it deploys:** Railway, at
   https://irreverents-production.up.railway.app. **A push to `main` is the
   deploy**, automatically, with no staging (the owner, 2026-11-23: "It's
@@ -66,8 +77,8 @@ from a fresh clone at 04:17 UTC on 2026-11-23, Node v22.23.5.
   evidence.
 - **Is there a test suite?** The scenarios (`docs/mechanisms/scenarios.md`):
   3 today, covering running, jumping onto a one-way platform, walls and
-  two players in one room. They check the simulation, not the page:
-  nothing scripted checks what the screen shows until Gate 2's `e2e`.
+  two players in one room. They check the simulation, not the page; `npm run e2e` checks what
+  the page draws.
 - **CI:** none, by absence, not by decision. Nothing checks a push before
   or after it deploys.
 
