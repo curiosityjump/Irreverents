@@ -11,12 +11,12 @@
   ],
   "inputs": [
     {"entity": "brute", "from": 2, "to": 4, "x": 1},
-    {"entity": "brute", "from": 10, "to": 13, "hold": ["attack"]}
+    {"entity": "brute", "from": 4, "to": 7, "hold": ["attack"]}
   ],
   "ticks": 90,
   "expect": [
     {"fact": "event", "event": "hit", "between": [10, 10], "where": {"by": "brute", "target": "p:b"}},
     {"fact": "body-state", "player": "b", "at": 14, "is": ["flying"], "worn": [1, 1000]},
-    {"fact": "velocity", "player": "b", "at": 18, "vx": [200, 520]}
+    {"fact": "velocity", "player": "b", "at": 20, "vx": [200, 520]}
   ]
 }

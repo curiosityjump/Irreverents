@@ -1,4 +1,4 @@
-import { bodyNumbers, markImpact, overlaps, strike, ticksOf, wear } from '../body-state.ts';
+import { beatTicks, bodyNumbers, markImpact, overlaps, strike, wear } from '../body-state.ts';
 import { heldBy } from '../effects.ts';
 import type { System } from '../types.ts';
 import { friendly } from './impact-walls.ts';
@@ -21,7 +21,6 @@ const system: System = {
   run(ctx) {
     const world = ctx.content.tuning.world;
     if (world.bodyImpactOn! < 1) return;
-    const beat = ticksOf(world.beatTime);
     for (const a of ctx.world.entities) {
       const fa = a.c.flying;
       if (!fa || heldBy(a) !== null || a.c.beat) continue;
@@ -43,6 +42,7 @@ const system: System = {
         const k = world.shoveBounce!;
         const [avx, avy, bvx, bvy] = [a.vx, a.vy, b.vx, b.vy];
         const pop = b.onGround ? world.shovePop! : 0;
+        const beat = beatTicks(ctx, world.beatTime, world.beatMaxTime, speed);
         fa.met.push(b.id);
         if (b.c.flying) b.c.flying.met.push(a.id);
         strike(ctx, a, (ma * avx + mb * bvx + mb * k * (bvx - avx)) / (ma + mb), (ma * avy + mb * bvy + mb * k * (bvy - avy)) / (ma + mb), beat);

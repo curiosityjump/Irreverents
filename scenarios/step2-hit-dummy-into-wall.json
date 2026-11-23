@@ -1,7 +1,7 @@
 {
   "id": "step2-hit-dummy-into-wall",
   "gate": "A",
-  "proves": "a dummy hit toward a wall records a wall impact and the held beat: it holds exactly still for the beat's ticks, then moves on, bounced back off the wall",
+  "proves": "a dummy hit toward a wall records a wall impact and the held beat: it holds exactly still for the beat's ticks (the hit's own beat first, then the wall's), then moves on, bounced back off the wall",
   "room": "test-hit",
   "players": [
     {"id": "a", "character": "grappler", "spawn": 0}
@@ -11,17 +11,17 @@
   ],
   "inputs": [
     {"player": "a", "from": 2, "to": 4, "x": -1},
-    {"player": "a", "from": 10, "to": 13, "hold": ["attack"]}
+    {"player": "a", "from": 4, "to": 7, "hold": ["attack"]}
   ],
   "ticks": 90,
   "expect": [
     {"fact": "event", "event": "hit", "between": [10, 10], "where": {"target": "dummy-1"}},
-    {"fact": "event", "event": "impact", "between": [14, 14], "entity": "dummy-1", "where": {"other": null}, "count": [1, 1]},
-    {"fact": "body-state", "entity": "dummy-1", "at": 16, "is": ["beat", "flying"]},
-    {"fact": "position", "entity": "dummy-1", "at": 15, "x": [22, 22], "y": [109, 109.1]},
-    {"fact": "position", "entity": "dummy-1", "at": 20, "x": [22, 22], "y": [109, 109.1]},
-    {"fact": "position", "entity": "dummy-1", "at": 22, "x": [24, 30]},
-    {"fact": "velocity", "entity": "dummy-1", "at": 22, "vx": [50, 300]},
-    {"fact": "event", "event": "impact", "between": [15, 30], "entity": "dummy-1", "count": [0, 0]}
+    {"fact": "event", "event": "impact", "between": [17, 17], "entity": "dummy-1", "where": {"other": null}, "count": [1, 1]},
+    {"fact": "body-state", "entity": "dummy-1", "at": 19, "is": ["beat", "flying"]},
+    {"fact": "position", "entity": "dummy-1", "at": 18, "x": [22, 22], "y": [109, 109.1]},
+    {"fact": "position", "entity": "dummy-1", "at": 25, "x": [22, 22], "y": [109, 109.1]},
+    {"fact": "position", "entity": "dummy-1", "at": 30, "x": [24, 32]},
+    {"fact": "velocity", "entity": "dummy-1", "at": 30, "vx": [50, 300]},
+    {"fact": "event", "event": "impact", "between": [18, 45], "entity": "dummy-1", "count": [0, 0]}
   ]
 }

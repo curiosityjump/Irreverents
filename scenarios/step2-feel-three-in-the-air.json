@@ -1,0 +1,29 @@
+{
+  "id": "step2-feel-three-in-the-air",
+  "gate": "A",
+  "proves": "the three feel different in the air: the same held jump from the same tick lands the grappler first (step 49), falling hardest (over 330 px/s), the infiltrator 3 ticks later at about 310, and the flyer floats down at no more than 170 and lands over 12 ticks after the grappler; all three peak within 3 px of each other (50 to 53 px up)",
+  "room": "test-hit",
+  "players": [
+    {"id": "g", "character": "grappler", "spawn": 0},
+    {"id": "i", "character": "infiltrator", "spawn": 1},
+    {"id": "f", "character": "flyer", "spawn": 1}
+  ],
+  "inputs": [
+    {"player": "g", "from": 10, "to": 50, "hold": ["jump"]},
+    {"player": "i", "from": 10, "to": 50, "hold": ["jump"]},
+    {"player": "f", "from": 10, "to": 50, "hold": ["jump"]}
+  ],
+  "ticks": 90,
+  "expect": [
+    {"fact": "event", "event": "jumped", "between": [10, 10], "count": [3, 3]},
+    {"fact": "event", "event": "landed", "player": "g", "between": [49, 49], "count": [1, 1]},
+    {"fact": "event", "event": "landed", "player": "i", "between": [52, 52], "count": [1, 1]},
+    {"fact": "event", "event": "landed", "player": "f", "between": [62, 64], "count": [1, 1]},
+    {"fact": "velocity", "player": "g", "at": 49, "vy": [330, 360]},
+    {"fact": "velocity", "player": "i", "at": 52, "vy": [300, 320]},
+    {"fact": "velocity", "player": "f", "at": 60, "vy": [160, 170]},
+    {"fact": "position", "player": "g", "at": 31, "y": [59, 60]},
+    {"fact": "position", "player": "i", "at": 32, "y": [60, 61]},
+    {"fact": "position", "player": "f", "at": 34, "y": [61.5, 62.5]}
+  ]
+}

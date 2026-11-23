@@ -1,4 +1,4 @@
-import { markImpact, strike, ticksOf, wear } from '../body-state.ts';
+import { beatTicks, markImpact, strike, wear } from '../body-state.ts';
 import { DT } from '../types.ts';
 import { heldBy } from '../effects.ts';
 import type { Entity, StepContext, System } from '../types.ts';
@@ -14,7 +14,8 @@ export function friendly(ctx: StepContext, by: string | null, victim: Entity): b
 /**
  * Just after physics: a flying body that a wall, the floor or a ceiling
  * stopped, faster than world.wallImpactSpeed, records an impact: the event,
- * the held beat, wear, and a bounce off walls and ceilings.
+ * the held beat (longer for a harder impact), wear, and a bounce off walls,
+ * ceilings and (Step 2 feel, 2026-11-23) the floor.
  */
 const system: System = {
   id: 'impact-walls',
@@ -22,7 +23,10 @@ const system: System = {
   tuning: {
     wallImpactSpeed: { min: 0, max: 900, what: 'the slowest a flying body can hit a wall, floor or ceiling and still count as an impact, pixels per second' },
     wallBounce: { min: 0, max: 1, what: 'share of its speed a body keeps, reversed, off a wall or ceiling (0 = it stops dead)' },
-    beatTime: { min: 0, max: 1, what: 'the held beat: seconds the bodies of an impact hold still before they move on (0 = none)' },
+    beatTime: { min: 0, max: 1, what: 'the held beat: seconds the bodies of an impact hold still before they move on, for the softest impact that counts (0 = none)' },
+    beatMaxTime: { min: 0, max: 1, what: 'the held beat of the hardest impact (at world.maxLaunchSpeed), seconds; an impact between gets a beat between beatTime and this' },
+    floorBounce: { min: 0, max: 1, what: 'share of its falling speed a flying body keeps, upwards, when it hits the floor (0 = it stops dead)' },
+    floorBounceSpeed: { min: 0, max: 900, what: 'a flying body that hits the floor slower than this (pixels per second) does not bounce, so the bouncing ends' },
     impactWear: { min: 0, max: 100, what: 'how much an impact wears a body down, per pixel-per-second of impact speed' },
     friendThrowWear: { min: 0, max: 1, what: "share of an impact's wear a player takes from a flight another player started (0 = a friend's throw does not wear you down)" },
   },
@@ -53,6 +57,9 @@ const system: System = {
         speed = fall;
         x = e.x + box.w / 2;
         y = e.y + box.h;
+        // DRAFT: a thrown or knocked body bounces off the floor, each bounce
+        // lower, until it lands slower than floorBounceSpeed.
+        if (fall >= world.floorBounceSpeed!) vy = -fall * world.floorBounce!;
       } else if (fall < 0 && e.vy === 0 && !e.onGround && -fall >= limit && -fall > speed) {
         speed = -fall;
         x = e.x + box.w / 2;
@@ -61,7 +68,7 @@ const system: System = {
       }
       if (speed === 0) continue;
       markImpact(ctx, e, x, y, speed);
-      strike(ctx, e, vx, vy, ticksOf(world.beatTime));
+      strike(ctx, e, vx, vy, beatTicks(ctx, world.beatTime, world.beatMaxTime, speed));
       ctx.emit('impact', { entity: e.id, player: e.player, other: null, speed });
       wear(ctx, e, speed * world.impactWear! * (friendly(ctx, f.by, e) ? world.friendThrowWear! : 1), f.by);
     }

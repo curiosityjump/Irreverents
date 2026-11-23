@@ -12,7 +12,8 @@ const system: System = {
   tuning: {
     flattenTime: { min: 0.1, max: 60, what: 'seconds a flattened body is out before it gets up' },
     flyMaxTime: { min: 0.1, max: 60, what: 'the longest a body stays "flying" (unable to act) from one hit or throw, seconds' },
-    hitBeatTime: { min: 0, max: 1, what: 'seconds a body hit by an attack is held still before it flies (the held beat of a hit; 0 = none)' },
+    hitBeatTime: { min: 0, max: 1, what: 'seconds a body hit by an attack is held still before it flies, for the softest hit (the held beat of a hit; 0 = none)' },
+    hitBeatMaxTime: { min: 0, max: 1, what: 'the held beat of the hardest hit (one that launches at world.maxLaunchSpeed), seconds; a hit between gets a beat between hitBeatTime and this' },
     defaultWeight: { min: 1, max: 1000, what: 'weight of a body whose kind gives none' },
     defaultToughness: { min: 0, max: 100000, what: 'toughness of a body whose kind gives none (0 = cannot be flattened)' },
     // INTENT: physics looks one 16 px tile ahead, so nothing may be launched

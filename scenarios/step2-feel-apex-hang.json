@@ -1,0 +1,22 @@
+{
+  "id": "step2-feel-apex-hang",
+  "gate": "A",
+  "proves": "a little hang at the top: held full jumps side by side; the infiltrator (apexGravity 0.6 while slower than 50 px/s) stays slower than 50 px/s up or down for at least 10 ticks, the hero (the plain arc, every multiplier 1) for only 6",
+  "room": "test-hit",
+  "players": [
+    {"id": "a", "character": "infiltrator", "spawn": 0},
+    {"id": "b", "character": "hero", "spawn": 1}
+  ],
+  "inputs": [
+    {"player": "a", "from": 10, "to": 50, "hold": ["jump"]},
+    {"player": "b", "from": 10, "to": 50, "hold": ["jump"]}
+  ],
+  "ticks": 80,
+  "expect": [
+    {"fact": "event", "event": "jumped", "between": [10, 10], "count": [2, 2]},
+    {"fact": "velocity", "player": "a", "at": 28, "vy": [-45, -35]},
+    {"fact": "velocity", "player": "a", "at": 37, "vy": [35, 45]},
+    {"fact": "velocity", "player": "b", "at": 29, "vy": [-40, -30]},
+    {"fact": "velocity", "player": "b", "at": 35, "vy": [50, 60]}
+  ]
+}

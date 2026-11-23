@@ -199,8 +199,22 @@ export const track = (ph: Phone, key: Key, ms: number): Promise<Pt[]> =>
  * where it started, and the most it covered in any 250 ms (no character runs
  * faster than 128 px a second, so more than 32 px in 250 ms is not walking).
  */
-export function flight(pts: Pt[]): { far: number; burst: number; rose: number } {
-  if (pts.length === 0) return { far: 0, burst: 0, rose: 0 };
+export function flight(raw: Pt[]): { far: number; burst: number; rose: number } {
+  if (raw.length === 0) return { far: 0, burst: 0, rose: 0 };
+  // INTENT (Step 2 feel, 2026-11-23): a held beat holds the body exactly
+  // still for up to ~9 frames, a harder impact longer. That time is not
+  // travel, so frames drawn in exactly the same place as the one before
+  // are dropped and the clock is closed up over them; otherwise a throw
+  // that meets a crate at once (the throne room's own crates lie on the
+  // only stretch of floor) reads as "did not fly".
+  const pts: Pt[] = [raw[0]!];
+  let held = 0;
+  for (let i = 1; i < raw.length; i++) {
+    const p = raw[i]!;
+    const q = raw[i - 1]!;
+    if (p.x === q.x && p.y === q.y) held += p.t - q.t;
+    else pts.push({ ...p, t: p.t - held });
+  }
   const p0 = pts[0]!;
   let far = 0;
   let burst = 0;
@@ -383,18 +397,46 @@ export async function touchAndThrows(kit: Kit): Promise<void> {
     // never toward a door: a body thrown through a door is in another room,
     // and this page stops drawing it. A stands just behind B, so only B is
     // in reach of the grab, with clear floor ahead for the flight.
-    const f2 = await floor(A);
-    const dir = f2.doorRight && !f2.doorLeft ? -1 : 1;
-    const wall = dir < 0 ? f2.left : f2.right;
-    let spot = wall - dir * 100;
+    let f2 = await floor(A);
+    // Step 2 feel, 2026-11-23: the room's own crates can lie on the only
+    // stretch of floor that ends at a wall (the throne room's do, once a
+    // bounced crate comes to rest there), and a friend thrown into one
+    // stops dead. So A first carries each body in the way out through the
+    // door, with B out of the way at the far end.
+    const doorSide = f2.doorRight ? 1 : f2.doorLeft ? -1 : 0;
+    if (doorSide !== 0) {
+      await standAt(B, doorSide > 0 ? f2.left + 4 : f2.right - 14, doorSide);
+      for (const o of f2.bodies) {
+        const k: Key = { id: o.id };
+        await standAt(A, doorSide > 0 ? o.x - 12 : o.x + o.w + 2, doorSide);
+        await tap(A, 'grab');
+        if ((await whenCarried(A, k, keyA, true, 1200)) === null) continue;
+        await standAt(A, doorSide > 0 ? f2.right - 30 : f2.left + 12, doorSide);
+        await tap(A, 'attack');
+        await sleep(800);
+      }
+      await settle(A);
+      f2 = await floor(A);
+    }
+    // Both ways along the floor that end at a wall, not a door; the
+    // clearest spot of either. (Step 2 feel, 2026-11-23: a crate thrown
+    // earlier now bounces, so where it ends up varies, and a heavy one
+    // lying in the one direction tried used to stop B dead.)
+    const dirs = ([1, -1] as const).filter((d) => !(d > 0 ? f2.doorRight : f2.doorLeft));
+    let dir: 1 | -1 = f2.doorRight && !f2.doorLeft ? -1 : 1;
+    let spot = (dir < 0 ? f2.left : f2.right) - dir * 100;
     let clear = -Infinity;
-    for (let d = 70; d <= 140; d += 6) {
-      const x = wall - dir * d;
-      if (x < f2.left + 30 || x > f2.right - 40) continue;
-      // From behind A to 50 px ahead of B.
-      const [lo, hi] = dir > 0 ? [x - 8, x + 60] : [x - 50, x + 26];
-      const gap = Math.min(999, ...f2.bodies.map((o) => (o.x + o.w < lo ? lo - (o.x + o.w) : o.x > hi ? o.x - hi : -1)));
-      if (gap > clear) [spot, clear] = [x, gap];
+    for (const d0 of dirs.length ? dirs : [dir]) {
+      const w0 = d0 < 0 ? f2.left : f2.right;
+      // Farthest from the wall first, so the flight is long before it meets the wall.
+      for (let d = 140; d >= 70; d -= 6) {
+        const x = w0 - d0 * d;
+        if (x < f2.left + 30 || x > f2.right - 40) continue;
+        // From behind A to 50 px ahead of B.
+        const [lo, hi] = d0 > 0 ? [x - 8, x + 60] : [x - 50, x + 26];
+        const gap = Math.min(999, ...f2.bodies.map((o) => (o.x + o.w < lo ? lo - (o.x + o.w) : o.x > hi ? o.x - hi : -1)));
+        if (gap > clear) [spot, clear, dir] = [x, gap, d0];
+      }
     }
     await standAt(B, spot);
     await standAt(A, ((await me(B)).x as number) - dir * 6, dir);

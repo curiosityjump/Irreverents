@@ -55,6 +55,8 @@ declare module './types.ts' {
     worn?: { amount: number };
     /** Present exactly while the body is knocked out. It stays in the world, lying where it fell. */
     flattened?: { ticksLeft: number; by: string | null };
+    /** The last throw this body made: the world tick and what it threw (Step 2 feel: drawing reads it). */
+    lastThrow?: { tick: number; target: string };
     /** The last impact or hit this body took: where (room pixels), how hard (pixels per second), and on which tick. Drawing reads it for shake and dust. */
     impact?: { x: number; y: number; speed: number; tick: number };
   }
@@ -113,6 +115,21 @@ export function clamp(v: number, limit: number): number {
 
 export function ticksOf(seconds: number | undefined): number {
   return Math.round((seconds ?? 0) * TICK_RATE);
+}
+
+/**
+ * The held beat for an impact of `speed` pixels per second, in ticks:
+ * `minSeconds` for the softest, rising evenly to `maxSeconds` at
+ * world.maxLaunchSpeed and above, so a harder hit holds longer.
+ * DRAFT (Step 2 feel, 2026-11-23): a straight line; with max = min every
+ * beat is the same length, as before.
+ */
+export function beatTicks(ctx: StepContext, minSeconds: number | undefined, maxSeconds: number | undefined, speed: number): number {
+  const lo = minSeconds ?? 0;
+  const hi = Math.max(lo, maxSeconds ?? lo);
+  const full = ctx.content.tuning.world.maxLaunchSpeed ?? 500;
+  const share = full > 0 ? Math.max(0, Math.min(1, speed / full)) : 1;
+  return ticksOf(lo + (hi - lo) * share);
 }
 
 /**
@@ -235,6 +252,7 @@ export function throwCarried(ctx: StepContext, e: Entity, input: Input, throwStr
   }
   release(ctx, target, null, spots);
   launch(ctx, target, vx, vy, e.id, [e.id]);
+  e.c.lastThrow = { tick: ctx.world.tick, target: target.id };
   ctx.emit('thrown', { by: e.id, target: target.id, player: e.player });
 }
 

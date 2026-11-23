@@ -324,6 +324,10 @@ body), `c.beat` (in a held beat), `c.flattened` (`ticksLeft`, `by`),
 drawing). `canAct(entity)` in `src/sim/body-state.ts` says whether a
 body may do anything this tick; the verbs system runs no verb for one
 that may not.
+Added 2026-11-23 for drawing (Step 2 feel; the table with what each
+says is in `docs/mechanisms/combat-and-impact.md`, "State"):
+`c.attack.phase` / `.left`, `c.lastHit`, `c.landing`, `c.airborne`,
+`c.grab.at`, `c.lastThrow`, `c.flap.at`, `c.stunned` (`why`).
 
 - **Knocked out is `entity.c.flattened`**, present on any entity exactly
   while it is out (at least `{ ticksLeft }`). The body stays in the

@@ -82,7 +82,7 @@ export function checkContentAgainstSim(content: Content): Problem[] {
       fail(TUNING, 'world.maxFallSpeed', `is ${fall}, but must be under ${limit} for the ${room.tile} px tiles of ${where}`);
     }
     for (const [id, set] of Object.entries(content.tuning.characters)) {
-      for (const name of ['runSpeed', 'jumpSpeed']) {
+      for (const name of ['runSpeed', 'jumpSpeed', 'fallSpeed']) {
         const v = set[name];
         if (v !== undefined && v >= limit) {
           fail(TUNING, `characters.${id}.${name}`, `is ${v}, but must be under ${limit} for the ${room.tile} px tiles of ${where}`);

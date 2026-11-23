@@ -7,6 +7,8 @@ declare module '../types.ts' {
     grab?: {
       /** Whether the action was held last tick, to see a fresh press. */
       held: boolean;
+      /** The world tick this body last picked something up (Step 2 feel: drawing reads it). Absent until the first grab. */
+      at?: number;
     };
   }
 }
@@ -74,6 +76,7 @@ const verb: Verb = {
     delete best.c.beat;
     emitEffect(ctx, best, { kind: 'hold', by: e.id });
     e.c.carrying = { id: best.id, kind: e.kind };
+    g.at = ctx.world.tick;
     best.c.held = {
       ticks: best.player !== null ? Math.max(1, ticksOf(ctx.content.tuning.world.holdPlayerTime)) : -1,
       jumpDown: inputOf(ctx, best).held.includes('jump'),

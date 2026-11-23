@@ -198,6 +198,27 @@ once, until the next restart. To send the numbers back, tap **Copy** and
 paste what it gives into any session with "make these the defaults"
 (`docs/mechanisms/tuning-panel.md`).
 
+**What to try, and which number changes it (feel, 2026-11-23).** Each
+is per hero on the panel unless it says world.
+- *A jump feels floaty or heavy:* `apexGravity` (under 1 = more hang at
+  the top) and `apexSpeed` (how wide the top is); `fallGravity` (over 1
+  = drops faster than it rose); `fallSpeed` (fastest fall).
+- *A short hop is too short or too tall:* `jumpCutMultiplier`.
+- *Running feels icy or sticky:* `runAccel` (start), `runDecel` (stop),
+  `airAccel` / `airDecel` (steering in the air).
+- *Missed a jump off an edge, or a jump pressed early was lost:*
+  `coyoteTime`, `jumpBufferTime`.
+- *A punch feels slow or limp:* `attackWindup` (draw-back), then
+  `attackStrikeTime`, `attackRecovery`; `attackStrength` (how far it
+  sends).
+- *Impacts don't land / freeze too long (world):* `hitBeatTime` to
+  `hitBeatMaxTime` for punches, `beatTime` to `beatMaxTime` for walls,
+  floors and bodies.
+- *Thrown things bounce too much or too little (world):* `floorBounce`,
+  `floorBounceSpeed`; `wallBounce` for walls.
+- *The three don't feel different enough:* `weight` (how far each flies
+  when hit), and the numbers above side by side.
+
 ## Measure
 
 Lead `session_017WiGzGRnRoAeW5Ep5iSycV`, 2026-11-23 04:30 UTC, on `main`

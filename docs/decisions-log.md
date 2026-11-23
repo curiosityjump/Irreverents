@@ -552,3 +552,31 @@ document as a decision of theirs.
 - **Why this way:** hits, throws and bounces are worked out on the server, so a change only on your phone would leave half the dials doing nothing. You tune with your brother-in-law in the same world, so you both feel the same change. Nothing in the game is kept between restarts yet, so the panel copies the numbers out for a session to make them the default.
 - **To change it:** say "tune only for me" (the dial stays on your phone; the server-run numbers then cannot be dialled) or "keep my dials" (needs saving, Step 7's store).
 - **Where:** `handoff-prompts/step-2-feel-dials.md`; when it lands, `docs/mechanisms/tuning-panel.md`.
+
+### 2026-11-23 · The three heroes now move and fall differently, not only do different things
+- **Decided by:** Step 2 feel worker, `session_017WiGzEuk7zACZWPXaqAcBQ`
+- **Instead of asking:** "How should each of the three feel to run and jump?"
+- **Why this way:** you asked for the feel of a careful platformer and for the three to feel different. The infiltrator now reaches full speed and stops in about a twentieth of a second and is the lightest (it flies furthest when hit); the flyer floats down at under half the others' speed and hangs longest at the top of a jump; the grappler slides a little when it stops, drops out of the air hardest and winds up its punch longest. Every jump has a small hang at the top. How high each jumps, and how fast the grappler starts and stops on the ground, were left as they were, because the rooftop, ledge and secret routes and the door checks are measured on them.
+- **To change it:** open the game with `?tune` and move `apexGravity`, `fallGravity`, `fallSpeed`, `runAccel`, `runDecel` or `weight` for that hero; or say "the plain jump back" (all multipliers 1).
+- **Where:** `content/tuning.json`; `docs/mechanisms/combat-and-impact.md`, "Movement feel".
+
+### 2026-11-23 · A punch has a short wind-up; a throw is still instant
+- **Decided by:** Step 2 feel worker, `session_017WiGzEuk7zACZWPXaqAcBQ`
+- **Instead of asking:** "Should a hit land the moment you tap, or after a wind-up? And a throw?"
+- **Why this way:** the step asks for a wind-up, a strike and a recovery so hits read as weighty. The grappler draws back for 0.1 s, the flyer 0.05, the infiltrator 0.033 (two frames). A throw stays instant: it reads as letting go, and the brief left that open.
+- **To change it:** `attackWindup`, `attackStrikeTime`, `attackRecovery` per hero on the `?tune` panel (0 wind-up is the old instant hit).
+- **Where:** `src/sim/verbs/attack.ts`; `docs/mechanisms/combat-and-impact.md`.
+
+### 2026-11-23 · Harder hits freeze longer, and thrown things bounce off the floor
+- **Decided by:** Step 2 feel worker, `session_017WiGzEuk7zACZWPXaqAcBQ`
+- **Instead of asking:** "How long should the freeze on impact be, and should a thrown body bounce?"
+- **Why this way:** your "OHHHHH" is about the size of the impact. The freeze now runs from 2 frames for a soft hit to 8 for one at full launch speed (3 to 9 for slamming into a wall, floor or someone), and a body thrown or knocked into the floor bounces up at 45% of its speed, each bounce lower, instead of stopping dead.
+- **To change it:** `hitBeatTime`/`hitBeatMaxTime`, `beatTime`/`beatMaxTime`, `floorBounce`, `floorBounceSpeed` on the `?tune` panel (max equal to min is a fixed freeze; `floorBounce` 0 is no bounce).
+- **Where:** `src/sim/body-state.ts` (`beatTicks`), `src/sim/systems/impact-walls.ts`.
+
+### 2026-11-23 · Step 4's "hit the shopkeeper" check waits a moment longer for the blow
+- **Decided by:** Step 2 lead, `session_017WiGzGN9egot3JUvSMBBA9` (Step 4 has no lead running), done by the Step 2 feel worker
+- **Instead of asking:** "The wind-up delays the blow; may another step's check be loosened to allow it?"
+- **Why this way:** the check means "the blow distresses her and the robbery doesn't calm her"; only when the blow lands changed. Its window is widened (hit within a quarter second of the press) rather than pinned, so a later wind-up dial doesn't break it again.
+- **To change it:** set the grappler's `attackWindup` to 0 and narrow the window back in `scenarios/step4-hero-hits-shopkeeper.json`.
+- **Where:** `scenarios/step4-hero-hits-shopkeeper.json`; `docs/plan/step-4.md`, handoff notes.

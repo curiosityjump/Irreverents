@@ -1,0 +1,20 @@
+{
+  "id": "step2-feel-coyote-refused",
+  "gate": "A",
+  "proves": "coyote time ends: the same run off the undercroft's upper ledge with the jump pressed on step 13, one tick past the 0.1 s grace, does not take off, and the press is not saved for the landing on the platform below",
+  "room": "undercroft",
+  "players": [
+    {"id": "a", "character": "infiltrator", "spawn": 1}
+  ],
+  "inputs": [
+    {"player": "a", "from": 0, "to": 40, "x": 1},
+    {"player": "a", "from": 13, "to": 30, "hold": ["jump"]}
+  ],
+  "ticks": 40,
+  "expect": [
+    {"fact": "position", "player": "a", "at": 8, "y": [80.01, 81]},
+    {"fact": "event", "event": "jumped", "player": "a", "between": [0, 40], "count": [0, 0]},
+    {"fact": "event", "event": "landed", "player": "a", "between": [20, 24], "count": [1, 1]},
+    {"fact": "position", "player": "a", "at": 25, "y": [112, 112]}
+  ]
+}

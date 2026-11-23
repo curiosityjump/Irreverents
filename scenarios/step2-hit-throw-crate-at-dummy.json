@@ -20,8 +20,8 @@
     {"fact": "event", "event": "thrown", "between": [20, 20], "where": {"target": "crate-1"}},
     {"fact": "event", "event": "impact", "between": [25, 35], "entity": "crate-1", "where": {"other": "dummy-1"}, "count": [1, 1]},
     {"fact": "event", "event": "impact", "between": [25, 35], "entity": "dummy-1", "where": {"other": "crate-1"}, "count": [1, 1]},
-    {"fact": "body-state", "entity": "dummy-1", "at": 36, "is": ["flying"]},
-    {"fact": "velocity", "entity": "dummy-1", "at": 36, "vx": [150, 520]},
-    {"fact": "velocity", "entity": "crate-1", "at": 36, "vx": [-520, -50]}
+    {"fact": "body-state", "entity": "dummy-1", "at": 42, "is": ["flying"]},
+    {"fact": "velocity", "entity": "dummy-1", "at": 42, "vx": [150, 520]},
+    {"fact": "velocity", "entity": "crate-1", "at": 42, "vx": [-520, -50]}
   ]
 }

@@ -1,0 +1,29 @@
+{
+  "id": "step2-feel-weight-order",
+  "gate": "A",
+  "proves": "the three weigh differently: the same grappler's hit (three bodies of the party's kinds, hit on the same tick) launches the grappler (weight 60) at about 230 px/s, the flyer (30) at about 465, twice as fast, and the infiltrator (26), the lightest, faster still at the 520 cap",
+  "room": "test-hit",
+  "players": [
+    {"id": "a", "character": "infiltrator", "spawn": 0}
+  ],
+  "entities": [
+    {"id": "brute-1", "character": "grappler", "tile": [6, 6]},
+    {"id": "body-g", "character": "grappler", "tile": [7, 6]},
+    {"id": "brute-2", "character": "grappler", "tile": [12, 6]},
+    {"id": "body-i", "character": "infiltrator", "tile": [13, 6]},
+    {"id": "brute-3", "character": "grappler", "tile": [18, 6]},
+    {"id": "body-f", "character": "flyer", "tile": [19, 6]}
+  ],
+  "inputs": [
+    {"entity": "brute-1", "from": 10, "to": 13, "hold": ["attack"]},
+    {"entity": "brute-2", "from": 10, "to": 13, "hold": ["attack"]},
+    {"entity": "brute-3", "from": 10, "to": 13, "hold": ["attack"]}
+  ],
+  "ticks": 30,
+  "expect": [
+    {"fact": "event", "event": "hit", "between": [16, 16], "count": [3, 3]},
+    {"fact": "velocity", "entity": "body-g", "at": 27, "vx": [220, 240]},
+    {"fact": "velocity", "entity": "body-f", "at": 27, "vx": [455, 470]},
+    {"fact": "velocity", "entity": "body-i", "at": 27, "vx": [510, 520]}
+  ]
+}

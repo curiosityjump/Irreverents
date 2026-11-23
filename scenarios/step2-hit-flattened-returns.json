@@ -11,12 +11,13 @@
   ],
   "inputs": [
     {"player": "a", "from": 2, "to": 4, "x": -1},
-    {"player": "a", "from": 10, "to": 13, "hold": ["attack"]},
-    {"player": "a", "from": 66, "to": 78, "x": 1},
-    {"player": "a", "from": 85, "to": 88, "y": -1, "hold": ["attack"]},
-    {"player": "a", "from": 150, "to": 190, "x": 1},
-    {"player": "a", "from": 220, "to": 223, "hold": ["attack"]},
-    {"player": "a", "from": 300, "to": 303, "hold": ["attack"]}
+    {"player": "a", "from": 4, "to": 7, "hold": ["attack"]},
+    {"player": "a", "from": 66, "to": 82, "x": 1},
+    {"player": "a", "from": 79, "to": 82, "hold": ["attack"]},
+    {"player": "a", "from": 150, "to": 194, "x": 1},
+    {"player": "a", "from": 214, "to": 217, "hold": ["attack"]},
+    {"player": "a", "from": 294, "to": 297, "hold": ["attack"]},
+    {"player": "a", "from": 79, "to": 88, "y": -1, "//": "held until the strike (tick 85): the stick when the strike starts makes it a launcher"}
   ],
   "ticks": 400,
   "expect": [

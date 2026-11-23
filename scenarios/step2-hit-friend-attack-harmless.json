@@ -10,7 +10,7 @@
   "entities": [],
   "inputs": [
     {"player": "a", "from": 0, "to": 14, "x": 1},
-    {"player": "a", "from": 20, "to": 23, "hold": ["attack"]}
+    {"player": "a", "from": 14, "to": 17, "hold": ["attack"]}
   ],
   "ticks": 90,
   "expect": [

@@ -33,6 +33,16 @@ const verb: Verb = {
     jumpCutMultiplier: { min: 0, max: 1, what: 'share of upward speed kept when the button is let go early (1 = fixed-height jump)' },
     coyoteTime: { min: 0, max: 1, what: 'seconds after walking off an edge in which a jump still works' },
     jumpBufferTime: { min: 0, max: 1, what: 'seconds before landing in which a press still counts' },
+    // Read by systems/physics.ts, not here: a per-character number must be
+    // declared by one of that character's verbs (src/sim/check-content.ts).
+    // They shape a body's own arc only; a body knocked flying or flattened
+    // falls by the world's numbers. All 1 (and fallSpeed = world.maxFallSpeed)
+    // is the plain arc of before 2026-11-23.
+    apexSpeed: { min: 0, max: 900, what: 'near the top of a jump: while the body rises or falls slower than this (pixels per second), apexGravity applies' },
+    apexGravity: { min: 0.1, max: 2, what: 'gravity near the top of a jump, as a share of world.gravity (under 1 = a little hang at the top)' },
+    fallGravity: { min: 0.1, max: 4, what: 'gravity while falling (past the top), as a share of world.gravity (over 1 = a faster fall than rise)' },
+    // INTENT: under one 16 px tile per tick (960 px/s), as world.maxFallSpeed.
+    fallSpeed: { min: 1, max: 900, what: "this character's fastest fall, pixels per second" },
   },
   update(ctx, e, input, t) {
     const j = (e.c.jump ??= { buffer: 0, coyote: 0, held: false, cut: true });

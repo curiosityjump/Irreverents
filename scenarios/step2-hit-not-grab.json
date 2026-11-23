@@ -12,7 +12,7 @@
   "inputs": [
     {"player": "a", "from": 5, "to": 8, "hold": ["grab"]},
     {"player": "a", "from": 20, "to": 23, "hold": ["grab"]},
-    {"player": "a", "from": 40, "to": 43, "hold": ["attack"]}
+    {"player": "a", "from": 34, "to": 37, "hold": ["attack"]}
   ],
   "ticks": 90,
   "expect": [
@@ -22,7 +22,7 @@
     {"fact": "standing-on-tile", "entity": "dummy-1", "at": 39, "tile": [3, 7]},
     {"fact": "event", "event": "hit", "between": [40, 40], "where": {"target": "dummy-1"}},
     {"fact": "event", "event": "grabbed", "between": [0, 90], "count": [1, 1]},
-    {"fact": "body-state", "entity": "dummy-1", "at": 46, "is": ["flying"], "not": ["held"]},
-    {"fact": "velocity", "entity": "dummy-1", "at": 46, "vx": [100, 520]}
+    {"fact": "body-state", "entity": "dummy-1", "at": 48, "is": ["flying"], "not": ["held"]},
+    {"fact": "velocity", "entity": "dummy-1", "at": 48, "vx": [100, 520]}
   ]
 }

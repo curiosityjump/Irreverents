@@ -12,10 +12,10 @@
   "ticks": 190,
   "expect": [
     {"fact": "mood", "npc": "shopkeeper-1", "between": [0, 100], "is": 1},
-    {"fact": "event-where", "event": "hit", "where": {"by": "p:a", "target": "shopkeeper-1"}, "between": [100, 100], "count": [1, 1]},
-    {"fact": "event-where", "event": "deed", "where": {"deed": "hit", "by": "p:a", "target": "shopkeeper-1", "witnesses": ["shopkeeper-1", "villain-1"]}, "between": [100, 100], "count": [1, 1]},
+    {"fact": "event-where", "event": "hit", "where": {"by": "p:a", "target": "shopkeeper-1"}, "between": [100, 115], "count": [1, 1]},
+    {"fact": "event-where", "event": "deed", "where": {"deed": "hit", "by": "p:a", "target": "shopkeeper-1", "witnesses": ["shopkeeper-1", "villain-1"]}, "between": [100, 115], "count": [1, 1]},
     {"fact": "event-where", "event": "deed", "where": {"deed": "rob", "by": "villain-1"}, "between": [168, 168], "count": [1, 1]},
-    {"fact": "mood", "npc": "shopkeeper-1", "between": [101, 190], "is": 2},
+    {"fact": "mood", "npc": "shopkeeper-1", "between": [116, 190], "is": 2},
     {"fact": "mood", "npc": "villain-1", "between": [0, 190], "is": 1}
   ]
 }

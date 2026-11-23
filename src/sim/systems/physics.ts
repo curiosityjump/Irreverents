@@ -6,6 +6,12 @@ import { DT } from '../types.ts';
 import type { System } from '../types.ts';
 
 declare module '../types.ts' {
+  interface Components {
+    /** The last time this body touched down: the world tick and how fast it was falling, pixels per second. Drawing reads it for a squash and dust. */
+    landing?: { tick: number; speed: number };
+    /** Present while the body is off the ground (after physics): the world tick it left it, by a jump, a fall or a launch. Drawing reads it for a stretch. */
+    airborne?: { since: number };
+  }
   interface EventMap {
     /** An entity touched down. tx,ty is the tile under the middle of its feet. */
     landed: { entity: string; player: string | null; tx: number; ty: number };
@@ -38,6 +44,7 @@ const system: System = {
   },
   run(ctx) {
     const { gravity, maxFallSpeed } = ctx.content.tuning.world;
+    const sets = ctx.content.tuning.characters;
     for (const e of ctx.world.entities) {
       const room = ctx.content.rooms[e.room];
       const kind = ctx.content.characters[e.kind];
@@ -47,7 +54,19 @@ const system: System = {
       const T = room.tile;
       const { w, h } = kind.box;
 
-      e.vy = Math.min(e.vy + gravity! * DT, maxFallSpeed!);
+      // Step 2 feel: a body moving itself falls by its own character's arc
+      // (apex hang, faster fall, its own fall cap; declared by verbs/jump.ts).
+      // A body knocked flying or flattened, and any kind without those
+      // numbers, falls by the world's. DRAFT: docs/mechanisms/combat-and-impact.md.
+      let pull = gravity!;
+      let cap = maxFallSpeed!;
+      const own = e.c.flying || e.c.flattened ? undefined : sets[kind.tuning];
+      if (own && own.fallSpeed !== undefined) {
+        cap = own.fallSpeed;
+        if (Math.abs(e.vy) < (own.apexSpeed ?? 0) && !e.onGround) pull *= own.apexGravity ?? 1;
+        else if (e.vy > 0) pull *= own.fallGravity ?? 1;
+      }
+      e.vy = Math.min(e.vy + pull * DT, cap);
 
       // Sideways first: only solid tiles block.
       e.x += e.vx * DT;
@@ -66,6 +85,7 @@ const system: System = {
       // Then up or down.
       const wasOnGround = e.onGround;
       const feetBefore = e.y + h;
+      const falling = e.vy;
       e.y += e.vy * DT;
       e.onGround = false;
       const left = Math.floor(e.x / T);
@@ -92,7 +112,11 @@ const system: System = {
         }
       }
 
+      if (!e.onGround && !e.c.airborne) e.c.airborne = { since: ctx.world.tick };
+      else if (e.onGround && e.c.airborne) delete e.c.airborne;
+
       if (e.onGround && !wasOnGround) {
+        e.c.landing = { tick: ctx.world.tick, speed: falling };
         ctx.emit('landed', {
           entity: e.id,
           player: e.player,

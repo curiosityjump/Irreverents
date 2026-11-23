@@ -10,6 +10,8 @@ declare module '../types.ts' {
       held: boolean;
       /** The world tick this verb last ran for this entity, to notice a body that only just became a flapper. */
       tick: number;
+      /** The world tick of the last flap (Step 2 feel: drawing reads it). Absent until the first. */
+      at?: number;
     };
   }
   interface EventMap {
@@ -60,6 +62,7 @@ const verb: Verb = {
     if ((e.c.jump?.coyote ?? 0) >= 2) return;
     if (f.used >= t.flaps!) return;
     f.used++;
+    f.at = now;
     e.vy = Math.min(e.vy, -t.flapSpeed!);
     ctx.emit('flapped', { entity: e.id, player: e.player, left: Math.max(0, Math.round(t.flaps!) - f.used) });
   },

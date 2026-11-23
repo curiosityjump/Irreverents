@@ -1,0 +1,32 @@
+{
+  "id": "step2-feel-attack-windup",
+  "gate": "A",
+  "proves": "an attack lands only after its wind-up, and the grappler's is the longest: three bodies press attack on the same tick (10) with a dummy in reach; nothing is hit on the press; the infiltrator's hit lands 2 ticks later, the flyer's 3, the grappler's 6",
+  "room": "test-hit",
+  "players": [
+    {"id": "a", "character": "infiltrator", "spawn": 0}
+  ],
+  "entities": [
+    {"id": "brute-g", "character": "grappler", "tile": [5, 6]},
+    {"id": "dummy-g", "character": "dummy", "tile": [6, 6]},
+    {"id": "brute-i", "character": "infiltrator", "tile": [11, 6]},
+    {"id": "dummy-i", "character": "dummy", "tile": [12, 6]},
+    {"id": "brute-f", "character": "flyer", "tile": [17, 6]},
+    {"id": "dummy-f", "character": "dummy", "tile": [18, 6]}
+  ],
+  "inputs": [
+    {"entity": "brute-g", "from": 10, "to": 13, "hold": ["attack"]},
+    {"entity": "brute-i", "from": 10, "to": 13, "hold": ["attack"]},
+    {"entity": "brute-f", "from": 10, "to": 13, "hold": ["attack"]}
+  ],
+  "ticks": 30,
+  "expect": [
+    {"fact": "event", "event": "hit", "between": [10, 11], "count": [0, 0]},
+    {"fact": "event", "event": "attacked", "between": [10, 11], "count": [0, 0]},
+    {"fact": "event-where", "event": "hit", "where": {"by": "brute-i", "target": "dummy-i"}, "between": [12, 12], "count": [1, 1]},
+    {"fact": "event-where", "event": "hit", "where": {"by": "brute-f", "target": "dummy-f"}, "between": [13, 13], "count": [1, 1]},
+    {"fact": "event-where", "event": "hit", "where": {"by": "brute-g", "target": "dummy-g"}, "between": [16, 16], "count": [1, 1]},
+    {"fact": "event-where", "event": "hit", "where": {"by": "brute-g", "target": "dummy-g"}, "between": [10, 15], "count": [0, 0]},
+    {"fact": "event", "event": "hit", "between": [0, 30], "count": [3, 3]}
+  ]
+}

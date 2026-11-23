@@ -1,0 +1,33 @@
+{
+  "id": "step2-feel-start-stop",
+  "gate": "A",
+  "proves": "the three feel different to run: pressed together, the infiltrator is at full speed (128) 3 ticks after the press, the flyer reaches 90% of its 92 in 7, the grappler 90% of its 84 only in 8; let go together, the infiltrator stops in 3 ticks, the flyer in 5, the grappler slides for 6",
+  "room": "test-hit",
+  "players": [
+    {"id": "g", "character": "grappler", "spawn": 0},
+    {"id": "i", "character": "infiltrator", "spawn": 1},
+    {"id": "f", "character": "flyer", "spawn": 1}
+  ],
+  "inputs": [
+    {"player": "g", "from": 10, "to": 40, "x": 1},
+    {"player": "i", "from": 10, "to": 40, "x": 1},
+    {"player": "f", "from": 10, "to": 40, "x": 1}
+  ],
+  "ticks": 60,
+  "expect": [
+    {"fact": "velocity", "player": "i", "at": 13, "vx": [128, 128]},
+    {"fact": "velocity", "player": "f", "at": 13, "vx": [0, 45]},
+    {"fact": "velocity", "player": "g", "at": 13, "vx": [0, 35]},
+    {"fact": "velocity", "player": "f", "at": 17, "vx": [83, 92]},
+    {"fact": "velocity", "player": "g", "at": 17, "vx": [0, 75]},
+    {"fact": "velocity", "player": "g", "at": 18, "vx": [75.6, 84]},
+    {"fact": "velocity", "player": "i", "at": 40, "vx": [128, 128]},
+    {"fact": "velocity", "player": "f", "at": 40, "vx": [92, 92]},
+    {"fact": "velocity", "player": "g", "at": 40, "vx": [84, 84]},
+    {"fact": "velocity", "player": "i", "at": 43, "vx": [0, 0]},
+    {"fact": "velocity", "player": "f", "at": 43, "vx": [1, 92]},
+    {"fact": "velocity", "player": "f", "at": 45, "vx": [0, 0]},
+    {"fact": "velocity", "player": "g", "at": 45, "vx": [1, 84]},
+    {"fact": "velocity", "player": "g", "at": 46, "vx": [0, 0]}
+  ]
+}

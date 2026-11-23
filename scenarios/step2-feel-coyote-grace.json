@@ -1,0 +1,19 @@
+{
+  "id": "step2-feel-coyote-grace",
+  "gate": "A",
+  "proves": "coyote time: the infiltrator runs off the undercroft's upper ledge (its first tick in the air is step 7) and a jump pressed on step 12, the last of the 0.1 s grace, still takes off",
+  "room": "undercroft",
+  "players": [
+    {"id": "a", "character": "infiltrator", "spawn": 1}
+  ],
+  "inputs": [
+    {"player": "a", "from": 0, "to": 40, "x": 1},
+    {"player": "a", "from": 12, "to": 30, "hold": ["jump"]}
+  ],
+  "ticks": 40,
+  "expect": [
+    {"fact": "position", "player": "a", "at": 8, "y": [80.01, 81]},
+    {"fact": "event", "event": "jumped", "player": "a", "between": [12, 12], "count": [1, 1]},
+    {"fact": "velocity", "player": "a", "at": 13, "vy": [-300, -280]}
+  ]
+}

@@ -12,7 +12,7 @@
   ],
   "inputs": [
     {"player": "a", "from": 5, "to": 8, "hold": ["grab"]},
-    {"entity": "brute", "from": 30, "to": 33, "hold": ["attack"]}
+    {"entity": "brute", "from": 28, "to": 31, "hold": ["attack"]}
   ],
   "ticks": 120,
   "expect": [
