@@ -66,6 +66,9 @@ words.
 **Pressing switch in a tight space sometimes does nothing, or skips a member.**
 → Intended. A member whose body would stand inside solid tiles where you are (the grappler or the flyer inside a one-tile-high crawlspace) is never switched to; the next member is tried, and if none fits the switch is refused with a `switch-refused` event and nothing changes. This is the project's "there is always a way out" principle (`CLAUDE.md`): a player is never left inside a wall. Decided by the Step 2 lead, 2026-11-23 (`docs/plan/step-2.md`); the owner may overrule. `INTENT:` at `src/sim/verbs/switch.ts`. Proven by `scenarios/step2-body-switch-refused-in-gap.json`.
 
+**The store swallows every error: a damaged or unwritable records file never stops the server, it just starts that collection empty.**
+→ Intended. With the storage volume attached, a server that fails to start leaves the owner and their friends with no game at all, which is worse than a Hall that is empty for one evening. So `src/server/store.ts` never throws: a file that does not parse, or is a newer version than the code knows, is renamed aside whole (`<name>.unreadable-<n>.json`, recoverable by hand, never deleted or written over), a failed write leaves the records in memory, and each is listed in `store.problems`. Do not turn a `try`/`catch` there into a throw. Decided by the Step 7 lead, 2026-11-23 (`handoff-prompts/step-7-a-store-and-pedestal.md`); the owner may overrule. `INTENT:` at `openStore` in `src/server/store.ts`. Proven by `node scripts/check-store.ts`.
+
 ---
 
 ## Where these live in the code
@@ -76,6 +79,7 @@ Keep this table in step with the entries:
 | Entry | Site |
 |---|---|
 | Switch refused or skips a member in a tight space | `src/sim/verbs/switch.ts` |
+| The store never throws; an unreadable file is set aside | `src/server/store.ts` (`openStore`, `load`) |
 
 **Still unmarked:** list entries that have no `INTENT:` at their site yet.
 Add the marker when you next touch one.

@@ -35,6 +35,7 @@ src/
     facts/<id>.ts     one kind of expectation (self-registering)
   client/           the browser page: canvas, keyboard, render
   server/           the one Node process: static files, /healthz, /ws
+    store.ts          lasting records: named collections on the volume
 scripts/            build, check, gates, dev, trace; lib/ reads the disk
 dist/               build output (git-ignored): server.cjs, public/
 ```
@@ -89,9 +90,61 @@ content *types* and the small pure constants beside them, such as `TILE`.)
 - **Content** is validated once (`scripts/lib/content-files.ts`) and baked
   into both bundles as `__CONTENT__` at build time. It never changes while
   the game runs, and the deploy reads nothing from `content/` at run time.
-- **Nothing is persisted.** No database, no files written, no accounts.
+- **Lasting records are the store's and nothing else's**
+  (`src/server/store.ts`; next section). No database, no accounts. The
+  world itself is still not saved: a restart is a fresh world, into which
+  the server puts back what the store kept. As of 2026-11-23 the store
+  exists and nothing opens it yet; the Hall's records are its first user
+  once it is wired into the server (`docs/plan/step-7.md`).
 - **No external services.** The server is one process on Railway; `/ws`
   is a hello-and-echo until Step 1 Gate 2 owns the protocol.
+
+## Lasting records: the store
+
+`src/server/store.ts` is the one place anything is kept across a restart:
+named collections of small JSON records on the owner's Railway volume.
+Proof: `node scripts/check-store.ts` (13 checks against a temporary
+directory; not yet part of `npm run check`).
+
+**To keep a collection from another step** (server code only; the
+simulation never sees the store):
+
+```ts
+const things = store.collection<Thing>('found-secrets'); // lower-case letters, digits, dashes
+things.all();            // every record, oldest first (a copy)
+things.add(record);      // kept, and written at once
+things.replaceAll(list); // the only way a record is ever dropped
+```
+
+The server opens one store at start
+(`openStore(storage.mounted ? storage.path : null)`; the exact lines are
+the comment at the top of `store.ts`) and passes collections to whoever
+needs them. What goes in a record is plain JSON; give it its own `v`.
+
+The rules, each `INTENT:` in the file:
+
+- **Nothing in it throws, and nothing in it may stop the server
+  starting.** A missing file is an empty collection. A file that does not
+  parse, or is a newer version than the code knows, is renamed aside
+  (`<name>.unreadable-<n>.json`), never deleted or written over. A failed
+  write leaves the records in memory. All of it is listed in
+  `store.problems` (and `store.status()`, meant for `/healthz`).
+- **The file's shape is a contract once on the live volume:**
+  `<volume>/irreverents/<name>.json` holding `{ "version": 1,
+  "collection": "<name>", "records": [...] }`. Additive only; top-level
+  fields the code does not know are kept on rewrite. Code reverts, the
+  volume does not.
+- **Written safely:** a temporary file beside it, flushed, renamed over.
+- **The directory comes from the caller**, Railway's own mount path and
+  only when `storageStatus().mounted` is true; never a hard-coded path.
+  The store makes its own subdirectory and never lists or cleans the
+  mount's root.
+- **No volume means in memory**, and it says so: `store.lasting` and
+  `collection.lasting` are false. Anything shown to a player about kept
+  records should say so too.
+- `DRAFT:` a collection past 500 records is reported, not trimmed; the
+  whole file is rewritten on every `add`, which is fine at this size and
+  not at thousands.
 
 ## The action list (what a player can press)
 
