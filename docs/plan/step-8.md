@@ -305,6 +305,95 @@ When frame lands, the orchestrator updates `docs/plan/step-5.md`'s
 lane's notes as in round 1. Round 3 starts with a fresh review of the
 live game in the same way.
 
+### Round 3 (2026-11-23)
+
+**The review.** Four fresh lenses (craft against the bar, the phone in
+the hand, the cast, closure of round 2) looked at the live game after
+round 2 (all five lanes on `main`, last ea44201), plus a code review of
+the actors lane's diff. Screenshots: every map room and the new places
+(the cantina, the Bandit Camp, the six quarry rooms) at 750×340 sideways,
+667×375 and 390×664 upright, and staged moments (a punch, a grab, a
+throw of a crate and of a friend, a carry, a hide, the three moods, the
+alarm, the brawl), as stills and as filmstrips of every drawn frame. They
+are in the orchestrator's scratch space, not the repository; the briefs
+describe each in words. Every gap below survived at least one of two
+adversarial skeptics; the top five were spot-checked by eye on the cited
+screenshots. Two Drive syncs landed mid-round (1019aab: P03, P04, P05 and
+doc 36; 0372804: P07, P08 and the P03 canon hero extraction) and are
+folded in: **the three heroes are owner-locked to the P03 sheet** (doc 36,
+*"We already have the playable characters. Remember these."*), so the
+heroes are now judged against it, not against `heroes-v2`.
+
+**Round 2's gaps, closed or not:**
+
+1. Sideways bars: **closed** (fills the width; 7.5 pt bands left at 667×375, gap 12).
+2. Flat padding above and below: **partly** (closed sideways; upright 22–41% flat sky, gap 6).
+3. The grappler: **partly** (round 2's terms met, but off the canon and 1.75× his friends, gap 1).
+4. Flat ground: **partly** (map rooms bevelled; quarry graybox, castle floor mass, cantina panels: gaps 2, 7, 10).
+5. The infiltrator: **partly** (upright and readable, but spiky-haired, off the canon, gap 1).
+6. Hits: **partly** (every frame reads; in motion the star lands about 0.4 s late, gap 4).
+7. Text and the ribbon: **closed** (an off-screen speaker's bark points at the wrong body, gap 11).
+8. Bleached backdrops, no depth: **partly** (closed sideways; upright sky and the quarry void remain, gaps 2, 6).
+9. Even lilac interiors: **partly** (torches and the undercroft lit; throne room and gallery one ramp, gap 10).
+10. The hoist: **partly** (fists up; the load floats, the throw flickers, gap 5).
+11. Controls over feet: **closed**.
+12. Underline ledges: **partly** (closed in the map rooms; back in the quarry, gap 2).
+13. Pink rage wash: **closed** (no scripted mood check yet, gap 8).
+14. Hiding: **partly** (the fold covers the body; the player-mark sits on the curtain, gap 9).
+15. The villain's size: **closed** (44 px, top hat, cape).
+
+**Ranked gaps** (size first, then lenses, then first-ten-seconds; lane
+that closes it):
+
+1. The three heroes are off the owner-locked P03 canon, and the grappler is 1.75× his friends (32×42 drawn over an 18×30 box) and taller than the street's arches (5; heroes).
+2. The six quarry rooms are untouched graybox, walkable from the courtyard since 78c4959; their 1×1 hides have no look; the camp (ab0b34b) has the courtyard's ground but no camp (5; ground, props).
+3. Five kinds of people are flat rectangles: brawler, skirmisher (the cantina's regulars), outpost fighter, lookout, horn post (5; cast, props for the horn).
+4. On the hitter's own page the star lands about 0.4 s after the swing (burst 155–320 ms, nothing to 520 ms, star at 555 ms), and the grappler's art hides the body he hits (5; actors, with hurt frames from heroes and cast).
+5. Grab, carry and throw stutter: no hoist, the load floats 2–4 px over the fists, the pose flips between carry, throw and punch for 0.44 s, the thrown friend teleports about 70 px and flies upright (4; actors, heroes).
+6. Upright, short rooms sit under flat stepped sky with their top row (canopy, eave, the cantina's floor tiles) floating in it (4; ground).
+7. The cantina reads as a storeroom of crates or a corridor, not a tavern (4; ground, props).
+8. The town cast (guard, king, shopkeeper, villain) is a different, thin, small-faced family from the canon; knocked-out is a rotated plank; mood 3 lacks attack/hurt/air/held frames; no scripted mood check (4; cast, props for marks, actors for the check).
+9. A hidden player's mark is drawn on the curtain on every page (3; actors).
+10. Large flat masses: one-tone ground under the walk line, the castle halls' single lilac, flat mid layers, mottled P01 imports (3; ground, props).
+11. Overlays read as debug boxes: the brawl strip, the alert circles, the bell bar, off-screen barks pointing at the wrong body (2; props, actors).
+12. Phone frame leftovers: 7.5 pt bands at 667×375, navy columns at the notch insets, controls over lower floors, the orientation hint back on every load (2; actors, after Step 17's `shell.ts` edit).
+13. Code: on the own page, a throw while carrying plays the punch wind-up and drops the load on the crest (`sprites.ts:197` before `:200`) (3; actors).
+14. Code: a carried body is drawn 12 px above its simulation spot but the mark, ribbon, bark and away dots use the simulation's y (2; actors).
+15. Code: the Hall card's `·` and `…` draw as `?` in the pixel font (1; actors).
+16. Code: the king's ribbon side fallback can clamp over him (1; actors).
+
+**Dropped:** none (no gap was refuted by both skeptics).
+
+**Contract additions, round 3** (`DRAFT:`; additive and optional; the
+actors lane validates them in `src/content/kinds/sprites.ts` in its first
+push, and the art lanes write them only once that is on `main`; the
+orchestrator folds them into `docs/mechanisms/art-pipeline.md`):
+
+- sprite state **`tumble`**: a launched or thrown body flying fast. Falls
+  back to `held` → `hurt` → `air`; with no `tumble` frames the renderer
+  turns the `hurt` frame in 90° steps.
+- **`carryAtBy`**: `{ "<state>": { "x", "y" } }` for `carry`, `carryRun`,
+  `throw`: that state's carry point, else `carryAt`.
+
+**Lanes** (five; no two edit one file):
+
+| Lane | Brief | Paths it alone may touch | Closes |
+|---|---|---|---|
+| heroes (art) | `handoff-prompts/look3-heroes.md` | `tools/art/heroes/`, `assets/sprites/heroes/`, `content/sprites/{grappler,infiltrator,flyer,hero}.json` | 1; 5 and 4 (frames, `carryAt`) |
+| cast (art) | `handoff-prompts/look3-cast.md` | `tools/art/cast/`, `assets/sprites/cast/`, `content/sprites/` for every other character id | 3 (people), 8 (art); 4 and 5 (hurt, held, tumble, down) |
+| ground (art) | `handoff-prompts/look3-ground.md` | `tools/art/tiles/`, `assets/tiles/`, `assets/backdrops/`, `content/atlases/`, `content/backdrops/` | 2 (ground), 6, 7 (ground), 10 (ground) |
+| props (art) | `handoff-prompts/look3-props.md` | `tools/art/props/`, `assets/props/`, `assets/decor/`, `assets/fx/`, `assets/ui/` except `assets/ui/touch/`, `content/looks/`, `content/decor/` | 2 and 7 (decor, 1×1 hides), 3 (the horn), 5 (fx), 8 (marks), 10 (P01 import), 11 (HUD pictures) |
+| actors (code) | `handoff-prompts/look3-actors.md` | `src/client/draw/{sprites,entities,npcs,impact,away,audience,fx,hall,alert,room}.ts`, `src/content/kinds/sprites.ts`, `scripts/e2e/look.ts` (new) and its one call in `scripts/e2e.ts`; `src/client/shell.ts` and `scripts/e2e/phone.ts` only after Step 17's shell edit is on `main` | 4, 5 (drawing), 9, 11 (drawing), 12, 13–16, the mood check |
+
+Not any lane's: `src/client/main.ts`, `start.ts`, `index.html`,
+`src/server/` (Step 17); `src/client/draw/cantina.ts` (Step 11) and
+`outpost.ts` (Step 12); `content/rooms/`, `content/characters/`,
+`content/outposts/`; `src/sim/`, `src/net/`. The art lanes start at once;
+the actors lane's first push (the two validators) unblocks `tumble` and
+`carryAtBy`. Each lane reports "look3 lane <lane> done at <commit>" and
+commits its before/after shots under `docs/plan/step-8-shots/round3/<lane>/`.
+Round 4 starts with a fresh review of the live game in the same way.
+
 ## Measure
 
 ## Briefs
@@ -312,6 +401,8 @@ live game in the same way.
 Round 1 of the look (2026-11-23): `handoff-prompts/look-foundation.md`, `look-heroes.md`, `look-cast.md`, `look-tiles.md`, `look-props.md`, `look-world.md`, `look-actors.md`, `look-shell.md`, `look-sound.md`. Delete each when its lane is reviewed. Reviewed by re-running build and check, and deleted 13:35 UTC: foundation (61f7676), heroes (59de45d), world (82fe89b), actors (f92a447), shell (ac6509b), sound (fdcfec9). Then tiles (ebcf79e) and props (a4040f4), deleted 13:41 UTC, and cast (cae8f46), deleted 13:44 UTC. Round 1 is complete.
 
 Round 2 of the look (2026-11-23, "Round 2" above): `handoff-prompts/look2-heroes.md`, `look2-ground.md`, `look2-props.md`, `look2-frame.md`, `look2-actors.md`. Delete each when its lane is reviewed. Workers: frame then actors `session_017WiGzGaGuR297NUCFSpVDU`; heroes `session_017WiGzFWVvNJrmXZ81rABuv`; ground then props `session_017WiGzHanC1tecHKJbjuyCf`. Reviewed (build and check re-run) and deleted: ground (ec49eb5), 15:01 UTC. Frame (06180df), props (992647b), heroes (d426771) and the villain (ea28af4) reviewed by build and check re-run (forwarder session_017WiGzGp8auJceLEAAh9Aqx, handoff addendum 501c223); briefs deleted 15:55 UTC by orchestrator session_017WiGzHhke4tkAThPgw6EXs. Actors (646f83d, ea44201) reviewed 16:20 UTC by orchestrator session_017WiGzHhke4tkAThPgw6EXs: build, check and e2e re-run green (197 ok, the known `t-switch-free` todo); diff read by an independent code reviewer against the brief: carryAt, rage, the no-render-freeze and fallback traps met; four bugs found (overlays of a carried body drawn at the simulation's y, 12 px off; a throw on the own page draws the punch wind-up; the Hall card's `·`/`…` drawn as `?`; the ribbon's side fallback can clamp over the king) and the hidden player's mark confirmed on every page: all carried into round 3's lanes. Brief deleted; builder archived (390k). **Round 2 is complete.**
+
+Round 3 of the look (2026-11-23, "Round 3" above): `handoff-prompts/look3-heroes.md`, `look3-cast.md`, `look3-ground.md`, `look3-props.md`, `look3-actors.md`. Delete each when its lane is reviewed.
 
 ## Open with the owner
 
