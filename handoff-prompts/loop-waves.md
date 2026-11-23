@@ -1,5 +1,7 @@
 # Core loop 5, escalating combat: waves that really come, and a last stand the Hall remembers (Step 7, slice B)
 
+**Landed so far (2026-11-23 23:20 UTC): pushes 1 and 2** by `session_017WiGzHvGxLQnLUErw7teAo`, which stopped at about 300k tokens: 91b83a5 (the camp's waves really come) and 745395d (the game notices: the legend detector, gate E on `step7-last-stand-camp` and `scripts/checks/step7-hall`; heist jobs hang pedestals too through the theft kind). **You do push 3:** the pedestal's picture drawn with real sprites in the P04 Hall frame (looks are cut: `tools/art/props/README.md`, "Core loops"; the art builder `session_017WiGzEN1QbSnHzXNqV4XSt` takes asks by message), plus iPhone-sized screenshots of the banner and the pedestal. Read `docs/plan/step-7.md`, "Builder notes", first. Weakest so far: the gate-E run fells exactly 5, which is the threshold; the picture fits only about 3 bodies in the 500-byte budget; the shared world's pedestals do not survive a restart until the store is wired (a later slice, not yours). The vehicles B builder is now working in the camp's files (`handoff-prompts/loop-vehicles-b.md`): do not edit the camp's room, outpost or scenarios.
+
 Brief for one cold builder. Written 2026-11-23 19:40 UTC by the core-loops
 re-plan (`docs/plan/core-loops.md`, section 5; read it and its "Names the
 slices share" table first). The step is `docs/plan/step-7.md`: read "Why",

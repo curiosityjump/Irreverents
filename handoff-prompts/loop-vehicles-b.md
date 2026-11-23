@@ -1,6 +1,6 @@
 # Core loop 6, vehicle hijacking, builder B: the wagon in the Bandit Camp, two screens to plough through, and a second wagon sent at you (Step 20)
 
-**HOLD (orchestrator, 2026-11-23 22:05 UTC): do not start this brief until `loop-waves.md` pushes 1 and 2 are on `main` and the orchestrator sends it. Brief A (`loop-vehicles-a.md`) starts first.**
+**Released by the orchestrator, 2026-11-23 23:20 UTC: `loop-waves.md` pushes 1 and 2 are on `main` (91b83a5, 745395d); the rescue is finished (a01c44c) and its builder archived. Builder A (`session_017WiGzGBREdxtzPBSo4mcca`) has push 1 on `main` (a2bee99) and is on push 2, the seat: your pushes 2 and 3 wait for it; push 1 does not. The waves slice's push 3 touches only the Hall's drawing, not the camp.**
 
 Brief for one cold builder. Written 2026-11-23 by the orchestrator's drafting
 agent, read at a01c44c; nothing was run. The step is `docs/plan/step-20.md`:
