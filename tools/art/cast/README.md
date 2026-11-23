@@ -160,9 +160,24 @@ height, faces 10-14 px wide.
 - `moods.png` (preview) puts the four in moods 1, 2, 3, idle over run;
   committed as `docs/plan/step-8-shots/round3/cast/moods-town-four.png`.
 
+### Round 3, push 3: Step 16's quarry fighters
+
+- `heavy-fighter`: P07 enemy sheet row 3, the armoured heavy with the red
+  plume and the club (the brief named P08's row 4: the same design drawn
+  smaller; P07's larger plate keeps more of the face). Scale 0.25, about
+  32 px over a 20x28 box; cell 56x48; stone and metal barred so the
+  armour stays purple. Plate's own walk, raise, swing, hurt, dizzy, KO.
+- `brute`: P03 villain sheet row 3, the horned, helmeted brute with the
+  hammer. Scale 0.235, about 36 px over a 26x32 box; cell 64x56. Plate's
+  own idle, walk, hammer up, slam, flying hit, KO.
+- Same moods as the rest: the plate's alert pose for the heavy's mood-2
+  idle; a sweat drop or red face elsewhere.
+- Seen in the real game: `quarry-pit` (7, 18) and `quarry-ridge` (72, 9)
+  (`after-quarry-*`).
+
 New ids for the contract's cast list: `brawler`, `skirmisher`,
-`outpost-fighter`, `outpost-lookout`, `signal-post` (sprite files and
-`assets/sprites/cast/<id>.png`).
+`outpost-fighter`, `outpost-lookout`, `signal-post`, `heavy-fighter`,
+`brute` (sprite files and `assets/sprites/cast/<id>.png`).
 
 ## Deviations from the contract
 
@@ -230,8 +245,10 @@ New ids for the contract's cast list: `brawler`, `skirmisher`,
 - (Round 3) `tumble` and the curled, kicking `held` wait for the actors
   lane's validator (`git log origin/main --grep 'round 3, actors'`, empty
   at this push); `held` is the hurt pose wiggling.
-- (Round 3) Step 16's `heavy-fighter` and `brute` landed on `main`
-  while this lane worked; they are not cut yet (the brief's item 3).
+- (Round 3) **`toll-keeper`** (Step 16, 14x26) has no sprite: it landed
+  after the brief, whose paths do not name it. P07's green-hooded
+  crossbow bandit (enemy row 4) or P08's goggled bomber (row 5) would
+  fit; it is one more function in `cut3.py`.
 - (Round 3) **The villain is the weakest again**: his face is small and
   dark under the hood, so his mood-3 red face is the least visible of
   the four; a few dark specks stay where the horns were; and his
@@ -282,5 +299,7 @@ New ids for the contract's cast list: `brawler`, `skirmisher`,
   (`t-throw-friend`, `s-throw-friend`, `s-after`); the control on `main`
   without the change passed, and the same change passed on the rerun.
   Read as a flaky fact, not this lane's (the sprites are other kinds').
+  Push 3 again: `t-throw-friend` alone failed once, passed on the rerun.
+  Two of five runs: worth a look by whoever owns that fact.
 - `tumble` and the curled `held`: not drawn (the actors lane's validator
   is not on `main`).

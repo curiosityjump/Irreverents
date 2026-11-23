@@ -502,6 +502,69 @@ ROUND3.update({
     'villain': villain,
 })
 
+
+# ----------------------------------------------------------------- Step 16's quarry fighters (round 3, push 3)
+
+def heavy_fighter():
+    # P07 enemy sheet, row 3: the armoured heavy with the red plume and the club (P08's row 4 is the
+    # same design drawn smaller; the larger plate keeps more of the face).
+    P = _poses('p07enemy', 0.25, {
+        'i0': ((24, 408, 142, 540),),
+        'i1': ((157, 409, 258, 540),),
+        'i2': ((272, 410, 359, 540),),
+        'w3': ((373, 416, 459, 540), {'erase': ((373, 505, 400, 540),)}),
+        'alert': ((467, 416, 561, 540),),
+        'raise': ((681, 381, 808, 540),),
+        'swing': ((823, 416, 955, 540), {'erase': ((912, 416, 960, 540),)}),
+        'hit': ((1083, 423, 1174, 540),),
+        'dizzy': ((1187, 458, 1281, 540),),
+        'ko': ((1297, 472, 1427, 540),),
+    }, drop=('stone', 'metal'))
+    i0, i1, i2, w3 = P['i0'], P['i1'], P['i2'], P['w3']
+    S = {
+        'idle': [i0, i0, i1, i1],
+        'run': [w3, lift(w3), i2, i2, lift(i2), w3],
+        'air': [lift(P['alert'], 0), lean(P['alert'], -1)],
+        'attack': [P['raise'], P['swing'], P['swing'], i0],
+        'hurt': [lean(P['hit'], -2), P['hit'], P['dizzy']],
+        'down': [P['dizzy'], P['ko']],
+        'held': [P['hit'], lean(P['hit'], 2), P['hit'], lean(P['hit'], -2)],
+        'talk': [i0, P['alert']],
+    }
+    M2 = {'idle': [P['alert'], P['alert'], breathe(P['alert']), breathe(P['alert'])], 'talk': [P['alert'], i0]}
+    return dict(cell=(56, 48), box=(20, 28), S=S, M2=M2, M3={})
+
+
+def brute():
+    # P03 villain sheet, row 3: the horned, helmeted brute with the hammer.
+    P = _poses('villains', 0.235, {
+        'i0': ((25, 591, 185, 750),),
+        'i1': ((218, 591, 371, 750),),
+        'walk': ((405, 591, 563, 750),),
+        'raise': ((600, 551, 764, 750), {'erase': ((700, 551, 770, 600),)}),
+        'slam': ((804, 606, 1022, 750), {'erase': ((900, 700, 1030, 750),)}),
+        'fly': ((1029, 566, 1196, 700), {'erase': ((1140, 566, 1200, 640),)}),
+        'ko': ((1219, 655, 1417, 750),),
+    })
+    i0, i1, w = P['i0'], P['i1'], P['walk']
+    S = {
+        'idle': [i0, i0, i1, i1],
+        'run': [w, lift(w), i1, i1, lift(i1), w],
+        'air': [lift(P['raise'], 0), P['fly']],
+        'attack': [P['raise'], P['slam'], P['slam'], i0],
+        'hurt': [lean(P['fly'], -1), P['fly'], P['fly']],
+        'down': [P['ko'], breathe(P['ko'], 0.4)],
+        'held': [P['fly'], lean(P['fly'], 2), P['fly'], lean(P['fly'], -2)],
+        'talk': [i0, i1],
+    }
+    return dict(cell=(64, 56), box=(26, 32), S=S, M2={}, M3={}, head=0.55)
+
+
+ROUND3.update({
+    'heavy-fighter': heavy_fighter,
+    'brute': brute,
+})
+
 PERSON_STATES = ['idle', 'run', 'air', 'attack', 'hurt', 'down', 'held', 'talk', 'grab', 'carry', 'carryRun', 'throw']
 MOOD_STATES = ['idle', 'run', 'air', 'attack', 'hurt', 'held', 'talk']
 

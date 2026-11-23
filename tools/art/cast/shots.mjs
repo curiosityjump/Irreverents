@@ -20,7 +20,7 @@ const only = process.argv[4] ? process.argv[4].split(',') : null;
 const out = path.join(here, 'preview', 'shots');
 fs.mkdirSync(out, { recursive: true });
 
-const SPOTS = [['cantina', 12, 9], ['outpost', 24, 10], ['castle-street', 14, 10], ['castle-street', 36, 10], ['throne-room', 11, 14]];
+const SPOTS = [['cantina', 12, 9], ['outpost', 24, 10], ['castle-street', 14, 10], ['castle-street', 36, 10], ['throne-room', 11, 14], ['quarry-pit', 7, 18], ['quarry-ridge', 72, 9]];
 const PHONES = [
   { name: 'up', opts: { viewport: { width: 390, height: 664 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true } },
   { name: 'side', opts: { viewport: { width: 844, height: 390 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true }, inset: true },
