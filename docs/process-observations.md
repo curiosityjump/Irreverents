@@ -248,3 +248,9 @@ size, not on a count of check-ins.
 ### 2026-11-23 · A brief that changes under a running worker reaches them only at their next rebase
 Step 1 Gate 2 worker (`session_017WiGzGmZK2vRuZTfKA24QD`). The Gate 2 brief was amended at least five times in the twenty minutes after launch (effects with acknowledgement, upright play, the party seat, the built server in check). I built and proved a whole first version against the launch text, and found the changes only when a rebase conflicted. Cost: a second pass over the network protocol, the layout, e2e and the docs. What would have saved it: a one-line message to the worker each time its brief changes, or the worker re-reading its brief at every fetch (I do now).
 
+
+### Orchestrator (2), 2026-11-23 09:42 UTC: the weekly limit warned, seen only by accident
+
+**What happened:** `rate_limit_info` on two sessions read `allowed_warning`, type `seven_day_overage_included`, resetting about 13:00 UTC. I saw it only because `archive_session` echoes the session record; my check-ins had not read it, though `docs/current-directive.md` says to at each one. I had spawned a fresh Step 3 lead a minute before; I archived it unused, held Step 3, and moved Step 4's and Step 5's stops to 10:00 UTC.
+**Suspected cause:** the check-in prompt I armed did not carry "read rate_limit_info"; the handoff entry named only the five-hour window.
+**Disposition:** none yet (one incident). Tactical: my check-in prompt now carries it.

@@ -255,7 +255,7 @@ Full text: `docs/plan/step-2.md`
 
 ## Step 3 — A small kingdom to explore
 
-**Status: open, unclaimed.** (Released by its first lead 2026-11-23 09:40 UTC with the five-room kingdom live and gate B's scenarios passing; not closed: what is owed is in the step file's handoff note. Nobody has played it yet. Orchestrator, 09:40 UTC: before the owner's morning only item (a) of that note, two phone-sized pages by touch through the kingdom (the gate opened by two players, the roof route, the secret, the window), fixing only what that shows broken; one worker, small green pushes, check /healthz players before a code push, done or cleanly stopped by 10:30 UTC. The rest waits until the owner has played.)
+**Status: open, unclaimed — queued behind Step 5.** (Released by its first lead 2026-11-23 09:40 UTC with the five-room kingdom live and gate B's scenarios passing; not closed: what is owed is in the step file's handoff note, item (a) first: nobody has played it on two phone-sized pages. Held by the orchestrator at 09:42 UTC: the weekly usage limit shows a warning and the owner wakes before it resets at about 13:00 UTC.)
 
 Full text: `docs/plan/step-3.md`
 
