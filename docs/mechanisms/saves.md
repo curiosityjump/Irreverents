@@ -104,11 +104,15 @@ own process group, one player in a kept game, SIGTERM to npm, and the line
 must say 1 game saved. Control watched to fail (2026-11-23): without `exec`
 the line never came, npm exited and node was left running.
 
-Not settled: Railway's time between SIGTERM and SIGKILL (said to default
-to 0 s). The save is synchronous and takes milliseconds, so it may finish
-anyway; the live `savedAt` measurement says. If it does not, a draining
-window must be set in Railway (key not verified from here; see Builder
-notes in `docs/plan/step-17.md`).
+Railway's time between SIGTERM and SIGKILL defaults to 0 s, so
+`railway.json` sets `deploy.drainingSeconds: 10` (`DRAFT:`; the key as the
+orchestrator found it in Railway's docs by search, 2026-11-23; nobody here
+can open docs.railway.com). The save is synchronous and takes milliseconds;
+10 s is room for many games. **`railway.json` stops being read on
+2026-12-01** (`docs/mechanisms/deploy.md`, Traps): the migration must carry
+the draining seconds over, or set `RAILWAY_DEPLOYMENT_DRAINING_SECONDS`.
+Measured on live after a deploy: `GET /game/<CODE>` `savedAt` for a game
+being played falls just before the new server's `startedAt`.
 
 ## What a save does not keep (`DRAFT:`, the owner decides by playing)
 

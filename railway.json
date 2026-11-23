@@ -15,6 +15,7 @@
   },
   "deploy": {
     "healthcheckPath": "/healthz",
-    "healthcheckTimeout": 120
+    "healthcheckTimeout": 120,
+    "drainingSeconds": 10
   }
 }
