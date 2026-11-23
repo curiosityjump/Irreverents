@@ -20,7 +20,7 @@ the count you report is whatever `npm run gates` prints.)
 **Push in two parts, the first one early.** Slice 2's worker starts the
 moment part 1 is on `main`, so part 1 is the foundation and nothing else:
 
-- **Part 1 (aim: within 45 minutes):** the content kinds, the spawner,
+- **Part 1 (aim: within 45 minutes):** the content kinds, `c.drive`,
   seeing, the deed list, the mood machine, the first two scenarios green,
   and the shapes written into `docs/mechanisms/npc-response.md`. When it
   is pushed, message the lead: `send_message` to
@@ -36,8 +36,8 @@ moment part 1 is on `main`, so part 1 is the foundation and nothing else:
   0 of 6, every gate "no scenario yet".
 - An NPC is an `Entity` with `player: null`. The `verbs` system skips
   those (`src/sim/systems/verbs.ts`, `if (entity.player === null)
-  continue`), so nothing moves an NPC unless a system of yours sets its
-  `vx`. Physics (`order: 500`) then moves **every** entity whose `kind`
+  continue`), so today nothing moves an NPC at all (the seam below
+  fixes that). Physics (`order: 500`) then moves **every** entity whose `kind`
   is a character kind and whose `room` exists, and **silently skips** any
   entity whose `kind` is not in `content.characters`
   (`physics.ts`: `if (!room || !kind) continue`). `draw/entities.ts` does
@@ -52,41 +52,66 @@ moment part 1 is on `main`, so part 1 is the foundation and nothing else:
   module variable, and it will reach both phones without network code.
 - Scenarios (`docs/mechanisms/scenarios.md`) drive **players only**, and
   need at least one player. The `event` fact can only filter by `player`.
-- The hero: a 12×26 box, runs 96 px/s. Tiles are 16 px; one screen is
+- Players are now `grappler`, `infiltrator` or `flyer` (Step 2, on
+  `main` since 701dc26); `hero` still exists for Step 1's scenarios. A
+  player's character has the role `hero` whichever body it is. The
+  `hero` body: a 12×26 box, runs 96 px/s. Tiles are 16 px; one screen is
   20×11 tiles.
 
-### The seams with the other steps (agreed or announced 04:35 UTC)
+### The seams with the other steps (agreed by message, 04:35–04:50 UTC)
 
-- **Step 2** (lead `session_017WiGzGRnRoAeW5Ep5iSycV`) is building
-  attack, grab and throw now. Its worker emits events `hit`, `impact`,
-  `grabbed`, `thrown`, `released` (field names not yet published; I asked
-  for `by` and `target` entity ids). **You do not wait for them.** Build
-  the generic path: a data table mapping a simulation event type to one
-  of your deeds, plus which of its fields name the actor and the target.
-  When Step 2's events are on `main`, hooking them in is lines in that
-  table. `git pull --rebase origin main` often and look.
-- **Step 2 has taken `content/placements/<room id>.json`** for crates and
-  practice dummies, with a `populateRoom` in `src/sim/world.ts`
-  (`docs/architecture.md` had given that path to this step; it is theirs
-  now). **Your people go in `content/people/<room id>.json`**, read by
-  your own kind file, and are put into the world by a system of yours,
-  not by `populateRoom`. Fix the two rows of `docs/architecture.md` that
-  say otherwise ("I need to add… NPC" and the Step 4 row of the paths
-  table).
-- **Step 3** (lead `session_017WiGzGUAnvQfWco5vTcMX4`) is building the
-  castle street. Until it is on `main`, use one scratch room,
-  `content/rooms/npc-lab-shop.json` (their directory; one additive file;
-  never the start room). Slice 2 will add its own.
-- **`interact`** does not exist yet. Add `content/actions/interact.json`
-  (label "Use", key `KeyE`; Step 2's directory, announced to its lead).
-  Read it from a **system** of yours (`ctx.inputs`), not a verb:
+Read `docs/plan/step-4.md`, "Every body is Step 2's, player or not",
+and "Names other steps are now building against" in
+`handoff-prompts/step-2-hit.md`. In short:
+
+- **A body is Step 2's; what a person wants is yours.** Your systems
+  never set `vx` or `vy`. They write `entity.c.drive`, an `Input` (`x`,
+  `y`, `held`), and the body's own verbs act on it. Nothing does this
+  yet: **you add one additive rule to `src/sim/systems/verbs.ts`**: a
+  non-player entity that has `c.drive` runs its kind's verbs with that
+  input; one without it is skipped exactly as today (Step 2's crates and
+  dummies must be untouched: prove it, their scenarios still pass).
+- **So your people are ordinary character kinds**: add
+  `content/characters/{shopkeeper,guard,villain}.json` listing `move`
+  (Step 2's directory; announced), each with its own tuning set in
+  `content/tuning.json` holding the numbers `move` declares (a walk:
+  `runSpeed` about 40). When Step 2's `attack` verb is on `main`, the
+  guard and the enraged shopkeeper may list it.
+- **Events** Step 2's worker (`session_017WiGzHbbov1AymyWrXuvge`, due
+  07:15 UTC) is emitting, each naming entity ids: `hit { by, target }`,
+  `grabbed { by, target }`, `thrown { by, target }`, `released`,
+  `flattened { target, by }`, `recovered { target }`. **Out cold is
+  `entity.c.flattened`**, present exactly while a body is out. **You do
+  not wait for them.** Build the generic path: a data table mapping an
+  event type to one of your deeds, plus which fields name the actor and
+  the target, with rows for `hit`, `grabbed` and `thrown` already in it.
+  `git pull --rebase origin main` often; when their events exist, add a
+  scenario that uses a real hit.
+- **Where people stand is `content/placements/<room id>.json`**, which
+  Step 2's worker is creating right now as its "push 1" (`{ "room",
+  "place": [{ "id", "character", "tile" }] }`, a `populateRoom(world,
+  content, roomId)` in `src/sim/world.ts`, a scenario field
+  `"placements": true` that calls it, and scenario `entities`). Step 2
+  hands that kind to this step after its push: **extend it additively**
+  with an optional `npc` (an NPC kind id) and `routine` on a `place`
+  entry, and an optional second list `things` (bodiless: a shop counter,
+  goods). Do **not** make a second placement file or your own spawner.
+  A system of yours gives `c.npc` to any entity whose placement entry
+  names an `npc`. If push 1 is not on `main` when you start, build the
+  NPC kind, the rules kind, seeing and the mood machine first and pull
+  again; if it is still missing after 30 minutes, tell the lead.
+- **Your test room** is `content/rooms/test-shop.json` (Step 3's
+  directory; one additive file; never the start room; **no doors**:
+  Step 3's validator treats a doorless room as standalone). Slice 2 will
+  add its own.
+- **`interact`** does not exist yet and is this step's: add
+  `content/actions/interact.json` (label "Use", key `KeyE`). Read it
+  from a **system** of yours (`ctx.inputs`), not a verb:
   `src/sim/verbs/**` is Step 2's.
-- **NPC bodies** are character kinds: add
-  `content/characters/{shopkeeper,guard,villain}.json` with `verbs: []`,
-  all three using one empty tuning set `"npc": {}` under `characters` in
-  `content/tuning.json`. Feel numbers for people (walk speed, sight
-  range, timers) are **world** numbers, declared by the system that reads
-  them, named with an `npc` prefix.
+- **Scenario and gate names:** scenarios are `scenarios/step4-*.json`.
+  `npm run gates` calls a gate passing as soon as one tagged scenario
+  passes, so gate C counts for this step only when its line lists a
+  scenario for each of signals 1, 1b and 2 (section "The scenarios").
 
 ### The rules to build (the owner's, from their design library)
 
@@ -151,54 +176,54 @@ and every choice labelled DRAFT below `DRAFT:`.
   (DRAFT 40 px) up or down; and no solid tile on the straight line
   between the two bodies' centres. The **target of a deed always
   perceives it**, facing or not. A knocked-out person sees nothing (the
-  flag is slice 2's; leave the hook).
+  flag is Step 2's `c.flattened`; read it if present).
 - **What a person does**, fixed per mood, chosen per NPC kind in data:
-  mood 1: its **routine**, a looping list of steps in the people file
+  mood 1: its **routine**, a looping list of steps in its placement
   (`wait` seconds, `face` a side, `walk-to` a tile column, `do` a deed at
   a target); mood 2: stop, face the offender, plead (a bark); mood 3:
   walk at the offender while seen (to where they were last seen, never to
-  where they are), `npcRageSpeedFactor` times normal speed, and shove on
-  contact. `DRAFT:` the shove sets the hero's velocity directly; Step 1
-  is publishing "Effects on a player" in `docs/architecture.md`, and if
-  that section exists when you get here, emit its push effect instead.
-  A shopkeeper's shove is weak: ordinary people stay ordinary (D-046).
+  where they are), and, once its body lists Step 2's `attack`, hold
+  `attack` when in reach. Until then it only charges. All of it through
+  `c.drive`. Ordinary people stay ordinary fighters (D-046): that is
+  Step 2's numbers on the shopkeeper's body, not a rule of yours.
 - **What a hero can do tonight:** a fresh press of `interact` acts on the
   nearest thing within `npcInteractReach` (DRAFT 20 px): at a shop
   counter whose keeper is present, `buy` (an event and a bark; no money
   tonight, DRAFT); at a piece of goods, `take` (it is marked taken and
   held by that hero; DRAFT, slice 2 decides what carrying it means).
-  Counters and goods are placed in the people file. They have no body:
-  make them fields of one bodiless per-room entity, or bodiless entities
-  of their own, your call.
-- **Bounded crowd:** the spawner never puts more than `npcMaxPerRoom`
-  (DRAFT 8) people in a room, and the validator refuses a people file
-  over it.
+  Counters and goods are the placements file's `things`. They have no
+  body: keep their state as fields of one bodiless per-room entity, or
+  bodiless entities of their own, your call.
+- **Bounded crowd:** the validator refuses a placements file with more
+  than 8 (DRAFT) entries naming an `npc`.
 - **Events** to emit, each naming entity ids: `deed` (every deed, with
   who witnessed it), `mood-changed` (`from`, `to`, `cause`), `reassured`,
   `opposed`. Slice 2 and the scenarios read these.
 
 ### The scenarios (signals 1, 1b and 2 of the step), all tagged `"gate": "C"`
 
-1. `npc-villain-robs`: the villain's routine robs the shopkeeper; the
+1. `step4-villain-robs`: the villain's routine robs the shopkeeper; the
    shopkeeper's mood is 1 throughout and `opposed` happens. (The player
    stands idle out of the way.)
-2. `npc-villain-buys-politely`: later in the same routine the villain
+2. `step4-villain-buys-politely`: later in the same routine the villain
    politely buys: mood 2. Then he robs properly: mood 1 within 2 ticks.
-3. `npc-hero-buys`: the control for 2. A hero buying the same potion:
+3. `step4-hero-buys`: the control for 2. A hero buying the same potion:
    mood 1 throughout.
-4. `npc-hero-fluke-reassured`: a hero takes goods in view: mood 2. The
+4. `step4-hero-fluke-reassured`: a hero takes goods in view: mood 2. The
    hero buys: mood 1 within 2 ticks.
-5. `npc-hero-persists-rage`: the hero keeps taking: mood 3. The hero buys
+5. `step4-hero-persists-rage`: the hero keeps taking: mood 3. The hero buys
    in view: **still 3** (D-073). The hero goes out of sight and does
    nothing for the cool time: mood 2.
-6. `npc-rage-needs-unseen`: the control for 5. Same, but the hero stays
+6. `step4-rage-needs-unseen`: the control for 5. Same, but the hero stays
    in view for the same time: still 3.
-7. `npc-unseen-take`: a hero takes goods behind the shopkeeper's back:
+7. `step4-unseen-take`: a hero takes goods behind the shopkeeper's back:
    mood 1, and the `deed` event lists no witness.
 
-You will need new facts in `src/scenarios/facts/` (a person's mood at a
-tick; an event for a named entity). The lab room needs a solid wall to
-get out of sight behind, and three pieces of goods.
+Signal 1 is scenario 1; signal 1b is 2 and 3; signal 2 is 4, 5 and 6.
+Each uses `"placements": true` in `test-shop`. You will need a new fact
+in `src/scenarios/facts/` for a person's mood at a tick; Step 2's push 1
+makes the existing facts accept `"entity": "<id>"`. The test room needs a
+solid wall to get out of sight behind, and three pieces of goods.
 
 ## 3 · Traps
 
@@ -213,7 +238,8 @@ get out of sight behind, and three pieces of goods.
   directory of your own, `src/sim/npc/`.
 - **System order.** Deeds emitted by other steps' systems must already
   exist when your witness pass runs: give the witness and mood systems an
-  `order` of 600 or more, the spawner and `interact` reader under 100.
+  `order` of 600 or more; the system that writes `c.drive` and the
+  `interact` reader under 100 (the `verbs` system runs at 100).
 - **Reading events.** Add `events` (this tick's events so far) to
   `StepContext` in `src/sim/types.ts` and fill it in `step.ts`: two
   lines, additive, both shared files. Say so in the commit
@@ -225,13 +251,14 @@ get out of sight behind, and three pieces of goods.
   `kind` today; Step 2's new systems may not. After each rebase run
   `npm run check`; if another step's system throws on your bodiless
   entity, do not edit their file: tell the lead.
-- **A spawner that runs every tick must be idempotent** and must not
-  respawn someone who was removed on purpose. Give people deterministic
-  ids (`npc:<room>:<id in the people file>`).
-- **Every push to `main` deploys, and each deploy is now about a minute
-  of downtime** on the live address (a storage volume was attached
-  tonight). Push finished parts, not every commit. A documents-only push
-  does not deploy.
+- **Two workers of Step 2 are pushing into `content/characters/`,
+  `content/tuning.json`, `src/sim/world.ts` and the scenario runner
+  while you work.** Rebase before you touch any of those, keep your
+  edits to them additive and small, and never reformat a shared file.
+- **A push that touches `src/`, `content/` or `scripts/` deploys, and
+  each deploy is about a minute of downtime** on the live address and
+  resets the live world. Push finished parts, not every commit. A
+  documents-only push does not deploy.
 - **The shared files** (`src/sim/types.ts`, `src/client/render.ts`,
   `content/tuning.json`): additive, small, `git pull --rebase origin
   main` immediately before pushing, then `npm run build && npm run check`
@@ -248,8 +275,10 @@ get out of sight behind, and three pieces of goods.
   camera; `src/client/**` other than your one drawing file and its one
   line; `src/server/**`; `scripts/**`. If one of them is in your way,
   tell the lead.
-- `content/game.json`: do not make a lab room the start room. The people
-  move into the real street in a later slice.
+- `content/game.json`: do not make a test room the start room. The
+  people move into the real street in a later slice.
+- The final look of a mood: Step 8 (not yet open) owns the marks. Yours
+  are plain and `DRAFT:`.
 - Sprites. People are their body's graybox rectangle; art arrives later
   as data.
 
@@ -257,7 +286,7 @@ get out of sight behind, and three pieces of goods.
 
 **Decided (do not reopen):** rules 1–8 above; the three roles; that the
 newer library rule wins where two disagree (D-073 over the older "rage
-resets quickly"); the path change to `content/people/`.
+resets quickly"); the seams above.
 
 **Open, and yours to decide without asking** (the owner is asleep and has
 said not to wait for them: decide, mark `DRAFT:`, and for anything a
@@ -283,7 +312,7 @@ loop being on show in the street.
 - **Rung 5, because people are seen:** add `src/client/draw/npcs.ts`
   (called by one line in `src/client/render.ts`): the mood over each
   person's head (nothing for 1, `?` for 2, `!` and a red tint for 3), and
-  barks. Run the built server with a lab room as the start room **in
+  barks. Run the built server with the test room as the start room **in
   your working copy only**, screenshot it with Playwright at 320×180
   scaled up, for each mood, **look at the images**, and say in the commit
   what you saw. Revert the start room before committing.
@@ -299,8 +328,8 @@ loop being on show in the street.
   `docs/mechanisms/README.md` + `docs/mechanisms/npc-response.md`: the
   component shapes, the tables, system order, the deed list, how seeing
   works, the hooks left for slice 2); where code belongs
-  (`docs/architecture.md`: the two corrected rows, and "I need to add… a
-  role / a person / a rule / a deed"); `INTENT:` and `DRAFT:` at every
+  (`docs/architecture.md`: the NPC row corrected to what you built, and
+  "I need to add… a role / a person / a rule / a deed"); `INTENT:` and `DRAFT:` at every
   site named above; `docs/decisions-log.md` for what a player would see.
 - **Do not delete this brief or edit `docs/plan/step-4.md`**: the lead
   does both after review.

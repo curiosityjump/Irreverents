@@ -204,11 +204,14 @@ is fun; whether the shopkeeper being pleased to be robbed is funny.
   state is `entity.c.*`, the area alert included.
 - **Seams** (messages sent to both leads 04:35 UTC): Step 2 emits `hit`,
   `grabbed`, `thrown`; this step maps event types to deeds in data.
-  Step 2 took `content/placements/` for crates and dummies, so **people
-  are placed in `content/people/<room id>.json`** and spawned by a
-  system of this step. Pursuers walk and never jump, so any ledge is a
-  refuge without a special object. Following through a door waits for
-  Step 3's door.
+  Step 2 creates `content/placements/` and `populateRoom` (its push 1)
+  and hands the kind over; this step extends it with `npc`, `routine`
+  and bodiless `things`. A person's body is an ordinary character kind;
+  this step writes `entity.c.drive` (an `Input`) and one additive rule
+  in `systems/verbs.ts` lets a driven non-player use its verbs. Out
+  cold is Step 2's `c.flattened`. Pursuers walk and never jump, so any
+  ledge is a refuge without a special object. Following through a door
+  waits for Step 3's door.
 
 **Decided by the lead** (each `DRAFT:` at its site; the first three and
 the alert ones are in `docs/decisions-log.md`):
