@@ -4,7 +4,7 @@
 `src/content/kinds/outposts.ts`, `src/sim/outpost/`, the `outpost-*`
 systems, `src/client/draw/outpost.ts`, or the outpost room
 (`content/rooms/outpost.json` and its placements). Built by Step 12, slice
-A, 2026-11-23 (`docs/plan/step-12.md`).
+A, 2026-11-23 (`docs/plan-archive.md`, "Step 12").
 
 ## Why it exists
 

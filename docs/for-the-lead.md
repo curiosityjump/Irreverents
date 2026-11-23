@@ -143,12 +143,3 @@ actually read (questions for the owner go through
 **Flag:** the banner's "new" means "not in the first frame that had a world in it". If Step 1's network layer delivers the world over several frames, or re-delivers it after a reconnect, check that old records are not announced (several arriving in one frame are already ignored).
 
 **Flag:** rung 5 was by eye, on hand-made records pushed into the page's world; nothing scripted covers the drawing, and the real path (detector → pedestal → page, two devices) has not been seen. Text follows `draw/npcs.ts` (`fillText`, 8 px): readable, soft on a phone; a shared pixel font would be Step 5's or 8's call.
-
-### step-12-b-chase-and-clash.md, 2026-11-23, push 3 (slice B builder session_017WiGzFLgKMowRCLNbRRYiE)
-
-**Push 3 landed without the guard's swing.** With `attack` in `guard.json`, three Step 4 scenarios go red only because a guard now hits the hero in its charge: `step4-guard-follows-seen` (the chase's door ticks and positions), `step4-standing-in-view-is-seen` (ts-guard at x 205.67 at tick 1000, expected 335-360), `step4-street-call` (street-guard at x 168 at tick 3600, expected 200-250). My two chase scenarios moved too (the hero knocked off the route); they are mine to re-time once guards swing. To add it: `"verbs": ["move", "attack"]` and attack numbers under `tuning.json` `characters.guard` (I used the fighter's: strength 9000, reach 12, time 0.8, wear 20, windup 0.25, strike 0.067, recovery 0.2). Watch: in an even meeting the faster fighter lands first and cuts the guard's wind-up off every time, so a guard may need a quicker wind-up to ever win.
-
-**Flag: `clash-cool` was not added; it would change nothing.** `alert-cool` already holds `quiet` at 0 whenever any conscious person of the area sees any hero, and a hit "in a guard's view" means the guard sees the hero. The brief's premise (a wanted hero brawling with bandits in view cools normally) does not hold, so `step12-hit-in-view-keeps-alert` was not written.
-
-**Flag:** the optional extra guards on the route (to make `step12-chase-cap` checkable) were not placed: no time.
-

@@ -336,9 +336,7 @@ Full text: `docs/plan-archive.md`, "Step 11". Durable record: `docs/mechanisms/c
 
 ## Step 12 — The outpost and the chase
 
-**Status: open, claimed by session_017WiGzJTXQVCWQYDDmC2UiY, 2026-11-23.** (Opened 2026-11-23 14:25 UTC by orchestrator session_017WiGzGp8auJceLEAAh9Aqx for the same owner words (enemies, levels). It builds on what Step 4 has live (moods, calls, the alarm, a guard who chases through doors, hiding; gate D passes); Step 4's unfinished knock-out pieces are not needed first. Runs beside Step 8's look; one worker at a time. Earlier: Drafted from the library by an agent; its independent review did not run before the usage limit stopped it at 04:58 UTC. 2 of its 2 quoted pieces were found verbatim by script. Check its D-numbers and its "What's decided" against the library before briefing from it.)
-
-Full text: `docs/plan/step-12.md`
+**Closed 2026-11-23, 18:05 UTC.** A bandit camp behind a doorway in the courtyard: a lookout who sees you runs to a horn, and every finished call brings a wave of fighters (never more than 8 people in the room); you can sneak past on a high ledge, stop the lookout mid-call, break the horn or walk out. Its fighters fight heroes in any room. Guards who saw you go in follow you into the camp, two at most, and guards and the camp's people fight each other on sight. Guards' own swing (and re-timing four scenarios) is Step 18's; the camp's sprites are Step 8's. No owner question open; decisions in `docs/decisions-log.md`. Full text: `docs/plan-archive.md`, "Step 12". Durable record: `docs/mechanisms/outposts.md`, `docs/architecture.md` ("How to add an outpost").
 
 ## Step 14 — Things to find, and knowing there is more
 
