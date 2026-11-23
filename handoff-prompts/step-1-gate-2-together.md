@@ -174,6 +174,16 @@ By the lead, 2026-11-23 04:02–04:10 UTC, in a container like yours.
   with the body's state, say so; if it does not, that is a gap to close
   before Steps 2–4's work can be seen by a second player: tell the lead
   at once, with what it would take.
+  **Step 3's parts, as its lead describes them (04:53 UTC):** a plate is
+  pressed by any body resting on it, a gate opens while its plates are
+  pressed, a wall breaks when a body is about to hit it fast, a hiding
+  place marks a body standing still in it. All read only bodies'
+  positions and speeds. So **the server runs every system in `step()`
+  over its copies of the players' bodies too** (from their reports,
+  speeds included), **without those systems moving the players' copies**,
+  and its `World.rooms` is the truth pages receive; a device computes the
+  same parts locally from what it sees, and where the two disagree the
+  server's `World.rooms` wins.
 
 - **Two requests from the Step 7 lead (Hall of Legends), 04:45 UTC; small,
   and they shape the server.** (1) **One place where a room's world is
