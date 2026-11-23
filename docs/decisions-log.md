@@ -196,3 +196,31 @@ document as a decision of theirs.
 - **Why this way:** harder hits and slams wear a body down faster, so impact is what beats things (doc 08: "The target is not damage numbers"). Powers were in scope only once three heroes and grab/throw are solid; those come first tonight.
 - **To change it:** toughness is numbers in the tuning file; powers are a new piece of work.
 - **Where:** `docs/plan/step-2.md`, "Decided by the lead".
+
+### 2026-11-23 · A person notices you only if you are in front of them, fairly close, with no wall in between
+- **Decided by:** lead, Step 4, `session_017WiGzG4WzuJfHAu3XWoUhc`
+- **Instead of asking:** "What counts as being seen?" (your library leaves it open: "a simple event/raycast/cone/collider".)
+- **Why this way:** it is the simplest rule that makes sneaking a real choice: you can slip behind someone's back or use a wall. Someone you hit or grab always notices, whichever way they face.
+- **To change it:** numbers in the data file (how far, how tall); a different shape is small work.
+- **Where:** `docs/plan/step-4.md`, "Measure".
+
+### 2026-11-23 · A furious person calms down in two stages: hide long enough and they drop to merely upset; then one normal act puts them right
+- **Decided by:** lead, Step 4, `session_017WiGzG4WzuJfHAu3XWoUhc`
+- **Instead of asking:** "After the cooldown, are they instantly fine, or still wary?"
+- **Why this way:** your D-074: "Once heat drops below the violent threshold, regular role-conforming reassurance may apply." So the "Yup! Just as expected!" moment still gets played after an escape. Left alone, upset fades by itself after a while.
+- **To change it:** one line in the rules.
+- **Where:** `docs/plan/step-4.md`, "Measure".
+
+### 2026-11-23 · In the street a villain keeps coming by: he robs the shop (the shopkeeper is delighted to resist), later returns to buy a potion politely (the shopkeeper is horrified), then robs properly (relief)
+- **Decided by:** lead, Step 4, `session_017WiGzG4WzuJfHAu3XWoUhc`
+- **Instead of asking:** "May your shop vignette from the library be on show in the game, on a loop?" (The library labels it "an EXAMPLE of tone and mechanics, not an approved scripted mission".)
+- **Why this way:** it shows the three moods and "who is acting matters" without a word of explanation, it is what build gate C asks to see, and it is a placeholder, not canon (D-096).
+- **To change it:** his routine is a short list in a data file; delete him from the street's people file to remove it.
+- **Where:** `docs/plan/step-4.md`, "Measure".
+
+### 2026-11-23 · The alarm has levels 0 to 3; each finished call for help adds one; hiding unseen and doing nothing takes one off about every 20 seconds
+- **Decided by:** lead, Step 4, `session_017WiGzG4WzuJfHAu3XWoUhc`
+- **Instead of asking:** "How many wanted levels, and how long to hide?" (both open in your library; its 0-to-5 scale is labelled a proposal.)
+- **Why this way:** three is enough to feel it climb with the handful of guards a phone can show, and short waits suit a quick session with a friend. Fighting back while chased restarts the wait but does not add a level by itself: only a finished call adds one, which keeps your rule that nothing escalates without a real signal. Everyone in the party is wanted together.
+- **To change it:** numbers in the data file.
+- **Where:** `docs/plan/step-4.md`, "Measure".

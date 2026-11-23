@@ -187,7 +187,61 @@ is fun; whether the shopkeeper being pleased to be robbed is funny.
 
 ## Measure
 
+*(Lead `session_017WiGzG4WzuJfHAu3XWoUhc`, 2026-11-23 04:45 UTC, at `b3a419e`.)*
+
+- **Baseline:** `npm run check` green with 3 scenarios, none about
+  people; `npm run gates` 0 of 6. No NPC code or data exists.
+- **Read for the rule tables:** library docs 23, 26, 27 and 07 in full,
+  the register's D-041–D-077, doc 24's gates, mode logic and "no
+  omniscient response". **Not read:** doc 22 (the earliest of the five;
+  23, 26 and 27 each carry later owner corrections that override it).
+- **Nothing outside a player's own verbs can act yet.** Systems cannot
+  read events, the `verbs` system skips non-players, scenarios drive
+  players only. So slice 1 adds a readable `ctx.events`, its own
+  `interact` reader and scripted routines, and waits on nobody.
+- **State must ride on entities.** Step 1's server replicates entities
+  generically; a new `World` field might not travel. All of this step's
+  state is `entity.c.*`, the area alert included.
+- **Seams** (messages sent to both leads 04:35 UTC): Step 2 emits `hit`,
+  `grabbed`, `thrown`; this step maps event types to deeds in data.
+  Step 2 took `content/placements/` for crates and dummies, so **people
+  are placed in `content/people/<room id>.json`** and spawned by a
+  system of this step. Pursuers walk and never jump, so any ledge is a
+  refuge without a special object. Following through a door waits for
+  Step 3's door.
+
+**Decided by the lead** (each `DRAFT:` at its site; the first three and
+the alert ones are in `docs/decisions-log.md`):
+
+- *Seen* = same room, in front of the person, within about 7 tiles
+  across, no solid tile on the line between. The target of a deed always
+  perceives it.
+- Rage cools to distress, not straight to calm: after the cooldown an
+  expected act is what finishes the job (D-074's last sentence).
+- The villain's routine in the street is the library's own vignette (rob,
+  leave, come back and buy politely, then rob properly), looping, as a
+  placeholder (D-096; doc 23 labels it an example).
+- The alert scale is 0 to 3, one level per completed call; it falls one
+  level per stretch of hiding (about 20 s), and 1 or more is "the violent
+  level".
+- Hitting back during a chase restarts the wait and does not raise the
+  number: only a completed call raises it (doc 27 leaves this open).
+- A report names the heroes as a party; every hero is wanted together
+  (D-065 wants witnesses to identify the attacker; with one shared party
+  tonight there is one thing to identify).
+- Missing goods are not noticed by themselves tonight; a person has to
+  see the taking.
+
+**The cut:** slice 1, people with three moods (gate C, signals 1, 1b,
+2); slice 2, the bell, the call, the alert, responders and hiding (gate
+D, signals 3, 4, 5), started when slice 1's foundation is on `main`;
+slice 3, into the real street and live, following through doors, the
+guard's whistle. The villain's own horn and reinforcement waves are left
+for later, as the step suggests.
+
 ## Briefs
+
+- `handoff-prompts/step-4-slice-1-moods.md` (written 04:45 UTC).
 
 ## Open with the owner
 
