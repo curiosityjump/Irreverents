@@ -250,9 +250,11 @@ for later, as the step suggests.
   `session_017WiGzFBg5B72dx48zdiZh9`, launched 04:35 UTC; its part 1
   (the foundation) is due about 05:20, the rest about 06:45.
 - `handoff-prompts/step-4-slice-2-alarm.md`: the bell, the call, the
-  alert, responders, hiding and cooling; gate D. **Held** until slice
-  1's part 1 is on `main` and re-run by the lead; then launched with the
-  canonical spawn call (`docs/lead-session.md`).
+  alert, responders, hiding and cooling; gate D. Launched 04:52 UTC,
+  after slice 1's part 1 landed at `a501061` (04:46) and the lead
+  re-ran it: build and check green; control: the villain's polite
+  purchase made "expected" fails `step4-villain-buys-politely`. Not
+  re-verified by the lead: sight through walls, anything on screen.
 - Slice 3, not yet written: the people into Step 3's castle street and
   live, following through a door, the knocked-out-caller and door
   controls, the guard's whistle.
