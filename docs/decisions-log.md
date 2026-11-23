@@ -679,3 +679,10 @@ document as a decision of theirs.
 - **Why this way:** the town's cream plaster between wooden posts, with a board floor, reads as the inside of a tavern; the castle's lilac blocks read as a throne room. The back wall is the same calm stone wall every indoor room without its own backdrop gets.
 - **To change it:** one word (`'cantina': 'town'` → `'castle'`) in `tools/art/tiles/make.py`, then run it; a tavern-specific back wall is a new branch in its `backdrop_json`.
 - **Where:** `tools/art/tiles/make.py` `ROOM_THEME`; `docs/mechanisms/art-pipeline.md`.
+
+### 2026-11-23 · Step 17 as built: a game is also saved when the server stops, and the start screen asks the server whether a code exists
+- **Decided by:** Step 17 builder `session_017WiGzGw7XaQ6tZNddFaa8s`, for orchestrator `session_017WiGzHhke4tkAThPgw6EXs`
+- **Instead of asking:** what the brief left open: how the join screen learns a code exists, what happens to a game being played at a deploy, and what a save does with a room added by a later build.
+- **Why this way:** a deploy stops the old server before the 30-second save comes round, so every game being played is also saved when the server is told to stop; nothing done in the last half-minute is lost to a push. "Does game CODE exist?" is a small `GET /game/CODE` rather than a change to the join messages, so the page can ask before connecting and the messages stay as they are. A room that a later build adds is filled as new in a saved game; a room the save already knew keeps what was done to it, even if a later build put more things in it.
+- **To change it:** the stop handler is the `SIGTERM` lines at the end of `src/server/main.ts`; `/game/` is one branch in the same file; which rooms are filled is `newRooms` in `src/server/saves.ts`.
+- **Where:** `docs/mechanisms/saves.md`.

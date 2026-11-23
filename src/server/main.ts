@@ -7,6 +7,8 @@ import path from 'node:path';
 import { createErrorLog, ERROR_BODY_MAX, ERRORS_KEPT } from './errors.ts';
 import { attachGame } from './game.ts';
 import type { Game } from './game.ts';
+import { isGameCode } from './saves.ts';
+import { openStore } from './store.ts';
 
 // INTENT: /healthz keeps exactly these three field names (ok, commit,
 // startedAt). docs/measures.md M1 reads them to tell which push is live;
@@ -26,8 +28,8 @@ const startedAt = new Date().toISOString();
  * written there would vanish on the next deploy.
  * The raw facts are each their own field too (variableSet + path, nameSet +
  * name, writable, differentDevice), so a reader can judge for themselves.
- * INTENT: report only. Nothing is stored yet; Step 7's Hall records are the
- * first user.
+ * Step 17: the store (below) keeps saved games there; Step 7's Hall
+ * records will be its second user.
  */
 function storageStatus(): {
   mounted: boolean;
@@ -60,6 +62,10 @@ function storageStatus(): {
 }
 // Checked once at start: Railway mounts a volume when the server starts.
 const storage = storageStatus();
+// INTENT: the directory is Railway's own mount path, and only when it is
+// a real attached volume. Never a hard-coded "/data". (Step 7 adds the
+// Hall's collection to this same store: src/server/store.ts, the comment at the top.)
+const store = openStore(storage.mounted ? storage.path : null);
 
 // The bundle is dist/server.cjs and the client is dist/public, so the public
 // directory is found relative to the running file, never the working directory.
@@ -92,7 +98,15 @@ const server = http.createServer((req, res) => {
   const url = new URL(req.url ?? '/', 'http://x');
   if (url.pathname === '/healthz') {
     // `errors`: how many reports pages have sent since the start (additive; see /debug/errors).
-    send(res, 200, 'application/json', JSON.stringify({ ok: true, commit, startedAt, storage, ...game?.counts(), errors: errorLog.count() }));
+    // `store` (Step 17, additive): what the store keeps and anything that went wrong with it.
+    send(res, 200, 'application/json', JSON.stringify({ ok: true, commit, startedAt, storage, store: store.status(), ...game?.counts(), errors: errorLog.count() }));
+    return;
+  }
+  // Step 17: "does game CODE exist?", for the start screen's Join a friend.
+  // DRAFT: answers only that; anyone may ask (friends, no accounts).
+  if (url.pathname.startsWith('/game/') && req.method === 'GET') {
+    const code = url.pathname.slice('/game/'.length).toUpperCase();
+    send(res, 200, 'application/json', JSON.stringify({ code, valid: isGameCode(code), exists: !!game?.gameExists(code) }));
     return;
   }
   if (url.pathname === '/debug/errors') {
@@ -151,7 +165,20 @@ const server = http.createServer((req, res) => {
 
 // The network layer (docs/mechanisms/network.md). /healthz adds its counts
 // (worlds, players) beside the fields above; additive.
-game = attachGame(server, { content: __CONTENT__, commit, startedAt });
+game = attachGame(server, { content: __CONTENT__, commit, startedAt, store, problem: (m) => errorLog.note(m) });
+
+// Step 17: a deploy stops this process (SIGTERM) before the new one starts:
+// every game being played is saved first, so nothing since the last
+// 30-second save is lost. Then the process ends as it would have.
+for (const signal of ['SIGTERM', 'SIGINT'] as const) {
+  process.once(signal, () => {
+    try {
+      game?.saveAll();
+    } finally {
+      process.exit(0);
+    }
+  });
+}
 
 const port = Number(process.env.PORT) || 3000;
 server.listen(port, '0.0.0.0', () => {

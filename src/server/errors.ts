@@ -14,7 +14,7 @@
 export interface ErrorReport {
   /** When the server received it. */
   at: string;
-  /** error, rejection, load (a script or image that failed to load) or socket. */
+  /** error, rejection, load (a script or image that failed to load) or socket; `server` for the server's own (Step 17). */
   kind: string;
   message: string;
   stack: string;
@@ -39,6 +39,11 @@ export interface ErrorLog {
   list(): ErrorReport[];
   /** How many were received since the server started (the list holds the newest ERRORS_KEPT). */
   count(): number;
+  /**
+   * Step 17 (additive): the server's own line (kind `server`), e.g. a saved
+   * game that no longer fit the content. Same rule: no personal data in it.
+   */
+  note(message: string): void;
 }
 
 export function createErrorLog(now: () => number = Date.now): ErrorLog {
@@ -79,6 +84,11 @@ export function createErrorLog(now: () => number = Date.now): ErrorLog {
       if (kept.length > ERRORS_KEPT) kept.shift();
       total++;
       return true;
+    },
+    note(message) {
+      kept.push({ at: new Date(now()).toISOString(), kind: 'server', message: text(message, 500), stack: '', build: '', screen: { w: 0, h: 0, dpr: 0 }, upright: false, ua: '' });
+      if (kept.length > ERRORS_KEPT) kept.shift();
+      total++;
     },
     list: () => kept.slice(),
     count: () => total,

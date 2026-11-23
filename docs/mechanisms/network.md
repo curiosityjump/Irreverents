@@ -51,7 +51,9 @@ with a throwaway entity kind on every `npm run check`).
 - **Worlds.** Everyone who opens the address is in the world `main`;
   `?room=<name>` is another, separate one. A private world is forgotten
   when its last player is gone; **`main` never is** while the server runs
-  (what was done to its rooms stays done, D-077).
+  (what was done to its rooms stays done, D-077). A world named
+  `game-<CODE>` is a kept game (Step 17, `docs/mechanisms/saves.md`):
+  saved before it is forgotten, and built from that save in `makeWorld`.
 - **The whole `World` is replicated, not only `entities`.** Every other
   top-level field (`rooms`: a gate open, a wall broken; whatever a step
   adds next) is the server's, sent in every snapshot and copied by key

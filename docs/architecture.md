@@ -107,10 +107,11 @@ content *types* and the small pure constants beside them, such as `TILE`.)
   the game runs, and the deploy reads nothing from `content/` at run time.
 - **Lasting records are the store's and nothing else's**
   (`src/server/store.ts`; next section). No database, no accounts. The
-  world itself is still not saved: a restart is a fresh world, into which
-  the server puts back what the store kept. As of 2026-11-23 the store
-  exists and nothing opens it yet; the Hall's records are its first user
-  once it is wired into the server (`docs/plan/step-7.md`).
+  server opens it at start (`src/server/main.ts`). Its first user is
+  saved games (Step 17, `docs/mechanisms/saves.md`): a world named
+  `game-<CODE>` is saved there and rebuilt from it; `main` and `?room=`
+  worlds are not saved, so a restart gives them a fresh world. The Hall's
+  records are next (`docs/plan/step-7.md`).
 - **No external services.** The server is one process on Railway; `/ws`
   is the network layer (`docs/mechanisms/network.md`): one `World` per
   named world on the server, and on each page a local world holding that

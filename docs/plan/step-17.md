@@ -92,3 +92,21 @@ leave, `src/server/main.ts` opening the store, `src/client/index.html`.
 
 - `handoff-prompts/step-17-start-and-saves.md` (written 2026-11-23 16:00 UTC by orchestrator
   `session_017WiGzHhke4tkAThPgw6EXs`), held by builder `session_017WiGzGw7XaQ6tZNddFaa8s` (spawned 15:51 UTC).
+
+## Builder notes
+
+Step 17 builder `session_017WiGzGw7XaQ6tZNddFaa8s`, 2026-11-23.
+
+- **Push 1 (saves, server).** `CLAUDE.md` "Architecture at a glance" says
+  "Nothing is persisted": false from this push (saved games). Left for the
+  orchestrator, as the brief says.
+- Doubt: `/healthz` `store.collections` lists every game code opened since
+  the start, so anyone reading `/healthz` can see live codes. The brief asked
+  for `store.status()` there; friends, no accounts, so left as asked.
+- Doubt: a game whose save knew a room keeps that room's bodies as saved,
+  so a placement a later build adds to an *existing* room never appears in
+  an existing save (only a wholly new room is filled). Small change in
+  `saves.ts` `load` if the owner wants new things to show up in old games.
+- Not verified on live: the SIGTERM save at a real Railway deploy (verified
+  locally against `dist/server.cjs` with a tmpfs as the "volume": killed with
+  a player in, the save was written at the kill).

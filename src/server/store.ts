@@ -5,9 +5,10 @@
 // Rules and how another step uses it: docs/architecture.md, "Lasting
 // records: the store". Proof: `node scripts/check-store.ts`.
 //
-// Nothing imports this file yet (Step 7 slice A, 2026-11-23). Wiring it
-// into src/server/main.ts waits for Step 1's network layer; these are the
-// lines to paste there, in this order (DRAFT: names follow slice B's brief,
+// Step 17 opened the store in src/server/main.ts (the `openStore` and
+// /healthz lines below are pasted there) for saved games
+// (src/server/saves.ts). Step 7 still adds the Hall lines, to that same
+// `store`, in this order (DRAFT: names follow slice B's brief,
 // `restoreHall` and the `hall-legend` event; check them against
 // src/sim/hall/ when pasting):
 //

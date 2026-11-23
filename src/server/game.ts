@@ -13,6 +13,8 @@ import { applyChange, applyTuningDiff, refuseChange, tuningDiff, tuningRules } f
 import { DT } from '../sim/types.ts';
 import type { Entity, Input, SimEvent, World } from '../sim/types.ts';
 import { createWorld, findEntity, NO_INPUT, populateRoom, removeEntity, spawnPlayer } from '../sim/world.ts';
+import { createSaves, GAME_PREFIX, gameCode, isGameCode, SAVE_EVERY_MS } from './saves.ts';
+import type { Store } from './store.ts';
 
 interface Player {
   id: string;
@@ -46,12 +48,26 @@ export interface GameWorld {
    * shared content. INTENT: one world's dials never move another's.
    */
   content?: Content;
+  /** Step 17: a kept game's code (the world is `game-<code>`), else absent. */
+  game?: string;
+  /** Step 17: when this game was last saved (ms). */
+  savedAt?: number;
 }
 
 export interface GameOptions {
   content: Content;
   commit: string;
   startedAt: string;
+  /**
+   * Step 17 (additive): where kept games are saved (src/server/saves.ts).
+   * Absent: no world is ever saved or loaded (the in-process checks that
+   * predate it).
+   */
+  store?: Store;
+  /** Step 17: something about a save that a person should know (src/server/main.ts sends it to /debug/errors). */
+  problem?: (message: string) => void;
+  /** Step 17: how often a game is saved while anyone is in it (ms); SAVE_EVERY_MS unless a check says otherwise. */
+  saveEveryMs?: number;
 }
 
 function cleanInput(raw: unknown): Input {
@@ -68,6 +84,13 @@ export function attachGame(server: http.Server, opts: GameOptions) {
   const net = content.net;
   const worlds = new Map<string, GameWorld>();
   const rules = tuningRules(content);
+  const saves = opts.store ? createSaves(opts.store, { content, commit: opts.commit, problem: opts.problem ?? ((m) => console.error(`saves: ${m}`)) }) : null;
+  const saveEveryMs = opts.saveEveryMs ?? SAVE_EVERY_MS;
+  const saveGame = (gw: GameWorld): void => {
+    if (!saves || !gw.game) return;
+    saves.save(gw.game, gw.world);
+    gw.savedAt = Date.now();
+  };
 
   const send = (sock: WebSocket | null, m: ServerMessage | string): void => {
     if (sock && sock.readyState === sock.OPEN) sock.send(typeof m === 'string' ? m : JSON.stringify(m));
@@ -79,8 +102,18 @@ export function attachGame(server: http.Server, opts: GameOptions) {
    */
   const makeWorld = (name: string): GameWorld => {
     const gw: GameWorld = { name, world: createWorld(), players: new Map(), owed: 0, events: [] };
-    // Whatever content/placements/ puts in each room (crates, dummies, people).
-    for (const roomId of Object.keys(content.rooms)) populateRoom(gw.world, content, roomId);
+    // Step 17: a kept game (`game-<CODE>`) with a save is built from it; a
+    // new code, `main` and every `?room=` world start fresh, as before.
+    const code = saves ? gameCode(name) : null;
+    const saved = code ? saves!.load(code) : null;
+    if (code) {
+      gw.game = code;
+      gw.savedAt = Date.now();
+    }
+    if (saved) gw.world = saved.world;
+    // Whatever content/placements/ puts in each room (crates, dummies, people);
+    // for a loaded game, only in rooms its save never knew.
+    for (const roomId of saved ? saved.newRooms : Object.keys(content.rooms)) populateRoom(gw.world, content, roomId);
     return gw;
   };
 
@@ -103,7 +136,12 @@ export function attachGame(server: http.Server, opts: GameOptions) {
     // runs: what players did to its rooms stays done when the last one
     // leaves (World.rooms is "never reset when a room empties", D-077).
     // DRAFT: it keeps being simulated while empty.
-    if (gw.players.size === 0 && gw.name !== DEFAULT_WORLD) worlds.delete(gw.name);
+    // Step 17: a kept game is saved first, then forgotten like any private
+    // world; joining it again builds it from that save.
+    if (gw.players.size === 0 && gw.name !== DEFAULT_WORLD) {
+      saveGame(gw);
+      worlds.delete(gw.name);
+    }
   };
 
   // INTENT: "while a character is held or flying from a hit, the server's
@@ -335,6 +373,8 @@ export function attachGame(server: http.Server, opts: GameOptions) {
         if (!p.sock && p.staleAt !== null && now >= p.staleAt) removePlayer(gw, p);
       }
       if (!worlds.has(gw.name)) continue;
+      // DRAFT (Step 17): a kept game is saved every saveEveryMs while anyone is in it.
+      if (gw.game && gw.players.size > 0 && now - (gw.savedAt ?? 0) >= saveEveryMs) saveGame(gw);
       gw.owed += elapsed;
       while (gw.owed >= DT) {
         tickWorld(gw, now);
@@ -373,6 +413,12 @@ export function attachGame(server: http.Server, opts: GameOptions) {
         worlds: worlds.size,
         playersEverywhere: [...worlds.values()].reduce((n, gw) => n + connected(gw), 0),
       };
+    },
+    /** Step 17: whether a kept game with this code exists (being played now, or saved). */
+    gameExists: (code: string): boolean => isGameCode(code) && (worlds.has(GAME_PREFIX + code) || !!saves?.has(code)),
+    /** Step 17: save every kept game being played now (the server is being stopped). */
+    saveAll: (): void => {
+      for (const gw of worlds.values()) if (gw.game) saveGame(gw);
     },
     close(): void {
       clearInterval(timer);

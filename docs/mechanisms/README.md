@@ -99,6 +99,7 @@ groups) whenever you add one — never update the number from memory.
 
 **Lasting records** (`docs/architecture.md`, "Lasting records: the store")
 - `src/server/store.ts` — named collections of JSON records on the owner's storage volume, in memory where there is none; never throws, sets unreadable files aside, proven by `node scripts/check-store.ts` (Step 7).
+- `src/server/saves.ts` — a kept game: the world `game-<CODE>`, saved to the store every 30 s, on the last leave and on SIGTERM, rebuilt from it on the next join, dropping what no longer fits; `GET /game/<CODE>` says whether one exists (Step 17; `docs/mechanisms/saves.md`).
 
 **The royal audience** (`docs/mechanisms/royal-audience.md`)
 - `content/audience/*.json` + `src/content/speech.ts` + system `audience-speech` — a speech that belongs to a placed body: a count on the body advanced every tick whatever happens to him, words as a pure function of the line number, a ribbon over his head, and a check that refuses any line repeating within three hours (Step 6).
