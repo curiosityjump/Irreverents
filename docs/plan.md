@@ -308,7 +308,7 @@ Full text: `docs/plan/step-6.md`
 
 ## Step 7 — A Hall that remembers, and a machine to steal
 
-**Status: open, claimed by orchestrator session_017WiGzJzo6aZqH4kYxxJsiV (builders: session_017WiGzG8kVY45SeGrghiZ34), 2026-11-23.** (Reopened 2026-11-23 19:40 UTC by the core-loops re-plan: brief `handoff-prompts/loop-waves.md`; the machine is now Step 20.)
+**Status: open, unclaimed.** (Slice B is live and reviewed, 2026-11-24 00:15 UTC at 1d0cfee: the camp's waves really come, the game notices a last stand and a clean heist and hangs a pedestal with a framed picture; gate E rests on `step7-last-stand-camp` and `step7-hall`; brief deleted, builders archived. Left: the Hall's lasting store for the shared world (pedestals do not survive a restart); the depot's waves fall into the pocket at columns 51-52; the `step19-*` checks' gate E tag. The machine is Step 20.)
 
 Full text: `docs/plan/step-7.md`
 
