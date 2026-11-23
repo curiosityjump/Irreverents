@@ -126,38 +126,3 @@ actually read (questions for the owner go through
 **Note:** taste, for the owner's list: whether a throw makes them say "OHH"; how long the freeze on impact should be (`beatTime`, `hitBeatTime`); how far things fly (`maxLaunchSpeed` 520, the strengths); whether friends should be able to hurt each other; whether three seconds flattened is right; carrying overhead.
 
 **Flag:** the brief asked for ground friction on every body with no `move` verb. Built narrower: friction and drag apply only to a body that is flying or flattened, and a body that cannot run is stopped when its flight ends. The broader rule broke Step 3's `step3-guard-follows` (a guard given a starting `vx` of 60 is expected to keep it through a door), and that scenario is its owner's. Seen from play the two rules are the same: nothing in the game moves a crate or a dummy except a hit, a throw or a shove.
-
-### step-4-slice-1-moods.md, 2026-11-23
-
-**Flag:** `interact` ("Use", key E) has no touch control. It is one more file in `content/actions/`, so whoever builds the touch layout from that list (Step 1 Gate 2 / Step 5) should pick it up, but nobody has checked that on a phone, and buying and taking are impossible on an iPhone until it does. Not mine to build (`src/client/**`).
-
-**Flag:** `npc-interact` keeps `c.interact` on the player's own entity and changes a thing's `takenBy`. If Step 1's netcode has each phone simulate only its own character, the server must still run this system for every player or a take never reaches the other phone. Not checked: the netcode is not on main.
-
-**Flag:** the brief said `entity.c.drive` and a rule of mine in `systems/verbs.ts`; Step 2 had landed `entity.c.input` and the rule, so people write `c.input` (one helper, `drive()` in `src/sim/npc/state.ts`). `docs/plan/step-4.md` still says `c.drive` (yours to edit).
-
-**Flag:** a blow that knocks a person out is not perceived by them. Step 2's hits landed while I worked, so `step4-hero-hits-shopkeeper` uses a real one: the first hit distresses the shopkeeper through the `events` table. A second hit knocked the shopkeeper out (a body with no toughness number gets the world default), and because someone out cold sees nothing, that hit had no witness but the villain and never became rage; the shopkeeper wakes still only distressed, clocks frozen meanwhile. Left as it is: knocked-out people are slice 2's, and the shopkeeper's toughness is Step 2's number. `grab` and `throw` rows were exercised only with made-up events in a scratch script.
-
-**Flag:** Step 2's `event` fact gained a `where` filter while I was writing `event-where`, so there are now two ways to say nearly the same thing. Mine compares whole values (`"witnesses": []`); I did not check whether theirs does. Worth folding into one later; not touched, the fact is theirs.
-
-**Note:** `deed.witnesses` lists everyone who perceived the deed, whether or not they care: the villain is in the list for a hero's take and stays in mood 1. Slice 2 should decide who reports from mood, not from the list alone.
-
-**Note:** my scenarios play `"character": "hero"` and pin exact ticks (the villain robs at 168 and buys at 2962; rage cools at 1150). They move if the `hero` tuning set, the three people's walk numbers or the test-shop routines change. `node scripts/trace.ts <id>` prints only bodies; moods are easiest read from the failure message of a `mood` fact, which lists every mood change in the run.
-
-**Note:** rung 5 was looked at in a desktop-sized headless page (960 px wide, canvas scaled 3x), not at phone size. The marks read clearly; the 8 px bark text is soft but legible there.
-
-### step-7-a-store-and-pedestal.md, 2026-11-23 (part 2, the pedestal)
-
-**Flag:** "Not saved" needs a signal the page can read. `draw/hall.ts` shows the line when a pedestal carries `c.hall.lasting === false`. Owed at wiring: the server sets it on every pedestal when `store.lasting` is false, and slice B's `Components.hall` gains `lasting?: boolean` (one optional field). Until then the line never shows.
-
-**Flag:** `content.hall` and the `pedestal` character kind were not on `main` when I finished, so the card's words were only seen through their fallbacks (ids as words), and the pedestal body in my screenshots was a stand-in kind added inside the page. `hall.ts` reads `content.hall.kinds[id].name` and `content.hall.stats[id].label` loosely; if slice B named them otherwise, the ids show instead. Worth one look at the real page once slice B's content lands.
-
-**Flag:** `render()` is not given the local player, so any player's character at a pedestal opens the card on every screen showing that room (`DRAFT:` at the site).
-
-**Flag:** the banner's "new" means "not in the first frame that had a world in it". If Step 1's network layer delivers the world over several frames, or re-delivers it after a reconnect, check that old records are not announced (several arriving in one frame are already ignored).
-
-**Flag:** rung 5 was by eye, on hand-made records pushed into the page's world; nothing scripted covers the drawing, and the real path (detector → pedestal → page, two devices) has not been seen. Text follows `draw/npcs.ts` (`fillText`, 8 px): readable, soft on a phone; a shared pixel font would be Step 5's or 8's call.
-
-
-### step-7-a-store-and-pedestal.md, 2026-11-23 (after both parts)
-
-**Note:** your 04:50 message (Step 1's two notes for the paste comment in `store.ts`) reached me after both pushes. The comment already says "where the world is created" and "where a tick's events are handled", which matches; it does not say that worlds are made per room name on demand and all read the one store. I did not push a comment-only change to `src/`, because it would take the live game down for a minute. Add those words when the wiring edit touches the file anyway.

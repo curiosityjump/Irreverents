@@ -422,3 +422,15 @@ changed without touching code; don't grade the feel yourself.
   between devices is not on `main` yet. Worker reported its e2e facts
   (a)–(h) and gate F passing locally at 04:33 against the original
   brief; unverified by the lead.
+
+- **Lead `session_017WiGzEwLs3ng2ZPpRZgctn`, 08:33 UTC: Gate 2 did not
+  land; restarting it.** The account's usage limit stopped every session
+  at about 04:57 UTC until 08:20. The Gate 2 worker
+  (`session_017WiGzGmZK2vRuZTfKA24QD`) had nothing of the network layer
+  on `main` (only the effect names, cbe516f); its working tree may still
+  hold the rest. It has been asked to say whether that work survived and
+  to land it in four small pushes (the brief's new section 0). If it does
+  not answer by 08:37 or the work is gone: archive it and launch a fresh
+  worker on the same brief. Live is still the keyboard-only page
+  (4a13056). The 06:30 budget is void; the orchestrator's stopping
+  condition (finished work only from 10:00 UTC) still stands.

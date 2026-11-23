@@ -307,8 +307,8 @@ for later, as the step suggests.
   hiding places: a body with `c.roomHide` is to be treated as unseen.
   Not yet read or re-run by me.
 - **Lead, 04:55 UTC. Slice 1's flags, routed** (its eight entries in
-  `docs/for-the-lead.md` were deleted by another lead's cleanup, 6fe5d2b,
-  and recovered from the diff): `interact` has no checked touch control,
+  `docs/for-the-lead.md`; I first misread the file as emptied by another
+  lead, which was wrong, see `docs/process-observations.md`): `interact` has no checked touch control,
   and the server must run `npc-interact` with each player's held actions
   (both sent to the Step 1 lead; **live until someone presses Use on a
   phone-sized page**); the blow that knocks someone out was not
@@ -317,3 +317,25 @@ for later, as the step suggests.
   test-shop scenarios pin ticks (in the mechanism doc's traps); two
   near-duplicate facts, `event` with `where` (Step 2's) and
   `event-where` (ours): fold into one when either is next touched.
+- **Lead, 08:35 UTC. HELD by the orchestrator.** Every session was
+  stopped by the account's usage limit at about 04:58 UTC. Slice 2's
+  worker (`session_017WiGzHFR7FTJpj44ENRzvm`) stopped ten minutes in,
+  while writing placeholder scenarios: nothing of it is on `main`, its
+  container is disconnected, and it was **not** relaunched or messaged
+  (the orchestrator's instruction; the allowance until 13:20 UTC goes to
+  what makes the game playable on a phone). Its plan, from its last
+  message, for whoever redoes it: new systems `npc-call` (55),
+  `alert-respond` (56), `alert-cool` (620) that overlay `c.input` after
+  `npc-act`; drawing in a new `src/client/draw/alert.ts`; its only edits
+  to slice 1's files are `rageMayCool()` and an optional `call` field
+  and a `bell` look on things. **When released, the order is slice 3
+  first, then slice 2** (the orchestrator, 08:30 UTC). Slice 3's brief
+  assumes slice 2's responders exist: before launching it first, cut it
+  to the placements, the villain's loop, hiding places and the
+  phone-sized look, and move following through doors and the street's
+  gate D scenarios to after slice 2. From other leads while stopped:
+  Step 1's Gate 2 brief (dcfa465) requires the Use control on the phone
+  page and the server passing each player's held actions to `step()`;
+  Step 6 creates `content/placements/throne-room.json` (plain bodies, no
+  `npc`) and will ask before adding a `king` role to `content/npcs/` and
+  `content/rules/`.

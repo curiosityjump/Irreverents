@@ -210,8 +210,8 @@ written into a charter (one incident).
 **Cause:** unknown (timers in the container appear not to run in real time).
 **Improvement:** tactical fix applied: polled `/healthz` and compared its `startedAt` and the commit times instead of trusting the script's own wait. Apparent: the script could print how long it actually waited, by the server's `startedAt` clock rather than its own timer.
 
-### 2026-11-23 · A lead's inbox cleanup deleted another step's unread entries (Step 4 lead)
-Six leads share `docs/for-the-lead.md`. Step 7's lead routed its own flags (6fe5d2b) and reset the Entries section, removing eight entries Step 4's worker had added one commit earlier (15cea88). The rule already exists (`docs/lead-session.md`, step 3: "Leave other steps' entries alone"). Caught only because the worker's message said it had written there and the file was empty; recovered with `git show 15cea88 -- docs/for-the-lead.md`. Cheap fix worth considering: one inbox file per step, or delete by heading, never by resetting the section.
+### 2026-11-23 · A lead read an empty-looking inbox and blamed another lead for deleting entries that were still there (Step 4 lead, corrected 08:35 UTC)
+I looked for my worker's flags in `docs/for-the-lead.md` by printing from the "## Entries" heading to "## Format", saw "(Empty. Append below.)", and concluded Step 7's cleanup (6fe5d2b) had removed them. It had not: entries are appended at the end of the file, after "## Format", and mine were at line 130 the whole time. I told the Step 7 lead and the orchestrator it had happened, and the orchestrator told every lead. The Step 7 lead checked the diff and was right. Cost: one wrong accusation and a wrong all-hands message. What would have prevented it: `grep -n '^### ' docs/for-the-lead.md` (enumerate, do not read a section), or `git show <commit> -- <file>` before saying what a commit did. The file's own layout invites it: a heading called "Entries" that says "Empty" above the real entries.
 
 ### 2026-11-23 · usage · orchestrator, first night
 
