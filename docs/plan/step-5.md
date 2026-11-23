@@ -149,7 +149,21 @@ site.
 
 ## Measure
 
+Lead `session_017WiGzJfkNbzJfpRVPhWoeK`, 09:00 UTC, `main` at b889437,
+local server, headless Chromium with touch. Whether the controls cover
+the view, by landscape size: 568×320 no; **667×375 (SE 2/3, 6/7/8) yes,
+the stick and all five buttons**; **736×414 (Plus) yes, all**; 750×340
+no; 844×390 no; 932×430 no. `npm run e2e` is green meanwhile: it looks
+only at 750×340 and upright 390×664. No error reporting exists; the
+button art is in the library mirror, not in `assets/`.
+
 ## Briefs
+
+- `handoff-prompts/step-5-a-phone-essentials.md` (running from 09:00
+  UTC, stops building at 10:10): no control hides the view on a 16:9
+  phone; the delivered button art; the page reports its own errors to
+  `/debug/errors`; a friend whose page went away looks away. Everything
+  else in this step waits until the owner has played.
 
 ## Open with the owner
 
