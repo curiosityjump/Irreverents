@@ -7,12 +7,20 @@ import type { ContentKind } from '../types.ts';
  * played from; the roster is everyone unlocked, party included. Every
  * roster character nobody is playing wanders the cantina
  * (docs/mechanisms/cantina.md).
- * DRAFT: the whole roster is unlocked; nothing in the world unlocks anyone
- * yet. One list for Step 13 (heroes you find and keep) too, never two.
+ * Step 13: `start` is who a new game has unlocked; the world's own list
+ * is World.roster (src/sim/roster.ts). One roster, never two.
  */
 export interface Roster {
   /** Character kind ids, in the order the cantina lists them. */
   characters: string[];
+  /**
+   * Step 13 (doc 05 "Players begin with a subset", doc 36): who a new
+   * shared world or a new kept game starts with unlocked; the rest are
+   * found in the world (content/recruits/). Every party member is in it.
+   * DRAFT: the canon three and the brawler, so the cantina always has
+   * someone to hit and to swap (D-085). Left out: everyone.
+   */
+  start: string[];
 }
 
 declare module '../types.ts' {
@@ -26,9 +34,14 @@ const kind: ContentKind = {
   source: { file: 'roster.json' },
   parse(raw, read) {
     const o = read.object(raw, '');
-    if (!o) return { characters: [] } satisfies Roster;
-    read.only(o, ['characters'], '');
-    const out: Roster = { characters: read.stringList(o, 'characters', '') };
+    if (!o) return { characters: [], start: [] } satisfies Roster;
+    read.only(o, ['characters', 'start'], '');
+    const characters = read.stringList(o, 'characters', '');
+    const out: Roster = { characters, start: o.start === undefined ? [...characters] : read.stringList(o, 'start', '') };
+    out.start.forEach((id, i) => {
+      if (out.start.indexOf(id) !== i) read.fail(`start[${i}]`, `"${id}" is listed twice`);
+      if (!characters.includes(id)) read.fail(`start[${i}]`, `"${id}" is not in the roster's characters (${characters.join(', ')})`);
+    });
     out.characters.forEach((id, i) => {
       if (out.characters.indexOf(id) !== i) read.fail(`characters[${i}]`, `"${id}" is listed twice`);
     });
@@ -41,6 +54,7 @@ const kind: ContentKind = {
     });
     content.party.members.forEach((id) => {
       if (!content.roster.characters.includes(id)) fail(file, 'characters', `"${id}" is in the party (content/party.json) but not in the roster: every party member is a roster character`);
+      else if (!content.roster.start.includes(id)) fail(file, 'start', `"${id}" is in the party (content/party.json) but not in the roster's start: a new game could not play it`);
     });
   },
 };

@@ -1,0 +1,15 @@
+{
+  "id": "step13-start-roster",
+  "proves": "a world started with the roster's start list (as a new shared world or a new kept game is) has a cantina regular only for the unlocked heroes nobody plays: the brawler wanders, the skirmisher (not yet found) does not, and switching still brings the old character's regular back",
+  "room": "cantina",
+  "placements": true,
+  "world": { "roster": ["grappler", "infiltrator", "flyer", "brawler"] },
+  "players": [{ "id": "a", "character": "grappler", "spawn": 0 }],
+  "inputs": [{ "player": "a", "from": 300, "to": 304, "hold": ["switch"] }],
+  "ticks": 480,
+  "expect": [
+    { "fact": "cantina", "room": "cantina", "between": [1, 300], "regulars": ["infiltrator", "flyer", "brawler"], "moved": 32 },
+    { "fact": "character", "player": "a", "at": 301, "is": "infiltrator" },
+    { "fact": "cantina", "room": "cantina", "between": [302, 480], "regulars": ["grappler", "flyer", "brawler"] }
+  ]
+}

@@ -21,7 +21,7 @@ export function parseScenario(raw: unknown, file: string, stem: string, content:
     fail('(the whole file)', `must be an object, but is ${describe(raw)}`);
     return null;
   }
-  const fields = ['id', 'gate', 'proves', 'room', 'players', 'entities', 'placements', 'placedRooms', 'tiles', 'inputs', 'ticks', 'expect'];
+  const fields = ['id', 'gate', 'proves', 'room', 'players', 'entities', 'placements', 'placedRooms', 'tiles', 'world', 'inputs', 'ticks', 'expect'];
   for (const key of Object.keys(raw)) {
     if (key !== '//' && !fields.includes(key)) fail(key, `unknown field (known fields: ${fields.join(', ')})`);
   }
@@ -106,6 +106,21 @@ export function parseScenario(raw: unknown, file: string, stem: string, content:
     else (raw.placedRooms as unknown[]).forEach((r, i) => (typeof r === 'string' && r in content.rooms ? placedRooms.push(r) : fail(`placedRooms[${i}]`, `no room ${JSON.stringify(r)} (rooms: ${known(content.rooms)})`)));
   }
 
+  // Step 13: top-level world fields seeded before the start (world.roster, say).
+  let seed: Record<string, unknown> | undefined;
+  if (raw.world !== undefined) {
+    if (!isRecord(raw.world)) fail('world', `must be an object of top-level world fields, but is ${describe(raw.world)}`);
+    else {
+      seed = {};
+      for (const [key, value] of Object.entries(raw.world)) {
+        if (key === '//') continue;
+        if (['tick', 'entities', 'rooms'].includes(key)) fail(`world.${key}`, 'is not seeded here (players, entities, tiles and placements set those)');
+        else if (key === 'roster' && (!Array.isArray(value) || !value.every((k) => typeof k === 'string' && content.roster.characters.includes(k)))) fail('world.roster', `must be a list of roster characters (${content.roster.characters.join(', ')}), but is ${JSON.stringify(value)}`);
+        else seed[key] = JSON.parse(JSON.stringify(value));
+      }
+    }
+  }
+
   // Step 3: tiles changed before the start, standing in for a working part (a closed gate).
   const tiles: NonNullable<Scenario['tiles']> = [];
   if (raw.tiles !== undefined && !Array.isArray(raw.tiles)) fail('tiles', `must be a list, but is ${describe(raw.tiles)}`);
@@ -183,6 +198,7 @@ export function parseScenario(raw: unknown, file: string, stem: string, content:
     placements: raw.placements === true,
     ...(placedRooms.length ? { placedRooms } : {}),
     ...(tiles.length ? { tiles } : {}),
+    ...(seed ? { world: seed } : {}),
     inputs,
     ticks: ticksOk ? (ticks as number) : 1,
     expect: [],
@@ -243,6 +259,8 @@ export function entityInputsAt(scenario: Scenario, tick: number): Record<string,
 
 export function simulate(scenario: Scenario, content: Content): Recording {
   const world = createWorld();
+  // Step 13: seeded first, as makeWorld sets them before anyone joins.
+  if (scenario.world) Object.assign(world, JSON.parse(JSON.stringify(scenario.world)));
   for (const p of scenario.players) {
     if (p.joins) continue;
     const e = spawnPlayer(world, content, { player: p.id, character: p.character, room: p.room ?? scenario.room, spawn: p.spawn });

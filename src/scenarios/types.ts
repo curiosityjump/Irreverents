@@ -40,6 +40,12 @@ export interface Scenario {
   placements?: boolean;
   /** Step 11: more rooms whose own placements are put in the world too (populateRoom), as the server's world has every room's. */
   placedRooms?: string[];
+  /**
+   * Step 13: top-level World fields set before tick 0 (`roster`, say), as a
+   * server's makeWorld would start a world with them. Never `tick`,
+   * `entities` or `rooms` (those have their own fields).
+   */
+  world?: Record<string, unknown>;
   inputs: InputSpan[];
   /** How many ticks to run. */
   ticks: number;

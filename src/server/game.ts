@@ -161,8 +161,16 @@ export function attachGame(server: http.Server, opts: GameOptions) {
       gw.savedAt = Date.now();
     }
     if (saved) gw.world = saved.world;
-    // Whatever content/placements/ puts in each room (crates, dummies, people).
-    else for (const roomId of Object.keys(content.rooms)) populateRoom(gw.world, content, roomId);
+    else {
+      // Step 13 (docs/mechanisms/recruits.md): a new world people play in
+      // (everyone's kingdom, a new kept game) starts with the roster's
+      // `start` unlocked; the rest are found. DRAFT: a `?room=` world (made
+      // for checks) has no roster of its own, so it keeps everyone, and an
+      // old save without one keeps everyone too (src/sim/roster.ts).
+      if (name === DEFAULT_WORLD || code) gw.world.roster = [...content.roster.start];
+      // Whatever content/placements/ puts in each room (crates, dummies, people).
+      for (const roomId of Object.keys(content.rooms)) populateRoom(gw.world, content, roomId);
+    }
     return gw;
   };
 

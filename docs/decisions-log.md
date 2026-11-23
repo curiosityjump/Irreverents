@@ -968,3 +968,10 @@ document as a decision of theirs.
 - **Why this way:** the owner, playing: "no power/item stealing". The common power has to be felt by whoever takes it, and player one is the grappler, who already lifts and throws nearly everything. So the boost raises every hero to above the grappler: a hit sends a body across the screen and through a cracked wall, and Grab lifts the throne. The rare one is wings (lends flapping), because the quarry pit has a ledge nobody can reach. Library doc 24 offers "limited grab/speed variants" as examples. A power is laid over the hero's own moves and never replaces them (D-082).
 - **To change it:** each power is a file in `content/powers/` (its name, icon, numbers, lent verbs). Add a file to add a power.
 - **Where:** `docs/mechanisms/powers.md`.
+
+### 2026-11-23 · Step 13: a new game starts with the three heroes and the brawler; the skirmisher has to be found
+- **Decided by:** rescue builder (Step 13, brief `loop-rescue.md`), `session_017WiGzHfRkFts4Z3rb8RMqC`
+- **Instead of asking:** "Who is unlocked when a game starts, and do old games and test worlds lose anyone?"
+- **Why this way:** the owner, after playing: "There are no ... characters to unlock"; doc 05 "Players begin with a subset"; doc 36 (the canon three are the start); D-085 wants the cantina brawl full, so the brawler starts unlocked and the cantina always has someone to hit and to swap. Who is unlocked now belongs to each game and is kept with it (D-082). A game saved before tonight, and every private test world (`?room=`), keeps all five heroes: nobody loses anyone they had.
+- **To change it:** the `start` list in `content/roster.json`; whether test worlds get it is one line in `makeWorld` (`src/server/game.ts`).
+- **Where:** `docs/mechanisms/recruits.md`; `docs/plan/step-13.md`.

@@ -72,6 +72,10 @@ a file, edit no list. The first is `together` (gate F,
 - `"placedRooms": ["cantina"]` (optional, Step 11): more rooms whose own
   placements are put in the world too, as the server's world has every
   room's (the street's door reads the chase list the cantina's systems write).
+- `"world": { "roster": [...] }` (optional, Step 13): top-level World
+  fields set before tick 0, as the server's `makeWorld` starts a world
+  with them (`roster` must name roster characters). Never `tick`,
+  `entities` or `rooms`.
 - A player may carry `"joins": <tick>`: put in the world at the start of
   that tick, as a friend arriving later (Step 11), instead of before tick 0.
 - A player may carry `"power": "<power id>"` (Step 9): they hold that

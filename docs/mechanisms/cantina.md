@@ -24,9 +24,12 @@ middle of the cantina player can use to stop fights."*
   Push up to go through; nothing else uses them (a regular never pushes
   up, a thrown body never uses an enter door).
 - **`content/roster.json`**: every character a player could be, in
-  order. `DRAFT:` all unlocked. Must hold the party (`party.json`); the
-  two roster-only characters `brawler` and `skirmisher` are not in the
-  party (slice B brings them in by the swap).
+  order. Must hold the party (`party.json`); the two roster-only
+  characters `brawler` and `skirmisher` are not in the party (slice B
+  brings them in by the swap). Step 13: who is unlocked is the world's
+  (`World.roster`, absent is everyone; a new game starts with the
+  roster's `start`, which leaves the skirmisher to be found):
+  `docs/mechanisms/recruits.md`.
 - **`content/cantina/<room>.json`** (kind `src/content/kinds/cantina.ts`):
   `edge` (tiles; a body whose middle is outside is out), `pads`,
   `calmTime` (seconds; **0 = never**, which it is: the bell ends it),
@@ -42,8 +45,8 @@ middle of the cantina player can use to stop fights."*
   never grows regulars or counts a brawl twice. Proven by
   `scripts/checks/step11-cantina.ts` (control: guard removed, each page
   grows four regulars).
-- **Regulars** (`cantina-regulars`, order 20): one body per roster
-  character nobody plays, id **`cantina:<kind>`** (a contract; never
+- **Regulars** (`cantina-regulars`, order 20): one body per unlocked
+  roster character nobody plays, id **`cantina:<kind>`** (a contract; never
   renamed), **never `c.npc`**, so they witness nothing and a brawl raises
   no mood, call or alert (`step11-brawl-raises-nothing`; the same hit on
   a person upsets them: `step4-hero-hits-shopkeeper`). They act through

@@ -1,4 +1,5 @@
 {
-  "//": "DRAFT (Step 11): every character a player could play, in order. All unlocked: nothing in the world unlocks anyone yet. The party (party.json) must be in it. Each one nobody is playing wanders the cantina.",
-  "characters": ["grappler", "infiltrator", "flyer", "brawler", "skirmisher"]
+  "//": "DRAFT (Step 11, Step 13): every character a player could play, in order. `start`: who a new shared world or a new kept game has unlocked (doc 05, 'Players begin with a subset'); the rest are found in the world (content/recruits/) and kept for good (D-082). The brawler starts unlocked so the cantina always has someone to hit and to swap. The party (party.json) must be in `start`. Each unlocked one nobody is playing wanders the cantina; a world with no roster of its own (every ?room= world, every old kept game) has them all.",
+  "characters": ["grappler", "infiltrator", "flyer", "brawler", "skirmisher"],
+  "start": ["grappler", "infiltrator", "flyer", "brawler"]
 }

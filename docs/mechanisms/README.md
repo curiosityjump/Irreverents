@@ -102,6 +102,9 @@ groups) whenever you add one — never update the number from memory.
 **The cantina** (`docs/mechanisms/cantina.md`)
 - `content/roster.json` + `content/cantina/<room>.json` + systems `cantina-*` + `~cantina:<room>` — the endless brawl: one scripted regular per roster character nobody plays, a player's hit on one starts a free-for-all (`c.brawl`), past the edge or flattened is back on a pad at once with a knock-out/fall count, the owner's bell or the last player leaving ends it; nothing runs in a page's own world (Step 11).
 
+**Recruits** (`docs/mechanisms/recruits.md`)
+- `World.roster` + `content/roster.json` `start` + `src/sim/roster.ts` — the heroes unlocked in this game: absent means everyone (old saves, scenarios, `?room=` worlds); a new shared world or kept game starts with `start`; it only grows (Step 13).
+
 **The Hall of Legends** (`docs/mechanisms/hall-of-legends.md`)
 - `src/client/draw/hall.ts` — each pedestal's record redrawn as a small framed picture, a card with no button when a player stands at it, and a three-second banner for a newly hung one (Step 7).
 

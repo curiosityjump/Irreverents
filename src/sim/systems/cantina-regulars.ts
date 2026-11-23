@@ -1,6 +1,7 @@
 import type { CantinaPattern } from '../../content/kinds/cantina.ts';
 import { canAct, release, ticksOf } from '../body-state.ts';
 import { cantinasOf, hasBody, isRegular, padSpot, regularId } from '../cantina.ts';
+import { isUnlocked } from '../roster.ts';
 import { heldBy } from '../effects.ts';
 import { TICK_RATE } from '../types.ts';
 import type { Entity, Input, StepContext, System } from '../types.ts';
@@ -8,7 +9,8 @@ import { addEntity, findEntity, removeEntity } from '../world.ts';
 
 /**
  * The cantina's regulars (Step 11, D-083; docs/mechanisms/cantina.md): one
- * body per roster character nobody is playing, `cantina:<kind>`, in the
+ * body per unlocked roster character nobody is playing (Step 13,
+ * src/sim/roster.ts), `cantina:<kind>`, in the
  * cantina room. A player becoming that character takes its regular away;
  * nobody playing it any more brings it back on a pad. Each regular is
  * driven through the input any body takes (entity.c.input): its walking
@@ -35,7 +37,8 @@ const system: System = {
           if (e) leave(ctx, e);
           return;
         }
-        if (e || !content.characters[kind]) return;
+        // Step 13: only a hero unlocked in this world wanders in (world.roster; absent is everyone).
+        if (e || !content.characters[kind] || !isUnlocked(world, content, kind)) return;
         const at = padSpot(content, file, state.pad++, kind);
         addEntity(world, { id, kind, player: null, room: file.room, x: at.x, y: at.y, vx: 0, vy: 0, facing: -1, onGround: true, c: { regular: { step: 0, ticks: 0, stall: 0, lastX: at.x } } });
       });
