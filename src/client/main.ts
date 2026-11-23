@@ -126,6 +126,8 @@ const debug = {
     signalers: [] as ReturnType<typeof drawnSignalers>,
     /** Step 2, signal 6: every string drawn into the game picture this frame (draw/fx.ts, takeWords); the tuning panel and the page shell are HTML, not in it. */
     words: [] as string[],
+    /** Step 5: the impacts drawn this frame (dust, star, shake read them): which body, its tick and age on this page's clock, whether in its held beat, whether the page predicted it. */
+    impacts: [] as { id: string; tick: number; age: number; beat: boolean; predicted: boolean }[],
     /** Step 11: the open party row's chips and the brawl's counter, as drawn (src/client/draw/cantina.ts); the row in CSS pixels of the page, so a check can tap it. */
     /** Step 14 slice A: the level entrances this frame drew (art, name or none, pie) and the banner's name, if one is up (src/client/draw/levels.ts). */
     levels: { entrances: [], banner: null } as ReturnType<typeof drawnLevels>,
@@ -250,7 +252,8 @@ function play(worldName: string): void {
     // What this player sees: everyone else as received, their own character
     // last (drawn on top), on this page's clock.
     const seen: Drawn[] = [];
-    const shown = { ...net.world, entities: [...net.others(), me] };
+    const drawnBodies = [...net.others(), me];
+    const shown = { ...net.world, entities: drawnBodies };
     const camera = render(g, shown, content, me.room, { me: me.id, frame: frameNo, drawn: seen });
     const result = { camera, drawn: seen };
     lastCamera = camera;
@@ -293,6 +296,8 @@ function play(worldName: string): void {
     d.hud = drawnHud();
     d.banner = drawnBanner();
     d.words = takeWords();
+    // Step 5 (docs/mechanisms/network.md, "Predicted hits"): each impact this frame drew from, on this page's clock.
+    d.impacts = drawnBodies.filter((e) => e.c.impact && e.room === me.room).map((e) => ({ id: e.id, tick: e.c.impact!.tick, age: net.world.tick - e.c.impact!.tick, beat: !!e.c.beat, predicted: !!e.c.predicted }));
     {
       const c = drawnCantina();
       const r = canvas.getBoundingClientRect();

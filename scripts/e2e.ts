@@ -364,6 +364,8 @@ async function main(): Promise<void> {
     if (!LIVE) {
       // Step 2's facts (t-*, s-*): hit, grab, carry, throw and switch by touch, and what the other phone's screen shows (docs/mechanisms/combat-and-impact.md, "Across two phones").
       await (await import('./lib/e2e-touch.ts')).touchAndThrows({ browser, devices, base, out, fact, errors });
+      // Step 5's facts (hit-*): the hitter's own page draws its hit at once on a delayed connection; the other page as before (docs/mechanisms/network.md, "Predicted hits").
+      await (await import('./e2e/hit-lands.ts')).hitLandsFacts({ browser, devices, base, out, fact, errors });
       // Step 2's ?tune facts (tune-*): the feel dials by touch, and play following them on two pages (docs/mechanisms/tuning-panel.md).
       await (await import('./e2e/tune.ts')).tuneFacts({ browser, devices, base, out, fact, errors });
       // Step 12's facts (outpost-*): into the outpost by touch, and the horn post drawn working, then broken (docs/mechanisms/outposts.md).
