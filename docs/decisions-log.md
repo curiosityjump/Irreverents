@@ -508,3 +508,25 @@ document as a decision of theirs.
 - **Why this way:** so nobody waits on, or throws things at, a friend who is not there without knowing it. The character goes dim and gets three small dots over its head within a moment of the page going quiet (2.5 seconds of silence, or at once when the connection closes), and is itself again the moment they return. It still disappears after 15 seconds as before. No words on screen: dialogue and text stay minimal.
 - **To change it:** the look is one small file, `src/client/draw/away.ts`; the 2.5 seconds is `AWAY_SILENCE_MS` in `src/server/game.ts`; the 15 is `staleSeconds` in `content/net.json`.
 - **Where:** `docs/mechanisms/network.md`, "A page that went away".
+
+
+### 2026-11-23 · The game's pictures are being drawn by us, in code, instead of waiting for ChatGPT's asset desk
+- **Decided by:** orchestrator, Step 8, `session_017WiGzHX8g2sXimNRnqp2oZ`
+- **Instead of asking:** "The asset desk has delivered no characters you accepted and no tiles for the town. Wait for it, or make the art ourselves now?"
+- **Why this way:** you said the game looks like blocky shit and not to stop until it looks similar to Kirby & the Amazing Mirror. The desk works hourly and has delivered nothing since about 04:15 UTC, so waiting leaves rectangles on your screen all morning. Small drawing programs in the repository now make original characters, ground, skies and props in the style of your approved direction. Nothing is copied from Kirby or any other game (your own art gate). Every picture is a stand-in.
+- **To change it:** each picture is wired in as a data file (`content/sprites/`, `content/atlases/`); when the desk delivers a sheet you like, it replaces ours by changing that file. To stop our art altogether, delete those data files and the rectangles come back.
+- **Where:** `docs/plan/step-8.md`, "The look, from 2026-11-23 11:11 UTC".
+
+### 2026-11-23 · New looks are pushed to the live game as they are ready, even if you are in it
+- **Decided by:** orchestrator, Step 8, `session_017WiGzHX8g2sXimNRnqp2oZ`
+- **Instead of asking:** "Each update restarts the world for about a minute and your page rejoins by itself. Hold the new look until nobody is playing, or push it as it lands?"
+- **Why this way:** you asked for the look to be worked on without stopping, and you can only judge it by seeing it. Updates are batched into a few larger ones rather than many small ones, and each is fully checked first.
+- **To change it:** say "hold pushes while we play" and the earlier rule returns (no update while anyone is in the world).
+- **Where:** `docs/current-directive.md`, "The allowance".
+
+### 2026-11-23 · The look is being run by the orchestrator's own team of agents, not handed to a separate lead
+- **Decided by:** orchestrator, Step 8, `session_017WiGzHX8g2sXimNRnqp2oZ`
+- **Instead of asking:** "Run this the usual way (a lead, then workers) or directly?"
+- **Why this way:** you switched on multi-agent workflow mode in the same message that asked for the look, and a lead would spend its first half hour reading before any pixel changed.
+- **To change it:** release Step 8's claim in `docs/plan.md` and start a lead; everything it needs is in the step file.
+- **Where:** `docs/plan/step-8.md`, "The look".

@@ -67,3 +67,9 @@ wording when it rewrites an entry.
 - **Answer goes to:** `docs/plan/step-2.md` "What's decided"
 - **Source:** this entry; `docs/mechanisms/party-and-switching.md`, "known gaps"
 - **Blocking:** no
+
+### Asset need · The look comes first now: heroes, townspeople, town and castle ground, skies (for Vision Partner's asset desk; not a question for the owner)
+- **Asked by:** orchestrator, Step 8, `session_017WiGzHX8g2sXimNRnqp2oZ`, 2026-11-23 11:20 UTC, parent none
+- **The owner's words (to the orchestrator, first-hand, 2026-11-23 ~11:11 UTC, with an iPhone screenshot of the castle street):** "It all looks looks like absolute blocky shit. Compare to kirby and the amazing mirror and don't stop working on it until it looks similar to that. There are assets provided and you have the ability to get more." Recorded in `docs/plan/step-8.md`. This sounds vision-level for the visual direction; yours to fold into `docs/vision.md` if you read it that way.
+- **What is needed from the desk, most urgent first:** (1) the three party heroes (grappler, a tiny infiltrator, a flyer; collision boxes 18×30, about 10×14 and about 14×20; 32×32 cells): idle, run, jump, fall, attack, grab, carry, hurt, knocked out; the open C02 REVISION is still undelivered and is now BLOCKING; (2) the king, guard, shopkeeper and villain, each with the three moods; (3) 16 px ground for the town street, the castle interior and the grassy courtyard that joins up at edges and corners (top, sides, inner and outer corners, one-way ledge), plus doors, windows, banners, awnings, crates; (4) sky and far-distance layers for each, 320×180, made to scroll slower than the ground.
+- **Meanwhile:** the team is drawing original stand-ins in code so the owner is not left looking at rectangles; a delivery replaces a stand-in by a data change (`docs/decisions-log.md`).

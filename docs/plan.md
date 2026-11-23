@@ -285,7 +285,7 @@ Full text: `docs/plan/step-7.md`
 
 ## Step 8 — What you see and hear
 
-**Status: open, unclaimed — queued behind Step 5.** (Step 1 closed 08:55 UTC; held by the orchestrator for the usage allowance until Step 5's essentials land.)
+**Status: open, claimed by session_017WiGzHX8g2sXimNRnqp2oZ, 2026-11-23.** (Put first by the owner at 11:11 UTC: "don't stop working on it until it looks similar to that". Run by the orchestrator itself as workflow rounds; see the step file, "The look".)
 
 Full text: `docs/plan/step-8.md`
 

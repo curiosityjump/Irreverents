@@ -190,8 +190,12 @@ played the whole thing through, and no real iPhone has been tried. Live at
 **The allowance.** `rate_limit_info` (`get_session`, no id) read
 `allowed_warning`, `seven_day_overage_included`, at 10:36 UTC; it resets
 about 13:00 UTC. Until then: one worker at a time, only for what the owner
-asks for or a fault on live. **No code push while `/healthz` shows players
-above 0**; read `/debug/errors` before any code push (a deploy empties it).
+asks for or a fault on live. **From 11:11 UTC the owner put the look first** (`docs/plan/step-8.md`):
+Step 8 runs now, as the orchestrator's own workflow rounds, and its pushes
+go out as they are ready even with players in the world, batched and fully
+checked (`docs/decisions-log.md`). For anything else the earlier rule
+stands: no code push while `/healthz` shows players above 0. Read
+`/debug/errors` before any code push (a deploy empties it).
 
 **Sessions.** No lead is working. Step 5's lead
 `session_017WiGzJfkNbzJfpRVPhWoeK` is fresh and holds Step 5 for after the

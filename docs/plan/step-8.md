@@ -13,6 +13,13 @@
 **Owner (Drive, doc 11, D-096):**
 > All new creative assets, design proposals and prototype implementation decisions are APPROVED FOR IMMEDIATE USE BY DEFAULT. Claude and other builders should implement first and refine/replace later.
 
+**Owner, 2026-11-23 ~11:11 UTC (06:11 Eastern), to the orchestrator, first-hand, with a screenshot of the castle street on their iPhone held upright (plain rectangles for every character, flat grey platforms, the game a small strip at the top of the screen):**
+> It all looks looks like absolute blocky shit.
+> Compare to kirby and the amazing mirror and don't stop working on it until it looks similar to that. There are assets provided and you have the ability to get more.
+
+This reorders the step: the look comes first, now, ahead of everything
+else in the plan. See "The look, from 2026-11-23 11:11 UTC" below.
+
 Art and sound are being made through the night and land in the library a
 batch at a time. The other steps build with plain shapes and never wait;
 somebody has to put the real pictures and sounds in as they arrive, and
@@ -109,6 +116,46 @@ assigns them. Opens when Step 1 closes.
 
 All of it: whether each asset is good enough to stay, the look at phone
 size, the sounds. List what was used and what was sent back.
+
+## The look, from 2026-11-23 11:11 UTC
+
+Read with the owner's words at the top of this file.
+
+- **The bar** is the owner's approved direction
+  (`docs/design-library/03-visual-direction-and-assets/current-pixel-art-explorations/pixel-aesthetic-reference-approved-direction.png`)
+  and, at the size the game is really drawn, the two S00-01 phone
+  previews in `s00-01-gameplay-references-use-now-revise-later/`
+  (320×180): textured ground with grass on top, a sky with depth behind
+  it, round expressive characters with dark outlines and shading, props
+  that read as things. Plain rectangles anywhere a player looks are a
+  failure of this step.
+- **Similar to, not copied from.** The owner's own art gate (doc 32) and
+  this step's "What's decided" stand: no character, sprite, tile or
+  screen of Kirby's or any other game's is copied or traced. The likeness
+  is in the craft (palette, outlines, shading, roundness, readable
+  silhouettes, lively animation), on original designs.
+- `DRAFT:` **Art is drawn here, in code, until the asset desk delivers.**
+  ChatGPT's desk has delivered nothing since about 04:15 UTC and the
+  heroes it did deliver were rejected by the owner as "crude near-identical
+  geometric box figures". So the pictures are made by small drawing
+  programs kept in the repository (`tools/art/`), which write the image
+  files the game uses. Every one is a stand-in wired in as data: a
+  delivered sheet replaces it by changing a file, not code. The desk's
+  requests stay open and Vision Partner is asked for more
+  (`docs/questions-inbox.md`, "Asset need").
+- `DRAFT:` **Who runs it.** The orchestrator `session_017WiGzHX8g2sXimNRnqp2oZ` runs this
+  step directly, as rounds of a multi-agent workflow in its own session,
+  because the owner switched that mode on in the same message. No lead is
+  spawned for it (`docs/decisions-log.md`).
+- **Feedback signal for the look:** screenshots of the real game at
+  iPhone size (sideways and upright), put beside the references and read
+  by a fresh reviewer each round who lists the largest remaining gaps;
+  the round after fixes those. `npm run build`, `npm run check` and
+  `npm run e2e` stay green on every push. Whether it finally looks right
+  is the owner's, by looking.
+- **Stopping condition:** the owner says it looks right, or a round's
+  fresh reviewer finds no rectangle or flat fill left where a player
+  looks and no gap it would call large. Not a clock.
 
 ## Measure
 

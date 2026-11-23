@@ -6,7 +6,7 @@ QUALITY ACCEPTANCE OVERRIDE — READ FIRST
 
 Owner rejected the v1 artwork (rectangular bodies, virtually no real animation); rebuilding only the same boxy art with a scarf/hat is NOT a fix. Use the actual earlier approved original GBA sprite/art references and the new visual QUALITY GATE: https://docs.google.com/document/d/17OlSfBfTnUEUTmbo-zcsl4VrSn1mPny-zAP6kZaiodU/edit . Produce original polished designs with distinct personality, convincing expressive keyframes and verified native pixel grid at 320×180. Generate art-directed poses FIRST, then package; do not create code-only stickman drawings. Keep request in inbox until visual and technical tests pass. No owner pre-approval needed.
 
-STATUS: REQUESTED
+STATUS: IN PROGRESS — QUALITY REWORK
 
 TITLE: C02-02 / C02-03 REVISION — heroes v2
 
@@ -43,3 +43,7 @@ Reviewed the actual approved pixel-art board, character roster exploration, game
 2026-11-23 01:58 AM EST — REFERENCE AUDIT / STILL IN PROGRESS — QUALITY REWORK
 
 Opened and visually inspected the actual approved master board, earlier roster board, gameplay showcase and quiet grassy-ruins reference. The controlling character language is NOT a detailed animal mascot or an armored human: tiny iconic toy-like figures with compact round/squat forms, large plain expressive eyes, small short limbs, restrained costume/accessory detail, black/dark clean pixel outlines, a few deliberate shade clusters and bright but controlled colors. The roster board is an EXPLORATION (some designs are franchise-adjacent) rather than approved canonical characters. Preserve the visual grammar while designing ORIGINAL silhouettes. The earlier oversized goggle-animal/bunny concept still misses scale and sprite density, and must NOT be promoted to source art. Target ~20–30px-tall figures within 32×32 cells, one coherent game pixel density and quiet 320×180 platform background. Need real 6-phase runs and unique attack/grab/throw/hurt poses. No native transparent frame set has yet passed visual and technical checks. Keep request in inbox; do not deliver or close. Next step: produce genuinely native small source sprites and inspect them at 1× before atlas packaging.
+
+2026-11-23 04:43 AM EST — QUALITY REWORK ATTEMPT, NOT DELIVERED
+
+Opened the approved visual benchmark, compact character roster, and quiet grassy-ruins scene. Produced a new art-directed 12-pose concept sheet (two original heroes, six poses each) rather than code-drawn rectangles. This remains a source concept ONLY: the characters are oversized relative to 32×32 cells, magenta background requires careful masking, and neither hero has a genuine six-frame run cycle, full grab/throw/hurt/crouch/victory states, a verified transparent native atlas, or a 320×180 QA composite. It therefore fails the controlling visual+technical delivery gate. No art files uploaded as completed, no status advanced to delivered. Next: establish small-scale polished source poses, animate real distinct frames, manually clean alpha and pixels, assemble 32×32 sheets, inspect at 1×, validate manifests and gameplay scene. STATUS: IN PROGRESS — QUALITY REWORK.
