@@ -75,6 +75,8 @@ that, not Vision Partner's check, is the real pace).
 
 - Sync ~13:41 UTC (Vision Partner, the owner asked "Check drive for art"): one new image, **H07-01 Hall of Legends corridor**, `docs/design-library/03-visual-direction-and-assets/h07-hall-of-legends-concept-studies/`. ChatGPT made it unrequested from its own art plan and labels it "CONCEPT REFERENCE ONLY — NOT A TILESET": a 1648×928 flattened scene with three blank monument frames. Useful for Step 7's Hall layout and mood, not for importing. Every request in 01 REQUESTS is still open; none was delivered.
 
+- **Standing duty from 2026-11-23 ~17:10 UTC** (the owner, via the orchestrator; `docs/vision.md` "Visual direction"): the orchestrator files the first "REQ — MISSING-ASSETS — …" doc in 01 REQUESTS from its inventory; after that the asset desk keeps it current (strike items as approved assets land, add new gaps as steps need them) and records integrated repo paths on ChatGPT's Master Asset Production Board.
+
 ### Requests in flight
 
 | Filed (UTC) | REQ doc | Priority |

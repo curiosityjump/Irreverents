@@ -260,6 +260,15 @@ are usable is read from ChatGPT's own Drive documentation ("ASSET LIBRARY —
 START HERE (Claude)", mirrored at `docs/design-library/asset-library-start-here-claude.md`,
 and its visual quality gate), not decided by the team.
 
+**Owner, 2026-11-23 ~17:10 UTC, to the orchestrator, first-hand (relayed to Vision Partner):**
+> I'd like everything to utilized the approved assets in the drive. If there is anything for which there is no approved asset. Start a list of those in the drive that is properly routed so it can be found and worked on. At it to the changelog
+
+*(Framing:)* every picture and sound in the game comes from an approved Drive
+asset; anything without one goes on one missing-assets list in Drive
+(01 REQUESTS), noted in the Drive changelog. Rule and procedure:
+`docs/mechanisms/art-pipeline.md`; Vision Partner's asset desk keeps the list
+current (`docs/mechanisms/asset-requests.md`).
+
 Detail: docs 10, 13, 14, 32. Only the look of "Pixel aesthetic reference —
 approved direction" is approved; no sprite or tile is production art yet.
 
