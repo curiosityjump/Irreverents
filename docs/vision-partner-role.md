@@ -298,6 +298,8 @@ doorbell as for any answer, with **Action for:** orchestrator
 
 ## Handoff
 
+**Owner, 2026-11-23 ~16:20 UTC, to the orchestrator (relayed):** "Just keep going i can't be babysitting handoffs all the time". So run long (to about 800k of context, like the orchestrator), and when you do hand off, the orchestrator starts your successor without the owner doing anything; tell the owner only after it's done.
+
 You aren't coding, so a larger context matters less than it does for a
 lead; you don't hand off on a token count. You hand off only before a
 compaction, or when the owner says so: bring the ledger current, commit
