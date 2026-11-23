@@ -268,9 +268,12 @@ for later, as the step suggests.
   re-ran it: build and check green; control: the villain's polite
   purchase made "expected" fails `step4-villain-buys-politely`. Not
   re-verified by the lead: sight through walls, anything on screen.
-- Slice 3, not yet written: the people into Step 3's castle street and
-  live, following through a door, the knocked-out-caller and door
-  controls, the guard's whistle.
+- `handoff-prompts/step-4-slice-3-street.md` (written 05:00 UTC):
+  the people into `castle-street`, a chasing guard following through a
+  door, hiding places unseen, gate D's signals in the real street, the
+  first phone-sized look. **Held** until slice 2 is on `main` and
+  reviewed (it builds on the responders). Left for later still: the
+  guard's whistle, the villain's horn, waves.
 
 ## Open with the owner
 
@@ -303,7 +306,7 @@ for later, as the step suggests.
   is the event; `doorToward()` gives a pursuer its door. His slice B adds
   hiding places: a body with `c.roomHide` is to be treated as unseen.
   Not yet read or re-run by me.
-- **Lead, 05:02 UTC. Slice 1's flags, routed** (its eight entries in
+- **Lead, 04:55 UTC. Slice 1's flags, routed** (its eight entries in
   `docs/for-the-lead.md` were deleted by another lead's cleanup, 6fe5d2b,
   and recovered from the diff): `interact` has no checked touch control,
   and the server must run `npc-interact` with each player's held actions
