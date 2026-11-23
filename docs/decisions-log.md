@@ -926,3 +926,10 @@ document as a decision of theirs.
 - **To change it:** two tiles in `content/rooms/quarry-depot.json` (column 23, rows 14-15); a two-wide hole needs the stack or the step moved and the main way's scenarios re-timed.
 - **Where:** `docs/plan/step-16.md`, slice 3 push 3; `step16-caught-escape-cave`.
 
+### 2026-11-23 · Bad guys chasing you across the depot's yard can fall down the hole to the cellar, and stay there
+- **Decided by:** Step 16 last-slice builder, `session_017WiGzFw42cUL6BQ27o3iz7`
+- **Instead of asking:** should a fighter chasing a hero west of the step be kept out of the one-tile hole at column 23?
+- **Why this way:** "a botched stealth attempt that becomes an even better fight or escape": a guard tumbling into the cellar after you is a good accident, and it never traps a hero (the way-out check in `npm run check` covers the cellar and passes). Closing it needs the hole moved or narrowed, which the narrow heroes' escape (`step16-caught-escape-cave`) depends on. Chosen, not deleted: nothing was changed.
+- **To change it:** untried here: a chase follows the hero, not a routine, so a placement change may not stop it; a sure fix is a fighter that will not step off a ledge (Step 12's code).
+- **Where:** `docs/plan/step-16.md`, last slice handoff; `content/rooms/quarry-depot.json` column 23.
+

@@ -495,6 +495,17 @@ Slice 1, 2026-11-23 16:10 UTC: the main way (road, ridge, tower, depot) is **248
 
 2026-11-23 19:25 UTC, lead review of push 3 at 9dd3561 (re-run): `npm run check` green, 65 `step16-*` scenarios, gates 5 of 6, stopping-condition `src/` count 0, `check:deployed` ok. Signals 1–6 now pass with two quiet routes (roof, ledge) and three caught outcomes (fight, tower, cellar-pit-cave). Not done, by the step's drop list: the ranged kind, the undercroft way home. After the owner's 18:30 verdict ("findable and recognisable without being told"), one last slice looks at it on a phone.
 
+2026-11-23 19:35 UTC, last slice (`step-16-e-quarry-on-a-phone.md`), builder `session_017WiGzFw42cUL6BQ27o3iz7`: **a phone-sized page now reaches every main-way room by touch** (`npm run e2e`'s `quarry-ridge-cross` and `quarry-depot-in`, 4 of 4 local runs green, about 80 s for the quarry block; control `E2E_TOUCH_BREAK=jump` fails both). The pit and the cave were not visited (a missed chasm jump does reach the pit, and from there the depot's cellar, in one run). What a first-time player sees on an iPhone held sideways (shots in `e2e-out/quarry/`, both ways up; the view is about 15 tiles wide and 7 tall):
+- **Courtyard doorway** (`e2e-out/e2e-quarry-road.png`, the road side): the Use button reads "GO IN" and an up arrow sits over the arch; it reads as a way in.
+- **Road:** a cave mouth behind you, a crate, and a two-tile rise straight ahead with a ladder-frame on it; it reads as "go east and climb". No enemy in the first screen.
+- **Ridge:** the chasm (two tiles) is the first thing past the step, drawn dark with a floor visible below it: reads as a gap to jump, not a death. The shelf and the crawl are out of view, as intended.
+- **Tower foot:** brick shaft with staggered planks going up; nothing says "jump here", but the planks plainly climb. Jumping on the spot under the overlap climbs it.
+- **Tower top:** a long stone floor and two window slits; the east opening to the depot is off the right edge until you walk.
+- **Depot, at the door:** the lookout stands two tiles away facing you, a patrol beside it and the big horn post right behind: **danger reads at once, but at the same moment you are seen** (in one run the horn was already sounding on arrival). The high ledge (row 8) is above the sideways view; upright it shows as a long plank over the yard. The roof is not in view.
+- **Depot yard:** the stack (a raised block) and the column-23 hole read clearly; the step blocks the view east.
+- **Depot, at the strongroom's front:** the heavy guard is beside you; the strongroom shows only as a hanging stone stub over the floor (its front pillar, rows 8-11); its roof is above the view and **the hoard (column 45) is out of view** until you are inside. The cellar's cracked wall shows as a crack in the dirt below: findable.
+- **Wave in:** not caught on camera (in no run did the horn's call finish while the page stood in the depot; once the hero was punched back through the tower door and a depot person followed onto the tower top).
+
 ## Briefs
 
 - Last slice, the quarry seen and found on a phone: `handoff-prompts/step-16-e-quarry-on-a-phone.md`, 19:25 UTC, builder `session_017WiGzFw42cUL6BQ27o3iz7`.
@@ -560,3 +571,18 @@ Slice 1, 2026-11-23 16:10 UTC: the main way (road, ridge, tower, depot) is **248
 **Landed (push 2):** the drop to the cellar, a one-tile hole at column 23 (rows 14-15) west of the step, and `step16-caught-escape-cave` (the flyer robs over the roof, is seen, the call completes and a wave walks in, it drops through the hole, leaves by `to-pit` and reaches `quarry-cave`; no wave after and nobody of the depot outside; control: the hole made solid, the flyer never leaves). The grappler (18 px) does not fit and escapes by the tower door. Flags in `docs/for-the-lead.md`.
 
 **Measured, worth knowing:** the grappler's jump rises about 37 px (2.3 tiles), not 3.2: one-tile steps are what it climbs. A body on a one-way step against the west wall (column 2) is pinned and cannot get down to the door: keep steps from column 3. The grappler cannot jump in the strongroom's front doorway (two tiles high): its head hits. Bodies block each other: a grappler standing on the inner step stops the guard walking back. Floor columns of the yard nobody's route stands on (`step16-across-*`, `room-depot-*`, the roof and caught ones): 13, 18, 23, 26 only.
+
+### Last slice (`step-16-e-quarry-on-a-phone.md`), 2026-11-23 19:40 UTC, builder `session_017WiGzFw42cUL6BQ27o3iz7`
+
+**Landed:** `scripts/e2e/quarry.ts` walks a phone-sized page by touch across the ridge (hops, one running jump over the chasm), up the tower (jumps on the spot over the ledges' overlap) and into the depot, with screenshots both ways up of the ridge, the tower foot and top, and the depot at the door, the yard, the strongroom front and 6 s later (`e2e-out/quarry/`); facts `quarry-ridge-cross`, `quarry-depot-in`. `step16-caught-escape`'s `proves` now names the column-23 hole as the narrower heroes' way. The column-23 hole stays open to chasing fighters (`docs/decisions-log.md`).
+
+**No room data changed.** Every findability problem seen is either the camera's height (src, Step 5/8) or drawing; moving the hoard or the lookout would re-time every depot scenario, which this slice's 75 minutes did not allow.
+
+**What needs another step to be findable** (for the orchestrator):
+- The depot's lookout sees you the moment you step in from the tower: danger and being seen arrive together. A sight mark or a lookout bark before the call (Step 4/12), or a data move of the lookout east with the depot scenarios re-timed (Step 16 again).
+- The strongroom does not read as a building on a phone: only its front pillar shows; it needs walls and a roof drawn (Step 8), and **the hoard needs to be seen from outside** (a window or a glint, Step 8; or the hoard moved west, re-timing the quiet routes).
+- The high ledge and the roof (the quiet ways) are above the sideways view at the door; a camera that looks up a little in tall rooms (Step 5) or a drawn hint of the plank's end at the view's top edge (Step 8).
+- The tower's climb has no "jump here" cue; it works, but a first-timer may walk back out (Step 8, a ladder look on the overlap).
+- Wave in: never photographed; a scripted shot needs the page to survive in the depot for the call (a sideways hide spot near the door would do, Step 16 data).
+
+**Flag, not this slice's:** the first full `npm run e2e` here failed one Step 17 fact, `start-continue-gone` (the list read `["ZZZZ"]`, no message); alone it passed three times (twice with this change, once without), and the next full run was green. A timing flake under the full run's load. After rebasing onto 4022fd6, one full run failed `h1`/`h2` (the server-down facts; the page did not come back within 10 s) and the next was green: the e2e flakes already owed a look (b9cf87c).
