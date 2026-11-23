@@ -133,3 +133,26 @@ number in `content/tuning.json` (for example `bodyImpactOn` 0,
 `beatTime` 0, `breakFreeOn` 0). The screen side (dust, shake, the
 flattened pose) is not covered by any script: it was looked at once in a
 headless browser, and how it feels is the owner's to judge.
+
+## Across two phones (measured 2026-11-23)
+
+- **The check:** thirteen facts inside `npm run e2e`, named `t-*` (what
+  a touch did on its own page) and `s-*` (what the second screen drew),
+  in `scripts/lib/e2e-touch.ts`: two phone-sized pages, touch only, in
+  a private world, in whatever room players start in, read from what
+  each page drew. `E2E_TOUCH_BREAK=<action>` takes that button off the
+  page and is every fact's control (watched: jump, switch, attack,
+  grab). They failed until Step 1's 2a7fd98 (the server keeping its own
+  `entity.c` for a player); before it no hit, grab or throw worked on
+  the real page.
+- **Proven, by touch and on both screens:** grab a crate, carry it,
+  throw it; hit a body away; switch hero; grab a friend, who is drawn
+  held on their own screen, breaks free with Jump, is thrown and sees
+  their own character fly, then walks again.
+- **Not proven:** a real iPhone or Safari; the live address; anything
+  about the freeze, dust or shake; hitting a dummy (the start room has
+  none, so a crate is hit). **Known gap, printed as `todo` and not
+  counted:** a switch can land on a member another player holds
+  (`t-switch-free`; `docs/mechanisms/network.md`, "Known limits"). A
+  friend thrown at a walk door leaves the room, and the thrower's
+  screen stops drawing them at once: the check throws toward a wall.

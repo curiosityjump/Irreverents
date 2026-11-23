@@ -81,14 +81,11 @@ groups) whenever you add one — never update the number from memory.
 
 **Lasting records** (`docs/architecture.md`, "Lasting records: the store")
 - `src/server/store.ts` — named collections of JSON records on the owner's storage volume, in memory where there is none; never throws, sets unreadable files aside, proven by `node scripts/check-store.ts` (Step 7).
-<<<<<<< HEAD
 
 **The royal audience** (`docs/mechanisms/royal-audience.md`)
 - `content/audience/*.json` + `src/content/speech.ts` + system `audience-speech` — a speech that belongs to a placed body: a count on the body advanced every tick whatever happens to him, words as a pure function of the line number, a ribbon over his head, and a check that refuses any line repeating within three hours (Step 6).
 
-=======
 **Network layer** (`docs/mechanisms/network.md`)
 - `src/net/` + `src/server/game.ts` + `content/net.json` — each page simulates its own character and reports it; the server holds each world (`?room=`), steps everything else, sends whole-world snapshots, and delivers effects on a player's character (acknowledged, resent); generic over entity kinds (Step 1).
 - `window.irreverents.drawn` + `scripts/e2e.ts` — the page records what it drew each frame; `npm run e2e` and `npm run check:live` drive two real pages (keys, and a touch phone) and assert only on that (Step 1).
 - `scripts/checks/<id>.ts` — scripted checks that need a real server, run by `npm run check` and counted by `npm run gates`; `together` is gate F, `built-server` starts `dist/server.cjs` (Step 1).
->>>>>>> 438fa77 (Step 1 Gate 2: two people in one world, on phones: network layer, touch, upright play, e2e, check:live, gate F)

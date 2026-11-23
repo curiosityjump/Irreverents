@@ -102,9 +102,11 @@ acknowledgement, and b's own device is in charge again afterwards.
 
 Known limits (`DRAFT:`), for whoever builds combat and doors:
 
-- **Only `push` has been run across two devices.** `hold`, `release` and
-  `move` share the same delivery but nothing emits them yet; the held
-  page following the server is written and untried.
+- **`push`, `hold` and `release` have been run across two pages**
+  (a grab, a break-free and a throw of a friend: the `t-*` and `s-*`
+  facts of `npm run e2e`, `docs/mechanisms/combat-and-impact.md`,
+  "Across two phones"). `move` shares the same delivery and is untried
+  there.
 - A page's local world holds **only its own character**. A verb that must
   see others *on the page* does not: `switch` there cannot know which
   members other players hold, and a hit cannot be shown before the server
@@ -174,12 +176,13 @@ drawn, `color`, `mine`), `me`, `room`, `camera`, `scale`, `status`,
 `statusText`, `touchControls`, `upright`, `hint`. Nothing in the game reads
 it back. **Checks assert on `drawn`, never on server state.**
 
-- **`npm run e2e`** (`scripts/e2e.ts`, about 100 s, 75 of them the
+- **`npm run e2e`** (`scripts/e2e.ts`, about 125 s, 75 of them the
   server kept down for fact (h); `E2E_DOWN_MS=3000` shortens that while
   working on other facts): builds, starts the
   built server on a free port, drives a desktop page by keys and
   Playwright's `iPhone 14 landscape` by touch. Facts (a)–(h) of the Gate 2
-  brief plus the message rate. The desktop page's socket is routed through
+  brief plus the message rate, and Step 2's `t-*` and `s-*` facts
+  (`scripts/lib/e2e-touch.ts`: two more phone pages, touch only). The desktop page's socket is routed through
   the script (`page.routeWebSocket`), which is how 150 ms is added each
   way (and measured from the page's own round trip) and how the socket is
   cut. Screenshots in `e2e-out/`.

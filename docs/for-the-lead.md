@@ -160,6 +160,7 @@ actually read (questions for the owner go through
 
 **Flag:** rung 5 was by eye, on hand-made records pushed into the page's world; nothing scripted covers the drawing, and the real path (detector → pedestal → page, two devices) has not been seen. Text follows `draw/npcs.ts` (`fillText`, 8 px): readable, soft on a phone; a shared pixel font would be Step 5's or 8's call.
 
+
 ### step-3-b-kingdom-and-parts.md, 2026-11-23 (pushes 1 and 2 of 4; pushes 3 and 4 not started)
 
 **Done:** push 1 (`cb297c0`): the five part kinds, drawn, in `test-parts`. Push 2: behind the throne (false wall, hidden door `behind-the-throne`, the window, a small `undercroft`, the cellar doorway up into the street). Gate B gains `step3-behind-the-throne` (signal 2). **Not done, for the next session:** push 3 (courtyard, plate gate, gallery, roofs: signal 5 and `step3-over-the-roofs`), push 4 (the secret, signal 3; placing `hide` parts in the street and the throne room; the undercroft's vault). The `hide` kind itself is on `main`.
@@ -179,3 +180,17 @@ actually read (questions for the owner go through
 **Flag:** the king's speech bubble covers most of the window from the spawn side (screenshot by eye). Step 6's to place.
 
 **Not verified:** no real iPhone; the hiding place and the false wall in `test-parts` were never seen drawn there (the false wall was seen in the throne room).
+
+### step-2-touch-and-two-screens.md, 2026-11-23
+
+**Flag:** at the brief's commit (87571e4) nothing worked on the real page: Hit, Grab, carry and throw did nothing, by touch or keys, on either screen (the page's report overwrote the server's `c.grab.held` / `c.attack.held`, so the server never saw a fresh press, and `c.carrying` was undone by the puppet restore). Step 1's 2a7fd98 landed while I was working and fixes exactly that; rebased onto it, every fact passes. Nothing in Step 2's own files needed changing.
+
+**Flag:** `t-switch-free` is a known gap, printed as `todo` on every e2e run and not counted: A (grappler) taps Switch while B plays the infiltrator and becomes a second infiltrator, on both screens. The party doc's rule is "no member is played twice by a switch". It is the limit Step 1 listed (a page cannot see which members others hold; `src/net/client.ts`). When it is fixed the line prints `ok` and says to make it a plain fact.
+
+**Flag:** a friend thrown toward the throne room's east opening flies into the street. Their own screen follows; the thrower's screen stops drawing them the moment they change room (it drew 23 px of a 235 px flight). Probably right as rules go, and funny; whether the thrower should see them sail out is a drawing question for Step 1 or Step 5. The check throws toward a wall so it does not depend on it.
+
+**Flag:** the brief said to put the facts in a new file under `scripts/checks/`. That directory is self-registering (`scripts/lib/script-checks.ts` imports every file as a `ScriptCheck`), so a helper there breaks `npm run check` and `npm run gates`. The file is `scripts/lib/e2e-touch.ts`.
+
+**Flag:** the start room changed under me mid-brief (grey hall to throne room, no dummy in it), which broke a script written against the first. The check now reads the floor, the doors and the bodies from the page instead of naming a room or a tile; it still needs one liftable `crate` on the floor players start on, and about 100 px of floor ending in a wall. If Step 3 or 6 moves those, `t0` says so.
+
+**Note:** "hits a dummy" is proven as "hits a crate away" (no dummy in the throne room; the check takes a dummy first when one is on the floor). Break-free with Jump works, and in the throne room the hop lands the freed player on the platform above the thrower. Limits in the check (40 px inside a quarter second counts as flying; free within 1.2 s of the Jump tap, well inside the 2.5 s a hold lasts) are `DRAFT:`, set from a handful of runs. Adds about 25 s to `npm run e2e`. Not run against the live address or on a real iPhone.

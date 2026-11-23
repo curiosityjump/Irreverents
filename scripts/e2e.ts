@@ -352,6 +352,8 @@ async function main(): Promise<void> {
       `the desktop page's socket was cut: ${back ? 'it reconnected by itself' : 'it did NOT reconnect'}${took === null ? '' : `, and ${took} ms after the cut the phone page had drawn it at its new place`}; no reload: ${same}; the phone page draws ${count} players (2 = no duplicate)`);
 
     if (!LIVE) {
+      // Step 2's facts (t-*, s-*): hit, grab, carry, throw and switch by touch, and what the other phone's screen shows (docs/mechanisms/combat-and-impact.md, "Across two phones").
+      await (await import('./lib/e2e-touch.ts')).touchAndThrows({ browser, devices, base, out, fact, errors });
       // (f) another world does not see them.
       const ctxC = await browser.newContext({ viewport: { width: 800, height: 450 } });
       const C = await ctxC.newPage();
