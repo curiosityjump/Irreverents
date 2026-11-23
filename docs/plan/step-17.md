@@ -110,3 +110,11 @@ Step 17 builder `session_017WiGzGw7XaQ6tZNddFaa8s`, 2026-11-23.
 - Not verified on live: the SIGTERM save at a real Railway deploy (verified
   locally against `dist/server.cjs` with a tmpfs as the "volume": killed with
   a player in, the save was written at the kill).
+- **Push 2 (start screen).** Not verified: a real iPhone or Safari (nobody
+  here can run one): the text field's keyboard, `navigator.share`'s sheet,
+  and the pixel font on a real screen. Headless iPhone 14 emulation only.
+- Doubt: in `?tune` pages sideways the tune panel's open button can sit
+  over the top-left menu button; the tune button is above it (z-index), so
+  the menu is unreachable there until the panel is moved. Dev page only.
+- `start-back.png` in `e2e-out/` can catch the plain-text fallback for a
+  moment after the reload, before the font image loads; intended fallback.

@@ -1,8 +1,10 @@
 # Saved games: a world that is kept, and a friend who joins it
 
-**Reference.** Open before touching `src/server/saves.ts`, `makeWorld` or
-the last-player leave in `src/server/game.ts`, the store lines and
-`/game/<CODE>` in `src/server/main.ts`, or `scripts/checks/step17-saves.ts`.
+**Reference.** Open before touching `src/server/saves.ts`, `src/net/game-code.ts`,
+`makeWorld` or the last-player leave in `src/server/game.ts`, the store
+lines and `/game/<CODE>` in `src/server/main.ts`, `src/client/start.ts`,
+how `src/client/main.ts` picks its world, `scripts/checks/step17-saves.ts`
+or `scripts/e2e/start-screen.ts`.
 Written by the Step 17 builder (2026-11-23). The step and its `DRAFT:`
 choices: `docs/plan/step-17.md`.
 
@@ -18,7 +20,7 @@ use. A game is a world like any other on the server (`docs/mechanisms/network.md
 
 - **A game is the world `game-<CODE>`**, CODE four letters from
   `ABCDEFGHJKMNPQRSTUVWXYZ` (no I, L, O; `DRAFT:`, `GAME_LETTERS` in
-  `saves.ts`). Any other world name (`main`, `?room=…`, `game-abc`) is not a
+  `src/net/game-code.ts`, shared by the page and the server). Any other world name (`main`, `?room=…`, `game-abc`) is not a
   game and behaves exactly as before. An unknown code is a new game.
 - **The record.** One store collection per game, `save-<code in lower
   case>`, holding exactly one record (written with `replaceAll`):
@@ -78,3 +80,49 @@ file, no "exists", the part state and the body's place gone).
   (size 0) to `/healthz`'s list until the server restarts.
 - The tick loop keeps simulating a game while it has players, even all
   away; it is saved and forgotten only once the last is removed.
+
+## The start screen (`src/client/start.ts`, push 2)
+
+`src/client/main.ts` decides before anything joins a world:
+
+- **`?room=<name>`** joins that world at once, as before Step 17 (`INTENT:`
+  at the code: every scripted check depends on it).
+- **Otherwise** `showStart()`: a tab that was already playing (its world in
+  sessionStorage, `irreverents.playing`) goes straight back in, so a
+  reload, and the reload after a deploy, need no tap; a `?game=CODE` link
+  shows one big **Join CODE** tap with **Start screen** beside it; else the
+  start screen: **New game** (the page makes the code and passes over one
+  `GET /game/<CODE>` says exists), **Join a friend** (a field upper-cased
+  as typed, letters of the code only; an unknown code says "No game CODE"
+  and stays), **Continue** (the newest three of the games this phone
+  played, `irreverents.games` in localStorage; hidden when none) and
+  **Everyone's kingdom** (`main`). Every fixed choice is in one column and
+  Continue in another, side by side when the screen is wide: sideways
+  (390 px high) the Continue list never pushes a fixed choice off screen.
+- Choosing replaces the address with the game's share link (`?game=CODE`,
+  or the bare address for `main`) and calls `play(world)`, which is the
+  page as it always was.
+- **In play**, a three-bar button in the top-left corner (the sound
+  button has the top-right) opens a panel: a kept game's code and
+  **Share** (`navigator.share` with the link, else copied), then **Back to
+  the start screen** (`INTENT:` the way out; it says `bye` and loads the
+  bare address) and **Close**. A `?room=` world has only Back and Close.
+- Words are the game's pixel font (`content/looks/font.json`,
+  `font-light`), drawn on small canvases at whole device pixels per font
+  pixel; plain text until the font loads. The code field is 24 px (under
+  16 px iPhone zooms the page) and sits in the upper half, above the
+  keyboard. Sound starts on the first tap, as before: `createAudio` now
+  runs before the start screen, so that tap is any of its buttons.
+
+e2e facts `start-*` (`scripts/e2e/start-screen.ts`, local runs only: a run
+leaves a save on the server's volume): `start-shown` (the bare address
+shows it, every choice on screen and 44 px or more, the field 16 px or more
+and in the upper half), `start-unknown`, `start-new`, `start-sideways`
+(iPhone 14 sideways with four games remembered: all seven choices on
+screen; watched to fail on the first layout, where Everyone's kingdom sat
+under the Continue list, off screen), `start-join` (the
+menu's code, Close, the link's one tap, sound unlocked by it, each page
+draws the other), `start-back` (back, Continue lists the game first, the
+friend's page stops drawing them), `start-room` (`?room=` never shows it,
+its menu has only Back and Close). Screenshot:
+`docs/plan/step-17-shots/start-screen-390x664.png`.

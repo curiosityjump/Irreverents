@@ -369,6 +369,8 @@ async function main(): Promise<void> {
       await (await import('./e2e/outpost.ts')).outpostFacts({ browser, devices, base, out, fact, errors });
       // Step 16's facts (quarry-*): into the quarry by touch, and across its road onto the ridge (docs/plan/step-16.md, signal 7).
       await (await import('./e2e/quarry.ts')).quarryFacts({ browser, devices, base, out, fact, errors });
+      // Step 17's facts (start-*): the start screen, New game, a friend joining by the shared link, and back, by touch (docs/mechanisms/saves.md).
+      await (await import('./e2e/start-screen.ts')).startFacts({ browser, devices, base, out, fact, errors, shots: path.join(root, 'docs/plan/step-17-shots') });
       // (f) another world does not see them.
       const ctxC = await browser.newContext({ viewport: { width: 800, height: 450 } });
       const C = await ctxC.newPage();

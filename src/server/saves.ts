@@ -10,13 +10,11 @@ import type { Content } from '../content/types.ts';
 import { clone } from '../net/protocol.ts';
 import type { World } from '../sim/types.ts';
 import type { Store } from './store.ts';
+import { gameCode, GAME_PREFIX, isGameCode } from '../net/game-code.ts';
 
-/** DRAFT: the letters a game code is made of: no I, L or O, which are misread for 1 and 0. */
-export const GAME_LETTERS = 'ABCDEFGHJKMNPQRSTUVWXYZ';
-/** DRAFT: how many letters a code has (23^4, about 280,000 codes). */
-export const GAME_CODE_LENGTH = 4;
-/** A game's world name is this followed by its code (`game-ABCD`). INTENT: an id once deployed; never rename it. */
-export const GAME_PREFIX = 'game-';
+// The code's rules are shared with the page (src/net/game-code.ts).
+export { gameCode, GAME_PREFIX, isGameCode };
+
 /** DRAFT: how often a game is saved while anyone is in it (it is also saved when the last player leaves, and when the server is stopped). */
 export const SAVE_EVERY_MS = 30_000;
 /** The record's own version. INTENT: additive only, like the store's file. */
@@ -40,20 +38,6 @@ export interface SaveRecord {
   rooms: string[];
   /** The World with every player's character taken out (they are put back as they join). */
   world: World;
-}
-
-const CODE = new RegExp(`^[${GAME_LETTERS}]{${GAME_CODE_LENGTH}}$`);
-
-/** The code of a game's world name, or null when the name is not a game's (`main`, `?room=` worlds). */
-export function gameCode(worldName: string): string | null {
-  if (!worldName.startsWith(GAME_PREFIX)) return null;
-  const code = worldName.slice(GAME_PREFIX.length);
-  return CODE.test(code) ? code : null;
-}
-
-/** Whether a string is a well-formed game code (upper case). */
-export function isGameCode(code: string): boolean {
-  return CODE.test(code);
 }
 
 const collectionName = (code: string): string => `save-${code.toLowerCase()}`;

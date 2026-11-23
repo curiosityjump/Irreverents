@@ -50,8 +50,10 @@ with a throwaway entity kind on every `npm run check`).
   player, and everything else **in the content room its own character is
   in**, whole in every snapshot even when it has not moved: the first
   thing to trim.
-- **Worlds.** Everyone who opens the address is in the world `main`;
-  `?room=<name>` is another, separate one. A private world is forgotten
+- **Worlds.** Opening the address shows the start screen (Step 17,
+  `docs/mechanisms/saves.md`), whose "Everyone's kingdom" is the world
+  `main`, shared by everyone; `?room=<name>` skips the start screen and is
+  another, separate world. A private world is forgotten
   when its last player is gone; **`main` never is** while the server runs
   (what was done to its rooms stays done, D-077). A world named
   `game-<CODE>` is a kept game (Step 17, `docs/mechanisms/saves.md`):
@@ -243,7 +245,10 @@ count as `errors`.
 ## The debug object, and the checks that read it
 
 `window.irreverents` (read-only by convention): `content`, `world` (the
-local world), `player`, `worldName`, `builtFrom`, `net` (counters:
+local world; set once play starts, after the start screen), `player`,
+`worldName` (`''` until then), `builtFrom`, `start` (Step 17: what the
+start screen shows, `src/client/start.ts`; absent in a `?room=` world),
+`net` (counters:
 `connects`, `rttMs`, messages and bytes, `effects`, `tunesOut`,
 `tuningsIn`) and **`drawn`**,
 which the frame loop fills each frame with what it just put on screen:

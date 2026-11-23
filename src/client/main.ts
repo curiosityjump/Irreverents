@@ -2,8 +2,7 @@
 // from the server, keyboard and touch, drawn as graybox shapes.
 // The network layer is src/net/ (docs/mechanisms/network.md).
 import { createNetClient } from '../net/client.ts';
-import type { Transport, TransportHandlers } from '../net/client.ts';
-import { DEFAULT_WORLD } from '../net/protocol.ts';
+import type { NetClient, Transport, TransportHandlers } from '../net/client.ts';
 import type { Input } from '../sim/types.ts';
 import { watchKeyboard } from './keyboard.ts';
 import { render, VIEW_H, VIEW_W, view } from './render.ts';
@@ -16,6 +15,8 @@ import { setUpTune, tuneWanted } from './tune.ts';
 import { takeWords } from './draw/fx.ts';
 import { drawnSignalers } from './draw/outpost.ts';
 import { drawnCantina } from './draw/cantina.ts';
+import { setUpMenu, showStart } from './start.ts';
+import type { StartRecord } from './start.ts';
 
 const content = __CONTENT__;
 const canvas = document.getElementById('game') as HTMLCanvasElement;
@@ -56,15 +57,16 @@ const stored = storage(() => sessionStorage);
 // dropping the tab or the page's own reload after a deploy brings the same
 // player back. No accounts: it is for friends. DRAFT: two tabs on one device
 // are therefore one player; the newer tab takes the character over.
-let player = device.get('irreverents.player');
-if (!player) {
+const player: string = device.get('irreverents.player') || newPlayer();
+function newPlayer(): string {
   const bytes = new Uint8Array(8);
   crypto.getRandomValues(bytes);
-  player = Array.from(bytes, (b) => b.toString(16).padStart(2, '0')).join('');
-  device.set('irreverents.player', player);
+  const id = Array.from(bytes, (b) => b.toString(16).padStart(2, '0')).join('');
+  device.set('irreverents.player', id);
+  return id;
 }
 
-const worldName = new URLSearchParams(location.search).get('room') || DEFAULT_WORLD;
+const params = new URLSearchParams(location.search);
 const builtFrom = document.querySelector('meta[name="build"]')?.getAttribute('content') ?? '';
 
 function connect(handlers: TransportHandlers): Transport {
@@ -81,96 +83,6 @@ function connect(handlers: TransportHandlers): Transport {
   };
 }
 
-const net = createNetClient({
-  content,
-  player,
-  world: worldName,
-  now: () => performance.now(),
-  connect,
-  onWelcome(commit) {
-    // INTENT: a deploy restarts the server while people play. When the
-    // server we rejoined runs a different commit than the one that served
-    // this page, reload ONCE to pick up the new build; the commit we
-    // reloaded for is remembered, so a mismatch that will not go away can
-    // never become a reload loop.
-    if (!builtFrom || builtFrom.startsWith('%') || commit === builtFrom) return;
-    if (stored.get('irreverents.reloadedFor') === commit) return;
-    // Only once the page itself can be fetched: during a deploy the address
-    // answers errors for about a minute, and reloading into one would leave
-    // a dead page. If this fails, the next rejoin tries again.
-    fetch(location.href, { cache: 'no-store' })
-      .then((res) => {
-        if (!res.ok) return;
-        stored.set('irreverents.reloadedFor', commit);
-        location.reload();
-      })
-      .catch(() => {});
-  },
-});
-
-const keys = watchKeyboard(content, window);
-const touchHost = document.getElementById('touch')!;
-const touch = watchTouch(content, touchHost);
-const hint = document.getElementById('hint')!;
-const shell = setUpShell(canvas, touchHost, hint);
-// The touch controls appear on a touch screen, or at the first touch on anything else.
-if (isTouchDevice()) touchHost.hidden = false;
-window.addEventListener('touchstart', () => (touchHost.hidden = false), { passive: true });
-// Step 2: the feel dials, only with ?tune in the address (src/client/tune.ts).
-if (tuneWanted(location.search)) setUpTune({ content, net, canvas, touchHost });
-
-// Step 11 (docs/mechanisms/cantina.md): a tap on the game view itself, not
-// on the pad or a button (they sit over it and take their own touches). It
-// rides in every input for TAP_MS, numbered, so the server acts on it once
-// however many ticks carry it. Room pixels; or the party slot when it lands
-// on the open party row's chip (draw/cantina.ts says where it drew them).
-// DRAFT: TAP_MS; the count starts anywhere, so a reloaded page's first tap
-// is never mistaken for the last one the server saw.
-const TAP_MS = 300;
-let tapN = Math.floor(Math.random() * 1e6);
-let tap: { at: number; tap: NonNullable<Input['tap']> } | null = null;
-let lastCamera = { x: 0, y: 0 };
-canvas.addEventListener('pointerdown', (e) => {
-  const r = canvas.getBoundingClientRect();
-  if (r.width < 1 || r.height < 1) return;
-  const gx = ((e.clientX - r.left) * canvas.width) / r.width;
-  const gy = ((e.clientY - r.top) * canvas.height) / r.height;
-  const chip = drawnCantina().row?.find((c) => gx >= c.x && gx < c.x + c.w && gy >= c.y && gy < c.y + c.h);
-  tapN++;
-  tap = { at: performance.now(), tap: chip ? { x: 0, y: 0, n: tapN, slot: chip.slot } : { x: gx + lastCamera.x, y: gy + lastCamera.y, n: tapN } };
-});
-
-function readInput(): Input {
-  const k = keys();
-  const t = touch();
-  const input: Input = {
-    x: Math.max(-1, Math.min(1, k.x + t.x)),
-    y: Math.max(-1, Math.min(1, k.y + t.y)),
-    held: [...new Set([...k.held, ...t.held])].sort(),
-  };
-  if (tap && performance.now() - tap.at > TAP_MS) tap = null;
-  if (tap) input.tap = tap.tap;
-  return input;
-}
-
-// INTENT (coming back): a phone that slept, a tab that was hidden, a network
-// that changed: each ends with the player back in the world with no reload.
-// The socket is dropped and retried at once rather than waiting to notice.
-let hiddenAt: number | null = null;
-document.addEventListener('visibilitychange', () => {
-  if (document.hidden) hiddenAt = performance.now();
-  else {
-    if (hiddenAt !== null && performance.now() - hiddenAt > content.net.silenceMs) net.kick();
-    hiddenAt = null;
-  }
-});
-window.addEventListener('online', () => net.kick());
-window.addEventListener('pageshow', (e) => {
-  if (e.persisted) net.kick();
-});
-// A closed or reloaded tab takes its character with it at once.
-window.addEventListener('pagehide', () => net.leave());
-
 /**
  * The debug object: `window.irreverents`, read-only by convention. Scripted
  * checks read `drawn`, which the frame loop fills with what it just put on
@@ -178,11 +90,14 @@ window.addEventListener('pagehide', () => net.leave());
  */
 const debug = {
   content,
-  world: net.world,
+  /** Set when play starts (Step 17: after the start screen). */
+  world: null as unknown as NetClient['world'],
   player,
-  worldName,
+  worldName: '',
   builtFrom,
-  net: net.stats,
+  net: null as unknown as NetClient['stats'],
+  /** Step 17: what the start screen shows (src/client/start.ts); absent in a `?room=` world. */
+  start: undefined as StartRecord | undefined,
   /** The view (render.ts): scripted checks read it, and the clearance fact's control sets `reserve` to 0 to watch it fail. */
   view,
   drawn: {
@@ -208,61 +123,167 @@ const debug = {
 (window as unknown as { irreverents: unknown }).irreverents = debug;
 const audio = createAudio(content, player); // audio hook (Step 8)
 
-/** DRAFT: how long without a connection before the page reports it. */
-const SOCKET_REPORT_MS = 20000;
-let offlineSince: number | null = null;
-let offlineReported = false;
-let frameNo = 0;
-function frame(): void {
-  const simEvents = net.update(readInput()); // audio hook (Step 8)
-  const me = net.me();
-  // What this player sees: everyone else as received, their own character
-  // last (drawn on top), on this page's clock.
-  const seen: Drawn[] = [];
-  const camera = render(g, { ...net.world, entities: [...net.others(), me] }, content, me.room, { me: me.id, frame: frameNo, drawn: seen });
-  const result = { camera, drawn: seen };
-  lastCamera = camera;
-  audio.frame(simEvents, net.latest(), me, net.others()); // audio hook (Step 8)
+/** Joins `worldName` and plays: everything that needs the world (Step 17: called once the world is chosen). */
+function play(worldName: string): void {
+  debug.worldName = worldName;
+  const net = createNetClient({
+    content,
+    player,
+    world: worldName,
+    now: () => performance.now(),
+    connect,
+    onWelcome(commit) {
+      // INTENT: a deploy restarts the server while people play. When the
+      // server we rejoined runs a different commit than the one that served
+      // this page, reload ONCE to pick up the new build; the commit we
+      // reloaded for is remembered, so a mismatch that will not go away can
+      // never become a reload loop.
+      if (!builtFrom || builtFrom.startsWith('%') || commit === builtFrom) return;
+      if (stored.get('irreverents.reloadedFor') === commit) return;
+      // Only once the page itself can be fetched: during a deploy the address
+      // answers errors for about a minute, and reloading into one would leave
+      // a dead page. If this fails, the next rejoin tries again.
+      fetch(location.href, { cache: 'no-store' })
+        .then((res) => {
+          if (!res.ok) return;
+          stored.set('irreverents.reloadedFor', commit);
+          location.reload();
+        })
+        .catch(() => {});
+    },
+  });
 
-  const status = net.status();
-  // DRAFT: the words. Shown only while not connected; the player can still move.
-  const text = status === 'online' ? '' : status === 'reconnecting' ? 'Reconnecting…' : 'Connecting…';
-  if (statusText.textContent !== text) statusText.textContent = text;
-  statusBox.hidden = text === '';
+  const keys = watchKeyboard(content, window);
+  const touchHost = document.getElementById('touch')!;
+  const touch = watchTouch(content, touchHost);
+  const hint = document.getElementById('hint')!;
+  const shell = setUpShell(canvas, touchHost, hint);
+  // The touch controls appear on a touch screen, or at the first touch on anything else.
+  if (isTouchDevice()) touchHost.hidden = false;
+  window.addEventListener('touchstart', () => (touchHost.hidden = false), { passive: true });
+  // Step 2: the feel dials, only with ?tune in the address (src/client/tune.ts).
+  if (tuneWanted(location.search)) setUpTune({ content, net, canvas, touchHost });
 
-  // A socket that will not open: after SOCKET_REPORT_MS without one, with
-  // the page in view, say so once per outage (it reaches the server only
-  // if plain requests still get through, which is the case worth knowing).
-  if (status === 'online' || document.hidden) offlineSince = null;
-  else if (offlineSince === null) {
-    offlineSince = performance.now();
-    offlineReported = false;
-  } else if (!offlineReported && performance.now() - offlineSince > SOCKET_REPORT_MS) {
-    offlineReported = true;
-    report('socket', `no connection for ${SOCKET_REPORT_MS / 1000} s: ${status}, after ${net.stats.connects} connection(s), navigator.onLine ${navigator.onLine}`);
+  // Step 11 (docs/mechanisms/cantina.md): a tap on the game view itself, not
+  // on the pad or a button (they sit over it and take their own touches). It
+  // rides in every input for TAP_MS, numbered, so the server acts on it once
+  // however many ticks carry it. Room pixels; or the party slot when it lands
+  // on the open party row's chip (draw/cantina.ts says where it drew them).
+  // DRAFT: TAP_MS; the count starts anywhere, so a reloaded page's first tap
+  // is never mistaken for the last one the server saw.
+  const TAP_MS = 300;
+  let tapN = Math.floor(Math.random() * 1e6);
+  let tap: { at: number; tap: NonNullable<Input['tap']> } | null = null;
+  let lastCamera = { x: 0, y: 0 };
+  canvas.addEventListener('pointerdown', (e) => {
+    const r = canvas.getBoundingClientRect();
+    if (r.width < 1 || r.height < 1) return;
+    const gx = ((e.clientX - r.left) * canvas.width) / r.width;
+    const gy = ((e.clientY - r.top) * canvas.height) / r.height;
+    const chip = drawnCantina().row?.find((c) => gx >= c.x && gx < c.x + c.w && gy >= c.y && gy < c.y + c.h);
+    tapN++;
+    tap = { at: performance.now(), tap: chip ? { x: 0, y: 0, n: tapN, slot: chip.slot } : { x: gx + lastCamera.x, y: gy + lastCamera.y, n: tapN } };
+  });
+
+  function readInput(): Input {
+    const k = keys();
+    const t = touch();
+    const input: Input = {
+      x: Math.max(-1, Math.min(1, k.x + t.x)),
+      y: Math.max(-1, Math.min(1, k.y + t.y)),
+      held: [...new Set([...k.held, ...t.held])].sort(),
+    };
+    if (tap && performance.now() - tap.at > TAP_MS) tap = null;
+    if (tap) input.tap = tap.tap;
+    return input;
   }
 
-  const d = debug.drawn;
-  d.frame = ++frameNo;
-  d.room = me.room;
-  d.camera = result.camera;
-  d.scale = shell.layout().scale;
-  d.upright = shell.layout().upright;
-  d.hint = hint.hidden ? '' : (hint.querySelector('span')?.textContent ?? '');
-  d.status = status;
-  d.statusText = text;
-  d.touchControls = !touchHost.hidden;
-  d.entities = result.drawn;
-  d.me = result.drawn.find((e) => e.mine) ?? null;
-  d.signalers = drawnSignalers();
-  d.words = takeWords();
-  {
-    const c = drawnCantina();
-    const r = canvas.getBoundingClientRect();
-    const sx = r.width / canvas.width;
-    const sy = r.height / canvas.height;
-    d.cantina = c.row || c.counter ? { row: c.row?.map((ch) => ({ ...ch, x: r.left + ch.x * sx, y: r.top + ch.y * sy, w: ch.w * sx, h: ch.h * sy })) ?? null, counter: c.counter } : null;
+  // INTENT (coming back): a phone that slept, a tab that was hidden, a network
+  // that changed: each ends with the player back in the world with no reload.
+  // The socket is dropped and retried at once rather than waiting to notice.
+  let hiddenAt: number | null = null;
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) hiddenAt = performance.now();
+    else {
+      if (hiddenAt !== null && performance.now() - hiddenAt > content.net.silenceMs) net.kick();
+      hiddenAt = null;
+    }
+  });
+  window.addEventListener('online', () => net.kick());
+  window.addEventListener('pageshow', (e) => {
+    if (e.persisted) net.kick();
+  });
+  // A closed or reloaded tab takes its character with it at once.
+  window.addEventListener('pagehide', () => net.leave());
+
+  debug.world = net.world;
+  debug.net = net.stats;
+
+  /** DRAFT: how long without a connection before the page reports it. */
+  const SOCKET_REPORT_MS = 20000;
+  let offlineSince: number | null = null;
+  let offlineReported = false;
+  let frameNo = 0;
+  function frame(): void {
+    const simEvents = net.update(readInput()); // audio hook (Step 8)
+    const me = net.me();
+    // What this player sees: everyone else as received, their own character
+    // last (drawn on top), on this page's clock.
+    const seen: Drawn[] = [];
+    const camera = render(g, { ...net.world, entities: [...net.others(), me] }, content, me.room, { me: me.id, frame: frameNo, drawn: seen });
+    const result = { camera, drawn: seen };
+    lastCamera = camera;
+    audio.frame(simEvents, net.latest(), me, net.others()); // audio hook (Step 8)
+
+    const status = net.status();
+    // DRAFT: the words. Shown only while not connected; the player can still move.
+    const text = status === 'online' ? '' : status === 'reconnecting' ? 'Reconnecting…' : 'Connecting…';
+    if (statusText.textContent !== text) statusText.textContent = text;
+    statusBox.hidden = text === '';
+
+    // A socket that will not open: after SOCKET_REPORT_MS without one, with
+    // the page in view, say so once per outage (it reaches the server only
+    // if plain requests still get through, which is the case worth knowing).
+    if (status === 'online' || document.hidden) offlineSince = null;
+    else if (offlineSince === null) {
+      offlineSince = performance.now();
+      offlineReported = false;
+    } else if (!offlineReported && performance.now() - offlineSince > SOCKET_REPORT_MS) {
+      offlineReported = true;
+      report('socket', `no connection for ${SOCKET_REPORT_MS / 1000} s: ${status}, after ${net.stats.connects} connection(s), navigator.onLine ${navigator.onLine}`);
+    }
+
+    const d = debug.drawn;
+    d.frame = ++frameNo;
+    d.room = me.room;
+    d.camera = result.camera;
+    d.scale = shell.layout().scale;
+    d.upright = shell.layout().upright;
+    d.hint = hint.hidden ? '' : (hint.querySelector('span')?.textContent ?? '');
+    d.status = status;
+    d.statusText = text;
+    d.touchControls = !touchHost.hidden;
+    d.entities = result.drawn;
+    d.me = result.drawn.find((e) => e.mine) ?? null;
+    d.signalers = drawnSignalers();
+    d.words = takeWords();
+    {
+      const c = drawnCantina();
+      const r = canvas.getBoundingClientRect();
+      const sx = r.width / canvas.width;
+      const sy = r.height / canvas.height;
+      d.cantina = c.row || c.counter ? { row: c.row?.map((ch) => ({ ...ch, x: r.left + ch.x * sx, y: r.top + ch.y * sy, w: ch.w * sx, h: ch.h * sy })) ?? null, counter: c.counter } : null;
+    }
+    requestAnimationFrame(frame);
   }
   requestAnimationFrame(frame);
+  // Step 17: the way back to the start screen (and a game's code and Share).
+  setUpMenu({ content, worldName, tab: stored, leave: () => net.leave() });
 }
-requestAnimationFrame(frame);
+
+// INTENT: `?room=<name>` skips the start screen entirely and joins at once,
+// exactly as before Step 17: `npm run e2e`, `check:live` and every scripted
+// check join `?room=check-…` and must never see a start screen.
+const room = params.get('room');
+if (room) play(room);
+else debug.start = showStart({ content, params, device, tab: stored, play });

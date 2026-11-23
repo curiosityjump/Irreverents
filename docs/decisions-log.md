@@ -714,3 +714,10 @@ document as a decision of theirs.
 - **Why this way:** the row is three big squares in each hero's colour across the top of the screen, about a thumb wide on an iPhone, with "TAP ONE TO SWAP" and a swatch of the hero you tapped; your own has a mark under it, and a friend's is dimmed and crossed out so it plainly can't be taken. A tap counts if it lands within half a tile of a hero, and the row closes by itself after six seconds. Tapping a hero who is already in your party does nothing.
 - **To change it:** `pick` (`reach`, `seconds`) in `content/cantina/cantina.json`; the row's look and words in `src/client/draw/cantina.ts`.
 - **Where:** `docs/mechanisms/cantina.md`, "The party swap".
+
+### 2026-11-23 · The start screen as built: what it shows, and where the way back sits in play
+- **Decided by:** Step 17 builder `session_017WiGzGw7XaQ6tZNddFaa8s`, for orchestrator `session_017WiGzHhke4tkAThPgw6EXs`
+- **Instead of asking:** "What does the start screen look like, and where is the button that leads back to it?"
+- **Why this way:** the title, then New game, Join a friend (a code field near the top, where the phone's keyboard does not cover it) and Everyone's kingdom in one column, and up to three games this phone played under Continue beside it (or below, upright), all in the game's own pixel letters on big night-blue buttons. A tab reloaded while playing (or by a deploy) goes straight back into its game with no tap. In play, a faint three-bar button in the top-left corner (the sound button has the top-right) opens the game's code, Share, Back to the start screen, and Close.
+- **To change it:** the words, order and look are all in `src/client/start.ts` (its `CSS`, `showStart`, `setUpMenu`); how many games Continue shows is `GAMES_SHOWN` there.
+- **Where:** `docs/mechanisms/saves.md`, "The start screen".
