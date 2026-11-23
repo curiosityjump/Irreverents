@@ -52,9 +52,9 @@ Deliver, on `main` and live:
 4. **The page shell, for iPhone Safari.** No zoom on double tap, no
    pull-to-refresh or rubber-banding, no text selection or long-press
    call-out, no scrolling (`touch-action: none` on the game surface,
-   `overscroll-behavior: none`, a viewport meta that fixes scale). A
-   phone held upright gets a plain "turn your phone sideways" screen,
-   never a broken layout. No hover anywhere. No sound yet.
+   `overscroll-behavior: none`, a viewport meta that fixes scale). **An
+   upright phone can still play** (superseded 04:36 UTC; see the top of
+   section 3): never a screen that only says "turn your phone". No hover anywhere. No sound yet.
 5. **It comes back.** If the socket drops, the tab is hidden and shown, or
    the network changes, the page reconnects by itself (with backoff) and
    the player is back in the world as the same player, without a reload.
@@ -144,6 +144,52 @@ By the lead, 2026-11-23 04:02–04:10 UTC, in a container like yours.
   Safari has). Say in the commit that a real iPhone has not been tried.
 
 ## 3 · Traps
+
+- **Last batch from the plan review, against the owner's phone spec
+  (added 04:36 UTC; each is in `docs/plan/step-1.md` "What's decided",
+  read those items). In the order to protect them if time runs short;
+  whatever does not fit, write under "Owed by Step 1" in
+  `docs/plan/step-5.md` and tell the lead, do not drop it silently.**
+  1. **An upright phone can still play.** An iPhone with rotation lock on
+     never turns the page, so a turn-your-phone screen is a dead end.
+     Upright: the same 320×180 view across the top, the controls below
+     it, and one dismissible line, "Better sideways. If turning does
+     nothing, switch off rotation lock." `// INTENT:` there is always a
+     way out. e2e fact (g) becomes "an upright phone page can move and
+     jump".
+  2. **The built server is started once inside `npm run check`.** With
+     the storage volume, a build that fails to *start* leaves nothing
+     serving, and four leads' workers run this gate tonight. Cheapest
+     form: your gate F check (item 8) starts **the built server**
+     (`dist/server.cjs`, a child process on a free port, stopped by pid),
+     sees `/healthz` answer and its two clients join. If `dist/` is
+     missing or older than the sources, fail with one line saying to run
+     `npm run build` first (or build it). Land this early, on its own if
+     you can.
+  3. **`/healthz` says how many players are in the default world** (one
+     added field; keep every existing field). Sessions look at it before
+     pushing code while someone may be playing.
+  4. **Joining seats you in the one shared party.** A joiner takes a
+     party member nobody is playing; leaving or timing out frees it; when
+     every member is taken, the next visitor is offered a private world,
+     never a duplicate or a blank page. Step 2 owns the party list
+     (`content/party.json`) and switching; you own the seat on join,
+     leave and rejoin, **through one call the simulation offers**. Step 2
+     is making `spawnPlayer` choose the first unplayed member when no
+     character is passed: use that as the call, do not write a second
+     chooser, and message the lead if it is not on `main` when you need
+     it.
+  5. **A reload is still you.** Keep the random player id on the device
+     (`localStorage`, falling back to memory if it throws), not only for
+     the tab's life, and send it on joining. This replaces the "for the
+     tab's life at least" wording further down.
+  6. **`check:live` starts with `check:deployed`'s test**, never "the
+     running commit equals the tip of `main`" (after a documents-only
+     push it is older, correctly). This replaces item 7's wording.
+  7. **Controls never cover the play field.** Where the phone is wider
+     than 16:9, the controls sit in the bars beside the view; upright,
+     below it. Polish is Step 5's; the first layout must not hide the
+     room.
 
 - **From the Step 2 lead, 04:35 UTC.** `populateRoom(world, content,
   roomId)` is on `main` (1868e01), safe with no placements file and safe
