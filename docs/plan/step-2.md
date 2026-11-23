@@ -584,3 +584,12 @@ rows re-read. See the handoff notes below.
   `friend` test is kept and only its share is replaced; a non-player hit
   never reads `c.brawl`; new roster characters joining `party.json` means
   re-running the switch scenarios and telling the Step 2 lead first.
+
+- **15:55 UTC, flag from Step 11's worker (via its lead), not acted on:**
+  on a page, a player's own copy of the world wears its own character on
+  landing from a friend's throw with the full share, because the thrower
+  is not in that page's world, so `friendly()` (`impact-walls.ts`) says
+  no. The server's wear is the truth and the page takes it with a
+  flatten or move, so it is only brief, but a page can believe for a
+  moment that its character is worn. Step 11's `c.brawl` reads landed at
+  fb619f5 as agreed; the friend scenarios pass unchanged.
