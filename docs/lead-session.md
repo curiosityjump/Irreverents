@@ -7,6 +7,14 @@ phrase to `docs/understanding-the-project.md` and then here, before you reply.
 first thing to fix, because it is the only file loaded on every message and so
 the only place a cold session can be caught.
 
+**Since 2026-11-23** (the owner, ~15:20 UTC: *"Implement the structural changes
+you recommended for efficiency"*), the orchestrator starts from
+`docs/roles/orchestrator-card.md` and builders from `docs/roles/builder-card.md`;
+this file is the reference those cards point into, and a lead's own charter.
+**Leads are now for large, multi-slice steps only** (otherwise the orchestrator
+briefs builders directly), and **builders are reused** ("Fewer, longer-lived
+builders", below). Where this file differs, the cards are newer.
+
 Read when you are the session responsible for one element of the plan: the
 one that decides what happens next within that element, writes the brief, and
 reviews what came back. `docs/sop.md` governs a session *doing* a slice; this

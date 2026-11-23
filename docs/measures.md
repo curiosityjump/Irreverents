@@ -104,3 +104,44 @@ npm run gates          # real since Step 1 Gate 1; one line per gate: passing, f
   reset" from rage (Q-005).
 - M1 says which commit is live, not that the page works; M2 is what checks
   the page.
+
+**M4 — Spend per visible change: how many dollars of sessions does each
+change the owner can see in the game cost?** A process measure, not in
+`docs/plan.md`'s table (the owner, 2026-11-23 ~15:20 UTC: *"Implement the
+structural changes you recommended for efficiency"*; why it matters:
+`docs/vision.md`, "Principles", "much more resukts for less tokens").
+`DRAFT:` the cut below is a first pass.
+
+**When:** at each orchestrator handoff, by the orchestrator handing off,
+for its own tenure (pickup to handoff). One row in the table below, no
+prose (`docs/roles/orchestrator-card.md`, "Handing off").
+
+**How:**
+- **Spend:** `get_session` on every session of the tenure (the
+  orchestrator itself with no id, Vision Partner, every lead and builder
+  it or its leads ran) and sum `cost_usd`. For a session that spans two
+  tenures, count only its spend since the last row. Read it when the
+  session is done, not a figure recorded at its close (those have run
+  low; `docs/orchestrator-role.md`).
+- **Visible changes:** commits in the tenure that touched the game:
+
+```bash
+git fetch origin main
+git log origin/main --since=<pickup, UTC> --until=<handoff, UTC> --oneline -- src content assets scripts | wc -l
+git log origin/main --since=<pickup, UTC> --until=<handoff, UTC> --oneline | wc -l   # all commits, for the ratio
+```
+
+- **The number:** total spend divided by visible changes. Lower is better;
+  read it beside what the owner can now do, never instead of it.
+
+**What it measures and what it doesn't.**
+- A commit is a proxy for a change: one big feature and a one-line tweak
+  count the same, and `scripts/` includes checks a player never sees.
+- Spend is only as complete as the sessions summed; a row that misses
+  some says so and is a lower bound.
+- Coordinators (orchestrators, Vision Partner, leads) and builders are
+  kept apart so a row shows where the money went.
+
+| Tenure (UTC) | Commits (all) | Visible changes | Coordinator spend | Builder spend | Per visible change | Notes |
+|---|---|---|---|---|---|---|
+| 2026-11-23 03:23–15:15 | 288 | 59 | ≥ $263 | ≥ $83 | ≥ $5.9 | Approximate, a lower bound. Counts re-run at 15:23 UTC with the commands above (the orchestrator's 15:20 count, by a slightly different cut, was 285 and 62). Coordinators: first orchestrator ~$140 (Vision Partner's figure), Fable orchestrator $37, backup orchestrator $58, first Vision Partner $28. Builders: only the nine round-1 look workers ($83); about 40 other sessions (leads and their workers) not yet summed. |

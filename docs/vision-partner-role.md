@@ -57,7 +57,9 @@ orchestrator sessions and the next free question id. Its sections:
 **Open** (yours to order) and **Parked by you**. Two lean files sit either
 side of it: `docs/questions-inbox.md`, where askers append, and
 `docs/answers-outbox.md`, where you put each answer for the orchestrator
-to act on. `docs/answers-archive.md` holds the receipts once acted on.
+to act on. The orchestrator deletes an outbox entry once acted on, and
+its commit message names what was done (git log is the record;
+`docs/answers-archive.md` holds receipts only up to 2026-11-23).
 
 ## Genesis: the first conversation
 
@@ -144,8 +146,9 @@ more stream; treat it as a vision conversation ("The vision documents").
 2. For each entry in `docs/questions-inbox.md`: assign the next `Q-NNN`
    (numbering rules: `docs/questions-for-the-owner.md`, "Ids"). Grep
    `docs/deliberate-designs.md`, the outbox, the archive and the
-   governing document's quoted rulings; an already-answered question gets
-   a receipt pointing at the answer and is never asked. Rewrite to the
+   governing document's quoted rulings; an already-answered question is
+   cut and never asked, and the commit message names where it was
+   answered. Rewrite to the
    bar (the owner's terms, what it unblocks, one recommendation, where the
    answer goes), keeping the asker's words under **As asked**. Cut it
    from the inbox into Open. One kind of entry is not a question: an
@@ -216,7 +219,7 @@ than referring to it.
    an effective expression of that intention longterm. So we should
    retain the intention rather than making the implementation
    unquestionable."* Any other code change is owed by the next session on
-   that file; the receipt says `code owed at <path>`.
+   that file; the outbox entry says `code owed at <path>`.
 5. Never change a step's status line. The orchestrator decides what is
    unblocked; your doorbell tells it.
 6. Delete the entry from Open and append it to `docs/answers-outbox.md`

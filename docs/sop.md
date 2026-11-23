@@ -2,6 +2,12 @@
 
 **Standing.** The one procedure. Run it every session, in order.
 
+**Since 2026-11-23** (the owner, ~15:20 UTC: *"Implement the structural changes
+you recommended for efficiency"*), a builder's start-up read is
+`docs/roles/builder-card.md`, not this file. This file is the reference the card
+points into: open the phase a card point names. Where they differ, the card is
+newer.
+
 Each phase has a **gate**, and every gate is a *measurement, never a feeling* —
 the two failure modes this procedure was built against were both feelings: a
 session felt it had read enough (wrong five times) and felt something looked

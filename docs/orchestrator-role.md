@@ -5,18 +5,26 @@ CLAUDE.md first."* (or
 starting a fresh session specifically to occupy this role) — `CLAUDE.md`'s
 *How to work here* routes that phrase here, before you reply to them.
 
+**Start-up read: `docs/roles/orchestrator-card.md`, not this file**
+(2026-11-23; the owner, ~15:20 UTC: *"Implement the structural changes
+you recommended for efficiency"*). This file is the reference the card
+points into: open the section a card point names. Where they differ, the
+card is newer (two layers by default, reused builders, handoff at about
+250k tokens); report the clash so one gets fixed.
+
 Read this if you're the session the owner talks to, full stop — not
 between rounds of one workstream, but across the whole build of
-Irreverents. **Read `docs/lead-session.md` in full before doing
-anything else — this role inherits everything there, one level up, and
-this file does not restate it.** Where that file says "the owner" or
-"brief," read it as described below.
+Irreverents. **This role inherits `docs/lead-session.md`, one level up,
+and this file does not restate it: open the section of it that the card
+or this file names when you need it, not the whole file at start-up**
+(until 2026-11-23 it was a full read before anything else). Where that
+file says "the owner" or "brief," read it as described below.
 
 **Is this the first orchestrator this project has ever had?** If
 `docs/plan.md` has no steps yet, no `**Status:**` lines, and
 `docs/questions-for-the-owner.md`'s header names no previous
 orchestrator, go to **"Your first run"** below right after reading
-`docs/lead-session.md`. It replaces "Picking up from a previous
+the card. It replaces "Picking up from a previous
 orchestrator" for this one session.
 
 ---
@@ -133,11 +141,10 @@ Do these in order; each ends in something committed.*
    - Until an architecture file exists, `docs/sop.md` phase 2's
      architecture lookup is skipped (that row says so); leave "Architecture
      at a glance" a placeholder rather than inventing one.
-   - Commit. Then cut the genesis entry from `docs/answers-outbox.md` and
-     append its receipt line to `docs/answers-archive.md` in that file's
-     format (`- Vision · <sections> → docs/vision.md, <commit>; acted on
-     by orchestrator <date>: <what you filled; plan drafted in this first
-     run>`).
+   - Commit. Then delete the genesis entry from `docs/answers-outbox.md`;
+     the commit message names what was done (what you filled; plan
+     drafted in this first run). No receipt in `docs/answers-archive.md`:
+     receipts are retired from 2026-11-23, and git log is the record.
 3. **Check your environment.** Do you have the Claude Code Remote tools
    (see above)? GitHub tools? A CI that runs on push? Hooks under
    `.claude/`? Record what exists in one place (`docs/git-workflow.md` /
@@ -368,8 +375,9 @@ doorbell, and at every check-in: pull, read the outbox, and act on each
 entry as a lead acts on a plan step. They are the owner's own words,
 recorded first-hand. Open or reopen the step, route it to its lead (a
 doorbell into that lead, naming the entry), or make the process edit.
-Then cut the entry and append it to `docs/answers-archive.md`. Keep the
-outbox empty between check-ins.
+Then delete the entry; the commit message names what was done (receipts
+in `docs/answers-archive.md` are retired from 2026-11-23: git log is the
+record). Keep the outbox empty between check-ins.
 
 ## The owner's direct feedback channel (if the project has one)
 

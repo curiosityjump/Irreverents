@@ -69,6 +69,14 @@ section is what makes that true; without it, "prime with a role name"
 quietly becomes "prime with a role name plus whatever the orchestrator
 has to restate by hand".
 
+**The orchestrator may run a step directly with builders, no lead** (two
+layers, the default since 2026-11-23, on the owner's "Implement the
+structural changes you recommended for efficiency";
+`docs/roles/orchestrator-card.md`). It claims the step with the
+orchestrator form below and briefs builders itself; a lead is opened only
+for a large step that needs sustained design judgement across many
+slices. `DRAFT:`
+
 **Every open step below carries one bolded status line, immediately
 after its heading, read literally by a scanning lead:**
 
@@ -77,6 +85,9 @@ after its heading, read literally by a scanning lead:**
   *first* step (lowest number) carrying this exact line.
 - `**Status: open, claimed by <session id>, <date>.**` — a lead is active
   on it. Skip it; don't start a second lead for the same step.
+- `**Status: open, claimed by orchestrator <session id> (builders: <ids>), <date>.**`
+  — the orchestrator runs it directly with the builders named. Skip it
+  like any claim; the orchestrator updates the builder ids as they change.
 - `**Status: open, unclaimed — blocked on the owner.**` — real work, but
   the next move is the owner's answer, not measurement or building (the
   step's own text names the question, and it has a `Q-NNN` in
@@ -92,6 +103,9 @@ after its heading, read literally by a scanning lead:**
 
 A status line may carry a parenthetical after it (who released it, what
 it waits on). Keep the bolded part exact: leads match it literally.
+**A status line stays one line** (from 2026-11-23): the bolded part and at
+most a short parenthetical. History (who released or reopened it, when,
+why) belongs in the step file or git log, not here. `DRAFT:`
 
 **Each step's text lives in its own file** (`docs/plan/README.md` has the
 convention):

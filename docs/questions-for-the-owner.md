@@ -4,8 +4,9 @@
 questions go to `docs/questions-inbox.md`; Vision Partner
 (`docs/vision-partner-role.md`) curates **Open** and **Parked** and reads
 them to the owner. The governing document holds each answer; this file
-holds what is open, and `docs/answers-archive.md` holds one receipt line
-per answer saying where it went.
+holds what is open. Once an answer is acted on, the orchestrator deletes
+its outbox entry and the commit message names what was done (git log is
+the record; `docs/answers-archive.md` holds receipts up to 2026-11-23).
 
 ## Current sessions
 
@@ -22,8 +23,9 @@ per answer saying where it went.
 **Don't append here — only Vision Partner writes this file.** New
 questions go to `docs/questions-inbox.md` (its
 header says how, and holds the entry format). Vision Partner moves each
-one into **Open** below. Answers leave through `docs/answers-outbox.md`
-and are filed in `docs/answers-archive.md` once acted on. All of this
+one into **Open** below. Answers leave through `docs/answers-outbox.md`;
+the orchestrator deletes each entry once acted on and names what was done
+in the commit message. All of this
 happens in the repository, not in chat: a question that exists only in a
 chat message is a question that will be lost. (Exception: at genesis,
 Vision Partner writes the first questions straight into Open;
@@ -41,7 +43,7 @@ Vision Partner writes the first questions straight into Open;
 - **Never reuse or renumber an id**, even for a dropped question: plan
   steps, receipts and code comments cite questions by id.
 - A question split into several gets new ids for the parts; the original
-  closes with a receipt naming them.
+  closes with a commit message naming them.
 
 ## Entry format
 

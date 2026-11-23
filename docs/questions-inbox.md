@@ -13,8 +13,10 @@ The moment any session has a question only the owner can answer:
    the owner in your message, first or alone, and still do steps 2-4, so
    a message they miss is not a question lost.
 2. Grep `docs/deliberate-designs.md`, `docs/questions-for-the-owner.md`
-   (Open, Parked), `docs/answers-outbox.md`, `docs/answers-archive.md` and
-   the governing step's quoted rulings. If it is answered, use the answer
+   (Open, Parked), `docs/answers-outbox.md`, `docs/answers-archive.md`
+   (receipts up to 2026-11-23; since then `git log --grep`, as the
+   orchestrator names what it did with each answer in the commit message)
+   and the governing step's quoted rulings. If it is answered, use the answer
    and write nothing.
 3. Append one entry under **Entries** below, in the format below, phrased
    to the bar: the owner's terms (they do not know the codebase; quote the

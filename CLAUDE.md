@@ -74,61 +74,41 @@ weighty, funny) is the owner's to judge by playing, never a script's.
 
 ## How to work here
 
-**Told you are Vision Partner** — those words or anything meaning them?
-**Open `docs/vision-partner-role.md` before you reply; it takes over from
-there.** It keeps the one list of questions for the owner and the vision
-documents — a distinct role from the orchestrator below; check this line
-first. Otherwise ignore this line.
+**Find the first line below that fits you ("told so" includes anything
+meaning it) and open its file before you reply; it takes over from
+there.** Ignore the rest.
 
-**Told you are the orchestrator** — those words, or you're a fresh session
-and the owner is talking to you directly with no role and no brief named?
-**Open `docs/orchestrator-role.md` before you reply — it's the root of this
-project's Claude organization, the one session the owner talks to, and it
-routes you everywhere else, `docs/understanding-the-project.md` included.**
-Otherwise ignore this line.
+- **Vision Partner** (told so; check this line first)
+  → `docs/vision-partner-role.md`. It keeps the one list of questions for
+  the owner and the vision documents, apart from the orchestrator.
+- **The orchestrator** (told so, or a fresh session the owner talks to
+  with no role and no brief named) → `docs/roles/orchestrator-card.md`,
+  the start-up read; `docs/orchestrator-role.md` is the reference it
+  points into. The root of this project's Claude organization.
+- **A lead** (told so) → `docs/understanding-the-project.md`. A lead
+  exists only when the orchestrator opens a large, many-slice step for one
+  (`docs/lead-session.md`). No step named: claim the first open, unclaimed
+  one (`docs/plan.md`, "How a lead finds its element"); never reply asking
+  what to work on.
+- **The Skunk Works Lead** → `docs/skunk-works-role.md`. It dreams up
+  ideas and builds nothing.
+- **The Industrial Engineer** → `docs/industrial-engineer-role.md`. It
+  studies the development process, not the product.
+- **A builder**: handed a brief (`work handoff-prompts/x.md`, or a message
+  naming one), or told you are the brief-worker, with no role above →
+  `docs/roles/builder-card.md`, in place of `docs/sop.md`, which stays as
+  the reference it points into.
 
-**Told you are the lead** — those words or anything meaning them? **Open
-`docs/understanding-the-project.md` before you reply; it takes over from
-there.** If no step was named, your first action is `docs/plan.md`'s "How a
-lead finds its element": claim the first open, unclaimed step yourself.
-Never reply asking what to work on. Otherwise ignore this line.
-
-**Told you are the Skunk Works Lead** — those words or anything meaning
-them? **Open `docs/skunk-works-role.md` before you reply; it takes over
-from there.** It dreams up ideas and builds nothing. Otherwise ignore this line.
-
-**Told you are the Industrial Engineer** — those words or anything
-meaning them? **Open `docs/industrial-engineer-role.md` before you reply;
-it takes over from there.** It studies the development process, not the
-product. Otherwise ignore this line.
-
-**Told you are the brief-worker — or handed a brief, with no other role
-named above?** A prompt that names a brief file (e.g. `work
-handoff-prompts/x.md`) is this role: that's every cold session executing
-one brief, and no special phrase is needed. (A fresh session with no role
-*and* no brief named is the orchestrator, above.) **Run `docs/sop.md`.**
-One procedure, seven phases, a measurable gate on each — the only universal
-document *this* role must open, and it
-routes you to everything else at the point you need it. A role matched above
-runs on its own document's own terms instead — `docs/lead-session.md` treats
-SOP as something to know about when briefing others, not its own procedure.
-
-A project-specific role, once one is born (`docs/roles/README.md`, "How a
-role is born"), gets its own line here in the same shape.
-
-The dispositions below apply regardless of which of the roles above got
-you here.
+A project-specific role, once born (`docs/roles/README.md`, "How a role is
+born"), gets its own line here. The dispositions below apply to every role.
 
 **Every session, including this one, is disposable — the repository is
-what persists.** A role's charter outlives whichever session first wrote
-it. **Never run long enough to compact your own memory — a fresh session
-reasoning from these docs consistently beats an old one reasoning from an
-aging summary of itself.** Record continuously, then stop; don't keep going
-because a long session "knows more" — the better this codebase carries what
-matters, the worse any one session's memory looks by comparison, on
-purpose. `docs/roles/README.md` indexes who already exists to do a kind of
-job and how a session gets spun up for one that doesn't fit an existing
-role yet.
+what persists.** **Never run long enough to compact your own memory** (an
+orchestrator hands off at about 250k tokens of context; a builder takes
+another brief only under about 400k): a fresh session reasoning from these
+docs beats an old one reasoning from an aging summary of itself. Record
+continuously, then stop. `docs/roles/README.md` indexes who exists to do a
+kind of job and how a new role is spun up.
 
 **Never stall on the owner; never "fix" on a hunch.** The owner,
 2026-11-23, first-hand: *"I don't want anything being bottlenecked by
@@ -288,8 +268,8 @@ noise in chat.
 
 ## Where to look things up
 
-**`docs/sop.md` routes everything**, at the phase where you need it. Three
-lookups are worth knowing without it:
+**Your role card or document routes everything**, at the point you need
+it. Three lookups are worth knowing without it:
 
 - **Any specific mechanism** → `docs/mechanisms/README.md`, the index, one
   line each, linking to a full writeup. Read the linked file *before*

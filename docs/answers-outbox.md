@@ -5,7 +5,9 @@ Partner (`docs/vision-partner-role.md`) appends an entry the moment it
 records an answer or makes a vision edit. The orchestrator reads this
 file on every doorbell and check-in, acts on each entry (opens or reopens
 a plan step, routes it to the lead that owns it, makes the process edit),
-then **cuts** the entry and appends a receipt to `docs/answers-archive.md`.
+then **deletes** the entry; the commit message names what was done (git
+log is the record: receipts in `docs/answers-archive.md` are retired from
+2026-11-23).
 A lead reads entries naming its step every round; only the orchestrator
 removes them.
 

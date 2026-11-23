@@ -4,6 +4,12 @@
 newest at the bottom. The governing document holds the owner's quote; this
 is only where it went. Read for history, never act on it.
 
+**Receipts are retired from 2026-11-23** (the owner, ~15:20 UTC:
+*"Implement the structural changes you recommended for efficiency"*). Git
+log is the record: the orchestrator deletes an outbox entry once acted on,
+and that commit's message names what was done. Nothing is appended here
+any more; the lines below stay as history, still worth grepping. `DRAFT:`
+
 Vision Partner and the orchestrator grep this file before asking anything
 (`docs/questions-inbox.md`, step 2), so a question answered once is never
 asked again.
