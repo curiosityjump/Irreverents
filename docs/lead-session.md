@@ -349,12 +349,28 @@ Spinning one up directly doesn't relax anything else in this file:
   forced a fresh clone at the branch tip. **Work out your environment's
   equivalent once, write the exact canonical spawn call here, and have every
   role that spawns sessions follow it.**
-  - Canonical spawn call for this project: *(not yet measured; the
-    orchestrator's first lead spawn measures it and writes it here —
-    `docs/orchestrator-role.md`, "Your first run" step 9: the repository
-    URL, branch main, and the clone-depth or equivalent
-    setting, once that spawn has been verified to start inside a current
-    checkout)*.
+  - **Canonical spawn call for this project** (measured 2026-11-23: the
+    first orchestrator's first lead, session_017WiGzEwLs3ng2ZPpRZgctn,
+    came up on `main` at the remote tip with `CLAUDE.md` loaded and had
+    claimed its step and pushed within two minutes of creation):
+
+    ```
+    create_session(
+      source_url:      "https://github.com/curiosityjump/Irreverents",   # this exact spelling
+      source_revision: "main",
+      clone_depth:     50,          # explicit, so the checkout is fresh
+      outcome_branch:  "main",      # the child's own instructions then name main, not an auto-generated claude/... branch
+      tags:            ["irreverents"],   # tells Irreverents sessions apart from the owner's other projects on this account
+      title:           "<the role, and the step or brief once known>",
+      prompt:          "<the bare prime, or: work handoff-prompts/<file>.md>"
+    )
+    ```
+
+    Leave the environment, model and permission mode unset (inherited from
+    the spawner) and don't set an effort level. To see only this project's
+    sessions, read `parent_session_id` and the `irreverents` tag;
+    `list_sessions` also returns the owner's other projects
+    (`docs/git-workflow.md`, "This project's environment").
   - When a spawn misbehaves, record it in `docs/spawn-failures.md`.
 - **Prime it with a role, not a paragraph.** Check `docs/roles/README.md`
   first. An existing role needs only its name and what it is for; a genuinely
