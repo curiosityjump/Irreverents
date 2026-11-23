@@ -1,0 +1,31 @@
+{
+  "//": "DRAFT: stand-in drawn by tools/art/tiles/make.py (round 2). Notes: tools/art/tiles/README.md.",
+  "id": "cantina",
+  "sky": [
+    "#4c476a",
+    "#4c476a"
+  ],
+  "layers": [],
+  "wall": {
+    "image": "tiles/castle.png",
+    "tile": 16,
+    "cells": [
+      [
+        0,
+        6
+      ],
+      [
+        1,
+        6
+      ],
+      [
+        2,
+        6
+      ],
+      [
+        3,
+        6
+      ]
+    ]
+  }
+}

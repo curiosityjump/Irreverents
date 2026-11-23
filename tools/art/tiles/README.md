@@ -174,9 +174,8 @@ room is "grass and old castle wall".
 
 ## Flags for the lead
 
-- **Round 2: `cantina` (Step 11's new room, and `outpost` when it lands) has no art files**: it
-  draws plain shapes. A theme exists for it to borrow (`castle` or `town`); add it to
-  `ROOM_THEME` in `make.py`.
+- **Round 2: `outpost` has no art files**: it draws plain shapes. A theme exists for it to
+  borrow; add it to `ROOM_THEME` in `make.py`. (`cantina` borrows `town`, Step 11 slice B.)
 - **Round 2: the canopy and eave rows repeat every 16 px.** A row-0 tile is index 11 (the room
   above "looks solid"), and only index 15 picks from fills, so their variety is in the one tile.
   More variety needs several regions along the row (cheap: one more 4x4 block each).

@@ -216,7 +216,8 @@ is additive and is what makes ground join up.
   under the castle, outdoors, day; `courtyard` grass and old castle wall,
   outdoors; `throne-room` royal interior (the start room); `hall-gallery`
   a grand interior hall; `undercroft` a dark cellar; `graybox-hall` a
-  plain interior. The `test-*` rooms are fixtures for scripted checks and
+  plain interior; `cantina` a tavern's inside (the `town` theme's
+  plaster, timbers and board floor; `DRAFT:`, Step 11). The `test-*` rooms are fixtures for scripted checks and
   get no art.
 
 ## Behind the ground: `content/backdrops/<room id>.json` (new kind)

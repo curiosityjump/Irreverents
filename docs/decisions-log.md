@@ -672,3 +672,10 @@ document as a decision of theirs.
 - **Why this way:** tap a wandering hero who is not in the party and your party appears across the screen; tap the one to replace. Replace someone nobody is playing and they swap; replace yourself and you become the newcomer; a friend's character is never taken (doc 06). No swapping while a brawl is on, so a tap mid-fight is never a surprise. The row closes when you move, tap elsewhere, or after a few seconds. The door refuses only while a good-side guard is actively chasing you, not merely because an alarm was raised (D-088 says a raised alert alone is open).
 - **To change it:** each is one rule in the cantina's systems (`docs/mechanisms/cantina.md`); the row's timing is a number in `content/cantina/cantina.json`.
 - **Where:** `docs/plan/step-11.md`; `handoff-prompts/step-11-b-hub.md` while it runs.
+
+### 2026-11-23 · The cantina looks like a tavern: plaster, timbers and a board floor
+- **Decided by:** Step 11 slice B builder `session_017WiGzHXvo5fjfVSeDUTX44`, for the Step 11 lead `session_017WiGzFy3MD6ecvM7QMvQGd`
+- **Instead of asking:** "Should the cantina look like the castle's stone halls or the town's houses?"
+- **Why this way:** the town's cream plaster between wooden posts, with a board floor, reads as the inside of a tavern; the castle's lilac blocks read as a throne room. The back wall is the same calm stone wall every indoor room without its own backdrop gets.
+- **To change it:** one word (`'cantina': 'town'` → `'castle'`) in `tools/art/tiles/make.py`, then run it; a tavern-specific back wall is a new branch in its `backdrop_json`.
+- **Where:** `tools/art/tiles/make.py` `ROOM_THEME`; `docs/mechanisms/art-pipeline.md`.

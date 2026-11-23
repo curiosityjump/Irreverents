@@ -48,6 +48,9 @@ ROOM_THEME = {
     'hall-gallery': 'castle',
     'graybox-hall': 'castle',
     'undercroft': 'cellar',
+    # DRAFT (Step 11 slice B): the cantina borrows the town's plaster, timbers and board floor, which
+    # read as a tavern's inside; `castle` is the other candidate (one word here).
+    'cantina': 'town',
 }
 
 # How often each fill is picked (cells may repeat to weight them): plain blocks most often.
@@ -231,8 +234,8 @@ def main():
     for room, name in ROOM_THEME.items():
         write_json(os.path.join(CONTENT, 'atlases', room + '.json'), atlas_json(room, by_name[name], metas[name]))
         write_json(os.path.join(CONTENT, 'backdrops', room + '.json'), backdrop_json(room, by_name))
-    print('ground lane: wrote 4 tile images, 8 backdrop images, 6 atlas files, 6 backdrop files%s'
-          % ('' if ROUND2 else ' (without round-2 fields)'))
+    print('ground lane: wrote 4 tile images, 8 backdrop images, %d atlas files, %d backdrop files%s'
+          % (len(ROOM_THEME), len(ROOM_THEME), '' if ROUND2 else ' (without round-2 fields)'))
 
 
 if __name__ == '__main__':
