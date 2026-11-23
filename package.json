@@ -1,13 +1,24 @@
 {
   "name": "irreverents",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "private": true,
-  "description": "Irreverents: a browser-played 2D action-adventure. See CLAUDE.md.",
+  "type": "module",
+  "description": "Irreverents: a browser-played 2D action-adventure. See CLAUDE.md and docs/architecture.md.",
   "engines": { "node": ">=22" },
   "scripts": {
-    "build": "node -e \"require('fs').writeFileSync('built.json', JSON.stringify({builtAt:new Date().toISOString(), node:process.version, devDepAtBuild:(()=>{try{require.resolve('typescript');return true}catch{return false}})()}))\"",
-    "start": "node server.js"
+    "build": "node scripts/build.ts",
+    "check": "node scripts/check.ts",
+    "gates": "node scripts/gates.ts",
+    "start": "node dist/server.cjs",
+    "dev": "node scripts/dev.ts",
+    "e2e": "node scripts/not-yet.ts e2e",
+    "check:live": "node scripts/not-yet.ts check:live"
   },
   "dependencies": { "ws": "8.23.0" },
-  "devDependencies": { "typescript": "7.0.2" }
+  "devDependencies": {
+    "@types/node": "22.20.5",
+    "@types/ws": "8.18.2",
+    "esbuild": "0.28.2",
+    "typescript": "7.0.2"
+  }
 }
