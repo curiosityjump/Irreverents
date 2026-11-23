@@ -22,7 +22,11 @@ THEME = {  # (backdrop, back wall or None, ground body, ground lip): plain stand
     'hall-gallery': ('#221f44', '#3f3a66', '#8179b8', '#d0aaff'),
     'undercroft': ('#141228', '#221f44', '#343066', '#4c4890'),
     'graybox-hall': ('#221f44', '#3f3a66', '#8179b8', '#d0aaff'),
+    'cantina': ('#5a3420', '#8a5230', '#94583a', '#e0a860'),
+    'outpost': ('#8fd0fa', None, '#807b96', '#5fd35a'),
 }
+for _q in ('road', 'ridge', 'tower', 'depot', 'pit', 'cave'):
+    THEME['quarry-' + _q] = ('#343066', '#5b5670', '#807b96', '#a9a5bd')
 
 
 def sheet_contact(s, path, k=4, bg='#807b96'):
@@ -187,7 +191,7 @@ def main():
         sheet_contact(s, os.path.join(OUT, 'looks-%s.png' % gid), k=4, bg='#807b96' if gid != 'fx' else '#5c5690')
     sheets = make.decor_sheets()
     for name, s in sheets.items():
-        sheet_contact(s, os.path.join(OUT, 'decor-%s.png' % name), k=3, bg={'town': '#8fd0fa', 'courtyard': '#8fd0fa', 'castle': '#3f3a66', 'undercroft': '#221f44'}[name])
+        sheet_contact(s, os.path.join(OUT, 'decor-%s.png' % name), k=3, bg={'town': '#8fd0fa', 'courtyard': '#8fd0fa', 'castle': '#3f3a66', 'undercroft': '#221f44'}.get(name, '#807b96'))
     from sizes import rooms
     all_rooms = rooms()
     for rid, R in place_all().items():

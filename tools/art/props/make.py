@@ -14,6 +14,7 @@ import looks_people as lq
 import decor_draw as dd
 import import_p01
 import round2 as r2
+import round3 as r3
 from px import mix, new, col, paste
 from sizes import ROOT, sizes
 from place import place_all
@@ -75,10 +76,13 @@ def looks_sheets():
     # the throne room's own window (its part id is "window"): stained glass
     s.add('part:throne-room:window', lp.stained(1, 3))
     s.add('part:throne-room:window:broken', lp.stained(1, 3, True))
+    # round 3: the one-tile hiding places are all in the quarry: rubble over a crevice, not a curtain
+    hide = lambda w, h: r3.hide_1x1() if (w, h) == (1, 1) else lp.curtain(w, h)
+    front = lambda w, h: r3.hide_front_1x1() if (w, h) == (1, 1) else r2.hide_front(w, h, lp.curtain(w, h))
     for (w, h) in sorted(sz['hide']):
-        s.add('hide-%dx%d' % (w, h), lp.curtain(w, h))
+        s.add('hide-%dx%d' % (w, h), hide(w, h))
     for (w, h) in sorted(sz['hide']):
-        s.add('hide-front-%dx%d' % (w, h), r2.hide_front(w, h, lp.curtain(w, h)))
+        s.add('hide-front-%dx%d' % (w, h), front(w, h))
     s.newrow()
     s.add('bell', lp.bell())
     s.add('bell-ringing', lp.bell_ringing(), frames=4, fps=10)
@@ -89,13 +93,19 @@ def looks_sheets():
     s.add('crack-1', lp.crack(0)); s.add('crack-2', lp.crack(1)); s.add('rubble', lp.rubble())
     s.add('shop-counter', lp.shop_counter()); s.add('shop-goods', lp.shop_goods())
     out = [('parts', 'props/parts.png', s)]
+    # ---- round 3: the horn on the camp's post (src/client/draw/outpost.ts draws it bottom-centre over 2x3 tiles)
+    s = Sheet(160)
+    work, sound, broken = r3.signaler_frames()
+    s.add('signaler', work); s.add('signaler-sounding', sound, frames=3, fps=12); s.add('signaler-broken', broken)
+    out.append(('outpost', 'props/outpost.png', s))
     # ---- people
     s = Sheet(96)
-    s.add('mood-2', lq.mood2(), frames=2, fps=3); s.add('mood-3', lq.mood3(), frames=2, fps=6)
+    # round 3: moods bold enough for any hat or plume (a white '?' and a sweat drop; a red mark rimmed white)
+    s.add('mood-2', r3.mood2(), frames=2, fps=3); s.add('mood-3', r3.mood3(), frames=2, fps=6)
     s.add('away-dots', lq.away_dots(), frames=4, fps=4)
     s.newrow()
     s.add('bark', lq.bark()); s.add('ribbon', lq.ribbon()); s.add('bark-tail', lq.bark_tail())
-    s.add('alert-pip', lq.alert_pip(True)); s.add('alert-pip-off', lq.alert_pip(False)); s.add('player-mark', lq.player_mark())
+    s.add('player-mark', lq.player_mark())  # round 3: the alert pips moved to the HUD sheet (ui)
     s.newrow()
     s.add('shadow-s', lq.shadow(12, 4)); s.add('shadow-m', lq.shadow(18, 5)); s.add('shadow-l', lq.shadow(26, 6))
     out.append(('people', 'props/people.png', s))
@@ -110,6 +120,11 @@ def looks_sheets():
     s.add('fx-land', lq.fx_land(), frames=4, fps=15)
     s.newrow()
     s.add('fx-dust', r2.fx_dust(), frames=5, fps=15)
+    s.newrow()
+    # round 3: a tumble, a dizzy landing, a ringing bell
+    s.add('fx-speed', r3.fx_speed(), frames=3, fps=15); s.add('fx-dizzy', r3.fx_dizzy(), frames=4, fps=8)
+    s.newrow()
+    s.add('fx-clang', r3.fx_clang(), frames=3, fps=12)
     out.append(('fx', 'fx/fx.png', s))
     # round 2: the game's own pixel font, dark on paper and light with a shadow on the ribbon
     s = Sheet(570)
@@ -117,10 +132,20 @@ def looks_sheets():
     s.newrow()
     s.add('font-light', r2.font_strip(False), frames=95)
     out.append(('font', 'ui/font.png', s))
-    # ---- ui: the whole 48 x 24 picture is the look (normal, then pressed), as assets/ui/touch/ are
-    s = Sheet(48)
+    # ---- ui: the whole 48 x 24 picture is the look (normal, then pressed), as assets/ui/touch/ are.
+    # Round 3: the HUD sheet (assets/ui/hud.png) holds it too, with the faces, plate, icons, pips, gauge and chip;
+    # assets/ui/use.png is still written, as content/actions/interact.json's icon.
+    s = Sheet(96)
     s.add('ui-use', lq.ui_use())
-    out.append(('ui', 'ui/use.png', s))
+    s.add('hud-plate', r3.hud_plate())
+    s.newrow()
+    for who in r3.FACES:
+        s.add('hud-face-' + who, r3.hud_face(who))
+    s.newrow()
+    s.add('hud-ko', r3.hud_ko()); s.add('hud-fall', r3.hud_fall())
+    s.add('alert-pip', r3.alert_pip(True)); s.add('alert-pip-off', r3.alert_pip(False))
+    s.add('bell-gauge', r3.bell_gauge()); s.add('bark-edge', r3.bark_edge())
+    out.append(('ui', 'ui/hud.png', s))
     return out
 
 
@@ -162,7 +187,7 @@ def decor_sheets():
     s.add('planter-a', dd.planter(0)); s.add('planter-b', dd.planter(1))
     sheets['town'] = s
     s = Sheet(256)
-    s.add('tree', dd.tree()); s.add('ruin-arch', P01['ruin_arch']); s.add('column-broken', P01['broken_column'])
+    s.add('tree', dd.tree()); s.add('ruin-arch', r3.ruin_arch()); s.add('column-broken', r3.ruin_column())  # round 3: re-cut from P03
     s.add('ivy-long', dd.ivy(16, 28, 1)); s.add('ivy-long-b', dd.ivy(16, 24, 5)); s.add('ivy-short', dd.ivy(16, 14, 2))
     s.add('bush', dd.bush()); s.add('bush-small', dd.bush_small())
     s.newrow()
@@ -181,10 +206,33 @@ def decor_sheets():
     s.add('lantern-post', dim_p01(P01['lantern_post'], 0.2)); s.add('glow-torch', r2.glow(18)); s.add('glow-lantern', r2.glow(16))
     s.add('cobweb', dd.cobweb()); s.add('chain', dd.chain()); s.add('chain-end', dd.chain(True))
     sheets['undercroft'] = s
+    # round 3 (handoff-prompts/look3-props.md): the cantina, the camp, the quarry
+    c = r3.cantina_pieces()
+    s = Sheet(256)
+    for name in ('bar', 'bar-bottles', 'kegs', 'shelf-bottles', 'shelf-plates', 'keg', 'barrel', 'table', 'table-mug',
+                 'stool', 'swag', 'curtain', 'banner', 'bunting', 'mirror'):
+        s.add(name, c[name])
+    s.newrow()
+    s.add('chandelier-hung', r3.hang(c['chandelier'], 48 - c['chandelier'].height))
+    s.add('lantern-hung', r3.hang(c['lantern'], 48 - c['lantern'].height))
+    s.add('glow-22', r3.glow(22)); s.add('glow-14', r3.glow(14))
+    sheets['tavern'] = s
+    s = Sheet(256)
+    s.add('tent', r3.tent()); s.add('tent-blue', r3.tent(30, 26, 'blue')); s.add('flag', r3.flagpole())
+    s.add('rack', r3.weapon_rack()); s.add('fire', r3.campfire()); s.add('crate', r3.crate())
+    s.add('palisade', r3.palisade()); s.add('glow-20', r3.glow(20))
+    sheets['camp'] = s
+    s = Sheet(160)
+    s.add('rocks', r3.rock_pile()); s.add('rocks-small', r3.rock_pile(14, 9, 1)); s.add('scaffold', r3.scaffold())
+    s.add('lantern-hung', r3.hang(c['lantern'], 32 - c['lantern'].height)); s.add('glow-14', r3.glow(14))
+    sheets['quarry'] = s
     return sheets
 
 
 def main():
+    use = new(48, 24)
+    paste(use, lq.ui_use(), 0, 0)
+    save(use, 'ui/use.png')
     for gid, rel, s in looks_sheets():
         if gid == 'font' and NO_FONT:
             continue

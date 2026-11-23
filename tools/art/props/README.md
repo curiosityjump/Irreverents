@@ -62,6 +62,54 @@ the room's rim.
 
 New looks: `fx-swing-grappler`, `hide-front-1x2`, `hide-front-2x2`; `font-dark`/`font-light` in `content/looks/font.json` + `assets/ui/font.png`. Resized: `fx-hit` 32, `fx-slash` 32, `fx-dust` 24. Cracks get a light edge beside the dark line. Decor: P01 barrels (street, undercroft, dimmed toward night there), P01 lantern posts (every other street lamp; undercroft lower floor every 10th column from 9), P01 ruin arch and broken column (courtyard, `far`); a `blend: "lighter"` glow on every torch in the five rooms that have them and on the undercroft's lantern posts.
 
+
+### Round 3 (2026-11-23, `handoff-prompts/look3-props.md`)
+
+| File | Role |
+|---|---|
+| `srcimport.py` | cuts a piece from an art-desk source plate (P03-P08): crop, hard alpha, largest blob, snap to the ramps given (by material), shrink by majority (a mode, never an average), remove lone speckle, re-ink the edge |
+| `round3.py` | the cantina pieces (P04 tavern hub, P08 furniture), the camp (drawn: tents, palisade, fire, rack, flag, crate), the quarry (drawn: rock piles, scaffold; P04 lantern), `hide-1x1`/`hide-front-1x1`, the horn |
+| `shots.mjs ... round3` | the brief's scenes, upright and sideways; copies at 1x of the device picture in `docs/plan/step-8-shots/round3/props/` |
+
+New looks: `hide-1x1`, `hide-front-1x1` (rubble over a crevice; every one-tile hide is in the quarry); `signaler`,
+`signaler-sounding` (3 frames, 12 fps), `signaler-broken` in `content/looks/outpost.json` + `assets/props/outpost.png`,
+each 32x48: the horn only, drawn for a 10x32 post standing at x 11..20, y 16..47 of the look (hung on a peg at
+y 21 on its right; raised above its top when sounding; a splintered top at y 12..16 and the horn at the foot when
+broken). New decor: `cantina`, `outpost`, `quarry-{road,ridge,tower,depot,pit,cave}` (sheets `decor/tavern.png`,
+`camp.png`, `quarry.png`); glows (`blend: "lighter"`) on the cantina's chandelier and lanterns, the camp's fire and
+the cave's and pit's lanterns (`GLOW3` in `place.py`). Decisions: `docs/decisions-log.md`, 2026-11-23, "The
+cantina, the Bandit Camp and the quarry are furnished" and "The courtyard's tree ... moved".
+
+- **The courtyard's round-2 tree, grass, bush and gold flower stood on the quarry and camp doorways and a plate**
+  (added after round 2): `selfcheck.py` caught it. Moved (decision above).
+- **Not verified:** the horn *sounding* in the real game: the screenshot's attempt to set the post sounding on the
+  page's copy of the world did not take (the next snapshot wins); `horn-looks-4x.png` shows the three looks. The
+  cast lane's post sprite had not landed, so "the horn hangs on your post's peg" is lined up with the post's box
+  (10x32), not its picture. The quarry rooms had no ground art yet. The cave's and pit's lanterns hang near the
+  ceiling, above the brief's camera spots.
+
+**Push 2 (round 3).** Looks: `fx-speed` (24x24 x3, white streaks trailing left of the centre: a body flying
+right; mirror for left), `fx-dizzy` (24x12 x4, three stars on an orbit, centred over the head), `fx-clang`
+(32x20 x3, lines either side of a 16 px clear middle where the bell is); `mood-2` (a white `?` in thick ink
+and a blue sweat drop) and `mood-3` (a red anger mark of four corner strokes, rimmed white inside the ink, so
+no red plume swallows it). The HUD sheet `assets/ui/hud.png` (looks in `content/looks/ui.json`, which now names
+it; `ui-use` is cut from it and `assets/ui/use.png` is still written for `content/actions/interact.json`):
+`hud-face-{grappler,infiltrator,flyer,brawler,skirmisher}` 12x12, hand-drawn in the canon colours (the P07
+portraits shrunk to 12 px were mush); `hud-plate` 34x16 (navy, gold corner studs, ink edge: a face at x 2,
+y 2 and a count to its right); `hud-ko` and `hud-fall` 10x10 pictures, no letters; `alert-pip`/`alert-pip-off`
+10x10 framed bells (lit gold in red, dim grey in dark; moved here from `people`); `bell-gauge` 20x6 (an empty
+dark well under a gold rim, for the renderer to fill); `bark-edge` 16x12 (a paper chip, its arrow on the right
+edge; x 2..10 left plain for a cropped head). `import_p01.py` keeps at most three tones per material and
+removes lone speckle (`clean()`, the barrels and lantern posts); the courtyard's arch and broken column are
+re-cut from P03 grassy ruins' clean vine arch (`round3.ruin_arch`) with `srcimport.grab(key=..., grid=True)`
+(that plate has an opaque pale ground and drawn cell lines). Sheets at 4x: `hud-sheet-4x.png`,
+`fx-sheet-4x.png`, `moods-on-red-4x.png` in `docs/plan/step-8-shots/round3/props/`.
+- **Not verified in the game:** every push-2 look but the arches and the cleaned barrels: the actors lane draws
+  them (its brief, push 2) and had not landed. The sizes above are this lane's choice; the actors lane reads them
+  from the look.
+- **Process:** push 1 (76791bf) was reverted (2527611) after ten minutes not live; Railway was only slow (it then
+  deployed a later commit), so the revert was premature and push 1 was re-applied with push 2.
+
 ## Deviations from the contract
 
 - `ui-use`'s `src` is the whole 48×24 picture (normal then pressed), with no `frames`: that is how

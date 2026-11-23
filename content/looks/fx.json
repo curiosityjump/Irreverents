@@ -7,6 +7,9 @@
     "fx-slash": {"src": [0, 32, 32, 32], "frames": 5, "fps": 20},
     "fx-swing-grappler": {"src": [0, 64, 32, 32], "frames": 3, "fps": 16},
     "fx-land": {"src": [0, 96, 24, 8], "frames": 4, "fps": 15},
-    "fx-dust": {"src": [0, 104, 24, 24], "frames": 5, "fps": 15}
+    "fx-dust": {"src": [0, 104, 24, 24], "frames": 5, "fps": 15},
+    "fx-speed": {"src": [0, 128, 24, 24], "frames": 3, "fps": 15},
+    "fx-dizzy": {"src": [0, 152, 24, 12], "frames": 4, "fps": 8},
+    "fx-clang": {"src": [0, 164, 32, 20], "frames": 3, "fps": 12}
   }
 }

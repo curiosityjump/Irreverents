@@ -755,6 +755,7 @@ document as a decision of theirs.
 - **Where:** `tools/art/heroes/README.md`, "Flags for the lead".
 
 
+
 ### 2026-11-23 · The cantina, the Bandit Camp and the quarry are furnished; the quarry's one-tile hiding spots are rubble
 - **Decided by:** Step 8 look round 3, props builder `session_017WiGzJxBqVvizcghgHk5NG`, for orchestrator
 - **Instead of asking:** "What goes in the cantina, the camp and the quarry, and what does a one-tile hiding spot look like?"

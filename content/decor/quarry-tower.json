@@ -1,0 +1,8 @@
+{
+  "//": "DRAFT: stand-in drawn and placed by tools/art/props/make.py (the placing rules are tools/art/props/place.py).",
+  "id": "quarry-tower",
+  "items": [
+    {"image": "decor/quarry.png", "src": [38, 0, 32, 48], "tx": 3, "ty": 4, "dx": 0, "dy": 0, "layer": "far", "flip": false},
+    {"image": "decor/quarry.png", "src": [38, 0, 32, 48], "tx": 15, "ty": 28, "dx": 0, "dy": 0, "layer": "far", "flip": false}
+  ]
+}

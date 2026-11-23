@@ -38,6 +38,39 @@ PIECES = {
 PALETTE = [col(name, i) for name in P if name not in ('sky', 'cloud') for i in range(len(P[name]))]
 
 
+# DRAFT (round 3): the courtyard's arches are raised toward the near layer's ramp (less greyed), so they read as
+# clean stone beside the ground lane's art rather than a blotchy wash. Undo: delete the entry.
+FAR_GREY = {'ruin_arch': 0.18, 'broken_column': 0.25}
+CLEAN = True
+
+RAMP_OF = {col(name, i)[:3]: name for name in P for i in range(len(P[name]))}
+
+
+def clean(im):
+    from collections import Counter
+    from srcimport import majority_pass
+    used = Counter(im.getpixel((x, y)) for y in range(im.height) for x in range(im.width) if im.getpixel((x, y))[3])
+    keep = {}
+    for c, n in used.most_common():
+        r = RAMP_OF.get(c[:3], 'other')
+        keep.setdefault(r, [])
+        if len(keep[r]) < 3:
+            keep[r].append(c)
+    remap = {}
+    for c in used:
+        r = RAMP_OF.get(c[:3], 'other')
+        if c not in keep[r]:
+            remap[c] = min(keep[r], key=lambda k: sum((k[i] - c[i]) ** 2 for i in range(3)))
+    for y in range(im.height):
+        for x in range(im.width):
+            c = im.getpixel((x, y))
+            if c in remap:
+                im.putpixel((x, y), remap[c])
+    for _ in range(2):
+        im = majority_pass(im)
+    return im
+
+
 def lum(c):
     return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]
 
@@ -77,6 +110,11 @@ def piece(name, far_to=None):
                 if im.getpixel((x, y))[3] and edge(x, y) and lum(im.getpixel((x, y))) > 185 and layer != 'fx']
         for x, y in drop:
             im.putpixel((x, y), CLEAR)
+    # round 3 (handoff-prompts/look3-props.md, 7): the painted speckle goes. Each material keeps at most its three
+    # most-used tones (the rest go to the nearest kept one), then a pixel no neighbour shares takes the
+    # neighbours' most common colour, twice. Effects keep every stroke.
+    if layer != 'fx' and CLEAN:
+        im = clean(im)
     # far-layer pieces are greyed toward the far colours and lose the dark outline
     if layer == 'far':
         to = far_to or col('far', 2)
@@ -84,7 +122,7 @@ def piece(name, far_to=None):
             for x in range(im.width):
                 c = im.getpixel((x, y))
                 if c[3]:
-                    im.putpixel((x, y), mix(c, to, 0.35))
+                    im.putpixel((x, y), mix(c, to, FAR_GREY.get(name, 0.35)))
     # the outline, re-applied on the silhouette's own edge
     line = INK if layer != 'far' else mix(col('stone', 1), col('far', 1), 0.3)
     if layer == 'fx':

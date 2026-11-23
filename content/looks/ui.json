@@ -1,8 +1,20 @@
 {
   "//": "DRAFT: stand-in drawn by tools/art/props/make.py; a delivered sheet replaces it by editing this file.",
   "id": "ui",
-  "image": "ui/use.png",
+  "image": "ui/hud.png",
   "looks": {
-    "ui-use": {"src": [0, 0, 48, 24]}
+    "ui-use": {"src": [0, 0, 48, 24]},
+    "hud-plate": {"src": [48, 0, 34, 16]},
+    "hud-face-grappler": {"src": [0, 24, 12, 12]},
+    "hud-face-infiltrator": {"src": [12, 24, 12, 12]},
+    "hud-face-flyer": {"src": [24, 24, 12, 12]},
+    "hud-face-brawler": {"src": [36, 24, 12, 12]},
+    "hud-face-skirmisher": {"src": [48, 24, 12, 12]},
+    "hud-ko": {"src": [0, 36, 10, 10]},
+    "hud-fall": {"src": [10, 36, 10, 10]},
+    "alert-pip": {"src": [20, 36, 10, 10]},
+    "alert-pip-off": {"src": [30, 36, 10, 10]},
+    "bell-gauge": {"src": [40, 36, 20, 6]},
+    "bark-edge": {"src": [60, 36, 16, 12]}
   }
 }
