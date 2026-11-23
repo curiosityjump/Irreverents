@@ -121,10 +121,11 @@ push. All are `DRAFT:`.
 | `world.found` | top-level world field: by level id, the piece ids found | glints | the entrance sign and menu row, puzzles |
 | `world.banked` | top-level: prize thing ids a hero carried out of their place | heist | glints (`from: { "prize": id }`), waves (the stealth legend) |
 | `world.cargo` | top-level: hero entity id to the prize thing it carries now | heist | the HUD plate, powers (a hard hit may drop it), risk (a throw-out puts it back) |
+| `world.jobs` | top-level: by heist id, `{ from, seen }`, the job in progress (server only) | heist | the waves slice's detector may read `seen` |
 | `world.roster` | top-level: the character ids unlocked in this game; absent means every roster character (today's behaviour) | rescue | `cantina-regulars`, the swap row |
 | `world.sources` | top-level: power source ids a hero has found | powers | the menu row |
 | effect `power` | `{ kind: 'power'; power: string \| null }` in `src/sim/effects.ts`: the holder's own page gains or loses it | powers | the page's own verbs and HUD |
-| events | `piece-found`, `place-found`, `set-complete` (glints); `prize-taken`, `prize-banked`, `clean-getaway` (heist; an unseen deed is already the `deed` event with no `witnesses`); `power-taken`, `power-dropped` (powers); `recruited` (rescue); `hall-legend` (waves) | their slice | banners, the detector |
+| events | `piece-found`, `place-found`, `set-complete` (glints); `prize-taken`, `prize-banked`, `clean-getaway`, `prize-returned` (heist; Step 21 emits the last, after `returnPrize`; an unseen deed is already the `deed` event with no `witnesses`); `power-taken`, `power-dropped` (powers); `recruited` (rescue); `hall-legend` (waves) | their slice | banners, the detector |
 | `src/sim/use.ts`, `src/sim/use/*.ts` | the one place that decides what a press of Use does here and the word the button shows | heist, push 1 | rescue (`free`), vehicles (`get-in`): one new file each |
 | `content/prompts.json` | the Use button's words, by entry | heist | one added row per later entry |
 | `src/client/draw/banner.ts` | one queue for the two-second banners at the top; one at a time, none over the controls | heist, push 2 | glints, powers, rescue, waves: each adds an entry from its own draw file |

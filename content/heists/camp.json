@@ -1,0 +1,6 @@
+{
+  "//": "DRAFT (Step 19): the Bandit Camp's job: the strongbox inside the watchers' beat (content/placements/outpost.json). Carried, it shows as the iron chest in the hero's slot; its stand is left open.",
+  "id": "camp",
+  "room": "outpost",
+  "prizes": [{ "thing": "camp-strongbox", "carried": "chest-iron-closed", "taken": "chest-iron-open" }]
+}

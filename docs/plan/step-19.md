@@ -104,3 +104,31 @@ Nothing of Step 16's.
   queue and HUD plate) unblock Steps 9, 13, 7 and 20.
 
 ## Builder notes
+
+(Step 19 builder `session_017WiGzJqpMTHyoAaus6JsHG`, brief `loop-heist.md`.)
+
+- **Landed:** push 1 (the Use arbiter) 03b5935; push 2 (the word, banners,
+  plate) 588ac88; push 3 (sight bands, the unseen mark) and push 4 (the
+  prize, cargo, clean getaway): see `git log --grep 'Step 19 push'`.
+- **The strongbox moved to column 34** (decisions-log): measured, no
+  clean job was possible at column 23.
+- **Not built:** `step19-camp-loud-no-horn` (every watcher knocked flat in
+  plain sight, the horn never sounded). The camp's fighters do not come at
+  a flyer they see, and a grappler on the floor is called on at once; a
+  scenario that flattens all three before a call completes needs tuning
+  the budget did not allow. `step19-camp-clean-control` covers the rule it
+  was for: seen, no call, banked, no clean getaway. For the next builder or
+  the orchestrator.
+- **Flaky under load, not ours:** full `npm run e2e` runs while another
+  heavy job ran missed `cantina-row`, `level-full`/`level-menu` once each
+  and `h1` (reconnect) once; each passed on a quiet re-run or on the
+  commit before with nothing of ours in its path.
+- **Unseen look:** the art builder cut `unseen` (P07's hood with eyes, no
+  closed eye on the atlas) and `seen-mark`; `draw/sight.ts` draws `unseen`;
+  `seen-mark` is unused yet.
+- **To ask Step 16's lead:** a `clean-getaway` expectation on its
+  zero-alarm scenarios and none on its caught ones, now the depot hoard is
+  a prize (`content/heists/depot.json`).
+- **Not verified:** the chime on a phone (audio is not in the e2e); the
+  band's cost on a real iPhone (14 by 10 line tests per person per frame,
+  up to 8 people).

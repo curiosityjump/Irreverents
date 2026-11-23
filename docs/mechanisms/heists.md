@@ -104,3 +104,56 @@ one the page shows on the button.
   witnessed by her); e2e fact `heist-band` (her band flips with her).
 - The Use mark (push 2) sits over the hero's head when the hero is taller
   than the thing, as the doorway arrow does.
+
+## A prize in your hands (push 4)
+
+- **A place with a prize** is one file, `content/heists/<id>.json`
+  (kind `src/content/kinds/heists.ts`): `room`, and `prizes`, each a
+  placed thing of that room (`once`, deed `take`, no keeper) with the look
+  shown in the carrier's slot (`carried`) and the look left on its stand
+  (`taken`). Tonight: `camp` (`camp-strongbox`, `content/placements/
+  outpost.json`) and `depot` (`depot-hoard`, Step 16's thing, named here,
+  never edited there). No "begin heist" flag (doc 07): nothing announces
+  a job.
+- **The rules** (`src/sim/systems/heist-cargo.ts`, order 607; helpers in
+  `src/sim/heist.ts`):
+  - A take of a prize puts it in `world.cargo` (hero entity id → thing
+    id): `prize-taken`.
+  - A carrier out of the place's room on their own feet (`onOwnFeet`: not
+    out cold, held or flying) banks it: `world.banked`, `prize-banked`.
+  - **Clean** when no person placed in that room (wherever they are now)
+    ever had a played hero in sight (`canSee`, the band's test) from the
+    first played hero coming in to the banking: `clean-getaway`. So a job
+    seen once, horn or no horn, is banked but not clean. A job ends when no
+    played hero is in the room and nobody carries its prize: the next
+    visit starts clean. `DRAFT:`.
+  - A prize taken with nobody carrying it (a kept game from before cargo,
+    or a carrier who left the game) counts as banked, quietly.
+  - `returnPrize(world, thing)` puts a carried prize back on its stand
+    (clears the cargo and `takenBy`) and returns who carried it; Step 21's
+    throw-out calls it and emits `prize-returned`.
+  - `INTENT:` it reads rooms each tick, never `changed-room` (the server
+    sees no door event for a player), and acts only on prizes whose thing
+    entity is in the world: a page's own world has none, so only the
+    server writes `cargo`, `banked` and `jobs`; pages take them by key.
+- **Shown**: the carried look in the plate's cargo slot (`fillHudSlot`,
+  `src/client/draw/heist.ts`); a taken prize's stand shows its `taken`
+  look; a `clean-getaway` (anyone's) queues the banner "Nobody noticed"
+  and plays the `clean-getaway` sound (the jingle, heard in every room).
+  A shop take is never a getaway: the street has no heist file.
+- **The camp's strongbox is at column 34**, not the brief's first guess
+  (23): the ledge has no way down but its ends, and every way to 23 on the
+  floor passes the lookout or fighter 1 in plain sight. At 34 only fighter
+  2 watches it (facing it 7 s of 10); the flyer drops off the ledge's east
+  end, takes it while fighter 2 looks away, flaps back up through the
+  ledge and walks out over everyone (`step19-camp-clean`).
+- Scenarios: `step19-camp-clean` and its control
+  `step19-camp-clean-control` (seen once by fighter 2, no call: banked,
+  not clean), `step19-cargo-waits-for-the-door` (taken and still inside:
+  never banked). Real server, two connections:
+  `scripts/checks/step19-heist.ts` (cargo, banked, `clean-getaway` on both
+  pages; control seen, none).
+- **Not built**: a loud camp job with every watcher knocked flat and the
+  horn never sounded (the brief's `step19-camp-loud-no-horn`); the control
+  covers "seen, no horn, not clean". See `docs/plan/step-19.md`, Builder
+  notes.

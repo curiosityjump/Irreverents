@@ -1,0 +1,11 @@
+{
+  "id": "clean-getaway",
+  "files": [
+    "audio/just_as_expected_jingle.wav"
+  ],
+  "volume": 0.8,
+  "pitch": 0,
+  "gapMs": 3000,
+  "distance": false,
+  "otherRooms": true
+}

@@ -154,6 +154,10 @@ export function createMoments(content: Content, myPlayer: string, myId: string) 
             out.push({ moment: 'door', room, x: d ? d.tx * 16 + 8 : null, y: d ? d.ty * 16 + 8 : null, key: hash(ev.tick, 'door', String(ev.entity)), tick: ev.tick, mine, delay: 0 });
             return;
           }
+          case 'clean-getaway':
+            // Step 19: nobody noticed; heard by everyone in the game, wherever they are (DRAFT: the jingle, louder).
+            out.push({ moment: 'clean-getaway', room: '', x: null, y: null, key: hash(ev.tick, 'clean-getaway', String(ev.thing)), tick: ev.tick, mine, delay: 0 });
+            return;
           case 'call-started':
             return at(ev.by, ev, 'call-windup', mine);
           case 'call-completed':

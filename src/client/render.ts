@@ -22,6 +22,7 @@ import { drawBanners } from './draw/banner.ts';
 import { drawHud } from './draw/hud.ts';
 import { drawUseHint } from './draw/use-hint.ts';
 import { drawSight, drawUnseenMarks } from './draw/sight.ts';
+import { drawPrizeStands } from './draw/heist.ts';
 import { useHere } from '../sim/use.ts';
 
 /** DRAFT: the internal resolution the art on order assumes (docs/plan/step-1.md). */
@@ -79,6 +80,8 @@ export function render(g: CanvasRenderingContext2D, world: World, content: Conte
   drawCantinaBell(g, world, content, roomId, ox, oy);
   const decor = decorOf(room, content);
   drawDecor(g, decor, 'back', room.tile, ox, oy, W, H);
+  // Step 19: a taken prize's empty stand (draw/heist.ts, which also fills the plate's cargo slot).
+  drawPrizeStands(g, world, content, roomId, ox, oy);
   // Step 19: every person's sight, faint, behind the bodies (draw/sight.ts).
   drawSight(g, world, content, roomId, ox, oy);
   drawEntities(g, world, content, roomId, ox, oy, pv);

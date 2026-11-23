@@ -7,5 +7,8 @@
     { "id": "camp-horn-post", "character": "signal-post", "tile": [20, 10] },
     { "id": "camp-fighter-1", "character": "outpost-fighter", "tile": [25, 10], "npc": "outpost-fighter", "routine": [{ "face": "left" }, { "wait": 8 }, { "face": "right" }, { "wait": 3 }] },
     { "id": "camp-fighter-2", "character": "outpost-fighter", "tile": [28, 10], "npc": "outpost-fighter", "routine": [{ "face": "right" }, { "wait": 7 }, { "face": "left" }, { "wait": 3 }] }
+  ],
+  "things": [
+    { "//": "DRAFT (Step 19): the camp's prize, a strongbox inside fighter 2's beat (column 28, facing it 7 s of 10), under the ledge's east end and seen from it. Not the brief's first guess, column 23: the ledge has no way down but its ends, and every way to 23 on the floor passes the lookout or fighter 1 in plain sight, so no clean job was possible there (decisions-log Step 19). A prize of content/heists/camp.json.", "id": "camp-strongbox", "tile": [34, 10], "deed": "take", "once": true, "look": "strongbox" }
   ]
 }

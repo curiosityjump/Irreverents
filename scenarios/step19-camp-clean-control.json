@@ -1,0 +1,167 @@
+{
+  "id": "step19-camp-clean-control",
+  "gate": "E",
+  "proves": "Step 19, the control of step19-camp-clean and the loud job: the same route, but the flyer lingers by the strongbox until fighter 2 turns back and has them in plain sight for about a second (the horn never sounds: no call starts); they still get out on their own feet, so the prize is banked, but there is no clean getaway",
+  "room": "outpost",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "flyer",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 420,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 20,
+      "to": 30,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 45,
+      "to": 50,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 60,
+      "to": 65,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 450,
+      "to": 512,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 515,
+      "to": 520,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 640,
+      "to": 650,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 665,
+      "to": 670,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 685,
+      "to": 690,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 660,
+      "to": 998,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 1030,
+      "to": 1035,
+      "hold": [
+        "interact"
+      ]
+    }
+  ],
+  "ticks": 1300,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "prize-taken",
+      "where": {
+        "heist": "camp",
+        "thing": "camp-strongbox",
+        "by": "p:a"
+      },
+      "between": [
+        515,
+        515
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "outpost-call-started",
+      "where": {},
+      "between": [
+        0,
+        1300
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "prize-banked",
+      "where": {
+        "heist": "camp",
+        "thing": "camp-strongbox",
+        "by": "p:a"
+      },
+      "between": [
+        1020,
+        1040
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "clean-getaway",
+      "where": {},
+      "between": [
+        0,
+        1300
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "in-room",
+      "player": "a",
+      "at": 1300,
+      "room": "courtyard"
+    }
+  ]
+}

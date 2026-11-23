@@ -989,3 +989,17 @@ document as a decision of theirs.
 - **Why this way:** D-016 (zero-alarm success deeply satisfying); doc 07's "detection cones or simple proximity checks"; your comp A00-01 draws a vision cone. The band is exactly the sight rule already in the game (a box ahead of them, blocked by walls), not a new rule (O-007 stays open). It flips when they turn, so the shopkeeper's glance behind is something you can watch for.
 - **To change it:** the band's look is two colours in `src/client/draw/sight.ts`; the mark is a look named `unseen`; turning the band off is one line in `src/client/render.ts`.
 - **Where:** `docs/mechanisms/heists.md`, "Sight you can see".
+
+### 2026-11-23 · Step 19: a prize is in your hands until you walk out with it, and a job nobody saw says "Nobody noticed"
+- **Decided by:** Step 19 builder (brief `loop-heist.md`), `session_017WiGzJqpMTHyoAaus6JsHG`
+- **Instead of asking:** "When is a stolen prize yours, and what counts as a clean job?"
+- **Why this way:** D-016 (zero-alarm success deeply satisfying), D-019 (failure opens play), D-081 (a hit can cost carried items, later). Taken, the prize shows by your face; it is yours once you are out of its room on your own feet (not knocked out, carried or thrown). Clean means none of that place's people ever had you in sight, from going in to walking out: the same sight the bands show. Seen once, even with the horn never sounded, it is still yours but not clean. Leaving with nothing and coming back later starts a fresh job. A prize already gone in an older saved game counts as carried out.
+- **To change it:** what is clean and when a job resets are a few lines in `src/sim/systems/heist-cargo.ts`; the words and looks are in `src/client/draw/heist.ts` and `content/heists/`.
+- **Where:** `docs/mechanisms/heists.md`, "A prize in your hands".
+
+### 2026-11-23 · Step 19: the Bandit Camp's strongbox sits at the east end, under the ledge, not in the middle of the camp
+- **Decided by:** Step 19 builder, `session_017WiGzJqpMTHyoAaus6JsHG`
+- **Instead of asking:** "Where in the camp does the strongbox go?" (the brief's first guess was between the horn post and fighter 1)
+- **Why this way:** measured: from the middle of the camp no hero can get in and out unseen (the ledge has no way down but its ends, and the floor passes the lookout or a fighter in plain sight), so a clean job would be impossible. At the east end only one fighter watches it, turning away for three seconds in ten; the flyer can drop off the ledge's end, take it while he looks away, and fly back up. The others can still take it and fight or run (getting caught opens play).
+- **To change it:** the strongbox's `tile` in `content/placements/outpost.json`; the camp scenarios' timings follow it.
+- **Where:** `content/placements/outpost.json`; `scenarios/step19-camp-*.json`.

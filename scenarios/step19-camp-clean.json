@@ -1,0 +1,214 @@
+{
+  "id": "step19-camp-clean",
+  "gate": "E",
+  "proves": "Step 19, the camp's job done clean, in the real room: the flyer comes in, hops onto the ledge (above everyone's sight), drops off its east end, waits for fighter 2 to turn away, takes the strongbox (prize-taken; it is in the flyer's hands, world.cargo), flaps back up through the ledge, walks it west and leaves by the doorway: no person of the camp ever had them in sight (canSee, the test the band draws), so out of the room on their own feet it is banked (prize-banked) and the job is a clean getaway (clean-getaway), once. Control: step19-camp-clean-control, the same job seen once by fighter 2: banked, no clean getaway",
+  "room": "outpost",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "flyer",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 420,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 20,
+      "to": 30,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 45,
+      "to": 50,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 60,
+      "to": 65,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 450,
+      "to": 505,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 510,
+      "to": 515,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 520,
+      "to": 530,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 545,
+      "to": 550,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 565,
+      "to": 570,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 540,
+      "to": 885,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 910,
+      "to": 915,
+      "hold": [
+        "interact"
+      ]
+    }
+  ],
+  "ticks": 1200,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "prize-taken",
+      "where": {
+        "heist": "camp",
+        "thing": "camp-strongbox",
+        "by": "p:a"
+      },
+      "between": [
+        510,
+        510
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "deed",
+      "where": {
+        "deed": "take",
+        "thing": "camp-strongbox",
+        "witnesses": []
+      },
+      "between": [
+        510,
+        510
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "prize-banked",
+      "where": {
+        "heist": "camp",
+        "thing": "camp-strongbox",
+        "by": "p:a"
+      },
+      "between": [
+        900,
+        920
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "prize-banked",
+      "where": {},
+      "between": [
+        0,
+        1200
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "clean-getaway",
+      "where": {
+        "heist": "camp",
+        "thing": "camp-strongbox",
+        "by": "p:a"
+      },
+      "between": [
+        900,
+        920
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "clean-getaway",
+      "where": {},
+      "between": [
+        0,
+        1200
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "outpost-call-started",
+      "where": {},
+      "between": [
+        0,
+        1200
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "in-room",
+      "player": "a",
+      "at": 1200,
+      "room": "courtyard"
+    }
+  ]
+}

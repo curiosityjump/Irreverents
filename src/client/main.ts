@@ -21,6 +21,7 @@ import { drawnCompletion } from './draw/completion.ts';
 import { drawnBanner } from './draw/banner.ts';
 import { drawnHud } from './draw/hud.ts';
 import { drawnSight, watchSightEvents } from './draw/sight.ts';
+import { drawnHeist, watchHeistEvents } from './draw/heist.ts';
 import { levelProgress } from '../sim/levels.ts';
 import { setUpMenu, showGone, showStart } from './start.ts';
 import type { StartRecord } from './start.ts';
@@ -139,6 +140,8 @@ const debug = {
     banner: null as ReturnType<typeof drawnBanner>,
     /** Step 19: each person's sight band this frame drew (facing, box, lit cells) and the unseen marks up (src/client/draw/sight.ts). */
     sight: null as ReturnType<typeof drawnSight> | null,
+    /** Step 19: the clean getaways this page announced (src/client/draw/heist.ts). */
+    heist: null as ReturnType<typeof drawnHeist> | null,
     cantina: null as { row: { kind: string; slot: number; x: number; y: number; w: number; h: number; taken: boolean }[] | null; counter: { player: string; ko: number; falls: number }[] | null } | null,
   },
 };
@@ -258,6 +261,7 @@ function play(worldName: string): void {
     const drawnBodies = [...net.others(), me];
     const shown = { ...net.world, entities: drawnBodies };
     watchSightEvents(net.latest(), frameNo); // Step 19: an unseen deed's mark (draw/sight.ts)
+    watchHeistEvents(net.latest()); // Step 19: a clean getaway's banner (draw/heist.ts)
     const camera = render(g, shown, content, me.room, { me: me.id, frame: frameNo, drawn: seen });
     const result = { camera, drawn: seen };
     lastCamera = camera;
@@ -300,6 +304,7 @@ function play(worldName: string): void {
     d.hud = drawnHud();
     d.banner = drawnBanner();
     d.sight = drawnSight();
+    d.heist = drawnHeist();
     d.words = takeWords();
     // Step 5 (docs/mechanisms/network.md, "Predicted hits"): each impact this frame drew from, on this page's clock.
     d.impacts = drawnBodies.filter((e) => e.c.impact && e.room === me.room).map((e) => ({ id: e.id, tick: e.c.impact!.tick, age: net.world.tick - e.c.impact!.tick, beat: !!e.c.beat, predicted: !!e.c.predicted }));

@@ -1,0 +1,6 @@
+{
+  "//": "DRAFT (Step 19): the depot's job, the same as the camp's at full size. The hoard is Step 16's (content/placements/quarry-depot.json, named here, never edited there). Carried, it shows as a gold sack.",
+  "id": "depot",
+  "room": "quarry-depot",
+  "prizes": [{ "thing": "depot-hoard", "carried": "gold-sack", "taken": "hoard-taken" }]
+}
