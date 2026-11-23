@@ -320,7 +320,7 @@ Full text: `docs/plan/step-8.md`
 
 ## Step 9 — Powers you pick up, and can lose
 
-**Status: open, unclaimed.** (Step 2 closed 17:30 UTC. Brief `handoff-prompts/loop-powers.md`.)
+**Status: open, claimed by orchestrator session_017WiGzJzo6aZqH4kYxxJsiV (builders: session_017WiGzF16bBpnLmeWErGynR), 2026-11-23.** (Step 2 closed 17:30 UTC. Brief `handoff-prompts/loop-powers.md`.)
 
 Full text: `docs/plan/step-9.md`
 
@@ -378,7 +378,7 @@ Full text: `docs/plan/step-18.md`
 
 ## Step 19 — Stealth you can read, and a prize you carry out
 
-**Status: open, unclaimed.** (Brief `handoff-prompts/loop-heist.md`; its first two pushes unblock Steps 9, 13, 7 and 20.)
+**Status: open, claimed by orchestrator session_017WiGzJzo6aZqH4kYxxJsiV (builders: session_017WiGzJqpMTHyoAaus6JsHG), 2026-11-23.** (Brief `handoff-prompts/loop-heist.md`; its first two pushes unblock Steps 9, 13, 7 and 20.)
 
 Full text: `docs/plan/step-19.md`
 

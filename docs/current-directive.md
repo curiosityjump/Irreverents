@@ -37,33 +37,15 @@ Re-check with `git log --oneline 9f36db3..origin/main`.)*
 
 ## Sessions
 
-*(19:20 UTC, orchestrator `session_017WiGzJzo6aZqH4kYxxJsiV` at pickup; all report to the session on the Orchestrator line of `docs/questions-for-the-owner.md`.)*
-Started 19:14 UTC: core-loop art cut-outs builder `session_017WiGzEN1QbSnHzXNqV4XSt` (`handoff-prompts/loop-art-cutouts.md`). Backstop `trig_011biZA4hCVneba273QGoi6c` (19:46 UTC, into the orchestrator: has the re-plan landed?).
-Running: hit-prediction builder `session_017WiGzGPRoCXeC3TG8HFyxh`
-(`handoff-prompts/step-5-hit-lands-at-once.md`); Step 14 slice A builder
-`session_017WiGzFeeJgj8z2SUAFyu5J`; Step 18 builder `session_017WiGzHwmFZe9AdG3KMHsa4` (about 350k
-tokens: its next slice wants a fresh builder); Step 16 lead `session_017WiGzHt9iJy3caBLkT1Ef4`
-with one builder on slice 4. Idle: the switch-gap and doorways builder
-`session_017WiGzJujVWWDboh12zWhNR` (done; reusable for client work if under 400k); Step 5's lead
-`session_017WiGzJfkNbzJfpRVPhWoeK` (idle since the morning). Vision Partner
-`session_017WiGzGHxdLq71CDUoQZz9Z` (keeps the Drive list from here). Archived today: every Step 8
-builder of rounds 2 and 3, the Step 2, 11 and 12 leads and their builders, the Step 3 and Step 17
-builders. Past orchestrators `session_017WiGzFWfLir1ATiSP7c5E5`,
-`session_017WiGzJeh7Tuov59d8XYmru`, `session_017WiGzHX8g2sXimNRnqp2oZ`,
-`session_017WiGzGp8auJceLEAAh9Aqx`, `session_017WiGzHhke4tkAThPgw6EXs` only forward; never archive
-them.
+*(19:55 UTC, orchestrator `session_017WiGzJzo6aZqH4kYxxJsiV`; all report to the session on the Orchestrator line of `docs/questions-for-the-owner.md`.)*
+Core loops, started 19:53 UTC (model `claude-opus-5-5`): hidden places `session_017WiGzFeeJgj8z2SUAFyu5J` (`handoff-prompts/loop-glints.md`, sent by message to Step 14 slice A's builder); heists `session_017WiGzJqpMTHyoAaus6JsHG` (`loop-heist.md`); powers `session_017WiGzF16bBpnLmeWErGynR` (`loop-powers.md`). Not started, held for the weekly limit until one of those reports done: `loop-waves.md`; `loop-rescue.md` waits for the Use arbiter (`src/sim/use.ts`) on `main`.
+Running besides: hit-prediction builder `session_017WiGzGPRoCXeC3TG8HFyxh` (`handoff-prompts/step-5-hit-lands-at-once.md`; push 057668b reverted at 7908aa8, re-pushing with a fix); Step 16 lead `session_017WiGzHt9iJy3caBLkT1Ef4` with builder `session_017WiGzH5v7n1DfXiS1iFbh6` (the escape, then a phone walk to the depot). Idle and open: art cut-outs builder `session_017WiGzEN1QbSnHzXNqV4XSt` (done and reviewed; takes look requests from loop builders); the doorways builder `session_017WiGzJujVWWDboh12zWhNR` (done, about 290k); Step 5's lead `session_017WiGzJfkNbzJfpRVPhWoeK`. Vision Partner `session_017WiGzGHxdLq71CDUoQZz9Z`. Archived 19:25 UTC: Step 18's builder (slice A reviewed). Past orchestrators only forward; never archive them. Backstop: `trig_01WyNPTaAPtCmK4nmC3qSQFt` (20:06 UTC).
 
 ## Owed next
 
 *(In order, 19:15 UTC.)*
 1. Whatever the owner says first.
-1a. Brief the core-loop playables in `docs/plan/core-loops.md`'s order: spawn a builder per brief in `handoff-prompts/loop-*.md` (model `claude-opus-5-5`), claim each step.
-1b. **The core loops** (the owner's verdict): when `docs/plan/core-loops.md` and
-   `handoff-prompts/loop-*.md` are on `main` (the re-plan's own commit; if it has not landed by
-   about 19:45 UTC, ask the previous orchestrator by message, then write the plan yourself from
-   `docs/answers-outbox.md`'s entry and the library), spawn one builder per brief plus one for
-   `handoff-prompts/loop-art-cutouts.md`, each with `model: "claude-opus-5-5"`, claim each step,
-   and tell the owner in plain words what each first playable is and where to find it.
+1a. **The core loops** (`docs/plan/core-loops.md`, "The order to start them in"): three builders run ("Sessions"). As each reports done or the Use arbiter lands: spawn `loop-waves.md`, then `loop-rescue.md`; first free slot after that, vehicles (Step 20, two builders, no brief yet), then risk (Step 21), the town's tiers (Step 4), puzzles (a Step 3 slice). Review each push by re-running.
 2. Review by re-running: Step 17's pushes B, C, D (then close Step 17); Step 18 pushes 1 and 2;
    the switch gap (18f7c48; delete its brief); Step 8 round 3's five lanes for green, then their
    looks against the approved sheets (delete each `handoff-prompts/look3-*.md`); hit prediction and
