@@ -143,13 +143,3 @@ actually read (questions for the owner go through
 **Flag:** the banner's "new" means "not in the first frame that had a world in it". If Step 1's network layer delivers the world over several frames, or re-delivers it after a reconnect, check that old records are not announced (several arriving in one frame are already ignored).
 
 **Flag:** rung 5 was by eye, on hand-made records pushed into the page's world; nothing scripted covers the drawing, and the real path (detector → pedestal → page, two devices) has not been seen. Text follows `draw/npcs.ts` (`fillText`, 8 px): readable, soft on a phone; a shared pixel font would be Step 5's or 8's call.
-
-
-
-
-
-### step-16-b-quarry-enemies.md, 2026-11-23
-
-**Flag:** a third new kind, `toll-keeper` (`content/characters/toll-keeper.json`, `content/npcs/toll-keeper.json`), outside the brief's listed paths: a fighter as keeper punches the hero before they can pay (traced). It has no `attack` verb, side bad, the shopkeeper's walking numbers. The rule row names it (`targetRole: toll-keeper`), because the brief's broader row (any bad witness of any buy) broke `step4-hero-buys` and `step4-hero-fluke-reassured` (the villain watching a shop purchase) and took the gates to 4 of 6; narrowed, 5 of 6.
-
-**Flag:** "heavy falls to a throw, not a punch" cannot be had with today's wear rules (a slam wears by speed × `impactWear`; the grappler throws a 120-weight heavy at about 217 px/s, 17 wear, against a punch's 34). Built as "eight punches drop it, seven don't". A world rule for slams (wear by weight, or a slam flattening outright) would be Step 2's.

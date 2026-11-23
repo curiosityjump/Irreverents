@@ -485,6 +485,8 @@ Slice 1, 2026-11-23 16:10 UTC: the main way (road, ridge, tower, depot) is **248
 
 2026-11-23 16:40 UTC, lead review of slice 1 at 1e35d37 (re-run): `npm run check` green, 224 s (77 s at e673fa5); 40 `step16-*` scenarios; `check:deployed` ok. The way-out check alone, `checkRooms`, takes 97 s with the quarry joined, and runs inside `loadContent()`, so `npm run build` went from 38 s (7500b81) to 93 s. Flagged to the orchestrator for a Step 3 fix; the rooms stay. Push 3, the undercroft way home, deferred.
 
+2026-11-23 17:35 UTC, lead review of slice 2 at 50c584d (re-run): `npm run check` green, 60 `step16-*` scenarios, `npm run gates` 5 of 6, the stopping condition's `src/` count 0. Accepted as built: a third kind `toll-keeper` (no attack: a fighter as keeper punched the hero before they could pay); the toll's rule row names `targetRole: toll-keeper` (the broad row broke `step4-hero-buys` and `step4-hero-fluke-reassured`); the heavy falls to eight punches, not seven, and not to one throw (a slam wears by speed, about 17 against a punch's 34: a slam rule is Step 2's or Step 18's, passed to the orchestrator).
+
 ## Briefs
 
 - Slice 3, the depot (signals 5–6): `handoff-prompts/step-16-c-quarry-depot.md`, written 17:30 UTC, for the same builder after slice 2. Measured at fd3f4d5: `npm run check` 41 s, `npm run build` 5 s (Step 3's way-out check fixed at a700081).
