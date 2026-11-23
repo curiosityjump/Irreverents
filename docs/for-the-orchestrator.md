@@ -108,7 +108,7 @@ whatever doc made the false claim, and only then delete the entry.
 propagate to every running lead (`docs/orchestrator-role.md`, "What's
 different from being a lead").
 
-### Step 1 lead, 2026-11-23 04:24 UTC
+### Step 1 lead, 2026-11-23 04:20 UTC
 
 **Flag:** `docs/architecture.md`'s path-ownership table is the Gate 1
 worker's reading of the queue, agreed by no other lead. It names four

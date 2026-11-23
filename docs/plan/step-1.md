@@ -300,7 +300,7 @@ changed without touching code; don't grade the feel yourself.
   core, scenarios, architecture doc. Worker `session_017WiGzHGmyESjXPtM3zXt19`, launched 04:04 UTC.
 - `handoff-prompts/step-1-gate-2-together.md` — Gate 2: browser client,
   touch, netcode, rejoin after a restart, `e2e`, `check:live`, gate F.
-  Launched 04:24 UTC after the Gate 1 review below.
+  Worker `session_017WiGzGmZK2vRuZTfKA24QD`, launched 04:20 UTC after the Gate 1 review below.
 
 ## Open with the owner
 
@@ -316,7 +316,7 @@ changed without touching code; don't grade the feel yourself.
   the orchestrator (`session_017WiGzFWfLir1ATiSP7c5E5`) the moment it is
   on `main`, launch Gate 2. A backstop wake is armed for 04:41 UTC.
 
-- **Lead `session_017WiGzEwLs3ng2ZPpRZgctn`, 04:24 UTC: Gate 1 reviewed at
+- **Lead `session_017WiGzEwLs3ng2ZPpRZgctn`, 04:20 UTC: Gate 1 reviewed at
   234d1b4 (deliverables 1–8).** Re-run by the lead from a fresh clone:
   `npm ci`, `npm run build`, `npm run check` exit 0 (three scenarios);
   `npm run gates` prints six "no scenario yet"; `e2e` and `check:live`
