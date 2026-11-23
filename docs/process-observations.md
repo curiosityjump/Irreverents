@@ -104,7 +104,7 @@ product pays for — is a different thing; say which one you mean.
 `docs/industrial-engineer-role.md` ships with this system, but the role is
 **not started** until enough *organic* evidence exists here for it to study.
 The owner may not read this file, so the orchestrator tells them. **Status:
-not yet announced.**
+not yet announced.** (Log began 2026-11-23, with the first organic entry.)
 
 **When to check:** only at a project transition the orchestrator is already
 handling: a `docs/plan.md` step closing, or a lead's end-of-element report.
@@ -168,3 +168,26 @@ also messages the worker.
 
 *Everything below this heading counts toward Industrial Engineer readiness
 (see above). Keep appending at the end.*
+
+### 2026-11-23 · tooling · orchestrator, first run
+
+**Observed:** The orchestrator cleared `docs/answers-outbox.md` by rewriting
+everything under "## Entries" in one edit, then rebased onto `main`. Vision
+Partner had appended a new entry ("Asset requests through Drive") in the
+meantime. The rebase reported success and the pushed file had no entries:
+the new entry was cut without having been read, acted on or receipted.
+**Surfaced at:** a later pull, when Vision Partner's commit message mentioned
+an asset mechanism the orchestrator had not heard of (about five minutes).
+**Impact:** small this time: the entry was recovered from `git show`, acted on
+and receipted within minutes. It carried the owner's instruction "Make sure
+the orchestrator knows it can request assets this way", so a miss would have
+been an owner instruction silently dropped.
+**Evidence:** outbox entry added in 312d81a; gone in ebe8c94 (orchestrator);
+receipt added in 6759f99.
+**Cause:** known: a whole-section rewrite merged against a concurrent append
+resolves as "deleted" without a conflict.
+**Improvement:** tactical fix applied: cut outbox entries one at a time, by
+heading, after a pull, and after any rebase that touched the outbox re-read
+`git diff ORIG_HEAD..HEAD -- docs/answers-outbox.md` before pushing. Not yet
+written into a charter (one incident).
+
