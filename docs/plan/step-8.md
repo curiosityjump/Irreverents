@@ -50,14 +50,23 @@ within the hour.
   characters that stand out.
 - **Nothing copied from Kirby or any other game's characters** (doc 32's
   art gate; Q-006).
-- **Sound stays silent until the first tap** (iPhone), has a mute, and
-  never blocks play if it fails to load.
+- **Sound is in scope tonight** (the owner, 2026-11-23: "I think you
+  can figure out what the music and sound effects should be like from
+  what's in there though. Do it."). `docs/audio-design.md` is the
+  direction: Vision Partner's reading of the library, which the owner
+  delegated and will judge by ear. Start with sounds synthesised in the
+  browser as placeholders and swap in the ordered sound packs (A01-01
+  effects, A02-01 layered music) when they land.
+- **Sound stays silent until the first tap** (iPhone), comes back after
+  the phone has slept, has a mute, and never blocks play if it fails to
+  load.
 - **Mood without words:** each of the three NPC moods has a mark a
   player reads at phone size (Step 4 owns the moods; this step owns how
   they look and sound).
 
 ## What's open (the lead's to measure and decide)
 
+- Read `docs/audio-design.md` before making any sound.
 - Read the style lock and art plan first:
   `docs/design-library/03-visual-direction-and-assets/00-asset-production-plan-and-style-lock/`
   (docs 13 and 14), doc 10 in the folder above it, and the asset protocol
