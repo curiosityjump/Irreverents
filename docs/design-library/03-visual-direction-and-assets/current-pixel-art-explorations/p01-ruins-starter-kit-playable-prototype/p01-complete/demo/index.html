@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no"><title>Irreverents P01 – Asset Playtest</title>
+<style>
+:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;min-height:100dvh;background:#101a2b;color:#eee9dc;font-family:system-ui,-apple-system,sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 12px calc(10px + env(safe-area-inset-bottom));gap:8px}header{font-size:12px;letter-spacing:.1em;font-weight:800;color:#f4cf8e}canvas{width:min(96vw,960px);height:auto;aspect-ratio:16/9;display:block;border:2px solid #51728c;border-radius:6px;image-rendering:pixelated;image-rendering:crisp-edges;background:#7cc8f5}#hud{font-size:11px;color:#bbd3e1;text-align:center;max-width:800px}#controls{display:flex;justify-content:space-between;gap:20px;width:min(96vw,780px);touch-action:none;user-select:none;-webkit-user-select:none}#controls>div{display:flex;gap:8px}.btn{font-size:17px;font-weight:700;display:grid;place-items:center;min-width:56px;min-height:56px;border:2px solid #829bb0;background:#253c53;border-radius:14px;color:#fff;touch-action:none;cursor:pointer}.btn:active,.btn.active{background:#527d98;transform:translateY(2px)}.btn[title="Switch character"]{background:#5b435c}.btn[title="Attack"]{background:#794653}small{font-size:11px;color:#97b5cc}a{color:#e8ca83}@media(min-width:768px){.btn{min-width:66px;min-height:66px}}
+</style></head>
+<body>
+<header>IRREVERENTS · P01 PROTOTYPE ASSET PLAYTEST</header>
+<canvas id="game" width="320" height="180" aria-label="Interactive pixel art test"></canvas>
+<div id="hud">Touch left/right to walk, jump or attack. Swap between both hero sheets. Desktop: arrows, Space, J, Q.</div>
+<div id="controls"><div><button class="btn" data-input="left" aria-label="Left">◀</button><button class="btn" data-input="right" aria-label="Right">▶</button></div><div><button class="btn" data-input="jump" aria-label="Jump">↑</button><button class="btn" data-input="attack" aria-label="Attack" title="Attack">✦</button><button class="btn" data-input="switch" aria-label="Switch character" title="Switch character">⇄</button></div></div>
+<small>Visual/technical asset smoke test only · not a full level · project palette and animations are still being refined</small>
+<script src="game.js"></script>
+</body></html>

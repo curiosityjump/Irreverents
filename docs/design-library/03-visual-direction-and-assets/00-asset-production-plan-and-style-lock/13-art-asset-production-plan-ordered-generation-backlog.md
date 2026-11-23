@@ -2,6 +2,12 @@
 
 ---
 
+CURRENT ASSET CATALOG OVERRIDES DISCOVERY GAPS (23 NOV 2026)
+
+Before continuing any production gate, browse this ROOT INDEX: https://docs.google.com/document/d/1bnr7GUgrYBVVY0BMkwx4qRPvW45Nk4grn-Tk6THcoY8/edit
+
+Prior to Claude requests there were already many useful polished pixel-art scene and character references, plus 5 quiet environment explorations, the prototype E01 tiles, S00 scenes, controls and audio. New requests must be grounded against THESE existing images first and should generally be for converting them to separated implementation sprites/tiles/frames. Newly produced assets are indexed in this root catalog with correct status and direct links before marked DELIVERED. The owner prefers USE FIRST and change later; do not wait for sign-off, but prevent low-quality work from displacing rich earlier art.
+
 ART PRODUCTION OVERRIDE — QUALITY FIRST, NO OWNER APPROVAL BOTTLENECK (22 NOV 2026)
 
 The earlier owner-signoff stop gates and “placeholder as deliverable” treatment are superseded. Owner permits continuous use/iteration by default, BUT supplied visual art MUST match actual selected expressive GBA-era reference images and have demonstrably readable animation, not crude programmatic box sprites. Create a short artistic source/key-pose proof, inspect native frames at phone scale, build correct sprites/atlases, QA actual pixels and motion in a 320×180 scene, then deliver. If unsuccessful, REWORK rather than mark complete. The previous C02 hero v1 is VISUALLY REJECTED. See controlling visual quality gate: https://docs.google.com/document/d/17OlSfBfTnUEUTmbo-zcsl4VrSn1mPny-zAP6kZaiodU/edit

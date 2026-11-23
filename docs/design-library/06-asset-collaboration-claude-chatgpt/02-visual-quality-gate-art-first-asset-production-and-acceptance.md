@@ -2,6 +2,14 @@
 
 ---
 
+MANDATORY VISUAL SOURCE / ASSET ROUTING (23 NOV 2026)
+
+The up-to-date asset catalog is in the Drive ROOT: https://docs.google.com/document/d/1bnr7GUgrYBVVY0BMkwx4qRPvW45Nk4grn-Tk6THcoY8/edit
+
+It links the polished earlier character concepts, strong playable environments, source tile/prop boards, existing 16px technical prototypes, audio SFX and controls. When building any new sprite/tileset, FIRST open current source art and compare VISUALLY; do not recreate lower-quality generic rectangles and later call them done. In the current C02 revision, the catalog now links a recovered pose study with expressive grappler/quick-hero sprite poses, and the old primitive C02 is labeled REJECTED.
+
+Actual quality-validated deliveries must be given an INDEX ENTRY before moving the request to DELIVERED; the preferred recommended link must point to the best CURRENT version and say what is merely reference vs technically importable. Claude should not be left with a folder of unlabeled PNGs to guess from.
+
 VISUAL QUALITY GATE — ART-FIRST PRODUCTION AND ACCEPTANCE
 
 Irreverents \| Controlling process revision \| 2026-11-22 \| Owner-directed quality correction

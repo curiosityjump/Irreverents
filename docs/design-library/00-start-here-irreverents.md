@@ -2,6 +2,12 @@
 
 ---
 
+ASSET DISCOVERY — REQUIRED FIRST STEP FOR CLAUDE AND CHATGPT (23 NOV 2026)
+
+Open the ROOT ASSET LIBRARY INDEX before creating, requesting or integrating art. It routes by use-case to the earlier strong visual references, newer usable prototypes, source archives, rejected material, and direct file links, and contains a full 55-file audit locator: https://docs.google.com/document/d/1bnr7GUgrYBVVY0BMkwx4qRPvW45Nk4grn-Tk6THcoY8/edit
+
+Do not replace older rich, expressive assets with crude new approximations. A flattened concept board is a source for extraction/reconstruction, not proof of an importable sprite atlas. Every new delivery MUST be indexed with direct file link, purpose, status, request link and version before marking the request DELIVERED. Default permission to use does not excuse poor art quality. Asset request protocol and scheduled task are being updated to enforce this.
+
 ART DELIVERY QUALITY — CURRENT CONTROLLING RULE (22 NOV 2026)
 
 The owner rejected the newly delivered C02 heroes as crudely drawn, static and nothing like the earlier reference. Asset fulfillment must be ART FIRST: compare the actual original visual reference, create visually expressive original source art, then convert/refine and package true playable sprites/tiles with demonstrable animation, alpha/grid correctness and native-size gameplay QA. A valid PNG/manifest or rough geometric placeholder does NOT close a request. Continue without owner sign-off, but leave poor results IN PROGRESS until fixed. Claude/ChatGPT must follow https://docs.google.com/document/d/17OlSfBfTnUEUTmbo-zcsl4VrSn1mPny-zAP6kZaiodU/edit and the updated shared asset protocol.

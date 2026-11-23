@@ -2,6 +2,14 @@
 
 ---
 
+2026-11-23 · 7:13 AM EST · ChatGPT — ROUTING RELIABILITY CLARIFICATION (PROCESS ONLY)
+
+Updated the asset handoff protocol to require verified upload of actual bytes into the 03 Visual Direction and Assets Drive area, readback of file IDs and parent folder, direct links and QA evidence in the request Doc, and a post-upload Eastern-time changelog entry. Previous C02 concept studies mentioned in request notes are NOT verified Drive production assets; C02 remains IN PROGRESS — QUALITY REWORK in the inbox. No new art delivered or deployed.
+
+Protocol: https://docs.google.com/document/d/1oBpJKI2P7v7rwoMku-TbcFuVQe2iajddK6v2i5Ro0G0/edit
+
+C02 request: https://docs.google.com/document/d/1velYJklnMai16cH12kYu-BIlyhx_p-6NlSpO41vfuKw/edit
+
 CHANGELOG — IRREVERENTS
 
 Shared change history for anyone editing this Google Drive game-design library (ChatGPT, Claude, or a human).
@@ -27,6 +35,34 @@ For EVERY MATERIAL CHANGE in this project folder, AFTER the changed Drive files 
 • Keep this changelog in the project ROOT, and keep a link on “00 START HERE.” Other collaborating assistants should use it as a routing index, but updating it is not automatic: the writer making a change must add an entry.
 
 ## Changes (newest first)
+
+## 
+
+## 2026-11-23 · 07:19 AM EST · ChatGPT — Central asset discovery and routing system instituted
+
+## Audited existing Irreverents Drive assets and indexed 55 non-document asset/support files with direct links and role-specific top recommendations. Created ROOT “ASSET LIBRARY — START HERE (Claude)” routing characters, environment, tile/prop, NPC/powers, interface and audio; distinguishes strong prior visual references from importable prototypes and REJECTED art. Visually inspected and recovered two strong prior ChatGPT assets missing from Drive: expressive grappler/quick-hero pose reference and grassy-ruins crystal-citadel gameplay scene. Updated START HERE, shared handoff protocol, request template, QA gate, art plan and decision register. Updated the existing enabled hourly asset-request automation: it MUST search the catalog before generating, and every verified delivery MUST add/refresh the catalog entry (with best current version and status) before request closure. Assets are use-by-default, revise later; this is not a claim that visual reference PNGs are technically importable atlases. No GitHub code or Railway deployments were changed.
+
+## Changed / route:
+
+## - ROOT ASSET CATALOG: https://docs.google.com/document/d/1bnr7GUgrYBVVY0BMkwx4qRPvW45Nk4grn-Tk6THcoY8/edit
+
+## - Recovered quality art folder: https://drive.google.com/drive/folders/1czMPWsiuQJsrDCbnmDMeFyYgUxr6qQ30
+
+## - Grappler and quick hero expressive poses: https://drive.google.com/file/d/13qA3OL9rGa9oRdg1QIjR6JFXxtzFBMIX/view
+
+## - Grassy ruins and crystal citadel gameplay art: https://drive.google.com/file/d/1q3U1q3eGO3bO_IVwZvTZx1disOJXAp7I/view
+
+## - 00 START HERE: https://docs.google.com/document/d/1-ASnTbCLAXSi_WCOl_7KNuUgelLXLmiZFKiN6APao2s/edit
+
+## - Asset handoff: https://docs.google.com/document/d/1oBpJKI2P7v7rwoMku-TbcFuVQe2iajddK6v2i5Ro0G0/edit
+
+## - Claude request template: https://docs.google.com/document/d/1ntJHj5rYYi59_o4-0c5Pf-rFYKcJvX1ZlUP43nCJaUw/edit
+
+## - Visual QA gate: https://docs.google.com/document/d/17OlSfBfTnUEUTmbo-zcsl4VrSn1mPny-zAP6kZaiodU/edit
+
+## - Art production plan: https://docs.google.com/document/d/1reKfubHb_S6mSyn89kTSm8T2bSRd67E2MptsL24skL8/edit
+
+## - Decision register: https://docs.google.com/document/d/1vlwf5VZgwT0E0cKqYF4o0EI5LhuR4iiZxCyVUUreytU/edit
 
 ## 
 

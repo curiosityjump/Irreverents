@@ -1,0 +1,1011 @@
+{
+  "project": "Irreverents",
+  "batch": "P01 \u2014 Ruins Starter Kit / Visual Comp 01",
+  "version": "0.1.0",
+  "generated": "2026-11-23",
+  "target": "iPhone and desktop browser HTML5 Canvas / WebGL",
+  "artDirection": [
+    "Kirby and the Amazing Mirror era level-scale charm without direct franchise copying",
+    "user-endorsed early pixel game visual boards",
+    "readability and low-noise platform geometry"
+  ],
+  "status": "PROTOTYPE-READY ASSETS \u2014 USE NOW, REVISE LATER",
+  "technical": {
+    "transparentPNG": true,
+    "renderFiltering": "nearest-neighbor",
+    "atlasCell": 112,
+    "staticAtlas": "atlas/static_112px_cells.png",
+    "heroFrames": "7 \u00d7 48px per strip",
+    "nativeGameplayView": {
+      "w": 320,
+      "h": 180
+    },
+    "pixelPerfect16Tiles": false,
+    "seamlessAutotile": false,
+    "fullyAuthoredCombatAnimation": false
+  },
+  "assets": {
+    "ruin_arch": {
+      "id": "ruin_arch",
+      "category": "prop",
+      "type": "decoration",
+      "path": "sprites/props/ruin_arch.png",
+      "width": 88,
+      "height": 55,
+      "anchor": {
+        "x": 44,
+        "y": 55
+      },
+      "collision": {
+        "type": "none"
+      },
+      "visualStatus": "playablePrototype",
+      "note": "Original illustrated prop, alpha-masked and trimmed.",
+      "atlas": {
+        "path": "atlas/static_112px_cells.png",
+        "sourceRect": {
+          "x": 12,
+          "y": 28,
+          "w": 88,
+          "h": 55
+        },
+        "atlasCell": {
+          "x": 0,
+          "y": 0,
+          "w": 112,
+          "h": 112
+        }
+      }
+    },
+    "broken_column": {
+      "id": "broken_column",
+      "category": "prop",
+      "type": "decoration",
+      "path": "sprites/props/broken_column.png",
+      "width": 35,
+      "height": 57,
+      "anchor": {
+        "x": 18,
+        "y": 57
+      },
+      "collision": {
+        "type": "none"
+      },
+      "visualStatus": "playablePrototype",
+      "note": "Original illustrated prop, alpha-masked and trimmed.",
+      "atlas": {
+        "path": "atlas/static_112px_cells.png",
+        "sourceRect": {
+          "x": 150,
+          "y": 27,
+          "w": 35,
+          "h": 57
+        },
+        "atlasCell": {
+          "x": 112,
+          "y": 0,
+          "w": 112,
+          "h": 112
+        }
+      }
+    },
+    "stone_pillar": {
+      "id": "stone_pillar",
+      "category": "prop",
+      "type": "decoration",
+      "path": "sprites/props/stone_pillar.png",
+      "width": 40,
+      "height": 61,
+      "anchor": {
+        "x": 20,
+        "y": 61
+      },
+      "collision": {
+        "type": "none"
+      },
+      "visualStatus": "playablePrototype",
+      "note": "Original illustrated prop, alpha-masked and trimmed.",
+      "atlas": {
+        "path": "atlas/static_112px_cells.png",
+        "sourceRect": {
+          "x": 260,
+          "y": 25,
+          "w": 40,
+          "h": 61
+        },
+        "atlasCell": {
+          "x": 224,
+          "y": 0,
+          "w": 112,
+          "h": 112
+        }
+      }
+    },
+    "red_banner": {
+      "id": "red_banner",
+      "category": "prop",
+      "type": "decoration",
+      "path": "sprites/props/red_banner.png",
+      "width": 34,
+      "height": 53,
+      "anchor": {
+        "x": 17,
+        "y": 53
+      },
+      "collision": {
+        "type": "none"
+      },
+      "visualStatus": "playablePrototype",
+      "note": "Original illustrated prop, alpha-masked and trimmed.",
+      "atlas": {
+        "path": "atlas/static_112px_cells.png",
+        "sourceRect": {
+          "x": 375,
+          "y": 29,
+          "w": 34,
+          "h": 53
+        },
+        "atlasCell": {
+          "x": 336,
+          "y": 0,
+          "w": 112,
+          "h": 112
+        }
+      }
+    },
+    "wooden_bridge": {
+      "id": "wooden_bridge",
+      "category": "prop",
+      "type": "oneWayPlatform",
+      "path": "sprites/props/wooden_bridge.png",
+      "width": 80,
+      "height": 35,
+      "anchor": {
+        "x": 40,
+        "y": 35
+      },
+      "collision": {
+        "type": "oneWay",
+        "x": 0,
+        "y": 0,
+        "w": 80,
+        "h": 6
+      },
+      "visualStatus": "playablePrototype",
+      "note": "Original illustrated prop, alpha-masked and trimmed.",
+      "atlas": {
+        "path": "atlas/static_112px_cells.png",
+        "sourceRect": {
+          "x": 464,
+          "y": 38,
+          "w": 80,
+          "h": 35
+        },
+        "atlasCell": {
+          "x": 448,
+          "y": 0,
+          "w": 112,
+          "h": 112
+        }
+      }
+    },
+    "wooden_ladder": {
+      "id": "wooden_ladder",
+      "category": "prop",
+      "type": "climbable",
+      "path": "sprites/props/wooden_ladder.png",
+      "width": 29,
+      "height": 69,
+      "anchor": {
+        "x": 14,
+        "y": 69
+      },
+      "collision": {
+        "type": "ladder",
+        "x": 0,
+        "y": 0,
+        "w": 29,
+        "h": 69
+      },
+      "visualStatus": "playablePrototype",
+      "note": "Original illustrated prop, alpha-masked and trimmed.",
+      "atlas": {
+        "path": "atlas/static_112px_cells.png",
+        "sourceRect": {
+          "x": 601,
+          "y": 21,
+          "w": 29,
+          "h": 69
+        },
+        "atlasCell": {
+          "x": 560,
+          "y": 0,
+          "w": 112,
+          "h": 112
+        }
+      }
+    },
+    "wooden_crate": {
+      "id": "wooden_crate",
+      "category": "prop",
+      "type": "pushable",
+      "path": "sprites/props/wooden_crate.png",
+      "width": 34,
+      "height": 31,
+      "anchor": {
+        "x": 17,
+        "y": 31
+      },
+      "collision": {
+        "type": "rect",
+        "x": 0,
+        "y": 3,
+        "w": 34,
+        "h": 28
+      },
+      "visualStatus": "playablePrototype",
+      "note": "Original illustrated prop, alpha-masked and trimmed.",
+      "atlas": {
+        "path": "atlas/static_112px_cells.png",
+        "sourceRect": {
+          "x": 39,
+          "y": 152,
+          "w": 34,
+          "h": 31
+        },
+        "atlasCell": {
+          "x": 0,
+          "y": 112,
+          "w": 112,
+          "h": 112
+        }
+      }
+    },
+    "small_barrel": {
+      "id": "small_barrel",
+      "category": "prop",
+      "type": "pushable",
+      "path": "sprites/props/small_barrel.png",
+      "width": 30,
+      "height": 37,
+      "anchor": {
+        "x": 15,
+        "y": 37
+      },
+      "collision": {
+        "type": "rect",
+        "x": 0,
+        "y": 3,
+        "w": 30,
+        "h": 34
+      },
+      "visualStatus": "playablePrototype",
+      "note": "Original illustrated prop, alpha-masked and trimmed.",
+      "atlas": {
+        "path": "atlas/static_112px_cells.png",
+        "sourceRect": {
+          "x": 153,
+          "y": 149,
+          "w": 30,
+          "h": 37
+        },
+        "atlasCell": {
+          "x": 112,
+          "y": 112,
+          "w": 112,
+          "h": 112
+        }
+      }
+    },
+    "treasure_chest": {
+      "id": "treasure_chest",
+      "category": "prop",
+      "type": "interactable",
+      "path": "sprites/props/treasure_chest.png",
+      "width": 38,
+      "height": 31,
+      "anchor": {
+        "x": 19,
+        "y": 31
+      },
+      "collision": {
+        "type": "none"
+      },
+      "visualStatus": "playablePrototype",
+      "note": "Original illustrated prop, alpha-masked and trimmed.",
+      "atlas": {
+        "path": "atlas/static_112px_cells.png",
+        "sourceRect": {
+          "x": 261,
+          "y": 152,
+          "w": 38,
+          "h": 31
+        },
+        "atlasCell": {
+          "x": 224,
+          "y": 112,
+          "w": 112,
+          "h": 112
+        }
+      }
+    },
+    "lantern_post": {
+      "id": "lantern_post",
+      "category": "prop",
+      "type": "decoration",
+      "path": "sprites/props/lantern_post.png",
+      "width": 39,
+      "height": 65,
+      "anchor": {
+        "x": 20,
+        "y": 65
+      },
+      "collision": {
+        "type": "none"
+      },
+      "visualStatus": "playablePrototype",
+      "note": "Original illustrated prop, alpha-masked and trimmed.",
+      "atlas": {
+        "path": "atlas/static_112px_cells.png",
+        "sourceRect": {
+          "x": 372,
+          "y": 135,
+          "w": 39,
+          "h": 65
+        },
+        "atlasCell": {
+          "x": 336,
+          "y": 112,
+          "w": 112,
+          "h": 112
+        }
+      }
+    },
+    "arrow_sign": {
+      "id": "arrow_sign",
+      "category": "prop",
+      "type": "decoration",
+      "path": "sprites/props/arrow_sign.png",
+      "width": 30,
+      "height": 54,
+      "anchor": {
+        "x": 15,
+        "y": 54
+      },
+      "collision": {
+        "type": "none"
+      },
+      "visualStatus": "playablePrototype",
+      "note": "Original illustrated prop, alpha-masked and trimmed.",
+      "atlas": {
+        "path": "atlas/static_112px_cells.png",
+        "sourceRect": {
+          "x": 489,
+          "y": 141,
+          "w": 30,
+          "h": 54
+        },
+        "atlasCell": {
+          "x": 448,
+          "y": 112,
+          "w": 112,
+          "h": 112
+        }
+      }
+    },
+    "big_barrel": {
+      "id": "big_barrel",
+      "category": "prop",
+      "type": "pushable",
+      "path": "sprites/props/big_barrel.png",
+      "width": 37,
+      "height": 40,
+      "anchor": {
+        "x": 18,
+        "y": 40
+      },
+      "collision": {
+        "type": "rect",
+        "x": 0,
+        "y": 4,
+        "w": 37,
+        "h": 36
+      },
+      "visualStatus": "playablePrototype",
+      "note": "Original illustrated prop, alpha-masked and trimmed.",
+      "atlas": {
+        "path": "atlas/static_112px_cells.png",
+        "sourceRect": {
+          "x": 597,
+          "y": 148,
+          "w": 37,
+          "h": 40
+        },
+        "atlasCell": {
+          "x": 560,
+          "y": 112,
+          "w": 112,
+          "h": 112
+        }
+      }
+    },
+    "grass_full": {
+      "id": "grass_full",
+      "category": "terrain",
+      "type": "solid",
+      "path": "sprites/terrain/grass_full.png",
+      "width": 50,
+      "height": 53,
+      "anchor": {
+        "x": 25,
+        "y": 53
+      },
+      "collision": {
+        "type": "rect",
+        "x": 0,
+        "y": 14,
+        "w": 50,
+        "h": 39
+      },
+      "visualStatus": "playablePrototype",
+      "note": "Prefab sprite; not certified as a seamless 16\u00d716 tileset.",
+      "atlas": {
+        "path": "atlas/static_112px_cells.png",
+        "sourceRect": {
+          "x": 31,
+          "y": 253,
+          "w": 50,
+          "h": 53
+        },
+        "atlasCell": {
+          "x": 0,
+          "y": 224,
+          "w": 112,
+          "h": 112
+        }
+      }
+    },
+    "grass_narrow": {
+      "id": "grass_narrow",
+      "category": "terrain",
+      "type": "solid",
+      "path": "sprites/terrain/grass_narrow.png",
+      "width": 36,
+      "height": 53,
+      "anchor": {
+        "x": 18,
+        "y": 53
+      },
+      "collision": {
+        "type": "rect",
+        "x": 0,
+        "y": 14,
+        "w": 36,
+        "h": 39
+      },
+      "visualStatus": "playablePrototype",
+      "note": "Prefab sprite; not certified as a seamless 16\u00d716 tileset.",
+      "atlas": {
+        "path": "atlas/static_112px_cells.png",
+        "sourceRect": {
+          "x": 150,
+          "y": 253,
+          "w": 36,
+          "h": 53
+        },
+        "atlasCell": {
+          "x": 112,
+          "y": 224,
+          "w": 112,
+          "h": 112
+        }
+      }
+    },
+    "grass_overhang_left": {
+      "id": "grass_overhang_left",
+      "category": "terrain",
+      "type": "solid",
+      "path": "sprites/terrain/grass_overhang_left.png",
+      "width": 50,
+      "height": 55,
+      "anchor": {
+        "x": 25,
+        "y": 55
+      },
+      "collision": {
+        "type": "rect",
+        "x": 0,
+        "y": 15,
+        "w": 50,
+        "h": 40
+      },
+      "visualStatus": "playablePrototype",
+      "note": "Prefab sprite; not certified as a seamless 16\u00d716 tileset.",
+      "atlas": {
+        "path": "atlas/static_112px_cells.png",
+        "sourceRect": {
+          "x": 255,
+          "y": 252,
+          "w": 50,
+          "h": 55
+        },
+        "atlasCell": {
+          "x": 224,
+          "y": 224,
+          "w": 112,
+          "h": 112
+        }
+      }
+    },
+    "grass_overhang_right": {
+      "id": "grass_overhang_right",
+      "category": "terrain",
+      "type": "solid",
+      "path": "sprites/terrain/grass_overhang_right.png",
+      "width": 49,
+      "height": 58,
+      "anchor": {
+        "x": 24,
+        "y": 58
+      },
+      "collision": {
+        "type": "rect",
+        "x": 0,
+        "y": 16,
+        "w": 49,
+        "h": 42
+      },
+      "visualStatus": "playablePrototype",
+      "note": "Prefab sprite; not certified as a seamless 16\u00d716 tileset.",
+      "atlas": {
+        "path": "atlas/static_112px_cells.png",
+        "sourceRect": {
+          "x": 367,
+          "y": 251,
+          "w": 49,
+          "h": 58
+        },
+        "atlasCell": {
+          "x": 336,
+          "y": 224,
+          "w": 112,
+          "h": 112
+        }
+      }
+    },
+    "floating_island": {
+      "id": "floating_island",
+      "category": "terrain",
+      "type": "solid",
+      "path": "sprites/terrain/floating_island.png",
+      "width": 62,
+      "height": 44,
+      "anchor": {
+        "x": 31,
+        "y": 44
+      },
+      "collision": {
+        "type": "rect",
+        "x": 0,
+        "y": 12,
+        "w": 62,
+        "h": 32
+      },
+      "visualStatus": "playablePrototype",
+      "note": "Prefab sprite; not certified as a seamless 16\u00d716 tileset.",
+      "atlas": {
+        "path": "atlas/static_112px_cells.png",
+        "sourceRect": {
+          "x": 473,
+          "y": 258,
+          "w": 62,
+          "h": 44
+        },
+        "atlasCell": {
+          "x": 448,
+          "y": 224,
+          "w": 112,
+          "h": 112
+        }
+      }
+    },
+    "stone_wall": {
+      "id": "stone_wall",
+      "category": "terrain",
+      "type": "solid",
+      "path": "sprites/terrain/stone_wall.png",
+      "width": 56,
+      "height": 47,
+      "anchor": {
+        "x": 28,
+        "y": 47
+      },
+      "collision": {
+        "type": "rect",
+        "x": 0,
+        "y": 13,
+        "w": 56,
+        "h": 34
+      },
+      "visualStatus": "playablePrototype",
+      "note": "Prefab sprite; not certified as a seamless 16\u00d716 tileset.",
+      "atlas": {
+        "path": "atlas/static_112px_cells.png",
+        "sourceRect": {
+          "x": 588,
+          "y": 256,
+          "w": 56,
+          "h": 47
+        },
+        "atlasCell": {
+          "x": 560,
+          "y": 224,
+          "w": 112,
+          "h": 112
+        }
+      }
+    },
+    "stone_steps": {
+      "id": "stone_steps",
+      "category": "terrain",
+      "type": "solid",
+      "path": "sprites/terrain/stone_steps.png",
+      "width": 50,
+      "height": 47,
+      "anchor": {
+        "x": 25,
+        "y": 47
+      },
+      "collision": {
+        "type": "rect",
+        "x": 0,
+        "y": 13,
+        "w": 50,
+        "h": 34
+      },
+      "visualStatus": "playablePrototype",
+      "note": "Prefab sprite; not certified as a seamless 16\u00d716 tileset.",
+      "atlas": {
+        "path": "atlas/static_112px_cells.png",
+        "sourceRect": {
+          "x": 31,
+          "y": 368,
+          "w": 50,
+          "h": 47
+        },
+        "atlasCell": {
+          "x": 0,
+          "y": 336,
+          "w": 112,
+          "h": 112
+        }
+      }
+    },
+    "stone_grass_wall": {
+      "id": "stone_grass_wall",
+      "category": "terrain",
+      "type": "solid",
+      "path": "sprites/terrain/stone_grass_wall.png",
+      "width": 58,
+      "height": 54,
+      "anchor": {
+        "x": 29,
+        "y": 54
+      },
+      "collision": {
+        "type": "rect",
+        "x": 0,
+        "y": 15,
+        "w": 58,
+        "h": 39
+      },
+      "visualStatus": "playablePrototype",
+      "note": "Prefab sprite; not certified as a seamless 16\u00d716 tileset.",
+      "atlas": {
+        "path": "atlas/static_112px_cells.png",
+        "sourceRect": {
+          "x": 139,
+          "y": 365,
+          "w": 58,
+          "h": 54
+        },
+        "atlasCell": {
+          "x": 112,
+          "y": 336,
+          "w": 112,
+          "h": 112
+        }
+      }
+    },
+    "spark_slash": {
+      "id": "spark_slash",
+      "category": "vfx",
+      "type": "visualEffect",
+      "path": "sprites/vfx/spark_slash.png",
+      "width": 42,
+      "height": 28,
+      "anchor": {
+        "x": 21,
+        "y": 28
+      },
+      "collision": {
+        "type": "none"
+      },
+      "visualStatus": "playablePrototype",
+      "note": "Effect key image; animate/transform via engine as needed.",
+      "atlas": {
+        "path": "atlas/static_112px_cells.png",
+        "sourceRect": {
+          "x": 259,
+          "y": 378,
+          "w": 42,
+          "h": 28
+        },
+        "atlasCell": {
+          "x": 224,
+          "y": 336,
+          "w": 112,
+          "h": 112
+        }
+      }
+    },
+    "impact_star": {
+      "id": "impact_star",
+      "category": "vfx",
+      "type": "visualEffect",
+      "path": "sprites/vfx/impact_star.png",
+      "width": 32,
+      "height": 25,
+      "anchor": {
+        "x": 16,
+        "y": 25
+      },
+      "collision": {
+        "type": "none"
+      },
+      "visualStatus": "playablePrototype",
+      "note": "Effect key image; animate/transform via engine as needed.",
+      "atlas": {
+        "path": "atlas/static_112px_cells.png",
+        "sourceRect": {
+          "x": 376,
+          "y": 379,
+          "w": 32,
+          "h": 25
+        },
+        "atlasCell": {
+          "x": 336,
+          "y": 336,
+          "w": 112,
+          "h": 112
+        }
+      }
+    },
+    "fireball": {
+      "id": "fireball",
+      "category": "vfx",
+      "type": "visualEffect",
+      "path": "sprites/vfx/fireball.png",
+      "width": 41,
+      "height": 22,
+      "anchor": {
+        "x": 20,
+        "y": 22
+      },
+      "collision": {
+        "type": "none"
+      },
+      "visualStatus": "playablePrototype",
+      "note": "Effect key image; animate/transform via engine as needed.",
+      "atlas": {
+        "path": "atlas/static_112px_cells.png",
+        "sourceRect": {
+          "x": 483,
+          "y": 381,
+          "w": 41,
+          "h": 22
+        },
+        "atlasCell": {
+          "x": 448,
+          "y": 336,
+          "w": 112,
+          "h": 112
+        }
+      }
+    },
+    "ice_burst": {
+      "id": "ice_burst",
+      "category": "vfx",
+      "type": "visualEffect",
+      "path": "sprites/vfx/ice_burst.png",
+      "width": 46,
+      "height": 24,
+      "anchor": {
+        "x": 23,
+        "y": 24
+      },
+      "collision": {
+        "type": "none"
+      },
+      "visualStatus": "playablePrototype",
+      "note": "Effect key image; animate/transform via engine as needed.",
+      "atlas": {
+        "path": "atlas/static_112px_cells.png",
+        "sourceRect": {
+          "x": 593,
+          "y": 380,
+          "w": 46,
+          "h": 24
+        },
+        "atlasCell": {
+          "x": 560,
+          "y": 336,
+          "w": 112,
+          "h": 112
+        }
+      }
+    },
+    "scout": {
+      "id": "scout",
+      "category": "hero",
+      "type": "playableActor",
+      "path": "sprites/heroes/scout_7states_48px.png",
+      "width": 48,
+      "height": 48,
+      "anchor": {
+        "x": 24,
+        "y": 45
+      },
+      "collision": {
+        "type": "rect",
+        "x": 15,
+        "y": 11,
+        "w": 18,
+        "h": 34
+      },
+      "frames": [
+        {
+          "name": "idle",
+          "x": 0,
+          "y": 0,
+          "w": 48,
+          "h": 48,
+          "duration_ms": 135
+        },
+        {
+          "name": "walk_a",
+          "x": 48,
+          "y": 0,
+          "w": 48,
+          "h": 48,
+          "duration_ms": 135
+        },
+        {
+          "name": "walk_b",
+          "x": 96,
+          "y": 0,
+          "w": 48,
+          "h": 48,
+          "duration_ms": 135
+        },
+        {
+          "name": "dash",
+          "x": 144,
+          "y": 0,
+          "w": 48,
+          "h": 48,
+          "duration_ms": 135
+        },
+        {
+          "name": "attack",
+          "x": 192,
+          "y": 0,
+          "w": 48,
+          "h": 48,
+          "duration_ms": 180
+        },
+        {
+          "name": "jump",
+          "x": 240,
+          "y": 0,
+          "w": 48,
+          "h": 48,
+          "duration_ms": 180
+        },
+        {
+          "name": "crouch",
+          "x": 288,
+          "y": 0,
+          "w": 48,
+          "h": 48,
+          "duration_ms": 180
+        }
+      ],
+      "frameWidth": 48,
+      "frameHeight": 48,
+      "note": "7 authored directional key poses, NOT a complete polished combat animation; walk frames share similar silhouettes and should be refined. Source strip includes real pose changes, not box art.",
+      "visualStatus": "playablePrototype"
+    },
+    "rogue": {
+      "id": "rogue",
+      "category": "hero",
+      "type": "playableActor",
+      "path": "sprites/heroes/rogue_7states_48px.png",
+      "width": 48,
+      "height": 48,
+      "anchor": {
+        "x": 24,
+        "y": 45
+      },
+      "collision": {
+        "type": "rect",
+        "x": 15,
+        "y": 11,
+        "w": 18,
+        "h": 34
+      },
+      "frames": [
+        {
+          "name": "idle",
+          "x": 0,
+          "y": 0,
+          "w": 48,
+          "h": 48,
+          "duration_ms": 135
+        },
+        {
+          "name": "walk_a",
+          "x": 48,
+          "y": 0,
+          "w": 48,
+          "h": 48,
+          "duration_ms": 135
+        },
+        {
+          "name": "walk_b",
+          "x": 96,
+          "y": 0,
+          "w": 48,
+          "h": 48,
+          "duration_ms": 135
+        },
+        {
+          "name": "dash",
+          "x": 144,
+          "y": 0,
+          "w": 48,
+          "h": 48,
+          "duration_ms": 135
+        },
+        {
+          "name": "attack",
+          "x": 192,
+          "y": 0,
+          "w": 48,
+          "h": 48,
+          "duration_ms": 180
+        },
+        {
+          "name": "jump",
+          "x": 240,
+          "y": 0,
+          "w": 48,
+          "h": 48,
+          "duration_ms": 180
+        },
+        {
+          "name": "crouch",
+          "x": 288,
+          "y": 0,
+          "w": 48,
+          "h": 48,
+          "duration_ms": 180
+        }
+      ],
+      "frameWidth": 48,
+      "frameHeight": 48,
+      "note": "7 authored directional key poses, NOT a complete polished combat animation; walk frames share similar silhouettes and should be refined. Source strip includes real pose changes, not box art.",
+      "visualStatus": "playablePrototype"
+    }
+  }
+}

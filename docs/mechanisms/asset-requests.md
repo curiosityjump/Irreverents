@@ -58,6 +58,21 @@ no connector: any session can run `python3 -I tools/drive_sync.py` whenever
 it wants the latest art (ChatGPT itself only processes requests hourly, so
 that, not Vision Partner's check, is the real pace).
 
+### Handoff state (2026-11-23 ~13:30 UTC)
+
+- The genesis Vision Partner's hourly Drive-check task (`trig_01B6h7mKw47J36oxJaxWf2NU`)
+  was **disabled** at 09:52 UTC for the usage limit and stays off: it fires
+  into that old session. **The next Vision Partner creates its own hourly
+  check** (same prompt, `persistent_session_id` = itself) if it keeps the
+  asset desk.
+- Last sync 13:2x UTC brought in **"P01 — Ruins Starter Kit (Playable
+  Prototype)"** under `docs/design-library/03-visual-direction-and-assets/current-pixel-art-explorations/`:
+  48 px hero state sheets (rogue and others), a static tile atlas, a small
+  JS demo and 320×180 previews; and ChatGPT's "02 VISUAL QUALITY GATE"
+  doc in `06-asset-collaboration-claude-chatgpt/`. Not yet looked at by
+  Vision Partner; the Step 8 lanes should judge it against
+  `docs/art-reference/heroes-v2-chatgpt-concept.png`.
+
 ### Requests in flight
 
 | Filed (UTC) | REQ doc | Priority |

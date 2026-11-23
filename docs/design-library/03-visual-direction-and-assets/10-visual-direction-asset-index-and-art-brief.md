@@ -2,6 +2,12 @@
 
 ---
 
+CURRENT ASSET ROUTER — READ THIS FIRST (23 NOV 2026)
+
+Use the ROOT ASSET LIBRARY INDEX for best-existing asset by character/level/tiles/NPC/UI/audio, all 55 files with links, two recovered earlier strong visual references, version/status, direct deliveries, and handoff rules: https://docs.google.com/document/d/1bnr7GUgrYBVVY0BMkwx4qRPvW45Nk4grn-Tk6THcoY8/edit
+
+Don't assume a newer file is superior to the earlier expressive pixel art. Future assets need a catalog entry BEFORE closing requests. Default use and revision, but keep rejected hero v1 out of visual production.
+
 CONTROLLING ART QUALITY CHANGE — 22 NOV 2026
 
 The earlier C02 hero v1 art is visually rejected (blocky near-static box characters). Previous artworks were richer, expressive and distinct; producing valid transparent sprite grids is not the same as matching the style. The shared process now requires direct comparison to actual approved image reference, art-first character/animation key poses, final visual inspection plus technical validation at native iPhone 320×180 gameplay scale. Do not close a request with weak placeholder art, but do continue creating without waiting for owner approval. Quality gate: https://docs.google.com/document/d/17OlSfBfTnUEUTmbo-zcsl4VrSn1mPny-zAP6kZaiodU/edit

@@ -2,6 +2,12 @@
 
 ---
 
+2026-11-23 08:18 AM EST — RECOVERED-SOURCE CONVERSION QA (NOT DELIVERED)
+
+Opened the actual recovered expressive hero pose PNG and the approved roster/style images. Tested cropping both seven-pose rows, nearest-neighbor reduction into 32×32 cells, and a 320×180 two-hero gameplay mock locally. The 32px contact test retains distinct red-heavy versus blue-scarf silhouettes and more real key-pose variation than rejected v1. However, 7 source poses per hero do NOT supply a six-phase run cycle, proper grab/throw subframes, crouch/victory variants, consistent pivot and full 6×8 sheet; scaling also loses details and effects protrude in some crops. This is a local conversion QA experiment only, NOT an uploaded or production-ready atlas. Do not claim files are in Drive. Next: redraw/extend missing source poses at native scale, alpha-clean and inspect each cell, validate full animation/manifest, then upload and catalog. STATUS: IN PROGRESS — QUALITY REWORK.
+
+Source: https://drive.google.com/file/d/13qA3OL9rGa9oRdg1QIjR6JFXxtzFBMIX/view
+
 QUALITY ACCEPTANCE OVERRIDE — READ FIRST
 
 Owner rejected the v1 artwork (rectangular bodies, virtually no real animation); rebuilding only the same boxy art with a scarf/hat is NOT a fix. Use the actual earlier approved original GBA sprite/art references and the new visual QUALITY GATE: https://docs.google.com/document/d/17OlSfBfTnUEUTmbo-zcsl4VrSn1mPny-zAP6kZaiodU/edit . Produce original polished designs with distinct personality, convincing expressive keyframes and verified native pixel grid at 320×180. Generate art-directed poses FIRST, then package; do not create code-only stickman drawings. Keep request in inbox until visual and technical tests pass. No owner pre-approval needed.

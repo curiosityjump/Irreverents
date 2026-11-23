@@ -2,6 +2,28 @@
 
 ---
 
+CRITICAL UPDATE — ASSET ROUTING / DISCOVERY IS MANDATORY (23 NOV 2026)
+
+MAIN ASSET INDEX: https://docs.google.com/document/d/1bnr7GUgrYBVVY0BMkwx4qRPvW45Nk4grn-Tk6THcoY8/edit
+
+Claude: (1) ALWAYS check the index and OPEN earlier visually strong assets before requesting or generating. (2) If a good concept/reference exists but requires actual PNG sprites/tiles, ask for a production conversion / extraction, naming the source, not a redraw from generic pixel-art words. (3) On receiving any delivery, see the index's category routing; do not rely only on the DELIVERY folder or ZIPs. (4) If a new asset is missing from the index, flag that as an INCOMPLETE handoff, even if the PNG exists somewhere else.
+
+ChatGPT: Before accepting any REQ, locate the most relevant existing assets through this index, review the actual artwork, and reuse/adapt first. When files are generated, upload to correct functional folder, update this ROOT INDEX with ID, title, DIRECT LINK, status, version/supersedes, source request and integration notes, and THEN mark the REQ delivered/move it. An asset is NOT fully delivered if the index still doesn't route Claude to it. For revisions, change the index's preferred/current pointer immediately; retain old links as rejected/superseded history only. Update project changelog after actual verified writes.
+
+READ / USE DEFAULT: do not wait for user approval. The quality gate still requires real art quality; the default-use policy does not justify pretending crude placeholders meet art requirements.
+
+ROUTING VERIFICATION — REQUIRED FOR EACH NEW ASSET (2026-11-23)
+
+1. Upload actual bytes to the appropriate batch folder inside 03 Visual Direction and Assets; never rely on a local/generated image or chat attachment as a Drive delivery.
+
+2. Read back the Drive folder listing and individual uploaded file metadata to verify the real file IDs, filenames, MIME types, and parent folder. Inspect final art before assigning production-ready status.
+
+3. Put direct verified Drive file links, asset folder, manifest/preview links, QA results and limits into the matching REQ Doc. Only then change status and move it to 02 DELIVERED if quality passed.
+
+4. Update the root changelog AFTER confirmed uploads/Doc edits, with actual Eastern time and direct changed-file links, distinguishing concepts/placeholders from game-ready art. Verify changelog readback.
+
+5. If no QA-passed asset exists, keep REQ in 01 REQUESTS marked IN PROGRESS — QUALITY REWORK. Do not imply Claude can find a local-only concept in Drive.
+
 OVERRIDING QUALITY STANDARD — OWNER CORRECTION (22 NOV 2026)
 
 MANDATORY before fulfilling any visual asset request: https://docs.google.com/document/d/17OlSfBfTnUEUTmbo-zcsl4VrSn1mPny-zAP6kZaiodU/edit

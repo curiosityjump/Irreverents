@@ -9,7 +9,7 @@ per answer saying where it went.
 
 ## Current sessions
 
-- **Vision Partner:** session_017WiGzHC3CvjTNZqCuxa8Ex (genesis, started 2026-11-23)
+- **Vision Partner:** session_017WiGzHC3CvjTNZqCuxa8Ex (genesis; handed off 2026-11-23 ~13:30 UTC, context long; successor to be started by the orchestrator)
 - **Orchestrator:** session_017WiGzGp8auJceLEAAh9Aqx (fourth; Opus; started by the owner 11:15 UTC as backup, took over 2026-11-23 12:01 UTC from session_017WiGzHX8g2sXimNRnqp2oZ, which stopped at 11:58 UTC on its Fable usage limit)
   This line is the one address every session uses to reach the current
   orchestrator; Vision Partner's doorbell goes only here.

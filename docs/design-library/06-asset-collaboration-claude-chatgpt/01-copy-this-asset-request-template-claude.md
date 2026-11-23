@@ -2,6 +2,14 @@
 
 ---
 
+MANDATORY — CHECK THE ASSET CATALOG BEFORE SUBMITTING A REQUEST
+
+https://docs.google.com/document/d/1bnr7GUgrYBVVY0BMkwx4qRPvW45Nk4grn-Tk6THcoY8/edit
+
+The request should include: EXISTING MATCHES / SOURCE ASSETS: direct links to relevant previously made images, sprite sets, tiles and visual references, and what must be improved/converted. If nothing matches, explicitly say “No useful existing art found after reviewing catalog.” Do not simply ask for generic new pixel art if strong work is already present.
+
+A delivery counts as complete ONLY after the new assets have also been listed in the central ROOT catalog with direct links, asset ID, status and actual intended game use. ADD TO THE CHATGPT FULFILLMENT SECTION: ASSET CATALOG ENTRY LINK / CONFIRMED UPDATED: \_\_\_\_\_\_\_\_\_\_
+
 MANDATORY QUALITY AND VISUAL REFERENCE GATE
 
 Before submission/fulfillment, link the actual LOOK reference image, not just “GBA pixel art.” The producer must inspect it, generate real aesthetically directed source art, and QA final pixels and native gameplay-size motion before counting delivery. Technical files are necessary but not sufficient. A FAILED visual gate leaves the request IN PROGRESS — QUALITY REWORK in the inbox and any placeholders separately labeled NOT FULFILLED. Do not request owner approval; improve autonomously. Details: https://docs.google.com/document/d/17OlSfBfTnUEUTmbo-zcsl4VrSn1mPny-zAP6kZaiodU/edit

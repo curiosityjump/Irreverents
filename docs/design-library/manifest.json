@@ -146,7 +146,7 @@
    "id": "1reKfubHb_S6mSyn89kTSm8T2bSRd67E2MptsL24skL8",
    "drive_path": "/03 Visual Direction and Assets/00 Asset Production Plan and Style Lock/13 — Art Asset Production Plan — Ordered Generation Backlog",
    "repo_path": "03-visual-direction-and-assets/00-asset-production-plan-and-style-lock/13-art-asset-production-plan-ordered-generation-backlog.md",
-   "sha256": "3b6fcbe95554357ad18493ab2bbcbfb712f46b2f9590949ec56d9180f1f9b83a"
+   "sha256": "312ebe143f4793aee9d4b5b397bdf747c136b0526aa37fecd92ba0521a777356"
   },
   {
    "kind": "doc",
@@ -322,6 +322,394 @@
   },
   {
    "kind": "folder",
+   "id": "1sXUTCyW2FTt0xuBauWfgSrUpfVw3ET43",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)"
+  },
+  {
+   "kind": "folder",
+   "id": "1aR9a3nqaPMExRXkHCAU4MYRx-E-YfemY",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/atlas"
+  },
+  {
+   "kind": "file",
+   "id": "11Rb02XC5nY334tY1sLDDUxmMIzcWq8Oh",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/atlas/static_112px_cells.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p01-ruins-starter-kit-playable-prototype/atlas/static-112px-cells.png",
+   "sha256": "705ceea076bd2b3854243e7f7e40badc08df1d1901af36d3bfff3e41d57ad3dd"
+  },
+  {
+   "kind": "folder",
+   "id": "1iFY3I5N4_vhCHP_g0OJ6DTYVYrOVOfFo",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/demo"
+  },
+  {
+   "kind": "file",
+   "id": "1nwAbMRiEgeGy_SN-PNm1ZImcc6E6ejPh",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/demo/game.js",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p01-ruins-starter-kit-playable-prototype/demo/game.js",
+   "sha256": "2f8dc251a697ec093d5057fe72b7c29e7c8933301b1aba8619c46796bf684335"
+  },
+  {
+   "kind": "file",
+   "id": "1SwGrWkQd9OyZoKCU6Lz7NAOi1HtX12qS",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/demo/index.html",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p01-ruins-starter-kit-playable-prototype/demo/index.html",
+   "sha256": "56b729382f60fc195e8c42d35d410c76faa99c40b95af8eecf1d68448f3d216a"
+  },
+  {
+   "kind": "folder",
+   "id": "1_Je0HLf7hZeZfEpV_BFr4tdsZ4bkLNgP",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/preview"
+  },
+  {
+   "kind": "file",
+   "id": "1TWqrDTuVLemSLNw81Gzkte-LQ0F3TEyY",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/preview/gameplay_320x180.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p01-ruins-starter-kit-playable-prototype/preview/gameplay-320x180.png",
+   "sha256": "bcecc901a47a6228dae11f077c628a3e13e1b28321ac8cc5dfc3df47c0b334fe"
+  },
+  {
+   "kind": "file",
+   "id": "1FoHfpWa6JlZRoldHhpwLHkjJ-SAR0dNJ",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/preview/gameplay_4x.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p01-ruins-starter-kit-playable-prototype/preview/gameplay-4x.png",
+   "sha256": "b97abeab6aa463eaf8f8087824e123cf1f4b1a35796576da40b0539e0be8bea1"
+  },
+  {
+   "kind": "file",
+   "id": "1-5bp9vfdDCD_2EHaz8dlSpfsUHQrBR2N",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/preview/review_board.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p01-ruins-starter-kit-playable-prototype/preview/review-board.png",
+   "sha256": "7e8c0ac91c72d05709e6ef5e10c82ef3914fdc36925d7ebbc5439cc40ea6b760"
+  },
+  {
+   "kind": "folder",
+   "id": "15ehRxG8LDCSiZ8MzDrZjHSjEJfpYKj1N",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/sprites"
+  },
+  {
+   "kind": "folder",
+   "id": "1w6J8UOiXZbMMAj08PwWrEIa2GKKADsWf",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/sprites/heroes"
+  },
+  {
+   "kind": "file",
+   "id": "1ntGtjpInDhv35dQonjc67tyaQrmcv-yj",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/sprites/heroes/rogue_7states_48px.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p01-ruins-starter-kit-playable-prototype/sprites/heroes/rogue-7states-48px.png",
+   "sha256": "bf77766a11e1f9c195d871195ab8f58f8b20f16092860a48c19cb600a1746cfe"
+  },
+  {
+   "kind": "file",
+   "id": "1xI_XBDN-HQSfkpn1X622idfzlMfRHWY-",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/sprites/heroes/rogue_attack.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p01-ruins-starter-kit-playable-prototype/sprites/heroes/rogue-attack.png",
+   "sha256": "d794c62cb30f24e6b1fa08ff485e406ddc1f622ae32873f60ceb92df39d3f266"
+  },
+  {
+   "kind": "file",
+   "id": "1AQFgqs01xoWoRNG9YCAizoQ9SVjq7ap8",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/sprites/heroes/rogue_crouch.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p01-ruins-starter-kit-playable-prototype/sprites/heroes/rogue-crouch.png",
+   "sha256": "2c16677296f1b2e88b554af20062e12851c9c68aa603cb84962ffe4a46516ee8"
+  },
+  {
+   "kind": "file",
+   "id": "1AZsFNEJF5tFuguMa1oIJSrPS730HGQGu",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/sprites/heroes/rogue_dash.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p01-ruins-starter-kit-playable-prototype/sprites/heroes/rogue-dash.png",
+   "sha256": "2c4d9f12187f2d27eb6ea52007666b9fcf350836fe8218e925da0ba87b73d052"
+  },
+  {
+   "kind": "file",
+   "id": "1coL7yjzBIjN5iJWno9xWBYSBnstS6lcE",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/sprites/heroes/rogue_idle.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p01-ruins-starter-kit-playable-prototype/sprites/heroes/rogue-idle.png",
+   "sha256": "a8c6bd75d0263e49af6483fe8446e0fc9045f6e78194f05c0746ac13d85d1db4"
+  },
+  {
+   "kind": "file",
+   "id": "1FGBybKkVpRRzpR2SP-9Bu2SzEYPQhN3c",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/sprites/heroes/rogue_jump.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p01-ruins-starter-kit-playable-prototype/sprites/heroes/rogue-jump.png",
+   "sha256": "db927118b52b211558c893f338c9904d405ffddd491c8067df0b6e207e37b5b1"
+  },
+  {
+   "kind": "file",
+   "id": "1k1vwBoSkvilZ9O0w7CoXq4X28_Msr0ve",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/sprites/heroes/rogue_walk_a.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p01-ruins-starter-kit-playable-prototype/sprites/heroes/rogue-walk-a.png",
+   "sha256": "cb564b39bd75c5e1037a7ab0716f505d1c8dae3667bc46955c6400689085756f"
+  },
+  {
+   "kind": "file",
+   "id": "1KyuVu3pATQRtgka31G8PEHNwxaCbq48S",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/sprites/heroes/rogue_walk_b.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p01-ruins-starter-kit-playable-prototype/sprites/heroes/rogue-walk-b.png",
+   "sha256": "60da452bbf5df4766793b4441ee561b01cc364b2c2784cc884338626ed4149e5"
+  },
+  {
+   "kind": "file",
+   "id": "1giCw-9hLv005Yyt2Dk-XftYK7Urt5S4a",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/sprites/heroes/scout_7states_48px.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p01-ruins-starter-kit-playable-prototype/sprites/heroes/scout-7states-48px.png",
+   "sha256": "b630805a004c544262be1c81d7bcff39daa7811ec195c2de57cff5ffab481b86"
+  },
+  {
+   "kind": "file",
+   "id": "19lHRmaL9algsnbupVG2Ok2cnyLLDnhzA",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/sprites/heroes/scout_attack.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p01-ruins-starter-kit-playable-prototype/sprites/heroes/scout-attack.png",
+   "sha256": "ccf4be68a3be3c2437ca45bd08ceaeaed579d14dcd23f37342c621df89cbd321"
+  },
+  {
+   "kind": "file",
+   "id": "1gq8bZkX7AZmZibb-y8924k3APYWK6ODb",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/sprites/heroes/scout_crouch.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p01-ruins-starter-kit-playable-prototype/sprites/heroes/scout-crouch.png",
+   "sha256": "88bfcac4de22b2e2de544f0fd0c53f2d2f910960fea5acc452922a4d9b112e3f"
+  },
+  {
+   "kind": "file",
+   "id": "16Dw4huvcwlGlmWSzlbyurK62nlYuWs8w",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/sprites/heroes/scout_dash.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p01-ruins-starter-kit-playable-prototype/sprites/heroes/scout-dash.png",
+   "sha256": "feea79ded1a49a92dac274d2755f44d3ed8d1b263627a574c51a10ce6b52d23d"
+  },
+  {
+   "kind": "file",
+   "id": "1GVEZxHYubVU8aUORHf4l9YRBXrIymh-8",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/sprites/heroes/scout_idle.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p01-ruins-starter-kit-playable-prototype/sprites/heroes/scout-idle.png",
+   "sha256": "1226ec6dd14958755a1e03a82088d080e2dbea64a1147bc1fe65db808dc3f422"
+  },
+  {
+   "kind": "file",
+   "id": "18FFlEv8bHfbN6GxkTexRqhW-I032Y4GM",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/sprites/heroes/scout_jump.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p01-ruins-starter-kit-playable-prototype/sprites/heroes/scout-jump.png",
+   "sha256": "d3ed056ef034917690853f4db93d83dc8c20a483db8005cea66cfce49fd1b62f"
+  },
+  {
+   "kind": "file",
+   "id": "1j7QyNKJbiYxrVd9GBaMWFjGXJ-Va75n0",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/sprites/heroes/scout_walk_a.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p01-ruins-starter-kit-playable-prototype/sprites/heroes/scout-walk-a.png",
+   "sha256": "d2c981ff9ddade5965426f4c1d7e5cd132a69efcd85ac5f42c3e76b5c3a633c7"
+  },
+  {
+   "kind": "file",
+   "id": "1vckzLq6jv2Ppal-3sNhnIypjMjqD5wzg",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/sprites/heroes/scout_walk_b.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p01-ruins-starter-kit-playable-prototype/sprites/heroes/scout-walk-b.png",
+   "sha256": "6966f4b01203602f9c2bb6b18c60be040f25fc17ae4994ffcd5fb1b04064499f"
+  },
+  {
+   "kind": "folder",
+   "id": "1qkZFCEg8Wqlo1Hwt0EDIccSxiFzWtg8Z",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/sprites/props"
+  },
+  {
+   "kind": "file",
+   "id": "1qoZ73O1POo2_xoxoz_d72F1pQNtNFBfy",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/sprites/props/arrow_sign.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p01-ruins-starter-kit-playable-prototype/sprites/props/arrow-sign.png",
+   "sha256": "c0cefa893fccb66088beaec1a986b2099783043fc5619afa21310b07f16970f6"
+  },
+  {
+   "kind": "file",
+   "id": "1k-KNKHVvEs8Acu3OmuXWP7qKlMtKC4am",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/sprites/props/big_barrel.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p01-ruins-starter-kit-playable-prototype/sprites/props/big-barrel.png",
+   "sha256": "cf64e4665098e0a983aa15b20fe44fd38d2ea2247252242b8c46d8811b226981"
+  },
+  {
+   "kind": "file",
+   "id": "1PtzCgsk7wu3FTC0sQ_Cbey-izoSKTF8w",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/sprites/props/broken_column.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p01-ruins-starter-kit-playable-prototype/sprites/props/broken-column.png",
+   "sha256": "0634fb1a85c60a5cfd5424a894262e2900995e33c3df268590256024bfba358c"
+  },
+  {
+   "kind": "file",
+   "id": "12YoJ6nnRK0KiSkwVDdUQL_O-kMucLIpS",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/sprites/props/lantern_post.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p01-ruins-starter-kit-playable-prototype/sprites/props/lantern-post.png",
+   "sha256": "72ee296d2445a63ec556f20172b855f6a0407e478507a2f8363f134844bf148d"
+  },
+  {
+   "kind": "file",
+   "id": "1LG1-UzIRp7QqMC1ZYV_tEjdae6ZZ7F5H",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/sprites/props/red_banner.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p01-ruins-starter-kit-playable-prototype/sprites/props/red-banner.png",
+   "sha256": "4ce66489c137fc6ade668a6b7798b0672fa4ecc57dafd54a8f66d0b94548972e"
+  },
+  {
+   "kind": "file",
+   "id": "1mqapAaMafIOIdcsGTks0XaBD3MLU-8SW",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/sprites/props/ruin_arch.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p01-ruins-starter-kit-playable-prototype/sprites/props/ruin-arch.png",
+   "sha256": "e719d3765c25cdee175f9b509e213b73b4dc09d882f046acde44571ca82f2777"
+  },
+  {
+   "kind": "file",
+   "id": "1x7cbVbslN1lLCZa9wX9q2e751JrwDMF0",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/sprites/props/small_barrel.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p01-ruins-starter-kit-playable-prototype/sprites/props/small-barrel.png",
+   "sha256": "5702f5ddb75787b0265d86741edbc9c2af50af0a538c2b0f238f54c31858e1ff"
+  },
+  {
+   "kind": "file",
+   "id": "1Z6Pt94ZYG0Q1ZzX_oZlpo-e3BwgGvH5v",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/sprites/props/stone_pillar.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p01-ruins-starter-kit-playable-prototype/sprites/props/stone-pillar.png",
+   "sha256": "8f8d6975681e06874eced0aae5153e0f9a9ce7b450b28b543e44d26b1b52836d"
+  },
+  {
+   "kind": "file",
+   "id": "1P3VzgFRX49HJ9KMtR4b4kPKrtEU9PUXX",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/sprites/props/treasure_chest.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p01-ruins-starter-kit-playable-prototype/sprites/props/treasure-chest.png",
+   "sha256": "d97130e9b89e0b473711119e38cecc4fced1a2d70f2a5640700ef620d8c98b5e"
+  },
+  {
+   "kind": "file",
+   "id": "1Ko7ElZK5NlD9xEmhw_KJxX6_TiXQ-ehJ",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/sprites/props/wooden_bridge.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p01-ruins-starter-kit-playable-prototype/sprites/props/wooden-bridge.png",
+   "sha256": "773eb80c60bf8ea69dc9b0b5b4de409b707d10658916053b867e6e7eb0f71325"
+  },
+  {
+   "kind": "file",
+   "id": "1BZc6uGsNE0x1Iym6jxbfsTJhkkIjp_7L",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/sprites/props/wooden_crate.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p01-ruins-starter-kit-playable-prototype/sprites/props/wooden-crate.png",
+   "sha256": "9a28b893c4537286bfcde14f8ededf2cc672c452a0de9c910ba7f369d41f11a0"
+  },
+  {
+   "kind": "file",
+   "id": "1zxO9jYJsnYdn768pKJQAG34snPZEwzED",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/sprites/props/wooden_ladder.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p01-ruins-starter-kit-playable-prototype/sprites/props/wooden-ladder.png",
+   "sha256": "0feda0d323a956bdb4fa34f66c3c22bcfd99709844acfaa7cadabb00befb5783"
+  },
+  {
+   "kind": "folder",
+   "id": "1zDaewpAHFBq50_RE2ihZWFQfaYrzch4o",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/sprites/terrain"
+  },
+  {
+   "kind": "file",
+   "id": "1MA92-X5EXcmm4jrATzhweqfcCU4Qlrsu",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/sprites/terrain/floating_island.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p01-ruins-starter-kit-playable-prototype/sprites/terrain/floating-island.png",
+   "sha256": "8550903490e3684dfe2bcad837cde571cef3ed96d191f02a77d2c7a798742e68"
+  },
+  {
+   "kind": "file",
+   "id": "1-s7lmKp_GuFTXqB6mkMTE5t48cecEaFn",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/sprites/terrain/grass_full.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p01-ruins-starter-kit-playable-prototype/sprites/terrain/grass-full.png",
+   "sha256": "35495e73c5477e91bd70e0c58745523d3545ff5b1434332224781f051cb08677"
+  },
+  {
+   "kind": "file",
+   "id": "15LKurjeq-23z7IalVdm4SdkgFc80t98B",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/sprites/terrain/grass_narrow.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p01-ruins-starter-kit-playable-prototype/sprites/terrain/grass-narrow.png",
+   "sha256": "375525778fc29fa91397a5f10ce8eacc977958bd92f7e36e53507b7f8f48f887"
+  },
+  {
+   "kind": "file",
+   "id": "1FYFP-wMhB3oax9ynjG5CW2cakTonckpG",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/sprites/terrain/grass_overhang_left.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p01-ruins-starter-kit-playable-prototype/sprites/terrain/grass-overhang-left.png",
+   "sha256": "eeb3a16547737fd1f228afe734ca9f5abf854334d978a7a1042750ceaae29719"
+  },
+  {
+   "kind": "file",
+   "id": "1rLIIZkh3iSW3cXB42pKwhdznCleizo_Z",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/sprites/terrain/grass_overhang_right.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p01-ruins-starter-kit-playable-prototype/sprites/terrain/grass-overhang-right.png",
+   "sha256": "455dfd2f4e92b270fa39fc6ed9635f2adf2547e979240679c0d3ad2dbe1cd643"
+  },
+  {
+   "kind": "file",
+   "id": "1IGqAKXaTIFzneasG9Lup_BkGrTW2o5aV",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/sprites/terrain/stone_grass_wall.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p01-ruins-starter-kit-playable-prototype/sprites/terrain/stone-grass-wall.png",
+   "sha256": "40f96955e0044310735181b7b618f29e262152fa0fdd31c34132b33794a3ea0b"
+  },
+  {
+   "kind": "file",
+   "id": "1qPdWDmUwQ5pBwJ8-N-45pIPsO1KrEmBe",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/sprites/terrain/stone_steps.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p01-ruins-starter-kit-playable-prototype/sprites/terrain/stone-steps.png",
+   "sha256": "cce5a890189bdadde1bf8c3bca8a743907f37abf6b20b7e4e368f75b34486ffb"
+  },
+  {
+   "kind": "file",
+   "id": "1hlhM39bdunmZMtrj3FtEiVMYDYfukChe",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/sprites/terrain/stone_wall.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p01-ruins-starter-kit-playable-prototype/sprites/terrain/stone-wall.png",
+   "sha256": "6248194f3cbf52f610546f39b4f584ddf0b71361861b55c46fcca3bffde3659a"
+  },
+  {
+   "kind": "folder",
+   "id": "1GfZPZqjxf_AMwMnqyaBun2YLJn9tfMZs",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/sprites/vfx"
+  },
+  {
+   "kind": "file",
+   "id": "1j_r3jf9TWPYwi1BcgZ3vh-CpqDQ7EN4L",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/sprites/vfx/fireball.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p01-ruins-starter-kit-playable-prototype/sprites/vfx/fireball.png",
+   "sha256": "fa9813567ffeedfa9c36ee327f02e081b17741e70a183e55c23185716a2c793d"
+  },
+  {
+   "kind": "file",
+   "id": "1tz5MMlckI0-kfWazR__iC_qZRFRjCIMT",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/sprites/vfx/ice_burst.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p01-ruins-starter-kit-playable-prototype/sprites/vfx/ice-burst.png",
+   "sha256": "d1c5415f4bf48b7327fdbbbdb0275e37634dec402a6eadfb0d9015d4436d1408"
+  },
+  {
+   "kind": "file",
+   "id": "1f_g8vNujePDsHlj4aP0pHfOkMuna1tkx",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/sprites/vfx/impact_star.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p01-ruins-starter-kit-playable-prototype/sprites/vfx/impact-star.png",
+   "sha256": "e552097cc00266356f9e27e3881c740acdaf8d80cf97c077f6f5a6e316a9e19a"
+  },
+  {
+   "kind": "file",
+   "id": "14Uk9v1P0jpkFaS0gAkxEkgSMgKplJL--",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/sprites/vfx/spark_slash.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p01-ruins-starter-kit-playable-prototype/sprites/vfx/spark-slash.png",
+   "sha256": "ec12cdb29e2533b3d1a12ae06a5406b2a82f9edca568c5e47ba0f43d29853a76"
+  },
+  {
+   "kind": "file",
+   "id": "1aAVGla1M0OSP0V-j5HzpBdZ2e1P9o0Kj",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/manifest.json",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p01-ruins-starter-kit-playable-prototype/manifest.json",
+   "sha256": "93f9f8500f03a9315cddea488b77b5607fc1e43c307419dac00074a66500f0cb"
+  },
+  {
+   "kind": "file",
+   "id": "1C48df-GK_259dtgqWW34BSKDjsgFOHp9",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/P01_COMPLETE.zip",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p01-ruins-starter-kit-playable-prototype/p01-complete/",
+   "sha256": "aa6aa14e9295c39f516e42331d897d8a93cc412dbd942aa6ba0067aa67bf9d8d"
+  },
+  {
+   "kind": "file",
+   "id": "1nP2d5LeF_4Pz-2utCnf005OBw3Ib0XiU",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P01 — Ruins Starter Kit (Playable Prototype)/README_FOR_CLAUDE.md",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p01-ruins-starter-kit-playable-prototype/readme-for-claude.md",
+   "sha256": "c164c83ad6b265ddef94cf54968ff002945215278e0c9610a969e03cb9676213"
+  },
+  {
+   "kind": "folder",
    "id": "11Wli0oy1WAtgIHT4ZUPX5Nprs0nM3RBD",
    "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/Quiet pixel-art environment studies — reduced visual noise"
   },
@@ -359,6 +747,25 @@
    "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/Quiet pixel-art environment studies — reduced visual noise/E-Q05 — Floating ruins, restrained color study.png",
    "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/quiet-pixel-art-environment-studies-reduced-visual-noise/e-q05-floating-ruins-restrained-color-study.png",
    "sha256": "166b2caeb8f22b692a6470badd361d343179f27cc5fdc311b3b1858539008530"
+  },
+  {
+   "kind": "folder",
+   "id": "1czMPWsiuQJsrDCbnmDMeFyYgUxr6qQ30",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/Recovered Prior Art — Strong Visual References"
+  },
+  {
+   "kind": "file",
+   "id": "13qA3OL9rGa9oRdg1QIjR6JFXxtzFBMIX",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/Recovered Prior Art — Strong Visual References/C02 — Grappler and Quick Hero Expressive Pose Reference.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/recovered-prior-art-strong-visual-references/c02-grappler-and-quick-hero-expressive-pose-reference.png",
+   "sha256": "d465acd69092a99b4b3edd723a627cd84bd0daa997b8e56e403c339e92845f15"
+  },
+  {
+   "kind": "file",
+   "id": "1q3U1q3eGO3bO_IVwZvTZx1disOJXAp7I",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/Recovered Prior Art — Strong Visual References/E00 — Grassy Ruins and Crystal Citadel Gameplay Reference.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/recovered-prior-art-strong-visual-references/e00-grassy-ruins-and-crystal-citadel-gameplay-reference.png",
+   "sha256": "fd21a55a84fbbe9d35f6e3b330bbf8de0a1d9be83abb6893dba46df214e4e5aa"
   },
   {
    "kind": "folder",
@@ -576,7 +983,7 @@
    "id": "1VJOvGqbT3wcqgD8-PaXpftODBr42ChGmqdBYHvx7_i0",
    "drive_path": "/03 Visual Direction and Assets/10 — Visual Direction, Asset Index and Art Brief",
    "repo_path": "03-visual-direction-and-assets/10-visual-direction-asset-index-and-art-brief.md",
-   "sha256": "4bdc4298f2cb12b0eecca5aa2b9986c3556df3ae9e1e70bf294f26c8c11c8eda"
+   "sha256": "26b34ef99bfa30288c1ca8e8610049904f90a195f2e66a4446b067d8257599fe"
   },
   {
    "kind": "folder",
@@ -588,7 +995,7 @@
    "id": "1vlwf5VZgwT0E0cKqYF4o0EI5LhuR4iiZxCyVUUreytU",
    "drive_path": "/04 Decisions and Prototyping/11 — Decision Register, Boundaries and Open Questions",
    "repo_path": "04-decisions-and-prototyping/11-decision-register-boundaries-and-open-questions.md",
-   "sha256": "8f5dc31e66ea2dbc36ebc5abcdda662b23280639f40a8ca4c9cd9de6590d2e76"
+   "sha256": "cf393e8b7fd172d8ef46ce653a34771244062b9cc3794198145241349d3e7896"
   },
   {
    "kind": "doc",
@@ -708,7 +1115,7 @@
    "id": "1velYJklnMai16cH12kYu-BIlyhx_p-6NlSpO41vfuKw",
    "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/01 REQUESTS — Claude to ChatGPT/REQ — C02-02/C02-03 REVISION — More expressive heroes with real animation",
    "repo_path": "06-asset-collaboration-claude-chatgpt/01-requests-claude-to-chatgpt/req-c02-02-c02-03-revision-more-expressive-heroes-with-real-animation.md",
-   "sha256": "9a53ed16b7df8b6f9b143192a13ec71b58a9a233c6b7317b02a4f23f7922fc7b"
+   "sha256": "f248779a7e06058ac767d562a3a12dd9efe1d6ed90522fd6f1b3d5f17a1d18ec"
   },
   {
    "kind": "doc",
@@ -760,35 +1167,42 @@
    "id": "1oBpJKI2P7v7rwoMku-TbcFuVQe2iajddK6v2i5Ro0G0",
    "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/00 START HERE — Claude ↔ ChatGPT Asset Request Protocol",
    "repo_path": "06-asset-collaboration-claude-chatgpt/00-start-here-claude-chatgpt-asset-request-protocol.md",
-   "sha256": "8b40e9f7612c928efa080bf92a5acfafcc94704f8a67bd344deeb4d80a106025"
+   "sha256": "694d1fa747908f0ddbd97fc2aef3c7927eed4418085257e2c98172aa26ca5608"
   },
   {
    "kind": "doc",
    "id": "1ntJHj5rYYi59_o4-0c5Pf-rFYKcJvX1ZlUP43nCJaUw",
    "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/01 COPY THIS — Asset Request Template (Claude)",
    "repo_path": "06-asset-collaboration-claude-chatgpt/01-copy-this-asset-request-template-claude.md",
-   "sha256": "05dd9d3ab1d3106ffb2c602142f91d6e8885ded2cf3b897f5d65b53dd8ad84c5"
+   "sha256": "1703e718b809542fad3f4d9a7e83f1e765f13277914d925c784a150c4072fa4e"
   },
   {
    "kind": "doc",
    "id": "17OlSfBfTnUEUTmbo-zcsl4VrSn1mPny-zAP6kZaiodU",
    "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/02 VISUAL QUALITY GATE — Art-first asset production and acceptance",
    "repo_path": "06-asset-collaboration-claude-chatgpt/02-visual-quality-gate-art-first-asset-production-and-acceptance.md",
-   "sha256": "c6aa824a16f798fe7f4084c028170b2097fb6fd20267696f2f1fabe345707ee6"
+   "sha256": "2d84cb7776e9e20d73f9975b453d10e2391fce29b3e2b6bab0e83ea8b7e9f5fe"
   },
   {
    "kind": "doc",
    "id": "1-ASnTbCLAXSi_WCOl_7KNuUgelLXLmiZFKiN6APao2s",
    "drive_path": "/00 START HERE — Irreverents",
    "repo_path": "00-start-here-irreverents.md",
-   "sha256": "ddc048706dea9aa6cfc420ca47728d360a7e8d5e965c0612713d210e05d8d381"
+   "sha256": "b147d9ba2fcb52d3ee9174f8e2ce8f9bfe62aadd730f02009f9a06e54640fa9c"
+  },
+  {
+   "kind": "doc",
+   "id": "1bnr7GUgrYBVVY0BMkwx4qRPvW45Nk4grn-Tk6THcoY8",
+   "drive_path": "/ASSET LIBRARY — START HERE (Claude)",
+   "repo_path": "asset-library-start-here-claude.md",
+   "sha256": "a6118eeeee4cb7ce3c0bd185afe4ef73045941cb594fda61a2a721ae77f1fa0e"
   },
   {
    "kind": "doc",
    "id": "17R7aKkqDxQwRk-cmywQbvQ_CcEzz4UqHz37YYYRnADs",
    "drive_path": "/changelog",
    "repo_path": "changelog.md",
-   "sha256": "58ab4916e369f0e98502b5bffaca033bfddc280d1274166efce7425b2d44f592"
+   "sha256": "c470c40ece0b9081639da8ed665993c923ef09913013742c4900ef0415af99e9"
   }
  ]
 }
