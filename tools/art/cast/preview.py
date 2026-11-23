@@ -17,8 +17,7 @@ from PIL import Image, ImageDraw
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(HERE)))
 OUT = os.path.join(HERE, 'preview')
-IDS = ['king', 'guard', 'shopkeeper', 'villain', 'crate', 'crate-heavy', 'dummy', 'dummy-heavy', 'throne',
-       'brawler', 'skirmisher', 'outpost-fighter', 'outpost-lookout', 'signal-post']
+IDS = ['king', 'guard', 'shopkeeper', 'villain', 'crate', 'crate-heavy', 'dummy', 'dummy-heavy', 'throne']
 PEOPLE = IDS[:4]
 BG = (129, 121, 184, 255)       # the castle ramp, where most of them stand
 S = 4
