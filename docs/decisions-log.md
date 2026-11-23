@@ -493,3 +493,11 @@ document as a decision of theirs.
 - **Why this way:** at column 24, thirteen tiles from the shop and from the guard's beat, so the shopkeeper's walk to it takes about five seconds (time to stop them, break it first, or buy something and be forgiven), and the guard is far enough away that they come to where you were reported, not to where you are. Nobody already in the street was moved.
 - **To change it:** move or delete `street-bell` in `content/placements/castle-street.json`.
 - **Where:** `docs/mechanisms/npc-response.md`, "Where the people are".
+
+### 2026-11-23 · The secret is a crawl only the smallest hero fits, and nobody who gets in is ever stuck
+- **Decided by:** brief-worker, Step 3 slice B (the rules are the Step 3 lead's, in the brief; the layout and numbers are this session's)
+- **Instead of asking:** "Where is the secret, who can reach it, and what if someone gets in and cannot get out?"
+- **Why this way:** it is in the hidden undercroft: a gap one tile high that only a body small enough fits through (tonight the tiny infiltrator), leading to a small chamber. The other two are stopped at its mouth, and the flyer cannot flap up into it from below. But a friend can throw you up into it from underneath, and that is meant to work: getting somewhere you "shouldn't" by play is the game. Anyone inside leaves through a hole in the floor that every body fits, so nobody is ever trapped, even after switching character. There is also a cracked wall at the west end with a small vault behind it, and two curtains to hide behind (by the throne room's door, and under an awning in the street); what hiding does to being seen is not built yet.
+- **To change it:** the rooms are data (`content/rooms/undercroft.json`): the crawl's length, the drop's height and the chamber's size are letters in a grid.
+- **Where:** `docs/mechanisms/rooms-and-doors.md`, "The map tonight".
+

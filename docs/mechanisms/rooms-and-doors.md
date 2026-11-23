@@ -55,9 +55,28 @@ that could trap someone.
   sign. The far end of each hidden connection (the undercroft, the
   gallery balcony) is not marked hidden, so the way back shows as an
   opening there.
-- Still to come (the brief's last push): the undercroft's vault and the
-  secret (signal 3), `hide` parts placed in the street and the throne
-  room, and the cellar doorway moved to the courtyard.
+- **The secret** (signal 3, `step3-secret-*`, gate B) is in the
+  undercroft: a crawl exactly one tile high and five long (row 4,
+  columns 11-15) from a ledge into a chamber. Only a body at most a tile
+  tall fits (tonight the infiltrator; the rule is the body's box, never
+  its name). `INTENT:` the chamber has a second way out any body can
+  take: a hole in its floor, two tiles wide for the widest body, dropping
+  eight tiles to the passage. That is too far to come back up (the
+  flyer's jump and three flaps reach about six and a half:
+  `step3-secret-not-by-flight`), but a body thrown up the drop lands in
+  the chamber, and that must keep working
+  (`step3-secret-another-way`): do not close it, and do not let the
+  chamber become leavable by one party member only (a player who crawls
+  in and switches character must still get out).
+- **The vault.** At the undercroft's west end a `breakable`
+  (`vault-wall`, column 4) seals a small hidden area. The way-out check
+  counts it as wall, so the vault is not a place it worries about; once
+  broken it is open for good.
+- **Hiding places** (`hide` parts): `door-curtain` in the throne room
+  (column 18, by the east opening) and `awning-curtain` in the street
+  (columns 8-9, under the west awning). Step 4 decides what hiding does.
+- Not done: the cellar doorway still comes up in the street; it is
+  meant for the courtyard (column 15, west of the gate).
 
 ## The room file (`content/rooms/<id>.json`)
 
