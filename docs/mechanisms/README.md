@@ -50,6 +50,11 @@ groups) whenever you add one — never update the number from memory.
 
 **Design library** (`docs/mechanisms/design-library-sync.md`)
 - **[Art pipeline](art-pipeline.md)**: how every picture gets into the game as data (sprites, joined-up ground, backdrops, decoration, looks), the palette and style lock for the stand-in art drawn by `tools/art/`, the draw order, and the rule that nothing drawn may point at a secret.
+- **[Art foundation](art-foundation.md)**: the art content kinds (sprites, atlases, backdrops, decor, looks), the check that every art file's cells fit inside its image, and the `look`/`drawLook`/`drawNine` helper (Step 8).
+- **[Rendering the world](rendering-world.md)**: backdrops and parallax, joined-up ground, room parts, decoration, and a view of any size (Step 8).
+- **[Rendering actors](rendering-actors.md)**: how bodies, people, moods, marks, effects and speech are drawn from the simulation's state (Step 8).
+- **[The page around the game](phone-shell-look.md)**: the shell, upright and sideways, the controls and how the view's size is chosen (Step 8).
+- **[Sound](sound.md)**: sound effects and music as data, wired to moments of play; silent until the first tap (Step 8; direction in `docs/audio-design.md`).
 - `tools/drive_sync.py` — mirrors the owner's Google Drive design library into `docs/design-library/` and reports what changed by hash (first import 2026-11-23).
 
 **Asset requests** (`docs/mechanisms/asset-requests.md`)
