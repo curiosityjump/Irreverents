@@ -1,0 +1,22 @@
+{
+  "id": "step12-caller-stopped-no-wave",
+  "gate": null,
+  "proves": "signal 1: the lookout sees the hero coming, runs to the horn post and starts the call; the hero knocks them out mid-call, so the call stops (knocked-out), nothing is sent, no wave walks in in the next 12 s and the lookout, up again, never calls again (DRAFT: a stopped caller fights instead; D-061: interrupt the caller). Control: step12-call-brings-wave",
+  "room": "test-outpost",
+  "placements": true,
+  "players": [{"id": "a", "character": "grappler", "spawn": 1}],
+  "inputs": [
+    {"player": "a", "from": 0, "to": 125, "x": 1},
+    {"player": "a", "from": 130, "to": 134, "hold": ["attack"]}
+  ],
+  "ticks": 900,
+  "expect": [
+    {"fact": "event-where", "event": "outpost-call-started", "where": {"by": "tout-lookout"}, "between": [0, 130], "count": [1, 1]},
+    {"fact": "event-where", "event": "outpost-call-stopped", "where": {"by": "tout-lookout", "why": "knocked-out"}, "between": [131, 140], "count": [1, 1]},
+    {"fact": "event-where", "event": "outpost-call-completed", "where": {}, "between": [0, 900], "count": [0, 0]},
+    {"fact": "event-where", "event": "outpost-call-started", "where": {}, "between": [131, 900], "count": [0, 0]},
+    {"fact": "event-where", "event": "outpost-wave", "where": {}, "between": [0, 900], "count": [0, 0]},
+    {"fact": "event-where", "event": "signaler-broken", "where": {}, "between": [0, 900], "count": [0, 0]},
+    {"fact": "people-count", "room": "test-outpost", "between": [1, 900], "count": [3, 3]}
+  ]
+}

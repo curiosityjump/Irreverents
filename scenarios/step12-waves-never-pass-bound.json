@@ -1,0 +1,20 @@
+{
+  "id": "step12-waves-never-pass-bound",
+  "gate": null,
+  "proves": "signal 3: the hero stands on the low platform in the lookout's sight and out of every fighter's reach, and the lookout calls again and again: more finished calls (8) than the table has rows (2), a wave for each of the first five (the last row coming again), then the room is at its bound of 8 people and the next waves wait; the room never holds more than 8 (doc 24: no cap on waves, a cap on bodies). Control: outpostBoundOn set to 0 in content/tuning.json, the room passes 8",
+  "room": "test-outpost",
+  "placements": true,
+  "players": [
+    {"id": "a", "character": "grappler", "spawn": 0}
+  ],
+  "inputs": [],
+  "ticks": 2400,
+  "expect": [
+    {"fact": "event-where", "event": "outpost-call-completed", "where": {"by": "tout-lookout"}, "between": [0, 2400], "count": [7, 99]},
+    {"fact": "event-where", "event": "outpost-wave", "where": {"row": 1}, "between": [0, 2400], "count": [4, 4]},
+    {"fact": "event-where", "event": "outpost-wave", "where": {"wave": 4, "row": 1}, "between": [1405, 1405], "count": [1, 1]},
+    {"fact": "event-where", "event": "outpost-wave", "where": {}, "between": [1406, 2400], "count": [0, 0]},
+    {"fact": "people-count", "room": "test-outpost", "between": [1, 2400], "count": [3, 8]},
+    {"fact": "people-count", "room": "test-outpost", "between": [1406, 2400], "count": [8, 8]}
+  ]
+}

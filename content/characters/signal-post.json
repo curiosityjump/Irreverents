@@ -1,0 +1,9 @@
+{
+  "//": "DRAFT (Step 12): the post the outpost's horn hangs on (the signaler, D-061). A plain body, too heavy for anyone to lift, that cannot be knocked out; hits and throws break it (src/sim/systems/outpost-signaler.ts). src/client/draw/outpost.ts draws the horn on it.",
+  "id": "signal-post",
+  "name": "Horn Post",
+  "box": { "w": 10, "h": 32 },
+  "color": "#5c4a32",
+  "verbs": ["body"],
+  "tuning": "signal-post"
+}

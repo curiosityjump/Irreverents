@@ -1,0 +1,17 @@
+{
+  "//": "DRAFT: Step 12's check outpost (no player reaches it). Two wave rows of one fighter each, so a few finished calls run past the table; a short callAgain so the scenarios stay short. breakSpeed is above any launch (maxLaunchSpeed 520) here only, so a lookout knocked into the post does not break it and the scenarios keep the ways to stop a call apart.",
+  "id": "test-outpost",
+  "room": "test-outpost",
+  "signaler": "tout-post",
+  "callers": ["tout-lookout"],
+  "entry": [27, 8],
+  "bound": 8,
+  "callTime": 3,
+  "callAgain": 2,
+  "breakHits": 3,
+  "breakSpeed": 600,
+  "waves": [
+    [{ "character": "outpost-fighter", "npc": "outpost-fighter" }],
+    [{ "character": "outpost-fighter", "npc": "outpost-fighter" }]
+  ]
+}

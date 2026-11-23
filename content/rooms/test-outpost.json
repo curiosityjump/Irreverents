@@ -1,0 +1,26 @@
+{
+  "//": "DRAFT: Step 12's check room for the outpost (content/outposts/test-outpost.json): no doors, so no player can reach it. A hero starts on the floor at column 2 or on a low one-way platform at columns 6-9, or at column 20 behind the lookout's back (east of the post) (two tiles up: in a lookout's sight, out of a fighter's reach). The lookout at column 12 faces west, the horn post at 14, two fighters at 22 and 24 facing east; waves walk in at column 27.",
+  "id": "test-outpost",
+  "name": "Test: outpost",
+  "tile": 16,
+  "legend": {
+    "#": "solid",
+    "=": "oneway",
+    ".": "empty",
+    "1": "spawn",
+    "2": "spawn",
+    "3": "spawn"
+  },
+  "rows": [
+    "##############################",
+    "#............................#",
+    "#............................#",
+    "#............................#",
+    "#............................#",
+    "#............................#",
+    "#.......2....................#",
+    "#.....====...................#",
+    "#.1.................3........#",
+    "##############################"
+  ]
+}

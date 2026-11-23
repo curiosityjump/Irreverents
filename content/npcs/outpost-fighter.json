@@ -1,0 +1,11 @@
+{
+  "//": "DRAFT (Step 12): a fighter of a hostile outpost. Fighting heroes is business as usual (D-060), so mood 1 covers it (src/sim/systems/outpost-fight.ts); the three moods are Step 4's (D-048). Barks are placeholders (D-057).",
+  "id": "outpost-fighter",
+  "role": "outpost-fighter",
+  "side": "bad",
+  "moods": { "1": "routine", "2": "plead", "3": "charge" },
+  "barks": {
+    "distress": "Huh?",
+    "rage": "GET THEM!"
+  }
+}

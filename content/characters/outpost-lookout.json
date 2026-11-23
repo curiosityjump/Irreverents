@@ -1,0 +1,9 @@
+{
+  "//": "DRAFT (Step 12): the graybox body of an outpost lookout. It walks and nothing else: its job is the horn. DRAFT: one good blow puts it down (toughness 30), so stopping the caller mid-call is a real move.",
+  "id": "outpost-lookout",
+  "name": "Camp Lookout",
+  "box": { "w": 12, "h": 26 },
+  "color": "#b5651d",
+  "verbs": ["move", "body"],
+  "tuning": "outpost-lookout"
+}

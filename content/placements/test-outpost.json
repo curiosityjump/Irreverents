@@ -1,0 +1,11 @@
+{
+  "//": "DRAFT: Step 12's check scene. The lookout watches west; the post with the horn is two tiles east of them; two fighters face east, out of sight of the west end. The scenarios scenarios/step12-*.json pin these columns.",
+  "id": "test-outpost",
+  "room": "test-outpost",
+  "place": [
+    { "id": "tout-lookout", "character": "outpost-lookout", "tile": [12, 8], "npc": "outpost-lookout", "routine": [{ "face": "left" }, { "wait": 5 }] },
+    { "id": "tout-post", "character": "signal-post", "tile": [14, 8] },
+    { "id": "tout-fighter-1", "character": "outpost-fighter", "tile": [22, 8], "npc": "outpost-fighter", "routine": [{ "face": "right" }, { "wait": 10 }] },
+    { "id": "tout-fighter-2", "character": "outpost-fighter", "tile": [24, 8], "npc": "outpost-fighter", "routine": [{ "face": "right" }, { "wait": 10 }] }
+  ]
+}

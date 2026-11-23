@@ -1,0 +1,9 @@
+{
+  "//": "DRAFT (Step 12): the graybox body of an outpost fighter. An ordinary body that walks and swings; who the person is lives in content/npcs/outpost-fighter.json.",
+  "id": "outpost-fighter",
+  "name": "Camp Fighter",
+  "box": { "w": 14, "h": 28 },
+  "color": "#8c3b2e",
+  "verbs": ["move", "attack"],
+  "tuning": "outpost-fighter"
+}

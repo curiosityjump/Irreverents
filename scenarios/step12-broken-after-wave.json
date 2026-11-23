@@ -1,0 +1,29 @@
+{
+  "id": "step12-broken-after-wave",
+  "gate": null,
+  "proves": "signal 2, second half: the lookout's call completes and one fighter walks in; the hero then gets round the post and breaks it with three hits (the lookout is not touched); the fighter who came stays, and though the lookout, ready again, sees the hero walk west across their view, no call starts and no more come (doc 24: those already called stay)",
+  "room": "test-outpost",
+  "placements": true,
+  "players": [
+    {"id": "a", "character": "grappler", "spawn": 1}
+  ],
+  "inputs": [
+    {"player": "a", "from": 0, "to": 125, "x": 1},
+    {"player": "a", "from": 250, "to": 280, "x": 1},
+    {"player": "a", "from": 290, "to": 292, "x": -1},
+    {"player": "a", "from": 300, "to": 303, "hold": ["attack"]},
+    {"player": "a", "from": 330, "to": 333, "hold": ["attack"]},
+    {"player": "a", "from": 360, "to": 363, "hold": ["attack"]},
+    {"player": "a", "from": 500, "to": 620, "x": -1}
+  ],
+  "ticks": 1500,
+  "expect": [
+    {"fact": "event-where", "event": "outpost-wave", "where": {"wave": 0}, "between": [242, 242], "count": [1, 1]},
+    {"fact": "event-where", "event": "signaler-broken", "where": {"signaler": "tout-post"}, "between": [366, 366], "count": [1, 1]},
+    {"fact": "event-where", "event": "hit", "where": {"target": "tout-lookout"}, "between": [0, 1500], "count": [0, 0]},
+    {"fact": "event-where", "event": "outpost-call-started", "where": {}, "between": [243, 1500], "count": [0, 0]},
+    {"fact": "event-where", "event": "outpost-wave", "where": {}, "between": [243, 1500], "count": [0, 0]},
+    {"fact": "position", "at": 1500, "x": [20, 190], "player": "a"},
+    {"fact": "people-count", "room": "test-outpost", "between": [243, 1500], "count": [4, 4]}
+  ]
+}

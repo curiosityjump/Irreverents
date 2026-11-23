@@ -1,0 +1,27 @@
+{
+  "id": "step12-signaler-broken-unseen",
+  "gate": null,
+  "proves": "signal 2: the hero comes up behind the lookout's back and breaks the horn post with three hits (no new button, D-093); nobody saw, so no call starts; then the hero walks west across the lookout's view, and with the post broken no call can start: no wave, ever. Control: breakHits raised past three in content/outposts/test-outpost.json, the lookout calls",
+  "room": "test-outpost",
+  "placements": true,
+  "players": [
+    {"id": "a", "character": "grappler", "spawn": 2}
+  ],
+  "inputs": [
+    {"player": "a", "from": 0, "to": 57, "x": -1},
+    {"player": "a", "from": 70, "to": 73, "hold": ["attack"]},
+    {"player": "a", "from": 100, "to": 103, "hold": ["attack"]},
+    {"player": "a", "from": 130, "to": 133, "hold": ["attack"]},
+    {"player": "a", "from": 200, "to": 300, "x": -1}
+  ],
+  "ticks": 900,
+  "expect": [
+    {"fact": "event-where", "event": "hit", "where": {"by": "p:a", "target": "tout-post"}, "between": [70, 140], "count": [3, 3]},
+    {"fact": "event-where", "event": "deed", "where": {"deed": "hit", "target": "tout-post", "witnesses": []}, "between": [70, 140], "count": [3, 3]},
+    {"fact": "event-where", "event": "signaler-broken", "where": {"outpost": "test-outpost", "signaler": "tout-post"}, "between": [136, 136], "count": [1, 1]},
+    {"fact": "event-where", "event": "outpost-call-started", "where": {}, "between": [0, 900], "count": [0, 0]},
+    {"fact": "event-where", "event": "outpost-wave", "where": {}, "between": [0, 900], "count": [0, 0]},
+    {"fact": "position", "at": 900, "x": [60, 160], "player": "a"},
+    {"fact": "people-count", "room": "test-outpost", "between": [1, 900], "count": [3, 3]}
+  ]
+}

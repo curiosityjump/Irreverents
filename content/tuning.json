@@ -50,7 +50,10 @@
     "hitBeatMaxTime": 0.133,
     "beatMaxTime": 0.15,
     "floorBounce": 0.45,
-    "floorBounceSpeed": 150
+    "floorBounceSpeed": 150,
+    "outpostCallReach": 12,
+    "outpostZoneEndOn": 1,
+    "outpostBoundOn": 1
   },
   "characters": {
     "shopkeeper": {
@@ -196,6 +199,36 @@
       "//": "DRAFT (Step 6): as the heavy dummy: anyone can hit him, only the grappler lifts him.",
       "weight": 110,
       "toughness": 260
+    },
+    "outpost-fighter": {
+      "//": "DRAFT (Step 12): a camp fighter. Walks like a guard (a little quicker), swings like a lighter grappler.",
+      "runSpeed": 48,
+      "runAccel": 400,
+      "runDecel": 600,
+      "airAccel": 200,
+      "airDecel": 100,
+      "attackStrength": 9000,
+      "attackReach": 12,
+      "attackTime": 0.8,
+      "attackWear": 20,
+      "attackWindup": 0.25,
+      "attackStrikeTime": 0.067,
+      "attackRecovery": 0.2
+    },
+    "outpost-lookout": {
+      "//": "DRAFT (Step 12): the camp lookout, quick on its feet so the run to the horn is a race.",
+      "runSpeed": 56,
+      "runAccel": 500,
+      "runDecel": 700,
+      "airAccel": 200,
+      "airDecel": 100,
+      "weight": 40,
+      "toughness": 30
+    },
+    "signal-post": {
+      "//": "DRAFT (Step 12): the post with the horn. Like the throne: nobody can lift it and it cannot be knocked out. Heaviest a body may be, so a hit or a body knocked into it barely moves it.",
+      "weight": 1000,
+      "toughness": 0
     },
     "throne": {
       "//": "DRAFT (Step 6): heavier than anyone can lift; it cannot be knocked out.",

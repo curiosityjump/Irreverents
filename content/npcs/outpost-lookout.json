@@ -1,0 +1,11 @@
+{
+  "//": "DRAFT (Step 12): the lookout of a hostile outpost: sees a hero, runs to the horn and sounds it (src/sim/systems/outpost-call.ts). Business as usual throughout (D-060).",
+  "id": "outpost-lookout",
+  "role": "outpost-lookout",
+  "side": "bad",
+  "moods": { "1": "routine", "2": "plead", "3": "charge" },
+  "barks": {
+    "distress": "Huh?",
+    "rage": "INTRUDERS!"
+  }
+}
