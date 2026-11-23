@@ -37,7 +37,8 @@ Re-check with `git log --oneline 9f36db3..origin/main`.)*
 
 ## Sessions
 
-*(19:15 UTC; all report to the session on the Orchestrator line of `docs/questions-for-the-owner.md`.)*
+*(19:20 UTC, orchestrator `session_017WiGzJzo6aZqH4kYxxJsiV` at pickup; all report to the session on the Orchestrator line of `docs/questions-for-the-owner.md`.)*
+Started 19:14 UTC: core-loop art cut-outs builder `session_017WiGzEN1QbSnHzXNqV4XSt` (`handoff-prompts/loop-art-cutouts.md`). Backstop `trig_011biZA4hCVneba273QGoi6c` (19:46 UTC, into the orchestrator: has the re-plan landed?).
 Running: hit-prediction builder `session_017WiGzGPRoCXeC3TG8HFyxh`
 (`handoff-prompts/step-5-hit-lands-at-once.md`); Step 14 slice A builder
 `session_017WiGzFeeJgj8z2SUAFyu5J`; Step 18 builder `session_017WiGzHwmFZe9AdG3KMHsa4` (about 350k
