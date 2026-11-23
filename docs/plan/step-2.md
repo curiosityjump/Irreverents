@@ -288,6 +288,87 @@ Shared by both briefs; a brief points here rather than repeating it.
 
 ## Open with the owner
 
+## Feel, from 2026-11-23 (what this step is reopened for)
+
+**Owner, 2026-11-23 ~10:05 UTC, to Vision Partner, first-hand, after
+playing the first morning build** (`docs/vision.md`, "The measure"):
+> The game looks awful. Make sure it stays on track. I want to be playing something that looks, sounds, and feels as good as kirby and the amazing mirror, but with all the decisions in the vision, by tomorrow. LONG way to go currently.
+
+The look and the sound are Step 8's, running now. **How it feels in the
+hands is this step's**, and it comes before any new system
+(`docs/current-directive.md`). The scripted signals above are met; what
+they cannot say is whether running, jumping, hitting and throwing feel
+good. That is the owner's to judge, so the job here is two things: make
+the feel as good as a careful platformer's by the known craft, and put
+the dials in the owner's hands.
+
+**Goal.** By the owner's morning of 2026-11-24, on an iPhone held either
+way: movement answers the thumb at once and lands where the player
+meant; a jump can be short or long; hits and throws carry weight (the
+library's "OHHHHH" of physical impact, D-020: impact, not numbers); the
+three party members feel different to move, not only different in what
+they can do; and the owner can change any of it from the phone while
+playing.
+
+**What that means, as things to build (all numbers are data in
+`content/tuning.json`, declared by their reader):**
+- *Moving:* quick acceleration and a short stop rather than instant or
+  icy; air control; a jump whose height follows how long the button is
+  held; a few ticks of grace after walking off a ledge and a few ticks of
+  memory for a jump pressed just before landing; a little hang at the top
+  and a faster fall; no stick on landing. The flyer floats and flaps; the
+  infiltrator is the quickest and lightest; the grappler is heavy and
+  hits hardest.
+- *Hitting and throwing:* an attack with a short wind-up, a strike and a
+  recovery; the held beat on impact scaled to how hard the hit was;
+  knockback in an arc, a bounce off walls and floors, bodies that tumble
+  into each other; a throw that follows the stick and feels heavy for
+  heavy things.
+- *Telling the picture:* Step 8's renderer draws from what the
+  simulation says. Its actors lane lists, in
+  `docs/mechanisms/rendering-actors.md` under "Flags for the lead", every
+  state it could not tell from the world (an attack's phase, the tick of
+  a landing or a hit, being stunned). Expose those, additively.
+- *The dials:* the `?tune` panel this step already owes: every feel
+  number adjustable on the phone while playing, per character, with a way
+  to copy the changed numbers out so they can be made the default. A
+  question about feel that comes back unanswerable is answered by
+  handing over the dial.
+
+**Feedback signal** (each a scenario in `npm run check` with a control
+watched to fail, named `step2-feel-*`): ticks from a press to most of top
+speed, and from release to a stop, inside stated bounds; a tap jump
+measurably lower than a held one; a jump still granted a few ticks after
+leaving a ledge, and refused after the grace; a jump pressed just before
+landing still happens; the held beat longer for a harder hit; a thrown
+body bounces rather than stops dead; each party member's top speed, jump
+height and weight differ by stated margins. `npm run e2e` proves the
+panel changes a number on a phone-sized page and that play follows it.
+None of this says it feels good: that is the owner's, with the panel.
+
+**Stopping condition.** Those scenarios pass on `main` and live, the
+panel works by touch on both holds, and a short list of what to try and
+which dial changes it is in the closing report. Budget: the owner's
+morning of 2026-11-24 (about 11:00 UTC). Report what is in the way if it
+will slip.
+
+**Decided.** Feel before new systems (the owner, above). Numbers are data
+and `DRAFT:`. Nothing copied from another game: its feel is the bar, the
+numbers are ours to find. **Not this step's:** the camera
+(`src/client/draw/room.ts`, Step 8's world lane, until its round 1 has
+landed; then ask the orchestrator), anything in `src/client/draw/`, the
+touch layout (Step 8's shell lane today).
+
+**While Step 8's lanes are landing** (nine of them push to `main` through
+the day; `docs/plan/step-8.md`, "The look"): pull before every push and
+run `npm run e2e` after every pull; a change of movement numbers can move
+what the scripted touch play does, and that is yours to keep green.
+
+**Also still owed here, after feel:** the switch gap (two players can
+become the same hero; the fix is in the network layer), the no-number
+check from the page's own record (signal 6), and `docs/architecture.md`'s
+rows re-read. See the handoff notes below.
+
 ## Handoff notes
 
 *(Newest last.)*

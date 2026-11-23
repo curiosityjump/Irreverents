@@ -249,7 +249,7 @@ Durable record: `docs/architecture.md`, `docs/mechanisms/network.md`,
 
 ## Step 2 — Moving, hitting, grabbing and throwing
 
-**Status: open, unclaimed — queued behind Step 5.** (Released 2026-11-23 10:40 UTC by orchestrator session_017WiGzHX8g2sXimNRnqp2oZ: its first lead session_017WiGzGRnRoAeW5Ep5iSycV is idle with a large context and is not to be reused; a fresh lead starts from the step file's handoff notes. Held, like Steps 3 and 8, for the usage allowance (resets about 13:00 UTC) and the owner's first play. Earlier: Opened 2026-11-23 04:26 UTC: Step 1's Gate 1 is on `main` and verified; `docs/architecture.md` is the contract.)
+**Status: open, unclaimed.** (Reopened 2026-11-23 11:55 UTC by orchestrator session_017WiGzHX8g2sXimNRnqp2oZ for game feel, second only to the look: the owner wants it to feel "as good as kirby and the amazing mirror" by 2026-11-24. Start from the step file's section "Feel, from 2026-11-23"; its first lead session_017WiGzGRnRoAeW5Ep5iSycV is idle with a large context and is not to be reused.)
 
 Full text: `docs/plan/step-2.md`
 
