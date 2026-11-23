@@ -165,3 +165,7 @@ List these; don't grade them.
 ## Open with the owner
 
 ## Handoff notes
+
+### Slice A handoff (2026-11-23, slice A worker)
+
+Done on `main` in three pushes (1bdd143, c889a47, and the e2e push after it): the outpost kind and four `outpost-*` systems, the test room and five scenarios, the Bandit Camp behind the courtyard's doorway (column 23), `step12-sneak-past-no-call` and `step12-walk-out-ends-it`, the horn drawn (`drawn.signalers`), `outpost-fight` widened to any bad-side person with `attack` (for Step 16), and `npm run e2e` facts `outpost-in` / `outpost-break` (a phone by touch walks from the start room into the camp; the page drew the post working, sounding, then broken; control `E2E_TOUCH_BREAK=attack` watched to fail). Writeup `docs/mechanisms/outposts.md`. Not done: the e2e "stop a caller mid-call" and "walk out during a wave" by touch (the scenarios cover both in the simulation); `check:live` does not run the outpost facts (local only). Open for the owner by playing: whether an endless fight is a thrill or a chore, how fast waves grow (1, 2, 3 fighters, 6 s between calls), the horn's look and sound (graybox now; no sound cue added). Flags: `docs/for-the-lead.md`.

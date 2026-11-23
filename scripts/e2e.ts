@@ -365,6 +365,8 @@ async function main(): Promise<void> {
       await (await import('./lib/e2e-touch.ts')).touchAndThrows({ browser, devices, base, out, fact, errors });
       // Step 2's ?tune facts (tune-*): the feel dials by touch, and play following them on two pages (docs/mechanisms/tuning-panel.md).
       await (await import('./e2e/tune.ts')).tuneFacts({ browser, devices, base, out, fact, errors });
+      // Step 12's facts (outpost-*): into the outpost by touch, and the horn post drawn working, then broken (docs/mechanisms/outposts.md).
+      await (await import('./e2e/outpost.ts')).outpostFacts({ browser, devices, base, out, fact, errors });
       // (f) another world does not see them.
       const ctxC = await browser.newContext({ viewport: { width: 800, height: 450 } });
       const C = await ctxC.newPage();
