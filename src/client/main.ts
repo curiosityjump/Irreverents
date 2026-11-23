@@ -24,6 +24,7 @@ import { drawnSight, watchSightEvents } from './draw/sight.ts';
 import { drawnHeist, watchHeistEvents } from './draw/heist.ts';
 import { drawnHall, watchHallEvents } from './draw/hall.ts';
 import { drawnRecruits, noteRecruits } from './draw/recruits.ts';
+import { drawnParts, setHeardRooms } from './draw/room-parts.ts';
 import { drawnPowers } from './draw/powers.ts';
 import { levelProgress } from '../sim/levels.ts';
 import { setUpMenu, showGone, showStart } from './start.ts';
@@ -151,6 +152,8 @@ const debug = {
     hall: null as ReturnType<typeof drawnHall> | null,
     /** Step 13: the cages this frame drew in this room and the captives' calls (src/client/draw/recruits.ts). */
     recruits: { cages: [], calls: [], flash: null } as ReturnType<typeof drawnRecruits>,
+    /** Step 3 (the stone plate): the plates and gates this frame drew in this room, down/open and how far a weighted plate sank (src/client/draw/room-parts.ts). */
+    parts: [] as ReturnType<typeof drawnParts>,
     cantina: null as { row: { kind: string; slot: number; x: number; y: number; w: number; h: number; taken: boolean }[] | null; counter: { player: string; ko: number; falls: number }[] | null } | null,
   },
 };
@@ -272,6 +275,7 @@ function play(worldName: string): void {
     watchSightEvents(net.latest(), frameNo); // Step 19: an unseen deed's mark (draw/sight.ts)
     watchHeistEvents(net.latest()); // Step 19: a clean getaway's banner (draw/heist.ts)
     watchHallEvents(net.latest()); // Step 7: a new legend's banner, wherever this page is (draw/hall.ts)
+    setHeardRooms(net.heardRooms()); // Step 3: plates drawn from the server's copy too (draw/room-parts.ts, plateAsDrawn)
     const camera = render(g, shown, content, me.room, { me: me.id, frame: frameNo, drawn: seen });
     const result = { camera, drawn: seen };
     lastCamera = camera;
@@ -319,6 +323,7 @@ function play(worldName: string): void {
     d.heist = drawnHeist();
     d.hall = drawnHall();
     d.recruits = drawnRecruits();
+    d.parts = drawnParts();
     d.words = takeWords();
     // Step 5 (docs/mechanisms/network.md, "Predicted hits"): each impact this frame drew from, on this page's clock.
     d.impacts = drawnBodies.filter((e) => e.c.impact && e.room === me.room).map((e) => ({ id: e.id, tick: e.c.impact!.tick, age: net.world.tick - e.c.impact!.tick, beat: !!e.c.beat, predicted: !!e.c.predicted }));

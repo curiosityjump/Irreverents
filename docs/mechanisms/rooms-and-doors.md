@@ -439,7 +439,13 @@ autotile corner can outline a secret. Every working part then draws what
 sits on that ground, from the world's run-time state, in
 `src/client/draw/room-parts.ts` (called from `render.ts` after the
 ground): a gate shut or drawn up, a crack or rubble, a plate up or down,
-a window, a curtain. `INTENT:` nothing there points either. How the art
+a window, a curtain. A plate with `needs` is drawn sunk by `load / needs`
+(none to 3 px part-loaded, 4 px down; a slab stand-in until its own
+picture), and a gate wider than tall is drawn as a grate in the floor.
+A plate is drawn down if the page's own step **or the server's newest
+snapshot** says so (`plateAsDrawn`): a page steps only its own body, so
+its own step alone reads a friend's plate up (`plates-friend-held` in
+`npm run e2e`). `INTENT:` nothing there points either. How the art
 plugs in: `docs/mechanisms/rendering-world.md`.
 
 ## Limits, on purpose for now (`DRAFT:`)

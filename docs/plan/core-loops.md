@@ -624,8 +624,12 @@ has its own one-way climb out. Opened by the grappler and any friend, never
 by one hero or the two light heroes; alone by the heavy crate thrown through
 the window, the king, the light crate in the brawler's hands, or the boost.
 Bars are a floor grate, not an upright portcullis (a one-tile floor has no
-room for one; decisions-log). Not yet: how far it has sunk drawn on a phone
-(push 4), the two-page proof (push 5).
+room for one; decisions-log). On a phone the plate is drawn sunk by the
+weight on it (a pale slab stand-in, part-sunk under one hero, flat when
+down) and the grate as bars in the floor (push 4); two phone pages by touch
+open the courtyard gate and the stone plate together in `npm run e2e`
+(`plates-*`, push 5), which also found and fixed the friend's plate drawn
+up on every page.
 
 ---
 

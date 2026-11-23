@@ -1087,6 +1087,13 @@ document as a decision of theirs.
 - **Where:** `docs/mechanisms/rooms-and-doors.md`, "The stone plate's pocket"; `docs/plan/step-3.md`, "Builder notes".
 
 
+### 2026-11-23 · Step 3: the stone plate shows how far it has sunk, and a friend's plate is drawn from the server too
+- **Decided by:** puzzles builder 2 (Step 3 slice), `session_017WiGzJyWTCjY8CTzrkdcpZ`
+- **Instead of asking:** "How does a phone show 'heavier' without saying so, and what does a floor grate look like?"
+- **Why this way:** the plan says the plate itself shows how far it has gone, with no arrow, number or text. The plate drops 1 to 3 pixels for some weight and 4 when it is down, so one hero leaves it visibly half-pressed. The small generic plate stone was invisible under a hero on a phone, so this plate is a wide pale slab until its own picture arrives. A gate lying flat is drawn as bars in the floor. Two phones showed each page drawing the friend's plate up all the time, so a plate now counts as down if either the page or the server says so.
+- **To change it:** `PLATE_SINK` and `SLAB_H` in `src/client/draw/room-parts.ts`; delivered looks `part:undercroft:stone-plate` and `part:undercroft:grate` replace the stand-ins with no code change.
+- **Where:** `docs/mechanisms/rooms-and-doors.md`, the drawing paragraph; `docs/plan/step-3.md`, "Builder notes".
+
 ### 2026-11-23 · Step 9: the street's villain carries the first power; knock him flat and it pops out of him
 - **Decided by:** Step 9 builder, `session_017WiGzF16bBpnLmeWErGynR`
 - **Instead of asking:** "Which enemy carries the first power, and how is it taken?"

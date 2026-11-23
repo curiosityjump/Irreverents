@@ -411,8 +411,10 @@ them:**
 
 1. **Nobody has played it.** Seen by the lead on the built page at
    844×390, keyboard: the throne room, the street, the courtyard with
-   its shut gate. Not seen by anyone: the gate opening for two players
-   on two pages, the roof route, the secret, the undercroft, a hiding
+   its shut gate. ~~Not seen by anyone: the gate opening for two players
+   on two pages~~ (proven by touch on two phone pages, `npm run e2e`
+   `plates-courtyard`, `plates-gate-through`, puzzles push 5). Not seen
+   by anyone: the roof route, the secret, the undercroft, a hiding
    place, touch on any of it, a real iPhone. Signal 4's real-page half
    (`npm run e2e` with the two players in different rooms) does not
    exist.
@@ -434,10 +436,16 @@ them:**
    five rooms through the real `step()`. `src/sim/check-rooms.ts` is
    this step's: shorten its move list, or skip rooms that did not
    change.
-5. **Plates between two devices may flicker**: a page steps only its
-   own character between server snapshots, so a plate a friend stands
-   on can pop up for a moment locally (the gate itself holds). Unseen;
-   told to Step 1's lead. Check it with two pages.
+5. ~~**Plates between two devices may flicker**~~ Measured worse and
+   fixed (puzzles push 5): each page drew the plate under its friend up
+   in every frame (91 of 91), because its own step sees no friend. A
+   plate is now drawn down if the page's step or the server's last
+   snapshot says so (`plateAsDrawn`, `src/client/draw/room-parts.ts`);
+   `plates-friend-held` in `npm run e2e`. The gate always held. Still
+   open: the page's own step still emits `plate-up` for that plate
+   after every snapshot; the sound picks it from the server's events
+   too, and its 2.5 s same-part rule may let a plate sound repeat while
+   a friend stands on it. Not listened to.
 6. **The cellar doorway comes up in the street** (column 7), not the
    courtyard as the map above says. A small room-data change.
 7. **Looks, for the owner or Step 8:** the wall tile under the false
@@ -591,3 +599,40 @@ names and shapes.
   the plate (`step3-weight-boost`, the boosted lift, in `test-weight`). Each
   link is proven; the chain is not, and nothing checks that a held power
   survives the two doors (powers.md says the holder's own page holds it).
+- **Push 4, how far it has sunk, on a phone** (puzzles builder 2,
+  `session_017WiGzJyWTCjY8CTzrkdcpZ`). A plate with `needs` is drawn
+  sunk by `load / needs`: 0 px empty, 1-3 px part-loaded (never as far as
+  down), 4 px down (`plateSink`). The generic `plate-up` look (one small
+  stone a tile) was lost under the hero and the room's props at 844×390,
+  so a weighted plate is a wide pale slab stand-in (`drawSlab`, `DRAFT:`)
+  until `part:undercroft:stone-plate` is delivered. A gate wider than
+  tall is drawn as a floor grate (`drawGrate`, `DRAFT:`, by shape: no
+  param on the gate). Both looks asked of the art builder
+  (`session_017WiGzEN1QbSnHzXNqV4XSt`), with **the decor's barrel, skull
+  and lantern stand placed on the plate's columns** (they half hide it;
+  `content/decor/undercroft.json` is make.py's, not edited). New drawn
+  record: `window.irreverents.drawn.parts`. Shots:
+  `docs/plan/step-3-shots/stone-plate-*`, `courtyard-gate-open-*`,
+  `pocket-*`.
+- **Push 5, the two-page proof** (`scripts/e2e/plates.ts`, facts
+  `plates-*`). Two phone pages by touch (grappler and infiltrator): the
+  courtyard gate drawn open on both, the friend's plate never drawn up,
+  both walk through; then the stone plate part-sunk under the grappler
+  alone (the control read first), right down under both (86), grate
+  open on both, both drop into the pocket. Control `E2E_PLATES_ALONE=1`
+  (second page kept off): every "open" fact failed, as it must. **Found
+  and fixed:** the friend's plate was drawn up in 91 of 91 frames on
+  each page (handoff item 5): `src/net/client.ts` now keeps the newest
+  snapshot's rooms apart (`heardRooms`, additive) and the drawing reads
+  plates from both copies. Not done here: the played boost chain end to
+  end; a real iPhone.
+- **e2e runs at the pushes 4-5 commit:** all seven `plates-*` passed in
+  both runs. Run 1 failed `h1` only; run 2 failed `t-throw-friend`,
+  `s-throw-friend`, `s-after` (follows from the throw), `cantina-row` and
+  `h1`: every one a measured flake on `main`
+  (`handoff-prompts/step-5-e2e-flakes.md`), none touched here. After
+  the rebase onto 49b9d07 a third run failed only `plates-stone`/`-held`/
+  `-pocket`: page B's Use at the cellar doorway missed once (it stood
+  9 px off; the street's guard or villain is the likely shove, not
+  proven). `down()` now tries the doorway up to three times and logs
+  each miss; then four plates-only runs: 28 of 28, one logged miss.

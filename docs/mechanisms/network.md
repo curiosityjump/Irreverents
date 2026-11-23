@@ -69,7 +69,10 @@ with a throwaway entity kind on every `npm run check`).
   top-level field (`rooms`: a gate open, a wall broken; whatever a step
   adds next) is the server's, sent in every snapshot and copied by key
   into each page's own world, so the page's local step and its drawing
-  use the server's room state. No list of names anywhere.
+  use the server's room state. No list of names anywhere. The local
+  step then rewrites it every tick with only the page's own body in it,
+  so `heardRooms()` keeps the newest snapshot's `rooms` untouched; the
+  plates are drawn from both (Step 3, `src/client/draw/room-parts.ts`).
 - **How a player's own actions reach what the server simulates:** every
   report carries the body's whole state *and one input per simulation
   tick since the last report* (`is`). The server gives `step()` one of

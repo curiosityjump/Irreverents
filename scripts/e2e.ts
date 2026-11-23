@@ -382,6 +382,8 @@ async function main(): Promise<void> {
       await (await import('./e2e/levels.ts')).levelFacts({ browser, devices, base, out, fact, errors, shots: path.join(out, 'levels') });
       // Step 14 slice B's facts (glint-*): the piece over the awning glints, a held Jump by touch finds it, the row shows it gold (docs/mechanisms/levels.md, "Pieces").
       await (await import('./e2e/glints.ts')).glintFacts({ browser, devices, base, out, fact, errors, shots: path.join(out, 'glints') });
+      // Step 3's two-page proof (plates-*): one page on each courtyard plate opens the gate on both, the friend's plate never drawn up; the stone plate under the castle part-sunk under one, down under two (docs/mechanisms/rooms-and-doors.md).
+      await (await import('./e2e/plates.ts')).plateFacts({ browser, devices, base, out, fact, errors, shots: path.join(out, 'plates') });
       // Step 9's facts (power-*): the villain drawn carrying his power, seen by a phone walking into the street by touch (docs/mechanisms/powers.md).
       await (await import('./e2e/powers.ts')).powerFacts({ browser, devices, base, out, fact, errors, shots: path.join(out, 'powers') });
       // Step 16's facts (quarry-*): into the quarry by touch, and across its road onto the ridge (docs/plan/step-16.md, signal 7).

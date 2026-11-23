@@ -113,7 +113,51 @@ function bounds(part: Part): { tx: number; ty: number; w: number; h: number } {
  * DRAFT: parts are drawn behind bodies, so a body walking into a false wall
  * stays visible in front of it (docs/decisions-log.md).
  */
+/** One plate or gate as the last frame drew it (for `window.irreverents.drawn.parts`; nothing in the game reads it). */
+export interface DrawnPart {
+  room: string;
+  part: string;
+  kind: string;
+  /** A plate: drawn down. A gate: drawn open. */
+  on: boolean;
+  /** A plate that needs weight: pixels it was drawn sunk (`plateSink`); else null. */
+  sink: number | null;
+}
+let drawnList: DrawnPart[] = [];
+
+/** The server's room state from the newest snapshot (src/net/client.ts `heardRooms`); the page sets it each frame. */
+let heard: World['rooms'] = undefined;
+export function setHeardRooms(rooms: World['rooms']): void {
+  heard = rooms;
+}
+
+/**
+ * What a plate is drawn as: down if the page's own step or the server says
+ * so, and the larger of their two loads (Step 3, the stone plate).
+ *
+ * INTENT: a page steps only its own character, so its own step sees no
+ * friend: a plate a friend stands on reads up there every tick (Step 3's
+ * handoff item 5, measured: drawn up in every frame on both pages,
+ * scripts/e2e/plates.ts `plates-friend-held`). The server's copy has every
+ * body but lags a round trip; the page's own copy is instant for its own
+ * feet. Either saying down is down, so a press shows at once and a friend's
+ * weight is never drawn away. Drawing only: what the page's own step does
+ * with the plate is untouched.
+ */
+function plateAsDrawn(local: { down?: boolean; load?: unknown }, server: { down?: boolean; load?: unknown } | undefined): { down: boolean; load?: number } {
+  const n = (v: unknown): number => (typeof v === 'number' ? v : 0);
+  const down = local.down === true || server?.down === true;
+  if (local.load === undefined && server?.load === undefined) return { down };
+  return { down, load: Math.max(n(local.load), n(server?.load)) };
+}
+
+/** The plates and gates the last frame drew. */
+export function drawnParts(): DrawnPart[] {
+  return drawnList;
+}
+
 export function drawRoomParts(g: CanvasRenderingContext2D, world: World, room: Room, ox: number, oy: number, content?: Content): void {
+  drawnList = [];
   if (room.parts.length === 0) return;
   const T = room.tile;
   const memory = world.rooms?.[room.id]?.parts ?? {};
@@ -133,12 +177,29 @@ export function drawRoomParts(g: CanvasRenderingContext2D, world: World, room: R
       return all;
     };
     if (part.kind === 'plate') {
-      const down = s.down === true;
+      const ps = plateAsDrawn(s, heard?.[room.id]?.parts?.[part.id]);
+      const down = ps.down;
+      const sink = plateSink(part, ps, down);
+      drawnList.push({ room: room.id, part: part.id, kind: part.kind, on: down, sink });
+      if (sink !== null) {
+        // A plate that needs weight: the same look, lowered into the floor by how much rests on it.
+        // DRAFT: the generic plate-up/plate-down look (a small stone, one tile) is lost under a hero and
+        // the room's props on a phone (seen at 844x390), so a weighted plate is its own wide slab unless
+        // a picture of it is delivered (`part:<room>:<part>`).
+        if (sunk(g, rx, ry, b.w * T, b.h * T, sink, () => whole([down ? `${own}:down` : own]))) continue;
+        drawSlab(g, rx, ry + b.h * T, b.w * T, sink);
+        continue;
+      }
       if (whole([down ? `${own}:down` : own]) || each(() => [down ? 'plate-down' : 'plate-up'])) continue;
       drawPlate(g, part, down, T, ox, oy);
     } else if (part.kind === 'gate') {
       const open = s.open === true;
+      drawnList.push({ room: room.id, part: part.id, kind: part.kind, on: open, sink: null });
       if (whole([open ? `${own}:open` : own])) continue;
+      if (isGrate(b)) {
+        drawGrate(g, part, open, T, ox, oy);
+        continue;
+      }
       if (open ? each(() => ['gate-open'], (t) => t.ty === b.ty) : each(() => ['gate-closed'])) continue;
       drawGate(g, part, open, T, ox, oy);
     } else if (part.kind === 'breakable') {
@@ -160,11 +221,112 @@ export function drawRoomParts(g: CanvasRenderingContext2D, world: World, room: R
   }
 }
 
+/**
+ * How many pixels a plate that needs weight is drawn below its raised look
+ * (Step 3, the stone plate): none with nothing on it, a little more for
+ * every bit of weight, `PLATE_SINK` when it is down. Null for a plate with
+ * no `needs`, drawn as it always was. A kept game's plate with no `load`
+ * yet reads as nothing on it.
+ *
+ * INTENT: the plate itself shows how far it has gone, and nothing else
+ * does: no arrow, no number, no text (docs/plan/step-3.md, "Unadvertised";
+ * handoff-prompts/loop-puzzles.md, push 4). "Heavier" is the thought the
+ * room hands you.
+ * DRAFT: a part-loaded plate sinks at least a pixel and never as far as a
+ * down one, so any weight shows and "almost" never looks like "done".
+ */
+export function plateSink(part: Part, s: { load?: unknown }, down: boolean): number | null {
+  const needs = part.params.needs;
+  if (typeof needs !== 'number' || !(needs > 0)) return null;
+  if (down) return PLATE_SINK;
+  const load = typeof s.load === 'number' && s.load > 0 ? s.load : 0;
+  if (load === 0) return 0;
+  return Math.max(1, Math.min(PLATE_SINK - 1, Math.round((load / needs) * (PLATE_SINK - 1))));
+}
+
+/** DRAFT: how far down a weighted plate goes, in room pixels (a quarter of a tile reads at phone size). */
+const PLATE_SINK = 4;
+
+/** Draws with `draw` lowered by `sink` pixels and clipped to the part's rectangle, so it sinks into the floor. */
+function sunk(g: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, sink: number, draw: () => boolean): boolean {
+  g.save();
+  g.beginPath();
+  g.rect(x, y, w, h);
+  g.clip();
+  g.translate(0, sink);
+  const ok = draw();
+  g.restore();
+  return ok;
+}
+
 function drawPlate(g: CanvasRenderingContext2D, part: Part, down: boolean, T: number, ox: number, oy: number): void {
   for (const t of part.tiles) {
     g.fillStyle = down ? PLATE_DOWN : PLATE;
     const h = down ? 1 : 3;
     g.fillRect(ox + t.tx * T + 1, oy + (t.ty + 1) * T - h, T - 2, h);
+  }
+}
+
+/** DRAFT: how tall a weighted plate's slab stands with nothing on it, in room pixels. */
+const SLAB_H = 6;
+
+/**
+ * DRAFT stand-in: a weighted plate as one wide stone slab standing `SLAB_H`
+ * pixels proud of the floor (`floorY`), `sink` pixels lower for its load.
+ * Pale stone against the dark floor, a darker rim, a joint every tile.
+ */
+function drawSlab(g: CanvasRenderingContext2D, x: number, floorY: number, w: number, sink: number): void {
+  const h = Math.max(1, SLAB_H - sink);
+  const top = floorY - h;
+  g.fillStyle = GATE_DARK;
+  g.fillRect(x, top - 1, w, h + 1);
+  g.fillStyle = sink >= PLATE_SINK ? PLATE_DOWN : PLATE;
+  g.fillRect(x + 1, top, w - 2, h);
+  if (h > 2) {
+    g.fillStyle = '#ddd5b0';
+    g.fillRect(x + 1, top, w - 2, 1);
+    g.fillStyle = PLATE_DOWN;
+    for (let j = x + 16; j < x + w - 1; j += 16) g.fillRect(j, top + 1, 1, h - 1);
+  }
+}
+
+/**
+ * A gate wider than it is tall is a grate in the floor (Step 3, the stone
+ * plate's grate under the castle): an upright portcullis look does not fit
+ * it. DRAFT: decided by shape, so no param is needed on the gate; a
+ * delivered `part:<room>:<part>` picture (and `:open`) still wins.
+ */
+function isGrate(b: { w: number; h: number }): boolean {
+  return b.w > b.h;
+}
+
+/** DRAFT: a stand-in floor grate: iron bars across the slot when shut; open, the slot is dark and the grate hangs down its side. */
+function drawGrate(g: CanvasRenderingContext2D, part: Part, open: boolean, T: number, ox: number, oy: number): void {
+  const xs = part.tiles.map((t) => t.tx);
+  const left = Math.min(...xs);
+  const right = Math.max(...xs);
+  for (const t of part.tiles) {
+    const x = ox + t.tx * T;
+    const y = oy + t.ty * T;
+    g.fillStyle = '#0d0d18';
+    g.fillRect(x, y, T, T);
+    if (!open) {
+      g.fillStyle = GATE_DARK;
+      g.fillRect(x, y, T, 4);
+      g.fillStyle = GATE;
+      g.fillRect(x, y, T, 2);
+      for (let bar = 1; bar < T; bar += 4) g.fillRect(x + bar, y, 2, 6);
+    } else if (t.tx === left) {
+      g.fillStyle = GATE_DARK;
+      g.fillRect(x, y, 3, T);
+      g.fillStyle = GATE;
+      for (let rung = 1; rung < T; rung += 4) g.fillRect(x, y + rung, 3, 1);
+    }
+    if (t.tx === left || t.tx === right) {
+      // The stone lip at each end of the slot.
+      g.fillStyle = SOLID;
+      g.fillRect(t.tx === left ? x : x + T - 1, y, 1, 2);
+    }
   }
 }
 

@@ -87,6 +87,7 @@ export function createNetClient(opts: NetClientOptions) {
   /** Step 17: the server said this world is gone; no reconnecting to it, not even on kick(). */
   let gone = false;
   let latest: { tick: number; events: SimEvent[] } = { tick: 0, events: [] };
+  let heardRooms: World['rooms'] = undefined;
   /** The newest effect applied; effect ids only ever grow, so a resent copy is recognised. */
   let lastFx = 0;
   /** What was held on each local tick since the last report. */
@@ -207,6 +208,10 @@ export function createNetClient(opts: NetClientOptions) {
       world.taken = m.w.entities.filter((e) => e.player !== null && e.id !== myId).map((e) => e.kind);
       if (Math.abs(world.tick - m.w.tick) > 60) world.tick = m.w.tick;
       latest = { tick: m.w.tick, events: m.ev };
+      // Step 3 (the stone plate): the room state as the server sent it, kept apart from the
+      // local step, which sees only this page's own body (a plate a friend stands on reads up
+      // there every tick). The drawing reads plates from both (src/client/draw/room-parts.ts).
+      heardRooms = m.w.rooms ? (clone(m.w.rooms) as World['rooms']) : undefined;
     } else if (m.t === 'fx') {
       // INTENT: the door for "the world did this to your character" (a hit,
       // a hold, a throw, a door: docs/architecture.md, "Effects on a
@@ -266,6 +271,8 @@ export function createNetClient(opts: NetClientOptions) {
     status: (): NetStatus => status,
     /** The newest server tick heard, and the simulation events that came with it. */
     latest: () => latest,
+    /** Step 3: the room state (`World.rooms`) of the newest snapshot, as sent, untouched by this page's own step; undefined before one. */
+    heardRooms: (): World['rooms'] => heardRooms,
     /**
      * Call once per frame with what the player is holding. Steps the local
      * character in whole ticks, and does the network's housekeeping.
