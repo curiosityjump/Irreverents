@@ -16,6 +16,7 @@ import fs from 'node:fs';
 import { createRequire } from 'node:module';
 import net from 'node:net';
 import path from 'node:path';
+import { errorFacts } from './e2e/errors.ts';
 import { phoneFacts } from './e2e/phone.ts';
 import { root } from './lib/registries.ts';
 
@@ -460,6 +461,8 @@ async function main(): Promise<void> {
     await phoneFacts({ browser, devices, base, out, tag: LIVE ? 'check' : 'e2e', fact, errors });
 
     fact('errors', errors.length === 0, errors.length ? `page errors: ${errors.join(' | ')}` : 'no page raised an error');
+    // After the fact above: this one raises errors in a page of its own, on purpose.
+    await errorFacts({ browser, base, tag: LIVE ? 'check' : 'e2e', fact });
     await ctxA.close();
     await ctxB.close();
   } finally {

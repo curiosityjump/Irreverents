@@ -58,6 +58,48 @@
 <div id="status" hidden><span></span></div>
 <div id="hint" hidden><span>Better sideways. If turning does nothing, switch off rotation lock.</span><button type="button" aria-label="Dismiss">&times;</button></div>
 <div id="safe"></div>
+<!-- INTENT: this script comes first and stands alone, in syntax every iPhone Safari reads, so that it still works when game.js fails to load or to parse (an older iOS), which is exactly when nobody could otherwise tell us what happened. It sends what went wrong to the server (GET /debug/errors lists it; src/server/errors.ts): the error, this page's build, the screen, the user-agent. INTENT: no personal data: never the player id, a name, or the room (anything after a "?" is cut from every string, since the room is in the address). DRAFT: at most 20 reports per page load. -->
+<script>
+(function () {
+  var sent = 0;
+  function clean(v, max) {
+    return String(v == null ? '' : v).replace(/\?[^\s)'"]*/g, '').slice(0, max);
+  }
+  function report(kind, message, stack) {
+    try {
+      if (++sent > 20) return;
+      var meta = document.querySelector('meta[name="build"]');
+      var body = JSON.stringify({
+        kind: kind,
+        message: clean(message, 500),
+        stack: clean(stack, 1500),
+        build: meta ? meta.getAttribute('content') : '',
+        screen: { w: window.innerWidth, h: window.innerHeight, dpr: window.devicePixelRatio || 1 },
+        upright: window.innerHeight > window.innerWidth,
+        ua: navigator.userAgent
+      });
+      var x = new XMLHttpRequest();
+      x.open('POST', 'debug/errors', true);
+      x.setRequestHeader('content-type', 'text/plain');
+      x.send(body);
+    } catch (e) { /* reporting must never break the page */ }
+  }
+  window.irreverentsReport = report;
+  window.addEventListener('error', function (e) {
+    var t = e.target;
+    if (t && t !== window && t.tagName) {
+      // A script, image or stylesheet that did not load.
+      report('load', t.tagName.toLowerCase() + ' failed to load: ' + (t.src || t.href || ''), '');
+    } else {
+      report('error', (e.message || 'error') + ' (' + (e.filename || '') + ':' + (e.lineno || 0) + ':' + (e.colno || 0) + ')', e.error && e.error.stack);
+    }
+  }, true);
+  window.addEventListener('unhandledrejection', function (e) {
+    var r = e.reason;
+    report('rejection', r && r.message ? r.message : String(r), r && r.stack);
+  });
+})();
+</script>
 <script src="game.js"></script>
 </body>
 </html>

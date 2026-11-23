@@ -7,6 +7,7 @@ import { DEFAULT_WORLD } from '../net/protocol.ts';
 import type { Input } from '../sim/types.ts';
 import { watchKeyboard } from './keyboard.ts';
 import { render, VIEW_H, VIEW_W } from './render.ts';
+import { report } from './report.ts';
 import type { Drawn } from './draw/entities.ts';
 import { isTouchDevice, setUpShell } from './shell.ts';
 import { watchTouch } from './touch.ts';
@@ -167,6 +168,10 @@ const debug = {
 };
 (window as unknown as { irreverents: unknown }).irreverents = debug;
 
+/** DRAFT: how long without a connection before the page reports it. */
+const SOCKET_REPORT_MS = 20000;
+let offlineSince: number | null = null;
+let offlineReported = false;
 let frameNo = 0;
 function frame(): void {
   net.update(readInput());
@@ -182,6 +187,18 @@ function frame(): void {
   const text = status === 'online' ? '' : status === 'reconnecting' ? 'Reconnecting…' : 'Connecting…';
   if (statusText.textContent !== text) statusText.textContent = text;
   statusBox.hidden = text === '';
+
+  // A socket that will not open: after SOCKET_REPORT_MS without one, with
+  // the page in view, say so once per outage (it reaches the server only
+  // if plain requests still get through, which is the case worth knowing).
+  if (status === 'online' || document.hidden) offlineSince = null;
+  else if (offlineSince === null) {
+    offlineSince = performance.now();
+    offlineReported = false;
+  } else if (!offlineReported && performance.now() - offlineSince > SOCKET_REPORT_MS) {
+    offlineReported = true;
+    report('socket', `no connection for ${SOCKET_REPORT_MS / 1000} s: ${status}, after ${net.stats.connects} connection(s), navigator.onLine ${navigator.onLine}`);
+  }
 
   const d = debug.drawn;
   d.frame = ++frameNo;

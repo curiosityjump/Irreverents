@@ -1,5 +1,6 @@
 import type { Content } from '../content/types.ts';
 import type { Input } from '../sim/types.ts';
+import { report } from './report.ts';
 
 /**
  * The touch controls: produces the same Input the keyboard does.
@@ -32,6 +33,8 @@ function addIcon(el: HTMLElement, file: string): void {
     icon.style.backgroundImage = `url("${url}")`;
     el.classList.add('art');
   };
+  // Not in the page, so its failure reaches no listener: say so here.
+  probe.onerror = () => report('load', `img failed to load: ${url}`);
   probe.src = url;
 }
 

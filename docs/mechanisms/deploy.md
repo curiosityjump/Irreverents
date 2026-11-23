@@ -31,6 +31,8 @@ evidence of what happened.
   `variableSet` true with `mounted` false means a variable typed in by
   hand, which is not storage. The raw facts are fields too: `variableSet`
   and `path`, `nameSet` and `name`, `writable`, `differentDevice`.
+  It also carries `errors`: how many reports players' pages have sent
+  since the start (`GET /debug/errors`, `docs/mechanisms/network.md`).
 - **`npm run check:deployed`** exits 0 when the running commit is the tip
   of `main` or everything since it is off the list. It retries for up to
   three minutes, to wait through the deploy gap below.

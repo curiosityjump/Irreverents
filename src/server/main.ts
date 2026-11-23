@@ -4,6 +4,7 @@
 import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
+import { createErrorLog, ERROR_BODY_MAX, ERRORS_KEPT } from './errors.ts';
 import { attachGame } from './game.ts';
 import type { Game } from './game.ts';
 
@@ -86,10 +87,34 @@ function send(res: http.ServerResponse, status: number, type: string, body: stri
 }
 
 let game: Game | null = null;
+const errorLog = createErrorLog();
 const server = http.createServer((req, res) => {
   const url = new URL(req.url ?? '/', 'http://x');
   if (url.pathname === '/healthz') {
-    send(res, 200, 'application/json', JSON.stringify({ ok: true, commit, startedAt, storage, ...game?.counts() }));
+    // `errors`: how many reports pages have sent since the start (additive; see /debug/errors).
+    send(res, 200, 'application/json', JSON.stringify({ ok: true, commit, startedAt, storage, ...game?.counts(), errors: errorLog.count() }));
+    return;
+  }
+  if (url.pathname === '/debug/errors') {
+    // What went wrong in players' browsers (src/server/errors.ts): a page
+    // POSTs a report, anyone GETs the newest ones. No personal data in them.
+    if (req.method === 'POST') {
+      let body = '';
+      let over = false;
+      req.setEncoding('utf8');
+      req.on('data', (chunk: string) => {
+        // Bodies are cut, never buffered without limit.
+        if (body.length + chunk.length > ERROR_BODY_MAX) over = true;
+        if (!over) body += chunk;
+      });
+      req.on('end', () => {
+        const kept = !over && errorLog.add(body);
+        send(res, kept ? 204 : 400, 'text/plain; charset=utf-8', '');
+      });
+      req.on('error', () => {});
+      return;
+    }
+    send(res, 200, 'application/json', JSON.stringify({ commit, startedAt, received: errorLog.count(), kept: ERRORS_KEPT, errors: errorLog.list() }, null, 1));
     return;
   }
   if (req.method !== 'GET' && req.method !== 'HEAD') {

@@ -174,6 +174,43 @@ into an error page.
 - The touch layer builds one button per file in `content/actions/`
   (`data-action`), and the stick (`data-stick`).
 
+## What goes wrong on a real iPhone (`GET /debug/errors`)
+
+Nobody here can run Safari, so the page tells the server what went wrong
+and anyone can read it:
+
+    curl -s https://irreverents-production.up.railway.app/debug/errors
+
+answers `{ commit, startedAt, received, kept, errors: [...] }`, oldest
+first. Each report: `at` (server time), `kind`, `message`, `stack`,
+`build` (the commit that served the page; compare with `commit`),
+`screen` (`w`, `h`, `dpr`), `upright`, `ua`. `/healthz` carries the
+count as `errors`.
+
+- **Kinds:** `error` (uncaught), `rejection` (a promise nobody caught),
+  `load` (a script, image or stylesheet that did not load, the button
+  pictures included), `socket` (no connection for 20 s with the page in
+  view; once per outage, `DRAFT:`).
+- **The reporter is the first script in `index.html`**, inline and in old
+  syntax (`INTENT:`): it must work when `game.js` fails to load or to
+  parse, which on an older iOS is the likeliest way to get a blank
+  screen. `src/client/report.ts` is how the bundle sends a line through it.
+- **`INTENT:` no personal data** (`src/server/errors.ts`): no player id,
+  name, room or address. The page cuts everything after a `?` from every
+  string (the room is in the address); the server keeps only the named
+  fields and never reads who sent it.
+- **Limits** (`DRAFT:`): 20 reports per page load, bodies over 4 kB
+  refused, 120 a minute from everyone, the newest 200 kept **in memory**:
+  a deploy empties it, so read it before pushing code.
+- A report can only arrive if plain requests get through; a phone with
+  no network at all reports nothing.
+- e2e fact `errors-reach-us` (`scripts/e2e/errors.ts`, also in
+  `check:live`, so the live list holds three lines marked
+  `scripted-check-…` after each run): a page throws, drops a rejection
+  and asks for a missing image; all three are listed with the page's
+  build and screen, no other fields, and neither the player id nor the
+  room. Control watched to fail: the reporter not installed (0 of 3).
+
 ## The debug object, and the checks that read it
 
 `window.irreverents` (read-only by convention): `content`, `world` (the
