@@ -77,6 +77,9 @@ groups) whenever you add one — never update the number from memory.
 - `entity.c.npc` + `content/npcs/`, `content/rules/` + the `npc-*` systems — scripted people with exactly three moods who witness deeds and react by role/deed tables in data; never AI (Step 4).
 - `entity.c.alert` / `c.call` / `c.respond` + `src/sim/npc/alert.ts` + the `npc-call`, `alert-respond`, `alert-cool` systems — an upset witness rings a bell, only a completed call raises the area alert (one line raises it), guards come to the place reported, and the alert cools only by hiding and waiting (Step 4, slice 2).
 
+**Hostile outposts** (`docs/mechanisms/outposts.md`)
+- `content/outposts/` + `src/sim/outpost/state.ts` + the `outpost-*` systems + `src/client/draw/outpost.ts` — a camp's lookout who sees a hero runs to a horn post and sounds it; each finished call brings a wave (rows of a table, the last repeating for ever, capped by a bound on bodies); stopped by staying unseen, knocking out or grabbing the caller, breaking the post with hits or a throw, or walking out (Step 12, slice A).
+
 **Rooms and doors** (`docs/mechanisms/rooms-and-doors.md`)
 - `content/rooms/*.json` doors, areas and parts + `src/sim/systems/room-doors.ts` — rooms joined by walk and enter doors that carry any body, tiles that change while the game runs (`src/sim/room-state.ts`), working-part kinds declared by their system (`plate`, `gate`, `breakable`, `false-wall`, `hide`: `src/sim/systems/room-<kind>.ts`, shared helpers in `src/sim/room-parts.ts`, drawn by `src/client/draw/room-parts.ts`), and the checks and controls (`controls/rooms/`) that refuse a broken map (Step 3).
 

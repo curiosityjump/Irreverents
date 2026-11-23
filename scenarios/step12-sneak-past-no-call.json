@@ -1,0 +1,23 @@
+{
+  "id": "step12-sneak-past-no-call",
+  "gate": null,
+  "proves": "signal 4, in the real room: a hero comes in from the courtyard's doorway, hops onto the step and up onto the long ledge, and walks the length of the camp above the lookout's sight (more than 40 px up): nobody sees them, no call starts and no wave comes; at the end they stand at the ledge's east end, past the whole camp (D-061: stay unseen). Control: npcSightHeight raised from 40 to 100 in content/tuning.json, the lookout sees them on the ledge and the call starts (and step12-walk-out-ends-it, the same way in down onto the floor, is seen at once)",
+  "room": "outpost",
+  "placements": true,
+  "players": [
+    {"id": "a", "character": "grappler", "spawn": 0}
+  ],
+  "inputs": [
+    {"player": "a", "from": 0, "to": 400, "x": 1},
+    {"player": "a", "from": 20, "to": 40, "hold": ["jump"]},
+    {"player": "a", "from": 60, "to": 80, "hold": ["jump"]}
+  ],
+  "ticks": 900,
+  "expect": [
+    {"fact": "event", "event": "landed", "player": "a", "where": {"ty": 6}, "between": [80, 100], "count": [1, 1]},
+    {"fact": "event-where", "event": "outpost-call-started", "where": {}, "between": [0, 900], "count": [0, 0]},
+    {"fact": "event-where", "event": "outpost-wave", "where": {}, "between": [0, 900], "count": [0, 0]},
+    {"fact": "position", "at": 900, "x": [560, 620], "y": [95, 97], "player": "a"},
+    {"fact": "people-count", "room": "outpost", "between": [1, 900], "count": [3, 3]}
+  ]
+}

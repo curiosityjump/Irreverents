@@ -1,14 +1,18 @@
 import { canAct } from '../body-state.ts';
 import { canSee } from '../npc/sight.ts';
-import { centre, drive, isOut } from '../npc/state.ts';
-import { heroesIn, ofOutpost, outposts } from '../outpost/state.ts';
+import { centre, drive, isOut, npcKind } from '../npc/state.ts';
+import { heroesIn } from '../outpost/state.ts';
 import type { System } from '../types.ts';
 
 /**
- * The outpost's people fight heroes: it is their business as usual (D-060),
- * so their mood stays 1 throughout. Runs after outpost-call (57) and
- * overlays the input npc-act wrote; a caller walking to the post or
- * sounding it is left to outpost-call.
+ * Hostile people fight heroes: it is their business as usual (D-060), so
+ * their mood stays 1 throughout. Runs after outpost-call (57) and overlays
+ * the input npc-act wrote; a caller walking to the post or sounding it is
+ * left to outpost-call.
+ * DRAFT (the Step 12 lead, 15:05 UTC, for Step 16): who fights is any
+ * person of the `bad` side whose body lists `attack`, wherever they are
+ * placed or walked in, not only in an outpost's room. Today that is the
+ * outpost fighter; Step 4's villain and guard bodies do not list attack.
  *
  * INTENT (D-065, "Escalation is not omniscient"): the only read of a hero's
  * position is under canSee on the same tick. Losing sight, a fighter walks
@@ -23,12 +27,13 @@ const system: System = {
   run(ctx) {
     const { world, content } = ctx;
     const reach = content.tuning.world.npcChargeReach!;
-    for (const op of outposts(content)) {
-      const heroes = heroesIn(world, op.room);
+    {
       for (const e of world.entities) {
-        if (!ofOutpost(op, e) || e.c.outpostCall?.phase === 'going' || e.c.outpostCall?.phase === 'sounding') continue;
+        if (!e.c.npc || e.player !== null || npcKind(content, e)?.side !== 'bad') continue;
+        if (e.c.outpostCall?.phase === 'going' || e.c.outpostCall?.phase === 'sounding') continue;
         if (isOut(e) || !canAct(e)) continue;
         if (!content.characters[e.kind]?.verbs.includes('attack')) continue;
+        const heroes = heroesIn(world, e.room);
         const me = centre(content, e);
         let seen: { x: number; y: number } | null = null;
         let best = Infinity;

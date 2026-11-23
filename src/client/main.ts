@@ -13,6 +13,7 @@ import { isTouchDevice, setUpShell } from './shell.ts';
 import { watchTouch } from './touch.ts';
 import { createAudio } from './audio/index.ts'; // audio hook (Step 8)
 import { setUpTune, tuneWanted } from './tune.ts';
+import { drawnSignalers } from './draw/outpost.ts';
 
 const content = __CONTENT__;
 const canvas = document.getElementById('game') as HTMLCanvasElement;
@@ -170,6 +171,8 @@ const debug = {
     hint: '',
     me: null as Drawn | null,
     entities: [] as Drawn[],
+    /** Step 12: the outposts' horn posts this frame drew, and in which state (src/client/draw/outpost.ts). */
+    signalers: [] as ReturnType<typeof drawnSignalers>,
   },
 };
 (window as unknown as { irreverents: unknown }).irreverents = debug;
@@ -220,6 +223,7 @@ function frame(): void {
   d.touchControls = !touchHost.hidden;
   d.entities = result.drawn;
   d.me = result.drawn.find((e) => e.mine) ?? null;
+  d.signalers = drawnSignalers();
   requestAnimationFrame(frame);
 }
 requestAnimationFrame(frame);

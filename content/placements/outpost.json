@@ -1,0 +1,11 @@
+{
+  "//": "DRAFT (Step 12): the camp. The lookout watches the west (the way in) and glances back now and then; the horn post is two tiles east of them; one fighter watches west, the other mostly east. Columns and timings are a first pass.",
+  "id": "outpost",
+  "room": "outpost",
+  "place": [
+    { "id": "camp-lookout", "character": "outpost-lookout", "tile": [18, 10], "npc": "outpost-lookout", "routine": [{ "face": "left" }, { "wait": 6 }, { "face": "right" }, { "wait": 2 }] },
+    { "id": "camp-horn-post", "character": "signal-post", "tile": [20, 10] },
+    { "id": "camp-fighter-1", "character": "outpost-fighter", "tile": [25, 10], "npc": "outpost-fighter", "routine": [{ "face": "left" }, { "wait": 8 }, { "face": "right" }, { "wait": 3 }] },
+    { "id": "camp-fighter-2", "character": "outpost-fighter", "tile": [28, 10], "npc": "outpost-fighter", "routine": [{ "face": "right" }, { "wait": 7 }, { "face": "left" }, { "wait": 3 }] }
+  ]
+}

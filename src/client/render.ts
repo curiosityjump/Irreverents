@@ -10,6 +10,7 @@ import type { PlayerView } from './draw/entities.ts';
 import { drawHall } from './draw/hall.ts';
 import { drawImpact } from './draw/impact.ts';
 import { drawNpcs } from './draw/npcs.ts';
+import { drawSignalers } from './draw/outpost.ts';
 import { backdropOf, decorOf, drawDoors, drawRoom, roomOrigin } from './draw/room.ts';
 import { drawRoomParts } from './draw/room-parts.ts';
 
@@ -64,6 +65,7 @@ export function render(g: CanvasRenderingContext2D, world: World, content: Conte
   const decor = decorOf(room, content);
   drawDecor(g, decor, 'back', room.tile, ox, oy, W, H);
   drawEntities(g, world, content, roomId, ox, oy, pv);
+  drawSignalers(g, world, content, roomId, ox, oy);
   drawAway(g, world, content, roomId, ox, oy, pv);
   // Round 2: backdrop layers marked `front` (foreground foliage along the bottom or top edge).
   if (backdrop) drawFrontLayers(g, backdrop, room, -ox, -oy, W, H);

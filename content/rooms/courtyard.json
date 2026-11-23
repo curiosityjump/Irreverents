@@ -17,6 +17,9 @@
     "E": {
       "door": "to-gallery"
     },
+    "o": {
+      "door": "to-outpost"
+    },
     "P": {
       "part": "plate-west"
     },
@@ -35,10 +38,19 @@
     "#........................G...#",
     "#........................G...#",
     "W........................G...E",
-    "W..1.2........3.P...4.Q..G...E",
+    "W..1.2........3.P...4.Qo.G...E",
     "##############################"
   ],
   "doors": [
+    {
+      "//": "Step 12: the doorway (push up) to the hostile camp (content/rooms/outpost.json). INTENT (D-061: you can always escape the zone): the camp's side is an enter doorway too, which a body goes through only by asking (a push up, or askForDoor()), and nobody of the camp ever asks: so no fight can shut it and the camp stays in its room.",
+      "id": "to-outpost",
+      "use": "enter",
+      "to": {
+        "room": "outpost",
+        "door": "to-courtyard"
+      }
+    },
     {
       "id": "to-street",
       "use": "walk",

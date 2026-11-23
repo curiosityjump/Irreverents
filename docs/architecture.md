@@ -235,7 +235,26 @@ extends from its own file with `declare module '../types.ts' { … }`
 | **kind of content** | `src/content/kinds/<kind>.ts` default-exporting a `ContentKind` (`source`, `parse`, optional cross-reference `check`) and extending `Content`. | One new file |
 | **kind of scenario fact** | `src/scenarios/facts/<id>.ts` default-exporting a `Fact`. | One new file |
 | **event** | Extend `EventMap` beside the code that emits it; `ctx.emit('name', {...})`. | In your own file |
+| **outpost** (a hostile camp: a horn, waves) | `content/outposts/<id>.json` naming its room, the placed horn post (a body listing `body`, like `signal-post`), the placed people who may call, the wave `entry` tile, the `bound`, the times and the `waves` table; the people and post in `content/placements/<room>.json`. See "How to add an outpost" below and `docs/mechanisms/outposts.md`. | No |
 | **speech / an audience** (a body that talks on and on) | `content/audience/<id>.json`: `speaker` (a placed body's id), `startLine`, `opening` (lines said once), `lists` and `tail` (digressions that go round for ever). The check refuses a line that repeats within three hours or does not fit two rows of 28 letters. Format and slots: `docs/mechanisms/royal-audience.md`. | No |
+
+## How to add an outpost (Step 12)
+
+1. A room (`content/rooms/<id>.json`) whose way out is an **enter**
+   doorway (a body goes through one only by asking, and the camp never
+   asks, so no fight can shut it: D-061). Leave a clear floor tile for the
+   wave `entry`, away from the post and the camp.
+2. Its placements: the horn post (a body with `"verbs": ["body"]`, weight
+   1000, toughness 0: copy `content/characters/signal-post.json`), a
+   caller (a person; copy `outpost-lookout`) facing the way heroes come,
+   and fighters (bodies listing `attack`; copy `outpost-fighter`), at most
+   8 people.
+3. `content/outposts/<id>.json`: `room`, `signaler`, `callers`, `entry`,
+   `bound`, `callTime`, `callAgain`, `breakHits`, `breakSpeed`, `waves`
+   (rows of `{ "character", "npc" }`, harder row by row; the last repeats
+   for ever). `npm run check` names anything that does not exist.
+
+No code. The page draws the horn on the post by itself.
 
 ## Rooms and doors: what other steps read (Step 3)
 

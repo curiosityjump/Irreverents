@@ -1,0 +1,40 @@
+{
+  "//": "DRAFT (Step 12): the hostile camp east of the courtyard; every column is a first pass, the id and the door id are permanent. In from the courtyard at the west doorway (column 2); a step three tiles high (columns 5-7) and from it a hop up to a long one-way ledge (row 6, columns 9-38), five tiles above the floor: up there a hero is far more than a lookout's 40 px of sight above them, so sneaking across is a real choice, and dropping off it into the camp is another. Under the ledge, the camp (content/placements/outpost.json): a lookout at column 18 watching west, the horn post at 20, two fighters at 25 and 28. Waves walk in at column 41 (content/outposts/outpost.json), clear of the post and the camp.",
+  "id": "outpost",
+  "name": "Bandit Camp",
+  "tile": 16,
+  "legend": {
+    "#": "solid",
+    "=": "oneway",
+    ".": "empty",
+    "1": "spawn",
+    "o": {
+      "door": "to-courtyard"
+    }
+  },
+  "rows": [
+    "############################################",
+    "#..........................................#",
+    "#..........................................#",
+    "#..........................................#",
+    "#..........................................#",
+    "#..........................................#",
+    "#........==============================....#",
+    "#..........................................#",
+    "#....###...................................#",
+    "#.o..###...................................#",
+    "#.o1.###...................................#",
+    "############################################"
+  ],
+  "doors": [
+    {
+      "//": "INTENT (D-061: you can always escape the zone): an enter doorway, which a body goes through only by asking (a push up, or askForDoor()). Nobody of the camp ever asks, so no fight can shut it and the camp stays in its room (src/sim/systems/outpost-*.ts never call askForDoor).",
+      "id": "to-courtyard",
+      "use": "enter",
+      "to": {
+        "room": "courtyard",
+        "door": "to-outpost"
+      }
+    }
+  ]
+}

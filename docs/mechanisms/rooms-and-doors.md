@@ -25,7 +25,13 @@ that could trap someone.
  (hidden)                                │    │    └──────── over the roofs (hidden) ──────────┘ (balcony)
       └── cellar doorway ── up into the street's west end (DRAFT: meant for the courtyard, column 15)
                                               └── doorway, column 20 ── cantina (Step 11)
+                                                      courtyard └── doorway, column 23 ── outpost (Step 12)
 ```
+
+- **The outpost** (Step 12, `DRAFT:` layout): the courtyard's enter
+  doorway `to-outpost` (ground row 7, column 23, beside the east plate) and the camp's
+  `to-courtyard` (column 2), both enter doorways so no body of the camp
+  is ever carried out (`docs/mechanisms/outposts.md`).
 
 - **The cantina** (Step 11, `DRAFT:` layout): the street's enter doorway
   `to-cantina` (column 20, rows 9-10, between the two buildings) and the

@@ -1,0 +1,18 @@
+{
+  "//": "DRAFT (Step 12): the camp east of the courtyard. Every number is a first pass (docs/decisions-log.md): 3 s at the horn, 6 s before a lookout goes again, 3 hits or a body thrown or knocked into the post at 300 px/s or more (a thrown crate flies at 520, a lookout knocked by the grappler at about 350) break it; waves of 1, 2, then 3 fighters, the last row coming again for ever; at most 8 people in the room.",
+  "id": "outpost",
+  "room": "outpost",
+  "signaler": "camp-horn-post",
+  "callers": ["camp-lookout"],
+  "entry": [41, 10],
+  "bound": 8,
+  "callTime": 3,
+  "callAgain": 6,
+  "breakHits": 3,
+  "breakSpeed": 300,
+  "waves": [
+    [{ "character": "outpost-fighter", "npc": "outpost-fighter" }],
+    [{ "character": "outpost-fighter", "npc": "outpost-fighter" }, { "character": "outpost-fighter", "npc": "outpost-fighter" }],
+    [{ "character": "outpost-fighter", "npc": "outpost-fighter" }, { "character": "outpost-fighter", "npc": "outpost-fighter" }, { "character": "outpost-fighter", "npc": "outpost-fighter" }]
+  ]
+}

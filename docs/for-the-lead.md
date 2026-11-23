@@ -141,3 +141,12 @@ actually read (questions for the owner go through
 **Flag:** the banner's "new" means "not in the first frame that had a world in it". If Step 1's network layer delivers the world over several frames, or re-delivers it after a reconnect, check that old records are not announced (several arriving in one frame are already ignored).
 
 **Flag:** rung 5 was by eye, on hand-made records pushed into the page's world; nothing scripted covers the drawing, and the real path (detector → pedestal → page, two devices) has not been seen. Text follows `draw/npcs.ts` (`fillText`, 8 px): readable, soft on a phone; a shared pixel font would be Step 5's or 8's call.
+
+
+### step-12-a-outpost.md, 2026-11-23
+
+**Flag:** a doorway needs two tiles of height and a free tile beside it for the way-out check to find it (a one-tile `o` at the wall's edge was refused as "no way out"). The courtyard's `o` is one tile (row 7, column 23, the brief's "that one character"), and the check passes it; the outpost's is two (rows 9-10, column 2).
+
+**Flag:** `scripts/lib/room-controls.ts` (not this step's) needed one word: a room control with its own `game` drops `content/outposts/` with the real rooms, as it drops placements, or every such control failed on the outpost's missing room. Additive.
+
+**Flag:** Step 4's `charge` holds `attack` continuously, and Step 2's attack starts a swing only on a fresh press, so a charging person with `attack` swings once. The outpost's fighters pulse it (every other tick); Step 4's behaviour is untouched.
