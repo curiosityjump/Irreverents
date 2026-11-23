@@ -342,13 +342,13 @@ Full text: `docs/plan-archive.md`, "Step 11". Durable record: `docs/mechanisms/c
 
 ## Step 13 — Heroes you find and keep
 
-**Status: open, unclaimed.** (Brief `handoff-prompts/loop-rescue.md`; spawn its builder when Step 19's first push, the Use arbiter, is on `main`.)
+**Status: open, claimed by orchestrator session_017WiGzJzo6aZqH4kYxxJsiV (builders: session_017WiGzHfRkFts4Z3rb8RMqC), 2026-11-23.** (Brief `handoff-prompts/loop-rescue.md`; spawn its builder when Step 19's first push, the Use arbiter, is on `main`.)
 
 Full text: `docs/plan/step-13.md`
 
 ## Step 14 — Things to find, and knowing there is more
 
-**Status: open, claimed by orchestrator session_017WiGzJzo6aZqH4kYxxJsiV (builders: session_017WiGzFeeJgj8z2SUAFyu5J), 2026-11-23.** (Opened 18:18 UTC for slice A, the owner's "Not finding clear 'level entries' with discovered indicators".) (Drafted from the library by an agent; its independent review did not run before the usage limit stopped it at 04:58 UTC. 2 of its 2 quoted pieces were found verbatim by script. Check its D-numbers and its "What's decided" against the library before briefing from it.)
+**Status: open, claimed by orchestrator session_017WiGzJzo6aZqH4kYxxJsiV (builders: session_017WiGzEdpvCBfqv752nbbSt), 2026-11-23.** (Opened 18:18 UTC for slice A, the owner's "Not finding clear 'level entries' with discovered indicators".) (Drafted from the library by an agent; its independent review did not run before the usage limit stopped it at 04:58 UTC. 2 of its 2 quoted pieces were found verbatim by script. Check its D-numbers and its "What's decided" against the library before briefing from it.)
 
 Full text: `docs/plan/step-14.md`
 
