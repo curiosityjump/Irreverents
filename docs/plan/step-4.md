@@ -339,3 +339,15 @@ for later, as the step suggests.
   Step 6 creates `content/placements/throne-room.json` (plain bodies, no
   `npc`) and will ask before adding a `king` role to `content/npcs/` and
   `content/rules/`.
+- **Lead, 08:47 UTC. Released for slice 3 only** by the new orchestrator
+  (`session_017WiGzJeh7Tuov59d8XYmru`; report there). Measured at
+  `2f634bd`: the live start room is still `graybox-hall`, and
+  `castle-street` is reachable only through `throne-room`, so nobody
+  playing can get to the street yet. The brief
+  (`handoff-prompts/step-4-slice-3-street.md`, rewritten 08:45) is cut
+  to: the people and the villain's loop in `castle-street`; a stand-in
+  shopkeeper in `graybox-hall` if the start room has not moved (`DRAFT:`,
+  appended to Step 2's placements file); the first phone-sized look with
+  touch; `c.roomHide` unseen only if it has landed. Following through
+  doors and the street's gate D scenarios wait for slice 2, still held.
+  Worker due done or stopped by 10:00 UTC.
