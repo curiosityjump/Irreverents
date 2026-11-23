@@ -1,0 +1,663 @@
+{
+ "id": "step21-friend-stops-it",
+ "proves": "Step 21 (DRAFT, docs/decisions-log.md 'Step 21'; D-019): in the real Bandit Camp the grappler breaks the horn post, then stands among the camp's fighters and is knocked flat by the wave's fighter, who can reach them: he stands over the hero for the place's beat (1 s), then the hero is thrown out into the courtyard's camp doorway, flat, and up 3 s later, free. The camp keeps its state: the post is still broken and the wave's fighter is still inside. Control (watched to fail): \"on\": false in content/defeat/outpost.json, the hero is still in the camp",
+ "room": "outpost",
+ "placements": true,
+ "players": [
+  {
+   "id": "a",
+   "character": "grappler",
+   "spawn": 0
+  },
+  {
+   "id": "b",
+   "character": "flyer",
+   "spawn": 0
+  }
+ ],
+ "inputs": [
+  {
+   "player": "b",
+   "from": 0,
+   "to": 120,
+   "x": 1
+  },
+  {
+   "player": "b",
+   "from": 20,
+   "to": 45,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 0,
+   "to": 100,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 20,
+   "to": 45,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 300,
+   "to": 304,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 320,
+   "to": 324,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 340,
+   "to": 344,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 360,
+   "to": 364,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 380,
+   "to": 384,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 400,
+   "to": 404,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 420,
+   "to": 424,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 440,
+   "to": 444,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 460,
+   "to": 464,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 480,
+   "to": 484,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 500,
+   "to": 504,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 520,
+   "to": 524,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 540,
+   "to": 544,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 560,
+   "to": 564,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 580,
+   "to": 584,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 600,
+   "to": 604,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 620,
+   "to": 624,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 640,
+   "to": 644,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 660,
+   "to": 664,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 680,
+   "to": 684,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 700,
+   "to": 704,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 720,
+   "to": 724,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 740,
+   "to": 744,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 760,
+   "to": 764,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 780,
+   "to": 784,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 800,
+   "to": 804,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 820,
+   "to": 824,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 840,
+   "to": 844,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 860,
+   "to": 864,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 880,
+   "to": 884,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 900,
+   "to": 904,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 920,
+   "to": 924,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 940,
+   "to": 944,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 960,
+   "to": 964,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 980,
+   "to": 984,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1000,
+   "to": 1004,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1020,
+   "to": 1024,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1040,
+   "to": 1044,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1060,
+   "to": 1064,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1080,
+   "to": 1084,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1100,
+   "to": 1104,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1120,
+   "to": 1124,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1140,
+   "to": 1144,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1160,
+   "to": 1164,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1180,
+   "to": 1184,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1200,
+   "to": 1204,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1220,
+   "to": 1224,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1240,
+   "to": 1244,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1260,
+   "to": 1264,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1280,
+   "to": 1284,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1300,
+   "to": 1304,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1320,
+   "to": 1324,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1340,
+   "to": 1344,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1360,
+   "to": 1364,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1380,
+   "to": 1384,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1400,
+   "to": 1404,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1420,
+   "to": 1424,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1440,
+   "to": 1444,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1460,
+   "to": 1464,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1480,
+   "to": 1484,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1500,
+   "to": 1504,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1520,
+   "to": 1524,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1540,
+   "to": 1544,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1560,
+   "to": 1564,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1580,
+   "to": 1584,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1600,
+   "to": 1604,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1620,
+   "to": 1624,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1640,
+   "to": 1644,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1660,
+   "to": 1664,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1680,
+   "to": 1684,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1700,
+   "to": 1704,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1720,
+   "to": 1724,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1740,
+   "to": 1744,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1760,
+   "to": 1764,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1780,
+   "to": 1784,
+   "hold": [
+    "attack"
+   ]
+  }
+ ],
+ "ticks": 1800,
+ "expect": [
+  {
+   "fact": "event",
+   "event": "seized",
+   "between": [
+    0,
+    1500
+   ],
+   "count": [
+    1,
+    9
+   ]
+  }
+ ]
+}

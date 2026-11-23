@@ -1,0 +1,13 @@
+{
+  "//": "DRAFT (Step 21, risk; docs/decisions-log.md 'Step 21'; O-006 is OPEN): beaten by the watch in the castle street while it is alerted (above 0), a guard stands over you for a second, then you are thrown into the open courtyard, the alert unchanged; the guards who saw it walk out after you by the same door (the existing chase rules: 'follow'). Never a hidden room: being beaten must never end a chase (docs/plan/step-21.md). 'on': false is the game before Step 21. Off on main until the orchestrator settles five other steps' scenarios that the throw turns red (docs/plan/step-21.md, 'Push 2').",
+  "id": "castle-street",
+  "on": false,
+  "rooms": ["castle-street"],
+  "seizers": ["guard"],
+  "reach": 24,
+  "beat": 1,
+  "alertAbove": 0,
+  "lands": { "room": "courtyard", "tile": [4, 7] },
+  "follow": true,
+  "words": { "thrownOut": "Thrown out of the street", "prizeReturned": "The prize is back where it was" }
+}

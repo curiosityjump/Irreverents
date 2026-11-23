@@ -255,3 +255,9 @@ Also seen: Step 7's `hall-detect` hangs a "narrow escape" legend on a
 throw-out (the hero is gone from the camp with a wave standing, though not
 on its own feet). The waves builder's session is inactive; asked through the
 orchestrator.
+
+**Landed switched off** (the commit after 7d6cea5): the rule's code and its
+two place files are on `main` with `"on": false`, so the game is exactly as
+before and `npm run check` is green. The two scenarios that need it on wait
+in `docs/plan/step-21-held/` (not run there); move them back to
+`scenarios/` and set both files `"on": true` once the five above are settled.

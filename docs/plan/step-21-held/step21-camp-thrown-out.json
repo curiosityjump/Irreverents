@@ -1,0 +1,244 @@
+{
+ "id": "step21-camp-thrown-out",
+ "proves": "Step 21 (DRAFT, docs/decisions-log.md 'Step 21'; D-019): in the real Bandit Camp the grappler breaks the horn post, then stands among the camp's fighters and is knocked flat by the wave's fighter, who can reach them: he stands over the hero for the place's beat (1 s), then the hero is thrown out into the courtyard's camp doorway, flat, and up 3 s later, free. The camp keeps its state: the post is still broken and the wave's fighter is still inside. Control (watched to fail): \"on\": false in content/defeat/outpost.json, the hero is still in the camp",
+ "room": "outpost",
+ "placements": true,
+ "players": [
+  {
+   "id": "a",
+   "character": "grappler",
+   "spawn": 0
+  }
+ ],
+ "inputs": [
+  {
+   "player": "a",
+   "from": 0,
+   "to": 135,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 20,
+   "to": 45,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 340,
+   "to": 414,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 400,
+   "to": 404,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 424,
+   "to": 428,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 448,
+   "to": 452,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 472,
+   "to": 476,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 496,
+   "to": 500,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 520,
+   "to": 524,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 544,
+   "to": 548,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 568,
+   "to": 572,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 592,
+   "to": 596,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 616,
+   "to": 620,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 640,
+   "to": 644,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 664,
+   "to": 668,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 688,
+   "to": 692,
+   "hold": [
+    "attack"
+   ]
+  }
+ ],
+ "ticks": 1500,
+ "expect": [
+  {
+   "fact": "signaler",
+   "outpost": "outpost",
+   "at": 600,
+   "broken": true
+  },
+  {
+   "fact": "event-where",
+   "event": "seized",
+   "where": {
+    "entity": "p:a",
+    "by": "outpost:w0:0",
+    "place": "outpost"
+   },
+   "between": [
+    1009,
+    1009
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "event-where",
+   "event": "thrown-out",
+   "where": {
+    "entity": "p:a",
+    "from": "outpost",
+    "to": "courtyard"
+   },
+   "between": [
+    1068,
+    1068
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "in-room",
+   "player": "a",
+   "at": 1069,
+   "room": "courtyard"
+  },
+  {
+   "fact": "body-state",
+   "player": "a",
+   "at": 1069,
+   "is": [
+    "flattened"
+   ]
+  },
+  {
+   "fact": "event-where",
+   "event": "recovered",
+   "where": {
+    "target": "p:a"
+   },
+   "between": [
+    1248,
+    1248
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "body-state",
+   "player": "a",
+   "at": 1249,
+   "not": [
+    "flattened",
+    "seized",
+    "flying",
+    "beat"
+   ]
+  },
+  {
+   "fact": "in-room",
+   "player": "a",
+   "at": 1500,
+   "room": "courtyard"
+  },
+  {
+   "fact": "signaler",
+   "outpost": "outpost",
+   "at": 1500,
+   "broken": true
+  },
+  {
+   "fact": "people-at",
+   "room": "outpost",
+   "ids": "outpost:w0",
+   "at": 1500,
+   "count": [
+    1,
+    1
+   ]
+  }
+ ]
+}
