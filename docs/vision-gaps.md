@@ -31,6 +31,6 @@ Three switchable heroes in one shared party (D-012, D-013) · online co-op in on
 
 - **Which levels to build.** The anthology, the ten level designs and the atlas regions (Grand Bank, Lanternmarket, Bramblewake Woods, Old Arena) are proposals (docs 15, 25, 28), yet gaps 1, 2 and 7 need real places. Meanwhile Step 16 builds doc 28's quarry, cut down, by default (D-096, `DRAFT:`).
 - **The throne room's cast.** D-034 names a champion, a captive dragon and the wizard's pills; doc 03 calls its props examples. Build those, or others like them?
-- **Saving.** "Permanent" roster growth (D-007), rare powers you can return to (D-080) and the Hall's pictures (D-024) all need something kept between sessions; the library leaves saves open and nothing is persisted.
+- **Saving.** Saved games exist (Step 17; the owner asked for them, `docs/vision.md` "Start screen and saved games"). Still open: what a save keeps for "permanent" roster growth (D-007), rare powers you can return to (D-080) and the Hall's pictures (D-024), and what a joining friend keeps. Built by default under D-096 (`DRAFT:`) unless the owner says otherwise.
 - **A Dark Lord boss** who wants the proper showdown (doc 22, an EXAMPLE).
 - **Hero thought bubbles and glances** (doc 03 "might").
