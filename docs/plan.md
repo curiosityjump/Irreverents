@@ -267,7 +267,7 @@ Full text: `docs/plan/step-4.md`
 
 ## Step 5 — Comfortable on an iPhone, easy to play together
 
-**Status: open, unclaimed.** (Opened 2026-11-23 09:00 UTC, Step 1 closed. Before the owner's morning only its "Owed by Step 1" essentials, one worker; the orchestrator has asked Step 1's lead to claim it.)
+**Status: open, unclaimed.** (Opened 2026-11-23 09:00 UTC, Step 1 closed. Before the owner's morning only its "Owed by Step 1" essentials, one worker, small green pushes, done or cleanly stopped by about 10:15 UTC; the rest of Step 5 waits until the owner has played. Step 1's lead released it for a fresh lead; its handoff note ends the step file.)
 
 Full text: `docs/plan/step-5.md`
 
