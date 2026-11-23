@@ -918,3 +918,11 @@ document as a decision of theirs.
 - **Why this way:** the library: fighting villains in the expected hero-versus-villain way is business as usual for them (D-060), and the robbery and the polite purchase in the shop (gate C) need a villain who does not attack every hero he sees. So he swings back at a hero who struck him, for 15 seconds after the latest blow, grab or throw, with a guard's blow. A guard thrown into him does not count as that hero striking him. Whether he should fight on sight is left for the owner to say after playing.
 - **To change it:** one word, `"fights"` in `content/npcs/villain.json` (`"on-sight"`; that also breaks the shop's rob and buy-politely checks, which would need re-timing); the 15 s is `npcStruckMemory` in `content/tuning.json`.
 - **Where:** `docs/mechanisms/npc-response.md`, "Who fights".
+
+### 2026-11-23 · A caught hero can run for the pit with the hoard, down a narrow hole in the depot's yard
+- **Decided by:** the Step 16 lead (18:48 UTC), built by the push 3 builder, `session_017WiGzH5v7n1DfXiS1iFbh6`
+- **Instead of asking:** every two-tile spot in the yard floor is walked on by the main way, so where can the drop to the cellar go without moving the stack or the step?
+- **Why this way:** "getting caught opens play": an escape route from inside matters more than every hero fitting. A one-tile hole at column 23, just west of the step, so walking east into the step drops you in; the flyer and the infiltrator fit, the grappler leaves by the tower door. It lands west of the cracked wall, so the wall stays the only way into the strongroom from below.
+- **To change it:** two tiles in `content/rooms/quarry-depot.json` (column 23, rows 14-15); a two-wide hole needs the stack or the step moved and the main way's scenarios re-timed.
+- **Where:** `docs/plan/step-16.md`, slice 3 push 3; `step16-caught-escape-cave`.
+
