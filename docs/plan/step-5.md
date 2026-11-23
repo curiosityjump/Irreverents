@@ -147,8 +147,10 @@ site.
 - **Two tabs on one device are one player** (the id is in
   `localStorage`); the newer tab takes the character and the older one
   keeps retrying.
-- **Nothing tells the others a player's page went away**: the character
-  stands still for `staleSeconds` (15) and then disappears.
+- ~~**Nothing tells the others a player's page went away.**~~ Closed by
+  slice A part 4: the character is drawn dimmed with three dots while
+  its page is gone or silent, then removed after `staleSeconds` (15) as
+  before (`docs/mechanisms/network.md`, "A page that went away").
 - Nothing here has been on a real iPhone.
 
 ## Measure

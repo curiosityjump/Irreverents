@@ -2,6 +2,7 @@ import type { Content } from '../content/types.ts';
 import type { World } from '../sim/types.ts';
 import { drawAlert } from './draw/alert.ts';
 import { drawAudience } from './draw/audience.ts';
+import { drawAway } from './draw/away.ts';
 import { drawEntities } from './draw/entities.ts';
 import type { PlayerView } from './draw/entities.ts';
 import { drawHall } from './draw/hall.ts';
@@ -34,6 +35,7 @@ export function render(g: CanvasRenderingContext2D, world: World, content: Conte
   drawRoom(g, room, ox, oy, content);
   drawRoomParts(g, world, room, ox, oy);
   drawEntities(g, world, content, roomId, ox, oy, view);
+  drawAway(g, world, content, roomId, ox, oy, view);
   drawImpact(g, world, roomId, ox, oy);
   drawNpcs(g, world, content, roomId, ox, oy);
   drawAlert(g, world, content, roomId, ox, oy);

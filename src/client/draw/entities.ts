@@ -16,6 +16,8 @@ export interface Drawn {
   /** For a player's character: that player's own colour (the dot above it). Otherwise the kind's colour. */
   color: string;
   mine: boolean;
+  /** Step 5 (set by draw/away.ts): drawn as away, its player's page being gone for the moment. */
+  away?: boolean;
 }
 
 /** Whose view this is, and where to record what was drawn. */

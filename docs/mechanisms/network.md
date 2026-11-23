@@ -148,6 +148,25 @@ reloads **once**, remembering the commit it reloaded for, so it can never
 loop, and only after fetching itself successfully, so it never reloads
 into an error page.
 
+## A page that went away (`away`, Step 5, `DRAFT:`)
+
+A player's character whose page is not there is drawn **away** on
+everyone else's screen: dimmed, three small dots above its head
+(`src/client/draw/away.ts`, its own layer in `render.ts`). The server
+decides it in one place, every tick (`tickWorld` in `src/server/game.ts`):
+away while the socket is closed (until `staleSeconds` removes the
+character, as before) or while nothing has come from the page for
+`AWAY_SILENCE_MS` (2.5 s; a locked phone keeps its socket open for a
+while). It is `away: true` on the server's own `c.net` component beside
+`slot` (additive), so every snapshot carries it with no network code; it
+goes when the page reports again. A tab closed on purpose still says
+`bye` and is removed at once. `drawn.entities[].away` records it for the
+checks. e2e fact `away` (`scripts/e2e/away.ts`): a routed socket is cut
+with no goodbye and kept from coming back; the other page draws away
+within 2 s (measured 162 ms), here again once let back, removed after
+`staleSeconds` (that last wait is skipped in `check:live`). Control
+watched to fail: the server never marking anyone away.
+
 ## The page shell (`src/client/shell.ts`, `index.html`)
 
 - The canvas is 320×180, sized in **device** pixels to a whole multiple.

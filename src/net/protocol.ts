@@ -14,7 +14,11 @@ import type { Entity, Input, SimEvent, World } from '../sim/types.ts';
 declare module '../sim/types.ts' {
   interface Components {
     /** Set by the server on a player's character: which player of this world they are, in join order (picks the graybox colour). */
-    net?: { slot: number };
+    net?: {
+      slot: number;
+      /** Step 5 (additive): true while this player's page is not there (its socket closed, or nothing heard from it for a moment). The others draw the character as away. */
+      away?: boolean;
+    };
   }
 }
 

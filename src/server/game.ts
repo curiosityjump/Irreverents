@@ -53,6 +53,9 @@ function cleanInput(raw: unknown): Input {
   return { x: axis(i.x), y: axis(i.y), held: Array.isArray(i.held) ? i.held.filter((a) => typeof a === 'string').slice(0, 32) : [] };
 }
 
+/** DRAFT: how long a page may say nothing before its character is shown as away (ms). A page in view reports many times a second. */
+const AWAY_SILENCE_MS = 2500;
+
 export function attachGame(server: http.Server, opts: GameOptions) {
   const { content } = opts;
   const net = content.net;
@@ -125,7 +128,8 @@ export function attachGame(server: http.Server, opts: GameOptions) {
     // (what was picked up, a press already seen) survives every report, and
     // a press is seen once: on the tick the server's copy first holds it.
     if (i >= 0) e.c = gw.world.entities[i]!.c;
-    e.c.net = { slot: p.slot };
+    // Keeps `away` as the tick set it: only the tick decides it.
+    e.c.net = i >= 0 && e.c.net?.away ? { slot: p.slot, away: true } : { slot: p.slot };
     if (i >= 0) gw.world.entities[i] = e;
     else {
       // Sorted by id, as World requires.
@@ -235,6 +239,13 @@ export function attachGame(server: http.Server, opts: GameOptions) {
       const id = playerEntityId(p.id);
       const e = findEntity(gw.world, id);
       if (!e) continue;
+      // DRAFT (Step 5): a friend whose page went away looks away, not frozen.
+      // While the socket is closed (until staleSeconds removes the
+      // character) or nothing has come from the page for AWAY_SILENCE_MS (a
+      // locked phone keeps its socket for a while), the character carries
+      // `away` on the server's own component, which every snapshot copies.
+      const away = !p.sock || (p.inputAt > 0 && now - p.inputAt > AWAY_SILENCE_MS);
+      if ((e.c.net?.away === true) !== away) e.c.net = away ? { slot: p.slot, away: true } : { slot: p.slot };
       // One reported tick of input per server tick; between reports the last
       // one is held (for inputHoldMs at most, so a vanished page lets go).
       p.input = p.queue.shift() ?? (p.sock && now - p.inputAt <= net.inputHoldMs ? p.input : NO_INPUT);

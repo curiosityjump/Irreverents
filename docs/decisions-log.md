@@ -501,3 +501,10 @@ document as a decision of theirs.
 - **To change it:** the rooms are data (`content/rooms/undercroft.json`): the crawl's length, the drop's height and the chamber's size are letters in a grid.
 - **Where:** `docs/mechanisms/rooms-and-doors.md`, "The map tonight".
 
+
+### 2026-11-23 · A friend whose phone slept or lost its connection is shown dimmed with three dots until they are back
+- **Decided by:** brief-worker, Step 5 slice A (brief by the Step 5 lead)
+- **Instead of asking:** "When your friend's phone locks or drops off the network, their character just stood there for 15 seconds and vanished. What should you see meanwhile?"
+- **Why this way:** so nobody waits on, or throws things at, a friend who is not there without knowing it. The character goes dim and gets three small dots over its head within a moment of the page going quiet (2.5 seconds of silence, or at once when the connection closes), and is itself again the moment they return. It still disappears after 15 seconds as before. No words on screen: dialogue and text stay minimal.
+- **To change it:** the look is one small file, `src/client/draw/away.ts`; the 2.5 seconds is `AWAY_SILENCE_MS` in `src/server/game.ts`; the 15 is `staleSeconds` in `content/net.json`.
+- **Where:** `docs/mechanisms/network.md`, "A page that went away".
