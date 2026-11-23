@@ -495,7 +495,7 @@ Slice 1, 2026-11-23 16:10 UTC: the main way (road, ridge, tower, depot) is **248
 
 ## Briefs
 
-- Slice 3 push 3, the depot's west ledge and a way down to the cellar (signals 5 and 6(b) in full): `handoff-prompts/step-16-d-depot-routes.md`, 18:45 UTC, fresh builder.
+- Slice 3 push 3, the depot's west ledge and a way down to the cellar (signals 5 and 6(b) in full): `handoff-prompts/step-16-d-depot-routes.md`, 18:45 UTC, fresh builder `session_017WiGzH5v7n1DfXiS1iFbh6`.
 
 - Slice 3, the depot (signals 5–6): `handoff-prompts/step-16-c-quarry-depot.md`, written 17:30 UTC; slice 1–2's builder declined it at 17:27 (context), so a fresh builder takes it: `session_017WiGzJqD8htNRHozGpJTgb`, launched 17:32 UTC. Measured at fd3f4d5: `npm run check` 41 s, `npm run build` 5 s (Step 3's way-out check fixed at a700081).
 - Slice 2, the enemies (signal 4; ranged left out, first to drop): `handoff-prompts/step-16-b-quarry-enemies.md`, written 16:15 UTC, sent 16:40 UTC to slice 1's builder `session_017WiGzFnkhyrpJqJ6xa9vTr`. Step 12 widened `outpost-fight` to any room at 2027994.
