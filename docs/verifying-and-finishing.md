@@ -1,0 +1,306 @@
+# Verifying a change, and finishing a session
+
+**Standing — SOP phase 7.** Reached by running `docs/sop.md`; phases 1-6 come
+first.
+
+Whatever your project's safety net is — a test suite, a staging environment,
+a review gate, or nothing at all — this file is where it is written down, and
+where the checks a session runs on its own work live. **If nothing stands
+between a push and production, then the only thing standing between a change
+and its users is whatever you check yourself.** Say which kind of project this
+is in the section below, so no session has to guess.
+
+Every command in this file should have been run end to end by someone, and the
+section should say when. A command nobody has run is a guess written in a code
+block.
+
+---
+
+## This project's setup (the project fills this in)
+
+Replace this section with the real answers. Until it is filled in, a session
+that needs it asks the owner (via `docs/questions-inbox.md`) rather than
+inventing commands.
+
+- **Build:** `{{BUILD_COMMAND}}`
+- **Static checks:** `{{STATIC_CHECKS}}` — every check that runs without a
+  live system: type-checking, linting, a content or schema validator, a docs
+  cross-reference checker, whatever exists.
+- **Get it running locally:** the exact commands, in order, from a fresh
+  container (start any database or service, create it the first time, build,
+  start, restart after a rebuild, stop).
+- **What "it started" looks like:** the line or lines the running system
+  prints when it is healthy, so a session can tell a good boot from a bad one.
+- **Where it deploys:** `{{DEPLOY_TARGET}}`, and what triggers a deploy (a push
+  to `main`, a manual release, a merge).
+- **Is there a test suite?** If yes, the command and how long it takes. If no,
+  say so plainly — it changes what "verified" can mean.
+- **Does CI exist, and is it a gate or a tripwire?** CI that runs *after* the
+  push that deploys can tell you a minute later; it cannot stop you. If CI is
+  known to be broken or switched off on purpose, say so here so sessions stop
+  reporting it as a finding.
+
+---
+
+## The verification ladder
+
+Climb only as far as your change requires — but **at least one rung above
+"it compiles."** The rungs are generic; the commands for each belong in the
+section above, or next to the rung once your project has them.
+
+### 1. It compiles
+```bash
+{{BUILD_COMMAND}}
+```
+Catches type and syntax errors. Catches nothing about behaviour. This is the
+floor, not a verification.
+
+### 2. The static checks pass
+```bash
+{{STATIC_CHECKS}}
+```
+The single highest-value check for any change to data, configuration or
+content the project loads — it needs no running system and no secrets. A good
+validator is stricter than it looks: it should name the exact broken
+reference, not just fail. Each check in it should carry a comment saying which
+real escape it would have caught.
+
+**If you changed something a static check covers and didn't run it, you
+haven't checked your work.**
+
+### 3. It behaves — drive the real thing
+
+Exercise the change through the same interface a user does: the HTTP API with
+`curl`, the CLI with real arguments, the library through a real caller. Keep
+whatever session state the system uses (a cookie jar, a token, a working
+directory) across calls, or you are a new user each time.
+
+**Prove your check can fail.** A check that passes tells you nothing until you
+have watched it fail — the cheapest way is a **failing control**: run the same
+check against the code from *before* your change.
+
+```bash
+git checkout <sha-before-your-change> -- <the file you changed>
+{{BUILD_COMMAND}} && <re-run your check>     # must FAIL — if it passes, the check is empty
+git checkout HEAD -- <the file you changed>
+{{BUILD_COMMAND}}
+```
+
+A check once passed on the shipped code *and* on the pre-change code, because
+its assertion was too loose to notice the difference. Nothing about the
+passing run said so; the control is what caught it.
+
+**Proving a change is invisible is a different job from proving it works.**
+When a change is meant to alter *nothing* a user sees — new plumbing, a
+refactor, an addition beside existing code — the check is a **transcript
+diff**: run the same walk before and after and confirm the outputs are
+byte-identical.
+
+```bash
+# ...run the walk, redirecting each response to a file, before and after...
+diff before.txt after.txt      # any output at all is a behaviour change
+```
+
+Reading the diff of your own code tells you what you *meant* to change. This
+tells you what you *did*.
+
+**Assert through the path the real client uses.** A check through a route,
+command or function the real client never calls proves nothing about real
+use. Before trusting an assertion, confirm the client actually calls what it
+reads; if not, assert through what it does call, and say so.
+
+### 4. It behaves for *two* users
+
+Anything touching shared state — a record several users can change, a
+counter, a claim, a lock — needs **two independent sessions** at once. Most
+real concurrency bugs only appear with two, and one session will never show
+them to you.
+
+Once a project has shared state, make this rung repeatable: a script that
+drives several sessions at once, each with a failing control built in,
+printing one fact per line. It is the only form of this check a fresh session
+can re-run without re-deriving your walk.
+
+**A race usually hides behind one round trip, so two parallel requests almost
+never hit it.** Make the window deterministic: delay the slow step on purpose
+(a temporary sleep in a database trigger, a held lock on a separate
+connection, a paused second process), and remove the delay in a `finally`.
+Note that a delay holding the very lock the race needs will serialise it
+instead of exposing it — hold the write in a separate process for that case.
+
+### 5. If it touches what a user sees, it has to actually be looked at
+
+Every rung above proves the server or the logic returns the right thing,
+never that the screen shows it. Two failure shapes have shipped exactly this
+way, each with every earlier rung passing:
+
+- **Unstyled.** A new element copied its siblings' naming convention but no
+  styling rule was ever added for it, so it rendered as a plain default
+  control in a styled page. "Verified live" in that change's commit meant an
+  API walk, never a screenshot.
+- **Silently dropped.** A new field was correct, sent by the server, and never
+  read by the client at all. The mechanic was driven end to end through the
+  API and passed; the user simply never saw it, for several changes in a row,
+  until the owner used it and asked why it looked wrong. The change's own
+  report had named the gap ("nobody has looked at it in a browser yet... not
+  urgent"), and because "not urgent" isn't a status any checklist tracked, the
+  flag went into a chat report and nowhere else.
+
+**Checks, because any one alone would have missed one of these:**
+
+1. **Mechanical — every new id, class or style hook has a rule, or a reason it
+   doesn't need one.** Grep the diff for new identifiers and grep the
+   stylesheet for each.
+2. **Mechanical — every new field on a response the client consumes has a
+   confirmed read site in the client**, or a one-line reason it is not
+   consumed yet. A field with no read and no reason is the second bug above.
+3. **Visual — render it and put it next to the sibling it's supposed to
+   match.** A headless browser and a screenshot, read back as an image. Does
+   the new element match the one above and below it, or does it read as an
+   unstyled thing dropped into a styled page? That comparison is the actual
+   gate, not "does it render at all."
+4. **Text existing in a file is not the same as the parser accepting it.** A
+   comment closed early, a typo in a selector, can corrupt everything after
+   it while the file still looks normal to grep. When a rule is present but
+   the screenshot still shows it unapplied, confirm in the live page that the
+   rule exists, before suspecting caching or specificity.
+5. **A flagged rung-5 gap is a blocking item, not a footnote.** "No browser
+   available this round" is not the same status as rung 5 passing. Either run
+   it before closing, or carry it forward as a live, named item
+   (`docs/for-the-lead.md` / `docs/for-the-orchestrator.md`, not a chat
+   report) until someone does.
+
+Skip this rung only when your diff touches nothing a user sees.
+
+---
+
+## Traps that will fool you
+
+**Every project has its own; write yours here as you find them, one bullet
+each, with the shape of the trap and how to see through it.** Generic traps,
+and the kinds of project-specific ones worth documenting:
+
+- **Features that fake themselves without their keys.** A feature that calls
+  an external service (an AI model, a payment provider, a mail sender) may
+  return a plausible fallback with no error and no log line when its key is
+  missing. You can "verify" a change that way and have tested **nothing**. If
+  your project has one, name it here, name the fallback text, and say: set a
+  key or don't claim it works.
+- **No test suite.** If the project has none, say so here — "it passed" can
+  only mean the rungs above, and a session must not imply more.
+- **A push is a deploy.** If pushing to `main` ships to users,
+  say so here and in the definition of done, in bold. There is no "push it to
+  see."
+- **Caches survive your edit.** Anything loaded once at boot (configuration,
+  data cached in memory, files read on first use) ignores your edit until a
+  restart. List what your system caches.
+- **A local system hides races.** With no network latency, one request
+  finishes before the next starts, so overlapping-request bugs can't show up.
+  When the bug might be concurrency, add artificial latency to every request
+  before trusting a pass.
+- **A failed build can still leave a runnable artifact.** Some compilers emit
+  output even when they exit non-zero, and the start command runs the output,
+  not your source. Check the exit code (`echo $?`), not the scrollback.
+- **Stop servers by pidfile, never by pattern-kill.** A pattern like
+  `pkill -f "<server command>"` can match the shell running it and kill your
+  own tool call, while the old server keeps its port and every "rerun" tests
+  the previous build. Have start/stop scripts that track the pid and confirm a
+  fresh boot (a health endpoint reporting its boot time is ideal).
+- **State left by an earlier run fails a check on state, not code.** If a
+  scenario depends on a clean starting state, reset it between runs and say
+  how here.
+- **Periodic refreshes hide lost writes.** A client that polls can show a
+  write as succeeded and then quietly revert it. Check the store, not the
+  screen.
+- **"The code looks right" is not a verification.** It is the thing that was
+  true every previous time something shipped broken.
+
+---
+
+## Reversing it
+
+Know the shape of getting back before you need it. Fill in this project's
+answer: if a push is the deploy, `git revert` is the rollback —
+
+```bash
+git revert <sha> && git push origin main
+```
+
+— and `{{DEPLOY_TARGET}}` redeploys from the branch. Say whether there is
+staging, feature flags, or anything else between a push and users.
+
+**The asymmetry that matters: code reverts, persisted state doesn't.** A
+reverted commit that added a database column, a file format or a stored
+record leaves it behind. That is harmless *only if* such changes are additive
+— which is why an additive-only habit is load-bearing rather than stylistic. A
+destructive migration is not recoverable by revert, so don't write one without
+a plan for getting back.
+
+**Don't rename or remove persisted identifiers is the reversibility rule in
+disguise.** Stored records keyed by an id are orphaned when the id goes, and
+no revert brings them back into meaning. Additive changes are reversible;
+subtractive ones frequently are not.
+
+**Before shipping anything substantial, be able to say how it gets undone.**
+Usually the honest answer is "revert the commit, nothing persists." When it
+*isn't*, you have found the risky part of your change — worth knowing before
+you push rather than after.
+
+---
+
+## Definition of done
+
+A session is not finished until all of these are true.
+
+**The change**
+- [ ] `{{BUILD_COMMAND}}` passes — by exit code, not by scrollback.
+- [ ] `{{STATIC_CHECKS}}` pass. If a check keeps a baseline of known
+      exceptions, a **stale baseline entry** is yours too: a known gap got
+      fixed and the exception was left behind to hide the next one.
+- [ ] Any docs checker passes, if you touched docs. If the project has one
+      and it only runs after the push, it belongs on this list, not in your
+      memory.
+- [ ] The change was actually *exercised* — at least rung 3, rung 4 if it
+      touches shared state, rung 5 if it touches what a user sees. **Driving
+      the logic through the API is not rung 5.** An acknowledged rung-5 skip
+      means this box is unchecked, not checked-with-a-caveat; carry it forward
+      as a live item instead.
+- [ ] **You can say how this gets reversed** in one sentence — and if the
+      answer isn't "revert the commit," you have found the risky part.
+- [ ] **The measure:** you can name the row of `docs/plan.md`'s measure table
+      this moved, and which way (commands in `docs/measures.md`). Moving
+      nothing is a fine answer for a bug fix. Choosing code where data or
+      configuration would have done is allowed — but say so in the commit.
+
+**The record**
+- [ ] Every row of `docs/sop.md` phase 6 that this change triggered is filled.
+      That table is canonical; it is not repeated here.
+
+**The landing**
+- [ ] Committed with a message explaining *why*, not what — the diff already
+      says what.
+- [ ] Pushed to `main`, verified with
+      `git ls-remote --heads origin` (`docs/git-workflow.md`). Work that lands
+      elsewhere can be silently dropped.
+- [ ] **If the push is the deploy, remember it.** If you would not want it
+      live in the next two minutes, don't push it yet.
+
+**The honest report — in the commit message, not a chat reply to the owner.**
+The owner may delete an executing session's chat once its brief ships, so the
+commit is the durable copy the lead actually reads at review — a chat report
+duplicates it at best and is the only copy at worst.
+- [ ] Say what you verified and how. "It builds and I drove the change
+      through the real interface" and "it compiles" are different claims, and
+      only one of them is worth anything.
+- [ ] Say what you *didn't* verify, and why. An unverified change that says so
+      is useful; an unverified change presented as done is a trap for the next
+      session.
+- [ ] Anything that doesn't fit a commit message: a question for the owner
+      goes to `docs/questions-inbox.md`; a flag or a "worth noting"
+      goes to `docs/for-the-lead.md`, per `docs/sop.md` phase 4. Not into your
+      final message either way.
+- [ ] **Your actual final chat message is a short confirmation, nothing
+      more** — done or blocked, the commit, a pointer to `docs/for-the-lead.md`
+      if you wrote there. Not a narrated version of the bullets above. Nobody
+      reads it, and carrying it in your own context is itself a reason
+      sessions drift from the SOP (`docs/sop.md` phase 4).
