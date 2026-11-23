@@ -108,6 +108,4 @@ different from being a lead").
 
 ## Entries
 
-### Step 7 lead, 2026-11-23 04:55 UTC: `CLAUDE.md` will say something false once the Hall is wired in
-
-`CLAUDE.md`, "Architecture at a glance", says "**State** is the `World` object only. Nothing is persisted". The store (`src/server/store.ts`, 7d101dd) exists and nothing opens it yet, so the line is still true. It becomes false when Step 7's slice 2 wires it into the server (after Step 1's Gate 2). Suggested wording then: "Nothing is persisted except small records in the store (`docs/architecture.md`, 'Lasting records')". Yours to edit; I will say when the wiring lands.
+*(empty)*

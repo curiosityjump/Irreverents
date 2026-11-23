@@ -213,7 +213,9 @@ owns and the rules for changing a shared shape are in
   `src/scenarios`. `npm run check` enforces the imports.
 - **Verbs, systems, content kinds and scenario facts are self-registering
   files**: add one file, edit no list.
-- **State** is the `World` object only. Nothing is persisted; no external
+- **State** is the `World` object only. Nothing is persisted except small
+  records in the store, on the owner's volume (saved games, Step 17;
+  `docs/architecture.md`, "Lasting records"); no external
   services; one Node process serves the client, `/healthz` and `/ws`.
 - **Shared shapes change additively only**; never rename or remove an id
   or a field once pushed.
