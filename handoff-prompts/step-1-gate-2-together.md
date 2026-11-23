@@ -239,6 +239,16 @@ By the lead, 2026-11-23 04:02–04:10 UTC, in a container like yours.
   drawn about 100 ms in the past; all `DRAFT:`, in the tuning data) and
   print the measured message rate and size per second as a fact in e2e.
 
+**Optional, only if it costs under fifteen minutes and only after facts
+(a)–(h) pass** (added 04:28 UTC): six 24×24 touch buttons with pressed
+states, an atlas and a manifest have arrived at
+`docs/design-library/03-visual-direction-and-assets/current-pixel-art-explorations/u08-01-touch-controls-ready-for-prototype/u08-01-touch-controls-complete/`.
+Art is approved for use by default (D-096). If they drop into your touch
+layer as data, copy what you use into the game's own `assets/` folder
+(`docs/architecture.md`, "Where art plugs in"; never load from the
+mirror) and draw them; otherwise leave them, and the hero sprite sheets
+beside them, to a later step. Plain shapes are a complete Gate 2.
+
 ## 4 · Out of scope (leave these, even when they look wrong)
 
 - Attack, grab, throw, more character kinds, movement feel and tuning
