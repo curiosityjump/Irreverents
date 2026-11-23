@@ -243,7 +243,7 @@ member only.
   way-out validator, door drawing, start room) is running. Format and
   rules: `docs/mechanisms/rooms-and-doors.md`.
 - **Slice B** (`handoff-prompts/step-3-b-kingdom-and-parts.md`,
-  launched 04:58 UTC): plate, gate, breakable wall, false wall, hiding
+  launched 04:52 UTC): plate, gate, breakable wall, false wall, hiding
   place; `undercroft`, `courtyard`, `hall-gallery`; both hidden routes;
   the secret. Signals 2, 3 and 5.
 - **Not briefed yet:** the camera at room edges and on a room change
@@ -254,7 +254,7 @@ member only.
 (signals 1, 3b, 4). It is not gate B until signals 2, 3 and 5 are on
 the line.
 
-**Routed from slice A's flags (04:58 UTC):** doors change a body
+**Routed from slice A's flags (04:52 UTC):** doors change a body
 directly and do not emit Step 1's `move` effect (a walk door keeps
 speed; a `move` arrives standing still): put to Step 1's lead.
 `boxInSolid` reads the room file, not run-time tiles: told Step 2's
