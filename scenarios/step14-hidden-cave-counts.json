@@ -1,0 +1,15 @@
+{
+  "id": "step14-hidden-cave-counts",
+  "gate": null,
+  "proves": "Step 14 slice A (D-079: 'Hidden rooms should contribute to the percentage'): the quarry's hidden cave is in the quarry's total from the first tick, and is not among the places seen until a hero walks through the pit's hidden opening into it",
+  "room": "quarry-pit",
+  "players": [{ "id": "a", "character": "hero", "spawn": 0 }],
+  "inputs": [{ "player": "a", "from": 0, "to": 60, "x": -1 }],
+  "ticks": 120,
+  "expect": [
+    { "fact": "level", "level": "iron-quarry", "at": 0, "discovered": false, "total": 13 },
+    { "fact": "level", "level": "iron-quarry", "at": 1, "discovered": true, "seen": ["quarry-pit"], "total": 13 },
+    { "fact": "event-where", "event": "changed-room", "between": [0, 60], "count": [1, 1], "where": { "player": "a", "fromRoom": "quarry-pit", "fromDoor": "to-cave", "toRoom": "quarry-cave" } },
+    { "fact": "level", "level": "iron-quarry", "at": 120, "seen": ["quarry-pit", "quarry-cave"], "total": 13, "quarters": 0 }
+  ]
+}

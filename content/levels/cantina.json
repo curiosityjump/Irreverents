@@ -1,0 +1,8 @@
+{
+  "//": "DRAFT: Step 14 slice A. Step 11's cantina, behind the street's doorway at column 20; the glowing open arch from P05.",
+  "id": "cantina",
+  "name": "Cantina",
+  "rooms": ["cantina"],
+  "entries": [{ "room": "castle-street", "door": "to-cantina" }],
+  "look": "arch"
+}

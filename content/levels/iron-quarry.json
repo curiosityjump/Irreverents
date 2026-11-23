@@ -1,0 +1,8 @@
+{
+  "//": "DRAFT: Step 14 slice A. Step 16's quarry; 'Iron Quarry' is doc 28's name for it. The timbered mine entrance from P05.",
+  "id": "iron-quarry",
+  "name": "Iron Quarry",
+  "rooms": ["quarry-road", "quarry-ridge", "quarry-tower", "quarry-depot", "quarry-pit", "quarry-cave"],
+  "entries": [{ "room": "courtyard", "door": "to-quarry" }],
+  "look": "mine"
+}

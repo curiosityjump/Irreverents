@@ -1,0 +1,8 @@
+{
+  "//": "DRAFT: Step 14 slice A. Where everyone starts, so it has no entrance; it is discovered on the first tick.",
+  "id": "castle-town",
+  "name": "Castle Town",
+  "rooms": ["throne-room", "castle-street", "courtyard", "undercroft", "hall-gallery"],
+  "entries": [],
+  "look": "arch"
+}

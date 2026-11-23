@@ -1,0 +1,8 @@
+{
+  "//": "DRAFT: Step 14 slice A. The outpost (Step 12), behind the courtyard's doorway at column 23; the ornate gem door from P05.",
+  "id": "bandit-camp",
+  "name": "Bandit Camp",
+  "rooms": ["outpost"],
+  "entries": [{ "room": "courtyard", "door": "to-outpost" }],
+  "look": "gem-door"
+}

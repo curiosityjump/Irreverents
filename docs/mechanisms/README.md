@@ -84,6 +84,9 @@ groups) whenever you add one — never update the number from memory.
 **Rooms and doors** (`docs/mechanisms/rooms-and-doors.md`)
 - `content/rooms/*.json` doors, areas and parts + `src/sim/systems/room-doors.ts` — rooms joined by walk and enter doors that carry any body, tiles that change while the game runs (`src/sim/room-state.ts`), working-part kinds declared by their system (`plate`, `gate`, `breakable`, `false-wall`, `hide`: `src/sim/systems/room-<kind>.ts`, shared helpers in `src/sim/room-parts.ts`, drawn by `src/client/draw/room-parts.ts`), and the checks and controls (`controls/rooms/`) that refuse a broken map (Step 3).
 
+**Levels** (`docs/mechanisms/levels.md`)
+- `content/levels/<id>.json` + `world.levels` + system `level-explore` — a level's rooms, its doorways in and their entrance art; which levels a hero someone plays has been inside and which rooms and areas (hidden ones counted from the start), shown at the doorway and in the menu as a name and a completion pie, never which or where (Step 14 slice A).
+
 **The feel dials** (`docs/mechanisms/tuning-panel.md`)
 - `?tune` + `src/client/tune.ts` + `src/sim/tuning-rules.ts` + messages `tune` / `tuning` — a panel listing every declared tuning number (per character, and the world's) with sliders, reset and copy-out as tuning-file JSON; a change is checked by the server and applied to that whole world, every page included, until it restarts (Step 2).
 

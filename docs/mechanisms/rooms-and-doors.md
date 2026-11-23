@@ -150,8 +150,9 @@ a room written before doors existed is still valid.
   `hidden`. Its tiles are the legend letter's tiles and must be one
   filled rectangle. **Both ends are written**, each naming the other.
 - **`areas`.** A named rectangle (`at` `[column, row]`, `size` `[wide,
-  tall]`) with `hidden` yes/no; the room itself has `hidden` too. Nothing
-  reads them yet: an explored percentage will count them (D-079).
+  tall]`) with `hidden` yes/no; the room itself has `hidden` too. A
+  level's completion pie counts them, hidden ones included (D-079,
+  `docs/mechanisms/levels.md`).
 - **`parts`.** A placed working part: `id`, a `kind` name, free `params`.
   The room file only places it; see "Working parts" below.
 - **`hidden`** on a door marks a connection nothing may point at. The
@@ -381,8 +382,8 @@ price, which is small for a control's few rooms.
 "rooms": { "<id>": <room file> } }`. `npm run check` ("room controls")
 lays each over the real content and requires the check to refuse it with
 one problem line containing every `expect` text. A control with its own
-`"game"` is a whole map of its own (the real rooms and placements, and
-the art files named after rooms, are left out), which is how the way-out controls work: `sealed-pit` (four
+`"game"` is a whole map of its own (the real rooms and placements, the
+levels and the art files named after rooms, are left out), which is how the way-out controls work: `sealed-pit` (four
 tiles deep, no door), `one-way-drop-no-way-back`,
 `one-way-drop-into-a-loop` (a door is reachable, the start never again),
 `room-not-reachable-from-start`, `start-room-has-no-doors`. A control

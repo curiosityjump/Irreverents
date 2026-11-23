@@ -1,0 +1,19 @@
+{
+  "id": "step14-quarry-discovered",
+  "gate": null,
+  "proves": "Step 14 slice A (D-078, D-079): before anyone goes in, the Iron Quarry is not discovered and counts all its 13 places (rooms and areas, hidden ones included); a hero walks into the courtyard's quarry doorway and goes in by Use, and the quarry is discovered with exactly the road seen (its pie still empty: one place in 13 is under a quarter), while castle town, where the hero was, is discovered too",
+  "room": "courtyard",
+  "players": [{ "id": "a", "character": "hero", "spawn": 3 }],
+  "inputs": [
+    { "player": "a", "from": 0, "to": 16, "x": -1 },
+    { "player": "a", "from": 40, "to": 44, "hold": ["interact"] }
+  ],
+  "ticks": 90,
+  "expect": [
+    { "fact": "level", "level": "iron-quarry", "between": [0, 40], "discovered": false, "seen": [], "total": 13, "quarters": 0 },
+    { "fact": "level", "level": "castle-town", "between": [1, 90], "discovered": true, "seen": ["courtyard"] },
+    { "fact": "event-where", "event": "changed-room", "between": [40, 50], "count": [1, 1], "where": { "player": "a", "fromRoom": "courtyard", "fromDoor": "to-quarry", "toRoom": "quarry-road" } },
+    { "fact": "level", "level": "iron-quarry", "between": [50, 90], "discovered": true, "seen": ["quarry-road"], "total": 13, "quarters": 0 },
+    { "fact": "level", "level": "bandit-camp", "at": 90, "discovered": false, "total": 1 }
+  ]
+}

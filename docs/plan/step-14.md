@@ -181,3 +181,9 @@ Don't grade these; list them.
 ## Open with the owner
 
 ## Handoff notes
+
+## Builder notes
+
+Slice A (`session_017WiGzFeeJgj8z2SUAFyu5J`):
+- `src/content/kinds/rooms.ts` still says of areas "Nothing reads these yet"; levels now count them. Not my file; the doc is fixed (`rooms-and-doors.md`).
+- A page's own world runs `level-explore` for its own hero (it only adds what the server adds a moment later); the brief said "written only by the server's step". Logged as `DRAFT:` at the system; to make it server-only, skip when the world has no `~cantina:` style marker, or have the server set a flag.
