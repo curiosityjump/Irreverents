@@ -304,6 +304,16 @@ tried: touch on that page, a real phone, the live address after the
 push (`npm run check:deployed` is the next thing to run). The camera is
 this step's from here; nothing about it is briefed yet.
 
+**Slice B, push 1 reviewed (lead, 08:50 UTC).** `cb297c0`: plate, gate,
+breakable (with `look`), false wall and hiding place, each one system
+file, drawn, in the scratch room `test-parts` with six scenarios.
+Re-run by the lead: check green; with the gate made to open on one
+plate, `step3-gate-waits` and `step3-plates-open-gate` fail. Light pass
+(a self-contained slice): the other four scenarios' controls and
+anything on a screen were not re-run by the lead. Events relayed to the
+Step 6 and Step 4 leads. None of the parts is placed in a kingdom room
+yet. Worker `session_017WiGzGm447aaoT1b3PWamZ` is on push 2.
+
 ## Open with the owner
 
 ## Handoff notes
