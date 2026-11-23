@@ -2,6 +2,16 @@
 
 ---
 
+NEW DELIVERIES P07/P08 — CHECK BEFORE REQUESTING MORE (2026-11-23)
+
+P07: https://drive.google.com/drive/folders/1PQO3UB9JbT8R5LPs6u66Nzz1JHgAHXB-
+
+P08: https://drive.google.com/drive/folders/1e1RmSNHr-VzCkSAVOJEbW8E9URTkrhsD
+
+Exact 9 image URLs, two manifests, two complete ZIP archives and source-format/technical notes: https://docs.google.com/document/d/16-SUnXVRVz9Yu-ySxdD8FrdsFgz6POt-5BI4cyEk5Tc/edit
+
+Before sending asset requests or making alternative art, inspect these sources by category (town/NPC, enemies, mechanisms, town/castle blocks, biome blocks, HUD). Reuse/crop/repair; do not mark open game-ready REQs completed until source sheets are converted to native transparent frame/true tested tile grids. Update Board/Asset Library/REQ and changelog on actual completed conversion. The three starting heroes are canon locked and must not be redesigned.
+
 CLAUDE ASSET HANDOFF UPDATE (23 NOV 2026): BEFORE generating lower-quality art or duplicating requests, open https://docs.google.com/document/d/1T7S5FVKq3ZTvNqwaIzC126wRb15V9Spp7xKbwhz-Qgg/edit . P03 https://drive.google.com/drive/folders/1m5KXh8Ts-UiMWS6Us9qaA6MlucsTHpGf and P04 https://drive.google.com/drive/folders/1CwqUK750arthkFGMfsK3yRiJ6lzlRfrW are now rich owner-endorsed visual source plates. REBUILD usable native frames/tiles from these, do not fake a 16px atlas by treating illustrative grid divisions as pixels. Complete actual REQs only after QA, catalog, Board, changelog, and links. Board rows now map to source folders. Claude can use pictures for immediate visual direction / temporary prototype, while producing actual importable assets.
 
 MANDATORY TEAM PLANNING UPDATE (2026-11-23)

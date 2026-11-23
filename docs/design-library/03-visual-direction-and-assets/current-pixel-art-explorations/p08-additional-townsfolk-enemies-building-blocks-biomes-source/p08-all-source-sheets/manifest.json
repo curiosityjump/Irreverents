@@ -1,0 +1,72 @@
+{
+  "batch": "P08",
+  "name": "Additional Townspeople, Enemies, Town/Castle Blocks and Region Biomes",
+  "source_date": "2026-11-23",
+  "status": "VISUAL SOURCE SHEETS \u2014 not verified native-size seamless tiles or production frame atlases",
+  "source_provenance": "Original ChatGPT-produced image sheets in this conversation; visually usable for source/extraction; no game deployment or native tile QA completed",
+  "source_art_preserves_canon": "Existing three playable heroes are locked and may not be redesigned. Only their HUD portraits in this batch are relevant; no new playable hero designs authorized.",
+  "assets": [
+    {
+      "file": "vibrant_chibi_townsfolk_sprite_atlas.png",
+      "type": "NPC",
+      "description": "Additional civilians and professions: baker, smith, merchant, scholar, farmers, musicians, royal, healer and traveler poses",
+      "width": 1448,
+      "height": 1086,
+      "mode": "RGBA",
+      "fully_transparent_pixels": 46502,
+      "partially_transparent_pixels": 1525988,
+      "opaque_pixels": 38,
+      "status": "SOURCE_ONLY",
+      "native_sprite_grid_verified": false,
+      "tile_seam_tested": false
+    },
+    {
+      "file": "chibi_enemy_animation_sprite_atlas.png",
+      "type": "ENEMY",
+      "description": "Additional foes: signaler, ranged, armored, bomber, beasts, skeleton and caster poses",
+      "width": 1448,
+      "height": 1086,
+      "mode": "RGBA",
+      "fully_transparent_pixels": 491361,
+      "partially_transparent_pixels": 1080734,
+      "opaque_pixels": 433,
+      "status": "SOURCE_ONLY",
+      "native_sprite_grid_verified": false,
+      "tile_seam_tested": false
+    },
+    {
+      "file": "colorful_retro_fantasy_tileset_atlas.png",
+      "type": "ENVIRONMENT",
+      "description": "Town, castle interior and exterior, wooden/tavern props and architecture",
+      "width": 1448,
+      "height": 1086,
+      "mode": "RGBA",
+      "fully_transparent_pixels": 204589,
+      "partially_transparent_pixels": 1367275,
+      "opaque_pixels": 664,
+      "status": "SOURCE_ONLY",
+      "native_sprite_grid_verified": false,
+      "tile_seam_tested": false
+    },
+    {
+      "file": "chibi_pixel_biome_tileset_atlas.png",
+      "type": "REGION",
+      "description": "Ice, lava, ancient ruins, purple dungeon modular-looking scene pieces",
+      "width": 1448,
+      "height": 1086,
+      "mode": "RGBA",
+      "fully_transparent_pixels": 401331,
+      "partially_transparent_pixels": 1169728,
+      "opaque_pixels": 1469,
+      "status": "SOURCE_ONLY",
+      "native_sprite_grid_verified": false,
+      "tile_seam_tested": false
+    }
+  ],
+  "integration_notes": [
+    "Art source images are not a 16x16 tile atlas just because they contain tile-looking pieces.",
+    "Before engine import: crop each item, repair partial transparency/edge fringes, normalize scale and pivots, verify animation consistency, and arrange validated PNG frames/tiles in a real atlas.",
+    "For environment art test seamless adjacency and collision geometry before labeling as autotile.",
+    "The asset production board must refer to these source sheets; actual request statuses remain open until native usable outputs are tested."
+  ]
+}

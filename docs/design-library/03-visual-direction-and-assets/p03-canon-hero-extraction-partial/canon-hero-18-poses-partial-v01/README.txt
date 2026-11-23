@@ -1,0 +1,1 @@
+18 individually separated transparent frames, exact owner canon. Cropped to six reliable source poses per hero; later poses omitted due to overlap and extraction QA failure. NOT a completed C02 animation deliverable.

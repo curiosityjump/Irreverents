@@ -2,6 +2,20 @@
 
 ---
 
+LATEST ASSET LIBRARY ROUTING — P07 & P08 (2026-11-23)
+
+Two additional full original source batches uploaded/verified. Handoff with 9 DIRECT PNG URLs, two manifests, README notes and ZIPs: https://docs.google.com/document/d/16-SUnXVRVz9Yu-ySxdD8FrdsFgz6POt-5BI4cyEk5Tc/edit
+
+P07: https://drive.google.com/drive/folders/1PQO3UB9JbT8R5LPs6u66Nzz1JHgAHXB- — five source sheets: townspeople/NPC poses (https://drive.google.com/file/d/1rnkPeLOL4fwcwNnvHH-C2uwiHblLnlz7/view), enemy/villain poses (https://drive.google.com/file/d/1P5Ri-aLXIGgrJer5gKSqz8L1wu3rlOaI/view), mechanisms/props (https://drive.google.com/file/d/11wWOkn-crWAe3GM0Mczfooch249mdK-M/view), grassy ruins/town/castle terrain (https://drive.google.com/file/d/19pAGODGsITkNmDHJ9Oqc5eZrUrYaf3kV/view), HUD and locked-hero portraits (https://drive.google.com/file/d/1OiO5SOEVE37hb_l1uas5IkG8f_U0yBpp/view).
+
+P08: https://drive.google.com/drive/folders/1e1RmSNHr-VzCkSAVOJEbW8E9URTkrhsD — four source sheets: additional professions/civilians (https://drive.google.com/file/d/1em653hyxy2eTXx1jlEAAkc4-C2Zv_R1-/view), additional enemies/creatures (https://drive.google.com/file/d/1jzkFelrMfWyaNEc3HXwnHqm3JZijVaCV/view), town/castle building blocks/furniture (https://drive.google.com/file/d/1xTENYP1MOBNXGQbck0qOzqGpxgp5N1hd/view), ice/lava/ancient ruins/purple dungeon biomes (https://drive.google.com/file/d/17aioRH9OMXm5VxCgaTec1xxRCG_qfDoE/view).
+
+Status: HIGH-VALUE VISUAL SOURCES — SOURCE_ONLY. Do not call 1448×1086 illustrative PNGs tested native sprites or seamless 16px tiles; alpha cleanup, cropping, animation/state extraction, edge matching, metadata, and 320×180 tests are required. These supporting assets do not change canon heroes (see Doc 36). Use immediately for art extraction/prototyping; do not create weaker replacements.
+
+P03-CANON-EXTRACT-01 — PARTIAL OWNER-CANON HERO SOURCE CONVERSION (2026-11-23 11:29 AM EST)
+
+CATEGORY: Three playable heroes, owner-locked designs. Canon source: https://drive.google.com/file/d/17Ulupi-WbcsqVWqS5m-bz1TmIjzx6VcM/view . 18 individually separated transparent 48×48 RGBA poses (6 each: red-scarf goggled grappler, green hooded rogue, pink winged flyer); ZIP includes manifest, README and contact preview. Source-derived with nearest-neighbor scale, no redesign. ZIP: https://drive.google.com/file/d/185sart4aSJmoVq2ZHEhjLV7t8ypa04lK/view ; QA preview: https://drive.google.com/file/d/1RU3plFJKyXEkj1rH0C7gsLvQZgMVUM1W/view ; folder: https://drive.google.com/drive/folders/1hZmcVkUTPlGZAnw74baDEVCNVSo-Y-4k . STATUS: PARTIAL SOURCE-DERIVED TECHNICAL PROTOTYPE — NOT REQUEST-COMPLETE, NOT 32px, NO SIX-PHASE RUN, NO 320×180 GAME SCENE OR INTEGRATION. Extraction of remaining source poses failed clean separation QA and was excluded. P01 still current implementation fallback. Preserve exact canonical hero identities; no replacement concepts. Do not mark HRO/C02 delivered.
+
 CANONICAL PLAYABLE CHARACTERS — OWNER CONFIRMED (2026-11-23)
 
 THE THREE LEAD HERO DESIGNS ALREADY EXIST. DO NOT REDESIGN. Open the ACTUAL three-row P03 sprite reference now: https://drive.google.com/file/d/17Ulupi-WbcsqVWqS5m-bz1TmIjzx6VcM/view . Exact visual identities: TOP goggles/red scarf compact adventurer (grappler role), MIDDLE green hood/red scarf agile rogue (infiltrator role), BOTTOM pink aviator/goggles/white wings/yellow scarf (flyer role). Preserve their tiny rounded proportions, pixel treatment, identity and expressive faces in every new animation/ability state. Any recent new red-haired/bulky humanoid grappler, purple-haired anime ninja, blonde human/fairy flyer or glossy presentation board is OFF-STYLE/REJECTED as their replacement. Those variants may not become source-of-truth. Technical extraction/animation is still unfinished; only create CLEAN NATIVE FRAMES OF THESE THREE, not new character concepts. AUTHORITATIVE OWNER-LOCKED CHARACTER GUIDE: https://docs.google.com/document/d/1p_kXnoB_9gClFaR47U6-ige5I-9hs1Ta9s-thwSwF9g/edit

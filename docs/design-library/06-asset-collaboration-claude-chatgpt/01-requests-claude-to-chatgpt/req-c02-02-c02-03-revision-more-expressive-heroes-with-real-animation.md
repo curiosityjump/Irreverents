@@ -2,6 +2,10 @@
 
 ---
 
+2026-11-23 11:29 AM EST — CANON SOURCE CONVERSION PARTIAL, NOT DELIVERED
+
+Used owner-locked three-hero reference, NOT a redesigned character. Extracted first six reliable poses for grappler and infiltrator into separate 48×48 RGBA PNGs with pivot/manifest; same process also includes flyer (six). Preview: https://drive.google.com/file/d/1RU3plFJKyXEkj1rH0C7gsLvQZgMVUM1W/view ; ZIP: https://drive.google.com/file/d/185sart4aSJmoVq2ZHEhjLV7t8ypa04lK/view ; catalog: https://docs.google.com/document/d/1bnr7GUgrYBVVY0BMkwx4qRPvW45Nk4grn-Tk6THcoY8/edit . Visual QA excluded later poses because effects and overlapping crops split identity. Missing 32×32 compatibility, six true run frames, action animation and 320×180 QA. STATUS: IN PROGRESS — QUALITY REWORK. Canon source https://drive.google.com/file/d/17Ulupi-WbcsqVWqS5m-bz1TmIjzx6VcM/view remains authoritative. Do not substitute unrelated earlier hero concepts.
+
 CANONICAL PLAYABLE CHARACTERS — OWNER CONFIRMED (2026-11-23)
 
 THE THREE LEAD HERO DESIGNS ALREADY EXIST. DO NOT REDESIGN. Open the ACTUAL three-row P03 sprite reference now: https://drive.google.com/file/d/17Ulupi-WbcsqVWqS5m-bz1TmIjzx6VcM/view . Exact visual identities: TOP goggles/red scarf compact adventurer (grappler role), MIDDLE green hood/red scarf agile rogue (infiltrator role), BOTTOM pink aviator/goggles/white wings/yellow scarf (flyer role). Preserve their tiny rounded proportions, pixel treatment, identity and expressive faces in every new animation/ability state. Any recent new red-haired/bulky humanoid grappler, purple-haired anime ninja, blonde human/fairy flyer or glossy presentation board is OFF-STYLE/REJECTED as their replacement. Those variants may not become source-of-truth. Technical extraction/animation is still unfinished; only create CLEAN NATIVE FRAMES OF THESE THREE, not new character concepts. AUTHORITATIVE OWNER-LOCKED CHARACTER GUIDE: https://docs.google.com/document/d/1p_kXnoB_9gClFaR47U6-ige5I-9hs1Ta9s-thwSwF9g/edit

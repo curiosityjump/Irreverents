@@ -1027,6 +1027,121 @@
   },
   {
    "kind": "folder",
+   "id": "1PQO3UB9JbT8R5LPs6u66Nzz1JHgAHXB-",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P07 — First Playable NPC Enemies Mechanisms Terrain HUD — SOURCE"
+  },
+  {
+   "kind": "file",
+   "id": "1P5Ri-aLXIGgrJer5gKSqz8L1wu3rlOaI",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P07 — First Playable NPC Enemies Mechanisms Terrain HUD — SOURCE/chibi_enemy_animation_sprite_sheet.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p07-first-playable-npc-enemies-mechanisms-terrain-hud-source/chibi-enemy-animation-sprite-sheet.png",
+   "sha256": "7f77abc7c036d7045111b782425bf0d5eee21585931cdfb72dff4cee7d85c558"
+  },
+  {
+   "kind": "file",
+   "id": "1rnkPeLOL4fwcwNnvHH-C2uwiHblLnlz7",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P07 — First Playable NPC Enemies Mechanisms Terrain HUD — SOURCE/colorful_chibi_npc_sprite_sheet.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p07-first-playable-npc-enemies-mechanisms-terrain-hud-source/colorful-chibi-npc-sprite-sheet.png",
+   "sha256": "3ce186863cde899f0ff7a776389b261b4be58d8f0698b9cd964bebf42f5980bb"
+  },
+  {
+   "kind": "file",
+   "id": "1OiO5SOEVE37hb_l1uas5IkG8f_U0yBpp",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P07 — First Playable NPC Enemies Mechanisms Terrain HUD — SOURCE/irreverents_pixel_ui_atlas.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p07-first-playable-npc-enemies-mechanisms-terrain-hud-source/irreverents-pixel-ui-atlas.png",
+   "sha256": "e0a9967e2ea29692fa49c1191f31332bb35246802dc546f57caef1870ca93d78"
+  },
+  {
+   "kind": "file",
+   "id": "1sax82LpdP23iEgPNRboVnvM99v-EIroZ",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P07 — First Playable NPC Enemies Mechanisms Terrain HUD — SOURCE/manifest.json",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p07-first-playable-npc-enemies-mechanisms-terrain-hud-source/manifest.json",
+   "sha256": "02cb1d297ee0a3ac8cd84c6219d5ffbd6f63f245a8591aed46e0ef8386d7aa00"
+  },
+  {
+   "kind": "file",
+   "id": "1ZzuqKI9lHWHNRsgbxjTEesrsPXEJx2b7",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P07 — First Playable NPC Enemies Mechanisms Terrain HUD — SOURCE/P07_ALL_SOURCE_SHEETS.zip",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p07-first-playable-npc-enemies-mechanisms-terrain-hud-source/p07-all-source-sheets/",
+   "sha256": "4f933de1c53ba60cb1921e868db0fd87be38010c6a6f2e93995bd972e02795d9"
+  },
+  {
+   "kind": "file",
+   "id": "19pAGODGsITkNmDHJ9Oqc5eZrUrYaf3kV",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P07 — First Playable NPC Enemies Mechanisms Terrain HUD — SOURCE/pixel_art_platformer_tileset_atlas.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p07-first-playable-npc-enemies-mechanisms-terrain-hud-source/pixel-art-platformer-tileset-atlas.png",
+   "sha256": "41a407b597cfb65cb565b153eaa5e4b74bbe8ae0e44030c64825cc9eb4e83afc"
+  },
+  {
+   "kind": "file",
+   "id": "1fpqXYLNDkOpv4wlPbbAsGlECkeBCaBFd",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P07 — First Playable NPC Enemies Mechanisms Terrain HUD — SOURCE/README_FOR_CLAUDE.txt",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p07-first-playable-npc-enemies-mechanisms-terrain-hud-source/readme-for-claude.txt",
+   "sha256": "2ab267abc0ba585317153c705b6a89513d02c98cb436e998aba559fb0c7b889b"
+  },
+  {
+   "kind": "file",
+   "id": "11wWOkn-crWAe3GM0Mczfooch249mdK-M",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P07 — First Playable NPC Enemies Mechanisms Terrain HUD — SOURCE/vibrant_platformer_interactables_sprite_sheet.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p07-first-playable-npc-enemies-mechanisms-terrain-hud-source/vibrant-platformer-interactables-sprite-sheet.png",
+   "sha256": "3731fdc9eb6a304142be502e7126a5f70a2403f2ec12385b1ed205b8e75bfbd8"
+  },
+  {
+   "kind": "folder",
+   "id": "1e1RmSNHr-VzCkSAVOJEbW8E9URTkrhsD",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P08 — Additional Townsfolk Enemies Building Blocks Biomes — SOURCE"
+  },
+  {
+   "kind": "file",
+   "id": "1jzkFelrMfWyaNEc3HXwnHqm3JZijVaCV",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P08 — Additional Townsfolk Enemies Building Blocks Biomes — SOURCE/chibi_enemy_animation_sprite_atlas.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p08-additional-townsfolk-enemies-building-blocks-biomes-source/chibi-enemy-animation-sprite-atlas.png",
+   "sha256": "ccb585bd58a8e7fdc9722130c79d4f25b6ae1016895cc0ac52bc6d83414e8cc3"
+  },
+  {
+   "kind": "file",
+   "id": "17aioRH9OMXm5VxCgaTec1xxRCG_qfDoE",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P08 — Additional Townsfolk Enemies Building Blocks Biomes — SOURCE/chibi_pixel_biome_tileset_atlas.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p08-additional-townsfolk-enemies-building-blocks-biomes-source/chibi-pixel-biome-tileset-atlas.png",
+   "sha256": "213f89bf1759b4227bdc30a6ab04968f26bc9b791e6dcc2b14ebd74b000f520a"
+  },
+  {
+   "kind": "file",
+   "id": "1xTENYP1MOBNXGQbck0qOzqGpxgp5N1hd",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P08 — Additional Townsfolk Enemies Building Blocks Biomes — SOURCE/colorful_retro_fantasy_tileset_atlas.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p08-additional-townsfolk-enemies-building-blocks-biomes-source/colorful-retro-fantasy-tileset-atlas.png",
+   "sha256": "08361158773839122e091b8d66b7f3f923570f6a46983384364d448238cad185"
+  },
+  {
+   "kind": "file",
+   "id": "1nR4xwRjWutvJV6mgKpyUXtxaG4bJ3p-Z",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P08 — Additional Townsfolk Enemies Building Blocks Biomes — SOURCE/manifest.json",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p08-additional-townsfolk-enemies-building-blocks-biomes-source/manifest.json",
+   "sha256": "e209c8d1d90c07a91f74ef1e2fbcc9f02456a35ea977ff063bbd726515d7c9d0"
+  },
+  {
+   "kind": "file",
+   "id": "1sbQfLmesPMGBHPpYp-P56M3O8wRpv-Ml",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P08 — Additional Townsfolk Enemies Building Blocks Biomes — SOURCE/P08_ALL_SOURCE_SHEETS.zip",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p08-additional-townsfolk-enemies-building-blocks-biomes-source/p08-all-source-sheets/",
+   "sha256": "8355f150af0cd3b50983d8d03aa177ccf931d8f8032554f63abe01f177780139"
+  },
+  {
+   "kind": "file",
+   "id": "1ojnN7_j8ZwL6mjC-Uk7v4mrgYgi9QXDG",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P08 — Additional Townsfolk Enemies Building Blocks Biomes — SOURCE/README_FOR_CLAUDE.txt",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p08-additional-townsfolk-enemies-building-blocks-biomes-source/readme-for-claude.txt",
+   "sha256": "a2ee5e1fa11fb6901eabe4f87ee6479dcfc04d60b35eb730b5f0bc66aed72df5"
+  },
+  {
+   "kind": "file",
+   "id": "1em653hyxy2eTXx1jlEAAkc4-C2Zv_R1-",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P08 — Additional Townsfolk Enemies Building Blocks Biomes — SOURCE/vibrant_chibi_townsfolk_sprite_atlas.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p08-additional-townsfolk-enemies-building-blocks-biomes-source/vibrant-chibi-townsfolk-sprite-atlas.png",
+   "sha256": "9edbdb954ce9e146e0c808e76a2d6ef5503708efc0dc0d57c5a0beab05b9da52"
+  },
+  {
+   "kind": "folder",
    "id": "11Wli0oy1WAtgIHT4ZUPX5Nprs0nM3RBD",
    "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/Quiet pixel-art environment studies — reduced visual noise"
   },
@@ -1339,6 +1454,25 @@
   },
   {
    "kind": "folder",
+   "id": "1hZmcVkUTPlGZAnw74baDEVCNVSo-Y-4k",
+   "drive_path": "/03 Visual Direction and Assets/P03 Canon Hero Extraction — Partial"
+  },
+  {
+   "kind": "file",
+   "id": "185sart4aSJmoVq2ZHEhjLV7t8ypa04lK",
+   "drive_path": "/03 Visual Direction and Assets/P03 Canon Hero Extraction — Partial/Canon_Hero_18_Poses_PARTIAL_v01.zip",
+   "repo_path": "03-visual-direction-and-assets/p03-canon-hero-extraction-partial/canon-hero-18-poses-partial-v01/",
+   "sha256": "bcc1fed6e7dd82dab9be3b677f031bc18dc24016006721b442e2ee70f478c586"
+  },
+  {
+   "kind": "file",
+   "id": "1RU3plFJKyXEkj1rH0C7gsLvQZgMVUM1W",
+   "drive_path": "/03 Visual Direction and Assets/P03 Canon Hero Extraction — Partial/Canon_Hero_18_Poses_QA_preview.png",
+   "repo_path": "03-visual-direction-and-assets/p03-canon-hero-extraction-partial/canon-hero-18-poses-qa-preview.png",
+   "sha256": "a7364b5f3a5a1ab81fb9dd211a021c9057314e2a2af59d0c7342c466c0f0cb92"
+  },
+  {
+   "kind": "folder",
    "id": "1BSIak5-a3FUlsJ6RW7mqrGLobOB53Erl",
    "drive_path": "/03 Visual Direction and Assets/Superseded Style Explorations"
   },
@@ -1514,14 +1648,14 @@
    "id": "1velYJklnMai16cH12kYu-BIlyhx_p-6NlSpO41vfuKw",
    "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/01 REQUESTS — Claude to ChatGPT/REQ — C02-02/C02-03 REVISION — More expressive heroes with real animation",
    "repo_path": "06-asset-collaboration-claude-chatgpt/01-requests-claude-to-chatgpt/req-c02-02-c02-03-revision-more-expressive-heroes-with-real-animation.md",
-   "sha256": "fa53ad6931ae19009741d8581192b4ddc852699f83d33979c4d239f3af7c9cfe"
+   "sha256": "fa25f877f800ac169691e697c566e29616a41ae764996dd3fda3933f0d63dda1"
   },
   {
    "kind": "doc",
    "id": "1fNd5TuX7J6ANSNDyUqPXZlo-2wu35OPzvkgFxLhfnA4",
    "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/01 REQUESTS — Claude to ChatGPT/REQ — C02-04 + N03-05/N03-06 — Third hero (flyer), the king and the villain; plus priority order for everything pending",
    "repo_path": "06-asset-collaboration-claude-chatgpt/01-requests-claude-to-chatgpt/req-c02-04-n03-05-n03-06-third-hero-flyer-the-king-and-the-villain-plus-priority-order-for-everything-pending.md",
-   "sha256": "b6110b0b9df585c0af1c9a1967b8375f429c72cccef8a4f21dc53935ad74f15e"
+   "sha256": "cce48af82c2a2027b8c960d5ae61313f9820a0ce9c8493be81f63bbf73052aa5"
   },
   {
    "kind": "doc",
@@ -1573,7 +1707,7 @@
    "id": "1oBpJKI2P7v7rwoMku-TbcFuVQe2iajddK6v2i5Ro0G0",
    "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/00 START HERE — Claude ↔ ChatGPT Asset Request Protocol",
    "repo_path": "06-asset-collaboration-claude-chatgpt/00-start-here-claude-chatgpt-asset-request-protocol.md",
-   "sha256": "b57522007100089371b29ee0d9227fdf6b725e8e155bc15a0cde5168047bd53e"
+   "sha256": "ff5583b105be78acb99a1fc59badf26135c0bbf7d48d984bf8f03256345705b4"
   },
   {
    "kind": "doc",
@@ -1598,10 +1732,17 @@
   },
   {
    "kind": "doc",
+   "id": "16-SUnXVRVz9Yu-ySxdD8FrdsFgz6POt-5BI4cyEk5Tc",
+   "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/LATEST ART DROP — P07 and P08 Townsfolk, Enemies and Biomes (Claude Read First)",
+   "repo_path": "06-asset-collaboration-claude-chatgpt/latest-art-drop-p07-and-p08-townsfolk-enemies-and-biomes-claude-read-first.md",
+   "sha256": "7dce2aa8e1590aac7ccc47dc94558a168f656302934c6ea7aed94dafe5738eb8"
+  },
+  {
+   "kind": "doc",
    "id": "1-ASnTbCLAXSi_WCOl_7KNuUgelLXLmiZFKiN6APao2s",
    "drive_path": "/00 START HERE — Irreverents",
    "repo_path": "00-start-here-irreverents.md",
-   "sha256": "1250afe41b7d66f5ac86df16186239fe0b95ee868bedaa2875f5140f30bf86e1"
+   "sha256": "6fb2935d412c88ba011052002e349bdf7fd223e709a63811e5338dcd0ca6c62b"
   },
   {
    "kind": "doc",
@@ -1622,14 +1763,14 @@
    "id": "1bnr7GUgrYBVVY0BMkwx4qRPvW45Nk4grn-Tk6THcoY8",
    "drive_path": "/ASSET LIBRARY — START HERE (Claude)",
    "repo_path": "asset-library-start-here-claude.md",
-   "sha256": "cf83b4663126ea1ffd48a19413aaad64be7850d67f1e52c6df222442104ff8c9"
+   "sha256": "8fdc5c0de1605974d0825d92032ea296607c4cc3d9aa29fdbdc909367adcb179"
   },
   {
    "kind": "doc",
    "id": "17R7aKkqDxQwRk-cmywQbvQ_CcEzz4UqHz37YYYRnADs",
    "drive_path": "/changelog",
    "repo_path": "changelog.md",
-   "sha256": "47069c79edfbef1ee7bc2274784c8695c5ce740c1de6cd485e052c42ea374edc"
+   "sha256": "4cbaa6e5faf3cb3b92145c0223493a66c03449e0c21a7057a22d4590a4e05c84"
   },
   {
    "kind": "file",

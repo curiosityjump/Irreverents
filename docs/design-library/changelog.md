@@ -2,6 +2,24 @@
 
 ---
 
+2026-11-23 · 11:30 AM EST — P07 AND P08 ADDITIONAL ART SOURCE BATCHES UPLOADED
+
+Uploaded/verified all nine original RGBA source sheets (5 P07: NPCs, enemies, interactables, terrain, HUD; 4 P08: townspeople, enemies, town/castle building blocks, ice/lava/ruins/dungeon) plus complete ZIPs, manifests and Claude READMEs in the correct Visual Direction and Assets / Current Pixel-Art Explorations folders. Files remain source-art/prototyping plates, NOT validated native seamless 16px tile or engine sprite frame atlases. Linked into root catalog and updated relevant production backlog work IDs; existing game-ready requests remain open.
+
+P07 https://drive.google.com/drive/folders/1PQO3UB9JbT8R5LPs6u66Nzz1JHgAHXB-
+
+P08 https://drive.google.com/drive/folders/1e1RmSNHr-VzCkSAVOJEbW8E9URTkrhsD
+
+Claude handoff with direct file links https://docs.google.com/document/d/16-SUnXVRVz9Yu-ySxdD8FrdsFgz6POt-5BI4cyEk5Tc/edit
+
+Art catalog https://docs.google.com/document/d/1bnr7GUgrYBVVY0BMkwx4qRPvW45Nk4grn-Tk6THcoY8/edit
+
+Production Board https://docs.google.com/spreadsheets/d/1rzixv5r4QWs7PKLYJ0e_sreLy0LjTdgua8uXKeTJpSE/edit
+
+2026-11-23 · 11:29 AM EST — CANON HERO EXTRACTION PARTIAL
+
+From exact owner-locked P03 image, extracted 18 clean separate 48×48 RGBA source-derived poses (six each for three canonical heroes), manifest and preview. Verified Drive uploads; deliberately excluded poorly segmented later columns. NOT completed HRO/C02 animation, not 32px, not integrated; P01 remains fallback. ZIP https://drive.google.com/file/d/185sart4aSJmoVq2ZHEhjLV7t8ypa04lK/view ; preview https://drive.google.com/file/d/1RU3plFJKyXEkj1rH0C7gsLvQZgMVUM1W/view ; folder https://drive.google.com/drive/folders/1hZmcVkUTPlGZAnw74baDEVCNVSo-Y-4k ; catalog https://docs.google.com/document/d/1bnr7GUgrYBVVY0BMkwx4qRPvW45Nk4grn-Tk6THcoY8/edit
+
 2026-11-23 · Morning EST · Owner CONFIRMED existing P03 three playable hero identities as CANON; rejected redesigned P06-style protagonists.
 
 Owner supplied the exact existing three-row pixel sheet and instructed “We already have the playable characters. Remember these.” TOP goggle/red-scarf compact hero (grappler role), MIDDLE green-hood rogue/infiltrator, BOTTOM pink winged aviator/flyer. Preserve exact character face/body/costume proportions when building new animations and expressions. Do NOT create alternate bulky red-haired humanoid, purple-haired ninja or blonde human flyer variants as replacements. Created new controlling document 36 under Visual Direction and Assets, inserted it prominently at the top of 00 START HERE, Asset Library, Production SOP, facial guide, C02 revision request, and Claude's handoff. Updated HRO-001..005 next production steps and source links in the 107-package Master Board. Updated the ACTIVE hourly asset desk prompt to read this canon before any hero work. The original P03 hero source remains a VISUAL SOURCE, not automatically cleaned native frames; related fulfillment remains open until technically validated.

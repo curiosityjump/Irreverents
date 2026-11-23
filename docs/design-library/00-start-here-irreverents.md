@@ -2,6 +2,14 @@
 
 ---
 
+LATEST ART UPLOAD 2026-11-23 — P07/P08 FILES READY TO FIND
+
+P07 (five sheets: NPCs, enemies, mechanisms, terrain, HUD) https://drive.google.com/drive/folders/1PQO3UB9JbT8R5LPs6u66Nzz1JHgAHXB-
+
+P08 (four sheets: more townspeople, enemies, town/castle construction, ice/lava/ruins/dungeon blocks) https://drive.google.com/drive/folders/1e1RmSNHr-VzCkSAVOJEbW8E9URTkrhsD
+
+Open Claude's exact direct file links and manifests here: https://docs.google.com/document/d/16-SUnXVRVz9Yu-ySxdD8FrdsFgz6POt-5BI4cyEk5Tc/edit . Both source batches are uploaded, allowed for immediate iteration, not yet fully verified native animation/tile grids. The three playable heroes remain owner-locked to P03. Team uses master board + root Asset Library; production QA and changelog required for completed individual sprites.
+
 CANONICAL PLAYABLE CHARACTERS — OWNER CONFIRMED (2026-11-23)
 
 THE THREE LEAD HERO DESIGNS ALREADY EXIST. DO NOT REDESIGN. Open the ACTUAL three-row P03 sprite reference now: https://drive.google.com/file/d/17Ulupi-WbcsqVWqS5m-bz1TmIjzx6VcM/view . Exact visual identities: TOP goggles/red scarf compact adventurer (grappler role), MIDDLE green hood/red scarf agile rogue (infiltrator role), BOTTOM pink aviator/goggles/white wings/yellow scarf (flyer role). Preserve their tiny rounded proportions, pixel treatment, identity and expressive faces in every new animation/ability state. Any recent new red-haired/bulky humanoid grappler, purple-haired anime ninja, blonde human/fairy flyer or glossy presentation board is OFF-STYLE/REJECTED as their replacement. Those variants may not become source-of-truth. Technical extraction/animation is still unfinished; only create CLEAN NATIVE FRAMES OF THESE THREE, not new character concepts. AUTHORITATIVE OWNER-LOCKED CHARACTER GUIDE: https://docs.google.com/document/d/1p_kXnoB_9gClFaR47U6-ige5I-9hs1Ta9s-thwSwF9g/edit

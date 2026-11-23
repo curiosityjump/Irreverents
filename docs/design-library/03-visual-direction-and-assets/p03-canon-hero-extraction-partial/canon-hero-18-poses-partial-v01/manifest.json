@@ -1,0 +1,252 @@
+{
+  "status": "PARTIAL: 18 clean source-derived poses; 48x48 RGBA; no native run cycles",
+  "canonical_source": "https://drive.google.com/file/d/17Ulupi-WbcsqVWqS5m-bz1TmIjzx6VcM/view",
+  "roles": [
+    "grappler",
+    "infiltrator",
+    "flyer"
+  ],
+  "frames": {
+    "grappler": [
+      {
+        "file": "grappler_00.png",
+        "source_column": 0,
+        "size": [
+          48,
+          48
+        ],
+        "pivot": [
+          24,
+          46
+        ],
+        "alpha": true
+      },
+      {
+        "file": "grappler_01.png",
+        "source_column": 1,
+        "size": [
+          48,
+          48
+        ],
+        "pivot": [
+          24,
+          46
+        ],
+        "alpha": true
+      },
+      {
+        "file": "grappler_02.png",
+        "source_column": 2,
+        "size": [
+          48,
+          48
+        ],
+        "pivot": [
+          24,
+          46
+        ],
+        "alpha": true
+      },
+      {
+        "file": "grappler_03.png",
+        "source_column": 3,
+        "size": [
+          48,
+          48
+        ],
+        "pivot": [
+          24,
+          46
+        ],
+        "alpha": true
+      },
+      {
+        "file": "grappler_04.png",
+        "source_column": 4,
+        "size": [
+          48,
+          48
+        ],
+        "pivot": [
+          24,
+          46
+        ],
+        "alpha": true
+      },
+      {
+        "file": "grappler_05.png",
+        "source_column": 5,
+        "size": [
+          48,
+          48
+        ],
+        "pivot": [
+          24,
+          46
+        ],
+        "alpha": true
+      }
+    ],
+    "infiltrator": [
+      {
+        "file": "infiltrator_00.png",
+        "source_column": 0,
+        "size": [
+          48,
+          48
+        ],
+        "pivot": [
+          24,
+          46
+        ],
+        "alpha": true
+      },
+      {
+        "file": "infiltrator_01.png",
+        "source_column": 1,
+        "size": [
+          48,
+          48
+        ],
+        "pivot": [
+          24,
+          46
+        ],
+        "alpha": true
+      },
+      {
+        "file": "infiltrator_02.png",
+        "source_column": 2,
+        "size": [
+          48,
+          48
+        ],
+        "pivot": [
+          24,
+          46
+        ],
+        "alpha": true
+      },
+      {
+        "file": "infiltrator_03.png",
+        "source_column": 3,
+        "size": [
+          48,
+          48
+        ],
+        "pivot": [
+          24,
+          46
+        ],
+        "alpha": true
+      },
+      {
+        "file": "infiltrator_04.png",
+        "source_column": 4,
+        "size": [
+          48,
+          48
+        ],
+        "pivot": [
+          24,
+          46
+        ],
+        "alpha": true
+      },
+      {
+        "file": "infiltrator_05.png",
+        "source_column": 5,
+        "size": [
+          48,
+          48
+        ],
+        "pivot": [
+          24,
+          46
+        ],
+        "alpha": true
+      }
+    ],
+    "flyer": [
+      {
+        "file": "flyer_00.png",
+        "source_column": 0,
+        "size": [
+          48,
+          48
+        ],
+        "pivot": [
+          24,
+          46
+        ],
+        "alpha": true
+      },
+      {
+        "file": "flyer_01.png",
+        "source_column": 1,
+        "size": [
+          48,
+          48
+        ],
+        "pivot": [
+          24,
+          46
+        ],
+        "alpha": true
+      },
+      {
+        "file": "flyer_02.png",
+        "source_column": 2,
+        "size": [
+          48,
+          48
+        ],
+        "pivot": [
+          24,
+          46
+        ],
+        "alpha": true
+      },
+      {
+        "file": "flyer_03.png",
+        "source_column": 3,
+        "size": [
+          48,
+          48
+        ],
+        "pivot": [
+          24,
+          46
+        ],
+        "alpha": true
+      },
+      {
+        "file": "flyer_04.png",
+        "source_column": 4,
+        "size": [
+          48,
+          48
+        ],
+        "pivot": [
+          24,
+          46
+        ],
+        "alpha": true
+      },
+      {
+        "file": "flyer_05.png",
+        "source_column": 5,
+        "size": [
+          48,
+          48
+        ],
+        "pivot": [
+          24,
+          46
+        ],
+        "alpha": true
+      }
+    ]
+  },
+  "notes": "18 individually separated transparent frames, exact owner canon. Cropped to six reliable source poses per hero; later poses omitted due to overlap and extraction QA failure. NOT a completed C02 animation deliverable."
+}

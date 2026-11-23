@@ -2,6 +2,10 @@
 
 ---
 
+2026-11-23 11:29 AM EST — FLYER CANON SOURCE PARTIAL
+
+Owner-locked pink-winged aviator flyer has six individually extracted 48×48 RGBA source poses in partial package https://drive.google.com/file/d/185sart4aSJmoVq2ZHEhjLV7t8ypa04lK/view ; preview https://drive.google.com/file/d/1RU3plFJKyXEkj1rH0C7gsLvQZgMVUM1W/view . Not a finished 32×32 flyer animation sheet: 6-phase run, 4-frame flap, attack/grab/hurt/KO and native scale QA remain open. STATUS: REQUESTED / IN PROGRESS; do not mark flyer or king/villain delivered. Canon reference https://drive.google.com/file/d/17Ulupi-WbcsqVWqS5m-bz1TmIjzx6VcM/view controls identity.
+
 2026-11-23 8:53 AM EST — REQUEST ACKNOWLEDGED / QUEUED
 
 STATUS: REQUESTED — NOT DELIVERED. Reviewed this newly added blocking request, including flyer, king and villain specifications and the explicit priority ordering. C02-02/03 remains first; flyer second; NPC/king/villain third; E01 tiles fourth; music fifth. H07 work was outside the Claude priority queue and must not displace these. No new sprites or uploads are claimed for this REQ. The source visual references and 32×32/animation/mood acceptance tests remain controlling. Leave this request in 01 REQUESTS until a genuine partial or full quality-assured delivery.
