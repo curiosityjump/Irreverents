@@ -12,6 +12,7 @@ import { applyChange, applyTuningDiff } from '../sim/tuning-rules.ts';
 import type { TuningChange } from '../sim/tuning-rules.ts';
 import { clone, looksLikeEntity, playerEntityId } from './protocol.ts';
 import type { ClientMessage, ServerMessage } from './protocol.ts';
+import { createPredictor } from './predict.ts';
 import { createSmoother } from './smooth.ts';
 
 /** A socket, as little of one as this needs; the host supplies it (a browser WebSocket, or `ws` in Node). */
@@ -64,6 +65,8 @@ export function createNetClient(opts: NetClientOptions) {
   const me = (): Entity => world.entities.find((e) => e.id === myId)!;
 
   const smoother = createSmoother(net);
+  // Step 5: this page's own hits drawn at once on what they strike (src/net/predict.ts).
+  const predictor = createPredictor(content, myId);
   let transport: Transport | null = null;
   let token = 0;
   let open = false;
@@ -88,7 +91,7 @@ export function createNetClient(opts: NetClientOptions) {
   let lastFx = 0;
   /** What was held on each local tick since the last report. */
   let ticked: Input[] = [];
-  const stats = { connects: 0, rttMs: null as number | null, msgsIn: 0, bytesIn: 0, msgsOut: 0, bytesOut: 0, effects: 0, tunesOut: 0, tuningsIn: 0 };
+  const stats = { /** Step 5: hits this page predicted, then seen from the server, or eased back unseen (src/net/predict.ts). */ hits: predictor.counts, connects: 0, rttMs: null as number | null, msgsIn: 0, bytesIn: 0, msgsOut: 0, bytesOut: 0, effects: 0, tunesOut: 0, tuningsIn: 0 };
   // INTENT (Step 2, ?tune): the world's tuning numbers are the server's, and
   // this page plays by them: `tuning` messages are laid over the shipped
   // numbers IN PLACE in `content.tuning`, the very object this page's step
@@ -167,6 +170,7 @@ export function createNetClient(opts: NetClientOptions) {
       // impact) reads about right on every screen. DRAFT: about, not exactly.
       if (typeof m.tick === 'number' && Math.abs(world.tick - m.tick) > 20) world.tick = m.tick;
       smoother.clear();
+      predictor.clear();
       // A server that restarted has forgotten every dial; if this world is
       // still tuned, its `tuning` follows this message.
       applyTuningDiff(content.tuning, shipped, {});
@@ -277,8 +281,14 @@ export function createNetClient(opts: NetClientOptions) {
         if (input.x !== 0 || input.y !== 0 || input.held.length) played = true;
         // A held character is not simulated here (see 'snap' above); offline, nothing can be holding it.
         if (heldBy(me()) && status !== 'online') applyEffect(me(), { kind: 'release' });
-        if (!heldBy(me())) events.push(...step(world, { [player]: input }, content));
-        else world.tick++;
+        if (!heldBy(me())) {
+          events.push(...step(world, { [player]: input }, content));
+          predictor.afterStep(world, me(), input, () => smoother.view(t), t, () =>
+            // Where the server will have each body when this swing reaches it: a round trip, a report's wait, and
+            // DRAFT: a snapshot's wait more, measured short by about that (the server works through queued inputs).
+            smoother.ahead(t, (stats.rttMs ?? 100) + 1000 / net.reportRate + 1000 / net.snapshotRate),
+          );
+        } else world.tick++;
         ticked.push(input);
         if (ticked.length > 12) ticked.shift();
         owed -= DT;
@@ -305,8 +315,11 @@ export function createNetClient(opts: NetClientOptions) {
     },
     /** Everything in the world that is not this player's character, as it should be drawn now. */
     others(): Entity[] {
-      return smoother.view(now());
+      const t = now();
+      return predictor.view(smoother.view(t), t);
     },
+    /** Step 5 (for checks): how many bodies this page is drawing from its own prediction right now. */
+    lent: (): number => predictor.lent(),
     /** Drop the socket (if any) and try again at once: the page became visible, the network changed. */
     kick(): void {
       if (gone) return;

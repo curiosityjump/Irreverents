@@ -62,7 +62,10 @@ export function drawEntities(g: CanvasRenderingContext2D, world: World, content:
   const mine = view ? world.entities.find((e) => e.id === view.me) : undefined;
   if (mine && mine.room === roomId) {
     remember(world, mine);
-    predictHits(world, content, mine, swingWasThrow(mine));
+    // Step 5 (docs/mechanisms/network.md, "Predicted hits"): with the net layer's prediction on, the
+    // struck body itself carries the hit's stamps, so this cosmetic star stands down (it aimed at bodies
+    // 100 ms old and could star one the server never hit). DRAFT: kept as the look when predictHitMs is 0.
+    if (content.net.predictHitMs <= 0) predictHits(world, content, mine, swingWasThrow(mine));
   }
   const dotOf = (e: Entity): string | null => (e.c.net ? content.net.playerColors[e.c.net.slot % content.net.playerColors.length]! : null);
   // What was drawn, recorded first and in the world's order, from the simulation's positions,

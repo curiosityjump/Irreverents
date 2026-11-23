@@ -114,8 +114,12 @@ function startStrike(ctx: StepContext, e: Entity, input: Input, t: Record<string
   strikeTick(ctx, e, input, t);
 }
 
-/** One tick of the strike: hits every body in reach that this swing has not hit yet. */
-function strikeTick(ctx: StepContext, e: Entity, input: Input, t: Record<string, number>): void {
+/**
+ * One tick of the strike: hits every body in reach that this swing has not hit yet.
+ * Exported (Step 5, "Predicted hits", docs/mechanisms/network.md) so a page can run
+ * this very test on the bodies it draws; the simulation calls it only from here.
+ */
+export function strikeTick(ctx: StepContext, e: Entity, input: Input, t: Record<string, number>): void {
   const a = e.c.attack!;
   const struck = (a.struck ??= []);
   const box = ctx.content.characters[e.kind]?.box;
