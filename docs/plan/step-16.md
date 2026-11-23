@@ -483,7 +483,7 @@ List these; don't grade them.
 
 ## Briefs
 
-- Slice 1, the rooms and their secrets (signals 1–3 and 7's first half): `handoff-prompts/step-16-a-quarry-rooms.md`, hard stop 16:45 UTC.
+- Slice 1, the rooms and their secrets (signals 1–3 and 7's first half): `handoff-prompts/step-16-a-quarry-rooms.md`, hard stop 16:45 UTC; worker `session_017WiGzFnkhyrpJqJ6xa9vTr` (launched 15:11 UTC).
 
 ## Open with the owner
 
