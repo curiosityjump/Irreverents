@@ -233,13 +233,34 @@ member only.
 
 ## Briefs
 
-- **Slice A** (`handoff-prompts/step-3-a-rooms-and-doors.md`): the room
-  format, doors for anybody, the first two rooms, the camera, the
-  way-out validator, the start room. Running from 04:35 UTC.
-- **Slice B** (not yet written; from A's first push): the other three
-  rooms, plates and the gate, the breakable and false walls, hiding
-  places, both routes, the secret. Needs Step 2's characters and thrown
-  objects for signals 3 and 5's solo half.
+- **Slice A** (`handoff-prompts/step-3-a-rooms-and-doors.md`, worker
+  `session_017WiGzFewfghZxs2P5YqJss`). Push 1 landed 04:47 UTC
+  (`9a4f6a8`) and was re-run by the lead at `3e23a69`: build, check and
+  gates green; `step3-guard-follows` watched to fail with doors made to
+  skip non-players. Two rooms, both kinds of door, `changed-room`,
+  run-time tiles, `doorToward`, 7 broken-room controls. Not verified by
+  the lead: the other eight controls the commit lists. Push 2 (the
+  way-out validator, door drawing, start room) is running. Format and
+  rules: `docs/mechanisms/rooms-and-doors.md`.
+- **Slice B** (`handoff-prompts/step-3-b-kingdom-and-parts.md`,
+  launched 04:58 UTC): plate, gate, breakable wall, false wall, hiding
+  place; `undercroft`, `courtyard`, `hall-gallery`; both hidden routes;
+  the secret. Signals 2, 3 and 5.
+- **Not briefed yet:** the camera at room edges and on a room change
+  (after Step 1's lands, about 06:30 UTC); switching the stand-in
+  scenarios to Step 2's real throw.
+
+**Gate B today:** `npm run gates` prints "passing" on 4 scenarios
+(signals 1, 3b, 4). It is not gate B until signals 2, 3 and 5 are on
+the line.
+
+**Routed from slice A's flags (04:58 UTC):** doors change a body
+directly and do not emit Step 1's `move` effect (a walk door keeps
+speed; a `move` arrives standing still): put to Step 1's lead.
+`boxInSolid` reads the room file, not run-time tiles: told Step 2's
+lead. Up is both stick-up and jump on a keyboard, so a doorway also
+fires `jumped`: told Step 1's lead. The street's out-of-sight stretch
+for Step 4 is building 2's upper room: told Step 4's lead.
 
 ## Open with the owner
 
