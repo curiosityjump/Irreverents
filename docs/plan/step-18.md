@@ -348,6 +348,7 @@ Steps that are not edited, but whose rules Step 18 must respect:
   `handoff-prompts/step-18-a-people-fight.md` (drafted 2026-11-23 ~17:05
   UTC at 1251555 for the orchestrator). Push 1 makes provoked good guys
   swing again. Push 2 makes the villain hit back.
+  **Reviewed 2026-11-23 19:25 UTC by orchestrator session_017WiGzJzo6aZqH4kYxxJsiV, by re-running at 9dd3561 (which holds 8c3a6e9): build ok, check ok, gates 5 of 6, e2e ok on the second run; the first e2e run at ab3ecb1 failed one fact I did not capture (the builder saw the Step 11 cantina facts flake twice: owed its own look). The diff was not read. Done; brief deleted. Open, from the builder's notes: the two-person way-out probe landed only one blow; `step11-chase-blink` was re-timed.**
 - **Slice B (not briefed; written only on the owner's word after playing,
   or on a measurement of a hero who cannot get away)**: no stun-lock in a
   corner or a crowd. It would add:
