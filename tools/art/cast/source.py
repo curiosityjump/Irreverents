@@ -67,13 +67,18 @@ def plate(key):
     return _cache[key]
 
 
-def nearest(c):
-    k = (c[0] >> 2, c[1] >> 2, c[2] >> 2)
+def nearest(c, drop=()):
+    """The palette colour nearest c; `drop` names ramps this cut may not use (the guard's
+    periwinkle helmet is blue, not purple)."""
+    k = (c[0] >> 2, c[1] >> 2, c[2] >> 2, drop)
     if k in _near:
         return _near[k]
     r, g, b = (k[0] << 2) + 2, (k[1] << 2) + 2, (k[2] << 2) + 2
     best, bd = None, None
+    banned = {q for name in drop for q in RAMP[name]}
     for p in PALETTE:
+        if p in banned:
+            continue
         rm = (r + p[0]) / 2
         d = (2 + rm / 256) * (r - p[0]) ** 2 + 4 * (g - p[1]) ** 2 + (2 + (255 - rm) / 256) * (b - p[2]) ** 2
         if bd is None or d < bd:
@@ -88,7 +93,7 @@ def _shadowish(c):
     return 40 <= r <= 95 and 40 <= g <= 85 and 85 <= b <= 140 and b - r >= 25 and b - g >= 30
 
 
-def cut(key, rect, scale, keep_islands=False, erase=(), shadow=True, minisle=0):
+def cut(key, rect, scale, keep_islands=False, erase=(), shadow=True, minisle=0, drop=()):
     """-> (image, (footx, footy)) for the plate `key`'s rectangle (x0, y0, x1, y1).
 
     erase: rectangles in plate coordinates whose pixels are dropped first
@@ -163,7 +168,7 @@ def cut(key, rect, scale, keep_islands=False, erase=(), shadow=True, minisle=0):
                     if not solid[sy][sx]:
                         empty += 1
                         continue
-                    p = nearest(col[sy][sx])
+                    p = nearest(col[sy][sx], drop)
                     votes[p] = votes.get(p, 0) + (1.45 if p == INK else 1.0)
             if not votes or empty > tot * 0.55:
                 continue

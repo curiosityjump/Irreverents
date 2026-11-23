@@ -35,6 +35,8 @@ def build_all():
     """-> {id: dict(cell, box, rows=[(name, [Frame])], fps_by)}"""
     out = {}
     for cid, spec in PEOPLE.items():
+        if cid in cut3.ROUND3:
+            continue  # round 3 cuts this one from the source sheets
         A = spec['anims']()
         rows = [(name, [spec['build'](p) for p in A[name]]) for name in PEOPLE_ROWS if name in A]
         out[cid] = dict(cell=spec['cell'], box=spec['box'], rows=rows, person=True)

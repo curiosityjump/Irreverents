@@ -63,14 +63,14 @@ def sheet(cid):
 
 
 def moods():
-    w = 48
-    out = Image.new('RGBA', (3 * 4 * w, 2 * w), BG)
+    w = 56
+    out = Image.new('RGBA', (3 * 4 * w, 2 * w), BG)  # the four town people
     for pi, cid in enumerate(PEOPLE):
         d, im, _ = load(cid)
         off = (w - d['cell']['w']) // 2
         for mi, m in enumerate(('1', '2', '3')):
             for si, st in enumerate(('idle', 'run')):
-                fr = d['frames'][st] if m == '1' else d['moods'][m][st]
+                fr = d['frames'][st] if m == '1' else d['moods'][m].get(st, d['frames'][st])
                 out.alpha_composite(cell(d, im, fr[0]), ((pi * 3 + mi) * w + off, si * w + (w - d['cell']['h'])))
     up(out).save(os.path.join(OUT, 'moods.png'))
 

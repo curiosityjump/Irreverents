@@ -3,8 +3,8 @@
 //   NODE_PATH=/opt/node-tools/node_modules node tools/art/cast/shots.mjs <base url> <tag> [room,room]
 //
 // Writes tools/art/cast/preview/shots/<tag>-<room>-<up|side>.png (git-ignored). Places the player the way
-// tools/art/tiles/shots.mjs does. `?mood=<id>:<n>` style overrides are not possible (the server owns moods), so
-// moods are judged from preview.py's scene and the guard shots in the real street.
+// tools/art/tiles/shots.mjs does. Moods cannot be forced from the page (setting a mood on the debug world does not
+// reach the drawn frame; tried 2026-11-23), so moods are judged from preview.py's moods.png.
 // DRAFT: a lane tool for judging the look, not a scripted check.
 import { createRequire } from 'node:module';
 import fs from 'node:fs';
@@ -20,7 +20,7 @@ const only = process.argv[4] ? process.argv[4].split(',') : null;
 const out = path.join(here, 'preview', 'shots');
 fs.mkdirSync(out, { recursive: true });
 
-const SPOTS = [['cantina', 12, 9], ['outpost', 24, 10], ['castle-street', 14, 10], ['throne-room', 11, 14]];
+const SPOTS = [['cantina', 12, 9], ['outpost', 24, 10], ['castle-street', 14, 10], ['castle-street', 36, 10], ['throne-room', 11, 14]];
 const PHONES = [
   { name: 'up', opts: { viewport: { width: 390, height: 664 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true } },
   { name: 'side', opts: { viewport: { width: 844, height: 390 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true }, inset: true },
@@ -48,7 +48,7 @@ for (const phone of PHONES) {
       me.vx = 0; me.vy = 0;
     }, [room, tx, ty]);
     await page.waitForTimeout(1500);
-    await page.screenshot({ path: path.join(out, `${tag}-${room}-${phone.name}.png`) });
+    await page.screenshot({ path: path.join(out, `${tag}-${room}${tx === 36 ? '-guard' : ''}-${phone.name}.png`) });
   }
   await ctx.close();
 }

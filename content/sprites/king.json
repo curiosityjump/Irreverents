@@ -1,24 +1,25 @@
 {
-  "//": "DRAFT: stand-in drawn by tools/art/cast/make.py; a delivered sheet replaces it by editing this file.",
+  "//": "DRAFT: stand-in cut from the art desk's source sheets by tools/art/cast/make.py (cut3.py, source.py); a delivered sheet replaces it by editing this file.",
   "id": "king",
   "image": "sprites/cast/king.png",
-  "cell": {"w": 48, "h": 48},
-  "anchor": {"x": 14, "y": 18},
+  "cell": {"w": 56, "h": 48},
+  "anchor": {"x": 18, "y": 18},
   "fps": 8,
   "frames": {
-    "idle": [0, 1, 2, 3, 4, 5, 6, 7],
+    "idle": [0, 1, 2, 3],
     "run": [8, 9, 10, 11, 12, 13],
     "air": [16, 17],
-    "hurt": [24, 25, 26],
-    "down": [32, 33],
-    "held": [40, 41, 42, 43],
-    "talk": [48, 49, 50, 51, 52, 53, 54, 55],
+    "attack": [24, 25, 26, 27],
+    "hurt": [32, 33, 34],
+    "down": [40, 41],
+    "held": [48, 49, 50, 51],
+    "talk": [56, 57, 58, 59, 60, 61, 62, 63],
     "jump": [16],
     "fall": [17]
   },
-  "fpsBy": {"idle": 6, "run": 12, "hurt": 10, "down": 2, "held": 10, "talk": 9, "air": 8},
+  "fpsBy": {"idle": 6, "run": 12, "attack": 14, "hurt": 10, "down": 2, "held": 10, "talk": 9, "air": 8},
   "moods": {
-    "2": {"idle": [56, 57, 58, 59, 60, 61, 62, 63], "run": [64, 65, 66, 67, 68, 69], "talk": [72, 73, 74, 75, 76, 77, 78, 79]},
-    "3": {"idle": [80, 81, 82, 83, 84, 85, 86, 87], "run": [88, 89, 90, 91, 92, 93], "talk": [96, 97, 98, 99, 100, 101, 102, 103]}
+    "2": {"idle": [64, 65, 66, 67], "run": [72, 73, 74, 75, 76, 77], "air": [80, 81], "attack": [88, 89, 90, 91], "hurt": [96, 97, 98], "held": [104, 105, 106, 107], "talk": [112, 113], "down": [40, 41]},
+    "3": {"idle": [120, 121, 122, 123], "run": [128, 129, 130, 131, 132, 133], "air": [136, 137], "attack": [144, 145, 146, 147], "hurt": [152, 153, 154], "held": [160, 161, 162, 163], "talk": [168, 169], "down": [40, 41]}
   }
 }

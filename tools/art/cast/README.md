@@ -119,6 +119,47 @@ does not sink into the undercroft.
   band recoloured to the red ramp (the costume unchanged), on the yell
   or ready pose for idle.
 
+### Round 3, push 2: the town's four re-cut from the plates
+
+`guard`, `king`, `shopkeeper`, `villain` are now cut from the source
+sheets too (`cut3.py`'s `guard()`, `king()`, `shopkeeper()`, `villain()`);
+`people.py`'s builders for them are no longer used by `make.py` (kept as
+the round-2 drawings, and the way back: drop the four from `cut3.ROUND3`).
+They join the heroes' round, big-headed family: head about half the
+height, faces 10-14 px wide.
+
+- `guard`: P03 town sheet row 2: blue helmet with a gold plume, the
+  crown shield, the spear. Scale 0.22, about 33 px; cell 56x48. Cut with
+  purple, stone and night barred from the palette (`drop`), so the
+  plate's periwinkle helmet comes out blue, not lilac. `attack` keeps the
+  spear: a wind-up, the thrust, then the swing (the bigger move, also
+  what a bell-ringing guard plays if the renderer uses `attack`). Knocked
+  out: the plate's own flat pose with `xx` eyes, then with its swirl.
+- `king`: P03 row 3: crown, white beard, ermine, red cape. Scale 0.215,
+  about 38 px (the crown over the box as before); cell 56x48. `talk` is
+  8 frames of the plate's talking, thumbs-up and laughing poses. P03 has
+  no knocked-out king, so `down` is **P07's** king lying on his front
+  with his crown on (that row's king has no beard; face down it does not
+  show).
+- `shopkeeper`: P03 row 1: headscarf, pink hair, apron. Scale 0.16,
+  about 28 px; cell 56x48. No walk poses on the plate: `run` is the idle
+  and cheer poses leaned and bobbing; mood-3 `run` is the plate's angry
+  charge.
+- `villain` (`DRAFT:`): P03 villain sheet row 1, the purple hooded
+  villain with the pink cape and skull clasp, his gold horns taken off
+  (`dehorn`) and round 2's tall top hat put on (`hat_image`, `tophat`):
+  about 46 px to the hat's top, cell 56x56. Knocked out: P07's robed
+  caster lying flat (the nearest purple-robed knocked-out pose on the
+  plates), horns off, with his hat on the ground beside him.
+- Moods, as for push 1: the plate's own worried pose (with its own sweat
+  drops) for mood-2 idle/talk; the plate's angry pose with a red face for
+  mood-3 idle/talk (the villain: his own poses, red-faced); a sweat drop
+  or a red face added to every other state's frames. Mood-3 frames exist
+  for `attack`, `hurt`, `air`, `held` (and `run`, `talk`). Nothing
+  rotates: knocked out is always a lying pose from a plate.
+- `moods.png` (preview) puts the four in moods 1, 2, 3, idle over run;
+  committed as `docs/plan/step-8-shots/round3/cast/moods-town-four.png`.
+
 New ids for the contract's cast list: `brawler`, `skirmisher`,
 `outpost-fighter`, `outpost-lookout`, `signal-post` (sprite files and
 `assets/sprites/cast/<id>.png`).
@@ -189,8 +230,19 @@ New ids for the contract's cast list: `brawler`, `skirmisher`,
 - (Round 3) `tumble` and the curled, kicking `held` wait for the actors
   lane's validator (`git log origin/main --grep 'round 3, actors'`, empty
   at this push); `held` is the hurt pose wiggling.
-- (Round 3) Step 16's `heavy-fighter` and `brute` are not on `main`
-  (`content/characters/` has neither), so they are not cut yet.
+- (Round 3) Step 16's `heavy-fighter` and `brute` landed on `main`
+  while this lane worked; they are not cut yet (the brief's item 3).
+- (Round 3) **The villain is the weakest again**: his face is small and
+  dark under the hood, so his mood-3 red face is the least visible of
+  the four; a few dark specks stay where the horns were; and his
+  knocked-out pose is borrowed from another plate's caster. The plain
+  horned hood (no hat) is the alternative (decisions log).
+- (Round 3) Moods could not be forced in the real game for a shot:
+  setting a mood on `window.irreverents.world` does not reach the drawn
+  frame. Moods are judged from the sheets (`moods-town-four.png`).
+- (Round 3) The street guard patrols columns 37-42 of `castle-street`,
+  so the brief's (14, 10) shows the shopkeeper and the villain, not him:
+  the shots add the player at column 36 (`*-castle-street-guard-*`).
 
 - (Round 2) The villain's `held` frames were not redrawn with legs kicking
   above the hands (the brief's "if time allows").
@@ -223,3 +275,12 @@ New ids for the contract's cast list: `brawler`, `skirmisher`,
 - Moods 2 and 3 in the running game (nobody was provoked); seen in
   `moods.png` and the mock scene.
 - The dummies in the running game (they stand in rooms not visited).
+
+## Not verified (round 3)
+
+- Push 2's first `npm run e2e` failed three facts of throwing a friend
+  (`t-throw-friend`, `s-throw-friend`, `s-after`); the control on `main`
+  without the change passed, and the same change passed on the rerun.
+  Read as a flaky fact, not this lane's (the sprites are other kinds').
+- `tumble` and the curled `held`: not drawn (the actors lane's validator
+  is not on `main`).

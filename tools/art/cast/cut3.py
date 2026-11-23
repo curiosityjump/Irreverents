@@ -113,11 +113,11 @@ def place(p, cw, ch):
 
 # ----------------------------------------------------------------- the five
 
-def _poses(key, scale, table):
+def _poses(key, scale, table, **common):
     out = {}
     for name, spec in table.items():
         rect = spec[0]
-        kw = spec[1] if len(spec) > 1 else {}
+        kw = dict(common, **(spec[1] if len(spec) > 1 else {}))
         im, foot = cut(key, rect, scale, **kw)
         out[name] = Pose(im, foot)
     return out
@@ -274,6 +274,233 @@ ROUND3 = {
     'outpost-lookout': outpost_lookout,
     'signal-post': signal_post,
 }
+
+
+# ----------------------------------------------------------------- the town's four (round 3, push 2)
+
+def hat_image():
+    """The villain's tall top hat (round 2's silhouette): purple, a red band, lit from the top-left."""
+    pu, re_ = RAMP['purple'], RAMP['red']
+    rows = [  # one string per row; . clear, k ink, 0-3 purple tones, r/R red band, w highlight
+        '...kkkkkkkkkkk...',
+        '...k3322221110k..',
+        '...k3222221110k..',
+        '...kw222221110k..',
+        '...kw222221100k..',
+        '...k3222221100k..',
+        '...k3222211100k..',
+        '...k3222211100k..',
+        '...kRRRRRrrrrrk..',
+        '...krrrrrrrrrrk..',
+        '.kkkkkkkkkkkkkkk.',
+        'k332222222111100k',
+        'kkkkkkkkkkkkkkkkk',
+    ]
+    w = max(len(r) for r in rows)
+    im = Image.new('RGBA', (w, len(rows)), (0, 0, 0, 0))
+    o = im.load()
+    pal = {'k': INK, '0': pu[0], '1': pu[1], '2': pu[2], '3': pu[3], 'w': pu[3], 'r': re_[1], 'R': re_[2]}
+    for y, r in enumerate(rows):
+        for x, ch in enumerate(r):
+            if ch in pal:
+                o[x, y] = pal[ch] + (255,)
+    return im
+
+
+def tophat(p, sink=3):
+    """The top hat set on the head, centred on the head's top."""
+    im = p.im
+    top = min(y for y in range(im.height) for x in range(im.width) if im.getpixel((x, y))[3])
+    row = [x for y in range(top, top + 6) for x in range(im.width) if im.getpixel((x, y))[3]]
+    cx = (min(row) + max(row) + 1) // 2
+    hat = hat_image()
+    pad = hat.height - sink
+    oy = max(0, pad - top)
+    hx = cx - hat.width // 2
+    ox = max(0, -hx)
+    out = Image.new('RGBA', (max(im.width, hx + hat.width) + ox, im.height + oy), (0, 0, 0, 0))
+    out.paste(im, (ox, oy))
+    out.alpha_composite(hat, (hx + ox, top + oy + sink - hat.height))
+    return Pose(out, (p.foot[0] + ox, p.foot[1] + oy), p.dy, p.dx)
+
+
+def dehorn(p, frac=0.4):
+    """Takes the hood's gold horns off (the top hat sits where they were)."""
+    from source import _ink
+    im = p.im.copy()
+    px = im.load()
+    gold = set(RAMP['gold']) | set(RAMP['orange']) | {hexc('e0a860'), hexc('b97a40')}
+    lim = int(im.height * frac)
+    gone = set()
+    for y in range(lim):
+        for x in range(im.width):
+            c = px[x, y]
+            if c[3] and c[:3] in gold:
+                px[x, y] = (0, 0, 0, 0)
+                gone.add((x, y))
+    for x, y in gone:
+        for dx in (-1, 0, 1):
+            for dy in (-1, 0, 1):
+                q = (x + dx, y + dy)
+                if 0 <= q[0] < im.width and 0 <= q[1] < im.height and px[q][3] and px[q][:3] == INK:
+                    px[q] = (0, 0, 0, 0)
+    # ink left floating where a horn was: drop ink with no coloured neighbour
+    for _ in range(2):
+        drop = [(x, y) for y in range(lim) for x in range(im.width) if px[x, y][3] and px[x, y][:3] == INK and not any(
+            0 <= x + dx < im.width and 0 <= y + dy < im.height and px[x + dx, y + dy][3] and px[x + dx, y + dy][:3] != INK
+            for dx in (-1, 0, 1) for dy in (-1, 0, 1))]
+        for x, y in drop:
+            px[x, y] = (0, 0, 0, 0)
+    from source import _clean
+    _clean(im)
+    _clean(im)
+    _ink(im)
+    return p.copy(im=im)
+
+
+def guard():
+    # P03 town sheet, row 2: helmet, plume, shield and spear.
+    P = _poses('town', 0.22, {
+        'i0': ((33, 353, 147, 512),),
+        'i1': ((172, 355, 285, 512),),
+        'alert': ((306, 368, 425, 512),),
+        'run': ((426, 368, 566, 512), {'erase': ((426, 470, 470, 512),)}),
+        'thrust': ((589, 368, 729, 512),),
+        'swing': ((725, 370, 875, 512), {'erase': ((830, 370, 880, 512),)}),
+        'calm': ((887, 356, 992, 512),),
+        'worry': ((1026, 368, 1125, 512),),
+        'worrys': ((990, 330, 1125, 512), {'keep_islands': True, 'minisle': 150}),
+        'angry': ((1158, 370, 1258, 512),),
+        'ko': ((1278, 425, 1432, 512),),
+        'kos': ((1278, 360, 1432, 512), {'keep_islands': True, 'minisle': 150}),
+    }, drop=('purple', 'stone', 'night'))
+    i0, i1, r = P['i0'], P['i1'], P['run']
+    S = {
+        'idle': [i0, i0, i1, i1, i0, breathe(i0), breathe(i0), i0],
+        'run': [r, lift(r), lean(i1, 2), lean(i1, 2), lift(r), r],
+        'air': [lift(P['alert'], 0), lean(P['alert'], -1)],
+        'attack': [lean(i1, -2), P['thrust'], P['swing'], P['swing']],
+        'hurt': [lean(P['worry'], -3), lean(P['worry'], -4), lean(P['worry'], -4)],
+        'down': [P['ko'], P['kos']],
+        'held': [lean(P['worry'], -2), lean(P['worry'], 2), lean(P['worry'], -2), lean(P['worry'], 2)],
+        'talk': [i0, P['calm'], i0, P['calm']],
+    }
+    M2 = {'idle': [P['worrys'], P['worrys'], breathe(P['worrys']), breathe(P['worrys'])],
+          'talk': [P['worrys'], P['alert']]}
+    M3 = {'idle': [flush(P['angry']), flush(P['angry']), breathe(flush(P['angry'])), breathe(flush(P['angry']))],
+          'talk': [flush(P['angry']), breathe(flush(P['angry']))]}
+    return dict(cell=(56, 48), box=(14, 28), S=S, M2=M2, M3=M3, head=0.75)
+
+
+def king():
+    # P03 town sheet, row 3: crown, white beard, ermine; knocked out from P07's king row.
+    P = _poses('town', 0.215, {
+        'idle': ((35, 580, 189, 765),),
+        'laugh': ((218, 598, 382, 765),),
+        'talk': ((406, 590, 564, 765),),
+        'thumb': ((572, 593, 715, 765), {'erase': ((690, 593, 720, 660),)}),
+        'side': ((744, 595, 888, 765),),
+        'walk': ((908, 595, 1039, 765),),
+        'worry': ((1059, 599, 1208, 765),),
+        'angry': ((1237, 601, 1402, 765),),
+    })
+    ko, f = cut('p07npc', (1279, 795, 1412, 870), 0.29)
+    P['ko'] = Pose(ko, f)
+    i, w, s = P['idle'], P['walk'], P['side']
+    S = {
+        'idle': [i, i, breathe(i), breathe(i)],
+        'run': [w, lift(w), s, s, lift(s), w],
+        'air': [lift(P['laugh'], 0), lean(P['worry'], -1)],
+        'attack': [lean(s, -2), lean(P['angry'], 2), lean(P['angry'], 2), s],
+        'hurt': [lean(P['worry'], -3), lean(P['worry'], -4), lean(P['worry'], -4)],
+        'down': [P['ko'], breathe(P['ko'], 0.4)],
+        'held': [lean(P['worry'], -2), lean(P['worry'], 2), lean(P['worry'], -2), lean(P['worry'], 2)],
+        'talk': [i, P['talk'], P['thumb'], P['talk'], i, P['laugh'], P['talk'], P['thumb']],
+    }
+    M2 = {'idle': [P['worry'], P['worry'], breathe(P['worry']), breathe(P['worry'])], 'talk': [P['worry'], breathe(P['worry'])]}
+    M3 = {'idle': [flush(P['angry']), flush(P['angry']), breathe(flush(P['angry'])), breathe(flush(P['angry']))],
+          'talk': [flush(P['angry']), breathe(flush(P['angry']))]}
+    return dict(cell=(56, 48), box=(20, 30), S=S, M2=M2, M3=M3, head=0.7)
+
+
+def shopkeeper():
+    # P03 town sheet, row 1: the headscarf townswoman.
+    P = _poses('town', 0.16, {
+        'idle': ((115, 98, 286, 280),),
+        'cheer': ((349, 110, 525, 280),),
+        'worry': ((602, 107, 773, 280),),
+        'worrys': ((590, 60, 773, 280), {'keep_islands': True, 'minisle': 150}),
+        'angry': ((880, 107, 1055, 280), {'erase': ((820, 200, 905, 280),)}),
+        'ko': ((1110, 172, 1318, 280),),
+        'kos': ((1110, 90, 1318, 280), {'keep_islands': True, 'minisle': 150}),
+    })
+    i, c, a = P['idle'], P['cheer'], P['angry']
+    S = {
+        'idle': [i, i, breathe(i), breathe(i)],
+        'run': [lean(i, 2), lift(lean(i, 2)), lean(c, 2), lean(c, 2), lift(lean(c, 2)), lean(i, 2)],
+        'air': [lift(c, 0), lean(P['worry'], -1)],
+        'attack': [lean(i, -2), a, a, i],
+        'hurt': [lean(P['worry'], -3), lean(P['worry'], -4), lean(P['worry'], -4)],
+        'down': [P['ko'], P['kos']],
+        'held': [lean(P['worry'], -2), lean(P['worry'], 2), lean(P['worry'], -2), lean(P['worry'], 2)],
+        'talk': [i, c, i, c],
+    }
+    M2 = {'idle': [P['worrys'], P['worrys'], breathe(P['worrys']), breathe(P['worrys'])], 'talk': [P['worrys'], breathe(P['worrys'])]}
+    M3 = {'idle': [flush(a), flush(a), breathe(flush(a)), breathe(flush(a))],
+          'run': [a, lift(a), lean(a, 1), lean(a, 1), lift(lean(a, 1)), a],
+          'talk': [flush(a), breathe(flush(a))]}
+    return dict(cell=(56, 48), box=(12, 24), S=S, M2=M2, M3=M3, head=0.75)
+
+
+def villain():
+    # DRAFT: P03 villain sheet, row 1 (the purple horned-hood villain: cape, colours, glowing eyes),
+    # horns taken off and round 2's tall top hat put on, so he keeps the silhouette that made him
+    # the tallest person in a room. The plain horned hood is the alternative: drop the tophat() and
+    # dehorn() calls in vil() below (docs/decisions-log.md).
+    raw = _poses('villains', 0.24, {
+        'i0': ((22, 151, 152, 290),),
+        'i1': ((189, 154, 303, 290),),
+        'w0': ((341, 155, 457, 290),),
+        'w1': ((478, 152, 631, 290),),
+        'cast': ((638, 155, 809, 290), {'erase': ((760, 155, 815, 290),)}),
+        'alert': ((818, 154, 950, 290),),
+        'hit': ((966, 167, 1116, 290), {'erase': ((1060, 167, 1120, 240),)}),
+        'worry': ((1131, 165, 1240, 290),),
+    })
+
+    def vil(p):
+        return tophat(dehorn(p))
+    P = {k: vil(v) for k, v in raw.items()}
+    i0, i1, w0, w1 = P['i0'], P['i1'], P['w0'], P['w1']
+    # knocked out: P07's robed caster lying flat (the nearest purple-robed KO on the plates), hat beside him
+    ko, f = cut('p07enemy', (1296, 965, 1429, 1040), 0.3)
+    ko = dehorn(Pose(ko, f), 0.7).im
+    hat = hat_image().transpose(Image.ROTATE_270)
+    base = Image.new('RGBA', (ko.width + hat.width + 1, max(ko.height, hat.height)), (0, 0, 0, 0))
+    base.alpha_composite(ko, (0, base.height - ko.height))
+    base.alpha_composite(hat, (ko.width + 1, base.height - hat.height))
+    down = Pose(base, (base.width / 2, base.height))
+    S = {
+        'idle': [i0, i0, i1, i1, i0, breathe(i0), breathe(i0), i0],
+        'run': [w0, lift(w0), w1, w1, lift(w1), w0],
+        'air': [lift(P['alert'], 0), lean(P['alert'], -1)],
+        'attack': [lean(w1, -2), P['cast'], P['cast'], i0],
+        'hurt': [lean(P['hit'], -2), P['hit'], P['hit']],
+        'down': [down, breathe(down, 0.4)],
+        'held': [P['hit'], lean(P['hit'], 2), P['hit'], lean(P['hit'], -2)],
+        'talk': [i0, P['cast'], i0, P['alert']],
+    }
+    M2 = {'idle': [P['worry'], P['worry'], breathe(P['worry']), breathe(P['worry'])], 'talk': [P['worry'], P['alert']]}
+    M3 = {}
+    return dict(cell=(56, 56), box=(14, 28), S=S, M2=M2, M3=M3, head=0.7)
+
+
+ROUND3.update({
+    'guard': guard,
+    'king': king,
+    'shopkeeper': shopkeeper,
+    'villain': villain,
+})
 
 PERSON_STATES = ['idle', 'run', 'air', 'attack', 'hurt', 'down', 'held', 'talk', 'grab', 'carry', 'carryRun', 'throw']
 MOOD_STATES = ['idle', 'run', 'air', 'attack', 'hurt', 'held', 'talk']

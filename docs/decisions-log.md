@@ -802,3 +802,17 @@ document as a decision of theirs.
 - **Why this way:** the owner (doc 31): the cantina is "NOT a shortcut for breaking line of sight". You stay barred for one second after a chasing guard last saw you; once the chase is really over, the door opens.
 - **To change it:** `chaseHold` (seconds) in `content/cantina/cantina.json`.
 - **Where:** `docs/mechanisms/cantina.md`, "The chase lock".
+
+### 2026-11-23 · The villain keeps his top hat on the source sheet's hooded villain
+- **Decided by:** Step 8 look round 3, lane "cast" (builder), for the orchestrator
+- **Instead of asking:** "The art desk's villain wears a horned hood; ours wore a tall top hat. Which?"
+- **Why this way:** the brief keeps him at least as tall as round 2 made him (about 44 px) with the top-hat silhouette that made him the tallest person in a room, and lends him P03's cape, colours and face. So he is P03's purple hooded villain, cut from the plate, with the gold horns taken off and the top hat on. Doc 36 does not lock the villain.
+- **To change it:** for the plain horned hood, return `p` instead of `tophat(dehorn(p))` in `vil()` inside `villain()` in `tools/art/cast/cut3.py` (and the cell can go back to 56x48), then `python3 -I tools/art/cast/make.py`. `DRAFT:`
+- **Where:** `tools/art/cast/cut3.py`, `villain()`.
+
+### 2026-11-23 · The king is knocked out face down, from the other king sheet
+- **Decided by:** Step 8 look round 3, lane "cast" (builder), for the orchestrator
+- **Instead of asking:** "P03's king has no knocked-out pose; what does he look like flattened?"
+- **Why this way:** the brief rules out a turned standing figure ("never a rotation"). P07's king row has one, lying on his front in his robe with his crown still on; face down, the missing beard does not show.
+- **To change it:** the `cut('p07npc', ...)` line in `king()` in `tools/art/cast/cut3.py`. `DRAFT:`
+- **Where:** `tools/art/cast/cut3.py`, `king()`.
