@@ -1,0 +1,14 @@
+{
+  "id": "step6-king-mid-speech",
+  "proves": "the king is already talking when a player arrives and keeps going with nobody pressing anything: he starts on a line after the first, and twenty seconds later is three lines on, saying something else",
+  "room": "throne-room",
+  "players": [{ "id": "a", "spawn": 0 }],
+  "placements": true,
+  "inputs": [],
+  "ticks": 1200,
+  "expect": [
+    { "fact": "speech", "entity": "king", "at": 0, "line": [4, 4] },
+    { "fact": "speech", "entity": "king", "at": 1200, "line": [7, 7], "differs-from-at": 0 },
+    { "fact": "in-room", "entity": "king", "at": 1200, "room": "throne-room" }
+  ]
+}

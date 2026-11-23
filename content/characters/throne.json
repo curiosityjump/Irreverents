@@ -1,0 +1,11 @@
+{
+  "//": "DRAFT: a graybox throne. A plain body, too heavy for anyone to lift.",
+  "id": "throne",
+  "name": "Throne",
+  "box": { "w": 24, "h": 32 },
+  "color": "#4a3728",
+  "verbs": [
+    "body"
+  ],
+  "tuning": "throne"
+}

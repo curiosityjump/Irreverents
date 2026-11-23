@@ -1,0 +1,13 @@
+{
+  "id": "step6-walk-out-during-speech",
+  "proves": "nothing waits on the speech: holding only the stick, a player walks east from a spawn and is in the castle street within three seconds while the king talks on",
+  "room": "throne-room",
+  "players": [{ "id": "a", "spawn": 3 }],
+  "placements": true,
+  "inputs": [{ "player": "a", "from": 0, "to": 180, "x": 1 }],
+  "ticks": 400,
+  "expect": [
+    { "fact": "in-room", "player": "a", "at": 180, "room": "castle-street" },
+    { "fact": "speech", "entity": "king", "at": 400, "line": [5, 5], "differs-from-at": 0 }
+  ]
+}

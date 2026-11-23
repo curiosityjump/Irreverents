@@ -1,0 +1,11 @@
+{
+  "//": "DRAFT: a graybox king. A plain body: anyone can hit him, only a strong character (the grappler) lifts him. His speech is content/audience/royal-audience.json; he is not a person (npc) yet, the court's reactions are Step 6's next slice.",
+  "id": "king",
+  "name": "King",
+  "box": { "w": 20, "h": 30 },
+  "color": "#8e44ad",
+  "verbs": [
+    "body"
+  ],
+  "tuning": "king"
+}

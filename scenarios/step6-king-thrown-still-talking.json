@@ -1,0 +1,130 @@
+{
+  "id": "step6-king-thrown-still-talking",
+  "proves": "the king keeps talking when he cannot act: a grappler lifts him off the dais, carries him for five seconds and throws him, and his speech moves to its next line while he is in the air and goes on after he lands",
+  "room": "throne-room",
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "placements": true,
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 40,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 0,
+      "to": 3,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 50,
+      "to": 53,
+      "hold": [
+        "grab"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 70,
+      "to": 74,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 350,
+      "to": 353,
+      "hold": [
+        "attack"
+      ]
+    }
+  ],
+  "ticks": 1200,
+  "expect": [
+    {
+      "fact": "event",
+      "event": "grabbed",
+      "between": [
+        50,
+        50
+      ],
+      "where": {
+        "target": "king"
+      }
+    },
+    {
+      "fact": "body-state",
+      "entity": "king",
+      "at": 340,
+      "is": [
+        "held"
+      ]
+    },
+    {
+      "fact": "speech",
+      "entity": "king",
+      "at": 340,
+      "line": [
+        4,
+        4
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "thrown",
+      "between": [
+        350,
+        350
+      ],
+      "where": {
+        "target": "king"
+      }
+    },
+    {
+      "fact": "body-state",
+      "entity": "king",
+      "at": 362,
+      "is": [
+        "flying"
+      ]
+    },
+    {
+      "fact": "speech",
+      "entity": "king",
+      "at": 362,
+      "line": [
+        5,
+        5
+      ],
+      "differs-from-at": 340
+    },
+    {
+      "fact": "body-state",
+      "entity": "king",
+      "at": 1200,
+      "not": [
+        "flying",
+        "held"
+      ]
+    },
+    {
+      "fact": "speech",
+      "entity": "king",
+      "at": 1200,
+      "line": [
+        7,
+        7
+      ],
+      "differs-from-at": 362
+    }
+  ]
+}

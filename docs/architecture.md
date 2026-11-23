@@ -213,6 +213,7 @@ extends from its own file with `declare module '../types.ts' { … }`
 | **kind of content** | `src/content/kinds/<kind>.ts` default-exporting a `ContentKind` (`source`, `parse`, optional cross-reference `check`) and extending `Content`. | One new file |
 | **kind of scenario fact** | `src/scenarios/facts/<id>.ts` default-exporting a `Fact`. | One new file |
 | **event** | Extend `EventMap` beside the code that emits it; `ctx.emit('name', {...})`. | In your own file |
+| **speech / an audience** (a body that talks on and on) | `content/audience/<id>.json`: `speaker` (a placed body's id), `startLine`, `opening` (lines said once), `lists` and `tail` (digressions that go round for ever). The check refuses a line that repeats within three hours or does not fit two rows of 28 letters. Format and slots: `docs/mechanisms/royal-audience.md`. | No |
 
 ## Rooms and doors: what other steps read (Step 3)
 
@@ -361,7 +362,7 @@ A step adds files freely in its own paths and avoids editing others'.
 | 3 | room data and format, its loader and validator, moving between rooms, the rooms' working parts, the camera, drawing tiles | `content/rooms/**`, `content/game.json`, `src/content/kinds/rooms.ts`, `src/content/kinds/game.ts`, `src/sim/systems/` files named `room-*`, `src/sim/systems/physics.ts`'s tile collision, `src/client/draw/room.ts` (tiles and camera) |
 | 4 | NPC response logic, roles and rule data, who is placed where, seeing and hiding, calling for help, the area alert | `content/npcs/**`, `content/placements/**`, `content/rules/**`, their kind files in `src/content/kinds/`, `src/sim/systems/` files named `npc-*`, `alert-*`; `src/sim/npc/**`; `src/client/draw/npcs.ts`; `content/actions/interact.json`; `content/rooms/test-shop.json`; the facts `mood` and `event-where` |
 | 5 (opens when Step 1 closes) | touch and keyboard input, on-screen controls, presence, joining and rejoining, the menu, the page shell | `src/client/**` except `draw/`, `src/server/**` |
-| 6 | the throne room's people and props, the speech text, the speech clock and credits | `content/audience/**` and its kind file, `src/sim/systems/` files named `audience-*`, a new `src/client/draw/audience.ts` |
+| 6 | the throne room's people and props, the speech text, the speech clock and credits | `content/audience/**` and its kind file, `src/content/speech.ts`, `src/sim/systems/` files named `audience-*`, a new `src/client/draw/audience.ts` |
 | 7 | the legend detector, Hall records and their display, the machine and the roadblock | `content/hall/**`, `content/machines/**` and their kind files, `src/sim/systems/` files named `hall-*`, `machine-*`, a new `src/client/draw/hall.ts` |
 | 8 (opens when Step 1 closes) | the game's asset list and assets, how things are drawn beyond plain shapes, mood marks, sound | `assets/**`, `content/atlases/**`, `content/sprites/**` and their kind files, sound files and the code that plays them, a new `src/client/draw/sprites.ts` |
 | everyone | their own checks | `scenarios/step<N>-*.json` (N is your plan step; Step 1's first three predate the rule), new files in `src/scenarios/facts/` |

@@ -38,7 +38,8 @@
     "breakFreeHop": 160,
     "friendAttackLaunch": 0,
     "friendAttackWear": 0,
-    "friendThrowWear": 0
+    "friendThrowWear": 0,
+    "speechLineTime": 6
   },
   "characters": {
     "shopkeeper": {
@@ -154,6 +155,16 @@
     "dummy-heavy": {
       "weight": 110,
       "toughness": 260
+    },
+    "king": {
+      "//": "DRAFT (Step 6): as the heavy dummy: anyone can hit him, only the grappler lifts him.",
+      "weight": 110,
+      "toughness": 260
+    },
+    "throne": {
+      "//": "DRAFT (Step 6): heavier than anyone can lift; it cannot be knocked out.",
+      "weight": 400,
+      "toughness": 0
     }
   }
 }

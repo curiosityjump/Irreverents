@@ -1,0 +1,12 @@
+{
+  "//": "DRAFT (Step 6): the king on the dais beside his throne, and a few things to throw, clear of the four spawn tiles (row 14, columns 9, 11, 13, 15) and of the east opening. No people (npc) yet: the court is Step 6's next slice. The king's speech is content/audience/royal-audience.json.",
+  "id": "throne-room",
+  "room": "throne-room",
+  "place": [
+    { "id": "king", "character": "king", "tile": [5, 13] },
+    { "id": "throne", "character": "throne", "tile": [4, 13] },
+    { "id": "throne-crate-1", "character": "crate", "tile": [12, 14] },
+    { "id": "throne-crate-2", "character": "crate-heavy", "tile": [10, 14] },
+    { "id": "throne-crate-3", "character": "crate", "tile": [15, 11] }
+  ]
+}

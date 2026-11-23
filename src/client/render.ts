@@ -1,5 +1,6 @@
 import type { Content } from '../content/types.ts';
 import type { World } from '../sim/types.ts';
+import { drawAudience } from './draw/audience.ts';
 import { drawEntities } from './draw/entities.ts';
 import { drawHall } from './draw/hall.ts';
 import { drawImpact } from './draw/impact.ts';
@@ -22,5 +23,6 @@ export function render(g: CanvasRenderingContext2D, world: World, content: Conte
   drawEntities(g, world, content, roomId, ox, oy);
   drawImpact(g, world, roomId, ox, oy);
   drawNpcs(g, world, content, roomId, ox, oy);
+  drawAudience(g, world, content, roomId, ox, oy);
   drawHall(g, world, content, roomId, ox, oy);
 }
