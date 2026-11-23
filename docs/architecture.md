@@ -255,6 +255,19 @@ extends from its own file with `declare module '../types.ts' { … }`
   null (same room, or no way). Step 5 draws from those two facts; nothing
   is drawn yet. A door's `hidden` flag is there too: a marker should not
   point at a hidden door.
+- **Working parts' events** (slice B; each `{ room, part }` names the
+  room id and the part's id in that room's file): `plate-down`,
+  `plate-up`, `gate-opened`, `gate-closed`, and `part-broken: { room,
+  part, by, player, speed, look }` when a breakable wall or window gives
+  way (`by`: the entity that went through it, or null; `player`: that
+  entity's player or null; `speed`: px/s, 0 when a system broke it;
+  `look`: `"wall"` or `"window"`). To break one from another system:
+  `breakPartAt(ctx, roomId, tx, ty, by?)` in `src/sim/room-parts.ts`.
+- **Hiding: `entity.c.roomHide = { in: "<part id>" }`.** Present exactly
+  while a body stands still on the ground inside a `hide` part's tiles
+  (the middle of its box), holding no action; gone the tick it moves or
+  acts. Step 3 only sets and clears it (`src/sim/systems/room-hide.ts`,
+  order 550). What being hidden does to being seen is Step 4's to read.
 - **Tiles that change while the game runs** are read with `tileAt(world,
   room, tx, ty)`, never `room.cells` directly, by anything that asks
   "is this solid *now*" (physics does). `room.cells` is the room file.

@@ -1,0 +1,66 @@
+{
+  "id": "step3-plates-open-gate",
+  "proves": "a player on one plate and a heavy crate resting on the other open the gate; the player walks through and the gate shuts behind them after its stay-open time",
+  "room": "test-parts",
+  "players": [
+    {
+      "id": "a",
+      "spawn": 1
+    }
+  ],
+  "entities": [
+    {
+      "id": "weight",
+      "character": "crate-heavy",
+      "tile": [
+        13,
+        7
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 30,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 60,
+      "to": 220,
+      "x": 1
+    }
+  ],
+  "ticks": 700,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "gate-opened",
+      "between": [
+        0,
+        60
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "where": {
+        "room": "test-parts",
+        "part": "gate"
+      }
+    },
+    {
+      "fact": "event-where",
+      "event": "gate-closed",
+      "between": [
+        0,
+        700
+      ],
+      "count": [
+        1,
+        1
+      ]
+    }
+  ]
+}

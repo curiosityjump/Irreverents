@@ -70,7 +70,7 @@ groups) whenever you add one — never update the number from memory.
 - `entity.c.npc` + `content/npcs/`, `content/rules/` + the `npc-*` systems — scripted people with exactly three moods who witness deeds and react by role/deed tables in data; never AI (Step 4).
 
 **Rooms and doors** (`docs/mechanisms/rooms-and-doors.md`)
-- `content/rooms/*.json` doors, areas and parts + `src/sim/systems/room-doors.ts` — rooms joined by walk and enter doors that carry any body, tiles that change while the game runs (`src/sim/room-state.ts`), working-part kinds declared by their system, and the checks and controls (`controls/rooms/`) that refuse a broken map (Step 3).
+- `content/rooms/*.json` doors, areas and parts + `src/sim/systems/room-doors.ts` — rooms joined by walk and enter doors that carry any body, tiles that change while the game runs (`src/sim/room-state.ts`), working-part kinds declared by their system (`plate`, `gate`, `breakable`, `false-wall`, `hide`: `src/sim/systems/room-<kind>.ts`, shared helpers in `src/sim/room-parts.ts`, drawn by `src/client/draw/room-parts.ts`), and the checks and controls (`controls/rooms/`) that refuse a broken map (Step 3).
 
 **Combat and impact** (`docs/mechanisms/combat-and-impact.md`)
 - `src/sim/body-state.ts` + verbs `attack`, `grab`, `body` + systems `combat-*`, `carry-*`, `impact-*` — hitting, picking up, carrying and throwing any body; flying bodies record wall and body impacts with a held beat; hidden toughness, flattened and back; a body that cannot act runs no verb (Step 2).

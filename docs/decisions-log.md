@@ -425,3 +425,24 @@ document as a decision of theirs.
 - **To change it:** start an orchestrator yourself whenever you like ("You are the orchestrator. Read CLAUDE.md first."); it picks up from the repository.
 - **Where:** `docs/for-the-orchestrator.md`, the handoff entry.
 
+### 2026-11-23 · The plate gate stays open six seconds after someone steps off a plate, and never shuts on anyone
+- **Decided by:** brief-worker, Step 3 slice B (brief by the Step 3 lead, `session_017WiGzGUAnvQfWco5vTcMX4`)
+- **Instead of asking:** "How long should a gate that two plates hold open stay open once a plate is let go?"
+- **Why this way:** six seconds is long enough for two friends to step off their plates and walk through together, and for one player whose crate is on the other plate to stroll through. If someone is standing in the gateway when the time runs out, the gate waits for them: your rule that there is always a way out.
+- **To change it:** one number, `gateStayOpenTime` in `content/tuning.json` (or `stayOpen` on one gate in its room file).
+- **Where:** `docs/mechanisms/rooms-and-doors.md`, "The kinds of part"; `src/sim/systems/room-gate.ts`.
+
+### 2026-11-23 · A cracked wall or a window breaks when something hits it at more than twice a hero's running speed
+- **Decided by:** brief-worker, Step 3 slice B
+- **Instead of asking:** "How hard must something hit a breakable wall to break it?"
+- **Why this way:** impact over numbers (D-020): the wall has no health, one hard arrival breaks it. At 200 a hero running into it (96) does nothing, and a thrown crate or a thrown friend goes straight through and keeps flying. It is drawn as a wall with a crack, your library's "suspicious cracked wall".
+- **To change it:** one number, `wallBreakSpeed` in `content/tuning.json` (or `breakSpeed` on one wall).
+- **Where:** `docs/mechanisms/rooms-and-doors.md`, "The kinds of part"; `src/sim/systems/room-breakable.ts`.
+
+### 2026-11-23 · A false wall looks exactly like the wall around it, and you can see your character walk in front of it
+- **Decided by:** brief-worker, Step 3 slice B
+- **Instead of asking:** "Should a hero inside a false wall be hidden by it or stay visible? Should the false wall look or sound any different?"
+- **Why this way:** nothing points at a hidden way, so the wall is identical to its neighbours. The hero stays visible in front of it so nobody loses track of their character on a phone; the surprise is walking into a wall and not stopping.
+- **To change it:** move one line in `src/client/render.ts` (draw the parts after the bodies) to make the wall swallow the hero.
+- **Where:** `src/client/draw/room-parts.ts`.
+

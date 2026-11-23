@@ -3,7 +3,8 @@
 **Reference.** Open before adding or changing a room, a door or a kind of
 working part, or touching `src/content/kinds/rooms.ts`,
 `src/sim/systems/room-doors.ts`, `src/sim/room-state.ts`,
-`src/sim/room-routes.ts`, `src/sim/check-rooms.ts`, the tile collision in
+`src/sim/room-routes.ts`, `src/sim/room-parts.ts`, a `src/sim/systems/room-<kind>.ts`,
+`src/client/draw/room-parts.ts`, `src/sim/check-rooms.ts`, the tile collision in
 `src/sim/systems/physics.ts`, or `controls/rooms/`. Built by Step 3
 slice A (2026-11-23); the plan step is `docs/plan/step-3.md`.
 
@@ -114,9 +115,28 @@ declares `parts: { "<kind>": { what, check? } }` and drives its parts in
 follows how tuning numbers are declared by their reader: no shared list
 to edit. `src/sim/check-rooms.ts` refuses a part whose kind no system
 declares, listing the known kinds, and runs the kind's own `check` on
-each placed part. No kind exists yet; slice B adds plates, gates and
-walls. Parts live in the room's own file, never in `content/objects/` or
-`content/placements/`.
+each placed part. Parts live in the room's own file, never in
+`content/objects/` or `content/placements/`. What the kinds share
+(finding the placed parts of a kind in a fixed order, "is a body in this
+part's tiles", breaking a breakable) is `src/sim/room-parts.ts`.
+
+### The kinds of part (Step 3 slice B)
+
+`INTENT:` no kind tests which character a body is, and none counts
+players (D-006, D-015): they read a body's box, speed and place. Each
+keeps its memory in `partState` and each draws itself
+(`src/client/draw/room-parts.ts`). `test-parts` is their check room.
+
+| Kind | What it does | `params` | Events | Order, and why |
+|---|---|---|---|---|
+| `plate` | A floor plate. Its tiles are the open tiles a body stands *in*, just above the floor. Down (`partState.down`) while any body, played or not, rests on the ground with its feet in them; a carried body does not count, its carrier does. | none | `plate-down`, `plate-up`: `{ room, part }` | 520: after physics (500), before gates |
+| `gate` | Solid while shut (`blocks: true`). Opens while **all** its plates are down; stays open for the stay-open time after one comes up. `INTENT:` it never shuts on a body standing in it: it waits (there is always a way out). | `plates`: ids of plates in the same room (required); `stayOpen`: seconds (default `world.gateStayOpenTime`, `DRAFT:` 6) | `gate-opened`, `gate-closed`: `{ room, part }` | 530: after the plates |
+| `breakable` | A wall, solid until a body is about to run into it sideways at or above the break speed; then its tiles are open for good and the body carries on through with its speed (`blocks: true`). No health: one hard arrival breaks it (D-020). Another system breaks one with `breakPartAt(ctx, roomId, tx, ty, by?)` (`src/sim/room-parts.ts`). | `breakSpeed`: px/s (default `world.wallBreakSpeed`, `DRAFT:` 200: a running hero at 96 does not, a thrown crate or friend does); `look`: `"wall"` (default; drawn as wall with a crack) or `"window"` (a paler pane in a frame), drawing only | `part-broken`: `{ room, part, by, player, speed, look }` (`by` the entity that broke it or null, `speed` 0 when a system broke it) | 460: physics zeroes a body's speed at a solid tile, so it looks at where the body is *about* to be, after `impact-before` (450) has slowed a flying body and before physics (500) |
+| `false-wall` | Drawn exactly as the wall around it, never solid. No behaviour, no event. `DRAFT:` identical to wall tonight; whether it should look or sound different is the owner's after playing. | none | none | (does nothing) |
+| `hide` | A place to hide. A body standing still on the ground with the middle of its box in its tiles, holding no action, carries `entity.c.roomHide = { in: "<part id>" }`; it is cleared the tick the body moves or acts. That is all: what hiding does to being seen is Step 4's. | none | none | 550: after physics |
+
+`DRAFT:` parts are drawn behind bodies, so a body inside a false wall
+shows in front of it (`docs/decisions-log.md`).
 
 ## What `npm run check` refuses
 
@@ -225,9 +245,15 @@ watched once; the commit that added them lists which.
 
 `src/client/draw/room.ts` draws an *enter* doorway as a dark arch and a
 *walk* door as nothing (it is the gap in the wall). `INTENT:` no arrows,
-no glow, no text on any door. It draws the room file's tiles; it does not
-yet draw tiles changed while the game runs (slice B's parts draw
-themselves).
+no glow, no text on any door. It draws the room file's tiles only. Every
+working part draws itself, from the world's run-time state, in
+`src/client/draw/room-parts.ts` (called from `render.ts` right after the
+room): a gate shut or drawn up, a wall cracked or gone, a plate up or
+down. `INTENT:` nothing there points either. A false wall and an unbroken
+cracked wall are painted with `draw/room.ts`'s own wall colours (keep the
+two files' `SOLID` and `SOLID_TOP` equal), and the lit top edge
+`drawRoom` gives the wall tile under them is painted out, or that edge
+would outline the secret.
 
 ## Limits, on purpose for now (`DRAFT:`)
 

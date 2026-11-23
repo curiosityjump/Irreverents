@@ -1,0 +1,61 @@
+{
+  "id": "step3-wall-breaks",
+  "proves": "a crate arriving at 300 px/s breaks the wall and carries on through; the tiles stay open, so a hero then walks through where the wall was",
+  "room": "test-parts",
+  "players": [
+    {
+      "id": "a",
+      "character": "hero",
+      "spawn": 2
+    }
+  ],
+  "entities": [
+    {
+      "id": "crate-1",
+      "character": "crate",
+      "tile": [
+        20,
+        7
+      ],
+      "vx": 300
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 60,
+      "to": 200,
+      "x": 1
+    }
+  ],
+  "ticks": 220,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "part-broken",
+      "between": [
+        0,
+        10
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "where": {
+        "room": "test-parts",
+        "part": "cracked-wall",
+        "by": "crate-1",
+        "look": "wall"
+      }
+    },
+    {
+      "fact": "position",
+      "player": "a",
+      "at": 220,
+      "x": [
+        380,
+        470
+      ]
+    }
+  ]
+}

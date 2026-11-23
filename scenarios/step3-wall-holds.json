@@ -1,0 +1,44 @@
+{
+  "id": "step3-wall-holds",
+  "proves": "a hero running at full speed into a breakable wall is stopped by it and the wall does not break",
+  "room": "test-parts",
+  "players": [
+    {
+      "id": "a",
+      "character": "hero",
+      "spawn": 2
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 120,
+      "x": 1
+    }
+  ],
+  "ticks": 150,
+  "expect": [
+    {
+      "fact": "position",
+      "player": "a",
+      "at": 150,
+      "x": [
+        346,
+        346
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "part-broken",
+      "between": [
+        0,
+        150
+      ],
+      "count": [
+        0,
+        0
+      ]
+    }
+  ]
+}

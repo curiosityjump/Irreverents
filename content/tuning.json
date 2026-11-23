@@ -39,7 +39,9 @@
     "friendAttackLaunch": 0,
     "friendAttackWear": 0,
     "friendThrowWear": 0,
-    "speechLineTime": 6
+    "speechLineTime": 6,
+    "gateStayOpenTime": 6,
+    "wallBreakSpeed": 200
   },
   "characters": {
     "shopkeeper": {

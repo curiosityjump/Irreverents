@@ -7,6 +7,7 @@ import { drawHall } from './draw/hall.ts';
 import { drawImpact } from './draw/impact.ts';
 import { drawNpcs } from './draw/npcs.ts';
 import { drawRoom, roomOrigin } from './draw/room.ts';
+import { drawRoomParts } from './draw/room-parts.ts';
 
 /** DRAFT: the internal resolution the art on order assumes (docs/plan/step-1.md). */
 export const VIEW_W = 320;
@@ -30,6 +31,7 @@ export function render(g: CanvasRenderingContext2D, world: World, content: Conte
   const focus = mine ? { x: mine.x + (box?.w ?? 0) / 2, y: mine.y + (box?.h ?? 0) / 2 } : undefined;
   const { ox, oy } = roomOrigin(room, VIEW_W, VIEW_H, focus);
   drawRoom(g, room, ox, oy, content);
+  drawRoomParts(g, world, room, ox, oy);
   drawEntities(g, world, content, roomId, ox, oy, view);
   drawImpact(g, world, roomId, ox, oy);
   drawNpcs(g, world, content, roomId, ox, oy);

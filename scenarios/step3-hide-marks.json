@@ -1,0 +1,60 @@
+{
+  "id": "step3-hide-marks",
+  "proves": "a body standing still in a hiding place is marked hiding, and is not the moment it walks out",
+  "room": "test-parts",
+  "players": [
+    {
+      "id": "a",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 20,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 120,
+      "to": 200,
+      "x": 1
+    }
+  ],
+  "ticks": 200,
+  "expect": [
+    {
+      "fact": "body-state",
+      "player": "a",
+      "at": 10,
+      "not": [
+        "roomHide"
+      ]
+    },
+    {
+      "fact": "body-state",
+      "player": "a",
+      "at": 110,
+      "is": [
+        "roomHide"
+      ]
+    },
+    {
+      "fact": "body-state",
+      "player": "a",
+      "at": 123,
+      "not": [
+        "roomHide"
+      ]
+    },
+    {
+      "fact": "body-state",
+      "player": "a",
+      "at": 200,
+      "not": [
+        "roomHide"
+      ]
+    }
+  ]
+}

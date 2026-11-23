@@ -1,0 +1,76 @@
+{
+  "//": "DRAFT: Step 3's check room for the kinds of working part; no doors, so it is standalone and not part of the kingdom. Left to right: a hiding place (column 4), two floor plates (columns 7 and 13) that hold the gate (column 16), a breakable wall (column 22), a false wall (columns 26-27). The id is permanent: scenarios use it.",
+  "id": "test-parts",
+  "name": "Test: working parts",
+  "tile": 16,
+  "legend": {
+    "#": "solid",
+    "=": "oneway",
+    ".": "empty",
+    "1": "spawn",
+    "2": "spawn",
+    "3": "spawn",
+    "4": "spawn",
+    "H": {
+      "part": "curtain"
+    },
+    "P": {
+      "part": "plate-west"
+    },
+    "Q": {
+      "part": "plate-east"
+    },
+    "G": {
+      "part": "gate"
+    },
+    "B": {
+      "part": "cracked-wall"
+    },
+    "F": {
+      "part": "false-wall"
+    }
+  },
+  "rows": [
+    "##############################",
+    "#...............#.....#...##.#",
+    "#...............#.....#...##.#",
+    "#...............#.....#...##.#",
+    "#...............G.....#...##.#",
+    "#...............G.....#...##.#",
+    "#...H...........G.....B...FF.#",
+    "#.1.H..P..2..Q..G..3..B.4.FF.#",
+    "##############################"
+  ],
+  "parts": [
+    {
+      "id": "curtain",
+      "kind": "hide"
+    },
+    {
+      "id": "plate-west",
+      "kind": "plate"
+    },
+    {
+      "id": "plate-east",
+      "kind": "plate"
+    },
+    {
+      "id": "gate",
+      "kind": "gate",
+      "params": {
+        "plates": [
+          "plate-west",
+          "plate-east"
+        ]
+      }
+    },
+    {
+      "id": "cracked-wall",
+      "kind": "breakable"
+    },
+    {
+      "id": "false-wall",
+      "kind": "false-wall"
+    }
+  ]
+}

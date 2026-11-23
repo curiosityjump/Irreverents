@@ -1,0 +1,85 @@
+{
+  "id": "step3-gate-waits",
+  "proves": "the gate does not shut on a body standing in it: it waits past its stay-open time until the body walks out, and the body is never inside a solid tile",
+  "room": "test-parts",
+  "players": [
+    {
+      "id": "a",
+      "spawn": 1
+    }
+  ],
+  "entities": [
+    {
+      "id": "weight",
+      "character": "crate-heavy",
+      "tile": [
+        13,
+        7
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 30,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 60,
+      "to": 158,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 700,
+      "to": 760,
+      "x": 1
+    }
+  ],
+  "ticks": 800,
+  "expect": [
+    {
+      "fact": "position",
+      "player": "a",
+      "at": 600,
+      "x": [
+        258,
+        270
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "gate-closed",
+      "between": [
+        0,
+        700
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "gate-closed",
+      "between": [
+        701,
+        800
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "clear-of-solid",
+      "player": "a",
+      "between": [
+        0,
+        800
+      ]
+    }
+  ]
+}
