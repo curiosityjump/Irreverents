@@ -269,7 +269,7 @@ Full text: `docs/plan/step-2.md`
 
 ## Step 3 — A small kingdom to explore
 
-**Status: open, unclaimed — queued behind Step 5.** (Released by its first lead 2026-11-23 09:40 UTC with the five-room kingdom live and gate B's scenarios passing; not closed: what is owed is in the step file's handoff note, item (a) first: nobody has played it on two phone-sized pages. Held by the orchestrator at 09:42 UTC: the weekly usage limit shows a warning and the owner wakes before it resets at about 13:00 UTC.)
+**Status: open, claimed by orchestrator session_017WiGzHhke4tkAThPgw6EXs (builders: session_017WiGzK3hTpzPypD5R9DVit), 2026-11-23.** (Claimed 16:45 UTC for one fix: the way-out check takes 97 s since the quarry joined, paid by every build and deploy; brief `handoff-prompts/step-3-fast-way-out-check.md`. Item (a) below is still owed. Earlier: released by its first lead 2026-11-23 09:40 UTC with the five-room kingdom live and gate B's scenarios passing; not closed: what is owed is in the step file's handoff note, item (a) first: nobody has played it on two phone-sized pages. Held by the orchestrator at 09:42 UTC: the weekly usage limit shows a warning and the owner wakes before it resets at about 13:00 UTC.)
 
 Full text: `docs/plan/step-3.md`
 
