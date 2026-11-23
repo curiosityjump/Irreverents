@@ -4,7 +4,8 @@
 // press would do (`data-state`, read from the page): "take" at the goods,
 // "buy" at the counter (docs/mechanisms/heists.md, "The word"). The party
 // plate (window.irreverents.drawn.hud) lists the party's faces, the page's
-// own first. Screenshots, sideways and upright, go to e2e-out/heist/
+// own first. Each person's sight band (drawn.sight) flips when they turn
+// (heist-band). Screenshots, sideways and upright, go to e2e-out/heist/
 // (git-ignored; the committed ones in docs/plan/step-19-shots/ were copied
 // from there by hand, and a run never rewrites files in the repository).
 //
@@ -82,6 +83,23 @@ export async function heistFacts(kit: Kit & { shots: string }): Promise<void> {
     const faces = (hud?.faces ?? []) as { kind: string; me: boolean }[];
     const ok = faces.length === party.members.length && faces[0]?.me === true && faces[0]?.kind === party.kind && party.members.every((m: string) => faces.some((f) => f.kind === m));
     fact('heist-plate', ok, `the party plate draws ${faces.length} faces (${faces.map((f) => f.kind + (f.me ? ' (me)' : '')).join(', ')}) for the party ${party.members.join(', ')}; the page's own (${party.kind}) first and lit`);
+
+    // Push 3: the shopkeeper's sight band, drawn on her side of the counter, flips when she turns
+    // (her routine: 5 s facing the goods, 1.5 s away).
+    const band = (): Promise<any> => ph.page.evaluate(() => (window as any).irreverents.drawn.sight?.bands.find((b: any) => b.id === 'street-shopkeeper') ?? null);
+    const first = await band();
+    let second: any = null;
+    if (first) {
+      try {
+        await ph.page.waitForFunction((f: number) => (window as any).irreverents.drawn.sight?.bands.find((b: any) => b.id === 'street-shopkeeper')?.facing === -f, first.facing, { polling: 'raf', timeout: 8000 });
+        second = await band();
+      } catch {
+        // reported below
+      }
+    }
+    const ahead = (b: any): boolean => b && b.cells > 0 && (b.facing > 0 ? b.x0 === b.eyeX && b.x1 > b.eyeX : b.x1 === b.eyeX && b.x0 < b.eyeX);
+    await ph.page.screenshot({ path: path.join(kit.shots, 'band-sideways.png') });
+    fact('heist-band', ahead(first) && ahead(second) && second.facing === -first.facing, `the page draws the shopkeeper's sight band ${first ? `facing ${first.facing}, ${first.cells} cells lit, from her eye at ${Math.round(first.eyeX)} to ${Math.round(first.facing > 0 ? first.x1 : first.x0)}` : 'NOT at all'}; when she turned it was ${second ? `facing ${second.facing}, ${second.cells} cells, to ${Math.round(second.facing > 0 ? second.x1 : second.x0)}` : 'not seen to flip in 8 s'}`);
   } finally {
     await ph.ctx.close();
   }

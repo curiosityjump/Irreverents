@@ -16,8 +16,8 @@ into the shared documents.
 - **Draw order** (`render()`): sky and backdrop layers → back wall → `far`
   decor → ground with its `top`/`under` pieces (those three from one cached
   picture) → enter doorways → working parts → bells → `back` decor →
-  bodies (actors lane) → away marks → `front` decor → impact dust and shake
-  → the doorway arrow (`draw/door-hint.ts`, own character only) → the Use mark (`draw/use-hint.ts`, Step 19, own character only) → moods and barks → ring bars and alert pips → the king's speech → Hall
+  sight bands (`draw/sight.ts`, Step 19) → bodies (actors lane) → away marks → `front` decor → impact dust and shake
+  → the doorway arrow (`draw/door-hint.ts`, own character only) → the Use mark (`draw/use-hint.ts`, Step 19, own character only) → moods and barks → unseen marks (`draw/sight.ts`) → ring bars and alert pips → the king's speech → Hall
   of Legends → (screen furniture) the cantina's counter and row, the
   level banner's watcher → the party plate (`draw/hud.ts`) → the one
   banner up (`draw/banner.ts`). `PlayerView.drawn` is untouched.

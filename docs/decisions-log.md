@@ -983,3 +983,9 @@ document as a decision of theirs.
 - **To change it:** the lookout's `tile`, its `routine` order, the horn's `tile` and patrol 1's walk in `content/placements/quarry-depot.json`; the hide is two `C` tiles in `content/rooms/quarry-depot.json`. Any move re-times the depot's scenarios (`docs/plan/step-16.md`, the handoff note).
 - **Where:** `docs/plan/step-16.md`, "The depot made findable"; `step16-door-unseen`.
 
+### 2026-11-23 · Step 19: every person shows a faint band of what they can see, and a take nobody saw gets a closed eye and a tick
+- **Decided by:** Step 19 builder (brief `loop-heist.md`), `session_017WiGzJqpMTHyoAaus6JsHG`
+- **Instead of asking:** "How should a phone player see where a watcher is looking, and know they got away with something?"
+- **Why this way:** D-016 (zero-alarm success deeply satisfying); doc 07's "detection cones or simple proximity checks"; your comp A00-01 draws a vision cone. The band is exactly the sight rule already in the game (a box ahead of them, blocked by walls), not a new rule (O-007 stays open). It flips when they turn, so the shopkeeper's glance behind is something you can watch for.
+- **To change it:** the band's look is two colours in `src/client/draw/sight.ts`; the mark is a look named `unseen`; turning the band off is one line in `src/client/render.ts`.
+- **Where:** `docs/mechanisms/heists.md`, "Sight you can see".

@@ -20,6 +20,7 @@ import { drawnLevels } from './draw/levels.ts';
 import { drawnCompletion } from './draw/completion.ts';
 import { drawnBanner } from './draw/banner.ts';
 import { drawnHud } from './draw/hud.ts';
+import { drawnSight, watchSightEvents } from './draw/sight.ts';
 import { levelProgress } from '../sim/levels.ts';
 import { setUpMenu, showGone, showStart } from './start.ts';
 import type { StartRecord } from './start.ts';
@@ -136,6 +137,8 @@ const debug = {
     /** Step 19: the party plate (faces, the viewer's slots) and the banner up, if any (src/client/draw/hud.ts, banner.ts). */
     hud: null as ReturnType<typeof drawnHud>,
     banner: null as ReturnType<typeof drawnBanner>,
+    /** Step 19: each person's sight band this frame drew (facing, box, lit cells) and the unseen marks up (src/client/draw/sight.ts). */
+    sight: null as ReturnType<typeof drawnSight> | null,
     cantina: null as { row: { kind: string; slot: number; x: number; y: number; w: number; h: number; taken: boolean }[] | null; counter: { player: string; ko: number; falls: number }[] | null } | null,
   },
 };
@@ -254,6 +257,7 @@ function play(worldName: string): void {
     const seen: Drawn[] = [];
     const drawnBodies = [...net.others(), me];
     const shown = { ...net.world, entities: drawnBodies };
+    watchSightEvents(net.latest(), frameNo); // Step 19: an unseen deed's mark (draw/sight.ts)
     const camera = render(g, shown, content, me.room, { me: me.id, frame: frameNo, drawn: seen });
     const result = { camera, drawn: seen };
     lastCamera = camera;
@@ -295,6 +299,7 @@ function play(worldName: string): void {
     d.completion = drawnCompletion();
     d.hud = drawnHud();
     d.banner = drawnBanner();
+    d.sight = drawnSight();
     d.words = takeWords();
     // Step 5 (docs/mechanisms/network.md, "Predicted hits"): each impact this frame drew from, on this page's clock.
     d.impacts = drawnBodies.filter((e) => e.c.impact && e.room === me.room).map((e) => ({ id: e.id, tick: e.c.impact!.tick, age: net.world.tick - e.c.impact!.tick, beat: !!e.c.beat, predicted: !!e.c.predicted }));

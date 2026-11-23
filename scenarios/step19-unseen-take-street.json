@@ -1,0 +1,91 @@
+{
+  "id": "step19-unseen-take-street",
+  "gate": "E",
+  "proves": "Step 19: on the real street, a good taken from the shop's shelf while the shopkeeper looks away (her 1.5 s glance behind) is a take nobody saw: a deed with no witnesses, the shopkeeper calm and the area's alert never raised; the control, the same take a beat earlier while she faces the goods, is witnessed (step19-unseen-take-street-control)",
+  "room": "castle-street",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "infiltrator",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 10,
+      "to": 92,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 720,
+      "to": 725,
+      "hold": [
+        "interact"
+      ]
+    }
+  ],
+  "ticks": 900,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "deed",
+      "where": {
+        "deed": "take",
+        "by": "p:a",
+        "thing": "street-goods-2",
+        "witnesses": []
+      },
+      "between": [
+        720,
+        720
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "deed",
+      "where": {
+        "deed": "take",
+        "by": "p:a"
+      },
+      "between": [
+        0,
+        900
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "mood-changed",
+      "where": {
+        "entity": "street-shopkeeper"
+      },
+      "between": [
+        700,
+        900
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "alert",
+      "area": "castle-street",
+      "between": [
+        0,
+        900
+      ],
+      "is": 0
+    }
+  ]
+}

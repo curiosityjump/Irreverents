@@ -1,0 +1,70 @@
+{
+  "id": "step19-unseen-take-street-control",
+  "gate": "E",
+  "proves": "Step 19, the control of step19-unseen-take-street: the same take on the real street a beat earlier (tick 640), while the shopkeeper faces the goods, is witnessed by her: the deed names her, so the unseen mark is never drawn for it",
+  "room": "castle-street",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "infiltrator",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 10,
+      "to": 92,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 640,
+      "to": 645,
+      "hold": [
+        "interact"
+      ]
+    }
+  ],
+  "ticks": 900,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "deed",
+      "where": {
+        "deed": "take",
+        "by": "p:a",
+        "thing": "street-goods-2",
+        "witnesses": [
+          "street-shopkeeper"
+        ]
+      },
+      "between": [
+        640,
+        640
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "deed",
+      "where": {
+        "deed": "take",
+        "by": "p:a",
+        "witnesses": []
+      },
+      "between": [
+        0,
+        900
+      ],
+      "count": [
+        0,
+        0
+      ]
+    }
+  ]
+}

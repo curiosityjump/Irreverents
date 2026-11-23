@@ -21,6 +21,7 @@ import { drawRoomParts } from './draw/room-parts.ts';
 import { drawBanners } from './draw/banner.ts';
 import { drawHud } from './draw/hud.ts';
 import { drawUseHint } from './draw/use-hint.ts';
+import { drawSight, drawUnseenMarks } from './draw/sight.ts';
 import { useHere } from '../sim/use.ts';
 
 /** DRAFT: the internal resolution the art on order assumes (docs/plan/step-1.md). */
@@ -78,6 +79,8 @@ export function render(g: CanvasRenderingContext2D, world: World, content: Conte
   drawCantinaBell(g, world, content, roomId, ox, oy);
   const decor = decorOf(room, content);
   drawDecor(g, decor, 'back', room.tile, ox, oy, W, H);
+  // Step 19: every person's sight, faint, behind the bodies (draw/sight.ts).
+  drawSight(g, world, content, roomId, ox, oy);
   drawEntities(g, world, content, roomId, ox, oy, pv);
   drawSignalers(g, world, content, roomId, ox, oy);
   drawAway(g, world, content, roomId, ox, oy, pv);
@@ -89,8 +92,9 @@ export function render(g: CanvasRenderingContext2D, world: World, content: Conte
   drawImpact(g, world, roomId, ox, oy);
   drawDoorHint(g, world, content, roomId, ox, oy, pv);
   // Step 19: the mark over what a press of Use would act on (the button names it: use-prompt.ts).
-  if (pv && mine && mine.room === roomId) drawUseHint(g, useHere(world, content, mine), ox, oy, pv.frame);
+  if (pv && mine && mine.room === roomId) drawUseHint(g, useHere(world, content, mine), ox, oy, pv.frame, mine.y);
   drawNpcs(g, world, content, roomId, ox, oy);
+  drawUnseenMarks(g, roomId, ox, oy);
   drawAlert(g, world, content, roomId, ox, oy);
   drawAudience(g, world, content, roomId, ox, oy);
   drawHall(g, world, content, roomId, ox, oy);
