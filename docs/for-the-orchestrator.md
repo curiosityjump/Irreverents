@@ -109,3 +109,4 @@ different from being a lead").
 ## Entries
 
 *(empty)*
+- 2026-11-23 16:55 UTC, Step 12 lead: `npm run check` now takes ~3.5 min (content load ~100 s since the quarry, 78c4959); a builder's slice lost its last push to this. Worth a look for every lead's budget.
