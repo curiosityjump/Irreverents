@@ -6,7 +6,8 @@
   "color": "#d95d39",
   "verbs": [
     "move",
-    "jump"
+    "jump",
+    "switch"
   ],
   "tuning": "grappler"
 }

@@ -1,0 +1,18 @@
+{
+  "id": "body-flyer-stopped-by-gap",
+  "gate": "A",
+  "proves": "with the same inputs as body-infiltrator-fits-gap, the flyer is stopped at the mouth of the crawlspace and stays on the near side",
+  "room": "test-body",
+  "players": [
+    {"id": "a", "character": "flyer", "spawn": 0}
+  ],
+  "inputs": [
+    {"player": "a", "from": 0, "to": 120, "x": -1}
+  ],
+  "ticks": 150,
+  "expect": [
+    {"fact": "standing-on-tile", "player": "a", "at": 150, "tile": [8, 10]},
+    {"fact": "position", "player": "a", "at": 150, "x": [135, 135]},
+    {"fact": "clear-of-solid", "player": "a", "between": [0, 150]}
+  ]
+}

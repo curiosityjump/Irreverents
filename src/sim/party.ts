@@ -1,0 +1,44 @@
+// The party's rules that more than one file needs: who is free to be
+// played, and whether a body fits where it stands. Pure, like the rest of
+// src/sim. Writeup: docs/mechanisms/party-and-switching.md.
+import { TILE } from '../content/kinds/rooms.ts';
+import type { Room } from '../content/kinds/rooms.ts';
+import type { Content } from '../content/types.ts';
+import { cellAt } from './systems/physics.ts';
+import type { World } from './types.ts';
+
+const EPS = 1e-6;
+
+/** Whether a box (top-left x,y; size w,h; pixels) overlaps any solid tile of the room. One-way platforms never count. */
+export function boxInSolid(room: Room, x: number, y: number, w: number, h: number): boolean {
+  const T = room.tile;
+  const left = Math.floor(x / T);
+  const right = Math.floor((x + w - EPS) / T);
+  const top = Math.floor(y / T);
+  const bottom = Math.floor((y + h - EPS) / T);
+  for (let ty = top; ty <= bottom; ty++) {
+    for (let tx = left; tx <= right; tx++) {
+      if (cellAt(room, tx, ty) === TILE.solid) return true;
+    }
+  }
+  return false;
+}
+
+/**
+ * Whether some player other than `exceptEntity` is playing this member.
+ * INTENT: "A character cannot be controlled by two humans at once" (library
+ * doc 05): a member counts as taken wherever in the world its player is.
+ */
+export function memberTaken(world: World, member: string, exceptEntity?: string): boolean {
+  return world.entities.some((e) => e.player !== null && e.id !== exceptEntity && e.kind === member);
+}
+
+/**
+ * The member a new player gets: the first in party order nobody is playing.
+ * INTENT: when every member is taken the first is given again, so a fourth
+ * friend is never turned away (docs/plan/step-2.md, "Decided by the lead").
+ */
+export function firstFreeMember(world: World, content: Content): string | undefined {
+  const members = content.party.members;
+  return members.find((m) => !memberTaken(world, m)) ?? members[0];
+}

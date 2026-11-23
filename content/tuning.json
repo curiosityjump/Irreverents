@@ -50,7 +50,9 @@
       "jumpSpeed": 300,
       "jumpCutMultiplier": 0.45,
       "coyoteTime": 0.1,
-      "jumpBufferTime": 0.1
+      "jumpBufferTime": 0.1,
+      "flapSpeed": 220,
+      "flaps": 3
     },
     "crate": {
       "weight": 20,

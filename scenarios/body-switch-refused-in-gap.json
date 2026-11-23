@@ -1,0 +1,25 @@
+{
+  "id": "body-switch-refused-in-gap",
+  "gate": "A",
+  "proves": "inside the crawlspace the taller bodies do not fit, so the infiltrator's switch is refused and nothing changes (never left inside a wall); out in the chamber the same press works",
+  "room": "test-body",
+  "players": [
+    {"id": "a", "character": "infiltrator", "spawn": 0}
+  ],
+  "inputs": [
+    {"player": "a", "from": 0, "to": 28, "x": -1},
+    {"player": "a", "from": 50, "to": 54, "hold": ["switch"]},
+    {"player": "a", "from": 60, "to": 110, "x": -1},
+    {"player": "a", "from": 130, "to": 134, "hold": ["switch"]}
+  ],
+  "ticks": 150,
+  "expect": [
+    {"fact": "position", "player": "a", "at": 50, "x": [88, 120], "y": [160, 160], "//": "standing inside the crawlspace (columns 5-7)"},
+    {"fact": "event", "event": "switch-refused", "player": "a", "between": [50, 50], "count": [1, 1]},
+    {"fact": "event", "event": "switched", "player": "a", "between": [0, 129], "count": [0, 0]},
+    {"fact": "character", "player": "a", "at": 129, "is": "infiltrator"},
+    {"fact": "event", "event": "switched", "player": "a", "between": [130, 130], "count": [1, 1]},
+    {"fact": "character", "player": "a", "at": 150, "is": "flyer", "//": "the next member, the flyer, fits in the chamber"},
+    {"fact": "clear-of-solid", "player": "a", "between": [0, 150]}
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "id": "body-flyer-reaches-ledge",
+  "gate": "A",
+  "proves": "the flyer jumps, flaps three times and stands on the ledge 5 tiles above the floor; one press is a take-off or a flap, never both; holding does not flap again; a fourth press has no flap left",
+  "room": "test-body",
+  "players": [
+    {"id": "a", "character": "flyer", "spawn": 0}
+  ],
+  "inputs": [
+    {"player": "a", "from": 0, "to": 33, "x": 1},
+    {"player": "a", "from": 50, "to": 60, "hold": ["jump"]},
+    {"player": "a", "from": 72, "to": 76, "hold": ["jump"]},
+    {"player": "a", "from": 88, "to": 92, "hold": ["jump"]},
+    {"player": "a", "from": 104, "to": 108, "hold": ["jump"]},
+    {"player": "a", "from": 112, "to": 114, "hold": ["jump"], "//": "a fourth press in the air: no flaps left"},
+    {"player": "a", "from": 100, "to": 150, "x": 1}
+  ],
+  "ticks": 200,
+  "expect": [
+    {"fact": "event", "event": "jumped", "player": "a", "between": [0, 200], "count": [1, 1]},
+    {"fact": "event", "event": "flapped", "player": "a", "between": [50, 71], "count": [0, 0], "//": "the take-off press (held 50-59) is not also a flap"},
+    {"fact": "event", "event": "flapped", "player": "a", "between": [72, 72], "count": [1, 1]},
+    {"fact": "event", "event": "flapped", "player": "a", "between": [73, 87], "count": [0, 0], "//": "held until 75: holding is not flapping"},
+    {"fact": "event", "event": "flapped", "player": "a", "between": [0, 200], "count": [3, 3]},
+    {"fact": "standing-on-tile", "player": "a", "at": 200, "tile": [18, 5]},
+    {"fact": "position", "player": "a", "at": 200, "y": [80, 80]}
+  ]
+}

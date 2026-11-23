@@ -1,0 +1,29 @@
+{
+  "id": "body-switch-midair-no-flaps",
+  "gate": "A",
+  "proves": "a body that becomes the flyer in mid-air has no flaps until it lands (switching in the air is not endless flight), and a flyer that switches away in mid-air keeps falling; after landing the flyer flaps again",
+  "room": "test-body",
+  "players": [
+    {"id": "a", "character": "infiltrator", "spawn": 0}
+  ],
+  "inputs": [
+    {"player": "a", "from": 5, "to": 8, "hold": ["jump"]},
+    {"player": "a", "from": 12, "to": 16, "hold": ["switch"]},
+    {"player": "a", "from": 18, "to": 21, "hold": ["jump"]},
+    {"player": "a", "from": 24, "to": 27, "hold": ["jump"]},
+    {"player": "a", "from": 80, "to": 90, "hold": ["jump"]},
+    {"player": "a", "from": 100, "to": 103, "hold": ["jump"]},
+    {"player": "a", "from": 104, "to": 108, "hold": ["switch"]},
+    {"player": "a", "from": 108, "to": 111, "hold": ["jump"]}
+  ],
+  "ticks": 200,
+  "expect": [
+    {"fact": "character", "player": "a", "at": 13, "is": "flyer"},
+    {"fact": "position", "player": "a", "at": 13, "y": [0, 150], "//": "in the air when it became the flyer"},
+    {"fact": "event", "event": "flapped", "between": [0, 99], "count": [0, 0]},
+    {"fact": "event", "event": "flapped", "player": "a", "between": [100, 100], "count": [1, 1]},
+    {"fact": "character", "player": "a", "at": 110, "is": "grappler"},
+    {"fact": "event", "event": "flapped", "between": [101, 200], "count": [0, 0]},
+    {"fact": "standing-on-tile", "player": "a", "at": 200, "tile": [10, 10]}
+  ]
+}

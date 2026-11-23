@@ -1,0 +1,26 @@
+{
+  "//": "DRAFT: Step 2's check room for the three bodies; no doors, so it is standalone and not part of the kingdom. Left: a wall with a one-tile-high crawlspace at floor level (columns 5-7, row 9) into a small chamber with a shelf. Right: a ledge whose top is 5 tiles above the floor (row 5, columns 15-18), with no stepping stones.",
+  "id": "test-body",
+  "name": "Test: bodies",
+  "tile": 16,
+  "legend": {
+    "#": "solid",
+    "=": "oneway",
+    ".": "empty",
+    "1": "spawn",
+    "2": "spawn"
+  },
+  "rows": [
+    "####################",
+    "#....###...........#",
+    "#....###...........#",
+    "#....###...........#",
+    "#....###...........#",
+    "#....###.......#####",
+    "#....###...........#",
+    "#.==.###...........#",
+    "#....###...........#",
+    "#.........1.2......#",
+    "####################"
+  ]
+}

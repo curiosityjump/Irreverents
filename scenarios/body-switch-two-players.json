@@ -1,0 +1,23 @@
+{
+  "id": "body-switch-two-players",
+  "gate": "A",
+  "proves": "A switches and becomes the one member neither player was playing; B is not moved off theirs and does not change; when no other member is free the switch is refused",
+  "room": "test-body",
+  "players": [
+    {"id": "a", "character": "grappler", "spawn": 0},
+    {"id": "b", "character": "infiltrator", "spawn": 1}
+  ],
+  "inputs": [
+    {"player": "a", "from": 10, "to": 14, "hold": ["switch"]}
+  ],
+  "ticks": 40,
+  "expect": [
+    {"fact": "character", "player": "a", "at": 40, "is": "flyer"},
+    {"fact": "character", "player": "b", "at": 40, "is": "infiltrator"},
+    {"fact": "character", "player": "a", "at": 40, "differentFrom": "b"},
+    {"fact": "position", "player": "b", "at": 40, "x": [200, 200], "y": [160, 160]},
+    {"fact": "position", "player": "a", "at": 40, "x": [168, 168], "y": [160, 160]},
+    {"fact": "event", "event": "switched", "player": "a", "between": [10, 10], "count": [1, 1]},
+    {"fact": "event", "event": "switched", "player": "b", "between": [0, 40], "count": [0, 0]}
+  ]
+}

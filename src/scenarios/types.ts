@@ -24,7 +24,8 @@ export interface Scenario {
   /** What this scenario proves, in a sentence. */
   proves: string;
   room: string;
-  players: { id: string; character: string; spawn: number }[];
+  /** `character` left out: the player gets the first party member nobody is playing, as a new player does. */
+  players: { id: string; character?: string; spawn: number }[];
   /** Bodies nobody plays, put in the room before tick 0. Their entity id is `id`. */
   entities?: { id: string; character: string; tile: [number, number]; vx?: number; vy?: number }[];
   /** True: the room's own placements (content/placements/<room>.json) are put in the world too. */

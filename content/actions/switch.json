@@ -1,0 +1,6 @@
+{
+  "//": "DRAFT: changes which party member you are, to the next one nobody is playing. Tab is the browser's, so Q.",
+  "id": "switch",
+  "label": "Switch",
+  "keys": ["KeyQ"]
+}

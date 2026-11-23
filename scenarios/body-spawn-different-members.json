@@ -1,0 +1,19 @@
+{
+  "id": "body-spawn-different-members",
+  "gate": "A",
+  "proves": "two players spawned with no character named are two different party members, the first two in party order",
+  "room": "test-body",
+  "players": [
+    {"id": "a", "spawn": 0},
+    {"id": "b", "spawn": 1}
+  ],
+  "inputs": [
+
+  ],
+  "ticks": 5,
+  "expect": [
+    {"fact": "character", "player": "a", "at": 0, "is": "grappler"},
+    {"fact": "character", "player": "b", "at": 0, "is": "infiltrator"},
+    {"fact": "character", "player": "a", "at": 5, "differentFrom": "b"}
+  ]
+}

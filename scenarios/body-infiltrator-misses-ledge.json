@@ -1,0 +1,23 @@
+{
+  "id": "body-infiltrator-misses-ledge",
+  "gate": "A",
+  "proves": "with the same inputs as body-flyer-reaches-ledge, the infiltrator never flaps and ends on the floor, not on the ledge",
+  "room": "test-body",
+  "players": [
+    {"id": "a", "character": "infiltrator", "spawn": 0}
+  ],
+  "inputs": [
+    {"player": "a", "from": 0, "to": 33, "x": 1},
+    {"player": "a", "from": 50, "to": 60, "hold": ["jump"]},
+    {"player": "a", "from": 72, "to": 76, "hold": ["jump"]},
+    {"player": "a", "from": 88, "to": 92, "hold": ["jump"]},
+    {"player": "a", "from": 104, "to": 108, "hold": ["jump"]},
+    {"player": "a", "from": 112, "to": 114, "hold": ["jump"], "//": "a fourth press in the air: no flaps left"},
+    {"player": "a", "from": 100, "to": 150, "x": 1}
+  ],
+  "ticks": 200,
+  "expect": [
+    {"fact": "event", "event": "flapped", "between": [0, 200], "count": [0, 0]},
+    {"fact": "position", "player": "a", "at": 200, "y": [160, 160]}
+  ]
+}

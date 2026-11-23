@@ -42,12 +42,12 @@ export function parseScenario(raw: unknown, file: string, stem: string, content:
       if (!isRecord(p)) return fail(w, `must be an object, but is ${describe(p)}`);
       if (typeof p.id !== 'string' || p.id === '') fail(`${w}.id`, 'must be non-empty text');
       else if (players.some((q) => q.id === p.id)) fail(`${w}.id`, `player "${p.id}" is listed twice`);
-      if (typeof p.character !== 'string' || !(p.character in content.characters)) {
+      if (p.character !== undefined && (typeof p.character !== 'string' || !(p.character in content.characters))) {
         fail(`${w}.character`, `no character ${JSON.stringify(p.character)} (characters: ${known(content.characters)})`);
       }
       const spawn = p.spawn ?? i;
       if (typeof spawn !== 'number' || !Number.isInteger(spawn) || spawn < 0) fail(`${w}.spawn`, `must be a whole number from 0, but is ${JSON.stringify(spawn)}`);
-      players.push({ id: String(p.id), character: String(p.character), spawn: Number(spawn) });
+      players.push({ id: String(p.id), character: p.character === undefined ? undefined : String(p.character), spawn: Number(spawn) });
     });
   }
 

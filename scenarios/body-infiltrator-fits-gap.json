@@ -1,0 +1,18 @@
+{
+  "id": "body-infiltrator-fits-gap",
+  "gate": "A",
+  "proves": "the infiltrator runs through the one-tile-high crawlspace and stands in the chamber on the far side (its own move is its body)",
+  "room": "test-body",
+  "players": [
+    {"id": "a", "character": "infiltrator", "spawn": 0}
+  ],
+  "inputs": [
+    {"player": "a", "from": 0, "to": 120, "x": -1}
+  ],
+  "ticks": 150,
+  "expect": [
+    {"fact": "position", "player": "a", "at": 30, "x": [80, 128], "y": [160, 160], "//": "inside the crawlspace, columns 5-7"},
+    {"fact": "standing-on-tile", "player": "a", "at": 150, "tile": [1, 10]},
+    {"fact": "clear-of-solid", "player": "a", "between": [0, 150]}
+  ]
+}

@@ -1,4 +1,5 @@
 import type { Content } from '../content/types.ts';
+import { firstFreeMember } from './party.ts';
 import type { Entity, Input, World } from './types.ts';
 
 export const NO_INPUT: Input = { x: 0, y: 0, held: [] };
@@ -32,17 +33,20 @@ export function removeEntity(world: World, id: string): void {
 /**
  * Puts a player's character in a room, feet on the floor of a spawn tile.
  * `spawn` picks among the room's spawn tiles and wraps, so any number of
- * players fits a room with at least one.
+ * players fits a room with at least one. Leave `character` out and the
+ * player gets the first party member nobody is playing (src/sim/party.ts);
+ * a caller that names one still gets it.
  */
 export function spawnPlayer(
   world: World,
   content: Content,
-  opts: { player: string; character: string; room: string; spawn?: number },
+  opts: { player: string; character?: string; room: string; spawn?: number },
 ): Entity {
   const room = content.rooms[opts.room];
-  const kind = content.characters[opts.character];
+  const character = opts.character ?? firstFreeMember(world, content);
+  const kind = character === undefined ? undefined : content.characters[character];
   if (!room) throw new Error(`no room "${opts.room}"`);
-  if (!kind) throw new Error(`no character "${opts.character}"`);
+  if (!kind) throw new Error(`no character "${character}"`);
   if (room.spawns.length === 0) throw new Error(`room "${room.id}" has no spawn tile`);
   const at = room.spawns[(opts.spawn ?? 0) % room.spawns.length]!;
   return addEntity(world, {
