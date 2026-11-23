@@ -550,3 +550,4 @@ and late so `closeIn` taps miss. The push's code is good to re-land as it stands
 fact that holds over live latency, e.g. a phone character that does not flatten him
 (the skirmisher), or `closeIn` waiting for the guard to stand. Push 3 (the armoured
 guard) not started. The builder stopped here at its context budget.
+- **The armoured guard's sprite (for push 3):** the art cut-outs builder will not cut `armoured-guard`: sprites belong to the cast lane, so it has asked the orchestrator to brief a cast builder (source: P08 chibi-enemy-animation row 4). Until that sprite exists, push 3 ships on the `guard` sprite, as the brief planned.
