@@ -933,3 +933,10 @@ document as a decision of theirs.
 - **To change it:** untried here: a chase follows the hero, not a routine, so a placement change may not stop it; a sure fix is a fighter that will not step off a ledge (Step 12's code).
 - **Where:** `docs/plan/step-16.md`, last slice handoff; `content/rooms/quarry-depot.json` column 23.
 
+
+### 2026-11-23 · DRAFT: the quarry's level keeps the id `iron-quarry`, though "Iron Quarry" is only a proposed name
+- **Decided by:** orchestrator, `session_017WiGzJzo6aZqH4kYxxJsiV` (flagged by Step 16's lead)
+- **Instead of asking:** the level id `iron-quarry` (`content/levels/iron-quarry.json`, 2b316ce) carries doc 28's proposed name, against "keep proposed names out of ids"; rename it?
+- **Why this way:** it is deployed and kept games already list discovered levels by id, and "don't rename or remove ids once deployed" protects those saves. The id is never shown: the shown name is the level file's own data and stays free to change. No new id takes a proposed name.
+- **To change it:** add a new level id and map the old one to it on load (retire, never delete); the shown name is one string in the level file.
+- **Where:** `content/levels/iron-quarry.json`; `docs/plan/step-14.md`.
