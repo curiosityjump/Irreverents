@@ -81,6 +81,44 @@ A review of push 2 is still running; its findings come as a follow-up message.
    instructions for Step 7 no longer fit `makeWorld`; `?room=game-XXXX` now
    joins a kept game (say so in network.md, or refuse it).
 
+## Push D: the start screen (review of 884bb80; five bugs, each reproduced twice)
+
+Do it after push B, before push C. All in `src/client/start.ts` unless said.
+
+10. **The owner's tuning link is broken.** `/?tune` shows the start screen, and
+    any choice runs `go()` (`start.ts:198`), whose `history.replaceState`
+    drops every other parameter; `play()` then checks
+    `tuneWanted(location.search)` (`src/client/main.ts:165`) and finds
+    nothing, so there is no Tune button, and a reload doesn't bring it back.
+    `docs/mechanisms/tuning-panel.md:21` gives the owner exactly that link.
+    Fix: read the flag once at load, and keep `tune` in the address `go()`
+    writes (`?game=CODE&tune`). e2e fact: `/?tune` → New game → the Tune
+    button is there, and still there after a reload.
+11. **Tune sits on top of the menu button** on every `?tune` page, upright and
+    sideways (`#tune-open` at (6,7) z 20 over `#menu-btn` at (6,6) z 15; a
+    tap on the menu opens Tune). The menu holds the way out. Move one of
+    them so both are whole and tappable, and add both to the e2e's "nothing
+    covers a control" fact.
+12. **At 667×375 sideways, Continue falls below the screen** (two 330 px
+    columns plus a 28 px gap need 688 px; that phone has 635). In Safari's
+    real sideways height (about 330) the saved-game button is entirely off
+    screen. Make the two columns fit from 568 px wide up (narrower columns),
+    and add 667×375 to `start-sideways` (its text says 844×390 but it
+    measures 750×340: say what it measures).
+13. **"Start screen" on a shared-link page drops you into Everyone's kingdom**
+    when that tab last played `main`: its handler (`start.ts:237`) doesn't
+    clear `sessionStorage` `irreverents.playing`, as the menu's Back does
+    (`start.ts:366`). Clear it. e2e fact for exactly that sequence.
+14. **Pasting a code fails**: `maxlength=4` cuts the pasted text before
+    `cleanGameCode` runs, so "ab cd" → "ABC", the Share message → "JN", a
+    pasted link → "HTTP" ("No game HTTP"). Drop `maxlength`, clean in the
+    input handler, and when the pasted text holds `?game=XXXX` take that code.
+15. Nits: Continue lists a game whose save is gone, and tapping it silently
+    starts an empty world under that code (ask the server first; say "That
+    game is gone" and drop it from the list); when neither share nor copy
+    works the menu prints the whole link wider than the screen (print the
+    code large and the link small, wrapped).
+
 ## Done
 
 Each push: `npm run build`, `npm run check` (about 35 s now) and `npm run e2e`
