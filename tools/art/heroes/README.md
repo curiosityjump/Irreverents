@@ -108,11 +108,13 @@ round 1 and 2 puppets below are history for the plain `hero` only.
   legs; throw = lift, lift leaning back, strike, strike +1; hurt = hurt,
   hurt leaning back; down = dizzy-down; held = jump (knees tucked), crouch;
   hide = crouch; talk = idle, cheer; flap = jump, walk A up (the flyer's
-  wings beat between them). A `tumble` row (the crouch, turned a quarter at
-  a time) is drawn and written to the content file only once the actors
-  lane's validator knows the field, as are `carryAtBy` points.
+  wings beat between them); tumble = the crouch turned a quarter at a time
+  (a spin, 16 fps). `canon.py` writes `tumble` and `carryAtBy` only while
+  `src/content/kinds/sprites.ts` knows them (the actors lane's push 1 does).
 - `carryAt` is (24, top of the fists + 2): the load sits centred over the
-  head, as the canon's rock does, 2 px into the fists.
+  head, as the canon's rock does, 2 px into the fists. `carryAtBy` gives
+  `carry`, `carryRun` and `throw` the same rule from each state's first
+  frame (for `throw`, the wind-up, while the load is still held).
 - `shots.mjs` (copied from the ground lane's) plays three pages in one
   private world and shoots page A, the grappler, upright 390x664 and
   sideways 844x390 with insets 47/47/21: the three together in four rooms,

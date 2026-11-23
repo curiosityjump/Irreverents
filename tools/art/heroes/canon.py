@@ -314,16 +314,12 @@ def content_json(hero, img, index):
         # INTENT: the load's bottom sits 2 px into the fists, so their lower part shows under it
         out['carryAt'] = {'x': x, 'y': y + 2}
     if validator_knows('carryAtBy'):
-        by = {}
+        # one point per state (src/content/kinds/sprites.ts): its first frame's fist tops,
+        # centred over the head as carryAt; the throw's is the wind-up's (the load is still held)
+        out['carryAtBy'] = {}
         for st in ('carry', 'carryRun', 'throw'):
-            pts = []
-            for f in index[st]:
-                r, c = divmod(f, COLS)
-                a = img[r * CELL:(r + 1) * CELL, c * CELL:(c + 1) * CELL, 3] > 0
-                ys = np.nonzero(a.any(1))[0]
-                pts.append({'x': CELL // 2, 'y': int(ys.min()) + 2})
-            by[st] = pts
-        out['carryAtBy'] = by
+            x, y = lift_hands(img, index, st)
+            out['carryAtBy'][st] = {'x': x, 'y': y + 2}
     return out
 
 
