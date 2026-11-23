@@ -1,0 +1,99 @@
+{
+  "//": "DRAFT: stand-in drawn by tools/art/heroes/make.py (a program, 2026-11-23); a delivered sheet replaces it by editing this file. Notes: tools/art/heroes/README.md.",
+  "id": "grappler",
+  "image": "sprites/heroes/grappler.png",
+  "cell": {
+    "w": 56,
+    "h": 44
+  },
+  "anchor": {
+    "x": 19,
+    "y": 14
+  },
+  "fps": 8,
+  "frames": {
+    "idle": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "run": [
+      8,
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "air": [
+      16,
+      17
+    ],
+    "jump": [
+      16
+    ],
+    "fall": [
+      17
+    ],
+    "attack": [
+      24,
+      25,
+      26,
+      27
+    ],
+    "grab": [
+      32,
+      33
+    ],
+    "carry": [
+      40,
+      41
+    ],
+    "carryRun": [
+      48,
+      49,
+      50,
+      51,
+      52,
+      53
+    ],
+    "throw": [
+      56,
+      57,
+      58
+    ],
+    "hurt": [
+      64,
+      65
+    ],
+    "down": [
+      72,
+      73
+    ],
+    "held": [
+      80,
+      81
+    ],
+    "hide": [
+      88
+    ],
+    "talk": [
+      96,
+      97
+    ],
+    "flap": [
+      104,
+      105
+    ]
+  },
+  "fpsBy": {
+    "run": 12,
+    "carryRun": 12,
+    "attack": 16,
+    "throw": 12,
+    "grab": 12,
+    "flap": 10,
+    "hurt": 8
+  }
+}
