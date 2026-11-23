@@ -42,6 +42,28 @@ Waddle-Dee-like, no masked-knight-like. What carries over is craft: a
 limited bright palette, dark coloured outlines, 3–4 tone shading, round
 masses, big readable silhouettes, squash and stretch, quiet backgrounds.
 
+## Approved Drive assets first (the owner, 2026-11-23)
+
+**The owner, ~17:10 UTC, first-hand to the orchestrator:** *"I'd like
+everything to utilized the approved assets in the drive. If there is
+anything for which there is no approved asset. Start a list of those in the
+drive that is properly routed so it can be found and worked on."*
+
+- **Every picture and sound in the game comes from an approved Drive asset
+  when one exists:** doc 36's canon heroes and the partial 18-pose extraction,
+  P01's importable files, the A00 comps, and the P03, P04, P05, P07 and P08
+  source plates (`docs/design-library/`, "LATEST ART DROP" docs in
+  `06-asset-collaboration-claude-chatgpt/`). A source plate is re-authored
+  (cropped, alpha repaired, normalised to the native grid, given real frames),
+  never redrawn from words when the plate already shows the thing.
+- **Never use what the library marks REJECTED, OFF-STYLE or SUPERSEDED.**
+- **Where no approved asset exists**, the thing is on the Drive's
+  missing-assets list (`REQ — MISSING-ASSETS — …` in 01 REQUESTS). Draw a
+  placeholder marked `DRAFT:` until it lands. Don't invent a final look.
+- **The map** of which game asset comes from which source, or which list item,
+  is `docs/mechanisms/asset-coverage.md`. A lane that changes a source
+  updates its row there.
+
 ## Ground rules
 
 - **320×180 internal view, 16 px tiles, nearest-neighbour.** Everything is
