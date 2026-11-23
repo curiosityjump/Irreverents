@@ -198,6 +198,12 @@ once, until the next restart. To send the numbers back, tap **Copy** and
 paste what it gives into any session with "make these the defaults"
 (`docs/mechanisms/tuning-panel.md`).
 
+**Worth asking the owner after they play (from the feel worker):** how long
+the freeze should be at the top end (8–9 frames for a full-speed impact);
+whether the floor bounce is too lively (45%); whether the flyer's slow fall
+(170 px/s) is floaty-good or floaty-annoying; whether the grappler's 0.1 s
+wind-up feels heavy or laggy on a phone. Each is a dial on the panel.
+
 **What to try, and which number changes it (feel, 2026-11-23).** Each
 is per hero on the panel unless it says world.
 - *A jump feels floaty or heavy:* `apexGravity` (under 1 = more hang at
@@ -522,3 +528,31 @@ rows re-read. See the handoff notes below.
   sliders across ranges like 0–100000 are coarse. **Not verified by the
   lead:** a real iPhone; the live address (worker's `check:live` and a
   live private-world change only).
+
+- **Lead `session_017WiGzGN9egot3JUvSMBBA9`, 14:20 UTC: the feel-sim
+  slice reviewed at 252e5ce (+06a07f4); worker archived, brief deleted
+  by it. The feel round is closed** (its stopping condition: scenarios
+  green on `main` and live, the panel works by touch both holds, the
+  "what to try" list is above). Re-run by the lead: build, check (108
+  ok), `npm run e2e` (36 ok, 1 known todo `t-switch-free`),
+  `check:deployed` (live at 06a07f4; the 3 live errors are `check:live`'s
+  deliberate ones). Control of the lead's own: the floor-bounce line
+  removed from `impact-walls.ts` → `step2-feel-thrown-bounces` failed
+  (4 problems); restored. Read the re-timed `step2-hit-*` diffs: ticks
+  moved, tolerances kept (one x window 2 px wider); `check-content.ts`
+  now also caps `fallSpeed` (stricter). **Flags routed:** (1) the
+  renderer plays a swing from `c.attack.swung`, now the strike's tick,
+  so **the wind-up draws as standing still** until `src/client/draw/`
+  reads `c.attack.phase` (Step 8's; sent to the orchestrator). (2) A
+  player's own page has no `c.carrying` (grab runs on the server), so
+  a throw press predicts a swing, now with a wind-up, on the thrower's
+  screen (network layer; sent to the orchestrator). (3) The friend-throw
+  e2e now clears the throne room's crates first; a check room with an
+  empty floor would be cleaner (Step 3's or 8's to give). (4) **Jump
+  heights and the grappler's ground start/stop are unchanged on
+  purpose:** Step 3's and Step 4's scenarios are timed on them to the
+  tick; the grappler's weight is carried by fall, wind-up, weight and
+  slide. A slower ground start needs those scenarios re-timed by their
+  owners. **Not verified:** a real iPhone; how any of it feels; nothing
+  reads `c.stunned`, `c.landing`, `c.lastHit` etc. in a scenario (they
+  are for drawing).
