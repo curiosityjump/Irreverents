@@ -181,6 +181,8 @@ Taken 2026-11-23 by the lead at 17d8c1b (`npm run check` green): friends hit but
 
 ## Handoff notes
 
+**Slice B push 4 (the phone check, 09d98a1) reviewed ~17:58 UTC by the lead:** `npm run e2e` re-run in full by the lead, green: by touch alone two phones walk into the cantina, a tap opens the row, a tap elsewhere closes it, a swap shows on both pages, switch reaches the newcomer, a brawl draws the same counter on both (signal 8). The builder's flag that a page's switch can land on a friend's member (the page's world has no friends in it) is the known switch gap, passed to the orchestrator as Step 2's holder. Owed in push 5: the way-out check and the sight-flicker hold.
+
 **Slice B push 3 (the chase lock, 433275e) reviewed ~17:40 UTC by the lead:** the `room-doors.ts` edit is additive and refuses only a door carrying `"refuse": "chased"` (only `to-cantina` does); `cantina-chase` runs only in a world with `~cantina` and reads saved state with `?.`; good-side `c.respond` chasers only. Lead's control: `"refuse"` on the cantina's own `to-street` door makes nothing fail, so the way out was protected by a comment alone. A content check for it, and a short hold over the guard's two-tick sight flicker, were sent to the builder for push 4.
 
 **The cantina's art is Step 8's from 17:07 UTC** (orchestrator): round 3's lanes draw its own tiles and backdrop (replacing slice B's borrowed `town` theme), tavern props, and the brawler's and skirmisher's sprites. Step 11 draws no cantina art; `content/rooms/cantina.json` stays Step 11's.
