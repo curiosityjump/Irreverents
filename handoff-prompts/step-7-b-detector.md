@@ -34,11 +34,15 @@ scripted events is not evidence for it. **Do not tag any scenario
 ### Measured on `main` at 73e73d2 (04:46 UTC)
 
 - `npm run build`, `npm run check` pass; `npm run gates` says 1 of 6 (A).
-- **A system cannot read events.** `StepContext` (`src/sim/types.ts`) has
-  `emit` and nothing that reads; `src/sim/step.ts` keeps the list in a
-  local `events`. You add one read-only field, `ctx.events` (the events
-  emitted so far this tick), additive. The Step 1 and Step 4 leads have
-  been told; if the lead relays a different agreed name, use theirs.
+- **A system cannot read events yet, and you do not add the way.**
+  `StepContext` (`src/sim/types.ts`) has `emit` and nothing that reads.
+  Step 4's slice 1 worker adds exactly this, `ctx.events` (read-only:
+  the events emitted so far this tick), in `types.ts` + `step.ts`, in
+  its first push, due about 05:20 UTC (agreed with the Step 1 and Step
+  4 leads, 04:45 UTC). Write against that name. Until it is on `main`
+  keep a stopgap in your working copy only and **push no edit of your
+  own to those lines**; `git pull --rebase origin main` and drop the
+  stopgap when theirs arrives.
 - **A scenario cannot script an event or place a bodiless entity.**
   `Scenario.entities` (`src/scenarios/types.ts`) needs a `character` and
   carries no `c`. You add (a) an optional fourth argument to `step()`,
@@ -64,14 +68,18 @@ scripted events is not evidence for it. **Do not tag any scenario
   in a scenario fact or the trace and state the numbers in your commit.
 - The events you may read are the tables in `docs/architecture.md`
   ("Bodies": `hit`, `grabbed`, `thrown`, `released`, `impact`,
-  `flattened`, `recovered`). From Step 4, not on `main` yet, names
-  assumed from its brief: `call-started`, `call-completed { by, area, x,
-  y }`, `call-stopped { by, why }`; and requested: `alert-changed {
-  area, from, to }` (the area is the room id tonight). The name of the
-  "a hero took goods" event is not known yet. **The lead will message
-  you the confirmed names. Until then build on these, and keep every
-  event name the detector reads in data (below), so a rename is a
-  one-line content edit.**
+  `flattened`, `recovered`). From Step 4, not on `main` yet, **names
+  confirmed by its lead at 04:45 UTC**: `call-started { by }`,
+  `call-completed { by, area, x, y }`, `call-stopped { by, why }`,
+  `alert-changed { area, from, to }` on every change (the area is the
+  room id tonight), and one event for every deed, `deed { deed, by,
+  target?, room, x, y, … }` where `deed` is `buy`, `take`, `rob`,
+  `hit`, `grab`, `throw` (`by` and `target` are entity ids; note
+  `room`, not `area`). **Taking goods is `deed` with `deed: "take"`.**
+  The deed also carries who witnessed it, under a field name not fixed
+  yet: do not read it until `docs/mechanisms/npc-response.md` is on
+  `main` and says what it is. Keep every event name the detector reads
+  in data (below), so a rename is a one-line content edit.
 
 ### The record (the contract with slice A; `src/sim/hall/record.ts`)
 
@@ -204,8 +212,11 @@ reads a pedestal's record).
 - **Registries take no helper files.** `src/sim/systems/` gets only
   `hall-detect.ts` (and other `hall-*.ts` systems); helpers and types
   go in `src/sim/hall/`.
-- **Run after everything** (order 900 or so) so the tick's events are
-  all there; leave gaps.
+- **Run after everything** (order 900 or so; Step 4's lead asks for
+  600 or later) so the tick's events are all there; leave gaps.
+- **Do not rewrite the watcher's `c` every tick** when nothing changed
+  (Step 1's lead: snapshots are JSON 20 times a second). Store start
+  ticks and counters, not a running clock.
 - **Other steps' systems will meet your entities.** Never give the
   watcher a character kind. If a system of another step chokes on it
   after your rebase, do not edit theirs: message the lead.

@@ -180,6 +180,18 @@ stores nothing; no Step 4 code is on `main`.
   at start, `restoreHall`, save on `hall-legend`, a `/healthz` field);
   point `content/hall` at the gallery; the real scenarios tagged gate
   E for signals 1 and 2. Then the machine.
+  **From Step 1's lead, 04:45 UTC, for that slice:** worlds are per
+  room name (the shared one plus `?room=<name>` private ones, made on
+  demand and forgotten when empty), so `restoreHall` hooks where a
+  room's world is created (where `populateRoom` is called), and the
+  save hook goes where the server collects `step()`'s events. Private
+  worlds read the same store (the lead's call, `DRAFT:`). My worker
+  makes the edit to `src/server/main.ts` itself once Gate 2 is on
+  `main`; Step 1's lead messages the commit. `/healthz` may gain one
+  additive field. **From Step 4's lead:** `ctx.events` comes from its
+  slice 1 worker (about 05:20 UTC); `alert-changed` and the calls with
+  slice 2 (about 06:45 to 07:15 UTC); the witness field of `deed` is in
+  `docs/mechanisms/npc-response.md` when that lands.
 
 ## Open with the owner
 
