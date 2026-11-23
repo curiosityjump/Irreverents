@@ -336,6 +336,32 @@ Remaining: push 3 (courtyard, plate gate, gallery, roofs: signals 5 and
 the second half of 2), push 4 (the secret: signal 3; `hide` parts
 placed).
 
+**Slice B, push 3 reviewed (lead, 09:20 UTC).** `2055ccb`: the
+`courtyard` (two plates, a gate, the opening beyond), the `hall-gallery`
+(floor, balcony, steps every member climbs) and the way over the roofs
+(a hidden opening in the street's east wall at roof height onto the
+gallery balcony, which is also the gallery's way out when the gate is
+shut). Re-run by the lead: build and check green; `npm run gates` reads
+4 of 6 and B's line has 9 scenarios, now covering signals 1, 2 (both
+hidden ways), 3b, 4 and 5. On the built page at 844×390 the lead walked
+from the throne room through the street into the courtyard: both
+plates and the shut gate are drawn and the gate stops a lone player.
+Step 6's lead measured the window with a real grab-and-throw: thrown
+from a jump the king arrives at 230 px/s and breaks it
+(`step6-king-through-the-window`); a standing throw hits the throne
+first. **Gate B is still not true by this step's rule: signal 3 (the
+secret) has no scenario.** Not verified by the lead: the gate open on
+the page with two players; the roof route walked on the page; the
+plates between two real devices (a plate another player stands on may
+flicker between server snapshots: unseen); a phone. Stand-in still in
+use: `step3-plates-one-and-a-weight` drops the crate on the plate, it
+is not thrown. Costs: `npm run check` takes about 38 s now (the way-out
+check grows with each room) and the build runs it. The cellar doorway
+still comes up in the street, not the courtyard. Owed: push 4 (the
+secret, signal 3; `hide` parts placed in the street and throne room;
+the undercroft's vault), then the camera's edges, the stand-ins, and
+"how to add a room" re-read in `docs/architecture.md`.
+
 ## Open with the owner
 
 ## Handoff notes
