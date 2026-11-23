@@ -131,14 +131,22 @@ swoosh; the red and the blue skull badges); `alert-pip`/`-off` from the P07 UI a
 the same cut, dimmed). `srcimport.grab(key=...)` now keys out only ground connected to the crop's edge, so a
 white inside a piece stays.
 
+**Drive-first, step 3.** `fx-hit` and `fx-dust` from the P03 vfx atlas (the starburst; the dust puffs); the
+camp's fire is P08 biome's brazier, its flag P07 platformer's star banner; the quarry's rock piles are P07
+platformer's boulder heap at two sizes.
+
 **No approved source found (for the Drive's missing-assets list):**
-- `fx-clang` (clang lines beside a ringing bell) - drawn here.
-- `mood-2`, `mood-3` (marks over a head, bold enough for any hat) - drawn here; P07's mood heads are whole faces.
-- `bell-gauge`, `bark-edge`, `hud-plate` - drawn here in the P07 UI atlas's frame style, not cut from it.
-- the camp: tents, palisade, weapons rack, campfire, the camp's flag - drawn here (no tent or palisade plate).
-- the quarry: rock piles and scaffolds - drawn here (P03 grassy ruins' rock piles sit on an opaque ground; next).
-- windows, the stained glass, curtain hides (`hide-1x2`, `hide-2x2`), cracks, `away-dots`, `bark`, `ribbon`,
-  `player-mark`, shadows, `fx-land` - round 1-2 drawings, not yet checked against the plates.
+- `fx-clang`: P03's alert ray fans fill in solid at 32x20; drawn here.
+- `mood-2`, `mood-3`: P03's "?" and "!" bubbles lose their glyph at 12x12; drawn here.
+- `bell-gauge`, `bark-edge`, `hud-plate`: drawn here in the P07 UI atlas's frame style, not cut from it.
+- the camp's tents, palisade, weapons rack and crates: no plate shows a tent, a wooden palisade or a weapons rack
+  (crates are the cast lane's bodies; these are decoration).
+- the quarry's scaffolds: no plate shows one.
+- `window-1x3`, `window-broken-1x3`, the stained glass, curtain hides (`hide-1x2`, `hide-2x2`): P07 has arched and
+  stained windows and P04 tavern curtains, but all about square: they would be stretched 2-3x into a 1x3 or 1x2
+  part. A tall window and a tall curtain are wanted.
+- cracks, `away-dots`, `bark`, `ribbon`, `player-mark`, shadows, `fx-land`, `fx-slash`, `fx-swing-grappler`:
+  round 1-2 drawings or P01 cuts, not yet checked against the plates.
 
 ## Deviations from the contract
 

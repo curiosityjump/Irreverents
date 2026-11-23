@@ -2,19 +2,19 @@
   "//": "DRAFT: stand-in drawn and placed by tools/art/props/make.py (the placing rules are tools/art/props/place.py).",
   "id": "quarry-road",
   "items": [
-    {"image": "decor/quarry.png", "src": [38, 0, 32, 48], "tx": 51, "ty": 4, "dx": 0, "dy": 0, "layer": "far", "flip": false},
-    {"image": "decor/quarry.png", "src": [38, 0, 32, 48], "tx": 75, "ty": 9, "dx": 0, "dy": 0, "layer": "far", "flip": false},
-    {"image": "decor/quarry.png", "src": [38, 0, 32, 48], "tx": 51, "ty": 10, "dx": 0, "dy": 0, "layer": "far", "flip": false},
-    {"image": "decor/quarry.png", "src": [38, 0, 32, 48], "tx": 39, "ty": 12, "dx": 0, "dy": 0, "layer": "far", "flip": false},
-    {"image": "decor/quarry.png", "src": [38, 0, 32, 48], "tx": 15, "ty": 14, "dx": 0, "dy": 0, "layer": "far", "flip": false},
-    {"image": "decor/quarry.png", "src": [38, 0, 32, 48], "tx": 27, "ty": 14, "dx": 0, "dy": 0, "layer": "far", "flip": false},
-    {"image": "decor/quarry.png", "src": [22, 0, 16, 11], "tx": 51, "ty": 4, "dx": 1, "dy": 0, "layer": "back", "flip": false},
-    {"image": "decor/quarry.png", "src": [0, 0, 22, 14], "tx": 51, "ty": 10, "dx": 2, "dy": 0, "layer": "back", "flip": false},
-    {"image": "decor/quarry.png", "src": [22, 0, 16, 11], "tx": 54, "ty": 10, "dx": 1, "dy": 0, "layer": "back", "flip": false},
-    {"image": "decor/quarry.png", "src": [22, 0, 16, 11], "tx": 31, "ty": 12, "dx": 1, "dy": 0, "layer": "back", "flip": false},
-    {"image": "decor/quarry.png", "src": [22, 0, 16, 11], "tx": 35, "ty": 12, "dx": 1, "dy": 0, "layer": "back", "flip": false},
-    {"image": "decor/quarry.png", "src": [0, 0, 22, 14], "tx": 12, "ty": 14, "dx": 2, "dy": 0, "layer": "back", "flip": false},
-    {"image": "decor/quarry.png", "src": [0, 0, 22, 14], "tx": 18, "ty": 14, "dx": 2, "dy": 0, "layer": "back", "flip": false},
-    {"image": "decor/quarry.png", "src": [22, 0, 16, 11], "tx": 25, "ty": 14, "dx": 1, "dy": 0, "layer": "back", "flip": false}
+    {"image": "decor/quarry.png", "src": [34, 0, 32, 48], "tx": 51, "ty": 4, "dx": 0, "dy": 0, "layer": "far", "flip": false},
+    {"image": "decor/quarry.png", "src": [34, 0, 32, 48], "tx": 75, "ty": 9, "dx": 0, "dy": 0, "layer": "far", "flip": false},
+    {"image": "decor/quarry.png", "src": [34, 0, 32, 48], "tx": 51, "ty": 10, "dx": 0, "dy": 0, "layer": "far", "flip": false},
+    {"image": "decor/quarry.png", "src": [34, 0, 32, 48], "tx": 39, "ty": 12, "dx": 0, "dy": 0, "layer": "far", "flip": false},
+    {"image": "decor/quarry.png", "src": [34, 0, 32, 48], "tx": 15, "ty": 14, "dx": 0, "dy": 0, "layer": "far", "flip": false},
+    {"image": "decor/quarry.png", "src": [34, 0, 32, 48], "tx": 27, "ty": 14, "dx": 0, "dy": 0, "layer": "far", "flip": false},
+    {"image": "decor/quarry.png", "src": [20, 0, 14, 10], "tx": 51, "ty": 4, "dx": 1, "dy": 0, "layer": "back", "flip": false},
+    {"image": "decor/quarry.png", "src": [0, 0, 20, 14], "tx": 51, "ty": 10, "dx": 2, "dy": 0, "layer": "back", "flip": false},
+    {"image": "decor/quarry.png", "src": [20, 0, 14, 10], "tx": 54, "ty": 10, "dx": 1, "dy": 0, "layer": "back", "flip": false},
+    {"image": "decor/quarry.png", "src": [20, 0, 14, 10], "tx": 31, "ty": 12, "dx": 1, "dy": 0, "layer": "back", "flip": false},
+    {"image": "decor/quarry.png", "src": [20, 0, 14, 10], "tx": 35, "ty": 12, "dx": 1, "dy": 0, "layer": "back", "flip": false},
+    {"image": "decor/quarry.png", "src": [0, 0, 20, 14], "tx": 12, "ty": 14, "dx": 2, "dy": 0, "layer": "back", "flip": false},
+    {"image": "decor/quarry.png", "src": [0, 0, 20, 14], "tx": 18, "ty": 14, "dx": 2, "dy": 0, "layer": "back", "flip": false},
+    {"image": "decor/quarry.png", "src": [20, 0, 14, 10], "tx": 25, "ty": 14, "dx": 1, "dy": 0, "layer": "back", "flip": false}
   ]
 }

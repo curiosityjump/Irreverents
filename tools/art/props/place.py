@@ -13,7 +13,7 @@ from sizes import ROOT, rooms as load_rooms, rect
 T = 16
 
 # round 3: where the light is on each lit piece, from its bottom-left: (glow radius, x, y up from the bottom)
-GLOW3 = {'chandelier-hung': (22, 13, 8), 'lantern-hung': (14, 5, 6), 'fire': (20, 11, 10)}
+GLOW3 = {'chandelier-hung': (22, 13, 8), 'lantern-hung': (14, 5, 6), 'fire': (20, 9, 13)}
 
 
 class Room:
@@ -276,7 +276,7 @@ def outpost(R):
     for tx in range(9, R.w - 2):
         R.add('camp', 'palisade', tx, 10, layer='far', support='wall')
     R.add('camp', 'tent', 10, 10, dx=4)
-    R.add('camp', 'flag', 14, 10, dx=4)
+    R.add('camp', 'flag', 14, 10, dx=-6)
     R.add('camp', 'rack', 15, 10, dx=6)
     R.add('camp', 'fire', 22, 10, dx=4)
     R.add('camp', 'crate', 30, 10)

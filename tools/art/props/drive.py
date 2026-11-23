@@ -196,3 +196,62 @@ def alert_pip(on):
             if c[3]:
                 out.putpixel((x, y), c if c[:3] == INK[:3] else mix(c, col('night', 2), 0.65))
     return out
+
+
+# ---- P03 pixel-art-vfx-and-pickup-atlas ('vfx'): hits, dust, alert rays, the '!' and '?' bubbles
+VFXR = ramps('gold', 'orange', 'red', 'metal', 'skin', 'stone', 'earth', 'purple')
+
+
+def _cuts(boxes, w, h, pal=VFXR, align='center', **kw):
+    return _strip([grab('vfx', b, 0, pal, size=(w, h), **kw) for b in boxes], w, h, align)
+
+
+def fx_hit():
+    """32 x 32 x 5: the P03 starburst growing to full, then breaking into sparks (row 1)."""
+    boxes = [(440, 50, 528, 132), (520, 42, 625, 138), (618, 42, 722, 140), (618, 42, 722, 140), (40, 70, 100, 130)]
+    sizes = [(20, 20), (28, 28), (30, 30), (20, 20), (12, 12)]
+    return _strip([grab('vfx', b, 0, VFXR, size=s) for b, s in zip(boxes, sizes)], 32, 32)
+
+
+def fx_dust():
+    """24 x 24 x 5: the P03 dust puffs (row 4), growing then thinning."""
+    boxes = [(28, 535, 92, 590), (95, 515, 172, 592), (168, 500, 272, 594), (268, 508, 362, 592), (268, 508, 362, 592)]
+    sizes = [(10, 9), (16, 15), (22, 18), (20, 16), (14, 11)]
+    return _strip([grab('vfx', b, 0, VFXR, size=s, largest=False) for b, s in zip(boxes, sizes)], 24, 24, 'bottom')
+
+
+def fx_clang():
+    """32 x 20 x 3: the P03 alert ray fans (row 5), gold, gold, red: rays fanning up over the ringing bell."""
+    boxes = [(52, 638, 152, 722), (182, 632, 282, 722), (328, 628, 432, 722)]
+    return _cuts(boxes, 26, 18, align='bottom')
+
+
+def mood(which):
+    """12 x 12 x 2: the P03 '?' (mood 2) or '!' (mood 3) bubble, a white bubble so no hat or plume swallows it;
+    the second frame is the same bubble a pixel higher (a bob)."""
+    box = (768, 642, 858, 724) if which == 2 else (636, 642, 728, 724)
+    b = grab('vfx', box, 0, ramps('metal', 'red', 'purple', 'blue', 'cloud'), size=(11, 11))
+    a = new(12, 12)
+    paste(a, b, 0, 1)
+    c = new(12, 12)
+    paste(c, b, 0, 0)
+    out = new(24, 12)
+    out.paste(a, (0, 0))
+    out.paste(c, (12, 0))
+    return out
+
+
+# ---- the camp and the quarry: what the plates do show
+def camp_fire():
+    """P08 chibi biome atlas, the lava band: a fire in an iron brazier (no plate has a campfire)."""
+    return grab('biome', (850, 555, 935, 635), 0.26, ramps('orange', 'gold', 'red', 'night', 'stone'))
+
+
+def camp_flag():
+    """P07 platformer tileset: the star banner on its pole."""
+    return grab('platformer', (722, 852, 798, 962), 0.4, ramps('wood', 'gold', 'red', 'stone'))
+
+
+def rocks(big=True):
+    """P07 platformer tileset: the grey boulder heap, and the small stones beside it."""
+    return grab('platformer', (875, 168, 1002, 265), 0.17 if big else 0.12, ramps('stone', 'castle'))

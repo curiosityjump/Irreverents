@@ -36,6 +36,8 @@ SHEETS = {
     'brawl': 'p05-hud-powers-cantina-brawl-and-secrets-visual-source-sheets/p05-brawl-hit-ko-respawn-source.png',
     'ui': 'p07-first-playable-npc-enemies-mechanisms-terrain-hud-source/irreverents-pixel-ui-atlas.png',
     'vibrant': 'p07-first-playable-npc-enemies-mechanisms-terrain-hud-source/vibrant-platformer-interactables-sprite-sheet.png',
+    'biome': 'p08-additional-townsfolk-enemies-building-blocks-biomes-source/chibi-pixel-biome-tileset-atlas.png',
+    'platformer': 'p07-first-playable-npc-enemies-mechanisms-terrain-hud-source/pixel-art-platformer-tileset-atlas.png',
     'fantasy': 'p08-additional-townsfolk-enemies-building-blocks-biomes-source/colorful-retro-fantasy-tileset-atlas.png',
 }
 _cache = {}

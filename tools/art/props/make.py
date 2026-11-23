@@ -114,14 +114,14 @@ def looks_sheets():
     # ---- fx
     # round 2: hits you feel (handoff-prompts/look2-props.md, section 3.1)
     s = Sheet(160)
-    s.add('fx-hit', r2.fx_hit(), frames=5, fps=18)
+    s.add('fx-hit', dv.fx_hit(), frames=5, fps=18)  # P03 vfx atlas
     s.newrow()
     s.add('fx-slash', r2.fx_slash(), frames=5, fps=20)
     s.newrow()
     s.add('fx-swing-grappler', r2.fx_swing_grappler(), frames=3, fps=16)
     s.add('fx-land', lq.fx_land(), frames=4, fps=15)
     s.newrow()
-    s.add('fx-dust', r2.fx_dust(), frames=5, fps=15)
+    s.add('fx-dust', dv.fx_dust(), frames=5, fps=15)  # P03 vfx atlas
     s.newrow()
     # round 3: a tumble, a dizzy landing, a ringing bell
     s.add('fx-speed', dv.fx_speed(), frames=3, fps=15); s.add('fx-dizzy', dv.fx_dizzy(), frames=4, fps=8)  # P05 brawl
@@ -220,12 +220,12 @@ def decor_sheets():
     s.add('glow-22', r3.glow(22)); s.add('glow-14', r3.glow(14))
     sheets['tavern'] = s
     s = Sheet(256)
-    s.add('tent', r3.tent()); s.add('tent-blue', r3.tent(30, 26, 'blue')); s.add('flag', r3.flagpole())
-    s.add('rack', r3.weapon_rack()); s.add('fire', r3.campfire()); s.add('crate', r3.crate())
+    s.add('tent', r3.tent()); s.add('tent-blue', r3.tent(30, 26, 'blue')); s.add('flag', dv.camp_flag())  # flag: P07
+    s.add('rack', r3.weapon_rack()); s.add('fire', dv.camp_fire()); s.add('crate', r3.crate())  # fire: P08 biome brazier
     s.add('palisade', r3.palisade()); s.add('glow-20', r3.glow(20))
     sheets['camp'] = s
     s = Sheet(160)
-    s.add('rocks', r3.rock_pile()); s.add('rocks-small', r3.rock_pile(14, 9, 1)); s.add('scaffold', r3.scaffold())
+    s.add('rocks', dv.rocks()); s.add('rocks-small', dv.rocks(False)); s.add('scaffold', r3.scaffold())  # rocks: P07 platformer boulders
     s.add('lantern-hung', r3.hang(c['lantern'], 32 - c['lantern'].height)); s.add('glow-14', r3.glow(14))
     sheets['quarry'] = s
     return sheets
