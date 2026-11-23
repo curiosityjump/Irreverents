@@ -16,6 +16,7 @@ import fs from 'node:fs';
 import { createRequire } from 'node:module';
 import net from 'node:net';
 import path from 'node:path';
+import { phoneFacts } from './e2e/phone.ts';
 import { root } from './lib/registries.ts';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -453,6 +454,8 @@ async function main(): Promise<void> {
       fact('h2', onNew && loadsA - loads1 === 1 && after.status === 'online',
         `the server was restarted as a different commit: the desktop page reloaded ${loadsA - loads1} time(s) (exactly 1 expected), ${onNew ? 'now runs the new build' : 'did NOT pick up the new build'} and is ${after.status}`);
     }
+
+    await phoneFacts({ browser, devices, base, out, tag: LIVE ? 'check' : 'e2e', fact, errors });
 
     fact('errors', errors.length === 0, errors.length ? `page errors: ${errors.join(' | ')}` : 'no page raised an error');
     await ctxA.close();

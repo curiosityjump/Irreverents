@@ -43,9 +43,8 @@ export function setUpShell(canvas: HTMLCanvasElement, touch: HTMLElement, hint: 
     } else if (touchScreen && scale >= 2 && barAt(scale) < BAR_NEEDED && barAt(scale - 1) >= BAR_NEEDED) {
       // INTENT: controls never cover the play field. On a phone wider than
       // 16:9 the view gives up one step of size so the controls fit in the
-      // bars beside it (5x to 4x on an iPhone 14). DRAFT: when even that
-      // leaves no room (a 16:9 phone) the view stays full size and the
-      // controls overlap its bottom corners; Step 5 owns a better answer.
+      // bars beside it (5x to 4x on an iPhone 14). Where even that leaves
+      // no room (a 16:9 phone) see `over` below.
       scale--;
     }
     const cw = (VIEW_W * scale) / dpr;
@@ -62,15 +61,26 @@ export function setUpShell(canvas: HTMLCanvasElement, touch: HTMLElement, hint: 
     let lz = { left: inset.left + gap, width: left - inset.left - 2 * gap };
     let rz = { left: left + cw + gap, width: W - inset.right - (left + cw) - 2 * gap };
     let button = 0;
+    let over = false;
     if (upright) {
       lz = { left: inset.left + 12, width: Math.min(180, W / 2 - inset.left - 20) };
       const width = W / 2 - inset.right - 20;
       rz = { left: W - inset.right - 12 - width, width };
       button = Math.max(44, Math.min(76, Math.floor((width - gap) / 2)));
     } else if (lz.width < BAR_NEEDED - 2 * gap) {
-      lz = { left: inset.left + 12, width: 150 };
-      rz = { left: W - inset.right - 12 - 170, width: 170 };
-      button = 76;
+      // DRAFT: a 16:9 phone (iPhone SE, 6/7/8 and Plus) has no bars, and
+      // giving up a size step leaves bars too narrow to use, so the
+      // controls sit over the view and are made see-through: only a small
+      // faint mark is painted, the touch area stays large, and they hug
+      // the bottom corners (docs/plan/step-5.md, "Controls never hide the
+      // game"; index.html `#touch.over`; e2e facts i-667x375, i-736x414).
+      // To reconsider: the camera keeping the player clear of them (Step 3).
+      over = true;
+      const edge = 4;
+      button = 60;
+      lz = { left: inset.left + edge, width: 136 };
+      const width = 2 * button + edge;
+      rz = { left: W - inset.right - edge - width, width };
     } else {
       lz.width = Math.min(lz.width, 180);
       lz.left = Math.max(inset.left + gap, left - gap - lz.width);
@@ -82,7 +92,10 @@ export function setUpShell(canvas: HTMLCanvasElement, touch: HTMLElement, hint: 
     set('--rz-left', rz.left);
     set('--rz-width', rz.width);
     set('--btn', button);
-    set('--bottom', Math.max(12, inset.bottom + 6));
+    set('--bottom', over ? Math.max(4, inset.bottom) : Math.max(12, inset.bottom + 6));
+    set('--pad-h', over ? 64 : 76);
+    set('--gap', over ? 4 : 8);
+    touch.classList.toggle('over', over);
     hint.style.setProperty('--hint-top', `${top + ch + 8}px`);
     hint.hidden = !upright || hint.dataset.dismissed === '1';
     current = { scale, upright };

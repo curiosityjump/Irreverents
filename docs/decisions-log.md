@@ -453,3 +453,9 @@ document as a decision of theirs.
 - **To change it:** the rooms are data (`content/rooms/throne-room.json`, `undercroft.json`): move the letters. To make the way back hidden from below too, set `hidden` on the undercroft's door.
 - **Where:** `docs/mechanisms/rooms-and-doors.md`, "The map tonight".
 
+### 2026-11-23 · On an iPhone SE or 8 the buttons are see-through words over the game, not discs
+- **Decided by:** brief-worker, Step 5 slice A (brief by the Step 5 lead, `session_017WiGzJfkNbzJfpRVPhWoeK`)
+- **Instead of asking:** "On the iPhones whose screen is exactly the game's shape (SE 2/3, 6/7/8, Plus) there is no spare strip for buttons. Shrink the game to make room, or put the buttons on top of it?"
+- **Why this way:** your rule that controls never hide the game. Shrinking the game a step leaves strips too thin for a thumb, so the game stays full size and each button is only a small faint word (and two small arrows for moving) in the bottom corners, with a large invisible area to touch; it lights up while your thumb is on it. Before, five discs and a box covered about a seventh of the room, including a crate and a ledge. On wider iPhones (12 and later) nothing changes: the buttons sit beside the game.
+- **To change it:** the block marked `DRAFT:` under `over` in `src/client/shell.ts` and the `#touch.over` rules in `src/client/index.html`; delete both to get the discs back.
+- **Where:** `docs/mechanisms/network.md`, "The page shell"; `scripts/e2e/phone.ts`.

@@ -151,8 +151,13 @@ into an error page.
 - The canvas is 320×180, sized in **device** pixels to a whole multiple.
 - **Sideways on a touch screen** the controls sit in the bars beside the
   view; the view gives up one step of scale when that is what makes them
-  fit (5× to 4× on an iPhone 14). On a 16:9 phone there are no bars and
-  the controls overlap the bottom corners (`DRAFT:`, Step 5).
+  fit (5× to 4× on an iPhone 14).
+- **On a 16:9 phone** (iPhone SE 2/3, 6/7/8 and Plus) there are no bars,
+  so the controls sit over the view and are see-through (`DRAFT:`;
+  `#touch.over` in `index.html`, set by `shell.ts`): only a faint label
+  or arrow is painted, the touch area is 60 px (the stick 136×64), they
+  hug the bottom corners, and a press lights the control under the
+  thumb. The camera keeping the player clear of them is not built.
 - **Upright** (`INTENT:` there is always a way out: rotation lock) the
   view is across the top, the controls below, with one dismissible line.
 - The touch layer builds one button per file in `content/actions/`
@@ -178,6 +183,15 @@ it back. **Checks assert on `drawn`, never on server state.**
   the script (`page.routeWebSocket`), which is how 150 ms is added each
   way (and measured from the page's own round trip) and how the socket is
   cut. Screenshots in `e2e-out/`.
+  `scripts/e2e/phone.ts` (called from `e2e.ts`; not in `scripts/checks/`,
+  whose files `npm run check` loads without a browser) adds one fact per
+  16:9 iPhone size, `i-667x375` and `i-736x414`: every action and the
+  stick has a control, on screen, 44 px or more, reachable at its centre,
+  clear of a notch and home bar (headless Chromium has no insets, so the
+  script sets `#safe`'s padding and re-runs the layout), two fingers run
+  and jump, and the controls paint over at most 3% of the view. The
+  painted share is measured: the view's box photographed with and without
+  `#touch`, the game hidden both times, compared pixel by pixel.
 - **`npm run check:live`**: the same file with `--live`: first `npm run
   check:deployed`, then facts (a)–(c), (e) and the rate against the live
   address. **`INTENT:` scripted players never join the world people play
@@ -197,6 +211,7 @@ on the first version); effects never resent (the push facts); the page
 never acknowledging (the acknowledgement fact); only the newest input sent, and the report overwriting the server's `c` (the one-tap fact, each: 0 presses seen); reconnect disabled (e,
 h1, h2); the built server throwing at start (`built-server`); upright
 treated as sideways and the view never shrinking for the bars (c2, g);
+the first touch layout, discs over the view (i-667x375: 14.76% painted, i-736x414: 9.71%);
 and on the first version: own input made to wait a round trip (d:
 331 ms) and the server ignoring the world name (f).
 
