@@ -1120,3 +1120,10 @@ document as a decision of theirs.
 - **Why this way:** measured on today's numbers (`docs/plan/step-21.md`, "Push 1"): every hero who stands among the camp's fighters, or swings every two seconds the wrong way half the time, is knocked flat within seconds of a wave and many times a minute; under the street's second and third alert too; a hero who keeps striking well mostly stays up, and everyone can still run for the door. That is the bar the plan set (D-019 "battles, last stands and narrow escapes"; doc 18: recovery time must not become the difficulty), so nothing was made harder.
 - **To change it:** the fighters' and guards' `attackWear` and `attackWindup` in `content/tuning.json` (the waves and town-tiers slices' numbers: ask them).
 - **Where:** `docs/plan/step-21.md`, "Push 1". `DRAFT:`
+
+### 2026-11-23 · DRAFT: a hero is thrown out after several knock-downs in a window, not on the first
+- **Decided by:** orchestrator, `session_017WiGzJzo6aZqH4kYxxJsiV` (asked by the risk builder, `session_017WiGzJWYyVWtYnjFXHko1S`, Step 21 push 2)
+- **Instead of asking:** thrown out the first time you are knocked flat with an enemy in reach (which turned five other steps' scenarios red), or only after N knock-downs?
+- **Why this way:** "Getting caught opens play": a fight, a last stand or an escape. With one fall ending it, no last stand can grow big enough for the Hall to remember (the waves loop), and Step 18's "a beaten hero gets up" is never seen. N and the window are data per place, chosen from the builder's measured table so a hero who stands or fights badly is thrown out within about a minute; the count shows on the HUD so the stakes are read first.
+- **To change it:** N = 1 in `content/defeat/<place>.json` is the other answer; the five scenarios it reddens are listed in `docs/plan/step-21.md`, "Push 2".
+- **Where:** `docs/plan/step-21.md`, "Push 2"; `content/defeat/`.
