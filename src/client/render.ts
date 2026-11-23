@@ -7,6 +7,7 @@ import { drawCantina, drawCantinaBell } from './draw/cantina.ts';
 import { drawBackdrop, drawFrontLayers } from './draw/backdrop.ts';
 import { drawDecor } from './draw/decor.ts';
 import { drawEntities } from './draw/entities.ts';
+import { watchWords } from './draw/fx.ts';
 import type { PlayerView } from './draw/entities.ts';
 import { drawHall } from './draw/hall.ts';
 import { drawImpact } from './draw/impact.ts';
@@ -42,6 +43,7 @@ const SKY = '#1b1b2f';
 export function render(g: CanvasRenderingContext2D, world: World, content: Content, roomId: string, pv?: PlayerView): { x: number; y: number } {
   const W = view.w;
   const H = view.h;
+  watchWords(g); // every string drawn into the picture is recorded (draw/fx.ts, takeWords)
   const room = content.rooms[roomId];
   if (!room) {
     g.fillStyle = SKY;

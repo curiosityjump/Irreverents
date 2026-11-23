@@ -101,7 +101,15 @@ is this one (see the flag below).
   letters straight on the paper, no halo, wrapped at 119 px), the plain
   label fallback, the king's ribbon (light letters, their own shadow) and
   the Hall's card (light letters recoloured per line). With the font
-  missing, every one falls back to `fillText` exactly as before. Proven
+  missing, every one falls back to `fillText` exactly as before.
+  **Every string drawn into the game picture is recorded** (Step 2,
+  signal 6): `drawText` notes its line, and `watchWords` (called by
+  `render()` on the game canvas's context, once) makes that context's
+  `fillText` note its string too, so a fallback, `edgedText` or a direct
+  `fillText` added later is in the record without knowing about it
+  (`INTENT:` at `watchWords`). The page takes the list once a frame
+  (`takeWords`) into `window.irreverents.drawn.words`; the e2e fact
+  `t-no-numbers` reads it. Proven
   first with a throwaway 95-glyph strip, then with the props lane's real
   font (992647b) in the after screenshots.
 - **The ribbon** (`audience.ts`): its bottom, tail included, stays 4 px

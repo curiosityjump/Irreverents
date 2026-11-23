@@ -13,6 +13,7 @@ import { isTouchDevice, setUpShell } from './shell.ts';
 import { watchTouch } from './touch.ts';
 import { createAudio } from './audio/index.ts'; // audio hook (Step 8)
 import { setUpTune, tuneWanted } from './tune.ts';
+import { takeWords } from './draw/fx.ts';
 import { drawnSignalers } from './draw/outpost.ts';
 
 const content = __CONTENT__;
@@ -173,6 +174,8 @@ const debug = {
     entities: [] as Drawn[],
     /** Step 12: the outposts' horn posts this frame drew, and in which state (src/client/draw/outpost.ts). */
     signalers: [] as ReturnType<typeof drawnSignalers>,
+    /** Step 2, signal 6: every string drawn into the game picture this frame (draw/fx.ts, takeWords); the tuning panel and the page shell are HTML, not in it. */
+    words: [] as string[],
   },
 };
 (window as unknown as { irreverents: unknown }).irreverents = debug;
@@ -224,6 +227,7 @@ function frame(): void {
   d.entities = result.drawn;
   d.me = result.drawn.find((e) => e.mine) ?? null;
   d.signalers = drawnSignalers();
+  d.words = takeWords();
   requestAnimationFrame(frame);
 }
 requestAnimationFrame(frame);

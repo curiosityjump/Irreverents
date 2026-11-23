@@ -209,7 +209,7 @@ headless browser, and how it feels is the owner's to judge.
 
 ## Across two phones (measured 2026-11-23)
 
-- **The check:** thirteen facts inside `npm run e2e`, named `t-*` (what
+- **The check:** fourteen facts inside `npm run e2e`, named `t-*` (what
   a touch did on its own page) and `s-*` (what the second screen drew),
   in `scripts/lib/e2e-touch.ts`: two phone-sized pages, touch only, in
   a private world, in whatever room players start in, read from what
@@ -218,6 +218,12 @@ headless browser, and how it feels is the owner's to judge.
   grab). They failed until Step 1's 2a7fd98 (the server keeping its own
   `entity.c` for a player); before it no hit, grab or throw worked on
   the real page.
+- **No number over a hit** (`t-no-numbers`, Step 2's signal 6): across
+  that whole fight, on both pages, no string the page drew into the game
+  picture (`drawn.words`, see `docs/mechanisms/rendering-actors.md`,
+  "Text") holds a digit. The HTML around the picture (tuning panel,
+  start screen, shell) is not read: it shows numbers on purpose. Control:
+  `E2E_TOUCH_BREAK=number-over-hit` draws "12" over any knocked body.
 - **Proven, by touch and on both screens:** grab a crate, carry it,
   throw it; hit a body away; switch hero; grab a friend, who is drawn
   held on their own screen, breaks free with Jump, is thrown and sees

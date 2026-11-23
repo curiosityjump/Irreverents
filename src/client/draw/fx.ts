@@ -105,6 +105,7 @@ export function lineHeight(name: FontName, fallback: number): number {
 export function drawText(g: CanvasRenderingContext2D, text: string, x: number, y: number, name: FontName, color?: string): boolean {
   const f = font(name);
   if (!f) return false;
+  noteWords(text);
   const source = color ? tinted(f, color) : undefined;
   const px = Math.round(x);
   const py = Math.round(y);
@@ -116,6 +117,42 @@ export function drawText(g: CanvasRenderingContext2D, text: string, x: number, y
     drawFrame(g, f, code, px + i * f.w, py, source ? { source } : {});
   }
   return true;
+}
+
+// Step 2, signal 6: every string drawn into the game picture, for the
+// page's debug record (`window.irreverents.drawn.words`). Impact is
+// physical, never a number on screen (docs/vision.md, "What it is not"),
+// and the e2e fact `t-no-numbers` reads this to check it. Filled by
+// drawText (the pixel font) and by fillText on the game canvas
+// (watchWords); taken, and emptied, once per frame by the page.
+let words: string[] = [];
+/** Notes one string as drawn into the game picture (each once per frame). */
+export function noteWords(text: string): void {
+  if (text !== '' && !words.includes(text)) words.push(text);
+}
+/** The strings drawn into the game picture since the last call, in the order first drawn. */
+export function takeWords(): string[] {
+  const out = words;
+  words = [];
+  return out;
+}
+const watched = new WeakSet<CanvasRenderingContext2D>();
+/**
+ * Makes every fillText on this context note its string too: words drawn
+ * the old way (no font yet, edgedText, a direct fillText) count as drawn.
+ * INTENT: on the context itself, not at each call site, so a string a later
+ * change draws into the game picture is in the record without that change
+ * knowing about it. Once per context; it draws exactly as before.
+ */
+export function watchWords(g: CanvasRenderingContext2D): void {
+  if (watched.has(g)) return;
+  watched.add(g);
+  const fill = g.fillText.bind(g);
+  g.fillText = (text: string, x: number, y: number, maxWidth?: number): void => {
+    noteWords(String(text));
+    if (maxWidth === undefined) fill(text, x, y);
+    else fill(text, x, y, maxWidth);
+  };
 }
 
 /** Breaks text into lines no wider than `width` pixels in this font (a word longer than a line stands alone). */

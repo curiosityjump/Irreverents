@@ -262,6 +262,41 @@ async function whenCarried(ph: Phone, top: Key, under: Key, carried: boolean, ms
   }
 }
 
+/**
+ * Step 2, signal 6: from now on, every string the page draws into the game
+ * picture (`irreverents.drawn.words`, each frame's) is kept on the page, to
+ * be read by `wordsSeen`. The control: E2E_TOUCH_BREAK=number-over-hit
+ * makes the page draw "12" over any body nobody plays while it is being
+ * knocked about (drawn more than 2 px from the frame before), as a game
+ * showing damage numbers would, and `t-no-numbers` must fail.
+ */
+async function keepWords(ph: Phone): Promise<void> {
+  await ph.page.evaluate((breakIt: boolean) => {
+    const w = window as any;
+    const seen = new Set<string>();
+    w.__e2eWords = seen;
+    w.__e2eFrames = 0;
+    const last = new Map<string, number>();
+    const g = (document.getElementById('game') as HTMLCanvasElement).getContext('2d')!;
+    const tick = (): void => {
+      const d = w.irreverents.drawn;
+      for (const t of d.words as string[]) seen.add(t);
+      w.__e2eFrames++;
+      if (breakIt) {
+        for (const e of d.entities) {
+          const was = last.get(e.id);
+          last.set(e.id, e.x);
+          if (e.player === null && was !== undefined && Math.abs(e.x - was) > 2) g.fillText('12', e.px - d.camera.x, e.py - d.camera.y - 4);
+        }
+      }
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }, process.env.E2E_TOUCH_BREAK === 'number-over-hit');
+}
+const wordsSeen = (ph: Phone): Promise<{ words: string[]; frames: number }> =>
+  ph.page.evaluate(() => ({ words: [...(window as any).__e2eWords], frames: (window as any).__e2eFrames as number }));
+
 export async function touchAndThrows(kit: Kit): Promise<void> {
   const { fact } = kit;
   const url = `${kit.base}/?room=e2e-touch-${Math.random().toString(36).slice(2, 10)}`;
@@ -270,6 +305,8 @@ export async function touchAndThrows(kit: Kit): Promise<void> {
   const A = await phone(kit, url, 'touch A');
   const B = await phone(kit, url, 'touch B');
   try {
+    await keepWords(A);
+    await keepWords(B);
     await B.page.waitForFunction((p: string) => (window as any).irreverents.drawn.entities.some((d: any) => d.player === p), A.id, { timeout: 5000 }).catch(() => {});
     await A.page.waitForFunction((p: string) => (window as any).irreverents.drawn.entities.some((d: any) => d.player === p), B.id, { timeout: 5000 }).catch(() => {});
     const a0 = await me(A);
@@ -456,6 +493,17 @@ export async function touchAndThrows(kit: Kit): Promise<void> {
     await steer(B, -dir, after.x - dir * 12, 3000);
     const after2 = await me(B);
     fact('s-after', held2 !== null && Math.abs(after.x - after2.x) >= 8, `after the throw B walks by its own stick again: from x ${n(after.x)} to ${n(after2.x)}`);
+
+    // Signal 6 (docs/plan/step-2.md, "Feedback signal"): impact is physical,
+    // never a number on screen. Across the whole fight above (a crate thrown,
+    // a body hit, a friend thrown), on both pages, no string drawn into the
+    // game picture holds a digit. The HTML around it (the tuning panel, the
+    // start screen, the shell) is not the picture and is not read.
+    const [wa, wb] = await Promise.all([wordsSeen(A), wordsSeen(B)]);
+    const numbered = [...new Set([...wa.words, ...wb.words])].filter((t) => /[0-9]/.test(t));
+    const sample = (w: string[]): string => (w.length === 0 ? 'none' : w.slice(0, 4).map((t) => JSON.stringify(t)).join(', ') + (w.length > 4 ? ', ...' : ''));
+    fact('t-no-numbers', wa.frames > 100 && wb.frames > 100 && numbered.length === 0,
+      `over the fight A's page drew ${wa.frames} frames with ${wa.words.length} different string(s) in the picture (${sample(wa.words)}), B's ${wb.frames} with ${wb.words.length} (${sample(wb.words)}); ${numbered.length === 0 ? 'none holds a digit' : `holding a digit: ${sample(numbered)}`}`);
 
     await A.page.screenshot({ path: `${kit.out}/touch-a.png` });
     await B.page.screenshot({ path: `${kit.out}/touch-b.png` });
