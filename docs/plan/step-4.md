@@ -386,3 +386,23 @@ for later, as the step suggests.
   street; following through doors; hiding unseen; the rest), hard stop
   10:15 UTC with whatever is green. `scripts/trace.ts`'s one-line fix is
   folded into push 1 (the orchestrator gave it to this step).
+- **Lead, 09:36 UTC. Slice 2 push 1 reviewed** (`513dbf5`, worker
+  `session_017WiGzEUPtEnYYKos3LUoLn`, second run). A bell, the call,
+  the area alert, the placed guard responding, cooling; `street-bell`
+  at column 24 of `castle-street`; `scripts/trace.ts` mended. **Gate
+  D's scenarios, by signal:** 3 `step4-call-brings-help`,
+  `step4-call-stopped-no-help` (bell broken; the knocked-out-caller
+  version is not written); 4 `step4-zero-alarm`; 5
+  `step4-catastrophe-and-escape`, `step4-incident-restarts-wait`; and
+  `step4-rage-without-a-call` (the one-raise rule). Review: fresh pull,
+  build and check green (82 ok), gates C and D listed by name; the
+  alert has one raising line (`src/sim/npc/alert.ts`); my control
+  (responders steering at any hero in the room instead of one they see)
+  fails three of the six. **On the live address** (1219e77, two
+  separate browser players, private world): one took goods in view; on
+  the other player's screen the shopkeeper showed "?", walked to the
+  bell, and ten seconds later an alert mark was at the top of the
+  screen and the guard, red with "!", had come down the street to the
+  bell. **Not verified by me:** hiding until the alert clears on the
+  live page, touch, a real iPhone. Still to come from the worker before
+  its 10:15 stop: following through doors, hiding unseen.
