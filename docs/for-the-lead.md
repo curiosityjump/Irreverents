@@ -159,3 +159,19 @@ actually read (questions for the owner go through
 **Flag:** the banner's "new" means "not in the first frame that had a world in it". If Step 1's network layer delivers the world over several frames, or re-delivers it after a reconnect, check that old records are not announced (several arriving in one frame are already ignored).
 
 **Flag:** rung 5 was by eye, on hand-made records pushed into the page's world; nothing scripted covers the drawing, and the real path (detector → pedestal → page, two devices) has not been seen. Text follows `draw/npcs.ts` (`fillText`, 8 px): readable, soft on a phone; a shared pixel font would be Step 5's or 8's call.
+
+### step-4-slice-3-street.md, 2026-11-23
+
+**Flag (the one that matters): "Use" does nothing on the real page, by touch or by key.** Seen on a local built server, one player, a private world, standing on `street-goods-1`: a 120 ms touch on Use, a 700 ms hold and six quick taps all left the goods on screen and the shopkeeper calm; `E` on a desktop page the same. After the key press the page's own `window.irreverents.world` has `street-goods-1.c.thing.takenBy` set to the player while the goods are still drawn: the take happened only in the page's own copy. My reading, not proven: the page simulates its own character, so `c.interact.held` is already true in the state it reports, and the server's `npc-interact` never sees a fresh press. It is the trap the brief named, and it is not a rare misfire: I did not get one take through in nine tries. So tonight a player **watches** people react (the villain's round) and cannot yet make them react by taking or buying; hitting them goes through Step 2's verbs and I did not try it. The scenario proves take and buy in the simulation only. Step 1's (`src/net`, `src/server`).
+
+**Flag:** `scripts/trace.ts` crashes in any room that has `things` (`feet()` reads the box of kind `~thing`, which has none). I traced with a scratch script instead and did not touch `scripts/`. Whoever owns it: skip entities whose kind has no character.
+
+**Flag:** a failing control that edits `content/` leaves `dist/` built from the broken content, because `npm run check` rebuilds when `dist/` is stale; restoring the file does not rebuild. I looked at a page served from that stale build and for a minute saw a villain whose polite purchase troubled nobody. `npm run build` after restoring a control, before looking at anything.
+
+**Note:** push 2 (the stand-in shopkeeper in `graybox-hall`) was skipped as the brief says: `startRoom` was already `throne-room` when I started. Push 3 not done: `grep -rn roomHide src` still returns nothing.
+
+**Note:** at 844x390 the play view is 480 px wide (game pixels at 1.5x, so not whole pixels; Step 1's) with the controls beside it. The `?` mark and the barks ("Thief! Begone!", "W-what?!", "Yup! As expected!") are small but readable there. A bark box near the screen's left edge would be cut off; none is at the shop.
+
+**Note:** the villain's first robbery is 4.6 s after the world starts and a player walking straight from the throne room arrives at about 5 s, so the first thing seen is usually "Thief! Begone!". The polite purchase is at about 19 s and every 53 s after. The street's people run from the start of the world whether or not anyone is in the street.
+
+**Note:** Step 3's hiding place under building 1's overhang will share columns 10–17 with the shop. If it should not, move the shop: every column is `DRAFT:`, but `step4-street-people` pins ticks and needs a re-trace.

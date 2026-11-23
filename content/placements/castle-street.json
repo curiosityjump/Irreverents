@@ -1,0 +1,35 @@
+{
+  "//": "DRAFT (Step 4, slice 3): the first people a player can meet, placed where a player walking east out of the throne room finds them. A shopkeeper under building 1's overhang with a counter and three goods in front of them (they glance behind every few seconds, which is when goods can be taken unseen). A villain who rests near column 21 and, about once a minute, walks up to the end of the goods (column 17, clear of where a player stands to use them), robs the shop (the shopkeeper happily opposes him), walks off, comes back and politely buys (the shopkeeper is distressed), robs properly (relief), then rests: the library's own example, doc 23; the loop is in docs/decisions-log.md. A guard pacing a post at columns 37-42, more than 7 tiles (sight) from the shop, so nothing at the shop reaches the guard yet. Columns 1-6 (the west door and the spawns) and the doorway at column 28 are kept clear. Every column and every timing here is a first guess: move people freely, but these ids are permanent. Their own routines: test-shop's are pinned by its scenarios and are not shared.",
+  "id": "castle-street",
+  "room": "castle-street",
+  "place": [
+    {
+      "id": "street-shopkeeper", "character": "shopkeeper", "tile": [11, 10], "npc": "shopkeeper",
+      "routine": [{ "walk-to": 11 }, { "face": "right" }, { "wait": 5 }, { "face": "left" }, { "wait": 1.5 }]
+    },
+    {
+      "id": "street-villain", "character": "villain", "tile": [21, 10], "npc": "villain",
+      "routine": [
+        { "wait": 3 },
+        { "walk-to": 17 }, { "do": "rob", "target": "street-shopkeeper" }, { "wait": 1.5 },
+        { "walk-to": 21 }, { "wait": 10 },
+        { "walk-to": 17 }, { "do": "buy", "target": "street-shopkeeper" }, { "wait": 4 },
+        { "do": "rob", "target": "street-shopkeeper" }, { "wait": 1.5 },
+        { "walk-to": 21 }, { "wait": 27 }
+      ]
+    },
+    {
+      "id": "street-guard", "character": "guard", "tile": [40, 10], "npc": "guard",
+      "routine": [
+        { "walk-to": 42 }, { "wait": 2 }, { "face": "left" }, { "wait": 2 },
+        { "walk-to": 37 }, { "wait": 2 }, { "face": "right" }, { "wait": 2 }
+      ]
+    }
+  ],
+  "things": [
+    { "id": "street-counter", "tile": [12, 10], "deed": "buy", "keeper": "street-shopkeeper", "look": "counter" },
+    { "id": "street-goods-1", "tile": [13, 10], "deed": "take", "once": true, "look": "goods" },
+    { "id": "street-goods-2", "tile": [14, 10], "deed": "take", "once": true, "look": "goods" },
+    { "id": "street-goods-3", "tile": [15, 10], "deed": "take", "once": true, "look": "goods" }
+  ]
+}

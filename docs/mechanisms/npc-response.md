@@ -193,10 +193,37 @@ green one (`goods`), gone once taken. Called by one line in
   (`MAX_NPCS_PER_ROOM`, `DRAFT:`).
 - **A thing to use:** an entry in `things`.
 
+## Where the people are (slice 3)
+
+- **`castle-street`** (`content/placements/castle-street.json`, `DRAFT:`
+  every column and timing): `street-shopkeeper` at column 11 under
+  building 1, `street-counter` at 12, goods at 13, 14 and 15;
+  `street-villain` resting at column 21 and walking to column 17 (the
+  end of the goods, clear of where a player stands to use them), whose
+  loop (rob, walk off, buy politely, rob properly, rest) takes about
+  53 s, the polite purchase near 19 s in; `street-guard` pacing columns 37–42, more than a sight
+  from the shop, so nothing at the shop reaches the guard until slice 2
+  gives people a way to call. A player reaches them by walking east out
+  of the throne room, where the game starts.
+- **`test-shop`** is still the check scene and no player can reach it.
+  The street has its own routines; test-shop's are pinned by its
+  scenarios.
+- **No stand-in in `graybox-hall`.** The brief's fallback (a shopkeeper
+  in the grey test hall) was for a start room still in the hall; the
+  start room moved to `throne-room` first, so it was skipped.
+
 ## Checking it
 
-Scenarios `scenarios/step4-*.json`, all in `content/rooms/test-shop.json`
-with `"placements": true`. Two facts were added for them
+`step4-street-people` (no gate tag) is the one in a room players reach:
+one round of the street villain's loop, then a hero takes in view and
+buys. Its ticks are pinned to the street's routines: change a timing in
+the placements file and re-trace it. `scripts/trace.ts` crashes on a
+room with `things` (a thing has no character box); until that is mended,
+print `rec.events` from `simulate()` yourself.
+
+
+The other scenarios `scenarios/step4-*.json` are all in
+`content/rooms/test-shop.json` with `"placements": true`. Two facts were added for them
 (`docs/mechanisms/scenarios.md`): `mood` and `event-where`. The
 villain's polite visit is at about tick 2960; the hero scenarios use the
 time before it. `step4-hero-hits-shopkeeper` is the one that uses a
