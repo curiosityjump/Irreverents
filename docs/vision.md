@@ -132,6 +132,17 @@ golden scenarios remain the owner's own yardsticks for what to add next.
 systems intact. Grey-box shapes and unwired sound now count against the
 measure, not as acceptable placeholders.
 
+**The verdict after playing, 2026-11-23 ~18:30 UTC.** **Owner, to Vision Partner, first-hand:**
+> Remember the original intentions for the game and make sure things align with it. I want to play it as I described it.
+> There are no heists or stealth yet, no puzzles, no hidden places to explore, no characters to unlock, no escalating combats or chases, no power/item stealing,  no vehicle hijacking, no risk. Virtually everything described in the vision docs that would make the game genuinely fun to play is yet to be seen at all
+
+*(Framing:)* passing scripts do not count. Some of these exist in code (a
+zero-alarm sneak, a hidden cellar, guards that chase), but the owner, playing,
+did not find them, so for the measure they do not exist yet. Progress is now
+read as: can the owner, on a phone, *play* each of the core loops above as
+the library describes them, from start to payoff. Each must be findable and
+recognisable without being told where it is.
+
 ## Principles that decide most questions
 
 **No NPC AI.** **Owner, 2026-11-22 (Drive, doc 11, D-055):**
