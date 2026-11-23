@@ -10,7 +10,7 @@ Written by Step 2's dials brief (2026-11-23).
 ## Why it exists
 
 The owner wants the game to feel as good as a careful platformer and is
-the only judge of whether it does (`docs/plan/step-2.md`, "Feel, from
+the only judge of whether it does (`docs/plan-archive.md` ("Step 2"), "Feel, from
 2026-11-23"). So every feel number is put in their hands, on the phone,
 while playing: open the game with `?tune` in the address, change any
 number, feel it at once, and copy the changed numbers out so a session

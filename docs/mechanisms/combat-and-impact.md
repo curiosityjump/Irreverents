@@ -13,7 +13,7 @@ The owner's standard for the game is the "OHHHHH" of physical impact
 knockback into walls/other enemies"). So a hit or a throw is never a
 number on screen: it is a body that flies, slams into a wall or another
 body, holds still for a beat, and moves on. What was built, and every
-choice in it, is Step 2's (`docs/plan/step-2.md`); the choices are
+choice in it, is Step 2's (`docs/plan-archive.md` ("Step 2")); the choices are
 `DRAFT:` and each is in `docs/decisions-log.md`.
 
 ## The pieces, in the order a tick runs them

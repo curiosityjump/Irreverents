@@ -10,7 +10,7 @@ The library's confirmed rules (doc 05, D-012, D-013): one shared party;
 "A character cannot be controlled by two humans at once. Unoccupied
 members are candidates for switching"; no "involuntary takeovers" (doc
 06). Everything else here is `DRAFT:` and decided in
-`docs/plan/step-2.md`, "Decided by the lead": three placeholder members
+`docs/plan-archive.md` ("Step 2"), "Decided by the lead": three placeholder members
 (`grappler`, `infiltrator`, `flyer`; the id is the function so names and
 art can change), switching in place, and what only each can do.
 
@@ -102,7 +102,7 @@ art can change), switching in place, and what only each can do.
 `scenarios/step2-body-*.json`, all tagged gate A, in room `test-body` (a
 crawlspace at columns 5-7 of row 9, a ledge 5 tiles up at columns
 15-18). Each names its control in the commit that added it (792b0aa,
-75da7ee). Against the feedback signals of `docs/plan/step-2.md`:
+75da7ee). Against the feedback signals of `docs/plan-archive.md` ("Step 2"):
 
 **Signal 3** (one thing each character can do that the other two cannot):
 

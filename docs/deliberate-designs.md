@@ -64,7 +64,7 @@ Once the owner confirms one, move it into its area's section with their
 words.
 
 **Pressing switch in a tight space sometimes does nothing, or skips a member.**
-→ Intended. A member whose body would stand inside solid tiles where you are (the grappler or the flyer inside a one-tile-high crawlspace) is never switched to; the next member is tried, and if none fits the switch is refused with a `switch-refused` event and nothing changes. This is the project's "there is always a way out" principle (`CLAUDE.md`): a player is never left inside a wall. Decided by the Step 2 lead, 2026-11-23 (`docs/plan/step-2.md`); the owner may overrule. `INTENT:` at `src/sim/verbs/switch.ts`. Proven by `scenarios/step2-body-switch-refused-in-gap.json`.
+→ Intended. A member whose body would stand inside solid tiles where you are (the grappler or the flyer inside a one-tile-high crawlspace) is never switched to; the next member is tried, and if none fits the switch is refused with a `switch-refused` event and nothing changes. This is the project's "there is always a way out" principle (`CLAUDE.md`): a player is never left inside a wall. Decided by the Step 2 lead, 2026-11-23 (`docs/plan-archive.md` ("Step 2")); the owner may overrule. `INTENT:` at `src/sim/verbs/switch.ts`. Proven by `scenarios/step2-body-switch-refused-in-gap.json`.
 
 **The store swallows every error: a damaged or unwritable records file never stops the server, it just starts that collection empty.**
 → Intended. With the storage volume attached, a server that fails to start leaves the owner and their friends with no game at all, which is worse than a Hall that is empty for one evening. So `src/server/store.ts` never throws: a file that does not parse, or is a newer version than the code knows, is renamed aside whole (`<name>.unreadable-<n>.json`, recoverable by hand, never deleted or written over), a failed write leaves the records in memory, and each is listed in `store.problems`. Do not turn a `try`/`catch` there into a throw. Decided by the Step 7 lead, 2026-11-23 (`handoff-prompts/step-7-a-store-and-pedestal.md`); the owner may overrule. `INTENT:` at `openStore` in `src/server/store.ts`. Proven by `node scripts/check-store.ts`.
@@ -125,4 +125,4 @@ session rediscovering it the expensive way.
   `holdPlayerTime` release or the `flyMaxTime` limit to make carrying a
   friend "reliable". This is the lead's reading of the owner's design
   principle (`CLAUDE.md`, "There is always a way out";
-  `docs/plan/step-2.md`), not yet the owner's own word on carrying.
+  `docs/plan-archive.md` ("Step 2")), not yet the owner's own word on carrying.
