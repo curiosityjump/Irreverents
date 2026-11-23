@@ -86,12 +86,10 @@ into the shared documents.
   `alert-pip-off` exists), 10×10, 12 px apart from (5, 5).
 - **Generic looks are bottom-centred** on the part's or door's rectangle
   (identical to "over the rectangle" when the sizes match).
-- **Looks were read loosely** from `content.looks` / `backdrops` / `decor`
-  and an atlas's `autotile` (a small resolver in `draw/room-parts.ts`,
-  `lookDef` / `drawLookIn`), because the foundation lane's
-  `draw/looks.ts` and content kinds were not on `main` while this was
-  written. Swapping to their helpers is a change inside those two
-  functions.
+- **Looks are asked for through `drawLookIn`** (`draw/room-parts.ts`): the
+  first of several ids that exists, bottom-centred on the part's or door's
+  rectangle, through the foundation lane's `look` / `drawLookFrame` /
+  `frameAt` (`draw/looks.ts`).
 
 ## Decisions
 
@@ -139,6 +137,8 @@ into the shared documents.
 - Frame rate on a real iPhone. The per-frame cost is one cached
   `drawImage` for the ground plus a few dozen small ones; not measured on
   a device.
-- The tiles lane's reference renderer (`tools/art/tiles/preview.py`) was
-  not on `main` when this was written; matching its pictures is the next
-  check.
+- No tiles or props art was on `main` when this was pushed: every art path
+  was proven only with throwaway test art (numbered cells), through a
+  harness and through the real page at 390×844 and 844×390 as content
+  files that passed `npm run check`. Matching the tiles lane's reference
+  renderer (`tools/art/tiles/preview.py`) once it lands is the open check.

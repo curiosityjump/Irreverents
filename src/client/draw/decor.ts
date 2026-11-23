@@ -1,3 +1,4 @@
+import type { Decor, DecorLayer } from '../../content/kinds/decor.ts';
 import { image } from './images.ts';
 
 /**
@@ -7,27 +8,7 @@ import { image } from './images.ts';
  * behind bodies and `front` in front of them, each frame.
  * INTENT: this code knows nothing about secrets and draws every item the
  * file lists, the same way everywhere ("Nothing points").
- * DRAFT: read loosely from `content.decor` until the foundation lane's
- * typed kind is the only shape.
  */
-
-export type DecorLayer = 'far' | 'back' | 'front';
-
-export interface DecorItem {
-  image: string;
-  src: [number, number, number, number];
-  tx: number;
-  ty: number;
-  dx?: number;
-  dy?: number;
-  layer?: DecorLayer;
-  flip?: boolean;
-}
-
-export interface Decor {
-  id: string;
-  items: DecorItem[];
-}
 
 /**
  * Draws the items of one layer, with the room's tile (0, 0) at (ox, oy).
@@ -38,11 +19,11 @@ export function drawDecor(g: CanvasRenderingContext2D, decor: Decor | undefined,
   if (!decor) return true;
   let complete = true;
   for (const it of decor.items) {
-    if ((it.layer ?? 'back') !== layer) continue;
+    if (it.layer !== layer) continue;
     const [sx, sy, sw, sh] = it.src;
     // Bottom-left of the picture on the bottom-left of its tile, then moved by (dx, dy).
-    const x = Math.round(ox + it.tx * T + (it.dx ?? 0));
-    const y = Math.round(oy + (it.ty + 1) * T - sh + (it.dy ?? 0));
+    const x = Math.round(ox + it.tx * T + it.dx);
+    const y = Math.round(oy + (it.ty + 1) * T - sh + it.dy);
     if (x >= w || y >= h || x + sw <= 0 || y + sh <= 0) continue;
     const img = image(it.image);
     if (!img) {

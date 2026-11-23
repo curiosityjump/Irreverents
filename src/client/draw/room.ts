@@ -2,12 +2,12 @@ import { TILE } from '../../content/kinds/rooms.ts';
 import type { Room } from '../../content/kinds/rooms.ts';
 import type { Content } from '../../content/types.ts';
 import type { World } from '../../sim/types.ts';
+import type { Atlas } from '../../content/kinds/atlases.ts';
+import type { Backdrop } from '../../content/kinds/backdrops.ts';
+import type { Decor } from '../../content/kinds/decor.ts';
 import { drawGround } from './autotile.ts';
-import type { GroundAtlas } from './autotile.ts';
 import { drawBackWall } from './backdrop.ts';
-import type { Backdrop } from './backdrop.ts';
 import { drawDecor } from './decor.ts';
-import type { Decor } from './decor.ts';
 import { image } from './images.ts';
 import { drawLookIn, solidLook } from './room-parts.ts';
 
@@ -31,10 +31,9 @@ export function roomOrigin(room: Room, viewW: number, viewH: number, focus?: { x
   return { ox: along(room.w * room.tile, viewW, focus?.x), oy: along(room.h * room.tile, viewH, focus?.y) };
 }
 
-/** The art files a room may have, read loosely until the foundation lane's typed kinds are on main. */
-function artOf(room: Room, content?: Content): { atlas?: GroundAtlas; backdrop?: Backdrop; decor?: Decor } {
-  const loose = content as unknown as { atlases?: Record<string, GroundAtlas>; backdrops?: Record<string, Backdrop>; decor?: Record<string, Decor> } | undefined;
-  return { atlas: loose?.atlases?.[room.id], backdrop: loose?.backdrops?.[room.id], decor: loose?.decor?.[room.id] };
+/** The art files a room may have (content/atlases/, backdrops/, decor/, each named after the room). */
+function artOf(room: Room, content?: Content): { atlas?: Atlas; backdrop?: Backdrop; decor?: Decor } {
+  return { atlas: content?.atlases?.[room.id], backdrop: content?.backdrops?.[room.id], decor: content?.decor?.[room.id] };
 }
 
 /** The room's backdrop file, if it has one (render.ts draws its sky and layers first). */
@@ -83,7 +82,7 @@ export function drawRoom(g: CanvasRenderingContext2D, room: Room, ox: number, oy
   const T = room.tile;
   const solid = solidLook(room, world);
   const art = artOf(room, content);
-  const hasArt = art.atlas !== undefined || art.backdrop?.wall !== undefined || (art.decor?.items ?? []).some((i) => i.layer === 'far');
+  const hasArt = art.atlas !== undefined || (art.backdrop?.wall ?? null) !== null || (art.decor?.items ?? []).some((i) => i.layer === 'far');
   if (!hasArt) {
     drawGraybox(g, room, ox, oy, solid.at);
     return;

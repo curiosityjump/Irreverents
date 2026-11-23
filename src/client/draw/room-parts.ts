@@ -2,7 +2,7 @@ import { TILE } from '../../content/kinds/rooms.ts';
 import type { Part, Room } from '../../content/kinds/rooms.ts';
 import type { Content } from '../../content/types.ts';
 import type { World } from '../../sim/types.ts';
-import { image } from './images.ts';
+import { drawLookFrame, frameAt, hasLook, look } from './looks.ts';
 
 // DRAFT: graybox colours, used when a room or a part has no picture.
 const CRACK = '#2e3242';
@@ -68,60 +68,23 @@ export function solidLook(room: Room, world: World): SolidLook {
   return made;
 }
 
-/** One look: its picture's rectangle, frame count and speed. */
-interface LookDef {
-  image: string;
-  src: [number, number, number, number];
-  frames: number;
-  fps: number;
-}
-
-/**
- * DRAFT: a look by id from `content.looks` (docs/mechanisms/art-pipeline.md,
- * "Everything else code used to draw"), read loosely until the foundation
- * lane's helpers in draw/looks.ts are on main; then this delegates to them.
- */
-const lookIndex = new WeakMap<object, Map<string, LookDef>>();
-export function lookDef(content: Content, id: string): LookDef | undefined {
-  const groups = (content as unknown as { looks?: Record<string, { image?: string; looks?: Record<string, { src?: number[]; frames?: number; fps?: number }> }> }).looks;
-  if (!groups) return undefined;
-  let index = lookIndex.get(groups);
-  if (!index) {
-    index = new Map();
-    for (const group of Object.values(groups)) {
-      for (const [lid, l] of Object.entries(group.looks ?? {})) {
-        if (!group.image || !Array.isArray(l.src) || l.src.length !== 4) continue;
-        index.set(lid, { image: group.image, src: l.src as LookDef['src'], frames: Math.max(1, l.frames ?? 1), fps: l.fps ?? 8 });
-      }
-    }
-    lookIndex.set(groups, index);
-  }
-  return index.get(id);
+/** Whether content names this look at all (draw/looks.ts). */
+export function lookDef(content: Content, id: string): boolean {
+  return hasLook(content, id);
 }
 
 /**
  * Draws the first of `ids` that exists and has loaded, bottom-centred on the
- * rectangle (x, y, w, h), at the frame `ticks` (60 a second) selects.
- * `mirror` flips it sideways. Returns false when none could be drawn: the
- * caller then draws its plain shape.
+ * rectangle (x, y, w, h), at the frame `ticks` (60 a second) selects
+ * (draw/looks.ts does the drawing). Returns false when none could be drawn:
+ * the caller then draws its plain shape.
  */
-export function drawLookIn(g: CanvasRenderingContext2D, content: Content, ids: string[], x: number, y: number, w: number, h: number, ticks = 0, mirror = false): boolean {
+export function drawLookIn(g: CanvasRenderingContext2D, content: Content, ids: string[], x: number, y: number, w: number, h: number, ticks = 0): boolean {
   for (const id of ids) {
-    const def = lookDef(content, id);
-    if (!def) continue;
-    const img = image(def.image);
-    if (!img) return false;
-    const [sx, sy, sw, sh] = def.src;
-    const f = Math.floor((Math.max(0, ticks) * def.fps) / 60) % def.frames;
-    const dx = Math.round(x + (w - sw) / 2);
-    const dy = Math.round(y + h - sh);
-    if (mirror) {
-      g.save();
-      g.translate(dx + sw, dy);
-      g.scale(-1, 1);
-      g.drawImage(img, sx + f * sw, sy, sw, sh, 0, 0, sw, sh);
-      g.restore();
-    } else g.drawImage(img, sx + f * sw, sy, sw, sh, dx, dy, sw, sh);
+    if (!hasLook(content, id)) continue;
+    const l = look(content, id);
+    if (!l) return false;
+    drawLookFrame(g, l, x + w / 2, y + h, { frame: frameAt(l, ticks), anchor: 'bottom-centre' });
     return true;
   }
   return false;

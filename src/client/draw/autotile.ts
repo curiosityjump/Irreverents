@@ -1,4 +1,5 @@
 import { TILE } from '../../content/kinds/rooms.ts';
+import type { Atlas } from '../../content/kinds/atlases.ts';
 import type { Room } from '../../content/kinds/rooms.ts';
 
 /**
@@ -11,25 +12,6 @@ import type { Room } from '../../content/kinds/rooms.ts';
  */
 
 type Cell = [number, number];
-
-/** The `autotile` block of an atlas file, read loosely so a partial file still draws. */
-export interface AutotileSpec {
-  origin: Cell;
-  innerCorners?: { nw?: Cell; ne?: Cell; sw?: Cell; se?: Cell };
-  fill?: Cell[];
-  top?: Cell[];
-  under?: Cell[];
-  oneway?: { left?: Cell; mid?: Cell; right?: Cell; single?: Cell };
-}
-
-export interface GroundAtlas {
-  /** Path under assets/. */
-  image: string;
-  tile: number;
-  cells: { solid: Cell; solidTop: Cell; oneway: Cell };
-  autotile?: AutotileSpec;
-}
-
 /** A fixed hash of a tile position; `salt` keeps the fill, top and under choices independent. */
 export function tileHash(tx: number, ty: number, salt: number): number {
   let h = (Math.imul(tx, 374761393) + Math.imul(ty, 668265263) + Math.imul(salt, 1442695041)) | 0;
@@ -51,7 +33,7 @@ const isCell = (c: unknown): c is Cell => Array.isArray(c) && c.length === 2 && 
 export function drawGround(
   g: CanvasRenderingContext2D,
   room: Room,
-  atlas: GroundAtlas,
+  atlas: Atlas,
   sheet: CanvasImageSource,
   solid: (tx: number, ty: number) => boolean,
   tx0: number,

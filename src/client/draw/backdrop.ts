@@ -1,3 +1,4 @@
+import type { Backdrop } from '../../content/kinds/backdrops.ts';
 import type { Room } from '../../content/kinds/rooms.ts';
 import { tileHash } from './autotile.ts';
 import { image } from './images.ts';
@@ -6,25 +7,7 @@ import { image } from './images.ts';
  * Behind the ground (docs/mechanisms/art-pipeline.md, "Behind the ground"):
  * the banded sky fixed to the screen, then each parallax layer, then (in the
  * room's cached picture, draw/room.ts) the indoor back wall.
- * DRAFT: read loosely from `content.backdrops` until the foundation lane's
- * typed kind is the only shape; every field has a safe default.
  */
-
-export interface BackdropLayer {
-  image: string;
-  parallax?: number;
-  parallaxY?: number;
-  y?: 'top' | 'bottom';
-  offsetY?: number;
-  repeatX?: boolean;
-}
-
-export interface Backdrop {
-  id: string;
-  sky?: string[];
-  layers?: BackdropLayer[];
-  wall?: { image: string; tile: number; cells: [number, number][] };
-}
 
 const MAX_BANDS = 8;
 
@@ -96,9 +79,9 @@ export function drawBackdrop(g: CanvasRenderingContext2D, bd: Backdrop, room: Ro
     const ih = img.naturalHeight;
     const bottom = layer.y === 'bottom';
     const rest = bottom ? Math.max(0, roomH - h) : 0;
-    const shiftY = -(camYClamped - rest) * (layer.parallaxY ?? 0);
-    const y = Math.round((bottom ? bottomEdge - ih : topEdge) + (layer.offsetY ?? 0) + shiftY);
-    let x = Math.floor(-camX * (layer.parallax ?? 0));
+    const shiftY = -(camYClamped - rest) * layer.parallaxY;
+    const y = Math.round((bottom ? bottomEdge - ih : topEdge) + layer.offsetY + shiftY);
+    let x = Math.floor(-camX * layer.parallax);
     if (layer.repeatX === false) {
       g.drawImage(img, x, y);
       continue;
