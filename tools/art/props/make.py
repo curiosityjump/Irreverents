@@ -14,6 +14,7 @@ import looks_people as lq
 import decor_draw as dd
 import import_p01
 import round2 as r2
+import round3 as r3
 from px import mix, new, col, paste
 from sizes import ROOT, sizes
 from place import place_all
@@ -75,10 +76,13 @@ def looks_sheets():
     # the throne room's own window (its part id is "window"): stained glass
     s.add('part:throne-room:window', lp.stained(1, 3))
     s.add('part:throne-room:window:broken', lp.stained(1, 3, True))
+    # round 3: the one-tile hiding places are all in the quarry: rubble over a crevice, not a curtain
+    hide = lambda w, h: r3.hide_1x1() if (w, h) == (1, 1) else lp.curtain(w, h)
+    front = lambda w, h: r3.hide_front_1x1() if (w, h) == (1, 1) else r2.hide_front(w, h, lp.curtain(w, h))
     for (w, h) in sorted(sz['hide']):
-        s.add('hide-%dx%d' % (w, h), lp.curtain(w, h))
+        s.add('hide-%dx%d' % (w, h), hide(w, h))
     for (w, h) in sorted(sz['hide']):
-        s.add('hide-front-%dx%d' % (w, h), r2.hide_front(w, h, lp.curtain(w, h)))
+        s.add('hide-front-%dx%d' % (w, h), front(w, h))
     s.newrow()
     s.add('bell', lp.bell())
     s.add('bell-ringing', lp.bell_ringing(), frames=4, fps=10)
@@ -89,6 +93,11 @@ def looks_sheets():
     s.add('crack-1', lp.crack(0)); s.add('crack-2', lp.crack(1)); s.add('rubble', lp.rubble())
     s.add('shop-counter', lp.shop_counter()); s.add('shop-goods', lp.shop_goods())
     out = [('parts', 'props/parts.png', s)]
+    # ---- round 3: the horn on the camp's post (src/client/draw/outpost.ts draws it bottom-centre over 2x3 tiles)
+    s = Sheet(160)
+    work, sound, broken = r3.signaler_frames()
+    s.add('signaler', work); s.add('signaler-sounding', sound, frames=3, fps=12); s.add('signaler-broken', broken)
+    out.append(('outpost', 'props/outpost.png', s))
     # ---- people
     s = Sheet(96)
     s.add('mood-2', lq.mood2(), frames=2, fps=3); s.add('mood-3', lq.mood3(), frames=2, fps=6)
@@ -181,6 +190,26 @@ def decor_sheets():
     s.add('lantern-post', dim_p01(P01['lantern_post'], 0.2)); s.add('glow-torch', r2.glow(18)); s.add('glow-lantern', r2.glow(16))
     s.add('cobweb', dd.cobweb()); s.add('chain', dd.chain()); s.add('chain-end', dd.chain(True))
     sheets['undercroft'] = s
+    # round 3 (handoff-prompts/look3-props.md): the cantina, the camp, the quarry
+    c = r3.cantina_pieces()
+    s = Sheet(256)
+    for name in ('bar', 'bar-bottles', 'kegs', 'shelf-bottles', 'shelf-plates', 'keg', 'barrel', 'table', 'table-mug',
+                 'stool', 'swag', 'curtain', 'banner', 'bunting', 'mirror'):
+        s.add(name, c[name])
+    s.newrow()
+    s.add('chandelier-hung', r3.hang(c['chandelier'], 48 - c['chandelier'].height))
+    s.add('lantern-hung', r3.hang(c['lantern'], 48 - c['lantern'].height))
+    s.add('glow-22', r3.glow(22)); s.add('glow-14', r3.glow(14))
+    sheets['tavern'] = s
+    s = Sheet(256)
+    s.add('tent', r3.tent()); s.add('tent-blue', r3.tent(30, 26, 'blue')); s.add('flag', r3.flagpole())
+    s.add('rack', r3.weapon_rack()); s.add('fire', r3.campfire()); s.add('crate', r3.crate())
+    s.add('palisade', r3.palisade()); s.add('glow-20', r3.glow(20))
+    sheets['camp'] = s
+    s = Sheet(160)
+    s.add('rocks', r3.rock_pile()); s.add('rocks-small', r3.rock_pile(14, 9, 1)); s.add('scaffold', r3.scaffold())
+    s.add('lantern-hung', r3.hang(c['lantern'], 32 - c['lantern'].height)); s.add('glow-14', r3.glow(14))
+    sheets['quarry'] = s
     return sheets
 
 

@@ -10,13 +10,12 @@
     {"image": "decor/courtyard.png", "src": [160, 0, 16, 28], "tx": 18, "ty": 1, "dx": 0, "dy": 12, "layer": "back", "flip": false},
     {"image": "decor/courtyard.png", "src": [192, 0, 16, 14], "tx": 23, "ty": 1, "dx": 0, "dy": -2, "layer": "back", "flip": false},
     {"image": "decor/courtyard.png", "src": [176, 0, 16, 24], "tx": 28, "ty": 1, "dx": 0, "dy": 8, "layer": "back", "flip": false},
-    {"image": "decor/courtyard.png", "src": [0, 0, 44, 60], "tx": 17, "ty": 7, "dx": 4, "dy": 0, "layer": "back", "flip": false},
-    {"image": "decor/courtyard.png", "src": [54, 60, 10, 7], "tx": 17, "ty": 7, "dx": 2, "dy": 0, "layer": "back", "flip": false},
+    {"image": "decor/courtyard.png", "src": [132, 0, 28, 46], "tx": 11, "ty": 7, "dx": 4, "dy": 0, "layer": "far", "flip": false},
+    {"image": "decor/courtyard.png", "src": [0, 0, 44, 60], "tx": 26, "ty": 7, "dx": 1, "dy": 0, "layer": "back", "flip": false},
+    {"image": "decor/courtyard.png", "src": [54, 60, 10, 7], "tx": 21, "ty": 7, "dx": 4, "dy": 0, "layer": "back", "flip": false},
     {"image": "decor/courtyard.png", "src": [18, 60, 12, 12], "tx": 21, "ty": 7, "dx": 2, "dy": 0, "layer": "back", "flip": false},
-    {"image": "decor/courtyard.png", "src": [208, 0, 28, 17], "tx": 23, "ty": 7, "dx": 1, "dy": 0, "layer": "back", "flip": false},
-    {"image": "decor/courtyard.png", "src": [132, 0, 28, 46], "tx": 26, "ty": 7, "dx": 0, "dy": 0, "layer": "back", "flip": false},
     {"image": "decor/courtyard.png", "src": [42, 60, 12, 12], "tx": 27, "ty": 7, "dx": 4, "dy": 0, "layer": "back", "flip": false},
     {"image": "decor/courtyard.png", "src": [0, 60, 18, 15], "tx": 28, "ty": 7, "dx": -3, "dy": 0, "layer": "back", "flip": false},
-    {"image": "decor/courtyard.png", "src": [30, 60, 12, 12], "tx": 19, "ty": 7, "dx": 6, "dy": 0, "layer": "back", "flip": false}
+    {"image": "decor/courtyard.png", "src": [30, 60, 12, 12], "tx": 24, "ty": 7, "dx": 2, "dy": 0, "layer": "back", "flip": false}
   ]
 }
