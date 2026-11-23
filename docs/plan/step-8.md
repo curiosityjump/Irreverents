@@ -406,6 +406,8 @@ Round 3 of the look (2026-11-23, "Round 3" above): `handoff-prompts/look3-heroes
 
 Round 3 builders (sent 17:06 UTC by orchestrator session_017WiGzHhke4tkAThPgw6EXs): heroes `session_017WiGzEv3ESfjNHm7u3Tk8v` (fresh, 17:10 UTC; round 2's heroes builder declined at 317k and was archived), cast `session_017WiGzFHN8SWsy5GnNkweMt`, ground `session_017WiGzHwFkUGGSmDqqnoSDY`, props `session_017WiGzJxBqVvizcghgHk5NG`, actors `session_017WiGzFsVDWWZc7nVHbv82A`.
 
+Round 3 reviews (orchestrator session_017WiGzHhke4tkAThPgw6EXs): **heroes push 1 (1b2c1c6, the canon P03 three)** reviewed 17:58 UTC by re-running build, check and e2e at 904c3e9 on a quiet machine (261 ok, e2e ok) and by looking at its before/after shots; the same run covers actors push 1 (a59a302) and cast push 1 (d80a79d) for green, their looks not yet reviewed. Two earlier e2e runs failed only because a review workflow's `pkill` stopped the local server (`docs/mechanisms/orchestrator-workflows.md`, "Trap"). Props pushes 1-2 (040bc8f, notes b152a90) live 17:55 UTC, not yet re-run.
+
 ## Open with the owner
 
 - Q-006 answered (2026-11-23, via Vision Partner): *"Many of the visuals are there to establish direction. Chat has been organizing the drive to be usable. Just review it's documentation."* The boards stay as direction. Judge what is usable from ChatGPT's own asset-library docs (`docs/design-library/asset-library-start-here-claude.md` and `06-asset-collaboration-claude-chatgpt/`), not from the boards. Later decisions trump earlier ones (Q-005).

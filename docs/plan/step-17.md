@@ -92,6 +92,7 @@ leave, `src/server/main.ts` opening the store, `src/client/index.html`.
 
 - `handoff-prompts/step-17-start-and-saves.md` (written 2026-11-23 16:00 UTC by orchestrator
   `session_017WiGzHhke4tkAThPgw6EXs`), held by builder `session_017WiGzGw7XaQ6tZNddFaa8s` (spawned 15:51 UTC).
+- `handoff-prompts/step-17-saves-hardening.md` (17:25 UTC, pushes A-D from two independent reviews: 12 confirmed problems in push 1, 9 in push 2), same builder. **Push A (fdfa6b1, ab25e7a) reviewed 17:58 UTC**: build, check and e2e re-run at 904c3e9 (261 ok, e2e ok); live `/healthz` `store.lasting` true. Pushes 1 and 2 are reviewed as *working but not yet safe across builds*: B, D and C are owed.
 
 ## Builder notes
 

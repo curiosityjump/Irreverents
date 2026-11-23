@@ -269,3 +269,6 @@ button art is in the library mirror, not in `assets/`.
     both buy and go through. `DRAFT:`, judged not worth a shape change.
   - The doorway arrow is drawn after the impact shake, so it does not
     shake; fine for now.
+
+- **Orchestrator `session_017WiGzHhke4tkAThPgw6EXs`, 17:58 UTC: doorways by Use (095775b) reviewed** by re-running build, check and e2e at 904c3e9 on a quiet machine (261 ok, e2e ok, its `step3-enter-doorway-by-use` and the touch fact among them) and by its phone-size shots (the Use button reads GO IN, an arrow over the hero). Brief deleted. Owed by the same builder in `handoff-prompts/step-5-switch-gap.md`: the e2e must stop writing its shots into `docs/`.
+
