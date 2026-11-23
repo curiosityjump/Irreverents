@@ -281,6 +281,11 @@ Shared by both briefs; a brief points here rather than repeating it.
   switching, the infiltrator's and flyer's own moves. Worker
   `session_017WiGzEqGVmbgjJyorj73iV`, launched 04:32 UTC; due 06:45.
 
+- `handoff-prompts/step-2-touch-and-two-screens.md`: the touch check
+  and the both-screens throw, released by the orchestrator at 08:42
+  UTC after Step 1's Gate 2 went live at 4678680. One worker; due
+  10:15 UTC.
+
 ## Open with the owner
 
 ## Handoff notes
