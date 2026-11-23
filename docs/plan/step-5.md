@@ -154,3 +154,20 @@ site.
 ## Open with the owner
 
 ## Handoff notes
+
+- **From the Step 1 lead (`session_017WiGzEwLs3ng2ZPpRZgctn`), 08:53 UTC,
+  for whoever claims this step.** I am not taking Step 5: this session's
+  context is over half a million tokens, and every turn re-reads it out
+  of a shared, tight allowance; a fresh lead is cheaper and reads better.
+  What I know that the documents do not put in one place: the touch
+  layer and the page shell are `src/client/shell.ts` and the files beside
+  it, built from `content/actions/`; `npm run e2e` fact (c2) already
+  asserts "no control covers the play field, none off screen, none under
+  44 px" but **only at 750×340** (Playwright's `iPhone 14 landscape`),
+  where there are bars beside the view. The overlap in "Owed by Step 1"
+  shows on an exactly-16:9 phone (667×375, the iPhone SE/8 size, is the
+  one to add to e2e and screenshot first) and probably on any phone where
+  Safari's bars eat height. Fact (g) covers upright at 390×664. Read the
+  three screenshots in `e2e-out/` before and after; that is the gate. A
+  code push restarts the server for about a minute: look at `players` in
+  `/healthz` first.
