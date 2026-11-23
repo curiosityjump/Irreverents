@@ -484,6 +484,13 @@ Gate E also passes on `step7-last-stand-camp` (real inputs) and
 `step7-hall` (real server, kept game). The shared world's pedestals do not
 outlast a restart until the store is wired.
 
+**Landed, push 3 (the picture; `docs/mechanisms/hall-of-legends.md`, "On
+screen").** The pedestal is the P04 atlas's plinth; its picture is the
+record's bodies drawn with their own sprites (standing, or lying if felled)
+in the atlas's frame; the same picture stands under the banner wherever the
+player is. Screenshots at iPhone sizes in `docs/plan/step-7-shots/push3-*`.
+Slice B's three pushes are on `main`; the store wiring is the next slice.
+
 ## 6 · Vehicle hijacking
 
 **The library.** DECIDED: D-017 (steal or hijack vehicles), D-020 (roadblock

@@ -2,18 +2,23 @@ import { hallOf } from '../../content/kinds/hall.ts';
 import type { Content } from '../../content/types.ts';
 import type { Entity, World } from '../../sim/types.ts';
 import { FRAME_CREDITED, FRAME_OUT, PEDESTAL_KIND } from '../../sim/hall/record.ts';
-import type { HallRecord } from '../../sim/hall/record.ts';
+import type { FrameBody, HallRecord } from '../../sim/hall/record.ts';
 import type { SimEvent } from '../../sim/types.ts';
-import { queueBanner } from './banner.ts';
-import { drawText, textWidth, useContent } from './fx.ts';
+import { drawnBanner, queueBanner } from './banner.ts';
+import { image } from './images.ts';
+import { look } from './looks.ts';
+import { drawText, safeView, textWidth, useContent } from './fx.ts';
 
 // How a Hall of Legends record looks in the room
 // (docs/mechanisms/hall-of-legends.md, "On screen"): a small framed picture
 // on its pedestal, a card when a player stands at it, and a banner for a
 // few seconds when a new one is hung.
-// DRAFT: every look here is a graybox stand-in (colours, sizes, wording);
-// Step 8 owns the final art. The picture is the record's `frame` redrawn,
-// never stored pixels, so new art redraws every old picture too.
+// Push 3: the picture is the record's bodies drawn with their own sprites in
+// the P04 hall atlas's frame (`hall-frame`), on the atlas's plinth (the
+// pedestal's sprite sheet, content/sprites/pedestal.json); the same picture
+// stands under a new legend's banner. The card's panel and words are still
+// DRAFT stand-ins. The picture is the record's `frame` redrawn, never stored
+// pixels, so new art redraws every old picture too.
 
 const INK = '#0f0f1c';
 const PAPER = '#f4f1de';
@@ -22,12 +27,13 @@ const GOLD = '#c9a66b';
 const WALL = '#2b2d42';
 const FLOOR = '#5c6378';
 const UNKNOWN = '#8d93a5';
+const PIP = '#ffd090';
 const FONT = 'bold 8px monospace';
 const LINE = 9;
 
 /** The picture's size on a pedestal, frame included. Twice this on the card. */
-const PIC_W = 28;
-const PIC_H = 20;
+const PIC_W = 32;
+const PIC_H = 24;
 /** DRAFT: about a tile and a half, measured between the middles of the two boxes. */
 const READ_X = 24;
 const READ_Y = 28;
@@ -53,60 +59,142 @@ function recordOf(e: Entity): HallRecord | null {
   return e.kind === PEDESTAL_KIND && record && record.frame && Array.isArray(record.frame.bodies) ? record : null;
 }
 
+/** Where a sheet's frame for a pose sits, or null when the kind has no sheet (or its image is still loading). */
+interface Pose { img: HTMLImageElement; sx: number; sy: number; cw: number; ch: number; footX: number; footY: number }
+function poseOf(content: Content, kind: string, out: boolean): Pose | null {
+  const sheet = content.sprites[kind] as { image: string; cell: { w: number; h: number }; anchor: { x: number; y: number }; frames: Record<string, number[] | undefined> } | undefined;
+  const box = content.characters[kind]?.box;
+  const img = sheet ? image(sheet.image) : null;
+  if (!sheet || !box || !img || !img.naturalWidth) return null;
+  // The contract's fallbacks (sprites.ts CHAIN): down, else hurt, else idle; standing is idle's first frame.
+  const list = (out ? (sheet.frames.down ?? sheet.frames.hurt) : undefined) ?? sheet.frames.idle ?? [0];
+  const f = list[out ? list.length - 1 : 0] ?? 0;
+  const cols = Math.max(1, Math.floor(img.naturalWidth / sheet.cell.w));
+  return {
+    img,
+    sx: (f % cols) * sheet.cell.w,
+    sy: Math.floor(f / cols) * sheet.cell.h,
+    cw: sheet.cell.w,
+    ch: sheet.cell.h,
+    footX: sheet.anchor.x + box.w / 2,
+    footY: sheet.anchor.y + box.h,
+  };
+}
+
 /**
- * The picture: the record's bodies as tiny blocks in their character
- * colours, at their places scaled into the frame. Knocked-out bodies lie
- * flat; a credited player has a bright pixel over the head. Whole pixels,
- * no text. `scale` 1 is the pedestal's size, 2 the card's.
+ * The frame, nine-sliced from the P04 atlas's `hall-frame` (14x14): its
+ * corners kept, its edges stretched, each atlas pixel `scale` pixels. The
+ * inside is painted over (a wall and a floor), so the atlas's grey canvas
+ * never shows. Returns false when the look has not loaded (draw the old box).
+ * DRAFT: the insets are read off the piece (dark line, grey margin, gold
+ * moulding: four on the left and top, two on the right and bottom).
  */
-function drawPicture(g: CanvasRenderingContext2D, record: HallRecord, content: Content, x: number, y: number, scale: number): void {
+const FRAME_INSET = { l: 4, t: 4, r: 2, b: 2 };
+function drawFrameLook(g: CanvasRenderingContext2D, content: Content, x: number, y: number, w: number, h: number, scale: number): boolean {
+  const l = look(content, 'hall-frame');
+  if (!l) return false;
+  const { l: L, t: T, r: R, b: B } = FRAME_INSET;
+  const piece = (sx: number, sy: number, sw: number, sh: number, dx: number, dy: number, dw: number, dh: number): void => {
+    if (dw > 0 && dh > 0) g.drawImage(l.img, l.x + sx, l.y + sy, sw, sh, dx, dy, dw, dh);
+  };
+  const midW = w - (L + R) * scale;
+  const midH = h - (T + B) * scale;
+  // Corners.
+  piece(0, 0, L, T, x, y, L * scale, T * scale);
+  piece(l.w - R, 0, R, T, x + w - R * scale, y, R * scale, T * scale);
+  piece(0, l.h - B, L, B, x, y + h - B * scale, L * scale, B * scale);
+  piece(l.w - R, l.h - B, R, B, x + w - R * scale, y + h - B * scale, R * scale, B * scale);
+  // Edges: one plain column or row of the piece, stretched (the top's highlights stay in its corners).
+  piece(L + 1, 0, 1, T, x + L * scale, y, midW, T * scale);
+  piece(L + 1, l.h - B, 1, B, x + L * scale, y + h - B * scale, midW, B * scale);
+  piece(0, T + 1, L, 1, x, y + T * scale, L * scale, midH);
+  piece(l.w - R, T + 1, R, 1, x + w - R * scale, y + T * scale, R * scale, midH);
+  return true;
+}
+
+/**
+ * The picture: the record's bodies drawn with their own sprites (the first
+ * frame of standing, or of lying down when knocked out), facing as they
+ * faced, at their places in the room drawn closer together to fit, inside
+ * the P04 atlas's frame. A credited player has a gold pip over the head.
+ * Whole pixels, no text. `scale` 1 is the pedestal's size (sprites at half
+ * size), 2 the card's and the banner's (sprites at their own size).
+ * A kind with no sheet (or before images load) is its coloured box, as before.
+ * DRAFT: every size and the half-size sprites on the pedestal.
+ */
+function drawPicture(g: CanvasRenderingContext2D, bodies: readonly FrameBody[], content: Content, x: number, y: number, scale: number): void {
   const w = PIC_W * scale;
   const h = PIC_H * scale;
-  g.fillStyle = GOLD;
-  g.fillRect(x, y, w, h);
-  const ix = x + scale;
-  const iy = y + scale;
-  const iw = w - 2 * scale;
-  const ih = h - 2 * scale;
+  const framed = drawFrameLook(g, content, x, y, w, h, scale);
+  if (!framed) {
+    g.fillStyle = GOLD;
+    g.fillRect(x, y, w, h);
+  }
+  const ix = x + (framed ? FRAME_INSET.l : 1) * scale;
+  const iy = y + (framed ? FRAME_INSET.t : 1) * scale;
+  const iw = w - (framed ? FRAME_INSET.l + FRAME_INSET.r : 2) * scale;
+  const ih = h - (framed ? FRAME_INSET.t + FRAME_INSET.b : 2) * scale;
   g.fillStyle = WALL;
   g.fillRect(ix, iy, iw, ih);
-
-  const bodies = record.frame.bodies.map(([kind, bx, by, facing, flags]) => {
-    const box = content.characters[kind]?.box ?? { w: 12, h: 16 };
-    return { color: content.characters[kind]?.color ?? UNKNOWN, bx, by, bw: box.w, bh: box.h, facing, flags };
-  });
-  if (bodies.length === 0) return;
-  // The part of the room the picture shows: around the bodies, never
-  // closer than about five tiles across, so two bodies side by side stay small.
-  const left = Math.min(...bodies.map((b) => b.bx));
-  const right = Math.max(...bodies.map((b) => b.bx + b.bw));
-  const top = Math.min(...bodies.map((b) => b.by));
-  const bottom = Math.max(...bodies.map((b) => b.by + b.bh));
   const floorH = scale;
-  const k = Math.min(iw / Math.max(right - left, 84), (ih - floorH - 2 * scale) / Math.max(bottom - top, 48));
-  const cx = (left + right) / 2;
   g.fillStyle = FLOOR;
   g.fillRect(ix, iy + ih - floorH, iw, floorH);
-  for (const b of bodies) {
-    const out = (b.flags & FRAME_OUT) !== 0;
-    // Lying flat: the box turned on its side, resting on its own feet line.
-    const pw = Math.max(scale * 2, Math.round((out ? b.bh : b.bw) * k));
-    const ph = Math.max(scale * 2, Math.round((out ? b.bw : b.bh) * k));
-    const midX = ix + iw / 2 + (b.bx + b.bw / 2 - cx) * k;
-    const feet = iy + ih - floorH - (bottom - (b.by + b.bh)) * k;
-    const px = Math.max(ix, Math.min(ix + iw - pw, Math.round(midX - pw / 2)));
-    const py = Math.max(iy + scale, Math.round(feet) - ph);
-    g.fillStyle = b.color;
-    g.fillRect(px, py, pw, ph);
-    if (!out) {
-      g.fillStyle = INK;
-      g.fillRect(b.facing > 0 ? px + pw - scale : px, py + scale, scale, scale);
+  if (bodies.length === 0) return;
+
+  const s = scale / 2; // sprite size: half on the pedestal, whole on the card
+  const list = bodies.map(([kind, bx, by, facing, flags]) => {
+    const box = content.characters[kind]?.box ?? { w: 12, h: 16 };
+    return { kind, color: content.characters[kind]?.color ?? UNKNOWN, bx, by, bw: box.w, bh: box.h, facing, flags, out: (flags & FRAME_OUT) !== 0 };
+  });
+  // Places are drawn closer together than the sprites, so a fight spread over a screen fits the frame.
+  const left = Math.min(...list.map((b) => b.bx + b.bw / 2));
+  const right = Math.max(...list.map((b) => b.bx + b.bw / 2));
+  const bottom = Math.max(...list.map((b) => b.by + b.bh));
+  const top = Math.min(...list.map((b) => b.by));
+  const margin = 7 * scale;
+  const kx = Math.min(s, (iw - 2 * margin) / Math.max(1, right - left));
+  const ky = Math.min(s, (ih - floorH - 12 * scale) / Math.max(1, bottom - top - 16));
+  const cx = (left + right) / 2;
+  const floorY = iy + ih - floorH;
+
+  g.save();
+  g.beginPath();
+  g.rect(ix, iy, iw, ih);
+  g.clip();
+  g.imageSmoothingEnabled = false;
+  // The standing first, then the fallen at their feet (in front, so a felled body shows), the credited players last (on top).
+  const order = [...list].sort((a, b) => (a.flags & FRAME_CREDITED) - (b.flags & FRAME_CREDITED) || Number(a.out) - Number(b.out));
+  for (const b of order) {
+    const fx = Math.round(ix + iw / 2 + (b.bx + b.bw / 2 - cx) * kx);
+    const fy = Math.round(floorY - Math.max(0, bottom - (b.by + b.bh)) * ky);
+    const pose = poseOf(content, b.kind, b.out);
+    let head = fy - Math.round(b.bh * s);
+    if (pose) {
+      const dw = Math.round(pose.cw * s);
+      const dh = Math.round(pose.ch * s);
+      const left0 = b.facing < 0 ? fx - Math.round((pose.cw - pose.footX) * s) : fx - Math.round(pose.footX * s);
+      const top0 = fy - Math.round(pose.footY * s);
+      if (b.facing < 0) {
+        g.save();
+        g.translate(left0 + dw, top0);
+        g.scale(-1, 1);
+        g.drawImage(pose.img, pose.sx, pose.sy, pose.cw, pose.ch, 0, 0, dw, dh);
+        g.restore();
+      } else g.drawImage(pose.img, pose.sx, pose.sy, pose.cw, pose.ch, left0, top0, dw, dh);
+    } else {
+      // No sheet: the coloured box, lying on its side when out.
+      const pw = Math.max(scale, Math.round((b.out ? b.bh : b.bw) * s));
+      const ph = Math.max(scale, Math.round((b.out ? b.bw : b.bh) * s));
+      g.fillStyle = b.color;
+      g.fillRect(fx - (pw >> 1), fy - ph, pw, ph);
+      head = fy - ph;
     }
-    if (b.flags & FRAME_CREDITED) {
-      g.fillStyle = PAPER;
-      g.fillRect(px + ((pw - scale) >> 1), py - scale - Math.min(scale, 1), scale, scale);
+    if (b.flags & FRAME_CREDITED && !b.out) {
+      g.fillStyle = PIP;
+      g.fillRect(fx - Math.floor(scale / 2), Math.max(iy, head - 2 * scale), scale, scale);
     }
   }
+  g.restore();
 }
 
 function ordinal(n: number): string {
@@ -188,12 +276,15 @@ function drawPanel(g: CanvasRenderingContext2D, record: HallRecord, content: Con
   const w = Math.min(viewW - 8, 264);
   const h = Math.max(picH, lines.length * LINE) + 2 * pad;
   const x = Math.round((viewW - w) / 2);
-  const y = 4;
+  // Push 3: below the party plate (and the menu beside it) when they would overlap, as banner.ts does;
+  // the plate is drawn after this, so it would cover the card's picture. Last frame's plate: a frame late at most.
+  let y = 4 + safeView.top;
+  if (plateRect && x < plateRect.x + plateRect.w && x + w > plateRect.x && y < plateRect.y + plateRect.h) y = plateRect.y + plateRect.h + 3;
   g.fillStyle = GOLD;
   g.fillRect(x - 1, y - 1, w + 2, h + 2);
   g.fillStyle = INK;
   g.fillRect(x, y, w, h);
-  drawPicture(g, record, content, x + pad, y + pad, pictureScale);
+  drawPicture(g, record.frame.bodies, content, x + pad, y + pad, pictureScale);
   g.font = FONT;
   g.textBaseline = 'top';
   g.textAlign = 'left';
@@ -246,8 +337,9 @@ export function drawHall(g: CanvasRenderingContext2D, world: World, content: Con
     if (e.room !== roomId) continue;
     // The picture stands on the pedestal's body and moves with it.
     const x = ox + Math.round(e.x) + Math.round((boxOf(e).w - PIC_W) / 2);
-    const y = oy + Math.round(e.y) - PIC_H - 1;
-    drawPicture(g, record, content, x, y, 1);
+    // Push 3: on the plinth's top (its sprite stands two pixels above the box), overlapping it by one.
+    const y = oy + Math.round(e.y) - 2 - PIC_H + 1;
+    drawPicture(g, record.frame.bodies, content, x, y, 1);
   }
 
   g.save();
@@ -293,10 +385,41 @@ export function drawHall(g: CanvasRenderingContext2D, world: World, content: Con
 const NEW_LEGEND = 'A new legend';
 let lastLatest: unknown = null;
 let announced: string[] = [];
+/** Push 3: the pictures of legends announced lately, by their banner's key. */
+const pictures = new Map<string, readonly FrameBody[]>();
+/** Push 3: whether the last frame drew a legend's picture under its banner (the page's drawn record). */
+let pictureShown = false;
+/** Push 3: the party plate's place on the last frame (draw/hud.ts, via render.ts), so the card can stand clear of it. */
+let plateRect: { x: number; y: number; w: number; h: number } | undefined;
 
 /** The legends this page has announced (for the page's drawn record): their titles, newest last. */
-export function drawnHall(): { announced: string[] } {
-  return { announced };
+export function drawnHall(): { announced: string[]; picture: boolean } {
+  return { announced, picture: pictureShown };
+}
+
+/**
+ * Push 3: while a new legend's banner is up (draw/banner.ts), its picture
+ * at the card's size, centred just under it. Called by render.ts right
+ * after drawBanners, with the same party plate (kept for the card: drawPanel).
+ * INTENT: like the banner, it takes no input and stops nothing; it goes with it.
+ * DRAFT: where the banner stands is worked out the way banner.ts does it
+ * (centred, 6 below the safe top, or under the plate when they would
+ * overlap). If banner.ts ever moves its banner, move this with it.
+ */
+export function drawLegendPicture(g: CanvasRenderingContext2D, content: Content, viewW: number, clearOf?: { x: number; y: number; w: number; h: number }): void {
+  pictureShown = false;
+  plateRect = clearOf;
+  const up = drawnBanner();
+  const bodies = up ? pictures.get(up.key) : undefined;
+  if (!up || !bodies) return;
+  useContent(content);
+  const bw = textWidth(g, up.text, 'light') + 16;
+  const bx = Math.round((viewW - bw) / 2);
+  let by = 6 + safeView.top;
+  if (clearOf && bx < clearOf.x + clearOf.w && bx + bw > clearOf.x && by < clearOf.y + clearOf.h) by = clearOf.y + clearOf.h + 3;
+  const scale = 2;
+  drawPicture(g, bodies, content, Math.round((viewW - PIC_W * scale) / 2), by + 16 + 3, scale);
+  pictureShown = true;
 }
 
 /**
@@ -310,6 +433,11 @@ export function watchHallEvents(latest: { tick: number; events: readonly SimEven
   for (const ev of latest.events) {
     if (ev.type !== 'hall-legend') continue;
     queueBanner({ key: `hall:${ev.n}`, text: `${NEW_LEGEND}: ${ev.title}`, frames: 180, color: GOLD });
+    // Push 3: the picture to stand under that banner (events from before push 3 carry none: words only).
+    if (Array.isArray(ev.frame) && ev.frame.length) {
+      pictures.set(`hall:${ev.n}`, ev.frame);
+      if (pictures.size > 8) pictures.delete(pictures.keys().next().value!);
+    }
     announced = [...announced, ev.title].slice(-8);
   }
 }

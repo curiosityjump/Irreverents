@@ -1127,3 +1127,11 @@ document as a decision of theirs.
 - **Why this way:** "Getting caught opens play": a fight, a last stand or an escape. With one fall ending it, no last stand can grow big enough for the Hall to remember (the waves loop), and Step 18's "a beaten hero gets up" is never seen. N and the window are data per place, chosen from the builder's measured table so a hero who stands or fights badly is thrown out within about a minute; the count shows on the HUD so the stakes are read first.
 - **To change it:** N = 1 in `content/defeat/<place>.json` is the other answer; the five scenarios it reddens are listed in `docs/plan/step-21.md`, "Push 2".
 - **Where:** `docs/plan/step-21.md`, "Push 2"; `content/defeat/`.
+
+
+### 2026-11-23 · Step 7: legends, push 3: the framed moment drawn with the real sprites, on the atlas's plinth, and under the banner
+- **Decided by:** Step 7 waves builder, push 3 (brief `loop-waves.md`), `session_017WiGzG8kVY45SeGrghiZ34`
+- **Instead of asking:** "How should the Hall's picture look, and should the banner show it?"
+- **Why this way:** D-025 (a framed moment with stats); the brief's "on the banner as well as the pedestal"; approved assets first (the P04 Hall atlas's `hall-frame` and `hall-plinth`, already cut). The picture is each body's own sprite (standing, or lying down if knocked out), half size on the pedestal so three bodies fit a frame that sits on a 12-pixel plinth, full size on the card and under the banner. The pedestal's box went from 16 to 12 wide so the plinth can be its sprite sheet (a body that flies when hit, as before). The `hall-legend` event gained an optional `frame` (additive) so a page anywhere can draw the picture.
+- **To change it:** sizes and insets at the top of `src/client/draw/hall.ts` (`PIC_W`, `PIC_H`, `FRAME_INSET`, the half-size `s`); the plinth in `content/sprites/pedestal.json` (frame 0 is `hall-plinth`; the box in `content/characters/pedestal.json`); to drop the banner's picture, remove the `drawLegendPicture` line in `src/client/render.ts`. Undo all: revert the commit (old records still draw; old events have no `frame` and show words only).
+- **Where:** `docs/mechanisms/hall-of-legends.md`, "On screen".

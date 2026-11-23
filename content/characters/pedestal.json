@@ -1,8 +1,8 @@
 {
-  "//": "DRAFT (Step 7 push 2): a Hall of Legends pedestal, the body a record hangs on (src/sim/hall/record.ts, entity hall:<n>). A real heavy body: it can be hit and the grappler can throw it (doc 00: do not protect the Hall from gameplay); it cannot be knocked out. Its look is drawn by src/client/draw/hall.ts.",
+  "//": "DRAFT (Step 7 push 2): a Hall of Legends pedestal, the body a record hangs on (src/sim/hall/record.ts, entity hall:<n>). A real heavy body: it can be hit and the grappler can throw it (doc 00: do not protect the Hall from gameplay); it cannot be knocked out. Push 3: its body is the P04 atlas's plinth (content/sprites/pedestal.json), so the box is the plinth's width, 12 (was 16); the framed picture on top is src/client/draw/hall.ts.",
   "id": "pedestal",
   "name": "Pedestal",
-  "box": { "w": 16, "h": 16 },
+  "box": { "w": 12, "h": 16 },
   "color": "#8d93a5",
   "verbs": ["body"],
   "tuning": "pedestal"

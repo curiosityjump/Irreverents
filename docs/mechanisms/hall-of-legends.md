@@ -7,18 +7,31 @@ slice B adds the detector, the record and `content/hall/` above it.)
 
 ## On screen: the picture, the card and the banner
 
-`src/client/draw/hall.ts`, one call in `src/client/render.ts`
-(`drawHall`). It reads only the world: every entity of kind `pedestal`
-carrying `c.hall.record`. It listens to no events and takes no input.
-Every look and word in it is `DRAFT:` graybox; Step 8 owns the final art.
+`src/client/draw/hall.ts`, two calls in `src/client/render.ts`
+(`drawHall` with the world's layers; `drawLegendPicture` right after the
+banner queue). `drawHall` reads only the world: every entity of kind
+`pedestal` carrying `c.hall.record`. Nothing takes input.
+The picture, the frame and the plinth are approved art (Step 7 push 3);
+the card's panel and words are still `DRAFT:` stand-ins.
 
-- **The picture** (28×20 with its frame, on top of the pedestal's body and
-  moving with it): the record's `frame.bodies` redrawn as tiny blocks in
-  their character kinds' colours, placed by their positions scaled into
-  the frame (never closer than about five tiles across, so two bodies do
-  not fill it). A body flagged knocked out (`FRAME_OUT`) lies on its side
-  and has no eye; a credited player's (`FRAME_CREDITED`) has a bright
-  pixel over the head. A kind the content does not know is a grey block.
+- **The pedestal's body** is the P04 Hall atlas's plain plinth
+  (`hall-plinth`, 12×18), drawn as its sprite sheet
+  (`content/sprites/pedestal.json` points at `props/hall.png`), so it
+  flies and tumbles like any body when hit or thrown. Its box is 12×16
+  (the plinth's width; 16×16 before push 3).
+- **The picture** (32×24, sitting on the plinth and moving with it): the
+  P04 atlas's `hall-frame` nine-sliced (corners kept, edges stretched;
+  insets 4 left and top, 2 right and bottom, read off the piece), a wall
+  and a floor painted inside, and the record's `frame.bodies` drawn with
+  their own sprite sheets: the first frame of `idle`, or the last of
+  `down` (else `hurt`) for a body flagged knocked out (`FRAME_OUT`),
+  facing as they faced. Sprites are half size on the pedestal and their
+  own size at twice the picture (card and banner); places are pulled
+  closer together than the sprites so a fight spread over a screen fits.
+  The standing are drawn first, the fallen in front of them, credited
+  players (`FRAME_CREDITED`) last, with a gold pip over the head. A kind
+  with no sheet (or before images load) is its coloured box, lying on its
+  side when out; before `hall-frame` loads, a plain gold border.
   No pixels are stored anywhere: new art redraws every old picture.
 - **The card** (across the top of the screen, the picture at twice the
   size beside the text): the title (two lines at most), the kind's shown
@@ -39,7 +52,14 @@ Every look and word in it is `DRAFT:` graybox; Step 8 owns the final art.
   its player is. `INTENT:` not from the pedestal arriving: a page is sent
   only its own room's entities (`src/server/game.ts`), so a page in the
   camp never sees the gallery's pedestal. It takes no input and stops
-  nothing. The page's record has `drawn.hall.announced` (titles).
+  nothing. **Since push 3 the event carries the record's picture**
+  (`frame`, optional, additive): `drawLegendPicture` stands it at twice
+  its size centred just under the banner while that banner is up, placed
+  by banner.ts's own rule (`DRAFT:` it mirrors that geometry; move it if
+  banner.ts moves). The page's record has `drawn.hall.announced` (titles)
+  and `drawn.hall.picture` (whether the last frame drew a legend's
+  picture). The card stands under the party plate when they would
+  overlap (the plate's place is remembered from the last frame).
 
 **What it expects from elsewhere, and where it guesses (`DRAFT:`):**
 

@@ -1,0 +1,9 @@
+{
+  "//": "DRAFT: cut by tools/art/props/loops.py from the approved P04 hall-of-legends atlas (Step 7 push 3): the Hall of Legends pedestal drawn as the approved P04 hall atlas's plain plinth (hall-plinth in content/looks/hall.json, the atlas's first cell, 12x18). A sprite sheet, not a look, so the body is drawn by the ordinary sprite path and moves, flies and tumbles when hit or thrown like any body (doc 00: do not protect the Hall from gameplay). The framed picture on top is src/client/draw/hall.ts.",
+  "id": "pedestal",
+  "image": "props/hall.png",
+  "cell": { "w": 12, "h": 18 },
+  "anchor": { "x": 0, "y": 2 },
+  "fps": 8,
+  "frames": { "idle": [0], "run": [0], "air": [0] }
+}

@@ -3,7 +3,7 @@
 // earns a legend in the Bandit Camp (a theft nobody noticed: put by the
 // camp's strongbox the moment nobody of the camp would see a body there,
 // Use, then put in the courtyard, as scripts/checks/step19-heist.ts does);
-// a's own events carry `hall-legend` though a is never sent the pedestal
+// a's own events carry `hall-legend` (since push 3, with the record's picture) though a is never sent the pedestal
 // (a page gets only its own room's entities); b, standing in the Hall
 // gallery, has the pedestal entity in its own world. Then everyone leaves,
 // the server is rebuilt from the same store, and the kept game has the
@@ -141,6 +141,10 @@ const check: ScriptCheck = {
         if (drawn(a).some((e) => e.kind === 'pedestal')) failures.push(`a, in the courtyard, draws a pedestal: ${drawn(a).filter((e) => e.kind === 'pedestal').map((e) => e.id).join(', ')}`);
         const ev = a.events.find((e) => e.type === 'hall-legend') as (SimEvent & { kind?: string; who?: string[] }) | undefined;
         if (ev && (ev.kind !== 'clean-theft' || !(ev.who ?? []).includes('a'))) failures.push(`a's hall-legend is ${JSON.stringify(ev)}, expected a clean-theft naming a`);
+        // Push 3: the event carries the record's picture, so the banner can show it wherever a page is; a's own body is in it, credited.
+        const frame = (ev as { frame?: unknown } | undefined)?.frame;
+        if (ev && !(Array.isArray(frame) && frame.some((b) => Array.isArray(b) && (Number(b[4]) & 1) === 1)))
+          failures.push(`a's hall-legend carries no picture with a credited body: frame ${JSON.stringify(frame ?? null)}`);
       } finally {
         a.leave();
         b.leave();

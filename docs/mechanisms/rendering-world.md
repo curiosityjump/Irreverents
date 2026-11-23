@@ -20,7 +20,8 @@ into the shared documents.
   → the doorway arrow (`draw/door-hint.ts`, own character only) → the Use mark (`draw/use-hint.ts`, Step 19, own character only) → moods and barks → unseen marks (`draw/sight.ts`) → ring bars and alert pips → the king's speech → Hall
   of Legends → (screen furniture) the cantina's counter and row, the
   level banner's watcher → the party plate (`draw/hud.ts`) → the one
-  banner up (`draw/banner.ts`). `PlayerView.drawn` is untouched.
+  banner up (`draw/banner.ts`) → a new legend's picture under it
+  (`drawLegendPicture`, `draw/hall.ts`, Step 7 push 3). `PlayerView.drawn` is untouched.
 - **"Looks solid"** (`solidLook` in `draw/room-parts.ts`): one set per room
   and part state, built from the room file plus false walls, unbroken
   wall-look breakables and hidden walk doors, continued past the room's

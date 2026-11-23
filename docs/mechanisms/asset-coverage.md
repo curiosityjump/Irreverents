@@ -128,7 +128,7 @@ All cut from P03/P07 plates by tools/art/cast/cut3.py. Every cast body still owe
 | `sprite:set-bandit-camp` | uses-approved | `P04/.../hall-of-legends-tile-atlas.png` (326,925)-(420,1062), 16x20 (`tools/art/sets/make.py`). | - |
 | `sprite:throne` | approved-source-not-used | `EQ/e-q01-quiet-throne-hall-clear-playable-platforms.png` throne (750,290)-(903,483), extract/redraw at 24x32 (~0.16); hurt = a small tilt. | look3-cast, the things push (throne.json is in its file list). |
 | `sprite:signal-post` | uses-approved | `P03/pixel-villain-sprite-sheet.png` row 4 horn post (100,812)-(300,1032), horns removed (cut3.py signal_post()). | - |
-| `sprite:pedestal` | approved-source-not-used | `P04/hall-of-legends-tile-atlas.png` plinth row (40,400)-(593,493); plain plinth ~(40,400)-(110,493). | The looks are cut: `hall-plinth`, `hall-plinth-tall`, `hall-plinth-star` (group `hall`); point content/characters/pedestal.json at one once Step 7 adds it. |
+| `sprite:pedestal` | uses-approved | `P04/hall-of-legends-tile-atlas.png` plain plinth, through the cut look `hall-plinth` (`assets/props/hall.png` (0,0) 12x18, `tools/art/props/loops.py`); content/sprites/pedestal.json, Step 7 push 3. The picture's frame is `hall-frame` from the same atlas. | - |
 
 ## Ground tiles (16 px)
 

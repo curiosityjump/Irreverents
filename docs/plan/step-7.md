@@ -411,3 +411,29 @@ is untouched.
   two-page facts already under investigation (54ce74b).
 - **Not verified:** the banner and the pedestal on a phone screen (push 3).
 
+
+### 2026-11-23, push 3 builder (`session_017WiGzG8kVY45SeGrghiZ34`): the picture
+
+- **What landed:** the pedestal is the P04 atlas's plinth (its sprite sheet,
+  `content/sprites/pedestal.json`; box narrowed 16 → 12 to fit the plinth);
+  the picture is the record's bodies drawn with their own sprites in the
+  atlas's `hall-frame`, nine-sliced; the same picture, twice the size,
+  stands under a new legend's banner (the `hall-legend` event now carries
+  `frame`, additive). `step7-hall` pins that a's event carries a picture
+  with a credited body (control: the event without `frame` fails it).
+- **The card used to sit under the party plate and the menu** (upright,
+  the plate covered the picture and the title): it now stands below the
+  plate when they overlap, reading last frame's plate.
+- **Screenshots** (`docs/plan/step-7-shots/push3-*.png`, 844×390 and
+  390×664, a local server): the banner with its picture, the pedestal, its
+  card, and a wave arriving in the camp. The record in them is the one
+  `step7-last-stand-camp` really hangs (its event's frame, copied), hung by
+  a scratch script straight into the server's world; the page's character
+  was moved by its own world, not walked. The wave shot is a real call.
+- **Weakest:** half-size sprites on the pedestal are small and a bit soft
+  on a phone (each body about 12 px tall at 1x); the felled body lies
+  partly under the heavy when they stood close. Room for the owner to judge.
+- **Not verified:** the picture on a real iPhone (only Chromium at iPhone
+  sizes); a record from before push 3 whose event arrived without `frame`
+  (it shows words only by reading; not driven); a banner pushed below the
+  party plate (the picture follows the same rule; not seen on screen).

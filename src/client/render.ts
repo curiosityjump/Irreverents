@@ -11,7 +11,7 @@ import { drawDoorHint } from './draw/door-hint.ts';
 import { drawEntities } from './draw/entities.ts';
 import { watchWords } from './draw/fx.ts';
 import type { PlayerView } from './draw/entities.ts';
-import { drawHall } from './draw/hall.ts';
+import { drawHall, drawLegendPicture } from './draw/hall.ts';
 import { drawImpact } from './draw/impact.ts';
 import { drawLevelBanner, drawLevelEntrances, drawLevelSigns } from './draw/levels.ts';
 import { drawCompletion, drawCompletionRow } from './draw/completion.ts';
@@ -112,7 +112,9 @@ export function render(g: CanvasRenderingContext2D, world: World, content: Conte
   drawLevelBanner(g, world, content, roomId, W, pv);
   drawCompletionRow(g, world, content, W, pv);
   // Step 19: the party plate, then the one banner queue (draw/banner.ts), clear of it; last, as screen furniture.
-  if (pv) drawBanners(g, W, pv.frame, drawHud(g, world, content, mine, pv.frame));
+  const plate = pv ? drawHud(g, world, content, mine, pv.frame) : undefined;
+  if (pv) drawBanners(g, W, pv.frame, plate);
+  if (pv) drawLegendPicture(g, content, W, plate); // Step 7 push 3: a new legend's picture under its banner (draw/hall.ts)
   // Step 13: a freed hero's face flashing beside the plate (draw/recruits.ts).
   if (pv) drawRecruitFlash(g, content, pv.frame);
   return { x: -ox, y: -oy };

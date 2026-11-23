@@ -38,7 +38,11 @@ declare module '../types.ts' {
   }
   interface EventMap {
     /** Step 7: a new legend was hung: its pedestal is `hall:<n>` in the gallery. A world event, so every page hears it (a page is sent only its own room's entities). */
-    'hall-legend': { n: number; kind: string; title: string; place: string; who: string[]; stats: Record<string, number> };
+    'hall-legend': {
+      n: number; kind: string; title: string; place: string; who: string[]; stats: Record<string, number>;
+      /** Push 3 (additive, optional): the record's picture, so a page anywhere can draw it under the banner. Absent on events from before it. */
+      frame?: FrameBody[];
+    };
   }
 }
 
@@ -100,6 +104,6 @@ export function hang(
   e.c.hall = { record };
   // INTENT (record.ts): the whole pedestal entity stays within its byte budget; the farthest bodies of the picture go first.
   while (JSON.stringify(e).length > PEDESTAL_BYTES && record.frame.bodies.length > 1) record.frame.bodies.pop();
-  ctx.emit('hall-legend', { n, kind: feat.kind, title, place: feat.place, who: feat.who.map(([p]) => p), stats: feat.stats });
+  ctx.emit('hall-legend', { n, kind: feat.kind, title, place: feat.place, who: feat.who.map(([p]) => p), stats: feat.stats, frame: record.frame.bodies });
   return record;
 }
