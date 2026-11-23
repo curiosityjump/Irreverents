@@ -732,3 +732,11 @@ document as a decision of theirs.
 - **Why this way:** a small red no-entry sign hops up over the doorway for a second, on that player's screen only, with no words (the owner: very limited dialogue; nothing over a hit). The way out of the cantina is never locked.
 - **To change it:** the look and its second in `src/client/draw/cantina.ts` (`drawDoorRefused`).
 - **Where:** `docs/mechanisms/cantina.md`, "The chase lock".
+
+### 2026-11-23 · Step 18: who fights, and how a beaten hero carries on
+- **Decided by:** orchestrator `session_017WiGzHhke4tkAThPgw6EXs`, from the owner's words ("Enemies or provoked good guys need to be able to fight too", ~16:05 UTC) and the library's decisions (D-046, D-049, D-060, D-075, D-019, D-020), designed and checked by a workflow
+- **Instead of asking:** "Who hits heroes, when, and what happens to a beaten hero?"
+- **Why this way:** the fight code already existed; people swung once per approach because they held the button, and only some bodies listed attack. So slice A pulses the press, gives the guard, shopkeeper and villain the attack verb (the villain only once a hero strikes him), and keeps a beaten hero's 3 s knockdown with no respawn or reload (D-019). The way out is that people never jump and walk slower than every hero runs. Grabbing or seizing heroes is left out: the library never gives NPCs those verbs.
+- **To change it:** `docs/plan/step-18.md`, "`DRAFT:` choices"; data in `content/characters/*.json`, `content/tuning.json`, `content/npcs/villain.json`.
+- **Where:** `docs/plan/step-18.md`; `docs/mechanisms/npc-response.md`, "Who fights".
+
