@@ -493,7 +493,11 @@ Slice 1, 2026-11-23 16:10 UTC: the main way (road, ridge, tower, depot) is **248
 
 2026-11-23 18:45 UTC, lead review of slice 3 push 2 at 36d838d (re-run): `npm run check` green, 63 `step16-*` scenarios, gates 5 of 6, stopping-condition `src/` count 0, live current. Caught at the depot: a fight (a thrown patrol drops the lookout mid-call and breaks the horn) and an escape by the tower door. The escape by the pit and cave with the hoard, and a second quiet route, need two edits in the depot room: briefed as push 3.
 
+2026-11-23 19:25 UTC, lead review of push 3 at 9dd3561 (re-run): `npm run check` green, 65 `step16-*` scenarios, gates 5 of 6, stopping-condition `src/` count 0, `check:deployed` ok. Signals 1–6 now pass with two quiet routes (roof, ledge) and three caught outcomes (fight, tower, cellar-pit-cave). Not done, by the step's drop list: the ranged kind, the undercroft way home. After the owner's 18:30 verdict ("findable and recognisable without being told"), one last slice looks at it on a phone.
+
 ## Briefs
+
+- Last slice, the quarry seen and found on a phone: `handoff-prompts/step-16-e-quarry-on-a-phone.md`, 19:25 UTC.
 
 - Slice 3 push 3, the depot's west ledge and a way down to the cellar (signals 5 and 6(b) in full): `handoff-prompts/step-16-d-depot-routes.md`, 18:45 UTC, fresh builder `session_017WiGzH5v7n1DfXiS1iFbh6`.
 
