@@ -119,3 +119,100 @@ None yet. **Waits** for the three pushes named above. The orchestrator writes
 its brief from this file and `docs/plan/core-loops.md`, section 7.
 
 ## Builder notes
+
+### Push 1 (measure, at 35ee868): how often a hero is beaten today
+
+A throwaway driver in a scratch copy (never committed) ran the real sim on
+the real rooms with their placements, solo, one hero at a time. The hero
+walks in (camp: to column 23, among the fighters; street: to column 32) and
+walks back there whenever knocked more than three tiles away, so it stays
+in the fight. Camp: the 90 s window starts at the wave's `outpost-wave`
+event (wave 1, 2 or 3 of a natural run: the lookout's calls). Street: the
+alert is raised to 1, 2 or 3 by `completeCall` (as the street guard) at the
+hero's feet when it arrives, and the window starts there. Three ways of
+playing: never strikes; strikes every 0.4 s facing the nearest foe; strikes
+every 2 s, facing the wrong way every other strike. After the window the
+hero runs (jumping) for the place's door (camp `to-courtyard` by Use; street
+west by `to-throne-room`) for at most 40 s.
+
+Each cell: seconds from the window's start to the first `flattened` (— for
+never) / how many `flattened` in the 90 s / the longest stretch with no
+control (`canAct` false, ticks in a row) / seconds to leave by the door
+("out already": a blow had carried the hero out of the street by its east
+door during the window; "no": never left in 40 s; "not reached": that wave
+never came, because the hero was flattened over and over and the callers
+were busy fighting).
+
+| place | level | hero | never strikes | strikes every 0.4 s | strikes every 2 s, half wrong way |
+|---|---|---|---|---|---|
+| camp | wave 1 | grappler | 8.4 s / 10 / 3.4 s / 6.5 s | — / 0 / 0.8 s / 4.5 s | 18.6 s / 6 / 3.4 s / 4.5 s |
+| camp | wave 1 | infiltrator | 2.9 s / 14 / 4.1 s / 2.8 s | 11.3 s / 3 / 3 s / 3.1 s | 2.9 s / 15 / 4 s / 3.1 s |
+| camp | wave 1 | flyer | 2.9 s / 11 / 4.2 s / 4 s | — / 0 / 0 s / 4.7 s | 2.9 s / 13 / 3.6 s / 5.7 s |
+| camp | wave 1 | brawler | 4.7 s / 9 / 3.1 s / no | 12.7 s / 2 / 3 s / no | 15.5 s / 5 / 3.1 s / no |
+| camp | wave 1 | skirmisher | 2.9 s / 18 / 3.8 s / 5.1 s | — / 0 / 0 s / 3.1 s | 2.9 s / 14 / 7.6 s / 4.1 s |
+| camp | wave 2 | grappler | not reached | — / 0 / 0.8 s / 4.9 s | 8.2 s / 6 / 3.4 s / 4 s |
+| camp | wave 2 | infiltrator | 5.5 s / 13 / 4.1 s / 2.3 s | 1.4 s / 3 / 3 s / 3.1 s | 8.7 s / 15 / 4 s / 2.3 s |
+| camp | wave 2 | flyer | 0.9 s / 17 / 3.9 s / 11.2 s | — / 0 / 0 s / 4.9 s | 1.6 s / 13 / 3.6 s / 7.7 s |
+| camp | wave 2 | brawler | 4.4 s / 9 / 3.8 s / no | 13.4 s / 3 / 3.2 s / no | 2 s / 2 / 3 s / no |
+| camp | wave 2 | skirmisher | 1.1 s / 3 / 3 s / 3.2 s | — / 0 / 0 s / 4.2 s | 7 s / 15 / 7.6 s / 7.9 s |
+| camp | wave 3 | grappler | not reached | — / 0 / 0.7 s / 4.9 s | 21.9 s / 7 / 3.5 s / 5.8 s |
+| camp | wave 3 | infiltrator | 4.6 s / 11 / 4.5 s / 10 s | 8.6 s / 2 / 3 s / 2.9 s | 6.3 s / 16 / 4 s / 3.3 s |
+| camp | wave 3 | flyer | 2.1 s / 16 / 4.5 s / 8.9 s | — / 0 / 0.1 s / 4.9 s | 2.2 s / 13 / 3.6 s / 4.5 s |
+| camp | wave 3 | brawler | 1.4 s / 10 / 3.8 s / no | 37.5 s / 1 / 3 s / no | 13.3 s / 1 / 3 s / no |
+| camp | wave 3 | skirmisher | 5.6 s / 15 / 3.7 s / 5 s | — / 0 / 0 s / 4.2 s | 3.5 s / 15 / 7.6 s / 2.9 s |
+| street | alert 1 | grappler | — / 0 / 0 s / 6.4 s | — / 0 / 0 s / 6.5 s | — / 0 / 0 s / 6.4 s |
+| street | alert 1 | infiltrator | — / 0 / 0 s / 3.9 s | — / 0 / 0 s / 4.3 s | — / 0 / 0 s / 3.9 s |
+| street | alert 1 | flyer | — / 0 / 0 s / 5.8 s | — / 0 / 0 s / 5.9 s | — / 0 / 0 s / 5.8 s |
+| street | alert 1 | brawler | — / 0 / 0 s / 7.7 s | — / 0 / 0 s / 7.7 s | — / 0 / 0 s / 7.7 s |
+| street | alert 1 | skirmisher | — / 0 / 0 s / 4.2 s | — / 0 / 0 s / 5 s | — / 0 / 0 s / 4.2 s |
+| street | alert 2 | grappler | 12.8 s / 5 / 3.5 s / 7.3 s | — / 0 / 0 s / 6.3 s | 26.4 s / 6 / 3.1 s / 7.3 s |
+| street | alert 2 | infiltrator | 10.8 s / 2 / 3 s / out already | — / 0 / 0.3 s / 4.3 s | 11.2 s / 3 / 3.5 s / out already |
+| street | alert 2 | flyer | 7.3 s / 7 / 3.8 s / out already | — / 0 / 0 s / 5.8 s | 10.8 s / 12 / 3.5 s / 7.7 s |
+| street | alert 2 | brawler | 13.9 s / 5 / 3 s / 8.7 s | — / 0 / 0 s / 6.6 s | 35 s / 3 / 3 s / 10.7 s |
+| street | alert 2 | skirmisher | 6.8 s / 2 / 4 s / out already | 72.6 s / 1 / 3.4 s / 5 s | 10.4 s / 11 / 3.8 s / 5.2 s |
+| street | alert 3 | grappler | 13.1 s / 6 / 3.4 s / 7.3 s | — / 0 / 0 s / 6.3 s | 22.3 s / 5 / 3.6 s / 6.4 s |
+| street | alert 3 | infiltrator | 10.8 s / 4 / 3.8 s / out already | — / 0 / 0 s / 4 s | 11.2 s / 4 / 3.5 s / out already |
+| street | alert 3 | flyer | 7.3 s / 8 / 3.8 s / 5 s | — / 0 / 0 s / 5.8 s | 10.8 s / 8 / 3.5 s / 5 s |
+| street | alert 3 | brawler | 12.7 s / 6 / 3.4 s / 7.7 s | — / 0 / 0 s / 6.8 s | 23.9 s / 5 / 3.4 s / 7.7 s |
+| street | alert 3 | skirmisher | 6.8 s / 11 / 4.2 s / out already | — / 0 / 0 s / 5 s | 10.4 s / 10 / 3.9 s / 5.1 s |
+
+**What it says.**
+- **A beating is already possible, and it is not one.** Every hero who
+  stands among the camp's fighters, or fights badly, is flattened within
+  about 1 to 20 s of a wave and many times a minute (1 to 18); at alert 2
+  and 3 in the street, within 7 to 35 s. A hero striking every 0.4 s stays
+  up: the grappler, flyer and skirmisher are never flattened in the camp,
+  and nobody is in the street; the infiltrator (toughness 80) and the
+  brawler (200 but slow, wind-up 0.15 s) still go down one to three times a
+  wave in the camp. This differs from the waves builder's measurement
+  (`docs/plan/step-7.md:363-367`, nobody knocked down while striking):
+  there the hero did not walk back into the fight, here it does, and wear
+  carries from the camp's own three fighters before the wave.
+- **Alert 1 beats nobody** in the street: its row is empty and the placed
+  guard who answers does not fight a hero who has not struck. That is the
+  town tiers' design, kept.
+- **Escape stays possible.** Every hero that was in the fight left by the
+  door within 2 to 11 s of running for it, with at most two blows landing
+  on the way, except the brawler in the camp (below).
+- **Longest stretch with no control: 3 to 4.5 s mostly, 7.6 s for the
+  skirmisher** in the camp (waves 1 to 3, never striking or fighting badly):
+  flattened 3 s, up, and launched again before it acts. That is Step 18
+  slice B's corner (`docs/plan/step-18.md:352-365`), reported here, not
+  fixed; the throw-out takes a beaten hero out of the crowd, so after push 2
+  it is bounded by the beat plus `flattenTime`.
+
+**The choice: no tuning change.** The brief's bar ("a hero who keeps
+striking well may stay safe; a hero who stands, or fights badly in a third
+wave, must go down") is met by today's numbers for all five heroes in camp
+wave 3 and street alert 2 and 3, and every hero can still get away. So no
+other owner's number is touched and no scenario is re-timed (zero red).
+Logged in `docs/decisions-log.md` ("Step 21: no tuning change").
+
+**Flag (not a fix): the brawler cannot get into the Bandit Camp.** From the
+spawn and the courtyard door (column 2), the brawler's jump does not clear
+the three-tile block at columns 5 to 7 (`content/rooms/outpost.json`, rows
+8 to 10): the furthest it reaches is column 3.9 under 200 tries of run-up
+and jump timing; the grappler reaches column 19.9 the same way. The brawler
+rows above were measured by putting it at column 9. It may be deliberate
+(a place only some heroes enter); nobody owns that room file until the
+vehicles slice. Sent to the orchestrator; left as it is.
