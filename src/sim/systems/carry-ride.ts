@@ -1,3 +1,4 @@
+import { heldBy } from '../effects.ts';
 import type { System } from '../types.ts';
 
 /**
@@ -10,9 +11,9 @@ const system: System = {
   order: 600,
   run(ctx) {
     for (const target of ctx.world.entities) {
-      const held = target.c.held;
-      if (!held) continue;
-      const carrier = ctx.world.entities.find((e) => e.id === held.by);
+      const by = heldBy(target);
+      if (by === null) continue;
+      const carrier = ctx.world.entities.find((e) => e.id === by);
       const cb = carrier && ctx.content.characters[carrier.kind]?.box;
       const tb = ctx.content.characters[target.kind]?.box;
       if (!carrier || !cb || !tb) continue;

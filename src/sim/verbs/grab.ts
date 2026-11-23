@@ -1,4 +1,5 @@
 import { bodyNumbers, inputOf, overlaps, release, ticksOf } from '../body-state.ts';
+import { emitEffect, heldBy } from '../effects.ts';
 import type { Entity, Verb } from '../types.ts';
 
 declare module '../types.ts' {
@@ -56,7 +57,7 @@ const verb: Verb = {
     let tooHeavy: Entity | undefined;
     let heavyGap = Infinity;
     for (const o of ctx.world.entities) {
-      if (o === e || o.room !== e.room || o.c.held || o.c.flattened) continue;
+      if (o === e || o.room !== e.room || heldBy(o) !== null || o.c.flattened) continue;
       const ob = ctx.content.characters[o.kind]?.box;
       if (!ob || !overlaps(x0, e.y - 2, box.w + reach, box.h + 4, o.x, o.y, ob.w, ob.h)) continue;
       const gap = Math.abs(o.x + ob.w / 2 - mid);
@@ -71,11 +72,9 @@ const verb: Verb = {
     }
     delete best.c.flying;
     delete best.c.beat;
-    best.vx = 0;
-    best.vy = 0;
+    emitEffect(ctx, best, { kind: 'hold', by: e.id });
     e.c.carrying = { id: best.id, kind: e.kind };
     best.c.held = {
-      by: e.id,
       ticks: best.player !== null ? Math.max(1, ticksOf(ctx.content.tuning.world.holdPlayerTime)) : -1,
       jumpDown: inputOf(ctx, best).held.includes('jump'),
     };

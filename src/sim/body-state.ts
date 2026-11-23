@@ -4,6 +4,7 @@
 // purpose: it is a helper, imported by verbs and systems.
 // Writeup: docs/mechanisms/combat-and-impact.md.
 import type { Content } from '../content/types.ts';
+import { emitEffect, heldBy } from './effects.ts';
 import { boxInSolid } from './party.ts';
 import { TICK_RATE } from './types.ts';
 import type { Entity, Input, StepContext } from './types.ts';
@@ -26,10 +27,11 @@ declare module './types.ts' {
       /** The world tick pvx/pvy were recorded on. */
       at: number;
     };
-    /** Present while the body is being carried. */
+    /**
+     * The hold's own timers, present while the body is being carried. Who
+     * holds it is Step 1's `heldBy(entity)` (src/sim/effects.ts): one copy.
+     */
     held?: {
-      /** The carrier's entity id. */
-      by: string;
       /** Ticks until a held player is let go by itself; -1 = no limit (bodies nobody plays). */
       ticks: number;
       /** Whether the held body's jump was down last tick, to see a fresh press. */
@@ -43,7 +45,12 @@ declare module './types.ts' {
       kind: string;
     };
     /** The held beat: present while an impact holds this body still. */
-    beat?: { ticks: number };
+    beat?: {
+      ticks: number;
+      /** The speed the body leaves with when the beat ends (a `push` effect then), if any. */
+      vx?: number;
+      vy?: number;
+    };
     /** How much hitting this body has taken since it was last fresh (hidden; never shown). */
     worn?: { amount: number };
     /** Present exactly while the body is knocked out. It stays in the world, lying where it fell. */
@@ -75,12 +82,12 @@ declare module './types.ts' {
  * it, not by its stick: src/sim/systems/verbs.ts runs no verb for it.
  */
 export function canAct(e: Entity): boolean {
-  return !e.c.flying && !e.c.held && !e.c.beat && !e.c.flattened;
+  return !e.c.flying && heldBy(e) === null && !e.c.beat && !e.c.flattened;
 }
 
 /** A carried body, and a body in a held beat, are not moved by gravity or tiles (read by systems/physics.ts). */
 export function takesNoPhysics(e: Entity): boolean {
-  return e.c.held !== undefined || e.c.beat !== undefined;
+  return heldBy(e) !== null || e.c.beat !== undefined;
 }
 
 /** What a body is asking for this tick: a player's device, or entity.c.input for anyone else. */
@@ -108,13 +115,37 @@ export function ticksOf(seconds: number | undefined): number {
   return Math.round((seconds ?? 0) * TICK_RATE);
 }
 
-/** Sends a body flying. Speeds are capped at world.maxLaunchSpeed on each axis (physics looks one tile ahead). */
-export function launch(ctx: StepContext, target: Entity, vx: number, vy: number, by: string | null, met: string[]): void {
+/**
+ * Changes a body's speed from outside, through an effect (src/sim/effects.ts)
+ * so it reaches a player's own device. With a held beat the body is stopped
+ * now and gets the speed when the beat ends (systems/combat-clock.ts).
+ * Speeds are capped at world.maxLaunchSpeed on each axis (physics looks one
+ * tile ahead). `fly` starts a flight; without it a flight already going carries on.
+ */
+export function strike(
+  ctx: StepContext,
+  target: Entity,
+  vx: number,
+  vy: number,
+  beatTicks: number,
+  fly?: { by: string | null; met: string[] },
+): void {
   const cap = ctx.content.tuning.world.maxLaunchSpeed ?? 500;
-  target.vx = clamp(vx, cap);
-  target.vy = clamp(vy, cap);
+  vx = clamp(vx, cap);
+  vy = clamp(vy, cap);
+  if (beatTicks > 0) {
+    emitEffect(ctx, target, { kind: 'push', vx: 0, vy: 0, ...(fly ? { fly } : {}) });
+    target.c.beat = { ticks: beatTicks, vx, vy };
+  } else {
+    delete target.c.beat;
+    emitEffect(ctx, target, { kind: 'push', vx, vy, ...(fly ? { fly } : {}) });
+  }
+}
+
+/** Sends a body flying from a hit or a throw. */
+export function launch(ctx: StepContext, target: Entity, vx: number, vy: number, by: string | null, met: string[], beatTicks = 0): void {
+  strike(ctx, target, vx, vy, beatTicks, { by, met });
   target.onGround = false;
-  target.c.flying = { by, met, ticks: 0, pvx: 0, pvy: 0, pGround: false, at: -1 };
 }
 
 /** Wears a body down; at its toughness it is flattened. A toughness of 0 cannot be flattened. */
@@ -127,14 +158,13 @@ export function wear(ctx: StepContext, target: Entity, amount: number, by: strin
   if (worn.amount < toughness) return;
   // DRAFT: a flattened body is out for world.flattenTime seconds and gets
   // up where it lies (docs/plan/step-2.md, "Being beaten never ends the game").
-  target.c.flattened = { ticksLeft: Math.max(1, ticksOf(ctx.content.tuning.world.flattenTime)), by };
+  emitEffect(ctx, target, { kind: 'flatten', ticks: Math.max(1, ticksOf(ctx.content.tuning.world.flattenTime)), by });
   ctx.emit('flattened', { target: target.id, by });
 }
 
-/** Records what drawing needs for shake and dust, and starts the held beat for this body. */
-export function markImpact(ctx: StepContext, e: Entity, x: number, y: number, speed: number, beatTicks: number): void {
+/** Records what drawing needs for shake and dust. */
+export function markImpact(ctx: StepContext, e: Entity, x: number, y: number, speed: number): void {
   e.c.impact = { x, y, speed, tick: ctx.world.tick };
-  if (beatTicks > 0) e.c.beat = { ticks: beatTicks };
 }
 
 /**
@@ -149,9 +179,10 @@ export function release(
   how: 'set-down' | 'broke-free' | 'let-go' | 'dropped' | null,
   spots: { x: number; y: number }[] = [],
 ): void {
-  const held = target.c.held;
-  if (!held) return;
-  const carrier = ctx.world.entities.find((e) => e.id === held.by);
+  const by = heldBy(target);
+  if (by === null) return;
+  const carrier = ctx.world.entities.find((e) => e.id === by);
+  emitEffect(ctx, target, { kind: 'release' });
   delete target.c.held;
   if (carrier?.c.carrying?.id === target.id) delete carrier.c.carrying;
 
@@ -162,15 +193,10 @@ export function release(
     const cbox = carrier && carrier.room === target.room ? ctx.content.characters[carrier.kind]?.box : undefined;
     if (carrier && cbox) tries.push({ x: carrier.x + (cbox.w - box.w) / 2, y: carrier.y + cbox.h - box.h });
     const spot = tries.find((s) => !boxInSolid(room, s.x, s.y, box.w, box.h));
-    if (spot) {
-      target.x = spot.x;
-      target.y = spot.y;
-    }
+    if (spot && (spot.x !== target.x || spot.y !== target.y)) emitEffect(ctx, target, { kind: 'move', room: target.room, x: spot.x, y: spot.y });
   }
-  target.vx = 0;
-  target.vy = 0;
   target.onGround = false;
-  if (how) ctx.emit('released', { by: held.by, target: target.id, player: carrier?.player ?? null, how });
+  if (how) ctx.emit('released', { by, target: target.id, player: carrier?.player ?? null, how });
 }
 
 /** Throws what `e` carries, aimed by the stick: forward by default, up, or down. */
@@ -178,7 +204,7 @@ export function throwCarried(ctx: StepContext, e: Entity, input: Input, throwStr
   const carrying = e.c.carrying;
   if (!carrying) return;
   const target = ctx.world.entities.find((o) => o.id === carrying.id);
-  if (!target || target.c.held?.by !== e.id) {
+  if (!target || heldBy(target) !== e.id) {
     delete e.c.carrying;
     return;
   }

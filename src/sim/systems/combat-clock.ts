@@ -1,4 +1,5 @@
 import { ticksOf } from '../body-state.ts';
+import { emitEffect, heldBy } from '../effects.ts';
 import type { System } from '../types.ts';
 
 /**
@@ -25,8 +26,12 @@ const system: System = {
   run(ctx) {
     for (const e of ctx.world.entities) {
       if (e.c.beat) {
-        if (e.c.beat.ticks <= 0) delete e.c.beat;
-        else e.c.beat.ticks--;
+        if (e.c.beat.ticks <= 0) {
+          // The beat is over: the body leaves with the speed the impact gave it.
+          const { vx, vy } = e.c.beat;
+          delete e.c.beat;
+          if (vx !== undefined && vy !== undefined) emitEffect(ctx, e, { kind: 'push', vx, vy });
+        } else e.c.beat.ticks--;
       }
       const flat = e.c.flattened;
       if (flat) {
@@ -38,7 +43,7 @@ const system: System = {
         }
       }
       const f = e.c.flying;
-      if (f && !e.c.beat && !e.c.held) {
+      if (f && !e.c.beat && heldBy(e) === null) {
         f.ticks++;
         // INTENT: there is always a way out. However a flight goes (a body
         // bouncing between two walls, wedged on a ledge), the player gets

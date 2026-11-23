@@ -1,4 +1,5 @@
 import { bodyNumbers, launch, markImpact, overlaps, throwCarried, ticksOf, wear } from '../body-state.ts';
+import { heldBy } from '../effects.ts';
 import type { Verb } from '../types.ts';
 
 declare module '../types.ts' {
@@ -57,7 +58,7 @@ const verb: Verb = {
     const x0 = e.facing > 0 ? e.x + box.w / 2 : e.x - reach;
     const width = box.w / 2 + reach;
     for (const o of ctx.world.entities) {
-      if (o === e || o.room !== e.room || o.c.held || o.c.flattened) continue;
+      if (o === e || o.room !== e.room || heldBy(o) !== null || o.c.flattened) continue;
       const ob = ctx.content.characters[o.kind]?.box;
       if (!ob || !overlaps(x0, e.y - 4, width, box.h + 4, o.x, o.y, ob.w, ob.h)) continue;
       ctx.emit('hit', { by: e.id, target: o.id, player: e.player });
@@ -68,8 +69,8 @@ const verb: Verb = {
       const speed = Math.min(t.attackStrength! / bodyNumbers(ctx.content, o).weight, world.maxLaunchSpeed ?? 500) * (friend ? (world.friendAttackLaunch ?? 0) : 1);
       if (speed > 0) {
         const up = input.y < -0.5;
-        launch(ctx, o, e.facing * speed * (up ? 0.25 : 1), -speed * (up ? 1 : (world.attackLift ?? 0.5)), e.id, [e.id]);
-        markImpact(ctx, o, e.facing > 0 ? o.x : o.x + ob.w, o.y + ob.h / 2, speed, ticksOf(world.hitBeatTime));
+        launch(ctx, o, e.facing * speed * (up ? 0.25 : 1), -speed * (up ? 1 : (world.attackLift ?? 0.5)), e.id, [e.id], ticksOf(world.hitBeatTime));
+        markImpact(ctx, o, e.facing > 0 ? o.x : o.x + ob.w, o.y + ob.h / 2, speed);
       }
       wear(ctx, o, t.attackWear! * (friend ? (world.friendAttackWear ?? 0) : 1), e.id);
     }

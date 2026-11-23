@@ -1,4 +1,5 @@
-import { bodyNumbers, clamp, markImpact, overlaps, ticksOf, wear } from '../body-state.ts';
+import { bodyNumbers, markImpact, overlaps, strike, ticksOf, wear } from '../body-state.ts';
+import { heldBy } from '../effects.ts';
 import type { System } from '../types.ts';
 import { friendly } from './impact-walls.ts';
 
@@ -20,15 +21,14 @@ const system: System = {
   run(ctx) {
     const world = ctx.content.tuning.world;
     if (world.bodyImpactOn! < 1) return;
-    const cap = world.maxLaunchSpeed ?? 500;
     const beat = ticksOf(world.beatTime);
     for (const a of ctx.world.entities) {
       const fa = a.c.flying;
-      if (!fa || a.c.held || a.c.beat) continue;
+      if (!fa || heldBy(a) !== null || a.c.beat) continue;
       const ab = ctx.content.characters[a.kind]?.box;
       if (!ab) continue;
       for (const b of ctx.world.entities) {
-        if (b === a || b.room !== a.room || b.c.held || b.c.flattened || b.c.beat) continue;
+        if (b === a || b.room !== a.room || heldBy(b) !== null || b.c.flattened || b.c.beat) continue;
         // INTENT: each pair meets once per flight (two bodies overlap for
         // several ticks), and a thrown body never "meets" its thrower:
         // launch() puts the thrower in `met`.
@@ -42,19 +42,24 @@ const system: System = {
         const mb = bodyNumbers(ctx.content, b).weight;
         const k = world.shoveBounce!;
         const [avx, avy, bvx, bvy] = [a.vx, a.vy, b.vx, b.vy];
-        a.vx = clamp((ma * avx + mb * bvx + mb * k * (bvx - avx)) / (ma + mb), cap);
-        a.vy = clamp((ma * avy + mb * bvy + mb * k * (bvy - avy)) / (ma + mb), cap);
-        b.vx = clamp((ma * avx + mb * bvx + ma * k * (avx - bvx)) / (ma + mb), cap);
-        b.vy = clamp((ma * avy + mb * bvy + ma * k * (avy - bvy)) / (ma + mb) - (b.onGround ? world.shovePop! : 0), cap);
-        b.onGround = false;
+        const pop = b.onGround ? world.shovePop! : 0;
         fa.met.push(b.id);
         if (b.c.flying) b.c.flying.met.push(a.id);
-        else b.c.flying = { by: fa.by, met: [a.id], ticks: 0, pvx: 0, pvy: 0, pGround: false, at: -1 };
+        strike(ctx, a, (ma * avx + mb * bvx + mb * k * (bvx - avx)) / (ma + mb), (ma * avy + mb * bvy + mb * k * (bvy - avy)) / (ma + mb), beat);
+        strike(
+          ctx,
+          b,
+          (ma * avx + mb * bvx + ma * k * (avx - bvx)) / (ma + mb),
+          (ma * avy + mb * bvy + ma * k * (avy - bvy)) / (ma + mb) - pop,
+          beat,
+          b.c.flying ? undefined : { by: fa.by, met: [a.id] },
+        );
+        b.onGround = false;
 
         const x = (a.x + ab.w / 2 + b.x + bb.w / 2) / 2;
         const y = (a.y + ab.h / 2 + b.y + bb.h / 2) / 2;
-        markImpact(ctx, a, x, y, speed, beat);
-        markImpact(ctx, b, x, y, speed, beat);
+        markImpact(ctx, a, x, y, speed);
+        markImpact(ctx, b, x, y, speed);
         ctx.emit('impact', { entity: a.id, player: a.player, other: b.id, speed });
         ctx.emit('impact', { entity: b.id, player: b.player, other: a.id, speed });
         const hurt = speed * world.impactWear!;

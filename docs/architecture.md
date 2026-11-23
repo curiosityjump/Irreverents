@@ -279,7 +279,8 @@ moves nothing (a friend's) still emits `hit`.
 
 State on a body that other steps may read (never write; all optional,
 present only while true): `c.flying` (`by`: the entity that started the
-flight), `c.held` (`by`: the carrier), `c.carrying` (`id`: the carried
+flight), `heldBy(entity)` from `src/sim/effects.ts` (the carrier; `c.held` holds
+only the hold's timers), `c.carrying` (`id`: the carried
 body), `c.beat` (in a held beat), `c.flattened` (`ticksLeft`, `by`),
 `c.worn` (`amount`: wear so far, against the kind's `toughness`),
 `c.impact` (`x`, `y`, `speed`, `tick` of the last impact or hit, for
@@ -330,10 +331,11 @@ scenario and is lost between two devices.**
 
 | `effect.kind` | Fields | Does | Typical emitter |
 |---|---|---|---|
-| `push` | `vx`, `vy` (pixels per second) | sets the body's velocity: sent flying | a hit, an impact, a throw (Step 2) |
+| `push` | `vx`, `vy` (pixels per second); optional `fly: { by, met }` | sets the body's velocity: sent flying. With `fly` it also sets `entity.c.flying`, so the body cannot act until it comes to rest | a hit, an impact, a throw (Step 2) |
 | `hold` | `by` (entity id of the holder) | marks it held (`entity.c.effect.heldBy`), stops it | a grab (Step 2) |
 | `release` | none | clears `heldBy`; free where it is now. Follow with `push` to throw | let go, break free (Step 2) |
-| `move` | `room`, `x`, `y` (top-left of its box) | puts it there, standing still | a door (Step 3), a respawn |
+| `move` | `room`, `x`, `y` (top-left of its box) | puts it there, standing still | a door (Step 3), a respawn; a body let go where it would not fit (Step 2) |
+| `flatten` | `ticks`, `by` | knocks it out: sets `entity.c.flattened`, so it cannot act until it recovers | toughness worn to nothing (Step 2) |
 
 - The event: `effect: { entity, player, effect }`. `heldBy(entity)` reads
   who holds a body, or null.

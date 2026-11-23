@@ -13,7 +13,10 @@ import type { Entity, StepContext } from './types.ts';
  */
 export type Effect =
   /** Sent flying: the body's velocity becomes (vx, vy), pixels per second. */
-  | { kind: 'push'; vx: number; vy: number }
+  /** With `fly` (Step 2): it is also "flying", unable to act until it comes to rest; `by` started the flight, `met` are bodies it will not strike. */
+  | { kind: 'push'; vx: number; vy: number; fly?: { by: string | null; met: string[] } }
+  /** Knocked out for `ticks` ticks (Step 2): it lies where it is and cannot act until it recovers. */
+  | { kind: 'flatten'; ticks: number; by: string | null }
   /** Held by the body with entity id `by`. Until released, whoever holds it moves it; its own device does not. */
   | { kind: 'hold'; by: string }
   /** Let go: free again, where it is now. Follow with a `push` to throw it. */
@@ -43,6 +46,9 @@ export function applyEffect(e: Entity, effect: Effect): void {
     e.vx = effect.vx;
     e.vy = effect.vy;
     if (effect.vy < 0) e.onGround = false;
+    if (effect.fly) e.c.flying = { by: effect.fly.by, met: [...effect.fly.met], ticks: 0, pvx: 0, pvy: 0, pGround: false, at: -1 };
+  } else if (effect.kind === 'flatten') {
+    e.c.flattened = { ticksLeft: effect.ticks, by: effect.by };
   } else if (effect.kind === 'hold') {
     e.c.effect = { ...e.c.effect, heldBy: effect.by };
     e.vx = 0;

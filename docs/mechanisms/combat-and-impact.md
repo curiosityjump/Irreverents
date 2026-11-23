@@ -36,10 +36,23 @@ choice in it, is Step 2's (`docs/plan/step-2.md`); the choices are
 `wear`, `release`, `throwCarried`, `bodyNumbers`) and declares the state
 and the events. It is not in a registry directory because it is a helper.
 
+## Everything that moves a body is an effect
+
+A launch, a hold, a release, a knock-out and the speed a body leaves a
+held beat with all go through `emitEffect` (`src/sim/effects.ts`,
+`docs/architecture.md`, "Effects on a player"), for every body, player or
+not, so a player's own device receives them. This slice added two things
+there, both additive: `push` may carry `fly` (the body is now "flying"
+and cannot act), and the kind `flatten`. The held beat is a `push` of
+zero when the impact happens and a `push` of the real speed when the
+beat ends (`strike` in `body-state.ts`, `combat-clock.ts`). Only two
+things are still written directly: a carried body's position each tick
+(`carry-ride.ts`, as the contract says), and `onGround`.
+
 ## State (all in `entity.c`, so every device and every scenario sees it)
 
-`flying` (who started it, whom it already met), `held` (by whom, ticks
-left for a player), `carrying` (whom), `beat` (ticks left), `worn`
+`flying` (who started it, whom it already met), `held` (ticks left for a
+player; who holds is `heldBy(entity)`, Step 1's single copy), `carrying` (whom), `beat` (ticks left), `worn`
 (wear taken so far), `flattened` (ticks left), `impact` (where, how
 hard, which tick: the only thing drawing reads for shake and dust),
 plus `attack` and `grab` (fresh-press trackers). The fields other steps
@@ -81,6 +94,8 @@ may read are listed in `docs/architecture.md`, "Bodies".
 
 ## Choices that are provisional (`DRAFT:` at each site)
 
+- A switch drops what is carried (the new body may be too weak for it);
+  it falls from overhead where the carrier stands.
 - No chains of holds: a carried body runs no verbs, so it cannot grab,
   and a body that is picked up or knocked flying drops what it carried.
 - A forward or downward throw leaves from in front of the carrier at
@@ -112,7 +127,7 @@ may read are listed in `docs/architecture.md`, "Bodies".
 
 ## How it is checked
 
-Sixteen scenarios, `scenarios/step2-hit-*.json`, in room `test-hit`.
+Eighteen scenarios, `scenarios/step2-hit-*.json`, in room `test-hit`.
 Each has a control that was watched to fail, most by changing one
 number in `content/tuning.json` (for example `bodyImpactOn` 0,
 `beatTime` 0, `breakFreeOn` 0). The screen side (dust, shake, the

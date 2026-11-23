@@ -1,5 +1,6 @@
-import { clamp, markImpact, ticksOf, wear } from '../body-state.ts';
+import { markImpact, strike, ticksOf, wear } from '../body-state.ts';
 import { DT } from '../types.ts';
+import { heldBy } from '../effects.ts';
 import type { Entity, StepContext, System } from '../types.ts';
 
 /** Whether the launcher of a flight and the body it hurts are both players (the friend rule). */
@@ -30,13 +31,14 @@ const system: System = {
     const limit = world.wallImpactSpeed!;
     for (const e of ctx.world.entities) {
       const f = e.c.flying;
-      if (!f || f.at !== ctx.world.tick || e.c.beat || e.c.held) continue;
+      if (!f || f.at !== ctx.world.tick || e.c.beat || heldBy(e) !== null) continue;
       const box = ctx.content.characters[e.kind]?.box;
       if (!box) continue;
       const fall = Math.min(f.pvy + world.gravity! * DT, world.maxFallSpeed!);
       let speed = 0;
       let x = 0;
       let y = 0;
+      let [vx, vy] = [e.vx, e.vy];
       // INTENT: one impact per stop. Physics leaves vx (or vy) at exactly 0
       // only on the tick it stopped the body, and a body resting on the
       // floor was already on it (pGround), so a body lying against a wall
@@ -45,7 +47,7 @@ const system: System = {
         speed = Math.abs(f.pvx);
         x = f.pvx > 0 ? e.x + box.w : e.x;
         y = e.y + box.h / 2;
-        e.vx = clamp(-f.pvx * world.wallBounce!, 900);
+        vx = -f.pvx * world.wallBounce!;
       }
       if (!f.pGround && e.onGround && fall >= limit && fall > speed) {
         speed = fall;
@@ -55,10 +57,11 @@ const system: System = {
         speed = -fall;
         x = e.x + box.w / 2;
         y = e.y;
-        e.vy = clamp(-fall * world.wallBounce!, 900);
+        vy = -fall * world.wallBounce!;
       }
       if (speed === 0) continue;
-      markImpact(ctx, e, x, y, speed, ticksOf(world.beatTime));
+      markImpact(ctx, e, x, y, speed);
+      strike(ctx, e, vx, vy, ticksOf(world.beatTime));
       ctx.emit('impact', { entity: e.id, player: e.player, other: null, speed });
       wear(ctx, e, speed * world.impactWear! * (friendly(ctx, f.by, e) ? world.friendThrowWear! : 1), f.by);
     }

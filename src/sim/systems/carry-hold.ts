@@ -1,4 +1,5 @@
 import { canAct, inputOf, release } from '../body-state.ts';
+import { emitEffect, heldBy } from '../effects.ts';
 import type { System } from '../types.ts';
 
 /**
@@ -18,9 +19,10 @@ const system: System = {
   run(ctx) {
     const world = ctx.content.tuning.world;
     for (const target of ctx.world.entities) {
-      const held = target.c.held;
-      if (!held) continue;
-      const carrier = ctx.world.entities.find((e) => e.id === held.by);
+      const by = heldBy(target);
+      if (by === null) continue;
+      const held = (target.c.held ??= { ticks: -1, jumpDown: true });
+      const carrier = ctx.world.entities.find((e) => e.id === by);
       const carrying = carrier?.c.carrying;
       if (!carrier || !carrying || carrying.id !== target.id || carrier.room !== target.room || carrier.kind !== carrying.kind || !canAct(carrier)) {
         release(ctx, target, 'dropped');
@@ -36,7 +38,7 @@ const system: System = {
       held.jumpDown = down;
       if (fresh && world.breakFreeOn! >= 1) {
         release(ctx, target, 'broke-free');
-        target.vy = -world.breakFreeHop!;
+        emitEffect(ctx, target, { kind: 'push', vx: 0, vy: -world.breakFreeHop! });
         continue;
       }
       if (held.ticks > 0 && --held.ticks === 0) release(ctx, target, 'let-go');
@@ -44,7 +46,8 @@ const system: System = {
     // A carrier whose body vanished (left the game) carries nothing.
     for (const e of ctx.world.entities) {
       const c = e.c.carrying;
-      if (c && ctx.world.entities.find((o) => o.id === c.id)?.c.held?.by !== e.id) delete e.c.carrying;
+      const carried = ctx.world.entities.find((o) => o.id === c?.id);
+      if (c && (!carried || heldBy(carried) !== e.id)) delete e.c.carrying;
     }
   },
 };
