@@ -6,7 +6,10 @@ import type { SimEvent, World } from '../sim/types.ts';
 
 /** Holds the stick and/or some actions for a span of ticks: from (inclusive) to (exclusive). */
 export interface InputSpan {
+  /** The player's id; empty text when the span drives `entity` instead. */
   player: string;
+  /** One of the scenario's `entities`: the span is written to its entity.c.input, as an NPC system would. */
+  entity?: string;
   from: number;
   to: number;
   x?: number;
@@ -23,7 +26,9 @@ export interface Scenario {
   room: string;
   players: { id: string; character: string; spawn: number }[];
   /** Bodies nobody plays, put in the room before tick 0. Their entity id is `id`. */
-  entities?: { id: string; character: string; tile: [number, number] }[];
+  entities?: { id: string; character: string; tile: [number, number]; vx?: number; vy?: number }[];
+  /** True: the room's own placements (content/placements/<room>.json) are put in the world too. */
+  placements?: boolean;
   inputs: InputSpan[];
   /** How many ticks to run. */
   ticks: number;

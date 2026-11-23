@@ -1,0 +1,17 @@
+{
+  "id": "step2-hit-nonplayer-acts",
+  "proves": "a body that is not a player does its kind's verbs from entity.c.input: a hero nobody plays, given a held stick and a jump, runs and jumps, while a player standing by is not moved",
+  "room": "graybox-hall",
+  "players": [{ "id": "a", "character": "hero", "spawn": 0 }],
+  "entities": [{ "id": "walker", "character": "hero", "tile": [8, 9] }],
+  "inputs": [
+    { "entity": "walker", "from": 0, "to": 40, "x": 1 },
+    { "entity": "walker", "from": 20, "to": 30, "hold": ["jump"] }
+  ],
+  "ticks": 90,
+  "expect": [
+    { "fact": "position", "entity": "walker", "at": 90, "x": [208, 210] },
+    { "fact": "event", "event": "jumped", "entity": "walker", "between": [20, 21], "count": [1, 1] },
+    { "fact": "position", "player": "a", "at": 90, "x": [40, 40] }
+  ]
+}

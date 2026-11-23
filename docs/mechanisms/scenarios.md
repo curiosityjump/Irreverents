@@ -35,10 +35,18 @@ build gates A–F (`docs/measures.md`, M3) from the scenarios' `gate` tags.
   `{ "id": "dummy-1", "character": "<character kind id>", "tile": [col, row] }`,
   put in the room before tick 0 with their feet on the floor of that tile,
   centred. The entity's id in the world is the `id` given (players are
-  `p:<player id>`, so an id may not start with `p:`).
+  `p:<player id>`, so an id may not start with `p:`). Optional `vx`, `vy`
+  give it a starting speed (pixels per second, up to 900).
+- `"placements": true` (optional, default off) also puts the room's own
+  placements (`content/placements/<room id>.json`) in the world, through
+  `populateRoom`; facts may then name those ids with `entity` too.
 - An input span holds the stick (`x`, `y` from -1 to 1) and/or actions
   (`hold`, ids from `content/actions/`) from tick `from` up to but not
   including `to`. Overlapping spans merge.
+- An input span may name `"entity"` (one of the scenario's `entities`)
+  instead of `"player"`: it is written to that body's `entity.c.input`,
+  which is how a body that is not a player acts (`docs/architecture.md`,
+  "Bodies"). Its kind must list the verbs for anything to happen.
 - **Ticks:** 60 a second. "At tick N" means after N steps; tick 0 is the
   start. An event's tick is the step it happened in.
 - Positions are measured at **the middle of the character's feet**, in
@@ -54,7 +62,8 @@ build gates A–F (`docs/measures.md`, M3) from the scenarios' `gate` tags.
 | `event` | event `event` happened (for `player`, if given) on a tick within `between`; optional `count: [min, max]`, and `[0, 0]` means "must not happen" |
 
 Every fact that names a `player` accepts `"entity": "<id>"` instead (one
-of the scenario's `entities`): the three body facts read that body, and
+of the scenario's `entities`, or of the room's placements when
+`placements` is true): the three body facts read that body, and
 `event` matches the event's `entity` field. Give one or the other.
 
 Add a fact by adding a file there that default-exports a `Fact`

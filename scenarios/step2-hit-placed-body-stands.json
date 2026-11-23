@@ -1,5 +1,5 @@
 {
-  "id": "hit-placed-body-stands",
+  "id": "step2-hit-placed-body-stands",
   "proves": "a scenario can put bodies nobody plays in the room (the entities field) and facts can read them by entity id: a dummy stands where it was put, and a crate put in mid-air falls and lands",
   "room": "graybox-hall",
   "players": [{ "id": "a", "character": "hero", "spawn": 0 }],

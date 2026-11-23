@@ -1,0 +1,15 @@
+{
+  "id": "step2-hit-room-placements",
+  "proves": "a scenario that asks for the room's placements gets the room's placed bodies, and a body given a starting speed moves with it",
+  "room": "graybox-hall",
+  "players": [{ "id": "a", "character": "hero", "spawn": 0 }],
+  "placements": true,
+  "entities": [{ "id": "thrown-crate", "character": "crate", "tile": [4, 6], "vx": 120, "vy": -100 }],
+  "inputs": [],
+  "ticks": 30,
+  "expect": [
+    { "fact": "standing-on-tile", "entity": "dummy-heavy-1", "at": 30, "tile": [17, 10] },
+    { "fact": "position", "entity": "thrown-crate", "at": 10, "x": [91.9, 92.1] },
+    { "fact": "velocity", "entity": "thrown-crate", "at": 1, "vx": [120, 120], "vy": [-86, -84] }
+  ]
+}

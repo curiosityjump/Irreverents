@@ -1,3 +1,4 @@
+import type { Content } from '../content/types.ts';
 import type { Entity } from '../sim/types.ts';
 import type { Recording, Scenario } from './types.ts';
 
@@ -44,12 +45,14 @@ export function round2(n: number): number {
 
 /**
  * A fact about a body names it with "player" (a player's id) or "entity"
- * (the id of one of the scenario's `entities`): exactly one of the two.
+ * (the id of one of the scenario's `entities`, or of one of the room's
+ * placements when the scenario has "placements": true): exactly one of the two.
  */
-export function checkBody(spec: Record<string, unknown>, scenario: Scenario, out: string[]): void {
+export function checkBody(spec: Record<string, unknown>, scenario: Scenario, out: string[], content?: Content): void {
   if (spec.entity === undefined) return checkPlayer(spec, scenario, out);
   if (spec.player !== undefined) out.push('player / entity: give one or the other, not both');
   const ids = (scenario.entities ?? []).map((e) => e.id);
+  if (scenario.placements && content) for (const p of content.placements?.[scenario.room]?.place ?? []) ids.push(p.id);
   if (typeof spec.entity !== 'string' || !ids.includes(spec.entity)) {
     out.push(`entity: must be one of this scenario's entities (${ids.join(', ') || 'it lists none'}), but is ${JSON.stringify(spec.entity)}`);
   }

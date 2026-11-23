@@ -2,7 +2,7 @@ import { describe, isRecord, known } from '../content/reader.ts';
 import type { Content, Problem } from '../content/types.ts';
 import { step } from '../sim/step.ts';
 import type { Input, SimEvent, World } from '../sim/types.ts';
-import { createWorld, spawnBody, spawnPlayer } from '../sim/world.ts';
+import { createWorld, populateRoom, spawnBody, spawnPlayer } from '../sim/world.ts';
 import facts from './facts/index.gen.ts';
 import type { InputSpan, Recording, Scenario } from './types.ts';
 
@@ -19,7 +19,7 @@ export function parseScenario(raw: unknown, file: string, stem: string, content:
     fail('(the whole file)', `must be an object, but is ${describe(raw)}`);
     return null;
   }
-  const fields = ['id', 'gate', 'proves', 'room', 'players', 'entities', 'inputs', 'ticks', 'expect'];
+  const fields = ['id', 'gate', 'proves', 'room', 'players', 'entities', 'placements', 'inputs', 'ticks', 'expect'];
   for (const key of Object.keys(raw)) {
     if (key !== '//' && !fields.includes(key)) fail(key, `unknown field (known fields: ${fields.join(', ')})`);
   }
@@ -60,11 +60,18 @@ export function parseScenario(raw: unknown, file: string, stem: string, content:
         const w = `entities[${i}]`;
         if (!isRecord(e)) return fail(w, `must be an object, but is ${describe(e)}`);
         for (const key of Object.keys(e)) {
-          if (!['id', 'character', 'tile', '//'].includes(key)) fail(`${w}.${key}`, 'unknown field (known fields: id, character, tile)');
+          if (!['id', 'character', 'tile', 'vx', 'vy', '//'].includes(key)) fail(`${w}.${key}`, 'unknown field (known fields: id, character, tile, vx, vy)');
+        for (const axis of ['vx', 'vy']) {
+          const v = e[axis];
+          if (v !== undefined && (typeof v !== 'number' || !Number.isFinite(v) || Math.abs(v) > 900)) fail(`${w}.${axis}`, `must be a speed from -900 to 900 pixels per second, but is ${JSON.stringify(v)}`);
+        }
         }
         if (typeof e.id !== 'string' || e.id === '') fail(`${w}.id`, 'must be non-empty text');
         else if (e.id.startsWith('p:')) fail(`${w}.id`, `"${e.id}" starts with "p:", which is how players' entities are named`);
         else if (entities.some((q) => q.id === e.id)) fail(`${w}.id`, `entity "${e.id}" is listed twice`);
+        else if (raw.placements === true && room && content.placements?.[room.id]?.place.some((q) => q.id === e.id)) {
+          fail(`${w}.id`, `"${e.id}" is already placed in room "${room.id}" by its placements file, which this scenario asked for`);
+        }
         if (typeof e.character !== 'string' || !(e.character in content.characters)) {
           fail(`${w}.character`, `no character ${JSON.stringify(e.character)} (characters: ${known(content.characters)})`);
         }
@@ -74,10 +81,12 @@ export function parseScenario(raw: unknown, file: string, stem: string, content:
         else if (room && (t[0] < 0 || t[1] < 0 || t[0] >= room.w || t[1] >= room.h)) {
           fail(`${w}.tile`, `[${t[0]}, ${t[1]}] is outside room "${room.id}", which is ${room.w} by ${room.h} tiles`);
         }
-        entities.push({ id: String(e.id), character: String(e.character), tile: tileOk ? [t[0], t[1]] : [0, 0] });
+        entities.push({ id: String(e.id), character: String(e.character), tile: tileOk ? [t[0], t[1]] : [0, 0], vx: e.vx as number | undefined, vy: e.vy as number | undefined });
       });
     }
   }
+
+  if (raw.placements !== undefined && typeof raw.placements !== 'boolean') fail('placements', `must be true or false, but is ${describe(raw.placements)}`);
 
   const inputs: InputSpan[] = [];
   if (!Array.isArray(raw.inputs)) fail('inputs', 'must be a list (it may be empty)');
@@ -86,9 +95,12 @@ export function parseScenario(raw: unknown, file: string, stem: string, content:
       const w = `inputs[${i}]`;
       if (!isRecord(s)) return fail(w, `must be an object, but is ${describe(s)}`);
       for (const key of Object.keys(s)) {
-        if (!['player', 'from', 'to', 'x', 'y', 'hold', '//'].includes(key)) fail(`${w}.${key}`, 'unknown field (known fields: player, from, to, x, y, hold)');
+        if (!['player', 'entity', 'from', 'to', 'x', 'y', 'hold', '//'].includes(key)) fail(`${w}.${key}`, 'unknown field (known fields: player, entity, from, to, x, y, hold)');
       }
-      if (!players.some((p) => p.id === s.player)) fail(`${w}.player`, `must be one of this scenario's players, but is ${JSON.stringify(s.player)}`);
+      if (s.entity !== undefined) {
+        if (s.player !== undefined) fail(`${w}.player`, 'give player or entity, not both');
+        if (!entities.some((e) => e.id === s.entity)) fail(`${w}.entity`, `must be one of this scenario's entities, but is ${JSON.stringify(s.entity)}`);
+      } else if (!players.some((p) => p.id === s.player)) fail(`${w}.player`, `must be one of this scenario's players, but is ${JSON.stringify(s.player)}`);
       const okTick = (v: unknown): boolean => typeof v === 'number' && Number.isInteger(v) && v >= 0;
       if (!okTick(s.from) || !okTick(s.to) || (s.from as number) >= (s.to as number)) {
         fail(`${w}.from`, `from and to must be whole ticks with from before to, but are ${JSON.stringify(s.from)} and ${JSON.stringify(s.to)}`);
@@ -104,7 +116,7 @@ export function parseScenario(raw: unknown, file: string, stem: string, content:
           if (typeof a !== 'string' || !(a in content.actions)) fail(`${w}.hold[${k}]`, `no action ${JSON.stringify(a)} (actions: ${known(content.actions)})`);
         });
       }
-      inputs.push({ player: String(s.player), from: Number(s.from), to: Number(s.to), x: s.x as number | undefined, y: s.y as number | undefined, hold: Array.isArray(hold) ? (hold as string[]) : [] });
+      inputs.push({ player: s.entity === undefined ? String(s.player) : '', entity: s.entity as string | undefined, from: Number(s.from), to: Number(s.to), x: s.x as number | undefined, y: s.y as number | undefined, hold: Array.isArray(hold) ? (hold as string[]) : [] });
     });
   }
 
@@ -115,6 +127,7 @@ export function parseScenario(raw: unknown, file: string, stem: string, content:
     room: String(raw.room),
     players,
     entities,
+    placements: raw.placements === true,
     inputs,
     ticks: ticksOk ? (ticks as number) : 1,
     expect: [],
@@ -140,8 +153,25 @@ export function inputsAt(scenario: Scenario, tick: number): Record<string, Input
   const out: Record<string, Input> = {};
   for (const p of scenario.players) out[p.id] = { x: 0, y: 0, held: [] };
   for (const s of scenario.inputs) {
-    if (tick < s.from || tick >= s.to) continue;
+    if (tick < s.from || tick >= s.to || s.entity !== undefined) continue;
     const input = out[s.player]!;
+    if (s.x !== undefined) input.x = s.x;
+    if (s.y !== undefined) input.y = s.y;
+    for (const a of s.hold ?? []) if (!input.held.includes(a)) input.held.push(a);
+  }
+  return out;
+}
+
+/**
+ * The input a scenario gives its non-player entities on one tick, by entity
+ * id: only entities that have at least one span anywhere in the scenario.
+ */
+export function entityInputsAt(scenario: Scenario, tick: number): Record<string, Input> {
+  const out: Record<string, Input> = {};
+  for (const s of scenario.inputs) {
+    if (s.entity === undefined) continue;
+    const input = (out[s.entity] ??= { x: 0, y: 0, held: [] });
+    if (tick < s.from || tick >= s.to) continue;
     if (s.x !== undefined) input.x = s.x;
     if (s.y !== undefined) input.y = s.y;
     for (const a of s.hold ?? []) if (!input.held.includes(a)) input.held.push(a);
@@ -152,11 +182,22 @@ export function inputsAt(scenario: Scenario, tick: number): Record<string, Input
 export function simulate(scenario: Scenario, content: Content): Recording {
   const world = createWorld();
   for (const p of scenario.players) spawnPlayer(world, content, { player: p.id, character: p.character, room: scenario.room, spawn: p.spawn });
-  for (const e of scenario.entities ?? []) spawnBody(world, content, { id: e.id, character: e.character, room: scenario.room, tile: e.tile });
+  if (scenario.placements) populateRoom(world, content, scenario.room);
+  for (const e of scenario.entities ?? []) {
+    const body = spawnBody(world, content, { id: e.id, character: e.character, room: scenario.room, tile: e.tile });
+    body.vx = e.vx ?? 0;
+    body.vy = e.vy ?? 0;
+    if (body.vx !== 0 || body.vy !== 0) body.onGround = false;
+  }
   const snapshot = (): World => JSON.parse(JSON.stringify(world)) as World;
   const history: World[] = [snapshot()];
   const events: SimEvent[] = [];
   for (let t = 0; t < scenario.ticks; t++) {
+    // A body that is not a player acts through entity.c.input (src/sim/systems/verbs.ts).
+    for (const [id, input] of Object.entries(entityInputsAt(scenario, t))) {
+      const body = world.entities.find((e) => e.id === id);
+      if (body) body.c.input = input;
+    }
     events.push(...step(world, inputsAt(scenario, t), content));
     history.push(snapshot());
   }

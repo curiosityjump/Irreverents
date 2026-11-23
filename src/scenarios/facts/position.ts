@@ -8,10 +8,10 @@ import type { Fact } from '../types.ts';
  */
 const fact: Fact = {
   id: 'position',
-  validate(spec, scenario) {
+  validate(spec, scenario, content) {
     const out: string[] = [];
     checkOnly(spec, ['player', 'entity', 'at', 'x', 'y'], out);
-    checkBody(spec, scenario, out);
+    checkBody(spec, scenario, out, content);
     checkAt(spec, scenario, out);
     if (spec.x === undefined && spec.y === undefined) out.push('x / y: give at least one range');
     for (const axis of ['x', 'y']) {

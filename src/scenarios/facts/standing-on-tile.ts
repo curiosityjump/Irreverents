@@ -8,10 +8,10 @@ import type { Fact } from '../types.ts';
  */
 const fact: Fact = {
   id: 'standing-on-tile',
-  validate(spec, scenario) {
+  validate(spec, scenario, content) {
     const out: string[] = [];
     checkOnly(spec, ['player', 'entity', 'at', 'tile'], out);
-    checkBody(spec, scenario, out);
+    checkBody(spec, scenario, out, content);
     checkAt(spec, scenario, out);
     const t = spec.tile;
     if (!Array.isArray(t) || t.length !== 2 || !t.every((n) => Number.isInteger(n))) {

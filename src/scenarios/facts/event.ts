@@ -11,11 +11,11 @@ import type { Fact } from '../types.ts';
  */
 const fact: Fact = {
   id: 'event',
-  validate(spec, scenario) {
+  validate(spec, scenario, content) {
     const out: string[] = [];
     checkOnly(spec, ['event', 'player', 'entity', 'between', 'count'], out);
     if (typeof spec.event !== 'string' || spec.event === '') out.push(`event: must name an event type, but is ${JSON.stringify(spec.event)}`);
-    if (spec.player !== undefined || spec.entity !== undefined) checkBody(spec, scenario, out);
+    if (spec.player !== undefined || spec.entity !== undefined) checkBody(spec, scenario, out, content);
     const b = spec.between;
     if (!isRange(b) || !isTick(b[0], scenario) || !isTick(b[1], scenario)) {
       out.push(`between: must be [first tick, last tick] within 0 to ${scenario.ticks}, but is ${JSON.stringify(b)}`);
