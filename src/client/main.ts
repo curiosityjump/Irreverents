@@ -17,6 +17,7 @@ import { takeWords } from './draw/fx.ts';
 import { drawnSignalers } from './draw/outpost.ts';
 import { drawnCantina } from './draw/cantina.ts';
 import { drawnLevels } from './draw/levels.ts';
+import { drawnCompletion } from './draw/completion.ts';
 import { levelProgress } from '../sim/levels.ts';
 import { setUpMenu, showGone, showStart } from './start.ts';
 import type { StartRecord } from './start.ts';
@@ -126,6 +127,8 @@ const debug = {
     /** Step 11: the open party row's chips and the brawl's counter, as drawn (src/client/draw/cantina.ts); the row in CSS pixels of the page, so a check can tap it. */
     /** Step 14 slice A: the level entrances this frame drew (art, name or none, pie) and the banner's name, if one is up (src/client/draw/levels.ts). */
     levels: { entrances: [], banner: null } as ReturnType<typeof drawnLevels>,
+    /** Step 14 slice B: the pieces' glints this frame drew, the found row while it shows, and pieces popping (src/client/draw/completion.ts). */
+    completion: { glints: [], row: null, pops: [] } as ReturnType<typeof drawnCompletion>,
     cantina: null as { row: { kind: string; slot: number; x: number; y: number; w: number; h: number; taken: boolean }[] | null; counter: { player: string; ko: number; falls: number }[] | null } | null,
   },
 };
@@ -280,6 +283,7 @@ function play(worldName: string): void {
     d.me = result.drawn.find((e) => e.mine) ?? null;
     d.signalers = drawnSignalers();
     d.levels = drawnLevels();
+    d.completion = drawnCompletion();
     d.words = takeWords();
     {
       const c = drawnCantina();

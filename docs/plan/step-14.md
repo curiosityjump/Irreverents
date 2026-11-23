@@ -219,3 +219,9 @@ Slice A (`session_017WiGzFeeJgj8z2SUAFyu5J`):
 - `npm run check:live` after push 1: `fight-back` (Step 18's guard fact) failed on live once, its 30 s with the hero not moved; nothing in this slice touches guards or combat. Not re-run.
 - Taste, for the owner: the signs' size and place; whether the camp's and quarry's signs, stacked, are too much in the courtyard; the banner.
 - `npm run e2e` on push 2 after rebasing onto 18f7c48: `t-throw-friend`, `s-throw-friend`, `s-after` failed once (B not drawn flying); the same run on 18f7c48 alone and a rerun with push 2 both passed. Logged as a possible flake in Step 2's throw facts; not investigated.
+
+### Slice B (glints builder, `session_017WiGzFeeJgj8z2SUAFyu5J`)
+
+- Push 1: pieces as data, `world.found`, `completion-find`, the glint, pop and found row; `town-1` over the awning, `town-2` the special good, two street crates. Not in push 1: `place-found` (needs the vault, push 2), the row on entrance signs and menu rows (item 8), the chime (no event→sound wiring added; `content/sounds/pickup` exists), D-089, what the set builds.
+- Asked the core-loop art cut-outs builder (`session_017WiGzEN1QbSnHzXNqV4XSt`) for `piece-grey`, `piece-gold` and a special-good look; I named it `goods-special` there, but the renderer reads `shop-<thing look>`, so the look id is **`shop-special`**. Until then the good is the cut `gem` and the row's pieces plain shapes.
+- The awning glint vs the street's "nothing points at the roofs" `INTENT:`: decided not pointing, logged, filed in `docs/for-the-orchestrator.md`.

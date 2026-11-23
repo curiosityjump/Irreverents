@@ -13,6 +13,7 @@ import type { PlayerView } from './draw/entities.ts';
 import { drawHall } from './draw/hall.ts';
 import { drawImpact } from './draw/impact.ts';
 import { drawLevelBanner, drawLevelEntrances, drawLevelSigns } from './draw/levels.ts';
+import { drawCompletion, drawCompletionRow } from './draw/completion.ts';
 import { drawNpcs } from './draw/npcs.ts';
 import { drawSignalers } from './draw/outpost.ts';
 import { backdropOf, decorOf, drawDoors, drawRoom, roomOrigin } from './draw/room.ts';
@@ -68,6 +69,7 @@ export function render(g: CanvasRenderingContext2D, world: World, content: Conte
   drawLevelEntrances(g, world, content, roomId, ox, oy);
   drawRoomParts(g, world, room, ox, oy, content);
   drawLevelSigns(g, content);
+  drawCompletion(g, world, content, roomId, ox, oy, W, pv);
   drawBells(g, world, content, roomId, ox, oy);
   drawCantinaBell(g, world, content, roomId, ox, oy);
   const decor = decorOf(room, content);
@@ -89,5 +91,6 @@ export function render(g: CanvasRenderingContext2D, world: World, content: Conte
   drawDoorRefused(g, world, content, roomId, ox, oy, pv?.me);
   drawCantina(g, world, content, roomId, pv?.me);
   drawLevelBanner(g, world, content, roomId, W, pv);
+  drawCompletionRow(g, world, content, W, pv);
   return { x: -ox, y: -oy };
 }

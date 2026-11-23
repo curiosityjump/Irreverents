@@ -1,0 +1,8 @@
+{
+  "//": "DRAFT (Step 14 slice B, push 1): the town's pieces. Ids never say what they are or what the set builds. One lies just over the shop's awning on the first street screen (a hop from the street floor takes it); one is the shop's special good (taking it, seen or not, is the piece). More land in push 2.",
+  "id": "castle-town",
+  "pieces": [
+    { "id": "town-1", "room": "castle-street", "tile": [8, 7], "look": "item-gear" },
+    { "id": "town-2", "from": { "thing": "street-goods-rare" } }
+  ]
+}

@@ -182,6 +182,8 @@ pocket, a ridge shelf, a hidden cave, the depot's cellar; hiding spots.
 drawn at the owner's play (they landed at 19:45 UTC, 4022fd6). Nothing is in
 any secret, and entering one shows and sounds nothing.
 
+**Landed (glints push 1, Step 14 slice B).** Pieces are data (`content/completion/`), found for the world (`world.found`, `piece-found`, `set-complete`); a glint at each unfound placed piece, a pop and a grey-and-gold row at the top. The town's first two: over the shop's awning, and the shop's special good. Two crates on the street. Still to land: the rest of the pieces (push 2), `place-found`, the row on signs and menu rows, the chime, what the sets build (push 3), D-089.
+
 **The first playable.** *Experience:* walking east out of the throne room, the
 first street screen shows a small glinting piece just over the shop's awning.
 A hop takes it: a chime, a burst, and a short row of grey pieces flashes at

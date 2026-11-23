@@ -940,3 +940,16 @@ document as a decision of theirs.
 - **Why this way:** it is deployed and kept games already list discovered levels by id, and "don't rename or remove ids once deployed" protects those saves. The id is never shown: the shown name is the level file's own data and stays free to change. No new id takes a proposed name.
 - **To change it:** add a new level id and map the old one to it on load (retire, never delete); the shown name is one string in the level file.
 - **Where:** `content/levels/iron-quarry.json`; `docs/plan/step-14.md`.
+### 2026-11-23 · Step 14 slice B: pieces to find, seen glinting before you can reach them; the first two in the street
+- **Decided by:** glints builder (Step 14 slice B), `session_017WiGzFeeJgj8z2SUAFyu5J`
+- **Instead of asking:** "Where do the first pieces go, how does finding one show, and what is the special good?"
+- **Why this way:** the owner, after playing: "no hidden places to explore"; D-078 (hidden pieces that build something unnamed), D-079 (more to find, never which or where), D-082 (kept). The first piece lies just over the shop's awning on the first street screen, so every player meets a glint and finds one with a hop within seconds of starting; the second is a visibly special good at the end of the shop's shelf, and taking it, seen or not, is the piece. A piece found pops, and a row of the town's pieces shows at the top for two seconds, grey with the found ones gold; no numbers. Pieces are the world's: a friend's find is yours. Two light crates now lie on the street east of the doorway, a weight to carry for the courtyard's plates.
+- **To change it:** a piece's place, look or source is one entry in `content/completion/<level>.json`; the special good is `street-goods-rare` in `content/placements/castle-street.json`; the row's time and look in `src/client/draw/completion.ts`.
+- **Where:** `docs/mechanisms/levels.md`, "Pieces"; `handoff-prompts/loop-glints.md`.
+
+### 2026-11-23 · A glint over the shop's awning marks a piece, not the way over the roofs
+- **Decided by:** glints builder (Step 14 slice B), `session_017WiGzFeeJgj8z2SUAFyu5J`
+- **Instead of asking:** "The street's `INTENT:` says nothing may point at the roofs' route; does a piece on the awning do that?"
+- **Why this way:** the awning is a low ledge right above the shop, not part of the route over the roofs (that starts at building 2's doorway and balcony, far east), and the piece sits on it, not on a roof or ledge of the route; the brief named this spot. The glint says "a piece is here", and a hero who takes it stands on an awning that goes nowhere. The doubt is filed for the owner (`docs/for-the-orchestrator.md`).
+- **To change it:** move `town-1` in `content/completion/castle-town.json` (for example to the shop's floor beside the curtain).
+- **Where:** `content/completion/castle-town.json`.

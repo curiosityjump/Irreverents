@@ -374,6 +374,8 @@ async function main(): Promise<void> {
       await (await import('./e2e/doors.ts')).doorFacts({ browser, devices, base, out, fact, errors, shots: path.join(out, 'doors') });
       // Step 14 slice A's facts (level-*): the quarry's entrance drawn, found by touch, its name and pie; the menu's rows (docs/mechanisms/levels.md).
       await (await import('./e2e/levels.ts')).levelFacts({ browser, devices, base, out, fact, errors, shots: path.join(out, 'levels') });
+      // Step 14 slice B's facts (glint-*): the piece over the awning glints, a held Jump by touch finds it, the row shows it gold (docs/mechanisms/levels.md, "Pieces").
+      await (await import('./e2e/glints.ts')).glintFacts({ browser, devices, base, out, fact, errors, shots: path.join(out, 'glints') });
       // Step 16's facts (quarry-*): into the quarry by touch, and across its road onto the ridge (docs/plan/step-16.md, signal 7).
       await (await import('./e2e/quarry.ts')).quarryFacts({ browser, devices, base, out, fact, errors });
       // Step 11's facts (cantina-*): into the cantina by touch, the party row, the swap and the brawl's counter on two phones (docs/mechanisms/cantina.md, signal 8).

@@ -56,7 +56,8 @@ export interface PlacedThing {
   side?: 'good' | 'bad';
 }
 
-export const THING_LOOKS = ['counter', 'goods', 'bell'] as const;
+// Step 14 slice B: 'special', a visibly special good (content/completion/: taking it is a piece).
+export const THING_LOOKS = ['counter', 'goods', 'bell', 'special'] as const;
 export type ThingLook = (typeof THING_LOOKS)[number];
 
 /**

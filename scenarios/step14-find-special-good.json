@@ -1,0 +1,112 @@
+{
+  "id": "step14-find-special-good",
+  "gate": null,
+  "proves": "Step 14 slice B: in the street with its own people and things, a hero takes the shop's ordinary goods first (nothing found), then walks on and takes the special good at the end of the shelf by Use: that is the town's piece, found for the world whether anyone saw it or not",
+  "room": "castle-street",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "infiltrator",
+      "spawn": 1
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 70,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 80,
+      "to": 84,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 90,
+      "to": 110,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 120,
+      "to": 124,
+      "hold": [
+        "interact"
+      ]
+    }
+  ],
+  "ticks": 150,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "did",
+      "between": [
+        80,
+        85
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "where": {
+        "deed": "take",
+        "thing": "street-goods-2"
+      }
+    },
+    {
+      "fact": "found",
+      "level": "castle-town",
+      "between": [
+        0,
+        119
+      ],
+      "pieces": []
+    },
+    {
+      "fact": "event-where",
+      "event": "did",
+      "between": [
+        115,
+        125
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "where": {
+        "deed": "take",
+        "thing": "street-goods-rare"
+      }
+    },
+    {
+      "fact": "event-where",
+      "event": "piece-found",
+      "between": [
+        115,
+        125
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "where": {
+        "level": "castle-town",
+        "piece": "town-2"
+      }
+    },
+    {
+      "fact": "found",
+      "level": "castle-town",
+      "at": 150,
+      "pieces": [
+        "town-2"
+      ]
+    }
+  ]
+}

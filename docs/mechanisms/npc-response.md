@@ -241,7 +241,9 @@ too."* Built by Step 18 slice A (`docs/plan/step-18.md`).
 nothing; mood 2 a yellow `?` over the head; mood 3 a red `!` and a red
 tint over the body. A bark (`c.npc.bark`) replaces the mark while it
 lasts (`npcBarkTime`). Things are a brown box (`counter`) or a small
-green one (`goods`), gone once taken. Called by one line in
+green one (`goods`), gone once taken; a `special` good (Step 14 slice B,
+taking it is a piece) is drawn from the cut `gem` look until a
+`shop-special` look lands. Called by one line in
 `src/client/render.ts`, after the bodies.
 
 ## Calling for help, the alert and getting away (slice 2)
@@ -385,13 +387,16 @@ levels 2 and 3; finding a knocked-out person; the villain's horn
 
 - **`castle-street`** (`content/placements/castle-street.json`, `DRAFT:`
   every column and timing): `street-shopkeeper` at column 11 under
-  building 1, `street-counter` at 12, goods at 13, 14 and 15;
+  building 1, `street-counter` at 12, goods at 13, 14 and 15, and
+  `street-goods-rare` (look `special`, Step 14 slice B: a piece) at 16;
   `street-villain` resting at column 21 and walking to column 17 (the
   end of the goods, clear of where a player stands to use them), whose
   loop (rob, walk off, buy politely, rob properly, rest) takes about
   53 s, the polite purchase near 19 s in; `street-guard` pacing columns 37–42, more than a sight
   from the shop, and `street-bell` at column 24, between them, is how the shop
-  reaches the guard (slice 2). A player reaches them by walking east out
+  reaches the guard (slice 2). Two light crates (`street-crate-1`, `-2`,
+  columns 31 and 34, Step 14 slice B) lie between the doorway at 28 and the
+  guard's beat. A player reaches them by walking east out
   of the throne room, where the game starts.
 - **`test-shop`** is still the check scene and no player can reach it.
   The street has its own routines; test-shop's are pinned by its

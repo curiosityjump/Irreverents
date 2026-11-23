@@ -95,6 +95,57 @@ still an empty pie; the name on the sign is what says "discovered".
 - `window.irreverents.drawn.levels`: `{ entrances: [{ level, room, door,
   look, discovered, name, quarters }], banner }`.
 
+## Pieces (Step 14 slice B, `DRAFT:` throughout)
+
+D-078: hidden pieces that build a thing nobody named while you collect
+them. `content/completion/<level id>.json` (`src/content/kinds/completion.ts`):
+
+```json
+{ "id": "castle-town", "pieces": [
+  { "id": "town-1", "room": "castle-street", "tile": [8, 7], "look": "item-gear" },
+  { "id": "town-2", "from": { "thing": "street-goods-rare" } } ] }
+```
+
+- A piece is **placed** (`room`, `tile`, `look`: a cut `item-*` loose item)
+  or comes **`from`** something: a once-only placed thing taken (its
+  `takenBy`, read as state, so an old kept game is not locked out), or a
+  prize the heist slice banks (`world.banked`, read with a default).
+  `builds` (what the set makes) is free data until push 3. **Ids never say
+  what anything is.** The check refuses a piece in a solid tile, outside
+  its room, in a room outside the level, a `from` thing that is not a
+  once-only thing of the level, a look that does not exist, and a piece id
+  used twice. Whole-map room controls leave `completion/` out.
+- **`world.found`** `{ "<level>": ["town-1", …] }`, top-level, only grows,
+  kept with a kept game, the world's (a friend's find is yours). System
+  `completion-find` (620): a body someone plays whose box overlaps a placed
+  piece's tile finds it (`INTENT:` a crate or a guard finds nothing); a
+  `from` piece when its thing is taken or its prize banked. Events
+  `piece-found {level, piece, by, player}` and, on the last,
+  `set-complete {level}`. It runs in a page's own world too, adding only
+  what the server adds.
+- **Drawn** (`src/client/draw/completion.ts`, two lines in `render.ts`): a
+  glint at every unfound placed piece in the room (`fx-pickup-glow` under
+  the item, a one-pixel bob, a sparkle once a second), behind the bodies;
+  a pop (`fx-pickup-get`) where one is found; and, drawn last over
+  everything, a row of the level's pieces at the top for two seconds, grey
+  with the found ones gold (`piece-grey`/`piece-gold` looks when cut,
+  plain shapes until then). `INTENT:` a glint marks a piece, never a way,
+  and no digit (`t-no-numbers`). `drawn.completion`: `{ glints, row, pops }`.
+- **Tonight (push 1):** `town-1` just over the shop's awning on the first
+  street screen (all three heroes take it with a held Jump from under the
+  awning; the grappler's box reaches it on a small hop); `town-2` the shop's
+  special good at column 16 (`look: "special"`). Two light crates on the
+  street at 31 and 34.
+- Proof: `step14-find-awning-{grappler,infiltrator,flyer}` (a crate sitting
+  on the piece's tile from tick 0 finds nothing; control watched to fail:
+  the played-body test removed), `step14-find-special-good` (an ordinary
+  good taken first finds nothing; control: any taken thing counted);
+  `scripts/checks/step14-found.ts` (two connections: one finds, the other's
+  own world has it; kept across a rebuilt server; control: saving off);
+  e2e `glint-seen`, `glint-found` (`scripts/e2e/glints.ts`, by touch, one
+  held Jump; control `E2E_TOUCH_BREAK=jump`). Shots
+  `docs/plan/step-14-shots/glint-*`, `found-*`.
+
 ## Proof
 
 - Scenarios (fact `level`, `src/scenarios/facts/level.ts`):
