@@ -49,6 +49,7 @@ groups) whenever you add one — never update the number from memory.
 ## Index
 
 **Design library** (`docs/mechanisms/design-library-sync.md`)
+- **[Art pipeline](art-pipeline.md)**: how every picture gets into the game as data (sprites, joined-up ground, backdrops, decoration, looks), the palette and style lock for the stand-in art drawn by `tools/art/`, the draw order, and the rule that nothing drawn may point at a secret.
 - `tools/drive_sync.py` — mirrors the owner's Google Drive design library into `docs/design-library/` and reports what changed by hash (first import 2026-11-23).
 
 **Asset requests** (`docs/mechanisms/asset-requests.md`)
