@@ -191,3 +191,21 @@ heading, after a pull, and after any rebase that touched the outbox re-read
 `git diff ORIG_HEAD..HEAD -- docs/answers-outbox.md` before pushing. Not yet
 written into a charter (one incident).
 
+
+### 2026-11-23 · conflict · brief-worker, Step 4 slice 1 (`step-4-slice-1-moods.md`)
+
+**Observed:** my brief named the seam with Step 2 `entity.c.drive` and told me to add the rule to `src/sim/systems/verbs.ts`; `docs/architecture.md` ("Bodies") and Step 2's brief, written minutes later, named it `entity.c.input` and gave that file to Step 2's worker. Step 2's version landed on main while I was building.
+**Surfaced at:** brief read, phase 1 (reading the architecture doc the brief did not need me to open).
+**Impact:** small: one message to the lead, and the name kept behind one helper so either answer was a one-line change. Had I followed the brief alone, two workers would have edited the same shared file with two names for one thing.
+**Evidence:** brief at 876c71d (section 2, "The seams"); `docs/architecture.md` at 27b4d03; Step 2's `systems/verbs.ts` on main; my a501061 commit message.
+**Cause:** suspected: two leads agreed a seam by message and each wrote it into their own brief from memory, a minute apart.
+**Improvement:** tactical fix applied: took the shared doc over the brief and told the lead. Apparent: when two leads agree a name, one of them writes it in the shared doc and both briefs point at that line.
+
+### 2026-11-23 · tooling · brief-worker, Step 4 slice 1
+
+**Observed:** `npm run check:deployed` printed FAILED within seconds of a push instead of waiting its three minutes: in this container the script's wait did not take the time it says, so its "after the wait, revert first" advice arrived while the deploy was simply still under way. The clock (`date`) moved about a minute while the check ran its full wait several times.
+**Surfaced at:** phase 7, after the push.
+**Impact:** a few minutes; no revert was made. A session trusting the message would have reverted a healthy push (and the pending set also held another step's commit).
+**Evidence:** 15cea88 pushed 04:52:59 by the commit clock; the check reported the live commit c05f6a5 "started 04:51:21" and FAILED at 04:53:20; a fresh clone of 15cea88 built and started locally.
+**Cause:** unknown (timers in the container appear not to run in real time).
+**Improvement:** tactical fix applied: polled `/healthz` and compared its `startedAt` and the commit times instead of trusting the script's own wait. Apparent: the script could print how long it actually waited, by the server's `startedAt` clock rather than its own timer.
