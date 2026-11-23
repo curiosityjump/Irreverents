@@ -489,6 +489,8 @@ Slice 1, 2026-11-23 16:10 UTC: the main way (road, ridge, tower, depot) is **248
 
 2026-11-23 17:50 UTC, lead probe of the touch crossing (local `npm run e2e`, not committed): the stall at x 174 was the script, not the level. `scripts/e2e/quarry.ts` added the jump finger with a `touchMove`, so the page never saw it go down; started with `touchStart` (as `scripts/e2e.ts`'s two-finger fact does), a phone-sized page held east and tapping jump every 0.7 s crossed `quarry-road` by touch as the grappler into `quarry-ridge`. Fix written into slice 3's brief.
 
+2026-11-23 18:30 UTC, lead review of slice 3 push 1 at 2ca087a (re-run): `npm run check` green, 61 `step16-*` scenarios, gates 5 of 6, no `src/`. The flyer's roof route is zero-alarm; `quarry-road-cross` is green by touch. Found by the builder: the cellar shaft is one-way (no drop-through), so the grappler's cellar route has no quiet way out; nobody but the flyer can cross the yard unseen, because the lookout only turns on the spot on one floor line; only the lookout can reach the horn. Decided: a ledge over the yard's west stretch (rows 8-9, about columns 2-13) in this step's own room file, and the second zero-alarm route on it, as push 3 if time allows.
+
 ## Briefs
 
 - Slice 3, the depot (signals 5–6): `handoff-prompts/step-16-c-quarry-depot.md`, written 17:30 UTC; slice 1–2's builder declined it at 17:27 (context), so a fresh builder takes it: `session_017WiGzJqD8htNRHozGpJTgb`, launched 17:32 UTC. Measured at fd3f4d5: `npm run check` 41 s, `npm run build` 5 s (Step 3's way-out check fixed at a700081).
