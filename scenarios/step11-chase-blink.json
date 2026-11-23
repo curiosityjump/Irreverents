@@ -1,0 +1,92 @@
+{
+  "id": "step11-chase-blink",
+  "proves": "doc 31, the cantina is NOT a shortcut for breaking line of sight: the guard who caught a hero in the castle street stands over them at the cantina's doorway; the hero steps past the guard, out of sight for two ticks (2962-2963) while still in the doorway, and pushes up on exactly that tick: refused (door-refused), because a player stays on the chased list for chaseHold (1 s) after the guard last saw them. Control: chaseHold 0, the push goes in",
+  "room": "castle-street",
+  "placements": true,
+  "placedRooms": [
+    "cantina"
+  ],
+  "players": [
+    {
+      "id": "a",
+      "character": "hero",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 60,
+      "to": 140,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 1450,
+      "to": 1475,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 1500,
+      "to": 1505,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 2200,
+      "to": 2260,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 2950,
+      "to": 2963,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 2962,
+      "to": 2965,
+      "y": -1
+    }
+  ],
+  "ticks": 3000,
+  "expect": [
+    {
+      "fact": "chased",
+      "between": [
+        2600,
+        3000
+      ],
+      "players": [
+        "a"
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "door-refused",
+      "where": {
+        "entity": "p:a",
+        "door": "to-cantina",
+        "why": "chased"
+      },
+      "between": [
+        2962,
+        2962
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "in-room",
+      "player": "a",
+      "at": 3000,
+      "room": "castle-street"
+    }
+  ]
+}

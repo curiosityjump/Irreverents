@@ -35,6 +35,13 @@ export interface Cantina {
    * by itself after `seconds`. Optional; DRAFT defaults 8 and 6.
    */
   pick: { reach: number; seconds: number };
+  /**
+   * Step 11 slice B (D-088; doc 31: the cantina is "NOT a shortcut for
+   * breaking line of sight"): seconds a player stays on the chased list after
+   * a good guard last had them in sight, so a blink of lost sight is no way
+   * in. Optional; DRAFT default 1.
+   */
+  chaseHold: number;
 }
 
 /** One step of a regular's walking loop: walk until its middle is over `column`, or stand for `seconds`. */
@@ -95,7 +102,7 @@ const kind: ContentKind = {
   parse(raw, read) {
     const o = read.object(raw, '');
     if (!o) return null;
-    read.only(o, ['id', 'room', 'edge', 'pads', 'calmTime', 'bell', 'friend', 'patterns', 'pick'], '');
+    read.only(o, ['id', 'room', 'edge', 'pads', 'calmTime', 'bell', 'friend', 'patterns', 'pick', 'chaseHold'], '');
     const out: Cantina = {
       id: read.string(o, 'id', ''),
       room: read.string(o, 'room', ''),
@@ -106,6 +113,7 @@ const kind: ContentKind = {
       friend: { attackLaunch: 0, attackWear: 0, throwWear: 0 },
       patterns: {},
       pick: { reach: 8, seconds: 6 },
+      chaseHold: o.chaseHold === undefined ? 1 : read.number(o, 'chaseHold', '', { min: 0, max: 30 }),
     };
     if (out.room !== out.id) read.fail('room', `must be the room this file is named after ("${out.id}"), but is ${describe(o.room)}`);
     const edge = read.object(o.edge, 'edge');
@@ -169,6 +177,11 @@ const kind: ContentKind = {
         fail(file, 'room', `no room "${c.room}" (rooms: ${known(content.rooms)})`);
         continue;
       }
+      // INTENT: there is always a way out (CLAUDE.md). The chase lock (D-088) is on the doorway IN, the
+      // street's; a cantina room's own doors never refuse anyone (controls/rooms/cantina-door-refuses.json).
+      room.doors.forEach((d) => {
+        if (d.refuse !== undefined) fail(`content/rooms/${room.id}.json`, `door ${d.id}`, `has "refuse": "${d.refuse}", but a cantina's own doors never refuse anyone: there is always a way out (only the doorway in, in another room, may)`);
+      });
       const [ex, ey] = c.edge.at;
       const [ew, eh] = c.edge.size;
       if (ex + ew > room.w || ey + eh > room.h) fail(file, 'edge', `reaches past room "${room.id}", which is ${room.w} by ${room.h} tiles`);

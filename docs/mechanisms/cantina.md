@@ -138,10 +138,16 @@ middle of the cantina player can use to stop fights."*
 - **The sign:** for a second, a red no-entry sign over the doorway on that
   player's screen only, from their body's `c.doorRefused`
   (`drawDoorRefused`); no words.
-- **Seen in the trace:** a guard standing over a hero loses sight for two
-  ticks when the hero starts to walk away (tick 2812 in
-  `step11-chase-locks-door`); a push on exactly those ticks would get in.
-  Left as it is (Step 4's sight, not this lock's).
+- **The hold** (`chaseHold`, seconds, `DRAFT:` 1, in the cantina file;
+  the lead, on doc 31: the cantina is "NOT a shortcut for breaking line of
+  sight"): a player stays listed that long after a chasing guard last had
+  them in sight (`c.cantina.seen`, optional). A guard standing over a hero
+  loses sight for two ticks when the hero steps past them; without the
+  hold a push on that tick gets in (`step11-chase-blink`, control
+  `chaseHold` 0). The alert at 0, the chase is over and it opens.
+- **The way out is checked:** the cantina kind's check refuses `refuse` on
+  any door of a cantina room (`INTENT:` there is always a way out;
+  control `controls/rooms/cantina-door-refuses.json`).
 
 ## Checks
 
@@ -150,6 +156,7 @@ walk-off, friend launch, last player leaves, bell, bell out of reach,
 raises nothing; slice B: swap an unplayed member, swap yourself, a
 friend's refused, the row's closing, none in a brawl, a friend joining
 after a swap; the chase lock: refused while chased and open after,
+refused on the two ticks a guard blinks,
 the same push with no chase, a bad-side chaser listing nobody), each with
 a control watched to fail; the fact `chased`; the fact
 `cantina` (`docs/mechanisms/scenarios.md`); the real-server check

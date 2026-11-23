@@ -754,8 +754,6 @@ document as a decision of theirs.
 - **To change it:** map the dome to the gold ramp in `tools/art/heroes/p03.py` (`PAL`).
 - **Where:** `tools/art/heroes/README.md`, "Flags for the lead".
 
-
-
 ### 2026-11-23 · The cantina, the Bandit Camp and the quarry are furnished; the quarry's one-tile hiding spots are rubble
 - **Decided by:** Step 8 look round 3, props builder `session_017WiGzJxBqVvizcghgHk5NG`, for orchestrator
 - **Instead of asking:** "What goes in the cantina, the camp and the quarry, and what does a one-tile hiding spot look like?"
@@ -798,3 +796,9 @@ document as a decision of theirs.
 - **To change it:** `content/hostility.json` (a pair per line); the order of priorities is in `src/sim/systems/clash-fight.ts`.
 - **Where:** `docs/mechanisms/outposts.md`, "Chase and clash".
 
+### 2026-11-23 · A guard who blinks still has you: one second's grace on the cantina lock
+- **Decided by:** Step 11 lead `session_017WiGzFy3MD6ecvM7QMvQGd` (built by the slice B builder `session_017WiGzHXvo5fjfVSeDUTX44`)
+- **Instead of asking:** "If the guard loses sight of me for a moment right at the cantina door, can I slip in?"
+- **Why this way:** the owner (doc 31): the cantina is "NOT a shortcut for breaking line of sight". You stay barred for one second after a chasing guard last saw you; once the chase is really over, the door opens.
+- **To change it:** `chaseHold` (seconds) in `content/cantina/cantina.json`.
+- **Where:** `docs/mechanisms/cantina.md`, "The chase lock".

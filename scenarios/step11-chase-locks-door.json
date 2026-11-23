@@ -71,16 +71,6 @@
       "fact": "chased",
       "between": [
         2600,
-        2811
-      ],
-      "players": [
-        "a"
-      ]
-    },
-    {
-      "fact": "chased",
-      "between": [
-        2814,
         2875
       ],
       "players": [

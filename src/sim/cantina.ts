@@ -32,6 +32,8 @@ declare module './types.ts' {
        * tick it closes by itself. Absent when no row is open.
        */
       pick?: Record<string, { kind: string; until: number }>;
+      /** Slice B, the chase lock: the world tick each player entity was last in a chasing good guard's sight (systems/cantina-chase.ts). Optional: older saves lack it. */
+      seen?: Record<string, number>;
     };
     /**
      * On every body in a cantina room while its brawl is on, players and

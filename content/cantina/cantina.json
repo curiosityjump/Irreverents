@@ -1,5 +1,5 @@
 {
-  "//": "DRAFT (Step 11, docs/mechanisms/cantina.md): every number and pattern here is a first guess. The edge is the stage floor's columns (2-23) from the ceiling down to the floor: past either end of the floor is the gutter, open air outside the edge, so a body launched or walked off the stage is out and back on a pad at once. Up has no edge: a body launched up meets the ceiling. Pads are on the stage, east of the doorway (column 3), so a body never comes back in the doorway. calmTime: seconds with no player attacking before the brawl settles by itself; 0 = never (the owner's answer to Q-008: the bell in the middle of the room stops the fight; leaving still does). bell: its tile, and how near (pixels, middle to middle) a player must be for Use to ring it. friend: Step 2's three friend numbers while a brawl is on (1 = as hard as on anyone). Patterns: walk-to columns stay on the stage; fight.reach is pixels, swingEvery and jumpEvery seconds.",
+  "//": "DRAFT (Step 11, docs/mechanisms/cantina.md): every number and pattern here is a first guess. chaseHold (slice B, D-088): seconds a player stays on the chased list after a good guard last saw them, so a blink of lost sight is no way in. The edge is the stage floor's columns (2-23) from the ceiling down to the floor: past either end of the floor is the gutter, open air outside the edge, so a body launched or walked off the stage is out and back on a pad at once. Up has no edge: a body launched up meets the ceiling. Pads are on the stage, east of the doorway (column 3), so a body never comes back in the doorway. calmTime: seconds with no player attacking before the brawl settles by itself; 0 = never (the owner's answer to Q-008: the bell in the middle of the room stops the fight; leaving still does). bell: its tile, and how near (pixels, middle to middle) a player must be for Use to ring it. friend: Step 2's three friend numbers while a brawl is on (1 = as hard as on anyone). Patterns: walk-to columns stay on the stage; fight.reach is pixels, swingEvery and jumpEvery seconds.",
   "id": "cantina",
   "room": "cantina",
   "edge": { "at": [2, 0], "size": [22, 11] },
@@ -7,6 +7,7 @@
   "calmTime": 0,
   "bell": { "tile": [13, 9], "reach": 18 },
   "friend": { "attackLaunch": 1, "attackWear": 1, "throwWear": 1 },
+  "chaseHold": 1,
   "pick": { "//": "DRAFT (Step 11 slice B): reach, pixels around a regular's box a tap still counts (a finger is wider than a pixel); seconds, how long the party row stays open by itself.", "reach": 8, "seconds": 6 },
   "patterns": {
     "grappler": {
