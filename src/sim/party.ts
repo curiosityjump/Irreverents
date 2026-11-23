@@ -32,7 +32,8 @@ export function boxInSolid(room: Room, x: number, y: number, w: number, h: numbe
  * doc 05): a member counts as taken wherever in the world its player is.
  */
 export function memberTaken(world: World, member: string, exceptEntity?: string): boolean {
-  return world.entities.some((e) => e.player !== null && e.id !== exceptEntity && e.kind === member);
+  // `taken`: a page's local world sees its friends only as this list (World.taken).
+  return world.entities.some((e) => e.player !== null && e.id !== exceptEntity && e.kind === member) || (world.taken?.includes(member) ?? false);
 }
 
 /**

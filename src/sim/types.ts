@@ -91,6 +91,15 @@ export interface World {
    * top-level fields by key, so a deleted one would linger there).
    */
   chased?: string[];
+  /**
+   * Party members played by players this world does not hold as entities.
+   * Only a page's own local world has it: that world holds just its own
+   * character, so the net client (src/net/client.ts) writes here the kinds
+   * of every other player in each snapshot, and memberTaken (src/sim/party.ts)
+   * counts them. The server's world never sets it (it holds every player).
+   * DRAFT: the switch gap (docs/mechanisms/party-and-switching.md).
+   */
+  taken?: string[];
 }
 
 /** One room's run-time state. Plain JSON, like the rest of the World. */

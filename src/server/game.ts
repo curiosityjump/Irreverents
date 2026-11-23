@@ -6,8 +6,9 @@ import type { WebSocket } from 'ws';
 import type { Content } from '../content/types.ts';
 import { clone, DEFAULT_WORLD, looksLikeEntity, playerEntityId } from '../net/protocol.ts';
 import type { ClientMessage, ServerMessage } from '../net/protocol.ts';
-import { heldBy } from '../sim/effects.ts';
+import { applyEffect, heldBy } from '../sim/effects.ts';
 import type { Effect } from '../sim/effects.ts';
+import { boxInSolid, firstFreeMember, memberTaken } from '../sim/party.ts';
 import { step } from '../sim/step.ts';
 import { applyChange, applyTuningDiff, refuseChange, tuningDiff, tuningRules } from '../sim/tuning-rules.ts';
 import { DT } from '../sim/types.ts';
@@ -204,6 +205,34 @@ export function attachGame(server: http.Server, opts: GameOptions) {
     return !!e && heldBy(e) !== null;
   };
 
+  /**
+   * A page reported its character as a party member another player holds:
+   * keep the one it had (a reconnect whose character was removed gets the
+   * first free one, as joining does) and tell the page with `become`, feet
+   * and middle kept, at the server's last place if the old body would not
+   * fit there. A member nobody else holds is left alone.
+   */
+  const refuseTaken = (gw: GameWorld, p: Player, e: Entity, was: Entity | undefined): void => {
+    const members = gw.world.party ?? content.party.members;
+    if (!members.includes(e.kind) || !memberTaken(gw.world, e.kind, e.id)) return;
+    const to = was?.kind ?? firstFreeMember(gw.world, content);
+    const now = content.characters[e.kind];
+    const back = to ? content.characters[to] : undefined;
+    const room = content.rooms[e.room];
+    if (!to || !now || !back || !room || to === e.kind) return;
+    let x = e.x + (now.box.w - back.box.w) / 2;
+    let y = e.y + now.box.h - back.box.h;
+    if (was && was.room === e.room && boxInSolid(room, x, y, back.box.w, back.box.h, gw.world)) {
+      x = was.x;
+      y = was.y;
+    }
+    const effect: Effect = { kind: 'become', to, x, y };
+    applyEffect(e, effect);
+    const fx = { id: ++nextFx, effect, sentAt: Date.now() };
+    p.pending.push(fx);
+    send(p.sock, { t: 'fx', id: fx.id, effect, e });
+  };
+
   /** Puts what a page says about its own character into the world, keeping what is the server's to say. */
   const adopt = (gw: GameWorld, p: Player, raw: unknown): boolean => {
     if (!looksLikeEntity(raw)) return false;
@@ -222,6 +251,14 @@ export function attachGame(server: http.Server, opts: GameOptions) {
     // (what was picked up, a press already seen) survives every report, and
     // a press is seen once: on the tick the server's copy first holds it.
     if (i >= 0) e.c = gw.world.entities[i]!.c;
+    // INTENT: the one exception to the page owning `kind`: "A character
+    // cannot be controlled by two humans at once" (library doc 05). A page
+    // that reports a party member another player of this world already
+    // plays (two switch presses in the same instant on two phones) keeps
+    // the member it had, and its page is put back by a `become` effect.
+    // DRAFT: the switch gap (docs/mechanisms/party-and-switching.md).
+    const was = i >= 0 ? gw.world.entities[i]! : undefined;
+    if (!was || e.kind !== was.kind) refuseTaken(gw, p, e, was);
     // Keeps `away` as the tick set it: only the tick decides it.
     e.c.net = i >= 0 && e.c.net?.away ? { slot: p.slot, away: true } : { slot: p.slot };
     if (i >= 0) gw.world.entities[i] = e;

@@ -272,3 +272,28 @@ button art is in the library mirror, not in `assets/`.
 
 - **Orchestrator `session_017WiGzHhke4tkAThPgw6EXs`, 17:58 UTC: doorways by Use (095775b) reviewed** by re-running build, check and e2e at 904c3e9 on a quiet machine (261 ok, e2e ok, its `step3-enter-doorway-by-use` and the touch fact among them) and by its phone-size shots (the Use button reads GO IN, an arrow over the hero). Brief deleted. Owed by the same builder in `handoff-prompts/step-5-switch-gap.md`: the e2e must stop writing its shots into `docs/`.
 
+- **The switch gap, builder (`session_017WiGzJujVWWDboh12zWhNR`),
+  2026-11-23 (brief `handoff-prompts/step-5-switch-gap.md`):**
+  - Chose the smaller hook: a `taken` list on the World (the page's
+    local world only), written by the net client from each snapshot and
+    counted by `memberTaken`, not the friends' entities in the local
+    world. Nothing local can move or hit a friend; both callers
+    (`switch`, the cantina swap) get it through `memberTaken` unchanged.
+  - Server: `refuseTaken` in `adopt`, the one written exception to the
+    page owning `kind`; it sends `become` and leaves the fourth friend's
+    duplicate seat alone (only a *change* of kind, or a rejoin with no
+    character left, is checked).
+  - The doorway e2e's screenshots now go to `e2e-out/doors/`; the
+    committed pair in `docs/plan/step-5-shots/doors/` is unchanged.
+  - Not verified: a real refusal racing on two real phones (the server
+    check does it on raw sockets); what a player sees in the moment a
+    refused switch is put back (a flash of the other hero, about one
+    round trip).
+  - Flaky, not this change: the friend grab/throw e2e facts
+    (`t-grab-friend`, `s-break-free`, `t-throw-friend`, `s-throw-friend`,
+    `s-after`) failed in 3 of 14 local runs today: once before any
+    switch-gap code existed, twice with it (each time a run alone after
+    was green; the base without it, d5e9596, was green once). In a failed
+    run the friend moves 5-30 px instead of about 100: the throw does not
+    happen, rather than falling short. Worth a look by whoever owns
+    `scripts/lib/e2e-touch.ts` and the throw (851eda9 changed it).

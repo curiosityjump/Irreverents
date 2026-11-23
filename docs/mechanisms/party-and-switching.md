@@ -23,7 +23,8 @@ art can change), switching in place, and what only each can do.
 - **`src/sim/party.ts`** (a helper, outside the self-registering
   directories): `memberTaken(world, member, exceptEntity?)`,
   `firstFreeMember(world, content)`, `boxInSolid(room, x, y, w, h)`.
-  "Taken" means some player entity anywhere in the world has that kind.
+  "Taken" means some player entity anywhere in the world has that kind,
+  or the world's `taken` list names it (a page's local world: below).
 - **Seating a new player:** `spawnPlayer` with no `character` uses
   `firstFreeMember`: the first member in party order nobody is playing;
   when all are taken, the first member again (a fourth friend gets a
@@ -72,6 +73,38 @@ art can change), switching in place, and what only each can do.
 - **A switch drops the old body's half-finished jump** (`c.jump.buffer`
   to 0, `cut` to true): no buffered press or jump-cut carries over.
 
+## Two players, one member (the switch gap)
+
+`DRAFT:` closed 2026-11-23 (`docs/plan/step-5.md`, the switch-gap note).
+A page steps a world that holds only its own character, and the page
+owns its `kind` (`docs/mechanisms/network.md`), so before this a page
+could switch into a member a friend was playing and the server took it.
+
+- **The page knows who is taken.** `src/net/client.ts` writes
+  `world.taken` (`World.taken` in `src/sim/types.ts`) from every
+  snapshot: the kinds of every other player, wherever they are.
+  `memberTaken` counts it, so `switch` and the cantina swap answer on the
+  page as on the server. The others' bodies are *not* put in the local
+  world: only the server simulates them. The server's world never sets
+  `taken`.
+- **The server refuses what slips through** (two presses in the same
+  instant on two phones, or a page that has not yet heard a snapshot):
+  `adopt` in `src/server/game.ts` calls `refuseTaken` when a report
+  changes `kind` (or a page rejoins with no character left) and names a
+  party member another player holds. The character keeps the member the
+  server had (a rejoin gets `firstFreeMember`), and the page is sent a
+  `become` effect back to it, feet and middle kept (at the server's last
+  place if the old body would not fit there). A member nobody else plays,
+  a kind outside the party, and the fourth friend's duplicate seat (an
+  unchanged kind) are left alone.
+- **Checks:** `scripts/checks/switch-taken.ts` (two raw connections
+  report the same member at once: exactly one keeps it; a rejoin keeps
+  its member, or is moved off one a friend took meanwhile; control: the
+  `refuseTaken` call removed, both keep it). `npm run e2e`:
+  `t-switch-free` (no member played twice, on both pages) and
+  `switch-refused` (three pages hold the party; a Switch tap changes
+  nothing and the page says so, `window.irreverents.switchRefused`).
+
 ## Events
 
 | Event | Fields | Means |
@@ -92,7 +125,8 @@ art can change), switching in place, and what only each can do.
   when this landed; when it does, use it in place of `heldBy` here.
 - Carrying something while switching to a member too weak to lift it is
   not handled here.
-- With every member taken (three players), nobody can switch; and a
+- With every member taken (three players), nobody can switch (the
+  `switch-refused` e2e fact); and a
   player who crawled somewhere as the infiltrator, switched, and then
   had the infiltrator taken by a friend can only leave once it is free
   again. Flagged to the lead for Step 3's rooms.
@@ -124,7 +158,8 @@ one event list every player's screen is fed from). Supporting:
 `step2-body-switch-solo` (cycles all three, feet kept),
 `step2-body-switch-refused-in-gap` (never left inside a wall),
 `step2-body-spawn-different-members` (two joiners are different
-members). The two-screens half needs `npm run e2e` and is not done.
+members). The two-screens half is `npm run e2e`'s `t-switch`,
+`t-switch-free` and `switch-refused`.
 
 A player only switches: `switch` returns at once for an entity with
 `player: null`, since bodies nobody plays also run verbs.

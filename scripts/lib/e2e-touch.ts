@@ -390,15 +390,18 @@ export async function touchAndThrows(kit: Kit): Promise<void> {
     const seenByB = kindNow !== a0.kind && (await B.page.waitForFunction(([p, k]: string[]) => (window as any).irreverents.drawn.entities.find((d: any) => d.player === p)?.kind === k, [A.id, kindNow], { timeout: 1500 }).then(() => true, () => false));
     fact('t-switch', tappedSwitch && kindNow !== a0.kind && seenByB,
       `A taps Switch: ${tappedSwitch ? '' : 'the Switch button could not be touched; '}A's page drew its character as the ${kindNow}${kindNow === a0.kind ? ' (unchanged)' : ''}; B's page ${seenByB ? 'drew the same' : 'did NOT'}`);
-    // "No member is played twice by a switch" (docs/mechanisms/party-and-switching.md).
-    const bKind = (await me(B)).kind as string;
-    // DRAFT: a known gap, printed on every run and not yet counted as a
-    // failure: a page's own world holds only its own character, so its
-    // switch cannot see which members others hold (docs/mechanisms/network.md,
-    // "Known limits"; the place to widen is src/net/client.ts, Step 1's).
-    // The day this prints "ok", make it a plain fact.
-    if (kindNow !== bKind) fact('t-switch-free', true, `after that switch A is the ${kindNow} and B the ${bKind}: no member played twice (this was a known gap: make it a plain fact now)`);
-    else console.log(`todo  (t-switch-free) KNOWN GAP, not counted: after that switch A is the ${kindNow} and B the ${bKind}, the SAME party member played twice`);
+    // "No member is played twice by a switch" (docs/mechanisms/party-and-switching.md),
+    // on both pages: each page's own character and how it draws the other's.
+    // The page knows who is taken from each snapshot (World.taken); the server
+    // refuses what slips through (scripts/checks/switch-taken.ts).
+    await sleep(400);
+    const kindOf = (ph: Phone, player: string): Promise<string | undefined> => ph.page.evaluate((p: string) => (window as any).irreverents.drawn.entities.find((d: any) => d.player === p)?.kind, player);
+    const aOwn = (await me(A)).kind as string;
+    const bOwn = (await me(B)).kind as string;
+    const bKindOnA = await kindOf(A, B.id);
+    const aKindOnB = await kindOf(B, A.id);
+    fact('t-switch-free', aOwn !== bOwn && bKindOnA === bOwn && aKindOnB === aOwn,
+      `after A's switch, A's page: A is the ${aOwn}, B is drawn as the ${bKindOnA}; B's page: B is the ${bOwn}, A is drawn as the ${aKindOnB}: ${aOwn !== bOwn ? 'no member played twice' : 'the SAME member played twice'}`);
     for (let i = 0; i < 4 && (await me(A)).kind !== 'grappler'; i++) {
       await tap(A, 'switch');
       await sleep(400);

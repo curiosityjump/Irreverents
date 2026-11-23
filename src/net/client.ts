@@ -53,9 +53,10 @@ export function createNetClient(opts: NetClientOptions) {
   // only reports it. That is what keeps movement instant on a slow
   // connection, and what lets one person play with no server at all
   // (docs/plan/step-1.md: "Solo works with the same build").
-  // DRAFT: this local world holds only the player's own character. A verb
-  // that must see others on this device (to aim, or to know which party
-  // member is free) does not yet; see docs/mechanisms/network.md.
+  // DRAFT: this local world holds only the player's own character. Which
+  // party members the others play reaches it as `world.taken` (from each
+  // snapshot, below); a verb that must see the others' bodies (to aim) does
+  // not yet; see docs/mechanisms/network.md.
   const world: World = createWorld();
   // No character passed: the simulation seats the player in the party
   // (src/sim/world.ts). The server's seat replaces this one on first joining.
@@ -195,6 +196,11 @@ export function createNetClient(opts: NetClientOptions) {
       // By key, never a list of names: a new field needs no change here.
       const mine = world as unknown as Record<string, unknown>;
       for (const [key, value] of Object.entries(m.w)) if (key !== 'entities' && key !== 'tick') mine[key] = value;
+      // The switch gap: which party members the other players hold, so this
+      // page's switch and cantina swap never pick one (World.taken; the
+      // server refuses whatever slips through, src/server/game.ts adopt).
+      // Their bodies stay out of this world: only the server simulates them.
+      world.taken = m.w.entities.filter((e) => e.player !== null && e.id !== myId).map((e) => e.kind);
       if (Math.abs(world.tick - m.w.tick) > 60) world.tick = m.w.tick;
       latest = { tick: m.w.tick, events: m.ev };
     } else if (m.t === 'fx') {

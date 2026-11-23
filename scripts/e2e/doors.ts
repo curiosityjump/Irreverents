@@ -5,7 +5,9 @@
 // no slide of the thumb, carries the character into the camp. The owner,
 // 2026-11-23: "There is no stick to push up..." (docs/mechanisms/rooms-and-doors.md,
 // "The two kinds of door"). Screenshots, sideways and upright, standing in
-// the doorway, go to docs/plan/step-5-shots/doors/.
+// the doorway, go to e2e-out/doors/ (git-ignored; the committed pair in
+// docs/plan/step-5-shots/doors/ was copied from there by hand, and a run
+// must never rewrite files in the repository).
 //
 // Control: E2E_TOUCH_BREAK=interact takes the Use button off the page, and
 // door-use must fail.

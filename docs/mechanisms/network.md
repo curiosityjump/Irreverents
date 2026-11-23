@@ -84,7 +84,12 @@ with a throwaway entity kind on every `npm run check`).
   advanced only by the server's own `step()`. So what a server-run system
   writes on a player (`c.interact`, a press already seen) survives every
   report, and other pages see the server's `c`. The server's step never
-  moves a player's copy except by an effect.
+  moves a player's copy except by an effect. **The one exception** is
+  `kind` when it names a party member another player of the world
+  already plays: `refuseTaken` keeps the member the server had (a page
+  rejoining after its character was removed gets the first free one) and
+  sends the page `become` back (`docs/mechanisms/party-and-switching.md`,
+  "Two players, one member"; `scripts/checks/switch-taken.ts`).
 
 ## Effects: the world moving a player's character
 
@@ -127,10 +132,13 @@ Known limits (`DRAFT:`), for whoever builds combat and doors:
   out of the cantina is put back on a pad, acknowledged, and runs from
   there on their own page); not yet in a browser.
 - A page's local world holds **only its own character**. A verb that must
-  see others *on the page* does not: `switch` there cannot know which
-  members other players hold, and a hit cannot be shown before the server
-  says so. The server's copy of each verb does see everyone. The place to
-  widen is the local world in `src/net/client.ts`.
+  see others' bodies *on the page* does not: a hit cannot be shown before
+  the server says so. The server's copy of each verb does see everyone.
+  The place to widen is the local world in `src/net/client.ts`. Which
+  party members the others play does reach it, as a list: `world.taken`,
+  the kinds of every other player in each snapshot, which `memberTaken`
+  counts (so the page's `switch` and cantina swap skip a friend's member).
+  It is a list, not bodies: no local system can move or hit a friend.
 - **A page does not get the server's `c` for its own character** (it keeps
   simulating with its own), so something only the server's copy knows
   (what this player is carrying, say) is not on the player's own entity

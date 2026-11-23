@@ -101,6 +101,8 @@ const debug = {
   start: undefined as StartRecord | undefined,
   /** The view (render.ts): scripted checks read it, and the clearance fact's control sets `reserve` to 0 to watch it fail. */
   view,
+  /** The switch gap: this page's own refused switches so far, and the last reason ("none-free", "no-fit"), from its local step's `switch-refused` events. */
+  switchRefused: { count: 0, reason: '' },
   drawn: {
     frame: 0,
     room: '',
@@ -229,6 +231,7 @@ function play(worldName: string): void {
   let frameNo = 0;
   function frame(): void {
     const simEvents = net.update(readInput()); // audio hook (Step 8)
+    for (const ev of simEvents) if (ev.type === 'switch-refused') debug.switchRefused = { count: debug.switchRefused.count + 1, reason: ev.reason };
     const me = net.me();
     // What this player sees: everyone else as received, their own character
     // last (drawn on top), on this page's clock.
