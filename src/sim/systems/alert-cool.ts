@@ -30,8 +30,9 @@ const system: System = {
     for (const a of world.entities) {
       const alert = a.c.alert;
       if (!alert || alert.level <= 0) continue;
-      const heroes = world.entities.filter((h) => h.player !== null && h.room === a.room);
-      const seen = world.entities.some((p) => p.c.npc && p.room === a.room && !isOut(p) && heroes.some((h) => canSee(content, p, h)));
+      // A person of the area is anyone in it, and anyone placed in it whom a chase has led elsewhere (D-077).
+      const heroes = world.entities.filter((h) => h.player !== null);
+      const seen = world.entities.some((p) => p.c.npc && (p.room === a.room || p.c.npc.home === a.room) && !isOut(p) && heroes.some((h) => canSee(content, p, h)));
       const incident = ctx.events.some((ev) => {
         if (ev.type !== 'deed' || ev.room !== a.room || ev.player === null) return false;
         const actor = whoIs(content, findEntity(world, ev.by));

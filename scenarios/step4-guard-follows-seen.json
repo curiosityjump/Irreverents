@@ -1,0 +1,35 @@
+{
+  "id": "step4-guard-follows-seen",
+  "gate": "D",
+  "proves": "a chasing guard follows a hero they saw leave through a door, and only then (D-077, D-065). In the castle street a hero is caught: the call completes, the guard comes and stands over them. The hero runs to the cellar doorway and goes down it with the guard 60 px behind and looking: the guard walks to that doorway and follows into the undercroft. The hero runs on through the undercroft's far opening, still in the guard's sight: the guard follows again, into the throne room. There the hero outruns the guard's sight and stands still; the guard searches by the door they came in at and does not wander back out through it. After 20 s unseen the street's alert falls to 0, and the guard walks home through the street door to their beat",
+  "room": "castle-street",
+  "placements": true,
+  "players": [{"id": "a", "character": "hero", "spawn": 0}],
+  "inputs": [
+    {"player": "a", "from": 60, "to": 140, "x": 1},
+    {"player": "a", "from": 1450, "to": 1475, "x": 1},
+    {"player": "a", "from": 1500, "to": 1505, "hold": ["interact"]},
+    {"player": "a", "from": 2800, "to": 2864, "x": -1},
+    {"player": "a", "from": 2880, "to": 2885, "y": -1},
+    {"player": "a", "from": 3100, "to": 3320, "x": 1}
+  ],
+  "ticks": 6600,
+  "expect": [
+    {"fact": "event-where", "event": "changed-room", "where": {"entity": "p:a", "fromDoor": "cellar-doorway", "toRoom": "undercroft"}, "between": [2880, 2880], "count": [1, 1]},
+    {"fact": "event-where", "event": "changed-room", "where": {"entity": "street-guard", "fromRoom": "castle-street", "fromDoor": "cellar-doorway", "toRoom": "undercroft"}, "between": [2900, 3100], "count": [1, 1]},
+    {"fact": "in-room", "entity": "street-guard", "at": 3100, "room": "undercroft"},
+    {"fact": "event-where", "event": "changed-room", "where": {"entity": "p:a", "fromRoom": "undercroft", "toRoom": "throne-room"}, "between": [3157, 3157], "count": [1, 1]},
+    {"fact": "event-where", "event": "changed-room", "where": {"entity": "street-guard", "fromRoom": "undercroft", "toRoom": "throne-room"}, "between": [3158, 3400], "count": [1, 1]},
+    {"fact": "event-where", "event": "changed-room", "where": {"entity": "street-guard", "fromRoom": "throne-room", "toRoom": "undercroft"}, "between": [0, 6600], "count": [0, 0]},
+    {"fact": "in-room", "entity": "street-guard", "at": 3600, "room": "throne-room"},
+    {"fact": "in-room", "entity": "street-guard", "at": 4356, "room": "throne-room"},
+    {"fact": "in-room", "player": "a", "at": 6600, "room": "throne-room"},
+    {"fact": "alert", "area": "castle-street", "between": [2130, 4356], "is": 1},
+    {"fact": "event-where", "event": "alert-changed", "where": {"area": "castle-street", "from": 1, "to": 0}, "between": [4356, 4356], "count": [1, 1]},
+    {"fact": "event-where", "event": "changed-room", "where": {"entity": "street-guard", "fromRoom": "throne-room", "fromDoor": "to-street", "toRoom": "castle-street"}, "between": [4400, 5000], "count": [1, 1]},
+    {"fact": "in-room", "entity": "street-guard", "at": 6600, "room": "castle-street"},
+    {"fact": "event-where", "event": "changed-room", "where": {"entity": "street-guard"}, "between": [0, 6600], "count": [3, 3]},
+    {"fact": "mood", "npc": "street-guard", "at": 6600, "is": 1},
+    {"fact": "position", "entity": "street-guard", "at": 6600, "x": [580, 690]}
+  ]
+}

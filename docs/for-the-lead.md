@@ -176,3 +176,15 @@ Push 1 of `handoff-prompts/step-4-slice-2-alarm.md`: the bell, the call, the ale
 **Not built in this push:** more help at levels 2 and 3; pushes 2-4 of the brief (`step4-caller-knocked-out` is in push 4).
 
 **Not verified:** no real iPhone; the bell and marks were seen in a desktop-sized Chromium only. Whether being caught is fun.
+
+## Step 4, slice 2, push 2 (brief-worker, 2026-11-23 ~09:36 UTC)
+
+A chasing guard follows a hero they saw leave through a door, and comes home when the alert is over (`alert-follow`, 605). Three scenarios in `castle-street`, tagged gate D.
+
+**Flag (a shape the brief did not give):** a guard who has followed into another room still answers to the alert of the area they were **placed** in (`c.npc.home`), and that area's wait is held while they can see a hero wherever they are. Without it a guard stepping into a room at alert 0 would turn round at once, which is D-077's "a transition resets pursuit" by another name. A good person's rage (`rageMayCool`) likewise waits on both their room's alert and their home area's.
+
+**Flag:** the three door scenarios and `step4-street-call` are pinned to the street's routines and the guard's beat, as `step4-street-people` is: moving a person or a timing in `content/placements/castle-street.json` means re-tracing five scenarios.
+
+**Flag (play):** sight is 7 tiles and a hero runs 2.4 times as fast as a guard walks, so a guard only "sees you leave" when the door is within about a second's run of where they caught up with you. Leaving by a far door is nearly always unseen.
+
+**Flag:** a guard with no way home (`doorToward` null) or one a wall blocks stands down where they are and their routine's `walk-to` columns then apply to the wrong room. No such room exists tonight.

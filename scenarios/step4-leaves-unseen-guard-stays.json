@@ -1,0 +1,26 @@
+{
+  "id": "step4-leaves-unseen-guard-stays",
+  "gate": "D",
+  "proves": "the partner of step4-guard-follows-seen (D-065: help is not psychic): the same theft and call, but the hero goes down the cellar doorway while the guard is still on their way and has not seen them: the guard never goes through any door, searches the street where the hero was reported, and after 20 s the alert falls to 0",
+  "room": "castle-street",
+  "placements": true,
+  "players": [{"id": "a", "character": "hero", "spawn": 0}],
+  "inputs": [
+    {"player": "a", "from": 60, "to": 140, "x": 1},
+    {"player": "a", "from": 1450, "to": 1475, "x": 1},
+    {"player": "a", "from": 1500, "to": 1505, "hold": ["interact"]},
+    {"player": "a", "from": 2200, "to": 2264, "x": -1},
+    {"player": "a", "from": 2280, "to": 2285, "y": -1}
+  ],
+  "ticks": 3600,
+  "expect": [
+    {"fact": "event-where", "event": "changed-room", "where": {"entity": "p:a", "fromDoor": "cellar-doorway"}, "between": [2280, 2280], "count": [1, 1]},
+    {"fact": "event-where", "event": "changed-room", "where": {"entity": "street-guard"}, "between": [0, 3600], "count": [0, 0]},
+    {"fact": "event-where", "event": "mood-changed", "where": {"entity": "street-guard", "cause": "pursuit"}, "between": [0, 3600], "count": [0, 0]},
+    {"fact": "in-room", "entity": "street-guard", "at": 3000, "room": "castle-street"},
+    {"fact": "in-room", "entity": "street-guard", "at": 3600, "room": "castle-street"},
+    {"fact": "position", "entity": "street-guard", "at": 3000, "x": [150, 300]},
+    {"fact": "alert", "area": "castle-street", "between": [2130, 3328], "is": 1},
+    {"fact": "alert", "area": "castle-street", "at": 3600, "is": 0}
+  ]
+}

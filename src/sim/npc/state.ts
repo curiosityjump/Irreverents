@@ -143,7 +143,8 @@ export function setMood(ctx: StepContext, e: Entity, to: Mood, cause: string): v
  */
 export function rageMayCool(ctx: StepContext, e: Entity): boolean {
   // INTENT (D-073, slice 2): a good person's rage ends only below the violent level, which is any alert above 0.
-  return npcKind(ctx.content, e)?.side !== 'good' || alertLevel(ctx.world, e.room) === 0;
+  // Their area is the room they are in, and the one they were placed in if a chase has led them out of it (D-077).
+  return npcKind(ctx.content, e)?.side !== 'good' || (alertLevel(ctx.world, e.room) === 0 && alertLevel(ctx.world, e.c.npc?.home ?? e.room) === 0);
 }
 
 /**

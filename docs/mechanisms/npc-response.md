@@ -69,6 +69,7 @@ in a `World` field or a module variable.
 | 100 | `verbs` (Step 2) | Bodies act on their input. |
 | 500 | `physics` | |
 | 600 | `npc-witness` | Collects this tick's deeds, works out who perceived each, emits `deed`, and applies the mood rules. |
+| 605 | `alert-follow` | After `room-doors` (600): tells a responder which door a hero they had in sight just left by. |
 | 610 | `npc-mood` | Runs the clocks (bark, distress fading, rage cooling) and updates `lastSeen`. |
 | 620 | `alert-cool` | Runs each area's hide-and-wait clock and lowers its alert one level at a time. |
 
@@ -206,7 +207,9 @@ The owner's rules, each marked `INTENT:` with its D-number at its site:
 - `c.ringing` `{ ticks, of }` on a bell while it is being rung (for the
   page to draw).
 - `c.respond` on a person answering a call: `phase` (`go`, `search`,
-  `chase`, `return`), `x` (where they are heading), `dir`, `stall`.
+  `chase`, `return`), `x` (where they are heading), `dir`, `stall`,
+  `sight` (the hero seen on their last turn) and `door` (a door they saw
+  a hero leave by).
 
 **A call point** is a thing with `"look": "bell"`, `"once": true` and a
 deed (tonight `break`). A hero's `interact` at it breaks it (the deed
@@ -246,8 +249,25 @@ alert 0 they walk back to their placement's column, return to mood 1
 (`stood-down`) and their routine restarts. All of it through `c.input`.
 While on duty their distress does not fade (`quiet` is held at 0).
 
+**Following through a door (`alert-follow`, 605; D-077).** When a
+player's character goes through a door (`changed-room`), a responder in
+the room it left who had that hero **in sight on that very tick**
+(`c.respond.sight`) takes `c.respond.door`: they walk to that door and
+through it (a walk door by walking in, an enter doorway with
+`askForDoor()`), then search from where they come out. One who did not
+see the hero leave learns nothing and searches where they are (D-065).
+A responder answers to the alert of the area they were **placed** in
+(`c.npc.home`), wherever the chase has led; when it reaches 0 they go
+home by `doorToward()` and back to their post. With no way home, or a
+door a wall keeps them from, they stand down where they are (`DRAFT:`).
+**Walking through a door never changes an alert.** A responder goes
+through a door only on purpose: every other place they walk to is kept
+clear of the room's walk doors (`clearOfDoors()`), or a guard searching
+beside one would be carried out of the room and back for ever.
+
 **Cooling (`alert-cool`, 620).** For an area with alert above 0: while
-no conscious person in the room sees any player's character, and no
+no conscious person of the area (anyone in the room, and anyone placed
+in it whom a chase has led elsewhere) sees any player's character, and no
 `deed` of this tick by a player was odd to any of its witnesses, `quiet`
 counts up; at `npcAlertCoolTime` (20 s) the alert drops one level and
 the count restarts. Otherwise `quiet` is 0. Standing in a pursuer's view
@@ -264,7 +284,7 @@ stop the call); broken, a grey stump. The area's alert is up to three
 red marks in the top-left corner; nothing at 0.
 
 **Not built yet** (the brief's later pushes): more help arriving at
-levels 2 and 3; a guard following a hero through a door; hiding places
+levels 2 and 3; hiding places
 counting as unseen; finding a knocked-out person; the villain's horn
 (D-070).
 
@@ -318,6 +338,10 @@ with its placements: a ledge at the left (the refuge), the shop at
 columns 10-14, a bell at 17, a guard's post at 30. The `alert` fact
 reads an area's level. A recorded tick shows the world *before* that
 tick's step, so an event at tick 505 shows in the `alert` fact from 506.
+`step4-street-call`, `step4-guard-follows-seen`,
+`step4-leaves-unseen-guard-stays` and
+`step4-door-and-back-alert-unchanged` run in `castle-street` itself and,
+like `step4-street-people`, are pinned to the street's routines.
 
 
 The other scenarios `scenarios/step4-*.json` are all in

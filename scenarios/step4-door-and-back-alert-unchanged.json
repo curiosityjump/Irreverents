@@ -1,0 +1,24 @@
+{
+  "id": "step4-door-and-back-alert-unchanged",
+  "gate": "D",
+  "proves": "the step's control: walking through a door alone does not cool an alert (D-077). With the street's alert at 1 the hero goes down the cellar doorway and comes straight back up: the alert is 1 before, during and after, and has not changed by the end",
+  "room": "castle-street",
+  "placements": true,
+  "players": [{"id": "a", "character": "hero", "spawn": 0}],
+  "inputs": [
+    {"player": "a", "from": 60, "to": 140, "x": 1},
+    {"player": "a", "from": 1450, "to": 1475, "x": 1},
+    {"player": "a", "from": 1500, "to": 1505, "hold": ["interact"]},
+    {"player": "a", "from": 2200, "to": 2264, "x": -1},
+    {"player": "a", "from": 2280, "to": 2285, "y": -1},
+    {"player": "a", "from": 2300, "to": 2305, "y": -1}
+  ],
+  "ticks": 3600,
+  "expect": [
+    {"fact": "event-where", "event": "changed-room", "where": {"entity": "p:a"}, "between": [2280, 2300], "count": [2, 2]},
+    {"fact": "in-room", "player": "a", "at": 2290, "room": "undercroft"},
+    {"fact": "in-room", "player": "a", "at": 2310, "room": "castle-street"},
+    {"fact": "alert", "area": "castle-street", "between": [2130, 3600], "is": 1},
+    {"fact": "event-where", "event": "alert-changed", "where": {"area": "castle-street"}, "between": [2130, 3600], "count": [0, 0]}
+  ]
+}

@@ -47,6 +47,10 @@ declare module '../types.ts' {
       dir: 1 | -1;
       /** How long a walk has made no headway. */
       stall: number;
+      /** The hero this person saw on their last turn, or null. Written by alert-respond, read by alert-follow. */
+      sight?: string | null;
+      /** A door of the room they are in that they saw a hero leave by, and mean to follow through. */
+      door?: string | null;
     };
   }
   interface EventMap {
