@@ -1,0 +1,31 @@
+{
+  "//": "DRAFT: stand-in drawn by tools/art/tiles/make.py; offsets are set for the 320x180 view. Notes: tools/art/tiles/README.md.",
+  "id": "castle-street",
+  "sky": [
+    "#5fb4f0",
+    "#c4e9ff"
+  ],
+  "layers": [
+    {
+      "image": "backdrops/sky-clouds.png",
+      "parallax": 0.1,
+      "y": "top",
+      "offsetY": 10,
+      "repeatX": true
+    },
+    {
+      "image": "backdrops/far-castle.png",
+      "parallax": 0.2,
+      "y": "bottom",
+      "offsetY": -30,
+      "repeatX": true
+    },
+    {
+      "image": "backdrops/town-mid.png",
+      "parallax": 0.5,
+      "y": "bottom",
+      "offsetY": 0,
+      "repeatX": true
+    }
+  ]
+}

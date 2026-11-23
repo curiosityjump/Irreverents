@@ -1,0 +1,140 @@
+{
+  "//": "DRAFT: stand-in drawn by tools/art/tiles/make.py (theme \"castle\"); a delivered tile sheet replaces it by editing this file. Notes: tools/art/tiles/README.md.",
+  "id": "hall-gallery",
+  "image": "tiles/castle.png",
+  "tile": 16,
+  "cells": {
+    "solid": [
+      3,
+      3
+    ],
+    "solidTop": [
+      2,
+      3
+    ],
+    "oneway": [
+      1,
+      5
+    ]
+  },
+  "autotile": {
+    "origin": [
+      0,
+      0
+    ],
+    "innerCorners": {
+      "nw": [
+        4,
+        0
+      ],
+      "ne": [
+        5,
+        0
+      ],
+      "sw": [
+        4,
+        1
+      ],
+      "se": [
+        5,
+        1
+      ]
+    },
+    "fill": [
+      [
+        3,
+        3
+      ],
+      [
+        6,
+        0
+      ],
+      [
+        7,
+        0
+      ],
+      [
+        6,
+        1
+      ],
+      [
+        7,
+        1
+      ]
+    ],
+    "top": [
+      [
+        4,
+        2
+      ],
+      [
+        5,
+        2
+      ],
+      [
+        -1,
+        -1
+      ],
+      [
+        -1,
+        -1
+      ],
+      [
+        -1,
+        -1
+      ],
+      [
+        -1,
+        -1
+      ],
+      [
+        -1,
+        -1
+      ],
+      [
+        -1,
+        -1
+      ],
+      [
+        -1,
+        -1
+      ],
+      [
+        -1,
+        -1
+      ],
+      [
+        -1,
+        -1
+      ],
+      [
+        -1,
+        -1
+      ]
+    ],
+    "under": [
+      [
+        4,
+        3
+      ]
+    ],
+    "oneway": {
+      "left": [
+        0,
+        5
+      ],
+      "mid": [
+        1,
+        5
+      ],
+      "right": [
+        2,
+        5
+      ],
+      "single": [
+        3,
+        5
+      ]
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "//": "DRAFT: stand-in drawn by tools/art/tiles/make.py; offsets are set for the 320x180 view. Notes: tools/art/tiles/README.md.",
+  "id": "graybox-hall",
+  "sky": [
+    "#4b4577",
+    "#4b4577"
+  ],
+  "layers": [],
+  "wall": {
+    "image": "tiles/castle.png",
+    "tile": 16,
+    "cells": [
+      [
+        0,
+        6
+      ],
+      [
+        1,
+        6
+      ],
+      [
+        2,
+        6
+      ],
+      [
+        3,
+        6
+      ]
+    ]
+  }
+}

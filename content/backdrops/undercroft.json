@@ -1,0 +1,18 @@
+{
+  "//": "DRAFT: stand-in drawn by tools/art/tiles/make.py; offsets are set for the 320x180 view. Notes: tools/art/tiles/README.md. DRAFT: no \"wall\" here on purpose: the one layer is the back wall itself, with vaults and piers, moving slower than the room; add \"wall\" (cells [0,6]..[3,6] of tiles/cellar.png) to go back to a flat wall that moves with the room.",
+  "id": "undercroft",
+  "sky": [
+    "#1c1937",
+    "#1c1937"
+  ],
+  "layers": [
+    {
+      "image": "backdrops/cellar-vault.png",
+      "parallax": 0.75,
+      "y": "top",
+      "offsetY": -12,
+      "repeatX": true,
+      "parallaxY": 0.75
+    }
+  ]
+}
