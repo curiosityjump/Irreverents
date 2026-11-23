@@ -10,7 +10,7 @@ import { image } from './images.ts';
 /** Every state the contract names. */
 export type AnimState =
   | 'idle' | 'run' | 'air' | 'jump' | 'fall' | 'flap' | 'attack' | 'grab' | 'carry' | 'carryRun'
-  | 'throw' | 'hurt' | 'down' | 'held' | 'hide' | 'talk';
+  | 'throw' | 'hurt' | 'down' | 'held' | 'hide' | 'talk' | 'tumble';
 
 /** The sprite file as the contract writes it (src/content/kinds/sprites.ts parses it; optional parts read defensively). */
 interface SheetFile {
@@ -23,6 +23,8 @@ interface SheetFile {
   fpsBy?: Partial<Record<AnimState, number>>;
   moods?: Record<string, Partial<Record<AnimState, number[]>>>;
   carryAt?: { x: number; y: number } | null;
+  /** Round 3: a carry point per state (carry, carryRun, throw); a state with none uses carryAt. */
+  carryAtBy?: Partial<Record<'carry' | 'carryRun' | 'throw', { x: number; y: number }>>;
 }
 
 /**
@@ -38,7 +40,9 @@ const CHAIN: Record<AnimState, AnimState[]> = {
   fall: ['fall', 'air'],
   flap: ['flap', 'air'],
   attack: ['attack', 'idle'],
-  throw: ['throw', 'attack', 'idle'],
+  // INTENT (round 3, gap 5): a throw is never drawn as the attack strip (the punch pose while
+  // carrying was the stutter); with no throw frames it is the carry pose.
+  throw: ['throw', 'carry', 'idle'],
   grab: ['grab', 'idle'],
   carry: ['carry'],
   carryRun: ['carryRun', 'carry'],
@@ -47,6 +51,8 @@ const CHAIN: Record<AnimState, AnimState[]> = {
   held: ['held', 'hurt', 'air'],
   hide: ['hide', 'idle'],
   talk: ['talk', 'idle'],
+  // Round 3 (the contract): with no tumble frames, the hurt frame turned in quarter turns (drawSprite).
+  tumble: ['tumble', 'held', 'hurt', 'air'],
 };
 
 /** INTENT (the contract): these play once from when they start and hold their last frame; every other state loops. */
@@ -64,6 +70,12 @@ const FLASH_TICKS = 2;
 const FLASH_SPEED = 250;
 /** DRAFT (round 2): the red flash when a person with drawn rage frames becomes enraged, in ticks. */
 const RAGE_FLASH_TICKS = 4;
+/** DRAFT (round 3): a flying body faster than this (px/s) tumbles; slower, it is hurt. */
+const TUMBLE_SPEED = 220;
+/** DRAFT (round 3): a body that flew lies `down` this long after it lands, while it stays still (ticks). */
+const DOWN_TICKS = 24;
+/** DRAFT (round 3): a turned hurt frame (no tumble frames) turns a quarter every this many ticks. */
+const TUMBLE_TURN_TICKS = 4;
 
 /**
  * What this page remembers about each body between frames, to time the
@@ -93,6 +105,11 @@ interface Memory {
    */
   phase: string;
   windThrew: boolean;
+  /** Round 3: the grab button last seen down, the tick of the last fresh press made while not carrying, whether the body was flying, and the tick it stopped. */
+  grabHeld: boolean;
+  grabPress: number;
+  flying: boolean;
+  flewEnd: number;
   /** The person's mood last seen, and the tick it became 3 (enraged). */
   mood: number;
   raged: number;
@@ -118,7 +135,7 @@ export function remember(world: World, e: Entity): Memory {
   const flaps = e.c.flap?.used ?? 0;
   if (!m || world.tick < m.tick - 600) {
     // First sight (or the world restarted): nothing has just happened.
-    m = { tick: world.tick, onGround: e.onGround, carrying, flaps, landed: -1e9, left: -1e9, grabbed: -1e9, threw: -1e9, flapped: -1e9, swing: e.c.attack?.swung ?? -1e9, swingThrew: false, phase: e.c.attack?.phase ?? 'ready', windThrew: false, mood: e.c.npc?.mood ?? 1, raged: -1e9 };
+    m = { tick: world.tick, onGround: e.onGround, carrying, flaps, landed: -1e9, left: -1e9, grabbed: -1e9, threw: -1e9, flapped: -1e9, swing: e.c.attack?.swung ?? -1e9, swingThrew: false, phase: e.c.attack?.phase ?? 'ready', windThrew: false, grabHeld: e.c.grab?.held ?? false, grabPress: -1e9, flying: !!e.c.flying, flewEnd: -1e9, mood: e.c.npc?.mood ?? 1, raged: -1e9 };
     memory.set(e.id, m);
     return stamped(e, m);
   }
@@ -139,9 +156,16 @@ export function remember(world: World, e: Entity): Memory {
       m.swingThrew = m.carrying !== null || carrying !== null || m.windThrew;
       if (m.swingThrew && !m.windThrew) m.threw = swung;
     }
+    // Round 3: the grab press itself (a player's own page never learns it caught anything until
+    // the server says so): the grab plays from the press, and a catch that follows continues it.
+    const grabHeld = e.c.grab?.held ?? false;
+    if (grabHeld && !m.grabHeld && !carrying && !m.carrying) m.grabPress = world.tick;
+    m.grabHeld = grabHeld;
+    if (m.flying && !e.c.flying) m.flewEnd = world.tick;
+    m.flying = !!e.c.flying;
     if (e.onGround && !m.onGround) m.landed = world.tick;
     if (!e.onGround && m.onGround && e.vy < 0) m.left = world.tick;
-    if (carrying && carrying !== m.carrying) m.grabbed = world.tick;
+    if (carrying && carrying !== m.carrying) m.grabbed = world.tick - m.grabPress < 40 ? m.grabPress : world.tick;
     if (!carrying && m.carrying) {
       // Let go while the body flies off from us: that was a throw (attack.ts
       // stamps no tick for one). Set down or dropped is not.
@@ -203,6 +227,7 @@ export function stateOf(world: World, e: Entity, m: Memory, onceTicks: (s: AnimS
   const t = world.tick;
   if (e.c.flattened) return { state: 'down', since: 0 };
   if (e.c.effect?.heldBy) return { state: 'held', since: 0 };
+  if (e.c.flying && !e.c.beat && Math.hypot(e.vx, e.vy) > TUMBLE_SPEED) return { state: 'tumble', since: e.c.impact && t - e.c.impact.tick < 120 ? e.c.impact.tick : m.tick };
   if (e.c.flying || e.c.beat || e.c.stunned) return { state: 'hurt', since: e.c.impact && t - e.c.impact.tick < 120 ? e.c.impact.tick : m.tick };
   if (t - m.threw < onceTicks('throw')) return { state: 'throw', since: m.threw };
   const swung = e.c.attack?.swung ?? -1e9;
@@ -213,6 +238,9 @@ export function stateOf(world: World, e: Entity, m: Memory, onceTicks: (s: AnimS
   if ((phase === 'windup' && !m.carrying && !m.windThrew) || ((phase === 'strike' || phase === 'recover') && !m.swingThrew && !m.windThrew)) return { state: 'attack', since: swung };
   if (phase === undefined && !m.swingThrew && t - swung >= 0 && t - swung < onceTicks('attack')) return { state: 'attack', since: swung };
   const moving = Math.abs(e.vx) > MOVING;
+  // Round 3: a body that flew lies down a moment where it landed (cut short when it moves).
+  if (!m.carrying && e.onGround && !moving && t - m.flewEnd >= 0 && t - m.flewEnd < DOWN_TICKS) return { state: 'down', since: m.flewEnd };
+  if (!m.carrying && t - m.grabPress >= 0 && t - m.grabPress < onceTicks('grab')) return { state: 'grab', since: m.grabPress };
   if (m.carrying) {
     if (t - m.grabbed < onceTicks('grab')) return { state: 'grab', since: m.grabbed };
     return { state: moving && e.onGround ? 'carryRun' : 'carry', since: 0 };
@@ -247,7 +275,7 @@ function fpsOf(sheet: SheetFile, s: AnimState): number {
 function onceTicksOn(sheet: SheetFile | undefined, s: AnimState, mood: number): number {
   if (!sheet) return s === 'attack' ? 7 : ONCE_TICKS;
   const { list, as } = framesFor(sheet, s, mood, false);
-  if (as !== s && !(s === 'throw' && as === 'attack')) return s === 'attack' ? 7 : ONCE_TICKS;
+  if (as !== s) return s === 'attack' ? 7 : ONCE_TICKS;
   return Math.max(4, Math.round((list.length * 60) / fpsOf(sheet, as)));
 }
 
@@ -265,6 +293,10 @@ export interface SpriteLook {
   alpha: number;
   /** A tint over the sprite's own pixels, or null. */
   tint: { color: string; amount: number } | null;
+  /** Round 3: a state this page shows ahead of the world (a hit it predicts on its own swing), and when it began. */
+  pose?: { state: AnimState; since: number };
+  /** Round 3: the white hit flash, asked for by the page's own prediction. */
+  flash?: boolean;
 }
 
 /** Offscreen canvases of tinted frames, made once each (no per-frame allocation). */
@@ -289,13 +321,50 @@ function tintedFrame(img: HTMLImageElement, sx: number, sy: number, w: number, h
   return c;
 }
 
+/**
+ * Round 3: the first row of a frame with any opaque pixel, measured once per frame and cached
+ * (0 when it cannot be read). Overlays sit on the picture, not on the cell's empty headroom.
+ */
+const opaque = new Map<string, number>();
+function opaqueTop(img: HTMLImageElement, sx: number, sy: number, w: number, h: number): number {
+  const key = `${img.src}|${sx},${sy}`;
+  const known = opaque.get(key);
+  if (known !== undefined) return known;
+  let row = 0;
+  try {
+    const c = document.createElement('canvas');
+    c.width = w;
+    c.height = h;
+    const g = c.getContext('2d', { willReadFrequently: true })!;
+    g.drawImage(img, sx, sy, w, h, 0, 0, w, h);
+    const data = g.getImageData(0, 0, w, h).data;
+    row = h;
+    for (let i = 3; i < data.length; i += 4) {
+      if (data[i]! > 0) {
+        row = Math.floor((i - 3) / 4 / w);
+        break;
+      }
+    }
+    if (row >= h) row = 0;
+  } catch {
+    row = 0;
+  }
+  if (opaque.size > 2048) opaque.clear();
+  opaque.set(key, row);
+  return row;
+}
+
 /** Facts the caller may want after drawing: where the top of the picture is (for marks over the head). */
 export interface Drew {
   state: AnimState;
   /** Screen y of the picture's top edge, after squash/stretch. */
   top: number;
+  /** Round 3: screen y of the frame's first non-transparent row (the top of the hat or plume), after squash/stretch. */
+  head: number;
   /** Round 2: the screen point where a carried body's bottom-centre sits (the sheet's carryAt), when it has one. */
   hold?: { x: number; y: number };
+  /** Round 3: during `grab`, how far the heave has come (0 at the press, 1 when the load is up): the caller eases the load from where it is to `hold`. */
+  heave?: number;
 }
 
 /**
@@ -314,7 +383,7 @@ export function drawSprite(g: CanvasRenderingContext2D, world: World, content: C
   const { sheet, img } = found;
   const mood = e.c.npc?.mood ?? 1;
   const m = remember(world, e);
-  const { state, since } = stateOf(world, e, m, (s) => onceTicksOn(sheet, s, mood));
+  const { state, since } = look.pose ?? stateOf(world, e, m, (s) => onceTicksOn(sheet, s, mood));
   const moving = Math.abs(e.vx) > MOVING;
   const { list, as } = framesFor(sheet, state, mood, moving);
   const fps = fpsOf(sheet, as);
@@ -368,13 +437,23 @@ export function drawSprite(g: CanvasRenderingContext2D, world: World, content: C
   // A white flash on the ticks right after a strong hit; else the tint asked for.
   const hitAge = e.c.impact ? t - e.c.impact.tick : 1e9;
   const strong = (e.c.impact?.speed ?? 0) >= FLASH_SPEED;
-  const tint = strong && hitAge >= 0 && hitAge < FLASH_TICKS ? { color: '#ffffff', amount: 1 } : look.tint;
+  const tint = look.flash || (strong && hitAge >= 0 && hitAge < FLASH_TICKS) ? { color: '#ffffff', amount: 1 } : look.tint;
   const src: CanvasImageSource = tint ? tintedFrame(img, sx, sy, cw, ch, tint.color, tint.amount) : img;
   const ox = tint ? 0 : sx;
   const oy = tint ? 0 : sy;
 
   g.save();
   if (look.alpha < 1) g.globalAlpha = look.alpha;
+  // Round 3 (the contract): a tumble with no frames of its own turns its frame in quarter turns
+  // about the middle of the box, the way it flies.
+  const turns = state === 'tumble' && as !== 'tumble' ? Math.floor(Math.max(0, t - since) / TUMBLE_TURN_TICKS) % 4 : 0;
+  if (turns) {
+    const mx = Math.round(footX);
+    const my = Math.round(y + kind.box.h / 2);
+    g.translate(mx, my);
+    g.rotate(((e.facing < 0 ? -turns : turns) * Math.PI) / 2);
+    g.translate(-mx, -my);
+  }
   if (e.facing < 0) {
     g.translate(left + dw, top);
     g.scale(-1, 1);
@@ -383,12 +462,19 @@ export function drawSprite(g: CanvasRenderingContext2D, world: World, content: C
   g.restore();
   // Round 2: where a carried body's bottom-centre goes (carryAt, mirrored with the facing), in
   // the states that hold it.
+  // Round 3: carryAtBy per state, else carryAt. During `grab` the point of the pose it heaves
+  // into (carry), with how far the heave has come: the caller eases the load up to it, so the
+  // load rises with the arms instead of popping overhead.
   let hold: { x: number; y: number } | undefined;
-  const ca = sheet.carryAt;
-  if (ca && (state === 'carry' || state === 'carryRun' || state === 'throw' || state === 'grab')) {
+  let heave: number | undefined;
+  const pointFor = state === 'grab' ? 'carry' : state;
+  const ca = pointFor === 'carry' || pointFor === 'carryRun' || pointFor === 'throw' ? (sheet.carryAtBy?.[pointFor] ?? sheet.carryAt) : null;
+  if (ca) {
     hold = { x: e.facing < 0 ? left + dw - ca.x * scaleX : left + ca.x * scaleX, y: top + ca.y * scaleY };
+    if (state === 'grab') heave = Math.max(0, Math.min(1, (t - since + 1) / Math.max(1, onceTicksOn(sheet, 'grab', mood))));
   }
-  return { state, top, hold };
+  const head = top + Math.round(opaqueTop(img, sx, sy, cw, ch) * scaleY);
+  return { state, top, head, hold, heave };
 }
 
 /** Whether a sheet draws its own rage (mood 3 frames). */

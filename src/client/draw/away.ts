@@ -1,5 +1,6 @@
 import type { Content } from '../../content/types.ts';
 import type { World } from '../../sim/types.ts';
+import { drawnOffset, drawnTop } from './entities.ts';
 import type { PlayerView } from './entities.ts';
 import { drawFrame, frameOf, look } from './fx.ts';
 import { sheetOf } from './sprites.ts';
@@ -23,8 +24,11 @@ export function drawAway(g: CanvasRenderingContext2D, world: World, content: Con
     if (e.room !== roomId || !e.c.net?.away || e.id === view?.me) continue;
     const box = content.characters[e.kind]?.box;
     if (!box) continue;
-    const x = ox + Math.round(e.x);
-    const y = oy + Math.round(e.y);
+    // Round 3 (gap 14): over the body where it is drawn (in a carrier's hands, say).
+    const off = drawnOffset(e.id);
+    const x = ox + Math.round(e.x) + off.x;
+    const y = oy + Math.round(e.y) + off.y;
+    const top = Math.min(y - 8, drawnTop(e.id) ?? y - 8);
     if (!sheetOf(content, e)) {
       g.globalAlpha = 0.6;
       g.fillStyle = VEIL;
@@ -32,7 +36,7 @@ export function drawAway(g: CanvasRenderingContext2D, world: World, content: Con
       g.globalAlpha = 1;
     }
     const mid = x + Math.floor(box.w / 2);
-    if (dots) drawFrame(g, dots, frameOf(dots, world.tick, true), mid - Math.floor(dots.w / 2), y - 8 - dots.h);
+    if (dots) drawFrame(g, dots, frameOf(dots, world.tick, true), mid - Math.floor(dots.w / 2), top - dots.h);
     else {
       g.fillStyle = MARK;
       for (const dx of [-5, -1, 3]) g.fillRect(mid + dx, y - 12, 2, 2);

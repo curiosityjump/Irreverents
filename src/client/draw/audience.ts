@@ -2,6 +2,7 @@ import type { Content } from '../../content/types.ts';
 import { speechLine, speechLineNumber, wrapSpeech } from '../../content/speech.ts';
 import { speechTicksPerLine } from '../../sim/systems/audience-speech.ts';
 import type { World } from '../../sim/types.ts';
+import { drawnOffset, drawnTop } from './entities.ts';
 import { drawNine, drawText, edgedText, font, lineHeight, textWidth } from './fx.ts';
 
 // DRAFT: the whole look. A small dark ribbon with pale letters over the
@@ -33,14 +34,19 @@ export function drawAudience(g: CanvasRenderingContext2D, world: World, content:
     const h = rows.length * row + 3;
     const W = g.canvas.width;
     const H = g.canvas.height;
-    const bx = ox + Math.round(e.x);
-    const by = oy + Math.round(e.y);
+    // Round 3 (gap 14): over him where he is drawn (a carried king is in the carrier's hands).
+    const off = drawnOffset(e.id);
+    const bx = ox + Math.round(e.x) + off.x;
+    const by = oy + Math.round(e.y) + off.y;
     const cx = bx + box.w / 2;
     // Round 2: never over the speaker. The ribbon's bottom (its frame and tail included) stays
     // CLEAR px above the top of his picture (box top minus the HEADROOM a crown stands above it),
     // with a tail pointing down at him; where there is no room above, it goes beside him, the
     // tail pointing at his head.
-    const picTop = by - HEADROOM;
+    // Round 3: a carried speaker has his carrier's player-mark over his crown (draw/entities.ts):
+    // the ribbon clears that too. DRAFT: CARRIED_MARK.
+    const carried = !!e.c.effect?.heldBy || world.entities.some((o) => o.c.carrying?.id === e.id);
+    const picTop = Math.min(by - HEADROOM, drawnTop(e.id) ?? by - HEADROOM) - (carried ? CARRIED_MARK : 0);
     let x = Math.round(cx - w / 2);
     let y = picTop - CLEAR - TAIL - 3 - h;
     let tail: 'down' | 'left' | 'right' = 'down';
@@ -90,6 +96,8 @@ const CLEAR = 4;
 /** DRAFT: the tail's length, and the gap from the box when the ribbon is beside him. */
 const TAIL = 3;
 const SIDE_GAP = 4;
+/** DRAFT (round 3): the room a carrier's mark takes over a carried speaker (the mark, its gap and bob). */
+const CARRIED_MARK = 14;
 
 /** A small stepped tail in the ribbon's colours, its base on (x, y), pointing down, left or right. */
 function drawTail(g: CanvasRenderingContext2D, dir: 'down' | 'left' | 'right', x: number, y: number): void {

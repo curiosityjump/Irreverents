@@ -18,6 +18,7 @@ import net from 'node:net';
 import path from 'node:path';
 import { awayFacts } from './e2e/away.ts';
 import { errorFacts } from './e2e/errors.ts';
+import { lookFacts } from './e2e/look.ts';
 import { PAINT, paintedShare, paintOk, phoneFacts, problemsOf, read as readPhone } from './e2e/phone.ts';
 import { root } from './lib/registries.ts';
 
@@ -375,6 +376,8 @@ async function main(): Promise<void> {
       await (await import('./e2e/cantina.ts')).cantinaFacts({ browser, devices, base, out, fact, errors });
       // Step 17's facts (start-*): the start screen, New game, a friend joining by the shared link, and back, by touch (docs/mechanisms/saves.md).
       await (await import('./e2e/start-screen.ts')).startFacts({ browser, devices, base, out, fact, errors, shots: path.join(root, 'docs/plan/step-17-shots') });
+      // Step 8's look facts (look-*): the three moods differ as drawn, and a hidden friend has no mark on another page (docs/mechanisms/rendering-actors.md, "Round 3").
+      await lookFacts({ browser, devices, base, out, fact, errors });
       // (f) another world does not see them.
       const ctxC = await browser.newContext({ viewport: { width: 800, height: 450 } });
       const C = await ctxC.newPage();

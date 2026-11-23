@@ -1,7 +1,9 @@
 # Rendering actors: how bodies, people, marks and effects are drawn
 
 **Reference.** Open before touching `src/client/draw/sprites.ts`,
-`entities.ts`, `npcs.ts`, `impact.ts`, `away.ts`, `audience.ts` or `fx.ts`.
+`entities.ts`, `npcs.ts`, `impact.ts`, `away.ts`, `audience.ts`, `fx.ts`,
+or (round 3) the overlays in `alert.ts` and the look facts in
+`scripts/e2e/look.ts`.
 
 `DRAFT:` the notes file of Step 8's look lane "actors"
 (`handoff-prompts/look-actors.md`), written 2026-11-23. The contract it
@@ -14,7 +16,7 @@ the items below to their homes.
   contract's sixteen states from what the world says about a body (table
   below); `framesFor()` applies the person's mood (`moods`), then the
   contract's fallbacks (`jump`/`fall`/`flap` → `air`; `carryRun` → `carry`
-  → `run`/`idle`; `throw` → `attack` → `idle`; `down` → `hurt` → `idle`;
+  → `run`/`idle`; `throw` → `carry` → `idle` (round 3; was `attack`); `tumble` → `held` → `hurt` → `air`; `down` → `hurt` → `idle`;
   `held` → `hurt` → `air`; `hide`/`talk`/`grab` → `idle`). `fpsBy`
   overrides `fps` per state. `attack`, `grab`, `throw`, `hurt` play once
   from the world tick they began and hold their last frame; the rest loop
@@ -55,9 +57,12 @@ the items below to their homes.
 |---|---|---|
 | `down` | `c.flattened` | loops |
 | `held` | `c.effect.heldBy` | loops |
+| `tumble` | round 3: `c.flying`, not in its beat, faster than 220 px/s | `c.impact.tick` |
 | `hurt` | `c.flying`, `c.beat` or `c.stunned` | `c.impact.tick` (else when first seen) |
 | `throw` | a swing made while carrying, or the carried body flying off with `flying.by` = this body | that tick |
 | `attack` | round 2: `c.attack.phase` is `windup` (never a throw), or `strike`/`recover` and the swing was not a throw; frame by phase: the strip's first while winding up, its second while striking (its third for the strike's last 2 ticks on a strip of 4 or more), its last while recovering. With no `phase` (an old body): `world.tick − c.attack.swung` < the strip's length | phase |
+| `down` | round 3: within 24 ticks after a flight ended, on the ground and still, not carrying | the landing |
+| `grab` | round 3: a fresh grab press while not carrying (the page's own), for the strip's length | the press |
 | `grab` | carrying, for the strip's length after it started | first tick seen carrying |
 | `carryRun` / `carry` | carrying, moving on the ground / otherwise | loops |
 | `flap` | in the air, rising, `c.flap.used` > 0, a flap seen in the last 30 ticks | loops |
@@ -158,6 +163,69 @@ Push 1:
 - **A hidden player has no mark on anyone else's page** (gap 9; the
   `INTENT:` at `HIDDEN_TINT`), and a faint one (35 %) on their own.
 
+Push 2:
+
+- **The hit lands when you throw it** (gap 4; `impact.ts`
+  `predictHits`/`predictedLook`, called from `entities.ts` for the page's
+  own character only). On each strike tick of the page's own swing,
+  attack.ts's strike box is tested against every body as drawn that the
+  server would launch (not a friend outside a cantina brawl, not a held,
+  knocked-out or bodiless thing); each is struck once per swing. The page
+  draws `fx-hit` at the contact edge (the target's side facing the fist),
+  `fx-dust` and the shake, and draws that body white for 3 ticks, then in
+  its hurt frame, nudged 2 px along the push, **in front of the hitter**.
+  The star holds its first frame until the server's impact on that body
+  arrives (the page's beat), then plays on; that impact draws no second
+  star, dust or shake (its key is `covered`). A swing the server does not
+  confirm within 500 ms just lets the star play out. `INTENT:` cosmetic:
+  nothing moves a body. Filmed locally: star and flash at 109 ms after the
+  press (was 555 ms on live), the launch at about 400 ms.
+- **Draw order:** a body in its beat, launched within 30 ticks, or
+  predicted hit is drawn after the rest, in front of whoever hit it.
+- **One motion for grab, carry, throw** (gap 5): `throw` falls back to
+  `carry` (never the attack strip); the load is held at `carryAtBy[state]`
+  else `carryAt` until the server releases it; a load whose own copy is
+  flying is no longer drawn in the hands, whatever the (older, smoothed)
+  carrier says, so the thrown friend's own page draws her where her camera
+  is; a released load eases from the hands to its flight over 3 ticks
+  (`holds`, `released()`). `grab` plays on the page from the press itself
+  (`grabPress`), and the load rises from where it is to the hands with the
+  heave (`Drew.heave`). `grab` stays a holding state for that reason.
+- **`tumble`**: a flying body faster than 220 px/s (not in its beat);
+  with no `tumble` frames, the hurt frame turned a quarter every 4 ticks
+  about the box's middle, with `fx-speed` trailing. After a flight a body
+  lies `down` for 24 ticks while still, with `fx-dizzy` over it.
+- **Overlays where the body is drawn** (gap 14): `drawnOffset(id)` and
+  `drawnTop(id)` (exported from `entities.ts`, filled each frame) are added
+  in the heads pass, `npcs.ts`, `audience.ts` and `away.ts`. Marks, barks,
+  the ribbon and away dots sit on the frame's first opaque row
+  (`Drew.head`, measured once per frame image), not on the cell's empty
+  headroom. The ribbon of a carried speaker also clears his carrier's
+  mark. `alert.ts` draws bells, which are never carried: unchanged there.
+- **HUD and effects** (gap 11): a ringing bell gets `bell-gauge` (frame by
+  the call's progress) and `fx-clang` either side; the newest lit alert pip
+  glows for 40 ticks; a bark from someone past the screen's edge is a
+  `bark-edge` chip at that edge (their head cropped from their first idle
+  frame, arrow toward them) with a tailless bubble beside it.
+- **The look facts** (gap 8, `scripts/e2e/look.ts`): `look-moods` draws
+  the same guard at moods 1, 2, 3 through the game's own drawing code in a
+  real page (bundled with esbuild) and asserts each pair differs in more
+  than 20 pixels (measured 185, 586, 628); its control, mood 1 twice, 0.
+  Not caught live: a raised guard paces and chases, so live crops would
+  measure his walk. `look-hidden-mark`: in the street a friend has a mark
+  on the other page; in the awning curtain none (and 0.35 on their own).
+  Failing controls run: with moods ignored in the drawing, `look-moods`
+  failed (0, 0, 0); with the hidden-mark rule removed, `look-hidden-mark`
+  failed (mark 1 on the other page). `PlayerView.drawn` gains `mood`,
+  `hidden`, `marked` (additive).
+- **Multi-floor camera** (gap 12, `room.ts`): with another floor within 9
+  tiles under the player's own, the camera moves down toward clearing it
+  of the controls, as far as the view's top stays 60 px above the feet.
+  In the undercroft (upstairs ledge, lower hall 8 tiles down, deeper than
+  a view) that is 20 px: the lower hall's lantern still sits near the
+  controls sideways.
+- **Shots**: `docs/plan/step-8-shots/round3/actors/`.
+
 ## Deviations from the contract
 
 - None in the shapes. The first push (8934a58) read `content.looks`
@@ -224,7 +292,35 @@ Push 1:
 - **To change it:** the `if (y < 3)` block in `src/client/draw/audience.ts`.
 - **Where:** `DRAFT:` there.
 
+### 2026-11-23 · Your own punch shows its hit at once; the server still decides the knockback
+- **Decided by:** look round 3, actors lane (the brief, gap 4)
+- **Instead of asking:** "Show the hit before the server confirms it, or widen what a phone simulates?"
+- **Why this way:** the owner's "OHHHHH": on the hitter's phone the star came half a second late. Drawing it at once changes nothing the game decides. The other way (the phone simulating everyone near it, `src/net/client.ts`, as network.md suggests) would change who decides a hit: not taken.
+- **To change it:** `PREDICT_MS`, `NUDGE`, `FRONT_TICKS` in `src/client/draw/impact.ts`; not calling `predictHits` in `entities.ts` turns it off.
+- **Where:** `DRAFT:` there.
+
+### 2026-11-23 · A body thrown hard tumbles; landing, it lies dizzy a moment
+- **Decided by:** look round 3, actors lane (the brief, gap 5)
+- **Instead of asking:** "How does a thrown body fly and land?"
+- **Why this way:** "flies and lands upright" was the round-3 review's complaint; the bar's "Start a Fight" panel.
+- **To change it:** `TUMBLE_SPEED`, `DOWN_TICKS`, `TUMBLE_TURN_TICKS` in `src/client/draw/sprites.ts`.
+- **Where:** `DRAFT:` there.
+
 ## Flags for the lead
+
+- **Round 3: the brawl strip** (`cantina.ts`, Step 11's) still draws
+  flat squares; `hud-face-*`, `hud-plate`, `hud-ko`, `hud-fall` exist and
+  wait for Step 11 slice B's review before this lane may use them.
+- **Round 3: the contract's fallback list** (`art-pipeline.md`, "throw →
+  attack") is now `throw` → `carry` in the renderer (the brief: a throw is
+  never the attack strip); the orchestrator folds it into the contract.
+- **Round 3: guards and enemies swinging** (Step 18) will need the same
+  hit drawing on the hitter's page; `predictHits` takes any attacker but
+  is only called for the page's own character.
+- **Round 3: `t-throw-friend`/`s-throw-friend` failed once in four e2e
+  runs** of push 1 (the throw did not happen at all, 0 px): the known
+  flake, not drawing.
+
 
 - **Round 2: not screenshotted: a carried friend.** In the scene harness
   (keyboard on a touch-sized page) the grappler's grab took a crate but

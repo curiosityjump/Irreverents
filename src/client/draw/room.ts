@@ -47,7 +47,40 @@ export function roomOrigin(room: Room, viewW: number, viewH: number, focus?: { x
   if (lowest > 0 && focus !== undefined) camY = Math.max(0, Math.min(lowest, Math.round(focus.y - viewH / 2)));
   // The player's own feet stay above the reserve (they never go below the room, so this fits).
   if (feet !== undefined && reserve > 0) camY = Math.min(lowest, Math.max(camY, Math.ceil(feet + reserve - viewH)));
+  // Round 3 (gap 12): a floor a few tiles under the player's own (the undercroft's lower hall,
+  // seen from upstairs) is brought up clear of the controls too, as far as the player's head
+  // stays HEAD_ROOM below the view's top. DRAFT: FLOOR_LOOK and HEAD_ROOM.
+  if (feet !== undefined && focus !== undefined && reserve > 0) {
+    const below = floorBelow(room, focus.x, feet);
+    if (below !== null) {
+      const want = Math.ceil(below + reserve - viewH);
+      camY = Math.min(lowest, Math.max(camY, Math.min(want, Math.floor(feet - HEAD_ROOM))));
+    }
+  }
   return { ox, oy: -camY };
+}
+
+/** DRAFT (round 3): how many tiles under the player's floor the camera looks for another, and how far above the feet the view's top must stay (px). */
+const FLOOR_LOOK = 9;
+const HEAD_ROOM = 60;
+
+/**
+ * The top (room px) of the next floor under the one the player stands on, at their column:
+ * past at least one open row, the first solid or one-way row within FLOOR_LOOK tiles; else null.
+ */
+function floorBelow(room: Room, x: number, feet: number): number | null {
+  const T = room.tile;
+  const tx = Math.max(0, Math.min(room.w - 1, Math.floor(x / T)));
+  const at = (ty: number): number => room.cells[ty * room.w + tx] ?? TILE.solid;
+  let ty = Math.floor(feet / T);
+  // Through the floor under the feet.
+  while (ty < room.h && (at(ty) === TILE.solid || at(ty) === TILE.oneway)) ty++;
+  const open = ty;
+  for (; ty < room.h && ty - open < FLOOR_LOOK; ty++) {
+    const c = at(ty);
+    if (c === TILE.solid || c === TILE.oneway) return ty > open ? ty * T : null;
+  }
+  return null;
 }
 
 /** The art files a room may have (content/atlases/, backdrops/, decor/, each named after the room). */

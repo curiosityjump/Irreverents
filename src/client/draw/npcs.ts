@@ -1,5 +1,7 @@
 import type { Content } from '../../content/types.ts';
 import type { World } from '../../sim/types.ts';
+import type { Entity } from '../../sim/types.ts';
+import { drawnOffset, drawnTop } from './entities.ts';
 import { drawFrame, drawNine, drawText, edgedText, font, frameOf, lineHeight, look, textWidth, wrapText } from './fx.ts';
 import { sheetOf } from './sprites.ts';
 
@@ -64,6 +66,71 @@ function bubble(g: CanvasRenderingContext2D, text: string, cx: number, bottom: n
 }
 
 /**
+ * Round 3 (gap 11): a bark from someone past the screen's edge (`side` -1 left, 1 right): at
+ * that edge, a `bark-edge` chip with their own head in it (cropped from the top of their
+ * sprite's first idle frame) and an arrow toward them, the words in a bubble with no tail
+ * beside it, level with where their head is (kept on screen). With no `bark-edge` look, the
+ * same bubble with a small plain arrow. DRAFT: the layout.
+ */
+function edgeBark(g: CanvasRenderingContext2D, content: Content, e: Entity, text: string, side: number, top: number): void {
+  const W = g.canvas.width;
+  const H = g.canvas.height;
+  const chip = look('bark-edge');
+  g.font = 'bold 8px monospace';
+  g.textBaseline = 'top';
+  const pixel = font('dark') !== null;
+  const rows = pixel ? wrapText(g, text, BARK_WIDTH, 'dark') : [text];
+  const lh = lineHeight('dark', 8);
+  const w = Math.ceil(Math.max(...rows.map((r) => textWidth(g, r, 'dark')))) + 8;
+  const h = pixel ? rows.length * lh + 5 : 14;
+  const cw = chip ? chip.w : 6;
+  const ch = chip ? chip.h : h;
+  const y = Math.max(2, Math.min(H - Math.max(h, ch) - 2, Math.round(top)));
+  const chipX = side < 0 ? 2 : W - cw - 2;
+  if (chip) {
+    // The chip's arrow is drawn pointing left; mirrored for a speaker off the right edge.
+    drawFrame(g, chip, frameOf(chip, 0, true), chipX, y, { flip: side > 0 });
+    const found = sheetOf(content, e);
+    if (found) {
+      // Their head: the top of the first idle frame, centred on the box, fitted inside the chip.
+      const { sheet, img } = found;
+      const box = content.characters[e.kind]!.box;
+      const f = sheet.frames.idle[0] ?? 0;
+      const cols = Math.max(1, Math.floor(img.naturalWidth / sheet.cell.w));
+      const hw = Math.min(sheet.cell.w, cw - 4);
+      const hh = Math.min(sheet.cell.h, ch - 4);
+      const sx = (f % cols) * sheet.cell.w + Math.max(0, Math.round(sheet.anchor.x + box.w / 2 - hw / 2));
+      const headTop = Math.max(0, sheet.anchor.y - Math.round(hh / 3));
+      const sy = Math.floor(f / cols) * sheet.cell.h + headTop;
+      const inset = side < 0 ? Math.round((cw - hw) / 2) + 1 : Math.round((cw - hw) / 2) - 1;
+      g.save();
+      if (side < 0) {
+        // Face toward the edge they are past.
+        g.translate(chipX + inset + hw, y + 2);
+        g.scale(-1, 1);
+        g.drawImage(img, sx, sy, hw, hh, 0, 0, hw, hh);
+      } else g.drawImage(img, sx, sy, hw, hh, chipX + inset, y + 2, hw, hh);
+      g.restore();
+    }
+  } else {
+    // A plain arrow at the edge, pointing out toward them.
+    g.fillStyle = INK;
+    for (let i = 0; i < 4; i++) g.fillRect(side < 0 ? chipX + i : chipX + cw - 1 - i, y + Math.round(h / 2) - 3 + i, 1, 7 - 2 * i);
+  }
+  const bx = side < 0 ? chipX + cw + 1 : chipX - w - 1;
+  if (look('bark') && drawNine(g, 'bark', bx, y, w, h)) {
+    if (pixel) rows.forEach((r, i) => drawText(g, r, bx + 4, y + 3 + i * lh, 'dark'));
+    else edgedText(g, text, bx + 4, y + 3, PAPER, INK);
+    return;
+  }
+  g.fillStyle = PAPER;
+  g.fillRect(bx, y, w, h);
+  if (drawText(g, text, bx + 4, y + 3, 'dark', INK)) return;
+  g.fillStyle = INK;
+  g.fillText(text, bx + 4, y + 3);
+}
+
+/**
  * People's moods and barks, and the bodiless things a hero can use.
  * Mood 1 shows nothing (business as usual is the world at rest); mood 2 a
  * "?" over the head; mood 3 a "!" and a red tint over the body. A bark
@@ -92,8 +159,12 @@ export function drawNpcs(g: CanvasRenderingContext2D, world: World, content: Con
     const n = e.c.npc;
     const box = content.characters[e.kind]?.box;
     if (e.room !== roomId || !n || !box) continue;
-    const x = ox + Math.round(e.x);
-    const y = oy + Math.round(e.y);
+    // Round 3 (gap 14): where the body is drawn (in a carrier's hands, say), not where the simulation has it.
+    const off = drawnOffset(e.id);
+    const x = ox + Math.round(e.x) + off.x;
+    const y = oy + Math.round(e.y) + off.y;
+    // Round 3: marks and barks sit over the picture as drawn (clear of hats and plumes), else over the box.
+    const top = Math.min(y, drawnTop(e.id) ?? y);
     // A person drawn from a sprite sheet shows rage in its own pixels (draw/entities.ts).
     if (n.mood === 3 && !sheetOf(content, e)) {
       // Strong enough that a raging person cannot be mistaken for anyone's own colour.
@@ -104,10 +175,13 @@ export function drawNpcs(g: CanvasRenderingContext2D, world: World, content: Con
     }
     const cx = x + box.w / 2;
     if (n.bark) {
-      if (!bubble(g, n.bark.text, cx, y - 2)) label(g, n.bark.text, cx, y - 2, PAPER, INK);
+      // Round 3 (gap 11): a speaker past the screen's edge is pointed at from that edge, never
+      // given a bubble whose tail lands on whoever stands there.
+      if (cx < 0 || cx > g.canvas.width) edgeBark(g, content, e, n.bark.text, cx < 0 ? -1 : 1, top);
+      else if (!bubble(g, n.bark.text, cx, top - 1)) label(g, n.bark.text, cx, top - 1, PAPER, INK);
     } else if (n.mood === 2 || n.mood === 3) {
       const mark = look(`mood-${n.mood}`);
-      if (mark) drawFrame(g, mark, frameOf(mark, world.tick, true), Math.round(cx - mark.w / 2), y - mark.h - 3);
+      if (mark) drawFrame(g, mark, frameOf(mark, world.tick, true), Math.round(cx - mark.w / 2), top - mark.h - 1);
       else if (n.mood === 2) label(g, '?', cx, y - 2, DISTRESS, INK);
       else label(g, '!', cx, y - 2, RAGE, PAPER);
     }

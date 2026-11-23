@@ -5,6 +5,7 @@ import { tileAt } from '../../sim/room-state.ts';
 import type { Entity, World } from '../../sim/types.ts';
 import { drawFrame, frameOf, look, tinted, useContent } from './fx.ts';
 import { drawLookIn } from './room-parts.ts';
+import { predictedLook, predictHits } from './impact.ts';
 import { carriedBy, drawSprite, drawsOwnRage, forget, rageFlash, remember, swingWasThrow } from './sprites.ts';
 import type { Drew } from './sprites.ts';
 
@@ -24,6 +25,12 @@ export interface Drawn {
   mine: boolean;
   /** Step 5 (set by draw/away.ts): drawn as away, its player's page being gone for the moment. */
   away?: boolean;
+  /** Round 3 (look): a person's mood as drawn (1, 2, 3); absent for anyone else. */
+  mood?: number;
+  /** Round 3 (look): hidden in a hiding place (`c.roomHide`) as this page has it. */
+  hidden?: boolean;
+  /** Round 3 (look): for a player's character, whether this page drew a mark over it (and how faint: 1 full). 0 = none. */
+  marked?: number;
 }
 
 /** Whose view this is, and where to record what was drawn. */
@@ -48,7 +55,15 @@ export function drawEntities(g: CanvasRenderingContext2D, world: World, content:
       drawShadow(g, world, room, kind.box, e, ox, oy);
     }
   }
-  const heads: { e: Entity; x: number; y: number; w: number; color: string; alpha: number }[] = [];
+  const heads: { e: Entity; x: number; y: number; w: number; color: string; alpha: number; top: number }[] = [];
+  offsets.clear();
+  tops.clear();
+  // Round 3 (gap 4): the page's own swing, predicted onto what it strikes (draw/impact.ts).
+  const mine = view ? world.entities.find((e) => e.id === view.me) : undefined;
+  if (mine && mine.room === roomId) {
+    remember(world, mine);
+    predictHits(world, content, mine, swingWasThrow(mine));
+  }
   const dotOf = (e: Entity): string | null => (e.c.net ? content.net.playerColors[e.c.net.slot % content.net.playerColors.length]! : null);
   // What was drawn, recorded first and in the world's order, from the simulation's positions,
   // exactly as before (scripted checks read it), however the bodies are then drawn.
@@ -57,21 +72,34 @@ export function drawEntities(g: CanvasRenderingContext2D, world: World, content:
       if (e.room !== roomId) continue;
       const kind = content.characters[e.kind];
       if (!kind) continue;
-      view.drawn.push({ id: e.id, player: e.player, kind: e.kind, x: e.x, y: e.y, px: Math.round(e.x), py: Math.round(e.y), color: dotOf(e) ?? kind.color, mine: e.id === view.me });
+      const rec: Drawn = { id: e.id, player: e.player, kind: e.kind, x: e.x, y: e.y, px: Math.round(e.x), py: Math.round(e.y), color: dotOf(e) ?? kind.color, mine: e.id === view.me };
+      if (e.c.npc) rec.mood = e.c.npc.mood;
+      if (e.c.roomHide) rec.hidden = true;
+      if (e.c.net) rec.marked = 0;
+      view.drawn.push(rec);
     }
   }
   // Round 2: a carried body is drawn right after its carrier (in its hands), not in list order.
+  const byId = new Map(world.entities.map((e) => [e.id, e]));
   const heldBy = new Map<string, string>();
   for (const e of world.entities) {
     if (e.room !== roomId) continue;
     const held = carriedBy(world, e);
-    if (held) heldBy.set(held, e.id);
+    // Round 3 (gap 5): a load already flying is no longer in the hands, whatever the carrier's
+    // (older, smoothed) copy still says: so a thrown friend's own page draws her where her
+    // camera is as soon as she flies.
+    if (held && !byId.get(held)?.c.flying) heldBy.set(held, e.id);
   }
-  const byId = new Map(world.entities.map((e) => [e.id, e]));
   const body = (e: Entity, at?: { x: number; y: number }): Drew | null => {
     const kind = content.characters[e.kind]!;
-    const x = at ? Math.round(at.x) : ox + Math.round(e.x);
+    // Round 3: a body this page predicts hit is nudged along the push (draw/impact.ts).
+    const hit = predictedLook(world, e.id);
+    const x = (at ? Math.round(at.x) : ox + Math.round(e.x)) + (hit?.dx ?? 0);
     const y = at ? Math.round(at.y) : oy + Math.round(e.y);
+    // Round 3 (gap 14): where it is drawn, against where the simulation has it, for overlays.
+    const dx = x - (ox + Math.round(e.x));
+    const dy = y - (oy + Math.round(e.y));
+    if (dx !== 0 || dy !== 0) offsets.set(e.id, { x: dx, y: dy });
     // Step 1 Gate 2 (one small edit; Step 2 owns this file): each PLAYER has
     // a dot above the head in their own colour, by join order, so two people
     // playing the same member can be told apart.
@@ -82,7 +110,7 @@ export function drawEntities(g: CanvasRenderingContext2D, world: World, content:
     const hiddenMark = e.c.roomHide ? (e.id === view?.me ? HIDDEN_MARK_ALPHA : 0) : 1;
     if (dot && hiddenMark > 0) {
       // With a `player-mark` look the mark is drawn over the head after every body (below).
-      if (look('player-mark')) heads.push({ e, x, y, w: kind.box.w, color: dot, alpha: hiddenMark });
+      if (look('player-mark')) heads.push({ e, x, y, w: kind.box.w, color: dot, alpha: hiddenMark, top: y });
       else {
         g.globalAlpha = hiddenMark;
         g.fillStyle = dot;
@@ -98,8 +126,16 @@ export function drawEntities(g: CanvasRenderingContext2D, world: World, content:
     const ownRage = enraged && drawsOwnRage(content, e);
     const fold = hideFold(content, e);
     const tint = enraged && !ownRage ? RAGE_TINT : ownRage && rageFlash(world, e) ? RAGE_FLASH : e.c.roomHide && !fold ? HIDDEN_TINT : null;
-    const drew = drawSprite(g, world, content, e, x, y, { alpha: away ? AWAY_ALPHA : 1, tint });
+    const rec = view?.drawn.find((d) => d.id === e.id);
+    if (rec && dot) rec.marked = hiddenMark;
+    const pose = hit?.waiting && !e.c.flying ? { state: 'hurt' as const, since: hit.since } : undefined;
+    if (fast(e)) drawTrail(g, world, e, x, y, kind.box);
+    const drew = drawSprite(g, world, content, e, x, y, { alpha: away ? AWAY_ALPHA : 1, tint, pose, flash: hit?.flash });
     if (drew) {
+      tops.set(e.id, drew.head);
+      const head = heads.find((h) => h.e === e);
+      if (head) head.top = drew.head;
+      if (drew.state === 'down' && !e.c.flattened) drawDizzy(g, world, e, x, drew.head, kind.box);
       drawSwing(g, world, content, e, x, y, kind.box, false);
       if (fold) drawLookIn(g, content, [fold.id], ox + fold.x, oy + fold.y, fold.w, fold.h, world.tick);
       return drew;
@@ -130,17 +166,28 @@ export function drawEntities(g: CanvasRenderingContext2D, world: World, content:
     if (fold) drawLookIn(g, content, [fold.id], ox + fold.x, oy + fold.y, fold.w, fold.h, world.tick);
     return null;
   };
-  for (const e of world.entities) {
-    if (e.room !== roomId || !content.characters[e.kind]) continue;
+  // Round 3 (gap 4): a body in its beat, hurt, launched or predicted hit is drawn after the
+  // rest (in front of whoever hit it), for the beat's length.
+  const front = (e: Entity): boolean => !!e.c.beat || (!!e.c.flying && !!e.c.impact && world.tick - e.c.impact.tick < 30) || predictedLook(world, e.id) !== null;
+  const order = world.entities.filter((e) => e.room === roomId && content.characters[e.kind]);
+  for (const e of [...order.filter((e) => !front(e)), ...order.filter(front)]) {
     const carrier = heldBy.get(e.id);
     if (carrier && byId.get(carrier)?.room === roomId) continue;
-    const drew = body(e);
+    const easing = released(world, e, ox, oy);
+    const drew = body(e, easing ?? undefined);
     const held = [...heldBy].find(([, by]) => by === e.id)?.[0];
     const h = held ? byId.get(held) : undefined;
     if (!h || h.room !== roomId || !content.characters[h.kind]) continue;
-    // In the carrier's hands: its bottom-centre on the carrier's carryAt; else where it is, as before.
+    // In the carrier's hands: its bottom-centre on the carrier's carryAt (carryAtBy); during the
+    // grab, eased from where it lies up to the hands with the heave; else where it is, as before.
     const hb = content.characters[h.kind]!.box;
-    body(h, drew?.hold ? { x: drew.hold.x - hb.w / 2, y: drew.hold.y - hb.h } : undefined);
+    let at = drew?.hold ? { x: drew.hold.x - hb.w / 2, y: drew.hold.y - hb.h } : undefined;
+    if (at && drew?.heave !== undefined && drew.heave < 1) {
+      const k = drew.heave;
+      at = { x: ox + h.x + (at.x - ox - h.x) * k, y: oy + h.y + (at.y - oy - h.y) * k };
+    }
+    if (at) holds.set(h.id, { x: at.x - ox, y: at.y - oy, tick: world.tick });
+    body(h, at);
   }
   // Effects over bodies: landing dust.
   const land = look('fx-land');
@@ -162,14 +209,76 @@ export function drawEntities(g: CanvasRenderingContext2D, world: World, content:
       // The bob comes from the tick and the body's id, so two marks do not bob in step.
       const bob = Math.floor((world.tick + hash(h.e.id)) / 24) % 2;
       // Over whatever is carried overhead too, so the mark is never hidden.
+      // Round 3 (gap 14): from the tops as drawn (the picture's, not the box's: clear of hats
+      // and plumes), the carried body's where it is drawn in the hands.
       const held = carriedBy(world, h.e);
       const over = held ? world.entities.find((o) => o.id === held) : undefined;
-      const top = over && over.room === roomId ? Math.min(h.y, oy + Math.round(over.y)) : h.y;
+      const overTop = over && over.room === roomId ? (tops.get(over.id) ?? oy + Math.round(over.y) + (offsets.get(over.id)?.y ?? 0)) : Infinity;
+      const top = Math.min(h.top, overTop) + 3;
       if (h.alpha < 1) g.globalAlpha = h.alpha;
       drawFrame(g, mark, frameOf(mark, world.tick, true), h.x + Math.round(h.w / 2 - mark.w / 2), top - mark.h - 4 - bob, { source: tinted(mark, h.color) });
       g.globalAlpha = 1;
     }
   }
+}
+
+/**
+ * Round 3 (gap 14): how far each body was drawn from where the simulation has it this frame
+ * (a carried body in its carrier's hands; a predicted hit's nudge), and the top of each
+ * sprite's picture as drawn (screen px). Overlays (marks, barks, the ribbon, away dots, the
+ * alert) add the offset and place from the top, so they sit on the body as drawn.
+ */
+const offsets = new Map<string, { x: number; y: number }>();
+const tops = new Map<string, number>();
+/** Where a body was drawn this frame against its simulation position (screen px; 0, 0 when not moved). */
+export function drawnOffset(id: string): { x: number; y: number } {
+  return offsets.get(id) ?? ZERO;
+}
+const ZERO = { x: 0, y: 0 };
+/** The screen y of a sprite body's picture top as drawn this frame, or null (a rectangle body, or not drawn). */
+export function drawnTop(id: string): number | null {
+  return tops.get(id) ?? null;
+}
+
+/**
+ * Round 3 (gap 5): where each carried body was last drawn in its carrier's hands (room px, and
+ * the tick). When the carrier lets go, the body is eased from there to where it flies over
+ * RELEASE_TICKS instead of snapping. Also why a thrown body is no longer drawn on its
+ * carrier's head once it flies: see `released`.
+ */
+const holds = new Map<string, { x: number; y: number; tick: number }>();
+/** DRAFT (round 3): the ticks over which a released load eases from the hands to its flight. */
+const RELEASE_TICKS = 3;
+function released(world: World, e: Entity, ox: number, oy: number): { x: number; y: number } | null {
+  const h = holds.get(e.id);
+  if (!h) return null;
+  const since = world.tick - h.tick;
+  if (since <= 0) return { x: ox + h.x, y: oy + h.y };
+  if (since > RELEASE_TICKS) {
+    holds.delete(e.id);
+    return null;
+  }
+  const k = since / (RELEASE_TICKS + 1);
+  return { x: ox + h.x + (e.x - h.x) * k, y: oy + h.y + (e.y - h.y) * k };
+}
+
+/** Whether a body is tumbling or flying fast this frame (the speed lines go behind it). */
+function fast(e: Entity): boolean {
+  return !!e.c.flying && Math.hypot(e.vx, e.vy) > 220;
+}
+/** Round 3: `fx-speed` trailing behind a body flying fast, along where it came from. Only with the look. */
+function drawTrail(g: CanvasRenderingContext2D, world: World, e: Entity, x: number, y: number, box: { w: number; h: number }): void {
+  const l = look('fx-speed');
+  if (!l) return;
+  const back = e.vx > 0 ? -1 : 1;
+  const cx = back < 0 ? x - l.w + 2 : x + box.w - 2;
+  drawFrame(g, l, frameOf(l, world.tick, true), cx, Math.round(y + box.h / 2 - l.h / 2), { flip: back > 0 });
+}
+/** Round 3: `fx-dizzy` over a body lying down after a flight. Only with the look. */
+function drawDizzy(g: CanvasRenderingContext2D, world: World, e: Entity, x: number, top: number, box: { w: number; h: number }): void {
+  const l = look('fx-dizzy');
+  if (!l) return;
+  drawFrame(g, l, frameOf(l, world.tick, true), Math.round(x + box.w / 2 - l.w / 2), Math.round(Math.max(top, 0) - l.h / 2 + 4));
 }
 
 /** DRAFT (round 3): how faint a hidden player's own mark is on their own page; on every other page it is not drawn. */
