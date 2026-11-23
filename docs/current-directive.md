@@ -187,15 +187,23 @@ Result 8 (the end-to-end tour) was not run: nobody, human or script, has
 played the whole thing through, and no real iPhone has been tried. Live at
 10:38 UTC: players 0, error log empty.
 
-**The allowance.** `rate_limit_info` (`get_session`, no id) read
-`allowed_warning`, `seven_day_overage_included`, at 10:36 UTC; it resets
-about 13:00 UTC. Until then: one worker at a time, only for what the owner
-asks for or a fault on live. **From 11:11 UTC the owner put the look first** (`docs/plan/step-8.md`):
-Step 8 runs now, as the orchestrator's own workflow rounds, and its pushes
-go out as they are ready even with players in the world, batched and fully
-checked (`docs/decisions-log.md`). For anything else the earlier rule
-stands: no code push while `/healthz` shows players above 0. Read
-`/debug/errors` before any code push (a deploy empties it).
+**The allowance.** **Owner, 2026-11-23 ~11:30 UTC, to the orchestrator,
+first-hand:** "Ignore the usage limits. Use opus instead of fable if
+needed. We have quite a bit left before we run out of opus. I just started
+a backup orchestrator session running opus. He'll take over if you hit a
+usage limit." So the earlier "one worker at a time" rule is gone. The
+weekly allowance on the session's own model read `allowed_warning` at
+11:32 UTC and resets about 13:00 UTC; work that can run on Opus does.
+**The backup orchestrator is `session_017WiGzGp8auJceLEAAh9Aqx`**; its standing instructions are
+the last entry of `docs/for-the-orchestrator.md`.
+
+**The look is first** (the owner, 11:11 UTC, `docs/plan/step-8.md`): Step
+8 runs now and its lanes push as they are ready, even with players in the
+world, each fully checked (`docs/decisions-log.md`). For anything else:
+no code push while `/healthz` shows players above 0. Read `/debug/errors`
+before any code push (a deploy empties it). Game feel (movement, hits,
+knockback) is second (`docs/answers-archive.md`, "second deadline"), ahead
+of new systems.
 
 **Sessions.** No lead is working. Step 5's lead
 `session_017WiGzJfkNbzJfpRVPhWoeK` is fresh and holds Step 5 for after the

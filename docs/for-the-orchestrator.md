@@ -111,3 +111,45 @@ different from being a lead").
 ### Step 7 lead, 2026-11-23 04:55 UTC: `CLAUDE.md` will say something false once the Hall is wired in
 
 `CLAUDE.md`, "Architecture at a glance", says "**State** is the `World` object only. Nothing is persisted". The store (`src/server/store.ts`, 7d101dd) exists and nothing opens it yet, so the line is still true. It becomes false when Step 7's slice 2 wires it into the server (after Step 1's Gate 2). Suggested wording then: "Nothing is persisted except small records in the store (`docs/architecture.md`, 'Lasting records')". Yours to edit; I will say when the wiring lands.
+
+### Live state for the backup orchestrator `session_017WiGzGp8auJceLEAAh9Aqx`, from orchestrator `session_017WiGzHX8g2sXimNRnqp2oZ`, 2026-11-23 11:50 UTC (not a handoff: I am running)
+
+**You are on standby.** The owner started you to take over if I hit a
+usage limit. Until then make no commits, spawn nothing, re-point nobody
+and push nothing: two orchestrators acting at once is the collision this
+system warns about. Read, stay small, answer the owner.
+
+**How to tell I have stopped:** `get_session` on `session_017WiGzHX8g2sXimNRnqp2oZ` shows a usage or
+rate limit stop, or the owner tells you. A quiet stretch is not a stop:
+lanes run for an hour. Before taking over, send me one message; if I
+answer, I am alive.
+
+**If you take over, this is what is in flight** (all of it is in the
+repo; nothing depends on my memory):
+- **Step 8, the look, round 1** (`docs/plan/step-8.md`, "The look"; the
+  contract `docs/mechanisms/art-pipeline.md`). Nine lanes, one brief each,
+  `handoff-prompts/look-<lane>.md`. Seven are worker sessions (cast, tiles,
+  props, world, actors, shell, sound), tagged `irreverents`, children of
+  my session; each pushes itself to `main` and reports to me. Two
+  (foundation, heroes) are agents on my machine, which dies with me: if
+  `src/client/draw/looks.ts` is not on `main`, launch
+  `work handoff-prompts/look-foundation.md`; if
+  `content/sprites/grappler.json` is not, launch
+  `work handoff-prompts/look-heroes.md` (canonical spawn call,
+  `docs/lead-session.md`). Re-point the seven sessions to yourself.
+- **After the lanes land:** read every lane's notes file (named in its
+  brief) and file each item where it belongs; index the new mechanism
+  docs; delete the briefs. Then round 2: take screenshots of the real
+  game at iPhone size, upright and sideways, in every map room; put them
+  beside the owner's references; have a fresh reviewer list the largest
+  gaps; brief fixes; repeat until a reviewer finds none it would call
+  large. The owner: "don't stop working on it until it looks similar to
+  that", and "It should play well in portrait too".
+- **Game feel is next** (the owner to Vision Partner: "looks, sounds, and
+  feels as good as kirby and the amazing mirror"): Step 2 is to be
+  reopened for it; see `docs/plan.md` for whether I got that far.
+- **If sessions stopped on the usage limit,** it resets about 13:00 UTC:
+  wake each with one message a couple of minutes after.
+- Waiting on the owner (none blocks): the ledger's Open list and the two
+  older inbox entries. Past orchestrators and I only forward once handed
+  off; never archive us.

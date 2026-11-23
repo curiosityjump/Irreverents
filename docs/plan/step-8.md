@@ -17,6 +17,13 @@
 > It all looks looks like absolute blocky shit.
 > Compare to kirby and the amazing mirror and don't stop working on it until it looks similar to that. There are assets provided and you have the ability to get more.
 
+**Owner, 2026-11-23 ~11:30 UTC, to the orchestrator, first-hand:**
+> It should play well in portrait too, not just landscape. Looks awful in both right now
+> Ignore the usage limits. Use opus instead of fable if needed. We have quite a bit left before we run out of opus
+
+So the phone held upright is a first-class way to play, not a fallback
+with a hint to turn it.
+
 This reorders the step: the look comes first, now, ahead of everything
 else in the plan. See "The look, from 2026-11-23 11:11 UTC" below.
 
@@ -143,10 +150,17 @@ Read with the owner's words at the top of this file.
   delivered sheet replaces it by changing a file, not code. The desk's
   requests stay open and Vision Partner is asked for more
   (`docs/questions-inbox.md`, "Asset need").
-- `DRAFT:` **Who runs it.** The orchestrator `session_017WiGzHX8g2sXimNRnqp2oZ` runs this
-  step directly, as rounds of a multi-agent workflow in its own session,
-  because the owner switched that mode on in the same message. No lead is
-  spawned for it (`docs/decisions-log.md`).
+- `DRAFT:` **Who runs it.** The orchestrator `session_017WiGzHX8g2sXimNRnqp2oZ` leads this step
+  itself. Round 1 is nine lanes building to one contract
+  (`docs/mechanisms/art-pipeline.md`) at the same time, each with its own
+  paths: foundation and heroes as agents on the orchestrator's machine
+  (it runs only two at once: 4 processors), and cast, tiles, props, world,
+  actors, shell and sound as worker sessions, one brief each
+  (`handoff-prompts/look-<lane>.md`). Each lane pushes itself to `main`
+  when green, so the look arrives piece by piece. Art lanes run on the
+  session's own model; the four code lanes on Opus, to spare the nearly
+  spent weekly allowance (the owner's words above). Each lane leaves a
+  notes file (named in its brief) that the orchestrator reads and files.
 - **Feedback signal for the look:** screenshots of the real game at
   iPhone size (sideways and upright), put beside the references and read
   by a fresh reviewer each round who lists the largest remaining gaps;
@@ -160,6 +174,8 @@ Read with the owner's words at the top of this file.
 ## Measure
 
 ## Briefs
+
+Round 1 of the look (2026-11-23): `handoff-prompts/look-foundation.md`, `look-heroes.md`, `look-cast.md`, `look-tiles.md`, `look-props.md`, `look-world.md`, `look-actors.md`, `look-shell.md`, `look-sound.md`. Delete each when its lane is reviewed.
 
 ## Open with the owner
 

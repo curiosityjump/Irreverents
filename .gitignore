@@ -7,3 +7,7 @@ built.json
 *.gen.ts
 # Screenshots saved by npm run e2e and npm run check:live.
 e2e-out/
+# Workflow agents' private worktrees on the machine that runs them.
+.claude/worktrees/
+# Contact sheets and mock scenes written by tools/art/<lane>/preview.py; re-run the script to see them.
+tools/art/*/preview/

@@ -530,3 +530,18 @@ document as a decision of theirs.
 - **Why this way:** you switched on multi-agent workflow mode in the same message that asked for the look, and a lead would spend its first half hour reading before any pixel changed.
 - **To change it:** release Step 8's claim in `docs/plan.md` and start a lead; everything it needs is in the step file.
 - **Where:** `docs/plan/step-8.md`, "The look".
+
+
+### 2026-11-23 · The new look arrives piece by piece over the next hours, each piece restarting the world for about a minute
+- **Decided by:** orchestrator, Step 8, `session_017WiGzHX8g2sXimNRnqp2oZ`
+- **Instead of asking:** "One big update when everything is ready, or each part (characters, ground, skies, the upright layout, sound) as soon as it is ready?"
+- **Why this way:** you said not to stop and you can only judge it by seeing it; one big update would have meant another hour or two of rectangles. Nine parts are being made at once, so expect around ten short restarts; your page rejoins by itself each time. This replaces "a few larger updates" in the entry above.
+- **To change it:** say "hold pushes while we play" and the parts are held until the world is empty.
+- **Where:** `docs/plan/step-8.md`, "The look"; each lane's brief in `handoff-prompts/`.
+
+### 2026-11-23 · The code half of the look is being built on Opus, the drawing half on the stronger model
+- **Decided by:** orchestrator, Step 8, `session_017WiGzHX8g2sXimNRnqp2oZ`
+- **Instead of asking:** "Which of the two models should do what while the weekly allowance on the stronger one is nearly spent?"
+- **Why this way:** you said "Use opus instead of fable if needed". Drawing is the part most likely to decide whether it looks right, so it keeps the stronger model; the renderer, the upright layout and sound go to Opus so that a tripped limit cannot stop everything at once.
+- **To change it:** say which model you want for which; it is one setting per worker.
+- **Where:** `docs/plan/step-8.md`, "The look".

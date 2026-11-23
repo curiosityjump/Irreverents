@@ -335,6 +335,12 @@ shadows → things and bodies → effects → `front` decor → marks over heads
 speech → screen furniture (alert pips). The debug record of what was
 drawn (`PlayerView.drawn`) is unchanged: scripted checks read it.
 
+## Who is building it (round 1) and where their notes are
+
+Nine lanes, one brief each in `handoff-prompts/look-<lane>.md`, each with its own paths (the table in any of those briefs). A lane does not edit this file or the other shared documents; it writes what exists, its deviations from this contract, its decisions and its flags in its own notes file: `tools/art/<lane>/README.md` for heroes, cast, tiles and props; `docs/mechanisms/art-foundation.md`, `rendering-world.md`, `rendering-actors.md`, `phone-shell-look.md` and `sound.md` for the code lanes. The orchestrator folds deviations back into this file.
+
+**Upright is a first-class way to play** (the owner, 2026-11-23: "It should play well in portrait too, not just landscape"): the view's size is a variable (`view` in `src/client/render.ts`), sideways 320×180, upright narrower and taller, and everything drawn must hold up at both.
+
 ## Checks
 
 - `npm run check` validates every art content file: the image exists,
