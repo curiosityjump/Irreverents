@@ -101,9 +101,8 @@ Step 17 builder `session_017WiGzGw7XaQ6tZNddFaa8s`, 2026-11-23.
 - **Push 1 (saves, server).** `CLAUDE.md` "Architecture at a glance" says
   "Nothing is persisted": false from this push (saved games). Left for the
   orchestrator, as the brief says.
-- Doubt: `/healthz` `store.collections` lists every game code opened since
-  the start, so anyone reading `/healthz` can see live codes. The brief asked
-  for `store.status()` there; friends, no accounts, so left as asked.
+- ~~Doubt: `/healthz` lists every game code.~~ Fixed by hardening push C
+  (a count only; asking about a code opens nothing).
 - ~~Doubt: a placement a later build adds to an existing room never appears
   in an existing save.~~ Fixed by hardening push B (every room is placed
   again on load; `removed` keeps what left the world out).

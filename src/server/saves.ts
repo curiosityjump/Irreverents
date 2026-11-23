@@ -6,6 +6,8 @@
 // Server code only: the simulation never sees the store. Like the rest of
 // the network layer, nothing here names a kind of entity, a verb or a
 // component: a save is the whole World with the players taken out.
+import fs from 'node:fs';
+import path from 'node:path';
 import type { Content } from '../content/types.ts';
 import { clone } from '../net/protocol.ts';
 import type { Room } from '../content/kinds/rooms.ts';
@@ -97,6 +99,8 @@ export interface Saves {
   load(code: string): Loaded;
   /** Keep this world as the game's save (its players are left out). Never throws; never writes over a newer version's record. */
   save(code: string, world: World): void;
+  /** How many games have a save (for /healthz: a count, never the codes). */
+  count(): number;
 }
 
 export interface SavesOptions {
@@ -108,7 +112,20 @@ export interface SavesOptions {
 
 export function createSaves(store: Store, opts: SavesOptions): Saves {
   const { content } = opts;
+  // INTENT: asking about a code that has no save opens nothing: a store
+  // collection, once opened, is listed until a restart, so every guessed
+  // code would otherwise leave an entry behind (the review's item 7).
+  const exists = (name: string): boolean => {
+    if (Object.prototype.hasOwnProperty.call(store.status().collections, name)) return true;
+    if (!store.dir) return false;
+    try {
+      return fs.existsSync(path.join(store.dir, `${name}.json`));
+    } catch {
+      return false;
+    }
+  };
   const latest = (code: string): SaveRecord | undefined => {
+    if (!exists(collectionName(code))) return undefined;
     const records = store.collection<SaveRecord>(collectionName(code)).all();
     return records[records.length - 1];
   };
@@ -201,6 +218,18 @@ export function createSaves(store: Store, opts: SavesOptions): Saves {
       // INTENT (src/server/errors.ts): no personal data, so not the code either.
       if (said.length > 0) opts.problem(`a saved game written by ${String(rec.commit).slice(0, 12)} was loaded without ${said.join('; and without ')}`);
       return { world };
+    },
+    count() {
+      const names = new Set<string>();
+      for (const [name, size] of Object.entries(store.status().collections)) if (name.startsWith('save-') && size > 0) names.add(name);
+      if (store.dir) {
+        try {
+          for (const f of fs.readdirSync(store.dir)) if (/^save-[a-z]+\.json$/.test(f)) names.add(f.slice(0, -'.json'.length));
+        } catch {
+          // an unreadable directory is the store's to report
+        }
+      }
+      return names.size;
     },
     save(code, world) {
       if (!isGameCode(code)) return;

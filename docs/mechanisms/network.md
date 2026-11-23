@@ -58,7 +58,9 @@ with a throwaway entity kind on every `npm run check`).
 - **Worlds.** Opening the address shows the start screen (Step 17,
   `docs/mechanisms/saves.md`), whose "Everyone's kingdom" is the world
   `main`, shared by everyone; `?room=<name>` skips the start screen and is
-  another, separate world. A private world is forgotten
+  another, separate world (`?room=game-ABCD` names a kept game's world,
+  so it joins that game, saved and loaded like any game, without the start
+  screen; `DRAFT:` allowed on purpose). A private world is forgotten
   when its last player is gone; **`main` never is** while the server runs
   (what was done to its rooms stays done, D-077). A world named
   `game-<CODE>` is a kept game (Step 17, `docs/mechanisms/saves.md`):
@@ -226,7 +228,9 @@ count as `errors`.
 - **Kinds:** `error` (uncaught), `rejection` (a promise nobody caught),
   `load` (a script, image or stylesheet that did not load, the button
   pictures included), `socket` (no connection for 20 s with the page in
-  view; once per outage, `DRAFT:`).
+  view; once per outage, `DRAFT:`), and `server` (Step 17: the server's
+  own line, `ErrorLog.note`: a saved game loaded without what no longer
+  fits, or a world set aside after it threw; `docs/mechanisms/saves.md`).
 - **The reporter is the first script in `index.html`**, inline and in old
   syntax (`INTENT:`): it must work when `game.js` fails to load or to
   parse, which on an older iOS is the likeliest way to get a blank

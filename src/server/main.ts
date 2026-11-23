@@ -66,6 +66,10 @@ const storage = storageStatus();
 // a real attached volume. Never a hard-coded "/data". (Step 7 adds the
 // Hall's collection to this same store: src/server/store.ts, the comment at the top.)
 const store = openStore(storage.mounted ? storage.path : null);
+const storeSummary = (): { lasting: boolean; dir: string | null; problems: string[]; saves: number } => {
+  const s = store.status();
+  return { lasting: s.lasting, dir: s.dir, problems: s.problems, saves: game?.savedGames() ?? 0 };
+};
 
 // The bundle is dist/server.cjs and the client is dist/public, so the public
 // directory is found relative to the running file, never the working directory.
@@ -97,9 +101,11 @@ const errorLog = createErrorLog();
 const server = http.createServer((req, res) => {
   const url = new URL(req.url ?? '/', 'http://x');
   if (url.pathname === '/healthz') {
-    // `errors`: how many reports pages have sent since the start (additive; see /debug/errors).
+    // `errors`: how many lines /debug/errors received since the start: pages' reports and, since Step 17, the server's own (kind `server`).
+    // `store` (Step 17): whether records last, where, any problem, and how many games are saved;
+    // INTENT: counts only, never the game codes (a code is how anyone joins a game).
     // `store` (Step 17, additive): what the store keeps and anything that went wrong with it.
-    send(res, 200, 'application/json', JSON.stringify({ ok: true, commit, startedAt, storage, store: store.status(), ...game?.counts(), errors: errorLog.count() }));
+    send(res, 200, 'application/json', JSON.stringify({ ok: true, commit, startedAt, storage, store: storeSummary(), ...game?.counts(), errors: errorLog.count() }));
     return;
   }
   // Step 17: "does game CODE exist?", for the start screen's Join a friend.

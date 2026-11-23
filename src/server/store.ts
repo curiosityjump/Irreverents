@@ -21,13 +21,16 @@
 //   const store = openStore(storage.mounted ? storage.path : null);
 //   const hallRecords = store.collection<HallRecord>('hall');
 //
-//   // where the world is created, before the first step:
-//   restoreHall(world, content, hallRecords.all());
+//   // where the world is created, before the first step: in makeWorld
+//   // (src/server/game.ts), on `gw.world` after it is made or loaded from a
+//   // save, and before it is returned:
+//   restoreHall(gw.world, content, hallRecords.all());
 //
-//   // where a tick's events are handled:
+//   // where a tick's events are handled (onEvents in src/server/game.ts):
 //   for (const e of events) if (e.type === 'hall-legend') hallRecords.add(e.record);
 //
-//   // in the /healthz body, a new field beside `storage` (additive):
+//   // (already pasted by Step 17, as a summary: storeSummary() in main.ts,
+//   // which gives counts, never game codes) in the /healthz body:
 //   store: store.status(),
 //
 import fs from 'node:fs';

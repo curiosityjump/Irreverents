@@ -19,8 +19,10 @@ use. A game is a world like any other on the server (`docs/mechanisms/network.md
 ## The pieces
 
 - **A game is the world `game-<CODE>`**, CODE four letters from
-  `ABCDEFGHJKMNPQRSTUVWXYZ` (no I, L, O; `DRAFT:`, `GAME_LETTERS` in
-  `src/net/game-code.ts`, shared by the page and the server). Any other world name (`main`, `?room=…`, `game-abc`) is not a
+  `ABCDEFGHJKMNPQRSTUVWXYZ` (no I, L, O; `GAME_LETTERS` in
+  `src/net/game-code.ts`, shared by the page and the server). `INTENT:`
+  the letters and the length are an id contract: every save is filed
+  under its code and every shared link carries one; add, never take away. Any other world name (`main`, `?room=…`, `game-abc`) is not a
   game and behaves exactly as before. An unknown code is a new game.
 - **The record.** One store collection per game, `save-<code in lower
   case>`, holding exactly one record (written with `replaceAll`):
@@ -47,9 +49,14 @@ use. A game is a world like any other on the server (`docs/mechanisms/network.md
 - **Does it exist?** `GET /game/<CODE>` answers `{ code, valid, exists, savedAt }`
   (the code upper-cased): `exists` is true while it is being played or when
   it has a save. For the start screen's "Join a friend".
-- **`/healthz` `store`** is `store.status()`: whether records last, where,
-  each open collection's size (so the codes of games opened since the
-  start), and any problem.
+- **`/healthz` `store`** is `{ lasting, dir, problems, saves }`: whether
+  records last, where, any problem, and how many games have a save.
+  `INTENT:` a count, never the codes (a code is how anyone joins a game).
+  Asking about a code with no save (`has`, `savedAt`, `load`, so
+  `GET /game/<CODE>`) opens nothing in the store, so it leaves nothing
+  behind. Proof: `scripts/checks/step17-contracts.ts` (control watched to
+  fail on push B's code: three asked-about codes opened three collections,
+  and /healthz listed both codes asked about).
 - **The store itself** (`src/server/store.ts`, `docs/architecture.md`
   "Lasting records: the store"): on the Railway volume when
   `storage.mounted`, else in memory (a local `npm run dev` keeps games until
@@ -181,8 +188,6 @@ file, no "exists", the part state and the body's place gone).
 
 - **A deploy is a restart.** The new build loads what the old one wrote:
   test any change to the record or to content ids against an old record.
-- `has(code)` opens the code's collection, so asking about a code adds it
-  (size 0) to `/healthz`'s list until the server restarts.
 - The tick loop keeps simulating a game while it has players, even all
   away; it is saved and forgotten only once the last is removed.
 

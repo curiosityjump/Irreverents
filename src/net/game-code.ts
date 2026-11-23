@@ -2,9 +2,16 @@
 // the page (src/client/start.ts) and the server (src/server/saves.ts) use
 // the one definition.
 
-/** DRAFT: the letters a game code is made of: no I, L or O, which are misread for 1 and 0. */
+/**
+ * The letters a game code is made of: no I, L or O, which are misread for 1
+ * and 0. INTENT: an id contract (CLAUDE.md, "Don't rename or remove ids once
+ * deployed"): every saved game on the volume is filed under its code
+ * (`save-<code>`) and every shared link carries one (`?game=CODE`), so a
+ * letter taken out orphans games and breaks links. Adding letters (or a
+ * longer code for new games only) is the additive way to change it.
+ */
 export const GAME_LETTERS = 'ABCDEFGHJKMNPQRSTUVWXYZ';
-/** DRAFT: how many letters a code has (23^4, about 280,000 codes). */
+/** How many letters a code has (23^4, about 280,000 codes). INTENT: as GAME_LETTERS: saved games and shared links depend on it. */
 export const GAME_CODE_LENGTH = 4;
 /** A game's world name is this followed by its code (`game-ABCD`). INTENT: an id once deployed; never rename it. */
 export const GAME_PREFIX = 'game-';

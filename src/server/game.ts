@@ -509,6 +509,8 @@ export function attachGame(server: http.Server, opts: GameOptions) {
       };
     },
     /** Step 17: whether a kept game with this code exists (being played now, or saved). */
+    /** Step 17: how many games have a save (for /healthz). */
+    savedGames: (): number => saves?.count() ?? 0,
     /** Step 17: when the kept game's save was last written (ISO time), or null. For GET /game/<CODE>: how a session proves the save at a deploy ran. */
     gameSavedAt: (code: string): string | null => (isGameCode(code) && saves ? saves.savedAt(code) : null),
     gameExists: (code: string): boolean => isGameCode(code) && (worlds.has(GAME_PREFIX + code) || !!saves?.has(code)),
