@@ -115,6 +115,15 @@ re-cut from P03 grassy ruins' clean vine arch (`round3.ruin_arch`) with `srcimpo
   against it. If it never goes live, look at Railway's build log for 040bc8f: locally `npm run build`,
   `check` and `e2e` are green on it.
 
+**Drive-first (the owner, ~17:10 UTC: "everything to utilized the approved assets in the drive").** `drive.py`
+cuts the first-room looks from the approved plates: `bell`, `bell-ringing`, `bell-broken` (P04
+chibi-pixel-interactables, bell posts row 3-4), `plate-up`/`plate-down` (P04 row 1), `gate-closed`/`gate-open`
+(P04 row 1 gates), `door-enter-*` (P07 vibrant-platformer-interactables, the open arched door), `shop-counter`
+(P04 tavern hub, counter panel), `shop-goods` (P04 tavern, bottle), `rubble` and `hide-1x1`/`hide-front-1x1`
+(P07 vibrant, rock heap). Still drawn here, no approved source taken yet: windows and the stained glass,
+curtain hides, cracks, the tents/palisade/rack/fire/flag, rock piles and scaffolds, the HUD faces and icons,
+the moods, fx-speed/dizzy/clang. Crates are the cast lane's sprites.
+
 ## Deviations from the contract
 
 - `ui-use`'s `src` is the whole 48×24 picture (normal then pressed), with no `frames`: that is how

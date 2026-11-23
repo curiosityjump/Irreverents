@@ -15,6 +15,7 @@ import decor_draw as dd
 import import_p01
 import round2 as r2
 import round3 as r3
+import drive as dv
 from px import mix, new, col, paste
 from sizes import ROOT, sizes
 from place import place_all
@@ -69,7 +70,7 @@ def looks_sheets():
     # ---- parts
     s = Sheet(160)
     for (w, h) in sorted(sz['door-enter']):
-        s.add('door-enter-%dx%d' % (w, h), lp.door_enter(w, h))
+        s.add('door-enter-%dx%d' % (w, h), dv.door_enter(w, h))  # P07 vibrant
     for (w, h) in sorted(sz['window']):
         s.add('window-%dx%d' % (w, h), lp.window(w, h))
         s.add('window-broken-%dx%d' % (w, h), lp.window(w, h, True))
@@ -77,21 +78,22 @@ def looks_sheets():
     s.add('part:throne-room:window', lp.stained(1, 3))
     s.add('part:throne-room:window:broken', lp.stained(1, 3, True))
     # round 3: the one-tile hiding places are all in the quarry: rubble over a crevice, not a curtain
-    hide = lambda w, h: r3.hide_1x1() if (w, h) == (1, 1) else lp.curtain(w, h)
-    front = lambda w, h: r3.hide_front_1x1() if (w, h) == (1, 1) else r2.hide_front(w, h, lp.curtain(w, h))
+    hide = lambda w, h: dv.hide_1x1() if (w, h) == (1, 1) else lp.curtain(w, h)
+    front = lambda w, h: dv.hide_front_1x1() if (w, h) == (1, 1) else r2.hide_front(w, h, lp.curtain(w, h))
     for (w, h) in sorted(sz['hide']):
         s.add('hide-%dx%d' % (w, h), hide(w, h))
     for (w, h) in sorted(sz['hide']):
         s.add('hide-front-%dx%d' % (w, h), front(w, h))
     s.newrow()
-    s.add('bell', lp.bell())
-    s.add('bell-ringing', lp.bell_ringing(), frames=4, fps=10)
-    s.add('bell-broken', lp.bell('broken'))
+    # Drive-first (owner, 2026-11-23): the bell, plates, gate, counter, goods and rubble are cut from P04/P07
+    s.add('bell', dv.bell())
+    s.add('bell-ringing', dv.bell_ringing(), frames=4, fps=10)
+    s.add('bell-broken', dv.bell_broken())
     s.newrow()
-    s.add('plate-up', lp.plate(False)); s.add('plate-down', lp.plate(True))
-    s.add('gate-closed', lp.gate(False)); s.add('gate-open', lp.gate(True))
-    s.add('crack-1', lp.crack(0)); s.add('crack-2', lp.crack(1)); s.add('rubble', lp.rubble())
-    s.add('shop-counter', lp.shop_counter()); s.add('shop-goods', lp.shop_goods())
+    s.add('plate-up', dv.plate(False)); s.add('plate-down', dv.plate(True))
+    s.add('gate-closed', dv.gate(False)); s.add('gate-open', dv.gate(True))
+    s.add('crack-1', lp.crack(0)); s.add('crack-2', lp.crack(1)); s.add('rubble', dv.rubble())
+    s.add('shop-counter', dv.shop_counter()); s.add('shop-goods', dv.shop_goods())
     out = [('parts', 'props/parts.png', s)]
     # ---- round 3: the horn on the camp's post (src/client/draw/outpost.ts draws it bottom-centre over 2x3 tiles)
     s = Sheet(160)

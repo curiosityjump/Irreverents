@@ -44,6 +44,8 @@ const ROUND3 = [
   ['quarry-depot', 'quarry-depot', 3, 13],
   ['quarry-cave', 'quarry-cave', 12, 12],
   ['courtyard', 'courtyard', 14, 7],
+  ['street-bell', 'castle-street', 21, 10],
+  ['courtyard-gate', 'courtyard', 21, 7],
 ];
 
 async function sound(page) {
