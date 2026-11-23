@@ -1,6 +1,6 @@
 {
   "id": "step16-room-cave-flyer",
-  "proves": "Step 16, push 1: the flyer alone climbs the cave's steps from its floor to the ledge by the east wall",
+  "proves": "Step 16: the flyer alone climbs the cave's steps from its floor to the ledge by the east wall",
   "room": "quarry-cave",
   "players": [
     {

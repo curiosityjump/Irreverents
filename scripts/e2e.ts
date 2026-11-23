@@ -367,6 +367,8 @@ async function main(): Promise<void> {
       await (await import('./e2e/tune.ts')).tuneFacts({ browser, devices, base, out, fact, errors });
       // Step 12's facts (outpost-*): into the outpost by touch, and the horn post drawn working, then broken (docs/mechanisms/outposts.md).
       await (await import('./e2e/outpost.ts')).outpostFacts({ browser, devices, base, out, fact, errors });
+      // Step 16's facts (quarry-*): into the quarry by touch, and across its road onto the ridge (docs/plan/step-16.md, signal 7).
+      await (await import('./e2e/quarry.ts')).quarryFacts({ browser, devices, base, out, fact, errors });
       // (f) another world does not see them.
       const ctxC = await browser.newContext({ viewport: { width: 800, height: 450 } });
       const C = await ctxC.newPage();

@@ -1,6 +1,6 @@
 {
   "id": "step16-room-cave-infiltrator",
-  "proves": "Step 16, push 1: the infiltrator alone climbs the cave's steps from its floor to the ledge by the east wall",
+  "proves": "Step 16: the infiltrator alone climbs the cave's steps from its floor to the ledge by the east wall",
   "room": "quarry-cave",
   "players": [
     {
@@ -14,7 +14,7 @@
       "player": "a",
       "from": 0,
       "to": 260,
-      "x": 1
+      "x": 0.6
     },
     {
       "player": "a",

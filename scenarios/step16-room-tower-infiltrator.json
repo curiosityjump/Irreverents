@@ -1,6 +1,6 @@
 {
   "id": "step16-room-tower-infiltrator",
-  "proves": "Step 16, push 1: the infiltrator alone climbs the tower from its foot, ledge by ledge by jumping on the spot, to the top floor and its east end",
+  "proves": "Step 16: the infiltrator alone climbs the tower from its foot, ledge by ledge by jumping on the spot, to the top floor, and goes out of its east opening into the depot",
   "room": "quarry-tower",
   "players": [
     {
@@ -122,13 +122,27 @@
   "ticks": 980,
   "expect": [
     {
-      "fact": "standing-on-tile",
+      "fact": "in-room",
       "player": "a",
       "at": 980,
-      "tile": [
-        18,
-        5
-      ]
+      "room": "quarry-depot"
+    },
+    {
+      "fact": "event-where",
+      "event": "changed-room",
+      "between": [
+        0,
+        980
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "where": {
+        "player": "a",
+        "fromRoom": "quarry-tower",
+        "fromDoor": "to-depot"
+      }
     }
   ]
 }

@@ -1,0 +1,280 @@
+{
+  "id": "step16-across-grappler",
+  "proves": "Step 16 signal 2: the grappler alone goes from the courtyard through its doorway, up the road, over the ridge, up the tower and across the depot to its far side",
+  "room": "courtyard",
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 3
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 12,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 24,
+      "to": 28,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 26,
+      "to": 1911,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 108,
+      "to": 126,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 200,
+      "to": 218,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 314,
+      "to": 332,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 394,
+      "to": 412,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 520,
+      "to": 538,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 703,
+      "to": 721,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 817,
+      "to": 835,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 1015,
+      "to": 1033,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 1129,
+      "to": 1147,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 1220,
+      "to": 1238,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 1426,
+      "to": 1444,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 1586,
+      "to": 1604,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 1961,
+      "to": 1979,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 2021,
+      "to": 2039,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 2081,
+      "to": 2099,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 2141,
+      "to": 2159,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 2201,
+      "to": 2219,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 2261,
+      "to": 2279,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 2321,
+      "to": 2339,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 2381,
+      "to": 2399,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 2441,
+      "to": 2459,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 2501,
+      "to": 2519,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 2561,
+      "to": 2579,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 2621,
+      "to": 2639,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 2681,
+      "to": 6681,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 2921,
+      "to": 2939,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 3035,
+      "to": 3053,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 3252,
+      "to": 3270,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 3343,
+      "to": 3361,
+      "hold": [
+        "jump"
+      ]
+    }
+  ],
+  "ticks": 3544,
+  "expect": [
+    {
+      "fact": "in-room",
+      "player": "a",
+      "at": 3544,
+      "room": "quarry-depot"
+    },
+    {
+      "fact": "standing-on-tile",
+      "player": "a",
+      "at": 3544,
+      "tile": [
+        62,
+        14
+      ]
+    }
+  ]
+}

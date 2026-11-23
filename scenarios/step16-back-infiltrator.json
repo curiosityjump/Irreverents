@@ -1,0 +1,117 @@
+{
+  "id": "step16-back-infiltrator",
+  "proves": "Step 16 signals 2 and 3: the infiltrator alone goes back another way: from the top of the tower west through the hidden opening (marked hidden in the tower) onto the ridge's shelf, down, west over the ridge and down the road, and through the doorway into the courtyard",
+  "room": "quarry-tower",
+  "players": [
+    {
+      "id": "a",
+      "character": "infiltrator",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 1292,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 235,
+      "to": 253,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 295,
+      "to": 313,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 340,
+      "to": 358,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 475,
+      "to": 493,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 610,
+      "to": 628,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 817,
+      "to": 835,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 1019,
+      "to": 1037,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 1147,
+      "to": 1165,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 1322,
+      "to": 1326,
+      "y": -1
+    }
+  ],
+  "ticks": 1372,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "changed-room",
+      "between": [
+        0,
+        200
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "where": {
+        "player": "a",
+        "fromRoom": "quarry-tower",
+        "fromDoor": "onto-the-shelf",
+        "toRoom": "quarry-ridge"
+      }
+    },
+    {
+      "fact": "in-room",
+      "player": "a",
+      "at": 1372,
+      "room": "courtyard"
+    }
+  ]
+}

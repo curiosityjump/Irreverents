@@ -1,5 +1,5 @@
 {
-  "//": "DRAFT: the layout is a first pass; the id, the door ids and the part ids are permanent. From the west opening a flat run of 13 tiles (columns 1-13: kept clear for Step 7's machine and its roadblock; place nothing there), then two floor plates six tiles apart (columns 16 and 22), so one body cannot press both, then the gate they hold open (column 25) and beyond it the east opening to the Hall gallery. INTENT: any two bodies open the gate, two friends or one hero and a heavy thing (solo is never locked out by headcount); nothing here counts players. The gallery has another way in and out, over the roofs, so nobody is ever shut in behind the gate. DRAFT: the undercroft's doorway still comes up in the street; it is meant to come up here, west of the gate (column 15 is left free for it).",
+  "//": "DRAFT: the layout is a first pass; the id, the door ids and the part ids are permanent. From the west opening a flat run of 13 tiles (columns 1-13: kept clear for Step 7's machine and its roadblock; place nothing there), then two floor plates six tiles apart (columns 16 and 22), so one body cannot press both, then the gate they hold open (column 25) and beyond it the east opening to the Hall gallery. INTENT: any two bodies open the gate, two friends or one hero and a heavy thing (solo is never locked out by headcount); nothing here counts players. The gallery has another way in and out, over the roofs, so nobody is ever shut in behind the gate. DRAFT: the undercroft's doorway still comes up in the street; it is meant to come up here, west of the gate (column 15 is left free for it). DRAFT (Step 16): an enter doorway between the plates (columns 17-19, rows 6-7, door to-quarry) leads up the road out of the kingdom into the quarry; nothing stands between it and a player alone.",
   "id": "courtyard",
   "name": "Courtyard",
   "tile": 16,
@@ -28,6 +28,9 @@
     },
     "G": {
       "part": "plate-gate"
+    },
+    "q": {
+      "door": "to-quarry"
     }
   },
   "rows": [
@@ -37,8 +40,8 @@
     "#........................#...#",
     "#........................G...#",
     "#........................G...#",
-    "W........................G...E",
-    "W..1.2........3.P...4.Qo.G...E",
+    "W................qqq.....G...E",
+    "W..1.2........3.Pqqq4.Qo.G...E",
     "##############################"
   ],
   "doors": [
@@ -64,6 +67,14 @@
       "use": "walk",
       "to": {
         "room": "hall-gallery",
+        "door": "to-courtyard"
+      }
+    },
+    {
+      "id": "to-quarry",
+      "use": "enter",
+      "to": {
+        "room": "quarry-road",
         "door": "to-courtyard"
       }
     }

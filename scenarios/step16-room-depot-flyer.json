@@ -1,6 +1,6 @@
 {
   "id": "step16-room-depot-flyer",
-  "proves": "Step 16, push 1: the flyer alone crosses the quarry-depot room from its west opening over the yard, through the strongroom front and back (over the shaft in its floor), to the far side, by running and jumping (the main way works for every hero)",
+  "proves": "Step 16: the flyer alone crosses the quarry-depot room from its west opening over the yard, through the strongroom front and back (over the shaft in its floor), to the far side, by running and jumping (the main way works for every hero)",
   "room": "quarry-depot",
   "players": [
     {

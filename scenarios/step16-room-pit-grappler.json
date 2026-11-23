@@ -1,6 +1,6 @@
 {
   "id": "step16-room-pit-grappler",
-  "proves": "Step 16, push 1: the grappler alone crosses the quarry-pit room along its floor from the west end to the opening into the cellar, by running and jumping (the main way works for every hero)",
+  "proves": "Step 16: the grappler alone crosses the quarry-pit room along its floor from the west end to the opening into the cellar, by running and jumping (the main way works for every hero), and goes through it into quarry-depot",
   "room": "quarry-pit",
   "players": [
     {
@@ -20,13 +20,27 @@
   "ticks": 490,
   "expect": [
     {
-      "fact": "standing-on-tile",
+      "fact": "in-room",
       "player": "a",
       "at": 490,
-      "tile": [
-        38,
-        19
-      ]
+      "room": "quarry-depot"
+    },
+    {
+      "fact": "event-where",
+      "event": "changed-room",
+      "between": [
+        0,
+        490
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "where": {
+        "player": "a",
+        "fromRoom": "quarry-pit",
+        "fromDoor": "to-depot-cellar"
+      }
     }
   ]
 }

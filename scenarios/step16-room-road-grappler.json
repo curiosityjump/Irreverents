@@ -1,6 +1,6 @@
 {
   "id": "step16-room-road-grappler",
-  "proves": "Step 16, push 1: the grappler alone crosses the quarry-road room from the doorway at its west end up every ledge and over every dip to the opening onto the ridge, by running and jumping (the main way works for every hero)",
+  "proves": "Step 16: the grappler alone crosses the quarry-road room from the doorway at its west end up every ledge and over every dip to the opening onto the ridge, by running and jumping (the main way works for every hero), and goes through it into quarry-ridge",
   "room": "quarry-road",
   "players": [
     {
@@ -76,13 +76,27 @@
   "ticks": 958,
   "expect": [
     {
-      "fact": "standing-on-tile",
+      "fact": "in-room",
       "player": "a",
       "at": 958,
-      "tile": [
-        82,
-        10
-      ]
+      "room": "quarry-ridge"
+    },
+    {
+      "fact": "event-where",
+      "event": "changed-room",
+      "between": [
+        0,
+        958
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "where": {
+        "player": "a",
+        "fromRoom": "quarry-road",
+        "fromDoor": "to-ridge"
+      }
     }
   ]
 }

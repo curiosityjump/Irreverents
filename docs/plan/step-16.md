@@ -481,6 +481,8 @@ List these; don't grade them.
 
 2026-11-23 15:10 UTC, lead session_017WiGzHt9iJy3caBLkT1Ef4, at e673fa5: `npm run check` green in 77 s; `npm run gates` 5 of 6 (E has no scenario), the number this step must leave unchanged. The heroes' reach, by `simulate()` on `test-body`: jump peak grappler 52.7 px, infiltrator 51.4, flyer 50.0 (124 px with three flaps); boxes 18×30, 10×12, 14×20; run speeds 84, 128, 92 px/s. So the main way steps up at most 2 tiles and gaps at most 2 (`DRAFT:`), and the "not yet" sits at least 10 tiles up.
 
+Slice 1, 2026-11-23 16:10 UTC: the main way (road, ridge, tower, depot) is **248 columns, 12.4 screens**, counted with `python3 -c "import json;print(sum(len(json.load(open(f'content/rooms/quarry-{r}.json'))['rows'][0]) for r in ['road','ridge','tower','depot']))"`. `npm run check` with the quarry joined: see the push 2 commit message.
+
 ## Briefs
 
 - Slice 2, the enemies (signal 4; ranged left out, first to drop): `handoff-prompts/step-16-b-quarry-enemies.md`, written 16:15 UTC, sent to slice 1's builder once slice 1 is joined. Step 12 widened `outpost-fight` to any room at 2027994.
@@ -489,3 +491,19 @@ List these; don't grade them.
 ## Open with the owner
 
 ## Handoff notes
+
+### Slice 1 (`step-16-a-quarry-rooms.md`), 2026-11-23 16:15 UTC, worker `session_017WiGzFnkhyrpJqJ6xa9vTr`
+
+**Landed:** push 1 (9f59f97: the six rooms alone) and push 2 (the joins: every door, the courtyard doorway `to-quarry`, columns 17-19 rows 6-7). Scenarios `step16-*`: per-room crossings for each hero (18), `step16-across-*` (courtyard to the depot's far side, each hero alone), `step16-back-*` (back another way: the tower's hidden top-west opening, the ridge's shelf, the road, the courtyard), `step16-hidden-cave-*`, `step16-secret-*` (each hero's secret with the other two as controls, and a body sent up onto the flyer's ledge), `step16-not-yet-*`; room control `controls/rooms/quarry-doorway-one-end-missing.json`. Controls watched once are listed in the two commit messages.
+
+**Not done:** half of push 2's touch block. `scripts/e2e/quarry.ts` proves by touch that a phone-sized page walks from the start room to the courtyard and up through its doorway into the quarry road (`quarry-in`); crossing the road by touch (stick held east, jump tapped every 0.6 s) stopped at the first two-tile step (drawn at x 174) in its one run and was taken out rather than left failing (`DRAFT:` in the file): the next session should find why the touch hops do not climb a step the scenarios climb. The screenshots of each room at 844×390 and 390×664 were not taken (the e2e saves `e2e-quarry-road.png` only). Push 3 (the undercroft's hidden way home) not started; the cave already has its ledge for it (columns 23-28, row 7; the door goes at column 29, rows 4-6, `to-undercroft`, hidden on the cave side: `HOME3` in the generator below).
+
+**Measured:** `npm run check` 81 s with the rooms alone, **about 3 minutes with the quarry joined** (the way-out check plays every standing place in six big rooms for three heroes): over the 150 s the brief names, told to the lead. The main way: 248 columns, 12.4 screens (command in "Measure").
+
+**How the rooms were made:** a short generator (not committed; in the worker's scratch space) wrote the rows; edit the room files directly from here, each `//` says what is where.
+
+**Atlas lines wanted (Step 8):** all six `quarry-*` rooms are graybox; none has an atlas.
+
+**For the owner to judge by playing** (not asked): whether the run is fun, whether the secrets are findable and satisfying (the ledge, the crawl, the rock and the cellar wall, the hidden openings in the tower and the pit), whether a quarry is the right place.
+
+**Traps met:** spawn numbers in a room file are read in reading order, not by digit; a body nobody plays keeps sliding on landing (the flyer's ledge has a lip so a thrown friend stays on it); the grappler's throw of the heavy rock arrives at 205.7 px/s against the wall's 200.

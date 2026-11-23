@@ -26,7 +26,32 @@ that could trap someone.
       └── cellar doorway ── up into the street's west end (DRAFT: meant for the courtyard, column 15)
                                               └── doorway, column 20 ── cantina (Step 11)
                                                       courtyard └── doorway, column 23 ── outpost (Step 12)
+                                                      courtyard └── doorway, columns 17-19 ── the quarry (Step 16)
+
+ quarry-road ── quarry-ridge ── quarry-tower (foot) ... (top) ── quarry-depot (yard)
+                  │   │   └── shelf ──[hidden in the tower]── tower top
+                  │   └── chasm and the pocket's drop (holes in the last row) ──▶ quarry-pit
+                  └── doorway (columns 70-71) ── quarry-pit's doorway
+ quarry-pit ── east ── quarry-depot (cellar) ;  quarry-pit ──[hidden in the pit]── quarry-cave
 ```
+
+- **The quarry** (Step 16 slice 1, `DRAFT:` layouts, permanent ids; each
+  room's `//` says what is where, `docs/plan/step-16.md` is the step).
+  The courtyard's enter doorway `to-quarry` (columns 17-19, rows 6-7,
+  between the plates) and the road's `to-courtyard` (columns 2-4). The
+  main way, road, ridge, tower and depot, is 248 columns (about 12
+  screens) and works for every hero alone: steps up and gaps at most two
+  tiles, the tower climbed by one-way ledges two tiles apart
+  (`step16-across-*`). A missed jump on the ridge falls into the pit
+  (nothing kills); the pit's doorway comes back up. Hidden, by the
+  rule above: the tower's top-west opening `onto-the-shelf` (the way back,
+  `step16-back-*`) and the pit's west opening `to-cave`
+  (`step16-hidden-cave-*`). The heroes' secrets: the flyer's ledge on the
+  road, the infiltrator's crawl on the ridge, the grappler's rock and the
+  depot cellar's cracked wall (`step16-secret-*`); the pit's ledge eleven
+  tiles up is a "not yet" (`step16-not-yet-*`). `INTENT:` the ridge's
+  crawl pocket has a hole into the pit, so anyone who lands there can
+  leave; do not close it.
 
 - **The outpost** (Step 12, `DRAFT:` layout): the courtyard's enter
   doorway `to-outpost` (ground row 7, column 23, beside the east plate) and the camp's

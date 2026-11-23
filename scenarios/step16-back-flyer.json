@@ -1,0 +1,117 @@
+{
+  "id": "step16-back-flyer",
+  "proves": "Step 16 signals 2 and 3: the flyer alone goes back another way: from the top of the tower west through the hidden opening (marked hidden in the tower) onto the ridge's shelf, down, west over the ridge and down the road, and through the doorway into the courtyard",
+  "room": "quarry-tower",
+  "players": [
+    {
+      "id": "a",
+      "character": "flyer",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 1797,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 324,
+      "to": 342,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 408,
+      "to": 426,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 470,
+      "to": 488,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 658,
+      "to": 676,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 846,
+      "to": 864,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 1133,
+      "to": 1151,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 1415,
+      "to": 1433,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 1592,
+      "to": 1610,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 1827,
+      "to": 1831,
+      "y": -1
+    }
+  ],
+  "ticks": 1877,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "changed-room",
+      "between": [
+        0,
+        200
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "where": {
+        "player": "a",
+        "fromRoom": "quarry-tower",
+        "fromDoor": "onto-the-shelf",
+        "toRoom": "quarry-ridge"
+      }
+    },
+    {
+      "fact": "in-room",
+      "player": "a",
+      "at": 1877,
+      "room": "courtyard"
+    }
+  ]
+}

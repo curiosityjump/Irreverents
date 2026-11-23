@@ -1,0 +1,47 @@
+{
+  "id": "step16-hidden-cave-flyer",
+  "proves": "Step 16 signal 3: the flyer alone, walking west along the pit's floor, goes through the opening in its west wall that the pit marks hidden (painted as wall) into the cave",
+  "room": "quarry-pit",
+  "players": [
+    {
+      "id": "a",
+      "character": "flyer",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 60,
+      "x": -1
+    }
+  ],
+  "ticks": 120,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "changed-room",
+      "between": [
+        0,
+        60
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "where": {
+        "player": "a",
+        "fromRoom": "quarry-pit",
+        "fromDoor": "to-cave",
+        "toRoom": "quarry-cave"
+      }
+    },
+    {
+      "fact": "in-room",
+      "player": "a",
+      "at": 120,
+      "room": "quarry-cave"
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "//": "Step 16: the courtyard without its end of the quarry doorway. The road still names it, so the map is refused: a door's two ends must both be written.",
+  "expect": [
+    "content/rooms/quarry-road.json",
+    "has no door \"to-quarry\""
+  ],
+  "rooms": {
+    "courtyard": {
+      "//": "DRAFT: the layout is a first pass; the id, the door ids and the part ids are permanent. From the west opening a flat run of 13 tiles (columns 1-13: kept clear for Step 7's machine and its roadblock; place nothing there), then two floor plates six tiles apart (columns 16 and 22), so one body cannot press both, then the gate they hold open (column 25) and beyond it the east opening to the Hall gallery. INTENT: any two bodies open the gate, two friends or one hero and a heavy thing (solo is never locked out by headcount); nothing here counts players. The gallery has another way in and out, over the roofs, so nobody is ever shut in behind the gate. DRAFT: the undercroft's doorway still comes up in the street; it is meant to come up here, west of the gate (column 15 is left free for it). DRAFT (Step 16): an enter doorway between the plates (columns 17-19, rows 6-7, door to-quarry) leads up the road out of the kingdom into the quarry; nothing stands between it and a player alone.",
+      "id": "courtyard",
+      "name": "Courtyard",
+      "tile": 16,
+      "legend": {
+        "#": "solid",
+        "=": "oneway",
+        ".": "empty",
+        "1": "spawn",
+        "2": "spawn",
+        "3": "spawn",
+        "4": "spawn",
+        "W": {
+          "door": "to-street"
+        },
+        "E": {
+          "door": "to-gallery"
+        },
+        "o": {
+          "door": "to-outpost"
+        },
+        "P": {
+          "part": "plate-west"
+        },
+        "Q": {
+          "part": "plate-east"
+        },
+        "G": {
+          "part": "plate-gate"
+        }
+      },
+      "rows": [
+        "##############################",
+        "#........................#...#",
+        "#........................#...#",
+        "#........................#...#",
+        "#........................G...#",
+        "#........................G...#",
+        "W........................G...E",
+        "W..1.2........3.P...4.Qo.G...E",
+        "##############################"
+      ],
+      "doors": [
+        {
+          "//": "Step 12: the doorway (push up) to the hostile camp (content/rooms/outpost.json). INTENT (D-061: you can always escape the zone): the camp's side is an enter doorway too, which a body goes through only by asking (a push up, or askForDoor()), and nobody of the camp ever asks: so no fight can shut it and the camp stays in its room.",
+          "id": "to-outpost",
+          "use": "enter",
+          "to": {
+            "room": "outpost",
+            "door": "to-courtyard"
+          }
+        },
+        {
+          "id": "to-street",
+          "use": "walk",
+          "to": {
+            "room": "castle-street",
+            "door": "to-courtyard"
+          }
+        },
+        {
+          "id": "to-gallery",
+          "use": "walk",
+          "to": {
+            "room": "hall-gallery",
+            "door": "to-courtyard"
+          }
+        }
+      ],
+      "parts": [
+        {
+          "id": "plate-west",
+          "kind": "plate"
+        },
+        {
+          "id": "plate-east",
+          "kind": "plate"
+        },
+        {
+          "id": "plate-gate",
+          "kind": "gate",
+          "params": {
+            "plates": [
+              "plate-west",
+              "plate-east"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

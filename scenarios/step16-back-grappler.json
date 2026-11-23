@@ -1,0 +1,181 @@
+{
+  "id": "step16-back-grappler",
+  "proves": "Step 16 signals 2 and 3: the grappler alone goes back another way: from the top of the tower west through the hidden opening (marked hidden in the tower) onto the ridge's shelf, down, west over the ridge and down the road, and through the doorway into the courtyard",
+  "room": "quarry-tower",
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 2011,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 352,
+      "to": 370,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 397,
+      "to": 415,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 444,
+      "to": 462,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 489,
+      "to": 507,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 512,
+      "to": 530,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 557,
+      "to": 575,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 718,
+      "to": 736,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 763,
+      "to": 781,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 924,
+      "to": 942,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 969,
+      "to": 987,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 1282,
+      "to": 1300,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 1327,
+      "to": 1345,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 1590,
+      "to": 1608,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 1635,
+      "to": 1653,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 1785,
+      "to": 1803,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 1830,
+      "to": 1848,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 2041,
+      "to": 2045,
+      "y": -1
+    }
+  ],
+  "ticks": 2091,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "changed-room",
+      "between": [
+        0,
+        200
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "where": {
+        "player": "a",
+        "fromRoom": "quarry-tower",
+        "fromDoor": "onto-the-shelf",
+        "toRoom": "quarry-ridge"
+      }
+    },
+    {
+      "fact": "in-room",
+      "player": "a",
+      "at": 2091,
+      "room": "courtyard"
+    }
+  ]
+}
