@@ -116,6 +116,26 @@ may overrule one with a measurement, recording why here.
   library's build gates A–F have a passing scenario; see
   `docs/measures.md`, M3), `npm start`, `npm run dev`.
 - **`/healthz` keeps reporting the deployed commit**, as the probe does.
+- **A push that only changes documents must not restart the game**
+  (added by the orchestrator, 2026-11-23 04:10 UTC). Measured: every push
+  to `main` redeploys and restarts the server (`/healthz`'s `startedAt`
+  moves with each push), which drops whoever is playing and resets the
+  world; leads and Vision Partner push documents every few minutes, and
+  will still be doing so while the owner plays. So: add Railway's own
+  config file with watch patterns that leave out `docs/**`,
+  `handoff-prompts/**`, `tools/**` and top-level `*.md`, and a health
+  check on `/healthz` so a build that fails to start never replaces the
+  running game. **Prove both:** a docs-only push leaves `startedAt`
+  unchanged; a code push changes it and reports the new commit.
+- **A restart must be survivable anyway.** After a deploy the page
+  rejoins by itself, and if the server reports a different commit than
+  the page was built from, the page reloads itself once to pick up the
+  new build (Step 5 polishes this; the bare mechanism is Step 1's).
+- **`/healthz` then reports the commit that is *running*, which after a
+  docs-only push is older than the tip of `main`.** Make M1 honest about
+  that: also report, or let a script compute, whether everything since
+  the running commit touched only watched-out paths
+  (`docs/measures.md`, M1).
 - **A push to `main` is the deploy**, so the gate before every push is
   `npm run build && npm run check`, plus `npm run e2e` when the client or
   the network changed. Write that gate into `docs/verifying-and-finishing.md`.
