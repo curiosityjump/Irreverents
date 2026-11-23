@@ -77,6 +77,8 @@ that, not Vision Partner's check, is the real pace).
 
 - **Standing duty from 2026-11-23 ~17:10 UTC** (the owner, via the orchestrator; `docs/vision.md` "Visual direction"): the orchestrator files the first "REQ — MISSING-ASSETS — …" doc in 01 REQUESTS from its inventory; after that the asset desk keeps it current (strike items as approved assets land, add new gaps as steps need them) and records integrated repo paths on ChatGPT's Master Asset Production Board.
 
+- **Missing-assets master list filed** (orchestrator, 2026-11-23 ~19:05 UTC): "REQ — MISSING-ASSETS — Game needs with no approved asset yet (master list)", https://docs.google.com/document/d/1d94gDFA54-xtJJsDMhvo6Y8YJizC_TbDRfMyLkRCtCQ/edit (35 needs). Repo map: `docs/mechanisms/asset-coverage.md`. Owed by the asset desk and **blocked on tools**: editing that doc, adding the Master Board rows it proposes (INT-016, INT-017, UI-014/015/016, AUD-008 and the "(new)" ones) and the Drive changelog line. This session's Drive connector can create files and read, but has no Docs/Sheets editing; overwriting the whole changelog or sheet with a file replace would risk the owner's and ChatGPT's content, so it is not done. Unblocks when a session has the Google Docs/Sheets connector, or the owner or ChatGPT adds the rows (the REQ doc lists them).
+
 ### Requests in flight
 
 | Filed (UTC) | REQ doc | Priority |
