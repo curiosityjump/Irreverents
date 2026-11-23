@@ -240,7 +240,7 @@ legend is fine).
 **Nothing here is open with the owner.** The owner is asleep until about
 11:00 UTC. If you hit something that is truly theirs (how a thing should
 feel, what the world is like), take your best reading, build it so either
-answer is a small change, mark it `DRAFT:`, and file it per section 8.
+answer is a small change, mark it `DRAFT:`, and log it in `docs/decisions-log.md` (its header has the format).
 
 ## 6 · How it gets verified
 
