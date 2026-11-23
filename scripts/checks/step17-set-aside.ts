@@ -20,7 +20,7 @@ import type { ScriptCheck } from '../lib/script-checks.ts';
 const check: ScriptCheck = {
   id: 'step17-set-aside',
   gate: null,
-  proves: "a saved game that throws when stepped (an older build's save missing a field) never takes the server down: its player is told and stops reconnecting, the throw is reported once, the save is left byte for byte as it was, joining it again is refused without a second report, and everyone's kingdom keeps running and takes new players",
+  proves: "a saved game that throws when stepped (an older build's save missing a field) never takes the server down: its player is told and stops reconnecting, the throw is reported once, the save is left byte for byte as it was, joining it again is refused without a second report, and everyone's kingdom keeps running and takes new players; a newer build's save is refused the same way, untouched",
   async run(content: Content): Promise<string[]> {
     const failures: string[] = [];
     const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'irreverents-step17-aside-'));
@@ -79,7 +79,20 @@ const check: ScriptCheck = {
       if (fs.readFileSync(file, 'utf8') !== before) failures.push('joining the set-aside game again wrote over its save');
       two.game.saveAll();
       if (fs.readFileSync(file, 'utf8') !== before) failures.push('saving every game (as at a deploy) wrote over the set-aside save');
-      for (const p of [m, n, g, h]) p.leave();
+      // 6. A save written by a newer build: refused with `gone`, file untouched, main still running.
+      const newerFile = path.join(dir, 'irreverents', 'save-nwrs.json');
+      const rec = JSON.parse(before) as { records: (SaveRecord & { version: number })[] };
+      rec.records[0]!.version = 99;
+      rec.records[0]!.code = 'NWRS';
+      fs.writeFileSync(newerFile, JSON.stringify({ version: 1, collection: 'save-nwrs', records: rec.records }));
+      const newerBytes = fs.readFileSync(newerFile, 'utf8');
+      const v = joinAs(content, two.port, 'v', GAME_PREFIX + 'NWRS');
+      await until(failures, 'a player joining a newer build\'s save is told it is gone', () => v.gone() !== null, () => `v is ${v.c.status()}`);
+      if (v.gone() && !/newer/.test(v.gone()!)) failures.push(`the player was not told the save is from a newer version: "${v.gone()}"`);
+      await sleep(300);
+      if (fs.readFileSync(newerFile, 'utf8') !== newerBytes) failures.push("a newer build's save was written over");
+      if (m.c.status() !== 'online') failures.push(`main's player is ${m.c.status()} after the newer save was refused`);
+      for (const p of [m, n, g, h, v]) p.leave();
       await sleep(300);
     } catch (err) {
       failures.push(`the check itself crashed: ${(err as Error).stack ?? String(err)}`);

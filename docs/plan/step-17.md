@@ -104,10 +104,9 @@ Step 17 builder `session_017WiGzGw7XaQ6tZNddFaa8s`, 2026-11-23.
 - Doubt: `/healthz` `store.collections` lists every game code opened since
   the start, so anyone reading `/healthz` can see live codes. The brief asked
   for `store.status()` there; friends, no accounts, so left as asked.
-- Doubt: a game whose save knew a room keeps that room's bodies as saved,
-  so a placement a later build adds to an *existing* room never appears in
-  an existing save (only a wholly new room is filled). Small change in
-  `saves.ts` `load` if the owner wants new things to show up in old games.
+- ~~Doubt: a placement a later build adds to an existing room never appears
+  in an existing save.~~ Fixed by hardening push B (every room is placed
+  again on load; `removed` keeps what left the world out).
 - Not verified on live: the SIGTERM save at a real Railway deploy (verified
   locally against `dist/server.cjs` with a tmpfs as the "volume": killed with
   a player in, the save was written at the kill).
@@ -127,3 +126,14 @@ Step 17 builder `session_017WiGzGw7XaQ6tZNddFaa8s`, 2026-11-23.
   after the push through `GET /game/<CODE>` `savedAt`.
 - The set-aside report carries the throw's first stack line, a path inside
   the built server (`dist/server.cjs:<line>`): code, not personal data.
+- **Stop-save measured on live, 2026-11-23 18:03 UTC** (hardening push A
+  live): one scripted player held in game SGTV (its save stays on the
+  volume, harmless). Periodic saves on a 30 s grid (…:18.0, …:48.0); at
+  the deploy of cf38dc4 the save landed at 18:03:01.265, off the grid, 2.45 s
+  before the new server's `startedAt` (18:03:03.717): the SIGTERM save runs
+  on Railway with `exec` and `drainingSeconds: 10`. For a few seconds after
+  each deploy some `/game` polls got a JSON body without `savedAt`,
+  presumably Railway's edge answering 502 in JSON during the switch; steady
+  after (30 of 30).
+- e2e flaked once on `t-throw-friend` (B not flying after a re-grab, a
+  `?room=` world saves never touch); green on the immediate re-run.

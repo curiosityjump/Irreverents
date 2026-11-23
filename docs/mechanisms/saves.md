@@ -24,10 +24,12 @@ use. A game is a world like any other on the server (`docs/mechanisms/network.md
   game and behaves exactly as before. An unknown code is a new game.
 - **The record.** One store collection per game, `save-<code in lower
   case>`, holding exactly one record (written with `replaceAll`):
-  `{ version: 1, code, savedAt, commit, rooms, world }`. `world` is the
-  `World` with every player's character taken out; `rooms` lists the
-  content rooms the writing build had. `INTENT:` a contract once on the
-  volume: add fields, never rename.
+  `{ version: 1, code, savedAt, commit, rooms, world, shapes, removed }`.
+  `world` is the `World` with every player's character taken out; `rooms`
+  lists the content rooms the writing build had; `shapes` (added by the
+  hardening) each content room's width, height, fingerprint and its parts'
+  own tiles; `removed` the placement ids not in the world when saved.
+  `INTENT:` a contract once on the volume: add fields, never rename.
 - **When it is saved:** every `SAVE_EVERY_MS` (30 s, `DRAFT:`) while anyone
   is in it (the server's tick loop), when its last player is removed (a
   `bye`, or `staleSeconds` after the socket went), and for every game being
@@ -35,13 +37,13 @@ use. A game is a world like any other on the server (`docs/mechanisms/network.md
   server: `src/server/main.ts`). After the last-player save the world is
   forgotten in memory like any private world.
 - **Loading** is in `makeWorld`, the one place a world is created: a game
-  with a save is built from it; content's placements are added only in
-  rooms the save never knew (a room a later build added). **What no longer
-  fits is dropped, never refused** (`INTENT:`): a body whose room is gone,
-  or whose kind is neither a character nor a bodiless `~` thing, and the
-  state of a room that is gone. The drop is said once per load, as a
-  `server` line in `GET /debug/errors` (no code in it: no personal data).
-  A player character in an old record is never loaded.
+  with a save is built from it (`load` in `saves.ts`; "Later builds"
+  below). **What no longer fits is dropped, never refused** (`INTENT:`): a
+  body whose room is gone, or whose kind is neither a character nor a
+  bodiless `~` thing, and the state of a room that is gone. The drop is
+  said once per load, as a `server` line in `GET /debug/errors` (no code
+  in it: no personal data). A player character in an old record is never
+  loaded.
 - **Does it exist?** `GET /game/<CODE>` answers `{ code, valid, exists, savedAt }`
   (the code upper-cased): `exists` is true while it is being played or when
   it has a save. For the start screen's "Join a friend".
@@ -52,6 +54,46 @@ use. A game is a world like any other on the server (`docs/mechanisms/network.md
   "Lasting records: the store"): on the Railway volume when
   `storage.mounted`, else in memory (a local `npm run dev` keeps games until
   it stops).
+
+## Later builds (`load` and `save` in `src/server/saves.ts`)
+
+Every deploy loads saves the previous build wrote. The hardening (push B)
+made four things survive that:
+
+- **Placements** (`INTENT:`): loading places every room's placements again.
+  `populateRoom` skips an id already in the world, so a body a later build
+  places appears in old games, and a body that was moved stays where it
+  was. A placed body that left the world for good is in the record's
+  `removed` and is taken out again, never brought back. (Nothing removes a
+  placed body today; only cantina regulars, which a system makes, leave.)
+  A record from before `removed` is loaded the same way, which is right
+  for the same reason.
+- **Tiles in an edited room.** Tile overrides are by cell index, so after
+  a room was widened they stood in the wrong cells: invisible walls, gates
+  that did not block (the review's courtyard, +2 columns: solid at (17,4),
+  (15,5), (13,6), (11,7)). Every override is laid by a part
+  (`setPartSolid`), so for a room whose fingerprint (`shapes`) changed,
+  each part whose own kind and tiles are unchanged keeps its state and its
+  overrides, moved to the same (x, y) in the new grid; the rest of that
+  room's state goes, and its parts start again (a broken wall whose part
+  moved is whole again). Said once in `/debug/errors`. `DRAFT:` a part
+  that moved could be followed by its id; not done. A record from before
+  `shapes` keeps its rooms' state as is.
+- **Every top-level `World` field** is kept (no list of names, as the
+  network layer does): only `entities` and `rooms` are looked into.
+- **A newer record** (`version` above `SAVE_VERSION`) is never loaded and
+  never written over, as `store.ts` treats its own files. Joining it is
+  refused with `gone` ("made by a newer version") and said once.
+
+Proof: `scripts/checks/step17-later-builds.ts` (under 1 s; no server): a
+world set up and stepped three ticks, one placement removed, a top-level
+field added, saved; loaded by a "later build" with every room that has
+overrides widened by two columns on the right and one new placement. Then
+a version-2 record is loaded and saved over. The server's refusal of a
+newer record is in `step17-set-aside.ts`. Control watched to fail
+(2026-11-23), push A's `saves.ts`: the new body missing; stray overrides in
+every widened room, the courtyard's at exactly the review's cells; the
+field lost; the newer record loaded and written over.
 
 ## A world that throws (`setAside`, `src/server/game.ts`)
 
@@ -76,8 +118,10 @@ process, `main` included, again at every reconnect. Now (`INTENT:`):
   `showGone` in `src/client/start.ts` shows the reason with **Back to the
   start screen** (`INTENT:` the way out). The tab forgets it was playing
   that world, so a reload shows the start screen.
-- This contains the crash; it does not make an old save run. Making later
-  builds keep old saves working is the hardening brief's push B.
+- This contains the crash; it does not make an old save run (an NPC
+  missing a field still throws). "Later builds" covers what a save can
+  carry across builds; a component field a later build adds still needs
+  that system to default it, or the game is set aside.
 
 Proof: `scripts/checks/step17-set-aside.ts` (about 2 s; harness in
 `scripts/lib/save-harness.ts`). A real game is saved, made "old" by

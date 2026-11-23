@@ -113,8 +113,8 @@ export function attachGame(server: http.Server, opts: GameOptions) {
   /** DRAFT: the words a player is shown when their world is set aside. */
   const whyGone = (code: string | null | undefined): string =>
     code ? 'This saved game could not run on this version. It was kept as it was.' : 'Something went wrong in this world, so it was started again.';
-  const tellGone = (sock: WebSocket | null, code: string | null | undefined): void => {
-    send(sock, { t: 'gone', why: whyGone(code) });
+  const tellGone = (sock: WebSocket | null, code: string | null | undefined, why = whyGone(code)): void => {
+    send(sock, { t: 'gone', why });
     sock?.close(4002, 'set aside');
   };
   const describe = (err: unknown): string => {
@@ -147,20 +147,21 @@ export function attachGame(server: http.Server, opts: GameOptions) {
    * THE one place a world is created (docs/mechanisms/network.md). Anything
    * a new world should start with goes here.
    */
-  const makeWorld = (name: string): GameWorld => {
+  const makeWorld = (name: string): GameWorld | { newer: number } => {
     const gw: GameWorld = { name, world: createWorld(), players: new Map(), owed: 0, events: [] };
-    // Step 17: a kept game (`game-<CODE>`) with a save is built from it; a
-    // new code, `main` and every `?room=` world start fresh, as before.
+    // Step 17: a kept game (`game-<CODE>`) with a save is built from it
+    // (saves.ts load places every room's placements again itself); a new
+    // code, `main` and every `?room=` world start fresh, as before.
     const code = saves ? gameCode(name) : null;
     const saved = code ? saves!.load(code) : null;
+    if (saved && 'newer' in saved) return saved;
     if (code) {
       gw.game = code;
       gw.savedAt = Date.now();
     }
     if (saved) gw.world = saved.world;
-    // Whatever content/placements/ puts in each room (crates, dummies, people);
-    // for a loaded game, only in rooms its save never knew.
-    for (const roomId of saved ? saved.newRooms : Object.keys(content.rooms)) populateRoom(gw.world, content, roomId);
+    // Whatever content/placements/ puts in each room (crates, dummies, people).
+    else for (const roomId of Object.keys(content.rooms)) populateRoom(gw.world, content, roomId);
     return gw;
   };
 
@@ -243,7 +244,18 @@ export function attachGame(server: http.Server, opts: GameOptions) {
       return null;
     }
     let gw = worlds.get(name);
-    if (!gw) worlds.set(name, (gw = makeWorld(name)));
+    if (!gw) {
+      const made = makeWorld(name);
+      if ('newer' in made) {
+        // INTENT: a save written by a newer build is neither loaded nor
+        // written over (saves.ts); its players are told, as for a set-aside game.
+        if (code) setAsideGames.add(code);
+        report(`a kept game's save is version ${made.newer}, newer than this build knows; it was left as it was and not loaded`);
+        tellGone(sock, code, 'This saved game was made by a newer version of the game. It was kept as it was.');
+        return null;
+      }
+      worlds.set(name, (gw = made));
+    }
     let p = gw.players.get(m.player);
     if (p) {
       // INTENT: the same player id coming back takes its character over; it

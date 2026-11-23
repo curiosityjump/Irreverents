@@ -8,7 +8,9 @@
 // component: a save is the whole World with the players taken out.
 import type { Content } from '../content/types.ts';
 import { clone } from '../net/protocol.ts';
-import type { World } from '../sim/types.ts';
+import type { Room } from '../content/kinds/rooms.ts';
+import type { RoomState, World } from '../sim/types.ts';
+import { populateRoom, removeEntity } from '../sim/world.ts';
 import type { Store } from './store.ts';
 import { gameCode, GAME_PREFIX, isGameCode } from '../net/game-code.ts';
 
@@ -34,13 +36,52 @@ export interface SaveRecord {
   savedAt: string;
   /** The commit of the server that wrote it. */
   commit: string;
-  /** Every content room this build had when it saved. A room added by a later build is populated as new; one listed here is not (what was done to it stays done). */
+  /** Every content room this build had when it saved. Kept for the record; loading no longer depends on it. */
   rooms: string[];
   /** The World with every player's character taken out (they are put back as they join). */
   world: World;
+  /**
+   * Hardening (additive): each content room's shape when saved, so a later
+   * build that edited a room can tell (its tile overrides are by cell
+   * index). Absent in records written before it.
+   */
+  shapes?: Record<string, RoomShape>;
+  /**
+   * Hardening (additive): ids of content placements that were not in the
+   * world when saved, so loading (which places every room's placements
+   * again, to bring in what later builds added) never brings back a
+   * placed body that left the world for good. Absent in older records.
+   */
+  removed?: string[];
+}
+
+/** A room as a save saw it: its width and height, a fingerprint of its cells and parts, and each part's own tiles. */
+export interface RoomShape {
+  w: number;
+  h: number;
+  sig: string;
+  parts: Record<string, string>;
 }
 
 const collectionName = (code: string): string => `save-${code.toLowerCase()}`;
+
+/** FNV-1a, 32 bits, as hex: enough to tell that a room file changed. */
+function fingerprint(text: string): string {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < text.length; i++) {
+    h ^= text.charCodeAt(i);
+    h = Math.imul(h, 0x01000193) >>> 0;
+  }
+  return h.toString(16).padStart(8, '0');
+}
+const partSig = (p: Room['parts'][number]): string => `${p.kind}|${p.tiles.map((t) => `${t.tx},${t.ty}`).join(' ')}`;
+function shapeOf(room: Room): RoomShape {
+  const parts: Record<string, string> = {};
+  for (const p of room.parts) parts[p.id] = partSig(p);
+  return { w: room.w, h: room.h, sig: fingerprint(JSON.stringify([room.w, room.h, room.cells, room.parts.map((p) => [p.id, partSig(p)])])), parts };
+}
+
+export type Loaded = { world: World } | { newer: number } | null;
 
 export interface Saves {
   /** Whether a game with this code has a save. */
@@ -48,13 +89,13 @@ export interface Saves {
   /** When the game's save was written (ISO time), or null when it has none. */
   savedAt(code: string): string | null;
   /**
-   * The saved world of a game, fitted to this build's content (with the
-   * rooms the save never knew, to be populated as new), or null when
-   * there is none (a new game). Never throws and never refuses: what no
-   * longer fits is dropped and said once through `problem`.
+   * The saved world of a game, fitted to this build's content, or null when
+   * there is none (a new game), or `{ newer }` when the record is a version
+   * this build does not know (never loaded, never written over). Never
+   * throws: what no longer fits is dropped and said once through `problem`.
    */
-  load(code: string): { world: World; newRooms: string[] } | null;
-  /** Keep this world as the game's save (its players are left out). Never throws. */
+  load(code: string): Loaded;
+  /** Keep this world as the game's save (its players are left out). Never throws; never writes over a newer version's record. */
   save(code: string, world: World): void;
 }
 
@@ -67,30 +108,39 @@ export interface SavesOptions {
 
 export function createSaves(store: Store, opts: SavesOptions): Saves {
   const { content } = opts;
+  const latest = (code: string): SaveRecord | undefined => {
+    const records = store.collection<SaveRecord>(collectionName(code)).all();
+    return records[records.length - 1];
+  };
   return {
     savedAt(code) {
       if (!isGameCode(code)) return null;
-      const records = store.collection<SaveRecord>(collectionName(code)).all();
-      const at = records[records.length - 1]?.savedAt;
+      const at = latest(code)?.savedAt;
       return typeof at === 'string' ? at : null;
     },
     has(code) {
       if (!isGameCode(code)) return false;
-      return store.collection<SaveRecord>(collectionName(code)).all().length > 0;
+      return latest(code) !== undefined;
     },
     load(code) {
       if (!isGameCode(code)) return null;
-      const records = store.collection<SaveRecord>(collectionName(code)).all();
-      const rec = records[records.length - 1];
+      const rec = latest(code);
       if (!rec || typeof rec !== 'object' || !rec.world || !Array.isArray(rec.world.entities)) return null;
-      const world: World = { tick: Number.isFinite(rec.world.tick) ? rec.world.tick : 0, entities: [] };
+      // INTENT: a record from a newer build is never read as if this build
+      // understood it, and never written over (as store.ts does for its files).
+      if (typeof rec.version === 'number' && rec.version > SAVE_VERSION) return { newer: rec.version };
+      // Every top-level field of the World is kept, not a list of names
+      // (docs/mechanisms/network.md: whatever a later step adds there travels).
+      const { tick, entities, rooms, ...rest } = rec.world;
+      const world: World = { ...rest, tick: Number.isFinite(tick) ? tick : 0, entities: [] };
       // INTENT: a save that no longer fits the content after a deploy (a
       // room or a kind gone) drops what doesn't fit and loads the rest. It
       // never refuses to load: that is what keeps the owner's game alive
       // across every push. A kind starting with `~` is a bodiless thing
       // (src/sim/npc/state.ts, src/sim/cantina.ts), not a character.
+      const said: string[] = [];
       const dropped: string[] = [];
-      for (const e of rec.world.entities) {
+      for (const e of entities) {
         if (!e || typeof e !== 'object' || typeof e.id !== 'string') continue;
         if (e.player !== null) continue; // never saved; an old record that had one is not trusted with it
         const kindKnown = typeof e.kind === 'string' && (e.kind.startsWith('~') || !!content.characters[e.kind]);
@@ -101,32 +151,72 @@ export function createSaves(store: Store, opts: SavesOptions): Saves {
         world.entities.push(e);
       }
       world.entities.sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
+      if (dropped.length > 0) said.push(`${dropped.length} bod${dropped.length === 1 ? 'y' : 'ies'} (${[...new Set(dropped)].slice(0, 8).join(', ')}) whose room or kind this build no longer has`);
+
+      // Room state. Tile overrides are by cell index (room-state.ts), so a room
+      // edited since the save would put them in the wrong places: invisible
+      // walls, gates that do not block. Every override is laid by a part
+      // (room-parts.ts, setPartSolid), so in a changed room each part whose
+      // own tiles are unchanged keeps its state and its overrides, moved to
+      // the same (x, y) in the new grid; the rest of that room's state goes.
       const goneRooms: string[] = [];
-      if (rec.world.rooms && typeof rec.world.rooms === 'object') {
-        for (const [roomId, state] of Object.entries(rec.world.rooms)) {
-          if (content.rooms[roomId]) (world.rooms ??= {})[roomId] = state;
-          else goneRooms.push(roomId);
+      const changed: string[] = [];
+      for (const [roomId, raw] of Object.entries(rooms ?? {})) {
+        const room = content.rooms[roomId];
+        if (!room) {
+          goneRooms.push(roomId);
+          continue;
         }
+        const state = raw as RoomState;
+        const was = rec.shapes?.[roomId];
+        if (!was || was.sig === shapeOf(room).sig) {
+          // Same room (or a record from before shapes, which the builds since were read with as-is).
+          (world.rooms ??= {})[roomId] = state;
+          continue;
+        }
+        changed.push(roomId);
+        const kept: RoomState = { tiles: {}, parts: {} };
+        const now = shapeOf(room).parts;
+        const keepParts = room.parts.filter((p) => was.parts[p.id] !== undefined && was.parts[p.id] === now[p.id]);
+        for (const p of keepParts) if (state.parts?.[p.id]) kept.parts[p.id] = state.parts[p.id]!;
+        const cells = new Set(keepParts.flatMap((p) => p.tiles.map((t) => `${t.tx},${t.ty}`)));
+        for (const [index, code] of Object.entries(state.tiles ?? {})) {
+          const i = Number(index);
+          const tx = i % was.w;
+          const ty = Math.floor(i / was.w);
+          if (cells.has(`${tx},${ty}`)) kept.tiles[ty * room.w + tx] = code;
+        }
+        (world.rooms ??= {})[roomId] = kept;
       }
-      if (dropped.length > 0 || goneRooms.length > 0) {
-        // INTENT (src/server/errors.ts): no personal data, so not the code either.
-        const parts: string[] = [];
-        if (dropped.length > 0) parts.push(`${dropped.length} bod${dropped.length === 1 ? 'y' : 'ies'} (${[...new Set(dropped)].slice(0, 8).join(', ')})`);
-        if (goneRooms.length > 0) parts.push(`the state of ${goneRooms.length} room(s) (${goneRooms.slice(0, 8).join(', ')})`);
-        opts.problem(`a saved game written by ${String(rec.commit).slice(0, 12)} was loaded without ${parts.join(' and ')} that this build no longer has`);
-      }
-      // Rooms this build has that the save never knew are populated as new.
-      const known = new Set(Array.isArray(rec.rooms) ? rec.rooms : Object.keys(content.rooms));
-      return { world, newRooms: Object.keys(content.rooms).filter((r) => !known.has(r)) };
+      if (goneRooms.length > 0) said.push(`the state of ${goneRooms.length} room(s) this build no longer has (${goneRooms.slice(0, 8).join(', ')})`);
+      if (changed.length > 0) said.push(`what was done in ${changed.length} room(s) changed since (${changed.slice(0, 8).join(', ')}), except parts that did not move`);
+
+      // INTENT: every room's placements are placed again: populateRoom skips
+      // an id already in the world, so what a later build added appears and
+      // what was moved stays where it was. What left the world for good
+      // (`removed`) is taken out again, never brought back.
+      for (const roomId of Object.keys(content.rooms)) populateRoom(world, content, roomId);
+      for (const id of Array.isArray(rec.removed) ? rec.removed : []) if (typeof id === 'string') removeEntity(world, id);
+
+      // INTENT (src/server/errors.ts): no personal data, so not the code either.
+      if (said.length > 0) opts.problem(`a saved game written by ${String(rec.commit).slice(0, 12)} was loaded without ${said.join('; and without ')}`);
+      return { world };
     },
     save(code, world) {
       if (!isGameCode(code)) return;
       try {
+        const old = latest(code);
+        if (old && typeof old.version === 'number' && old.version > SAVE_VERSION) return; // a newer build's record: never written over
         const w = clone(world);
         // INTENT: player characters are never saved. They are put back as
         // their players join; one loaded from a save would stand there for ever.
         w.entities = w.entities.filter((e) => e.player === null);
-        const record: SaveRecord = { version: SAVE_VERSION, code, savedAt: new Date().toISOString(), commit: opts.commit, rooms: Object.keys(content.rooms), world: w };
+        const here = new Set(w.entities.map((e) => e.id));
+        const removed: string[] = [];
+        for (const roomId of Object.keys(content.placements ?? {})) for (const p of content.placements[roomId]!.place) if (!here.has(p.id)) removed.push(p.id);
+        const shapes: Record<string, RoomShape> = {};
+        for (const [id, room] of Object.entries(content.rooms)) shapes[id] = shapeOf(room);
+        const record: SaveRecord = { version: SAVE_VERSION, code, savedAt: new Date().toISOString(), commit: opts.commit, rooms: Object.keys(content.rooms), world: w, shapes, removed };
         store.collection<SaveRecord>(collectionName(code)).replaceAll([record]);
       } catch (err) {
         opts.problem(`a game could not be saved (${err instanceof Error ? err.message : String(err)})`);
