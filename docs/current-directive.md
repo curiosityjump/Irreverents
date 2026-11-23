@@ -174,20 +174,21 @@ orchestrator when it can answer faster than they can decide. Only what
 the owner alone can supply goes to `docs/questions-inbox.md`, and nothing
 waits on it.
 
-**Status (orchestrator session_017WiGzJeh7Tuov59d8XYmru, 2026-11-23 08:35
-UTC):** every session was stopped by the shared usage limit from about
-04:58 to 08:26 UTC, so the 10:00 and 10:30 UTC times above no longer
-hold; the rule that still binds is the last one (no code push while
-anyone is playing). Live runs 4a13056 (`/healthz`, 08:31 UTC): one
-character, keyboard only, in the grey test hall. Result 1 is not met:
-Step 1's second gate (two players on the real page, with touch) has not
-landed and is the first priority. On `main` but not yet playable on a
-phone: three heroes and switching, the first part of hit, grab and throw,
-two joined rooms, three people with moods (test room only), the Hall's
-store and pedestal. Running, one worker each: Steps 1, 3, 2, 6. Held:
-Steps 4 and 7. One allowance until 13:20 UTC; aim to be quiet by about
-11:00 UTC with a verified build live. The morning report is due by about
-10:45 UTC (`docs/for-the-orchestrator.md`, handoff entry).
+**Status (orchestrator session_017WiGzJeh7Tuov59d8XYmru, 2026-11-23 09:55
+UTC, all work stopped for the owner's morning):** results 1 to 6 are on
+the live game (ade2616) by scripted check: two players together with
+touch and reconnect; phone-sized controls; hit, grab, carry, throw and
+three heroes; a five-room kingdom with a two-player gate, two unmarked
+routes and a secret; townspeople with moods, a bell, an alarm and a guard
+who chases through doors; the king, mid-speech and throwable through his
+window. `npm run gates`: 5 of 6 (E, the Hall, is not on the page; result
+7). Result 8 (the end-to-end tour) was not run: nobody, human or script,
+has played the whole thing through, and no real iPhone has been tried.
+The night lost about three and a half hours to the shared usage limit
+(04:58 to 08:26 UTC); the weekly limit showed a warning at 09:40 UTC, so
+everything was stopped at 09:50 to leave the owner room to talk and for
+one fix. **No code push while `/healthz` shows players above 0.** What is
+owed next is in `docs/for-the-orchestrator.md`, handoff entry.
 
 ## History
 

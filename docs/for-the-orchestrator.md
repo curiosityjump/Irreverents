@@ -112,164 +112,58 @@ different from being a lead").
 
 `CLAUDE.md`, "Architecture at a glance", says "**State** is the `World` object only. Nothing is persisted". The store (`src/server/store.ts`, 7d101dd) exists and nothing opens it yet, so the line is still true. It becomes false when Step 7's slice 2 wires it into the server (after Step 1's Gate 2). Suggested wording then: "Nothing is persisted except small records in the store (`docs/architecture.md`, 'Lasting records')". Yours to edit; I will say when the wiring lands.
 
-### Handoff, orchestrator session_017WiGzFWfLir1ATiSP7c5E5, 2026-11-23 08:35 UTC, at the commit that adds this entry
+### Handoff, orchestrator session_017WiGzJeh7Tuov59d8XYmru, 2026-11-23 09:58 UTC, at the commit that adds this entry
 
-**Read this before anything else: there is one allowance and it has to last.**
-Every session was stopped at about 04:58 UTC by the account's shared
-five-hour usage limit and nothing ran until 08:26 UTC
-(`docs/process-observations.md`, last entry). The window that opened at
-08:20 UTC is the only allowance until 13:20 UTC: the month's extra-usage
-limit is spent. The owner is on US Eastern time, asleep since about 04:40
-UTC, and will wake inside this window. Nobody can read how much is left;
-the warning comes about a minute before the stop. The last window was
-emptied in about 100 minutes by: this orchestrator's own turns (683k of
-context re-read on every tool call), five orchestrator workflows, and
-sixteen build sessions at once. So, as the successor:
-- **Stay small.** Run no workflows and no subagent fan-outs. Read what
-  this entry names, not the whole repository. Hand off again on context
-  size.
-- **Four leads, one worker each, and hold the rest.** Resumed by me at
-  08:30 UTC, in priority order: Step 1 (Gate 2), Step 3, Step 2, Step 6.
-  Held: Step 4, Step 7. Open nothing new unless one of the four stops.
-- **Aim to be quiet by about 11:00 UTC** with a verified build live and
-  allowance left for the owner's morning (their talk with Vision Partner,
-  a fix if the first real iPhone shows a fault).
+**Why now:** my context is about 400k tokens after 90 minutes (each tool
+reconnect re-adds the tool list), and the owner's morning is the natural
+break. The next orchestrator is the owner's to start.
 
-**What is live and what is not (measured 08:27 UTC).** Live runs 4a13056,
-up since 04:57:35, storage mounted. It is still the page from Step 1's
-first gate: one character, keyboard only, no touch, no second player on
-screen, starting in the grey test hall. **Step 1's second gate (Gate 2)
-did not land** and is the whole morning: until it does, nothing built
-tonight can be played on a phone. On `main` and passing `npm run check`
-at 04:55 (53 scenarios): the simulation core; three heroes, one shared
-party, switching; bodies nobody plays, crates and dummies; the first part
-of hit, grab and throw with the effects contract; a throne room and a
-castle street joined by doors that carry anyone; a shopkeeper, a guard
-and a villain with three moods (in a test room only); the Hall's store
-on the owner's volume and how a record looks on its pedestal. None of
-this is visible on the live page except by keyboard in the test hall.
+**Read first: the allowance.** `rate_limit_info` read `allowed_warning`,
+type `seven_day_overage_included`, resetting about 13:00 UTC, at 09:40
+UTC. Read it (`get_session`, no id) before starting anything. Until it
+resets: one worker at a time, only for what the owner asks for or a fault
+on live.
 
-**Running (all are my children; re-point them to you, pickup step 2):**
-- Step 1 lead `session_017WiGzEwLs3ng2ZPpRZgctn`; its Gate 2 worker is
-  named in `docs/plan/step-1.md` (handoff notes) and briefed in
-  `handoff-prompts/step-1-gate-2-together.md`. **First priority.** Told
-  to land it in pieces: two players seeing each other move on the real
-  page with touch first, then rejoin, then the rest.
-- Step 3 lead `session_017WiGzGUAnvQfWco5vTcMX4`; slice A worker
-  `session_017WiGzFewfghZxs2P5YqJss` (second push: start in the throne
-  room, the way-out check, door drawing), slice B worker
-  `session_017WiGzHCNJSCum98mk1tFku` (the other three rooms, plates and
-  gate, breakable wall and the window for Step 6, hiding place, the
-  secret). Told: slice A's second push first, one worker at a time.
-- Step 2 lead `session_017WiGzGRnRoAeW5Ep5iSycV`; "the hit" worker
-  `session_017WiGzHbbov1AymyWrXuvge`, "the body" worker
-  `session_017WiGzEqGVmbgjJyorj73iV` (its work looked landed). Told: the
-  hit only; no tuning panel or extras until Gate 2 is live.
-- Step 6 lead `session_017WiGzH9B4usC2uz4woP8Sa`; slice A worker
-  `session_017WiGzFDAdFWLNWSBgGNoEU` (the king, his speech, throwable and
-  still talking). Told: land slice A, then hold.
-- **Held** Step 4 lead `session_017WiGzG4WzuJfHAu3XWoUhc` (slice 1 done
-  and reviewed; slice 2 worker `session_017WiGzHFR7FTJpj44ENRzvm` was
-  mid-flight; slice 3, the people into the castle street, briefed and
-  held). When you release it: **slice 3 first**, so the owner sees people.
-- **Held** Step 7 lead `session_017WiGzF4QGboHBQtunwprhk` (store and
-  pedestal landed and reviewed; detector worker
-  `session_017WiGzJNvq96pjtVZnaRP9N` mid-flight; second worker
-  `session_017WiGzFwud41UiryQTtHH52`).
-- Vision Partner `session_017WiGzHC3CvjTNZqCuxa8Ex` (also the asset
-  coordinator, with an hourly self-wake that will have failed during the
-  stop). ChatGPT kept working: `python3 -I tools/drive_sync.py --check`
-  shows what art and sound has landed since 04:22 UTC.
-Each lead decides whether its stopped worker continues or is relaunched
-fresh against the same pushed brief (`docs/spawn-failures.md`, "Docs carry
-state, sessions don't").
+**Running:** nothing builds. Idle, large contexts, do not reuse for new
+work (start fresh leads from the step files): Step 2 lead
+`session_017WiGzGRnRoAeW5Ep5iSycV`, Step 4 lead
+`session_017WiGzG4WzuJfHAu3XWoUhc`, Step 6 lead
+`session_017WiGzH9B4usC2uz4woP8Sa`, Step 7 lead
+`session_017WiGzF4QGboHBQtunwprhk` (never re-pointed to me; I owe it the
+correction that it did NOT delete another step's entries, Step 4's lead
+withdrew the claim). Step 5 lead `session_017WiGzJfkNbzJfpRVPhWoeK` is
+fresh (my child) and holds Step 5 for after the owner has played. Steps 1
+and 3 leads are archived. Vision Partner
+`session_017WiGzHC3CvjTNZqCuxa8Ex` has the morning report's words. The
+first orchestrator `session_017WiGzFWfLir1ATiSP7c5E5` only forwards;
+never archive it.
 
-**Armed check-ins:** none. I deleted my 09:50 and 10:30 UTC wakes; arm
-your own. A check-in about every thirty minutes is enough.
+**Armed check-ins:** none of mine. Vision Partner's hourly asset check
+(`trig_01B6h7mKw47J36oxJaxWf2NU`) is its own.
 
-**Next moves, in order, as each thing lands:**
-1. When Gate 2's first piece is live: re-run it yourself (two headless
-   browsers, one phone-sized by touch, against the live address in a
-   private `?room=`), then write the first morning report (below).
-2. The start room must become the throne room (Step 3 slice A's second
-   push) and the server must fill a room with its people and things when
-   a player enters (Step 1); without both, the king and the townspeople
-   exist only in tests. Step 4's lead flagged this at 04:58.
-3. "Use" (buy, take, ring the bell) has never been pressed on a
-   phone-sized page; Step 1's Gate 2 brief carries it (dcfa465).
-4. Steps 5 (phone comfort), 8 (art and sound) and 10 (the first ten
-   minutes, played end to end) open when Step 1 closes. With the budget
-   as it is, prefer giving Step 10's tour and Step 5's essentials to the
-   lead that frees up first over spawning new leads; art that has
-   arrived can be wired by one worker.
-5. Steps 9, 11, 12, 14, 15 are written and queued (11, 12, 14, 15 are
-   unreviewed drafts: their status lines say so). They are for after the
-   essentials, probably after the owner has played.
+**Live (measured 09:55 UTC):** ade2616, players 0, `/debug/errors` empty,
+`npm run check:live` ok, `npm run gates` 5 of 6. Rule in force: no code
+push while players is above 0; read `/debug/errors` before any code push
+(a deploy empties it).
 
-**The morning report** (`docs/current-directive.md`, "Stopping
-condition") is yours: by about 10:45 UTC, and again when what is playable
-changes. Say plainly that the night lost three and a half hours to the
-usage limit and what that cost. Tell the owner how two people start
-(the address, phones sideways or upright, the buttons), what to try, what
-is theirs to judge (each step file's taste list), what did not make it,
-and that no real iPhone has been tried. Vision Partner should have the
-same words: the owner talks to it first. After the report, no code push
-while `/healthz` shows anyone in the default world (once Gate 2 adds the
-count).
+**Waiting on the owner (none blocks):** Q-005, Q-006, Q-008, Q-010 in the
+ledger; two inbox entries (Railway "Watch Paths"; a friend holding the
+hero you need). Above all: their reactions after playing.
 
-**Waiting on the owner (none blocks):** in the ledger
-(`docs/questions-for-the-owner.md`): Q-005, Q-006, Q-008, Q-010 and
-whatever Vision Partner has made of the two inbox entries (the Railway
-"Watch Paths" setting; the build order). Four permissions I listed for
-the owner at 04:12 UTC were never explicitly answered; they then said not
-to be a bottleneck on permissions and to keep going
-(`docs/decisions-log.md` records each assumption, the successor spawn
-included).
+**Owed next, in the order I would take it, after the owner has played:**
+1. Whatever the owner says first.
+2. Step 3 item (a): two phone-sized pages by touch through the kingdom
+   (the two-plate gate, roofs, the secret, the window). Nobody has played
+   it. This is most of Step 10's tour; consider doing them as one.
+3. The switch gap: two players can become the same hero (the page decides
+   the switch without seeing friends' heroes); the owner's rule is one
+   person per hero. Fix is in the network layer (Step 5's lead knows it).
+4. Step 4 slice 2 pushes 3 and 4 (hiding counts as unseen; knocking out
+   the caller as the stealth answer), from the held brief.
+5. Step 7: relaunch the detector, then the wiring slice (gate E).
+   `CLAUDE.md`'s "Nothing is persisted" line changes then (entry above).
+6. Step 6 slice B, Step 8 (the sound pack is in the repo; hero art v2,
+   townspeople, tiles and music still in ChatGPT's queue), then 9, 11-15.
 
-**In flight, not visible from the repo:**
-- I told all six leads the lean rule at 08:30 UTC and that a new
-  orchestrator would message them. The ledger header still names me
-  until you change it.
-- Step 7's lead cleared `docs/for-the-lead.md`'s Entries and with them
-  another step's unread entries (6fe5d2b; recovered by Step 4's lead). I
-  told all leads: delete only your own step's entries.
-- Two agents' work is thrown away: the draft of Step 13 and the reviews
-  of Steps 11, 12, 14, 15 were stopped by the limit.
-- The freeze times in `docs/current-directive.md` (10:00 and 10:30 UTC)
-  were set before the stop. Its rule that matters now is the last one: no
-  code push while anyone is playing. Update that file's status; it is
-  yours.
-- I will answer your questions and forward anything that reaches me, and
-  do nothing else (`docs/orchestrator-role.md`, "After your own handoff
-  commit, you are only a forwarder").
-
-### Step 1 lead, 2026-11-23 08:55 UTC
-
-**Flag:** Step 1 is closed (`docs/plan.md`); Step 5 can open. Three
-things from the network layer reach beyond it
-(`docs/mechanisms/network.md`, "Known limits" and "Who owns which
-part"): a player's own page does not receive the server's per-verb state
-for its own character, and `switch` is decided on the page without
-seeing which members others hold (Steps 2 and 4); a page receives about
-35 kB/s with five or six placed bodies, every body sent whole 20 times a
-second, which grows with each NPC Step 4 places (first trim: send only
-what changed); and no hit, grab, throw or "Use" has been run between two
-devices, so the most valuable next scripted fact is one of those in
-`scripts/e2e.ts`.
-
-### Step 5 lead, 2026-11-23 09:50 UTC
-
-**Flag:** slice A is closed and live at e01e5d6 (see-through corner
-controls on 16:9 iPhones, the button art, `/debug/errors`, a friend who
-left drawn away). Step 5 stays open, claimed, for after the owner has
-played; what is left and what only a real iPhone shows is the last
-handoff note in `docs/plan/step-5.md`. **Read
-https://irreverents-production.up.railway.app/debug/errors before any
-code push in the morning: a deploy empties it.**
-
-**Flag (every lead):** a fresh session's checkout starts on a detached
-HEAD with a stale local `main` (shallow clone); `git fetch --deepen=200
-origin main && git checkout main && git merge --ff-only origin/main`
-fixed mine, the worker used `git checkout -B main`. Worth a line in
-`docs/git-workflow.md`.
+**In flight, not visible from the repo:** nothing.
 
