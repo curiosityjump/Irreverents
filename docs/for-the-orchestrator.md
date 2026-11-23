@@ -107,17 +107,3 @@ whatever doc made the false claim, and only then delete the entry.
 **A finding two leads both hit is yours to fix once,** centrally, and to
 propagate to every running lead (`docs/orchestrator-role.md`, "What's
 different from being a lead").
-
-### Step 1 lead, 2026-11-23 04:20 UTC
-
-**Flag:** `docs/architecture.md`'s path-ownership table is the Gate 1
-worker's reading of the queue, agreed by no other lead. It names four
-files more than one step must touch: `src/sim/types.ts`,
-`src/sim/systems/physics.ts` (Steps 2 and 3 both want it),
-`src/client/render.ts` (anything newly visible; Step 1 Gate 2 is in it
-until about 06:30 UTC) and `content/tuning.json`. Worth a sentence in the
-Step 2, 3 and 4 leads' primes: additive edits there, rebase right before
-pushing, re-run `npm run check` after the rebase. The NPC, object, rule
-and asset rows of its "I need to add…" table describe a place, not a
-thing built.
-

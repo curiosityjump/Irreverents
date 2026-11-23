@@ -38,16 +38,52 @@ plan was.
   Call it NPC response logic in code and docs.
 - **Exactly three modes;** counters and timers behind them are
   implementation, not extra modes (doc 24, "Mode logic").
-- **A person's mood and the area's alert are two separate things** (doc 24,
-  "No omniscient response"): mood 1/2/3 per person; alert 0..N per area,
-  raised only by a completed call. No witness, no call. Calming a person
-  does not withdraw a call already made.
+- **A person's mood and the area's alert are two separate things**
+  (D-065; doc 24, "No omniscient response"): mood 1/2/3 per person; alert
+  0..N per area, lifted off 0 only by a completed call, and more help
+  always needs another completed call (D-063, D-075). No witness, no
+  call. Calming a person does not withdraw a call already made (D-066).
+- **Help is not psychic** (D-065: "Escalation is not omniscient").
+  Responders go to the place that was reported, search from there, and
+  chase only a hero they then see. They never home in on the players.
+- **Who may call** (D-064, D-070, D-071): a good guy only from mood 2 or
+  3, never from business as usual; a villain from business as usual too,
+  whenever he recognises a hero as a threat, at his own side's signaler.
+  Either way nothing comes until the call is completed, and it can be
+  stopped (D-066): knock out the caller, break the bell, get there
+  first. Someone who finds a knocked-out person may become distressed and
+  try to call (D-064).
+- **Calming down has two halves, both confirmed, both written for good
+  guys.** From distress (mood 2): visible expected behaviour calms a
+  person at once, "Yup! Just as expected!" (D-042, D-072); this is build
+  gate C's "quick reset", it stays, and the owner calls its speed "core
+  to the game's comedy and strategy". From rage (mood 3): no normal
+  action in view works (D-073).
+- **An alert cools only by hiding and waiting** (D-068, D-074, D-076).
+  Break contact with every pursuer, stay unseen, and attack nothing (not
+  even in self-defence), break nothing, do nothing unexpected; after long
+  enough the alert falls, and once it is below the violent level ordinary
+  behaviour reassures again. Being seen again, or any incident, restarts
+  the wait. Going through a door does not cool it, and pursuers may
+  follow (D-077; Step 3 builds doors that carry anyone). The surest
+  escape is a spot pursuers cannot easily reach (D-076): Step 3 owns
+  hiding places, ask it for one. How long is open: pick, `DRAFT:`.
+  Whether hitting back during a pursuit raises the alert number or only
+  blocks cooling is open too (doc 27): pick one, `DRAFT:`.
+- **Gate C's "polite villain transaction" is played by the scripted
+  villain** (a fixed routine, D-055). A hero buying a potion is business
+  as usual; a villain politely buying one "is horrifying to the
+  shopkeeper, more so than a conventional villainous robbery. The world
+  evaluates WHO is acting and WHAT their expected role dictates" (D-050).
 - **Where older library text disagrees with a later owner correction, the
-  later one is in force** (the cases are listed in Q-005, still open with
-  the owner): rage is not undone by one normal action (D-073, over doc
-  24's "quick reset"); pursuit is not escaped by acting normal in view
-  (D-067); a villain may call from mode 1. Build the newer rule, mark it
-  `DRAFT:` citing Q-005.
+  later one is in force.** The library itself labels these as overriding:
+  rage is not undone by one normal action (D-073, over doc 24 "Mode
+  logic": "Both distress and rage can rapidly reset…"); pursuit is not
+  escaped by acting normal in view (D-067); a villain may call from
+  business as usual (D-070). Build the newer rule and mark the site
+  `INTENT:` with its D-number (Q-005 only asks the owner to tidy the
+  stale lines in Drive). Keep `DRAFT:` for what the library leaves open:
+  timer lengths, the alert scale, how many levels.
 - **Getting caught opens play.** No fail screen, no reload, no forced
   restart of the room. An alarm starts something.
 - **Very little dialogue** (D-057): a bark is a few words or a symbol over
@@ -79,24 +115,32 @@ the first things to leave for later.
   the register for D-041–D-051 and D-059–D-077.
 - What "seen" is (a cone, a distance, a wall in between), and what hiding
   is, at the simplest level that makes sneaking a real choice.
-- The heroes are heroes: gate C's "polite villain transaction" needs a
-  villain *character* doing the unexpected thing. Decide whether the
-  scripted villain NPC demonstrates it, or a player can; say which.
 
 ## Feedback signal
 
 Scenario scripts in `npm run check`, each with a control watched to fail:
 1. The villain robs the shopkeeper: the shopkeeper stays in business as
-   usual (this is the expected story).
-2. A hero does the unexpected to the shopkeeper: confusion and distress;
-   persists: rage; then the calm-down, by the newer rule.
-3. A witness walks to the call point and completes the call: the area
-   alert rises and help arrives. Control: the same scene with the witness
-   knocked out before finishing: alert stays 0, nobody comes.
+   usual (this is the expected story), and does not call.
+1b. The same villain comes back and politely buys a potion: the
+   shopkeeper goes to confusion and distress (D-050). The villain then
+   robs him properly: the shopkeeper calms at once and goes back to
+   happily opposing him. Control: a hero buying the same potion leaves
+   him in business as usual.
+2. A hero does the unexpected to the shopkeeper: confusion and distress,
+   and one expected act calms him at once (D-072). The hero persists
+   instead: rage, which the same expected act does *not* calm (D-073);
+   only getting away, staying unseen and causing no incident does.
+3. A witness in mood 2 or 3 walks to the call point and completes the
+   call: the area alert rises and help arrives at the reported place, not
+   at wherever the heroes have gone. Control: the same scene with the
+   witness knocked out before finishing and nobody there to find them:
+   alert stays 0, nobody comes.
 4. Zero-alarm: a scripted route takes the valuable and leaves with the
    alert at 0 and no call completed.
-5. Catastrophe: the same room, seen; help arrives; the players can still
-   get out by an exit, the alert cools, and they can come back.
+5. Catastrophe: the same room, seen; a call completes; help arrives. The
+   players get away, hide, and do nothing; after the wait the alert
+   falls and they can come back. Controls: walking through a door alone
+   does not cool it; hitting a pursuer during the wait restarts it.
 6. `npm run gates` reports gates C and D as passing.
 
 ## Stopping condition
@@ -110,6 +154,16 @@ UTC, 2026-11-23.
 NPC response logic, roles and rule data, who is placed where, seeing and
 hiding, calling for help, the area alert; exact paths as
 `docs/architecture.md` assigns them.
+
+
+**Four files are shared between steps** (`docs/architecture.md`, "Files
+two steps must both touch"): `src/sim/types.ts`,
+`src/sim/systems/physics.ts`, `src/client/render.ts` (Step 1 is in it
+until its Gate 2 lands) and `content/tuning.json`. In those: additive
+edits only, keep each one small, `git pull --rebase` right before
+pushing, and re-run `npm run check` after the rebase. That table of
+owned paths was written by Step 1 before any other lead existed; if it
+is wrong for your step, fix it there and tell the orchestrator.
 
 ## Taste, for the owner in the morning
 

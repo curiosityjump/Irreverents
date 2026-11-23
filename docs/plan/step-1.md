@@ -86,6 +86,18 @@ may overrule one with a measurement, recording why here.
   files (Step 3 owns the first, Step 4 the people). The player's actions
   are one abstract list (move, jump, attack, grab, …) that the touch
   layout and the keyboard both read, so adding an action is one entry.
+- **The netcode must let the world move a player** (added 2026-11-23
+  04:25 UTC, from the plan review). Each player's own character runs on
+  their own device, but an enemy's hit, a friend's hold or throw, or a
+  door all move a player from outside it. So the protocol carries, from
+  the server to the one player concerned, a small set of *effects*
+  (pushed with this velocity, held by this body, released, moved to this
+  room and place) that the player's own device applies and acknowledges,
+  resent until acknowledged. In the simulation these are ordinary events
+  on the player's entity, so Step 2 (throws, knockback) and Step 3
+  (doors) write **no network code**: they emit the effect and the layer
+  delivers it. While a character is held or flying from a hit, the
+  server's word wins; its own device takes over again when it is free.
 - **Solo works with the same build.** One person opening the URL can play;
   nothing waits for a second player (owner's rule, D-015).
 - **Joining needs nothing.** Everyone who opens the URL is in the same

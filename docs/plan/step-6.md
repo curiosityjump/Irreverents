@@ -34,7 +34,8 @@ hours, the speech turns into the credits.
 - **The speech is the one place with a lot of words, and it is still not
   dialogue:** nobody has to read it and it never asks for a reply. It
   shows as a slow ribbon of text or a speech bubble that can be ignored.
-  It must not be "an obvious short loop" (doc 03).
+  It must not visibly loop (doc 03: "Avoid an obvious short looping audio
+  sample"; doc 12, G-02: "No short obvious loops").
 - **The speech's words are the owner's taste.** Write a long placeholder
   (solemn, increasingly digressive, in doc 03's spirit), keep it in a
   data file, mark it `DRAFT:`, and list it for the owner. Use by default
@@ -42,7 +43,15 @@ hours, the speech turns into the credits.
 - **The king and his court are ordinary people of Step 4's kind** (roles,
   three modes, a call for help), placed by data in Step 3's throne room.
   No special-case engine code for the king beyond the speech clock.
-- **The three-hour ending is real** and reached by actually waiting; the
+- **The three-hour ending is real, secret, and for uninterrupted
+  listening** (D-033: "Approximately three hours of uninterrupted
+  listening triggers a secret, seamless actual end-credits alternate
+  ending"; D-032: "the king does not naturally stop talking if players
+  wait"). The count runs only while the audience is undisturbed and
+  someone is in the throne room listening; disturbing the court (anything
+  that changes its mood) or the last listener leaving starts it again.
+  No countdown, bar or hint. The king's own words run on into the
+  credits with no cut. It is never a clock since the server started. The
   script proves it by running the simulation fast, headlessly.
 - **Doc 03's props are examples, not a blueprint** (champion, advisor,
   caged beast, the stained-glass window). Pick the two or three cheapest
@@ -54,9 +63,10 @@ hours, the speech turns into the credits.
 - Which distractions, and how the court reacts to each: read
   `docs/design-library/01-vision-and-narrative/03-opening-the-never-ending-royal-audience.md`
   in full, then Step 4's rule tables as built.
-- Whether the three-hour clock survives a player leaving the room, a
-  reload, or a second player misbehaving (the library leaves "save/replay
-  state" open). Pick the simplest, `DRAFT:`, file the question.
+- What a reload, a dropped connection or a server restart does to the
+  count, and whether one of two players wandering off while the other
+  listens interrupts it (the library leaves "save/replay state" open).
+  Pick the simplest, `DRAFT:`, log it.
 
 ## Feedback signal
 
@@ -65,8 +75,9 @@ hours, the speech turns into the credits.
    answered (control: a build with a gate fails).
 2. One nonviolent and one outrageous interruption each change the court's
    mood by Step 4's rules, and play continues.
-3. Headless, fast-forwarded: about three hours of simulated listening
-   ends in the credits; ten minutes does not.
+3. Headless, fast-forwarded: about three hours of undisturbed simulated
+   listening ends in the credits; ten minutes does not; and three hours
+   with one disturbance in the middle does not (control).
 4. The speech shows no repeated line within its first thirty minutes.
 
 ## Stopping condition
