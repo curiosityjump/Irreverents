@@ -453,3 +453,32 @@ names and shapes.
   kind, or a `dummy` at weight 40: 520 px/s too). `party.ts`
   `boxInSolid` reads run-time tiles since b79ad96.
 
+
+- **The way-out check made cheap again (builder
+  `session_017WiGzK3hTpzPypD5R9DVit`, 2026-11-23, brief
+  `step-3-fast-way-out-check.md`).** Measured in a cloud container
+  (4 cores), before → after: `checkRooms` on the real map 75.9 s → 3.6 s;
+  `npm run build` 79 s → 5 s; `npm run check` 192 s → 36 s (the
+  baseline check ran partly alongside another measurement, so 192 s is
+  if anything low). Profile (counted moves rather than `--cpu-prof`: the
+  cost was simply moves played): the old check played every one of 51
+  moves from every standing place, 1,805 places for the grappler, 909
+  the infiltrator, 885 the flyer, about 182,000 moves and 10 million
+  `step()` calls; the new one plays about 15,800 (phase 1, way out and
+  way back: 7,326 / 3,506 / 3,041; the forward search from the start:
+  838 / 632 / 480). What changed is only the order and when to stop
+  (`docs/mechanisms/rooms-and-doors.md`, "How it is fast"); the moves,
+  the snap and the messages are the same. **Same answer, checked:** old
+  and new compared problem for problem (JSON-equal) on the real map,
+  every control in `controls/rooms/` that reaches `checkRooms`, and three
+  scratch copies of `quarry-road` (a wall at column 40 cutting the climb:
+  173 problems from both; a two-wide, three-deep pit by the spawn:
+  accepted by both; a wall in front of the ridge opening: refused before
+  the check by assembly). The cut-climb copy, laid into `content/rooms/`,
+  made `npm run build` fail with the 173 problems; restored and rebuilt.
+  Brief steps 3 and 4 (skipping the check in the build, a cache) were not
+  done: the targets were met without them, and the check still guards
+  every deploy. **Weakest:** a map that is broken pays the old full price
+  (the cut-climb copy: 77 s), because a "no" needs every move played; a
+  fast "yes" is the common case. The forward search's 76 s on that map
+  is mostly the many trapped places, not the search.
