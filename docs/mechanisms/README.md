@@ -76,6 +76,7 @@ groups) whenever you add one — never update the number from memory.
 **NPC response logic** (`docs/mechanisms/npc-response.md`)
 - `entity.c.npc` + `content/npcs/`, `content/rules/` + the `npc-*` systems — scripted people with exactly three moods who witness deeds and react by role/deed tables in data; never AI (Step 4).
 - `entity.c.alert` / `c.call` / `c.respond` + `src/sim/npc/alert.ts` + the `npc-call`, `alert-respond`, `alert-cool` systems — an upset witness rings a bell, only a completed call raises the area alert (one line raises it), guards come to the place reported, and the alert cools only by hiding and waiting (Step 4, slice 2).
+- `src/sim/use.ts` + `src/sim/use/*.ts` — the Use arbiter: one answer to what a fresh press of Use does here (door, thing, cantina bell, in that order), which the systems act on and the button shows; heists, cargo and clean getaways (Step 19; `docs/mechanisms/heists.md`).
 
 **Hostile outposts** (`docs/mechanisms/outposts.md`)
 - `content/outposts/` + `src/sim/outpost/state.ts` + the `outpost-*` systems + `src/client/draw/outpost.ts` — a camp's lookout who sees a hero runs to a horn post and sounds it; each finished call brings a wave (rows of a table, the last repeating for ever, capped by a bound on bodies); stopped by staying unseen, knocking out or grabbing the caller, breaking the post with hits or a throw, or walking out (Step 12, slice A).

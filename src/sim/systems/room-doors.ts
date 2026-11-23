@@ -2,6 +2,7 @@ import type { Door, Room } from '../../content/kinds/rooms.ts';
 import type { Content } from '../../content/types.ts';
 import type { Entity, System } from '../types.ts';
 import { NO_INPUT } from '../world.ts';
+import { useHere } from '../use.ts';
 
 declare module '../types.ts' {
   interface Components {
@@ -117,7 +118,9 @@ const system: System = {
       const up = input.y <= STICK_UP;
       const use = input.held.includes('interact');
       const memory = e.c.roomDoors;
-      const asking = (memory?.want ?? false) || (up && !(memory?.up ?? false)) || (use && !(memory?.use ?? false));
+      // Step 19: a fresh press of Use asks for the doorway when the Use arbiter gives it the press (src/sim/use.ts; the door entry is first).
+      const freshUse = use && !(memory?.use ?? false);
+      const asking = (memory?.want ?? false) || (up && !(memory?.up ?? false)) || (freshUse && useHere(ctx.world, ctx.content, e)?.entry === 'door');
       if (memory || up || use) e.c.roomDoors = { up, want: false, use };
 
       if (room.doors.length === 0) continue;
@@ -127,7 +130,7 @@ const system: System = {
       // DRAFT: a doorway is used with a fresh push of the stick up (the Step 3 brief's call; Amazing
       // Mirror's door) or a fresh press of Use, the phone's context button (the owner, 2026-11-23:
       // "There is no stick to push up..."; decisions-log "Doorways by Use"). On that tick the door
-      // wins the press: npc-interact and cantina-brawl skip a body in an enter doorway.
+      // wins the press: the Use arbiter (src/sim/use.ts) gives it to the door entry first.
       if (door.use === 'enter' && !asking) continue;
       // Step 11 (D-088): chased by the good guys, the cantina's doorway will not take you.
       if (door.refuse === 'chased' && ctx.world.chased?.includes(e.id)) {

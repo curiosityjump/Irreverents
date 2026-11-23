@@ -940,6 +940,7 @@ document as a decision of theirs.
 - **Why this way:** it is deployed and kept games already list discovered levels by id, and "don't rename or remove ids once deployed" protects those saves. The id is never shown: the shown name is the level file's own data and stays free to change. No new id takes a proposed name.
 - **To change it:** add a new level id and map the old one to it on load (retire, never delete); the shown name is one string in the level file.
 - **Where:** `content/levels/iron-quarry.json`; `docs/plan/step-14.md`.
+
 ### 2026-11-23 · Step 14 slice B: pieces to find, seen glinting before you can reach them; the first two in the street
 - **Decided by:** glints builder (Step 14 slice B), `session_017WiGzFeeJgj8z2SUAFyu5J`
 - **Instead of asking:** "Where do the first pieces go, how does finding one show, and what is the special good?"
@@ -953,3 +954,10 @@ document as a decision of theirs.
 - **Why this way:** the awning is a low ledge right above the shop, not part of the route over the roofs (that starts at building 2's doorway and balcony, far east), and the piece sits on it, not on a roof or ledge of the route; the brief named this spot. The glint says "a piece is here", and a hero who takes it stands on an awning that goes nowhere. The doubt is filed for the owner (`docs/for-the-orchestrator.md`).
 - **To change it:** move `town-1` in `content/completion/castle-town.json` (for example to the shop's floor beside the curtain).
 - **Where:** `content/completion/castle-town.json`.
+
+### 2026-11-23 · Step 19: one place decides what the Use button does where you stand, and the doorway still wins
+- **Decided by:** Step 19 builder (brief `loop-heist.md`), `session_017WiGzJqpMTHyoAaus6JsHG`
+- **Instead of asking:** "When a doorway, a shop's goods and the cantina's bell are all near, which one does Use do?"
+- **Why this way:** D-093 (a few context-sensitive touch controls): the button must name what it will do, so the game needs one answer to what it does. The order is the one that was already played: a doorway first (decisions-log "Doorways by Use"), then the nearest thing, then the cantina's bell. Nothing a player does changes; nothing near the bell can be taken today.
+- **To change it:** the `order` number in one file per kind of thing Use does (`src/sim/use/`).
+- **Where:** `docs/mechanisms/heists.md`, "The Use arbiter"; `docs/plan/step-19.md`.

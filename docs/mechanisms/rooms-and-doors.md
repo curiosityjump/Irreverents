@@ -175,10 +175,14 @@ owner's "There is no stick to push up...").
 | Arriving | just inside the far room, clear of the far door's tiles, at the same place across the opening, **speed kept** | standing still in the pair's doorway |
 | Why you do not bounce back | the two ends are on opposite edges, so you arrive moving away from the door | the stick (or Use) must be let go and pushed again |
 
-- **The door wins the Use press.** On a tick a body stands in an enter
-  doorway (`inEnterDoorway(content, e)` / `enterDoorwayAt`, exported from
-  `room-doors.ts`), `npc-interact` and `cantina-brawl` ignore its Use
-  press, so it never also buys, robs or rings a bell. Measured at
+- **The door wins the Use press.** What a fresh press of Use does is
+  decided in one place, the Use arbiter (`useHere` in `src/sim/use.ts`,
+  Step 19; `docs/mechanisms/heists.md`): its entries in `src/sim/use/`
+  ask in a fixed order and the door entry (`use/door.ts`, reading
+  `enterDoorwayAt` from `room-doors.ts`) asks first. So on a tick a body
+  stands in an enter doorway, `room-doors` takes the press and
+  `npc-interact` and `cantina-brawl` ignore it: it never also buys, robs
+  or rings a bell. Measured at
   build: no counter, goods or bell is within reach of any enter doorway
   (`docs/plan/step-5.md`, the "Doorways by Use" handoff note); a thing
   placed in a doorway would be unusable there. `DRAFT:`.

@@ -13,7 +13,7 @@ import path from 'node:path';
 export const root = path.resolve(import.meta.dirname, '../..');
 
 /** Directories whose every .ts file default-exports one registered thing. */
-export const REGISTRY_DIRS = ['src/content/kinds', 'src/sim/systems', 'src/sim/verbs', 'src/scenarios/facts'];
+export const REGISTRY_DIRS = ['src/content/kinds', 'src/sim/systems', 'src/sim/verbs', 'src/scenarios/facts', 'src/sim/use'];
 
 export function generateRegistries(): void {
   for (const dir of REGISTRY_DIRS) {
