@@ -92,12 +92,15 @@ add (Step 2 adds a file each; Step 5 checks every entry has a touch control).
 
 ## Deploying
 
-A push to `main` deploys, **except** a push that changes only documents:
-`railway.json` tells Railway to ignore `docs/**`, `handoff-prompts/**`,
-`tools/**` and any `*.md`, and to health-check `/healthz` before a new
-build replaces the running one. `npm run check:deployed` says whether the
-live address runs what `main` needs. Details and how it was proven:
-`docs/mechanisms/deploy.md`.
+A push to `main` deploys **only when it changes a path listed in
+`railway.json`**: `src/**`, `content/**`, `scripts/**`, `assets/**`,
+`package.json`, `package-lock.json`, the `tsconfig` files, `railway.json`.
+Documents-only pushes leave the running game alone. **A new top-level
+path the running game needs must be added to that list** (and to
+`scripts/lib/deploy-paths.ts`) or it will not go live. Every deploy has a
+short gap in which the address does not answer, and resets the world.
+`npm run check:deployed` says whether the live address runs what `main`
+needs. Details, traps and the proof: `docs/mechanisms/deploy.md`.
 
 ## Self-registering files (the rule that lets steps work in parallel)
 

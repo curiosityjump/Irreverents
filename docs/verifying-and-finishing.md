@@ -61,8 +61,8 @@ from a fresh clone at 04:17 UTC on 2026-11-23, Node v22.23.5.
   https://irreverents-production.up.railway.app. **A push to `main` is the
   deploy**, automatically, with no staging (the owner, 2026-11-23: "It's
   setup to deploy automatically from main yes."). Railway runs
-  `npm run build` then `npm start`. Measured: 25 to 40 s from push to
-  live. Nobody here can see Railway's logs; the live address is the only
+  `npm run build` then `npm start`. Measured: 25 to 80 s from push to
+  live. Only pushes touching the paths in `railway.json` deploy. Nobody here can see Railway's logs; the live address is the only
   evidence.
 - **Is there a test suite?** The scenarios (`docs/mechanisms/scenarios.md`):
   3 today, covering running, jumping onto a one-way platform, walls and
@@ -74,9 +74,12 @@ from a fresh clone at 04:17 UTC on 2026-11-23, Node v22.23.5.
 **The pre-push gate, because a push goes live:** `npm run build && npm run
 check`, plus `npm run e2e` when the client or the network changed; then
 `git fetch origin main && git rebase origin/main`, re-run the gate if
-anything came in, push, and confirm `/healthz` reports your commit within
-a few minutes. If it does not, the previous deploy is still serving: tell
-your lead at once and push nothing on top.
+anything came in, push, then `npm run check:deployed` (it waits up to
+three minutes through the deploy gap and exits 0 once the live address
+runs what `main` needs). If it fails, the previous deploy is still
+serving or the game is down: revert first, tell your lead, diagnose
+after. **A push that changes only documents does not deploy** and does
+not need this (`docs/mechanisms/deploy.md`).
 
 ---
 
@@ -234,8 +237,12 @@ and the kinds of project-specific ones worth documenting:
 - **Content is baked in at build time.** Editing `content/` changes
   nothing in a running server until `npm run build` and a restart
   (`npm run dev` does both).
-- **A push is a deploy.** Pushing to `main` ships to the owner and their
-  friends within about a minute. **There is no "push it to see."** A push
+- **Every deploy drops the players for a moment and resets the world.**
+  With the storage volume attached the address answers Railway's own 404
+  for a few seconds to a minute during a deploy. Batch code pushes; do
+  not push code "to see".
+- **A push is a deploy.** Pushing code to `main` ships to the owner and
+  their friends within about a minute. **There is no "push it to see."** A push
   whose build fails on Railway is invisible from here except that
   `/healthz` keeps reporting the old commit.
 - **Caches survive your edit.** Anything loaded once at boot (configuration,

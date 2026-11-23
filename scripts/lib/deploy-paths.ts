@@ -4,7 +4,7 @@
 // documents every few minutes; without the patterns every one of them
 // restarted the server and dropped whoever was playing (docs/plan/step-1.md,
 // "What's decided"). Change both together, and re-prove it:
-// docs/mechanisms/deploy.md.
+// docs/mechanisms/deploy.md (proven 2026-11-23: documents-only pushes do not restart).
 const WATCHED_DIRS = ['src/', 'content/', 'scripts/', 'assets/'];
 const WATCHED_FILES = ['package.json', 'package-lock.json', 'tsconfig.json', 'tsconfig.pure.json', 'railway.json'];
 

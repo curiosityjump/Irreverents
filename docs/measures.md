@@ -51,8 +51,10 @@ npm run check:deployed
 
 Exits 0 when the commit the live address is running (`/healthz`) is the
 tip of `origin/main`, **or** when every commit since it changed only
-files that do not redeploy (`docs/**`, `handoff-prompts/**`, `tools/**`,
-any `*.md`: `docs/mechanisms/deploy.md`); it prints which. Non-zero when
+files that do not redeploy (anything outside the paths listed in
+`railway.json`: `docs/mechanisms/deploy.md`); it prints which. It waits
+up to three minutes for the address to answer, because every deploy has
+a gap. Non-zero when
 `main` holds code that is not live, the address does not answer, or the
 running commit is not on `main`. A push takes 25 to 40 s to go live;
 allow a few minutes before calling one failed.

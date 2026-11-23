@@ -129,4 +129,17 @@ actually read (questions for the owner go through
   the config-file format `railway.json` uses is deprecated, with a cut-off
   of 2026-12-01 for existing services. What is and is not proven is in
   `docs/mechanisms/deploy.md`, "Proof".
+- **Result of the watch-pattern test** (full proof in
+  `docs/mechanisms/deploy.md`): the "everything except documents" form
+  did not clearly hold; the form now in `railway.json` lists the code
+  paths instead, and with it a documents-only push did not restart the
+  server. The cost of that form: **a new top-level path the game needs
+  at run time must be added to the list or it will not go live** (I
+  listed `assets/**` ahead of time). Worth one line in every brief that
+  adds a top-level directory.
+- **`CLAUDE.md`'s "Git: one branch" still says every push to `main` is
+  the deploy.** I left it, because the brief gave me only the two
+  placeholder sections; it wants one clause about documents-only pushes.
+- **Not proven: the health check.** Nobody has pushed a build that fails
+  to start to see whether Railway keeps the old one; I did not either.
 

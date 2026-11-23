@@ -59,3 +59,6 @@ groups) whenever you add one — never update the number from memory.
 
 **Content** (`docs/mechanisms/content-validation.md`)
 - `src/content/kinds/` + `src/sim/check-content.ts` — every `content/` file is validated at check and build time, naming the exact file and field; tuning numbers are declared by the verb or system that reads them (Step 1).
+
+**Deploy** (`docs/mechanisms/deploy.md`)
+- `railway.json` + `scripts/lib/deploy-paths.ts` — only pushes that change the listed code paths redeploy, so documents-only pushes do not restart the live game; `/healthz` reports the running commit and whether a storage volume is mounted; `npm run check:deployed` is M1 (Step 1).
