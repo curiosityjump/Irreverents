@@ -404,7 +404,7 @@ Round 2 of the look (2026-11-23, "Round 2" above): `handoff-prompts/look2-heroes
 
 Round 3 of the look (2026-11-23, "Round 3" above): `handoff-prompts/look3-heroes.md`, `look3-cast.md`, `look3-ground.md`, `look3-props.md`, `look3-actors.md`. Delete each when its lane is reviewed.
 
-Round 3 builders (sent 17:06 UTC by orchestrator session_017WiGzHhke4tkAThPgw6EXs): heroes `session_017WiGzFWVvNJrmXZ81rABuv` (reused, round 2's heroes builder), cast `session_017WiGzFHN8SWsy5GnNkweMt`, ground `session_017WiGzHwFkUGGSmDqqnoSDY`, props `session_017WiGzJxBqVvizcghgHk5NG`, actors `session_017WiGzFsVDWWZc7nVHbv82A`.
+Round 3 builders (sent 17:06 UTC by orchestrator session_017WiGzHhke4tkAThPgw6EXs): heroes `session_017WiGzEv3ESfjNHm7u3Tk8v` (fresh, 17:10 UTC; round 2's heroes builder declined at 317k and was archived), cast `session_017WiGzFHN8SWsy5GnNkweMt`, ground `session_017WiGzHwFkUGGSmDqqnoSDY`, props `session_017WiGzJxBqVvizcghgHk5NG`, actors `session_017WiGzFsVDWWZc7nVHbv82A`.
 
 ## Open with the owner
 

@@ -299,7 +299,7 @@ Full text: `docs/plan/step-7.md`
 
 ## Step 8 — What you see and hear
 
-**Status: open, claimed by orchestrator session_017WiGzHhke4tkAThPgw6EXs (builders: heroes session_017WiGzFWVvNJrmXZ81rABuv, cast session_017WiGzFHN8SWsy5GnNkweMt, ground session_017WiGzHwFkUGGSmDqqnoSDY, props session_017WiGzJxBqVvizcghgHk5NG, actors session_017WiGzFsVDWWZc7nVHbv82A), 2026-11-23.** (Round 3's five lanes sent 17:06 UTC. Put first by the owner at 11:11 UTC; re-claimed 15:50 UTC at pickup.)
+**Status: open, claimed by orchestrator session_017WiGzHhke4tkAThPgw6EXs (builders: heroes session_017WiGzEv3ESfjNHm7u3Tk8v, cast session_017WiGzFHN8SWsy5GnNkweMt, ground session_017WiGzHwFkUGGSmDqqnoSDY, props session_017WiGzJxBqVvizcghgHk5NG, actors session_017WiGzFsVDWWZc7nVHbv82A), 2026-11-23.** (Round 3's five lanes sent 17:06 UTC. Put first by the owner at 11:11 UTC; re-claimed 15:50 UTC at pickup.)
 
 Full text: `docs/plan/step-8.md`
 
