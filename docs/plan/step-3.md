@@ -482,3 +482,8 @@ names and shapes.
   (the cut-climb copy: 77 s), because a "no" needs every move played; a
   fast "yes" is the common case. The forward search's 76 s on that map
   is mostly the many trapped places, not the search.
+  **Deploy episode:** 582db12 was not live after seven minutes (live
+  stayed bb06263), so it was reverted (a86071a) per the gate. The revert
+  itself took about five minutes to go live, so deploys were slow, not
+  failing. Re-landed unchanged as a700081, live 80 s after its push
+  (17:16 UTC); `/debug/errors` empty after it.
