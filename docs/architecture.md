@@ -181,6 +181,39 @@ The intended shape, so art arriving tonight drops in as data:
 - Collision never depends on art: the box in the character file and the
   legend in the room file stay the truth.
 
+## Effects on a player
+
+Each player's own character is simulated on that player's device. Anything
+else that moves it (a hit, a hold, a throw, a door, a respawn) does so
+through an **effect**: `emitEffect(ctx, entity, effect)` from
+`src/sim/effects.ts`. It applies the effect to the body at once and
+records an `effect` event. In one world (a scenario; any body the server
+simulates) that is all there is. Across devices the network layer sends
+each effect on a player's character to that player's page, which applies
+it with the same `applyEffect` and acknowledges it; the server resends
+until it does. **A verb or system that emits an effect writes no network
+code. One that changes a player's `x`, `vx`, `room`… directly works in a
+scenario and is lost between two devices.**
+
+| `effect.kind` | Fields | Does | Typical emitter |
+|---|---|---|---|
+| `push` | `vx`, `vy` (pixels per second) | sets the body's velocity: sent flying | a hit, an impact, a throw (Step 2) |
+| `hold` | `by` (entity id of the holder) | marks it held (`entity.c.effect.heldBy`), stops it | a grab (Step 2) |
+| `release` | none | clears `heldBy`; free where it is now. Follow with `push` to throw | let go, break free (Step 2) |
+| `move` | `room`, `x`, `y` (top-left of its box) | puts it there, standing still | a door (Step 3), a respawn |
+
+- The event: `effect: { entity, player, effect }`. `heldBy(entity)` reads
+  who holds a body, or null.
+- **Who moves a held body:** whoever holds it, in the simulation (Step 2's
+  carry system sets its position each tick). While a player's character is
+  held, or has an effect its page has not acknowledged yet, **the server's
+  copy of it is the truth** and the page follows; when it is free and
+  acknowledged the page's own simulation takes over again.
+- A held player's input still reaches the server every report, so "press
+  jump to break free" is read where the holding is simulated.
+- The list is additive: a new kind is a new member of `Effect` and a
+  branch in `applyEffect`.
+
 ## Which paths each plan step owns
 
 A step adds files freely in its own paths and avoids editing others'.
