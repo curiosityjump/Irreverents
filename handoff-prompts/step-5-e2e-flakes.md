@@ -9,6 +9,8 @@ hits") and `docs/plan/step-5.md`'s last handoff entries first.
 `docs/questions-for-the-owner.md`, after each finding and each push. Notes:
 `docs/plan/step-5.md`, a "Flakes" section under "Builder notes".
 
+**Landed so far (2026-11-23 22:46 UTC): task step 1, the measurement, at a98c7f6** by `session_017WiGzJujVWWDboh12zWhNR`, which stopped at its context limit. 10 runs at 54ce74b on a quiet machine, 4 with a failure: `cantina-row`/swap 3 (a tap on a wandering regular opened nothing), `h1`+`h2` 1 (the page stayed "Reconnecting…" through two server restarts although the server was up; no page error; likely real), `t-throw-friend` 1. The table, the failing lines and each fact's next step are in `docs/plan/step-5.md`, "Builder notes > Flakes": read that first. The harness cannot run one part. Others saw `h1` far more often under load (5 of 7 for the rescue builder; 2 of the orchestrator's last 6 runs). **You do task steps 2 to 5, `h1`/`h2` first.**
+
 ## Why
 
 The owner confirmed for phones: "coming back after a sleep or a network
