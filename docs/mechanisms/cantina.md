@@ -159,7 +159,13 @@ tap through the real connection opens the row, a slot tap changes the
 party on the server and both pages, an own-slot tap makes the player the
 newcomer by `become`, and a third player joining gets the world's first
 free member; the server's `chased` list reaches b's page, whose own push
-up at `to-cantina` is refused, and goes in once the list is empty).
+up at `to-cantina` is refused, and goes in once the list is empty); and in
+`npm run e2e` (`scripts/e2e/cantina.ts`, signal 8): two phone-sized pages
+walk in by touch, a tap on an outsider opens the row (`drawn.cantina.row`),
+a tap elsewhere closes it with nothing changed, a tap on a free member's
+chip swaps on both pages and the switch button reaches the newcomer, and a
+swing at a regular starts a brawl whose counter (`drawn.cantina.counter`)
+both pages draw with the same numbers.
 
 ## Traps
 
