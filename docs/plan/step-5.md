@@ -216,6 +216,15 @@ button art is in the library mirror, not in `assets/`.
     look. Fix: a hit is predicted only if it also reaches the body at twice
     the look-ahead. After that, against live: 3 of 3 ok, with 6 hits
     predicted and all 6 confirmed.
+  - **Push 2, throws:** a throw press while the hero is drawn carrying runs
+    `throwCarried` on copies, and the thrown body is lent
+    (`docs/mechanisms/network.md`, "Predicted hits"). New e2e fact
+    `throw-leaves`: from the press, the crate is drawn leaving the hands
+    after 17–18 ms; with the control it is 566 ms and the fact fails. The
+    first control run threw the crate through a walk door, so it left
+    without ever being drawn moving: the fact now throws toward the longer
+    floor and counts leaving the room as leaving the hands. Not done: the
+    grab's lift.
   - Seen in the gate, not mine: one full e2e failed `h1` (the server-down
     fact; the page was not back within 10 s), the flake Step 16's notes
     already owe a look. The next run was green.

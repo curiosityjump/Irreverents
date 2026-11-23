@@ -142,6 +142,63 @@ export async function hitLandsFacts(kit: Kit): Promise<void> {
     const gap = ra.at && rb.at ? Math.hypot(ra.at.x - rb.at.x, ra.at.y - rb.at.y) : null;
     fact('hit-agree', gap !== null && gap <= 2 && restA !== null && restA <= 2500,
       `once still, both pages draw the crate in the same place: ${gap === null ? '?' : gap.toFixed(1)} px apart (limit 2), the hitter's at x ${n(ra.at?.x)} still after ${n(restA)} ms, the watcher's at x ${n(rb.at?.x)} after ${n(restB)} ms (from x ${n(ra.from?.x)})`);
+
+    // ---- brief item 3: a throw leaves the hands on the press ----
+    await sleep(1500);
+    const f2 = await floor(A);
+    const at = (await me(A)).x as number;
+    const box = f2.bodies.filter((o) => o.kind === 'crate').sort((p, q) => Math.abs(p.x - at) - Math.abs(q.x - at))[0];
+    let carried = false;
+    if (box) {
+      // Throw toward the longer floor, away from a walk door (a body thrown through one leaves the room).
+      const dir = f2.right - box.x >= box.x - f2.left ? 1 : -1;
+      await standAt(A, dir > 0 ? box.x - 10 : box.x + box.w - 6, dir);
+      await tap(A, 'grab');
+      carried = await A.page
+        .waitForFunction(([id, me]: string[]) => {
+          const d = (window as any).irreverents.drawn;
+          const c = d.entities.find((e: any) => e.id === id);
+          const m = d.entities.find((e: any) => e.id === me);
+          return !!c && !!m && c.y < m.y - 4 && Math.abs(c.x - m.x) < 16;
+        }, [box.id, (await me(A)).id], { timeout: 3000, polling: 'raf' })
+        .then(() => true, () => false);
+    }
+    if (!carried) {
+      fact('throw-leaves', false, `the hitter could not pick up a crate to throw (crate ${box ? `at x ${n(box.x)}` : 'none'} on its floor)`);
+      return;
+    }
+    await sleep(600);
+    const leaves = A.page.evaluate(
+      ([id, dur]: [string, number]) =>
+        new Promise((resolve) => {
+          const irr = (window as any).irreverents;
+          const clock = (): number => performance.timeOrigin + performance.now();
+          const rel = (): { x: number; y: number } | null => {
+            const c = irr.drawn.entities.find((e: any) => e.id === id);
+            const m = irr.drawn.me;
+            return c && m ? { x: c.x - m.x, y: c.y - m.y } : null;
+          };
+          const r0 = rel();
+          let pressed: number | null = null;
+          addEventListener('touchstart', () => { if (pressed === null) pressed = clock(); }, { capture: true, once: true });
+          const t0 = clock();
+          const tick = (): void => {
+            const r = rel();
+            // Out of the hands: drawn 6 px from where it rode, or no longer drawn in this room at all.
+            if (pressed !== null && r0 && (!r || Math.hypot(r.x - r0.x, r.y - r0.y) >= 6)) return resolve({ left: clock() - pressed, gone: !r, hits: irr.net.hits });
+            if (clock() - t0 > dur) return resolve({ left: null, hits: irr.net.hits });
+            requestAnimationFrame(tick);
+          };
+          requestAnimationFrame(tick);
+        }),
+      [box!.id, 3000],
+    );
+    await sleep(50);
+    const threw = await tap(A, 'attack');
+    const lv = (await leaves) as { left: number | null; gone?: boolean; hits: any };
+    // DRAFT: a throw has no wind-up (attack.ts); 100 ms is a press, a tick and a few frames.
+    fact('throw-leaves', threw && lv.left !== null && lv.left <= 100,
+      `${how}: the hitter taps Hit while carrying a crate; its page first drew the crate leaving the hands ${n(lv.left)} ms after the press${lv.gone ? ' (gone from the room)' : ''} (limit 100 ms; ${DELAY_MS} ms added each way); throws predicted ${lv.hits?.thrown ?? '?'}, hits confirmed ${lv.hits?.confirmed ?? '?'}, eased back ${lv.hits?.easedBack ?? '?'}`);
   } finally {
     await A.ctx.close();
     await B.ctx.close();

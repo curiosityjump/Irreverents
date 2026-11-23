@@ -201,6 +201,19 @@ of 8 ticks held for 9).
   ends the loan at once. A loan never lasts more than 4 s. For about 3 s
   afterwards the server's copy of the same hit is not drawn as a second
   star.
+- **A throw** (push 2): on a press the page's own attack verb accepts while
+  a drawn body is held by its hero, the page runs the simulation's own
+  `throwCarried` on copies of the two. The thrown body is lent the same
+  way: the server's copy still being held by this player is no reason to
+  end the loan, and its `c.effect.heldBy` is dropped from the drawn copy so
+  drawing does not put it back in the hands. It is confirmed when the
+  server's copy is let go and flying, thrown by this player. The page's own
+  verb then winds up a swing it does not know is a throw; no hit is
+  predicted for that swing. Measured (`throw-leaves`, 150 ms added each
+  way): the crate is drawn leaving the hands 17–18 ms after the press,
+  566 ms with prediction off. The predicted flight and the server's ended
+  3 px apart, eased over. The grab's lift is not predicted yet: the page
+  still waits for the server to show a body picked up.
 - **A player's body** (a brawl): only the star and the beat are drawn on
   it. Its position stays the server's, because its own page owns it.
 - **Counters:** `window.irreverents.net.hits` holds `predicted`,
@@ -216,9 +229,8 @@ of 8 ticks held for 9).
   first frame with the crate 4 px away by wind-up + the beat as held +
   50 ms. The watcher (no added delay) draws the server's hit as before
   (about 700 ms). Once still, both pages draw the crate 0.0 px apart.
-- **Not done:** throws and a grab's lift are still a round trip on the
-  hitter's screen (brief item 3), and `interpDelayMs` is untried at 66
-  (item 4). Not verified: the ease back when the server disagrees, and a
+- **Not done:** a grab's lift is still a round trip on the hitter's
+  screen (brief item 3), and `interpDelayMs` is untried at 66 (item 4). Not verified: the ease back when the server disagrees, and a
   brawl hit on a friend. Both are only reasoned.
 
 ## Smoothing

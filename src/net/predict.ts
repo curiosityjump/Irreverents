@@ -5,6 +5,7 @@ import type { Content } from '../content/types.ts';
 import { heldBy } from '../sim/effects.ts';
 import { systems } from '../sim/registry.ts';
 import type { Entity, Input, SimEvent, StepContext, World } from '../sim/types.ts';
+import { throwCarried, ticksOf } from '../sim/body-state.ts';
 import { strikeTick } from '../sim/verbs/attack.ts';
 import { clone } from './protocol.ts';
 
@@ -45,6 +46,8 @@ interface Loan {
   confirmed: boolean;
   /** A player's character: its own page moves it, so only the star and the beat are drawn here, never its movement. */
   still: boolean;
+  /** A throw (brief item 3): lent from this player's hands, so the server's copy being held by them is no reason to end it. */
+  thrown: boolean;
   /** Handing back: from where, and since when. */
   back: { at: number; x: number; y: number } | null;
 }
@@ -55,8 +58,10 @@ export function createPredictor(content: Content, myId: string) {
   const quiet = new Map<string, { server: number | null; c: Pick<Entity['c'], 'impact' | 'lastHit'>; until: number }>();
   /** The swing being predicted: its strike tick and what it has hit so far (so each body once, as in the verb). */
   let swing = { swung: Number.NaN, struck: [] as string[] };
+  /** Set by a throw press: the page's own verb winds up a swing it does not know is a throw; no hit is predicted for it. */
+  let throwing = false;
   /** For checks (`window.irreverents.net.hits`): hits predicted, then seen from the server, or eased back unseen. */
-  const counts = { predicted: 0, confirmed: 0, easedBack: 0 };
+  const counts = { predicted: 0, confirmed: 0, easedBack: 0, thrown: 0 };
 
   const on = (): boolean => content.net.predictHitMs > 0;
 
@@ -106,8 +111,41 @@ export function createPredictor(content: Content, myId: string) {
       // A friend's body (still) is stepped alone, only so its beat counts down: it is drawn where its own page puts it.
       for (const loan of loans.values()) if (!loan.back) run(world, loan.body, loan.still ? [] : around(), tick, -Infinity);
       const a = me.c.attack;
+      if (!a || a.tick !== tick) return;
+      const kind0 = content.characters[me.kind];
+      const t0 = kind0 ? (content.tuning.characters[kind0.tuning] ?? {}) : {};
+      if ((a.phase ?? 'ready') === 'ready') throwing = false;
+      // The verb took a press on this tick (it set the cooldown, attack.ts). While a drawn body is held by
+      // this player's character, the server throws it now (attack.ts: "a throw stays immediate").
+      if (a.cooldown === Math.max(1, ticksOf(t0.attackTime))) {
+        const held = shownNow().find((e) => e.room === me.room && heldBy(e) === me.id);
+        if (held) {
+          throwing = true;
+          const thrower = clone(me);
+          thrower.c.carrying = { id: held.id, kind: me.kind };
+          const body = clone(held);
+          const events: SimEvent[] = [];
+          const ctx: StepContext = {
+            world: { ...world, tick, entities: [thrower, body].sort(byId) },
+            inputs: me.player ? { [me.player]: input } : {},
+            content,
+            events,
+            emit(type, data) {
+              events.push({ type, tick, ...data } as SimEvent);
+            },
+          };
+          // The simulation's own throw (src/sim/body-state.ts): where it leaves from, how fast, which way.
+          throwCarried(ctx, thrower, input, t0.throwStrength ?? 0);
+          if (heldBy(body) === null) {
+            loans.set(body.id, { body, since: now, prior: null, confirmed: false, still: false, thrown: true, back: null });
+            quiet.delete(body.id);
+            counts.thrown++;
+            run(world, body, around(), tick, VERBS_ORDER);
+          }
+        }
+      }
       // The verb left the swing in `strike` exactly on the ticks it tested for hits (attack.ts).
-      if (!a || a.phase !== 'strike' || a.tick !== tick) return;
+      if (a.phase !== 'strike' || throwing) return;
       if (a.swung !== swing.swung) swing = { swung: a.swung, struck: [] };
       const kind = content.characters[me.kind];
       if (!kind?.verbs.includes('attack')) return;
@@ -156,6 +194,7 @@ export function createPredictor(content: Content, myId: string) {
           prior: old ? old.prior : (was.c.lastHit?.tick ?? null),
           confirmed: false,
           still: body.player !== null,
+          thrown: false,
           back: null,
         });
         quiet.delete(id);
@@ -185,16 +224,28 @@ export function createPredictor(content: Content, myId: string) {
           return { ...s, c: { ...s.c, impact: q.c.impact, lastHit: q.c.lastHit } };
         }
         const b = loan.body;
-        // Someone took hold of it, or it left the room: the server's, at once.
-        if (heldBy(s) !== null || s.room !== b.room) {
+        // Someone took hold of it, or it left the room: the server's, at once. A thrown body is still in
+        // this player's hands on the server until the throw arrives there.
+        const stillMine = loan.thrown && heldBy(s) === myId;
+        if ((heldBy(s) !== null && !stillMine) || s.room !== b.room) {
           loans.delete(s.id);
           return s;
         }
-        if (!loan.confirmed && s.c.lastHit?.by === myId && s.c.lastHit.tick !== loan.prior) {
+        // The server's throw: the body let go and flying, thrown by this player.
+        if (loan.thrown && !loan.confirmed && heldBy(s) === null && s.c.flying?.by === myId) {
+          loan.confirmed = true;
+          counts.confirmed++;
+        } else if (!loan.thrown && !loan.confirmed && s.c.lastHit?.by === myId && s.c.lastHit.tick !== loan.prior) {
           loan.confirmed = true;
           counts.confirmed++;
         }
         const c: Entity['c'] = { ...s.c };
+        // A thrown body is out of the hands on this page; drawing must not put it back in them (draw/entities.ts carryAt).
+        if (loan.thrown) {
+          if (b.c.effect === undefined) delete c.effect;
+          else c.effect = b.c.effect;
+          delete c.held;
+        }
         for (const k of COMBAT) {
           if (b.c[k] === undefined) delete c[k];
           else (c as Record<string, unknown>)[k] = b.c[k];
