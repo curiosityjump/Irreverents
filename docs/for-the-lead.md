@@ -106,3 +106,27 @@ on — covers everything that used to arrive through a session's own final
 message: findings and flags alike, folded into the one report that is
 actually read (questions for the owner go through
 `docs/questions-inbox.md`).
+
+---
+
+## 2026-11-23 — Step 1 Gate 1 worker, items 9-11
+
+- **The live address was down for about two minutes around 04:23 UTC**
+  (Railway's own 404 "Application not found"). It followed my
+  `railway.json` push (04:21:55) and, from `/healthz`, the owner's volume
+  being attached at about the same time (`storage.mounted` true at
+  `/data` from the 04:24:05 start). I removed `railway.json` at once
+  (54190f9), the site was already coming back, and I re-added it
+  (1709e09) to test it in a quiet moment. Most likely cause: the volume
+  attach, not the file. Not provable from here.
+- **With a volume attached, every deploy now has a gap of a few seconds**
+  in which the address does not answer (seen at 04:24:33 and 04:25:36:
+  the old server stops before the new one answers). Gate 2's "the page
+  rejoins by itself after a restart" has to survive that gap, and
+  `check:live` should retry rather than fail on one refused connection.
+- **Railway's documentation cannot be opened from a session** (hosts
+  outside the sandbox's network), and a web search's summary of it says
+  the config-file format `railway.json` uses is deprecated, with a cut-off
+  of 2026-12-01 for existing services. What is and is not proven is in
+  `docs/mechanisms/deploy.md`, "Proof".
+
