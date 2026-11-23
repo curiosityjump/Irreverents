@@ -262,6 +262,20 @@ lead. Up is both stick-up and jump on a keyboard, so a doorway also
 fires `jumped`: told Step 1's lead. The street's out-of-sight stretch
 for Step 4 is building 2's upper room: told Step 4's lead.
 
+**After the usage-limit stop (lead, 08:33 UTC).** Both workers were
+stopped at 04:57 UTC; nothing of Step 3 landed after `9a4f6a8`. Resumed
+in the orchestrator's order, one worker at a time: slice A's worker
+(same session, messaged) finishes the way-out validator and door
+drawing; slice B's worker stopped five minutes in and is relaunched
+fresh against the same brief once A's push lands. **The start room is
+not switched yet:** there is no follow camera on `main`, and the throne
+room is 256 px tall on a 180 px screen, so a player on its floor would
+be drawn off the bottom. Asked Step 1's lead when its camera lands; if
+not soon, slice A adds an optional focus point to `roomOrigin` (pure,
+additive) and Step 1 passes the local player to it. If time runs short:
+three rooms with one hidden route and the plate gate (this file, "How to
+cut it").
+
 ## Open with the owner
 
 ## Handoff notes
