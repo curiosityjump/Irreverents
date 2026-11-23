@@ -1,0 +1,132 @@
+{
+  "id": "step3-weight-undercroft-light-pair",
+  "proves": "the stone plate in the undercroft holds against the two light heroes: the infiltrator (26) and the flyer (30) stand on it together: 56 sinks it part way and no further, the grate stays shut, and when they walk on west onto the grate it holds them up: nobody enters the pocket and town-7 is not taken. Control (watched to fail): the plate's need set to 50 in the room file, it goes down and the grate opens. DRAFT: the need of 83 (docs/decisions-log.md 'Step 3: the stone plate'); the plate reads only weight, never who or how many.",
+  "room": "undercroft",
+  "players": [
+    {
+      "id": "a",
+      "character": "infiltrator",
+      "spawn": 3
+    },
+    {
+      "id": "b",
+      "character": "flyer",
+      "spawn": 3
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 82,
+      "x": -1
+    },
+    {
+      "player": "b",
+      "from": 0,
+      "to": 110,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 150,
+      "to": 175,
+      "x": -1
+    },
+    {
+      "player": "b",
+      "from": 150,
+      "to": 185,
+      "x": -1
+    }
+  ],
+  "ticks": 400,
+  "expect": [
+    {
+      "fact": "part",
+      "room": "undercroft",
+      "part": "stone-plate",
+      "between": [
+        120,
+        150
+      ],
+      "load": [
+        56,
+        56
+      ],
+      "is": {
+        "down": false
+      }
+    },
+    {
+      "fact": "event-where",
+      "event": "gate-opened",
+      "between": [
+        0,
+        400
+      ],
+      "count": [
+        0,
+        0
+      ],
+      "where": {
+        "room": "undercroft",
+        "part": "grate"
+      }
+    },
+    {
+      "fact": "position",
+      "player": "a",
+      "at": 400,
+      "y": [
+        207,
+        209
+      ]
+    },
+    {
+      "fact": "position",
+      "player": "b",
+      "at": 400,
+      "y": [
+        207,
+        209
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "piece-found",
+      "between": [
+        0,
+        400
+      ],
+      "count": [
+        0,
+        0
+      ],
+      "where": {
+        "level": "castle-town",
+        "piece": "town-7",
+        "by": "p:a",
+        "player": "a"
+      }
+    },
+    {
+      "fact": "event-where",
+      "event": "piece-found",
+      "between": [
+        0,
+        400
+      ],
+      "count": [
+        0,
+        0
+      ],
+      "where": {
+        "level": "castle-town",
+        "piece": "town-7",
+        "by": "p:b",
+        "player": "b"
+      }
+    }
+  ]
+}

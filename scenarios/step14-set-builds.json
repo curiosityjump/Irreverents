@@ -1,7 +1,7 @@
 {
   "id": "step14-set-builds",
   "gate": null,
-  "proves": "Step 14 slice B push 3 (D-078): with five of the town's six pieces already found (seeded), the grappler takes the last one over the awning (as in step14-find-awning-grappler): on that tick the set is complete and the thing it builds appears as a body on the throne room's dais (id built:castle-town, the level's name, never the thing's), standing on the floor (its box's top at y 192, 32 tall, on the dais floor at 224); nothing else moves the hero. Control (watched to fail, 2026-11-23): the same run without the rooms' placements (a page's own world) builds nothing.",
+  "proves": "Step 14 slice B push 3 (D-078): with six of the town's seven pieces already found (seeded), the grappler takes the last one over the awning (as in step14-find-awning-grappler): on that tick the set is complete and the thing it builds appears as a body on the throne room's dais (id built:castle-town, the level's name, never the thing's), standing on the floor (its box's top at y 192, 32 tall, on the dais floor at 224); nothing else moves the hero. Control (watched to fail, 2026-11-23): the same run without the rooms' placements (a page's own world) builds nothing. (town-7, the stone plate's piece, was added to the seed when Step 3's puzzles slice appended it.)",
   "room": "castle-street",
   "players": [
     {
@@ -21,7 +21,8 @@
         "town-3",
         "town-4",
         "town-5",
-        "town-6"
+        "town-6",
+        "town-7"
       ]
     }
   },
@@ -55,7 +56,8 @@
         "town-3",
         "town-4",
         "town-5",
-        "town-6"
+        "town-6",
+        "town-7"
       ]
     },
     {

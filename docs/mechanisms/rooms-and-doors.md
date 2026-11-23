@@ -118,6 +118,16 @@ that could trap someone.
   not solid, the pocket is joined to the passage and **the way-out check
   plays it** (it does not see a place sealed off entirely; with the
   platforms made solid it says nothing, which is that blind spot).
+  **The stone plate** (`stone-plate`, columns 17-20, row 12, `needs` 83)
+  holds the **grate** (`grate`, a `gate` in the passage floor, columns
+  14-15, row 13): while it is open a body drops through into the pocket,
+  the hidden area `plate-pocket`, where `town-7` lies (column 17). The
+  grate is wall to the way-out check (`blocks`), so the pocket's own way
+  out is what the check plays. Opened by the grappler and a friend
+  (`step3-weight-undercroft-friends`), not by the two light heroes
+  (`-undercroft-light-pair`); alone by the heavy crate thrown through the
+  throne room's window (`-heavy-crate-thrown`), by the king
+  (`-king`), or by the boost (`-boost`, in `test-weight`).
 - **The vault.** At the undercroft's west end a `breakable`
   (`vault-wall`, column 4) seals a small hidden area. The way-out check
   counts it as wall, so the vault is not a place it worries about; once

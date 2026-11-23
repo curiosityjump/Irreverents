@@ -1,0 +1,204 @@
+{
+  "id": "step3-weight-undercroft-friends",
+  "proves": "the stone plate in the undercroft, the designed co-op way: two friends, the grappler (60) and the infiltrator (26), walk west from beside the cellar arch onto the stone plate together: 86, it goes down and the grate in the floor opens. They step off west onto the open grate and drop into the hidden pocket within the stay-open time (the place is found), the infiltrator takes town-7, and both climb out by the pocket's way out onto the passage floor; the grate shuts only after they are out. Control (watched to fail): the infiltrator's walk onto the plate left out, the plate reads 60 and the grate never opens. DRAFT: the need of 83 (docs/decisions-log.md 'Step 3: the stone plate'); the plate reads only weight, never who or how many.",
+  "room": "undercroft",
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 3
+    },
+    {
+      "id": "b",
+      "character": "infiltrator",
+      "spawn": 3
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 108,
+      "x": -1
+    },
+    {
+      "player": "b",
+      "from": 0,
+      "to": 84,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 150,
+      "to": 215,
+      "x": -1
+    },
+    {
+      "player": "b",
+      "from": 150,
+      "to": 180,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 240,
+      "to": 265,
+      "x": 1
+    },
+    {
+      "player": "b",
+      "from": 240,
+      "to": 275,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 300,
+      "to": 380,
+      "x": -1
+    },
+    {
+      "player": "b",
+      "from": 300,
+      "to": 360,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 385,
+      "to": 400,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "b",
+      "from": 385,
+      "to": 400,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 440,
+      "to": 455,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "b",
+      "from": 440,
+      "to": 455,
+      "hold": [
+        "jump"
+      ]
+    }
+  ],
+  "ticks": 900,
+  "expect": [
+    {
+      "fact": "part",
+      "room": "undercroft",
+      "part": "stone-plate",
+      "between": [
+        100,
+        140
+      ],
+      "load": [
+        86,
+        86
+      ],
+      "is": {
+        "down": true
+      }
+    },
+    {
+      "fact": "event-where",
+      "event": "gate-opened",
+      "between": [
+        0,
+        900
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "where": {
+        "room": "undercroft",
+        "part": "grate"
+      }
+    },
+    {
+      "fact": "event-where",
+      "event": "place-found",
+      "between": [
+        0,
+        900
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "where": {
+        "level": "castle-town",
+        "place": "undercroft/plate-pocket",
+        "by": "p:b",
+        "player": "b"
+      }
+    },
+    {
+      "fact": "event-where",
+      "event": "piece-found",
+      "between": [
+        0,
+        900
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "where": {
+        "level": "castle-town",
+        "piece": "town-7",
+        "by": "p:b",
+        "player": "b"
+      }
+    },
+    {
+      "fact": "event-where",
+      "event": "gate-closed",
+      "between": [
+        0,
+        470
+      ],
+      "count": [
+        0,
+        0
+      ],
+      "where": {
+        "room": "undercroft",
+        "part": "grate"
+      }
+    },
+    {
+      "fact": "position",
+      "player": "a",
+      "at": 900,
+      "y": [
+        207,
+        209
+      ]
+    },
+    {
+      "fact": "position",
+      "player": "b",
+      "at": 900,
+      "y": [
+        207,
+        209
+      ]
+    }
+  ]
+}

@@ -1,0 +1,153 @@
+{
+  "id": "step3-weight-king",
+  "proves": "the stone plate, alone with the king (D-038: a king is a weight): as in step6-king-through-the-window the grappler lifts the king off the dais and throws him with a jump through the stained-glass window into the undercroft; it walks after him through the false wall and the hidden door, picks him up where he lies, carries him onto the stone plate (down, the two weigh 170) and sets him down there, and walks off east: the king (110) keeps it down and the grate stays open (the plate reads 130: the undercroft's light crate, knocked along the passage by the king's landing, came to rest on its east end too). Control (watched to fail): the set-down left out, the grappler walks off still holding him, the plate comes up. DRAFT: the need of 83 (docs/decisions-log.md 'Step 3: the stone plate').",
+  "room": "throne-room",
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "placements": true,
+  "placedRooms": [
+    "undercroft"
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 40,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 0,
+      "to": 3,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 50,
+      "to": 53,
+      "hold": [
+        "grab"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 60,
+      "to": 64,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 120,
+      "to": 135,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 132,
+      "to": 135,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 240,
+      "to": 365,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 368,
+      "to": 371,
+      "hold": [
+        "grab"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 380,
+      "to": 470,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 480,
+      "to": 483,
+      "hold": [
+        "grab"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 495,
+      "to": 540,
+      "x": 1
+    }
+  ],
+  "ticks": 900,
+  "expect": [
+    {
+      "fact": "in-room",
+      "entity": "king",
+      "at": 200,
+      "room": "undercroft"
+    },
+    {
+      "fact": "event-where",
+      "event": "gate-opened",
+      "between": [
+        0,
+        900
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "where": {
+        "room": "undercroft",
+        "part": "grate"
+      }
+    },
+    {
+      "fact": "part",
+      "room": "undercroft",
+      "part": "stone-plate",
+      "between": [
+        560,
+        900
+      ],
+      "load": [
+        130,
+        130
+      ],
+      "is": {
+        "down": true
+      }
+    },
+    {
+      "fact": "event-where",
+      "event": "gate-closed",
+      "between": [
+        0,
+        900
+      ],
+      "count": [
+        0,
+        0
+      ],
+      "where": {
+        "room": "undercroft",
+        "part": "grate"
+      }
+    }
+  ]
+}

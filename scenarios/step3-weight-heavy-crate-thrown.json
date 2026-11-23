@@ -1,0 +1,244 @@
+{
+  "id": "step3-weight-heavy-crate-thrown",
+  "proves": "the stone plate, alone with the heavy crate by a real throw: the grappler picks up the throne room's heavy crate (120) beside spawn 0, hops onto the dais with it and throws it with a jump west: it breaks the stained-glass window (about 207 px/s) and lands in the undercroft. The grappler walks after it through the false wall and the hidden door, picks it up, carries it to the stone plate (the plate goes down, carried weight counts) and sets it down there: 120 rests on it, the grate in the floor opens and stays open with the hero off the plate. The grappler walks onto the open grate, drops into the hidden pocket (the place is found), takes town-7, and climbs out by the pocket's way out onto the passage floor. Control (watched to fail): the crate's set-down left out (carried off again it is not on the plate), the grate shuts after the stay-open time with the grappler in the pocket, the piece still taken but the gate-closed fact fails; and with the throw left out the crate never reaches the undercroft. DRAFT: the need of 83 (docs/decisions-log.md 'Step 3: the stone plate').",
+  "room": "throne-room",
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "placements": true,
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 3,
+      "hold": [
+        "grab"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 10,
+      "to": 40,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 10,
+      "to": 14,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 120,
+      "to": 135,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 132,
+      "to": 135,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 240,
+      "to": 362,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 366,
+      "to": 369,
+      "hold": [
+        "grab"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 375,
+      "to": 485,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 495,
+      "to": 498,
+      "hold": [
+        "grab"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 510,
+      "to": 560,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 600,
+      "to": 640,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 660,
+      "to": 740,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 745,
+      "to": 760,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 800,
+      "to": 815,
+      "hold": [
+        "jump"
+      ]
+    }
+  ],
+  "ticks": 900,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "part-broken",
+      "between": [
+        120,
+        160
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "where": {
+        "room": "throne-room",
+        "part": "window",
+        "by": "throne-crate-2"
+      }
+    },
+    {
+      "fact": "in-room",
+      "entity": "throne-crate-2",
+      "at": 250,
+      "room": "undercroft"
+    },
+    {
+      "fact": "event-where",
+      "event": "gate-opened",
+      "between": [
+        0,
+        900
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "where": {
+        "room": "undercroft",
+        "part": "grate"
+      }
+    },
+    {
+      "fact": "event-where",
+      "event": "gate-closed",
+      "between": [
+        0,
+        900
+      ],
+      "count": [
+        0,
+        0
+      ],
+      "where": {
+        "room": "undercroft",
+        "part": "grate"
+      }
+    },
+    {
+      "fact": "part",
+      "room": "undercroft",
+      "part": "stone-plate",
+      "between": [
+        560,
+        900
+      ],
+      "load": [
+        120,
+        120
+      ],
+      "is": {
+        "down": true
+      }
+    },
+    {
+      "fact": "event-where",
+      "event": "place-found",
+      "between": [
+        0,
+        900
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "where": {
+        "level": "castle-town",
+        "place": "undercroft/plate-pocket",
+        "by": "p:a",
+        "player": "a"
+      }
+    },
+    {
+      "fact": "event-where",
+      "event": "piece-found",
+      "between": [
+        0,
+        900
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "where": {
+        "level": "castle-town",
+        "piece": "town-7",
+        "by": "p:a",
+        "player": "a"
+      }
+    },
+    {
+      "fact": "position",
+      "player": "a",
+      "at": 900,
+      "y": [
+        207,
+        209
+      ]
+    },
+    {
+      "fact": "in-room",
+      "player": "a",
+      "at": 900,
+      "room": "undercroft"
+    }
+  ],
+  "placedRooms": [
+    "undercroft"
+  ],
+  "gate": null
+}

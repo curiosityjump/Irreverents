@@ -592,7 +592,19 @@ tiles and the green `step3-*` and way-out results before adding a part.
 
 **Step:** 3, a new slice. **Signal:** `step3-weight-*` scenarios with the pair
 cases, never reading how many are playing; the two-phone gate proof Step 3
-still owes. **Status: waits** for playable 1 (it appends one piece).
+still owes. **Status:** building (`handoff-prompts/loop-puzzles.md`).
+
+**What landed (puzzles builder, 2026-11-23).** A plate may say `needs` (a
+weight; `src/sim/systems/room-plate.ts`), carried weight counting through
+the carrier; the undercroft's stone plate needs 83 (`DRAFT:`), columns 17-20
+by the cellar arch, holding a grate in the floor (columns 14-15) over a
+hidden pocket appended under the passage, where `town-7` lies; the pocket
+has its own one-way climb out. Opened by the grappler and any friend, never
+by one hero or the two light heroes; alone by the heavy crate thrown through
+the window, the king, the light crate in the brawler's hands, or the boost.
+Bars are a floor grate, not an upright portcullis (a one-tile floor has no
+room for one; decisions-log). Not yet: how far it has sunk drawn on a phone
+(push 4), the two-page proof (push 5).
 
 ---
 

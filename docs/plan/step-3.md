@@ -565,3 +565,29 @@ names and shapes.
   spawn 0, hops onto the dais carrying it, and a jumping throw west from
   column 7 breaks the window (208 px/s leaving the hands) and it lands in
   the undercroft at about column 26, on the passage floor.
+- **Push 3, the stone plate and the grate in the undercroft.** Plate
+  `stone-plate` (row 12, columns 17-20, needs 83), gate `grate` (row 13,
+  columns 14-15) naming it, hidden area `plate-pocket` ([9, 14], 9 × 2),
+  piece `town-7` at [17, 15] (look `item-ring`), appended to
+  `content/completion/castle-town.json` (the hidden-places builder had
+  stopped; the orchestrator gave me the line). Because two Step 14
+  scenarios seed the whole town set, `town-7` was added to their seeds
+  (`step14-set-builds`: "six of seven"; `step14-all-found-opens-cantina`):
+  additive, their controls unchanged. **The town now has seven pieces and
+  one more hidden place**, so a kept game in progress shows its town pie a
+  little lower and its set one short until the pocket is found; expected.
+  Scenarios: `step3-weight-undercroft-friends` (86, open, both in and out,
+  the grate shuts after they are out), `-undercroft-light-pair` (56, shut,
+  the grate holds them), `-heavy-crate-thrown` (alone: real throw through
+  the window, carried to the plate, set down, stays open, into the pocket,
+  piece, out), `-king` (thrown, carried, set down: 110 holds it). The
+  pocket's way out with the grate shut: push 2's `-pocket-way-out-*`.
+- **The boost, played (Step 9 push 2, b2216dc, landed during push 3).** The
+  street's villain now carries it (`"carriers": ["street-villain"]`). Not
+  played end to end here: the route would be take it in the street
+  (`step9-take-from-carrier`), walk to the throne room, lift the heavy crate
+  a light hero cannot otherwise lift, throw it through the window (the
+  grappler's throw: `step3-weight-heavy-crate-thrown`), follow, lift it onto
+  the plate (`step3-weight-boost`, the boosted lift, in `test-weight`). Each
+  link is proven; the chain is not, and nothing checks that a held power
+  survives the two doors (powers.md says the holder's own page holds it).

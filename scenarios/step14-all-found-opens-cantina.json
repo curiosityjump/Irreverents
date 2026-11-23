@@ -1,7 +1,7 @@
 {
   "id": "step14-all-found-opens-cantina",
   "gate": null,
-  "proves": "Step 14 slice B, D-089 with D-090: with every level's set of pieces complete (seeded in world.found), a chased hero is let into the cantina, and it is no shelter. The street run of step11-chase-locks-door (the hero takes the goods, the guard sees and chases); with the guard chasing and in sight, the hero pushes up at the cantina's doorway and goes in at once (no door-refused); the guard who was chasing follows through the same doorway, keeps after the hero inside and lands a hit, and the street's alert never drops. Control (watched to fail, 2026-11-23): one piece short (town-6 left out of the seed), the door refuses and the hero stays in the street.",
+  "proves": "Step 14 slice B, D-089 with D-090: with every level's set of pieces complete (seeded in world.found), a chased hero is let into the cantina, and it is no shelter. The street run of step11-chase-locks-door (the hero takes the goods, the guard sees and chases); with the guard chasing and in sight, the hero pushes up at the cantina's doorway and goes in at once (no door-refused); the guard who was chasing follows through the same doorway, keeps after the hero inside and lands a hit, and the street's alert never drops. Control (watched to fail, 2026-11-23): one piece short (town-6 left out of the seed), the door refuses and the hero stays in the street. (town-7, the stone plate's piece, was added to the seed when Step 3's puzzles slice appended it.)",
   "room": "castle-street",
   "players": [
     {
@@ -32,7 +32,8 @@
         "town-3",
         "town-4",
         "town-5",
-        "town-6"
+        "town-6",
+        "town-7"
       ]
     }
   },
