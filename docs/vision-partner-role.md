@@ -342,6 +342,14 @@ was ever kept): consolidate every open question in the repo into the
 ledger first, with a count per source file, then run the same `shuf`
 check over ten entries.
 
+## Asset coordinator (owner-added, 2026-11-23)
+
+The owner asked Vision Partner to also file asset requests to ChatGPT
+through Drive and collect deliveries, "throughout the night without me".
+That is the one standing exception to "between the owner's messages, do
+nothing": an hourly self-wake to check Drive. The procedure and the owner's
+words are in `docs/mechanisms/asset-requests.md`.
+
 ## When this file is wrong
 
 Same rule as `docs/sop.md`: change it and record why.

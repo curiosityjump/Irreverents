@@ -36,11 +36,40 @@ Read it; the short version:
    owner sign-off; the owner critiques later. Concept images stay concepts:
    don't treat a flattened scene as a tile atlas.
 
+## Who files them: Vision Partner, as asset coordinator
+
+**Owner, 2026-11-23 ~04:00 UTC, to Vision Partner, first-hand:**
+> You can help by coordinating this and making the requests and so on.
+> Are you prepared to request assets from chat via the drive? Will you do this as needed throughout the night without me?
+> You should be able to write too
+
+So the Vision Partner session named in `docs/questions-for-the-owner.md`'s
+header files every request and collects every delivery. **Any other session
+that needs an asset sends Vision Partner one message** (`send_message`, or
+an entry in `docs/questions-inbox.md` headed "Asset need") saying: what it
+is for in the game, size / frames / states, which step needs it, priority.
+Vision Partner writes the `REQ` doc, and on each hourly check syncs
+deliveries into `docs/design-library/` and tells the asker where the files
+landed. Don't write to Drive yourself even if you have the connector: one
+filer keeps ChatGPT's queue free of duplicates.
+
+### Requests in flight
+
+| Filed (UTC) | REQ doc | Priority |
+|---|---|---|
+| 2026-11-23 03:58 | C02-02/C02-03 — two playable heroes, sprite sheets for co-op (32×32 cells, ~24–28 px tall, idle/run/jump/fall/attack/grab/throw/hurt, JSON manifest) | BLOCKING |
+| 2026-11-23 03:58 | N03-01/02/04 — shopkeeper, guard, cat with 3 modes; grunt + brute enemies; alarm signaler prop | SOON |
+| 2026-11-23 03:58 | E01-02/E01-03 — 16×16 tile atlases (grassy ruins, castle, town street) with solid/one-way/decor/breakable flags; parallax layers | SOON |
+
+All assume 320×180 internal resolution and a 16 px tile grid (doc 14
+option B; S00-01's phone previews). A build that chooses otherwise tells
+Vision Partner, who files a REVISION.
+
 ## The catch: writing to Drive
 
-Sessions in this cloud environment can **read** the shared Drive folder (the
-public link) but **cannot create a Google Doc in it**: that needs a signed-in
-Google account. The fix is the claude.ai **Google Drive connector**
+Writing needs the claude.ai **Google Drive connector**. The owner connected
+it on 2026-11-23; Vision Partner's session has it (write tested 03:57 UTC).
+Without it, a session can only read the public folder. The connector
 (https://claude.ai/customize/connectors), which provides `create_file`;
 connectors load when a session starts, so only sessions started after it is
 connected get it. A session without it has no way to submit a request and
