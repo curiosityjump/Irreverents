@@ -156,7 +156,11 @@ List these; don't grade them.
 
 ## Measure
 
+2026-11-23 14:40 UTC, lead session_017WiGzJTXQVCWQYDDmC2UiY, at 5fb514f (`npm run check` green, 64 s): the seams are measured into the slice A brief's "Measured for you". The ones that shape the step: calls are good-side only (`npc-call.ts:77`), so the horn is this step's own system and never raises Step 4's alert (`DRAFT:`); a bell can't be hit, so the horn is a heavy body like the throne; the people cap is parse-time only (`MAX_NPCS_PER_ROOM` 8), so the bound is new data; no cap exists on guards crossing doors (`alert-follow.ts`), slice B's. The outpost joins by an `enter` doorway at courtyard column 9, row 7 (agreed with Step 11's lead, whose cantina goes off `castle-street`); `enter` doorways only, so nobody of the camp is carried out and no fight shuts a door.
+
 ## Briefs
+
+- Slice A, the outpost (signals 1–4 and 7, the room and its door): `handoff-prompts/step-12-a-outpost.md`, hard stop 16:05 UTC. Slice B, the chase and the clash (signals 5–6), is briefed after A's review.
 
 ## Open with the owner
 
