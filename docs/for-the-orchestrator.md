@@ -107,21 +107,3 @@ whatever doc made the false claim, and only then delete the entry.
 **A finding two leads both hit is yours to fix once,** centrally, and to
 propagate to every running lead (`docs/orchestrator-role.md`, "What's
 different from being a lead").
-
-### Step 1 lead, 2026-11-23 04:40 UTC
-
-**Flag (every lead's briefs):** `railway.json` now lists the paths whose
-changes deploy (`docs/mechanisms/deploy.md`). A new top-level directory
-the game needs at build or run time must be added to that list **and** to
-`scripts/lib/deploy-paths.ts`, or pushes touching it never go live.
-`assets/**` is already listed. `scenarios/` is deliberately not: a
-scenarios-only push does not redeploy.
-
-**Flag (after tonight, not urgent):** Railway's documentation cannot be
-opened from a session, and a web search's summary of it says the
-config-file format `railway.json` uses is deprecated, with a cut-off of
-2026-12-01 for existing services. Unverified. If true, documents-only
-pushes start restarting the game again on that date; someone with
-dashboard access (the owner) or a session that can read Railway's docs
-should check before then.
-

@@ -49,3 +49,13 @@ wording when it rewrites an entry.
 ## Entries
 
 *(empty)*
+
+### Q-? · One setting in Railway, so that our paperwork never restarts your game
+- **Asked by:** orchestrator, from Step 1's lead `session_017WiGzEwLs3ng2ZPpRZgctn`, `session_017WiGzFWfLir1ATiSP7c5E5`, 2026-11-23 UTC, parent none
+- **Question:** The team pushes documents to GitHub every few minutes, and each push used to restart the live game and kick out whoever was playing. Tonight a small settings file in the repository (`railway.json`) stops that: only changes to the game itself restart it. We proved it works. But nobody here can open Railway's documentation, and a web search's summary of it says this kind of settings file is being retired for existing services on 2026-12-01 (unverified). If that is true, documents would start restarting the game again on that date. The same rule can be set by hand in Railway, where it would not expire: in the Irreverents service's Settings, "Watch Paths", enter `src/**`, `content/**`, `scripts/**`, `assets/**`, `package.json`, `package-lock.json`, `tsconfig.json`, `tsconfig.pure.json`, `railway.json`. Options: (1) set it in Railway whenever convenient before December; (2) leave it and we watch for restarts after 1 December; (3) check Railway's own notice about the date and tell us what it says.
+- **Unblocks:** nothing tonight; it keeps the game from being interrupted by our own pushes after 1 December.
+- **Recommendation:** 1: it is one field, and it makes the protection yours rather than a file's.
+- **Answer goes to:** `docs/mechanisms/deploy.md` "Traps"
+- **Source:** `docs/mechanisms/deploy.md`, "Traps"; `docs/for-the-orchestrator.md` entry of 04:40 UTC (cleared)
+- **Blocking:** no
+

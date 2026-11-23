@@ -252,6 +252,14 @@ and the kinds of project-specific ones worth documenting:
   their friends within about a minute. **There is no "push it to see."** A push
   whose build fails on Railway is invisible from here except that
   `/healthz` keeps reporting the old commit.
+- **A new top-level folder does not deploy until it is listed.** Only
+  pushes touching the paths in `railway.json` go live (`src/`,
+  `content/`, `scripts/`, `assets/` and the package and config files). If
+  the game needs a new top-level folder at build or run time, add it to
+  `railway.json` **and** `scripts/lib/deploy-paths.ts` in the same push,
+  or your change silently never reaches the live game
+  (`docs/mechanisms/deploy.md`). A push that only changes `scenarios/` or
+  documents does not restart the game, on purpose.
 - **Caches survive your edit.** Anything loaded once at boot (configuration,
   data cached in memory, files read on first use) ignores your edit until a
   restart. List what your system caches.
