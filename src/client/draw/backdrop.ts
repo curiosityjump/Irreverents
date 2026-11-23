@@ -50,6 +50,19 @@ export function skyBands(sky: string[]): string[] {
  * `fallback`.
  */
 export function drawBackdrop(g: CanvasRenderingContext2D, bd: Backdrop, room: Room, camX: number, camY: number, w: number, h: number, fallback: string): void {
+  drawSky(g, bd, w, h, fallback);
+  drawLayers(g, bd, room, camX, camY, w, h, false);
+}
+
+/**
+ * Round 2: the layers marked `front`, in front of bodies (render.ts draws
+ * them after effects and before front decoration).
+ */
+export function drawFrontLayers(g: CanvasRenderingContext2D, bd: Backdrop, room: Room, camX: number, camY: number, w: number, h: number): void {
+  drawLayers(g, bd, room, camX, camY, w, h, true);
+}
+
+function drawSky(g: CanvasRenderingContext2D, bd: Backdrop, w: number, h: number, fallback: string): void {
   const bands = skyBands(bd.sky ?? []);
   if (bands.length === 0) {
     g.fillStyle = fallback;
@@ -62,6 +75,9 @@ export function drawBackdrop(g: CanvasRenderingContext2D, bd: Backdrop, room: Ro
       g.fillRect(0, y0, w, y1 - y0);
     }
   }
+}
+
+function drawLayers(g: CanvasRenderingContext2D, bd: Backdrop, room: Room, camX: number, camY: number, w: number, h: number, front: boolean): void {
   const roomH = room.h * room.tile;
   // DRAFT: a layer pins to the screen's top or bottom edge, or to the room's own edge when the
   // room is shorter than the view and so sits inside it (an upright phone): hills drawn to stand
@@ -73,14 +89,24 @@ export function drawBackdrop(g: CanvasRenderingContext2D, bd: Backdrop, room: Ro
   // offsetY when the camera is against that edge. Rooms shorter than the view never shift.
   const camYClamped = Math.max(0, Math.min(Math.max(0, roomH - h), camY));
   for (const layer of bd.layers ?? []) {
+    if ((layer.front === true) !== front) continue;
     const img = image(layer.image);
     if (!img) continue;
     const iw = img.naturalWidth;
     const ih = img.naturalHeight;
     const bottom = layer.y === 'bottom';
-    const rest = bottom ? Math.max(0, roomH - h) : 0;
-    const shiftY = -(camYClamped - rest) * layer.parallaxY;
-    const y = Math.round((bottom ? bottomEdge - ih : topEdge) + layer.offsetY + shiftY);
+    let y: number;
+    if (layer.pin === 'room') {
+      // Round 2: measured from the room's own edge on screen, wherever that is, so in a view
+      // taller than the room the layer stays behind (or, `front`, in front of) the room.
+      // DRAFT: parallaxY is not applied to a room-pinned layer: it moves up and down with the room.
+      y = Math.round((bottom ? roomH - camY - ih : -camY) + layer.offsetY);
+    } else {
+      const rest = bottom ? Math.max(0, roomH - h) : 0;
+      const shiftY = -(camYClamped - rest) * layer.parallaxY;
+      y = Math.round((bottom ? bottomEdge - ih : topEdge) + layer.offsetY + shiftY);
+    }
+    if (y >= h || y + ih <= 0) continue;
     let x = Math.floor(-camX * layer.parallax);
     if (layer.repeatX === false) {
       g.drawImage(img, x, y);

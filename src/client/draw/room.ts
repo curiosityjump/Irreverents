@@ -116,9 +116,11 @@ function buildCache(room: Room, art: ReturnType<typeof artOf>, sheet: CanvasImag
   g.imageSmoothingEnabled = false;
   const p = MARGIN * T;
   const [tx0, ty0, tx1, ty1] = [-MARGIN, -MARGIN, room.w + MARGIN, room.h + MARGIN];
-  if (art.backdrop) drawBackWall(g, room, art.backdrop, solid, tx0, ty0, tx1, ty1, p, p);
+  const outside = art.backdrop?.outside ?? { above: 'fill', below: 'fill' };
+  // `outside.above: "sky"`: nothing past the room's top edge, the back wall included.
+  if (art.backdrop) drawBackWall(g, room, art.backdrop, solid, tx0, outside.above === 'sky' ? 0 : ty0, tx1, ty1, p, p);
   const decorReady = drawDecor(g, art.decor, 'far', T, p, p, canvas.width, canvas.height);
-  if (art.atlas && sheet) drawGround(g, room, art.atlas, sheet, solid, tx0, ty0, tx1, ty1, p, p);
+  if (art.atlas && sheet) drawGround(g, room, art.atlas, sheet, solid, tx0, ty0, tx1, ty1, p, p, outside);
   return { canvas, key, waiting: !decorReady, at: performance.now() };
 }
 

@@ -1,5 +1,7 @@
 import { TILE } from '../../content/kinds/rooms.ts';
+import { regionAt } from '../../content/kinds/atlases.ts';
 import type { Atlas } from '../../content/kinds/atlases.ts';
+import type { Backdrop } from '../../content/kinds/backdrops.ts';
 import type { Room } from '../../content/kinds/rooms.ts';
 
 /**
@@ -29,6 +31,12 @@ const isCell = (c: unknown): c is Cell => Array.isArray(c) && c.length === 2 && 
  * which may run past the room's edges), with tile (0, 0)'s top-left at
  * (px, py) on `g`. `solid(tx, ty)` is the "looks solid" set
  * (draw/room-parts.ts, `solidLook`), already continued past the edges.
+ * `outside` (the room's backdrop's, round 2) says what is painted past the
+ * room's top and bottom edges: `sky` paints nothing above row 0; `deep`
+ * paints the solid tiles below the last row from `autotile.deep`.
+ * INTENT: `outside` and regions change only which picture a tile gets. The
+ * index is worked out from `solid` exactly as before, so past the edge still
+ * looks solid and a secret still looks like the wall around it.
  */
 export function drawGround(
   g: CanvasRenderingContext2D,
@@ -42,10 +50,20 @@ export function drawGround(
   ty1: number,
   px: number,
   py: number,
+  outside: Backdrop['outside'] = { above: 'fill', below: 'fill' },
 ): void {
   const S = atlas.tile;
   const T = room.tile;
   const auto = atlas.autotile && isCell(atlas.autotile.origin) ? atlas.autotile : undefined;
+  // Above the room with a sky: nothing is painted, so the sky and its layers show.
+  const painted = (ty: number): boolean => !(outside.above === 'sky' && ty < 0);
+  const deep = outside.below === 'deep' && auto && (auto.deep?.length ?? 0) > 0 ? auto.deep : undefined;
+  const inRoom = (tx: number, ty: number): boolean => tx >= 0 && ty >= 0 && tx < room.w && ty < room.h;
+  // A region's own block and lists for a tile of the room, else the atlas's.
+  const blockOf = (tx: number, ty: number): { origin: Cell; fill: Cell[]; top: Cell[]; under: Cell[] } => {
+    const r = auto && inRoom(tx, ty) ? regionAt(auto, tx, ty) : undefined;
+    return { origin: r?.origin ?? auto!.origin, fill: r?.fill ?? auto!.fill, top: r?.top ?? auto!.top, under: r?.under ?? auto!.under };
+  };
   const put = (c: Cell | undefined, tx: number, ty: number): void => {
     if (!c || c[0] < 0 || c[1] < 0) return;
     g.drawImage(sheet, c[0] * S, c[1] * S, S, S, px + tx * T, py + ty * T, T, T);
@@ -55,6 +73,7 @@ export function drawGround(
 
   // Solid tiles first, then the pieces that hang off them, so a tuft is never covered by its neighbour.
   for (let ty = ty0; ty < ty1; ty++) {
+    if (!painted(ty)) continue;
     for (let tx = tx0; tx < tx1; tx++) {
       if (!solid(tx, ty)) {
         if (oneway(tx, ty)) {
@@ -71,12 +90,17 @@ export function drawGround(
         put(n ? atlas.cells.solid : atlas.cells.solidTop, tx, ty);
         continue;
       }
-      const index = (n ? 1 : 0) + (solid(tx + 1, ty) ? 2 : 0) + (solid(tx, ty + 1) ? 4 : 0) + (solid(tx - 1, ty) ? 8 : 0);
-      if (index !== 15) {
-        put([auto.origin[0] + (index % 4), auto.origin[1] + Math.floor(index / 4)], tx, ty);
+      if (deep && ty >= room.h) {
+        put(pick(deep, tx, ty, 4), tx, ty);
         continue;
       }
-      put(pick(auto.fill, tx, ty, 1) ?? [auto.origin[0] + 3, auto.origin[1] + 3], tx, ty);
+      const b = blockOf(tx, ty);
+      const index = (n ? 1 : 0) + (solid(tx + 1, ty) ? 2 : 0) + (solid(tx, ty + 1) ? 4 : 0) + (solid(tx - 1, ty) ? 8 : 0);
+      if (index !== 15) {
+        put([b.origin[0] + (index % 4), b.origin[1] + Math.floor(index / 4)], tx, ty);
+        continue;
+      }
+      put(pick(b.fill, tx, ty, 1) ?? [b.origin[0] + 3, b.origin[1] + 3], tx, ty);
       const ic = auto.innerCorners;
       if (!ic) continue;
       if (!solid(tx - 1, ty - 1)) put(ic.nw, tx, ty);
@@ -87,11 +111,13 @@ export function drawGround(
   }
   if (!auto) return;
   for (let ty = ty0; ty < ty1; ty++) {
+    if (!painted(ty) || (deep && ty >= room.h)) continue;
     for (let tx = tx0; tx < tx1; tx++) {
       if (!solid(tx, ty)) continue;
+      const b = blockOf(tx, ty);
       // A top surface: the piece stands in the open tile above (cells are one tile, so bottom-aligned is in place).
-      if (!solid(tx, ty - 1) && !oneway(tx, ty - 1)) put(pick(auto.top, tx, ty, 2), tx, ty - 1);
-      if (!solid(tx, ty + 1) && !oneway(tx, ty + 1)) put(pick(auto.under, tx, ty, 3), tx, ty + 1);
+      if (!solid(tx, ty - 1) && !oneway(tx, ty - 1) && painted(ty - 1)) put(pick(b.top, tx, ty, 2), tx, ty - 1);
+      if (!solid(tx, ty + 1) && !oneway(tx, ty + 1)) put(pick(b.under, tx, ty, 3), tx, ty + 1);
     }
   }
 }

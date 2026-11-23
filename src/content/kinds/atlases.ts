@@ -1,6 +1,7 @@
 import { readCell, readCellList, readImage, requireDraftNote } from '../art-fields.ts';
 import type { Cell } from '../art-fields.ts';
-import type { ContentKind } from '../types.ts';
+import { describe } from '../reader.ts';
+import type { ContentKind, Reader } from '../types.ts';
 
 /**
  * content/atlases/<room id>.json: the tile image that replaces a room's
@@ -40,6 +41,35 @@ export interface Autotile {
   under: Cell[];
   /** A one-way platform's cell by its place in a run. Null when the file has none (then `cells.oneway`). */
   oneway: { left: Cell; mid: Cell; right: Cell; single: Cell } | null;
+  /**
+   * Round 2 (the contract, "Round 2 additions"): cells chosen by hash for
+   * everything past the room's bottom edge, when the room's backdrop says
+   * `outside.below: "deep"`. Empty when the file has none (then the ground
+   * continues as before).
+   */
+  deep: Cell[];
+  /** Round 2: rectangles of the room drawn from their own 4×4 block and lists; the first that holds a tile wins. Empty when none. */
+  regions: AutotileRegion[];
+}
+
+export interface AutotileRegion {
+  /** [x, y, w, h] in room tiles. */
+  tiles: [number, number, number, number];
+  /** Top-left of this region's own 4×4 block (same index as `origin`). */
+  origin: Cell;
+  /** This region's own lists, or null to use the atlas's. */
+  fill: Cell[] | null;
+  top: Cell[] | null;
+  under: Cell[] | null;
+}
+
+/** The first region that holds room tile (tx, ty), if any. */
+export function regionAt(t: Autotile, tx: number, ty: number): AutotileRegion | undefined {
+  for (const r of t.regions ?? []) {
+    const [x, y, w, h] = r.tiles;
+    if (tx >= x && ty >= y && tx < x + w && ty < y + h) return r;
+  }
+  return undefined;
 }
 
 declare module '../types.ts' {
@@ -64,6 +94,38 @@ export function atlasCells(a: Atlas): { where: string; cell: Cell }[] {
   t.top.forEach((c, i) => add(`autotile.top[${i}]`, c));
   t.under.forEach((c, i) => add(`autotile.under[${i}]`, c));
   if (t.oneway) for (const [k, c] of Object.entries(t.oneway)) add(`autotile.oneway.${k}`, c);
+  t.deep.forEach((c, i) => add(`autotile.deep[${i}]`, c));
+  t.regions.forEach((r, i) => {
+    const w = `autotile.regions[${i}]`;
+    add(`${w}.origin (its 4×4 block)`, [r.origin[0] + 3, r.origin[1] + 3]);
+    for (const k of ['fill', 'top', 'under'] as const) (r[k] ?? []).forEach((c, j) => add(`${w}.${k}[${j}]`, c));
+  });
+  return out;
+}
+
+function readTiles(read: Reader, v: unknown, where: string): [number, number, number, number] {
+  if (Array.isArray(v) && v.length === 4 && v.every((n) => Number.isInteger(n) && n >= 0) && (v[2] as number) > 0 && (v[3] as number) > 0) return v as [number, number, number, number];
+  read.fail(where, `must be [x, y, w, h] in whole room tiles (w and h at least 1), but is ${describe(v)}`);
+  return [0, 0, 0, 0];
+}
+
+function readRegions(read: Reader, v: unknown): AutotileRegion[] {
+  if (v === undefined) return [];
+  if (!Array.isArray(v)) {
+    read.fail('autotile.regions', `must be a list of { "tiles": [x, y, w, h], "origin": [c, r] }, but is ${describe(v)}`);
+    return [];
+  }
+  const out: AutotileRegion[] = [];
+  v.forEach((raw, i) => {
+    const w = `autotile.regions[${i}]`;
+    const r = read.object(raw, w);
+    if (!r) return;
+    read.only(r, ['tiles', 'origin', 'fill', 'top', 'under'], w);
+    // DRAFT: a region's own fill needs only one cell (a strip of roof may want one); the atlas's own needs four.
+    const list = (k: 'fill' | 'top' | 'under'): Cell[] | null =>
+      r[k] === undefined ? null : readCellList(read, r[k], `${w}.${k}`, { allowNone: k !== 'fill' });
+    out.push({ tiles: readTiles(read, r.tiles, `${w}.tiles`), origin: readCell(read, r.origin, `${w}.origin`), fill: list('fill'), top: list('top'), under: list('under') });
+  });
   return out;
 }
 
@@ -81,7 +143,7 @@ const kind: ContentKind = {
     if (o.autotile !== undefined) {
       const t = read.object(o.autotile, 'autotile');
       if (t) {
-        read.only(t, ['origin', 'innerCorners', 'fill', 'top', 'under', 'oneway'], 'autotile');
+        read.only(t, ['origin', 'innerCorners', 'fill', 'top', 'under', 'oneway', 'deep', 'regions'], 'autotile');
         const four = <K extends string>(v: unknown, where: string, keys: K[]): Record<K, Cell> | null => {
           if (v === undefined) return null;
           const b = read.object(v, where);
@@ -97,6 +159,9 @@ const kind: ContentKind = {
           top: t.top === undefined ? [] : readCellList(read, t.top, 'autotile.top', { allowNone: true }),
           under: t.under === undefined ? [] : readCellList(read, t.under, 'autotile.under', { allowNone: true }),
           oneway: four(t.oneway, 'autotile.oneway', ['left', 'mid', 'right', 'single']),
+          // The contract: "a list of at least two cells, chosen by hash".
+          deep: t.deep === undefined ? [] : readCellList(read, t.deep, 'autotile.deep', { min: 2 }),
+          regions: readRegions(read, t.regions),
         };
       }
     }
@@ -111,7 +176,15 @@ const kind: ContentKind = {
   },
   check(content, fail) {
     for (const a of Object.values(content.atlases)) {
-      if (!(a.id in content.rooms)) fail(`content/atlases/${a.id}.json`, 'id', `no room "${a.id}": an atlas file is named after the room it draws`);
+      const room = content.rooms[a.id];
+      if (!room) {
+        fail(`content/atlases/${a.id}.json`, 'id', `no room "${a.id}": an atlas file is named after the room it draws`);
+        continue;
+      }
+      (a.autotile?.regions ?? []).forEach((r, i) => {
+        const [x, y, w, h] = r.tiles;
+        if (x + w > room.w || y + h > room.h) fail(`content/atlases/${a.id}.json`, `autotile.regions[${i}].tiles`, `[${r.tiles.join(', ')}] runs past room "${room.id}" (${room.w}×${room.h} tiles)`);
+      });
     }
   },
 };

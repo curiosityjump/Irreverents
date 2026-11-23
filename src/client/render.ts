@@ -3,7 +3,7 @@ import type { World } from '../sim/types.ts';
 import { drawAlert, drawBells } from './draw/alert.ts';
 import { drawAudience } from './draw/audience.ts';
 import { drawAway } from './draw/away.ts';
-import { drawBackdrop } from './draw/backdrop.ts';
+import { drawBackdrop, drawFrontLayers } from './draw/backdrop.ts';
 import { drawDecor } from './draw/decor.ts';
 import { drawEntities } from './draw/entities.ts';
 import type { PlayerView } from './draw/entities.ts';
@@ -59,6 +59,8 @@ export function render(g: CanvasRenderingContext2D, world: World, content: Conte
   drawDecor(g, decor, 'back', room.tile, ox, oy, W, H);
   drawEntities(g, world, content, roomId, ox, oy, pv);
   drawAway(g, world, content, roomId, ox, oy, pv);
+  // Round 2: backdrop layers marked `front` (foreground foliage along the bottom or top edge).
+  if (backdrop) drawFrontLayers(g, backdrop, room, -ox, -oy, W, H);
   // DRAFT: front decoration before the impact pass, not after the effects: drawImpact shakes the
   // finished picture, and a blade of grass that stayed still while the world shook would show.
   drawDecor(g, decor, 'front', room.tile, ox, oy, W, H);

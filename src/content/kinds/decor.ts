@@ -35,6 +35,11 @@ export interface DecorItem {
   layer: DecorLayer;
   /** Mirrored sideways (false when the file has none). */
   flip: boolean;
+  /**
+   * Round 2 (the contract, "Round 2 additions"): `lighter` draws it as added
+   * light in its layer (a torch's or a window's glow); null draws it normally.
+   */
+  blend: 'lighter' | null;
 }
 
 declare module '../types.ts' {
@@ -58,7 +63,8 @@ const kind: ContentKind = {
         const w = `items[${i}]`;
         const it = read.object(rawItem, w);
         if (!it) return;
-        read.only(it, ['image', 'src', 'tx', 'ty', 'dx', 'dy', 'layer', 'flip'], w);
+        read.only(it, ['image', 'src', 'tx', 'ty', 'dx', 'dy', 'layer', 'flip', 'blend'], w);
+        if (it.blend !== undefined && it.blend !== 'lighter') read.fail(`${w}.blend`, `must be "lighter" (or left out), but is ${describe(it.blend)}`);
         const layer = it.layer;
         if (!DECOR_LAYERS.includes(layer as DecorLayer)) read.fail(`${w}.layer`, `must be one of ${DECOR_LAYERS.join(', ')}, but is ${describe(layer)}`);
         const px = (f: string): number => (it[f] === undefined ? 0 : read.number(it, f, w, { min: -512, max: 512, integer: true }));
@@ -71,6 +77,7 @@ const kind: ContentKind = {
           dy: px('dy'),
           layer: DECOR_LAYERS.includes(layer as DecorLayer) ? (layer as DecorLayer) : 'back',
           flip: readBool(read, it, 'flip', w, false),
+          blend: it.blend === 'lighter' ? 'lighter' : null,
         });
       });
     const out: Decor = { id: read.string(o, 'id', ''), items };

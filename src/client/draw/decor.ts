@@ -30,11 +30,18 @@ export function drawDecor(g: CanvasRenderingContext2D, decor: Decor | undefined,
       complete = false;
       continue;
     }
-    if (it.flip) {
+    // Round 2: `blend: "lighter"` adds its light to what is under it (a torch's glow), then the
+    // canvas goes back to normal drawing. DRAFT: a `far` glow lands in the room's cached picture,
+    // so outdoors with no back wall under it, it is laid over the sky rather than added to it.
+    const glow = it.blend === 'lighter';
+    if (it.flip || glow) {
       g.save();
-      g.translate(x + sw, y);
-      g.scale(-1, 1);
-      g.drawImage(img, sx, sy, sw, sh, 0, 0, sw, sh);
+      if (glow) g.globalCompositeOperation = 'lighter';
+      if (it.flip) {
+        g.translate(x + sw, y);
+        g.scale(-1, 1);
+        g.drawImage(img, sx, sy, sw, sh, 0, 0, sw, sh);
+      } else g.drawImage(img, sx, sy, sw, sh, x, y, sw, sh);
       g.restore();
     } else g.drawImage(img, sx, sy, sw, sh, x, y, sw, sh);
   }
