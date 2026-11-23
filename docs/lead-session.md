@@ -61,6 +61,25 @@ is needed.
 It is not a manager. It writes no plans it has not measured, and reviews
 nothing by reading it.
 
+**Fewer, longer-lived builders (the owner, 2026-11-23 ~14:40 UTC, first-hand to
+Vision Partner, `docs/vision.md` "Principles"):** *"I want as much as possible to go
+into actually building the game. The structure is just meant to prevent wasteful
+work drifting from the vision or stepping on eachothers toes, fixing things that
+arent broken, etc. if things can be done more efficiently to get much more resukts
+for less tokens, the team has full license to do that"*. So, by default
+(`DRAFT:` set by orchestrator `session_017WiGzGp8auJceLEAAh9Aqx`, `docs/decisions-log.md`):
+- **One worker per step, reused.** Send each next brief to the same worker by
+  message (it pulls and re-reads the brief) instead of spawning a fresh one per
+  slice, while its context stays under about 400k tokens. Every cold start costs
+  a full read of these documents. Start a second worker only for a lane whose
+  paths don't overlap and that gets something in front of the owner sooner.
+- **Paperwork is what a cold successor needs, nothing more:** the status line
+  at claim and release, the brief, and a handoff note when you release. A report
+  that a message already carried needs no file entry as well.
+- **What stays:** briefs before builds, review by re-running, path ownership,
+  `DRAFT:`/`INTENT:` markers. Those are what stop drift, collisions and fixing
+  what isn't broken.
+
 **It also does not build, not even when the fix looks small.** In the project
 this system was derived from, two genuinely one-line fixes (a stale comment, a
 missing filter caught mid-review) were done directly by a lead, with no brief,
