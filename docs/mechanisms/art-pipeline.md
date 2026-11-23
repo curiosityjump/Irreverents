@@ -353,7 +353,8 @@ when you give it a picture.
 ## Draw order
 
 sky → backdrop layers → back wall → `far` decor → ground (autotile) and
-its `top`/`under` pieces → doors and working parts → `back` decor →
+its `top`/`under` pieces → doors, level entrances (Step 14) and working
+parts → level signs → `back` decor →
 shadows → things and bodies → effects → `front` decor → marks over heads,
 speech → screen furniture (alert pips). The debug record of what was
 drawn (`PlayerView.drawn`) is unchanged: scripted checks read it.

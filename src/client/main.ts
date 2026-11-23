@@ -16,6 +16,8 @@ import { setUpTune, tuneWanted } from './tune.ts';
 import { takeWords } from './draw/fx.ts';
 import { drawnSignalers } from './draw/outpost.ts';
 import { drawnCantina } from './draw/cantina.ts';
+import { drawnLevels } from './draw/levels.ts';
+import { levelProgress } from '../sim/levels.ts';
 import { setUpMenu, showGone, showStart } from './start.ts';
 import type { StartRecord } from './start.ts';
 
@@ -122,6 +124,8 @@ const debug = {
     /** Step 2, signal 6: every string drawn into the game picture this frame (draw/fx.ts, takeWords); the tuning panel and the page shell are HTML, not in it. */
     words: [] as string[],
     /** Step 11: the open party row's chips and the brawl's counter, as drawn (src/client/draw/cantina.ts); the row in CSS pixels of the page, so a check can tap it. */
+    /** Step 14 slice A: the level entrances this frame drew (art, name or none, pie) and the banner's name, if one is up (src/client/draw/levels.ts). */
+    levels: { entrances: [], banner: null } as ReturnType<typeof drawnLevels>,
     cantina: null as { row: { kind: string; slot: number; x: number; y: number; w: number; h: number; taken: boolean }[] | null; counter: { player: string; ko: number; falls: number }[] | null } | null,
   },
 };
@@ -275,6 +279,7 @@ function play(worldName: string): void {
     d.entities = result.drawn;
     d.me = result.drawn.find((e) => e.mine) ?? null;
     d.signalers = drawnSignalers();
+    d.levels = drawnLevels();
     d.words = takeWords();
     {
       const c = drawnCantina();
@@ -287,7 +292,17 @@ function play(worldName: string): void {
   }
   requestAnimationFrame(frame);
   // Step 17: the way back to the start screen (and a game's code and Share).
-  setUpMenu({ content, worldName, tab: stored, leave: () => net.leave() });
+  setUpMenu({
+    content,
+    worldName,
+    tab: stored,
+    leave: () => net.leave(),
+    // Step 14 slice A: a row per discovered level in the menu (src/client/start.ts).
+    levels: () => Object.values(content.levels ?? {}).flatMap((l) => {
+      const p = levelProgress(net.world, content, l.id);
+      return p.discovered ? [{ id: l.id, name: l.name, quarters: p.quarters }] : [];
+    }),
+  });
 }
 
 // INTENT: `?room=<name>` skips the start screen entirely and joins at once,

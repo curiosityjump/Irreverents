@@ -101,6 +101,36 @@ function words(content: Content, text: string, cssPerPixel: number): HTMLElement
   return span;
 }
 
+/** A level's completion pie (the look `level-pie-<n>`), `cssPerPixel` CSS pixels a game pixel; a plain ring until it loads. */
+function pieImage(content: Content, quarters: number, cssPerPixel: number): HTMLElement {
+  const span = document.createElement('span');
+  span.className = 'st-pie';
+  span.setAttribute('role', 'img');
+  span.setAttribute('aria-label', ['not yet', 'a quarter', 'half', 'three quarters', 'all'][quarters] ?? '');
+  const draw = (): boolean => {
+    const p = look(content, `level-pie-${quarters}`);
+    if (!p) return false;
+    const dpr = window.devicePixelRatio || 1;
+    const k = Math.max(1, Math.round(cssPerPixel * dpr));
+    const c = document.createElement('canvas');
+    c.width = p.w * k;
+    c.height = p.h * k;
+    c.style.width = `${c.width / dpr}px`;
+    c.style.height = `${c.height / dpr}px`;
+    const g = c.getContext('2d');
+    if (!g) return false;
+    g.imageSmoothingEnabled = false;
+    g.drawImage(p.img, p.x, p.y, p.w, p.h, 0, 0, p.w * k, p.h * k);
+    span.replaceChildren(c);
+    return true;
+  };
+  if (!draw()) {
+    const t = setInterval(() => draw() && clearInterval(t), 100);
+    setTimeout(() => clearInterval(t), 20000);
+  }
+  return span;
+}
+
 // ---- Look ----------------------------------------------------------------
 
 const CSS = `
@@ -140,6 +170,9 @@ const CSS = `
 #gone .st-col { display: flex; flex-direction: column; gap: 14px; width: 100%; max-width: 330px; }
 #gone .st-say { font-size: 16px; line-height: 1.4; }
 .st-link { font: 500 13px/1.35 ui-monospace, "SF Mono", Menlo, monospace; color: var(--pale); word-break: break-all; text-align: center; -webkit-user-select: text; user-select: text; }
+#game-menu .st-levels { display: flex; flex-direction: column; gap: 6px; }
+#game-menu .st-level { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 4px 10px; min-height: 32px; border-radius: 6px; background: rgba(34, 31, 68, .85); }
+#game-menu .st-pie { display: inline-flex; width: 24px; height: 24px; border-radius: 50%; }
 #game-menu .st-col { display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 330px; align-items: stretch; }
 #game-menu .st-code { align-self: center; margin: 4px 0 8px; }
 `;
@@ -351,6 +384,8 @@ export interface MenuOptions {
   tab: Kept;
   /** Leaving on purpose, before the page goes to the start screen. */
   leave(): void;
+  /** Step 14 slice A (additive): the levels discovered in this world, read each time the panel opens. */
+  levels?(): { id: string; name: string; quarters: number }[];
 }
 
 /**
@@ -414,9 +449,22 @@ export function setUpMenu(opts: MenuOptions): void {
   panel.addEventListener('click', (e) => {
     if (e.target === panel) shut();
   });
-  col.append(say, back, close);
+  // Step 14 slice A (D-078, D-079): a row per discovered level, its name and its completion pie.
+  // INTENT: a pie, never a digit, and nothing about a level not yet found or which place is missing.
+  const places = el('div', { class: 'st-levels' });
+  const fillLevels = (): void => {
+    const found = opts.levels?.() ?? [];
+    places.replaceChildren(
+      ...(found.length ? [el('div', { class: 'st-label' }, words(content, 'Places found', 2))] : []),
+      ...found.map((l) => el('div', { class: 'st-level', 'data-level': l.id, 'data-quarters': String(l.quarters) }, words(content, l.name, 2), pieImage(content, l.quarters, 2))),
+    );
+  };
+  col.append(places, say, back, close);
   panel.append(col);
-  btn.addEventListener('click', () => (panel.hidden = false));
+  btn.addEventListener('click', () => {
+    fillLevels();
+    panel.hidden = false;
+  });
   document.body.append(btn, panel);
   // INTENT (the review's item 11): the menu holds the way out, so nothing may
   // sit on it. On a `?tune` page the Tune button (tune.ts) places itself at

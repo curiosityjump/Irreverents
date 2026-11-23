@@ -72,6 +72,29 @@ first tick (`levelPlaces`).
 quarters rounded down, 4 only when every place is seen. One place in 13 is
 still an empty pie; the name on the sign is what says "discovered".
 
+## Drawn (`src/client/draw/levels.ts`, three lines in `render.ts`)
+
+- **The entrance**: the look `level-entry-<look>` (32×32, cut by the props
+  lane from P05's top row: `content/looks/levels.json`,
+  `tools/art/props/drive.py`), standing on the doorway's floor, centred on
+  it, after the doorway's own arch and before the working parts.
+- **The sign**, after the working parts (a gate never covers it), behind
+  the bodies: not discovered, the empty ring alone (`level-pie-0`) and no
+  name; discovered, the name in the pixel font and the pie
+  (`level-pie-<quarters>`) on a dark plate, 12 px above the art (clear of
+  the Go-in arrow). `DRAFT:` a sign that would overlap another is lifted
+  above it (the courtyard's quarry and camp doorways are five tiles apart).
+- **The banner**: the first time this page sees the level its own hero is
+  in become discovered, the name across the top for two seconds.
+  `INTENT:` it takes no input and stops nothing.
+- **The menu** (`setUpMenu`, `levels` option from `main.ts`): "Places
+  found", a row per discovered level with its pie, read when it opens.
+- `INTENT:` no digit anywhere (`t-no-numbers`), no list or count of what
+  is missing (D-079). This is the one sign a door may carry; the check
+  refuses a hidden door as an entry.
+- `window.irreverents.drawn.levels`: `{ entrances: [{ level, room, door,
+  look, discovered, name, quarters }], banner }`.
+
 ## Proof
 
 - Scenarios (fact `level`, `src/scenarios/facts/level.ts`):
@@ -89,3 +112,11 @@ still an empty pie; the name on the sign is what says "discovered".
   store loads it, the server's world and the joining page's own world have
   it, a new code does not. Controls watched to fail: the room-in-two rule
   removed; saving off for the check's code.
+- `npm run e2e`, facts `level-*` (`scripts/e2e/levels.ts`), a phone by
+  touch: at the quarry's doorway the mine entrance, the empty ring and no
+  name (`level-entrance`); in by Use (the banner says "Iron Quarry") and
+  back, the name and the world's pie (`level-found`; one place of 13 is
+  still the empty pie); into the camp and back, its full pie
+  (`level-full`); the menu by touch lists the three levels found with
+  their pies and Close shuts it (`level-menu`). Screenshots, sideways and
+  upright: `docs/plan/step-14-shots/` (copied from a run's `e2e-out/levels/`).

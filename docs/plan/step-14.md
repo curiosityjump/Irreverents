@@ -187,3 +187,7 @@ Don't grade these; list them.
 Slice A (`session_017WiGzFeeJgj8z2SUAFyu5J`):
 - `src/content/kinds/rooms.ts` still says of areas "Nothing reads these yet"; levels now count them. Not my file; the doc is fixed (`rooms-and-doors.md`).
 - A page's own world runs `level-explore` for its own hero (it only adds what the server adds a moment later); the brief said "written only by the server's step". Logged as `DRAFT:` at the system; to make it server-only, skip when the world has no `~cantina:` style marker, or have the server set a flag.
+- The e2e's "part-filled pie" after the quarry: walking in and out sees 1 of its 13 places, which rounds down to the empty pie (the brief's own rounding). So `level-found` checks the name and the pie the world says, and `level-full` shows a filled pie at the one-room Bandit Camp. Whether an empty pie under a name reads as "found" is the owner's to judge by playing.
+- `npm run check:live` after push 1: `fight-back` (Step 18's guard fact) failed on live once, its 30 s with the hero not moved; nothing in this slice touches guards or combat. Not re-run.
+- Taste, for the owner: the signs' size and place; whether the camp's and quarry's signs, stacked, are too much in the courtyard; the banner.
+- `npm run e2e` on push 2 after rebasing onto 18f7c48: `t-throw-friend`, `s-throw-friend`, `s-after` failed once (B not drawn flying); the same run on 18f7c48 alone and a rerun with push 2 both passed. Logged as a possible flake in Step 2's throw facts; not investigated.

@@ -214,7 +214,8 @@ file, no "exists", the part state and the body's place gone).
   page as it always was.
 - **In play**, a three-bar button in the top-left corner (the sound
   button has the top-right) opens a panel: a kept game's code and
-  **Share** (`navigator.share` with the link, else copied), then **Back to
+  **Share** (`navigator.share` with the link, else copied), then the
+  levels found with their pies (Step 14, `docs/mechanisms/levels.md`), then **Back to
   the start screen** (`INTENT:` the way out; it says `bye` and loads the
   bare address) and **Close**. A `?room=` world has only Back and Close.
 - Words are the game's pixel font (`content/looks/font.json`,
