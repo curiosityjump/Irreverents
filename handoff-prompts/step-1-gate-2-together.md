@@ -169,16 +169,25 @@ By the lead, 2026-11-23 04:02–04:10 UTC, in a container like yours.
   3. **`/healthz` says how many players are in the default world** (one
      added field; keep every existing field). Sessions look at it before
      pushing code while someone may be playing.
-  4. **Joining seats you in the one shared party.** A joiner takes a
-     party member nobody is playing; leaving or timing out frees it; when
-     every member is taken, the next visitor is offered a private world,
-     never a duplicate or a blank page. Step 2 owns the party list
-     (`content/party.json`) and switching; you own the seat on join,
-     leave and rejoin, **through one call the simulation offers**. Step 2
-     is making `spawnPlayer` choose the first unplayed member when no
-     character is passed: use that as the call, do not write a second
-     chooser, and message the lead if it is not on `main` when you need
-     it.
+  4. **Joining seats you in the one shared party** (corrected 04:39 UTC;
+     the call is agreed with the Step 2 lead, all existing names in
+     `src/sim/world.ts`). **Join:** `spawnPlayer(world, content, { player,
+     room, spawn? })` with **no** `character`: the simulation picks the
+     first member of `content/party.json` nobody is playing, and when all
+     are taken the first member again. **Nobody is ever turned away or
+     sent to a private world** (Step 2's decision, logged). That
+     no-character behaviour is being built by Step 2 now; until the lead
+     tells you it is on `main`, keep passing
+     `content.game.playerCharacter`, behind one line that is easy to
+     drop. **Leave** (page gone past your timeout): `removeEntity(world,
+     'p:<player id>')`; Step 2's systems release anything carried or
+     held. **Rejoin** with the same id while the entity exists: call
+     nothing, the character and its current member are kept; after
+     removal, join again. **A switch of member changes `entity.kind` on
+     the same entity id**, done by the player's own device (the `switch`
+     action), so your layer carries `kind` for a client-owned entity like
+     any other field: replicate the entity generically, do not
+     special-case position.
   5. **A reload is still you.** Keep the random player id on the device
      (`localStorage`, falling back to memory if it throws), not only for
      the tab's life, and send it on joining. This replaces the "for the
