@@ -153,8 +153,15 @@ whether it is fun; that is the owner's, in the morning.
 design principles, iPhone-first above all (D-093); the design library's
 labels (a proposal used tonight is in use, not canon: D-096). Art comes
 through Vision Partner (`docs/mechanisms/asset-requests.md`); nothing
-waits for it. The usage limit is shared with the owner's other projects:
-at most about four leads at once, each with one or two workers.
+waits for it. The usage limit is shared with the owner's other projects.
+The owner was told "about five leads at once, each with one or two
+workers" and then said not to stop; since 04:53 UTC six leads are
+running, because the king's first half is small and says most about what
+the game is. Hold there until a step closes: at each check-in read
+`rate_limit_info` on a running session, and at any warning stop opening
+steps and let workers finish what is in flight. If the limit is hit,
+everything pauses until about 08:20 UTC and the orchestrator's 08:26 wake
+relaunches what stopped.
 
 **Escalation.** None to the owner tonight: *"I don't want anything being
 bottlenecked by permissions issues or design decisions from me. … Use your
