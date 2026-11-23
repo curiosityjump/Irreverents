@@ -1,0 +1,24 @@
+{
+  "//": "DRAFT (Step 20): a test outpost so the machine's scenarios can break a real horn post (src/sim/systems/outpost-signaler.ts). Nobody calls (no callers), so no wave ever walks in. breakSpeed 300 as at the camp (content/outposts/outpost.json).",
+  "id": "test-machine",
+  "room": "test-machine",
+  "signaler": "tm-post",
+  "callers": [],
+  "entry": [
+    90,
+    8
+  ],
+  "bound": 8,
+  "callTime": 3,
+  "callAgain": 6,
+  "breakHits": 3,
+  "breakSpeed": 300,
+  "waves": [
+    [
+      {
+        "character": "outpost-fighter",
+        "npc": "outpost-fighter"
+      }
+    ]
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "id": "step20-barricade-breaks-and-rolls-on",
+  "proves": "a hero driving the wagon flat out into a breakable barrier bursts it (the barrier's own rule, no new one), rolls on through at speed and rams the fighter standing behind it, and the stick still steers after: held the other way it brakes and drives the wagon back west (G-08, 'controls recover') (control: the barrier's breakSpeed set to 400, above the wagon's top speed: it holds, the wagon stops at it and the fighter behind is never launched)",
+  "room": "test-machine",
+  "players": [{ "id": "a", "character": "ram-wagon", "spawn": 0 }],
+  "entities": [{ "id": "behind", "character": "outpost-fighter", "tile": [64, 8] }],
+  "inputs": [{ "player": "a", "from": 0, "to": 240, "x": 1 }, { "player": "a", "from": 240, "to": 330, "x": -1 }],
+  "ticks": 330,
+  "expect": [
+    { "fact": "event-where", "event": "part-broken", "where": { "part": "barrier", "by": "p:a" }, "between": [190, 215], "count": [1, 1] },
+    { "fact": "event-where", "event": "machine-crash", "where": { "machine": "p:a", "target": null }, "between": [190, 215], "count": [1, 1] },
+    { "fact": "velocity", "player": "a", "at": 210, "vx": [300, 340] },
+    { "fact": "event-where", "event": "impact", "where": { "entity": "behind", "other": "p:a" }, "between": [205, 230], "count": [1, 1] },
+    { "fact": "position", "player": "a", "at": 240, "x": [1100, 1250] },
+    { "fact": "velocity", "player": "a", "at": 330, "vx": [-340, -100] }
+  ]
+}

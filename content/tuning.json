@@ -368,6 +368,11 @@
       "attackRecovery": 0.4,
       "weight": 140,
       "toughness": 480
+    },
+    "ram-wagon": {
+      "//": "DRAFT (Step 20): the ram wagon's body. Weight 200: a ram at 340 px/s sends a camp fighter (40) off at the launch cap and a heavy (120) at about 380; nobody on the roster can lift it (the grappler lifts 150); a body thrown into it barely moves it. Toughness 0: it is never knocked out, it wears to a wreck by its own count of crashes (content/machines/ram-wagon.json).",
+      "weight": 200,
+      "toughness": 0
     }
   }
 }

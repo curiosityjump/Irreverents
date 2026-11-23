@@ -1,0 +1,9 @@
+{
+  "//": "DRAFT (Step 20): the body of the armoured ram wagon (content/machines/ram-wagon.json). Its box is inside 32 by 32 (src/content/kinds/characters.ts, an INTENT); the 48 by 44 look is drawn bottom-centred over it. No jump, no switch, no attack: the stick drives it (src/sim/verbs/drive.ts). The id is the function; the name is data.",
+  "id": "ram-wagon",
+  "name": "Ram Wagon",
+  "box": { "w": 32, "h": 26 },
+  "color": "#6e5a3c",
+  "verbs": ["drive", "body"],
+  "tuning": "ram-wagon"
+}

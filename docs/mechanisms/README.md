@@ -97,6 +97,9 @@ groups) whenever you add one — never update the number from memory.
 - `verbs/jump.ts` (declares) + `systems/physics.ts` (reads), the attack's phases, `beatTicks`, the floor bounce, `systems/body-stun.ts` — game feel: each character's own arc (apex hang, fall gravity, fall cap), a wind-up / strike / recovery swing, a held beat scaled by impact speed, bodies bouncing off floors, and the states drawing reads (`c.landing`, `c.airborne`, `c.stunned`…) (Step 2, 2026-11-23).
 - `content/placements/<room id>.json` + `populateRoom` — who and what stands in a room, as bodies nobody plays; scenarios get them with `"placements": true` or their own `entities` (Step 2; Step 4 owns the kind from here).
 
+**Machines** (`docs/mechanisms/machines.md`)
+- `content/machines/<id>.json` + verb `drive` + system `machine-ram` + `ram()` in `src/sim/machines.ts` + `World.machines` — a machine body the stick drives (slow to build, rolls on); at its ramSpeed it shoves bodies by weight (the one ram rule, shared with Step 18), and each crash wears it to a wreck for good (Step 20).
+
 **Powers** (`docs/mechanisms/powers.md`)
 - `content/powers/<id>.json` + `src/sim/powers.ts` (`numbersOf`, `verbsOf`, used at all four read sites) + effect `power` + `c.power` — a power is a numbers overlay and lent verbs on top of whoever holds it, reaching the holder's own page as an effect (Step 9).
 - systems `power-carriers`, `power-take` + `src/sim/power-orbs.ts` + `~power-orb` (no body) + `src/client/draw/powers.ts` — a carrier laid flat drops its power as a bouncing orb nobody can take for 0.6 s; a hero holding none takes it by touch; it fades if left (Step 9).

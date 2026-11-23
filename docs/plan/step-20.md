@@ -122,3 +122,16 @@ arrive). The orchestrator writes its brief from this file and
 `docs/plan/core-loops.md`, section 6.
 
 ## Builder notes
+
+**Builder A, push 1 (drive and ram, sim only).** Landed: the `ram-wagon`
+character, `content/machines/ram-wagon.json`, the `drive` verb, the ram
+rule (`ram()` in `src/sim/machines.ts`) and `machine-ram`, `World.machines`,
+the check room `test-machine` with a test outpost (no callers) for the post.
+Nothing is reachable by a player until builder B's push 2. Notes:
+- A flying body that meets the wagon still shoves it (impact-bodies' rule;
+  the wagon is a body of weight 200): a heavy launched into a rolling wagon
+  can knock it flying, and while flying it neither drives nor rams. Left as
+  the impact rules make it.
+- The test room's barrier puts its part state in every world (as every
+  room's parts do): the `together` check's snapshot grew 2376 to 2477 bytes.
+- Not verified: anything on a page (push 1 has no drawing and no seat).

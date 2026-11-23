@@ -1,0 +1,14 @@
+{
+  "id": "step20-ram-snaps-the-post",
+  "proves": "a hero driving the wagon flat out (340 px/s, above the outpost's breakSpeed of 300) into the horn post snaps it at once, by the post's own rule, and rolls on past it (control: the wagon's rider top speed set to 290, under the post's breakSpeed: it rams the post and the post stands)",
+  "room": "test-machine",
+  "placements": true,
+  "players": [{ "id": "a", "character": "ram-wagon", "spawn": 0 }],
+  "inputs": [{ "player": "a", "from": 0, "to": 200, "x": 1 }],
+  "ticks": 200,
+  "expect": [
+    { "fact": "event-where", "event": "machine-crash", "where": { "machine": "p:a", "target": "tm-post" }, "between": [130, 160], "count": [1, 1] },
+    { "fact": "event-where", "event": "signaler-broken", "where": { "outpost": "test-machine", "signaler": "tm-post", "by": "p:a" }, "between": [130, 160], "count": [1, 1] },
+    { "fact": "position", "player": "a", "at": 200, "x": [720, 820] }
+  ]
+}

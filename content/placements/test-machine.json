@@ -1,0 +1,15 @@
+{
+  "//": "DRAFT (Step 20): the horn post of content/outposts/test-machine.json, at column 40 of the machine's check room.",
+  "id": "test-machine",
+  "room": "test-machine",
+  "place": [
+    {
+      "id": "tm-post",
+      "character": "signal-post",
+      "tile": [
+        40,
+        8
+      ]
+    }
+  ]
+}

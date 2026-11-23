@@ -124,7 +124,9 @@ push. All are `DRAFT:`.
 | `world.jobs` | top-level: by heist id, `{ from, seen }`, the job in progress (server only) | heist | the waves slice's detector may read `seen` |
 | `world.roster` | top-level: the character ids unlocked in this game; absent means every roster character (today's behaviour) | rescue | `cantina-regulars`, the swap row |
 | `world.sources` | top-level: power source ids a hero has found | powers | the menu row |
+| `world.machines` | top-level: by a machine's entity id, `{ wear, wrecked }` (crashes taken; a wreck is for good); absent until the first crash | vehicles (Step 20, builder A push 1) | the rider's own page (`drive`), the machine's look (push 3) |
 | effect `power` | `{ kind: 'power'; power: string \| null }` in `src/sim/effects.ts`: the holder's own page gains or loses it | powers | the page's own verbs and HUD |
+| events (Step 20) | `machine-crash`, `machine-wrecked` (push 1); `machine-taken`, `machine-left` (push 2) | vehicles | the look, banners, sounds |
 | events | `piece-found`, `place-found`, `set-complete` (glints); `prize-taken`, `prize-banked`, `clean-getaway`, `prize-returned` (heist; Step 21 emits the last, after `returnPrize`; an unseen deed is already the `deed` event with no `witnesses`); `power-taken`, `power-dropped` (powers); `recruited` (rescue); `hall-legend` (waves) | their slice | banners, the detector |
 | `src/sim/use.ts`, `src/sim/use/*.ts` | the one place that decides what a press of Use does here and the word the button shows | heist, push 1 | rescue (`free`), vehicles (`get-in`): one new file each |
 | `content/prompts.json` | the Use button's words, by entry | heist | one added row per later entry |
@@ -513,7 +515,9 @@ one shared rule. It rewrites the camp's room, placements and outpost files and
 so every tick-pinned real-camp scenario: two builders, never beside the rescue
 slice.
 
-**Step:** 20 (new). **Signal:** in `docs/plan/step-20.md`. **Status: waits.**
+**Landed (builder A push 1):** the wagon drives and rams in the check room `test-machine` (`docs/mechanisms/machines.md`); not yet in the camp, no seat, no look.
+
+**Step:** 20 (new). **Signal:** in `docs/plan/step-20.md`. **Status: building** (builders A and B).
 
 ## 7 · Risk
 
