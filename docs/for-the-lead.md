@@ -106,11 +106,3 @@ on — covers everything that used to arrive through a session's own final
 message: findings and flags alike, folded into the one report that is
 actually read (questions for the owner go through
 `docs/questions-inbox.md`).
-
-### step-7-b-detector.md
-
-- **Stopped on the lead's 08:35 UTC hold, not finished and not green.** Only the record shape is on `main` (a5c98c3). Everything else is unpushed and saved whole as `handoff-prompts/step-7-b-working-copy.patch` (25 files, against a5c98c3; `git apply` it, then expect to re-fit it to what has landed since).
-- **In the patch, built and passing when last run:** `content/hall/hall.json` + `src/content/kinds/hall.ts` (`content.hall.kinds[id].name`, `.stats[id].label`, signals/event names as data), `content/characters/pedestal.json` + tuning set, `content/rooms/test-hall.json`, `src/sim/hall/{watch,hang,detect,index}.ts`, `src/sim/systems/hall-detect.ts` (order 900), `step()`'s fourth argument `incoming`, scenario fields `events` and `hall`, facts `hall-record` and `entity-bytes`, and 7 of 9 `step7-*` scenarios (escape, scuffle, same-feat-twice, solo, quiet-theft, theft-noticed, restored).
-- **Failing in the patch:** `step7-last-stand-lost` (the picture is empty: the alert-rise capture does not happen on the tick trouble opens, look at `rose`/`shot` in `detect.ts`) and `step7-hall-is-full` (my scenario's own numbers: its new escape scores 29, under the stored 30).
-- **Not done:** the lead's four 04:50 to 04:58 messages were read only at 08:31, so none is applied: `restoreHall` must never throw and must return what it skipped; a quiet theft must also require `deed.witnesses` to be empty; `Components.hall.lasting?: boolean`; the docs go into the existing `docs/mechanisms/hall-of-legends.md`. Also undone: every failing control, the byte measurements, `docs/architecture.md`, `docs/mechanisms/scenarios.md`, `docs/deliberate-designs.md`, the decisions-log entries (floors, weights, titles, which pedestal leaves a full floor).
-- **Flag:** `scripts/trace.ts` calls `feet()` on every entity and will throw on the bodiless `hall:watch` (unknown kind, room `''`); not verified, and `scripts/` is Step 1's.
