@@ -124,7 +124,7 @@ may overrule one with a measurement, recording why here.
   owner's game.
 - **`/healthz` keeps reporting the deployed commit**, as the probe does,
   **and says whether the server has lasting storage** (added 2026-11-23
-  04:20 UTC: the owner asked how to add a Railway volume and was told to
+  04:16 UTC: the owner asked how to add a Railway volume and was told to
   mount it at `/data`; Railway then sets `RAILWAY_VOLUME_MOUNT_PATH` and
   `RAILWAY_VOLUME_NAME` for the running server by itself). Report
   whether that variable is set and the path is writable, nothing more;

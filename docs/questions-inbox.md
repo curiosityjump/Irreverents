@@ -65,5 +65,5 @@ wording when it rewrites an entry.
 - **Answer goes to:** `docs/plan/step-7.md` "Open with the owner"
 - **Source:** `docs/plan/step-7.md`, "What's decided"
 - **Blocking:** no
-- **Note (orchestrator, 2026-11-23 ~04:18 UTC):** the owner then asked the orchestrator, first-hand, "Tell me how to add the railway volume", and was given the steps (create a volume in the Railway project, attach it to the Irreverents service, mount path `/data`). That is not yet an answer to this question; once a volume exists the live `/healthz` will say so (`docs/plan/step-1.md`), and the orchestrator opens the saving work then.
+- **Note (orchestrator, 2026-11-23 ~04:16 UTC):** the owner then asked the orchestrator, first-hand, "Tell me how to add the railway volume", and was given the steps (create a volume in the Railway project, attach it to the Irreverents service, mount path `/data`). That is not yet an answer to this question; once a volume exists the live `/healthz` will say so (`docs/plan/step-1.md`), and the orchestrator opens the saving work then.
 
