@@ -32,6 +32,22 @@ Hall.
 **The machine.** In the courtyard, a heavy patrol machine that can be
 knocked open, climbed into and driven through a roadblock that breaks.
 
+## How to cut it (a suggestion, not a rule)
+
+Opened early (04:45 UTC, 2026-11-23), before the rooms and the people it
+will finally read exist, because three of its parts wait on nobody:
+**the store** on the owner's volume; **the detector**, built against
+made-up events that use exactly the event names in
+`docs/architecture.md` (Step 2's hits and knock-outs are there now; ask
+Step 4's lead for the names of its calls and alert changes before
+inventing any); and **the record itself** (the picture, who was there,
+the numbers). Placing pedestals in the gallery waits for Step 3's room;
+the real zero-alarm scenario waits for Step 4. The server's own files are
+Step 1's until its second gate lands (about 06:30 UTC): the store is a
+new file of your own beside them, and the one line that starts it is
+agreed with Step 1's lead. The machine comes last; if the night runs
+short it is the part to leave.
+
 ## What's decided
 
 - **Detected from what happened, not from a list of achievements.** The
@@ -113,8 +129,10 @@ Signals 1–3 pass on `main` and live (4 if the machine was built).
 ## Owns
 
 The legend detector, Hall records and their display, the machine and the
-roadblock; exact paths as `docs/architecture.md` assigns them. Queued
-behind Steps 3 and 4.
+roadblock; exact paths as `docs/architecture.md` assigns them. Scenarios
+are named `step7-*.json`, tagged `"gate": "E"` where they are evidence
+for it; gate E counts only when `npm run gates` lists a scenario for each
+of signals 1 and 2.
 
 ## Taste, for the owner in the morning
 

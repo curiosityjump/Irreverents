@@ -256,7 +256,7 @@ Full text: `docs/plan/step-6.md`
 
 ## Step 7 — A Hall that remembers, and a machine to steal
 
-**Status: open, unclaimed — queued behind Step 4.** (And Step 3: it needs the gallery and the alert system.)
+**Status: open, unclaimed.** (Opened early, 2026-11-23 04:45 UTC: the store, the detector and the record wait on nobody; see its "How to cut it".)
 
 Full text: `docs/plan/step-7.md`
 
