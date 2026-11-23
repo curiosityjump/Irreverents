@@ -12,6 +12,8 @@
     "level-pie-2": {"src": [24, 32, 12, 12]},
     "level-pie-3": {"src": [36, 32, 12, 12]},
     "level-pie-4": {"src": [48, 32, 12, 12]},
-    "level-sign": {"src": [60, 32, 16, 16]}
+    "level-sign": {"src": [60, 32, 16, 16]},
+    "piece-grey": {"src": [76, 32, 12, 12]},
+    "piece-gold": {"src": [88, 32, 12, 12]}
   }
 }

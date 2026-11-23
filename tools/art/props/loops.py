@@ -280,3 +280,30 @@ CLOTH = ('hall-banner-tower', 'hall-banner', 'hall-banner-laurel', 'hall-drape',
 def hall(which):
     pal = HALLR + ramps('pink') if which in CLOTH else HALLR
     return grab('hall', HALL[which], 0.2, pal, key=HALLKEY, grid=True)
+
+
+# ---- asks from the core-loop builders (brief item 5)
+def puzzle_piece(gold):
+    """The glints builder's found row (Step 14 slice B): P05 HUD sheet's bottom row, the grey and the gold jigsaw
+    piece. The plate's edge cuts each piece off below its side knobs, so the visible top is mirrored about the
+    knob row (y 498) to close it: a piece with knobs above and below is still a jigsaw piece.
+    DRAFT: 12 x 12, not the 8 x 8 asked: at 8 the knobs go and it is a blob (tried fill 0.2-0.5)."""
+    from PIL import Image, ImageOps
+    from srcimport import _cache, sheet
+    x0, x1 = (505, 572) if gold else (436, 504)
+    top = sheet('hud').crop((x0, 455, x1, 498))
+    im = Image.new('RGBA', (x1 - x0, 86), (245, 245, 244, 255))
+    im.paste(top, (0, 0))
+    im.paste(ImageOps.flip(top), (0, 43))
+    _cache['hud-piece'] = im
+    pal = ramps('gold', 'orange') if gold else ramps('stone', 'castle', 'metal')
+    return grab('hud-piece', (0, 0, x1 - x0, 86), 0, pal, key=(245, 245, 244), size=(12, 12), fill=0.3,
+                majority=False)
+
+
+def goods_special():
+    """The glints builder's once-only shop good: the Hall atlas's crown on a cushion in its glass case."""
+    g = grab('hall', HALL['hall-case-crown'], 0, HALLR + ramps('pink'), key=HALLKEY, grid=True, size=(14, 16))
+    out = new(16, 16)
+    paste(out, g, 1, 0)
+    return out

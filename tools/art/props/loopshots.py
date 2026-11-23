@@ -125,7 +125,24 @@ def hall():
     return scene
 
 
-SCENES = {'rides': rides, 'powers': powers, 'treasure': treasure, 'hall': hall}
+def asks():
+    """the glints builder's asks in place: an entrance with its sign, pie and found pieces; the shop's goods with the
+    special one among them"""
+    lv, LL = looks('levels')
+    tr, TL = looks('treasure')
+    pr, PL = looks('parts')
+    scene = ground(140)
+    place(scene, frame(lv, LL['level-entry-arch']), 70, 140)
+    place(scene, frame(lv, LL['level-sign']), 100, 140)
+    for i, k in enumerate(('level-pie-2', 'piece-gold', 'piece-grey', 'piece-grey')):
+        scene.alpha_composite(frame(lv, LL[k]), (60 + i * 14, 94))
+    for i, k in enumerate(('shop-goods', 'goods-special', 'shop-goods')):
+        img, L = (tr, TL) if k == 'goods-special' else (pr, PL)
+        place(scene, frame(img, L[k]), 196 + i * 22, 140)
+    return scene
+
+
+SCENES = {'rides': rides, 'powers': powers, 'treasure': treasure, 'hall': hall, 'asks': asks}
 
 if __name__ == '__main__':
     os.makedirs(OUT, exist_ok=True)

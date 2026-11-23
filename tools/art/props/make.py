@@ -109,6 +109,7 @@ def looks_sheets():
     for n in range(5):
         s.add('level-pie-%d' % n, dv.level_pie(n))
     s.add('level-sign', dv.level_sign())
+    s.add('piece-grey', lo.puzzle_piece(False)); s.add('piece-gold', lo.puzzle_piece(True))  # glints builder's ask
     out.append(('levels', 'props/levels.png', s))
     # ---- the core loops' rides (loops.py: P04 vehicle-and-mount sheet; handoff-prompts/loop-art-cutouts.md)
     s = Sheet(192)
@@ -149,6 +150,7 @@ def looks_sheets():
     s.add('gold-pile', lo.gold_pile()); s.add('gem', lo.gem()); s.add('gem-pedestal', lo.gem_pedestal())
     s.newrow()
     s.add('hoard', lo.hoard(False)); s.add('hoard-taken', lo.hoard(True)); s.add('vault-cave', lo.vault_cave())
+    s.add('goods-special', lo.goods_special())  # the glints builder's once-only shop good
     out.append(('treasure', 'props/treasure.png', s))
     # ---- the core loops' Hall of Legends pieces (loops.py: P04 hall-of-legends atlas)
     s = Sheet(256)

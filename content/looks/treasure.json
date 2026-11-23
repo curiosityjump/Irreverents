@@ -23,6 +23,7 @@
     "gem-pedestal": {"src": [84, 58, 20, 22]},
     "hoard": {"src": [0, 80, 32, 16]},
     "hoard-taken": {"src": [32, 80, 32, 16]},
-    "vault-cave": {"src": [64, 80, 64, 30]}
+    "vault-cave": {"src": [64, 80, 64, 30]},
+    "goods-special": {"src": [128, 80, 16, 16]}
   }
 }
