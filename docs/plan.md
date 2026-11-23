@@ -405,7 +405,7 @@ Full text: `docs/plan/step-19.md`
 
 ## Step 20 — A machine to steal, and things to crash it through
 
-**Status: open, unclaimed.** (No brief yet: waits for Step 19's and Step 7's first pushes; two builders; never beside Step 13 in the camp's files.)
+**Status: open, claimed by orchestrator session_017WiGzJzo6aZqH4kYxxJsiV (builders: session_017WiGzGBREdxtzPBSo4mcca), 2026-11-23.** (Briefs `handoff-prompts/loop-vehicles-a.md`, the machine in a test room, started 22:00 UTC; `loop-vehicles-b.md`, the camp run, held until `loop-waves.md` pushes 1 and 2 are on `main`.)
 
 Full text: `docs/plan/step-20.md`
 
