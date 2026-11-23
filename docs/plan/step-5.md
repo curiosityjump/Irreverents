@@ -366,3 +366,54 @@ button art is in the library mirror, not in `assets/`.
     run the friend moves 5-30 px instead of about 100: the throw does not
     happen, rather than falling short. Worth a look by whoever owns
     `scripts/lib/e2e-touch.ts` and the throw (851eda9 changed it).
+
+## Builder notes
+
+### Flakes (brief `handoff-prompts/step-5-e2e-flakes.md`)
+
+**Measured** by the builder `session_017WiGzJujVWWDboh12zWhNR`,
+2026-11-23 21:34-22:44 UTC: 10 serial `npm run e2e` runs at `main` 54ce74b
+on a quiet machine (the container restarted at 21:33; nothing else running,
+4 cores, 1-minute load 0.8-2.1 during the runs, which is the run itself).
+Each run reports 87 facts. **4 runs of 10 had at least one failure.**
+`npm run e2e` cannot run one part (its only switch is `--live`), so the
+"`h1`/`h2` and friend-grab alone" rates were not taken.
+
+| Fact | Failures of 10 | Run | The failing line |
+|---|---|---|---|
+| `cantina-row` | 2 | 5, 10 | "a tap on a wandering hero outside the party (brawler) opened the party row: nothing drawn" |
+| `cantina-swap`, `cantina-switch` | 1 | 8 | "a tap on no free chip put brawler in the party …" (the row did not open again within 2 s, so no chip was found; switch then never reached the brawler) |
+| `t-throw-friend` | 1 | 5 | "A's page drew B NOT fly: 19 px from where it was, 29 px of it inside a quarter second" (the fact wants 40 px in a quarter second; a good throw is about 100) |
+| `h1`, `h2` | 1 | 9 | h1: "the desktop page said "Reconnecting…" (and still at the end), its player could still move: true; it did NOT come back within 10 s of the server returning"; h2 (the next restart): "reloaded 0 time(s) … did NOT pick up the new build and is reconnecting" |
+| `t-grab-friend`, `s-break-free`, `level-*`, `start-*` | 0 | | |
+
+**Evidence so far, and the next step for each** (not yet a verdict; no
+fault fixed):
+
+- **`h1`/`h2` (run 9): the strongest lead, and likely real.** The server did
+  come back (`startServer` waits for its "listening" line, else the run
+  throws), the page raised no error (`errors` ok in that run) and its frame
+  loop kept running (later facts passed), yet it stayed "Reconnecting…" for
+  at least 10 s and then through a second restart (13+ s more). With
+  `reconnectMaxMs` 4000 and `silenceMs` 3000 (`content/net.json`) the page
+  should try at least every ~4 s. So either the page stopped *trying*, or its
+  attempts were not getting through (Chromium delays repeated failed WebSocket
+  connections to one host; the page makes ~19 failed attempts in 75 s down).
+  Next: record, in the check only (an init script wrapping `WebSocket` on
+  page A), each socket's create/open/close/error times, print them in h1's
+  text on failure, and probe `/healthz` from node at that moment. That tells
+  "no attempts" (the client's loop: fix in `src/net/client.ts`) from
+  "attempts that never open" (the browser: then a real iPhone matters, and
+  the fix may be in how the page retries).
+- **`cantina-row` / `cantina-swap` (3 runs): same symptom, a tap on a
+  wandering regular opens nothing.** Lead to test: the page draws others a
+  little behind the server (the smoother), regulars walk, and a tap counts
+  within `pick.reach` 8 px (`content/cantina/*.json`) of where the *server*
+  has the regular. A walking regular can be more than 8 px from where it is
+  drawn, which would be a real fault (a friend tapping a moving regular
+  misses), not a check fault. Next: log in the check the regular's drawn x,
+  its speed and the server's x at the tap.
+- **`t-throw-friend` (1 run):** B moved 19-29 px, not 0, so something moved B
+  but not a full throw. The earlier notes (above) saw 5-30 px. Next: log B's
+  path on both pages, the events the server emitted at the throw, and the
+  bodies between B and the wall.
