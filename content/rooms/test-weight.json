@@ -1,0 +1,48 @@
+{
+  "//": "DRAFT: Step 3's check room for a plate that needs weight (the stone plate); no doors, so it is standalone and not part of the kingdom. A six-tile stone plate (columns 5-10, row 5) that needs 83 holds the gate at column 12; spawns 1 and 2 stand west of the plate, 3 and 4 east of the gate. The id is permanent: scenarios use it.",
+  "id": "test-weight",
+  "name": "Test: a plate that needs weight",
+  "tile": 16,
+  "legend": {
+    "#": "solid",
+    "=": "oneway",
+    ".": "empty",
+    "1": "spawn",
+    "2": "spawn",
+    "3": "spawn",
+    "4": "spawn",
+    "S": {
+      "part": "stone-plate"
+    },
+    "G": {
+      "part": "gate"
+    }
+  },
+  "rows": [
+    "########################",
+    "#...........#..........#",
+    "#...........#..........#",
+    "#...........#..........#",
+    "#...........G..........#",
+    "#.12.SSSSSS.G...3..4...#",
+    "########################"
+  ],
+  "parts": [
+    {
+      "id": "stone-plate",
+      "kind": "plate",
+      "params": {
+        "needs": 83
+      }
+    },
+    {
+      "id": "gate",
+      "kind": "gate",
+      "params": {
+        "plates": [
+          "stone-plate"
+        ]
+      }
+    }
+  ]
+}

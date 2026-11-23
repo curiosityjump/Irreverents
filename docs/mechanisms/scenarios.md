@@ -104,6 +104,7 @@ a file, edit no list. The first is `together` (gate F,
 | `chased` | at tick `at`, or on every tick of `between`, the world's `chased` list is exactly `players` (player ids; empty allowed). Needs a cantina in the world (Step 11) |
 | `cantina` | at tick `at`, or on every tick of `between`, about the cantina in `room` (the scenario must be there with `placements`): `regulars` exactly these roster characters have a regular, each in the room and inside the edge; `moved` (with `between`) each moved at least that many pixels sideways; `on` whether a brawl is on; `score` `{ "<player>": { "ko", "falls" } }` (Step 11); `party` the world's party in order; `row` with `player`: that player's open party row's character, or `null` for none (Step 11 slice B) |
 | `recruit` | at tick `at`, or on every tick of `between`, about the captive of `content/recruits/<id>.json`: `present` (its entity is in the world), `open` (its cage), `holding` `[min, max]` ticks Use has been held at it, `unlocked` (its hero is in the world's roster; absent is everyone) (Step 13) |
+| `part` | at tick `at`, or on every tick of `between`, the working part `part` of room `room` has every state field in `is` at that value (`down`, `open`…; an unwritten true/false field reads false), and/or its `load` is within `load: [min, max]` (an unwritten load reads 0) (Step 3, the stone plate) |
 
 Every fact that names a `player` accepts `"entity": "<id>"` instead (one
 of the scenario's `entities`, or of the room's placements when

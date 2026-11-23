@@ -1,0 +1,55 @@
+{
+  "id": "step3-weight-one-brawler",
+  "proves": "one hero alone, the brawler (70, the heaviest hero): the plate reads 70 and stays up, the gate shut; the stone plate needs 83 of weight (DRAFT, docs/decisions-log.md \"Step 3: the stone plate\"); it reads only the weight resting on it, never who or how many",
+  "room": "test-weight",
+  "players": [
+    {
+      "id": "a",
+      "character": "brawler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 55,
+      "x": 1
+    }
+  ],
+  "ticks": 180,
+  "expect": [
+    {
+      "fact": "part",
+      "room": "test-weight",
+      "part": "stone-plate",
+      "between": [
+        90,
+        180
+      ],
+      "load": [
+        70,
+        70
+      ],
+      "is": {
+        "down": false
+      }
+    },
+    {
+      "fact": "event-where",
+      "event": "gate-opened",
+      "between": [
+        0,
+        180
+      ],
+      "count": [
+        0,
+        0
+      ],
+      "where": {
+        "room": "test-weight",
+        "part": "gate"
+      }
+    }
+  ]
+}

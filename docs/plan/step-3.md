@@ -511,3 +511,29 @@ names and shapes.
 
 - **Orchestrator `session_017WiGzHhke4tkAThPgw6EXs`, 2026-11-23 18:45 UTC: the fast way-out check (a700081) reviewed.** Re-run here: build 5 s, check 35 s, 177 ok. A differential workflow compared the old and new `checkRooms` on 1,204 variants (133 mutations of the real map across 13 rooms, party and tuning changes, 800 random maps, all 18 room controls): identical problem lists every time; mutants of the new code that stop early are caught by the real map. Brief deleted, builder archived. **A finding for whoever takes Step 3 or the camp next:** with the grappler's or the infiltrator's `jumpSpeed` 10% lower, the Bandit Camp becomes a trap (both checks: "no way out" at `content/rooms/outpost.json` tile [8, 10], everything east of the three-tile block at columns 5-7). The owner tunes `jumpSpeed` by feel in the `?tune` panel, so that block wants to be two tiles, or the room a second way out.
 
+
+## Builder notes
+
+**Puzzles slice (`handoff-prompts/loop-puzzles.md`), builder
+`session_017WiGzFt1yTaqTXe7DVDi4B`, 2026-11-23.**
+
+- **Push 1, a plate can need weight.** `params.needs` on a `plate`
+  (`src/sim/systems/room-plate.ts`); `partState.load` the weight on it now
+  (only for a plate with `needs`; a plate without is byte-for-byte the old
+  rule, the 25 earlier `step3-*` unedited and green). Carried weight
+  counts through the carrier. Need 83, `DRAFT:` (decisions-log "Step 3:
+  the stone plate"): which side each row falls, from `content/tuning.json`
+  weights: shut: any one hero (grappler 60, brawler 70), the light pairs
+  (infiltrator + flyer 56, skirmisher + flyer 58, infiltrator + skirmisher
+  54), grappler + light crate 80, both light heroes + light crate 76;
+  open: grappler + infiltrator 86, grappler + skirmisher 88, grappler +
+  flyer 90, brawler + any light hero 96-100, brawler + light crate 90,
+  heavy crate 120, king 110, boosted light hero + heavy crate 146.
+  Scenarios in the scratch room `test-weight`: `step3-weight-one-grappler`,
+  `-one-brawler`, `-grappler-infiltrator`, `-grappler-flyer`,
+  `-light-pair`, `-nobody-plays`, `-carried`, `-grappler-and-crate`,
+  `-boost`. New fact `part` (`src/scenarios/facts/part.ts`); room control
+  `plate-needs-not-a-number`. **The boost:** `step3-weight-boost` gives the
+  scenario player the power directly; a player cannot hold it yet
+  (`content/powers/boost.json` `"carriers": []`). Whether the played
+  route works is to be said here once Step 9's carrier push lands.

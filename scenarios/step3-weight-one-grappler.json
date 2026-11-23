@@ -1,0 +1,55 @@
+{
+  "id": "step3-weight-one-grappler",
+  "proves": "one hero alone, the grappler (60), walks onto a plate that needs weight: it sinks part way (load 60) and stays up, and the gate it holds stays shut; the stone plate needs 83 of weight (DRAFT, docs/decisions-log.md \"Step 3: the stone plate\"); it reads only the weight resting on it, never who or how many",
+  "room": "test-weight",
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 55,
+      "x": 1
+    }
+  ],
+  "ticks": 180,
+  "expect": [
+    {
+      "fact": "part",
+      "room": "test-weight",
+      "part": "stone-plate",
+      "between": [
+        90,
+        180
+      ],
+      "load": [
+        60,
+        60
+      ],
+      "is": {
+        "down": false
+      }
+    },
+    {
+      "fact": "event-where",
+      "event": "gate-opened",
+      "between": [
+        0,
+        180
+      ],
+      "count": [
+        0,
+        0
+      ],
+      "where": {
+        "room": "test-weight",
+        "part": "gate"
+      }
+    }
+  ]
+}

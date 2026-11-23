@@ -1,0 +1,66 @@
+{
+  "id": "step3-weight-grappler-flyer",
+  "proves": "the grappler (60) and the flyer (30) together: 90, the plate goes down and the gate opens; the stone plate needs 83 of weight (DRAFT, docs/decisions-log.md \"Step 3: the stone plate\"); it reads only the weight resting on it, never who or how many",
+  "room": "test-weight",
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    },
+    {
+      "id": "b",
+      "character": "flyer",
+      "spawn": 1
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 55,
+      "x": 1
+    },
+    {
+      "player": "b",
+      "from": 0,
+      "to": 55,
+      "x": 1
+    }
+  ],
+  "ticks": 180,
+  "expect": [
+    {
+      "fact": "part",
+      "room": "test-weight",
+      "part": "stone-plate",
+      "between": [
+        90,
+        180
+      ],
+      "load": [
+        90,
+        90
+      ],
+      "is": {
+        "down": true
+      }
+    },
+    {
+      "fact": "event-where",
+      "event": "gate-opened",
+      "between": [
+        0,
+        180
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "where": {
+        "room": "test-weight",
+        "part": "gate"
+      }
+    }
+  ]
+}

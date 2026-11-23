@@ -1,0 +1,66 @@
+{
+  "id": "step3-weight-nobody-plays",
+  "room": "test-weight",
+  "proves": "two bodies nobody plays, of the grappler's and the infiltrator's kinds, rest on the plate while the one player stands still beyond the gate: 86, it goes down and the gate opens, as for the two friends (it is weight, not players); the stone plate needs 83 of weight (DRAFT, docs/decisions-log.md \"Step 3: the stone plate\"); it reads only the weight resting on it, never who or how many",
+  "players": [
+    {
+      "id": "a",
+      "character": "flyer",
+      "spawn": 3
+    }
+  ],
+  "entities": [
+    {
+      "id": "heavy",
+      "character": "grappler",
+      "tile": [
+        6,
+        5
+      ]
+    },
+    {
+      "id": "light",
+      "character": "infiltrator",
+      "tile": [
+        9,
+        5
+      ]
+    }
+  ],
+  "inputs": [],
+  "ticks": 60,
+  "expect": [
+    {
+      "fact": "part",
+      "room": "test-weight",
+      "part": "stone-plate",
+      "between": [
+        5,
+        60
+      ],
+      "load": [
+        86,
+        86
+      ],
+      "is": {
+        "down": true
+      }
+    },
+    {
+      "fact": "event-where",
+      "event": "gate-opened",
+      "between": [
+        0,
+        60
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "where": {
+        "room": "test-weight",
+        "part": "gate"
+      }
+    }
+  ]
+}

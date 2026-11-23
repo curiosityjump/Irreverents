@@ -1,0 +1,103 @@
+{
+  "id": "step3-weight-boost",
+  "proves": "the boost (Step 9), the third solo way: the infiltrator (26, lift 60) holding the boost (lift 420) picks up the heavy crate (120) that it could never lift alone and stands on the plate with it: 146, it goes down and the gate opens. Control (watched to fail): the same run without the power, the grab lifts nothing and the plate reads 26; the stone plate needs 83 of weight (DRAFT, docs/decisions-log.md \"Step 3: the stone plate\"); it reads only the weight resting on it, never who or how many",
+  "room": "test-weight",
+  "players": [
+    {
+      "id": "a",
+      "character": "infiltrator",
+      "spawn": 0,
+      "power": "boost"
+    }
+  ],
+  "entities": [
+    {
+      "id": "load",
+      "character": "crate-heavy",
+      "tile": [
+        3,
+        5
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 12,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 14,
+      "to": 17,
+      "hold": [
+        "grab"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 30,
+      "to": 70,
+      "x": 1
+    }
+  ],
+  "ticks": 200,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "grabbed",
+      "between": [
+        14,
+        20
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "where": {
+        "target": "load"
+      }
+    },
+    {
+      "fact": "body-state",
+      "entity": "load",
+      "at": 200,
+      "is": [
+        "held"
+      ]
+    },
+    {
+      "fact": "part",
+      "room": "test-weight",
+      "part": "stone-plate",
+      "between": [
+        120,
+        200
+      ],
+      "load": [
+        146,
+        146
+      ],
+      "is": {
+        "down": true
+      }
+    },
+    {
+      "fact": "event-where",
+      "event": "gate-opened",
+      "between": [
+        0,
+        200
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "where": {
+        "room": "test-weight",
+        "part": "gate"
+      }
+    }
+  ]
+}
