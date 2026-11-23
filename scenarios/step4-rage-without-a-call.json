@@ -1,0 +1,29 @@
+{
+  "id": "step4-rage-without-a-call",
+  "gate": "D",
+  "proves": "rule 2's control (D-063, D-065): a person's mood and the area's alert are separate. With the bell already broken, unseen, a hero takes three goods in the shopkeeper's view and drives them to rage: the alert is 0 throughout, nothing calls, and the guard never moves. Rage alone raises nothing",
+  "room": "test-street",
+  "placements": true,
+  "players": [{"id": "a", "character": "hero", "spawn": 0}],
+  "inputs": [
+    {"player": "a", "from": 300, "to": 331, "x": 1},
+    {"player": "a", "from": 340, "to": 345, "hold": ["interact"]},
+    {"player": "a", "from": 350, "to": 391, "x": -1},
+    {"player": "a", "from": 450, "to": 455, "hold": ["interact"]},
+    {"player": "a", "from": 470, "to": 475, "hold": ["interact"]},
+    {"player": "a", "from": 490, "to": 495, "hold": ["interact"]}
+  ],
+  "ticks": 1500,
+  "expect": [
+    {"fact": "event-where", "event": "deed", "where": {"deed": "break", "by": "p:a", "thing": "ts-bell", "witnesses": []}, "between": [340, 340], "count": [1, 1]},
+    {"fact": "event-where", "event": "call-started", "where": {}, "between": [0, 1500], "count": [0, 0]},
+    {"fact": "event-where", "event": "call-completed", "where": {}, "between": [0, 1500], "count": [0, 0]},
+    {"fact": "event-where", "event": "alert-changed", "where": {}, "between": [0, 1500], "count": [0, 0]},
+    {"fact": "alert", "area": "test-street", "between": [0, 1500], "is": 0},
+    {"fact": "position", "at": 700, "x": [484, 492], "entity": "ts-guard"},
+    {"fact": "position", "at": 1500, "x": [484, 492], "entity": "ts-guard"},
+    {"fact": "mood", "npc": "ts-guard", "between": [0, 1500], "is": 1},
+    {"fact": "event-where", "event": "mood-changed", "where": {"entity": "ts-shopkeeper", "from": 2, "to": 3}, "between": [490, 490], "count": [1, 1]},
+    {"fact": "mood", "npc": "ts-shopkeeper", "at": 1000, "is": 3}
+  ]
+}

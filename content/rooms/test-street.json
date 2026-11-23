@@ -1,0 +1,24 @@
+{
+  "//": "DRAFT: Step 4 slice 2's check room for calling, the alert and getting away; no doors, so it is standalone and no player can reach it. Left: a ledge four tiles high with a two-tile step (columns 1-5) that a jump reaches and a walking person cannot: the refuge. Then the shop, a bell, and far to the right a guard's post, out of the shop's sight (the people and things are content/placements/test-street.json).",
+  "id": "test-street",
+  "name": "Test: street",
+  "tile": 16,
+  "legend": {
+    "#": "solid",
+    ".": "empty",
+    "1": "spawn"
+  },
+  "rows": [
+    "############################################",
+    "#..........................................#",
+    "#..........................................#",
+    "#..........................................#",
+    "#..........................................#",
+    "#..........................................#",
+    "####.......................................#",
+    "####.......................................#",
+    "######.....................................#",
+    "######........1............................#",
+    "############################################"
+  ]
+}

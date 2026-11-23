@@ -1,0 +1,21 @@
+{
+  "id": "step4-street-call",
+  "proves": "slice 2 works in a room players reach: in the castle street a hero takes goods in the shopkeeper's view and stands there; the shopkeeper pleads, walks to the street's bell and completes the call; the street's alert is 1; the guard leaves their beat, comes to the place reported, sees the hero and stands over them in pursuit, and while the hero stays in view the alert does not cool",
+  "room": "castle-street",
+  "placements": true,
+  "players": [{"id": "a", "character": "hero", "spawn": 0}],
+  "inputs": [
+    {"player": "a", "from": 60, "to": 140, "x": 1},
+    {"player": "a", "from": 1450, "to": 1475, "x": 1},
+    {"player": "a", "from": 1500, "to": 1505, "hold": ["interact"]}
+  ],
+  "ticks": 3600,
+  "expect": [
+    {"fact": "event-where", "event": "call-started", "where": {"by": "street-shopkeeper"}, "between": [1900, 2060]},
+    {"fact": "event-where", "event": "call-completed", "where": {"by": "street-shopkeeper", "area": "castle-street"}, "between": [2050, 2210], "count": [1, 1]},
+    {"fact": "alert", "area": "castle-street", "between": [0, 2000], "is": 0},
+    {"fact": "alert", "area": "castle-street", "between": [2250, 3600], "is": 1},
+    {"fact": "event-where", "event": "mood-changed", "where": {"entity": "street-guard", "to": 3, "cause": "pursuit"}, "between": [2300, 2800], "count": [1, 1]},
+    {"fact": "position", "entity": "street-guard", "at": 3600, "x": [200, 250]}
+  ]
+}

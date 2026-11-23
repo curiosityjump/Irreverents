@@ -22,7 +22,8 @@ if (!scenario) {
 const rec = simulate(scenario, loaded.content);
 rec.history.forEach((world, tick) => {
   if (tick % every !== 0 && tick !== scenario.ticks) return;
-  const who = world.entities.map((e) => {
+  // A thing or an alert has no character box: only bodies are traced.
+  const who = world.entities.filter((e) => e.kind in loaded.content.characters).map((e) => {
     const f = feet(rec, e);
     return `${e.player ?? e.id} in ${e.room}: feet ${round2(f.x)},${round2(f.y)} tile [${f.tx},${f.ty}] v ${round2(e.vx)},${round2(e.vy)} ${e.onGround ? 'ground' : 'air'}`;
   });

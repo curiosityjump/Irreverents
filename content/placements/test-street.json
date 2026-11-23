@@ -1,0 +1,22 @@
+{
+  "//": "DRAFT: Step 4 slice 2's check scene. A shopkeeper at a counter with three goods in front of them, glancing behind every few seconds (when goods can be taken unseen); a bell seven tiles to their right that they walk to when they call for help; a guard at a post at column 30 with their back to the shop, far out of sight of it, who answers the call. The scenarios scenarios/step4-*.json pin these columns and timings.",
+  "id": "test-street",
+  "room": "test-street",
+  "place": [
+    {
+      "id": "ts-shopkeeper", "character": "shopkeeper", "tile": [10, 9], "npc": "shopkeeper",
+      "routine": [{ "walk-to": 10 }, { "face": "right" }, { "wait": 5 }, { "face": "left" }, { "wait": 1.5 }]
+    },
+    {
+      "id": "ts-guard", "character": "guard", "tile": [30, 9], "npc": "guard",
+      "routine": [{ "walk-to": 30 }, { "face": "right" }, { "wait": 10 }]
+    }
+  ],
+  "things": [
+    { "id": "ts-counter", "tile": [11, 9], "deed": "buy", "keeper": "ts-shopkeeper", "look": "counter" },
+    { "id": "ts-goods-1", "tile": [12, 9], "deed": "take", "once": true, "look": "goods" },
+    { "id": "ts-goods-2", "tile": [13, 9], "deed": "take", "once": true, "look": "goods" },
+    { "id": "ts-goods-3", "tile": [14, 9], "deed": "take", "once": true, "look": "goods" },
+    { "id": "ts-bell", "tile": [17, 9], "deed": "break", "once": true, "look": "bell", "side": "good" }
+  ]
+}

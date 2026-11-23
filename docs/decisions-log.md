@@ -472,3 +472,24 @@ document as a decision of theirs.
 - **To change it:** the rooms are data (`content/rooms/courtyard.json`, `hall-gallery.json`, `castle-street.json`): move the letters.
 - **Where:** `docs/mechanisms/rooms-and-doors.md`, "The map tonight".
 
+
+### 2026-11-23 · Who rings the bell, and what you see when they do
+- **Decided by:** brief-worker, Step 4 slice 2 (brief by the Step 4 lead, `session_017WiGzG4WzuJfHAu3XWoUhc`)
+- **Instead of asking:** "When a shopkeeper is upset, who do they call the guards on, how often, and how does a player see it coming?"
+- **Why this way:** a call is a report about the heroes, so only someone upset by a hero walks to the bell; the villain's polite purchase still horrifies the shopkeeper but sends nobody running. They plead for three seconds first (your window to make it right), walk to the bell and ring it for two and a half; a bar over the swinging bell fills as they ring, which is the time you have left to stop them. Breaking the bell yourself leaves a grey stump and it stays broken. Having called once, a person calls again only if they see something more. The alert shows as up to three red marks in the corner of the screen, and nothing at all when the area is calm.
+- **To change it:** the times are `npcPleadTime` and `npcCallTime` in `content/tuning.json`; the looks are one small file, `src/client/draw/alert.ts`; "only when upset by a hero" is one marked line in `src/sim/systems/npc-call.ts`.
+- **Where:** `docs/mechanisms/npc-response.md`, "Calling for help, the alert and getting away".
+
+### 2026-11-23 · A guard who answers a call is alarmed at once, furious once they see you, and calm again the moment the alert is over
+- **Decided by:** brief-worker, Step 4 slice 2
+- **Instead of asking:** "What mood is a guard in while searching, and how do they stand down?"
+- **Why this way:** they show the yellow "?" from the moment they are called, turn red and shout when they actually see a hero, and stay that way for as long as the alert lasts. When hiding and waiting has brought the alert to nothing they walk back to their post and are at business as usual on arrival, with no lingering distress: they were on duty, not personally wronged. They only ever walk to where a hero was reported or last seen, never to where one is.
+- **To change it:** `src/sim/systems/alert-respond.ts`, the marked `DRAFT:` lines.
+- **Where:** `docs/mechanisms/npc-response.md`, "Responders".
+
+### 2026-11-23 · There is a bell in the castle street, between the shop and the guard
+- **Decided by:** brief-worker, Step 4 slice 2 (placement asked for by the Step 4 lead)
+- **Instead of asking:** "Where does the street's shopkeeper call for help from?"
+- **Why this way:** at column 24, thirteen tiles from the shop and from the guard's beat, so the shopkeeper's walk to it takes about five seconds (time to stop them, break it first, or buy something and be forgiven), and the guard is far enough away that they come to where you were reported, not to where you are. Nobody already in the street was moved.
+- **To change it:** move or delete `street-bell` in `content/placements/castle-street.json`.
+- **Where:** `docs/mechanisms/npc-response.md`, "Where the people are".

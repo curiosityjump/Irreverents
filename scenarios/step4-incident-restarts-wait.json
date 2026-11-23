@@ -1,0 +1,30 @@
+{
+  "id": "step4-incident-restarts-wait",
+  "gate": "D",
+  "proves": "signal 5's control: the same play as step4-catastrophe-and-escape, except that partway through the wait the hero comes down and takes goods in the shopkeeper's view (then buys, so the shopkeeper is reassured before they would call again): at tick 2190, where the first run's alert reached 0, the alert is still 1, and it has not fallen by the end (D-068: being seen or any perceived incident puts the wait back to zero)",
+  "room": "test-street",
+  "placements": true,
+  "players": [{"id": "a", "character": "hero", "spawn": 0}],
+  "inputs": [
+    {"player": "a", "from": 20, "to": 25, "hold": ["interact"]},
+    {"player": "a", "from": 40, "to": 115, "x": -1},
+    {"player": "a", "from": 940, "to": 1040, "x": -1},
+    {"player": "a", "from": 945, "to": 965, "hold": ["jump"]},
+    {"player": "a", "from": 990, "to": 1010, "hold": ["jump"]},
+    {"player": "a", "from": 1500, "to": 1613, "x": 1},
+    {"player": "a", "from": 1650, "to": 1655, "hold": ["interact"]},
+    {"player": "a", "from": 1660, "to": 1670, "x": -1},
+    {"player": "a", "from": 1690, "to": 1695, "hold": ["interact"]}
+  ],
+  "ticks": 2400,
+  "expect": [
+    {"fact": "event-where", "event": "call-completed", "where": {"by": "ts-shopkeeper", "area": "test-street"}, "between": [505, 505], "count": [1, 1]},
+    {"fact": "event-where", "event": "alert-changed", "where": {"area": "test-street", "from": 0, "to": 1}, "between": [505, 505], "count": [1, 1]},
+    {"fact": "event-where", "event": "mood-changed", "where": {"entity": "ts-guard", "to": 3, "cause": "pursuit"}, "between": [902, 902], "count": [1, 1]},
+    {"fact": "position", "at": 1100, "x": [16, 40], "player": "a", "y": [96, 96]},
+    {"fact": "event-where", "event": "deed", "where": {"deed": "take", "by": "p:a", "thing": "ts-goods-1"}, "between": [1650, 1650], "count": [1, 1]},
+    {"fact": "alert", "area": "test-street", "between": [506, 2400], "is": 1},
+    {"fact": "event-where", "event": "alert-changed", "where": {"area": "test-street", "to": 0}, "between": [0, 2400], "count": [0, 0]},
+    {"fact": "event-where", "event": "call-completed", "where": {}, "between": [0, 2400], "count": [1, 1]}
+  ]
+}

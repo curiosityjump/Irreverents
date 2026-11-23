@@ -1,0 +1,21 @@
+{
+  "id": "step4-zero-alarm",
+  "gate": "D",
+  "proves": "signal 4: a zero-alarm infiltration. A hero waits until the shopkeeper's routine turns their back, takes the goods unseen (nobody perceives the deed) and walks to the far end of the room past the guard: the alert is 0 throughout, no call starts, and the shopkeeper is in business as usual from start to finish",
+  "room": "test-street",
+  "placements": true,
+  "players": [{"id": "a", "character": "hero", "spawn": 0}],
+  "inputs": [
+    {"player": "a", "from": 330, "to": 335, "hold": ["interact"]},
+    {"player": "a", "from": 350, "to": 800, "x": 1}
+  ],
+  "ticks": 900,
+  "expect": [
+    {"fact": "event-where", "event": "deed", "where": {"deed": "take", "by": "p:a", "thing": "ts-goods-3", "witnesses": []}, "between": [330, 330], "count": [1, 1]},
+    {"fact": "alert", "area": "test-street", "between": [0, 900], "is": 0},
+    {"fact": "event-where", "event": "call-started", "where": {}, "between": [0, 900], "count": [0, 0]},
+    {"fact": "event-where", "event": "mood-changed", "where": {}, "between": [0, 900], "count": [0, 0]},
+    {"fact": "mood", "npc": "ts-shopkeeper", "between": [0, 900], "is": 1},
+    {"fact": "position", "at": 900, "x": [670, 690], "player": "a"}
+  ]
+}

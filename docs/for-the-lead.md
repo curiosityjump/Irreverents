@@ -189,3 +189,18 @@ actually read (questions for the owner go through
 
 **Not verified:** no real iPhone; the hiding place and the false wall in `test-parts` were never seen drawn there (the false wall was seen in the throne room).
 
+## Step 4, slice 2, push 1 (brief-worker, 2026-11-23 ~09:25 UTC)
+
+Push 1 of `handoff-prompts/step-4-slice-2-alarm.md`: the bell, the call, the alert, the placed guard responding, cooling; a bell in `castle-street`; `scripts/trace.ts` mended. Gate D passes with six scenarios.
+
+**Flag (the brief's control for the single raise):** a raise added "on a sighting" inside the responder does **not** fail `step4-rage-without-a-call` (no guard ever responds there, so no responder ever sights anyone). It fails `step4-catastrophe-and-escape` and `step4-incident-restarts-wait` (alert 2 at tick 903), which was watched. A raise from rage itself fails `step4-rage-without-a-call`, also watched. Both kinds of second raise are caught; by different scenarios than the brief names.
+
+**Flag (shapes changed from the brief, all `DRAFT:`):** (1) only someone upset **by a hero** goes to call; without it the street villain's polite purchase would send the shopkeeper to the bell every minute and move `step4-street-people`'s ticks. (2) Having sent a call a person calls again only after witnessing something more, or a distressed person would re-ring every 2.5 s up to alert 3. (3) A responder is in mood 2 from the moment of the call, not on arrival. (4) The alert's clock is held by **any** conscious person in the room seeing a hero, the villain included (the brief's wording, taken literally). (5) At alert 0 a responder goes straight to mood 1 on reaching their post (`stood-down`), not through slice 1's 3 → 2 → 1.
+
+**Flag:** sight at exactly `npcSightRange` counts as seen (`>` in `canSee`), so a bell exactly 7 tiles from a watcher is in view.
+
+**Flag (play):** in the street the guard has no `attack` verb, so being caught is a guard standing over you in red; the alert then never cools while you stay in his view. Leaving by a door is the way out until push 2 (he does not follow).
+
+**Not built in this push:** more help at levels 2 and 3; pushes 2-4 of the brief (`step4-caller-knocked-out` is in push 4).
+
+**Not verified:** no real iPhone; the bell and marks were seen in a desktop-sized Chromium only. Whether being caught is fun.

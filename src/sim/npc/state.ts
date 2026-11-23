@@ -9,6 +9,7 @@ import type { PlacedThing, Placements } from '../../content/kinds/placements.ts'
 import type { Content } from '../../content/types.ts';
 import { TICK_RATE } from '../types.ts';
 import type { Entity, Input, StepContext } from '../types.ts';
+import { alertLevel } from './alert.ts';
 
 declare module '../types.ts' {
   interface Components {
@@ -140,8 +141,9 @@ export function setMood(ctx: StepContext, e: Entity, to: Mood, cause: string): v
  * (D-074: once the alert is below the violent level, ordinary behaviour
  * reassures again). Today nothing else holds rage up.
  */
-export function rageMayCool(_ctx: StepContext, _e: Entity): boolean {
-  return true;
+export function rageMayCool(ctx: StepContext, e: Entity): boolean {
+  // INTENT (D-073, slice 2): a good person's rage ends only below the violent level, which is any alert above 0.
+  return npcKind(ctx.content, e)?.side !== 'good' || alertLevel(ctx.world, e.room) === 0;
 }
 
 /**

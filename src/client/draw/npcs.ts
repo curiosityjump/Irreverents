@@ -38,6 +38,8 @@ export function drawNpcs(g: CanvasRenderingContext2D, world: World, content: Con
   for (const e of world.entities) {
     if (e.room !== roomId || !e.c.thing || e.c.thing.takenBy !== null) continue;
     const def = content.placements[roomId]?.things?.find((t) => t.id === e.id);
+    // A bell (slice 2) is drawn, working or broken, by draw/alert.ts.
+    if (def?.look === 'bell') continue;
     const look = LOOKS[def?.look ?? 'goods'];
     g.fillStyle = look.color;
     g.fillRect(ox + e.x + Math.round((room.tile - look.w) / 2), oy + e.y + room.tile - look.h, look.w, look.h);

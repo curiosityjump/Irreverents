@@ -1,0 +1,10 @@
+{
+  "//": "Step 4, slice 2: the deed of breaking a call point (a bell). A hero doing it in a good person's view is odd, like helping themselves to the goods; unseen, nobody knows. DRAFT: the weight.",
+  "id": "calls",
+  "deeds": ["break"],
+  "expect": [
+    { "actor": "hero", "deed": "break", "witnessSide": "good", "verdict": "odd", "weight": 1 }
+  ],
+  "reactions": [],
+  "events": []
+}

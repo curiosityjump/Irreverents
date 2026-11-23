@@ -1,0 +1,33 @@
+{
+  "id": "step4-catastrophe-and-escape",
+  "gate": "D",
+  "proves": "signal 5: getting caught opens play, and hiding and waiting ends it (D-019, D-068). A hero takes goods in the shopkeeper's view and stands by; the shopkeeper pleads, walks to the bell and completes the call (alert 1); the guard comes to the reported place, sees the hero and chases; the hero jumps up the ledge, which no walking person can climb, and does nothing; the guard searches below; after 20 s unseen the alert falls to 0, the guard walks back to their post and is in business as usual, and the hero comes down and buys from a shopkeeper in mood 1",
+  "room": "test-street",
+  "placements": true,
+  "players": [{"id": "a", "character": "hero", "spawn": 0}],
+  "inputs": [
+    {"player": "a", "from": 20, "to": 25, "hold": ["interact"]},
+    {"player": "a", "from": 40, "to": 115, "x": -1},
+    {"player": "a", "from": 940, "to": 1040, "x": -1},
+    {"player": "a", "from": 945, "to": 965, "hold": ["jump"]},
+    {"player": "a", "from": 990, "to": 1010, "hold": ["jump"]},
+    {"player": "a", "from": 2800, "to": 2903, "x": 1},
+    {"player": "a", "from": 2930, "to": 2935, "hold": ["interact"]}
+  ],
+  "ticks": 3100,
+  "expect": [
+    {"fact": "event-where", "event": "call-completed", "where": {"by": "ts-shopkeeper", "area": "test-street"}, "between": [505, 505], "count": [1, 1]},
+    {"fact": "event-where", "event": "alert-changed", "where": {"area": "test-street", "from": 0, "to": 1}, "between": [505, 505], "count": [1, 1]},
+    {"fact": "event-where", "event": "mood-changed", "where": {"entity": "ts-guard", "to": 3, "cause": "pursuit"}, "between": [902, 902], "count": [1, 1]},
+    {"fact": "position", "at": 1100, "x": [16, 40], "player": "a", "y": [96, 96]},
+    {"fact": "alert", "area": "test-street", "between": [506, 2190], "is": 1},
+    {"fact": "event-where", "event": "alert-changed", "where": {"area": "test-street", "from": 1, "to": 0}, "between": [2190, 2190], "count": [1, 1]},
+    {"fact": "alert", "area": "test-street", "between": [2191, 3100], "is": 0},
+    {"fact": "event-where", "event": "mood-changed", "where": {"entity": "ts-guard", "to": 1, "cause": "stood-down"}, "between": [2768, 2768], "count": [1, 1]},
+    {"fact": "position", "at": 3100, "x": [484, 492], "entity": "ts-guard"},
+    {"fact": "mood", "npc": "ts-guard", "at": 3100, "is": 1},
+    {"fact": "event-where", "event": "deed", "where": {"deed": "buy", "by": "p:a", "target": "ts-shopkeeper"}, "between": [2930, 2930], "count": [1, 1]},
+    {"fact": "mood", "npc": "ts-shopkeeper", "between": [2800, 3100], "is": 1},
+    {"fact": "event-where", "event": "call-completed", "where": {}, "between": [0, 3100], "count": [1, 1]}
+  ]
+}

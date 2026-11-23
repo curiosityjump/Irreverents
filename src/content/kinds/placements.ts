@@ -52,9 +52,11 @@ export interface PlacedThing {
   once: boolean;
   /** DRAFT: how the graybox drawer shows it. */
   look: ThingLook;
+  /** Slice 2: for a call point (look "bell"), whose side rings it. Left out: "good". */
+  side?: 'good' | 'bad';
 }
 
-export const THING_LOOKS = ['counter', 'goods'] as const;
+export const THING_LOOKS = ['counter', 'goods', 'bell'] as const;
 export type ThingLook = (typeof THING_LOOKS)[number];
 
 /**
@@ -128,7 +130,7 @@ const kind: ContentKind = {
           const w = `things[${i}]`;
           const t = read.object(item, w);
           if (!t) return;
-          read.only(t, ['id', 'tile', 'deed', 'keeper', 'once', 'look'], w);
+          read.only(t, ['id', 'tile', 'deed', 'keeper', 'once', 'look', 'side'], w);
           const id = read.string(t, 'id', w);
           if (badId(id)) read.fail(`${w}.id`, `"${id}" ${NOT_AN_ID}`);
           if (out.things!.some((q) => q.id === id)) read.fail(`${w}.id`, `"${id}" is placed twice in this file`);
@@ -136,6 +138,12 @@ const kind: ContentKind = {
           if (!THING_LOOKS.includes(t.look as ThingLook)) read.fail(`${w}.look`, `must be one of ${THING_LOOKS.join(', ')}, but is ${describe(t.look)}`);
           const thing: PlacedThing = { id, tile: tileOf(t, w, read), deed: read.string(t, 'deed', w), once: t.once === true, look: THING_LOOKS.includes(t.look as ThingLook) ? (t.look as ThingLook) : 'goods' };
           if (t.keeper !== undefined) thing.keeper = read.string(t, 'keeper', w);
+          if (t.side !== undefined) {
+            if (t.side === 'good' || t.side === 'bad') thing.side = t.side;
+            else read.fail(`${w}.side`, `must be "good" or "bad", but is ${describe(t.side)}`);
+          }
+          // A bell is a call point (docs/mechanisms/npc-response.md): using it breaks it, so it must be a once thing.
+          if (thing.look === 'bell' && !thing.once) read.fail(`${w}.once`, 'a bell must have "once": true (a hero using it breaks it, and a broken bell stays broken)');
           out.things!.push(thing);
         });
       }

@@ -1,5 +1,6 @@
 import type { Content } from '../content/types.ts';
 import type { World } from '../sim/types.ts';
+import { drawAlert } from './draw/alert.ts';
 import { drawAudience } from './draw/audience.ts';
 import { drawEntities } from './draw/entities.ts';
 import type { PlayerView } from './draw/entities.ts';
@@ -35,6 +36,7 @@ export function render(g: CanvasRenderingContext2D, world: World, content: Conte
   drawEntities(g, world, content, roomId, ox, oy, view);
   drawImpact(g, world, roomId, ox, oy);
   drawNpcs(g, world, content, roomId, ox, oy);
+  drawAlert(g, world, content, roomId, ox, oy);
   drawAudience(g, world, content, roomId, ox, oy);
   drawHall(g, world, content, roomId, ox, oy);
   return { x: -ox, y: -oy };
