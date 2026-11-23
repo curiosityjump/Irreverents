@@ -27,3 +27,9 @@ changed>` as its heading. The first one in a new project is the genesis
 entry: "first vision written; no plan exists yet", naming the sections.
 
 ## Entries
+
+### Vision · Deploys while the owner isn't playing
+- **Answer:** "Don't worry. I'n not playing that shit right now. Redeploy all you want" (owner to Vision Partner, first-hand, 2026-11-23 ~11:40 UTC)
+- **Recorded in:** this entry (process, not vision)
+- **Action for:** orchestrator (process): the "hold pushes while the owner is playing" caution does not apply right now; push and redeploy freely until the owner says they are playing again.
+
