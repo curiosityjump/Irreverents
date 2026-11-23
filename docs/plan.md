@@ -345,4 +345,10 @@ Full text: `docs/plan/step-15.md`
 
 Full text: `docs/plan/step-16.md`
 
+## Step 17 — A start screen, and saved games a friend can join
+
+**Status: open, claimed by orchestrator session_017WiGzHhke4tkAThPgw6EXs (builders: spawning), 2026-11-23.** (Opened 2026-11-23 16:00 UTC from the owner's words of ~15:10 UTC, outbox entry at 4294051.)
+
+Full text: `docs/plan/step-17.md`
+
 *(Step 13, "Heroes you find and keep" — the discoverable permanent roster, D-007 — was to be drafted the same way; its drafter was stopped by the usage limit. The number is reserved.)*
