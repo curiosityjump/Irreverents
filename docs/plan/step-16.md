@@ -528,3 +528,14 @@ Slice 1, 2026-11-23 16:10 UTC: the main way (road, ridge, tower, depot) is **248
 **Sprites wanted (Step 8):** `heavy-fighter`, `brute`, `toll-keeper`; the toll counter reuses the shop's `counter` look.
 
 **For the owner to judge by playing** (not asked): whether the kinds feel different, whether sending one flying into another is an "OHHHH", whether paying the toll is funny.
+
+### Slice 3 (`step-16-c-quarry-depot.md`), 2026-11-23 18:30 UTC, builder (push 1)
+
+**Landed (push 1, quiet):** `content/outposts/quarry-depot.json` (the depot's horn: only the lookout calls; waves 2, 3, then 3 and a heavy; in at column 61; bound 8), the depot's people and hoard in `content/placements/quarry-depot.json` (slice 2's ids `depot-fighter-1`/`-2` carry on as the two patrols, so `step16-present-depot` is unchanged), `scenarios/step16-zero-alarm-roof.json` (the flyer in and out over the roof, unseen at every tick; control: entering 20 ticks early is seen and a call starts), and the e2e touch fix: `quarry-road-cross` now crosses the road into the ridge by touch.
+
+**Cut:** the second zero-alarm route (the step's "Drop first", item 3). The cellar's shaft is one-way, so the suggested grappler route cannot come back out (`docs/for-the-lead.md`).
+
+**Measured, worth knowing:** the flyer climbs at most about 110 px (jump and three flaps), which barely clears sight's 40 px band over a floor watcher, so the quiet way works only from high starts (the stack's west edge, the roof). The middle stretch (columns 18-23) is hidden from every watcher: the stack and the step block the line.
+
+**For the owner to judge by playing** (not asked): whether the quiet way over the roof makes you proud, whether getting caught is a better time than not, what the hoard should look like.
+

@@ -1,0 +1,18 @@
+{
+  "//": "DRAFT (Step 16 slice 3): the depot's horn. Only the lookout calls (as at the camp): the patrols and the strongroom guard fight whoever they see but cannot reach the post, which stands with the lookout on the yard's west stretch (no person jumps, and the stack at columns 14-17 and the step at 24-25 cut the yard in three). Numbers copied from the camp (3 s, 6 s, 3 hits or 300 px/s); waves grow 2, 3, then 3 fighters and a heavy, the last row coming again for ever; they walk in at the far east end (column 61), away from the two west doors; at most 8 people in the room (4 are placed). docs/decisions-log.md, Step 16 slice 3.",
+  "id": "quarry-depot",
+  "room": "quarry-depot",
+  "signaler": "depot-horn-post",
+  "callers": ["depot-lookout"],
+  "entry": [61, 13],
+  "bound": 8,
+  "callTime": 3,
+  "callAgain": 6,
+  "breakHits": 3,
+  "breakSpeed": 300,
+  "waves": [
+    [{ "character": "outpost-fighter", "npc": "outpost-fighter" }, { "character": "outpost-fighter", "npc": "outpost-fighter" }],
+    [{ "character": "outpost-fighter", "npc": "outpost-fighter" }, { "character": "outpost-fighter", "npc": "outpost-fighter" }, { "character": "outpost-fighter", "npc": "outpost-fighter" }],
+    [{ "character": "outpost-fighter", "npc": "outpost-fighter" }, { "character": "outpost-fighter", "npc": "outpost-fighter" }, { "character": "outpost-fighter", "npc": "outpost-fighter" }, { "character": "heavy-fighter", "npc": "heavy-fighter" }]
+  ]
+}

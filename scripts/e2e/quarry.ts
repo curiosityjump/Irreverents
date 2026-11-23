@@ -1,8 +1,7 @@
 // Step 16's facts inside `npm run e2e` (one call line in scripts/e2e.ts):
 // a phone-sized page, by touch only, walks from the start room to the
-// courtyard and up through its doorway into the quarry road (signal 7,
-// its first half; docs/plan/step-16.md). Crossing the road by touch is
-// not proven yet (see the DRAFT below). Copied in shape from
+// courtyard, up through its doorway into the quarry road and across it
+// into the ridge (signal 7; docs/plan/step-16.md). Copied in shape from
 // scripts/e2e/outpost.ts.
 //
 // DRAFT: every limit below is a first pass with room to spare.
@@ -29,9 +28,12 @@ async function walkInto(ph: Phone, dir: number, goal: string, ms = 20000, hop = 
     if (hop) {
       const jump = await pointOn(ph, '[data-action="jump"]');
       if (jump) {
-        await ph.cdp.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ ...p, id: 1 }, { ...jump, id: 2 }] });
+        // The jump finger lands with a touchStart carrying both fingers (as scripts/e2e.ts's two-finger fact does):
+        // a touchMove that adds a finger is never seen by the page as touching down (measured by the lead at 727dec7).
+        await ph.cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ ...p, id: 1 }, { ...jump, id: 2 }] });
         await sleep(300);
-        await ph.cdp.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ ...p, id: 1 }] });
+        await ph.cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+        await ph.cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ ...p, id: 1 }] });
       }
       await sleep(Math.max(0, hop - 300));
     } else await sleep(50);
@@ -78,8 +80,8 @@ export async function quarryFacts(kit: Kit): Promise<void> {
     }
     fact('quarry-in', inside, `by touch alone, a phone walked from the start room to the courtyard (${toCourtyard}) and up through its doorway into the quarry road (${inside}; now in ${await room(ph)})`);
     await ph.page.screenshot({ path: path.join(kit.out, 'e2e-quarry-road.png') });
-    // DRAFT: the second half, across the road by touch (stick held east, jump tapped every 0.6 s), stopped at the
-    // first two-tile step (x 174) in its one run on 2026-11-23 and is left for the next session (docs/plan/step-16.md, handoff notes).
+    const across = inside && (await walkInto(ph, 1, 'quarry-ridge', 45000, 700));
+    fact('quarry-road-cross', across, `by touch alone (stick held east, jump tapped every 0.7 s), a phone crossed the quarry road into the ridge (${across}; now in ${await room(ph)})`);
   } finally {
     await ph.ctx.close();
   }
