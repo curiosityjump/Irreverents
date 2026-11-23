@@ -12,9 +12,6 @@ from sizes import ROOT, rooms as load_rooms, rect
 
 T = 16
 
-# round 3: where the light is on each lit piece, from its bottom-left: (glow radius, x, y up from the bottom)
-GLOW3 = {'chandelier-hung': (22, 13, 8), 'lantern-hung': (14, 5, 6), 'fire': (20, 11, 10)}
-
 
 class Room:
     def __init__(self, r):
@@ -22,13 +19,6 @@ class Room:
         self.rows = r['rows']; self.w = len(self.rows[0]); self.h = len(self.rows)
         self.legend = r['legend']
         self.items = []
-        # round 3: the tiles people and things are placed on (content/placements/), so scattered pieces keep off
-        pl = os.path.join(ROOT, 'content', 'placements', self.id + '.json')
-        self.occupied = set()
-        if os.path.exists(pl):
-            j = json.load(open(pl))
-            for p in (j.get('place') or []) + (j.get('things') or []):
-                self.occupied.add(tuple(p['tile']))
 
     def kind(self, tx, ty):
         """'solid', 'oneway', 'open' (spawn, door and part cells are 'open' here: they hold no ground)."""
@@ -76,16 +66,6 @@ class Room:
                 # DRAFT: no glow on a lantern in daylight: added light on a bright sky only bleaches it
                 cx = left + (29 - 24 if it['flip'] else 24)
                 self.glow(it['sheet'], 'glow-lantern', 16, cx, bottom - 49 + 31, it['layer'])
-
-    def glows3(self):
-        """Round 3: a glow on every hung light (chandelier, lantern, mine lantern) and the camp's fire."""
-        for it in list(self.items):
-            left = it['tx'] * T + it['dx']
-            bottom = (it['ty'] + 1) * T + it['dy']
-            spot = GLOW3.get(it['name'])
-            if spot:
-                r, ox, oy = spot
-                self.glow(it['sheet'], 'glow-%d' % r, r, left + ox, bottom - oy, it['layer'])
 
     def column(self, tx, top, bottom):
         """A far-layer column from row `top` down to stand on row `bottom`."""
@@ -139,16 +119,14 @@ def courtyard(R):
         if R.plain(tx, 1) and R.kind(tx, 0) == 'solid':
             name = ['ivy-long', 'ivy-short', 'ivy-long-b'][i % 3]
             R.add('courtyard', name, tx, 1, dy={'ivy-long': 12, 'ivy-short': -2, 'ivy-long-b': 8}[name], support='ceiling')
-    # DRAFT (round 3): the quarry doorway (columns 17-19), the plates (16, 22), the outpost doorway (23) and the
-    # gate (25) came after round 2 and the old tree, grass, bush and a flower stood on them. Moved: the tree east
-    # of the gate, the broken column back among the far-off ruins, the small things into the gaps; the bush gone.
-    R.add('courtyard', 'column-broken', 11, 7, dx=4, layer='far', support='wall')
-    R.add('courtyard', 'tree', 26, 7, dx=1)
-    R.add('courtyard', 'grass', 21, 7, dx=4)
+    R.add('courtyard', 'tree', 17, 7, dx=4)
+    R.add('courtyard', 'grass', 17, 7, dx=2)
     R.add('courtyard', 'flower-pink', 21, 7, dx=2)
+    R.add('courtyard', 'bush', 23, 7, dx=1)
+    R.add('courtyard', 'column-broken', 26, 7, dx=0)
     R.add('courtyard', 'flower-white', 27, 7, dx=4)
     R.add('courtyard', 'column-stump', 28, 7, dx=-3)
-    R.add('courtyard', 'flower-gold', 24, 7, dx=2)
+    R.add('courtyard', 'flower-gold', 19, 7, dx=6)
 
 
 def throne_room(R):
@@ -233,88 +211,9 @@ def graybox_hall(R):
         R.add('castle', 'banner-blue', tx, 3, dy=-4, layer='far', support='wall')
 
 
-# ---------------------------------------------------------------- round 3 (handoff-prompts/look3-props.md)
-
-def cantina(R):
-    """The tavern (DRAFT: first pass). Floor row 10 (top at y 160), doorway column 3, pads at columns 8, 12, 16
-    and 20 and the bell at 13 (content/cantina/cantina.json): furniture stands only between them, so nothing
-    covers a pad's floor line, the bell or the doorway. The stage is marked by red swags across its top and
-    bunting between them; the light is a chandelier over the middle and two lanterns, each with a glow."""
-    # the bar by the doorway: counter, and on the wall over it two bottle shelves either side of a mirror
-    R.add('tavern', 'bar', 4, 9, dx=4)
-    R.add('tavern', 'shelf-bottles', 4, 7, dx=3, dy=-6, support='wall')
-    R.add('tavern', 'mirror', 5, 7, dx=8, dy=-5, support='wall')
-    R.add('tavern', 'shelf-plates', 6, 7, dx=9, dy=-6, support='wall')
-    # tables with stools in the gaps between the pads
-    for tx, dx in ((9, 1), (17, 1)):
-        R.add('tavern', 'stool', tx, 9, dx=dx)
-        R.add('tavern', 'table', tx, 9, dx=dx + 11)
-        R.add('tavern', 'stool', tx, 9, dx=dx + 31, flip=True)
-    R.add('tavern', 'table-mug', 14, 9, dx=2)
-    R.add('tavern', 'barrel', 15, 9, dx=1)
-    # kegs past the last pad, under the raised side platform
-    R.add('tavern', 'kegs', 21, 9, dx=2)
-    # banners on the wall, one rule: every 5th column from 10
-    for tx in range(10, R.w - 4, 5):
-        R.add('tavern', 'banner', tx, 4, dy=0, support='wall')
-    # the stage: a red swag every 4 columns across the top, from 7 to 21, bunting strung between
-    for tx in range(7, 22, 4):
-        R.add('tavern', 'swag', tx, 1, dx=-2, dy=2, support='ceiling')
-    for tx in range(9, 20, 4):
-        R.add('tavern', 'bunting', tx, 1, dx=-6, dy=-2, support='ceiling')
-    # light: a chandelier over the middle, a lantern over the bar and one over the kegs
-    R.add('tavern', 'chandelier-hung', 12, 3, dx=3, support='ceiling')
-    R.add('tavern', 'lantern-hung', 6, 3, dx=3, support='ceiling')
-    R.add('tavern', 'lantern-hung', 22, 3, dx=3, support='ceiling')
-
-
-def outpost(R):
-    """The Bandit Camp (DRAFT: first pass). Floor row 11 (top at y 176), the ledge at row 6, the step at
-    columns 5-7, the lookout at 18, the horn post at 20, fighters at 25 and 28, waves walking in at 41
-    (content/placements/outpost.json, content/outposts/outpost.json): tents, the fire and the rack stand
-    between them, the palisade runs behind the whole camp on the far layer."""
-    for tx in range(9, R.w - 2):
-        R.add('camp', 'palisade', tx, 10, layer='far', support='wall')
-    R.add('camp', 'tent', 10, 10, dx=4)
-    R.add('camp', 'flag', 14, 10, dx=4)
-    R.add('camp', 'rack', 15, 10, dx=6)
-    R.add('camp', 'fire', 22, 10, dx=4)
-    R.add('camp', 'crate', 30, 10)
-    R.add('camp', 'tent-blue', 32, 10, dx=2)
-    R.add('camp', 'tent', 35, 10, dx=2, flip=True)
-    R.add('camp', 'crate', 38, 10, dx=4)
-
-
-def quarry(R):
-    """The six quarry rooms (DRAFT: first pass). One rule each, never reading a door's or a room's hidden flag:
-    a scaffold on the far layer every 12th column wherever four open cells stand on a floor; a rock pile by a
-    fixed hash on floor cells; a lantern hung from the ceiling every 9th column in the cave and the pit
-    (rooms with no daylight), with a glow."""
-    for ty in range(2, R.h - 1):
-        for tx in range(3, R.w - 3, 12):
-            if R.floor(tx, ty) and R.floor(tx + 1, ty) and all(R.plain(tx + k, ty - j) for j in range(3) for k in (0, 1)):
-                R.add('quarry', 'scaffold', tx, ty, layer='far', support='wall')
-    for ty in range(1, R.h - 1):
-        for tx in range(1, R.w - 1):
-            near = any((tx + k, ty) in R.occupied for k in (-1, 0, 1, 2))
-            if R.floor(tx, ty) and R.floor(tx + 1, ty) and R.plain(tx, ty - 1) and R.plain(tx + 1, ty - 1) and not near:
-                pick = hsh(tx, ty, 61) % 9
-                if pick == 0:
-                    R.add('quarry', 'rocks', tx, ty, dx=2)
-                elif pick == 1:
-                    R.add('quarry', 'rocks-small', tx, ty, dx=1)
-    if R.id in ('quarry-cave', 'quarry-pit'):
-        for tx in range(4, R.w - 2, 9):
-            if R.plain(tx, 1) and R.plain(tx, 2) and R.kind(tx, 0) == 'solid':
-                R.add('quarry', 'lantern-hung', tx, 2, dx=2, support='ceiling')
-
-
 PLACERS = {
     'castle-street': castle_street, 'courtyard': courtyard, 'throne-room': throne_room,
     'hall-gallery': hall_gallery, 'undercroft': undercroft, 'graybox-hall': graybox_hall,
-    'cantina': cantina, 'outpost': outpost,
-    'quarry-road': quarry, 'quarry-ridge': quarry, 'quarry-tower': quarry, 'quarry-depot': quarry,
-    'quarry-pit': quarry, 'quarry-cave': quarry,
 }
 
 
@@ -333,6 +232,5 @@ def place_all():
             undercroft_posts(R)
         if rid in GLOW_ROOMS:
             R.glows()
-        R.glows3()
         out[rid] = R
     return out

@@ -62,32 +62,6 @@ the room's rim.
 
 New looks: `fx-swing-grappler`, `hide-front-1x2`, `hide-front-2x2`; `font-dark`/`font-light` in `content/looks/font.json` + `assets/ui/font.png`. Resized: `fx-hit` 32, `fx-slash` 32, `fx-dust` 24. Cracks get a light edge beside the dark line. Decor: P01 barrels (street, undercroft, dimmed toward night there), P01 lantern posts (every other street lamp; undercroft lower floor every 10th column from 9), P01 ruin arch and broken column (courtyard, `far`); a `blend: "lighter"` glow on every torch in the five rooms that have them and on the undercroft's lantern posts.
 
-
-### Round 3 (2026-11-23, `handoff-prompts/look3-props.md`)
-
-| File | Role |
-|---|---|
-| `srcimport.py` | cuts a piece from an art-desk source plate (P03-P08): crop, hard alpha, largest blob, snap to the ramps given (by material), shrink by majority (a mode, never an average), remove lone speckle, re-ink the edge |
-| `round3.py` | the cantina pieces (P04 tavern hub, P08 furniture), the camp (drawn: tents, palisade, fire, rack, flag, crate), the quarry (drawn: rock piles, scaffold; P04 lantern), `hide-1x1`/`hide-front-1x1`, the horn |
-| `shots.mjs ... round3` | the brief's scenes, upright and sideways; copies at 1x of the device picture in `docs/plan/step-8-shots/round3/props/` |
-
-New looks: `hide-1x1`, `hide-front-1x1` (rubble over a crevice; every one-tile hide is in the quarry); `signaler`,
-`signaler-sounding` (3 frames, 12 fps), `signaler-broken` in `content/looks/outpost.json` + `assets/props/outpost.png`,
-each 32x48: the horn only, drawn for a 10x32 post standing at x 11..20, y 16..47 of the look (hung on a peg at
-y 21 on its right; raised above its top when sounding; a splintered top at y 12..16 and the horn at the foot when
-broken). New decor: `cantina`, `outpost`, `quarry-{road,ridge,tower,depot,pit,cave}` (sheets `decor/tavern.png`,
-`camp.png`, `quarry.png`); glows (`blend: "lighter"`) on the cantina's chandelier and lanterns, the camp's fire and
-the cave's and pit's lanterns (`GLOW3` in `place.py`). Decisions: `docs/decisions-log.md`, 2026-11-23, "The
-cantina, the Bandit Camp and the quarry are furnished" and "The courtyard's tree ... moved".
-
-- **The courtyard's round-2 tree, grass, bush and gold flower stood on the quarry and camp doorways and a plate**
-  (added after round 2): `selfcheck.py` caught it. Moved (decision above).
-- **Not verified:** the horn *sounding* in the real game: the screenshot's attempt to set the post sounding on the
-  page's copy of the world did not take (the next snapshot wins); `horn-looks-4x.png` shows the three looks. The
-  cast lane's post sprite had not landed, so "the horn hangs on your post's peg" is lined up with the post's box
-  (10x32), not its picture. The quarry rooms had no ground art yet. The cave's and pit's lanterns hang near the
-  ceiling, above the brief's camera spots.
-
 ## Deviations from the contract
 
 - `ui-use`'s `src` is the whole 48×24 picture (normal then pressed), with no `frames`: that is how

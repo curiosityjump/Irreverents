@@ -740,18 +740,3 @@ document as a decision of theirs.
 - **To change it:** `docs/plan/step-18.md`, "`DRAFT:` choices"; data in `content/characters/*.json`, `content/tuning.json`, `content/npcs/villain.json`.
 - **Where:** `docs/plan/step-18.md`; `docs/mechanisms/npc-response.md`, "Who fights".
 
-
-
-### 2026-11-23 · The cantina, the Bandit Camp and the quarry are furnished; the quarry's one-tile hiding spots are rubble
-- **Decided by:** Step 8 look round 3, props builder `session_017WiGzJxBqVvizcghgHk5NG`, for orchestrator
-- **Instead of asking:** "What goes in the cantina, the camp and the quarry, and what does a one-tile hiding spot look like?"
-- **Why this way:** the review saw a cantina with one shelf and a camp drawn as the courtyard again. The cantina gets a bar with bottle shelves and a mirror by the doorway, round tables and stools and kegs between the fighting pads (never on them or the bell), red swags and bunting over the stage, and a chandelier and two lanterns with warm light; the camp gets a palisade behind it, two striped tents, a flag, a weapons rack and a campfire with a glow, all clear of the lookout, the horn post and the fighters; the quarry gets scaffolds, rock piles and, in the cave and the pit, hanging lanterns. Most pieces are cut from the art desk's own tavern and furniture plates (the asset desk: "do not re-generate generic inferior art if a strong source here already matches"). Every quarry hiding spot is one tile, in a yard, a cave, a pit and on a roof, so the one picture that fits all of them is a heap of boulders over a dark crevice, not an ore cart.
-- **To change it:** where things go is one function per room in `tools/art/props/place.py`; the pictures are in `tools/art/props/round3.py`; then `python3 -I tools/art/props/make.py`.
-- **Where:** `tools/art/props/README.md`, "Round 3".
-
-### 2026-11-23 · The courtyard's tree, bush and flowers moved off the new doorways
-- **Decided by:** Step 8 look round 3, props builder `session_017WiGzJxBqVvizcghgHk5NG`
-- **Instead of asking:** "The quarry and camp doorways and the gate's plates were added where round 2's tree, bush and flowers stood; which goes?"
-- **Why this way:** decoration never covers a door or a working part (the art contract). The tree now stands east of the gate, the broken column joins the far-off ruins, the bush is gone and the small things sit in the gaps.
-- **To change it:** `courtyard()` in `tools/art/props/place.py`.
-- **Where:** `tools/art/props/README.md`, "Round 3".
