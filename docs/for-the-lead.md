@@ -137,3 +137,20 @@ actually read (questions for the owner go through
 
 **Note:** the paste for `src/server/main.ts` is the comment at the top of `src/server/store.ts`. It assumes slice B's names (`restoreHall`, event `hall-legend { record }`); check them when pasting.
 
+### step-4-slice-1-moods.md, 2026-11-23
+
+**Flag:** `interact` ("Use", key E) has no touch control. It is one more file in `content/actions/`, so whoever builds the touch layout from that list (Step 1 Gate 2 / Step 5) should pick it up, but nobody has checked that on a phone, and buying and taking are impossible on an iPhone until it does. Not mine to build (`src/client/**`).
+
+**Flag:** `npc-interact` keeps `c.interact` on the player's own entity and changes a thing's `takenBy`. If Step 1's netcode has each phone simulate only its own character, the server must still run this system for every player or a take never reaches the other phone. Not checked: the netcode is not on main.
+
+**Flag:** the brief said `entity.c.drive` and a rule of mine in `systems/verbs.ts`; Step 2 had landed `entity.c.input` and the rule, so people write `c.input` (one helper, `drive()` in `src/sim/npc/state.ts`). `docs/plan/step-4.md` still says `c.drive` (yours to edit).
+
+**Flag:** a blow that knocks a person out is not perceived by them. Step 2's hits landed while I worked, so `step4-hero-hits-shopkeeper` uses a real one: the first hit distresses the shopkeeper through the `events` table. A second hit knocked the shopkeeper out (a body with no toughness number gets the world default), and because someone out cold sees nothing, that hit had no witness but the villain and never became rage; the shopkeeper wakes still only distressed, clocks frozen meanwhile. Left as it is: knocked-out people are slice 2's, and the shopkeeper's toughness is Step 2's number. `grab` and `throw` rows were exercised only with made-up events in a scratch script.
+
+**Flag:** Step 2's `event` fact gained a `where` filter while I was writing `event-where`, so there are now two ways to say nearly the same thing. Mine compares whole values (`"witnesses": []`); I did not check whether theirs does. Worth folding into one later; not touched, the fact is theirs.
+
+**Note:** `deed.witnesses` lists everyone who perceived the deed, whether or not they care: the villain is in the list for a hero's take and stays in mood 1. Slice 2 should decide who reports from mood, not from the list alone.
+
+**Note:** my scenarios play `"character": "hero"` and pin exact ticks (the villain robs at 168 and buys at 2962; rage cools at 1150). They move if the `hero` tuning set, the three people's walk numbers or the test-shop routines change. `node scripts/trace.ts <id>` prints only bodies; moods are easiest read from the failure message of a `mood` fact, which lists every mood change in the run.
+
+**Note:** rung 5 was looked at in a desktop-sized headless page (960 px wide, canvas scaled 3x), not at phone size. The marks read clearly; the 8 px bark text is soft but legible there.

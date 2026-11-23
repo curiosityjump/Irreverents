@@ -158,6 +158,15 @@ One function per behaviour id; an NPC kind picks one per mood.
   within `npcChargeReach`. If the body lists Step 2's `attack` verb,
   hold `attack` there while an offender is in sight.
 
+## On screen (`src/client/draw/npcs.ts`)
+
+`DRAFT:` plain stand-ins until Step 8 draws real ones. Mood 1 shows
+nothing; mood 2 a yellow `?` over the head; mood 3 a red `!` and a red
+tint over the body. A bark (`c.npc.bark`) replaces the mark while it
+lasts (`npcBarkTime`). Things are a brown box (`counter`) or a small
+green one (`goods`), gone once taken. Called by one line in
+`src/client/render.ts`, after the bodies.
+
 ## Hooks left for slice 2
 
 - `rageMayCool()` in `src/sim/npc/state.ts`: add "and the area alert is
@@ -190,7 +199,8 @@ Scenarios `scenarios/step4-*.json`, all in `content/rooms/test-shop.json`
 with `"placements": true`. Two facts were added for them
 (`docs/mechanisms/scenarios.md`): `mood` and `event-where`. The
 villain's polite visit is at about tick 2960; the hero scenarios use the
-time before it.
+time before it. `step4-hero-hits-shopkeeper` is the one that uses a
+real event of another step (Step 2's `hit`).
 
 ## Traps
 
@@ -199,5 +209,8 @@ time before it.
 - Turning nudges a body by a hundredth of a pixel, so a person's `x`
   drifts by fractions over many turns. Do not assert a person's exact
   position.
+- Someone knocked out by a blow does not perceive that blow (out cold
+  sees nothing, and Step 2 flattens before the witness pass runs). Slice
+  2 owns knocked-out people.
 - A `once` thing stays in the world after it is taken (with `takenBy`
   set); it is never re-added.

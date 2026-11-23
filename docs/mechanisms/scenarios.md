@@ -73,6 +73,8 @@ build gates A–F (`docs/measures.md`, M3) from the scenarios' `gate` tags.
 | `in-room` | at tick `at`, `player` (or `entity`) is in room `room` |
 | `event` | event `event` happened (for `player`, if given) on a tick within `between`; optional `count: [min, max]`, and `[0, 0]` means "must not happen"; optional `where: { "target": "dummy-1" }` also requires those fields of the event to have exactly those values |
 | `body-state` | at tick `at`, the body has every state in `is` and none in `not` (names of `entity.c` fields: `flying`, `held`, `carrying`, `beat`, `flattened`…), and its hidden wear is within `worn: [min, max]`; give at least one of the three |
+| `mood` | at tick `at`, or on every tick of `between`, the person `npc` (placed by the room's placements file; the scenario needs `"placements": true`) is in mood `is` (1, 2 or 3) |
+| `event-where` | event `event` whose fields equal everything in `where` (compared whole: `"witnesses": []` means nobody) happened on a tick within `between`; optional `count` as for `event`. For events that name entity ids rather than one `player` or `entity` |
 
 Every fact that names a `player` accepts `"entity": "<id>"` instead (one
 of the scenario's `entities`, or of the room's placements when

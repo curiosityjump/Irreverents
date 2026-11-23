@@ -1,0 +1,18 @@
+{
+  "id": "step4-unseen-take",
+  "gate": "C",
+  "proves": "a hero takes goods behind the shopkeeper's back while the shopkeeper faces the other way: nobody perceives the deed (its witness list is empty) and the shopkeeper stays in business as usual, even after later glancing that way",
+  "room": "test-shop",
+  "placements": true,
+  "players": [{"id": "a", "character": "hero", "spawn": 0}],
+  "inputs": [
+    {"player": "a", "from": 320, "to": 420, "x": -1},
+    {"player": "a", "from": 450, "to": 455, "hold": ["interact"]}
+  ],
+  "ticks": 900,
+  "expect": [
+    {"fact": "event-where", "event": "deed", "where": {"deed": "take", "by": "p:a", "thing": "goods-4", "witnesses": []}, "between": [450, 450], "count": [1, 1]},
+    {"fact": "mood", "npc": "shopkeeper-1", "between": [0, 900], "is": 1},
+    {"fact": "event-where", "event": "mood-changed", "between": [0, 900], "count": [0, 0]}
+  ]
+}

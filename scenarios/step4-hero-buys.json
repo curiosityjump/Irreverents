@@ -1,0 +1,18 @@
+{
+  "id": "step4-hero-buys",
+  "gate": "C",
+  "proves": "signal 1b's control: a hero buying the same potion the villain's polite visit horrifies the shopkeeper with leaves the shopkeeper in business as usual throughout (D-050: the same deed, a different doer)",
+  "room": "test-shop",
+  "placements": true,
+  "players": [{"id": "a", "character": "hero", "spawn": 0}],
+  "inputs": [
+    {"player": "a", "from": 10, "to": 56, "x": -1},
+    {"player": "a", "from": 80, "to": 85, "hold": ["interact"]}
+  ],
+  "ticks": 300,
+  "expect": [
+    {"fact": "event-where", "event": "deed", "where": {"deed": "buy", "by": "p:a", "target": "shopkeeper-1", "thing": "counter-1"}, "between": [80, 80], "count": [1, 1]},
+    {"fact": "mood", "npc": "shopkeeper-1", "between": [0, 300], "is": 1},
+    {"fact": "event-where", "event": "mood-changed", "between": [0, 300], "count": [0, 0]}
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "id": "step4-rage-needs-unseen",
+  "gate": "C",
+  "proves": "signal 2's control: the same play as step4-hero-persists-rage, except the hero does not jump the wall and stands in the shopkeeper's view for the same time: the shopkeeper is still in rage at the end (D-073: rage ends only once the offender has stayed unseen)",
+  "room": "test-shop",
+  "placements": true,
+  "players": [{"id": "a", "character": "hero", "spawn": 0}],
+  "inputs": [
+    {"player": "a", "from": 20, "to": 25, "hold": ["interact"]},
+    {"player": "a", "from": 30, "to": 41, "x": -1},
+    {"player": "a", "from": 50, "to": 55, "hold": ["interact"]},
+    {"player": "a", "from": 60, "to": 71, "x": -1},
+    {"player": "a", "from": 80, "to": 85, "hold": ["interact"]},
+    {"player": "a", "from": 90, "to": 116, "x": -1},
+    {"player": "a", "from": 130, "to": 135, "hold": ["interact"]},
+    {"player": "a", "from": 140, "to": 260, "x": 1}
+  ],
+  "ticks": 1300,
+  "expect": [
+    {"fact": "event-where", "event": "mood-changed", "where": {"entity": "shopkeeper-1", "from": 2, "to": 3}, "between": [80, 80], "count": [1, 1]},
+    {"fact": "event-where", "event": "deed", "where": {"deed": "buy", "by": "p:a", "target": "shopkeeper-1"}, "between": [130, 130], "count": [1, 1]},
+    {"fact": "position", "player": "a", "at": 300, "x": [212, 224], "y": [160, 160]},
+    {"fact": "mood", "npc": "shopkeeper-1", "between": [81, 1300], "is": 3},
+    {"fact": "event-where", "event": "mood-changed", "where": {"entity": "shopkeeper-1", "from": 3}, "between": [0, 1300], "count": [0, 0]}
+  ]
+}

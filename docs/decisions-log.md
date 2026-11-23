@@ -338,3 +338,37 @@ document as a decision of theirs.
 - **Why this way:** placeholders (D-096) that make the moment of contact readable on a phone: everything freezes for a few frames, flashes, shakes and puffs. The crates got a plank line instead of an eye so things and creatures tell apart.
 - **To change it:** sizes and lengths are constants at the top of one drawing file; art replaces it.
 - **Where:** `src/client/draw/impact.ts`, `src/client/draw/entities.ts`.
+### 2026-11-23 · How a person's mood shows: nothing when all is well, a yellow "?" when upset, a red "!" and a red body when furious
+- **Decided by:** brief-worker, Step 4 slice 1, `session_017WiGzFBg5B72dx48zdiZh9`
+- **Instead of asking:** "How should the three moods read at a glance?" (yours to judge on a phone; the library gives no look.)
+- **Why this way:** business as usual is the world at rest, so it shows nothing; the other two have to be told apart in one look, by shape and by colour. When a person speaks, their few words replace the mark for a second and a half. All plain placeholder boxes until the art step draws real ones.
+- **To change it:** a few lines of drawing code and one number for how long words stay up.
+- **Where:** `src/client/draw/npcs.ts` (marked `DRAFT:`); `content/tuning.json`, `npcBarkTime`.
+
+### 2026-11-23 · What people say: "W-what?!", "ENOUGH!!", "Yup! As expected!", "Thief! Begone!", "Thank you!"
+- **Decided by:** brief-worker, Step 4 slice 1, `session_017WiGzFBg5B72dx48zdiZh9`
+- **Instead of asking:** "What are the words over their heads?"
+- **Why this way:** you asked for very little dialogue (D-057), so the game refuses anything longer than three words. The calming line is your own "Yup! Just as expected!" (D-042) cut to fit. The guard and the villain have their own three lines each. All placeholders.
+- **To change it:** the words are text in each person's data file.
+- **Where:** `content/npcs/shopkeeper.json`, `guard.json`, `villain.json`.
+
+### 2026-11-23 · One odd thing seen only ever upsets a person; it takes three small ones (or two blows) to enrage them, and left alone an upset person settles in 12 seconds
+- **Decided by:** brief-worker, Step 4 slice 1, `session_017WiGzFBg5B72dx48zdiZh9`
+- **Instead of asking:** "How much does it take to make someone furious, and how long do they stay upset?" (the library leaves the numbers open.)
+- **Why this way:** your rule is that the first deviation is a fluke and persisting is rage (D-044, D-045), so the first odd deed, however bad, stops at upset. Taking goods counts 1 and laying hands on a good person counts 2, against a limit of 3. A furious good person is not calmed by anything you do in front of them (D-073); 15 seconds out of their sight brings them down to upset, still on edge, so one more odd deed is fury again.
+- **To change it:** numbers in two data files.
+- **Where:** `content/tuning.json` (`npcRageAt`, `npcDistressFadeTime`, `npcRageCoolTime`), `content/rules/expectations.json` (the weights); `docs/mechanisms/npc-response.md`.
+
+### 2026-11-23 · Only good people are troubled by what a hero does; and a deed nobody wrote a rule for means nothing to anyone
+- **Decided by:** brief-worker, Step 4 slice 1, `session_017WiGzFBg5B72dx48zdiZh9`
+- **Instead of asking:** "Does the villain mind a hero stealing from the shop? What does a guard make of something we never thought of?"
+- **Why this way:** nothing in the library says what unsettles a villain yet, so tonight he watches a hero rob the shop and carries on. An unlisted deed is ignored rather than guessed at, because people here are scripted and never improvise (D-055).
+- **To change it:** rows in a data file.
+- **Where:** `content/rules/expectations.json`.
+
+### 2026-11-23 · Shopping has no money yet, taken goods simply leave the shelf, and the shopkeeper glances behind every five seconds
+- **Decided by:** brief-worker, Step 4 slice 1, `session_017WiGzFBg5B72dx48zdiZh9`
+- **Instead of asking:** "What does buying cost, what happens to what you take, and how watchful is a shopkeeper?"
+- **Why this way:** the mood rules needed the acts of buying and taking, not an economy, so buying is free and what you take is only marked as yours. Buying needs the shopkeeper standing by the counter, and still counts as buying when they are furious with you (it just does not help). The glance behind (a second and a half in every six and a half) makes "behind their back" a matter of timing rather than a free shelf. These are in a test room only; the street gets its own.
+- **To change it:** the glance is the shopkeeper's routine in a data file; money and carrying are real work for a later slice.
+- **Where:** `content/placements/test-shop.json`; `src/sim/systems/npc-interact.ts` (marked `DRAFT:`).

@@ -1,0 +1,21 @@
+{
+  "id": "step4-hero-hits-shopkeeper",
+  "gate": "C",
+  "proves": "a real blow from Step 2's attack verb reaches people through the event table in content/rules/ (hit -> the deed 'hit'): a hero hitting the shopkeeper distresses the shopkeeper, and the villain's robbery a moment later does not calm them, because only the offender's own expected act does",
+  "room": "test-shop",
+  "placements": true,
+  "players": [{"id": "a", "character": "grappler", "spawn": 0}],
+  "inputs": [
+    {"player": "a", "from": 10, "to": 70, "x": -1},
+    {"player": "a", "from": 100, "to": 104, "hold": ["attack"]}
+  ],
+  "ticks": 190,
+  "expect": [
+    {"fact": "mood", "npc": "shopkeeper-1", "between": [0, 100], "is": 1},
+    {"fact": "event-where", "event": "hit", "where": {"by": "p:a", "target": "shopkeeper-1"}, "between": [100, 100], "count": [1, 1]},
+    {"fact": "event-where", "event": "deed", "where": {"deed": "hit", "by": "p:a", "target": "shopkeeper-1", "witnesses": ["shopkeeper-1", "villain-1"]}, "between": [100, 100], "count": [1, 1]},
+    {"fact": "event-where", "event": "deed", "where": {"deed": "rob", "by": "villain-1"}, "between": [168, 168], "count": [1, 1]},
+    {"fact": "mood", "npc": "shopkeeper-1", "between": [101, 190], "is": 2},
+    {"fact": "mood", "npc": "villain-1", "between": [0, 190], "is": 1}
+  ]
+}

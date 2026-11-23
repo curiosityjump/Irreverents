@@ -16,6 +16,9 @@ content/            the game's data: what exists and how it feels
   characters/<id>.json  one kind of body: box, colour, verbs, tuning set
   party.json          the shared party: member character ids, in order
   actions/<id>.json   one pressable action: label and keyboard keys
+  npcs/<id>.json      one kind of person: role, side, a behaviour per mood, barks
+  rules/<id>.json     what each role makes of each deed (NPC response logic's tables)
+  placements/<room id>.json  who and what stands in a room: bodies, people, things
 scenarios/<id>.json  scripted play-throughs with the facts expected
 controls/rooms/<name>.json  broken rooms `npm run check` must keep refusing
 src/
@@ -27,6 +30,7 @@ src/
     world.ts          createWorld, spawnPlayer, add/remove entity
     verbs/<id>.ts     one thing a character can do (self-registering)
     systems/<id>.ts   one pass over the world per tick (self-registering)
+    npc/              NPC response logic's helpers: state, sight, rule lookup, behaviours
     check-content.ts  content checked against the verbs and systems
     check-rooms.ts    the room checks that need the simulation (Step 3)
     room-state.ts     tiles and part memory that change while the game runs
@@ -152,9 +156,11 @@ The rules, each `INTENT:` in the file:
 name. A player's `Input` for a tick is the stick (`x`, `y`) plus `held`,
 the ids of the actions held down. Keyboard, touch and scenario files all
 speak those ids, and a script can enumerate them by listing the directory
-(or `content.actions` after loading). Only `jump` exists today; `attack`,
-`grab` exist too (Step 2); `special` and `interact` are names later steps are expected to
-add (a file each; Step 5 checks every entry has a touch control).
+(or `content.actions` after loading). `jump`, `switch`, `attack` and
+`grab` (Step 2) and `interact` (Step 4: use the nearest thing; read by
+the `npc-interact` system, not a verb) exist today; `special` is a name
+a later step is expected to add (a file each; Step 5 checks every entry
+has a touch control).
 
 ## Deploying
 
@@ -191,11 +197,15 @@ extends from its own file with `declare module '../types.ts' { … }`
 | **kind of working part** (a plate, a gate, a breakable wall) | One system file `src/sim/systems/room-<kind>.ts` that declares the kind in its `parts: { "<kind>": { what, check? } }` and drives it in `run`: read the placed parts from `content.rooms[id].parts` (`id`, `kind`, `tiles`, `params`), keep their memory with `partState(world, roomId, partId)`, make tiles solid or open with `setTile(world, room, tx, ty, TILE.solid \| null)` (`src/sim/room-state.ts`). A room places one with an entry in `parts` (`id`, `kind`, `params`) and a legend letter `{ "part": "<id>" }`. A kind no system declares is refused, listing the known kinds. | One new file |
 | **character kind** | `content/characters/<id>.json` (box up to 32×32, colour, the verbs it can do one per line, a tuning set name) plus that set under `characters` in `content/tuning.json`, holding exactly the numbers its verbs declare. Kinds today: `hero` (Step 1's stand-in, not in the party), the three party members `grappler` (18×30, heavy), `infiltrator` (10×12, quick, fits a one-tile gap), `flyer` (14×20, flaps), and the hit's crates and dummies. A mark for it on screen is optional, in `src/client/draw/entities.ts` (`MARKS`). | No |
 | **party member** | A character kind that lists the `switch` verb, added to `members` in `content/party.json` (its place in the list is its place in the seating and switching order). `docs/mechanisms/party-and-switching.md`. | No |
-| **NPC** | Its body is built: a character kind, placed by `content/placements/<room id>.json` (`{ id, room, place: [{ id, character, tile }] }`, kind file `src/content/kinds/placements.ts`) and put in the world by `populateRoom(world, content, roomId)` as an `Entity` with `player: null`. It acts by having another system write an `Input` to `entity.c.input`; its kind's verbs do the rest. The NPC kind data (`content/npcs/`) and its response logic (systems named `npc-*`) are Step 4's. | Step 4 adds the kind files and systems |
+| **person** (an NPC in a room) | An entry in `content/placements/<room id>.json` `place`: `id`, `character` (the body), `tile`, plus `npc` (an NPC kind id) and a `routine` (`wait`, `face`, `walk-to`, `do` steps). At most 8 people per file. `populateRoom(world, content, roomId)` puts the body in the world as an `Entity` with `player: null`; the `npc-setup` system gives it `c.npc`; it acts by writing an `Input` to `entity.c.input`, never by moving itself. Details: `docs/mechanisms/npc-response.md`. | No |
+| **role / kind of person** | `content/npcs/<id>.json`: `role`, `side` (`good` / `bad`), `moods` (exactly `"1"`, `"2"`, `"3"`, each a behaviour id) and `barks` (at most three words each). Its body is a character kind as above. Then rows for the role in `content/rules/`. | No |
+| **deed** (a thing a person can witness) | Add its id to `deeds` in a `content/rules/` file and rows to `expect`. It happens through a routine's `do` step, a thing's `deed`, or an `events` row mapping a simulation event to it. | No |
+| **thing to use** (a counter, goods) | An entry in the placements file's `things`: `id`, `tile`, `deed`, optional `keeper`, `once`, `look`. | No |
+| **behaviour** (a new thing a person can be doing in a mood) | Its id in `BEHAVIOURS` (`src/content/kinds/npcs.ts`) and its function in `src/sim/npc/behaviours.ts`. | Two small edits |
 | **object** (a thing to pick up and throw) | A character kind listing the verb `body`, with `weight` and `toughness` (0 = cannot be knocked out) in its tuning set: see `crate`, `crate-heavy`. Place it with a line in `content/placements/<room id>.json`. There is no separate objects kind. Step 7's machine is still to come. | No |
 | **throwable or hittable body** | The same: any character kind can be hit, grabbed and thrown; one with no `weight` or `toughness` gets the world defaults. To make a character able to hit or lift, list `attack` and/or `grab` in its `verbs` and add their numbers (`docs/mechanisms/combat-and-impact.md`). | No |
 | **verb** (an action a character can take) | `src/sim/verbs/<id>.ts` default-exporting a `Verb` (its `order`, the tuning numbers and action ids it reads, `update`). If it needs a button, `content/actions/<id>.json`. List the verb id in each character that can do it and add its numbers to their tuning sets. | One new file, no edits |
-| **rule** (a thing the world does every tick, or an "event → reaction" mapping) | A system: `src/sim/systems/<id>.ts` with an `order` (verbs run at 100, physics at 500; leave gaps). Step 4's authored event/role mappings should be data in `content/rules/` read by one such system. | One new file |
+| **rule** (a thing the world does every tick, or an "event → reaction" mapping) | A system: `src/sim/systems/<id>.ts` with an `order` (verbs run at 100, physics at 500; leave gaps). Step 4's authored role/deed mappings are data: add a row to `expect` or `reactions` in `content/rules/` (`docs/mechanisms/npc-response.md`), no code. | One new file |
 | **scenario** | `scenarios/<id>.json` (`docs/mechanisms/scenarios.md`). Find the numbers with `node scripts/trace.ts <id>`. Tag it `"gate": "A"`…`"F"` when it is evidence for a build gate. | No |
 | **tuning number** | Declare it in the `tuning` of the verb (per character) or system (world) that reads it, with its range; put the value in `content/tuning.json`. `npm run check` names any number missing, out of range or unread. | Only the reader |
 | **asset** | See "Where art plugs in". | Not yet built |
@@ -346,7 +356,7 @@ A step adds files freely in its own paths and avoids editing others'.
 | 1 (until it closes) | the page, input, network, server, build and deploy | `src/client/**` except `draw/`, `src/server/**`, `scripts/**`, `package.json`, `tsconfig*.json`, `railway.json` |
 | 2 | movement and actions, combat and impact, the characters' data, the tuning data | `src/sim/verbs/**`, `src/sim/systems/` files named `combat-*`, `impact-*`, `carry-*`; `content/characters/**`, `content/actions/**`, `content/tuning.json`, `content/objects/**` and its kind file; `src/client/draw/entities.ts` |
 | 3 | room data and format, its loader and validator, moving between rooms, the rooms' working parts, the camera, drawing tiles | `content/rooms/**`, `content/game.json`, `src/content/kinds/rooms.ts`, `src/content/kinds/game.ts`, `src/sim/systems/` files named `room-*`, `src/sim/systems/physics.ts`'s tile collision, `src/client/draw/room.ts` (tiles and camera) |
-| 4 | NPC response logic, roles and rule data, who is placed where, seeing and hiding, calling for help, the area alert | `content/npcs/**`, `content/placements/**`, `content/rules/**`, their kind files in `src/content/kinds/`, `src/sim/systems/` files named `npc-*`, `alert-*`; a new `src/client/draw/npcs.ts` if NPCs need their own drawing |
+| 4 | NPC response logic, roles and rule data, who is placed where, seeing and hiding, calling for help, the area alert | `content/npcs/**`, `content/placements/**`, `content/rules/**`, their kind files in `src/content/kinds/`, `src/sim/systems/` files named `npc-*`, `alert-*`; `src/sim/npc/**`; `src/client/draw/npcs.ts`; `content/actions/interact.json`; `content/rooms/test-shop.json`; the facts `mood` and `event-where` |
 | 5 (opens when Step 1 closes) | touch and keyboard input, on-screen controls, presence, joining and rejoining, the menu, the page shell | `src/client/**` except `draw/`, `src/server/**` |
 | 6 | the throne room's people and props, the speech text, the speech clock and credits | `content/audience/**` and its kind file, `src/sim/systems/` files named `audience-*`, a new `src/client/draw/audience.ts` |
 | 7 | the legend detector, Hall records and their display, the machine and the roadblock | `content/hall/**`, `content/machines/**` and their kind files, `src/sim/systems/` files named `hall-*`, `machine-*`, a new `src/client/draw/hall.ts` |

@@ -1,0 +1,23 @@
+{
+  "id": "step4-hero-fluke-reassured",
+  "gate": "C",
+  "proves": "signal 2, first half: a hero takes goods in the shopkeeper's view, which distresses the shopkeeper (D-044: the first deviation is a fluke); the hero then buys, and the shopkeeper is back in business as usual on the very next tick (D-072)",
+  "room": "test-shop",
+  "placements": true,
+  "players": [{"id": "a", "character": "hero", "spawn": 0}],
+  "inputs": [
+    {"player": "a", "from": 20, "to": 25, "hold": ["interact"]},
+    {"player": "a", "from": 30, "to": 76, "x": -1},
+    {"player": "a", "from": 100, "to": 105, "hold": ["interact"]}
+  ],
+  "ticks": 300,
+  "expect": [
+    {"fact": "mood", "npc": "shopkeeper-1", "between": [0, 20], "is": 1},
+    {"fact": "event-where", "event": "deed", "where": {"deed": "take", "by": "p:a", "thing": "goods-3", "witnesses": ["shopkeeper-1", "villain-1"]}, "between": [20, 20], "count": [1, 1]},
+    {"fact": "mood", "npc": "shopkeeper-1", "between": [21, 100], "is": 2},
+    {"fact": "event-where", "event": "deed", "where": {"deed": "buy", "by": "p:a", "target": "shopkeeper-1"}, "between": [100, 100], "count": [1, 1]},
+    {"fact": "event-where", "event": "reassured", "where": {"entity": "shopkeeper-1", "by": "p:a", "deed": "buy"}, "between": [100, 100], "count": [1, 1]},
+    {"fact": "mood", "npc": "shopkeeper-1", "between": [101, 300], "is": 1},
+    {"fact": "mood", "npc": "villain-1", "between": [0, 300], "is": 1}
+  ]
+}
