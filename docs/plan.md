@@ -34,11 +34,11 @@ So progress is read off the live game, in this order: is it up, can two
 people play it together, and how much of the vision is in it. Each row is
 re-measured by the command in `docs/measures.md`, never quoted from here.
 
-| | Thing being measured | Today (2026-11-23 03:56 UTC) | Where it should get to |
+| | Thing being measured | Today (2026-11-23 08:47 UTC, re-run by orchestrator session_017WiGzJeh7Tuov59d8XYmru) | Where it should get to |
 |---|---|---|---|
-| M1 | **Live:** the address serves what is on `main` | a deploy probe, commit 7b8dc09 (no game) | the game, at the tip of `main`, after every push |
-| M2 | **Together:** two players on separate devices share one world at the live address | no | yes, proven by script (Step 1) |
-| M3 | **Vision playable:** of the design library's six build gates A–F (doc 24), how many have a scripted player-view check passing | 0 of 6 | F and A by the owner's morning, then B, C, D, E |
+| M1 | **Live:** the address serves what is on `main` | the game at 4678680; `main` ahead by documents only | the game, at the tip of `main`, after every push |
+| M2 | **Together:** two players on separate devices share one world at the live address | yes by script (`npm run check:live`: two pages, one phone-sized by touch, reconnect); no real iPhone tried | yes, proven by script (Step 1) |
+| M3 | **Vision playable:** of the design library's six build gates A–F (doc 24), how many have a scripted player-view check passing | 4 of 6 (A, B, C, F; `npm run gates`); only F and the party's moves are on the live page so far | F and A by the owner's morning, then B, C, D, E |
 
 **What the measure cannot say.** Whether a gate *feels* right ("joyful",
 "OHH!") is the owner's to judge by playing. A passing script means the
