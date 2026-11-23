@@ -136,3 +136,33 @@ sooner; a shopkeeper knocked out is still lying there after the old
 `flattenTime`; a cleared room is empty while you stay and restocked after you
 have been gone the data time), and one phone e2e fact: by touch, a fighter is
 beaten and is gone.
+
+## Part 3, added 2026-11-24 00:08 UTC: the king stuck in the wall (do this with part 1)
+
+**The owner, first-hand to the orchestrator, ~00:05 UTC, still playing:**
+
+> The king keeps getting stuck in the wall too
+
+"Too" may tie it to the fly-off: a body driven into solid tiles and then
+pushed out by whatever un-sticks bodies would be a collapse followed by a
+flight nobody caused. So add it to part 1's hunt as evidence, and reproduce it
+on its own: in the throne room, by touch on a phone-sized page with delay
+added, hit, grab, carry and throw the king at each wall, the throne, the
+window, the corners and the doorway, and (he can be thrown down through the
+stained-glass window into the undercroft: the puzzles slice added a pocket and
+a floor grate there tonight, 6475497 and 4204f68) into the undercroft. Record
+where his body's box is against the solid tiles every tick, on the server's
+world and as drawn. Say exactly how he gets in (a throw's end, being set down
+beside a wall, a slam, landing from the window, his own walk back to the
+throne, a hero's predicted throw the server placed elsewhere) and whether any
+other body (a guard, a fighter, a crate, a hero) can be put in a wall the same
+way.
+
+Fix the cause in the one rule the evidence convicts (tell me the file first):
+no body may come to rest overlapping solid tiles, and one that is found there
+is put in the nearest free place the same tick it is found, not launched. A
+scenario per way in, each with its control, and an e2e fact by touch. If the
+king must be able to return to his throne after being moved (read
+`docs/mechanisms/` for the throne room and `docs/deliberate-designs.md`:
+the king's endless speech is deliberate), say what he does today and leave
+that as it is unless it is how he gets stuck.
