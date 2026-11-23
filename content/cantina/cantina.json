@@ -7,6 +7,7 @@
   "calmTime": 0,
   "bell": { "tile": [13, 9], "reach": 18 },
   "friend": { "attackLaunch": 1, "attackWear": 1, "throwWear": 1 },
+  "pick": { "//": "DRAFT (Step 11 slice B): reach, pixels around a regular's box a tap still counts (a finger is wider than a pixel); seconds, how long the party row stays open by itself.", "reach": 8, "seconds": 6 },
   "patterns": {
     "grappler": {
       "walk": [{ "walk-to": 9 }, { "wait": 2 }, { "walk-to": 14 }, { "wait": 1.5 }],

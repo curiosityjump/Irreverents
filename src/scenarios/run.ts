@@ -52,7 +52,9 @@ export function parseScenario(raw: unknown, file: string, stem: string, content:
       // Step 3: a player may start in another room than the scenario's.
       if (p.room !== undefined && (typeof p.room !== 'string' || !(p.room in content.rooms))) fail(`${w}.room`, `no room ${JSON.stringify(p.room)} (rooms: ${known(content.rooms)})`);
       else if (typeof p.room === 'string' && content.rooms[p.room]!.spawns.length === 0) fail(`${w}.room`, `room "${p.room}" has no spawn tile for a player to start on`);
-      players.push({ id: String(p.id), character: p.character === undefined ? undefined : String(p.character), spawn: Number(spawn), ...(typeof p.room === 'string' ? { room: p.room } : {}) });
+      // Step 11: a player who joins on a later tick (a friend arriving after a swap); left out, before tick 0.
+      if (p.joins !== undefined && (typeof p.joins !== 'number' || !Number.isInteger(p.joins) || p.joins < 0)) fail(`${w}.joins`, `must be a whole tick from 0, but is ${JSON.stringify(p.joins)}`);
+      players.push({ id: String(p.id), character: p.character === undefined ? undefined : String(p.character), spawn: Number(spawn), ...(typeof p.room === 'string' ? { room: p.room } : {}), ...(typeof p.joins === 'number' && p.joins > 0 ? { joins: p.joins } : {}) });
     });
   }
 
@@ -121,7 +123,7 @@ export function parseScenario(raw: unknown, file: string, stem: string, content:
       const w = `inputs[${i}]`;
       if (!isRecord(s)) return fail(w, `must be an object, but is ${describe(s)}`);
       for (const key of Object.keys(s)) {
-        if (!['player', 'entity', 'from', 'to', 'x', 'y', 'hold', '//'].includes(key)) fail(`${w}.${key}`, 'unknown field (known fields: player, entity, from, to, x, y, hold)');
+        if (!['player', 'entity', 'from', 'to', 'x', 'y', 'hold', 'tap', '//'].includes(key)) fail(`${w}.${key}`, 'unknown field (known fields: player, entity, from, to, x, y, hold, tap)');
       }
       if (s.entity !== undefined) {
         if (s.player !== undefined) fail(`${w}.player`, 'give player or entity, not both');
@@ -142,7 +144,24 @@ export function parseScenario(raw: unknown, file: string, stem: string, content:
           if (typeof a !== 'string' || !(a in content.actions)) fail(`${w}.hold[${k}]`, `no action ${JSON.stringify(a)} (actions: ${known(content.actions)})`);
         });
       }
-      inputs.push({ player: s.entity === undefined ? String(s.player) : '', entity: s.entity as string | undefined, from: Number(s.from), to: Number(s.to), x: s.x as number | undefined, y: s.y as number | undefined, hold: Array.isArray(hold) ? (hold as string[]) : [] });
+      // Step 11: a tap on the game view (Input.tap). `n` as the page counts taps; `at` an entity id stands for
+      // that body's middle on each tick of the span (authoring sugar: a page sends room pixels); or `x`,`y`; or `slot`.
+      let tap: InputSpan['tap'];
+      if (s.tap !== undefined) {
+        const t = s.tap;
+        const n = (v: unknown): boolean => typeof v === 'number' && Number.isFinite(v);
+        if (!isRecord(t) || !Number.isInteger(t.n)) fail(`${w}.tap`, `must be { "n": whole number, and "at": entity id, or "x" and "y" room pixels, or "slot" }, but is ${describe(t)}`);
+        else {
+          for (const key of Object.keys(t)) if (!['n', 'at', 'x', 'y', 'slot', '//'].includes(key)) fail(`${w}.tap.${key}`, 'unknown field (known fields: n, at, x, y, slot)');
+          const ways = [t.at !== undefined, t.x !== undefined || t.y !== undefined, t.slot !== undefined].filter(Boolean).length;
+          if (ways !== 1) fail(`${w}.tap`, 'give one of "at", "x" and "y", or "slot"');
+          if (t.at !== undefined && typeof t.at !== 'string') fail(`${w}.tap.at`, 'must be an entity id');
+          if ((t.x !== undefined || t.y !== undefined) && (!n(t.x) || !n(t.y))) fail(`${w}.tap`, '"x" and "y" must both be numbers');
+          if (t.slot !== undefined && (!Number.isInteger(t.slot) || (t.slot as number) < 0)) fail(`${w}.tap.slot`, 'must be a whole number from 0');
+          tap = { n: t.n as number, ...(typeof t.at === 'string' ? { at: t.at } : {}), ...(n(t.x) && n(t.y) ? { x: t.x as number, y: t.y as number } : {}), ...(Number.isInteger(t.slot) ? { slot: t.slot as number } : {}) };
+        }
+      }
+      inputs.push({ player: s.entity === undefined ? String(s.player) : '', entity: s.entity as string | undefined, from: Number(s.from), to: Number(s.to), x: s.x as number | undefined, y: s.y as number | undefined, hold: Array.isArray(hold) ? (hold as string[]) : [], ...(tap ? { tap } : {}) });
     });
   }
 
@@ -176,7 +195,7 @@ export function parseScenario(raw: unknown, file: string, stem: string, content:
 }
 
 /** The input a scenario gives each player on one tick: every span covering the tick, merged in file order. */
-export function inputsAt(scenario: Scenario, tick: number): Record<string, Input> {
+export function inputsAt(scenario: Scenario, tick: number, world?: World, content?: Content): Record<string, Input> {
   const out: Record<string, Input> = {};
   for (const p of scenario.players) out[p.id] = { x: 0, y: 0, held: [] };
   for (const s of scenario.inputs) {
@@ -185,6 +204,13 @@ export function inputsAt(scenario: Scenario, tick: number): Record<string, Input
     if (s.x !== undefined) input.x = s.x;
     if (s.y !== undefined) input.y = s.y;
     for (const a of s.hold ?? []) if (!input.held.includes(a)) input.held.push(a);
+    if (s.tap) {
+      // Step 11: `at` resolves to that body's middle as it stands now (nowhere it is not in the world).
+      const body = s.tap.at !== undefined ? world?.entities.find((e) => e.id === s.tap!.at) : undefined;
+      const box = body ? content?.characters[body.kind]?.box : undefined;
+      const at = body && box ? { x: body.x + box.w / 2, y: body.y + box.h / 2 } : { x: s.tap.x ?? -9999, y: s.tap.y ?? -9999 };
+      input.tap = { ...at, n: s.tap.n, ...(s.tap.slot !== undefined ? { slot: s.tap.slot } : {}) };
+    }
   }
   return out;
 }
@@ -208,7 +234,7 @@ export function entityInputsAt(scenario: Scenario, tick: number): Record<string,
 
 export function simulate(scenario: Scenario, content: Content): Recording {
   const world = createWorld();
-  for (const p of scenario.players) spawnPlayer(world, content, { player: p.id, character: p.character, room: p.room ?? scenario.room, spawn: p.spawn });
+  for (const p of scenario.players) if (!p.joins) spawnPlayer(world, content, { player: p.id, character: p.character, room: p.room ?? scenario.room, spawn: p.spawn });
   if (scenario.placements) populateRoom(world, content, scenario.room);
   for (const e of scenario.entities ?? []) {
     const body = spawnBody(world, content, { id: e.id, character: e.character, room: e.room ?? scenario.room, tile: e.tile });
@@ -226,7 +252,9 @@ export function simulate(scenario: Scenario, content: Content): Recording {
       const body = world.entities.find((e) => e.id === id);
       if (body) body.c.input = input;
     }
-    events.push(...step(world, inputsAt(scenario, t), content));
+    // Step 11: a player who joins later is put in the world at the start of that tick, as a server does on joining.
+    for (const p of scenario.players) if (p.joins === t) spawnPlayer(world, content, { player: p.id, character: p.character, room: p.room ?? scenario.room, spawn: p.spawn });
+    events.push(...step(world, inputsAt(scenario, t, world, content), content));
     history.push(snapshot());
   }
   return { scenario, content, history, events };

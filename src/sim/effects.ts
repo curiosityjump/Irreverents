@@ -22,7 +22,9 @@ export type Effect =
   /** Let go: free again, where it is now. Follow with a `push` to throw it. */
   | { kind: 'release' }
   /** Put somewhere: a door, a respawn. `x`,`y` are the top-left of its box in `room`; it arrives standing still. */
-  | { kind: 'move'; room: string; x: number; y: number };
+  | { kind: 'move'; room: string; x: number; y: number }
+  /** Step 11: becomes character `to`, standing at `x`,`y` (top-left of the new box), still (a cantina swap; docs/mechanisms/cantina.md). */
+  | { kind: 'become'; to: string; x: number; y: number };
 
 declare module './types.ts' {
   interface Components {
@@ -57,6 +59,12 @@ export function applyEffect(e: Entity, effect: Effect): void {
     if (e.c.effect) delete e.c.effect.heldBy;
   } else if (effect.kind === 'move') {
     e.room = effect.room;
+    e.x = effect.x;
+    e.y = effect.y;
+    e.vx = 0;
+    e.vy = 0;
+  } else if (effect.kind === 'become') {
+    e.kind = effect.to;
     e.x = effect.x;
     e.y = effect.y;
     e.vx = 0;

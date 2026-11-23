@@ -1,0 +1,90 @@
+{
+  "id": "step11-row-not-in-brawl",
+  "proves": "no swapping while a brawl is on (DRAFT, the Step 11 lead): with the row open, the player's hit on a regular starts a brawl and the row closes (why brawl; the attack press also counts as a button); while the brawl is on a tap on a hero outside the party opens nothing",
+  "room": "cantina",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 1,
+      "to": 3,
+      "tap": {
+        "n": 1,
+        "at": "cantina:brawler"
+      }
+    },
+    {
+      "player": "a",
+      "from": 4,
+      "to": 8,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 100,
+      "to": 102,
+      "tap": {
+        "n": 2,
+        "at": "cantina:brawler"
+      }
+    }
+  ],
+  "ticks": 140,
+  "expect": [
+    {
+      "fact": "cantina",
+      "room": "cantina",
+      "at": 3,
+      "player": "a",
+      "row": "brawler"
+    },
+    {
+      "fact": "event-where",
+      "event": "cantina-row-close",
+      "where": {
+        "entity": "p:a"
+      },
+      "between": [
+        4,
+        4
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "cantina",
+      "room": "cantina",
+      "between": [
+        90,
+        140
+      ],
+      "on": true,
+      "player": "a",
+      "row": null
+    },
+    {
+      "fact": "event-where",
+      "event": "cantina-row-open",
+      "where": {},
+      "between": [
+        0,
+        140
+      ],
+      "count": [
+        1,
+        1
+      ]
+    }
+  ]
+}

@@ -73,7 +73,15 @@ export interface GameOptions {
 function cleanInput(raw: unknown): Input {
   const i = (raw ?? {}) as Partial<Input>;
   const axis = (v: unknown): number => (typeof v === 'number' && Number.isFinite(v) ? Math.max(-1, Math.min(1, v)) : 0);
-  return { x: axis(i.x), y: axis(i.y), held: Array.isArray(i.held) ? i.held.filter((a) => typeof a === 'string').slice(0, 32) : [] };
+  const out: Input = { x: axis(i.x), y: axis(i.y), held: Array.isArray(i.held) ? i.held.filter((a) => typeof a === 'string').slice(0, 32) : [] };
+  // Step 11: a tap on the game view (src/sim/types.ts). Finite numbers or nothing; a slot is a small whole number.
+  const t = i.tap as Record<string, unknown> | undefined;
+  const num = (v: unknown): v is number => typeof v === 'number' && Number.isFinite(v);
+  if (t && typeof t === 'object' && num(t.x) && num(t.y) && num(t.n)) {
+    out.tap = { x: t.x, y: t.y, n: t.n };
+    if (Number.isInteger(t.slot) && (t.slot as number) >= 0 && (t.slot as number) < 16) out.tap.slot = t.slot as number;
+  }
+  return out;
 }
 
 /** DRAFT: how long a page may say nothing before its character is shown as away (ms). A page in view reports many times a second. */

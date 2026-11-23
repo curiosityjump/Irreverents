@@ -43,7 +43,8 @@ const verb: Verb = {
     // press is ignored; break free first, with jump).
     if (!canAct(e)) return;
 
-    const members = ctx.content.party.members;
+    // Step 11: the world's own party once a cantina swap has changed it (docs/mechanisms/cantina.md).
+    const members = ctx.world.party ?? ctx.content.party.members;
     const at = members.indexOf(e.kind);
     const room = ctx.content.rooms[e.room];
     const old = ctx.content.characters[e.kind];

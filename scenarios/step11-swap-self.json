@@ -1,0 +1,108 @@
+{
+  "id": "step11-swap-self",
+  "proves": "D-084, your own member: a player taps a wandering hero outside the party (the skirmisher), then their own slot: the party slot becomes the skirmisher and the player becomes the skirmisher through the become effect, feet where they stood; the grappler they were starts wandering as a regular, and the skirmisher's regular is gone",
+  "room": "cantina",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 10,
+      "to": 14,
+      "tap": {
+        "n": 7,
+        "at": "cantina:skirmisher"
+      }
+    },
+    {
+      "player": "a",
+      "from": 30,
+      "to": 34,
+      "tap": {
+        "n": 8,
+        "slot": 0
+      }
+    }
+  ],
+  "ticks": 90,
+  "expect": [
+    {
+      "fact": "cantina",
+      "room": "cantina",
+      "at": 29,
+      "player": "a",
+      "row": "skirmisher"
+    },
+    {
+      "fact": "event-where",
+      "event": "cantina-swap",
+      "where": {
+        "entity": "p:a",
+        "slot": 0,
+        "from": "grappler",
+        "to": "skirmisher"
+      },
+      "between": [
+        30,
+        30
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "effect",
+      "where": {
+        "entity": "p:a",
+        "player": "a"
+      },
+      "between": [
+        30,
+        30
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "character",
+      "player": "a",
+      "at": 29,
+      "is": "grappler"
+    },
+    {
+      "fact": "character",
+      "player": "a",
+      "at": 31,
+      "is": "skirmisher"
+    },
+    {
+      "fact": "cantina",
+      "room": "cantina",
+      "between": [
+        40,
+        90
+      ],
+      "party": [
+        "skirmisher",
+        "infiltrator",
+        "flyer"
+      ],
+      "regulars": [
+        "grappler",
+        "infiltrator",
+        "flyer",
+        "brawler"
+      ]
+    }
+  ]
+}

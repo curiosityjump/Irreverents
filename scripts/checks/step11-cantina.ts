@@ -19,7 +19,7 @@ import type { ScriptCheck } from '../lib/script-checks.ts';
 const check: ScriptCheck = {
   id: 'step11-cantina',
   gate: null,
-  proves: "the cantina over the real network: with two players on separate connections in it, the server's world has exactly one regular per roster character nobody plays and each page's own world has none; a player launched past the edge is put back on a pad by the server's move effect, acknowledged, and their own page then has them on the pad, no longer flying, and able to run",
+  proves: "the cantina over the real network: with two players on separate connections in it, the server's world has exactly one regular per roster character nobody plays and each page's own world has none; a player launched past the edge is put back on a pad by the server's move effect, acknowledged, and their own page then has them on the pad, no longer flying, and able to run; slice B: a tap sent through a real connection on a regular opens that player's party row (seen on their page), a tap on a free member's slot changes the world's party on the server and on both pages (no page writes its own), a tap on their own slot makes them the newcomer through the become effect on their own page, and a third player joining then gets the world's party's first free member",
   async run(content: Content): Promise<string[]> {
     const failures: string[] = [];
     const file = Object.values(content.cantina)[0];
@@ -57,9 +57,11 @@ const check: ScriptCheck = {
     };
     const a = make('a');
     const b = make('b');
+    const extra: NetClient[] = [];
     const frames = setInterval(() => {
       a.update(inputs.a!);
       b.update(inputs.b!);
+      for (const x of extra) x.update({ x: 0, y: 0, held: [] });
     }, 1000 / 60);
 
     const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
@@ -157,6 +159,56 @@ const check: ScriptCheck = {
       await sleep(150);
       if (b.me().x - landed < 5) failures.push(`back on the pad, b could not run on their own device (moved ${(b.me().x - landed).toFixed(1)} px)`);
       await until('the server has b where b ran to', () => Math.abs((gw.world.entities.find((e) => e.id === bId)?.x ?? -999) - b.me().x) < 1, () => `b's page ${pos(b.me())}, server ${pos(gw.world.entities.find((e) => e.id === bId))}`, 1000);
+
+      // 4. Slice B: the party swap, by taps through the real connection (Input.tap survives cleanInput).
+      const cantinaState = (w: World | Entity[]): NonNullable<Entity['c']['cantina']> | undefined => (Array.isArray(w) ? w : w.entities).find((e) => e.id === `~cantina:${file.room}`)?.c.cantina;
+      let n = 100;
+      const tapOn = async (id: string): Promise<void> => {
+        const r = gw.world.entities.find((e) => e.id === id);
+        const box = r ? content.characters[r.kind]!.box : { w: 0, h: 0 };
+        inputs.a = { x: 0, y: 0, held: [], tap: { x: (r?.x ?? -999) + box.w / 2, y: (r?.y ?? -999) + box.h / 2, n: ++n } };
+        await sleep(120);
+        inputs.a = { x: 0, y: 0, held: [] };
+      };
+      const tapSlot = async (slot: number): Promise<void> => {
+        inputs.a = { x: 0, y: 0, held: [], tap: { x: 0, y: 0, n: ++n, slot } };
+        await sleep(120);
+        inputs.a = { x: 0, y: 0, held: [] };
+      };
+      const party0 = content.party.members;
+      const free = party0.findIndex((m) => m !== a.me().kind && m !== b.me().kind);
+      const newcomer = content.roster.characters.filter((k) => !party0.includes(k));
+      if (free < 0 || newcomer.length < 2) failures.push(`the swap needs a free party member and two roster characters outside the party (party ${party0.join(', ')}; a ${a.me().kind}, b ${b.me().kind})`);
+      else {
+        await tapOn(`cantina:${newcomer[0]}`);
+        await until("a's tap on a regular opens a's party row on the server", () => cantinaState(gw.world)?.pick?.[aId]?.kind === newcomer[0], () => `server pick ${JSON.stringify(cantinaState(gw.world)?.pick ?? null)}`, 2000);
+        await until("a's own page is shown its party row", () => cantinaState(a.others())?.pick?.[aId]?.kind === newcomer[0], () => `a's page pick ${JSON.stringify(cantinaState(a.others())?.pick ?? null)}`, 2000);
+        await tapSlot(free);
+        const want1 = party0.map((m, i) => (i === free ? newcomer[0]! : m));
+        await until('the server has the swapped party', () => gw.world.party?.join() === want1.join(), () => `server party ${JSON.stringify(gw.world.party ?? null)}`, 2000);
+        await until('both pages have the swapped party, as the server sent it', () => a.world.party?.join() === want1.join() && b.world.party?.join() === want1.join(), () => `a ${JSON.stringify(a.world.party ?? null)}, b ${JSON.stringify(b.world.party ?? null)}`, 2000);
+        const aKind = a.me().kind;
+        const own = want1.indexOf(aKind);
+        await tapOn(`cantina:${newcomer[1]}`);
+        await until("a's second row opens", () => cantinaState(gw.world)?.pick?.[aId]?.kind === newcomer[1], () => `server pick ${JSON.stringify(cantinaState(gw.world)?.pick ?? null)}`, 2000);
+        await tapSlot(own);
+        await until(`a's own page has a become the ${newcomer[1]} (the become effect)`, () => a.me().kind === newcomer[1], () => `a's page has a as the ${a.me().kind}; server ${gw.world.entities.find((e) => e.id === aId)?.kind}`, 3000);
+        await until('the server hears a acknowledge it', () => gw.players.get('a')!.pending.length === 0, () => 'effects still pending', 2000);
+        await sleep(300);
+        if (a.me().kind !== newcomer[1] || gw.world.entities.find((e) => e.id === aId)?.kind !== newcomer[1]) failures.push(`after the ack a is the ${a.me().kind} on its page and the ${gw.world.entities.find((e) => e.id === aId)?.kind} on the server, expected the ${newcomer[1]} on both`);
+        if (b.me().kind !== want1.find((m) => m === b.me().kind)) failures.push(`b's character changed to ${b.me().kind}`);
+        const want2 = want1.map((m, i) => (i === own ? newcomer[1]! : m));
+        const firstFree = want2.find((m) => m !== a.me().kind && m !== b.me().kind);
+        const c = make('c');
+        extra.push(c);
+        try {
+          await until('a third player joins', () => c.status() === 'online', () => c.status(), 3000);
+          await sleep(200);
+          if (c.me().kind !== firstFree) failures.push(`a third player joining after the swaps is the ${c.me().kind}, expected the world's party's first free member, the ${firstFree} (party ${want2.join(', ')})`);
+        } finally {
+          c.leave();
+        }
+      }
 
       a.leave();
       b.leave();

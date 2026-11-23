@@ -1,0 +1,153 @@
+{
+  "id": "step11-swap-unplayed",
+  "proves": "D-084, a member nobody plays: in the cantina a player taps a wandering hero outside the party (the brawler) and their party row opens; tapping the slot of a member nobody plays (the flyer) puts the brawler in the party in that place; the player is unchanged, both the brawler and the flyer go on wandering, and the switch button now reaches the brawler (grappler, then infiltrator, then brawler)",
+  "room": "cantina",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 10,
+      "to": 14,
+      "tap": {
+        "n": 1,
+        "at": "cantina:brawler"
+      }
+    },
+    {
+      "player": "a",
+      "from": 20,
+      "to": 24,
+      "tap": {
+        "n": 2,
+        "slot": 2
+      }
+    },
+    {
+      "player": "a",
+      "from": 40,
+      "to": 44,
+      "hold": [
+        "switch"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 60,
+      "to": 64,
+      "hold": [
+        "switch"
+      ]
+    }
+  ],
+  "ticks": 120,
+  "expect": [
+    {
+      "fact": "cantina",
+      "room": "cantina",
+      "at": 11,
+      "player": "a",
+      "row": "brawler"
+    },
+    {
+      "fact": "event-where",
+      "event": "cantina-row-open",
+      "where": {
+        "entity": "p:a",
+        "kind": "brawler"
+      },
+      "between": [
+        0,
+        120
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "cantina-swap",
+      "where": {
+        "entity": "p:a",
+        "player": "a",
+        "slot": 2,
+        "from": "flyer",
+        "to": "brawler"
+      },
+      "between": [
+        20,
+        20
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "cantina",
+      "room": "cantina",
+      "at": 21,
+      "player": "a",
+      "row": null
+    },
+    {
+      "fact": "cantina",
+      "room": "cantina",
+      "between": [
+        21,
+        39
+      ],
+      "party": [
+        "grappler",
+        "infiltrator",
+        "brawler"
+      ],
+      "regulars": [
+        "infiltrator",
+        "flyer",
+        "brawler",
+        "skirmisher"
+      ]
+    },
+    {
+      "fact": "character",
+      "player": "a",
+      "at": 39,
+      "is": "grappler"
+    },
+    {
+      "fact": "character",
+      "player": "a",
+      "at": 59,
+      "is": "infiltrator"
+    },
+    {
+      "fact": "character",
+      "player": "a",
+      "at": 80,
+      "is": "brawler"
+    },
+    {
+      "fact": "event-where",
+      "event": "effect",
+      "where": {
+        "entity": "p:a"
+      },
+      "between": [
+        0,
+        120
+      ],
+      "count": [
+        0,
+        0
+      ]
+    }
+  ]
+}

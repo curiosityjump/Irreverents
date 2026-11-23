@@ -1,0 +1,138 @@
+{
+  "id": "step11-swap-taken",
+  "proves": "doc 06, never a friend's character: with b playing the infiltrator, a's tap on the infiltrator's slot is refused (cantina-swap-refused, taken) and changes nothing, b stays the infiltrator; the row stays open and a's tap on the flyer's slot (nobody plays it) then makes the swap",
+  "room": "cantina",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    },
+    {
+      "id": "b",
+      "character": "infiltrator",
+      "spawn": 3
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 10,
+      "to": 14,
+      "tap": {
+        "n": 1,
+        "at": "cantina:brawler"
+      }
+    },
+    {
+      "player": "a",
+      "from": 20,
+      "to": 24,
+      "tap": {
+        "n": 2,
+        "slot": 1
+      }
+    },
+    {
+      "player": "a",
+      "from": 40,
+      "to": 44,
+      "tap": {
+        "n": 3,
+        "slot": 2
+      }
+    }
+  ],
+  "ticks": 80,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "cantina-swap-refused",
+      "where": {
+        "entity": "p:a",
+        "slot": 1,
+        "why": "taken"
+      },
+      "between": [
+        20,
+        20
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "cantina",
+      "room": "cantina",
+      "between": [
+        21,
+        39
+      ],
+      "party": [
+        "grappler",
+        "infiltrator",
+        "flyer"
+      ],
+      "player": "a",
+      "row": "brawler"
+    },
+    {
+      "fact": "event-where",
+      "event": "cantina-swap",
+      "where": {
+        "entity": "p:a",
+        "slot": 2,
+        "from": "flyer",
+        "to": "brawler"
+      },
+      "between": [
+        40,
+        40
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "cantina-swap",
+      "where": {},
+      "between": [
+        0,
+        80
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "character",
+      "player": "b",
+      "at": 80,
+      "is": "infiltrator"
+    },
+    {
+      "fact": "character",
+      "player": "a",
+      "at": 80,
+      "is": "grappler"
+    },
+    {
+      "fact": "event-where",
+      "event": "effect",
+      "where": {},
+      "between": [
+        0,
+        80
+      ],
+      "count": [
+        0,
+        0
+      ]
+    }
+  ]
+}

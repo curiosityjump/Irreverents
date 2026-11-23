@@ -21,6 +21,13 @@ export interface Input {
   y: number;
   /** Ids of the actions held down this tick. */
   held: string[];
+  /**
+   * Step 11 (docs/mechanisms/cantina.md): the newest tap on the game view,
+   * if any: `x`,`y` in room pixels, or `slot` (a party index) when it
+   * landed on the cantina's party row. `n` grows by one per tap, so a tap
+   * repeated across several ticks' inputs is acted on once. DRAFT.
+   */
+  tap?: { x: number; y: number; n: number; slot?: number };
 }
 
 /**
@@ -69,6 +76,13 @@ export interface World {
    * (Step 3); never reset when a room empties (D-077).
    */
   rooms?: Record<string, RoomState>;
+  /**
+   * Step 11: the party as it stands in this world, after a cantina swap
+   * (docs/mechanisms/cantina.md); absent until the first swap, which means
+   * content.party.members. Written only by the server's world (a page takes
+   * it by key with every snapshot).
+   */
+  party?: string[];
 }
 
 /** One room's run-time state. Plain JSON, like the rest of the World. */

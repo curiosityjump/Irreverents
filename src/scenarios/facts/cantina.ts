@@ -12,20 +12,27 @@ import type { Fact } from '../types.ts';
  *   "on": true   whether a brawl is on
  *   "score": { "a": { "ko": 1, "falls": 0 } }  by player id: this brawl's
  *                count (a player with no entry has 0 and 0)
+ *   "party": ["grappler", ...]  the world's party in order (world.party,
+ *                else content's): slice B's swap
+ *   "row": "brawler" | null  player `player`'s party row is open to bring
+ *                in that character, or (null) no row is open for them
  * The scenario needs "placements": true (that is what puts the cantina in the world).
  */
 const fact: Fact = {
   id: 'cantina',
   validate(spec, scenario, content) {
     const out: string[] = [];
-    checkOnly(spec, ['room', 'at', 'between', 'regulars', 'moved', 'on', 'score'], out);
+    checkOnly(spec, ['room', 'at', 'between', 'regulars', 'moved', 'on', 'score', 'party', 'row', 'player'], out);
     if (typeof spec.room !== 'string' || !content.cantina?.[spec.room]) out.push(`room: must be a cantina room (${Object.keys(content.cantina ?? {}).join(', ') || 'none'}), but is ${JSON.stringify(spec.room)}`);
     if (!scenario.placements || scenario.room !== spec.room) out.push('the scenario must be in this room with "placements": true, which is what puts the cantina in the world');
     const b = spec.between;
     if ((spec.at === undefined) === (b === undefined)) out.push('at / between: give one or the other');
     else if (spec.at !== undefined && !isTick(spec.at, scenario)) out.push(`at: must be a tick from 0 to ${scenario.ticks}, but is ${JSON.stringify(spec.at)}`);
     else if (b !== undefined && (!isRange(b) || !isTick(b[0], scenario) || !isTick(b[1], scenario))) out.push(`between: must be [first tick, last tick] within 0 to ${scenario.ticks}`);
-    if (spec.regulars === undefined && spec.on === undefined && spec.score === undefined) out.push('give at least one of regulars, on, score');
+    if (spec.regulars === undefined && spec.on === undefined && spec.score === undefined && spec.party === undefined && spec.row === undefined) out.push('give at least one of regulars, on, score, party, row');
+    if (spec.party !== undefined && (!Array.isArray(spec.party) || !spec.party.every((k) => typeof k === 'string' && k in content.characters))) out.push('party: must be a list of characters');
+    if (spec.row !== undefined && spec.row !== null && (typeof spec.row !== 'string' || !(spec.row in content.characters))) out.push('row: a character, or null');
+    if ((spec.row !== undefined) !== (spec.player !== undefined) || (spec.player !== undefined && !scenario.players.some((p) => p.id === spec.player))) out.push('row and player go together; player: one of this scenario\'s players');
     if (spec.regulars !== undefined && (!Array.isArray(spec.regulars) || !spec.regulars.every((k) => typeof k === 'string' && content.roster.characters.includes(k)))) {
       out.push(`regulars: must be a list of roster characters (${content.roster.characters.join(', ')})`);
     }
@@ -56,6 +63,14 @@ const fact: Fact = {
       }
       const state = w.entities.find((e) => e.id === cantinaId(room))?.c.cantina;
       if (spec.on !== undefined && (state?.on ?? false) !== spec.on) return `at tick ${t} the brawl is ${state?.on ? 'on' : 'off'}, expected ${spec.on ? 'on' : 'off'}`;
+      if (spec.party !== undefined) {
+        const have = w.party ?? rec.content.party.members;
+        if (have.join() !== (spec.party as string[]).join()) return `at tick ${t} the party is [${have.join(', ')}], expected [${(spec.party as string[]).join(', ')}]`;
+      }
+      if (spec.row !== undefined) {
+        const have = state?.pick?.[`p:${spec.player as string}`]?.kind ?? null;
+        if (have !== spec.row) return `at tick ${t} player ${String(spec.player)}'s party row is ${have === null ? 'closed' : `open for ${have}`}, expected ${spec.row === null ? 'closed' : `open for ${String(spec.row)}`}`;
+      }
       if (spec.score !== undefined) {
         for (const [p, v] of Object.entries(spec.score as Record<string, { ko?: number; falls?: number }>)) {
           const got = state?.score[`p:${p}`] ?? { ko: 0, falls: 0 };

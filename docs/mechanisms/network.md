@@ -38,7 +38,9 @@ with a throwaway entity kind on every `npm run check`).
   timeout, and the graybox player colours. All `DRAFT:`.
 - **Messages** (JSON text over one WebSocket at `/ws`; `DRAFT:`):
   page → server `join`, `me` (own entity, held input, own tick count, 30 a
-  second), `ping`, `bye`; server → page `welcome`, `snap` (the world, 20 a
+  second; the server copies each input field by field in `cleanInput`
+  (`src/server/game.ts`) and drops anything else, so a new `Input` field
+  needs a line there: Step 11 added `tap`, a tap on the game view), `ping`, `bye`; server → page `welcome`, `snap` (the world, 20 a
   second, with the simulation's events since the last one), `fx` (an
   effect), `pong`; and page → server `ack`. Step 2 added `tune` (page →
   server, only from a `?tune` page) and `tuning` (server → page: the
@@ -79,7 +81,9 @@ with a throwaway entity kind on every `npm run check`).
 
 The contract for Steps 2 and 3 is `docs/architecture.md`, "Effects on a
 player" (`src/sim/effects.ts`: `emitEffect`, kinds `push`, `hold`,
-`release`, `move`). How the layer delivers one:
+`release`, `move`, and Step 11's `become`: the character changes kind
+where it stands, a cantina swap; the page takes the server's copy, kind
+included, like any non-push effect). How the layer delivers one:
 
 - A character a page owns is a **puppet** on the server: its state there
   is the page's latest report, put back after every tick. The server

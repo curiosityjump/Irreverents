@@ -707,3 +707,10 @@ document as a decision of theirs.
 - **Why this way:** the owner wants the chase to carry between regions (D-077) and the camp and town to be one world (D-069), but a whole watch pouring through a doorway would empty the town and swamp the camp's bound on people. The nearest two who saw the hero go follow; the rest search where they stand, as a guard who never saw them leave does (D-065).
 - **To change it:** `chaseCrossCap` in `content/tuning.json` (`world`); 99 means everyone who saw follows, as before.
 - **Where:** `src/sim/systems/chase-cap.ts`; `docs/mechanisms/outposts.md`, "Chase and clash".
+
+### 2026-11-23 · Swapping heroes in the cantina: how it looks and how long the row stays
+- **Decided by:** Step 11 slice B builder `session_017WiGzHXvo5fjfVSeDUTX44`, for the Step 11 lead `session_017WiGzFy3MD6ecvM7QMvQGd`
+- **Instead of asking:** "How big is the party row, what does it say, and how forgiving is a tap?"
+- **Why this way:** the row is three big squares in each hero's colour across the top of the screen, about a thumb wide on an iPhone, with "TAP ONE TO SWAP" and a swatch of the hero you tapped; your own has a mark under it, and a friend's is dimmed and crossed out so it plainly can't be taken. A tap counts if it lands within half a tile of a hero, and the row closes by itself after six seconds. Tapping a hero who is already in your party does nothing.
+- **To change it:** `pick` (`reach`, `seconds`) in `content/cantina/cantina.json`; the row's look and words in `src/client/draw/cantina.ts`.
+- **Where:** `docs/mechanisms/cantina.md`, "The party swap".

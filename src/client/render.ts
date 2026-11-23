@@ -81,6 +81,6 @@ export function render(g: CanvasRenderingContext2D, world: World, content: Conte
   drawAlert(g, world, content, roomId, ox, oy);
   drawAudience(g, world, content, roomId, ox, oy);
   drawHall(g, world, content, roomId, ox, oy);
-  drawCantina(g, world, content, roomId);
+  drawCantina(g, world, content, roomId, pv?.me);
   return { x: -ox, y: -oy };
 }

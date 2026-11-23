@@ -41,6 +41,7 @@ export function memberTaken(world: World, member: string, exceptEntity?: string)
  * friend is never turned away (docs/plan/step-2.md, "Decided by the lead").
  */
 export function firstFreeMember(world: World, content: Content): string | undefined {
-  const members = content.party.members;
+  // Step 11: the world's own party once a cantina swap has changed it (docs/mechanisms/cantina.md).
+  const members = world.party ?? content.party.members;
   return members.find((m) => !memberTaken(world, m)) ?? members[0];
 }

@@ -64,6 +64,13 @@ a file, edit no list. The first is `together` (gate F,
   instead of `"player"`: it is written to that body's `entity.c.input`,
   which is how a body that is not a player acts (`docs/architecture.md`,
   "Bodies"). Its kind must list the verbs for anything to happen.
+- A player's span may carry a **`tap`** (Step 11, `Input.tap`, a tap on
+  the game view): `{ "n": 1, "at": "<entity id>" }` taps that body's
+  middle as it stands on each tick of the span (authoring sugar: a page
+  sends room pixels), or `{ "n", "x", "y" }` room pixels, or
+  `{ "n", "slot" }` the party row's chip. A new tap needs a new `n`.
+- A player may carry `"joins": <tick>`: put in the world at the start of
+  that tick, as a friend arriving later (Step 11), instead of before tick 0.
 - **Ticks:** 60 a second. "At tick N" means after N steps; tick 0 is the
   start. An event's tick is the step it happened in.
 - Positions are measured at **the middle of the character's feet**, in
@@ -84,7 +91,7 @@ a file, edit no list. The first is `together` (gate F,
 | `mood` | at tick `at`, or on every tick of `between`, the person `npc` (placed by the room's placements file; the scenario needs `"placements": true`) is in mood `is` (1, 2 or 3) |
 | `alert` | at tick `at`, or on every tick of `between`, the alert of the area `area` (a room id) is `is` (0 to 3); an area nobody has called from is at 0 |
 | `event-where` | event `event` whose fields equal everything in `where` (compared whole: `"witnesses": []` means nobody) happened on a tick within `between`; optional `count` as for `event`. For events that name entity ids rather than one `player` or `entity` |
-| `cantina` | at tick `at`, or on every tick of `between`, about the cantina in `room` (the scenario must be there with `placements`): `regulars` exactly these roster characters have a regular, each in the room and inside the edge; `moved` (with `between`) each moved at least that many pixels sideways; `on` whether a brawl is on; `score` `{ "<player>": { "ko", "falls" } }` (Step 11) |
+| `cantina` | at tick `at`, or on every tick of `between`, about the cantina in `room` (the scenario must be there with `placements`): `regulars` exactly these roster characters have a regular, each in the room and inside the edge; `moved` (with `between`) each moved at least that many pixels sideways; `on` whether a brawl is on; `score` `{ "<player>": { "ko", "falls" } }` (Step 11); `party` the world's party in order; `row` with `player`: that player's open party row's character, or `null` for none (Step 11 slice B) |
 
 Every fact that names a `player` accepts `"entity": "<id>"` instead (one
 of the scenario's `entities`, or of the room's placements when

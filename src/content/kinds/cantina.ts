@@ -29,6 +29,12 @@ export interface Cantina {
   friend: { attackLaunch: number; attackWear: number; throwWear: number };
   /** By roster character id. */
   patterns: Record<string, CantinaPattern>;
+  /**
+   * Step 11 slice B, the party swap (D-084): a tap within `reach` pixels of a
+   * regular's box (room pixels, for a finger) opens the party row; it closes
+   * by itself after `seconds`. Optional; DRAFT defaults 8 and 6.
+   */
+  pick: { reach: number; seconds: number };
 }
 
 /** One step of a regular's walking loop: walk until its middle is over `column`, or stand for `seconds`. */
@@ -89,7 +95,7 @@ const kind: ContentKind = {
   parse(raw, read) {
     const o = read.object(raw, '');
     if (!o) return null;
-    read.only(o, ['id', 'room', 'edge', 'pads', 'calmTime', 'bell', 'friend', 'patterns'], '');
+    read.only(o, ['id', 'room', 'edge', 'pads', 'calmTime', 'bell', 'friend', 'patterns', 'pick'], '');
     const out: Cantina = {
       id: read.string(o, 'id', ''),
       room: read.string(o, 'room', ''),
@@ -99,6 +105,7 @@ const kind: ContentKind = {
       bell: { tile: [0, 0], reach: 16 },
       friend: { attackLaunch: 0, attackWear: 0, throwWear: 0 },
       patterns: {},
+      pick: { reach: 8, seconds: 6 },
     };
     if (out.room !== out.id) read.fail('room', `must be the room this file is named after ("${out.id}"), but is ${describe(o.room)}`);
     const edge = read.object(o.edge, 'edge');
@@ -120,6 +127,13 @@ const kind: ContentKind = {
     if (friend) {
       read.only(friend, ['attackLaunch', 'attackWear', 'throwWear'], 'friend');
       for (const f of ['attackLaunch', 'attackWear', 'throwWear'] as const) out.friend[f] = read.number(friend, f, 'friend', { min: 0, max: 2 });
+    }
+    if (o.pick !== undefined) {
+      const pick = read.object(o.pick, 'pick');
+      if (pick) {
+        read.only(pick, ['reach', 'seconds'], 'pick');
+        out.pick = { reach: read.number(pick, 'reach', 'pick', { min: 0, max: 64 }), seconds: read.number(pick, 'seconds', 'pick', { min: 0.5, max: 60 }) };
+      }
     }
     const patterns = read.object(o.patterns, 'patterns');
     if (patterns) {

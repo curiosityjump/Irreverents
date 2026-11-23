@@ -1,0 +1,77 @@
+{
+  "id": "step11-join-after-swap",
+  "proves": "a friend arriving after a swap is given the world's party: a swaps the brawler into the infiltrator's slot, and b, joining later with no character named, gets the first member nobody plays in the world's party (the brawler), not content's (the infiltrator)",
+  "room": "cantina",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    },
+    {
+      "id": "b",
+      "spawn": 2,
+      "joins": 60
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 10,
+      "to": 12,
+      "tap": {
+        "n": 1,
+        "at": "cantina:brawler"
+      }
+    },
+    {
+      "player": "a",
+      "from": 20,
+      "to": 22,
+      "tap": {
+        "n": 2,
+        "slot": 1
+      }
+    }
+  ],
+  "ticks": 90,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "cantina-swap",
+      "where": {
+        "slot": 1,
+        "from": "infiltrator",
+        "to": "brawler"
+      },
+      "between": [
+        20,
+        20
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "character",
+      "player": "b",
+      "at": 61,
+      "is": "brawler"
+    },
+    {
+      "fact": "cantina",
+      "room": "cantina",
+      "between": [
+        70,
+        90
+      ],
+      "regulars": [
+        "infiltrator",
+        "flyer",
+        "skirmisher"
+      ]
+    }
+  ]
+}

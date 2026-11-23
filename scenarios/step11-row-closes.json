@@ -1,0 +1,179 @@
+{
+  "id": "step11-row-closes",
+  "proves": "the party row's closing rules (DRAFT, the Step 11 lead): a tap elsewhere closes it with nothing changed; the stick closes it; left alone it closes by itself after pick.seconds; a tap on a hero already in the party (the flyer) opens nothing",
+  "room": "cantina",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 10,
+      "to": 12,
+      "tap": {
+        "n": 1,
+        "at": "cantina:brawler"
+      }
+    },
+    {
+      "player": "a",
+      "from": 20,
+      "to": 22,
+      "tap": {
+        "n": 2,
+        "x": 200,
+        "y": 20
+      }
+    },
+    {
+      "player": "a",
+      "from": 30,
+      "to": 32,
+      "tap": {
+        "n": 3,
+        "at": "cantina:brawler"
+      }
+    },
+    {
+      "player": "a",
+      "from": 40,
+      "to": 42,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 50,
+      "to": 52,
+      "tap": {
+        "n": 4,
+        "at": "cantina:brawler"
+      }
+    },
+    {
+      "player": "a",
+      "from": 500,
+      "to": 502,
+      "tap": {
+        "n": 5,
+        "at": "cantina:flyer"
+      }
+    }
+  ],
+  "ticks": 560,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "cantina-row-close",
+      "where": {
+        "entity": "p:a",
+        "why": "tap"
+      },
+      "between": [
+        20,
+        20
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "cantina-row-close",
+      "where": {
+        "entity": "p:a",
+        "why": "moved"
+      },
+      "between": [
+        40,
+        40
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "cantina-row-close",
+      "where": {
+        "entity": "p:a",
+        "why": "time"
+      },
+      "between": [
+        410,
+        410
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "cantina-row-open",
+      "where": {
+        "entity": "p:a"
+      },
+      "between": [
+        0,
+        560
+      ],
+      "count": [
+        3,
+        3
+      ]
+    },
+    {
+      "fact": "cantina",
+      "room": "cantina",
+      "between": [
+        51,
+        410
+      ],
+      "player": "a",
+      "row": "brawler"
+    },
+    {
+      "fact": "cantina",
+      "room": "cantina",
+      "between": [
+        411,
+        560
+      ],
+      "player": "a",
+      "row": null
+    },
+    {
+      "fact": "cantina",
+      "room": "cantina",
+      "between": [
+        0,
+        560
+      ],
+      "party": [
+        "grappler",
+        "infiltrator",
+        "flyer"
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "cantina-swap",
+      "where": {},
+      "between": [
+        0,
+        560
+      ],
+      "count": [
+        0,
+        0
+      ]
+    }
+  ]
+}

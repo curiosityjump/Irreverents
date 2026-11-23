@@ -1,7 +1,8 @@
 # The cantina: an endless brawl
 
 **Reference.** Open before touching `content/cantina/`, `content/roster.json`,
-`content/rooms/cantina.json`, `src/sim/cantina.ts`, the `cantina-*` systems,
+`content/rooms/cantina.json`, `src/sim/cantina.ts`, the `cantina-*` systems
+(`cantina-swap` included),
 `src/client/draw/cantina.ts` or `scripts/checks/step11-cantina.ts`.
 Written by Step 11 slice A (2026-11-23). Plan: `docs/plan/step-11.md`.
 
@@ -76,14 +77,63 @@ middle of the cantina player can use to stop fights."*
   brawl is on, a strip along the top: each player in the room by their
   colour, "n KO n FALL". `INTENT:` no number over a hit (D-020).
 
+## The party swap (slice B, D-084)
+
+- **The tap.** `Input.tap` (`src/sim/types.ts`, optional): a tap on the
+  game view itself, not on the pad or a button (those sit over it and take
+  their own touches). `main.ts` turns a `pointerdown` on `#game` into room
+  pixels (`(clientX - rect.left) * canvas.width / rect.width + camera.x`),
+  or into `slot` when it lands on an open row's chip, and carries it in
+  every input for 300 ms (`DRAFT:`) with a count `n`, so the server acts on
+  it once (`c.cantinaTap` remembers the last `n`). **The server copies it
+  in `cleanInput`** (`src/server/game.ts`); without that line every
+  scenario passes and the live game ignores every tap (the real-server
+  check's control).
+- **The row** (`cantina-swap`, order 660, server world only): a fresh tap
+  within `pick.reach` pixels of a regular **outside the party**, with no
+  brawl on and the stick and buttons idle, opens that player's row:
+  `~cantina`'s `c.cantina.pick[playerEntity] = { kind, until }`
+  (`cantina-row-open`). It closes (`cantina-row-close`, `why`) on a tap
+  elsewhere (`tap`; a tap on another outsider opens a row for them), the
+  stick or any button (`moved`), a brawl (`brawl`), leaving the room
+  (`left`), after `pick.seconds` (`time`), or the swap (`swap`).
+- **The swap**, a tap on slot `i` with the row open:
+  a member nobody plays → `world.party[i]` becomes the newcomer; your own
+  member → that too, **and you become the newcomer** by the `become`
+  effect (feet and middle kept, slid as a switch slides; `no-fit` refused);
+  a friend's → `cantina-swap-refused {why: "taken"}`, nothing changes and
+  the row stays open (`INTENT:` doc 06). `cantina-swap {entity, player,
+  slot, from, to}`. The regulars follow by themselves: one per roster
+  character nobody plays.
+- **`World.party`** (optional; absent means `content.party.members`): read
+  by `firstFreeMember` (so a friend joining later gets the world's party)
+  and the switch verb. Written only in the server's world; a page takes it
+  by key with each snapshot (`net/client.ts`), so the page's own switch
+  cycles the swapped party.
+- **On screen** (`drawCantina`, given `pv.me`): the row only on the picking
+  player's screen: a swatch of the newcomer, `DRAFT:` "TAP ONE TO SWAP",
+  one chip per member in party order in its colour, a friend's dimmed and
+  crossed, your own with a notch under it; chips 34 game pixels (about
+  57-68 CSS px on an iPhone). `drawn.cantina = { row, counter }`, the row
+  in CSS pixels of the page.
+- **Scenarios** may tap: an input span's `tap: { n, at: <entity id> }`
+  (that body's middle each tick), `{ n, x, y }` or `{ n, slot }`; a
+  player's `joins: <tick>` puts them in later (`docs/mechanisms/scenarios.md`).
+
 ## Checks
 
 Scenarios `step11-*` (regulars, door, brawl start and not, ring-out,
 walk-off, friend launch, last player leaves, bell, bell out of reach,
-raises nothing), each with a control watched to fail; the fact
+raises nothing; slice B: swap an unplayed member, swap yourself, a
+friend's refused, the row's closing, none in a brawl, a friend joining
+after a swap), each with a control watched to fail; the fact
 `cantina` (`docs/mechanisms/scenarios.md`); the real-server check
 `step11-cantina` (two connections, regulars only on the server, a
-launched player brought back by `move`, acknowledged, able to run).
+launched player brought back by `move`, acknowledged, able to run; a
+tap through the real connection opens the row, a slot tap changes the
+party on the server and both pages, an own-slot tap makes the player the
+newcomer by `become`, and a third player joining gets the world's first
+free member).
 
 ## Traps
 
@@ -101,5 +151,6 @@ launched player brought back by `move`, acknowledged, able to run).
 Layout, numbers, patterns, the two characters, the counter's look and
 words, the bell's place (column 13) and reach, friend shares at 1, no
 ring-out upward (the ceiling), the walk-off put-back: all in
-`docs/decisions-log.md`. Slice B: the tap, the row, the swap, the chase
-lock on the door.
+`docs/decisions-log.md`. Slice B's sizes, timings (`pick`), the row's
+look and the tap's 300 ms likewise. The cantina's tiles borrow the `town`
+theme (`tools/art/tiles/make.py`). Still to come: the chase lock on the door.

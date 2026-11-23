@@ -15,6 +15,7 @@ import { createAudio } from './audio/index.ts'; // audio hook (Step 8)
 import { setUpTune, tuneWanted } from './tune.ts';
 import { takeWords } from './draw/fx.ts';
 import { drawnSignalers } from './draw/outpost.ts';
+import { drawnCantina } from './draw/cantina.ts';
 
 const content = __CONTENT__;
 const canvas = document.getElementById('game') as HTMLCanvasElement;
@@ -118,14 +119,38 @@ window.addEventListener('touchstart', () => (touchHost.hidden = false), { passiv
 // Step 2: the feel dials, only with ?tune in the address (src/client/tune.ts).
 if (tuneWanted(location.search)) setUpTune({ content, net, canvas, touchHost });
 
+// Step 11 (docs/mechanisms/cantina.md): a tap on the game view itself, not
+// on the pad or a button (they sit over it and take their own touches). It
+// rides in every input for TAP_MS, numbered, so the server acts on it once
+// however many ticks carry it. Room pixels; or the party slot when it lands
+// on the open party row's chip (draw/cantina.ts says where it drew them).
+// DRAFT: TAP_MS; the count starts anywhere, so a reloaded page's first tap
+// is never mistaken for the last one the server saw.
+const TAP_MS = 300;
+let tapN = Math.floor(Math.random() * 1e6);
+let tap: { at: number; tap: NonNullable<Input['tap']> } | null = null;
+let lastCamera = { x: 0, y: 0 };
+canvas.addEventListener('pointerdown', (e) => {
+  const r = canvas.getBoundingClientRect();
+  if (r.width < 1 || r.height < 1) return;
+  const gx = ((e.clientX - r.left) * canvas.width) / r.width;
+  const gy = ((e.clientY - r.top) * canvas.height) / r.height;
+  const chip = drawnCantina().row?.find((c) => gx >= c.x && gx < c.x + c.w && gy >= c.y && gy < c.y + c.h);
+  tapN++;
+  tap = { at: performance.now(), tap: chip ? { x: 0, y: 0, n: tapN, slot: chip.slot } : { x: gx + lastCamera.x, y: gy + lastCamera.y, n: tapN } };
+});
+
 function readInput(): Input {
   const k = keys();
   const t = touch();
-  return {
+  const input: Input = {
     x: Math.max(-1, Math.min(1, k.x + t.x)),
     y: Math.max(-1, Math.min(1, k.y + t.y)),
     held: [...new Set([...k.held, ...t.held])].sort(),
   };
+  if (tap && performance.now() - tap.at > TAP_MS) tap = null;
+  if (tap) input.tap = tap.tap;
+  return input;
 }
 
 // INTENT (coming back): a phone that slept, a tab that was hidden, a network
@@ -176,6 +201,8 @@ const debug = {
     signalers: [] as ReturnType<typeof drawnSignalers>,
     /** Step 2, signal 6: every string drawn into the game picture this frame (draw/fx.ts, takeWords); the tuning panel and the page shell are HTML, not in it. */
     words: [] as string[],
+    /** Step 11: the open party row's chips and the brawl's counter, as drawn (src/client/draw/cantina.ts); the row in CSS pixels of the page, so a check can tap it. */
+    cantina: null as { row: { kind: string; slot: number; x: number; y: number; w: number; h: number; taken: boolean }[] | null; counter: { player: string; ko: number; falls: number }[] | null } | null,
   },
 };
 (window as unknown as { irreverents: unknown }).irreverents = debug;
@@ -194,6 +221,7 @@ function frame(): void {
   const seen: Drawn[] = [];
   const camera = render(g, { ...net.world, entities: [...net.others(), me] }, content, me.room, { me: me.id, frame: frameNo, drawn: seen });
   const result = { camera, drawn: seen };
+  lastCamera = camera;
   audio.frame(simEvents, net.latest(), me, net.others()); // audio hook (Step 8)
 
   const status = net.status();
@@ -228,6 +256,13 @@ function frame(): void {
   d.me = result.drawn.find((e) => e.mine) ?? null;
   d.signalers = drawnSignalers();
   d.words = takeWords();
+  {
+    const c = drawnCantina();
+    const r = canvas.getBoundingClientRect();
+    const sx = r.width / canvas.width;
+    const sy = r.height / canvas.height;
+    d.cantina = c.row || c.counter ? { row: c.row?.map((ch) => ({ ...ch, x: r.left + ch.x * sx, y: r.top + ch.y * sy, w: ch.w * sx, h: ch.h * sy })) ?? null, counter: c.counter } : null;
+  }
   requestAnimationFrame(frame);
 }
 requestAnimationFrame(frame);

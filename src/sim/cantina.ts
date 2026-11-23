@@ -26,6 +26,12 @@ declare module './types.ts' {
       rang?: number;
       /** This brawl's count by player entity id: knock-outs (bodies it sent out) and falls (times it was out). Kept until the next brawl starts. */
       score: Record<string, { ko: number; falls: number }>;
+      /**
+       * Slice B, the party swap (D-084): whose party row is open, by player
+       * entity id: the regular's character it would bring in, and the world
+       * tick it closes by itself. Absent when no row is open.
+       */
+      pick?: Record<string, { kind: string; until: number }>;
     };
     /**
      * On every body in a cantina room while its brawl is on, players and
@@ -37,6 +43,8 @@ declare module './types.ts' {
     brawl?: { attackLaunch: number; attackWear: number; throwWear: number };
     /** On a player in a cantina room: whether Use was held last tick, to see a fresh press at the bell. */
     cantinaUse?: { held: boolean };
+    /** On a player: the `n` of the tap last seen in its input (Input.tap), so one tap is acted on once; removed when its input carries no tap. */
+    cantinaTap?: { n: number };
     /** On a regular: where it is in its walking loop. */
     regular?: { step: number; ticks: number; stall: number; lastX: number };
   }
@@ -49,6 +57,14 @@ declare module './types.ts' {
     'cantina-bell': { room: string; by: string };
     /** `entity` went past the edge or was knocked flat in a brawl and is back on a pad. `by`: the body credited with sending it (null: nobody). */
     'cantina-out': { room: string; entity: string; player: string | null; by: string | null };
+    /** Slice B: a player's tap on a regular outside the party opened their party row, to bring in `kind`. */
+    'cantina-row-open': { room: string; entity: string; player: string | null; kind: string };
+    /** Slice B: a player's party row closed: a tap elsewhere, the stick or a button, a brawl, its time, the swap made, or the player left the room. */
+    'cantina-row-close': { room: string; entity: string; player: string | null; why: 'tap' | 'moved' | 'brawl' | 'time' | 'swap' | 'left' };
+    /** Slice B: party slot `slot` was `from` and is now `to`. When `from` was the tapping player's own character, they became `to`. */
+    'cantina-swap': { room: string; entity: string; player: string | null; slot: number; from: string; to: string };
+    /** Slice B: a slot was tapped and nothing changed: a friend plays that member (`taken`, never taken from them), or the new body would not fit where the player stands (`no-fit`). */
+    'cantina-swap-refused': { room: string; entity: string; player: string | null; slot: number; why: 'taken' | 'no-fit' };
   }
 }
 
@@ -110,4 +126,9 @@ export function pastEdge(content: Content, file: Cantina, e: Entity): boolean {
   const [ex, ey] = file.edge.at;
   const [ew, eh] = file.edge.size;
   return mx < ex * room.tile || mx >= (ex + ew) * room.tile || my < ey * room.tile || my >= (ey + eh) * room.tile;
+}
+
+/** The party as it stands in this world: its own after a swap, else content's (src/sim/types.ts World.party). */
+export function partyOf(world: World, content: Content): string[] {
+  return world.party ?? content.party.members;
 }
