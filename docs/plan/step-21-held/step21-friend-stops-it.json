@@ -645,7 +645,7 @@
    ]
   }
  ],
- "ticks": 1800,
+ "ticks": 3600,
  "expect": [
   {
    "fact": "event",

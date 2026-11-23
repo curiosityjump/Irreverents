@@ -31,6 +31,13 @@ const system: System = {
         if (!hero || hero.player === null || hero.c.seized || !hero.c.flattened) continue;
         const d = placeAt(world, content, hero.room);
         if (!d) continue;
+        // DRAFT (the orchestrator, 2026-11-23): only the place's `downs`-th fall within its `window` throws.
+        const keep = world.tick - ticksOf(d.window);
+        const prev = hero.c.falls?.place === d.id ? hero.c.falls.ticks.filter((t) => t > keep) : [];
+        const falls = { place: d.id, ticks: [...prev, world.tick] };
+        hero.c.falls = falls;
+        ctx.emit('fall', { entity: hero.id, player: hero.player, place: d.id, falls: falls.ticks.length, downs: d.downs });
+        if (falls.ticks.length < d.downs) continue;
         const near = world.entities
           .filter((o) => canSeize(content, d, o, hero))
           .sort((a, b) => Math.abs(a.x - hero.x) - Math.abs(b.x - hero.x) || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0))[0];

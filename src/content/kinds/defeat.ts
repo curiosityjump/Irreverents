@@ -26,6 +26,16 @@ export interface Defeat {
   seizers: string[];
   /** Pixels between the seizer's box and the hero's (sideways) that count as "can reach". */
   reach: number;
+  /**
+   * How many times a hero must be knocked flat here within `window` seconds,
+   * this fall included, before the next fall in reach of a seizer throws them
+   * out. 1: the first fall does (the orchestrator's other answer is one number).
+   * DRAFT (the orchestrator, 2026-11-23, docs/decisions-log.md "Step 21"): a
+   * last stand must be able to grow; one fall is part of the fight.
+   */
+  downs: number;
+  /** Seconds a fall is remembered for `downs`. */
+  window: number;
   /** Seconds the seizer stands over the hero before the throw. Below world.flattenTime. */
   beat: number;
   /**
@@ -57,7 +67,7 @@ const kind: ContentKind = {
   parse(raw, read) {
     const o = read.object(raw, '');
     if (!o) return null;
-    read.only(o, ['id', 'on', 'rooms', 'seizers', 'reach', 'beat', 'alertAbove', 'lands', 'follow', 'words'], '');
+    read.only(o, ['id', 'on', 'rooms', 'seizers', 'reach', 'downs', 'window', 'beat', 'alertAbove', 'lands', 'follow', 'words'], '');
     if (typeof o.on !== 'boolean') read.fail('on', `must be true or false, but is ${describe(o.on)}`);
     if (o.follow !== undefined && typeof o.follow !== 'boolean') read.fail('follow', `must be true or false, but is ${describe(o.follow)}`);
     const out: Defeat = {
@@ -66,6 +76,8 @@ const kind: ContentKind = {
       rooms: read.stringList(o, 'rooms', ''),
       seizers: read.stringList(o, 'seizers', ''),
       reach: read.number(o, 'reach', '', { min: 0, max: 200 }),
+      downs: read.number(o, 'downs', '', { min: 1, max: 99, integer: true }),
+      window: read.number(o, 'window', '', { min: 1, max: 3600 }),
       beat: read.number(o, 'beat', '', { min: 0.05, max: 30 }),
       alertAbove: o.alertAbove === undefined ? null : read.number(o, 'alertAbove', '', { min: 0, max: 3, integer: true }),
       lands: { room: '', door: null, tile: null },

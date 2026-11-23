@@ -13,6 +13,8 @@ This is the hub `CLAUDE.md` points at. It lives here rather than in
 specific mechanism, not on every decision. `CLAUDE.md`'s budget is spent on
 things that shape every decision instead.
 
+- **Defeat (Step 21)**: beaten N times in a bad guys' place with one of them in reach, you are stood over for a beat and thrown out, what you carried put back — `defeat.md`
+
 ## Adding to this file
 
 One line per mechanism, in the group it belongs to (or a new group, if none

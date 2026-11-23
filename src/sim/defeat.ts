@@ -18,10 +18,19 @@ declare module './types.ts' {
      * bandit). Read with a default: absent is "not seized" (old saves).
      */
     seized?: { by: string; place: string; ticks: number };
+    /**
+     * Step 21: on a played hero, the ticks they were knocked flat in a place
+     * (`place`), newest last, kept for the place's `window`. Read with a
+     * default: absent is none. Cleared by a throw-out. The HUD's condition
+     * reads how many there are (push 3).
+     */
+    falls?: { place: string; ticks: number[] };
   }
   interface EventMap {
     /** Step 21: a person of the place stands over a beaten hero; the throw comes after the place's beat. */
     seized: { entity: string; player: string | null; by: string; place: string };
+    /** Step 21: a played hero was knocked flat in a place; `falls` counts this one, `downs` is the place's limit. */
+    fall: { entity: string; player: string | null; place: string; falls: number; downs: number };
     /** Step 21: a played body hit the one standing over them: no throw, the hero gets up where they lie. */
     'seize-stopped': { entity: string; player: string | null; by: string; place: string; stoppedBy: string };
     /** Step 21: thrown out of a place: `from` the room they were beaten in, `to` the room they landed in. */

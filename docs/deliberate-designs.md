@@ -81,6 +81,9 @@ words.
 **People can be outrun and jumped over.**
 → Intended. There is always a way out (`CLAUDE.md`): now that guards and shopkeepers swing at heroes (Step 18), no person's body lists `jump`, and every person walks slower than the slowest hero runs (people 40–56 px/s; the brawler, the slowest hero, runs at 76). A hero who jumps over a swinging person and runs gets away. A person who runs or jumps needs another way out first. Decided by the Step 18 builder for the orchestrator, 2026-11-23 (`docs/plan/step-18.md`, "`DRAFT:` choices"); the owner may overrule. `INTENT:` at `charge()` in `src/sim/npc/behaviours.ts` and in the people's `"//"` in `content/tuning.json`. Proven by `scenarios/step18-jump-over-is-a-way-out.json`.
 
+**Beaten in the Bandit Camp or the alerted street, you are thrown bodily out into the courtyard, and anything you carried is taken back.**
+→ Intended, and it is the way out, not a trap. "There is always a way out" (`CLAUDE.md`) and D-019 ("battles, last stands and narrow escapes, NOT an automatic-reload punishment loop"): the throw is the exit. You are free the moment you get up (never held longer than the beat plus `flattenTime`), the place keeps its state, and you can walk straight back in. A place with no landing spot throws nobody. Step 21 builder, 2026-11-23, `DRAFT:` numbers; `INTENT:` in `src/sim/systems/defeat-throw.ts`; `docs/mechanisms/defeat.md`.
+
 ---
 
 ## Where these live in the code
@@ -93,6 +96,7 @@ Keep this table in step with the entries:
 | Switch refused or skips a member in a tight space | `src/sim/verbs/switch.ts` |
 | The store never throws; an unreadable file is set aside | `src/server/store.ts` (`openStore`, `load`) |
 | The pedestal's card has no button | `src/client/draw/hall.ts` (`drawHall`) |
+| Beaten, you are thrown out (the throw is the way out) | `src/sim/systems/defeat-throw.ts` |
 | People can be outrun and jumped over | `src/sim/npc/behaviours.ts` (`charge`); `content/tuning.json` (`characters.guard`, `.shopkeeper`, `.toll-keeper` `"//"`) |
 
 **Still unmarked:** list entries that have no `INTENT:` at their site yet.

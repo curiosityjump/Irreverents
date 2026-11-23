@@ -19,6 +19,9 @@ having lost nothing, because there was nothing to lose. It also answers Step
 18's open question (what happens when enemies win) by default. From
 `docs/plan/core-loops.md`, section 7.
 
+**Owner, 2026-11-23 ~23:52 UTC, playing the live game, first-hand (relayed by the orchestrator):**
+> Also, i seem to be invincible as hero...
+
 ## Goal
 
 A player can see they are in trouble, and losing costs something real that
@@ -261,3 +264,17 @@ two place files are on `main` with `"on": false`, so the game is exactly as
 before and `npm run check` is green. The two scenarios that need it on wait
 in `docs/plan/step-21-held/` (not run there); move them back to
 `scenarios/` and set both files `"on": true` once the five above are settled.
+
+### Push 2, landed on: the orchestrator's (c)
+
+Thrown out only on the `downs`-th fall within `window` (60 s) with a seizer
+in reach: the camp 4, the street 2. Measured: the camp's 2 and 3 still turn
+`step7-waves-reach-the-hero` red (its hero standing a minute under three
+waves falls at 1167, 1801, 2187, 2563...), 4 and 5 keep it and
+`step7-caller-tries-again` green; the street's 2 keeps all three town
+scenarios green. Both places on; `step21-camp-thrown-out` back in
+`scenarios/` (first three falls get up inside; the fourth at 2374, 23 s
+after the first, is seized and thrown at 2433). `step21-friend-stops-it`
+still waits in `docs/plan/step-21-held/`: with `downs` 4 its timing has to be
+found again (next push), as do the other signal scenarios and the Hall's
+narrow-escape edit the orchestrator allowed.

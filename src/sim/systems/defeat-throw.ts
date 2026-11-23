@@ -50,6 +50,7 @@ const system: System = {
         ctx.emit('prize-returned', { heist: prizeOf(content, thing)?.heist.id ?? '', thing, by: hero.id });
       }
 
+      delete hero.c.falls;
       const from = hero.room;
       const by = hero.c.flattened?.by ?? null;
       delete hero.c.flying;
