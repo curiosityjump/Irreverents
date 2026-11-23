@@ -176,10 +176,10 @@ By the lead, 2026-11-23 04:02–04:10 UTC, in a container like yours.
      first member of `content/party.json` nobody is playing, and when all
      are taken the first member again. **Nobody is ever turned away or
      sent to a private world** (Step 2's decision, logged). That
-     no-character behaviour is being built by Step 2 now; until the lead
-     tells you it is on `main`, keep passing
-     `content.game.playerCharacter`, behind one line that is easy to
-     drop. **Leave** (page gone past your timeout): `removeEntity(world,
+     no-character behaviour is on `main` since 792b0aa (04:38 UTC): do
+     not pass `content.game.playerCharacter`. The `switch` action
+     (`content/actions/switch.json`) is on `main` too and emits
+     `switched { entity, player, from, to }`. **Leave** (page gone past your timeout): `removeEntity(world,
      'p:<player id>')`; Step 2's systems release anything carried or
      held. **Rejoin** with the same id while the entity exists: call
      nothing, the character and its current member are kept; after
