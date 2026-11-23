@@ -4,6 +4,8 @@ srcimport.grab() does the cut. DRAFT: boxes, sizes, materials and ids' frame spl
 
 Groups (content/looks/<group>.json):
 - rides: P04 chibi-vehicle-and-mount-sprite-sheet ('vehicle'), four machines/mounts, five cells a row.
+- powers: P05 rare-powers-pickups ('powers'): power orbs, loose pieces, fixtures, the pickup glow and get, the
+  "lost" pop, a cloud poof.
 """
 from PIL import Image
 
@@ -63,3 +65,86 @@ def ride(which, state):
     mount), wrecked (cell 5: the plastered X and the smoke curl; the mount sits down, spent)."""
     cells = {'idle': [0], 'moving': [1, 2], 'crash': [3], 'wrecked': [4]}[state]
     return _strip([_frame(_cell(which, i)) for i in cells])
+
+
+# ---- rare powers and pickups: P05 rare-powers-pickups ('powers'), painted on an opaque pale ground (key=)
+P05KEY = (247, 245, 243)
+POWER = ramps('gold', 'orange', 'red', 'blue', 'sky', 'purple', 'teal', 'metal', 'cloud', 'wood', 'night', 'pink',
+              'foliage', 'grass', 'stone')
+GLOW = ramps('gold', 'orange', 'purple', 'sky', 'cloud')
+# row 2: nine power orbs, named by what the plate paints in them (a shown name is data: these are pictures)
+ORBS = {'fire': (48, 122), 'ice': (135, 208), 'bolt': (220, 294), 'moon': (305, 378), 'wing': (388, 457),
+        'gear': (465, 534), 'bomb': (542, 608), 'star': (615, 681), 'swirl': (688, 754)}
+# row 4: nine loose pieces
+ITEMS = {'gear': (45, 123), 'lens': (130, 206), 'pipe': (217, 299), 'crystal': (310, 366), 'spring': (380, 426),
+         'book': (440, 523), 'hook': (532, 584), 'ring': (607, 658), 'feather': (675, 749)}
+# row 1: six fixtures a power comes from
+FIXTURES = {'crystal': (47, 176), 'orrery': (184, 283), 'tree': (290, 408), 'shrine': (414, 531),
+            'brazier': (539, 626), 'portal': (632, 762)}
+# row 5: the pickup sequence (ring, sparkles, column, burst, flash) and a cloud poof; the plate cuts them at y 512
+SEQ = [(45, 151), (165, 260), (276, 371), (385, 487), (505, 593)]
+POOF = (602, 742)
+
+
+def orb(which):
+    x0, x1 = ORBS[which]
+    # DRAFT: 20 px: at 16 the plate's glyph (flame, flake, bolt...) turned to mush
+    return grab('powers', (x0 - 3, 140, x1 + 3, 219), 0, POWER, key=P05KEY, size=(20, 20))
+
+
+def item(which):
+    x0, x1 = ITEMS[which]
+    return grab('powers', (x0 - 3, 338, x1 + 3, 426), 0.2, POWER, key=P05KEY)
+
+
+def fit_item(piece):
+    """every loose piece on an 18 x 16 cell, bottom-centred (it lies on the floor)"""
+    out = new(18, 16)
+    paste(out, piece, (18 - piece.width) // 2, 16 - piece.height)
+    return out
+
+
+def fixture(which):
+    x0, x1 = FIXTURES[which]
+    g = grab('powers', (x0 - 3, 8, x1 + 3, 134), 0.25, POWER, key=P05KEY)
+    out = new(32, 32)
+    paste(out, g, (32 - g.width) // 2, 32 - g.height)
+    return out
+
+
+def _fx(box, size, pal=GLOW):
+    return grab('powers', box, 0, pal, key=P05KEY, largest=False, edge=None, dark_ink=40, size=size)
+
+
+def _row(frames, w, h, align='bottom'):
+    out = new(w * len(frames), h)
+    for i, f in enumerate(frames):
+        y = h - f.height if align == 'bottom' else (h - f.height) // 2
+        paste(out, f, i * w + (w - f.width) // 2, y)
+    return out
+
+
+def pickup_glow():
+    """3 frames, looping under a pickup lying on the floor: the plate's ring, then the ring with sparkles rising."""
+    return _row([_fx((x0, 430, x1, 512), (22, 16)) for x0, x1 in SEQ[:3]], 24, 16)
+
+
+def pickup_get():
+    """3 frames, once, when a pickup is taken: the column of light, the burst, the star flash."""
+    return _row([_fx((x0, 426, x1, 512), (22, 22)) for x0, x1 in SEQ[2:]], 24, 24)
+
+
+def power_lost():
+    """INTENT: the "lost" pop as the plate draws it (row 3): the hit spark, the stars over the knocked head, the
+    orb flying off on its swoosh. 3 frames, once, at the hero who lost the power; the orb then lies as pickup-*."""
+    spark = _fx((146, 225, 192, 290), (14, 16))
+    stars = _fx((196, 224, 296, 262), (22, 10))
+    fly = grab('powers', (353, 223, 452, 326), 0, POWER, key=P05KEY, largest=False, edge=None, dark_ink=40, size=(22, 22))
+    return _row([spark, stars, fly], 24, 24, align='middle')
+
+
+def poof():
+    """3 frames: the plate's cloud poof, then the same cut smaller twice (the cloud shrinking away)."""
+    cut = lambda w, h: _fx((POOF[0], 430, POOF[1], 512), (w, h), ramps('cloud', 'purple', 'sky'))
+    return _row([cut(24, 14), cut(18, 10), cut(12, 7)], 24, 14)
+

@@ -39,6 +39,8 @@ SHEETS = {
     'vibrant': 'p07-first-playable-npc-enemies-mechanisms-terrain-hud-source/vibrant-platformer-interactables-sprite-sheet.png',
     'biome': 'p08-additional-townsfolk-enemies-building-blocks-biomes-source/chibi-pixel-biome-tileset-atlas.png',
     'platformer': 'p07-first-playable-npc-enemies-mechanisms-terrain-hud-source/pixel-art-platformer-tileset-atlas.png',
+    'powers': 'p05-hud-powers-cantina-brawl-and-secrets-visual-source-sheets/p05-rare-powers-pickups-source.png',
+    'hall': 'p04-cantina-props-vehicles-hall-visual-source-sheets/hall-of-legends-tile-atlas.png',
     'fantasy': 'p08-additional-townsfolk-enemies-building-blocks-biomes-source/colorful-retro-fantasy-tileset-atlas.png',
 }
 _cache = {}

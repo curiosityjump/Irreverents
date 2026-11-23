@@ -62,7 +62,27 @@ def rides():
     return scene
 
 
-SCENES = {'rides': rides}
+def powers():
+    """a room's floor: the six fixtures on the back ledge; on the floor, each orb over its glow, the loose pieces,
+    and the get, lost and poof strips frame by frame"""
+    img, L = looks('powers')
+    scene, floors = shelves(3, sky=NIGHT)
+    for i, k in enumerate(('crystal', 'orrery', 'tree', 'shrine', 'brazier', 'portal')):
+        place(scene, frame(img, L['power-fixture-' + k]), 28 + i * 52, floors[0])
+    for i, k in enumerate(('fire', 'ice', 'bolt', 'moon', 'wing', 'gear', 'bomb', 'star', 'swirl')):
+        cx = 18 + i * 35
+        place(scene, frame(img, L['fx-pickup-glow'], i % 3), cx, floors[1])
+        place(scene, frame(img, L['pickup-' + k]), cx, floors[1] - 3)
+    for i, k in enumerate(('gear', 'lens', 'pipe', 'crystal', 'spring', 'book', 'hook', 'ring', 'feather')):
+        place(scene, frame(img, L['item-' + k]), 12 + i * 20, floors[2])
+    for n in range(3):
+        place(scene, frame(img, L['fx-pickup-get'], n), 196 + n * 24, floors[2])
+        place(scene, frame(img, L['fx-power-lost'], n), 196 + n * 24, floors[2] - 26)
+        place(scene, frame(img, L['fx-poof'], n), 270 + n * 22, floors[2])
+    return scene
+
+
+SCENES = {'rides': rides, 'powers': powers}
 
 if __name__ == '__main__':
     os.makedirs(OUT, exist_ok=True)

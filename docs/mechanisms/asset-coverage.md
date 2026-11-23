@@ -26,13 +26,13 @@ Rows go stale as the look3 lanes push: re-check a row against the current file b
 | Bodies (things you lift, hit or stand by) | 7 | 1 | 4 | 2 |
 | Ground tiles (16 px) | 6 | 2 | 4 | 0 |
 | Backdrops | 14 | 0 | 14 | 0 |
-| Interactive looks (props) | 23 | 14 | 9 | 0 |
+| Interactive looks (props) | 24 | 15 | 9 | 0 |
 | Decor | 43 | 12 | 25 | 6 |
 | Effects | 9 | 5 | 4 | 0 |
 | UI and HUD | 42 | 6 | 31 | 5 |
 | Sound effects | 42 | 29 | 7 | 6 |
 | Music | 8 | 0 | 0 | 8 |
-| **All** | **211** | **82** | **102** | **27** |
+| **All** | **212** | **83** | **102** | **27** |
 
 ## Path keys
 
@@ -190,6 +190,7 @@ Cuts live in tools/art/props/drive.py, round3.py and looks_parts.py.
 | `look:level-sign` | uses-approved | `P07/pixel-art-platformer-tileset-atlas.png` two-arrow signpost (815,860)-(895,958). | - |
 | `look:level-pie` | approved-source-not-used | `P05/p05-d-ui-powers-exploration-preferred-sheet.png` rings: empty (138,463)-(205,532), quarter (208,463)-(276,532), three-quarters (276,463)-(344,532), full (342,463)-(410,532) (leave out the rays above). Half = empty + right half of full. | look3-props or loop-art-cutouts: point drive.level_pie() at P05 D (register it in srcimport.SHEETS) and delete the drawn redefinition. |
 | `look:ride` | uses-approved | `P04/chibi-vehicle-and-mount-sprite-sheet.png`, the plate's 5x4 cells (cols x 49-257, 299-542, 565-824, 856-1133, 1154-1404; rows plane y 36-234, cart 309-493, wagon 566-744, mount 816-1036): idle, moving x2, crash, wrecked (loops.ride(), group `rides`). | Every cell has the goggled rider baked in: an empty machine and an empty saddle are on no plate (MA, missing list). No game code draws a ride yet. |
+| `look:powers` | uses-approved | `P05/p05-rare-powers-pickups-source.png` (opaque pale ground, key (247,245,243)): row 1 fixtures y 8-134, row 2 orbs y 140-219, row 3 lost sequence y 223-326 (spark (146,225)-(192,290), stars (196,224)-(296,262), orb on its swoosh (353,223)-(452,326)), row 4 loose pieces y 338-426, row 5 pickup sequence and cloud poof y 426-512 (x boxes in loops.py). Group `powers`: pickup-*, item-*, power-fixture-*, fx-pickup-glow/-get, fx-power-lost, fx-poof. | The plate's row 5 runs off its bottom edge (the column and burst are cut at y 512). item-spring is mush at 16 px. No game code draws them yet. |
 
 ## Decor
 

@@ -120,6 +120,23 @@ def looks_sheets():
         s.add('ride-%s-wrecked' % which, lo.ride(which, 'wrecked'))
         s.newrow()
     out.append(('rides', 'props/rides.png', s))
+    # ---- the core loops' powers and pickups (loops.py: P05 rare-powers-pickups)
+    s = Sheet(216)
+    for which in lo.ORBS:
+        s.add('pickup-' + which, lo.orb(which))
+    s.newrow()
+    for which in lo.ITEMS:
+        s.add('item-' + which, lo.fit_item(lo.item(which)))
+    s.newrow()
+    for which in lo.FIXTURES:
+        s.add('power-fixture-' + which, lo.fixture(which))
+    s.newrow()
+    s.add('fx-pickup-glow', lo.pickup_glow(), frames=3, fps=6)
+    s.add('fx-pickup-get', lo.pickup_get(), frames=3, fps=12)
+    s.add('fx-power-lost', lo.power_lost(), frames=3, fps=10)
+    s.newrow()
+    s.add('fx-poof', lo.poof(), frames=3, fps=12)
+    out.append(('powers', 'props/powers.png', s))
     # ---- people
     s = Sheet(96)
     # round 3: moods bold enough for any hat or plume (a white '?' and a sweat drop; a red mark rimmed white)

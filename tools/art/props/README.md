@@ -165,11 +165,20 @@ bottom-centred over an entrance; `level-pie-0`..`4` 12x12 (none, a quarter, half
   are lined up by the rider's head, so dust or a flame on one side does not jolt the machine. `crash` is the plate's
   4th cell (hit for the machines, a horn charge for the mount); `wrecked` the 5th (the plastered X and smoke; the
   mount sits, spent). Scale 0.2 (the rider's head about a hero's).
+- **Powers** (group `powers`, `assets/props/powers.png`, P05 rare-powers-pickups, registered as `powers` in
+  `srcimport.SHEETS`): `pickup-{fire,ice,bolt,moon,wing,gear,bomb,star,swirl}` 20x20 (at 16 the glyph inside went to
+  mush); `item-{gear,lens,pipe,crystal,spring,book,hook,ring,feather}` on an 18x16 cell, bottom-centred;
+  `power-fixture-{crystal,orrery,tree,shrine,brazier,portal}` 32x32; `fx-pickup-glow` (24x16 x3, loops under a lying
+  pickup: drawn first, the orb 3 px above the floor over it), `fx-pickup-get` (24x24 x3, once), `fx-power-lost` (24x24
+  x3, once: the hit spark, the stars, the orb flying off on its swoosh), `fx-poof` (24x14 x3: the plate's poof, then
+  smaller twice; the shrinking is this lane's, the plate has one cloud). Ids name what the plate paints, not a power's
+  name in the game.
 - **No approved source:** an empty machine or an empty saddle: every cell has the same goggled rider baked in, so a
   hero cannot be drawn riding one without that rider showing (for the Drive's missing-assets list).
 - **Not verified in the game:** no code draws a ride yet; seen in the mock scene only.
-- **Drift seen, left alone:** `make.py` now drops three far/back items from `content/decor/quarry-depot.json`
-  (a room change since 6153027 put something under them); the committed file was kept as it was.
+- **The depot's decor follows its room:** Step 16 slice 3 (5ae2ac0, 9dd3561) put ground under four far/back items in
+  `content/decor/quarry-depot.json`; `selfcheck.py` failed on the stale file, so push 2 re-ran `make.py` and the four
+  items are gone (the placing rules, not a choice).
 
 ## Deviations from the contract
 
