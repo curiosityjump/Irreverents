@@ -6,7 +6,7 @@ import type { Transport, TransportHandlers } from '../net/client.ts';
 import { DEFAULT_WORLD } from '../net/protocol.ts';
 import type { Input } from '../sim/types.ts';
 import { watchKeyboard } from './keyboard.ts';
-import { render, VIEW_H, VIEW_W } from './render.ts';
+import { render, VIEW_H, VIEW_W, view } from './render.ts';
 import { report } from './report.ts';
 import type { Drawn } from './draw/entities.ts';
 import { isTouchDevice, setUpShell } from './shell.ts';
@@ -156,6 +156,8 @@ const debug = {
   worldName,
   builtFrom,
   net: net.stats,
+  /** The view (render.ts): scripted checks read it, and the clearance fact's control sets `reserve` to 0 to watch it fail. */
+  view,
   drawn: {
     frame: 0,
     room: '',

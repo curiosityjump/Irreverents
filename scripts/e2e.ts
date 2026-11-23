@@ -18,7 +18,7 @@ import net from 'node:net';
 import path from 'node:path';
 import { awayFacts } from './e2e/away.ts';
 import { errorFacts } from './e2e/errors.ts';
-import { phoneFacts } from './e2e/phone.ts';
+import { PAINT, paintedShare, paintOk, phoneFacts, problemsOf, read as readPhone } from './e2e/phone.ts';
 import { root } from './lib/registries.ts';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -271,10 +271,17 @@ async function main(): Promise<void> {
     await cdpB.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
     fact('c', both !== null,
       `two fingers down at once on the phone page (pad and jump): its character ${both ? `was running and in the air in the same frame (from ${b0.x.toFixed(0)},${b0.y.toFixed(0)} to ${both.x.toFixed(1)},${both.y.toFixed(1)})` : `did not run and jump together (at ${mid.me.x.toFixed(1)},${mid.me.y.toFixed(1)}, started ${b0.x},${b0.y})`}`);
-    const lay = await controlsOf(B);
-    const have = lay.controls.map((c: any) => c.action);
-    fact('c2', mid.touchControls && lay.covering.length === 0 && lay.offScreen.length === 0 && lay.small.length === 0 && lay.actions.every((a: string) => have.includes(a)),
-      `the phone page (${lay.vw}x${lay.vh}) shows a touch control for every action (${lay.actions.join(', ')}) and the stick; covering the play field: ${lay.covering.join(', ') || 'none'}; off screen: ${lay.offScreen.join(', ') || 'none'}; smaller than 44 px: ${lay.small.join(', ') || 'none'}; game pixels are ${mid.scale}x device pixels`);
+    // c2 (look round 2, a design change decided in docs/decisions-log.md 2026-11-23, "Held sideways,
+    // the game fills the phone"): it used to require no control over the play field; sideways the
+    // controls now sit over the view, see-through, so it is the see-through test the full-view
+    // phones pass (scripts/e2e/phone.ts): every action and the stick on screen, clear of the safe
+    // area, 44 px or more, reachable, two fingers ran and jumped (fact c), and the paint limits.
+    const lay = await readPhone(B);
+    const seeProblems = problemsOf(lay);
+    const overView = lay.controls.some((c: any) => c.left < lay.view.right && c.right > lay.view.left && c.top < lay.view.bottom && c.bottom > lay.view.top);
+    const painted = await paintedShare(B, lay.view);
+    fact('c2', seeProblems.length === 0 && both !== null && paintOk(painted, overView),
+      `the phone page (${lay.vw}x${lay.vh}) shows a touch control for every action (${lay.actions.join(', ')}) and the stick, on screen, clear of the safe area, 44 px or more and reachable: ${seeProblems.join('; ') || 'yes'}; two fingers ran and jumped: ${both !== null}; controls ${overView ? 'over' : 'beside'} the view paint ${(painted * 100).toFixed(2)}% of it (limit ${PAINT.limit * 100}%, at least ${PAINT.floor * 100}% when over it); game pixels are ${mid.scale}x device pixels`);
 
     // How much is sent: measured on the desktop page over two seconds of play.
     await A.keyboard.down('ArrowLeft');

@@ -41,7 +41,41 @@ into the shared documents.
   to the screen, then each layer with parallax, sideways wrap, top/bottom
   pinning and optional `parallaxY`.
 - **Decoration** (`draw/decor.ts`): items by tile, bottom-left anchored,
-  `flip` mirrored, culled to the view.
+  `flip` mirrored, culled to the view; `blend: "lighter"` drawn with
+  `globalCompositeOperation = 'lighter'` in its own layer, then reset.
+- **Round 2 fields** (the contract's "Round 2 additions"; validated in
+  `src/content/kinds/{atlases,backdrops,decor}.ts`, each absent → the old
+  picture): `autotile.deep` (≥ 2 cells; `content/backdrops`' `outside.below:
+  "deep"` without it fails the check), `autotile.regions` (a rectangle in
+  room tiles, which must lie inside the room, with its own 4×4 `origin`
+  and optional `fill`/`top`/`under`; `regionAt` picks the first that holds
+  a tile), `outside` (`above: fill|sky`, `below: fill|deep`), a layer's
+  `pin: screen|room` and `front`, a decor item's `blend`. Proven with a
+  throwaway courtyard set (passes; each field malformed is refused) and
+  one render, then removed.
+- **Past the room's edge, by `outside`** (`drawGround`, `buildCache`):
+  `sky` paints neither ground nor back wall above row 0 (nor a `top` piece
+  there); `deep` paints the solid tiles below the last row from
+  `autotile.deep` by hash, with no top/under pieces; `fill` as before.
+  `INTENT:` the autotile index is worked out from `solidLook` exactly as
+  before; only the picture changes.
+- **Layers**: `pin: "room"` measures `y`/`offsetY` from the room's
+  on-screen top or bottom edge; `front: true` layers are skipped in the
+  backdrop pass and drawn by `drawFrontLayers` after bodies, effects and
+  away marks, before `front` decor (`render()`).
+- **The camera up and down** (`roomOrigin`, round 2): it may look past the
+  room's bottom edge by `view.reserve` (the shell's bottom reserve, 0
+  unless controls sit over the view), so the floor stays that far above
+  the view's bottom with ground below it; a room shorter than the view
+  sits at the bottom and all spare height goes above it, to the sky (it
+  was centred); the player's own feet are kept above the reserve.
+  Measured at 750×340 (375×170, reserve 29): in every room the floor line
+  is 29 px (17%) above the bottom and the room fills the rest (83%);
+  before (296×204, centred) the courtyard was 15% fill above, 71% room,
+  15% fill below. Upright (234×252, reserve 0) courtyard 43% above the
+  room, 57% room, nothing below (before 21/57/21); castle street 24/76/0
+  (before 12/76/12). Whether "above" is sky or wall is the ground lane's
+  `outside.above` per room.
 - **Looks** for doors (`door-enter-<w>x<h>`), parts (`part:<room>:<part>`
   with `:down`/`:open`/`:broken`, then `plate-up`/`plate-down`,
   `gate-closed`/`gate-open`, `crack-1`/`crack-2`, `rubble`,
@@ -91,7 +125,26 @@ into the shared documents.
   rectangle, through the foundation lane's `look` / `drawLookFrame` /
   `frameAt` (`draw/looks.ts`).
 
+- **Round 2: `deep` paints only where the room's bottom edge continues
+  solid** (past the edge a tile looks like the nearest tile inside), not
+  every tile below the edge: an open column at the bottom (a way down)
+  stays open.
+- **Round 2: a room-pinned layer ignores `parallaxY`**: it moves up and
+  down with the room.
+- **Round 2: a `far` glow** is drawn into the room's cached picture, so
+  where nothing lies under it (outdoors, no back wall) it is laid over the
+  sky rather than added to it.
+- **Round 2: a region's own `fill` needs one cell**, not four (a strip of
+  roof may want one).
+
 ## Decisions
+
+### 2026-11-23 · A room shorter than the view sits at the bottom, with the sky above it
+- **Decided by:** look round 2, frame lane, Step 8 (the brief, from your bar)
+- **Instead of asking:** "Centre a short room in a tall view, or stand it on the bottom?"
+- **Why this way:** your bar: "sky to the top edge; a band of ground under the feet in about the bottom 20%". Centred, half the outdoor picture was wall above and below the room.
+- **To change it:** `lowest` in `roomOrigin`, `src/client/draw/room.ts` (back to centred: `Math.floor((viewH - roomH) / 2)` when the room is shorter).
+- **Where:** `DRAFT:` at `roomOrigin`.
 
 ### 2026-11-23 · Past the edge of a room, the ground carries on as the room's own edge does
 - **Decided by:** look lane "world", Step 8
@@ -128,9 +181,14 @@ into the shared documents.
 - **Room layouts:** `courtyard` has a solid roof row, so it reads as a
   covered yard, not open sky; `castle-street` likewise. A layout question
   for whoever owns the rooms, not a renderer one.
-- **The upright camera centres a short room vertically**, leaving ground
-  below and above it; the owner may prefer the room lower on the screen
-  (more sky). `roomOrigin` in `draw/room.ts`.
+
+- **Outdoor rooms still show their solid row 0 as ground above the sky**
+  until the ground lane sets `outside.above: "sky"` and a region for the
+  roof row (and `outside.below: "deep"` for the beige under the castle
+  street, `e2e-out/look2-frame/after-side750x340-castle-street-16x10.png`).
+- **Screenshots** before (live, 2d34418's parent) and after, every room
+  at 390×664, 750×340, 844×390, 844×340 with insets and 667×375, are in
+  `e2e-out/look2-frame/` (git-ignored).
 
 ## Not verified
 

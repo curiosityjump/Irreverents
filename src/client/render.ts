@@ -16,7 +16,12 @@ import { drawRoomParts } from './draw/room-parts.ts';
 /** DRAFT: the internal resolution the art on order assumes (docs/plan/step-1.md). */
 export const VIEW_W = 320;
 export const VIEW_H = 180;
-export const view = { w: VIEW_W, h: VIEW_H };
+/**
+ * The view, game pixels. `reserve`: how much of its bottom the touch
+ * controls sit over (the shell sets it; 0 when they sit outside the view),
+ * which the camera keeps the floor and the player above (draw/room.ts).
+ */
+export const view = { w: VIEW_W, h: VIEW_H, reserve: 0 };
 const SKY = '#1b1b2f';
 
 /**
@@ -44,7 +49,8 @@ export function render(g: CanvasRenderingContext2D, world: World, content: Conte
   const mine = pv ? world.entities.find((e) => e.id === pv.me) : undefined;
   const box = mine ? content.characters[mine.kind]?.box : undefined;
   const focus = mine ? { x: mine.x + (box?.w ?? 0) / 2, y: mine.y + (box?.h ?? 0) / 2 } : undefined;
-  const { ox, oy } = roomOrigin(room, W, H, focus);
+  const feet = mine && box ? mine.y + box.h : undefined;
+  const { ox, oy } = roomOrigin(room, W, H, focus, view.reserve, feet);
   const backdrop = backdropOf(room, content);
   if (backdrop) drawBackdrop(g, backdrop, room, -ox, -oy, W, H, SKY);
   else {

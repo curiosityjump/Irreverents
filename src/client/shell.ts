@@ -15,7 +15,19 @@ export const isTouchDevice = (): boolean => navigator.maxTouchPoints > 0 || 'ont
  * Off a touch screen it stays 320x180 (VIEW_W x VIEW_H).
  */
 const UPRIGHT = { wMax: 264, wMin: 192, hMax: 256 };
-const SIDEWAYS = { wMin: 288, wMax: 400, hMin: VIEW_H, hMax: 225 };
+// DRAFT (look round 2, frame lane): sideways the view is framed like the owner's bar, about
+// 320×180 or tighter (at most 180 tall), so a body is as big on the phone as in the references:
+// an 844×340 or 750×340 page at 3× is 375×170 at 6×. It was { 288, 400, 180, 225 }.
+const SIDEWAYS = { wMin: 280, wMax: 450, hMin: 160, hMax: VIEW_H };
+/**
+ * DRAFT: over the view, how many actions sit in the one low row at the
+ * bottom-right (nearest the corner first, in ARC_ORDER); any after those
+ * (today: switch) are small chips along the top edge, left of the sound
+ * button, so no control sits higher than about a fifth of the view.
+ */
+const LOW_ROW = 4;
+/** DRAFT: a control over the view, CSS pixels: the touch area (what is painted is smaller). */
+const OVER_BUTTON = 52;
 /** DRAFT: a sideways bar beside the view that holds two columns of buttons, CSS pixels (not counting a notch). */
 const BAR = 128;
 /** DRAFT: the smallest button anywhere but over the view, CSS pixels (the brief asks 56; the scripted checks 44). */
@@ -41,9 +53,11 @@ type Mode = 'desktop' | 'upright' | 'bars' | 'over';
  * rings around that corner (two near, three further out), the way a thumb
  * sweeps. `columns`: two staggered columns for a narrow bar beside the view.
  */
-function slots(count: number, kind: 'arc' | 'columns'): { x: number; y: number }[] {
+function slots(count: number, kind: 'arc' | 'columns' | 'row'): { x: number; y: number }[] {
   const out: { x: number; y: number }[] = [];
-  if (kind === 'arc') {
+  if (kind === 'row') {
+    for (let i = 0; i < count; i++) out.push({ x: 0.5 + i, y: 0.5 });
+  } else if (kind === 'arc') {
     const rings = [
       { r: 1.3, angles: [22, 68] },
       { r: 2.35, angles: [12, 45, 78] },
@@ -104,7 +118,7 @@ export function setUpShell(canvas: HTMLCanvasElement, touch: HTMLElement, hint: 
     let gap = 8;
     const unit = (): number => button + gap;
     // The arc's extent from its corner, in CSS pixels, for `button`.
-    const arcExtent = (kind: 'arc' | 'columns'): { w: number; h: number } => {
+    const arcExtent = (kind: 'arc' | 'columns' | 'row'): { w: number; h: number } => {
       const s = slots(buttons.length, kind);
       return { w: Math.max(...s.map((p) => p.x)) * unit() + button / 2, h: Math.max(...s.map((p) => p.y)) * unit() + button / 2 };
     };
@@ -141,23 +155,27 @@ export function setUpShell(canvas: HTMLCanvasElement, touch: HTMLElement, hint: 
       const barsW = W - 2 * (BAR + side);
       const sBars = best(barsW);
       const sOver = best(W - inset.left - inset.right);
-      if (sBars >= sOver) {
+      // Bars only when they give a strictly bigger picture (a tie goes to the overlay: the
+      // picture fills the phone, docs/decisions-log.md 2026-11-23 "Held sideways, the game
+      // fills the phone"; the camera keeps the floor and the player clear of the controls).
+      if (sBars > sOver) {
         mode = 'bars';
         scale = sBars;
         vw = wide(barsW, scale);
         button = MIN_BUTTON;
         gap = 6;
       } else {
-        // DRAFT: where bars would cost a step of scale (a 16:9 phone, or a
-        // notched one with both insets), the view fills the screen and the
-        // controls sit over its lower corners, see-through: only a small
-        // picture or faint label is painted, the touch area stays large
-        // (index.html `#touch.over`; e2e facts i-667x375, i-736x414).
-        // To reconsider: the camera keeping the player clear of them.
+        // DRAFT: the view fills the screen between the notch insets and the
+        // controls sit over it, see-through: only a small picture or faint
+        // label is painted, the touch area stays large (index.html
+        // `#touch.over`; e2e facts c2, i-*). They sit low: the stick
+        // bottom-left, one row of actions bottom-right, the rest as chips
+        // along the top; the camera keeps the floor and the player above the
+        // low ones (`view.reserve`, draw/room.ts `roomOrigin`).
         mode = 'over';
         scale = sOver;
         vw = wide(W - inset.left - inset.right, scale);
-        button = 60;
+        button = OVER_BUTTON;
         gap = 4;
       }
       vh = tall(scale);
@@ -169,6 +187,7 @@ export function setUpShell(canvas: HTMLCanvasElement, touch: HTMLElement, hint: 
 
     view.w = vw;
     view.h = vh;
+    view.reserve = 0;
     if (canvas.width !== vw || canvas.height !== vh) {
       canvas.width = vw;
       canvas.height = vh;
@@ -190,7 +209,7 @@ export function setUpShell(canvas: HTMLCanvasElement, touch: HTMLElement, hint: 
     // under the right.
     const bottom = snap(mode === 'over' ? Math.max(4, inset.bottom) : Math.max(12, inset.bottom + 6));
     const edge = mode === 'over' ? 4 : mode === 'bars' ? 6 : 12;
-    const kind: 'arc' | 'columns' = mode === 'bars' ? 'columns' : 'arc';
+    const kind: 'arc' | 'columns' | 'row' = mode === 'bars' ? 'columns' : mode === 'over' ? 'row' : 'arc';
     const right = W - inset.right - edge;
     let lz: { left: number; width: number };
     if (mode === 'bars') {
@@ -201,14 +220,22 @@ export function setUpShell(canvas: HTMLCanvasElement, touch: HTMLElement, hint: 
       lz = { left: inset.left + edge, width: Math.min(2 * Math.round(button * 1.15), W - arcExtent(kind).w - 3 * edge) };
     }
     lz.width = Math.floor(lz.width / 2) * 2;
-    const ph = mode === 'over' ? 64 : padH();
+    const ph = mode === 'over' ? button : padH();
     // Upright the stick sits level with the arc's near ring, where a thumb rests.
     const padBottom = mode === 'upright' ? bottom + Math.max(0, 0.9 * unit() - ph / 2) : bottom;
-    const s = slots(buttons.length, kind);
-    buttons.forEach((b, i) => {
+    const low = mode === 'over' ? buttons.slice(0, LOW_ROW) : buttons;
+    const s = slots(low.length, kind);
+    low.forEach((b, i) => {
       const p = s[i]!;
       b.style.left = `${snap(right - p.x * unit() - button / 2)}px`;
       b.style.top = `${snap(H - bottom - p.y * unit() - button / 2)}px`;
+    });
+    // Over the view, the rest are chips along the top edge, right to left from beside the sound
+    // button (32 px at the top-right, audio/index.ts), clear of the alert pips at the top-left.
+    const chipRight = W - inset.right - 6 - 32 - 8;
+    buttons.slice(low.length).forEach((b, i) => {
+      b.style.left = `${snap(chipRight - (i + 1) * button - i * gap)}px`;
+      b.style.top = `${snap(Math.max(2, inset.top))}px`;
     });
 
     // INTENT: the button pictures are 24x24 pixel art, drawn at a whole
@@ -231,6 +258,12 @@ export function setUpShell(canvas: HTMLCanvasElement, touch: HTMLElement, hint: 
     set('--bottom', snap(padBottom));
     set('--pad-h', ph);
     touch.classList.toggle('over', mode === 'over');
+    if (mode === 'over') {
+      // The bottom reserve: from the top of the stick and the low row down to the view's bottom,
+      // in game pixels. The camera keeps the room's floor and the player above it.
+      const lowTop = Math.min(H - padBottom - ph, H - bottom - 0.5 * unit() - button / 2);
+      view.reserve = Math.max(0, Math.ceil(((top + ch - lowTop) * dpr) / scale));
+    }
     hint.style.setProperty('--hint-top', `${top + ch + 10}px`);
     hint.hidden = !upright || hint.dataset.dismissed === '1';
     current = { scale, upright };

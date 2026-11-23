@@ -21,14 +21,33 @@ const ONEWAY = '#c9a66b';
  * position to get a screen position).
  * DRAFT: the first camera (Step 1 Gate 2; Step 3 owns it from here): each
  * player's own view follows their own character, centred on `focus`, and
- * stops at the room's edges. A room smaller than the screen is centred.
+ * stops at the room's edges. A room narrower than the screen is centred.
+ * Round 2 (frame lane), up and down:
+ * - `reserve` (game px, from the shell: the height of the touch controls
+ *   sitting over the view's bottom, 0 when none do): the camera may look
+ *   that far past the room's bottom edge, so the room's floor stays at
+ *   least `reserve` above the view's bottom, with ground showing below it
+ *   (the room's cached picture has 12 tiles of margin).
+ * - A room shorter than the view sits at the bottom (plus the reserve) and
+ *   all the spare height goes above it, to the sky.
+ * - `feet` (the player's own character's bottom, room px): the camera keeps
+ *   it above the reserve, so no control sits on the player.
+ * DRAFT: the reserve and "spare height to the sky" (docs/decisions-log.md,
+ * 2026-11-23, "Held sideways, the game fills the phone"; the owner's bar:
+ * sky to the top edge, a band of ground under the feet).
+ * INTENT: drawing only. Collision and the simulation never read this.
  */
-export function roomOrigin(room: Room, viewW: number, viewH: number, focus?: { x: number; y: number }): { ox: number; oy: number } {
-  const along = (roomSize: number, view: number, at: number | undefined): number => {
-    if (roomSize <= view || at === undefined) return Math.floor((view - roomSize) / 2);
-    return -Math.max(0, Math.min(roomSize - view, Math.round(at - view / 2)));
-  };
-  return { ox: along(room.w * room.tile, viewW, focus?.x), oy: along(room.h * room.tile, viewH, focus?.y) };
+export function roomOrigin(room: Room, viewW: number, viewH: number, focus?: { x: number; y: number }, reserve = 0, feet?: number): { ox: number; oy: number } {
+  const roomW = room.w * room.tile;
+  const roomH = room.h * room.tile;
+  const ox = roomW <= viewW || focus === undefined ? Math.floor((viewW - roomW) / 2) : -Math.max(0, Math.min(roomW - viewW, Math.round(focus.x - viewW / 2)));
+  // The lowest the camera's top may go: the room's bottom edge `reserve` above the view's bottom.
+  const lowest = roomH + reserve - viewH;
+  let camY = lowest;
+  if (lowest > 0 && focus !== undefined) camY = Math.max(0, Math.min(lowest, Math.round(focus.y - viewH / 2)));
+  // The player's own feet stay above the reserve (they never go below the room, so this fits).
+  if (feet !== undefined && reserve > 0) camY = Math.min(lowest, Math.max(camY, Math.ceil(feet + reserve - viewH)));
+  return { ox, oy: -camY };
 }
 
 /** The art files a room may have (content/atlases/, backdrops/, decor/, each named after the room). */
