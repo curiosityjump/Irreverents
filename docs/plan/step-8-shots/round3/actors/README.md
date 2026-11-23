@@ -29,3 +29,6 @@ from the press in each corner, cropped around the grappler at 3×.
 - `after-hall-words.png`: a Hall card's lines through the game's own
   `drawText` (no pedestal exists in a fresh world).
 - `*-undercroft-upstairs-sideways.png`: the multi-floor camera bias (20 px).
+- `*-frame-667x375.png`, `*-frame-844x390-notch.png` (push 3, live at
+  77df756 after; before is live at 851eda9): sideways, no bands at
+  667×375; under the notch at 844×390 with insets 47/47/21.
