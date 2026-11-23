@@ -39,6 +39,13 @@ export interface Sprite {
   fpsBy: Partial<Record<SpriteState, number>>;
   /** Frame lists that replace the normal ones while a person is in mood "2" or "3". Empty when the file has none. */
   moods: Partial<Record<(typeof SPRITE_MOODS)[number], Partial<Record<SpriteState, number[]>>>>;
+  /**
+   * Round 2 (the contract, "Round 2 additions"): the cell pixel (facing
+   * right) where a carried body's bottom-centre sits during `carry`,
+   * `carryRun` and `throw`, mirrored with the facing. Null when the file
+   * has none (then today's placement).
+   */
+  carryAt?: { x: number; y: number } | null;
 }
 
 declare module '../types.ts' {
@@ -76,7 +83,7 @@ const kind: ContentKind = {
   parse(raw, read) {
     const o = read.object(raw, '');
     if (!o) return null;
-    read.only(o, ['id', 'image', 'cell', 'anchor', 'fps', 'frames', 'fpsBy', 'moods'], '');
+    read.only(o, ['id', 'image', 'cell', 'anchor', 'fps', 'frames', 'fpsBy', 'moods', 'carryAt'], '');
     requireDraftNote(read, o);
     const cell = read.object(o.cell, 'cell') ?? {};
     const anchor = read.object(o.anchor, 'anchor') ?? {};
@@ -97,6 +104,14 @@ const kind: ContentKind = {
         for (const mood of SPRITE_MOODS) if (m[mood] !== undefined) moods[mood] = stateLists(read, m[mood], `moods.${mood}`, []);
       }
     }
+    let carryAt: { x: number; y: number } | null = null;
+    if (o.carryAt !== undefined) {
+      const c = read.object(o.carryAt, 'carryAt');
+      if (c) {
+        read.only(c, ['x', 'y'], 'carryAt');
+        carryAt = { x: read.number(c, 'x', 'carryAt', { min: 0, max: 512, integer: true }), y: read.number(c, 'y', 'carryAt', { min: 0, max: 512, integer: true }) };
+      }
+    }
     const out: Sprite = {
       id: read.string(o, 'id', ''),
       image: readImage(read, o, 'image', ''),
@@ -106,6 +121,7 @@ const kind: ContentKind = {
       frames: { idle: [0], run: [0], air: [0], ...frames },
       fpsBy,
       moods,
+      carryAt,
     };
     return out;
   },
@@ -120,6 +136,10 @@ const kind: ContentKind = {
       // INTENT (the contract): the picture may overhang the box, never the other way round; the box is the truth.
       if (s.anchor.x + ch.box.w > s.cell.w || s.anchor.y + ch.box.h > s.cell.h) {
         fail(file, 'anchor', `the collision box (${ch.box.w}×${ch.box.h} at ${s.anchor.x},${s.anchor.y}) does not fit inside a ${s.cell.w}×${s.cell.h} cell`);
+      }
+      // carryAt is a pixel of the cell: inside it.
+      if (s.carryAt && (s.carryAt.x >= s.cell.w || s.carryAt.y >= s.cell.h)) {
+        fail(file, 'carryAt', `(${s.carryAt.x}, ${s.carryAt.y}) is outside the ${s.cell.w}×${s.cell.h} cell`);
       }
     }
   },
