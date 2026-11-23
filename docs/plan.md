@@ -360,9 +360,30 @@ Full text: `docs/plan/step-15.md`
 
 ## Step 16 — A first real level: many screens, enemies all through it, and a guarded place to get into unseen
 
-**Status: open, claimed by session_017WiGzHt9iJy3caBLkT1Ef4, 2026-11-23.** (Opened 2026-11-23 15:05 UTC by orchestrator session_017WiGzGp8auJceLEAAh9Aqx: Step 12's first push, its hostile kinds, is on main at 1bdd143. Slice 2, enemies outside an outpost, still needs Step 12's lead to widen `outpost-fight.ts`; geography and secrets first. Earlier: drafted from docs/vision-gaps.md gaps 1, 2 and 10, verified at 43556ba.)
-
-Full text: `docs/plan/step-16.md`
+**Closed 2026-11-23, 21:15 UTC.** The kingdom has its first real level.
+A doorway in the courtyard leads to a quarry of six rooms (road, ridge,
+tower, depot, pit, cave) and 12.4 screens of main way that every hero
+crosses alone and comes back by another way, with a secret per hero
+(size, flaps, weight), a "not yet" out of everyone's reach, and a missed
+jump that drops you to the pit, never a reload. Bad guys stand in every
+room but the cave, and they are not alike: light fighters that fly, a
+heavy one a punch barely moves, a brute only the grappler lifts, and a
+toll on the road that upsets them if you politely pay it. In the middle
+is the bad guys' depot: a lookout and a horn, patrols, a heavy at the
+strongroom, a hoard. You arrive unseen with the danger in view, can take
+the hoard and leave with no call started (the flyer over the roof, the
+grappler over a ledge and a shelf), and if you are seen the horn brings
+waves and you fight or run (the tower door, or a hole to the cellar, the
+pit and the cave). A phone crosses road, ridge and tower into the depot
+by touch. Not done, by the step's drop list: the ranged kind, the hidden
+way home under the castle. Left for other steps (in
+`docs/for-the-orchestrator.md`): a slam rule so a throw topples a heavy
+(today eight punches do), a glint or window so the hoard shows from the
+yard, a sight mark before a call, a camera that looks up in tall rooms,
+a jump cue at the tower. No owner question is open; its decisions are in
+`docs/decisions-log.md`. Full text: `docs/plan-archive.md`, "Step 16".
+Mechanisms: `docs/mechanisms/rooms-and-doors.md` (the map) and
+`docs/mechanisms/outposts.md` (the depot).
 
 ## Step 17 — A start screen, and saved games a friend can join
 

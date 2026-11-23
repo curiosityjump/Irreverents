@@ -36,7 +36,7 @@ that could trap someone.
 ```
 
 - **The quarry** (Step 16 slice 1, `DRAFT:` layouts, permanent ids; each
-  room's `//` says what is where, `docs/plan/step-16.md` is the step).
+  room's `//` says what is where, the step is `docs/plan-archive.md`, "Step 16").
   The courtyard's enter doorway `to-quarry` (columns 17-19, rows 6-7,
   between the plates) and the road's `to-courtyard` (columns 2-4). The
   main way, road, ridge, tower and depot, is 248 columns (about 12
