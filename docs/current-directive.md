@@ -53,7 +53,7 @@ Running besides: hit-prediction builder `session_017WiGzGPRoCXeC3TG8HFyxh` (`han
 3. **The owner is waiting on two answers they have not given:** the Drive changelog entry for the
    missing-assets list (the connected account can only view the changelog; the entry text was
    given to them at 19:10 UTC), and "full speed" or "throttle" for the weekly usage limit.
-4. An e2e fact failed once in two full runs at 19:20 UTC (not captured; the Step 18 builder saw the Step 11 cantina facts flake twice): fold into the flake investigation. The throw-a-friend flake (`t-throw-friend`, `t-grab-friend`: 3 runs in 14, "no throw happened
+4. An e2e fact failed once in two full runs at 19:20 UTC (not captured; the heist builder names the flaking fact `cantina-row`, a tap flake, 20:14 UTC; the Step 18 builder saw the Step 11 cantina facts flake twice): fold into the flake investigation. The throw-a-friend flake (`t-throw-friend`, `t-grab-friend`: 3 runs in 14, "no throw happened
    server-side"): brief its own investigation.
 5. Shop interiors from P08's building sheets (offered to the owner ~16:55 UTC, no objection).
 6. The Bandit Camp traps heroes if `jumpSpeed` is tuned 10% lower (`docs/plan/step-3.md`, last
