@@ -365,3 +365,71 @@ the undercroft's vault), then the camera's edges, the stand-ins, and
 ## Open with the owner
 
 ## Handoff notes
+
+**From the first Step 3 lead (`session_017WiGzGUAnvQfWco5vTcMX4`),
+2026-11-23 09:40 UTC. Read this first; everything above it under
+"Briefs" is the record it was built from.**
+
+**What is live** (re-run by the lead at `1219e77`: build, check, gates
+green; `check:deployed` ok; with the crawl blocked,
+`step3-secret-by-size` fails). The game starts in the throne room. Five
+rooms: `throne-room`, `castle-street`, `courtyard`, `hall-gallery`,
+`undercroft`. Two kinds of door that carry anybody; nothing resets when
+a room empties. Two hidden ways (behind the throne; over the roofs). A
+two-plate gate (two friends, or one and a heavy crate; never one
+alone). A breakable window above the dais and a breakable vault wall.
+A secret chamber only a small body crawls into, with a drop out that
+any body can take. Hiding places in the street and the throne room.
+`npm run gates`: 5 of 6; B lists 15 scenarios, at least one for each of
+signals 1, 2, 3, 3b, 4, 5. The format, rules, part kinds and the
+way-out check: `docs/mechanisms/rooms-and-doors.md`; "how to add a
+room" and "a kind of working part": `docs/architecture.md`.
+
+**Why the step is not closed. Owed, in the order the lead would take
+them:**
+
+1. **Nobody has played it.** Seen by the lead on the built page at
+   844×390, keyboard: the throne room, the street, the courtyard with
+   its shut gate. Not seen by anyone: the gate opening for two players
+   on two pages, the roof route, the secret, the undercroft, a hiding
+   place, touch on any of it, a real iPhone. Signal 4's real-page half
+   (`npm run e2e` with the two players in different rooms) does not
+   exist.
+2. **Stand-ins to replace with Step 2's real throw** (the step's own
+   rule): `step3-secret-another-way` (a body given 500 px/s upward;
+   whether a real throw can lift a friend up the eight-tile drop is
+   unmeasured, and if it cannot the "way round" needs a lower drop or
+   a box to stand on), `step3-plates-one-and-a-weight` (the crate is
+   dropped on the plate), `step3-through-the-window` and
+   `step3-wall-breaks` (a crate with a starting speed). Step 6 has
+   already proven the window with a real throw
+   (`step6-king-through-the-window`).
+3. **The camera is this step's now** (`src/client/draw/room.ts`,
+   Step 1's first version: follows the player on both axes, clamped to
+   the room). Nothing decided yet about room edges, a room change, or
+   easing. Look before changing.
+4. **`npm run check` takes about 38 s** and the build runs it: the
+   way-out check plays every party member from every standing place in
+   five rooms through the real `step()`. `src/sim/check-rooms.ts` is
+   this step's: shorten its move list, or skip rooms that did not
+   change.
+5. **Plates between two devices may flicker**: a page steps only its
+   own character between server snapshots, so a plate a friend stands
+   on can pop up for a moment locally (the gate itself holds). Unseen;
+   told to Step 1's lead. Check it with two pages.
+6. **The cellar doorway comes up in the street** (column 7), not the
+   courtyard as the map above says. A small room-data change.
+7. **Looks, for the owner or Step 8:** the wall tile under the false
+   wall shows a two-pixel lighter edge (a tell); when a room with a
+   false wall gets a tile atlas the false wall will stand out unless
+   its drawing uses the atlas's wall cell
+   (`src/client/draw/room-parts.ts`); the king's speech ribbon covers
+   part of the window.
+8. **Step 5 has not drawn "where did my friend go"**; the fact is
+   `doorToward` (`docs/architecture.md`, Step 3's section).
+
+**Taste, the owner's after playing:** whether the rooms are interesting
+to move through; whether the two hidden ways feel like discoveries;
+the six seconds the gate stays open; that a standing throw of the king
+hits the throne and only a jumping throw reaches the window; the
+names and shapes.

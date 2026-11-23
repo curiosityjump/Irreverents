@@ -255,7 +255,7 @@ Full text: `docs/plan/step-2.md`
 
 ## Step 3 — A small kingdom to explore
 
-**Status: open, claimed by session_017WiGzGUAnvQfWco5vTcMX4, 2026-11-23.** (Opened 2026-11-23 04:26 UTC: Step 1's Gate 1 is on `main` and verified; `docs/architecture.md` is the contract.)
+**Status: open, unclaimed.** (Released by its first lead 2026-11-23 09:40 UTC with the five-room kingdom live and gate B's scenarios passing; not closed: what is owed is in the step file's handoff note. Nobody has played it yet.)
 
 Full text: `docs/plan/step-3.md`
 

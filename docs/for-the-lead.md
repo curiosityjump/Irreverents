@@ -161,38 +161,6 @@ actually read (questions for the owner go through
 **Flag:** rung 5 was by eye, on hand-made records pushed into the page's world; nothing scripted covers the drawing, and the real path (detector → pedestal → page, two devices) has not been seen. Text follows `draw/npcs.ts` (`fillText`, 8 px): readable, soft on a phone; a shared pixel font would be Step 5's or 8's call.
 
 
-### step-3-b-kingdom-and-parts.md, 2026-11-23 (all four pushes landed; one item left out)
-
-**Done:** push 1 (`cb297c0`): the five part kinds, drawn, in `test-parts`. Push 2 (`5b7e319`): behind the throne. Push 3 (`2055ccb`): courtyard and plate gate, gallery, roofs. Push 4: the secret, the vault, two hiding places. `npm run gates` B lists 15 scenarios: signal 1 (`walk-to-street`), 2 (`behind-the-throne`, `over-the-roofs`), 3 (`secret-by-size`, `-grappler-stopped`, `-flyer-stopped`, `-not-by-flight`, `-another-way`, `-way-out`), 3b (`guard-follows`, `room-remembers`), 4 (`two-players-apart`), 5 (`plates-two-players`, `-one-and-a-weight`, `-one-alone`). **Left out (the brief allowed it): the cellar doorway's pair is still the street (column 7), not the courtyard.** To move it: add an enter doorway at the courtyard's column 15, point the undercroft's `cellar-up` at it, and decide what the street's `cellar-doorway` id becomes (it is pushed, so retire it rather than delete it); `step3-behind-the-throne` then ends in the courtyard as the brief first wrote it. The brief file is yours to delete at review.
-
-**Stand-ins (signal 3 and 5, as the step file asks to be told):** `step3-secret-another-way` sends a `dummy-heavy` up the drop with a starting speed (500 px/s up, 30 sideways), not a friend's real throw; whether Step 2's throw can put a body up an eight-tile drop is unmeasured (500 is under `maxLaunchSpeed` 520, but `throwLift` is 0.3). If it cannot, the "way round" needs a box to stand on or a lower drop: the flyer's reach leaves about 1.4 tiles of margin. `step3-plates-one-and-a-weight` drops the crate onto the plate.
-
-**Flag:** undercroft spawn tiles are numbered in reading order (a scenario's `spawn` index is reading order, not the digit); I renamed the digits to match.
-
-**Flag (cost): `npm run check` now takes about 38 s, and `npm run build` runs the same way-out check**, so every session's check and every deploy's build pay it. A profile shows it spread over `step()` itself and every system (the check plays moves through the whole simulation for three characters from every standing place in five rooms); my part systems are about 8% of it after caching their part lists. `check-rooms.ts` is yours: shorten `HOLDS`, or skip rooms whose file and whose neighbours did not change.
-
-**Flag:** `scripts/trace.ts` crashes on any scenario in `castle-street` after tick 0 (`fact-helpers.ts` `feet`: an entity whose kind is not a character kind; it appeared with Step 4's placements). Not mine to fix; I traced with a scratch copy that skips such entities.
-
-**Flag:** the roofs have two tiles of headroom (rows 1-2 under the ceiling), so nobody can jump there; the ledge is therefore continuous. If the street gets taller, a gap "just in reach" becomes possible.
-
-**Stand-in:** `step3-plates-one-and-a-weight` drops a `crate-heavy` onto the plate; no real carry-and-throw onto a plate is scripted. A crate given only a sideways speed never stops (no friction unless it is flying), so "slides to rest on the plate" needs Step 2's real throw.
-
-**For Step 6:** the window is part `window` in `throne-room`; its event is `part-broken: { room: "throne-room", part: "window", by, player, speed, look: "window" }`.
-
-**Stand-ins:** `step3-through-the-window` and `step3-wall-breaks` use a crate given a starting speed, not a real grab-and-throw. No scenario yet throws a real body (or the king) through the window from the dais; whether Step 2's throw reaches 200 px/s sideways at window height from where a carrier can stand is unmeasured.
-
-**Flag (network):** each page steps its own world with only its own character in it. So between the server's snapshots a page's local `room-plate` sees nobody on a plate another player is standing on, sets it up and emits `plate-up`, until the next snapshot sets it down again. The gate itself is safe (its countdown is refreshed by every snapshot while the server sees the plates held), but another player's plate may flicker on screen and local `plate-up`/`plate-down` events are noise. Not seen on a real pair of devices; look at it when push 3 puts plates in the courtyard. A page-side rule "parts are the server's while online" would fix it, in Step 1's layer.
-
-**Flag:** a body thrown through the window keeps its full speed into the undercroft and slides the length of the passage (a plain crate with a starting speed has no friction; a really thrown body is slowed by Step 2's drag). Looks right for a throw; untested with one.
-
-**Flag:** the brief asked for one more control "a room whose hidden connection is an enter doorway": slice A's `hidden-doorway-has-a-sign` is exactly that, so none was added. Added instead: `gate-names-no-plates`, `breakable-unknown-look` (the kinds' own parameter checks).
-
-**Flag:** `drawRoom` draws from a tile atlas when a room has one (`content/atlases/`); `draw/room-parts.ts` paints false walls, hidden doors and cracked walls with the graybox wall colour. The day a room with a false wall gets an atlas, the false wall will stand out: the part drawing must use the atlas's solid cell then.
-
-**Flag:** the king's speech bubble covers most of the window from the spawn side (screenshot by eye). Step 6's to place.
-
-**Not verified:** no real iPhone; the hiding place and the false wall in `test-parts` were never seen drawn there (the false wall was seen in the throne room).
-
 ## Step 4, slice 2, push 1 (brief-worker, 2026-11-23 ~09:25 UTC)
 
 Push 1 of `handoff-prompts/step-4-slice-2-alarm.md`: the bell, the call, the alert, the placed guard responding, cooling; a bell in `castle-street`; `scripts/trace.ts` mended. Gate D passes with six scenarios.
