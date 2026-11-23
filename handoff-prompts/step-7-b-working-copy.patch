@@ -1,0 +1,1967 @@
+diff --git a/content/characters/pedestal.json b/content/characters/pedestal.json
+new file mode 100644
+index 0000000..1acdf6c
+--- /dev/null
++++ b/content/characters/pedestal.json
+@@ -0,0 +1,11 @@
++{
++  "//": "DRAFT (Step 7): the body a Hall of Legends record hangs on. An ordinary heavy body on purpose: nothing in the Hall is protected from play, so it can be hit, grabbed and thrown like a heavy crate, and the record rides on it (entity.c.hall).",
++  "id": "pedestal",
++  "name": "Pedestal",
++  "box": { "w": 14, "h": 20 },
++  "color": "#c9b037",
++  "verbs": [
++    "body"
++  ],
++  "tuning": "pedestal"
++}
+diff --git a/content/hall/hall.json b/content/hall/hall.json
+new file mode 100644
+index 0000000..c72de38
+--- /dev/null
++++ b/content/hall/hall.json
+@@ -0,0 +1,52 @@
++{
++  "//": "The Hall of Legends as data (docs/mechanisms/hall-of-legends.md). DRAFT, all of it: the test room, the eight quiet seconds, every floor and weight, every name, label and title. Nothing here names a place, a person or a deed to perform: it says how to recognise and weigh what happened. 'signals' maps what the detector listens for to the simulation's events, so an event renamed by another step is a one-line edit here.",
++  "room": "test-hall",
++  "pedestals": [[3, 9], [6, 9], [9, 9], [12, 9], [15, 9], [4, 6], [14, 6]],
++  "quietSeconds": 8,
++  "signals": {
++    "alert": { "event": "alert-changed", "from": "from", "to": "to" },
++    "call": { "event": "call-started" },
++    "taking": { "event": "deed", "match": { "deed": "take" }, "by": "by" },
++    "impact": { "event": "impact", "speed": "speed" },
++    "down": { "event": "flattened", "who": "target" },
++    "up": { "event": "recovered", "who": "target" }
++  },
++  "where": { "fields": ["area", "room"], "entities": ["entity", "target", "by"] },
++  "stats": {
++    "seconds": { "label": "Seconds", "how": "seconds" },
++    "highestAlert": { "label": "Highest alert", "how": "max", "event": "alert-changed", "field": "to" },
++    "calls": { "label": "Calls for help", "how": "count", "event": "call-completed" },
++    "hits": { "label": "Hits landed", "how": "count", "event": "hit", "who": "by", "is": "player" },
++    "knockedOut": { "label": "Knocked out", "how": "count", "event": "flattened", "who": "target", "is": "other" },
++    "fell": { "label": "Heroes down", "how": "count", "event": "flattened", "who": "target", "is": "player" },
++    "biggestImpact": { "label": "Biggest crash", "how": "max", "event": "impact", "field": "speed" },
++    "throws": { "label": "Throws", "how": "count", "event": "thrown", "who": "by", "is": "player" },
++    "taken": { "label": "Things taken", "how": "count", "event": "deed", "match": { "deed": "take" }, "who": "by", "is": "player" }
++  },
++  "kinds": {
++    "infiltration": {
++      "name": "Quiet Theft",
++      "episode": "quiet",
++      "ending": "unnoticed",
++      "titles": ["The Quiet Hand at {place}", "Nobody Saw a Thing at {place}", "The Empty Shelf of {place}", "Light Fingers in {place}"],
++      "floor": 10,
++      "score": { "taken": 10 }
++    },
++    "escape": {
++      "name": "Narrow Escape",
++      "episode": "trouble",
++      "ending": "calm",
++      "titles": ["The Vanishing at {place}", "Gone from {place}", "The Slip at {place}", "{seconds} Seconds Loose in {place}"],
++      "floor": 15,
++      "score": { "seconds": 1, "highestAlert": 10, "calls": 5, "hits": 2, "knockedOut": 5, "throws": 3, "biggestImpact": 0.05 }
++    },
++    "last-stand": {
++      "name": "Last Stand",
++      "episode": "trouble",
++      "ending": "all-down",
++      "titles": ["The Stand at {place}", "Held to the End at {place}", "Down Swinging in {place}", "The Last of It at {place}"],
++      "floor": 20,
++      "score": { "seconds": 1, "highestAlert": 10, "calls": 5, "hits": 2, "knockedOut": 5, "throws": 3, "biggestImpact": 0.05 }
++    }
++  }
++}
+diff --git a/content/rooms/test-hall.json b/content/rooms/test-hall.json
+new file mode 100644
+index 0000000..d514271
+--- /dev/null
++++ b/content/rooms/test-hall.json
+@@ -0,0 +1,26 @@
++{
++  "//": "DRAFT (Step 7): a stand-in for the Hall gallery until Step 3's exists; no doors, so it is standalone and never the start room. Pedestals stand along the floor and on the two shelves (content/hall/hall.json, 'pedestals').",
++  "id": "test-hall",
++  "name": "Test: Hall",
++  "tile": 16,
++  "legend": {
++    "#": "solid",
++    "=": "oneway",
++    ".": "empty",
++    "1": "spawn",
++    "2": "spawn"
++  },
++  "rows": [
++    "####################",
++    "#..................#",
++    "#..................#",
++    "#..................#",
++    "#..................#",
++    "#..................#",
++    "#..................#",
++    "#..===.......===...#",
++    "#..................#",
++    "#.1..............2.#",
++    "####################"
++  ]
++}
+diff --git a/content/tuning.json b/content/tuning.json
+index 0cf6da2..1a4c5ea 100644
+--- a/content/tuning.json
++++ b/content/tuning.json
+@@ -101,6 +101,11 @@
+     "dummy-heavy": {
+       "weight": 110,
+       "toughness": 260
++    },
++    "pedestal": {
++      "//": "DRAFT (Step 7): a Hall pedestal is as heavy as a heavy crate and cannot be flattened.",
++      "weight": 120,
++      "toughness": 0
+     }
+   }
+ }
+diff --git a/scenarios/step7-escape-is-remembered.json b/scenarios/step7-escape-is-remembered.json
+new file mode 100644
+index 0000000..4c1e0d1
+--- /dev/null
++++ b/scenarios/step7-escape-is-remembered.json
+@@ -0,0 +1,49 @@
++{
++  "id": "step7-escape-is-remembered",
++  "//": "The events are scripted by hand: the systems that will really emit them (Step 4's calls and alert, Step 2's hits and impacts) are not built yet. So this proves how the detector handles such events, never that the game produces them, and it is deliberately not tagged for gate E.",
++  "proves": "an escape is noticed by itself and remembered: help is called on two players, there is a hit and a crash, and the alert dies down with both still standing; one record of the escape kind hangs on a pedestal in the Hall room crediting both players (D-026), with numbers counted from the events themselves and its picture taken at the crash, not at the end",
++  "room": "test-body",
++  "players": [
++    {"id": "a", "character": "hero", "spawn": 0},
++    {"id": "b", "character": "hero", "spawn": 1}
++  ],
++  "entities": [
++    {"id": "dummy-1", "character": "dummy", "tile": [16, 9]}
++  ],
++  "inputs": [
++    {"player": "a", "from": 30, "to": 100, "x": -1},
++    {"player": "a", "from": 140, "to": 170, "x": 1},
++    {"player": "b", "from": 100, "to": 160, "x": 1}
++  ],
++  "events": [
++    {"at": 60, "type": "call-completed", "by": "dummy-1", "area": "test-body", "x": 260, "y": 150},
++    {"at": 60, "type": "alert-changed", "area": "test-body", "from": 0, "to": 1},
++    {"at": 120, "type": "hit", "by": "p:a", "target": "dummy-1", "player": "a"},
++    {"at": 130, "type": "hit", "by": "dummy-1", "target": "p:b", "player": null},
++    {"at": 150, "type": "impact", "entity": "dummy-1", "player": null, "other": null, "speed": 240},
++    {"at": 780, "type": "alert-changed", "area": "test-body", "from": 1, "to": 0}
++  ],
++  "ticks": 800,
++  "expect": [
++    {"fact": "event", "event": "hall-legend", "between": [780, 780], "count": [1, 1]},
++    {"fact": "event", "event": "hall-legend", "between": [0, 800], "count": [1, 1]},
++    {"fact": "event", "event": "hall-passed", "between": [0, 800], "count": [0, 0]},
++    {
++      "fact": "hall-record",
++      "n": 1,
++      "at": 800,
++      "kind": "escape",
++      "place": "test-body",
++      "who": [
++        "a",
++        "b"
++      ],
++      "title": "Gone from Test: bodies",
++      "stats": {"seconds": [12, 12], "highestAlert": [1, 1], "calls": [1, 1], "hits": [1, 1], "biggestImpact": [240, 240], "fell": [0, 0], "knockedOut": [0, 0]},
++      "frameAt": 150
++    },
++    {"fact": "hall-record", "n": 1, "at": 779, "absent": true},
++    {"fact": "entity-bytes", "entity": "hall:1", "between": [0, 800], "max": 500},
++    {"fact": "entity-bytes", "entity": "hall:watch", "between": [0, 800], "max": 800}
++  ]
++}
+diff --git a/scenarios/step7-hall-is-full.json b/scenarios/step7-hall-is-full.json
+new file mode 100644
+index 0000000..2fe7684
+--- /dev/null
++++ b/scenarios/step7-hall-is-full.json
+@@ -0,0 +1,234 @@
++{
++  "id": "step7-hall-is-full",
++  "//": "Eight stored records and seven pedestal tiles (content/hall/hall.json). DRAFT rule under test: the oldest record that has since been beaten leaves the floor (record 2, an escape beaten by record 5 in the same place); the store keeps every record regardless.",
++  "proves": "when the Hall room has more records than places to stand them, the oldest record that has since been beaten leaves the floor and every other one stands; nothing is lost from the count: the next record would be number 9",
++  "room": "test-body",
++  "players": [
++    {"id": "a", "character": "hero", "spawn": 0}
++  ],
++  "inputs": [],
++  "hall": [
++    {
++      "v": 1,
++      "n": 1,
++      "kind": "escape",
++      "title": "Stored 1",
++      "place": "test-body",
++      "ticks": 720,
++      "who": [
++        {"player": "z", "character": "grappler"}
++      ],
++      "stats": {"seconds": 12},
++      "score": 30,
++      "frame": {
++        "room": "test-body",
++        "bodies": [
++          [
++            "grappler",
++            100,
++            114,
++            1,
++            1
++          ]
++        ]
++      }
++    },
++    {
++      "v": 1,
++      "n": 2,
++      "kind": "escape",
++      "title": "Stored 2",
++      "place": "graybox-hall",
++      "ticks": 720,
++      "who": [
++        {"player": "z", "character": "grappler"}
++      ],
++      "stats": {"seconds": 12},
++      "score": 30,
++      "frame": {
++        "room": "graybox-hall",
++        "bodies": [
++          [
++            "grappler",
++            100,
++            114,
++            1,
++            1
++          ]
++        ]
++      }
++    },
++    {
++      "v": 1,
++      "n": 3,
++      "kind": "escape",
++      "title": "Stored 3",
++      "place": "test-shop",
++      "ticks": 720,
++      "who": [
++        {"player": "z", "character": "grappler"}
++      ],
++      "stats": {"seconds": 12},
++      "score": 30,
++      "frame": {
++        "room": "test-shop",
++        "bodies": [
++          [
++            "grappler",
++            100,
++            114,
++            1,
++            1
++          ]
++        ]
++      }
++    },
++    {
++      "v": 1,
++      "n": 4,
++      "kind": "last-stand",
++      "title": "Stored 4",
++      "place": "test-body",
++      "ticks": 720,
++      "who": [
++        {"player": "z", "character": "grappler"}
++      ],
++      "stats": {"seconds": 12},
++      "score": 30,
++      "frame": {
++        "room": "test-body",
++        "bodies": [
++          [
++            "grappler",
++            100,
++            114,
++            1,
++            1
++          ]
++        ]
++      }
++    },
++    {
++      "v": 1,
++      "n": 5,
++      "kind": "escape",
++      "title": "Stored 5",
++      "place": "graybox-hall",
++      "ticks": 720,
++      "who": [
++        {"player": "z", "character": "grappler"}
++      ],
++      "stats": {"seconds": 12},
++      "score": 45,
++      "frame": {
++        "room": "graybox-hall",
++        "bodies": [
++          [
++            "grappler",
++            100,
++            114,
++            1,
++            1
++          ]
++        ]
++      }
++    },
++    {
++      "v": 1,
++      "n": 6,
++      "kind": "last-stand",
++      "title": "Stored 6",
++      "place": "test-shop",
++      "ticks": 720,
++      "who": [
++        {"player": "z", "character": "grappler"}
++      ],
++      "stats": {"seconds": 12},
++      "score": 30,
++      "frame": {
++        "room": "test-shop",
++        "bodies": [
++          [
++            "grappler",
++            100,
++            114,
++            1,
++            1
++          ]
++        ]
++      }
++    },
++    {
++      "v": 1,
++      "n": 7,
++      "kind": "infiltration",
++      "title": "Stored 7",
++      "place": "test-body",
++      "ticks": 720,
++      "who": [
++        {"player": "z", "character": "grappler"}
++      ],
++      "stats": {"seconds": 12},
++      "score": 10,
++      "frame": {
++        "room": "test-body",
++        "bodies": [
++          [
++            "grappler",
++            100,
++            114,
++            1,
++            1
++          ]
++        ]
++      }
++    },
++    {
++      "v": 1,
++      "n": 8,
++      "kind": "infiltration",
++      "title": "Stored 8",
++      "place": "test-shop",
++      "ticks": 720,
++      "who": [
++        {"player": "z", "character": "grappler"}
++      ],
++      "stats": {"seconds": 12},
++      "score": 10,
++      "frame": {
++        "room": "test-shop",
++        "bodies": [
++          [
++            "grappler",
++            100,
++            114,
++            1,
++            1
++          ]
++        ]
++      }
++    }
++  ],
++  "events": [
++    {"at": 60, "type": "call-completed", "by": "dummy-1", "area": "test-body", "x": 260, "y": 150},
++    {"at": 60, "type": "alert-changed", "area": "test-body", "from": 0, "to": 1},
++    {"at": 120, "type": "hit", "by": "p:a", "target": "dummy-1", "player": "a"},
++    {"at": 130, "type": "hit", "by": "dummy-1", "target": "p:b", "player": null},
++    {"at": 150, "type": "impact", "entity": "dummy-1", "player": null, "other": null, "speed": 300},
++    {"at": 780, "type": "alert-changed", "area": "test-body", "from": 1, "to": 0}
++  ],
++  "ticks": 800,
++  "expect": [
++    {"fact": "hall-record", "n": 2, "at": 0, "absent": true},
++    {"fact": "hall-record", "n": 1, "at": 0},
++    {"fact": "hall-record", "n": 3, "at": 0},
++    {"fact": "hall-record", "n": 4, "at": 0},
++    {"fact": "hall-record", "n": 5, "at": 0},
++    {"fact": "hall-record", "n": 6, "at": 0},
++    {"fact": "hall-record", "n": 7, "at": 0},
++    {"fact": "hall-record", "n": 8, "at": 0},
++    {"fact": "hall-record", "n": 9, "at": 800, "kind": "escape", "who": ["a"]},
++    {"fact": "hall-record", "n": 1, "at": 800, "absent": true},
++    {"fact": "entity-bytes", "entity": "hall:watch", "between": [0, 800], "max": 800}
++  ]
++}
+diff --git a/scenarios/step7-last-stand-lost.json b/scenarios/step7-last-stand-lost.json
+new file mode 100644
+index 0000000..0c75b86
+--- /dev/null
++++ b/scenarios/step7-last-stand-lost.json
+@@ -0,0 +1,54 @@
++{
++  "id": "step7-last-stand-lost",
++  "//": "The events are scripted by hand: the systems that will really emit them (Step 4's calls and alert, Step 2's hits and impacts) are not built yet. So this proves how the detector handles such events, never that the game produces them, and it is deliberately not tagged for gate E.",
++  "proves": "losing counts: under an alert two players fight, one is knocked out and then the other; the moment both are down a last-stand record hangs crediting both, not before, and nothing more hangs when one gets up and the alert later dies down",
++  "room": "test-body",
++  "players": [
++    {"id": "a", "character": "hero", "spawn": 0},
++    {"id": "b", "character": "hero", "spawn": 1}
++  ],
++  "entities": [
++    {"id": "dummy-1", "character": "dummy", "tile": [16, 9]}
++  ],
++  "inputs": [
++    {"player": "a", "from": 30, "to": 100, "x": -1},
++    {"player": "a", "from": 140, "to": 170, "x": 1},
++    {"player": "b", "from": 100, "to": 160, "x": 1}
++  ],
++  "events": [
++    {"at": 60, "type": "call-completed", "by": "dummy-1", "area": "test-body", "x": 260, "y": 150},
++    {"at": 60, "type": "alert-changed", "area": "test-body", "from": 0, "to": 1},
++    {"at": 100, "type": "hit", "by": "p:a", "target": "dummy-1", "player": "a"},
++    {"at": 110, "type": "hit", "by": "p:b", "target": "dummy-1", "player": "b"},
++    {"at": 115, "type": "hit", "by": "p:a", "target": "dummy-1", "player": "a"},
++    {"at": 200, "type": "flattened", "target": "dummy-1", "by": "p:a"},
++    {"at": 300, "type": "impact", "entity": "dummy-1", "player": null, "other": null, "speed": 200},
++    {"at": 400, "type": "alert-changed", "area": "test-body", "from": 1, "to": 2},
++    {"at": 600, "type": "flattened", "target": "p:a", "by": null},
++    {"at": 900, "type": "flattened", "target": "p:b", "by": null},
++    {"at": 1000, "type": "recovered", "target": "p:a"},
++    {"at": 1100, "type": "alert-changed", "area": "test-body", "from": 2, "to": 0}
++  ],
++  "ticks": 1200,
++  "expect": [
++    {"fact": "event", "event": "hall-legend", "between": [0, 899], "count": [0, 0]},
++    {"fact": "event", "event": "hall-legend", "between": [900, 900], "count": [1, 1]},
++    {"fact": "event", "event": "hall-legend", "between": [901, 1200], "count": [0, 0]},
++    {"fact": "event", "event": "hall-passed", "between": [0, 1200], "count": [0, 0]},
++    {
++      "fact": "hall-record",
++      "n": 1,
++      "at": 1200,
++      "kind": "last-stand",
++      "place": "test-body",
++      "who": [
++        "a",
++        "b"
++      ],
++      "stats": {"seconds": [14, 14], "highestAlert": [2, 2], "hits": [3, 3], "knockedOut": [1, 1], "fell": [2, 2], "biggestImpact": [200, 200]},
++      "frameAt": 300
++    },
++    {"fact": "entity-bytes", "entity": "hall:1", "between": [0, 1200], "max": 500},
++    {"fact": "entity-bytes", "entity": "hall:watch", "between": [0, 1200], "max": 800}
++  ]
++}
+diff --git a/scenarios/step7-quiet-theft.json b/scenarios/step7-quiet-theft.json
+new file mode 100644
+index 0000000..017daca
+--- /dev/null
++++ b/scenarios/step7-quiet-theft.json
+@@ -0,0 +1,41 @@
++{
++  "id": "step7-quiet-theft",
++  "//": "The events are scripted by hand: the systems that will really emit them (Step 4's calls and alert, Step 2's hits and impacts) are not built yet. So this proves how the detector handles such events, never that the game produces them, and it is deliberately not tagged for gate E.",
++  "proves": "a theft nobody noticed is remembered: a player takes goods where the alert is 0, and after eight seconds with no call and no alert an infiltration record hangs crediting both players who were there, its picture taken at the taking",
++  "room": "test-body",
++  "players": [
++    {"id": "a", "character": "hero", "spawn": 0},
++    {"id": "b", "character": "hero", "spawn": 1}
++  ],
++  "entities": [
++    {"id": "dummy-1", "character": "dummy", "tile": [16, 9]}
++  ],
++  "inputs": [
++    {"player": "a", "from": 30, "to": 100, "x": -1},
++    {"player": "a", "from": 140, "to": 170, "x": 1},
++    {"player": "b", "from": 100, "to": 160, "x": 1}
++  ],
++  "events": [
++    {"at": 150, "type": "deed", "deed": "take", "by": "p:a", "player": "a", "target": null, "thing": "goods-1", "room": "test-body", "x": 100, "y": 140, "witnesses": []}
++  ],
++  "ticks": 700,
++  "expect": [
++    {"fact": "event", "event": "hall-legend", "between": [0, 629], "count": [0, 0]},
++    {"fact": "event", "event": "hall-legend", "between": [630, 630], "count": [1, 1]},
++    {
++      "fact": "hall-record",
++      "n": 1,
++      "at": 700,
++      "kind": "infiltration",
++      "place": "test-body",
++      "who": [
++        "a",
++        "b"
++      ],
++      "title": "Nobody Saw a Thing at Test: bodies",
++      "stats": {"taken": [1, 1], "seconds": [8, 8]},
++      "frameAt": 150
++    },
++    {"fact": "entity-bytes", "entity": "hall:1", "between": [0, 700], "max": 500}
++  ]
++}
+diff --git a/scenarios/step7-restored.json b/scenarios/step7-restored.json
+new file mode 100644
+index 0000000..4beec90
+--- /dev/null
++++ b/scenarios/step7-restored.json
+@@ -0,0 +1,127 @@
++{
++  "id": "step7-restored",
++  "//": "The events are scripted by hand: the systems that will really emit them (Step 4's calls and alert, Step 2's hits and impacts) are not built yet. So this proves how the detector handles such events, never that the game produces them, and it is deliberately not tagged for gate E. The two records in 'hall' stand for what the server's store will hand restoreHall() when it starts.",
++  "proves": "the Hall comes back after a restart: two stored records are put back on their pedestals before anyone plays, and the detector remembers them: an escape no greater than the stored one and a theft no greater than the stored one hang nothing, and a greater escape hangs as record 3 (not 1), titled from its own numbers",
++  "room": "test-body",
++  "players": [
++    {"id": "a", "character": "hero", "spawn": 0},
++    {"id": "b", "character": "hero", "spawn": 1}
++  ],
++  "entities": [
++    {"id": "dummy-1", "character": "dummy", "tile": [16, 9]}
++  ],
++  "inputs": [
++    {"player": "a", "from": 30, "to": 100, "x": -1},
++    {"player": "a", "from": 140, "to": 170, "x": 1},
++    {"player": "b", "from": 100, "to": 160, "x": 1}
++  ],
++  "hall": [
++    {
++      "v": 1,
++      "n": 2,
++      "kind": "infiltration",
++      "title": "Stored 2",
++      "place": "test-body",
++      "ticks": 720,
++      "who": [
++        {"player": "z", "character": "grappler"}
++      ],
++      "stats": {"taken": 1, "seconds": 8},
++      "score": 10,
++      "frame": {
++        "room": "test-body",
++        "bodies": [
++          [
++            "grappler",
++            100,
++            114,
++            1,
++            1
++          ]
++        ]
++      }
++    },
++    {
++      "v": 1,
++      "n": 1,
++      "kind": "escape",
++      "title": "Stored 1",
++      "place": "test-body",
++      "ticks": 720,
++      "who": [
++        {"player": "z", "character": "grappler"}
++      ],
++      "stats": {"seconds": 12},
++      "score": 41,
++      "frame": {
++        "room": "test-body",
++        "bodies": [
++          [
++            "grappler",
++            100,
++            114,
++            1,
++            1
++          ]
++        ]
++      }
++    }
++  ],
++  "events": [
++    {"at": 60, "type": "call-completed", "by": "dummy-1", "area": "test-body", "x": 260, "y": 150},
++    {"at": 60, "type": "alert-changed", "area": "test-body", "from": 0, "to": 1},
++    {"at": 120, "type": "hit", "by": "p:a", "target": "dummy-1", "player": "a"},
++    {"at": 130, "type": "hit", "by": "dummy-1", "target": "p:b", "player": null},
++    {"at": 150, "type": "impact", "entity": "dummy-1", "player": null, "other": null, "speed": 240},
++    {"at": 780, "type": "alert-changed", "area": "test-body", "from": 1, "to": 0},
++    {"at": 900, "type": "deed", "deed": "take", "by": "p:a", "player": "a", "target": null, "thing": "goods-1", "room": "test-body", "x": 100, "y": 140, "witnesses": []},
++    {"at": 1860, "type": "call-completed", "by": "dummy-1", "area": "test-body", "x": 260, "y": 150},
++    {"at": 1860, "type": "alert-changed", "area": "test-body", "from": 0, "to": 1},
++    {"at": 1920, "type": "hit", "by": "p:a", "target": "dummy-1", "player": "a"},
++    {"at": 1930, "type": "hit", "by": "dummy-1", "target": "p:b", "player": null},
++    {"at": 1950, "type": "impact", "entity": "dummy-1", "player": null, "other": null, "speed": 300},
++    {"at": 2760, "type": "alert-changed", "area": "test-body", "from": 1, "to": 0}
++  ],
++  "ticks": 2800,
++  "expect": [
++    {"fact": "hall-record", "n": 1, "at": 0, "kind": "escape", "place": "test-body", "title": "Stored 1"},
++    {
++      "fact": "hall-record",
++      "n": 2,
++      "at": 0,
++      "kind": "infiltration",
++      "stats": {"taken": [1, 1]}
++    },
++    {
++      "fact": "event-where",
++      "event": "hall-passed",
++      "where": {"kind": "escape", "place": "test-body", "score": 41, "why": "not-greater"},
++      "between": [
++        780,
++        780
++      ],
++      "count": [
++        1,
++        1
++      ]
++    },
++    {
++      "fact": "event-where",
++      "event": "hall-passed",
++      "where": {"kind": "infiltration", "place": "test-body", "score": 10, "why": "not-greater"},
++      "between": [
++        1380,
++        1380
++      ],
++      "count": [
++        1,
++        1
++      ]
++    },
++    {"fact": "event", "event": "hall-legend", "between": [0, 2759], "count": [0, 0]},
++    {"fact": "event", "event": "hall-legend", "between": [2760, 2760], "count": [1, 1]},
++    {"fact": "hall-record", "n": 3, "at": 2800, "kind": "escape", "who": ["a", "b"], "title": "15 Seconds Loose in Test: bodies"},
++    {"fact": "hall-record", "n": 1, "at": 2800, "kind": "escape"},
++    {"fact": "hall-record", "n": 4, "at": 2800, "absent": true}
++  ]
++}
+diff --git a/scenarios/step7-same-feat-twice.json b/scenarios/step7-same-feat-twice.json
+new file mode 100644
+index 0000000..bfe80a0
+--- /dev/null
++++ b/scenarios/step7-same-feat-twice.json
+@@ -0,0 +1,79 @@
++{
++  "id": "step7-same-feat-twice",
++  "//": "The events are scripted by hand: the systems that will really emit them (Step 4's calls and alert, Step 2's hits and impacts) are not built yet. So this proves how the detector handles such events, never that the game produces them, and it is deliberately not tagged for gate E.",
++  "proves": "greatness is relative to what was done before: the same escape twice in a row hangs one pedestal, and the repeat is weighed and passed over as no greater; a third that lasts longer and crashes harder beats the first and hangs a second pedestal",
++  "room": "test-body",
++  "players": [
++    {"id": "a", "character": "hero", "spawn": 0},
++    {"id": "b", "character": "hero", "spawn": 1}
++  ],
++  "entities": [
++    {"id": "dummy-1", "character": "dummy", "tile": [16, 9]}
++  ],
++  "inputs": [
++    {"player": "a", "from": 30, "to": 100, "x": -1},
++    {"player": "a", "from": 140, "to": 170, "x": 1},
++    {"player": "b", "from": 100, "to": 160, "x": 1}
++  ],
++  "events": [
++    {"at": 60, "type": "call-completed", "by": "dummy-1", "area": "test-body", "x": 260, "y": 150},
++    {"at": 60, "type": "alert-changed", "area": "test-body", "from": 0, "to": 1},
++    {"at": 120, "type": "hit", "by": "p:a", "target": "dummy-1", "player": "a"},
++    {"at": 130, "type": "hit", "by": "dummy-1", "target": "p:b", "player": null},
++    {"at": 150, "type": "impact", "entity": "dummy-1", "player": null, "other": null, "speed": 240},
++    {"at": 780, "type": "alert-changed", "area": "test-body", "from": 1, "to": 0},
++    {"at": 960, "type": "call-completed", "by": "dummy-1", "area": "test-body", "x": 260, "y": 150},
++    {"at": 960, "type": "alert-changed", "area": "test-body", "from": 0, "to": 1},
++    {"at": 1020, "type": "hit", "by": "p:a", "target": "dummy-1", "player": "a"},
++    {"at": 1030, "type": "hit", "by": "dummy-1", "target": "p:b", "player": null},
++    {"at": 1050, "type": "impact", "entity": "dummy-1", "player": null, "other": null, "speed": 240},
++    {"at": 1680, "type": "alert-changed", "area": "test-body", "from": 1, "to": 0},
++    {"at": 1860, "type": "call-completed", "by": "dummy-1", "area": "test-body", "x": 260, "y": 150},
++    {"at": 1860, "type": "alert-changed", "area": "test-body", "from": 0, "to": 1},
++    {"at": 1920, "type": "hit", "by": "p:a", "target": "dummy-1", "player": "a"},
++    {"at": 1930, "type": "hit", "by": "dummy-1", "target": "p:b", "player": null},
++    {"at": 1950, "type": "impact", "entity": "dummy-1", "player": null, "other": null, "speed": 300},
++    {"at": 2760, "type": "alert-changed", "area": "test-body", "from": 1, "to": 0}
++  ],
++  "ticks": 2800,
++  "expect": [
++    {"fact": "event", "event": "hall-legend", "between": [0, 1859], "count": [1, 1]},
++    {
++      "fact": "event-where",
++      "event": "hall-passed",
++      "where": {"kind": "escape", "place": "test-body", "score": 41, "why": "not-greater"},
++      "between": [
++        1680,
++        1680
++      ],
++      "count": [
++        1,
++        1
++      ]
++    },
++    {"fact": "event", "event": "hall-passed", "between": [0, 2800], "count": [1, 1]},
++    {"fact": "hall-record", "n": 2, "at": 1859, "absent": true},
++    {"fact": "event", "event": "hall-legend", "between": [2760, 2760], "count": [1, 1]},
++    {
++      "fact": "hall-record",
++      "n": 1,
++      "at": 2800,
++      "kind": "escape",
++      "stats": {"biggestImpact": [240, 240]}
++    },
++    {
++      "fact": "hall-record",
++      "n": 2,
++      "at": 2800,
++      "kind": "escape",
++      "who": [
++        "a",
++        "b"
++      ],
++      "stats": {"seconds": [15, 15], "biggestImpact": [300, 300]},
++      "frameAt": 1950
++    },
++    {"fact": "hall-record", "n": 3, "at": 2800, "absent": true},
++    {"fact": "entity-bytes", "entity": "hall:watch", "between": [0, 2800], "max": 800}
++  ]
++}
+diff --git a/scenarios/step7-scuffle-is-not.json b/scenarios/step7-scuffle-is-not.json
+new file mode 100644
+index 0000000..dc9e144
+--- /dev/null
++++ b/scenarios/step7-scuffle-is-not.json
+@@ -0,0 +1,29 @@
++{
++  "id": "step7-scuffle-is-not",
++  "//": "The events are scripted by hand: the systems that will really emit them (Step 4's calls and alert, Step 2's hits and impacts) are not built yet. So this proves how the detector handles such events, never that the game produces them, and it is deliberately not tagged for gate E.",
++  "proves": "the control for the escape: the very same hits and crash with no call and no alert are an ordinary scuffle; no episode opens, so nothing hangs and nothing is even weighed",
++  "room": "test-body",
++  "players": [
++    {"id": "a", "character": "hero", "spawn": 0},
++    {"id": "b", "character": "hero", "spawn": 1}
++  ],
++  "entities": [
++    {"id": "dummy-1", "character": "dummy", "tile": [16, 9]}
++  ],
++  "inputs": [
++    {"player": "a", "from": 30, "to": 100, "x": -1},
++    {"player": "a", "from": 140, "to": 170, "x": 1},
++    {"player": "b", "from": 100, "to": 160, "x": 1}
++  ],
++  "events": [
++    {"at": 120, "type": "hit", "by": "p:a", "target": "dummy-1", "player": "a"},
++    {"at": 130, "type": "hit", "by": "dummy-1", "target": "p:b", "player": null},
++    {"at": 150, "type": "impact", "entity": "dummy-1", "player": null, "other": null, "speed": 240}
++  ],
++  "ticks": 800,
++  "expect": [
++    {"fact": "event", "event": "hall-legend", "between": [0, 800], "count": [0, 0]},
++    {"fact": "event", "event": "hall-passed", "between": [0, 800], "count": [0, 0]},
++    {"fact": "hall-record", "n": 1, "at": 800, "absent": true}
++  ]
++}
+diff --git a/scenarios/step7-solo-counts.json b/scenarios/step7-solo-counts.json
+new file mode 100644
+index 0000000..553afa2
+--- /dev/null
++++ b/scenarios/step7-solo-counts.json
+@@ -0,0 +1,38 @@
++{
++  "id": "step7-solo-counts",
++  "//": "The events are scripted by hand: the systems that will really emit them (Step 4's calls and alert, Step 2's hits and impacts) are not built yet. So this proves how the detector handles such events, never that the game produces them, and it is deliberately not tagged for gate E.",
++  "proves": "solo is never locked out by headcount: one player alone, with the same call, hit, crash and calm, earns the same escape record, crediting just them",
++  "room": "test-body",
++  "players": [
++    {"id": "a", "character": "hero", "spawn": 0}
++  ],
++  "entities": [
++    {"id": "dummy-1", "character": "dummy", "tile": [16, 9]}
++  ],
++  "inputs": [
++    {"player": "a", "from": 30, "to": 100, "x": -1},
++    {"player": "a", "from": 140, "to": 170, "x": 1}
++  ],
++  "events": [
++    {"at": 60, "type": "call-completed", "by": "dummy-1", "area": "test-body", "x": 260, "y": 150},
++    {"at": 60, "type": "alert-changed", "area": "test-body", "from": 0, "to": 1},
++    {"at": 120, "type": "hit", "by": "p:a", "target": "dummy-1", "player": "a"},
++    {"at": 150, "type": "impact", "entity": "dummy-1", "player": null, "other": null, "speed": 240},
++    {"at": 780, "type": "alert-changed", "area": "test-body", "from": 1, "to": 0}
++  ],
++  "ticks": 800,
++  "expect": [
++    {"fact": "event", "event": "hall-legend", "between": [780, 780], "count": [1, 1]},
++    {
++      "fact": "hall-record",
++      "n": 1,
++      "at": 800,
++      "kind": "escape",
++      "who": [
++        "a"
++      ],
++      "stats": {"seconds": [12, 12], "hits": [1, 1]},
++      "frameAt": 150
++    }
++  ]
++}
+diff --git a/scenarios/step7-theft-noticed.json b/scenarios/step7-theft-noticed.json
+new file mode 100644
+index 0000000..8a297b8
+--- /dev/null
++++ b/scenarios/step7-theft-noticed.json
+@@ -0,0 +1,28 @@
++{
++  "id": "step7-theft-noticed",
++  "//": "The events are scripted by hand: the systems that will really emit them (Step 4's calls and alert, Step 2's hits and impacts) are not built yet. So this proves how the detector handles such events, never that the game produces them, and it is deliberately not tagged for gate E.",
++  "proves": "the control for the quiet theft: the same taking, but somebody starts calling for help five seconds later; it was noticed, so it closes as nothing: no record, and nothing weighed",
++  "room": "test-body",
++  "players": [
++    {"id": "a", "character": "hero", "spawn": 0},
++    {"id": "b", "character": "hero", "spawn": 1}
++  ],
++  "entities": [
++    {"id": "dummy-1", "character": "dummy", "tile": [16, 9]}
++  ],
++  "inputs": [
++    {"player": "a", "from": 30, "to": 100, "x": -1},
++    {"player": "a", "from": 140, "to": 170, "x": 1},
++    {"player": "b", "from": 100, "to": 160, "x": 1}
++  ],
++  "events": [
++    {"at": 150, "type": "deed", "deed": "take", "by": "p:a", "player": "a", "target": null, "thing": "goods-1", "room": "test-body", "x": 100, "y": 140, "witnesses": []},
++    {"at": 450, "type": "call-started", "by": "dummy-1"}
++  ],
++  "ticks": 700,
++  "expect": [
++    {"fact": "event", "event": "hall-legend", "between": [0, 700], "count": [0, 0]},
++    {"fact": "event", "event": "hall-passed", "between": [0, 700], "count": [0, 0]},
++    {"fact": "hall-record", "n": 1, "at": 700, "absent": true}
++  ]
++}
+diff --git a/src/content/kinds/hall.ts b/src/content/kinds/hall.ts
+new file mode 100644
+index 0000000..9de687a
+--- /dev/null
++++ b/src/content/kinds/hall.ts
+@@ -0,0 +1,247 @@
++import { describe, isRecord, known } from '../reader.ts';
++import type { ContentKind, Reader } from '../types.ts';
++
++/**
++ * content/hall/hall.json: everything the Hall of Legends is made of that
++ * is not code: where the pedestals stand, which of the simulation's events
++ * the detector listens to, what it counts, and the kinds of legend with
++ * their names, titles, floors and scoring (docs/mechanisms/hall-of-legends.md).
++ *
++ * INTENT (design library doc 00: "Do not turn the Hall into a preset
++ * achievements checklist instead of a memory of actual events"): nothing
++ * here names a place, a person or a deed to perform. It says how to
++ * recognise and weigh *what happened*; what a room or a person is never
++ * says "this is a legend".
++ */
++export interface Hall {
++  /** The room the pedestals stand in. */
++  room: string;
++  /** Where pedestals are put, [column, row], in the order they fill. */
++  pedestals: [number, number][];
++  /** How long, in seconds, a taking must stay unnoticed to be a quiet theft. */
++  quietSeconds: number;
++  /** The happenings the detector's episodes are built from, each mapped to one of the simulation's events. */
++  signals: Record<SignalId, Signal>;
++  /** How to tell where an event happened: fields that hold a room id, then fields that hold an entity id (its room is the place). */
++  where: { fields: string[]; entities: string[] };
++  stats: Record<string, HallStat>;
++  kinds: Record<string, HallKind>;
++}
++
++/**
++ * The six happenings the two episode shapes are built from. Which event
++ * each one is, and which of its fields to read, is data, so another step
++ * renaming an event is a one-line edit of content/hall/hall.json.
++ */
++export const SIGNALS = {
++  alert: { what: "an area's alert changed", fields: ['from', 'to'] },
++  call: { what: 'somebody started calling for help', fields: [] },
++  taking: { what: 'somebody took goods', fields: ['by'] },
++  impact: { what: 'a flying body struck something', fields: ['speed'] },
++  down: { what: 'a body was knocked out', fields: ['who'] },
++  up: { what: 'a knocked-out body got back up', fields: ['who'] },
++} as const;
++export type SignalId = keyof typeof SIGNALS;
++
++export interface Signal {
++  /** The event type. */
++  event: string;
++  /** Only events whose fields equal all of these count (e.g. `deed` with `{ "deed": "take" }`). */
++  match: Record<string, string | number | boolean>;
++  /** The signal's own field names (SIGNALS) -> the event's field names. */
++  fields: Record<string, string>;
++}
++
++export const STAT_HOWS = ['count', 'max', 'sum', 'seconds'] as const;
++export type StatHow = (typeof STAT_HOWS)[number];
++export const STAT_WHOSE = ['player', 'other'] as const;
++
++/** One number a record can carry, and how it is counted from the episode's events. */
++export interface HallStat {
++  /** Shown text. */
++  label: string;
++  /** count: how many such events; max / sum: of `field`; seconds: how long the episode lasted (no event). */
++  how: StatHow;
++  event?: string;
++  match: Record<string, string | number | boolean>;
++  /** For max and sum: the event field holding the number. */
++  field?: string;
++  /** Count only events whose `who` field names an entity that `is` a player's ("player") or nobody's ("other"). */
++  who?: string;
++  is?: (typeof STAT_WHOSE)[number];
++}
++
++/** The two episode shapes the detector knows (src/sim/hall/detect.ts) and the ways each can end as a legend. */
++export const EPISODES = { trouble: ['calm', 'all-down'], quiet: ['unnoticed'] } as const;
++export type EpisodeId = keyof typeof EPISODES;
++
++export interface HallKind {
++  id: string;
++  /** Shown name of the kind. */
++  name: string;
++  /** Which episode shape, and which ending of it, is this kind of legend. */
++  episode: EpisodeId;
++  ending: string;
++  /** Title templates: `{place}` and `{<stat id>}` are filled in. Picked by the record's number, never at random. */
++  titles: string[];
++  /** The least score that hangs anything. */
++  floor: number;
++  /** Stat id -> how much one of it adds to the score. */
++  score: Record<string, number>;
++}
++
++/** The character kind (content/characters/) a record's pedestal is. */
++export const PEDESTAL_CHARACTER = 'pedestal';
++
++declare module '../types.ts' {
++  interface Content {
++    hall: Hall;
++  }
++}
++
++const FILE = 'content/hall/hall.json';
++
++function matchOf(read: Reader, o: Record<string, unknown>, where: string): Record<string, string | number | boolean> {
++  const out: Record<string, string | number | boolean> = {};
++  if (o.match === undefined) return out;
++  const m = read.object(o.match, `${where}.match`);
++  for (const [k, v] of Object.entries(m ?? {})) {
++    if (k === '//') continue;
++    if (typeof v === 'string' || typeof v === 'number' || typeof v === 'boolean') out[k] = v;
++    else read.fail(`${where}.match.${k}`, `must be text, a number or true/false, but is ${describe(v)}`);
++  }
++  return out;
++}
++
++const kind: ContentKind = {
++  id: 'hall',
++  source: { file: 'hall/hall.json' },
++  parse(raw, read) {
++    const out: Hall = { room: '', pedestals: [], quietSeconds: 1, signals: {} as Hall['signals'], where: { fields: [], entities: [] }, stats: {}, kinds: {} };
++    const o = read.object(raw, '');
++    if (!o) return out;
++    read.only(o, ['room', 'pedestals', 'quietSeconds', 'signals', 'where', 'stats', 'kinds'], '');
++    out.room = read.string(o, 'room', '');
++    out.quietSeconds = read.number(o, 'quietSeconds', '', { min: 0.1, max: 600 });
++
++    if (!Array.isArray(o.pedestals) || o.pedestals.length === 0) read.fail('pedestals', `must list at least one [column, row], but is ${describe(o.pedestals)}`);
++    else {
++      o.pedestals.forEach((t: unknown, i: number) => {
++        if (Array.isArray(t) && t.length === 2 && t.every((n) => Number.isInteger(n) && n >= 0)) out.pedestals.push([t[0], t[1]]);
++        else read.fail(`pedestals[${i}]`, `must be [column, row], but is ${JSON.stringify(t)}`);
++      });
++    }
++
++    const signals = read.object(o.signals, 'signals');
++    if (signals) {
++      read.only(signals, Object.keys(SIGNALS), 'signals');
++      for (const id of Object.keys(SIGNALS) as SignalId[]) {
++        const w = `signals.${id}`;
++        if (signals[id] === undefined) {
++          read.fail(w, `missing: the detector listens for it (${SIGNALS[id].what})`);
++          continue;
++        }
++        const s = read.object(signals[id], w);
++        if (!s) continue;
++        const names: readonly string[] = SIGNALS[id].fields;
++        read.only(s, ['event', 'match', ...names], w);
++        const fields: Record<string, string> = {};
++        for (const f of names) fields[f] = read.string(s, f, w);
++        out.signals[id] = { event: read.string(s, 'event', w), match: matchOf(read, s, w), fields };
++      }
++    }
++
++    const where = read.object(o.where, 'where');
++    if (where) {
++      read.only(where, ['fields', 'entities'], 'where');
++      out.where = { fields: read.stringList(where, 'fields', 'where'), entities: read.stringList(where, 'entities', 'where') };
++    }
++
++    const stats = read.object(o.stats, 'stats');
++    for (const [id, value] of Object.entries(stats ?? {})) {
++      if (id === '//') continue;
++      const w = `stats.${id}`;
++      // A stat id is a slot in a title template and a key in stored records, so it is kept to plain letters and digits.
++      if (!/^[a-z][A-Za-z0-9]*$/.test(id)) read.fail(w, `"${id}" is not a valid stat id: letters and digits only, starting with a lower-case letter`);
++      if (id === 'place') read.fail(w, '"place" is the title slot for where it happened; a stat needs another id');
++      const s = read.object(value, w);
++      if (!s) continue;
++      read.only(s, ['label', 'how', 'event', 'match', 'field', 'who', 'is'], w);
++      const how = s.how as StatHow;
++      if (!STAT_HOWS.includes(how)) {
++        read.fail(`${w}.how`, `must be one of ${STAT_HOWS.join(', ')}, but is ${describe(s.how)}`);
++        continue;
++      }
++      const stat: HallStat = { label: read.string(s, 'label', w), how, match: matchOf(read, s, w) };
++      if (how === 'seconds') {
++        for (const f of ['event', 'match', 'field', 'who', 'is']) if (s[f] !== undefined) read.fail(`${w}.${f}`, 'a "seconds" stat is the length of the episode and reads no event');
++      } else {
++        stat.event = read.string(s, 'event', w);
++        if (how === 'count') {
++          if (s.field !== undefined) read.fail(`${w}.field`, 'a "count" stat counts events and reads no field');
++        } else stat.field = read.string(s, 'field', w);
++        if ((s.who === undefined) !== (s.is === undefined)) read.fail(`${w}.who`, 'give who and is together (which field names an entity, and whether it must be a player\'s), or neither');
++        else if (s.who !== undefined) {
++          stat.who = read.string(s, 'who', w);
++          if (STAT_WHOSE.includes(s.is as 'player')) stat.is = s.is as 'player';
++          else read.fail(`${w}.is`, `must be one of ${STAT_WHOSE.join(', ')}, but is ${describe(s.is)}`);
++        }
++      }
++      out.stats[id] = stat;
++    }
++
++    const kinds = read.object(o.kinds, 'kinds');
++    for (const [id, value] of Object.entries(kinds ?? {})) {
++      if (id === '//') continue;
++      const w = `kinds.${id}`;
++      if (!/^[a-z][a-z0-9]*(-[a-z0-9]+)*$/.test(id)) read.fail(w, `"${id}" is not a valid id: use lower-case letters, digits and dashes, starting with a letter`);
++      const k = read.object(value, w);
++      if (!k) continue;
++      read.only(k, ['name', 'episode', 'ending', 'titles', 'floor', 'score'], w);
++      const hk: HallKind = { id, name: read.string(k, 'name', w), episode: 'trouble', ending: '', titles: read.stringList(k, 'titles', w), floor: read.number(k, 'floor', w, { min: 0 }), score: {} };
++      if (typeof k.episode === 'string' && Object.hasOwn(EPISODES, k.episode)) {
++        hk.episode = k.episode as EpisodeId;
++        const endings: readonly string[] = EPISODES[hk.episode];
++        if (typeof k.ending === 'string' && endings.includes(k.ending)) hk.ending = k.ending;
++        else read.fail(`${w}.ending`, `must be one of ${endings.join(', ')} (the ways a "${hk.episode}" episode can end as a legend), but is ${describe(k.ending)}`);
++      } else read.fail(`${w}.episode`, `must be one of ${Object.keys(EPISODES).join(', ')}, but is ${describe(k.episode)}`);
++      if (hk.titles.length === 0) read.fail(`${w}.titles`, 'must hold at least one title');
++      hk.titles.forEach((t, i) => {
++        for (const slot of t.match(/\{[^}]*\}/g) ?? []) {
++          const name = slot.slice(1, -1);
++          if (name !== 'place' && !(isRecord(stats) && name in stats)) read.fail(`${w}.titles[${i}]`, `unknown slot ${slot}: use {place} or a stat id in braces (stats: ${isRecord(stats) ? known(stats) : 'none'})`);
++        }
++      });
++      const score = read.object(k.score, `${w}.score`);
++      for (const [stat, weight] of Object.entries(score ?? {})) {
++        if (stat === '//') continue;
++        if (!(isRecord(stats) && stat in stats)) read.fail(`${w}.score.${stat}`, `no stat "${stat}" (stats: ${isRecord(stats) ? known(stats) : 'none'})`);
++        else if (typeof weight !== 'number' || !Number.isFinite(weight)) read.fail(`${w}.score.${stat}`, `must be a number, but is ${describe(weight)}`);
++        else hk.score[stat] = weight;
++      }
++      out.kinds[id] = hk;
++    }
++    // Two kinds with the same episode and ending would both claim the same happening.
++    const seen: Record<string, string> = {};
++    for (const k of Object.values(out.kinds)) {
++      const key = `${k.episode}/${k.ending}`;
++      if (k.ending !== '' && seen[key] !== undefined) read.fail(`kinds.${k.id}.ending`, `kind "${seen[key]}" is already the "${k.ending}" ending of a "${k.episode}" episode`);
++      seen[key] = k.id;
++    }
++    return out;
++  },
++  check(content, fail) {
++    const h = content.hall;
++    const room = content.rooms[h.room];
++    if (!room) fail(FILE, 'room', `no room "${h.room}" (rooms: ${known(content.rooms)})`);
++    else {
++      h.pedestals.forEach(([tx, ty], i) => {
++        if (tx >= room.w || ty >= room.h) fail(FILE, `pedestals[${i}]`, `[${tx}, ${ty}] is outside room "${room.id}", which is ${room.w} by ${room.h} tiles`);
++      });
++    }
++    if (!(PEDESTAL_CHARACTER in content.characters)) {
++      fail(`content/characters/${PEDESTAL_CHARACTER}.json`, '(the whole file)', 'missing: a Hall record hangs on a body of this character kind');
++    }
++  },
++};
++export default kind;
+diff --git a/src/scenarios/facts/entity-bytes.ts b/src/scenarios/facts/entity-bytes.ts
+new file mode 100644
+index 0000000..154fd3c
+--- /dev/null
++++ b/src/scenarios/facts/entity-bytes.ts
+@@ -0,0 +1,39 @@
++import { checkOnly, isRange, isTick } from '../fact-helpers.ts';
++import type { Fact } from '../types.ts';
++
++/**
++ * { "fact": "entity-bytes", "entity": "hall:watch", "between": [0, 600], "max": 800 }
++ * On every tick of the span on which entity `entity` is in the world, it
++ * is at most `max` characters of JSON (what the network sends for it), and
++ * it is in the world on at least one of them. Any entity id may be named,
++ * including ones the simulation makes itself.
++ */
++const fact: Fact = {
++  id: 'entity-bytes',
++  validate(spec, scenario) {
++    const out: string[] = [];
++    checkOnly(spec, ['entity', 'between', 'max'], out);
++    if (typeof spec.entity !== 'string' || spec.entity === '') out.push(`entity: must be an entity id, but is ${JSON.stringify(spec.entity)}`);
++    const b = spec.between;
++    if (!isRange(b) || !isTick(b[0], scenario) || !isTick(b[1], scenario)) out.push(`between: must be [first tick, last tick] within 0 to ${scenario.ticks}, but is ${JSON.stringify(b)}`);
++    if (typeof spec.max !== 'number' || spec.max < 1) out.push(`max: must be a number of characters from 1, but is ${JSON.stringify(spec.max)}`);
++    return out;
++  },
++  test(spec, rec) {
++    const [from, to] = spec.between as [number, number];
++    let biggest = -1;
++    let when = -1;
++    for (let t = from; t <= to; t++) {
++      const e = rec.history[t]?.entities.find((x) => x.id === spec.entity);
++      if (!e) continue;
++      const size = JSON.stringify(e).length;
++      if (size > biggest) {
++        biggest = size;
++        when = t;
++      }
++    }
++    if (biggest < 0) return `entity ${String(spec.entity)} is not in the world on any tick from ${from} to ${to}`;
++    return biggest <= (spec.max as number) ? null : `entity ${String(spec.entity)} is ${biggest} characters of JSON at tick ${when}, expected at most ${String(spec.max)}`;
++  },
++};
++export default fact;
+diff --git a/src/scenarios/facts/hall-record.ts b/src/scenarios/facts/hall-record.ts
+new file mode 100644
+index 0000000..f2d0a1b
+--- /dev/null
++++ b/src/scenarios/facts/hall-record.ts
+@@ -0,0 +1,86 @@
++import { describe, isRecord, known } from '../../content/reader.ts';
++import { FRAME_CREDITED, PEDESTAL_KIND, pedestalId } from '../../sim/hall/record.ts';
++import { checkAt, checkOnly, isRange, isTick } from '../fact-helpers.ts';
++import type { Fact } from '../types.ts';
++
++/**
++ * { "fact": "hall-record", "n": 1, "at": 600, "kind": "escape", "place": "test-body",
++ *   "who": ["a", "b"], "stats": { "hits": [1, 1], "calls": [0, 0] }, "frameAt": 240 }
++ * At tick `at`, Hall of Legends record number `n` hangs on its pedestal
++ * (entity `hall:<n>`, a pedestal body, in the Hall room) and, for each
++ * field given: is of that `kind`, happened in room `place`, credits exactly
++ * the players `who`, has each named stat within [min, max] (a stat the
++ * record does not carry counts as 0), has that `title`, and its picture
++ * was taken on tick `frameAt`: every credited player's character is in the
++ * frame exactly where the world had it at the end of that tick.
++ * { "fact": "hall-record", "n": 2, "at": 600, "absent": true } says no such pedestal stands.
++ */
++const fact: Fact = {
++  id: 'hall-record',
++  validate(spec, scenario, content) {
++    const out: string[] = [];
++    checkOnly(spec, ['n', 'at', 'absent', 'kind', 'place', 'who', 'stats', 'title', 'frameAt'], out);
++    checkAt(spec, scenario, out);
++    if (typeof spec.n !== 'number' || !Number.isInteger(spec.n) || spec.n < 1) out.push(`n: must be a record number from 1, but is ${JSON.stringify(spec.n)}`);
++    if (spec.absent !== undefined && spec.absent !== true) out.push('absent: must be true or left out');
++    if (spec.absent === true && Object.keys(spec).some((k) => !['fact', '//', 'n', 'at', 'absent'].includes(k))) out.push('absent: a record that must not hang takes only n and at');
++    if (spec.kind !== undefined && (typeof spec.kind !== 'string' || !(spec.kind in content.hall.kinds))) out.push(`kind: no kind of legend ${JSON.stringify(spec.kind)} (kinds: ${known(content.hall.kinds)})`);
++    if (spec.place !== undefined && (typeof spec.place !== 'string' || !(spec.place in content.rooms))) out.push(`place: no room ${JSON.stringify(spec.place)}`);
++    if (spec.who !== undefined && (!Array.isArray(spec.who) || spec.who.some((p) => !scenario.players.some((q) => q.id === p)))) {
++      out.push(`who: must list players of this scenario (${scenario.players.map((p) => p.id).join(', ')}), but is ${JSON.stringify(spec.who)}`);
++    }
++    if (spec.stats !== undefined) {
++      if (!isRecord(spec.stats)) out.push(`stats: must be an object of stat id: [min, max], but is ${describe(spec.stats)}`);
++      else {
++        for (const [id, range] of Object.entries(spec.stats)) {
++          if (!(id in content.hall.stats)) out.push(`stats.${id}: no stat "${id}" (stats: ${known(content.hall.stats)})`);
++          else if (!isRange(range)) out.push(`stats.${id}: must be [min, max], but is ${JSON.stringify(range)}`);
++        }
++      }
++    }
++    if (spec.title !== undefined && typeof spec.title !== 'string') out.push(`title: must be text, but is ${describe(spec.title)}`);
++    if (spec.frameAt !== undefined && (!isTick(spec.frameAt, scenario) || spec.frameAt >= scenario.ticks)) out.push(`frameAt: must be a tick from 0 to ${scenario.ticks - 1}, but is ${JSON.stringify(spec.frameAt)}`);
++    return out;
++  },
++  test(spec, rec) {
++    const at = spec.at as number;
++    const id = pedestalId(spec.n as number);
++    const e = rec.history[at]?.entities.find((x) => x.id === id);
++    const hung = rec.events.filter((ev) => ev.type === 'hall-legend' || ev.type === 'hall-passed').map((ev) => JSON.stringify(ev));
++    const story = `Hall events in this run: ${hung.join(' ') || 'none'}`;
++    if (spec.absent === true) return e ? `${id} stands at tick ${at}, expected no such pedestal; ${story}` : null;
++    if (!e) return `no entity ${id} at tick ${at}; ${story}`;
++    const record = e.c.hall?.record;
++    if (!record) return `${id} carries no record (entity.c.hall) at tick ${at}`;
++    const wrong: string[] = [];
++    if (e.kind !== PEDESTAL_KIND) wrong.push(`its body is the kind "${e.kind}", expected "${PEDESTAL_KIND}"`);
++    if (e.room !== rec.content.hall.room) wrong.push(`it stands in room "${e.room}", expected the Hall room "${rec.content.hall.room}"`);
++    if (record.n !== spec.n) wrong.push(`its record says n ${record.n}`);
++    if (spec.kind !== undefined && record.kind !== spec.kind) wrong.push(`kind is "${record.kind}", expected "${String(spec.kind)}"`);
++    if (spec.place !== undefined && record.place !== spec.place) wrong.push(`place is "${record.place}", expected "${String(spec.place)}"`);
++    if (spec.title !== undefined && record.title !== spec.title) wrong.push(`title is ${JSON.stringify(record.title)}, expected ${JSON.stringify(spec.title)}`);
++    if (spec.who !== undefined) {
++      const got = record.who.map((w) => w.player).sort();
++      const want = [...(spec.who as string[])].sort();
++      if (JSON.stringify(got) !== JSON.stringify(want)) wrong.push(`it credits ${JSON.stringify(got)}, expected ${JSON.stringify(want)}`);
++    }
++    for (const [stat, range] of Object.entries((spec.stats as Record<string, [number, number]> | undefined) ?? {})) {
++      const v = record.stats[stat] ?? 0;
++      if (v < range[0] || v > range[1]) wrong.push(`stat ${stat} is ${v}, expected ${range[0]} to ${range[1]} (its stats: ${JSON.stringify(record.stats)})`);
++    }
++    if (spec.frameAt !== undefined) {
++      // The detector runs last in a tick, so the picture of tick T is the world as that step left it.
++      const then = rec.history[(spec.frameAt as number) + 1]!;
++      if (record.frame.room !== record.place) wrong.push(`the picture is of room "${record.frame.room}", not of "${record.place}"`);
++      for (const w of record.who) {
++        const p = then.entities.find((x) => x.player === w.player);
++        if (!p) continue;
++        const want = [p.kind, Math.round(p.x), Math.round(p.y), p.facing];
++        const found = record.frame.bodies.some((b) => (b[4] & FRAME_CREDITED) !== 0 && JSON.stringify(b.slice(0, 4)) === JSON.stringify(want));
++        if (!found) wrong.push(`the picture was not taken on tick ${String(spec.frameAt)}: player ${w.player} was then ${JSON.stringify(want)}, and the picture holds ${JSON.stringify(record.frame.bodies)}`);
++      }
++    }
++    return wrong.length ? `${id} at tick ${at}: ${wrong.join('; ')}` : null;
++  },
++};
++export default fact;
+diff --git a/src/scenarios/run.ts b/src/scenarios/run.ts
+index 9584a40..b8d2e29 100644
+--- a/src/scenarios/run.ts
++++ b/src/scenarios/run.ts
+@@ -2,6 +2,8 @@ import { describe, isRecord, known } from '../content/reader.ts';
+ import type { Content, Problem } from '../content/types.ts';
+ import { TILE } from '../content/kinds/rooms.ts';
+ import { setTile } from '../sim/room-state.ts';
++import { restoreHall } from '../sim/hall/index.ts';
++import type { HallRecord } from '../sim/hall/record.ts';
+ import { step } from '../sim/step.ts';
+ import type { Input, SimEvent, World } from '../sim/types.ts';
+ import { createWorld, populateRoom, spawnBody, spawnPlayer } from '../sim/world.ts';
+@@ -21,7 +23,7 @@ export function parseScenario(raw: unknown, file: string, stem: string, content:
+     fail('(the whole file)', `must be an object, but is ${describe(raw)}`);
+     return null;
+   }
+-  const fields = ['id', 'gate', 'proves', 'room', 'players', 'entities', 'placements', 'tiles', 'inputs', 'ticks', 'expect'];
++  const fields = ['id', 'gate', 'proves', 'room', 'players', 'entities', 'placements', 'tiles', 'inputs', 'events', 'hall', 'ticks', 'expect'];
+   for (const key of Object.keys(raw)) {
+     if (key !== '//' && !fields.includes(key)) fail(key, `unknown field (known fields: ${fields.join(', ')})`);
+   }
+@@ -146,6 +148,43 @@ export function parseScenario(raw: unknown, file: string, stem: string, content:
+     });
+   }
+ 
++  // Step 7: events scripted by hand, standing in for systems not built yet (docs/mechanisms/scenarios.md).
++  const scripted: NonNullable<Scenario['events']> = [];
++  if (raw.events !== undefined && !Array.isArray(raw.events)) fail('events', `must be a list, but is ${describe(raw.events)}`);
++  else {
++    ((raw.events as unknown[] | undefined) ?? []).forEach((e: unknown, i: number) => {
++      const w = `events[${i}]`;
++      if (!isRecord(e)) return fail(w, `must be an object, but is ${describe(e)}`);
++      const atOk = typeof e.at === 'number' && Number.isInteger(e.at) && e.at >= 0 && (!ticksOk || e.at < (ticks as number));
++      if (!atOk) fail(`${w}.at`, `must be a whole tick from 0 to one before the scenario's last (${ticksOk ? (ticks as number) - 1 : '?'}), but is ${JSON.stringify(e.at)}`);
++      if (typeof e.type !== 'string' || e.type === '') fail(`${w}.type`, `must name an event type, but is ${describe(e.type)}`);
++      if (e.tick !== undefined) fail(`${w}.tick`, 'say when with "at"; the simulation stamps the tick itself');
++      if (atOk && typeof e.type === 'string' && e.type !== '') {
++        const { '//': _note, ...rest } = e;
++        scripted.push(rest as NonNullable<Scenario['events']>[number]);
++      }
++    });
++  }
++
++  // Step 7: Hall records already stored when the scenario starts.
++  const stored: HallRecord[] = [];
++  if (raw.hall !== undefined && !Array.isArray(raw.hall)) fail('hall', `must be a list of Hall records, but is ${describe(raw.hall)}`);
++  else {
++    ((raw.hall as unknown[] | undefined) ?? []).forEach((r: unknown, i: number) => {
++      const w = `hall[${i}]`;
++      if (!isRecord(r)) return fail(w, `must be an object, but is ${describe(r)}`);
++      const frame = r.frame;
++      if (r.v !== 1) fail(`${w}.v`, `must be 1, but is ${JSON.stringify(r.v)}`);
++      else if (typeof r.n !== 'number' || !Number.isInteger(r.n) || r.n < 1) fail(`${w}.n`, `must be a whole number from 1, but is ${JSON.stringify(r.n)}`);
++      else if (stored.some((q) => q.n === r.n)) fail(`${w}.n`, `record ${r.n} is listed twice`);
++      else if (typeof r.kind !== 'string' || !(r.kind in content.hall.kinds)) fail(`${w}.kind`, `no kind of legend ${JSON.stringify(r.kind)} (kinds: ${known(content.hall.kinds)})`);
++      else if (typeof r.place !== 'string' || !(r.place in content.rooms)) fail(`${w}.place`, `no room ${JSON.stringify(r.place)} (rooms: ${known(content.rooms)})`);
++      else if (typeof r.score !== 'number' || typeof r.ticks !== 'number' || typeof r.title !== 'string') fail(w, 'needs a title (text), ticks and a score (numbers)');
++      else if (!Array.isArray(r.who) || !isRecord(r.stats) || !isRecord(frame) || !Array.isArray(frame.bodies)) fail(w, 'needs who (a list), stats (an object) and frame ({ room, bodies })');
++      else stored.push(r as unknown as HallRecord);
++    });
++  }
++
+   const scenario: Scenario = {
+     id: stem,
+     gate: gate as string | null,
+@@ -156,6 +195,8 @@ export function parseScenario(raw: unknown, file: string, stem: string, content:
+     placements: raw.placements === true,
+     ...(tiles.length ? { tiles } : {}),
+     inputs,
++    ...(scripted.length ? { events: scripted } : {}),
++    ...(stored.length ? { hall: stored } : {}),
+     ticks: ticksOk ? (ticks as number) : 1,
+     expect: [],
+   };
+@@ -217,6 +258,7 @@ export function simulate(scenario: Scenario, content: Content): Recording {
+     if (body.vx !== 0 || body.vy !== 0) body.onGround = false;
+   }
+   for (const t of scenario.tiles ?? []) setTile(world, content.rooms[t.room]!, t.tile[0], t.tile[1], t.is);
++  if (scenario.hall) restoreHall(world, content, scenario.hall);
+   const snapshot = (): World => JSON.parse(JSON.stringify(world)) as World;
+   const history: World[] = [snapshot()];
+   const events: SimEvent[] = [];
+@@ -226,7 +268,8 @@ export function simulate(scenario: Scenario, content: Content): Recording {
+       const body = world.entities.find((e) => e.id === id);
+       if (body) body.c.input = input;
+     }
+-    events.push(...step(world, inputsAt(scenario, t), content));
++    const incoming = (scenario.events ?? []).filter((e) => e.at === t).map(({ at: _at, ...event }) => event);
++    events.push(...step(world, inputsAt(scenario, t), content, incoming));
+     history.push(snapshot());
+   }
+   return { scenario, content, history, events };
+diff --git a/src/scenarios/types.ts b/src/scenarios/types.ts
+index 444da16..cb48a3d 100644
+--- a/src/scenarios/types.ts
++++ b/src/scenarios/types.ts
+@@ -2,6 +2,7 @@
+ // Pure (no DOM, no Node): reading files is scripts/lib/scenario-files.ts.
+ // Format and fact vocabulary: docs/mechanisms/scenarios.md.
+ import type { Content } from '../content/types.ts';
++import type { HallRecord } from '../sim/hall/record.ts';
+ import type { SimEvent, World } from '../sim/types.ts';
+ 
+ /** Holds the stick and/or some actions for a span of ticks: from (inclusive) to (exclusive). */
+@@ -35,6 +36,14 @@ export interface Scenario {
+   /** True: the room's own placements (content/placements/<room>.json) are put in the world too. */
+   placements?: boolean;
+   inputs: InputSpan[];
++  /**
++   * Events scripted by hand (Step 7): each is put on tick `at`'s list before any system runs, as if a
++   * system had emitted it. They stand in for systems that are not built yet; a scenario that scripts the
++   * event it is about proves how that event is *handled*, never that the game produces it.
++   */
++  events?: ({ at: number; type: string } & Record<string, unknown>)[];
++  /** Hall of Legends records already stored when the scenario starts, put back with restoreHall() before tick 0 (Step 7). */
++  hall?: HallRecord[];
+   /** How many ticks to run. */
+   ticks: number;
+   /** The facts expected. Each has a `fact` naming a file in src/scenarios/facts/. */
+diff --git a/src/sim/hall/detect.ts b/src/sim/hall/detect.ts
+new file mode 100644
+index 0000000..22aec94
+--- /dev/null
++++ b/src/sim/hall/detect.ts
+@@ -0,0 +1,323 @@
++// The legend detector: notices a feat from what happened, by itself
++// (docs/mechanisms/hall-of-legends.md). Called once a tick by
++// src/sim/systems/hall-detect.ts, after every other system.
++import type { EpisodeId, Hall, HallKind, HallStat, Signal, SignalId } from '../../content/kinds/hall.ts';
++import type { Content } from '../../content/types.ts';
++import { TICK_RATE } from '../types.ts';
++import type { Entity, StepContext, World } from '../types.ts';
++import { findEntity } from '../world.ts';
++import { hangRecord } from './hang.ts';
++import { FRAME_CREDITED, FRAME_MAX_BODIES, FRAME_OUT } from './record.ts';
++import type { FrameBody, HallRecord } from './record.ts';
++import { WATCH_ID, WATCH_MAX_BYTES, bestKey, ensureWatch } from './watch.ts';
++import type { Episode, HallWatch } from './watch.ts';
++
++declare module '../types.ts' {
++  interface EventMap {
++    /** A feat was recognised and its record hung on a pedestal (`hall:<record.n>`). */
++    'hall-legend': { record: HallRecord };
++    /** An episode ended as a kind of legend but hung nothing: under that kind's floor, or no greater than the best of its kind in that place. */
++    'hall-passed': { kind: string; place: string; score: number; why: 'below-floor' | 'not-greater' };
++  }
++}
++
++/**
++ * Any event, read by field name. The detector takes every event name and
++ * field name from content/hall/hall.json, so it never names another step's
++ * event in code and a rename is a content edit.
++ */
++type Ev = { type: string } & Record<string, unknown>;
++
++function matches(ev: Ev, event: string | undefined, match: Record<string, unknown>): boolean {
++  if (ev.type !== event) return false;
++  for (const k of Object.keys(match)) if (ev[k] !== match[k]) return false;
++  return true;
++}
++
++const isSignal = (ev: Ev, s: Signal): boolean => matches(ev, s.event, s.match);
++
++/** Where an event happened: a field that holds a room id, else the room of an entity it names. */
++function placeOf(world: World, hall: Hall, ev: Ev): string | null {
++  for (const f of hall.where.fields) {
++    const v = ev[f];
++    if (typeof v === 'string' && v !== '') return v;
++  }
++  for (const f of hall.where.entities) {
++    const v = ev[f];
++    const e = typeof v === 'string' ? findEntity(world, v) : undefined;
++    if (e && e.room !== '') return e.room;
++  }
++  return null;
++}
++
++/**
++ * Knocked out: Step 2's published `entity.c.flattened` (docs/architecture.md,
++ * "Bodies"), or heard knocked out through the `down` signal and not yet
++ * back up.
++ * DRAFT: the second half exists because Step 2's knock-outs were not on
++ * `main` when this was written, so the scenarios can only script the
++ * events. Once they are, reading `c.flattened` alone would do.
++ */
++function isOut(watch: HallWatch, e: Entity): boolean {
++  return (e.c as { flattened?: unknown }).flattened !== undefined || watch.out.includes(e.id);
++}
++
++/**
++ * The picture: who stands where in `area` right now, in whole pixels. The
++ * players first, then whoever is nearest to them, FRAME_MAX_BODIES at most.
++ */
++function capture(world: World, content: Content, watch: HallWatch, area: string): FrameBody[] {
++  const centre = (e: Entity): { x: number; y: number } => {
++    const box = content.characters[e.kind]!.box;
++    return { x: e.x + box.w / 2, y: e.y + box.h / 2 };
++  };
++  const bodies = world.entities.filter((e) => e.room === area && content.characters[e.kind]);
++  const players = bodies.filter((e) => e.player !== null).map(centre);
++  const far = (e: Entity): number => {
++    if (e.player !== null) return -1;
++    const c = centre(e);
++    let best = Infinity;
++    for (const p of players) best = Math.min(best, (p.x - c.x) ** 2 + (p.y - c.y) ** 2);
++    return best;
++  };
++  // world.entities is in id order and the sort is stable, so ties fall the same way on every device.
++  return bodies
++    .map((e) => ({ e, d: far(e) }))
++    .sort((a, b) => a.d - b.d)
++    .slice(0, FRAME_MAX_BODIES)
++    .map(({ e }): FrameBody => [e.kind, Math.round(e.x), Math.round(e.y), e.facing, (e.player !== null ? FRAME_CREDITED : 0) | (isOut(watch, e) ? FRAME_OUT : 0)]);
++}
++
++function countStat(world: World, stat: HallStat, ev: Ev, s: Record<string, number>, id: string): void {
++  if (stat.how === 'seconds' || !matches(ev, stat.event, stat.match)) return;
++  if (stat.who !== undefined) {
++    const named = ev[stat.who];
++    const e = typeof named === 'string' ? findEntity(world, named) : undefined;
++    if (!e || (e.player !== null) !== (stat.is === 'player')) return;
++  }
++  if (stat.how === 'count') {
++    s[id] = (s[id] ?? 0) + 1;
++    return;
++  }
++  const v = ev[stat.field!];
++  if (typeof v !== 'number' || !Number.isFinite(v)) return;
++  if (stat.how === 'sum') s[id] = (s[id] ?? 0) + v;
++  else if (!(id in s) || v > s[id]!) s[id] = v;
++}
++
++function titleOf(content: Content, kind: HallKind, n: number, place: string, stats: Record<string, number>): string {
++  // INTENT: picked by the record's number, never at random: the simulation has no dice.
++  const template = kind.titles[n % kind.titles.length]!;
++  return template.replace(/\{([^}]*)\}/g, (_, slot: string) => (slot === 'place' ? (content.rooms[place]?.name ?? place) : String(stats[slot] ?? 0)));
++}
++
++/** An episode is over, in one of the ways its shape can end. Hangs a record, passes, or (nobody was there) says nothing. */
++function close(ctx: StepContext, watch: HallWatch, ep: Episode, ending: string): void {
++  const { world, content } = ctx;
++  watch.open.splice(watch.open.indexOf(ep), 1);
++  if (ep.who.length === 0) return;
++  const kind = Object.values(content.hall.kinds).find((k) => k.episode === ep.e && k.ending === ending);
++  if (!kind) return;
++
++  const ticks = world.tick - ep.t0;
++  const stats: Record<string, number> = {};
++  for (const [id, stat] of Object.entries(content.hall.stats)) {
++    const v = Math.round(stat.how === 'seconds' ? ticks / TICK_RATE : (ep.s[id] ?? 0));
++    // Only what happened is kept: a zero is left out (the record must stay small).
++    if (v !== 0) stats[id] = v;
++  }
++  let score = 0;
++  for (const [id, weight] of Object.entries(kind.score)) score += weight * (stats[id] ?? 0);
++  score = Math.round(score);
++
++  // INTENT (design library doc 09: "they should feel rare and earned"): each kind has a floor.
++  if (score < kind.floor) {
++    ctx.emit('hall-passed', { kind: kind.id, place: ep.area, score, why: 'below-floor' });
++    return;
++  }
++  // DRAFT (S-001, a direction: "events of unusual greatness relative to past
++  // exploits"): a feat hangs only if nothing of its kind hangs for that
++  // place yet, or it beats the best one. The same feat again hangs nothing.
++  const best = watch.best[bestKey(kind.id, ep.area)];
++  if (best !== undefined && score <= best) {
++    ctx.emit('hall-passed', { kind: kind.id, place: ep.area, score, why: 'not-greater' });
++    return;
++  }
++  const n = watch.next;
++  const record: HallRecord = {
++    v: 1,
++    n,
++    kind: kind.id,
++    title: titleOf(content, kind, n, ep.area, stats),
++    place: ep.area,
++    ticks,
++    // INTENT (D-026): everyone who took part is credited, whoever started or finished it.
++    who: [...ep.who].sort((a, b) => (a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0)).map(([player, character]) => ({ player, character })),
++    stats,
++    score,
++    frame: { room: ep.area, bodies: ep.f },
++  };
++  ctx.emit('hall-legend', { record: hangRecord(world, content, record).c.hall!.record });
++}
++
++/**
++ * One tick of noticing.
++ *
++ * INTENT (design library doc 00, "Do not turn the Hall into a preset
++ * achievements checklist instead of a memory of actual events"): this
++ * reads only what happened (this tick's events, and who is where) and
++ * nothing in a room, a person or a scenario can say "this is a legend".
++ * Do not add a way to award one.
++ *
++ * INTENT (rule 7 of the step's brief; CLAUDE.md, "There is always a way
++ * out"): getting recognised never holds anyone. Nothing here pauses,
++ * freezes or moves a player, and no state here is one a player is in.
++ *
++ * DRAFT: the two episode shapes below (trouble; a quiet theft) and "taking
++ * part = a player whose character was in the area on any tick of the
++ * episode, knocked out or not" are the Step 7 lead's first reading
++ * (docs/decisions-log.md, 2026-11-23); the kinds, floors, weights, stats
++ * and event names are data in content/hall/hall.json.
++ */
++export function detect(ctx: StepContext): void {
++  const { world, content } = ctx;
++  const hall = content.hall;
++  const sig = hall.signals;
++  // A copy: closing an episode emits, and the list must not grow under the loop.
++  const events = [...ctx.events] as unknown as Ev[];
++  const watch = ensureWatch(world).c.hallWatch!;
++  // INTENT: nothing below writes to the watcher on a tick when nothing
++  // happened; it is sent to every phone, and holds start ticks, not clocks.
++  if (events.length === 0 && watch.open.length === 0) return;
++
++  const tick = world.tick;
++  const openIn = (e: EpisodeId, area: string): Episode | undefined => watch.open.find((ep) => ep.e === e && ep.area === area);
++  const drop = (ep: Episode | undefined): void => {
++    if (ep) watch.open.splice(watch.open.indexOf(ep), 1);
++  };
++  const has = (id: SignalId, ev: Ev): boolean => isSignal(ev, sig[id]);
++  const field = (id: SignalId, name: string, ev: Ev): unknown => ev[sig[id].fields[name]!];
++
++  const rose = new Set<string>();
++  const calm = new Set<string>();
++  const noticed = new Set<string>();
++  const shot = new Set<Episode>();
++  let grew = false;
++
++  // 1 · What was heard: knock-outs, alerts, calls.
++  for (const ev of events) {
++    if (has('down', ev) || has('up', ev)) {
++      const down = has('down', ev);
++      const who = field(down ? 'down' : 'up', 'who', ev);
++      const e = typeof who === 'string' ? findEntity(world, who) : undefined;
++      if (e && e.player !== null) {
++        if (down && !watch.out.includes(e.id)) watch.out = [...watch.out, e.id].sort();
++        else if (!down && watch.out.includes(e.id)) watch.out = watch.out.filter((id) => id !== e.id);
++      }
++    }
++    if (has('alert', ev)) {
++      const area = placeOf(world, hall, ev);
++      const from = field('alert', 'from', ev);
++      const to = field('alert', 'to', ev);
++      if (area === null || typeof from !== 'number' || typeof to !== 'number') continue;
++      if (to > 0) watch.alert[area] = to;
++      else delete watch.alert[area];
++      if (to > from) {
++        rose.add(area);
++        noticed.add(area);
++        // Trouble opens when an area's alert rises from 0.
++        if (from === 0 && !openIn('trouble', area)) {
++          watch.open.push({ e: 'trouble', area, t0: tick, who: [], s: {}, fs: 0, f: [] });
++          grew = true;
++        }
++      }
++      if (to === 0) calm.add(area);
++    }
++    if (has('call', ev)) {
++      const area = placeOf(world, hall, ev);
++      if (area !== null) noticed.add(area);
++    }
++  }
++  if (watch.out.length > 0 && watch.out.some((id) => !findEntity(world, id))) watch.out = watch.out.filter((id) => findEntity(world, id));
++
++  // A quiet theft that was noticed (the alert rose, or a call started there) closes as nothing.
++  for (const area of noticed) drop(openIn('quiet', area));
++
++  // 2 · A player took something where all was calm: a quiet theft opens (or, already open, counts on).
++  for (const ev of events) {
++    if (!has('taking', ev)) continue;
++    const by = field('taking', 'by', ev);
++    const taker = typeof by === 'string' ? findEntity(world, by) : undefined;
++    const area = placeOf(world, hall, ev);
++    if (!taker || taker.player === null || area === null) continue;
++    if ((watch.alert[area] ?? 0) !== 0 || noticed.has(area) || openIn('trouble', area)) continue;
++    const until = tick + Math.round(hall.quietSeconds * TICK_RATE);
++    const ep = openIn('quiet', area);
++    // DRAFT: a second taking while one is still being judged is the same
++    // theft, and every taking needs its own quiet seconds after it.
++    if (ep) ep.until = until;
++    else {
++      const opened: Episode = { e: 'quiet', area, t0: tick, who: [], s: {}, fs: 0, f: [], until };
++      watch.open.push(opened);
++      shot.add(opened);
++      grew = true;
++    }
++  }
++
++  for (const ep of [...watch.open]) {
++    // 3 · Credit: every player whose character is in the area on any tick of the episode.
++    for (const e of world.entities) {
++      if (e.player === null || e.room !== ep.area || ep.who.some(([p]) => p === e.player)) continue;
++      ep.who.push([e.player, e.kind]);
++      grew = true;
++    }
++
++    // 4 · The numbers, and the moment worth a picture.
++    for (const ev of events) {
++      if (placeOf(world, hall, ev) !== ep.area) continue;
++      for (const [id, stat] of Object.entries(hall.stats)) countStat(world, stat, ev, ep.s, id);
++      if (ep.e === 'trouble' && has('impact', ev)) {
++        const speed = field('impact', 'speed', ev);
++        if (typeof speed === 'number' && speed > ep.fs) {
++          ep.fs = speed;
++          shot.add(ep);
++        }
++      }
++    }
++    // INTENT: the picture is the "OHH" moment, not the end: for trouble the
++    // fastest impact so far (until there is one, when the alert last rose);
++    // for a quiet theft, the taking.
++    if (ep.e === 'trouble' && ep.fs === 0 && rose.has(ep.area)) shot.add(ep);
++    if (shot.has(ep)) {
++      ep.f = capture(world, content, watch, ep.area);
++      grew = true;
++    }
++
++    // 5 · Endings.
++    if (ep.e === 'trouble') {
++      const here = world.entities.filter((e) => e.player !== null && e.room === ep.area);
++      const standing = ep.who.some(([p]) => {
++        const e = world.entities.find((x) => x.player === p);
++        return e !== undefined && !isOut(watch, e);
++      });
++      // A last stand: every credited player still in the area is knocked out at once (losing counts).
++      if (here.length > 0 && here.every((e) => isOut(watch, e))) close(ctx, watch, ep, 'all-down');
++      // An escape: the alert is back to 0 with somebody still standing.
++      else if (calm.has(ep.area)) {
++        if (standing) close(ctx, watch, ep, 'calm');
++        else if (ep.who.some(([p]) => world.entities.some((x) => x.player === p))) close(ctx, watch, ep, 'all-down');
++        else drop(ep);
++      }
++    } else if (ep.until !== undefined && tick >= ep.until) close(ctx, watch, ep, 'unnoticed');
++  }
++
++  // The budget: pictures still being judged give way from their far end first.
++  if (grew) {
++    const self = findEntity(world, WATCH_ID)!;
++    while (JSON.stringify(self).length > WATCH_MAX_BYTES) {
++      const fullest = [...watch.open].sort((a, b) => b.f.length - a.f.length)[0];
++      if (!fullest || fullest.f.length === 0) break;
++      fullest.f.pop();
++    }
++  }
++}
+diff --git a/src/sim/hall/hang.ts b/src/sim/hall/hang.ts
+new file mode 100644
+index 0000000..9b82c37
+--- /dev/null
++++ b/src/sim/hall/hang.ts
+@@ -0,0 +1,74 @@
++// Putting records in the world: a record is a pedestal entity `hall:<n>`
++// in the Hall room (docs/mechanisms/hall-of-legends.md).
++import type { Content } from '../../content/types.ts';
++import type { Entity, World } from '../types.ts';
++import { addEntity, findEntity, removeEntity } from '../world.ts';
++import { PEDESTAL_KIND, pedestalId } from './record.ts';
++import type { HallRecord } from './record.ts';
++import { PEDESTAL_MAX_BYTES, bestKey, ensureWatch } from './watch.ts';
++
++/**
++ * Hangs one record: notes it on the watcher (the next number, the best
++ * score of its kind and place) and stands its pedestal in the Hall room.
++ * Returns the pedestal. Safe to call for a record already hung.
++ *
++ * INTENT: the pedestal is an ordinary body of an ordinary character kind
++ * ("Do not ... protect the Hall of Legends from gameplay", design library
++ * doc 00). Nothing here pins it, shields it or puts it back: it can be
++ * hit, grabbed and thrown, and the record rides on it.
++ */
++export function hangRecord(world: World, content: Content, record: HallRecord): Entity {
++  const watch = ensureWatch(world).c.hallWatch!;
++  if (record.n >= watch.next) watch.next = record.n + 1;
++  const key = bestKey(record.kind, record.place);
++  if (!(key in watch.best) || record.score > watch.best[key]!) watch.best[key] = record.score;
++
++  const already = findEntity(world, pedestalId(record.n));
++  if (already) return already;
++
++  const room = content.rooms[content.hall.room]!;
++  const body = content.characters[PEDESTAL_KIND]!;
++  const tiles = content.hall.pedestals;
++  const standing = world.entities.filter((e) => e.c.hall);
++  let slot = tiles.findIndex((_, i) => !standing.some((e) => e.c.hall!.slot === i));
++  if (slot < 0) {
++    // DRAFT (the worker's call, docs/decisions-log.md): when every tile is
++    // taken, the oldest record that has since been beaten leaves the floor;
++    // if none has been beaten, the oldest. The store keeps every record
++    // regardless: this only decides what stands in the room.
++    const byAge = [...standing].sort((a, b) => a.c.hall!.record.n - b.c.hall!.record.n);
++    const beaten = byAge.find((e) => e.c.hall!.record.score < (watch.best[bestKey(e.c.hall!.record.kind, e.c.hall!.record.place)] ?? 0));
++    const leaving = beaten ?? byAge[0]!;
++    slot = leaving.c.hall!.slot ?? 0;
++    removeEntity(world, leaving.id);
++  }
++  const [tx, ty] = tiles[slot]!;
++  const copy = JSON.parse(JSON.stringify(record)) as HallRecord;
++  const pedestal = addEntity(world, {
++    id: pedestalId(record.n),
++    kind: body.id,
++    player: null,
++    room: room.id,
++    x: tx * room.tile + (room.tile - body.box.w) / 2,
++    y: (ty + 1) * room.tile - body.box.h,
++    vx: 0,
++    vy: 0,
++    facing: 1,
++    onGround: true,
++    c: { hall: { record: copy, slot } },
++  });
++  // The budget: a pedestal goes to every phone many times a second. The
++  // picture gives way first, from its far end (the bodies furthest from the
++  // credited players), never the names or the numbers.
++  while (copy.frame.bodies.length > 0 && JSON.stringify(pedestal).length > PEDESTAL_MAX_BYTES) copy.frame.bodies.pop();
++  return pedestal;
++}
++
++/**
++ * Puts the Hall back as it was: the watcher, and every stored record in
++ * the order hung. What the server calls when it creates a world.
++ */
++export function restoreHall(world: World, content: Content, records: readonly HallRecord[]): void {
++  ensureWatch(world);
++  for (const r of [...records].sort((a, b) => a.n - b.n)) hangRecord(world, content, r);
++}
+diff --git a/src/sim/hall/index.ts b/src/sim/hall/index.ts
+new file mode 100644
+index 0000000..528282b
+--- /dev/null
++++ b/src/sim/hall/index.ts
+@@ -0,0 +1,6 @@
++// The Hall of Legends inside the simulation (docs/mechanisms/hall-of-legends.md).
++export { hangRecord, restoreHall } from './hang.ts';
++export { FRAME_CREDITED, FRAME_MAX_BODIES, FRAME_OUT, PEDESTAL_KIND, pedestalId } from './record.ts';
++export type { FrameBody, HallRecord } from './record.ts';
++export { PEDESTAL_MAX_BYTES, WATCH_ID, WATCH_KIND, WATCH_MAX_BYTES } from './watch.ts';
++export type { Episode, HallWatch } from './watch.ts';
+diff --git a/src/sim/hall/record.ts b/src/sim/hall/record.ts
+index ed49e64..82faf9a 100644
+--- a/src/sim/hall/record.ts
++++ b/src/sim/hall/record.ts
+@@ -3,6 +3,7 @@
+ // carries it in the world, the store that keeps it across restarts and the
+ // page that shows it (docs/plan/step-7.md; docs/mechanisms/hall-of-legends.md).
+ // Types and constants only: nothing here runs.
++import { PEDESTAL_CHARACTER } from '../../content/kinds/hall.ts';
+ 
+ /**
+  * One remembered feat.
+@@ -54,13 +55,17 @@ export const FRAME_OUT = 2;
+ export const FRAME_MAX_BODIES = 10;
+ 
+ /** The character kind (content/characters/) of the body a record hangs on. Its entity id is `hall:<n>`. */
+-export const PEDESTAL_KIND = 'pedestal';
++export const PEDESTAL_KIND = PEDESTAL_CHARACTER;
+ /** The entity id of record number `n`'s pedestal. */
+ export const pedestalId = (n: number): string => `hall:${n}`;
+ 
+ declare module '../types.ts' {
+   interface Components {
+     /** On a pedestal entity (`hall:<n>`): the record it shows. It rides on the body, so it survives being thrown. */
+-    hall?: { record: HallRecord };
++    hall?: {
++      record: HallRecord;
++      /** Which of content/hall's pedestal tiles this one was put on (it may have been thrown since). */
++      slot?: number;
++    };
+   }
+ }
+diff --git a/src/sim/hall/watch.ts b/src/sim/hall/watch.ts
+new file mode 100644
+index 0000000..bacabb2
+--- /dev/null
++++ b/src/sim/hall/watch.ts
+@@ -0,0 +1,84 @@
++// The detector's own notes: one bodiless entity, `hall:watch`
++// (docs/mechanisms/hall-of-legends.md, "The two entities").
++import type { EpisodeId } from '../../content/kinds/hall.ts';
++import type { Entity, World } from '../types.ts';
++import { addEntity, findEntity } from '../world.ts';
++import type { FrameBody } from './record.ts';
++
++export const WATCH_ID = 'hall:watch';
++/**
++ * INTENT: never a character kind. Physics, the verbs system and the entity
++ * drawer skip a kind they do not know, so the watcher has no body, cannot
++ * be hit and is never drawn; `room: ''` keeps it out of every room.
++ */
++export const WATCH_KIND = 'hall-watch';
++
++/** DRAFT: the budgets the Step 7 lead set, because every entity goes to every phone about 20 times a second. */
++export const WATCH_MAX_BYTES = 800;
++export const PEDESTAL_MAX_BYTES = 500;
++
++/** Something under way that may turn out to be a legend. Short field names: this is sent to every phone. */
++export interface Episode {
++  /** The episode shape (content/hall: `trouble` or `quiet`). */
++  e: EpisodeId;
++  /** Where: a room id tonight. */
++  area: string;
++  /** The tick it opened. A start tick, never a running clock, so the watcher only changes when something happens. */
++  t0: number;
++  /** Everyone credited so far: [player id, the character they were when first seen there]. */
++  who: [player: string, character: string][];
++  /** Stat id -> the count so far (content/hall, `stats`). Absent means 0. */
++  s: Record<string, number>;
++  /** The fastest impact so far, or 0 before any. */
++  fs: number;
++  /** The candidate picture (see record.ts, `frame.bodies`). */
++  f: FrameBody[];
++  /** A quiet episode: the tick it closes on if nothing spoils it. */
++  until?: number;
++}
++
++export interface HallWatch {
++  /** The number the next record gets. */
++  next: number;
++  open: Episode[];
++  /** The best score hung so far, by `<kind>@<place>`. */
++  best: Record<string, number>;
++  /** Each area's alert as the detector last heard it; an area at 0 has no entry. */
++  alert: Record<string, number>;
++  /** Entity ids of players' characters heard knocked out and not yet heard back up, sorted. */
++  out: string[];
++}
++
++declare module '../types.ts' {
++  interface Components {
++    /**
++     * On `hall:watch` only.
++     * INTENT: every note the detector keeps is here, on an entity: nothing
++     * at module level (the simulation must be deterministic and a world
++     * must be plain JSON), and the network replicates entities and nothing else.
++     */
++    hallWatch?: HallWatch;
++  }
++}
++
++export const bestKey = (kind: string, place: string): string => `${kind}@${place}`;
++
++/** The watcher entity, made the first time it is wanted. */
++export function ensureWatch(world: World): Entity {
++  return (
++    findEntity(world, WATCH_ID) ??
++    addEntity(world, {
++      id: WATCH_ID,
++      kind: WATCH_KIND,
++      player: null,
++      room: '',
++      x: 0,
++      y: 0,
++      vx: 0,
++      vy: 0,
++      facing: 1,
++      onGround: true,
++      c: { hallWatch: { next: 1, open: [], best: {}, alert: {}, out: [] } },
++    })
++  );
++}
+diff --git a/src/sim/step.ts b/src/sim/step.ts
+index 7f2d5ca..03a929d 100644
+--- a/src/sim/step.ts
++++ b/src/sim/step.ts
+@@ -2,6 +2,16 @@ import type { Content } from '../content/types.ts';
+ import { systems } from './registry.ts';
+ import type { Input, SimEvent, StepContext, World } from './types.ts';
+ 
++/**
++ * An event put on a tick's list from outside the simulation: its type and
++ * fields, without `tick` (step() stamps it).
++ * INTENT (Step 7): this exists so a scenario can script an event that a
++ * system not built yet will one day emit (`events` in a scenario file,
++ * docs/mechanisms/scenarios.md). The game itself never passes any: the
++ * server and the page call step() with three arguments.
++ */
++export type IncomingEvent = { type: string } & Record<string, unknown>;
++
+ /**
+  * Advances the world by one tick.
+  *
+@@ -12,8 +22,10 @@ import type { Input, SimEvent, StepContext, World } from './types.ts';
+  * nothing here may read a clock, a random number or anything outside its
+  * arguments (docs/architecture.md, "The simulation core").
+  */
+-export function step(world: World, inputs: Record<string, Input>, content: Content): SimEvent[] {
++export function step(world: World, inputs: Record<string, Input>, content: Content, incoming?: readonly IncomingEvent[]): SimEvent[] {
+   const events: SimEvent[] = [];
++  // Events handed in from outside (see IncomingEvent) are on this tick's list before any system runs.
++  for (const e of incoming ?? []) events.push({ ...e, tick: world.tick } as unknown as SimEvent);
+   const ctx: StepContext = {
+     world,
+     inputs,
+diff --git a/src/sim/systems/hall-detect.ts b/src/sim/systems/hall-detect.ts
+new file mode 100644
+index 0000000..2b11d45
+--- /dev/null
++++ b/src/sim/systems/hall-detect.ts
+@@ -0,0 +1,19 @@
++import { detect } from '../hall/detect.ts';
++import type { System } from '../types.ts';
++
++/**
++ * The Hall of Legends' detector (src/sim/hall/detect.ts;
++ * docs/mechanisms/hall-of-legends.md): notices an escape, a last stand or
++ * a quiet theft from this tick's events and hangs its record on a pedestal.
++ *
++ * INTENT: order 900, after every system that can emit an event this tick
++ * (verbs 100, physics 500, doors and the witness pass 600), so the tick's
++ * events are all there to read. A system that emits later than this is
++ * invisible to the Hall: keep it below 900.
++ */
++const system: System = {
++  id: 'hall-detect',
++  order: 900,
++  run: detect,
++};
++export default system;
