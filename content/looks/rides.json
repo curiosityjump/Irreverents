@@ -1,0 +1,23 @@
+{
+  "//": "DRAFT: stand-in drawn by tools/art/props/make.py; a delivered sheet replaces it by editing this file.",
+  "id": "rides",
+  "image": "props/rides.png",
+  "looks": {
+    "ride-plane-idle": {"src": [0, 0, 48, 44]},
+    "ride-plane-moving": {"src": [48, 0, 48, 44], "frames": 2, "fps": 8},
+    "ride-plane-crash": {"src": [144, 0, 48, 44]},
+    "ride-plane-wrecked": {"src": [0, 44, 48, 44]},
+    "ride-cart-idle": {"src": [0, 88, 48, 44]},
+    "ride-cart-moving": {"src": [48, 88, 48, 44], "frames": 2, "fps": 8},
+    "ride-cart-crash": {"src": [144, 88, 48, 44]},
+    "ride-cart-wrecked": {"src": [0, 132, 48, 44]},
+    "ride-wagon-idle": {"src": [0, 176, 48, 44]},
+    "ride-wagon-moving": {"src": [48, 176, 48, 44], "frames": 2, "fps": 8},
+    "ride-wagon-crash": {"src": [144, 176, 48, 44]},
+    "ride-wagon-wrecked": {"src": [0, 220, 48, 44]},
+    "ride-mount-idle": {"src": [0, 264, 48, 44]},
+    "ride-mount-moving": {"src": [48, 264, 48, 44], "frames": 2, "fps": 8},
+    "ride-mount-crash": {"src": [144, 264, 48, 44]},
+    "ride-mount-wrecked": {"src": [0, 308, 48, 44]}
+  }
+}

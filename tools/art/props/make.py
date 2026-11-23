@@ -16,6 +16,7 @@ import import_p01
 import round2 as r2
 import round3 as r3
 import drive as dv
+import loops as lo
 from px import mix, new, col, paste
 from sizes import ROOT, sizes
 from place import place_all
@@ -109,6 +110,16 @@ def looks_sheets():
         s.add('level-pie-%d' % n, dv.level_pie(n))
     s.add('level-sign', dv.level_sign())
     out.append(('levels', 'props/levels.png', s))
+    # ---- the core loops' rides (loops.py: P04 vehicle-and-mount sheet; handoff-prompts/loop-art-cutouts.md)
+    s = Sheet(192)
+    for which in lo.RIDES:
+        s.add('ride-%s-idle' % which, lo.ride(which, 'idle'))
+        s.add('ride-%s-moving' % which, lo.ride(which, 'moving'), frames=2, fps=8)
+        s.add('ride-%s-crash' % which, lo.ride(which, 'crash'))
+        s.newrow()
+        s.add('ride-%s-wrecked' % which, lo.ride(which, 'wrecked'))
+        s.newrow()
+    out.append(('rides', 'props/rides.png', s))
     # ---- people
     s = Sheet(96)
     # round 3: moods bold enough for any hat or plume (a white '?' and a sweat drop; a red mark rimmed white)

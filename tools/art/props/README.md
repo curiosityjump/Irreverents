@@ -155,6 +155,22 @@ bottom-centred over an entrance; `level-pie-0`..`4` 12x12 (none, a quarter, half
 `DRAFT:` drawn in the P05 HUD rings' own colours because the plate's rings run off its bottom edge;
 `level-sign` 16x16, P07 platformer's wooden signpost, no text.
 
+## Core loops (`handoff-prompts/loop-art-cutouts.md`)
+
+`loops.py` cuts the core loops' looks from the approved plates (one function per piece, its plate and box);
+`loopshots.py` writes one 320x180 mock scene per group at 4x into `docs/plan/step-8-shots/round3/props/loops-<group>-4x.png`.
+
+- **Rides** (group `rides`, `assets/props/rides.png`, P04 chibi-vehicle-and-mount sheet): `ride-{plane,cart,wagon,mount}-`
+  `{idle,moving,crash,wrecked}`, every frame 48x44, `moving` 2 frames at 8 fps. Drawn bottom-centred; `INTENT:` frames
+  are lined up by the rider's head, so dust or a flame on one side does not jolt the machine. `crash` is the plate's
+  4th cell (hit for the machines, a horn charge for the mount); `wrecked` the 5th (the plastered X and smoke; the
+  mount sits, spent). Scale 0.2 (the rider's head about a hero's).
+- **No approved source:** an empty machine or an empty saddle: every cell has the same goggled rider baked in, so a
+  hero cannot be drawn riding one without that rider showing (for the Drive's missing-assets list).
+- **Not verified in the game:** no code draws a ride yet; seen in the mock scene only.
+- **Drift seen, left alone:** `make.py` now drops three far/back items from `content/decor/quarry-depot.json`
+  (a room change since 6153027 put something under them); the committed file was kept as it was.
+
 ## Deviations from the contract
 
 - `ui-use`'s `src` is the whole 48×24 picture (normal then pressed), with no `frames`: that is how
