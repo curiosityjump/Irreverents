@@ -246,8 +246,9 @@ owns and the rules for changing a shared shape are in
 All work goes on **`main`**, and **a push to `main` is the deploy**:
 Railway builds and serves it at
 https://irreverents-production.up.railway.app within about a minute (the
-owner: "It's setup to deploy automatically from main yes."). There is no
-staging and no PR step. Don't push what you wouldn't want the owner and
+owner: "It's setup to deploy automatically from main yes."). A push that
+touches only documents does not redeploy (`docs/mechanisms/deploy.md`).
+There is no staging and no PR step. Don't push what you wouldn't want the owner and
 their friends playing two minutes later; run the pre-push gate in
 `docs/verifying-and-finishing.md` first, every time.
 
