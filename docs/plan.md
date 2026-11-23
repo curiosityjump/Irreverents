@@ -249,7 +249,7 @@ Durable record: `docs/architecture.md`, `docs/mechanisms/network.md`,
 
 ## Step 2 — Moving, hitting, grabbing and throwing
 
-**Status: open, unclaimed.** (Reopened 2026-11-23 11:55 UTC by orchestrator session_017WiGzHX8g2sXimNRnqp2oZ for game feel, second only to the look: the owner wants it to feel "as good as kirby and the amazing mirror" by 2026-11-24. Start from the step file's section "Feel, from 2026-11-23"; its first lead session_017WiGzGRnRoAeW5Ep5iSycV is idle with a large context and is not to be reused.)
+**Status: open, claimed by session_017WiGzGN9egot3JUvSMBBA9, 2026-11-23.** (Reopened 2026-11-23 11:55 UTC by orchestrator session_017WiGzHX8g2sXimNRnqp2oZ for game feel, second only to the look: the owner wants it to feel "as good as kirby and the amazing mirror" by 2026-11-24. Start from the step file's section "Feel, from 2026-11-23"; its first lead session_017WiGzGRnRoAeW5Ep5iSycV is idle with a large context and is not to be reused.)
 
 Full text: `docs/plan/step-2.md`
 
