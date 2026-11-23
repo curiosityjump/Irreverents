@@ -403,3 +403,22 @@ changed without touching code; don't grade the feel yourself.
   built server boots inside `npm run check`, player count in `/healthz`,
   party seat on join, id kept on the device); anything that does not fit
   06:30 UTC is to be written into `docs/plan/step-5.md` as owed.
+
+- **Lead `session_017WiGzEwLs3ng2ZPpRZgctn`, 04:53 UTC: open risk for Gate
+  2, asked of the worker, not yet answered.** Each player's body runs on
+  their own device; gates, dummies, crates and NPCs run on the server.
+  Nothing written so far says how a player's *action* on a server-run
+  thing (open a gate, hit a dummy, lift a crate) reaches the server. If
+  the layer sends only the body's state, Steps 2–4's work is visible to
+  the player who did it and to nobody else. The worker's brief now asks
+  for the answer in the network writeup and a message to the lead. Also
+  folded into the brief since 04:38, each from another lead: the party
+  seat call agreed with Step 2 (`spawnPlayer` with no character,
+  `removeEntity` on leave; on `main` at 792b0aa); Step 7's two server
+  hooks; Step 3's needs (the report carries `room`; the whole `World`
+  including `World.rooms` is replicated; the default world is never
+  forgotten while the server runs). Effect names are published
+  (`docs/architecture.md`, "Effects on a player", cbe516f); delivery
+  between devices is not on `main` yet. Worker reported its e2e facts
+  (a)–(h) and gate F passing locally at 04:33 against the original
+  brief; unverified by the lead.
