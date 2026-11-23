@@ -1,0 +1,10 @@
+{
+  "name": "irreverents",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Irreverents: a browser-played 2D action-adventure. See CLAUDE.md.",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "start": "node server.js"
+  }
+}
