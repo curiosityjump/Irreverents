@@ -57,3 +57,12 @@ wording when it rewrites an entry.
 - **Source:** `docs/current-directive.md`
 - **Blocking:** no
 
+### Q-? · Should the game remember things after it restarts? That needs storage only you can add on Railway
+- **Asked by:** orchestrator, first run, `session_017WiGzFWfLir1ATiSP7c5E5`, 2026-11-23 UTC, parent none
+- **Question:** Tonight's game keeps the world in the server's memory. Every time new code goes live the server restarts, so the world resets and anything "permanent" (Hall of Legends records, unlocked characters, what you've explored) is gone, apart from what each phone remembers for itself. Your library says saves are still open (D-095: "save backend … OPEN"). To keep things across restarts the Railway service needs somewhere to store them (a Railway "volume", or a Postgres database), and only you can add that in Railway. Options: (1) not yet: fine for now, we say plainly in the game what is and isn't kept; (2) add a volume to the `irreverents-production` service and tell us where it is mounted, and we save a small file there; (3) add Postgres and we use that.
+- **Unblocks:** lasting Hall of Legends records (plan Step 7) and any unlock that should survive a restart.
+- **Recommendation:** 1 for this morning; 2 the first time you wish something had been kept (it is one setting in Railway and no code on your side).
+- **Answer goes to:** `docs/plan/step-7.md` "Open with the owner"
+- **Source:** `docs/plan/step-7.md`, "What's decided"
+- **Blocking:** no
+

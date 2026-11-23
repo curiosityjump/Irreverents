@@ -240,3 +240,9 @@ Full text: `docs/plan/step-6.md`
 
 Full text: `docs/plan/step-7.md`
 
+## Step 8 — What you see and hear
+
+**Status: open, unclaimed — queued behind Step 1.** (Opens when Step 1 closes.)
+
+Full text: `docs/plan/step-8.md`
+
