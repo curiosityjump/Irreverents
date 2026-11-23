@@ -282,9 +282,13 @@ ledge is out of reach, and `npcSightHeight` or a solid tile makes it
 unseen.
 
 **On screen (`src/client/draw/alert.ts`, `DRAFT:`):** a brass bell on a
-post; while rung it swings and a bar over it fills (the time left to
-stop the call); broken, a grey stump. The area's alert is up to three
-red marks in the top-left corner; nothing at 0.
+post, drawn with the working parts behind bodies (`drawBells`); while rung
+it swings and a bar over it fills (the time left to stop the call),
+drawn with the marks (`drawAlert`); broken, a grey stump. The area's
+alert is up to three red marks in the top-left corner; nothing at 0. The
+looks `bell`, `bell-ringing`, `bell-broken`, `alert-pip` and
+`alert-pip-off` replace the plain shapes when present
+(`docs/mechanisms/art-pipeline.md`).
 
 **Not built yet** (the brief's later pushes): more help arriving at
 levels 2 and 3; finding a knocked-out person; the villain's horn

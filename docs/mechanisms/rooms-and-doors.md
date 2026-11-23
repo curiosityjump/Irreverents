@@ -306,17 +306,20 @@ watched once; the commit that added them lists which.
 
 ## Drawing
 
-`src/client/draw/room.ts` draws an *enter* doorway as a dark arch and a
-*walk* door as nothing (it is the gap in the wall). `INTENT:` no arrows,
-no glow, no text on any door. It draws the room file's tiles only. Every
-working part draws itself, from the world's run-time state, in
-`src/client/draw/room-parts.ts` (called from `render.ts` right after the
-room): a gate shut or drawn up, a wall cracked or gone, a plate up or
-down. `INTENT:` nothing there points either. A false wall and an unbroken
-cracked wall are painted with `draw/room.ts`'s own wall colours (keep the
-two files' `SOLID` and `SOLID_TOP` equal), and the lit top edge
-`drawRoom` gives the wall tile under them is painted out, or that edge
-would outline the secret.
+`src/client/draw/room.ts` draws an *enter* doorway as a dark arch (or its
+look, `door-enter-<w>x<h>`) and a *walk* door as nothing (it is the gap in
+the wall). `INTENT:` no arrows, no glow, no text on any door. Every tile is
+drawn by whether it *looks* solid (`solidLook` in
+`src/client/draw/room-parts.ts`): the room file's solid tiles, false walls,
+unbroken wall-look breakables and hidden walk doors' tiles. So a false
+wall, a cracked wall and a hidden door are drawn by the very code that
+draws the wall around them, with art or in graybox, and no lit edge or
+autotile corner can outline a secret. Every working part then draws what
+sits on that ground, from the world's run-time state, in
+`src/client/draw/room-parts.ts` (called from `render.ts` after the
+ground): a gate shut or drawn up, a crack or rubble, a plate up or down,
+a window, a curtain. `INTENT:` nothing there points either. How the art
+plugs in: `docs/mechanisms/rendering-world.md`.
 
 ## Limits, on purpose for now (`DRAFT:`)
 
