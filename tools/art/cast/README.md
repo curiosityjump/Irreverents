@@ -303,5 +303,11 @@ New ids for the contract's cast list: `brawler`, `skirmisher`,
   Read as a flaky fact, not this lane's (the sprites are other kinds').
   Push 3 again: `t-throw-friend` alone failed once, passed on the rerun.
   Two of five runs: worth a look by whoever owns that fact.
+- Push 4 (df3d523) live, `check:live` failed one fact, `fight-back`
+  (Step 18's, added at 1458d57 just before): the grappler tapped attack
+  at the street guard and was never hit back in 30 s. Not reverted: push 4
+  only adds the toll keeper's picture, and collision never depends on art.
+  A second run could not check it (main moved on to the ground lane's
+  queued push). For the Step 18 owner.
 - `tumble` and the curled `held`: not drawn (the actors lane's validator
   is not on `main`).
