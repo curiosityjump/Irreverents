@@ -88,7 +88,7 @@ export function font(name: FontName): Look | null {
 /** How wide a line of text is drawn, in pixels: by the font's advance, else the canvas's own measure. */
 export function textWidth(g: CanvasRenderingContext2D, text: string, name: FontName): number {
   const f = font(name);
-  return f ? Math.max(0, text.length * f.w - 1) : g.measureText(text).width;
+  return f ? Math.max(0, inFont(text).length * f.w - 1) : g.measureText(text).width;
 }
 
 /** The height of one line of the font (its cell), else `fallback`. */
@@ -109,6 +109,7 @@ export function drawText(g: CanvasRenderingContext2D, text: string, x: number, y
   const source = color ? tinted(f, color) : undefined;
   const px = Math.round(x);
   const py = Math.round(y);
+  text = inFont(text);
   for (let i = 0; i < text.length; i++) {
     let code = text.charCodeAt(i) - 32;
     if (code === 0) continue;
@@ -117,6 +118,16 @@ export function drawText(g: CanvasRenderingContext2D, text: string, x: number, y
     drawFrame(g, f, code, px + i * f.w, py, source ? { source } : {});
   }
   return true;
+}
+
+/**
+ * Round 3 (gap 15): the few non-ASCII marks the game's own words use, spelled in the font's
+ * ASCII, so they never draw as "?". Anything else outside the strip still draws as "?".
+ * DRAFT: the spellings ("·" as "-", "…" as "...").
+ */
+const SPELLED: Record<string, string> = { '·': '-', '…': '...', '—': '-', '–': '-', '’': "'", '‘': "'", '“': '"', '”': '"' };
+function inFont(text: string): string {
+  return /[^\x20-\x7e]/.test(text) ? text.replace(/[·…—–’‘“”]/g, (c) => SPELLED[c] ?? c) : text;
 }
 
 // Step 2, signal 6: every string drawn into the game picture, for the

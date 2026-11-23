@@ -16,6 +16,9 @@ import type { ContentKind, Reader } from '../types.ts';
 export const SPRITE_STATES = [
   'idle', 'run', 'air', 'jump', 'fall', 'attack', 'grab', 'carry', 'carryRun', 'throw',
   'hurt', 'down', 'held', 'hide', 'talk', 'flap',
+  // Round 3 (the contract, "Round 3 additions"): a launched or thrown body flying fast. Falls back
+  // to held, then hurt, then air; with no tumble frames the renderer turns the hurt frame.
+  'tumble',
 ] as const;
 export type SpriteState = (typeof SPRITE_STATES)[number];
 const REQUIRED: SpriteState[] = ['idle', 'run', 'air'];
@@ -46,7 +49,17 @@ export interface Sprite {
    * has none (then today's placement).
    */
   carryAt?: { x: number; y: number } | null;
+  /**
+   * Round 3: a carry point per state (`carry`, `carryRun`, `throw`), for a
+   * sheet whose hands move between those poses; a state with no entry uses
+   * `carryAt`. Empty when the file has none.
+   */
+  carryAtBy?: Partial<Record<CarryState, { x: number; y: number }>>;
 }
+
+/** The states that may have their own carry point (`carryAtBy`). */
+export const CARRY_STATES = ['carry', 'carryRun', 'throw'] as const;
+export type CarryState = (typeof CARRY_STATES)[number];
 
 declare module '../types.ts' {
   interface Content {
@@ -83,7 +96,7 @@ const kind: ContentKind = {
   parse(raw, read) {
     const o = read.object(raw, '');
     if (!o) return null;
-    read.only(o, ['id', 'image', 'cell', 'anchor', 'fps', 'frames', 'fpsBy', 'moods', 'carryAt'], '');
+    read.only(o, ['id', 'image', 'cell', 'anchor', 'fps', 'frames', 'fpsBy', 'moods', 'carryAt', 'carryAtBy'], '');
     requireDraftNote(read, o);
     const cell = read.object(o.cell, 'cell') ?? {};
     const anchor = read.object(o.anchor, 'anchor') ?? {};
@@ -104,12 +117,23 @@ const kind: ContentKind = {
         for (const mood of SPRITE_MOODS) if (m[mood] !== undefined) moods[mood] = stateLists(read, m[mood], `moods.${mood}`, []);
       }
     }
-    let carryAt: { x: number; y: number } | null = null;
-    if (o.carryAt !== undefined) {
-      const c = read.object(o.carryAt, 'carryAt');
-      if (c) {
-        read.only(c, ['x', 'y'], 'carryAt');
-        carryAt = { x: read.number(c, 'x', 'carryAt', { min: 0, max: 512, integer: true }), y: read.number(c, 'y', 'carryAt', { min: 0, max: 512, integer: true }) };
+    const point = (raw: unknown, where: string): { x: number; y: number } | null => {
+      const c = read.object(raw, where);
+      if (!c) return null;
+      read.only(c, ['x', 'y'], where);
+      return { x: read.number(c, 'x', where, { min: 0, max: 512, integer: true }), y: read.number(c, 'y', where, { min: 0, max: 512, integer: true }) };
+    };
+    const carryAt = o.carryAt !== undefined ? point(o.carryAt, 'carryAt') : null;
+    const carryAtBy: NonNullable<Sprite['carryAtBy']> = {};
+    if (o.carryAtBy !== undefined) {
+      const by = read.object(o.carryAtBy, 'carryAtBy');
+      if (by) {
+        read.only(by, [...CARRY_STATES], 'carryAtBy');
+        for (const st of CARRY_STATES) {
+          if (by[st] === undefined) continue;
+          const p = point(by[st], `carryAtBy.${st}`);
+          if (p) carryAtBy[st] = p;
+        }
       }
     }
     const out: Sprite = {
@@ -122,6 +146,7 @@ const kind: ContentKind = {
       fpsBy,
       moods,
       carryAt,
+      carryAtBy,
     };
     return out;
   },
@@ -140,6 +165,9 @@ const kind: ContentKind = {
       // carryAt is a pixel of the cell: inside it.
       if (s.carryAt && (s.carryAt.x >= s.cell.w || s.carryAt.y >= s.cell.h)) {
         fail(file, 'carryAt', `(${s.carryAt.x}, ${s.carryAt.y}) is outside the ${s.cell.w}×${s.cell.h} cell`);
+      }
+      for (const [st, p] of Object.entries(s.carryAtBy ?? {})) {
+        if (p.x >= s.cell.w || p.y >= s.cell.h) fail(file, `carryAtBy.${st}`, `(${p.x}, ${p.y}) is outside the ${s.cell.w}×${s.cell.h} cell`);
       }
     }
   },

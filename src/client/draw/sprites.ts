@@ -85,6 +85,14 @@ interface Memory {
   /** The last swing seen (attack.swung), and whether this body was carrying then: that swing is a throw. */
   swing: number;
   swingThrew: boolean;
+  /**
+   * Round 3 (gap 13): the swing's phase last seen, and whether the wind-up now running began
+   * while carrying. On a player's own page a throw press starts a wind-up (the page never
+   * learns it carries); that wind-up is the throw, and so is the strike it ends in, even if
+   * the server's release has arrived by then.
+   */
+  phase: string;
+  windThrew: boolean;
   /** The person's mood last seen, and the tick it became 3 (enraged). */
   mood: number;
   raged: number;
@@ -110,19 +118,26 @@ export function remember(world: World, e: Entity): Memory {
   const flaps = e.c.flap?.used ?? 0;
   if (!m || world.tick < m.tick - 600) {
     // First sight (or the world restarted): nothing has just happened.
-    m = { tick: world.tick, onGround: e.onGround, carrying, flaps, landed: -1e9, left: -1e9, grabbed: -1e9, threw: -1e9, flapped: -1e9, swing: e.c.attack?.swung ?? -1e9, swingThrew: false, mood: e.c.npc?.mood ?? 1, raged: -1e9 };
+    m = { tick: world.tick, onGround: e.onGround, carrying, flaps, landed: -1e9, left: -1e9, grabbed: -1e9, threw: -1e9, flapped: -1e9, swing: e.c.attack?.swung ?? -1e9, swingThrew: false, phase: e.c.attack?.phase ?? 'ready', windThrew: false, mood: e.c.npc?.mood ?? 1, raged: -1e9 };
     memory.set(e.id, m);
     return stamped(e, m);
   }
   if (world.tick !== m.tick) {
     const swung = e.c.attack?.swung ?? -1e9;
+    const phase = e.c.attack?.phase ?? 'ready';
+    if (phase === 'windup' && m.phase !== 'windup') {
+      m.windThrew = m.carrying !== null || carrying !== null;
+      // INTENT (round 3): the throw is drawn from the press, not from the server's release.
+      if (m.windThrew) m.threw = world.tick;
+    } else if (phase === 'ready') m.windThrew = false;
+    m.phase = phase;
     if (swung !== m.swing) {
       // INTENT: a player's own page predicts a plain swing when the
       // attack button throws (it never learns it carries; see carriedBy):
       // a swing made while carrying is drawn as the throw it is.
       m.swing = swung;
-      m.swingThrew = m.carrying !== null || carrying !== null;
-      if (m.swingThrew) m.threw = swung;
+      m.swingThrew = m.carrying !== null || carrying !== null || m.windThrew;
+      if (m.swingThrew && !m.windThrew) m.threw = swung;
     }
     if (e.onGround && !m.onGround) m.landed = world.tick;
     if (!e.onGround && m.onGround && e.vy < 0) m.left = world.tick;
@@ -194,7 +209,8 @@ export function stateOf(world: World, e: Entity, m: Memory, onceTicks: (s: AnimS
   // Round 2: the swing's own phase (Step 2 stamps it), so the wind-up is drawn too; drawSprite
   // picks the frame by phase. A wind-up is never a throw (a throw has none).
   const phase = e.c.attack?.phase;
-  if (phase === 'windup' || ((phase === 'strike' || phase === 'recover') && !m.swingThrew)) return { state: 'attack', since: swung };
+  // Round 3 (gap 13): a wind-up while carrying is the throw (handled above), never an attack.
+  if ((phase === 'windup' && !m.carrying && !m.windThrew) || ((phase === 'strike' || phase === 'recover') && !m.swingThrew && !m.windThrew)) return { state: 'attack', since: swung };
   if (phase === undefined && !m.swingThrew && t - swung >= 0 && t - swung < onceTicks('attack')) return { state: 'attack', since: swung };
   const moving = Math.abs(e.vx) > MOVING;
   if (m.carrying) {

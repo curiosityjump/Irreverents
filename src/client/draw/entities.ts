@@ -48,7 +48,7 @@ export function drawEntities(g: CanvasRenderingContext2D, world: World, content:
       drawShadow(g, world, room, kind.box, e, ox, oy);
     }
   }
-  const heads: { e: Entity; x: number; y: number; w: number; color: string }[] = [];
+  const heads: { e: Entity; x: number; y: number; w: number; color: string; alpha: number }[] = [];
   const dotOf = (e: Entity): string | null => (e.c.net ? content.net.playerColors[e.c.net.slot % content.net.playerColors.length]! : null);
   // What was drawn, recorded first and in the world's order, from the simulation's positions,
   // exactly as before (scripted checks read it), however the bodies are then drawn.
@@ -76,12 +76,18 @@ export function drawEntities(g: CanvasRenderingContext2D, world: World, content:
     // a dot above the head in their own colour, by join order, so two people
     // playing the same member can be told apart.
     const dot = dotOf(e);
-    if (dot) {
+    // Round 3 (gap 9). INTENT (with HIDDEN_TINT): nothing points at a hidden body, so on every
+    // other page a hidden player has no mark at all; on their own page it stays, faint, so they
+    // know which one is them. DRAFT: HIDDEN_MARK_ALPHA.
+    const hiddenMark = e.c.roomHide ? (e.id === view?.me ? HIDDEN_MARK_ALPHA : 0) : 1;
+    if (dot && hiddenMark > 0) {
       // With a `player-mark` look the mark is drawn over the head after every body (below).
-      if (look('player-mark')) heads.push({ e, x, y, w: kind.box.w, color: dot });
+      if (look('player-mark')) heads.push({ e, x, y, w: kind.box.w, color: dot, alpha: hiddenMark });
       else {
+        g.globalAlpha = hiddenMark;
         g.fillStyle = dot;
         g.fillRect(x + Math.floor(kind.box.w / 2) - 2, y - 7, 4, 4);
+        g.globalAlpha = 1;
       }
     }
     // Art as data: a kind with a file in content/sprites/ is drawn from its sheet.
@@ -159,11 +165,15 @@ export function drawEntities(g: CanvasRenderingContext2D, world: World, content:
       const held = carriedBy(world, h.e);
       const over = held ? world.entities.find((o) => o.id === held) : undefined;
       const top = over && over.room === roomId ? Math.min(h.y, oy + Math.round(over.y)) : h.y;
+      if (h.alpha < 1) g.globalAlpha = h.alpha;
       drawFrame(g, mark, frameOf(mark, world.tick, true), h.x + Math.round(h.w / 2 - mark.w / 2), top - mark.h - 4 - bob, { source: tinted(mark, h.color) });
+      g.globalAlpha = 1;
     }
   }
 }
 
+/** DRAFT (round 3): how faint a hidden player's own mark is on their own page; on every other page it is not drawn. */
+const HIDDEN_MARK_ALPHA = 0.35;
 /** DRAFT: a friend whose page went away is drawn this faint (draw/away.ts adds the dots). */
 const AWAY_ALPHA = 0.45;
 /** DRAFT: an enraged person's own pixels, pushed this far toward red (only for a sheet with no mood-3 frames, round 2). */

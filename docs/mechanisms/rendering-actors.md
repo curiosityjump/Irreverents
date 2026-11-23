@@ -131,6 +131,33 @@ is this one (see the flag below).
   the crate), the ribbon, a carried crate standing and running, the guard
   punched into rage, the infiltrator in the awning curtain.
 
+### Round 3 (look lane "actors", 2026-11-23)
+
+Push 1:
+
+- **`tumble`** and **`carryAtBy`** are validated in
+  `src/content/kinds/sprites.ts` (`tumble` is one more state everywhere a
+  state's frames may be given: `frames`, `fpsBy`, `moods`; `carryAtBy` is
+  `{ carry | carryRun | throw: { x, y } }`, whole pixels inside the cell).
+  Proven with a throwaway sheet (passes) and a malformed one (an empty
+  `tumble`, an unknown state, a fractional or extra field, a point outside
+  the cell: each refused), then removed.
+- **A throw press while carrying is the throw from the press** (gap 13):
+  the own page's wind-up while carrying (or one that began carrying)
+  selects `throw`, never `attack`, and the strike it ends in stays a throw
+  even when the server's release arrives first (`windThrew` in
+  `remember()`). Filmed against the live game before: carry, throw, punch,
+  carry poses alternating for 0.4 s; after: carry, throw, release in
+  about 180 ms.
+- **Words in the pixel font** (gap 15): `·` draws as `-`, `…` as `...`
+  (and dashes and curly quotes as their ASCII), inside `drawText` and
+  `textWidth`; anything else outside the font is still `?`.
+- **The king's ribbon** (gap 16): beside him only where it fits whole on
+  that side; else it stays above, running off the top. Never moved
+  sideways across his box.
+- **A hidden player has no mark on anyone else's page** (gap 9; the
+  `INTENT:` at `HIDDEN_TINT`), and a faint one (35 %) on their own.
+
 ## Deviations from the contract
 
 - None in the shapes. The first push (8934a58) read `content.looks`
@@ -183,13 +210,22 @@ is this one (see the flag below).
 - **To change it:** `RAGE_TINT` / `RAGE_FLASH` in `entities.ts`, `RAGE_FLASH_TICKS` in `sprites.ts`.
 - **Where:** `DRAFT:` at those lines.
 
+### 2026-11-23 · A hidden friend has no mark on your screen; on their own, a faint one
+- **Decided by:** look round 3, actors lane (the brief, gap 9)
+- **Instead of asking:** "Should hiding hide the coloured mark over a player's head?"
+- **Why this way:** the owner's "satisfaction of a zero-alarm infiltration", and the round-2 rule that nothing points at a hidden body. The hider still needs to know which one is them, so their own page keeps it at about a third.
+- **To change it:** `HIDDEN_MARK_ALPHA` in `src/client/draw/entities.ts` (0 hides it on the own page too; 1 on every page needs the `hiddenMark` line).
+- **Where:** `DRAFT:` at that line.
+
+### 2026-11-23 · With no room above or beside him, the king's words run off the top
+- **Decided by:** look round 3, actors lane (the brief, gap 16)
+- **Instead of asking:** "Where does the ribbon go when the king is carried at the top of a sideways screen?"
+- **Why this way:** over him it hid him; the line he is saying stays nearest his crown, and the screen's top edge cuts the earlier one.
+- **To change it:** the `if (y < 3)` block in `src/client/draw/audience.ts`.
+- **Where:** `DRAFT:` there.
+
 ## Flags for the lead
 
-- **Round 2: a hidden player still shows their own `player-mark`** over
-  the curtain (the mark is every player's identity, not a secret's); the
-  hide itself is otherwise drawn exactly as the brief says. If the owner
-  wants a hidden friend fully gone on screen, hide the mark for a body
-  with `roomHide`.
 - **Round 2: not screenshotted: a carried friend.** In the scene harness
   (keyboard on a touch-sized page) the grappler's grab took a crate but
   not the second page's infiltrator standing overlapping him; fact
@@ -229,7 +265,8 @@ is this one (see the flag below).
 
 - Round 2 with real art: the swing burst, star, hide fold, carry frames
   and rage frames and the font were on `main` and are in the screenshots;
-  `carryAt` was not (proven with a throwaway value, then removed).
+  `carryAt` was not then (proven with a throwaway value, then removed);
+  it has been on `main` since d426771 (the heroes lane).
 - `down` for a sprite body was not looked at in a live room.
 - 60 fps on a real iPhone: only reasoned (no per-frame allocation beyond
   small arrays; tinted frames cached).

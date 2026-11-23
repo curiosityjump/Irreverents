@@ -45,18 +45,23 @@ export function drawAudience(g: CanvasRenderingContext2D, world: World, content:
     let y = picTop - CLEAR - TAIL - 3 - h;
     let tail: 'down' | 'left' | 'right' = 'down';
     if (y < 3) {
-      y = Math.max(3, Math.min(H - h - 3, picTop));
       const right = bx + box.w + SIDE_GAP + TAIL + 2;
       const left = bx - SIDE_GAP - TAIL - 2 - w;
-      if (right + w + 3 <= W || left < 3) {
+      // Round 3 (gap 16): beside him only where the whole ribbon fits on that side; where
+      // neither side fits it stays above him, its bottom still clear of his crown, its top
+      // running off the screen (the last row, the one he is saying, nearest him). INTENT:
+      // never clamped sideways across his box. DRAFT: running off the top, not shrinking.
+      if (right + w + 3 <= W) {
         x = right;
         tail = 'left';
-      } else {
+        y = Math.max(3, Math.min(H - h - 3, picTop));
+      } else if (left >= 3) {
         x = left;
         tail = 'right';
+        y = Math.max(3, Math.min(H - h - 3, picTop));
       }
     }
-    x = Math.max(3, Math.min(W - w - 3, x));
+    if (tail === 'down') x = Math.max(3, Math.min(W - w - 3, x));
     // The `ribbon` nine-slice, a little roomier; else the plain ribbon.
     const framed = drawNine(g, 'ribbon', x - 2, y - 2, w + 4, h + 4);
     if (!framed) {
