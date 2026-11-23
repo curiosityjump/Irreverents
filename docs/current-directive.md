@@ -194,14 +194,16 @@ a backup orchestrator session running opus. He'll take over if you hit a
 usage limit." So the earlier "one worker at a time" rule is gone. The
 weekly allowance on the session's own model read `allowed_warning` at
 11:32 UTC and resets about 13:00 UTC; work that can run on Opus does.
-**The backup orchestrator is `session_017WiGzGp8auJceLEAAh9Aqx`**; its standing instructions are
-the last entry of `docs/for-the-orchestrator.md`.
+**Since 12:01 UTC the orchestrator is `session_017WiGzGp8auJceLEAAh9Aqx`** (the backup, on Opus; it took over when this tenure's Fable limit stopped it at 11:58 UTC; pickup entry at the end of `docs/for-the-orchestrator.md`).
 
 **The look is first** (the owner, 11:11 UTC, `docs/plan/step-8.md`): Step
 8 runs now and its lanes push as they are ready, even with players in the
-world, each fully checked (`docs/decisions-log.md`). For anything else:
-no code push while `/healthz` shows players above 0. Read `/debug/errors`
-before any code push (a deploy empties it). Game feel (movement, hits,
+world, each fully checked (`docs/decisions-log.md`). For anything else,
+too, pushes and redeploys are free until the owner says they are playing
+again: *"Don't worry. I'n not playing that shit right now. Redeploy all you
+want"* (the owner to Vision Partner, first-hand, ~11:40 UTC; receipt in
+`docs/answers-archive.md`). Read `/debug/errors` before any code push (a
+deploy empties it). Game feel (movement, hits,
 knockback) is second (`docs/answers-archive.md`, "second deadline"), ahead
 of new systems.
 
