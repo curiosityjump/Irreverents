@@ -296,6 +296,8 @@ tiles are reported once ("and 9 more tile(s) beside it").
   `npm run build`, which runs the same check, grows with it); see
   `docs/for-the-lead.md`.
 
+- **A doorway at a wall's edge needs two tiles of height and a free tile beside it** for the way-out check to find it: a one-tile `enter` doorway on the wall column was refused as "no way out" (Step 12, the outpost's side, rows 9-10, column 2). A one-tile doorway on an open floor row (the courtyard's `o`, column 23) passes.
+
 ## The controls
 
 `controls/rooms/<name>.json` holds broken rooms: `{ "expect": [text…],
