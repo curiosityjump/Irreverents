@@ -403,3 +403,45 @@ Your final message is that one line.
   their state on `c.npc` and are ordinary entities. Put the "how a
   system sends entity X through door D" paragraph in
   `docs/architecture.md` in your *first* push.
+
+## 10 · Added 04:36 UTC, from the orchestrator's review (overrides sections 1–9 where they differ)
+
+- **Do not build the camera.** Step 1's second-gate worker is writing
+  the first follow camera into `src/client/draw/room.ts` right now (due
+  about 06:30 UTC). Drop "The camera" from section 2 and the camera half
+  of rung 5; do not touch `roomOrigin`, `render.ts` or `main.ts`. You
+  still draw doors and any new tile meaning in `drawRoom` (pull first;
+  that file is being edited by someone else, keep your change to a few
+  added lines). The camera's behaviour at room edges and on a room
+  change becomes this step's after Step 1's lands; the lead will brief
+  it then. Your second push is therefore: door drawing, the validator,
+  the start room.
+- **Scenario names and gate tags.** Name every scenario `step3-*.json`
+  (not `rooms-*`), e.g. `step3-walk-to-street`. Gate B counts only when
+  `npm run gates` lists a scenario for each of step-3 signals 1–5
+  (`docs/plan/step-3.md`, "Feedback signal", re-read it: it changed), so
+  tag `"gate": "B"` the scenarios that are evidence for a signal:
+  `step3-guard-follows` and `step3-room-remembers` (3b),
+  `step3-two-players-apart` (4), and one scenario for signal 1 that
+  exercises validated rooms end to end (`step3-walk-to-street`). Gate B
+  will read "passing" after your push while signals 2, 3 and 5 are still
+  slice B's; say exactly that in the commit so nobody reads it as done.
+- **A connection can be marked hidden in the room data**, and the
+  validator refuses a hidden connection that carries a sign or marker
+  (signal 2). So: doors take a `hidden` yes/no (default no); whatever
+  "sign" comes to mean in the format (tonight: any drawn marker a door
+  kind has; an *enter* doorway's arch is a sign, a bare gap is not),
+  a hidden door must not have one, and the check names the door.
+  Slice B's hidden routes use it.
+- **Working parts live in the room's own file** and are run by this
+  step's `room-*` systems: not `content/objects/**`, not
+  `content/placements/**`. Section 2's generic "placed parts" already
+  says this; keep it that way.
+- **Your half of "where did my friend go" is a fact, not a drawing.**
+  Add a pure helper (beside the sim, not in a registry directory) that,
+  given the content and two room ids, returns the door of the first
+  room that starts the shortest way to the second (or none: same room,
+  or no way), and document under Step 3's row in `docs/architecture.md`
+  what each player's device can know about every other party member:
+  their entity's `room`, and that door. One scenario-free check of the
+  helper on the two rooms is enough. Step 5 draws it later.
