@@ -1,0 +1,14 @@
+{
+  "//": "DRAFT: the barks are placeholders (D-057: a symbol or at most three words). 'reassured' is the owner's \"Yup! Just as expected!\" (D-042) cut to fit.",
+  "id": "shopkeeper",
+  "role": "shopkeeper",
+  "side": "good",
+  "moods": { "1": "routine", "2": "plead", "3": "charge" },
+  "barks": {
+    "distress": "W-what?!",
+    "rage": "ENOUGH!!",
+    "reassured": "Yup! As expected!",
+    "oppose": "Thief! Begone!",
+    "serve": "Thank you!"
+  }
+}

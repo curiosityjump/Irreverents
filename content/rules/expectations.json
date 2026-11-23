@@ -1,0 +1,27 @@
+{
+  "//": "Step 4: what each role is expected to do, read by the npc-witness system (docs/mechanisms/npc-response.md). 'expect': who did what (optionally to whom, optionally in whose eyes) is 'expected' or 'odd'; an odd deed adds its weight to a witness's dissonance. The row with the most conditions wins. A deed with no row means nothing to a witness. 'reactions': what a person in business as usual does about an expected deed. 'events': which of the simulation's events count as which deed. DRAFT: every weight, and the choice that tonight only good people are troubled by a hero's odd deeds.",
+  "id": "expectations",
+  "deeds": ["buy", "take", "rob", "hit", "grab", "throw"],
+  "expect": [
+    { "//": "D-050: a hero buying a potion is the story as written.", "actor": "hero", "deed": "buy", "verdict": "expected" },
+    { "//": "A hero helping themselves to the goods is not.", "actor": "hero", "deed": "take", "witnessSide": "good", "verdict": "odd", "weight": 1 },
+    { "actor": "hero", "deed": "hit", "targetSide": "good", "witnessSide": "good", "verdict": "odd", "weight": 2 },
+    { "actor": "hero", "deed": "grab", "targetSide": "good", "witnessSide": "good", "verdict": "odd", "weight": 2 },
+    { "actor": "hero", "deed": "throw", "targetSide": "good", "witnessSide": "good", "verdict": "odd", "weight": 2 },
+    { "//": "D-060: fighting the bad guys is what heroes are for.", "actor": "hero", "deed": "hit", "targetSide": "bad", "verdict": "expected" },
+    { "actor": "hero", "deed": "grab", "targetSide": "bad", "verdict": "expected" },
+    { "actor": "hero", "deed": "throw", "targetSide": "bad", "verdict": "expected" },
+    { "//": "D-049: a villain robbing the shop is business as usual.", "actor": "villain", "deed": "rob", "verdict": "expected" },
+    { "//": "D-050: the same villain politely buying is horrifying.", "actor": "villain", "deed": "buy", "witnessSide": "good", "verdict": "odd", "weight": 1 },
+    { "actor": "villain", "deed": "hit", "targetRole": "hero", "verdict": "expected" }
+  ],
+  "reactions": [
+    { "//": "D-049: happily opposing the robber, inside business as usual.", "witness": "shopkeeper", "actor": "villain", "deed": "rob", "reaction": "oppose" },
+    { "witness": "shopkeeper", "actor": "hero", "deed": "buy", "reaction": "serve" }
+  ],
+  "events": [
+    { "//": "Step 2's events (docs/architecture.md, 'Bodies').", "event": "hit", "deed": "hit", "by": "by", "target": "target" },
+    { "event": "grabbed", "deed": "grab", "by": "by", "target": "target" },
+    { "event": "thrown", "deed": "throw", "by": "by", "target": "target" }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "id": "step4-villain-robs",
+  "gate": "C",
+  "proves": "signal 1: the villain's routine robs the shopkeeper, and the shopkeeper stays in business as usual throughout and happily opposes him (D-049); the player stands idle out of the way",
+  "room": "test-shop",
+  "placements": true,
+  "players": [{ "id": "a", "character": "hero", "spawn": 0 }],
+  "inputs": [],
+  "ticks": 600,
+  "expect": [
+    { "fact": "event-where", "event": "deed", "where": { "deed": "rob", "by": "villain-1", "target": "shopkeeper-1", "witnesses": ["shopkeeper-1"] }, "between": [168, 168], "count": [1, 1] },
+    { "fact": "event-where", "event": "opposed", "where": { "entity": "shopkeeper-1", "target": "villain-1" }, "between": [168, 168], "count": [1, 1] },
+    { "fact": "mood", "npc": "shopkeeper-1", "between": [0, 600], "is": 1 },
+    { "fact": "event-where", "event": "mood-changed", "between": [0, 600], "count": [0, 0] }
+  ]
+}

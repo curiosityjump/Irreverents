@@ -1,0 +1,9 @@
+{
+  "//": "DRAFT: the graybox body of a guard (Step 4). An ordinary body; who the person is lives in content/npcs/guard.json.",
+  "id": "guard",
+  "name": "Graybox Guard",
+  "box": { "w": 14, "h": 28 },
+  "color": "#577590",
+  "verbs": ["move"],
+  "tuning": "guard"
+}

@@ -1,0 +1,9 @@
+{
+  "//": "DRAFT: the graybox body of a shopkeeper (Step 4). An ordinary body: it walks with the same verb a player runs with, and is hit, lifted and thrown like any other. Who the person is lives in content/npcs/shopkeeper.json.",
+  "id": "shopkeeper",
+  "name": "Graybox Shopkeeper",
+  "box": { "w": 12, "h": 24 },
+  "color": "#e9c46a",
+  "verbs": ["move"],
+  "tuning": "shopkeeper"
+}

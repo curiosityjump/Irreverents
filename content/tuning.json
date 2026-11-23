@@ -2,9 +2,41 @@
   "//": "DRAFT: every feel number in the game lives in this one file, so the owner can change how it plays without touching code. Units: pixels (at the 320x180 scale) and seconds. Each number is declared, with its allowed range, by the verb or system that reads it (src/sim/verbs/, src/sim/systems/); npm run check names any number that is missing, out of range or unread.",
   "world": {
     "gravity": 900,
-    "maxFallSpeed": 360
+    "maxFallSpeed": 360,
+    "//": "DRAFT (Step 4, people): how far a person sees, how much oddness makes rage, how long distress and rage last, how near a hero must be to use a thing. Every one is a first guess.",
+    "npcSightRange": 112,
+    "npcSightHeight": 40,
+    "npcRageAt": 3,
+    "npcDistressFadeTime": 12,
+    "npcRageCoolTime": 15,
+    "npcInteractReach": 20,
+    "npcKeeperReach": 40,
+    "npcBarkTime": 1.5,
+    "npcChargeReach": 14
   },
   "characters": {
+    "shopkeeper": {
+      "//": "DRAFT (Step 4): people walk; they do not run or jump.",
+      "runSpeed": 40,
+      "runAccel": 400,
+      "runDecel": 600,
+      "airAccel": 200,
+      "airDecel": 100
+    },
+    "guard": {
+      "runSpeed": 40,
+      "runAccel": 400,
+      "runDecel": 600,
+      "airAccel": 200,
+      "airDecel": 100
+    },
+    "villain": {
+      "runSpeed": 40,
+      "runAccel": 400,
+      "runDecel": 600,
+      "airAccel": 200,
+      "airDecel": 100
+    },
     "hero": {
       "runSpeed": 96,
       "runAccel": 900,

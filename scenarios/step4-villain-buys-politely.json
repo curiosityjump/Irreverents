@@ -1,0 +1,20 @@
+{
+  "id": "step4-villain-buys-politely",
+  "gate": "C",
+  "proves": "signal 1b: later in the same routine the villain politely buys, which distresses the shopkeeper (D-050: who is acting matters); when he then robs properly the shopkeeper is back in business as usual on the very next tick, opposing him (D-072)",
+  "room": "test-shop",
+  "placements": true,
+  "players": [{ "id": "a", "character": "hero", "spawn": 0 }],
+  "inputs": [],
+  "ticks": 3300,
+  "expect": [
+    { "fact": "mood", "npc": "shopkeeper-1", "between": [0, 2962], "is": 1 },
+    { "fact": "event-where", "event": "deed", "where": { "deed": "buy", "by": "villain-1", "witnesses": ["shopkeeper-1"] }, "between": [2962, 2962], "count": [1, 1] },
+    { "fact": "mood", "npc": "shopkeeper-1", "between": [2963, 3082], "is": 2 },
+    { "fact": "event-where", "event": "deed", "where": { "deed": "rob", "by": "villain-1" }, "between": [3082, 3082], "count": [1, 1] },
+    { "fact": "event-where", "event": "reassured", "where": { "entity": "shopkeeper-1", "by": "villain-1" }, "between": [3082, 3082], "count": [1, 1] },
+    { "fact": "event-where", "event": "opposed", "where": { "entity": "shopkeeper-1", "target": "villain-1" }, "between": [3082, 3082], "count": [1, 1] },
+    { "fact": "mood", "npc": "shopkeeper-1", "between": [3083, 3300], "is": 1 },
+    { "fact": "mood", "npc": "villain-1", "between": [0, 3300], "is": 1 }
+  ]
+}

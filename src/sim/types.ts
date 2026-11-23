@@ -88,6 +88,8 @@ export interface StepContext {
   /** By player id. A player with no entry is holding nothing. */
   inputs: Record<string, Input>;
   content: Content;
+  /** This tick's events so far, oldest first. Read-only: add one with emit(). (Step 4: its witness pass reads other steps' events.) */
+  events: readonly SimEvent[];
   emit<K extends keyof EventMap>(type: K, data: EventMap[K]): void;
 }
 

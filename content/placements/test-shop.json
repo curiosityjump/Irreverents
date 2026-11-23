@@ -1,0 +1,32 @@
+{
+  "//": "DRAFT: Step 4's check scene. A shopkeeper behind a counter who now and then glances at the shelf behind them; a villain who robs the shop, leaves, comes back much later and politely buys, then robs it properly (the library's own example, doc 23), on a loop; a guard watching the far wall with their back to the shop. Goods: three in front of the shopkeeper, one behind. The villain's long wait keeps his polite visit out of the first 50 seconds, which the hero scenarios use.",
+  "id": "test-shop",
+  "room": "test-shop",
+  "place": [
+    {
+      "id": "shopkeeper-1", "character": "shopkeeper", "tile": [3, 9], "npc": "shopkeeper",
+      "routine": [{ "walk-to": 3 }, { "face": "right" }, { "wait": 5 }, { "face": "left" }, { "wait": 1.5 }]
+    },
+    {
+      "id": "villain-1", "character": "villain", "tile": [12, 9], "npc": "villain",
+      "routine": [
+        { "walk-to": 5 }, { "do": "rob", "target": "shopkeeper-1" }, { "wait": 1 },
+        { "walk-to": 12 }, { "wait": 40 },
+        { "walk-to": 5 }, { "do": "buy", "target": "shopkeeper-1" }, { "wait": 2 },
+        { "do": "rob", "target": "shopkeeper-1" }, { "wait": 1 },
+        { "walk-to": 12 }, { "wait": 3 }
+      ]
+    },
+    {
+      "id": "guard-1", "character": "guard", "tile": [11, 9], "npc": "guard",
+      "routine": [{ "face": "right" }, { "wait": 10 }]
+    }
+  ],
+  "things": [
+    { "id": "counter-1", "tile": [4, 9], "deed": "buy", "keeper": "shopkeeper-1", "look": "counter" },
+    { "id": "goods-1", "tile": [6, 9], "deed": "take", "once": true, "look": "goods" },
+    { "id": "goods-2", "tile": [7, 9], "deed": "take", "once": true, "look": "goods" },
+    { "id": "goods-3", "tile": [8, 9], "deed": "take", "once": true, "look": "goods" },
+    { "id": "goods-4", "tile": [1, 9], "deed": "take", "once": true, "look": "goods" }
+  ]
+}

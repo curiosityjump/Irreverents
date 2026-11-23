@@ -1,0 +1,12 @@
+{
+  "//": "DRAFT: nothing tonight drives the villain out of business as usual (no rule makes a deed odd in a bad person's eyes), but he has the same three moods as everyone (D-048). The barks are placeholders (D-057).",
+  "id": "villain",
+  "role": "villain",
+  "side": "bad",
+  "moods": { "1": "routine", "2": "plead", "3": "charge" },
+  "barks": {
+    "distress": "...What?",
+    "rage": "DESTROY THEM!",
+    "reassured": "Hah! Typical."
+  }
+}

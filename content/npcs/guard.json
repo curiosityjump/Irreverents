@@ -1,0 +1,12 @@
+{
+  "//": "DRAFT: the barks are placeholders (D-057).",
+  "id": "guard",
+  "role": "guard",
+  "side": "good",
+  "moods": { "1": "routine", "2": "plead", "3": "charge" },
+  "barks": {
+    "distress": "Hey! What?!",
+    "rage": "SEIZE THEM!!",
+    "reassured": "Carry on."
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "//": "DRAFT: Step 4's check room for people with three moods; no doors, so it is standalone and not part of the kingdom. Left: the shop (the people and the goods are content/placements/test-shop.json). Right: a wall two tiles high (column 14) that a hero can jump and a walking person cannot, with a nook behind it to be out of sight in.",
+  "id": "test-shop",
+  "name": "Test: shop",
+  "tile": 16,
+  "legend": {
+    "#": "solid",
+    ".": "empty",
+    "1": "spawn"
+  },
+  "rows": [
+    "####################",
+    "#..................#",
+    "#..................#",
+    "#..................#",
+    "#..................#",
+    "#..................#",
+    "#..................#",
+    "#..................#",
+    "#.............#....#",
+    "#........1....#....#",
+    "####################"
+  ]
+}

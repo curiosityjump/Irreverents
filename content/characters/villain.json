@@ -1,0 +1,9 @@
+{
+  "//": "DRAFT: the graybox body of a villain (Step 4). An ordinary body; who the person is lives in content/npcs/villain.json.",
+  "id": "villain",
+  "name": "Graybox Villain",
+  "box": { "w": 14, "h": 28 },
+  "color": "#6a4c93",
+  "verbs": ["move"],
+  "tuning": "villain"
+}

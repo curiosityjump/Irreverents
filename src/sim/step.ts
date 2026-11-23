@@ -18,6 +18,7 @@ export function step(world: World, inputs: Record<string, Input>, content: Conte
     world,
     inputs,
     content,
+    events,
     emit(type, data) {
       events.push({ type, tick: world.tick, ...data } as SimEvent);
     },
