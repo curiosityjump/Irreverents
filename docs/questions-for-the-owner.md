@@ -15,7 +15,7 @@ per answer saying where it went.
   orchestrator; Vision Partner's doorbell goes only here.
 - **Questions per message the owner wants:** 3 (the default; record the
   owner's own number here, quoted, if they set one).
-- **Next id:** Q-010
+- **Next id:** Q-012
 
 ## How to feed this file
 
@@ -71,7 +71,28 @@ entries group them; they are not entries.
 
 ---
 
-## Open (3)
+## Open (5)
+
+**After you've played the morning build**
+
+### Q-010 · Is this the right order for what we build first?
+- **Asked by:** orchestrator, first run, `session_017WiGzFWfLir1ATiSP7c5E5`, 2026-11-23 UTC, parent none
+- **Question:** You gave the orchestrator free rein tonight, so the team is building in this order, protecting the top of the list if time runs short: (1) you and a friend in the same world at the live address, moving; (2) comfortable on a phone, easy to join and rejoin; (3) moving, hitting, grabbing and throwing things and each other, with three kinds of character; (4) a small kingdom of connected rooms with hidden routes; (5) people who react (three moods, witnesses, calls for help, sneaking or catastrophe); (6) the king who never stops talking; (7) a Hall of Legends pedestal and a machine to steal. After you've played the morning build: keep this order for what comes next, or move something up?
+- **Unblocks:** `docs/current-directive.md` moving from draft to approved; what the next night's leads pick up first.
+- **Recommendation:** yes, keep the order; tell us the one thing you most missed while playing and it moves to the top.
+- **Answer goes to:** `docs/current-directive.md` "Current directive"
+- **Source:** `docs/current-directive.md`
+- **Blocking:** no
+
+### Q-011 · Should the game remember things after it restarts? That needs storage only you can add on Railway
+- **Asked by:** orchestrator, first run, `session_017WiGzFWfLir1ATiSP7c5E5`, 2026-11-23 UTC, parent none
+- **Question:** Tonight's game keeps the world in the server's memory. Every time new code goes live the server restarts, so the world resets and anything "permanent" (Hall of Legends records, unlocked characters, what you've explored) is gone, apart from what each phone remembers for itself. Your library says saves are still open (D-095: "save backend … OPEN"). To keep things across restarts the Railway service needs somewhere to store them (a Railway "volume", or a Postgres database), and only you can add that in Railway. Options: (1) not yet: fine for now, we say plainly in the game what is and isn't kept; (2) add a volume to the `irreverents-production` service and tell us where it is mounted, and we save a small file there; (3) add Postgres and we use that.
+- **Unblocks:** lasting Hall of Legends records (plan Step 7) and any unlock that should survive a restart.
+- **Recommendation:** 1 for this morning; 2 the first time you wish something had been kept (it is one setting in Railway and no code on your side).
+- **Answer goes to:** `docs/plan/step-7.md` "Open with the owner"
+- **Source:** `docs/plan/step-7.md`, "What's decided"
+- **Blocking:** no
+- **Note (orchestrator, 2026-11-23 ~04:16 UTC):** the owner then asked the orchestrator, first-hand, "Tell me how to add the railway volume", and was given the steps (create a volume in the Railway project, attach it to the Irreverents service, mount path `/data`). That is not yet an answer to this question; once a volume exists the live `/healthz` will say so (`docs/plan/step-1.md`), and the orchestrator opens the saving work then.
 
 **Fixes for the Drive library (non-blocking; the newer rule wins until you say otherwise)**
 
