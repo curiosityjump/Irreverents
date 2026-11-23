@@ -10,7 +10,7 @@ per answer saying where it went.
 ## Current sessions
 
 - **Vision Partner:** session_017WiGzHC3CvjTNZqCuxa8Ex (genesis, started 2026-11-23)
-- **Orchestrator:** session_017WiGzJeh7Tuov59d8XYmru (second orchestrator, picked up 2026-11-23 08:31 UTC from session_017WiGzFWfLir1ATiSP7c5E5, which now only forwards).
+- **Orchestrator:** session_017WiGzJeh7Tuov59d8XYmru (handed off 2026-11-23 ~09:58 UTC at 097383c; the owner starts the next).
   This line is the one address every session uses to reach the current
   orchestrator; Vision Partner's doorbell goes only here.
 - **Questions per message the owner wants:** 3 (the default; record the
