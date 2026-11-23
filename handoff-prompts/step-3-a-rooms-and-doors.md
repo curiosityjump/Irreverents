@@ -366,3 +366,40 @@ mark `DRAFT:`, log it in `docs/decisions-log.md`. Flags and findings
 that are not questions: `docs/for-the-lead.md`. When each push lands,
 and when you are done or stuck, send the lead one line with the commit.
 Your final message is that one line.
+
+## 9 · Added 04:33 UTC, from the Step 2 and Step 4 leads (these override anything above they contradict)
+
+- **A room with no doors is a standalone room and is exempt** from "every
+  room reachable from every other" and from the way-out rule. Other
+  steps are adding scratch rooms to `content/rooms/` for their own
+  checks (`test-body.json`, maybe `test-hit.json` from Step 2;
+  `npc-lab.json` from Step 4), and `graybox-hall` is one already. They
+  have no doors and are never the start room. Do not key this on a name.
+  Spawn-on-ground and row-width rules still apply to them. A room *with*
+  doors must be in the kingdom reachable from the start room.
+- **Non-player bodies in scenarios: use Step 2's, do not add your own.**
+  Step 2 is landing (by about 05:00 UTC) `content/placements/<room
+  id>.json` (`{ "room", "place": [{ "id", "character", "tile":
+  [col,row] }] }`) and `populateRoom(world, content, roomId)` in
+  `src/sim/world.ts`, with bodies `crate`, `crate-heavy`, `dummy`,
+  `dummy-heavy` (`player: null`). Placements are Step 4's and Step 2's
+  files, not yours: for `rooms-guard-follows` you still need a body that
+  *moves*. If what has landed when you get there cannot give a body a
+  starting speed, add only that (an optional scenario field that sets an
+  entity's starting speed by id), additively.
+- **Which characters the way-out check runs for:** Step 2 is adding
+  `content/party.json` (the party list; a new player gets the first
+  member nobody plays) and character kinds `grappler`, `infiltrator`
+  (about 12 px tall, fits a one-tile gap) and `flyer`.
+  `game.json`'s `playerCharacter` stops deciding who a player is. Run
+  the check for every party member if `party.json` exists when you
+  rebase, else for `playerCharacter`.
+- **The castle street, for Step 4** (shop, guard post, bell): besides
+  the 12 flat tiles, a second flat stretch that is out of straight-line
+  sight of the first (a solid wall or a change of level between them),
+  and at least one ledge reached only by a jump (Step 4's pursuers walk
+  and never jump, so that ledge is a refuge with no special object).
+- **The non-player door hook is wanted by Step 4 now.** Its people keep
+  their state on `c.npc` and are ordinary entities. Put the "how a
+  system sends entity X through door D" paragraph in
+  `docs/architecture.md` in your *first* push.
