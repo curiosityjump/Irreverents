@@ -330,7 +330,7 @@ Full text: `docs/plan/step-10.md`
 
 ## Step 11 — The cantina: an endless brawl and the place you change your party
 
-**Status: open, claimed by session_017WiGzFy3MD6ecvM7QMvQGd, 2026-11-23.** (Opened 2026-11-23 14:25 UTC by orchestrator session_017WiGzGp8auJceLEAAh9Aqx: the owner, ~14:30 UTC, "I haven't seen any levels being built, enemies, the cantina, etc."; Step 2's feel round, which it waited on, closed at 06a07f4. Runs beside Step 8's look; one worker at a time. Earlier: Drafted from the library by an agent; its independent review did not run before the usage limit stopped it at 04:58 UTC. 4 of its 4 quoted pieces were found verbatim by script. Check its D-numbers and its "What's decided" against the library before briefing from it.)
+**Closed 2026-11-23, 18:05 UTC.** Off the castle street (column 20) is a cantina where every roster hero nobody is playing wanders, including two new roster-only ones; hit one and everyone in the room brawls, friends included; launched off the stage or knocked flat, anyone is back on a pad at once; a counter keeps each player's knock-outs and falls; the owner's bell (Use near it) or the last player leaving ends it, and it raises no alarm. Tap a wandering hero outside the party, then the member to replace in the row across the screen (never a friend's). Chased by a town guard, the street's doorway in refuses you; the cantina's way out never refuses. Proven by scenarios, a real-server check and the phone e2e (all re-run by the lead); **not tried on a real iPhone**; the no-fit self-swap is untested; the switch landing on a friend's member is Step 5's switch-gap brief; the cantina's own art is Step 8 round 3's. Lead: `session_017WiGzFy3MD6ecvM7QMvQGd`.
 
 Full text: `docs/plan/step-11.md`
 
