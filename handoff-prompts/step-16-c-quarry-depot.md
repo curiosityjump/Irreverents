@@ -1,6 +1,6 @@
 # Step 16, slice 3: the depot — a guarded hoard, taken quietly or loudly
 
-Brief for a builder. Written 2026-11-23 17:30 UTC by the Step 16 lead
+Brief for a fresh builder. Written 2026-11-23 17:30 UTC by the Step 16 lead
 (`session_017WiGzHt9iJy3caBLkT1Ef4`). The step is `docs/plan/step-16.md`:
 read "What's decided", bullets from "Seeing is not calling" to "Solo is
 never locked out". Read `docs/mechanisms/outposts.md` and
@@ -92,7 +92,16 @@ Owned paths: `content/outposts/quarry-depot.json`; people and things in
 
 ## The two pushes
 
-1. **Quiet** (signal 5): items 1–3, and the two zero-alarm scenarios.
+1. **Quiet** (signal 5): items 1–3, the two zero-alarm scenarios, and
+   **the touch crossing of the road** (signal 7, measured by the lead
+   at 727dec7): in `scripts/e2e/quarry.ts`, `walkInto`'s hop adds the
+   jump finger with a `touchMove`, so the page never sees it touch down.
+   Replace the hop with: `touchStart` [stick id 1, jump id 2]; sleep 300;
+   `touchEnd` []; `touchStart` [stick id 1] (as `scripts/e2e.ts`'s
+   two-finger fact starts both in one `touchStart`). Then after the road
+   screenshot, `walkInto(ph, 1, 'quarry-ridge', 45000, 700)` as a fact
+   `quarry-road-cross`; drop the DRAFT comment there. With that change the
+   lead's local `npm run e2e` crossed into `quarry-ridge` as the grappler.
 2. **Loud** (signal 6): the caught scenarios, and the doc rows.
 
 ## Scenarios (`step16-*`, no `gate` tag, one player, each with a control watched to fail)
