@@ -150,8 +150,9 @@ Read with the owner's words at the top of this file.
   delivered sheet replaces it by changing a file, not code. The desk's
   requests stay open and Vision Partner is asked for more
   (`docs/questions-inbox.md`, "Asset need").
-- `DRAFT:` **Who runs it.** The orchestrator `session_017WiGzHX8g2sXimNRnqp2oZ` leads this step
-  itself. Round 1 is nine lanes building to one contract
+- `DRAFT:` **Who runs it.** The orchestrator leads this step itself:
+  `session_017WiGzHX8g2sXimNRnqp2oZ` until its Fable limit stopped it at 11:58 UTC, then
+  `session_017WiGzGp8auJceLEAAh9Aqx` (pickup at be15324). Round 1 is nine lanes building to one contract
   (`docs/mechanisms/art-pipeline.md`) at the same time, each with its own
   paths: foundation and heroes as agents on the orchestrator's machine
   (it runs only two at once: 4 processors), and cast, tiles, props, world,
@@ -161,6 +162,21 @@ Read with the owner's words at the top of this file.
   session's own model; the four code lanes on Opus, to spare the nearly
   spent weekly allowance (the owner's words above). Each lane leaves a
   notes file (named in its brief) that the orchestrator reads and files.
+- **P01 Ruins Starter Kit (delivered 2026-11-23 ~13:25 UTC by the asset
+  desk, synced at 2882af1):** `docs/design-library/03-visual-direction-and-assets/current-pixel-art-explorations/p01-ruins-starter-kit-playable-prototype/p01-complete/`.
+  Two original 48×48 hero strips (scout, rogue; seven poses, no polished
+  run loop), 12 props, 8 terrain prefabs (not a 16 px autotile set), 4
+  effects, an atlas with a manifest of exact source rectangles and foot
+  pivots, and 320×180 previews. It is bright, outlined, shaded and round:
+  closer to the bar than anything drawn in code so far. It arrived after
+  round 1's lanes started, so they were not redirected to it mid-flight
+  (a brief changed under a running worker costs a second pass,
+  `docs/process-observations.md`). `DRAFT:` **Round 2 starts here:** where
+  a P01 prop, terrain piece or effect beats the code-drawn stand-in, it
+  replaces it as data (the manifest gives the rectangles). The 48 px heroes
+  are a scale question against the 32 px cells and 18×30 boxes, the round-2
+  reviewer's to weigh. Its readme asks for a 1–5 rating per category; the
+  round-2 review answers that back to the desk through Vision Partner.
 - **Feedback signal for the look:** screenshots of the real game at
   iPhone size (sideways and upright), put beside the references and read
   by a fresh reviewer each round who lists the largest remaining gaps;
@@ -175,7 +191,7 @@ Read with the owner's words at the top of this file.
 
 ## Briefs
 
-Round 1 of the look (2026-11-23): `handoff-prompts/look-foundation.md`, `look-heroes.md`, `look-cast.md`, `look-tiles.md`, `look-props.md`, `look-world.md`, `look-actors.md`, `look-shell.md`, `look-sound.md`. Delete each when its lane is reviewed.
+Round 1 of the look (2026-11-23): `handoff-prompts/look-foundation.md`, `look-heroes.md`, `look-cast.md`, `look-tiles.md`, `look-props.md`, `look-world.md`, `look-actors.md`, `look-shell.md`, `look-sound.md`. Delete each when its lane is reviewed. Reviewed by re-running build and check, and deleted 13:35 UTC: foundation (61f7676), heroes (59de45d), world (82fe89b), actors (f92a447), shell (ac6509b), sound (fdcfec9). Still running: cast, tiles, props.
 
 ## Open with the owner
 
