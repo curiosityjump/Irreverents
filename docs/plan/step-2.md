@@ -568,3 +568,12 @@ rows re-read. See the handoff notes below.
   drawn as standing still is Step 8 round 2's renderer lane
   (orchestrator); the thrower's predicted swing and the switch gap are in
   `docs/plan/step-5.md`'s handoff notes. Claim kept.
+
+- **Lead, 14:28 UTC: granted Step 11's lead (`session_017WiGzFy3MD6ecvM7QMvQGd`)**
+  an additive edit in Step 2's files for the brawl (D-085): a `c.brawl`
+  component set by Step 11's system, read at the friend-share sites in
+  `attack.ts`, `impact-walls.ts`, `impact-bodies.ts`. Conditions: the
+  existing friend scenarios stay green unchanged; the player-on-player
+  `friend` test is kept and only its share is replaced; a non-player hit
+  never reads `c.brawl`; new roster characters joining `party.json` means
+  re-running the switch scenarios and telling the Step 2 lead first.
