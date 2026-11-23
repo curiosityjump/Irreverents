@@ -53,7 +53,7 @@ export function runRoomControls(content: Content): { problems: string[]; count: 
     // logic (collision never depends on art; docs/mechanisms/art-pipeline.md).
     const files = { ...base };
     if (raw.game !== undefined) {
-      for (const rel of Object.keys(files)) if (/^(rooms|placements|outposts|dispatch|cantina|levels|completion|heists|atlases|backdrops|decor|looks|powers|recruits)\//.test(rel)) delete files[rel];
+      for (const rel of Object.keys(files)) if (/^(rooms|placements|outposts|dispatch|cantina|levels|completion|heists|atlases|backdrops|decor|looks|powers|recruits|hall)\//.test(rel)) delete files[rel];
       files['game.json'] = raw.game;
     }
     for (const [id, room] of Object.entries(raw.rooms)) files[`rooms/${id}.json`] = room;

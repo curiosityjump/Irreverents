@@ -378,3 +378,36 @@ is untouched.
 - **Not verified:** how a wave arriving looks on a phone beyond the e2e
   screenshot (`e2e-outpost-wave.png`); push 3 takes the iPhone-size
   screenshots of a wave arriving.
+
+### 2026-11-23, same builder, push 2: the game notices
+
+- **The world everyone shares keeps no legend across a restart or deploy**
+  (said plainly, as the brief asks): its pedestals live in its world, which
+  a restart rebuilds. A kept game's live in its save (`step7-hall`). Owed:
+  the store wiring slice (`src/server`: give each record its lasting number
+  on the server, restore on world creation, dedupe on load).
+- **Three kinds shipped, not two:** the heist's `clean-getaway` was on
+  `main`, so "a theft nobody noticed" is in. Consequence: the heist's own
+  check (`step19-heist`) and its camp scenarios now hang a pedestal too
+  (nothing asserts against it).
+- **Thresholds sit at the measured edge:** `step7-last-stand-camp` fells
+  exactly 5 (the threshold); a small change in fighting or in the camp's
+  numbers can move it below. Its facts pin the numbers, so check will say.
+- **The picture holds about three bodies** under the 500-byte budget with
+  today's ids ("outpost-fighter" is long): push 3 might store kinds by a
+  short index to fit more.
+- **A page's local world:** the detector stands down where `world.taken`
+  is set (a page's own one-character world). If the net client ever stops
+  setting `taken`, pages would hang private pedestals; `step7-hall`'s
+  courtyard fact would catch it.
+- **e2e:** no phone fact for push 2 (the banner comes from a real server
+  event that takes 40 s of fighting or a timed heist to earn); the banner is
+  for push 3's screenshots. `gates` reads 6 of 6, with E now also on
+  `step7-last-stand-camp` and `step7-hall`.
+- **e2e runs for push 2:** 4 in all. Full pass on the last. Before it,
+  `h1` (reconnect after 75 s down) failed twice, together with
+  `t-grab-friend` and `s-break-free` once, and a baseline run of `main`
+  without this push failed `cantina-row`. These are the intermittent
+  two-page facts already under investigation (54ce74b).
+- **Not verified:** the banner and the pedestal on a phone screen (push 3).
+

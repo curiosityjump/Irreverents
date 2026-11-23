@@ -1,7 +1,10 @@
+import { hallOf } from '../../content/kinds/hall.ts';
 import type { Content } from '../../content/types.ts';
 import type { Entity, World } from '../../sim/types.ts';
 import { FRAME_CREDITED, FRAME_OUT, PEDESTAL_KIND } from '../../sim/hall/record.ts';
 import type { HallRecord } from '../../sim/hall/record.ts';
+import type { SimEvent } from '../../sim/types.ts';
+import { queueBanner } from './banner.ts';
 import { drawText, textWidth, useContent } from './fx.ts';
 
 // How a Hall of Legends record looks in the room
@@ -40,7 +43,8 @@ const CARD_STATS = 4;
  * the real type once src/content/kinds/hall.ts exists.
  */
 type HallWords = { kinds?: Record<string, { name?: string }>; stats?: Record<string, { label?: string }> };
-const words = (content: Content): HallWords => (content as unknown as { hall?: HallWords }).hall ?? {};
+// Step 7: the content kind exists now (src/content/kinds/hall.ts); read through hallOf, still with the fallbacks.
+const words = (content: Content): HallWords => hallOf(content) ?? {};
 const fromId = (id: string): string => id.replace(/([a-z])([A-Z])/g, '$1 $2').replace(/-/g, ' ').toLowerCase();
 
 /** A pedestal's record, or null for anything else. */
@@ -230,7 +234,11 @@ export function drawHall(g: CanvasRenderingContext2D, world: World, content: Con
   } else {
     const fresh = pedestals.filter((p) => !seen!.has(p.e.id));
     for (const p of fresh) seen.add(p.e.id);
-    if (fresh.length === 1) banner = { id: fresh[0]!.e.id, until: now + BANNER_MS };
+    // Step 7: a new legend is announced from the world's `hall-legend` event (watchHallEvents),
+    // which reaches every page; a pedestal arriving is no longer announced by itself, or a page
+    // in the gallery would announce it twice. INTENT: a page is sent only the entities of its
+    // own room (src/server/game.ts), so the pedestal cannot be how a page in the camp hears it.
+    void BANNER_MS;
   }
 
   const boxOf = (e: Entity): { w: number; h: number } => content.characters[e.kind]?.box ?? { w: 16, h: 16 };
@@ -279,4 +287,29 @@ export function drawHall(g: CanvasRenderingContext2D, world: World, content: Con
   }
   if (best) drawPanel(g, best.record, content, cardLines(g, best.record, world, content, best.lasting, textW), 2);
   g.restore();
+}
+
+/** Step 7 (DRAFT): the words of a new legend's banner, before its title. No digits (t-no-numbers). */
+const NEW_LEGEND = 'A new legend';
+let lastLatest: unknown = null;
+let announced: string[] = [];
+
+/** The legends this page has announced (for the page's drawn record): their titles, newest last. */
+export function drawnHall(): { announced: string[] } {
+  return { announced };
+}
+
+/**
+ * Fed every frame from main.ts with the server's newest events: a new
+ * legend, anyone's, anywhere in this world, queues its banner (draw/banner.ts).
+ * INTENT: the banner takes no input and stops nothing; it goes by itself.
+ */
+export function watchHallEvents(latest: { tick: number; events: readonly SimEvent[] }): void {
+  if (latest === lastLatest) return;
+  lastLatest = latest;
+  for (const ev of latest.events) {
+    if (ev.type !== 'hall-legend') continue;
+    queueBanner({ key: `hall:${ev.n}`, text: `${NEW_LEGEND}: ${ev.title}`, frames: 180, color: GOLD });
+    announced = [...announced, ev.title].slice(-8);
+  }
 }

@@ -1,0 +1,32 @@
+{
+  "//": "DRAFT (Step 7 push 2, docs/decisions-log.md 'Step 7: legends'): what the Hall of Legends recognises and how it words it. Thresholds come from measured fights in the real camp (docs/plan/step-7.md, Builder notes): one wave hangs nothing. Titles are picked by the record's number, so the same feat reads differently over time; {place} is the room's shown name. No digits in any title (the banner shows it). Pedestals stand on the gallery's flat floor (row 10), in this order; past the last spot they go round again.",
+  "id": "legends",
+  "room": "hall-gallery",
+  "spots": [[5, 10], [9, 10], [13, 10], [17, 10], [21, 10]],
+  "kinds": {
+    "last-stand": {
+      "name": "A last stand",
+      "titles": ["The stand at {place}", "They held {place}", "Not one step back at {place}"],
+      "minWaves": 3,
+      "minFelled": 5
+    },
+    "narrow-escape": {
+      "name": "A narrow escape",
+      "titles": ["Out of {place} by a hair", "The getaway from {place}", "Gone from {place} with them still coming"],
+      "minWaves": 2,
+      "minFelled": 0
+    },
+    "clean-theft": {
+      "name": "A theft nobody noticed",
+      "titles": ["The quiet job at {place}", "Nobody saw a thing at {place}", "Lifted from {place}"],
+      "minWaves": 0,
+      "minFelled": 0
+    }
+  },
+  "stats": {
+    "waves": { "label": "waves" },
+    "came": { "label": "came" },
+    "felled": { "label": "fell" },
+    "seconds": { "label": "seconds" }
+  }
+}

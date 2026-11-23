@@ -59,6 +59,7 @@
     "outpostZoneEndOn": 1,
     "outpostBoundOn": 1,
     "outpostSendOn": 1,
+    "hallRelativeOn": 1,
     "chaseCrossCap": 2,
     "powerOrbPop": 240,
     "powerOrbSpread": 40,
@@ -270,6 +271,11 @@
     "signal-post": {
       "//": "DRAFT (Step 12): the post with the horn. Like the throne: nobody can lift it and it cannot be knocked out. Heaviest a body may be, so a hit or a body knocked into it barely moves it.",
       "weight": 1000,
+      "toughness": 0
+    },
+    "pedestal": {
+      "//": "DRAFT (Step 7): as heavy as the heavy dummy, so only the grappler lifts it; it cannot be knocked out.",
+      "weight": 110,
       "toughness": 0
     },
     "throne": {

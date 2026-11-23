@@ -22,6 +22,7 @@ import { drawnBanner } from './draw/banner.ts';
 import { drawnHud } from './draw/hud.ts';
 import { drawnSight, watchSightEvents } from './draw/sight.ts';
 import { drawnHeist, watchHeistEvents } from './draw/heist.ts';
+import { drawnHall, watchHallEvents } from './draw/hall.ts';
 import { drawnRecruits, noteRecruits } from './draw/recruits.ts';
 import { drawnPowers } from './draw/powers.ts';
 import { levelProgress } from '../sim/levels.ts';
@@ -146,6 +147,8 @@ const debug = {
     sight: null as ReturnType<typeof drawnSight> | null,
     /** Step 19: the clean getaways this page announced (src/client/draw/heist.ts). */
     heist: null as ReturnType<typeof drawnHeist> | null,
+    /** Step 7: the legends this page has announced by banner (src/client/draw/hall.ts). */
+    hall: null as ReturnType<typeof drawnHall> | null,
     /** Step 13: the cages this frame drew in this room and the captives' calls (src/client/draw/recruits.ts). */
     recruits: { cages: [], calls: [], flash: null } as ReturnType<typeof drawnRecruits>,
     cantina: null as { row: { kind: string; slot: number; x: number; y: number; w: number; h: number; taken: boolean }[] | null; counter: { player: string; ko: number; falls: number }[] | null } | null,
@@ -268,6 +271,7 @@ function play(worldName: string): void {
     const shown = { ...net.world, entities: drawnBodies };
     watchSightEvents(net.latest(), frameNo); // Step 19: an unseen deed's mark (draw/sight.ts)
     watchHeistEvents(net.latest()); // Step 19: a clean getaway's banner (draw/heist.ts)
+    watchHallEvents(net.latest()); // Step 7: a new legend's banner, wherever this page is (draw/hall.ts)
     const camera = render(g, shown, content, me.room, { me: me.id, frame: frameNo, drawn: seen });
     const result = { camera, drawn: seen };
     lastCamera = camera;
@@ -313,6 +317,7 @@ function play(worldName: string): void {
     d.banner = drawnBanner();
     d.sight = drawnSight();
     d.heist = drawnHeist();
+    d.hall = drawnHall();
     d.recruits = drawnRecruits();
     d.words = takeWords();
     // Step 5 (docs/mechanisms/network.md, "Predicted hits"): each impact this frame drew from, on this page's clock.

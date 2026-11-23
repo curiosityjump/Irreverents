@@ -474,6 +474,16 @@ flung at 450 px/s (was 300). Measured: each hero, striking, reaches the third
 wave (23 to 59 s). The depot is unchanged, but its waves now drop into the
 floor's gap at columns 51-52 on the way west: flagged.
 
+**Landed, push 2 (the game notices; `docs/mechanisms/hall-of-legends.md`,
+"Recognising a legend").** A last stand (3 waves, 5 felled by the players),
+a narrow escape (2 waves, out on your feet with one still standing) and a
+theft nobody noticed (the heist's clean getaway) hang a pedestal in the
+gallery by themselves, everyone there credited, the same again only if
+better; the banner comes from the world's `hall-legend` event on every page.
+Gate E also passes on `step7-last-stand-camp` (real inputs) and
+`step7-hall` (real server, kept game). The shared world's pedestals do not
+outlast a restart until the store is wired.
+
 ## 6 · Vehicle hijacking
 
 **The library.** DECIDED: D-017 (steal or hijack vehicles), D-020 (roadblock

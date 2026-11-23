@@ -113,7 +113,8 @@ groups) whenever you add one — never update the number from memory.
 - `src/sim/use/free.ts` + system `recruit-free` + event `recruited` — Use held at a shut cage frees the captive (the roster grows for good), then Use there swaps them in on the spot; a banner, the new face and a fanfare on every page (Step 13).
 
 **The Hall of Legends** (`docs/mechanisms/hall-of-legends.md`)
-- `src/client/draw/hall.ts` — each pedestal's record redrawn as a small framed picture, a card with no button when a player stands at it, and a three-second banner for a newly hung one (Step 7).
+- `src/client/draw/hall.ts` — each pedestal's record redrawn as a small framed picture, a card with no button when a player stands at it, and a new legend's banner on every page from the world's `hall-legend` event (Step 7).
+- `src/sim/systems/hall-detect.ts` + `src/sim/hall/detect.ts` + `content/hall/legends.json` (kind `halls`) — the game notices a last stand, a narrow escape at an outpost, or a theft nobody noticed, by itself, and hangs a pedestal `hall:<n>` in the gallery unless it is no better than the best of its kind there (Step 7).
 
 **Lasting records** (`docs/architecture.md`, "Lasting records: the store")
 - `src/server/store.ts` — named collections of JSON records on the owner's storage volume, in memory where there is none; never throws, sets unreadable files aside, proven by `node scripts/check-store.ts` (Step 7).
