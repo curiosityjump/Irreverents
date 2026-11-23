@@ -325,3 +325,35 @@ depend on it. Only-the-owner questions: decide, `DRAFT:`, log. Flags and
 findings: `docs/for-the-lead.md`. Message the lead one line with the
 commit when each push lands and when you are done or stuck; that line is
 your final message.
+
+## 12 · Added 04:56 UTC, from the Step 6 lead (the king's speech): a window in the throne room
+
+The library (doc 03): the king "occupies a throne against a
+stained-glass window; players wonder if they can suplex him through
+it". Doc 24 gives the throne room "one or two spectacular breaches".
+So, in your second push:
+
+- `breakable` takes an optional `params.look` (`"wall"` by default,
+  `"window"`), which only changes how it is drawn (graybox: a paler
+  pane with a frame). Same rule as any breakable: a thrown body breaks
+  it, a walking hero does not.
+- Place one `breakable` with `"look": "window"` in `throne-room`, in
+  the west wall above the dais, **above** the false wall's tiles (wall
+  tiles only, section 2's rule holds). Step 6 is placing a king at
+  about column 5 on the dais, a throne and crates, through
+  `content/placements/throne-room.json` (theirs): do not change the
+  dais.
+- **A body thrown through it must land somewhere with a way back**,
+  never a pocket. The lead's suggestion, yours to change: the wall is
+  3 tiles thick, so the window is its inner face and behind it is the
+  top of the same space the false wall leads into; the body drops into
+  the hidden passage and through to the undercroft. A spectacular
+  breach that also gives the secret away to whoever does it is the
+  game working. If the geometry will not allow that, a second hidden
+  walk door higher on the west edge with its pair on the undercroft's
+  east edge.
+- One scenario, `step3-through-the-window` (not gate-tagged): a body
+  thrown from the dais at the window breaks it and ends in the
+  undercroft; the same body walking at it does not break it. Message
+  the lead the event's name and fields as soon as `breakable` is on
+  `main` (Step 6's court reacts to it).
