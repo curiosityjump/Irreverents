@@ -445,3 +445,32 @@ for later, as the step suggests.
   `step4-caller-knocked-out` control, and (3), a real iPhone, are what
   is left.** Any uncommitted push-4 work in the worker's container is
   not on `main` and should be redone from the brief, not recovered.
+- **Lead, 10:03 UTC. Slice 2's flags, routed here** (its section in
+  `docs/for-the-lead.md` is removed; the mechanism doc carries the
+  shapes). **For whoever briefs next, and for the taste list:**
+  - Being caught in the street is a red guard standing over you: the
+    guard's body has no `attack` verb, so nothing lands. The alarm does
+    not clear while he can see you. Giving him Step 2's `attack` is one
+    word in `content/characters/guard.json` plus its numbers; not done,
+    because how hard a guard hits is the owner's to feel first.
+  - A hero runs 2.4 times as fast as a guard walks and sight is 7
+    tiles, so a guard only sees you leave by a door that is close.
+    Leaving by a far door is nearly always unseen.
+  - A guard who watches a hero step into a hiding place stops seeing
+    them the moment they stand still, walks to the spot and searches
+    around it. Nothing remembers "I saw you go in there". Funny or
+    broken is the owner's call.
+  - Only someone upset **by a hero** goes to the bell (the villain's
+    polite purchase does not send the shopkeeper there every minute);
+    a caller rings again only after seeing something more; the alarm's
+    wait is held by anyone conscious seeing a hero, the villain too.
+  - A guard who followed into another room still answers to the alarm
+    of the room he was placed in.
+  - Seven scenarios are pinned to `content/placements/castle-street.json`'s
+    routines and columns: moving a person or a timing there means
+    re-tracing them.
+  - `call-stopped { why: "knocked-out" }` is emitted but no scenario
+    covers it (part of what is left).
+  - The worker wrote that no room a player can reach has a hiding
+    place; at 10:02 UTC `grep -l '"hide"' content/rooms/*.json` says
+    which do. Check it before telling the owner where to hide.
