@@ -27,3 +27,9 @@ changed>` as its heading. The first one in a new project is the genesis
 entry: "first vision written; no plan exists yet", naming the sections.
 
 ## Entries
+
+### Vision · The measure (second deadline: Amazing Mirror quality by tomorrow)
+- **Answer:** "The game looks awful. Make sure it stays on track. I want to be playing something that looks, sounds, and feels as good as kirby and the amazing mirror, but with all the decisions in the vision, by tomorrow. LONG way to go currently."
+- **Recorded in:** `docs/vision.md` "The measure"
+- **Action for:** orchestrator (vision-level): by 2026-11-24 the target is look, sound and feel on par with Kirby & the Amazing Mirror. Put Step 8 ("What you see and hear") and game feel (movement, hit-stop, knockback, animation) ahead of new systems. Assets on hand: SFX pack (`docs/design-library/03-visual-direction-and-assets/audio/a01-01-first-sfx-pack/`), touch buttons (U08-01), S00-01 style references. ChatGPT's first heroes were too plain (it rejected them itself); hero v2, NPCs, tiles and music are queued. Art quality from ChatGPT is the biggest risk to this bar: consider having a session produce pixel art directly too, judged against `docs/design-library/` doc 14 and doc 32's checklist, rather than waiting on hourly deliveries.
+

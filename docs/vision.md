@@ -124,6 +124,14 @@ fun. Two people playing together means online co-op with one shared party
 is the orchestrator's call ("free reign"); doc 24's gates and doc 12's
 golden scenarios remain the owner's own yardsticks for what to add next.
 
+**The second deadline, and the quality bar.** **Owner, 2026-11-23 ~10:05 UTC, to Vision Partner, first-hand, after the first morning build:**
+> The game looks awful. Make sure it stays on track. I want to be playing something that looks, sounds, and feels as good as kirby and the amazing mirror, but with all the decisions in the vision, by tomorrow. LONG way to go currently.
+
+*(Framing:)* so by 2026-11-24 the bar is no longer "playable together" but
+**Amazing Mirror quality in look, sound and feel**, with the decided
+systems intact. Grey-box shapes and unwired sound now count against the
+measure, not as acceptable placeholders.
+
 ## Principles that decide most questions
 
 **No NPC AI.** **Owner, 2026-11-22 (Drive, doc 11, D-055):**
