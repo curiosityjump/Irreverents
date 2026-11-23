@@ -123,6 +123,9 @@ All cut from P03/P07 plates by tools/art/cast/cut3.py. Every cast body still owe
 | `sprite:crate-heavy` | approved-source-not-used | `CPE/cooperative-adventure-pixel-asset-studies.png` iron-cornered crate (835,455)-(895,525), ~0.35 to 24x24; hurt = P07 crack lines (750,480)-(860,590) over it. Alt: P07 push block (760,660)-(850,750). | look3-cast, the same things push. |
 | `sprite:dummy` | no-approved-source | MA-23 | look3-cast once delivered (graybox-hall only). |
 | `sprite:dummy-heavy` | no-approved-source | MA-24 | look3-cast once delivered (graybox-hall only). |
+| `sprite:set-castle-town` | uses-approved | `P04/.../hall-of-legends-tile-atlas.png` (210,885)-(325,1062), 24x32 (`tools/art/sets/make.py`, Step 14 slice B push 3). | - |
+| `sprite:set-iron-quarry` | uses-approved | `P05/p05-rare-powers-pickups-source.png` (181,8)-(286,134), scale 0.25 (`tools/art/sets/make.py`). | - |
+| `sprite:set-bandit-camp` | uses-approved | `P04/.../hall-of-legends-tile-atlas.png` (326,925)-(420,1062), 16x20 (`tools/art/sets/make.py`). | - |
 | `sprite:throne` | approved-source-not-used | `EQ/e-q01-quiet-throne-hall-clear-playable-platforms.png` throne (750,290)-(903,483), extract/redraw at 24x32 (~0.16); hurt = a small tilt. | look3-cast, the things push (throne.json is in its file list). |
 | `sprite:signal-post` | uses-approved | `P03/pixel-villain-sprite-sheet.png` row 4 horn post (100,812)-(300,1032), horns removed (cut3.py signal_post()). | - |
 | `sprite:pedestal` | approved-source-not-used | `P04/hall-of-legends-tile-atlas.png` plinth row (40,400)-(593,493); plain plinth ~(40,400)-(110,493). | The looks are cut: `hall-plinth`, `hall-plinth-tall`, `hall-plinth-star` (group `hall`); point content/characters/pedestal.json at one once Step 7 adds it. |

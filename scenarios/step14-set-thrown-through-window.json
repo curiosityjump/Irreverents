@@ -1,0 +1,127 @@
+{
+  "id": "step14-set-thrown-through-window",
+  "gate": null,
+  "proves": "Step 14 slice B push 3: the body the town's set builds does what bodies already do: the grappler hops onto the throne room's dais, picks it up where it stands (tile [7, 13]), carries it west and throws it with a jump: it smashes the stained-glass window and flies on into the hidden undercroft (as the king does in step6-king-through-the-window). It is heavy (the heavy crate's numbers), so this is the grappler's. Control (watched to fail, 2026-11-23): the throw left out, the window holds.",
+  "room": "throne-room",
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "placements": true,
+  "entities": [
+    {
+      "id": "thing",
+      "character": "set-castle-town",
+      "tile": [
+        7,
+        13
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 16,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 0,
+      "to": 3,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 16,
+      "to": 19,
+      "hold": [
+        "grab"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 26,
+      "to": 40,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 120,
+      "to": 135,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 132,
+      "to": 135,
+      "hold": [
+        "attack"
+      ]
+    }
+  ],
+  "ticks": 400,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "grabbed",
+      "where": {
+        "target": "thing"
+      },
+      "between": [
+        16,
+        16
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "part-broken",
+      "where": {
+        "room": "throne-room",
+        "part": "window",
+        "by": "thing"
+      },
+      "between": [
+        132,
+        160
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "changed-room",
+      "where": {
+        "entity": "thing",
+        "toRoom": "undercroft"
+      },
+      "between": [
+        132,
+        200
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "in-room",
+      "entity": "thing",
+      "at": 400,
+      "room": "undercroft"
+    }
+  ]
+}

@@ -199,7 +199,8 @@ owner's "There is no stick to push up...").
   player's device, or `entity.c.input` for a body nobody plays).
 - **A door that refuses** (Step 11, D-088): an *enter* doorway may carry
   `"refuse": "chased"` (only an enter one: a walk door would refuse every
-  tick). It does not take a body on the world's `chased` list (players a
+  tick). Unless every set of pieces is complete (D-089,
+  `docs/mechanisms/cantina.md`), it does not take a body on the world's `chased` list (players a
   good guard is chasing now; `systems/cantina-chase.ts` writes it in the
   server's world, a page takes it by key) and emits `door-refused
   {entity, player, room, door, why}` once per push, writing the body's

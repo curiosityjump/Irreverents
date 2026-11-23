@@ -1,0 +1,169 @@
+{
+  "id": "step14-all-found-opens-cantina",
+  "gate": null,
+  "proves": "Step 14 slice B, D-089 with D-090: with every level's set of pieces complete (seeded in world.found), a chased hero is let into the cantina, and it is no shelter. The street run of step11-chase-locks-door (the hero takes the goods, the guard sees and chases); with the guard chasing and in sight, the hero pushes up at the cantina's doorway and goes in at once (no door-refused); the guard who was chasing follows through the same doorway, keeps after the hero inside and lands a hit, and the street's alert never drops. Control (watched to fail, 2026-11-23): one piece short (town-6 left out of the seed), the door refuses and the hero stays in the street.",
+  "room": "castle-street",
+  "players": [
+    {
+      "id": "a",
+      "character": "hero",
+      "spawn": 0
+    }
+  ],
+  "placements": true,
+  "placedRooms": [
+    "cantina"
+  ],
+  "world": {
+    "found": {
+      "iron-quarry": [
+        "quarry-1",
+        "quarry-2",
+        "quarry-3",
+        "quarry-4",
+        "quarry-5"
+      ],
+      "bandit-camp": [
+        "camp-1"
+      ],
+      "castle-town": [
+        "town-1",
+        "town-2",
+        "town-3",
+        "town-4",
+        "town-5",
+        "town-6"
+      ]
+    }
+  },
+  "inputs": [
+    {
+      "player": "a",
+      "from": 60,
+      "to": 140,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 1450,
+      "to": 1475,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 1500,
+      "to": 1505,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 2800,
+      "to": 2867,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 2875,
+      "to": 2880,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 2900,
+      "to": 3000,
+      "x": 1
+    }
+  ],
+  "ticks": 3600,
+  "expect": [
+    {
+      "fact": "chased",
+      "between": [
+        2600,
+        2875
+      ],
+      "players": [
+        "a"
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "door-refused",
+      "between": [
+        0,
+        3600
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "changed-room",
+      "where": {
+        "entity": "p:a",
+        "fromDoor": "to-cantina",
+        "toRoom": "cantina"
+      },
+      "between": [
+        2875,
+        2875
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "changed-room",
+      "where": {
+        "entity": "street-guard",
+        "fromDoor": "to-cantina",
+        "toRoom": "cantina"
+      },
+      "between": [
+        2876,
+        3100
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "hit",
+      "where": {
+        "by": "street-guard",
+        "target": "p:a"
+      },
+      "between": [
+        3004,
+        3600
+      ],
+      "count": [
+        1,
+        99
+      ]
+    },
+    {
+      "fact": "in-room",
+      "entity": "street-guard",
+      "at": 3600,
+      "room": "cantina"
+    },
+    {
+      "fact": "alert",
+      "area": "castle-street",
+      "between": [
+        2130,
+        3600
+      ],
+      "is": 1
+    }
+  ]
+}

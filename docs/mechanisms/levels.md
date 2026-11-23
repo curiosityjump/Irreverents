@@ -145,6 +145,26 @@ them. `content/completion/<level id>.json` (`src/content/kinds/completion.ts`):
   menu row (`.st-pieces`, `data-pieces="gold grey …"`). `INTENT:` a glint
   marks a piece, never a way, and no digit (`t-no-numbers`).
   `drawn.completion`: `{ glints, row, pops, place }`.
+- **What a set builds** (push 3): `builds: { character, room, tile }` in
+  the set's file. System `completion-build` (625): when the set is
+  complete, a body of that character, id `built:<level>`, stands there
+  (put back if ever missing), and `set-built {level, entity, room, x, y}`
+  is emitted; from then on it is an ordinary body. `INTENT:` only in a
+  world that holds placed bodies (a page's own world would make a local
+  copy). The page: the level's pieces spiral in to the spot, then a burst
+  (`drawn.completion.snaps`). Bodies `set-castle-town` (heavy: the
+  grappler's; on the throne room's dais), `set-iron-quarry` (light; the
+  quarry road's start), `set-bandit-camp` (light; the courtyard by the camp
+  doorway, beside a plate); sheets by `tools/art/sets/make.py` from
+  approved sheets. `INTENT:` never named in an id, a log or a note (D-078).
+  Proof: `step14-set-builds` (the last piece over the awning: the body
+  appears that tick on the dais floor; control: no placements, nothing
+  built), `step14-set-thrown-through-window` (the grappler throws the
+  town's through the stained-glass window into the undercroft; control: no
+  throw). Shots `snap-sideways`, `built-*`.
+- **The complete sets (D-089, D-090):** with every level's set complete
+  (`everySetComplete`, `src/sim/completion.ts`), the cantina's door takes a
+  chased hero; the chasers follow in (`docs/mechanisms/cantina.md`).
 - **Tonight (push 1):** `town-1` just over the shop's awning on the first
   street screen (all three heroes take it with a held Jump from under the
   awning; the grappler's box reaches it on a small hop); `town-2` the shop's

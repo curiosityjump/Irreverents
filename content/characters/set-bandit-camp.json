@@ -1,0 +1,14 @@
+{
+  "//": "DRAFT (Step 14 slice B push 3): what a level's set of pieces builds, a body that appears when the last piece is found (content/completion/, builds). light: anyone lifts it; set down on one of the courtyard's plates it holds it. INTENT: the id says which level's set, never what it is (D-078).",
+  "id": "set-bandit-camp",
+  "name": "Something",
+  "box": {
+    "w": 16,
+    "h": 20
+  },
+  "color": "#c9a227",
+  "verbs": [
+    "body"
+  ],
+  "tuning": "crate"
+}

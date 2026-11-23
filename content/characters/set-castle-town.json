@@ -1,0 +1,14 @@
+{
+  "//": "DRAFT (Step 14 slice B push 3): what a level's set of pieces builds, a body that appears when the last piece is found (content/completion/, builds). heavy: only the grappler lifts it, and thrown it hits like the heavy crate (the throne room's window gives way to it). INTENT: the id says which level's set, never what it is (D-078).",
+  "id": "set-castle-town",
+  "name": "Something",
+  "box": {
+    "w": 24,
+    "h": 32
+  },
+  "color": "#9a9a9a",
+  "verbs": [
+    "body"
+  ],
+  "tuning": "crate-heavy"
+}

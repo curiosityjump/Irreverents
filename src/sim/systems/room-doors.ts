@@ -1,4 +1,5 @@
 import type { Door, Room } from '../../content/kinds/rooms.ts';
+import { everySetComplete } from '../completion.ts';
 import type { Content } from '../../content/types.ts';
 import type { Entity, System } from '../types.ts';
 import { NO_INPUT } from '../world.ts';
@@ -133,7 +134,8 @@ const system: System = {
       // wins the press: the Use arbiter (src/sim/use.ts) gives it to the door entry first.
       if (door.use === 'enter' && !asking) continue;
       // Step 11 (D-088): chased by the good guys, the cantina's doorway will not take you.
-      if (door.refuse === 'chased' && ctx.world.chased?.includes(e.id)) {
+      // Step 14 slice B (D-089): unless every set of pieces is complete; the chasers follow (D-090).
+      if (door.refuse === 'chased' && ctx.world.chased?.includes(e.id) && !everySetComplete(ctx.world, ctx.content)) {
         e.c.doorRefused = { tick: ctx.world.tick, room: room.id, door: door.id };
         ctx.emit('door-refused', { entity: e.id, player: e.player, room: room.id, door: door.id, why: 'chased' });
         continue;

@@ -34,12 +34,20 @@ export interface DrawnCompletion {
   pops: string[];
   /** Push 2: the level whose pie flashes at the top because a hidden place of it was just found, and the pie drawn; null when none. */
   place: { level: string; quarters: number } | null;
+  /** Push 3: levels whose finished set is snapping together in this room now. */
+  snaps?: string[];
 }
 
 let last: DrawnCompletion = { glints: [], row: null, pops: [], place: null };
 /** Hidden places this page has seen found (`<level>:<place>`); null until the first frame (what was found before this page came does not flash). */
 let knownPlaces: Set<string> | null = null;
 let flash: { level: string; until: number } | null = null;
+/** Push 3: sets this page has seen complete; null until the first frame. */
+let completeKnown: Set<string> | null = null;
+const snaps = new Map<string, number>();
+/** DRAFT: the pieces fly in for SNAP_IN frames, then a burst for SNAP_POP more. */
+const SNAP_IN = 36;
+const SNAP_POP = 24;
 /** Pieces this page has seen found; null until the first frame (what was found before this page came does not pop). */
 let known: Set<string> | null = null;
 let row: { level: string; until: number } | null = null;
@@ -96,6 +104,44 @@ export function drawCompletion(g: CanvasRenderingContext2D, world: World, conten
         g.fillRect(x + 11, y + 3 - bob, 3, 1);
       }
       out.glints.push({ piece: p.id, level: set.id });
+    }
+  }
+
+  // Push 3: a set just completed snaps together where what it builds stands (D-078: unknown until
+  // the last piece). Read from the record, so a friend's last piece snaps here too.
+  // INTENT: it stops nothing and takes no input.
+  const complete = Object.values(sets).filter((set) => set.pieces.every((p) => found.has(`${set.id}:${p.id}`))).map((set) => set.id);
+  if (completeKnown === null) completeKnown = new Set(complete);
+  for (const level of complete) if (!completeKnown.has(level)) {
+    completeKnown.add(level);
+    snaps.set(level, frame);
+  }
+  for (const [level, at] of snaps) {
+    const age = frame - at;
+    const b = sets[level]?.builds;
+    if (age > SNAP_IN + SNAP_POP || !b) {
+      snaps.delete(level);
+      continue;
+    }
+    if (b.room !== roomId) continue;
+    (out.snaps ??= []).push(level);
+    const cx = ox + b.tile[0] * T + T / 2;
+    const cy = oy + b.tile[1] * T + T / 2;
+    if (age < SNAP_IN) {
+      const n = sets[level]!.pieces.length;
+      const r = 44 * (1 - age / SNAP_IN);
+      for (let i = 0; i < n; i++) {
+        const a = (i / n) * Math.PI * 2 + age * 0.12;
+        const px = Math.round(cx + Math.cos(a) * r - 6);
+        const py = Math.round(cy + Math.sin(a) * r - 6);
+        if (!drawLook(g, content, 'piece-gold', px, py)) {
+          g.fillStyle = GOLD;
+          g.fillRect(px + 2, py + 2, 8, 8);
+        }
+      }
+    } else {
+      const fx = look(content, 'fx-pickup-get');
+      if (fx) drawLook(g, content, 'fx-pickup-get', Math.round(cx - fx.w / 2), Math.round(cy - fx.h / 2), { frame: Math.max(0, frameAt(fx, age - SNAP_IN, false)) });
     }
   }
 

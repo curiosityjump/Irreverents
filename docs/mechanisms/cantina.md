@@ -139,6 +139,11 @@ middle of the cantina player can use to stop fights."*
 - **The door:** the street's `to-cantina` carries `"refuse": "chased"`
   (`docs/mechanisms/rooms-and-doors.md`); the page's own step refuses its
   own push up (`door-refused`). The cantina's `to-street` never refuses.
+  **Except** (Step 14 slice B, D-089 with D-090): with every level's set of
+  pieces complete (`everySetComplete`, `src/sim/completion.ts`) the door
+  takes a chased hero, and it is no shelter: the chasing guard follows
+  through the same doorway, keeps after them inside and the alert does not
+  drop (`step14-all-found-opens-cantina`; control: one piece short).
 - **The sign:** for a second, a red no-entry sign over the doorway on that
   player's screen only, from their body's `c.doorRefused`
   (`drawDoorRefused`); no words.

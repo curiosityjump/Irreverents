@@ -1,0 +1,108 @@
+{
+  "id": "step14-set-builds",
+  "gate": null,
+  "proves": "Step 14 slice B push 3 (D-078): with five of the town's six pieces already found (seeded), the grappler takes the last one over the awning (as in step14-find-awning-grappler): on that tick the set is complete and the thing it builds appears as a body on the throne room's dais (id built:castle-town, the level's name, never the thing's), standing on the floor (its box's top at y 192, 32 tall, on the dais floor at 224); nothing else moves the hero. Control (watched to fail, 2026-11-23): the same run without the rooms' placements (a page's own world) builds nothing.",
+  "room": "castle-street",
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 1
+    }
+  ],
+  "placements": true,
+  "placedRooms": [
+    "throne-room"
+  ],
+  "world": {
+    "found": {
+      "castle-town": [
+        "town-2",
+        "town-3",
+        "town-4",
+        "town-5",
+        "town-6"
+      ]
+    }
+  },
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 30,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 40,
+      "to": 70,
+      "hold": [
+        "jump"
+      ]
+    }
+  ],
+  "ticks": 120,
+  "expect": [
+    {
+      "fact": "found",
+      "level": "castle-town",
+      "between": [
+        0,
+        40
+      ],
+      "pieces": [
+        "town-2",
+        "town-3",
+        "town-4",
+        "town-5",
+        "town-6"
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "set-complete",
+      "where": {
+        "level": "castle-town"
+      },
+      "between": [
+        40,
+        70
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "set-built",
+      "where": {
+        "level": "castle-town",
+        "entity": "built:castle-town",
+        "room": "throne-room",
+        "x": 108,
+        "y": 192
+      },
+      "between": [
+        40,
+        70
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "set-built",
+      "between": [
+        71,
+        120
+      ],
+      "count": [
+        0,
+        0
+      ]
+    }
+  ]
+}

@@ -1036,3 +1036,16 @@ document as a decision of theirs.
 - **Why this way:** doc 05 (a new hero makes earlier places worth revisiting). One extra jump in mid-air (the flyer's flap, once) lets them reach ledges about a hero's height higher than anyone else from a standing start: the way out of the camp is straight up from the cage onto the walkway, and the town's high ledges and the quarry tower's shaft open to them.
 - **To change it:** `flapSpeed` and `flaps` in the skirmisher's section of `content/tuning.json` (0 flaps takes it away).
 - **Where:** `docs/mechanisms/recruits.md`, "Their reach".
+### 2026-11-23 · D-089: every set complete lets a chased hero into the cantina, and the chasers follow
+- **Decided by:** glints builder (Step 14 slice B), `session_017WiGzEdpvCBfqv752nbbSt`
+- **Instead of asking:** "Does one finished set open the cantina's door to a chased hero, or all of them; and is it safe to build before guards are tested inside?"
+- **Why this way:** D-089 ("the complete set lets a chased hero into the cantina", "NOT a wanted-level reset or shelter") and D-090 (the chasers follow). Read as every level's set, so it is the reward for finding everything, not one corner. Built only after measuring that the guard who was chasing follows through the doorway, keeps after the hero inside, lands a hit and the street's alert never drops.
+- **To change it:** one set instead of every set is `everySetComplete` in `src/sim/completion.ts`; the exception is one condition at the cantina's refusal in `src/sim/systems/room-doors.ts`.
+- **Where:** `docs/mechanisms/cantina.md`, "The door"; `scenarios/step14-all-found-opens-cantina.json`.
+
+### 2026-11-23 · Step 14 slice B push 3: what each set of pieces builds, and what it does
+- **Decided by:** glints builder (Step 14 slice B), `session_017WiGzEdpvCBfqv752nbbSt`
+- **Instead of asking:** "What do the pieces build, where does it appear, and what does it do?" (doc 11: "No specific combined construction is owner-approved")
+- **Why this way:** D-078: the pieces assemble into something the player does not know while collecting; the brief: a real object per level cut from the approved sheets, never a stand-in, doing one thing through behaviour the game already has, and never named. Each set's last piece makes a body snap together (the pieces spiral in, a burst). The town's is heavy (only the grappler lifts it), on the throne room's dais by the king: thrown, it smashes the stained-glass window and flies into the undercroft, as the king does. The quarry's is light, at the road's start, for anyone to throw. The camp's is light, in the courtyard beside the camp doorway's plate, a weight for it. The pictures are cut from P04's Hall atlas and P05's rare-powers sheet (cells given by the props builder).
+- **To change it:** `builds` in `content/completion/<level>.json` (which body, where); the body's weight is its `tuning` in `content/characters/set-<level>.json`; the pictures are `tools/art/sets/make.py`.
+- **Where:** `docs/mechanisms/levels.md`, "What a set builds".

@@ -1,7 +1,20 @@
 {
-  "//": "DRAFT (Step 14 slice B, push 2): the Bandit Camp's one piece is its strongbox once carried out of the camp (a prize: world.banked, the heist slice's field, read with a default). Ids never say what it is or what the set builds. More can be placed when the camp grows (docs/decisions-log.md, 'Step 14 slice B').",
+  "//": "DRAFT (Step 14 slice B, push 2): the Bandit Camp's one piece is its strongbox once carried out of the camp (a prize: world.banked, the heist slice's field, read with a default). Ids never say what it is or what the set builds. More can be placed when the camp grows (docs/decisions-log.md, 'Step 14 slice B'). Push 3: 'builds' is what the finished set makes, a body that appears where it names (system completion-build); never named.",
   "id": "bandit-camp",
   "pieces": [
-    { "id": "camp-1", "from": { "prize": "camp-strongbox" } }
-  ]
+    {
+      "id": "camp-1",
+      "from": {
+        "prize": "camp-strongbox"
+      }
+    }
+  ],
+  "builds": {
+    "character": "set-bandit-camp",
+    "room": "courtyard",
+    "tile": [
+      21,
+      7
+    ]
+  }
 }

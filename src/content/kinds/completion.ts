@@ -28,8 +28,13 @@ export interface CompletionSet {
   /** The level id (content/levels/). */
   id: string;
   pieces: Piece[];
-  /** What the finished set makes (push 3); absent: nothing assembles yet. Free data until then. */
-  builds?: Record<string, unknown>;
+  /**
+   * What the finished set makes (push 3): a body of this character that
+   * appears at this room and tile when the last piece is found (system
+   * completion-build). Absent: nothing assembles. The room may be any room.
+   * INTENT: the character's id says which level's set, never what it is.
+   */
+  builds?: { character: string; room: string; tile: [number, number] };
 }
 
 declare module '../types.ts' {
@@ -48,7 +53,14 @@ const kind: ContentKind = {
     const out: CompletionSet = { id: read.string(o, 'id', ''), pieces: [] };
     if (o.builds !== undefined) {
       const b = read.object(o.builds, 'builds');
-      if (b) out.builds = b;
+      if (b) {
+        read.only(b, ['character', 'room', 'tile'], 'builds');
+        const t = b.tile;
+        const ok = Array.isArray(t) && t.length === 2 && t.every((n) => Number.isInteger(n));
+        if (!ok) read.fail('builds.tile', `must be [column, row], but is ${describe(t)}`);
+        const tile: [number, number] = ok ? [t[0] as number, t[1] as number] : [0, 0];
+        out.builds = { character: read.string(b, 'character', 'builds'), room: read.string(b, 'room', 'builds'), tile };
+      }
     }
     if (!Array.isArray(o.pieces) || o.pieces.length === 0) {
       read.fail('pieces', `must be a list of at least one piece, but is ${describe(o.pieces)}`);
@@ -91,6 +103,17 @@ const kind: ContentKind = {
       if (!level) {
         fail(file, 'id', `no level "${set.id}" (levels: ${known(content.levels ?? {})})`);
         continue;
+      }
+      if (set.builds) {
+        const b = set.builds;
+        const room = content.rooms[b.room];
+        if (!content.characters[b.character]) fail(file, 'builds.character', `no character "${b.character}" (characters: ${known(content.characters)})`);
+        if (!room) fail(file, 'builds.room', `no room "${b.room}" (rooms: ${known(content.rooms)})`);
+        else {
+          const [tx, ty] = b.tile;
+          if (tx < 0 || ty < 0 || tx >= room.w || ty >= room.h) fail(file, 'builds.tile', `[${tx}, ${ty}] is outside room "${room.id}" (${room.w} by ${room.h} tiles)`);
+          else if (room.cells[ty * room.w + tx] === TILE.solid) fail(file, 'builds.tile', `[${tx}, ${ty}] is a solid tile of room "${room.id}"`);
+        }
       }
       set.pieces.forEach((p, i) => {
         const w = `pieces[${i}]`;

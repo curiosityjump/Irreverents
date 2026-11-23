@@ -1,0 +1,34 @@
+{
+  "//": "DRAFT: cut by tools/art/sets/make.py from an approved sheet (Step 14 slice B push 3); the body a level's set of pieces builds.",
+  "id": "set-bandit-camp",
+  "image": "sprites/cast/set-bandit-camp.png",
+  "cell": {
+    "w": 48,
+    "h": 48
+  },
+  "anchor": {
+    "x": 16,
+    "y": 28
+  },
+  "fps": 8,
+  "frames": {
+    "idle": [
+      0
+    ],
+    "run": [
+      0
+    ],
+    "air": [
+      1,
+      2
+    ],
+    "hurt": [
+      3,
+      4
+    ]
+  },
+  "fpsBy": {
+    "hurt": 10,
+    "air": 8
+  }
+}
