@@ -53,6 +53,11 @@ deliveries into `docs/design-library/` and tells the asker where the files
 landed. Don't write to Drive yourself even if you have the connector: one
 filer keeps ChatGPT's queue free of duplicates.
 
+**Don't wait for the hourly check to *use* a delivery.** Reading Drive needs
+no connector: any session can run `python3 -I tools/drive_sync.py` whenever
+it wants the latest art (ChatGPT itself only processes requests hourly, so
+that, not Vision Partner's check, is the real pace).
+
 ### Requests in flight
 
 | Filed (UTC) | REQ doc | Priority |
