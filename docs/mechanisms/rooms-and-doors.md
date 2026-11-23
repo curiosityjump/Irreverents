@@ -314,38 +314,12 @@ tiles are reported once ("and 9 more tile(s) beside it").
   `open-part-is-accepted` (a control may declare control-only kinds with
   `controlKinds`). A kind without `blocks` behaves as its system makes it
   with one body alone in the world.
-
-**How it is fast (Step 3, 2026-11-23).** Playing every move from every
-standing place took 97 s once the quarry's six rooms joined (about 107,000
-moves). The check now plays moves lazily and gets **the same answer**
-(compared problem for problem against the old exhaustive check on the
-real map, every control and three broken copies of the quarry road;
-`docs/plan/step-3.md`, the last handoff note), in about 4 s, about 16,000
-moves:
-
-- *Way out and way back.* A place stops being played the moment one of
-  its moves lands on a place already proved to reach a door and the start
-  room (or goes through a door while it is in the start room). A place
-  never proved so has had **every** move played, so "no way out" and "no
-  way back" are only ever drawn from complete lists (`INTENT:` at the
-  site). Places are played nearest-first to a door that leads toward the
-  start room (rooms fewer doors from the start first), and each place's
-  moves toward that door first, short runs before long ones; the order is
-  only for speed.
-- *Reachable from the start.* A search forward from the start spawns plays
-  one move at a time from the reached place nearest a door into a room not
-  reached yet, and stops when every room is reached; it says "can never
-  get here" only after every reached place has had every move played.
-- A move's result is remembered per place, so no move is played twice.
-- The move list itself (`MOVES`) is unchanged; the two orders are checked
-  at run time to hold exactly its moves.
-
-It still runs in `npm run build` as well as `npm run check` (and so in
-every deploy, dev rebuild, `npm run gates` and `scripts/trace.ts`), and
-once more per overlay control in "room controls". The cost now grows with
-how far places sit from a door, not with every place times every move; a
-map whose places mostly cannot get out (a control) still pays the full
-price, which is small for a control's few rooms.
+- It cost about two seconds of `npm run check` for two rooms and three
+  characters, and grows with rooms × characters × standing places. If it
+  gets slow, shorten `HOLDS` before anything cleverer. **Measured
+  2026-11-23 with five rooms: `npm run check` takes about 38 s** (and
+  `npm run build`, which runs the same check, grows with it); see
+  `docs/for-the-lead.md`.
 
 - **A doorway at a wall's edge needs two tiles of height and a free tile beside it** for the way-out check to find it: a one-tile `enter` doorway on the wall column was refused as "no way out" (Step 12, the outpost's side, rows 9-10, column 2). A one-tile doorway on an open floor row (the courtyard's `o`, column 23) passes.
 

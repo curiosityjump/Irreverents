@@ -252,129 +252,57 @@ function checkWaysOut(content: Content, systems: System[], problems: Problem[]):
       return best;
     };
 
-    /** Each node's moves already played, so no move is played twice from the same node. */
-    const played = nodes.map(() => new Map<Move, { to: number | undefined; door: boolean }>());
-    /** Plays one move from a node through the real simulation: the node it comes to rest on, and whether it went through a door. */
-    const play = (from: number, move: Move): { to: number | undefined; door: boolean } => {
-      const known = played[from]!.get(move);
-      if (known) return known;
-      const node = nodes[from]!;
+    // Play every move from every node through the real simulation.
+    nodes.forEach((node, from) => {
       const room = content.rooms[node.room]!;
-      const body: Entity = {
-        id: `p:${PLAYER}`,
-        kind: kind.id,
-        player: PLAYER,
-        room: room.id,
-        x: standX(room, kind, node.tx, node.half),
-        y: (node.ty + 1) * room.tile - kind.box.h,
-        vx: 0,
-        vy: 0,
-        facing: 1,
-        onGround: true,
-        c: {},
-      };
-      const world: World = { tick: 0, entities: [body] };
-      let still = 0;
-      let door = false;
-      const end = inputsEnd(move);
-      for (let t = 0; t < end + SETTLE_TICKS && still < 3; t++) {
-        wall(world);
-        const events = step(world, { [PLAYER]: inputFor(move, t) }, content);
-        if (events.some((e) => e.type === 'changed-room')) door = true;
-        still = t >= end && body.onGround && body.vx === 0 && body.vy === 0 ? still + 1 : 0;
+      for (const move of MOVES) {
+        const body: Entity = {
+          id: `p:${PLAYER}`,
+          kind: kind.id,
+          player: PLAYER,
+          room: room.id,
+          x: standX(room, kind, node.tx, node.half),
+          y: (node.ty + 1) * room.tile - kind.box.h,
+          vx: 0,
+          vy: 0,
+          facing: 1,
+          onGround: true,
+          c: {},
+        };
+        const world: World = { tick: 0, entities: [body] };
+        let still = 0;
+        const end = inputsEnd(move);
+        for (let t = 0; t < end + SETTLE_TICKS && still < 3; t++) {
+          wall(world);
+          const events = step(world, { [PLAYER]: inputFor(move, t) }, content);
+          if (events.some((e) => e.type === 'changed-room')) node.door = true;
+          still = t >= end && body.onGround && body.vx === 0 && body.vy === 0 ? still + 1 : 0;
+        }
+        if (still < 3) continue;
+        const to = nodeUnder(body);
+        if (to !== undefined && to !== from) node.next.add(to);
       }
-      const result = { to: still < 3 ? undefined : nodeUnder(body), door };
-      played[from]!.set(move, result);
-      return result;
-    };
+    });
 
-    // Who can get where, found lazily. `toDoor[i]`: some chain of moves
-    // from node i goes through a door; `toStart[i]`: some chain arrives in
-    // the start room. INTENT: the answer is exactly the one playing every
-    // move from every node would give (docs/mechanisms/rooms-and-doors.md,
-    // "How it is fast"): a node stops being played only once both are
-    // proved true for it, so a node left false has had every move played,
-    // and a false answer is only ever drawn from a node's complete list of
-    // moves. Only the order is chosen for speed: nodes nearest a door that
-    // leads toward the start room first, and each node's moves toward it first.
-    const toDoor = nodes.map(() => false);
-    const toStart = nodes.map((n) => n.room === start.id);
+    // Who can get where. `canReach(goal)` = every node from which some chain of moves arrives at a goal node.
     const before: number[][] = nodes.map(() => []);
-    const tried = nodes.map(() => 0);
-    const mark = (flags: boolean[], i: number): void => {
-      if (flags[i]) return;
-      flags[i] = true;
-      const stack = [i];
-      while (stack.length) for (const p of before[stack.pop()!]!) if (!flags[p]) (flags[p] = true), stack.push(p);
+    nodes.forEach((n, i) => n.next.forEach((to) => before[to]!.push(i)));
+    const canReach = (goal: (n: Node) => boolean): boolean[] => {
+      const ok = nodes.map(goal);
+      const queue = ok.flatMap((v, i) => (v ? [i] : []));
+      while (queue.length) for (const i of before[queue.pop()!]!) if (!ok[i]) (ok[i] = true), queue.push(i);
+      return ok;
     };
-    const moveOrder = movesFor(rooms, start.id, walled);
-    const orderOf = (i: number): Move[] => moveOrder.moves(nodes[i]!);
-    /** Plays node i's next untried move; false when it has none left. */
-    const playNext = (i: number): boolean => {
-      const list = orderOf(i);
-      if (tried[i]! >= list.length) return false;
-      const { to, door } = play(i, list[tried[i]!]!);
-      tried[i]!++;
-      const node = nodes[i]!;
-      if (door) (node.door = true), mark(toDoor, i);
-      if (to !== undefined && to !== i && !node.next.has(to)) {
-        node.next.add(to);
-        before[to]!.push(i);
-        if (toDoor[to]) mark(toDoor, i);
-        if (toStart[to]) mark(toStart, i);
-      }
-      return true;
-    };
-    const byPromise = nodes.map((_, i) => i).sort((a, b) => moveOrder.rank(nodes[a]!) - moveOrder.rank(nodes[b]!) || a - b);
-    for (const i of byPromise) while (!(toDoor[i] && toStart[i]) && playNext(i)) {
-      // keep playing this node's moves
-    }
-
-    // Which rooms the start room leads to: a search forward from the start
-    // spawns. It plays one move at a time, from the reached node nearest a
-    // door into a room not reached yet, and stops once every room has been
-    // reached. Exact either way: a room is counted reached only through
-    // moves actually played, and it gives up only when every reached node
-    // has had every move played.
     const fromStart = nodes.map(() => false);
-    const roomsLeft = new Set(rooms.map((r) => r.id));
-    const frontier: number[] = [];
-    const reach = (i: number): void => {
-      if (fromStart[i]) return;
-      fromStart[i] = true;
-      roomsLeft.delete(nodes[i]!.room);
-      frontier.push(i);
-    };
+    const queue: number[] = [];
     for (const s of start.spawns) {
       const i = index.get(key(start.id, s.tx, s.ty, 0));
-      if (i !== undefined) reach(i);
+      if (i !== undefined && !fromStart[i]) (fromStart[i] = true), queue.push(i);
     }
-    const forwardTried = nodes.map(() => 0);
-    // INTENT: a node's order is fixed the first time it is picked, so that counting `forwardTried` along it plays every move exactly once even after the aim changes.
-    const forwardList: (Move[] | undefined)[] = nodes.map(() => undefined);
-    // Tile steps to a door into a room not reached yet, per room; worked out again when a room is reached.
-    let aim = moveOrder.aimAt(roomsLeft);
-    let aimed = roomsLeft.size;
-    while (roomsLeft.size > 0 && frontier.length > 0) {
-      if (aimed !== roomsLeft.size) (aim = moveOrder.aimAt(roomsLeft)), (aimed = roomsLeft.size);
-      let best = 0;
-      let bestScore = Infinity;
-      for (let k = 0; k < frontier.length; k++) {
-        const j = frontier[k]!;
-        const score = aim.far(nodes[j]!) * MOVES.length + forwardTried[j]!;
-        if (score < bestScore) (best = k), (bestScore = score);
-      }
-      const i = frontier[best]!;
-      const list = (forwardList[i] ??= aim.moves(nodes[i]!));
-      if (forwardTried[i]! >= list.length) {
-        frontier.splice(best, 1);
-        continue;
-      }
-      const move = list[forwardTried[i]!++]!;
-      const { to } = play(i, move);
-      if (to !== undefined && to !== i) reach(to);
-    }
+    while (queue.length) for (const to of nodes[queue.pop()!]!.next) if (!fromStart[to]) (fromStart[to] = true), queue.push(to);
 
+    const toDoor = canReach((n) => n.door);
+    const toStart = canReach((n) => n.room === start.id);
     const who = `the ${kind.id} (${kind.box.w} by ${kind.box.h} px)`;
 
     for (const room of rooms) {
@@ -412,112 +340,4 @@ function checkWaysOut(content: Content, systems: System[], problems: Problem[]):
       );
     }
   }
-}
-
-/**
- * The order the way-out check plays nodes and moves in. Speed only: every
- * order gives the same answer (see "Who can get where" above). A node's
- * promise is how near it is to a door that leads toward the start room
- * (rooms nearer the start first, then tiles nearer such a door), and its
- * moves are played toward that door first, short runs before long ones.
- */
-function movesFor(
-  rooms: Room[],
-  startId: string,
-  walled: (room: Room) => Room,
-): {
-  moves: (n: Node) => Move[];
-  rank: (n: Node) => number;
-  aimAt: (unreached: Set<string>) => { moves: (n: Node) => Move[]; far: (n: Node) => number };
-} {
-  // Rooms by how many doors from the start room.
-  const roomDist = new Map<string, number>([[startId, 0]]);
-  const byId = new Map(rooms.map((r) => [r.id, r]));
-  const queue = [startId];
-  while (queue.length) {
-    const id = queue.shift()!;
-    for (const d of byId.get(id)?.doors ?? []) {
-      if (!byId.has(d.to.room) || roomDist.has(d.to.room)) continue;
-      roomDist.set(d.to.room, roomDist.get(id)! + 1);
-      queue.push(d.to.room);
-    }
-  }
-  const FAR = 1e5;
-  /** Tile steps through open tiles from the given doors' tiles. */
-  const field = (room: Room, doors: Room['doors']): number[] => {
-    const out = room.cells.map(() => FAR);
-    const q: number[] = [];
-    for (const d of doors) {
-      for (let ty = d.ty; ty < d.ty + d.h; ty++) {
-        for (let tx = d.tx; tx < d.tx + d.w; tx++) {
-          const i = ty * room.w + tx;
-          if (cellOf(room, tx, ty) !== TILE.solid && out[i] === FAR) (out[i] = 0), q.push(i);
-        }
-      }
-    }
-    for (let k = 0; k < q.length; k++) {
-      const i = q[k]!;
-      const tx = i % room.w;
-      const ty = (i - tx) / room.w;
-      for (const [x, y] of [[tx - 1, ty], [tx + 1, ty], [tx, ty - 1], [tx, ty + 1]] as const) {
-        if (cellOf(room, x, y) === TILE.solid) continue;
-        const j = y * room.w + x;
-        if (out[j] === FAR) (out[j] = out[i]! + 1), q.push(j);
-      }
-    }
-    return out;
-  };
-  const toward = new Map<string, number[]>();
-  for (const room of rooms) {
-    const seen = walled(room);
-    const mine = roomDist.get(room.id) ?? FAR;
-    const homeward = room.id === startId ? room.doors : room.doors.filter((d) => (roomDist.get(d.to.room) ?? FAR) < mine);
-    toward.set(room.id, field(seen, homeward.length ? homeward : room.doors));
-  }
-  const at = (f: number[] | undefined, room: Room | undefined, tx: number, ty: number): number =>
-    !f || !room || tx < 0 || tx >= room.w || ty < 0 || ty >= room.h ? FAR : f[ty * room.w + tx]!;
-
-  // One object per move, shared by both orders, so a move's result can be remembered per node.
-  const pool = new Map<string, Move>();
-  const m = (move: Move): Move => {
-    const k = `${move.dir}/${move.hold}/${move.jump}/${move.up}`;
-    if (!pool.has(k)) pool.set(k, move);
-    return pool.get(k)!;
-  };
-  const ordered = (d: -1 | 1): Move[] => {
-    const out: Move[] = [m({ dir: 0, hold: 0, jump: 'none', up: true })];
-    for (const dir of [d, -d as -1 | 1]) {
-      for (const jump of ['none', 'run-up', 'start', 'taps'] as const) for (const hold of HOLDS) out.push(m({ dir, hold, jump, up: false }));
-      if (dir === d) out.push(m({ dir: 0, hold: 0, jump: 'start', up: false }), m({ dir: 0, hold: 0, jump: 'taps', up: false }));
-    }
-    return out;
-  };
-  const leftFirst = ordered(-1);
-  const rightFirst = ordered(1);
-  // INTENT: the same moves as MOVES, only reordered; a move missing here would weaken the check.
-  const sig = (list: Move[]): string => list.map((m) => `${m.dir}/${m.hold}/${m.jump}/${m.up}`).sort().join(' ');
-  if (sig(leftFirst) !== sig(MOVES) || sig(rightFirst) !== sig(MOVES)) throw new Error('way-out check: the move orders must hold exactly the moves in MOVES');
-  return {
-    moves: (n) => {
-      const room = byId.get(n.room);
-      const f = toward.get(n.room);
-      return at(f, room, n.tx - 1, n.ty) < at(f, room, n.tx + 1, n.ty) ? leftFirst : rightFirst;
-    },
-    rank: (n) => (roomDist.get(n.room) ?? FAR) * FAR * 10 + at(toward.get(n.room), byId.get(n.room), n.tx, n.ty),
-    aimAt: (unreached) => {
-      const aims = new Map<string, number[]>();
-      for (const room of rooms) {
-        const doors = room.doors.filter((d) => unreached.has(d.to.room));
-        if (doors.length) aims.set(room.id, field(walled(room), doors));
-      }
-      return {
-        moves: (n) => {
-          const room = byId.get(n.room);
-          const f = aims.get(n.room) ?? toward.get(n.room);
-          return at(f, room, n.tx - 1, n.ty) < at(f, room, n.tx + 1, n.ty) ? leftFirst : rightFirst;
-        },
-        far: (n) => at(aims.get(n.room), byId.get(n.room), n.tx, n.ty),
-      };
-    },
-  };
 }
