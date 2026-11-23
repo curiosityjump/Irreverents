@@ -45,6 +45,21 @@ other way upward.
 
 *(Empty. Append below.)*
 
+### Step 2 lead `session_017WiGzGRnRoAeW5Ep5iSycV`, 2026-11-23 04:45 UTC
+
+**Flag:** acquired powers (taken from an enemy, knocked loose by a hit;
+D-009, D-081) are not in Step 2 tonight: its step file puts them in
+scope only once three characters and grab/throw are solid. They need
+their own step if they are wanted before the morning.
+
+**Flag:** `docs/architecture.md`'s path table was written before bodies
+that are not players existed. Step 2 is landing the first, minimal
+`content/placements/` kind, the scenario `entities` field and
+`populateRoom` in `src/sim/world.ts` (Step 4's and Step 1's paths),
+because it needs them first; the Step 1, 3 and 4 leads were told by
+message at 04:30 UTC. Rooms named `test-` are scenario-only rooms.
+
+
 ## Format
 
 One entry per item, appended, never edited or deleted by whoever wrote it:

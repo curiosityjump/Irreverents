@@ -161,3 +161,38 @@ document as a decision of theirs.
 - **To change it:** one line in `content/game.json`.
 - **Where:** `content/game.json`, switched only once the new rooms are verified
 
+
+### 2026-11-23 · Four buttons: jump, attack, grab, switch; attack throws what you are carrying
+- **Decided by:** lead, Step 2, `session_017WiGzGRnRoAeW5Ep5iSycV`
+- **Instead of asking:** "Which buttons?" (your library leaves the controls open, D-095, and asks for "a small reusable set of context-sensitive controls, not a dozen tiny virtual buttons".)
+- **Why this way:** a separate grab button means you can always choose to hit the thing beside you rather than pick it up, and a tap never has to wait to find out whether it was a hold. While you carry something, attack throws it (aim with the stick) and grab sets it down.
+- **To change it:** the buttons are a short list of data files; folding grab into a held attack is real but small work.
+- **Where:** `docs/plan/step-2.md`, "Decided by the lead".
+
+### 2026-11-23 · What only each of the three heroes can do: lift heavy things, fit through a tiny gap, flap up to high ledges
+- **Decided by:** lead, Step 2, `session_017WiGzGRnRoAeW5Ep5iSycV`
+- **Instead of asking:** "What makes the grappler, the tiny infiltrator and the flyer different?" (the library names the types and gives no move list.)
+- **Why this way:** your own illustration (doc 05): a team that "would reach high ledges, small crawlspaces, heavy objects", and "strong-grab can slam an enemy or move a heavy object". The flyer gets a few weaker jumps in the air rather than free flight, so ledges still matter.
+- **To change it:** numbers and a list of abilities per character in data files.
+- **Where:** `docs/plan/step-2.md`, "Decided by the lead".
+
+### 2026-11-23 · Characters and enemies walk through each other; only something flying from a hit or a throw shoves what it meets
+- **Decided by:** lead, Step 2, `session_017WiGzGRnRoAeW5Ep5iSycV`
+- **Instead of asking:** "Do bodies block each other?" (not stated in the library.)
+- **Why this way:** friends never get stuck behind each other in a corridor, and every collision you see is one that matters: a thrown crate or enemy sending others flying (D-020).
+- **To change it:** real but contained work.
+- **Where:** `docs/plan/step-2.md`, "Decided by the lead".
+
+### 2026-11-23 · A fourth friend joining a party of three plays a second copy of a hero rather than being turned away
+- **Decided by:** lead, Step 2, `session_017WiGzGRnRoAeW5Ep5iSycV`
+- **Instead of asking:** "What happens when more people join than there are party members?" (party size is open, O-003.)
+- **Why this way:** it is for friends; nobody should open the link and be refused. Your rule that one character is never controlled by two people still holds: each has their own body.
+- **To change it:** small (add members to the party list, or show a "party full" screen).
+- **Where:** `docs/plan/step-2.md`, "Decided by the lead".
+
+### 2026-11-23 · Enemies and heroes have a hidden toughness, never shown as a number; picking up powers from enemies waits for its own step
+- **Decided by:** lead, Step 2, `session_017WiGzGRnRoAeW5Ep5iSycV`
+- **Instead of asking:** "How does anything get beaten without damage numbers, and are stolen powers in tonight's build?"
+- **Why this way:** harder hits and slams wear a body down faster, so impact is what beats things (doc 08: "The target is not damage numbers"). Powers were in scope only once three heroes and grab/throw are solid; those come first tonight.
+- **To change it:** toughness is numbers in the tuning file; powers are a new piece of work.
+- **Where:** `docs/plan/step-2.md`, "Decided by the lead".

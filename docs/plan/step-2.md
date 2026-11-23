@@ -168,7 +168,91 @@ and a "copy these values" button.
 
 ## Measure
 
+Lead `session_017WiGzGRnRoAeW5Ep5iSycV`, 2026-11-23 04:30 UTC, on `main`
+at 679e4d3. Each line is from the file named.
+
+- **Only players act; only character kinds have bodies.**
+  `src/sim/systems/verbs.ts` skips every entity with `player: null`;
+  `src/sim/systems/physics.ts` skips every entity whose `kind` is not in
+  `content.characters`. So a crate or a dummy is a character kind with no
+  acting verbs, and anything that happens *to* a body is a system.
+- **Nothing slows a body that is not a player.** Physics has gravity and
+  tile collision and no friction; only `src/sim/verbs/move.ts` changes
+  `vx`, and it pulls a player's `vx` to the stick's target at `runDecel`
+  1200 px/s² every tick, which would erase a knockback in a few ticks.
+- **Physics stops a body at a wall silently**: `vx = 0`, no event
+  (`physics.ts`, the sideways block). `landed` is its only event.
+- **The speed limit is 960 px/s** (16 px tile × 60 ticks): physics looks
+  one tile ahead. `src/sim/check-content.ts` enforces it for `runSpeed`,
+  `jumpSpeed` and `maxFallSpeed` only, so every new speed needs its own
+  declared range under it. Falling is capped at `maxFallSpeed` 360;
+  rising is not capped.
+- **A per-character number must be declared by one of that character's
+  verbs** (`check-content.ts`: any other name in a tuning set fails as
+  "no verb reads this number"). A system cannot declare one.
+- **A scenario can only spawn players** (`src/scenarios/run.ts`,
+  `simulate`), and facts find bodies by player id
+  (`src/scenarios/fact-helpers.ts`, `playerAt`).
+- **Nothing puts a non-player into the live world**: `src/client/main.ts`
+  calls `createWorld` and `spawnPlayer` and nothing else (the server is
+  being written by Step 1's Gate 2 worker).
+- **The first jump is 56.9 px high, 3.56 tiles** (`jumpSpeed` 320,
+  `gravity` 900: 320² / 1800), so a ledge 5 tiles up is out of reach of a
+  plain jump.
+- **The library gives the three functions no move list** (docs 05, 08,
+  11, 24, 33 read in full by a subagent): "not stated" for flight
+  limits, the squeeze rule, carry rules, movement forgiveness, whether
+  players' bodies block each other, and defeat outside the cantina. Its
+  own examples: "strong-grab can slam an enemy or move a heavy object";
+  a team that "would reach high ledges, small crawlspaces, heavy
+  objects" (doc 05, illustrative).
+
+## Decided by the lead (all `DRAFT:`, each in `docs/decisions-log.md`)
+
+Shared by both briefs; a brief points here rather than repeating it.
+
+- **Buttons:** `jump` (exists), `attack`, `grab`, `switch`. Attack hits;
+  while carrying, attack throws (the stick aims: forward, up, down).
+  Grab picks up what is in reach; while carrying, grab sets it down.
+  Separate buttons, so hitting instead of grabbing is always possible.
+  Held by someone: `jump` breaks free at once.
+- **Ids:** character kinds `grappler`, `infiltrator`, `flyer` (the
+  function, so names and art can change); `hero` stays, unchanged and
+  unused by the party (Step 1's scenarios read it). Bodies: `crate`,
+  `crate-heavy`, `dummy`, `dummy-heavy`.
+- **What only each can do:** the grappler lifts and throws heavy bodies
+  (`crate-heavy`, `dummy-heavy`); the infiltrator's body fits a
+  one-tile-high gap; the flyer flaps in the air (a limited number of
+  weaker air jumps) and reaches a ledge 5 tiles up.
+- **The party** is `content/party.json`, a list of three member ids. A
+  new player gets the first member nobody is playing; `switch` cycles to
+  the next unplayed member, in place, feet kept, refused when the new
+  body would not fit. A fourth player gets a second copy of a member
+  rather than being turned away.
+- **Bodies pass through each other** unless one is flying from a hit or
+  a throw; then it shoves what it meets, by weight.
+- **The held beat** is the two bodies of an impact holding still for a
+  few ticks before they fly, inside the simulation (so every screen
+  sees it and scenarios can read it); shake and dust are drawn from the
+  same recorded impact.
+- **No damage numbers, but a hidden toughness:** hits and impacts wear a
+  body down by how hard they were; at zero it is flattened, out for a
+  few seconds, then back near where it fell. Dummies too.
+- **Non-player bodies in scenarios and rooms:** scenario field
+  `entities`, `content/placements/<room id>.json`, and
+  `populateRoom(world, content, roomId)` in `src/sim/world.ts`. Step 2
+  lands the minimal shape first (told to the Step 1, 3 and 4 leads,
+  04:30 UTC); Step 4 extends placements.
+- **Acquired powers are not in this step.** Three characters and
+  grab/throw first; powers become their own step (flagged to the
+  orchestrator).
+
 ## Briefs
+
+- `handoff-prompts/step-2-hit.md`: attack, grab, carry, throw, impact,
+  bodies that are not players, the grappler's strength.
+- `handoff-prompts/step-2-body.md`: the three characters, the party,
+  switching, the infiltrator's and flyer's own moves.
 
 ## Open with the owner
 
