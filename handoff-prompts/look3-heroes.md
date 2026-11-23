@@ -1,5 +1,8 @@
 # Brief: the look, round 3, lane "heroes": the three canon heroes, re-authored from the owner's P03 sheet
 
+**Landed so far: nothing** (2026-11-23 17:10 UTC: round 2's heroes builder declined this brief at 317k tokens, so it moves to a fresh builder). Its tips: `tools/art/heroes/{grappler,infiltrator}.py` are dedicated `pix.Figure` puppets, easy to replace whole; `selfcheck.py` holds the wall-colour and overhang rules; `preview.py` writes the line-up; its Playwright phone-screenshot recipe is in `tools/art/heroes/README.md`, "Not verified" (touch-tap `[data-action=grab]` for the carry; the keyboard grab doesn't fire on a phone page). **And the owner's rule since 4ed30c3** (`docs/mechanisms/art-pipeline.md`, "Approved Drive assets first"): re-author from the approved Drive sources (doc 36, the P03 sheet, the partial 18-pose extraction), never redraw from words.
+
+
 Written 2026-11-23 by the orchestrator, which runs Step 8 itself
 (`docs/plan/step-8.md`, "The look" and "Round 3 (2026-11-23)"). The
 reviewer deletes it after review.
