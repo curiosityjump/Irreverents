@@ -1,0 +1,23 @@
+{
+  "id": "step6-king-through-the-window",
+  "proves": "the signature throw works with real hands: a grappler lifts the king off the dais, jumps and throws him west, and he breaks the stained-glass window behind the throne and lands in the undercroft, where he is still in the world (control: the same throw without the jump hits the throne and breaks nothing)",
+  "room": "throne-room",
+  "placements": true,
+  "players": [{ "id": "a", "character": "grappler", "spawn": 0 }],
+  "inputs": [
+    { "player": "a", "from": 0, "to": 40, "x": -1 },
+    { "player": "a", "from": 0, "to": 3, "hold": ["jump"] },
+    { "player": "a", "from": 50, "to": 53, "hold": ["grab"] },
+    { "player": "a", "from": 60, "to": 64, "x": -1 },
+    { "player": "a", "from": 120, "to": 135, "hold": ["jump"] },
+    { "player": "a", "from": 132, "to": 135, "hold": ["attack"] }
+  ],
+  "ticks": 400,
+  "expect": [
+    { "fact": "event", "event": "grabbed", "between": [50, 50], "where": { "target": "king" } },
+    { "fact": "event", "event": "thrown", "between": [132, 132], "where": { "target": "king" } },
+    { "fact": "event", "event": "part-broken", "between": [133, 145], "count": [1, 1], "where": { "part": "window", "by": "king" } },
+    { "fact": "in-room", "entity": "king", "at": 400, "room": "undercroft" },
+    { "fact": "in-room", "player": "a", "at": 400, "room": "throne-room" }
+  ]
+}

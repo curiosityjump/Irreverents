@@ -207,3 +207,18 @@ Nothing blocking. Taste, in the morning: the speech's words.
   `"window"`), in `docs/architecture.md`, "Rooms and doors: what other
   steps read". The window is not placed in the throne room yet; the part
   id comes when it is. Still holding.
+- **Lead, 09:10 UTC. The window, measured with real hands.** The window
+  is on `main` (5b7e319: part `window`, throne room column 2, rows 9–11;
+  beyond it the hidden passage and the `undercroft`). Traced by me: a
+  grappler who lifts the king and throws him west **from a standing
+  start hits the throne** (launch 242 px/s; the throne stands between
+  him and the wall) and breaks nothing; the same throw **from a jump**
+  breaks the window at 230 px/s (it needs 200) and the king lands in the
+  undercroft. Pinned as `scenarios/step6-king-through-the-window.json`
+  (control watched: without the jump, no break). Left as it is: needing
+  the jump reads as a suplex, and moving the throne is the owner's taste.
+  `DRAFT:` to make a standing throw work too, move the throne one tile
+  east of the king in `content/placements/throne-room.json`, or ask the
+  Step 3 lead to lower the window's `breakSpeed`. Not checked: whether
+  the king's ribbon is seen in the undercroft (it should be: it follows
+  his room), and what a second player sees.
