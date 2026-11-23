@@ -81,3 +81,58 @@ steps' scenarios.
 
 The table; the cause shown with a control; the fix live; one line for the
 owner in plain words saying what they were seeing and what they will see now.
+
+## Part 2, added 23:55 UTC: beaten enemies stay beaten
+
+**The owner, first-hand to the orchestrator, ~23:52 UTC, still playing:**
+
+> Also, i seem to be invincible as hero... and enemies collapse but never die
+
+(The hero half is Step 21, `handoff-prompts/loop-risk.md`, building now: not
+yours.) The enemy half is yours, after part 1's cause is found, as its own
+push. Today a flattened body lies `flattenTime` and gets up fresh
+(`docs/mechanisms/combat-and-impact.md`), every time, for ever: nothing a
+player does to an enemy lasts.
+
+**Decided by the orchestrator (`DRAFT:`; log it in `docs/decisions-log.md`
+with how to undo it), from the owner's words and the library:**
+
+- **Bad guys can be defeated.** Doc 08: "enemy regains footing, staggers,
+  falls, counterattacks, loses armor or is defeated". A bad guy (the quarry's
+  and camp's fighters, heavies, the brute, the lookout, a wave's arrivals; not
+  the villain yet: he carries the power and loops his robbery, ask before
+  touching him) who is worn out a set number of times, or by one hard enough
+  slam (a throw into a wall or into another body: impact over numbers, D-020,
+  so the big hit ends it sooner), does not get up: he lies a beat, then goes
+  with the cut `fx-poof`, and is gone. The count and the slam speed are data
+  per kind (the heavy takes more); 1 must be a legal count.
+- **He does not come back while you are there.** A placed bad guy returns
+  after a data time once no player is in the room (as the shop's goods do,
+  `heist-restock.ts`): `DRAFT:`, so a place can be cleared and is not empty
+  for ever. A wave's arrival never returns (the next wave is the camp's
+  answer).
+- **Townspeople and guards are knocked out, not defeated:** D-064 and doc 26
+  build on an unconscious body lying there to be found. They stay down for a
+  long data time (far longer than today's `flattenTime`) instead of popping
+  up fresh; nobody poofs. Read `npc-witness.ts` and `npc-call.ts` first: a
+  body staying down longer must not break "stop the caller and no help
+  comes", and must not leave a room where a player cannot get what a
+  standing shopkeeper gives (say what you find).
+- **No number over anyone's head, no health bar.** How close a bad guy is to
+  going shows on the body (the hurt pose, `fx-dizzy`, a stagger), `DRAFT:`.
+- **Other steps' scenarios:** the waves', outpost's, quarry's, town tiers',
+  Step 18's and Step 21's scenarios flatten people on pinned ticks. Count
+  which go red before you push; if a default of "one more than any scenario
+  needs" keeps them green, take it and say so; otherwise stop and tell me the
+  list (as the risk builder did). The Hall's detector counts bodies felled by
+  a credited player (`hall-detect.ts`): a defeat must still count once.
+- Files: the rule lives in new `src/sim/systems/` files and new content
+  fields with safe defaults; tell me by message before editing another
+  builder's system.
+
+Signal: scenarios with a control each (a fighter worn out the set number of
+times stays down and is gone; one fewer and he gets up; a slam ends it
+sooner; a shopkeeper knocked out is still lying there after the old
+`flattenTime`; a cleared room is empty while you stay and restocked after you
+have been gone the data time), and one phone e2e fact: by touch, a fighter is
+beaten and is gone.
