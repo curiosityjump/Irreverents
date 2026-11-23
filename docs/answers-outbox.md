@@ -27,3 +27,9 @@ changed>` as its heading. The first one in a new project is the genesis
 entry: "first vision written; no plan exists yet", naming the sections.
 
 ## Entries
+
+### Vision · Principles: "looking at the game, looking at the vision, seeing the gaps, and closing them"
+- **Answer:** "I put a lot of work into getting all the vision documentation laid out for you guys. I don't want to repeat all that. You are capable of looking at the game, looking at the vision, seeing the gaps, and closing them" (the owner, first-hand, ~14:50 UTC, after noticing levels, enemies and the cantina missing and asking whether anyone audits the game against Kirby and the other inspirations).
+- **Recorded in:** `docs/vision.md` "Principles that decide most questions", under the build-first principle
+- **Action for:** orchestrator (process, vision-level): make it routine, and cheap per the build-first principle, to compare the live game (screenshots and play, phone size) with `docs/vision.md`, the design library and the named inspirations, rank the biggest gaps, and drive the plan from that list. The owner should not be the one finding omissions. Today's known gaps raised by the owner: levels, enemies, cantina; look; feel.
+

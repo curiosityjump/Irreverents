@@ -168,6 +168,15 @@ token, are what the process is judged by.
 **Owner, ~14:45 UTC, confirming that framing:**
 > Yup. Do whatever gets us the game I want as soon and efficiently as possible. That's all i care about
 
+**The team finds the gaps itself.** **Owner, ~14:50 UTC, to Vision Partner, first-hand:**
+> I put a lot of work into getting all the vision documentation laid out for you guys. I don't want to repeat all that. You are capable of looking at the game, looking at the vision, seeing the gaps, and closing them
+
+*(Framing:)* the owner should never have to point out what is missing. The
+team compares the live game with this document and the design library
+(including the games named as inspiration), lists the biggest gaps, and
+closes them in order without waiting to be told. What the owner raises
+should be taste, not omissions.
+
 ## Frontiers
 
 *(Framing: one line each on what the owner wants built, pointing at the
