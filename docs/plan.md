@@ -342,13 +342,13 @@ Full text: `docs/plan-archive.md`, "Step 11". Durable record: `docs/mechanisms/c
 
 ## Step 13 — Heroes you find and keep
 
-**Status: open, claimed by orchestrator session_017WiGzJzo6aZqH4kYxxJsiV (builders: session_017WiGzHfRkFts4Z3rb8RMqC), 2026-11-23.** (Brief `handoff-prompts/loop-rescue.md`; spawn its builder when Step 19's first push, the Use arbiter, is on `main`.)
+**Status: open, unclaimed — queued behind Step 7.** (The first playable is live and reviewed, 2026-11-23 22:08 UTC at a01c44c: the skirmisher caged in the Bandit Camp, freed by holding Use, kept on the roster; brief deleted, builder archived. One signal is not built, `step13-free-while-caught`: freeing mid-alarm needs the waves slice's fighting first; then close.)
 
 Full text: `docs/plan/step-13.md`
 
 ## Step 14 — Things to find, and knowing there is more
 
-**Status: open, claimed by orchestrator session_017WiGzJzo6aZqH4kYxxJsiV (builders: session_017WiGzEdpvCBfqv752nbbSt), 2026-11-23.** (Opened 18:18 UTC for slice A, the owner's "Not finding clear 'level entries' with discovered indicators".) (Drafted from the library by an agent; its independent review did not run before the usage limit stopped it at 04:58 UTC. 2 of its 2 quoted pieces were found verbatim by script. Check its D-numbers and its "What's decided" against the library before briefing from it.)
+**Status: open, unclaimed.** (Slices A, level entrances, and B, hidden places, are live and reviewed, 2026-11-23 22:25 UTC at 343c4e3; briefs deleted, builders archived. The puzzles slice of Step 3 appends one piece, `town-7`. Later slices are in the step file; none is briefed.)
 
 Full text: `docs/plan/step-14.md`
 
@@ -399,7 +399,7 @@ Full text: `docs/plan/step-18.md`
 
 ## Step 19 — Stealth you can read, and a prize you carry out
 
-**Status: open, claimed by orchestrator session_017WiGzJzo6aZqH4kYxxJsiV (builders: session_017WiGzJqpMTHyoAaus6JsHG), 2026-11-23.** (Brief `handoff-prompts/loop-heist.md`; its first two pushes unblock Steps 9, 13, 7 and 20.)
+**Status: open, unclaimed.** (The first playable is live and reviewed, 2026-11-23 21:50 UTC at f1cdff0: the Use button's words, sight bands, the camp's strongbox and the depot's hoard as cargo, "Nobody noticed", restock; brief deleted, builder archived. Left: `step19-camp-loud-no-horn` not built; Step 16's depot scenarios carry no clean-getaway expectation; its checks are tagged gate E, which the waves builder is to move to a Hall capture. A small closing brief, then close.)
 
 Full text: `docs/plan/step-19.md`
 
