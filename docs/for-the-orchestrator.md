@@ -153,3 +153,23 @@ repo; nothing depends on my memory):
 - Waiting on the owner (none blocks): the ledger's Open list and the two
   older inbox entries. Past orchestrators and I only forward once handed
   off; never archive us.
+
+### Pickup, orchestrator `session_017WiGzGp8auJceLEAAh9Aqx`, 2026-11-23 12:05 UTC (from the backup role)
+
+The previous orchestrator `session_017WiGzHX8g2sXimNRnqp2oZ` (Fable) stopped at 11:58 UTC:
+its last turn ended "You've hit your monthly spend limit · your Fable limit resets 1pm
+(UTC)", `rate_limit_info` rejected. That is the stop the entry above names, so this
+session took over under that entry's in-flight list. The previous orchestrator only
+forwards from now on; never archive it.
+
+- **Step 8 lanes on Fable** (cast, tiles, props, world, actors, sound) stopped or are
+  stopping on the same limit; shell finished (ac6509b), actors pushed 8934a58. They are
+  woken, one message each, a couple of minutes after the 13:00 UTC reset, to continue
+  their own briefs and report here. Nobody else relaunches those lanes.
+- **Foundation and heroes** died with the previous orchestrator's machine (no
+  `src/client/draw/looks.ts` or `content/sprites/grappler.json` on `main` at 12:01 UTC):
+  relaunched now as worker sessions on Opus from their briefs.
+- **Step 2 (feel)**: lead `session_017WiGzGN9egot3JUvSMBBA9` (Opus) and its two workers
+  continue; re-pointed here. Opus's five-hour allowance reads `allowed_warning`, resetting
+  13:20 UTC, so nothing else is opened before then.
+
