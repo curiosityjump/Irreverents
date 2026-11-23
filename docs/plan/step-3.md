@@ -487,3 +487,6 @@ names and shapes.
   itself took about five minutes to go live, so deploys were slow, not
   failing. Re-landed unchanged as a700081, live 80 s after its push
   (17:16 UTC); `/debug/errors` empty after it.
+
+- **Orchestrator `session_017WiGzHhke4tkAThPgw6EXs`, 2026-11-23 18:45 UTC: the fast way-out check (a700081) reviewed.** Re-run here: build 5 s, check 35 s, 177 ok. A differential workflow compared the old and new `checkRooms` on 1,204 variants (133 mutations of the real map across 13 rooms, party and tuning changes, 800 random maps, all 18 room controls): identical problem lists every time; mutants of the new code that stop early are caught by the real map. Brief deleted, builder archived. **A finding for whoever takes Step 3 or the camp next:** with the grappler's or the infiltrator's `jumpSpeed` 10% lower, the Bandit Camp becomes a trap (both checks: "no way out" at `content/rooms/outpost.json` tile [8, 10], everything east of the three-tile block at columns 5-7). The owner tunes `jumpSpeed` by feel in the `?tune` panel, so that block wants to be two tiles, or the room a second way out.
+
