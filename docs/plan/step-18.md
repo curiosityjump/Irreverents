@@ -431,3 +431,68 @@ scenarios-only runner (content load plus every scenario: 1 min 48 s):
     under a second.
 
 ## Builder notes
+
+### Slice A, push 1 (builder `session_017WiGzHwmFZe9AdG3KMHsa4`, 2026-11-23 ~18:00 UTC)
+
+- **Measured on push 1:** 187 of 187 scenarios pass (the brief's five
+  re-timed, three new); `npm run gates` 5 of 6 before and after. The new
+  scenarios: shopkeeper hits 10 (control, held input in `charge()`: 1),
+  guard hits 15 (control, held input in the chase: 3).
+- **Not in the brief: the toll keeper.** Step 16's `toll-keeper` body
+  shared the shopkeeper's tuning set and lists no `attack` (by design: a
+  keeper who swings punched the hero before they could pay). With the
+  shopkeeper's seven attack numbers in that set, the content check fails
+  "no verb of character toll-keeper reads this number". Fixed as data: a
+  new set `characters.toll-keeper` with the same walking numbers, and
+  `"tuning": "toll-keeper"` in `content/characters/toll-keeper.json`
+  (Step 16's file; its `"//"` updated to match). All 60 `step16-*` stay
+  green. Step 16's lead is told.
+- **The way-out scenario's geometry and control differ from the brief.**
+  A cornered hero could not be set up in the test street with a grappler:
+  punched from the guard's left, he is slammed into the right wall and
+  flattened before he rages (flattened sees nothing), at gaps of 30, 220
+  and 300 ticks between punches. So the scenario punches from his right;
+  the fight drifts left to the shop, he rages on the second punch (tick
+  420), hits the hero once (728), and the hero runs at him, jumps over
+  (750) and climbs the ledge at the left. No hit after; at tick 2400 the
+  hero is at x 25.8 on the ledge, the guard at 229.2 (203 px). **The
+  brief's control ("holds into the right wall") does not fail here**:
+  in the open street the hero outruns him to the wall and he loses sight
+  (1 hit in all). The control used is the hero **standing still** after
+  the first blow: 20 hits and 2 flattenings, and the guard's blows carry
+  the hero across the street into the right wall (18 hits after tick
+  840). That is the cornered case, reached by staying.
+- **The way out against two (probe, `scripts/.probe-two.ts`, not
+  committed):** solo grappler in the test street. Punched `ts-guard`
+  (rage at 415; the shopkeeper saw it, mood 2) and then `ts-shopkeeper`
+  (rage at 619), the hero standing between them at tick 600 (shopkeeper
+  x 121, hero 139, guard 167). Hits on the hero: one, by `ts-shopkeeper`
+  at 654. The guard was knocked away by the hero's own punch at 619 (it
+  struck both). The hero jumped over the guard at 825 and ran right to
+  the wall. **No hit by either from 915 to the end.** At tick 2400: hero
+  x 674.6, guard 406.8 (268 px), shopkeeper 328.5 (346 px): **passes.**
+  Run on to 3000, the guard has cooled, stood down and walked back to his
+  post at 487 (187 px, mood 1, no hit). Jumping over the shopkeeper
+  instead and up the ledge: no hit after the jump either, but at 3000 she
+  is back at her counter 141 px from the hero on the ledge. Neither is a
+  hero who cannot get away: no one can reach the ledge, and nobody swung
+  again. Only one blow landed while the hero stood between the two, so
+  this probe does not measure two people swinging at once (slice B's
+  question).
+- **e2e `fight-back`:** a guard punched from his left is carried out
+  through the courtyard door (measured), so the page first walks past
+  him and punches from his right. "His drawn x jumps 10 px" counts a move
+  of 10 px within 150 ms (his walk is 6 px in 150 ms; a jump over 700 ms
+  counted his walk). Local runs: three jumps in 5–7 taps, the hero
+  knocked 20 px within 1 s 2.9 s after settling. **Control** (guard and
+  shopkeeper back to `["move"]`, their numbers out, rebuilt): false, 0 px
+  in 30 s, the guard's barks only "Hey! What?!".
+- **`step4-guard-follows-seen`'s words:** the hero now reaches the
+  cellar doorway with the guard about 35 px behind, not the 60 its
+  `proves` says (the blow knocked the hero nearer). The claim (he follows
+  through, and only having seen) holds; the number in the sentence is
+  left as it was.
+- **Open for the owner by playing** (no change made): a shopkeeper hit
+  twice is easy to rage, and her blows are small; the guard goes to the
+  bell before he swings if hit from behind, so a first fight in the
+  street takes about 12 s to come back at you.

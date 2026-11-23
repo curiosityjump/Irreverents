@@ -1,0 +1,15 @@
+{
+  "id": "step18-guard-swings-again",
+  "proves": "Step 18 signal 2: a guard chasing after a completed call keeps swinging at the hero it sees in reach (the attack pulse in alert-respond's chase). The play of step4-standing-in-view-is-seen: the hero takes in view and stands in the open; the guard comes and hits them at least 6 times in 2600 ticks. Control: the chase's held ['attack'] back gives 3",
+  "room": "test-street",
+  "placements": true,
+  "players": [{"id": "a", "character": "hero", "spawn": 0}],
+  "inputs": [
+    {"player": "a", "from": 20, "to": 25, "hold": ["interact"]},
+    {"player": "a", "from": 40, "to": 108, "x": 1}
+  ],
+  "ticks": 2600,
+  "expect": [
+    {"fact": "event-where", "event": "hit", "where": {"by": "ts-guard", "target": "p:a"}, "between": [0, 2600], "count": [6, 99]}
+  ]
+}

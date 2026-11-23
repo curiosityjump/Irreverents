@@ -13,7 +13,7 @@
     {"player": "a", "from": 80, "to": 85, "hold": ["interact"]},
     {"player": "a", "from": 90, "to": 116, "x": -1},
     {"player": "a", "from": 130, "to": 135, "hold": ["interact"]},
-    {"player": "a", "from": 140, "to": 260, "x": 1},
+    {"player": "a", "from": 140, "to": 270, "x": 1},
     {"player": "a", "from": 215, "to": 240, "hold": ["jump"]}
   ],
   "ticks": 1300,
@@ -23,9 +23,9 @@
     {"fact": "event-where", "event": "deed", "where": {"deed": "buy", "by": "p:a", "target": "shopkeeper-1", "witnesses": ["shopkeeper-1", "villain-1"]}, "between": [130, 130], "count": [1, 1]},
     {"fact": "event-where", "event": "reassured", "between": [0, 1300], "count": [0, 0]},
     {"fact": "position", "player": "a", "at": 300, "x": [256, 304], "y": [160, 160]},
-    {"fact": "mood", "npc": "shopkeeper-1", "between": [81, 1150], "is": 3},
-    {"fact": "event-where", "event": "mood-changed", "where": {"entity": "shopkeeper-1", "from": 3, "to": 2, "cause": "cooled"}, "between": [1150, 1150], "count": [1, 1]},
-    {"fact": "mood", "npc": "shopkeeper-1", "between": [1151, 1300], "is": 2},
+    {"fact": "mood", "npc": "shopkeeper-1", "between": [81, 1165], "is": 3},
+    {"fact": "event-where", "event": "mood-changed", "where": {"entity": "shopkeeper-1", "from": 3, "to": 2, "cause": "cooled"}, "between": [1165, 1165], "count": [1, 1]},
+    {"fact": "mood", "npc": "shopkeeper-1", "between": [1166, 1300], "is": 2},
     {"fact": "mood", "npc": "guard-1", "between": [0, 1300], "is": 1}
   ]
 }

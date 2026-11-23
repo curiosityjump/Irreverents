@@ -1,7 +1,7 @@
 {
   "id": "step12-guard-follows-into-camp",
   "gate": null,
-  "proves": "a chase crosses the whole route into the camp (D-077, D-069): in the castle street a hero takes goods, the call completes and the street's guard comes and stands over them; the hero walks slowly east, in the guard's sight all the way, out to the courtyard and up its doorway into the Bandit Camp; the guard follows through both doors (one of chaseCrossCap's 2 places), and the street's alert stays 1 in the camp (walking through a door never changes an alert). Control: chaseCrossCap 0 in content/tuning.json, the guard stays in the courtyard",
+  "proves": "a chase crosses the whole route into the camp (D-077, D-069): in the castle street a hero takes goods, the call completes and the street's guard comes and hits them; the hero walks slowly east, in the guard's sight all the way, out to the courtyard and up its doorway into the Bandit Camp; the guard follows through both doors (one of chaseCrossCap's 2 places), and the street's alert stays 1 in the camp (walking through a door never changes an alert). Control: chaseCrossCap 0 in content/tuning.json, the guard stays in the courtyard",
   "room": "castle-street",
   "placements": true,
   "players": [
@@ -35,19 +35,19 @@
     {
       "player": "a",
       "from": 2800,
-      "to": 4650,
-      "x": 0.3
+      "to": 4076,
+      "x": 0.42
     },
     {
       "player": "a",
-      "from": 4660,
-      "to": 4665,
+      "from": 4080,
+      "to": 4085,
       "y": -1
     },
     {
       "player": "a",
-      "from": 4700,
-      "to": 4760,
+      "from": 4120,
+      "to": 4180,
       "x": 1
     }
   ],
@@ -62,8 +62,8 @@
         "toRoom": "courtyard"
       },
       "between": [
-        3905,
-        3905
+        3543,
+        3543
       ],
       "count": [
         1,
@@ -80,8 +80,8 @@
         "toRoom": "courtyard"
       },
       "between": [
-        3906,
-        4100
+        3544,
+        3738
       ],
       "count": [
         1,
@@ -98,8 +98,8 @@
         "toRoom": "outpost"
       },
       "between": [
-        4660,
-        4660
+        4080,
+        4080
       ],
       "count": [
         1,
@@ -116,8 +116,8 @@
         "toRoom": "outpost"
       },
       "between": [
-        4661,
-        4800
+        4081,
+        4220
       ],
       "count": [
         1,

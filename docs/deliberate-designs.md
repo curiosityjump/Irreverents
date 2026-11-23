@@ -78,6 +78,9 @@ words.
 **When one world throws, the server sets it aside and tells its players to go back to the start screen, and refuses that saved game until the next restart.**
 → Intended (Step 17, 2026-11-23). A save from an older build crashed the whole server, `main` included, again on every reconnect. One world's trouble must never take the others down, and a game that cannot run must never be written over its own save. `INTENT:` at `setAside` in `src/server/game.ts`.
 
+**People can be outrun and jumped over.**
+→ Intended. There is always a way out (`CLAUDE.md`): now that guards and shopkeepers swing at heroes (Step 18), no person's body lists `jump`, and every person walks slower than the slowest hero runs (people 40–56 px/s; the brawler, the slowest hero, runs at 76). A hero who jumps over a swinging person and runs gets away. A person who runs or jumps needs another way out first. Decided by the Step 18 builder for the orchestrator, 2026-11-23 (`docs/plan/step-18.md`, "`DRAFT:` choices"); the owner may overrule. `INTENT:` at `charge()` in `src/sim/npc/behaviours.ts` and in the people's `"//"` in `content/tuning.json`. Proven by `scenarios/step18-jump-over-is-a-way-out.json`.
+
 ---
 
 ## Where these live in the code
@@ -90,6 +93,7 @@ Keep this table in step with the entries:
 | Switch refused or skips a member in a tight space | `src/sim/verbs/switch.ts` |
 | The store never throws; an unreadable file is set aside | `src/server/store.ts` (`openStore`, `load`) |
 | The pedestal's card has no button | `src/client/draw/hall.ts` (`drawHall`) |
+| People can be outrun and jumped over | `src/sim/npc/behaviours.ts` (`charge`); `content/tuning.json` (`characters.guard`, `.shopkeeper`, `.toll-keeper` `"//"`) |
 
 **Still unmarked:** list entries that have no `INTENT:` at their site yet.
 Add the marker when you next touch one.

@@ -479,6 +479,8 @@ async function main(): Promise<void> {
     }
 
     await phoneFacts({ browser, devices, base, out, tag: LIVE ? 'check' : 'e2e', fact, errors });
+    // Step 18's fact (fight-back): a guard hit until he rages hits the phone's character back, by touch, here and on live (docs/plan/step-18.md, signal 5).
+    await (await import('./e2e/fight.ts')).fightFacts({ browser, devices, base, out, tag: LIVE ? 'check' : 'e2e', fact, errors });
     await awayFacts({ browser, base, out, tag: LIVE ? 'check' : 'e2e', fact, errors, wholeWait: !LIVE });
 
     fact('errors', errors.length === 0, errors.length ? `page errors: ${errors.join(' | ')}` : 'no page raised an error');

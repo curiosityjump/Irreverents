@@ -90,8 +90,11 @@ function plead(ctx: StepContext, e: Entity): Input {
  * INTENT (D-065, "Escalation is not omniscient"): the target is the place
  * the offender was last *seen*, never where they are. Out of sight, the
  * person arrives at an empty spot and stands there.
- * DRAFT: once the body lists Step 2's `attack` verb, they hold it when an
- * offender is in sight and in reach; until then they only charge.
+ * INTENT (Step 18): a body that lists Step 2's `attack` presses it fresh
+ * every other tick while an offender is in sight and in reach, because the
+ * verb starts a swing only on a fresh press (src/sim/verbs/attack.ts:65-72);
+ * held, it would swing once per approach. People never jump and walk slower
+ * than every hero runs: the way out.
  */
 function charge(ctx: StepContext, e: Entity): Input {
   const n = e.c.npc!;
@@ -105,7 +108,7 @@ function charge(ctx: StepContext, e: Entity): Input {
     const who = findEntity(ctx.world, id);
     return who !== undefined && canSee(ctx.content, e, who);
   });
-  return canAttack && inSight ? { x: 0, y: 0, held: ['attack'] } : IDLE;
+  return canAttack && inSight ? { x: 0, y: 0, held: ctx.world.tick % 2 === 0 ? ['attack'] : [] } : IDLE;
 }
 
 /**

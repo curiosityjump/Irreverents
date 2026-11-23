@@ -4,6 +4,6 @@
   "name": "Graybox Shopkeeper",
   "box": { "w": 12, "h": 24 },
   "color": "#e9c46a",
-  "verbs": ["move"],
+  "verbs": ["move", "attack"],
   "tuning": "shopkeeper"
 }

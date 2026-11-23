@@ -1,0 +1,19 @@
+{
+  "id": "step18-rage-keeps-swinging",
+  "proves": "Step 18 signal 1: a raging good person keeps swinging at the hero in reach and in sight, not once per approach (the attack pulse in charge(), src/sim/npc/behaviours.ts). The play of step4-rage-without-a-call: the bell broken unseen, three goods taken in the shopkeeper's view, the hero stays at the counter; the shopkeeper hits them at least 4 times. Control: charge()'s held ['attack'] back gives 1",
+  "room": "test-street",
+  "placements": true,
+  "players": [{"id": "a", "character": "hero", "spawn": 0}],
+  "inputs": [
+    {"player": "a", "from": 300, "to": 331, "x": 1},
+    {"player": "a", "from": 340, "to": 345, "hold": ["interact"]},
+    {"player": "a", "from": 350, "to": 391, "x": -1},
+    {"player": "a", "from": 450, "to": 455, "hold": ["interact"]},
+    {"player": "a", "from": 470, "to": 475, "hold": ["interact"]},
+    {"player": "a", "from": 490, "to": 495, "hold": ["interact"]}
+  ],
+  "ticks": 1500,
+  "expect": [
+    {"fact": "event-where", "event": "hit", "where": {"by": "ts-shopkeeper", "target": "p:a"}, "between": [0, 1500], "count": [4, 99]}
+  ]
+}

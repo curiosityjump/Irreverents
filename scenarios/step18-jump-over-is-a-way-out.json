@@ -1,0 +1,26 @@
+{
+  "id": "step18-jump-over-is-a-way-out",
+  "proves": "Step 18 signal 3, there is always a way out: people never jump and walk slower than every hero runs. A grappler walks to ts-guard, punches him twice in his own view (the second punch enrages him), and is hit once by the raging guard; the hero then runs at him, jumps over him and runs on up the ledge at the left, where no person can follow. The guard lands no hit from 90 ticks after the jump to the end, and they end over 200 px apart. Control: the hero stands still after the first blow instead, and is hit 20 times and flattened twice",
+  "room": "test-street",
+  "placements": true,
+  "players": [{"id": "a", "character": "grappler", "spawn": 0}],
+  "inputs": [
+    {"player": "a", "from": 0, "to": 201, "x": 1},
+    {"player": "a", "from": 202, "to": 203, "x": -0.01},
+    {"player": "a", "from": 204, "to": 205, "hold": ["attack"]},
+    {"player": "a", "from": 218, "to": 414, "x": -1},
+    {"player": "a", "from": 414, "to": 415, "hold": ["attack"]},
+    {"player": "a", "from": 750, "to": 941, "x": -1},
+    {"player": "a", "from": 750, "to": 768, "hold": ["jump"]},
+    {"player": "a", "from": 869, "to": 887, "hold": ["jump"]},
+    {"player": "a", "from": 901, "to": 919, "hold": ["jump"]}
+  ],
+  "ticks": 2400,
+  "expect": [
+    {"fact": "event-where", "event": "mood-changed", "where": {"entity": "ts-guard", "from": 2, "to": 3}, "between": [420, 420], "count": [1, 1]},
+    {"fact": "event-where", "event": "hit", "where": {"by": "ts-guard", "target": "p:a"}, "between": [0, 749], "count": [1, 1]},
+    {"fact": "event-where", "event": "hit", "where": {"by": "ts-guard", "target": "p:a"}, "between": [840, 2400], "count": [0, 0]},
+    {"fact": "position", "player": "a", "at": 2400, "x": [16, 28], "y": [96, 96]},
+    {"fact": "position", "entity": "ts-guard", "at": 2400, "x": [228, 320]}
+  ]
+}

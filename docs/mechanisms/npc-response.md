@@ -168,7 +168,59 @@ One function per behaviour id; an NPC kind picks one per mood.
 - **`charge`**: walk to `lastSeen`, the place an offender was last
   **seen**, never where they are (D-065: not omniscient), and stop
   within `npcChargeReach`. If the body lists Step 2's `attack` verb,
-  hold `attack` there while an offender is in sight.
+  press `attack` there every other tick while an offender is in sight
+  (Step 18's pulse: "Who fights" below).
+
+## Who fights (Step 18)
+
+The owner: *"Enemies or provoked good guys need to be able to fight
+too."* Built by Step 18 slice A (`docs/plan/step-18.md`).
+
+- **Who, against a hero.** A good person fights a hero only in mood 3,
+  and only an offender in sight (`charge`). A guard answering a
+  completed call fights the hero it sees (`alert-respond`'s chase).
+  Enemies fight heroes as business as usual, in mood 1, through Step 12's
+  `outpost-fight` (`docs/mechanisms/outposts.md`). A good person
+  fighting a villain who acts like a villain, in mood 1, is the design
+  too (D-049; `INTENT:` at `src/sim/systems/npc-witness.ts:72-74`), only
+  not built yet (the step's slice D).
+- **Rage alone summons no one (D-075).** An isolated raging person
+  fights where they are; reinforcements come only from a completed call.
+  A raging good person still goes to call once no offender is in sight
+  (`npc-call.ts`), which is why a guard hit from behind walks to the bell
+  before he comes back to swing.
+- **How.** A person swings with Step 2's own `attack` verb, with its
+  wind-up, knockback and wear (`docs/mechanisms/combat-and-impact.md`).
+  Its body must list `attack` and its tuning set must carry the seven
+  attack numbers. Today: `guard` and `shopkeeper` (Step 18), and the
+  camp's `outpost-fighter` and Step 16's kinds (Step 12's system). Not
+  the lookout, the king, the toll keeper or the villain (push 2 gives the
+  villain a swing once struck).
+- **The pulse.** `charge()` and the chase press `attack` on even ticks
+  only (`world.tick % 2 === 0`), as `outpost-fight` does: Step 2's verb
+  starts a swing only on a fresh press (`attack.ts`), so a held input
+  would swing once per approach. Do not "fix" the pulse back to a held
+  input, and do not change the verb.
+- **The numbers** (`content/tuning.json`, `DRAFT:`): the guard hits like a
+  camp fighter with a slower wind-up (strength 9000, reach 12, every
+  0.8 s, wear 20, wind-up 0.4 s); the shopkeeper is an ordinary fighter
+  (4000, reach 10, every 1.0 s, wear 8, wind-up 0.5 s). The wind-ups are
+  long so a blow can be seen coming on a phone over a network (the step's
+  DRAFT list). The toll keeper walks on its own copy of the shopkeeper's
+  walking numbers (`characters.toll-keeper`), because a number its body
+  has no verb for fails the content check.
+- **The way out** (`INTENT:`; `docs/deliberate-designs.md`): no person's
+  body lists `jump`, and every person walks slower than the slowest hero
+  runs (people 40–56 px/s; the brawler runs at 76). A hero who jumps
+  over a swinging person and runs gets away:
+  `scenarios/step18-jump-over-is-a-way-out.json`, and against two at once
+  the probe in the step's builder notes. A person who runs or jumps
+  needs another way out first.
+- **Friendly fire stays** (`DRAFT:`): a swing hits every body in reach,
+  whatever its side, so a guard can flatten the shopkeeper.
+- **Checks:** `step18-rage-keeps-swinging`, `step18-guard-swings-again`,
+  `step18-jump-over-is-a-way-out`, and `npm run e2e`'s `fight-back`
+  (`scripts/e2e/fight.ts`, also in `check:live`).
 
 ## On screen (`src/client/draw/npcs.ts`)
 
@@ -244,8 +296,9 @@ of role `guard` (`RESPONDER_ROLE`, `DRAFT:`) and the caller's side in
 the area gets `c.respond` and, from mood 1, mood 2 (`called`). They walk
 to the reported `x`, then pace `npcSearchRange` (48 px) either side of
 it. One who **sees** a hero (`canSee`, that tick) goes to mood 3
-(`pursuit`) and walks at where it saw them, holding `attack` in
-`npcChargeReach` if its body lists the verb (the guard's does not yet);
+(`pursuit`) and walks at where it saw them, pressing `attack` every
+other tick in `npcChargeReach` if its body lists the verb (the guard's
+does since Step 18: "Who fights" below);
 losing sight, it walks to the last place seen and searches there. **The
 only read of a hero's position is under `canSee` on the same tick.** At
 alert 0 they walk back to their placement's column, return to mood 1
@@ -371,3 +424,7 @@ real event of another step (Step 2's `hit`).
   2 owns knocked-out people.
 - A `once` thing stays in the world after it is taken (with `takenBy`
   set); it is never re-added.
+- **Holding `attack` swings once** (`attack.ts`: `fresh = down &&
+  !a.held`). A person who should keep swinging presses it on alternate
+  ticks (the pulse, "Who fights"); a held input looks right and swings
+  once per approach.

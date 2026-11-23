@@ -143,7 +143,7 @@ const system: System = {
         if (n.mood !== 3) setMood(ctx, e, 3, 'pursuit');
         const dx = r.x - me;
         if (Math.abs(dx) > npcChargeReach!) drive(e, walk(dx));
-        else drive(e, content.characters[e.kind]?.verbs.includes('attack') ? { x: 0, y: 0, held: ['attack'] } : IDLE);
+        else drive(e, content.characters[e.kind]?.verbs.includes('attack') ? { x: 0, y: 0, held: world.tick % 2 === 0 ? ['attack'] : [] } : IDLE);
         continue;
       }
 

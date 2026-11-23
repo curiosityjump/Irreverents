@@ -1,7 +1,7 @@
 {
   "id": "step4-standing-in-view-is-seen",
   "gate": "D",
-  "proves": "the partner of step4-hiding-is-unseen: the same play, but the hero stops one tile short of the hiding place and stands still in the open: the guard sees them on the way, gives chase and stands over them, and the alert is still 1 at the end (D-067: acting normal in view of a pursuer does nothing)",
+  "proves": "the partner of step4-hiding-is-unseen: the same play, but the hero stops one tile short of the hiding place and stands still in the open: the guard sees them on the way, gives chase and hits them, and the alert is still 1 at the end (D-067: acting normal in view of a pursuer does nothing)",
   "room": "test-street",
   "placements": true,
   "players": [{"id": "a", "character": "hero", "spawn": 0}],
@@ -14,7 +14,7 @@
     {"fact": "body-state", "player": "a", "at": 400, "not": ["roomHide"]},
     {"fact": "event-where", "event": "call-completed", "where": {"by": "ts-shopkeeper"}, "between": [505, 505], "count": [1, 1]},
     {"fact": "event-where", "event": "mood-changed", "where": {"entity": "ts-guard", "to": 3, "cause": "pursuit"}, "between": [506, 700], "count": [1, 1]},
-    {"fact": "position", "entity": "ts-guard", "at": 1000, "x": [335, 360]},
+    {"fact": "position", "entity": "ts-guard", "at": 730, "x": [335, 360]},
     {"fact": "alert", "area": "test-street", "between": [506, 2600], "is": 1},
     {"fact": "event-where", "event": "alert-changed", "where": {"area": "test-street", "to": 0}, "between": [0, 2600], "count": [0, 0]}
   ]

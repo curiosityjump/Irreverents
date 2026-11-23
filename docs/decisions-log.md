@@ -831,3 +831,36 @@ document as a decision of theirs.
 - **To change it:** `handoff-prompts/step-5-hit-lands-at-once.md` while it is being built; then `docs/mechanisms/network.md`, "Predicted hits".
 - **Where:** `docs/plan/step-5.md` handoff notes.
 
+
+### 2026-11-23 · Step 18: a guard or shopkeeper in a fight swings again and again, about once a second
+- **Decided by:** Step 18 slice A builder `session_017WiGzHwmFZe9AdG3KMHsa4`, for the orchestrator `session_017WiGzHhke4tkAThPgw6EXs`
+- **Instead of asking:** "Should an angry person keep swinging while you stand in reach, or hit once and stand there?"
+- **Why this way:** the owner: "Enemies or provoked good guys need to be able to fight too." People held the attack button, and the game swings only on a fresh press, so they hit once per approach. Now they press it every other moment, as the camp's fighters already do.
+- **To change it:** one expression each in `charge()` (`src/sim/npc/behaviours.ts`) and the chase in `src/sim/systems/alert-respond.ts`.
+- **Where:** `docs/mechanisms/npc-response.md`, "Who fights".
+
+### 2026-11-23 · Step 18: how hard a guard and a shopkeeper hit, and how long you see it coming
+- **Decided by:** Step 18 slice A builder `session_017WiGzHwmFZe9AdG3KMHsa4`
+- **Instead of asking:** "How strong is a guard's blow, how weak a shopkeeper's, and how long is the warning before it lands?"
+- **Why this way:** a guard hits like a camp fighter (library doc 24: guards keep stronger toolsets); a shopkeeper is an ordinary fighter, a nuisance alone (D-046, doc 23:69: "mechanically ordinary and often hopeless"). Both wind up longer than a camp fighter (0.4 s and 0.5 s against 0.25 s), because on a phone a dodge reaches the server only after about half a second of delays (snapshots, smoothing, the network, your thumb).
+- **To change it:** seven numbers each in `content/tuning.json`, `characters.guard` and `characters.shopkeeper`; the wind-up is `attackWindup`.
+- **Where:** `docs/plan/step-18.md`, "`DRAFT:` choices".
+
+### 2026-11-23 · Step 18: the toll keeper keeps its own walking numbers
+- **Decided by:** Step 18 slice A builder `session_017WiGzHwmFZe9AdG3KMHsa4`
+- **Instead of asking:** nothing of the owner's: the toll keeper shared the shopkeeper's numbers, and her new attack numbers would have been numbers it has no use for, which the checks refuse.
+- **Why this way:** the toll keeper must not swing (Step 16: a fighter as keeper punched the hero before they could pay), so it walks on its own copy of the same walking numbers. Nothing changes in play.
+- **To change it:** `characters.toll-keeper` in `content/tuning.json`, and `"tuning"` in `content/characters/toll-keeper.json`.
+- **Where:** `content/tuning.json`.
+
+### 2026-11-23 · Step 18: five scenarios re-timed because people now really hit
+- **Decided by:** Step 18 slice A builder `session_017WiGzHwmFZe9AdG3KMHsa4` (the re-times were assigned to Step 18 by the orchestrator, `handoff-prompts/step-12-b-chase-and-clash.md:36-42`)
+- **Instead of asking:** nothing: each keeps its claim; only ticks, positions and the hero's moves changed, and "stands over them" became "hits them".
+- **Why this way, scenario by scenario** (the blow that moved each, from `node scripts/trace.ts`):
+  - `step4-standing-in-view-is-seen`: `{"type":"hit","tick":734,"by":"ts-guard","target":"p:a"}` knocks the hero back and the guard follows, so the guard's place is read at tick 730, when he has just reached them (x 335–360), not 1000.
+  - `step4-street-call`: `{"type":"hit","tick":2750,"by":"street-guard","target":"p:a"}`; the guard's place is read at 2745 (x 200–250), not 3600.
+  - `step4-hero-persists-rage`: `{"type":"hit","tick":142,"by":"shopkeeper-1","target":"p:a"}` slows the hero's run to the wall: they run 10 ticks longer (to 270), and rage cools 15 ticks later (1165, not 1150), counted from when they were last seen.
+  - `step4-guard-follows-seen`: `{"type":"hit","tick":2750,"by":"street-guard","target":"p:a"}` knocks the hero 28 px nearer the cellar doorway: they run 46 ticks, not 64; in the undercroft they run on as the guard comes up (2932, not 3100), before his next swing, so every later tick moves 168 earlier. The guard is now about 35 px behind at the cellar doorway, not 60.
+  - `step12-guard-follows-into-camp`: `{"type":"hit","tick":2750,"by":"street-guard","target":"p:a"}` and 14 more with 3 flattenings: walking at 0.3 of a run (29 px/s) the hero stayed in the guard's reach. They now walk at 0.42 (about the guard's 40 px/s), which keeps them in his sight and out of reach; the door ticks move to 3543 and 4080. Sent to the Step 12 lead before the push.
+- **To change it:** the scenario files.
+- **Where:** `scenarios/step4-*.json`, `scenarios/step12-guard-follows-into-camp.json`.

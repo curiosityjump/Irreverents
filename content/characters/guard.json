@@ -4,6 +4,6 @@
   "name": "Graybox Guard",
   "box": { "w": 14, "h": 28 },
   "color": "#577590",
-  "verbs": ["move"],
+  "verbs": ["move", "attack"],
   "tuning": "guard"
 }

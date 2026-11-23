@@ -110,6 +110,9 @@ the server.
   When a flight ends, a body that cannot run is stopped dead.
 - **"Friend" means player on player**, never "is it an NPC kind": a
   body nobody plays that attacks a player launches and wears them.
+  So a person's blow (Step 18: guards and shopkeepers in a fight,
+  `docs/mechanisms/npc-response.md`, "Who fights") lands at full share:
+  the friend rule is player on player only (`attack.ts:139`).
   **In the cantina's brawl** (Step 11) the struck player's `c.brawl`
   shares are read first at the three friend sites (`attack.ts`,
   `impact-walls.ts`, `impact-bodies.ts`), so friends launch and hurt each
