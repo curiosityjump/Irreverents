@@ -106,6 +106,18 @@ that could trap someone.
   (`step3-secret-another-way`): do not close it, and do not let the
   chamber become leavable by one party member only (a player who crawls
   in and switches character must still get out).
+- **The stone plate's pocket** (Step 3, the puzzles slice, `DRAFT:`).
+  Three rows appended under the undercroft's floor (rows 14-16; nothing
+  above moved) hold a small hidden pocket, columns 9-17, rows 14-15.
+  `INTENT:` its way out, which any body can take with everything else
+  shut: at its west end one-way platforms in the passage floor (columns
+  9-12, row 13) over a one-way ledge (same columns, row 14); from the
+  pocket floor a jump on the spot reaches the ledge, another the passage
+  floor (`step3-weight-pocket-way-out-*`, one per party member). From
+  above they are floor, so it is not a way in. Because the platforms are
+  not solid, the pocket is joined to the passage and **the way-out check
+  plays it** (it does not see a place sealed off entirely; with the
+  platforms made solid it says nothing, which is that blind spot).
 - **The vault.** At the undercroft's west end a `breakable`
   (`vault-wall`, column 4) seals a small hidden area. The way-out check
   counts it as wall, so the vault is not a place it worries about; once

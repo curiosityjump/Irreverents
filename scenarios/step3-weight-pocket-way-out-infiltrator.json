@@ -1,0 +1,76 @@
+{
+  "id": "step3-weight-pocket-way-out-infiltrator",
+  "room": "undercroft",
+  "proves": "INTENT (docs/plan/step-3.md, \"Builder notes\"): the stone plate's pocket under the undercroft's floor has a way out any body can take with everything else shut: the infiltrator, in the pocket's east end (no player holds the plate, so the bars, once there, are shut), walks west, jumps on the spot onto the one-way ledge (columns 9-12, row 14), jumps again up through the one-way platforms in the passage floor (row 13) and stands on it, then walks on east along it. The way-out check plays the same climb (the pocket is joined to the passage through the platforms, so the check sees it). Control (watched to fail): the passage-floor platforms made solid by a tiles override, and the infiltrator stays in the pocket.",
+  "players": [
+    {
+      "id": "a",
+      "spawn": 3
+    }
+  ],
+  "entities": [
+    {
+      "id": "climber",
+      "character": "infiltrator",
+      "tile": [
+        16,
+        15
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "entity": "climber",
+      "from": 0,
+      "to": 55,
+      "x": -1
+    },
+    {
+      "entity": "climber",
+      "from": 60,
+      "to": 75,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "entity": "climber",
+      "from": 110,
+      "to": 125,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "entity": "climber",
+      "from": 170,
+      "to": 230,
+      "x": 1
+    }
+  ],
+  "ticks": 260,
+  "expect": [
+    {
+      "fact": "position",
+      "entity": "climber",
+      "at": 165,
+      "y": [
+        207,
+        209
+      ]
+    },
+    {
+      "fact": "position",
+      "entity": "climber",
+      "at": 260,
+      "x": [
+        180,
+        400
+      ],
+      "y": [
+        207,
+        209
+      ]
+    }
+  ]
+}

@@ -537,3 +537,31 @@ names and shapes.
   scenario player the power directly; a player cannot hold it yet
   (`content/powers/boost.json` `"carriers": []`). Whether the played
   route works is to be said here once Step 9's carrier push lands.
+- **Push 2, the pocket's tiles alone** (no part yet). The undercroft's
+  rows after it (rows 0-12 unchanged; 13 was all wall):
+  ```
+  12 #...B.3....................c.4...T
+  13 #########====#####################
+  14 #########====.....################
+  15 #########.........################
+  16 ##################################
+  ```
+  Pocket columns 9-17, rows 14-15 (two tiles: the grappler is 30 px).
+  The way out is the one-way platforms (row 13, columns 9-12) over a
+  one-way ledge (row 14): a jump from the pocket floor goes up through
+  both and lands on the passage floor (all three party members, scenarios
+  `step3-weight-pocket-way-out-*`; control, the row-13 platforms made
+  solid by a tiles override: each stays in the pocket). First try had a
+  solid step under the platforms: refused by the way-out check (a 30 px
+  body under a one-tile floor cannot hop onto anything), so the ledge is
+  one-way too. **Bars, not a portcullis (DRAFT):** with a one-tile floor
+  no upright bar fits a standing hero, so push 3's gate is a 2×1 grate
+  in the passage floor, columns 14-15, row 13 (drop through it when it
+  is open). The plate goes on the passage floor, columns 17-20 (row 12),
+  clear of spawn 3 (column 6), spawn 4 (29), the cellar doorway (27),
+  the crate (24) and the step (row 11, 22-24).
+  **Measured (trace, push 2 tiles):** the heavy crate (`throne-crate-2`,
+  120) does go through by a real throw: the grappler grabs it beside
+  spawn 0, hops onto the dais carrying it, and a jumping throw west from
+  column 7 breaks the window (208 px/s leaving the hands) and it lands in
+  the undercroft at about column 26, on the passage floor.
