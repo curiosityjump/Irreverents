@@ -1,9 +1,9 @@
 {
-  "//": "DRAFT: stand-in drawn by tools/art/tiles/make.py; offsets are set for the 320x180 view. Notes: tools/art/tiles/README.md. DRAFT: no \"wall\" here on purpose: the one layer is the back wall itself, with windows and pillars, moving slower than the room; add \"wall\" (cells [0,6]..[3,6] of tiles/castle.png) to go back to a flat wall that moves with the room.",
+  "//": "DRAFT: stand-in drawn by tools/art/tiles/make.py (round 2). Notes: tools/art/tiles/README.md. DRAFT: no \"wall\" here on purpose: the one layer is the back wall itself, with windows and pillars, moving slower than the room; add \"wall\" (cells [0,6]..[3,6] of tiles/castle.png) to go back to a flat wall that moves with the room.",
   "id": "throne-room",
   "sky": [
-    "#4b4577",
-    "#4b4577"
+    "#4c476a",
+    "#4c476a"
   ],
   "layers": [
     {

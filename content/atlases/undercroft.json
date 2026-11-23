@@ -1,5 +1,5 @@
 {
-  "//": "DRAFT: stand-in drawn by tools/art/tiles/make.py (theme \"cellar\"); a delivered tile sheet replaces it by editing this file. Notes: tools/art/tiles/README.md.",
+  "//": "DRAFT: stand-in drawn by tools/art/tiles/make.py (theme \"cellar\", round 2); a delivered tile sheet replaces it by editing this file. Notes: tools/art/tiles/README.md.",
   "id": "undercroft",
   "image": "tiles/cellar.png",
   "tile": 16,
@@ -46,11 +46,11 @@
         3
       ],
       [
-        6,
-        0
+        3,
+        3
       ],
       [
-        7,
+        6,
         0
       ],
       [
@@ -58,7 +58,39 @@
         1
       ],
       [
+        6,
+        0
+      ],
+      [
         7,
+        0
+      ],
+      [
+        7,
+        1
+      ],
+      [
+        6,
+        3
+      ],
+      [
+        7,
+        3
+      ],
+      [
+        0,
+        4
+      ],
+      [
+        1,
+        4
+      ],
+      [
+        3,
+        3
+      ],
+      [
+        6,
         1
       ]
     ],
@@ -66,18 +98,6 @@
       [
         4,
         2
-      ],
-      [
-        5,
-        2
-      ],
-      [
-        6,
-        2
-      ],
-      [
-        -1,
-        -1
       ],
       [
         -1,
@@ -104,10 +124,6 @@
       [
         5,
         3
-      ],
-      [
-        -1,
-        -1
       ],
       [
         -1,

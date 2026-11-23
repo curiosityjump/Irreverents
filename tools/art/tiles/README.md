@@ -11,40 +11,39 @@ decided. The orchestrator moves each item to its home.
 
 ## What exists
 
+Round 2 (2026-11-23, `handoff-prompts/look2-ground.md`) redrew everything; round 1's
+drawing code is gone (git history, ebcf79e).
+
 | File | What it is |
 |---|---|
-| `tools/art/tiles/make.py` | Draws everything and writes the twelve content files. `python3 -I tools/art/tiles/make.py`. Same bytes every run. |
-| `tools/art/tiles/common.py` | The palette, the cell layout shared by all four tile images, the position hash, the sky bands. |
-| `tools/art/tiles/preview.py` | The reference renderer. Reads the real room, atlas and backdrop files and writes `tools/art/tiles/preview/` (git-ignored): `sheet-*.png` (each tile image, 4×, grid), `seams-*.png` (every neighbour case, fills and one-way runs), `room-<id>-<n>.png` (320×180 views, 4×), `upright-<id>.png` (a 180×320 view, 2×), `layer-*.png` (each layer twice side by side, to see the wrap). |
-| `tools/art/tiles/selfcheck.py` | The lane's own check: images exist, cells fit and are not empty, all 16 cases drawn, keys present, `"//"` starts `DRAFT:`, alpha 0 or 255, layers a multiple of 320 wide, two runs of `make.py` give the same bytes. |
-| `assets/tiles/grass-ruins.png` | Old warm-grey stone blocks under a grass lip; grass tufts and a daisy on top, vines underneath; a wooden plank ledge. Room: `courtyard`. |
-| `assets/tiles/town.png` | Cream plaster in a timber frame (posts on open sides, a beam along an open underside) under a course of rounded slates. Room: `castle-street`. |
-| `assets/tiles/castle.png` | Lilac dressed blocks, a pale cream trim on every walkable top, a row of small teeth under every ledge, a thin pale ledge to jump through, four dim back-wall cells. Rooms: `throne-room`, `hall-gallery`, `graybox-hall`. |
-| `assets/tiles/cellar.png` | Rough dark blocks with a worn pale-lilac lip, drips underneath, a dark wooden plank ledge, four near-black back-wall cells. Room: `undercroft`. |
-| `assets/backdrops/sky-clouds.png` (320×72) | Flat-bottomed clouds. Both outdoor rooms. |
-| `assets/backdrops/far-hills.png` (320×96) | Two ranges of round hills and a far castle in one tone. `courtyard`. |
-| `assets/backdrops/far-castle.png` (320×128) | The castle over the town, pale. `castle-street`. |
-| `assets/backdrops/castle-mid.png` (320×112) | A pale old wall with broken crenellations, two towers, open arches and round trees. `courtyard`. |
-| `assets/backdrops/town-mid.png` (320×120) | A row of pale gabled houses. `castle-street`. |
-| `assets/backdrops/castle-hall.png` (320×352) | Opaque: the dim back wall with tall round-headed windows, a shaft of pale light from each, and pillars. `throne-room`, `hall-gallery`. |
-| `assets/backdrops/cellar-vault.png` (320×352) | Opaque: the near-black back wall with a row of vaults between squat piers. `undercroft`. |
-| `content/atlases/<room>.json`, `content/backdrops/<room>.json` | Six of each, written by `make.py`. |
+| `tools/art/tiles/make.py` | Builds the sheets and writes the twelve content files. `python3 -I tools/art/tiles/make.py`; `--no-round2-fields` leaves out `deep`, `regions`, `outside`, `pin`, `front` (for a check that does not know them). Same bytes every run. Holds the region rectangles (`ROOM_REGIONS`) and the fill weights. |
+| `tools/art/tiles/tiles_draw.py` | The block engine: a bevelled block (ink/mortar joint, top highlight, left light, bottom-right shade, rounded corners, pits), a wall of them that joins every variant to every other, open-edge silhouettes with notches at joints, the plank ledge (post and brace end caps) and the stone shelf (corbel end caps). |
+| `tools/art/tiles/themes.py` | The four themes (lips, fills and their marks, tops, unders, deep, back-wall cells) and the regions: leaf canopy, cobbled street with curb, red and blue tile roofs, the street's eave. |
+| `tools/art/tiles/backdrops.py` | Clouds, far layers, mid layers, the front foliage strip, the two interior back walls. |
+| `tools/art/tiles/common.py` | Palette, sheet layout, `region_cells`, the position hash, sky bands. |
+| `tools/art/tiles/preview.py` | Reference renderer with round 2's rules (regions, deep, outside, pin, front). Writes `preview/`: `sheet-*`, `seams-*`, `room-*`, `beside-<room>.png` (a 320x180 mock next to the matching bar image), `upright-*` (234x256), `layer-*`. |
+| `tools/art/tiles/selfcheck.py` | The lane's own check: as round 1, plus at least six different fills, deep and region cells drawn and inside the room, the mid-layer fog measure, determinism in whichever mode the files were written. |
+| `tools/art/tiles/shots.mjs` | Screenshots of the eight spots in the real game at iPhone 14 upright, sideways (insets) and 667x375: `NODE_PATH=/opt/node-tools/node_modules node tools/art/tiles/shots.mjs <url> <tag>` -> `preview/shots/`. |
+| `assets/tiles/grass-ruins.png` (128x192) | Warm-grey bevelled blocks, a 6-7 px grass lip with drips, tufts and a daisy, hanging vines, moss/chip/hairline fills, dark foundation `deep`, the leaf-canopy region. `courtyard`. |
+| `assets/tiles/town.png` (128x384) | Plaster between timbers (braces, fallen plaster), board floor inside houses, packed-earth `deep`; regions: street (curb over rounded cobbles), red roof, blue roof (shingle courses, ridge, eave board), eave (ridge caps against the sky, now and then a chimney pot). `castle-street`. |
+| `assets/tiles/castle.png` | Lilac bevelled blocks (sconce ring, banner hook, chip, hairline), a warm gold-tan floor cap with an ink line under it, dentils under ceilings, pale stone shelves with corbels, calm back-wall cells. `throne-room`, `hall-gallery`, `graybox-hall`. |
+| `assets/tiles/cellar.png` | Night-blue blocks, a worn lilac flagstone lip, drips, dark plank ledges, back-wall cells. `undercroft`. |
+| `assets/backdrops/far-hills.png` 320x112, `far-castle.png` 320x128 | Far blue silhouettes: ruined towers, an aqueduct, a blue-green tree line; the castle on its hill. |
+| `assets/backdrops/castle-mid.png` 320x120, `town-mid.png` 320x124 | Mid layers: stone `#a9a5bd` wall with arches and foliage trees; houses with coloured roofs; each with a dark hedge/fence foot. Measured: 0% of opaque pixels at luminance >= 215 (darkest 87 and 70). |
+| `assets/backdrops/front-foliage.png` 320x24 | Dark bushes, outlined, with gaps; a `front` layer pinned to the room's bottom, its top 8 px below the floor line. |
+| `assets/backdrops/castle-hall.png`, `cellar-vault.png` 320x352 | Interiors: a darker, desaturated back wall in three flat bands (darkest at the top), stained-glass windows with two-band light shafts, muted pillars; the cellar's vaults with lit ribs and two candle niches per 320 px. |
 
-**Every tile image is 128×128 (8×8 cells of 16) with the same layout**, so a
-room changes theme by changing `image` alone:
+**Sheet layout** (every image; extra rows only where used):
 
 | Cells `[column, row]` | What |
 |---|---|
-| `[0..3, 0..3]` | the 4×4 block, `origin [0, 0]` |
+| `[0..3, 0..3]` | the 4x4 block, `origin [0, 0]` |
 | `[4,0] [5,0] [4,1] [5,1]` | inner corners `nw ne sw se` |
-| `[3,3] [6,0] [7,0] [6,1] [7,1]` | the five fills (the block's own index 15 first) |
-| `[4..7, 2]` | top pieces (bottom of the cell) |
-| `[4,3] [5,3]` | under pieces (top of the cell) |
-| `[0..3, 5]` | one-way `left mid right single` |
-| `[0..3, 6]` | back-wall cells (indoor themes only) |
-
-The fallback `cells` are `solid [3,3]`, `solidTop [2,3]` (index 14: lip on
-top, joined both sides), `oneway [1,5]` (the middle piece).
+| `[3,3] [6,0] [7,0] [6,1] [7,1] [6,3] [7,3] [0,4] [1,4]` | nine fills (plain first; the atlas weights plain ones) |
+| `[2..5, 4]` | `deep` (outdoor sheets) |
+| `[4..7, 2]`, `[4,3] [5,3]` | top pieces, under pieces |
+| `[0..3, 5]`, `[0..3, 6]` | one-way `left mid right single`; back-wall cells (indoor) |
+| region i: `[0..3, 8+4i .. 11+4i]`, fills `[4..7, 8+4i]` `[4,11+4i] [5,11+4i]`, tops `[4..7, 9+4i]`, unders `[4..7, 10+4i]` | regions (`grass-ruins`: 0 canopy; `town`: 0 street, 1 red roof, 2 blue roof, 3 eave) |
 
 ## How the contract was read (the world lane matches these)
 
@@ -85,6 +84,11 @@ top, joined both sides), `oneway [1,5]` (the middle piece).
 
 ## Deviations from the contract
 
+- **Round 2: "stepping down in value with depth"** (brief, `deep`) is not drawn: `deep` cells
+  are chosen by hash, not by depth, so a darker cell deeper down would land at random. The deep
+  cells are all one dark value instead; the front strip hides the joint with the floor row.
+- **Round 2: empty `top`/`under` lists are `[[-1, -1]]`**: the check wants at least one cell.
+
 - **Three indoor rooms have no `wall`** (`throne-room`, `hall-gallery`,
   `undercroft`). The contract's order is sky → layers → wall, and `wall`
   covers every open tile of the room, so an indoor layer would never be
@@ -104,7 +108,38 @@ top, joined both sides), `oneway [1,5]` (the middle piece).
 
 ## Decisions
 
-### 2026-11-23 — The street's cobbles and its roofs are the same stone
+### 2026-11-23 (round 2) — Regions: the street's materials, and where they are
+
+**What a player sees:** in the castle street the floor is a curb and rounded cobbles; the hollow
+house wears a red tile roof and the block by the stall a two-tile blue roof (it reads as the
+stall's roof); the top row is the eave of the roofs over the street, its ridge caps against the
+sky; buildings stay plaster and timber. In the courtyard the top row is a leaf canopy.
+**Why:** the review's "street and roofs are one grey course"; `autotile.regions` now exists.
+Rectangles come from the room's rows (`ROOM_REGIONS` in `make.py`), never from secrets.
+**To undo:** delete a rectangle from `ROOM_REGIONS` and re-run `make.py`. `DRAFT:`.
+
+### 2026-11-23 (round 2) — Walls join with one fixed crossing block
+
+**What a player sees:** blocks 16x8 in running bond, the top course split differently from tile
+to tile (16, 8+8, 10+6, 12+4, 6+10), so a big wall is not wallpaper.
+**Why:** the bottom course's block crosses the tile edge and is the same in every fill, so every
+fill joins every other; the brief asked for widths 8, 12, 16.
+**To undo:** `C0` and `wall_fill` in `tiles_draw.py`. `DRAFT:`.
+
+### 2026-11-23 (round 2) — Under the floor: foundation stone in the courtyard, packed earth in the street
+
+**What a player sees:** below the courtyard's grass and stone, darker plainer foundation blocks;
+below the street's cobbles, dark packed earth with a few stones; the dark bush strip in front.
+**Why:** the brief's "packed earth or foundation stone"; two rooms, one of each, for variety.
+**To undo:** `deep()` in `themes.py`. `DRAFT:`.
+
+### 2026-11-23 (round 2) — Indoor ledges are cool pale stone, the floor cap warm gold
+
+**What a player sees:** you stand on a warm gold-tan cap on every castle floor; the shelves you
+jump through are pale lilac stone with corbels, so they never read as floor trim.
+**Why:** the brief, and round 1's flag that both were cream. **To undo:** `Castle.lip`/`Castle.oneway`. `DRAFT:`.
+
+### 2026-11-23 — The street's cobbles and its roofs are the same stone (superseded by round 2's regions)
 
 **What a player sees:** in the castle street the ground is a band of
 rounded grey stones with a bright top line, and the top of every building
@@ -139,6 +174,17 @@ room is "grass and old castle wall".
 
 ## Flags for the lead
 
+- **Round 2: `cantina` (Step 11's new room, and `outpost` when it lands) has no art files**: it
+  draws plain shapes. A theme exists for it to borrow (`castle` or `town`); add it to
+  `ROOM_THEME` in `make.py`.
+- **Round 2: the canopy and eave rows repeat every 16 px.** A row-0 tile is index 11 (the room
+  above "looks solid"), and only index 15 picks from fills, so their variety is in the one tile.
+  More variety needs several regions along the row (cheap: one more 4x4 block each).
+- **Round 2: past the room's sides the fill continues above row 0's line** only if the renderer
+  paints it; with `outside.above: "sky"` the side columns stop at the room's top edge.
+- **The hollow house's inside shows the sky** unless decoration covers it (the props lane's
+  wooden wall does today).
+
 - **Upright view.** Layers are pinned to the *screen's* top or bottom
   (the contract), and every `offsetY` here is set for the 320×180 view. In
   a taller view a room shorter than the view is centred, so `y: "bottom"`
@@ -172,9 +218,9 @@ worse for it.
 ## Not verified
 
 - Nothing here has been judged by the owner.
-- In the real game only the throne room and the street's east end were
-  looked at. The courtyard, the gallery, the undercroft and graybox-hall
-  were judged from the reference views only.
-- An upright view of an outdoor room in the real game (see the flag above).
-- No screenshot was put beside the owner's references by anyone but this
-  lane.
+- Round 2: all six rooms were looked at in the real game (local build at the frame lane's
+  2d34418) at iPhone 14 upright and sideways with insets, the eight spots of the brief
+  (`preview/shots/before-*` from live, `after-*` local; git-ignored, re-run `shots.mjs`). The
+  667x375 shots were taken, not studied.
+- Which fill or tuft lands where differs between the preview and the game (different hash salts).
+- The cellar's back wall and the castle's windows were not compared against the bar at 4x.

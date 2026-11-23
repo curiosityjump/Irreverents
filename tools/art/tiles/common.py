@@ -53,12 +53,25 @@ C = {k: [rgb(c) for c in v] for k, v in P.items()}
 # Where things sit in every tile image (cells of 16 px, [column, row]). 8 x 8 cells = 128 x 128.
 ORIGIN = [0, 0]
 INNER = {'nw': [4, 0], 'ne': [5, 0], 'sw': [4, 1], 'se': [5, 1]}
-FILL = [[3, 3], [6, 0], [7, 0], [6, 1], [7, 1]]
+# Round 2: four more fills ([6,3] [7,3] [0,4] [1,4]); `deep` (ground under the floor) at [2..5, 4].
+FILL = [[3, 3], [6, 0], [7, 0], [6, 1], [7, 1], [6, 3], [7, 3], [0, 4], [1, 4]]
+DEEP_CELLS = [[2, 4], [3, 4], [4, 4], [5, 4]]
 TOP_CELLS = [[4, 2], [5, 2], [6, 2], [7, 2]]
 UNDER_CELLS = [[4, 3], [5, 3]]
 ONEWAY = {'left': [0, 5], 'mid': [1, 5], 'right': [2, 5], 'single': [3, 5]}
 WALL_CELLS = [[0, 6], [1, 6], [2, 6], [3, 6]]
 SHEET = 128
+# Round 2 regions (autotile.regions): region i has its 4x4 block at [0, 8 + 4i] and its own
+# fill, top and under cells beside it in columns 4..7 of the same four rows.
+def region_cells(i):
+    r = 8 + 4 * i
+    return {
+        'origin': [0, r],
+        'fill': [[4, r], [5, r], [6, r], [7, r], [4, r + 3], [5, r + 3]],
+        'top': [[4, r + 1], [5, r + 1], [6, r + 1], [7, r + 1]],
+        'under': [[4, r + 2], [5, r + 2], [6, r + 2], [7, r + 2]],
+        'spare': [[6, r + 3], [7, r + 3]],
+    }
 
 
 def tile_hash(tx, ty, salt):

@@ -87,8 +87,20 @@ def main():
                 cell_ok(im, [at['origin'][0] + i % 4, at['origin'][1] + i // 4], t, where + ' autotile index %d' % i, must_draw=True)
             for k in ('nw', 'ne', 'sw', 'se'):
                 cell_ok(im, at['innerCorners'][k], t, where + ' innerCorners.' + k, must_draw=True)
-            if len(at['fill']) < 4:
-                fail(where, 'fewer than four fill variants')
+            if len({tuple(c) for c in at['fill']}) < 6:
+                fail(where, 'fewer than six different fill variants (round 2)')
+            for c in at.get('deep', []):
+                cell_ok(im, c, t, where + ' deep', must_draw=True)
+            for i, r in enumerate(at.get('regions', [])):
+                x, y, w, h = r['tiles']
+                rows = json.load(open(os.path.join(CONTENT, 'rooms', room + '.json')))['rows']
+                if x < 0 or y < 0 or x + w > len(rows[0]) or y + h > len(rows):
+                    fail(where, 'region %d is outside the room' % i)
+                for j in range(16):
+                    cell_ok(im, [r['origin'][0] + j % 4, r['origin'][1] + j // 4], t, where + ' region %d index %d' % (i, j), must_draw=True)
+                for k in ('fill', 'top', 'under'):
+                    for c in r.get(k, []):
+                        cell_ok(im, c, t, where + ' region %d %s' % (i, k), allow_none=True, must_draw=True)
             for c in at['fill']:
                 cell_ok(im, c, t, where + ' fill', must_draw=True)
             for k in ('top', 'under'):
@@ -122,8 +134,21 @@ def main():
             if im:
                 for c in b['wall']['cells']:
                     cell_ok(im, c, b['wall']['tile'], where + ' wall', must_draw=True)
+    # round 2's measure: a mid layer is not fog (under 30% of opaque pixels at luminance >= 215)
+    for rel in ('backdrops/castle-mid.png', 'backdrops/town-mid.png'):
+        im = img(rel, rel)
+        if im:
+            b = im.tobytes()
+            px = [tuple(b[i:i + 4]) for i in range(0, len(b), 4) if b[i + 3]]
+            bright = sum(1 for p in px if 0.2126 * p[0] + 0.7152 * p[1] + 0.0722 * p[2] >= 215)
+            share = bright / max(1, len(px))
+            print('%s: %.1f%% of opaque pixels at luminance >= 215, darkest %d' % (
+                rel, 100 * share, min(int(0.2126 * p[0] + 0.7152 * p[1] + 0.0722 * p[2]) for p in px)))
+            if share >= 0.30:
+                fail(rel, 'still fog: %.0f%% bright' % (100 * share))
+    flags = [] if 'outside' in json.load(open(os.path.join(CONTENT, 'backdrops', 'courtyard.json'))) else ['--no-round2-fields']
     before = digest()
-    subprocess.run([sys.executable, '-I', os.path.join(HERE, 'make.py')], check=True, stdout=subprocess.DEVNULL)
+    subprocess.run([sys.executable, '-I', os.path.join(HERE, 'make.py')] + flags, check=True, stdout=subprocess.DEVNULL)
     if digest() != before:
         fail('make.py', 'not deterministic: a second run changed the files')
     if errors:

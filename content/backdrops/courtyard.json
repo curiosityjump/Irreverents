@@ -1,5 +1,5 @@
 {
-  "//": "DRAFT: stand-in drawn by tools/art/tiles/make.py; offsets are set for the 320x180 view. Notes: tools/art/tiles/README.md.",
+  "//": "DRAFT: stand-in drawn by tools/art/tiles/make.py (round 2). Notes: tools/art/tiles/README.md. Layers below the clouds are pinned to the room so they stay behind it in a tall view; the front strip sits in the ground under the floor line.",
   "id": "courtyard",
   "sky": [
     "#5fb4f0",
@@ -10,22 +10,37 @@
       "image": "backdrops/sky-clouds.png",
       "parallax": 0.1,
       "y": "top",
-      "offsetY": 22,
+      "offsetY": 4,
       "repeatX": true
     },
     {
       "image": "backdrops/far-hills.png",
       "parallax": 0.25,
       "y": "bottom",
-      "offsetY": -34,
-      "repeatX": true
+      "offsetY": -40,
+      "repeatX": true,
+      "pin": "room"
     },
     {
       "image": "backdrops/castle-mid.png",
       "parallax": 0.5,
       "y": "bottom",
-      "offsetY": -30,
-      "repeatX": true
+      "offsetY": -8,
+      "repeatX": true,
+      "pin": "room"
+    },
+    {
+      "image": "backdrops/front-foliage.png",
+      "parallax": 1,
+      "y": "bottom",
+      "offsetY": 16,
+      "repeatX": true,
+      "pin": "room",
+      "front": true
     }
-  ]
+  ],
+  "outside": {
+    "above": "sky",
+    "below": "deep"
+  }
 }
