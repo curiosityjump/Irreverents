@@ -122,7 +122,16 @@ may overrule one with a measurement, recording why here.
 - **Red on live means revert first, diagnose after.** If a push leaves the
   live game broken, the next push is the revert; nobody debugs on the
   owner's game.
-- **`/healthz` keeps reporting the deployed commit**, as the probe does.
+- **`/healthz` keeps reporting the deployed commit**, as the probe does,
+  **and says whether the server has lasting storage** (added 2026-11-23
+  04:20 UTC: the owner asked how to add a Railway volume and was told to
+  mount it at `/data`; Railway then sets `RAILWAY_VOLUME_MOUNT_PATH` and
+  `RAILWAY_VOLUME_NAME` for the running server by itself). Report
+  whether that variable is set and the path is writable, nothing more;
+  no session should have to ask the owner whether they did it. Using the
+  storage is not this step's job (Step 7's Hall records are the first
+  customer). Known from Railway's docs: the volume is mounted when the
+  server starts, not during the build.
 - **A push that only changes documents must not restart the game**
   (added by the orchestrator, 2026-11-23 04:10 UTC). Measured: every push
   to `main` redeploys and restarts the server (`/healthz`'s `startedAt`
