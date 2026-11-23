@@ -1,29 +1,323 @@
 import type { Content } from '../../content/types.ts';
-import type { Entity } from '../../sim/types.ts';
+import type { Entity, World } from '../../sim/types.ts';
 import { image } from './images.ts';
+
+// The actor side of the art contract (docs/mechanisms/art-pipeline.md,
+// "Characters and things"): which animation state a body is in, which
+// frames that state plays, and juice (squash, stretch, flash, tint) that
+// never moves where a body is. Notes: docs/mechanisms/rendering-actors.md.
+
+/** Every state the contract names. */
+export type AnimState =
+  | 'idle' | 'run' | 'air' | 'jump' | 'fall' | 'flap' | 'attack' | 'grab' | 'carry' | 'carryRun'
+  | 'throw' | 'hurt' | 'down' | 'held' | 'hide' | 'talk';
+
+/**
+ * The sprite file as the contract writes it. The content kind may not yet
+ * parse the optional fields (the foundation lane extends it); everything
+ * beyond idle/run/air is read defensively.
+ */
+interface SheetFile {
+  id: string;
+  image: string;
+  cell: { w: number; h: number };
+  anchor: { x: number; y: number };
+  fps: number;
+  frames: Partial<Record<AnimState, number[]>> & { idle: number[]; run: number[]; air: number[] };
+  fpsBy?: Partial<Record<AnimState, number>>;
+  moods?: Record<string, Partial<Record<AnimState, number[]>>>;
+}
+
+/**
+ * The contract's fallbacks, in order: a state missing from the sheet uses
+ * the next name that is there. `carry` with no frames uses run or idle by
+ * whether the body moves (handled in framesFor).
+ */
+const CHAIN: Record<AnimState, AnimState[]> = {
+  idle: ['idle'],
+  run: ['run'],
+  air: ['air'],
+  jump: ['jump', 'air'],
+  fall: ['fall', 'air'],
+  flap: ['flap', 'air'],
+  attack: ['attack', 'idle'],
+  throw: ['throw', 'attack', 'idle'],
+  grab: ['grab', 'idle'],
+  carry: ['carry'],
+  carryRun: ['carryRun', 'carry'],
+  hurt: ['hurt', 'idle'],
+  down: ['down', 'hurt', 'idle'],
+  held: ['held', 'hurt', 'air'],
+  hide: ['hide', 'idle'],
+  talk: ['talk', 'idle'],
+};
+
+/** INTENT (the contract): these play once from when they start and hold their last frame; every other state loops. */
+const ONCE: ReadonlySet<AnimState> = new Set(['attack', 'grab', 'throw', 'hurt']);
+
+/** Below this speed (pixels per second) a body on the ground is standing, as before. */
+const MOVING = 1;
+/** DRAFT: how long a grab or a throw shows when the sheet has no frames to time it by (ticks). */
+const ONCE_TICKS = 12;
+/** DRAFT: squash after landing and stretch after leaving the ground, in ticks. */
+const SQUASH_TICKS = 6;
+const STRETCH_TICKS = 6;
+/** DRAFT: the white flash on being hit, in ticks (the contract: "brief"). */
+const FLASH_TICKS = 3;
+
+/**
+ * What this page remembers about each body between frames, to time the
+ * states the simulation does not stamp with a tick (landing, leaving the
+ * ground, starting a grab or a throw, a flap). Everything is kept in world
+ * ticks, so two screens differ only by when the news reached them.
+ * DRAFT: see "Flags for the lead" in docs/mechanisms/rendering-actors.md.
+ */
+interface Memory {
+  tick: number;
+  onGround: boolean;
+  carrying: string | null;
+  flaps: number;
+  landed: number;
+  left: number;
+  grabbed: number;
+  threw: number;
+  flapped: number;
+  /** The last swing seen (attack.swung), and whether this body was carrying then: that swing is a throw. */
+  swing: number;
+  swingThrew: boolean;
+}
+const memory = new Map<string, Memory>();
+
+/**
+ * What a body is carrying: its own `carrying`, or else a body that says it
+ * is held by this one. INTENT: the second half is needed: a player's own
+ * character is simulated on their page, which never learns it carries
+ * (the server does the hold); the carried body's copy says who holds it.
+ */
+export function carriedBy(world: World, e: Entity): string | null {
+  if (e.c.carrying) return e.c.carrying.id;
+  for (const o of world.entities) if (o.c.effect?.heldBy === e.id) return o.id;
+  return null;
+}
+
+/** Updates one body's memory for this tick and returns it. Call once per body per frame. */
+export function remember(world: World, e: Entity): Memory {
+  let m = memory.get(e.id);
+  const carrying = carriedBy(world, e);
+  const flaps = e.c.flap?.used ?? 0;
+  if (!m || world.tick < m.tick - 600) {
+    // First sight (or the world restarted): nothing has just happened.
+    m = { tick: world.tick, onGround: e.onGround, carrying, flaps, landed: -1e9, left: -1e9, grabbed: -1e9, threw: -1e9, flapped: -1e9, swing: e.c.attack?.swung ?? -1e9, swingThrew: false };
+    memory.set(e.id, m);
+    return m;
+  }
+  if (world.tick !== m.tick) {
+    const swung = e.c.attack?.swung ?? -1e9;
+    if (swung !== m.swing) {
+      // INTENT: a player's own page predicts a plain swing when the
+      // attack button throws (it never learns it carries; see carriedBy):
+      // a swing made while carrying is drawn as the throw it is.
+      m.swing = swung;
+      m.swingThrew = m.carrying !== null || carrying !== null;
+      if (m.swingThrew) m.threw = swung;
+    }
+    if (e.onGround && !m.onGround) m.landed = world.tick;
+    if (!e.onGround && m.onGround && e.vy < 0) m.left = world.tick;
+    if (carrying && carrying !== m.carrying) m.grabbed = world.tick;
+    if (!carrying && m.carrying) {
+      // Let go while the body flies off from us: that was a throw (attack.ts
+      // stamps no tick for one). Set down or dropped is not.
+      const was = world.entities.find((o) => o.id === m!.carrying);
+      if (was?.c.flying?.by === e.id && world.tick - m.threw > 20) m.threw = world.tick;
+    }
+    if (flaps > m.flaps) m.flapped = world.tick;
+    m.tick = world.tick;
+    m.onGround = e.onGround;
+    m.carrying = carrying;
+    m.flaps = flaps;
+  }
+  return m;
+}
+
+/** Whether this body's latest swing was really a throw (no slash for it). */
+export function swingWasThrow(e: Entity): boolean {
+  return memory.get(e.id)?.swingThrew ?? false;
+}
+
+/** Forgets bodies not seen for a while, so the memory never grows. Call once per frame. */
+export function forget(world: World): void {
+  if (memory.size < 64) return;
+  for (const [id, m] of memory) if (world.tick - m.tick > 600) memory.delete(id);
+}
+
+/**
+ * Which state a body is in, and the world tick it began (for play-once
+ * states; loops use 0). The table of which fact selects which state is in
+ * docs/mechanisms/rendering-actors.md.
+ */
+export function stateOf(world: World, e: Entity, m: Memory, onceTicks: (s: AnimState) => number): { state: AnimState; since: number } {
+  const t = world.tick;
+  if (e.c.flattened) return { state: 'down', since: 0 };
+  if (e.c.effect?.heldBy) return { state: 'held', since: 0 };
+  if (e.c.flying || e.c.beat) return { state: 'hurt', since: e.c.impact && t - e.c.impact.tick < 120 ? e.c.impact.tick : m.tick };
+  if (t - m.threw < onceTicks('throw')) return { state: 'throw', since: m.threw };
+  const swung = e.c.attack?.swung ?? -1e9;
+  if (!m.swingThrew && t - swung >= 0 && t - swung < onceTicks('attack')) return { state: 'attack', since: swung };
+  const moving = Math.abs(e.vx) > MOVING;
+  if (m.carrying) {
+    if (t - m.grabbed < onceTicks('grab')) return { state: 'grab', since: m.grabbed };
+    return { state: moving && e.onGround ? 'carryRun' : 'carry', since: 0 };
+  }
+  if (!e.onGround) {
+    if (e.c.flap && e.c.flap.used > 0 && e.vy < 0 && t - m.flapped < 30) return { state: 'flap', since: 0 };
+    return { state: e.vy < 0 ? 'jump' : 'fall', since: 0 };
+  }
+  if (moving) return { state: 'run', since: 0 };
+  if (e.c.roomHide) return { state: 'hide', since: 0 };
+  if (e.c.npc?.bark || e.c.audience) return { state: 'talk', since: 0 };
+  return { state: 'idle', since: 0 };
+}
+
+/** The frame list a state plays on this sheet, after moods and the contract's fallbacks; and which state's numbers (fpsBy) time it. */
+function framesFor(sheet: SheetFile, state: AnimState, mood: number, moving: boolean): { list: number[]; as: AnimState } {
+  const byMood = mood > 1 ? sheet.moods?.[String(mood)] : undefined;
+  const chain = state === 'carry' || state === 'carryRun' ? [...CHAIN[state], moving ? 'run' : 'idle'] as AnimState[] : CHAIN[state];
+  for (const name of chain) {
+    const list = byMood?.[name] ?? sheet.frames[name];
+    if (list && list.length > 0) return { list, as: name };
+  }
+  return { list: sheet.frames.idle, as: 'idle' };
+}
+
+function fpsOf(sheet: SheetFile, s: AnimState): number {
+  const f = sheet.fpsBy?.[s] ?? sheet.fps;
+  return f > 0 ? f : 8;
+}
+
+/** How long a play-once state lasts on this sheet, in ticks: its frames at its speed. */
+function onceTicksOn(sheet: SheetFile | undefined, s: AnimState, mood: number): number {
+  if (!sheet) return s === 'attack' ? 7 : ONCE_TICKS;
+  const { list, as } = framesFor(sheet, s, mood, false);
+  if (as !== s && !(s === 'throw' && as === 'attack')) return s === 'attack' ? 7 : ONCE_TICKS;
+  return Math.max(4, Math.round((list.length * 60) / fpsOf(sheet, as)));
+}
+
+/** A body's sheet, image and kind, or null when it is drawn as its rectangle. */
+export function sheetOf(content: Content, e: Entity): { sheet: SheetFile; img: HTMLImageElement } | null {
+  const kind = content.characters[e.kind];
+  const sheet = kind ? (content.sprites[kind.id] as unknown as SheetFile | undefined) : undefined;
+  const img = sheet ? image(sheet.image) : null;
+  return sheet && img ? { sheet, img } : null;
+}
+
+/** How a sprite body is drawn this frame: set by entities.ts. */
+export interface SpriteLook {
+  /** 0..1 dimming (away). */
+  alpha: number;
+  /** A tint over the sprite's own pixels, or null. */
+  tint: { color: string; amount: number } | null;
+}
+
+/** Offscreen canvases of tinted frames, made once each (no per-frame allocation). */
+const tinted = new Map<string, HTMLCanvasElement>();
+function tintedFrame(img: HTMLImageElement, sx: number, sy: number, w: number, h: number, color: string, amount: number): HTMLCanvasElement {
+  const key = `${img.src}|${sx},${sy},${w},${h}|${color}|${amount}`;
+  let c = tinted.get(key);
+  if (!c) {
+    c = document.createElement('canvas');
+    c.width = w;
+    c.height = h;
+    const g = c.getContext('2d')!;
+    g.imageSmoothingEnabled = false;
+    g.drawImage(img, sx, sy, w, h, 0, 0, w, h);
+    g.globalCompositeOperation = 'source-atop';
+    g.globalAlpha = amount;
+    g.fillStyle = color;
+    g.fillRect(0, 0, w, h);
+    if (tinted.size > 512) tinted.clear();
+    tinted.set(key, c);
+  }
+  return c;
+}
+
+/** Facts the caller may want after drawing: where the top of the picture is (for marks over the head). */
+export interface Drew {
+  state: AnimState;
+  /** Screen y of the picture's top edge, after squash/stretch. */
+  top: number;
+}
 
 /**
  * INTENT: art replaces rectangles as DATA. A character kind with a file in
  * content/sprites/ (named after the kind) is drawn from that sheet; one
- * without keeps its graybox box. Returns whether it drew
- * (docs/architecture.md, "Where art plugs in").
+ * without keeps its graybox box. Returns what it drew, or null when it did
+ * not draw (docs/architecture.md, "Where art plugs in").
+ * INTENT: juice never moves a body. Squash and stretch scale the picture
+ * about the middle of the box's bottom edge; the box (and PlayerView.drawn)
+ * stays where the simulation put it.
  */
-export function drawSprite(g: CanvasRenderingContext2D, content: Content, e: Entity, x: number, y: number, frame: number): boolean {
+export function drawSprite(g: CanvasRenderingContext2D, world: World, content: Content, e: Entity, x: number, y: number, look: SpriteLook): Drew | null {
   const kind = content.characters[e.kind];
-  const sprite = kind ? content.sprites[kind.id] : undefined;
-  const img = sprite ? image(sprite.image) : null;
-  if (!kind || !sprite || !img) return false;
-  const frames = !e.onGround ? sprite.frames.air : Math.abs(e.vx) > 1 ? sprite.frames.run : sprite.frames.idle;
-  const f = frames[Math.floor((frame * sprite.fps) / 60) % frames.length]!;
-  const cols = Math.max(1, Math.floor(img.naturalWidth / sprite.cell.w));
-  g.save();
-  if (e.facing < 0) {
-    g.translate(x + kind.box.w + sprite.anchor.x, y - sprite.anchor.y);
-    g.scale(-1, 1);
-  } else {
-    g.translate(x - sprite.anchor.x, y - sprite.anchor.y);
+  const found = sheetOf(content, e);
+  if (!kind || !found) return null;
+  const { sheet, img } = found;
+  const mood = e.c.npc?.mood ?? 1;
+  const m = remember(world, e);
+  const { state, since } = stateOf(world, e, m, (s) => onceTicksOn(sheet, s, mood));
+  const moving = Math.abs(e.vx) > MOVING;
+  const { list, as } = framesFor(sheet, state, mood, moving);
+  const fps = fpsOf(sheet, as);
+  const t = world.tick;
+  const step = Math.floor(((ONCE.has(state) ? t - since : t) * fps) / 60);
+  const f = ONCE.has(state) ? list[Math.max(0, Math.min(list.length - 1, step))]! : list[((step % list.length) + list.length) % list.length]!;
+  const cols = Math.max(1, Math.floor(img.naturalWidth / sheet.cell.w));
+  const sx = (f % cols) * sheet.cell.w;
+  const sy = Math.floor(f / cols) * sheet.cell.h;
+  const { w: cw, h: ch } = sheet.cell;
+
+  // Squash on landing, stretch on take-off: whole pixels of the cell, about the feet.
+  let sqx = 0;
+  let sqy = 0;
+  const sinceLand = t - m.landed;
+  const sinceLeft = t - m.left;
+  if (state !== 'down' && state !== 'held') {
+    if (sinceLand >= 0 && sinceLand < SQUASH_TICKS && e.onGround) {
+      const k = 1 - sinceLand / SQUASH_TICKS;
+      sqy = -Math.round(ch * 0.14 * k);
+      sqx = Math.round(cw * 0.1 * k);
+    } else if (sinceLeft >= 0 && sinceLeft < STRETCH_TICKS && !e.onGround) {
+      const k = 1 - sinceLeft / STRETCH_TICKS;
+      sqy = Math.round(ch * 0.12 * k);
+      sqx = -Math.round(cw * 0.08 * k);
+    }
   }
-  g.drawImage(img, (f % cols) * sprite.cell.w, Math.floor(f / cols) * sprite.cell.h, sprite.cell.w, sprite.cell.h, 0, 0, sprite.cell.w, sprite.cell.h);
+  const dw = cw + 2 * Math.round(sqx / 2);
+  const dh = ch + sqy;
+  // The feet: the box's bottom edge, at the box's middle.
+  const footX = x + kind.box.w / 2;
+  const footY = y + kind.box.h;
+  // Where the cell's own feet-middle sits inside the cell.
+  const ax = sheet.anchor.x + kind.box.w / 2;
+  const ay = sheet.anchor.y + kind.box.h;
+  const scaleX = dw / cw;
+  const scaleY = dh / ch;
+  const left = Math.round(e.facing < 0 ? footX - (cw - ax) * scaleX : footX - ax * scaleX);
+  const top = Math.round(footY - ay * scaleY);
+
+  // A flash on the ticks right after being hit; else the tint asked for.
+  const hitAge = e.c.impact ? t - e.c.impact.tick : 1e9;
+  const tint = hitAge >= 0 && hitAge < FLASH_TICKS ? { color: '#ffffff', amount: 1 } : look.tint;
+  const src: CanvasImageSource = tint ? tintedFrame(img, sx, sy, cw, ch, tint.color, tint.amount) : img;
+  const ox = tint ? 0 : sx;
+  const oy = tint ? 0 : sy;
+
+  g.save();
+  if (look.alpha < 1) g.globalAlpha = look.alpha;
+  if (e.facing < 0) {
+    g.translate(left + dw, top);
+    g.scale(-1, 1);
+  } else g.translate(left, top);
+  g.drawImage(src, ox, oy, cw, ch, 0, 0, dw, dh);
   g.restore();
-  return true;
+  return { state, top };
 }

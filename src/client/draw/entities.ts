@@ -1,6 +1,10 @@
 import type { Content } from '../../content/types.ts';
+import { TILE } from '../../content/kinds/rooms.ts';
+import type { Room } from '../../content/kinds/rooms.ts';
+import { tileAt } from '../../sim/room-state.ts';
 import type { Entity, World } from '../../sim/types.ts';
-import { drawSprite } from './sprites.ts';
+import { drawFrame, frameOf, look, tinted, useContent } from './fx.ts';
+import { carriedBy, drawSprite, forget, remember, swingWasThrow } from './sprites.ts';
 
 /** One thing the renderer put on screen this frame, in room pixels. Part of the debug object (docs/mechanisms/network.md). */
 export interface Drawn {
@@ -29,6 +33,20 @@ export interface PlayerView {
 
 /** DRAFT: every entity is its character kind's box in a flat colour, with an eye so facing reads. Sprite sheets replace this as data. */
 export function drawEntities(g: CanvasRenderingContext2D, world: World, content: Content, roomId: string, ox: number, oy: number, view?: PlayerView): void {
+  useContent(content);
+  forget(world);
+  const room = content.rooms[roomId];
+  // Shadows first, under every body (the contract's draw order), only once the looks exist.
+  if (room) {
+    for (const e of world.entities) {
+      if (e.room !== roomId) continue;
+      const kind = content.characters[e.kind];
+      if (!kind) continue;
+      remember(world, e);
+      drawShadow(g, world, room, kind.box, e, ox, oy);
+    }
+  }
+  const heads: { e: Entity; x: number; y: number; w: number; color: string }[] = [];
   for (const e of world.entities) {
     if (e.room !== roomId) continue;
     const kind = content.characters[e.kind];
@@ -41,12 +59,22 @@ export function drawEntities(g: CanvasRenderingContext2D, world: World, content:
     // recorded for the scripted checks.
     const dot = e.c.net ? content.net.playerColors[e.c.net.slot % content.net.playerColors.length]! : null;
     if (dot) {
-      g.fillStyle = dot;
-      g.fillRect(x + Math.floor(kind.box.w / 2) - 2, y - 7, 4, 4);
+      // With a `player-mark` look the mark is drawn over the head after every body (below).
+      if (look('player-mark')) heads.push({ e, x, y, w: kind.box.w, color: dot });
+      else {
+        g.fillStyle = dot;
+        g.fillRect(x + Math.floor(kind.box.w / 2) - 2, y - 7, 4, 4);
+      }
     }
     view?.drawn.push({ id: e.id, player: e.player, kind: e.kind, x: e.x, y: e.y, px: Math.round(e.x), py: Math.round(e.y), color: dot ?? kind.color, mine: e.id === view.me });
     // Art as data: a kind with a file in content/sprites/ is drawn from its sheet.
-    if (drawSprite(g, content, e, x, y, view?.frame ?? world.tick)) continue;
+    const away = !!e.c.net?.away && e.id !== view?.me;
+    const enraged = e.c.npc?.mood === 3;
+    const drew = drawSprite(g, world, content, e, x, y, { alpha: away ? AWAY_ALPHA : 1, tint: enraged ? RAGE_TINT : null });
+    if (drew) {
+      drawSwing(g, world, content, e, x, y, kind.box, false);
+      continue;
+    }
     const { w, h } = kind.box;
     if (e.c.flattened) {
       // DRAFT: knocked out reads as lying down: the same box on its side at
@@ -69,14 +97,111 @@ export function drawEntities(g: CanvasRenderingContext2D, world: World, content:
     if (content.tuning.characters[kind.tuning]?.toughness === 0) g.fillRect(x + 2, y + Math.floor(h / 2), w - 4, 1);
     else g.fillRect(e.facing > 0 ? x + w - 4 : x + 2, y + Math.min(5, h - 4), 2, 3);
     MARKS[kind.id]?.(g, x, y, w, h, e);
-    // DRAFT: the swing of an attack, shown for a few ticks in front of the body.
-    const since = world.tick - (e.c.attack?.swung ?? -1000);
-    if (since >= 0 && since < SWING_TICKS) {
-      const reach = (content.tuning.characters[kind.tuning]?.attackReach ?? 10) * (1 - since / (SWING_TICKS * 2));
-      g.fillStyle = '#fdf6e3';
-      g.fillRect(e.facing > 0 ? x + w : x - Math.round(reach), y + Math.floor(h / 3), Math.round(reach), Math.max(2, Math.floor(h / 4)));
+    drawSwing(g, world, content, e, x, y, kind.box, true);
+  }
+  // Effects over bodies: landing dust.
+  const land = look('fx-land');
+  if (land) {
+    for (const e of world.entities) {
+      if (e.room !== roomId) continue;
+      const kind = content.characters[e.kind];
+      const m = kind ? remember(world, e) : null;
+      if (!kind || !m) continue;
+      const f = frameOf(land, world.tick - m.landed, false);
+      if (f < 0) continue;
+      drawFrame(g, land, f, ox + Math.round(e.x + kind.box.w / 2 - land.w / 2), oy + Math.round(e.y + kind.box.h - land.h + 1));
     }
   }
+  // Marks over heads: each player's own mark in their colour, bobbing gently.
+  const mark = look('player-mark');
+  if (mark) {
+    for (const h of heads) {
+      // The bob comes from the tick and the body's id, so two marks do not bob in step.
+      const bob = Math.floor((world.tick + hash(h.e.id)) / 24) % 2;
+      // Over whatever is carried overhead too, so the mark is never hidden.
+      const held = carriedBy(world, h.e);
+      const over = held ? world.entities.find((o) => o.id === held) : undefined;
+      const top = over && over.room === roomId ? Math.min(h.y, oy + Math.round(over.y)) : h.y;
+      drawFrame(g, mark, frameOf(mark, world.tick, true), h.x + Math.round(h.w / 2 - mark.w / 2), top - mark.h - 4 - bob, { source: tinted(mark, h.color) });
+    }
+  }
+}
+
+/** DRAFT: a friend whose page went away is drawn this faint (draw/away.ts adds the dots). */
+const AWAY_ALPHA = 0.45;
+/** DRAFT: an enraged person's own pixels, pushed this far toward red (the rectangle veil's replacement). */
+const RAGE_TINT = { color: '#c8324a', amount: 0.45 };
+
+/** A small fixed number from an id (no randomness). */
+function hash(s: string): number {
+  let h = 0;
+  for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) | 0;
+  return Math.abs(h);
+}
+
+/**
+ * A soft shadow on the ground under a body: sized by the body's width,
+ * shrinking and fading as the body rises above the floor, gone when it is
+ * far up or there is no floor near. Only with the `shadow-*` looks.
+ */
+function drawShadow(g: CanvasRenderingContext2D, world: World, room: Room, box: { w: number; h: number }, e: Entity, ox: number, oy: number): void {
+  const l = look(box.w <= 12 ? 'shadow-s' : box.w <= 20 ? 'shadow-m' : 'shadow-l');
+  if (!l) return;
+  const feet = e.y + box.h;
+  const cx = e.x + box.w / 2;
+  const tx = Math.floor(cx / room.tile);
+  let floor = -1;
+  for (let ty = Math.floor((feet - 1) / room.tile); ty < room.h && ty * room.tile < feet + SHADOW_REACH; ty++) {
+    const top = ty * room.tile;
+    if (top < feet - 1) continue;
+    const code = tileAt(world, room, tx, ty);
+    if (code === TILE.solid || code === TILE.oneway) {
+      floor = top;
+      break;
+    }
+  }
+  if (floor < 0) {
+    if (!e.onGround) return;
+    floor = feet;
+  }
+  const rise = Math.max(0, floor - feet);
+  const k = 1 - rise / SHADOW_REACH;
+  if (k <= 0.2) return;
+  const w = Math.max(4, Math.round(l.w * (0.5 + 0.5 * k)));
+  const h = Math.max(2, Math.round(l.h * (0.5 + 0.5 * k)));
+  drawFrame(g, l, 0, ox + Math.round(cx - w / 2), oy + Math.round(floor - h / 2 - 1), { w, h });
+}
+/** DRAFT: how far above the floor (pixels) a body still casts a shadow. */
+const SHADOW_REACH = 72;
+
+/**
+ * DRAFT: the swing of an attack, in front of the body for a moment: the
+ * `fx-slash` strip, placed and mirrored by facing and sized by reach; with
+ * no look, a rectangle body keeps the white bar it always had.
+ */
+function drawSwing(g: CanvasRenderingContext2D, world: World, content: Content, e: Entity, x: number, y: number, box: { w: number; h: number }, plain: boolean): void {
+  const since = world.tick - (e.c.attack?.swung ?? -1000);
+  if (since < 0) return;
+  const slash = look('fx-slash');
+  if (slash && swingWasThrow(e)) return;
+  const kind = content.characters[e.kind];
+  const reachOf = (content.tuning.characters[kind?.tuning ?? '']?.attackReach ?? 10);
+  if (slash) {
+    const f = frameOf(slash, since, false);
+    if (f < 0) return;
+    // Sized by reach, in quarter steps so the pixels stay even.
+    const scale = Math.max(0.5, Math.min(2, Math.round(((reachOf + box.w / 2) / slash.w) * 4) / 4));
+    const w = Math.round(slash.w * scale);
+    const h = Math.round(slash.h * scale);
+    const sx = e.facing > 0 ? x + Math.round(box.w / 2) : x + Math.round(box.w / 2) - w;
+    const sy = y + Math.round(box.h * 0.45 - h / 2);
+    drawFrame(g, slash, f, sx, sy, { flip: e.facing < 0, w, h });
+    return;
+  }
+  if (!plain || since >= SWING_TICKS) return;
+  const reach = reachOf * (1 - since / (SWING_TICKS * 2));
+  g.fillStyle = '#fdf6e3';
+  g.fillRect(e.facing > 0 ? x + box.w : x - Math.round(reach), y + Math.floor(box.h / 3), Math.round(reach), Math.max(2, Math.floor(box.h / 4)));
 }
 
 const DARK = '#1b1b2f';

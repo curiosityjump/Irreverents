@@ -1,5 +1,7 @@
 import type { Content } from '../../content/types.ts';
 import type { World } from '../../sim/types.ts';
+import { drawFrame, drawNine, edgedText, frameOf, look } from './fx.ts';
+import { sheetOf } from './sprites.ts';
 
 // DRAFT: every look in this file is a plain graybox stand-in. Step 8 owns
 // how a mood finally reads; this is the least that lets the three moods,
@@ -27,6 +29,30 @@ function label(g: CanvasRenderingContext2D, text: string, cx: number, bottom: nu
 }
 
 /**
+ * A bark in the `bark` nine-slice with its `bark-tail` under it pointing
+ * at the speaker, centred on cx with the tail's tip at `bottom`, kept
+ * inside the screen. Returns false when the look is missing.
+ */
+function bubble(g: CanvasRenderingContext2D, text: string, cx: number, bottom: number): boolean {
+  if (!look('bark')) return false;
+  const tail = look('bark-tail');
+  g.font = 'bold 8px monospace';
+  g.textBaseline = 'top';
+  const w = Math.ceil(g.measureText(text).width) + 8;
+  const h = 14;
+  const th = tail ? tail.h - 1 : 0;
+  const x = Math.max(1, Math.min(g.canvas.width - w - 1, Math.round(cx - w / 2)));
+  const y = Math.max(1, Math.round(bottom - th - h));
+  drawNine(g, 'bark', x, y, w, h);
+  if (tail) {
+    const tx = Math.max(x + 2, Math.min(x + w - tail.w - 2, Math.round(cx - tail.w / 2)));
+    drawFrame(g, tail, 0, tx, y + h - 1);
+  }
+  edgedText(g, text, x + 4, y + 3, PAPER, INK);
+  return true;
+}
+
+/**
  * People's moods and barks, and the bodiless things a hero can use.
  * Mood 1 shows nothing (business as usual is the world at rest); mood 2 a
  * "?" over the head; mood 3 a "!" and a red tint over the body. A bark
@@ -40,9 +66,16 @@ export function drawNpcs(g: CanvasRenderingContext2D, world: World, content: Con
     const def = content.placements[roomId]?.things?.find((t) => t.id === e.id);
     // A bell (slice 2) is drawn, working or broken, by draw/alert.ts.
     if (def?.look === 'bell') continue;
-    const look = LOOKS[def?.look ?? 'goods'];
-    g.fillStyle = look.color;
-    g.fillRect(ox + e.x + Math.round((room.tile - look.w) / 2), oy + e.y + room.tile - look.h, look.w, look.h);
+    const name = def?.look ?? 'goods';
+    // The `shop-counter` / `shop-goods` looks, bottom-centre on the tile; else the plain block.
+    const art = look(`shop-${name}`);
+    if (art) {
+      drawFrame(g, art, frameOf(art, world.tick, true), ox + Math.round(e.x + (room.tile - art.w) / 2), oy + Math.round(e.y + room.tile - art.h));
+      continue;
+    }
+    const plain = LOOKS[name];
+    g.fillStyle = plain.color;
+    g.fillRect(ox + e.x + Math.round((room.tile - plain.w) / 2), oy + e.y + room.tile - plain.h, plain.w, plain.h);
   }
   for (const e of world.entities) {
     const n = e.c.npc;
@@ -50,7 +83,8 @@ export function drawNpcs(g: CanvasRenderingContext2D, world: World, content: Con
     if (e.room !== roomId || !n || !box) continue;
     const x = ox + Math.round(e.x);
     const y = oy + Math.round(e.y);
-    if (n.mood === 3) {
+    // A person drawn from a sprite sheet shows rage in its own pixels (draw/entities.ts).
+    if (n.mood === 3 && !sheetOf(content, e)) {
       // Strong enough that a raging person cannot be mistaken for anyone's own colour.
       g.globalAlpha = 0.75;
       g.fillStyle = RAGE;
@@ -58,8 +92,13 @@ export function drawNpcs(g: CanvasRenderingContext2D, world: World, content: Con
       g.globalAlpha = 1;
     }
     const cx = x + box.w / 2;
-    if (n.bark) label(g, n.bark.text, cx, y - 2, PAPER, INK);
-    else if (n.mood === 2) label(g, '?', cx, y - 2, DISTRESS, INK);
-    else if (n.mood === 3) label(g, '!', cx, y - 2, RAGE, PAPER);
+    if (n.bark) {
+      if (!bubble(g, n.bark.text, cx, y - 2)) label(g, n.bark.text, cx, y - 2, PAPER, INK);
+    } else if (n.mood === 2 || n.mood === 3) {
+      const mark = look(`mood-${n.mood}`);
+      if (mark) drawFrame(g, mark, frameOf(mark, world.tick, true), Math.round(cx - mark.w / 2), y - mark.h - 3);
+      else if (n.mood === 2) label(g, '?', cx, y - 2, DISTRESS, INK);
+      else label(g, '!', cx, y - 2, RAGE, PAPER);
+    }
   }
 }

@@ -2,6 +2,7 @@ import type { Content } from '../../content/types.ts';
 import { speechLine, speechLineNumber, wrapSpeech } from '../../content/speech.ts';
 import { speechTicksPerLine } from '../../sim/systems/audience-speech.ts';
 import type { World } from '../../sim/types.ts';
+import { drawNine, edgedText } from './fx.ts';
 
 // DRAFT: the whole look. A small dark ribbon with pale letters over the
 // speaker's head, two rows at most: there to be glanced at or ignored,
@@ -31,6 +32,11 @@ export function drawAudience(g: CanvasRenderingContext2D, world: World, content:
     const cx = ox + Math.round(e.x) + box.w / 2;
     const x = Math.max(1, Math.min(g.canvas.width - w - 1, Math.round(cx - w / 2)));
     const y = Math.max(1, Math.min(g.canvas.height - h - 1, oy + Math.round(e.y) - 4 - h));
+    // The `ribbon` nine-slice, a little roomier, with edged letters; else the plain ribbon.
+    if (drawNine(g, 'ribbon', x - 2, y - 2, w + 4, h + 4)) {
+      rows.forEach((r, i) => edgedText(g, r, x + 3, y + 2 + i * ROW, WORDS, RIBBON));
+      continue;
+    }
     g.fillStyle = EDGE;
     g.fillRect(x - 1, y - 1, w + 2, h + 2);
     g.fillStyle = RIBBON;
