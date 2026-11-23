@@ -19,6 +19,22 @@ the friend rule in `docs/mechanisms/combat-and-impact.md`. **First push:
 something the owner can walk into from the street and fight in**; the
 counter, the rest of the scenarios and the real-server check follow.
 
+
+**Changed 14:45 UTC (also sent by message): the owner answered how a
+brawl ends:** *"There is a bell in the middle of the cantina player can
+use to stop fights"* (`docs/vision.md`, "Heroes, roster, powers and
+co-op"). So: a bell at the middle of the room (place in the cantina file;
+draw it with the existing `bell` / `bell-ringing` looks in
+`content/looks/parts.json`). A fresh press of the existing `interact`
+action (the "Use" button) by a player within reach of it rings it and
+ends the brawl at once (`cantina-brawl-end {why: "bell"}`), the way
+`src/sim/systems/npc-interact.ts` reads the press; your own system, not
+Step 4's things. The last player leaving still ends it (INTENT: there is
+always a way out). **The calm timer is off**: keep `calmTime` as a number
+where 0 means never, and set it to 0. Scenario 5 becomes: the bell ends
+it; leaving ends it; control: a Use press out of reach of the bell does
+not. The bell can come in the push after the first.
+
 ## The task
 
 Off the castle street is a tavern. Inside it, every character in the
