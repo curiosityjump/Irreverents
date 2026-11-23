@@ -127,16 +127,6 @@ actually read (questions for the owner go through
 
 **Flag:** the brief asked for ground friction on every body with no `move` verb. Built narrower: friction and drag apply only to a body that is flying or flattened, and a body that cannot run is stopped when its flight ends. The broader rule broke Step 3's `step3-guard-follows` (a guard given a starting `vx` of 60 is expected to keep it through a door), and that scenario is its owner's. Seen from play the two rules are the same: nothing in the game moves a crate or a dummy except a hit, a throw or a shove.
 
-### step-7-a-store-and-pedestal.md, 2026-11-23 (part 1, the store)
-
-**Flag:** `node scripts/check-store.ts` is not run by `npm run check`; the one-line hook in `scripts/check.ts` (Step 1's, in flight) is owed. Until then nothing runs it but a person.
-
-**Flag:** `CLAUDE.md`, "Architecture at a glance", still says "Nothing is persisted". True until the store is wired into the server; false after. Not mine to edit; `docs/architecture.md` ("Where state lives", "Lasting records: the store") is updated.
-
-**Note:** the shape differs from the brief's sketch in three small ways. `collection()` never throws on a bad name: it reports it and hands back a memory-only collection (`collection.lasting` false), because a throw at boot is the one thing the store must not do. `store.status()` is the ready-made `/healthz` field (lasting, dir, each collection's size, problems). The cap (500) is reported when passed, never enforced; trimming is `replaceAll` by the collection's owner.
-
-**Note:** the paste for `src/server/main.ts` is the comment at the top of `src/server/store.ts`. It assumes slice B's names (`restoreHall`, event `hall-legend { record }`); check them when pasting.
-
 ### step-4-slice-1-moods.md, 2026-11-23
 
 **Flag:** `interact` ("Use", key E) has no touch control. It is one more file in `content/actions/`, so whoever builds the touch layout from that list (Step 1 Gate 2 / Step 5) should pick it up, but nobody has checked that on a phone, and buying and taking are impossible on an iPhone until it does. Not mine to build (`src/client/**`).

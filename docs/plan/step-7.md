@@ -193,6 +193,23 @@ stores nothing; no Step 4 code is on `main`.
   slice 2 (about 06:45 to 07:15 UTC); the witness field of `deed` is in
   `docs/mechanisms/npc-response.md` when that lands.
 
+## Reviews
+
+- **The store, 7d101dd, reviewed 04:55 UTC: sound.** Full depth, because
+  it holds the owner's lasting records. I re-ran `node
+  scripts/check-store.ts` (13 pass), build and check; watched a control
+  of my own fail (a write in place instead of by rename: 4 checks named
+  it); and ran three cases its script does not have (a file naming the
+  wrong collection is set aside; no directory and an unusable path both
+  give an in-memory store). **Not verified:** the real Railway volume,
+  since nothing opens the store there until slice 2. Owed, for slice 2:
+  hook `check-store` into `scripts/check.ts` (one line, Step 1's file);
+  `CLAUDE.md`'s "Nothing is persisted" becomes false at wiring (flagged
+  to the orchestrator); **two worlds share one store, so two worlds can
+  each number a new record the same `n`**: the server, not the world,
+  must give a record its lasting number when it saves, and `restoreHall`
+  must not throw on a duplicate.
+
 ## Open with the owner
 
 - Q-011 (lasting storage): answered by the owner's own action,
