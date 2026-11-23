@@ -255,6 +255,14 @@ Detail: docs 04, 29; level proposals 25, 28 (not canon).
 > Epic stealth successes, last stands and escapes are commemorated in a Hall of Legends …
 > Every participating player's history includes the event, even if played in somebody else's game.
 
+**Owner, 2026-11-23 ~23:47–23:52 UTC, playing (relayed by the orchestrator):**
+> When an enemy gets knocked out, they collapse, then randomly fly off the screen. Very weird
+> Also, i seem to be invincible as hero... and enemies collapse but never die
+
+*(Framing:)* gaps against the library, not new direction: bad guys can be
+defeated and are gone; townspeople stay knocked out as a body to be found
+(D-064, doc 26); heroes can lose (risk, Step 21). Being fixed.
+
 Detail: docs 08, 09.
 
 ### Visual direction
