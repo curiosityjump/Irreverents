@@ -187,11 +187,131 @@ Read with the owner's words at the top of this file.
   fresh reviewer finds no rectangle or flat fill left where a player
   looks and no gap it would call large. Not a clock.
 
+### Round 2 (2026-11-23)
+
+**The review.** Three fresh reviewers looked at the live game after round
+1 (all nine lanes on `main`, last cae8f46), each through one lens
+(craft against the bar, the phone in the hand, the cast), from
+screenshots of the six map rooms at 750×340, 844×390 with notch insets,
+667×375 and 390×664 (upright), plus staged moments (a punch, a throw, a carry, a
+hide, a rage). The screenshots are in the orchestrator's scratch space,
+not the repository; the briefs describe each one in words. Merged and
+ranked by the orchestrator (size first, then how many lenses saw it,
+then whether a player meets it in the first ten seconds); the top gaps
+were spot-checked by eye on the cited screenshots and by measuring the
+files (the grappler's main fill `#8179b8` is `castle.png`'s commonest
+colour; the infiltrator's idle is drawn 21×20; `castle-mid.png` and
+`town-mid.png` are 71% and 77% near-white).
+
+**Ranked gaps** (lenses that saw it; lane that closes it):
+
+1. Sideways the game is a box between two navy bars (66% of the width
+   captured, about 58% calculated for a real iPhone 14 in Safari), and it
+   frames 13–14 tiles tall against the bar's 11.25, so everyone is small
+   (phone; frame).
+2. Outdoor rooms are padded with flat wall above and below the room:
+   48–56% of the courtyard picture, 20–31% of the castle street's (craft,
+   phone; frame and ground).
+3. The grappler, every player's first hero, is painted in the castle
+   wall's own lilac, has a 5 px face, no neck, and a crest that reads as a
+   second crown beside the king (all three; heroes).
+4. Ground and walls are flat two-tone wallpaper (18–25 colours a sheet, no
+   bevel, light or ink edge); the street and the roofs are one grey course
+   (craft; ground).
+5. The infiltrator is a 20-px horizontal green smear that vanishes beside
+   a crate; its `down` is a rotated lump (all three; heroes).
+6. Hits do not look like hits: a pale sword arc over a punch, cream puffs,
+   no star seen in six frames; the wind-up draws as standing still
+   (all three, and Step 2's flag; props and actors).
+7. Speech is the browser's monospace smeared by scaling (Courier on an
+   iPhone); the king's ribbon cuts off his crown (all three; props and
+   actors).
+8. Backdrops are bleached and nothing is ever in front of the action: no
+   depth (craft; ground and frame).
+9. Interiors are one evenly lit lilac; torches have no glow; the
+   undercroft is a near-black void (craft; ground, props, frame).
+10. Carrying does not read as a hoist: the load sits on the grappler's
+    head behind his crest, fists spread wide (cast; heroes and actors).
+11. Where the controls already sit over the picture they cover people's
+    feet, doors and props on the floor line (phone; frame; the condition
+    for fixing 1).
+12. Ledges are 2–4 px lines that read like underlines or sticks (craft;
+    ground).
+13. Enraged people are washed pink over their own red-faced mood-3 frames
+    (craft, cast; actors).
+14. A hidden infiltrator is drawn whole in front of the curtain (craft,
+    cast; actors and props).
+15. The villain is small and dark, no taller than a guard (cast; heroes,
+    second priority).
+
+Round 1's own flags, checked: the bars, the cobbles-and-roofs course, the
+ribbon on the crown and the infiltrator's `down` are confirmed. Refuted:
+upright, the far and mid layers *do* show; the fill crowds them. Partly
+refuted: the villain reads as a dark silhouette on the pale street (the
+risk is dark rooms and his small face); "the punch reaches 12 px past
+its box" split the reviewers (one saw the arc on the forearm, one on the
+fist): the fault is a blade arc on a punch. Not checked by anyone: crack
+overlays on dark walls (handed to props to look at). The states round 1
+never saw (held, carry, hide, down, rage) have now been seen and read
+wrong; mood 2 reads fine. **No scripted check proves the three moods
+differ on screen** (`grep -i mood scripts/e2e.ts scripts/e2e/` finds
+nothing), although "Checks" in `docs/mechanisms/art-pipeline.md` says
+`npm run e2e` does: owed by whoever owns e2e.
+
+**Hero set, `DRAFT:`** (`docs/decisions-log.md`, 2026-11-23, "The heroes
+you liked stay"): keep main's set (59de45d), which follows the owner's
+liked concept; redraw the grappler and the infiltrator with the
+proportions of the alternative set on `claude/gallant-keller-1gpm2y`
+(c7c9555): its faces, not its characters. All three reviewers reached the
+same verdict independently. The grappler moves off the castle ramp to a
+darker, bluer slate and his crest becomes swept-back orange spikes; the
+infiltrator stands upright at about 22 px over its unchanged 10×12 box.
+
+**P01 Ruins Starter Kit, `DRAFT:`** (`docs/decisions-log.md`, 2026-11-23,
+"From the art desk's ruins kit"): nothing goes in raw (each piece has 363
+to 2,975 colours and a light edge fringe; alpha is already hard). One
+import, `tools/art/props/import_p01.py`, re-colours to the master palette
+and re-inks the outline. In: `impact_star` (base of `fx-hit`, the biggest
+single gain), `spark_slash` (`fx-slash`), `big_barrel`, `small_barrel`,
+`lantern_post` (with a glow), `ruin_arch` and `broken_column` (courtyard,
+far layer only). Out: `arrow_sign`, `wooden_ladder`, `red_banner`,
+`stone_pillar`, `treasure_chest`, `wooden_crate`. Reference only: the
+terrain prefabs (not on the 16 px grid; `stone_wall`, `stone_grass_wall`,
+`grass_full` and `wooden_bridge` are the model for the ground lane's
+redraw) and the scout and rogue (not our party; a size and face
+proportion target: about 36 px, head about 60%). **Ratings back to the
+desk** (its readme asks for 1–5; the orchestrator hands these to Vision
+Partner): hero look 3, animation 2, props 4, terrain readability 3 (the
+right look, not on the 16 px grid), effects 4, overall match to the
+reference 4. What would make the next kit drop in: a fixed palette with
+hard edges instead of painted colour, and ground as a 16 px autotile set.
+
+**Lanes** (five; paths in `docs/mechanisms/art-pipeline.md`, "Who is
+building round 2", where the contract's round-2 fields are also defined):
+
+| Lane | Brief | Closes |
+|---|---|---|
+| heroes (art) | `handoff-prompts/look2-heroes.md` | 3, 5, 10 (frames and `carryAt`), 15 |
+| ground (art) | `handoff-prompts/look2-ground.md` | 2 (pictures and data), 4, 8, 9 (walls), 12 |
+| props (art) | `handoff-prompts/look2-props.md` | 6 (pictures), 7 (font), 9 (glows), 14 (folds), the P01 import |
+| frame (code) | `handoff-prompts/look2-frame.md` | 1, 2 (painting and camera), 8 and 9 (front layer, glow pass), 11 |
+| actors (code) | `handoff-prompts/look2-actors.md` | 6, 7, 10 (drawing), 13, 14 |
+
+The two code lanes push their validators first, because the art lanes
+write fields the check rejects until then. Each lane pushes at most twice
+and reports "look2 lane <lane> done at <commit>" to the orchestrator.
+When frame lands, the orchestrator updates `docs/plan/step-5.md`'s
+"Controls never hide the game" to the decided layout, and folds each
+lane's notes as in round 1. Round 3 starts with a fresh review of the
+live game in the same way.
+
 ## Measure
 
 ## Briefs
 
 Round 1 of the look (2026-11-23): `handoff-prompts/look-foundation.md`, `look-heroes.md`, `look-cast.md`, `look-tiles.md`, `look-props.md`, `look-world.md`, `look-actors.md`, `look-shell.md`, `look-sound.md`. Delete each when its lane is reviewed. Reviewed by re-running build and check, and deleted 13:35 UTC: foundation (61f7676), heroes (59de45d), world (82fe89b), actors (f92a447), shell (ac6509b), sound (fdcfec9). Then tiles (ebcf79e) and props (a4040f4), deleted 13:41 UTC, and cast (cae8f46), deleted 13:44 UTC. Round 1 is complete.
+
+Round 2 of the look (2026-11-23, "Round 2" above): `handoff-prompts/look2-heroes.md`, `look2-ground.md`, `look2-props.md`, `look2-frame.md`, `look2-actors.md`. Delete each when its lane is reviewed.
 
 ## Open with the owner
 

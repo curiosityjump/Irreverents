@@ -341,6 +341,101 @@ Nine lanes, one brief each in `handoff-prompts/look-<lane>.md`, each with its ow
 
 **Upright is a first-class way to play** (the owner, 2026-11-23: "It should play well in portrait too, not just landscape"): the view's size is a variable (`view` in `src/client/render.ts`), sideways 320×180, upright narrower and taller, and everything drawn must hold up at both.
 
+## Round 2 additions (2026-11-23)
+
+`DRAFT:` written by the orchestrator's round-2 synthesis
+(`docs/plan/step-8.md`, "Round 2 (2026-11-23)"). Every field here is
+additive and optional: with it absent, the picture is exactly what it was.
+The code lane named validates it (`src/content/kinds/`) and draws it; an
+art lane writes it once that validator is on `main`.
+
+**Atlases** (frame lane: `src/content/kinds/atlases.ts`, `src/client/draw/autotile.ts`):
+
+- `autotile.deep`: a list of at least two cells, chosen by hash, painted
+  for everything past the room's bottom edge when the room's backdrop
+  says `outside.below: "deep"`. The ground's body seen from the side:
+  packed earth or foundation stone, darker and plainer than `fill`.
+- `autotile.regions`: a list of
+  `{ "tiles": [x, y, w, h], "origin": [c, r], "fill"?: [...], "top"?: [...], "under"?: [...] }`.
+  A tile inside the rectangle (room tile coordinates) is drawn from that
+  region's own 4×4 block, and its own `fill`/`top`/`under` lists when
+  given. The neighbour index is worked out exactly as before ("looks
+  solid" is unchanged). The first region that holds the tile wins. Uses:
+  the castle street's roofs drawn differently from its street; an outdoor
+  room's top row drawn as an eave or a leaf canopy.
+
+**Backdrops** (frame lane: `src/content/kinds/backdrops.ts`, `src/client/draw/backdrop.ts`, `src/client/render.ts`):
+
+- `outside`: `{ "above": "fill" | "sky", "below": "fill" | "deep" }`,
+  both `"fill"` by default (today: past the edge continues the ground).
+  `"sky"` paints nothing past the room's top edge, so the sky and layers
+  show; `"deep"` paints past the bottom edge from `autotile.deep`. Only
+  the painting changes. `INTENT:` everything past the room's edge still
+  *looks solid* for the autotile index (it keeps a secret looking like
+  wall) and is still solid to the simulation.
+- a layer's `pin`: `"screen"` (default, today) or `"room"`: `y` and
+  `offsetY` are measured from the room's on-screen top or bottom edge, so
+  in a view taller than the room the layer stays behind the room.
+- a layer's `front: true`: drawn after effects and before `front` decor,
+  in front of bodies. Only for strips kept below the floor line or along
+  the very top edge (foreground foliage); never over a person, a door or a
+  working part. It may have a dark outline (the one exception to "none
+  has a dark outline").
+
+**Decoration** (frame lane: `src/content/kinds/decor.ts`, `src/client/draw/decor.ts`):
+an item's `blend: "lighter"` draws it as added light in its layer: the
+glow of a torch, a lantern or a window. Exception to "alpha is 0 or 255":
+a glow picture may use up to three alpha levels as stepped rings, no
+smooth gradient. A glow sits on a light that is already there, placed like
+every other decoration: evenly, never as a hint.
+
+**Sprites** (actors lane: `src/content/kinds/sprites.ts`, `src/client/draw/entities.ts`):
+`carryAt: { "x", "y" }`: the cell pixel (right-facing) where a carried
+body's bottom-centre sits during `carry`, `carryRun` and `throw`,
+mirrored with the facing. Absent: today's placement.
+
+**Overhang** (heroes lane): a body whose box is under 16 px tall (the
+infiltrator, 10×12) may be drawn up to 12 px above its box and up to 6 px
+past each side; the feet stay on the box's bottom edge. Every other body
+keeps "a few pixels" (the king's crown is 8).
+
+**Looks added or resized** (rows for the table above; the actors lane
+makes the renderer read every size from the look, none hard-coded):
+
+| Id | What it is | Size and placement |
+|---|---|---|
+| `fx-hit` | the star at the point of impact | now 32×32 strip (was 16×16) |
+| `fx-dust` | a dust puff | 16×16 or 24×24 strip |
+| `fx-swing-<character id>` | that character's own swing, used instead of `fx-slash` when present (the grappler's punch burst) | square strip, any size, centred on the strike point |
+| `font-dark`, `font-light` | the game's pixel font: dark letters for barks on paper; light letters with a 1 px dark shadow for the king's ribbon | strip of 95 frames, ASCII 32–126 in order; cell 6×10, capitals on rows 0–6, descenders to row 9, glyphs 5 px wide, advance 6 px |
+| `hide-front-<w>x<h>` | the front fold of a hiding place, drawn over a body hidden in it | the part's tile rectangle, transparent except the fold |
+
+**View** (frame lane): sideways the view is about 320×180 or tighter
+(height at most 180); upright as before. Sideways on a touch phone the
+controls sit see-through over the view, and the camera keeps the floor
+under the player clear of them (`docs/decisions-log.md`, 2026-11-23,
+"Held sideways, the game fills the phone").
+
+### Who is building round 2
+
+Five lanes, one brief each in `handoff-prompts/look2-<lane>.md`:
+
+| Lane | Paths it alone may touch |
+|---|---|
+| heroes (art) | `tools/art/heroes/`, `assets/sprites/heroes/`, `content/sprites/{grappler,infiltrator,flyer,hero}.json`; then `tools/art/cast/`, `assets/sprites/cast/`, `content/sprites/{king,guard,shopkeeper,villain,crate,crate-heavy,dummy,dummy-heavy,throne}.json` |
+| ground (art) | `tools/art/tiles/`, `assets/tiles/`, `assets/backdrops/`, `content/atlases/`, `content/backdrops/` |
+| props (art) | `tools/art/props/`, `assets/props/`, `assets/decor/`, `assets/fx/`, `assets/ui/use.png`, `assets/ui/font.png` (new), `content/looks/`, `content/decor/` |
+| frame (code) | `src/client/shell.ts`, `touch.ts`, `keyboard.ts`, `main.ts`, `index.html` and page styles, `src/client/render.ts`, `src/client/draw/room.ts`, `room-parts.ts`, `alert.ts`, `backdrop.ts`, `autotile.ts`, `decor.ts`, `src/content/kinds/{atlases,backdrops,decor}.ts`, `scripts/e2e/phone.ts`, the `c2` fact in `scripts/e2e.ts` |
+| actors (code) | `src/client/draw/sprites.ts`, `entities.ts`, `npcs.ts`, `impact.ts`, `away.ts`, `audience.ts`, `fx.ts`, `hall.ts`, `src/content/kinds/sprites.ts` |
+
+Notes go where round 1's went: `tools/art/<lane>/README.md` (heroes,
+cast, tiles, props), `docs/mechanisms/phone-shell-look.md` and
+`rendering-world.md` (frame), `rendering-actors.md` (actors).
+Exceptions inside the frame lane's files: Steps 11 and 12 each add one
+import and one call to `src/client/render.ts`, and Step 12 a block to
+`scripts/e2e.ts` (`handoff-prompts/step-11-a-brawl.md`,
+`step-12-a-outpost.md`); those lines are theirs.
+
 ## Checks
 
 - `npm run check` validates every art content file: the image exists,
