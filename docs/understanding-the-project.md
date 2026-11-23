@@ -161,8 +161,9 @@ Night one (2026-11-23). The owner's current goal is in
 `docs/current-directive.md`. Step 1 is done and live; the other steps build on it in
 parallel. The account's usage limit stopped every session from 04:57 to
 08:20 UTC, so the night is short: finished work only from 10:00 UTC
-(`docs/current-directive.md`). Untried by anyone: a real iPhone, and a
-hit, grab, throw or "Use" between two devices. Open steps, their status lines and what each
+(`docs/current-directive.md`). Untried by anyone: a real iPhone (the page now
+reports its own errors: read `/debug/errors` on the live address
+before any code push, which empties it). Open steps, their status lines and what each
 waits on are in `docs/plan.md`; recount there, not here.
 
 Nothing has been stopped by the owner.

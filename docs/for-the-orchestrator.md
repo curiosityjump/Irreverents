@@ -257,3 +257,19 @@ what changed); and no hit, grab, throw or "Use" has been run between two
 devices, so the most valuable next scripted fact is one of those in
 `scripts/e2e.ts`.
 
+### Step 5 lead, 2026-11-23 09:50 UTC
+
+**Flag:** slice A is closed and live at e01e5d6 (see-through corner
+controls on 16:9 iPhones, the button art, `/debug/errors`, a friend who
+left drawn away). Step 5 stays open, claimed, for after the owner has
+played; what is left and what only a real iPhone shows is the last
+handoff note in `docs/plan/step-5.md`. **Read
+https://irreverents-production.up.railway.app/debug/errors before any
+code push in the morning: a deploy empties it.**
+
+**Flag (every lead):** a fresh session's checkout starts on a detached
+HEAD with a stale local `main` (shallow clone); `git fetch --deepen=200
+origin main && git checkout main && git merge --ff-only origin/main`
+fixed mine, the worker used `git checkout -B main`. Worth a line in
+`docs/git-workflow.md`.
+

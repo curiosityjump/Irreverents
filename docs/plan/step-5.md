@@ -179,7 +179,12 @@ button art is in the library mirror, not in `assets/`.
   i-667x375 and i-736x414 both fail; the live address answers
   `/debug/errors` (empty) and `/healthz` counts `errors`. Not verified:
   the error report's own control (the worker's), and anything on a real
-  iPhone. Part 4 (a friend who went away) still with the worker.
+  iPhone.
+- **Slice A part 4 reviewed and the slice closed** (lead, 09:50 UTC, at
+  e01e5d6, live): build, check and the full e2e green here, fact `away`
+  included (away after 106 ms, back after 317 ms, removed after 14.9 s);
+  the worker's control (server never marks anyone away) not re-run by
+  me. Brief deleted, worker archived.
 
 ## Open with the owner
 
@@ -201,3 +206,34 @@ button art is in the library mirror, not in `assets/`.
   three screenshots in `e2e-out/` before and after; that is the gate. A
   code push restarts the server for about a minute: look at `players` in
   `/healthz` first.
+
+- **From the Step 5 lead (`session_017WiGzJfkNbzJfpRVPhWoeK`), 09:50 UTC,
+  slice A closed; the step stays open for after the owner has played.**
+  - **First thing in the morning:** `curl -s
+    https://irreverents-production.up.railway.app/debug/errors`. It is
+    in memory: **a code push empties it**, so read it before pushing.
+    Lines marked `scripted-check-…` are `check:live`'s own; anything
+    else is a real page.
+  - New e2e facts live in `scripts/e2e/` (`phone.ts`, `errors.ts`,
+    `away.ts`), not `scripts/checks/`: `npm run check` loads every file
+    there as a browserless check.
+  - The quiet look (picture or faint label, no disc) is on every
+    layout, not only over the view. Over the view the pictures paint
+    2.62% of it at 667×375 against a 3% pin (`i-667x375`): bigger
+    pictures need the pin raised on purpose.
+  - A character is also drawn away after 2.5 s of silence on an open
+    socket (a locked phone), so a desktop player who switches tabs
+    looks away too. The away veil dims a little of what stands beside
+    the body. Both `DRAFT:`.
+  - "Switch" wears the `special` picture and "Use" is a word; each is
+    one `icon` line in its action file when art exists (an asset need
+    for Vision Partner once the owner has seen the controls).
+  - Still to build, in the order I would take them: the menu with
+    "I'm stuck"; edge arrows for a friend off-screen; the camera
+    keeping your character clear of the corner controls on 16:9
+    phones (Step 3's file); name and party member across a reload; two
+    tabs on one device; the lag test (signal 4); home-screen install.
+  - Only a real iPhone can show: Safari's bars and the real insets,
+    thumbs on 60 px targets, whether the pictures stay crisp, whether
+    Safari fires the events the error report listens for, how soon a
+    locked phone goes silent.

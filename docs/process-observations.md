@@ -254,3 +254,15 @@ Step 1 Gate 2 worker (`session_017WiGzGmZK2vRuZTfKA24QD`). The Gate 2 brief was 
 **What happened:** `rate_limit_info` on two sessions read `allowed_warning`, type `seven_day_overage_included`, resetting about 13:00 UTC. I saw it only because `archive_session` echoes the session record; my check-ins had not read it, though `docs/current-directive.md` says to at each one. I had spawned a fresh Step 3 lead a minute before; I archived it unused, held Step 3, and moved Step 4's and Step 5's stops to 10:00 UTC.
 **Suspected cause:** the check-in prompt I armed did not carry "read rate_limit_info"; the handoff entry named only the five-hour window.
 **Disposition:** none yet (one incident). Tactical: my check-in prompt now carries it.
+
+### Step 5 slice A, 2026-11-23 (lead session_017WiGzJfkNbzJfpRVPhWoeK)
+
+- **A brief sent a worker to the wrong folder.** I told it to put new
+  e2e facts in `scripts/checks/` because another brief said so; `npm
+  run check` loads every file there as a browserless check. The worker
+  caught it and used `scripts/e2e/`. I copied a path from a brief
+  instead of opening the folder's loader: a brief's claims are claims.
+- **Worked well:** four parts as four small pushes with a clock in the
+  brief; three were live 24 minutes after launch, so an earlier stop
+  from the orchestrator cost nothing.
+
