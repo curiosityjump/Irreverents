@@ -86,7 +86,9 @@ const kind: ContentKind = {
         const c = read.object(rawCut, w);
         if (!c) continue;
         read.only(c, ['src', 'frames', 'fps'], w);
-        const frames = c.frames === undefined ? 1 : read.number(c, 'frames', w, { min: 1, max: 64, integer: true });
+        // DRAFT: raised from 64 to 128 for the 95-frame pixel fonts (font-dark, font-light: one strip,
+        // ASCII 32..126, docs/mechanisms/art-pipeline.md "Round 2 additions"); the orchestrator's call.
+        const frames = c.frames === undefined ? 1 : read.number(c, 'frames', w, { min: 1, max: 128, integer: true });
         const fps = c.fps === undefined ? DEFAULT_LOOK_FPS : read.number(c, 'fps', w, { min: 1, max: 60 });
         looks[id] = { src: readRect(read, c.src, `${w}.src`), frames, fps };
       }

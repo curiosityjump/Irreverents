@@ -60,7 +60,7 @@ the room's rim.
 | `font.py` | the pixel font: 95 hand-drawn glyphs, 5 wide on a 6x10 cell, mixed case, descenders |
 | `shots.mjs` | real-game screenshots: a punch on a dummy (6 frames), the throne room, the undercroft, the street; upright and sideways |
 
-New looks: `fx-swing-grappler`, `hide-front-1x2`, `hide-front-2x2`; `font-dark`/`font-light` in `content/looks/font.json` + `assets/ui/font.png` (held back, see Flags). Resized: `fx-hit` 32, `fx-slash` 32, `fx-dust` 24. Cracks get a light edge beside the dark line. Decor: P01 barrels (street, undercroft, dimmed toward night there), P01 lantern posts (every other street lamp; undercroft lower floor every 10th column from 9), P01 ruin arch and broken column (courtyard, `far`); a `blend: "lighter"` glow on every torch in the five rooms that have them and on the undercroft's lantern posts.
+New looks: `fx-swing-grappler`, `hide-front-1x2`, `hide-front-2x2`; `font-dark`/`font-light` in `content/looks/font.json` + `assets/ui/font.png`. Resized: `fx-hit` 32, `fx-slash` 32, `fx-dust` 24. Cracks get a light edge beside the dark line. Decor: P01 barrels (street, undercroft, dimmed toward night there), P01 lantern posts (every other street lamp; undercroft lower floor every 10th column from 9), P01 ruin arch and broken column (courtyard, `far`); a `blend: "lighter"` glow on every torch in the five rooms that have them and on the undercroft's lantern posts.
 
 ## Deviations from the contract
 
@@ -122,10 +122,9 @@ Cracks are a thin dark line with no highlight.
 
 ## Flags for the lead
 
-- **Round 2: the font is held back.** `src/content/kinds/looks.ts` caps a strip at 64 frames; the
-  contract's font is a 95-frame strip. `make.py --no-font` leaves `font.json` out; asked of the
-  orchestrator (who raises the cap, or should it be two strips). Run `make.py` without the flag
-  once the cap allows 95.
+- **Round 2: the looks validator's strip cap was raised from 64 to 128 frames** in
+  `src/content/kinds/looks.ts` (a `DRAFT:` there), on the orchestrator's word, so the font stays the
+  one 95-frame strip the contract describes. `make.py --no-font` is kept for a check that refuses it.
 - **Round 2: the punch burst and the big star are only seen once the actors lane's renderer reads
   `fx-swing-<id>` and sizes from the look**; at the time of this push the grappler still swings `fx-slash`.
 

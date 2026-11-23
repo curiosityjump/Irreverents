@@ -1,0 +1,9 @@
+{
+  "//": "DRAFT: stand-in drawn by tools/art/props/make.py; a delivered sheet replaces it by editing this file.",
+  "id": "font",
+  "image": "ui/font.png",
+  "looks": {
+    "font-dark": {"src": [0, 0, 6, 10], "frames": 95, "fps": 10},
+    "font-light": {"src": [0, 10, 6, 10], "frames": 95, "fps": 10}
+  }
+}
