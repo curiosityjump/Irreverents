@@ -24,8 +24,9 @@ read-only, at `docs/design-library/`. **Its labels are literal:** a thing
 it calls PROPOSED, EXAMPLE or OPEN is not a decision, and only the owner
 promotes one.
 
-Tie-breakers a session can apply, each the owner's own rule (quoted in
-`docs/vision.md`, "Principles that decide most questions"):
+Tie-breakers a session can apply. Each is the owner's own rule, quoted
+in `docs/vision.md` or, where a D-number is given, in the decision
+register (library doc 11):
 
 - **Gameplay before joke.** Movement, powers, secrets, stealth and combat
   first; dialogue is very limited; don't thread the premise into every room.
@@ -33,7 +34,8 @@ Tie-breakers a session can apply, each the owner's own rule (quoted in
   mappings, authored reactions. Call it NPC response logic.
 - **Getting caught opens play.** An alarm is never a reload or an automatic
   bad outcome: it starts a fight, a last stand or an escape.
-- **Impact over numbers.** Knockback, throws and collisions carry combat.
+- **Impact over numbers.** Knockback, throws and collisions carry combat
+  (D-020; `docs/vision.md`, "What it is not").
 - **Solo is never locked out by headcount.**
 - **iPhone first.** Every action must work with touch on an iPhone
   browser, through a few context-sensitive controls; never require a
@@ -41,11 +43,15 @@ Tie-breakers a session can apply, each the owner's own rule (quoted in
 - **Use by default, revise later.** New art, mechanics and implementation
   choices are approved for immediate use; never wait on the owner's
   sign-off to proceed (D-096). In use is not canon: mark what is
-  provisional `DRAFT:` so it is easy to replace, and never revive a
+  provisional `DRAFT:` so it is easy to replace, keep proposed names out
+  of ids (a shown name is data), keep it original, and never revive a
   rejected style.
-- **It is for friends, not strangers.** Don't build accounts, anti-cheat,
-  scale or monetisation unasked; what the owner can see and try beats
-  robustness they can't.
+- **It is for friends, not strangers** (the owner: "a game for me and my
+  friends"). So no accounts, anti-cheat, monetisation or building for
+  crowds unless asked (our reading, `DRAFT:`; the library leaves accounts
+  and saves open). Playable soon beats polished later, but never at the
+  cost of what the owner confirmed for phones: touch, legible pixels,
+  phone performance, coming back after a sleep or a network change.
 
 ---
 

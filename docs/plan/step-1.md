@@ -5,11 +5,9 @@
 ## Why
 
 **Owner, 2026-11-23, to Vision Partner, first-hand** (`docs/vision.md`, "The measure"):
-> I want this game to be playable by the time I wake up in the morning.
+> I want this game to be playable by the time I wake up in the morning. …
 >
-> It's setup to deploy automatically from main yes.
->
-> Focus on getting things playable asap. I want as much of the vision in playable form as possible by the time i wake up tomorrow. I want to be playing the game having fun with it with my brother in law tomorrow morning.
+> It's setup to deploy automatically from main yes. … Focus on getting things playable asap. I want as much of the vision in playable form as possible by the time i wake up tomorrow. I want to be playing the game having fun with it with my brother in law tomorrow morning.
 
 **Owner (Drive, doc 11, D-093; doc 33 is the full platform spec):**
 > D-093 IRREVERENTS IS PRIMARILY AN IPHONE BROWSER / WEBAPP GAME. Desktop COMPUTER BROWSER play is a secondary possible target. … Mobile touch ergonomics, legible pixels and actual phone performance are top-level requirements.
@@ -100,21 +98,56 @@ may overrule one with a measurement, recording why here.
   server's word wins; its own device takes over again when it is free.
 - **Solo works with the same build.** One person opening the URL can play;
   nothing waits for a second player (owner's rule, D-015).
-- **Joining needs nothing.** Everyone who opens the URL is in the same
-  shared world by default; a `?room=<name>` in the address makes a private
-  one. No accounts (it is for friends).
+- **Joining needs nothing, and seats you in the one shared party.**
+  Everyone who opens the URL is in the same shared world by default; a
+  `?room=<name>` in the address makes a private one. No accounts (it is
+  for friends). A joiner takes a member of that world's party nobody is
+  playing (D-013; doc 05: "A character cannot be controlled by two humans
+  at once"); leaving or timing out frees the member and changes nothing
+  else (doc 06: "When a player joins or leaves, the same underlying party
+  architecture continues"). Step 2 owns the party list and the switch;
+  Step 1 owns the seat on join, leave and rejoin, through one call the
+  simulation offers. When every member is taken (the party's size is
+  `DRAFT:`, O-003 is open) the next visitor is told so and offered a
+  private world: never a duplicate, never a blank page.
+- **A reload is still you.** The page keeps a random player id on the
+  device (not only in the tab) and sends it on joining, so after a
+  pull-to-refresh, Safari dropping the tab, or the page's own reload
+  after a deploy, the same player comes back: the name, the party member
+  if it is still free, and later the credit on Hall records. A different
+  device is a different player until there are accounts. `DRAFT:`.
+- **`/healthz` says how many players are in the default world**, so a
+  session can look before it pushes code while someone is playing
+  (`docs/current-directive.md`, "Stopping condition").
+- **The built server is started once before every code push.** With the
+  owner's storage volume attached, Railway stops the old server before
+  the new one starts, so the health check no longer protects a running
+  game: a build that fails to *start* would leave nothing serving until a
+  revert is live. So `npm run check` (or a step it runs) boots the built
+  server on a free port, sees `/healthz` answer and one client join, and
+  fails otherwise.
 - **Rendering is a plain canvas at 320×180 internal resolution on a 16 px
   tile grid, scaled up crisp; characters fit 32×32 cells (about 24–28 px
   tall).** These are the numbers the art already on order assumes
   (`docs/mechanisms/asset-requests.md`, "Requests in flight"; library
-  doc 14, option B). Start with graybox shapes and **build so sprite
+  doc 14, option B). `DRAFT:` the library calls these "Candidate
+  technical pixel benchmarks (NOT LOCKED)"; they are tonight's working
+  numbers because the first gate and the ordered art already use them.
+  Keep each in one place in code, and tell Vision Partner before changing
+  one. Start with graybox shapes and **build so sprite
   sheets and tile atlases drop in as data when they arrive** (below).
 - **Touch first, landscape.** Design the controls for two thumbs on an
   iPhone held sideways: a few context-sensitive controls, "not a dozen
   tiny virtual buttons" (doc 33). Orientation and the exact layout are
   open in the library (landscape is "a promising test"), so they are
-  `DRAFT:`; a portrait phone must at least get a clear "turn your phone"
-  screen, never a broken one.
+  `DRAFT:`. **An upright phone can still play** (`INTENT:` there is
+  always a way out): an iPhone with rotation lock on stays upright
+  however it is held, and a page cannot override that, so a screen that
+  only says "turn your phone" is a place a player can be stuck in for
+  good, and could be the owner's whole first minute. Held upright, the
+  page shows the same 320×180 view across the top with the controls
+  below it, and one dismissible line: "Better sideways. If turning does
+  nothing, switch off rotation lock."
 - **A phone that sleeps or changes network comes back.** A suspended tab,
   a lock screen or a Wi-Fi to cellular switch must end in the player back
   in the world on their own, not a dead page (doc 33, "browser state
@@ -177,9 +210,6 @@ may overrule one with a measurement, recording why here.
 
 - Library choices and versions, the file layout inside the constraints
   above, tick and send rates, how remote characters are smoothed.
-- The internal resolution and tile size: the library's style lock (doc 14,
-  `docs/design-library/03-visual-direction-and-assets/00-asset-production-plan-and-style-lock/`)
-  names the candidates; pick one and mark it `DRAFT:`.
 - How the scenario scripts are written (prefer scenarios as data: a room,
   a list of timed inputs, the facts expected).
 
@@ -228,7 +258,9 @@ may overrule one with a measurement, recording why here.
 3. `npm run check:live` passes against the live URL, `npm run
    check:deployed` exits 0 (what is running has every code change on
    `main`), and `npm run gates` reports gate F as passing (the headless
-   two-player scenario).
+   two-player scenario). `check:live` uses `check:deployed`'s test as its
+   own first step, never "the running commit equals the tip of `main`":
+   after a documents-only push that is false on a healthy game.
 
 ## Stopping condition
 

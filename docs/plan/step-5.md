@@ -29,8 +29,21 @@ instructions longer than a glance.
 - **Few, context-sensitive controls** (doc 33: "not a dozen tiny virtual
   buttons"); move with one thumb, act with the other; two fingers at once
   must work (run and jump).
-- **Landscape, with a plain "turn your phone" screen in portrait.**
-  Orientation is open in the library; this is `DRAFT:`.
+- **Landscape first; an upright phone can still play.** Held upright,
+  the page shows the same 320×180 view across the top with the controls
+  below it (nothing covers the view), and one dismissible line about
+  turning the phone and rotation lock. Never a screen that only says
+  "turn your phone": with rotation lock on, that is a place a player
+  cannot leave (`INTENT:` there is always a way out). Step 1 lands the
+  bare version; this step makes both layouts comfortable. Orientation is
+  open in the library; `DRAFT:`.
+- **Controls never hide the game** (doc 33: "UI should not cover secret
+  entrances or enemies"). Put them in the bars beside the 16:9 view where
+  the phone is wider than the view (most iPhones held sideways); where
+  the view fills the screen they are see-through, small in art and large
+  in touch area, and the camera keeps the player's own character and what
+  stands beside it clear of them. `DRAFT:`. The touch-button art is
+  delivered (`docs/mechanisms/asset-requests.md`, U08-01).
 - **The owner's cantina tap rule is a control anchor** for later (doc 33:
   tap a roaming character, then tap the party member to replace; attack
   is distinct from tap). Don't build the cantina; don't make a layout
@@ -38,11 +51,22 @@ instructions longer than a glance.
 - **Presence:** each player has a colour or mark; a friend off-screen or
   in another room is indicated at the screen edge; joining and leaving
   are visible.
-- **It mends itself:** a lost socket, a slept tab, a network change all
-  end with the player back in the world, same character, without a
-  reload. While mending, the screen says so.
+- **It mends itself, and a reload is still you.** A lost socket, a slept
+  tab or a network change ends with the player back in the world, same
+  character, without a reload. A page reload (pull-to-refresh, Safari
+  dropping the tab, the page's own reload after a deploy) ends with the
+  same player too: Step 1 keeps a player id on the device; this step
+  makes sure the name, the party member if it is still free, and the
+  credit on Hall records carry over (doc 33: "A page refresh / device
+  switch should not inadvertently wipe … Hall of Legends records"). While
+  mending, the screen says so.
 - **There is always a way out:** a small menu, reachable by touch, with at
   least "I'm stuck" (back to the room's entrance) and a way to leave.
+  "I'm stuck" moves the body and nothing else: it clears no alarm, alert
+  or pursuit, and pursuers keep their target (D-077: "a level transition
+  never automatically resets pursuit"). Agree the hook with Step 4
+  through `docs/architecture.md`. `INTENT:` on the exit, `DRAFT:` on
+  where it puts you.
 - **What goes wrong on a real iPhone reaches us.** Nobody here can run
   Safari, so the page reports its own errors (an uncaught error, a failed
   load, a socket that will not open) to the server, which keeps the last
@@ -70,12 +94,15 @@ instructions longer than a glance.
 
 1. `npm run check`: every action in the action list has a touch control
    (control: an action with none fails).
-2. `npm run e2e`, iPhone-sized landscape viewports (at least 667×375 and
-   844×390): no control sits under a safe-area inset or off-screen; run
+2. `npm run e2e`, iPhone-sized viewports (landscape at least 667×375,
+   750×340 and 844×390, and one upright): no control sits under a
+   safe-area inset or off-screen, none overlaps the game view where bars
+   exist beside it, and the upright page can move and jump; run
    and jump at once by two touches. (Reading the screenshots back and
    comparing them is your rung 5 of `docs/verifying-and-finishing.md`,
    and the owner's taste; it is not this signal.)
-3. Mending: the script cuts the socket, and separately hides and shows the
+3. After a full page reload the player has the same id, name and party
+   member. And mending: the script cuts the socket, and separately hides and shows the
    page; each time the player is back in the world within ten seconds as
    the same character, with no reload.
 4. With 150 ms of delay each way and a few dropped messages injected, two

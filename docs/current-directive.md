@@ -80,7 +80,7 @@ filed in `docs/questions-inbox.md`.
 
 **The owner's words this comes from** (recorded first-hand by Vision
 Partner, 2026-11-23, in `docs/vision.md`):
-> I want this game to be playable by the time I wake up in the morning.
+> I want this game to be playable by the time I wake up in the morning. …
 >
 > Focus on getting things playable asap. I want as much of the vision in playable form as possible by the time i wake up tomorrow. I want to be playing the game having fun with it with my brother in law tomorrow morning.
 
@@ -109,8 +109,8 @@ their brother-in-law can open on their own iPhones and play together, with
 as many of results 2–7 in it as were finished and verified, and nothing in
 it half-working.
 
-**Feedback signal.** `docs/measures.md`: M1 (the live address reports the
-tip of `main`), M2 (`npm run check:live`: two scripted players share the
+**Feedback signal.** `docs/measures.md`: M1 (`npm run check:deployed`: the
+live address runs what `main` needs), M2 (`npm run check:live`: two scripted players share the
 live world), M3 (`npm run gates`: build gates with a passing scripted
 check). Each step's own file names its scenarios. None of these says
 whether it is fun; that is the owner's, in the morning.
@@ -123,6 +123,13 @@ whether it is fun; that is the owner's, in the morning.
 - **By 10:30 UTC** the orchestrator re-measures M1–M3 on the live address
   and writes the morning report: what is playable, how to play it with a
   second person, what to try, and what is the owner's to judge.
+- **From the morning report on, no code push while anyone is in the
+  default world**, except a revert or a fix for something broken on live.
+  Each code push is about a minute of Railway's "Application not found"
+  and a fresh world (measured 04:22 UTC, since the owner's storage volume
+  was attached). `/healthz` says how many players are in the default
+  world, so look before pushing. Documents push freely: they do not
+  redeploy (proven, `docs/mechanisms/deploy.md`).
 
 **Constraints.** The owner's rules in `docs/vision.md` ("What it is not",
 "Principles that decide most questions"); `CLAUDE.md`'s tie-breakers and
