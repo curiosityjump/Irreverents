@@ -56,6 +56,7 @@ Running besides: the flake investigation, sent 21:36 UTC to the doorways builder
 4. An e2e fact failed once in two full runs at 19:20 UTC (not captured; the heist builder names the flaking fact `cantina-row`, a tap flake, 20:14 UTC; the Step 18 builder saw the Step 11 cantina facts flake twice): fold into the flake investigation. The throw-a-friend flake (`t-throw-friend`, `t-grab-friend`: 3 runs in 14, "no throw happened
    server-side"): brief its own investigation.
 4a. An `armoured-guard` sprite from P08 chibi-enemy-animation row 4 (cast lane, `tools/art/cast/cut3.py`) for the town's last dispatch row: needs a cast brief; the town-tiers builder ships on `guard` meanwhile. Also owed from Step 16's close: a slam rule so heavies fall to a throw (Step 2/18); the depot's hoard visible from the yard (Step 8).
+4b. From the waves builder (91b83a5, `docs/plan/step-7.md` "Builder notes"): the depot's waves now walk west and drop through the floor gap at columns 51-52 into the pocket below and stay there (before, they stood at the entry): a depot data fix, unbriefed (Step 16 is closed). A hero striking every 0.4 s is never knocked down by the camp's fighters: feed that to the risk brief (Step 21).
 5. Shop interiors from P08's building sheets (offered to the owner ~16:55 UTC, no objection).
 6. The Bandit Camp traps heroes if `jumpSpeed` is tuned 10% lower (`docs/plan/step-3.md`, last
    note); Step 16 lead's two routing notes (`docs/for-the-orchestrator.md`); Step 18's later
