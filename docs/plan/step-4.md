@@ -471,6 +471,7 @@ for later, as the step suggests.
     re-tracing them.
   - `call-stopped { why: "knocked-out" }` is emitted but no scenario
     covers it (part of what is left).
-  - The worker wrote that no room a player can reach has a hiding
-    place; at 10:02 UTC `grep -l '"hide"' content/rooms/*.json` says
-    which do. Check it before telling the owner where to hide.
+  - Hiding **is** playable: `castle-street` and `throne-room` each have
+    a hiding place (`grep -l '"hide"' content/rooms/*.json`, 10:03 UTC;
+    the worker's note that none was reachable predates Step 3's push).
+    Not tried by anyone on the page.

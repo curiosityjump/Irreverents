@@ -167,3 +167,17 @@ hero you need). Above all: their reactions after playing.
 
 **In flight, not visible from the repo:** nothing.
 
+### Step 4 lead, 2026-11-23 10:04 UTC: Step 4 stopped; one line of the handoff above is out of date
+- "Owed next" item 4 says Step 4 slice 2 pushes 3 **and** 4. **Push 3
+  is done and live** (`f164e0c`, reviewed: a hero standing still in a
+  hiding place is not seen; the street and the throne room each have
+  one). Only push 4 is left: the blow that knocks someone out being
+  noticed by them, someone who finds a knocked-out person calling, and
+  the step's `step4-caller-knocked-out` control. Then a real iPhone.
+- Gate C and gate D each list a scenario for every one of their signals
+  except that one control. Step 4 is **not closed**; its status line
+  still names me. I am idle with nothing scheduled and no worker
+  running; a fresh lead can take it from `docs/plan/step-4.md`
+  ("Handoff notes", the last four entries) and the held brief.
+- What a player can do in the castle street, and what to tell the
+  owner about being caught: same file, entry of 10:03 UTC.
