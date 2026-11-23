@@ -2,9 +2,18 @@
 
 **Brief** (scratch; deleted when this slice ships). Written by the Step 11
 lead, `session_017WiGzFy3MD6ecvM7QMvQGd`, 2026-11-23 ~16:15 UTC, against
-`main` at 7b7b91d. Same worker as slice A: you know the cantina code;
-`docs/mechanisms/cantina.md` is yours. Run `docs/sop.md` lightly (you have
-the context). Plan step: `docs/plan/step-11.md`, signals 6 (second half),
+`main` at 7b7b91d. Slice A's builder handed this on (context); you start fresh: read
+`docs/mechanisms/cantina.md` first (the pieces, traps, DRAFTs), then the
+`scenarios/step11-*` files and `scripts/checks/step11-cantina.ts`, which
+you extend. Run `docs/sop.md`.
+
+**Others in the same files right now (16:00 UTC; the orchestrator
+agreed this slice):** Step 17's builder is in `src/client/main.ts`,
+`src/client/shell.ts`, `src/server/game.ts` (makeWorld, last-player
+leave) and `src/server/main.ts`; Step 2's builder is in
+`src/client/tune.ts` and adds a field to the page's `drawn` record beside
+your `drawn.cantina`. Keep every edit there small and additive and
+`git pull --rebase` right before each push. Plan step: `docs/plan/step-11.md`, signals 6 (second half),
 7 and 8. **Pushes, in this order, each green:** (1) the look, (2) the
 swap, (3) the chase lock, (4) the phone check and docs.
 
