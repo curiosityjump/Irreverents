@@ -181,6 +181,8 @@ Taken 2026-11-23 by the lead at 17d8c1b (`npm run check` green): friends hit but
 
 ## Handoff notes
 
+**Slice B push 3 (the chase lock, 433275e) reviewed ~17:40 UTC by the lead:** the `room-doors.ts` edit is additive and refuses only a door carrying `"refuse": "chased"` (only `to-cantina` does); `cantina-chase` runs only in a world with `~cantina` and reads saved state with `?.`; good-side `c.respond` chasers only. Lead's control: `"refuse"` on the cantina's own `to-street` door makes nothing fail, so the way out was protected by a comment alone. A content check for it, and a short hold over the guard's two-tick sight flicker, were sent to the builder for push 4.
+
 **The cantina's art is Step 8's from 17:07 UTC** (orchestrator): round 3's lanes draw its own tiles and backdrop (replacing slice B's borrowed `town` theme), tavern props, and the brawler's and skirmisher's sprites. Step 11 draws no cantina art; `content/rooms/cantina.json` stays Step 11's.
 
 **Slice B pushes 1-2 reviewed ~17:00 UTC by the lead** (365a40d the look: only `content/atlases|backdrops/cantina.json` and the art tool's lists changed, no existing image; 49a5e53 the swap): read the shared edits (`cleanInput` carries `tap` with numbers checked; `World.party` read at exactly `firstFreeMember` and `switch`; effect `become` sent only to the tapping player's own entity); `npm run check` re-run green (18 step11 scenarios and the extended real-server check). Lead's control: a tap counted on every tick instead of once by its `n` fails `step11-row-closes`, `-row-not-in-brawl` and `-swap-unplayed`. Not verified: a real iPhone; the no-fit refusal (no spot in the cantina where a body would not fit).
