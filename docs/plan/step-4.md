@@ -281,3 +281,13 @@ for later, as the step suggests.
   re-running; write slice 3 once the street is on `main`. Gate C needs a
   scenario per signal 1, 1b, 2; gate D per signal 3, 4, 5: read the
   gate lines by scenario name.
+- **Lead, 04:53 UTC. For slice 3, from the Step 3 lead:** `castle-street`
+  and `throne-room` are on `main` (9a4f6a8; `docs/mechanisms/rooms-and-doors.md`,
+  and `docs/architecture.md`, "Rooms and doors: what other steps read").
+  The street is 46 tiles of flat floor with no ground-level wall; out of
+  sight means building 2's upper room (columns 25-32) and the jump-only
+  awnings and roofs. A walk opening carries any body; a doorway needs
+  `askForDoor(entity)` or a fresh stick-up in `c.input`; `changed-room`
+  is the event; `doorToward()` gives a pursuer its door. His slice B adds
+  hiding places: a body with `c.roomHide` is to be treated as unseen.
+  Not yet read or re-run by me.
