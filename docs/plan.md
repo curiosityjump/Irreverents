@@ -263,7 +263,7 @@ Durable record: `docs/architecture.md`, `docs/mechanisms/network.md`,
 
 ## Step 2 — Moving, hitting, grabbing and throwing
 
-**Status: open, claimed by orchestrator session_017WiGzHhke4tkAThPgw6EXs (builders: none yet), 2026-11-23.** (Feel round closed and live at 252e5ce; released 15:55 UTC by lead session_017WiGzGN9egot3JUvSMBBA9 to the orchestrator. What is owed, in order, is the last entries of the step file's "Handoff notes".) (Reopened 2026-11-23 11:55 UTC by orchestrator session_017WiGzHX8g2sXimNRnqp2oZ for game feel, second only to the look: the owner wants it to feel "as good as kirby and the amazing mirror" by 2026-11-24. Start from the step file's section "Feel, from 2026-11-23"; its first lead session_017WiGzGRnRoAeW5Ep5iSycV is idle with a large context and is not to be reused.)
+**Status: open, claimed by orchestrator session_017WiGzHhke4tkAThPgw6EXs (builders: session_017WiGzEW8KSWarusEnTDSEg), 2026-11-23.** (Brief `handoff-prompts/step-2-panel-and-no-numbers.md`, items (a)+(b), sent 15:56 UTC. Feel round closed and live at 252e5ce; released 15:55 UTC by lead session_017WiGzGN9egot3JUvSMBBA9 to the orchestrator. What is owed, in order, is the last entries of the step file's "Handoff notes".) (Reopened 2026-11-23 11:55 UTC by orchestrator session_017WiGzHX8g2sXimNRnqp2oZ for game feel, second only to the look: the owner wants it to feel "as good as kirby and the amazing mirror" by 2026-11-24. Start from the step file's section "Feel, from 2026-11-23"; its first lead session_017WiGzGRnRoAeW5Ep5iSycV is idle with a large context and is not to be reused.)
 
 Full text: `docs/plan/step-2.md`
 
