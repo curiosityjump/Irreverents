@@ -143,9 +143,3 @@ actually read (questions for the owner go through
 **Flag:** the banner's "new" means "not in the first frame that had a world in it". If Step 1's network layer delivers the world over several frames, or re-delivers it after a reconnect, check that old records are not announced (several arriving in one frame are already ignored).
 
 **Flag:** rung 5 was by eye, on hand-made records pushed into the page's world; nothing scripted covers the drawing, and the real path (detector → pedestal → page, two devices) has not been seen. Text follows `draw/npcs.ts` (`fillText`, 8 px): readable, soft on a phone; a shared pixel font would be Step 5's or 8's call.
-
-### step-16-c-quarry-depot.md, 2026-11-23 (push 2, loud)
-
-- **Door carry, measured (push 2):** a patrol chasing a hero it punched out through `to-tower` walks to column 1 and stands (not carried); a body knocked or thrown into the door's tiles is carried through (the grappler punched patrol 1 into the tower). `entry` stays at column 61.
-- **Scenario 6 (b) changed:** the brief's escape by the cellar, the pit and the cave cannot start inside the depot (the shaft is one-way; nothing leads down to the cellar), so `step16-caught-escape` leaves by the tower door, with the door made solid as its control. It does not take the hoard first: the hoard is behind the guard, and the escape is the point.
-- **Scenario 6 (a) is a chain reaction:** the grappler throws the held patrol at the lookout mid-call, the lookout goes down and the body goes on into the horn post and breaks it. It holds for throws from tick 590 to 630.

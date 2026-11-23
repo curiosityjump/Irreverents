@@ -491,7 +491,11 @@ Slice 1, 2026-11-23 16:10 UTC: the main way (road, ridge, tower, depot) is **248
 
 2026-11-23 18:30 UTC, lead review of slice 3 push 1 at 2ca087a (re-run): `npm run check` green, 61 `step16-*` scenarios, gates 5 of 6, no `src/`. The flyer's roof route is zero-alarm; `quarry-road-cross` is green by touch. Found by the builder: the cellar shaft is one-way (no drop-through), so the grappler's cellar route has no quiet way out; nobody but the flyer can cross the yard unseen, because the lookout only turns on the spot on one floor line; only the lookout can reach the horn. Decided: a ledge over the yard's west stretch (rows 8-9, about columns 2-13) in this step's own room file, and the second zero-alarm route on it, as push 3 if time allows.
 
+2026-11-23 18:45 UTC, lead review of slice 3 push 2 at 36d838d (re-run): `npm run check` green, 63 `step16-*` scenarios, gates 5 of 6, stopping-condition `src/` count 0, live current. Caught at the depot: a fight (a thrown patrol drops the lookout mid-call and breaks the horn) and an escape by the tower door. The escape by the pit and cave with the hoard, and a second quiet route, need two edits in the depot room: briefed as push 3.
+
 ## Briefs
+
+- Slice 3 push 3, the depot's west ledge and a way down to the cellar (signals 5 and 6(b) in full): `handoff-prompts/step-16-d-depot-routes.md`, 18:45 UTC, fresh builder.
 
 - Slice 3, the depot (signals 5–6): `handoff-prompts/step-16-c-quarry-depot.md`, written 17:30 UTC; slice 1–2's builder declined it at 17:27 (context), so a fresh builder takes it: `session_017WiGzJqD8htNRHozGpJTgb`, launched 17:32 UTC. Measured at fd3f4d5: `npm run check` 41 s, `npm run build` 5 s (Step 3's way-out check fixed at a700081).
 - Slice 2, the enemies (signal 4; ranged left out, first to drop): `handoff-prompts/step-16-b-quarry-enemies.md`, written 16:15 UTC, sent 16:40 UTC to slice 1's builder `session_017WiGzFnkhyrpJqJ6xa9vTr`. Step 12 widened `outpost-fight` to any room at 2027994.
