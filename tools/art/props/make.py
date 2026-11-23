@@ -100,6 +100,15 @@ def looks_sheets():
     work, sound, broken = r3.signaler_frames()
     s.add('signaler', work); s.add('signaler-sounding', sound, frames=3, fps=12); s.add('signaler-broken', broken)
     out.append(('outpost', 'props/outpost.png', s))
+    # ---- Step 14 slice A's level entrances (drive.py: P05 secrets row 1, P05 HUD rings' colours, P07 sign)
+    s = Sheet(160)
+    for which in dv.ENTRIES:
+        s.add('level-entry-' + which, dv.level_entry(which))
+    s.newrow()
+    for n in range(5):
+        s.add('level-pie-%d' % n, dv.level_pie(n))
+    s.add('level-sign', dv.level_sign())
+    out.append(('levels', 'props/levels.png', s))
     # ---- people
     s = Sheet(96)
     # round 3: moods bold enough for any hat or plume (a white '?' and a sweat drop; a red mark rimmed white)

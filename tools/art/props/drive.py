@@ -255,3 +255,63 @@ def camp_flag():
 def rocks(big=True):
     """P07 platformer tileset: the grey boulder heap, and the small stones beside it."""
     return grab('platformer', (875, 168, 1002, 265), 0.17 if big else 0.12, ramps('stone', 'castle'))
+
+
+# ---- Step 14 slice A's level entrances (asked by the orchestrator for the owner's "level entries"):
+# P05 secrets-doors-breakables, top row; the completion rings from P05 ui-hero-party-hud's bottom row;
+# the sign is P07 platformer's wooden signpost. Both P05 plates sit on an opaque pale ground (keyed out).
+P05PALE = (247, 247, 247)
+ENTRY = ramps('stone', 'castle', 'wood', 'gold', 'blue', 'purple', 'foliage', 'grass', 'night', 'red', 'pink', 'teal')
+ENTRIES = {'arch': (203, 68, 308, 172), 'gem-door': (313, 66, 418, 172), 'portal': (528, 68, 632, 172),
+           'mine': (638, 72, 756, 172)}
+
+
+def level_entry(which):
+    return fit(grab('secrets', ENTRIES[which], 0, ENTRY, key=P05PALE, size=(30, 30)), 32, 32)
+
+
+PIES = [(138, 455, 208, 512), (208, 455, 273, 512), (273, 455, 338, 512), (338, 455, 412, 512)]
+PIER = ramps('gold', 'purple', 'castle', 'stone', 'metal', 'orange')
+
+
+def level_pie(n):
+    """0 empty .. 4 full; the plate shows empty, a quarter, three quarters and full; half is made from the
+    empty and the full ring (right half from the full one)."""
+    if n == 2:
+        a, b = level_pie(0), level_pie(4)
+        out = a.copy()
+        out.paste(b.crop((6, 0, 12, 12)), (6, 0))
+        return out
+    box = PIES[{0: 0, 1: 1, 3: 2, 4: 3}[n]]
+    return fit(grab('hud', box, 0, PIER, key=(245, 245, 244), size=(12, 11)), 12, 12)
+
+
+def level_sign():
+    return fit(grab('platformer', (815, 860, 895, 958), 0, ramps('wood', 'stone', 'gold', 'earth'), size=(15, 16)), 16, 16)
+
+
+def level_pie(n):  # noqa: F811 (replaces the cut above: the plate's rings run off its bottom edge)
+    """12 x 12, n quarters filled clockwise from the top. DRAFT: drawn in the P05 HUD rings' own colours (a
+    purple ring, gold fill, ink edge) because the plate's rings are cut off by its bottom edge."""
+    import math
+    from px import col, put
+    im = new(12, 12)
+    for y in range(12):
+        for x in range(12):
+            dx, dy = x + 0.5 - 6, y + 0.5 - 6
+            r = math.hypot(dx, dy)
+            if r > 6:
+                continue
+            ang = (math.degrees(math.atan2(dx, -dy)) + 360) % 360
+            if r > 5:
+                c = INK
+            elif r > 3.6:
+                c = col('purple', 2) if dx + dy < 0 else col('purple', 1)
+                if ang < n * 90:
+                    c = col('gold', 3) if dx + dy < 0 else col('gold', 2)
+            else:
+                c = col('night', 2)
+                if ang < n * 90:
+                    c = col('gold', 2) if dx + dy < 0 else col('gold', 1)
+            put(im, x, y, c)
+    return im

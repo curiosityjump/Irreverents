@@ -148,6 +148,13 @@ platformer's boulder heap at two sizes.
 - cracks, `away-dots`, `bark`, `ribbon`, `player-mark`, shadows, `fx-land`, `fx-slash`, `fx-swing-grappler`:
   round 1-2 drawings or P01 cuts, not yet checked against the plates.
 
+**Level entrances (Step 14 slice A, at the orchestrator's ask).** Group `levels` (`content/looks/levels.json`,
+`assets/props/levels.png`): `level-entry-{arch,gem-door,portal,mine}` 32x32, cut from P05
+secrets-doors-breakables' top row (the glowing arch, the gem door, the swirl portal, the mine mouth), drawn
+bottom-centred over an entrance; `level-pie-0`..`4` 12x12 (none, a quarter, half, three quarters, full),
+`DRAFT:` drawn in the P05 HUD rings' own colours because the plate's rings run off its bottom edge;
+`level-sign` 16x16, P07 platformer's wooden signpost, no text.
+
 ## Deviations from the contract
 
 - `ui-use`'s `src` is the whole 48×24 picture (normal then pressed), with no `frames`: that is how

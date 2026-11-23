@@ -32,6 +32,7 @@ SHEETS = {
     'villain': 'p03-core-heroes-npcs-terrain-and-vfx-visual-source-sheets/pixel-villain-sprite-sheet.png',
     'vfx': 'p03-core-heroes-npcs-terrain-and-vfx-visual-source-sheets/pixel-art-vfx-and-pickup-atlas.png',
     'ruins': 'p03-core-heroes-npcs-terrain-and-vfx-visual-source-sheets/grassy-ruins-pixel-art-tileset-atlas.png',
+    'secrets': 'p05-hud-powers-cantina-brawl-and-secrets-visual-source-sheets/p05-secrets-doors-breakables-source.png',
     'hud': 'p05-hud-powers-cantina-brawl-and-secrets-visual-source-sheets/p05-ui-hero-party-hud-source.png',
     'brawl': 'p05-hud-powers-cantina-brawl-and-secrets-visual-source-sheets/p05-brawl-hit-ko-respawn-source.png',
     'ui': 'p07-first-playable-npc-enemies-mechanisms-terrain-hud-source/irreverents-pixel-ui-atlas.png',

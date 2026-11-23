@@ -1,0 +1,17 @@
+{
+  "//": "DRAFT: stand-in drawn by tools/art/props/make.py; a delivered sheet replaces it by editing this file.",
+  "id": "levels",
+  "image": "props/levels.png",
+  "looks": {
+    "level-entry-arch": {"src": [0, 0, 32, 32]},
+    "level-entry-gem-door": {"src": [32, 0, 32, 32]},
+    "level-entry-portal": {"src": [64, 0, 32, 32]},
+    "level-entry-mine": {"src": [96, 0, 32, 32]},
+    "level-pie-0": {"src": [0, 32, 12, 12]},
+    "level-pie-1": {"src": [12, 32, 12, 12]},
+    "level-pie-2": {"src": [24, 32, 12, 12]},
+    "level-pie-3": {"src": [36, 32, 12, 12]},
+    "level-pie-4": {"src": [48, 32, 12, 12]},
+    "level-sign": {"src": [60, 32, 16, 16]}
+  }
+}
