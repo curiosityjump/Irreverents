@@ -12,11 +12,7 @@ export type AnimState =
   | 'idle' | 'run' | 'air' | 'jump' | 'fall' | 'flap' | 'attack' | 'grab' | 'carry' | 'carryRun'
   | 'throw' | 'hurt' | 'down' | 'held' | 'hide' | 'talk';
 
-/**
- * The sprite file as the contract writes it. The content kind may not yet
- * parse the optional fields (the foundation lane extends it); everything
- * beyond idle/run/air is read defensively.
- */
+/** The sprite file as the contract writes it (src/content/kinds/sprites.ts parses it; optional parts read defensively). */
 interface SheetFile {
   id: string;
   image: string;
@@ -205,7 +201,7 @@ function onceTicksOn(sheet: SheetFile | undefined, s: AnimState, mood: number): 
 /** A body's sheet, image and kind, or null when it is drawn as its rectangle. */
 export function sheetOf(content: Content, e: Entity): { sheet: SheetFile; img: HTMLImageElement } | null {
   const kind = content.characters[e.kind];
-  const sheet = kind ? (content.sprites[kind.id] as unknown as SheetFile | undefined) : undefined;
+  const sheet = kind ? (content.sprites[kind.id] as SheetFile | undefined) : undefined;
   const img = sheet ? image(sheet.image) : null;
   return sheet && img ? { sheet, img } : null;
 }

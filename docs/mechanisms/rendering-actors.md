@@ -43,9 +43,10 @@ the items below to their homes.
 - **`away.ts`**: a sprite body is dimmed by `entities.ts` and gets
   `away-dots`; a rectangle body keeps the veil.
 - **`audience.ts`**: the king's line in the `ribbon` nine-slice.
-- **`fx.ts`**: the lane's own reader of `content.looks` (`look`,
-  `frameOf`, `drawFrame`, `tinted`, `drawNine`, `edgedText`). Text lands on
-  whole pixels with a 1 px dark edge.
+- **`fx.ts`**: a thin layer over the foundation lane's `draw/looks.ts`
+  that remembers the frame's content (`useContent`), so `look(id)` works
+  in files whose entry points get no content; plus `drawFrame` and
+  `edgedText` (text on whole pixels with a 1 px dark edge).
 - Every look falls back to what was drawn before when its id is missing.
 
 ### Which fact selects which state (first match wins)
@@ -71,10 +72,9 @@ is this one (see the flag below).
 
 ## Deviations from the contract
 
-- `fx.ts` reads `content.looks` itself, loosely (any group with `image`
-  and `looks{id:{src,frames,fps}}`), instead of the foundation lane's
-  helper, which was not on `main` while this was written. When it lands,
-  `fx.ts` should become a thin call to it.
+- None in the shapes. The first push (8934a58) read `content.looks`
+  itself because the foundation lane was late; the second goes through
+  its helper.
 - `draw/impact.ts` gets no content in its signature; it reads looks
   through the content `drawEntities` last set (`useContent`).
 
@@ -124,6 +124,12 @@ is this one (see the flag below).
   carrier's own screen (net layer, not drawing).
 
 ## Not verified
+
+- Verified with throwaway numbered test art through the foundation lane's
+  real kinds (61f7676): every state above, moods 2 and 3, a bark, the
+  king's ribbon, held, hit flash, slash, hit star, dust, landing dust,
+  the player mark over a carried crate; at 844×390 and upright on an
+  iPhone 14 (390×844 @3×).
 
 - With the real art of the heroes, cast and props lanes (not on `main`
   while this was written): verified only with throwaway numbered test art.

@@ -33,8 +33,11 @@ export function drawAudience(g: CanvasRenderingContext2D, world: World, content:
     const x = Math.max(1, Math.min(g.canvas.width - w - 1, Math.round(cx - w / 2)));
     const y = Math.max(1, Math.min(g.canvas.height - h - 1, oy + Math.round(e.y) - 4 - h));
     // The `ribbon` nine-slice, a little roomier, with edged letters; else the plain ribbon.
-    if (drawNine(g, 'ribbon', x - 2, y - 2, w + 4, h + 4)) {
-      rows.forEach((r, i) => edgedText(g, r, x + 3, y + 2 + i * ROW, WORDS, RIBBON));
+    // Its frame is 2 px wider each side, so it is kept 3 px inside the screen.
+    const nx = Math.max(3, Math.min(g.canvas.width - w - 3, x));
+    const ny = Math.max(3, y);
+    if (drawNine(g, 'ribbon', nx - 2, ny - 2, w + 4, h + 4)) {
+      rows.forEach((r, i) => edgedText(g, r, nx + 3, ny + 2 + i * ROW, WORDS, RIBBON));
       continue;
     }
     g.fillStyle = EDGE;
