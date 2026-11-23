@@ -1,6 +1,6 @@
 # Brief: Step 2 feel, the simulation side
 
-Lead: `session_017WiGzGN9egot3JUvSMBBA9` (Step 2). Written 2026-11-23 ~12:10 UTC on `main` at d2459f0.
+Lead: `session_017WiGzGN9egot3JUvSMBBA9` (Step 2). Written 2026-11-23 11:42 UTC on `main` at d2459f0.
 A sibling brief, `handoff-prompts/step-2-feel-dials.md`, runs at the same time (the `?tune` panel); it reads the tuning declarations you add, so **every new number must be declared by its reader with a range and a `what:`** (that is what gives it a slider).
 
 ## 1 · The task, and what it moves

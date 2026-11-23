@@ -1,6 +1,6 @@
 # Brief: Step 2 feel, the dials (`?tune` panel)
 
-Lead: `session_017WiGzGN9egot3JUvSMBBA9` (Step 2). Written 2026-11-23 ~12:15 UTC on `main` at d2459f0.
+Lead: `session_017WiGzGN9egot3JUvSMBBA9` (Step 2). Written 2026-11-23 11:43 UTC on `main` at d2459f0.
 A sibling brief, `handoff-prompts/step-2-feel-sim.md`, runs at the same time and adds new feel numbers (gravity shaping, attack phases, beat scaling, floor bounce). **Build the panel from the declarations, never from a hand list**, so its numbers appear on their own as they land.
 
 ## 1 · The task, and what it moves
