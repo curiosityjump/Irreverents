@@ -123,19 +123,48 @@ them. `content/completion/<level id>.json` (`src/content/kinds/completion.ts`):
   `piece-found {level, piece, by, player}` and, on the last,
   `set-complete {level}`. It runs in a page's own world too, adding only
   what the server adds.
+- **A hidden place found** (push 2): system `completion-places` (605, just
+  before `level-explore`) emits `place-found {level, place, by, player}`
+  the first time a played body's middle is in a hidden room or a hidden
+  area that `world.levels` does not list yet; it keeps no state of its own,
+  so a kept game never flashes a place twice. The page flashes the level's
+  pie at the top for two seconds (read from the record, so a friend's find
+  in another room flashes too) and plays the pack's secret chime (moment
+  `secret-found`, `content/sounds/secret-found.json`, from the server's
+  copy of `place-found` or `piece-found` only). `INTENT:` nothing is drawn
+  in the room.
 - **Drawn** (`src/client/draw/completion.ts`, two lines in `render.ts`): a
   glint at every unfound placed piece in the room (`fx-pickup-glow` under
   the item, a one-pixel bob, a sparkle once a second), behind the bodies;
   a pop (`fx-pickup-get`) where one is found; and, drawn last over
-  everything, a row of the level's pieces at the top for two seconds, grey
-  with the found ones gold (`piece-grey`/`piece-gold` looks when cut,
-  plain shapes until then). `INTENT:` a glint marks a piece, never a way,
-  and no digit (`t-no-numbers`). `drawn.completion`: `{ glints, row, pops }`.
+  everything, a strip at the top for two seconds: the flashing pie (a
+  hidden place found) and/or a row of the level's pieces, grey with the
+  found ones gold (the cut 12x12 `piece-grey`/`piece-gold`, plain shapes
+  if missing). The same row is under the name on each discovered entrance
+  sign (`drawLevelSigns`, `drawn.levels.entrances[].pieces`) and on each
+  menu row (`.st-pieces`, `data-pieces="gold grey …"`). `INTENT:` a glint
+  marks a piece, never a way, and no digit (`t-no-numbers`).
+  `drawn.completion`: `{ glints, row, pops, place }`.
 - **Tonight (push 1):** `town-1` just over the shop's awning on the first
   street screen (all three heroes take it with a held Jump from under the
   awning; the grappler's box reaches it on a small hop); `town-2` the shop's
-  special good at column 16 (`look: "special"`). Two light crates on the
-  street at 31 and 34.
+  special good at column 16 (`look: "special"`, drawn with the cut
+  `goods-special`). Two light crates on the street at 31 and 34.
+- **Push 2:** the town's six: `town-3` behind the courtyard gate's bars
+  [27, 7], `town-4` in the undercroft's vault [2, 12] (behind the cracked
+  wall; a light crate, `undercroft-crate`, now lies in the passage at
+  column 24, `content/placements/undercroft.json`), `town-5` in the secret
+  chamber [9, 4], `town-6` on the gallery's balcony [7, 2]. The quarry's
+  five (`content/completion/iron-quarry.json`): `quarry-1` the road's
+  flyer ledge, `quarry-2` the ridge's crawl pocket at its far wall (a hop
+  over the drop), `quarry-3` the pit's out-of-reach ledge (wings only),
+  `quarry-4` the hidden cave's west step, `quarry-5` the depot's hoard
+  once banked. The Bandit Camp's one, `camp-1`, is its strongbox once
+  banked (`content/completion/bandit-camp.json`). Reached in scripted runs: `town-3` by
+  `step3-plates-one-and-a-weight`, `town-5` by `step3-secret-by-size`,
+  `town-6` by `step3-over-the-roofs`, `quarry-1` by
+  `step16-secret-ledge-flyer` (their own scenarios, which do not assert
+  it), and the four below.
 - Proof: `step14-find-awning-{grappler,infiltrator,flyer}` (a crate sitting
   on the piece's tile from tick 0 finds nothing; control watched to fail:
   the played-body test removed), `step14-find-special-good` (an ordinary
@@ -145,6 +174,15 @@ them. `content/completion/<level id>.json` (`src/content/kinds/completion.ts`):
   e2e `glint-seen`, `glint-found` (`scripts/e2e/glints.ts`, by touch, one
   held Jump; control `E2E_TOUCH_BREAK=jump`). Shots
   `docs/plan/step-14-shots/glint-*`, `found-*`.
+  Push 2: `step14-find-vault` (`placements: true`: the grappler throws the
+  undercroft's own crate from sixteen tiles back, the wall breaks, the
+  crate comes to rest on the piece and finds nothing, the grappler takes
+  it; control: no throw), `step14-place-found-once` (the undercroft on
+  tick 0, the vault once though entered twice; control: the "already
+  seen" test removed), `step14-find-pocket`, `step14-find-cave` (control:
+  the hop / the jump left out); e2e `place-flash` (Use at the cellar
+  doorway into the undercroft by touch; control `E2E_TOUCH_BREAK=interact`)
+  and `pieces-menu`. Shots `place-*`, `menu-pieces-sideways`.
 
 ## Proof
 

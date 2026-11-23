@@ -171,6 +171,13 @@ export function createMoments(content: Content, myPlayer: string, myId: string) 
             const moment = calmed ? 'calmed' : ev.to === 1 ? 'mood-calm' : ev.to === 2 ? 'mood-confused' : 'mood-rage';
             return at(ev.entity, ev, moment, mine);
           }
+          // Step 14 slice B: a hidden place found, or a piece. INTENT: from the server's copy only
+          // (`mine` false): the page's own world emits these too, and a friend's find is the world's.
+          case 'place-found':
+          case 'piece-found':
+            if (mine) return;
+            out.push({ moment: 'secret-found', room: me.room, x: null, y: null, key: hash(ev.tick, 'secret', String(ev.place ?? ev.piece)), tick: ev.tick, mine: ev.player === myPlayer, delay: 0 });
+            return;
           case 'part-broken': {
             const p = partAt(String(ev.room), String(ev.part));
             out.push({ moment: ev.look === 'window' ? 'break-window' : 'break-wall', room: String(ev.room), x: p?.x ?? null, y: p?.y ?? null, key: hash(ev.tick, 'break', String(ev.part)), tick: ev.tick, mine, delay: 0 });

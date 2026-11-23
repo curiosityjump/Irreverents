@@ -1,8 +1,12 @@
 {
-  "//": "DRAFT (Step 14 slice B, push 1): the town's pieces. Ids never say what they are or what the set builds. One lies just over the shop's awning on the first street screen (a hop from the street floor takes it); one is the shop's special good (taking it, seen or not, is the piece). More land in push 2.",
+  "//": "DRAFT (Step 14 slice B): the town's pieces. Ids never say what they are or what the set builds. Push 1: one lies just over the shop's awning on the first street screen (a hop from the street floor takes it); one is the shop's special good (taking it, seen or not, is the piece). Push 2: one behind the courtyard gate's bars (seen through them, reached when a weight holds a plate); one in the undercroft's vault, behind the cracked wall (the undercroft's own crate, thrown, breaks it); one in the secret chamber up the one-tile crawl; one on the gallery's balcony (the floor is kept clear for pedestals). Six in all; the count and every tile are a first guess (docs/decisions-log.md, 'Step 14 slice B').",
   "id": "castle-town",
   "pieces": [
     { "id": "town-1", "room": "castle-street", "tile": [8, 7], "look": "item-gear" },
-    { "id": "town-2", "from": { "thing": "street-goods-rare" } }
+    { "id": "town-2", "from": { "thing": "street-goods-rare" } },
+    { "id": "town-3", "room": "courtyard", "tile": [27, 7], "look": "item-lens" },
+    { "id": "town-4", "room": "undercroft", "tile": [2, 12], "look": "item-spring" },
+    { "id": "town-5", "room": "undercroft", "tile": [9, 4], "look": "item-pipe" },
+    { "id": "town-6", "room": "hall-gallery", "tile": [7, 2], "look": "item-hook" }
   ]
 }

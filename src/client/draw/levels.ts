@@ -6,6 +6,7 @@ import type { PlayerView } from './entities.ts';
 import { drawText, textWidth, useContent } from './fx.ts';
 import { drawLook, look } from './looks.ts';
 import { drawnBanner, queueBanner } from './banner.ts';
+import { drawPieces, levelPieces, piecesWidth } from './completion.ts';
 
 // Step 14 slice A (docs/mechanisms/levels.md): the owner, playing, "Not
 // finding clear 'level entries' with discovered indicators etc" (D-078,
@@ -43,6 +44,8 @@ export interface DrawnEntrance {
   name: string | null;
   /** The pie drawn, 0 (empty ring) to 4 (full). */
   quarters: number;
+  /** Step 14 slice B (additive): the level's pieces drawn under the name, true when found; absent when none are drawn (not discovered, or no set). */
+  pieces?: boolean[];
 }
 
 let entrances: DrawnEntrance[] = [];
@@ -85,14 +88,18 @@ export function drawLevelEntrances(g: CanvasRenderingContext2D, world: World, co
         g.fillRect(x + 5, y + 6, aw - 10, ah - 6);
       }
       const name = p.discovered ? level.name : null;
+      // Step 14 slice B: once discovered, the level's pieces in a row under its name, grey with the found ones gold (no digit).
+      const pieces = name ? levelPieces(world, content, level.id) : null;
       // DRAFT: 12 px above the art, clear of the doorway's bobbing Go-in arrow (draw/door-hint.ts, 10 px up).
-      signs.push({ name, quarters: name ? p.quarters : 0, mid: x + Math.floor(aw / 2), bottom: y - GAP });
-      entrances.push({ level: level.id, room: roomId, door: door.id, look: art ? id : '', discovered: p.discovered, name, quarters: name ? p.quarters : 0 });
+      signs.push({ name, quarters: name ? p.quarters : 0, mid: x + Math.floor(aw / 2), bottom: y - GAP, pieces });
+      entrances.push({ level: level.id, room: roomId, door: door.id, look: art ? id : '', discovered: p.discovered, name, quarters: name ? p.quarters : 0, ...(pieces ? { pieces } : {}) });
     }
   }
 }
 
-let signs: { name: string | null; quarters: number; mid: number; bottom: number }[] = [];
+let signs: { name: string | null; quarters: number; mid: number; bottom: number; pieces: boolean[] | null }[] = [];
+/** Step 14 slice B: the height the pieces' row adds under a sign's name (12 px pieces and a gap). */
+const ROW_H = 14;
 
 /**
  * The signs over this room's entrances (the name and pie, or the empty ring
@@ -104,8 +111,9 @@ let signs: { name: string | null; quarters: number; mid: number; bottom: number 
 export function drawLevelSigns(g: CanvasRenderingContext2D, content: Content): void {
   const placed: { x: number; y: number; w: number; h: number }[] = [];
   for (const s of [...signs].sort((a, b) => a.mid - b.mid)) {
-    const w = s.name ? textWidth(g, s.name, 'light') + PIE + 9 : PIE;
-    const h = s.name ? PIE + 4 : PIE;
+    const extra = s.name && s.pieces ? ROW_H : 0;
+    const w = s.name ? Math.max(textWidth(g, s.name, 'light') + PIE + 9, extra ? piecesWidth(s.pieces!.length) + 6 : 0) : PIE;
+    const h = s.name ? PIE + 4 + extra : PIE;
     const x = Math.round(s.mid - w / 2);
     let y = s.bottom - h;
     for (let moved = true; moved; ) {
@@ -118,14 +126,15 @@ export function drawLevelSigns(g: CanvasRenderingContext2D, content: Content): v
       }
     }
     placed.push({ x, y, w, h });
-    if (s.name) sign(g, content, s.name, s.quarters, x, y, w, h);
+    if (s.name) sign(g, content, s.name, s.quarters, x, y, w, h - extra, extra);
     else pie(g, content, 0, x, y);
+    if (s.name && s.pieces && extra) drawPieces(g, content, s.pieces, x + 3, y + h - ROW_H);
   }
 }
 
 /** The name and the pie on one dark plate. */
-function sign(g: CanvasRenderingContext2D, content: Content, name: string, quarters: number, x: number, y: number, w: number, h: number): void {
-  plate(g, x, y, w, h);
+function sign(g: CanvasRenderingContext2D, content: Content, name: string, quarters: number, x: number, y: number, w: number, h: number, below = 0): void {
+  plate(g, x, y, w, h + below);
   if (!drawText(g, name, x + 3, y + Math.floor((h - 10) / 2) + 1, 'light')) {
     g.font = 'bold 8px monospace';
     g.textBaseline = 'top';
@@ -143,6 +152,11 @@ function plate(g: CanvasRenderingContext2D, x: number, y: number, w: number, h: 
   g.fillRect(x, y, w, h);
   g.fillStyle = PLATE;
   g.fillRect(x + 1, y + 1, w - 2, h - 2);
+}
+
+/** Step 14 slice B (additive): the pie, for the place-found flash (draw/completion.ts). */
+export function drawPie(g: CanvasRenderingContext2D, content: Content, quarters: number, x: number, y: number): void {
+  pie(g, content, quarters, x, y);
 }
 
 /** A completion pie: the look `level-pie-<n>`, else a ring drawn in its colours. */

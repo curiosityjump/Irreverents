@@ -131,6 +131,46 @@ function pieImage(content: Content, quarters: number, cssPerPixel: number): HTML
   return span;
 }
 
+/**
+ * Step 14 slice B: a level's pieces in a row, grey with the found ones gold
+ * (the `piece-grey` / `piece-gold` looks), for a menu row. INTENT: pieces,
+ * never a digit; the label says only how many are found, for a screen reader.
+ */
+function piecesImage(content: Content, pieces: boolean[], cssPerPixel: number): HTMLElement {
+  const span = document.createElement('span');
+  span.className = 'st-pieces';
+  span.setAttribute('role', 'img');
+  span.setAttribute('aria-label', pieces.every(Boolean) ? 'every piece found' : pieces.some(Boolean) ? 'some pieces found' : 'no pieces found');
+  span.dataset.pieces = pieces.map((p) => (p ? 'gold' : 'grey')).join(' ');
+  const draw = (): boolean => {
+    const grey = look(content, 'piece-grey');
+    const gold = look(content, 'piece-gold');
+    if (!grey || !gold) return false;
+    const dpr = window.devicePixelRatio || 1;
+    const k = Math.max(1, Math.round(cssPerPixel * dpr));
+    const c = document.createElement('canvas');
+    const step = grey.w + 1;
+    c.width = (pieces.length * step - 1) * k;
+    c.height = grey.h * k;
+    c.style.width = `${c.width / dpr}px`;
+    c.style.height = `${c.height / dpr}px`;
+    const g = c.getContext('2d');
+    if (!g) return false;
+    g.imageSmoothingEnabled = false;
+    pieces.forEach((on, i) => {
+      const p = on ? gold : grey;
+      g.drawImage(p.img, p.x, p.y, p.w, p.h, i * step * k, 0, p.w * k, p.h * k);
+    });
+    span.replaceChildren(c);
+    return true;
+  };
+  if (!draw()) {
+    const t = setInterval(() => draw() && clearInterval(t), 100);
+    setTimeout(() => clearInterval(t), 20000);
+  }
+  return span;
+}
+
 // ---- Look ----------------------------------------------------------------
 
 const CSS = `
@@ -171,7 +211,8 @@ const CSS = `
 #gone .st-say { font-size: 16px; line-height: 1.4; }
 .st-link { font: 500 13px/1.35 ui-monospace, "SF Mono", Menlo, monospace; color: var(--pale); word-break: break-all; text-align: center; -webkit-user-select: text; user-select: text; }
 #game-menu .st-levels { display: flex; flex-direction: column; gap: 6px; }
-#game-menu .st-level { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 4px 10px; min-height: 32px; border-radius: 6px; background: rgba(34, 31, 68, .85); }
+#game-menu .st-level { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding: 4px 10px; min-height: 32px; border-radius: 6px; background: rgba(34, 31, 68, .85); }
+#game-menu .st-level .st-pieces { flex-basis: 100%; display: flex; padding-bottom: 2px; }
 #game-menu .st-pie { display: inline-flex; width: 24px; height: 24px; border-radius: 50%; }
 #game-menu .st-col { display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 330px; align-items: stretch; }
 #game-menu .st-code { align-self: center; margin: 4px 0 8px; }
@@ -385,7 +426,7 @@ export interface MenuOptions {
   /** Leaving on purpose, before the page goes to the start screen. */
   leave(): void;
   /** Step 14 slice A (additive): the levels discovered in this world, read each time the panel opens. */
-  levels?(): { id: string; name: string; quarters: number }[];
+  levels?(): { id: string; name: string; quarters: number; pieces?: boolean[] }[];
 }
 
 /**
@@ -456,7 +497,7 @@ export function setUpMenu(opts: MenuOptions): void {
     const found = opts.levels?.() ?? [];
     places.replaceChildren(
       ...(found.length ? [el('div', { class: 'st-label' }, words(content, 'Places found', 2))] : []),
-      ...found.map((l) => el('div', { class: 'st-level', 'data-level': l.id, 'data-quarters': String(l.quarters) }, words(content, l.name, 2), pieImage(content, l.quarters, 2))),
+      ...found.map((l) => el('div', { class: 'st-level', 'data-level': l.id, 'data-quarters': String(l.quarters) }, words(content, l.name, 2), pieImage(content, l.quarters, 2), ...(l.pieces ? [piecesImage(content, l.pieces, 2)] : []))),
     );
   };
   col.append(places, say, back, close);

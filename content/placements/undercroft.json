@@ -1,0 +1,8 @@
+{
+  "//": "DRAFT (Step 14 slice B, push 2): one light crate in the passage near the stair up to the street (cellar-up, column 27), well away from the cracked wall (column 4): before it, nothing in the undercroft could be thrown at the wall, so the vault (and the piece in it) needed a body carried down from the street, which a door lets go of. The id is permanent; the column is a first guess.",
+  "id": "undercroft",
+  "room": "undercroft",
+  "place": [
+    { "id": "undercroft-crate", "character": "crate", "tile": [24, 12] }
+  ]
+}

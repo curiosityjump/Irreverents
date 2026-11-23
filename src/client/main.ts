@@ -17,7 +17,7 @@ import { takeWords } from './draw/fx.ts';
 import { drawnSignalers } from './draw/outpost.ts';
 import { drawnCantina } from './draw/cantina.ts';
 import { drawnLevels } from './draw/levels.ts';
-import { drawnCompletion } from './draw/completion.ts';
+import { drawnCompletion, levelPieces } from './draw/completion.ts';
 import { drawnBanner } from './draw/banner.ts';
 import { drawnHud } from './draw/hud.ts';
 import { drawnSight, watchSightEvents } from './draw/sight.ts';
@@ -134,7 +134,7 @@ const debug = {
     /** Step 14 slice A: the level entrances this frame drew (art, name or none, pie) and the banner's name, if one is up (src/client/draw/levels.ts). */
     levels: { entrances: [], banner: null } as ReturnType<typeof drawnLevels>,
     /** Step 14 slice B: the pieces' glints this frame drew, the found row while it shows, and pieces popping (src/client/draw/completion.ts). */
-    completion: { glints: [], row: null, pops: [] } as ReturnType<typeof drawnCompletion>,
+    completion: { glints: [], row: null, pops: [], place: null } as ReturnType<typeof drawnCompletion>,
     /** Step 19: the party plate (faces, the viewer's slots) and the banner up, if any (src/client/draw/hud.ts, banner.ts). */
     hud: null as ReturnType<typeof drawnHud>,
     banner: null as ReturnType<typeof drawnBanner>,
@@ -327,7 +327,9 @@ function play(worldName: string): void {
     // Step 14 slice A: a row per discovered level in the menu (src/client/start.ts).
     levels: () => Object.values(content.levels ?? {}).flatMap((l) => {
       const p = levelProgress(net.world, content, l.id);
-      return p.discovered ? [{ id: l.id, name: l.name, quarters: p.quarters }] : [];
+      // Step 14 slice B: and its pieces, grey with the found ones gold.
+      const pieces = levelPieces(net.world, content, l.id);
+      return p.discovered ? [{ id: l.id, name: l.name, quarters: p.quarters, ...(pieces ? { pieces } : {}) }] : [];
     }),
   });
 }

@@ -104,6 +104,7 @@ export const MOMENTS: Record<string, string> = {
   'switch-refused': 'switch pressed and nothing changed (switch-refused)',
   'ui-tap': 'the sound button turned sound on',
   'clean-getaway': 'Step 19: a prize carried out of its place with nobody of the place ever having seen the heroes (heard everywhere)',
+  'secret-found': 'a hidden place entered for the first time, or a piece of a set found (place-found, piece-found; Step 14 slice B)',
 };
 
 const NOTE = /^([A-G])(#|b)?([0-8])$/;

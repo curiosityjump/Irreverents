@@ -1,0 +1,142 @@
+{
+  "id": "step14-place-found-once",
+  "gate": null,
+  "proves": "Step 14 slice B (D-079; the owner: 'no hidden places to explore'): the first time a hero someone plays is inside a hidden place, place-found is emitted once: the undercroft (a hidden room) on the first tick, the vault (a hidden area) when the grappler first walks in (through the wall the undercroft's crate broke, as in step14-find-vault), and not again when they walk back out past the wall and in a second time. Control (watched to fail, 2026-11-23): completion-places with its 'already seen' test removed emits for the vault on every tick inside it.",
+  "room": "undercroft",
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 3
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 40,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 45,
+      "to": 48,
+      "hold": [
+        "grab"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 50,
+      "to": 120,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 125,
+      "to": 128,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 200,
+      "to": 400,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 405,
+      "to": 470,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 480,
+      "to": 560,
+      "x": -1
+    }
+  ],
+  "ticks": 580,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "place-found",
+      "between": [
+        0,
+        0
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "where": {
+        "place": "undercroft",
+        "player": "a"
+      }
+    },
+    {
+      "fact": "event-where",
+      "event": "place-found",
+      "between": [
+        1,
+        580
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "where": {
+        "place": "undercroft/vault",
+        "player": "a"
+      }
+    },
+    {
+      "fact": "event-where",
+      "event": "place-found",
+      "between": [
+        380,
+        400
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "where": {
+        "place": "undercroft/vault"
+      }
+    },
+    {
+      "fact": "standing-on-tile",
+      "player": "a",
+      "at": 480,
+      "tile": [
+        8,
+        13
+      ]
+    },
+    {
+      "fact": "standing-on-tile",
+      "player": "a",
+      "at": 580,
+      "tile": [
+        1,
+        13
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "place-found",
+      "between": [
+        401,
+        580
+      ],
+      "count": [
+        0,
+        0
+      ]
+    }
+  ],
+  "placements": true
+}

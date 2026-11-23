@@ -1,0 +1,72 @@
+{
+  "id": "step14-find-pocket",
+  "gate": null,
+  "proves": "Step 14 slice B (D-078): the quarry's crawl-pocket piece is reached by the infiltrator's own secret: through the ridge's one-tile crawl (as in step16-secret-crawl-infiltrator) into the pocket, then a hop west over the pocket's drop to the piece at its far wall. Control (watched to fail, 2026-11-23): the hop left out, and the piece is not found.",
+  "room": "quarry-ridge",
+  "players": [
+    {
+      "id": "a",
+      "character": "infiltrator",
+      "spawn": 1
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 110,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 130,
+      "to": 170,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 132,
+      "to": 150,
+      "hold": [
+        "jump"
+      ]
+    }
+  ],
+  "ticks": 200,
+  "expect": [
+    {
+      "fact": "found",
+      "level": "iron-quarry",
+      "between": [
+        0,
+        140
+      ],
+      "pieces": []
+    },
+    {
+      "fact": "event-where",
+      "event": "piece-found",
+      "between": [
+        140,
+        170
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "where": {
+        "level": "iron-quarry",
+        "piece": "quarry-2",
+        "player": "a"
+      }
+    },
+    {
+      "fact": "found",
+      "level": "iron-quarry",
+      "at": 200,
+      "pieces": [
+        "quarry-2"
+      ]
+    }
+  ]
+}

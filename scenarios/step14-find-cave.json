@@ -1,0 +1,72 @@
+{
+  "id": "step14-find-cave",
+  "gate": null,
+  "proves": "Step 14 slice B (D-078): the hidden cave's piece, on the step at the cave's west end, is reached by walking in from the pit (as in step16-hidden-cave-grappler) and on west with one jump up the step. Control (watched to fail, 2026-11-23): the jump left out, and the piece is not found.",
+  "room": "quarry-pit",
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 60,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 70,
+      "to": 340,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 295,
+      "to": 315,
+      "hold": [
+        "jump"
+      ]
+    }
+  ],
+  "ticks": 360,
+  "expect": [
+    {
+      "fact": "found",
+      "level": "iron-quarry",
+      "between": [
+        0,
+        320
+      ],
+      "pieces": []
+    },
+    {
+      "fact": "event-where",
+      "event": "piece-found",
+      "between": [
+        320,
+        340
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "where": {
+        "level": "iron-quarry",
+        "piece": "quarry-4",
+        "player": "a"
+      }
+    },
+    {
+      "fact": "found",
+      "level": "iron-quarry",
+      "at": 360,
+      "pieces": [
+        "quarry-4"
+      ]
+    }
+  ]
+}

@@ -17,7 +17,7 @@ const BARK_WIDTH = 119;
 const LOOKS = {
   counter: { w: 16, h: 12, color: '#8d6e63' },
   goods: { w: 6, h: 8, color: '#06d6a0' },
-  // Step 14 slice B: the shop's special good, until a `shop-special` look lands (drawn from the cut `gem` look meanwhile).
+  // Step 14 slice B: the shop's special good, if neither its cut look (`goods-special`) nor `gem` is loaded.
   special: { w: 8, h: 10, color: '#ff4fa3' },
   // Step 19: a prize's strongbox, drawn from the cut `chest-iron-closed` look meanwhile.
   strongbox: { w: 14, h: 10, color: '#7d8597' },
@@ -151,8 +151,8 @@ export function drawNpcs(g: CanvasRenderingContext2D, world: World, content: Con
     if (def?.look === 'bell') continue;
     const name = def?.look ?? 'goods';
     // The `shop-counter` / `shop-goods` looks, bottom-centre on the tile; else the plain block.
-    // Step 14 slice B: the special good uses the approved `gem` cut until a `shop-special` look exists.
-    const art = look(`shop-${name}`) ?? (name === 'special' ? look('gem') : name === 'strongbox' ? look('chest-iron-closed') : null);
+    // Step 14 slice B: the special good is the cut `goods-special` (8d15d9c; the crown in its case), `gem` if that is missing.
+    const art = look(`shop-${name}`) ?? (name === 'special' ? (look('goods-special') ?? look('gem')) : name === 'strongbox' ? look('chest-iron-closed') : null);
     if (art) {
       drawFrame(g, art, frameOf(art, world.tick, true), ox + Math.round(e.x + (room.tile - art.w) / 2), oy + Math.round(e.y + room.tile - art.h));
       continue;

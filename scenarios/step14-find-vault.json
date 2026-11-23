@@ -1,0 +1,120 @@
+{
+  "id": "step14-find-vault",
+  "gate": null,
+  "proves": "Step 14 slice B (D-078, doc 04 'Visible inaccessible curiosities'): the undercroft's own light crate, placed near the stair up (column 24), is the way into the vault: the grappler walks west, grabs it, carries it to column 20 (sixteen tiles from the cracked wall) and throws it; it breaks the wall, flies on into the vault and comes to rest on the piece's tile, which finds nothing (only a hero someone plays finds); the grappler walks in and takes the piece, and the vault (a hidden area) is found once. Control (watched to fail, 2026-11-23): the throw left out, the wall stays whole, the grappler stops at it, and the piece is never found.",
+  "room": "undercroft",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 3
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 40,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 45,
+      "to": 48,
+      "hold": [
+        "grab"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 50,
+      "to": 120,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 125,
+      "to": 128,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 200,
+      "to": 400,
+      "x": -1
+    }
+  ],
+  "ticks": 420,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "part-broken",
+      "between": [
+        125,
+        175
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "where": {
+        "room": "undercroft",
+        "part": "vault-wall",
+        "by": "undercroft-crate"
+      }
+    },
+    {
+      "fact": "found",
+      "level": "castle-town",
+      "between": [
+        0,
+        380
+      ],
+      "pieces": []
+    },
+    {
+      "fact": "event-where",
+      "event": "place-found",
+      "between": [
+        0,
+        420
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "where": {
+        "place": "undercroft/vault",
+        "player": "a"
+      }
+    },
+    {
+      "fact": "event-where",
+      "event": "piece-found",
+      "between": [
+        380,
+        420
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "where": {
+        "level": "castle-town",
+        "piece": "town-4",
+        "player": "a"
+      }
+    },
+    {
+      "fact": "found",
+      "level": "castle-town",
+      "at": 420,
+      "pieces": [
+        "town-4"
+      ]
+    }
+  ]
+}

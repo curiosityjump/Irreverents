@@ -310,6 +310,18 @@ No code. The page draws the horn on the post by itself.
   room, tx, ty)`, never `room.cells` directly, by anything that asks
   "is this solid *now*" (physics does). `room.cells` is the room file.
 
+## Places and pieces: the state and events other steps read (Step 14)
+
+- **`world.levels`** `{ <level>: { seen: [<room> | <room>/<area>] } }` and
+  **`world.found`** `{ <level>: [<piece id>] }`: top-level, only grow,
+  kept with a kept game; read both with a default (`docs/mechanisms/levels.md`).
+- **`place-found: { level, place, by, player }`**: a hero someone plays is
+  inside a hidden room or hidden area for the first time in this world.
+- **`piece-found: { level, piece, by, player }`** (`by`/`player` null when
+  the piece came from a thing taken or a prize banked) and, on the last of
+  a set, **`set-complete: { level }`**. All three are world events
+  (`snap.ev`), so a friend in another room hears and sees them.
+
 ## Bodies: the events and state other steps read (Step 2)
 
 `DRAFT:` names fixed 2026-11-23 04:40 UTC by the Step 2 lead with the

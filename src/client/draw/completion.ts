@@ -2,6 +2,9 @@ import type { Content } from '../../content/types.ts';
 import type { World } from '../../sim/types.ts';
 import type { PlayerView } from './entities.ts';
 import { drawLook, frameAt, look } from './looks.ts';
+import { levelProgress } from '../../sim/levels.ts';
+import { drawPie } from './levels.ts';
+import { safeView } from './fx.ts';
 
 // Step 14 slice B (docs/mechanisms/levels.md, "Pieces"): the owner, after
 // playing, "no hidden places to explore". Every unfound placed piece in this
@@ -29,9 +32,14 @@ export interface DrawnCompletion {
   row: { level: string; pieces: boolean[] } | null;
   /** Pieces popping now (found a moment ago). */
   pops: string[];
+  /** Push 2: the level whose pie flashes at the top because a hidden place of it was just found, and the pie drawn; null when none. */
+  place: { level: string; quarters: number } | null;
 }
 
-let last: DrawnCompletion = { glints: [], row: null, pops: [] };
+let last: DrawnCompletion = { glints: [], row: null, pops: [], place: null };
+/** Hidden places this page has seen found (`<level>:<place>`); null until the first frame (what was found before this page came does not flash). */
+let knownPlaces: Set<string> | null = null;
+let flash: { level: string; until: number } | null = null;
 /** Pieces this page has seen found; null until the first frame (what was found before this page came does not pop). */
 let known: Set<string> | null = null;
 let row: { level: string; until: number } | null = null;
@@ -44,7 +52,7 @@ export function drawnCompletion(): DrawnCompletion {
 
 /** Glints and pops in the room, behind the bodies; then the found row, as screen furniture. */
 export function drawCompletion(g: CanvasRenderingContext2D, world: World, content: Content, roomId: string, ox: number, oy: number, viewW: number, view?: PlayerView): void {
-  const out: DrawnCompletion = { glints: [], row: null, pops: [] };
+  const out: DrawnCompletion = { glints: [], row: null, pops: [], place: null };
   last = out;
   const sets = content.completion;
   const room = content.rooms[roomId];
@@ -118,37 +126,102 @@ export function drawCompletion(g: CanvasRenderingContext2D, world: World, conten
  */
 export function drawCompletionRow(g: CanvasRenderingContext2D, world: World, content: Content, viewW: number, view?: PlayerView): void {
   const sets = content.completion;
-  if (!sets || !view) return;
+  if (!view) return;
   const frame = view.frame;
   const out = last;
-  if (row && frame < row.until) {
-    const set = sets[row.level];
-    if (set) {
-      const have = world.found?.[row.level] ?? [];
-      const pieces = set.pieces.map((p) => have.includes(p.id));
-      out.row = { level: row.level, pieces };
-      drawRow(g, content, pieces, viewW);
-    }
+  // Push 2: a hidden place found (D-079: "Hidden rooms should contribute to the percentage"): the
+  // level's pie flashes here, with the chime (src/client/audio/moments.ts, place-found). Read from
+  // the record, so a friend's find in another room flashes too. INTENT: nothing is drawn in the
+  // room itself, and the pie never says which place.
+  const places = hiddenSeen(world, content);
+  if (knownPlaces === null) knownPlaces = new Set(places);
+  for (const key of places) {
+    if (knownPlaces.has(key)) continue;
+    knownPlaces.add(key);
+    flash = { level: key.slice(0, key.indexOf(':')), until: frame + ROW_FRAMES };
+  }
+  if (flash && frame >= flash.until) flash = null;
+  let pieces: boolean[] | null = null;
+  if (row && frame < row.until && sets?.[row.level]) {
+    const have = world.found?.[row.level] ?? [];
+    pieces = sets[row.level]!.pieces.map((p) => have.includes(p.id));
+    out.row = { level: row.level, pieces };
   } else row = null;
+  let pie: number | null = null;
+  if (flash) {
+    pie = levelProgress(world, content, flash.level).quarters;
+    out.place = { level: flash.level, quarters: pie };
+  }
+  if (pieces || pie !== null) drawStrip(g, content, pie, pieces ?? [], viewW);
 }
 
-/** The row of pieces: grey, the found ones gold, centred at the top under the level banner's place. */
-function drawRow(g: CanvasRenderingContext2D, content: Content, pieces: boolean[], viewW: number): void {
-  const S = 10;
-  const w = pieces.length * S + 6;
+/** `<level>:<place>` for every hidden room and hidden area the world's record has seen. */
+function hiddenSeen(world: World, content: Content): string[] {
+  const out: string[] = [];
+  for (const [level, rec] of Object.entries(world.levels ?? {})) {
+    for (const place of rec.seen) {
+      const [roomId, areaId] = place.split('/');
+      const room = content.rooms[roomId!];
+      if (!room) continue;
+      const hidden = areaId === undefined ? room.hidden : room.areas.some((a) => a.id === areaId && a.hidden);
+      if (hidden) out.push(`${level}:${place}`);
+    }
+  }
+  return out;
+}
+
+/** Piece looks are 12 by 12 (the P05 HUD sheet's bottom row, cut at 8d15d9c). */
+const S = 12;
+const PIE_W = 12;
+
+/**
+ * The strip at the top, under the level banner's place: the flashing pie
+ * (a hidden place found), then the row of pieces, grey with the found ones
+ * gold. Either may be alone.
+ */
+function drawStrip(g: CanvasRenderingContext2D, content: Content, pie: number | null, pieces: boolean[], viewW: number): void {
+  const rowW = pieces.length ? pieces.length * (S + 1) - 1 : 0;
+  const pieW = pie === null ? 0 : PIE_W;
+  const inner = pieW + rowW + (pieW && rowW ? 5 : 0);
+  const w = inner + 6;
   const x = Math.round((viewW - w) / 2);
-  const y = 26;
+  // DRAFT: just under the banner queue's line (draw/banner.ts, 6 px down, 16 tall). Kept here rather
+  // than in the queue, which shows words only; this strip is pictures (a pie, pieces).
+  const y = 26 + safeView.top;
   g.fillStyle = INK;
   g.fillRect(x, y, w, S + 6);
   g.fillStyle = '#221f44';
   g.fillRect(x + 1, y + 1, w - 2, S + 4);
+  let px = x + 3;
+  if (pie !== null) {
+    drawPie(g, content, pie, px, y + 3);
+    px += PIE_W + 5;
+  }
+  drawPieces(g, content, pieces, px, y + 3);
+}
+
+/** A row of piece looks from (x, y), grey with the found ones gold; plain shapes if the looks are missing. Also the entrance signs' row. */
+export function drawPieces(g: CanvasRenderingContext2D, content: Content, pieces: boolean[], x: number, y: number): void {
   pieces.forEach((gold, i) => {
-    const px = x + 3 + i * S;
-    if (drawLook(g, content, gold ? 'piece-gold' : 'piece-grey', px, y + 3)) return;
+    const px = x + i * (S + 1);
+    if (drawLook(g, content, gold ? 'piece-gold' : 'piece-grey', px, y)) return;
     g.fillStyle = INK;
-    g.fillRect(px, y + 3, S - 1, S);
+    g.fillRect(px, y + 1, S - 1, S - 1);
     g.fillStyle = gold ? GOLD : GREY;
-    g.fillRect(px + 1, y + 4, S - 3, S - 2);
-    g.fillRect(px + 3, y + 2, 3, 2);
+    g.fillRect(px + 1, y + 2, S - 3, S - 3);
+    g.fillRect(px + 4, y, 3, 2);
   });
+}
+
+/** The width drawPieces takes for n pieces. */
+export function piecesWidth(n: number): number {
+  return n ? n * (S + 1) - 1 : 0;
+}
+
+/** For a level, each of its pieces in order, true when the world has found it; null when the level has no set. */
+export function levelPieces(world: World, content: Content, level: string): boolean[] | null {
+  const set = content.completion?.[level];
+  if (!set) return null;
+  const have = world.found?.[level] ?? [];
+  return set.pieces.map((p) => have.includes(p.id));
 }

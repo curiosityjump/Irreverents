@@ -1,0 +1,11 @@
+{
+  "//": "DRAFT (Step 14 slice B, push 2): the quarry's pieces. Ids never say what they are or what the set builds. One on the road's flyer ledge; one in the ridge's crawl pocket; one on the pit's out-of-reach ledge (seen from the pit floor, not reachable until wings: handoff-prompts/loop-powers.md); one in the hidden cave; one is the depot's hoard once carried out (a prize: world.banked, the heist slice's field, read with a default). Five in all; the count and every tile are a first guess (docs/decisions-log.md, 'Step 14 slice B').",
+  "id": "iron-quarry",
+  "pieces": [
+    { "id": "quarry-1", "room": "quarry-road", "tile": [52, 4], "look": "item-crystal" },
+    { "id": "quarry-2", "room": "quarry-ridge", "tile": [32, 10], "look": "item-ring" },
+    { "id": "quarry-3", "room": "quarry-pit", "tile": [6, 7], "look": "item-feather" },
+    { "id": "quarry-4", "room": "quarry-cave", "tile": [3, 11], "look": "item-book" },
+    { "id": "quarry-5", "from": { "prize": "depot-hoard" } }
+  ]
+}
