@@ -133,24 +133,102 @@ In `src/content/kinds/rooms.ts` (content only):
   can be (every party member in `content/party.json`).
 
 In `src/sim/check-rooms.ts` (needs the simulation): a part of an unknown
-kind.
+kind, and the way-out check below.
 
 **Standalone rooms.** A room with no doors is a test room (`graybox-hall`,
 other steps' scratch rooms): it is exempt from the map rules, never keyed
 on a name. The spawn and row rules still apply to it.
+
+## The way-out check: "there is always a way out", measured
+
+For every room that has doors, and **for every character a player can
+be** (the members in `content/party.json`), `npm run check` and `npm run
+build` refuse:
+
+- **no way out**: a tile a body could stand on from which it can never
+  reach a door of its room;
+- **no way back**: a tile from which it can leave but never get back to
+  the start room (a one-way drop into a dead end);
+- a room with doors that cannot be reached from the start room at all;
+- a start room with no doors while other rooms have them.
+
+Each message names the room file, the tile and the character; neighbouring
+tiles are reported once ("and 9 more tile(s) beside it").
+
+**How it knows (`DRAFT:` the model).**
+
+- *Where a body could be* is **over-estimated**: every tile a body could
+  stand on that is joined to a spawn or a door through tiles that are not
+  solid, whether or not anyone could walk there. Being thrown somewhere is
+  the game working, so "nobody can reach that pit" is no defence.
+- *What a body can do from there* is **under-estimated**, and nothing
+  about it is hard-coded: from each such place the check **plays a fixed
+  list of simple moves through the real `step()`**, starting from standing
+  still, with the character's own verbs and tuning numbers: run left or
+  right for 8 to 80 ticks, with no jump, a jump from the start, a jump
+  after a short run-up, or jump tapped again and again (which is how a
+  flyer flaps); jump on the spot; push the stick up (a doorway). When the
+  body comes to rest, the place it rests is one move away. Retune a jump,
+  resize a body or add a verb and the check follows without an edit.
+- So a way out is never claimed that the simulation did not actually
+  perform. A real way out that needs a cleverer move than the list has
+  (a chain of precise mid-air turns, another player's help, a thrown
+  crate) is reported as missing: the check errs toward "trapped".
+- The start room is `content/game.json`'s `mapStart` if given, else
+  `startRoom`. `mapStart` exists only while the game still starts in the
+  standalone test hall; delete it when `startRoom` becomes a room with
+  doors.
+
+**Limits.**
+
+- A body at rest is snapped to the nearest standing place on its floor,
+  at most a tile away: the one inexact step.
+- Standing places are a body centred on a column (and, for a body wider
+  than a tile, centred between two columns). A spot that only fits a body
+  at some other offset is not seen.
+- Every system runs during the check with one body alone in the world: a
+  gate that needs two players is a wall to it. So a room behind such a
+  gate needs another way in that one body can take, which is the owner's
+  rule anyway (solo is never locked out by headcount).
+- **A part that can block is a wall to the check.** A kind declared with
+  `blocks: true` (a shut gate, an unbroken wall) has its tiles counted as
+  solid for the whole check, whatever its system would do: pessimistic on
+  purpose. Controls: `blocking-part-seals-the-way` and
+  `open-part-is-accepted` (a control may declare control-only kinds with
+  `controlKinds`). A kind without `blocks` behaves as its system makes it
+  with one body alone in the world.
+- It costs about two seconds of `npm run check` for two rooms and three
+  characters, and grows with rooms × characters × standing places. If it
+  gets slow, shorten `HOLDS` before anything cleverer.
 
 ## The controls
 
 `controls/rooms/<name>.json` holds broken rooms: `{ "expect": [text…],
 "rooms": { "<id>": <room file> } }`. `npm run check` ("room controls")
 lays each over the real content and requires the check to refuse it with
-one problem line containing every `expect` text. A control that starts
+one problem line containing every `expect` text. A control with its own
+`"game"` is a whole map of its own (the real rooms and placements are
+left out), which is how the way-out controls work: `sealed-pit` (four
+tiles deep, no door), `one-way-drop-no-way-back`,
+`one-way-drop-into-a-loop` (a door is reachable, the start never again),
+`room-not-reachable-from-start`, `start-room-has-no-doors`. A control
+with `"accept": true` instead of `expect` must *pass*:
+`pit-three-deep-is-accepted` is the sealed pit one tile shallower, and
+pins that rule from the allowed side. A control that starts
 passing, or fails for another reason, fails the check. They are never
 files in `content/rooms/`. The same section checks `doorToward` against
 the real map. Add a control whenever you add a rule.
 
 The scenarios (`scenarios/step3-*.json`) each had a failing control
 watched once; the commit that added them lists which.
+
+## Drawing
+
+`src/client/draw/room.ts` draws an *enter* doorway as a dark arch and a
+*walk* door as nothing (it is the gap in the wall). `INTENT:` no arrows,
+no glow, no text on any door. It draws the room file's tiles; it does not
+yet draw tiles changed while the game runs (slice B's parts draw
+themselves).
 
 ## Limits, on purpose for now (`DRAFT:`)
 

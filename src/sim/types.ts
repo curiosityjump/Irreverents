@@ -130,6 +130,13 @@ export interface System {
 export interface PartRule {
   /** What this kind of part is, in a few words (shown when a room names an unknown kind). */
   what: string;
+  /**
+   * True when a part of this kind can stand in the way (a shut gate, an
+   * unbroken wall). The way-out check then counts its tiles as solid
+   * throughout: pessimistic, so "there is a way out" never leans on a part
+   * being open.
+   */
+  blocks?: boolean;
   /** Reports what is wrong with one placed part's parameters or tiles. `part` and `room` are the content's Part and Room. */
   check?(part: { id: string; kind: string; tiles: { tx: number; ty: number }[]; params: Record<string, unknown> }, room: { id: string; w: number; h: number }, fail: (message: string) => void): void;
 }

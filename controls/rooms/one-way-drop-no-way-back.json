@@ -1,0 +1,122 @@
+{
+  "//": "A hole in the floor drops into a cellar whose only door is the hole in its ceiling, out of reach: you can leave the cellar's room list but never get back to the start.",
+  "expect": [
+    "content/rooms/control-c.json",
+    "no way out"
+  ],
+  "rooms": {
+    "control-a": {
+      "id": "control-a",
+      "name": "Control",
+      "tile": 16,
+      "legend": {
+        "#": "solid",
+        "=": "oneway",
+        ".": "empty",
+        "1": "spawn",
+        "E": {
+          "door": "east"
+        },
+        "D": {
+          "door": "hole"
+        }
+      },
+      "rows": [
+        "############",
+        "#..........#",
+        "#..........#",
+        "#..........E",
+        "#.1........E",
+        "#####DD#####"
+      ],
+      "doors": [
+        {
+          "id": "east",
+          "use": "walk",
+          "to": {
+            "room": "control-b",
+            "door": "west"
+          }
+        },
+        {
+          "id": "hole",
+          "use": "walk",
+          "to": {
+            "room": "control-c",
+            "door": "ceiling"
+          }
+        }
+      ]
+    },
+    "control-b": {
+      "id": "control-b",
+      "name": "Control",
+      "tile": 16,
+      "legend": {
+        "#": "solid",
+        "=": "oneway",
+        ".": "empty",
+        "1": "spawn",
+        "W": {
+          "door": "west"
+        }
+      },
+      "rows": [
+        "############",
+        "#..........#",
+        "#..........#",
+        "W..........#",
+        "W.......1..#",
+        "############"
+      ],
+      "doors": [
+        {
+          "id": "west",
+          "use": "walk",
+          "to": {
+            "room": "control-a",
+            "door": "east"
+          }
+        }
+      ]
+    },
+    "control-c": {
+      "id": "control-c",
+      "name": "Control",
+      "tile": 16,
+      "legend": {
+        "#": "solid",
+        "=": "oneway",
+        ".": "empty",
+        "1": "spawn",
+        "C": {
+          "door": "ceiling"
+        }
+      },
+      "rows": [
+        "#####CC#####",
+        "#..........#",
+        "#..........#",
+        "#..........#",
+        "#..........#",
+        "#..........#",
+        "#..........#",
+        "############"
+      ],
+      "doors": [
+        {
+          "id": "ceiling",
+          "use": "walk",
+          "to": {
+            "room": "control-a",
+            "door": "hole"
+          }
+        }
+      ]
+    }
+  },
+  "game": {
+    "startRoom": "control-a",
+    "playerCharacter": "hero"
+  }
+}

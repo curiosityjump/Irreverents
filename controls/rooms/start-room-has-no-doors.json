@@ -1,0 +1,89 @@
+{
+  "//": "The kingdom's entrance is set to a standalone room while other rooms are joined by doors.",
+  "expect": [
+    "content/game.json",
+    "startRoom",
+    "has no doors"
+  ],
+  "rooms": {
+    "control-a": {
+      "id": "control-a",
+      "name": "Control",
+      "tile": 16,
+      "legend": {
+        "#": "solid",
+        ".": "empty",
+        "1": "spawn"
+      },
+      "rows": [
+        "######",
+        "#....#",
+        "#....#",
+        "#.1..#",
+        "######"
+      ]
+    },
+    "control-b": {
+      "id": "control-b",
+      "name": "Control",
+      "tile": 16,
+      "legend": {
+        "#": "solid",
+        ".": "empty",
+        "1": "spawn",
+        "E": {
+          "door": "east"
+        }
+      },
+      "rows": [
+        "########",
+        "#......E",
+        "#.1....E",
+        "########"
+      ],
+      "doors": [
+        {
+          "id": "east",
+          "use": "walk",
+          "to": {
+            "room": "control-c",
+            "door": "west"
+          }
+        }
+      ]
+    },
+    "control-c": {
+      "id": "control-c",
+      "name": "Control",
+      "tile": 16,
+      "legend": {
+        "#": "solid",
+        ".": "empty",
+        "1": "spawn",
+        "W": {
+          "door": "west"
+        }
+      },
+      "rows": [
+        "########",
+        "W......#",
+        "W....1.#",
+        "########"
+      ],
+      "doors": [
+        {
+          "id": "west",
+          "use": "walk",
+          "to": {
+            "room": "control-b",
+            "door": "east"
+          }
+        }
+      ]
+    }
+  },
+  "game": {
+    "startRoom": "control-a",
+    "playerCharacter": "hero"
+  }
+}

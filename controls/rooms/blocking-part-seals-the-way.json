@@ -1,0 +1,91 @@
+{
+  "//": "A part that can block stands between the start and the only door, floor to a height nobody clears. Read pessimistically it is a wall, so the far room cannot be reached.",
+  "expect": [
+    "content/rooms/control-b.json",
+    "can never get here"
+  ],
+  "controlKinds": {
+    "control-gate": {
+      "blocks": true
+    }
+  },
+  "game": {
+    "startRoom": "control-a",
+    "playerCharacter": "hero"
+  },
+  "rooms": {
+    "control-a": {
+      "id": "control-a",
+      "name": "Control",
+      "tile": 16,
+      "legend": {
+        "#": "solid",
+        "=": "oneway",
+        ".": "empty",
+        "1": "spawn",
+        "E": {
+          "door": "east"
+        },
+        "G": {
+          "part": "gate"
+        }
+      },
+      "rows": [
+        "############",
+        "#......G...#",
+        "#......G...#",
+        "#......G...E",
+        "#.1....G...E",
+        "############"
+      ],
+      "doors": [
+        {
+          "id": "east",
+          "use": "walk",
+          "to": {
+            "room": "control-b",
+            "door": "west"
+          }
+        }
+      ],
+      "parts": [
+        {
+          "id": "gate",
+          "kind": "control-gate"
+        }
+      ]
+    },
+    "control-b": {
+      "id": "control-b",
+      "name": "Control",
+      "tile": 16,
+      "legend": {
+        "#": "solid",
+        "=": "oneway",
+        ".": "empty",
+        "1": "spawn",
+        "W": {
+          "door": "west"
+        }
+      },
+      "rows": [
+        "############",
+        "#..........#",
+        "#..........#",
+        "W..........#",
+        "W.......1..#",
+        "############"
+      ],
+      "doors": [
+        {
+          "id": "west",
+          "use": "walk",
+          "to": {
+            "room": "control-a",
+            "door": "east"
+          }
+        }
+      ]
+    }
+  }
+}

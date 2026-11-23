@@ -1,0 +1,77 @@
+{
+  "//": "NOT a broken room: the sealed-pit control's pit, one tile shallower and two tiles wide. Every party member can get out, so the check must ACCEPT it. It proves sealed-pit is refused for its depth, not because pits are refused.",
+  "rooms": {
+    "control-a": {
+      "id": "control-a",
+      "name": "Control",
+      "tile": 16,
+      "legend": {
+        "#": "solid",
+        "=": "oneway",
+        ".": "empty",
+        "1": "spawn",
+        "E": {
+          "door": "east"
+        }
+      },
+      "rows": [
+        "############",
+        "#..........#",
+        "#..........#",
+        "#..........E",
+        "#.1........E",
+        "############"
+      ],
+      "doors": [
+        {
+          "id": "east",
+          "use": "walk",
+          "to": {
+            "room": "control-b",
+            "door": "west"
+          }
+        }
+      ]
+    },
+    "control-b": {
+      "id": "control-b",
+      "name": "Control",
+      "tile": 16,
+      "legend": {
+        "#": "solid",
+        "=": "oneway",
+        ".": "empty",
+        "1": "spawn",
+        "W": {
+          "door": "west"
+        }
+      },
+      "rows": [
+        "############",
+        "#..........#",
+        "#..........#",
+        "W..........#",
+        "W.......1..#",
+        "#####..#####",
+        "#####..#####",
+        "#####..#####",
+        "############"
+      ],
+      "doors": [
+        {
+          "id": "west",
+          "use": "walk",
+          "to": {
+            "room": "control-a",
+            "door": "east"
+          }
+        }
+      ]
+    }
+  },
+  "game": {
+    "startRoom": "control-a",
+    "playerCharacter": "hero"
+  },
+  "accept": true
+}

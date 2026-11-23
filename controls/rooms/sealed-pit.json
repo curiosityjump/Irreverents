@@ -1,0 +1,83 @@
+{
+  "//": "A pit four tiles deep with no door in it: whoever falls or is thrown in can never leave.",
+  "expect": [
+    "content/rooms/control-b.json",
+    "tile [5, 8]",
+    "no way out",
+    "grappler"
+  ],
+  "rooms": {
+    "control-a": {
+      "id": "control-a",
+      "name": "Control",
+      "tile": 16,
+      "legend": {
+        "#": "solid",
+        "=": "oneway",
+        ".": "empty",
+        "1": "spawn",
+        "E": {
+          "door": "east"
+        }
+      },
+      "rows": [
+        "############",
+        "#..........#",
+        "#..........#",
+        "#..........E",
+        "#.1........E",
+        "############"
+      ],
+      "doors": [
+        {
+          "id": "east",
+          "use": "walk",
+          "to": {
+            "room": "control-b",
+            "door": "west"
+          }
+        }
+      ]
+    },
+    "control-b": {
+      "id": "control-b",
+      "name": "Control",
+      "tile": 16,
+      "legend": {
+        "#": "solid",
+        "=": "oneway",
+        ".": "empty",
+        "1": "spawn",
+        "W": {
+          "door": "west"
+        }
+      },
+      "rows": [
+        "############",
+        "#..........#",
+        "#..........#",
+        "W..........#",
+        "W.......1..#",
+        "#####..#####",
+        "#####..#####",
+        "#####..#####",
+        "#####..#####",
+        "############"
+      ],
+      "doors": [
+        {
+          "id": "west",
+          "use": "walk",
+          "to": {
+            "room": "control-a",
+            "door": "east"
+          }
+        }
+      ]
+    }
+  },
+  "game": {
+    "startRoom": "control-a",
+    "playerCharacter": "hero"
+  }
+}

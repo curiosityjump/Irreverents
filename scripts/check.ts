@@ -38,7 +38,7 @@ if (loaded.problems.length === 0) {
   // Step 3: the room checks' own controls (broken rooms that must stay refused) and the route helper.
   const { runRoomControls } = await import('./lib/room-controls.ts');
   const controls = runRoomControls(loaded.content);
-  section('room controls', controls.problems, `${controls.count} broken room file(s) in controls/rooms/ are each refused for the stated reason; the route helper agrees with the map`);
+  section('room controls', controls.problems, `${controls.count} control(s) in controls/rooms/ each end as stated (broken rooms refused for the stated reason, sound ones accepted); the route helper agrees with the map`);
   const { scenarios, problems } = loadScenarios(loaded.content);
   section('scenario files', problems.map(formatProblem), `${scenarios.length} scenario file(s) are well-formed`);
   if (scenarios.length === 0 && problems.length === 0) section('scenarios', ['there are no scenarios in scenarios/: nothing was checked'], '');

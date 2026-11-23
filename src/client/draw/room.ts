@@ -33,4 +33,33 @@ export function drawRoom(g: CanvasRenderingContext2D, room: Room, ox: number, oy
       }
     }
   }
+  drawDoors(g, room, ox, oy);
+}
+
+// DRAFT: graybox doorway colours.
+const DOORWAY = '#0d0d18';
+const DOORWAY_FRAME = '#3d4254';
+
+/**
+ * Doors (Step 3). An *enter* doorway is a dark arch, so an opening reads as
+ * an opening. A *walk* door draws nothing: it is simply the gap in the wall.
+ * INTENT: no arrows, no glow, no text, on any door: hidden routes depend on
+ * the game never pointing (docs/plan/step-3.md, "Unadvertised"). The content
+ * check refuses a hidden door that would get the arch.
+ */
+function drawDoors(g: CanvasRenderingContext2D, room: Room, ox: number, oy: number): void {
+  const T = room.tile;
+  for (const door of room.doors) {
+    if (door.use !== 'enter') continue;
+    const x = ox + door.tx * T;
+    const y = oy + door.ty * T;
+    const w = door.w * T;
+    const h = door.h * T;
+    g.fillStyle = DOORWAY_FRAME;
+    g.fillRect(x, y + 4, w, h - 4);
+    g.fillRect(x + 2, y + 1, w - 4, 3);
+    g.fillStyle = DOORWAY;
+    g.fillRect(x + 2, y + 5, w - 4, h - 5);
+    g.fillRect(x + 4, y + 3, w - 8, 2);
+  }
 }

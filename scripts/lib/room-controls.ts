@@ -9,6 +9,8 @@ import { assembleContent } from '../../src/content/assemble.ts';
 import { formatProblem, isRecord } from '../../src/content/reader.ts';
 import type { Content } from '../../src/content/types.ts';
 import { checkContentAgainstSim } from '../../src/sim/check-content.ts';
+import { checkRooms } from '../../src/sim/check-rooms.ts';
+import { systems } from '../../src/sim/registry.ts';
 import { doorToward } from '../../src/sim/room-routes.ts';
 import { root } from './registries.ts';
 
@@ -38,17 +40,34 @@ export function runRoomControls(content: Content): { problems: string[]; count: 
       problems.push(`${file}: is not valid JSON: ${(err as Error).message}`);
       continue;
     }
-    if (!isRecord(raw) || !isRecord(raw.rooms) || !Array.isArray(raw.expect) || raw.expect.length === 0 || !raw.expect.every((x) => typeof x === 'string')) {
-      problems.push(`${file}: must be { "expect": [text every matching problem line contains, ...], "rooms": { "<room id>": <a room file> } }`);
+    // "accept": true turns a control round: these rooms must pass. It pins the edge of a rule from the allowed side.
+    const accept = isRecord(raw) && raw.accept === true;
+    if (!isRecord(raw) || !isRecord(raw.rooms) || (!accept && (!Array.isArray(raw.expect) || raw.expect.length === 0 || !raw.expect.every((x) => typeof x === 'string')))) {
+      problems.push(`${file}: must be { "expect": [text every matching problem line contains, ...], "rooms": { "<room id>": <a room file> }, optional "game": <a game.json, making the control a map of its own> }, or "accept": true in place of "expect"`);
       continue;
     }
-    // The real content plus this control's rooms; `game` may be replaced the same way.
+    // The real content plus this control's rooms. A control that brings its
+    // own `game` is a whole map of its own: the real rooms, and what is
+    // placed in them, are left out so only the control's rooms are judged.
     const files = { ...base };
+    if (raw.game !== undefined) {
+      for (const rel of Object.keys(files)) if (rel.startsWith('rooms/') || rel.startsWith('placements/')) delete files[rel];
+      files['game.json'] = raw.game;
+    }
     for (const [id, room] of Object.entries(raw.rooms)) files[`rooms/${id}.json`] = room;
-    if (raw.game !== undefined) files['game.json'] = raw.game;
     const assembled = assembleContent(files);
-    const found = assembled.problems.length ? assembled.problems : checkContentAgainstSim(assembled.content);
+    // "controlKinds": part kinds that exist only for this control ({ "<kind>": { "blocks": true } }), as if a system declared them.
+    let found = assembled.problems.length ? assembled.problems : checkContentAgainstSim(assembled.content);
+    if (isRecord(raw.controlKinds) && assembled.problems.length === 0) {
+      const parts: Record<string, { what: string; blocks?: boolean }> = {};
+      for (const [kind, rule] of Object.entries(raw.controlKinds)) parts[kind] = { what: 'a control-only kind', blocks: isRecord(rule) && rule.blocks === true };
+      found = checkRooms(assembled.content, [...systems, { id: 'room-control', order: 9999, parts, run() {} }]);
+    }
     const lines = found.map(formatProblem);
+    if (accept) {
+      if (lines.length > 0) problems.push(`${file}: these rooms must be accepted, but the check refuses them: ${lines.slice(0, 3).join(' | ')}`);
+      continue;
+    }
     const expect = raw.expect as string[];
     if (lines.length === 0) problems.push(`${file}: the check accepted these rooms, but it must refuse them (${String(raw['//'] ?? 'no note')})`);
     else if (!lines.some((l) => expect.every((x) => l.includes(x)))) {

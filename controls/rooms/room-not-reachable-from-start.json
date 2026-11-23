@@ -1,0 +1,137 @@
+{
+  "//": "Two rooms joined to each other but to nothing the kingdom is entered from.",
+  "expect": [
+    "content/rooms/control-c.json",
+    "can never get here"
+  ],
+  "rooms": {
+    "control-a": {
+      "id": "control-a",
+      "name": "Control",
+      "tile": 16,
+      "legend": {
+        "#": "solid",
+        "=": "oneway",
+        ".": "empty",
+        "1": "spawn",
+        "E": {
+          "door": "east"
+        }
+      },
+      "rows": [
+        "############",
+        "#..........#",
+        "#..........#",
+        "#..........E",
+        "#.1........E",
+        "############"
+      ],
+      "doors": [
+        {
+          "id": "east",
+          "use": "walk",
+          "to": {
+            "room": "control-b",
+            "door": "west"
+          }
+        }
+      ]
+    },
+    "control-b": {
+      "id": "control-b",
+      "name": "Control",
+      "tile": 16,
+      "legend": {
+        "#": "solid",
+        "=": "oneway",
+        ".": "empty",
+        "1": "spawn",
+        "W": {
+          "door": "west"
+        }
+      },
+      "rows": [
+        "############",
+        "#..........#",
+        "#..........#",
+        "W..........#",
+        "W.......1..#",
+        "############"
+      ],
+      "doors": [
+        {
+          "id": "west",
+          "use": "walk",
+          "to": {
+            "room": "control-a",
+            "door": "east"
+          }
+        }
+      ]
+    },
+    "control-c": {
+      "id": "control-c",
+      "name": "Control",
+      "tile": 16,
+      "legend": {
+        "#": "solid",
+        "=": "oneway",
+        ".": "empty",
+        "1": "spawn",
+        "E": {
+          "door": "east"
+        }
+      },
+      "rows": [
+        "########",
+        "#......E",
+        "#.1....E",
+        "########"
+      ],
+      "doors": [
+        {
+          "id": "east",
+          "use": "walk",
+          "to": {
+            "room": "control-d",
+            "door": "west"
+          }
+        }
+      ]
+    },
+    "control-d": {
+      "id": "control-d",
+      "name": "Control",
+      "tile": 16,
+      "legend": {
+        "#": "solid",
+        "=": "oneway",
+        ".": "empty",
+        "1": "spawn",
+        "W": {
+          "door": "west"
+        }
+      },
+      "rows": [
+        "########",
+        "W......#",
+        "W....1.#",
+        "########"
+      ],
+      "doors": [
+        {
+          "id": "west",
+          "use": "walk",
+          "to": {
+            "room": "control-c",
+            "door": "east"
+          }
+        }
+      ]
+    }
+  },
+  "game": {
+    "startRoom": "control-a",
+    "playerCharacter": "hero"
+  }
+}

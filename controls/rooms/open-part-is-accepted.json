@@ -1,0 +1,88 @@
+{
+  "//": "NOT a broken map: the same rooms, with the part's kind not blocking. The check must ACCEPT it; it proves blocking-part-seals-the-way is refused because of `blocks`.",
+  "accept": true,
+  "controlKinds": {
+    "control-gate": {
+      "blocks": false
+    }
+  },
+  "game": {
+    "startRoom": "control-a",
+    "playerCharacter": "hero"
+  },
+  "rooms": {
+    "control-a": {
+      "id": "control-a",
+      "name": "Control",
+      "tile": 16,
+      "legend": {
+        "#": "solid",
+        "=": "oneway",
+        ".": "empty",
+        "1": "spawn",
+        "E": {
+          "door": "east"
+        },
+        "G": {
+          "part": "gate"
+        }
+      },
+      "rows": [
+        "############",
+        "#......G...#",
+        "#......G...#",
+        "#......G...E",
+        "#.1....G...E",
+        "############"
+      ],
+      "doors": [
+        {
+          "id": "east",
+          "use": "walk",
+          "to": {
+            "room": "control-b",
+            "door": "west"
+          }
+        }
+      ],
+      "parts": [
+        {
+          "id": "gate",
+          "kind": "control-gate"
+        }
+      ]
+    },
+    "control-b": {
+      "id": "control-b",
+      "name": "Control",
+      "tile": 16,
+      "legend": {
+        "#": "solid",
+        "=": "oneway",
+        ".": "empty",
+        "1": "spawn",
+        "W": {
+          "door": "west"
+        }
+      },
+      "rows": [
+        "############",
+        "#..........#",
+        "#..........#",
+        "W..........#",
+        "W.......1..#",
+        "############"
+      ],
+      "doors": [
+        {
+          "id": "west",
+          "use": "walk",
+          "to": {
+            "room": "control-a",
+            "door": "east"
+          }
+        }
+      ]
+    }
+  }
+}

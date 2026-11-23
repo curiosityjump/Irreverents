@@ -1,0 +1,121 @@
+{
+  "//": "A hole in the floor drops into a cellar whose ceiling is out of reach. The cellar has a door, but it only leads to a side room and back: you can always reach a door and never the start again.",
+  "expect": [
+    "content/rooms/control-c.json",
+    "no way back",
+    "grappler"
+  ],
+  "game": {
+    "startRoom": "control-a",
+    "playerCharacter": "hero"
+  },
+  "rooms": {
+    "control-a": {
+      "id": "control-a",
+      "name": "Control",
+      "tile": 16,
+      "legend": {
+        "#": "solid",
+        "=": "oneway",
+        ".": "empty",
+        "1": "spawn",
+        "D": {
+          "door": "hole"
+        }
+      },
+      "rows": [
+        "############",
+        "#..........#",
+        "#..........#",
+        "#..........#",
+        "#.1........#",
+        "#####DD#####"
+      ],
+      "doors": [
+        {
+          "id": "hole",
+          "use": "walk",
+          "to": {
+            "room": "control-c",
+            "door": "ceiling"
+          }
+        }
+      ]
+    },
+    "control-c": {
+      "id": "control-c",
+      "name": "Control",
+      "tile": 16,
+      "legend": {
+        "#": "solid",
+        "=": "oneway",
+        ".": "empty",
+        "1": "spawn",
+        "C": {
+          "door": "ceiling"
+        },
+        "E": {
+          "door": "east"
+        }
+      },
+      "rows": [
+        "#####CC#####",
+        "#..........#",
+        "#..........#",
+        "#..........#",
+        "#..........#",
+        "#..........E",
+        "#..........E",
+        "############"
+      ],
+      "doors": [
+        {
+          "id": "ceiling",
+          "use": "walk",
+          "to": {
+            "room": "control-a",
+            "door": "hole"
+          }
+        },
+        {
+          "id": "east",
+          "use": "walk",
+          "to": {
+            "room": "control-d",
+            "door": "west"
+          }
+        }
+      ]
+    },
+    "control-d": {
+      "id": "control-d",
+      "name": "Control",
+      "tile": 16,
+      "legend": {
+        "#": "solid",
+        "=": "oneway",
+        ".": "empty",
+        "1": "spawn",
+        "W": {
+          "door": "west"
+        }
+      },
+      "rows": [
+        "########",
+        "W......#",
+        "W......#",
+        "########"
+      ],
+      "doors": [
+        {
+          "id": "west",
+          "use": "walk",
+          "to": {
+            "room": "control-c",
+            "door": "east"
+          }
+        }
+      ]
+    }
+  }
+}
