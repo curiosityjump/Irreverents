@@ -332,7 +332,7 @@ Full text: `docs/plan/step-10.md`
 
 **Closed 2026-11-23, 18:05 UTC.** Off the castle street (column 20) is a cantina where every roster hero nobody is playing wanders, including two new roster-only ones; hit one and everyone in the room brawls, friends included; launched off the stage or knocked flat, anyone is back on a pad at once; a counter keeps each player's knock-outs and falls; the owner's bell (Use near it) or the last player leaving ends it, and it raises no alarm. Tap a wandering hero outside the party, then the member to replace in the row across the screen (never a friend's). Chased by a town guard, the street's doorway in refuses you; the cantina's way out never refuses. Proven by scenarios, a real-server check and the phone e2e (all re-run by the lead); **not tried on a real iPhone**; the no-fit self-swap is untested; the switch landing on a friend's member is Step 5's switch-gap brief; the cantina's own art is Step 8 round 3's. Lead: `session_017WiGzFy3MD6ecvM7QMvQGd`.
 
-Full text: `docs/plan/step-11.md`
+Full text: `docs/plan-archive.md`, "Step 11". Durable record: `docs/mechanisms/cantina.md`.
 
 ## Step 12 — The outpost and the chase
 

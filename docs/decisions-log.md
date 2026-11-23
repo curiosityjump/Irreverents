@@ -612,7 +612,7 @@ document as a decision of theirs.
 - **Instead of asking:** Q-008, "How does someone leave the endless cantina brawl?", and the open parts of doc 31 (where the door is, who is unlocked, where the edge is, who gets a knock-out).
 - **Why this way:** **Updated 14:45 UTC after your answer to Q-008** ("There is a bell in the middle of the cantina player can use to stop fights"): ringing the bell with Use ends the brawl, and the last player walking out still ends it, because there is always a way out. The few-seconds calm timer is switched off (kept as a number, 0), so the fight never stops by itself. The door is on the castle street at ground level between the two buildings (the step's "off the castle street"). Everyone in the roster is unlocked, because nothing in the world unlocks anyone yet, and two extra characters join the three so a bar fight has more than one or two people in it. The arena's edge is a line drawn inside the room, because nothing can leave a room's bounds. A knock-out goes to whoever sent the body flying, else whoever knocked it flat, else the last to hit it.
 - **To change it:** the bell's place, the calm time (0 = off), edge, pads and patterns are numbers in `content/cantina/`; the door is one tile in `content/rooms/castle-street.json`; the roster is `content/roster.json`.
-- **Where:** `docs/plan/step-11.md`; `handoff-prompts/step-11-a-brawl.md` while it runs, then `docs/mechanisms/cantina.md`.
+- **Where:** `docs/plan-archive.md` ("Step 11"); `handoff-prompts/step-11-a-brawl.md` while it runs, then `docs/mechanisms/cantina.md`.
 
 ### 2026-11-23 · The outpost's horn: what it brings, what stops it, and how much it takes
 - **Decided by:** Step 12 slice A worker (`handoff-prompts/step-12-a-outpost.md`), for the Step 12 lead `session_017WiGzJTXQVCWQYDDmC2UiY`
@@ -661,7 +661,7 @@ document as a decision of theirs.
 - **Instead of asking:** the parts doc 31 and D-084/D-088 leave open: what tapping a hero already in the party does, whether you can swap mid-brawl, what replacing your own character does, when the party row closes, and what "being chased" means for the door.
 - **Why this way:** tap a wandering hero who is not in the party and your party appears across the screen; tap the one to replace. Replace someone nobody is playing and they swap; replace yourself and you become the newcomer; a friend's character is never taken (doc 06). No swapping while a brawl is on, so a tap mid-fight is never a surprise. The row closes when you move, tap elsewhere, or after a few seconds. The door refuses only while a good-side guard is actively chasing you, not merely because an alarm was raised (D-088 says a raised alert alone is open).
 - **To change it:** each is one rule in the cantina's systems (`docs/mechanisms/cantina.md`); the row's timing is a number in `content/cantina/cantina.json`.
-- **Where:** `docs/plan/step-11.md`; `handoff-prompts/step-11-b-hub.md` while it runs.
+- **Where:** `docs/plan-archive.md` ("Step 11"); `handoff-prompts/step-11-b-hub.md` while it runs.
 
 ### 2026-11-23 · The cantina looks like a tavern: plaster, timbers and a board floor
 - **Decided by:** Step 11 slice B builder `session_017WiGzHXvo5fjfVSeDUTX44`, for the Step 11 lead `session_017WiGzFy3MD6ecvM7QMvQGd`

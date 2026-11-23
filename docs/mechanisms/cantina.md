@@ -4,7 +4,7 @@
 `content/rooms/cantina.json`, `src/sim/cantina.ts`, the `cantina-*` systems
 (`cantina-swap` included),
 `src/client/draw/cantina.ts` or `scripts/checks/step11-cantina.ts`.
-Written by Step 11 slice A (2026-11-23). Plan: `docs/plan/step-11.md`.
+Written by Step 11 slice A (2026-11-23). Plan: `docs/plan-archive.md` ("Step 11").
 
 ## Why it is shaped this way
 
