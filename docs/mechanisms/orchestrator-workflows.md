@@ -19,6 +19,20 @@ the session ids, commit hashes and screenshot path, which are hard-coded.
   against main and the live game, by hand or with one agent. Re-run the whole audit only
   when the vision changes.
 
+## Trap: a review agent that kills servers by name kills yours too
+
+2026-11-23 17:40 UTC: two of the orchestrator's own `npm run e2e` re-runs failed
+with `ERR_CONNECTION_REFUSED` part-way through, at different points, while a
+review workflow ran on the same machine. Its agents had run `pkill -f
+"dist/server.cjs"` (10 times in their transcripts) to stop servers in their
+scratch copies, which stops every local server, the e2e's included. Nothing
+was wrong on `main`.
+
+- In every review prompt that may start a server, say: **stop only the process
+  you started, by its PID (`kill $PID`), never by name (`pkill`, `killall`).**
+- Don't read an e2e failure taken while such a workflow runs as a finding:
+  re-run it when the machine is quiet.
+
 ## Look review (round 2's script)
 
 ```js
