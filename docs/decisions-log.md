@@ -721,3 +721,11 @@ document as a decision of theirs.
 - **Why this way:** the title, then New game, Join a friend (a code field near the top, where the phone's keyboard does not cover it) and Everyone's kingdom in one column, and up to three games this phone played under Continue beside it (or below, upright), all in the game's own pixel letters on big night-blue buttons. A tab reloaded while playing (or by a deploy) goes straight back into its game with no tap. In play, a faint three-bar button in the top-left corner (the sound button has the top-right) opens the game's code, Share, Back to the start screen, and Close.
 - **To change it:** the words, order and look are all in `src/client/start.ts` (its `CSS`, `showStart`, `setUpMenu`); how many games Continue shows is `GAMES_SHOWN` there.
 - **Where:** `docs/mechanisms/saves.md`, "The start screen".
+
+### 2026-11-23 · Doorways by Use: the phone's Use button takes you through a doorway
+- **Decided by:** orchestrator `session_017WiGzHhke4tkAThPgw6EXs`, on the owner's words (first-hand, ~17:00 UTC, told that a doorway is used by pushing the stick up): "There is no stick to push up..."
+- **Instead of asking:** "Which control should take a phone player through a doorway?"
+- **Why this way:** the stick's "up" is a hidden gesture (slide the thumb up off the pad), so on a phone doorways looked broken. Use is the one context-sensitive button the phone already has (D-093: "a few context-sensitive controls"), and no counter or bell stands in a doorway, so the press is never ambiguous. While you stand in a doorway the button says "Go in" and an arrow bobs over the doorway. The stick gesture and the keyboard's Up still work.
+- **To change it:** `src/sim/systems/room-doors.ts` (what counts as asking), the Use button's door state in `src/client/touch.ts`/`shell.ts`, the arrow in `src/client/draw/door-hint.ts`. A separate "Go in" button would be a new action file in `content/actions/`.
+- **Where:** `docs/mechanisms/rooms-and-doors.md`, "The two kinds of door".
+
