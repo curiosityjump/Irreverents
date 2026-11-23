@@ -250,10 +250,24 @@ Shared by both briefs; a brief points here rather than repeating it.
 ## Briefs
 
 - `handoff-prompts/step-2-hit.md`: attack, grab, carry, throw, impact,
-  bodies that are not players, the grappler's strength.
+  bodies that are not players, the grappler's strength. Worker
+  `session_017WiGzHbbov1AymyWrXuvge`, launched 04:32 UTC; due 07:15.
 - `handoff-prompts/step-2-body.md`: the three characters, the party,
-  switching, the infiltrator's and flyer's own moves.
+  switching, the infiltrator's and flyer's own moves. Worker
+  `session_017WiGzEqGVmbgjJyorj73iV`, launched 04:32 UTC; due 06:45.
 
 ## Open with the owner
 
 ## Handoff notes
+
+*(Newest last.)*
+
+- **Lead `session_017WiGzGRnRoAeW5Ep5iSycV`, 04:33 UTC.** Claimed,
+  measured, decided (above), two workers running at once. The Step 1, 3
+  and 4 leads were told the shared shapes by message. Next: when each
+  worker's first push lands, re-run it; ask the Step 1 lead to call
+  `populateRoom` and to stop passing a character to `spawnPlayer`;
+  review each slice by re-running with a control of my own; then a
+  third brief (the `?tune` panel, both-screens checks once `npm run
+  e2e` exists). Not yet asked of anyone: the exact effect events Step
+  1's netcode delivers (asked of its lead, no answer yet).
