@@ -308,6 +308,19 @@ Push 2:
 
 ## Flags for the lead
 
+- **Round 3: a predicted hit the server does not confirm** (the target
+  was walking: the page aims at bodies as drawn, 100 ms in the past) holds
+  its star and the hurt pose for the full 500 ms, then lets go: seen once in
+  the live after-filmstrip (`after-punch-villain-Asideways.png`). The Step 5
+  brief `step-5-hit-lands-at-once.md` (real prediction of the struck body)
+  supersedes this drawing-only version; `predictedLook()` is the seam.
+- **Round 3: push 3 (the phone frame's leftovers, gap 12 in `shell.ts`)
+  not started:** Step 17's `shell.ts` edit was not on `main` at the end of
+  push 2 (last `shell.ts` commit c889a47). The brief says the orchestrator
+  re-briefs it.
+- **Round 3: `check:live`'s `fight-back` (Step 18's fact) failed** after
+  push 2 as it did before it (the cast lane noted it at 7cdde6a); every
+  other live fact passed.
 - **Round 3: the brawl strip** (`cantina.ts`, Step 11's) still draws
   flat squares; `hud-face-*`, `hud-plate`, `hud-ko`, `hud-fall` exist and
   wait for Step 11 slice B's review before this lane may use them.
