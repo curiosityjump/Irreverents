@@ -158,17 +158,3 @@ actually read (questions for the owner go through
 **Flag:** the banner's "new" means "not in the first frame that had a world in it". If Step 1's network layer delivers the world over several frames, or re-delivers it after a reconnect, check that old records are not announced (several arriving in one frame are already ignored).
 
 **Flag:** rung 5 was by eye, on hand-made records pushed into the page's world; nothing scripted covers the drawing, and the real path (detector → pedestal → page, two devices) has not been seen. Text follows `draw/npcs.ts` (`fillText`, 8 px): readable, soft on a phone; a shared pixel font would be Step 5's or 8's call.
-
-### step-3-a-rooms-and-doors.md, 2026-11-23 (second push)
-
-**Flag: the start room was NOT switched to the throne room.** `src/client/main.ts` still draws only `content.game.startRoom` and centres it with no camera (lines 18, 19, 35; Step 1's files, Gate 2 in progress). With `startRoom: throne-room` the room is 256 px tall on a 180 px view, so the floor and the player are drawn below the bottom edge; and a player who walks into the street disappears, because the page keeps drawing the throne room. Switching is one line in `content/game.json` (set `startRoom` to `throne-room` and delete `mapStart`) once the page follows the local player's room and a room larger than the screen. Until then `mapStart: throne-room` tells the map checks where the kingdom is entered from.
-
-**Flag for slice B:** every room with doors must now pass the way-out check for all three party members, each alone (`docs/mechanisms/rooms-and-doors.md`, "The way-out check"). A gate that needs two bodies is a wall to it, and so is a wall only an attack breaks; the hidden chamber needs its any-body exit to be a real door or drop. The check adds about two seconds to `npm run check` and `npm run build` now and grows with each room.
-
-**Flag:** `drawRoom` draws the room file's tiles, not tiles changed while the game runs (`tileAt`). A closed gate made solid by `setTile` is invisible unless its part draws itself.
-
-**Note:** the brief's "compute jump height and reach from content, round down" became "play a fixed list of simple moves through the real `step()`": nothing about any character is assumed, and a flyer's flaps and a small body's fit come out by themselves. Where a body *could be* is over-estimated instead of under-estimated (any standable tile joined to a door or spawn), because thrown bodies land where walkers cannot go; that makes the check stricter than the brief asked, never looser.
-
-**Note:** rung 5 for door drawing was done on a local build with the start temporarily set to the street (not committed): the doorway pair draws as dark arches and Up carries the player between them. Not seen: the throne room on the page, an edge opening on the page, any phone.
-
-**Note (after the 08:33 message):** `PartRule.blocks?: boolean` is in and read pessimistically. I had already added `mapStart: "throne-room"` to `content/game.json` before your "leave game.json alone" arrived: it does not change where the game starts (`startRoom` is still `graybox-hall`); it only tells the map checks where the kingdom is entered from, because a standalone start room gives them no root. Delete it when `startRoom` is switched.

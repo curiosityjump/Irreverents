@@ -276,6 +276,23 @@ additive) and Step 1 passes the local player to it. If time runs short:
 three rooms with one hidden route and the plate gate (this file, "How to
 cut it").
 
+**Slice A closed (lead, 08:40 UTC).** Push 2 landed at `96a8c38` and
+was re-run by the lead: build, check (15 room controls) and gates green;
+a walled-off stretch of the street is refused by name for the grappler
+and the infiltrator. The way-out check plays each party member alone
+through the real `step()`; a blocking part is a wall to it. Doorways are
+drawn as arches. Not verified by the lead: the 15 controls one by one;
+anything on a screen (the worker saw the doorway pair on a local build;
+nobody has seen the throne room, an edge opening or a phone). **Still
+open from slice A, the lead's to do when Step 1's camera is on `main`:**
+set `startRoom` to `throne-room` and delete `mapStart` in
+`content/game.json` (one line; `mapStart` only tells the map checks
+where the kingdom is entered while the start is a standalone room),
+then look at the page. Known: `drawRoom` draws the room file's tiles,
+not run-time ones, so every part must draw itself (slice B is told).
+Slice B relaunched fresh at 08:41 UTC with section 13 of its brief:
+four small pushes, stop cleanly by 09:50 UTC.
+
 ## Open with the owner
 
 ## Handoff notes

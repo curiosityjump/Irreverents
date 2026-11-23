@@ -357,3 +357,62 @@ So, in your second push:
   undercroft; the same body walking at it does not break it. Message
   the lead the event's name and fields as soon as `breakable` is on
   `main` (Step 6's court reacts to it).
+
+## 13 · Added 08:40 UTC: after the usage-limit stop. This section overrides the budget, the push order and section 2
+
+Every session was stopped at 04:57 UTC by the account's usage limit;
+the first slice B worker got five minutes in and pushed nothing. You
+are its fresh replacement. **The allowance is tight until 13:20 UTC: no
+subagents, no broad exploration, read only what a section here names,
+short messages.** `main` takes only finished, verified work from
+**10:00 UTC** (`docs/current-directive.md`): what is not green and
+pushed by 09:50 is left out, behind nothing half-working.
+
+**Slice A is finished** (`96a8c38`, re-run by the lead: green, and a
+walled-off stretch of the street refused by name). So:
+
+- Section 2's "slice A is still running" no longer holds. You may edit
+  `src/client/draw/room.ts` only for the camera's sake: don't; parts
+  draw in your own `draw/room-parts.ts`. `content/game.json` is the
+  lead's (the start room switches when Step 1's camera lands; leave
+  `startRoom` and `mapStart` alone).
+- **The way-out check is live** (`docs/mechanisms/rooms-and-doors.md`,
+  "The way-out check": read it). It plays each party member **alone**
+  through the real `step()`. A part whose kind declares `blocks: true`
+  is solid to it: the gate and the breakable are walls. So every room
+  must be leavable by each member alone with every gate shut and every
+  wall unbroken. It costs about 2 s per `npm run check` and grows with
+  each room: keep rooms no bigger than they need to be.
+- **`drawRoom` draws the room file's tiles, not run-time ones**: a shut
+  gate is invisible unless your part draws itself. Draw every part.
+- Step 2's hit is on `main` (`c05f6a5`, `d430dba`): real throws exist.
+  Read its mechanism doc's event list before `breakable`; use stand-in
+  bodies with a starting speed wherever a real throw would cost you
+  more than ten minutes, and name them in `docs/for-the-lead.md`.
+
+**Four small pushes, in this order, each green and complete by itself.
+Stop cleanly after whichever is the last you can finish by 09:50 and
+say so; a later session continues from the list.**
+
+1. **The parts** `plate`, `gate`, `breakable` (with `look`),
+   `false-wall`, each one file, drawn, with one scenario each in
+   `test-parts` (section 5's `step3-wall-breaks`, `step3-gate-waits`,
+   and one plate-and-gate scenario). `hide` only if it takes under ten
+   minutes; otherwise leave it for later and say so.
+2. **Behind the throne**: the false wall, the window above it
+   (section 12), the hidden door and a small `undercroft` (the passage
+   and the doorway only; no vault, no secret yet) whose doorway comes
+   up in … the street for now (an ordinary doorway at the street's
+   west end, in empty floor tiles away from Step 4's columns 10–35), so
+   the undercroft has a way out before the courtyard exists.
+   `step3-behind-the-throne` (signal 2, gate B) and
+   `step3-through-the-window`. This is what Step 6's king is waiting
+   for: message the lead the breakable's event name and fields the
+   moment it is pushed.
+3. **The courtyard, the plate gate, the gallery and the roofs**,
+   together (the gallery's way out with the gate shut is the roofs, so
+   they cannot land apart): section 3's table, signal 5's three
+   scenarios and `step3-over-the-roofs`. Move the undercroft's doorway
+   pair from the street to the courtyard here only if it is quick;
+   otherwise leave it and say so.
+4. **The secret** (signal 3) and `hide`.
