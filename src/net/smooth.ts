@@ -56,25 +56,6 @@ export function createSmoother(net: Net) {
     keep(ids: Set<string>): void {
       for (const id of tracks.keys()) if (!ids.has(id)) tracks.delete(id);
     },
-    /**
-     * Step 5 (src/net/predict.ts): every tracked entity where its simulator will have it `leadMs`
-     * after `now`: its newest state received, carried on at the pace of its last two states (a
-     * walking person's speed is not in its `vx`; its behaviour moves it). DRAFT: straight along, x only.
-     */
-    ahead(now: number, leadMs: number): Entity[] {
-      const out: Entity[] = [];
-      for (const track of tracks.values()) {
-        const s = track.samples;
-        const newest = s[s.length - 1];
-        if (!newest) continue;
-        const prev = s[s.length - 2];
-        const pace = prev && prev.e.room === newest.e.room && newest.t > prev.t ? (newest.e.x - prev.e.x) / (newest.t - prev.t) : 0;
-        // The simulator's tick that is arriving now (the fastest packet's offset), then `leadMs` on.
-        const at = (now - Math.min(...track.offsets) + leadMs) / TICK_MS;
-        out.push({ ...newest.e, x: newest.e.x + pace * Math.max(0, at - newest.t) });
-      }
-      return out;
-    },
     /** Every tracked entity as it should be drawn at `now`. */
     view(now: number): Entity[] {
       const out: Entity[] = [];

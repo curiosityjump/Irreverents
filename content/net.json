@@ -11,9 +11,6 @@
   "reconnectMaxMs": 4000,
   "silenceMs": 3000,
   "pingMs": 1000,
-  "//predict": "DRAFT (Step 5): a page draws its own hero's hit on what it strikes at once; past predictHitMs with no word from the server it eases back. 0 turns it off.",
-  "predictHitMs": 1000,
-  "predictBlendMs": 120,
   "//colors": "DRAFT: graybox player colours, by the order players joined a world.",
   "playerColors": ["#e07a5f", "#81b29a", "#f2cc8f", "#6fa8dc", "#c38d9e", "#b5e48c", "#f4a261", "#9d8df1"]
 }
