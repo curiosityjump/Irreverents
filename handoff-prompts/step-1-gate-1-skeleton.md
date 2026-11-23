@@ -81,6 +81,33 @@ Deliver, all on `main`:
    pattern worth copying under "What is already right" in `docs/plan.md`;
    your measurements appended under "Measure" in `docs/plan/step-1.md`.
 
+9. **Documents-only pushes must not restart the game** (added 04:10 UTC
+   from `docs/plan/step-1.md`, "What's decided"; do this right after your
+   current push, before the simulation work, because three more leads
+   start pushing when Gate 1 lands). Measured by the orchestrator: every
+   push to `main`, documents included, redeploys and restarts the server
+   (`startedAt` in `/healthz` moves each time), and documents are pushed
+   every few minutes all night. Add Railway's own config file
+   (`railway.json`, config-as-code; **look up its current schema in
+   Railway's documentation rather than writing it from memory**) with
+   watch patterns so that changes under `docs/**`, `handoff-prompts/**`,
+   `tools/**` and top-level `*.md` do not trigger a deploy, and a health
+   check on `/healthz` so a build that fails to start never replaces the
+   running one. **Prove both, and say so in the commit:** a push touching
+   only a file under `docs/` leaves `startedAt` unchanged (wait two
+   minutes); a push touching code changes it and reports the new commit.
+   **Trap: a wrong pattern can stop every deploy silently.** If the code
+   push after adding the file is not live within five minutes, remove the
+   file, push, confirm deploys work again, and message the lead.
+10. **Keep M1 honest.** `/healthz` reports the commit that is *running*,
+   which after a documents-only push is older than the tip of `main`. Add
+   a small script (suggested `npm run check:deployed`) that fetches
+   `/healthz` from the live address and exits 0 when the running commit is
+   the tip of `origin/main` **or** every commit since it touched only the
+   watched-out paths, printing which; non-zero otherwise. Write its
+   command into `docs/measures.md` under M1 (replace the two-line command
+   there; keep the label).
+
 **The abstract action list is part of the contract** (added 04:12 UTC;
 Steps 2 and 5 are written against it). A player's input for a tick is
 expressed in named, device-independent actions (for example a horizontal
