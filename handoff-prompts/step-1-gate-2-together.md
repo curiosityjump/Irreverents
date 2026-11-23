@@ -145,6 +145,28 @@ By the lead, 2026-11-23 04:02–04:10 UTC, in a container like yours.
 
 ## 3 · Traps
 
+- **"The netcode must let the world move a player" is now decided, in
+  detail** (added 04:26 UTC; read that item in `docs/plan/step-1.md`,
+  "What's decided", it supersedes the looser trap about this below). The
+  protocol carries, from the server to the one player concerned, a small
+  set of *effects* (pushed with this velocity, held by this body,
+  released, moved to this room and place) that the player's own device
+  applies and acknowledges, resent until acknowledged. In the simulation
+  they are ordinary events on the player's entity, so Steps 2 and 3 emit
+  an effect and write no network code. While a character is held or
+  flying from a hit, the server's word wins; its own device takes over
+  when it is free. Prove delivery, acknowledgement and resend (drop the
+  first copy) in the gate F check with one scripted shove.
+- **Every deploy is now about a minute of "Application not found"**
+  (measured by the orchestrator, 04:22:57–04:24:11 UTC). The owner
+  attached a storage volume at 04:2x, and with a volume Railway stops the
+  old server before starting the new one. So: the page's rejoin must keep
+  trying, calmly, for at least three minutes and through HTTP errors on
+  the page's own requests (fact (h): keep the server down for 75 s in
+  e2e, the page is back by itself afterwards); `check:live` polls
+  `/healthz` for up to three minutes before calling the live address red;
+  and "red on live" below means red after that wait, not during the gap.
+
 - **The Gate 1 worker is still landing three small things in your paths**
   as you start: `railway.json` (watch patterns and a health check), one
   storage field in `/healthz` (`src/server/`), and an `npm run

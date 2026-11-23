@@ -99,6 +99,20 @@ Deliver, all on `main`:
    **Trap: a wrong pattern can stop every deploy silently.** If the code
    push after adding the file is not live within five minutes, remove the
    file, push, confirm deploys work again, and message the lead.
+   **Known confound, measured by the orchestrator (added 04:26 UTC):**
+   the owner attached a real storage volume at about 04:22 UTC (live
+   `/healthz` now reports it mounted). With a volume, Railway stops the
+   old server before starting the new one, so **every deploy now shows
+   Railway's "Application not found" for about a minute** (seen
+   04:22:57–04:24:11). That gap, not `railway.json`, very likely caused
+   the 404 you reverted for. The clean test: once the commit that
+   restores `railway.json` is live, make one documents-only push and
+   watch `startedAt` and `commit` for three minutes; then one code push,
+   polling through the gap for up to three minutes before calling it
+   red. Report the result to the lead either way; if the patterns do not
+   hold, say so at once and leave the file out. Write the deploy gap, the
+   patterns and the test into a new `docs/mechanisms/deploy.md` (with its
+   index line), and make `check:deployed` wait through the gap.
 10. **Keep M1 honest.** `/healthz` reports the commit that is *running*,
    which after a documents-only push is older than the tip of `main`. Add
    a small script (suggested `npm run check:deployed`) that fetches
