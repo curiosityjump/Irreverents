@@ -110,6 +110,7 @@ document as a decision of theirs.
 - **Why this way:** lasting saves need storage on Railway that only you can add; nothing tonight depends on it. The game will say plainly what is and is not kept.
 - **To change it:** add a Railway volume and tell us; then small.
 - **Where:** `docs/plan/step-7.md`; the question is filed with Vision Partner.
+- **Since then (04:24 UTC):** you added the volume, and the game sees it (a real one, named `irreverents-volume`, at `/data`). Hall of Legends records will be the first thing kept on it (plan Step 7). The world itself (who is standing where, what is broken) still starts fresh on a restart. One side effect: with a volume attached, each time new code goes live the game is offline for about a minute.
 
 ### 2026-11-23 · A file in the repository now tells Railway not to restart the game for documents-only changes
 - **Decided by:** orchestrator, first run, `session_017WiGzFWfLir1ATiSP7c5E5`

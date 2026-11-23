@@ -58,11 +58,16 @@ knocked open, climbed into and driven through a roadblock that breaks.
 - **The Hall is a room like any other:** Step 3's gallery, people placed
   by Step 4's data. Nothing in it is protected from play, and a record
   survives the Hall being wrecked (doc 09).
-- **Records must outlive the session at least on the server while it
-  runs.** Lasting storage (across deploys, per player) is open in the
-  library and needs a decision about a database: don't add one tonight;
-  say plainly in the Hall what is and is not kept, mark it `DRAFT:`, and
-  file the question.
+- **Records are kept on the volume the owner added.** The owner asked the
+  orchestrator how to add Railway storage and attached it the same night:
+  the live `/healthz` reported `storage: {mounted: true, writable: true,
+  path: "/data", name: "irreverents-volume"}` at 04:24 UTC, 2026-11-23.
+  So Hall records are written to a small file under the path Railway
+  gives the server (`RAILWAY_VOLUME_MOUNT_PATH`; never a hard-coded
+  `/data`), read back at start, and survive restarts and deploys. Where
+  no volume is mounted (a session's own machine, tests) records live in
+  memory and the Hall says so. The file's shape is a contract once
+  written: additive only, with a version number. No database. `DRAFT:`.
 - **The machine is one vehicle with one move** (drive, ram); the
   roadblock breaks in stages with debris (doc 24, "Combat that feels huge
   with scripted opponents" and "1 hijackable machine with a simple
