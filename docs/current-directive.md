@@ -84,6 +84,14 @@ Partner, 2026-11-23, in `docs/vision.md`):
 >
 > Focus on getting things playable asap. I want as much of the vision in playable form as possible by the time i wake up tomorrow. I want to be playing the game having fun with it with my brother in law tomorrow morning.
 
+**Owner, 2026-11-23 ~04:38 UTC, to the orchestrator, first-hand, on going
+to sleep:**
+> Going to sleep now. Realize as much of the vision as possible. Don't stop until you have realized as much as you can.
+
+So the list below does not end at seven, and nobody waits with time in
+hand: a lead whose step closes claims the next open one, and the
+orchestrator keeps more steps open and written than there are free leads.
+
 **Desired results, in priority order** (each is a plan step; the order is
 what to protect if the night runs short):
 1. Two people on separate devices are in the same world at the live
@@ -101,6 +109,15 @@ what to protect if the night runs short):
    (Step 6).
 7. A Hall of Legends that remembers something the players really did, and
    a machine to steal and crash through a roadblock (Step 7).
+8. The whole first ten minutes, played end to end by two scripted
+   players on the live game, so the pieces are known to fit (Step 10).
+9. Then the rest of the confirmed vision, as far as the night reaches:
+   the cantina and its endless brawl (Step 11), powers you pick up and
+   can lose (Step 9), the villain's outpost and a chase that follows you
+   through doors (Step 12), heroes you find and keep (Step 13), things
+   to find and an explored percentage (Step 14), a second place worth
+   coming back to (Step 15). Steps 11–15 are being written from the
+   library now.
 
 **Goal.** By the owner's morning (they are on US Eastern time; working
 deadline 11:00 UTC = 06:00 Eastern, 2026-11-23),

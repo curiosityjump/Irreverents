@@ -24,6 +24,22 @@ can run around, poke at things, hit him, or just leave. The court reacts
 when they do. And if someone really does stand and listen for about three
 hours, the speech turns into the credits.
 
+## How to cut it (a suggestion, not a rule)
+
+**The first half needs only the throne room and Step 2's bodies, and is
+the fastest way for the game to say what it is. Land it first, alone:**
+both players appear in the throne room with the king already talking; a
+slow ribbon of his words that nobody has to read; no prompt and no locked
+door; he is a body like any other, so he can be hit, lifted and thrown,
+and the speech belongs to his body, so he keeps talking wherever he ends
+up; the stained-glass window behind the throne breaks when something
+heavy enough goes through it (doc 03: "players wonder if they can suplex
+him through it"). None of that waits for Step 4.
+
+**The second half** is the court's reaction (Step 4's moods, a call for
+help, guards) once Step 4's rules are on `main`, and the three-hour
+ending. If the night runs short, the first half alone is worth shipping.
+
 ## What's decided
 
 - **No gate of any kind:** no "press to continue", no locked door, no
@@ -82,15 +98,20 @@ hours, the speech turns into the credits.
 
 ## Stopping condition
 
-The four signals pass on `main` and live. **Budget:** two hours from
-claiming; if the owner's morning is nearer than that, land signals 1 and
-2 only and say so.
+The four signals pass on `main` and live (`npm run check:deployed` exits
+0). **Budget:** the first half within an hour of claiming; two hours in
+all. If the 10:00 UTC cut-off is nearer than that, land signal 1 and the
+throwable, still-talking king, and say so. Scenarios are named
+`step6-*.json`.
 
 ## Owns
 
 The throne room's people and props (data), the speech text (data), the
 speech clock and credits; exact paths as `docs/architecture.md` assigns
-them. Queued behind Steps 3 and 4.
+them. The king's body is Step 2's kind of body and his moods are Step
+4's: this step hands him his speech and places him, and edits neither.
+The window is one of Step 3's breakable walls, asked for from its lead.
+Opens as soon as the throne room is on `main`.
 
 ## Taste, for the owner in the morning
 

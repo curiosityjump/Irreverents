@@ -250,7 +250,7 @@ Full text: `docs/plan/step-5.md`
 
 ## Step 6 — The king who never stops talking
 
-**Status: open, unclaimed — queued behind Step 3.** (And Step 4: it needs the throne room and people who react.)
+**Status: open, unclaimed — queued behind Step 3.** (Opens as soon as the throne room is on `main`, not at Step 3's close; its second half needs Step 4's rules.)
 
 Full text: `docs/plan/step-6.md`
 
@@ -271,4 +271,10 @@ Full text: `docs/plan/step-8.md`
 **Status: open, unclaimed — queued behind Step 2.**
 
 Full text: `docs/plan/step-9.md`
+
+## Step 10 — The first ten minutes, played end to end
+
+**Status: open, unclaimed — queued behind Step 1.** (Opens when Step 1's second gate lands: two players on the real page.)
+
+Full text: `docs/plan/step-10.md`
 

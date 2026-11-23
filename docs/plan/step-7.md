@@ -68,6 +68,11 @@ knocked open, climbed into and driven through a roadblock that breaks.
   no volume is mounted (a session's own machine, tests) records live in
   memory and the Hall says so. The file's shape is a contract once
   written: additive only, with a version number. No database. `DRAFT:`.
+  **Build the store as one small general thing** (named collections of
+  records, read at start, written safely, versioned), because the Hall is
+  only its first customer: unlocked heroes (Step 13) and what has been
+  found and explored (Step 14) will keep theirs in it too. Say how to use
+  it in `docs/architecture.md`.
 - **The machine is one vehicle with one move** (drive, ram); the
   roadblock breaks in stages with debris (doc 24, "Combat that feels huge
   with scripted opponents" and "1 hijackable machine with a simple
