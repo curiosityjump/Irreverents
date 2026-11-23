@@ -228,3 +228,15 @@ Full text: `docs/plan/step-4.md`
 
 Full text: `docs/plan/step-5.md`
 
+## Step 6 — The king who never stops talking
+
+**Status: open, unclaimed — queued behind Step 3.** (And Step 4: it needs the throne room and people who react.)
+
+Full text: `docs/plan/step-6.md`
+
+## Step 7 — A Hall that remembers, and a machine to steal
+
+**Status: open, unclaimed — queued behind Step 4.** (And Step 3: it needs the gallery and the alert system.)
+
+Full text: `docs/plan/step-7.md`
+
