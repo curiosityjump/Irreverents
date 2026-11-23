@@ -1,0 +1,369 @@
+{
+ "id": "step16-zero-alarm-ledge",
+ "proves": "Step 16 signal 5, the second zero-alarm way, on foot: the grappler alone walks in from the tower while the lookout looks east and patrol 1 walks away, hops up the two steps by the door onto the high ledge over the yard's west stretch (row 8, five tiles over the lookout and patrol 1, out of their sight up and down), walks it east and drops into the middle stretch past their reach, follows the heavy guard into the strongroom while it walks in looking east, climbs the step onto the shelf over the guard's stand (row 11, 49 px over its middle: out of sight up and down) and waits there while the guard walks back under it to the front, drops behind it, takes the hoard with Use, climbs back onto the shelf, and when the guard has walked in again and stands looking east, drops behind it, walks out through the front and back across the yard, up the step on the stack to the ledge, and down the steps into the tower while the lookout looks east and patrol 1 waits looking east: no call starts, no blow lands and every person in the depot stays in mood 1 throughout. Control (watched to fail, docs/decisions-log.md): the ledge's tiles (row 8, columns 7-17) made empty by a tiles override, the same inputs, and the grappler is seen and a call starts.",
+ "room": "quarry-depot",
+ "placements": true,
+ "players": [
+  {
+   "id": "a",
+   "character": "grappler",
+   "room": "quarry-tower",
+   "spawn": 0
+  }
+ ],
+ "inputs": [
+  {
+   "player": "a",
+   "from": 222,
+   "to": 258,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 258,
+   "to": 266,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 262,
+   "to": 272,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 284,
+   "to": 290,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 290,
+   "to": 298,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 290,
+   "to": 304,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 314,
+   "to": 320,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 320,
+   "to": 328,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 320,
+   "to": 345,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 350,
+   "to": 540,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 540,
+   "to": 548,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 540,
+   "to": 572,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 1225,
+   "to": 1374,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 1374,
+   "to": 1382,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1374,
+   "to": 1384,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 1400,
+   "to": 1408,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1400,
+   "to": 1410,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 1680,
+   "to": 1730,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 1740,
+   "to": 1748,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1740,
+   "to": 1752,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 1775,
+   "to": 1778,
+   "hold": [
+    "interact"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1790,
+   "to": 1815,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 1830,
+   "to": 1838,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1830,
+   "to": 1850,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 1870,
+   "to": 1912,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 1920,
+   "to": 1936,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 1926,
+   "to": 1934,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1960,
+   "to": 1968,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1960,
+   "to": 1970,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 2250,
+   "to": 2540,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 2414,
+   "to": 2422,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 2516,
+   "to": 2524,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 2570,
+   "to": 2578,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 2610,
+   "to": 2618,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 2610,
+   "to": 2700,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 2770,
+   "to": 2900,
+   "x": -1
+  }
+ ],
+ "ticks": 3000,
+ "expect": [
+  {
+   "fact": "event-where",
+   "event": "did",
+   "where": {
+    "deed": "take",
+    "by": "p:a",
+    "thing": "depot-hoard"
+   },
+   "between": [
+    1700,
+    1850
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "event",
+   "event": "changed-room",
+   "player": "a",
+   "where": {
+    "toRoom": "quarry-tower",
+    "toDoor": "to-depot"
+   },
+   "between": [
+    2800,
+    3000
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "in-room",
+   "player": "a",
+   "at": 3000,
+   "room": "quarry-tower"
+  },
+  {
+   "fact": "event-where",
+   "event": "outpost-call-started",
+   "where": {},
+   "between": [
+    0,
+    3000
+   ],
+   "count": [
+    0,
+    0
+   ]
+  },
+  {
+   "fact": "event-where",
+   "event": "hit",
+   "where": {
+    "target": "p:a"
+   },
+   "between": [
+    0,
+    3000
+   ],
+   "count": [
+    0,
+    0
+   ]
+  },
+  {
+   "fact": "mood",
+   "npc": "depot-lookout",
+   "between": [
+    1,
+    3000
+   ],
+   "is": 1
+  },
+  {
+   "fact": "mood",
+   "npc": "depot-fighter-1",
+   "between": [
+    1,
+    3000
+   ],
+   "is": 1
+  },
+  {
+   "fact": "mood",
+   "npc": "depot-fighter-2",
+   "between": [
+    1,
+    3000
+   ],
+   "is": 1
+  },
+  {
+   "fact": "mood",
+   "npc": "depot-guard",
+   "between": [
+    1,
+    3000
+   ],
+   "is": 1
+  }
+ ]
+}
