@@ -174,15 +174,20 @@ orchestrator when it can answer faster than they can decide. Only what
 the owner alone can supply goes to `docs/questions-inbox.md`, and nothing
 waits on it.
 
-**Status (orchestrator session_017WiGzFWfLir1ATiSP7c5E5, 2026-11-23 04:12
-UTC):** the deploy is proven (a push is live in under a minute). Step 1 is
-claimed (lead session_017WiGzEwLs3ng2ZPpRZgctn) and its bare skeleton is
-live: a real build, the server, `/healthz`, a WebSocket. No game on screen
-yet. Steps 2–8 are written and queued; 2, 3 and 4 open at Step 1's first
-gate, 5 and 8 when it closes, 6 and 7 behind the map and the people.
-Results 2–7 above map to Steps 5, 2, 3, 4, 6, 7; Step 8 (the look and the
-sound, as the ordered art arrives) runs alongside; Step 9 (powers you
-pick up and can lose) follows Step 2.
+**Status (orchestrator session_017WiGzJeh7Tuov59d8XYmru, 2026-11-23 08:35
+UTC):** every session was stopped by the shared usage limit from about
+04:58 to 08:26 UTC, so the 10:00 and 10:30 UTC times above no longer
+hold; the rule that still binds is the last one (no code push while
+anyone is playing). Live runs 4a13056 (`/healthz`, 08:31 UTC): one
+character, keyboard only, in the grey test hall. Result 1 is not met:
+Step 1's second gate (two players on the real page, with touch) has not
+landed and is the first priority. On `main` but not yet playable on a
+phone: three heroes and switching, the first part of hit, grab and throw,
+two joined rooms, three people with moods (test room only), the Hall's
+store and pedestal. Running, one worker each: Steps 1, 3, 2, 6. Held:
+Steps 4 and 7. One allowance until 13:20 UTC; aim to be quiet by about
+11:00 UTC with a verified build live. The morning report is due by about
+10:45 UTC (`docs/for-the-orchestrator.md`, handoff entry).
 
 ## History
 
