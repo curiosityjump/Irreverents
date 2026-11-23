@@ -321,3 +321,21 @@ def seen_mark():
     """The heists builder's `seen-mark`: P07 UI atlas bottom right, the yellow '!' speech bubble (alert-pip is its
     red neighbour), its shine rays left on the plate. 12 x 12."""
     return grab('ui', (1252, 928, 1330, 1000), 0, ramps('gold', 'orange', 'metal', 'night'), size=(12, 12))
+
+
+def cage(open_):
+    """The rescue builder's cage (Step 13, camp-captive): P04 interactables row 1, the barred gate shut and its open
+    frame, 32 x 28, standing on the floor. INTENT: the shut gate's gaps between the bars are opaque dark fill on the
+    plate, which would hide the captive; they are cleared (alpha repair, not a redraw) so the hero shows through
+    three bars. DRAFT: the gap box (x 7-24, y 9-20) is read off this cut at this size."""
+    from drive import PARTS
+    from px import INK
+    if open_:
+        return grab('interact', (1265, 175, 1432, 318), 0, PARTS, size=(32, 28))
+    im = grab('interact', (1072, 172, 1236, 318), 0, PARTS, size=(32, 28))
+    for y in range(9, 21):
+        for x in range(7, 25):
+            c = im.getpixel((x, y))
+            if c[3] and (c[:3] == INK[:3] or 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2] < 78):
+                im.putpixel((x, y), (0, 0, 0, 0))
+    return im

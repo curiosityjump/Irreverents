@@ -196,6 +196,10 @@ bottom-centred over an entrance; `level-pie-0`..`4` 12x12 (none, a quarter, half
   The heists builder (Step 19): `unseen` (14x12) and `seen-mark` (12x12) in group `ui` (`assets/ui/hud.png`, appended).
   P07's UI atlas has no closed eye: `unseen` is its stealth hood with two glowing eyes, cut off its slot; `seen-mark`
   is its yellow '!' bubble (alert-pip is the red one). Scene: `loops-heist-4x.png`.
+  The rescue builder (Step 13): `cage-shut`, `cage-open` (32x28) in group `outpost`, appended: P04 interactables
+  row 1's barred gate and its open frame. `INTENT:` the plate fills the gaps between the bars with opaque dark; they
+  are cleared (x 7-24, y 9-20) so a captive shows through three bars. The bottom rail is 7 px tall: a captive drawn
+  on the floor is hidden below the knees, raised 7 px it shows whole. Scene: `loops-cage-4x.png`.
 - **No approved source:** an empty machine or an empty saddle: every cell has the same goggled rider baked in, so a
   hero cannot be drawn riding one without that rider showing (for the Drive's missing-assets list).
 - **Not verified in the game:** no code draws a ride yet; seen in the mock scene only.

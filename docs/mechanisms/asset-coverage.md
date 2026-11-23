@@ -26,13 +26,13 @@ Rows go stale as the look3 lanes push: re-check a row against the current file b
 | Bodies (things you lift, hit or stand by) | 7 | 1 | 4 | 2 |
 | Ground tiles (16 px) | 6 | 2 | 4 | 0 |
 | Backdrops | 14 | 0 | 14 | 0 |
-| Interactive looks (props) | 27 | 18 | 7 | 0 |
+| Interactive looks (props) | 28 | 19 | 7 | 0 |
 | Decor | 43 | 12 | 25 | 6 |
 | Effects | 9 | 5 | 4 | 0 |
 | UI and HUD | 43 | 7 | 31 | 5 |
 | Sound effects | 42 | 29 | 7 | 6 |
 | Music | 8 | 0 | 0 | 8 |
-| **All** | **216** | **87** | **100** | **27** |
+| **All** | **217** | **88** | **100** | **27** |
 
 ## Path keys
 
@@ -195,6 +195,7 @@ Cuts live in tools/art/props/drive.py, round3.py and looks_parts.py.
 | `look:hall` | uses-approved | `P04/hall-of-legends-tile-atlas.png` (opaque pale ground with drawn cell lines: key (247,247,247), grid=True), scale 0.2: plinths (38-272, 398-495), niches (610-1095, 395-497), plaques/shield/banners/drape (38-1320, 510-608), lantern/torch/braziers (40-610, 598-684), doors/window/portals (30-1125, 692-808), statues and keepsakes (35-1420, 885-1062), gold-edged frames (362-517, 114-192); per-piece boxes in loops.HALL. Group `hall`. | The wood doors lose their pale stone arch to the ground key (wood and gold rim only). Statues are thin at 0.2. hall-frame/-frame-star are about 14x16: small for a hall picture; scale up if the picture needs it. No game code draws them yet. |
 | `look:piece` | uses-approved | `P05/p05-ui-hero-party-hud-source.png` bottom row: grey piece x 436-504, gold x 505-572, y 455-498 (the plate's edge cuts them below the side knobs; mirrored about y 498 to close). `piece-grey`, `piece-gold` 12x12 (group `levels`); `goods-special` is the hall-case-crown cut at 14x16 (group `treasure`). | At 8 px the piece is a blob, so 12. |
 | `look:unseen` | uses-approved | `P07/irreverents-pixel-ui-atlas.png` stealth hood (1218,280)-(1306,364), its slot keyed (190,200,248) = `unseen` 14x12; yellow '!' bubble (1252,928)-(1330,1000) = `seen-mark` 12x12 (group `ui`). | No closed eye on any plate checked (P07 UI): the hood stands in for "unseen". |
+| `look:cage` | uses-approved | `P04/chibi-pixel-interactables-sprite-sheet.png` row 1 barred gate (1072,172)-(1236,318) = `cage-shut` (the gaps' dark fill cleared so the captive shows), open frame (1265,175)-(1432,318) = `cage-open`; 32x28, group `outpost`. | No plate shows a cage as such: this is the gate standing in. |
 
 ## Decor
 

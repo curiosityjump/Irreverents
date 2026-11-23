@@ -5,6 +5,8 @@
   "looks": {
     "signaler": {"src": [0, 0, 32, 48]},
     "signaler-sounding": {"src": [32, 0, 32, 48], "frames": 3, "fps": 12},
-    "signaler-broken": {"src": [128, 0, 32, 48]}
+    "signaler-broken": {"src": [128, 0, 32, 48]},
+    "cage-shut": {"src": [0, 48, 32, 28]},
+    "cage-open": {"src": [32, 48, 32, 28]}
   }
 }

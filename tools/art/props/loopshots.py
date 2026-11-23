@@ -157,7 +157,25 @@ def heist():
     return scene
 
 
-SCENES = {'rides': rides, 'powers': powers, 'treasure': treasure, 'hall': hall, 'asks': asks, 'heist': heist}
+def cage():
+    """the rescue builder's cage: shut with a 12x18 captive inside (the grappler shrunk, a stand-in), then open, by
+    night and by day; the captive stands on the floor and again on the cage's 7 px rail"""
+    ou, OL = looks('outpost')
+    hero = Image.open(os.path.join(ROOT, 'assets', 'sprites', 'heroes', 'grappler.png')).convert('RGBA').crop((0, 0, 48, 48))
+    hero = hero.crop(hero.getbbox())
+    hero = hero.resize((hero.width * 18 // hero.height, 18), Image.NEAREST)
+    scene = ground(90, sky=NIGHT, body=NBODY, lip=NLIP)
+    scene.alpha_composite(ground(180).crop((0, 92, 320, 180)), (0, 92))
+    for floor in (90, 176):
+        for cx, lift in ((60, 0), (140, 7)):
+            place(scene, hero, cx, floor - lift)
+            place(scene, frame(ou, OL['cage-shut']), cx, floor)
+        place(scene, frame(ou, OL['cage-open']), 240, floor)
+    return scene
+
+
+SCENES = {'rides': rides, 'powers': powers, 'treasure': treasure, 'hall': hall, 'asks': asks, 'heist': heist,
+          'cage': cage}
 
 if __name__ == '__main__':
     os.makedirs(OUT, exist_ok=True)

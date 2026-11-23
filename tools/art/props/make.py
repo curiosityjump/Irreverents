@@ -100,6 +100,8 @@ def looks_sheets():
     s = Sheet(160)
     work, sound, broken = r3.signaler_frames()
     s.add('signaler', work); s.add('signaler-sounding', sound, frames=3, fps=12); s.add('signaler-broken', broken)
+    s.newrow()
+    s.add('cage-shut', lo.cage(False)); s.add('cage-open', lo.cage(True))  # the rescue builder's camp cage (P04)
     out.append(('outpost', 'props/outpost.png', s))
     # ---- Step 14 slice A's level entrances (drive.py: P05 secrets row 1, P05 HUD rings' colours, P07 sign)
     s = Sheet(160)
