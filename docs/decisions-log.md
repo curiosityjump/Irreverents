@@ -754,3 +754,31 @@ document as a decision of theirs.
 - **To change it:** map the dome to the gold ramp in `tools/art/heroes/p03.py` (`PAL`).
 - **Where:** `tools/art/heroes/README.md`, "Flags for the lead".
 
+
+### 2026-11-23 · The cantina, the Bandit Camp and the quarry are furnished; the quarry's one-tile hiding spots are rubble
+- **Decided by:** Step 8 look round 3, props builder `session_017WiGzJxBqVvizcghgHk5NG`, for orchestrator
+- **Instead of asking:** "What goes in the cantina, the camp and the quarry, and what does a one-tile hiding spot look like?"
+- **Why this way:** the review saw a cantina with one shelf and a camp drawn as the courtyard again. The cantina gets a bar with bottle shelves and a mirror by the doorway, round tables and stools and kegs between the fighting pads (never on them or the bell), red swags and bunting over the stage, and a chandelier and two lanterns with warm light; the camp gets a palisade behind it, two striped tents, a flag, a weapons rack and a campfire with a glow, all clear of the lookout, the horn post and the fighters; the quarry gets scaffolds, rock piles and, in the cave and the pit, hanging lanterns. Most pieces are cut from the art desk's own tavern and furniture plates (the asset desk: "do not re-generate generic inferior art if a strong source here already matches"). Every quarry hiding spot is one tile, in a yard, a cave, a pit and on a roof, so the one picture that fits all of them is a heap of boulders over a dark crevice, not an ore cart.
+- **To change it:** where things go is one function per room in `tools/art/props/place.py`; the pictures are in `tools/art/props/round3.py`; then `python3 -I tools/art/props/make.py`.
+- **Where:** `tools/art/props/README.md`, "Round 3".
+
+### 2026-11-23 · The courtyard's tree, bush and flowers moved off the new doorways
+- **Decided by:** Step 8 look round 3, props builder `session_017WiGzJxBqVvizcghgHk5NG`
+- **Instead of asking:** "The quarry and camp doorways and the gate's plates were added where round 2's tree, bush and flowers stood; which goes?"
+- **Why this way:** decoration never covers a door or a working part (the art contract). The tree now stands east of the gate, the broken column joins the far-off ruins, the bush is gone and the small things sit in the gaps.
+- **To change it:** `courtyard()` in `tools/art/props/place.py`.
+- **Where:** `tools/art/props/README.md`, "Round 3".
+
+### 2026-11-23 · The cantina's regulars and the Bandit Camp's people are the art desk's own chibis
+- **Decided by:** Step 8 look round 3, lane "cast" (builder), for the orchestrator
+- **Instead of asking:** "Which of the source sheets' people should the brawler, the skirmisher, the camp's fighter and lookout, and the horn post be?"
+- **Why this way:** the owner: "There are assets provided" and "don't stop working on it until it looks similar to that"; the asset desk: "Do not re-generate generic inferior art if a strong source here already matches the need." The brawler is P04's bald strongman, the skirmisher P04's feathered-hat patron (the brief's two picks). The camp's fighter and lookout are P07's red-hooded bandit with a dagger and purple-hooded signaller with a horn, not P03's hooded grunt the brief named first: P07's rows carry every pose the game shows (walk, strike, hurt, dizzy, knocked out), where the P03 grunt has no knocked-out pose, and a red fighter beside a purple lookout tells the two jobs apart at a glance. The post is P03's horn post with its horns taken off, so the props lane's horn hangs on it.
+- **To change it:** the plate rectangles in `brawler()`, `skirmisher()`, `outpost_fighter()`, `outpost_lookout()`, `signal_post()` in `tools/art/cast/cut3.py` (the P03 grunt is row 2 of the `villains` plate, about y 377-502), then `python3 -I tools/art/cast/make.py`. `DRAFT:`
+- **Where:** `tools/art/cast/cut3.py`; `tools/art/cast/README.md`, "Round 3".
+
+### 2026-11-23 · An unsettled person sweats and an enraged one goes red in the face, in every pose
+- **Decided by:** Step 8 look round 3, lane "cast" (builder), for the orchestrator
+- **Instead of asking:** "The source sheets draw a worried and an angry face for standing still only; what do a worried or angry person's other poses look like?"
+- **Why this way:** the bar's "NPC Reactions" panel: a red face and an anger mark, the costume unchanged. Where a sheet has the mood's own pose (the brawler's yell, the patron's side-eye) it is used; every other pose gets a sweat drop beside the head (mood 2) or the head's skin turned to the red ramp (mood 3). Nothing tints the costume, so the round-2 rage wash does not come back.
+- **To change it:** `sweat()` and `flush()` in `tools/art/cast/cut3.py`, or a person's own `M2`/`M3` poses there. `DRAFT:`
+- **Where:** `tools/art/cast/cut3.py`.

@@ -21,12 +21,14 @@ from PIL import Image  # noqa: E402
 from px import render, extent  # noqa: E402
 from people import PEOPLE  # noqa: E402
 from things import THINGS  # noqa: E402
+import cut3  # noqa: E402
 
 COLS = 8
 # Sheet rows, in order. A name ending in 2 or 3 is that state in mood 2 or 3.
 PEOPLE_ROWS = ['idle', 'run', 'air', 'hurt', 'down', 'held', 'talk', 'attack',
                'idle2', 'run2', 'talk2', 'idle3', 'run3', 'talk3']
-FPS_BY = {'idle': 6, 'run': 12, 'attack': 14, 'hurt': 10, 'down': 2, 'held': 10, 'talk': 9, 'air': 8}
+FPS_BY = {'idle': 6, 'run': 12, 'attack': 14, 'hurt': 10, 'down': 2, 'held': 10, 'talk': 9, 'air': 8,
+          'grab': 10, 'carry': 4, 'carryRun': 12, 'throw': 14}
 
 
 def build_all():
@@ -92,7 +94,7 @@ def dump(doc):
     keys = list(doc.keys())
     for k in keys:
         v = doc[k]
-        if k in ('frames',) or k == 'moods':
+        if k in ('frames', 'moods'):
             if k == 'frames':
                 inner = ',\n'.join('    %s: %s' % (json.dumps(n), json.dumps(f)) for n, f in v.items())
             else:
@@ -105,6 +107,51 @@ def dump(doc):
     return '\n'.join(lines) + '\n'
 
 
+def round3():
+    """Round 3's people and the horn post, cut from the source sheets (cut3.py)."""
+    out = {}
+    for cid, fn in cut3.ROUND3.items():
+        spec = fn()
+        cw, ch = spec['cell']
+        rows = cut3.rows(spec)
+        img = Image.new('RGBA', (COLS * cw, len(rows) * ch), (0, 0, 0, 0))
+        for ri, (_, poses) in enumerate(rows):
+            if len(poses) > COLS:
+                raise SystemExit('%s: row %d has more than %d frames' % (cid, ri, COLS))
+            for ci, p in enumerate(poses):
+                img.paste(cut3.place(p, cw, ch), (ci * cw, ri * ch))
+        bw, bh = spec['box']
+        frames, moods = {}, {}
+        for ri, (name, poses) in enumerate(rows):
+            nums = [ri * COLS + i for i in range(len(poses))]
+            if name[-1] in '23':
+                moods.setdefault(name[-1], {})[name[:-1]] = nums
+            else:
+                frames[name] = nums
+        if len(frames['air']) == 2:
+            frames['jump'] = [frames['air'][0]]
+            frames['fall'] = [frames['air'][1]]
+        for m in moods:
+            # knocked out looks the same in every mood; the list is named so every state has one
+            moods[m]['down'] = frames['down']
+        doc = {
+            '//': 'DRAFT: stand-in cut from the art desk\'s source sheets by tools/art/cast/make.py (cut3.py, source.py); a delivered sheet replaces it by editing this file.',
+            'id': cid,
+            'image': 'sprites/cast/%s.png' % cid,
+            'cell': {'w': cw, 'h': ch},
+            'anchor': {'x': (cw - bw) // 2, 'y': ch - bh},
+            'fps': 8,
+            'frames': frames,
+            'fpsBy': {k: v for k, v in FPS_BY.items() if k in frames and len(frames[k]) > 1},
+        }
+        if 'carryAt' in spec:
+            doc['carryAt'] = {'x': spec['carryAt'][0], 'y': spec['carryAt'][1]}
+        if moods:
+            doc['moods'] = moods
+        out[cid] = (img, doc)
+    return out
+
+
 def main():
     os.makedirs(os.path.join(ROOT, 'assets', 'sprites', 'cast'), exist_ok=True)
     os.makedirs(os.path.join(ROOT, 'content', 'sprites'), exist_ok=True)
@@ -113,6 +160,11 @@ def main():
         with open(os.path.join(ROOT, 'content', 'sprites', cid + '.json'), 'w') as fh:
             fh.write(dump(content(cid, spec)))
         print('wrote', cid, len(spec['rows']), 'rows')
+    for cid, (img, doc) in round3().items():
+        img.save(os.path.join(ROOT, 'assets', 'sprites', 'cast', cid + '.png'), optimize=False)
+        with open(os.path.join(ROOT, 'content', 'sprites', cid + '.json'), 'w') as fh:
+            fh.write(dump(doc))
+        print('wrote', cid, img.height // doc['cell']['h'], 'rows (cut from the source sheets)')
 
 
 if __name__ == '__main__':

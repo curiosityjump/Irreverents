@@ -1,0 +1,15 @@
+{
+  "//": "DRAFT: stand-in cut from the art desk's source sheets by tools/art/cast/make.py (cut3.py, source.py); a delivered sheet replaces it by editing this file.",
+  "id": "signal-post",
+  "image": "sprites/cast/signal-post.png",
+  "cell": {"w": 32, "h": 48},
+  "anchor": {"x": 11, "y": 16},
+  "fps": 8,
+  "frames": {
+    "idle": [0],
+    "run": [8],
+    "air": [16],
+    "hurt": [24, 25, 26]
+  },
+  "fpsBy": {"hurt": 10}
+}
