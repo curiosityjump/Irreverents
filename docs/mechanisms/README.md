@@ -48,4 +48,5 @@ groups) whenever you add one — never update the number from memory.
 
 ## Index
 
-*(No mechanisms yet. The first group lands with the first mechanism.)*
+**Design library** (`docs/mechanisms/design-library-sync.md`)
+- `tools/drive_sync.py` — mirrors the owner's Google Drive design library into `docs/design-library/` and reports what changed by hash (first import 2026-11-23).

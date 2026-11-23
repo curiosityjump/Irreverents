@@ -1,0 +1,665 @@
+{
+  "project": "Irreverents",
+  "version": "0.1_prototype",
+  "status": "procedural early game-dev test assets, NOT canonical approved art",
+  "tile_size_px": 16,
+  "columns": 8,
+  "atlases": {
+    "grass_ruins": {
+      "file": "grass_ruins_tiles_16px.png",
+      "tiles": [
+        {
+          "id": 0,
+          "name": "grass_top",
+          "x": 0,
+          "y": 0,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 1,
+          "name": "grass_left",
+          "x": 16,
+          "y": 0,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 2,
+          "name": "grass_right",
+          "x": 32,
+          "y": 0,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 3,
+          "name": "grass_left_corner",
+          "x": 48,
+          "y": 0,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 4,
+          "name": "grass_right_corner",
+          "x": 64,
+          "y": 0,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 5,
+          "name": "dirt_fill",
+          "x": 80,
+          "y": 0,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 6,
+          "name": "dirt_left",
+          "x": 96,
+          "y": 0,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 7,
+          "name": "dirt_right",
+          "x": 112,
+          "y": 0,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 8,
+          "name": "dirt_bottom",
+          "x": 0,
+          "y": 16,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 9,
+          "name": "stone_fill",
+          "x": 16,
+          "y": 16,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 10,
+          "name": "stone_top",
+          "x": 32,
+          "y": 16,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 11,
+          "name": "stone_left",
+          "x": 48,
+          "y": 16,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 12,
+          "name": "stone_right",
+          "x": 64,
+          "y": 16,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 13,
+          "name": "stone_bottom",
+          "x": 80,
+          "y": 16,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 14,
+          "name": "stone_crack",
+          "x": 96,
+          "y": 16,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 15,
+          "name": "stone_rubble",
+          "x": 112,
+          "y": 16,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 16,
+          "name": "slope_up",
+          "x": 0,
+          "y": 32,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 17,
+          "name": "slope_down",
+          "x": 16,
+          "y": 32,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 18,
+          "name": "wood_bridge",
+          "x": 32,
+          "y": 32,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 19,
+          "name": "wood_support",
+          "x": 48,
+          "y": 32,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 20,
+          "name": "ladder",
+          "x": 64,
+          "y": 32,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 21,
+          "name": "ladder_top",
+          "x": 80,
+          "y": 32,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 22,
+          "name": "water_top",
+          "x": 96,
+          "y": 32,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 23,
+          "name": "water_deep",
+          "x": 112,
+          "y": 32,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 24,
+          "name": "rock",
+          "x": 0,
+          "y": 48,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 25,
+          "name": "bush",
+          "x": 16,
+          "y": 48,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 26,
+          "name": "flowers",
+          "x": 32,
+          "y": 48,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 27,
+          "name": "vine",
+          "x": 48,
+          "y": 48,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 28,
+          "name": "grass_tuft",
+          "x": 64,
+          "y": 48,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 29,
+          "name": "crate",
+          "x": 80,
+          "y": 48,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 30,
+          "name": "door",
+          "x": 96,
+          "y": 48,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 31,
+          "name": "cave_dark",
+          "x": 112,
+          "y": 48,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 32,
+          "name": "switch",
+          "x": 0,
+          "y": 64,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 33,
+          "name": "plate",
+          "x": 16,
+          "y": 64,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 34,
+          "name": "chest",
+          "x": 32,
+          "y": 64,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 35,
+          "name": "barrel",
+          "x": 48,
+          "y": 64,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 36,
+          "name": "torch",
+          "x": 64,
+          "y": 64,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 37,
+          "name": "empty",
+          "x": 80,
+          "y": 64,
+          "w": 16,
+          "h": 16
+        }
+      ]
+    },
+    "royal_castle": {
+      "file": "royal_castle_tiles_16px.png",
+      "tiles": [
+        {
+          "id": 0,
+          "name": "wall_fill",
+          "x": 0,
+          "y": 0,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 1,
+          "name": "wall_dark",
+          "x": 16,
+          "y": 0,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 2,
+          "name": "wall_crack",
+          "x": 32,
+          "y": 0,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 3,
+          "name": "wall_secret",
+          "x": 48,
+          "y": 0,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 4,
+          "name": "floor_top",
+          "x": 64,
+          "y": 0,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 5,
+          "name": "floor_gold",
+          "x": 80,
+          "y": 0,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 6,
+          "name": "pillar_top",
+          "x": 96,
+          "y": 0,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 7,
+          "name": "pillar_mid",
+          "x": 112,
+          "y": 0,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 8,
+          "name": "pillar_base",
+          "x": 0,
+          "y": 16,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 9,
+          "name": "rail_left",
+          "x": 16,
+          "y": 16,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 10,
+          "name": "rail_mid",
+          "x": 32,
+          "y": 16,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 11,
+          "name": "rail_right",
+          "x": 48,
+          "y": 16,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 12,
+          "name": "steps",
+          "x": 64,
+          "y": 16,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 13,
+          "name": "arch_left",
+          "x": 80,
+          "y": 16,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 14,
+          "name": "arch_right",
+          "x": 96,
+          "y": 16,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 15,
+          "name": "arch_top",
+          "x": 112,
+          "y": 16,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 16,
+          "name": "door_closed",
+          "x": 0,
+          "y": 32,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 17,
+          "name": "door_open",
+          "x": 16,
+          "y": 32,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 18,
+          "name": "door_locked",
+          "x": 32,
+          "y": 32,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 19,
+          "name": "window",
+          "x": 48,
+          "y": 32,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 20,
+          "name": "stained_glass",
+          "x": 64,
+          "y": 32,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 21,
+          "name": "banner",
+          "x": 80,
+          "y": 32,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 22,
+          "name": "torch",
+          "x": 96,
+          "y": 32,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 23,
+          "name": "chest",
+          "x": 112,
+          "y": 32,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 24,
+          "name": "crate",
+          "x": 0,
+          "y": 48,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 25,
+          "name": "barrel",
+          "x": 16,
+          "y": 48,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 26,
+          "name": "ladder",
+          "x": 32,
+          "y": 48,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 27,
+          "name": "lever",
+          "x": 48,
+          "y": 48,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 28,
+          "name": "plate",
+          "x": 64,
+          "y": 48,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 29,
+          "name": "grate",
+          "x": 80,
+          "y": 48,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 30,
+          "name": "royal_throne",
+          "x": 96,
+          "y": 48,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 31,
+          "name": "crown",
+          "x": 112,
+          "y": 48,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 32,
+          "name": "red_curtain",
+          "x": 0,
+          "y": 64,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 33,
+          "name": "crystal",
+          "x": 16,
+          "y": 64,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 34,
+          "name": "gate",
+          "x": 32,
+          "y": 64,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 35,
+          "name": "chain",
+          "x": 48,
+          "y": 64,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 36,
+          "name": "rubble",
+          "x": 64,
+          "y": 64,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 37,
+          "name": "vines",
+          "x": 80,
+          "y": 64,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 38,
+          "name": "plant",
+          "x": 96,
+          "y": 64,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 39,
+          "name": "wall_torch",
+          "x": 112,
+          "y": 64,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 40,
+          "name": "magic_orb",
+          "x": 0,
+          "y": 80,
+          "w": 16,
+          "h": 16
+        },
+        {
+          "id": 41,
+          "name": "treasure",
+          "x": 16,
+          "y": 80,
+          "w": 16,
+          "h": 16
+        }
+      ]
+    }
+  },
+  "notes": [
+    "Native PNG atlases are transparent, aligned to 16x16 cells and readable by a tilemap editor.",
+    "Concept geometry and colors are provisional; consistent native pixel art, but not the final approved art direction.",
+    "Contact preview images add labels and enlarged nearest-neighbor rendering for human review.",
+    "Concept painterly image is kept separately; it is not source tile data."
+  ]
+}

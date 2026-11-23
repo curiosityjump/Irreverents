@@ -1,0 +1,462 @@
+{
+ "root_folder": "https://drive.google.com/drive/folders/1UEVhtK6SA8-8AkWD4w768ZLzx1UjO8DD",
+ "last_sync_utc": "2026-11-23",
+ "entries": [
+  {
+   "kind": "folder",
+   "id": "1APhk4GQoAdrlftyKaF_hpSbUQin5SO5P",
+   "drive_path": "/01 Vision and Narrative"
+  },
+  {
+   "kind": "doc",
+   "id": "1eiJy6KuTf5ze1bu-S5CB5jh_wjCEEG3Txg_UvjIHlAc",
+   "drive_path": "/01 Vision and Narrative/01 — Creative North Star and Player Experience",
+   "repo_path": "01-vision-and-narrative/01-creative-north-star-and-player-experience.md",
+   "sha256": "8be47683fe48d2d74ac231f72e1aed4c569cc8f6c1feb8c1e88c98ab90ee5577"
+  },
+  {
+   "kind": "doc",
+   "id": "1mJ8Pi7zuNuXJDLk5Sn6H6XplVZsCBR968OTZphYsFRY",
+   "drive_path": "/01 Vision and Narrative/02 — World, Narrative and Irreverent Heroes",
+   "repo_path": "01-vision-and-narrative/02-world-narrative-and-irreverent-heroes.md",
+   "sha256": "aa58adfdf0a227fbdfe94707314bbcb76e360eb2df1fb98d82d2219f75dbcb1b"
+  },
+  {
+   "kind": "doc",
+   "id": "1X4Jc4wkkZtiEY1uqz7b7aKf9KILw6X79mtbM_9Btknk",
+   "drive_path": "/01 Vision and Narrative/03 — Opening: The Never-Ending Royal Audience",
+   "repo_path": "01-vision-and-narrative/03-opening-the-never-ending-royal-audience.md",
+   "sha256": "25f559a54275c526e9c8d512a2073797b95798cf6259228ae348ae18ad0705a2"
+  },
+  {
+   "kind": "doc",
+   "id": "16hzOOStE4Nt-uOcD6ApTDbWPT10fgizTC3eOcDB8Vmw",
+   "drive_path": "/01 Vision and Narrative/21 — The Sacred Script: A World Where Everything Has One Glorious Purpose",
+   "repo_path": "01-vision-and-narrative/21-the-sacred-script-a-world-where-everything-has-one-glorious-purpose.md",
+   "sha256": "f294f5c55923739142954ad4ef324b4c59cedada5545c45d19b1a51e75cab95c"
+  },
+  {
+   "kind": "folder",
+   "id": "17Jsjq7uqNna0kUi7t6xR6lYZXnbDY7ko",
+   "drive_path": "/02 Gameplay Systems"
+  },
+  {
+   "kind": "doc",
+   "id": "1AY19fKuh2SEUZ8dH9f56R8Ci1wZ59Hae-FmzSuBMJWc",
+   "drive_path": "/02 Gameplay Systems/04 — World Structure, Secrets and Revisiting",
+   "repo_path": "02-gameplay-systems/04-world-structure-secrets-and-revisiting.md",
+   "sha256": "317c200b019bc6b5938f1ab9cc591c09d98ad85e3097f549f3a26de8ae5a69dc"
+  },
+  {
+   "kind": "doc",
+   "id": "1sE-ZkWFxqP-_UckkA5c7Pf0xbDTfN2kQUDMt6mUDgPk",
+   "drive_path": "/02 Gameplay Systems/05 — Characters, Roster, Parties and Acquired Powers",
+   "repo_path": "02-gameplay-systems/05-characters-roster-parties-and-acquired-powers.md",
+   "sha256": "19716356878bd9a00d836af31b9fe05c92bfd2217e87784081a905b2dac1f1fc"
+  },
+  {
+   "kind": "doc",
+   "id": "1QPSj4HcnjuEF0r9y2ghg4PgAwUdv_nCvweIgQ_H-M0Q",
+   "drive_path": "/02 Gameplay Systems/06 — Online Co-op and Creative Combination Rules",
+   "repo_path": "02-gameplay-systems/06-online-co-op-and-creative-combination-rules.md",
+   "sha256": "44b1f005c022e727bab2778d3b158f1079ad1ca1109396aa6b538cdb2ff2a7cf"
+  },
+  {
+   "kind": "doc",
+   "id": "11sUrQ0eFfjXi_inoYBFnYGJ6FA_IAc5fJeKfru5KDIQ",
+   "drive_path": "/02 Gameplay Systems/07 — Stealth, Heists, NPC Reactions and Pursuit",
+   "repo_path": "02-gameplay-systems/07-stealth-heists-npc-reactions-and-pursuit.md",
+   "sha256": "b4790b48748b2c63673764b89c3786e64ba3faea6421dff14abbc8be6d27711b"
+  },
+  {
+   "kind": "doc",
+   "id": "1Px-MPxRc2dTP-yyxCJcSCGRg5Y-TY6AuLA62ovOcn1c",
+   "drive_path": "/02 Gameplay Systems/08 — Combat Impact, Destruction and Vehicles",
+   "repo_path": "02-gameplay-systems/08-combat-impact-destruction-and-vehicles.md",
+   "sha256": "3b204f8e1e1dd9c16339a584cd8d6589dba00159975a74c41de76373157ba664"
+  },
+  {
+   "kind": "doc",
+   "id": "1YHOq_XWGEU59lMoiVnhJpADMeOMk33h6Vg02fSXEqGo",
+   "drive_path": "/02 Gameplay Systems/09 — Hall of Legends, Records and Living History",
+   "repo_path": "02-gameplay-systems/09-hall-of-legends-records-and-living-history.md",
+   "sha256": "98a2c0ce0495bb30f515bf60c885cbea5ae9bef11bcc5fa043ce768f2a29cfc5"
+  },
+  {
+   "kind": "doc",
+   "id": "1jQssgW8w1oXo_14lLhbGHVwWTPef7y2TEU_aCD_nMvQ",
+   "drive_path": "/02 Gameplay Systems/22 — Narrative Dissonance: Provocation and Instant Reassurance",
+   "repo_path": "02-gameplay-systems/22-narrative-dissonance-provocation-and-instant-reassurance.md",
+   "sha256": "2ed69001dc1722c5a2ef292fac75bdf14924598ebac1c7bb1d245a778dc84794"
+  },
+  {
+   "kind": "doc",
+   "id": "1wuGuCu1RhXXhdWuU55ZcJJ8rZAbCx98mZfdqsyrgMv8",
+   "drive_path": "/02 Gameplay Systems/23 — The Three NPC Modes: Role-Consistent Behavior, Distress, Rage",
+   "repo_path": "02-gameplay-systems/23-the-three-npc-modes-role-consistent-behavior-distress-rage.md",
+   "sha256": "26df31263a086120a95ab51e38ffdbf301289ecd360e8ff0b909a166784e317d"
+  },
+  {
+   "kind": "doc",
+   "id": "1WdIyj6OrTzMhXD842nIJ4iIlQYlFuQQiwxNj2ygIyYM",
+   "drive_path": "/02 Gameplay Systems/24 — Feasible Game Architecture: Making Irreverents Playable",
+   "repo_path": "02-gameplay-systems/24-feasible-game-architecture-making-irreverents-playable.md",
+   "sha256": "fdf5a15b033fe23cc2bb021e1e3b3553884ae50b3f5703ba38a038c024341328"
+  },
+  {
+   "kind": "doc",
+   "id": "1wbSNfKLfrUsg9YX5qsRhYX9KwiMX8clXRZZBiuuz8PA",
+   "drive_path": "/02 Gameplay Systems/26 — Witnesses, Reporting and Wanted Levels",
+   "repo_path": "02-gameplay-systems/26-witnesses-reporting-and-wanted-levels.md",
+   "sha256": "2ee3111596a3fa686b0d03d476c06b247eb95c0099a325ef718eea0a5ff88445"
+  },
+  {
+   "kind": "doc",
+   "id": "1RMdB5x9k3wfVKolnYhZLtuwLYrm3lmrO1w6fpjCy7po",
+   "drive_path": "/02 Gameplay Systems/27 — Persistent Wanted Pursuits and Three-Sided Battles",
+   "repo_path": "02-gameplay-systems/27-persistent-wanted-pursuits-and-three-sided-battles.md",
+   "sha256": "5a2fc85db69158c7bb0c2d622cdb2a08619ccca765e85c633ea90cfb06b6dd88"
+  },
+  {
+   "kind": "doc",
+   "id": "1r7D8pXDPNtablfb9r8BOWWrxO6czv0hqHqLjsD8kRKU",
+   "drive_path": "/02 Gameplay Systems/31 — Cantina: Party Roster Hub and Endless Brawl",
+   "repo_path": "02-gameplay-systems/31-cantina-party-roster-hub-and-endless-brawl.md",
+   "sha256": "18d1f3eac3e2ea2489c1510fb40cafd43ea11ba39d8b9fee9ee0046405fa52c5"
+  },
+  {
+   "kind": "folder",
+   "id": "14_W7PwMV8nmRRTSo5FB6_gtih3V4j8Y-",
+   "drive_path": "/03 Visual Direction and Assets"
+  },
+  {
+   "kind": "folder",
+   "id": "1W5iBhYZ0FMBD35Pa3DIYr_SNZLrA6yJn",
+   "drive_path": "/03 Visual Direction and Assets/00 Asset Production Plan and Style Lock"
+  },
+  {
+   "kind": "doc",
+   "id": "1reKfubHb_S6mSyn89kTSm8T2bSRd67E2MptsL24skL8",
+   "drive_path": "/03 Visual Direction and Assets/00 Asset Production Plan and Style Lock/13 — Art Asset Production Plan — Ordered Generation Backlog",
+   "repo_path": "03-visual-direction-and-assets/00-asset-production-plan-and-style-lock/13-art-asset-production-plan-ordered-generation-backlog.md",
+   "sha256": "0781562e6b9dd95afec3522e69fcbfca62a2d6f312a036eee748640a13b8d122"
+  },
+  {
+   "kind": "doc",
+   "id": "1TYZcSUJ6pRxWCp76f2mrvwAAz90PRCYVRAWiejmJFFI",
+   "drive_path": "/03 Visual Direction and Assets/00 Asset Production Plan and Style Lock/14 — Visual Style Lock — Amazing Mirror-Era Pixel-Art Contract",
+   "repo_path": "03-visual-direction-and-assets/00-asset-production-plan-and-style-lock/14-visual-style-lock-amazing-mirror-era-pixel-art-contract.md",
+   "sha256": "655169e7d48abe0a229e6b186ee7c052e95aa685f3b23385cc5da23a2cb7fc60"
+  },
+  {
+   "kind": "folder",
+   "id": "1keZSTY0jaKXupkZ8TXZMW11c9e5s__C2",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations"
+  },
+  {
+   "kind": "folder",
+   "id": "1wSx5SxZf0lRaQqKqgPP-fy_SenjAKfYB",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/E01 — Level Construction Kit (Experimental 16px)"
+  },
+  {
+   "kind": "doc",
+   "id": "1CdGdaj-Q1e1JWT2s63no3Pp1CMwxPw9qzhExikZbWKY",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/E01 — Level Construction Kit (Experimental 16px)/E01 README — Using the Experimental Construction Kit",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/e01-level-construction-kit-experimental-16px/e01-readme-using-the-experimental-construction-kit.md",
+   "sha256": "bd01ff1d2908338080b1ea8e84b3347732f7480652241256e9ffa8a1c1ac3953"
+  },
+  {
+   "kind": "file",
+   "id": "1lqsDimFjkzDPpmbdJWBxr1EORH09bpu7",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/E01 — Level Construction Kit (Experimental 16px)/E01 — Composed playable-room scale proof.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/e01-level-construction-kit-experimental-16px/e01-composed-playable-room-scale-proof.png",
+   "sha256": "439ebba904c2bfcf150cb3f2a456e9da38bf9b175a8ab28895ea45c22cac7381"
+  },
+  {
+   "kind": "file",
+   "id": "1RFvEYnknErRSsJvSkI-WaFuYE3AzPqdS",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/E01 — Level Construction Kit (Experimental 16px)/E01 — Grid-aligned tilekit (source + PNGs + manifest).zip",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/e01-level-construction-kit-experimental-16px/e01-grid-aligned-tilekit-source-pngs-manifest/",
+   "sha256": "076f11e092dd9184eadbd962d74c9963c5a3caec48e1a150fffb4af323090f7c"
+  },
+  {
+   "kind": "file",
+   "id": "1L9zKq4igj6MyI1-yIRgU1yssRQyKU66Z",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/E01 — Level Construction Kit (Experimental 16px)/E01 — Tile metadata and coordinates.json",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/e01-level-construction-kit-experimental-16px/e01-tile-metadata-and-coordinates.json",
+   "sha256": "72f8a4d72efcff140276fd245c9647eb345f9118aa19cfee921515051152eac5"
+  },
+  {
+   "kind": "file",
+   "id": "1rIzWfAF3aIoCmeE3ukmuAWYkIdLUZufU",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/E01 — Level Construction Kit (Experimental 16px)/E01-01 — Terrain construction concept sheet.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/e01-level-construction-kit-experimental-16px/e01-01-terrain-construction-concept-sheet.png",
+   "sha256": "2d37ff55da4bee9d2dc7a711bdccd4ade666469e3016734c27c192dacd75b742"
+  },
+  {
+   "kind": "file",
+   "id": "1Zgf9Ms727VAEcC0ZDIlhBVOfkA8CZlNQ",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/E01 — Level Construction Kit (Experimental 16px)/E01A — Grass ruins 16px transparent atlas.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/e01-level-construction-kit-experimental-16px/e01a-grass-ruins-16px-transparent-atlas.png",
+   "sha256": "dc9db6af9eadc701cb17c7fbb4b34b29d39b4eae2a5d2e5de200d78a73ac5f12"
+  },
+  {
+   "kind": "file",
+   "id": "1GkLuwGuJmYua3bncZZRe6fvAQRfGioFk",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/E01 — Level Construction Kit (Experimental 16px)/E01A — Grass ruins tile reference sheet.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/e01-level-construction-kit-experimental-16px/e01a-grass-ruins-tile-reference-sheet.png",
+   "sha256": "ac5f0f9b5c83582bd53ac7bf5facdb778d67cdffe99338ad50cdead5103380c5"
+  },
+  {
+   "kind": "file",
+   "id": "1DL-NvflklT2sWvtaV809aRnLzbajZPyh",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/E01 — Level Construction Kit (Experimental 16px)/E01B — Castle 16px transparent atlas.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/e01-level-construction-kit-experimental-16px/e01b-castle-16px-transparent-atlas.png",
+   "sha256": "f65d8f79dda658fea513fc1ed441a041edb89a28df0f4478866668e61fa970ce"
+  },
+  {
+   "kind": "file",
+   "id": "1bF9092nhTxRDlGEVoaTkpqouf9vUI_XY",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/E01 — Level Construction Kit (Experimental 16px)/E01B — Castle tile reference sheet.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/e01-level-construction-kit-experimental-16px/e01b-castle-tile-reference-sheet.png",
+   "sha256": "f99c4ed4a997ba3091d7896f6b46e1f8567880f6424e0b9232660556272e9c2f"
+  },
+  {
+   "kind": "folder",
+   "id": "11Wli0oy1WAtgIHT4ZUPX5Nprs0nM3RBD",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/Quiet pixel-art environment studies — reduced visual noise"
+  },
+  {
+   "kind": "file",
+   "id": "1yxc6rXqOKyMHLEq29eUrsTfWhTroiYz3",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/Quiet pixel-art environment studies — reduced visual noise/E-Q01 — Quiet throne hall, clear playable platforms.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/quiet-pixel-art-environment-studies-reduced-visual-noise/e-q01-quiet-throne-hall-clear-playable-platforms.png",
+   "sha256": "1c03ab3a50e44eed45aa2e575df6f7fcb2337b92cd11b044c0d5d775507707c1"
+  },
+  {
+   "kind": "file",
+   "id": "1ZzsDSnFWhXt8co6ybMenMB1tJ8n-AbLb",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/Quiet pixel-art environment studies — reduced visual noise/E-Q02 — Sunset ruins and bridge, simple depth.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/quiet-pixel-art-environment-studies-reduced-visual-noise/e-q02-sunset-ruins-and-bridge-simple-depth.png",
+   "sha256": "9817051e2d69215b6c54d98f84df9cb566acac9b98c805269336caddcb38ac46"
+  },
+  {
+   "kind": "file",
+   "id": "1CS7h4NNsW795y8v2e-Xlz-YKiuESN2P5",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/Quiet pixel-art environment studies — reduced visual noise/E-Q03 — Night castle courtyard, stealth-friendly lighting.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/quiet-pixel-art-environment-studies-reduced-visual-noise/e-q03-night-castle-courtyard-stealth-friendly-lighting.png",
+   "sha256": "dbe09130dca020af066ab6a34ae431927188ec8b573d2a8b235efac1c05fdc0a"
+  },
+  {
+   "kind": "file",
+   "id": "1Ng0Q0qhagVE8rjbYsMLSmudBXPdPZGDa",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/Quiet pixel-art environment studies — reduced visual noise/E-Q04 — Castle gate and grass, modular layout study.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/quiet-pixel-art-environment-studies-reduced-visual-noise/e-q04-castle-gate-and-grass-modular-layout-study.png",
+   "sha256": "0a2b6925b831dd70540cb293f3837e3569706538e0c0c0d93cbc951b3aeebe44"
+  },
+  {
+   "kind": "file",
+   "id": "1jdxQqXjyExDda2TE8r8iZZRITsjRk_kR",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/Quiet pixel-art environment studies — reduced visual noise/E-Q05 — Floating ruins, restrained color study.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/quiet-pixel-art-environment-studies-reduced-visual-noise/e-q05-floating-ruins-restrained-color-study.png",
+   "sha256": "166b2caeb8f22b692a6470badd361d343179f27cc5fdc311b3b1858539008530"
+  },
+  {
+   "kind": "file",
+   "id": "1_Kf9A99HzHi7BH-jt_H_nQz2K5F5OhJ1",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/Character roster — pixel art exploration.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/character-roster-pixel-art-exploration.png",
+   "sha256": "51bbd7d4b1b95f38b1c5004a792d7e3251382b7c2e3fc7d51b13dd3a7ddb93f4"
+  },
+  {
+   "kind": "file",
+   "id": "1nngd6l6Sargc5dRENSmZjEGF0vagxBGV",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/Cooperative adventure — pixel asset studies.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/cooperative-adventure-pixel-asset-studies.png",
+   "sha256": "77b8e27692e40bffe59fc6cf03d9f4c6ba469df87fa785cdbcc445284f062593"
+  },
+  {
+   "kind": "file",
+   "id": "1VSAPHeTQ5Uw_5AFP-Y4paoxQHIQhCWck",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/Gameplay showcase — pixel art study.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/gameplay-showcase-pixel-art-study.png",
+   "sha256": "69fc83fbe75ff1e932588761c433d957e8b206260bdbd29f84c12cd45a636c44"
+  },
+  {
+   "kind": "file",
+   "id": "1s2xzQtWfZw_KJwf7xkuHA8cu1RqFs5kq",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/Pixel aesthetic reference — approved direction.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/pixel-aesthetic-reference-approved-direction.png",
+   "sha256": "38be390a30a52c7fa2632010d19a5bbac98d9d2a983d11993c3b28f1cf2dc27c"
+  },
+  {
+   "kind": "file",
+   "id": "18e3U20DMwbmZHrU8RFOwO1PU1qjfV0w8",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/World and ability asset studies — pixel art.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/world-and-ability-asset-studies-pixel-art.png",
+   "sha256": "7a6cbec532d93e5ad461e9002c39e056c4ced9c4e4bd6e5e85fab60383898e06"
+  },
+  {
+   "kind": "folder",
+   "id": "1BSIak5-a3FUlsJ6RW7mqrGLobOB53Erl",
+   "drive_path": "/03 Visual Direction and Assets/Superseded Style Explorations"
+  },
+  {
+   "kind": "file",
+   "id": "1nu8vE_iZDzSSgQI2RjGPiEW8Qz0tBLL_",
+   "drive_path": "/03 Visual Direction and Assets/Superseded Style Explorations/Earlier style A — warm toybox fantasy.png",
+   "repo_path": "03-visual-direction-and-assets/superseded-style-explorations/earlier-style-a-warm-toybox-fantasy.png",
+   "status": "not downloaded (superseded)"
+  },
+  {
+   "kind": "file",
+   "id": "17mpbHD_X2-fkTaIuQXBI9M9ocVIgA9GI",
+   "drive_path": "/03 Visual Direction and Assets/Superseded Style Explorations/Earlier style B — painterly fantasy.png",
+   "repo_path": "03-visual-direction-and-assets/superseded-style-explorations/earlier-style-b-painterly-fantasy.png",
+   "status": "not downloaded (superseded)"
+  },
+  {
+   "kind": "file",
+   "id": "1AvbP9y_HBk0Zn5RcYryEzN8ogtrv78CY",
+   "drive_path": "/03 Visual Direction and Assets/Superseded Style Explorations/Earlier style C — bold platformer.png",
+   "repo_path": "03-visual-direction-and-assets/superseded-style-explorations/earlier-style-c-bold-platformer.png",
+   "status": "not downloaded (superseded)"
+  },
+  {
+   "kind": "file",
+   "id": "1YdSsTMkdsvExb3D1iIz8VeMdy9atdPTv",
+   "drive_path": "/03 Visual Direction and Assets/Superseded Style Explorations/Earlier style D — urban fantasy mayhem.png",
+   "repo_path": "03-visual-direction-and-assets/superseded-style-explorations/earlier-style-d-urban-fantasy-mayhem.png",
+   "status": "not downloaded (superseded)"
+  },
+  {
+   "kind": "doc",
+   "id": "1VJOvGqbT3wcqgD8-PaXpftODBr42ChGmqdBYHvx7_i0",
+   "drive_path": "/03 Visual Direction and Assets/10 — Visual Direction, Asset Index and Art Brief",
+   "repo_path": "03-visual-direction-and-assets/10-visual-direction-asset-index-and-art-brief.md",
+   "sha256": "9fdb3019e1fdae075b3660e0962e42d58fd7a358bc45bda22be2456bb1118ab0"
+  },
+  {
+   "kind": "folder",
+   "id": "1IszJaiaCjwWi3pc8Fi-V9xGIq_S778XL",
+   "drive_path": "/04 Decisions and Prototyping"
+  },
+  {
+   "kind": "doc",
+   "id": "1vlwf5VZgwT0E0cKqYF4o0EI5LhuR4iiZxCyVUUreytU",
+   "drive_path": "/04 Decisions and Prototyping/11 — Decision Register, Boundaries and Open Questions",
+   "repo_path": "04-decisions-and-prototyping/11-decision-register-boundaries-and-open-questions.md",
+   "sha256": "933c3554e014dee8aa985a72e315db60b7fa306e29528d00c4def38ecc05d98d"
+  },
+  {
+   "kind": "doc",
+   "id": "1AKkv8KIGU5RRhEeaOqtExTfsJw2xWFCt65PqeVCHDcc",
+   "drive_path": "/04 Decisions and Prototyping/12 — Golden Scenarios and Prototype Acceptance Tests",
+   "repo_path": "04-decisions-and-prototyping/12-golden-scenarios-and-prototype-acceptance-tests.md",
+   "sha256": "6a199f411b492f9782a1cb0b63767d2e17c05f5defd66f6f848b69c95b4aa77a"
+  },
+  {
+   "kind": "doc",
+   "id": "1NtE6Be9LX5uOd6ditYwN0UPeSbhEefEW4SJ75NVFGf0",
+   "drive_path": "/04 Decisions and Prototyping/25 — Playable Level Anthology: Twelve Irreverent Adventures",
+   "repo_path": "04-decisions-and-prototyping/25-playable-level-anthology-twelve-irreverent-adventures.md",
+   "sha256": "cf0c09c858406952ab6e965124653b90eb78c33ec6f3c5c33296f9fbf8e4b52f"
+  },
+  {
+   "kind": "doc",
+   "id": "1W09Tzw4sRLsy9zCQJGj9vPoiI8F01sjSCLyVpF54Xzs",
+   "drive_path": "/04 Decisions and Prototyping/32 — Verified Drive Audit and Art Curation Gate",
+   "repo_path": "04-decisions-and-prototyping/32-verified-drive-audit-and-art-curation-gate.md",
+   "sha256": "c7d21f2770fbcc1b9c103cb746fd6103544233868d6c57dcee6c1070fa461128"
+  },
+  {
+   "kind": "folder",
+   "id": "1dbl7vEcPb6nNokyH15SmluB4r87YK23L",
+   "drive_path": "/05 World and Game Expansion — Proposals"
+  },
+  {
+   "kind": "doc",
+   "id": "1uOzDzNwhqwValL70Ix7rgE-ss8S6l22BJXVjftZCfYk",
+   "drive_path": "/05 World and Game Expansion — Proposals/05 START HERE — Expanded World & Game Proposals",
+   "repo_path": "05-world-and-game-expansion-proposals/05-start-here-expanded-world-game-proposals.md",
+   "sha256": "66d16378759d580aaa58d15ad54b2edbf825216e5de8d5ef37226b87921adcf4"
+  },
+  {
+   "kind": "doc",
+   "id": "1ML4mYkg2PDRBVrkA1waxXJPCmuDpGdBWZ3cmU_ZEj9M",
+   "drive_path": "/05 World and Game Expansion — Proposals/15 — World Atlas: The Kingdom and Its Hidden Routes (Proposed)",
+   "repo_path": "05-world-and-game-expansion-proposals/15-world-atlas-the-kingdom-and-its-hidden-routes-proposed.md",
+   "sha256": "490a3e2263608ef910d09c9985569446ef086d2296fd112af2f63aa655b919c3"
+  },
+  {
+   "kind": "doc",
+   "id": "1fkVzvjB94BMxHNwSGgcWFZbz_9whf2oPEhNznwB5wak",
+   "drive_path": "/05 World and Game Expansion — Proposals/16 — The Living World: People, Factions and Contradictory Reputation (Proposed)",
+   "repo_path": "05-world-and-game-expansion-proposals/16-the-living-world-people-factions-and-contradictory-reputation-proposed.md",
+   "sha256": "7deb0f6cf41668be57cb0464ffaf8578b8d36245782d4534aaf0992111eea554"
+  },
+  {
+   "kind": "doc",
+   "id": "1Ck4bDkPu5j54bkx6CXzDyhZrpEb7c_VbZ4oHQu3xntw",
+   "drive_path": "/05 World and Game Expansion — Proposals/17 — The Grand Quest Nobody Gets Around To (Proposed Story Bible)",
+   "repo_path": "05-world-and-game-expansion-proposals/17-the-grand-quest-nobody-gets-around-to-proposed-story-bible.md",
+   "sha256": "7f5a89d898a6c4139b622388d93c3d6d5cef94f4afe930549d027577277b6b77"
+  },
+  {
+   "kind": "doc",
+   "id": "1ERo2-TFbGwTm7Y4UfDHsJA-jmgSA7pR8zHp3Qz1uUaI",
+   "drive_path": "/05 World and Game Expansion — Proposals/18 — Systemic Adventure Engine: How Situations Become Legends (Proposed)",
+   "repo_path": "05-world-and-game-expansion-proposals/18-systemic-adventure-engine-how-situations-become-legends-proposed.md",
+   "sha256": "22329a859d334cae5fbfe6886361bb8e12813d669b34b37856798e9d8f2296df"
+  },
+  {
+   "kind": "doc",
+   "id": "1vo7Gf22e_cE4sVM8hU4mDUYYFXreOObWNS0yD-KklDI",
+   "drive_path": "/05 World and Game Expansion — Proposals/19 — Character Ecology, Recruitment and Ability Interactions (Proposed)",
+   "repo_path": "05-world-and-game-expansion-proposals/19-character-ecology-recruitment-and-ability-interactions-proposed.md",
+   "sha256": "a3d984151c85cdec7e8331c488ce06c601d09ae55a3211a0747e7f8e291441bd"
+  },
+  {
+   "kind": "doc",
+   "id": "1-qy6AhsCBl3KZYmHiiVfmtxRRAVLp4mJHMOfhIjwEJk",
+   "drive_path": "/05 World and Game Expansion — Proposals/20 — Encounter Atlas: 15 Playable Stories Without Mandatory Scripts (Proposed)",
+   "repo_path": "05-world-and-game-expansion-proposals/20-encounter-atlas-15-playable-stories-without-mandatory-scripts-proposed.md",
+   "sha256": "3ad2f0879aee343e45a5caed062d8859a5a4b7acbbe5049771e95668d0efcc2b"
+  },
+  {
+   "kind": "doc",
+   "id": "1tvbPY5po9I6XitnlNzVrE8UH7ihgU8rIjSr_CBuHyko",
+   "drive_path": "/05 World and Game Expansion — Proposals/28 — Ten More Gameplay-First Level Designs",
+   "repo_path": "05-world-and-game-expansion-proposals/28-ten-more-gameplay-first-level-designs.md",
+   "sha256": "8053937f6a29f66ec78126a1c9e84c586b30b19076e6f5b374c1d86d1f6ecdcb"
+  },
+  {
+   "kind": "doc",
+   "id": "13cnvLDsV6ILLs_yc202HENUSVKYMiMcHpmZpMXvpeoc",
+   "drive_path": "/05 World and Game Expansion — Proposals/29 — Level Completion: Exploration and Mystery Components",
+   "repo_path": "05-world-and-game-expansion-proposals/29-level-completion-exploration-and-mystery-components.md",
+   "sha256": "03da5c1e25fbfe9b4507e0ae223db8060520f64da1623aa0a977e205d59cb7fa"
+  },
+  {
+   "kind": "doc",
+   "id": "1puHJwUoNnBkNZyTLCh01VRQiqzUzjnb7plYfni9e2Gw",
+   "drive_path": "/05 World and Game Expansion — Proposals/30 — Rare Powers, Recoverable Drops, and Return Expeditions",
+   "repo_path": "05-world-and-game-expansion-proposals/30-rare-powers-recoverable-drops-and-return-expeditions.md",
+   "sha256": "a4d555cd8e53011443dbfcb824c8b48a05c1ca7f438edb6a83d086d4acf29bc3"
+  },
+  {
+   "kind": "doc",
+   "id": "1-ASnTbCLAXSi_WCOl_7KNuUgelLXLmiZFKiN6APao2s",
+   "drive_path": "/00 START HERE — Irreverents",
+   "repo_path": "00-start-here-irreverents.md",
+   "sha256": "2b10eca3b00072837b7dc954a3f9a789d9c4b3d736f01ee71f7aa59d29e3f45f"
+  },
+  {
+   "kind": "doc",
+   "id": "17R7aKkqDxQwRk-cmywQbvQ_CcEzz4UqHz37YYYRnADs",
+   "drive_path": "/changelog",
+   "repo_path": "changelog.md",
+   "sha256": "e037f1cdc9ad2b9b356fd18d80f772ac4bfa3c467a03ee0afa14cabd6e412062"
+  }
+ ]
+}
