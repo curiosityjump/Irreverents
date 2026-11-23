@@ -58,6 +58,12 @@
   #pad .icon { left: var(--pad-icon-x, 0); top: var(--pad-icon-y, 0); }
   .art > .icon { display: block; }
   .on > .icon { background-position: 100% 0; opacity: 1; }
+  /* DRAFT: in an enter doorway the Use button goes through it (touch.ts, showGoIn): its picture gives way to a small arched door with an up arrow and the words "Go in". Same button, same place. */
+  #actions button .go { display: none; }
+  #actions button.go-in { color: transparent; text-shadow: none; }
+  #actions button.go-in > .icon { display: none; }
+  #actions button.go-in > .go { display: flex; position: absolute; top: 0; right: 0; bottom: 0; left: 0; flex-direction: column; align-items: center; justify-content: center; gap: 4px; color: var(--cream); text-shadow: 0 0 2px #0f0f1c, 0 1px 1px #0f0f1c; pointer-events: none; }
+  #actions button.go-in > .go::before { content: "\25B2"; display: block; width: 16px; height: 18px; box-sizing: border-box; border: 2px solid var(--cream); border-bottom: 0; border-radius: 8px 8px 0 0; background: rgba(15, 15, 28, .55); font-size: 8px; line-height: 15px; text-align: center; box-shadow: 0 0 2px #0f0f1c; }
 
   #hint { position: absolute; left: 0; right: 0; top: var(--hint-top, 200px); padding: 0 16px; display: flex; align-items: center; justify-content: flex-start; gap: 8px; text-transform: uppercase; letter-spacing: .12em; text-align: center; color: rgba(210, 207, 224, .8); }
   #hint[hidden] { display: none; }

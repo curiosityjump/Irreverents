@@ -39,6 +39,32 @@ function addIcon(el: HTMLElement, file: string): void {
   probe.src = url;
 }
 
+/**
+ * The Use button says when it goes through a doorway: while this page's own
+ * character stands in an enter doorway (src/sim/systems/room-doors.ts,
+ * enterDoorwayAt), the `interact` button wears a door-and-arrow look and
+ * the words "Go in" (index.html `.go-in`), and carries
+ * `data-state="go-in"` so a check can read it. The button stays the same
+ * element with the same `data-action`; nothing else moves (the owner,
+ * 2026-11-23: "There is no stick to push up...").
+ * DRAFT: the look and the words (decisions-log 2026-11-23 "Doorways by Use").
+ */
+export function showGoIn(host: HTMLElement, on: boolean): void {
+  const b = host.querySelector<HTMLElement>('#actions [data-action="interact"]');
+  if (!b || b.classList.contains('go-in') === on) return;
+  let go = b.querySelector<HTMLElement>(':scope > .go');
+  if (!go) {
+    go = document.createElement('span');
+    go.className = 'go';
+    go.textContent = 'Go in';
+    b.append(go);
+  }
+  b.classList.toggle('go-in', on);
+  if (on) b.dataset.state = 'go-in';
+  else delete b.dataset.state;
+  b.setAttribute('aria-label', on ? 'Go in' : (b.firstChild?.textContent ?? ''));
+}
+
 export function watchTouch(content: Content, host: HTMLElement): () => Input {
   let x = 0;
   let y = 0;

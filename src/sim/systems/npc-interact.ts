@@ -1,6 +1,7 @@
 import type { Entity, System } from '../types.ts';
 import { findEntity } from '../world.ts';
 import { centre, isOut, thingDef } from '../npc/state.ts';
+import { inEnterDoorway } from './room-doors.ts';
 
 /**
  * A hero using a thing: a fresh press of the `interact` action
@@ -31,6 +32,8 @@ const system: System = {
       const fresh = down && !state.held;
       state.held = down;
       if (!fresh || isOut(e)) continue;
+      // DRAFT: in an enter doorway, Use goes through it (systems/room-doors.ts); the door wins the press.
+      if (inEnterDoorway(content, e)) continue;
 
       const me = centre(content, e);
       let best: Entity | undefined;

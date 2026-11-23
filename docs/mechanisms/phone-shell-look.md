@@ -61,8 +61,9 @@ into their homes.
   pixels per art pixel; upright a picture fills its button.
 - **The stick pushes up**: slide the thumb up off the pad and keep holding
   (down: off its bottom). Before this a touch player could never enter an
-  `enter` doorway (that takes a fresh push up, `room-doors.ts`) or attack
-  or throw upwards. A small chevron above the pad (not over the view) shows
+  `enter` doorway (that takes a fresh push up, `room-doors.ts`; since
+  "Doorways by Use" a tap of Use does it too, and the Use button reads
+  "Go in" there: `showGoIn`, `.go-in`) or attack or throw upwards. A small chevron above the pad (not over the view) shows
   it and lights while pushed.
 - **A button with no picture** (today: Use) is a round night-coloured plate
   with a pale rim and its word, except over the view, where only the faint

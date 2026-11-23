@@ -56,7 +56,7 @@ middle of the cantina player can use to stop fights."*
   else: no). While on, every body in the room carries `c.brawl` (the
   friend shares), removed the tick it leaves the room or the brawl ends.
   Ends: a player's fresh press of Use (`interact`) within `bell.reach` of
-  the bell (`why: "bell"`), no player in the room (`"empty"`), or
+  the bell, not standing in an enter doorway (there Use goes through it) (`why: "bell"`), no player in the room (`"empty"`), or
   `calmTime` without a player's swing if it is above 0 (`"calm"`; the
   regulars' swings never count). The bell rings (`cantina-bell`) brawl
   or not.

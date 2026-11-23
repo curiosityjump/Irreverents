@@ -6,6 +6,7 @@ import { drawAway } from './draw/away.ts';
 import { drawCantina, drawCantinaBell, drawDoorRefused } from './draw/cantina.ts';
 import { drawBackdrop, drawFrontLayers } from './draw/backdrop.ts';
 import { drawDecor } from './draw/decor.ts';
+import { drawDoorHint } from './draw/door-hint.ts';
 import { drawEntities } from './draw/entities.ts';
 import { watchWords } from './draw/fx.ts';
 import type { PlayerView } from './draw/entities.ts';
@@ -77,6 +78,7 @@ export function render(g: CanvasRenderingContext2D, world: World, content: Conte
   // finished picture, and a blade of grass that stayed still while the world shook would show.
   drawDecor(g, decor, 'front', room.tile, ox, oy, W, H);
   drawImpact(g, world, roomId, ox, oy);
+  drawDoorHint(g, world, content, roomId, ox, oy, pv);
   drawNpcs(g, world, content, roomId, ox, oy);
   drawAlert(g, world, content, roomId, ox, oy);
   drawAudience(g, world, content, roomId, ox, oy);

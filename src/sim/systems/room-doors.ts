@@ -1,4 +1,5 @@
 import type { Door, Room } from '../../content/kinds/rooms.ts';
+import type { Content } from '../../content/types.ts';
 import type { Entity, System } from '../types.ts';
 import { NO_INPUT } from '../world.ts';
 
@@ -14,6 +15,8 @@ declare module '../types.ts' {
        * stick: a fresh push up in the body's Input.
        */
       want: boolean;
+      /** Whether `interact` (Use) was held last tick, to see a fresh press. Additive: absent reads as not held. */
+      use?: boolean;
     };
     /** Step 11: the tick and door of the last refusal (a `refuse` door), for the page to show it. */
     doorRefused?: { tick: number; room: string; door: string };
@@ -36,6 +39,33 @@ const STICK_UP = -0.5;
  */
 export function askForDoor(entity: Entity): void {
   (entity.c.roomDoors ??= { up: false, want: false }).want = true;
+}
+
+/**
+ * The enter doorway the middle of this body's box is in, if any: where a
+ * fresh press of Use (or a fresh push up) takes it through. Shared with
+ * the systems that also read Use (npc-interact, cantina-brawl), so the
+ * door wins that press, and with the client, which shows it (the Use
+ * button's "Go in", draw/door-hint.ts).
+ * DRAFT: the door wins the press (decisions-log 2026-11-23 "Doorways by Use").
+ */
+export function enterDoorwayAt(content: Content, e: Entity): Door | undefined {
+  const room = content.rooms[e.room];
+  const kind = content.characters[e.kind];
+  if (!room || !kind || room.doors.length === 0) return undefined;
+  const door = doorAt(room, e, kind.box.w, kind.box.h);
+  return door?.use === 'enter' ? door : undefined;
+}
+
+/** True while this body stands in an enter doorway (enterDoorwayAt). */
+export function inEnterDoorway(content: Content, e: Entity): boolean {
+  return enterDoorwayAt(content, e) !== undefined;
+}
+
+function doorAt(room: Room, e: Entity, w: number, h: number): Door | undefined {
+  const tx = Math.floor((e.x + w / 2) / room.tile);
+  const ty = Math.floor((e.y + h / 2) / room.tile);
+  return room.doors.find((d) => tx >= d.tx && tx < d.tx + d.w && ty >= d.ty && ty < d.ty + d.h);
 }
 
 function clamp(v: number, min: number, max: number): number {
@@ -81,21 +111,23 @@ const system: System = {
       const kind = ctx.content.characters[e.kind];
       if (!room || !kind) continue;
 
-      // Is this body asking to use a doorway? A fresh push of the stick up, or the hook.
+      // Is this body asking to use a doorway? A fresh push of the stick up, a fresh press of Use, or the hook.
       // The same Input the body's verbs get (systems/verbs.ts): its player's device, or entity.c.input.
       const input = (e.player === null ? e.c.input : ctx.inputs[e.player]) ?? NO_INPUT;
       const up = input.y <= STICK_UP;
+      const use = input.held.includes('interact');
       const memory = e.c.roomDoors;
-      const asking = (memory?.want ?? false) || (up && !(memory?.up ?? false));
-      if (memory || up) e.c.roomDoors = { up, want: false };
+      const asking = (memory?.want ?? false) || (up && !(memory?.up ?? false)) || (use && !(memory?.use ?? false));
+      if (memory || up || use) e.c.roomDoors = { up, want: false, use };
 
       if (room.doors.length === 0) continue;
       const { w, h } = kind.box;
-      const tx = Math.floor((e.x + w / 2) / room.tile);
-      const ty = Math.floor((e.y + h / 2) / room.tile);
-      const door = room.doors.find((d) => tx >= d.tx && tx < d.tx + d.w && ty >= d.ty && ty < d.ty + d.h);
+      const door = doorAt(room, e, w, h);
       if (!door) continue;
-      // DRAFT: a doorway is used with the stick, no new action button (the brief's call; Amazing Mirror's door).
+      // DRAFT: a doorway is used with a fresh push of the stick up (the Step 3 brief's call; Amazing
+      // Mirror's door) or a fresh press of Use, the phone's context button (the owner, 2026-11-23:
+      // "There is no stick to push up..."; decisions-log "Doorways by Use"). On that tick the door
+      // wins the press: npc-interact and cantina-brawl skip a body in an enter doorway.
       if (door.use === 'enter' && !asking) continue;
       // Step 11 (D-088): chased by the good guys, the cantina's doorway will not take you.
       if (door.refuse === 'chased' && ctx.world.chased?.includes(e.id)) {

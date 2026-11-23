@@ -9,7 +9,8 @@ import { render, VIEW_H, VIEW_W, view } from './render.ts';
 import { report } from './report.ts';
 import type { Drawn } from './draw/entities.ts';
 import { isTouchDevice, setUpShell } from './shell.ts';
-import { watchTouch } from './touch.ts';
+import { showGoIn, watchTouch } from './touch.ts';
+import { inEnterDoorway } from '../sim/systems/room-doors.ts';
 import { createAudio } from './audio/index.ts'; // audio hook (Step 8)
 import { setUpTune, tuneWanted } from './tune.ts';
 import { takeWords } from './draw/fx.ts';
@@ -235,6 +236,7 @@ function play(worldName: string): void {
     const camera = render(g, { ...net.world, entities: [...net.others(), me] }, content, me.room, { me: me.id, frame: frameNo, drawn: seen });
     const result = { camera, drawn: seen };
     lastCamera = camera;
+    showGoIn(touchHost, inEnterDoorway(content, me)); // the Use button says "Go in" in a doorway (touch.ts)
     audio.frame(simEvents, net.latest(), me, net.others()); // audio hook (Step 8)
 
     const status = net.status();

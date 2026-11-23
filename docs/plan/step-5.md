@@ -244,3 +244,28 @@ button art is in the library mirror, not in `assets/`.
   predict a swing, now with Step 2's attack wind-up, on the thrower's own
   screen (252e5ce; `docs/mechanisms/rendering-actors.md`, "Flags for the
   lead").
+
+- **Doorways by Use, builder (`session_017WiGzJujVWWDboh12zWhNR`),
+  2026-11-23 (brief `handoff-prompts/step-5-doors-by-use.md`):**
+  - Measured: no thing is within `npcInteractReach` (20 px) + 8 of any
+    enter doorway in any placements file (street counter col 12, goods
+    13-15, street bell 24; test-shop and test-street things; the
+    cantina bell is 160 px from its doorway, reach 18). The only body
+    that near a doorway is the street villain NPC (8 px from
+    `to-cantina`), which is not a usable thing. So "the door wins"
+    changes no press today; no scenario proves that branch, since none
+    can without placing a thing in a doorway.
+  - The brief's "castle street's throne-room doorway": the street's
+    throne-room connection is a walk door; the new scenario
+    `step3-enter-doorway-by-use` mirrors `step3-enter-doorway` (the
+    street's building doorway, `street-doorway` ↔ `upper-doorway`), with
+    Use in place of the stick. Control: with the Use clause removed from
+    `asking`, it fails (no `changed-room` at 330); restored, it passes.
+  - Use still buys at a counter: `step4-hero-buys` (and the rest of
+    step4-*) unchanged and green.
+  - `npc-interact` (order 60) tests the doorway at the tick's start
+    position, `room-doors` (600) after physics: a body moving fast
+    across a doorway edge on the press tick could lose that press or
+    both buy and go through. `DRAFT:`, judged not worth a shape change.
+  - The doorway arrow is drawn after the impact shake, so it does not
+    shake; fine for now.

@@ -17,7 +17,7 @@ into the shared documents.
   decor → ground with its `top`/`under` pieces (those three from one cached
   picture) → enter doorways → working parts → bells → `back` decor →
   bodies (actors lane) → away marks → `front` decor → impact dust and shake
-  → moods and barks → ring bars and alert pips → the king's speech → Hall
+  → the doorway arrow (`draw/door-hint.ts`, own character only) → moods and barks → ring bars and alert pips → the king's speech → Hall
   of Legends. `PlayerView.drawn` is untouched.
 - **"Looks solid"** (`solidLook` in `draw/room-parts.ts`): one set per room
   and part state, built from the room file plus false walls, unbroken

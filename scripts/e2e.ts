@@ -367,6 +367,8 @@ async function main(): Promise<void> {
       await (await import('./e2e/tune.ts')).tuneFacts({ browser, devices, base, out, fact, errors });
       // Step 12's facts (outpost-*): into the outpost by touch, and the horn post drawn working, then broken (docs/mechanisms/outposts.md).
       await (await import('./e2e/outpost.ts')).outpostFacts({ browser, devices, base, out, fact, errors });
+      // Doorways by Use (door-*): the Use button says "Go in" in a doorway and a tap of it goes through (docs/mechanisms/rooms-and-doors.md).
+      await (await import('./e2e/doors.ts')).doorFacts({ browser, devices, base, out, fact, errors, shots: path.join(root, 'docs/plan/step-5-shots/doors') });
       // Step 16's facts (quarry-*): into the quarry by touch, and across its road onto the ridge (docs/plan/step-16.md, signal 7).
       await (await import('./e2e/quarry.ts')).quarryFacts({ browser, devices, base, out, fact, errors });
       // Step 17's facts (start-*): the start screen, New game, a friend joining by the shared link, and back, by touch (docs/mechanisms/saves.md).

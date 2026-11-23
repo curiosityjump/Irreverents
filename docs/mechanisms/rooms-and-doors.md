@@ -163,15 +163,32 @@ a room written before doors existed is still valid.
 ## The two kinds of door
 
 `DRAFT:` both are the Step 3 lead's call in the owner's place
-(`docs/decisions-log.md`): no door needs a button.
+(`docs/decisions-log.md`); an enter doorway also answers the phone's one
+context button, Use (decisions-log 2026-11-23 "Doorways by Use", on the
+owner's "There is no stick to push up...").
 
 | | `walk` | `enter` |
 |---|---|---|
 | Where | on the room's edge: first or last column, or first or last row (a hole in the floor is a walk door in the last row) | anywhere inside, standing on a floor |
-| Used by | touching it: the middle of the body's box is in the door's tiles | being in it *and asking*: a fresh push of the stick up, or `askForDoor(entity)` |
+| Used by | touching it: the middle of the body's box is in the door's tiles | being in it *and asking*: a fresh push of the stick up, **or a fresh press of Use** (`interact`), or `askForDoor(entity)` |
 | Arriving | just inside the far room, clear of the far door's tiles, at the same place across the opening, **speed kept** | standing still in the pair's doorway |
-| Why you do not bounce back | the two ends are on opposite edges, so you arrive moving away from the door | the stick must be let go and pushed again |
+| Why you do not bounce back | the two ends are on opposite edges, so you arrive moving away from the door | the stick (or Use) must be let go and pushed again |
 
+- **The door wins the Use press.** On a tick a body stands in an enter
+  doorway (`inEnterDoorway(content, e)` / `enterDoorwayAt`, exported from
+  `room-doors.ts`), `npc-interact` and `cantina-brawl` ignore its Use
+  press, so it never also buys, robs or rings a bell. Measured at
+  build: no counter, goods or bell is within reach of any enter doorway
+  (`docs/plan/step-5.md`, the "Doorways by Use" handoff note); a thing
+  placed in a doorway would be unusable there. `DRAFT:`.
+- **Shown.** While the page's own character stands in an enter doorway,
+  the Use button reads "Go in" with a small door-and-arrow look
+  (`showGoIn` in `src/client/touch.ts`, `data-state="go-in"`, CSS
+  `.go-in` in `index.html`), and an up-arrow bobs over the doorway
+  (`src/client/draw/door-hint.ts`; a `door-hint` look replaces the drawn
+  arrow). Scenario `step3-enter-doorway-by-use`; e2e facts `door-go-in`,
+  `door-use` (`scripts/e2e/doors.ts`, screenshots in
+  `docs/plan/step-5-shots/doors/`).
 - **Any body.** `INTENT:` the door system never tests for a player. A
   body asks for a doorway through its `Input`, whoever supplies it (a
   player's device, or `entity.c.input` for a body nobody plays).

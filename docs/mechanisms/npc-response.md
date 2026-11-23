@@ -65,7 +65,7 @@ in a `World` field or a module variable.
 | 50 | `npc-act` | Runs the behaviour the person's kind names for their mood and writes `c.input`. A routine's `do` step emits `did`. |
 | 55 | `npc-call` | An upset good person pleads, walks to a bell and rings it; overlays the input `npc-act` wrote. A completed call is the only thing that raises the alert. |
 | 56 | `alert-respond` | Guards answer a completed call: go to the reported place, search, chase a hero they see, go back at alert 0. Overlays input too. |
-| 60 | `npc-interact` | A player's fresh press of `interact` uses the nearest thing within `npcInteractReach`: emits `did` with the thing's deed; a `once` thing is marked taken. A thing with a `keeper` works only while the keeper stands within `npcKeeperReach` of it. |
+| 60 | `npc-interact` | A player's fresh press of `interact` uses the nearest thing within `npcInteractReach`: emits `did` with the thing's deed; a `once` thing is marked taken. A thing with a `keeper` works only while the keeper stands within `npcKeeperReach` of it. A body standing in an enter doorway is skipped: Use goes through the door (`inEnterDoorway`, `room-doors.ts`). |
 | 100 | `verbs` (Step 2) | Bodies act on their input. |
 | 500 | `physics` | |
 | 600 | `npc-witness` | Collects this tick's deeds, works out who perceived each, emits `deed`, and applies the mood rules. |

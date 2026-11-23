@@ -1,0 +1,137 @@
+{
+  "id": "step3-enter-doorway-by-use",
+  "proves": "on a phone a doorway is used with Use (the owner: \"There is no stick to push up...\"): standing in the street's building doorway does nothing; a fresh press of Use carries the player to its pair, standing still; holding Use does not carry them back; a fresh press does",
+  "room": "castle-street",
+  "players": [
+    {
+      "id": "a",
+      "spawn": 1
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 262,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 330,
+      "to": 390,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 400,
+      "to": 410,
+      "hold": [
+        "interact"
+      ]
+    }
+  ],
+  "ticks": 460,
+  "expect": [
+    {
+      "fact": "standing-on-tile",
+      "player": "a",
+      "at": 330,
+      "tile": [
+        28,
+        11
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "changed-room",
+      "between": [
+        0,
+        329
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "changed-room",
+      "between": [
+        330,
+        330
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "player": "a"
+    },
+    {
+      "fact": "standing-on-tile",
+      "player": "a",
+      "at": 340,
+      "tile": [
+        26,
+        7
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "changed-room",
+      "between": [
+        331,
+        399
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "standing-on-tile",
+      "player": "a",
+      "at": 399,
+      "tile": [
+        26,
+        7
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "changed-room",
+      "between": [
+        400,
+        400
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "player": "a"
+    },
+    {
+      "fact": "standing-on-tile",
+      "player": "a",
+      "at": 460,
+      "tile": [
+        28,
+        11
+      ]
+    },
+    {
+      "fact": "velocity",
+      "player": "a",
+      "at": 401,
+      "vx": [
+        0,
+        0
+      ],
+      "vy": [
+        0,
+        0
+      ]
+    }
+  ]
+}

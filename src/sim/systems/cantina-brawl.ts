@@ -2,6 +2,7 @@ import { ticksOf } from '../body-state.ts';
 import { byBell, cantinasOf, hasBody, isRegular } from '../cantina.ts';
 import type { System } from '../types.ts';
 import { findEntity } from '../world.ts';
+import { inEnterDoorway } from './room-doors.ts';
 
 /**
  * The cantina's brawl: when it starts and when it settles (Step 11, D-085;
@@ -43,7 +44,8 @@ const system: System = {
         const use = (e.c.cantinaUse ??= { held: false });
         const fresh = down && !use.held;
         use.held = down;
-        if (fresh && !rung && byBell(content, file, e)) {
+        // DRAFT: in an enter doorway, Use goes through it (systems/room-doors.ts); the door wins the press.
+        if (fresh && !rung && byBell(content, file, e) && !inEnterDoorway(content, e)) {
           rung = true;
           state.rang = world.tick;
           ctx.emit('cantina-bell', { room, by: e.id });
