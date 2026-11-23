@@ -311,6 +311,8 @@
       "apexGravity": 0.6,
       "fallGravity": 1.2,
       "fallSpeed": 380,
+      "flapSpeed": 300,
+      "flaps": 1,
       "weight": 28,
       "toughness": 70,
       "attackStrength": 7000,

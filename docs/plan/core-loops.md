@@ -376,8 +376,13 @@ the ledge, control the hold begun while watched starts a call; freed while
 caught; a fresh world's cantina lacks that wanderer and has it after the
 rescue); a real-server check that a kept game keeps the roster and that a
 friend in another room gets the event; phone e2e: the gauge at the cage and
-the new face on the plate. **Status: briefed,
-`handoff-prompts/loop-rescue.md`; spawn after the Use arbiter lands.**
+the new face on the plate. **Status: landed 2026-11-23 (pushes 1-4,
+`docs/mechanisms/recruits.md`): a new game starts with the canon three and
+the brawler; the skirmisher is caged at the camp's columns 32-33 (moved
+off Step 19's strongbox), freed by holding Use 2.2 s in fighter 2's look
+west, kept for good, swapped in on the spot, and leaves by a second jump
+up to the ledge. Not built: the freed-while-caught scenario (the wave's
+fighter watches every way down; `docs/plan/step-13.md`, "Builder notes").**
 
 ## 5 · Escalating combat and chases
 

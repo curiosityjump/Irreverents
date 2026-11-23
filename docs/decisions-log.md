@@ -1029,3 +1029,10 @@ document as a decision of theirs.
 - **Why this way:** D-093 (a few context-sensitive touch controls): the Use button says "Free" at the cage and you hold it while a bar fills, a little shorter than the fighter's three seconds looking away, so a well-timed rescue fits and a greedy one does not. Seen, the fighter comes at you and his blows knock you off the cage: caught, the rescue becomes a fight ("getting caught opens play"). The camp's only caller is the lookout at the far west, so being seen at the cage starts a fight there, not a horn call. Freed, the cage stays open, a banner says who joined, their face flashes by the party plate and a chime plays on every friend's phone; for five seconds "Swap in" on the same button lets you become them on the spot (the cantina's own swap), and if you walk away they wait in the cantina for good (D-082, D-083).
 - **To change it:** the hold's length (2.2 s) is `hold` in `content/recruits/camp-captive.json`; the cage stands just west of the camp's strongbox, and within the strongbox's reach Use takes the strongbox (the order number in `src/sim/use/free.ts`); the swap window and the reach are numbers at the top of `src/sim/systems/recruit-free.ts` and `src/sim/use/free.ts`; how a watcher judges it is `content/rules/rescue.json`.
 - **Where:** `docs/mechanisms/recruits.md`, "FREE".
+
+### 2026-11-23 · Step 13: the skirmisher's difference is a second jump in the air
+- **Decided by:** rescue builder (Step 13, brief `loop-rescue.md`), `session_017WiGzHfRkFts4Z3rb8RMqC`
+- **Instead of asking:** "What makes the first found hero worth having?"
+- **Why this way:** doc 05 (a new hero makes earlier places worth revisiting). One extra jump in mid-air (the flyer's flap, once) lets them reach ledges about a hero's height higher than anyone else from a standing start: the way out of the camp is straight up from the cage onto the walkway, and the town's high ledges and the quarry tower's shaft open to them.
+- **To change it:** `flapSpeed` and `flaps` in the skirmisher's section of `content/tuning.json` (0 flaps takes it away).
+- **Where:** `docs/mechanisms/recruits.md`, "Their reach".

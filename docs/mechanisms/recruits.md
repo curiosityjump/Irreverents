@@ -130,3 +130,20 @@ ids never change.
   hold, none), `scripts/checks/step13-roster.ts` (two connections in a kept
   game; control: `unlock` adding nothing), and the e2e facts `rescue-cage`,
   `rescue-plate` (`scripts/e2e/rescue.ts`).
+
+## Their reach (push 4)
+
+- **The skirmisher's second jump**, by data: the verb `flap` in
+  `content/characters/skirmisher.json` and `flapSpeed` 300, `flaps` 1 in
+  its `content/tuning.json` section (`DRAFT:`). Measured
+  (`step13-free-unseen`): from the camp floor, a jump and a flap near its
+  top rise to about 97 px (feet at y 79 over the floor's 176), clearing the
+  ledge (80 px) by about 17; without the flap the jump tops out about 49 px
+  up (control: `flaps` 0, the hero is seen, a call starts, they never
+  leave). No `step11-*` scenario changed (a regular's jump in the cantina
+  may now flap; all 21 stay green).
+- **Places it opens** (read from the rooms' tiles, not driven: a surface
+  64-80 px over the floor below it with no step within three columns):
+  the castle street's high ledges at columns 25-27 (rows 3 and 7), and the
+  quarry tower's shaft at column 4 (ledges every four rows, 7 to 23). Also
+  the camp's ledge from the floor, which the rescue's way out uses.

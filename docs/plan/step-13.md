@@ -96,3 +96,39 @@ the camp's three files.
   tick-pinned scenarios.
 
 ## Builder notes
+
+Rescue builder (`session_017WiGzHfRkFts4Z3rb8RMqC`, brief `loop-rescue.md`),
+2026-11-23. Landed: push 1 a1741fa (`World.roster`, the start list), push 2
+0a2e8fa (the caged skirmisher), push 3 (FREE, the banner, the swap on the
+spot), push 4 (the second jump). Writeup: `docs/mechanisms/recruits.md`.
+
+- **Not built: `step13-free-while-caught`.** Measured: with a call
+  completed (a second player seen by the lookout), the wave's fighter
+  stands at the entry (column 41) facing west, seeing x 554-666 on the
+  floor; every way down from the ledge (its east end) lands in his sight,
+  and his blows break any hold (as `step13-free-watched` shows for fighter
+  2). Freeing while caught needs the hero to deal with him first (a grab
+  and throw, or a second player drawing him off): a scenario worth
+  authoring, not attempted for budget. Nothing in the code prevents it:
+  the cage takes any holder, alarm or not.
+- **Brief vs measured:** the watched control is "he comes at the hero and
+  the hold breaks", not "a call starts": in this camp only the lookout
+  (far west) calls, and fighter 2's seeing starts a fight, not a call.
+- **The cage moved** from columns 33-34 to 32-33 after Step 19 put the
+  camp strongbox on column 34; FREE is ordered after placed things (150)
+  so the strongbox keeps Use within its reach. The hold is 2.2 s, not 2.5:
+  the slowest hero (the grappler) must wait just out of fighter 2's sight
+  east of the strongbox and walk about 40 px to the cage after he turns,
+  leaving about a quarter second to spare.
+- **`?room=` worlds and old saves** have no roster of their own
+  (everyone), and still get the cage; freeing there emits `recruited` with
+  `added: false`.
+- **The e2e reconnect fact h1** ("the server down 75 s", scripts/e2e.ts)
+  failed in 5 of 7 full runs this session, including once on origin/main
+  at c881c17 without any of this work: flagged in
+  `docs/for-the-orchestrator.md`.
+- **Two places the reach opens** (by the rooms' tiles, not driven): the
+  castle street's high ledges at columns 25-27 (rows 3 and 7) and the
+  quarry tower's shaft at column 4.
+- **A second recruit** needs a sixth hero from the approved P04 cantina
+  sheet (out of scope).
