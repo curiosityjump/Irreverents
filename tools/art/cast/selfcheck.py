@@ -16,7 +16,8 @@ from PIL import Image
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(HERE)))
-IDS = ['king', 'guard', 'shopkeeper', 'villain', 'crate', 'crate-heavy', 'dummy', 'dummy-heavy', 'throne']
+IDS = ['king', 'guard', 'shopkeeper', 'villain', 'crate', 'crate-heavy', 'dummy', 'dummy-heavy', 'throne',
+       'brawler', 'skirmisher', 'outpost-fighter', 'outpost-lookout', 'signal-post']
 PEOPLE = ['king', 'guard', 'shopkeeper', 'villain']
 bad = []
 

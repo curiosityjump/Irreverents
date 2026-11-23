@@ -1,4 +1,4 @@
-# The cast's pictures: king, guard, shopkeeper, villain, crates, dummies, throne
+# The cast's pictures: king, guard, shopkeeper, villain, crates, dummies, throne, the cantina's regulars, the Bandit Camp
 
 **Reference.** Open before redrawing or replacing anything under
 `assets/sprites/cast/` or the nine `content/sprites/` files named below.
@@ -73,6 +73,56 @@ hair (a slick of hair behind the ear only), with arched brows, the curled
 moustache and the white gloves kept. No colour of the night ramp, so he
 does not sink into the undercroft.
 
+### Round 3: cut from the art desk's source sheets (2026-11-23, `handoff-prompts/look3-cast.md`)
+
+- **Five more sheets, cut from the plates, not drawn**: `brawler`,
+  `skirmisher`, `outpost-fighter`, `outpost-lookout`, `signal-post`
+  (before round 3 each was its `color` box). `make.py` writes them after
+  the nine above; `source.py` does the cut (crop, alpha >= 128, the
+  plates' purple ground shadow and floating effects dropped, a colour
+  vote down to the scale with ink voting a little louder, every colour
+  snapped to the master palette, the silhouette re-inked); `cut3.py`
+  holds which plate rectangles each person is made of and how each
+  state's frames are made from them (lift, breathe, lean, red face,
+  sweat drop). `compare.py <dir>` puts each sprite beside its source.
+  `shots.mjs` takes the iPhone-size shots (`docs/plan/step-8-shots/round3/cast/`).
+- **Who, from where:**
+  - `brawler`: P04 cantina sheet row 3, the bald strongman (crossed arms,
+    two walk poses, fists-up with a sweat drop, the punch, the yell, KO).
+    Drawn about 34 px tall at scale 0.175; cell 56x48; `carryAt` (28, 13).
+  - `skirmisher`: P04 row 2, the feathered-hat patron with the beer
+    (idle, cheer, side-eye, punch, knocked flying, KO with swirl). About
+    27 px tall at 0.15; cell 56x48; `carryAt` (28, 22).
+  - `outpost-fighter`: P07 enemy sheet row 1, the red-hooded bandit with
+    the dagger (12 poses incl. slash, hurt, dizzy, KO). Scale 0.32, about
+    30 px; cell 56x48.
+  - `outpost-lookout`: P07 enemy row 2, the purple-hooded signaller with
+    the feather and the horn. Scale 0.285, about 30 px; cell 56x48. Its
+    `attack` is raising and blowing the horn (it has no attack verb; the
+    state is there if one is ever given).
+  - `signal-post`: P03 villain sheet row 4, the horn post with both horns
+    erased: the red lamp, the cap, the pole, the castle banner, the stone
+    base. 33 px tall over its 10x32 box, cell 32x48; `idle` (= `run`,
+    `air`) only. **The horn's peg** (for the props lane's `signaler`
+    looks): the cap's underside, about 10 px below the box's top, either
+    side of the pole.
+- **States** for the four people: `idle` 4, `run` 6, `air` 2 (`jump`,
+  `fall`), `attack` 4, `hurt` 3, `down` 2, `held` 4, `talk` 2, `grab` 1,
+  `carry` 2, `carryRun` 4, `throw` 3 (the fighter and lookout have no
+  grab/carry/throw: they cannot grab). Moods `"2"` and `"3"` each have
+  `idle`, `run`, `air`, `attack`, `hurt`, `held`, `talk`, and `down`
+  naming the normal knocked-out frames. Mood 2 idle/talk use the plate's
+  own worried pose where it has one (the brawler's fists-up with the
+  plate's own sweat drop, the patron's side-eye, the bandits' alert
+  pose); the other mood-2 states are the normal frames with a sweat drop
+  added beside the head. Mood 3 is a red face: the skin in the head's
+  band recoloured to the red ramp (the costume unchanged), on the yell
+  or ready pose for idle.
+
+New ids for the contract's cast list: `brawler`, `skirmisher`,
+`outpost-fighter`, `outpost-lookout`, `signal-post` (sprite files and
+`assets/sprites/cast/<id>.png`).
+
 ## Deviations from the contract
 
 - **The shopkeeper's cell is 48×48**, though its body would fit 32×32:
@@ -89,8 +139,14 @@ does not sink into the undercroft.
   cream ramps: in-between shades, no new hue.
 - **Lit-side outlines are plain ink**, not a dark shade of the fill, so
   the cast reads against both the lilac interior and the outdoor street.
-- No `carry`, `throw`, `grab`, `hide` or `flap` for anyone here: the
-  renderer's fallbacks cover them.
+- No `carry`, `throw`, `grab`, `hide` or `flap` for the round-1 people:
+  the renderer's fallbacks cover them. (Round 3's playable brawler and
+  skirmisher have `grab`, `carry`, `carryRun`, `throw` and `carryAt`.)
+- **Round 3's people are wider than their boxes**: the chibi plates are
+  as wide as tall, so the brawler is about 30 px over an 18 px box and the
+  patron about 24 over 12; a punch reaches about 14 px past the box. The
+  skirmisher's feathered hat stands about 9 px above its 18 px box. Height
+  and feet follow the box; the box stays the truth.
 
 ## Decisions
 
@@ -122,6 +178,19 @@ does not sink into the undercroft.
   with a tall hat or collar. To undo: `villain()` in `people.py`. `DRAFT:`
 
 ## Flags for the lead
+
+- (Round 3) **No walk poses on the patron's plate**, so the skirmisher's
+  run is its idle and side-eye poses leaned forward and bobbing: it
+  slides more than it steps. The brawler and the two bandits walk with
+  the plates' own walk poses.
+- (Round 3) The props lane's `signaler` (76791bf) hangs its horn on the
+  post's cap; seen lined up in the Bandit Camp at 844x390. The sounding
+  horn over the post is not yet seen in a shot.
+- (Round 3) `tumble` and the curled, kicking `held` wait for the actors
+  lane's validator (`git log origin/main --grep 'round 3, actors'`, empty
+  at this push); `held` is the hurt pose wiggling.
+- (Round 3) Step 16's `heavy-fighter` and `brute` are not on `main`
+  (`content/characters/` has neither), so they are not cut yet.
 
 - (Round 2) The villain's `held` frames were not redrawn with legs kicking
   above the hands (the brief's "if time allows").
