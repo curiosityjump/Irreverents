@@ -508,6 +508,7 @@ Slice 1, 2026-11-23 16:10 UTC: the main way (road, ridge, tower, depot) is **248
 
 ## Briefs
 
+- The depot findable (arrive unseen with the danger in view, a hide by the door, the hoard visible): `handoff-prompts/step-16-f-depot-findable.md`, 20:10 UTC, to the phone slice's builder `session_017WiGzFw42cUL6BQ27o3iz7`. Lead's reason: at b0a7d5e a first-time player is seen the moment they enter, so the zero-alarm infiltration is reachable only by script; that is Step 16's own data.
 - Last slice, the quarry seen and found on a phone: `handoff-prompts/step-16-e-quarry-on-a-phone.md`, 19:25 UTC, builder `session_017WiGzFw42cUL6BQ27o3iz7`.
 
 - Slice 3 push 3, the depot's west ledge and a way down to the cellar (signals 5 and 6(b) in full): `handoff-prompts/step-16-d-depot-routes.md`, 18:45 UTC, fresh builder `session_017WiGzH5v7n1DfXiS1iFbh6`.
