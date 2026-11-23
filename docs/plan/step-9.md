@@ -119,3 +119,25 @@ back feels like a scramble worth having.
 ## Open with the owner
 
 ## Handoff notes
+
+## Builder notes
+
+*(Step 9 builder, `session_017WiGzF16bBpnLmeWErGynR`, brief `loop-powers.md`.)*
+
+- Push 1 (64bd1fe): e2e facts h1 and h2 (reconnect after the 75 s outage,
+  then the reload on a new commit) failed once on the rebased tree and
+  passed on the two runs after it, with no change in between. The push
+  touches no network code. Railway took about 8 minutes to put it live,
+  against the usual minute or two.
+- Push 2: h1 (and once h2) failed again, in 3 of about 7 e2e runs here.
+  `origin/main` at 4754ec5 without any Step 9 commit, in a separate
+  worktree, failed h1 the same way, so it is not this step's. Also seen
+  once: `t-throw-friend`, the known flake.
+- Push 2: the brief's "decide the first carrier by measuring" came out for
+  the street's villain (two grappler hits from the spawn, about 5 s;
+  `step9-take-from-carrier`). Two changes made after seeing it on a page:
+  nobody can take an orb for 0.6 s, or the hitter had it the frame it
+  appeared; and the orb is no body (it was one at first: follow-up swings
+  punched it across the street, and after a rebase onto Step 4's town tiers
+  a shopkeeper's swing on it raised the alert and one tier scenario failed). The boost's icon became `pickup-bolt`,
+  because the star could not be told from the hit star.

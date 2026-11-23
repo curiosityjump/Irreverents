@@ -1085,3 +1085,11 @@ document as a decision of theirs.
 - **Why this way:** the plan puts the plate a few steps from the cellar arch with "a portcullis over a glinting piece", and "there is always a way out". The undercroft has one passage and a one-tile floor, so the pocket goes under the floor (rows appended, nothing moved), and the bars are a grate in the floor you drop through when it is open: an upright portcullis cannot fit a standing hero there. The way out is one-way platforms in the floor at the pocket's west end, jumped up through from below; from above they are floor, so they are not a way in.
 - **To change it:** the rows and the legend in the undercroft's room file; the grate is a `gate` part, its plate a `plate` with `needs`.
 - **Where:** `docs/mechanisms/rooms-and-doors.md`, "The stone plate's pocket"; `docs/plan/step-3.md`, "Builder notes".
+
+
+### 2026-11-23 · Step 9: the street's villain carries the first power; knock him flat and it pops out of him
+- **Decided by:** Step 9 builder, `session_017WiGzF16bBpnLmeWErGynR`
+- **Instead of asking:** "Which enemy carries the first power, and how is it taken?"
+- **Why this way:** measured. From the street's first spawn, player one's grappler lays the villain flat in two hits, about 5 s in, before he starts hitting back. So the first power is on the way every player already walks. The orb pops up and a little away from you, and nobody can grab it for just over half a second, so you see it come out and step over him to take it. When you could take it at once, it vanished the moment it appeared. The orb is not a body, so no swing knocks it away and no guard sees it as a fight. He has it again when he gets up, so he can be beaten for it again. He is not made stronger by carrying it.
+- **To change it:** the carrier is one id in `content/powers/boost.json` (`carriers`). A quarry heavy is a one-word change (`heavy-fighter`). The wait and the bounce are world numbers named `powerOrb*` and `powerRetakeTime`.
+- **Where:** `docs/mechanisms/powers.md`, "Carriers and orbs".

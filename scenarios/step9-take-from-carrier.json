@@ -1,0 +1,160 @@
+{
+  "//": "DRAFT (Step 9): the first carrier, measured. Player one's grappler walks east from the street's first spawn and swings as it goes. Two hits lay the street's villain flat (about 5 s in, before his fight-back matters). The orb pops up out of him, a little away from the grappler; nobody can take it for 0.6 s, then the grappler walks on into it and holds the boost. The villain is spent until he gets up, then carries it again (regain). Control, watched to fail: with boost's carriers emptied there is no power-dropped and the hero holds nothing.",
+  "id": "step9-take-from-carrier",
+  "gate": null,
+  "proves": "laying the street's villain flat pops his power out as an orb, a hero who touches it holds the power, and he has it again when he gets up",
+  "room": "castle-street",
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "placements": true,
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 420,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 150,
+      "to": 152,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 174,
+      "to": 176,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 198,
+      "to": 200,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 222,
+      "to": 224,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 246,
+      "to": 248,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 270,
+      "to": 272,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 294,
+      "to": 296,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 318,
+      "to": 320,
+      "hold": [
+        "attack"
+      ]
+    }
+  ],
+  "ticks": 520,
+  "expect": [
+    {
+      "fact": "event",
+      "event": "flattened",
+      "where": {
+        "target": "street-villain"
+      },
+      "between": [
+        280,
+        320
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "power-dropped",
+      "entity": "street-villain",
+      "where": {
+        "power": "boost"
+      },
+      "between": [
+        280,
+        320
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "power",
+      "player": "a",
+      "at": 280,
+      "is": null
+    },
+    {
+      "fact": "event",
+      "event": "power-taken",
+      "player": "a",
+      "where": {
+        "power": "boost",
+        "from": "street-villain"
+      },
+      "between": [
+        330,
+        420
+      ]
+    },
+    {
+      "fact": "power",
+      "player": "a",
+      "at": 440,
+      "is": "boost"
+    },
+    {
+      "fact": "body-state",
+      "entity": "street-villain",
+      "at": 400,
+      "is": [
+        "powerSpent",
+        "flattened"
+      ]
+    },
+    {
+      "fact": "body-state",
+      "entity": "street-villain",
+      "at": 520,
+      "not": [
+        "powerSpent",
+        "flattened"
+      ]
+    }
+  ]
+}

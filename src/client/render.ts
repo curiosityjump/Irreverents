@@ -16,6 +16,7 @@ import { drawImpact } from './draw/impact.ts';
 import { drawLevelBanner, drawLevelEntrances, drawLevelSigns } from './draw/levels.ts';
 import { drawCompletion, drawCompletionRow } from './draw/completion.ts';
 import { drawNpcs } from './draw/npcs.ts';
+import { drawPowers } from './draw/powers.ts';
 import { drawSignalers } from './draw/outpost.ts';
 import { backdropOf, decorOf, drawDoors, drawRoom, roomOrigin } from './draw/room.ts';
 import { drawRoomParts } from './draw/room-parts.ts';
@@ -90,6 +91,7 @@ export function render(g: CanvasRenderingContext2D, world: World, content: Conte
   drawRecruits(g, world, content, roomId, ox, oy, pv);
   drawSignalers(g, world, content, roomId, ox, oy);
   drawAway(g, world, content, roomId, ox, oy, pv);
+  drawPowers(g, world, content, roomId, ox, oy, pv); // Step 9: carriers' orbs, loose orbs, holders' glow
   // Round 2: backdrop layers marked `front` (foreground foliage along the bottom or top edge).
   if (backdrop) drawFrontLayers(g, backdrop, room, -ox, -oy, W, H);
   // DRAFT: front decoration before the impact pass, not after the effects: drawImpact shakes the

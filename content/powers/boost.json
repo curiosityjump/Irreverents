@@ -2,9 +2,9 @@
   "//": "DRAFT (Step 9; O-005 is OPEN): the common power, a boost on top of whoever holds it. Its numbers sit above every hero's own, the grappler's included. A struck body crosses the screen and goes through a cracked wall (30000 against a weight of 110 is 272 px/s, over wallBreakSpeed 200). Grab lifts the throne (420 against its weight of 400). Player one is given the grappler, who already lifts 150, so a plain strength power would change nothing for them (docs/plan/step-9.md). The id says what it does; the shown name is data. docs/mechanisms/powers.md.",
   "id": "boost",
   "name": "Brawn",
-  "icon": "pickup-star",
+  "icon": "pickup-bolt",
   "atLeast": { "attackStrength": 30000, "liftStrength": 420, "throwStrength": 60000 },
-  "carriers": [],
+  "carriers": ["street-villain"],
   "fade": 5,
   "regain": true
 }

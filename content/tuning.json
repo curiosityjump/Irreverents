@@ -59,7 +59,12 @@
     "outpostZoneEndOn": 1,
     "outpostBoundOn": 1,
     "outpostSendOn": 1,
-    "chaseCrossCap": 2
+    "chaseCrossCap": 2,
+    "powerOrbPop": 240,
+    "powerOrbSpread": 40,
+    "powerOrbBounce": 0.4,
+    "powerOrbFriction": 400,
+    "powerRetakeTime": 0.6
   },
   "characters": {
     "shopkeeper": {
