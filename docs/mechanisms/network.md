@@ -132,8 +132,8 @@ Known limits (`DRAFT:`), for whoever builds combat and doors:
   out of the cantina is put back on a pad, acknowledged, and runs from
   there on their own page); not yet in a browser.
 - A page's local world holds **only its own character**. A verb that must
-  see others' bodies *on the page* does not. A hit is the one exception, and only for
-  drawing (below, "Predicted hits"). The server's copy of each verb does see everyone.
+  see others' bodies *on the page* does not: a hit cannot be shown before
+  the server says so. The server's copy of each verb does see everyone.
   The place to widen is the local world in `src/net/client.ts`. Which
   party members the others play does reach it, as a list: `world.taken`,
   the kinds of every other player in each snapshot, which `memberTaken`
@@ -148,62 +148,6 @@ Known limits (`DRAFT:`), for whoever builds combat and doors:
   by the puppet rule on the next tick.
 - The server's events for puppets (`landed` and such) are the server's
   view, forwarded in `snap.ev`; nothing reads them yet.
-
-## Predicted hits (Step 5, `DRAFT:`; `src/net/predict.ts`)
-
-The owner, playing on a phone: "Big delay between swing and actual
-impact." The page simulates only its own hero, so what that hero hit used
-to answer a round trip late. Measured in `npm run e2e` (fact `hit-*`, a
-phone page with 150 ms added each way): **before**, the star after 716 ms
-and the crate moving after 833 ms; **after**, the star after 103 to 136 ms
-and the crate moving after 251 to 283 ms (grappler: wind-up 100 ms, a beat
-of 8 ticks held for 9).
-
-- **When.** After each local tick, if the page's own `c.attack` is in
-  `strike` on that tick (the verb tested for hits then), the predictor
-  runs **the verb's own `strikeTick`** (`src/sim/verbs/attack.ts`,
-  exported for this) in a scratch world. That world holds a copy of the
-  hero and copies of the bodies in its room **as this page draws them**
-  (smoothed, about 100 ms old). Each swing hits each body once, as in the
-  verb. A press while a drawn body is held by the hero is a throw on the
-  server, so nothing is predicted then.
-- **The loan.** A struck body is lent to the page: a copy carrying the
-  verb's own stamps on the page's clock (`c.lastHit`, `c.beat`,
-  `c.impact`; `c.stunned`, `c.flying`). Every local tick it is stepped by
-  the simulation's own flight systems (`combat-clock`, `impact-before`,
-  `physics`, `impact-walls`, `impact-bodies`, `combat-rest`, `body-stun`),
-  among copies of the bodies around it so it bounces off them as on the
-  server. Never a verb, and never an NPC system. `client.others()`
-  returns that copy in place of the smoothed one, marked `c.predicted`
-  (page-only). Drawing needs nothing new: the star, flash, hurt frame,
-  dust and shake come from the stamps as before. The actors lane's
-  cosmetic star (`predictHits` in `draw/impact.ts`) stands down while this
-  is on (`draw/entities.ts`).
-- **Handing back** (`INTENT:` the page never owns another body). The
-  server's hit is seen when the drawn copy's `c.lastHit` is by this player
-  and newer than at the loan. Once both the copy and the server's body
-  have come to rest, the drawn body eases into the server's position over
-  `predictBlendMs`, never faster than `remoteMaxSpeed`. If the server has
-  not hit it within `predictHitMs` (a friend took it, it had moved), it
-  eases back the same way. Something holding it, or it leaving the room,
-  ends the loan at once. A loan never lasts more than 4 s. For about 3 s
-  afterwards the server's copy of the same hit is not drawn as a second
-  star.
-- **A player's body** (a brawl): only the star and the beat are drawn on
-  it. Its position stays the server's, because its own page owns it.
-- **Switch:** `content/net.json` `predictHitMs` 0 turns it off. The e2e
-  control `E2E_NO_PREDICT=1` does that on the hitter's page, and `hit-star`
-  and `hit-moves` fail (716 ms and 833 ms).
-- **The check** (`scripts/e2e/hit-lands.ts`): the hitter's first frame
-  with a new impact on the crate (`drawn.impacts`, which the frame loop
-  fills from the bodies it drew) must come by wind-up + 50 ms, and its
-  first frame with the crate 4 px away by wind-up + the beat as held +
-  50 ms. The watcher (no added delay) draws the server's hit as before
-  (about 700 ms). Once still, both pages draw the crate 0.0 px apart.
-- **Not done:** throws and a grab's lift are still a round trip on the
-  hitter's screen (brief item 3), and `interpDelayMs` is untried at 66
-  (item 4). Not verified: the ease back when the server disagrees, and a
-  brawl hit on a friend. Both are only reasoned.
 
 ## Smoothing
 

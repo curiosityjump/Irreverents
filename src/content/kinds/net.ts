@@ -27,15 +27,6 @@ export interface Net {
   silenceMs: number;
   /** How often a page measures its round trip. */
   pingMs: number;
-  /**
-   * Step 5, "Predicted hits" (docs/mechanisms/network.md): the longest a page
-   * draws its own hit on a body before the server has said it happened, ms;
-   * past it, the body eases back to the server's. 0 = no prediction (the
-   * e2e control sets it to 0).
-   */
-  predictHitMs: number;
-  /** How long a predicted body takes to ease into the server's path, ms. */
-  predictBlendMs: number;
   /** Graybox colours for players, by join order. */
   playerColors: string[];
 }
@@ -51,7 +42,7 @@ const kind: ContentKind = {
   source: { file: 'net.json' },
   parse(raw, read) {
     const o = read.object(raw, '') ?? {};
-    read.only(o, ['reportRate', 'snapshotRate', 'interpDelayMs', 'remoteMaxSpeed', 'inputHoldMs', 'staleSeconds', 'maxCatchUpTicks', 'reconnectFirstMs', 'reconnectMaxMs', 'silenceMs', 'pingMs', 'predictHitMs', 'predictBlendMs', 'playerColors', '//colors', '//predict'], '');
+    read.only(o, ['reportRate', 'snapshotRate', 'interpDelayMs', 'remoteMaxSpeed', 'inputHoldMs', 'staleSeconds', 'maxCatchUpTicks', 'reconnectFirstMs', 'reconnectMaxMs', 'silenceMs', 'pingMs', 'playerColors', '//colors'], '');
     const out: Net = {
       reportRate: read.number(o, 'reportRate', '', { min: 1, max: 60 }),
       snapshotRate: read.number(o, 'snapshotRate', '', { min: 1, max: 60 }),
@@ -64,8 +55,6 @@ const kind: ContentKind = {
       reconnectMaxMs: read.number(o, 'reconnectMaxMs', '', { min: 10, max: 60000 }),
       silenceMs: read.number(o, 'silenceMs', '', { min: 500, max: 60000 }),
       pingMs: read.number(o, 'pingMs', '', { min: 100, max: 60000 }),
-      predictHitMs: read.number(o, 'predictHitMs', '', { min: 0, max: 10000 }),
-      predictBlendMs: read.number(o, 'predictBlendMs', '', { min: 0, max: 2000 }),
       playerColors: read.stringList(o, 'playerColors', ''),
     };
     if (out.playerColors.length === 0) read.fail('playerColors', 'needs at least one colour');
