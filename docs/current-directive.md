@@ -157,7 +157,8 @@ live: a real build, the server, `/healthz`, a WebSocket. No game on screen
 yet. Steps 2–8 are written and queued; 2, 3 and 4 open at Step 1's first
 gate, 5 and 8 when it closes, 6 and 7 behind the map and the people.
 Results 2–7 above map to Steps 5, 2, 3, 4, 6, 7; Step 8 (the look and the
-sound, as the ordered art arrives) runs alongside.
+sound, as the ordered art arrives) runs alongside; Step 9 (powers you
+pick up and can lose) follows Step 2.
 
 ## History
 

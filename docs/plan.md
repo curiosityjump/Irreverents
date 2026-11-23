@@ -266,3 +266,9 @@ Full text: `docs/plan/step-7.md`
 
 Full text: `docs/plan/step-8.md`
 
+## Step 9 — Powers you pick up, and can lose
+
+**Status: open, unclaimed — queued behind Step 2.**
+
+Full text: `docs/plan/step-9.md`
+

@@ -108,8 +108,10 @@ may overrule one with a measurement, recording why here.
   architecture continues"). Step 2 owns the party list and the switch;
   Step 1 owns the seat on join, leave and rejoin, through one call the
   simulation offers. When every member is taken (the party's size is
-  `DRAFT:`, O-003 is open) the next visitor is told so and offered a
-  private world: never a duplicate, never a blank page.
+  `DRAFT:`, O-003 is open), Step 2's lead has decided what happens and it
+  stands: the next visitor plays a second copy of a member, with a body
+  of their own, rather than being turned away (`docs/plan/step-2.md`,
+  "Decided by the lead"; `docs/decisions-log.md`). Never a blank page.
 - **A reload is still you.** The page keeps a random player id on the
   device (not only in the tab) and sends it on joining, so after a
   pull-to-refresh, Safari dropping the tab, or the page's own reload

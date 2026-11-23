@@ -232,11 +232,11 @@ document as a decision of theirs.
 - **To change it:** layout work; the sideways layout is still the main one.
 - **Where:** `docs/plan/step-1.md` and `docs/plan/step-5.md`, "What's decided".
 
-### 2026-11-23 · Joining gives you a party member nobody else is playing; when all are taken, the next person is offered a world of their own
+### 2026-11-23 · Joining gives you a party member nobody else is playing
 - **Decided by:** orchestrator, `session_017WiGzFWfLir1ATiSP7c5E5`, from an independent review of the plan
-- **Instead of asking:** "What happens when more friends join than there are heroes?" (party size and player count are open, O-003.)
-- **Why this way:** your library says "A character cannot be controlled by two humans at once", so a full party cannot take another player; a private world is kinder than a blank page. Tonight there are three heroes, so three friends at once.
-- **To change it:** more heroes is a data file each; a different rule for the extra person is small.
+- **Instead of asking:** "Who are you when you open the link?"
+- **Why this way:** your library says the party is one shared team and "A character cannot be controlled by two humans at once", so each person who joins takes a hero nobody is playing, and leaving frees that hero. What happens when more friends join than there are heroes is the entry above ("A fourth friend…"): they get a second copy rather than being turned away. (This entry first said the extra person would be offered a world of their own; the lead's earlier, kinder rule stands instead.)
+- **To change it:** small.
 - **Where:** `docs/plan/step-1.md`, "Joining needs nothing, and seats you in the one shared party".
 
 ### 2026-11-23 · Once the morning report is out, no new code goes live while anyone is in the game
