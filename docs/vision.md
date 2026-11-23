@@ -165,6 +165,9 @@ the drift, collisions or needless "fixes" it prevents may be trimmed, merged
 or dropped by the team without asking. Results visible in the game, per
 token, are what the process is judged by.
 
+**Owner, ~14:45 UTC, confirming that framing:**
+> Yup. Do whatever gets us the game I want as soon and efficiently as possible. That's all i care about
+
 ## Frontiers
 
 *(Framing: one line each on what the owner wants built, pointing at the
