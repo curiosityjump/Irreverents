@@ -380,3 +380,9 @@ for later, as the step suggests.
   after the world starts, his polite purchase at about 19 s and every
   53 s after; a hit knocks the shopkeeper out (Step 2's default
   toughness).
+- **Lead, 09:05 UTC. Slice 2 released** by the orchestrator: one fresh
+  worker from the existing brief (its new first section orders four
+  small pushes: bell/call/alert/guard responding with a bell in the
+  street; following through doors; hiding unseen; the rest), hard stop
+  10:15 UTC with whatever is green. `scripts/trace.ts`'s one-line fix is
+  folded into push 1 (the orchestrator gave it to this step).

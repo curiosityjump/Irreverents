@@ -5,26 +5,71 @@ lead (`session_017WiGzG4WzuJfHAu3XWoUhc`). The step is
 `docs/plan/step-4.md`. Self-contained: you do not need the design library
 or `docs/vision.md`.
 
-**You build on slice 1's foundation, which another worker
-(`session_017WiGzFBg5B72dx48zdiZh9`) pushed just before you were started
-and is still extending.** Read `docs/mechanisms/npc-response.md` first:
-it has the shapes this brief could only name loosely (`c.npc`, the deed
-events, the seeing helper, the placements `things`, the hooks left for
-you). Where that file and this brief disagree about a *shape*, the file
-wins; about a *rule*, this brief wins: tell the lead.
+## Read this first: how tonight changes this brief (lead, 2026-11-23 09:05 UTC)
 
-**Since this was written: the foundation is on `main` at `a501061`**
-(re-run by the lead at 04:47 UTC: build and check green, and making the
-villain's polite purchase "expected" fails `step4-villain-buys-politely`
-as it should). What it settled, where this brief was guessing: a hero's
-or a routine's act is a `did` event that the witness pass turns into
-`deed { …, witnesses }`; things are bodiless entities of kind `~thing`
-with `c.thing`, each naming the `deed` using it performs (so a bell is a
-thing whose deed is `break`, plus whatever state you add); behaviours
-are ids in `BEHAVIOURS` with one function each; the rage hook is
-`rageMayCool()`; `charge` already steers by `lastSeen` only. The test
-room so far is `test-shop`; the villain's polite visit there is at about
-tick 2960.
+Everything below this section was written at 04:40 UTC and its rules and
+shapes stand. Since then: slices 1 and 3 are finished and live (the
+shopkeeper, the villain and a pacing guard are in `castle-street`, one
+door east of where players start, `content/placements/castle-street.json`);
+a first worker on this brief was cut off by a usage limit after ten
+minutes and left nothing on `main`; Step 1's netcode, Step 2's hits and
+Step 3's doors and hiding places are all on `main`. Read
+`docs/mechanisms/npc-response.md` first, then `docs/architecture.md`
+("Bodies…", "Rooms and doors…") and `docs/mechanisms/network.md`
+("Who owns which part").
+
+**Hard stop at 10:15 UTC with whatever is green. Nothing half-working on
+`main`.** Work in small pushes that each stand alone, in this order, so
+the most visible part lands first; after each, message the lead
+(`send_message` to `session_017WiGzG4WzuJfHAu3XWoUhc`) with the commit:
+
+1. **The bell, the call, the alert and the placed guard responding**
+   (rules 1–6 and 8–10 below), with signals 3, 4 and 5's scenarios in
+   your own test room, **and** a bell placed in `castle-street` between
+   the shop and the guard so it happens where players are (the street's
+   guard is `street-guard`, more than a sight range from the shop: he is
+   the responder). Do not move the street's existing people or things:
+   `step4-street-people` pins their ticks. Skip "more help at levels 2
+   and 3". **Fold in one fix:** `scripts/trace.ts` crashes in a room
+   that has `things` (it reads the box of an entity of kind `~thing`):
+   skip entities whose kind is not a character kind. The orchestrator
+   has given that file to this step for this fix only.
+2. **A chasing guard follows a hero he saw leave through a door**
+   (D-077; never one he did not see leave, D-065): a `changed-room`
+   event for an offender he had in sight; a walk door by walking into
+   it; `askForDoor(entity)` for a doorway. One scenario and its partner
+   (the hero leaves unseen: the guard stays), and the step's control: a
+   hero who leaves by the door and comes straight back finds the alert
+   unchanged.
+3. **Hiding counts as unseen:** a body with `entity.c.roomHide` is not
+   seen (one line in `src/sim/npc/sight.ts`), a scenario, a control.
+4. Only then: finding a knocked-out person (rule 7), the knocked-out
+   caller control, the drawing polish.
+
+If the clock runs out inside a push, drop that push, leave `main` at the
+last green one, and say where you stopped.
+
+**Before every code push:** `curl -s
+https://irreverents-production.up.railway.app/healthz` and read how many
+players are connected. A push restarts the live world. If people are
+playing, hold the push and message the lead instead.
+
+**The names `call-started { by }`, `call-completed { by, area, x, y }`,
+`call-stopped { by, why }` and `alert-changed { area, from, to }` are a
+contract with Step 7's detector:** exactly these.
+
+**From slice 1's review:** the blow that knocks a person out is to be
+perceived by them (today it is not: the witness pass runs after they are
+out); `deed.witnesses` lists everyone who perceived a deed whether or
+not they care, so decide who calls from mood and side; a player's own
+page does not receive the server's `c` for its own character, so
+anything the page must draw comes from an entity or event it does
+receive (the alert and the bell are on bodiless entities: fine).
+Where the earlier worker was heading, if useful: new systems `npc-call`
+(55), `alert-respond` (56), `alert-cool` (620) that overlay `c.input`
+after `npc-act`; drawing in a new `src/client/draw/alert.ts`; the only
+edits to slice 1's files were `rageMayCool()` and a `bell` look on
+things.
 
 ## 1 · The task, and the measure row it moves
 
