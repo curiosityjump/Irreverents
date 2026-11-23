@@ -24,6 +24,8 @@ so broken content cannot deploy (Railway keeps serving the previous build).
    verb a character lists exists; each tuning number a verb or system
    declares is present and in range; no tuning number is unread; each
    action a verb reads exists; no speed can cross a whole tile in one tick.
+   It then calls `src/sim/check-rooms.ts` for the room checks that need
+   the simulation (`docs/mechanisms/rooms-and-doors.md`).
 4. The build bakes the validated result into both bundles as `__CONTENT__`.
 
 ## Rules that are deliberate
@@ -37,6 +39,13 @@ so broken content cannot deploy (Railway keeps serving the previous build).
   so a new verb brings its own numbers and nobody edits a common file.
 - **An unread tuning number is an error**: a typo in a name would
   otherwise silently fall back to nothing.
+
+## Controls that stay alive
+
+`controls/rooms/*.json` are deliberately broken rooms that `npm run
+check` lays over the real content and requires to be refused, each for
+its stated reason (`scripts/lib/room-controls.ts`). They are not content:
+nothing in `content/` may depend on them, and the build never reads them.
 
 ## Adding a kind of content
 

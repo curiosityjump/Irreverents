@@ -1,0 +1,128 @@
+{
+  "id": "step3-room-remembers",
+  "gate": "B",
+  "proves": "signal 3b: a room is not reset when it empties. A body left standing on the dais is exactly where it was when the only player returns after more than ten seconds in the street",
+  "room": "throne-room",
+  "players": [
+    {
+      "id": "a",
+      "spawn": 3
+    }
+  ],
+  "entities": [
+    {
+      "id": "statue",
+      "character": "dummy",
+      "tile": [
+        5,
+        13
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 120,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 700,
+      "to": 830,
+      "x": -1
+    }
+  ],
+  "ticks": 880,
+  "expect": [
+    {
+      "fact": "position",
+      "entity": "statue",
+      "at": 30,
+      "x": [
+        88,
+        88
+      ],
+      "y": [
+        224,
+        224
+      ]
+    },
+    {
+      "fact": "in-room",
+      "player": "a",
+      "at": 44,
+      "room": "castle-street"
+    },
+    {
+      "fact": "in-room",
+      "player": "a",
+      "at": 699,
+      "room": "castle-street"
+    },
+    {
+      "fact": "position",
+      "entity": "statue",
+      "at": 699,
+      "x": [
+        88,
+        88
+      ],
+      "y": [
+        224,
+        224
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "changed-room",
+      "between": [
+        700,
+        880
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "player": "a"
+    },
+    {
+      "fact": "in-room",
+      "player": "a",
+      "at": 880,
+      "room": "throne-room"
+    },
+    {
+      "fact": "position",
+      "entity": "statue",
+      "at": 880,
+      "x": [
+        88,
+        88
+      ],
+      "y": [
+        224,
+        224
+      ]
+    },
+    {
+      "fact": "in-room",
+      "entity": "statue",
+      "at": 880,
+      "room": "throne-room"
+    },
+    {
+      "fact": "event",
+      "event": "landed",
+      "entity": "statue",
+      "between": [
+        0,
+        880
+      ],
+      "count": [
+        0,
+        0
+      ]
+    }
+  ]
+}

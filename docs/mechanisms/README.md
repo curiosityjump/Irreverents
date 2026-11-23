@@ -68,3 +68,6 @@ groups) whenever you add one — never update the number from memory.
 
 **NPC response logic** (`docs/mechanisms/npc-response.md`)
 - `entity.c.npc` + `content/npcs/`, `content/rules/` + the `npc-*` systems — scripted people with exactly three moods who witness deeds and react by role/deed tables in data; never AI (Step 4).
+
+**Rooms and doors** (`docs/mechanisms/rooms-and-doors.md`)
+- `content/rooms/*.json` doors, areas and parts + `src/sim/systems/room-doors.ts` — rooms joined by walk and enter doors that carry any body, tiles that change while the game runs (`src/sim/room-state.ts`), working-part kinds declared by their system, and the checks and controls (`controls/rooms/`) that refuse a broken map (Step 3).

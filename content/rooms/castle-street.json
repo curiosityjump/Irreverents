@@ -1,0 +1,86 @@
+{
+  "//": "DRAFT: the layout is a first pass for the owner to judge; the id and the door ids are permanent. Three screens wide. The floor is flat from end to end (Step 4's guarded target and pursuit want at least 12 flat tiles). Building 1 (columns 10-17) overhangs the street; its awning (row 8) is reached from the ground and its roof from the awning. Building 2 (columns 24-33) has an upper room: the doorway under it leads up into the room, whose east opening gives onto a balcony, a step and the roof. INTENT: the east wall is solid for now; slice B joins it to the courtyard and turns the roofs into an unadvertised route. Nothing here points at anything: no arrows, no glow, no text.",
+  "id": "castle-street",
+  "name": "Castle Street",
+  "tile": 16,
+  "legend": {
+    "#": "solid",
+    "=": "oneway",
+    ".": "empty",
+    "1": "spawn",
+    "2": "spawn",
+    "W": {
+      "door": "to-throne-room"
+    },
+    "d": {
+      "door": "street-doorway"
+    },
+    "u": {
+      "door": "upper-doorway"
+    }
+  },
+  "rows": [
+    "################################################",
+    "#..............................................#",
+    "#..............................................#",
+    "#.......................##########.............#",
+    "#.......................#........#.............#",
+    "#.........########......#.u.........==.........#",
+    "#.........########......#.u....................#",
+    "#.......................##########====.........#",
+    "#......===............................===......#",
+    "W...........................d..................#",
+    "W..1.2......................d..................#",
+    "################################################"
+  ],
+  "doors": [
+    {
+      "id": "to-throne-room",
+      "use": "walk",
+      "to": {
+        "room": "throne-room",
+        "door": "to-street"
+      }
+    },
+    {
+      "id": "street-doorway",
+      "use": "enter",
+      "to": {
+        "room": "castle-street",
+        "door": "upper-doorway"
+      }
+    },
+    {
+      "id": "upper-doorway",
+      "use": "enter",
+      "to": {
+        "room": "castle-street",
+        "door": "street-doorway"
+      }
+    }
+  ],
+  "areas": [
+    {
+      "id": "upper-room",
+      "at": [
+        25,
+        4
+      ],
+      "size": [
+        8,
+        3
+      ]
+    },
+    {
+      "id": "rooftops",
+      "at": [
+        10,
+        1
+      ],
+      "size": [
+        24,
+        4
+      ]
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "//": "A door that names a room that does not exist.",
+  "expect": [
+    "content/rooms/control-a.json",
+    "no room \"control-z\""
+  ],
+  "rooms": {
+    "control-a": {
+      "id": "control-a",
+      "name": "Control",
+      "tile": 16,
+      "legend": {
+        "#": "solid",
+        "=": "oneway",
+        ".": "empty",
+        "1": "spawn",
+        "E": {
+          "door": "east"
+        }
+      },
+      "rows": [
+        "##########",
+        "#........E",
+        "#.1......E",
+        "##########"
+      ],
+      "doors": [
+        {
+          "id": "east",
+          "use": "walk",
+          "to": {
+            "room": "control-z",
+            "door": "west"
+          }
+        }
+      ]
+    }
+  }
+}

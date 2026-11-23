@@ -11,11 +11,13 @@ mechanics unless marked `INTENT:` in the code.
 content/            the game's data: what exists and how it feels
   tuning.json         every feel number (speeds, jump, gravity), one file
   game.json           where a player starts, and as whom
-  rooms/<id>.json     one room's geometry, rows of characters + a legend
+  rooms/<id>.json     one room: rows of characters + a legend, its doors,
+                      named areas and placed working parts
   characters/<id>.json  one kind of body: box, colour, verbs, tuning set
   party.json          the shared party: member character ids, in order
   actions/<id>.json   one pressable action: label and keyboard keys
 scenarios/<id>.json  scripted play-throughs with the facts expected
+controls/rooms/<name>.json  broken rooms `npm run check` must keep refusing
 src/
   content/          pure: content shapes and validators
     kinds/<kind>.ts   one content kind each (self-registering)
@@ -26,6 +28,9 @@ src/
     verbs/<id>.ts     one thing a character can do (self-registering)
     systems/<id>.ts   one pass over the world per tick (self-registering)
     check-content.ts  content checked against the verbs and systems
+    check-rooms.ts    the room checks that need the simulation (Step 3)
+    room-state.ts     tiles and part memory that change while the game runs
+    room-routes.ts    doorToward: which door leads toward another room
   scenarios/        pure: the scenario runner
     facts/<id>.ts     one kind of expectation (self-registering)
   client/           the browser page: canvas, keyboard, render
@@ -66,13 +71,20 @@ content *types* and the small pure constants beside them, such as `TILE`.)
   scenario runs twice and compares, which is what catches a slip.
 - **N players:** each is an entity with `player` set; `inputs` is keyed by
   player id. A player with no input that tick holds nothing.
-- **Rooms:** every entity carries its `room`, so one world can hold
-  several rooms. Today everything outside a room's grid is solid.
+- **Rooms:** every entity carries its `room`, and one world holds every
+  room all the time; nothing is unloaded or reset when a room empties
+  (D-077). Everything outside a room's grid is solid: doors are tiles
+  *inside* the grid, and `src/sim/systems/room-doors.ts` (order 600,
+  after physics) moves whatever stands in one to the room it leads to.
+  A tile's collision can change while the game runs
+  (`tileAt` / `setTile` in `src/sim/room-state.ts`, state in
+  `World.rooms`). Writeup: `docs/mechanisms/rooms-and-doors.md`.
 
 ## Where state lives
 
-- **World state** is the `World` object and nothing else: `tick` and
-  `entities`. Per-entity memory a verb or system needs lives in
+- **World state** is the `World` object and nothing else: `tick`,
+  `entities`, and `rooms` (per-room tile overrides and working parts'
+  memory; absent until something changes). Per-entity memory a verb or system needs lives in
   `entity.c.<its id>` (see `src/sim/verbs/jump.ts`).
 - **Content** is validated once (`scripts/lib/content-files.ts`) and baked
   into both bundles as `__CONTENT__` at build time. It never changes while
@@ -121,7 +133,9 @@ extends from its own file with `declare module '../types.ts' { … }`
 
 | …a | Do this | Engine change? |
 |---|---|---|
-| **room** | `content/rooms/<id>.json`: `rows` of characters and a `legend` mapping each to `solid`, `oneway`, `empty` or `spawn`. Point `content/game.json` at it to start there. | No |
+| **room** | `content/rooms/<id>.json`: `rows` of characters and a `legend` mapping each to `solid`, `oneway`, `empty`, `spawn`, `{ "door": "<door id>" }` or `{ "part": "<part id>" }`. Optional: `doors`, `areas`, `parts`, `hidden`. A room with no doors is a standalone room (a test room); a room with doors must be reachable from the start room and back. Full format: `docs/mechanisms/rooms-and-doors.md`. | No |
+| **door** | In *both* rooms: an entry in `doors` (`id`, `use`: `walk` or `enter`, `to`: `{ room, door }`, optional `hidden`), a legend letter `{ "door": "<id>" }`, and that letter in `rows` as one filled rectangle. `walk`: on the room's edge (or a hole in its last row); anything that touches it is carried through, speed kept. `enter`: a doorway inside the room, standing on a floor; a body goes through on a fresh push of the stick up. The check refuses ends that disagree. | No |
+| **kind of working part** (a plate, a gate, a breakable wall) | One system file `src/sim/systems/room-<kind>.ts` that declares the kind in its `parts: { "<kind>": { what, check? } }` and drives it in `run`: read the placed parts from `content.rooms[id].parts` (`id`, `kind`, `tiles`, `params`), keep their memory with `partState(world, roomId, partId)`, make tiles solid or open with `setTile(world, room, tx, ty, TILE.solid \| null)` (`src/sim/room-state.ts`). A room places one with an entry in `parts` (`id`, `kind`, `params`) and a legend letter `{ "part": "<id>" }`. A kind no system declares is refused, listing the known kinds. | One new file |
 | **character kind** | `content/characters/<id>.json` (box up to 32×32, colour, the verbs it can do one per line, a tuning set name) plus that set under `characters` in `content/tuning.json`, holding exactly the numbers its verbs declare. Kinds today: `hero` (Step 1's stand-in, not in the party), the three party members `grappler` (18×30, heavy), `infiltrator` (10×12, quick, fits a one-tile gap), `flyer` (14×20, flaps), and the hit's crates and dummies. A mark for it on screen is optional, in `src/client/draw/entities.ts` (`MARKS`). | No |
 | **party member** | A character kind that lists the `switch` verb, added to `members` in `content/party.json` (its place in the list is its place in the seating and switching order). `docs/mechanisms/party-and-switching.md`. | No |
 | **NPC** | Not built yet (Step 4). The place: an NPC kind is data in `content/npcs/<id>.json` read by a new `src/content/kinds/npcs.ts`; its body is a character kind; who stands where is `content/placements/<room id>.json` (a new kind), never the room file; its response logic is a system in `src/sim/systems/`. An NPC in the world is an `Entity` with `player: null`. | Step 4 adds the kind files and systems |
@@ -134,6 +148,34 @@ extends from its own file with `declare module '../types.ts' { … }`
 | **kind of content** | `src/content/kinds/<kind>.ts` default-exporting a `ContentKind` (`source`, `parse`, optional cross-reference `check`) and extending `Content`. | One new file |
 | **kind of scenario fact** | `src/scenarios/facts/<id>.ts` default-exporting a `Fact`. | One new file |
 | **event** | Extend `EventMap` beside the code that emits it; `ctx.emit('name', {...})`. | In your own file |
+
+## Rooms and doors: what other steps read (Step 3)
+
+- **The event:** `changed-room: { entity, player, fromRoom, fromDoor,
+  toRoom, toDoor }`, once whenever anything goes through a door (`player`
+  is null for a body nobody plays). A doorway whose pair is in the same
+  room also emits it, with `fromRoom` equal to `toRoom`.
+- **Doors carry any body, never only players** (D-077). A *walk* door
+  needs nothing: a body that moves into it is carried, with its speed.
+- **How a system sends entity X through an *enter* doorway D:** bring X
+  to stand in D's tiles (the middle of its box inside the door's
+  rectangle: `room.doors`, fields `tx`, `ty`, `w`, `h`), then either push
+  its stick up for a tick the way any action is asked for
+  (`entity.c.input.y = -1`; it must have been above -0.5 the tick before,
+  a *fresh* push), or call `askForDoor(entity)` from
+  `src/sim/systems/room-doors.ts`, which asks for exactly one tick and
+  needs no fresh push. Either must happen before order 600 in the same
+  tick. X arrives standing still in D's pair.
+- **Where a friend went.** Every device has the whole `World`, so for
+  every other party member it knows their entity's `room`; and
+  `doorToward(content, myRoom, theirRoom)` (`src/sim/room-routes.ts`)
+  gives the door of my room that starts the shortest way to theirs, or
+  null (same room, or no way). Step 5 draws from those two facts; nothing
+  is drawn yet. A door's `hidden` flag is there too: a marker should not
+  point at a hidden door.
+- **Tiles that change while the game runs** are read with `tileAt(world,
+  room, tx, ty)`, never `room.cells` directly, by anything that asks
+  "is this solid *now*" (physics does). `room.cells` is the room file.
 
 ## Bodies: the events and state other steps read (Step 2)
 

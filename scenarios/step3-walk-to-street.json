@@ -1,0 +1,161 @@
+{
+  "id": "step3-walk-to-street",
+  "gate": "B",
+  "proves": "signal 1, end to end on validated rooms: a player walks out of the throne room's east opening into the castle street and back, keeping full speed and their footing across the door both ways",
+  "room": "throne-room",
+  "players": [
+    {
+      "id": "a",
+      "spawn": 3
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 120,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 140,
+      "to": 270,
+      "x": -1
+    }
+  ],
+  "ticks": 320,
+  "expect": [
+    {
+      "fact": "in-room",
+      "player": "a",
+      "at": 43,
+      "room": "throne-room"
+    },
+    {
+      "fact": "event",
+      "event": "changed-room",
+      "between": [
+        43,
+        43
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "player": "a"
+    },
+    {
+      "fact": "in-room",
+      "player": "a",
+      "at": 44,
+      "room": "castle-street"
+    },
+    {
+      "fact": "velocity",
+      "player": "a",
+      "at": 44,
+      "vx": [
+        83.9,
+        84.1
+      ],
+      "vy": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "position",
+      "player": "a",
+      "at": 44,
+      "x": [
+        25,
+        25
+      ],
+      "y": [
+        176,
+        176
+      ]
+    },
+    {
+      "fact": "standing-on-tile",
+      "player": "a",
+      "at": 130,
+      "tile": [
+        8,
+        11
+      ]
+    },
+    {
+      "fact": "in-room",
+      "player": "a",
+      "at": 228,
+      "room": "castle-street"
+    },
+    {
+      "fact": "event",
+      "event": "changed-room",
+      "between": [
+        228,
+        228
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "player": "a"
+    },
+    {
+      "fact": "in-room",
+      "player": "a",
+      "at": 229,
+      "room": "throne-room"
+    },
+    {
+      "fact": "velocity",
+      "player": "a",
+      "at": 229,
+      "vx": [
+        -84.1,
+        -83.9
+      ],
+      "vy": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "position",
+      "player": "a",
+      "at": 229,
+      "x": [
+        290,
+        296
+      ],
+      "y": [
+        240,
+        240
+      ]
+    },
+    {
+      "fact": "standing-on-tile",
+      "player": "a",
+      "at": 320,
+      "tile": [
+        14,
+        15
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "changed-room",
+      "between": [
+        0,
+        320
+      ],
+      "count": [
+        2,
+        2
+      ]
+    }
+  ]
+}

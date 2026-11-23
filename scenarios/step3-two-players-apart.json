@@ -1,0 +1,126 @@
+{
+  "id": "step3-two-players-apart",
+  "gate": "B",
+  "proves": "signal 4, the headless half: two players separate and regroup. A walks to the street while B stays in the throne room; then B follows and both are in the street",
+  "room": "throne-room",
+  "players": [
+    {
+      "id": "a",
+      "spawn": 3
+    },
+    {
+      "id": "b",
+      "spawn": 2
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 150,
+      "x": 1
+    },
+    {
+      "player": "b",
+      "from": 200,
+      "to": 330,
+      "x": 1
+    }
+  ],
+  "ticks": 360,
+  "expect": [
+    {
+      "fact": "in-room",
+      "player": "a",
+      "at": 0,
+      "room": "throne-room"
+    },
+    {
+      "fact": "in-room",
+      "player": "b",
+      "at": 0,
+      "room": "throne-room"
+    },
+    {
+      "fact": "in-room",
+      "player": "a",
+      "at": 190,
+      "room": "castle-street"
+    },
+    {
+      "fact": "in-room",
+      "player": "b",
+      "at": 190,
+      "room": "throne-room"
+    },
+    {
+      "fact": "position",
+      "player": "b",
+      "at": 190,
+      "x": [
+        216,
+        216
+      ],
+      "y": [
+        240,
+        240
+      ]
+    },
+    {
+      "fact": "in-room",
+      "player": "a",
+      "at": 360,
+      "room": "castle-street"
+    },
+    {
+      "fact": "in-room",
+      "player": "b",
+      "at": 360,
+      "room": "castle-street"
+    },
+    {
+      "fact": "standing-on-tile",
+      "player": "a",
+      "at": 360,
+      "tile": [
+        11,
+        11
+      ]
+    },
+    {
+      "fact": "standing-on-tile",
+      "player": "b",
+      "at": 360,
+      "tile": [
+        12,
+        11
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "changed-room",
+      "between": [
+        0,
+        360
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "player": "a"
+    },
+    {
+      "fact": "event",
+      "event": "changed-room",
+      "between": [
+        0,
+        360
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "player": "b"
+    }
+  ]
+}

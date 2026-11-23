@@ -1,5 +1,6 @@
 import { TILE } from '../../content/kinds/rooms.ts';
 import type { Room } from '../../content/kinds/rooms.ts';
+import { tileAt } from '../room-state.ts';
 import { DT } from '../types.ts';
 import type { System } from '../types.ts';
 
@@ -13,8 +14,11 @@ declare module '../types.ts' {
 const EPS = 1e-6;
 
 /**
- * DRAFT: everything outside a room's grid is solid, so nothing can leave a
- * room or fall forever. Step 3 (connected rooms) will want exits.
+ * The room file's own tile code. INTENT: everything outside a room's grid
+ * is solid, so nothing can leave the grid or fall forever. Doors are tiles
+ * *inside* the grid (src/sim/systems/room-doors.ts). Collision reads
+ * tileAt() (src/sim/room-state.ts), which lets a working part override a
+ * tile while the game runs and falls back to this.
  */
 export function cellAt(room: Room, tx: number, ty: number): number {
   if (tx < 0 || ty < 0 || tx >= room.w || ty >= room.h) return TILE.solid;
@@ -49,7 +53,7 @@ const system: System = {
         const bottom = Math.floor((e.y + h - EPS) / T);
         const tx = e.vx > 0 ? Math.floor((e.x + w - EPS) / T) : Math.floor(e.x / T);
         for (let ty = top; ty <= bottom; ty++) {
-          if (cellAt(room, tx, ty) !== TILE.solid) continue;
+          if (tileAt(ctx.world, room, tx, ty) !== TILE.solid) continue;
           e.x = e.vx > 0 ? tx * T - w : (tx + 1) * T;
           e.vx = 0;
           break;
@@ -66,7 +70,7 @@ const system: System = {
       if (e.vy > 0) {
         const ty = Math.floor((e.y + h - EPS) / T);
         for (let tx = left; tx <= right; tx++) {
-          const cell = cellAt(room, tx, ty);
+          const cell = tileAt(ctx.world, room, tx, ty);
           // A one-way platform only catches feet that were above it.
           const lands = cell === TILE.solid || (cell === TILE.oneway && feetBefore <= ty * T + EPS);
           if (!lands) continue;
@@ -78,7 +82,7 @@ const system: System = {
       } else if (e.vy < 0) {
         const ty = Math.floor(e.y / T);
         for (let tx = left; tx <= right; tx++) {
-          if (cellAt(room, tx, ty) !== TILE.solid) continue;
+          if (tileAt(ctx.world, room, tx, ty) !== TILE.solid) continue;
           e.y = (ty + 1) * T;
           e.vy = 0;
           break;

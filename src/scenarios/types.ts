@@ -25,9 +25,13 @@ export interface Scenario {
   proves: string;
   room: string;
   /** `character` left out: the player gets the first party member nobody is playing, as a new player does. */
-  players: { id: string; character?: string; spawn: number }[];
+  /** `room`: where this player starts; left out, the scenario's `room` (Step 3). */
+  players: { id: string; character?: string; spawn: number; room?: string }[];
   /** Bodies nobody plays, put in the room before tick 0. Their entity id is `id`. */
-  entities?: { id: string; character: string; tile: [number, number]; vx?: number; vy?: number }[];
+  /** `room`: which room the body is put in; left out, the scenario's `room` (Step 3). */
+  entities?: { id: string; character: string; tile: [number, number]; vx?: number; vy?: number; room?: string }[];
+  /** Tiles changed before tick 0, as a working part would change them while the game runs (src/sim/room-state.ts): `is` is a TILE code (Step 3). */
+  tiles?: { room: string; tile: [number, number]; is: number }[];
   /** True: the room's own placements (content/placements/<room>.json) are put in the world too. */
   placements?: boolean;
   inputs: InputSpan[];

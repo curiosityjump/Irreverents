@@ -1,0 +1,62 @@
+{
+  "id": "step3-tile-made-solid",
+  "proves": "a tile made solid while the game runs (how a closed gate will work) stops a runner where the room file alone has open floor",
+  "room": "castle-street",
+  "players": [
+    {
+      "id": "a",
+      "spawn": 0
+    }
+  ],
+  "tiles": [
+    {
+      "room": "castle-street",
+      "tile": [
+        6,
+        10
+      ],
+      "is": "solid"
+    },
+    {
+      "room": "castle-street",
+      "tile": [
+        6,
+        9
+      ],
+      "is": "solid"
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 120,
+      "x": 1
+    }
+  ],
+  "ticks": 150,
+  "expect": [
+    {
+      "fact": "position",
+      "player": "a",
+      "at": 150,
+      "x": [
+        87,
+        87
+      ],
+      "y": [
+        176,
+        176
+      ]
+    },
+    {
+      "fact": "velocity",
+      "player": "a",
+      "at": 100,
+      "vx": [
+        0,
+        0
+      ]
+    }
+  ]
+}

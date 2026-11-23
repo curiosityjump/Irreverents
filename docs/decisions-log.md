@@ -267,3 +267,17 @@ document as a decision of theirs.
 - **Why this way:** nobody should ever end up stuck inside a wall, so in a crawlspace the tiny one stays tiny when you press switch. Standing right against a wall is different: there the wider hero is simply nudged a few pixels clear, so the button does not feel broken beside walls.
 - **To change it:** the nudge is one small block of code; the refusal should stay unless something else guarantees a way out.
 - **Where:** `src/sim/verbs/switch.ts`; `docs/deliberate-designs.md`.
+### 2026-11-23 · The first two rooms are drawn: a tall throne room with a dais and balconies, and a street three screens long with two buildings to climb
+- **Decided by:** brief-worker, Step 3 slice A, `session_017WiGzFewfghZxs2P5YqJss`
+- **Instead of asking:** "What do the throne room and the street look like?"
+- **Why this way:** something had to be there to walk through. The throne room is one screen wide and taller than a screen: a low dais at the west end with clear space for the throne, a long floor for the king's audience (doc 24), and balconies each a full jump above the last. The street is flat from end to end so a chase has room, with an awning you reach from the ground, a roof you reach from the awning, and a building whose upper room you enter through a doorway under it. Nothing points at anything.
+- **To change it:** each room is a small text grid in one data file; redraw the grid. Only the rooms' internal ids and their door ids stay.
+- **Where:** `content/rooms/throne-room.json`, `content/rooms/castle-street.json` (both marked `DRAFT:`).
+
+### 2026-11-23 · A doorway takes you on a fresh push up, and sets you down standing still; an opening at a room's edge takes you at a run
+- **Decided by:** brief-worker, Step 3 slice A, `session_017WiGzFewfghZxs2P5YqJss`
+- **Instead of asking:** "If you are still holding up when you come out of a doorway, should it take you straight back? Should you keep running through an opening?"
+- **Why this way:** holding up would flick you back and forth between the two doorways; letting go and pushing again is one clear decision each time. An opening at the edge of a room keeps your speed so a chase or a thrown friend carries straight on into the next room (D-077: guards may follow between regions; impact over numbers).
+- **To change it:** small, in one file.
+- **Where:** `docs/mechanisms/rooms-and-doors.md`, "The two kinds of door".
+

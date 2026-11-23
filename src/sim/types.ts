@@ -63,6 +63,20 @@ export interface World {
   /** How many steps have run. */
   tick: number;
   entities: Entity[];
+  /**
+   * What has changed in a room while the game runs, by room id. Absent
+   * until something changes. Read and written through src/sim/room-state.ts
+   * (Step 3); never reset when a room empties (D-077).
+   */
+  rooms?: Record<string, RoomState>;
+}
+
+/** One room's run-time state. Plain JSON, like the rest of the World. */
+export interface RoomState {
+  /** Tile codes (TILE) that replace the room file's, by cell index (ty * room.w + tx). How a closed gate is solid and an open one is not. */
+  tiles: Record<number, number>;
+  /** Whatever each placed part remembers, by part id; owned by the system that declares the part's kind. */
+  parts: Record<string, Record<string, number | boolean | string>>;
 }
 
 /**
@@ -103,7 +117,21 @@ export interface System {
   order: number;
   /** Numbers this system reads from content/tuning.json "world". */
   tuning?: Record<string, TuningRule>;
+  /**
+   * Kinds of working part (a room file's "parts") this system drives, by
+   * kind name. Declaring a kind here is what makes it a known kind
+   * (src/sim/check-rooms.ts); see docs/architecture.md, "a kind of working part".
+   */
+  parts?: Record<string, PartRule>;
   run(ctx: StepContext): void;
+}
+
+/** A kind of working part, declared by the system that drives it. */
+export interface PartRule {
+  /** What this kind of part is, in a few words (shown when a room names an unknown kind). */
+  what: string;
+  /** Reports what is wrong with one placed part's parameters or tiles. `part` and `room` are the content's Part and Room. */
+  check?(part: { id: string; kind: string; tiles: { tx: number; ty: number }[]; params: Record<string, unknown> }, room: { id: string; w: number; h: number }, fail: (message: string) => void): void;
 }
 
 /**

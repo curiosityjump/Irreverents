@@ -106,3 +106,18 @@ on — covers everything that used to arrive through a session's own final
 message: findings and flags alike, folded into the one report that is
 actually read (questions for the owner go through
 `docs/questions-inbox.md`).
+
+### step-3-a-rooms-and-doors.md, 2026-11-23 (first push)
+
+**Flag:** `docs/architecture.md`, "Effects on a player", lists "a door (Step 3)" as an emitter of the `move` effect. The door system does **not** emit it: it changes the body directly, as the brief says (each device runs the same `step()` for its own character). If Step 1's netcode has the *server* step a player's body through a door (for instance while that player is held and "the server's copy is the truth"), the page has to follow that copy's `room`, `x`, `y`; nothing is sent as an effect. I did not switch to effects because a `move` arrives standing still (a walk door keeps speed) and because a device and the server both emitting it for the same step could put a player back at the door a moment later. Worth one line between you and Step 1's lead.
+
+**Flag:** `src/sim/party.ts` `boxInSolid` (Step 2's, used by `switch` and the `clear-of-solid` fact) reads the room file's cells (`cellAt`), not `tileAt(world, …)`. Once slice B has gates, switching to a bigger body inside a closed gate's tiles would be allowed. Not mine to edit.
+
+**Flag:** on a keyboard the Up arrow and W are both "stick up" and jump (`content/actions/jump.json` keys, Step 1/2's). Entering a doorway with them also fires a `jumped` event; the door zeroes the speed so nothing shows, but a jump sound later would play. Touch has no overlap.
+
+**Note:** the castle street for Step 4. The floor is flat from end to end (46 tiles). The second flat stretch that is out of straight-line sight is the upper room of building 2 (columns 25-32, 8 tiles, solid floor and walls, reached by the doorway under it or from the east balcony). Ledges reached only by a jump: the awning at row 8 (columns 7-9), building 1's roof, the east awning and balcony. I did not put a wall or a step across the street itself, because either would also cut the obvious walk to the courtyard that slice B opens in the east wall. If Step 4 needs a ground-level blind corner, it is a redraw of the grid.
+
+**Note:** contracts that grew (all additive): the room format (`doors`, `areas`, `parts`, `hidden`, two legend object forms); `World.rooms`; `System.parts`; event `changed-room`; component `roomDoors`; scenario format (`players[].room`, `entities[].room`, `tiles`); fact `in-room`; `scripts/check.ts` gained a "room controls" section; `scripts/trace.ts` prints each body's room. New top-level directory `controls/` (not deployed, not content).
+
+**Note:** my scenarios use the default party characters (no `character`), so their numbers move if Step 2 retunes the grappler or reorders the party. `step3-guard-follows` uses Step 2's `dummy` for the body that slides and `hero` for the body driven through `c.input`.
+

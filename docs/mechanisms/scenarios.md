@@ -46,6 +46,12 @@ build gates A–F (`docs/measures.md`, M3) from the scenarios' `gate` tags.
 - An input span holds the stick (`x`, `y` from -1 to 1) and/or actions
   (`hold`, ids from `content/actions/`) from tick `from` up to but not
   including `to`. Overlapping spans merge.
+- A player or an entity may carry `"room": "<room id>"` to start in
+  another room than the scenario's (Step 3; a scenario's `placements`
+  still means the scenario's own room). `tiles` is optional: `[{ "room",
+  "tile": [col, row], "is": "solid" | "oneway" | "empty" }]` changes
+  tiles before tick 0 the way a working part does while the game runs
+  (`docs/mechanisms/rooms-and-doors.md`).
 - An input span may name `"entity"` (one of the scenario's `entities`)
   instead of `"player"`: it is written to that body's `entity.c.input`,
   which is how a body that is not a player acts (`docs/architecture.md`,
@@ -64,6 +70,7 @@ build gates A–F (`docs/measures.md`, M3) from the scenarios' `gate` tags.
 | `velocity` | at tick `at`, `player`'s `vx` and/or `vy` (pixels per second) are within `[min, max]` |
 | `character` | at tick `at`, `player` is the character kind `is`, and/or a different kind from player `differentFrom` |
 | `clear-of-solid` | on every tick within `between`, `player`'s whole box is outside every solid tile |
+| `in-room` | at tick `at`, `player` (or `entity`) is in room `room` |
 | `event` | event `event` happened (for `player`, if given) on a tick within `between`; optional `count: [min, max]`, and `[0, 0]` means "must not happen" |
 
 Every fact that names a `player` accepts `"entity": "<id>"` instead (one
@@ -90,6 +97,6 @@ returns what was true instead). It registers itself.
 ## Authoring
 
 `node scripts/trace.ts <scenario id> [every N ticks]` prints each
-player's feet, tile, speed and ground state as the scenario runs, and
+body's room, feet, tile, speed and ground state as the scenario runs, and
 every event. Write the inputs, give it one placeholder fact, trace it,
 then write the real facts from what you see and judge to be right.

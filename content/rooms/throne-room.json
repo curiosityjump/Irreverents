@@ -1,0 +1,70 @@
+{
+  "//": "DRAFT: the layout is a first pass for the owner to judge; the id and the door ids are permanent. One screen wide, taller than a screen (the camera scrolls up). West end: a dais one tile high with open space on it for the throne (Step 6 places it). INTENT: the west wall behind the dais is three plain tiles thick: slice B hides a passage there (the library's example E-002, 'secret behind throne'); do not thin it or decorate it. Balconies are one-way platforms, each three tiles above the last, the height a hero's jump just clears.",
+  "id": "throne-room",
+  "name": "Throne Room",
+  "tile": 16,
+  "legend": {
+    "#": "solid",
+    "=": "oneway",
+    ".": "empty",
+    "1": "spawn",
+    "2": "spawn",
+    "3": "spawn",
+    "4": "spawn",
+    "E": {
+      "door": "to-street"
+    }
+  },
+  "rows": [
+    "####################",
+    "###................#",
+    "###................#",
+    "###................#",
+    "###................#",
+    "###................#",
+    "###.......=====....#",
+    "###................#",
+    "###................#",
+    "###..====......====#",
+    "###................#",
+    "###................#",
+    "###......===..===..#",
+    "###................E",
+    "########.1.2.3.4...E",
+    "####################"
+  ],
+  "doors": [
+    {
+      "id": "to-street",
+      "use": "walk",
+      "to": {
+        "room": "castle-street",
+        "door": "to-throne-room"
+      }
+    }
+  ],
+  "areas": [
+    {
+      "id": "dais",
+      "at": [
+        3,
+        10
+      ],
+      "size": [
+        5,
+        4
+      ]
+    },
+    {
+      "id": "balconies",
+      "at": [
+        3,
+        1
+      ],
+      "size": [
+        16,
+        9
+      ]
+    }
+  ]
+}

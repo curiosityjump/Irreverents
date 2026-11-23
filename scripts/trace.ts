@@ -24,7 +24,7 @@ rec.history.forEach((world, tick) => {
   if (tick % every !== 0 && tick !== scenario.ticks) return;
   const who = world.entities.map((e) => {
     const f = feet(rec, e);
-    return `${e.player ?? e.id}: feet ${round2(f.x)},${round2(f.y)} tile [${f.tx},${f.ty}] v ${round2(e.vx)},${round2(e.vy)} ${e.onGround ? 'ground' : 'air'}`;
+    return `${e.player ?? e.id} in ${e.room}: feet ${round2(f.x)},${round2(f.y)} tile [${f.tx},${f.ty}] v ${round2(e.vx)},${round2(e.vy)} ${e.onGround ? 'ground' : 'air'}`;
   });
   console.log(`tick ${String(tick).padStart(4)}  ${who.join('  |  ')}`);
 });

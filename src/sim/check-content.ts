@@ -1,4 +1,5 @@
 import type { Content, Problem } from '../content/types.ts';
+import { checkRooms } from './check-rooms.ts';
 import { systems, verbs } from './registry.ts';
 import { TICK_RATE } from './types.ts';
 import type { TuningRule } from './types.ts';
@@ -89,5 +90,7 @@ export function checkContentAgainstSim(content: Content): Problem[] {
       }
     }
   }
+  // Step 3: working parts and (docs/mechanisms/rooms-and-doors.md) that every room has a way out.
+  problems.push(...checkRooms(content, systems));
   return problems;
 }

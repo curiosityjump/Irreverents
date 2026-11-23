@@ -1,0 +1,52 @@
+{
+  "//": "A connection marked hidden that is an enter doorway, which is drawn as an arch.",
+  "expect": [
+    "content/rooms/control-a.json",
+    "hidden",
+    "sign"
+  ],
+  "rooms": {
+    "control-a": {
+      "id": "control-a",
+      "name": "Control",
+      "tile": 16,
+      "legend": {
+        "#": "solid",
+        "=": "oneway",
+        ".": "empty",
+        "1": "spawn",
+        "d": {
+          "door": "down"
+        },
+        "u": {
+          "door": "up"
+        }
+      },
+      "rows": [
+        "##########",
+        "#........#",
+        "#.1.d..u.#",
+        "##########"
+      ],
+      "doors": [
+        {
+          "id": "down",
+          "use": "enter",
+          "hidden": true,
+          "to": {
+            "room": "control-a",
+            "door": "up"
+          }
+        },
+        {
+          "id": "up",
+          "use": "enter",
+          "to": {
+            "room": "control-a",
+            "door": "down"
+          }
+        }
+      ]
+    }
+  }
+}

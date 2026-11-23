@@ -1,0 +1,139 @@
+{
+  "id": "step3-guard-follows",
+  "gate": "B",
+  "proves": "signal 3b: a body nobody plays goes through doors like a player. One slides out of the throne room into the street; another, driven the way an NPC is, pushes up in a doorway and is carried to its pair. The player who stayed is untouched",
+  "room": "throne-room",
+  "players": [
+    {
+      "id": "a",
+      "spawn": 0
+    }
+  ],
+  "entities": [
+    {
+      "id": "guard",
+      "character": "dummy",
+      "tile": [
+        14,
+        14
+      ],
+      "vx": 60
+    },
+    {
+      "id": "porter",
+      "character": "hero",
+      "room": "castle-street",
+      "tile": [
+        28,
+        10
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "entity": "porter",
+      "from": 30,
+      "to": 40,
+      "y": -1
+    }
+  ],
+  "ticks": 200,
+  "expect": [
+    {
+      "fact": "in-room",
+      "entity": "guard",
+      "at": 71,
+      "room": "throne-room"
+    },
+    {
+      "fact": "event",
+      "event": "changed-room",
+      "between": [
+        71,
+        71
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "entity": "guard"
+    },
+    {
+      "fact": "in-room",
+      "entity": "guard",
+      "at": 72,
+      "room": "castle-street"
+    },
+    {
+      "fact": "velocity",
+      "entity": "guard",
+      "at": 72,
+      "vx": [
+        60,
+        60
+      ]
+    },
+    {
+      "fact": "standing-on-tile",
+      "entity": "guard",
+      "at": 200,
+      "tile": [
+        9,
+        11
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "changed-room",
+      "between": [
+        30,
+        30
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "entity": "porter"
+    },
+    {
+      "fact": "standing-on-tile",
+      "entity": "porter",
+      "at": 200,
+      "tile": [
+        26,
+        7
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "changed-room",
+      "between": [
+        0,
+        200
+      ],
+      "count": [
+        2,
+        2
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "changed-room",
+      "between": [
+        0,
+        200
+      ],
+      "count": [
+        0,
+        0
+      ],
+      "player": "a"
+    },
+    {
+      "fact": "in-room",
+      "player": "a",
+      "at": 200,
+      "room": "throne-room"
+    }
+  ]
+}

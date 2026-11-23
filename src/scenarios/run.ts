@@ -1,5 +1,7 @@
 import { describe, isRecord, known } from '../content/reader.ts';
 import type { Content, Problem } from '../content/types.ts';
+import { TILE } from '../content/kinds/rooms.ts';
+import { setTile } from '../sim/room-state.ts';
 import { step } from '../sim/step.ts';
 import type { Input, SimEvent, World } from '../sim/types.ts';
 import { createWorld, populateRoom, spawnBody, spawnPlayer } from '../sim/world.ts';
@@ -19,7 +21,7 @@ export function parseScenario(raw: unknown, file: string, stem: string, content:
     fail('(the whole file)', `must be an object, but is ${describe(raw)}`);
     return null;
   }
-  const fields = ['id', 'gate', 'proves', 'room', 'players', 'entities', 'placements', 'inputs', 'ticks', 'expect'];
+  const fields = ['id', 'gate', 'proves', 'room', 'players', 'entities', 'placements', 'tiles', 'inputs', 'ticks', 'expect'];
   for (const key of Object.keys(raw)) {
     if (key !== '//' && !fields.includes(key)) fail(key, `unknown field (known fields: ${fields.join(', ')})`);
   }
@@ -47,7 +49,10 @@ export function parseScenario(raw: unknown, file: string, stem: string, content:
       }
       const spawn = p.spawn ?? i;
       if (typeof spawn !== 'number' || !Number.isInteger(spawn) || spawn < 0) fail(`${w}.spawn`, `must be a whole number from 0, but is ${JSON.stringify(spawn)}`);
-      players.push({ id: String(p.id), character: p.character === undefined ? undefined : String(p.character), spawn: Number(spawn) });
+      // Step 3: a player may start in another room than the scenario's.
+      if (p.room !== undefined && (typeof p.room !== 'string' || !(p.room in content.rooms))) fail(`${w}.room`, `no room ${JSON.stringify(p.room)} (rooms: ${known(content.rooms)})`);
+      else if (typeof p.room === 'string' && content.rooms[p.room]!.spawns.length === 0) fail(`${w}.room`, `room "${p.room}" has no spawn tile for a player to start on`);
+      players.push({ id: String(p.id), character: p.character === undefined ? undefined : String(p.character), spawn: Number(spawn), ...(typeof p.room === 'string' ? { room: p.room } : {}) });
     });
   }
 
@@ -55,12 +60,15 @@ export function parseScenario(raw: unknown, file: string, stem: string, content:
   if (raw.entities !== undefined) {
     if (!Array.isArray(raw.entities)) fail('entities', `must be a list, but is ${describe(raw.entities)}`);
     else {
-      const room = typeof raw.room === 'string' ? content.rooms[raw.room] : undefined;
+      const scenarioRoom = typeof raw.room === 'string' ? content.rooms[raw.room] : undefined;
       raw.entities.forEach((e: unknown, i: number) => {
         const w = `entities[${i}]`;
         if (!isRecord(e)) return fail(w, `must be an object, but is ${describe(e)}`);
+        // Step 3: a body may be put in another room than the scenario's.
+        if (e.room !== undefined && (typeof e.room !== 'string' || !(e.room in content.rooms))) fail(`${w}.room`, `no room ${JSON.stringify(e.room)} (rooms: ${known(content.rooms)})`);
+        const room = typeof e.room === 'string' ? content.rooms[e.room] : scenarioRoom;
         for (const key of Object.keys(e)) {
-          if (!['id', 'character', 'tile', 'vx', 'vy', '//'].includes(key)) fail(`${w}.${key}`, 'unknown field (known fields: id, character, tile, vx, vy)');
+          if (!['id', 'character', 'tile', 'vx', 'vy', 'room', '//'].includes(key)) fail(`${w}.${key}`, 'unknown field (known fields: id, character, tile, vx, vy, room)');
         for (const axis of ['vx', 'vy']) {
           const v = e[axis];
           if (v !== undefined && (typeof v !== 'number' || !Number.isFinite(v) || Math.abs(v) > 900)) fail(`${w}.${axis}`, `must be a speed from -900 to 900 pixels per second, but is ${JSON.stringify(v)}`);
@@ -69,7 +77,7 @@ export function parseScenario(raw: unknown, file: string, stem: string, content:
         if (typeof e.id !== 'string' || e.id === '') fail(`${w}.id`, 'must be non-empty text');
         else if (e.id.startsWith('p:')) fail(`${w}.id`, `"${e.id}" starts with "p:", which is how players' entities are named`);
         else if (entities.some((q) => q.id === e.id)) fail(`${w}.id`, `entity "${e.id}" is listed twice`);
-        else if (raw.placements === true && room && content.placements?.[room.id]?.place.some((q) => q.id === e.id)) {
+        else if (raw.placements === true && room && room === scenarioRoom && content.placements?.[room.id]?.place.some((q) => q.id === e.id)) {
           fail(`${w}.id`, `"${e.id}" is already placed in room "${room.id}" by its placements file, which this scenario asked for`);
         }
         if (typeof e.character !== 'string' || !(e.character in content.characters)) {
@@ -81,12 +89,30 @@ export function parseScenario(raw: unknown, file: string, stem: string, content:
         else if (room && (t[0] < 0 || t[1] < 0 || t[0] >= room.w || t[1] >= room.h)) {
           fail(`${w}.tile`, `[${t[0]}, ${t[1]}] is outside room "${room.id}", which is ${room.w} by ${room.h} tiles`);
         }
-        entities.push({ id: String(e.id), character: String(e.character), tile: tileOk ? [t[0], t[1]] : [0, 0], vx: e.vx as number | undefined, vy: e.vy as number | undefined });
+        entities.push({ id: String(e.id), character: String(e.character), tile: tileOk ? [t[0], t[1]] : [0, 0], vx: e.vx as number | undefined, vy: e.vy as number | undefined, ...(typeof e.room === 'string' ? { room: e.room } : {}) });
       });
     }
   }
 
   if (raw.placements !== undefined && typeof raw.placements !== 'boolean') fail('placements', `must be true or false, but is ${describe(raw.placements)}`);
+
+  // Step 3: tiles changed before the start, standing in for a working part (a closed gate).
+  const tiles: NonNullable<Scenario['tiles']> = [];
+  if (raw.tiles !== undefined && !Array.isArray(raw.tiles)) fail('tiles', `must be a list, but is ${describe(raw.tiles)}`);
+  else {
+    ((raw.tiles as unknown[] | undefined) ?? []).forEach((t: unknown, i: number) => {
+      const w = `tiles[${i}]`;
+      if (!isRecord(t)) return fail(w, `must be an object, but is ${describe(t)}`);
+      for (const key of Object.keys(t)) if (!['room', 'tile', 'is', '//'].includes(key)) fail(`${w}.${key}`, 'unknown field (known fields: room, tile, is)');
+      const room = typeof t.room === 'string' ? content.rooms[t.room] : undefined;
+      const at = t.tile;
+      const tileOk = Array.isArray(at) && at.length === 2 && at.every((n) => Number.isInteger(n));
+      if (!room) fail(`${w}.room`, `no room ${JSON.stringify(t.room)} (rooms: ${known(content.rooms)})`);
+      else if (!tileOk || at[0] < 0 || at[1] < 0 || at[0] >= room.w || at[1] >= room.h) fail(`${w}.tile`, `must be [column, row] inside room "${room.id}" (${room.w} by ${room.h} tiles), but is ${JSON.stringify(at)}`);
+      if (typeof t.is !== 'string' || !Object.hasOwn(TILE, t.is)) fail(`${w}.is`, `must be one of ${Object.keys(TILE).join(', ')}, but is ${JSON.stringify(t.is)}`);
+      else if (room && tileOk) tiles.push({ room: room.id, tile: [at[0], at[1]], is: TILE[t.is as keyof typeof TILE] });
+    });
+  }
 
   const inputs: InputSpan[] = [];
   if (!Array.isArray(raw.inputs)) fail('inputs', 'must be a list (it may be empty)');
@@ -128,6 +154,7 @@ export function parseScenario(raw: unknown, file: string, stem: string, content:
     players,
     entities,
     placements: raw.placements === true,
+    ...(tiles.length ? { tiles } : {}),
     inputs,
     ticks: ticksOk ? (ticks as number) : 1,
     expect: [],
@@ -181,14 +208,15 @@ export function entityInputsAt(scenario: Scenario, tick: number): Record<string,
 
 export function simulate(scenario: Scenario, content: Content): Recording {
   const world = createWorld();
-  for (const p of scenario.players) spawnPlayer(world, content, { player: p.id, character: p.character, room: scenario.room, spawn: p.spawn });
+  for (const p of scenario.players) spawnPlayer(world, content, { player: p.id, character: p.character, room: p.room ?? scenario.room, spawn: p.spawn });
   if (scenario.placements) populateRoom(world, content, scenario.room);
   for (const e of scenario.entities ?? []) {
-    const body = spawnBody(world, content, { id: e.id, character: e.character, room: scenario.room, tile: e.tile });
+    const body = spawnBody(world, content, { id: e.id, character: e.character, room: e.room ?? scenario.room, tile: e.tile });
     body.vx = e.vx ?? 0;
     body.vy = e.vy ?? 0;
     if (body.vx !== 0 || body.vy !== 0) body.onGround = false;
   }
+  for (const t of scenario.tiles ?? []) setTile(world, content.rooms[t.room]!, t.tile[0], t.tile[1], t.is);
   const snapshot = (): World => JSON.parse(JSON.stringify(world)) as World;
   const history: World[] = [snapshot()];
   const events: SimEvent[] = [];
