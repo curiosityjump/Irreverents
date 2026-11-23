@@ -325,4 +325,10 @@ Full text: `docs/plan/step-14.md`
 
 Full text: `docs/plan/step-15.md`
 
+## Step 16 — A first real level: many screens, enemies all through it, and a guarded place to get into unseen
+
+**Status: open, unclaimed — queued behind Step 12.** (Opened 2026-11-23 ~15:00 UTC by orchestrator session_017WiGzGp8auJceLEAAh9Aqx from docs/vision-gaps.md gaps 1, 2 and 10. It waits only for Step 12's first push, its hostile kinds; a lead may start the geography slice sooner if the orchestrator says so.)
+
+Full text: `docs/plan/step-16.md`
+
 *(Step 13, "Heroes you find and keep" — the discoverable permanent roster, D-007 — was to be drafted the same way; its drafter was stopped by the usage limit. The number is reserved.)*
