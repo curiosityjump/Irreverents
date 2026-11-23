@@ -1,0 +1,112 @@
+{
+  "id": "step20-jump-out-at-speed",
+  "proves": "Jump gets a rider out at any speed: the grappler gets in an empty wagon, drives it flat out (340 px/s), and a fresh press of Jump puts them on their feet beside it as the grappler, free to walk; the empty wagon rolls on by itself at speed and bursts the barrier with nobody in it (doc 08: 'bail out at the last moment'). Control (watched to fail): the Jump left out, and the grappler is still the wagon",
+  "room": "test-machine",
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 1
+    }
+  ],
+  "entities": [
+    {
+      "id": "w",
+      "character": "ram-wagon",
+      "tile": [
+        9,
+        8
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 18,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 30,
+      "to": 32,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 35,
+      "to": 200,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 150,
+      "to": 152,
+      "hold": [
+        "jump"
+      ]
+    }
+  ],
+  "ticks": 240,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "machine-left",
+      "where": {
+        "machine": "w",
+        "by": "p:a",
+        "how": "jumped"
+      },
+      "between": [
+        148,
+        152
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "character",
+      "player": "a",
+      "at": 152,
+      "is": "grappler"
+    },
+    {
+      "fact": "position",
+      "player": "a",
+      "at": 210,
+      "x": [
+        550,
+        610
+      ]
+    },
+    {
+      "fact": "velocity",
+      "entity": "w",
+      "at": 200,
+      "vx": [
+        280,
+        340
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "part-broken",
+      "where": {
+        "part": "barrier",
+        "by": "w"
+      },
+      "between": [
+        200,
+        240
+      ],
+      "count": [
+        1,
+        1
+      ]
+    }
+  ]
+}

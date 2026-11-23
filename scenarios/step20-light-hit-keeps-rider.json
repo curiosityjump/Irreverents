@@ -1,0 +1,97 @@
+{
+  "id": "step20-light-hit-keeps-rider",
+  "proves": "a light blow does not throw the rider: the same as step20-hit-throws-rider with a camp fighter (attackStrength 9000, under the wagon's throwRider of 11000): his blow lands on the wagon and the grappler stays in it, never thrown",
+  "room": "test-machine",
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 1
+    }
+  ],
+  "entities": [
+    {
+      "id": "w",
+      "character": "ram-wagon",
+      "tile": [
+        9,
+        8
+      ]
+    },
+    {
+      "id": "fighter",
+      "character": "outpost-fighter",
+      "tile": [
+        11,
+        8
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 18,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 30,
+      "to": 32,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "entity": "fighter",
+      "from": 40,
+      "to": 42,
+      "x": -1
+    },
+    {
+      "entity": "fighter",
+      "from": 50,
+      "to": 52,
+      "hold": [
+        "attack"
+      ]
+    }
+  ],
+  "ticks": 150,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "hit",
+      "where": {
+        "by": "fighter",
+        "target": "p:a"
+      },
+      "between": [
+        40,
+        100
+      ],
+      "count": [
+        1,
+        9
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "machine-left",
+      "between": [
+        0,
+        150
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "character",
+      "player": "a",
+      "at": 150,
+      "is": "ram-wagon"
+    }
+  ]
+}

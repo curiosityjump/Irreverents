@@ -35,6 +35,18 @@ export interface Machine {
   ramSpeed: number;
   /** Crashes (a ram, or a wall met at ramSpeed or faster) it takes before it is a wreck, for good. */
   crashes: number;
+  /**
+   * The slowest it rams at while a person of the world drives it (no player
+   * at the reins), so a bandit's slow machine still shoves the hero it
+   * catches. Left out: `ramSpeed`.
+   */
+  driverRamSpeed?: number;
+  /**
+   * Step 20 push 2: the weakest blow (the striker's attackStrength) that
+   * throws a rider out of the seat and flying; a lighter blow only rocks the
+   * machine. Left out: no blow throws a rider.
+   */
+  throwRider?: number;
 }
 
 declare module '../types.ts' {
@@ -49,7 +61,7 @@ const kind: ContentKind = {
   parse(raw, read) {
     const o = read.object(raw, '');
     if (!o) return null;
-    read.only(o, ['id', 'character', 'speed', 'accel', 'coast', 'brake', 'ramSpeed', 'crashes'], '');
+    read.only(o, ['id', 'character', 'speed', 'accel', 'coast', 'brake', 'ramSpeed', 'crashes', 'driverRamSpeed', 'throwRider'], '');
     const speed = read.object(o.speed, 'speed');
     if (speed) read.only(speed, ['rider', 'driver'], 'speed');
     const out: Machine = {
@@ -64,6 +76,8 @@ const kind: ContentKind = {
       brake: read.number(o, 'brake', '', { min: 1, max: 100000 }),
       ramSpeed: read.number(o, 'ramSpeed', '', { min: 1, max: 900 }),
       crashes: read.number(o, 'crashes', '', { min: 1, max: 1000, integer: true }),
+      ...(o.driverRamSpeed === undefined ? {} : { driverRamSpeed: read.number(o, 'driverRamSpeed', '', { min: 1, max: 900 }) }),
+      ...(o.throwRider === undefined ? {} : { throwRider: read.number(o, 'throwRider', '', { min: 0, max: 1000000 }) }),
     };
     return out;
   },

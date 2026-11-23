@@ -1,0 +1,58 @@
+{
+  "id": "step20-driven-is-outrun",
+  "proves": "people can be outrun: a camp fighter at the reins of a wagon facing west sees the brawler (the slowest hero, 76 px/s) in front of him and drives at him, at the wagon's bandit speed (60); the brawler walks west clear of it, the driver loses sight of him, drives on to where he saw him last and stops; the wagon never reaches him. Control (watched to fail): speed.driver raised to 120 (with the content check's floor lifted for the run), and the wagon catches and rams him",
+  "room": "test-machine",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "brawler",
+      "spawn": 3
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 200,
+      "x": -1
+    }
+  ],
+  "ticks": 200,
+  "expect": [
+    {
+      "fact": "position",
+      "entity": "tm-wagon-2",
+      "at": 100,
+      "x": [
+        1220,
+        1300
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "machine-crash",
+      "where": {
+        "machine": "tm-wagon-2",
+        "target": "p:a"
+      },
+      "between": [
+        0,
+        200
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "position",
+      "player": "a",
+      "at": 200,
+      "x": [
+        980,
+        1030
+      ]
+    }
+  ]
+}

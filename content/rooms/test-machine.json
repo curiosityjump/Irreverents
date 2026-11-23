@@ -1,5 +1,5 @@
 {
-  "//": "DRAFT (Step 20): the check room for the machine (content/machines/ram-wagon.json): a long flat floor with no doors, so no player reaches it. Spawns at columns 3 and 6; a breakable barrier three tiles tall at column 60; the horn post of a test outpost (content/outposts/test-machine.json) at column 40 when a scenario asks for placements. Scenarios scenarios/step20-*.json place their own bodies and pin these columns.",
+  "//": "DRAFT (Step 20): the check room for the machine (content/machines/ram-wagon.json): a long flat floor with no doors, so no player reaches it. Spawns at columns 3, 6, 48 and 78; a breakable barrier three tiles tall at column 60; with placements: the horn post of a test outpost (content/outposts/test-machine.json) at column 40, a ram wagon at column 54 whose driver faces east, and a second at column 84 whose driver faces west. Scenarios scenarios/step20-*.json place their own bodies and pin these columns.",
   "id": "test-machine",
   "name": "Test: machine",
   "tile": 16,
@@ -10,7 +10,9 @@
     "2": "spawn",
     "B": {
       "part": "barrier"
-    }
+    },
+    "3": "spawn",
+    "4": "spawn"
   },
   "rows": [
     "################################################################################################",
@@ -21,7 +23,7 @@
     "#..............................................................................................#",
     "#...........................................................B..................................#",
     "#...........................................................B..................................#",
-    "#..1..2.....................................................B..................................#",
+    "#..1..2.........................................3...........B.................4................#",
     "################################################################################################"
   ],
   "parts": [

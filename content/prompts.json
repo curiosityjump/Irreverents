@@ -4,6 +4,7 @@
     "door": { "go-in": "Go in" },
     "thing": { "take": "Take", "buy": "Buy", "break": "Break" },
     "bell": { "ring": "Ring" },
-    "free": { "free": "Free", "swap": "Swap in" }
+    "free": { "free": "Free", "swap": "Swap in" },
+    "get-in": { "get-in": "Get in" }
   }
 }

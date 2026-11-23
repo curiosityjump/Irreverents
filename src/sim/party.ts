@@ -33,7 +33,12 @@ export function boxInSolid(room: Room, x: number, y: number, w: number, h: numbe
  */
 export function memberTaken(world: World, member: string, exceptEntity?: string): boolean {
   // `taken`: a page's local world sees its friends only as this list (World.taken).
-  return world.entities.some((e) => e.player !== null && e.id !== exceptEntity && e.kind === member) || (world.taken?.includes(member) ?? false);
+  return (
+    world.entities.some((e) => e.player !== null && e.id !== exceptEntity && e.kind === member) ||
+    (world.taken?.includes(member) ?? false) ||
+    // Step 20: a rider's body is the machine while they ride; the hero they went in as stays theirs (World.machines).
+    Object.values(world.machines ?? {}).some((m) => m.rider !== undefined && m.rider !== exceptEntity && m.hero === member)
+  );
 }
 
 /**

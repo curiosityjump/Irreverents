@@ -1,6 +1,6 @@
 import { overlaps, takesNoPhysics } from '../body-state.ts';
 import { emitEffect, heldBy } from '../effects.ts';
-import { crashMachine, machineOf, machineState, ram } from '../machines.ts';
+import { crashMachine, machineIdOf, machineOf, machineState, ram, ramSpeedOf } from '../machines.ts';
 import type { System } from '../types.ts';
 
 /**
@@ -39,35 +39,39 @@ const system: System = {
         const bb = b ? ctx.content.characters[b.kind]?.box : undefined;
         return !!b && !!bb && b.room === a.room && overlaps(a.x, a.y, ab.w, ab.h, b.x, b.y, bb.w, bb.h);
       });
+      const mid = machineIdOf(ctx.world, a);
+      const limit = ramSpeedOf(m, a);
       const free = !a.c.flying && heldBy(a) === null && !takesNoPhysics(a);
       // A wall stopped it dead at ram speed: physics leaves vx at exactly 0 only on the tick it stopped the body.
-      if (free && a.vx === 0 && Math.abs(r.pvx) >= m.ramSpeed && !machineState(ctx.world, a.id).wrecked) {
+      if (free && a.vx === 0 && Math.abs(r.pvx) >= limit && !machineState(ctx.world, mid).wrecked) {
         const ax = r.pvx > 0 ? a.x + ab.w : a.x;
         const speed = Math.abs(r.pvx);
         a.c.impact = { x: ax, y: a.y + ab.h / 2, speed, tick: ctx.world.tick };
         ctx.emit('impact', { entity: a.id, player: a.player, other: null, speed });
-        ctx.emit('machine-crash', { machine: a.id, target: null, speed, player: a.player });
+        ctx.emit('machine-crash', { machine: mid, target: null, speed, player: a.player });
         crashMachine(ctx, a, m);
       }
       // A barrier it burst through this tick (room-breakable, order 460, names it as `by`) is a crash too.
       for (const ev of ctx.events) {
         if (ev.type === 'part-broken' && ev.by === a.id) {
-          ctx.emit('machine-crash', { machine: a.id, target: null, speed: ev.speed, player: a.player });
+          ctx.emit('machine-crash', { machine: mid, target: null, speed: ev.speed, player: a.player });
           crashMachine(ctx, a, m);
         }
       }
-      if (free && Math.abs(a.vx) >= m.ramSpeed && !machineState(ctx.world, a.id).wrecked) {
+      if (free && Math.abs(a.vx) >= limit && !machineState(ctx.world, mid).wrecked) {
         for (const b of ctx.world.entities) {
           if (b === a || b.room !== a.room || r.met.includes(b.id)) continue;
           if (heldBy(b) !== null || b.c.carrying?.id === a.id || b.c.flattened || b.c.beat) continue;
+          // Its own driver sits in it (machine-driven snaps him to the seat).
+          if (a.c.seat?.driver === b.id) continue;
           const bb = ctx.content.characters[b.kind]?.box;
           if (!bb || !overlaps(a.x, a.y, ab.w, ab.h, b.x, b.y, bb.w, bb.h)) continue;
           r.met.push(b.id);
           const after = ram(ctx, a, b, a.id);
-          ctx.emit('machine-crash', { machine: a.id, target: b.id, speed: after.speed, player: a.player });
+          ctx.emit('machine-crash', { machine: mid, target: b.id, speed: after.speed, player: a.player });
           if (after.vx !== a.vx) emitEffect(ctx, a, { kind: 'push', vx: after.vx, vy: a.vy });
           crashMachine(ctx, a, m);
-          if (machineState(ctx.world, a.id).wrecked || Math.abs(a.vx) < m.ramSpeed) break;
+          if (machineState(ctx.world, mid).wrecked || Math.abs(a.vx) < limit) break;
         }
       }
       r.pvx = a.vx;

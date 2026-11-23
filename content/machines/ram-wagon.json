@@ -1,11 +1,16 @@
 {
-  "//": "DRAFT (Step 20): the armoured ram wagon. A hero at the reins builds to 340 px/s in about 1.5 s (the fastest hero runs at 128; the horn post snaps at 300), and it rolls on nearly holding its speed with the stick let go. A bandit drives it at 60, below the slowest hero (the brawler, 76). It rams at 160 or faster; eight crashes make it a wreck, for good. docs/decisions-log.md, 'Step 20: the machine' and 'Step 20: the ram'.",
+  "//": "DRAFT (Step 20): the armoured ram wagon. A hero at the reins builds to 340 px/s in about 1.5 s (the fastest hero runs at 128; the horn post snaps at 300), and it rolls on nearly holding its speed with the stick let go. A bandit drives it at 60, below the slowest hero (the brawler, 76). It rams at 160 or faster; eight crashes make it a wreck, for good. A bandit's slow wagon still rams at 50. A blow as hard as a heavy's (attackStrength 11000 or more; a camp fighter's is 9000) throws its rider out. docs/decisions-log.md, 'Step 20: the machine' and 'Step 20: the ram'.",
   "id": "ram-wagon",
   "character": "ram-wagon",
-  "speed": { "rider": 340, "driver": 60 },
+  "speed": {
+    "rider": 340,
+    "driver": 60
+  },
   "accel": 220,
   "coast": 30,
   "brake": 700,
   "ramSpeed": 160,
-  "crashes": 8
+  "crashes": 8,
+  "driverRamSpeed": 50,
+  "throwRider": 11000
 }

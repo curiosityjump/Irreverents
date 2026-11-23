@@ -1,5 +1,5 @@
 {
-  "//": "DRAFT (Step 20): the horn post of content/outposts/test-machine.json, at column 40 of the machine's check room.",
+  "//": "DRAFT (Step 20): the horn post of content/outposts/test-machine.json at column 40; a ram wagon at column 54 with a camp fighter at its reins facing east (away from a hero coming from the west), and a second at column 84 whose driver faces west. Each driver stands on his wagon's tile, so machine-seat seats him on the first tick; the parked wagon turns the way its driver faces.",
   "id": "test-machine",
   "room": "test-machine",
   "place": [
@@ -9,6 +9,56 @@
       "tile": [
         40,
         8
+      ]
+    },
+    {
+      "id": "tm-wagon",
+      "character": "ram-wagon",
+      "tile": [
+        54,
+        8
+      ]
+    },
+    {
+      "id": "tm-driver",
+      "character": "outpost-fighter",
+      "tile": [
+        54,
+        8
+      ],
+      "npc": "outpost-fighter",
+      "routine": [
+        {
+          "face": "right"
+        },
+        {
+          "wait": 10
+        }
+      ]
+    },
+    {
+      "id": "tm-wagon-2",
+      "character": "ram-wagon",
+      "tile": [
+        84,
+        8
+      ]
+    },
+    {
+      "id": "tm-driver-2",
+      "character": "outpost-fighter",
+      "tile": [
+        84,
+        8
+      ],
+      "npc": "outpost-fighter",
+      "routine": [
+        {
+          "face": "left"
+        },
+        {
+          "wait": 10
+        }
       ]
     }
   ]

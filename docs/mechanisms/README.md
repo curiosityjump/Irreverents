@@ -99,6 +99,7 @@ groups) whenever you add one — never update the number from memory.
 
 **Machines** (`docs/mechanisms/machines.md`)
 - `content/machines/<id>.json` + verb `drive` + system `machine-ram` + `ram()` in `src/sim/machines.ts` + `World.machines` — a machine body the stick drives (slow to build, rolls on); at its ramSpeed it shoves bodies by weight (the one ram rule, shared with Step 18), and each crash wears it to a wreck for good (Step 20).
+- `c.seat` + `src/sim/use/get-in.ts` + systems `machine-seat`, `machine-driven` — a person at the reins (Grab pulls him out), Use gets in (the hero's body becomes the machine by `become`), Jump, a heavy blow or the wreck gets you out as the hero you went in as; a bandit drives at a hero he sees, slower than any hero (Step 20).
 
 **Powers** (`docs/mechanisms/powers.md`)
 - `content/powers/<id>.json` + `src/sim/powers.ts` (`numbersOf`, `verbsOf`, used at all four read sites) + effect `power` + `c.power` — a power is a numbers overlay and lent verbs on top of whoever holds it, reaching the holder's own page as an effect (Step 9).

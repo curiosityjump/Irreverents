@@ -1,0 +1,103 @@
+{
+  "id": "step20-pull-driver-get-in-grappler",
+  "proves": "the grappler alone, coming up behind the ram wagon (its driver faces away), pulls the driver out with an ordinary Grab and throws him; Use beside the empty seat gets in: the hero's body becomes the wagon, keeping the grappler as the hero it went in as, and the stick drives it west from where it stood. Control (watched to fail): the grab and the throw left out, the driver still in it: Use there gets nobody in",
+  "room": "test-machine",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 2
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 50,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 60,
+      "to": 62,
+      "hold": [
+        "grab"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 80,
+      "to": 82,
+      "x": 1,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 90,
+      "to": 92,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 100,
+      "to": 240,
+      "x": -1
+    }
+  ],
+  "ticks": 240,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "grabbed",
+      "where": {
+        "by": "p:a",
+        "target": "tm-driver"
+      },
+      "between": [
+        55,
+        65
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "machine-taken",
+      "where": {
+        "machine": "tm-wagon",
+        "by": "p:a",
+        "hero": "grappler"
+      },
+      "between": [
+        85,
+        95
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "character",
+      "player": "a",
+      "at": 100,
+      "is": "ram-wagon"
+    },
+    {
+      "fact": "position",
+      "player": "a",
+      "at": 200,
+      "x": [
+        550,
+        800
+      ]
+    }
+  ]
+}

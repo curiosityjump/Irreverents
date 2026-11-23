@@ -13,6 +13,18 @@ export interface MachineState {
   wear: number;
   /** True once worn through: it never drives again and stays where it stops. INTENT: nothing resets. */
   wrecked: boolean;
+  /**
+   * Step 20 push 2: while a player rides it, the rider's entity id (their
+   * body is the machine now: its kind is the machine's), the hero they went
+   * in as, and where the machine last was, so it is put back there if the
+   * rider's body leaves the world (a reconnect, a kept game loaded).
+   * Absent while nobody rides it. Read with defaults (docs/mechanisms/saves.md).
+   */
+  rider?: string;
+  hero?: string;
+  /** The machine's character kind, to stand it again. */
+  kind?: string;
+  at?: { room: string; x: number; y: number; facing: 1 | -1 };
 }
 
 declare module './types.ts' {
@@ -29,12 +41,27 @@ declare module './types.ts' {
   interface Components {
     /** On a machine's body, server-side bookkeeping for the ram: the bodies it is passing through now, and its speed after last tick. */
     ram?: { met: string[]; pvx: number };
+    /**
+     * Step 20 push 2: on a standing machine, who sits at the reins: a person's
+     * entity id, or null for an empty seat. Absent until the server's world
+     * first looks (machine-seat seats a person standing on it then). A page
+     * reads it to show GET IN.
+     */
+    seat?: { driver: string | null };
+    /** On a rider: whether Use and Jump were held last tick, for fresh presses (machine-seat). */
+    seatKeys?: { use: boolean; jump: boolean };
+    /** On a standing machine a person drives: where the driver last saw a hero (machine-driven), or null. */
+    chase?: { x: number } | null;
   }
   interface EventMap {
     /** A machine rammed `target` (or, with `target` null, crashed into a wall) at `speed`. `player` drives it, if a player does. */
     'machine-crash': { machine: string; target: string | null; speed: number; player: string | null };
     /** A machine wore through: a wreck, for good. */
     'machine-wrecked': { machine: string; player: string | null };
+    /** Step 20 push 2: a player got in (`by` is their entity id; `hero` the hero they went in as). */
+    'machine-taken': { machine: string; by: string; player: string | null; hero: string };
+    /** Step 20 push 2: a rider is out: jumped, thrown by a blow, put out by the wreck, or their body left the world (`gone`). */
+    'machine-left': { machine: string; by: string; player: string | null; how: 'jumped' | 'thrown' | 'wrecked' | 'gone' };
   }
 }
 
@@ -44,9 +71,34 @@ export function machineOf(content: Content, kind: string): Machine | undefined {
   return undefined;
 }
 
-/** A machine's state; a fresh one (not stored) when it has none yet. */
+/**
+ * The machine id of a machine body: the standing machine's own entity id,
+ * or, for a rider (whose body is the machine while they ride), the id of
+ * the machine they ride.
+ */
+export function machineIdOf(world: World, e: Entity): string {
+  for (const [id, s] of Object.entries(world.machines ?? {})) if (s.rider === e.id) return id;
+  return e.id;
+}
+
+/** A machine's state, by machine id; a fresh one (not stored) when it has none yet. */
 export function machineState(world: World, id: string): MachineState {
   return world.machines?.[id] ?? { wear: 0, wrecked: false };
+}
+
+/** The ram threshold for this machine body now: a person at the reins rams at `driverRamSpeed`. */
+export function ramSpeedOf(m: Machine, e: Entity): number {
+  return e.player === null ? (m.driverRamSpeed ?? m.ramSpeed) : m.ramSpeed;
+}
+
+/**
+ * Whether this is a page's own local world (src/net/client.ts writes
+ * `taken` there with every snapshot; the server's world and a scenario's
+ * never have it). DRAFT: the seat is the server's alone: getting in and out
+ * are decided there and reach the rider's page as `become` effects.
+ */
+export function isPageWorld(world: World): boolean {
+  return world.taken !== undefined;
 }
 
 /**
@@ -56,12 +108,13 @@ export function machineState(world: World, id: string): MachineState {
  */
 export function crashMachine(ctx: StepContext, e: Entity, m: Machine): void {
   const all = (ctx.world.machines ??= {});
-  const s = (all[e.id] ??= { wear: 0, wrecked: false });
+  const id = machineIdOf(ctx.world, e);
+  const s = (all[id] ??= { wear: 0, wrecked: false });
   if (s.wrecked) return;
   s.wear++;
   if (s.wear < m.crashes) return;
   s.wrecked = true;
-  ctx.emit('machine-wrecked', { machine: e.id, player: e.player });
+  ctx.emit('machine-wrecked', { machine: id, player: e.player });
 }
 
 /**

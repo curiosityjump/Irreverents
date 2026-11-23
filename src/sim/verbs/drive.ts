@@ -1,4 +1,4 @@
-import { machineOf, machineState } from '../machines.ts';
+import { machineIdOf, machineOf, machineState } from '../machines.ts';
 import { DT } from '../types.ts';
 import type { Verb } from '../types.ts';
 
@@ -26,7 +26,7 @@ const verb: Verb = {
   update(ctx, e, input) {
     const m = machineOf(ctx.content, e.kind);
     if (!m) return;
-    if (machineState(ctx.world, e.id).wrecked) {
+    if (machineState(ctx.world, machineIdOf(ctx.world, e)).wrecked) {
       if (e.onGround) e.vx = approach(e.vx, 0, m.brake * DT);
       return;
     }

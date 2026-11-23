@@ -1,0 +1,112 @@
+{
+  "id": "step20-hit-throws-rider",
+  "proves": "a hard blow throws the rider: the grappler sits in a standing wagon and a heavy (attackStrength 12000, above the wagon's throwRider of 11000) swings at it: the rider is out of the seat at once, the grappler again, flying up and away from the heavy, and lands on their feet among them; the wagon stands where it was. Control (watched to fail): throwRider raised to 13000, and the rider stays in. Companion: step20-light-hit-keeps-rider",
+  "room": "test-machine",
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 1
+    }
+  ],
+  "entities": [
+    {
+      "id": "w",
+      "character": "ram-wagon",
+      "tile": [
+        9,
+        8
+      ]
+    },
+    {
+      "id": "heavy",
+      "character": "heavy-fighter",
+      "tile": [
+        11,
+        8
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 18,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 30,
+      "to": 32,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "entity": "heavy",
+      "from": 40,
+      "to": 42,
+      "x": -1
+    },
+    {
+      "entity": "heavy",
+      "from": 50,
+      "to": 52,
+      "hold": [
+        "attack"
+      ]
+    }
+  ],
+  "ticks": 150,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "machine-left",
+      "where": {
+        "machine": "w",
+        "by": "p:a",
+        "how": "thrown"
+      },
+      "between": [
+        65,
+        75
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "character",
+      "player": "a",
+      "at": 72,
+      "is": "grappler"
+    },
+    {
+      "fact": "body-state",
+      "player": "a",
+      "at": 80,
+      "is": [
+        "flying"
+      ]
+    },
+    {
+      "fact": "position",
+      "player": "a",
+      "at": 105,
+      "x": [
+        20,
+        60
+      ]
+    },
+    {
+      "fact": "position",
+      "entity": "w",
+      "at": 150,
+      "x": [
+        130,
+        160
+      ]
+    }
+  ]
+}

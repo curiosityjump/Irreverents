@@ -1,0 +1,24 @@
+{
+  "id": "step20-seat-keeps-hero",
+  "proves": "your hero stays yours while you ride: player a (the grappler) gets in an empty wagon, so their body is the wagon; player b (the flyer), pressing switch, whose next member in the party's order is the grappler, skips it and becomes the infiltrator; a jumps out and is the grappler again, and nobody else is. Control (watched to fail): the read of World.machines taken out of memberTaken (src/sim/party.ts), and b switches into the grappler while a rides",
+  "room": "test-machine",
+  "players": [
+    { "id": "a", "character": "grappler", "spawn": 1 },
+    { "id": "b", "character": "flyer", "spawn": 2 }
+  ],
+  "entities": [{ "id": "w", "character": "ram-wagon", "tile": [9, 8] }],
+  "inputs": [
+    { "player": "a", "from": 0, "to": 18, "x": 1 },
+    { "player": "a", "from": 30, "to": 32, "hold": ["interact"] },
+    { "player": "b", "from": 60, "to": 62, "hold": ["switch"] },
+    { "player": "a", "from": 100, "to": 102, "hold": ["jump"] }
+  ],
+  "ticks": 130,
+  "expect": [
+    { "fact": "event-where", "event": "machine-taken", "where": { "machine": "w", "by": "p:a", "hero": "grappler" }, "between": [28, 34], "count": [1, 1] },
+    { "fact": "character", "player": "a", "at": 70, "is": "ram-wagon" },
+    { "fact": "character", "player": "b", "at": 70, "is": "infiltrator" },
+    { "fact": "character", "player": "a", "at": 110, "is": "grappler" },
+    { "fact": "character", "player": "b", "at": 130, "is": "infiltrator" }
+  ]
+}

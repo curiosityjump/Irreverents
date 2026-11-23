@@ -32,6 +32,47 @@ check room `test-machine` until builder B puts it in the Bandit Camp.
 | `world.machines` | by the machine's entity id, `{ wear, wrecked }`; absent until the first crash (read with `machineState`, which defaults) |
 | events | `machine-crash` `{ machine, target, speed, player }` (`target` null for a wall or a barrier), `machine-wrecked` `{ machine, player }` |
 
+## The seat (Step 20, builder A, push 2)
+
+| Piece | What it does |
+|---|---|
+| `c.seat` on a standing machine | `{ driver }`: a person's entity id, or null for an empty seat. The server's world sets it the first tick it sees the machine: a person (`c.npc`) standing on it is at the reins. He is out of the seat once held, flying, flattened or gone |
+| `src/sim/systems/machine-driven.ts` (605) | keeps the driver in the seat (at the rear, sunk 16 px in: `INTENT:` the 12 px tall infiltrator can Grab him from the ground behind), turns a parked machine the way he faces, and drives by two fixed states: **parked**, or **driving** at a hero he sees (the NPC sight rule), on to where he saw them last, at `speed.driver`. A person's machine rams from `driverRamSpeed` |
+| `src/sim/use/get-in.ts` (order 120) | Use reads **Get in** beside a standing machine with an empty seat that is not a wreck (`content/prompts.json`, `get-in`) |
+| `src/sim/systems/machine-seat.ts` (120) | **in:** the hero's body becomes the machine (a `become` effect, so their own page drives it with no lag); the standing machine leaves the world while ridden. **Out:** a fresh Jump at any moment, a blow at or above `throwRider` from someone nobody plays (thrown, flying), the wreck, or the rider's body gone or no longer the machine (a reconnect, a kept game loaded). Out, they are the hero they went in as, beside it; the machine stands again where it was, rolling on |
+| `World.machines[id]` `rider`, `hero`, `kind`, `at` | while ridden: the rider's entity id, the hero they went in as, the machine's kind, where it last was |
+| `memberTaken` (`src/sim/party.ts`) | also counts a rider's hero: nobody can switch into it |
+| events | `machine-taken` `{ machine, by, player, hero }`, `machine-left` `{ machine, by, player, how }` (`how`: jumped, thrown, wrecked, gone) |
+
+**Getting a person's machine into a room** (for builder B):
+- **Placements:** two entries on the same tile, the machine first:
+  `{ "id": "camp-wagon", "character": "ram-wagon", "tile": [c, r] }` and
+  `{ "id": "camp-wagon-driver", "character": "outpost-fighter", "npc": "outpost-fighter", "tile": [c, r], "routine": [{ "face": "right" }, { "wait": 10 }] }`.
+  The driver's routine `face` is the way the parked wagon stands; he sits at
+  its rear, so "facing away" from the camp's entrance means facing east.
+  `content/placements/test-machine.json` does exactly this twice.
+- **A wave row** (`{ character, npc }`, `src/content/kinds/outposts.ts`)
+  cannot put a machine down today: the machine is not a person and has no
+  NPC kind. Seating needs only the driver standing on the machine on the
+  tick the machine is first seen, so the smallest change is an optional
+  field on a wave person, e.g. `{ "character": "outpost-fighter", "npc":
+  "outpost-fighter", "rides": "ram-wagon" }`, with the waves system adding
+  a machine body of that kind under the person at the entry. That file is
+  the waves slice's, so it was not changed here.
+
+**Rules that are deliberate (the seat):** there is always a way out
+(`INTENT:` in `machine-seat.ts`): Jump is never refused while riding, a
+wreck puts its rider out, and a rider whose body left the world never leaves
+the machine missing. The seat is the server's alone (`isPageWorld`): getting
+in and out reach the rider's page as `become` effects, so getting out waits
+one round trip (`DRAFT:`). A friend's blow never throws a friend out.
+
+**Kept games and reconnects.** A standing machine is a body nobody plays and
+is saved; a ridden one is the player's body and is not. `World.machines`
+is saved with its `rider`, so a loaded game (or a rider removed after they
+left) has the machine stand again on the first tick at `at`, still, with
+nobody in it. Proven by `scripts/checks/step20-machine.ts`.
+
 ## The ram rule (`ram()` in `src/sim/machines.ts`)
 
 The mover keeps going; the target is shoved by weight with the same
@@ -85,10 +126,17 @@ second slam rule. Nothing of that slice is built.
 (push 1's commit lists them): `step20-ram-launches-by-weight` (control:
 `ramSpeed` 400), `step20-ram-snaps-the-post` (control: `speed.rider` 290),
 `step20-barricade-breaks-and-rolls-on` (control: the barrier's `breakSpeed`
-400), `step20-wears-to-a-wreck` (control: `crashes` 100).
+400), `step20-wears-to-a-wreck` (control: `crashes` 100). Push 2:
+`step20-pull-driver-get-in-grappler` and `-infiltrator` (control: the grab
+and throw left out), `step20-jump-out-at-speed` (control: no Jump),
+`step20-hit-throws-rider` (control: `throwRider` 13000) with its companion
+`step20-light-hit-keeps-rider`, `step20-seat-keeps-hero` (control: the
+`World.machines` read out of `memberTaken`), `step20-driven-is-outrun`
+(control: `speed.driver` 120 with the content floor lifted), and the
+real-server check `step20-machine` (controls: the machine not stood again
+for a rider gone; an effect sent to the rider while driving).
 
-## Still to come (builder A pushes 2 and 3, then builder B)
+## Still to come (builder A push 3, then builder B)
 
-The seat (pull the driver out with Grab, GET IN with Use, Jump out, the hero
-kept while riding, a hard hit throws the rider), a bandit driving by script,
-the look, and the camp.
+The look (`src/client/draw/machines.ts`: the cells, the rider's face on the
+plate) and the camp.

@@ -139,3 +139,23 @@ Nothing is reachable by a player until builder B's push 2. Notes:
   1 green, 1 failed `h1`, 1 failed `h1` and `h2` (the known flakes,
   `handoff-prompts/step-5-e2e-flakes.md`). build, check, check:deployed and
   check:live green at a2bee99.
+
+**Builder A, push 2 (the seat).** Landed: `c.seat`, `machine-seat`,
+`machine-driven`, the Use entry `get-in` (order 120, "Get in"), the
+`memberTaken` read, `World.machines` rider fields, events `machine-taken`,
+`machine-left`, and `scripts/checks/step20-machine.ts`. Notes:
+- **How B puts a driven wagon in a room:** `docs/mechanisms/machines.md`,
+  "Getting a person's machine into a room". Placements: the machine and its
+  driver on the same tile; the driver's routine `face` is the way it stands.
+  A wave row cannot put one down yet: the smallest change is an optional
+  `rides` on a wave person in `src/content/kinds/outposts.ts` (the waves
+  slice's file; not changed here).
+- Getting out waits one round trip on a phone: the seat is the server's,
+  and the page learns by `become`.
+- In the reconnect leg of `step20-machine`, the rider who left with `bye`
+  was removed from the world, so they came back as the hero with the wagon
+  standing (the check accepts either way). The "still the rider" branch
+  was not exercised over the network.
+- Riders' wall crashes and barrier bursts are also counted on the rider's
+  own page (its world runs `machine-ram`); the snapshot overwrites them.
+- Not verified: anything on a page's screen (push 3 draws).
