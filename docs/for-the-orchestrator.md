@@ -139,3 +139,16 @@ fixes from the cold-start and lost-rule checks").
   `python3 -I tools/drive_sync.py` at check-ins.
 - **Watch:** the account's five-hour limit (resets 18:20 UTC). About ten sessions at once hit it at
   12:36. Seven are running now.
+
+**Addendum, 15:50 UTC (same handoff; what reached the forwarder before a successor started):**
+- Reviewed on main (build and check re-run, green): frame 06180df, props 992647b (it includes the
+  looks.ts frame cap raised 64→128, `DRAFT:`, so the 95-frame pixel font is one strip, as the forwarder
+  told the props builder), heroes d426771, and the villain ea28af4 (heroes builder, its brief's priority 4).
+  Delete `handoff-prompts/look2-{frame,props,heroes}.md` and note them in step-8.md "Briefs".
+- Still running: the actors lane (the frame builder's second brief). Round 3 of the look starts when it lands.
+- Idle, both briefs done: the heroes builder `session_017WiGzFWVvNJrmXZ81rABuv` and the ground/props builder
+  `session_017WiGzHanC1tecHKJbjuyCf`. Reuse them for round 3 or archive them. The frame lane's flag about
+  `outside` was stale: the ground data already had it (ec49eb5), and it was checked on live.
+- Step 16's lead started slice 1 (the quarry's six rooms and secrets), hard stop 16:45 UTC. It adds Step 3's
+  agreed doorways: the courtyard `to-quarry` at columns 17–19, and the undercroft's hidden `to-quarry-cave`.
+- Branch `claude/gallant-keller-1gpm2y` (the alternative heroes) can be deleted; round 2 kept main's set.
