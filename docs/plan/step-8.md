@@ -315,6 +315,6 @@ Round 2 of the look (2026-11-23, "Round 2" above): `handoff-prompts/look2-heroes
 
 ## Open with the owner
 
-- Q-006 (the four "current" art boards that fail the art gate).
+- Q-006 answered (2026-11-23, via Vision Partner): *"Many of the visuals are there to establish direction. Chat has been organizing the drive to be usable. Just review it's documentation."* The boards stay as direction. Judge what is usable from ChatGPT's own asset-library docs (`docs/design-library/asset-library-start-here-claude.md` and `06-asset-collaboration-claude-chatgpt/`), not from the boards. Later decisions trump earlier ones (Q-005).
 
 ## Handoff notes

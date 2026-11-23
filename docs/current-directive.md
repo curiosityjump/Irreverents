@@ -79,11 +79,14 @@ heading:
 change freely; the measure is the vision playable soonest (see
 `docs/vision.md` "Principles": build-first and find-the-gaps).
 
-**Draft — awaiting the owner's approval.** The owner gave the orchestrator
-free rein over what to build first ("Orchestrator has free reign.",
-2026-11-23, `docs/vision.md` "The measure"), so work runs on this list
-tonight; they have not seen the list itself. The approval question is
-filed in `docs/questions-inbox.md`.
+**Approved by the owner, 2026-11-23,** in the form quoted above (Q-010): the
+order is the orchestrator's, and the measure is the vision playable soonest.
+**How the order is kept honest (the owner, ~14:50 UTC: "You are capable of
+looking at the game, looking at the vision, seeing the gaps, and closing
+them"):** `docs/vision-gaps.md` is the ranked list of gaps between the live
+game and the vision (first audit 7454fd9). The orchestrator refreshes its
+status column whenever a plan step closes or a round lands, and opens steps
+from its top rows. The owner should never be the one who finds an omission.
 
 **The owner's words this comes from** (recorded first-hand by Vision
 Partner, 2026-11-23, in `docs/vision.md`):
@@ -229,7 +232,7 @@ the claim). Past orchestrators `session_017WiGzFWfLir1ATiSP7c5E5` and
 
 *(Vision Partner's reading, not the owner's decision:)* the owner is
 noticing breadth missing: more levels, enemies and the cantina, beside the
-look. They didn't say to reorder. Q-010 (the build order) is still open.
+look. They didn't say to reorder.
 
 **Breadth runs beside the look (orchestrator session_017WiGzGp8auJceLEAAh9Aqx, 14:25 UTC), in answer to
 the owner's words above.** `DRAFT:` Step 8's look keeps going (round 2), and
@@ -241,7 +244,7 @@ the kingdom (Steps 3, 14 and 15) come after those two show up on the phone.
 Why: the owner named exactly these, and the account's limit allows about two
 more leads beside the look. At ten sessions at once it stopped everything at
 12:36 UTC (`docs/process-observations.md`). To undo: release the two claims.
-Q-010 (the build order) stays open for the owner.
+Q-010 was answered since: the order is the orchestrator's.
 
 **Owed next, in the order I would take it, after the owner has played:**
 1. Whatever the owner says first.
