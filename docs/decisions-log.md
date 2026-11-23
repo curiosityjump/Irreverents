@@ -281,3 +281,25 @@ document as a decision of theirs.
 - **To change it:** small, in one file.
 - **Where:** `docs/mechanisms/rooms-and-doors.md`, "The two kinds of door".
 
+
+### 2026-11-23 · A Hall picture is the moment rebuilt, not a photograph
+- **Decided by:** Step 7 lead, `session_017WiGzF4QGboHBQtunwprhk`
+- **Instead of asking:** "Is the picture on a pedestal a screenshot?" (your library leaves it open: "screenshots, render replays or in-engine freeze frames?")
+- **Why this way:** the game remembers who stood where at the chosen instant (up to ten bodies, who was knocked flat, who is credited) and redraws that small inside a frame. It costs almost nothing to send to a phone, both players see the same picture, and when real art arrives every old picture is redrawn with it. A stored photograph would be frozen in tonight's coloured boxes for ever.
+- **To change it:** small to add a real image beside it later; the record has a version number for that.
+- **Where:** `docs/plan/step-7.md`, "Decided by the lead"; `handoff-prompts/step-7-b-detector.md`.
+
+### 2026-11-23 · What counts as a legend tonight, and who is credited
+- **Decided by:** Step 7 lead, `session_017WiGzF4QGboHBQtunwprhk`
+- **Instead of asking:** "When exactly should the game decide something was legendary?" (your library: "No final score formula is selected.")
+- **Why this way:** three happenings, each read from what the world itself did, never from a list. **An escape:** help was called on you, and the alarm died down again with at least one of you still standing. **A last stand:** help was called and every one of you ended up flat (losing counts, as your library says). **A quiet theft:** you took something and for eight seconds afterwards nobody called anyone. Everyone who was in that place at any point is credited, knocked out or not. Each kind has a floor so a small scuffle hangs nothing, and a repeat of something already in the Hall hangs nothing unless it beats it (longer, bigger crash, more who came). A fight where nobody ever called for help is not an event at all.
+- **To change it:** the floors, the weights, the eight seconds and the titles are data; the three definitions are a few lines each.
+- **Where:** `docs/plan/step-7.md`; `content/hall/` once built.
+
+### 2026-11-23 · You read a pedestal by walking up to it, and you can throw it
+- **Decided by:** Step 7 lead, `session_017WiGzF4QGboHBQtunwprhk`
+- **Instead of asking:** "How do you look at a record on a phone, and is a pedestal furniture or a thing?"
+- **Why this way:** no extra button on a phone: stand at a pedestal and its card appears (title, who was there, a few true numbers, where it ranks among its kind); walk away and it goes. A new legend also shows itself for about three seconds wherever you are, without stopping play. And the pedestal is an ordinary heavy body, so it can be hit, grabbed and thrown like anything else: you said not to protect the Hall from gameplay. The record rides on it and is also kept on your storage, so wrecking the Hall never loses one.
+- **To change it:** small either way (a button; a fixed pedestal).
+- **Where:** `docs/plan/step-7.md`; `handoff-prompts/step-7-a-store-and-pedestal.md`.
+

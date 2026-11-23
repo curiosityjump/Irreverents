@@ -139,9 +139,47 @@ of signals 1 and 2.
 Whether the game noticed the right moment; the generated titles; whether
 ramming the roadblock earns the "OHH!".
 
+## Decided by the lead (2026-11-23, all `DRAFT:`, each in `docs/decisions-log.md`)
+
+- **All Hall state lives on entities**, because the network replicates
+  entities and nothing else: a record is a pedestal entity `hall:<n>`
+  (kind `pedestal`, a real heavy body, so it can be hit and thrown);
+  the detector's notes are on one bodiless entity `hall:watch`. Budget:
+  500 and 800 bytes, since every entity goes to every phone about 20
+  times a second.
+- **The picture is a redrawn scene** (who stood where, at most ten
+  bodies), not pixels.
+- **Three episodes:** escape (alert rose, returned to 0, someone still
+  standing), last stand (alert rose, every credited player flat), quiet
+  theft (goods taken, no call for 8 seconds). Credited: every player in
+  the area during the episode. A floor per kind; a repeat hangs nothing
+  unless it beats the best of its kind in that place.
+- **Read by walking up** (no button); a new legend shows a three-second
+  banner that stops nothing.
+- **Slice 1's scenarios script the events by hand** (Step 4's systems
+  are not on `main`), so none is tagged for gate E. Gate E's scenarios
+  are slice 2's, on Step 4's real zero-alarm run.
+
 ## Measure
 
+Taken 04:46 UTC at 73e73d2: build and check pass; gates 1 of 6 (A). A
+system cannot read the tick's events (no reader on `StepContext`); a
+scenario cannot script an event or place a bodiless entity; physics,
+the verbs system and `draw/entities.ts` skip an entity whose kind is
+not a character kind; `src/server/main.ts` reports the volume and
+stores nothing; no Step 4 code is on `main`.
+
 ## Briefs
+
+- `handoff-prompts/step-7-b-detector.md`: the detector, the record, the
+  two entities, `content/hall/`, scripted scenarios.
+- `handoff-prompts/step-7-a-store-and-pedestal.md`: `src/server/store.ts`
+  with its own check, then the pedestal's picture, card and banner.
+- **Slice 2, not yet written** (waits on Step 1's Gate 2, Step 4's
+  slice 2 and Step 3's gallery): wire the store into the server (open
+  at start, `restoreHall`, save on `hall-legend`, a `/healthz` field);
+  point `content/hall` at the gallery; the real scenarios tagged gate
+  E for signals 1 and 2. Then the machine.
 
 ## Open with the owner
 
