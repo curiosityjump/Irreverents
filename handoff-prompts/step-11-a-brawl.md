@@ -8,6 +8,17 @@ This slice is signals 1 to 5, the first half of 6, the door, and the
 counter. **Not** the tap, the row or the swap (slice B), **not** the chase
 lock (slice B), **not** the best score (dropped tonight).
 
+
+**Changed 14:30 UTC (also sent to the worker by message):** Step 2's lead
+agreed item 7 on three conditions: its friend scenarios stay green
+unchanged; the player-on-player `friend` test stays as it is and only its
+share reads `c.brawl` (a non-player hit never does); the two new
+characters are roster-only, never in `content/party.json`. Read
+`attack.ts` fresh (wind-up/strike/recover since 252e5ce); one line under
+the friend rule in `docs/mechanisms/combat-and-impact.md`. **First push:
+something the owner can walk into from the street and fight in**; the
+counter, the rest of the scenarios and the real-server check follow.
+
 ## The task
 
 Off the castle street is a tavern. Inside it, every character in the
