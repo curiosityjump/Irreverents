@@ -221,6 +221,16 @@ Taken by the lead, 2026-11-23 04:30 UTC, at `368e1b9`:
   stick-up. Rooms may be wider than a screen; each screen follows its
   own character.
 
+**From Step 2, measured 04:43 UTC (bind slice B's layouts):** jump
+heights are about 52 px (grappler), 51 px (infiltrator), 47 px (flyer
+from the ground, then it flaps; three flaps reach 5 tiles). So no path
+anyone *needs* may have a step over 2 tiles. And a switch only offers
+members nobody else plays: someone who crawls into the secret as the
+infiltrator and switches away may be unable to crawl back. So **the
+hidden chamber gets a second way out that any body can take** (a one-way
+drop back into the undercroft), and no room may be leavable by one
+member only.
+
 ## Briefs
 
 - **Slice A** (`handoff-prompts/step-3-a-rooms-and-doors.md`): the room
