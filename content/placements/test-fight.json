@@ -1,0 +1,8 @@
+{
+  "//": "DRAFT (Step 12): one outpost fighter facing west, five tiles from the spawn; no outpost names this room.",
+  "id": "test-fight",
+  "room": "test-fight",
+  "place": [
+    { "id": "tf-fighter", "character": "outpost-fighter", "tile": [9, 5], "npc": "outpost-fighter", "routine": [{ "face": "left" }, { "wait": 5 }] }
+  ]
+}

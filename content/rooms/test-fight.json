@@ -1,0 +1,16 @@
+{
+  "//": "DRAFT (Step 12): a plain doorless check room with no outposts/ file, for a hostile person placed in an ordinary room (content/placements/test-fight.json).",
+  "id": "test-fight",
+  "name": "Test: fight",
+  "tile": 16,
+  "legend": { "#": "solid", ".": "empty", "1": "spawn" },
+  "rows": [
+    "####################",
+    "#..................#",
+    "#..................#",
+    "#..................#",
+    "#..................#",
+    "#...1..............#",
+    "####################"
+  ]
+}
