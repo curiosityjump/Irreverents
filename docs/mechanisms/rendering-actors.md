@@ -55,9 +55,9 @@ the items below to their homes.
 |---|---|---|
 | `down` | `c.flattened` | loops |
 | `held` | `c.effect.heldBy` | loops |
-| `hurt` | `c.flying` or `c.beat` | `c.impact.tick` (else when first seen) |
+| `hurt` | `c.flying`, `c.beat` or `c.stunned` | `c.impact.tick` (else when first seen) |
 | `throw` | a swing made while carrying, or the carried body flying off with `flying.by` = this body | that tick |
-| `attack` | `world.tick − c.attack.swung` < the strip's length (7 ticks with no frames) | `attack.swung` |
+| `attack` | round 2: `c.attack.phase` is `windup` (never a throw), or `strike`/`recover` and the swing was not a throw; frame by phase: the strip's first while winding up, its second while striking (its third for the strike's last 2 ticks on a strip of 4 or more), its last while recovering. With no `phase` (an old body): `world.tick − c.attack.swung` < the strip's length | phase |
 | `grab` | carrying, for the strip's length after it started | first tick seen carrying |
 | `carryRun` / `carry` | carrying, moving on the ground / otherwise | loops |
 | `flap` | in the air, rising, `c.flap.used` > 0, a flap seen in the last 30 ticks | loops |
@@ -69,6 +69,59 @@ the items below to their homes.
 
 "Carrying" is `c.carrying`, or else another body whose `c.effect.heldBy`
 is this one (see the flag below).
+
+### Round 2 (look lane "actors", 2026-11-23)
+
+- **`carryAt`** validated in `src/content/kinds/sprites.ts` (`{ x, y }`,
+  whole pixels inside the cell; optional in the type). A carried body is
+  drawn right after its carrier (not in list order), its box's
+  bottom-centre on the carrier's `carryAt` (mirrored with facing, scaled
+  with squash) during `carry`, `carryRun`, `throw` and `grab`; with no
+  `carryAt`, where the simulation put it (on the head), as before.
+  `PlayerView.drawn` is now recorded in a pass of its own before drawing,
+  in the world's order, from the simulation's positions: the same values.
+- **Hits**: the attack strip follows `c.attack.phase`, so the wind-up is
+  drawn. The swing is `fx-swing-<kind>` when it exists (the grappler's
+  burst, at its own size), else `fx-slash` (sized by reach as before),
+  centred on the strike point (half the reach past the front edge, at
+  45% of the box's height), from the strike, never in the wind-up. The
+  `fx-hit` star is held on its first frame while either body of that
+  impact is in its beat (`c.beat`) and plays on when it lets go; it is
+  drawn 5/4 size at ≥ 85% of full impact speed, 3/4 below 35% unless it
+  was an attack's hit (`c.lastHit` on that tick), else its own size. The
+  white flash is 2 ticks and only for impacts ≥ 250 px/s.
+- **Stamped states** (Step 2's feel push) replace the page's own timing
+  where present and newer: `c.landing.tick`, `c.airborne.since` (rising
+  only), `c.grab.at` (while carrying), `c.lastThrow.tick`, `c.flap.at`;
+  `c.stunned` selects `hurt`.
+- **Text** (`fx.ts`): `drawText` copies glyphs from `font-dark` /
+  `font-light` (one frame per ASCII 32–126, advance = the cell's width)
+  onto whole pixels, optionally recoloured (multiply); `textWidth`,
+  `lineHeight`, `wrapText` measure in the same font. Used by barks (dark
+  letters straight on the paper, no halo, wrapped at 119 px), the plain
+  label fallback, the king's ribbon (light letters, their own shadow) and
+  the Hall's card (light letters recoloured per line). With the font
+  missing, every one falls back to `fillText` exactly as before. Proven
+  first with a throwaway 95-glyph strip, then with the props lane's real
+  font (992647b) in the after screenshots.
+- **The ribbon** (`audience.ts`): its bottom, tail included, stays 4 px
+  above the speaker's picture (box top minus 8, the crown); a 3-px stepped
+  tail points down at him. With no room above, it goes beside him (right,
+  else left) with the tail pointing at his head; never over him.
+- **Rage**: `RAGE_TINT` only for a sheet with no `moods["3"]` frames; a
+  sheet that has them gets a 4-tick red flash (`#f0596a` at 0.55) as mood 3
+  begins, then its own drawn face. Measured at 844×390: the enraged guard
+  keeps his silver helmet and blue tabard, red face and the red mood mark
+  tell him from a calm one
+  (`e2e-out/look2-actors/after-side-guard-punch-5.png`).
+- **Hiding**: a body in a hide part gets `hide-front-<w>x<h>` (the part's
+  size in tiles) drawn over it, through `drawLookIn`; with no such look it
+  is drawn one ramp step darker (night ink at 0.35). Nothing else marks it.
+- **Screenshots** before (live) and after, upright 390×664 and sideways
+  844×390 with insets: `e2e-out/look2-actors/` (git-ignored): a punch in
+  seven frames (wind-up; the grappler's burst at the fist; the star at
+  the crate), the ribbon, a carried crate standing and running, the guard
+  punched into rage, the infiltrator in the awning curtain.
 
 ## Deviations from the contract
 
@@ -101,7 +154,42 @@ is this one (see the flag below).
 - **To change it:** the colours passed to `edgedText` in `npcs.ts`.
 - **Where:** `src/client/draw/npcs.ts`, `bubble()`.
 
+### 2026-11-23 · A strong hit flashes white for two frames; a light bump does not
+- **Decided by:** look round 2, actors lane, Step 8
+- **Instead of asking:** "Which hits flash, and how long?"
+- **Why this way:** "the OHHHHH of spectacular physical impact": the flash marks the big ones; on every bump it was noise.
+- **To change it:** `FLASH_TICKS`, `FLASH_SPEED` in `src/client/draw/sprites.ts`.
+- **Where:** `DRAFT:` at those lines.
+
+### 2026-11-23 · Barks are dark letters on the paper; the king's words light letters on his dark ribbon, above his crown
+- **Decided by:** look round 2, actors lane (the brief, from the bar's "crisp outlined bitmap lettering")
+- **Instead of asking:** "How do words look?"
+- **Why this way:** the canvas's own font smeared into grey fringes at game size; the game's pixel font lands on whole pixels. This replaces round 1's "pale with a dark edge" decision for barks once the font exists.
+- **To change it:** `BARK_WIDTH` in `npcs.ts`; `HEADROOM`, `CLEAR`, `TAIL` in `audience.ts`.
+- **Where:** `DRAFT:` at those lines.
+
+### 2026-11-23 · A person who draws their own rage is not washed red
+- **Decided by:** look round 2, actors lane (the brief)
+- **Instead of asking:** "Keep the red wash on top of the angry frames?"
+- **Why this way:** the bar's "NPC Reactions": a red face and an anger mark, costume unchanged. Measured: the guard still reads as enraged without it.
+- **To change it:** `RAGE_TINT` / `RAGE_FLASH` in `entities.ts`, `RAGE_FLASH_TICKS` in `sprites.ts`.
+- **Where:** `DRAFT:` at those lines.
+
 ## Flags for the lead
+
+- **Round 2: a hidden player still shows their own `player-mark`** over
+  the curtain (the mark is every player's identity, not a secret's); the
+  hide itself is otherwise drawn exactly as the brief says. If the owner
+  wants a hidden friend fully gone on screen, hide the mark for a body
+  with `roomHide`.
+- **Round 2: not screenshotted: a carried friend.** In the scene harness
+  (keyboard on a touch-sized page) the grappler's grab took a crate but
+  not the second page's infiltrator standing overlapping him; fact
+  `t-grab-friend` passes in e2e by touch, so the drawing path is the same
+  one the crate takes. Not chased further.
+- **Round 2: `hall.ts`'s `LINE` is 9 px**, the pixel font's cell 10: a
+  descender can touch the next line's capitals. Only how words are drawn
+  was changed (the brief); 10 would be the fix.
 
 - **States the renderer cannot read from the world, and times itself on
   the page** (so two screens agree only to within network delay):
@@ -131,8 +219,9 @@ is this one (see the flag below).
   the player mark over a carried crate; at 844×390 and upright on an
   iPhone 14 (390×844 @3×).
 
-- With the real art of the heroes, cast and props lanes (not on `main`
-  while this was written): verified only with throwaway numbered test art.
+- Round 2 with real art: the swing burst, star, hide fold, carry frames
+  and rage frames and the font were on `main` and are in the screenshots;
+  `carryAt` was not (proven with a throwaway value, then removed).
 - `down` for a sprite body was not looked at in a live room.
 - 60 fps on a real iPhone: only reasoned (no per-frame allocation beyond
   small arrays; tinted frames cached).

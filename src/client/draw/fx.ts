@@ -71,3 +71,64 @@ export function edgedText(g: CanvasRenderingContext2D, text: string, x: number, 
   g.fillText(text, px, py);
 }
 const EDGE: [number, number][] = [[-1, 0], [1, 0], [0, -1], [0, 1], [-1, -1], [1, -1], [-1, 1], [1, 1]];
+
+/**
+ * Round 2: the game's pixel font (the contract's `font-dark` / `font-light`:
+ * a 95-frame strip, ASCII 32–126 in order, each cell one glyph, advancing
+ * by the cell's width). `dark` is for words on paper (barks), `light` for
+ * words on a dark ground (it carries its own 1 px shadow).
+ */
+export type FontName = 'dark' | 'light';
+
+/** The font look, once loaded; null means "draw words the old way" (fillText). */
+export function font(name: FontName): Look | null {
+  return look(`font-${name}`);
+}
+
+/** How wide a line of text is drawn, in pixels: by the font's advance, else the canvas's own measure. */
+export function textWidth(g: CanvasRenderingContext2D, text: string, name: FontName): number {
+  const f = font(name);
+  return f ? Math.max(0, text.length * f.w - 1) : g.measureText(text).width;
+}
+
+/** The height of one line of the font (its cell), else `fallback`. */
+export function lineHeight(name: FontName, fallback: number): number {
+  return font(name)?.h ?? fallback;
+}
+
+/**
+ * Draws one line with its top-left at (x, y), glyph by glyph on whole
+ * pixels from the font strip; `color` repaints the letters (multiply over
+ * their own shading). Returns false when the font is missing, and draws
+ * nothing: the caller then uses fillText as before.
+ */
+export function drawText(g: CanvasRenderingContext2D, text: string, x: number, y: number, name: FontName, color?: string): boolean {
+  const f = font(name);
+  if (!f) return false;
+  const source = color ? tinted(f, color) : undefined;
+  const px = Math.round(x);
+  const py = Math.round(y);
+  for (let i = 0; i < text.length; i++) {
+    let code = text.charCodeAt(i) - 32;
+    if (code === 0) continue;
+    // Outside the strip (an ellipsis, an accent): a question mark, so the line keeps its length.
+    if (code < 0 || code >= f.frames) code = 63 - 32;
+    drawFrame(g, f, code, px + i * f.w, py, source ? { source } : {});
+  }
+  return true;
+}
+
+/** Breaks text into lines no wider than `width` pixels in this font (a word longer than a line stands alone). */
+export function wrapText(g: CanvasRenderingContext2D, text: string, width: number, name: FontName): string[] {
+  const lines: string[] = [];
+  let line = '';
+  for (const word of text.split(/\s+/).filter(Boolean)) {
+    const next = line ? `${line} ${word}` : word;
+    if (line && textWidth(g, next, name) > width) {
+      lines.push(line);
+      line = word;
+    } else line = next;
+  }
+  if (line) lines.push(line);
+  return lines;
+}

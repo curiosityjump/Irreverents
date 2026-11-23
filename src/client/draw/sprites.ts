@@ -22,6 +22,7 @@ interface SheetFile {
   frames: Partial<Record<AnimState, number[]>> & { idle: number[]; run: number[]; air: number[] };
   fpsBy?: Partial<Record<AnimState, number>>;
   moods?: Record<string, Partial<Record<AnimState, number[]>>>;
+  carryAt?: { x: number; y: number } | null;
 }
 
 /**
@@ -58,8 +59,11 @@ const ONCE_TICKS = 12;
 /** DRAFT: squash after landing and stretch after leaving the ground, in ticks. */
 const SQUASH_TICKS = 6;
 const STRETCH_TICKS = 6;
-/** DRAFT: the white flash on being hit, in ticks (the contract: "brief"). */
-const FLASH_TICKS = 3;
+/** DRAFT (round 2): the white flash on being hit, in ticks, and only for a strong hit (impact speed, px/s). */
+const FLASH_TICKS = 2;
+const FLASH_SPEED = 250;
+/** DRAFT (round 2): the red flash when a person with drawn rage frames becomes enraged, in ticks. */
+const RAGE_FLASH_TICKS = 4;
 
 /**
  * What this page remembers about each body between frames, to time the
@@ -81,6 +85,9 @@ interface Memory {
   /** The last swing seen (attack.swung), and whether this body was carrying then: that swing is a throw. */
   swing: number;
   swingThrew: boolean;
+  /** The person's mood last seen, and the tick it became 3 (enraged). */
+  mood: number;
+  raged: number;
 }
 const memory = new Map<string, Memory>();
 
@@ -103,9 +110,9 @@ export function remember(world: World, e: Entity): Memory {
   const flaps = e.c.flap?.used ?? 0;
   if (!m || world.tick < m.tick - 600) {
     // First sight (or the world restarted): nothing has just happened.
-    m = { tick: world.tick, onGround: e.onGround, carrying, flaps, landed: -1e9, left: -1e9, grabbed: -1e9, threw: -1e9, flapped: -1e9, swing: e.c.attack?.swung ?? -1e9, swingThrew: false };
+    m = { tick: world.tick, onGround: e.onGround, carrying, flaps, landed: -1e9, left: -1e9, grabbed: -1e9, threw: -1e9, flapped: -1e9, swing: e.c.attack?.swung ?? -1e9, swingThrew: false, mood: e.c.npc?.mood ?? 1, raged: -1e9 };
     memory.set(e.id, m);
-    return m;
+    return stamped(e, m);
   }
   if (world.tick !== m.tick) {
     const swung = e.c.attack?.swung ?? -1e9;
@@ -127,12 +134,38 @@ export function remember(world: World, e: Entity): Memory {
       if (was?.c.flying?.by === e.id && world.tick - m.threw > 20) m.threw = world.tick;
     }
     if (flaps > m.flaps) m.flapped = world.tick;
+    const mood = e.c.npc?.mood ?? 1;
+    if (mood === 3 && m.mood !== 3) m.raged = world.tick;
+    m.mood = mood;
     m.tick = world.tick;
     m.onGround = e.onGround;
     m.carrying = carrying;
     m.flaps = flaps;
   }
+  return stamped(e, m);
+}
+
+/**
+ * Round 2: where the simulation stamps when something began (Step 2's feel
+ * push, docs/mechanisms/combat-and-impact.md), that tick is used instead of
+ * the moment this page first saw it, so two screens time it alike. Each
+ * stamp is taken only when it is newer than what the page saw, so a stale
+ * one never restarts an old animation.
+ */
+function stamped(e: Entity, m: Memory): Memory {
+  const newer = (stamp: number | undefined, seen: number): number => (stamp !== undefined && stamp > seen - 30 ? stamp : seen);
+  m.landed = newer(e.c.landing?.tick, m.landed);
+  if (e.vy < 0) m.left = newer(e.c.airborne?.since, m.left);
+  if (m.carrying) m.grabbed = newer(e.c.grab?.at, m.grabbed);
+  m.threw = newer(e.c.lastThrow?.tick, m.threw);
+  m.flapped = newer(e.c.flap?.at, m.flapped);
   return m;
+}
+
+/** Whether a person is in the first ticks of rage (a short red flash for a sheet that draws its own rage). */
+export function rageFlash(world: World, e: Entity): boolean {
+  const m = memory.get(e.id);
+  return !!m && world.tick - m.raged >= 0 && world.tick - m.raged < RAGE_FLASH_TICKS;
 }
 
 /** Whether this body's latest swing was really a throw (no slash for it). */
@@ -155,10 +188,14 @@ export function stateOf(world: World, e: Entity, m: Memory, onceTicks: (s: AnimS
   const t = world.tick;
   if (e.c.flattened) return { state: 'down', since: 0 };
   if (e.c.effect?.heldBy) return { state: 'held', since: 0 };
-  if (e.c.flying || e.c.beat) return { state: 'hurt', since: e.c.impact && t - e.c.impact.tick < 120 ? e.c.impact.tick : m.tick };
+  if (e.c.flying || e.c.beat || e.c.stunned) return { state: 'hurt', since: e.c.impact && t - e.c.impact.tick < 120 ? e.c.impact.tick : m.tick };
   if (t - m.threw < onceTicks('throw')) return { state: 'throw', since: m.threw };
   const swung = e.c.attack?.swung ?? -1e9;
-  if (!m.swingThrew && t - swung >= 0 && t - swung < onceTicks('attack')) return { state: 'attack', since: swung };
+  // Round 2: the swing's own phase (Step 2 stamps it), so the wind-up is drawn too; drawSprite
+  // picks the frame by phase. A wind-up is never a throw (a throw has none).
+  const phase = e.c.attack?.phase;
+  if (phase === 'windup' || ((phase === 'strike' || phase === 'recover') && !m.swingThrew)) return { state: 'attack', since: swung };
+  if (phase === undefined && !m.swingThrew && t - swung >= 0 && t - swung < onceTicks('attack')) return { state: 'attack', since: swung };
   const moving = Math.abs(e.vx) > MOVING;
   if (m.carrying) {
     if (t - m.grabbed < onceTicks('grab')) return { state: 'grab', since: m.grabbed };
@@ -241,6 +278,8 @@ export interface Drew {
   state: AnimState;
   /** Screen y of the picture's top edge, after squash/stretch. */
   top: number;
+  /** Round 2: the screen point where a carried body's bottom-centre sits (the sheet's carryAt), when it has one. */
+  hold?: { x: number; y: number };
 }
 
 /**
@@ -265,7 +304,17 @@ export function drawSprite(g: CanvasRenderingContext2D, world: World, content: C
   const fps = fpsOf(sheet, as);
   const t = world.tick;
   const step = Math.floor(((ONCE.has(state) ? t - since : t) * fps) / 60);
-  const f = ONCE.has(state) ? list[Math.max(0, Math.min(list.length - 1, step))]! : list[((step % list.length) + list.length) % list.length]!;
+  let f = ONCE.has(state) ? list[Math.max(0, Math.min(list.length - 1, step))]! : list[((step % list.length) + list.length) % list.length]!;
+  // Round 2: an attack strip drawn by the swing's phase (the contract: wind-up, strike, recovery):
+  // the first frame while winding up, the next while striking (the one after for the strike's
+  // second half on a strip of 4 or more), the last while recovering.
+  const phase = e.c.attack?.phase;
+  if (state === 'attack' && as === 'attack' && (phase === 'windup' || phase === 'strike' || phase === 'recover')) {
+    const n = list.length;
+    const left = e.c.attack?.left ?? 0;
+    const idx = phase === 'windup' ? 0 : phase === 'recover' ? n - 1 : Math.min(n - 1, n >= 4 && left <= 2 ? 2 : 1);
+    f = list[Math.max(0, idx)]!;
+  }
   const cols = Math.max(1, Math.floor(img.naturalWidth / sheet.cell.w));
   const sx = (f % cols) * sheet.cell.w;
   const sy = Math.floor(f / cols) * sheet.cell.h;
@@ -300,9 +349,10 @@ export function drawSprite(g: CanvasRenderingContext2D, world: World, content: C
   const left = Math.round(e.facing < 0 ? footX - (cw - ax) * scaleX : footX - ax * scaleX);
   const top = Math.round(footY - ay * scaleY);
 
-  // A flash on the ticks right after being hit; else the tint asked for.
+  // A white flash on the ticks right after a strong hit; else the tint asked for.
   const hitAge = e.c.impact ? t - e.c.impact.tick : 1e9;
-  const tint = hitAge >= 0 && hitAge < FLASH_TICKS ? { color: '#ffffff', amount: 1 } : look.tint;
+  const strong = (e.c.impact?.speed ?? 0) >= FLASH_SPEED;
+  const tint = strong && hitAge >= 0 && hitAge < FLASH_TICKS ? { color: '#ffffff', amount: 1 } : look.tint;
   const src: CanvasImageSource = tint ? tintedFrame(img, sx, sy, cw, ch, tint.color, tint.amount) : img;
   const ox = tint ? 0 : sx;
   const oy = tint ? 0 : sy;
@@ -315,5 +365,18 @@ export function drawSprite(g: CanvasRenderingContext2D, world: World, content: C
   } else g.translate(left, top);
   g.drawImage(src, ox, oy, cw, ch, 0, 0, dw, dh);
   g.restore();
-  return { state, top };
+  // Round 2: where a carried body's bottom-centre goes (carryAt, mirrored with the facing), in
+  // the states that hold it.
+  let hold: { x: number; y: number } | undefined;
+  const ca = sheet.carryAt;
+  if (ca && (state === 'carry' || state === 'carryRun' || state === 'throw' || state === 'grab')) {
+    hold = { x: e.facing < 0 ? left + dw - ca.x * scaleX : left + ca.x * scaleX, y: top + ca.y * scaleY };
+  }
+  return { state, top, hold };
+}
+
+/** Whether a sheet draws its own rage (mood 3 frames). */
+export function drawsOwnRage(content: Content, e: Entity): boolean {
+  const s = sheetOf(content, e)?.sheet;
+  return !!s?.moods?.['3'] && Object.keys(s.moods['3']).length > 0;
 }

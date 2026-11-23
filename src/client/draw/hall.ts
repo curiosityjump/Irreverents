@@ -2,6 +2,7 @@ import type { Content } from '../../content/types.ts';
 import type { Entity, World } from '../../sim/types.ts';
 import { FRAME_CREDITED, FRAME_OUT, PEDESTAL_KIND } from '../../sim/hall/record.ts';
 import type { HallRecord } from '../../sim/hall/record.ts';
+import { drawText, textWidth, useContent } from './fx.ts';
 
 // How a Hall of Legends record looks in the room
 // (docs/mechanisms/hall-of-legends.md, "On screen"): a small framed picture
@@ -116,7 +117,7 @@ function wrap(g: CanvasRenderingContext2D, text: string, width: number, max: num
   let line = '';
   for (const word of text.split(/\s+/).filter(Boolean)) {
     const next = line ? `${line} ${word}` : word;
-    if (line && g.measureText(next).width > width) {
+    if (line && textWidth(g, next, 'light') > width) {
       lines.push(line);
       line = word;
     } else line = next;
@@ -126,7 +127,7 @@ function wrap(g: CanvasRenderingContext2D, text: string, width: number, max: num
   if (lines.length > max) kept[max - 1] = `${kept[max - 1]}…`;
   return kept.map((l) => {
     let out = l;
-    while (out.length > 1 && g.measureText(out).width > width) out = `${out.slice(0, -2)}…`;
+    while (out.length > 1 && textWidth(g, out, 'light') > width) out = `${out.slice(0, -2)}…`;
     return out;
   });
 }
@@ -149,7 +150,7 @@ function cardLines(g: CanvasRenderingContext2D, record: HallRecord, world: World
   for (let i = 0; i < names.length; i++) {
     const rest = names.length - i - 1;
     const next = who ? `${who}, ${names[i]}` : names[i]!;
-    if (who && g.measureText(rest ? `${next} +${rest}` : next).width > width) {
+    if (who && textWidth(g, rest ? `${next} +${rest}` : next, 'light') > width) {
       who = `${who} +${names.length - i}`;
       break;
     }
@@ -164,7 +165,7 @@ function cardLines(g: CanvasRenderingContext2D, record: HallRecord, world: World
   const stat = (id: string): string => `${w.stats?.[id]?.label ?? fromId(id)} ${Math.round(record.stats[id]! * 10) / 10}`;
   for (let i = 0; i < shown.length; i += 2) {
     const pair = shown[i + 1] ? `${stat(shown[i]!)}   ${stat(shown[i + 1]!)}` : stat(shown[i]!);
-    if (shown[i + 1] && g.measureText(pair).width > width) {
+    if (shown[i + 1] && textWidth(g, pair, 'light') > width) {
       lines.push({ text: wrap(g, stat(shown[i]!), width, 1)[0] ?? '', color: DIM });
       lines.push({ text: wrap(g, stat(shown[i + 1]!), width, 1)[0] ?? '', color: DIM });
     } else lines.push({ text: pair, color: DIM });
@@ -193,6 +194,8 @@ function drawPanel(g: CanvasRenderingContext2D, record: HallRecord, content: Con
   g.textBaseline = 'top';
   g.textAlign = 'left';
   lines.forEach((line, i) => {
+    // Round 2: the pixel font, light letters recoloured per line; else the canvas's letters as before.
+    if (drawText(g, line.text, x + pad + picW + pad, y + pad + i * LINE, 'light', line.color)) return;
     g.fillStyle = line.color;
     g.fillText(line.text, x + pad + picW + pad, y + pad + i * LINE);
   });
@@ -207,6 +210,7 @@ let banner: { id: string; until: number } | null = null;
  * newly hung record, or else the card of the pedestal a player stands at.
  */
 export function drawHall(g: CanvasRenderingContext2D, world: World, content: Content, roomId: string, ox: number, oy: number): void {
+  useContent(content);
   const pedestals: { e: Entity; record: HallRecord }[] = [];
   for (const e of world.entities) {
     const record = recordOf(e);

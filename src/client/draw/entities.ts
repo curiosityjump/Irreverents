@@ -4,7 +4,9 @@ import type { Room } from '../../content/kinds/rooms.ts';
 import { tileAt } from '../../sim/room-state.ts';
 import type { Entity, World } from '../../sim/types.ts';
 import { drawFrame, frameOf, look, tinted, useContent } from './fx.ts';
-import { carriedBy, drawSprite, forget, remember, swingWasThrow } from './sprites.ts';
+import { drawLookIn } from './room-parts.ts';
+import { carriedBy, drawSprite, drawsOwnRage, forget, rageFlash, remember, swingWasThrow } from './sprites.ts';
+import type { Drew } from './sprites.ts';
 
 /** One thing the renderer put on screen this frame, in room pixels. Part of the debug object (docs/mechanisms/network.md). */
 export interface Drawn {
@@ -47,17 +49,33 @@ export function drawEntities(g: CanvasRenderingContext2D, world: World, content:
     }
   }
   const heads: { e: Entity; x: number; y: number; w: number; color: string }[] = [];
+  const dotOf = (e: Entity): string | null => (e.c.net ? content.net.playerColors[e.c.net.slot % content.net.playerColors.length]! : null);
+  // What was drawn, recorded first and in the world's order, from the simulation's positions,
+  // exactly as before (scripted checks read it), however the bodies are then drawn.
+  if (view) {
+    for (const e of world.entities) {
+      if (e.room !== roomId) continue;
+      const kind = content.characters[e.kind];
+      if (!kind) continue;
+      view.drawn.push({ id: e.id, player: e.player, kind: e.kind, x: e.x, y: e.y, px: Math.round(e.x), py: Math.round(e.y), color: dotOf(e) ?? kind.color, mine: e.id === view.me });
+    }
+  }
+  // Round 2: a carried body is drawn right after its carrier (in its hands), not in list order.
+  const heldBy = new Map<string, string>();
   for (const e of world.entities) {
     if (e.room !== roomId) continue;
-    const kind = content.characters[e.kind];
-    if (!kind) continue;
-    const x = ox + Math.round(e.x);
-    const y = oy + Math.round(e.y);
+    const held = carriedBy(world, e);
+    if (held) heldBy.set(held, e.id);
+  }
+  const byId = new Map(world.entities.map((e) => [e.id, e]));
+  const body = (e: Entity, at?: { x: number; y: number }): Drew | null => {
+    const kind = content.characters[e.kind]!;
+    const x = at ? Math.round(at.x) : ox + Math.round(e.x);
+    const y = at ? Math.round(at.y) : oy + Math.round(e.y);
     // Step 1 Gate 2 (one small edit; Step 2 owns this file): each PLAYER has
     // a dot above the head in their own colour, by join order, so two people
-    // playing the same member can be told apart; and what was drawn is
-    // recorded for the scripted checks.
-    const dot = e.c.net ? content.net.playerColors[e.c.net.slot % content.net.playerColors.length]! : null;
+    // playing the same member can be told apart.
+    const dot = dotOf(e);
     if (dot) {
       // With a `player-mark` look the mark is drawn over the head after every body (below).
       if (look('player-mark')) heads.push({ e, x, y, w: kind.box.w, color: dot });
@@ -66,14 +84,19 @@ export function drawEntities(g: CanvasRenderingContext2D, world: World, content:
         g.fillRect(x + Math.floor(kind.box.w / 2) - 2, y - 7, 4, 4);
       }
     }
-    view?.drawn.push({ id: e.id, player: e.player, kind: e.kind, x: e.x, y: e.y, px: Math.round(e.x), py: Math.round(e.y), color: dot ?? kind.color, mine: e.id === view.me });
     // Art as data: a kind with a file in content/sprites/ is drawn from its sheet.
     const away = !!e.c.net?.away && e.id !== view?.me;
     const enraged = e.c.npc?.mood === 3;
-    const drew = drawSprite(g, world, content, e, x, y, { alpha: away ? AWAY_ALPHA : 1, tint: enraged ? RAGE_TINT : null });
+    // Round 2: a sheet with its own rage frames carries the anger in its drawn face (a short
+    // red flash as it begins); only a sheet without them is washed red, as before.
+    const ownRage = enraged && drawsOwnRage(content, e);
+    const fold = hideFold(content, e);
+    const tint = enraged && !ownRage ? RAGE_TINT : ownRage && rageFlash(world, e) ? RAGE_FLASH : e.c.roomHide && !fold ? HIDDEN_TINT : null;
+    const drew = drawSprite(g, world, content, e, x, y, { alpha: away ? AWAY_ALPHA : 1, tint });
     if (drew) {
       drawSwing(g, world, content, e, x, y, kind.box, false);
-      continue;
+      if (fold) drawLookIn(g, content, [fold.id], ox + fold.x, oy + fold.y, fold.w, fold.h, world.tick);
+      return drew;
     }
     const { w, h } = kind.box;
     if (e.c.flattened) {
@@ -87,7 +110,7 @@ export function drawEntities(g: CanvasRenderingContext2D, world: World, content:
       g.globalAlpha = 1;
       g.fillStyle = DARK;
       g.fillRect(e.facing > 0 ? lx + h - 6 : lx + 2, ly + Math.min(3, w - 2), 4, 1);
-      continue;
+      return null;
     }
     g.fillStyle = kind.color;
     g.fillRect(x, y, w, h);
@@ -98,6 +121,20 @@ export function drawEntities(g: CanvasRenderingContext2D, world: World, content:
     else g.fillRect(e.facing > 0 ? x + w - 4 : x + 2, y + Math.min(5, h - 4), 2, 3);
     MARKS[kind.id]?.(g, x, y, w, h, e);
     drawSwing(g, world, content, e, x, y, kind.box, true);
+    if (fold) drawLookIn(g, content, [fold.id], ox + fold.x, oy + fold.y, fold.w, fold.h, world.tick);
+    return null;
+  };
+  for (const e of world.entities) {
+    if (e.room !== roomId || !content.characters[e.kind]) continue;
+    const carrier = heldBy.get(e.id);
+    if (carrier && byId.get(carrier)?.room === roomId) continue;
+    const drew = body(e);
+    const held = [...heldBy].find(([, by]) => by === e.id)?.[0];
+    const h = held ? byId.get(held) : undefined;
+    if (!h || h.room !== roomId || !content.characters[h.kind]) continue;
+    // In the carrier's hands: its bottom-centre on the carrier's carryAt; else where it is, as before.
+    const hb = content.characters[h.kind]!.box;
+    body(h, drew?.hold ? { x: drew.hold.x - hb.w / 2, y: drew.hold.y - hb.h } : undefined);
   }
   // Effects over bodies: landing dust.
   const land = look('fx-land');
@@ -129,8 +166,34 @@ export function drawEntities(g: CanvasRenderingContext2D, world: World, content:
 
 /** DRAFT: a friend whose page went away is drawn this faint (draw/away.ts adds the dots). */
 const AWAY_ALPHA = 0.45;
-/** DRAFT: an enraged person's own pixels, pushed this far toward red (the rectangle veil's replacement). */
+/** DRAFT: an enraged person's own pixels, pushed this far toward red (only for a sheet with no mood-3 frames, round 2). */
 const RAGE_TINT = { color: '#c8324a', amount: 0.45 };
+/** DRAFT (round 2): the brief red flash as a person with drawn rage becomes enraged. */
+const RAGE_FLASH = { color: '#f0596a', amount: 0.55 };
+/** DRAFT (round 2): a hidden body with no `hide-front` fold to draw over it is one ramp step darker (the night ink). INTENT: no outline, icon or sparkle: nothing points. */
+const HIDDEN_TINT = { color: '#221f44', amount: 0.35 };
+
+/**
+ * Round 2: the front fold of the hiding place a body is in, `hide-front-<w>x<h>`
+ * for the part's size in tiles, drawn over the body; null when the body is
+ * not hidden in a part or the look is missing (then the body is drawn darker).
+ */
+function hideFold(content: Content, e: Entity): { id: string; x: number; y: number; w: number; h: number } | null {
+  const inPart = e.c.roomHide?.in;
+  const room = inPart ? content.rooms[e.room] : undefined;
+  const part = room?.parts.find((p) => p.id === inPart);
+  if (!room || !part || part.tiles.length === 0) return null;
+  const xs = part.tiles.map((t) => t.tx);
+  const ys = part.tiles.map((t) => t.ty);
+  const tx = Math.min(...xs);
+  const ty = Math.min(...ys);
+  const w = Math.max(...xs) - tx + 1;
+  const h = Math.max(...ys) - ty + 1;
+  const id = `hide-front-${w}x${h}`;
+  if (!look(id)) return null;
+  const T = room.tile;
+  return { id, x: tx * T, y: ty * T, w: w * T, h: h * T };
+}
 
 /** A small fixed number from an id (no randomness). */
 function hash(s: string): number {
@@ -175,27 +238,32 @@ function drawShadow(g: CanvasRenderingContext2D, world: World, room: Room, box: 
 const SHADOW_REACH = 72;
 
 /**
- * DRAFT: the swing of an attack, in front of the body for a moment: the
- * `fx-slash` strip, placed and mirrored by facing and sized by reach; with
- * no look, a rectangle body keeps the white bar it always had.
+ * DRAFT: the swing of an attack, in front of the body for a moment. Round 2:
+ * the character's own `fx-swing-<character id>` when there is one (the
+ * grappler's punch burst), else `fx-slash`, centred on where the strike
+ * lands (half the attack's reach past the body's front edge, at chest
+ * height), mirrored by facing; it starts with the strike, not the wind-up.
+ * `fx-slash` is sized by reach as before; a character's own swing is drawn
+ * at its own size. With no look, a rectangle body keeps its white bar.
  */
 function drawSwing(g: CanvasRenderingContext2D, world: World, content: Content, e: Entity, x: number, y: number, box: { w: number; h: number }, plain: boolean): void {
   const since = world.tick - (e.c.attack?.swung ?? -1000);
-  if (since < 0) return;
-  const slash = look('fx-slash');
+  if (since < 0 || e.c.attack?.phase === 'windup') return;
+  const own = look(`fx-swing-${e.kind}`);
+  const slash = own ?? look('fx-slash');
   if (slash && swingWasThrow(e)) return;
   const kind = content.characters[e.kind];
   const reachOf = (content.tuning.characters[kind?.tuning ?? '']?.attackReach ?? 10);
   if (slash) {
     const f = frameOf(slash, since, false);
     if (f < 0) return;
-    // Sized by reach, in quarter steps so the pixels stay even.
-    const scale = Math.max(0.5, Math.min(2, Math.round(((reachOf + box.w / 2) / slash.w) * 4) / 4));
+    // fx-slash: sized by reach, in quarter steps so the pixels stay even.
+    const scale = own ? 1 : Math.max(0.5, Math.min(2, Math.round(((reachOf + box.w / 2) / slash.w) * 4) / 4));
     const w = Math.round(slash.w * scale);
     const h = Math.round(slash.h * scale);
-    const sx = e.facing > 0 ? x + Math.round(box.w / 2) : x + Math.round(box.w / 2) - w;
-    const sy = y + Math.round(box.h * 0.45 - h / 2);
-    drawFrame(g, slash, f, sx, sy, { flip: e.facing < 0, w, h });
+    const cx = e.facing > 0 ? x + box.w + reachOf / 2 : x - reachOf / 2;
+    const cy = y + box.h * 0.45;
+    drawFrame(g, slash, f, Math.round(cx - w / 2), Math.round(cy - h / 2), { flip: e.facing < 0, w, h });
     return;
   }
   if (!plain || since >= SWING_TICKS) return;

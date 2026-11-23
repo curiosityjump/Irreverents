@@ -2,7 +2,7 @@ import type { Content } from '../../content/types.ts';
 import { speechLine, speechLineNumber, wrapSpeech } from '../../content/speech.ts';
 import { speechTicksPerLine } from '../../sim/systems/audience-speech.ts';
 import type { World } from '../../sim/types.ts';
-import { drawNine, edgedText } from './fx.ts';
+import { drawNine, drawText, edgedText, font, lineHeight, textWidth } from './fx.ts';
 
 // DRAFT: the whole look. A small dark ribbon with pale letters over the
 // speaker's head, two rows at most: there to be glanced at or ignored,
@@ -27,24 +27,77 @@ export function drawAudience(g: CanvasRenderingContext2D, world: World, content:
     if (rows.length === 0) continue;
     g.font = 'bold 8px monospace';
     g.textBaseline = 'top';
-    const w = Math.ceil(Math.max(...rows.map((r) => g.measureText(r).width))) + 6;
-    const h = rows.length * ROW + 3;
-    const cx = ox + Math.round(e.x) + box.w / 2;
-    const x = Math.max(1, Math.min(g.canvas.width - w - 1, Math.round(cx - w / 2)));
-    const y = Math.max(1, Math.min(g.canvas.height - h - 1, oy + Math.round(e.y) - 4 - h));
-    // The `ribbon` nine-slice, a little roomier, with edged letters; else the plain ribbon.
-    // Its frame is 2 px wider each side, so it is kept 3 px inside the screen.
-    const nx = Math.max(3, Math.min(g.canvas.width - w - 3, x));
-    const ny = Math.max(3, y);
-    if (drawNine(g, 'ribbon', nx - 2, ny - 2, w + 4, h + 4)) {
-      rows.forEach((r, i) => edgedText(g, r, nx + 3, ny + 2 + i * ROW, WORDS, RIBBON));
-      continue;
+    const pixel = font('light') !== null;
+    const row = pixel ? lineHeight('light', ROW) : ROW;
+    const w = Math.ceil(Math.max(...rows.map((r) => textWidth(g, r, 'light')))) + 6;
+    const h = rows.length * row + 3;
+    const W = g.canvas.width;
+    const H = g.canvas.height;
+    const bx = ox + Math.round(e.x);
+    const by = oy + Math.round(e.y);
+    const cx = bx + box.w / 2;
+    // Round 2: never over the speaker. The ribbon's bottom (its frame and tail included) stays
+    // CLEAR px above the top of his picture (box top minus the HEADROOM a crown stands above it),
+    // with a tail pointing down at him; where there is no room above, it goes beside him, the
+    // tail pointing at his head.
+    const picTop = by - HEADROOM;
+    let x = Math.round(cx - w / 2);
+    let y = picTop - CLEAR - TAIL - 3 - h;
+    let tail: 'down' | 'left' | 'right' = 'down';
+    if (y < 3) {
+      y = Math.max(3, Math.min(H - h - 3, picTop));
+      const right = bx + box.w + SIDE_GAP + TAIL + 2;
+      const left = bx - SIDE_GAP - TAIL - 2 - w;
+      if (right + w + 3 <= W || left < 3) {
+        x = right;
+        tail = 'left';
+      } else {
+        x = left;
+        tail = 'right';
+      }
     }
-    g.fillStyle = EDGE;
-    g.fillRect(x - 1, y - 1, w + 2, h + 2);
-    g.fillStyle = RIBBON;
-    g.fillRect(x, y, w, h);
-    g.fillStyle = WORDS;
-    rows.forEach((r, i) => g.fillText(r, x + 3, y + 2 + i * ROW));
+    x = Math.max(3, Math.min(W - w - 3, x));
+    // The `ribbon` nine-slice, a little roomier; else the plain ribbon.
+    const framed = drawNine(g, 'ribbon', x - 2, y - 2, w + 4, h + 4);
+    if (!framed) {
+      g.fillStyle = EDGE;
+      g.fillRect(x - 1, y - 1, w + 2, h + 2);
+      g.fillStyle = RIBBON;
+      g.fillRect(x, y, w, h);
+    }
+    drawTail(g, tail, tail === 'down' ? Math.max(x + 2, Math.min(x + w - 3, Math.round(cx))) : tail === 'left' ? x - 2 : x + w + 2, tail === 'down' ? y + h + 2 : y + Math.min(h - 2, 5));
+    rows.forEach((r, i) => {
+      // Light letters carry their own shadow; without the font, edged canvas letters as before.
+      if (drawText(g, r, x + 3, y + 2 + i * row, 'light')) return;
+      if (framed) edgedText(g, r, x + 3, y + 2 + i * row, WORDS, RIBBON);
+      else {
+        g.fillStyle = WORDS;
+        g.fillText(r, x + 3, y + 2 + i * row);
+      }
+    });
   }
+}
+
+/** DRAFT: how far a speaker's picture may stand above his box (the contract: the king's crown is 8). */
+const HEADROOM = 8;
+/** DRAFT: the clear gap between the ribbon (tail included) and the speaker's picture. */
+const CLEAR = 4;
+/** DRAFT: the tail's length, and the gap from the box when the ribbon is beside him. */
+const TAIL = 3;
+const SIDE_GAP = 4;
+
+/** A small stepped tail in the ribbon's colours, its base on (x, y), pointing down, left or right. */
+function drawTail(g: CanvasRenderingContext2D, dir: 'down' | 'left' | 'right', x: number, y: number): void {
+  for (let i = 0; i < TAIL; i++) {
+    const half = TAIL - 1 - i;
+    g.fillStyle = EDGE;
+    if (dir === 'down') g.fillRect(x - half - 1, y + i, 2 * half + 3, 1);
+    else g.fillRect(dir === 'left' ? x - i - 1 : x + i, y - half - 1, 1, 2 * half + 3);
+    g.fillStyle = RIBBON;
+    if (dir === 'down') g.fillRect(x - half, y + i, 2 * half + 1, 1);
+    else g.fillRect(dir === 'left' ? x - i - 1 : x + i, y - half, 1, 2 * half + 1);
+  }
+  g.fillStyle = EDGE;
+  if (dir === 'down') g.fillRect(x, y + TAIL, 1, 1);
+  else g.fillRect(dir === 'left' ? x - TAIL - 1 : x + TAIL, y, 1, 1);
 }
