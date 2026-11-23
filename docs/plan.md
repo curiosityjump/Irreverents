@@ -1,4 +1,4 @@
-# {{PROJECT_NAME}} — the plan
+# Irreverents — the plan
 
 **Standing.** Run per `docs/sop.md`.
 

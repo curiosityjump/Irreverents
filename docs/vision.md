@@ -1,4 +1,4 @@
-# {{PROJECT_NAME}} — the vision
+# Irreverents — the vision
 
 **Standing.** The owner's own words on where this project is going and
 why, kept current, read by the orchestrator and leads before writing or

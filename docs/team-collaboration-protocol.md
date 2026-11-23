@@ -2,7 +2,7 @@
 
 **Standing.** Run per `docs/sop.md`.
 
-How multiple sessions work the same round of {{PROJECT_NAME}} changes at once
+How multiple sessions work the same round of Irreverents changes at once
 without blocking each other, overwriting each other's work, or needing to be in
 lockstep. In the project this system was derived from, this was the de facto
 pattern for several multi-session rounds before it was written down; it is

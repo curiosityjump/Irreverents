@@ -17,7 +17,7 @@ orchestration. If a fresh orchestrator session spins up, it should see
 this, and exactly what has been achieved and what is left, when it asks
 the Initiating Question."*
 
-`docs/vision.md` says where {{PROJECT_NAME}} is going and why.
+`docs/vision.md` says where Irreverents is going and why.
 `docs/plan.md` says the whole roadmap. Neither is meant to answer, in one
 place, *"what is the current concrete thing we're all pointed at, right
 now, and how far along is it"* — that's what this file is for, and it's

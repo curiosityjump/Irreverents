@@ -10,7 +10,7 @@ re-derives them.
 
 ## The branch
 
-All {{PROJECT_NAME}} work goes on **`main`**. Fill in, here, the
+All Irreverents work goes on **`main`**. Fill in, here, the
 facts a session needs and must not guess:
 
 - Is `main` the repository's default branch?

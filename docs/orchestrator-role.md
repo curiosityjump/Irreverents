@@ -7,7 +7,7 @@ starting a fresh session specifically to occupy this role) — `CLAUDE.md`'s
 
 Read this if you're the session the owner talks to, full stop — not
 between rounds of one workstream, but across the whole build of
-{{PROJECT_NAME}}. **Read `docs/lead-session.md` in full before doing
+Irreverents. **Read `docs/lead-session.md` in full before doing
 anything else — this role inherits everything there, one level up, and
 this file does not restate it.** Where that file says "the owner" or
 "brief," read it as described below.
@@ -115,14 +115,14 @@ Do these in order; each ends in something committed.*
      written; no plan exists yet"). It quotes what the owner said about
      the default branch, the deploy target, and how the project is built
      and checked; use those facts first — they are the owner's words.
-   - **Grep the docs for `{{`.** {{PROJECT_NAME}}, main,
+   - **Grep the docs for `{{`.** Irreverents, main,
      {{DEPLOY_TARGET}}, {{BUILD_COMMAND}} and {{STATIC_CHECKS}} each need a
      real value or an explicit "none yet." Fill any the genesis entry or
      the repo itself answers (`git ls-remote --heads origin` for the
      branch; a `package.json`/`Makefile`/CI file for the build and
      checks).
    - **Grep for `Placeholder`** (`grep -rn 'Placeholder' CLAUDE.md docs/`):
-     `CLAUDE.md`'s "What {{PROJECT_NAME}} is", the measure under "Where
+     `CLAUDE.md`'s "What Irreverents is", the measure under "Where
      this is going", "Architecture at a glance" and "Working locally";
      `docs/working-on-the-project.md` §1; `docs/understanding-the-project.md`'s
      sections; `docs/plan.md`'s header sections; and whatever else the

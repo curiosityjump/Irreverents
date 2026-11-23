@@ -55,7 +55,7 @@ growing, something in it has stopped earning its place.
 
 ## 1 · What this is, and who it is for
 
-> **Placeholder.** A paragraph: what {{PROJECT_NAME}} is, who it is for,
+> **Placeholder.** A paragraph: what Irreverents is, who it is for,
 > and the understanding underneath it, from `docs/vision.md`. Whether it is
 > a product for strangers or something for a known group changes almost
 > every trade-off — say which.

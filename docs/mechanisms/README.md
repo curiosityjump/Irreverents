@@ -2,7 +2,7 @@
 
 **Standing.** Run per `docs/sop.md`.
 
-Every mechanism in {{PROJECT_NAME}} gets exactly one line here, plus a full
+Every mechanism in Irreverents gets exactly one line here, plus a full
 writeup in a linked `docs/mechanisms/<topic>.md` file. **Read the linked file
 before touching the mechanism it covers** — the one-liner tells you a thing
 exists; the linked file tells you why it exists, what it interacts with, and

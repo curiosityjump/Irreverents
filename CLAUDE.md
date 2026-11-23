@@ -9,7 +9,7 @@ If you add to this file, something else should usually come out.
 
 ---
 
-## What {{PROJECT_NAME}} is
+## What Irreverents is
 
 > **Placeholder.** Replace this section with two or three short paragraphs,
 > once the owner and the Vision Partner have written `docs/vision.md`: what
