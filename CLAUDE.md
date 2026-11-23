@@ -11,17 +11,35 @@ If you add to this file, something else should usually come out.
 
 ## What Irreverents is
 
-> **Placeholder.** Replace this section with two or three short paragraphs,
-> once the owner and the Vision Partner have written `docs/vision.md`: what
-> the project is, who it is for, and the one or two consequences of that
-> which change what "good work" means here. Until then, `docs/vision.md` is
-> the answer, and if it is empty too, the first job is a Vision Partner
-> session (see "How to work here" below).
+A 2D side-scrolling action-adventure played in a browser, on phones and
+computers, made for **the owner and their friends** — a known group, not
+strangers. Its heroes are gleefully curious and ignore the world-saving
+quest; the world takes its story very seriously and reacts when they
+don't. The owner's standard for it working: the "OHHHHH" of spectacular
+physical impact, the satisfaction of a zero-alarm infiltration, and a
+botched stealth attempt that becomes an even better fight or escape.
 
-Write the consequences as tie-breakers a session can actually apply — for
-example *"legibility beats robustness: the owner can fix anything they can
-see"* — not as aspirations. If a sentence here wouldn't change a decision,
-it belongs in `docs/vision.md`, not in this file.
+The owner's words are in `docs/vision.md`; their full design is mirrored,
+read-only, at `docs/design-library/`. **Its labels are literal:** a thing
+it calls PROPOSED, EXAMPLE or OPEN is not a decision, and only the owner
+promotes one.
+
+Tie-breakers a session can apply, each the owner's own rule (quoted in
+`docs/vision.md`, "Principles that decide most questions"):
+
+- **Gameplay before joke.** Movement, powers, secrets, stealth and combat
+  first; dialogue is very limited; don't thread the premise into every room.
+- **NPCs are scripted, never AI.** Fixed states, explicit event/role
+  mappings, authored reactions. Call it NPC response logic.
+- **Getting caught opens play.** An alarm is never a reload or an automatic
+  bad outcome: it starts a fight, a last stand or an escape.
+- **Impact over numbers.** Knockback, throws and collisions carry combat.
+- **Solo is never locked out by headcount.**
+- **Nothing generated is canon.** Placeholder art, names and counts are
+  `DRAFT:` until the owner approves them.
+- **It is for friends, not strangers.** Don't build accounts, anti-cheat,
+  scale or monetisation unasked; what the owner can see and try beats
+  robustness they can't.
 
 ---
 
@@ -33,7 +51,11 @@ sentences, **the one measure** progress is read by — a number a session can
 check, not a feeling. (`docs/measures.md` holds the measures the plan is
 built on, and how to take them.)
 
-> **Placeholder:** *"The measure: ______ ."*
+**The measure (provisional: Q-003 is open with the owner):** how many of
+the design library's six build gates, A–F, pass their scripted player-view
+checks in the live build. `docs/plan.md`'s table holds the count and
+`docs/measures.md` the commands. Whether a gate *feels* right (joyful,
+weighty, funny) is the owner's to judge by playing, never a script's.
 
 ---
 
@@ -187,10 +209,12 @@ code site and the line in `docs/deliberate-designs.md`.
 
 ## Git: one branch
 
-All work goes on **`main`**. If {{DEPLOY_TARGET}} deploys from
-it, **a push to it is the deploy** — say so here plainly if that is true,
-because it changes how carefully every session finishes. Whether routine work
-needs a PR step is the owner's call; record their answer here.
+All work goes on **`main`**. The game is served by Railway at
+https://irreverents-production.up.railway.app. Whether Railway deploys
+`main` automatically is open with the owner (Q-009), so **until it is
+answered, treat every push to `main` as the deploy**: don't push what you
+wouldn't want live in two minutes. No PR step for routine work (the
+default; the owner hasn't said otherwise).
 
 **Caveat for cloud / remote sessions:** a harness may hand each session an
 auto-generated branch name in its own instructions, and tell it not to push

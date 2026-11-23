@@ -10,18 +10,57 @@ re-derives them.
 
 ## The branch
 
-All Irreverents work goes on **`main`**. Fill in, here, the
-facts a session needs and must not guess:
+All Irreverents work goes on **`main`**. The facts a session needs and must
+not guess (measured 2026-11-23 by the first orchestrator):
 
-- Is `main` the repository's default branch?
-- Does a push to it deploy (to `{{DEPLOY_TARGET}}`)? If so, **a push is the
-  deploy**, and no PR step exists for routine work. If not, say what the
-  route to production is (PR and review, a release tag, a manual step).
-- Are there any other long-lived branches, and what are they for? The default
-  answer this system was built around is: none.
-- Where production lives, if a session ever needs to reach it, and how
-  credentials for it are obtained — from whoever holds them, never guessed or
-  searched for in the filesystem or environment.
+- **`main` is the default branch** of `https://github.com/curiosityjump/Irreverents`
+  (spell the URL exactly so, capital I). The owner's own first commit of
+  `CLAUDE.md` (c2a0bbb) says "All work goes on `main`".
+- **Deploy:** Railway serves the game at
+  https://irreverents-production.up.railway.app. Whether Railway deploys
+  `main` automatically is open with the owner (Q-009 in
+  `docs/questions-for-the-owner.md`). **Until answered, treat a push to
+  `main` as the deploy.** No PR step for routine work. Nobody here has a
+  Railway login: sessions can push to GitHub and load the public URL
+  (`curl`, or the pre-installed Playwright Chromium), nothing more.
+- **Other long-lived branches:** none. Each cloud session is also handed an
+  auto-generated `claude/...` branch (next section); a session may leave
+  it as a mirror of `main`, never as the only place work lives.
+- **Credentials:** none are needed to build or run the game. Anything that
+  later needs one (a database, an API key) is requested from the owner
+  through the environment's secret form, never guessed, searched for or
+  committed.
+
+## This project's environment
+
+*(What exists, so no session assumes infrastructure that isn't there.
+Measured 2026-11-23; re-measure before relying on it.)*
+
+- **Session tools: yes.** Sessions run in Claude Code Remote (environment
+  "Curiosity Cloud") and have `create_session`, `list_sessions`,
+  `get_session`, `create_trigger`, `fire_trigger`, `send_later`,
+  `list_triggers`, `archive_session`. So the orchestrator launches leads
+  and leads launch brief-workers; the owner launches nothing but a fresh
+  orchestrator. The canonical spawn call is in `docs/lead-session.md`.
+- **The account is shared with the owner's other projects.** `list_sessions`
+  and `list_triggers` show their sessions and scheduled tasks too (RPGo,
+  HappyHome and others). **Never message, archive, re-arm or delete
+  anything that isn't Irreverents'**: filter by a session's repository or
+  by ids recorded in this repo. The usage limit is shared as well, so a
+  runaway fan-out here can stop every project (`docs/spawn-failures.md`,
+  "A spend-limit stop").
+- **GitHub tools: yes** (MCP `mcp__github__*`, scoped to this repository).
+  No `gh` CLI. No pull requests unless the owner asks.
+- **CI: none.** No `.github/` directory. Nothing runs on push except
+  (possibly) Railway's own build.
+- **Hooks: none.** No `.claude/` directory in the repository.
+- **Network:** limited allowlist plus package registries (npm, PyPI). The
+  deploy URL, the owner's Drive hosts and `kenney.nl` are allowed; most
+  other sites are not. A blocked host is a question for the orchestrator,
+  not something to work around.
+- **In every container:** Node 22, npm 10, Python 3.13, Playwright with
+  headless Chromium (`require('playwright')` works; never run
+  `playwright install`).
 
 ## Auto-generated session branch names: don't trust them
 

@@ -21,8 +21,21 @@ than no guide at all.
 
 ## 1. What this project actually is
 
-> **Placeholder.** One paragraph, from `docs/vision.md`: who this is for and
-> what kind of thing it is. Then the practical consequence for how to work.
+Irreverents is a browser game the owner is making **for themselves and
+their friends**, to play on phones and computers: a 2D side-scrolling
+action-adventure whose heroes ignore the world-saving quest and whose
+world reacts when they do (`docs/vision.md`; the tie-breakers are in
+`CLAUDE.md`). The owner has designed it in depth, in a Drive library
+mirrored at `docs/design-library/`, and cares most about how it *feels*:
+movement, impact, stealth, the fun of a plan going wrong.
+
+The practical consequences: (1) **the design library is the owner
+speaking**, labels included, so before inventing a rule, look for theirs,
+and never promote a PROPOSED or OPEN item to a decision; (2) **feel is
+theirs to judge**, so get things in front of them, playable, and never
+grade your own joke or game-feel with a made-up score; (3) **much of what
+looks like a design flaw is the joke or the point** (an NPC who is
+delighted to be robbed by a villain, a king who never stops talking).
 
 Forgetting what a project actually is produces worse work, in a recognizable
 way: a cost-of-a-mistake designed on purpose gets treated as a bug; a
