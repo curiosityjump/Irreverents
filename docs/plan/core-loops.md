@@ -590,3 +590,7 @@ the builder who makes it.
 - The two thin jump margins (the camp's way out, `docs/plan/step-3.md`'s last
   note; the awning and roof hops, about 3 to 5 px to spare by the check's
   measure) both break if `jumpSpeed` is tuned down in `?tune`.
+
+## Reviews by re-running (orchestrator)
+
+- 2026-11-23 20:50 UTC, `session_017WiGzJzo6aZqH4kYxxJsiV`, at 64bd1fe: build ok, check ok, e2e ok (one run). Covers glints push 1 (02455d2), heist pushes 1 and 2 (03b5935, 588ac88), powers push 1 (64bd1fe), hit prediction's re-push (d2c6e73), the art asks (8d15d9c, 720401f). Diffs not read. Flakes builders saw once each, not seen here: `cantina-row`, `level-full`/`level-menu` under load, reconnect h1/h2.
