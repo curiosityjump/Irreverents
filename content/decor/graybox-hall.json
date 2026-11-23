@@ -1,0 +1,12 @@
+{
+  "//": "DRAFT: stand-in drawn and placed by tools/art/props/make.py (the placing rules are tools/art/props/place.py).",
+  "id": "graybox-hall",
+  "items": [
+    {"image": "decor/castle.png", "src": [50, 0, 12, 22], "tx": 3, "ty": 7, "dx": 2, "dy": 0, "layer": "far", "flip": false},
+    {"image": "decor/castle.png", "src": [50, 0, 12, 22], "tx": 9, "ty": 7, "dx": 2, "dy": 0, "layer": "far", "flip": false},
+    {"image": "decor/castle.png", "src": [50, 0, 12, 22], "tx": 15, "ty": 7, "dx": 2, "dy": 0, "layer": "far", "flip": false},
+    {"image": "decor/castle.png", "src": [16, 0, 16, 44], "tx": 6, "ty": 3, "dx": 0, "dy": -4, "layer": "far", "flip": false},
+    {"image": "decor/castle.png", "src": [16, 0, 16, 44], "tx": 12, "ty": 3, "dx": 0, "dy": -4, "layer": "far", "flip": false},
+    {"image": "decor/castle.png", "src": [16, 0, 16, 44], "tx": 18, "ty": 3, "dx": 0, "dy": -4, "layer": "far", "flip": false}
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "//": "DRAFT: stand-in drawn by tools/art/props/make.py; a delivered sheet replaces it by editing this file.",
+  "id": "ui",
+  "image": "ui/use.png",
+  "looks": {
+    "ui-use": {"src": [0, 0, 48, 24]}
+  }
+}

@@ -2,5 +2,6 @@
   "//": "Step 4: use the nearest thing in reach (a shop counter, goods on a shelf). Read by the npc-interact system, not by a verb. DRAFT: the label and the key.",
   "id": "interact",
   "label": "Use",
-  "keys": ["KeyE"]
+  "keys": ["KeyE"],
+  "icon": "ui/use.png"
 }

@@ -1,0 +1,22 @@
+{
+  "//": "DRAFT: stand-in drawn and placed by tools/art/props/make.py (the placing rules are tools/art/props/place.py).",
+  "id": "courtyard",
+  "items": [
+    {"image": "decor/courtyard.png", "src": [44, 0, 56, 60], "tx": 3, "ty": 7, "dx": 0, "dy": 0, "layer": "far", "flip": false},
+    {"image": "decor/courtyard.png", "src": [44, 0, 56, 60], "tx": 9, "ty": 7, "dx": 8, "dy": 0, "layer": "far", "flip": true},
+    {"image": "decor/courtyard.png", "src": [118, 0, 16, 28], "tx": 3, "ty": 1, "dx": 0, "dy": 12, "layer": "back", "flip": false},
+    {"image": "decor/courtyard.png", "src": [150, 0, 16, 14], "tx": 8, "ty": 1, "dx": 0, "dy": -2, "layer": "back", "flip": false},
+    {"image": "decor/courtyard.png", "src": [134, 0, 16, 24], "tx": 13, "ty": 1, "dx": 0, "dy": 8, "layer": "back", "flip": false},
+    {"image": "decor/courtyard.png", "src": [118, 0, 16, 28], "tx": 18, "ty": 1, "dx": 0, "dy": 12, "layer": "back", "flip": false},
+    {"image": "decor/courtyard.png", "src": [150, 0, 16, 14], "tx": 23, "ty": 1, "dx": 0, "dy": -2, "layer": "back", "flip": false},
+    {"image": "decor/courtyard.png", "src": [134, 0, 16, 24], "tx": 28, "ty": 1, "dx": 0, "dy": 8, "layer": "back", "flip": false},
+    {"image": "decor/courtyard.png", "src": [0, 0, 44, 60], "tx": 17, "ty": 7, "dx": 4, "dy": 0, "layer": "back", "flip": false},
+    {"image": "decor/courtyard.png", "src": [54, 60, 10, 7], "tx": 17, "ty": 7, "dx": 2, "dy": 0, "layer": "back", "flip": false},
+    {"image": "decor/courtyard.png", "src": [18, 60, 12, 12], "tx": 21, "ty": 7, "dx": 2, "dy": 0, "layer": "back", "flip": false},
+    {"image": "decor/courtyard.png", "src": [166, 0, 28, 17], "tx": 23, "ty": 7, "dx": 1, "dy": 0, "layer": "back", "flip": false},
+    {"image": "decor/courtyard.png", "src": [100, 0, 18, 34], "tx": 26, "ty": 7, "dx": 0, "dy": 0, "layer": "back", "flip": false},
+    {"image": "decor/courtyard.png", "src": [42, 60, 12, 12], "tx": 27, "ty": 7, "dx": 4, "dy": 0, "layer": "back", "flip": false},
+    {"image": "decor/courtyard.png", "src": [0, 60, 18, 15], "tx": 28, "ty": 7, "dx": -3, "dy": 0, "layer": "back", "flip": false},
+    {"image": "decor/courtyard.png", "src": [30, 60, 12, 12], "tx": 19, "ty": 7, "dx": 6, "dy": 0, "layer": "back", "flip": false}
+  ]
+}

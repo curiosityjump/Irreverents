@@ -1,0 +1,19 @@
+{
+  "//": "DRAFT: stand-in drawn by tools/art/props/make.py; a delivered sheet replaces it by editing this file.",
+  "id": "people",
+  "image": "props/people.png",
+  "looks": {
+    "mood-2": {"src": [0, 0, 12, 12], "frames": 2, "fps": 3},
+    "mood-3": {"src": [24, 0, 12, 12], "frames": 2, "fps": 6},
+    "away-dots": {"src": [48, 0, 12, 6], "frames": 4, "fps": 4},
+    "bark": {"src": [0, 12, 12, 12]},
+    "ribbon": {"src": [12, 12, 12, 12]},
+    "bark-tail": {"src": [24, 12, 6, 4]},
+    "alert-pip": {"src": [30, 12, 10, 10]},
+    "alert-pip-off": {"src": [40, 12, 10, 10]},
+    "player-mark": {"src": [50, 12, 8, 8]},
+    "shadow-s": {"src": [0, 24, 12, 4]},
+    "shadow-m": {"src": [12, 24, 18, 5]},
+    "shadow-l": {"src": [30, 24, 26, 6]}
+  }
+}

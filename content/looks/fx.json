@@ -1,0 +1,11 @@
+{
+  "//": "DRAFT: stand-in drawn by tools/art/props/make.py; a delivered sheet replaces it by editing this file.",
+  "id": "fx",
+  "image": "fx/fx.png",
+  "looks": {
+    "fx-slash": {"src": [0, 0, 24, 24], "frames": 5, "fps": 20},
+    "fx-hit": {"src": [0, 24, 16, 16], "frames": 5, "fps": 20},
+    "fx-dust": {"src": [0, 40, 16, 16], "frames": 5, "fps": 15},
+    "fx-land": {"src": [0, 56, 24, 8], "frames": 4, "fps": 15}
+  }
+}
