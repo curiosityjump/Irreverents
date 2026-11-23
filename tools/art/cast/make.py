@@ -28,7 +28,7 @@ COLS = 8
 PEOPLE_ROWS = ['idle', 'run', 'air', 'hurt', 'down', 'held', 'talk', 'attack',
                'idle2', 'run2', 'talk2', 'idle3', 'run3', 'talk3']
 FPS_BY = {'idle': 6, 'run': 12, 'attack': 14, 'hurt': 10, 'down': 2, 'held': 10, 'talk': 9, 'air': 8,
-          'grab': 10, 'carry': 4, 'carryRun': 12, 'throw': 14}
+          'grab': 10, 'carry': 4, 'carryRun': 12, 'throw': 14, 'tumble': 14}
 
 
 def build_all():

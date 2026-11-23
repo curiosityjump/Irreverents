@@ -69,15 +69,22 @@ def lean(p, k):
     return p.copy(im=out, foot=(p.foot[0] + pad, p.foot[1]))
 
 
-def flush(p, frac=0.62):
+# The villain's plate paints his face in gold and orange tones; his red face recolours those too.
+WARM = dict(SKIN)
+WARM.update({RAMP['gold'][2]: RAMP['red'][2], RAMP['gold'][1]: RAMP['red'][1], RAMP['gold'][3]: RAMP['red'][3],
+                     RAMP['orange'][1]: RAMP['red'][1], RAMP['orange'][0]: RAMP['red'][0]})
+
+
+def flush(p, frac=0.62, table=None):
     im = p.im.copy()
     px = im.load()
     lim = int(im.height * frac)
+    table = table or SKIN
     for y in range(lim):
         for x in range(im.width):
             c = px[x, y]
-            if c[3] and c[:3] in SKIN:
-                px[x, y] = SKIN[c[:3]] + (255,)
+            if c[3] and c[:3] in table:
+                px[x, y] = table[c[:3]] + (255,)
     return p.copy(im=im)
 
 
@@ -354,8 +361,33 @@ def dehorn(p, frac=0.4):
     from source import _clean
     _clean(im)
     _clean(im)
+    _islands(im, 8)
     _ink(im)
     return p.copy(im=im)
+
+
+def _islands(im, smallest):
+    """Drops every 8-connected island of fewer than `smallest` pixels (specks left where a horn was)."""
+    px = im.load()
+    seen = set()
+    for y0 in range(im.height):
+        for x0 in range(im.width):
+            if (x0, y0) in seen or not px[x0, y0][3]:
+                continue
+            comp, stack = [], [(x0, y0)]
+            seen.add((x0, y0))
+            while stack:
+                x, y = stack.pop()
+                comp.append((x, y))
+                for dx in (-1, 0, 1):
+                    for dy in (-1, 0, 1):
+                        q = (x + dx, y + dy)
+                        if 0 <= q[0] < im.width and 0 <= q[1] < im.height and q not in seen and px[q][3]:
+                            seen.add(q)
+                            stack.append(q)
+            if len(comp) < smallest:
+                for q in comp:
+                    px[q] = (0, 0, 0, 0)
 
 
 def guard():
@@ -457,7 +489,7 @@ def villain():
     # horns taken off and round 2's tall top hat put on, so he keeps the silhouette that made him
     # the tallest person in a room. The plain horned hood is the alternative: drop the tophat() and
     # dehorn() calls in vil() below (docs/decisions-log.md).
-    raw = _poses('villains', 0.24, {
+    raw = _poses('villains', 0.28, {
         'i0': ((22, 151, 152, 290),),
         'i1': ((189, 154, 303, 290),),
         'w0': ((341, 155, 457, 290),),
@@ -492,7 +524,7 @@ def villain():
     }
     M2 = {'idle': [P['worry'], P['worry'], breathe(P['worry']), breathe(P['worry'])], 'talk': [P['worry'], P['alert']]}
     M3 = {}
-    return dict(cell=(56, 56), box=(14, 28), S=S, M2=M2, M3=M3, head=0.7)
+    return dict(cell=(56, 64), box=(14, 28), S=S, M2=M2, M3=M3, head=0.62, flush=WARM)
 
 
 ROUND3.update({
@@ -600,8 +632,36 @@ def toll_keeper():
 
 ROUND3['toll-keeper'] = toll_keeper
 
-PERSON_STATES = ['idle', 'run', 'air', 'attack', 'hurt', 'down', 'held', 'talk', 'grab', 'carry', 'carryRun', 'throw']
-MOOD_STATES = ['idle', 'run', 'air', 'attack', 'hurt', 'held', 'talk']
+PERSON_STATES = ['idle', 'run', 'air', 'attack', 'hurt', 'down', 'held', 'talk', 'grab', 'carry', 'carryRun', 'throw', 'tumble']
+MOOD_STATES = ['idle', 'run', 'air', 'attack', 'hurt', 'held', 'talk', 'tumble']
+
+
+def curl(p):
+    """Tucked: two rows out of the body (knees up), so a held or flung person reads as a ball."""
+    return breathe(breathe(p, 0.62), 0.45)
+
+
+def spin(p):
+    """A tumble: the curled pose turned a quarter at a time, forwards (a body in flight, not one lying down)."""
+    out = []
+    for t in (None, Image.ROTATE_270, Image.ROTATE_180, Image.ROTATE_90):
+        bb = p.im.getbbox()
+        im = p.im.crop(bb)
+        if t is not None:
+            im = im.transpose(t)
+        out.append(Pose(im, (im.width / 2, im.height), -2, 0))
+    return out
+
+
+def flight(S):
+    """Round 3: `held` curled and kicking, and `tumble`, made from the person's recoil pose."""
+    if 'hurt' not in S or 'held' not in S:
+        return S
+    S = dict(S)
+    S['held'] = [curl(p) for p in S['held']]
+    S['tumble'] = spin(curl(S['hurt'][1]))
+    S['_tumble'] = curl(S['hurt'][1])   # the unturned pose, so a mood's face edit lands on the head
+    return S
 
 
 def rows(spec):
@@ -610,15 +670,19 @@ def rows(spec):
     A mood state the person has no own pose for is the normal frames with
     the face edited: mood 2 a sweat drop, mood 3 a red face.
     """
-    S = spec['S']
+    S = spec['S'] if spec.get('thing') else flight(spec['S'])
     out = [(s, S[s]) for s in PERSON_STATES if s in S]
     if spec.get('thing'):
         return out
     head = spec.get('head', 0.62)
-    for m, own, edit in (('2', spec['M2'], sweat), ('3', spec['M3'], lambda p: flush(p, head))):
+    table = spec.get('flush')
+    for m, own, edit in (('2', spec['M2'], sweat), ('3', spec['M3'], lambda p: flush(p, head, table))):
         for s in MOOD_STATES:
             if s not in S:
                 continue
-            fr = own.get(s) or [edit(p) for p in S[s]]
+            if s == 'tumble' and '_tumble' in S and s not in own:
+                fr = spin(edit(S['_tumble']))
+            else:
+                fr = own.get(s) or [edit(p) for p in S[s]]
             out.append((s + m, fr))
     return out

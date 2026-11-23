@@ -2,8 +2,8 @@
   "//": "DRAFT: stand-in cut from the art desk's source sheets by tools/art/cast/make.py (cut3.py, source.py); a delivered sheet replaces it by editing this file.",
   "id": "villain",
   "image": "sprites/cast/villain.png",
-  "cell": {"w": 56, "h": 56},
-  "anchor": {"x": 21, "y": 28},
+  "cell": {"w": 56, "h": 64},
+  "anchor": {"x": 21, "y": 36},
   "fps": 8,
   "frames": {
     "idle": [0, 1, 2, 3, 4, 5, 6, 7],
@@ -14,12 +14,13 @@
     "down": [40, 41],
     "held": [48, 49, 50, 51],
     "talk": [56, 57, 58, 59],
+    "tumble": [64, 65, 66, 67],
     "jump": [16],
     "fall": [17]
   },
-  "fpsBy": {"idle": 6, "run": 12, "attack": 14, "hurt": 10, "down": 2, "held": 10, "talk": 9, "air": 8},
+  "fpsBy": {"idle": 6, "run": 12, "attack": 14, "hurt": 10, "down": 2, "held": 10, "talk": 9, "air": 8, "tumble": 14},
   "moods": {
-    "2": {"idle": [64, 65, 66, 67], "run": [72, 73, 74, 75, 76, 77], "air": [80, 81], "attack": [88, 89, 90, 91], "hurt": [96, 97, 98], "held": [104, 105, 106, 107], "talk": [112, 113], "down": [40, 41]},
-    "3": {"idle": [120, 121, 122, 123, 124, 125, 126, 127], "run": [128, 129, 130, 131, 132, 133], "air": [136, 137], "attack": [144, 145, 146, 147], "hurt": [152, 153, 154], "held": [160, 161, 162, 163], "talk": [168, 169, 170, 171], "down": [40, 41]}
+    "2": {"idle": [72, 73, 74, 75], "run": [80, 81, 82, 83, 84, 85], "air": [88, 89], "attack": [96, 97, 98, 99], "hurt": [104, 105, 106], "held": [112, 113, 114, 115], "talk": [120, 121], "tumble": [128, 129, 130, 131], "down": [40, 41]},
+    "3": {"idle": [136, 137, 138, 139, 140, 141, 142, 143], "run": [144, 145, 146, 147, 148, 149], "air": [152, 153], "attack": [160, 161, 162, 163], "hurt": [168, 169, 170], "held": [176, 177, 178, 179], "talk": [184, 185, 186, 187], "tumble": [192, 193, 194, 195], "down": [40, 41]}
   }
 }

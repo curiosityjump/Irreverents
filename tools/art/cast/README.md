@@ -108,7 +108,7 @@ does not sink into the undercroft.
     side of the pole.
 - **States** for the four people: `idle` 4, `run` 6, `air` 2 (`jump`,
   `fall`), `attack` 4, `hurt` 3, `down` 2, `held` 4, `talk` 2, `grab` 1,
-  `carry` 2, `carryRun` 4, `throw` 3 (the fighter and lookout have no
+  `carry` 2, `carryRun` 4, `throw` 3, `tumble` 4 (push 5) (the fighter and lookout have no
   grab/carry/throw: they cannot grab). Moods `"2"` and `"3"` each have
   `idle`, `run`, `air`, `attack`, `hurt`, `held`, `talk`, and `down`
   naming the normal knocked-out frames. Mood 2 idle/talk use the plate's
@@ -251,11 +251,13 @@ New ids for the contract's cast list: `brawler`, `skirmisher`,
 - (Round 3) `tumble` and the curled, kicking `held` wait for the actors
   lane's validator (`git log origin/main --grep 'round 3, actors'`, empty
   at this push); `held` is the hurt pose wiggling.
-- (Round 3) **The villain is the weakest again**: his face is small and
-  dark under the hood, so his mood-3 red face is the least visible of
-  the four; a few dark specks stay where the horns were; and his
-  knocked-out pose is borrowed from another plate's caster. The plain
-  horned hood (no hat) is the alternative (decisions log).
+- (Round 3, push 5) **The villain** is now cut larger (scale 0.28, about
+  50 px to the hat's top, cell 56x64) so his face is about 11x7 px, and
+  his red face also recolours the gold and orange tones the plate paints
+  his face in (`WARM` in `cut3.py`), so mood 3 shows. Specks where the
+  horns were are dropped (`_islands`). Still the weakest: his knocked-out
+  pose is another plate's caster. Top hat kept; the horned hood is the
+  logged alternative.
 - (Round 3) Moods could not be forced in the real game for a shot:
   setting a mood on `window.irreverents.world` does not reach the drawn
   frame. Moods are judged from the sheets (`moods-town-four.png`).
@@ -309,5 +311,9 @@ New ids for the contract's cast list: `brawler`, `skirmisher`,
   only adds the toll keeper's picture, and collision never depends on art.
   A second run could not check it (main moved on to the ground lane's
   queued push). For the Step 18 owner.
-- `tumble` and the curled `held`: not drawn (the actors lane's validator
-  is not on `main`).
+- (Push 5) `tumble` and the curled `held` are drawn for every person
+  (`flight()` in `cut3.py`): `held` is the held pose tucked (two rows out,
+  knees up, still kicking side to side); `tumble` is the recoil pose
+  tucked and turned a quarter at a time, four frames at 14 fps, with
+  mood-2 and mood-3 versions (the face edited before the turn). Not seen
+  in the real game in flight: judged from the sheets.
