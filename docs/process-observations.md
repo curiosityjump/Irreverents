@@ -209,3 +209,6 @@ written into a charter (one incident).
 **Evidence:** 15cea88 pushed 04:52:59 by the commit clock; the check reported the live commit c05f6a5 "started 04:51:21" and FAILED at 04:53:20; a fresh clone of 15cea88 built and started locally.
 **Cause:** unknown (timers in the container appear not to run in real time).
 **Improvement:** tactical fix applied: polled `/healthz` and compared its `startedAt` and the commit times instead of trusting the script's own wait. Apparent: the script could print how long it actually waited, by the server's `startedAt` clock rather than its own timer.
+
+### 2026-11-23 · A lead's inbox cleanup deleted another step's unread entries (Step 4 lead)
+Six leads share `docs/for-the-lead.md`. Step 7's lead routed its own flags (6fe5d2b) and reset the Entries section, removing eight entries Step 4's worker had added one commit earlier (15cea88). The rule already exists (`docs/lead-session.md`, step 3: "Leave other steps' entries alone"). Caught only because the worker's message said it had written there and the file was empty; recovered with `git show 15cea88 -- docs/for-the-lead.md`. Cheap fix worth considering: one inbox file per step, or delete by heading, never by resetting the section.

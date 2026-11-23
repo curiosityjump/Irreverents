@@ -245,10 +245,22 @@ for later, as the step suggests.
 
 ## Briefs
 
-- `handoff-prompts/step-4-slice-1-moods.md`: people with three moods,
-  seeing, the rule table, routines, `interact`; gate C. Worker
-  `session_017WiGzFBg5B72dx48zdiZh9`, launched 04:35 UTC; its part 1
-  (the foundation) is due about 05:20, the rest about 06:45.
+- **Slice 1, shipped and reviewed** (worker `session_017WiGzFBg5B72dx48zdiZh9`,
+  `a501061` + `15cea88`, 04:46 and 04:53 UTC; brief deleted). People
+  with three moods, seeing, the rule tables, routines, `interact`, mood
+  marks. **Gate C's scenarios, by signal:** 1 `step4-villain-robs`; 1b
+  `step4-villain-buys-politely`, `step4-hero-buys`; 2
+  `step4-hero-fluke-reassured`, `step4-hero-persists-rage`,
+  `step4-rage-needs-unseen`; also `step4-unseen-take`,
+  `step4-hero-hits-shopkeeper` (a real Step 2 hit). Lead's review, full
+  depth on the rules: build, check (53 ok) and gates re-run on a fresh
+  pull; two controls of my own (villain `buy` made expected fails 1b;
+  sight made to ignore walls fails `step4-hero-persists-rage`); the test
+  room loaded at phone size (844×390) with no page error. **Not
+  verified by me:** the mood marks on screen (the worker looked at them
+  at desktop size; my own scripted run did not provoke a mood), touch,
+  two phones. Carried to slice 3's rung 5. The durable record is
+  `docs/mechanisms/npc-response.md`.
 - `handoff-prompts/step-4-slice-2-alarm.md`: the bell, the call, the
   alert, responders, hiding and cooling; gate D. Worker
   `session_017WiGzHFR7FTJpj44ENRzvm`, launched 04:47 UTC,
@@ -291,3 +303,14 @@ for later, as the step suggests.
   is the event; `doorToward()` gives a pursuer its door. His slice B adds
   hiding places: a body with `c.roomHide` is to be treated as unseen.
   Not yet read or re-run by me.
+- **Lead, 05:02 UTC. Slice 1's flags, routed** (its eight entries in
+  `docs/for-the-lead.md` were deleted by another lead's cleanup, 6fe5d2b,
+  and recovered from the diff): `interact` has no checked touch control,
+  and the server must run `npc-interact` with each player's held actions
+  (both sent to the Step 1 lead; **live until someone presses Use on a
+  phone-sized page**); the blow that knocks someone out was not
+  perceived by them (decided: it is; sent to slice 2's worker); who
+  calls is decided by mood, not by `deed.witnesses` (slice 2); the
+  test-shop scenarios pin ticks (in the mechanism doc's traps); two
+  near-duplicate facts, `event` with `where` (Step 2's) and
+  `event-where` (ours): fold into one when either is next touched.
