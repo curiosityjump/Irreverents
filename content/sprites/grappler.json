@@ -1,14 +1,14 @@
 {
-  "//": "DRAFT: stand-in drawn by tools/art/heroes/make.py (a program, 2026-11-23); a delivered sheet replaces it by editing this file. Notes: tools/art/heroes/README.md.",
+  "//": "DRAFT: the owner's canon hero (P03 sheet, doc 36) imported at native size by tools/art/heroes/canon.py and p03.py (a program, 2026-11-23); a delivered sheet replaces it by editing this file. Notes: tools/art/heroes/README.md.",
   "id": "grappler",
   "image": "sprites/heroes/grappler.png",
   "cell": {
-    "w": 56,
-    "h": 44
+    "w": 48,
+    "h": 48
   },
   "anchor": {
-    "x": 19,
-    "y": 14
+    "x": 15,
+    "y": 16
   },
   "fps": 8,
   "frames": {
@@ -61,7 +61,8 @@
     "throw": [
       56,
       57,
-      58
+      58,
+      59
     ],
     "hurt": [
       64,
@@ -92,12 +93,12 @@
     "carryRun": 12,
     "attack": 16,
     "throw": 12,
-    "grab": 12,
+    "grab": 10,
     "flap": 10,
     "hurt": 8
   },
   "carryAt": {
-    "x": 28,
-    "y": 2
+    "x": 24,
+    "y": 21
   }
 }

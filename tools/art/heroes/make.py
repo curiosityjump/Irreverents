@@ -642,7 +642,10 @@ def main():
     json_dir = os.path.join(ROOT, 'content', 'sprites')
     os.makedirs(img_dir, exist_ok=True)
     os.makedirs(json_dir, exist_ok=True)
+    # Round 3: the party comes from the owner's canon (canon.py); make.py draws only the plain hero.
     for S in SPECS:
+        if S.id in ('grappler', 'infiltrator', 'flyer'):
+            continue
         arr = sheet(S)
         Image.fromarray(arr, 'RGBA').save(os.path.join(img_dir, f'{S.id}.png'), optimize=True)
         with open(os.path.join(json_dir, f'{S.id}.json'), 'w') as fh:
@@ -652,3 +655,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+    import canon  # noqa: E402
+    canon.main()

@@ -740,3 +740,17 @@ document as a decision of theirs.
 - **To change it:** `docs/plan/step-18.md`, "`DRAFT:` choices"; data in `content/characters/*.json`, `content/tuning.json`, `content/npcs/villain.json`.
 - **Where:** `docs/plan/step-18.md`; `docs/mechanisms/npc-response.md`, "Who fights".
 
+### 2026-11-23 · The three heroes are the owner's canon three, at three different heights
+- **Decided by:** Step 8 round 3 heroes builder, for the orchestrator
+- **Instead of asking:** "The canon sheet draws all three heroes the same size; should the game?"
+- **Why this way:** doc 36 ("We already have the playable characters. Remember these.") fixes who they are; the game's bodies are the simulation's truth, and the infiltrator is tiny on purpose (this log, "fit through a tiny gap"). So each is the canon figure at its own height: the grappler 31 px over his 30 px body, the flyer 26 px with wings, the infiltrator 23 px, the most the small-body overhang allows. Same faces, costumes and proportions, only the size differs. The alternative, one equal height as the canon draws them, would need the infiltrator's body or the overhang rule changed.
+- **To change it:** `HEIGHT` in `tools/art/heroes/canon.py`, then `python3 -I tools/art/heroes/make.py`; equal heights also need `content/characters/infiltrator.json`'s box or the overhang rule in `docs/mechanisms/art-pipeline.md` changed.
+- **Where:** `tools/art/heroes/README.md`, "Round 3".
+
+### 2026-11-23 · The grappler's cap follows the canon picture: a blue dome under a gold goggle band
+- **Decided by:** Step 8 round 3 heroes builder, for the orchestrator
+- **Instead of asking:** "Doc 36 calls the cap brown/gold, its picture shows a blue dome; which?"
+- **Why this way:** doc 36: "The illustrated image itself is controlling over verbal approximations." The blue is the palette's bright blue, not the castle's navy, and the gold band, goggles, red scarf and face read against the castle and undercroft walls (screenshots in `docs/plan/step-8-shots/round3/heroes/`).
+- **To change it:** map the dome to the gold ramp in `tools/art/heroes/p03.py` (`PAL`).
+- **Where:** `tools/art/heroes/README.md`, "Flags for the lead".
+

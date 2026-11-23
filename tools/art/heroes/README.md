@@ -77,6 +77,48 @@ round-2 heroes brief-worker (its session is in the commit trailer).
 - `preview.py` adds `lineup.png` / `lineup-1x.png`: the party and the cast
   on the castle lilac, the street and the undercroft dark.
 
+### Round 3 (2026-11-23, `handoff-prompts/look3-heroes.md`)
+
+**The party is now the owner's canon three (doc 36, the P03 sheet)**; the
+round 1 and 2 puppets below are history for the plain `hero` only.
+
+- `p03.py` imports a canon pose: it cuts the figure out of
+  `pixel-heroes-action-sprite-sheet.png` as one connected piece (the "!!",
+  swirls and sweat marks are separate pieces and drop out; the punch burst,
+  the rock, the chest and the coin are cut by rectangle; the blue slash by
+  colour), drops the ground shadow, area-averages it down to native size,
+  snaps every pixel to the master palette (the faces use two in-between
+  shades of the cream and gold hues), hardens alpha to 0/255, despeckles,
+  and re-inks a 1 px `ink` outline. Same bytes every run.
+- `canon.py` builds the three sheets from the 13 canon columns (0 idle,
+  1-2 walk, 3 crouch, 4 jump, 5 ready, 6 alert, 7 strike, 8 brace, 9 lift,
+  10 hurt, 11 dizzy-down, 12 cheer) with small native edits: a 1 px bob, a
+  breath, a blink, the lift's arms over walking legs, a 1 px lean. Cells
+  48x48 for all three, feet on row 45, the box's bottom edge on row 46 and
+  centred on x 24; each pose is placed by its head, with one per-hero nudge
+  so the idle feet are on the box's middle. Heights: grappler 31, flyer 26,
+  infiltrator 23 (`HEIGHT`). `make.py` runs it after drawing the plain hero.
+- State map: idle = idle, breath, idle, blink; run = walk A, A up, ready up,
+  walk B, B up, ready up (the flyer: A/B only); air = jump, jump stretched;
+  attack = brace, strike, strike +1 px, ready; grab = crouch, lift;
+  carry = lift, lift breathing; carryRun = the lift's top over the walk's
+  legs; throw = lift, lift leaning back, strike, strike +1; hurt = hurt,
+  hurt leaning back; down = dizzy-down; held = jump (knees tucked), crouch;
+  hide = crouch; talk = idle, cheer; flap = jump, walk A up (the flyer's
+  wings beat between them). A `tumble` row (the crouch, turned a quarter at
+  a time) is drawn and written to the content file only once the actors
+  lane's validator knows the field, as are `carryAtBy` points.
+- `carryAt` is (24, top of the fists + 2): the load sits centred over the
+  head, as the canon's rock does, 2 px into the fists.
+- `shots.mjs` (copied from the ground lane's) plays three pages in one
+  private world and shoots page A, the grappler, upright 390x664 and
+  sideways 844x390 with insets 47/47/21: the three together in four rooms,
+  a punch, carrying a friend and a crate, a throw filmstrip. `shotsheet.py`
+  crops them, with every canon crop beside its frame, into
+  `docs/plan/step-8-shots/round3/heroes/`.
+- `selfcheck.py` now checks every colour of each party sheet against the
+  wall ramps (it read the round-2 grappler's `NAVY`).
+
 ## Deviations from the contract
 
 - **Grappler cell 56×44**, not 32×32 or 48×48. The contract allows a larger
@@ -88,6 +130,16 @@ round-2 heroes brief-worker (its session is in the commit trailer).
   only the flyer has the `flap` verb.
 
 ## Decisions
+
+- **2026-11-23 (round 3): every pose is cut from the P03 sheet itself, not
+  from the 48 px partial extraction.** The extraction is the same sheet's
+  first six columns at 0.39x with soft edges; cutting all 13 columns from
+  the sheet puts every frame through one downscale, so the same person comes
+  out of every column. The extraction stays the reference the QA compares
+  with. To undo: point `p03.source` at the extraction's files for columns
+  0-5. `DRAFT:`
+- **2026-11-23 (round 3): the three heroes keep different heights** (31, 26,
+  23 px), not the canon's one size; see `docs/decisions-log.md`. `DRAFT:`
 
 - **2026-11-23: the grappler and the infiltrator follow the owner's shared
   heroes v2 concept** (`docs/art-reference/heroes-v2-chatgpt-concept.png`,
@@ -116,6 +168,22 @@ round-2 heroes brief-worker (its session is in the commit trailer).
   `DRAFT:`
 
 ## Flags for the lead
+
+- (Round 3) **The grappler's cap dome is blue, not gold/brown.** Doc 36's
+  words say "warm brown/gold cap"; its image, which it says controls, has a
+  slate-blue dome under a wide gold goggle band. We follow the image, in the
+  master palette's brighter blue, so it is not the walls' navy; at 1x the
+  gold band and goggles carry most of the cap.
+- (Round 3) **The carry is the canon's own lift pose (column 9), seen
+  three-quarter, not side-on as the brief asked.** The canon has no side-on
+  carry; drawing one would be a new design. The legs walk under it in
+  `carryRun`. Where the rock was cut away the cap's top is flat; the load
+  sits there.
+- (Round 3) The infiltrator's and flyer's `carry`, `grab` and `throw` use
+  the canon's cheer (arms up), since their column 9 is a chest and a coin.
+- (Round 3) Faces act only where the canon does: squint in strike, brace
+  and hurt, cheerful in cheer, the dizzy-down; the blink is a native edit.
+  Wide eyes in `jump` are the canon's own dots.
 
 - (Round 2) Until the actors lane draws a carried body at `carryAt`, today's
   renderer puts it on the box top (cell row 14), i.e. between the raised
