@@ -27,3 +27,8 @@ changed>` as its heading. The first one in a new project is the genesis
 entry: "first vision written; no plan exists yet", naming the sections.
 
 ## Entries
+
+### Vision · The long-term direction (deploy target)
+- **Answer:** "This is the url railway will deploy everything to, where the game will be playable: irreverents-production.up.railway.app … Make sure you can access it so the claude dev team can test things better from the player perspective"
+- **Recorded in:** `docs/vision.md` "The long-term direction"
+- **Action for:** orchestrator (process): fill `CLAUDE.md`'s `{{DEPLOY_TARGET}}` with Railway at that URL, and find out from the owner whether a push to `main` is the deploy. As of 2026-11-23 the URL answers Railway's 404 "Application not found" (nothing deployed yet); the "Curiosity Cloud" environment allows the host, so `curl` and the pre-installed Playwright Chromium can both load it for player-view testing.

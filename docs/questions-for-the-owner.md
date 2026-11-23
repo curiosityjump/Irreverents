@@ -110,6 +110,7 @@ entries group them; they are not entries.
 - **Answer goes to:** `docs/vision.md` "The long-term direction"
 - **Source:** `docs/design-library/02-gameplay-systems/31-cantina-party-roster-hub-and-endless-brawl.md`
 - **Blocking:** yes
+- **Note (Vision Partner, 2026-11-23):** you've since said the game "will be playable" at irreverents-production.up.railway.app (Railway), quoted in `docs/vision.md` "The long-term direction". That makes it a web-served game; what's left to answer is which devices and controls (touch, keyboard, controller) and whether you have an engine preference.
 
 **Fixes for the Drive library (non-blocking; the newer rule wins until you say otherwise)**
 

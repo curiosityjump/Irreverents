@@ -51,6 +51,15 @@ A picture, not a feature list.)*
 *(Where this is ultimately headed, even if far off, and what they
 explicitly do not want it to become.)*
 
+**Where it is played.** *(Framing:)* the owner named the game's public
+address. A session that wants to see the game the way a player does opens
+this URL (the cloud environment allows it since 2026-11-23).
+
+**Owner, 2026-11-23:**
+> This is the url railway will deploy everything to, where the game will be playable: irreverents-production.up.railway.app
+>
+> Make sure you can access it so the claude dev team can test things better from the player perspective
+
 ## The measure
 
 *(How the owner would know the project is moving in the right direction.
