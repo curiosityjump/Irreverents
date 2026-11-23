@@ -44,6 +44,39 @@ previous orchestrator's machine.
   the box fits the cell, idle feet on the box's bottom row and centred on
   it.
 
+### Round 2 (2026-11-23, `handoff-prompts/look2-heroes.md`)
+
+Brief by the orchestrator `session_017WiGzGp8auJceLEAAh9Aqx`; drawn by the
+round-2 heroes brief-worker (its session is in the commit trailer).
+
+- `grappler.py`: the grappler's own puppet (make.py routes to it). A navy
+  slate bruiser (`NAVY`, the blue ramp's darks greyed toward ink) with the
+  head raised and pushed forward of the shoulders, a tan muzzle about half
+  the head, a 2 px brow, 2x3 eyes with a light pixel, a mouth that changes
+  by state (gritted idle, open shout in attack, throw and carry), a
+  swept-back orange crest of four spikes, a 4 px orange scarf, green
+  shorts, a brown backpack hump and big tan fists. Head plus muzzle is
+  19 of 42 drawn rows. `carry`, `carryRun` and `throw[0]` turn him to face
+  us with both fists above his head at one hands point, `CARRY_AT`
+  (28, 2), arms passing behind the head so the face stays clear (an
+  `INTENT:` in the code). `down` is hand-drawn flat on his back, eyes shut.
+- `infiltrator.py`: the infiltrator's own puppet. Upright, 23-24 px tall
+  over its 10x12 box, head about 60%, a 9 px tan face, 2x3 eyes with a
+  light pixel, two broad leaf ears raised up and back in a V with a light
+  vein, goggles on the brow, one orange scarf streamer. Hand-drawn `down`
+  (eyes shut), a low crouched `hide`; `held` and `air` keep the face.
+- Flyer: its eyes moved 1 px back so both are clear of the outline (they
+  were 2x4 already; the front one merged into the outline).
+- `make.py` writes `carryAt` into `content/sprites/grappler.json` only once
+  `src/content/kinds/sprites.ts` knows the field (the actors lane's
+  validator); until then the file is as before.
+- `selfcheck.py` adds: the main fill colour of each party hero may not be a
+  top-5 colour of any atlas or backdrop image; the grappler's body may use
+  none of the castle, stone or night ramps; every infiltrator frame stays
+  inside its overhang (12 px up, 6 px each side).
+- `preview.py` adds `lineup.png` / `lineup-1x.png`: the party and the cast
+  on the castle lilac, the street and the undercroft dark.
+
 ## Deviations from the contract
 
 - **Grappler cell 56×44**, not 32×32 or 48×48. The contract allows a larger
@@ -71,7 +104,26 @@ previous orchestrator's machine.
   wings that rise and fall, and the hero's salmon family. To undo: edit
   that hero's spec. `DRAFT:`
 
+- **2026-11-23 (round 2): the grappler turns to face the player while he
+  holds something over his head.** A player sees him hoist a crate or a
+  friend with both fists, face to camera, as in the concept's lifting pose;
+  side-on, the raised front arm would hide his face. To undo: in
+  `grappler.py`, give `carry`/`carryRun`/`throw[0]` `front=False` and side
+  `hands`. `DRAFT:`
+- **2026-11-23 (round 2): the grappler's body is a navy slate, not the
+  castle lilac.** Why: in the castle he vanished into the walls. To undo:
+  the `NAVY` ramp in `grappler.py` (the selfcheck refuses wall colours).
+  `DRAFT:`
+
 ## Flags for the lead
+
+- (Round 2) Until the actors lane draws a carried body at `carryAt`, today's
+  renderer puts it on the box top (cell row 14), i.e. between the raised
+  fists and partly behind them. It reads as held, but low.
+- (Round 2) The villain (priority 4 of the round-2 brief) was not reached.
+- (Round 2) The plain `hero`'s main fill `#b97a40` is a top-5 colour of
+  `assets/tiles/town.png`; it is not in the party, so the new colour rule
+  skips it.
 
 - `npm run check` on `main` without the foundation commit rejects `fpsBy`
   (`src/content/kinds/sprites.ts` knows only id, image, cell, anchor, fps
@@ -85,6 +137,13 @@ previous orchestrator's machine.
   line up. Worth a look by the actors lane.
 
 ## Not verified
+
+- (Round 2) Before/after screenshots (live vs local, iPhone 14 upright,
+  844x390 with insets, 667x375; throne room with all three, a crate hoisted,
+  the castle street) were looked at and kept in `preview/` (git-ignored),
+  taken by a Playwright script in the worker's scratchpad, not in the repo.
+- (Round 2) The graybox hall carry: shot in the throne room instead (the
+  start room has a crate on its floor).
 
 - On a real iPhone: checked only in Chromium with Playwright's iPhone 14
   sizes, upright and sideways.

@@ -70,6 +70,51 @@ for h in HEROES:
     mid = x0 + (feet[0] + feet[2]) / 2
     if abs(mid - (ax + box['w'] / 2)) > 2.5:
         bad.append(f'{where}: idle feet centred at {mid}, the box at {ax + box["w"] / 2}')
+
+# Round 2 (handoff-prompts/look2-heroes.md, section 4): a hero must stand off
+# the room behind it. Its main fill colour (the commonest non-outline colour of
+# idle frame 0) may not be among the top five colours of any atlas or backdrop
+# image, so the grappler cannot drift back into a wall's colours.
+from collections import Counter
+import glob
+PARTY = ['grappler', 'infiltrator', 'flyer']
+INKS = {(0x2b, 0x21, 0x40), (0x4a, 0x3a, 0x5e)}
+top5 = {}
+for p in sorted(glob.glob(os.path.join(ROOT, 'assets', 'tiles', '*.png')) + glob.glob(os.path.join(ROOT, 'assets', 'backdrops', '*.png'))):
+    a = np.asarray(Image.open(p).convert('RGBA')).reshape(-1, 4)
+    c = Counter(map(tuple, a[a[:, 3] > 0][:, :3].tolist()))
+    for col, _ in c.most_common(5):
+        top5.setdefault(col, os.path.relpath(p, ROOT))
+# DRAFT: only the party (content/party.json); the plain hero is not played and the brief leaves it as it is.
+for h in PARTY:
+    s = json.load(open(os.path.join(ROOT, 'content', 'sprites', f'{h}.json')))
+    im = np.asarray(Image.open(os.path.join(ROOT, 'assets', s['image'])).convert('RGBA'))
+    cw, ch = s['cell']['w'], s['cell']['h']
+    c0 = im[:ch, :cw].reshape(-1, 4)
+    c = Counter(map(tuple, c0[c0[:, 3] > 0][:, :3].tolist()))
+    main = next(col for col, _ in c.most_common() if col not in INKS)
+    if main in top5:
+        bad.append(f'{h}: main fill #%02x%02x%02x is a top-5 colour of {top5[main]}' % main)
+# The grappler's body may use none of the castle, stone or night ramps, nor a top-5 colour.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import grappler as _g  # noqa: E402
+WALLS = {(0x3f, 0x3a, 0x66), (0x5c, 0x56, 0x90), (0x81, 0x79, 0xb8), (0xaa, 0xa3, 0xd8),
+         (0x5b, 0x56, 0x70), (0x80, 0x7b, 0x96), (0xa9, 0xa5, 0xbd), (0xd2, 0xcf, 0xe0),
+         (0x14, 0x12, 0x28), (0x22, 0x1f, 0x44), (0x34, 0x30, 0x66), (0x4c, 0x48, 0x90)}
+for col in _g.NAVY:
+    if tuple(col) in WALLS or tuple(col) in top5:
+        bad.append('grappler: body colour #%02x%02x%02x is a wall colour' % tuple(col))
+# The infiltrator's overhang: up to 12 px above its box and 6 px past each side, every frame.
+s = json.load(open(os.path.join(ROOT, 'content', 'sprites', 'infiltrator.json')))
+box = json.load(open(os.path.join(ROOT, 'content', 'characters', 'infiltrator.json')))['box']
+im = Image.open(os.path.join(ROOT, 'assets', s['image'])).convert('RGBA')
+cw, ch = s['cell']['w'], s['cell']['h']
+ax, ay = s['anchor']['x'], s['anchor']['y']
+for st, fr in s['frames'].items():
+    for f in fr:
+        b = im.crop(((f % 8) * cw, (f // 8) * ch, (f % 8) * cw + cw, (f // 8) * ch + ch)).getbbox()
+        if b[1] < ay - 12 or b[0] < ax - 6 or b[2] > ax + box['w'] + 6 or b[3] > ay + box['h']:
+            bad.append(f'infiltrator: frame {f} ({st}) at {b} is outside the overhang')
 if bad:
     print('\n'.join(bad))
     sys.exit(1)

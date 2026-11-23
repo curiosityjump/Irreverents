@@ -164,6 +164,47 @@ def scene(all_):
     up(sc, 4).save(os.path.join(OUT, 'scene.png'))
 
 
+def lineup(all_):
+    """Round 2: every hero and person standing in a row on the castle lilac,
+    the street and the undercroft dark, at 1x and 4x (lineup-1x.png, lineup.png)."""
+    people = ['king', 'guard', 'shopkeeper', 'villain']
+    who = [(h, all_[h]) for h in ('grappler', 'infiltrator', 'flyer')]
+    for pname in people:
+        try:
+            who.append((pname, load(pname)))
+        except (OSError, KeyError):
+            pass
+    grounds = [
+        ('castle', '#8179b8', '#6b64a0', 'tiles/castle.png'),
+        ('street', '#c4e9ff', '#ffe2c0', 'tiles/town.png'),
+        ('undercroft', '#221f44', '#343066', 'tiles/cellar.png'),
+    ]
+    W, band = 320, 64
+    sc = Image.new('RGBA', (W, band * len(grounds)), (0, 0, 0, 255))
+    d = ImageDraw.Draw(sc)
+    for g, (name, back, floor_c, tiles) in enumerate(grounds):
+        y0 = g * band
+        d.rectangle((0, y0, W, y0 + band), fill=back)
+        # the real tile sheet's commonest look, as a texture behind, when present
+        tp = os.path.join(ROOT, 'assets', tiles)
+        if os.path.exists(tp):
+            t = Image.open(tp).convert('RGBA').crop((0, 0, 16, 16))
+            for x in range(0, W, 16):
+                for yy in range(y0 + 8, y0 + band - 12, 16):
+                    sc.alpha_composite(t, (x, yy))
+        floor = y0 + band - 8
+        d.rectangle((0, floor, W, y0 + band), fill=floor_c)
+        x = 8
+        for h, (meta, img) in who:
+            box = box_of(h)
+            c = cell(meta, img, meta['frames']['idle'][0])
+            ax, ay = meta['anchor']['x'], meta['anchor']['y']
+            sc.alpha_composite(c, (x - ax, floor - box['h'] - ay))
+            x += box['w'] + 22
+    sc.save(os.path.join(OUT, 'lineup-1x.png'))
+    up(sc, 4).save(os.path.join(OUT, 'lineup.png'))
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     all_ = {h: load(h) for h in HEROES}
@@ -173,6 +214,7 @@ def main():
         strips(h, meta, img)
     silhouettes(all_)
     scene(all_)
+    lineup(all_)
     print('wrote', ', '.join(sorted(os.listdir(OUT))))
 
 

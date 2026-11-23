@@ -514,7 +514,7 @@ def flyer_spec():
         # a small beak
         fig.ell(10, GOLD, hcx + S.head_rx - 0.2, hcy + 1.4, 1.9, 1.1, bias=0.2)
         if state != 'down':
-            standard_face(fig, S, p, info, state, eh=4, ex=(-0.2, 3.0), ey=-1.6, my=3.4, mx=4.4, blush=True)
+            standard_face(fig, S, p, info, state, eh=4, ex=(-1.4, 2.0), ey=-1.6, my=3.4, mx=4.4, blush=True)  # round 2: both eyes clear of the outline
 
     def arms(fig, S, p, info, shy):
         k = S.k
@@ -555,7 +555,17 @@ SPECS = [grappler_spec(), infiltrator_spec(), flyer_spec(), hero_spec()]
 
 # ---------------------------------------------------------------- frames
 
+# Round 2: the grappler and the infiltrator have their own puppets
+# (grappler.py, infiltrator.py); their specs above still give the cell, the
+# feet and the box.
+import grappler as _grappler  # noqa: E402
+import infiltrator as _infiltrator  # noqa: E402
+MODS = {'grappler': _grappler, 'infiltrator': _infiltrator}
+
+
 def draw_frame(S, state, i):
+    if S.id in MODS:
+        return MODS[S.id].frame(state, i)
     p = POSES[state][i]
     if state == 'down':
         return draw_down(S, p, i)
@@ -605,7 +615,7 @@ def sheet(S):
 
 def content_json(S):
     anchor = {'x': S.fx - S.box[0] // 2, 'y': S.ch - S.box[1]}
-    return {
+    out = {
         '//': f'DRAFT: stand-in drawn by tools/art/heroes/make.py (a program, 2026-11-23); a delivered sheet replaces it by editing this file. Notes: tools/art/heroes/README.md.',
         'id': S.id,
         'image': f'sprites/heroes/{S.id}.png',
@@ -615,6 +625,16 @@ def content_json(S):
         'frames': frames_json(),
         'fpsBy': {'run': 12, 'carryRun': 12, 'attack': 16, 'throw': 12, 'grab': 12, 'flap': 10, 'hurt': 8},
     }
+    if S.id == 'grappler' and carry_at_known():
+        out['carryAt'] = {'x': _grappler.CARRY_AT[0], 'y': _grappler.CARRY_AT[1]}
+    return out
+
+
+def carry_at_known():
+    """DRAFT: carryAt is written only once the actors lane's validator knows it
+    (handoff-prompts/look2-heroes.md, section 4); until then npm run check rejects it."""
+    p = os.path.join(ROOT, 'src', 'content', 'kinds', 'sprites.ts')
+    return os.path.exists(p) and 'carryAt' in open(p).read()
 
 
 def main():
