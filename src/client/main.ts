@@ -19,7 +19,6 @@ import { drawnCantina } from './draw/cantina.ts';
 import { drawnLevels } from './draw/levels.ts';
 import { drawnCompletion, levelPieces } from './draw/completion.ts';
 import { drawnBanner } from './draw/banner.ts';
-import { drawnAlert } from './draw/alert.ts';
 import { drawnHud } from './draw/hud.ts';
 import { drawnSight, watchSightEvents } from './draw/sight.ts';
 import { drawnHeist, watchHeistEvents } from './draw/heist.ts';
@@ -144,7 +143,6 @@ const debug = {
     /** Step 9: the carriers drawn with their orb, the loose orbs and the glowing holders this frame (src/client/draw/powers.ts). */
     powers: { carriers: [], orbs: [], holders: [] } as ReturnType<typeof drawnPowers>,
     banner: null as ReturnType<typeof drawnBanner>,
-    alert: { level: 0, whistle: null } as ReturnType<typeof drawnAlert>,
     /** Step 19: each person's sight band this frame drew (facing, box, lit cells) and the unseen marks up (src/client/draw/sight.ts). */
     sight: null as ReturnType<typeof drawnSight> | null,
     /** Step 19: the clean getaways this page announced (src/client/draw/heist.ts). */
@@ -317,7 +315,6 @@ function play(worldName: string): void {
     d.hud = drawnHud();
     d.powers = drawnPowers();
     d.banner = drawnBanner();
-    d.alert = drawnAlert();
     d.sight = drawnSight();
     d.heist = drawnHeist();
     d.hall = drawnHall();

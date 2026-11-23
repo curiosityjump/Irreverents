@@ -118,7 +118,6 @@ push. All are `DRAFT:`.
 
 | Name | What it is | Written by | Read by |
 |---|---|---|---|
-| `world.alerts` | top-level: by area, its alert level (0-3), for the pips wherever the party is; never deleted | town tiers (`src/sim/npc/alert.ts`, raise and lower only) | `src/client/draw/alert.ts` |
 | `world.found` | top-level world field: by level id, the piece ids found | glints | the entrance sign and menu row, puzzles |
 | `world.banked` | top-level: prize thing ids a hero carried out of their place | heist | glints (`from: { "prize": id }`), waves (the stealth legend) |
 | `world.cargo` | top-level: hero entity id to the prize thing it carries now | heist | the HUD plate, powers (a hard hit may drop it), risk (a throw-out puts it back) |
@@ -441,10 +440,8 @@ the bell's. `content/dispatch/castle-street.json` walks level 2's row (two)
 and level 3's (three) in by both street doors, under a cap of 8 people;
 at the top each further call brings the last row again; at alert 0 they walk
 out and are gone. Every hero, solo, gets out of the street at the cap
-(`step4-tier-away-at-the-most-*`). **Push 2 landed (the page):** the gauge over a
-whistling guard, the pips under the party plate in every room (`world.alerts`),
-a banner per new pip; a raging guard who rang the bell himself whistles too.
-Waits: push 3 (the armoured guard).
+(`step4-tier-away-at-the-most-*`). Waits: push 2 (the gauge, the pips that
+follow you, `world.alerts`), push 3 (the armoured guard).
 **Part 1b, waits: the Hall's lasting store** for the world everyone shares
 (wire `src/server/store.ts`, give each record its lasting number on the
 server, dedupe on load), by a builder given the `src/server` edits by name.

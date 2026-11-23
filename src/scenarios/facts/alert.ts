@@ -6,16 +6,13 @@ import type { Fact } from '../types.ts';
  * { "fact": "alert", "area": "test-street", "between": [0, 600], "is": 0 }
  * An area's alert level (0 to 3) at a tick, or on every tick of a span,
  * both ends included. An area is a room id tonight; one with no alert
- * entity yet is at 0. With `"shown": true`, the level the world shows the
- * party instead (`world.alerts[area]`, Step 4's town tiers: what a page in
- * any room draws as pips), 0 when absent.
+ * entity yet is at 0.
  */
 const fact: Fact = {
   id: 'alert',
   validate(spec, scenario, content) {
     const out: string[] = [];
-    checkOnly(spec, ['area', 'at', 'between', 'is', 'shown'], out);
-    if (spec.shown !== undefined && spec.shown !== true) out.push(`shown: must be true or left out, but is ${JSON.stringify(spec.shown)}`);
+    checkOnly(spec, ['area', 'at', 'between', 'is'], out);
     if (typeof spec.area !== 'string' || !(spec.area in content.rooms)) out.push(`area: must be a room id, but is ${JSON.stringify(spec.area)}`);
     if (![0, 1, 2, 3].includes(spec.is as number)) out.push(`is: must be 0, 1, 2 or 3, but is ${JSON.stringify(spec.is)}`);
     const b = spec.between;
@@ -29,11 +26,10 @@ const fact: Fact = {
   test(spec, rec) {
     const [from, to] = spec.at !== undefined ? [spec.at as number, spec.at as number] : (spec.between as [number, number]);
     for (let t = from; t <= to; t++) {
-      const w = rec.history[t];
-      const level = spec.shown === true ? (w?.alerts?.[String(spec.area)] ?? 0) : (w?.entities.find((x) => x.id === `~alert:${String(spec.area)}`)?.c.alert?.level ?? 0);
+      const level = rec.history[t]?.entities.find((x) => x.id === `~alert:${String(spec.area)}`)?.c.alert?.level ?? 0;
       if (level !== spec.is) {
         const changes = rec.events.filter((ev) => ev.type === 'alert-changed').map((ev) => (ev.type === 'alert-changed' ? `${ev.from}->${ev.to} at tick ${ev.tick}` : ''));
-        return `at tick ${t} the ${spec.shown === true ? 'shown ' : ''}alert of ${String(spec.area)} is ${level}, expected ${String(spec.is)}; alert changes in this run: ${changes.join(', ') || 'none'}`;
+        return `at tick ${t} the alert of ${String(spec.area)} is ${level}, expected ${String(spec.is)}; alert changes in this run: ${changes.join(', ') || 'none'}`;
       }
     }
     return null;

@@ -538,10 +538,3 @@ Builder `session_017WiGzFxZZnM2VcdqhXnrNu`. Push 1 (the sim), 2026-11-23.
   him (they cannot); arrivals hit each other (friendly fire stays).
 - **Not verified:** anything on a page (push 2 draws the gauge and pips);
   `check:live` exercises nothing of this push.
-
-Push 2 (the page), 2026-11-23:
-- **Controls watched to fail:** `-pips-cross-a-door` and `scripts/checks/step4-tiers.ts`: `world.alerts` never written (the shown alert 0; A's page shows the street at 1). `-raging-guard-whistles`: the raging-guard branch off (no whistle). The e2e fact `tiers`: its control is the level read before the gauge (one pip fewer); not run with code broken.
-- **Found by tracing the phone:** in the usual fight the guard rings the bell himself and is never a responder, so push 1's whistle never came; widened (decisions-log, "Step 4: pips"). A grappler's later blows flatten a worn guard, and a flattening blow is never perceived (slice 1), so those give him no new cause; lighter hits do.
-- **Screenshots:** `docs/plan/step-4-shots/tiers-*-750x340.png` (the e2e phone, iPhone 14 sideways): pips under the plate in the street and in the throne room. **Not taken:** 390×664 upright, a frame with the gauge up, a row arriving at each door.
-- **Flag (not mine to change):** the level banner draws over the king's speech box in the throne room (banner.ts and the speech drawer, other slices').
-- `npm run e2e`'s `tiers` takes about 70 s (a 45 s wait while the guard goes to ring).
