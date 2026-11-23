@@ -169,6 +169,16 @@ button art is in the library mirror, not in `assets/`.
   `/debug/errors`; a friend whose page went away looks away. Everything
   else in this step waits until the owner has played.
 
+- **Slice A parts 1 to 3 reviewed by re-running** (lead, 09:32 UTC, at
+  3f3150d): `npm run build`, `npm run check` and the full `npm run e2e`
+  green here; screenshots read at 667×375, 750×340 and upright (icons
+  crisp, the crate and ledge that were hidden are visible, "Use" is a
+  word); control watched: with the controls painted solid, facts
+  i-667x375 and i-736x414 both fail; the live address answers
+  `/debug/errors` (empty) and `/healthz` counts `errors`. Not verified:
+  the error report's own control (the worker's), and anything on a real
+  iPhone. Part 4 (a friend who went away) still with the worker.
+
 ## Open with the owner
 
 ## Handoff notes
