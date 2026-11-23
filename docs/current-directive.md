@@ -137,9 +137,14 @@ nothing waits in a chat. The owner is asleep: a question that would stop
 a step gets the asker's own best reading, built so that either answer is a
 small change, marked `DRAFT:`.
 
-**Status (orchestrator session_017WiGzFWfLir1ATiSP7c5E5, 2026-11-23 04:00
-UTC):** nothing achieved yet beyond the deploy being proven (M1 serves a
-probe). Step 1 open, about to be claimed. Steps 2–7 queued.
+**Status (orchestrator session_017WiGzFWfLir1ATiSP7c5E5, 2026-11-23 04:12
+UTC):** the deploy is proven (a push is live in under a minute). Step 1 is
+claimed (lead session_017WiGzEwLs3ng2ZPpRZgctn) and its bare skeleton is
+live: a real build, the server, `/healthz`, a WebSocket. No game on screen
+yet. Steps 2–8 are written and queued; 2, 3 and 4 open at Step 1's first
+gate, 5 and 8 when it closes, 6 and 7 behind the map and the people.
+Results 2–7 above map to Steps 5, 2, 3, 4, 6, 7; Step 8 (the look and the
+sound, as the ordered art arrives) runs alongside.
 
 ## History
 
