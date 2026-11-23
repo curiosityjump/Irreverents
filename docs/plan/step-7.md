@@ -280,6 +280,17 @@ bodiless `hall:watch`; `scripts/` is Step 1's, so settle it with that
 lead. Add "start from the patch" and these to the brief before
 relaunching.
 
+**The server is ready for the wiring** (Step 1's lead, 08:51 UTC; not
+re-measured by me): Gate 2 is live at 4678680. The two hooks are in
+`src/server/game.ts`: `makeWorld` (where a room's world is created and
+`populateRoom` is called) and `onEvents` (where each tick's events
+arrive). Measured by Step 1: an unknown-kind entity with 500 bytes in
+`c` replicates to both clients and is left alone by drawing, and adds
+about 660 bytes to a 1557-byte snapshot sent 20 times a second, so keep
+such entities few and change `c` rarely. One more push is coming from
+Step 1's worker in `src/net` and `src/server/game.ts`: keep the edit
+small and rebase right before pushing.
+
 **To resume:** relaunch slice B from its brief (fresh session, canonical
 spawn call), review it, then write slice 2 from "Briefs" and "Reviews"
 above (wiring, the owed items, real gate E scenarios; when the wiring
