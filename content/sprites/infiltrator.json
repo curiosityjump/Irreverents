@@ -1,0 +1,27 @@
+{
+  "//": "DRAFT: stand-in drawn by tools/art/heroes/make.py (which also wrote this file; change the numbers there). A delivered sheet replaces it by editing this file.",
+  "id": "infiltrator",
+  "image": "sprites/heroes/infiltrator.png",
+  "cell": {"w": 32, "h": 32},
+  "anchor": {"x": 11, "y": 20},
+  "fps": 8,
+  "frames": {
+    "idle": [0, 0, 0, 1, 1, 1, 0, 0, 0, 2, 2, 2, 0, 3, 0, 1, 1, 1, 0, 0, 0, 2, 2, 2],
+    "run": [8, 9, 10, 11, 12, 13],
+    "air": [16, 17],
+    "jump": [18, 19],
+    "fall": [20, 21],
+    "attack": [24, 25, 26, 27],
+    "grab": [32, 33],
+    "carry": [40, 41],
+    "carryRun": [48, 49, 50, 51, 52, 53],
+    "throw": [56, 57, 58],
+    "hurt": [64, 65],
+    "down": [72, 73],
+    "held": [80, 81],
+    "hide": [88],
+    "talk": [96, 97],
+    "flap": [104, 105]
+  },
+  "fpsBy": {"run": 14, "carryRun": 14, "attack": 18, "throw": 12, "grab": 12, "hurt": 8, "down": 2, "held": 8, "flap": 10, "talk": 6}
+}
