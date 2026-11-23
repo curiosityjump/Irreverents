@@ -127,7 +127,12 @@ may overrule one with a measurement, recording why here.
   04:16 UTC: the owner asked how to add a Railway volume and was told to
   mount it at `/data`; Railway then sets `RAILWAY_VOLUME_MOUNT_PATH` and
   `RAILWAY_VOLUME_NAME` for the running server by itself). Report
-  whether that variable is set and the path is writable, nothing more;
+  whether that variable is set and the path is writable, **and whether it
+  is a real mounted volume** (`RAILWAY_VOLUME_NAME` is set too, and the
+  path sits on a different device than `/`): at 04:19 UTC the owner
+  wrote "I added variable volume mount path with name /data", which may
+  be a hand-typed variable rather than an attached volume, and a typed
+  variable must not read as storage. Nothing more than that;
   no session should have to ask the owner whether they did it. Using the
   storage is not this step's job (Step 7's Hall records are the first
   customer). Known from Railway's docs: the volume is mounted when the
