@@ -538,3 +538,15 @@ Builder `session_017WiGzFxZZnM2VcdqhXnrNu`. Push 1 (the sim), 2026-11-23.
   him (they cannot); arrivals hit each other (friendly fire stays).
 - **Not verified:** anything on a page (push 2 draws the gauge and pips);
   `check:live` exercises nothing of this push.
+
+Push 2, outcome (2026-11-23 ~23:55 UTC): pushed at b441908, live, then **reverted at
+0457923**: the new `check:live` fact `tiers` failed on live (alert drawn at 1 after
+14.7 s, then 12 taps and the gauge never drawn; every other live fact passed, game
+healthy). Locally the same fact passed three times in a row (e2e). Not yet diagnosed;
+leading guesses, unmeasured: on live the grappler's taps flatten the worn guard (a
+flattening blow is never perceived, so no new cause), or the drawn guard is smoothed
+and late so `closeIn` taps miss. The push's code is good to re-land as it stands
+(scenarios, the real-server check and local e2e green); what it needs is a `tiers`
+fact that holds over live latency, e.g. a phone character that does not flatten him
+(the skirmisher), or `closeIn` waiting for the guard to stand. Push 3 (the armoured
+guard) not started. The builder stopped here at its context budget.
