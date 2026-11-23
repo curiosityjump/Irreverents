@@ -133,6 +133,38 @@ extends from its own file with `declare module '../types.ts' { … }`
 | **kind of scenario fact** | `src/scenarios/facts/<id>.ts` default-exporting a `Fact`. | One new file |
 | **event** | Extend `EventMap` beside the code that emits it; `ctx.emit('name', {...})`. | In your own file |
 
+## Bodies: the events and state other steps read (Step 2)
+
+`DRAFT:` names fixed 2026-11-23 04:40 UTC by the Step 2 lead with the
+Step 1, 3 and 4 leads, before the code; Step 2's workers fill in any
+extra fields here as they land. Every body is Step 2's, player or not.
+Ids are entity ids; `by` is who did it, `target` whom it was done to.
+
+| Event | Fields | Means |
+|---|---|---|
+| `hit` | `by`, `target`, `player` | an attack landed on `target` |
+| `grabbed` | `by`, `target`, `player` | `by` picked `target` up |
+| `thrown` | `by`, `target`, `player` | `by` threw `target` |
+| `released` | `by`, `target`, `player` | `target` was set down, broke free or was let go |
+| `impact` | `entity`, `player`, `other`, `speed` | a flying body struck `other` (an entity id), or a wall, floor or ceiling (`other: null`); one event per body involved |
+| `flattened` | `target`, `by` | `target` is knocked out (`by` may be null) |
+| `recovered` | `target` | `target` is back in play |
+
+In `hit`, `grabbed`, `thrown` and `released`, `player` is the player id
+of `by` (null when a non-player did it); in `impact` it is the player id
+of `entity`.
+
+- **Knocked out is `entity.c.flattened`**, present on any entity exactly
+  while it is out (at least `{ ticksLeft }`). The body stays in the
+  world where it fell.
+- **A body that is not a player acts through `entity.c.input`**: an
+  `Input` (`x`, `y`, `held`) that the verbs system gives to that body's
+  verbs exactly as it gives a player their device's input. Step 4's
+  systems write it; they never move a body themselves. A non-player
+  body with no `c.input` holds nothing.
+- **A kind with no weight or toughness numbers** gets the world
+  defaults, so any character kind can be hit, grabbed and thrown.
+
 ## Where art plugs in
 
 Nothing is drawn from images yet; `src/client/render.ts` draws rectangles.

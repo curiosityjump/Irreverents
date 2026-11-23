@@ -95,14 +95,22 @@ Then tell me push 1 is on `main` (see "Where your questions go").
 
 Agreed by message with the Step 1, 3 and 4 leads; use these exactly.
 
-- **Events**, each naming entity ids, the target possibly a non-player:
-  `hit { by, target }`, `grabbed { by, target }`, `thrown { by,
-  target }`, `released { by, target }`, `flattened { target, by }`
-  (`by` may be null), `recovered { target }`, and your `impact`. Add
-  `player` beside them where a scenario needs to match one. Step 4's
-  people react to these (its worker adds a readable
-  `StepContext.events` to `src/sim/types.ts` and `step.ts`; expect it
-  when you rebase).
+- **Events: the table in `docs/architecture.md`, "Bodies: the events
+  and state other steps read"**, is the contract (names and fields).
+  Emit exactly those; add fields there, never rename. Step 4's worker
+  adds a readable `StepContext.events` to `src/sim/types.ts` and
+  `step.ts`; expect it when you rebase.
+- **A body that is not a player can act (part of push 1).** Step 4
+  never moves a body: it writes an `Input` to `entity.c.input` and the
+  body's own verbs do the rest. So change `src/sim/systems/verbs.ts`
+  (it is yours now: every body is Step 2's) to run verbs for every
+  entity whose kind lists any, with the player's input for a player
+  and `entity.c.input` (or nothing held) otherwise; declare
+  `Components.input`. Your attack and grab must therefore work when a
+  non-player does them, to a player included; who may hurt whom is by
+  `player === null` or not, never by "is it an NPC kind".
+- **Scenario files are named `step2-hit-*.json`** (the prefix rule
+  changed at 5df1ef0), not `hit-*`.
 - **Out cold is `entity.c.flattened`**, present on any entity (player
   or not) exactly while it is out, with at least `{ ticksLeft }`.
   Step 4 reads it. A flattened body stays in the world, lying where it
@@ -291,6 +299,7 @@ message. Tag each `"gate": "A"`. Minimum set:
    scenarios) leave it on the floor with a refusal event.
 8. `hit-flattened-returns`: a dummy worn to zero is flattened, absent
    from play for the wait, then back.
+   (Read every `hit-…` name above as `step2-hit-…`.)
 9. A screenshot of a fight on the built page (`npm run build && npm
    start`, headless Chromium is installed: `require('playwright')`,
    never `playwright install`), read by you: bodies, dust, no number

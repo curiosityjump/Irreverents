@@ -195,7 +195,7 @@ before you build.
 
 Rung 3 of `docs/verifying-and-finishing.md`: scenarios in `npm run
 check`, each with a control you watched fail, named in the commit
-message. Tag each `"gate": "A"`. You will need a fact that says which
+message. Tag each `"gate": "A"`. **Name the files `step2-body-*.json`** (the prefix rule changed at 5df1ef0; read every `body-…` name below as `step2-body-…`). You will need a fact that says which
 character a player is at a tick (a new file in `src/scenarios/facts/`,
 for example `character`). Minimum set:
 
