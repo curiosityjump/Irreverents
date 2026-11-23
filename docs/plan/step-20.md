@@ -135,3 +135,7 @@ Nothing is reachable by a player until builder B's push 2. Notes:
 - The test room's barrier puts its part state in every world (as every
   room's parts do): the `together` check's snapshot grew 2376 to 2477 bytes.
 - Not verified: anything on a page (push 1 has no drawing and no seat).
+- Push 1's e2e runs (no client, server or network code changed): 3 runs,
+  1 green, 1 failed `h1`, 1 failed `h1` and `h2` (the known flakes,
+  `handoff-prompts/step-5-e2e-flakes.md`). build, check, check:deployed and
+  check:live green at a2bee99.
