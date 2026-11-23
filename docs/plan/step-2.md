@@ -486,3 +486,18 @@ rows re-read. See the handoff notes below.
   the `?tune` panel; `docs/architecture.md`'s "I need to add…" rows
   re-read. All held by the orchestrator's lean rule.
 
+
+- **Lead `session_017WiGzGN9egot3JUvSMBBA9`, 12:25 UTC: the dials slice
+  reviewed at dd4f83c; worker archived, brief deleted by it.** Re-run by
+  the lead after pulling 98431b0: build, check (incl. new
+  `tune-server`), and the whole `npm run e2e` (36 ok, 1 todo: the
+  known `t-switch-free`). Control of the lead's own: the server's range
+  test removed (`refuseChange`, `src/sim/tuning-rules.ts`) → `tune-server`
+  failed with 7 problems; restored. The worker's `scripts/lib/e2e-touch.ts`
+  change only exports helpers; no fact weakened. Looked at the panel at
+  iPhone size both holds: opens, scrolls, covers no control. **For a
+  later pass (`DRAFT:`, not blocking):** numbers are listed
+  alphabetically, so the most-felt ones (top speed, jump) are not first;
+  sliders across ranges like 0–100000 are coarse. **Not verified by the
+  lead:** a real iPhone; the live address (worker's `check:live` and a
+  live private-world change only).
