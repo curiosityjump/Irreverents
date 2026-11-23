@@ -174,21 +174,52 @@ orchestrator when it can answer faster than they can decide. Only what
 the owner alone can supply goes to `docs/questions-inbox.md`, and nothing
 waits on it.
 
-**Status (orchestrator session_017WiGzJeh7Tuov59d8XYmru, 2026-11-23 09:55
-UTC, all work stopped for the owner's morning):** results 1 to 6 are on
-the live game (ade2616) by scripted check: two players together with
-touch and reconnect; phone-sized controls; hit, grab, carry, throw and
-three heroes; a five-room kingdom with a two-player gate, two unmarked
-routes and a secret; townspeople with moods, a bell, an alarm and a guard
-who chases through doors; the king, mid-speech and throwable through his
-window. `npm run gates`: 5 of 6 (E, the Hall, is not on the page; result
-7). Result 8 (the end-to-end tour) was not run: nobody, human or script,
-has played the whole thing through, and no real iPhone has been tried.
-The night lost about three and a half hours to the shared usage limit
-(04:58 to 08:26 UTC); the weekly limit showed a warning at 09:40 UTC, so
-everything was stopped at 09:50 to leave the owner room to talk and for
-one fix. **No code push while `/healthz` shows players above 0.** What is
-owed next is in `docs/for-the-orchestrator.md`, handoff entry.
+**Status (orchestrator session_017WiGzHX8g2sXimNRnqp2oZ, 2026-11-23 10:40 UTC, picked up from
+session_017WiGzJeh7Tuov59d8XYmru; nothing is building):** results 1 to 6
+are on the live game (84c1b92; `main` is ahead by documents only) by
+scripted check: two players together with touch and reconnect; phone-sized
+controls; hit, grab, carry, throw and three heroes; a five-room kingdom
+with a two-player gate, two unmarked routes and a secret; townspeople with
+moods, a bell, an alarm, a guard who chases through doors, and hiding
+places; the king, mid-speech and throwable through his window. Gates: 5 of
+6 at the last run (09:55 UTC; E, the Hall, is not on the page; result 7).
+Result 8 (the end-to-end tour) was not run: nobody, human or script, has
+played the whole thing through, and no real iPhone has been tried. Live at
+10:38 UTC: players 0, error log empty.
+
+**The allowance.** `rate_limit_info` (`get_session`, no id) read
+`allowed_warning`, `seven_day_overage_included`, at 10:36 UTC; it resets
+about 13:00 UTC. Until then: one worker at a time, only for what the owner
+asks for or a fault on live. **No code push while `/healthz` shows players
+above 0**; read `/debug/errors` before any code push (a deploy empties it).
+
+**Sessions.** No lead is working. Step 5's lead
+`session_017WiGzJfkNbzJfpRVPhWoeK` is fresh and holds Step 5 for after the
+owner has played. The first leads of Steps 2, 4, 6 and 7 are idle with
+large contexts and were not woken or re-pointed (a wake at that size costs
+allowance and they have nothing in flight); their claims were released in
+`docs/plan.md`. The Step 7 lead is still owed one correction if it is ever
+woken: it did not delete another step's entries (Step 4's lead withdrew
+the claim). Past orchestrators `session_017WiGzFWfLir1ATiSP7c5E5` and
+`session_017WiGzJeh7Tuov59d8XYmru` only forward; never archive them.
+
+**Owed next, in the order I would take it, after the owner has played:**
+1. Whatever the owner says first.
+2. Step 3 item (a): two phone-sized pages by touch through the kingdom
+   (the two-plate gate, roofs, the secret, the window). Nobody has played
+   it. This is most of Step 10's tour; consider doing them as one.
+3. The switch gap: two players can become the same hero (the page decides
+   the switch without seeing friends' heroes); the owner's rule is one
+   person per hero. Fix is in the network layer (Step 5's lead knows it).
+4. Step 4 slice 2 push 4 only (push 3, hiding counts as unseen, is live at
+   f164e0c): the blow that knocks someone out being noticed, someone
+   finding a knocked-out person calling, and the
+   `step4-caller-knocked-out` control; from the held brief and
+   `docs/plan/step-4.md`, "Handoff notes".
+5. Step 7: relaunch the detector, then the wiring slice (gate E).
+   `CLAUDE.md`'s "Nothing is persisted" line changes then (entry above).
+6. Step 6 slice B, Step 8 (the sound pack is in the repo; hero art v2,
+   townspeople, tiles and music still in ChatGPT's queue), then 9, 11-15.
 
 ## History
 

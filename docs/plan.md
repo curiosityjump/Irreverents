@@ -36,7 +36,7 @@ re-measured by the command in `docs/measures.md`, never quoted from here.
 
 | | Thing being measured | Today (2026-11-23 09:55 UTC, re-run by orchestrator session_017WiGzJeh7Tuov59d8XYmru) | Where it should get to |
 |---|---|---|---|
-| M1 | **Live:** the address serves what is on `main` | the game at ade2616; `main` ahead by documents only; nobody playing; error log empty | the game, at the tip of `main`, after every push |
+| M1 | **Live:** the address serves what is on `main` | the game at 84c1b92 (re-read 10:38 UTC by session_017WiGzHX8g2sXimNRnqp2oZ); `main` ahead by documents only; nobody playing; error log empty | the game, at the tip of `main`, after every push |
 | M2 | **Together:** two players on separate devices share one world at the live address | yes by script (`npm run check:live`: two pages, one phone-sized by touch, reconnect); no real iPhone tried | yes, proven by script (Step 1) |
 | M3 | **Vision playable:** of the design library's six build gates A–F (doc 24), how many have a scripted player-view check passing | 5 of 6 (A, B, C, D, F; `npm run gates`); E (the Hall) not started on the page; none of it played by a person or on a real iPhone | F and A by the owner's morning, then B, C, D, E |
 
@@ -249,7 +249,7 @@ Durable record: `docs/architecture.md`, `docs/mechanisms/network.md`,
 
 ## Step 2 — Moving, hitting, grabbing and throwing
 
-**Status: open, claimed by session_017WiGzGRnRoAeW5Ep5iSycV, 2026-11-23.** (Opened 2026-11-23 04:26 UTC: Step 1's Gate 1 is on `main` and verified; `docs/architecture.md` is the contract.)
+**Status: open, unclaimed — queued behind Step 5.** (Released 2026-11-23 10:40 UTC by orchestrator session_017WiGzHX8g2sXimNRnqp2oZ: its first lead session_017WiGzGRnRoAeW5Ep5iSycV is idle with a large context and is not to be reused; a fresh lead starts from the step file's handoff notes. Held, like Steps 3 and 8, for the usage allowance (resets about 13:00 UTC) and the owner's first play. Earlier: Opened 2026-11-23 04:26 UTC: Step 1's Gate 1 is on `main` and verified; `docs/architecture.md` is the contract.)
 
 Full text: `docs/plan/step-2.md`
 
@@ -261,7 +261,7 @@ Full text: `docs/plan/step-3.md`
 
 ## Step 4 — People who react
 
-**Status: open, claimed by session_017WiGzG4WzuJfHAu3XWoUhc, 2026-11-23.** (Opened 2026-11-23 04:26 UTC: Step 1's Gate 1 is on `main` and verified; `docs/architecture.md` is the contract.)
+**Status: open, unclaimed — queued behind Step 5.** (Released 2026-11-23 10:40 UTC by orchestrator session_017WiGzHX8g2sXimNRnqp2oZ: its first lead session_017WiGzG4WzuJfHAu3XWoUhc is idle with a large context and is not to be reused; a fresh lead starts from the step file's handoff notes. Held, like Steps 3 and 8, for the usage allowance (resets about 13:00 UTC) and the owner's first play. Earlier: Opened 2026-11-23 04:26 UTC: Step 1's Gate 1 is on `main` and verified; `docs/architecture.md` is the contract.)
 
 Full text: `docs/plan/step-4.md`
 
@@ -273,13 +273,13 @@ Full text: `docs/plan/step-5.md`
 
 ## Step 6 — The king who never stops talking
 
-**Status: open, claimed by session_017WiGzH9B4usC2uz4woP8Sa, 2026-11-23.** (Opened 2026-11-23 04:54 UTC: the throne room is on `main` (9a4f6a8). First half first; its second half needs Step 4's rules.)
+**Status: open, unclaimed — queued behind Step 5.** (Released 2026-11-23 10:40 UTC by orchestrator session_017WiGzHX8g2sXimNRnqp2oZ: its first lead session_017WiGzH9B4usC2uz4woP8Sa is idle with a large context and is not to be reused; a fresh lead starts from the step file's handoff notes. Held, like Steps 3 and 8, for the usage allowance (resets about 13:00 UTC) and the owner's first play. Earlier: Opened 2026-11-23 04:54 UTC: the throne room is on `main` (9a4f6a8). First half first; its second half needs Step 4's rules.)
 
 Full text: `docs/plan/step-6.md`
 
 ## Step 7 — A Hall that remembers, and a machine to steal
 
-**Status: open, claimed by session_017WiGzF4QGboHBQtunwprhk, 2026-11-23.** (Opened early, 2026-11-23 04:45 UTC: the store, the detector and the record wait on nobody; see its "How to cut it".)
+**Status: open, unclaimed — queued behind Step 5.** (Released 2026-11-23 10:40 UTC by orchestrator session_017WiGzHX8g2sXimNRnqp2oZ: its first lead session_017WiGzF4QGboHBQtunwprhk is idle with a large context and is not to be reused; a fresh lead starts from the step file's handoff notes. Held, like Steps 3 and 8, for the usage allowance (resets about 13:00 UTC) and the owner's first play. Earlier: Opened early, 2026-11-23 04:45 UTC: the store, the detector and the record wait on nobody; see its "How to cut it".)
 
 Full text: `docs/plan/step-7.md`
 
