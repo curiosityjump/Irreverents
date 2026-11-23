@@ -145,6 +145,23 @@ By the lead, 2026-11-23 04:02–04:10 UTC, in a container like yours.
 
 ## 3 · Traps
 
+- **Two requests from the Step 2 lead** (`session_017WiGzGRnRoAeW5Ep5iSycV`,
+  04:28 UTC). (1) **Fix the effect names early and publish them.** As soon
+  as the server-to-player effects' event names and fields are settled
+  (before the rest of the netcode is done), write them into
+  `docs/architecture.md` (a short "Effects on a player" section: name,
+  fields, who emits, who applies), push, and message the lead the commit;
+  Step 2's worker is emitting its own events (`hit`, `impact`, `grabbed`,
+  `thrown`, `released`) until it can use yours. Cover at least: pushed
+  with a velocity, held by a body, released, moved to a room and place
+  (which also serves a respawn). (2) **Step 2 is adding
+  `populateRoom(world, content, roomId)` to `src/sim/world.ts`** (it puts
+  a room's crates and practice dummies into the world from
+  `content/placements/<room id>.json`). Wherever the server creates a
+  world or first puts someone in a room, and wherever the solo page
+  builds its local world, call it once it exists on `main`; until then
+  there is nothing to call. Check for it each time you rebase.
+
 - **"The netcode must let the world move a player" is now decided, in
   detail** (added 04:26 UTC; read that item in `docs/plan/step-1.md`,
   "What's decided", it supersedes the looser trap about this below). The
