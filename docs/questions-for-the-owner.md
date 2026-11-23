@@ -15,7 +15,7 @@ per answer saying where it went.
   orchestrator; Vision Partner's doorbell goes only here.
 - **Questions per message the owner wants:** 3 (the default; record the
   owner's own number here, quoted, if they set one).
-- **Next id:** Q-009
+- **Next id:** Q-010
 
 ## How to feed this file
 
@@ -71,9 +71,18 @@ entries group them; they are not entries.
 
 ---
 
-## Open (5)
+## Open (6)
 
 **Blocking the plan**
+
+### Q-009 · Is the Railway service connected to this repo, so a push to `main` goes live?
+- **Asked by:** Vision Partner, `session_017WiGzHC3CvjTNZqCuxa8Ex`, 2026-11-23 UTC, parent none
+- **Question:** irreverents-production.up.railway.app currently answers Railway's own "Application not found", so nothing is deployed there yet. Sessions here have no Railway login; they can only push to GitHub. Options: (1) the Railway service already deploys from `curiosityjump/Irreverents` branch `main` automatically, so a push is the deploy; (2) you will connect it before bed; (3) you deploy by hand in the morning.
+- **Unblocks:** a build you can actually open in the morning, and how carefully every session finishes (a push to `main` = going live).
+- **Recommendation:** (Vision Partner's) 2 if not already 1: in Railway, make the `irreverents-production` service deploy from this repo's `main`.
+- **Answer goes to:** `docs/vision.md` "The long-term direction"
+- **Source:** this entry
+- **Blocking:** yes
 
 ### Q-003 · How should we measure that the game is moving the right way?
 - **Asked by:** Vision Partner, genesis, `session_017WiGzHC3CvjTNZqCuxa8Ex`, 2026-11-23 UTC, parent none
