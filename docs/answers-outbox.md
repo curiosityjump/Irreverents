@@ -53,3 +53,8 @@ entry: "first vision written; no plan exists yet", naming the sections.
 - **Recorded in:** `docs/vision.md`: "Where the detail lives", "Who this is for, and why", "What “working” looks like", "The long-term direction", "The measure" (open, Q-003), "Principles that decide most questions", "Frontiers" (7), "Still open".
 - **Action for:** orchestrator (vision-level): write `docs/plan.md` from it. Q-003 (the measure) and Q-007 (first slice) are open in the ledger and shape the first step.
 
+### Vision · The measure (first deadline)
+- **Answer:** "I want this game to be playable by the time I wake up in the morning. Once you are ready, I will start the orchestrator session and let you all work through the night on this."
+- **Recorded in:** `docs/vision.md` "The measure"
+- **Action for:** orchestrator (vision-level): the first plan step is a playable build live at irreverents-production.up.railway.app by the owner's morning (2026-11-23 local). The owner is asleep while you work, so anything needing their approval waits; see the ledger for what they pre-answered.
+

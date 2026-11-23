@@ -109,6 +109,12 @@ by D-055 below.
 
 ## The measure
 
+**The first deadline.** **Owner, 2026-11-23, to Vision Partner, first-hand:**
+> I want this game to be playable by the time I wake up in the morning. Once you are ready, I will start the orchestrator session and let you all work through the night on this.
+
+*(Framing:)* "playable" at the address above, in a phone or computer
+browser. Which slice, and how its quality is judged, is Q-003 / Q-007.
+
 *(Not yet chosen: Q-003. The library offers two candidates, both the
 owner's words: doc 24's ordered build gates A–F, and doc 12's sixteen
 golden scenarios G-01–G-16 with a pass line each.)*
