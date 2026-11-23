@@ -18,6 +18,29 @@ principles). So rooms are data, a door carries anything with a body, a
 room keeps its state when it empties, and `npm run check` refuses a map
 that could trap someone.
 
+## The map tonight (`DRAFT:` layouts, permanent ids)
+
+```
+ undercroft (hidden room) ──[behind the throne: false wall, hidden door]── throne-room ── castle-street
+      └── cellar doorway ── up into the street's west end (DRAFT: moves to the courtyard when it exists)
+```
+
+- **Behind the throne.** The throne room's west wall is three tiles
+  thick. At dais level columns 1-2 are a `false-wall` part and column 0
+  is the hidden walk door `behind-the-throne`, five tiles tall (rows
+  9-13). Above the false wall the wall's inner face (column 2, rows
+  9-11) is a `breakable` with `look: "window"`: a body thrown through it
+  flies on through the tall hidden door and lands in the undercroft
+  (`step3-through-the-window`), so the breach gives the secret away to
+  whoever does it. A walker goes under the window, through the false
+  wall (`step3-behind-the-throne`, gate B, signal 2).
+- **A hidden walk door is painted as wall** on the side where it is
+  marked `hidden` (`draw/room-parts.ts`): a gap in a room's edge is a
+  sign. The undercroft's end of the same connection is not marked
+  hidden, so the way back shows as an opening there.
+- Still to come (the brief's later pushes): `courtyard`, the plate gate,
+  `hall-gallery`, the roofs, the undercroft's vault and the secret.
+
 ## The room file (`content/rooms/<id>.json`)
 
 Everything but `id`, `name`, `tile`, `legend` and `rows` is optional, so

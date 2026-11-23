@@ -1,5 +1,5 @@
 {
-  "//": "DRAFT: the layout is a first pass for the owner to judge; the id and the door ids are permanent. One screen wide, taller than a screen (the camera scrolls up). West end: a dais one tile high with open space on it for the throne (Step 6 places it). INTENT: the west wall behind the dais is three plain tiles thick: slice B hides a passage there (the library's example E-002, 'secret behind throne'); do not thin it or decorate it. Balconies are one-way platforms, each three tiles above the last, the height a hero's jump just clears.",
+  "//": "DRAFT: the layout is a first pass for the owner to judge; the id and the door ids are permanent. One screen wide, taller than a screen (the camera scrolls up). West end: a dais one tile high with open space on it for the throne (Step 6 places it). INTENT: the west wall behind the dais is three tiles thick and hides a way out (the library's example E-002, 'secret behind throne'): at dais level a false wall (drawn as wall, never solid) leads to a hidden door on the west edge and the undercroft; above it a stained-glass window (a breakable, graybox) is the wall's inner face, and a body thrown through it flies on through the same hidden door, which is five tiles tall for that. Do not thin the wall, decorate it or point at it. DRAFT: the window's place and size. Balconies are one-way platforms, each three tiles above the last, the height a hero's jump just clears.",
   "id": "throne-room",
   "name": "Throne Room",
   "tile": 16,
@@ -13,6 +13,15 @@
     "4": "spawn",
     "E": {
       "door": "to-street"
+    },
+    "U": {
+      "door": "behind-the-throne"
+    },
+    "F": {
+      "part": "false-wall"
+    },
+    "S": {
+      "part": "window"
     }
   },
   "rows": [
@@ -25,11 +34,11 @@
     "###.......=====....#",
     "###................#",
     "###................#",
-    "###..====......====#",
-    "###................#",
-    "###................#",
-    "###......===..===..#",
-    "###................E",
+    "UFS..====......====#",
+    "UFS................#",
+    "UFS................#",
+    "UFF......===..===..#",
+    "UFF................E",
     "########.1.2.3.4...E",
     "####################"
   ],
@@ -39,6 +48,15 @@
       "use": "walk",
       "to": {
         "room": "castle-street",
+        "door": "to-throne-room"
+      }
+    },
+    {
+      "id": "behind-the-throne",
+      "use": "walk",
+      "hidden": true,
+      "to": {
+        "room": "undercroft",
         "door": "to-throne-room"
       }
     }
@@ -65,6 +83,31 @@
         16,
         9
       ]
+    },
+    {
+      "id": "behind-the-throne",
+      "hidden": true,
+      "at": [
+        0,
+        9
+      ],
+      "size": [
+        3,
+        5
+      ]
+    }
+  ],
+  "parts": [
+    {
+      "id": "false-wall",
+      "kind": "false-wall"
+    },
+    {
+      "id": "window",
+      "kind": "breakable",
+      "params": {
+        "look": "window"
+      }
     }
   ]
 }

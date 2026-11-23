@@ -1,0 +1,114 @@
+{
+  "id": "step3-behind-the-throne",
+  "proves": "signal 2: a way nothing points at. From a throne-room spawn a player climbs the dais, walks west into the wall behind the throne, which is false, and is in the undercroft without ever using the room's east opening; from there the cellar doorway brings them up into the street (DRAFT: into the courtyard once it exists)",
+  "gate": "B",
+  "room": "throne-room",
+  "players": [
+    {
+      "id": "a",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 259,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 2,
+      "to": 20,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 290,
+      "to": 295,
+      "y": -1
+    }
+  ],
+  "ticks": 330,
+  "expect": [
+    {
+      "fact": "in-room",
+      "player": "a",
+      "at": 90,
+      "room": "throne-room"
+    },
+    {
+      "fact": "event-where",
+      "event": "changed-room",
+      "between": [
+        90,
+        115
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "where": {
+        "entity": "p:a",
+        "fromRoom": "throne-room",
+        "fromDoor": "behind-the-throne",
+        "toRoom": "undercroft"
+      }
+    },
+    {
+      "fact": "in-room",
+      "player": "a",
+      "at": 280,
+      "room": "undercroft"
+    },
+    {
+      "fact": "event-where",
+      "event": "changed-room",
+      "between": [
+        0,
+        330
+      ],
+      "count": [
+        0,
+        0
+      ],
+      "where": {
+        "fromDoor": "to-street"
+      }
+    },
+    {
+      "fact": "event-where",
+      "event": "changed-room",
+      "between": [
+        290,
+        295
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "where": {
+        "entity": "p:a",
+        "fromRoom": "undercroft",
+        "fromDoor": "cellar-up",
+        "toRoom": "castle-street"
+      }
+    },
+    {
+      "fact": "in-room",
+      "player": "a",
+      "at": 330,
+      "room": "castle-street"
+    },
+    {
+      "fact": "clear-of-solid",
+      "player": "a",
+      "between": [
+        0,
+        330
+      ]
+    }
+  ]
+}

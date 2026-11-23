@@ -1,0 +1,102 @@
+{
+  "id": "step3-through-the-window",
+  "proves": "a spectacular breach: a body arriving at the throne room's window at 400 px/s (a stand-in for a throw from the dais) breaks it, flies on through the hidden opening behind and lands in the undercroft; the same kind of body arriving at 100 px/s is stopped by the window and drops onto the dais, breaking nothing",
+  "room": "throne-room",
+  "players": [
+    {
+      "id": "a",
+      "spawn": 3
+    }
+  ],
+  "entities": [
+    {
+      "id": "walker",
+      "character": "crate",
+      "tile": [
+        3,
+        10
+      ],
+      "vx": -100
+    },
+    {
+      "id": "thrown",
+      "character": "crate",
+      "tile": [
+        6,
+        10
+      ],
+      "vx": -400
+    }
+  ],
+  "inputs": [],
+  "ticks": 200,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "part-broken",
+      "between": [
+        0,
+        200
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "where": {
+        "room": "throne-room",
+        "part": "window",
+        "by": "thrown",
+        "look": "window"
+      }
+    },
+    {
+      "fact": "event-where",
+      "event": "part-broken",
+      "between": [
+        0,
+        200
+      ],
+      "count": [
+        0,
+        0
+      ],
+      "where": {
+        "by": "walker"
+      }
+    },
+    {
+      "fact": "velocity",
+      "entity": "walker",
+      "at": 5,
+      "vx": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "changed-room",
+      "entity": "thrown",
+      "between": [
+        5,
+        30
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "in-room",
+      "entity": "thrown",
+      "at": 200,
+      "room": "undercroft"
+    },
+    {
+      "fact": "in-room",
+      "entity": "walker",
+      "at": 200,
+      "room": "throne-room"
+    }
+  ]
+}

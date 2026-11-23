@@ -1,0 +1,46 @@
+{
+  "//": "A breakable whose look is neither wall nor window: the breakable kind's own check refuses it.",
+  "expect": [
+    "content/rooms/control-a.json",
+    "wall",
+    "params.look"
+  ],
+  "rooms": {
+    "control-a": {
+      "id": "control-a",
+      "name": "Control",
+      "tile": 16,
+      "legend": {
+        "#": "solid",
+        "=": "oneway",
+        ".": "empty",
+        "1": "spawn",
+        "P": {
+          "part": "plate"
+        },
+        "G": {
+          "part": "wall"
+        }
+      },
+      "rows": [
+        "##########",
+        "#....G...#",
+        "#.1.PG...#",
+        "##########"
+      ],
+      "parts": [
+        {
+          "id": "plate",
+          "kind": "plate"
+        },
+        {
+          "id": "wall",
+          "kind": "breakable",
+          "params": {
+            "look": "door"
+          }
+        }
+      ]
+    }
+  }
+}

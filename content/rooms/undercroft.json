@@ -1,0 +1,49 @@
+{
+  "//": "DRAFT: the layout is a first pass; the id and the door ids are permanent. A hidden room under the castle. East: the opening behind the throne, five tiles tall (a body thrown through the throne room's window arrives high and drops to the floor; a walker arrives at floor level). A low passage runs west to a doorway that comes up in the castle street for now (it moves to the courtyard when the courtyard exists). The side vault and the secret come in a later push; leave the west end plain. DRAFT: the opening back to the throne room is not marked hidden on this side, so it shows as an opening here: once you are in the hidden room, the way back is plain. In the throne room the same connection is hidden and painted as wall.",
+  "id": "undercroft",
+  "name": "Undercroft",
+  "tile": 16,
+  "hidden": true,
+  "legend": {
+    "#": "solid",
+    "=": "oneway",
+    ".": "empty",
+    "1": "spawn",
+    "T": {
+      "door": "to-throne-room"
+    },
+    "c": {
+      "door": "cellar-up"
+    }
+  },
+  "rows": [
+    "######################",
+    "################.....#",
+    "################.....#",
+    "################.....T",
+    "#....................T",
+    "#....................T",
+    "#.....c..............T",
+    "#..1..c..............T",
+    "######################"
+  ],
+  "doors": [
+    {
+      "id": "to-throne-room",
+      "use": "walk",
+      "hidden": false,
+      "to": {
+        "room": "throne-room",
+        "door": "behind-the-throne"
+      }
+    },
+    {
+      "id": "cellar-up",
+      "use": "enter",
+      "to": {
+        "room": "castle-street",
+        "door": "cellar-doorway"
+      }
+    }
+  ]
+}

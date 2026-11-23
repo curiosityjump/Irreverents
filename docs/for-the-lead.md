@@ -175,3 +175,24 @@ actually read (questions for the owner go through
 **Note:** the villain's first robbery is 4.6 s after the world starts and a player walking straight from the throne room arrives at about 5 s, so the first thing seen is usually "Thief! Begone!". The polite purchase is at about 19 s and every 53 s after. The street's people run from the start of the world whether or not anyone is in the street.
 
 **Note:** Step 3's hiding place under building 1's overhang will share columns 10–17 with the shop. If it should not, move the shop: every column is `DRAFT:`, but `step4-street-people` pins ticks and needs a re-trace.
+
+### step-3-b-kingdom-and-parts.md, 2026-11-23 (pushes 1 and 2 of 4; pushes 3 and 4 not started)
+
+**Done:** push 1 (`cb297c0`): the five part kinds, drawn, in `test-parts`. Push 2: behind the throne (false wall, hidden door `behind-the-throne`, the window, a small `undercroft`, the cellar doorway up into the street). Gate B gains `step3-behind-the-throne` (signal 2). **Not done, for the next session:** push 3 (courtyard, plate gate, gallery, roofs: signal 5 and `step3-over-the-roofs`), push 4 (the secret, signal 3; placing `hide` parts in the street and the throne room; the undercroft's vault). The `hide` kind itself is on `main`.
+
+**For Step 6:** the window is part `window` in `throne-room`; its event is `part-broken: { room: "throne-room", part: "window", by, player, speed, look: "window" }`.
+
+**Stand-ins:** `step3-through-the-window` and `step3-wall-breaks` use a crate given a starting speed, not a real grab-and-throw. No scenario yet throws a real body (or the king) through the window from the dais; whether Step 2's throw reaches 200 px/s sideways at window height from where a carrier can stand is unmeasured.
+
+**Flag (network):** each page steps its own world with only its own character in it. So between the server's snapshots a page's local `room-plate` sees nobody on a plate another player is standing on, sets it up and emits `plate-up`, until the next snapshot sets it down again. The gate itself is safe (its countdown is refreshed by every snapshot while the server sees the plates held), but another player's plate may flicker on screen and local `plate-up`/`plate-down` events are noise. Not seen on a real pair of devices; look at it when push 3 puts plates in the courtyard. A page-side rule "parts are the server's while online" would fix it, in Step 1's layer.
+
+**Flag:** a body thrown through the window keeps its full speed into the undercroft and slides the length of the passage (a plain crate with a starting speed has no friction; a really thrown body is slowed by Step 2's drag). Looks right for a throw; untested with one.
+
+**Flag:** the brief asked for one more control "a room whose hidden connection is an enter doorway": slice A's `hidden-doorway-has-a-sign` is exactly that, so none was added. Added instead: `gate-names-no-plates`, `breakable-unknown-look` (the kinds' own parameter checks).
+
+**Flag:** `drawRoom` draws from a tile atlas when a room has one (`content/atlases/`); `draw/room-parts.ts` paints false walls, hidden doors and cracked walls with the graybox wall colour. The day a room with a false wall gets an atlas, the false wall will stand out: the part drawing must use the atlas's solid cell then.
+
+**Flag:** the king's speech bubble covers most of the window from the spawn side (screenshot by eye). Step 6's to place.
+
+**Not verified:** no real iPhone; the hiding place and the false wall in `test-parts` were never seen drawn there (the false wall was seen in the throne room).
+

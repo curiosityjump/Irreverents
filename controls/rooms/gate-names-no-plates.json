@@ -1,0 +1,43 @@
+{
+  "//": "A gate that names no plates could never open: the gate kind's own check refuses it.",
+  "expect": [
+    "content/rooms/control-a.json",
+    "gate",
+    "params.plates"
+  ],
+  "rooms": {
+    "control-a": {
+      "id": "control-a",
+      "name": "Control",
+      "tile": 16,
+      "legend": {
+        "#": "solid",
+        "=": "oneway",
+        ".": "empty",
+        "1": "spawn",
+        "P": {
+          "part": "plate"
+        },
+        "G": {
+          "part": "gate"
+        }
+      },
+      "rows": [
+        "##########",
+        "#....G...#",
+        "#.1.PG...#",
+        "##########"
+      ],
+      "parts": [
+        {
+          "id": "plate",
+          "kind": "plate"
+        },
+        {
+          "id": "gate",
+          "kind": "gate"
+        }
+      ]
+    }
+  }
+}

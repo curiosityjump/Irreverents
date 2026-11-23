@@ -446,3 +446,10 @@ document as a decision of theirs.
 - **To change it:** move one line in `src/client/render.ts` (draw the parts after the bodies) to make the wall swallow the hero.
 - **Where:** `src/client/draw/room-parts.ts`.
 
+### 2026-11-23 · The wall behind the throne is false, the window above it breaks, and both lead to a hidden undercroft
+- **Decided by:** brief-worker, Step 3 slice B (map and window decided by the Step 3 lead in the brief; the layout is this session's)
+- **Instead of asking:** "Where exactly is the secret behind the throne, how big is the window, and where does someone thrown through it land?"
+- **Why this way:** your library gives "secret behind throne" as an example and seats the king "against a stained-glass window; players wonder if they can suplex him through it". So: walk into the wall behind the throne and you pass through it into a hidden undercroft. Nothing marks it; the wall looks like every other wall. The window (three tiles tall, a pale graybox pane) is in the same wall above; anything thrown through it hard enough breaks it, flies on and drops into the same undercroft, so the breach also gives the secret away. A walking hero cannot break it. From the undercroft a plain doorway comes up at the west end of the street for now, so nobody is ever stuck down there; it moves to the courtyard when the courtyard is built. In the undercroft the way back to the throne room shows as an ordinary opening.
+- **To change it:** the rooms are data (`content/rooms/throne-room.json`, `undercroft.json`): move the letters. To make the way back hidden from below too, set `hidden` on the undercroft's door.
+- **Where:** `docs/mechanisms/rooms-and-doors.md`, "The map tonight".
+

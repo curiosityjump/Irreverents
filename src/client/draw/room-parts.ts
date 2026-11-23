@@ -30,8 +30,12 @@ const HIDE_FOLD = '#4f2d3a';
  * stays visible in front of it (docs/decisions-log.md).
  */
 export function drawRoomParts(g: CanvasRenderingContext2D, world: World, room: Room, ox: number, oy: number): void {
-  if (room.parts.length === 0) return;
   const T = room.tile;
+  // INTENT: a hidden walk door is a gap in the room's edge, and a gap is a
+  // sign. It is painted as the wall it sits in, so nothing shows where the
+  // way is (the door still works: draw/room.ts draws a walk door as nothing).
+  const secretDoors = room.doors.filter((d) => d.hidden && d.use === 'walk');
+  if (room.parts.length === 0 && secretDoors.length === 0) return;
   const memory = world.rooms?.[room.id]?.parts ?? {};
   // Cells that look like wall: the room file's solid tiles, false walls and unbroken wall-look breakables.
   const wallLook = new Set<number>();
@@ -39,10 +43,13 @@ export function drawRoomParts(g: CanvasRenderingContext2D, world: World, room: R
     const asWall = part.kind === 'false-wall' || (part.kind === 'breakable' && part.params.look !== 'window' && !memory[part.id]?.broken);
     if (asWall) for (const t of part.tiles) wallLook.add(t.ty * room.w + t.tx);
   }
+  const doorTiles: { tx: number; ty: number }[] = [];
+  for (const d of secretDoors) for (let ty = d.ty; ty < d.ty + d.h; ty++) for (let tx = d.tx; tx < d.tx + d.w; tx++) doorTiles.push({ tx, ty });
+  for (const t of doorTiles) wallLook.add(t.ty * room.w + t.tx);
   const looksSolid = (tx: number, ty: number): boolean =>
     tx >= 0 && ty >= 0 && tx < room.w && ty < room.h && (room.cells[ty * room.w + tx] === TILE.solid || wallLook.has(ty * room.w + tx));
 
-  for (const part of room.parts) {
+  for (const part of [{ id: '', kind: 'hidden-door', tiles: doorTiles, params: {} } as Part, ...room.parts]) {
     const s = memory[part.id] ?? {};
     for (const t of part.tiles) {
       const x = ox + t.tx * T;
