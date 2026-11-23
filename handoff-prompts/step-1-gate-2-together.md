@@ -145,6 +145,33 @@ By the lead, 2026-11-23 04:02–04:10 UTC, in a container like yours.
 
 ## 3 · Traps
 
+- **Three overlaps with the other running steps, settled by a review**
+  (added 04:35 UTC; `docs/plan/step-3.md` and `step-1.md` carry them).
+  (1) **The camera:** you write the first follow camera, in
+  `src/client/draw/room.ts` in place of `roomOrigin`, as one small
+  additive edit that you name in the commit. Step 3 owns the camera from
+  the moment yours lands and writes no second one, so keep it simple
+  (each player's own camera follows their own character, clamped to the
+  room). The same holds for per-player colour in
+  `src/client/draw/entities.ts`, which is Step 2's file once you land:
+  one small named edit. (2) **The touch layer shows a control for every
+  file in `content/actions/`, including ones added after you, without
+  being told.** Step 2 is adding actions tonight and will add its own
+  touch-per-action checks to e2e once you land; a new action that needs
+  an edit to your code to appear on a phone is a defect. (3) **Do not pin
+  positions in the room `graybox-hall` in `e2e` or `check:live`.** Step 3
+  will move the start room (to a throne room) and add rooms. Assert
+  relative facts (B draws A within a few pixels of where A draws itself;
+  A's x grew after holding right; A left the floor after jump), read the
+  start room from the content, never a tile number.
+- **What "done" reads for this step** (step file, feedback signal 3):
+  `npm run check:live` passes, `npm run check:deployed` exits 0 (it
+  exists now; `docs/mechanisms/deploy.md` explains it and the deploy
+  list: **if you add a top-level directory the server or the build
+  needs, add it to both `railway.json` and
+  `scripts/lib/deploy-paths.ts`**, or pushes touching it will not
+  deploy), and `npm run gates` reports gate F.
+
 - **Two requests from the Step 2 lead** (`session_017WiGzGRnRoAeW5Ep5iSycV`,
   04:28 UTC). (1) **Fix the effect names early and publish them.** As soon
   as the server-to-player effects' event names and fields are settled
