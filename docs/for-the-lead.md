@@ -150,3 +150,24 @@ actually read (questions for the owner go through
 **Flag:** `scripts/lib/room-controls.ts` (not this step's) needed one word: a room control with its own `game` drops `content/outposts/` with the real rooms, as it drops placements, or every such control failed on the outpost's missing room. Additive.
 
 **Flag:** Step 4's `charge` holds `attack` continuously, and Step 2's attack starts a swing only on a fresh press, so a charging person with `attack` swings once. The outpost's fighters pulse it (every other tick); Step 4's behaviour is untouched.
+
+## `handoff-prompts/step-11-a-brawl.md` (slice A, done)
+
+- **The brief changed under me at 14:45** (the bell); I read it at the
+  start and saw the change only at the decisions log, after the calm-time
+  version had shipped (fb619f5). The bell is in the following push;
+  calmTime is 0 and the calm scenarios became the bell's.
+- **Two lines in `render.ts`, not one:** the bell is drawn behind the
+  bodies (beside `drawBells`), the counter on top.
+- **One edit in Step 3/scripts:** `scripts/lib/room-controls.ts` drops
+  `content/cantina/` with the real rooms (a map-of-its-own control would
+  otherwise fail on "no room cantina"). One token in a regex.
+- **Not mine, seen while building:** on a page, a player's own world
+  wears its character on landing with the full share (the attacker is
+  not in that world, so `friendly()` says no). The server's wear is the
+  truth and the page takes it with a flatten or move, but a page can
+  believe for a moment it is worn. Step 2's, if it matters.
+- **Not verified:** a real iPhone; two real phones in a brawl (the
+  real-server check uses two headless clients; `npm run e2e` was green,
+  and a phone-sized Playwright page started a brawl by touch and showed
+  the counter).

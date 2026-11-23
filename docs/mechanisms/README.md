@@ -91,6 +91,9 @@ groups) whenever you add one — never update the number from memory.
 - `verbs/jump.ts` (declares) + `systems/physics.ts` (reads), the attack's phases, `beatTicks`, the floor bounce, `systems/body-stun.ts` — game feel: each character's own arc (apex hang, fall gravity, fall cap), a wind-up / strike / recovery swing, a held beat scaled by impact speed, bodies bouncing off floors, and the states drawing reads (`c.landing`, `c.airborne`, `c.stunned`…) (Step 2, 2026-11-23).
 - `content/placements/<room id>.json` + `populateRoom` — who and what stands in a room, as bodies nobody plays; scenarios get them with `"placements": true` or their own `entities` (Step 2; Step 4 owns the kind from here).
 
+**The cantina** (`docs/mechanisms/cantina.md`)
+- `content/roster.json` + `content/cantina/<room>.json` + systems `cantina-*` + `~cantina:<room>` — the endless brawl: one scripted regular per roster character nobody plays, a player's hit on one starts a free-for-all (`c.brawl`), past the edge or flattened is back on a pad at once with a knock-out/fall count, the owner's bell or the last player leaving ends it; nothing runs in a page's own world (Step 11).
+
 **The Hall of Legends** (`docs/mechanisms/hall-of-legends.md`)
 - `src/client/draw/hall.ts` — each pedestal's record redrawn as a small framed picture, a card with no button when a player stands at it, and a three-second banner for a newly hung one (Step 7).
 

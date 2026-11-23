@@ -22,6 +22,8 @@ declare module './types.ts' {
       quiet: number;
       /** Which pad the next body comes back on (an index into the cantina file's pads, wrapping). */
       pad: number;
+      /** The world tick the bell was last rung (-1: never), for drawing it ringing. */
+      rang?: number;
       /** This brawl's count by player entity id: knock-outs (bodies it sent out) and falls (times it was out). Kept until the next brawl starts. */
       score: Record<string, { ko: number; falls: number }>;
     };
@@ -33,14 +35,18 @@ declare module './types.ts' {
      * outside a brawl a friend stays harmless (Step 2's rule).
      */
     brawl?: { attackLaunch: number; attackWear: number; throwWear: number };
+    /** On a player in a cantina room: whether Use was held last tick, to see a fresh press at the bell. */
+    cantinaUse?: { held: boolean };
     /** On a regular: where it is in its walking loop. */
     regular?: { step: number; ticks: number; stall: number; lastX: number };
   }
   interface EventMap {
     /** A player's hit on a regular started a brawl in `room`. */
     'cantina-brawl-start': { room: string; by: string };
-    /** The brawl in `room` settled: nobody attacked for calmTime (`calm`), or no player is left in the room (`empty`). */
-    'cantina-brawl-end': { room: string; why: 'calm' | 'empty' };
+    /** The brawl in `room` settled: a player rang the bell (`bell`), nobody attacked for calmTime (`calm`), or no player is left in the room (`empty`). */
+    'cantina-brawl-end': { room: string; why: 'bell' | 'calm' | 'empty' };
+    /** `by` (a player's entity) rang the cantina's bell, whether or not a brawl was on. */
+    'cantina-bell': { room: string; by: string };
     /** `entity` went past the edge or was knocked flat in a brawl and is back on a pad. `by`: the body credited with sending it (null: nobody). */
     'cantina-out': { room: string; entity: string; player: string | null; by: string | null };
   }
@@ -85,6 +91,14 @@ export function padSpot(content: Content, file: Cantina, index: number, kind: st
   const box = content.characters[kind]!.box;
   const [tx, ty] = file.pads[((index % file.pads.length) + file.pads.length) % file.pads.length]!;
   return { x: tx * room.tile + (room.tile - box.w) / 2, y: (ty + 1) * room.tile - box.h };
+}
+
+/** Whether a body's middle is within reach of the cantina's bell. */
+export function byBell(content: Content, file: Cantina, e: Entity): boolean {
+  const room = content.rooms[file.room]!;
+  const box = content.characters[e.kind]!.box;
+  const [tx, ty] = file.bell.tile;
+  return Math.abs(e.x + box.w / 2 - (tx + 0.5) * room.tile) <= file.bell.reach && Math.abs(e.y + box.h / 2 - (ty + 0.5) * room.tile) <= file.bell.reach + room.tile;
 }
 
 /** Whether a body's middle is outside the cantina's edge. */

@@ -110,6 +110,10 @@ the server.
   When a flight ends, a body that cannot run is stopped dead.
 - **"Friend" means player on player**, never "is it an NPC kind": a
   body nobody plays that attacks a player launches and wears them.
+  **In the cantina's brawl** (Step 11) the struck player's `c.brawl`
+  shares are read first at the three friend sites (`attack.ts`,
+  `impact-walls.ts`, `impact-bodies.ts`), so friends launch and hurt each
+  other there; `c.brawl` exists only in a brawl (`docs/mechanisms/cantina.md`).
 - **A kind with no `weight` or `toughness`** (an NPC kind with
   `"verbs": []`, or `hero`) gets `defaultWeight` and
   `defaultToughness`, so anything can be hit, grabbed and thrown.

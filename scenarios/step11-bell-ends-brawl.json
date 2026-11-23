@@ -1,6 +1,6 @@
 {
-  "id": "step11-brawl-calms",
-  "proves": "a brawl with no player attacking for calmTime (5 s) settles by itself (cantina-brawl-end, why calm): nobody carries c.brawl and the regulars go back to wandering",
+  "id": "step11-bell-ends-brawl",
+  "proves": "the owner's bell stops the fight (Q-008): a player in a brawl walks to the bell in the middle of the cantina and presses Use, and the brawl ends that tick (cantina-brawl-end, why bell); nobody carries c.brawl, the regulars stop fighting and go back to wandering, and nothing raises an alert",
   "room": "cantina",
   "placements": true,
   "players": [
@@ -18,29 +18,59 @@
       "hold": [
         "attack"
       ]
+    },
+    {
+      "player": "a",
+      "from": 30,
+      "to": 85,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 190,
+      "to": 194,
+      "hold": [
+        "interact"
+      ]
     }
   ],
-  "ticks": 600,
+  "ticks": 500,
   "expect": [
     {
       "fact": "cantina",
       "room": "cantina",
       "between": [
         9,
-        307
+        189
       ],
       "on": true
+    },
+    {
+      "fact": "event-where",
+      "event": "cantina-bell",
+      "where": {
+        "room": "cantina",
+        "by": "p:a"
+      },
+      "between": [
+        190,
+        190
+      ],
+      "count": [
+        1,
+        1
+      ]
     },
     {
       "fact": "event-where",
       "event": "cantina-brawl-end",
       "where": {
         "room": "cantina",
-        "why": "calm"
+        "why": "bell"
       },
       "between": [
-        308,
-        308
+        190,
+        190
       ],
       "count": [
         1,
@@ -52,7 +82,7 @@
       "event": "cantina-brawl-end",
       "between": [
         0,
-        600
+        500
       ],
       "count": [
         1,
@@ -63,15 +93,15 @@
       "fact": "cantina",
       "room": "cantina",
       "between": [
-        309,
-        600
+        191,
+        500
       ],
       "on": false
     },
     {
       "fact": "body-state",
       "player": "a",
-      "at": 309,
+      "at": 191,
       "not": [
         "brawl"
       ]
@@ -80,8 +110,8 @@
       "fact": "event",
       "event": "hit",
       "between": [
-        310,
-        600
+        200,
+        500
       ],
       "count": [
         0,
@@ -92,8 +122,8 @@
       "fact": "cantina",
       "room": "cantina",
       "between": [
-        320,
-        600
+        260,
+        500
       ],
       "regulars": [
         "infiltrator",
@@ -102,6 +132,15 @@
         "skirmisher"
       ],
       "moved": 16
+    },
+    {
+      "fact": "alert",
+      "area": "cantina",
+      "between": [
+        0,
+        500
+      ],
+      "is": 0
     }
   ]
 }

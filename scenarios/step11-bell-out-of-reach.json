@@ -1,0 +1,76 @@
+{
+  "id": "step11-bell-out-of-reach",
+  "proves": "Use pressed away from the bell rings nothing and ends nothing, and with the calm timer off (calmTime 0) a brawl nobody stops goes on: fifteen seconds after the last player swing it is still on",
+  "room": "cantina",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 2,
+      "to": 6,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 30,
+      "to": 34,
+      "hold": [
+        "interact"
+      ]
+    }
+  ],
+  "ticks": 920,
+  "expect": [
+    {
+      "fact": "position",
+      "player": "a",
+      "at": 30,
+      "x": [
+        120,
+        150
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "cantina-bell",
+      "between": [
+        0,
+        920
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "cantina-brawl-end",
+      "between": [
+        0,
+        920
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "cantina",
+      "room": "cantina",
+      "between": [
+        9,
+        920
+      ],
+      "on": true
+    }
+  ]
+}

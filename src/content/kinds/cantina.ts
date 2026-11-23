@@ -16,8 +16,15 @@ export interface Cantina {
   edge: { at: [number, number]; size: [number, number] };
   /** [column, row]: a body comes back standing on the floor of one of these tiles, in turn. */
   pads: [number, number][];
-  /** Seconds with no player attacking in the room before a brawl ends. */
+  /** Seconds with no player attacking in the room before a brawl ends by itself; 0: never (the owner's bell ends it, Q-008). */
   calmTime: number;
+  /**
+   * The bell that stops the fight (the owner, Q-008: "There is a bell in the
+   * middle of the cantina player can use to stop fights"): a fresh press of
+   * Use (`interact`) by a player whose middle is within `reach` pixels of the
+   * middle of tile `tile` ([column, row]) ends the brawl at once.
+   */
+  bell: { tile: [number, number]; reach: number };
   /** Shares of a player's attack and throw on another player while a brawl is on (Step 2's friend numbers outside it). */
   friend: { attackLaunch: number; attackWear: number; throwWear: number };
   /** By roster character id. */
@@ -82,13 +89,14 @@ const kind: ContentKind = {
   parse(raw, read) {
     const o = read.object(raw, '');
     if (!o) return null;
-    read.only(o, ['id', 'room', 'edge', 'pads', 'calmTime', 'friend', 'patterns'], '');
+    read.only(o, ['id', 'room', 'edge', 'pads', 'calmTime', 'bell', 'friend', 'patterns'], '');
     const out: Cantina = {
       id: read.string(o, 'id', ''),
       room: read.string(o, 'room', ''),
       edge: { at: [0, 0], size: [1, 1] },
       pads: [],
-      calmTime: read.number(o, 'calmTime', '', { min: 0.5, max: 600 }),
+      calmTime: read.number(o, 'calmTime', '', { min: 0, max: 600 }),
+      bell: { tile: [0, 0], reach: 16 },
       friend: { attackLaunch: 0, attackWear: 0, throwWear: 0 },
       patterns: {},
     };
@@ -102,6 +110,11 @@ const kind: ContentKind = {
     else {
       const pads = o.pads as unknown[];
       pads.forEach((_p, i) => out.pads.push(pair(pads as unknown as Record<string, unknown>, String(i), 'pads', read, 0)));
+    }
+    const bell = read.object(o.bell, 'bell');
+    if (bell) {
+      read.only(bell, ['tile', 'reach'], 'bell');
+      out.bell = { tile: pair(bell, 'tile', 'bell', read, 0), reach: read.number(bell, 'reach', 'bell', { min: 4, max: 64 }) };
     }
     const friend = read.object(o.friend, 'friend');
     if (friend) {
@@ -152,6 +165,8 @@ const kind: ContentKind = {
       c.pads.forEach(([tx, ty], i) => {
         if (!inEdge(tx) || ty < ey || ty >= ey + eh) fail(file, `pads[${i}]`, `[${tx}, ${ty}] is outside the edge: a body put there would be out again at once`);
       });
+      const [bx, by] = c.bell.tile;
+      if (!inEdge(bx) || by < ey || by >= ey + eh) fail(file, 'bell.tile', `[${bx}, ${by}] is outside the edge: nobody could stand by it`);
       const roster = content.roster.characters;
       for (const id of roster) if (!c.patterns[id]) fail(file, 'patterns', `has no pattern for roster character "${id}": every roster character wanders the cantina`);
       for (const [id, p] of Object.entries(c.patterns)) {

@@ -107,8 +107,10 @@ Known limits (`DRAFT:`), for whoever builds combat and doors:
 - **`push`, `hold` and `release` have been run across two pages**
   (a grab, a break-free and a throw of a friend: the `t-*` and `s-*`
   facts of `npm run e2e`, `docs/mechanisms/combat-and-impact.md`,
-  "Across two phones"). `move` shares the same delivery and is untried
-  there.
+  "Across two phones"). `move` has been run across two connections by
+  headless clients (`scripts/checks/step11-cantina.ts`: a player launched
+  out of the cantina is put back on a pad, acknowledged, and runs from
+  there on their own page); not yet in a browser.
 - A page's local world holds **only its own character**. A verb that must
   see others *on the page* does not: `switch` there cannot know which
   members other players hold, and a hit cannot be shown before the server
