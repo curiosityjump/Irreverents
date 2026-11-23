@@ -157,3 +157,17 @@ one the page shows on the button.
   horn never sounded (the brief's `step19-camp-loud-no-horn`); the control
   covers "seen, no horn, not clean". See `docs/plan/step-19.md`, Builder
   notes.
+
+## The lure comes back (push 5)
+
+- A placed `once` thing may carry `restock` (seconds, 1 to 3600;
+  `src/content/kinds/placements.ts`): `heist-restock` (order 615) puts it
+  back, untaken, that long after it was first seen taken (`c.restockFrom`
+  holds the clock; event `restocked`). A good taken in an older kept game
+  comes back that long after the game is next played.
+- Tonight the street's three ordinary goods, 60 s each. `INTENT:` never a
+  bell (a broken bell stays broken), the special good (a piece, found
+  once) or a prize (only `returnPrize` puts one back): the check refuses
+  `restock` on them.
+- Scenarios `step19-restock` (taken at 720, back at 4320, taken again) and
+  `step19-restock-control` (the test shop's good, no restock: never back).

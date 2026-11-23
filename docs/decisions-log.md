@@ -1003,3 +1003,10 @@ document as a decision of theirs.
 - **Why this way:** measured: from the middle of the camp no hero can get in and out unseen (the ledge has no way down but its ends, and the floor passes the lookout or a fighter in plain sight), so a clean job would be impossible. At the east end only one fighter watches it, turning away for three seconds in ten; the flyer can drop off the ledge's end, take it while he looks away, and fly back up. The others can still take it and fight or run (getting caught opens play).
 - **To change it:** the strongbox's `tile` in `content/placements/outpost.json`; the camp scenarios' timings follow it.
 - **Where:** `content/placements/outpost.json`; `scenarios/step19-camp-*.json`.
+
+### 2026-11-23 · Step 19: the shop's ordinary goods are back on the shelf a minute after they are taken
+- **Decided by:** Step 19 builder (brief `loop-heist.md`), `session_017WiGzJqpMTHyoAaus6JsHG`
+- **Instead of asking:** "Once a friend has emptied the shelf, is the shop's little job gone for good in that game?"
+- **Why this way:** your verdict after playing ("no risk"; nothing to try) and "Lure before secret": the take in the shopkeeper's glance behind is the first stealth a player meets, so it should be there every time. The special good, the bells and the prizes never come back: they are found or broken once.
+- **To change it:** the `restock` number on each good in `content/placements/castle-street.json`; remove it and the good is gone for good again.
+- **Where:** `docs/mechanisms/heists.md`, "The lure comes back".

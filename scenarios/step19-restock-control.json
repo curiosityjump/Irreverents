@@ -1,0 +1,80 @@
+{
+  "id": "step19-restock-control",
+  "gate": "E",
+  "proves": "Step 19, the control of step19-restock: a good with no restock (the test shop's goods-3) taken at tick 20 is still gone 75 s later: no restocked event, and a second press there takes nothing",
+  "room": "test-shop",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "hero",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 20,
+      "to": 25,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 4400,
+      "to": 4405,
+      "hold": [
+        "interact"
+      ]
+    }
+  ],
+  "ticks": 4500,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "did",
+      "where": {
+        "deed": "take",
+        "by": "p:a",
+        "thing": "goods-3"
+      },
+      "between": [
+        20,
+        20
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "restocked",
+      "where": {},
+      "between": [
+        0,
+        4500
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "did",
+      "where": {
+        "thing": "goods-3"
+      },
+      "between": [
+        21,
+        4500
+      ],
+      "count": [
+        0,
+        0
+      ]
+    }
+  ]
+}

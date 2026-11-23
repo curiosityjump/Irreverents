@@ -55,6 +55,7 @@ const kind: ContentKind = {
         const def = content.placements[h.room]?.things?.find((t) => t.id === p.thing);
         if (!def) return fail(file, `prizes[${i}].thing`, `room "${h.room}" places no thing "${p.thing}" (content/placements/${h.room}.json, "things")`);
         if (!def.once || def.deed !== 'take') fail(file, `prizes[${i}].thing`, `"${p.thing}" must be a once thing whose deed is "take" (a prize is taken and carried)`);
+        if (def.restock !== undefined) fail(file, `prizes[${i}].thing`, `"${p.thing}" has a restock: a prize never comes back by itself (put back only by returnPrize)`);
         if (def.keeper !== undefined) fail(file, `prizes[${i}].thing`, `"${p.thing}" has a keeper: a prize is stolen, never bought`);
         const other = seen.get(p.thing);
         if (other !== undefined) fail(file, `prizes[${i}].thing`, `"${p.thing}" is already a prize of "${other}"`);

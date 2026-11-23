@@ -1,0 +1,103 @@
+{
+  "id": "step19-restock",
+  "gate": "E",
+  "proves": "Step 19: the shop's ordinary goods come back: a good taken from the real street's shelf (restock 60 in content/placements/castle-street.json) is back, untaken, exactly 60 s after the take (restocked), and can be taken again. Control: step19-restock-control, a good with no restock (the test shop's) never comes back",
+  "room": "castle-street",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "infiltrator",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 10,
+      "to": 92,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 720,
+      "to": 725,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 4400,
+      "to": 4405,
+      "hold": [
+        "interact"
+      ]
+    }
+  ],
+  "ticks": 4500,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "did",
+      "where": {
+        "deed": "take",
+        "by": "p:a",
+        "thing": "street-goods-2"
+      },
+      "between": [
+        720,
+        720
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "restocked",
+      "where": {
+        "thing": "street-goods-2"
+      },
+      "between": [
+        4320,
+        4321
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "restocked",
+      "where": {},
+      "between": [
+        0,
+        4500
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "did",
+      "where": {
+        "deed": "take",
+        "by": "p:a",
+        "thing": "street-goods-2"
+      },
+      "between": [
+        4400,
+        4400
+      ],
+      "count": [
+        1,
+        1
+      ]
+    }
+  ]
+}

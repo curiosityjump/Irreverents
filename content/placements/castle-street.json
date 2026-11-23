@@ -30,9 +30,9 @@
   ],
   "things": [
     { "id": "street-counter", "tile": [12, 10], "deed": "buy", "keeper": "street-shopkeeper", "look": "counter" },
-    { "id": "street-goods-1", "tile": [13, 10], "deed": "take", "once": true, "look": "goods" },
-    { "id": "street-goods-2", "tile": [14, 10], "deed": "take", "once": true, "look": "goods" },
-    { "id": "street-goods-3", "tile": [15, 10], "deed": "take", "once": true, "look": "goods" },
+    { "id": "street-goods-1", "tile": [13, 10], "deed": "take", "once": true, "look": "goods", "restock": 60 },
+    { "id": "street-goods-2", "tile": [14, 10], "deed": "take", "once": true, "look": "goods", "restock": 60 },
+    { "id": "street-goods-3", "tile": [15, 10], "deed": "take", "once": true, "look": "goods", "restock": 60 },
     { "//": "DRAFT (Step 14 slice B): a visibly special good at the end of the shelf; taking it, seen or not, is one of the town's pieces (content/completion/castle-town.json).", "id": "street-goods-rare", "tile": [16, 10], "deed": "take", "once": true, "look": "special" },
     { "//": "DRAFT (Step 4, slice 2): where the street's good people call for help; column 24 is between the shop and the guard's beat and clear of the villain's walk and of the doorway at 28.", "id": "street-bell", "tile": [24, 10], "deed": "break", "once": true, "look": "bell", "side": "good" }
   ]

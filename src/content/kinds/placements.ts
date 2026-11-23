@@ -54,6 +54,13 @@ export interface PlacedThing {
   look: ThingLook;
   /** Slice 2: for a call point (look "bell"), whose side rings it. Left out: "good". */
   side?: 'good' | 'bad';
+  /**
+   * Step 19: seconds after it is taken until it is back on its shelf
+   * (systems/heist-restock.ts). Left out: never (today's behaviour). Only an
+   * ordinary `once` thing: never a bell, the special good or a prize
+   * (content/heists/). DRAFT: the lure exists in every session.
+   */
+  restock?: number;
 }
 
 // Step 14 slice B: 'special', a visibly special good (content/completion/: taking it is a piece).
@@ -131,7 +138,7 @@ const kind: ContentKind = {
           const w = `things[${i}]`;
           const t = read.object(item, w);
           if (!t) return;
-          read.only(t, ['id', 'tile', 'deed', 'keeper', 'once', 'look', 'side'], w);
+          read.only(t, ['id', 'tile', 'deed', 'keeper', 'once', 'look', 'side', 'restock'], w);
           const id = read.string(t, 'id', w);
           if (badId(id)) read.fail(`${w}.id`, `"${id}" ${NOT_AN_ID}`);
           if (out.things!.some((q) => q.id === id)) read.fail(`${w}.id`, `"${id}" is placed twice in this file`);
@@ -145,6 +152,11 @@ const kind: ContentKind = {
           }
           // A bell is a call point (docs/mechanisms/npc-response.md): using it breaks it, so it must be a once thing.
           if (thing.look === 'bell' && !thing.once) read.fail(`${w}.once`, 'a bell must have "once": true (a hero using it breaks it, and a broken bell stays broken)');
+          if (t.restock !== undefined) {
+            thing.restock = read.number(t, 'restock', w, { min: 1, max: 3600 });
+            if (!thing.once) read.fail(`${w}.restock`, 'only a once thing is taken, so only a once thing restocks');
+            if (thing.look === 'bell' || thing.look === 'special') read.fail(`${w}.restock`, `a ${thing.look} never restocks (a broken bell stays broken; the special good is a piece, found once)`);
+          }
           out.things!.push(thing);
         });
       }

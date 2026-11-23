@@ -281,7 +281,10 @@ clean event); a real-server check with two connections that cargo, the banked
 prize and the clean event reach each connection's own world; phone e2e: the
 button's `data-state` reads take at the goods and buy at the counter, and the
 drawn record lists the shopkeeper's band flipping with her facing. **Status:
-briefed, `handoff-prompts/loop-heist.md`.**
+landed 2026-11-23, pushes 1-5 (03b5935, 588ac88, 60175bb, c881c17, then
+restock). What changed from the plan: the camp's strongbox is at column 34,
+not 23 (no clean job was possible there); the loud no-horn scenario was not
+built (`docs/plan/step-19.md`, Builder notes; `docs/mechanisms/heists.md`).**
 
 ## 3 · Power and item stealing
 

@@ -108,8 +108,9 @@ Nothing of Step 16's.
 (Step 19 builder `session_017WiGzJqpMTHyoAaus6JsHG`, brief `loop-heist.md`.)
 
 - **Landed:** push 1 (the Use arbiter) 03b5935; push 2 (the word, banners,
-  plate) 588ac88; push 3 (sight bands, the unseen mark) and push 4 (the
-  prize, cargo, clean getaway): see `git log --grep 'Step 19 push'`.
+  plate) 588ac88; push 3 (sight bands, the unseen mark) 60175bb; push 4
+  (the prize, cargo, clean getaway) c881c17; push 5 (restock): `git log
+  --grep 'Step 19 push 5'`. check:live ok after pushes 1, 2 and 4.
 - **The strongbox moved to column 34** (decisions-log): measured, no
   clean job was possible at column 23.
 - **Not built:** `step19-camp-loud-no-horn` (every watcher knocked flat in
