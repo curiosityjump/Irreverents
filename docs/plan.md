@@ -24,31 +24,38 @@ the first steps.
 
 ## The destination, and the measure
 
-*(Placeholder. Quote the owner's destination from `docs/vision.md`, then
-reduce it to **one checkable measure**: a question whose answer is a
-number or a table a session can re-measure, not a feeling. The project
-this system was derived from used "how much custom code does it take to
-add one new piece of content?", tabulated per kind of content. Each row
-names the command that produced its number (`docs/measures.md`), so the
-next session re-measures instead of trusting it. Every step below should
-move something on this measure, or make it cheaper to.)*
+**Owner, 2026-11-22 (Drive, doc 00), via `docs/vision.md`:**
+> A richly interconnected 2D side-scrolling, Amazing Mirror-inspired action-adventure about a shared party of radically curious, gleefully irreverent heroes whose favorite activity is disrupting a world that takes its stories and prophecies very seriously.
 
-| Thing being measured | Today | Where it should get to |
-|---|---|---|
-| *(row)* | *(measured value, with the command in `docs/measures.md`)* | *(target)* |
+**Owner, 2026-11-23, first-hand, on how to read progress now** (`docs/vision.md`, "The measure"):
+> Focus on getting things playable asap. I want as much of the vision in playable form as possible by the time i wake up tomorrow. I want to be playing the game having fun with it with my brother in law tomorrow morning.
+
+So progress is read off the live game, in this order: is it up, can two
+people play it together, and how much of the vision is in it. Each row is
+re-measured by the command in `docs/measures.md`, never quoted from here.
+
+| | Thing being measured | Today (2026-11-23 03:56 UTC) | Where it should get to |
+|---|---|---|---|
+| M1 | **Live:** the address serves what is on `main` | a deploy probe, commit 7b8dc09 (no game) | the game, at the tip of `main`, after every push |
+| M2 | **Together:** two players on separate devices share one world at the live address | no | yes, proven by script (Step 1) |
+| M3 | **Vision playable:** of the design library's six build gates A–F (doc 24), how many have a scripted player-view check passing | 0 of 6 | F and A by the owner's morning, then B, C, D, E |
+
+**What the measure cannot say.** Whether a gate *feels* right ("joyful",
+"OHH!") is the owner's to judge by playing. A passing script means the
+thing exists and behaves as written, never that it is fun; no session
+grades that (`docs/orchestrator-role.md`, on taste). The golden scenarios
+(doc 12, G-01–G-16) are the owner's yardstick for the whole game later,
+not a count to chase tonight.
 
 ## Where we are
 
-*(Placeholder. A short table of the state of the reference material, the
-procedure, the policies and the codebase itself, each with a count and the
-command that produced it, so "recount before citing" is possible.)*
-
-| | Status |
+| | Status (2026-11-23, first orchestrator's first run) |
 |---|---|
-| **Reference material** | *(e.g. mechanism index entries: `grep -cE '^- ' docs/mechanisms/README.md`)* |
-| **Procedure** | `docs/sop.md` + `docs/briefs.md`; every doc declares its kind. |
-| **Policies** | *(e.g. `INTENT:`/`DRAFT:` markers placed: `git grep -cE '(INTENT|DRAFT):'`)* |
-| **Codebase structure** | *(what exists)* |
+| **Vision** | Written (`docs/vision.md`); the owner's full design is mirrored at `docs/design-library/` (38 documents: `git ls-files docs/design-library | grep -c '\.md$'`). |
+| **Procedure** | `docs/sop.md` + `docs/briefs.md`; every doc declares its kind. First plan; no step closed yet. |
+| **Deploy** | Railway serves `main` at https://irreverents-production.up.railway.app automatically; measured 37 s from push to live for the probe (Step 1, "Measure"). **A push to `main` is the deploy.** |
+| **Codebase** | No game. `server.js` + `package.json` are a deploy probe that Step 1 replaces. No tests, no CI, no hooks (`docs/git-workflow.md`, "This project's environment"). |
+| **Mechanisms indexed** | 1 (`grep -cE '^- ' docs/mechanisms/README.md`): the design-library sync. |
 
 ---
 
@@ -191,12 +198,8 @@ questions.
 
 # Steps
 
-*(None yet. The first step opens as:)*
-
-```markdown
-## Step 1 — <title in plain terms>
+## Step 1 — A live room two people can play in together
 
 **Status: open, unclaimed.**
 
 Full text: `docs/plan/step-1.md`
-```

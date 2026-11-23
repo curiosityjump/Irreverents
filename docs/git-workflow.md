@@ -16,13 +16,15 @@ not guess (measured 2026-11-23 by the first orchestrator):
 - **`main` is the default branch** of `https://github.com/curiosityjump/Irreverents`
   (spell the URL exactly so, capital I). The owner's own first commit of
   `CLAUDE.md` (c2a0bbb) says "All work goes on `main`".
-- **Deploy:** Railway serves the game at
-  https://irreverents-production.up.railway.app. Whether Railway deploys
-  `main` automatically is open with the owner (Q-009 in
-  `docs/questions-for-the-owner.md`). **Until answered, treat a push to
-  `main` as the deploy.** No PR step for routine work. Nobody here has a
-  Railway login: sessions can push to GitHub and load the public URL
-  (`curl`, or the pre-installed Playwright Chromium), nothing more.
+- **Deploy:** Railway builds and serves `main` at
+  https://irreverents-production.up.railway.app, automatically (the owner,
+  2026-11-23: "It's setup to deploy automatically from main yes."; measured
+  the same night, 37 s from push to live). **A push to `main` is the
+  deploy.** No staging, no PR step. Nobody here has a Railway login or its
+  logs: sessions can push to GitHub and load the public address (`curl`,
+  or the pre-installed Playwright Chromium), nothing more.
+  `curl -s https://irreverents-production.up.railway.app/healthz` says
+  which commit is live.
 - **Other long-lived branches:** none. Each cloud session is also handed an
   auto-generated `claude/...` branch (next section); a session may leave
   it as a mirror of `main`, never as the only place work lives.

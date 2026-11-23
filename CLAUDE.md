@@ -209,12 +209,13 @@ code site and the line in `docs/deliberate-designs.md`.
 
 ## Git: one branch
 
-All work goes on **`main`**. The game is served by Railway at
-https://irreverents-production.up.railway.app. Whether Railway deploys
-`main` automatically is open with the owner (Q-009), so **until it is
-answered, treat every push to `main` as the deploy**: don't push what you
-wouldn't want live in two minutes. No PR step for routine work (the
-default; the owner hasn't said otherwise).
+All work goes on **`main`**, and **a push to `main` is the deploy**:
+Railway builds and serves it at
+https://irreverents-production.up.railway.app within about a minute (the
+owner: "It's setup to deploy automatically from main yes."). There is no
+staging and no PR step. Don't push what you wouldn't want the owner and
+their friends playing two minutes later; run the pre-push gate in
+`docs/verifying-and-finishing.md` first, every time.
 
 **Caveat for cloud / remote sessions:** a harness may hand each session an
 auto-generated branch name in its own instructions, and tell it not to push
@@ -234,16 +235,16 @@ noise in chat.
 
 ## Working locally
 
-> **Placeholder.** Setup in three or four bullets: services to start, where
-> config comes from (never a checked-in secret), caches that need a restart
-> to pick up a manual edit.
+> **Placeholder until plan Step 1 lands** (`docs/plan/step-1.md`): three or
+> four bullets on setup, from `docs/architecture.md`. Today the repository
+> holds only a deploy probe (`server.js`); `npm start` runs it.
 
-- **Static gates:** `{{BUILD_COMMAND}}` and `{{STATIC_CHECKS}}`. Say here
-  whether CI runs them before or after a push, and whether a test suite
-  exists — if not, say so plainly, because "the code looks right" will be
-  tempting. The verification ladder, the traps and the definition of done
-  are in `docs/verifying-and-finishing.md`, which is SOP phase 7. **"The
-  code looks right" is not a verification.**
+- **Static gates:** `npm run build` and `npm run check`. No CI: nothing
+  runs them for you, before or after a push, and the push deploys. Until
+  Step 1 lands them, these commands do not exist. The verification
+  ladder, the traps and the definition of done are in
+  `docs/verifying-and-finishing.md`, which is SOP phase 7. **"The code
+  looks right" is not a verification.**
 
 ---
 

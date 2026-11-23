@@ -452,7 +452,7 @@ reaches the same place independently.
   the riskiest claim) when a slice touches shared or concurrent state, or adds
   new core code whose correctness the brief assumed but never tested.** A
   narrower, self-contained slice can get a lighter pass: read the diff for the
-  traps the brief named, re-run {{BUILD_COMMAND}} and {{STATIC_CHECKS}}, and
+  traps the brief named, re-run npm run build and npm run check, and
   confirm the executing session's reported live testing actually covers the
   risk. Say which depth you used and why. A light pass presented as the full
   one is the same trap as an unverified change presented as done.

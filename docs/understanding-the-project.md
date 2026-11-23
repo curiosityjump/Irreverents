@@ -55,33 +55,48 @@ growing, something in it has stopped earning its place.
 
 ## 1 · What this is, and who it is for
 
-> **Placeholder.** A paragraph: what Irreverents is, who it is for,
-> and the understanding underneath it, from `docs/vision.md`. Whether it is
-> a product for strangers or something for a known group changes almost
-> every trade-off — say which.
+Irreverents is a 2D side-scrolling action-adventure played in a browser,
+on phones and computers, **for the owner and their friends** (a known
+group, not strangers). A shared party of gleefully curious heroes ignores
+the world-saving quest; the world, which has made a religion of the
+Hero's Journey, reacts when they do. The owner has designed it in depth:
+`docs/vision.md` is the short version in their words, `docs/design-library/`
+the full library (start at its `README.md`; its PROPOSED / EXAMPLE / OPEN
+labels are literal). **Read `docs/vision.md` early.**
 
-Then the two or three consequences that decide real questions, phrased as
-tie-breakers (e.g. *"legibility beats robustness"*, *"there is always a way
-out"*). Point at whatever the project names as its clearest statement of
-purpose, and tell the reader to read it early.
+What decides real questions here: gameplay before joke; NPCs are scripted,
+never AI; getting caught opens play; impact over numbers; solo never
+locked out; nothing generated is canon; built for friends, not strangers
+(`CLAUDE.md` has each in a line). And one that is about us, not the game:
+**how it feels is the owner's to judge by playing**, so the job is to get
+playable things in front of them, not to grade our own work.
 
 ## 2 · Where it is going
 
-> **Placeholder.** The destination, in the owner's words where possible
-> (`docs/vision.md`), and **the one measurable question** progress is read
-> by — e.g. *"how much custom code does it take to add one more of X?"*.
+The owner's first deadline, in their words (2026-11-23): *"I want as much
+of the vision in playable form as possible by the time i wake up tomorrow.
+I want to be playing the game having fun with it with my brother in law
+tomorrow morning."* The destination beyond that is the whole of
+`docs/vision.md`.
 
-Also say what the owner does **not** want — the limit of the destination —
-because a session optimizing the measure without it will overshoot.
-`docs/plan.md`'s measure table is the scoreboard; `docs/measures.md` says
-how each row is taken. Re-measure before quoting.
+**The measurable question:** is the live address serving `main` (M1), can
+two people on separate devices play together there (M2), and how many of
+the library's six build gates have a scripted check passing (M3).
+`docs/plan.md`'s table is the scoreboard; `docs/measures.md` says how each
+row is taken. Re-measure before quoting.
+
+**The limit:** a passing script is not fun. Don't optimise the gate count
+by building things nobody would enjoy, and don't promote the library's
+proposals into decisions to get there (`docs/vision.md`, "What it is
+not").
 
 ## 3 · Where it has been
 
-> **Placeholder.** The arc, in order, a line per closed plan step that
-> changed the shape of things — because the order explains the state.
-> Closed steps' full text lives in `docs/plan-archive.md`; this is the
-> one-line version only.
+No plan step has closed yet. Before the plan: the owner installed this
+operating system (2026-11-23), Vision Partner mirrored their Drive design
+library and wrote the vision, and the first orchestrator measured the
+deploy (a push to `main` is live on Railway in under a minute) and wrote
+the first plan.
 
 **Findings that each cost a round to learn.** Carry them. Three arrive with
 this operating system, from the project it was derived from:
@@ -117,8 +132,9 @@ a brief is self-contained; needing it means the brief is the gap.
 **Every rule here was bought with a mistake** —
 `docs/working-on-the-project.md` is the receipt.
 
-**What "verified" means here.** Say whether there is a test suite and
-whether a push to `main` is a deploy. Either way, a change is
+**What "verified" means here.** A push to `main` is the deploy, with no
+staging and no CI; the scripted scenarios Step 1 lands are the only test
+suite. A change is
 verified when it was *run*, with a control watched to fail — "the code looks
 right" was true every time something shipped broken. Ladder:
 `docs/verifying-and-finishing.md`.
@@ -130,14 +146,13 @@ content at volume, briefed.
 
 ## 5 · Where it stands now
 
-> **Placeholder.** Which plan steps are done (one line, pointing at
-> `docs/plan-archive.md`), the owner's current goal
-> (`docs/current-directive.md`), and the open steps — one line each, saying
-> what each is waiting on (a build, a measurement, the owner's answer, the
-> owner's own use of it). Detail and recount in `docs/plan.md`.
+Night one (2026-11-23). The owner's current goal is in
+`docs/current-directive.md`. No step is done. **Step 1** (a live room two
+people can play in together) is the critical path; every other step is
+queued behind its first gate. Open steps, their status lines and what each
+waits on are in `docs/plan.md`; recount there, not here.
 
-Anything the owner has explicitly stopped: say so here, in their words, with
-**"Don't resume unasked."**
+Nothing has been stopped by the owner.
 
 **Parked:** `docs/ideas-for-later.md`.
 

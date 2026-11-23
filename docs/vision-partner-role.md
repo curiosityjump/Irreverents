@@ -130,8 +130,8 @@ standard is: **every line traces to the owner's own words.**
 9. Also tell the owner, in the same message, anything you heard that is
    not vision but the orchestrator will need on its first run: the
    default branch, where the project deploys, how it is built and
-   checked (the kit's `main`, `{{DEPLOY_TARGET}}`,
-   `{{BUILD_COMMAND}}`, `{{STATIC_CHECKS}}` placeholders). Put it in the
+   checked (the kit's `main`, `Railway`,
+   `npm run build`, `npm run check` placeholders). Put it in the
    same outbox entry, quoted. You don't edit those placeholders yourself;
    filling them is the orchestrator's first-run work.
 
@@ -202,8 +202,8 @@ than referring to it.
    plan follows.
 4. Never change behaviour in code. You may add a comment-only line (an
    `INTENT:` marker, `CLAUDE.md`'s comment conventions, for an answer you
-   just recorded), and only after `{{BUILD_COMMAND}}` and
-   `{{STATIC_CHECKS}}` pass on it. Word it as the owner's reason, not as
+   just recorded), and only after `npm run build` and
+   `npm run check` pass on it. Word it as the owner's reason, not as
    a verdict: "based on the owner saying '<their words>' (<date>)", never
    "this must stay". The reason, as the original owner put it: *"even if
    something is based on a real intention, doesn't mean it ends up being

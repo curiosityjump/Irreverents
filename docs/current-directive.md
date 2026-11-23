@@ -72,22 +72,71 @@ heading:
 
 ## Current directive
 
-*(Empty until the first orchestrator's first Becoming Flow. Replace this
-line with the directive.)*
+**Draft — awaiting the owner's approval.** The owner gave the orchestrator
+free rein over what to build first ("Orchestrator has free reign.",
+2026-11-23, `docs/vision.md` "The measure"), so work runs on this list
+tonight; they have not seen the list itself. The approval question is
+filed in `docs/questions-inbox.md`.
 
-**Status:** —
+**The owner's words this comes from** (recorded first-hand by Vision
+Partner, 2026-11-23, in `docs/vision.md`):
+> I want this game to be playable by the time I wake up in the morning.
+>
+> Focus on getting things playable asap. I want as much of the vision in playable form as possible by the time i wake up tomorrow. I want to be playing the game having fun with it with my brother in law tomorrow morning.
 
-**Desired results, in priority order:**
-1. —
+**Desired results, in priority order** (each is a plan step; the order is
+what to protect if the night runs short):
+1. Two people on separate devices are in the same world at the live
+   address, moving (Step 1).
+2. It is comfortable to open on a phone and to play with a friend: touch
+   controls, seeing who is there, getting back in after a dropped
+   connection (Step 5).
+3. Moving, hitting, grabbing and throwing things and each other feels
+   good, and three kinds of character play differently (Step 2).
+4. A small kingdom of connected rooms to explore, with hidden routes
+   (Step 3).
+5. The world reacts: people with three moods, witnesses, calls for help,
+   sneaking past or glorious catastrophe (Step 4).
+6. The king who never stops talking, and the freedom to ignore him
+   (Step 6).
+7. A Hall of Legends that remembers something the players really did, and
+   a machine to steal and crash through a roadblock (Step 7).
 
-**Goal.** —
+**Goal.** By the owner's morning (working deadline 11:00 UTC, 2026-11-23),
+https://irreverents-production.up.railway.app is a game the owner and
+their brother-in-law can open on their own devices and play together, with
+as many of results 2–7 in it as were finished and verified, and nothing in
+it half-working.
 
-**Feedback signal.** —
+**Feedback signal.** `docs/measures.md`: M1 (the live address reports the
+tip of `main`), M2 (`npm run check:live`: two scripted players share the
+live world), M3 (`npm run gates`: build gates with a passing scripted
+check). Each step's own file names its scenarios. None of these says
+whether it is fun; that is the owner's, in the morning.
 
-**Stopping condition.** —
+**Stopping condition.** The owner's morning. Before it, in order:
+- **From 10:00 UTC, `main` only takes finished, verified work.** Anything
+  not done by then is left out behind a `DRAFT:` note or reverted, not
+  pushed half-working. A push is the deploy, and the owner may open the
+  game at any moment after that.
+- **By 10:30 UTC** the orchestrator re-measures M1–M3 on the live address
+  and writes the morning report: what is playable, how to play it with a
+  second person, what to try, and what is the owner's to judge.
+
+**Constraints.** The owner's rules in `docs/vision.md` ("What it is not",
+"Principles that decide most questions"); `CLAUDE.md`'s design principles;
+the design library's labels (a proposal used tonight stays a labelled
+placeholder). The usage limit is shared with the owner's other projects:
+at most about four leads at once, each with one or two workers.
 
 **Escalation.** Every question goes to `docs/questions-inbox.md`;
-nothing waits in a chat.
+nothing waits in a chat. The owner is asleep: a question that would stop
+a step gets the asker's own best reading, built so that either answer is a
+small change, marked `DRAFT:`.
+
+**Status (orchestrator session_017WiGzFWfLir1ATiSP7c5E5, 2026-11-23 04:05
+UTC):** nothing achieved yet beyond the deploy being proven (M1 serves a
+probe). Step 1 open, about to be claimed. Steps 2–7 queued.
 
 ## History
 

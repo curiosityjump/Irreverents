@@ -220,9 +220,9 @@ without permission. **Settled for this project.** The owner's own commit of
 work goes on **`main`**"* and *"push to the branch above regardless — work
 that lands on an auto-generated branch is silently dropped."* That is the
 permission your instructions ask for, written down; the owner's own
-first-hand sessions push to `main` the same way. Until Q-009 is answered a
-push may be a live deploy to Railway, so finish phase 7's other checks
-first, then push to the one branch.
+first-hand sessions push to `main` the same way. A push is a live deploy
+to Railway, so finish phase 7's other checks first, then push to the one
+branch.
 
 **Gate:** the change was **run**, not read — and you can say in one sentence
 how it gets reversed. If that answer isn't "revert the commit," you have found

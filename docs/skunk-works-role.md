@@ -251,7 +251,7 @@ and reporting" below.
   its own successor, and doesn't claim plan steps.
 - **Commit and push** the report to main
   (`docs/git-workflow.md`), with only your own files staged. Run the
-  project's docs checks first ({{STATIC_CHECKS}}, or a docs
+  project's docs checks first (npm run check, or a docs
   cross-reference checker if the project has one).
 - **Report to the orchestrator that started you, not the owner.**
   - If your environment can push a message into another session (e.g.

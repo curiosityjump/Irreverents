@@ -65,7 +65,7 @@ and the onboarding copy.
 
 **Nothing checks any of it.** Every one of those is a person remembering.
 
-{{STATIC_CHECKS}} includes a templates check (`scripts/check-templates.ts`)
+npm run check includes a templates check (`scripts/check-templates.ts`)
 that, at line 40, confirms *"every template referenced in code exists."*
 There is no counterpart confirming that every template **sent** can be
 **turned off** by the person receiving it, and that is the direction the
@@ -160,7 +160,7 @@ the check's output, not a silently hardcoded name.
    added no outward import.
 5. **Do not "fix" the templates this flags.** Phase 3. Five are fine, one is
    deliberate. The deliverable is the check, not a template edit.
-6. **{{BUILD_COMMAND}} writes its output even when it fails.** Check the exit
+6. **npm run build writes its output even when it fails.** Check the exit
    code, not the presence of the build directory.
 
 ---
@@ -188,7 +188,7 @@ the check's output, not a silently hardcoded name.
 
 - **Deleting an account unassigns that user's open tasks, and each task's
   creator is told** (owner). Item 1.
-- One branch, main, deployed to {{DEPLOY_TARGET}}
+- One branch, main, deployed to Railway
   (`docs/git-workflow.md`, `docs/sop.md` phase 7).
 - Transactional emails are never mutable: decided and marked `INTENT:` in an
   earlier slice.
@@ -209,7 +209,7 @@ the check's output, not a silently hardcoded name.
 control.** This is a static-check change, so the check *is* the test, which
 means the only thing that matters is whether it can fail.
 
-1. Run {{STATIC_CHECKS}} on the unmodified tree: passes, with `trial-ending`
+1. Run npm run check on the unmodified tree: passes, with `trial-ending`
    either marked deliberate or reported as a known note, and **no other
    template flagged.** If you flag more, your model is missing a mechanism
    from the table above; find it rather than adding an exception.
@@ -224,7 +224,7 @@ means the only thing that matters is whether it can fail.
    and confirm from A's view that the task shows as unassigned and that A's
    notification arrived (check the inbox in the local mail catcher, not the
    database row).
-5. {{BUILD_COMMAND}} (exit code) and {{STATIC_CHECKS}}.
+5. npm run build (exit code) and npm run check.
 
 ---
 

@@ -16,29 +16,45 @@ block.
 
 ---
 
-## This project's setup (the project fills this in)
+## This project's setup
 
-Replace this section with the real answers. Until it is filled in, a session
-that needs it asks the owner (via `docs/questions-inbox.md`) rather than
-inventing commands.
+**Status, 2026-11-23 04:00 UTC: partly real.** The repository holds a
+deploy probe, not the game. Plan Step 1 (`docs/plan/step-1.md`) makes the
+commands below real and must rewrite this section with what is true and
+when each command was last run end to end. Until it does, a line marked
+*(Step 1)* is the contract, not yet a fact.
 
-- **Build:** `{{BUILD_COMMAND}}`
-- **Static checks:** `{{STATIC_CHECKS}}` — every check that runs without a
-  live system: type-checking, linting, a content or schema validator, a docs
-  cross-reference checker, whatever exists.
-- **Get it running locally:** the exact commands, in order, from a fresh
-  container (start any database or service, create it the first time, build,
-  start, restart after a rebuild, stop).
-- **What "it started" looks like:** the line or lines the running system
-  prints when it is healthy, so a session can tell a good boot from a bad one.
-- **Where it deploys:** `{{DEPLOY_TARGET}}`, and what triggers a deploy (a push
-  to `main`, a manual release, a merge).
-- **Is there a test suite?** If yes, the command and how long it takes. If no,
-  say so plainly — it changes what "verified" can mean.
-- **Does CI exist, and is it a gate or a tripwire?** CI that runs *after* the
-  push that deploys can tell you a minute later; it cannot stop you. If CI is
-  known to be broken or switched off on purpose, say so here so sessions stop
-  reporting it as a finding.
+- **Build:** `npm run build` *(Step 1)*.
+- **Static checks:** `npm run check` *(Step 1)*: type-checking, content
+  validation, and the headless simulation scenarios. No browser, no
+  network; fast enough to run before every push.
+- **The real page, two players:** `npm run e2e` *(Step 1)*: headless
+  browsers against a local server, one of them phone-sized with touch.
+- **The live site:** `npm run check:live` *(Step 1)*: the same two-player
+  check against the live address. Which commit is live:
+  `curl -s https://irreverents-production.up.railway.app/healthz` (real
+  today; run 2026-11-23 03:56 UTC).
+- **Get it running locally:** `npm start` serves on `PORT` (default 3000).
+  Real today for the probe; *(Step 1)* writes the full sequence from a
+  fresh container (`npm ci`, build, start, stop).
+- **What "it started" looks like:** *(Step 1)*.
+- **Where it deploys:** Railway, at
+  https://irreverents-production.up.railway.app. **A push to `main` is the
+  deploy**, automatically, with no staging (the owner, 2026-11-23: "It's
+  setup to deploy automatically from main yes."). Measured: 37 s from push
+  to live for a no-build app. Nobody here can see Railway's logs; the live
+  address is the only evidence.
+- **Is there a test suite?** Not yet. *(Step 1)* lands the scenario
+  harness; until then "it passed" can mean nothing.
+- **CI:** none, by absence, not by decision. Nothing checks a push before
+  or after it deploys.
+
+**The pre-push gate, because a push goes live:** `npm run build && npm run
+check`, plus `npm run e2e` when the client or the network changed; then
+`git fetch origin main && git rebase origin/main`, re-run the gate if
+anything came in, push, and confirm `/healthz` reports your commit within
+a few minutes. If it does not, the previous deploy is still serving: tell
+your lead at once and push nothing on top.
 
 ---
 
@@ -50,14 +66,14 @@ section above, or next to the rung once your project has them.
 
 ### 1. It compiles
 ```bash
-{{BUILD_COMMAND}}
+npm run build
 ```
 Catches type and syntax errors. Catches nothing about behaviour. This is the
 floor, not a verification.
 
 ### 2. The static checks pass
 ```bash
-{{STATIC_CHECKS}}
+npm run check
 ```
 The single highest-value check for any change to data, configuration or
 content the project loads — it needs no running system and no secrets. A good
@@ -81,9 +97,9 @@ check against the code from *before* your change.
 
 ```bash
 git checkout <sha-before-your-change> -- <the file you changed>
-{{BUILD_COMMAND}} && <re-run your check>     # must FAIL — if it passes, the check is empty
+npm run build && <re-run your check>     # must FAIL — if it passes, the check is empty
 git checkout HEAD -- <the file you changed>
-{{BUILD_COMMAND}}
+npm run build
 ```
 
 A check once passed on the shipped code *and* on the pre-change code, because
@@ -186,11 +202,12 @@ and the kinds of project-specific ones worth documenting:
   missing. You can "verify" a change that way and have tested **nothing**. If
   your project has one, name it here, name the fallback text, and say: set a
   key or don't claim it works.
-- **No test suite.** If the project has none, say so here — "it passed" can
-  only mean the rungs above, and a session must not imply more.
-- **A push is a deploy.** If pushing to `main` ships to users,
-  say so here and in the definition of done, in bold. There is no "push it to
-  see."
+- **No test suite yet.** Until plan Step 1 lands the scenario harness, "it
+  passed" can only mean the rungs above, and a session must not imply more.
+- **A push is a deploy.** Pushing to `main` ships to the owner and their
+  friends within about a minute. **There is no "push it to see."** A push
+  whose build fails on Railway is invisible from here except that
+  `/healthz` keeps reporting the old commit.
 - **Caches survive your edit.** Anything loaded once at boot (configuration,
   data cached in memory, files read on first use) ignores your edit until a
   restart. List what your system caches.
@@ -226,7 +243,7 @@ answer: if a push is the deploy, `git revert` is the rollback —
 git revert <sha> && git push origin main
 ```
 
-— and `{{DEPLOY_TARGET}}` redeploys from the branch. Say whether there is
+— and `Railway` redeploys from the branch. Say whether there is
 staging, feature flags, or anything else between a push and users.
 
 **The asymmetry that matters: code reverts, persisted state doesn't.** A
@@ -253,8 +270,8 @@ you push rather than after.
 A session is not finished until all of these are true.
 
 **The change**
-- [ ] `{{BUILD_COMMAND}}` passes — by exit code, not by scrollback.
-- [ ] `{{STATIC_CHECKS}}` pass. If a check keeps a baseline of known
+- [ ] `npm run build` passes — by exit code, not by scrollback.
+- [ ] `npm run check` pass. If a check keeps a baseline of known
       exceptions, a **stale baseline entry** is yours too: a known gap got
       fixed and the exception was left behind to hide the next one.
 - [ ] Any docs checker passes, if you touched docs. If the project has one

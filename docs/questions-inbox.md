@@ -47,3 +47,13 @@ Vision Partner assigns the id and adds **As asked:** with the original
 wording when it rewrites an entry.
 
 ## Entries
+
+### Q-? · Is this the right order for what we build first?
+- **Asked by:** orchestrator, first run, `session_017WiGzFWfLir1ATiSP7c5E5`, 2026-11-23 UTC, parent none
+- **Question:** You gave the orchestrator free rein tonight, so the team is building in this order, protecting the top of the list if time runs short: (1) you and a friend in the same world at the live address, moving; (2) comfortable on a phone, easy to join and rejoin; (3) moving, hitting, grabbing and throwing things and each other, with three kinds of character; (4) a small kingdom of connected rooms with hidden routes; (5) people who react (three moods, witnesses, calls for help, sneaking or catastrophe); (6) the king who never stops talking; (7) a Hall of Legends pedestal and a machine to steal. After you've played the morning build: keep this order for what comes next, or move something up?
+- **Unblocks:** `docs/current-directive.md` moving from draft to approved; what the next night's leads pick up first.
+- **Recommendation:** yes, keep the order; tell us the one thing you most missed while playing and it moves to the top.
+- **Answer goes to:** `docs/current-directive.md` "Current directive"
+- **Source:** `docs/current-directive.md`
+- **Blocking:** no
+

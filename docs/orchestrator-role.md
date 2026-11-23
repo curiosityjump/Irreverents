@@ -116,7 +116,7 @@ Do these in order; each ends in something committed.*
      the default branch, the deploy target, and how the project is built
      and checked; use those facts first — they are the owner's words.
    - **Grep the docs for `{{`.** Irreverents, main,
-     {{DEPLOY_TARGET}}, {{BUILD_COMMAND}} and {{STATIC_CHECKS}} each need a
+     Railway, npm run build and npm run check each need a
      real value or an explicit "none yet." Fill any the genesis entry or
      the repo itself answers (`git ls-remote --heads origin` for the
      branch; a `package.json`/`Makefile`/CI file for the build and
@@ -768,8 +768,8 @@ prime" means this line.
   explicitly, every time, for the one element you're assigning.** The
   goal is a row of `docs/measures.md` moving, or a named vision-level
   outcome. The feedback signal is how the lead will know it's converging
-  *without asking you* — a re-runnable check ({{BUILD_COMMAND}},
-  {{STATIC_CHECKS}}, a scripted scenario, a failing control that turns
+  *without asking you* — a re-runnable check (npm run build,
+  npm run check, a scripted scenario, a failing control that turns
   green), never "it seems right." The stopping condition is what ends
   the element: done when the signal passes, or a real budget (rounds, a
   time window, a cost) if the work is open-ended. An element with no
