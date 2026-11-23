@@ -22,6 +22,11 @@ export function tuneWanted(search: string): boolean {
   return new URLSearchParams(search).has('tune');
 }
 
+// INTENT: the 8 px between a number's words and its slider keeps a thumb
+// that starts a scroll on the words off the slider. With 2 px, a swipe on
+// a one-line description (runSpeed's, first since the panel puts the felt
+// numbers first) was taken by the slider below it and set a new value
+// (measured 2026-11-23 in Chromium, whose touch lands on the nearest control).
 const CSS = `
 #tune-open { position: fixed; z-index: 20; width: 44px; height: 30px; padding: 0; border: 1px solid rgba(244,241,222,.5); border-radius: 8px; background: rgba(15,15,28,.75); color: #f4f1de; font: 600 12px/1 system-ui, -apple-system, sans-serif; touch-action: manipulation; }
 #tune { position: fixed; z-index: 19; box-sizing: border-box; display: flex; flex-direction: column; background: rgba(15,15,28,.9); color: #f4f1de; border: 1px solid rgba(244,241,222,.35); border-radius: 8px; font: 12px/1.3 system-ui, -apple-system, sans-serif; -webkit-user-select: none; user-select: none; }
@@ -37,13 +42,26 @@ const CSS = `
 #tune .top { display: flex; align-items: baseline; gap: 6px; }
 #tune .name { flex: 1; font-weight: 600; word-break: break-all; }
 #tune .what { opacity: .65; font-size: 11px; }
-#tune .ctl { display: flex; align-items: center; gap: 6px; margin-top: 2px; }
+#tune .ctl { display: flex; align-items: center; gap: 6px; margin-top: 8px; }
 #tune input[type=range] { flex: 1; min-width: 0; height: 32px; touch-action: pan-y; margin: 0; }
 #tune input.val { width: 72px; height: 26px; box-sizing: border-box; background: #1b1b2f; color: #f4f1de; border: 1px solid rgba(244,241,222,.35); border-radius: 4px; font: 12px system-ui, sans-serif; padding: 0 4px; -webkit-user-select: text; user-select: text; }
 #tune textarea { flex: none; height: 90px; margin: 4px 6px 6px; background: #1b1b2f; color: #f4f1de; border: 1px solid rgba(244,241,222,.35); font: 11px ui-monospace, monospace; -webkit-user-select: text; user-select: text; touch-action: pan-y; }
 #tune textarea[hidden] { display: none; }
 #tune .note { padding: 2px 6px; opacity: .75; font-size: 11px; min-height: 14px; }
 `;
+
+/**
+ * DRAFT (Step 2 panel polish): the numbers the owner feels most, first in
+ * every set that has them, in this order; the rest follow alphabetically.
+ * A name here that a set lacks is skipped. `fallSpeed` is a character's
+ * fastest fall, `maxFallSpeed` the world's.
+ */
+export const FIRST = ['runSpeed', 'jumpSpeed', 'attackWindup', 'fallSpeed', 'maxFallSpeed'];
+/** A set's numbers in the order the panel lists them: FIRST's, then the rest by name. */
+export function panelOrder(names: string[]): string[] {
+  const rank = (n: string): number => (FIRST.includes(n) ? FIRST.indexOf(n) : FIRST.length);
+  return [...names].sort((a, b) => rank(a) - rank(b) || (a < b ? -1 : a > b ? 1 : 0));
+}
 
 /** A step that suits a range: 1, 2 or 5 times a power of ten, about a hundredth of it. */
 function niceStep(span: number): number {
@@ -52,6 +70,27 @@ function niceStep(span: number): number {
   const p = 10 ** Math.floor(Math.log10(raw));
   const m = raw / p;
   return (m < 1.5 ? 1 : m < 3.5 ? 2 : m < 7.5 ? 5 : 10) * p;
+}
+/** The largest of 1, 2 or 5 times a power of ten that is no more than `v`. */
+function niceFloor(v: number): number {
+  const p = 10 ** Math.floor(Math.log10(v));
+  const m = v / p;
+  return (m >= 5 ? 5 : m >= 2 ? 2 : 1) * p;
+}
+/**
+ * DRAFT (Step 2 panel polish): the step of a number's slider and of its
+ * - / +. About a hundredth of the slider's span, except where the declared
+ * range is huge next to the shipped number (20 times it or more, e.g. a
+ * strength of 9000 allowed up to 1,000,000, a wind-up of 0.033 s up to 1 s):
+ * there no step is larger than 2% of the shipped number, so it can be moved
+ * by small amounts. Typing still takes any number in the range.
+ */
+export const FINE_SHARE = 0.02;
+export const HUGE_RANGE = 20;
+export function stepFor(rule: TuningRule, shipped: number, sliderMax: number): number {
+  const step = niceStep(sliderMax - rule.min);
+  if (!(shipped > 0) || rule.max - rule.min < HUGE_RANGE * shipped) return step;
+  return Math.min(step, niceFloor(shipped * FINE_SHARE));
 }
 const roundTo = (v: number, step: number): number => {
   const digits = Math.max(0, -Math.floor(Math.log10(step)) + 1);
@@ -144,7 +183,7 @@ export function setUpTune(opts: { content: Content; net: NetClient; canvas: HTML
     // some declared maxima are huge (1,000,000) and a slider over all of it
     // could not be aimed; + and typing still reach the whole declared range.
     const hi = Math.min(rule.max, base > 0 ? Math.max(base * 3, rule.min + 1) : rule.max <= 10 ? rule.max : Math.min(rule.max, rule.min + 100));
-    const step = niceStep(hi - rule.min);
+    const step = stepFor(rule, base, hi);
     const el = document.createElement('div');
     el.className = 'row';
     el.dataset.set = set;
@@ -199,7 +238,7 @@ export function setUpTune(opts: { content: Content; net: NetClient; canvas: HTML
     const order = [...sets.filter((s) => s === mine || party.has(s)), WORLD_SET, ...sets.filter((s) => s !== mine && !party.has(s))];
     for (const set of order) {
       const list = set === WORLD_SET ? rules.world : rules.characters[set]!;
-      const names = Object.keys(list).sort();
+      const names = panelOrder(Object.keys(list));
       if (names.length === 0) continue;
       const group = document.createElement('details');
       group.dataset.set = set;

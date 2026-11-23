@@ -23,6 +23,9 @@ can make them the default in `content/tuning.json`.
   top left of the view; tap it.
 - The character you are playing is first and open; the other party
   members, then **World (everyone)**, then the people and objects follow.
+  In each, the numbers felt most come first: top run speed (`runSpeed`),
+  jump (`jumpSpeed`), wind-up (`attackWindup`), fall speed (`fallSpeed`,
+  the world's `maxFallSpeed`), then the rest alphabetically.
   Each number has its plain description, the shipped value and its
   allowed range, a slider, and − / +. Tap the number box to type one.
   A changed number is yellow.
@@ -75,7 +78,10 @@ can make them the default in `content/tuning.json`.
   and a quick second tap at the document, and reads keys on the window;
   the panel stops each of those on itself first, which is what lets it
   scroll on a phone and keeps its touches off the game. Sliders take
-  sideways drags and let vertical swipes scroll the list.
+  sideways drags and let vertical swipes scroll the list. A row's words
+  stand 8 px clear of its slider (`INTENT:` in `tune.ts`): closer, a
+  scroll started on a one-line description was taken by the slider below
+  and changed its number.
 - **Where it sits**: over the left half of the view, the full height of
   the column the view stands in, cut short above any game control it
   would cover, so the game can be played with the panel open; upright,
@@ -86,7 +92,16 @@ can make them the default in `content/tuning.json`.
 to the whole world, for everyone, until the server restarts; nothing is
 saved. The slider spans the minimum to three times the shipped number
 (some declared maxima are a million); − / + and typing reach the whole
-range. The look is plain DOM; Step 8 may restyle it.
+range. The order is one list, `FIRST` in `tune.ts` (a name a set lacks
+is skipped). A slider's step, which − / + also move by, is about a
+hundredth of its span, except where the declared range is 20 times the
+shipped number or more (strengths up to 1,000,000, times up to 1 s):
+there it is never more than 2% of the shipped number (`stepFor`).
+Measured 2026-11-23 on the five widest rows: the two 26000
+`throwStrength`s went from 1000 (3.8%) to 500 (1.9%), the brawler's and
+grappler's `attackStrength` from 500 (3.1%, 3.6%) to 200; the flyer's
+`throwStrength` stayed 200 (2.0%). A 0.033 s wind-up went from 0.01
+(30%) to 0.0005. 97 of 240 rows got finer; none got coarser. The look is plain DOM; Step 8 may restyle it.
 
 ## How it is checked
 

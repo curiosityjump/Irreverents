@@ -593,3 +593,22 @@ rows re-read. See the handoff notes below.
   flatten or move, so it is only brief, but a page can believe for a
   moment that its character is worn. Step 11's `c.brawl` reads landed at
   fb619f5 as agreed; the friend scenarios pass unchanged.
+
+- **Builder `session_017WiGzEW8KSWarusEnTDSEg`, ~16:50 UTC: the brief
+  `step-2-panel-and-no-numbers.md`, both pushes.** (b) at 7500b81:
+  `drawn.words` records every string drawn into the game picture; e2e
+  `t-no-numbers` holds across the touch fight; control
+  `E2E_TOUCH_BREAK=number-over-hit` failed it alone. (a) next commit: the
+  felt numbers first, steps ≤ 2% of shipped where the range is huge (five
+  widest rows measured in `docs/mechanisms/tuning-panel.md`); shots in
+  `step-2-shots/panel-order-*.png` (the upright one is 390×844, the e2e's
+  size, not 390×664). **Found and fixed in passing:** with runSpeed first,
+  the e2e's scroll swipe on its one-line description was taken by the
+  slider below (Chromium's touch lands on the nearest control) and changed
+  the grappler's runSpeed 84 → 56; no fact failed. 8 px between words and
+  slider stops it (repro and `INTENT:` in `tune.ts`). **Doubts, not
+  acted on:** the record misses text drawn into an offscreen canvas and
+  copied in (none today); the fight hits a crate, not a dummy (the start
+  room has none); a real iPhone's Safari moves a range only from its thumb,
+  as far as I know, so the bump may be Chromium-only. **Not verified:** a
+  real iPhone; how the finer steps feel.
