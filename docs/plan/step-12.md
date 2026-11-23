@@ -160,6 +160,8 @@ List these; don't grade them.
 
 ## Briefs
 
+- 16:05 UTC: slice A reviewed by the lead (check, the walk-out control, and `npm run e2e`'s `outpost-in`/`outpost-break` re-run green). Slice B: `handoff-prompts/step-12-b-chase-and-clash.md` (slice A's two gaps first: the fight-anywhere scenario and the camp's art; then the chase cap, the clash and hiding while wanted), hard stop 17:15 UTC.
+
 - Slice A, the outpost (signals 1–4 and 7, the room and its door): `handoff-prompts/step-12-a-outpost.md`, hard stop 16:05 UTC. Added to slice A by message 15:05 UTC: `outpost-fight` widened so a hostile person fights wherever it is placed (Step 16 places these kinds in ordinary rooms; tell its lead when it lands). Slice B, the chase and the clash (signals 5–6), is briefed after A's review.
 
 ## Open with the owner
