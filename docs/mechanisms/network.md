@@ -56,28 +56,20 @@ with a throwaway entity kind on every `npm run check`).
   into each page's own world, so the page's local step and its drawing
   use the server's room state. No list of names anywhere.
 - **How a player's own actions reach what the server simulates:** every
-  report carries the body's whole state *and the input being held*. The
-  server runs every system and the player's own verbs over its copy of
-  that body with that input, so a plate is pressed, a dummy hit, a gate
-  opened there; it just never lets that step move the player's copy
-  (unless by an effect). ("Room" in the address means a *world*; a content
-  room is `entity.room` inside one.)
-- **Who you are** is a random id kept on the device (`localStorage`,
-  falling back to memory), so a reload is still you. The same id joining
-  again **takes its character over** (no second one; two tabs on one
-  device are one player). A
-  character whose socket closed waits `staleSeconds` (15) for its page; a
-  page that says `bye` (closed tab, a scripted client) is removed at once.
-- **The seat.** A page that has not played yet is seated by the server:
-  `spawnPlayer` with no character, so the simulation picks a party member
-  nobody is playing (`docs/mechanisms/party-and-switching.md`), on a spawn
-  tile by join order. Leaving is `removeEntity`. A page that is coming
-  back keeps its own character, member and place, even after a server
-  restart. `entity.kind` travels like any other field, so a switch of
-  member needs nothing here.
-- **Placed bodies.** A new world gets `populateRoom` for every content
-  room. A page's local world does not (it would draw them twice); alone
-  with no server there are no crates.
+  report carries the body's whole state *and one input per simulation
+  tick since the last report* (`is`). The server gives `step()` one of
+  those per server tick, and runs every system and the player's own verbs
+  over its copy of that body, so a plate is pressed, a dummy hit, a thing
+  picked up there. A tap shorter than a report is seen exactly once.
+- **Who owns which part of a player's entity** (`INTENT:` at `adopt` in
+  `src/server/game.ts`). The **page** owns the body's motion and
+  identity: every top-level field (`x`, `y`, speeds, `facing`,
+  `onGround`, `room`, `kind`). The **server** owns its copy of `c` (the
+  per-verb and per-system state): taken from the page on joining, then
+  advanced only by the server's own `step()`. So what a server-run system
+  writes on a player (`c.interact`, a press already seen) survives every
+  report, and other pages see the server's `c`. The server's step never
+  moves a player's copy except by an effect.
 
 ## Effects: the world moving a player's character
 
@@ -118,9 +110,11 @@ Known limits (`DRAFT:`), for whoever builds combat and doors:
   members other players hold, and a hit cannot be shown before the server
   says so. The server's copy of each verb does see everyone. The place to
   widen is the local world in `src/net/client.ts`.
-- A verb's one-tick edge (a press) can fall between two reports (30 a
-  second) and never be seen by the server's copy of the verb. Keep what
-  matters in the entity's state (`entity.c`), which is reported whole.
+- **A page does not get the server's `c` for its own character** (it keeps
+  simulating with its own), so something only the server's copy knows
+  (what this player is carrying, say) is not on the player's own entity
+  on their own page; read it from the other entity involved, which does
+  arrive. `kind` is the page's: a `switch` is decided on the page.
 - A change made to a player's entity **without** `emitEffect` is undone
   by the puppet rule on the next tick.
 - The server's events for puppets (`landed` and such) are the server's
@@ -200,7 +194,7 @@ it back. **Checks assert on `drawn`, never on server state.**
 Controls watched to fail, 2026-11-23 (each named the broken fact):
 snapshots not sent (`together`, `built-server`; e2e a, b, e, f, h1, rate
 on the first version); effects never resent (the push facts); the page
-never acknowledging (the acknowledgement fact); reconnect disabled (e,
+never acknowledging (the acknowledgement fact); only the newest input sent, and the report overwriting the server's `c` (the one-tap fact, each: 0 presses seen); reconnect disabled (e,
 h1, h2); the built server throwing at start (`built-server`); upright
 treated as sideways and the view never shrinking for the bars (c2, g);
 and on the first version: own input made to wait a round trip (d:

@@ -78,6 +78,8 @@ export function createNetClient(opts: NetClientOptions) {
   let latest: { tick: number; events: SimEvent[] } = { tick: 0, events: [] };
   /** The newest effect applied; effect ids only ever grow, so a resent copy is recognised. */
   let lastFx = 0;
+  /** What was held on each local tick since the last report. */
+  let ticked: Input[] = [];
   const stats = { connects: 0, rttMs: null as number | null, msgsIn: 0, bytesIn: 0, msgsOut: 0, bytesOut: 0, effects: 0 };
   const adopt = (e: Entity): void => {
     const mine = me();
@@ -241,6 +243,8 @@ export function createNetClient(opts: NetClientOptions) {
         if (heldBy(me()) && status !== 'online') applyEffect(me(), { kind: 'release' });
         if (!heldBy(me())) events.push(...step(world, { [player]: input }, content));
         else world.tick++;
+        ticked.push(input);
+        if (ticked.length > 12) ticked.shift();
         owed -= DT;
       }
       if (left) return events;
@@ -251,7 +255,8 @@ export function createNetClient(opts: NetClientOptions) {
       } else if (open && status === 'online') {
         if (t - lastReport >= 1000 / net.reportRate - 1) {
           lastReport = t;
-          send({ t: 'me', e: me(), i: input, ct: world.tick });
+          send({ t: 'me', e: me(), i: input, is: ticked, ct: world.tick });
+          ticked = [];
         }
         if (t - lastPing >= net.pingMs) {
           lastPing = t;

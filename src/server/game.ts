@@ -17,8 +17,11 @@ interface Player {
   id: string;
   sock: WebSocket | null;
   slot: number;
+  /** The input last given to step() for this player. */
   input: Input;
   inputAt: number;
+  /** Inputs reported and not yet stepped, one per simulation tick, oldest first. */
+  queue: Input[];
   /** The page's own tick count at its latest report. */
   ct: number;
   /** When a character whose page went away is removed. */
@@ -112,8 +115,17 @@ export function attachGame(server: http.Server, opts: GameOptions) {
     const e = clone(raw);
     e.id = playerEntityId(p.id);
     e.player = p.id;
-    e.c.net = { slot: p.slot };
     const i = gw.world.entities.findIndex((x) => x.id === e.id);
+    // INTENT: who owns which part of a player's entity. The PAGE owns the
+    // body's motion and identity: every top-level field (x, y, speeds,
+    // facing, onGround, room, kind). The SERVER owns its copy of `c`, the
+    // per-verb and per-system state: it starts from the page's on joining
+    // and from then on is advanced only by the server's own step(), fed the
+    // player's input tick by tick. So what a server-run system writes there
+    // (what was picked up, a press already seen) survives every report, and
+    // a press is seen once: on the tick the server's copy first holds it.
+    if (i >= 0) e.c = gw.world.entities[i]!.c;
+    e.c.net = { slot: p.slot };
     if (i >= 0) gw.world.entities[i] = e;
     else {
       // Sorted by id, as World requires.
@@ -140,7 +152,7 @@ export function attachGame(server: http.Server, opts: GameOptions) {
       let slot = 0;
       const used = new Set([...gw.players.values()].map((q) => q.slot));
       while (used.has(slot)) slot++;
-      p = { id: m.player, sock, slot, input: NO_INPUT, inputAt: 0, ct: 0, staleAt: null, pending: [] };
+      p = { id: m.player, sock, slot, input: NO_INPUT, inputAt: 0, queue: [], ct: 0, staleAt: null, pending: [] };
       gw.players.set(p.id, p);
     }
     p.staleAt = null;
@@ -179,7 +191,10 @@ export function attachGame(server: http.Server, opts: GameOptions) {
       if (!here || here.p.sock !== sock) return;
       if (m.t === 'me') {
         if (!adopt(here.gw, here.p, m.e)) return;
-        here.p.input = cleanInput(m.i);
+        const list = Array.isArray(m.is) && m.is.length > 0 ? m.is.slice(-12) : [m.i];
+        here.p.queue.push(...list.map(cleanInput));
+        // DRAFT: if the page runs ahead of the server, the oldest ticks are dropped.
+        if (here.p.queue.length > 12) here.p.queue.splice(0, here.p.queue.length - 12);
         here.p.inputAt = Date.now();
         here.p.ct = typeof m.ct === 'number' ? m.ct : here.p.ct;
       } else if (m.t === 'ack') {
@@ -194,6 +209,7 @@ export function attachGame(server: http.Server, opts: GameOptions) {
       if (!here || here.p.sock !== sock) return;
       here.p.sock = null;
       here.p.input = NO_INPUT;
+      here.p.queue = [];
       // DRAFT: how long a character waits for its page to come back
       // (content/net.json staleSeconds). Step 5 owns what the others see meanwhile.
       here.p.staleAt = Date.now() + net.staleSeconds * 1000;
@@ -219,7 +235,10 @@ export function attachGame(server: http.Server, opts: GameOptions) {
       const id = playerEntityId(p.id);
       const e = findEntity(gw.world, id);
       if (!e) continue;
-      inputs[p.id] = p.sock && now - p.inputAt <= net.inputHoldMs ? p.input : NO_INPUT;
+      // One reported tick of input per server tick; between reports the last
+      // one is held (for inputHoldMs at most, so a vanished page lets go).
+      p.input = p.queue.shift() ?? (p.sock && now - p.inputAt <= net.inputHoldMs ? p.input : NO_INPUT);
+      inputs[p.id] = p.input;
       if (!serverMoves(gw, p)) puppets.push({ id, before: clone(e) });
     }
     const events = step(gw.world, inputs, content);
@@ -238,7 +257,10 @@ export function attachGame(server: http.Server, opts: GameOptions) {
     for (const o of puppets) {
       if (hit.has(o.id)) continue;
       const i = gw.world.entities.findIndex((x) => x.id === o.id);
-      if (i >= 0) gw.world.entities[i] = o.before;
+      if (i < 0) continue;
+      // The motion goes back to what the page reported; `c` stays as the step left it (see adopt).
+      o.before.c = gw.world.entities[i]!.c;
+      gw.world.entities[i] = o.before;
     }
     for (const p of gw.players.values()) {
       const e = findEntity(gw.world, playerEntityId(p.id));

@@ -19,7 +19,7 @@ import type { ScriptCheck } from '../lib/script-checks.ts';
 const check: ScriptCheck = {
   id: 'together',
   gate: 'F',
-  proves: 'two players on separate connections share one world over the real network layer: each sees the other move, a new kind of entity arrives with no network code, an effect from the simulation on the server reaches a player (acknowledged, and resent when the first copy is lost), and a dropped player comes back as themselves',
+  proves: 'two players on separate connections share one world over the real network layer: each sees the other move, a new kind of entity arrives with no network code, an effect from the simulation on the server reaches a player (acknowledged, and resent when the first copy is lost), a tap between two reports is seen once by the server, and a dropped player comes back as themselves',
   async run(content: Content): Promise<string[]> {
     const failures: string[] = [];
     const server = http.createServer();
@@ -64,7 +64,17 @@ const check: ScriptCheck = {
     };
     const a = make('a');
     const b = make('b');
+    /** Set to make player a hold 'interact' for exactly one frame. */
+    let tapOnce = false;
     const frames = setInterval(() => {
+      if (tapOnce) {
+        // Held until one tick has really been simulated with it, then let go.
+        const before = a.world.tick;
+        a.update({ x: 0, y: 0, held: ['interact'] });
+        if (a.world.tick > before) tapOnce = false;
+        b.update(inputs.b!);
+        return;
+      }
       a.update(inputs.a!);
       b.update(inputs.b!);
     }, 1000 / 60);
@@ -121,6 +131,34 @@ const check: ScriptCheck = {
         (gw.world as unknown as Record<string, unknown>).throwawayState = { gate: 'open' };
         await until('a new top-level field of the World set on the server arrives in both players\' own worlds', () => [a, b].every((c) => (c.world as unknown as { throwawayState?: { gate: string } }).throwawayState?.gate === 'open'), () => `a has ${JSON.stringify((a.world as unknown as Record<string, unknown>).throwawayState)}`);
         delete (gw.world as unknown as Record<string, unknown>).throwawayState;
+
+        //    A tap shorter than a report: the server's copy of a system sees
+        //    exactly one fresh press, and what it wrote on the player's
+        //    entity survives the page's later reports.
+        const taps: System = {
+          id: 'throwaway-taps',
+          order: 901,
+          run(ctx) {
+            if (ctx.world.entities.filter((e) => e.player !== null).length < 2) return;
+            const e = ctx.world.entities.find((x) => x.id === aId);
+            if (!e) return;
+            const c = e.c as unknown as { throwawayTaps?: { held: boolean; count: number } };
+            const state = (c.throwawayTaps ??= { held: false, count: 0 });
+            const down = (ctx.inputs.a?.held ?? []).includes('interact');
+            if (down && !state.held) state.count++;
+            state.held = down;
+          },
+        };
+        const tapsOn = (): { held: boolean; count: number } | undefined => (gw.world.entities.find((x) => x.id === aId)?.c as unknown as { throwawayTaps?: { held: boolean; count: number } } | undefined)?.throwawayTaps;
+        systems.push(taps);
+        try {
+          await sleep(100);
+          tapOnce = true;
+          await sleep(500);
+          if (tapsOn()?.count !== 1) failures.push(`player a tapped 'interact' for one tick between two reports: the server's system should have seen exactly 1 fresh press, but saw ${tapsOn()?.count ?? 'no state at all'}`);
+        } finally {
+          systems.splice(systems.indexOf(taps), 1);
+        }
 
         // 4. Something the server simulates shoves player b, as an effect.
         //    The throwaway system below knows nothing about the network.

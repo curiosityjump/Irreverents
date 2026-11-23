@@ -24,8 +24,13 @@ export const DEFAULT_WORLD = 'main';
 export type ClientMessage =
   /** First message on every socket. `fresh`: this page has not played yet, so the server may place it. */
   | { t: 'join'; player: string; world: string; e: Entity; fresh: boolean }
-  /** The page's own character after its latest tick, the input it is holding, and its own tick count. */
-  | { t: 'me'; e: Entity; i: Input; ct: number }
+  /**
+   * The page's own character after its latest tick, its own tick count, and
+   * what it was holding: `is` has one Input per simulation tick since the
+   * last report, oldest first, so a tap shorter than a report is neither
+   * lost nor seen twice; `i` is the newest of them.
+   */
+  | { t: 'me'; e: Entity; i: Input; is?: Input[]; ct: number }
   /** "I applied effect `id`" (the server resends an effect until it hears this). */
   | { t: 'ack'; id: number }
   | { t: 'ping'; n: number }
