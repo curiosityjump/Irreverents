@@ -205,9 +205,13 @@ Detail: docs 07, 22, 23, 26, 27 (D-041–D-051, D-059–D-077).
 **Owner, 2026-11-23 ~16:05 UTC, to the orchestrator, first-hand (relayed to Vision Partner by session_017WiGzHhke4tkAThPgw6EXs):**
 > Enemies or provoked good guys need to be able to fight too.
 
-*(Framing:)* the people of the world fight back: enemies, and townspeople
-or guards once provoked, within the scripted three-mode rules (no NPC AI).
-The orchestrator made this plan Step 18.
+*(Framing:)* this is not new. The library already decides it: bad guys
+are "scattered throughout levels" and fight as normal heroic conflict;
+mode 3 rage NPCs "can attack personally"; at active pursuit "guards attack
+and try to continue signaling". It was in the design and missing from the
+game. **Owner, ~16:20 UTC:** "Of course they need to be able to fight. If
+you didn't get that, you need to read the documents again." The
+orchestrator made it plan Step 18.
 
 ### Heroes, roster, powers and co-op
 **Owner, 2026-11-22 (Drive, doc 11, D-007, D-010, D-012–D-013):**
