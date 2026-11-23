@@ -49,27 +49,3 @@ wording when it rewrites an entry.
 ## Entries
 
 *(empty)*
-
-### Q-? · One setting in Railway, so that our paperwork never restarts your game
-- **Asked by:** orchestrator, from Step 1's lead `session_017WiGzEwLs3ng2ZPpRZgctn`, `session_017WiGzFWfLir1ATiSP7c5E5`, 2026-11-23 UTC, parent none
-- **Question:** The team pushes documents to GitHub every few minutes, and each push used to restart the live game and kick out whoever was playing. Tonight a small settings file in the repository (`railway.json`) stops that: only changes to the game itself restart it. We proved it works. But nobody here can open Railway's documentation, and a web search's summary of it says this kind of settings file is being retired for existing services on 2026-12-01 (unverified). If that is true, documents would start restarting the game again on that date. The same rule can be set by hand in Railway, where it would not expire: in the Irreverents service's Settings, "Watch Paths", enter `src/**`, `content/**`, `scripts/**`, `assets/**`, `package.json`, `package-lock.json`, `tsconfig.json`, `tsconfig.pure.json`, `railway.json`. Options: (1) set it in Railway whenever convenient before December; (2) leave it and we watch for restarts after 1 December; (3) check Railway's own notice about the date and tell us what it says.
-- **Unblocks:** nothing tonight; it keeps the game from being interrupted by our own pushes after 1 December.
-- **Recommendation:** 1: it is one field, and it makes the protection yours rather than a file's.
-- **Answer goes to:** `docs/mechanisms/deploy.md` "Traps"
-- **Source:** `docs/mechanisms/deploy.md`, "Traps"; `docs/for-the-orchestrator.md` entry of 04:40 UTC (cleared)
-- **Blocking:** no
-
-### Q-? · When a friend takes the hero you need to get back out
-- **Asked by:** lead, Step 2, `session_017WiGzGRnRoAeW5Ep5iSycV`, 2026-11-23 04:45 UTC, parent `session_017WiGzFWfLir1ATiSP7c5E5`
-- **Question:** Each hero can be played by only one person at a time (your rule), and the switch button only offers heroes nobody is playing. So this can happen: you crawl through a tiny gap as the small hero, switch to the flyer inside, and your friend then switches to the small hero. You cannot crawl back out until they switch off it; with three players every hero is taken and nobody can switch at all. Nobody is ever stuck inside a wall, and your friend can free you with one press. Options: (a) leave it, friends sort it out by talking; (b) let a press ask the friend to swap (your library calls a consent swap "sensible … but not approved"); (c) let the party hold more heroes than players so one is always free.
-- **Unblocks:** nothing tonight; it is how switching feels with two or three players.
-- **Recommendation:** (a) for the first morning, then (c) once more heroes exist.
-- **Answer goes to:** `docs/plan/step-2.md` "What's decided"
-- **Source:** this entry; `docs/mechanisms/party-and-switching.md`, "known gaps"
-- **Blocking:** no
-
-### Asset need · The look comes first now: heroes, townspeople, town and castle ground, skies (for Vision Partner's asset desk; not a question for the owner)
-- **Asked by:** orchestrator, Step 8, `session_017WiGzHX8g2sXimNRnqp2oZ`, 2026-11-23 11:20 UTC, parent none
-- **The owner's words (to the orchestrator, first-hand, 2026-11-23 ~11:11 UTC, with an iPhone screenshot of the castle street):** "It all looks looks like absolute blocky shit. Compare to kirby and the amazing mirror and don't stop working on it until it looks similar to that. There are assets provided and you have the ability to get more." Recorded in `docs/plan/step-8.md`. This sounds vision-level for the visual direction; yours to fold into `docs/vision.md` if you read it that way.
-- **What is needed from the desk, most urgent first:** (1) the three party heroes (grappler, a tiny infiltrator, a flyer; collision boxes 18×30, about 10×14 and about 14×20; 32×32 cells): idle, run, jump, fall, attack, grab, carry, hurt, knocked out; the open C02 REVISION is still undelivered and is now BLOCKING; (2) the king, guard, shopkeeper and villain, each with the three moods; (3) 16 px ground for the town street, the castle interior and the grassy courtyard that joins up at edges and corners (top, sides, inner and outer corners, one-way ledge), plus doors, windows, banners, awnings, crates; (4) sky and far-distance layers for each, 320×180, made to scroll slower than the ground.
-- **Meanwhile:** the team is drawing original stand-ins in code so the owner is not left looking at rectangles; a delivery replaces a stand-in by a data change (`docs/decisions-log.md`).

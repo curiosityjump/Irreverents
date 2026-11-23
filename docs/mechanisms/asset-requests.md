@@ -58,7 +58,7 @@ no connector: any session can run `python3 -I tools/drive_sync.py` whenever
 it wants the latest art (ChatGPT itself only processes requests hourly, so
 that, not Vision Partner's check, is the real pace).
 
-### Handoff state (2026-11-23 ~13:30 UTC)
+### Handoff state (2026-11-23 ~13:30 UTC; picked up by session_017WiGzGHxdLq71CDUoQZz9Z, which runs its own hourly check)
 
 - The genesis Vision Partner's hourly Drive-check task (`trig_01B6h7mKw47J36oxJaxWf2NU`)
   was **disabled** at 09:52 UTC for the usage limit and stays off: it fires
@@ -83,7 +83,8 @@ that, not Vision Partner's check, is the real pace).
 | 2026-11-23 04:00 | U08-01 — six 24×24 touch buttons (left, right, jump, attack, grab/throw, special) + pressed states; the owner's end-to-end process test — **DELIVERED ~04:10**: `.../current-pixel-art-explorations/u08-01-touch-controls-ready-for-prototype/` | SOON |
 | 2026-11-23 04:07 | A01-01 — first sound-effects pack — **DELIVERED** (synced 08:3x): `docs/design-library/03-visual-direction-and-assets/audio/a01-01-first-sfx-pack/` (OGG/WAV + manifest) | SOON |
 | 2026-11-23 04:20 | A02-01 (replaced 04:07 version) — music: layered area theme + stumble/snap-back, stealth, NFS/GTA pursuit layers, Far Cry outpost, Smash cantina brawl, GTA radio, Matrix mob, royal march, Hall | SOON |
-| 2026-11-23 04:25 | C02-02/03 REVISION — heroes v2: distinct grappler/quick silhouettes, real animation, crouch, victory | SOON |
+| 2026-11-23 04:25 | C02-02/03 REVISION — heroes v2: distinct grappler/quick silhouettes, real animation, crouch, victory | BLOCKING (doc says so; ChatGPT: "IN PROGRESS — QUALITY REWORK" at 08:18 EST, not delivered) |
+| 2026-11-23 13:32 | C02-04 + N03-05/N03-06 — third hero (the flyer), the king, the villain, each NPC with three moods; also sets one priority order across all pending requests (heroes, then NPCs, then E01 ground and sky layers, then music); answers Step 8's "Asset need" | BLOCKING |
 
 All assume 320×180 internal resolution and a 16 px tile grid (doc 14
 option B; S00-01's phone previews). A build that chooses otherwise tells

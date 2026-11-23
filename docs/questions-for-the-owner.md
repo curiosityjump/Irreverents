@@ -9,13 +9,13 @@ per answer saying where it went.
 
 ## Current sessions
 
-- **Vision Partner:** session_017WiGzHC3CvjTNZqCuxa8Ex (genesis; handed off 2026-11-23 ~13:30 UTC, context long; successor to be started by the orchestrator)
+- **Vision Partner:** session_017WiGzGHxdLq71CDUoQZz9Z (second; started by the orchestrator 2026-11-23 13:29 UTC, succeeding genesis session_017WiGzHC3CvjTNZqCuxa8Ex, which handed off ~13:30 UTC, context long)
 - **Orchestrator:** session_017WiGzGp8auJceLEAAh9Aqx (fourth; Opus; started by the owner 11:15 UTC as backup, took over 2026-11-23 12:01 UTC from session_017WiGzHX8g2sXimNRnqp2oZ, which stopped at 11:58 UTC on its Fable usage limit)
   This line is the one address every session uses to reach the current
   orchestrator; Vision Partner's doorbell goes only here.
 - **Questions per message the owner wants:** 3 (the default; record the
   owner's own number here, quoted, if they set one).
-- **Next id:** Q-012
+- **Next id:** Q-014
 
 ## How to feed this file
 
@@ -71,7 +71,7 @@ entries group them; they are not entries.
 
 ---
 
-## Open (4)
+## Open (6)
 
 **After you've played the morning build**
 
@@ -82,6 +82,28 @@ entries group them; they are not entries.
 - **Recommendation:** yes, keep the order; tell us the one thing you most missed while playing and it moves to the top.
 - **Answer goes to:** `docs/current-directive.md` "Current directive"
 - **Source:** `docs/current-directive.md`
+- **Blocking:** no
+
+### Q-013 · When a friend takes the hero you need to get back out
+- **Asked by:** lead, Step 2, `session_017WiGzGRnRoAeW5Ep5iSycV`, 2026-11-23 04:45 UTC, parent `session_017WiGzFWfLir1ATiSP7c5E5`
+- **Question:** Your rule is that one person plays a hero at a time, so the switch button only offers heroes nobody is playing. That allows this: you crawl through a tiny gap as the small hero, switch to the flyer inside, then your friend switches to the small hero. You can't crawl back out until they switch off it, and with three players every hero is taken, so nobody can switch at all. Nobody is ever stuck in a wall, and your friend can free you with one press. Options: (a) leave it as it is and let friends sort it out by talking; (b) let a press ask your friend to swap (your library calls a consent swap "a sensible proposal but not approved"); (c) let the party have more heroes than players, so one is always free.
+- **Unblocks:** nothing tonight; decides how switching feels with two or three players.
+- **Recommendation:** (a) for now, then (c) once there are more heroes.
+- **Answer goes to:** `docs/plan/step-2.md` "What's decided"
+- **Source:** `docs/mechanisms/party-and-switching.md`, "known gaps"; `docs/plan/step-2.md`
+- **Blocking:** no
+- **Needs trying first:** best judged after playing with a friend.
+- **As asked:** "When a friend takes the hero you need to get back out" (wording tightened; options and recommendation unchanged)
+
+**One setting to change in Railway, when convenient (before 1 December)**
+
+### Q-012 · Set Railway's "Watch Paths" so that our document pushes never restart your game
+- **Asked by:** orchestrator, from Step 1's lead `session_017WiGzEwLs3ng2ZPpRZgctn`, `session_017WiGzFWfLir1ATiSP7c5E5`, 2026-11-23 UTC, parent none
+- **Question:** The team pushes documents to GitHub every few minutes. Each push used to restart the live game and kick out whoever was playing. A small settings file in the repository (`railway.json`) now stops that, so only changes to the game itself restart it, and we've seen it work. But a web search (we couldn't open Railway's own docs, so this is unverified) says Railway stops reading that file for existing services on 2026-12-01. If so, document pushes would start restarting the game again from that date. Setting the rule by hand in Railway doesn't expire: open the Irreverents service, go to Settings, "Watch Paths", and enter `src/**`, `content/**`, `scripts/**`, `assets/**`, `package.json`, `package-lock.json`, `tsconfig.json`, `tsconfig.pure.json`, `railway.json`. Options: (1) set it by hand before December; (2) leave it, and we watch for restarts after 1 December; (3) check Railway's own notice about the date and tell us what it says.
+- **Unblocks:** nothing tonight; it keeps games from being cut off by our pushes after 1 December.
+- **Recommendation:** 1. It's one field, and then the protection lives in Railway, not in a file that might stop working.
+- **Answer goes to:** `docs/mechanisms/deploy.md` "Traps"
+- **Source:** `docs/mechanisms/deploy.md`, "Traps"
 - **Blocking:** no
 
 **Fixes for the Drive library (non-blocking; the newer rule wins until you say otherwise)**

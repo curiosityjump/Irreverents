@@ -205,6 +205,16 @@ Detail: docs 08, 09.
 **Owner, 2026-11-22 (Drive, doc 00):**
 > Visual priority per owner: achieve Kirby & the Amazing Mirror's restraint and legibility, not merely its colorfulness.
 
+**Owner, 2026-11-23 ~11:11 UTC, to the orchestrator, first-hand (recorded in `docs/plan/step-8.md`), on seeing the live castle street on an iPhone:**
+> It all looks looks like absolute blocky shit.
+> Compare to kirby and the amazing mirror and don't stop working on it until it looks similar to that. There are assets provided and you have the ability to get more.
+
+*(Framing, Vision Partner:)* so the look is now the first thing worked on
+(Step 8), and "similar" is measured against the quality and legibility of
+that game, with designs that stay original (`CLAUDE.md`: keep it original).
+Folded in from the orchestrator's record. Vision Partner hasn't yet
+confirmed it with the owner directly.
+
 Detail: docs 10, 13, 14, 32. Only the look of "Pixel aesthetic reference —
 approved direction" is approved; no sprite or tile is production art yet.
 
