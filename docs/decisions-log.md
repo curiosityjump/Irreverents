@@ -617,3 +617,9 @@ document as a decision of theirs.
 - **To change it:** delete the "Fewer, longer-lived builders" paragraph at the top of `docs/lead-session.md` "What the role is".
 - **Where:** `docs/lead-session.md`; the Step 8 round-2 lanes and Steps 11–12 run this way.
 
+### 2026-11-23 · How the cantina brawl ends, and its first shape
+- **Decided by:** Step 11 lead `session_017WiGzFy3MD6ecvM7QMvQGd`
+- **Instead of asking:** Q-008, "How does someone leave the endless cantina brawl?", and the open parts of doc 31 (where the door is, who is unlocked, where the edge is, who gets a knock-out).
+- **Why this way:** "There is always a way out", so both: the brawl calms when nobody has attacked for a few seconds, and it ends when the last player walks out (Q-008's recommendation, 3). The door is on the castle street at ground level between the two buildings (the step's "off the castle street"). Everyone in the roster is unlocked, because nothing in the world unlocks anyone yet, and two extra characters join the three so a bar fight has more than one or two people in it. The arena's edge is a line drawn inside the room, because nothing can leave a room's bounds. A knock-out goes to whoever sent the body flying, else whoever knocked it flat, else the last to hit it.
+- **To change it:** the calm time, edge, pads and patterns are numbers in `content/cantina/`; the door is one tile in `content/rooms/castle-street.json`; the roster is `content/roster.json`.
+- **Where:** `docs/plan/step-11.md`; `handoff-prompts/step-11-a-brawl.md` while it runs, then `docs/mechanisms/cantina.md`.

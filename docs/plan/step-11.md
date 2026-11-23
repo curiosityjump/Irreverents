@@ -170,7 +170,11 @@ taps feel direct on a real iPhone.
 
 ## Measure
 
+Taken 2026-11-23 by the lead at 17d8c1b (`npm run check` green): friends hit but do not launch or wear each other (three tuning numbers at 0, read at `attack.ts:139-146` and `friendly()` in impact-walls/bodies); nothing removes or respawns a body; nothing can leave a room's bounds (outside reads solid); unplayed party members are not in the world; no roster exists; no tap on the game view; the `move` effect exists but has never run across two pages. Step 12's door goes in the courtyard (column 9), so there is no clash.
+
 ## Briefs
+
+- **Slice A, the brawl** (`handoff-prompts/step-11-a-brawl.md`, briefed 2026-11-23 by lead `session_017WiGzFy3MD6ecvM7QMvQGd`): roster, two new characters, the cantina room and its street door (castle street column 20), regulars, the brawl, out-and-back with a counter. Signals 1-5, half of 6, plus a real-server check that `move` brings a player back. Slice B (the tap, the row, the swap, the chase lock, signal 8) waits for it.
 
 ## Open with the owner
 
