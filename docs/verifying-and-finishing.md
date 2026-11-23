@@ -93,8 +93,21 @@ stops the old server before starting the new one, now that a storage
 volume is attached): it answers Railway's own "Application not found"
 meanwhile, which is not a failed deploy. The running commit need not be
 yours: a later push by someone else reads as fine. If `check:deployed`
-fails after its wait, the previous deploy is still serving or the game
-is down: revert first, tell your lead, diagnose after. **A push that
+fails after its wait, look before you revert (`DRAFT:` orchestrator,
+2026-11-23 17:45 UTC, after three good pushes were reverted in one hour:
+582db12, 76791bf, 8c2b471; each went live unchanged when pushed again):
+- **`/healthz` answers and its `commit` is an older one:** the deploy is
+  queued or was superseded. With ten builders pushing, several code pushes
+  inside a minute or two replace each other's builds, and the live commit
+  moves only when there is a gap (measured: ab25e7a was live 51 s after
+  its push once the burst ended). **Do not revert.** Wait, re-run
+  `check:deployed` every two minutes for up to fifteen, and push nothing
+  else meanwhile. A revert is one more push in the queue and deletes work
+  that was fine.
+- **`/healthz` does not answer for more than three minutes, or answers
+  with your commit and `check:live` fails, or `/debug/errors` shows new
+  errors from your build:** the game is down or broken. Revert first,
+  tell your lead, diagnose after. **A push that
 changes only documents does not deploy** and does not need this
 (`docs/mechanisms/deploy.md`).
 

@@ -782,3 +782,11 @@ document as a decision of theirs.
 - **Why this way:** the bar's "NPC Reactions" panel: a red face and an anger mark, the costume unchanged. Where a sheet has the mood's own pose (the brawler's yell, the patron's side-eye) it is used; every other pose gets a sweat drop beside the head (mood 2) or the head's skin turned to the red ramp (mood 3). Nothing tints the costume, so the round-2 rage wash does not come back.
 - **To change it:** `sweat()` and `flush()` in `tools/art/cast/cut3.py`, or a person's own `M2`/`M3` poses there. `DRAFT:`
 - **Where:** `tools/art/cast/cut3.py`.
+
+### 2026-11-23 · A push that is "not live yet" is not reverted while the game is healthy
+- **Decided by:** orchestrator `session_017WiGzHhke4tkAThPgw6EXs`
+- **Instead of asking:** "Should a builder revert when its commit is not live after a few minutes?"
+- **Why this way:** three good pushes were reverted in an hour (582db12, 76791bf, 8c2b471) because `check:deployed` timed out, and each went live unchanged when pushed again. The cause was a burst of code pushes replacing each other's builds on Railway, not a broken build: the live address stayed healthy on an older commit, and ab25e7a was live 51 s after its push once the burst ended. A revert adds a push to the queue and deletes work. The rule still reverts at once when the game is down or broken.
+- **To change it:** `docs/verifying-and-finishing.md`, "The pre-push gate".
+- **Where:** that section.
+
