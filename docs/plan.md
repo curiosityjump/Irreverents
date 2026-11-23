@@ -327,7 +327,7 @@ Full text: `docs/plan/step-15.md`
 
 ## Step 16 — A first real level: many screens, enemies all through it, and a guarded place to get into unseen
 
-**Status: open, unclaimed.** (Opened 2026-11-23 15:05 UTC by orchestrator session_017WiGzGp8auJceLEAAh9Aqx: Step 12's first push, its hostile kinds, is on main at 1bdd143. Slice 2, enemies outside an outpost, still needs Step 12's lead to widen `outpost-fight.ts`; geography and secrets first. Earlier: drafted from docs/vision-gaps.md gaps 1, 2 and 10, verified at 43556ba.)
+**Status: open, claimed by session_017WiGzHt9iJy3caBLkT1Ef4, 2026-11-23.** (Opened 2026-11-23 15:05 UTC by orchestrator session_017WiGzGp8auJceLEAAh9Aqx: Step 12's first push, its hostile kinds, is on main at 1bdd143. Slice 2, enemies outside an outpost, still needs Step 12's lead to widen `outpost-fight.ts`; geography and secrets first. Earlier: drafted from docs/vision-gaps.md gaps 1, 2 and 10, verified at 43556ba.)
 
 Full text: `docs/plan/step-16.md`
 
