@@ -51,6 +51,22 @@
       "jumpCutMultiplier": 0.45,
       "coyoteTime": 0.1,
       "jumpBufferTime": 0.1
+    },
+    "crate": {
+      "weight": 20,
+      "toughness": 0
+    },
+    "crate-heavy": {
+      "weight": 120,
+      "toughness": 0
+    },
+    "dummy": {
+      "weight": 40,
+      "toughness": 100
+    },
+    "dummy-heavy": {
+      "weight": 110,
+      "toughness": 260
     }
   }
 }

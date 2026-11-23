@@ -1,0 +1,11 @@
+{
+  "//": "DRAFT: a graybox body to hit and throw. It stands there; it has no behaviour.",
+  "id": "dummy",
+  "name": "Dummy",
+  "box": { "w": 12, "h": 26 },
+  "color": "#81b29a",
+  "verbs": [
+    "body"
+  ],
+  "tuning": "dummy"
+}

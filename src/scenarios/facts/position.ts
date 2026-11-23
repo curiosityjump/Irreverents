@@ -1,4 +1,4 @@
-import { checkAt, checkOnly, checkPlayer, feet, isRange, playerAt, round2 } from '../fact-helpers.ts';
+import { checkAt, checkOnly, bodyAt, bodyName, checkBody, feet, isRange, round2 } from '../fact-helpers.ts';
 import type { Fact } from '../types.ts';
 
 /**
@@ -10,8 +10,8 @@ const fact: Fact = {
   id: 'position',
   validate(spec, scenario) {
     const out: string[] = [];
-    checkOnly(spec, ['player', 'at', 'x', 'y'], out);
-    checkPlayer(spec, scenario, out);
+    checkOnly(spec, ['player', 'entity', 'at', 'x', 'y'], out);
+    checkBody(spec, scenario, out);
     checkAt(spec, scenario, out);
     if (spec.x === undefined && spec.y === undefined) out.push('x / y: give at least one range');
     for (const axis of ['x', 'y']) {
@@ -20,13 +20,13 @@ const fact: Fact = {
     return out;
   },
   test(spec, rec) {
-    const e = playerAt(rec, spec.player as string, spec.at as number);
-    if (!e) return `player ${spec.player} is not in the world at tick ${spec.at}`;
+    const e = bodyAt(rec, spec, spec.at as number);
+    if (!e) return `${bodyName(spec)} is not in the world at tick ${spec.at}`;
     const f = feet(rec, e);
     for (const axis of ['x', 'y'] as const) {
       const range = spec[axis] as [number, number] | undefined;
       if (range && (f[axis] < range[0] || f[axis] > range[1])) {
-        return `at tick ${spec.at} player ${spec.player}'s feet are at ${axis} = ${round2(f[axis])}, expected between ${range[0]} and ${range[1]}`;
+        return `at tick ${spec.at} ${bodyName(spec)}'s feet are at ${axis} = ${round2(f[axis])}, expected between ${range[0]} and ${range[1]}`;
       }
     }
     return null;

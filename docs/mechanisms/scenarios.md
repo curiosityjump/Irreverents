@@ -31,6 +31,11 @@ build gates A–F (`docs/measures.md`, M3) from the scenarios' `gate` tags.
 ```
 
 - `id` must equal the file name. `gate` is optional: `A`–`F`.
+- `entities` is optional: bodies nobody plays (a crate, a dummy), each
+  `{ "id": "dummy-1", "character": "<character kind id>", "tile": [col, row] }`,
+  put in the room before tick 0 with their feet on the floor of that tile,
+  centred. The entity's id in the world is the `id` given (players are
+  `p:<player id>`, so an id may not start with `p:`).
 - An input span holds the stick (`x`, `y` from -1 to 1) and/or actions
   (`hold`, ids from `content/actions/`) from tick `from` up to but not
   including `to`. Overlapping spans merge.
@@ -47,6 +52,10 @@ build gates A–F (`docs/measures.md`, M3) from the scenarios' `gate` tags.
 | `position` | at tick `at`, `player`'s feet are within `x` and/or `y` `[min, max]` |
 | `velocity` | at tick `at`, `player`'s `vx` and/or `vy` (pixels per second) are within `[min, max]` |
 | `event` | event `event` happened (for `player`, if given) on a tick within `between`; optional `count: [min, max]`, and `[0, 0]` means "must not happen" |
+
+Every fact that names a `player` accepts `"entity": "<id>"` instead (one
+of the scenario's `entities`): the three body facts read that body, and
+`event` matches the event's `entity` field. Give one or the other.
 
 Add a fact by adding a file there that default-exports a `Fact`
 (`validate` names what is wrong with how a scenario wrote it; `test`

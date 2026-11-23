@@ -1,0 +1,20 @@
+{
+  "id": "hit-placed-body-stands",
+  "proves": "a scenario can put bodies nobody plays in the room (the entities field) and facts can read them by entity id: a dummy stands where it was put, and a crate put in mid-air falls and lands",
+  "room": "graybox-hall",
+  "players": [{ "id": "a", "character": "hero", "spawn": 0 }],
+  "entities": [
+    { "id": "dummy-1", "character": "dummy", "tile": [10, 9] },
+    { "id": "crate-1", "character": "crate", "tile": [12, 2] }
+  ],
+  "inputs": [],
+  "ticks": 90,
+  "expect": [
+    { "fact": "standing-on-tile", "entity": "dummy-1", "at": 90, "tile": [10, 10] },
+    { "fact": "position", "entity": "dummy-1", "at": 90, "x": [168, 168], "y": [160, 160] },
+    { "fact": "standing-on-tile", "entity": "crate-1", "at": 90, "tile": [12, 5] },
+    { "fact": "velocity", "entity": "crate-1", "at": 90, "vx": [0, 0], "vy": [0, 0] },
+    { "fact": "event", "event": "landed", "entity": "crate-1", "between": [1, 60], "count": [1, 1] },
+    { "fact": "event", "event": "landed", "entity": "dummy-1", "between": [0, 90], "count": [0, 0] }
+  ]
+}

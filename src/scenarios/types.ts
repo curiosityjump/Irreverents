@@ -22,6 +22,8 @@ export interface Scenario {
   proves: string;
   room: string;
   players: { id: string; character: string; spawn: number }[];
+  /** Bodies nobody plays, put in the room before tick 0. Their entity id is `id`. */
+  entities?: { id: string; character: string; tile: [number, number] }[];
   inputs: InputSpan[];
   /** How many ticks to run. */
   ticks: number;

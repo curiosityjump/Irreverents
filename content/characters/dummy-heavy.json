@@ -1,0 +1,11 @@
+{
+  "//": "DRAFT: a graybox big body; it can be hit by anyone, lifted only by a strong character (the grappler).",
+  "id": "dummy-heavy",
+  "name": "Heavy Dummy",
+  "box": { "w": 20, "h": 30 },
+  "color": "#3d6b58",
+  "verbs": [
+    "body"
+  ],
+  "tuning": "dummy-heavy"
+}

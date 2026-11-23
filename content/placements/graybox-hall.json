@@ -1,0 +1,13 @@
+{
+  "//": "DRAFT: things to hit and throw in the first room, clear of the two spawn tiles (columns 2 and 5). Step 4 owns this kind of file from here.",
+  "id": "graybox-hall",
+  "room": "graybox-hall",
+  "place": [
+    { "id": "crate-1", "character": "crate", "tile": [8, 9] },
+    { "id": "crate-2", "character": "crate", "tile": [12, 4] },
+    { "id": "dummy-1", "character": "dummy", "tile": [10, 9] },
+    { "id": "dummy-2", "character": "dummy", "tile": [13, 9] },
+    { "id": "crate-heavy-1", "character": "crate-heavy", "tile": [15, 9] },
+    { "id": "dummy-heavy-1", "character": "dummy-heavy", "tile": [17, 9] }
+  ]
+}

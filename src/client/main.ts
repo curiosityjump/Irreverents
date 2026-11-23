@@ -3,7 +3,7 @@
 // scenario harness, and draws it as graybox rectangles.
 import { step } from '../sim/step.ts';
 import { DT } from '../sim/types.ts';
-import { createWorld, spawnPlayer } from '../sim/world.ts';
+import { createWorld, populateRoom, spawnPlayer } from '../sim/world.ts';
 import { watchKeyboard } from './keyboard.ts';
 import { render, VIEW_H, VIEW_W } from './render.ts';
 
@@ -16,6 +16,7 @@ const g = canvas.getContext('2d')!;
 const LOCAL = 'local';
 const world = createWorld();
 spawnPlayer(world, content, { player: LOCAL, character: content.game.playerCharacter, room: content.game.startRoom });
+populateRoom(world, content, content.game.startRoom);
 const readInput = watchKeyboard(content, window);
 
 // A fixed timestep fed by real time: the simulation always advances in

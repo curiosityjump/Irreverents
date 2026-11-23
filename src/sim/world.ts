@@ -59,3 +59,46 @@ export function spawnPlayer(
     c: {},
   });
 }
+
+/**
+ * Puts a body nobody plays (a crate, a dummy, later an NPC) in a room: feet
+ * on the floor of `tile`, centred in it, the way spawnPlayer does it.
+ */
+export function spawnBody(
+  world: World,
+  content: Content,
+  opts: { id: string; character: string; room: string; tile: [number, number] },
+): Entity {
+  const room = content.rooms[opts.room];
+  const kind = content.characters[opts.character];
+  if (!room) throw new Error(`no room "${opts.room}"`);
+  if (!kind) throw new Error(`no character "${opts.character}"`);
+  const [tx, ty] = opts.tile;
+  return addEntity(world, {
+    id: opts.id,
+    kind: kind.id,
+    player: null,
+    room: room.id,
+    x: tx * room.tile + (room.tile - kind.box.w) / 2,
+    y: (ty + 1) * room.tile - kind.box.h,
+    vx: 0,
+    vy: 0,
+    facing: 1,
+    onGround: true,
+    c: {},
+  });
+}
+
+/**
+ * Adds everything content/placements/<room id>.json places in a room.
+ * Safe to call twice: an id already in the world is skipped. A room with no
+ * placements file gets nothing.
+ */
+export function populateRoom(world: World, content: Content, roomId: string): void {
+  const placed = content.placements?.[roomId];
+  if (!placed) return;
+  for (const p of placed.place) {
+    if (findEntity(world, p.id)) continue;
+    spawnBody(world, content, { id: p.id, character: p.character, room: roomId, tile: p.tile });
+  }
+}

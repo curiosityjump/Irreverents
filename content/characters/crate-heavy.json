@@ -1,0 +1,11 @@
+{
+  "//": "DRAFT: a graybox heavy thing; only a strong character (the grappler) can lift it.",
+  "id": "crate-heavy",
+  "name": "Heavy Crate",
+  "box": { "w": 24, "h": 24 },
+  "color": "#7f5539",
+  "verbs": [
+    "body"
+  ],
+  "tuning": "crate-heavy"
+}

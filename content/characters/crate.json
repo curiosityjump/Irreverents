@@ -1,0 +1,11 @@
+{
+  "//": "DRAFT: a graybox thing to pick up and throw. Anyone can lift it.",
+  "id": "crate",
+  "name": "Crate",
+  "box": { "w": 14, "h": 14 },
+  "color": "#b08968",
+  "verbs": [
+    "body"
+  ],
+  "tuning": "crate"
+}

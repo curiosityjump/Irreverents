@@ -2,7 +2,7 @@ import { describe, isRecord, known } from '../content/reader.ts';
 import type { Content, Problem } from '../content/types.ts';
 import { step } from '../sim/step.ts';
 import type { Input, SimEvent, World } from '../sim/types.ts';
-import { createWorld, spawnPlayer } from '../sim/world.ts';
+import { createWorld, spawnBody, spawnPlayer } from '../sim/world.ts';
 import facts from './facts/index.gen.ts';
 import type { InputSpan, Recording, Scenario } from './types.ts';
 
@@ -19,7 +19,7 @@ export function parseScenario(raw: unknown, file: string, stem: string, content:
     fail('(the whole file)', `must be an object, but is ${describe(raw)}`);
     return null;
   }
-  const fields = ['id', 'gate', 'proves', 'room', 'players', 'inputs', 'ticks', 'expect'];
+  const fields = ['id', 'gate', 'proves', 'room', 'players', 'entities', 'inputs', 'ticks', 'expect'];
   for (const key of Object.keys(raw)) {
     if (key !== '//' && !fields.includes(key)) fail(key, `unknown field (known fields: ${fields.join(', ')})`);
   }
@@ -49,6 +49,34 @@ export function parseScenario(raw: unknown, file: string, stem: string, content:
       if (typeof spawn !== 'number' || !Number.isInteger(spawn) || spawn < 0) fail(`${w}.spawn`, `must be a whole number from 0, but is ${JSON.stringify(spawn)}`);
       players.push({ id: String(p.id), character: String(p.character), spawn: Number(spawn) });
     });
+  }
+
+  const entities: NonNullable<Scenario['entities']> = [];
+  if (raw.entities !== undefined) {
+    if (!Array.isArray(raw.entities)) fail('entities', `must be a list, but is ${describe(raw.entities)}`);
+    else {
+      const room = typeof raw.room === 'string' ? content.rooms[raw.room] : undefined;
+      raw.entities.forEach((e: unknown, i: number) => {
+        const w = `entities[${i}]`;
+        if (!isRecord(e)) return fail(w, `must be an object, but is ${describe(e)}`);
+        for (const key of Object.keys(e)) {
+          if (!['id', 'character', 'tile', '//'].includes(key)) fail(`${w}.${key}`, 'unknown field (known fields: id, character, tile)');
+        }
+        if (typeof e.id !== 'string' || e.id === '') fail(`${w}.id`, 'must be non-empty text');
+        else if (e.id.startsWith('p:')) fail(`${w}.id`, `"${e.id}" starts with "p:", which is how players' entities are named`);
+        else if (entities.some((q) => q.id === e.id)) fail(`${w}.id`, `entity "${e.id}" is listed twice`);
+        if (typeof e.character !== 'string' || !(e.character in content.characters)) {
+          fail(`${w}.character`, `no character ${JSON.stringify(e.character)} (characters: ${known(content.characters)})`);
+        }
+        const t = e.tile;
+        const tileOk = Array.isArray(t) && t.length === 2 && t.every((n) => Number.isInteger(n));
+        if (!tileOk) fail(`${w}.tile`, `must be [column, row], but is ${JSON.stringify(t)}`);
+        else if (room && (t[0] < 0 || t[1] < 0 || t[0] >= room.w || t[1] >= room.h)) {
+          fail(`${w}.tile`, `[${t[0]}, ${t[1]}] is outside room "${room.id}", which is ${room.w} by ${room.h} tiles`);
+        }
+        entities.push({ id: String(e.id), character: String(e.character), tile: tileOk ? [t[0], t[1]] : [0, 0] });
+      });
+    }
   }
 
   const inputs: InputSpan[] = [];
@@ -86,6 +114,7 @@ export function parseScenario(raw: unknown, file: string, stem: string, content:
     proves: String(raw.proves ?? ''),
     room: String(raw.room),
     players,
+    entities,
     inputs,
     ticks: ticksOk ? (ticks as number) : 1,
     expect: [],
@@ -123,6 +152,7 @@ export function inputsAt(scenario: Scenario, tick: number): Record<string, Input
 export function simulate(scenario: Scenario, content: Content): Recording {
   const world = createWorld();
   for (const p of scenario.players) spawnPlayer(world, content, { player: p.id, character: p.character, room: scenario.room, spawn: p.spawn });
+  for (const e of scenario.entities ?? []) spawnBody(world, content, { id: e.id, character: e.character, room: scenario.room, tile: e.tile });
   const snapshot = (): World => JSON.parse(JSON.stringify(world)) as World;
   const history: World[] = [snapshot()];
   const events: SimEvent[] = [];
