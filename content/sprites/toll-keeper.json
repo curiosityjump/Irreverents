@@ -1,0 +1,25 @@
+{
+  "//": "DRAFT: stand-in cut from the art desk's source sheets by tools/art/cast/make.py (cut3.py, source.py); a delivered sheet replaces it by editing this file.",
+  "id": "toll-keeper",
+  "image": "sprites/cast/toll-keeper.png",
+  "cell": {"w": 56, "h": 48},
+  "anchor": {"x": 21, "y": 22},
+  "fps": 8,
+  "frames": {
+    "idle": [0, 1, 2, 3],
+    "run": [8, 9, 10, 11, 12, 13],
+    "air": [16, 17],
+    "attack": [24, 25, 26, 27],
+    "hurt": [32, 33, 34],
+    "down": [40, 41],
+    "held": [48, 49, 50, 51],
+    "talk": [56, 57, 58, 59],
+    "jump": [16],
+    "fall": [17]
+  },
+  "fpsBy": {"idle": 6, "run": 12, "attack": 14, "hurt": 10, "down": 2, "held": 10, "talk": 9, "air": 8},
+  "moods": {
+    "2": {"idle": [64, 65, 66, 67], "run": [72, 73, 74, 75, 76, 77], "air": [80, 81], "attack": [88, 89, 90, 91], "hurt": [96, 97, 98], "held": [104, 105, 106, 107], "talk": [112, 113], "down": [40, 41]},
+    "3": {"idle": [120, 121, 122, 123], "run": [128, 129, 130, 131, 132, 133], "air": [136, 137], "attack": [144, 145, 146, 147], "hurt": [152, 153, 154], "held": [160, 161, 162, 163], "talk": [168, 169], "down": [40, 41]}
+  }
+}

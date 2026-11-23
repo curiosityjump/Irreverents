@@ -565,6 +565,41 @@ ROUND3.update({
     'brute': brute,
 })
 
+
+def toll_keeper():
+    # P03 villain sheet, row 2: the hooded grunt (the orchestrator's pick for the quarry road's toll keeper,
+    # who never swings: the dagger only comes out in mood 3). P03 has no knocked-out grunt, so `down` is
+    # P07's purple-hooded signaller lying flat (the nearest hooded KO on the plates).
+    P = _poses('villains', 0.24, {
+        'i0': ((85, 377, 200, 510),),
+        'i1': ((268, 377, 380, 510),),
+        'ready': ((447, 377, 586, 510), {'erase': ((540, 340, 600, 420),)}),
+        'slash': ((622, 377, 783, 510), {'erase': ((730, 377, 790, 510),)}),
+        'hit': ((812, 361, 964, 480), {'erase': ((900, 340, 970, 420),)}),
+        'dash': ((1056, 378, 1163, 510),),
+        'gasp': ((1224, 377, 1355, 510),),
+    })
+    ko, f = cut('p07enemy', (1290, 291, 1413, 352), 0.27)
+    P['ko'] = Pose(ko, f)
+    i0, i1, d = P['i0'], P['i1'], P['dash']
+    S = {
+        'idle': [i0, i0, i1, i1],
+        'run': [d, lift(d), i1, i1, lift(i1), d],
+        'air': [lift(P['gasp'], 0), lean(P['gasp'], -1)],
+        'attack': [P['ready'], P['slash'], P['slash'], i0],
+        'hurt': [lean(P['hit'], -1), P['hit'], P['hit']],
+        'down': [P['ko'], breathe(P['ko'], 0.4)],
+        'held': [P['hit'], lean(P['hit'], 2), P['hit'], lean(P['hit'], -2)],
+        'talk': [i0, P['gasp'], i0, i1],
+    }
+    M2 = {'idle': [P['gasp'], P['gasp'], breathe(P['gasp']), breathe(P['gasp'])], 'talk': [P['gasp'], i0]}
+    M3 = {'idle': [flush(P['ready']), flush(P['ready']), breathe(flush(P['ready'])), breathe(flush(P['ready']))],
+          'talk': [flush(P['ready']), flush(P['gasp'])]}
+    return dict(cell=(56, 48), box=(14, 26), S=S, M2=M2, M3=M3)
+
+
+ROUND3['toll-keeper'] = toll_keeper
+
 PERSON_STATES = ['idle', 'run', 'air', 'attack', 'hurt', 'down', 'held', 'talk', 'grab', 'carry', 'carryRun', 'throw']
 MOOD_STATES = ['idle', 'run', 'air', 'attack', 'hurt', 'held', 'talk']
 

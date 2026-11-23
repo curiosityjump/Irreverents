@@ -174,10 +174,16 @@ height, faces 10-14 px wide.
   idle; a sweat drop or red face elsewhere.
 - Seen in the real game: `quarry-pit` (7, 18) and `quarry-ridge` (72, 9)
   (`after-quarry-*`).
+- `toll-keeper` (push 4, asked by the orchestrator after the brief): P03
+  villain sheet row 2, the purple hooded grunt (scale 0.24, about 30 px
+  over 14x26; cell 56x48). He never swings, so his dagger shows only in
+  `attack` and his mood-3 ready pose. P03 has no knocked-out grunt:
+  `down` is P07's purple-hooded signaller lying flat. Seen at
+  `quarry-road` (41, 12).
 
 New ids for the contract's cast list: `brawler`, `skirmisher`,
 `outpost-fighter`, `outpost-lookout`, `signal-post`, `heavy-fighter`,
-`brute` (sprite files and `assets/sprites/cast/<id>.png`).
+`brute`, `toll-keeper` (sprite files and `assets/sprites/cast/<id>.png`).
 
 ## Deviations from the contract
 
@@ -245,10 +251,6 @@ New ids for the contract's cast list: `brawler`, `skirmisher`,
 - (Round 3) `tumble` and the curled, kicking `held` wait for the actors
   lane's validator (`git log origin/main --grep 'round 3, actors'`, empty
   at this push); `held` is the hurt pose wiggling.
-- (Round 3) **`toll-keeper`** (Step 16, 14x26) has no sprite: it landed
-  after the brief, whose paths do not name it. P07's green-hooded
-  crossbow bandit (enemy row 4) or P08's goggled bomber (row 5) would
-  fit; it is one more function in `cut3.py`.
 - (Round 3) **The villain is the weakest again**: his face is small and
   dark under the hood, so his mood-3 red face is the least visible of
   the four; a few dark specks stay where the horns were; and his
