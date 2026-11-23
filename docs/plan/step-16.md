@@ -483,9 +483,11 @@ List these; don't grade them.
 
 Slice 1, 2026-11-23 16:10 UTC: the main way (road, ridge, tower, depot) is **248 columns, 12.4 screens**, counted with `python3 -c "import json;print(sum(len(json.load(open(f'content/rooms/quarry-{r}.json'))['rows'][0]) for r in ['road','ridge','tower','depot']))"`. `npm run check` with the quarry joined: see the push 2 commit message.
 
+2026-11-23 16:40 UTC, lead review of slice 1 at 1e35d37 (re-run): `npm run check` green, 224 s (77 s at e673fa5); 40 `step16-*` scenarios; `check:deployed` ok. The way-out check alone, `checkRooms`, takes 97 s with the quarry joined, and runs inside `loadContent()`, so `npm run build` went from 38 s (7500b81) to 93 s. Flagged to the orchestrator for a Step 3 fix; the rooms stay. Push 3, the undercroft way home, deferred.
+
 ## Briefs
 
-- Slice 2, the enemies (signal 4; ranged left out, first to drop): `handoff-prompts/step-16-b-quarry-enemies.md`, written 16:15 UTC, sent to slice 1's builder once slice 1 is joined. Step 12 widened `outpost-fight` to any room at 2027994.
+- Slice 2, the enemies (signal 4; ranged left out, first to drop): `handoff-prompts/step-16-b-quarry-enemies.md`, written 16:15 UTC, sent 16:40 UTC to slice 1's builder `session_017WiGzFnkhyrpJqJ6xa9vTr`. Step 12 widened `outpost-fight` to any room at 2027994.
 - Slice 1, the rooms and their secrets (signals 1–3 and 7's first half): `handoff-prompts/step-16-a-quarry-rooms.md`, hard stop 16:45 UTC; worker `session_017WiGzFnkhyrpJqJ6xa9vTr` (launched 15:11 UTC).
 
 ## Open with the owner
