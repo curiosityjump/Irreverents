@@ -143,7 +143,9 @@ actually read (questions for the owner go through
 **Flag:** rung 5 was by eye, on hand-made records pushed into the page's world; nothing scripted covers the drawing, and the real path (detector → pedestal → page, two devices) has not been seen. Text follows `draw/npcs.ts` (`fillText`, 8 px): readable, soft on a phone; a shared pixel font would be Step 5's or 8's call.
 
 
-## Step 4, slice 2, push 1 (brief-worker, 2026-11-23 ~09:25 UTC)
+### step-4-slice-2-alarm.md
+
+#### Push 1 (brief-worker, 2026-11-23 ~09:25 UTC)
 
 Push 1 of `handoff-prompts/step-4-slice-2-alarm.md`: the bell, the call, the alert, the placed guard responding, cooling; a bell in `castle-street`; `scripts/trace.ts` mended. Gate D passes with six scenarios.
 
@@ -159,7 +161,7 @@ Push 1 of `handoff-prompts/step-4-slice-2-alarm.md`: the bell, the call, the ale
 
 **Not verified:** no real iPhone; the bell and marks were seen in a desktop-sized Chromium only. Whether being caught is fun.
 
-## Step 4, slice 2, push 2 (brief-worker, 2026-11-23 ~09:36 UTC)
+#### Push 2 (brief-worker, 2026-11-23 ~09:36 UTC)
 
 A chasing guard follows a hero they saw leave through a door, and comes home when the alert is over (`alert-follow`, 605). Three scenarios in `castle-street`, tagged gate D.
 
@@ -171,10 +173,14 @@ A chasing guard follows a hero they saw leave through a door, and comes home whe
 
 **Flag:** a guard with no way home (`doorToward` null) or one a wall blocks stands down where they are and their routine's `walk-to` columns then apply to the wrong room. No such room exists tonight.
 
-## Step 4, slice 2, push 3 (brief-worker, 2026-11-23 ~09:50 UTC)
+#### Push 3 (brief-worker, 2026-11-23 ~09:50 UTC)
 
 Hiding counts as unseen: one line in `src/sim/npc/sight.ts`, a `hide` part at column 22 of `test-street`, `step4-hiding-is-unseen` and its partner `step4-standing-in-view-is-seen`.
 
 **Flag (play):** the rule is as plain as the brief gave it: a guard who watches a hero step into a hiding place stops seeing them the moment they stand still. Nothing remembers "I saw you go in there". The guard then walks to where they last saw the hero, which is the hiding place, and searches around it without finding them. Funny or broken is the owner's to judge by playing.
 
 **Flag:** no room a player can reach has a `hide` part yet (only `test-parts` and `test-street`), so this cannot be played tonight.
+
+#### Stopped here (09:55 UTC, on the orchestrator's stop)
+
+**Not built:** push 4 (the blow that knocks someone out being perceived by them; finding a knocked-out person, rule 7; `step4-caller-knocked-out`; drawing polish) and "more help at levels 2 and 3". Nothing of push 4 was started in code. `call-stopped { why: "knocked-out" }` is already emitted by `npc-call` but no scenario covers it.
