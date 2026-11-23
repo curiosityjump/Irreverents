@@ -19,6 +19,7 @@ content/            the game's data: what exists and how it feels
                       named areas and placed working parts
   characters/<id>.json  one kind of body: box, colour, verbs, tuning set
   party.json          the shared party: member character ids, in order
+  prompts.json        the Use button's words, by Use entry and word key (Step 19)
   actions/<id>.json   one pressable action: label and keyboard keys
   npcs/<id>.json      one kind of person: role, side, a behaviour per mood, barks
   rules/<id>.json     what each role makes of each deed (NPC response logic's tables)
@@ -224,7 +225,7 @@ extends from its own file with `declare module '../types.ts' { … }`
 | **deed** (a thing a person can witness) | Add its id to `deeds` in a `content/rules/` file and rows to `expect`. It happens through a routine's `do` step, a thing's `deed`, or an `events` row mapping a simulation event to it. | No |
 | **thing to use** (a counter, goods) | An entry in the placements file's `things`: `id`, `tile`, `deed`, optional `keeper`, `once`, `look`. | No |
 | **call point** (a bell an upset person rings for help) | A `things` entry with `"look": "bell"`, `"once": true`, `"deed": "break"`, optional `"side"`. `docs/mechanisms/npc-response.md`, "Calling for help". | No |
-| **something Use does** (a new thing the phone's one context button can do) | One file `src/sim/use/<id>.ts` default-exporting a `UseEntry` (`id`, `order`: the door is 0, a thing 100, the cantina bell 200; `find` returns `{ entry, word, target?, at }` or nothing), and in the system that does it, act only when `useHere(world, content, e)?.entry === '<id>'` (`src/sim/use.ts`; `docs/mechanisms/heists.md`). | One new file |
+| **something Use does** (a new thing the phone's one context button can do) | One file `src/sim/use/<id>.ts` default-exporting a `UseEntry` (`id`, `order`: the door is 0, a thing 100, the cantina bell 200; `find` returns `{ entry, word, target?, at }` or nothing), and in the system that does it, act only when `useHere(world, content, e)?.entry === '<id>'` (`src/sim/use.ts`; `docs/mechanisms/heists.md`); the button's word is a row in `content/prompts.json` (`words.<id>.<word key>`). | One new file |
 | **responder** (someone who answers a call) | Place a person whose NPC kind has the role `guard`, in the same room as the bell. | No |
 | **behaviour** (a new thing a person can be doing in a mood) | Its id in `BEHAVIOURS` (`src/content/kinds/npcs.ts`) and its function in `src/sim/npc/behaviours.ts`. | Two small edits |
 | **object** (a thing to pick up and throw) | A character kind listing the verb `body`, with `weight` and `toughness` (0 = cannot be knocked out) in its tuning set: see `crate`, `crate-heavy`. Place it with a line in `content/placements/<room id>.json`. There is no separate objects kind. Step 7's machine is still to come. | No |

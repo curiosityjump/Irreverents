@@ -40,29 +40,38 @@ function addIcon(el: HTMLElement, file: string): void {
 }
 
 /**
- * The Use button says when it goes through a doorway: while this page's own
- * character stands in an enter doorway (src/sim/systems/room-doors.ts,
- * enterDoorwayAt), the `interact` button wears a door-and-arrow look and
- * the words "Go in" (index.html `.go-in`), and carries
- * `data-state="go-in"` so a check can read it. The button stays the same
- * element with the same `data-action`; nothing else moves (the owner,
- * 2026-11-23: "There is no stick to push up...").
- * DRAFT: the look and the words (decisions-log 2026-11-23 "Doorways by Use").
+ * The Use button says what a press will do here (Step 19; the word and the
+ * state come from src/client/use-prompt.ts, which asks the Use arbiter,
+ * src/sim/use.ts). In an enter doorway (state "go-in") the button wears a
+ * door-and-arrow look and the words "Go in" (index.html `.go-in`); for
+ * anything else (take, buy, break, ring) its picture dims and the word sits
+ * over it (`.says`). It carries `data-state="<state>"` so a check can read
+ * it. The button stays the same element with the same `data-action`;
+ * nothing else moves (the owner, 2026-11-23: "There is no stick to push
+ * up..."). `state` null: the plain button.
+ * DRAFT: the looks and the words (decisions-log 2026-11-23 "Doorways by
+ * Use"; "Step 19").
  */
-export function showGoIn(host: HTMLElement, on: boolean): void {
+export function showUseWord(host: HTMLElement, state: string | null, word: string): void {
   const b = host.querySelector<HTMLElement>('#actions [data-action="interact"]');
-  if (!b || b.classList.contains('go-in') === on) return;
+  if (!b || (b.dataset.state ?? null) === state) return;
   let go = b.querySelector<HTMLElement>(':scope > .go');
   if (!go) {
     go = document.createElement('span');
     go.className = 'go';
-    go.textContent = 'Go in';
     b.append(go);
   }
-  b.classList.toggle('go-in', on);
-  if (on) b.dataset.state = 'go-in';
+  go.textContent = word;
+  b.classList.toggle('go-in', state === 'go-in');
+  b.classList.toggle('says', state !== null && state !== 'go-in');
+  if (state !== null) b.dataset.state = state;
   else delete b.dataset.state;
-  b.setAttribute('aria-label', on ? 'Go in' : (b.firstChild?.textContent ?? ''));
+  b.setAttribute('aria-label', state !== null ? word : (b.firstChild?.textContent ?? ''));
+}
+
+/** Step 5's switch, kept for anything that still calls it: "Go in" or the plain button. */
+export function showGoIn(host: HTMLElement, on: boolean): void {
+  showUseWord(host, on ? 'go-in' : null, 'Go in');
 }
 
 export function watchTouch(content: Content, host: HTMLElement): () => Input {

@@ -5,13 +5,15 @@ import type { World } from '../../sim/types.ts';
 import type { PlayerView } from './entities.ts';
 import { drawText, textWidth, useContent } from './fx.ts';
 import { drawLook, look } from './looks.ts';
+import { drawnBanner, queueBanner } from './banner.ts';
 
 // Step 14 slice A (docs/mechanisms/levels.md): the owner, playing, "Not
 // finding clear 'level entries' with discovered indicators etc" (D-078,
 // D-079). Each doorway into a level (content/levels/, `entries`) is drawn as
 // an entrance from the P05 sheet; over it, a completion pie, and once the
 // level is discovered its name on a small sign. The first time a level is
-// discovered, its name crosses the top of the view for two seconds.
+// discovered, its name crosses the top of the view for two seconds (the
+// shared banner queue, draw/banner.ts, Step 19).
 //
 // INTENT: a pie and a name, never a digit, a list or a count of places
 // left: "player knows there's more to discover without the game revealing
@@ -44,14 +46,13 @@ export interface DrawnEntrance {
 }
 
 let entrances: DrawnEntrance[] = [];
-let banner: { level: string; name: string; until: number } | null = null;
-let shown: string | null = null;
 /** Levels this page has seen discovered; null until the first frame (what was found before this page came is never announced). */
 let known: Set<string> | null = null;
 
 /** What the last frame drew, for `window.irreverents.drawn.levels` (scripted checks read only this). */
 export function drawnLevels(): { entrances: DrawnEntrance[]; banner: string | null } {
-  return { entrances, banner: shown };
+  const up = drawnBanner();
+  return { entrances, banner: up && up.key.startsWith('level:') ? up.text : null };
 }
 
 /** The entrances in this room: drawn after the doorways' own arches, behind the parts and the bodies. */
@@ -162,36 +163,18 @@ function pie(g: CanvasRenderingContext2D, content: Content, quarters: number, x:
 
 /**
  * The first time this page sees the level its own hero stands in become
- * discovered, the level's name across the top for two seconds.
+ * discovered, the level's name across the top for two seconds: an entry in
+ * the shared banner queue (Step 19, draw/banner.ts, which draws it).
  * INTENT: it takes no input and stops nothing; it goes by itself (there is
  * always a way out). Screen furniture: drawn last, at the top, never over
  * the controls (they sit at the bottom).
  */
-export function drawLevelBanner(g: CanvasRenderingContext2D, world: World, content: Content, roomId: string, viewW: number, view?: PlayerView): void {
-  shown = null;
+export function drawLevelBanner(_g: CanvasRenderingContext2D, world: World, content: Content, roomId: string, _viewW: number, view?: PlayerView): void {
   if (!view || !content.levels) return;
   useContent(content);
   const discovered = Object.keys(content.levels).filter((id) => levelProgress(world, content, id).discovered);
   if (known === null) known = new Set(discovered);
   const here = levelOfRoom(content, roomId);
-  if (here && discovered.includes(here) && !known.has(here)) banner = { level: here, name: content.levels[here]!.name, until: view.frame + BANNER_FRAMES };
+  if (here && discovered.includes(here) && !known.has(here)) queueBanner({ key: `level:${here}`, text: content.levels[here]!.name, frames: BANNER_FRAMES });
   for (const id of discovered) known.add(id);
-  if (!banner || view.frame >= banner.until) {
-    banner = null;
-    return;
-  }
-  const name = banner.name;
-  const tw = textWidth(g, name, 'light');
-  const w = tw + 16;
-  const h = 16;
-  const x = Math.round((viewW - w) / 2);
-  const y = 6;
-  plate(g, x, y, w, h);
-  if (!drawText(g, name, x + 8, y + 3, 'light')) {
-    g.font = 'bold 8px monospace';
-    g.textBaseline = 'top';
-    g.fillStyle = LIGHT;
-    g.fillText(name, x + 8, y + 4);
-  }
-  shown = name;
 }

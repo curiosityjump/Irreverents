@@ -18,6 +18,10 @@ import { drawNpcs } from './draw/npcs.ts';
 import { drawSignalers } from './draw/outpost.ts';
 import { backdropOf, decorOf, drawDoors, drawRoom, roomOrigin } from './draw/room.ts';
 import { drawRoomParts } from './draw/room-parts.ts';
+import { drawBanners } from './draw/banner.ts';
+import { drawHud } from './draw/hud.ts';
+import { drawUseHint } from './draw/use-hint.ts';
+import { useHere } from '../sim/use.ts';
 
 /** DRAFT: the internal resolution the art on order assumes (docs/plan/step-1.md). */
 export const VIEW_W = 320;
@@ -84,6 +88,8 @@ export function render(g: CanvasRenderingContext2D, world: World, content: Conte
   drawDecor(g, decor, 'front', room.tile, ox, oy, W, H);
   drawImpact(g, world, roomId, ox, oy);
   drawDoorHint(g, world, content, roomId, ox, oy, pv);
+  // Step 19: the mark over what a press of Use would act on (the button names it: use-prompt.ts).
+  if (pv && mine && mine.room === roomId) drawUseHint(g, useHere(world, content, mine), ox, oy, pv.frame);
   drawNpcs(g, world, content, roomId, ox, oy);
   drawAlert(g, world, content, roomId, ox, oy);
   drawAudience(g, world, content, roomId, ox, oy);
@@ -92,5 +98,7 @@ export function render(g: CanvasRenderingContext2D, world: World, content: Conte
   drawCantina(g, world, content, roomId, pv?.me);
   drawLevelBanner(g, world, content, roomId, W, pv);
   drawCompletionRow(g, world, content, W, pv);
+  // Step 19: the party plate, then the one banner queue (draw/banner.ts), clear of it; last, as screen furniture.
+  if (pv) drawBanners(g, W, pv.frame, drawHud(g, world, content, mine, pv.frame));
   return { x: -ox, y: -oy };
 }

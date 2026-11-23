@@ -372,6 +372,8 @@ async function main(): Promise<void> {
       await (await import('./e2e/switch.ts')).switchFacts({ browser, devices, base, out, fact, errors });
       // Doorways by Use (door-*): the Use button says "Go in" in a doorway and a tap of it goes through (docs/mechanisms/rooms-and-doors.md).
       await (await import('./e2e/doors.ts')).doorFacts({ browser, devices, base, out, fact, errors, shots: path.join(out, 'doors') });
+      // Step 19's facts (heist-*): the Use button's word at the shop, and the party plate (docs/mechanisms/heists.md).
+      await (await import('./e2e/heist.ts')).heistFacts({ browser, devices, base, out, fact, errors, shots: path.join(out, 'heist') });
       // Step 14 slice A's facts (level-*): the quarry's entrance drawn, found by touch, its name and pie; the menu's rows (docs/mechanisms/levels.md).
       await (await import('./e2e/levels.ts')).levelFacts({ browser, devices, base, out, fact, errors, shots: path.join(out, 'levels') });
       // Step 14 slice B's facts (glint-*): the piece over the awning glints, a held Jump by touch finds it, the row shows it gold (docs/mechanisms/levels.md, "Pieces").

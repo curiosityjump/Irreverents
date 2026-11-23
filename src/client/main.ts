@@ -9,8 +9,8 @@ import { render, VIEW_H, VIEW_W, view } from './render.ts';
 import { report } from './report.ts';
 import type { Drawn } from './draw/entities.ts';
 import { isTouchDevice, setUpShell } from './shell.ts';
-import { showGoIn, watchTouch } from './touch.ts';
-import { inEnterDoorway } from '../sim/systems/room-doors.ts';
+import { watchTouch } from './touch.ts';
+import { showUsePrompt, usePrompt } from './use-prompt.ts';
 import { createAudio } from './audio/index.ts'; // audio hook (Step 8)
 import { setUpTune, tuneWanted } from './tune.ts';
 import { takeWords } from './draw/fx.ts';
@@ -18,6 +18,8 @@ import { drawnSignalers } from './draw/outpost.ts';
 import { drawnCantina } from './draw/cantina.ts';
 import { drawnLevels } from './draw/levels.ts';
 import { drawnCompletion } from './draw/completion.ts';
+import { drawnBanner } from './draw/banner.ts';
+import { drawnHud } from './draw/hud.ts';
 import { levelProgress } from '../sim/levels.ts';
 import { setUpMenu, showGone, showStart } from './start.ts';
 import type { StartRecord } from './start.ts';
@@ -129,6 +131,9 @@ const debug = {
     levels: { entrances: [], banner: null } as ReturnType<typeof drawnLevels>,
     /** Step 14 slice B: the pieces' glints this frame drew, the found row while it shows, and pieces popping (src/client/draw/completion.ts). */
     completion: { glints: [], row: null, pops: [] } as ReturnType<typeof drawnCompletion>,
+    /** Step 19: the party plate (faces, the viewer's slots) and the banner up, if any (src/client/draw/hud.ts, banner.ts). */
+    hud: null as ReturnType<typeof drawnHud>,
+    banner: null as ReturnType<typeof drawnBanner>,
     cantina: null as { row: { kind: string; slot: number; x: number; y: number; w: number; h: number; taken: boolean }[] | null; counter: { player: string; ko: number; falls: number }[] | null } | null,
   },
 };
@@ -245,10 +250,11 @@ function play(worldName: string): void {
     // What this player sees: everyone else as received, their own character
     // last (drawn on top), on this page's clock.
     const seen: Drawn[] = [];
-    const camera = render(g, { ...net.world, entities: [...net.others(), me] }, content, me.room, { me: me.id, frame: frameNo, drawn: seen });
+    const shown = { ...net.world, entities: [...net.others(), me] };
+    const camera = render(g, shown, content, me.room, { me: me.id, frame: frameNo, drawn: seen });
     const result = { camera, drawn: seen };
     lastCamera = camera;
-    showGoIn(touchHost, inEnterDoorway(content, me)); // the Use button says "Go in" in a doorway (touch.ts)
+    showUsePrompt(touchHost, usePrompt(content, shown, me)); // Step 19: the Use button names what a press does here (use-prompt.ts)
     audio.frame(simEvents, net.latest(), me, net.others()); // audio hook (Step 8)
 
     const status = net.status();
@@ -284,6 +290,8 @@ function play(worldName: string): void {
     d.signalers = drawnSignalers();
     d.levels = drawnLevels();
     d.completion = drawnCompletion();
+    d.hud = drawnHud();
+    d.banner = drawnBanner();
     d.words = takeWords();
     {
       const c = drawnCantina();

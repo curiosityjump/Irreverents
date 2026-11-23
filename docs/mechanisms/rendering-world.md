@@ -17,8 +17,10 @@ into the shared documents.
   decor → ground with its `top`/`under` pieces (those three from one cached
   picture) → enter doorways → working parts → bells → `back` decor →
   bodies (actors lane) → away marks → `front` decor → impact dust and shake
-  → the doorway arrow (`draw/door-hint.ts`, own character only) → moods and barks → ring bars and alert pips → the king's speech → Hall
-  of Legends. `PlayerView.drawn` is untouched.
+  → the doorway arrow (`draw/door-hint.ts`, own character only) → the Use mark (`draw/use-hint.ts`, Step 19, own character only) → moods and barks → ring bars and alert pips → the king's speech → Hall
+  of Legends → (screen furniture) the cantina's counter and row, the
+  level banner's watcher → the party plate (`draw/hud.ts`) → the one
+  banner up (`draw/banner.ts`). `PlayerView.drawn` is untouched.
 - **"Looks solid"** (`solidLook` in `draw/room-parts.ts`): one set per room
   and part state, built from the room file plus false walls, unbroken
   wall-look breakables and hidden walk doors, continued past the room's
@@ -86,6 +88,31 @@ into the shared documents.
   renderers drew byte-identical frames for all eleven rooms (test rooms
   included) at three camera positions each, plus broken window, broken
   vault wall, pressed plate, open gate and cracked wall (36 cases).
+
+- **Banners: one queue** (Step 19, `src/client/draw/banner.ts`).
+  `queueBanner({ key, text, frames?, color? })` from any draw file (a
+  level discovered, `level:<id>`; a clean getaway, `heist:`; later a piece
+  found, a hero freed); `render()` draws the queue last. One at a time, in
+  the order queued, two seconds each by default (`BANNER_FRAMES`); a key
+  already waiting or up is ignored; at most four wait. Centred across the
+  top, never over the controls; it drops below the party plate when the
+  two would overlap (an upright phone). `INTENT:` it takes no input and
+  stops nothing; it goes by itself. The page's record:
+  `drawn.banner` (`{ key, text }`), and `drawn.levels.banner` stays the
+  level's name while a `level:` banner is up. The level's name moved here
+  from `draw/levels.ts` (Step 14 slice A's own drawing, now a queued entry).
+- **The party plate** (Step 19, `src/client/draw/hud.ts`): top-left, the
+  `hud-plate` nine-slice; the viewer's own face first, lit
+  (`hud-face-<kind>`, else a square in the kind's colour); then three
+  slots beside it, `power`, `cargo`, `condition`, each a dark well until a
+  slice fills it with `fillHudSlot(slot, (world, content, me) => lookId)`
+  from its own draw file (the look is fitted into 12×12); then the rest of
+  the party (`world.party`, else `content.party.members`) at full strength
+  when a friend plays it (`memberTaken`, which reads `world.taken` on a
+  page), dimmed when free. It moves right of the menu button (the way
+  out, `#menu-btn`) when the button sits over the view's corner, looked
+  up every 30 frames, and inside `safeView`. The record: `drawn.hud`
+  (`faces`, `slots`, `box`). `DRAFT:` all of it.
 
 ## Deviations from the contract
 

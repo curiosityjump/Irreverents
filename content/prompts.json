@@ -1,0 +1,8 @@
+{
+  "//": "DRAFT (Step 19): the words the Use button shows, by Use entry (src/sim/use/<entry>.ts) then the answer's word key (a thing's deed, go-in, ring). A new entry adds its row. Short: they sit on a thumb-sized button. No digits.",
+  "words": {
+    "door": { "go-in": "Go in" },
+    "thing": { "take": "Take", "buy": "Buy", "break": "Break" },
+    "bell": { "ring": "Ring" }
+  }
+}

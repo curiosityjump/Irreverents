@@ -44,3 +44,27 @@ one the page shows on the button.
 - **To add something Use does** (rescue's `free`, vehicles' `get-in`): one
   file in `src/sim/use/` with an order between the others, the system that
   acts asks `useHere(...)?.entry === '<id>'`, and (push 2) one row of words.
+
+## The word on the button and the mark (push 2)
+
+- **The words are data**: `content/prompts.json`, `words.<entry>.<word
+  key>` (kind `src/content/kinds/prompts.ts`): door `go-in` "Go in",
+  thing `take`/`buy`/`break`, bell `ring`. At most eight letters, no
+  digits. `npm run check` refuses a placed thing whose deed has no word.
+- **The page asks the arbiter** each frame with the composed world (its
+  own character plus everyone received: the room's things, keepers and
+  doorways): `usePrompt(content, world, me)` in `src/client/use-prompt.ts`,
+  then `showUsePrompt` → `showUseWord` (`src/client/touch.ts`). The
+  button keeps its element and `data-action`; `data-state` is the word
+  key (`go-in`, `take`, `buy`, `break`, `ring`), absent for nothing.
+  `go-in` keeps Step 5's door look (`.go-in`); the others dim the hand and
+  set the word over it (`.says`, `src/client/index.html`).
+- **The mark**: a small bobbing chevron over `answer.at`
+  (`src/client/draw/use-hint.ts`); a doorway keeps its own up-arrow
+  (`draw/door-hint.ts`).
+- **What the page shows is its prediction**: the page's world holds the
+  room's things and people as received, so for a frame or two around a
+  take by a friend the button can name a good already gone. The server's
+  arbiter decides; a press on a stale word does nothing.
+- e2e facts `heist-word` (take at the goods, buy at the counter) and
+  `heist-plate` (`scripts/e2e/heist.ts`).
