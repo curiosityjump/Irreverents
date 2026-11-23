@@ -317,3 +317,43 @@ Shared by both briefs; a brief points here rather than repeating it.
   gates` prints: signals 1, 2 and 5 have no scenario. Record: mechanism
   `docs/mechanisms/party-and-switching.md`. One question filed in
   `docs/questions-inbox.md` (a friend taking the hero you need).
+
+- **Lead, 08:45 UTC: the hit slice reviewed at b79ad96; worker's brief
+  deleted by it.** (Every session was stopped by the account's usage
+  limit from about 04:58 to 08:20 UTC; nothing of Step 2 was lost, both
+  workers had pushed.) Re-run by the lead: build, check, gates. Five
+  controls of the lead's own: `wallImpactSpeed` 900 and `maxLaunchSpeed`
+  30 each failed the impact scenarios; `c.input` ignored failed the
+  non-player ones (and Step 4's); `holdPlayerTime` 0.05 was refused by
+  the validator; **removing the "cannot act while flying, held or
+  flattened" rule from `verbs.ts` failed nothing**, so the lead added
+  `step2-hit-thrown-cannot-steer` (fails with the rule removed: a thrown
+  player steering back drops from 500 to 207 px/s). Looked at on the
+  built page at phone size: the grappler lifts a crate, throws it into a
+  dummy, the dummy shoves the next, dust at the contact, no number or
+  bar, no page errors.
+  **Signals, by scenario** (21 `step2-hit-*`, 12 `step2-body-*`):
+  1 `step2-hit-throw-crate-at-dummy`; 2 `step2-hit-dummy-into-wall`,
+  `step2-hit-dummy-into-dummy`; 3 `step2-body-infiltrator-fits-gap`,
+  `step2-body-flyer-reaches-ledge`, `step2-hit-grappler-lifts-heavy`
+  (each with its two "the others cannot"); 4 `step2-body-switch-two-players`;
+  5 `step2-hit-throw-friend`, `step2-hit-break-free`,
+  `step2-hit-held-let-go` (headless); also `step2-hit-not-grab`. So
+  **gate A's scripted side is met for signals 1 to 5, headless.**
+  **Not verified:** an independent break-it review was cut off by the
+  usage limit and reported nothing (chains of holds, a body under a low
+  ceiling, repeated impacts and summed speeds are checked only by the
+  worker's own scenarios); anything across two devices; touch; signal 6
+  as a script. **Not live for a player yet:** the page still seats
+  everyone as `hero`, who cannot hit, grab or switch
+  (`src/client/main.ts` passes a character; Step 1's, asked 04:52 and
+  again 08:45).
+  **Still open in this step** (held until Step 1's Gate 2 is live, by
+  the orchestrator's 08:30 instruction): one touch per new action in
+  `npm run e2e`; the no-number check from the page's own record; the
+  both-screens throw; the `?tune` panel; `docs/architecture.md`'s
+  "I need to add…" rows re-read against what landed. Records:
+  `docs/mechanisms/combat-and-impact.md`,
+  `docs/mechanisms/party-and-switching.md`. Taste list for the owner is
+  in the first and in "Taste, for the owner in the morning" above.
+

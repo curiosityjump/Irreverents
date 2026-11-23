@@ -1,0 +1,124 @@
+{
+  "id": "step2-hit-thrown-cannot-steer",
+  "gate": "A",
+  "proves": "a player who is held cannot run, and a player thrown by a friend cannot steer out of the flight with the stick or jump out of it",
+  "room": "test-hit",
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    },
+    {
+      "id": "b",
+      "character": "infiltrator",
+      "spawn": 1
+    }
+  ],
+  "entities": [],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 14,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 20,
+      "to": 23,
+      "hold": [
+        "grab"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 40,
+      "to": 43,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "b",
+      "from": 24,
+      "to": 39,
+      "x": 1
+    },
+    {
+      "player": "b",
+      "from": 41,
+      "to": 60,
+      "x": -1,
+      "hold": [
+        "jump"
+      ]
+    }
+  ],
+  "ticks": 200,
+  "expect": [
+    {
+      "fact": "body-state",
+      "player": "b",
+      "at": 36,
+      "is": [
+        "held"
+      ]
+    },
+    {
+      "fact": "position",
+      "player": "b",
+      "at": 36,
+      "x": [
+        57,
+        58.5
+      ],
+      "y": [
+        82,
+        82
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "thrown",
+      "between": [
+        40,
+        40
+      ],
+      "where": {
+        "target": "p:b"
+      }
+    },
+    {
+      "fact": "event",
+      "event": "jumped",
+      "player": "b",
+      "between": [
+        0,
+        60
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "velocity",
+      "player": "b",
+      "at": 52,
+      "vx": [
+        495,
+        520
+      ]
+    },
+    {
+      "fact": "velocity",
+      "player": "b",
+      "at": 60,
+      "vx": [
+        485,
+        520
+      ]
+    }
+  ]
+}
