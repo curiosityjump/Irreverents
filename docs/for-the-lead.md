@@ -145,23 +145,3 @@ actually read (questions for the owner go through
 **Flag:** rung 5 was by eye, on hand-made records pushed into the page's world; nothing scripted covers the drawing, and the real path (detector → pedestal → page, two devices) has not been seen. Text follows `draw/npcs.ts` (`fillText`, 8 px): readable, soft on a phone; a shared pixel font would be Step 5's or 8's call.
 
 
-## `handoff-prompts/step-11-a-brawl.md` (slice A, done)
-
-- **The brief changed under me at 14:45** (the bell); I read it at the
-  start and saw the change only at the decisions log, after the calm-time
-  version had shipped (fb619f5). The bell is in the following push;
-  calmTime is 0 and the calm scenarios became the bell's.
-- **Two lines in `render.ts`, not one:** the bell is drawn behind the
-  bodies (beside `drawBells`), the counter on top.
-- **One edit in Step 3/scripts:** `scripts/lib/room-controls.ts` drops
-  `content/cantina/` with the real rooms (a map-of-its-own control would
-  otherwise fail on "no room cantina"). One token in a regex.
-- **Not mine, seen while building:** on a page, a player's own world
-  wears its character on landing with the full share (the attacker is
-  not in that world, so `friendly()` says no). The server's wear is the
-  truth and the page takes it with a flatten or move, but a page can
-  believe for a moment it is worn. Step 2's, if it matters.
-- **Not verified:** a real iPhone; two real phones in a brawl (the
-  real-server check uses two headless clients; `npm run e2e` was green,
-  and a phone-sized Playwright page started a brawl by touch and showed
-  the counter).

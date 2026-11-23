@@ -179,3 +179,5 @@ Taken 2026-11-23 by the lead at 17d8c1b (`npm run check` green): friends hit but
 ## Open with the owner
 
 ## Handoff notes
+
+**Slice A reviewed 2026-11-23 ~16:05 UTC by the lead** (fb619f5, 0043f36; live): `npm run check` re-run green (12 step11 scenarios and checks, Step 2's friend scenarios unchanged); a page-like world in the cantina grows no regulars (lead's probe); lead's control: making the respawn write a player's position instead of sending `move` fails `step11-cantina` (4 problems) while `step11-ring-out` still passes, so the real-server check is what guards it. Signals 1-5 and 6's first half pass; the bell (owner's answer to Q-008) ends a brawl. Not verified: a real iPhone, two real phones in one brawl. Worker's flag on a page briefly wearing its own body on landing passed to Step 2's lead.
