@@ -1,0 +1,100 @@
+{
+  "id": "step3-plates-one-alone",
+  "gate": "B",
+  "proves": "signal 5's control: one player and no weight stands on each courtyard plate in turn and the gate never opens; running at it they are stopped by it; and they can still leave the courtyard the way they came",
+  "room": "courtyard",
+  "players": [
+    {
+      "id": "a",
+      "spawn": 2
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 22,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 90,
+      "to": 158,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 240,
+      "to": 300,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 360,
+      "to": 700,
+      "x": -1
+    }
+  ],
+  "ticks": 720,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "plate-down",
+      "between": [
+        0,
+        30
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "where": {
+        "room": "courtyard",
+        "part": "plate-west"
+      }
+    },
+    {
+      "fact": "event-where",
+      "event": "plate-down",
+      "between": [
+        140,
+        170
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "where": {
+        "room": "courtyard",
+        "part": "plate-east"
+      }
+    },
+    {
+      "fact": "event-where",
+      "event": "gate-opened",
+      "between": [
+        0,
+        720
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "position",
+      "player": "a",
+      "at": 340,
+      "x": [
+        391,
+        391
+      ]
+    },
+    {
+      "fact": "in-room",
+      "player": "a",
+      "at": 720,
+      "room": "castle-street"
+    }
+  ]
+}

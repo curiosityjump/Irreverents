@@ -1,0 +1,64 @@
+{
+  "//": "DRAFT: the layout is a first pass; the id and the door ids are permanent. The Hall gallery. The ground floor is flat from end to end (columns 1-22: Step 7's pedestals want at least three flat stretches of three tiles; place nothing there). A balcony (row 3) where the way over the roofs arrives, and steps of one-way platforms, each two tiles above the last and one column under it, from the floor up to the balcony. INTENT: every party member can climb those steps by jumping on the spot; they are the gallery's way out when the courtyard gate is shut. Do not make a step taller than two tiles. The opening on the balcony is hidden in the street (painted as wall there) and plain here: once you are in, the way back shows.",
+  "id": "hall-gallery",
+  "name": "Hall Gallery",
+  "tile": 16,
+  "legend": {
+    "#": "solid",
+    "=": "oneway",
+    ".": "empty",
+    "1": "spawn",
+    "W": {
+      "door": "to-courtyard"
+    },
+    "R": {
+      "door": "from-the-roofs"
+    }
+  },
+  "rows": [
+    "########################",
+    "R......................#",
+    "R......................#",
+    "#===========...........#",
+    "#......................#",
+    "#..........====........#",
+    "#......................#",
+    "#.............====.....#",
+    "#......................#",
+    "W................====..#",
+    "W..1...................#",
+    "########################"
+  ],
+  "doors": [
+    {
+      "id": "to-courtyard",
+      "use": "walk",
+      "to": {
+        "room": "courtyard",
+        "door": "to-gallery"
+      }
+    },
+    {
+      "id": "from-the-roofs",
+      "use": "walk",
+      "to": {
+        "room": "castle-street",
+        "door": "over-the-roofs"
+      }
+    }
+  ],
+  "areas": [
+    {
+      "id": "balcony",
+      "hidden": true,
+      "at": [
+        1,
+        1
+      ],
+      "size": [
+        11,
+        2
+      ]
+    }
+  ]
+}

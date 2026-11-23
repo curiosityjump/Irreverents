@@ -1,5 +1,5 @@
 {
-  "//": "DRAFT: the layout is a first pass for the owner to judge; the id and the door ids are permanent. Three screens wide. The floor is flat from end to end (Step 4's guarded target and pursuit want at least 12 flat tiles). Building 1 (columns 10-17) overhangs the street; its awning (row 8) is reached from the ground and its roof from the awning. Building 2 (columns 24-33) has an upper room: the doorway under it leads up into the room, whose east opening gives onto a balcony, a step and the roof. INTENT: the east wall is solid for now; slice B joins it to the courtyard and turns the roofs into an unadvertised route. Nothing here points at anything: no arrows, no glow, no text.",
+  "//": "DRAFT: the layout is a first pass for the owner to judge; the id and the door ids are permanent. Three screens wide. The floor is flat from end to end (Step 4's guarded target and pursuit want at least 12 flat tiles). Building 1 (columns 10-17) overhangs the street; its awning (row 8) is reached from the ground and its roof from the awning. Building 2 (columns 24-33) has an upper room: the doorway under it leads up into the room, whose east opening gives onto a balcony, a step and the roof. The east opening at street level leads to the courtyard. INTENT: the roofs are a way nothing points at: from building 2's balcony step, a ledge just in reach (row 3, columns 37-46; a hop of two tiles up from the step, with no gap, because there is only two tiles of headroom under the ceiling and nobody can jump there) leads to a hidden opening in the east wall at roof height (rows 1-2), painted as wall, which comes out on the Hall gallery's balcony. Do not mark it. Nothing here points at anything: no arrows, no glow, no text.",
   "id": "castle-street",
   "name": "Castle Street",
   "tile": 16,
@@ -20,20 +20,26 @@
     },
     "c": {
       "door": "cellar-doorway"
+    },
+    "C": {
+      "door": "to-courtyard"
+    },
+    "R": {
+      "door": "over-the-roofs"
     }
   },
   "rows": [
     "################################################",
-    "#..............................................#",
-    "#..............................................#",
-    "#.......................##########.............#",
+    "#..............................................R",
+    "#..............................................R",
+    "#.......................##########...==========#",
     "#.......................#........#.............#",
     "#.........########......#.u.........==.........#",
     "#.........########......#.u....................#",
     "#.......................##########====.........#",
     "#......===............................===......#",
-    "W......c....................d..................#",
-    "W..1.2.c....................d..................#",
+    "W......c....................d..................C",
+    "W..1.2.c....................d..................C",
     "################################################"
   ],
   "doors": [
@@ -67,6 +73,23 @@
       "to": {
         "room": "undercroft",
         "door": "cellar-up"
+      }
+    },
+    {
+      "id": "to-courtyard",
+      "use": "walk",
+      "to": {
+        "room": "courtyard",
+        "door": "to-street"
+      }
+    },
+    {
+      "id": "over-the-roofs",
+      "use": "walk",
+      "hidden": true,
+      "to": {
+        "room": "hall-gallery",
+        "door": "from-the-roofs"
       }
     }
   ],

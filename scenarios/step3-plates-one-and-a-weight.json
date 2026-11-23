@@ -1,0 +1,101 @@
+{
+  "id": "step3-plates-one-and-a-weight",
+  "gate": "B",
+  "proves": "signal 5, solo: one player on one plate and a heavy crate that came to rest on the other (a stand-in for a throw: it is dropped onto the plate) open the gate; the player steps off and walks through into the Hall gallery well inside the gate's stay-open time, and the gate shuts only afterwards",
+  "room": "courtyard",
+  "players": [
+    {
+      "id": "a",
+      "spawn": 2
+    }
+  ],
+  "entities": [
+    {
+      "id": "weight",
+      "character": "crate-heavy",
+      "tile": [
+        22,
+        4
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 22,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 90,
+      "to": 400,
+      "x": 1
+    }
+  ],
+  "ticks": 700,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "gate-opened",
+      "between": [
+        0,
+        30
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "where": {
+        "room": "courtyard",
+        "part": "plate-gate"
+      }
+    },
+    {
+      "fact": "in-room",
+      "player": "a",
+      "at": 420,
+      "room": "hall-gallery"
+    },
+    {
+      "fact": "event-where",
+      "event": "gate-closed",
+      "between": [
+        0,
+        440
+      ],
+      "count": [
+        0,
+        0
+      ],
+      "where": {
+        "room": "courtyard",
+        "part": "plate-gate"
+      }
+    },
+    {
+      "fact": "event-where",
+      "event": "gate-closed",
+      "between": [
+        441,
+        500
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "where": {
+        "room": "courtyard",
+        "part": "plate-gate"
+      }
+    },
+    {
+      "fact": "clear-of-solid",
+      "player": "a",
+      "between": [
+        0,
+        700
+      ]
+    }
+  ]
+}

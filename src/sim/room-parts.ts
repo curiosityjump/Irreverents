@@ -26,13 +26,21 @@ declare module './types.ts' {
  * them in the same order (determinism).
  */
 export function partsOfKind(content: Content, kind: string): { room: Room; part: Part }[] {
-  const out: { room: Room; part: Part }[] = [];
+  // Content never changes while the game runs, and this is asked several
+  // times a tick: the answer is kept per content object (not world state).
+  let byKind = found.get(content.rooms);
+  if (!byKind) found.set(content.rooms, (byKind = new Map()));
+  let out = byKind.get(kind);
+  if (out) return out;
+  out = [];
   for (const id of Object.keys(content.rooms).sort()) {
     const room = content.rooms[id]!;
     for (const part of room.parts) if (part.kind === kind) out.push({ room, part });
   }
+  byKind.set(kind, out);
   return out;
 }
+const found = new WeakMap<object, Map<string, { room: Room; part: Part }[]>>();
 
 /** Whether a body's box overlaps any of the part's tiles. */
 export function inPart(content: Content, e: Entity, room: Room, part: Part): boolean {

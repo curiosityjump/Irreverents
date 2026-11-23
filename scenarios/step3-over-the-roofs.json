@@ -1,0 +1,126 @@
+{
+  "id": "step3-over-the-roofs",
+  "gate": "B",
+  "proves": "signal 2: the other way nothing points at. From the street floor a player takes building 2's doorway up, crosses its balcony, hops up the step and onto the roof ledge, walks into the east wall at roof height and is on the Hall gallery's balcony, without ever being in the courtyard",
+  "room": "castle-street",
+  "players": [
+    {
+      "id": "a",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 286,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 300,
+      "to": 304,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 310,
+      "to": 419,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 440,
+      "to": 460,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 490,
+      "to": 505,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 530,
+      "to": 550,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 590,
+      "to": 790,
+      "x": 1
+    }
+  ],
+  "ticks": 800,
+  "expect": [
+    {
+      "fact": "in-room",
+      "player": "a",
+      "at": 700,
+      "room": "castle-street"
+    },
+    {
+      "fact": "event-where",
+      "event": "changed-room",
+      "between": [
+        700,
+        720
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "where": {
+        "entity": "p:a",
+        "fromRoom": "castle-street",
+        "fromDoor": "over-the-roofs",
+        "toRoom": "hall-gallery",
+        "toDoor": "from-the-roofs"
+      }
+    },
+    {
+      "fact": "event-where",
+      "event": "changed-room",
+      "between": [
+        0,
+        800
+      ],
+      "count": [
+        0,
+        0
+      ],
+      "where": {
+        "toRoom": "courtyard"
+      }
+    },
+    {
+      "fact": "standing-on-tile",
+      "player": "a",
+      "at": 800,
+      "tile": [
+        9,
+        3
+      ]
+    },
+    {
+      "fact": "in-room",
+      "player": "a",
+      "at": 800,
+      "room": "hall-gallery"
+    },
+    {
+      "fact": "clear-of-solid",
+      "player": "a",
+      "between": [
+        0,
+        800
+      ]
+    }
+  ]
+}

@@ -21,8 +21,9 @@ that could trap someone.
 ## The map tonight (`DRAFT:` layouts, permanent ids)
 
 ```
- undercroft (hidden room) ──[behind the throne: false wall, hidden door]── throne-room ── castle-street
-      └── cellar doorway ── up into the street's west end (DRAFT: moves to the courtyard when it exists)
+ undercroft ──[behind the throne]── throne-room ── castle-street ── courtyard ──[plate gate]── hall-gallery
+ (hidden)                                │    └──────── over the roofs (hidden) ───────────────┘ (balcony)
+      └── cellar doorway ── up into the street's west end (DRAFT: meant for the courtyard, column 15)
 ```
 
 - **Behind the throne.** The throne room's west wall is three tiles
@@ -34,12 +35,29 @@ that could trap someone.
   (`step3-through-the-window`), so the breach gives the secret away to
   whoever does it. A walker goes under the window, through the false
   wall (`step3-behind-the-throne`, gate B, signal 2).
+- **Over the roofs.** In the street, building 2's doorway, balcony and
+  step lead to a one-way ledge (row 3, columns 37-46) and the hidden
+  walk door `over-the-roofs` in the east wall at rows 1-2, which comes
+  out on the gallery's balcony (`step3-over-the-roofs`, gate B, signal
+  2). The ledge has no gap: under the ceiling there are only two tiles
+  of headroom, so nobody can jump up there.
+- **The plate gate.** In the courtyard two plates six tiles apart
+  (columns 16 and 22) hold the gate at column 25; beyond it is the
+  opening to the gallery. Two players, or one and a weight, open it; one
+  alone does not (`step3-plates-*`, gate B, signal 5). `INTENT:` the
+  gallery's steps up to its balcony (one-way platforms, two tiles apart,
+  each one column under the next, climbed by jumping on the spot) are its
+  way out over the roofs when the gate is shut; the way-out check plays
+  them for every party member. Columns 1-13 of the courtyard and the
+  gallery's ground floor are left empty for Step 7.
 - **A hidden walk door is painted as wall** on the side where it is
   marked `hidden` (`draw/room-parts.ts`): a gap in a room's edge is a
-  sign. The undercroft's end of the same connection is not marked
-  hidden, so the way back shows as an opening there.
-- Still to come (the brief's later pushes): `courtyard`, the plate gate,
-  `hall-gallery`, the roofs, the undercroft's vault and the secret.
+  sign. The far end of each hidden connection (the undercroft, the
+  gallery balcony) is not marked hidden, so the way back shows as an
+  opening there.
+- Still to come (the brief's last push): the undercroft's vault and the
+  secret (signal 3), `hide` parts placed in the street and the throne
+  room, and the cellar doorway moved to the courtyard.
 
 ## The room file (`content/rooms/<id>.json`)
 
@@ -239,9 +257,12 @@ tiles are reported once ("and 9 more tile(s) beside it").
   `open-part-is-accepted` (a control may declare control-only kinds with
   `controlKinds`). A kind without `blocks` behaves as its system makes it
   with one body alone in the world.
-- It costs about two seconds of `npm run check` for two rooms and three
+- It cost about two seconds of `npm run check` for two rooms and three
   characters, and grows with rooms × characters × standing places. If it
-  gets slow, shorten `HOLDS` before anything cleverer.
+  gets slow, shorten `HOLDS` before anything cleverer. **Measured
+  2026-11-23 with five rooms: `npm run check` takes about 38 s** (and
+  `npm run build`, which runs the same check, grows with it); see
+  `docs/for-the-lead.md`.
 
 ## The controls
 

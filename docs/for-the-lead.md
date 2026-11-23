@@ -161,9 +161,17 @@ actually read (questions for the owner go through
 **Flag:** rung 5 was by eye, on hand-made records pushed into the page's world; nothing scripted covers the drawing, and the real path (detector → pedestal → page, two devices) has not been seen. Text follows `draw/npcs.ts` (`fillText`, 8 px): readable, soft on a phone; a shared pixel font would be Step 5's or 8's call.
 
 
-### step-3-b-kingdom-and-parts.md, 2026-11-23 (pushes 1 and 2 of 4; pushes 3 and 4 not started)
+### step-3-b-kingdom-and-parts.md, 2026-11-23 (pushes 1, 2 and 3 of 4; push 4 not started)
 
-**Done:** push 1 (`cb297c0`): the five part kinds, drawn, in `test-parts`. Push 2: behind the throne (false wall, hidden door `behind-the-throne`, the window, a small `undercroft`, the cellar doorway up into the street). Gate B gains `step3-behind-the-throne` (signal 2). **Not done, for the next session:** push 3 (courtyard, plate gate, gallery, roofs: signal 5 and `step3-over-the-roofs`), push 4 (the secret, signal 3; placing `hide` parts in the street and the throne room; the undercroft's vault). The `hide` kind itself is on `main`.
+**Done:** push 1 (`cb297c0`): the five part kinds, drawn, in `test-parts`. Push 2 (`5b7e319`): behind the throne (false wall, hidden door, the window, a small `undercroft`, the cellar doorway up into the street). Push 3: `courtyard` with the plate gate, `hall-gallery`, the roofs. Gate B now lists a scenario for signals 1, 2 (both hidden ways), 3b, 4 and 5. **Not done, for the next session: push 4**: the secret (signal 3: `step3-secret-*`), the undercroft's vault behind a breakable wall, `hide` parts placed in the street and the throne room (the kind is on `main`), and moving the cellar doorway's pair from the street (column 7) to the courtyard (column 15 is left free for it). Gate B is not true until signal 3 has its scenarios.
+
+**Flag (cost): `npm run check` now takes about 38 s, and `npm run build` runs the same way-out check**, so every session's check and every deploy's build pay it. A profile shows it spread over `step()` itself and every system (the check plays moves through the whole simulation for three characters from every standing place in five rooms); my part systems are about 8% of it after caching their part lists. `check-rooms.ts` is yours: shorten `HOLDS`, or skip rooms whose file and whose neighbours did not change.
+
+**Flag:** `scripts/trace.ts` crashes on any scenario in `castle-street` after tick 0 (`fact-helpers.ts` `feet`: an entity whose kind is not a character kind; it appeared with Step 4's placements). Not mine to fix; I traced with a scratch copy that skips such entities.
+
+**Flag:** the roofs have two tiles of headroom (rows 1-2 under the ceiling), so nobody can jump there; the ledge is therefore continuous. If the street gets taller, a gap "just in reach" becomes possible.
+
+**Stand-in:** `step3-plates-one-and-a-weight` drops a `crate-heavy` onto the plate; no real carry-and-throw onto a plate is scripted. A crate given only a sideways speed never stops (no friction unless it is flying), so "slides to rest on the plate" needs Step 2's real throw.
 
 **For Step 6:** the window is part `window` in `throne-room`; its event is `part-broken: { room: "throne-room", part: "window", by, player, speed, look: "window" }`.
 

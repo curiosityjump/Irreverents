@@ -1,0 +1,121 @@
+{
+  "id": "step3-plates-two-players",
+  "gate": "B",
+  "proves": "signal 5: two players stand one on each courtyard plate and the gate opens; both step off and walk through before it shuts, and are in the Hall gallery; the gate shuts behind them",
+  "room": "courtyard",
+  "players": [
+    {
+      "id": "a",
+      "spawn": 2
+    },
+    {
+      "id": "b",
+      "spawn": 3
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 22,
+      "x": 1
+    },
+    {
+      "player": "b",
+      "from": 0,
+      "to": 14,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 90,
+      "to": 400,
+      "x": 1
+    },
+    {
+      "player": "b",
+      "from": 90,
+      "to": 400,
+      "x": 1
+    }
+  ],
+  "ticks": 540,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "gate-opened",
+      "between": [
+        0,
+        30
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "where": {
+        "room": "courtyard",
+        "part": "plate-gate"
+      }
+    },
+    {
+      "fact": "in-room",
+      "player": "b",
+      "at": 420,
+      "room": "hall-gallery"
+    },
+    {
+      "fact": "in-room",
+      "player": "a",
+      "at": 420,
+      "room": "hall-gallery"
+    },
+    {
+      "fact": "event-where",
+      "event": "gate-closed",
+      "between": [
+        0,
+        440
+      ],
+      "count": [
+        0,
+        0
+      ],
+      "where": {
+        "room": "courtyard",
+        "part": "plate-gate"
+      }
+    },
+    {
+      "fact": "event-where",
+      "event": "gate-closed",
+      "between": [
+        441,
+        480
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "where": {
+        "room": "courtyard",
+        "part": "plate-gate"
+      }
+    },
+    {
+      "fact": "clear-of-solid",
+      "player": "a",
+      "between": [
+        0,
+        540
+      ]
+    },
+    {
+      "fact": "clear-of-solid",
+      "player": "b",
+      "between": [
+        0,
+        540
+      ]
+    }
+  ]
+}
