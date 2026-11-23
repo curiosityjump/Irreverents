@@ -224,11 +224,23 @@ changed without touching code; don't grade the feel yourself.
 - **Node 22.23.5 here runs `.ts` directly** (`node t.ts`, no flag);
   registry today: typescript 7.0.2, esbuild 0.28.2, ws 8.23.0; Playwright
   1.63.0 preinstalled at `/opt/node-tools/node_modules`.
+- **For the two-player browser check** (lead, 04:07 UTC, headless
+  Chromium via a CDP session): two fingers at once can be scripted
+  (`Input.dispatchTouchEvent` with two `touchPoints` gave `touches.length`
+  1 then 2 on two elements); Chromium's network throttling does **not**
+  delay WebSocket frames (latency 150 set, echo round trips stayed
+  104–108 ms against a 105–108 baseline), so the 150 ms delay in
+  feedback signal 2 must be injected by a delaying relay in the script;
+  `iPhone 14 landscape` is 750×340 CSS px at ratio 3, so 320×180 fits 5×
+  in device pixels.
 
 ## Briefs
 
 - `handoff-prompts/step-1-gate-1-skeleton.md` — Gate 1: skeleton, sim
   core, scenarios, architecture doc. Worker `session_017WiGzHGmyESjXPtM3zXt19`, launched 04:04 UTC.
+- Gate 2 (browser client, touch, netcode, `e2e`, `check:live`): drafted
+  by the lead, held until Gate 1 is reviewed because it builds on Gate
+  1's layout; it is launched from `handoff-prompts/` at that review.
 
 ## Open with the owner
 
@@ -237,3 +249,9 @@ changed without touching code; don't grade the feel yourself.
 ## Handoff notes
 
 *(Newest last.)*
+
+- **Lead `session_017WiGzEwLs3ng2ZPpRZgctn`, 04:12 UTC.** Claimed; measured
+  the deploy (above); Gate 1 briefed and its worker running. Next: review
+  Gate 1 by re-running it from a fresh clone with a failing control, tell
+  the orchestrator (`session_017WiGzFWfLir1ATiSP7c5E5`) the moment it is
+  on `main`, launch Gate 2. A backstop wake is armed for 04:41 UTC.
