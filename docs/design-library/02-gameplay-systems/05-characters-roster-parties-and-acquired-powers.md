@@ -2,6 +2,10 @@
 
 ---
 
+OWNER CORRECTION — PLAYABLE CAST IS ALREADY ESTABLISHED (2026-11-23)
+
+The owner supplied a visual reference in the active conversation and explicitly said THESE ARE THE PLAYABLE CHARACTERS. Treat the existing pictured playable cast as the canonical character designs. Do NOT treat newly generated generic three-human-hero art, new grappler/rogue/flyer interpretations, or an arbitrary three-person lineup as a replacement roster. Existing costumes, silhouettes, faces, proportions, colors and character identities must be maintained when generating new animation frames, attacks, expressions, portraits, or ability variations. Any prior numbered production packages for three hero archetypes are functional placeholders, NOT permission to redesign or replace the owner's cast. Continue using owner-endorsed previously stored character art and request/capture exact character source files in Drive when available. The current user-supplied image has NOT yet been verified as a downloadable Drive asset; do not invent a Drive file link. On new work, prefer source-faithful animation extension over character reinvention. Newly generated human-style hero concepts in this session are NONCANON / EXCLUDED FROM PLAYABLE ROSTER, even if usable as unrelated concept art.
+
 Characters, Roster, Parties and Acquired Powers
 
 Status: Confirmed high-level architecture \| 22 November 2026

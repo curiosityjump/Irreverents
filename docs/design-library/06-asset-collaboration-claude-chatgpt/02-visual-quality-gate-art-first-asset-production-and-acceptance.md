@@ -2,6 +2,12 @@
 
 ---
 
+MASTER ASSET BACKLOG — QA HANDOFF EXTENSION (2026-11-23)
+
+https://docs.google.com/spreadsheets/d/1rzixv5r4QWs7PKLYJ0e_sreLy0LjTdgua8uXKeTJpSE/edit
+
+Production is tracked by package ID, not by how many generated boards exist. Full completion requires visually inspected actual assets, transparent individual files/frames or true tile tests, valid manifest, 320x180 demo, Drive URLs, root catalog entry, backlog status and request/changelog update. QA AND HANDOFF tab carries checks. Existing rough concept boards are not automatically game-ready; quality failed/rejected art cannot be marked Production ready. New work may be used as a prototype immediately.
+
 NEW MANDATORY CHARACTER QUALITY CHECK — FACE ACTING (23 NOV 2026)
 
 Owner wants MORE EXPRESSIVE faces like the emotional readability of Kirby (not copied designs). Inspect the actual eyes/mouth/head acting in each delivered sprite and verify real differences between idle, dash, attack, sneak, jump, hurt, triumph etc. Static same-face-in-every-frame art does not meet upgraded target even if outlines/animations/grid/alpha pass. Test in actual 320×180 gameplay at 1× and inspect native PNG transparency. Current P01 hero art remains an IMPORTABLE PROTOTYPE, but should be refined with expressive faces; P02 sheets require extraction. Controlling detailed acceptance spec: https://docs.google.com/document/d/1W1rOej7YL6MGcvwZfbpBTBqMyMz9Q_O2zpLNCZ2XNL8/edit . Explicit owner consent to use by default still applies; no user approval holds.

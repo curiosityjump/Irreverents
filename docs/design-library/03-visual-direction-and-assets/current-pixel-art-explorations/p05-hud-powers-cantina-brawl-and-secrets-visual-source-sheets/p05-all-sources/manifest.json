@@ -1,0 +1,122 @@
+{
+  "id": "P05",
+  "project": "Irreverents",
+  "creation_date": "2026-11-23",
+  "source": "Four image-generated high quality source boards, with category quadrants cropped from preferred concept",
+  "usable_state": "reference or temporary art; NOT engine-import verified, NOT transparent PNG atlas",
+  "assets": [
+    {
+      "file": "P05_UI_hero_party_HUD_source.png",
+      "size_px": [
+        768,
+        512
+      ],
+      "exact_transparent_pct": 0.0,
+      "semi_transparent_pct": 100.0,
+      "status": "VISUAL SOURCE PLATE \u2014 NOT NATIVE PIXEL SPRITES"
+    },
+    {
+      "file": "P05_RARE_powers_pickups_source.png",
+      "size_px": [
+        768,
+        512
+      ],
+      "exact_transparent_pct": 0.0,
+      "semi_transparent_pct": 100.0,
+      "status": "VISUAL SOURCE PLATE \u2014 NOT NATIVE PIXEL SPRITES"
+    },
+    {
+      "file": "P05_SECRETS_doors_breakables_source.png",
+      "size_px": [
+        768,
+        512
+      ],
+      "exact_transparent_pct": 0.0,
+      "semi_transparent_pct": 100.0,
+      "status": "VISUAL SOURCE PLATE \u2014 NOT NATIVE PIXEL SPRITES"
+    },
+    {
+      "file": "P05_B_UI_Powers_Exploration_VARIANT_B.png",
+      "size_px": [
+        1536,
+        1024
+      ],
+      "exact_transparent_pct": 31.69,
+      "semi_transparent_pct": 68.31,
+      "status": "VISUAL SOURCE PLATE \u2014 NOT NATIVE PIXEL SPRITES"
+    },
+    {
+      "file": "P05_C_UI_Powers_Exploration_VARIANT_C.png",
+      "size_px": [
+        1536,
+        1024
+      ],
+      "exact_transparent_pct": 0.0,
+      "semi_transparent_pct": 100.0,
+      "status": "VISUAL SOURCE PLATE \u2014 NOT NATIVE PIXEL SPRITES"
+    },
+    {
+      "file": "P05_D_UI_Powers_Exploration_PREFERRED_SHEET.png",
+      "size_px": [
+        1536,
+        1024
+      ],
+      "exact_transparent_pct": 0.0,
+      "semi_transparent_pct": 100.0,
+      "status": "VISUAL SOURCE PLATE \u2014 NOT NATIVE PIXEL SPRITES"
+    },
+    {
+      "file": "P05_BRAWL_hit_KO_respawn_source.png",
+      "size_px": [
+        768,
+        512
+      ],
+      "exact_transparent_pct": 0.0,
+      "semi_transparent_pct": 100.0,
+      "status": "VISUAL SOURCE PLATE \u2014 NOT NATIVE PIXEL SPRITES"
+    },
+    {
+      "file": "P05_A_UI_Powers_Exploration_VARIANT_A.png",
+      "size_px": [
+        1536,
+        1024
+      ],
+      "exact_transparent_pct": 0.0,
+      "semi_transparent_pct": 100.0,
+      "status": "VISUAL SOURCE PLATE \u2014 NOT NATIVE PIXEL SPRITES"
+    }
+  ],
+  "authority": "Example visual style and owner approved-to-try, not final gameplay canon",
+  "dependencies": [
+    "A00 owner-endorsed comps",
+    "P01 importable prototype",
+    "34 production SOP"
+  ],
+  "next_steps": [
+    "select which source elements to turn into native sprites",
+    "manually clean alpha and rebuild pixels",
+    "produce transparent aligned frames at 32x32/16x16 as per request",
+    "validate 320x180 iPhone UI scale",
+    "update Master Board + index with real paths"
+  ],
+  "board_ids": [
+    "UI-002",
+    "UI-005",
+    "UI-007",
+    "UI-008",
+    "UI-009",
+    "INT-007",
+    "INT-008",
+    "VFX-001",
+    "VFX-005",
+    "VFX-006",
+    "VFX-007",
+    "VFX-008",
+    "PWR-001",
+    "PWR-003",
+    "ENV-006",
+    "ENV-007",
+    "INT-004",
+    "INT-009"
+  ]
+}

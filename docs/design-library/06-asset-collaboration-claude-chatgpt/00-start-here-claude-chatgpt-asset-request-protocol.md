@@ -2,6 +2,14 @@
 
 ---
 
+CLAUDE ASSET HANDOFF UPDATE (23 NOV 2026): BEFORE generating lower-quality art or duplicating requests, open https://docs.google.com/document/d/1T7S5FVKq3ZTvNqwaIzC126wRb15V9Spp7xKbwhz-Qgg/edit . P03 https://drive.google.com/drive/folders/1m5KXh8Ts-UiMWS6Us9qaA6MlucsTHpGf and P04 https://drive.google.com/drive/folders/1CwqUK750arthkFGMfsK3yRiJ6lzlRfrW are now rich owner-endorsed visual source plates. REBUILD usable native frames/tiles from these, do not fake a 16px atlas by treating illustrative grid divisions as pixels. Complete actual REQs only after QA, catalog, Board, changelog, and links. Board rows now map to source folders. Claude can use pictures for immediate visual direction / temporary prototype, while producing actual importable assets.
+
+MANDATORY TEAM PLANNING UPDATE (2026-11-23)
+
+MASTER BACKLOG: https://docs.google.com/spreadsheets/d/1rzixv5r4QWs7PKLYJ0e_sreLy0LjTdgua8uXKeTJpSE/edit
+
+Before making a new REQ, Claude should find the relevant BACKLOG ID, review its game need and existing A00/P01/P02 references, and include that ID in the request. Only if needed, add a new ID/row; don't duplicate a package already in the Sheet. On completion, the producer must update the Board row's Workflow status and actual Drive delivery, then the root ASSET LIBRARY index, direct links in the REQ, and Eastern-time changelog. The Board is the active \*work plan\*, the index is the file locator, and the request queue is a producer handoff. Claude fills Actual GitHub path only after code integration is real. Proposed regions/abilities are not automatically canon.
+
 CHARACTER / NPC REQUEST CHECKLIST ADDITION — EXPRESSIVE FACES (2026-11-23)
 
 BEFORE servicing any character/NPC request, READ https://docs.google.com/document/d/1W1rOej7YL6MGcvwZfbpBTBqMyMz9Q_O2zpLNCZ2XNL8/edit and inspect A00-04 character acting and A00-02 NPC reactions. Request specs should name target emotional beats as well as motion states; delivery must show actual visually distinct facial expressions (eye/mouth/head) for reaction, attack effort, stealth, hurt and joy where relevant, judged at 320×180. "Like Kirby" means expressive and immediately readable, NOT reuse recognizable character designs. Include direct catalog links and QA preview; do not mark source-only boards delivered as native frames.

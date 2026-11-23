@@ -2,6 +2,86 @@
 
 ---
 
+2026-11-23 · Morning EST · Owner CONFIRMED existing P03 three playable hero identities as CANON; rejected redesigned P06-style protagonists.
+
+Owner supplied the exact existing three-row pixel sheet and instructed “We already have the playable characters. Remember these.” TOP goggle/red-scarf compact hero (grappler role), MIDDLE green-hood rogue/infiltrator, BOTTOM pink winged aviator/flyer. Preserve exact character face/body/costume proportions when building new animations and expressions. Do NOT create alternate bulky red-haired humanoid, purple-haired ninja or blonde human flyer variants as replacements. Created new controlling document 36 under Visual Direction and Assets, inserted it prominently at the top of 00 START HERE, Asset Library, Production SOP, facial guide, C02 revision request, and Claude's handoff. Updated HRO-001..005 next production steps and source links in the 107-package Master Board. Updated the ACTIVE hourly asset desk prompt to read this canon before any hero work. The original P03 hero source remains a VISUAL SOURCE, not automatically cleaned native frames; related fulfillment remains open until technically validated.
+
+- Canon image: https://drive.google.com/file/d/17Ulupi-WbcsqVWqS5m-bz1TmIjzx6VcM/view
+
+- Canon doc: https://docs.google.com/document/d/1p_kXnoB_9gClFaR47U6-ige5I-9hs1Ta9s-thwSwF9g/edit
+
+- Master Board: https://docs.google.com/spreadsheets/d/1rzixv5r4QWs7PKLYJ0e_sreLy0LjTdgua8uXKeTJpSE/edit
+
+- Claude asset library: https://docs.google.com/document/d/1bnr7GUgrYBVVY0BMkwx4qRPvW45Nk4grn-Tk6THcoY8/edit
+
+2026-11-23 · 10:22 AM EST · OWNER CAST CORRECTION — existing pictured playable characters are canonical
+
+The owner supplied a reference image in chat and explicitly corrected asset production: playable characters are ALREADY established, no replacement designs. Updated 05 Characters/Roster, ROOT Asset Library, Art Production SOP, and 00 START HERE to enforce identity preservation (shape, costume, colors, expressions). Updated HRO-001 through HRO-005 next-step cells on the Master Board and the enabled hourly asset request desk to refuse generic replacement three-human-hero artwork. The new generated human-style hero sheets from 2026-11-23 are noncanonical and should NOT become game assets. Full native user image has not yet been verified as a Drive file, so do not invent its file URL. Environment art creation may proceed independently. No actual GitHub/Railway changes claimed.
+
+- Character design doc https://docs.google.com/document/d/1sE-ZkWFxqP-\_UckkA5c7Pf0xbDTfN2kQUDMt6mUDgPk/edit
+
+- Root art catalog https://docs.google.com/document/d/1bnr7GUgrYBVVY0BMkwx4qRPvW45Nk4grn-Tk6THcoY8/edit
+
+- Production board https://docs.google.com/spreadsheets/d/1rzixv5r4QWs7PKLYJ0e_sreLy0LjTdgua8uXKeTJpSE/edit
+
+- Existing endorsed character and animation comp folder https://drive.google.com/drive/folders/1ejWvlQBo85YiC_5dsTxZFZugwFxKS1pB
+
+2026-11-23 · Morning EST · ChatGPT — NEXT ART BATCH P05 CREATED, UPLOADED AND ROUTED
+
+Generated 4 new 1536×1024 HUD/power/brawl/exploration visual source boards. Cropped one preferred board into 4 topic-specific sub-plates (HUD/party, rare powers/recovery, cantina brawl feedback, doors/secrets), uploaded the 8 PNGs plus JSON manifest, Claude README and complete ZIP to P05. Updated root Asset Library, 00 START HERE, and Claude's direct art-drop handoff, and linked source folder in 23 existing Master Board rows. Source-only: no claim of normalized transparent native assets, 16px tiles, full animation, GitHub imports or Railway deployment. Claude should extract/QA or use for visual direction. Owner preapproval not required.
+
+- P05 folder https://drive.google.com/drive/folders/1SpbZln3ZqaefjyNJRwRjXJ11UdROoKdk
+
+- P05 preferred board https://drive.google.com/file/d/1GaXUALQ4a0zyTbTtUezGBLxTNugfx74c/view
+
+- HUD crop https://drive.google.com/file/d/159pI0l2X_D1ZmJV3GBxh9fbE0DSJrTo-/view
+
+- Rare powers crop https://drive.google.com/file/d/1OWZri2zXNt-0yH9L6AAXUMSRNfpnhkLU/view
+
+- Cantina brawl crop https://drive.google.com/file/d/1Cz1mweh3pY1gfHeUrGeEb5ptwu6sFaex/view
+
+- Secret-route crop https://drive.google.com/file/d/18tGdp9CgBcW_EyR3ZdQMOrCoMT2-46aY/view
+
+- Claude direct handoff https://docs.google.com/document/d/1T7S5FVKq3ZTvNqwaIzC126wRb15V9Spp7xKbwhz-Qgg/edit
+
+- Master Board https://docs.google.com/spreadsheets/d/1rzixv5r4QWs7PKLYJ0e_sreLy0LjTdgua8uXKeTJpSE/edit
+
+2026-11-23 · Morning EST · ChatGPT — P03/P04 12 new art source sheets uploaded and routed
+
+Verified and uploaded seven P03 source PNGs (heroes, town NPCs, villain/enemies, VFX/pickups, grass, castle, town) plus five P04 source PNGs (cantina interior, cantina NPCs, mechanisms, vehicles, Hall of Legends), each with README/manifest and complete ZIP. Directly linked handoff Doc for Claude; updated central Asset Library, project START HERE, asset workflow, art production SOP, and Current starting point in 37 matching Master Board backlog rows. Technical status remains VISUAL SOURCE, not final native pixel grid or cleaned transparent sprite animation; open REQs are not falsely marked delivered. Intended next art batch: HUD/completion, rare-power/recovery, and cantina brawl/gameplay feedback.
+
+- P03 https://drive.google.com/drive/folders/1m5KXh8Ts-UiMWS6Us9qaA6MlucsTHpGf
+
+- P04 https://drive.google.com/drive/folders/1CwqUK750arthkFGMfsK3yRiJ6lzlRfrW
+
+- Direct handoff https://docs.google.com/document/d/1T7S5FVKq3ZTvNqwaIzC126wRb15V9Spp7xKbwhz-Qgg/edit
+
+- Root art catalog https://docs.google.com/document/d/1bnr7GUgrYBVVY0BMkwx4qRPvW45Nk4grn-Tk6THcoY8/edit
+
+- Master Board https://docs.google.com/spreadsheets/d/1rzixv5r4QWs7PKLYJ0e_sreLy0LjTdgua8uXKeTJpSE/edit
+
+2026-11-23 10:02 AM EST — SOURCE QA / OWNER STYLE CORRECTION
+
+Read current 107-package Master Board (HRO-001/HRO-002/HRO-004 already In progress), SOP 34, facial acting guide 35, actual A00-04 and A00-02 owner-endorsed images, actual P01 prototype art, and the previously recommended C02 recovered pose reference. IMPORTANT VISUAL FINDING: the C02 recovered pose reference (13qA3...) depicts large human-like fighting characters with elaborate costume anatomy; it conflicts with the compact, masked, toy-like silhouettes and restrained pixel language of A00-04 and P01, and is NOT a safe canonical source for the requested heroes. Do not use it as primary direction merely because it is labeled 'expressive'. A00-04 and existing P01 sprite identities are the preferred visual basis; preserve their small face/hat/scarf silhouettes, and upgrade ACTING within that style. The recently owner-rejected 24-pose humanoid sheet remains Trashed and prohibited. No newly generated art has passed full native 32x32, six-phase run, alpha, expression and 320x180 QA this iteration. HRO-001/HRO-002/HRO-004 stay In progress; C02 remains IN PROGRESS — QUALITY REWORK. Do not mark delivered or change column P/Q.
+
+2026-11-23 · 10:00 AM EST — OWNER REJECTION / ASSET REMOVAL
+
+Moved C02-REV-SOURCE-01 (file ID 187I-8MxxZ_5JW24Jegyqzp1LHYMl6p3C) to Google Drive Trash after owner rejected its incompatible art direction. Updated central catalog and C02 request to mark it REJECTED/DO NOT USE; earlier approved A00/P01 references remain preferred. No delivery status changed. Catalog: https://docs.google.com/document/d/1bnr7GUgrYBVVY0BMkwx4qRPvW45Nk4grn-Tk6THcoY8/edit ; request: https://docs.google.com/document/d/1velYJklnMai16cH12kYu-BIlyhx_p-6NlSpO41vfuKw/edit
+
+2026-11-23 · 09:43 AM EST · ChatGPT — MASTER ASSET PRODUCTION BOARD (TEAM WORK PLAN)
+
+Created and verified a native six-tab Google Sheet with 107 individually specified asset packages, 32 P0/42 P1/29 P2/4 P3; six build waves; current A00/P01/P02/E01/UI/audio/Hall inventory; acceptance and handoff rules; open design decisions; priority and status dropdown columns. Every item maps art files/states to actual game verbs, existing references/Claude REQs, dependencies, known status, and acceptance test. The 66-item prior art plan remains a brainstorming source, not the live production schedule. Updated root project START HERE, asset catalog, Art Plan 13, Art SOP 34, visual QA and Claude request protocol; updated enabled hourly desk to check this Board and record deliveries by ID and link. No asset files were created or GitHub/Railway code changed by this planning work.
+
+PRIMARY WORK BOARD: https://docs.google.com/spreadsheets/d/1rzixv5r4QWs7PKLYJ0e_sreLy0LjTdgua8uXKeTJpSE/edit
+
+Project START HERE: https://docs.google.com/document/d/1-ASnTbCLAXSi_WCOl_7KNuUgelLXLmiZFKiN6APao2s/edit
+
+Asset locator: https://docs.google.com/document/d/1bnr7GUgrYBVVY0BMkwx4qRPvW45Nk4grn-Tk6THcoY8/edit
+
+Art SOP: https://docs.google.com/document/d/1SinRhkiHFGlbZfsvYziXlSlVxerQG7J2vSgl3KxlWVo/edit
+
+Claude request protocol: https://docs.google.com/document/d/1oBpJKI2P7v7rwoMku-TbcFuVQe2iajddK6v2i5Ro0G0/edit
+
 2026-11-23 · 9:00 AM EST — C02-REV-SOURCE-01 NEW SOURCE POSES
 
 Created and uploaded a 24-pose expressive grappler/quick hero source sheet, cataloged as SOURCE ONLY, NOT native 32px game sprites; C02 remains open for QA rework. File: https://drive.google.com/file/d/187I-8MxxZ_5JW24Jegyqzp1LHYMl6p3C/view ; request: https://docs.google.com/document/d/1velYJklnMai16cH12kYu-BIlyhx_p-6NlSpO41vfuKw/edit ; catalog: https://docs.google.com/document/d/1bnr7GUgrYBVVY0BMkwx4qRPvW45Nk4grn-Tk6THcoY8/edit

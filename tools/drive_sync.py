@@ -111,7 +111,16 @@ def main():
             data = body.encode()
         else:
             t = os.path.join(tmp, "f")
-            curl(f"https://drive.usercontent.google.com/download?id={e['id']}&export=download&confirm=t", t)
+            try:
+                curl(f"https://drive.usercontent.google.com/download?id={e['id']}&export=download&confirm=t", t)
+            except RuntimeError as err:
+                # INTENT: one file Drive will not hand out (a Google Sheet or
+                # Slides deck has no plain download; the owner's "Master Asset
+                # Production Board" is one, 2026-11-23) must not stop the
+                # whole import. It is listed, not downloaded, and reported.
+                e["status"] = "not downloaded (fetch failed)"
+                report.setdefault("failed", []).append(f"{e['drive_path']}: {err}")
+                continue
             data = open(t, "rb").read()
         e["sha256"] = hashlib.sha256(data).hexdigest()
         prev = old.get(e["id"])
@@ -152,9 +161,9 @@ def main():
                    "last_sync_utc": today, "entries": entries},
                   open(MANIFEST, "w"), indent=1, ensure_ascii=False)
     subprocess.run(["rm", "-rf", tmp])
-    for k in ("added", "changed", "removed", "skipped"):
-        print(f"{k}: {len(report[k])}")
-        for p in report[k]:
+    for k in ("added", "changed", "removed", "skipped", "failed"):
+        print(f"{k}: {len(report.get(k, []))}")
+        for p in report.get(k, []):
             print(f"  {p}")
     print(f"unchanged: {report['unchanged']}")
     # The owner's Drive changelog (newest first): show the top of its entries.

@@ -2,6 +2,82 @@
 
 ---
 
+CANONICAL PLAYABLE CHARACTERS — OWNER CONFIRMED (2026-11-23)
+
+THE THREE LEAD HERO DESIGNS ALREADY EXIST. DO NOT REDESIGN. Open the ACTUAL three-row P03 sprite reference now: https://drive.google.com/file/d/17Ulupi-WbcsqVWqS5m-bz1TmIjzx6VcM/view . Exact visual identities: TOP goggles/red scarf compact adventurer (grappler role), MIDDLE green hood/red scarf agile rogue (infiltrator role), BOTTOM pink aviator/goggles/white wings/yellow scarf (flyer role). Preserve their tiny rounded proportions, pixel treatment, identity and expressive faces in every new animation/ability state. Any recent new red-haired/bulky humanoid grappler, purple-haired anime ninja, blonde human/fairy flyer or glossy presentation board is OFF-STYLE/REJECTED as their replacement. Those variants may not become source-of-truth. Technical extraction/animation is still unfinished; only create CLEAN NATIVE FRAMES OF THESE THREE, not new character concepts. AUTHORITATIVE OWNER-LOCKED CHARACTER GUIDE: https://docs.google.com/document/d/1p_kXnoB_9gClFaR47U6-ige5I-9hs1Ta9s-thwSwF9g/edit
+
+OWNER CORRECTION — PLAYABLE CAST IS ALREADY ESTABLISHED (2026-11-23)
+
+The owner supplied a visual reference in the active conversation and explicitly said THESE ARE THE PLAYABLE CHARACTERS. Treat the existing pictured playable cast as the canonical character designs. Do NOT treat newly generated generic three-human-hero art, new grappler/rogue/flyer interpretations, or an arbitrary three-person lineup as a replacement roster. Existing costumes, silhouettes, faces, proportions, colors and character identities must be maintained when generating new animation frames, attacks, expressions, portraits, or ability variations. Any prior numbered production packages for three hero archetypes are functional placeholders, NOT permission to redesign or replace the owner's cast. Continue using owner-endorsed previously stored character art and request/capture exact character source files in Drive when available. The current user-supplied image has NOT yet been verified as a downloadable Drive asset; do not invent a Drive file link. On new work, prefer source-faithful animation extension over character reinvention. Newly generated human-style hero concepts in this session are NONCANON / EXCLUDED FROM PLAYABLE ROSTER, even if usable as unrelated concept art.
+
+LATEST ADDITION: P05 — HUD, RARE POWERS, CANTINA BRAWL, SECRETS (2026-11-23)
+
+The next four original composite boards, plus four cropped category reference plates, are NOW UPLOADED. All are SOURCE-ONLY illustration/reference; most have painted white/pastel backgrounds or uneven transparency. NOT true native transparent atlases. Each folder includes a manifest, Claude README and ZIP.
+
+P05 FOLDER: https://drive.google.com/drive/folders/1SpbZln3ZqaefjyNJRwRjXJ11UdROoKdk
+
+P05 PREFERRED FULL BOARD: https://drive.google.com/file/d/1GaXUALQ4a0zyTbTtUezGBLxTNugfx74c/view
+
+P05 UI / health / party / completeness crop: https://drive.google.com/file/d/159pI0l2X_D1ZmJV3GBxh9fbE0DSJrTo-/view
+
+P05 rare power sources, drops, copied abilities crop: https://drive.google.com/file/d/1OWZri2zXNt-0yH9L6AAXUMSRNfpnhkLU/view
+
+P05 cantina KOs / respawn / brawl feedback crop: https://drive.google.com/file/d/1Cz1mweh3pY1gfHeUrGeEb5ptwu6sFaex/view
+
+P05 exploration secrets / doors / platforms crop: https://drive.google.com/file/d/18tGdp9CgBcW_EyR3ZdQMOrCoMT2-46aY/view
+
+P05 all image sources ZIP: https://drive.google.com/file/d/1Avb0oVF6IV2uWf60_B88Oss2fW0OzAe7/view
+
+Use immediately for art direction and reference while implementing; rebuild clean separable sprites and native UI PNGs with true transparency and phone-scale tests. Do not announce production-ready frames/tiles until verified. The build priority still favors native heroes, NPCs and first three biomes; P05 enriches the following systems in parallel. Other P05 A/B/C full plates remain in its folder as alternatives.
+
+LATEST VISUAL SOURCE ASSETS — P03 & P04 (23 NOV 2026)
+
+This is the current preferred NEW art direction, produced after the owner explicitly approved the look. All 12 1448×1086 PNG sheets are uploaded and indexed; original images preserved. These are STRONG ART SOURCES, NOT validated native sprite sheets / 16px tiles. See the actual per-file link list and Claude integration notes in https://docs.google.com/document/d/1T7S5FVKq3ZTvNqwaIzC126wRb15V9Spp7xKbwhz-Qgg/edit
+
+P03 — HEROES, TOWN NPCs, ENEMIES, VFX, GRASSY RUINS, CASTLE, TOWN: https://drive.google.com/drive/folders/1m5KXh8Ts-UiMWS6Us9qaA6MlucsTHpGf
+
+Hero action sheet: https://drive.google.com/file/d/17Ulupi-WbcsqVWqS5m-bz1TmIjzx6VcM/view
+
+Town NPC/guard/king/cat: https://drive.google.com/file/d/1yQSnaJztXw-1CKZ39dHZffHJP8w72_ua/view
+
+Enemy/villain/alarm: https://drive.google.com/file/d/1vPsNnNBL1943FTTOelO-luf9phra8H0r/view
+
+VFX and pickups: https://drive.google.com/file/d/1hQs3famEOC_hv-t7dqEpr60jQVNpJgL1/view
+
+Grass/ruins: https://drive.google.com/file/d/1VPnTjuSi_EJbaiBl_5PsSRvFjg4Ebu23/view
+
+Castle: https://drive.google.com/file/d/1p8EzaOuSqwpiGezmPwB_0vT97eoGz7-3/view
+
+Town: https://drive.google.com/file/d/1RVWiLn5NEx1XpHW685Q-SGSBs4o4RqkC/view
+
+P04 — CANTINA INTERIOR, NPCs, PROPS, VEHICLES, HALL: https://drive.google.com/drive/folders/1CwqUK750arthkFGMfsK3yRiJ6lzlRfrW
+
+Cantina room: https://drive.google.com/file/d/10jnBxyIv1a4gkgPX2TuvhryNVl4RoWdd/view
+
+Cantina NPCs: https://drive.google.com/file/d/1TOBTAJERML_9JTEWcdANOIOxk72bmhey/view
+
+Mechanisms, props: https://drive.google.com/file/d/1ZvRy_Ion5Zl9RZJaYgQo_sJi0I6gjjFU/view
+
+Vehicles, mounts: https://drive.google.com/file/d/1Q9crBCEko3TKVFsPAkRUhw4IB4Hgy8mC/view
+
+Hall of Legends: https://drive.google.com/file/d/1qJUKLk3clZOSU0Xc6tstNR91R-Rt8vln/view
+
+Master Board currently links these sources in 37 matching work-package rows under Current starting point; pending technical extraction requests remain open. Compare A00 and P01, then extract and test at native scale before moving request to Delivered.
+
+2026-11-23 10:02 AM EST — SOURCE QA / OWNER STYLE CORRECTION
+
+Read current 107-package Master Board (HRO-001/HRO-002/HRO-004 already In progress), SOP 34, facial acting guide 35, actual A00-04 and A00-02 owner-endorsed images, actual P01 prototype art, and the previously recommended C02 recovered pose reference. IMPORTANT VISUAL FINDING: the C02 recovered pose reference (13qA3...) depicts large human-like fighting characters with elaborate costume anatomy; it conflicts with the compact, masked, toy-like silhouettes and restrained pixel language of A00-04 and P01, and is NOT a safe canonical source for the requested heroes. Do not use it as primary direction merely because it is labeled 'expressive'. A00-04 and existing P01 sprite identities are the preferred visual basis; preserve their small face/hat/scarf silhouettes, and upgrade ACTING within that style. The recently owner-rejected 24-pose humanoid sheet remains Trashed and prohibited. No newly generated art has passed full native 32x32, six-phase run, alpha, expression and 320x180 QA this iteration. HRO-001/HRO-002/HRO-004 stay In progress; C02 remains IN PROGRESS — QUALITY REWORK. Do not mark delivered or change column P/Q.
+
+REJECTED AND REMOVED FROM ACTIVE DRIVE — 2026-11-23 10:00 AM EST
+
+C02-REV-SOURCE-01 humanoid 24-pose sheet is OWNER-REJECTED: DOES NOT MATCH ART DIRECTION. The original Drive file was moved to Trash; DO NOT USE, RECOMMEND, RESTORE, REPRODUCE OR TREAT AS A POSITIVE REFERENCE. Its old link https://drive.google.com/file/d/187I-8MxxZ_5JW24Jegyqzp1LHYMl6p3C/view is archival identification ONLY, not a valid asset pointer. P01 and the approved A00 comparisons remain preferred references. The C02 revision remains BLOCKING and IN PROGRESS — QUALITY REWORK. Source folder may remain but contains no approved deliverable from this attempt.
+
+ACTIVE PRODUCTION BOARD — LOOK HERE FOR WHAT TO BUILD NEXT (2026-11-23)
+
+https://docs.google.com/spreadsheets/d/1rzixv5r4QWs7PKLYJ0e_sreLy0LjTdgua8uXKeTJpSE/edit
+
+The central asset index is for FINDING exact existing files; the Board is for PLANNING and TRACKING 107 actual itemized work packages. Every new file must link from BOTH its indexed ID and its Board row. Reference art and technical prototypes are identified; don't replace strong earlier artwork with weaker substitutes. Team columns: ID/Priority/Wave, states, dependency, source link, QA, suggested producer, Status, Drive delivery, GitHub path.
+
 C02 REVISION — NEW 24-POSE SOURCE STUDY (2026-11-23)
 
 CATEGORY: playable heroes / grappler and quick infiltrator. ASSET ID: C02-REV-SOURCE-01. Source REQ: https://docs.google.com/document/d/1velYJklnMai16cH12kYu-BIlyhx_p-6NlSpO41vfuKw/edit . 2×12 original expressive poses; file PNG large art sheet, not 32px atlas. STATUS: SOURCE-ONLY / NOT GAME READY / NOT APPROVED REPLACEMENT. Differentiated faces and action silhouettes; missing true 6-phase run and native alpha/cell/pivot QA, potential over-detail versus approved small-game reference. DO NOT supersede existing P01 playable prototype or use rejected C02 v1. File: https://drive.google.com/file/d/187I-8MxxZ_5JW24Jegyqzp1LHYMl6p3C/view ; folder: https://drive.google.com/drive/folders/1czssq_XVJgBYyk1XwqHPuWNXR5tFJzQu

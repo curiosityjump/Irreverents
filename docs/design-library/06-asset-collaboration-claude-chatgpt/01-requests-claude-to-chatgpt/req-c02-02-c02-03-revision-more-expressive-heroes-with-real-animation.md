@@ -2,6 +2,18 @@
 
 ---
 
+CANONICAL PLAYABLE CHARACTERS — OWNER CONFIRMED (2026-11-23)
+
+THE THREE LEAD HERO DESIGNS ALREADY EXIST. DO NOT REDESIGN. Open the ACTUAL three-row P03 sprite reference now: https://drive.google.com/file/d/17Ulupi-WbcsqVWqS5m-bz1TmIjzx6VcM/view . Exact visual identities: TOP goggles/red scarf compact adventurer (grappler role), MIDDLE green hood/red scarf agile rogue (infiltrator role), BOTTOM pink aviator/goggles/white wings/yellow scarf (flyer role). Preserve their tiny rounded proportions, pixel treatment, identity and expressive faces in every new animation/ability state. Any recent new red-haired/bulky humanoid grappler, purple-haired anime ninja, blonde human/fairy flyer or glossy presentation board is OFF-STYLE/REJECTED as their replacement. Those variants may not become source-of-truth. Technical extraction/animation is still unfinished; only create CLEAN NATIVE FRAMES OF THESE THREE, not new character concepts. AUTHORITATIVE OWNER-LOCKED CHARACTER GUIDE: https://docs.google.com/document/d/1p_kXnoB_9gClFaR47U6-ige5I-9hs1Ta9s-thwSwF9g/edit
+
+2026-11-23 10:02 AM EST — SOURCE QA / OWNER STYLE CORRECTION
+
+Read current 107-package Master Board (HRO-001/HRO-002/HRO-004 already In progress), SOP 34, facial acting guide 35, actual A00-04 and A00-02 owner-endorsed images, actual P01 prototype art, and the previously recommended C02 recovered pose reference. IMPORTANT VISUAL FINDING: the C02 recovered pose reference (13qA3...) depicts large human-like fighting characters with elaborate costume anatomy; it conflicts with the compact, masked, toy-like silhouettes and restrained pixel language of A00-04 and P01, and is NOT a safe canonical source for the requested heroes. Do not use it as primary direction merely because it is labeled 'expressive'. A00-04 and existing P01 sprite identities are the preferred visual basis; preserve their small face/hat/scarf silhouettes, and upgrade ACTING within that style. The recently owner-rejected 24-pose humanoid sheet remains Trashed and prohibited. No newly generated art has passed full native 32x32, six-phase run, alpha, expression and 320x180 QA this iteration. HRO-001/HRO-002/HRO-004 stay In progress; C02 remains IN PROGRESS — QUALITY REWORK. Do not mark delivered or change column P/Q.
+
+REJECTED AND REMOVED FROM ACTIVE DRIVE — 2026-11-23 10:00 AM EST
+
+C02-REV-SOURCE-01 humanoid 24-pose sheet is OWNER-REJECTED: DOES NOT MATCH ART DIRECTION. The original Drive file was moved to Trash; DO NOT USE, RECOMMEND, RESTORE, REPRODUCE OR TREAT AS A POSITIVE REFERENCE. Its old link https://drive.google.com/file/d/187I-8MxxZ_5JW24Jegyqzp1LHYMl6p3C/view is archival identification ONLY, not a valid asset pointer. P01 and the approved A00 comparisons remain preferred references. The C02 revision remains BLOCKING and IN PROGRESS — QUALITY REWORK. Source folder may remain but contains no approved deliverable from this attempt.
+
 2026-11-23 9:00 AM EST — NEW SOURCE ART UPLOADED; NOT DELIVERED
 
 Produced a new 2×12 original character pose source sheet (grappler and quick hero), with much clearer expressions and differentiated motion than rejected v1. Drive source: https://drive.google.com/file/d/187I-8MxxZ_5JW24Jegyqzp1LHYMl6p3C/view ; folder: https://drive.google.com/drive/folders/1czssq_XVJgBYyk1XwqHPuWNXR5tFJzQu . This is an art-directed LARGE SOURCE IMAGE ONLY, not a 32×32 transparent cell atlas or complete 6-frame run animation. Also the designs are more humanoid/detailed than some earlier compact references, so visual compatibility is unproven. Do not import as production sprites. Next: refine to compact 32px scale, create genuine six-phase runs, clean alpha, construct manifest and verify 320×180 scene. STATUS remains IN PROGRESS — QUALITY REWORK.

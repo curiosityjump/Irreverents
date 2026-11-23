@@ -2,6 +2,10 @@
 
 ---
 
+CANONICAL PLAYABLE CHARACTERS — OWNER CONFIRMED (2026-11-23)
+
+THE THREE LEAD HERO DESIGNS ALREADY EXIST. DO NOT REDESIGN. Open the ACTUAL three-row P03 sprite reference now: https://drive.google.com/file/d/17Ulupi-WbcsqVWqS5m-bz1TmIjzx6VcM/view . Exact visual identities: TOP goggles/red scarf compact adventurer (grappler role), MIDDLE green hood/red scarf agile rogue (infiltrator role), BOTTOM pink aviator/goggles/white wings/yellow scarf (flyer role). Preserve their tiny rounded proportions, pixel treatment, identity and expressive faces in every new animation/ability state. Any recent new red-haired/bulky humanoid grappler, purple-haired anime ninja, blonde human/fairy flyer or glossy presentation board is OFF-STYLE/REJECTED as their replacement. Those variants may not become source-of-truth. Technical extraction/animation is still unfinished; only create CLEAN NATIVE FRAMES OF THESE THREE, not new character concepts. AUTHORITATIVE OWNER-LOCKED CHARACTER GUIDE: https://docs.google.com/document/d/1p_kXnoB_9gClFaR47U6-ige5I-9hs1Ta9s-thwSwF9g/edit
+
 CHARACTER FACIAL EXPRESSIONS AND ACTING — PRODUCTION STANDARD
 
 Irreverents \| 2026-11-23 09:13 AM EST \| Owner-directed visual improvement

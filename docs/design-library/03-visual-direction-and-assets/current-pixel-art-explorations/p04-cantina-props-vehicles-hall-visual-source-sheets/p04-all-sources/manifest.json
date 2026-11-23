@@ -1,0 +1,86 @@
+{
+  "series": "P04",
+  "project": "Irreverents",
+  "date": "2026-11-23",
+  "batch_type": "artistically useful source sheets, not validated engine assets",
+  "items": [
+    {
+      "filename": "cantina_tavern_hub_tileset.png",
+      "category": "CANTINA hub scenery",
+      "status": "cantina props/building source plate",
+      "description": "Wood, bar, tavern doors, tables, furniture, lamps, banners",
+      "size_px": [
+        1448,
+        1086
+      ],
+      "exact_opaque_percentage": 0.16,
+      "semi_transparent_percentage": 75.88,
+      "native_frame_grid_verified": false,
+      "gameplay_ready": false,
+      "notes": "Original image-generated visual source. Extract/clean alpha, crop consistent cells, normalize pivots/animations; tile art must be reworked/tested on true 16x16 grid. Artistically accepted as a current positive reference but NOT engine-ready."
+    },
+    {
+      "filename": "cantina_npc_sprite_sheet.png",
+      "category": "CANTINA NPCs / brawlers",
+      "status": "character source plate",
+      "description": "Barkeep, patron, brawler, bard expressions and hits",
+      "size_px": [
+        1448,
+        1086
+      ],
+      "exact_opaque_percentage": 0.08,
+      "semi_transparent_percentage": 47.85,
+      "native_frame_grid_verified": false,
+      "gameplay_ready": false,
+      "notes": "Original image-generated visual source. Extract/clean alpha, crop consistent cells, normalize pivots/animations; tile art must be reworked/tested on true 16x16 grid. Artistically accepted as a current positive reference but NOT engine-ready."
+    },
+    {
+      "filename": "chibi_pixel_interactables_sprite_sheet.png",
+      "category": "Puzzle mechanisms / alarms",
+      "status": "prop / interactable source plate",
+      "description": "Plates, switches, gates, gears, bells, chests, flagged checkpoints",
+      "size_px": [
+        1448,
+        1086
+      ],
+      "exact_opaque_percentage": 0.06,
+      "semi_transparent_percentage": 41.6,
+      "native_frame_grid_verified": false,
+      "gameplay_ready": false,
+      "notes": "Original image-generated visual source. Extract/clean alpha, crop consistent cells, normalize pivots/animations; tile art must be reworked/tested on true 16x16 grid. Artistically accepted as a current positive reference but NOT engine-ready."
+    },
+    {
+      "filename": "chibi_vehicle_and_mount_sprite_sheet.png",
+      "category": "Vehicles / mounts",
+      "status": "vehicle source plate",
+      "description": "Flying machine, minecart, wheeled machine, mount, damage states",
+      "size_px": [
+        1448,
+        1086
+      ],
+      "exact_opaque_percentage": 0.05,
+      "semi_transparent_percentage": 64.72,
+      "native_frame_grid_verified": false,
+      "gameplay_ready": false,
+      "notes": "Original image-generated visual source. Extract/clean alpha, crop consistent cells, normalize pivots/animations; tile art must be reworked/tested on true 16x16 grid. Artistically accepted as a current positive reference but NOT engine-ready."
+    },
+    {
+      "filename": "hall_of_legends_tile_atlas.png",
+      "category": "H07 Hall of Legends",
+      "status": "hall architecture source plate",
+      "description": "Lavender stone, columns, windows, statues, banners, door, portals; grid not verified",
+      "size_px": [
+        1448,
+        1086
+      ],
+      "exact_opaque_percentage": 0.05,
+      "semi_transparent_percentage": 99.01,
+      "native_frame_grid_verified": false,
+      "gameplay_ready": false,
+      "notes": "Original image-generated visual source. Extract/clean alpha, crop consistent cells, normalize pivots/animations; tile art must be reworked/tested on true 16x16 grid. Artistically accepted as a current positive reference but NOT engine-ready."
+    }
+  ],
+  "approved_for_prototyping_by_default": true,
+  "art_guidance": "Use A00 comps and 34 SOP; preserve navy contours, playful GBA-scale palette and expressive faces; treat source sheet layout as illustrative, not mechanical grid.",
+  "workflow": "Use P01 importable files for immediate game; adapt these plates with proper separate transparent PNGs and manifest, verify at 320x180, then update Master Board & Asset Index."
+}

@@ -52,7 +52,7 @@
    "id": "1sE-ZkWFxqP-_UckkA5c7Pf0xbDTfN2kQUDMt6mUDgPk",
    "drive_path": "/02 Gameplay Systems/05 — Characters, Roster, Parties and Acquired Powers",
    "repo_path": "02-gameplay-systems/05-characters-roster-parties-and-acquired-powers.md",
-   "sha256": "0b9710486a4b54a72b31dd7d47b67dc452e37c06915916336351269f220085ce"
+   "sha256": "5c001fed27233363a8ba8d9cd538ba79d5745b5c9a5b7d693840914a0a2dbad4"
   },
   {
    "kind": "doc",
@@ -146,7 +146,7 @@
    "id": "1reKfubHb_S6mSyn89kTSm8T2bSRd67E2MptsL24skL8",
    "drive_path": "/03 Visual Direction and Assets/00 Asset Production Plan and Style Lock/13 — Art Asset Production Plan — Ordered Generation Backlog",
    "repo_path": "03-visual-direction-and-assets/00-asset-production-plan-and-style-lock/13-art-asset-production-plan-ordered-generation-backlog.md",
-   "sha256": "ab4b311871f2dd19ffb2f1400b3dbc6a40147290716babc7b003b4718b43552f"
+   "sha256": "2a39fef1db512c9f7b0b760eee107c92dca0c038d8a394d5b0d56ed66acebd9e"
   },
   {
    "kind": "doc",
@@ -237,13 +237,6 @@
    "kind": "folder",
    "id": "1czssq_XVJgBYyk1XwqHPuWNXR5tFJzQu",
    "drive_path": "/03 Visual Direction and Assets/C02 — Hero Revision Source Studies"
-  },
-  {
-   "kind": "file",
-   "id": "187I-8MxxZ_5JW24Jegyqzp1LHYMl6p3C",
-   "drive_path": "/03 Visual Direction and Assets/C02 — Hero Revision Source Studies/C02-REV-source-24poses-NOT_NATIVE_ATLAS.png",
-   "repo_path": "03-visual-direction-and-assets/c02-hero-revision-source-studies/c02-rev-source-24poses-not-native-atlas.png",
-   "sha256": "f8cce8f6e532b172faa508e65d8b0dd0ca02cd740595adc07f73b7e49ddbf161"
   },
   {
    "kind": "folder",
@@ -816,6 +809,224 @@
   },
   {
    "kind": "folder",
+   "id": "1m5KXh8Ts-UiMWS6Us9qaA6MlucsTHpGf",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P03 — Core Heroes NPCs Terrain and VFX — VISUAL SOURCE SHEETS"
+  },
+  {
+   "kind": "file",
+   "id": "1p8EzaOuSqwpiGezmPwB_0vT97eoGz7-3",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P03 — Core Heroes NPCs Terrain and VFX — VISUAL SOURCE SHEETS/castle_interior_tileset_atlas.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p03-core-heroes-npcs-terrain-and-vfx-visual-source-sheets/castle-interior-tileset-atlas.png",
+   "sha256": "b18447adaefbc09ffd7ac5257c0dc0feebf803095dfb3f3a07438604c1ebe1a0"
+  },
+  {
+   "kind": "file",
+   "id": "1RVWiLn5NEx1XpHW685Q-SGSBs4o4RqkC",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P03 — Core Heroes NPCs Terrain and VFX — VISUAL SOURCE SHEETS/gba_town_street_tileset_atlas.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p03-core-heroes-npcs-terrain-and-vfx-visual-source-sheets/gba-town-street-tileset-atlas.png",
+   "sha256": "d3a0b028e0ad8409a99a390047027fe91da53dc191228b06de82756348193879"
+  },
+  {
+   "kind": "file",
+   "id": "1VPnTjuSi_EJbaiBl_5PsSRvFjg4Ebu23",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P03 — Core Heroes NPCs Terrain and VFX — VISUAL SOURCE SHEETS/grassy_ruins_pixel_art_tileset_atlas.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p03-core-heroes-npcs-terrain-and-vfx-visual-source-sheets/grassy-ruins-pixel-art-tileset-atlas.png",
+   "sha256": "93fdd5d4ad6f235f1b025f175d42841554412af08883eb9c09352c965c704028"
+  },
+  {
+   "kind": "file",
+   "id": "1Sp-TrVTecE1rKQ27Gd65aJN_mr4igpVd",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P03 — Core Heroes NPCs Terrain and VFX — VISUAL SOURCE SHEETS/manifest.json",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p03-core-heroes-npcs-terrain-and-vfx-visual-source-sheets/manifest.json",
+   "sha256": "349f8d05ca2e8c4f9bdfefa736660ae4a226d860f9a5ade26b1221c3d303d98a"
+  },
+  {
+   "kind": "file",
+   "id": "16kpIaGnWflxb4w2hVyWm8ytIOEJbJndc",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P03 — Core Heroes NPCs Terrain and VFX — VISUAL SOURCE SHEETS/P03_ALL_SOURCES.zip",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p03-core-heroes-npcs-terrain-and-vfx-visual-source-sheets/p03-all-sources/",
+   "sha256": "2e0049519f9ba4286ccda79b37391b2a3297107f1ced62ecd75cb6c50ce24a27"
+  },
+  {
+   "kind": "file",
+   "id": "1hQs3famEOC_hv-t7dqEpr60jQVNpJgL1",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P03 — Core Heroes NPCs Terrain and VFX — VISUAL SOURCE SHEETS/pixel_art_vfx_and_pickup_atlas.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p03-core-heroes-npcs-terrain-and-vfx-visual-source-sheets/pixel-art-vfx-and-pickup-atlas.png",
+   "sha256": "0bde8d9300349f273c533d0d955c2fe1a3f8daddbed3d0270fc82318858ab8bd"
+  },
+  {
+   "kind": "file",
+   "id": "17Ulupi-WbcsqVWqS5m-bz1TmIjzx6VcM",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P03 — Core Heroes NPCs Terrain and VFX — VISUAL SOURCE SHEETS/pixel_heroes_action_sprite_sheet.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p03-core-heroes-npcs-terrain-and-vfx-visual-source-sheets/pixel-heroes-action-sprite-sheet.png",
+   "sha256": "015aedef16e820cbc7c34d7f15c058a150118c16b28f5c7320d7114cefd81201"
+  },
+  {
+   "kind": "file",
+   "id": "1vPsNnNBL1943FTTOelO-luf9phra8H0r",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P03 — Core Heroes NPCs Terrain and VFX — VISUAL SOURCE SHEETS/pixel_villain_sprite_sheet.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p03-core-heroes-npcs-terrain-and-vfx-visual-source-sheets/pixel-villain-sprite-sheet.png",
+   "sha256": "55d3dc21db84a4b2711ea2dfbdce56e67554bb026efacfa26d880f829dcda763"
+  },
+  {
+   "kind": "file",
+   "id": "1qUACt0PGzHlgeuOGGuSo2aeNiQub6YH8",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P03 — Core Heroes NPCs Terrain and VFX — VISUAL SOURCE SHEETS/README_FOR_CLAUDE.txt",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p03-core-heroes-npcs-terrain-and-vfx-visual-source-sheets/readme-for-claude.txt",
+   "sha256": "9893ed3f18c15542c2d83cad484fcf380233092fb99a3b1eddaa58f56c8c42c3"
+  },
+  {
+   "kind": "file",
+   "id": "1yQSnaJztXw-1CKZ39dHZffHJP8w72_ua",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P03 — Core Heroes NPCs Terrain and VFX — VISUAL SOURCE SHEETS/retro_town_npc_sprite_sheet.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p03-core-heroes-npcs-terrain-and-vfx-visual-source-sheets/retro-town-npc-sprite-sheet.png",
+   "sha256": "c1ad7500a5c3c8c22709cff6e295060a028fa0319be1e381a74107539eaf53bc"
+  },
+  {
+   "kind": "folder",
+   "id": "1CwqUK750arthkFGMfsK3yRiJ6lzlRfrW",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P04 — Cantina Props Vehicles Hall — VISUAL SOURCE SHEETS"
+  },
+  {
+   "kind": "file",
+   "id": "1TOBTAJERML_9JTEWcdANOIOxk72bmhey",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P04 — Cantina Props Vehicles Hall — VISUAL SOURCE SHEETS/cantina_npc_sprite_sheet.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p04-cantina-props-vehicles-hall-visual-source-sheets/cantina-npc-sprite-sheet.png",
+   "sha256": "e0989c979c578c4ad1186ac8313010b679625e16d47b7d96ceaca79deb45c4c6"
+  },
+  {
+   "kind": "file",
+   "id": "10jnBxyIv1a4gkgPX2TuvhryNVl4RoWdd",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P04 — Cantina Props Vehicles Hall — VISUAL SOURCE SHEETS/cantina_tavern_hub_tileset.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p04-cantina-props-vehicles-hall-visual-source-sheets/cantina-tavern-hub-tileset.png",
+   "sha256": "0de8d30d2798f009af2589955402f0640d7c5d0007cfb6377a0c4622235e1bfa"
+  },
+  {
+   "kind": "file",
+   "id": "1ZvRy_Ion5Zl9RZJaYgQo_sJi0I6gjjFU",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P04 — Cantina Props Vehicles Hall — VISUAL SOURCE SHEETS/chibi_pixel_interactables_sprite_sheet.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p04-cantina-props-vehicles-hall-visual-source-sheets/chibi-pixel-interactables-sprite-sheet.png",
+   "sha256": "8dfb3d1f3ea444e94471629f46b7fbca48a73a0d8ae30923e9afd002e10fec5e"
+  },
+  {
+   "kind": "file",
+   "id": "1Q9crBCEko3TKVFsPAkRUhw4IB4Hgy8mC",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P04 — Cantina Props Vehicles Hall — VISUAL SOURCE SHEETS/chibi_vehicle_and_mount_sprite_sheet.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p04-cantina-props-vehicles-hall-visual-source-sheets/chibi-vehicle-and-mount-sprite-sheet.png",
+   "sha256": "a192b442ed9414180a299a9530dfe9b466b3983b89ddd4b3f7d6b741284dd549"
+  },
+  {
+   "kind": "file",
+   "id": "1qJUKLk3clZOSU0Xc6tstNR91R-Rt8vln",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P04 — Cantina Props Vehicles Hall — VISUAL SOURCE SHEETS/hall_of_legends_tile_atlas.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p04-cantina-props-vehicles-hall-visual-source-sheets/hall-of-legends-tile-atlas.png",
+   "sha256": "6cba2ac1358e71e9a6e37645b90a1e5239912c013ca78202205f7b6c4c634299"
+  },
+  {
+   "kind": "file",
+   "id": "1add06z_tQ0LqS7ktpNoD0l5tgWW7Otm0",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P04 — Cantina Props Vehicles Hall — VISUAL SOURCE SHEETS/manifest.json",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p04-cantina-props-vehicles-hall-visual-source-sheets/manifest.json",
+   "sha256": "1ce7580d33e8f7bd3e7d247dfaff9154ce4c08973ea84919d36f117fb3b6c965"
+  },
+  {
+   "kind": "file",
+   "id": "1G9UKD-HAqeYWaHqA9tTjpm3q_5TA8l69",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P04 — Cantina Props Vehicles Hall — VISUAL SOURCE SHEETS/P04_ALL_SOURCES.zip",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p04-cantina-props-vehicles-hall-visual-source-sheets/p04-all-sources/",
+   "sha256": "444282fb6e242e0a0e6135f84da279423d8e0bec045c87526304a523ed247fe7"
+  },
+  {
+   "kind": "file",
+   "id": "1zoWocT2bzVWH06XdYFE6LrmjmzmDDbPn",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P04 — Cantina Props Vehicles Hall — VISUAL SOURCE SHEETS/README_FOR_CLAUDE.txt",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p04-cantina-props-vehicles-hall-visual-source-sheets/readme-for-claude.txt",
+   "sha256": "05e0a14e712b74d6af089cf2f7f5380379810bb23b0ef611b2a59170e41f99bc"
+  },
+  {
+   "kind": "folder",
+   "id": "1SpbZln3ZqaefjyNJRwRjXJ11UdROoKdk",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P05 — HUD Powers Cantina Brawl and Secrets — VISUAL SOURCE SHEETS"
+  },
+  {
+   "kind": "file",
+   "id": "1vvPcf1X1xAKBg3o8paZWFWcETNI7h0_u",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P05 — HUD Powers Cantina Brawl and Secrets — VISUAL SOURCE SHEETS/manifest.json",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p05-hud-powers-cantina-brawl-and-secrets-visual-source-sheets/manifest.json",
+   "sha256": "be060f05b6aba8889d3524730ef7d0c448fa9d14b784cdc5850c70e634406081"
+  },
+  {
+   "kind": "file",
+   "id": "1q5sEtsTd09HaWg4I39YC6TXT46MgaW3F",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P05 — HUD Powers Cantina Brawl and Secrets — VISUAL SOURCE SHEETS/P05_A_UI_Powers_Exploration_VARIANT_A.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p05-hud-powers-cantina-brawl-and-secrets-visual-source-sheets/p05-a-ui-powers-exploration-variant-a.png",
+   "sha256": "772fc648bb16bb87cd184dfb83b40db59cf9eeffcca288bbfc123c6710095bbf"
+  },
+  {
+   "kind": "file",
+   "id": "1Avb0oVF6IV2uWf60_B88Oss2fW0OzAe7",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P05 — HUD Powers Cantina Brawl and Secrets — VISUAL SOURCE SHEETS/P05_ALL_SOURCES.zip",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p05-hud-powers-cantina-brawl-and-secrets-visual-source-sheets/p05-all-sources/",
+   "sha256": "a14db91bc23c5d5ae44e65988a8ecf9b2f95b83657a7aae75268588116c01aee"
+  },
+  {
+   "kind": "file",
+   "id": "1TEaLJTZ9ISDODBNZBMY38BYBxIrjxNOe",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P05 — HUD Powers Cantina Brawl and Secrets — VISUAL SOURCE SHEETS/P05_B_UI_Powers_Exploration_VARIANT_B.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p05-hud-powers-cantina-brawl-and-secrets-visual-source-sheets/p05-b-ui-powers-exploration-variant-b.png",
+   "sha256": "c83a14fb8ce69f8118d90bd539d7781ae667069ea045189e8a4f04b76939cd7e"
+  },
+  {
+   "kind": "file",
+   "id": "1Cz1mweh3pY1gfHeUrGeEb5ptwu6sFaex",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P05 — HUD Powers Cantina Brawl and Secrets — VISUAL SOURCE SHEETS/P05_BRAWL_hit_KO_respawn_source.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p05-hud-powers-cantina-brawl-and-secrets-visual-source-sheets/p05-brawl-hit-ko-respawn-source.png",
+   "sha256": "c389e63a1e032047e6151118c41da87f6f362674dfd61e5c16f686dd4109f0cc"
+  },
+  {
+   "kind": "file",
+   "id": "1-NdD1ne6GjkZfD6ysHAwuTCuEqNsaKGm",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P05 — HUD Powers Cantina Brawl and Secrets — VISUAL SOURCE SHEETS/P05_C_UI_Powers_Exploration_VARIANT_C.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p05-hud-powers-cantina-brawl-and-secrets-visual-source-sheets/p05-c-ui-powers-exploration-variant-c.png",
+   "sha256": "756a9a6b9ea48cb6b4e4106c3544f8d8d620447deaebe9d9c7391fd177cf0d47"
+  },
+  {
+   "kind": "file",
+   "id": "1GaXUALQ4a0zyTbTtUezGBLxTNugfx74c",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P05 — HUD Powers Cantina Brawl and Secrets — VISUAL SOURCE SHEETS/P05_D_UI_Powers_Exploration_PREFERRED_SHEET.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p05-hud-powers-cantina-brawl-and-secrets-visual-source-sheets/p05-d-ui-powers-exploration-preferred-sheet.png",
+   "sha256": "aad121675189ebc5716a1a9955bd520621c8aa49627f71e38568747b04be12de"
+  },
+  {
+   "kind": "file",
+   "id": "1OWZri2zXNt-0yH9L6AAXUMSRNfpnhkLU",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P05 — HUD Powers Cantina Brawl and Secrets — VISUAL SOURCE SHEETS/P05_RARE_powers_pickups_source.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p05-hud-powers-cantina-brawl-and-secrets-visual-source-sheets/p05-rare-powers-pickups-source.png",
+   "sha256": "8afe491e1e128131048c8825313fa3c15e8ff89f792049c18cb8df23606281c9"
+  },
+  {
+   "kind": "file",
+   "id": "18tGdp9CgBcW_EyR3ZdQMOrCoMT2-46aY",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P05 — HUD Powers Cantina Brawl and Secrets — VISUAL SOURCE SHEETS/P05_SECRETS_doors_breakables_source.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p05-hud-powers-cantina-brawl-and-secrets-visual-source-sheets/p05-secrets-doors-breakables-source.png",
+   "sha256": "5da512471365f8a4ddf6e88692a2f7a7c1b4a8becf5508c0b6921185fdb256ee"
+  },
+  {
+   "kind": "file",
+   "id": "159pI0l2X_D1ZmJV3GBxh9fbE0DSJrTo-",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P05 — HUD Powers Cantina Brawl and Secrets — VISUAL SOURCE SHEETS/P05_UI_hero_party_HUD_source.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p05-hud-powers-cantina-brawl-and-secrets-visual-source-sheets/p05-ui-hero-party-hud-source.png",
+   "sha256": "007d4a5ca4afa2c75c7fe901efdf3620b0352b1d919d8eddfff4088e0fe0618c"
+  },
+  {
+   "kind": "file",
+   "id": "1aPrAwKlyv0GbszSHeOVuqwYC7DIcLycs",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P05 — HUD Powers Cantina Brawl and Secrets — VISUAL SOURCE SHEETS/README_FOR_CLAUDE.txt",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p05-hud-powers-cantina-brawl-and-secrets-visual-source-sheets/readme-for-claude.txt",
+   "sha256": "72bdcef423d94913eca0376672153a180ee12d41d68514fb3e64c429b0900316"
+  },
+  {
+   "kind": "folder",
    "id": "11Wli0oy1WAtgIHT4ZUPX5Nprs0nM3RBD",
    "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/Quiet pixel-art environment studies — reduced visual noise"
   },
@@ -1167,6 +1378,13 @@
    "sha256": "d73b356a94fdd72b416d3d0beaefe9a8d63196fe3c4bef7fddcb39975c001915"
   },
   {
+   "kind": "doc",
+   "id": "1p_kXnoB_9gClFaR47U6-ige5I-9hs1Ta9s-thwSwF9g",
+   "drive_path": "/03 Visual Direction and Assets/36 — CANON PLAYABLE CHARACTER DESIGNS — Preserve These Three",
+   "repo_path": "03-visual-direction-and-assets/36-canon-playable-character-designs-preserve-these-three.md",
+   "sha256": "765085e0021dca1be54fc71618693ad55c1cb26cfd31125ec12e1f30c8e7bad7"
+  },
+  {
    "kind": "folder",
    "id": "1IszJaiaCjwWi3pc8Fi-V9xGIq_S778XL",
    "drive_path": "/04 Decisions and Prototyping"
@@ -1176,7 +1394,7 @@
    "id": "1vlwf5VZgwT0E0cKqYF4o0EI5LhuR4iiZxCyVUUreytU",
    "drive_path": "/04 Decisions and Prototyping/11 — Decision Register, Boundaries and Open Questions",
    "repo_path": "04-decisions-and-prototyping/11-decision-register-boundaries-and-open-questions.md",
-   "sha256": "63591eb48263e485079ad11bc313a74468f24234b542fb4ebb154acefc3efa8b"
+   "sha256": "39ab8fc3c5a1f844e0ae6a58f0ee3647327bb2489e65e18fdf9c13f13be76b27"
   },
   {
    "kind": "doc",
@@ -1296,7 +1514,7 @@
    "id": "1velYJklnMai16cH12kYu-BIlyhx_p-6NlSpO41vfuKw",
    "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/01 REQUESTS — Claude to ChatGPT/REQ — C02-02/C02-03 REVISION — More expressive heroes with real animation",
    "repo_path": "06-asset-collaboration-claude-chatgpt/01-requests-claude-to-chatgpt/req-c02-02-c02-03-revision-more-expressive-heroes-with-real-animation.md",
-   "sha256": "84230354ec768ab0923022dc4fdda6485395e3043ee10024c00e16057aea181e"
+   "sha256": "fa53ad6931ae19009741d8581192b4ddc852699f83d33979c4d239f3af7c9cfe"
   },
   {
    "kind": "doc",
@@ -1355,7 +1573,7 @@
    "id": "1oBpJKI2P7v7rwoMku-TbcFuVQe2iajddK6v2i5Ro0G0",
    "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/00 START HERE — Claude ↔ ChatGPT Asset Request Protocol",
    "repo_path": "06-asset-collaboration-claude-chatgpt/00-start-here-claude-chatgpt-asset-request-protocol.md",
-   "sha256": "278e104f2705aa028492662005b68eff093e2ed01d9a25a91d2233b1689c39fb"
+   "sha256": "b57522007100089371b29ee0d9227fdf6b725e8e155bc15a0cde5168047bd53e"
   },
   {
    "kind": "doc",
@@ -1369,42 +1587,56 @@
    "id": "17OlSfBfTnUEUTmbo-zcsl4VrSn1mPny-zAP6kZaiodU",
    "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/02 VISUAL QUALITY GATE — Art-first asset production and acceptance",
    "repo_path": "06-asset-collaboration-claude-chatgpt/02-visual-quality-gate-art-first-asset-production-and-acceptance.md",
-   "sha256": "0179b8f1efae35a30b7b7ecbe1132b72c438f025ebe0be3ae6fce5cc07e4c1b4"
+   "sha256": "8060008f49409a149d4de61559e15eee46df8a8c46ce987348b409128a3ef98b"
+  },
+  {
+   "kind": "doc",
+   "id": "1T7S5FVKq3ZTvNqwaIzC126wRb15V9Spp7xKbwhz-Qgg",
+   "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/LATEST ART DROP — P03 Core + P04 Cantina (Claude Read First)",
+   "repo_path": "06-asset-collaboration-claude-chatgpt/latest-art-drop-p03-core-p04-cantina-claude-read-first.md",
+   "sha256": "917460175e30b14792d13846c998d223e87c5d88b4f99e97c46011d48203ea3c"
   },
   {
    "kind": "doc",
    "id": "1-ASnTbCLAXSi_WCOl_7KNuUgelLXLmiZFKiN6APao2s",
    "drive_path": "/00 START HERE — Irreverents",
    "repo_path": "00-start-here-irreverents.md",
-   "sha256": "028a16472aaef91ab17916a28d9125471fb854c3ca721afee131b66ff65380db"
+   "sha256": "1250afe41b7d66f5ac86df16186239fe0b95ee868bedaa2875f5140f30bf86e1"
   },
   {
    "kind": "doc",
    "id": "1SinRhkiHFGlbZfsvYziXlSlVxerQG7J2vSgl3KxlWVo",
    "drive_path": "/34 — Art Production SOP — Reproduce the Owner-Endorsed Pixel Look",
    "repo_path": "34-art-production-sop-reproduce-the-owner-endorsed-pixel-look.md",
-   "sha256": "15ad3a25fab3737721cf863804c18ab7edf33009b6d4a6144c4e748c99d58e4a"
+   "sha256": "aee9ef4bbd8cbfdebbcf34a81963165e1025d68efb2e7db577b1454305997689"
   },
   {
    "kind": "doc",
    "id": "1W1rOej7YL6MGcvwZfbpBTBqMyMz9Q_O2zpLNCZ2XNL8",
    "drive_path": "/35 — Character Facial Expressions and Acting: Production Standard",
    "repo_path": "35-character-facial-expressions-and-acting-production-standard.md",
-   "sha256": "a6ed30b4618077c8a34003f08bd5251507b04519a1c8898dcf2c14c688872603"
+   "sha256": "5106061ebcc9881e0bcf0ae2792781f1b5f7eddd63d298670cbdf0696565ab2c"
   },
   {
    "kind": "doc",
    "id": "1bnr7GUgrYBVVY0BMkwx4qRPvW45Nk4grn-Tk6THcoY8",
    "drive_path": "/ASSET LIBRARY — START HERE (Claude)",
    "repo_path": "asset-library-start-here-claude.md",
-   "sha256": "74ddbbc480f623140eb9e212325e922a217b17de194e4a83081fae796b628c9d"
+   "sha256": "cf83b4663126ea1ffd48a19413aaad64be7850d67f1e52c6df222442104ff8c9"
   },
   {
    "kind": "doc",
    "id": "17R7aKkqDxQwRk-cmywQbvQ_CcEzz4UqHz37YYYRnADs",
    "drive_path": "/changelog",
    "repo_path": "changelog.md",
-   "sha256": "854722bb4658bee578fae9fc428d88a141868a9b89e8290b3433d8d1503c7837"
+   "sha256": "47069c79edfbef1ee7bc2274784c8695c5ce740c1de6cd485e052c42ea374edc"
+  },
+  {
+   "kind": "file",
+   "id": "1rzixv5r4QWs7PKLYJ0e_sreLy0LjTdgua8uXKeTJpSE",
+   "drive_path": "/IRREVERENTS — Master Asset Production Board",
+   "repo_path": "irreverents-master-asset-production-board",
+   "status": "not downloaded (fetch failed)"
   }
  ]
 }

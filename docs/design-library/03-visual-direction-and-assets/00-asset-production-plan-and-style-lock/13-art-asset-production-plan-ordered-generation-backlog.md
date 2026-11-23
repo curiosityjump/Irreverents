@@ -2,6 +2,12 @@
 
 ---
 
+SUPERSEDING ITEMIZED PRODUCTION TRACKER — 2026-11-23
+
+https://docs.google.com/spreadsheets/d/1rzixv5r4QWs7PKLYJ0e_sreLy0LjTdgua8uXKeTJpSE/edit
+
+This earlier 66-deliverable ordered concept plan remains brainstorming and visual-spec history. The NEW master working board has 107 concrete game-asset packages, organized by actual gameplay need, dependencies, priority and source status. Future assets should be chosen and tracked THERE, rather than treating this list of conceptual images as a production schedule or proof completed sprites exist. Avoid making all 10 proposed regions before the first playable game loop is implemented. Creative assets default usable, but clean PNGs, native animation, manifest, iPhone QA, index and changelog still required.
+
 CHARACTER PRODUCTION NEXT-PASS — EXPRESSIVE FACES (2026-11-23)
 
 Current P01 heroes are importable, but owner requests a stronger KIRBY-LIKE facial expressiveness in ORIGINAL pixel art. Put face acting into C02 hero revisions and new NPC batches: legible changing eyes/mouth/head/body expressing delight, stealth, determination, shock, exertion, hurt and victory, not same two-dot face copied to every state. P01→P03 recommended expression frames/overlay approach; spec https://docs.google.com/document/d/1W1rOej7YL6MGcvwZfbpBTBqMyMz9Q_O2zpLNCZ2XNL8/edit. Check A00 references https://drive.google.com/drive/folders/1ejWvlQBo85YiC_5dsTxZFZugwFxKS1pB first; keep status prototype until actual improved PNG frames, manifest and 320×180 QA are produced. Continue without owner review gate.

@@ -2,6 +2,44 @@
 
 ---
 
+CANONICAL PLAYABLE CHARACTERS — OWNER CONFIRMED (2026-11-23)
+
+THE THREE LEAD HERO DESIGNS ALREADY EXIST. DO NOT REDESIGN. Open the ACTUAL three-row P03 sprite reference now: https://drive.google.com/file/d/17Ulupi-WbcsqVWqS5m-bz1TmIjzx6VcM/view . Exact visual identities: TOP goggles/red scarf compact adventurer (grappler role), MIDDLE green hood/red scarf agile rogue (infiltrator role), BOTTOM pink aviator/goggles/white wings/yellow scarf (flyer role). Preserve their tiny rounded proportions, pixel treatment, identity and expressive faces in every new animation/ability state. Any recent new red-haired/bulky humanoid grappler, purple-haired anime ninja, blonde human/fairy flyer or glossy presentation board is OFF-STYLE/REJECTED as their replacement. Those variants may not become source-of-truth. Technical extraction/animation is still unfinished; only create CLEAN NATIVE FRAMES OF THESE THREE, not new character concepts. AUTHORITATIVE OWNER-LOCKED CHARACTER GUIDE: https://docs.google.com/document/d/1p_kXnoB_9gClFaR47U6-ige5I-9hs1Ta9s-thwSwF9g/edit
+
+OWNER CORRECTION — PLAYABLE CAST IS ALREADY ESTABLISHED (2026-11-23)
+
+The owner supplied a visual reference in the active conversation and explicitly said THESE ARE THE PLAYABLE CHARACTERS. Treat the existing pictured playable cast as the canonical character designs. Do NOT treat newly generated generic three-human-hero art, new grappler/rogue/flyer interpretations, or an arbitrary three-person lineup as a replacement roster. Existing costumes, silhouettes, faces, proportions, colors and character identities must be maintained when generating new animation frames, attacks, expressions, portraits, or ability variations. Any prior numbered production packages for three hero archetypes are functional placeholders, NOT permission to redesign or replace the owner's cast. Continue using owner-endorsed previously stored character art and request/capture exact character source files in Drive when available. The current user-supplied image has NOT yet been verified as a downloadable Drive asset; do not invent a Drive file link. On new work, prefer source-faithful animation extension over character reinvention. Newly generated human-style hero concepts in this session are NONCANON / EXCLUDED FROM PLAYABLE ROSTER, even if usable as unrelated concept art.
+
+LATEST ADDITION: P05 — HUD, RARE POWERS, CANTINA BRAWL, SECRETS (2026-11-23)
+
+The next four original composite boards, plus four cropped category reference plates, are NOW UPLOADED. All are SOURCE-ONLY illustration/reference; most have painted white/pastel backgrounds or uneven transparency. NOT true native transparent atlases. Each folder includes a manifest, Claude README and ZIP.
+
+P05 FOLDER: https://drive.google.com/drive/folders/1SpbZln3ZqaefjyNJRwRjXJ11UdROoKdk
+
+P05 PREFERRED FULL BOARD: https://drive.google.com/file/d/1GaXUALQ4a0zyTbTtUezGBLxTNugfx74c/view
+
+P05 UI / health / party / completeness crop: https://drive.google.com/file/d/159pI0l2X_D1ZmJV3GBxh9fbE0DSJrTo-/view
+
+P05 rare power sources, drops, copied abilities crop: https://drive.google.com/file/d/1OWZri2zXNt-0yH9L6AAXUMSRNfpnhkLU/view
+
+P05 cantina KOs / respawn / brawl feedback crop: https://drive.google.com/file/d/1Cz1mweh3pY1gfHeUrGeEb5ptwu6sFaex/view
+
+P05 exploration secrets / doors / platforms crop: https://drive.google.com/file/d/18tGdp9CgBcW_EyR3ZdQMOrCoMT2-46aY/view
+
+P05 all image sources ZIP: https://drive.google.com/file/d/1Avb0oVF6IV2uWf60_B88Oss2fW0OzAe7/view
+
+Use immediately for art direction and reference while implementing; rebuild clean separable sprites and native UI PNGs with true transparency and phone-scale tests. Do not announce production-ready frames/tiles until verified. The build priority still favors native heroes, NPCs and first three biomes; P05 enriches the following systems in parallel. Other P05 A/B/C full plates remain in its folder as alternatives.
+
+LATEST ASSET PRODUCTION (23 NOV 2026): P03 and P04 visually strong source sheets are UPLOADED and ROUTED. P03 = 7 sheets of heroes, NPCs, enemies, VFX and 3 biome terrain looks: https://drive.google.com/drive/folders/1m5KXh8Ts-UiMWS6Us9qaA6MlucsTHpGf . P04 = 5 sheets of cantina, characters, mechanisms, vehicles, Hall of Legends: https://drive.google.com/drive/folders/1CwqUK750arthkFGMfsK3yRiJ6lzlRfrW . Claude MUST read the direct integration handoff https://docs.google.com/document/d/1T7S5FVKq3ZTvNqwaIzC126wRb15V9Spp7xKbwhz-Qgg/edit and the root Asset Library index, then the Master Board. These are high-quality SOURCE PLATES but not yet normalized 16px tiles or RGBA character animation frames; avoid claiming engine-ready until technical conversion. 37 Board item references were updated to route to the source art. Use P01 as current importable prototype. No owner approval delay.
+
+TEAM-ASSET PRODUCTION BOARD — PRIMARY WORKING PLAN (2026-11-23 09:41 AM EST)
+
+All art work should now route through the editable 107-package MASTER ASSET PRODUCTION BOARD: https://docs.google.com/spreadsheets/d/1rzixv5r4QWs7PKLYJ0e_sreLy0LjTdgua8uXKeTJpSE/edit
+
+Open START HERE, then filter MASTER BACKLOG by Priority, Wave and Workflow status. Each item specifies concrete files/states, game feature, confirmed-vs-proposed authority, dependencies, existing art, exact reference/Claude REQ links, completion test, suggested producer and current delivered path. The BUILD WAVES tab is the intended sequence; EXISTING ASSETS prevents redundant redraws; QA AND HANDOFF defines objective completion; OPEN DECISIONS lists nonblocking uncertainties. The existing 66-item concept-image plan remains reference material, but the Sheet is the ACTIVE production tracker for separable sprites, tiles, effects, UI and sound.
+
+Producer: look at A00 comps/P01/P02 and current asset catalog, complete actual artifact, test at 320x180 with transparent/native files and manifest, upload to Drive, then update SAME backlog row (Status and Drive link), asset catalog, relevant Claude request, and root changelog. Claude integrates into GitHub/Railway and writes actual repo path, not before. Default owner approval to TRY/ITERATE; a source-only collage is not engine-ready. Do not promote optional level proposals into confirmed canon.
+
 LATEST CHARACTER ART IMPROVEMENT — EXPRESSIVE FACES (23 NOV 2026)
 
 Owner requests MUCH MORE EXPRESSIVE FACES, like the emotional immediacy of Kirby, WITHOUT copying Kirby's art. No generic dot-eyes reused unchanged for every action: communicate delight, focus, surprise, effort, hurt, stealth and comic reactions with small legible eye/mouth/head variations at iPhone gameplay scale. The existing P01 hero frames are usable prototypes, but need a face-acting improvement pass. Controlling NEW character facial expression guide: https://docs.google.com/document/d/1W1rOej7YL6MGcvwZfbpBTBqMyMz9Q_O2zpLNCZ2XNL8/edit

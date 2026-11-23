@@ -411,3 +411,7 @@ Preferred controlling reference and implementation spec: https://docs.google.com
 Owner-endorsed six-image corpus: https://drive.google.com/drive/folders/1ejWvlQBo85YiC_5dsTxZFZugwFxKS1pB
 
 P01 current game-usable prototype art: https://drive.google.com/drive/folders/1sXUTCyW2FTt0xuBauWfgSrUpfVw3ET43
+
+TEAM PRODUCTION PLAN — OWNER REQUEST, 2026-11-23 (UNNUMBERED; DESIGN CONTENT NOT CHANGED)
+
+The team should work from a CLEAR, ITEMIZED asset plan based on actual playable features, rather than generating ad hoc poster art or treating every proposed region as mandatory. The primary active production work plan is the native Google Sheet https://docs.google.com/spreadsheets/d/1rzixv5r4QWs7PKLYJ0e_sreLy0LjTdgua8uXKeTJpSE/edit. It contains 107 specific packages with priority/wave, deliverable states, confirmed/proposed authority, dependencies, existing source art, asset request links, objective QA, suggested producer, status, Drive output and actual GitHub path. The older Art Plan 13 (66 concept deliverables) is historical production thinking; this Sheet is the current schedule/requirements inventory. New deliverables should update sheet, asset catalog, request and changelog together. Owner approval not needed before using creative assets; QA still distinguishes source art, usable prototypes and production-ready files. Open design questions remain open and do not authorize new canonical story or world features.
