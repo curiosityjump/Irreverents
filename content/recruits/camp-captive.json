@@ -1,16 +1,16 @@
 {
-  "//": "DRAFT (Step 13): the skirmisher, caged on the Bandit Camp's floor two rooms from the start, inside the second fighter's look east (he faces east 7 s, west 3 s). Cage columns 33-34, row 10: clear of the waves' entry at column 41 (nothing at 39-42). Hold Use 2.5 s, a little less than his 3 s look away. The cage: P04's barred gate, cut by the core-loop art builder (content/looks/outpost.json).",
+  "//": "DRAFT (Step 13): the skirmisher, caged on the Bandit Camp's floor two rooms from the start, inside the second fighter's look east (he faces east 7 s, west 3 s; sees to about x 568). Cage columns 32-33, row 10: just west of the camp's strongbox (column 34, Step 19's prize; within its reach Use still takes it, src/sim/use/free.ts order) and clear of the waves' entry at column 41 (nothing at 39-42). Hold Use 2.2 s, a little less than his 3 s look west, leaving the slowest hero (the grappler, waiting out of his sight east of the strongbox) a few tenths to spare. The cage: P04's barred gate, cut by the core-loop art builder (content/looks/outpost.json).",
   "id": "camp-captive",
   "character": "skirmisher",
   "room": "outpost",
   "tile": [
-    33,
+    32,
     10
   ],
   "w": 2,
   "look": "cage-shut",
   "openLook": "cage-open",
-  "hold": 2.5,
+  "hold": 2.2,
   "call": "Psst! Over here! Get me out!",
   "callEvery": 6,
   "callFor": 2.5

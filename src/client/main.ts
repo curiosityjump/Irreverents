@@ -22,7 +22,7 @@ import { drawnBanner } from './draw/banner.ts';
 import { drawnHud } from './draw/hud.ts';
 import { drawnSight, watchSightEvents } from './draw/sight.ts';
 import { drawnHeist, watchHeistEvents } from './draw/heist.ts';
-import { drawnRecruits } from './draw/recruits.ts';
+import { drawnRecruits, noteRecruits } from './draw/recruits.ts';
 import { levelProgress } from '../sim/levels.ts';
 import { setUpMenu, showGone, showStart } from './start.ts';
 import type { StartRecord } from './start.ts';
@@ -144,7 +144,7 @@ const debug = {
     /** Step 19: the clean getaways this page announced (src/client/draw/heist.ts). */
     heist: null as ReturnType<typeof drawnHeist> | null,
     /** Step 13: the cages this frame drew in this room and the captives' calls (src/client/draw/recruits.ts). */
-    recruits: { cages: [], calls: [] } as ReturnType<typeof drawnRecruits>,
+    recruits: { cages: [], calls: [], flash: null } as ReturnType<typeof drawnRecruits>,
     cantina: null as { row: { kind: string; slot: number; x: number; y: number; w: number; h: number; taken: boolean }[] | null; counter: { player: string; ko: number; falls: number }[] | null } | null,
   },
 };
@@ -270,6 +270,7 @@ function play(worldName: string): void {
     lastCamera = camera;
     showUsePrompt(touchHost, usePrompt(content, shown, me)); // Step 19: the Use button names what a press does here (use-prompt.ts)
     audio.frame(simEvents, net.latest(), me, net.others()); // audio hook (Step 8)
+    noteRecruits(content, net.latest().events, frameNo); // Step 13: a rescue anywhere in this world: a banner and the new face
 
     const status = net.status();
     // DRAFT: the words. Shown only while not connected; the player can still move.

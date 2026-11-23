@@ -88,8 +88,11 @@ const system: System = {
 };
 export default system;
 
-/** A tap on party slot `slot` with the row open to bring in `to`. True when the party changed. */
-function swap(ctx: StepContext, e: Entity, to: string, slot: number, base: { room: string; entity: string; player: string | null }): boolean {
+/**
+ * A tap on party slot `slot` with the row open to bring in `to`. True when the party changed.
+ * Step 13: also the rescue's swap on the spot (systems/recruit-free.ts), one function for both.
+ */
+export function swap(ctx: StepContext, e: Entity, to: string, slot: number, base: { room: string; entity: string; player: string | null }): boolean {
   const { world, content } = ctx;
   const party = [...partyOf(world, content)];
   const from = party[slot];

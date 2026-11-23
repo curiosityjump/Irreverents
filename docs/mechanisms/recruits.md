@@ -58,8 +58,9 @@ ids never change.
   wide, default 2), `look` / `openLook` (optional; left out, plain drawn
   bars), `hold` (seconds of Use, push 3), `call` (the words), `callEvery`,
   `callFor` (seconds). `DRAFT:` tonight one file, `camp-captive`: the
-  skirmisher at the Bandit Camp's columns 33-34, row 10, inside the second
-  fighter's look east, clear of the waves' entry at column 41.
+  skirmisher at the Bandit Camp's columns 32-33, row 10, inside the second
+  fighter's look east, just west of the camp's strongbox (column 34, Step
+  19's prize), clear of the waves' entry at column 41.
 - **The entity** `recruit:<id>` (`INTENT:` a contract once pushed; kept
   games hold it), kind `~thing`, `c.recruit = { id, character, open,
   hold }`, at the cage's bottom-left in pixels. **`INTENT:` a thing, never
@@ -82,3 +83,50 @@ ids never change.
   calls }`. The cage is `cage-shut` / `cage-open` (P04's barred gate, cut
   by the core-loop art builder, `content/looks/outpost.json`); a recruit
   file without looks gets plain drawn bars (`drawBars`).
+
+## FREE (push 3)
+
+- **The Use entry `free`** (`src/sim/use/free.ts`, order 150: after the
+  door and after a placed thing, so within the strongbox's reach Use still
+  takes it; before the bell): a played body, not out cold, whose middle
+  is within the cage's width (plus `DRAFT:` 22 px across, 20 px up/down)
+  of a shut cage's middle answers word `free` (button: "Free",
+  `content/prompts.json`); at an open cage, the freer alone, while the
+  offer lasts, `swap` ("Swap in").
+- **The hold** (`recruit-free`, order 61, server world only): a fresh
+  press starts `c.recruit.hold = { by, ticks }` (`recruit-hold`); each tick
+  Use stays held and the arbiter still answers `free` adds one; letting go,
+  stepping away or being knocked out empties it (`recruit-let-go`).
+  `INTENT:` one holder at a time; a friend's press does not reset it. Full
+  at the recruit file's `hold` seconds (`DRAFT:` 2.2 s, a little less than
+  the fighter's 3 s look west, leaving the slowest hero, waiting just out
+  of his sight east of the strongbox, a few tenths to spare): the cage opens for good, `unlock` (the
+  roster grows, D-082), event **`recruited { recruit, character, by,
+  player, added }`** (`added` false in a world with no roster of its own),
+  and the deed `free` (`did`) where any watcher may see it
+  (`content/rules/rescue.json`: odd in a bad guy's eyes, weight 2).
+- **Swap on the spot:** for `DRAFT:` 5 s (`c.recruit.offer`), a fresh
+  press of Use there by the freer swaps the hero in on the freer's own
+  slot through the cantina's own `swap` (`systems/cantina-swap.ts`,
+  exported): the `become` effect, `cantina-swap`. Ignored, the hero goes
+  to the cantina, where `cantina-regulars` now makes them a regular.
+- **On a phone:** the gauge is a bar over the cage (`t-no-numbers`), from
+  `c.recruit.hold` on the camp's entity; `recruited` is a world event, so
+  every page in the world, any room, queues a banner "<name> joins!"
+  (`draw/banner.ts`), flashes the new face beside the party plate
+  (`drawRecruitFlash`) and plays the fanfare (`content/sounds/recruited.json`,
+  the approved pack's `secret_found_chime.wav`); `World.roster` reaches
+  every page by key.
+- **Caught:** the fighter who sees a hero at the cage comes at them; his
+  blows knock the hero off the cage and the hold empties
+  (`step13-free-watched`). Measured: seeing alone starts no call in this
+  camp (only the lookout calls, at the far west), so the control is the
+  blow and the broken hold, not a call (decisions-log "Step 13: FREE").
+- **Proven by:** `step13-free-unseen` (freed unseen in fighter 2's look
+  west, no witness, no call; swapped in on the spot), `step13-free-watched`
+  (its control: begun while he faces it), `step13-hold-let-go` (control:
+  the hold kept on let-go, the second press frees), `step13-new-game-roster`
+  (the cantina gains the skirmisher's regular on the rescue; control: no
+  hold, none), `scripts/checks/step13-roster.ts` (two connections in a kept
+  game; control: `unlock` adding nothing), and the e2e facts `rescue-cage`,
+  `rescue-plate` (`scripts/e2e/rescue.ts`).

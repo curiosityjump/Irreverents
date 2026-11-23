@@ -11,6 +11,7 @@ import type { NetClient } from '../../src/net/client.ts';
 import { attachGame } from '../../src/server/game.ts';
 import type { Game } from '../../src/server/game.ts';
 import { openStore } from '../../src/server/store.ts';
+import type { Input } from '../../src/sim/types.ts';
 
 export interface Booted {
   game: Game;
@@ -49,8 +50,8 @@ export interface Player {
   drop(): void;
 }
 
-/** A headless player in world `world`, stepped 60 times a second until it leaves. */
-export function joinAs(content: Content, port: number, id: string, world: string): Player {
+/** A headless player in world `world`, stepped 60 times a second until it leaves. `input` (Step 13): what it holds each frame; left out, nothing. */
+export function joinAs(content: Content, port: number, id: string, world: string, input?: () => Input): Player {
   let ws: WebSocket | null = null;
   let why: string | null = null;
   const c = createNetClient({
@@ -69,7 +70,7 @@ export function joinAs(content: Content, port: number, id: string, world: string
       return { send: (t) => s.readyState === s.OPEN && s.send(t), close: () => s.close() };
     },
   });
-  const frames = setInterval(() => c.update({ x: 0, y: 0, held: [] }), 1000 / 60);
+  const frames = setInterval(() => c.update(input ? input() : { x: 0, y: 0, held: [] }), 1000 / 60);
   return {
     c,
     gone: () => why,

@@ -1,0 +1,129 @@
+{
+  "id": "step13-free-watched",
+  "proves": "the control for step13-free-unseen, as its own run: the same way in, but the hero walks to the cage a few seconds early and begins holding Use while the second fighter still faces it: he comes at the hero and hits them away, the hold breaks (recruit-let-go) and nobody is freed; caught, the rescue becomes a fight",
+  "room": "outpost",
+  "placements": true,
+  "world": {
+    "roster": [
+      "grappler",
+      "infiltrator",
+      "flyer",
+      "brawler"
+    ]
+  },
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 470,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 20,
+      "to": 40,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 60,
+      "to": 80,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 880,
+      "to": 985,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 986,
+      "to": 1200,
+      "hold": [
+        "interact"
+      ]
+    }
+  ],
+  "ticks": 1100,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "recruit-hold",
+      "where": {
+        "recruit": "camp-captive",
+        "by": "p:a"
+      },
+      "between": [
+        980,
+        995
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "hit",
+      "where": {
+        "by": "camp-fighter-2",
+        "target": "p:a"
+      },
+      "between": [
+        986,
+        1100
+      ],
+      "count": [
+        1,
+        100
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "recruit-let-go",
+      "where": {
+        "recruit": "camp-captive",
+        "by": "p:a"
+      },
+      "between": [
+        986,
+        1100
+      ],
+      "count": [
+        1,
+        100
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "recruited",
+      "between": [
+        0,
+        1100
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "recruit",
+      "id": "camp-captive",
+      "at": 1100,
+      "open": false,
+      "unlocked": false
+    }
+  ]
+}

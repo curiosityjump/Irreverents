@@ -107,7 +107,8 @@ middle of the cantina player can use to stop fights."*
   a friend's → `cantina-swap-refused {why: "taken"}`, nothing changes and
   the row stays open (`INTENT:` doc 06). `cantina-swap {entity, player,
   slot, from, to}`. The regulars follow by themselves: one per roster
-  character nobody plays.
+  character nobody plays. Step 13's swap on the spot at an opened cage calls the same
+  `swap` (exported), so it emits `cantina-swap` too (`docs/mechanisms/recruits.md`).
 - **`World.party`** (optional; absent means `content.party.members`): read
   by `firstFreeMember` (so a friend joining later gets the world's party)
   and the switch verb. Written only in the server's world; a page takes it

@@ -1,0 +1,184 @@
+{
+  "id": "step13-free-unseen",
+  "proves": "the rescue, unseen, in the real camp with a new game's roster: the grappler walks the long ledge east, drops off its end to the floor beyond the second fighter's sight, waits east of the strongbox out of his sight, and walks to the cage as he turns to look west; Use held there 2.2 s (inside his 3 s look away) frees the skirmisher: the cage opens, the roster gains them for good, `recruited`, and the deed `free` is seen by nobody; no call starts and no blow lands; a fresh press of Use at the open cage swaps them in on the spot (the cantina's swap, on the freer's own slot). Control: step13-free-watched (the hold begun while he faces the cage: he comes at the hero, the hold breaks)",
+  "room": "outpost",
+  "placements": true,
+  "world": {
+    "roster": [
+      "grappler",
+      "infiltrator",
+      "flyer",
+      "brawler"
+    ]
+  },
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 470,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 20,
+      "to": 40,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 60,
+      "to": 80,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 927,
+      "to": 1000,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 1021,
+      "to": 1055,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 1056,
+      "to": 1195,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 1197,
+      "to": 1200,
+      "hold": [
+        "interact"
+      ]
+    }
+  ],
+  "ticks": 1260,
+  "expect": [
+    {
+      "fact": "recruit",
+      "id": "camp-captive",
+      "between": [
+        0,
+        1186
+      ],
+      "present": true,
+      "open": false,
+      "unlocked": false
+    },
+    {
+      "fact": "recruit",
+      "id": "camp-captive",
+      "at": 1100,
+      "holding": [
+        40,
+        50
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "recruited",
+      "where": {
+        "recruit": "camp-captive",
+        "character": "skirmisher",
+        "by": "p:a",
+        "player": "a",
+        "added": true
+      },
+      "between": [
+        1185,
+        1190
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "recruit",
+      "id": "camp-captive",
+      "between": [
+        1188,
+        1260
+      ],
+      "present": true,
+      "open": true,
+      "unlocked": true,
+      "holding": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "deed",
+      "where": {
+        "deed": "free",
+        "by": "p:a",
+        "witnesses": []
+      },
+      "between": [
+        0,
+        1260
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "character",
+      "player": "a",
+      "at": 1196,
+      "is": "grappler"
+    },
+    {
+      "fact": "character",
+      "player": "a",
+      "at": 1200,
+      "is": "skirmisher"
+    },
+    {
+      "fact": "event",
+      "event": "outpost-call-started",
+      "between": [
+        0,
+        1260
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "hit",
+      "player": "a",
+      "between": [
+        0,
+        1260
+      ],
+      "count": [
+        0,
+        0
+      ]
+    }
+  ]
+}

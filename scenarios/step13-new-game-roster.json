@@ -1,0 +1,126 @@
+{
+  "id": "step13-new-game-roster",
+  "proves": "a world started with the new-game roster has no skirmisher wandering the cantina, and has one the moment the camp's captive is freed (the same unseen rescue as step13-free-unseen, with the cantina in the world as the server's is); when the freer then swaps them in on the spot, the skirmisher's regular goes and the grappler's comes. Control (watched to fail): the rescue skipped (the Use holds removed), and no skirmisher regular appears",
+  "room": "cantina",
+  "placements": true,
+  "world": {
+    "roster": [
+      "grappler",
+      "infiltrator",
+      "flyer",
+      "brawler"
+    ]
+  },
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0,
+      "room": "outpost"
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 470,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 20,
+      "to": 40,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 60,
+      "to": 80,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 927,
+      "to": 1000,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 1021,
+      "to": 1055,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 1056,
+      "to": 1195,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 1197,
+      "to": 1200,
+      "hold": [
+        "interact"
+      ]
+    }
+  ],
+  "ticks": 1260,
+  "expect": [
+    {
+      "fact": "cantina",
+      "room": "cantina",
+      "between": [
+        1,
+        1186
+      ],
+      "regulars": [
+        "infiltrator",
+        "flyer",
+        "brawler"
+      ]
+    },
+    {
+      "fact": "cantina",
+      "room": "cantina",
+      "between": [
+        1189,
+        1196
+      ],
+      "regulars": [
+        "infiltrator",
+        "flyer",
+        "brawler",
+        "skirmisher"
+      ]
+    },
+    {
+      "fact": "cantina",
+      "room": "cantina",
+      "between": [
+        1199,
+        1260
+      ],
+      "regulars": [
+        "grappler",
+        "infiltrator",
+        "flyer",
+        "brawler"
+      ],
+      "party": [
+        "skirmisher",
+        "infiltrator",
+        "flyer"
+      ]
+    }
+  ],
+  "placedRooms": [
+    "outpost"
+  ]
+}

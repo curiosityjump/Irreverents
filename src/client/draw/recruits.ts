@@ -1,7 +1,9 @@
 import type { Content } from '../../content/types.ts';
 import { recruitsOf } from '../../sim/recruits.ts';
-import type { Entity, World } from '../../sim/types.ts';
+import type { Entity, SimEvent, World } from '../../sim/types.ts';
 import type { PlayerView } from './entities.ts';
+import { BANNER_FRAMES, queueBanner } from './banner.ts';
+import { drawnHud } from './hud.ts';
 import { drawLook, look } from './looks.ts';
 import { bubble, edgeBark, label } from './npcs.ts';
 import { drawSprite } from './sprites.ts';
@@ -17,15 +19,21 @@ const PAPER = '#f8f9fa';
 const INK = '#1b1b2f';
 const BAR = '#8a8aa0';
 const BAR_DARK = '#2a2438';
+const GAUGE_EDGE = '#1b1b2f';
+const GAUGE_WELL = '#4a4560';
+const GAUGE_FILL = '#ffd23f';
+const FLASH_EDGE = '#ffd23f';
 
 export interface DrawnRecruits {
   /** The cages this frame drew in this room: the recruit file, its hero, and whether it stands open. */
-  cages: { id: string; character: string; open: boolean }[];
+  cages: { id: string; character: string; open: boolean; gauge: number | null }[];
   /** The captives' calls this frame drew: over the cage, or at the screen's edge. */
   calls: { id: string; at: 'cage' | 'edge' }[];
+  /** Step 13 push 3: the face flashing beside the party plate after a rescue, if any. */
+  flash: string | null;
 }
 
-let last: DrawnRecruits = { cages: [], calls: [] };
+let last: DrawnRecruits = { cages: [], calls: [], flash: null };
 /** What the last frame drew, for `window.irreverents.drawn.recruits` (scripted checks read only this). */
 export function drawnRecruits(): DrawnRecruits {
   return last;
@@ -40,7 +48,7 @@ function captiveBody(content: Content, e: Entity, character: string, cageW: numb
 
 /** The cages and the heroes in them, in front of the bodies' layer (the bars over the captive). */
 export function drawRecruits(g: CanvasRenderingContext2D, world: World, content: Content, roomId: string, ox: number, oy: number, view?: PlayerView): void {
-  const out: DrawnRecruits = { cages: [], calls: [] };
+  const out: DrawnRecruits = { cages: [], calls: [], flash: null };
   last = out;
   if (!view) return;
   for (const { r, e, state } of recruitsOf(world, content)) {
@@ -49,7 +57,8 @@ export function drawRecruits(g: CanvasRenderingContext2D, world: World, content:
     const cageW = r.w * T;
     const x = ox + Math.round(e.x);
     const y = oy + Math.round(e.y);
-    out.cages.push({ id: r.id, character: r.character, open: state.open });
+    const gauge = state.hold ? Math.min(1, state.hold.ticks / Math.max(1, Math.round(r.hold * 60))) : null;
+    out.cages.push({ id: r.id, character: r.character, open: state.open, gauge });
     const hero = state.open ? null : captiveBody(content, e, r.character, cageW);
     if (hero) {
       // Facing whoever is looking, so the captive reads as calling to them.
@@ -67,6 +76,18 @@ export function drawRecruits(g: CanvasRenderingContext2D, world: World, content:
       // The cage's art, standing on the floor, spread over the cage's tiles.
       for (let i = 0; i * l.w < cageW; i++) drawLook(g, content, id, x + i * l.w, y - l.h);
     } else drawBars(g, x, y, cageW, T + 8, state.open);
+    // The hold: a bar over the cage filling while Use is held (t-no-numbers: a bar, never a count).
+    if (gauge !== null) {
+      const gw = cageW + 4;
+      const gx = x - 2;
+      const gy = y - (l?.h ?? T + 8) - 8;
+      g.fillStyle = GAUGE_EDGE;
+      g.fillRect(gx - 1, gy - 1, gw + 2, 6);
+      g.fillStyle = GAUGE_WELL;
+      g.fillRect(gx, gy, gw, 4);
+      g.fillStyle = GAUGE_FILL;
+      g.fillRect(gx, gy, Math.round(gw * gauge), 4);
+    }
   }
 }
 
@@ -95,7 +116,8 @@ function drawBars(g: CanvasRenderingContext2D, x: number, floor: number, w: numb
 /** The captives' calls, over everything in the room (as people's barks are), every `callEvery` seconds while shut. */
 export function drawRecruitCalls(g: CanvasRenderingContext2D, world: World, content: Content, roomId: string, ox: number, oy: number): void {
   for (const { r, e, state } of recruitsOf(world, content)) {
-    if (e.room !== roomId || state.open) continue;
+    // Quiet while someone holds Use at the cage (the gauge shows there instead).
+    if (e.room !== roomId || state.open || state.hold) continue;
     const every = Math.max(1, Math.round(r.callEvery * 60));
     const showing = world.tick % every < Math.round(r.callFor * 60);
     if (!showing) continue;
@@ -111,5 +133,53 @@ export function drawRecruitCalls(g: CanvasRenderingContext2D, world: World, cont
       if (!bubble(g, r.call, cx, top)) label(g, r.call, cx, top, PAPER, INK);
       last.calls.push({ id: r.id, at: 'cage' });
     }
+  }
+}
+
+/** Rescues this page has announced (event tick and recruit), so a snapshot's events count once. */
+const announced = new Set<string>();
+let flash: { kind: string; until: number } | null = null;
+
+/**
+ * Step 13 push 3: a world event `recruited` (it reaches every page, in any
+ * room) queues a banner saying who joined, and flashes their face beside
+ * the party plate. Called by main.ts with each frame's latest snapshot events.
+ */
+export function noteRecruits(content: Content, events: SimEvent[], frame: number): void {
+  for (const ev of events) {
+    if (ev.type !== 'recruited') continue;
+    const key = `${ev.tick}:${ev.recruit}`;
+    if (announced.has(key)) continue;
+    announced.add(key);
+    const name = content.characters[ev.character]?.name ?? ev.character;
+    queueBanner({ key: `rescue:${ev.recruit}`, text: `${name} joins!`, frames: BANNER_FRAMES });
+    flash = { kind: ev.character, until: frame + FLASH_FRAMES };
+  }
+}
+
+/** DRAFT: two seconds of this page's frames; the face blinks every 8. */
+const FLASH_FRAMES = 120;
+
+/**
+ * The new hero's face flashing onto the party plate (draw/hud.ts), over its
+ * right end, while it lasts: inside the plate, which the banners keep clear
+ * of. Screen furniture.
+ */
+export function drawRecruitFlash(g: CanvasRenderingContext2D, content: Content, frame: number): void {
+  if (!flash || frame >= flash.until) {
+    flash = null;
+    return;
+  }
+  last.flash = flash.kind;
+  const box = drawnHud()?.box;
+  const size = box ? box.h - 4 : 18;
+  const x = box ? box.x + box.w - size - 2 : 4;
+  const y = box ? box.y + 2 : 4;
+  const on = Math.floor(frame / 8) % 2 === 0;
+  g.fillStyle = on ? FLASH_EDGE : INK;
+  g.fillRect(x - 1, y - 1, size + 2, size + 2);
+  if (!drawLook(g, content, `hud-face-${flash.kind}`, x, y, { w: size, h: size })) {
+    g.fillStyle = content.characters[flash.kind]?.color ?? PAPER;
+    g.fillRect(x, y, size, size);
   }
 }

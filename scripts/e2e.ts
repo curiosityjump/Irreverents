@@ -370,6 +370,8 @@ async function main(): Promise<void> {
       await (await import('./e2e/tune.ts')).tuneFacts({ browser, devices, base, out, fact, errors });
       // Step 12's facts (outpost-*): into the outpost by touch, and the horn post drawn working, then broken (docs/mechanisms/outposts.md).
       await (await import('./e2e/outpost.ts')).outpostFacts({ browser, devices, base, out, fact, errors });
+      // Step 13's facts (rescue-*): into the camp by touch, the captive's cage and call drawn, the party plate's faces (docs/mechanisms/recruits.md).
+      await (await import('./e2e/rescue.ts')).rescueFacts({ browser, devices, base, out, fact, errors });
       // The switch gap (switch-refused): three pages hold the whole party and a Switch tap changes nothing (docs/mechanisms/party-and-switching.md).
       await (await import('./e2e/switch.ts')).switchFacts({ browser, devices, base, out, fact, errors });
       // Doorways by Use (door-*): the Use button says "Go in" in a doorway and a tap of it goes through (docs/mechanisms/rooms-and-doors.md).

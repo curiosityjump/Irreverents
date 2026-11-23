@@ -17,7 +17,7 @@ const room = (ph: Phone): Promise<string> => ph.page.evaluate(() => (window as a
 const signalers = (ph: Phone): Promise<{ id: string; state: string }[]> => ph.page.evaluate(() => (window as any).irreverents.drawn.signalers ?? []);
 
 /** Holds the stick one way until the page draws its character in `goal` (or the time runs out). */
-async function walkInto(ph: Phone, dir: number, goal: string, ms = 20000): Promise<boolean> {
+export async function walkInto(ph: Phone, dir: number, goal: string, ms = 20000): Promise<boolean> {
   const p = await pointOn(ph, '[data-stick]', dir > 0 ? 0.9 : 0.1);
   if (!p) return false;
   await ph.cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ ...p, id: 1 }] });
@@ -33,7 +33,7 @@ async function walkInto(ph: Phone, dir: number, goal: string, ms = 20000): Promi
 }
 
 /** A thumb slides up off the pad for a moment (the stick pushed up: the way through an enter doorway, src/client/touch.ts). */
-async function pushUp(ph: Phone): Promise<void> {
+export async function pushUp(ph: Phone): Promise<void> {
   const r = await ph.page.evaluate(() => {
     const b = document.querySelector('[data-stick]')!.getBoundingClientRect();
     return { x: Math.round(b.left + b.width / 2), top: Math.round(b.top - 30), mid: Math.round(b.top + b.height / 2) };

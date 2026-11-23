@@ -1,0 +1,11 @@
+{
+  "id": "recruited",
+  "files": [
+    "audio/secret_found_chime.wav"
+  ],
+  "volume": 0.8,
+  "pitch": 0,
+  "gapMs": 1500,
+  "distance": false,
+  "otherRooms": true
+}

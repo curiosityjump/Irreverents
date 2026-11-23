@@ -22,6 +22,8 @@ declare module './types.ts' {
       open: boolean;
       /** Step 13 push 3: who is holding Use at the cage, and for how many ticks; null when nobody. */
       hold: { by: string; ticks: number } | null;
+      /** Step 13 push 3: after freeing, the freer's entity id and the tick until which Use at the open cage swaps the hero in on the spot. */
+      offer?: { to: string; until: number } | null;
     };
   }
 }

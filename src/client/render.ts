@@ -1,4 +1,4 @@
-import { drawRecruitCalls, drawRecruits } from './draw/recruits.ts';
+import { drawRecruitCalls, drawRecruitFlash, drawRecruits } from './draw/recruits.ts';
 import type { Content } from '../content/types.ts';
 import type { World } from '../sim/types.ts';
 import { drawAlert, drawBells } from './draw/alert.ts';
@@ -111,5 +111,7 @@ export function render(g: CanvasRenderingContext2D, world: World, content: Conte
   drawCompletionRow(g, world, content, W, pv);
   // Step 19: the party plate, then the one banner queue (draw/banner.ts), clear of it; last, as screen furniture.
   if (pv) drawBanners(g, W, pv.frame, drawHud(g, world, content, mine, pv.frame));
+  // Step 13: a freed hero's face flashing beside the plate (draw/recruits.ts).
+  if (pv) drawRecruitFlash(g, content, pv.frame);
   return { x: -ox, y: -oy };
 }

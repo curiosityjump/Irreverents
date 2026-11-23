@@ -105,6 +105,7 @@ groups) whenever you add one — never update the number from memory.
 **Recruits** (`docs/mechanisms/recruits.md`)
 - `World.roster` + `content/roster.json` `start` + `src/sim/roster.ts` — the heroes unlocked in this game: absent means everyone (old saves, scenarios, `?room=` worlds); a new shared world or kept game starts with `start`; it only grows (Step 13).
 - `content/recruits/<id>.json` + `src/sim/recruits.ts` + `recruit:<id>` — a hero caged in the world: a bodiless thing placed by `populateRoom` unless the roster names them, drawn with their own sprite behind bars, calling out at the screen's edge (Step 13).
+- `src/sim/use/free.ts` + system `recruit-free` + event `recruited` — Use held at a shut cage frees the captive (the roster grows for good), then Use there swaps them in on the spot; a banner, the new face and a fanfare on every page (Step 13).
 
 **The Hall of Legends** (`docs/mechanisms/hall-of-legends.md`)
 - `src/client/draw/hall.ts` — each pedestal's record redrawn as a small framed picture, a card with no button when a player stands at it, and a three-second banner for a newly hung one (Step 7).

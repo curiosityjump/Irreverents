@@ -1,0 +1,10 @@
+{
+  "//": "DRAFT (Step 13): the deed of freeing a captive. A hero doing it where a bad guy sees is odd in his eyes (it is his prisoner); unseen, nobody knows. The weight is a first pass.",
+  "id": "rescue",
+  "deeds": ["free"],
+  "expect": [
+    { "actor": "hero", "deed": "free", "witnessSide": "bad", "verdict": "odd", "weight": 2 }
+  ],
+  "reactions": [],
+  "events": []
+}

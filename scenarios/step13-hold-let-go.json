@@ -1,0 +1,141 @@
+{
+  "id": "step13-hold-let-go",
+  "proves": "letting go of Use before the hold is full does nothing: the same unseen way to the cage, Use held about 1.3 s and released, then pressed again for about 1.3 s: each hold starts from empty, the second does not finish the first, nobody is freed and the cage stays shut. Control (watched to fail): the system keeping the hold when Use is let go, and the second press frees them",
+  "room": "outpost",
+  "placements": true,
+  "world": {
+    "roster": [
+      "grappler",
+      "infiltrator",
+      "flyer",
+      "brawler"
+    ]
+  },
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 470,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 20,
+      "to": 40,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 60,
+      "to": 80,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 927,
+      "to": 1000,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 1021,
+      "to": 1055,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 1056,
+      "to": 1136,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 1144,
+      "to": 1224,
+      "hold": [
+        "interact"
+      ]
+    }
+  ],
+  "ticks": 1240,
+  "expect": [
+    {
+      "fact": "recruit",
+      "id": "camp-captive",
+      "at": 1135,
+      "holding": [
+        75,
+        85
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "recruit-let-go",
+      "where": {
+        "recruit": "camp-captive",
+        "by": "p:a"
+      },
+      "between": [
+        1136,
+        1137
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "recruit",
+      "id": "camp-captive",
+      "between": [
+        1137,
+        1143
+      ],
+      "holding": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "recruit",
+      "id": "camp-captive",
+      "at": 1223,
+      "holding": [
+        75,
+        85
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "recruited",
+      "between": [
+        0,
+        1240
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "recruit",
+      "id": "camp-captive",
+      "at": 1240,
+      "open": false,
+      "unlocked": false
+    }
+  ]
+}

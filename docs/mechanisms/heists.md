@@ -21,6 +21,7 @@ one the page shows on the button.
   |---|---|---|---|
   | 0 | `door` (`use/door.ts`) | the body's middle is in an enter doorway (`enterDoorwayAt`) | `room-doors` (600) takes it through |
   | 100 | `thing` (`use/thing.ts`) | the nearest untaken thing in the room within `npcInteractReach`, its keeper attending it; never while the body is out cold. Word: the thing's deed | `npc-interact` (60) does the deed |
+  | 150 | `free` (`use/free.ts`, Step 13) | at a captive's shut cage; at the open cage, the freer, for a few seconds (`swap`) | `recruit-free` (61) holds, frees, swaps (`docs/mechanisms/recruits.md`) |
   | 200 | `bell` (`use/bell.ts`) | the body is by a cantina's bell (`byBell`) | `cantina-brawl` (640) rings it, ending a brawl |
 
 - **An answer** is `{ entry, word, target?, at }`: `word` keys the button's
