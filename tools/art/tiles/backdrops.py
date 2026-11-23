@@ -223,9 +223,18 @@ def make_castle_mid():
             rect(img, xx, yy - 6, 1, 6, shade)
     # two towers
     for x, ttop, w in ((30, 16, 36), (214, 24, 30)):
+        # round 3: a round tower, lit on its left third and shaded on its right third, with courses
+        lit_w, sh_w = w * 3 // 10, w * 3 // 10
         rect(img, x, ttop, w, h - ttop, body)
-        rect(img, x, ttop, 2, h - ttop, lit)
-        rect(img, x + w - 4, ttop, 4, h - ttop, shade)
+        rect(img, x, ttop, lit_w, h - ttop, mix(ST[2], ST[3], 0.55))
+        rect(img, x, ttop, 1, h - ttop, lit)
+        rect(img, x + w - sh_w, ttop, sh_w, h - ttop, shade)
+        rect(img, x + w - 2, ttop, 2, h - ttop, dark)
+        for row, yy in enumerate(range(ttop + 6, h, 6)):
+            rect(img, x, yy, w, 1, mix(body, shade, 0.6))
+            rect(img, x + w - sh_w, yy, sh_w, 1, dark)
+            for xx in range(x + 3 + (row % 2) * 5, x + w - 2, 10):
+                rect(img, xx, yy - 5, 1, 5, mix(body, shade, 0.6))
         for xx in range(x, x + w - 3, 8):
             rect(img, xx, ttop - 5, 5, 5, body)
             rect(img, xx, ttop - 5, 5, 1, lit)
@@ -263,9 +272,10 @@ def make_town_mid():
     street, with a dark fence and hedge at their foot."""
     h = 124
     img = canvas(h)
-    wall, wall2 = mix(CR[1], ST[3], 0.45), mix(CR[1], ST[2], 0.55)
-    frame = mix(WD[1], ST[1], 0.35)
-    pane, pane2 = mix(C['blue'][2], ST[2], 0.45), mix(C['blue'][3], ST[3], 0.5)
+    # round 3: hazed toward the far blue, so the houses read as a plane behind the street
+    wall, wall2 = mix(mix(CR[1], ST[3], 0.45), FAR[2], 0.4), mix(mix(CR[1], ST[2], 0.55), FAR[1], 0.4)
+    frame = mix(mix(WD[1], ST[1], 0.35), FAR[0], 0.35)
+    pane, pane2 = mix(C['blue'][2], FAR[0], 0.5), mix(C['blue'][3], FAR[2], 0.5)
     roofs = [(C['red'][2], C['red'][1]), (C['blue'][2], C['blue'][1]), (C['orange'][1], C['red'][0]), (C['teal'][1], C['teal'][0])]
     roofs = [(mix(a, ST[2], 0.3), mix(b, ST[1], 0.3)) for a, b in roofs]
     houses = [(0, 44, 64, 20, 0, 2), (44, 36, 48, 16, 1, 3), (80, 52, 72, 22, 2, 2), (132, 34, 42, 15, 3, 3),
@@ -458,4 +468,387 @@ def make_cellar_vault(theme):
         rect(img, nx + 10, ny + 4, 4, 9, C['cream'][2])
         rect(img, nx + 11, ny, 2, 4, flame)
         px(img, nx + 11, ny - 1, GO[3])
+    return img
+
+
+# ---------------------------------------------------------------- round 3: the tall sky, the quarry
+
+EA, SKYC = C['earth'], C['sky']
+
+
+def make_sky_tall():
+    """Round 3: the sky as one picture, 320 x 264, pinned to the screen's top: a multi-step
+    gradient whose steps meet in a 2-row checker dither (no flat bands with hard edges), with two
+    rows of small far clouds low down. Opaque, so the backdrop's 8 flat bands never show."""
+    h = 264
+    img = canvas(h, SKYC[0])
+    # DRAFT: six master sky shades from the top down; between each pair, a 4x4 ordered dither whose
+    # share of the lower shade grows row by row, so no row is one flat colour and no band edge shows.
+    stops = [(0, SKYC[0]), (60, mix(SKYC[0], SKYC[1], 0.5)), (120, SKYC[1]), (176, mix(SKYC[1], SKYC[2], 0.5)),
+             (224, SKYC[2]), (264, mix(SKYC[2], SKYC[3], 0.6))]
+    # every row holds all 16 thresholds (the 4x4 Bayer order, run along the row and shifted per row)
+    perm = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5]
+    for (y0, c0), (y1, c1) in zip(stops, stops[1:]):
+        for y in range(y0, y1):
+            t = (y - y0 + 0.5) / (y1 - y0)
+            for x in range(W):
+                img.putpixel((x, y), c1 if perm[(x + 6 * y) % 16] < t * 16 else c0)
+    # far clouds: low, flat, pale, two rows (they are far: no shade side)
+    pale, base = mix(C['cloud'][0], SKYC[2], 0.35), mix(C['cloud'][1], SKYC[3], 0.5)
+    for row, (y, n, seed) in enumerate(((176, 7, 3), (214, 9, 5))):
+        for i in range(n):
+            cx = (i * (W // n) + tile_hash(i, row, seed) % 30) % W
+            w = 18 + tile_hash(i, row, seed + 1) % 22
+            for k in range(3):
+                dx = (k - 1) * w // 3
+                r = 4 + (tile_hash(i, k, seed + 2) % 4) + (2 if k == 1 else 0)
+                for yy in range(y - r, y + 1):
+                    for xx in range(cx + dx - r - 3, cx + dx + r + 4):
+                        if ((xx - cx - dx) / (r + 3)) ** 2 + ((yy - y) / r) ** 2 <= 1:
+                            px(img, xx, yy, base if yy < y - 1 else pale)
+    return img
+
+
+def make_far_cliffs():
+    """Quarry, far: pale cut cliffs in layered strata, terraces stepped into them, dust haze at the
+    foot. Lighter and greyer than anything near; no outline. 320 x 128."""
+    h = 128
+    img = canvas(h)
+    back = mix(FAR[1], EA[2], 0.42)
+    face = mix(FAR[2], EA[3], 0.55)
+    strata = mix(FAR[1], EA[2], 0.55)
+    shadow = mix(FAR[0], EA[1], 0.4)
+    haze = mix(FAR[2], C['cream'][2], 0.4)
+    # the back range
+    fill_below(img, hills(h, 96, [(30, 60, 30), (130, 70, 40), (240, 80, 34)]), mix(FAR[1], EA[2], 0.25))
+    # cut cliffs: flat-topped mesas with stepped terraces (a quarry's cut faces)
+    for x0, w, top in ((0, 70, 66), (96, 90, 52), (206, 74, 70), (290, 50, 60)):
+        for x in range(x0, x0 + w):
+            # the face steps in at two terraces
+            for y in range(top, h):
+                step = 0 if y < top + 22 else 4 if y < top + 44 else 8
+                if x0 + step <= x < x0 + w - step // 2:
+                    lit = x < x0 + step + 3
+                    c = face if lit else back
+                    if (y - top) % 22 in (0, 1):
+                        c = face
+                    elif (y - top) % 7 == 3 and not lit:
+                        c = strata
+                    elif x >= x0 + w - step // 2 - 4:
+                        c = shadow
+                    px(img, x, y, c)
+    # haze at the foot
+    for y in range(112, h):
+        for x in range(W):
+            if y >= 120 or (x + y) % 2 == 0:
+                px(img, x, y, haze)
+    return img
+
+
+def make_quarry_mid():
+    """Quarry, middle: scaffolds and a crane against the cliffs, in muted wood, with a dusty spoil
+    heap at the foot. Muted (no dark outline), 320 x 120."""
+    h = 120
+    img = canvas(h)
+    wood = mix(WD[1], FAR[1], 0.45)
+    wood_l = mix(WD[2], FAR[2], 0.45)
+    rope = mix(WD[0], FAR[0], 0.45)
+    heap, heap_l = mix(EA[1], FAR[1], 0.5), mix(EA[2], FAR[2], 0.5)
+    # spoil heaps along the foot
+    fill_below(img, hills(h, 120, [(40, 50, 26), (150, 40, 18), (250, 60, 30)]), heap)
+    for x in range(W):
+        for y in range(h):
+            if img.getpixel((x, y))[3] and not img.getpixel((x, max(0, y - 3)))[3]:
+                px(img, x, y, heap_l)
+    # scaffolds: posts, cross braces and plank decks
+    for x0, w, top in ((12, 48, 70), (204, 48, 62)):
+        for px0 in range(x0, x0 + w + 1, 16):
+            rect(img, px0, top, 3, h - top, wood)
+            rect(img, px0, top, 1, h - top, wood_l)
+        for dy in range(top, h - 10, 22):
+            rect(img, x0 - 2, dy, w + 7, 3, wood_l)
+            rect(img, x0 - 2, dy + 3, w + 7, 1, wood)
+            for i in range(16):
+                for px0 in range(x0, x0 + w, 16):
+                    px(img, px0 + 2 + i, dy + 4 + i, wood)
+    # a crane: mast, jib, rope and a hanging stone
+    mx, my = 128, 36
+    rect(img, mx, my, 4, h - my, wood)
+    rect(img, mx, my, 1, h - my, wood_l)
+    rect(img, mx - 30, my, 70, 3, wood_l)
+    for i in range(16):
+        px(img, mx + 4 + i, my + 3 + i, wood)
+        px(img, mx - 1 - i, my + 3 + i, wood)
+    rect(img, mx + 34, my + 3, 1, 30, rope)
+    rect(img, mx + 30, my + 33, 9, 7, mix(ST[1], FAR[1], 0.4))
+    rect(img, mx + 30, my + 33, 9, 1, mix(ST[2], FAR[2], 0.4))
+    return img
+
+
+def make_cave_wall():
+    """Quarry cave: the dark rock back wall, irregular lumps a step lighter than the gaps, timber
+    props every 160 px. Opaque, 320 x 352, dimmer and flatter than the ground."""
+    h = 352
+    body = mix(EA[0], NI[1], 0.55)
+    gap = mix(EA[0], INK, 0.55)
+    lump = mix(EA[0], NI[2], 0.45)
+    lump_l = mix(EA[1], NI[2], 0.45)
+    img = canvas(h, gap)
+    # rock lumps on a rough grid, offset per row
+    for row, y0 in enumerate(range(-6, h, 18)):
+        for i, x0 in enumerate(range((row % 2) * 13, W + 26, 26)):
+            r = 9 + tile_hash(i, row, 41) % 4
+            cx, cy = x0 + tile_hash(i, row, 42) % 5, y0 + 9
+            for y in range(cy - r, cy + r):
+                for x in range(cx - r - 2, cx + r + 2):
+                    if ((x - cx) / (r + 2)) ** 2 + ((y - cy) / r) ** 2 <= 1:
+                        lit = ((x - cx + 3) / (r + 2)) ** 2 + ((y - cy + 3) / r) ** 2 > 1
+                        px(img, x, y, lump_l if lit else lump)
+    # timber props: posts and a cap beam, evenly every 160 px (they mark nothing)
+    tw, tw_l, tw_s = mix(WD[0], NI[1], 0.35), mix(WD[1], NI[2], 0.35), mix(WD[0], INK, 0.5)
+    for x0 in (60, 220):
+        for dx in (0, 46):
+            rect(img, x0 + dx, 0, 7, h, tw)
+            rect(img, x0 + dx, 0, 2, h, tw_l)
+            rect(img, x0 + dx + 6, 0, 1, h, tw_s)
+        for yy in (70, 230):
+            rect(img, x0 - 4, yy, 61, 7, tw_l)
+            rect(img, x0 - 4, yy + 6, 61, 2, tw_s)
+    return img
+
+
+def make_tower_wall():
+    """Quarry tower: a warm cut-stone wall in dim earth tones, tall slit windows with the sky
+    showing, every 160 px. Opaque, 320 x 352, dimmer than the ground."""
+    h = 352
+    body = mix(EA[1], NI[1], 0.55)
+    line = mix(EA[0], NI[1], 0.55)
+    light = mix(EA[2], NI[2], 0.55)
+    img = canvas(h, body)
+    for row, yy in enumerate(range(9, h, 10)):
+        rect(img, 0, yy, W, 1, line)
+        rect(img, 0, yy - 9, W, 1, light)
+        for xx in range((row % 2) * 12, W, 24):
+            rect(img, xx, yy - 9, 1, 9, line)
+    sky1, sky2 = mix(SKYC[1], body, 0.25), mix(SKYC[2], body, 0.2)
+    for x0 in (52, 212):
+        for wy in (40, 200):
+            for y in range(wy, wy + 64):
+                for x in range(x0, x0 + 14):
+                    dx = x - x0 - 6.5
+                    if y >= wy + 7 or dx * dx + (y - wy - 7) ** 2 <= 49:
+                        px(img, x, y, sky2 if y > wy + 40 else sky1)
+            rect(img, x0 - 3, wy + 64, 20, 3, light)
+            rect(img, x0 - 3, wy + 67, 20, 1, line)
+            # light falling from it, one flat step
+            for y in range(wy + 68, wy + 140):
+                off = (y - wy - 68) // 4
+                for x in range(x0 + off, x0 + off + 14):
+                    c = img.getpixel((x % W, y))
+                    if c[:3] == body[:3]:
+                        px(img, x, y, mix(body, C['cream'][2], 0.12))
+    return img
+
+
+def make_cave_strip():
+    """Round 3: the cave's back wall as a 128 px strip, pinned to an outdoor room's bottom, so a
+    cellar or crawl under its floor shows rock instead of sky (the depot's cellar, the ridge's
+    pocket). Opaque."""
+    return make_cave_wall().crop((0, 0, W, 128))
+
+
+# ---------------------------------------------------------------- round 3: what hangs above a short room, and the cantina's wall
+
+def _dim(img, toward, t):
+    out = img.copy()
+    for y in range(out.height):
+        for x in range(out.width):
+            c = out.getpixel((x, y))
+            if c[3]:
+                out.putpixel((x, y), mix(c, toward, t))
+    return out
+
+
+def _tile_row(img, tile, y, step=16, x0=0):
+    for x in range(x0, W, step):
+        img.paste(tile, (x, y), tile)
+
+
+def make_cantina_wall():
+    """The cantina's back wall, 320 x 192, pinned to the room's top: dark planks above, wood
+    wainscot to waist height (its top rail under the plate's trim) down to the floor line (y 160),
+    a post every 160 px. From the P04 plate's plank cells, dimmed toward night so it sits behind
+    the floor. Opaque."""
+    import plates as PL
+    h = 192
+    img = canvas(h, mix(WD[0], NI[1], 0.5))
+    dark = _dim(PL.grid_cell('tavern', 5, 0, PL.tavern_map), NI[1], 0.45)
+    dark2 = _dim(PL.grid_cell('tavern', 0, 0, PL.tavern_map), NI[1], 0.55)
+    wains = _dim(PL.grid_cell('tavern', 0, 1, PL.tavern_map), NI[1], 0.3)
+    wains2 = _dim(PL.grid_cell('tavern', 1, 1, PL.tavern_map), NI[1], 0.3)
+    post = _dim(PL.grid_cell('tavern', 15, 1, PL.tavern_map), NI[1], 0.25)
+    # dark planks: courses 8 px tall, long boards with staggered joints, in the plate's tones dimmed
+    b_hi, b_body, b_sh = mix(WD[2], NI[1], 0.5), mix(WD[1], NI[1], 0.5), mix(WD[0], NI[1], 0.45)
+    for row, y in enumerate(range(0, 126, 8)):
+        rect(img, 0, y, W, 8, b_body)
+        rect(img, 0, y, W, 1, b_hi)
+        rect(img, 0, y + 7, W, 1, b_sh)
+        for j in range(0, W, 64):
+            jx = (j + row * 24 + tile_hash(row, j, 52) % 9) % W
+            rect(img, jx, y, 1, 8, mix(WD[0], INK, 0.4))
+            px(img, jx + 2, y + 3, b_sh)
+        for j in range(4):
+            gx = tile_hash(row, j, 53) % W
+            rect(img, gx, y + 3, 5, 1, b_sh)
+    for i, x in enumerate(range(0, W, 16)):
+        for y in (128, 144):
+            t = wains if (i + y // 16) % 2 else wains2
+            img.paste(t, (x, y), t)
+    # the rail along the wainscot's top, lit
+    rect(img, 0, 126, W, 2, mix(WD[3], NI[2], 0.3))
+    rect(img, 0, 128, W, 1, mix(WD[0], INK, 0.3))
+    p_body, p_lit, p_sh = mix(WD[1], NI[1], 0.35), mix(WD[2], NI[1], 0.35), mix(WD[0], INK, 0.4)
+    for x0 in (72, 232):
+        rect(img, x0, 0, 10, 160, p_body)
+        rect(img, x0, 0, 2, 160, p_lit)
+        rect(img, x0 + 9, 0, 1, 160, p_sh)
+        rect(img, x0 - 3, 120, 16, 6, p_lit)
+        rect(img, x0 - 3, 125, 16, 1, p_sh)
+    rect(img, 0, 160, W, 32, mix(CA[0], INK, 0.4))
+    return img
+
+
+def make_cantina_roof():
+    """Above the cantina's top row, for a view taller than the room: the dark underside of the roof,
+    common rafters sloping up to a ridge beam, purlins across. 320 x 80, opaque, pinned above the room."""
+    h = 80
+    img = canvas(h, mix(NI[0], INK, 0.3))
+    beam, beam_l, beam_s = mix(WD[0], NI[1], 0.4), mix(WD[1], NI[2], 0.4), mix(WD[0], INK, 0.5)
+    for x0 in range(0, W, 64):
+        for i in range(h):
+            for dx in range(4):
+                px(img, x0 + i // 2 + dx, h - 1 - i, beam if dx else beam_l)
+                px(img, x0 + 64 - i // 2 - dx, h - 1 - i, beam if dx else beam_l)
+    for y in (22, 60):
+        rect(img, 0, y, W, 5, beam)
+        rect(img, 0, y, W, 1, beam_l)
+        rect(img, 0, y + 5, W, 1, beam_s)
+    return img
+
+
+def make_hall_vault():
+    """Above the hall gallery's top row: stone vaults springing from the wall, lilac and dim, so a
+    tall view shows a ceiling rather than solid block. 320 x 80, opaque, pinned above the room."""
+    h = 80
+    body = mix(CA[0], NI[1], 0.5)
+    rib, rib_l = mix(CA[1], NI[2], 0.3), mix(CA[2], NI[2], 0.3)
+    deep = mix(CA[0], INK, 0.55)
+    img = canvas(h, body)
+    for x0 in range(0, W, 80):
+        cx = x0 + 40
+        for y in range(h):
+            for x in range(x0, x0 + 80):
+                dx = x - cx + 0.5
+                r2 = dx * dx + (y - h) ** 2 * 1.6
+                if r2 <= 34 ** 2:
+                    px(img, x, y, deep)
+                elif r2 <= 38 ** 2:
+                    px(img, x, y, rib_l if dx < 0 else rib)
+        rect(img, x0, 0, 6, h, rib)
+        rect(img, x0, 0, 2, h, rib_l)
+    rect(img, 0, h - 3, W, 3, rib)
+    return img
+
+
+def make_tree_crowns():
+    """Above the courtyard's leaf canopy: the crowns the canopy hangs from. Round masses in the
+    foliage ramp, each lit top-left with a highlight and shaded under, overlapping back to front;
+    sky between them at the top. 320 x 112, pinned above the room."""
+    h = 112
+    img = canvas(h)
+    edge = mix(F[0], INK, 0.45)
+    discs = []
+    for i in range(0, W, 26):
+        r = 17 + tile_hash(i, 0, 61) % 9
+        discs.append((i + tile_hash(i, 1, 61) % 9, 28 + r // 2 + tile_hash(i, 2, 61) % 12, r))
+    for i in range(13, W, 30):
+        discs.append((i, 74 + tile_hash(i, 3, 61) % 10, 20 + tile_hash(i, 4, 61) % 6))
+    discs.sort(key=lambda d: d[1])
+
+    def circle(cx, cy, r, c):
+        for y in range(cy - r - 1, cy + r + 2):
+            for x in range(cx - r - 1, cx + r + 2):
+                if (x - cx) ** 2 + (y - cy) ** 2 <= r * r + r * 0.5:
+                    px(img, x, y, c)
+    # the dark mass behind the crowns, so no sky shows between the two rows of them
+    for x in range(W):
+        top = 54 + (tile_hash(x // 6, 0, 65) % 7)
+        for y in range(top, h):
+            px(img, x, y, edge if y == top else F[0])
+    for n, (cx, cy, r) in enumerate(discs):
+        # a crown is a cluster of leafy lumps: outline pass, shade, body, lit, so it reads as one mass
+        lumps = [(cx, cy, r * 6 // 10)]
+        for k in range(8):
+            ang = k * 0.785 + (tile_hash(n, k, 63) % 40) / 100
+            d = r * 55 // 100
+            lumps.append((cx + int(d * math.cos(ang)), cy + int(d * 0.8 * math.sin(ang)), r * 4 // 10 + tile_hash(n, k, 64) % 3))
+        for lx, ly, lr in lumps:
+            circle(lx, ly, lr + 1, edge)
+        for lx, ly, lr in lumps:
+            circle(lx, ly, lr, F[0])
+        for lx, ly, lr in lumps:
+            circle(lx - 1, ly - 2, lr - 2, F[1])
+        for lx, ly, lr in lumps:
+            if ly <= cy + 2:
+                circle(lx - lr // 3, ly - lr // 3, lr // 2, F[2])
+                px(img, lx - lr // 2, ly - lr // 2, F[3])
+                px(img, lx - lr // 2 + 1, ly - lr // 2, F[3])
+    for y in range(h - 8, h):
+        for x in range(W):
+            px(img, x, y, F[0] if y < h - 4 or (x + y) % 2 else edge)
+    return img
+
+
+def make_street_upper():
+    """Above the castle street's eave: the upper storeys of the houses over the street, plaster
+    between timbers with small windows, under tile roofs against the sky. 320 x 104, pinned above
+    the room; the eave (the room's top row) hangs from it."""
+    h = 104
+    img = canvas(h)
+    RD, BL = C['red'], C['blue']
+    pl, pl_s, tm, tm_l = mix(CR[2], FAR[2], 0.15), mix(CR[1], FAR[1], 0.2), mix(WD[1], FAR[0], 0.15), mix(WD[2], FAR[1], 0.15)
+    houses = [(0, 64, 30, RD), (64, 58, 18, BL), (122, 70, 26, RD), (192, 52, 12, RD), (244, 76, 22, BL)]
+    for x0, w, top, R in houses:
+        roof_h = 24
+        # roof: a steep gable, shingle courses
+        for y in range(top, top + roof_h):
+            inset = (top + roof_h - y) * w // (2 * roof_h)
+            for x in range(x0 + inset - 2 + 2 * ((top + roof_h - y) == roof_h), x0 + w - inset + 2):
+                course = (y - top) % 5
+                c = R[2] if course < 3 else R[1]
+                if (x + (y - top) // 5 * 4) % 8 == 0 and course < 4:
+                    c = R[0]
+                if y == top or x in (x0 + inset - 2, x0 + w - inset + 1):
+                    c = mix(R[0], INK, 0.35)
+                px(img, x, y, c)
+        # storey: plaster, timbers, windows
+        y0 = top + roof_h
+        rect(img, x0, y0, w, h - y0, pl)
+        rect(img, x0, y0, w, 2, pl_s)
+        for tx in range(x0, x0 + w, 16):
+            rect(img, tx, y0, 2, h - y0, tm)
+            rect(img, tx, y0, 1, h - y0, tm_l)
+        rect(img, x0, y0 + 26, w, 3, tm)
+        for wx in range(x0 + 6, x0 + w - 8, 16):
+            for wy in (y0 + 8,):
+                rect(img, wx, wy, 7, 10, mix(BL[0], NI[1], 0.3))
+                rect(img, wx, wy, 7, 1, tm)
+                rect(img, wx + 3, wy, 1, 10, tm)
+                rect(img, wx, wy + 5, 7, 1, tm)
+                rect(img, wx - 1, wy + 10, 9, 2, tm_l)
+                px(img, wx + 1, wy + 2, mix(BL[3], CR[2], 0.4))
+        # a chimney
+        cx = x0 + w - 16
+        rect(img, cx, top - 8, 6, roof_h // 2 + 8, mix(C['earth'][1], FAR[0], 0.2))
+        rect(img, cx - 1, top - 9, 8, 2, mix(C['earth'][0], INK, 0.2))
     return img

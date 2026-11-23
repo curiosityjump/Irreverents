@@ -1,5 +1,5 @@
 {
-  "//": "DRAFT: stand-in drawn by tools/art/tiles/make.py (round 2). Notes: tools/art/tiles/README.md. DRAFT: no \"wall\" here on purpose: the one layer is the back wall itself, with windows and pillars, moving slower than the room; add \"wall\" (cells [0,6]..[3,6] of tiles/castle.png) to go back to a flat wall that moves with the room.",
+  "//": "DRAFT: stand-in drawn by tools/art/tiles/make.py (round 2). Notes: tools/art/tiles/README.md. DRAFT: no \"wall\" here on purpose: the one layer is the back wall itself, with windows and pillars, moving slower than the room; add \"wall\" (cells [0,6]..[3,6] of tiles/castle.png) to go back to a flat wall that moves with the room. Round 3: above the top row, for a view taller than the room, stone vaults.",
   "id": "hall-gallery",
   "sky": [
     "#4c476a",
@@ -13,6 +13,18 @@
       "offsetY": -24,
       "repeatX": true,
       "parallaxY": 0.75
+    },
+    {
+      "image": "backdrops/hall-vault.png",
+      "parallax": 1,
+      "y": "top",
+      "offsetY": -80,
+      "repeatX": true,
+      "pin": "room"
     }
-  ]
+  ],
+  "outside": {
+    "above": "sky",
+    "below": "deep"
+  }
 }

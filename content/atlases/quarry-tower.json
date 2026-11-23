@@ -1,7 +1,7 @@
 {
-  "//": "DRAFT: stand-in drawn by tools/art/tiles/make.py (theme \"cellar\", round 2); a delivered tile sheet replaces it by editing this file. Notes: tools/art/tiles/README.md.",
+  "//": "DRAFT: stand-in drawn by tools/art/tiles/make.py (theme \"quarry\", round 2); a delivered tile sheet replaces it by editing this file. Notes: tools/art/tiles/README.md.",
   "id": "quarry-tower",
-  "image": "tiles/cellar.png",
+  "image": "tiles/quarry.png",
   "tile": 16,
   "cells": {
     "solid": [
@@ -20,7 +20,7 @@
   "autotile": {
     "origin": [
       0,
-      0
+      12
     ],
     "innerCorners": {
       "nw": [
@@ -42,93 +42,37 @@
     },
     "fill": [
       [
-        3,
-        3
+        4,
+        12
       ],
       [
-        3,
-        3
-      ],
-      [
-        6,
-        0
+        5,
+        12
       ],
       [
         6,
-        1
-      ],
-      [
-        6,
-        0
+        12
       ],
       [
         7,
-        0
+        12
       ],
       [
-        7,
-        1
+        4,
+        15
       ],
       [
-        6,
-        3
-      ],
-      [
-        7,
-        3
-      ],
-      [
-        0,
-        4
-      ],
-      [
-        1,
-        4
-      ],
-      [
-        3,
-        3
-      ],
-      [
-        6,
-        1
+        5,
+        15
       ]
     ],
     "top": [
-      [
-        4,
-        2
-      ],
-      [
-        -1,
-        -1
-      ],
-      [
-        -1,
-        -1
-      ],
-      [
-        -1,
-        -1
-      ],
       [
         -1,
         -1
       ]
     ],
     "under": [
-      [
-        4,
-        3
-      ],
-      [
-        5,
-        3
-      ],
-      [
-        -1,
-        -1
-      ],
       [
         -1,
         -1

@@ -1,11 +1,18 @@
 {
-  "//": "DRAFT: stand-in drawn by tools/art/tiles/make.py (round 2). Notes: tools/art/tiles/README.md. Round 3 first pass: the far hills are pinned to the room so they stay behind it at any height; the front strip sits in the ground under the lowest floor.",
+  "//": "DRAFT: stand-in drawn by tools/art/tiles/make.py (round 2). Notes: tools/art/tiles/README.md. Round 3: the sky is one tall picture pinned to the screen (no flat bands); cliffs and scaffolds are pinned to the room so they stay behind it at any height; the front strip sits in the ground under the lowest floor.",
   "id": "quarry-ridge",
   "sky": [
     "#5fb4f0",
     "#c4e9ff"
   ],
   "layers": [
+    {
+      "image": "backdrops/sky-tall.png",
+      "parallax": 0,
+      "y": "top",
+      "offsetY": 0,
+      "repeatX": true
+    },
     {
       "image": "backdrops/sky-clouds.png",
       "parallax": 0.1,
@@ -14,10 +21,26 @@
       "repeatX": true
     },
     {
-      "image": "backdrops/far-hills.png",
+      "image": "backdrops/far-cliffs.png",
       "parallax": 0.25,
       "y": "bottom",
-      "offsetY": -64,
+      "offsetY": -128,
+      "repeatX": true,
+      "pin": "room"
+    },
+    {
+      "image": "backdrops/quarry-mid.png",
+      "parallax": 0.5,
+      "y": "bottom",
+      "offsetY": -120,
+      "repeatX": true,
+      "pin": "room"
+    },
+    {
+      "image": "backdrops/cave-strip.png",
+      "parallax": 1,
+      "y": "bottom",
+      "offsetY": 0,
       "repeatX": true,
       "pin": "room"
     },

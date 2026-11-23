@@ -1,7 +1,7 @@
 {
-  "//": "DRAFT: stand-in drawn by tools/art/tiles/make.py (theme \"grass-ruins\", round 2); a delivered tile sheet replaces it by editing this file. Notes: tools/art/tiles/README.md.",
+  "//": "DRAFT: stand-in drawn by tools/art/tiles/make.py (theme \"quarry\", round 2); a delivered tile sheet replaces it by editing this file. Notes: tools/art/tiles/README.md.",
   "id": "quarry-road",
-  "image": "tiles/grass-ruins.png",
+  "image": "tiles/quarry.png",
   "tile": 16,
   "cells": {
     "solid": [
@@ -104,7 +104,7 @@
         2
       ],
       [
-        7,
+        6,
         2
       ],
       [
@@ -112,12 +112,16 @@
         2
       ],
       [
-        5,
+        7,
         2
       ],
       [
         6,
         2
+      ],
+      [
+        -1,
+        -1
       ],
       [
         -1,
@@ -144,6 +148,10 @@
       [
         5,
         3
+      ],
+      [
+        -1,
+        -1
       ],
       [
         -1,
@@ -197,68 +205,6 @@
         5,
         4
       ]
-    ],
-    "regions": [
-      {
-        "tiles": [
-          0,
-          0,
-          84,
-          1
-        ],
-        "origin": [
-          0,
-          8
-        ],
-        "fill": [
-          [
-            4,
-            8
-          ],
-          [
-            5,
-            8
-          ],
-          [
-            6,
-            8
-          ],
-          [
-            7,
-            8
-          ],
-          [
-            4,
-            11
-          ],
-          [
-            5,
-            11
-          ]
-        ],
-        "under": [
-          [
-            4,
-            10
-          ],
-          [
-            5,
-            10
-          ],
-          [
-            -1,
-            -1
-          ],
-          [
-            -1,
-            -1
-          ],
-          [
-            -1,
-            -1
-          ]
-        ]
-      }
     ]
   }
 }

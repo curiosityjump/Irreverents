@@ -1,7 +1,7 @@
 {
-  "//": "DRAFT: stand-in drawn by tools/art/tiles/make.py (theme \"town\", round 2); a delivered tile sheet replaces it by editing this file. Notes: tools/art/tiles/README.md.",
+  "//": "DRAFT: stand-in drawn by tools/art/tiles/make.py (theme \"cantina\", round 2); a delivered tile sheet replaces it by editing this file. Notes: tools/art/tiles/README.md.",
   "id": "cantina",
-  "image": "tiles/town.png",
+  "image": "tiles/cantina.png",
   "tile": 16,
   "cells": {
     "solid": [
@@ -102,14 +102,6 @@
     ],
     "under": [
       [
-        4,
-        3
-      ],
-      [
-        5,
-        3
-      ],
-      [
         -1,
         -1
       ]
@@ -149,6 +141,46 @@
         5,
         4
       ]
+    ],
+    "regions": [
+      {
+        "tiles": [
+          0,
+          0,
+          26,
+          1
+        ],
+        "origin": [
+          0,
+          8
+        ],
+        "fill": [
+          [
+            4,
+            8
+          ],
+          [
+            5,
+            8
+          ],
+          [
+            6,
+            8
+          ],
+          [
+            7,
+            8
+          ],
+          [
+            4,
+            11
+          ],
+          [
+            5,
+            11
+          ]
+        ]
+      }
     ]
   }
 }

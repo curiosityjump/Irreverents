@@ -1,31 +1,30 @@
 {
-  "//": "DRAFT: stand-in drawn by tools/art/tiles/make.py (round 2). Notes: tools/art/tiles/README.md.",
+  "//": "DRAFT: stand-in drawn by tools/art/tiles/make.py (round 2). Notes: tools/art/tiles/README.md. Round 3: the tavern's back wall (dark planks, wainscot to waist height, posts) is a layer pinned to the room; above the rafters, for a view taller than the room, the roof's dark underside.",
   "id": "cantina",
   "sky": [
-    "#4c476a",
-    "#4c476a"
+    "#1c1a33",
+    "#1c1a33"
   ],
-  "layers": [],
-  "wall": {
-    "image": "tiles/castle.png",
-    "tile": 16,
-    "cells": [
-      [
-        0,
-        6
-      ],
-      [
-        1,
-        6
-      ],
-      [
-        2,
-        6
-      ],
-      [
-        3,
-        6
-      ]
-    ]
+  "layers": [
+    {
+      "image": "backdrops/cantina-roof.png",
+      "parallax": 1,
+      "y": "top",
+      "offsetY": -80,
+      "repeatX": true,
+      "pin": "room"
+    },
+    {
+      "image": "backdrops/cantina-wall.png",
+      "parallax": 1,
+      "y": "top",
+      "offsetY": 0,
+      "repeatX": true,
+      "pin": "room"
+    }
+  ],
+  "outside": {
+    "above": "sky",
+    "below": "deep"
   }
 }

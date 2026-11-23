@@ -45,6 +45,62 @@ drawing code is gone (git history, ebcf79e).
 | `[0..3, 5]`, `[0..3, 6]` | one-way `left mid right single`; back-wall cells (indoor) |
 | region i: `[0..3, 8+4i .. 11+4i]`, fills `[4..7, 8+4i]` `[4,11+4i] [5,11+4i]`, tops `[4..7, 9+4i]`, unders `[4..7, 10+4i]` | regions (`grass-ruins`: 0 canopy; `town`: 0 street, 1 red roof, 2 blue roof, 3 eave) |
 
+## Round 3 (2026-11-23, `handoff-prompts/look3-ground.md`)
+
+**Approved plates first** (the owner, ~17:10, `docs/mechanisms/art-pipeline.md`): `plates.py` cuts a
+plate cell into a true 16x16 tile (each art pixel the median of the middle of its ~5.6 px source
+block) and maps it to the master palette through measured (plate colour, master colour) pairs, so a
+cell keeps its 3-4 tones. Grids measured by hand: P03 grassy-ruins (`GRID['ruins']`), P04 cantina
+tavern (`GRID['tavern']`). P07 and P08 were not used this round.
+
+| New | What it is |
+|---|---|
+| `tools/art/tiles/plates.py` | The plate cutter and the two colour maps. |
+| `assets/tiles/quarry.png` (128x256) | From P03: cobbled earth (4 tones) under a lime grass cap with a 1 px ink edge; fills are the plate's earth cells, flipped, plus a buried stone, pebbles and a root; scaffold ledges from the plate's bridge; tops: the plate's bushes and rubble; deep: the earth two steps down. Region 0 `cave` (earth cooled toward night under a pale cut-stone floor cap), region 1 `cutstone` (the plate's dressed wall). |
+| `assets/tiles/cantina.png` (128x192) | From P04: floor of the counter-top boards with an ink cap, over the plate's lilac stone one step darker; braced plank ledges; deep: the stone two steps down; region 0 `rafters` (the plate's beam cells over roof dark). |
+| `assets/backdrops/sky-tall.png` 320x264 | The sky as one picture: six master sky shades, an ordered dither between each pair in which every row holds all 16 thresholds (13 of 264 rows are one colour), two rows of low far clouds. |
+| `far-cliffs.png`, `quarry-mid.png` | Pale cut cliffs with terraces and haze; scaffolds, a crane, spoil heaps (muted, no outline). Drawn: no plate shows them. |
+| `cave-wall.png` 320x352, `cave-strip.png` 320x128 | Dark rock lumps and timber props (every 160 px); the strip is pinned to the bottom of an outdoor quarry room so its cellar or crawl shows rock, not sky. |
+| `tower-wall.png` 320x352 | Warm cut stone, slit windows with sky, a flat step of light. |
+| `cantina-wall.png` 320x192, `cantina-roof.png` 320x80 | Dark planks over a wainscot (P04's vertical boards) with a lit rail, two posts; the roof's underside for above the rafters. |
+| `tree-crowns.png` 320x112, `street-upper.png` 320x104, `hall-vault.png` 320x80 | What a short room hangs from, upright: leafy crowns over the courtyard's canopy; upper storeys and roofs over the street's eave; stone vaults over the gallery. |
+
+**Rooms.** Quarry road, ridge, depot: `quarry` grassy earth; depot regions: the cellar (rows 15-19)
+`cave`, the strongroom (columns 36-47, rows 8-13) `cutstone`. Cave and pit: the `cave` block
+(`ROOM_BASE`), the tower `cutstone`. All six: `outside.below: "deep"`; outdoor ones `above: "sky"`.
+Cantina: its own theme, `outside {above: sky, below: deep}`. Throne room and gallery: `below: "deep"`
+(castle foundation); the gallery `above: "sky"` with the vault layer.
+
+**Flat masses (part 3), what was done:** a 1 px ink line under the grass lip (`grass-ruins`); the
+castle floor cap now has a warm grey flagstone course under it and an ink line; castle `deep` is warm
+grey footing stone near ink; the street's deep is foundation stone with a cellar grate one tile in
+ten (it was packed earth); the courtyard's mid towers are lit on the left third, shaded on the right
+third, with courses; the street's far houses are hazed toward the far blue. **Not done:** the wall
+ramp one step darker away from torches (it needs where the torches are, which the props lane
+places); moss and vine drips on every lip (the courtyard's lip already drips; the quarry's is the
+plate's); `deep` stepping darker with depth (cells are chosen by hash, not depth; every deep is one
+dark value instead).
+
+### Round 3 decisions
+
+- **The renderer pins a "screen top" layer to the room's top when the room is shorter than the
+  view** (`drawLayers`, `topEdge`), so in the courtyard, street and outpost the tall sky and the
+  clouds are pinned to the room (`pin: "room"`, `offsetY` -200 and -110, `SKY_ABOVE`,
+  `CLOUDS_ABOVE` in `make.py`); in the tall quarry rooms they stay on the screen. `DRAFT:`.
+- **Rooms drawn from a region's block** (`ROOM_BASE`): an atlas's `origin`/`fill`/`top`/`under`
+  may point at a region's 4x4 block, so the cave, the pit and the tower share the quarry sheet.
+  No contract change. `DRAFT:`.
+- **`deep` may be weighted** (`deep_list` on a theme): the street's grate is one deep tile in ten.
+
+### Round 3 flags
+
+- `docs/mechanisms/cantina.md` ("The cantina's tiles borrow the `town` theme") and the contract's
+  theme list (`cantina` … "the `town` theme's plaster") are now out of date: the cantina has its
+  own theme.
+- No approved asset shows the quarry's cliffs, cranes, cave wall, the tower's wall, tree crowns,
+  upper storeys or vaults: drawn stand-ins, for the Drive's missing-assets list.
+- `selfcheck.py` still checks its round-2 list of eight rooms, not the six quarry rooms.
+
 ## How the contract was read (the world lane matches these)
 
 `preview.py` is the reference. Where the contract left a choice:

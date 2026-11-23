@@ -14,5 +14,9 @@
       "repeatX": true,
       "parallaxY": 0.75
     }
-  ]
+  ],
+  "outside": {
+    "above": "fill",
+    "below": "deep"
+  }
 }

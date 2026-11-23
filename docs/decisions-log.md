@@ -865,3 +865,26 @@ document as a decision of theirs.
   - `step11-chase-blink` (landed while this was built): `{"type":"hit","tick":2608,"by":"street-guard","target":"p:a"}` and three more knocked the hero off the cantina doorway before the step past the guard at 2950. The step past now starts as the guard arrives (2590), the refused push is at 2602, before his first blow. Sent to the Step 11 lead before the push.
 - **To change it:** the scenario files.
 - **Where:** `scenarios/step4-*.json`, `scenarios/step12-guard-follows-into-camp.json`, `scenarios/step11-chase-blink.json`.
+
+
+
+### 2026-11-23 · The quarry looks like a working quarry: orange cobbled earth under grass, scaffolds, a dark cave, cut stone
+- **Decided by:** Step 8 look round 3, ground lane builder (`handoff-prompts/look3-ground.md`), session_017WiGzHwFkUGGSmDqqnoSDY
+- **Instead of asking:** "What should the quarry look like, and which approved art does it come from?"
+- **Why this way:** the owner's bar (Kirby and the Amazing Mirror; "use the approved assets in the drive"): the quarry's ground is re-authored from the approved P03 grassy-ruins plate (its cobbled earth, grass cap, scaffold bridge, rubble and bushes, cut stone), cut to true 16 px tiles and mapped to the master palette. The cave and the pit use the same earth cooled and darkened under a pale stone floor; the tower and the depot's strongroom are cut stone; the depot's cellar is the cave's look. Behind them: a dithered tall sky, pale cut cliffs, scaffolds and a crane; in the cave a dark rock wall with timber props; in the tower a warm stone wall with slit windows. The plates show no cliffs, cranes or cave walls, so those are drawn stand-ins (`DRAFT:`) until an approved asset exists.
+- **To change it:** `tools/art/tiles/themes.py` (`Quarry`, `cave_region`, `cutstone_region`), `backdrops.py`, `make.py` (`ROOM_THEME`, `ROOM_BASE`, `ROOM_REGIONS`, `QUARRY_FAR`); re-run `make.py`.
+- **Where:** `tools/art/tiles/README.md`, round 3.
+
+### 2026-11-23 · The cantina is a tavern: long warm floor boards, plank walls with a wainscot, rafters
+- **Decided by:** Step 8 look round 3, ground lane builder, session_017WiGzHwFkUGGSmDqqnoSDY
+- **Instead of asking:** "The cantina borrowed the town's half-timber plaster (it read as stacked crates); what should it be?"
+- **Why this way:** the brief, from the approved P04 cantina tavern plate: the floor is the plate's counter-top boards with an ink cap over its lilac stone one step darker; the back wall is dark planks over a wood wainscot to waist height, with posts; the top row is the plate's beams; upright, the roof's dark underside fills the space above. The door stays where it is.
+- **To change it:** `'cantina'` in `ROOM_THEME` (`tools/art/tiles/make.py`; `'town'` brings back the borrowed look), `Cantina` in `themes.py`, `make_cantina_wall`/`make_cantina_roof` in `backdrops.py`.
+- **Where:** `tools/art/tiles/README.md`, round 3.
+
+### 2026-11-23 · Held upright, a short room hangs from something: tree crowns, upper storeys, a roof, vaults
+- **Decided by:** Step 8 look round 3, ground lane builder, session_017WiGzHwFkUGGSmDqqnoSDY
+- **Instead of asking:** "Upright, the courtyard and the street float in flat sky (41% and 22% of the picture one colour); what goes above them?"
+- **Why this way:** the owner, ~11:30: "It should play well in portrait too". In data only (the code alternative is Step 17's file): above the courtyard's leaf canopy, the crowns it hangs from; above the street's eave, the houses' upper storeys and roofs; above the cantina's rafters, the roof's underside; above the gallery, stone vaults. The sky is one dithered picture with low clouds, so no flat bands show. Measured upright: courtyard 41% → 1%, street 22% → 2% single-colour rows.
+- **To change it:** the layers in `content/backdrops/<room>.json` (written by `make.py`); drop a layer to go back.
+- **Where:** `tools/art/tiles/README.md`, round 3.

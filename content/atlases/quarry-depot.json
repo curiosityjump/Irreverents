@@ -1,7 +1,7 @@
 {
-  "//": "DRAFT: stand-in drawn by tools/art/tiles/make.py (theme \"grass-ruins\", round 2); a delivered tile sheet replaces it by editing this file. Notes: tools/art/tiles/README.md.",
+  "//": "DRAFT: stand-in drawn by tools/art/tiles/make.py (theme \"quarry\", round 2); a delivered tile sheet replaces it by editing this file. Notes: tools/art/tiles/README.md.",
   "id": "quarry-depot",
-  "image": "tiles/grass-ruins.png",
+  "image": "tiles/quarry.png",
   "tile": 16,
   "cells": {
     "solid": [
@@ -104,7 +104,7 @@
         2
       ],
       [
-        7,
+        6,
         2
       ],
       [
@@ -112,12 +112,16 @@
         2
       ],
       [
-        5,
+        7,
         2
       ],
       [
         6,
         2
+      ],
+      [
+        -1,
+        -1
       ],
       [
         -1,
@@ -144,6 +148,10 @@
       [
         5,
         3
+      ],
+      [
+        -1,
+        -1
       ],
       [
         -1,
@@ -202,9 +210,9 @@
       {
         "tiles": [
           0,
-          0,
+          15,
           64,
-          1
+          5
         ],
         "origin": [
           0,
@@ -236,6 +244,28 @@
             11
           ]
         ],
+        "top": [
+          [
+            4,
+            9
+          ],
+          [
+            5,
+            9
+          ],
+          [
+            -1,
+            -1
+          ],
+          [
+            -1,
+            -1
+          ],
+          [
+            -1,
+            -1
+          ]
+        ],
         "under": [
           [
             4,
@@ -256,6 +286,44 @@
           [
             -1,
             -1
+          ]
+        ]
+      },
+      {
+        "tiles": [
+          36,
+          8,
+          12,
+          6
+        ],
+        "origin": [
+          0,
+          12
+        ],
+        "fill": [
+          [
+            4,
+            12
+          ],
+          [
+            5,
+            12
+          ],
+          [
+            6,
+            12
+          ],
+          [
+            7,
+            12
+          ],
+          [
+            4,
+            15
+          ],
+          [
+            5,
+            15
           ]
         ]
       }

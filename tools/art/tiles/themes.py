@@ -117,7 +117,7 @@ class Ruins(Theme):
             for y in range(3, d):
                 put(img, x, y, G[2] if y < 4 else G[1])
             put(img, x, d, G[0])
-            put(img, x, d + 1, ST[0])  # its shadow on the stone
+            put(img, x, d + 1, INK)  # round 3: a 1 px ink line under the walk edge
         for x in (2, 9, 14):
             put(img, x, 3, G[3])
         lip_ends(img, idx, 6, G[0])
@@ -350,24 +350,28 @@ class Town(Theme):
     def oneway(self, kind):
         return plank_ledge(kind, WD)
 
+    # round 3: the grate (cell 3) about one deep tile in ten
+    deep_list = [0, 1, 2, 0, 1, 2, 0, 1, 2, 3]
+
     def deep(self):
-        """Packed earth under the street: darker and plainer than the cobbles, a few stones in it."""
-        body, d1, d2, st = mix(EA[0], INK, 0.35), mix(EA[0], INK, 0.55), mix(EA[0], EA[1], 0.4), mix(ST[0], INK, 0.3)
+        """Round 3: foundation stone under the street (it was packed earth): big dark dressed stones,
+        now and then a cellar grate with the dark behind its bars."""
+        R = Ramp(mix(ST[0], INK, 0.6), mix(ST[0], INK, 0.3), mix(ST[0], EA[0], 0.35), mix(ST[0], ST[1], 0.45), mix(ST[1], EA[1], 0.3))
         out = []
         for v in range(4):
             img = new_tile()
-            for y in range(T):
-                for x in range(T):
-                    put(img, x, y, body)
-            for i in range(5):
-                x, y = rnd(v + 60, i) % 15, rnd(v + 61, i) % 15
-                put(img, x, y, d1 if i % 2 else d2)
-                put(img, x + 1, y, d1)
-            if v in (1, 3):
-                sx, sy = 3 + v * 2, 5 + v
-                stamp(img, sx, sy, ['.ss.', 'slss', '.ss.'], {'s': st, 'l': mix(ST[0], ST[1], 0.5)})
-            if v == 2:
-                stamp(img, 9, 2, ['r..', '.r.', '.rr'], {'r': mix(WD[0], INK, 0.3)})
+            block(img, 0, 0, 16 if v % 2 else 9, 8, R, seed=v + 70, specks=1)
+            if v % 2 == 0:
+                block(img, 9, 0, 16, 8, R, seed=v + 75, specks=0)
+            block(img, -6, 8, 10, 16, R, seed=81, specks=0)
+            block(img, 10, 8, 26, 16, R, seed=82 + v, specks=1)
+            if v == 3:  # a cellar grate: iron bars over the dark
+                for y in range(2, 13):
+                    for x in range(3, 13):
+                        put(img, x, y, INK if (x - 3) % 3 else mix(C['metal'][0], INK, 0.3))
+                for x in range(2, 14):
+                    put(img, x, 1, mix(C['metal'][1], INK, 0.2))
+                    put(img, x, 13, mix(C['metal'][0], INK, 0.4))
             out.append(img)
         return out
 
@@ -588,7 +592,15 @@ class Castle(Theme):
         for y in range(1, 5):
             put(img, 7, y, sh)
         put(img, 7, 1, INK2)
-        lip_ends(img, idx, 6)
+        # round 3: a floor-face course under the cap: warm grey flagstone ends, then ink, so the floor
+        # mass is a different stone from the lilac wall
+        R = Ramp(INK, ST[0], ST[1], mix(ST[1], ST[2], 0.5), ST[2])
+        block(img, -5, 6, 11, 11, R, seed=2, specks=1, rounded=False)
+        block(img, 11, 6, 27, 11, R, seed=3, specks=1, rounded=False)
+        for x in range(T):
+            put(img, x, 11, INK)
+            put(img, x, 12, mix(CA[0], INK, 0.3))
+        lip_ends(img, idx, 11)
 
     def tops(self):
         return []
@@ -609,6 +621,21 @@ class Castle(Theme):
         # paler and cooler than the warm floor cap, so a ledge never reads as floor trim
         r = Ramp(CA[1], CA[2], mix(CA[2], CA[3], 0.6), CA[3], mix(CA[3], C['metal'][3], 0.45))
         return stone_shelf(kind, r)
+
+    def deep(self):
+        """Round 3: the foundation under a castle floor: big warm-grey footing stones two steps below
+        the wall, nearly ink, so the floor mass differs from the lilac wall."""
+        R = Ramp(mix(ST[0], INK, 0.7), mix(ST[0], INK, 0.45), mix(ST[0], CA[0], 0.5), mix(ST[0], ST[1], 0.4), mix(ST[1], CA[1], 0.4))
+        out = []
+        for v in range(4):
+            img = new_tile()
+            block(img, -4 if v % 2 else 0, 0, 12 if v % 2 else 16, 8, R, seed=v + 50, specks=1)
+            if v % 2:
+                block(img, 12, 0, 28, 8, R, seed=v + 55, specks=0)
+            block(img, -8, 8, 8, 16, R, seed=61, specks=0)
+            block(img, 8, 8, 24, 16, R, seed=62 + v, specks=1)
+            out.append(img)
+        return out
 
     def walls(self):
         """Back-wall cells (graybox-hall's `wall`): big flat blocks, faint joints, no bevel."""
@@ -726,3 +753,365 @@ class Cellar(Theme):
 
 
 THEMES = [Ruins(), Town(), Castle(), Cellar()]
+
+
+# ---------------------------------------------------------------- quarry (round 3): re-authored from the P03 plate
+
+from PIL import Image as _Image  # noqa: E402
+
+import plates as PL  # noqa: E402
+
+E = C['earth']
+
+
+def _flip(img, h=True):
+    return img.transpose(_Image.FLIP_LEFT_RIGHT if h else _Image.FLIP_TOP_BOTTOM)
+
+
+def recolour(img, table):
+    """A copy with colours swapped by `table` (rgb tuple -> rgb tuple); others kept."""
+    out = img.copy()
+    for y in range(out.height):
+        for x in range(out.width):
+            c = out.getpixel((x, y))
+            if c[3] and c[:3] in table:
+                out.putpixel((x, y), table[c[:3]] + (255,))
+    return out
+
+
+def _t(c):
+    return c[:3]
+
+
+INK_DEEP = mix(INK, NI[0], 0.5)
+# Two steps darker: the earth seen deeper down (the brief's "deep falling off toward near-ink").
+EARTH_DOWN1 = {_t(E[3]): _t(E[2]), _t(E[2]): _t(E[1]), _t(E[1]): _t(E[0]), _t(E[0]): _t(mix(E[0], INK, 0.5))}
+EARTH_DOWN2 = {_t(E[3]): _t(E[1]), _t(E[2]): _t(E[0]), _t(E[1]): _t(mix(E[0], INK, 0.45)), _t(E[0]): _t(mix(E[0], INK, 0.75))}
+# The cave's body: the earth one step down and cooled toward night.
+EARTH_CAVE = {_t(E[3]): _t(mix(E[2], NI[3], 0.35)), _t(E[2]): _t(mix(E[1], NI[2], 0.35)), _t(E[1]): _t(mix(E[0], NI[1], 0.4)),
+              _t(E[0]): _t(mix(E[0], INK, 0.6))}
+
+
+def _q(col, row, span=(1, 1)):
+    return PL.grid_cell('ruins', col, row, PL.ruins_map, span=span)
+
+
+def _qbox(x0, y0, x1, y1, w=16, h=16):
+    return PL.cell('ruins', x0, y0, x1, y1, PL.ruins_map, w, h)
+
+
+def _shift_up(img, n):
+    out = new_tile(img.width, img.height)
+    out.paste(img.crop((0, n, img.width, img.height)), (0, 0))
+    return out
+
+
+class Quarry(Theme):
+    """Round 3: the quarry's own sheet, re-authored from the P03 grassy-ruins plate: orange-brown
+    cobbled earth (4 tones) under a lime grass cap with a 1 px ink edge; scaffold planks on posts;
+    rubble and bushes on top; regions for the cave (cooler, darker earth under a cut-stone floor)
+    and cut stone (the depot's strongroom, the tower)."""
+    name = 'quarry'
+    seed = 23
+
+    def ramps(self):
+        r = Ramp(INK, E[1], E[2], E[3], E[3])
+        return [r, r, r]
+
+    def _bodies(self):
+        if not hasattr(self, '_b'):
+            a, b = _q(0, 1), _q(1, 1)
+            self._b = [a, b, _flip(a), _flip(b), _flip(a, False), _flip(b, False)]
+        return self._b
+
+    def fills(self):
+        out = [im.copy() for im in self._bodies()]
+        # three more: a buried cut stone, a pebble cluster, a root (marks drawn over the plate's earth)
+        st = {'#': INK, 'h': ST[3], 'b': ST[2], 's': ST[1]}
+        a = out[0].copy()
+        stamp(a, 4, 5, ['.####.', '#hhbb#', '#hbbs#', '#bbss#', '.####.'], st)
+        b = out[1].copy()
+        stamp(b, 9, 9, ['.##..', '#hb#.', '#bs##', '.##hs#', '...##.'], st)
+        c = out[3].copy()
+        stamp(c, 2, 3, ['r...', '.r..', '.rr.', '...r'], {'r': mix(WD[0], INK, 0.3)})
+        return out + [a, b, c]
+
+    def mark(self, img, v):
+        pass
+
+    def lip_pixels(self):
+        """The plate's grass cap (row 0, column 0), as (x, y, colour) for every grass or ink pixel in
+        its top rows; the top row becomes a 1 px ink edge."""
+        if not hasattr(self, '_lip'):
+            src = _q(0, 0)
+            grass = {_t(g) for g in G} | {_t(INK)}
+            px = []
+            for x in range(T):
+                col = [(y, src.getpixel((x, y))) for y in range(10)]
+                ys = [y for y, c in col if c[3] and _t(c) in grass]
+                if not ys:
+                    continue
+                bottom = max(ys)
+                for y in range(0, bottom + 1):
+                    c = src.getpixel((x, y))
+                    if not c[3] or _t(c) not in grass:
+                        c = G[1]
+                    px.append((x, y, c))
+            self._lip = px
+        return self._lip
+
+    def lip(self, img, idx):
+        tops = {}
+        for x, y, c in self.lip_pixels():
+            put(img, x, y, c)
+            tops[x] = max(tops.get(x, 0), y)
+        for x in range(T):
+            put(img, x, 0, INK)
+            if x in tops:
+                put(img, x, tops[x] + 1, mix(E[0], INK, 0.3))  # the grass's shadow on the earth
+        lip_ends(img, idx, 6, INK)
+
+    def tile(self, idx):
+        img = self._bodies()[0].copy()
+        open_edges(img, idx, INK, E[3], E[1])
+        if not idx & 1:
+            self.lip(img, idx)
+        return img
+
+    def inner(self, corner):
+        img = new_tile()
+        k = {'#': INK, 's': E[1], 'g': G[2], 'o': G[0]}
+        if corner == 'nw':
+            stamp(img, 0, 0, ['go', 'o.'], k)
+        elif corner == 'ne':
+            stamp(img, 14, 0, ['og', '.o'], k)
+        elif corner == 'sw':
+            stamp(img, 0, 14, ['s.', '#s'], k)
+        else:
+            stamp(img, 14, 14, ['.s', 's#'], k)
+        return img
+
+    def tops(self):
+        gx = PL.GRID['ruins']['x']
+
+        def r5(i):
+            return _qbox(gx[i] + 2, 632 - 90, gx[i + 1] - 2, 632 - 2)
+        return [r5(9), r5(10), r5(8), r5(7)]  # small bush, bush, low rubble, rubble heap
+
+    top_list = [0, 1, 2, 0, 3, 2, None, None, None, None, None]
+
+    def unders(self):
+        return Ruins().unders()
+
+    under_list = [0, 1, None, None, None, None, None]
+
+    def oneway(self, kind):
+        """Scaffold planks from the plate's bridge: posts and braces under each end."""
+        if not hasattr(self, '_br'):
+            gx = PL.GRID['ruins']['x']
+            br = _qbox(gx[0] + 2, 632 - 90, gx[2] - 2, 632 - 2, 32, 16)
+            # the plank's top edge to the tile's top (the standing surface)
+            # (the posts' caps stand above the plank in the plate; the plank's top is the surface)
+            top = min(y for y in range(16) if all(br.getpixel((x, y))[3] for x in range(8, 24)))
+            self._br = _shift_up(br, top)
+        br = self._br
+        left, right = br.crop((0, 0, 16, 16)), br.crop((16, 0, 32, 16))
+        if kind == 'left':
+            return left
+        if kind == 'right':
+            return right
+        # the middle: the plank band only (its rows above the first clear row under the plank)
+        band = 0
+        while band < 16 and all(br.getpixel((x, band))[3] for x in range(8, 24)):
+            band += 1
+        band = max(band, 4)
+        mid = new_tile()
+        piece = br.crop((10, 0, 22, band))
+        for x0 in (0, 12):
+            mid.paste(piece, (x0, 0))
+        mid.paste(br.crop((10, 0, 14, band)), (12, 0))
+        if kind == 'mid':
+            return mid
+        single = left.copy()
+        single.paste(right.crop((8, 0, 16, 16)), (8, 0))
+        return single
+
+    def deep(self):
+        return [recolour(im, EARTH_DOWN2) for im in self._bodies()[:4]]
+
+
+def _cave_tile(q, idx, v=0):
+    """The cave's ground: the earth cooled and darkened, a pale cut-stone floor cap."""
+    img = recolour(q._bodies()[v % 6], EARTH_CAVE)
+    open_edges(img, idx, INK, mix(E[2], NI[3], 0.35), mix(E[0], NI[1], 0.4))
+    if not idx & 1:
+        R = Ramp(INK, ST[1], ST[2], mix(ST[2], ST[3], 0.5), ST[3])
+        block(img, -6, 0, 10, 6, R, seed=3, specks=1)
+        block(img, 10, 0, 26, 6, R, seed=4, specks=1)
+        for x in range(T):
+            put(img, x, 0, INK)
+            put(img, x, 6, mix(E[0], INK, 0.6))
+        lip_ends(img, idx, 6)
+    return img
+
+
+def cave_region(q):
+    blocks = [_cave_tile(q, i) for i in range(16)]
+    fills = [_cave_tile(q, 15, v) for v in range(6)]
+    k = {'a': NI[2], 'b': NI[3], '#': INK, 's': ST[1], 'h': ST[2]}
+    t1 = new_tile()
+    stamp(t1, 3, 12, ['.hh..', '#hss#', '#####'], k)
+    t2 = new_tile()
+    stamp(t2, 9, 13, ['.h.', '#s#'], k)
+    return {'name': 'cave', 'block': blocks, 'fill': fills, 'top': [t1, t2], 'top_list': [0, 1, None, None, None],
+            'under': Cellar().unders(), 'under_list': [0, 1, None, None, None]}
+
+
+def _cut_tile(idx, v=0):
+    """Cut stone (the plate's dressed wall), a lit cap where it is open above."""
+    gx, gy = PL.GRID['ruins']['x'], PL.GRID['ruins']['y']
+    col = [0, 1, 2, 0, 1, 2][v % 6]
+    img = _qbox(gx[col] + 2, 512 - 90, gx[col + 1] - 2, 512 - 2)
+    if v >= 3:
+        img = _flip(img)
+    open_edges(img, idx, INK, ST[3], ST[1])
+    if not idx & 1:
+        for x in range(T):
+            put(img, x, 0, INK)
+            put(img, x, 1, ST[3])
+            put(img, x, 2, mix(ST[2], ST[3], 0.5))
+            put(img, x, 3, ST[1])
+            put(img, x, 4, INK)
+        lip_ends(img, idx, 5)
+    return img
+
+
+def cutstone_region():
+    return {'name': 'cutstone', 'block': [_cut_tile(i) for i in range(16)], 'fill': [_cut_tile(15, v) for v in range(6)],
+            'top': [], 'top_list': [], 'under': [], 'under_list': []}
+
+
+THEMES.append(Quarry())
+
+
+# ---------------------------------------------------------------- cantina (round 3): re-authored from the P04 tavern plate
+
+def _tv(col, row):
+    return PL.grid_cell('tavern', col, row, PL.tavern_map)
+
+
+# The plate's lilac stone one step darker: the floor's body sits under the boards, darker than them.
+CASTLE_DOWN1 = {_t(CA[3]): _t(CA[2]), _t(CA[2]): _t(CA[1]), _t(CA[1]): _t(CA[0]), _t(CA[0]): _t(mix(CA[0], INK, 0.5))}
+CASTLE_DOWN2 = {_t(CA[3]): _t(CA[1]), _t(CA[2]): _t(CA[0]), _t(CA[1]): _t(mix(CA[0], INK, 0.45)), _t(CA[0]): _t(mix(CA[0], INK, 0.75))}
+
+
+class Cantina(Theme):
+    """Round 3: the tavern's inside, re-authored from the P04 cantina tileset plate: a floor of long
+    warm planks (the plate's counter top) with an ink cap, over the plate's stone one step darker;
+    the top row is rafters (a region). Its back wall is a backdrop layer (backdrops.make_cantina_wall)."""
+    name = 'cantina'
+    indoor = True
+    seed = 29
+
+    def ramps(self):
+        r = Ramp(INK, CA[0], CA[1], CA[2], CA[2])
+        return [r, r, r]
+
+    def _bodies(self):
+        if not hasattr(self, '_b'):
+            st = [recolour(_tv(c, 2), CASTLE_DOWN1) for c in (0, 1, 2)]
+            self._b = [st[0], st[1], st[2], _flip(st[0]), _flip(st[1]), _flip(st[0], False)]
+        return self._b
+
+    def fills(self):
+        out = [im.copy() for im in self._bodies()]
+        return out + [out[0].copy(), out[1].copy(), out[3].copy()]
+
+    def mark(self, img, v):
+        pass
+
+    def board(self):
+        """The floor's walking boards: the top rows of the plate's counter top (row 4, column 9)."""
+        if not hasattr(self, '_board'):
+            src = _tv(9, 4)
+            top = min(y for y in range(16) if all(src.getpixel((x, y))[3] for x in range(3, 13)))
+            self._board = _shift_up(src, top)
+        return self._board
+
+    def lip(self, img, idx):
+        b = self.board()
+        depth = 0
+        while depth < 9 and b.getpixel((8, depth))[3]:
+            depth += 1
+        depth = min(depth, 8)
+        for y in range(depth):
+            for x in range(T):
+                c = b.getpixel((x, y))
+                put(img, x, y, c if c[3] else WD[1])
+        for x in range(T):
+            put(img, x, 0, INK)
+            put(img, x, depth, INK)
+            put(img, x, depth + 1, mix(CA[0], INK, 0.5))
+        # a board joint every 16 px, offset so boards read long
+        for y in range(1, depth):
+            put(img, 11, y, WD[0])
+        lip_ends(img, idx, depth)
+
+    def tile(self, idx):
+        img = self._bodies()[0].copy()
+        open_edges(img, idx, INK, CA[1], mix(CA[0], INK, 0.4))
+        if not idx & 1:
+            self.lip(img, idx)
+        return img
+
+    def inner(self, corner):
+        img = new_tile()
+        k = {'#': INK, 's': mix(CA[0], INK, 0.4)}
+        if corner == 'nw':
+            stamp(img, 0, 0, ['#s', 's.'], k)
+        elif corner == 'ne':
+            stamp(img, 14, 0, ['s#', '.s'], k)
+        elif corner == 'sw':
+            stamp(img, 0, 14, ['s.', '#s'], k)
+        else:
+            stamp(img, 14, 14, ['.s', 's#'], k)
+        return img
+
+    def tops(self):
+        return []
+
+    top_list = []
+
+    def unders(self):
+        return []
+
+    under_list = []
+
+    def oneway(self, kind):
+        return plank_ledge(kind, WD)
+
+    def deep(self):
+        return [recolour(im, CASTLE_DOWN2) for im in self._bodies()[:4]]
+
+
+def _rafter_tile(v=0):
+    """The cantina's top row: a heavy beam along the top, the dark of the roof under it, and a
+    tie-beam's end with its brace now and then (from the plate's beam cells, row 0 columns 9 and 13)."""
+    src = _tv(13 if v in (1, 4) else 9, 0)
+    img = src.copy()
+    for y in range(T):
+        for x in range(T):
+            if not img.getpixel((x, y))[3]:
+                put(img, x, y, NI[1])
+    for x in range(T):
+        put(img, x, 15, INK)
+    return img
+
+
+def rafters_region():
+    blocks = [_rafter_tile(0) for _ in range(16)]
+    fills = [_rafter_tile(v) for v in range(6)]
+    return {'name': 'rafters', 'block': blocks, 'fill': fills, 'top': [], 'top_list': [], 'under': [], 'under_list': []}
+
+
+THEMES.append(Cantina())

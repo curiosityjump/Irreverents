@@ -7,11 +7,20 @@
   ],
   "layers": [
     {
+      "image": "backdrops/sky-tall.png",
+      "parallax": 0,
+      "y": "top",
+      "offsetY": -200,
+      "repeatX": true,
+      "pin": "room"
+    },
+    {
       "image": "backdrops/sky-clouds.png",
       "parallax": 0.1,
       "y": "top",
-      "offsetY": 4,
-      "repeatX": true
+      "offsetY": -110,
+      "repeatX": true,
+      "pin": "room"
     },
     {
       "image": "backdrops/far-hills.png",
