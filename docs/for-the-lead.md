@@ -50,20 +50,6 @@ question for the owner, blocking or not, goes to
 
 *(Empty. Append below.)*
 
-### step-2-body.md, 2026-11-23
-
-**Flag:** `npm run gates` reads gate A as passing on the twelve `step2-body-*` scenarios alone. It will say so before the hit's scenarios land, so the count in `docs/plan.md` can read true early. Not chased: the gates script is Step 1's.
-
-**Flag:** no `src/sim/body-state.ts` (or any "may this player act" helper) was on `main` when I finished, so `switch` and `flap` ask only Step 1's `heldBy` (`src/sim/effects.ts`): a held player's press is ignored, checked by a one-off script and not by a scenario (nothing can hold a player in a scenario yet). A flattened player can still switch and flap. Both verbs need the hit's helper in place of `heldBy` when it exists (`docs/mechanisms/party-and-switching.md`, "known gaps"). Carrying something while switching to a member too weak to hold it is also unhandled, and is the hit's to decide.
-
-**Flag:** switching can strand someone in a room that needs the infiltrator. A crawls into a chamber as the infiltrator and switches to the flyer; B then switches to the infiltrator; A cannot become the infiltrator again until B lets go of it. With three players every member is taken and nobody can switch at all. Nothing in the simulation is stuck inside a wall, but "there is always a way out" for the room is Step 3's way-out check to cover (it runs per member, not per who is free). Not chased: the fix is a design choice (swap with a friend is "not approved" in the library).
-
-**Note:** the live page still passes `content.game.playerCharacter` (`hero`), which has no `switch` verb, so Q does nothing live until Step 1 stops passing a character. `spawnPlayer` without one is on `main` since 792b0aa.
-
-**Note:** in `graybox-hall` the first platform is 3 tiles up. The grappler (peak about 52 px) and infiltrator (about 51 px) clear it with 3 to 4 px to spare; the flyer's ground jump (about 47 px) does not, by design, and needs one flap. If Step 3's rooms use 3-tile steps, that margin is thin: `jumpSpeed` in `content/tuning.json`.
-
-**Note:** a third scenario beyond the brief's list, `step2-body-switch-midair-no-flaps`, and a fourth, `step2-body-flyer-coyote-jump-not-flap`, cover two rules I added (both in the decisions log or the mechanism writeup).
-
 ## Format
 
 One entry per item, appended, never edited or deleted by the session that

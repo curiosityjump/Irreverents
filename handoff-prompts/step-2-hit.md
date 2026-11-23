@@ -135,6 +135,22 @@ Agreed by message with the Step 1, 3 and 4 leads; use these exactly.
   released, moved to a room and place). When it appears, emit those
   for players as well; until then, change the entity directly.
 
+## Handed to you by the body slice (added 04:46 UTC)
+
+The body worker finished at 75da7ee. Three things are now yours:
+
+- `src/sim/verbs/switch.ts` and `flap.ts` ask only Step 1's `heldBy`.
+  When your act-or-not helper exists, make both use it (a flattened
+  or flying player cannot switch or flap), and add
+  `step2-hit-held-cannot-switch`: a held player presses `switch` and
+  `jump`: no switch, no flap, and the jump breaks free.
+- A carrier who switches to a member too weak for what they carry:
+  decide (suggested: the thing is set down at their feet, a
+  `released` event), `DRAFT:`, with a scenario.
+- Effects: read `docs/architecture.md`, "Effects on a player", and my
+  message of 04:42 UTC. Every launch, hold, release and come-back goes
+  through `emitEffect`.
+
 ## The derivation, already done
 
 Everything measured is in `docs/plan/step-2.md`, "Measure". What it

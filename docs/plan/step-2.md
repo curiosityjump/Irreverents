@@ -296,3 +296,24 @@ Shared by both briefs; a brief points here rather than repeating it.
   third brief (the `?tune` panel, both-screens checks once `npm run
   e2e` exists). Not yet asked of anyone: the exact effect events Step
   1's netcode delivers (asked of its lead, no answer yet).
+
+- **Lead, 04:47 UTC: the body slice reviewed at 75da7ee and closed;
+  worker archived, brief deleted by it.** Re-run by the lead: build,
+  check (all scenarios), and three controls each failing the right
+  scenario (flyer `flaps` 0; infiltrator box 26 px tall; the "nobody
+  else is playing it" test removed from `switch.ts`). Thirteen
+  scenarios, renamed by the lead to `step2-body-*`. For signal 3:
+  `step2-body-infiltrator-fits-gap` (+ `-grappler-stopped-by-gap`,
+  `-flyer-stopped-by-gap`), `step2-body-flyer-reaches-ledge` (+
+  `-grappler-misses-ledge`, `-infiltrator-misses-ledge`); the
+  grappler's third is the hit worker's. For signal 4:
+  `step2-body-switch-two-players`, `-switch-solo`,
+  `-switch-refused-in-gap`, `-spawn-different-members`. **Not verified
+  by the lead:** the worker's screenshot of the three side by side; a
+  held player's refused switch (no scenario can hold a player yet;
+  handed to the hit brief); anything on the live page, where a player
+  is still `hero` until Step 1's page stops naming a character (its
+  lead has the call). **Gate A is not passing yet** whatever `npm run
+  gates` prints: signals 1, 2 and 5 have no scenario. Record: mechanism
+  `docs/mechanisms/party-and-switching.md`. One question filed in
+  `docs/questions-inbox.md` (a friend taking the hero you need).

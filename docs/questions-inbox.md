@@ -59,3 +59,11 @@ wording when it rewrites an entry.
 - **Source:** `docs/mechanisms/deploy.md`, "Traps"; `docs/for-the-orchestrator.md` entry of 04:40 UTC (cleared)
 - **Blocking:** no
 
+### Q-? · When a friend takes the hero you need to get back out
+- **Asked by:** lead, Step 2, `session_017WiGzGRnRoAeW5Ep5iSycV`, 2026-11-23 04:45 UTC, parent `session_017WiGzFWfLir1ATiSP7c5E5`
+- **Question:** Each hero can be played by only one person at a time (your rule), and the switch button only offers heroes nobody is playing. So this can happen: you crawl through a tiny gap as the small hero, switch to the flyer inside, and your friend then switches to the small hero. You cannot crawl back out until they switch off it; with three players every hero is taken and nobody can switch at all. Nobody is ever stuck inside a wall, and your friend can free you with one press. Options: (a) leave it, friends sort it out by talking; (b) let a press ask the friend to swap (your library calls a consent swap "sensible … but not approved"); (c) let the party hold more heroes than players so one is always free.
+- **Unblocks:** nothing tonight; it is how switching feels with two or three players.
+- **Recommendation:** (a) for the first morning, then (c) once more heroes exist.
+- **Answer goes to:** `docs/plan/step-2.md` "What's decided"
+- **Source:** this entry; `docs/mechanisms/party-and-switching.md`, "known gaps"
+- **Blocking:** no
