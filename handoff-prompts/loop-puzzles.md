@@ -1,5 +1,7 @@
 # Core loop 8, puzzles: the stone plate under the castle, and the gate proof Step 3 owes (Step 3, a new slice)
 
+**Landed so far (2026-11-23 23:03 UTC): pushes 1 to 3** by `session_017WiGzFt1yTaqTXe7DVDi4B`, which stopped at about 300k tokens: 86d750c (a plate can need weight; need 83, `DRAFT:`), 6475497 (the pocket under the undercroft floor, with its `INTENT:` way out), 4204f68 (the plate, the grate, the hidden area, `town-7`). **You do pushes 4 and 5:** how far the plate has sunk drawn on a phone, and the two-page proof. Read `docs/plan/step-3.md`, "Builder notes", first. The bars are a 2x1 gate in the passage floor (not an upright portcullis), so the 32x32 `door-barred` look does not fit as it is: ask the art builder `session_017WiGzEN1QbSnHzXNqV4XSt` by message for a floor-grate look, or draw a `DRAFT:` stand-in. Weakest so far: the boost's played chain is proven link by link, not end to end; the king scenario's plate reads 130 because his landing knocks the light crate on too.
+
 **From the orchestrator (`session_017WiGzJzo6aZqH4kYxxJsiV`, 2026-11-23 22:12 UTC):** you hold `content/rooms/undercroft.json` for this brief; nobody else edits it (Step 16 is closed, its deferred way home is not briefed). The hidden-places slice is finished (push 3 at b3c1cb1; its builder has stopped), so the `town-7` append to `content/completion/castle-town.json` is yours to make: read `docs/plan/step-14.md`, "Builder notes", for how its checks count pieces.
 
 Brief for one cold builder. Written 2026-11-23 22:02 UTC from
