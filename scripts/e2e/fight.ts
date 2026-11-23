@@ -38,25 +38,33 @@ const GUARD = 'street-guard';
 const guardX = (ph: Phone): Promise<number | null> =>
   ph.page.evaluate((id: string) => (window as any).irreverents.drawn.entities.find((e: any) => e.id === id)?.x ?? null, GUARD);
 /**
- * The most the guard's drawn x moves within any 150 ms, over `ms`: a blow,
- * not his walk (people walk at 40 px a second, 6 px in 150 ms).
+ * The most the guard's drawn x moves within any 300 ms, over `ms`, and
+ * whether his rage bark was drawn meanwhile. A grappler's blow carries him
+ * about 50 px; his walk is 12 px in 300 ms. On live the drawn guard is
+ * smoothed and late, so a shorter window under-reads a blow and over-reads
+ * a correction (measured on live: 14-22 px with no blow landing).
  */
-const guardJump = (ph: Phone, ms: number): Promise<number> =>
+const guardJump = (ph: Phone, ms: number): Promise<{ most: number; rage: boolean }> =>
   ph.page.evaluate(
     ([id, dur]: [string, number]) =>
-      new Promise<number>((resolve) => {
+      new Promise<{ most: number; rage: boolean }>((resolve) => {
         const t0 = performance.now();
         const pts: { t: number; x: number }[] = [];
         let most = 0;
+        let rage = false;
         const tick = (): void => {
           const t = performance.now() - t0;
-          const g = (window as any).irreverents.drawn.entities.find((e: any) => e.id === id);
+          // Read afresh each frame: a page that reloads (a deploy landing mid-run) has none for a moment.
+          const irr = (window as any).irreverents;
+          const bark = irr?.content?.npcs?.guard?.barks?.rage as string | undefined;
+          const g = irr?.drawn?.entities?.find((e: any) => e.id === id);
           if (g) {
             pts.push({ t, x: g.x });
-            while (pts.length && pts[0]!.t < t - 150) pts.shift();
+            while (pts.length && pts[0]!.t < t - 300) pts.shift();
             for (const p of pts) most = Math.max(most, Math.abs(g.x - p.x));
           }
-          if (t > dur) return resolve(most);
+          if (bark && (irr?.drawn?.words ?? []).includes(bark)) rage = true;
+          if (t > dur) return resolve({ most, rage });
           requestAnimationFrame(tick);
         };
         requestAnimationFrame(tick);
@@ -128,30 +136,35 @@ export async function fightFacts(kit: Kit & { tag: string }): Promise<void> {
     const kind = (await me(ph))?.kind as string;
     const inStreet = await walkInto(ph, 1, 'castle-street');
 
-    // Steer at the guard and tap attack until his drawn x has jumped 10 px or more three times (at most 8 taps).
+    // Steer at the guard and tap attack until his drawn x has jumped 30 px or more four times, or his rage
+    // bark is drawn (at most 12 taps; rage needs hits he sees, and on live some taps miss).
     const jumps: number[] = [];
     let taps = 0;
+    let rage = false;
     // First get past him, between him and the courtyard door: from his right, a punch sends him back up the
     // street, not out through that door (measured: a grappler's punch from his left carried him into the courtyard).
     if (inStreet) await passGuard(ph);
-    while (inStreet && taps < 8 && jumps.filter((j) => j >= 10).length < 3) {
+    while (inStreet && taps < 12 && !rage && jumps.filter((j) => j >= 30).length < 4) {
       // Hold the stick toward him until the page draws the two bodies touching, then tap attack at once:
       // he walks his beat, and standing still first lets him walk out of reach.
-      const close = await closeIn(ph);
-      const watch = guardJump(ph, 700);
+      await closeIn(ph);
+      const watch = guardJump(ph, 900);
       await tap(ph, 'attack');
       taps++;
-      jumps.push(Math.round(await watch));
+      const r = await watch;
+      jumps.push(Math.round(r.most));
+      rage ||= r.rage;
     }
 
     // Its own last move must not count: wait until the page draws it standing still.
     await settle(ph);
-    // Now touch nothing, and watch the page's own character for 30 s: did it move 20 px or more within any 1 s?
+    // Now touch nothing, and watch the page's own character for 30 s: did it move 20 px or more within any
+    // 1 s, in one room (a walk door carries a body hundreds of pixels in a frame)?
     const seen = (await ph.page.evaluate(
       ([id, dur]: [string, number]) =>
         new Promise<any>((resolve) => {
           const t0 = performance.now();
-          const pts: { t: number; x: number }[] = [];
+          const pts: { t: number; x: number; room: string }[] = [];
           let best = { d: 0, at: -1 };
           const words = new Set<string>();
           let gMin = Infinity;
@@ -159,8 +172,8 @@ export async function fightFacts(kit: Kit & { tag: string }): Promise<void> {
           const tick = (): void => {
             const d = (window as any).irreverents.drawn;
             const t = performance.now() - t0;
-            pts.push({ t, x: d.me.x });
-            while (pts.length && pts[0]!.t < t - 1000) pts.shift();
+            pts.push({ t, x: d.me.x, room: d.room });
+            while (pts.length && (pts[0]!.t < t - 1000 || pts[0]!.room !== d.room)) pts.shift();
             for (const p of pts) {
               const moved = Math.abs(d.me.x - p.x);
               if (moved > best.d) best = { d: moved, at: Math.round(t) };
@@ -182,8 +195,8 @@ export async function fightFacts(kit: Kit & { tag: string }): Promise<void> {
     fact(
       'fight-back',
       inStreet && seen.best >= 20,
-      `by touch, a phone's ${kind} walked into the castle street (${inStreet}), tapped attack ${taps} time(s) at the street guard (the most his drawn x moved within 150 ms after each tap: ${jumps.join(', ') || 'never'} px), then touched nothing: ` +
-        `in ${(seen.end / 1000).toFixed(1)} s its own character moved at most ${seen.best} px within 1 s (${seen.best >= 20 ? `at ${(seen.at / 1000).toFixed(1)} s` : 'expected 20 px or more'}); it ended at x ${seen.x} in ${seen.room}; the guard was drawn between x ${seen.gMin} and ${seen.gMax}; words drawn meanwhile: ${seen.words || 'none'}`,
+      `by touch, a phone's ${kind} walked into the castle street (${inStreet}), tapped attack ${taps} time(s) at the street guard (the most his drawn x moved within 300 ms after each tap: ${jumps.join(', ') || 'never'} px; his rage bark drawn: ${rage}), then touched nothing: ` +
+        `in ${(seen.end / 1000).toFixed(1)} s its own character moved at most ${seen.best} px within 1 s in one room (${seen.best >= 20 ? `at ${(seen.at / 1000).toFixed(1)} s` : 'expected 20 px or more'}); it ended at x ${seen.x} in ${seen.room}; the guard was drawn between x ${seen.gMin} and ${seen.gMax}; words drawn meanwhile: ${seen.words || 'none'}`,
     );
   } finally {
     await ph.ctx.close();

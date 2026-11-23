@@ -528,3 +528,20 @@ scenarios-only runner (content load plus every scenario: 1 min 48 s):
 - **Friendly fire seen:** the villain's swing at the hero also moved
   `guard-1` (from his post at x 184 to 78 by tick 900, in the probe). Left as it is (`DRAFT:`, the
   step's list).
+- **`fight-back` made robust for live (after push 1).** On live (push 1
+  deployed) the first version failed: taps missed the smoothed, late
+  drawn guard, and walk/smoothing moves of 14–22 px were counted as
+  blows, so it stopped after 5 taps before he raged. Now a blow is 30 px
+  or more in 300 ms (his walk is 12), tapping stops at four blows or once
+  his rage bark ("SEIZE THEM!!") is drawn (at most 12 taps), and the 1 s
+  window restarts on a room change. Measured: live 3 of 3 (rage, then
+  his blow 4.5–11.4 s later); locally the server's effect to the page is
+  `push vx 150, vy -82.5` from `street-guard`. **Control** (guard and
+  shopkeeper back to `["move"]`, numbers out, rebuilt, fresh server):
+  false, no effect at all in 30 s; also false with the villain's swing
+  removed too.
+- **A wrong turn worth knowing:** for half an hour my scratch driver's
+  controls "passed", because a server from an earlier crashed run was
+  still listening on its port and served the old build. Start a check's
+  server on a port nothing holds (or stop it by pid) before trusting a
+  control.
