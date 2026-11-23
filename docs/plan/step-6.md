@@ -120,8 +120,53 @@ tempt them first.
 
 ## Measure
 
+Lead `session_017WiGzH9B4usC2uz4woP8Sa`, 04:53–05:00 UTC, `main` at 1ab71d9:
+
+- The throne room is on `main` (20×16 tiles; dais = row 14, columns 0–7);
+  nothing is placed in it (`content/placements/throne-room.json` absent).
+- The game still starts in `graybox-hall` (`content/game.json`); Step 3's
+  worker switches it. Until then the king is on `main` but not on screen.
+- Any character kind is hittable and throwable with no code; a body that
+  cannot act runs no verb but systems still run, so the speech is a system.
+- Scenarios stop at 18,000 ticks (5 minutes) and copy the world each
+  tick: "no repeat in thirty minutes" is a check on the text, and the
+  three-hour proof (signal 3) needs its own fast runner in slice B.
+
+## What the lead decided (also in `docs/decisions-log.md`)
+
+- The speech count lives on the king's body, runs from world start, and
+  nothing stops it: held, flying, knocked out, another room. `DRAFT:`.
+- The speech is an authored opening plus table-built digressions that
+  never run out (line n is a pure function of n and the data); the file
+  is refused if a line repeats.
+- Only the grappler can lift him (weight as `dummy-heavy`); anyone can
+  hit him. `DRAFT:`.
+- His words show over his head, only to players in the room he is in.
+
 ## Briefs
+
+- **Slice A** (`handoff-prompts/step-6-a-king-and-speech.md`): the king,
+  a throne and a few crates placed by data; the speech as data; the
+  speech clock; the ribbon. Signals 1 (its scripted half) and 4.
+- **Slice B (not written):** the window (asked of the Step 3 lead,
+  04:55 UTC, when `breakable` lands), the court as Step 4's people
+  (asked of the Step 4 lead; needs their alarm slice on `main`), the
+  listening count and the credits, and a fast headless runner for
+  signal 3.
 
 ## Open with the owner
 
+Nothing blocking. Taste, in the morning: the speech's words.
+
 ## Handoff notes
+
+*(Newest last.)*
+
+- **Lead `session_017WiGzH9B4usC2uz4woP8Sa`, 05:00 UTC.** Claimed,
+  measured, slice A briefed and its worker launched. Told the Step 2
+  lead (two new character files), the Step 4 lead (a new placements file
+  for the throne room, no `npc` fields yet) and asked the Step 3 lead for
+  the window. Next: on "slice A at <commit>", re-run build and check,
+  watch scenario 3's control fail myself, look at the page with the
+  start room set to the throne room; then write slice B from what Steps
+  3 and 4 have landed by then.
