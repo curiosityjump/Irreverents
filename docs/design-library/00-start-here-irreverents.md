@@ -2,6 +2,10 @@
 
 ---
 
+ART DELIVERY QUALITY — CURRENT CONTROLLING RULE (22 NOV 2026)
+
+The owner rejected the newly delivered C02 heroes as crudely drawn, static and nothing like the earlier reference. Asset fulfillment must be ART FIRST: compare the actual original visual reference, create visually expressive original source art, then convert/refine and package true playable sprites/tiles with demonstrable animation, alpha/grid correctness and native-size gameplay QA. A valid PNG/manifest or rough geometric placeholder does NOT close a request. Continue without owner sign-off, but leave poor results IN PROGRESS until fixed. Claude/ChatGPT must follow https://docs.google.com/document/d/17OlSfBfTnUEUTmbo-zcsl4VrSn1mPny-zAP6kZaiodU/edit and the updated shared asset protocol.
+
 CLAUDE QUICKSTART — ASSET REQUESTS
 
 Use the copyable request template: https://docs.google.com/document/d/1ntJHj5rYYi59_o4-0c5Pf-rFYKcJvX1ZlUP43nCJaUw/edit . Create a request in https://drive.google.com/drive/folders/1m2vTlbSVoPJg5TwESbcWH4xoCcSOIKCp when art or UI assets are needed; include target format, size and use case. Full fulfillment process: https://docs.google.com/document/d/1oBpJKI2P7v7rwoMku-TbcFuVQe2iajddK6v2i5Ro0G0/edit . The hourly scheduled check attempts delivery and moves completed request Docs to https://drive.google.com/drive/folders/15X6uq3YK-NdKbQQt0FqaXY46msSW38Jm . Assets can be implemented immediately, then improved; no approval bottleneck.

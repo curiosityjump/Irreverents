@@ -1,0 +1,285 @@
+{
+  "pack": "Irreverents A01-01",
+  "sample_rate": 44100,
+  "channels": 1,
+  "formats": [
+    "wav",
+    "ogg"
+  ],
+  "assets": [
+    {
+      "name": "footstep",
+      "file": "footstep.ogg",
+      "wav": "footstep.wav",
+      "duration_seconds": 0.085,
+      "description": "noise-style original retro sound effect"
+    },
+    {
+      "name": "jump",
+      "file": "jump.ogg",
+      "wav": "jump.wav",
+      "duration_seconds": 0.23,
+      "description": "up-style original retro sound effect"
+    },
+    {
+      "name": "land",
+      "file": "land.ogg",
+      "wav": "land.wav",
+      "duration_seconds": 0.18,
+      "description": "thud-style original retro sound effect"
+    },
+    {
+      "name": "swing",
+      "file": "swing.ogg",
+      "wav": "swing.wav",
+      "duration_seconds": 0.22,
+      "description": "down-style original retro sound effect"
+    },
+    {
+      "name": "hit",
+      "file": "hit.ogg",
+      "wav": "hit.wav",
+      "duration_seconds": 0.19,
+      "description": "crack-style original retro sound effect"
+    },
+    {
+      "name": "heavy_hit",
+      "file": "heavy_hit.ogg",
+      "wav": "heavy_hit.wav",
+      "duration_seconds": 0.4,
+      "description": "thud-style original retro sound effect"
+    },
+    {
+      "name": "grab",
+      "file": "grab.ogg",
+      "wav": "grab.wav",
+      "duration_seconds": 0.19,
+      "description": "blip-style original retro sound effect"
+    },
+    {
+      "name": "throw",
+      "file": "throw.ogg",
+      "wav": "throw.wav",
+      "duration_seconds": 0.28,
+      "description": "down-style original retro sound effect"
+    },
+    {
+      "name": "suplex_slam",
+      "file": "suplex_slam.ogg",
+      "wav": "suplex_slam.wav",
+      "duration_seconds": 0.66,
+      "description": "slam-style original retro sound effect"
+    },
+    {
+      "name": "hurt",
+      "file": "hurt.ogg",
+      "wav": "hurt.wav",
+      "duration_seconds": 0.27,
+      "description": "down-style original retro sound effect"
+    },
+    {
+      "name": "power_gain",
+      "file": "power_gain.ogg",
+      "wav": "power_gain.wav",
+      "duration_seconds": 0.52,
+      "description": "arpeggio-style original retro sound effect"
+    },
+    {
+      "name": "power_knocked_loose",
+      "file": "power_knocked_loose.ogg",
+      "wav": "power_knocked_loose.wav",
+      "duration_seconds": 0.35,
+      "description": "down-style original retro sound effect"
+    },
+    {
+      "name": "pickup",
+      "file": "pickup.ogg",
+      "wav": "pickup.wav",
+      "duration_seconds": 0.2,
+      "description": "up-style original retro sound effect"
+    },
+    {
+      "name": "mode1_happy_blip",
+      "file": "mode1_happy_blip.ogg",
+      "wav": "mode1_happy_blip.wav",
+      "duration_seconds": 0.16,
+      "description": "blip-style original retro sound effect"
+    },
+    {
+      "name": "mode2_confused_warble",
+      "file": "mode2_confused_warble.ogg",
+      "wav": "mode2_confused_warble.wav",
+      "duration_seconds": 0.39,
+      "description": "warble-style original retro sound effect"
+    },
+    {
+      "name": "mode3_rage_buzz",
+      "file": "mode3_rage_buzz.ogg",
+      "wav": "mode3_rage_buzz.wav",
+      "duration_seconds": 0.43,
+      "description": "buzz-style original retro sound effect"
+    },
+    {
+      "name": "just_as_expected_jingle",
+      "file": "just_as_expected_jingle.ogg",
+      "wav": "just_as_expected_jingle.wav",
+      "duration_seconds": 1.35,
+      "description": "jingle-style original retro sound effect"
+    },
+    {
+      "name": "gibberish_voice_blip_1",
+      "file": "gibberish_voice_blip_1.ogg",
+      "wav": "gibberish_voice_blip_1.wav",
+      "duration_seconds": 0.13,
+      "description": "warble-style original retro sound effect"
+    },
+    {
+      "name": "gibberish_voice_blip_2",
+      "file": "gibberish_voice_blip_2.ogg",
+      "wav": "gibberish_voice_blip_2.wav",
+      "duration_seconds": 0.15,
+      "description": "warble-style original retro sound effect"
+    },
+    {
+      "name": "gibberish_voice_blip_3",
+      "file": "gibberish_voice_blip_3.ogg",
+      "wav": "gibberish_voice_blip_3.wav",
+      "duration_seconds": 0.12,
+      "description": "warble-style original retro sound effect"
+    },
+    {
+      "name": "gibberish_voice_blip_4",
+      "file": "gibberish_voice_blip_4.ogg",
+      "wav": "gibberish_voice_blip_4.wav",
+      "duration_seconds": 0.17,
+      "description": "warble-style original retro sound effect"
+    },
+    {
+      "name": "call_windup",
+      "file": "call_windup.ogg",
+      "wav": "call_windup.wav",
+      "duration_seconds": 0.46,
+      "description": "up-style original retro sound effect"
+    },
+    {
+      "name": "bell_clang",
+      "file": "bell_clang.ogg",
+      "wav": "bell_clang.wav",
+      "duration_seconds": 0.85,
+      "description": "bell-style original retro sound effect"
+    },
+    {
+      "name": "horn_blast",
+      "file": "horn_blast.ogg",
+      "wav": "horn_blast.wav",
+      "duration_seconds": 0.67,
+      "description": "horn-style original retro sound effect"
+    },
+    {
+      "name": "reinforcements_sting",
+      "file": "reinforcements_sting.ogg",
+      "wav": "reinforcements_sting.wav",
+      "duration_seconds": 0.8,
+      "description": "arpeggio-style original retro sound effect"
+    },
+    {
+      "name": "break_crack",
+      "file": "break_crack.ogg",
+      "wav": "break_crack.wav",
+      "duration_seconds": 0.36,
+      "description": "crack-style original retro sound effect"
+    },
+    {
+      "name": "crumble",
+      "file": "crumble.ogg",
+      "wav": "crumble.wav",
+      "duration_seconds": 0.69,
+      "description": "noise-style original retro sound effect"
+    },
+    {
+      "name": "door_open",
+      "file": "door_open.ogg",
+      "wav": "door_open.wav",
+      "duration_seconds": 0.46,
+      "description": "creak-style original retro sound effect"
+    },
+    {
+      "name": "door_locked",
+      "file": "door_locked.ogg",
+      "wav": "door_locked.wav",
+      "duration_seconds": 0.23,
+      "description": "thud-style original retro sound effect"
+    },
+    {
+      "name": "secret_found_chime",
+      "file": "secret_found_chime.ogg",
+      "wav": "secret_found_chime.wav",
+      "duration_seconds": 0.95,
+      "description": "arpeggio-style original retro sound effect"
+    },
+    {
+      "name": "component_collected",
+      "file": "component_collected.ogg",
+      "wav": "component_collected.wav",
+      "duration_seconds": 0.42,
+      "description": "arpeggio-style original retro sound effect"
+    },
+    {
+      "name": "alarm_destroyed",
+      "file": "alarm_destroyed.ogg",
+      "wav": "alarm_destroyed.wav",
+      "duration_seconds": 0.68,
+      "description": "slam-style original retro sound effect"
+    },
+    {
+      "name": "meow",
+      "file": "meow.ogg",
+      "wav": "meow.wav",
+      "duration_seconds": 0.46,
+      "description": "meow-style original retro sound effect"
+    },
+    {
+      "name": "hiss",
+      "file": "hiss.ogg",
+      "wav": "hiss.wav",
+      "duration_seconds": 0.38,
+      "description": "noise-style original retro sound effect"
+    },
+    {
+      "name": "pounce",
+      "file": "pounce.ogg",
+      "wav": "pounce.wav",
+      "duration_seconds": 0.29,
+      "description": "up-style original retro sound effect"
+    },
+    {
+      "name": "tap",
+      "file": "tap.ogg",
+      "wav": "tap.wav",
+      "duration_seconds": 0.07,
+      "description": "blip-style original retro sound effect"
+    },
+    {
+      "name": "party_swap",
+      "file": "party_swap.ogg",
+      "wav": "party_swap.wav",
+      "duration_seconds": 0.29,
+      "description": "arpeggio-style original retro sound effect"
+    },
+    {
+      "name": "menu_open",
+      "file": "menu_open.ogg",
+      "wav": "menu_open.wav",
+      "duration_seconds": 0.2,
+      "description": "up-style original retro sound effect"
+    },
+    {
+      "name": "menu_close",
+      "file": "menu_close.ogg",
+      "wav": "menu_close.wav",
+      "duration_seconds": 0.2,
+      "description": "down-style original retro sound effect"
+    }
+  ],
+  "notes": "Original procedurally synthesized retro handheld cues. OGG Vorbis for browser use; WAV masters. No copyrighted samples. Test loudness on physical iPhone."
+}

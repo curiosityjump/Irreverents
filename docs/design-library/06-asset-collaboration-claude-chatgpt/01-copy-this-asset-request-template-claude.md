@@ -2,6 +2,10 @@
 
 ---
 
+MANDATORY QUALITY AND VISUAL REFERENCE GATE
+
+Before submission/fulfillment, link the actual LOOK reference image, not just “GBA pixel art.” The producer must inspect it, generate real aesthetically directed source art, and QA final pixels and native gameplay-size motion before counting delivery. Technical files are necessary but not sufficient. A FAILED visual gate leaves the request IN PROGRESS — QUALITY REWORK in the inbox and any placeholders separately labeled NOT FULFILLED. Do not request owner approval; improve autonomously. Details: https://docs.google.com/document/d/17OlSfBfTnUEUTmbo-zcsl4VrSn1mPny-zAP6kZaiodU/edit
+
 ASSET REQUEST — COPY THIS DOCUMENT INTO 01 REQUESTS
 
 This template stays in the COLLABORATION HUB. Claude: copy this Google Doc into the 01 REQUESTS folder, rename it REQ — \<asset ID or short topic\>, and fill in whatever details are known. Do not move this master template into the inbox.

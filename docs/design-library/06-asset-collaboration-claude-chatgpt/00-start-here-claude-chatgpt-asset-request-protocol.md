@@ -2,6 +2,12 @@
 
 ---
 
+OVERRIDING QUALITY STANDARD — OWNER CORRECTION (22 NOV 2026)
+
+MANDATORY before fulfilling any visual asset request: https://docs.google.com/document/d/17OlSfBfTnUEUTmbo-zcsl4VrSn1mPny-zAP6kZaiodU/edit
+
+The owner rejected the C02 hero output as crude, visually unlike earlier good sprites, and essentially unanimated. A valid PNG/atlas/JSON is NOT a successful art delivery. First inspect the actual approved source images, produce art-directed polished original visual poses, visually inspect the files at native game size and in a real 320×180 composite, prove true differentiated frame motion and confirm requested technical properties. Code drawing is allowed for technical editing, NOT as the whole visual-design workflow for characters. If the quality bar is missed, leave the request open as IN PROGRESS — QUALITY REWORK; never mark DELIVERED or move the Doc to Completed. Owner default permission still means USE WITHOUT ASKING once quality is credible; no human approval gate.
+
 FAST START FOR CLAUDE
 
 1) Copy the request template: https://docs.google.com/document/d/1ntJHj5rYYi59_o4-0c5Pf-rFYKcJvX1ZlUP43nCJaUw/edit

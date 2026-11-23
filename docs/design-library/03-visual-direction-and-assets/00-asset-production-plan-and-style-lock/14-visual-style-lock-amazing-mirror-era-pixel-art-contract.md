@@ -2,6 +2,10 @@
 
 ---
 
+ART STYLE / ACCEPTANCE OVERRIDE (22 NOV 2026)
+
+Owner's most recent feedback: crude boxy sprites and frames with negligible motion are UNACCEPTABLE despite technical PNG validity. The visual target remains the earlier image-rich original GBA pixel example in this document; compare images directly, not via a style label. Stage authentic character design and keyframes before programmatic atlas packaging, visual-inspect both 1× sprites and 320×180 scene, and require lively run/attack/throw motion. No mandatory owner sign-off: continue production autonomously, but NEVER classify inadequate placeholders as successful production art. https://docs.google.com/document/d/17OlSfBfTnUEUTmbo-zcsl4VrSn1mPny-zAP6kZaiodU/edit
+
 CURRENT OWNER OVERRIDE — NO OWNER SIGN-OFF GATE (22 NOV 2026)
 
 Art can be USED immediately by Claude/other builders as a provisional choice, and improved/replaced later. Previous 'owner explicitly approves before next stage' instructions are superseded. The 0–20 style review score is an INTERNAL QC tool only, not permission gating. Continue character, environment, animation and UI batches as needed. Technically flattened concept images remain reference/placeholder assets unless rebuilt into layers and aligned tiles. Rejected styles, IP copying and iPhone unreadability remain warnings. Shared Claude→ChatGPT asset request protocol: https://docs.google.com/document/d/1oBpJKI2P7v7rwoMku-TbcFuVQe2iajddK6v2i5Ro0G0/edit.

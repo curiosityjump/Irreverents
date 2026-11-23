@@ -30,6 +30,36 @@ For EVERY MATERIAL CHANGE in this project folder, AFTER the changed Drive files 
 
 ## 
 
+## 2026-11-22 · 11:31 PM EST · ChatGPT — OWNER QUALITY CORRECTION: art-first acceptance; C02 v1 visually rejected
+
+## Inspected original approved pixel-art and character roster images against actual delivered C02 hero sheet previews. Both heroes are crude near-identical geometric box figures with almost static frames; owner rejects them as finished art. Created a CONTROLLING visual quality contract: original image-art direction and key poses FIRST; real motion, actual image inspection against prior visual references, native 320×180 compositing, transparent sprite/tile/manifest checks; no automated completion for merely technically valid placeholders. User's no-preapproval/iterate-default rule remains. Updated and verified hourly asset desk automation to apply this contract and prioritize Claude's C02 revision. Marked v1 artwork REJECTED (retained for format compatibility only), elevated C02 revision request to BLOCKING, and updated handoff, request template, art plan, style lock, asset index, decision register and START HERE. No replacement hero art was generated in this process-only correction; the revised request remains open.
+
+## Changed / routing:
+
+## - New controlling quality contract: https://docs.google.com/document/d/17OlSfBfTnUEUTmbo-zcsl4VrSn1mPny-zAP6kZaiodU/edit
+
+## - Claude ↔ ChatGPT asset handoff: https://docs.google.com/document/d/1oBpJKI2P7v7rwoMku-TbcFuVQe2iajddK6v2i5Ro0G0/edit
+
+## - Asset request template: https://docs.google.com/document/d/1ntJHj5rYYi59_o4-0c5Pf-rFYKcJvX1ZlUP43nCJaUw/edit
+
+## - BLOCKING C02 hero revision request: https://docs.google.com/document/d/1velYJklnMai16cH12kYu-BIlyhx_p-6NlSpO41vfuKw/edit
+
+## - Rejected original C02 hero art: https://drive.google.com/drive/folders/1D34ZytHeo2RUD2un9ox20sB4TD3bajpn
+
+## - Original C02 delivery record, now visibly rejection-labeled: https://docs.google.com/document/d/1bxtTcbU6dvD0j5KrSs12ozIIg35gh7xcXwQ663vQbPA/edit
+
+## - 13 Asset Production Plan: https://docs.google.com/document/d/1reKfubHb_S6mSyn89kTSm8T2bSRd67E2MptsL24skL8/edit
+
+## - 14 Visual Style Lock: https://docs.google.com/document/d/1TYZcSUJ6pRxWCp76f2mrvwAAz90PRCYVRAWiejmJFFI/edit
+
+## - 10 Visual Direction and Index: https://docs.google.com/document/d/1VJOvGqbT3wcqgD8-PaXpftODBr42ChGmqdBYHvx7_i0/edit
+
+## - 11 Decision Register: https://docs.google.com/document/d/1vlwf5VZgwT0E0cKqYF4o0EI5LhuR4iiZxCyVUUreytU/edit
+
+## - 00 START HERE: https://docs.google.com/document/d/1-ASnTbCLAXSi_WCOl_7KNuUgelLXLmiZFKiN6APao2s/edit
+
+## 
+
 ## 2026-11-22 · 11:16 PM EST · ChatGPT — C02-02/C02-03 two playable hero PROTOTYPE sprite sheets delivered
 
 ## Fulfilled Claude's BLOCKING request with two original 192×256 transparent PNG sheets (32px grid, 8 animation rows), JSON animation manifests, previews, README and ZIP. The frames are simple programmatically drawn prototype pixel art, not polished final character animation; motion and expressiveness require refinement. Edited request with direct file links and limitations, marked delivered and moved to Delivered queue. No GitHub changes or deployment.
@@ -217,3 +247,5 @@ Selected restrained gameplay-scale GBA pixel-art direction reminiscent of Kirby 
 - Current exploratory images: https://drive.google.com/drive/folders/1keZSTY0jaKXupkZ8TXZMW11c9e5s\_\_C2
 
 - E01 prototype kit: https://drive.google.com/drive/folders/1wSx5SxZf0lRaQqKqgPP-fy_SenjAKfYB
+
+2026-11-22 11:29 PM EST — A01-01 SOUND EFFECTS DELIVERED. 39 original synthesized cues as 78 OGG/WAV files in ZIP, with separate JSON manifest and README. Request marked DELIVERED and moved out of inbox. Art direction remains GBA-style; audio prototype requires in-game/iPhone listening test. Request: https://docs.google.com/document/d/13982Ar8l96vxxHNBLAjCZMQwutOvuaXTq8P4YLFY7R8/edit . Asset folder: https://drive.google.com/drive/folders/1xvUsHDjxurJpsVwgcnFJkIqZ9lmGi-2t . ZIP: https://drive.google.com/file/d/1PLmDnw1oqWfYqKeRXa6YVSmKiJQSB914/view . Manifest: https://drive.google.com/file/d/1z4T_zHuUCI7ajTq4F8o5xFgVVEiRWQs\_/view . No GitHub/Railway changes.

@@ -2,6 +2,10 @@
 
 ---
 
+ART PRODUCTION OVERRIDE — QUALITY FIRST, NO OWNER APPROVAL BOTTLENECK (22 NOV 2026)
+
+The earlier owner-signoff stop gates and “placeholder as deliverable” treatment are superseded. Owner permits continuous use/iteration by default, BUT supplied visual art MUST match actual selected expressive GBA-era reference images and have demonstrably readable animation, not crude programmatic box sprites. Create a short artistic source/key-pose proof, inspect native frames at phone scale, build correct sprites/atlases, QA actual pixels and motion in a 320×180 scene, then deliver. If unsuccessful, REWORK rather than mark complete. The previous C02 hero v1 is VISUALLY REJECTED. See controlling visual quality gate: https://docs.google.com/document/d/17OlSfBfTnUEUTmbo-zcsl4VrSn1mPny-zAP6kZaiodU/edit
+
 CURRENT OWNER OVERRIDE — BUILD NOW, REFINE LATER (22 NOV 2026)
 
 Everything creative is approved for use/experimentation BY DEFAULT. The owner explicitly prefers new assets be integrated and changed later rather than blocked awaiting review. All STOP-until-owner-approves gates below are obsolete as a workflow requirement. Continue S00-02, S00-03 and the rest of the backlog whenever useful; prioritize real iPhone-browser usability, original GBA-era readable art and modular technical assets. Internal QA and status labeling are still important, but absence of sign-off is not a blocker.

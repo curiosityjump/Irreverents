@@ -2,6 +2,10 @@
 
 ---
 
+CONTROLLING ART QUALITY CHANGE — 22 NOV 2026
+
+The earlier C02 hero v1 art is visually rejected (blocky near-static box characters). Previous artworks were richer, expressive and distinct; producing valid transparent sprite grids is not the same as matching the style. The shared process now requires direct comparison to actual approved image reference, art-first character/animation key poses, final visual inspection plus technical validation at native iPhone 320×180 gameplay scale. Do not close a request with weak placeholder art, but do continue creating without waiting for owner approval. Quality gate: https://docs.google.com/document/d/17OlSfBfTnUEUTmbo-zcsl4VrSn1mPny-zAP6kZaiodU/edit
+
 CURRENT ASSET WORKFLOW — NO OWNER REVIEW BOTTLENECK (22 NOV 2026)
 
 All new creative art candidates are approved by default for implementation/prototyping; use promptly, revise later. Earlier holds awaiting explicit owner approval are SUPERSEDED. Quality matters: prefer the original calm GBA pixel style, no copyright-confusing sprites and no misleading claims that flattened concepts are engine-ready sheets. Claude may request more assets via https://drive.google.com/drive/folders/1m2vTlbSVoPJg5TwESbcWH4xoCcSOIKCp; handoff/protocol https://docs.google.com/document/d/1oBpJKI2P7v7rwoMku-TbcFuVQe2iajddK6v2i5Ro0G0/edit; the automated check can see the queue. S00-01 batch https://drive.google.com/drive/folders/1BCT_Sao2sZNCygUCv0qSQcECtIlsmc2j is ready to USE NOW.

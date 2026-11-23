@@ -389,3 +389,9 @@ Collaboration hub: https://drive.google.com/drive/folders/1W_H99UY0Xne85PWK8Lb4Q
 Protocol: https://docs.google.com/document/d/1oBpJKI2P7v7rwoMku-TbcFuVQe2iajddK6v2i5Ro0G0/edit
 
 Existing S00-01 use-now references: https://drive.google.com/drive/folders/1BCT_Sao2sZNCygUCv0qSQcECtIlsmc2j
+
+D-096 OWNER OVERRIDE — HIGH-QUALITY ART, NOT GEOMETRIC PLACEHOLDERS (22 NOV 2026)
+
+The owner explicitly REJECTED the recent C02 character sprite output as crude, lacking genuine animation and failing to resemble the earlier expressive pixel visual target. Future Claude-to-ChatGPT asset deliveries MUST include visual-art-direction first, real source-image/pose QA, distinct character shapes/personality, and accurate frame motion plus technical alpha/grid/manifest tests. No programmatically drawn rectangle-man output is acceptable as a polished art delivery even if the PNG is mechanically valid. Use the actual visual references in Doc 14 and the following controlling QUALITY GATE: https://docs.google.com/document/d/17OlSfBfTnUEUTmbo-zcsl4VrSn1mPny-zAP6kZaiodU/edit
+
+D-097 The owner previously approved USE/ITERATION BY DEFAULT without personal pre-approval; that policy REMAINS. Default permission does not waive internal QA or acceptance. Poor or visually unvalidated output is marked IN PROGRESS — QUALITY REWORK and left in the inbox; temporary placeholders may be used only explicitly labeled NOT FULFILLED. Do not falsely deliver or move the request to Completed. Current C02 revision is priority; do not resurrect visually rejected v1.

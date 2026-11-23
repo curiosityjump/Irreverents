@@ -146,14 +146,45 @@
    "id": "1reKfubHb_S6mSyn89kTSm8T2bSRd67E2MptsL24skL8",
    "drive_path": "/03 Visual Direction and Assets/00 Asset Production Plan and Style Lock/13 — Art Asset Production Plan — Ordered Generation Backlog",
    "repo_path": "03-visual-direction-and-assets/00-asset-production-plan-and-style-lock/13-art-asset-production-plan-ordered-generation-backlog.md",
-   "sha256": "3ed24f8155fa9676d3f8b0ede644123324f6ffa5cfc1cfdc6bb4073af4532c15"
+   "sha256": "3b6fcbe95554357ad18493ab2bbcbfb712f46b2f9590949ec56d9180f1f9b83a"
   },
   {
    "kind": "doc",
    "id": "1TYZcSUJ6pRxWCp76f2mrvwAAz90PRCYVRAWiejmJFFI",
    "drive_path": "/03 Visual Direction and Assets/00 Asset Production Plan and Style Lock/14 — Visual Style Lock — Amazing Mirror-Era Pixel-Art Contract",
    "repo_path": "03-visual-direction-and-assets/00-asset-production-plan-and-style-lock/14-visual-style-lock-amazing-mirror-era-pixel-art-contract.md",
-   "sha256": "5797c68eb69276cab1a388344af65dbd3218f993e0cd9672c529ce9e17a49c35"
+   "sha256": "b18ec4e26cfccb3d117148209e5836c157515200c9ad193d9c6f29107c286a8a"
+  },
+  {
+   "kind": "folder",
+   "id": "1Wi9oUAPv_c6noytThA8Js5h2JfqE91P1",
+   "drive_path": "/03 Visual Direction and Assets/Audio"
+  },
+  {
+   "kind": "folder",
+   "id": "1xvUsHDjxurJpsVwgcnFJkIqZ9lmGi-2t",
+   "drive_path": "/03 Visual Direction and Assets/Audio/A01-01 — First SFX Pack"
+  },
+  {
+   "kind": "file",
+   "id": "1PLmDnw1oqWfYqKeRXa6YVSmKiJQSB914",
+   "drive_path": "/03 Visual Direction and Assets/Audio/A01-01 — First SFX Pack/A01-01_COMPLETE.zip",
+   "repo_path": "03-visual-direction-and-assets/audio/a01-01-first-sfx-pack/a01-01-complete/",
+   "sha256": "03c2838a357dbbfc26fca0e893dfa6d09e6a8ffd5c4bca6fc893c67fb1695ace"
+  },
+  {
+   "kind": "file",
+   "id": "1z4T_zHuUCI7ajTq4F8o5xFgVVEiRWQs_",
+   "drive_path": "/03 Visual Direction and Assets/Audio/A01-01 — First SFX Pack/manifest.json",
+   "repo_path": "03-visual-direction-and-assets/audio/a01-01-first-sfx-pack/manifest.json",
+   "sha256": "d8f3975bc27f76b263def426ce7e6c8e4597bd28b909e546546547bfc1465d7d"
+  },
+  {
+   "kind": "file",
+   "id": "17T-3uq3TvSSv7P8VvtPASgq_4QHLlE60",
+   "drive_path": "/03 Visual Direction and Assets/Audio/A01-01 — First SFX Pack/README.txt",
+   "repo_path": "03-visual-direction-and-assets/audio/a01-01-first-sfx-pack/readme.txt",
+   "sha256": "b8f23003e6e8c86a5911a9399e51389809243d9da691056b584cab4de0792bca"
   },
   {
    "kind": "folder",
@@ -163,62 +194,62 @@
   {
    "kind": "folder",
    "id": "1D34ZytHeo2RUD2un9ox20sB4TD3bajpn",
-   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/C02 — Playable Heroes Prototype"
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/C02 — REJECTED Hero v1 (grid-format reference only)"
   },
   {
    "kind": "file",
    "id": "1OjxxRTvbDK0fqmpilySx-tkvFWTD3EmO",
-   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/C02 — Playable Heroes Prototype/C02_heroes_COMPLETE.zip",
-   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/c02-playable-heroes-prototype/c02-heroes-complete/",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/C02 — REJECTED Hero v1 (grid-format reference only)/C02_heroes_COMPLETE.zip",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/c02-rejected-hero-v1-grid-format-reference-only/c02-heroes-complete/",
    "sha256": "dcec4acbb9ea19b6c24b4795bba38c90a1fe755a961d409d16cbfa19141351fe"
   },
   {
    "kind": "file",
    "id": "1_wcNKKk07A5RD6clVclIRtdsNVqkp1QZ",
-   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/C02 — Playable Heroes Prototype/hero_A_manifest.json",
-   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/c02-playable-heroes-prototype/hero-a-manifest.json",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/C02 — REJECTED Hero v1 (grid-format reference only)/hero_A_manifest.json",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/c02-rejected-hero-v1-grid-format-reference-only/hero-a-manifest.json",
    "sha256": "06b45b05bfddcd4134927aba963cdae7ae448604cbf10f7fc60a917eb1a10781"
   },
   {
    "kind": "file",
    "id": "1q0GyeLDSfqdt77tQxX__3_5sR4l_-Gur",
-   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/C02 — Playable Heroes Prototype/hero_A_preview_3x.png",
-   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/c02-playable-heroes-prototype/hero-a-preview-3x.png",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/C02 — REJECTED Hero v1 (grid-format reference only)/hero_A_preview_3x.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/c02-rejected-hero-v1-grid-format-reference-only/hero-a-preview-3x.png",
    "sha256": "1652c6caf6c3afde33f80f023b383a4f455c9c0801b2e234ed0b4cef180b681e"
   },
   {
    "kind": "file",
    "id": "1_ISaUe2uS16woABXMBIsVzQM-d5Mq-nu",
-   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/C02 — Playable Heroes Prototype/hero_A_sheet.png",
-   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/c02-playable-heroes-prototype/hero-a-sheet.png",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/C02 — REJECTED Hero v1 (grid-format reference only)/hero_A_sheet.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/c02-rejected-hero-v1-grid-format-reference-only/hero-a-sheet.png",
    "sha256": "5832c66b1ae4476e7ca2300cd657efa6ca2ddb2959133de036a29c3b72f240f8"
   },
   {
    "kind": "file",
    "id": "1EPUsl98AaEwyOJlv82i8u0sDovep2i6J",
-   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/C02 — Playable Heroes Prototype/hero_B_manifest.json",
-   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/c02-playable-heroes-prototype/hero-b-manifest.json",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/C02 — REJECTED Hero v1 (grid-format reference only)/hero_B_manifest.json",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/c02-rejected-hero-v1-grid-format-reference-only/hero-b-manifest.json",
    "sha256": "b1f523a56e26f9e49216f8bc646bc1058e8bf196bd99cf1287e22615bf64c6fd"
   },
   {
    "kind": "file",
    "id": "15H627DOqrex_3Uze_SEgwl4GyBXpX1rV",
-   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/C02 — Playable Heroes Prototype/hero_B_preview_3x.png",
-   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/c02-playable-heroes-prototype/hero-b-preview-3x.png",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/C02 — REJECTED Hero v1 (grid-format reference only)/hero_B_preview_3x.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/c02-rejected-hero-v1-grid-format-reference-only/hero-b-preview-3x.png",
    "sha256": "4e64a8f2bad5052d51675a8bb32f3c37ad77c3a05f8e395dc566a5b17055c3da"
   },
   {
    "kind": "file",
    "id": "1kP_w4leYbxoNZLOtN65ZrivkEUVj2vyA",
-   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/C02 — Playable Heroes Prototype/hero_B_sheet.png",
-   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/c02-playable-heroes-prototype/hero-b-sheet.png",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/C02 — REJECTED Hero v1 (grid-format reference only)/hero_B_sheet.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/c02-rejected-hero-v1-grid-format-reference-only/hero-b-sheet.png",
    "sha256": "e6f628edc73ef7739a09e74e62d358051d70d14da1c0a56916159055d2182bd9"
   },
   {
    "kind": "file",
    "id": "1BSZulqzKkIGETfXcRCFYPVX5p-fWjYrY",
-   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/C02 — Playable Heroes Prototype/README.txt",
-   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/c02-playable-heroes-prototype/readme.txt",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/C02 — REJECTED Hero v1 (grid-format reference only)/README.txt",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/c02-rejected-hero-v1-grid-format-reference-only/readme.txt",
    "sha256": "aa7d9f189837fda4af81ac0266118642d991ea1ff0d5c8989fbcffe6a05f97b2"
   },
   {
@@ -545,7 +576,7 @@
    "id": "1VJOvGqbT3wcqgD8-PaXpftODBr42ChGmqdBYHvx7_i0",
    "drive_path": "/03 Visual Direction and Assets/10 — Visual Direction, Asset Index and Art Brief",
    "repo_path": "03-visual-direction-and-assets/10-visual-direction-asset-index-and-art-brief.md",
-   "sha256": "e1fcb791cd98263152b0ca8d10b0527cdfd2e7835dc31fe44af28bb7698b5900"
+   "sha256": "4bdc4298f2cb12b0eecca5aa2b9986c3556df3ae9e1e70bf294f26c8c11c8eda"
   },
   {
    "kind": "folder",
@@ -557,7 +588,7 @@
    "id": "1vlwf5VZgwT0E0cKqYF4o0EI5LhuR4iiZxCyVUUreytU",
    "drive_path": "/04 Decisions and Prototyping/11 — Decision Register, Boundaries and Open Questions",
    "repo_path": "04-decisions-and-prototyping/11-decision-register-boundaries-and-open-questions.md",
-   "sha256": "b142690f2ed82916b37895522b8ef170cbcb64bec944aadaaecb93ef1964f15e"
+   "sha256": "8f5dc31e66ea2dbc36ebc5abcdda662b23280639f40a8ca4c9cd9de6590d2e76"
   },
   {
    "kind": "doc",
@@ -667,17 +698,17 @@
   },
   {
    "kind": "doc",
-   "id": "13982Ar8l96vxxHNBLAjCZMQwutOvuaXTq8P4YLFY7R8",
-   "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/01 REQUESTS — Claude to ChatGPT/REQ — A01-01 — First sound-effects pack (chiptune, phone-friendly)",
-   "repo_path": "06-asset-collaboration-claude-chatgpt/01-requests-claude-to-chatgpt/req-a01-01-first-sound-effects-pack-chiptune-phone-friendly.md",
-   "sha256": "ddb9cb86a3f88843d3de6268ccedd2ac1ada637f76f551d7773d2529680b43b7"
-  },
-  {
-   "kind": "doc",
    "id": "1cvf_rCrdY7rSDc78_tA75-ZL-Xm9QlVRPWmNiLSKrLY",
    "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/01 REQUESTS — Claude to ChatGPT/REQ — A02-01 — Music: GBA chiptune with each game's influence (replaces earlier A02-01)",
    "repo_path": "06-asset-collaboration-claude-chatgpt/01-requests-claude-to-chatgpt/req-a02-01-music-gba-chiptune-with-each-game-s-influence-replaces-earlier-a02-01.md",
    "sha256": "90e38b2edaf5a8033636def282b82265cb42f1220bf5e57aeb427ac198f096cd"
+  },
+  {
+   "kind": "doc",
+   "id": "1velYJklnMai16cH12kYu-BIlyhx_p-6NlSpO41vfuKw",
+   "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/01 REQUESTS — Claude to ChatGPT/REQ — C02-02/C02-03 REVISION — More expressive heroes with real animation",
+   "repo_path": "06-asset-collaboration-claude-chatgpt/01-requests-claude-to-chatgpt/req-c02-02-c02-03-revision-more-expressive-heroes-with-real-animation.md",
+   "sha256": "514abfec307c7ad764deb62f4f490a28a79bbce99774f0517f00c359f9bf4933"
   },
   {
    "kind": "doc",
@@ -700,10 +731,17 @@
   },
   {
    "kind": "doc",
+   "id": "13982Ar8l96vxxHNBLAjCZMQwutOvuaXTq8P4YLFY7R8",
+   "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/02 DELIVERED — ChatGPT to Claude/REQ — A01-01 — First sound-effects pack (chiptune, phone-friendly)",
+   "repo_path": "06-asset-collaboration-claude-chatgpt/02-delivered-chatgpt-to-claude/req-a01-01-first-sound-effects-pack-chiptune-phone-friendly.md",
+   "sha256": "956c9f1d654b144c76957f3badfa5a71940d24215fbd0e824411cf39270d6f6f"
+  },
+  {
+   "kind": "doc",
    "id": "1bxtTcbU6dvD0j5KrSs12ozIIg35gh7xcXwQ663vQbPA",
    "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/02 DELIVERED — ChatGPT to Claude/REQ — C02-02/C02-03 — Two playable heroes, sprite sheets for co-op",
    "repo_path": "06-asset-collaboration-claude-chatgpt/02-delivered-chatgpt-to-claude/req-c02-02-c02-03-two-playable-heroes-sprite-sheets-for-co-op.md",
-   "sha256": "543c2579416901e996725c6f58451531c4080c9caeca8c5f97687dc23c94ac64"
+   "sha256": "5ad0d0ad20321e1b2dd7c70134e6833b92ceb10f2b6330c87539af014b4f0fbd"
   },
   {
    "kind": "doc",
@@ -722,28 +760,35 @@
    "id": "1oBpJKI2P7v7rwoMku-TbcFuVQe2iajddK6v2i5Ro0G0",
    "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/00 START HERE — Claude ↔ ChatGPT Asset Request Protocol",
    "repo_path": "06-asset-collaboration-claude-chatgpt/00-start-here-claude-chatgpt-asset-request-protocol.md",
-   "sha256": "eab76eecebad4969c207c29b89a6e1233811b1c82e0addf7a7bc0b200c91d0ea"
+   "sha256": "8b40e9f7612c928efa080bf92a5acfafcc94704f8a67bd344deeb4d80a106025"
   },
   {
    "kind": "doc",
    "id": "1ntJHj5rYYi59_o4-0c5Pf-rFYKcJvX1ZlUP43nCJaUw",
    "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/01 COPY THIS — Asset Request Template (Claude)",
    "repo_path": "06-asset-collaboration-claude-chatgpt/01-copy-this-asset-request-template-claude.md",
-   "sha256": "e0a8eff5a8e5a289fae4726d53d300f6776acfb73719f381c743eab3e28b1195"
+   "sha256": "05dd9d3ab1d3106ffb2c602142f91d6e8885ded2cf3b897f5d65b53dd8ad84c5"
+  },
+  {
+   "kind": "doc",
+   "id": "17OlSfBfTnUEUTmbo-zcsl4VrSn1mPny-zAP6kZaiodU",
+   "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/02 VISUAL QUALITY GATE — Art-first asset production and acceptance",
+   "repo_path": "06-asset-collaboration-claude-chatgpt/02-visual-quality-gate-art-first-asset-production-and-acceptance.md",
+   "sha256": "c6aa824a16f798fe7f4084c028170b2097fb6fd20267696f2f1fabe345707ee6"
   },
   {
    "kind": "doc",
    "id": "1-ASnTbCLAXSi_WCOl_7KNuUgelLXLmiZFKiN6APao2s",
    "drive_path": "/00 START HERE — Irreverents",
    "repo_path": "00-start-here-irreverents.md",
-   "sha256": "93c69db1f70e74f1598227dc2c9c28fe0cd1367c9f585b32de07d526d00c3c42"
+   "sha256": "ddc048706dea9aa6cfc420ca47728d360a7e8d5e965c0612713d210e05d8d381"
   },
   {
    "kind": "doc",
    "id": "17R7aKkqDxQwRk-cmywQbvQ_CcEzz4UqHz37YYYRnADs",
    "drive_path": "/changelog",
    "repo_path": "changelog.md",
-   "sha256": "812720af6355e936809a3c95059f6571ce8fe45922c6ff937fe59f04e47f6489"
+   "sha256": "58ab4916e369f0e98502b5bffaca033bfddc280d1274166efce7425b2d44f592"
   }
  ]
 }

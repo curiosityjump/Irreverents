@@ -2,6 +2,10 @@
 
 ---
 
+VISUAL REJECTION NOTICE (22 NOV 2026)
+
+STATUS: VISUALLY REJECTED — FORMAT REFERENCE / ENGINE PLACEHOLDER ONLY. The owner found both v1 hero artworks unacceptable and unlike the earlier high-quality GBA art. Minimal / repeated poses are not real animation. The earlier “DELIVERED — PROTOTYPE” reflects historical file delivery ONLY, not artwork acceptance or task completion. Do not present these as finished characters; do not use them as style reference. The active REWORK request is https://docs.google.com/document/d/1velYJklnMai16cH12kYu-BIlyhx_p-6NlSpO41vfuKw/edit ; controlling quality gate: https://docs.google.com/document/d/17OlSfBfTnUEUTmbo-zcsl4VrSn1mPny-zAP6kZaiodU/edit
+
 STATUS: DELIVERED — PROTOTYPE
 
 TITLE: C02-02 / C02-03 — Two contrasting original playable heroes (one per co-op player)

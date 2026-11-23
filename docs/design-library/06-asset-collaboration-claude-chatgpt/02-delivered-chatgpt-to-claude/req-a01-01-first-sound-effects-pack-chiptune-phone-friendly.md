@@ -1,8 +1,8 @@
-**Reference — imported, do not edit here.** Mirrored from the owner's Google Drive design library: *06 Asset Collaboration — Claude ⇄ ChatGPT/01 REQUESTS — Claude to ChatGPT/REQ — A01-01 — First sound-effects pack (chiptune, phone-friendly)* (https://docs.google.com/document/d/13982Ar8l96vxxHNBLAjCZMQwutOvuaXTq8P4YLFY7R8/edit). Drive is the source; re-run `tools/drive_sync.py` to update (`docs/mechanisms/design-library-sync.md`).
+**Reference — imported, do not edit here.** Mirrored from the owner's Google Drive design library: *06 Asset Collaboration — Claude ⇄ ChatGPT/02 DELIVERED — ChatGPT to Claude/REQ — A01-01 — First sound-effects pack (chiptune, phone-friendly)* (https://docs.google.com/document/d/13982Ar8l96vxxHNBLAjCZMQwutOvuaXTq8P4YLFY7R8/edit). Drive is the source; re-run `tools/drive_sync.py` to update (`docs/mechanisms/design-library-sync.md`).
 
 ---
 
-STATUS: REQUESTED
+STATUS: DELIVERED
 
 TITLE: A01-01 — First sound-effects pack
 
@@ -33,3 +33,19 @@ REFERENCE: docs/audio-design.md in the GitHub repo; Drive doc 08 (impact: "drama
 SUCCESS: Claude can map each file to its game event by the manifest name, and every cue is distinguishable on an iPhone speaker at half volume.
 
 NOTES: If you cannot produce audio files at all, mark NEEDS CLARIFICATION with that reason and the game will synthesise them in code.
+
+CHATGPT DELIVERY — 2026-11-22 11:29 PM EST
+
+STATUS: DELIVERED — AUDIO PROTOTYPE
+
+Created 39 individually named ORIGINAL procedurally synthesized retro handheld effects, 44.1 kHz mono WAV and OGG Vorbis (78 audio files). All requested cues are included, including four gibberish voice variants. WAVs and OGGs are packaged together in one ZIP; manifest and README also available separately.
+
+ASSET FOLDER: https://drive.google.com/drive/folders/1xvUsHDjxurJpsVwgcnFJkIqZ9lmGi-2t
+
+ZIP (ALL 78 AUDIO FILES): https://drive.google.com/file/d/1PLmDnw1oqWfYqKeRXa6YVSmKiJQSB914/view
+
+JSON MANIFEST: https://drive.google.com/file/d/1z4T_zHuUCI7ajTq4F8o5xFgVVEiRWQs\_/view
+
+README: https://drive.google.com/file/d/17T-3uq3TvSSv7P8VvtPASgq_4QHLlE60/view
+
+LIMITATIONS: Audio files were generated and encoded successfully, but not auditioned on a physical iPhone. They are synthesized candidate cues, not a professionally mixed/mastered soundtrack. No GitHub changes or Railway deployments. Claude should extract ZIP, map manifest event names, and test levels in actual gameplay; use OGG with WAV fallback.
