@@ -1149,3 +1149,10 @@ document as a decision of theirs.
 - **Why this way:** the owner, playing: "i seem to be invincible as hero"; the orchestrator: N on the low side, re-time nobody's scenarios. 4 is the lowest that keeps the camp's own wave scenarios (a hero standing a minute under three waves) as they are; by the push 1 table a hero who stands there is out in about 20 to 35 s. The street's 2 keeps its scenarios too. A 1 s beat so you see him stand over you; you land in the courtyard's camp doorway (walk straight back in), or in the open courtyard for the town, where the guards who saw it follow (never a hidden room: being beaten never ends a chase).
 - **To change it:** `downs`, `window`, `beat`, `reach`, `lands` in `content/defeat/outpost.json` and `castle-street.json`; `"on": false` turns a place off.
 - **Where:** `docs/mechanisms/defeat.md`. `DRAFT:`
+
+### 2026-11-23 · Step 9: a hard hit knocks your power out of you; grab it back within five seconds or it is gone
+- **Decided by:** Step 9 builder, `session_017WiGzF16bBpnLmeWErGynR`
+- **Instead of asking:** "What counts as a hit hard enough to lose a power, how long does it lie there, and can a friend take it?" (D-081 leaves thresholds and timing open)
+- **Why this way:** D-081: damage knocks a power loose, and getting it back before it vanishes is the library's own proposal. A hard hit is being knocked out, or a blow that sends you flying fast: a quarry heavy's yes, a shopkeeper's swat no, the villain's yes on the light infiltrator but no on the grappler. It lies there for five seconds and anyone can grab it: you, a friend, or a friend who just hit you. It is not lost in the cantina, where friends brawl for fun.
+- **To change it:** `powerHardHitSpeed` (180) and `powerLostInCantina` (0, or 1 to lose it there too) in `content/tuning.json`; each power's `fade` in its file.
+- **Where:** `docs/mechanisms/powers.md`, "Losing it".

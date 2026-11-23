@@ -105,7 +105,7 @@ groups) whenever you add one — never update the number from memory.
 
 **Powers** (`docs/mechanisms/powers.md`)
 - `content/powers/<id>.json` + `src/sim/powers.ts` (`numbersOf`, `verbsOf`, used at all four read sites) + effect `power` + `c.power` — a power is a numbers overlay and lent verbs on top of whoever holds it, reaching the holder's own page as an effect (Step 9).
-- systems `power-carriers`, `power-take` + `src/sim/power-orbs.ts` + `~power-orb` (no body) + `src/client/draw/powers.ts` — a carrier laid flat drops its power as a bouncing orb nobody can take for 0.6 s; a hero holding none takes it by touch; it fades if left (Step 9).
+- systems `power-carriers`, `power-take` + `src/sim/power-orbs.ts` + `~power-orb` (no body) + `src/client/draw/powers.ts` — a carrier laid flat drops its power as a bouncing orb nobody can take for 0.6 s; a hero holding none takes it by touch; it fades if left; system `power-drop`: a hard hit (laid flat, or a blow of `powerHardHitSpeed`) knocks a held power loose, never in the cantina (Step 9).
 
 **The cantina** (`docs/mechanisms/cantina.md`)
 - `content/roster.json` + `content/cantina/<room>.json` + systems `cantina-*` + `~cantina:<room>` — the endless brawl: one scripted regular per roster character nobody plays, a player's hit on one starts a free-for-all (`c.brawl`), past the edge or flattened is back on a pad at once with a knock-out/fall count, the owner's bell or the last player leaving ends it; nothing runs in a page's own world (Step 11).

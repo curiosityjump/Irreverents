@@ -15,6 +15,7 @@ import { createNetClient } from '../../src/net/client.ts';
 import type { NetClient } from '../../src/net/client.ts';
 import { playerEntityId } from '../../src/net/protocol.ts';
 import { attachGame } from '../../src/server/game.ts';
+import { launch, markImpact } from '../../src/sim/body-state.ts';
 import { popOrb } from '../../src/sim/power-orbs.ts';
 import { systems } from '../../src/sim/registry.ts';
 import type { Entity, StepContext, System } from '../../src/sim/types.ts';
@@ -26,7 +27,7 @@ const check: ScriptCheck = {
   id: 'step9-powers',
   gate: null,
   proves:
-    "a power over the real network: an orb popped in the server's world at player a's feet is taken by a, after which a's own page holds the power (so its own verbs use it) and b's page sees it on a; control: the server writing the power onto b's copy without the effect leaves b's own page without it",
+    "a power over the real network: an orb popped in the server's world at player a's feet is taken by a, after which a's own page holds the power (so its own verbs use it) and b's page sees it on a; after b's hard blow on the server, a's own page holds none, b's page sees none on a, and an orb lies in the server's world; control: the server writing the power onto b's copy without the effect leaves b's own page without it",
   async run(content: Content): Promise<string[]> {
     const failures: string[] = [];
     const power = content.powers?.[POWER];
@@ -76,11 +77,11 @@ const check: ScriptCheck = {
     const bId = playerEntityId('b');
     const held = (e: Entity | undefined): string => e?.c.power?.id ?? 'none';
     /** A throwaway system: does `act` once, in the server's world only (a page's own world holds one player). */
-    const once = (id: string, act: (ctx: StepContext) => void): System => {
+    const once = (id: string, act: (ctx: StepContext) => void, order = 905): System => {
       let armed = true;
       return {
         id,
-        order: 905,
+        order,
         run(ctx) {
           if (!armed || ctx.world.entities.filter((e) => e.player !== null).length < 2) return;
           armed = false;
@@ -121,7 +122,27 @@ const check: ScriptCheck = {
         if (lift < (power.atLeast.liftStrength ?? 0)) failures.push(`a's own page lifts ${lift} with the power, expected at least ${power.atLeast.liftStrength}`);
       }
 
-      // 2. Control: the server writes the power onto b's copy directly, no effect.
+      // 2. A hard blow on the server, as verbs/attack.ts lands one: b's hit sends a off at 300 px/s
+      // (systems/power-drop.ts). A blow reaches a's page as a `push`, applied where the page has
+      // a, not as the server's copy, so only the `power` effect can take the power off a's page.
+      // (A knock-out is a `flatten`, after which the page takes the server's whole copy anyway.)
+      const knock = once('throwaway-hard-blow', (ctx) => {
+        const e = ctx.world.entities.find((x) => x.id === aId)!;
+        ctx.emit('hit', { by: bId, target: aId, player: 'b' });
+        launch(ctx, e, 300, -120, bId, [bId]);
+        markImpact(ctx, e, e.x, e.y, 300);
+      }, 300); // before power-drop (542), which reads this tick's `hit`
+      // In tick order (the registry is sorted once, at load), so power-drop sees its `flattened` this tick.
+      systems.splice(systems.findIndex((s) => s.order > knock.order), 0, knock);
+      try {
+        await until("the server's world has a holding nothing and an orb lying loose", () => held(gw.world.entities.find((e) => e.id === aId)) === 'none' && gw.world.entities.some((e) => e.c.orb?.power === POWER), () => `server's a holds ${held(gw.world.entities.find((e) => e.id === aId))}, orbs ${gw.world.entities.filter((e) => e.c.orb).length}`);
+        await until("a's own page holds no power after the hard hit", () => held(a.me()) === 'none', () => `a's page holds ${held(a.me())}`);
+        await until("b's page sees no power on a", () => held(b.others().find((e) => e.id === aId)) === 'none', () => `b's page sees a holding ${held(b.others().find((e) => e.id === aId))}`);
+      } finally {
+        systems.splice(systems.indexOf(knock), 1);
+      }
+
+      // 3. Control: the server writes the power onto b's copy directly, no effect.
       // The server's own copy (and so a's view of b) has it; b's own page never does.
       const direct = once('throwaway-direct-power', (ctx) => {
         const e = ctx.world.entities.find((x) => x.id === bId)!;

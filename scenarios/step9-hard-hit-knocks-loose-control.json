@@ -1,0 +1,80 @@
+{
+  "gate": null,
+  "room": "quarry-pit",
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 1,
+      "power": "boost"
+    }
+  ],
+  "ticks": 180,
+  "id": "step9-hard-hit-knocks-loose-control",
+  "//": "DRAFT (Step 9): the control of step9-hard-hit-knocks-loose. The same grappler holding the boost and the same swing, from a shopkeeper (4000 against weight 60 is 67 px/s, under powerHardHitSpeed): a light hit, and the power stays.",
+  "proves": "a light hit (a shopkeeper's swat) lands on a hero holding a power and does not knock it loose",
+  "entities": [
+    {
+      "id": "keeper",
+      "character": "shopkeeper",
+      "tile": [
+        15,
+        18
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "entity": "keeper",
+      "from": 5,
+      "to": 8,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 90,
+      "to": 110,
+      "x": -1
+    }
+  ],
+  "expect": [
+    {
+      "fact": "event",
+      "event": "hit",
+      "where": {
+        "by": "keeper",
+        "target": "p:a"
+      },
+      "between": [
+        20,
+        50
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "power-dropped",
+      "between": [
+        0,
+        180
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "power",
+      "player": "a",
+      "at": 60,
+      "is": "boost"
+    },
+    {
+      "fact": "power",
+      "player": "a",
+      "at": 180,
+      "is": "boost"
+    }
+  ]
+}

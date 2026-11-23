@@ -92,6 +92,31 @@ world that has the orb and the carrier, which is the server's or a
 scenario's. A page's own world has neither, so a page never takes or pops
 one.
 
+## Losing it (push 3; D-081)
+
+`systems/power-drop.ts` (order 542): a **hard hit** on a hero holding a power
+knocks it out of them as an orb (the same `popOrb`, `power-dropped`), and
+they hold none (the effect `power` with `null`). It fades after the power's
+`fade` (5 s) unless someone takes it: the hero again, a friend, or the hero
+who hit them if that one is played. A hard hit is:
+
+- being laid flat by someone (`flattened` with a `by`), or
+- a blow (`hit`) whose own launch speed, which the attack records in
+  `c.impact` that tick, is `powerHardHitSpeed` (180) or more. A quarry heavy
+  sends a grappler off at 200 (hard). A shopkeeper's swat reaches 67 and the
+  villain's 150 (light). On the 26-weight infiltrator the villain's blow is
+  346 (hard): the light hero loses it more easily.
+
+`DRAFT:` a throw or a fall is no hit; **not lost in the cantina**
+(`powerLostInCantina` 0; D-086 leaves rare gear in a brawl OPEN; 1 is the
+other answer). `INTENT:` only a blow from someone in this world counts, so a
+page, whose own world holds only its own character, never drops a power
+itself. The server drops it and sends the effect. **A blow reaches the
+holder's page as a `push`**, applied where the page has the character
+without taking the server's copy, so without the `power` effect the page
+would keep a power the server says is gone. A knock-out is a `flatten`,
+after which the page takes the server's whole copy anyway.
+
 ## What a player sees (`src/client/draw/powers.ts`)
 
 One line in `render.ts`, after the bodies. A carrier's orb over its head
@@ -141,5 +166,17 @@ acknowledges it.
   writes the power onto b's copy with no effect, a sees it, b's own page
   never does. Watched to fail: with the take writing `c.power` instead of
   sending the effect, a's own page never holds it.
+- `step9-hard-hit-knocks-loose`: a quarry heavy's blow on a grappler holding
+  the boost: an orb appears, the grappler holds none, walks back into it and
+  holds it again. Its control (`-control`, committed): a shopkeeper's swat on
+  the same grappler, and the power stays. Watched to fail with
+  `powerHardHitSpeed` 900.
+- `step9-fades`: the same blow, left alone. The orb fades at 5 s. Watched to
+  fail with the boost's `fade` at 20.
+- The two-connection check also lands a hard blow on the server (b's hit at
+  300 px/s). a's own page then holds none and b sees none on a. Watched to
+  fail with the drop clearing `c.power` instead of sending the effect. A
+  knock-out (the first try at the check) passed that control too, because a
+  `flatten` makes the page take the server's whole copy.
 - `npm run e2e`, fact `power-carrier-drawn` (`scripts/e2e/powers.ts`): a phone
   walks by touch into the street and its page draws the villain carrying.

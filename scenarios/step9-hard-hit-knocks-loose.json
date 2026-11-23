@@ -1,0 +1,109 @@
+{
+  "gate": null,
+  "room": "quarry-pit",
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 1,
+      "power": "boost"
+    }
+  ],
+  "ticks": 180,
+  "id": "step9-hard-hit-knocks-loose",
+  "//": "DRAFT (Step 9, D-081): a quarry heavy's blow sends a grappler holding the boost off at 200 px/s, over powerHardHitSpeed (180): the power pops out of them as an orb, they hold none, and walking back into it inside its fade (5 s) they hold it again. The control is step9-hard-hit-knocks-loose-control: the same grappler and the same swing from a shopkeeper (67 px/s), and the power stays.",
+  "proves": "a hard hit knocks a held power loose as an orb, the hero then holds none, and walking back into the orb before it fades takes it again",
+  "entities": [
+    {
+      "id": "heavy",
+      "character": "heavy-fighter",
+      "tile": [
+        15,
+        18
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "entity": "heavy",
+      "from": 5,
+      "to": 8,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 90,
+      "to": 110,
+      "x": -1
+    }
+  ],
+  "expect": [
+    {
+      "fact": "event",
+      "event": "hit",
+      "where": {
+        "by": "heavy",
+        "target": "p:a"
+      },
+      "between": [
+        20,
+        40
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "power-dropped",
+      "player": "a",
+      "where": {
+        "power": "boost"
+      },
+      "between": [
+        20,
+        40
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "power",
+      "player": "a",
+      "at": 60,
+      "is": null
+    },
+    {
+      "fact": "event",
+      "event": "power-taken",
+      "player": "a",
+      "where": {
+        "power": "boost",
+        "from": "p:a"
+      },
+      "between": [
+        90,
+        130
+      ]
+    },
+    {
+      "fact": "power",
+      "player": "a",
+      "at": 150,
+      "is": "boost"
+    },
+    {
+      "fact": "event",
+      "event": "power-faded",
+      "between": [
+        0,
+        180
+      ],
+      "count": [
+        0,
+        0
+      ]
+    }
+  ]
+}

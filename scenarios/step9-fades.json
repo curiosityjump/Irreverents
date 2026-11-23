@@ -1,0 +1,85 @@
+{
+  "gate": null,
+  "room": "quarry-pit",
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 1,
+      "power": "boost"
+    }
+  ],
+  "ticks": 400,
+  "id": "step9-fades",
+  "//": "DRAFT (Step 9; doc 30's short-lived pickup, PROPOSED, used as DRAFT): the same hard hit as step9-hard-hit-knocks-loose, and nobody goes back for it: the orb fades after the boost's `fade` (5 s, 300 ticks) and is gone. Control, watched to fail: boost's fade raised past the scenario's end.",
+  "proves": "a power knocked loose and left alone fades: the orb is gone after its power's fade and nobody holds the power",
+  "entities": [
+    {
+      "id": "heavy",
+      "character": "heavy-fighter",
+      "tile": [
+        15,
+        18
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "entity": "heavy",
+      "from": 5,
+      "to": 8,
+      "hold": [
+        "attack"
+      ]
+    }
+  ],
+  "expect": [
+    {
+      "fact": "event",
+      "event": "power-dropped",
+      "player": "a",
+      "between": [
+        20,
+        40
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "power-faded",
+      "where": {
+        "power": "boost",
+        "room": "quarry-pit"
+      },
+      "between": [
+        320,
+        332
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "power-taken",
+      "between": [
+        0,
+        400
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "power",
+      "player": "a",
+      "at": 400,
+      "is": null
+    }
+  ]
+}

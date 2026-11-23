@@ -65,7 +65,9 @@
     "powerOrbSpread": 40,
     "powerOrbBounce": 0.4,
     "powerOrbFriction": 400,
-    "powerRetakeTime": 0.6
+    "powerRetakeTime": 0.6,
+    "powerHardHitSpeed": 180,
+    "powerLostInCantina": 0
   },
   "characters": {
     "shopkeeper": {
