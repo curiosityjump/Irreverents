@@ -308,7 +308,7 @@ Full text: `docs/plan/step-6.md`
 
 ## Step 7 — A Hall that remembers, and a machine to steal
 
-**Status: open, unclaimed.** (Reopened 2026-11-23 19:40 UTC by the core-loops re-plan: brief `handoff-prompts/loop-waves.md`; the machine is now Step 20.)
+**Status: open, claimed by orchestrator session_017WiGzJzo6aZqH4kYxxJsiV (builders: session_017WiGzHvGxLQnLUErw7teAo), 2026-11-23.** (Reopened 2026-11-23 19:40 UTC by the core-loops re-plan: brief `handoff-prompts/loop-waves.md`; the machine is now Step 20.)
 
 Full text: `docs/plan/step-7.md`
 
