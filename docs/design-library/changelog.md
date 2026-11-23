@@ -2,6 +2,10 @@
 
 ---
 
+2026-11-23 · 8:37 AM EST · ChatGPT — H07 HALL OF LEGENDS NEW CONCEPT REFERENCE
+
+Created and uploaded an original H07-01 side-on Hall of Legends corridor visual exploration into 03 Visual Direction and Assets. Indexed it by functional category in the central catalog with direct file/folder links and explicit CONCEPT ONLY status. This is a flattened scene, NOT modular tiles or validated gameplay art; no existing art was superseded and no REQ was closed. Catalog: https://docs.google.com/document/d/1bnr7GUgrYBVVY0BMkwx4qRPvW45Nk4grn-Tk6THcoY8/edit ; image: https://drive.google.com/file/d/1TSgZ9J5JeBs6CCTA1gFCdvpeUMBi-GXf/view ; folder: https://drive.google.com/drive/folders/1ziNuvVtP8yvDr-\_7Yg4-g7xc-FcxpPfr
+
 2026-11-23 · 7:13 AM EST · ChatGPT — ROUTING RELIABILITY CLARIFICATION (PROCESS ONLY)
 
 Updated the asset handoff protocol to require verified upload of actual bytes into the 03 Visual Direction and Assets Drive area, readback of file IDs and parent folder, direct links and QA evidence in the request Doc, and a post-upload Eastern-time changelog entry. Previous C02 concept studies mentioned in request notes are NOT verified Drive production assets; C02 remains IN PROGRESS — QUALITY REWORK in the inbox. No new art delivered or deployed.

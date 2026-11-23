@@ -73,6 +73,8 @@ that, not Vision Partner's check, is the real pace).
   Vision Partner; the Step 8 lanes should judge it against
   `docs/art-reference/heroes-v2-chatgpt-concept.png`.
 
+- Sync ~13:41 UTC (Vision Partner, the owner asked "Check drive for art"): one new image, **H07-01 Hall of Legends corridor**, `docs/design-library/03-visual-direction-and-assets/h07-hall-of-legends-concept-studies/`. ChatGPT made it unrequested from its own art plan and labels it "CONCEPT REFERENCE ONLY — NOT A TILESET": a 1648×928 flattened scene with three blank monument frames. Useful for Step 7's Hall layout and mood, not for importing. Every request in 01 REQUESTS is still open; none was delivered.
+
 ### Requests in flight
 
 | Filed (UTC) | REQ doc | Priority |

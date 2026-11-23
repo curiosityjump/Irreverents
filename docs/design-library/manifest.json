@@ -947,6 +947,18 @@
   },
   {
    "kind": "folder",
+   "id": "1ziNuvVtP8yvDr-_7Yg4-g7xc-FcxpPfr",
+   "drive_path": "/03 Visual Direction and Assets/H07 — Hall of Legends Concept Studies"
+  },
+  {
+   "kind": "file",
+   "id": "1TSgZ9J5JeBs6CCTA1gFCdvpeUMBi-GXf",
+   "drive_path": "/03 Visual Direction and Assets/H07 — Hall of Legends Concept Studies/H07-01_hall_corridor_CONCEPT_NOT_TILESET.png",
+   "repo_path": "03-visual-direction-and-assets/h07-hall-of-legends-concept-studies/h07-01-hall-corridor-concept-not-tileset.png",
+   "sha256": "ebfe3fe81941fb833209c68bc6404b7b0a5dfcb99d2b25df32c60c9416d0f8d4"
+  },
+  {
+   "kind": "folder",
    "id": "1BSIak5-a3FUlsJ6RW7mqrGLobOB53Erl",
    "drive_path": "/03 Visual Direction and Assets/Superseded Style Explorations"
   },
@@ -1119,6 +1131,13 @@
   },
   {
    "kind": "doc",
+   "id": "1fNd5TuX7J6ANSNDyUqPXZlo-2wu35OPzvkgFxLhfnA4",
+   "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/01 REQUESTS — Claude to ChatGPT/REQ — C02-04 + N03-05/N03-06 — Third hero (flyer), the king and the villain; plus priority order for everything pending",
+   "repo_path": "06-asset-collaboration-claude-chatgpt/01-requests-claude-to-chatgpt/req-c02-04-n03-05-n03-06-third-hero-flyer-the-king-and-the-villain-plus-priority-order-for-everything-pending.md",
+   "sha256": "09a1e2523352d3b86fa5734cd32b0168b80bc69605b1d8c5cc83883c1bd8d8a7"
+  },
+  {
+   "kind": "doc",
    "id": "1KlKA9opw3zNbzDKwTOuOfM0BfJMjLDzxSQH4k2cV-GU",
    "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/01 REQUESTS — Claude to ChatGPT/REQ — E01-02/E01-03 — Production 16px tilesets: grassy ruins, castle, town street",
    "repo_path": "06-asset-collaboration-claude-chatgpt/01-requests-claude-to-chatgpt/req-e01-02-e01-03-production-16px-tilesets-grassy-ruins-castle-town-street.md",
@@ -1195,14 +1214,14 @@
    "id": "1bnr7GUgrYBVVY0BMkwx4qRPvW45Nk4grn-Tk6THcoY8",
    "drive_path": "/ASSET LIBRARY — START HERE (Claude)",
    "repo_path": "asset-library-start-here-claude.md",
-   "sha256": "a6118eeeee4cb7ce3c0bd185afe4ef73045941cb594fda61a2a721ae77f1fa0e"
+   "sha256": "8dca68a62b2cbe8b987ea680dd474b7622ae5289eead1658f020e7d72fce4244"
   },
   {
    "kind": "doc",
    "id": "17R7aKkqDxQwRk-cmywQbvQ_CcEzz4UqHz37YYYRnADs",
    "drive_path": "/changelog",
    "repo_path": "changelog.md",
-   "sha256": "c470c40ece0b9081639da8ed665993c923ef09913013742c4900ef0415af99e9"
+   "sha256": "8c52023814af395e84cc4a4ca6271a5d9919964b03e929a095f2f1439b878184"
   }
  ]
 }

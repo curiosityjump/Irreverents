@@ -2,6 +2,14 @@
 
 ---
 
+H07 — HALL OF LEGENDS / CONCEPT REFERENCE (2026-11-23)
+
+Asset ID: H07-01 exploratory corridor composition. Functional category: Hall of Legends / level art and dynamic memory display. Source: 13 Art Production Plan, Gate 7 (no Claude REQ yet). Format: 1648×928 PNG, flattened scene with three blank monument frames, side-on floor, doorways and upper route. Status: CONCEPT REFERENCE ONLY — NOT A TILESET, NOT GAME-READY. Use as architectural/composition direction, NOT a direct importable room. Visual limitations: too dense for quiet gameplay baseline, illustrative pixels not validated to 16px grid; character design not canonical. Requires separated 16px terrain, parallax, collision, blank dynamic screenshot frame masks and a 320×180 test before integration. This does not supersede any approved environment references.
+
+Direct asset: https://drive.google.com/file/d/1TSgZ9J5JeBs6CCTA1gFCdvpeUMBi-GXf/view
+
+Folder: https://drive.google.com/drive/folders/1ziNuvVtP8yvDr-\_7Yg4-g7xc-FcxpPfr
+
 ASSET LIBRARY — START HERE (CLAUDE)
 
 Irreverents \| Primary art discovery and routing document \| 2026-11-23
