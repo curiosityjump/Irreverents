@@ -1,6 +1,7 @@
 // The page around the game: crisp scaling, the size of the view and where
 // the touch controls sit sideways and upright, and switching off what an
 // iPhone browser does to a page by default.
+import { safeView } from './draw/fx.ts';
 import { VIEW_H, VIEW_W, view } from './render.ts';
 
 export const isTouchDevice = (): boolean => navigator.maxTouchPoints > 0 || 'ontouchstart' in window;
@@ -78,6 +79,20 @@ function slots(count: number, kind: 'arc' | 'columns' | 'row'): { x: number; y: 
   for (let i = out.length; i < count; i++) out.push({ x: 0.5 + (i % 2), y: 4 + Math.floor(i / 2) });
   return out.slice(0, count);
 }
+
+/** Whether this viewer dismissed the orientation hint before (round 3; false when storage is refused). */
+function hintDismissed(): boolean {
+  try {
+    return localStorage.getItem(HINT_KEY) === '1';
+  } catch {
+    return false;
+  }
+}
+
+/** DRAFT (round 3): the tallest a sideways view grows, in game pixels, to fill the phone's height. */
+const SIDEWAYS_FILL_H = 200;
+/** Where a viewer's dismissal of the orientation hint is remembered (this browser only). */
+const HINT_KEY = 'irreverents.hint.dismissed';
 
 export function setUpShell(canvas: HTMLCanvasElement, touch: HTMLElement, hint: HTMLElement): { layout(): Layout } {
   let current: Layout = { scale: 1, upright: false };
@@ -174,11 +189,16 @@ export function setUpShell(canvas: HTMLCanvasElement, touch: HTMLElement, hint: 
         // low ones (`view.reserve`, draw/room.ts `roomOrigin`).
         mode = 'over';
         scale = sOver;
-        vw = wide(W - inset.left - inset.right, scale);
+        // Round 3 (gap 12): the picture runs under the side insets (only the controls and the
+        // HUD need the safe area: `safeView`), as wide as the screen allows.
+        vw = wide(W, scale);
         button = OVER_BUTTON;
         gap = 4;
       }
       vh = tall(scale);
+      // Round 3 (gap 12): then the view grows to the screen's height (above it, the scale was
+      // chosen as before), so no bands are left above and below, as upright already does.
+      vh = Math.max(vh, Math.min(SIDEWAYS_FILL_H, Math.floor(((H - inset.top) * dpr) / scale)));
     } else {
       // Off a touch screen: 320x180 as large as fits.
       const fit = Math.min((W * dpr) / VIEW_W, (H * dpr) / VIEW_H);
@@ -203,6 +223,11 @@ export function setUpShell(canvas: HTMLCanvasElement, touch: HTMLElement, hint: 
     canvas.style.height = `${ch}px`;
     canvas.style.left = `${left}px`;
     canvas.style.top = `${top}px`;
+    // How much of the picture lies under each inset, in game pixels (round 3).
+    const gp = (css: number): number => Math.max(0, Math.ceil((css * dpr) / scale));
+    safeView.left = gp(inset.left - left);
+    safeView.right = gp(left + cw - (W - inset.right));
+    safeView.top = gp(inset.top - top);
     document.body.dataset.hold = mode;
 
     // The controls: the stick under the left thumb, the actions in an arc
@@ -265,7 +290,7 @@ export function setUpShell(canvas: HTMLCanvasElement, touch: HTMLElement, hint: 
       view.reserve = Math.max(0, Math.ceil(((top + ch - lowTop) * dpr) / scale));
     }
     hint.style.setProperty('--hint-top', `${top + ch + 10}px`);
-    hint.hidden = !upright || hint.dataset.dismissed === '1';
+    hint.hidden = !upright || hint.dataset.dismissed === '1' || hintDismissed();
     current = { scale, upright };
   };
   layout();
@@ -278,6 +303,13 @@ export function setUpShell(canvas: HTMLCanvasElement, touch: HTMLElement, hint: 
   hint.querySelector('button')?.addEventListener('click', () => {
     hint.dataset.dismissed = '1';
     hint.hidden = true;
+    // Round 3 (gap 12): remembered for this viewer, so it does not come back on every load.
+    // DRAFT: per browser, in localStorage; without storage it is dismissed for this page only.
+    try {
+      localStorage.setItem(HINT_KEY, '1');
+    } catch {
+      // Storage refused (a private window): this page only, as before.
+    }
   });
 
   // INTENT: no zoom on double tap or pinch, no pull-to-refresh, no rubber

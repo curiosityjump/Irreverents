@@ -2,7 +2,7 @@ import type { Content } from '../../content/types.ts';
 import type { World } from '../../sim/types.ts';
 import type { Entity } from '../../sim/types.ts';
 import { drawnOffset, drawnTop } from './entities.ts';
-import { drawFrame, drawNine, drawText, edgedText, font, frameOf, lineHeight, look, textWidth, wrapText } from './fx.ts';
+import { drawFrame, drawNine, drawText, edgedText, font, frameOf, lineHeight, look, safeView, textWidth, wrapText } from './fx.ts';
 import { sheetOf } from './sprites.ts';
 
 // DRAFT: every look in this file is a plain graybox stand-in. Step 8 owns
@@ -86,7 +86,8 @@ function edgeBark(g: CanvasRenderingContext2D, content: Content, e: Entity, text
   const cw = chip ? chip.w : 6;
   const ch = chip ? chip.h : h;
   const y = Math.max(2, Math.min(H - Math.max(h, ch) - 2, Math.round(top)));
-  const chipX = side < 0 ? 2 : W - cw - 2;
+  // Clear of a notch the picture runs under (round 3, fx.ts `safeView`, set by shell.ts).
+  const chipX = side < 0 ? 2 + safeView.left : W - cw - 2 - safeView.right;
   if (chip) {
     // The chip's arrow is drawn pointing left; mirrored for a speaker off the right edge.
     drawFrame(g, chip, frameOf(chip, 0, true), chipX, y, { flip: side > 0 });

@@ -42,9 +42,9 @@ into their homes.
   | Page (CSS, DPR) | before | after |
   |---|---|---|
   | 750×340 @3 (Playwright iPhone 14 landscape) | bars, 296×204 at 5×, picture 493 of 750 pt (66%) | over, 375×170 at 6×, full width |
-  | 844×340 @3, insets 47/47/0/21 (iPhone 14 in Safari) | bars, 296×204 at 5×, 493 of 844 pt (58%) | over, 375×170 at 6×, 750 pt between the insets |
+  | 844×340 @3, insets 47/47/0/21 (iPhone 14 in Safari) | bars, 296×204 at 5×, 493 of 844 pt (58%) | over, 375×170 at 6×, 750 pt between the insets; look round 3: full width, under the insets |
   | 844×390 @3 | bars, 294×195 at 6× | over, 361×167 at 7× |
-  | 667×375 @2 | over, 333×187 at 4× | over, 333×180 at 4× (7.5 pt bands above and below) |
+  | 667×375 @2 | over, 333×187 at 4× | over, 333×180 at 4× (7.5 pt bands above and below); look round 3: 333×187, no bands |
   | 736×414 @3 | over, at 6× | over, at 7× |
   | 390×664 upright | 234×252 at 5× | unchanged |
 
@@ -87,9 +87,26 @@ into their homes.
 - **The upright line** now says "Plays either way up", left-aligned under
   the view, still dismissible (`INTENT:` a way out; fact g taps it away).
 
+- **Look round 3 (actors lane, push 3; gap 12):**
+  - Sideways, the view grows to the screen's height after the scale is
+    chosen (as upright does; at most `SIDEWAYS_FILL_H` 200): 667×375 is
+    333×187 at 4×, no bands. The scale choice is unchanged.
+  - In `over` mode the picture runs under the side insets (only the
+    controls and screen furniture keep the safe area): 844×390 with
+    insets 47/47/21 is 361×167 at 7×, 842 of 844 pt (live before: 321×167,
+    749 pt between the insets). `safeView` (in `draw/fx.ts`, set here on
+    every layout) says how many game pixels lie under each inset; the
+    alert pips and an edge bark chip move in by it.
+  - The upright hint's dismissal is remembered per browser
+    (`localStorage` `irreverents.hint.dismissed`, inside try/catch; with
+    storage refused, this page only, as before). Live before: back after a
+    reload; after: stays gone.
+  - Controls over a lower floor: `draw/room.ts` biases the camera toward
+    a floor up to 9 tiles below (`docs/mechanisms/rendering-actors.md`).
+
 ## Deviations from the contract
 
-- **Sideways is not exactly 320×180**: 280–450 wide and 160–180 tall at
+- **Sideways is not exactly 320×180** (round 3: up to 200 tall to fill the phone): 280–450 wide and 160–180 tall at
   a whole scale (375×170 on an iPhone 14, 333×180 on a 667×375 page); the
   contract's round 2 says "about 320×180 or tighter (height at most 180)".
 - **Fact c2 changed by design** (round 2, decided in
@@ -152,7 +169,18 @@ into their homes.
 - **To change it:** `SIDEWAYS`, and `sBars > sOver` in `src/client/shell.ts`.
 - **Where:** `DRAFT:` at `SIDEWAYS`.
 
+### 2026-11-23 · Sideways, the picture fills the whole phone, notch included
+- **Decided by:** look round 3, actors lane (the brief, gap 12)
+- **Instead of asking:** "Leave the notch columns and the 7.5-point bands, or let the picture run under them?"
+- **Why this way:** "Compare to kirby and the amazing mirror": the picture to every edge. Only what you touch or read (the controls, the alert pips, an edge bark) keeps clear of the notch.
+- **To change it:** `vw = wide(W, scale)` back to `W - inset.left - inset.right`, and `SIDEWAYS_FILL_H` to 180, in `src/client/shell.ts`.
+- **Where:** `DRAFT:` at `SIDEWAYS_FILL_H`.
+
 ## Flags for the lead
+
+- **Look round 3:** `docs/deliberate-designs.md` has no entry for the
+  upright hint (it must stay dismissible; now remembered per browser).
+
 
 - **`docs/mechanisms/network.md`, "The page shell"** still says the canvas
   is 320×180 and describes the old upright layout; the facts are above.
@@ -173,9 +201,6 @@ into their homes.
   page drew B move 20 px, not fly) and passed on the rerun with no change:
   flaky, not from the layout (the desktop page, no touch). Step 11's or
   the actors' fact; not edited.
-- **667×375 now has 7.5-point dark bands** above and below (333×180 at
-  4× is 360 of 375 points), the price of "at most 180 tall"; a 187-tall
-  view filled it before.
 - **`docs/plan/step-5.md`, "Controls never hide the game"** now reads as
   "controls never hide the floor or the player": the orchestrator updates
   it (brief).

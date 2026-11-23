@@ -93,6 +93,9 @@ export function predictHits(world: World, content: Content, me: Entity, isThrow:
     // A friend's swing neither wears nor launches a friend (Step 2), except in a cantina brawl.
     if (o.player !== null && !(o.c.brawl && me.c.brawl)) continue;
     if (o.c.thing || o.c.alert) continue;
+    // INTENT (round 3): a body the net layer has lent to this page with real predicted stamps
+    // (Step 5, `c.predicted`) is drawn from those; this cosmetic prediction stands down for it.
+    if ((o.c as { predicted?: unknown }).predicted) continue;
     const ob = content.characters[o.kind]?.box;
     if (!ob) continue;
     if (!(x0 < o.x + ob.w && x0 + width > o.x && me.y - 4 < o.y + ob.h && me.y + box.h > o.y)) continue;

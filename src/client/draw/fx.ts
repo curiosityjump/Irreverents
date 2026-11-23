@@ -12,6 +12,15 @@ import type { Look } from './looks.ts';
 
 export type { Look };
 
+/**
+ * Look round 3 (gap 12): the safe area's insets over the game picture, in game pixels, set by
+ * shell.ts on every layout, so screen furniture drawn in the picture (the alert pips, an edge
+ * bark) stays clear of a notch while the picture itself runs under it. All 0 when nothing of
+ * the picture is under an inset. Kept here so draw files never import the shell (an import
+ * cycle through render.ts).
+ */
+export const safeView = { left: 0, right: 0, top: 0 };
+
 let current: Content | null = null;
 
 /** Which content the looks come from. drawEntities sets it every frame. */

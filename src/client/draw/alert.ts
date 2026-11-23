@@ -1,7 +1,7 @@
 import type { Content } from '../../content/types.ts';
 import { MAX_ALERT } from '../../sim/npc/alert.ts';
 import type { World } from '../../sim/types.ts';
-import { drawFrame, frameOf, look } from './fx.ts';
+import { drawFrame, frameOf, look, safeView } from './fx.ts';
 import { drawLookIn, lookDef } from './room-parts.ts';
 
 // DRAFT: plain stand-ins (Step 8 and Step 5 own the final look of marks and
@@ -17,6 +17,9 @@ const PAPER = '#f8f9fa';
 
 /** Round 3: the area's alert level last drawn and the tick it last rose (the newest pip glows). DRAFT: GLOW_TICKS. */
 let lastLevel = 0;
+/** Round 3 (gap 12): the pips' corner, clear of a notch the picture now runs under. */
+const PX = (): number => 5 + safeView.left;
+const PY = (): number => 5 + safeView.top;
 let litAt = -1e9;
 const GLOW_TICKS = 40;
 
@@ -106,7 +109,7 @@ export function drawAlert(g: CanvasRenderingContext2D, world: World, content: Co
     let drawn = true;
     const slots = lookDef(content, 'alert-pip-off') ? Math.max(level, MAX_ALERT) : level;
     for (let i = 0; i < slots; i++) {
-      drawn = drawLookIn(g, content, [i < level ? 'alert-pip' : 'alert-pip-off'], 5 + i * 12, 5, 10, 10) && drawn;
+      drawn = drawLookIn(g, content, [i < level ? 'alert-pip' : 'alert-pip-off'], PX() + i * 12, PY(), 10, 10) && drawn;
       if (!drawn) break;
     }
     // Round 3 (gap 11): the newest lit pip glows as it fills: a ring of its own light, fading.
@@ -114,19 +117,20 @@ export function drawAlert(g: CanvasRenderingContext2D, world: World, content: Co
     const age = world.tick - litAt;
     if (drawn && pip && age >= 0 && age < GLOW_TICKS) {
       g.globalAlpha = 0.6 * (1 - age / GLOW_TICKS);
-      drawFrame(g, pip, frameOf(pip, world.tick, true), 5 + (level - 1) * 12 - 2, 3, { w: 14, h: 14 });
+      drawFrame(g, pip, frameOf(pip, world.tick, true), PX() + (level - 1) * 12 - 2, PY() - 2, { w: 14, h: 14 });
       g.globalAlpha = 1;
     }
     if (drawn) return;
   }
   for (let i = 0; i < level; i++) {
-    const x = 6 + i * 12;
+    const x = PX() + 1 + i * 12;
+    const y = PY();
     g.fillStyle = INK;
-    g.fillRect(x - 1, 5, 10, 12);
+    g.fillRect(x - 1, y, 10, 12);
     g.fillStyle = ALARM;
-    g.fillRect(x, 6, 8, 10);
+    g.fillRect(x, y + 1, 8, 10);
     g.fillStyle = PAPER;
-    g.fillRect(x + 3, 8, 2, 4);
-    g.fillRect(x + 3, 13, 2, 2);
+    g.fillRect(x + 3, y + 3, 2, 4);
+    g.fillRect(x + 3, y + 8, 2, 2);
   }
 }
