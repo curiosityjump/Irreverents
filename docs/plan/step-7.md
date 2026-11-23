@@ -260,6 +260,26 @@ should return what it skipped; the content fields must be
 boolean`; a quiet theft counts only when the `deed`'s `witnesses` is
 empty.
 
+**The detector's unfinished work is saved, not lost** (the worker's
+own report at f2a80cd; **I have not re-run any of it**):
+`handoff-prompts/step-7-b-working-copy.patch`, 25 files against
+a5c98c3, `git apply` then re-fit to what has landed since. It reports 7
+of 9 `step7-*` scenarios passing (escape, scuffle, same feat twice,
+solo, quiet theft, theft noticed, restored). Failing: `step7-last-stand-lost`
+(the picture is empty: the capture when the alert rises does not happen
+on the tick trouble opens; `rose`/`shot` in `detect.ts`) and
+`step7-hall-is-full` (the scenario's own numbers: 29 against a stored
+30). Not done: the three message-only items above; every failing
+control; the byte measurements; `docs/architecture.md`,
+`docs/mechanisms/scenarios.md`, `docs/deliberate-designs.md`, the
+decisions-log entries (floors, weights, titles, which pedestal leaves a
+full floor); the mechanism doc (add to the existing
+`docs/mechanisms/hall-of-legends.md`). Its flag, unverified:
+`scripts/trace.ts` calls `feet()` on every entity and may throw on the
+bodiless `hall:watch`; `scripts/` is Step 1's, so settle it with that
+lead. Add "start from the patch" and these to the brief before
+relaunching.
+
 **To resume:** relaunch slice B from its brief (fresh session, canonical
 spawn call), review it, then write slice 2 from "Briefs" and "Reviews"
 above (wiring, the owed items, real gate E scenarios; when the wiring
