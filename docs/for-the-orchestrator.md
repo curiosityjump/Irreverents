@@ -111,3 +111,30 @@ different from being a lead").
 
 - 2026-11-23 18:39 UTC, Step 16 lead, to route (orchestrator session_017WiGzHhke4tkAThPgw6EXs wrote this down, not yet acted on): (1) Step 10 has no lead: carry into its file or its next brief the beat "courtyard doorway (cols 17-19) -> quarry-road, crossed by touch (e2e fact quarry-road-cross), meet the road's fighters and the toll". (2) Deferred, not built: the hidden way home from the quarry through the undercroft vault (its door in Step 3's `undercroft.json`, agreed earlier). Step 16's slices 1-3 are live at 36d838d (the depot: a zero-alarm robbery over the roof with the flyer; getting caught opens a fight or an escape); slice 4 (`handoff-prompts/step-16-d-depot-routes.md`: an on-foot quiet route and an escape by pit and cave) is building.
 
+### Handoff, orchestrator `session_017WiGzHhke4tkAThPgw6EXs`, 2026-11-23 19:15 UTC
+
+Picked up 15:50 UTC; handing off at about 795k tokens of context (the card's threshold, raised
+today by the owner's "Just keep going i can't be babysitting handoffs all the time"), to a
+successor this session starts itself. **Everything in flight is in `docs/current-directive.md`'s
+"Status", "Sessions" and "Owed next" (rewritten 19:15 UTC). Read "Owed next" 1a first: the owner's
+verdict after playing is that none of the fun loops are playable, and the re-plan from it is the
+top priority.**
+
+- **In flight inside this old session** (its results cannot be read from your container): the
+  core-loops re-plan workflow. Its last stage commits `docs/plan/core-loops.md`, the step files
+  and `handoff-prompts/loop-*.md` to `main` itself and clears the outbox entry; when it reports,
+  this session forwards one message to you. Nothing else of this session's is unlanded.
+- **Rules changed today, all in the repo:** approved Drive assets first
+  (`docs/mechanisms/art-pipeline.md`); a healthy game on an older commit is a queued deploy, wait,
+  don't revert (`docs/verifying-and-finishing.md`); review agents stop servers by PID, never
+  `pkill` (`docs/mechanisms/orchestrator-workflows.md`); orchestrators run to about 800k and
+  start their own successors (the card); the weekly usage limit is at warning until 2026-11-30
+  about 13:00 UTC ("Rules in force now").
+- **Spawns inherit the caller's model.** The owner switched this session to Fable at ~17:45 UTC,
+  so you are probably on Fable: pass `model: "claude-opus-5-5"` for builders.
+- **No triggers of this session are left armed.** Arm your own.
+- **The Google Drive connector** was available here (create and read; no Docs editing). The
+  missing-assets list is Vision Partner's to keep current now.
+- **Waiting on the owner (nothing blocks):** the changelog entry; "full speed" or "throttle";
+  deleting the stale branch.
+

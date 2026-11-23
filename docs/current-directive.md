@@ -11,77 +11,74 @@ feature.
 
 ## Status
 
-*(Orchestrator `session_017WiGzHhke4tkAThPgw6EXs`, 2026-11-23 18:05 UTC. Re-check with
-`git log --oneline 375babf..origin/main`.)*
+*(Orchestrator `session_017WiGzHhke4tkAThPgw6EXs`, 2026-11-23 19:15 UTC, at its handoff.
+Re-check with `git log --oneline 9f36db3..origin/main`.)*
 
-- **Closed today:** Step 2 (feel, the tuning panel, no number over a hit), Step 11 (the cantina:
-  brawl, bell, swap, chase lock), Step 12 (the Bandit Camp: horn, waves, guards following in,
-  guards and bandits fighting). Step 3's way-out check is fast again (a700081: build 5 s, check
-  35 s).
-- **Live:** the owner's three canon heroes from the P03 sheet (1b2c1c6, 891894c); people cut from
-  the Drive sheets for the five former rectangles (d80a79d); props, effects and the HUD sheet
-  (040bc8f); GO IN at doorways by the Use button (095775b); the start screen and saved games
-  (8a54ea4, 884bb80) with crash protection (fdfa6b1, ab25e7a); the quarry joined to the courtyard
-  with three enemy kinds and a toll (78c4959, 50c584d).
-- **Building:** Step 8 round 3 (five lanes, all re-authoring from approved Drive sheets); Step 17's
-  hardening pushes B, D, C; Step 18 slice A (provoked good guys and the villain fight); the switch
-  gap (two players as the same hero); Step 16 slice 3 (the depot).
-- **The owner's standing rules from today** (`docs/vision.md`): everything uses approved Drive
-  assets, with one routed Drive list for what has none; enemies and provoked good guys fight;
-  doorways must work by touch; no handoff babysitting.
-- `main` at 904c3e9 re-run on a quiet machine: 261 ok, e2e ok.
+- **THE OWNER'S VERDICT AFTER PLAYING, ~18:30 UTC, orders everything** (`docs/vision.md` "The
+  measure"): *"I want to play it as I described it. There are no heists or stealth yet, no
+  puzzles, no hidden places to explore, no characters to unlock, no escalating combats or chases,
+  no power/item stealing, no vehicle hijacking, no risk."* A re-plan workflow is writing
+  `docs/plan/core-loops.md`, step files and `handoff-prompts/loop-*.md` briefs and commits them
+  itself; its notice arrives at the old orchestrator, which forwards it.
+- **Closed today:** Steps 2, 11, 12. Step 3's check is fast again and verified (a700081).
+- **Live:** the owner's canon heroes, townspeople, enemies, props, effects, HUD faces, the tavern
+  and quarry ground, all cut from the approved Drive sheets (Step 8 round 3, five lanes done);
+  GO IN at doorways; two players can no longer be the same hero (18f7c48); the start screen and
+  saved games, hardened in four pushes (A fdfa6b1, B baa651b, C d5e9596, D 6d737a6); provoked
+  guards and shopkeepers swing (1458d57); the quarry with enemies, a toll and a guarded depot with
+  a hoard (36d838d); a cosmetic predicted hit star (851eda9).
+- **Building:** hit prediction, Step 14 slice A (level entrances), Step 18 push 2 (the villain
+  hits back), Step 16 slice 4 (the depot's quiet route and escape).
+- **The Drive's missing-assets list is filed** (35 items):
+  https://docs.google.com/document/d/1d94gDFA54-xtJJsDMhvo6Y8YJizC_TbDRfMyLkRCtCQ/edit ; the map is
+  `docs/mechanisms/asset-coverage.md`.
+- `main` at 904c3e9 was re-run on a quiet machine (261 ok, e2e ok); nothing after it has been
+  re-run by an orchestrator.
 
 ## Sessions
 
-*(18:05 UTC; all report to the session on the Orchestrator line of `docs/questions-for-the-owner.md`.)*
-Step 8 round 3 builders: heroes `session_017WiGzEv3ESfjNHm7u3Tk8v`, cast
-`session_017WiGzFHN8SWsy5GnNkweMt`, ground `session_017WiGzHwFkUGGSmDqqnoSDY`, props
-`session_017WiGzJxBqVvizcghgHk5NG`, actors `session_017WiGzFsVDWWZc7nVHbv82A`. Step 17 builder
-`session_017WiGzGw7XaQ6tZNddFaa8s` (hardening B, D, C). Step 18 builder
-`session_017WiGzHwmFZe9AdG3KMHsa4`. Switch-gap builder `session_017WiGzJujVWWDboh12zWhNR` (it also
-did doorways by Use). Hit-prediction builder `session_017WiGzGPRoCXeC3TG8HFyxh` (`handoff-prompts/step-5-hit-lands-at-once.md`, the owner's "Big delay between swing and actual impact") and Step 14 slice A builder `session_017WiGzFeeJgj8z2SUAFyu5J` (level entrances with discovered indicators), both spawned 18:21 UTC on Opus. Step 3 builder `session_017WiGzK3hTpzPypD5R9DVit` idle, waiting on the
-differential test of its fix. Step 16 lead `session_017WiGzHt9iJy3caBLkT1Ef4` with one builder.
-Step 5's lead `session_017WiGzJfkNbzJfpRVPhWoeK` holds Step 5 (idle since the morning). Vision
-Partner `session_017WiGzGHxdLq71CDUoQZz9Z`; the orchestrator runs `python3 -I tools/drive_sync.py`
-when the owner says there are new assets. Archived today: the round-2 builders, the Step 2 lead and
-builder, the Step 11 and Step 12 leads. Past orchestrators `session_017WiGzFWfLir1ATiSP7c5E5`,
+*(19:15 UTC; all report to the session on the Orchestrator line of `docs/questions-for-the-owner.md`.)*
+Running: hit-prediction builder `session_017WiGzGPRoCXeC3TG8HFyxh`
+(`handoff-prompts/step-5-hit-lands-at-once.md`); Step 14 slice A builder
+`session_017WiGzFeeJgj8z2SUAFyu5J`; Step 18 builder `session_017WiGzHwmFZe9AdG3KMHsa4` (about 350k
+tokens: its next slice wants a fresh builder); Step 16 lead `session_017WiGzHt9iJy3caBLkT1Ef4`
+with one builder on slice 4. Idle: the switch-gap and doorways builder
+`session_017WiGzJujVWWDboh12zWhNR` (done; reusable for client work if under 400k); Step 5's lead
+`session_017WiGzJfkNbzJfpRVPhWoeK` (idle since the morning). Vision Partner
+`session_017WiGzGHxdLq71CDUoQZz9Z` (keeps the Drive list from here). Archived today: every Step 8
+builder of rounds 2 and 3, the Step 2, 11 and 12 leads and their builders, the Step 3 and Step 17
+builders. Past orchestrators `session_017WiGzFWfLir1ATiSP7c5E5`,
 `session_017WiGzJeh7Tuov59d8XYmru`, `session_017WiGzHX8g2sXimNRnqp2oZ`,
-`session_017WiGzGp8auJceLEAAh9Aqx` only forward; never archive them.
+`session_017WiGzGp8auJceLEAAh9Aqx`, `session_017WiGzHhke4tkAThPgw6EXs` only forward; never archive
+them.
 
 ## Owed next
 
-*(In order, 18:05 UTC.)*
+*(In order, 19:15 UTC.)*
 1. Whatever the owner says first.
-2. **The Drive's missing-assets list** (the owner, ~17:10 UTC): the coverage workflow's output is in
-   the orchestrator's scratchpad (`coverage/missing-assets.html`, `asset-coverage.md`). Create the
-   `REQ — MISSING-ASSETS — …` Google Doc in Drive folder 01 REQUESTS
-   (`1m2vTlbSVoPJg5TwESbcWH4xoCcSOIKCp`), commit `docs/mechanisms/asset-coverage.md`, tell the art
-   lanes and Vision Partner. **The changelog entry is not done:** the connected Google account can
-   only view the changelog (`17R7aKkqDxQwRk-cmywQbvQ_CcEzz4UqHz37YYYRnADs`) and this chat has no
-   Google Docs connector. The owner was asked to grant edit access and turn the connector on, or to
-   paste the entry; no answer yet.
-3. Step 8 round 3: review each lane's pushes by re-running (looks included), delete each
-   `handoff-prompts/look3-*.md` when its lane is done; then round 4 = the same review script
-   (`docs/mechanisms/orchestrator-workflows.md`), judging everything against the approved sheets.
-4. Step 17: review pushes B, D, C (`handoff-prompts/step-17-saves-hardening.md`); close the step
-   when its signal passes with saves safe across builds. Step 18: review slice A; then the heavy-slam
-   slice and the fight art (`docs/plan/step-18.md`, "Next, after slice A"). The switch gap:
-   review, then close `t-switch-free` as a fact.
-5. Step 3's fix: land the differential test's verdict (workflow `wdr9dhnqf`), archive its builder,
-   delete `handoff-prompts/step-3-fast-way-out-check.md`. Step 3 item (a) (two phones by touch
-   through the kingdom) is still owed.
-6. **The throw-a-friend flake** (`t-throw-friend`, `t-grab-friend`: about one e2e run in four; the
-   actors builder saw "no throw happened server-side"): brief its own investigation.
-7. Shop interiors: the street's shopfronts as real doors into small shops, from P08's building
-   sheets (offered to the owner at ~16:55 UTC; no objection). A new step.
-8. Before 2026-12-01: Railway stops reading `railway.json`; migrate to `.railway/railway.ts`
-   (`docs/mechanisms/deploy.md`, Traps).
-9. Branch `claude/gallant-keller-1gpm2y` is to be deleted; the delete was refused by a permission
-   check, and the owner was asked at pickup (no answer).
-10. Next uncovered gaps (`docs/vision-gaps.md`, refreshed decd5a2): Step 13 (a roster you grow by
-    recruiting, never drafted), the community swarm, objects with surprising uses, Step 9 (powers),
-    Step 7 (the Hall's detector and wiring; it opens the same store Step 17 opened), Step 6 slice B,
-    Step 4 slice 2 push 4.
+1a. **The core loops** (the owner's verdict): when `docs/plan/core-loops.md` and
+   `handoff-prompts/loop-*.md` are on `main` (the re-plan's own commit; if it has not landed by
+   about 19:45 UTC, ask the previous orchestrator by message, then write the plan yourself from
+   `docs/answers-outbox.md`'s entry and the library), spawn one builder per brief plus one for
+   `handoff-prompts/loop-art-cutouts.md`, each with `model: "claude-opus-5-5"`, claim each step,
+   and tell the owner in plain words what each first playable is and where to find it.
+2. Review by re-running: Step 17's pushes B, C, D (then close Step 17); Step 18 pushes 1 and 2;
+   the switch gap (18f7c48; delete its brief); Step 8 round 3's five lanes for green, then their
+   looks against the approved sheets (delete each `handoff-prompts/look3-*.md`); hit prediction and
+   Step 14 slice A as they report.
+3. **The owner is waiting on two answers they have not given:** the Drive changelog entry for the
+   missing-assets list (the connected account can only view the changelog; the entry text was
+   given to them at 19:10 UTC), and "full speed" or "throttle" for the weekly usage limit.
+4. The throw-a-friend flake (`t-throw-friend`, `t-grab-friend`: 3 runs in 14, "no throw happened
+   server-side"): brief its own investigation.
+5. Shop interiors from P08's building sheets (offered to the owner ~16:55 UTC, no objection).
+6. The Bandit Camp traps heroes if `jumpSpeed` is tuned 10% lower (`docs/plan/step-3.md`, last
+   note); Step 16 lead's two routing notes (`docs/for-the-orchestrator.md`); Step 18's later
+   slices (heavies topple to a throw; fight art); `docs/mechanisms/cantina.md` l.155 still says
+   the cantina's theme is 'town' (it is 'cantina' since ae6147e).
+7. Before 2026-12-01: Railway stops reading `railway.json` (`docs/mechanisms/deploy.md`, Traps).
+8. Branch `claude/gallant-keller-1gpm2y` is to be deleted; a permission check refused it and the
+   owner has not answered.
 
 ## Rules in force now
 
