@@ -255,7 +255,7 @@ Full text: `docs/plan/step-5.md`
 
 ## Step 6 — The king who never stops talking
 
-**Status: open, unclaimed — queued behind Step 3.** (Opens as soon as the throne room is on `main`, not at Step 3's close; its second half needs Step 4's rules.)
+**Status: open, unclaimed.** (Opened 2026-11-23 04:54 UTC: the throne room is on `main` (9a4f6a8). First half first; its second half needs Step 4's rules.)
 
 Full text: `docs/plan/step-6.md`
 
