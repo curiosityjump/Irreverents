@@ -303,7 +303,7 @@ Full text: `docs/plan/step-10.md`
 
 ## Step 11 — The cantina: an endless brawl and the place you change your party
 
-**Status: open, unclaimed.** (Opened 2026-11-23 14:25 UTC by orchestrator session_017WiGzGp8auJceLEAAh9Aqx: the owner, ~14:30 UTC, "I haven't seen any levels being built, enemies, the cantina, etc."; Step 2's feel round, which it waited on, closed at 06a07f4. Runs beside Step 8's look; one worker at a time. Earlier: Drafted from the library by an agent; its independent review did not run before the usage limit stopped it at 04:58 UTC. 4 of its 4 quoted pieces were found verbatim by script. Check its D-numbers and its "What's decided" against the library before briefing from it.)
+**Status: open, claimed by session_017WiGzFy3MD6ecvM7QMvQGd, 2026-11-23.** (Opened 2026-11-23 14:25 UTC by orchestrator session_017WiGzGp8auJceLEAAh9Aqx: the owner, ~14:30 UTC, "I haven't seen any levels being built, enemies, the cantina, etc."; Step 2's feel round, which it waited on, closed at 06a07f4. Runs beside Step 8's look; one worker at a time. Earlier: Drafted from the library by an agent; its independent review did not run before the usage limit stopped it at 04:58 UTC. 4 of its 4 quoted pieces were found verbatim by script. Check its D-numbers and its "What's decided" against the library before briefing from it.)
 
 Full text: `docs/plan/step-11.md`
 
