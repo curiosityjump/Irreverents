@@ -301,7 +301,7 @@ Shared by both briefs; a brief points here rather than repeating it.
   worker archived, brief deleted by it.** Re-run by the lead: build,
   check (all scenarios), and three controls each failing the right
   scenario (flyer `flaps` 0; infiltrator box 26 px tall; the "nobody
-  else is playing it" test removed from `switch.ts`). Thirteen
+  else is playing it" test removed from `switch.ts`). Twelve
   scenarios, renamed by the lead to `step2-body-*`. For signal 3:
   `step2-body-infiltrator-fits-gap` (+ `-grappler-stopped-by-gap`,
   `-flyer-stopped-by-gap`), `step2-body-flyer-reaches-ledge` (+
