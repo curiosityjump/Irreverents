@@ -100,6 +100,12 @@ dark value instead).
 - No approved asset shows the quarry's cliffs, cranes, cave wall, the tower's wall, tree crowns,
   upper storeys or vaults: drawn stand-ins, for the Drive's missing-assets list.
 - `selfcheck.py` still checks its round-2 list of eight rooms, not the six quarry rooms.
+- Push 2 (ae6147e): main moved five times during its five-minute gate; the last rebases brought in
+  other lanes' art and Step 16/17 code, none in this lane's paths. After the last rebase build and
+  check ran before the push and e2e right after it, on the pushed tree (all exit 0).
+- Not looked at: the outpost (its backdrop now takes the tall sky and clouds pinned above it, as
+  the courtyard's does); the 667x375 sideways size.
+- Before/after shots and the measure: `docs/plan/step-8-shots/round3/ground/`.
 
 ## How the contract was read (the world lane matches these)
 

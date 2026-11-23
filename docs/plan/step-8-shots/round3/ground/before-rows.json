@@ -1,0 +1,132 @@
+{
+ "before-quarry-road-1-up": {
+  "flat": 132,
+  "rows": 256,
+  "share": 51.6
+ },
+ "before-quarry-ridge-1-up": {
+  "flat": 196,
+  "rows": 256,
+  "share": 76.6
+ },
+ "before-quarry-cave-1-up": {
+  "flat": 207,
+  "rows": 256,
+  "share": 80.9
+ },
+ "before-quarry-depot-1-up": {
+  "flat": 74,
+  "rows": 256,
+  "share": 28.9
+ },
+ "before-quarry-depot-2-up": {
+  "flat": 65,
+  "rows": 256,
+  "share": 25.4
+ },
+ "before-quarry-pit-1-up": {
+  "flat": 195,
+  "rows": 256,
+  "share": 76.2
+ },
+ "before-quarry-tower-1-up": {
+  "flat": 20,
+  "rows": 256,
+  "share": 7.8
+ },
+ "before-quarry-tower-2-up": {
+  "flat": 21,
+  "rows": 256,
+  "share": 8.2
+ },
+ "before-cantina-1-up": {
+  "flat": 35,
+  "rows": 256,
+  "share": 13.7
+ },
+ "before-courtyard-1-up": {
+  "flat": 115,
+  "rows": 256,
+  "share": 44.9
+ },
+ "before-castle-street-1-up": {
+  "flat": 69,
+  "rows": 256,
+  "share": 27
+ },
+ "before-hall-gallery-1-up": {
+  "flat": 13,
+  "rows": 256,
+  "share": 5.1
+ },
+ "before-throne-room-1-up": {
+  "flat": 3,
+  "rows": 256,
+  "share": 1.2
+ },
+ "before-quarry-road-1-side": {
+  "flat": 47,
+  "rows": 180,
+  "share": 26.1
+ },
+ "before-quarry-ridge-1-side": {
+  "flat": 87,
+  "rows": 180,
+  "share": 48.3
+ },
+ "before-quarry-cave-1-side": {
+  "flat": 44,
+  "rows": 180,
+  "share": 24.4
+ },
+ "before-quarry-depot-1-side": {
+  "flat": 60,
+  "rows": 180,
+  "share": 33.3
+ },
+ "before-quarry-depot-2-side": {
+  "flat": 95,
+  "rows": 180,
+  "share": 52.8
+ },
+ "before-quarry-pit-1-side": {
+  "flat": 136,
+  "rows": 180,
+  "share": 75.6
+ },
+ "before-quarry-tower-1-side": {
+  "flat": 30,
+  "rows": 180,
+  "share": 16.7
+ },
+ "before-quarry-tower-2-side": {
+  "flat": 0,
+  "rows": 180,
+  "share": 0
+ },
+ "before-cantina-1-side": {
+  "flat": 16,
+  "rows": 180,
+  "share": 8.9
+ },
+ "before-courtyard-1-side": {
+  "flat": 9,
+  "rows": 180,
+  "share": 5
+ },
+ "before-castle-street-1-side": {
+  "flat": 5,
+  "rows": 180,
+  "share": 2.8
+ },
+ "before-hall-gallery-1-side": {
+  "flat": 5,
+  "rows": 180,
+  "share": 2.8
+ },
+ "before-throne-room-1-side": {
+  "flat": 5,
+  "rows": 180,
+  "share": 2.8
+ }
+}

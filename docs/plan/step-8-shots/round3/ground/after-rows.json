@@ -1,0 +1,132 @@
+{
+ "after-quarry-road-1-up": {
+  "flat": 0,
+  "rows": 256,
+  "share": 0
+ },
+ "after-quarry-ridge-1-up": {
+  "flat": 0,
+  "rows": 256,
+  "share": 0
+ },
+ "after-quarry-cave-1-up": {
+  "flat": 0,
+  "rows": 256,
+  "share": 0
+ },
+ "after-quarry-depot-1-up": {
+  "flat": 2,
+  "rows": 256,
+  "share": 0.8
+ },
+ "after-quarry-depot-2-up": {
+  "flat": 2,
+  "rows": 256,
+  "share": 0.8
+ },
+ "after-quarry-pit-1-up": {
+  "flat": 2,
+  "rows": 256,
+  "share": 0.8
+ },
+ "after-quarry-tower-1-up": {
+  "flat": 3,
+  "rows": 256,
+  "share": 1.2
+ },
+ "after-quarry-tower-2-up": {
+  "flat": 0,
+  "rows": 256,
+  "share": 0
+ },
+ "after-cantina-1-up": {
+  "flat": 18,
+  "rows": 256,
+  "share": 7
+ },
+ "after-courtyard-1-up": {
+  "flat": 3,
+  "rows": 256,
+  "share": 1.2
+ },
+ "after-castle-street-1-up": {
+  "flat": 5,
+  "rows": 256,
+  "share": 2
+ },
+ "after-hall-gallery-1-up": {
+  "flat": 10,
+  "rows": 256,
+  "share": 3.9
+ },
+ "after-throne-room-1-up": {
+  "flat": 2,
+  "rows": 256,
+  "share": 0.8
+ },
+ "after-quarry-road-1-side": {
+  "flat": 0,
+  "rows": 180,
+  "share": 0
+ },
+ "after-quarry-ridge-1-side": {
+  "flat": 0,
+  "rows": 180,
+  "share": 0
+ },
+ "after-quarry-cave-1-side": {
+  "flat": 0,
+  "rows": 180,
+  "share": 0
+ },
+ "after-quarry-depot-1-side": {
+  "flat": 2,
+  "rows": 180,
+  "share": 1.1
+ },
+ "after-quarry-depot-2-side": {
+  "flat": 2,
+  "rows": 180,
+  "share": 1.1
+ },
+ "after-quarry-pit-1-side": {
+  "flat": 2,
+  "rows": 180,
+  "share": 1.1
+ },
+ "after-quarry-tower-1-side": {
+  "flat": 0,
+  "rows": 180,
+  "share": 0
+ },
+ "after-quarry-tower-2-side": {
+  "flat": 0,
+  "rows": 180,
+  "share": 0
+ },
+ "after-cantina-1-side": {
+  "flat": 2,
+  "rows": 180,
+  "share": 1.1
+ },
+ "after-courtyard-1-side": {
+  "flat": 3,
+  "rows": 180,
+  "share": 1.7
+ },
+ "after-castle-street-1-side": {
+  "flat": 3,
+  "rows": 180,
+  "share": 1.7
+ },
+ "after-hall-gallery-1-side": {
+  "flat": 4,
+  "rows": 180,
+  "share": 2.2
+ },
+ "after-throne-room-1-side": {
+  "flat": 4,
+  "rows": 180,
+  "share": 2.2
+ }
+}
