@@ -312,7 +312,7 @@ Full text: `docs/plan/step-7.md`
 
 ## Step 8 — What you see and hear
 
-**Status: open, claimed by orchestrator session_017WiGzHhke4tkAThPgw6EXs (builders: heroes session_017WiGzEv3ESfjNHm7u3Tk8v, cast session_017WiGzFHN8SWsy5GnNkweMt, ground session_017WiGzHwFkUGGSmDqqnoSDY, props session_017WiGzJxBqVvizcghgHk5NG, actors session_017WiGzFsVDWWZc7nVHbv82A), 2026-11-23.** (Round 3's five lanes sent 17:06 UTC. Put first by the owner at 11:11 UTC; re-claimed 15:50 UTC at pickup.)
+**Status: open, claimed by orchestrator session_017WiGzJzo6aZqH4kYxxJsiV (builders: heroes session_017WiGzEv3ESfjNHm7u3Tk8v, cast session_017WiGzFHN8SWsy5GnNkweMt, ground session_017WiGzHwFkUGGSmDqqnoSDY, props session_017WiGzJxBqVvizcghgHk5NG, actors session_017WiGzFsVDWWZc7nVHbv82A), 2026-11-23.** (Round 3's five lanes sent 17:06 UTC. Put first by the owner at 11:11 UTC; re-claimed 15:50 UTC at pickup.)
 
 Full text: `docs/plan/step-8.md`
 
@@ -340,7 +340,7 @@ Full text: `docs/plan-archive.md`, "Step 11". Durable record: `docs/mechanisms/c
 
 ## Step 14 — Things to find, and knowing there is more
 
-**Status: open, claimed by orchestrator session_017WiGzHhke4tkAThPgw6EXs (builders: session_017WiGzFeeJgj8z2SUAFyu5J), 2026-11-23.** (Opened 18:18 UTC for slice A, the owner's "Not finding clear 'level entries' with discovered indicators".) (Drafted from the library by an agent; its independent review did not run before the usage limit stopped it at 04:58 UTC. 2 of its 2 quoted pieces were found verbatim by script. Check its D-numbers and its "What's decided" against the library before briefing from it.)
+**Status: open, claimed by orchestrator session_017WiGzJzo6aZqH4kYxxJsiV (builders: session_017WiGzFeeJgj8z2SUAFyu5J), 2026-11-23.** (Opened 18:18 UTC for slice A, the owner's "Not finding clear 'level entries' with discovered indicators".) (Drafted from the library by an agent; its independent review did not run before the usage limit stopped it at 04:58 UTC. 2 of its 2 quoted pieces were found verbatim by script. Check its D-numbers and its "What's decided" against the library before briefing from it.)
 
 Full text: `docs/plan/step-14.md`
 
@@ -358,13 +358,13 @@ Full text: `docs/plan/step-16.md`
 
 ## Step 17 — A start screen, and saved games a friend can join
 
-**Status: open, claimed by orchestrator session_017WiGzHhke4tkAThPgw6EXs (builders: session_017WiGzGw7XaQ6tZNddFaa8s), 2026-11-23.** (Opened 2026-11-23 16:00 UTC from the owner's words of ~15:10 UTC, outbox entry at 4294051.)
+**Status: open, claimed by orchestrator session_017WiGzJzo6aZqH4kYxxJsiV (builders: session_017WiGzGw7XaQ6tZNddFaa8s), 2026-11-23.** (Opened 2026-11-23 16:00 UTC from the owner's words of ~15:10 UTC, outbox entry at 4294051.)
 
 Full text: `docs/plan/step-17.md`
 
 ## Step 18 — Enemies and provoked good guys fight
 
-**Status: open, claimed by orchestrator session_017WiGzHhke4tkAThPgw6EXs (builders: session_017WiGzHwmFZe9AdG3KMHsa4), 2026-11-23.** (Opened 17:35 UTC from the owner's words of ~16:05 and ~16:20 UTC; designed by a workflow from the library and the code, with two adversarial checks.)
+**Status: open, claimed by orchestrator session_017WiGzJzo6aZqH4kYxxJsiV (builders: session_017WiGzHwmFZe9AdG3KMHsa4), 2026-11-23.** (Opened 17:35 UTC from the owner's words of ~16:05 and ~16:20 UTC; designed by a workflow from the library and the code, with two adversarial checks.)
 
 Full text: `docs/plan/step-18.md`
 
