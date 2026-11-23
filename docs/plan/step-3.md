@@ -293,6 +293,17 @@ not run-time ones, so every part must draw itself (slice B is told).
 Slice B relaunched fresh at 08:41 UTC with section 13 of its brief:
 four small pushes, stop cleanly by 09:50 UTC.
 
+**The game starts in the throne room (lead, 08:50 UTC).** Step 1's
+follow camera landed at `4678680` (both axes, clamped to the room), so
+the lead switched `startRoom` to `throne-room` and removed `mapStart`.
+Run before pushing: build, check, `npm run e2e` (all facts ok), and the
+built page at 844×390 in headless Chromium: the throne room is drawn
+with its floor, the king and his speech; walking right goes through the
+opening and the view scrolls along the street with its doorways. Not
+tried: touch on that page, a real phone, the live address after the
+push (`npm run check:deployed` is the next thing to run). The camera is
+this step's from here; nothing about it is briefed yet.
+
 ## Open with the owner
 
 ## Handoff notes

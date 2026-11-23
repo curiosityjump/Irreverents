@@ -174,10 +174,9 @@ tiles are reported once ("and 9 more tile(s) beside it").
   perform. A real way out that needs a cleverer move than the list has
   (a chain of precise mid-air turns, another player's help, a thrown
   crate) is reported as missing: the check errs toward "trapped".
-- The start room is `content/game.json`'s `mapStart` if given, else
-  `startRoom`. `mapStart` exists only while the game still starts in the
-  standalone test hall; delete it when `startRoom` becomes a room with
-  doors.
+- The start room is `content/game.json`'s `startRoom` (`mapStart`, if
+  given, overrides it for the map checks only; unused since the game
+  starts in the throne room).
 
 **Limits.**
 

@@ -1,6 +1,5 @@
 {
-  "//": "DRAFT: where a player starts and as whom. Step 3 (the map) and Step 2 (the roster) will want more than one answer. DRAFT: mapStart is the room the kingdom is entered from, for the map checks; the game itself still starts in the grey test hall until the page can follow a character through rooms larger than a screen (Step 1's camera). When startRoom becomes throne-room, delete mapStart.",
-  "startRoom": "graybox-hall",
-  "playerCharacter": "hero",
-  "mapStart": "throne-room"
+  "//": "DRAFT: where a player starts and as whom. Step 3 (the map) and Step 2 (the roster) will want more than one answer.",
+  "startRoom": "throne-room",
+  "playerCharacter": "hero"
 }
