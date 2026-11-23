@@ -159,3 +159,14 @@ Nothing is reachable by a player until builder B's push 2. Notes:
 - Riders' wall crashes and barrier bursts are also counted on the rider's
   own page (its world runs `machine-ram`); the snapshot overwrites them.
 - Not verified: anything on a page's screen (push 3 draws).
+- **Open asks from builder B (23:21, 23:29 UTC), for whoever takes push 3:**
+  the camp's post now breaks at 450 and the wagon can stand no nearer than
+  column 8, so B asks for `speed.rider` about 560-600 with `accel` about
+  300 (a westbound run then snaps the post; the timber barricade can sit at
+  about 540, wagon only), and `crashes` about 16 (B's run from the doorway
+  wrecks at the 8th crash, before the barricade). Builder A agrees with
+  both (all are `DRAFT:` data in `content/machines/ram-wagon.json`), but
+  stopped at the context budget: the change re-times
+  `step20-ram-snaps-the-post`, `-barricade-breaks-and-rolls-on`,
+  `-wears-to-a-wreck` (it counts 8), `-jump-out-at-speed` and the post
+  control (`speed.rider` 290 becomes any number under 450 closing speed).
