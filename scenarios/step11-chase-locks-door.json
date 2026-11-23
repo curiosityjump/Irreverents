@@ -1,0 +1,165 @@
+{
+  "id": "step11-chase-locks-door",
+  "proves": "D-088, chased by the good guys the cantina refuses: in the castle street a hero who takes the shop's goods is caught by the guard (Step 4's step4-guard-follows-seen, the same first 1505 ticks); with the guard chasing and in sight, the hero walks to the cantina's doorway and pushes up: door-refused (chased), the hero stays in the street. The hero runs west into the throne room, out of sight; the street's alert falls to 0 and the guard walks home; the hero walks back to the doorway and pushes up: in. Control: cantina-chase writing an empty list, the first push goes in",
+  "room": "castle-street",
+  "placements": true,
+  "placedRooms": [
+    "cantina"
+  ],
+  "players": [
+    {
+      "id": "a",
+      "character": "hero",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 60,
+      "to": 140,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 1450,
+      "to": 1475,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 1500,
+      "to": 1505,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 2800,
+      "to": 2867,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 2875,
+      "to": 2880,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 2900,
+      "to": 3300,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 4700,
+      "to": 4999,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 5010,
+      "to": 5015,
+      "y": -1
+    }
+  ],
+  "ticks": 5100,
+  "expect": [
+    {
+      "fact": "chased",
+      "between": [
+        2600,
+        2811
+      ],
+      "players": [
+        "a"
+      ]
+    },
+    {
+      "fact": "chased",
+      "between": [
+        2814,
+        2875
+      ],
+      "players": [
+        "a"
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "door-refused",
+      "where": {
+        "entity": "p:a",
+        "player": "a",
+        "room": "castle-street",
+        "door": "to-cantina",
+        "why": "chased"
+      },
+      "between": [
+        2875,
+        2875
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "door-refused",
+      "between": [
+        0,
+        5100
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "in-room",
+      "player": "a",
+      "at": 2900,
+      "room": "castle-street"
+    },
+    {
+      "fact": "alert",
+      "area": "castle-street",
+      "at": 4700,
+      "is": 0
+    },
+    {
+      "fact": "chased",
+      "between": [
+        4700,
+        5100
+      ],
+      "players": []
+    },
+    {
+      "fact": "event-where",
+      "event": "changed-room",
+      "where": {
+        "entity": "p:a",
+        "fromDoor": "to-cantina",
+        "toRoom": "cantina"
+      },
+      "between": [
+        5010,
+        5010
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "in-room",
+      "player": "a",
+      "at": 5100,
+      "room": "cantina"
+    }
+  ]
+}

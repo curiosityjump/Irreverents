@@ -175,6 +175,15 @@ a room written before doors existed is still valid.
 - **Any body.** `INTENT:` the door system never tests for a player. A
   body asks for a doorway through its `Input`, whoever supplies it (a
   player's device, or `entity.c.input` for a body nobody plays).
+- **A door that refuses** (Step 11, D-088): an *enter* doorway may carry
+  `"refuse": "chased"` (only an enter one: a walk door would refuse every
+  tick). It does not take a body on the world's `chased` list (players a
+  good guard is chasing now; `systems/cantina-chase.ts` writes it in the
+  server's world, a page takes it by key) and emits `door-refused
+  {entity, player, room, door, why}` once per push, writing the body's
+  `c.doorRefused` for the page to show a sign. Only the street's
+  `to-cantina` has it; the cantina's own door out never does (`INTENT:`
+  there is always a way out). `docs/mechanisms/cantina.md`.
 - **Order.** The system runs at 600, after physics (500): a door acts on
   where the body is at the end of the tick, and the next tick's physics
   settles it in the far room.

@@ -15,10 +15,14 @@ declare module '../types.ts' {
        */
       want: boolean;
     };
+    /** Step 11: the tick and door of the last refusal (a `refuse` door), for the page to show it. */
+    doorRefused?: { tick: number; room: string; door: string };
   }
   interface EventMap {
     /** Something went through a door. `player` is null for a body nobody drives. */
     'changed-room': { entity: string; player: string | null; fromRoom: string; fromDoor: string; toRoom: string; toDoor: string };
+    /** Step 11 (D-088): a push up at a `"refuse": "chased"` doorway by a body on the world's `chased` list; nothing moved. */
+    'door-refused': { entity: string; player: string | null; room: string; door: string; why: 'chased' };
   }
 }
 
@@ -46,7 +50,9 @@ function clamp(v: number, min: number, max: number): number {
  * physics settles it; the content check guarantees the place it arrives at
  * is not inside a wall.
  *
- * INTENT: doors never test for a player. "A level transition never
+ * INTENT: doors never test for a player. (Step 11: a door with `"refuse":
+ * "chased"` tests a list the world keeps, `world.chased`, which some system
+ * fills; a door still never asks who is a player.) "A level transition never
  * automatically resets pursuit, and guards may follow between regions"
  * (D-077): a guard, a thrown crate and a player all go through the same
  * code. A body asks to use a doorway through its Input, whoever supplies
@@ -91,6 +97,12 @@ const system: System = {
       if (!door) continue;
       // DRAFT: a doorway is used with the stick, no new action button (the brief's call; Amazing Mirror's door).
       if (door.use === 'enter' && !asking) continue;
+      // Step 11 (D-088): chased by the good guys, the cantina's doorway will not take you.
+      if (door.refuse === 'chased' && ctx.world.chased?.includes(e.id)) {
+        e.c.doorRefused = { tick: ctx.world.tick, room: room.id, door: door.id };
+        ctx.emit('door-refused', { entity: e.id, player: e.player, room: room.id, door: door.id, why: 'chased' });
+        continue;
+      }
 
       const farRoom = ctx.content.rooms[door.to.room];
       const far = farRoom?.doors.find((d) => d.id === door.to.door);

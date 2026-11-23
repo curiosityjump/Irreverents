@@ -120,20 +120,46 @@ middle of the cantina player can use to stop fights."*
   (that body's middle each tick), `{ n, x, y }` or `{ n, slot }`; a
   player's `joins: <tick>` puts them in later (`docs/mechanisms/scenarios.md`).
 
+## The chase lock (slice B, D-088)
+
+- **`World.chased`** (optional): the player entity ids a good-side person
+  is chasing now: `c.respond.phase === 'chase'` with that player in
+  `c.respond.sight` (Step 4's responders; only guards respond). Written
+  every tick by `cantina-chase` (order 590, before the doors) **in the
+  server's world only** (guarded on `~cantina`): a page's world has no
+  guards, and writing an empty list there would overwrite the server's
+  every tick. Never deleted (a page copies top-level fields by key, so a
+  deleted one would linger). `DRAFT:` an active chase, not a raised alert;
+  a bad-side chaser (Step 12's camp fighters, `c.outpostFight`) never
+  counts.
+- **The door:** the street's `to-cantina` carries `"refuse": "chased"`
+  (`docs/mechanisms/rooms-and-doors.md`); the page's own step refuses its
+  own push up (`door-refused`). The cantina's `to-street` never refuses.
+- **The sign:** for a second, a red no-entry sign over the doorway on that
+  player's screen only, from their body's `c.doorRefused`
+  (`drawDoorRefused`); no words.
+- **Seen in the trace:** a guard standing over a hero loses sight for two
+  ticks when the hero starts to walk away (tick 2812 in
+  `step11-chase-locks-door`); a push on exactly those ticks would get in.
+  Left as it is (Step 4's sight, not this lock's).
+
 ## Checks
 
 Scenarios `step11-*` (regulars, door, brawl start and not, ring-out,
 walk-off, friend launch, last player leaves, bell, bell out of reach,
 raises nothing; slice B: swap an unplayed member, swap yourself, a
 friend's refused, the row's closing, none in a brawl, a friend joining
-after a swap), each with a control watched to fail; the fact
+after a swap; the chase lock: refused while chased and open after,
+the same push with no chase, a bad-side chaser listing nobody), each with
+a control watched to fail; the fact `chased`; the fact
 `cantina` (`docs/mechanisms/scenarios.md`); the real-server check
 `step11-cantina` (two connections, regulars only on the server, a
 launched player brought back by `move`, acknowledged, able to run; a
 tap through the real connection opens the row, a slot tap changes the
 party on the server and both pages, an own-slot tap makes the player the
 newcomer by `become`, and a third player joining gets the world's first
-free member).
+free member; the server's `chased` list reaches b's page, whose own push
+up at `to-cantina` is refused, and goes in once the list is empty).
 
 ## Traps
 
@@ -153,4 +179,4 @@ words, the bell's place (column 13) and reach, friend shares at 1, no
 ring-out upward (the ceiling), the walk-off put-back: all in
 `docs/decisions-log.md`. Slice B's sizes, timings (`pick`), the row's
 look and the tap's 300 ms likewise. The cantina's tiles borrow the `town`
-theme (`tools/art/tiles/make.py`). Still to come: the chase lock on the door.
+theme (`tools/art/tiles/make.py`). The sign's look and time are `DRAFT:`.

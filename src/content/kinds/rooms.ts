@@ -59,6 +59,13 @@ export interface Door {
    * percentage (D-079).
    */
   hidden: boolean;
+  /**
+   * Step 11 (D-088): `"chased"`: this enter doorway will not take a body
+   * on the world's `chased` list (a player a good guard is chasing now).
+   * Absent: it takes anyone. Only an enter door (a refused push up is one
+   * event; a walk door would refuse every tick).
+   */
+  refuse?: 'chased';
 }
 
 /** A named rectangle of tiles. Nothing reads these yet (D-079: hidden areas count toward the explored percentage). */
@@ -190,7 +197,9 @@ const kind: ContentKind = {
     list(read, o, 'doors').forEach((d, i) => {
       const w = `doors[${i}]`;
       if (d['//'] === 'unusable') return;
-      read.only(d, ['id', 'use', 'side', 'to', 'hidden'], w);
+      read.only(d, ['id', 'use', 'side', 'to', 'hidden', 'refuse'], w);
+      if (d.refuse !== undefined && d.refuse !== 'chased') read.fail(`${w}.refuse`, `must be "chased" or left out, but is ${describe(d.refuse)}`);
+      else if (d.refuse !== undefined && d.use !== 'enter') read.fail(`${w}.refuse`, 'only an enter doorway may refuse (a walk door would refuse every tick)');
       const id = localId(read, d, w, doorIds, 'door');
       const use = d.use as DoorUse;
       if (!USES.includes(use)) read.fail(`${w}.use`, `must be one of ${USES.join(', ')}, but is ${describe(d.use)}`);
@@ -212,6 +221,7 @@ const kind: ContentKind = {
         h: 0,
         to: { room: to ? read.string(to, 'room', `${w}.to`) : '', door: to ? read.string(to, 'door', `${w}.to`) : '' },
         hidden: flag(read, d, 'hidden', w),
+        ...(d.refuse === 'chased' ? { refuse: 'chased' as const } : {}),
       });
       // INTENT: "unadvertised" is checked, not trusted. Whatever comes to count as a sign on a door, a hidden one may not have it.
       if (d.hidden === true && use === 'enter') {

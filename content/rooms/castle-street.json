@@ -91,6 +91,8 @@
     },
     {
       "id": "to-cantina",
+      "//": "DRAFT (Step 11 slice B, D-088): chased by a good guard, the cantina will not let you in; the chase over, it does.",
+      "refuse": "chased",
       "use": "enter",
       "to": {
         "room": "cantina",

@@ -83,6 +83,14 @@ export interface World {
    * it by key with every snapshot).
    */
   party?: string[];
+  /**
+   * Step 11 (D-088): the player entity ids a good-side guard is chasing
+   * right now; a door with `"refuse": "chased"` will not take them
+   * (systems/room-doors.ts). Written only by the server's world
+   * (systems/cantina-chase.ts), every tick, never deleted (a page takes
+   * top-level fields by key, so a deleted one would linger there).
+   */
+  chased?: string[];
 }
 
 /** One room's run-time state. Plain JSON, like the rest of the World. */

@@ -1,0 +1,44 @@
+{
+  "id": "step11-bad-chaser-no-lock",
+  "proves": "D-088 names the good guys: a bad-side fighter going for a hero (Step 12's camp fighter in the test-fight room, as step12-fighter-any-room) never puts the hero on the chased list, so it would never lock the cantina's doorway. Control: cantina-chase also counting a person in an outpost fight, the hero is listed",
+  "room": "test-fight",
+  "placements": true,
+  "placedRooms": [
+    "cantina"
+  ],
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [],
+  "ticks": 300,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "hit",
+      "where": {
+        "by": "tf-fighter",
+        "target": "p:a"
+      },
+      "between": [
+        0,
+        300
+      ],
+      "count": [
+        1,
+        99
+      ]
+    },
+    {
+      "fact": "chased",
+      "between": [
+        0,
+        300
+      ],
+      "players": []
+    }
+  ]
+}

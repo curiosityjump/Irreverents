@@ -13,13 +13,13 @@ import { attachGame } from '../../src/server/game.ts';
 import { padSpot } from '../../src/sim/cantina.ts';
 import { emitEffect } from '../../src/sim/effects.ts';
 import { systems } from '../../src/sim/registry.ts';
-import type { Entity, Input, StepContext, System, World } from '../../src/sim/types.ts';
+import type { Entity, Input, SimEvent, StepContext, System, World } from '../../src/sim/types.ts';
 import type { ScriptCheck } from '../lib/script-checks.ts';
 
 const check: ScriptCheck = {
   id: 'step11-cantina',
   gate: null,
-  proves: "the cantina over the real network: with two players on separate connections in it, the server's world has exactly one regular per roster character nobody plays and each page's own world has none; a player launched past the edge is put back on a pad by the server's move effect, acknowledged, and their own page then has them on the pad, no longer flying, and able to run; slice B: a tap sent through a real connection on a regular opens that player's party row (seen on their page), a tap on a free member's slot changes the world's party on the server and on both pages (no page writes its own), a tap on their own slot makes them the newcomer through the become effect on their own page, and a third player joining then gets the world's party's first free member",
+  proves: "the cantina over the real network: with two players on separate connections in it, the server's world has exactly one regular per roster character nobody plays and each page's own world has none; a player launched past the edge is put back on a pad by the server's move effect, acknowledged, and their own page then has them on the pad, no longer flying, and able to run; slice B: a tap sent through a real connection on a regular opens that player's party row (seen on their page), a tap on a free member's slot changes the world's party on the server and on both pages (no page writes its own), a tap on their own slot makes them the newcomer through the become effect on their own page, and a third player joining then gets the world's party's first free member; the chase lock: with the server's world listing b as chased (world.chased), b's own page holds the list and its push up at the street's cantina doorway is refused there (door-refused), and with the list empty the same push takes b in",
   async run(content: Content): Promise<string[]> {
     const failures: string[] = [];
     const file = Object.values(content.cantina)[0];
@@ -207,6 +207,58 @@ const check: ScriptCheck = {
           if (c.me().kind !== firstFree) failures.push(`a third player joining after the swaps is the ${c.me().kind}, expected the world's party's first free member, the ${firstFree} (party ${want2.join(', ')})`);
         } finally {
           c.leave();
+        }
+      }
+
+      // 5. The chase lock across the network: world.chased is the server's (a page's own world has no guards);
+      // b's page takes it by key, and b's own step refuses b at the street's cantina doorway.
+      const street = content.rooms['castle-street']!;
+      const lockDoor = street.doors.find((d) => d.refuse === 'chased');
+      if (!lockDoor) failures.push('the castle street has no door with "refuse": "chased"');
+      else {
+        let lock = true;
+        const chaser: System = {
+          id: 'throwaway-chased',
+          order: 595,
+          run(ctx) {
+            // The server's world only (a page's holds one player); stands in for a good guard chasing b.
+            if (ctx.world.entities.filter((e) => e.player !== null).length < 2) return;
+            if (lock) ctx.world.chased = [bId];
+          },
+        };
+        const toDoor = once('throwaway-to-street', (ctx) => {
+          const e = ctx.world.entities.find((x) => x.id === bId)!;
+          const box = content.characters[e.kind]!.box;
+          emitEffect(ctx, e, { kind: 'move', room: street.id, x: (lockDoor.tx + lockDoor.w / 2) * street.tile - box.w / 2, y: (lockDoor.ty + lockDoor.h) * street.tile - box.h });
+        });
+        systems.push(chaser, toDoor);
+        const refusedOnB: SimEvent[] = [];
+        try {
+          await until("b's own page is at the street's cantina doorway", () => b.me().room === street.id, () => pos(b.me()), 3000);
+          await until('the server hears b acknowledge it', () => pb.pending.length === 0, () => 'effects still pending', 2000);
+          await until("b's own page holds the server's chased list", () => b.world.chased?.includes(bId) === true, () => `b's page chased ${JSON.stringify(b.world.chased ?? null)}`, 2000);
+          const push = async (): Promise<void> => {
+            inputs.b = { x: 0, y: -1, held: [] };
+            await sleep(100);
+            inputs.b = { x: 0, y: 0, held: [] };
+            await sleep(400);
+          };
+          const orig = b.update;
+          (b as { update: NetClient['update'] }).update = (i) => {
+            const ev = orig(i);
+            refusedOnB.push(...ev.filter((e) => e.type === 'door-refused'));
+            return ev;
+          };
+          await push();
+          if (b.me().room !== street.id) failures.push(`chased, b's push up at ${lockDoor.id} took b to ${b.me().room}; expected refused`);
+          if (refusedOnB.length !== 1) failures.push(`chased, b's own step emitted ${refusedOnB.length} door-refused events for one push, expected 1`);
+          lock = false;
+          await until("b's own page holds the emptied list", () => b.world.chased !== undefined && !b.world.chased.includes(bId), () => `b's page chased ${JSON.stringify(b.world.chased ?? null)}`, 2000);
+          await push();
+          await until('not chased, the same push takes b into the cantina', () => b.me().room === file.room, () => pos(b.me()), 1500);
+          (b as { update: NetClient['update'] }).update = orig;
+        } finally {
+          for (const s of [chaser, toDoor]) if (systems.includes(s)) systems.splice(systems.indexOf(s), 1);
         }
       }
 

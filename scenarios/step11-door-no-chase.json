@@ -1,0 +1,70 @@
+{
+  "id": "step11-door-no-chase",
+  "proves": "the chase lock's control (D-088): the same hero, the same street and the same push up at the cantina's doorway with nobody chasing (no crime, the alert at 0) goes straight in; the chased list stays empty",
+  "room": "castle-street",
+  "placements": true,
+  "placedRooms": [
+    "cantina"
+  ],
+  "players": [
+    {
+      "id": "a",
+      "character": "hero",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 10,
+      "to": 180,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 250,
+      "to": 255,
+      "y": -1
+    }
+  ],
+  "ticks": 300,
+  "expect": [
+    {
+      "fact": "chased",
+      "between": [
+        0,
+        300
+      ],
+      "players": []
+    },
+    {
+      "fact": "event",
+      "event": "door-refused",
+      "between": [
+        0,
+        300
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "changed-room",
+      "where": {
+        "entity": "p:a",
+        "fromDoor": "to-cantina",
+        "toRoom": "cantina"
+      },
+      "between": [
+        250,
+        250
+      ],
+      "count": [
+        1,
+        1
+      ]
+    }
+  ]
+}

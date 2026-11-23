@@ -21,7 +21,7 @@ export function parseScenario(raw: unknown, file: string, stem: string, content:
     fail('(the whole file)', `must be an object, but is ${describe(raw)}`);
     return null;
   }
-  const fields = ['id', 'gate', 'proves', 'room', 'players', 'entities', 'placements', 'tiles', 'inputs', 'ticks', 'expect'];
+  const fields = ['id', 'gate', 'proves', 'room', 'players', 'entities', 'placements', 'placedRooms', 'tiles', 'inputs', 'ticks', 'expect'];
   for (const key of Object.keys(raw)) {
     if (key !== '//' && !fields.includes(key)) fail(key, `unknown field (known fields: ${fields.join(', ')})`);
   }
@@ -97,6 +97,12 @@ export function parseScenario(raw: unknown, file: string, stem: string, content:
   }
 
   if (raw.placements !== undefined && typeof raw.placements !== 'boolean') fail('placements', `must be true or false, but is ${describe(raw.placements)}`);
+  // Step 11: other rooms whose placements are put in too, as the server's world has every room's (the street's door reads the cantina's chase list).
+  const placedRooms: string[] = [];
+  if (raw.placedRooms !== undefined) {
+    if (!Array.isArray(raw.placedRooms)) fail('placedRooms', `must be a list of room ids, but is ${describe(raw.placedRooms)}`);
+    else (raw.placedRooms as unknown[]).forEach((r, i) => (typeof r === 'string' && r in content.rooms ? placedRooms.push(r) : fail(`placedRooms[${i}]`, `no room ${JSON.stringify(r)} (rooms: ${known(content.rooms)})`)));
+  }
 
   // Step 3: tiles changed before the start, standing in for a working part (a closed gate).
   const tiles: NonNullable<Scenario['tiles']> = [];
@@ -173,6 +179,7 @@ export function parseScenario(raw: unknown, file: string, stem: string, content:
     players,
     entities,
     placements: raw.placements === true,
+    ...(placedRooms.length ? { placedRooms } : {}),
     ...(tiles.length ? { tiles } : {}),
     inputs,
     ticks: ticksOk ? (ticks as number) : 1,
@@ -236,6 +243,7 @@ export function simulate(scenario: Scenario, content: Content): Recording {
   const world = createWorld();
   for (const p of scenario.players) if (!p.joins) spawnPlayer(world, content, { player: p.id, character: p.character, room: p.room ?? scenario.room, spawn: p.spawn });
   if (scenario.placements) populateRoom(world, content, scenario.room);
+  for (const r of scenario.placedRooms ?? []) populateRoom(world, content, r);
   for (const e of scenario.entities ?? []) {
     const body = spawnBody(world, content, { id: e.id, character: e.character, room: e.room ?? scenario.room, tile: e.tile });
     body.vx = e.vx ?? 0;

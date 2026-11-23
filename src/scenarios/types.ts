@@ -37,6 +37,8 @@ export interface Scenario {
   tiles?: { room: string; tile: [number, number]; is: number }[];
   /** True: the room's own placements (content/placements/<room>.json) are put in the world too. */
   placements?: boolean;
+  /** Step 11: more rooms whose own placements are put in the world too (populateRoom), as the server's world has every room's. */
+  placedRooms?: string[];
   inputs: InputSpan[];
   /** How many ticks to run. */
   ticks: number;

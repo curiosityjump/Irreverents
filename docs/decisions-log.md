@@ -161,7 +161,6 @@ document as a decision of theirs.
 - **To change it:** one line in `content/game.json`.
 - **Where:** `content/game.json`, switched only once the new rooms are verified
 
-
 ### 2026-11-23 · Four buttons: jump, attack, grab, switch; attack throws what you are carrying
 - **Decided by:** lead, Step 2, `session_017WiGzGRnRoAeW5Ep5iSycV`
 - **Instead of asking:** "Which buttons?" (your library leaves the controls open, D-095, and asks for "a small reusable set of context-sensitive controls, not a dozen tiny virtual buttons".)
@@ -246,7 +245,6 @@ document as a decision of theirs.
 - **To change it:** tell Vision Partner you don't mind interruptions.
 - **Where:** `docs/current-directive.md`, "Stopping condition".
 
-
 ### 2026-11-23 · How the three heroes look and feel for now: a big slow orange one, a tiny quick green one, a light blue one with wings
 - **Decided by:** brief-worker, Step 2 "the body", `session_017WiGzEqGVmbgjJyorj73iV`
 - **Instead of asking:** "How big, how fast and what colour is each of the three, and who does the first person to join get?"
@@ -281,7 +279,6 @@ document as a decision of theirs.
 - **To change it:** small, in one file.
 - **Where:** `docs/mechanisms/rooms-and-doors.md`, "The two kinds of door".
 
-
 ### 2026-11-23 · A Hall picture is the moment rebuilt, not a photograph
 - **Decided by:** Step 7 lead, `session_017WiGzF4QGboHBQtunwprhk`
 - **Instead of asking:** "Is the picture on a pedestal a screenshot?" (your library leaves it open: "screenshots, render replays or in-engine freeze frames?")
@@ -302,7 +299,6 @@ document as a decision of theirs.
 - **Why this way:** no extra button on a phone: stand at a pedestal and its card appears (title, who was there, a few true numbers, where it ranks among its kind); walk away and it goes. A new legend also shows itself for about three seconds wherever you are, without stopping play. And the pedestal is an ordinary heavy body, so it can be hit, grabbed and thrown like anything else: you said not to protect the Hall from gameplay. The record rides on it and is also kept on your storage, so wrecking the Hall never loses one.
 - **To change it:** small either way (a button; a fixed pedestal).
 - **Where:** `docs/plan/step-7.md`; `handoff-prompts/step-7-a-store-and-pedestal.md`.
-
 
 ### 2026-11-23 · Hitting is one button and lands the instant you press; holding up while you hit sends the thing upward
 - **Decided by:** brief-worker, Step 2 "the hit", `session_017WiGzHbbov1AymyWrXuvge`
@@ -394,7 +390,6 @@ document as a decision of theirs.
 - **To change it:** rewrite the text file; any line can be replaced without touching anything else.
 - **Where:** `content/audience/royal-audience.json`.
 
-
 ### 2026-11-23 · On a phone you steer with a left/right pad under your left thumb and round buttons (Jump, Switch, …) under your right; sideways they sit beside the picture, upright below it
 - **Decided by:** Step 1 Gate 2 worker, `session_017WiGzGmZK2vRuZTfKA24QD`
 - **Instead of asking:** "What should the touch controls look like, and may the picture be a little smaller so they never cover it?" (the library asks for a few big controls, not many small ones.)
@@ -472,7 +467,6 @@ document as a decision of theirs.
 - **To change it:** the rooms are data (`content/rooms/courtyard.json`, `hall-gallery.json`, `castle-street.json`): move the letters.
 - **Where:** `docs/mechanisms/rooms-and-doors.md`, "The map tonight".
 
-
 ### 2026-11-23 · Who rings the bell, and what you see when they do
 - **Decided by:** brief-worker, Step 4 slice 2 (brief by the Step 4 lead, `session_017WiGzG4WzuJfHAu3XWoUhc`)
 - **Instead of asking:** "When a shopkeeper is upset, who do they call the guards on, how often, and how does a player see it coming?"
@@ -501,14 +495,12 @@ document as a decision of theirs.
 - **To change it:** the rooms are data (`content/rooms/undercroft.json`): the crawl's length, the drop's height and the chamber's size are letters in a grid.
 - **Where:** `docs/mechanisms/rooms-and-doors.md`, "The map tonight".
 
-
 ### 2026-11-23 · A friend whose phone slept or lost its connection is shown dimmed with three dots until they are back
 - **Decided by:** brief-worker, Step 5 slice A (brief by the Step 5 lead)
 - **Instead of asking:** "When your friend's phone locks or drops off the network, their character just stood there for 15 seconds and vanished. What should you see meanwhile?"
 - **Why this way:** so nobody waits on, or throws things at, a friend who is not there without knowing it. The character goes dim and gets three small dots over its head within a moment of the page going quiet (2.5 seconds of silence, or at once when the connection closes), and is itself again the moment they return. It still disappears after 15 seconds as before. No words on screen: dialogue and text stay minimal.
 - **To change it:** the look is one small file, `src/client/draw/away.ts`; the 2.5 seconds is `AWAY_SILENCE_MS` in `src/server/game.ts`; the 15 is `staleSeconds` in `content/net.json`.
 - **Where:** `docs/mechanisms/network.md`, "A page that went away".
-
 
 ### 2026-11-23 · The game's pictures are being drawn by us, in code, instead of waiting for ChatGPT's asset desk
 - **Decided by:** orchestrator, Step 8, `session_017WiGzHX8g2sXimNRnqp2oZ`
@@ -530,7 +522,6 @@ document as a decision of theirs.
 - **Why this way:** you switched on multi-agent workflow mode in the same message that asked for the look, and a lead would spend its first half hour reading before any pixel changed.
 - **To change it:** release Step 8's claim in `docs/plan.md` and start a lead; everything it needs is in the step file.
 - **Where:** `docs/plan/step-8.md`, "The look".
-
 
 ### 2026-11-23 · The new look arrives piece by piece over the next hours, each piece restarting the world for about a minute
 - **Decided by:** orchestrator, Step 8, `session_017WiGzHX8g2sXimNRnqp2oZ`
@@ -587,7 +578,6 @@ document as a decision of theirs.
 - **Why this way:** you said "I haven't seen any levels being built, enemies, the cantina, etc. there is a bunch of stuff I haven't seen yet". Step 11 (the cantina's brawl) and Step 12 (the outpost: guards who call for help, a chase) bring those, and the game-feel work they lean on is done. The look keeps going at the same time. Only two more leads start, each running one worker at a time, because ten sessions at once hit the account's usage limit at 12:36 UTC.
 - **To change it:** release Step 11's or Step 12's claim in `docs/plan.md` (or tell the orchestrator which to stop).
 - **Where:** `docs/plan.md` Steps 11 and 12; `docs/current-directive.md`.
-
 
 ### 2026-11-23 · The heroes you liked stay; the grappler and the infiltrator get bigger faces, and the grappler leaves the castle's colours
 - **Decided by:** orchestrator, Step 8 look round 2 (synthesis stage), `session_017WiGzGp8auJceLEAAh9Aqx`
@@ -729,10 +719,16 @@ document as a decision of theirs.
 - **To change it:** `src/sim/systems/room-doors.ts` (what counts as asking), the Use button's door state in `src/client/touch.ts`/`shell.ts`, the arrow in `src/client/draw/door-hint.ts`. A separate "Go in" button would be a new action file in `content/actions/`.
 - **Where:** `docs/mechanisms/rooms-and-doors.md`, "The two kinds of door".
 
-
 ### 2026-11-23 · The quarry's bad guys: three kinds, where they stand, and the toll
 - **Decided by:** Step 16 slice 2 builder (`handoff-prompts/step-16-b-quarry-enemies.md`), for the Step 16 lead `session_017WiGzHt9iJy3caBLkT1Ef4`
 - **Instead of asking:** how heavy and how tough each kind is, where they stand, and how paying a toll can work when the bad guys fight on sight.
 - **Why this way:** three kinds that feel different under the same punch: a light fighter (Step 12's) flies about 18 tiles; a heavy (three times its weight) moves under two tiles and goes down on the eighth punch; a brute is bigger than the grappler, slow, hits very hard, and only the grappler can lift it. A slam wears a body by its speed, and a heavy thrown by the grappler is too slow for a slam to beat a punch, so the heavy is dropped by many punches, not by one throw (the nearest the current wear rules allow). Bad guys stand in every room but the cave, two or three to a place; one brute on the ridge's east stretch. The toll on the road: a toll keeper who cannot swing (otherwise a hostile keeper punches whoever comes to pay) keeps a counter, and a fighter watches; paying once troubles them both, three times enrages them. Only buying from the toll keeper troubles a bad guy: one who sees a hero buy at a shop is untouched.
 - **To change it:** weights and toughness are in `content/tuning.json` (`heavy-fighter`, `brute`); people in `content/placements/quarry-*.json`; the toll's rule in `content/rules/quarry.json`.
 - **Where:** `docs/plan/step-16.md`, handoff notes.
+
+### 2026-11-23 · Chased into the cantina: a red no-entry sign over the door
+- **Decided by:** Step 11 slice B builder `session_017WiGzHXvo5fjfVSeDUTX44`, for the Step 11 lead `session_017WiGzFy3MD6ecvM7QMvQGd`
+- **Instead of asking:** "How does a player know the cantina door won't open because the guard is after them?"
+- **Why this way:** a small red no-entry sign hops up over the doorway for a second, on that player's screen only, with no words (the owner: very limited dialogue; nothing over a hit). The way out of the cantina is never locked.
+- **To change it:** the look and its second in `src/client/draw/cantina.ts` (`drawDoorRefused`).
+- **Where:** `docs/mechanisms/cantina.md`, "The chase lock".

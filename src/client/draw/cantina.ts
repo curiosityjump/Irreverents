@@ -164,3 +164,36 @@ function drawRow(g: CanvasRenderingContext2D, world: World, content: Content, me
   });
   return out;
 }
+
+/** DRAFT: how long (ticks) the refusal sign shows after a refused push. */
+const REFUSED_TICKS = 60;
+const SIGN_RED = '#d62828';
+
+/**
+ * Step 11 slice B (D-088): the cantina's doorway refused this player (a
+ * good guard is chasing them): for a second, a no-entry sign over the
+ * doorway, on their own screen only. Drawn from their own body's
+ * `c.doorRefused`, which their own device's step writes (room-doors.ts).
+ * INTENT: no words, and nothing over a hit (D-020).
+ */
+export function drawDoorRefused(g: CanvasRenderingContext2D, world: World, content: Content, roomId: string, ox: number, oy: number, me?: string): void {
+  const r = me ? world.entities.find((e) => e.id === me)?.c.doorRefused : undefined;
+  if (!r || r.room !== roomId) return;
+  const since = world.tick - r.tick;
+  if (since < 0 || since >= REFUSED_TICKS) return;
+  const room = content.rooms[roomId];
+  const door = room?.doors.find((d) => d.id === r.door);
+  if (!room || !door) return;
+  const T = room.tile;
+  const cx = Math.round(ox + (door.tx + door.w / 2) * T);
+  // A small hop on arrival, then still.
+  const cy = Math.round(oy + door.ty * T - 18 - (since < 8 ? 8 - since : 0) / 2);
+  g.fillStyle = INK;
+  g.fillRect(cx - 7, cy - 5, 14, 10);
+  g.fillRect(cx - 5, cy - 7, 10, 14);
+  g.fillStyle = SIGN_RED;
+  g.fillRect(cx - 6, cy - 4, 12, 8);
+  g.fillRect(cx - 4, cy - 6, 8, 12);
+  g.fillStyle = PAPER;
+  g.fillRect(cx - 4, cy - 1, 8, 2);
+}

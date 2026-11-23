@@ -3,7 +3,7 @@ import type { World } from '../sim/types.ts';
 import { drawAlert, drawBells } from './draw/alert.ts';
 import { drawAudience } from './draw/audience.ts';
 import { drawAway } from './draw/away.ts';
-import { drawCantina, drawCantinaBell } from './draw/cantina.ts';
+import { drawCantina, drawCantinaBell, drawDoorRefused } from './draw/cantina.ts';
 import { drawBackdrop, drawFrontLayers } from './draw/backdrop.ts';
 import { drawDecor } from './draw/decor.ts';
 import { drawEntities } from './draw/entities.ts';
@@ -81,6 +81,7 @@ export function render(g: CanvasRenderingContext2D, world: World, content: Conte
   drawAlert(g, world, content, roomId, ox, oy);
   drawAudience(g, world, content, roomId, ox, oy);
   drawHall(g, world, content, roomId, ox, oy);
+  drawDoorRefused(g, world, content, roomId, ox, oy, pv?.me);
   drawCantina(g, world, content, roomId, pv?.me);
   return { x: -ox, y: -oy };
 }

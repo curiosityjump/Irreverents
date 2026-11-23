@@ -32,6 +32,7 @@
   "doors": [
     {
       "id": "to-street",
+      "//": "INTENT (Step 11 slice B): never \"refuse\" here. The way out of the cantina is always open (there is always a way out); only the street's doorway in is locked by a chase (D-088).",
       "use": "enter",
       "to": {
         "room": "castle-street",
