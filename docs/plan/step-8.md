@@ -404,6 +404,8 @@ Round 2 of the look (2026-11-23, "Round 2" above): `handoff-prompts/look2-heroes
 
 Round 3 of the look (2026-11-23, "Round 3" above): `handoff-prompts/look3-heroes.md`, `look3-cast.md`, `look3-ground.md`, `look3-props.md`, `look3-actors.md`. Delete each when its lane is reviewed.
 
+Round 3 builders (sent 17:06 UTC by orchestrator session_017WiGzHhke4tkAThPgw6EXs): heroes `session_017WiGzFWVvNJrmXZ81rABuv` (reused, round 2's heroes builder), cast `session_017WiGzFHN8SWsy5GnNkweMt`, ground `session_017WiGzHwFkUGGSmDqqnoSDY`, props `session_017WiGzJxBqVvizcghgHk5NG`, actors `session_017WiGzFsVDWWZc7nVHbv82A`.
+
 ## Open with the owner
 
 - Q-006 answered (2026-11-23, via Vision Partner): *"Many of the visuals are there to establish direction. Chat has been organizing the drive to be usable. Just review it's documentation."* The boards stay as direction. Judge what is usable from ChatGPT's own asset-library docs (`docs/design-library/asset-library-start-here-claude.md` and `06-asset-collaboration-claude-chatgpt/`), not from the boards. Later decisions trump earlier ones (Q-005).
