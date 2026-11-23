@@ -7,7 +7,7 @@
 // before calling here): every scripted check joins `?room=check-…` and
 // must go straight into play.
 import type { Content } from '../content/types.ts';
-import { cleanGameCode, GAME_CODE_LENGTH, GAME_PREFIX, gameCode, isGameCode, makeGameCode } from '../net/game-code.ts';
+import { cleanGameCode, codeFromText, GAME_CODE_LENGTH, GAME_PREFIX, gameCode, isGameCode, makeGameCode } from '../net/game-code.ts';
 import { DEFAULT_WORLD } from '../net/protocol.ts';
 import { look } from './draw/looks.ts';
 
@@ -42,6 +42,10 @@ export function playedGames(device: Kept): string[] {
   } catch {
     return [];
   }
+}
+
+function forgetGame(device: Kept, code: string): void {
+  device.set(GAMES_KEY, JSON.stringify(playedGames(device).filter((c) => c !== code)));
 }
 
 function rememberGame(device: Kept, code: string): void {
@@ -106,8 +110,9 @@ const CSS = `
   box-sizing: border-box; background: rgba(20, 18, 40, .96); display: flex; flex-direction: column; align-items: center; }
 #start[hidden], #game-menu[hidden], #menu-btn[hidden] { display: none; }
 #start .st-title { margin: 6px 0 14px; filter: drop-shadow(0 3px 0 #0b0a18); }
-#start .st-cols { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; gap: 10px 28px; width: 100%; }
-#start .st-col { display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 330px; }
+/* Two columns side by side from 568 px wide (an iPhone SE sideways): each at least 250 px, at most 330. */
+#start .st-cols { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; gap: 10px 20px; width: 100%; }
+#start .st-col { display: flex; flex-direction: column; gap: 10px; flex: 1 1 250px; min-width: 0; max-width: 330px; }
 .st-btn { -webkit-appearance: none; appearance: none; margin: 0; width: 100%; min-height: 52px; padding: 8px 14px; border: 0; border-radius: 12px; cursor: pointer;
   display: flex; align-items: center; justify-content: center; gap: 10px; touch-action: manipulation;
   background: radial-gradient(circle at 50% 30%, var(--night2), var(--night1) 80%); box-shadow: inset 0 0 0 2px rgba(210, 207, 224, .55), inset 0 -4px 0 2px rgba(20, 18, 40, .6);
@@ -134,6 +139,7 @@ const CSS = `
 #game-menu, #gone { justify-content: center; }
 #gone .st-col { display: flex; flex-direction: column; gap: 14px; width: 100%; max-width: 330px; }
 #gone .st-say { font-size: 16px; line-height: 1.4; }
+.st-link { font: 500 13px/1.35 ui-monospace, "SF Mono", Menlo, monospace; color: var(--pale); word-break: break-all; text-align: center; -webkit-user-select: text; user-select: text; }
 #game-menu .st-col { display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 330px; align-items: stretch; }
 #game-menu .st-code { align-self: center; margin: 4px 0 8px; }
 `;
@@ -188,6 +194,13 @@ export function showStart(opts: StartOptions): StartRecord {
   const linkCode = linked.length === GAME_CODE_LENGTH && isGameCode(linked) ? linked : null;
   const playing = tab.get(PLAYING_KEY) ?? '';
 
+  // Step 17 hardening (item 10): the owner's `?tune` link must survive the
+  // start screen. INTENT: every address this screen writes keeps `tune`.
+  const tune = opts.params.has('tune');
+  const address = (code: string | null): string => {
+    const parts = [...(code ? [`game=${code}`] : []), ...(tune ? ['tune'] : [])];
+    return parts.length > 0 ? `?${parts.join('&')}` : location.pathname;
+  };
   let done = false;
   const go = (world: string): void => {
     if (done) return;
@@ -197,7 +210,7 @@ export function showStart(opts: StartOptions): StartRecord {
     if (code) rememberGame(device, code);
     // The address says where this tab is: a game's is its share link.
     try {
-      history.replaceState(null, '', code ? `?game=${code}` : location.pathname);
+      history.replaceState(null, '', address(code));
     } catch {
       // an address that cannot be changed changes nothing else
     }
@@ -237,7 +250,10 @@ export function showStart(opts: StartOptions): StartRecord {
     join.addEventListener('click', () => go(GAME_PREFIX + linkCode));
     const back = button('Start screen', 'to-start', 'quiet');
     back.addEventListener('click', () => {
-      location.href = location.pathname;
+      // INTENT: forget the world this tab last played, or the start screen
+      // would go straight back into it (the review's item 13).
+      tab.set(PLAYING_KEY, '');
+      location.href = location.pathname + (tune ? '?tune' : '');
     });
     const col = el('div', { class: 'st-col' }, join, back);
     root.append(el('div', { class: 'st-title' }, words(content, 'Irreverents', 4)), col);
@@ -261,7 +277,6 @@ export function showStart(opts: StartOptions): StartRecord {
     id: 'join-code',
     'aria-label': 'Game code',
     placeholder: '-'.repeat(GAME_CODE_LENGTH),
-    maxlength: String(GAME_CODE_LENGTH),
     autocapitalize: 'characters',
     autocomplete: 'off',
     autocorrect: 'off',
@@ -269,15 +284,16 @@ export function showStart(opts: StartOptions): StartRecord {
     enterkeyhint: 'go',
     inputmode: 'text',
   });
-  // Upper-cased as typed; only the code's letters stay.
+  // Upper-cased as typed; only the code's letters stay. No maxlength: a
+  // pasted link or message is read whole first (codeFromText), then cut.
   field.addEventListener('input', () => {
-    const clean = cleanGameCode(field.value);
+    const clean = codeFromText(field.value);
     if (field.value !== clean) field.value = clean;
     if (record.message) tell('');
   });
   const join = button('Join', 'join');
   const tryJoin = async (): Promise<void> => {
-    const code = cleanGameCode(field.value);
+    const code = codeFromText(field.value);
     if (code.length !== GAME_CODE_LENGTH) return tell(`A code is ${GAME_CODE_LENGTH} letters`);
     join.disabled = true;
     const there = await exists(code);
@@ -303,7 +319,21 @@ export function showStart(opts: StartOptions): StartRecord {
     right.append(el('div', { class: 'st-label' }, words(content, 'Continue', 2)));
     for (const code of record.continues) {
       const b = button(`Continue ${code}`, `continue-${code}`);
-      b.addEventListener('click', () => go(GAME_PREFIX + code));
+      b.addEventListener('click', async () => {
+        if (b.disabled) return;
+        b.disabled = true;
+        const there = await exists(code);
+        b.disabled = false;
+        // A game whose save is gone would start empty under its old code: say so, and forget it here.
+        if (there === false) {
+          forgetGame(device, code);
+          record.continues = record.continues.filter((c) => c !== code);
+          b.remove();
+          return tell('That game is gone');
+        }
+        if (there === null) return tell('No connection. Try again');
+        go(GAME_PREFIX + code);
+      });
       right.append(b);
     }
   }
@@ -353,10 +383,16 @@ export function setUpMenu(opts: MenuOptions): void {
         nav.share({ title: 'Irreverents', text: `Join my game: ${code}`, url }).catch(() => {});
         return;
       }
-      navigator.clipboard?.writeText(url).then(
-        () => tell('Link copied'),
-        () => tell(url.replace(/^https?:\/\//, '')),
-      ) ?? tell(url.replace(/^https?:\/\//, ''));
+      // Neither share nor copy: the code is already large above; the link goes under it, small and wrapped.
+      const showLink = (): void => {
+        tell('');
+        const line = el('div', { class: 'st-link' });
+        line.textContent = url.replace(/^https?:\/\//, '');
+        say.replaceChildren(line);
+      };
+      const copy = navigator.clipboard?.writeText(url);
+      if (copy) copy.then(() => tell('Link copied'), showLink);
+      else showLink();
     });
     col.append(share);
   } else if (opts.worldName === DEFAULT_WORLD) {
@@ -366,7 +402,7 @@ export function setUpMenu(opts: MenuOptions): void {
   back.addEventListener('click', () => {
     opts.leave();
     opts.tab.set(PLAYING_KEY, '');
-    location.href = location.pathname;
+    location.href = location.pathname + (new URLSearchParams(location.search).has('tune') ? '?tune' : '');
   });
   // INTENT: there is always a way out of the panel too: Close, or a tap outside it.
   const close = button('Close', 'close', 'quiet');
@@ -382,6 +418,20 @@ export function setUpMenu(opts: MenuOptions): void {
   panel.append(col);
   btn.addEventListener('click', () => (panel.hidden = false));
   document.body.append(btn, panel);
+  // INTENT (the review's item 11): the menu holds the way out, so nothing may
+  // sit on it. On a `?tune` page the Tune button (tune.ts) places itself at
+  // the view's top-left; when the two overlap, the menu moves just right of it.
+  const clear = (): void => {
+    const other = document.getElementById('tune-open');
+    btn.style.left = '';
+    if (!other) return;
+    const a = btn.getBoundingClientRect();
+    const b = other.getBoundingClientRect();
+    if (a.right > b.left && a.left < b.right && a.bottom > b.top && a.top < b.bottom) btn.style.left = `${Math.ceil(b.right + 6)}px`;
+  };
+  clear();
+  window.addEventListener('resize', () => requestAnimationFrame(clear));
+  setInterval(clear, 1000);
 }
 
 // ---- A world the server set aside ----------------------------------------

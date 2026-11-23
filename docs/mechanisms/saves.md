@@ -224,13 +224,37 @@ file, no "exists", the part state and the body's place gone).
   keyboard. Sound starts on the first tap, as before: `createAudio` now
   runs before the start screen, so that tap is any of its buttons.
 
+Hardening push D (the review of 884bb80, five bugs), each with an e2e fact
+watched to fail on push C's client:
+
+- **`?tune` survives the start screen** (`INTENT:` in `start.ts`): every
+  address it writes keeps `tune` (`?game=ABCD&tune`), the link page's Start
+  screen and the menu's Back keep it, and `main.ts` reads the flag once at
+  load (`start-tune`; control: no Tune button after New game).
+- **Nothing covers the menu button**: on a `?tune` page the Tune button
+  sits at the view's top-left, so the menu moves just right of it when they
+  overlap (`INTENT:`; `start-tune` taps the centre of each; control: the
+  menu could not be tapped).
+- **Two columns from 568 px wide** (each 250 to 330 px): `start-sideways`
+  measures 750×340 (Playwright's iPhone 14 sideways) and 667×330 (an iPhone
+  SE sideways at Safari's real height); control: Continue off screen at
+  667×330.
+- **The link page's Start screen forgets the world this tab played**
+  (`start-link-back`; control: it dropped into `main`).
+- **Pasting**: no `maxlength`; `codeFromText` (`src/net/game-code.ts`;
+  `scripts/checks/step17-codes.ts`) takes `game=XXXX` from a link, the last
+  whole code from a message, else the letters (`start-paste`; control: HTTP,
+  JN, ABC).
+- **Continue asks first**: a game whose save is gone says "That game is
+  gone" and leaves the list (`start-continue-gone`). When neither share nor
+  copy works, the menu shows the link small and wrapped under the code.
+
 e2e facts `start-*` (`scripts/e2e/start-screen.ts`, local runs only: a run
 leaves a save on the server's volume): `start-shown` (the bare address
 shows it, every choice on screen and 44 px or more, the field 16 px or more
 and in the upper half), `start-unknown`, `start-new`, `start-sideways`
-(iPhone 14 sideways with four games remembered: all seven choices on
-screen; watched to fail on the first layout, where Everyone's kingdom sat
-under the Continue list, off screen), `start-join` (the
+(at 750×340 and 667×330 with four games remembered: all seven choices on
+screen), `start-join` (the
 menu's code, Close, the link's one tap, sound unlocked by it, each page
 draws the other), `start-back` (back, Continue lists the game first, the
 friend's page stops drawing them), `start-room` (`?room=` never shows it,

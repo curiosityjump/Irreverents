@@ -68,6 +68,8 @@ function newPlayer(): string {
 }
 
 const params = new URLSearchParams(location.search);
+// Step 17 hardening: read once at load, before the start screen rewrites the address (it keeps `tune`, but play must not depend on that).
+const tuneAtLoad = tuneWanted(location.search);
 const builtFrom = document.querySelector('meta[name="build"]')?.getAttribute('content') ?? '';
 
 function connect(handlers: TransportHandlers): Transport {
@@ -167,7 +169,7 @@ function play(worldName: string): void {
   if (isTouchDevice()) touchHost.hidden = false;
   window.addEventListener('touchstart', () => (touchHost.hidden = false), { passive: true });
   // Step 2: the feel dials, only with ?tune in the address (src/client/tune.ts).
-  if (tuneWanted(location.search)) setUpTune({ content, net, canvas, touchHost });
+  if (tuneAtLoad) setUpTune({ content, net, canvas, touchHost });
 
   // Step 11 (docs/mechanisms/cantina.md): a tap on the game view itself, not
   // on the pad or a button (they sit over it and take their own touches). It

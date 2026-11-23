@@ -41,3 +41,19 @@ export function makeGameCode(random: () => number): string {
 export function cleanGameCode(typed: string): string {
   return [...typed.toUpperCase()].filter((ch) => GAME_LETTERS.includes(ch)).join('').slice(0, GAME_CODE_LENGTH);
 }
+
+/**
+ * The code in whatever was typed or pasted into the code field: a shared
+ * link's `game=XXXX`; else, in text with spaces or punctuation (the share
+ * message "Join my game: ABCD"), its last word that is a whole code; else
+ * the letters as typed (cleanGameCode), so "ab cd" is ABCD.
+ */
+export function codeFromText(text: string): string {
+  const linked = /[?&]game=([A-Za-z]+)/.exec(text);
+  if (linked) return cleanGameCode(linked[1]!);
+  if (/[^A-Za-z]/.test(text.trim())) {
+    const words = text.split(/[^A-Za-z]+/).map((w) => w.toUpperCase()).filter((w) => w.length === GAME_CODE_LENGTH && isGameCode(w));
+    if (words.length > 0) return words[words.length - 1]!;
+  }
+  return cleanGameCode(text);
+}

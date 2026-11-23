@@ -88,20 +88,33 @@ export async function startFacts(run: { browser: any; devices: any; base: string
     await A.tap('#game-menu [data-menu="close"]');
     await sleep(100);
     const closed = await A.evaluate(() => (document.getElementById('game-menu') as HTMLElement).hidden);
-    // Sideways, with as many games to continue as it shows: every choice still on screen.
-    await B.goto(`${base}/`);
-    await B.evaluate(() => localStorage.setItem('irreverents.games', JSON.stringify(['HJKR', 'MNPB', 'QWZX', 'TUVW'])));
-    await B.reload();
-    await safely(B.waitForSelector('#start [data-start="kingdom"]', { timeout: 5000 }));
-    const side = await B.evaluate(() =>
-      [...document.querySelectorAll('#start button, #start input')].map((e) => {
-        const r = e.getBoundingClientRect();
-        return { name: (e as HTMLElement).dataset.start ?? e.id, ok: r.height >= 44 && r.top >= 0 && r.bottom <= innerHeight && r.left >= 0 && r.right <= innerWidth };
-      }),
-    );
-    await B.screenshot({ path: path.join(out, 'start-sideways.png') });
-    const offSide = side.filter((t: any) => !t.ok).map((t: any) => t.name);
-    fact('start-sideways', side.length === 7 && offSide.length === 0, `sideways (844x390) with four games remembered, the start screen has ${side.length} choices (3 to continue shown) and ${offSide.length ? `these are off screen or small: ${offSide.join(', ')}` : 'every one is on screen and 44 px or taller'}`);
+    // Sideways, with as many games to continue as it shows: every choice still
+    // on screen, on Playwright's iPhone 14 sideways and on an iPhone SE
+    // sideways at Safari's real height there (667 wide, about 330 high).
+    const SE = await browser.newContext({ viewport: { width: 667, height: 330 }, hasTouch: true, isMobile: true, deviceScaleFactor: 2 });
+    const sizes: string[] = [];
+    const offSide: string[] = [];
+    let choices = 0;
+    for (const P of [B, await SE.newPage()]) {
+      await P.goto(`${base}/`);
+      await P.evaluate(() => localStorage.setItem('irreverents.games', JSON.stringify(['HJKR', 'MNPB', 'QWZX', 'TUVW'])));
+      await P.reload();
+      await safely(P.waitForSelector('#start [data-start="kingdom"]', { timeout: 5000 }));
+      const side = await P.evaluate(() => ({
+        size: `${innerWidth}x${innerHeight}`,
+        all: [...document.querySelectorAll('#start button, #start input')].map((e) => {
+          const r = e.getBoundingClientRect();
+          return { name: (e as HTMLElement).dataset.start ?? e.id, ok: r.height >= 44 && r.top >= 0 && r.bottom <= innerHeight && r.left >= 0 && r.right <= innerWidth };
+        }),
+      }));
+      sizes.push(side.size);
+      choices = Math.max(choices, side.all.length);
+      offSide.push(...side.all.filter((t: any) => !t.ok).map((t: any) => `${t.name} at ${side.size}`));
+      if (side.all.length !== 7) offSide.push(`${side.all.length} choices at ${side.size}`);
+      await P.screenshot({ path: path.join(out, `start-sideways-${side.size}.png`) });
+    }
+    await SE.close();
+    fact('start-sideways', offSide.length === 0, `sideways at ${sizes.join(' and ')} (the page's own measure) with four games remembered, the start screen has ${choices} choices (3 to continue shown) and ${offSide.length ? `these are off screen or small: ${offSide.join(', ')}` : 'every one is on screen and 44 px or taller'}`);
     await B.goto(`${base}/?game=${code}`);
     await safely(B.waitForSelector('#start [data-start="join-link"]', { timeout: 5000 }));
     const link = await B.evaluate(() => ({ shown: (window as any).irreverents.start?.shown, world: (window as any).irreverents.worldName }));
@@ -147,6 +160,66 @@ export async function startFacts(run: { browser: any; devices: any; base: string
     fact('start-room', !!inC && !c.start && c.record === undefined && c.menu && roomMenu.join() === 'back,close',
       `a ?room= page: ${inC ? 'in play at once' : 'NOT in play'}, start screen ${c.start ? 'SHOWN' : 'never shown'}; its menu has [${roomMenu.join(', ')}] (only the way back, and Close)`);
     await C.close();
+
+    // 7. The review of the start screen (hardening push D), one page each.
+    const D = await (await browser.newContext({ ...devices['iPhone 14'] })).newPage();
+    D.on('pageerror', (e: Error) => errors.push(`start D: ${e.message}`));
+    const tapsTo = (sel: string): Promise<boolean> =>
+      D.evaluate((s: string) => {
+        const e = document.querySelector(s) as HTMLElement | null;
+        if (!e) return false;
+        const r = e.getBoundingClientRect();
+        const hit = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2);
+        return !!hit && (hit === e || e.contains(hit));
+      }, sel);
+    //    (10, 11) The owner's ?tune link: New game keeps the Tune button, after a reload too, and it never covers the menu.
+    await D.goto(`${base}/?tune`);
+    await safely(D.waitForSelector('#start [data-start="new"]', { timeout: 5000 }));
+    await D.tap('#start [data-start="new"]');
+    await safely(online(D));
+    await safely(D.waitForSelector('#tune-open', { timeout: 3000 }));
+    await sleep(1200);
+    const t1 = { tune: !!(await D.$('#tune-open')), address: await D.evaluate(() => location.search), menu: await tapsTo('#menu-btn'), tuneTap: await tapsTo('#tune-open') };
+    await D.reload();
+    await safely(online(D));
+    await safely(D.waitForSelector('#tune-open', { timeout: 3000 }));
+    await sleep(1200);
+    const t2 = { tune: !!(await D.$('#tune-open')), menu: await tapsTo('#menu-btn'), tuneTap: await tapsTo('#tune-open'), world: await D.evaluate(() => (window as any).irreverents.worldName) };
+    await D.screenshot({ path: path.join(out, 'start-tune.png') });
+    fact('start-tune', t1.tune && t2.tune && t1.menu && t1.tuneTap && t2.menu && t2.tuneTap && /^\?game=[A-Z]{4}&tune$/.test(t1.address) && /^game-/.test(t2.world),
+      `/?tune then New game: Tune button ${t1.tune ? 'there' : 'MISSING'}, address ${t1.address}; after a reload ${t2.tune ? 'still there' : 'MISSING'} in ${t2.world}; a tap at the centre of each reaches it: menu ${t1.menu}/${t2.menu}, Tune ${t1.tuneTap}/${t2.tuneTap}`);
+    //    (13) A tab that last played main, opening a shared link, then "Start screen": the start screen, not main.
+    await D.goto(`${base}/`);
+    await safely(D.waitForSelector('#start [data-start="kingdom"]', { timeout: 5000 }));
+    await D.tap('#start [data-start="kingdom"]');
+    await safely(online(D));
+    const inMain = await D.evaluate(() => (window as any).irreverents.worldName);
+    await D.goto(`${base}/?game=${code}`);
+    await safely(D.waitForSelector('#start [data-start="to-start"]', { timeout: 5000 }));
+    await D.tap('#start [data-start="to-start"]');
+    await safely(D.waitForSelector('#start [data-start="new"]', { timeout: 5000 }));
+    await sleep(300);
+    const after = await D.evaluate(() => ({ shown: (window as any).irreverents.start?.shown, world: (window as any).irreverents.worldName }));
+    fact('start-link-back', inMain === 'main' && after.shown === 'start' && after.world === '', `a tab that played ${inMain} opened a shared link and tapped Start screen: the ${after.shown ?? 'NO'} screen, world ${JSON.stringify(after.world)}`);
+    //    (14) Pasting: a link, the share message, letters with a space. From a clean start screen, whatever the fact above found.
+    await D.evaluate(() => sessionStorage.clear());
+    await D.goto(`${base}/`);
+    await safely(D.waitForSelector('#join-code', { timeout: 5000 }));
+    const pasted: string[] = [];
+    for (const text of [`${base}/?game=HJKR`, 'Join my game: MNPB', 'ab cd']) {
+      await D.fill('#join-code', text);
+      pasted.push(await D.evaluate(() => (document.getElementById('join-code') as HTMLInputElement).value));
+    }
+    fact('start-paste', pasted.join() === 'HJKR,MNPB,ABCD', `pasted a link, the share message and "ab cd": the field holds ${pasted.join(', ')} (expected HJKR, MNPB, ABCD)`);
+    //    (15) Continue on a game whose save is gone: said, and dropped from the list.
+    await D.evaluate(() => localStorage.setItem('irreverents.games', JSON.stringify(['ZZZZ'])));
+    await D.reload();
+    await safely(D.waitForSelector('#start [data-start="continue-ZZZZ"]', { timeout: 5000 }));
+    await D.tap('#start [data-start="continue-ZZZZ"]');
+    await safely(D.waitForFunction(() => (window as any).irreverents.start.message !== '', null, { timeout: 3000 }));
+    const lost = await D.evaluate(() => ({ message: (window as any).irreverents.start.message, world: (window as any).irreverents.worldName, button: !!document.querySelector('#start [data-start="continue-ZZZZ"]'), kept: localStorage.getItem('irreverents.games') }));
+    fact('start-continue-gone', lost.message === 'That game is gone' && lost.world === '' && !lost.button && lost.kept === '[]', `Continue on a game with no save: says "${lost.message}", world ${JSON.stringify(lost.world)}, its button ${lost.button ? 'STILL there' : 'gone'}, this phone's list now ${lost.kept}`);
+    await D.context().close();
   } finally {
     await ctxA.close();
     await ctxB.close();

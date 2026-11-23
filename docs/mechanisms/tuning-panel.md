@@ -19,8 +19,10 @@ can make them the default in `content/tuning.json`.
 ## How to use it (for the owner)
 
 - Open `https://irreverents-production.up.railway.app/?tune` (or add
-  `&room=<name>` for a private world). A small **Tune** button sits at the
-  top left of the view; tap it.
+  `&room=<name>` for a private world). Without `room`, the start screen
+  comes first; pick any choice and `tune` stays in the address (Step 17).
+  A small **Tune** button sits at the top left of the view (the menu
+  button moves aside for it); tap it.
 - The character you are playing is first and open; the other party
   members, then **World (everyone)**, then the people and objects follow.
   In each, the numbers felt most come first: top run speed (`runSpeed`),
