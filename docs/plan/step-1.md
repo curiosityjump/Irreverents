@@ -77,6 +77,15 @@ may overrule one with a measurement, recording why here.
   server need not distrust a client. Whatever is chosen must keep one rule:
   **the network layer replicates the simulation's state generically**, so a
   later step that adds a kind of NPC or object writes no network code.
+- **Built for several leads at once.** Steps 2, 3 and 4 will build in
+  parallel on top of Gate 1, and every push deploys. So a new verb, a new
+  kind of NPC behaviour, a new room or object must be added by **adding
+  files that register themselves** (code) or by adding data, not by
+  editing one shared list or switch that three sessions would all touch.
+  Room geometry and who or what is placed in a room are separate data
+  files (Step 3 owns the first, Step 4 the people). The player's actions
+  are one abstract list (move, jump, attack, grab, …) that the touch
+  layout and the keyboard both read, so adding an action is one entry.
 - **Solo works with the same build.** One person opening the URL can play;
   nothing waits for a second player (owner's rule, D-015).
 - **Joining needs nothing.** Everyone who opens the URL is in the same

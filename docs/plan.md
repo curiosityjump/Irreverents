@@ -203,3 +203,28 @@ questions.
 **Status: open, claimed by session_017WiGzEwLs3ng2ZPpRZgctn, 2026-11-23.**
 
 Full text: `docs/plan/step-1.md`
+
+## Step 2 — Moving, hitting, grabbing and throwing
+
+**Status: open, unclaimed — queued behind Step 1.** (Opens at Step 1's Gate 1, the contract, not its close.)
+
+Full text: `docs/plan/step-2.md`
+
+## Step 3 — A small kingdom to explore
+
+**Status: open, unclaimed — queued behind Step 1.** (Opens at Step 1's Gate 1.)
+
+Full text: `docs/plan/step-3.md`
+
+## Step 4 — People who react
+
+**Status: open, unclaimed — queued behind Step 1.** (Opens at Step 1's Gate 1.)
+
+Full text: `docs/plan/step-4.md`
+
+## Step 5 — Comfortable on an iPhone, easy to play together
+
+**Status: open, unclaimed — queued behind Step 1.** (Opens when Step 1 closes.)
+
+Full text: `docs/plan/step-5.md`
+
