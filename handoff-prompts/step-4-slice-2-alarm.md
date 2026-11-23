@@ -86,6 +86,11 @@ When done, message the lead (`send_message` to
   bell; emit `call-started`, then `call-completed { by, area, x, y }`
   where `x, y` is where the caller last witnessed something, or
   `call-stopped { by, why }`.
+- **Every change of an area's alert emits `alert-changed { area, from,
+  to }`** (the area is the room id tonight). Step 7's legend detector
+  reads this and `call-started` / `call-completed` / `call-stopped`
+  (agreed with its lead, `session_017WiGzF4QGboHBQtunwprhk`, 04:45
+  UTC): keep these four names and fields exactly.
 - **The scale:** each completed call adds 1, to a most of 3. The violent
   level is 1: any alert above 0 means pursuit. One level cools per
   `npcAlertCoolTime` (20 s) of quiet.
