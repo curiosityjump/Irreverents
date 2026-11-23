@@ -158,7 +158,8 @@ the server.
 
 ## Movement feel (Step 2, 2026-11-23)
 
-Numbers are each character's, declared by `verbs/jump.ts` and read by
+Numbers are each character's (with any held power laid over them, Step 9:
+`numbersOf`, `docs/mechanisms/powers.md`), declared by `verbs/jump.ts` and read by
 physics (a per-character number must be declared by one of that
 character's verbs). They shape only a body moving itself: a body knocked
 flying or flattened, and any kind without them, falls by `world.gravity`

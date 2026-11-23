@@ -2,6 +2,7 @@ import { TILE } from '../../content/kinds/rooms.ts';
 import type { Room } from '../../content/kinds/rooms.ts';
 import { tileAt } from '../room-state.ts';
 import { takesNoPhysics } from '../body-state.ts';
+import { numbersOf } from '../powers.ts';
 import { DT } from '../types.ts';
 import type { System } from '../types.ts';
 
@@ -44,7 +45,6 @@ const system: System = {
   },
   run(ctx) {
     const { gravity, maxFallSpeed } = ctx.content.tuning.world;
-    const sets = ctx.content.tuning.characters;
     for (const e of ctx.world.entities) {
       const room = ctx.content.rooms[e.room];
       const kind = ctx.content.characters[e.kind];
@@ -60,7 +60,8 @@ const system: System = {
       // numbers, falls by the world's. DRAFT: docs/mechanisms/combat-and-impact.md.
       let pull = gravity!;
       let cap = maxFallSpeed!;
-      const own = e.c.flying || e.c.flattened ? undefined : sets[kind.tuning];
+      // Step 9: the body's own numbers with any held power laid over them (src/sim/powers.ts).
+      const own = e.c.flying || e.c.flattened ? undefined : numbersOf(ctx.content, e);
       if (own && own.fallSpeed !== undefined) {
         cap = own.fallSpeed;
         if (Math.abs(e.vy) < (own.apexSpeed ?? 0) && !e.onGround) pull *= own.apexGravity ?? 1;

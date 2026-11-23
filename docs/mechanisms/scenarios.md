@@ -74,6 +74,8 @@ a file, edit no list. The first is `together` (gate F,
   room's (the street's door reads the chase list the cantina's systems write).
 - A player may carry `"joins": <tick>`: put in the world at the start of
   that tick, as a friend arriving later (Step 11), instead of before tick 0.
+- A player may carry `"power": "<power id>"` (Step 9): they hold that
+  power from before tick 0, as if they had taken it (`docs/mechanisms/powers.md`).
 - **Ticks:** 60 a second. "At tick N" means after N steps; tick 0 is the
   start. An event's tick is the step it happened in.
 - Positions are measured at **the middle of the character's feet**, in

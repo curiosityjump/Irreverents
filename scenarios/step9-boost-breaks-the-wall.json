@@ -1,0 +1,18 @@
+{
+  "//": "DRAFT (Step 9): the boost's hit. An infiltrator, the weakest hitter (8000), holds the boost and strikes a heavy dummy (weight 110) west into the undercroft's vault wall: 30000 / 110 is about 272 px/s, over wallBreakSpeed 200, so the wall breaks. The control is step9-boost-breaks-the-wall-control: the same blow without the boost (about 73 px/s) leaves the wall standing.",
+  "id": "step9-boost-breaks-the-wall",
+  "gate": null,
+  "proves": "a body struck by an infiltrator holding the boost flies into a cracked wall hard enough to break it",
+  "room": "undercroft",
+  "players": [{ "id": "a", "character": "infiltrator", "spawn": 2, "power": "boost" }],
+  "entities": [{ "id": "dummy", "character": "dummy-heavy", "tile": [6, 12] }],
+  "inputs": [
+    { "player": "a", "from": 5, "to": 6, "x": -1 },
+    { "player": "a", "from": 10, "to": 12, "hold": ["attack"] }
+  ],
+  "ticks": 60,
+  "expect": [
+    { "fact": "event", "event": "hit", "player": "a", "where": { "target": "dummy" }, "between": [10, 14] },
+    { "fact": "event", "event": "part-broken", "where": { "part": "vault-wall", "by": "dummy" }, "between": [10, 40] }
+  ]
+}

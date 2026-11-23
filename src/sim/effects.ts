@@ -24,7 +24,9 @@ export type Effect =
   /** Put somewhere: a door, a respawn. `x`,`y` are the top-left of its box in `room`; it arrives standing still. */
   | { kind: 'move'; room: string; x: number; y: number }
   /** Step 11: becomes character `to`, standing at `x`,`y` (top-left of the new box), still (a cantina swap; docs/mechanisms/cantina.md). */
-  | { kind: 'become'; to: string; x: number; y: number };
+  | { kind: 'become'; to: string; x: number; y: number }
+  /** Step 9: now holds power `power` (content/powers/), or none (null); `src`, the source it was taken from (docs/mechanisms/powers.md). */
+  | { kind: 'power'; power: string | null; src?: string };
 
 declare module './types.ts' {
   interface Components {
@@ -69,6 +71,9 @@ export function applyEffect(e: Entity, effect: Effect): void {
     e.y = effect.y;
     e.vx = 0;
     e.vy = 0;
+  } else if (effect.kind === 'power') {
+    if (effect.power === null) delete e.c.power;
+    else e.c.power = { id: effect.power, ...(effect.src ? { src: effect.src } : {}) };
   }
 }
 

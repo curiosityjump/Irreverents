@@ -1,4 +1,5 @@
 import { canAct } from '../body-state.ts';
+import { numbersOf, verbsOf } from '../powers.ts';
 import { verbs } from '../registry.ts';
 import type { Input, System } from '../types.ts';
 import { NO_INPUT } from '../world.ts';
@@ -25,15 +26,17 @@ const system: System = {
   run(ctx) {
     for (const entity of ctx.world.entities) {
       const kind = ctx.content.characters[entity.kind];
-      if (!kind || kind.verbs.length === 0) continue;
+      // Step 9: a held power may lend verbs and raise numbers (src/sim/powers.ts); with none these are the kind's own.
+      const own = kind ? verbsOf(ctx.content, entity) : [];
+      if (!kind || own.length === 0) continue;
       // A body that is flying, carried, in a held beat or flattened is moved
       // by what happened to it: none of its verbs run, so no verb (move would
       // pull a knockback back to the stick's speed) needs its own test.
       if (!canAct(entity)) continue;
       const input = (entity.player === null ? entity.c.input : ctx.inputs[entity.player]) ?? NO_INPUT;
-      const tuning = ctx.content.tuning.characters[kind.tuning] ?? {};
+      const tuning = numbersOf(ctx.content, entity);
       for (const verb of verbs) {
-        if (kind.verbs.includes(verb.id)) verb.update(ctx, entity, input, tuning);
+        if (own.includes(verb.id)) verb.update(ctx, entity, input, tuning);
       }
     }
   },

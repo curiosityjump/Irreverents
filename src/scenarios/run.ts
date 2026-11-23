@@ -54,7 +54,9 @@ export function parseScenario(raw: unknown, file: string, stem: string, content:
       else if (typeof p.room === 'string' && content.rooms[p.room]!.spawns.length === 0) fail(`${w}.room`, `room "${p.room}" has no spawn tile for a player to start on`);
       // Step 11: a player who joins on a later tick (a friend arriving after a swap); left out, before tick 0.
       if (p.joins !== undefined && (typeof p.joins !== 'number' || !Number.isInteger(p.joins) || p.joins < 0)) fail(`${w}.joins`, `must be a whole tick from 0, but is ${JSON.stringify(p.joins)}`);
-      players.push({ id: String(p.id), character: p.character === undefined ? undefined : String(p.character), spawn: Number(spawn), ...(typeof p.room === 'string' ? { room: p.room } : {}), ...(typeof p.joins === 'number' && p.joins > 0 ? { joins: p.joins } : {}) });
+      // Step 9: a player who starts holding a power (content/powers/), as if they had taken it before tick 0.
+      if (p.power !== undefined && (typeof p.power !== 'string' || !(p.power in (content.powers ?? {})))) fail(`${w}.power`, `no power ${JSON.stringify(p.power)} (powers: ${known(content.powers ?? {})})`);
+      players.push({ id: String(p.id), character: p.character === undefined ? undefined : String(p.character), spawn: Number(spawn), ...(typeof p.room === 'string' ? { room: p.room } : {}), ...(typeof p.joins === 'number' && p.joins > 0 ? { joins: p.joins } : {}), ...(typeof p.power === 'string' ? { power: p.power } : {}) });
     });
   }
 
@@ -241,7 +243,11 @@ export function entityInputsAt(scenario: Scenario, tick: number): Record<string,
 
 export function simulate(scenario: Scenario, content: Content): Recording {
   const world = createWorld();
-  for (const p of scenario.players) if (!p.joins) spawnPlayer(world, content, { player: p.id, character: p.character, room: p.room ?? scenario.room, spawn: p.spawn });
+  for (const p of scenario.players) {
+    if (p.joins) continue;
+    const e = spawnPlayer(world, content, { player: p.id, character: p.character, room: p.room ?? scenario.room, spawn: p.spawn });
+    if (p.power) e.c.power = { id: p.power };
+  }
   if (scenario.placements) populateRoom(world, content, scenario.room);
   for (const r of scenario.placedRooms ?? []) populateRoom(world, content, r);
   for (const e of scenario.entities ?? []) {

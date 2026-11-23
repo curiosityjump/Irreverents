@@ -6,6 +6,7 @@
 import type { Content } from '../content/types.ts';
 import { emitEffect, heldBy } from './effects.ts';
 import { boxInSolid } from './party.ts';
+import { numbersOf } from './powers.ts';
 import { TICK_RATE } from './types.ts';
 import type { Entity, Input, StepContext } from './types.ts';
 import { NO_INPUT } from './world.ts';
@@ -103,8 +104,8 @@ export function inputOf(ctx: StepContext, e: Entity): Input {
  * character kind can be hit, grabbed and thrown.
  */
 export function bodyNumbers(content: Content, e: Entity): { weight: number; toughness: number } {
-  const kind = content.characters[e.kind];
-  const set = (kind && content.tuning.characters[kind.tuning]) || {};
+  // Step 9: with a held power laid over the kind's own numbers (src/sim/powers.ts).
+  const set = numbersOf(content, e);
   const world = content.tuning.world;
   return { weight: set.weight ?? world.defaultWeight ?? 40, toughness: set.toughness ?? world.defaultToughness ?? 0 };
 }

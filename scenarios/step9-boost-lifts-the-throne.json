@@ -1,0 +1,17 @@
+{
+  "//": "DRAFT (Step 9): the boost's grab. The grappler, the strongest lifter (150), holds the boost and lifts a throne (weight 400) in the throne room. The control is step9-boost-lifts-the-throne-control: the same grappler and the same press, without the boost, refused as too heavy.",
+  "id": "step9-boost-lifts-the-throne",
+  "gate": null,
+  "proves": "a grappler holding the boost lifts the throne (weight 400), which nobody can lift without it",
+  "room": "throne-room",
+  "players": [{ "id": "a", "character": "grappler", "spawn": 0, "power": "boost" }],
+  "entities": [{ "id": "throne", "character": "throne", "tile": [10, 14] }],
+  "inputs": [{ "player": "a", "from": 10, "to": 14, "hold": ["grab"] }],
+  "ticks": 40,
+  "expect": [
+    { "fact": "event", "event": "grabbed", "player": "a", "where": { "target": "throne" }, "between": [10, 12] },
+    { "fact": "event", "event": "grab-refused", "player": "a", "between": [0, 40], "count": [0, 0] },
+    { "fact": "body-state", "entity": "throne", "at": 40, "is": ["held"] },
+    { "fact": "power", "player": "a", "at": 40, "is": "boost" }
+  ]
+}

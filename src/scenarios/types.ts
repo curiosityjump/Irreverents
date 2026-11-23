@@ -29,7 +29,8 @@ export interface Scenario {
   /** `character` left out: the player gets the first party member nobody is playing, as a new player does. */
   /** `room`: where this player starts; left out, the scenario's `room` (Step 3). */
   /** `joins`: the tick this player is put in the world (Step 11); left out, before tick 0. */
-  players: { id: string; character?: string; spawn: number; room?: string; joins?: number }[];
+  /** `power` (Step 9): the player starts holding this power (content/powers/), as if taken before tick 0. */
+  players: { id: string; character?: string; spawn: number; room?: string; joins?: number; power?: string }[];
   /** Bodies nobody plays, put in the room before tick 0. Their entity id is `id`. */
   /** `room`: which room the body is put in; left out, the scenario's `room` (Step 3). */
   entities?: { id: string; character: string; tile: [number, number]; vx?: number; vy?: number; room?: string }[];

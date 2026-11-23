@@ -1,4 +1,5 @@
 import type { Content, Problem } from '../content/types.ts';
+import { checkPowers } from './check-powers.ts';
 import { checkRooms } from './check-rooms.ts';
 import { systems, verbs } from './registry.ts';
 import { TICK_RATE } from './types.ts';
@@ -92,5 +93,7 @@ export function checkContentAgainstSim(content: Content): Problem[] {
   }
   // Step 3: working parts and (docs/mechanisms/rooms-and-doors.md) that every room has a way out.
   problems.push(...checkRooms(content, systems));
+  // Step 9: what a power changes is read by some verb, and a lent verb has its numbers (src/sim/check-powers.ts).
+  problems.push(...checkPowers(content));
   return problems;
 }

@@ -961,3 +961,10 @@ document as a decision of theirs.
 - **Why this way:** D-093 (a few context-sensitive touch controls): the button must name what it will do, so the game needs one answer to what it does. The order is the one that was already played: a doorway first (decisions-log "Doorways by Use"), then the nearest thing, then the cantina's bell. Nothing a player does changes; nothing near the bell can be taken today.
 - **To change it:** the `order` number in one file per kind of thing Use does (`src/sim/use/`).
 - **Where:** `docs/mechanisms/heists.md`, "The Use arbiter"; `docs/plan/step-19.md`.
+
+### 2026-11-23 · Step 9: two powers to start, a strength boost anyone can use and wings, each one file you can change
+- **Decided by:** Step 9 builder, `session_017WiGzF16bBpnLmeWErGynR` (brief `loop-powers.md`)
+- **Instead of asking:** "Which powers come first, and what does each one do?" (O-005 is open)
+- **Why this way:** the owner, playing: "no power/item stealing". The common power has to be felt by whoever takes it, and player one is the grappler, who already lifts and throws nearly everything. So the boost raises every hero to above the grappler: a hit sends a body across the screen and through a cracked wall, and Grab lifts the throne. The rare one is wings (lends flapping), because the quarry pit has a ledge nobody can reach. Library doc 24 offers "limited grab/speed variants" as examples. A power is laid over the hero's own moves and never replaces them (D-082).
+- **To change it:** each power is a file in `content/powers/` (its name, icon, numbers, lent verbs). Add a file to add a power.
+- **Where:** `docs/mechanisms/powers.md`.

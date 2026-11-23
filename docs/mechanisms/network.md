@@ -97,7 +97,9 @@ The contract for Steps 2 and 3 is `docs/architecture.md`, "Effects on a
 player" (`src/sim/effects.ts`: `emitEffect`, kinds `push`, `hold`,
 `release`, `move`, and Step 11's `become`: the character changes kind
 where it stands, a cantina swap; the page takes the server's copy, kind
-included, like any non-push effect). How the layer delivers one:
+included, like any non-push effect; and Step 9's `power`: the power the
+character holds, which travels this way because the page never gets the
+server's `c` for its own character, `docs/mechanisms/powers.md`). How the layer delivers one:
 
 - A character a page owns is a **puppet** on the server: its state there
   is the page's latest report, put back after every tick. The server

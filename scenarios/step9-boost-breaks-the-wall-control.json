@@ -1,0 +1,67 @@
+{
+  "//": "DRAFT (Step 9): the control of step9-boost-breaks-the-wall. The same infiltrator, dummy, room and blow, without the boost: about 73 px/s, so the vault wall stands.",
+  "id": "step9-boost-breaks-the-wall-control",
+  "gate": null,
+  "proves": "without the boost the same infiltrator's same blow does not break the cracked wall",
+  "room": "undercroft",
+  "players": [
+    {
+      "id": "a",
+      "character": "infiltrator",
+      "spawn": 2
+    }
+  ],
+  "entities": [
+    {
+      "id": "dummy",
+      "character": "dummy-heavy",
+      "tile": [
+        6,
+        12
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 5,
+      "to": 6,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 10,
+      "to": 12,
+      "hold": [
+        "attack"
+      ]
+    }
+  ],
+  "ticks": 60,
+  "expect": [
+    {
+      "fact": "event",
+      "event": "hit",
+      "player": "a",
+      "where": {
+        "target": "dummy"
+      },
+      "between": [
+        10,
+        14
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "part-broken",
+      "between": [
+        0,
+        60
+      ],
+      "count": [
+        0,
+        0
+      ]
+    }
+  ]
+}
