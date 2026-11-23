@@ -15,6 +15,42 @@
       "jumpCutMultiplier": 0.45,
       "coyoteTime": 0.1,
       "jumpBufferTime": 0.1
+    },
+    "grappler": {
+      "//": "DRAFT: heavy: slower to start and stop, a little slower at full run.",
+      "runSpeed": 84,
+      "runAccel": 600,
+      "runDecel": 900,
+      "airAccel": 400,
+      "airDecel": 200,
+      "jumpSpeed": 315,
+      "jumpCutMultiplier": 0.45,
+      "coyoteTime": 0.1,
+      "jumpBufferTime": 0.1
+    },
+    "infiltrator": {
+      "//": "DRAFT: quick and twitchy, with a lower jump.",
+      "runSpeed": 128,
+      "runAccel": 1500,
+      "runDecel": 1800,
+      "airAccel": 900,
+      "airDecel": 450,
+      "jumpSpeed": 310,
+      "jumpCutMultiplier": 0.45,
+      "coyoteTime": 0.1,
+      "jumpBufferTime": 0.1
+    },
+    "flyer": {
+      "//": "DRAFT: light: a weak jump from the ground, good steering in the air.",
+      "runSpeed": 92,
+      "runAccel": 800,
+      "runDecel": 1000,
+      "airAccel": 800,
+      "airDecel": 300,
+      "jumpSpeed": 300,
+      "jumpCutMultiplier": 0.45,
+      "coyoteTime": 0.1,
+      "jumpBufferTime": 0.1
     }
   }
 }

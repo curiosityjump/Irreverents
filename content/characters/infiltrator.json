@@ -1,0 +1,12 @@
+{
+  "//": "DRAFT: placeholder for the 'tiny infiltrator' function (docs/plan/step-2.md). Its own move is its body: at most 14 px tall, so it runs through a one-tile-high (16 px) gap the other two are stopped by.",
+  "id": "infiltrator",
+  "name": "Graybox Infiltrator",
+  "box": { "w": 10, "h": 12 },
+  "color": "#8ac926",
+  "verbs": [
+    "move",
+    "jump"
+  ],
+  "tuning": "infiltrator"
+}

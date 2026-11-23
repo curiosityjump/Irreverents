@@ -1,0 +1,8 @@
+{
+  "//": "DRAFT: the one shared party (D-012, D-013): the member characters, in the order a new player is given them and the switch button cycles through them. Three tonight, one of each function; the count and the order are provisional (O-003 is open).",
+  "members": [
+    "grappler",
+    "infiltrator",
+    "flyer"
+  ]
+}
