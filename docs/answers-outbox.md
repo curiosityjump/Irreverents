@@ -50,6 +50,6 @@ entry: "first vision written; no plan exists yet", naming the sections.
 
 ### Vision · first vision written; no plan exists yet
 - **Answer:** genesis vision written from the owner's Drive library (now mirrored at `docs/design-library/`) and their chat answers.
-- **Recorded in:** `docs/vision.md`: "Where the detail lives", "Who this is for, and why", "What \"working\" looks like", "The long-term direction", "The measure" (open, Q-003), "Principles that decide most questions", "Frontiers" (7), "Still open".
+- **Recorded in:** `docs/vision.md`: "Where the detail lives", "Who this is for, and why", "What “working” looks like", "The long-term direction", "The measure" (open, Q-003), "Principles that decide most questions", "Frontiers" (7), "Still open".
 - **Action for:** orchestrator (vision-level): write `docs/plan.md` from it. Q-003 (the measure) and Q-007 (first slice) are open in the ledger and shape the first step.
 
