@@ -545,3 +545,10 @@ document as a decision of theirs.
 - **Why this way:** you said "Use opus instead of fable if needed". Drawing is the part most likely to decide whether it looks right, so it keeps the stronger model; the renderer, the upright layout and sound go to Opus so that a tripped limit cannot stop everything at once.
 - **To change it:** say which model you want for which; it is one setting per worker.
 - **Where:** `docs/plan/step-8.md`, "The look".
+
+### 2026-11-23 · A dial change on the `?tune` panel applies to everyone in that world, until the next restart
+- **Decided by:** Step 2 lead, `session_017WiGzGN9egot3JUvSMBBA9`
+- **Instead of asking:** "When you change how the game feels from your phone, should it change only for you, or for everyone playing with you; and should it be kept?"
+- **Why this way:** hits, throws and bounces are worked out on the server, so a change only on your phone would leave half the dials doing nothing. You tune with your brother-in-law in the same world, so you both feel the same change. Nothing in the game is kept between restarts yet, so the panel copies the numbers out for a session to make them the default.
+- **To change it:** say "tune only for me" (the dial stays on your phone; the server-run numbers then cannot be dialled) or "keep my dials" (needs saving, Step 7's store).
+- **Where:** `handoff-prompts/step-2-feel-dials.md`; when it lands, `docs/mechanisms/tuning-panel.md`.

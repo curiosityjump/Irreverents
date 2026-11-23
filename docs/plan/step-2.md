@@ -281,6 +281,16 @@ Shared by both briefs; a brief points here rather than repeating it.
   switching, the infiltrator's and flyer's own moves. Worker
   `session_017WiGzEqGVmbgjJyorj73iV`, launched 04:32 UTC; due 06:45.
 
+- **Feel round (lead `session_017WiGzGN9egot3JUvSMBBA9`, 2026-11-23 ~12:15 UTC):**
+  `handoff-prompts/step-2-feel-sim.md` (movement shaping, attack phases,
+  hit weight, floor bounce, states the renderer needs) and
+  `handoff-prompts/step-2-feel-dials.md` (the `?tune` panel, reaching the
+  server), two workers at once. Measured at d2459f0: coyote time, jump
+  buffer and variable height exist with no scenario proving them;
+  gravity is world-only; the attack lands on the press tick; the held
+  beat is fixed; floors do not bounce; the page runs its own movement
+  and the server runs hits, so a dial has to reach the server.
+
 - `handoff-prompts/step-2-touch-and-two-screens.md`: the touch check
   and the both-screens throw, released by the orchestrator at 08:42
   UTC after Step 1's Gate 2 went live at 4678680. One worker; due
