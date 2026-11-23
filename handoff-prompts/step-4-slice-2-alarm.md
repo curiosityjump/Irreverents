@@ -5,12 +5,12 @@ lead (`session_017WiGzG4WzuJfHAu3XWoUhc`). The step is
 `docs/plan/step-4.md`. Self-contained: you do not need the design library
 or `docs/vision.md`.
 
-## Status at 09:48 UTC (lead): pushes 1 and 2 are done and reviewed
+## Status at 10:00 UTC (lead): pushes 1, 2 and 3 are done and reviewed
 
 On `main`: the bell, the call, the alert, the guard responding, cooling
-(`513dbf5`), and following through doors (`ade2616`). **Left for the
-next worker, in this order:** push 3 (hiding counts as unseen), then
-push 4's knocked-out pieces (the blow that knocks someone out is
+(`513dbf5`), following through doors (`ade2616`) and hiding counts as
+unseen (`f164e0c`). **Left for the next worker:** push 4's knocked-out
+pieces (the blow that knocks someone out is
 perceived by them; finding a knocked-out person; the
 `step4-caller-knocked-out` control). The rest of this brief stands.
 

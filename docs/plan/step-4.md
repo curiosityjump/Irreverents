@@ -433,3 +433,15 @@ for later, as the step suggests.
   Gates C and D are passing with a scenario for every signal except
   (2). The slice 2 brief stays in `handoff-prompts/` until (1) and (2)
   are done; its first section says what is left.
+- **Lead, 10:00 UTC. Slice 2 push 3 reviewed** (`f164e0c`): a hero
+  standing still in one of Step 3's hiding places (`c.roomHide`) is not
+  seen (`src/sim/npc/sight.ts`); `step4-hiding-is-unseen` and its
+  partner; gate D lists 11 scenarios. Review: fresh pull, build and
+  check green (93 ok), gates 5 of 6; my control (the hiding line
+  removed) fails the hiding scenario. Not looked at on the live page.
+  The worker (`session_017WiGzEUPtEnYYKos3LUoLn`) had not seen the stop
+  and was starting push 4; I interrupted it at 09:54. **So of the list
+  above, (1) is done; (2), the knocked-out pieces and the
+  `step4-caller-knocked-out` control, and (3), a real iPhone, are what
+  is left.** Any uncommitted push-4 work in the worker's container is
+  not on `main` and should be redone from the brief, not recovered.
