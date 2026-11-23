@@ -217,7 +217,7 @@ is additive and is what makes ground join up.
   outdoors; `throne-room` royal interior (the start room); `hall-gallery`
   a grand interior hall; `undercroft` a dark cellar; `graybox-hall` a
   plain interior; `cantina` a tavern's inside (the `town` theme's
-  plaster, timbers and board floor; `DRAFT:`, Step 11). The `test-*` rooms are fixtures for scripted checks and
+  plaster, timbers and board floor; `DRAFT:`, Step 11); `outpost` (the Bandit Camp) outdoors past the courtyard, its grass-ruins blocks and backdrop (`DRAFT:`, Step 12). The `test-*` rooms are fixtures for scripted checks and
   get no art.
 
 ## Behind the ground: `content/backdrops/<room id>.json` (new kind)

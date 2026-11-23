@@ -233,7 +233,7 @@ def seam_test(room_id, name):
 
 def main():
     os.makedirs(OUT, exist_ok=True)
-    themes = {'courtyard': 'grass-ruins', 'castle-street': 'town', 'throne-room': 'castle', 'undercroft': 'cellar', 'cantina': 'town'}
+    themes = {'courtyard': 'grass-ruins', 'castle-street': 'town', 'throne-room': 'castle', 'undercroft': 'cellar', 'cantina': 'town', 'outpost': 'grass-ruins'}
     for room_id, name in themes.items():
         sheet_preview(name)
         seam_test(room_id, name)

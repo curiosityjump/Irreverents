@@ -174,8 +174,8 @@ room is "grass and old castle wall".
 
 ## Flags for the lead
 
-- **Round 2: `outpost` has no art files**: it draws plain shapes. A theme exists for it to
-  borrow; add it to `ROOM_THEME` in `make.py`. (`cantina` borrows `town`, Step 11 slice B.)
+- **Done (Step 12 slice B): `outpost` borrows `grass-ruins`** and the courtyard's backdrop (far
+  hills, castle wall, front foliage), as `cantina` borrows `town` (Step 11 slice B).
 - **Round 2: the canopy and eave rows repeat every 16 px.** A row-0 tile is index 11 (the room
   above "looks solid"), and only index 15 picks from fills, so their variety is in the one tile.
   More variety needs several regions along the row (cheap: one more 4x4 block each).

@@ -20,7 +20,7 @@ from PIL import Image  # noqa: E402
 
 from common import ASSETS, CONTENT, HERE  # noqa: E402
 
-ROOMS = ['courtyard', 'castle-street', 'throne-room', 'hall-gallery', 'graybox-hall', 'undercroft', 'cantina']
+ROOMS = ['courtyard', 'castle-street', 'throne-room', 'hall-gallery', 'graybox-hall', 'undercroft', 'cantina', 'outpost']
 errors = []
 
 

@@ -51,6 +51,9 @@ ROOM_THEME = {
     # DRAFT (Step 11 slice B): the cantina borrows the town's plaster, timbers and board floor, which
     # read as a tavern's inside; `castle` is the other candidate (one word here).
     'cantina': 'town',
+    # DRAFT (Step 12 slice B): the Bandit Camp is outdoors past the courtyard, so it takes the courtyard's
+    # grass-ruins blocks and its far hills, castle wall and front foliage (backdrop_json); one word each.
+    'outpost': 'grass-ruins',
 }
 
 # How often each fill is picked (cells may repeat to weight them): plain blocks most often.
@@ -163,7 +166,7 @@ def backdrop_json(room, by_name):
     note = 'DRAFT: stand-in drawn by tools/art/tiles/make.py (round 2). Notes: tools/art/tiles/README.md.'
     sky = [P_SKY[0], P_SKY[2]]
     outdoor = {'above': 'sky', 'below': 'deep'}
-    if room == 'courtyard':
+    if room in ('courtyard', 'outpost'):
         d = {'//': note + ' Layers below the clouds are pinned to the room so they stay behind it in a tall view; the front strip sits in the ground under the floor line.',
              'id': room, 'sky': sky, 'layers': [
                  layer('backdrops/sky-clouds.png', 0.1, 'top', 4),

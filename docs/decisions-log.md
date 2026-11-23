@@ -686,3 +686,10 @@ document as a decision of theirs.
 - **Why this way:** a deploy stops the old server before the 30-second save comes round, so every game being played is also saved when the server is told to stop; nothing done in the last half-minute is lost to a push. "Does game CODE exist?" is a small `GET /game/CODE` rather than a change to the join messages, so the page can ask before connecting and the messages stay as they are. A room that a later build adds is filled as new in a saved game; a room the save already knew keeps what was done to it, even if a later build put more things in it.
 - **To change it:** the stop handler is the `SIGTERM` lines at the end of `src/server/main.ts`; `/game/` is one branch in the same file; which rooms are filled is `newRooms` in `src/server/saves.ts`.
 - **Where:** `docs/mechanisms/saves.md`.
+
+### 2026-11-23 · The Bandit Camp looks like the courtyard's grass and old stone
+- **Decided by:** Step 12 slice B builder, for the Step 12 lead `session_017WiGzJTXQVCWQYDDmC2UiY`
+- **Instead of asking:** "What should the camp's ground and sky look like?"
+- **Why this way:** the camp is outdoors, through a doorway at the courtyard's east end, so it borrows the courtyard's grass-topped blocks and its far hills, castle wall and front bushes; it reads as the same countryside, one door on. A camp of its own (tents, a palisade) is new drawing, not a choice between what exists.
+- **To change it:** one word (`'outpost': 'grass-ruins'` → another theme) in `tools/art/tiles/make.py`, and its `backdrop_json` branch, then run it.
+- **Where:** `tools/art/tiles/make.py` `ROOM_THEME`; `docs/mechanisms/art-pipeline.md`.
