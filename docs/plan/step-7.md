@@ -9,8 +9,8 @@
 > Every participating player's history includes the event, even if played in somebody else's game.
 
 **Owner (Drive, doc 00), "Invariants for designers":**
+> Do not confine mayhem to designated levels or protect the Hall of Legends from gameplay. …
 > Do not turn the Hall into a preset achievements checklist instead of a memory of actual events.
-> Do not confine mayhem to designated levels or protect the Hall of Legends from gameplay.
 
 The library's fifth build gate (doc 24, gate E): "simple Hall captures a
 real highlight, without scripting the event itself." And golden scenario
