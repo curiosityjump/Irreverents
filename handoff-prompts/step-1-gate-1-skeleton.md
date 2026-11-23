@@ -112,8 +112,15 @@ Deliver, all on `main`:
    04:17 UTC from the step file). The owner is adding a Railway volume at
    `/data`; Railway then sets `RAILWAY_VOLUME_MOUNT_PATH` and
    `RAILWAY_VOLUME_NAME` at runtime. Add one field (keep `ok`, `commit`,
-   `startedAt` as they are) reporting whether that path is set and
-   writable, and nothing more. Using the storage is Step 7's, not yours.
+   `startedAt` as they are): a `storage` object with **four raw facts,
+   each its own field**: whether `RAILWAY_VOLUME_MOUNT_PATH` is set (and
+   its value), whether `RAILWAY_VOLUME_NAME` is set (and its value),
+   whether that path is writable, and whether it is on a different device
+   than `/` (`statSync(path).dev !== statSync('/').dev`), so an attached
+   volume can be told from a hand-typed variable. Nothing more. **Push
+   this first, on its own, as soon as it passes the pre-push gate: the
+   owner is waiting on the answer** (04:20 UTC), then message the lead
+   the commit. Using the storage is Step 7's, not yours.
 
 **The abstract action list is part of the contract** (added 04:12 UTC;
 Steps 2 and 5 are written against it). A player's input for a tick is
