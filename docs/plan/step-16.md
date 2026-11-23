@@ -479,7 +479,11 @@ List these; don't grade them.
 
 ## Measure
 
+2026-11-23 15:10 UTC, lead session_017WiGzHt9iJy3caBLkT1Ef4, at e673fa5: `npm run check` green in 77 s; `npm run gates` 5 of 6 (E has no scenario), the number this step must leave unchanged. The heroes' reach, by `simulate()` on `test-body`: jump peak grappler 52.7 px, infiltrator 51.4, flyer 50.0 (124 px with three flaps); boxes 18×30, 10×12, 14×20; run speeds 84, 128, 92 px/s. So the main way steps up at most 2 tiles and gaps at most 2 (`DRAFT:`), and the "not yet" sits at least 10 tiles up.
+
 ## Briefs
+
+- Slice 1, the rooms and their secrets (signals 1–3 and 7's first half): `handoff-prompts/step-16-a-quarry-rooms.md`, hard stop 16:45 UTC.
 
 ## Open with the owner
 
