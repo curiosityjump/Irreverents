@@ -15,7 +15,7 @@ per answer saying where it went.
   orchestrator; Vision Partner's doorbell goes only here.
 - **Questions per message the owner wants:** 3 (the default; record the
   owner's own number here, quoted, if they set one).
-- **Next id:** Q-001
+- **Next id:** Q-009
 
 ## How to feed this file
 
@@ -71,21 +71,84 @@ entries group them; they are not entries.
 
 ---
 
-## Open (0)
+## Open (8)
 
-*(empty)*
+**Before the vision can be written**
 
-<!-- Example of a filled entry, delete once real entries exist:
+### Q-001 · Can the Drive library's "CONFIRMED" lines count as your own words?
+- **Asked by:** Vision Partner, genesis, `session_017WiGzHC3CvjTNZqCuxa8Ex`, 2026-11-23 UTC, parent none
+- **Question:** The vision file (`docs/vision.md`) may only state something as decided if it quotes you. Your Drive library is written in ChatGPT's words, not yours: e.g. Decision Register D-055 reads "NO NPCS WILL HAVE AI. This includes shopkeepers, villains, guards, champions, pets and crowds." Options: (1) treat every entry the library labels CONFIRMED / "owner-confirmed" as your decision, quoted as "Owner, via the Drive Decision Register (ChatGPT's wording), 22 Nov 2026"; (2) same, but you skim the list I build and strike anything that isn't really yours; (3) none of it counts until you say it to me directly.
+- **Unblocks:** writing `docs/vision.md` at all (genesis), and therefore the first plan.
+- **Recommendation:** (Vision Partner's) 2. You get a one-page list of the ~90 confirmed decisions to strike from; nothing ChatGPT inferred gets promoted silently.
+- **Answer goes to:** `docs/vision.md` "Reading this document"
+- **Source:** `docs/design-library/04-decisions-and-prototyping/11-decision-register-boundaries-and-open-questions.md`
+- **Blocking:** yes
 
-### Q-001 · Who is the first person you want to use this, besides you?
-- **Asked by:** Vision Partner, genesis, `session_example`, 2026-01-01 UTC, parent none
-- **Question:** You said "people like me" will use it first. The plan's first step depends on whether that means you alone for now, a small group you know by name, or anyone who finds it. Options: (1) just you; (2) a named small group; (3) anyone.
-- **Unblocks:** the first step in docs/plan.md, and who its checks are written for.
-- **Recommendation:** (Vision Partner's) 1, until the first step ships.
+### Q-002 · Who is Irreverents for, and what is it for you?
+- **Asked by:** Vision Partner, genesis, `session_017WiGzHC3CvjTNZqCuxa8Ex`, 2026-11-23 UTC, parent none
+- **Question:** The library says in detail what the game *is*, but never who it is for or what success means outside the game: it lists "release platforms… business scope, monetization, and engine" as "Not fixed" (doc 01). Is this (1) a game you want to ship and sell; (2) a personal / friends project played online together; (3) a prototype to find out whether the idea is fun before deciding? And who is the first person besides you who should play it?
+- **Unblocks:** `docs/vision.md` "Who this is for, and why" and "The long-term direction"; how ambitious the first plan step is.
+- **Recommendation:** none: only you know this.
 - **Answer goes to:** `docs/vision.md` "Who this is for, and why"
-- **Source:** this entry
+- **Source:** `docs/design-library/01-vision-and-narrative/01-creative-north-star-and-player-experience.md` ("Confirmed versus undecided")
+- **Blocking:** yes
+
+### Q-003 · How should we measure that the game is moving the right way?
+- **Asked by:** Vision Partner, genesis, `session_017WiGzHC3CvjTNZqCuxa8Ex`, 2026-11-23 UTC, parent none
+- **Question:** The plan needs one number a session can check. Your library already has 16 "golden scenarios" with pass lines, e.g. G-04 "Solo player is not hard-blocked by player count" and G-08 "player says 'OHH!' without relying on giant text damage numbers". Options: (1) the count of golden scenarios (G-01 to G-16, doc 12) that pass in a playable build, judged by you playing it; (2) doc 24's six build gates in order (A: "movement + jump + attack + grab/throw are joyful in a graybox test" … F: "2-player same-party online works reliably"); (3) something else you'd judge by.
+- **Unblocks:** `docs/plan.md` "The destination, and the measure"; the orchestrator's first plan.
+- **Recommendation:** (Vision Partner's) 2 first, then 1: the gates say what to build in order, the scenarios say when the whole thing works.
+- **Answer goes to:** `docs/vision.md` "The measure"
+- **Source:** `docs/design-library/04-decisions-and-prototyping/12-golden-scenarios-and-prototype-acceptance-tests.md`; `docs/design-library/02-gameplay-systems/24-feasible-game-architecture-making-irreverents-playable.md` ("Decision gates")
+- **Blocking:** yes
+
+### Q-004 · What does it run on, and how is it played?
+- **Asked by:** Vision Partner, genesis, `session_017WiGzHC3CvjTNZqCuxa8Ex`, 2026-11-23 UTC, parent none
+- **Question:** No doc names an engine, language or device. The cantina spec says you "TAP the desired roaming cantina character", which suggests a touchscreen; the rest reads like a controller game in the GBA tradition. Options: (1) browser game (PC and phone, keyboard/controller + touch); (2) desktop PC with controller; (3) phone/tablet first; (4) a console target later. Also: any engine you want or don't want?
+- **Unblocks:** the orchestrator's first build step and `CLAUDE.md`'s build/deploy placeholders.
+- **Recommendation:** (Vision Partner's) 1: easiest to share with a friend for online co-op tests, and it lets "tap" and controller both be real.
+- **Answer goes to:** `docs/vision.md` "The long-term direction"
+- **Source:** `docs/design-library/02-gameplay-systems/31-cantina-party-roster-hub-and-endless-brawl.md`
+- **Blocking:** yes
+
+**Fixes for the Drive library (non-blocking; the newer rule wins until you say otherwise)**
+
+### Q-005 · Several Drive docs still state rules your later decisions replaced. OK to treat the newer rule as the one in force?
+- **Asked by:** Vision Partner, genesis, `session_017WiGzHC3CvjTNZqCuxa8Ex`, 2026-11-23 UTC, parent none
+- **Question:** Some docs weren't updated after a later correction: (a) doc 24 says "Both distress and rage can rapidly reset to business as usual on reliable expected action", but D-073 says rage "is NOT instantly reversible"; (b) docs 22 and 24 still call villain signalling OPEN, resolved by D-070; (c) docs 02, 21 and 22 say pursuit can be escaped by acting normal in view, replaced by D-067 / doc 27 ("cannot be used as a trivial magical reset"); (d) doc 06 says "no NPC AI restriction remains in force for scripted brawlers", which literally means brawlers may have AI, against D-086; (e) doc 05 says you decided how tapping a cantina character differs from attacking it, doc 31 says you haven't. Also the register skips from D-090 to D-092 (no D-091).
+- **Unblocks:** nothing now; it stops a future session building the stale rule.
+- **Recommendation:** (Vision Partner's) yes: the newer, owner-labelled rule wins everywhere; (d) is a typo for "no NPC AI applies to brawlers too"; (e) is open. Whoever next edits Drive fixes the stale lines and logs it in the changelog.
+- **Answer goes to:** `docs/vision.md` "Principles that decide most questions"
+- **Source:** `docs/design-library/02-gameplay-systems/24-feasible-game-architecture-making-irreverents-playable.md`, 22, 21, 06, 05, 31
 - **Blocking:** no
--->
+
+### Q-006 · Four of the five "current" pixel-art boards fail your own art gate. Move them out of "current"?
+- **Asked by:** Vision Partner, genesis, `session_017WiGzHC3CvjTNZqCuxa8Ex`, 2026-11-23 UTC, parent none
+- **Question:** Doc 32 says to exclude "large labeled poster/collage… graphics… direct Kirby-like final character designs". Four images in "Current Pixel-Art Explorations" are exactly that: "Character roster" (named cards, a Kirby clone called "Pupu"), "Cooperative adventure" and "World and ability asset studies" (Kirby himself with Kirby's copy abilities), and "Gameplay showcase" (a poster titled "Starvale Quest"). The fifth, "Pixel aesthetic reference — approved direction", is also a labelled collage with Kirby, but it is your chosen *look*. Options: (1) move the four to "Superseded" in Drive and keep only the reference as current; (2) keep them as current explorations; (3) move all five, keeping the reference only as a look reference.
+- **Unblocks:** nothing now; prevents a session copying Kirby designs as a starting point.
+- **Recommendation:** (Vision Partner's) 1.
+- **Answer goes to:** `docs/vision.md` "Frontiers" (visual direction)
+- **Source:** `docs/design-library/04-decisions-and-prototyping/32-verified-drive-audit-and-art-curation-gate.md`; `docs/design-library/03-visual-direction-and-assets/current-pixel-art-explorations/`
+- **Blocking:** no
+- **Note (Vision Partner, 2026-11-23):** the E01 tilekit also has small defects (3 duplicate tiles per atlas, e.g. "wall_torch" draws as plain wall; its 384×224 screen size is neither of doc 14's options, 240×160 or 320×180). It is labelled experimental, so this only matters if someone builds on it.
+
+### Q-007 · Which first slice?
+- **Asked by:** Vision Partner, genesis, `session_017WiGzHC3CvjTNZqCuxa8Ex`, 2026-11-23 UTC, parent none
+- **Question:** Four docs each propose a near-identical first playable slice, none approved by you: doc 12 ("compact explorable castle-town/royal audience and connected secret undercroft"), doc 05, doc 18, doc 25; doc 27 proposes a smaller one ("a town/shop, transition passage and forest bandit outpost"); doc 24 proposes "5–6 rooms, 3 characters, 2 powers, 4 archetypes, 1 hijackable machine and 1 Hall pedestal". Options: (1) let the orchestrator propose one from these for you to approve; (2) you pick one now.
+- **Unblocks:** the first real step of `docs/plan.md`.
+- **Recommendation:** (Vision Partner's) 1.
+- **Answer goes to:** `docs/vision.md` "Frontiers"
+- **Source:** `docs/design-library/04-decisions-and-prototyping/12-golden-scenarios-and-prototype-acceptance-tests.md` and the others named
+- **Blocking:** no
+
+### Q-008 · How does someone leave the endless cantina brawl?
+- **Asked by:** Vision Partner, genesis, `session_017WiGzHC3CvjTNZqCuxa8Ex`, 2026-11-23 UTC, parent none
+- **Question:** The project rule is "There is always a way out." Doc 31 says: "Owner has not specified a stop/exit/reset method" for the endless Smash-style bar fight. Options: (1) walk out a door; the fight stops behind you; (2) stop attacking for a few seconds and everyone calms; (3) both.
+- **Unblocks:** the cantina whenever it's built (not soon).
+- **Recommendation:** (Vision Partner's) 3.
+- **Answer goes to:** `docs/vision.md` "Frontiers"
+- **Source:** `docs/design-library/02-gameplay-systems/31-cantina-party-roster-hub-and-endless-brawl.md`
+- **Blocking:** no
 
 ## Parked by you (0)
 
