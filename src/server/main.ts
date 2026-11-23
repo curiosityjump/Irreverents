@@ -12,6 +12,42 @@ import { WebSocketServer } from 'ws';
 const commit = process.env.RAILWAY_GIT_COMMIT_SHA || 'unknown';
 const startedAt = new Date().toISOString();
 
+/**
+ * Whether Railway has mounted lasting storage (a volume), and whether the
+ * server can write to it. Reported in /healthz so no session has to ask the
+ * owner whether they added one (docs/plan/step-1.md, "What's decided").
+ *
+ * INTENT: `mounted` is true only for a real attached volume: Railway sets
+ * both RAILWAY_VOLUME_MOUNT_PATH and RAILWAY_VOLUME_NAME itself, and the
+ * path sits on a different device than "/". A variable typed in by hand
+ * (`variableSet` true, `mounted` false) must not read as storage: files
+ * written there would vanish on the next deploy.
+ * INTENT: report only. Nothing is stored yet; Step 7's Hall records are the
+ * first user.
+ */
+function storageStatus(): { mounted: boolean; writable: boolean; variableSet: boolean; path: string | null; name: string | null } {
+  const dir = process.env.RAILWAY_VOLUME_MOUNT_PATH || null;
+  const name = process.env.RAILWAY_VOLUME_NAME || null;
+  const status = { mounted: false, writable: false, variableSet: dir !== null, path: dir, name };
+  if (!dir) return status;
+  try {
+    status.mounted = name !== null && fs.statSync(dir).dev !== fs.statSync('/').dev;
+  } catch {
+    status.mounted = false;
+  }
+  try {
+    const probe = path.join(dir, `.write-check-${process.pid}`);
+    fs.writeFileSync(probe, startedAt);
+    fs.rmSync(probe);
+    status.writable = true;
+  } catch {
+    status.writable = false;
+  }
+  return status;
+}
+// Checked once at start: Railway mounts a volume when the server starts.
+const storage = storageStatus();
+
 // The bundle is dist/server.cjs and the client is dist/public, so the public
 // directory is found relative to the running file, never the working directory.
 const publicDir = path.join(path.dirname(path.resolve(process.argv[1] ?? '.')), 'public');
@@ -40,7 +76,7 @@ function send(res: http.ServerResponse, status: number, type: string, body: stri
 const server = http.createServer((req, res) => {
   const url = new URL(req.url ?? '/', 'http://x');
   if (url.pathname === '/healthz') {
-    send(res, 200, 'application/json', JSON.stringify({ ok: true, commit, startedAt }));
+    send(res, 200, 'application/json', JSON.stringify({ ok: true, commit, startedAt, storage }));
     return;
   }
   if (req.method !== 'GET' && req.method !== 'HEAD') {

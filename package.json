@@ -12,7 +12,8 @@
     "start": "node dist/server.cjs",
     "dev": "node scripts/dev.ts",
     "e2e": "node scripts/not-yet.ts e2e",
-    "check:live": "node scripts/not-yet.ts check:live"
+    "check:live": "node scripts/not-yet.ts check:live",
+    "check:deployed": "node scripts/check-deployed.ts"
   },
   "dependencies": { "ws": "8.23.0" },
   "devDependencies": {

@@ -1,5 +1,7 @@
 .drive_sync_tmp/
 node_modules/
 dist/
+# Left behind by the retired deploy probe in older working trees.
+built.json
 # Registries written by scripts/lib/registries.ts from the files beside them.
 *.gen.ts

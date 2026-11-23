@@ -124,3 +124,10 @@ document as a decision of theirs.
 - **Why this way:** you may open the game at any moment after waking; half-working is worse than missing.
 - **To change it:** a line in `docs/current-directive.md`.
 - **Where:** `docs/current-directive.md`, "Stopping condition".
+
+### 2026-11-23 · How the first character runs and jumps is a first guess: brisk run, a jump about three and a half tiles high, a shorter hop if you let go early
+- **Decided by:** Step 1 Gate 1 worker, `session_017WiGzHGmyESjXPtM3zXt19`
+- **Instead of asking:** "How should moving feel?" (yours to judge by playing; doc 01 asks for superb movement.)
+- **Why this way:** something had to be there to play. The jump also forgives a press that is a tenth of a second early or late at an edge, which is common in platformers and easy to switch off.
+- **To change it:** numbers in one data file (`content/tuning.json`); no code.
+- **Where:** `content/tuning.json`; `docs/plan/step-1.md`, "Taste, for the owner in the morning".

@@ -80,6 +80,25 @@ content *types* and the small pure constants beside them, such as `TILE`.)
 - **No external services.** The server is one process on Railway; `/ws`
   is a hello-and-echo until Step 1 Gate 2 owns the protocol.
 
+## The action list (what a player can press)
+
+`content/actions/` **is** the list: one file per action, its id the file
+name. A player's `Input` for a tick is the stick (`x`, `y`) plus `held`,
+the ids of the actions held down. Keyboard, touch and scenario files all
+speak those ids, and a script can enumerate them by listing the directory
+(or `content.actions` after loading). Only `jump` exists today; `attack`,
+`grab`, `special` and `interact` are the names later steps are expected to
+add (Step 2 adds a file each; Step 5 checks every entry has a touch control).
+
+## Deploying
+
+A push to `main` deploys, **except** a push that changes only documents:
+`railway.json` tells Railway to ignore `docs/**`, `handoff-prompts/**`,
+`tools/**` and any `*.md`, and to health-check `/healthz` before a new
+build replaces the running one. `npm run check:deployed` says whether the
+live address runs what `main` needs. Details and how it was proven:
+`docs/mechanisms/deploy.md`.
+
 ## Self-registering files (the rule that lets steps work in parallel)
 
 Four directories are registries: `src/content/kinds/`, `src/sim/verbs/`,
@@ -131,21 +150,25 @@ The intended shape, so art arriving tonight drops in as data:
 
 A step adds files freely in its own paths and avoids editing others'.
 
-| Step | Owns |
-|---|---|
-| 1 (Gate 2: client, touch, netcode) | `src/client/**`, `src/server/**`, `scripts/**`, `package.json`, the build |
-| 2 (feel, attack, grab, throw, three kinds) | `src/sim/verbs/**`, `content/characters/**`, `content/actions/**`, `content/tuning.json`, `content/objects/**` |
-| 3 (the map, hidden routes) | `content/rooms/**`, `content/game.json`, room-travel systems `src/sim/systems/room-*.ts`, exits in `src/content/kinds/rooms.ts` |
-| 4 (NPC response logic) | `content/npcs/**`, `content/placements/**`, `content/rules/**`, their kind files, `src/sim/systems/npc-*.ts` |
-| 5 (phone comfort, joining) | `src/client/**` and `src/server/**` after Step 1 closes |
-| 6 (the talking king) | its own `content/` directory and kind file, `src/sim/systems/audience-*.ts` |
-| 7 (Hall, hijackable machine) | its own `content/` directories and kind files, `src/sim/systems/hall-*.ts`, `machine-*.ts` |
-| everyone | `scenarios/<own-prefix>-*.json`, `src/scenarios/facts/<new>.ts` |
+| Step | Owns (from its step file's "Owns") | Paths |
+|---|---|---|
+| 1 (until it closes) | the page, input, network, server, build and deploy | `src/client/**` except `draw/`, `src/server/**`, `scripts/**`, `package.json`, `tsconfig*.json`, `railway.json` |
+| 2 | movement and actions, combat and impact, the characters' data, the tuning data | `src/sim/verbs/**`, `src/sim/systems/` files named `combat-*`, `impact-*`, `carry-*`; `content/characters/**`, `content/actions/**`, `content/tuning.json`, `content/objects/**` and its kind file; `src/client/draw/entities.ts` |
+| 3 | room data and format, its loader and validator, moving between rooms, the rooms' working parts, the camera, drawing tiles | `content/rooms/**`, `content/game.json`, `src/content/kinds/rooms.ts`, `src/content/kinds/game.ts`, `src/sim/systems/` files named `room-*`, `src/sim/systems/physics.ts`'s tile collision, `src/client/draw/room.ts` (tiles and camera) |
+| 4 | NPC response logic, roles and rule data, who is placed where, seeing and hiding, calling for help, the area alert | `content/npcs/**`, `content/placements/**`, `content/rules/**`, their kind files in `src/content/kinds/`, `src/sim/systems/` files named `npc-*`, `alert-*`; a new `src/client/draw/npcs.ts` if NPCs need their own drawing |
+| 5 (opens when Step 1 closes) | touch and keyboard input, on-screen controls, presence, joining and rejoining, the menu, the page shell | `src/client/**` except `draw/`, `src/server/**` |
+| 6 | the throne room's people and props, the speech text, the speech clock and credits | `content/audience/**` and its kind file, `src/sim/systems/` files named `audience-*`, a new `src/client/draw/audience.ts` |
+| 7 | the legend detector, Hall records and their display, the machine and the roadblock | `content/hall/**`, `content/machines/**` and their kind files, `src/sim/systems/` files named `hall-*`, `machine-*`, a new `src/client/draw/hall.ts` |
+| everyone | their own checks | `scenarios/<own-prefix>-*.json`, new files in `src/scenarios/facts/` |
+
+Anything that draws is one file in `src/client/draw/`, called from
+`src/client/render.ts` in one line: a step adds its file and its line.
 
 **Files two steps must both touch** (keep each edit additive and small,
 `git pull --rebase` right before): `src/sim/types.ts` (`Entity`, `Input`,
-`World`), `src/sim/systems/physics.ts` (Steps 2 and 3 both want it:
-knockback, exits), `src/client/render.ts` (anything newly visible),
+`World`), `src/sim/systems/physics.ts` (Step 3 owns tile collision;
+Step 2 adds knockback and thrown bodies as its own systems where it can),
+`src/client/render.ts` (one line per drawing layer),
 `content/tuning.json` (one section per character; add sections, don't
 reorder).
 

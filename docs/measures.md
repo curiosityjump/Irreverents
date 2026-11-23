@@ -46,13 +46,16 @@ the history a per-commit measure walks; deepen it first with
 UTC: yes, but it is the deploy probe, not the game (commit 7b8dc09).
 
 ```bash
-git fetch -q origin main && echo "main:  $(git rev-parse origin/main)"
-echo "live:  $(curl -s --max-time 15 https://irreverents-production.up.railway.app/healthz)"
+npm run check:deployed
 ```
 
-The two commit ids match when the newest push is live. Railway took 37 s
-for a no-build push; allow a few minutes for a real build before calling
-a push failed.
+Exits 0 when the commit the live address is running (`/healthz`) is the
+tip of `origin/main`, **or** when every commit since it changed only
+files that do not redeploy (`docs/**`, `handoff-prompts/**`, `tools/**`,
+any `*.md`: `docs/mechanisms/deploy.md`); it prints which. Non-zero when
+`main` holds code that is not live, the address does not answer, or the
+running commit is not on `main`. A push takes 25 to 40 s to go live;
+allow a few minutes before calling one failed.
 
 **M2 — Can two players on separate devices share one world at the live
 address?** 2026-11-23: no (no game yet).
