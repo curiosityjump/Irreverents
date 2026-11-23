@@ -142,7 +142,22 @@ def asks():
     return scene
 
 
-SCENES = {'rides': rides, 'powers': powers, 'treasure': treasure, 'hall': hall, 'asks': asks}
+def heist():
+    """the heists builder's marks over a hero (the grappler's first cell): unseen on the left, seen on the right,
+    by night and by day"""
+    ui, UL = looks('ui')
+    hero = Image.open(os.path.join(ROOT, 'assets', 'sprites', 'heroes', 'grappler.png')).convert('RGBA').crop((0, 0, 48, 48))
+    scene = ground(90, sky=NIGHT, body=NBODY, lip=NLIP)
+    day = ground(180)
+    scene.alpha_composite(day.crop((0, 92, 320, 180)), (0, 92))
+    for floor in (90, 176):
+        for cx, mark in ((100, 'unseen'), (220, 'seen-mark')):
+            place(scene, hero, cx, floor)
+            place(scene, frame(ui, UL[mark]), cx, floor - 34)
+    return scene
+
+
+SCENES = {'rides': rides, 'powers': powers, 'treasure': treasure, 'hall': hall, 'asks': asks, 'heist': heist}
 
 if __name__ == '__main__':
     os.makedirs(OUT, exist_ok=True)

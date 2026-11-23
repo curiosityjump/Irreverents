@@ -307,3 +307,17 @@ def goods_special():
     out = new(16, 16)
     paste(out, g, 1, 0)
     return out
+
+
+def unseen():
+    """The heists builder's `unseen` (a take went unnoticed): P07 has no closed eye; its nearest is the stealth
+    power's purple hood with two glowing eyes in the dark (P07 UI atlas, row 2, last but one), cut off its slot.
+    DRAFT: 14 x 12."""
+    return grab('ui', (1218, 280, 1306, 364), 0, ramps('purple', 'night', 'gold', 'pink'), key=(190, 200, 248),
+                size=(14, 12))
+
+
+def seen_mark():
+    """The heists builder's `seen-mark`: P07 UI atlas bottom right, the yellow '!' speech bubble (alert-pip is its
+    red neighbour), its shine rays left on the plate. 12 x 12."""
+    return grab('ui', (1252, 928, 1330, 1000), 0, ramps('gold', 'orange', 'metal', 'night'), size=(12, 12))

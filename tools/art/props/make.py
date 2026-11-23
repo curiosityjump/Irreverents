@@ -204,6 +204,7 @@ def looks_sheets():
     s.add('hud-ko', dv.hud_ko()); s.add('hud-fall', dv.hud_fall())  # P05 brawl skull badges
     s.add('alert-pip', dv.alert_pip(True)); s.add('alert-pip-off', dv.alert_pip(False))  # P07 UI atlas
     s.add('bell-gauge', r3.bell_gauge()); s.add('bark-edge', r3.bark_edge())
+    s.add('unseen', lo.unseen()); s.add('seen-mark', lo.seen_mark())  # the heists builder's asks (P07 UI atlas)
     out.append(('ui', 'ui/hud.png', s))
     return out
 

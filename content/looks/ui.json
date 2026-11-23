@@ -15,6 +15,8 @@
     "alert-pip": {"src": [20, 40, 10, 10]},
     "alert-pip-off": {"src": [30, 40, 10, 10]},
     "bell-gauge": {"src": [40, 40, 20, 6]},
-    "bark-edge": {"src": [60, 40, 16, 12]}
+    "bark-edge": {"src": [60, 40, 16, 12]},
+    "unseen": {"src": [76, 40, 14, 12]},
+    "seen-mark": {"src": [0, 52, 12, 12]}
   }
 }

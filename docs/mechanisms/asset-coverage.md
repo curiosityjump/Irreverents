@@ -29,10 +29,10 @@ Rows go stale as the look3 lanes push: re-check a row against the current file b
 | Interactive looks (props) | 27 | 18 | 7 | 0 |
 | Decor | 43 | 12 | 25 | 6 |
 | Effects | 9 | 5 | 4 | 0 |
-| UI and HUD | 42 | 6 | 31 | 5 |
+| UI and HUD | 43 | 7 | 31 | 5 |
 | Sound effects | 42 | 29 | 7 | 6 |
 | Music | 8 | 0 | 0 | 8 |
-| **All** | **215** | **86** | **100** | **27** |
+| **All** | **216** | **87** | **100** | **27** |
 
 ## Path keys
 
@@ -194,6 +194,7 @@ Cuts live in tools/art/props/drive.py, round3.py and looks_parts.py.
 | `look:treasure` | uses-approved | `P07/vibrant-platformer-interactables-sprite-sheet.png` row 1 chests (wood closed (195,95)-(330,215), open (370,70)-(505,215), empty (545,95)-(670,215); iron the same at x 800-1290), row 2 doors (ring door shut (35,240)-(212,415), open (212,240)-(390,415), portcullis down (410,240)-(595,415), raised (600,240)-(785,415)), key (30,980)-(130,1065), coins (1005,985)-(1165,1065), sack (780,960)-(875,1075), gem on post (610,795)-(745,935); `P05/p05-secrets-doors-breakables-source.png` padlocked door (102,68)-(200,172), barred door (424,68)-(524,172), vault cave (526,372)-(758,482); `P04/chibi-pixel-interactables-sprite-sheet.png` crystal (240,380)-(320,470); `P04/cantina-tavern-hub-tileset.png` coin heap (566,1040)-(643,1075). Group `treasure` (loops.py). | `hoard`/`hoard-taken` (32x16: the sack on the heap; a few coins) are ready for depot-hoard, whose placement still says `goods` (Step 16's to repoint). P05's own vault gold pile sits on the cave floor and does not cut clean. |
 | `look:hall` | uses-approved | `P04/hall-of-legends-tile-atlas.png` (opaque pale ground with drawn cell lines: key (247,247,247), grid=True), scale 0.2: plinths (38-272, 398-495), niches (610-1095, 395-497), plaques/shield/banners/drape (38-1320, 510-608), lantern/torch/braziers (40-610, 598-684), doors/window/portals (30-1125, 692-808), statues and keepsakes (35-1420, 885-1062), gold-edged frames (362-517, 114-192); per-piece boxes in loops.HALL. Group `hall`. | The wood doors lose their pale stone arch to the ground key (wood and gold rim only). Statues are thin at 0.2. hall-frame/-frame-star are about 14x16: small for a hall picture; scale up if the picture needs it. No game code draws them yet. |
 | `look:piece` | uses-approved | `P05/p05-ui-hero-party-hud-source.png` bottom row: grey piece x 436-504, gold x 505-572, y 455-498 (the plate's edge cuts them below the side knobs; mirrored about y 498 to close). `piece-grey`, `piece-gold` 12x12 (group `levels`); `goods-special` is the hall-case-crown cut at 14x16 (group `treasure`). | At 8 px the piece is a blob, so 12. |
+| `look:unseen` | uses-approved | `P07/irreverents-pixel-ui-atlas.png` stealth hood (1218,280)-(1306,364), its slot keyed (190,200,248) = `unseen` 14x12; yellow '!' bubble (1252,928)-(1330,1000) = `seen-mark` 12x12 (group `ui`). | No closed eye on any plate checked (P07 UI): the hood stands in for "unseen". |
 
 ## Decor
 

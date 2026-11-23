@@ -193,6 +193,9 @@ bottom-centred over an entrance; `level-pie-0`..`4` 12x12 (none, a quarter, half
   group `levels` (P05 HUD bottom row; the plate cuts the pieces off below their side knobs, so the top is mirrored
   to close them) at 12x12, not the 8x8 asked: at 8 the knobs vanish; `goods-special` in group `treasure` (16x16, the
   Hall atlas's crown on a cushion in its case). Scene: `loops-asks-4x.png`.
+  The heists builder (Step 19): `unseen` (14x12) and `seen-mark` (12x12) in group `ui` (`assets/ui/hud.png`, appended).
+  P07's UI atlas has no closed eye: `unseen` is its stealth hood with two glowing eyes, cut off its slot; `seen-mark`
+  is its yellow '!' bubble (alert-pip is the red one). Scene: `loops-heist-4x.png`.
 - **No approved source:** an empty machine or an empty saddle: every cell has the same goggled rider baked in, so a
   hero cannot be drawn riding one without that rider showing (for the Drive's missing-assets list).
 - **Not verified in the game:** no code draws a ride yet; seen in the mock scene only.
