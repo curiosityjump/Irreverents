@@ -853,7 +853,7 @@ document as a decision of theirs.
 - **To change it:** `characters.toll-keeper` in `content/tuning.json`, and `"tuning"` in `content/characters/toll-keeper.json`.
 - **Where:** `content/tuning.json`.
 
-### 2026-11-23 · Step 18: five scenarios re-timed because people now really hit
+### 2026-11-23 · Step 18: six scenarios re-timed because people now really hit
 - **Decided by:** Step 18 slice A builder `session_017WiGzHwmFZe9AdG3KMHsa4` (the re-times were assigned to Step 18 by the orchestrator, `handoff-prompts/step-12-b-chase-and-clash.md:36-42`)
 - **Instead of asking:** nothing: each keeps its claim; only ticks, positions and the hero's moves changed, and "stands over them" became "hits them".
 - **Why this way, scenario by scenario** (the blow that moved each, from `node scripts/trace.ts`):
@@ -862,5 +862,6 @@ document as a decision of theirs.
   - `step4-hero-persists-rage`: `{"type":"hit","tick":142,"by":"shopkeeper-1","target":"p:a"}` slows the hero's run to the wall: they run 10 ticks longer (to 270), and rage cools 15 ticks later (1165, not 1150), counted from when they were last seen.
   - `step4-guard-follows-seen`: `{"type":"hit","tick":2750,"by":"street-guard","target":"p:a"}` knocks the hero 28 px nearer the cellar doorway: they run 46 ticks, not 64; in the undercroft they run on as the guard comes up (2932, not 3100), before his next swing, so every later tick moves 168 earlier. The guard is now about 35 px behind at the cellar doorway, not 60.
   - `step12-guard-follows-into-camp`: `{"type":"hit","tick":2750,"by":"street-guard","target":"p:a"}` and 14 more with 3 flattenings: walking at 0.3 of a run (29 px/s) the hero stayed in the guard's reach. They now walk at 0.42 (about the guard's 40 px/s), which keeps them in his sight and out of reach; the door ticks move to 3543 and 4080. Sent to the Step 12 lead before the push.
+  - `step11-chase-blink` (landed while this was built): `{"type":"hit","tick":2608,"by":"street-guard","target":"p:a"}` and three more knocked the hero off the cantina doorway before the step past the guard at 2950. The step past now starts as the guard arrives (2590), the refused push is at 2602, before his first blow. Sent to the Step 11 lead before the push.
 - **To change it:** the scenario files.
-- **Where:** `scenarios/step4-*.json`, `scenarios/step12-guard-follows-into-camp.json`.
+- **Where:** `scenarios/step4-*.json`, `scenarios/step12-guard-follows-into-camp.json`, `scenarios/step11-chase-blink.json`.

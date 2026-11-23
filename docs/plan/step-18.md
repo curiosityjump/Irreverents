@@ -434,7 +434,7 @@ scenarios-only runner (content load plus every scenario: 1 min 48 s):
 
 ### Slice A, push 1 (builder `session_017WiGzHwmFZe9AdG3KMHsa4`, 2026-11-23 ~18:00 UTC)
 
-- **Measured on push 1:** 187 of 187 scenarios pass (the brief's five
+- **Measured on push 1:** 193 of 193 after rebasing on f230c2b (the brief's five plus Step 11's new `step11-chase-blink`
   re-timed, three new); `npm run gates` 5 of 6 before and after. The new
   scenarios: shopkeeper hits 10 (control, held input in `charge()`: 1),
   guard hits 15 (control, held input in the chase: 3).
@@ -496,3 +496,15 @@ scenarios-only runner (content load plus every scenario: 1 min 48 s):
   twice is easy to rage, and her blows are small; the guard goes to the
   bell before he swings if hit from behind, so a first fight in the
   street takes about 12 s to come back at you.
+- **`step11-chase-blink` re-timed** (it landed at f230c2b while push 1
+  was built; red only because the guard now hits, trace in
+  `docs/decisions-log.md`). The Step 11 lead
+  (`session_017WiGzFy3MD6ecvM7QMvQGd`) was inactive when messaged: **for
+  the orchestrator to pass on.** Its control (`chaseHold` 0) still fails.
+- **Flag from Step 12's slice B builder (18:01 UTC), not acted on:** with
+  the guard's 0.4 s wind-up against a camp fighter's 0.25 s, in an even
+  meeting in Step 12's clash the fighter strikes first and cuts the
+  guard's wind-up off, so a guard may never win a clash. The 0.4 s is the
+  brief's (seen coming on a phone); a quicker guard wind-up, or a
+  clash-only number, is the orchestrator's call. `step12-guards-and-camp-clash`
+  stays green with these numbers.

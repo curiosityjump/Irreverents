@@ -1,6 +1,6 @@
 {
   "id": "step11-chase-blink",
-  "proves": "doc 31, the cantina is NOT a shortcut for breaking line of sight: the guard who caught a hero in the castle street stands over them at the cantina's doorway; the hero steps past the guard, out of sight for two ticks (2962-2963) while still in the doorway, and pushes up on exactly that tick: refused (door-refused), because a player stays on the chased list for chaseHold (1 s) after the guard last saw them. Control: chaseHold 0, the push goes in",
+  "proves": "doc 31, the cantina is NOT a shortcut for breaking line of sight: the guard who caught a hero in the castle street comes at them at the cantina's doorway; the hero steps past the guard, out of sight for a moment while still in the doorway, and pushes up on exactly that tick: refused (door-refused), because a player stays on the chased list for chaseHold (1 s) after the guard last saw them. Control: chaseHold 0, the push goes in",
   "room": "castle-street",
   "placements": true,
   "placedRooms": [
@@ -42,14 +42,14 @@
     },
     {
       "player": "a",
-      "from": 2950,
-      "to": 2963,
+      "from": 2590,
+      "to": 2603,
       "x": 1
     },
     {
       "player": "a",
-      "from": 2962,
-      "to": 2965,
+      "from": 2602,
+      "to": 2605,
       "y": -1
     }
   ],
@@ -74,8 +74,8 @@
         "why": "chased"
       },
       "between": [
-        2962,
-        2962
+        2602,
+        2602
       ],
       "count": [
         1,
