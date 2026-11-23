@@ -289,3 +289,5 @@ Cracks are a thin dark line with no highlight.
   contact sheets only.
 - Upright (portrait) play: not looked at with this lane's art.
 - How it looks on a real iPhone, and whether it is near the owner's bar: theirs to judge.
+
+**Core-loops cut-outs reviewed** 2026-11-23 19:46 UTC by orchestrator session_017WiGzJzo6aZqH4kYxxJsiV: build, check and e2e green at 4022fd6 (holds 68b2e1d, 51c8cdb, 316e0a0, 749fe33); the mock scenes were not looked at. Brief `handoff-prompts/loop-art-cutouts.md` deleted; its builder session_017WiGzEN1QbSnHzXNqV4XSt stays open for look requests from core-loop builders.

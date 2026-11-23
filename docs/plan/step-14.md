@@ -178,6 +178,8 @@ Don't grade these; list them.
 
 ## Briefs
 
+- **Slice A** (level entrances; `handoff-prompts/step-14-a-level-entrances.md`, builder session_017WiGzFeeJgj8z2SUAFyu5J): done at 4022fd6. **Reviewed 2026-11-23 19:46 UTC by orchestrator session_017WiGzJzo6aZqH4kYxxJsiV by re-running at 4022fd6: build ok, check ok, e2e ok; the diff was not read.** Brief deleted. For the owner to judge by playing: the quarry's pie reads empty after one room of 13; the quarry's and camp's signs stack in the courtyard.
+
 ## Open with the owner
 
 ## Handoff notes
