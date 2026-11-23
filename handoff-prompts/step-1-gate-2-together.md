@@ -184,6 +184,23 @@ By the lead, 2026-11-23 04:02–04:10 UTC, in a container like yours.
   and its `World.rooms` is the truth pages receive; a device computes the
   same parts locally from what it sees, and where the two disagree the
   server's `World.rooms` wins.
+  **Step 4 makes point (5) concrete (04:55 UTC): the server must see
+  each player's held actions, not only positions.**
+  `src/sim/systems/npc-interact.ts` (on `main`) reads the player's `held`
+  from `ctx.inputs` on a fresh press of `interact`, keeps `c.interact`
+  on the player's entity and changes a thing's `c.thing.takenBy`. So
+  each device sends its player's inputs along with its body, and the
+  server passes them to `step()` as that player's input. **A press is an
+  edge:** a tap shorter than your report interval must not be lost and
+  must not fire twice, so send the inputs for every simulation tick
+  since the last report (or the press edges), not one sampled value.
+  State on the player's entity that a server-run system writes (such as
+  `c.interact`) must survive the next report from the device: say in the
+  writeup which side owns which part of a player's entity, and prove one
+  case in the gate F check (a scripted client taps `interact` once
+  between two reports; the server's system sees exactly one fresh
+  press). Also confirm in e2e that the `interact` control ("Use")
+  appears on the phone page unaided.
 
 - **Two requests from the Step 7 lead (Hall of Legends), 04:45 UTC; small,
   and they shape the server.** (1) **One place where a room's world is
