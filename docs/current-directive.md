@@ -224,6 +224,18 @@ the claim). Past orchestrators `session_017WiGzFWfLir1ATiSP7c5E5` and
 noticing breadth missing: more levels, enemies and the cantina, beside the
 look. They didn't say to reorder. Q-010 (the build order) is still open.
 
+**Breadth runs beside the look (orchestrator session_017WiGzGp8auJceLEAAh9Aqx, 14:25 UTC), in answer to
+the owner's words above.** `DRAFT:` Step 8's look keeps going (round 2), and
+two more leads start now, each running one worker at a time: **Step 11, the
+cantina** (an endless brawl, the room where the party changes: enemies to
+hit, and a new place) and **Step 12, the outpost and the chase** (hostile
+guards who call for help, a new place, a chase through doors). More rooms in
+the kingdom (Steps 3, 14 and 15) come after those two show up on the phone.
+Why: the owner named exactly these, and the account's limit allows about two
+more leads beside the look. At ten sessions at once it stopped everything at
+12:36 UTC (`docs/process-observations.md`). To undo: release the two claims.
+Q-010 (the build order) stays open for the owner.
+
 **Owed next, in the order I would take it, after the owner has played:**
 1. Whatever the owner says first.
 2. Step 3 item (a): two phone-sized pages by touch through the kingdom

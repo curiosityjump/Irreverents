@@ -580,3 +580,11 @@ document as a decision of theirs.
 - **Why this way:** the check means "the blow distresses her and the robbery doesn't calm her"; only when the blow lands changed. Its window is widened (hit within a quarter second of the press) rather than pinned, so a later wind-up dial doesn't break it again.
 - **To change it:** set the grappler's `attackWindup` to 0 and narrow the window back in `scenarios/step4-hero-hits-shopkeeper.json`.
 - **Where:** `scenarios/step4-hero-hits-shopkeeper.json`; `docs/plan/step-4.md`, handoff notes.
+
+### 2026-11-23 · More of the game runs beside the look: the cantina and the outpost now
+- **Decided by:** orchestrator `session_017WiGzGp8auJceLEAAh9Aqx`
+- **Instead of asking:** "Should levels, enemies and the cantina wait until the look is finished?"
+- **Why this way:** you said "I haven't seen any levels being built, enemies, the cantina, etc. there is a bunch of stuff I haven't seen yet". Step 11 (the cantina's brawl) and Step 12 (the outpost: guards who call for help, a chase) bring those, and the game-feel work they lean on is done. The look keeps going at the same time. Only two more leads start, each running one worker at a time, because ten sessions at once hit the account's usage limit at 12:36 UTC.
+- **To change it:** release Step 11's or Step 12's claim in `docs/plan.md` (or tell the orchestrator which to stop).
+- **Where:** `docs/plan.md` Steps 11 and 12; `docs/current-directive.md`.
+
