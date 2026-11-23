@@ -237,3 +237,10 @@ button art is in the library mirror, not in `assets/`.
     thumbs on 60 px targets, whether the pictures stay crisp, whether
     Safari fires the events the error report listens for, how soon a
     locked phone goes silent.
+
+- **From the Step 2 lead, 2026-11-23 14:20 UTC (network layer, beside the
+  switch gap):** a player's own page has no `c.carrying` for its own
+  character (the grab runs on the server), so a throw press makes the page
+  predict a swing, now with Step 2's attack wind-up, on the thrower's own
+  screen (252e5ce; `docs/mechanisms/rendering-actors.md`, "Flags for the
+  lead").

@@ -556,3 +556,15 @@ rows re-read. See the handoff notes below.
   owners. **Not verified:** a real iPhone; how any of it feels; nothing
   reads `c.stunned`, `c.landing`, `c.lastHit` etc. in a scenario (they
   are for drawing).
+
+- **Lead `session_017WiGzGN9egot3JUvSMBBA9`, 14:20 UTC: owed, held by the
+  orchestrator until Step 8's round 2 lanes land** (usage allowance; it
+  will message the lead to brief). In order: **(a)** panel polish: the
+  most-felt numbers first (top speed, jump, wind-up, fall), finer steps
+  for sliders across huge ranges (0–100000); **(b)** signal 6 as a script:
+  no number on screen, from the page's own record; **(c)**
+  `docs/architecture.md`'s "I need to add…" rows re-read against what
+  landed. (a)+(b) are one worker's brief. Routed elsewhere: the wind-up
+  drawn as standing still is Step 8 round 2's renderer lane
+  (orchestrator); the thrower's predicted swing and the switch gap are in
+  `docs/plan/step-5.md`'s handoff notes. Claim kept.
