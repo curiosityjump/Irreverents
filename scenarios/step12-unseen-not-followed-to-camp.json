@@ -1,0 +1,105 @@
+{
+  "id": "step12-unseen-not-followed-to-camp",
+  "gate": null,
+  "proves": "the partner of step12-guard-follows-into-camp (D-065: help is not psychic): the same theft and call, but the hero runs east out of the guard's sight before reaching the courtyard and goes up into the camp; the guard never goes through any door, and after 20 s unseen the street's alert falls to 0",
+  "room": "castle-street",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "hero",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 60,
+      "to": 140,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 1450,
+      "to": 1475,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 1500,
+      "to": 1505,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 2800,
+      "to": 3355,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 3365,
+      "to": 3370,
+      "y": -1
+    }
+  ],
+  "ticks": 4600,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "changed-room",
+      "where": {
+        "entity": "p:a",
+        "fromRoom": "courtyard",
+        "fromDoor": "to-outpost",
+        "toRoom": "outpost"
+      },
+      "between": [
+        3365,
+        3365
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "changed-room",
+      "where": {
+        "entity": "street-guard"
+      },
+      "between": [
+        0,
+        4600
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "in-room",
+      "entity": "street-guard",
+      "at": 4600,
+      "room": "castle-street"
+    },
+    {
+      "fact": "alert",
+      "area": "castle-street",
+      "between": [
+        2130,
+        4146
+      ],
+      "is": 1
+    },
+    {
+      "fact": "alert",
+      "area": "castle-street",
+      "at": 4600,
+      "is": 0
+    }
+  ]
+}

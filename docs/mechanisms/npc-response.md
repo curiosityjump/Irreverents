@@ -259,6 +259,8 @@ the room it left who had that hero **in sight on that very tick**
 through it (a walk door by walking in, an enter doorway with
 `askForDoor()`), then search from where they come out. One who did not
 see the hero leave learns nothing and searches where they are (D-065).
+Only the nearest `chaseCrossCap` (2) of those who saw follow: Step 12's
+`chase-cap` (606) clears the door for the rest (`docs/mechanisms/outposts.md`).
 A responder answers to the alert of the area they were **placed** in
 (`c.npc.home`), wherever the chase has led; when it reaches 0 they go
 home by `doorToward()` and back to their post. With no way home, or a

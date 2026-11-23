@@ -122,7 +122,24 @@ a hero east of it within sight at tick 0 is seen.
 
 See `docs/architecture.md`, "How to add an outpost".
 
+## Chase and clash (slice B)
+
+**The chase crosses, a few at a time (`chase-cap`, 606, `DRAFT:`).** Step
+4's `alert-follow` (605) gives every responder who had a hero in sight on
+the tick they left `c.respond.door`. `chase-cap` keeps that door for the
+nearest `chaseCrossCap` (tuning `world`, 2) of them, by distance to the
+door, ties by id, and sends the rest to search where they stand (D-065:
+they learn nothing more). Per hero, per door: going back out and in again
+is a new chase. The street's guard follows a hero seen all the way from
+the castle street through the courtyard and up into the camp, and the
+street's alert is unchanged there (`step12-guard-follows-into-camp`,
+control `chaseCrossCap` 0); a hero who got out of sight first is not
+followed and the alert cools (`step12-unseen-not-followed-to-camp`).
+Not checked by a scenario: three responders with two crossing. Rooms
+joined by doors must be reachable from the start (`check-rooms.ts`,
+`INTENT:`), so a test room cannot hold a door, and the real route has one
+guard.
+
 ## Not built yet
 
-Slice B: guards chasing through doors into the camp, and sides that meet
-fighting (D-069). Saving a broken horn (Step 7's store).
+Sides that meet fighting (D-069). Saving a broken horn (Step 7's store).

@@ -701,3 +701,9 @@ document as a decision of theirs.
 - **To change it:** `docs/roles/orchestrator-card.md`, "Handing off" (the threshold and the spawn line); `CLAUDE.md`'s "Every session … is disposable" paragraph.
 - **Where:** the card; `docs/orchestrator-role.md`, "Handing off to a fresh successor".
 
+### 2026-11-23 · Two guards at most follow a hero through one door
+- **Decided by:** Step 12 slice B builder `session_017WiGzFLgKMowRCLNbRRYiE`, for the Step 12 lead `session_017WiGzJTXQVCWQYDDmC2UiY`
+- **Instead of asking:** "How many guards follow a hero into the camp?"
+- **Why this way:** the owner wants the chase to carry between regions (D-077) and the camp and town to be one world (D-069), but a whole watch pouring through a doorway would empty the town and swamp the camp's bound on people. The nearest two who saw the hero go follow; the rest search where they stand, as a guard who never saw them leave does (D-065).
+- **To change it:** `chaseCrossCap` in `content/tuning.json` (`world`); 99 means everyone who saw follows, as before.
+- **Where:** `src/sim/systems/chase-cap.ts`; `docs/mechanisms/outposts.md`, "Chase and clash".
