@@ -142,4 +142,4 @@ guard.
 
 ## Not built yet
 
-Sides that meet fighting (D-069). Saving a broken horn (Step 7's store).
+Sides that meet fighting (D-069) and `clash-cool` (slice B's push 3, not landed: `docs/for-the-lead.md`). Saving a broken horn (Step 7's store).

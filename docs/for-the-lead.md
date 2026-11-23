@@ -145,3 +145,13 @@ actually read (questions for the owner go through
 **Flag:** rung 5 was by eye, on hand-made records pushed into the page's world; nothing scripted covers the drawing, and the real path (detector → pedestal → page, two devices) has not been seen. Text follows `draw/npcs.ts` (`fillText`, 8 px): readable, soft on a phone; a shared pixel font would be Step 5's or 8's call.
 
 
+
+### step-12-b-chase-and-clash.md, 2026-11-23 (slice B builder session_017WiGzFLgKMowRCLNbRRYiE)
+
+**Stopped after push 2 (1d53683, live); push 3 (the clash) is not on `main`.** Why: after the quarry joined (78c4959), loading content takes about 100 s (`node scripts/trace.ts` on an unchanged scenario took over 100 s; your Step 3 brief 1251555 measured the same), so a full check, a control and e2e would not fit before 17:15. What push 3 had, unpushed and unverified: `content/hostility.json` (`pairs`: guard with outpost-fighter, guard with outpost-lookout) and its kind `src/content/kinds/hostility.ts` (with `hostile(h, a, b)` and a cross-check that each id is a `content/npcs/` file); `guard.json` verbs `["move", "attack"]` with the fighter's attack numbers in `tuning.json`'s `guard`; `clash-fight` (order 59, after outpost-fight): a person whose body lists attack, not calling and seeing no hero, walks at the nearest hostile person it sees and pulses attack in `npcChargeReach`; `clash-cool` (621): a player's `hit` on a person, seen by a conscious person of an alerted area, sets that area's `quiet` to 0 (never raises). A hit between two people is no deed (no `expect` row for those roles), so moods should stay put. A doorless `test-clash` room (guard and fighter facing, five tiles apart) was the scene for `step12-guards-and-camp-clash`.
+
+**Flag:** `step12-chase-cap` (three responders, two cross) was not written: rooms joined by doors must be reachable from the start room (`check-rooms.ts`, `INTENT:`), so no test room can hold a door, and the real route has one guard. The cap is checked only through its control (cap 0, the one guard stays behind). Three guards on the route (the courtyard has none) would make it checkable; that is a placement choice for you.
+
+**Flag:** slice A's "fight anywhere" gap was already on `main` (`step12-fighter-any-room`, 2027994, control: the side test flipped), so push 1 was the art alone.
+
+**Flag:** push 1's commit (ab0b34b) carries your session id in its `Claude-Session` trailer by my mistake; it was mine.
