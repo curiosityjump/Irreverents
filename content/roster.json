@@ -1,0 +1,4 @@
+{
+  "//": "DRAFT (Step 11): every character a player could play, in order. All unlocked: nothing in the world unlocks anyone yet. The party (party.json) must be in it. Each one nobody is playing wanders the cantina.",
+  "characters": ["grappler", "infiltrator", "flyer", "brawler", "skirmisher"]
+}

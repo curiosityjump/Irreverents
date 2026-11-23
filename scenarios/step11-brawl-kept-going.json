@@ -1,0 +1,95 @@
+{
+  "id": "step11-brawl-kept-going",
+  "proves": "one player swing inside the calm time keeps the brawl going: a second swing four seconds in moves the settling to five seconds after that swing (the regulars' own swings never keep it going)",
+  "room": "cantina",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 2,
+      "to": 6,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 240,
+      "to": 244,
+      "hold": [
+        "attack"
+      ]
+    }
+  ],
+  "ticks": 800,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "attacked",
+      "where": {
+        "by": "p:a"
+      },
+      "between": [
+        246,
+        246
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "cantina",
+      "room": "cantina",
+      "between": [
+        9,
+        545
+      ],
+      "on": true
+    },
+    {
+      "fact": "event",
+      "event": "cantina-brawl-end",
+      "between": [
+        0,
+        545
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "cantina-brawl-end",
+      "where": {
+        "room": "cantina",
+        "why": "calm"
+      },
+      "between": [
+        546,
+        546
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "cantina",
+      "room": "cantina",
+      "between": [
+        547,
+        800
+      ],
+      "on": false
+    }
+  ]
+}

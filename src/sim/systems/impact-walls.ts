@@ -70,7 +70,8 @@ const system: System = {
       markImpact(ctx, e, x, y, speed);
       strike(ctx, e, vx, vy, beatTicks(ctx, world.beatTime, world.beatMaxTime, speed));
       ctx.emit('impact', { entity: e.id, player: e.player, other: null, speed });
-      wear(ctx, e, speed * world.impactWear! * (friendly(ctx, f.by, e) ? world.friendThrowWear! : 1), f.by);
+      // Step 11: in a cantina brawl the body's c.brawl share is read first (systems/cantina-brawl.ts).
+      wear(ctx, e, speed * world.impactWear! * (friendly(ctx, f.by, e) ? (e.c.brawl?.throwWear ?? world.friendThrowWear!) : 1), f.by);
     }
   },
 };

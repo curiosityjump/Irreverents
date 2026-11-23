@@ -1,0 +1,73 @@
+{
+  "id": "step11-walk-off-no-score",
+  "proves": "outside a brawl a body that leaves the cantina's edge is put back on a pad too, with no cantina-out and no score: a player walking west off the stage into the gutter is back on the stage at once",
+  "room": "cantina",
+  "placements": true,
+  "players": [
+    {
+      "id": "b",
+      "character": "infiltrator",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "b",
+      "from": 0,
+      "to": 90,
+      "x": -1
+    }
+  ],
+  "ticks": 120,
+  "expect": [
+    {
+      "fact": "event",
+      "event": "cantina-out",
+      "between": [
+        0,
+        120
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "effect",
+      "player": "b",
+      "between": [
+        0,
+        120
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "cantina",
+      "room": "cantina",
+      "between": [
+        0,
+        120
+      ],
+      "on": false,
+      "score": {
+        "b": {
+          "ko": 0,
+          "falls": 0
+        }
+      }
+    },
+    {
+      "fact": "position",
+      "player": "b",
+      "at": 120,
+      "x": [
+        40,
+        400
+      ]
+    }
+  ]
+}

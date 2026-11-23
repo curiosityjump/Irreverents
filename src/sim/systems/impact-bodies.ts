@@ -63,8 +63,9 @@ const system: System = {
         ctx.emit('impact', { entity: a.id, player: a.player, other: b.id, speed });
         ctx.emit('impact', { entity: b.id, player: b.player, other: a.id, speed });
         const hurt = speed * world.impactWear!;
-        wear(ctx, a, hurt * (friendly(ctx, fa.by, a) ? world.friendThrowWear! : 1), fa.by);
-        wear(ctx, b, hurt * (friendly(ctx, fa.by, b) ? world.friendThrowWear! : 1), fa.by);
+        // Step 11: in a cantina brawl each body's c.brawl share is read first (systems/cantina-brawl.ts).
+        wear(ctx, a, hurt * (friendly(ctx, fa.by, a) ? (a.c.brawl?.throwWear ?? world.friendThrowWear!) : 1), fa.by);
+        wear(ctx, b, hurt * (friendly(ctx, fa.by, b) ? (b.c.brawl?.throwWear ?? world.friendThrowWear!) : 1), fa.by);
         break;
       }
     }

@@ -1,0 +1,174 @@
+{
+  "id": "step11-last-player-leaves",
+  "proves": "the last player walking out of the cantina ends its brawl that tick (cantina-brawl-end, why empty); out in the street they carry no c.brawl and their attack on a friend is harmless again (Step 2's rule), and no regular follows them out",
+  "room": "cantina",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    },
+    {
+      "id": "b",
+      "character": "infiltrator",
+      "spawn": 1,
+      "room": "castle-street"
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 2,
+      "to": 6,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 20,
+      "to": 76,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 100,
+      "to": 104,
+      "y": -1
+    },
+    {
+      "player": "b",
+      "from": 0,
+      "to": 108,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 150,
+      "to": 154,
+      "hold": [
+        "attack"
+      ]
+    }
+  ],
+  "ticks": 240,
+  "expect": [
+    {
+      "fact": "cantina",
+      "room": "cantina",
+      "between": [
+        9,
+        99
+      ],
+      "on": true
+    },
+    {
+      "fact": "body-state",
+      "player": "a",
+      "at": 99,
+      "is": [
+        "brawl"
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "changed-room",
+      "where": {
+        "entity": "p:a",
+        "toRoom": "castle-street"
+      },
+      "between": [
+        100,
+        100
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "cantina-brawl-end",
+      "where": {
+        "room": "cantina",
+        "why": "empty"
+      },
+      "between": [
+        100,
+        100
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "body-state",
+      "player": "a",
+      "at": 101,
+      "not": [
+        "brawl"
+      ]
+    },
+    {
+      "fact": "cantina",
+      "room": "cantina",
+      "between": [
+        101,
+        240
+      ],
+      "on": false,
+      "regulars": [
+        "flyer",
+        "brawler",
+        "skirmisher"
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "hit",
+      "where": {
+        "by": "p:a",
+        "target": "p:b"
+      },
+      "between": [
+        150,
+        180
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "body-state",
+      "player": "b",
+      "at": 200,
+      "not": [
+        "flying",
+        "worn",
+        "brawl"
+      ]
+    },
+    {
+      "fact": "velocity",
+      "player": "b",
+      "at": 200,
+      "vx": [
+        0,
+        0
+      ],
+      "vy": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "in-room",
+      "player": "b",
+      "at": 240,
+      "room": "castle-street"
+    }
+  ]
+}

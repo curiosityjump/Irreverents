@@ -1,0 +1,216 @@
+{
+  "id": "step11-ring-out",
+  "proves": "in a brawl, a player launched past the cantina's edge is out: cantina-out credits whoever sent it, it counts a fall for the body and a knock-out for the sender, and the body is back on a pad at once, standing still and no longer flying; the same player three times running",
+  "room": "cantina",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    },
+    {
+      "id": "b",
+      "character": "infiltrator",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 2,
+      "to": 6,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 20,
+      "to": 21,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 30,
+      "to": 34,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 80,
+      "to": 84,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "b",
+      "from": 110,
+      "to": 172,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 180,
+      "to": 184,
+      "hold": [
+        "attack"
+      ]
+    }
+  ],
+  "ticks": 230,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "cantina-out",
+      "where": {
+        "entity": "p:b",
+        "player": "b",
+        "by": "p:a"
+      },
+      "between": [
+        0,
+        230
+      ],
+      "count": [
+        3,
+        3
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "cantina-out",
+      "where": {
+        "entity": "p:b"
+      },
+      "between": [
+        57,
+        57
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "position",
+      "player": "b",
+      "at": 58,
+      "x": [
+        135,
+        137
+      ],
+      "y": [
+        159,
+        161
+      ]
+    },
+    {
+      "fact": "velocity",
+      "player": "b",
+      "at": 58,
+      "vx": [
+        0,
+        0
+      ],
+      "vy": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "body-state",
+      "player": "b",
+      "at": 58,
+      "not": [
+        "flying",
+        "flattened",
+        "worn",
+        "beat"
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "cantina-out",
+      "where": {
+        "entity": "p:b"
+      },
+      "between": [
+        107,
+        107
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "position",
+      "player": "b",
+      "at": 108,
+      "x": [
+        263,
+        265
+      ],
+      "y": [
+        159,
+        161
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "cantina-out",
+      "where": {
+        "entity": "p:b"
+      },
+      "between": [
+        206,
+        206
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "position",
+      "player": "b",
+      "at": 207,
+      "x": [
+        199,
+        201
+      ],
+      "y": [
+        159,
+        161
+      ]
+    },
+    {
+      "fact": "body-state",
+      "player": "b",
+      "at": 207,
+      "not": [
+        "flying"
+      ]
+    },
+    {
+      "fact": "cantina",
+      "room": "cantina",
+      "at": 230,
+      "on": true,
+      "score": {
+        "a": {
+          "ko": 4,
+          "falls": 0
+        },
+        "b": {
+          "ko": 0,
+          "falls": 3
+        }
+      }
+    }
+  ]
+}

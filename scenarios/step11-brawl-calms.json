@@ -1,0 +1,107 @@
+{
+  "id": "step11-brawl-calms",
+  "proves": "a brawl with no player attacking for calmTime (5 s) settles by itself (cantina-brawl-end, why calm): nobody carries c.brawl and the regulars go back to wandering",
+  "room": "cantina",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 2,
+      "to": 6,
+      "hold": [
+        "attack"
+      ]
+    }
+  ],
+  "ticks": 600,
+  "expect": [
+    {
+      "fact": "cantina",
+      "room": "cantina",
+      "between": [
+        9,
+        307
+      ],
+      "on": true
+    },
+    {
+      "fact": "event-where",
+      "event": "cantina-brawl-end",
+      "where": {
+        "room": "cantina",
+        "why": "calm"
+      },
+      "between": [
+        308,
+        308
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "cantina-brawl-end",
+      "between": [
+        0,
+        600
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "cantina",
+      "room": "cantina",
+      "between": [
+        309,
+        600
+      ],
+      "on": false
+    },
+    {
+      "fact": "body-state",
+      "player": "a",
+      "at": 309,
+      "not": [
+        "brawl"
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "hit",
+      "between": [
+        310,
+        600
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "cantina",
+      "room": "cantina",
+      "between": [
+        320,
+        600
+      ],
+      "regulars": [
+        "infiltrator",
+        "flyer",
+        "brawler",
+        "skirmisher"
+      ],
+      "moved": 16
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "//": "DRAFT (Step 11, docs/mechanisms/cantina.md): every number and pattern here is a first guess. The edge is the stage floor's columns (2-23) from the ceiling down to the floor: past either end of the floor is the gutter, open air outside the edge, so a body launched or walked off the stage is out and back on a pad at once. Up has no edge: a body launched up meets the ceiling. Pads are on the stage, east of the doorway (column 3), so a body never comes back in the doorway. calmTime: seconds with no player attacking before the brawl settles. friend: Step 2's three friend numbers while a brawl is on (1 = as hard as on anyone). Patterns: walk-to columns stay on the stage; fight.reach is pixels, swingEvery and jumpEvery seconds.",
+  "id": "cantina",
+  "room": "cantina",
+  "edge": { "at": [2, 0], "size": [22, 11] },
+  "pads": [[8, 9], [16, 9], [12, 9], [20, 9]],
+  "calmTime": 5,
+  "friend": { "attackLaunch": 1, "attackWear": 1, "throwWear": 1 },
+  "patterns": {
+    "grappler": {
+      "walk": [{ "walk-to": 9 }, { "wait": 2 }, { "walk-to": 14 }, { "wait": 1.5 }],
+      "fight": { "reach": 6, "swingEvery": 1.1, "jumpEvery": 0 }
+    },
+    "infiltrator": {
+      "walk": [{ "walk-to": 18 }, { "wait": 0.8 }, { "walk-to": 11 }, { "wait": 1.2 }, { "walk-to": 15 }, { "wait": 0.5 }],
+      "fight": { "reach": 4, "swingEvery": 0.5, "jumpEvery": 1.7 }
+    },
+    "flyer": {
+      "walk": [{ "walk-to": 20 }, { "wait": 2.5 }, { "walk-to": 13 }, { "wait": 1 }],
+      "fight": { "reach": 8, "swingEvery": 0.8, "jumpEvery": 1.3 }
+    },
+    "brawler": {
+      "walk": [{ "walk-to": 7 }, { "wait": 3 }, { "walk-to": 12 }, { "wait": 2 }],
+      "fight": { "reach": 6, "swingEvery": 1.4, "jumpEvery": 0 }
+    },
+    "skirmisher": {
+      "walk": [{ "walk-to": 21 }, { "wait": 1 }, { "walk-to": 16 }, { "wait": 0.6 }, { "walk-to": 19 }, { "wait": 1.4 }],
+      "fight": { "reach": 3, "swingEvery": 0.45, "jumpEvery": 2.2 }
+    }
+  }
+}

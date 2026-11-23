@@ -1,0 +1,81 @@
+{
+  "id": "step11-brawl-starts",
+  "proves": "a player's hit landing on a regular starts the brawl (cantina-brawl-start, every body in the room carries c.brawl) and a regular hits the player back",
+  "room": "cantina",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 2,
+      "to": 6,
+      "hold": [
+        "attack"
+      ]
+    }
+  ],
+  "ticks": 600,
+  "expect": [
+    {
+      "fact": "cantina",
+      "room": "cantina",
+      "between": [
+        0,
+        7
+      ],
+      "on": false
+    },
+    {
+      "fact": "event-where",
+      "event": "cantina-brawl-start",
+      "where": {
+        "room": "cantina",
+        "by": "p:a"
+      },
+      "between": [
+        8,
+        8
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "cantina",
+      "room": "cantina",
+      "at": 9,
+      "on": true
+    },
+    {
+      "fact": "body-state",
+      "player": "a",
+      "at": 9,
+      "is": [
+        "brawl"
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "hit",
+      "where": {
+        "by": "cantina:infiltrator",
+        "target": "p:a"
+      },
+      "between": [
+        9,
+        120
+      ],
+      "count": [
+        1,
+        10
+      ]
+    }
+  ]
+}

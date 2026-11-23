@@ -1,0 +1,164 @@
+{
+  "id": "step11-brawl-raises-nothing",
+  "proves": "a whole brawl, players launched out three times and regulars knocked about, raises nothing: every deed has no witness, nobody's mood changes, nobody calls, and the cantina's alert stays at 0 (the same hit on a person in the street upsets them: step4-hero-hits-shopkeeper)",
+  "room": "cantina",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    },
+    {
+      "id": "b",
+      "character": "infiltrator",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 2,
+      "to": 6,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 20,
+      "to": 21,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 30,
+      "to": 34,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 80,
+      "to": 84,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "b",
+      "from": 110,
+      "to": 172,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 180,
+      "to": 184,
+      "hold": [
+        "attack"
+      ]
+    }
+  ],
+  "ticks": 420,
+  "expect": [
+    {
+      "fact": "event",
+      "event": "cantina-brawl-start",
+      "between": [
+        0,
+        420
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "cantina-out",
+      "between": [
+        0,
+        420
+      ],
+      "count": [
+        4,
+        100
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "deed",
+      "where": {
+        "deed": "hit",
+        "witnesses": []
+      },
+      "between": [
+        0,
+        420
+      ],
+      "count": [
+        5,
+        5
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "deed",
+      "between": [
+        0,
+        420
+      ],
+      "count": [
+        5,
+        5
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "mood-changed",
+      "between": [
+        0,
+        420
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "call-started",
+      "between": [
+        0,
+        420
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "alert-changed",
+      "between": [
+        0,
+        420
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "alert",
+      "area": "cantina",
+      "between": [
+        0,
+        420
+      ],
+      "is": 0
+    }
+  ]
+}

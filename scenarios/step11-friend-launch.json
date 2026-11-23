@@ -1,0 +1,119 @@
+{
+  "id": "step11-friend-launch",
+  "proves": "in a brawl a player's attack launches another player; the same swing landing on that friend before the brawl was on (the swing that starts it) does not move them (Step 2's friend rule, which stands outside a brawl)",
+  "room": "cantina",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    },
+    {
+      "id": "b",
+      "character": "infiltrator",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 2,
+      "to": 6,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 20,
+      "to": 21,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 30,
+      "to": 34,
+      "hold": [
+        "attack"
+      ]
+    }
+  ],
+  "ticks": 50,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "hit",
+      "where": {
+        "by": "p:a",
+        "target": "p:b"
+      },
+      "between": [
+        8,
+        8
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "body-state",
+      "player": "b",
+      "at": 30,
+      "not": [
+        "flying",
+        "worn"
+      ],
+      "is": [
+        "brawl"
+      ]
+    },
+    {
+      "fact": "position",
+      "player": "b",
+      "at": 30,
+      "x": [
+        135,
+        137
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "hit",
+      "where": {
+        "by": "p:a",
+        "target": "p:b"
+      },
+      "between": [
+        36,
+        36
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "body-state",
+      "player": "b",
+      "at": 40,
+      "is": [
+        "flying"
+      ],
+      "worn": [
+        1,
+        1000
+      ]
+    },
+    {
+      "fact": "velocity",
+      "player": "b",
+      "at": 50,
+      "vx": [
+        -600,
+        -300
+      ]
+    }
+  ]
+}

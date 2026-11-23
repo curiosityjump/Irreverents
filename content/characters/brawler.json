@@ -1,0 +1,16 @@
+{
+  "//": "DRAFT (Step 11): a roster character for the 'heavy brawler' function: big, slow, hits hardest, hard to knock out. Only moves that exist (D-008). The id is the function; the name and the colour are data.",
+  "id": "brawler",
+  "name": "Graybox Brawler",
+  "box": { "w": 18, "h": 28 },
+  "color": "#ff8fab",
+  "verbs": [
+    "move",
+    "jump",
+    "switch",
+    "body",
+    "attack",
+    "grab"
+  ],
+  "tuning": "brawler"
+}

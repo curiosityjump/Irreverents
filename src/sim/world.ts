@@ -1,4 +1,5 @@
 import type { Content } from '../content/types.ts';
+import { cantinaEntity, cantinaId } from './cantina.ts';
 import { firstFreeMember } from './party.ts';
 import type { Entity, Input, World } from './types.ts';
 
@@ -94,11 +95,15 @@ export function spawnBody(
 }
 
 /**
- * Adds everything content/placements/<room id>.json places in a room.
+ * Adds everything content/placements/<room id>.json places in a room
+ * (and, Step 11, a cantina room's `~cantina:<room>` entity).
  * Safe to call twice: an id already in the world is skipped. A room with no
  * placements file gets nothing.
  */
 export function populateRoom(world: World, content: Content, roomId: string): void {
+  // Step 11: a cantina room starts with the bodiless entity its brawl runs on
+  // (src/sim/cantina.ts); its regulars are added by systems/cantina-regulars.ts.
+  if (content.cantina?.[roomId] && !findEntity(world, cantinaId(roomId))) addEntity(world, cantinaEntity(roomId));
   const placed = content.placements?.[roomId];
   if (!placed) return;
   for (const p of placed.place) {

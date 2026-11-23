@@ -1,0 +1,16 @@
+{
+  "//": "DRAFT (Step 11): a roster character for the 'light and quick' function: small, fast, quick jabs that barely push, easy to send flying. Only moves that exist (D-008). The id is the function; the name and the colour are data.",
+  "id": "skirmisher",
+  "name": "Graybox Skirmisher",
+  "box": { "w": 12, "h": 18 },
+  "color": "#ffd60a",
+  "verbs": [
+    "move",
+    "jump",
+    "switch",
+    "body",
+    "attack",
+    "grab"
+  ],
+  "tuning": "skirmisher"
+}

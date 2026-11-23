@@ -137,13 +137,14 @@ function strikeTick(ctx: StepContext, e: Entity, input: Input, t: Record<string,
     // down nor launches you. Each share is a number in the tuning file,
     // so the other answer is a small change. "Friend" is player on player.
     const friend = e.player !== null && o.player !== null;
-    const speed = Math.min(t.attackStrength! / bodyNumbers(ctx.content, o).weight, world.maxLaunchSpeed ?? 500) * (friend ? (world.friendAttackLaunch ?? 0) : 1);
+    // Step 11: in a cantina brawl the target's c.brawl share is read first (systems/cantina-brawl.ts).
+    const speed = Math.min(t.attackStrength! / bodyNumbers(ctx.content, o).weight, world.maxLaunchSpeed ?? 500) * (friend ? (o.c.brawl?.attackLaunch ?? world.friendAttackLaunch ?? 0) : 1);
     if (speed > 0) {
       const up = input.y < -0.5;
       launch(ctx, o, e.facing * speed * (up ? 0.25 : 1), -speed * (up ? 1 : (world.attackLift ?? 0.5)), e.id, [e.id], beatTicks(ctx, world.hitBeatTime, world.hitBeatMaxTime, speed));
       markImpact(ctx, o, e.facing > 0 ? o.x : o.x + ob.w, o.y + ob.h / 2, speed);
     }
-    wear(ctx, o, t.attackWear! * (friend ? (world.friendAttackWear ?? 0) : 1), e.id);
+    wear(ctx, o, t.attackWear! * (friend ? (o.c.brawl?.attackWear ?? world.friendAttackWear ?? 0) : 1), e.id);
   }
 }
 export default verb;
