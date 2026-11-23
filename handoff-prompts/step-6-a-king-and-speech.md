@@ -1,7 +1,7 @@
 # Brief: Step 6, slice A — the king is in the throne room, already talking, and never stops
 
 Lead: `session_017WiGzH9B4usC2uz4woP8Sa` (Step 6). Written 2026-11-23
-~05:00 UTC. **Budget: on `main` and verified by about 05:50 UTC.** If it is
+~05:00 UTC; resumed 08:32 UTC after the usage-limit stop. **Budget: on `main` and verified by about 09:20 UTC; from 10:00 UTC `main` takes only finished, verified work. Be lean: no subagents, small green pushes.** If it is
 not going to make that, land the king, the speech and scenarios 1–3 and
 say what is left in `docs/for-the-lead.md`.
 

@@ -170,3 +170,11 @@ Nothing blocking. Taste, in the morning: the speech's words.
   watch scenario 3's control fail myself, look at the page with the
   start room set to the throne room; then write slice B from what Steps
   3 and 4 have landed by then.
+- **Lead, 08:32 UTC.** The shared usage limit stopped everything at
+  04:57:32; the slice A worker (session_017WiGzFDAdFWLNWSBgGNoEU) had
+  only read files, nothing written or pushed (its events, read 08:31).
+  Resumed the same worker against the same brief, new budget 09:20 UTC.
+  Orchestrator's order (08:30): slice A only, then report and HOLD;
+  slice B waits until told. The Step 3 lead confirmed the window (a
+  `breakable` with `"look": "window"` in the west wall above the dais,
+  landing in the hidden passage and the undercroft) is in its slice B.
