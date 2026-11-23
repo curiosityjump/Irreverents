@@ -307,6 +307,12 @@ changed without touching code; don't grade the feel yourself.
   Playwright's `iPhone 14 landscape`: holding right then space moved the
   character from the spawn onto the first platform; no page errors.
   Keyboard only; touch is Gate 2. Not tried: Safari, a real phone.
+- **Documents-only pushes no longer restart the game** (Gate 1 worker,
+  04:29 to 04:33 UTC): with `railway.json` listing only the code paths,
+  four documents-only pushes left `startedAt` at 04:29:08; a code push
+  restarted it at 04:33:03. `/healthz` reports the volume: mounted and
+  writable at `/data`. `npm run check:deployed` is M1's command. Record
+  and traps: `docs/mechanisms/deploy.md`. Not proven: the health check.
 
 ## Briefs
 

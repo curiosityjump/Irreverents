@@ -91,5 +91,7 @@ Run by the Step 1 Gate 1 worker on 2026-11-23, times UTC, reading
   `docs/for-the-lead.md` (b3a419e) was pushed at 04:29:29, and three more
   documents-only commits by other sessions by 04:31:53; at 04:32:03
   `/healthz` still reported `fa825d4` and `startedAt` 04:29:08.
-- **Second form, code still deploys:** see the line the same session
-  added below once its closing code push was live.
+- **Second form, code still deploys.** c27224c (a change under
+  `scripts/`) was pushed at 04:32:19; the server restarted at 04:33:03
+  reporting 395580e, the tip of `main` at that moment, which contains it.
+  `npm run check:deployed` then exited 0.
