@@ -210,9 +210,60 @@ stores nothing; no Step 4 code is on `main`.
   must give a record its lasting number when it saves, and `restoreHall`
   must not throw on a duplicate.
 
+- **The pedestal's picture, card and banner, 4820c43, reviewed 05:00
+  UTC: light pass only.** It is one self-contained drawing file and
+  one line in `render.ts`, and draws nothing while no pedestal exists,
+  so I read the diff and re-ran build and check. **Not verified by me:**
+  how it looks. The worker saw it only on hand-made records with a
+  stand-in pedestal; I look at it myself (phone-sized screenshots) once
+  slice B's real records and words are on `main`. Owed, for slice 2:
+  `Components.hall` gains `lasting?: boolean` and the server sets it
+  false on every pedestal when the store is in memory (the card's "Not
+  saved" line reads it); `render()` is not given the local player, so
+  anyone at a pedestal opens the card on every screen in that room
+  (ask Step 1's lead what Gate 2 gives `render()`); check the banner
+  does not announce old records when the network delivers the world
+  late or again after a reconnect; check `content.hall`'s field names
+  match what `draw/hall.ts` reads (`kinds[id].name`,
+  `stats[id].label`).
+
 ## Open with the owner
 
 - Q-011 (lasting storage): answered by the owner's own action,
   2026-11-23; see "Records are kept on the volume the owner added" above.
 
 ## Handoff notes
+
+### 2026-11-23 08:35 UTC, Step 7 lead (session_017WiGzF4QGboHBQtunwprhk): held by the orchestrator
+
+**Step 7 is held** (orchestrator, 08:30 UTC): every session was stopped
+by the account's shared usage limit from about 04:58 to 08:20 UTC, and
+the allowance until 13:20 UTC goes to what makes the game playable on a
+phone. Do not relaunch workers until the orchestrator releases the step.
+
+**On `main` and reviewed** (see "Reviews"): the store
+(`src/server/store.ts`, `node scripts/check-store.ts`), the pedestal's
+picture, card and banner (`src/client/draw/hall.ts`), the record shape
+(`src/sim/hall/record.ts`, a5c98c3). None of it changes what a player
+sees yet: nothing makes a record and nothing opens the store.
+
+**Not on `main`:** the detector (slice B,
+`handoff-prompts/step-7-b-detector.md`, worker
+session_017WiGzJNvq96pjtVZnaRP9N, stopped by the limit nine minutes in;
+asked at 08:35 to push anything green and stop). Its brief is current:
+it carries Step 4's confirmed event names. Two things told to that
+worker by message only, to fold into the brief before relaunching:
+`restoreHall` must never throw on duplicate or missing numbers and
+should return what it skipped; the content fields must be
+`content.hall.kinds[id].name` and `content.hall.stats[id].label`
+(what `draw/hall.ts` reads), and `Components.hall` gains `lasting?:
+boolean`; a quiet theft counts only when the `deed`'s `witnesses` is
+empty.
+
+**To resume:** relaunch slice B from its brief (fresh session, canonical
+spawn call), review it, then write slice 2 from "Briefs" and "Reviews"
+above (wiring, the owed items, real gate E scenarios; when the wiring
+edit touches `store.ts`, its paste comment should also say worlds are
+made per room name on demand and all read the one store). Slice A's
+brief can be deleted: both parts shipped and were reviewed. The machine
+is untouched.

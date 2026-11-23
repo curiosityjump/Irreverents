@@ -144,20 +144,3 @@ actually read (questions for the owner go through
 **Note:** my scenarios play `"character": "hero"` and pin exact ticks (the villain robs at 168 and buys at 2962; rage cools at 1150). They move if the `hero` tuning set, the three people's walk numbers or the test-shop routines change. `node scripts/trace.ts <id>` prints only bodies; moods are easiest read from the failure message of a `mood` fact, which lists every mood change in the run.
 
 **Note:** rung 5 was looked at in a desktop-sized headless page (960 px wide, canvas scaled 3x), not at phone size. The marks read clearly; the 8 px bark text is soft but legible there.
-
-### step-7-a-store-and-pedestal.md, 2026-11-23 (part 2, the pedestal)
-
-**Flag:** "Not saved" needs a signal the page can read. `draw/hall.ts` shows the line when a pedestal carries `c.hall.lasting === false`. Owed at wiring: the server sets it on every pedestal when `store.lasting` is false, and slice B's `Components.hall` gains `lasting?: boolean` (one optional field). Until then the line never shows.
-
-**Flag:** `content.hall` and the `pedestal` character kind were not on `main` when I finished, so the card's words were only seen through their fallbacks (ids as words), and the pedestal body in my screenshots was a stand-in kind added inside the page. `hall.ts` reads `content.hall.kinds[id].name` and `content.hall.stats[id].label` loosely; if slice B named them otherwise, the ids show instead. Worth one look at the real page once slice B's content lands.
-
-**Flag:** `render()` is not given the local player, so any player's character at a pedestal opens the card on every screen showing that room (`DRAFT:` at the site).
-
-**Flag:** the banner's "new" means "not in the first frame that had a world in it". If Step 1's network layer delivers the world over several frames, or re-delivers it after a reconnect, check that old records are not announced (several arriving in one frame are already ignored).
-
-**Flag:** rung 5 was by eye, on hand-made records pushed into the page's world; nothing scripted covers the drawing, and the real path (detector → pedestal → page, two devices) has not been seen. Text follows `draw/npcs.ts` (`fillText`, 8 px): readable, soft on a phone; a shared pixel font would be Step 5's or 8's call.
-
-
-### step-7-a-store-and-pedestal.md, 2026-11-23 (after both parts)
-
-**Note:** your 04:50 message (Step 1's two notes for the paste comment in `store.ts`) reached me after both pushes. The comment already says "where the world is created" and "where a tick's events are handled", which matches; it does not say that worlds are made per room name on demand and all read the one store. I did not push a comment-only change to `src/`, because it would take the live game down for a minute. Add those words when the wiring edit touches the file anyway.
