@@ -145,6 +145,18 @@ By the lead, 2026-11-23 04:02–04:10 UTC, in a container like yours.
 
 ## 3 · Traps
 
+- **From the Step 2 lead, 04:35 UTC.** `populateRoom(world, content,
+  roomId)` is on `main` (1868e01), safe with no placements file and safe
+  to call twice; Step 2 already added the call in `src/client/main.ts`
+  beside `spawnPlayer` (you will meet it on rebase; keep it, and add the
+  same call where the server builds a room's world). `content/party.json`
+  exists: `spawnPlayer` will soon pick the first party member nobody is
+  playing when no `character` is passed, so do not build anything that
+  depends on passing `content.game.playerCharacter`; the lead will say
+  when to stop passing it. New actions are arriving in
+  `content/actions/` (attack, grab, switch, later interact): your touch
+  layer should show them as they land.
+
 - **Three overlaps with the other running steps, settled by a review**
   (added 04:35 UTC; `docs/plan/step-3.md` and `step-1.md` carry them).
   (1) **The camera:** you write the first follow camera, in
