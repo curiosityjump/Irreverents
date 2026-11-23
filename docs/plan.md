@@ -309,7 +309,7 @@ Full text: `docs/plan/step-11.md`
 
 ## Step 12 — The outpost and the chase
 
-**Status: open, unclaimed.** (Opened 2026-11-23 14:25 UTC by orchestrator session_017WiGzGp8auJceLEAAh9Aqx for the same owner words (enemies, levels). It builds on what Step 4 has live (moods, calls, the alarm, a guard who chases through doors, hiding; gate D passes); Step 4's unfinished knock-out pieces are not needed first. Runs beside Step 8's look; one worker at a time. Earlier: Drafted from the library by an agent; its independent review did not run before the usage limit stopped it at 04:58 UTC. 2 of its 2 quoted pieces were found verbatim by script. Check its D-numbers and its "What's decided" against the library before briefing from it.)
+**Status: open, claimed by session_017WiGzJTXQVCWQYDDmC2UiY, 2026-11-23.** (Opened 2026-11-23 14:25 UTC by orchestrator session_017WiGzGp8auJceLEAAh9Aqx for the same owner words (enemies, levels). It builds on what Step 4 has live (moods, calls, the alarm, a guard who chases through doors, hiding; gate D passes); Step 4's unfinished knock-out pieces are not needed first. Runs beside Step 8's look; one worker at a time. Earlier: Drafted from the library by an agent; its independent review did not run before the usage limit stopped it at 04:58 UTC. 2 of its 2 quoted pieces were found verbatim by script. Check its D-numbers and its "What's decided" against the library before briefing from it.)
 
 Full text: `docs/plan/step-12.md`
 
