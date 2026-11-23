@@ -157,13 +157,15 @@ def main():
         for p in report[k]:
             print(f"  {p}")
     print(f"unchanged: {report['unchanged']}")
-    # The owner's Drive changelog (newest first): show its latest entry.
+    # The owner's Drive changelog (newest first): show the top of its entries.
     log = os.path.join(LIB, "changelog.md")
     if os.path.exists(log):
         txt = open(log).read()
-        m = re.search(r"\n## .*?(?=\n## |\n# |\Z)", txt.split("# Changes", 1)[-1], re.S)
-        if m:
-            print("\nLatest Drive changelog entry:" + m.group(0))
+        i = txt.find("Changes (newest first)")
+        if i >= 0:
+            lines = [l.lstrip("# ").rstrip() for l in txt[i:].splitlines()[1:]]
+            lines = [l for l in lines if l][:12]
+            print("\nTop of the Drive changelog:\n  " + "\n  ".join(lines))
 
 
 if __name__ == "__main__":

@@ -2,6 +2,18 @@
 
 ---
 
+CURRENT OWNER IMPLEMENTATION POLICY — USE BY DEFAULT / REVISE LATER (22 NOV 2026)
+
+New asset designs, game prototypes, candidate mechanics and implementation choices are authorized for immediate use and iteration by Claude; NEVER wait on owner sign-off to proceed. Keep the approved direction (original, calm GBA-like pixel platformer, iPhone web first) and don't resurrect rejected styles. The 'pending owner approval' pauses in older documents are SUPERSEDED. Asset references are not necessarily engine-ready layers/tiles just because they may be used as temporary prototypes.
+
+SHARED ASSET REQUESTS — CLAUDE ↔ CHATGPT
+
+Claude creates one request Google Doc per asset in https://drive.google.com/drive/folders/1m2vTlbSVoPJg5TwESbcWH4xoCcSOIKCp. ChatGPT checks the inbox on an active HOURLY scheduled task, fills feasible requests, uploads resulting files, moves delivered requests, and updates the root changelog. Request/handoff rules: https://docs.google.com/document/d/1oBpJKI2P7v7rwoMku-TbcFuVQe2iajddK6v2i5Ro0G0/edit. Collaboration hub: https://drive.google.com/drive/folders/1W_H99UY0Xne85PWK8Lb4QcKK2q2tSncu. S00-01 reference images now use-by-default: https://drive.google.com/drive/folders/1BCT_Sao2sZNCygUCv0qSQcECtIlsmc2j.
+
+PLATFORM & DELIVERY — OWNER CONFIRMED (22 NOV 2026)
+
+Irreverents is designed FIRST for iPhone browsers as a webapp; desktop browser use is possible too. Claude will write the game code in GitHub. The owner will connect GitHub to Railway so code pushes/merges can AUTO-DEPLOY to a playable URL. This pipeline is PLANNED, NOT YET VERIFIED CONFIGURED. Touch controls, tiny readable sprites and phone performance are essential. See the controlling platform spec: https://docs.google.com/document/d/1uAu-ziYoHi9n7K3_YyxMgEiw23HuvOvDv1zRlhTRlp8/edit
+
 SHARED CHANGELOG FOR CHATGPT, CLAUDE AND HUMAN EDITORS
 
 Current material updates, Eastern date/time, brief summaries and direct links to changed files: https://docs.google.com/document/d/17R7aKkqDxQwRk-cmywQbvQ_CcEzz4UqHz37YYYRnADs/edit
@@ -118,7 +130,7 @@ NEW — Asset Generation Controls (22 Nov 2026)
 
 Plan folder: https://drive.google.com/drive/folders/1W5iBhYZ0FMBD35Pa3DIYr_SNZLrA6yJn
 
-Important correction: earlier approved compact pixel style governs; later anime-like character illustrations and glossy marketing collages do NOT govern future production art. No big generation batches before the 3-image style lock and owner approval.
+Important correction: earlier approved compact pixel style governs; later anime-like character illustrations and glossy marketing collages do NOT govern future production art. Make small coherent asset batches; owner approval is NOT a prerequisite. Use, evaluate and improve art during implementation.
 
 NEW QUIET PIXEL-ART STUDIES — Nov 22 2026
 
@@ -225,3 +237,7 @@ The BETWEEN-LEVEL world includes a CANTINA where ALL UNLOCKED playable character
 CANTINA DOOR NETWORK / COMPLETION OVERRIDE (22 NOV 2026)
 
 The cantina has a MAIN DOOR and many SHORTCUT DOORS throughout the BETWEEN-LEVEL world. Normally, if heroes are actively CHASED BY GOOD GUYS, EVERY cantina entrance is LOCKED: you cannot use it as a getaway or cooldown exploit. One particular late-game unlock, awarded after FINDING ALL MYSTERY COMPONENTS, removes this restriction. Chased players then may enter the cantina, BUT THEIR GOOD-GUY PURSUERS CAN FOLLOW THEM INSIDE and clash with infinitely respawning cantina playable-character fighters, yielding huge mixed bar fights. This does not reset wanted heat. The collection's ultimate purpose, other rewards, precise threshold and outsiders' KO/scoring rules remain open. Canonical design: https://docs.google.com/document/d/1r7D8pXDPNtablfb9r8BOWWrxO6czv0hqHqLjsD8kRKU/edit
+
+ART CANDIDATES FOR CLAUDE — S00-01 GRASSY RUINS (22 NOV 2026)
+
+Two new focused 2D side-on grassy-ruins pixel-art candidate screenshots (A/B), plus 320x180 iPhone review previews, JSON provenance/status manifest and explicit README for Claude, are present in https://drive.google.com/drive/folders/1BCT_Sao2sZNCygUCv0qSQcECtIlsmc2j. The batch is APPROVED FOR USE BY DEFAULT as prototype visual references; no rejected assets imported and no claim of engine-ready tiles/sprites. B is the stronger low-noise gameplay-scale exploration. There is NO required owner style-review gate before continuing tileset/character production; iterate and improve while using the best available assets. Source-of-truth Art Plan 13 and Style Lock 14 still control. Check shared root changelog for timestamp and routing.

@@ -221,3 +221,11 @@ Store personal NPC mode 1/2/3 SEPARATELY from zone wanted/heat 0..N. NPC mood af
 This is entirely deterministic, with scene events/waypoint paths/report interact timers and authored spawn tables. Villain outpost mode-gating ambiguity stays OPEN because a conventional villain legitimately fights a hero in mode 1 but may still recognize a tactical threat.
 
 Detailed authoritative design: https://docs.google.com/document/d/1wbSNfKLfrUsg9YX5qsRhYX9KwiMX8clXRZZBiuuz8PA/edit
+
+OVERRIDING OWNER DELIVERY CONSTRAINT — IPHONE BROWSER / GITHUB / RAILWAY (22 NOV 2026)
+
+The TARGET GAME runs chiefly as a BROWSER / WEBAPP on iPhones, with desktop browsers possibly supported. Design controls, action pacing, sprite sizes, HUD, audio, connection interruptions, loading and scalable sprite counts FIRST for an actual mobile browser, not a PC/console. Touch gameplay without hardware controller must support movement, jump, attack, grab/throw, special powers, hiding and character switching. Browser orientation, engine, render choice and input layout remain OPEN.
+
+SOURCE OF CODE: GitHub, authored by Claude. OWNER plans to CONNECT that GitHub repo to Railway so code changes auto-deploy to a playable URL. Setup and any actual URL remain UNVERIFIED. Railway hosts deployment but does not automatically provide a game engine, multiplayer server architecture, player save model or tested networking. Test on iPhone Safari after configuring deployment. Authored NO-AI NPC behaviors, bounded simultaneous crowds and room transfers are particularly important to performance. Full current requirements: https://docs.google.com/document/d/1uAu-ziYoHi9n7K3_YyxMgEiw23HuvOvDv1zRlhTRlp8/edit
+
+PREVIOUS VILLAIN-MODE AMBIGUITY CLARIFIED: villains can recognize a threat and operate their outpost signaler in Business As Usual mode (1). A successful signal, not recognition alone, summons new reinforcements. Do not follow the earlier open ambiguity.

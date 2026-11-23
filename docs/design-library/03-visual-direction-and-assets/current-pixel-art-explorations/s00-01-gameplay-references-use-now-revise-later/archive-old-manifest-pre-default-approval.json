@@ -1,0 +1,38 @@
+{
+  "project": "Irreverents",
+  "batch_id": "S00-01",
+  "title": "Grassy ruins gameplay-scale style candidates",
+  "owner_approval": "PENDING",
+  "site_target": "iPhone browser / optional desktop",
+  "date_local": "2026-11-22 10:45 PM EST",
+  "style_reference": "https://drive.google.com/file/d/1s2xzQtWfZw_KJwf7xkuHA8cu1RqFs5kq/view",
+  "asset_plan": "https://docs.google.com/document/d/1reKfubHb_S6mSyn89kTSm8T2bSRd67E2MptsL24skL8/edit",
+  "style_contract": "https://docs.google.com/document/d/1TYZcSUJ6pRxWCp76f2mrvwAAz90PRCYVRAWiejmJFFI/edit",
+  "files": [
+    {
+      "filename": "S00-01A_grass_ruins_upper_ledge_candidate.png",
+      "resolution": [
+        1672,
+        941
+      ],
+      "preview": "S00-01A_grass_ruins_upper_ledge_phone_320x180_preview.png",
+      "status": "UNAPPROVED_CONCEPT_REFERENCE",
+      "source": "image-generation test 2026-11-22",
+      "type": "flattened pixel-art visual concept, NOT tilemap/sprite sheet",
+      "native_pixel_grid_proven": false
+    },
+    {
+      "filename": "S00-01B_grass_ruins_quiet_route_candidate.png",
+      "resolution": [
+        1672,
+        941
+      ],
+      "preview": "S00-01B_grass_ruins_quiet_route_phone_320x180_preview.png",
+      "status": "UNAPPROVED_CONCEPT_REFERENCE",
+      "source": "image-generation test 2026-11-22",
+      "type": "flattened pixel-art visual concept, NOT tilemap/sprite sheet",
+      "native_pixel_grid_proven": false
+    }
+  ],
+  "notes": "Two restrained single-room style proofs; no finished reusable tiles/sprites; approval gate needed before next asset phase."
+}

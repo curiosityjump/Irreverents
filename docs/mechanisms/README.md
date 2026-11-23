@@ -50,3 +50,6 @@ groups) whenever you add one — never update the number from memory.
 
 **Design library** (`docs/mechanisms/design-library-sync.md`)
 - `tools/drive_sync.py` — mirrors the owner's Google Drive design library into `docs/design-library/` and reports what changed by hash (first import 2026-11-23).
+
+**Asset requests** (`docs/mechanisms/asset-requests.md`)
+- Drive folder "01 REQUESTS" — Claude asks ChatGPT for art by creating a `REQ — …` Google Doc there; ChatGPT checks hourly and delivers into Drive; needs the Google Drive connector to write (2026-11-23).

@@ -1,0 +1,30 @@
+IRREVERENTS — S00-01 GBA-ERA GRASSY RUINS STYLE CANDIDATES
+STATUS: USE NOW / REVISE LATER — PROTOTYPE VISUAL REFERENCES, NOT EDITABLE PRODUCTION ART
+
+CONTENTS
+- S00-01A: a strict side-on ground/upper ledge/bridge/door composition with one tiny original original traveler and a large flat sky. Its X-marked tile may reveal a secret too obviously; illustrative only.
+- S00-01B: calmer single ground path with modest raised platform, bridge/gap, dark arched doorway, original tiny traveler, subtle cracked wall tile and layered distant ruins. Stronger visual clarity option; available for immediate prototype use.
+- 320x180 PNG previews for realistic internal phone-resolution evaluation (resized from conceptual masters with downsampling). These are NOT original 320x180 hand-pixelled sources.
+- Manifest: provenance and status.
+
+CLAUDE: HOW TO USE
+1. Use these immediately as provisional level reference art or temporary prototype backgrounds as appropriate. You may create new assets from them without seeking another approval.
+2. DO NOT crop and directly claim the scene to be a working modular tileset, transparent sprite sheet or animation. The master PNGs are FLATTENED generated concepts; they do not contain independent layers, collision tiles, or a guaranteed coherent 16px grid.
+3. Reconstruct independently in real editable source at a coherent pixel grid with player sprite, platform tiles, foreground/decoration, backdrop and solid/one-way collisions separated.
+4. Compare on actual iPhone in the Railway-deployed browser after owner sets up that connection; keep readable platforms under touch UI.
+5. Preserve original art identity; no reused Kirby-owned shapes or names. The red-scarfed tiny adventurer in these images is a PROVISIONAL design, not a confirmed player character.
+6. Do not wait for owner style approval before continuing asset development or testing. Choose reasonable palette/character/asset defaults, implement them, and revise when better ideas or owner feedback arrive. Distinguish visually approved-by-default prototype work from technically validated layer/tile assets.
+
+VISUAL QA / UNRESOLVED
+- Scene A: good composition and empty background, but the foreground cracked tile X is an over-obvious hint; upper ledge may have no visible accessible platform route from initial pose.
+- Scene B: quieter and better level-plane legibility; background has subtle blended pixel gradients from image generation, and the character/art may not meet strict 16px native asset criteria.
+- Both are 1672x941 concept images, not native-resolution 320x180 tile sources. No editable layers, tile adjacency or production animation.
+
+DRIVE SOURCE OF TRUTH
+Asset plan: https://docs.google.com/document/d/1reKfubHb_S6mSyn89kTSm8T2bSRd67E2MptsL24skL8/edit
+Style lock: https://docs.google.com/document/d/1TYZcSUJ6pRxWCp76f2mrvwAAz90PRCYVRAWiejmJFFI/edit
+Approved direction board: https://drive.google.com/file/d/1s2xzQtWfZw_KJwf7xkuHA8cu1RqFs5kq/view
+
+ALL CURRENT NEW ASSETS ARE APPROVED FOR IMPLEMENTATION BY DEFAULT, NOT GUARANTEED TECHNICALLY READY. REJECTED EARLIER COLLAGES ARE STILL EXCLUDED.
+
+OWNER OVERRIDE 2026-11-22: New game artwork is approved for immediate use by default. Do not pause for sign-off; use and improve. Old rejected art is not restored. See shared asset-request protocol https://docs.google.com/document/d/1oBpJKI2P7v7rwoMku-TbcFuVQe2iajddK6v2i5Ro0G0/edit .

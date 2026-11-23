@@ -2,6 +2,12 @@
 
 ---
 
+CURRENT OWNER OVERRIDE — BUILD NOW, REFINE LATER (22 NOV 2026)
+
+Everything creative is approved for use/experimentation BY DEFAULT. The owner explicitly prefers new assets be integrated and changed later rather than blocked awaiting review. All STOP-until-owner-approves gates below are obsolete as a workflow requirement. Continue S00-02, S00-03 and the rest of the backlog whenever useful; prioritize real iPhone-browser usability, original GBA-era readable art and modular technical assets. Internal QA and status labeling are still important, but absence of sign-off is not a blocker.
+
+Claude may request specific assets from ChatGPT through shared Drive inbox: https://drive.google.com/drive/folders/1m2vTlbSVoPJg5TwESbcWH4xoCcSOIKCp. Request protocol: https://docs.google.com/document/d/1oBpJKI2P7v7rwoMku-TbcFuVQe2iajddK6v2i5Ro0G0/edit. S00-01 images are now USE NOW / REVISE LATER: https://drive.google.com/drive/folders/1BCT_Sao2sZNCygUCv0qSQcECtIlsmc2j.
+
 IRREVERENTS — ART ASSET PRODUCTION PLAN
 
 Ordered generation backlog \| Proposed production plan, not automatic canon \| 22 November 2026
@@ -10,7 +16,7 @@ Ordered generation backlog \| Proposed production plan, not automatic canon \| 2
 
 Stop producing unrelated spectacle collages. The project owner prefers the EARLIER pixel-art board strongly informed by Kirby & the Amazing Mirror, not the recent anime-like hero lineups, cinematic illustration and glossy/cartoon marketing aesthetic. This plan prioritizes assets a game team needs to reason about environment construction, gameplay readability and implementation.
 
-No more bulk generation before passing the first style lock. Everything generated before approval remains exploratory, not a character, mechanic or lore decision.
+Produce purposeful, coherent asset batches and integrate them promptly. Use new designs as provisional implementation choices by default, refining them when playtesting or owner feedback warrants it; keep concept and production readiness labels accurate.
 
 # Reference hierarchy
 
@@ -38,7 +44,7 @@ S00-02: Character-to-screen-scale proof: 6 small ORIGINAL silhouettes, standing 
 
 S00-03: One royal throne room side-view gameplay cross-section at the identical pixel density, with the king, champion, wizard, dragon access and a suspicious passage. No cinematic angle or extravagant foreground occlusion.
 
-Review S00 together at NATIVE PIXEL SIZE and at 2x/4x NEAREST-NEIGHBOR scale; compare directly with selected earlier board. STOP if it looks anime, modern cartoon, illustration, isometric, perspective painting, or too detailed for gameplay. Gate: project owner selects a direction explicitly.
+Review S00 together at NATIVE PIXEL SIZE and at 2x/4x NEAREST-NEIGHBOR scale; compare directly with selected earlier board. STOP if it looks anime, modern cartoon, illustration, isometric, perspective painting, or too detailed for gameplay. Gate: evaluate internally against style/readability criteria and keep building; owner pre-approval is not required.
 
 # Gate 1 — Foundational construction kit (11 concept deliverables)
 
@@ -224,10 +230,16 @@ Do not proceed if: anime face/hair/proportions dominate; side-scrolling turns in
 
 # Next single generation task
 
-Produce S00-01 at the approved older pixel-art look, with no title, cards, logos, poster layout, anime or hand-painted rendering. Assess honestly, revise until user likes the art style, THEN proceed to the small-scale character proof and royal-room proof. No next production batches before that approval.
+Produce/use S00-01 and continue immediately to small-scale character and royal-room proofs as the code needs them; keep improving art iteratively. Do not wait for user approval to proceed.
 
 BATCH STATUS — 22 NOV 2026
 
 Gate 1 has begun. E01-01 terrain modular visual concept completed; 16×16 transparent prototype grass/castle tile atlases (38 + 42 entries), associated manifest, contact previews and assembled low-noise room proof created. Status is EXPERIMENTAL/UNAPPROVED, not production-ready. Bundle and README: https://drive.google.com/drive/folders/1wSx5SxZf0lRaQqKqgPP-fy_SenjAKfYB
 
 Next priority within Gate 1: castle architectural pieces with consistent 16px cell adjacency, town props, undercroft/secret door states, walkable six-room layout and foreground/background layering. Avoid another broad “asset plan” poster.
+
+S00 GATE STATUS UPDATE — 22 NOV 2026
+
+Generated two focused S00-01 grassy-ruins single-room style-test variants and 320x180 iPhone-resolution review thumbnails, with an unapproved asset manifest and clear developer usage notes; uploaded to Drive in candidate-only folder: https://drive.google.com/drive/folders/1BCT_Sao2sZNCygUCv0qSQcECtIlsmc2j
+
+STATUS: AVAILABLE FOR PROTOTYPE USE BY DEFAULT / CONTINUE ITERATING. The best visual candidate for further comparison is S00-01B; S00-01A overemphasizes an X-marked secret wall. Both are flattened concept art with an unproven native pixel grid and no separable art layers, not production-ready sprites, tile atlas or source code. Proceed with S00-02 character experiments and S00-03 palace art as needed; don't require a review pause. Maintain quality checks and rebuild flattened references into actual reusable pixels when needed. Future production pixels should be rebuilt/validated as reusable modular assets. Detailed README: https://drive.google.com/file/d/1iffaXkKFwkkyLigzMKu9xEn8aGonkm4n/view

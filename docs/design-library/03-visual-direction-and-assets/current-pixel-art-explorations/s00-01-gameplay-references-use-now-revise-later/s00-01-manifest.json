@@ -1,0 +1,39 @@
+{
+  "project": "Irreverents",
+  "batch_id": "S00-01",
+  "title": "Grassy ruins gameplay references - use now and improve later",
+  "owner_approval": "APPROVED_FOR_USE_BY_DEFAULT",
+  "site_target": "iPhone browser / optional desktop",
+  "date_local": "2026-11-22 10:45 PM EST",
+  "style_reference": "https://drive.google.com/file/d/1s2xzQtWfZw_KJwf7xkuHA8cu1RqFs5kq/view",
+  "asset_plan": "https://docs.google.com/document/d/1reKfubHb_S6mSyn89kTSm8T2bSRd67E2MptsL24skL8/edit",
+  "style_contract": "https://docs.google.com/document/d/1TYZcSUJ6pRxWCp76f2mrvwAAz90PRCYVRAWiejmJFFI/edit",
+  "files": [
+    {
+      "filename": "S00-01A_grass_ruins_upper_ledge_candidate.png",
+      "resolution": [
+        1672,
+        941
+      ],
+      "preview": "S00-01A_grass_ruins_upper_ledge_phone_320x180_preview.png",
+      "status": "USE_NOW_AS_PROTOTYPE_REFERENCE",
+      "source": "image-generation test 2026-11-22",
+      "type": "flattened pixel-art visual concept, NOT tilemap/sprite sheet",
+      "native_pixel_grid_proven": false
+    },
+    {
+      "filename": "S00-01B_grass_ruins_quiet_route_candidate.png",
+      "resolution": [
+        1672,
+        941
+      ],
+      "preview": "S00-01B_grass_ruins_quiet_route_phone_320x180_preview.png",
+      "status": "USE_NOW_AS_PROTOTYPE_REFERENCE",
+      "source": "image-generation test 2026-11-22",
+      "type": "flattened pixel-art visual concept, NOT tilemap/sprite sheet",
+      "native_pixel_grid_proven": false
+    }
+  ],
+  "notes": "Both files are permitted for immediate prototype use. Variant B preferred for legibility. Neither image is a finished grid-aligned tilemap, layered sprite sheet, or collision atlas. No pause for owner approval before continuing asset production.",
+  "implementation_policy": "Claude may use both immediately as prototypes/visual references; no owner pre-approval gate. Flattened images have no verified tile grid or separable layers; reconstruct native sprites/tiles when needed. Historical rejected images remain excluded."
+}

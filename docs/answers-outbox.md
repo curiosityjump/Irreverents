@@ -73,3 +73,8 @@ entry: "first vision written; no plan exists yet", naming the sections.
 - **Recorded in:** `docs/vision.md` "The measure"
 - **Action for:** orchestrator (vision-level): the morning measure is two people playing together, having fun, at the live URL, in browsers (phone or computer). That puts 2-player online co-op (one shared party) in tonight's scope, not later.
 
+### Vision · Asset requests through Drive (ChatGPT makes assets)
+- **Answer:** "Ok, chatgpt is setting up the google drive so you can request assets, it will see those requests and put the requested assets into the drive, and so on. I want yoy to take advantage of this. Make sure the orchestrator knows it can request assets this way."
+- **Recorded in:** `docs/mechanisms/asset-requests.md` "What it is"
+- **Action for:** orchestrator (process): request art via Drive folder "01 REQUESTS" per that doc; ChatGPT polls hourly, so build with placeholders and swap in. New assets are approved for use by default (Drive protocol's owner rule). Writing the request needs the Google Drive connector, which sessions don't have yet; the owner has been asked to connect it. Also new in the Drive sync: doc 33 (owner-confirmed: iPhone browser is the primary target, touch-first) and S00-01 grassy-ruins style candidates.
+

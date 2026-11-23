@@ -2,6 +2,10 @@
 
 ---
 
+CURRENT ASSET WORKFLOW — NO OWNER REVIEW BOTTLENECK (22 NOV 2026)
+
+All new creative art candidates are approved by default for implementation/prototyping; use promptly, revise later. Earlier holds awaiting explicit owner approval are SUPERSEDED. Quality matters: prefer the original calm GBA pixel style, no copyright-confusing sprites and no misleading claims that flattened concepts are engine-ready sheets. Claude may request more assets via https://drive.google.com/drive/folders/1m2vTlbSVoPJg5TwESbcWH4xoCcSOIKCp; handoff/protocol https://docs.google.com/document/d/1oBpJKI2P7v7rwoMku-TbcFuVQe2iajddK6v2i5Ro0G0/edit; the automated check can see the queue. S00-01 batch https://drive.google.com/drive/folders/1BCT_Sao2sZNCygUCv0qSQcECtIlsmc2j is ready to USE NOW.
+
 Visual Direction, Asset Index and Art Brief
 
 Status: Current pixel-art direction approved in principle; examples remain exploratory \| 22 November 2026
@@ -104,7 +108,7 @@ The user rejected recent anime-inspired/cartoon fantasy character illustrations 
 
 14 Visual Style Lock: https://docs.google.com/document/d/1TYZcSUJ6pRxWCp76f2mrvwAAz90PRCYVRAWiejmJFFI/edit
 
-Next art work must be S00-01 (single actual gameplay-scale environment proof), followed by owner review, NOT unplanned mega-batches.
+New art work should prioritize useful compact gameplay-scale assets and can proceed directly without owner sign-off. Avoid unfocused giant collages.
 
 REDUCED VISUAL NOISE — NEW OWNER FEEDBACK (22 Nov 2026)
 
@@ -121,3 +125,25 @@ OWNER ASSET-QUALITY GATE / SHARED CHANGELOG (22 NOV 2026)
 Do NOT automatically import the many generated images outside this Drive or treat volume of art as progress. The user explicitly warned that many iterations were poor. Restrict current project art to owner-aligned, restrained gameplay-scale GBA pixel visual work; existing accepted look reference is a STYLE direction, not permission to reuse Kirby-like characters. Ornate/anime-like hero and royal court composites, dense labeled asset megaboards and asset-plan posters are NOT game-ready current sprites; unreviewed images remain out. Quiet environment images and E01 tilekit are still exploratory/experimental. No missing images were bulk copied in this audit. See curation audit: https://docs.google.com/document/d/1W09Tzw4sRLsy9zCQJGj9vPoiI8F01sjSCLyVpF54Xzs/edit
 
 From now on, when assets are added, removed, approved, or downgraded, link affected assets/folders and write a dated entry to the shared changelog: https://docs.google.com/document/d/17R7aKkqDxQwRk-cmywQbvQ_CcEzz4UqHz37YYYRnADs/edit
+
+PRIMARY RENDERING TEST TARGET — IPHONE WEB BROWSER (22 NOV 2026)
+
+The game will run mostly on iPhone browsers, with possible desktop-browser support. Evaluate any new art asset at actual iPhone gameplay scale, including safe-area chrome and overlay controls, before approving. GBA-like restrained pixel art and tiny readable characters are core, but not a reason to use Kirby IP. Avoid too-detailed sprites, oversized character portraits, noisy backgrounds, inconsistent pixel density, or promotional collage assets that obscure mobile gameplay. Actual mobile browser and deploy architecture constraints: https://docs.google.com/document/d/1uAu-ziYoHi9n7K3_YyxMgEiw23HuvOvDv1zRlhTRlp8/edit
+
+NEW S00-01 CANDIDATE STYLE BATCH — 22 NOV 2026 ~10:45 PM EST
+
+Two self-contained original side-on grassy-ruins gameplay concept variants were generated and uploaded to a USE NOW / REVISE LATER prototype folder, without importing rejected art. Both show calm GBA-era pixel visual grammar, small original traveler sprite, modular-looking terrain, simple doors, hidden/marked crack, ground/platforms and bridge. No owner approval gate is required before S00-02, S00-03 or further asset production. Variant B appears more legible at the required 320x180 iPhone reference scale; A has a too-obvious X secret tile. Neither flattened output is a true 16px editable tileset, separate-layer sprite sheet, animation or production resource. Claude must REBUILD approved art as actual aligned sprites/tiles and collision map, not assume these PNGs are game-ready.
+
+Folder: https://drive.google.com/drive/folders/1BCT_Sao2sZNCygUCv0qSQcECtIlsmc2j
+
+A concept: https://drive.google.com/file/d/1xrGI83dMCoGEXeIptFqU6_N-rSpWttYt/view
+
+B concept: https://drive.google.com/file/d/1-nt2daRplwxdd1QuuY8MGCGhaHZdWeGQ/view
+
+A phone-scale preview: https://drive.google.com/file/d/1Me4BCxwLb_dP412KRNTN7BgkKx1U8T1y/view
+
+B phone-scale preview: https://drive.google.com/file/d/1zaOazCAtXxenmiUPhCseD6U1ThGXh5cY/view
+
+Manifest: https://drive.google.com/file/d/1WDZ0AZmEyIJq6eTK10AWAc44zHH2rYMe/view
+
+Instructions for Claude: https://drive.google.com/file/d/1iffaXkKFwkkyLigzMKu9xEn8aGonkm4n/view

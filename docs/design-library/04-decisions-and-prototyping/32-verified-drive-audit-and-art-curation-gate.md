@@ -2,6 +2,10 @@
 
 ---
 
+UPDATE — 22 NOV 2026: DEFAULT USE RULE SUPERSEDES OWNER REVIEW GATES
+
+This document describes an earlier asset audit, not the active delivery policy. The owner now expressly prefers everything newly created to be APPROVED FOR IMMEDIATE USE BY DEFAULT, with revisions later. Do not park viable art awaiting sign-off. The selected visual look and technical quality requirements still apply; explicitly rejected old images remain outside active art. Claude→ChatGPT request desk: https://docs.google.com/document/d/1oBpJKI2P7v7rwoMku-TbcFuVQe2iajddK6v2i5Ro0G0/edit. Existing S00-01 references now use-by-default: https://drive.google.com/drive/folders/1BCT_Sao2sZNCygUCv0qSQcECtIlsmc2j.
+
 VERIFIED DRIVE AUDIT AND ART CURATION GATE
 
 Irreverents \| 22 November 2026 \| Audit status: INCOMPLETE / CURATION REQUIRED

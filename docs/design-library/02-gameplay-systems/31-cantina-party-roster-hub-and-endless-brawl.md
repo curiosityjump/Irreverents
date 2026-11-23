@@ -133,3 +133,7 @@ ACCEPTANCE TESTS:
 6. There is no accidental cantina reset that deletes pursuers, voids completed calls, clears wanted level or grants players a safe cooldown.
 
 7. Party-swapping touch interaction still functions when appropriate; treatment during the special mixed brawl remains a design question.
+
+IPHONE-BROWSER CONTROL AND PERFORMANCE REQUIREMENTS (22 NOV 2026)
+
+This entire game is PRIMARY for iPhone web browsers, secondary possible desktop browsers. The cantina's owner-defined TAP a wandering unlocked character → show active party ACROSS SCREEN → TAP the one to replace is the touch UI anchor. ATTACK remains a distinct combat gesture/action. Party list must fit a small phone viewport and avoid obscuring exploration/brawl unnecessarily. Endless offscreen KOs/respawns and huge guard-cantina mixed fights must keep bounded active sprites and legible K/D so they run well on real iPhones. Browser launch, controls and multiplayer load should be tested from a real Railway-deployed URL once owner connects Claude GitHub code to Railway. Full platform spec: https://docs.google.com/document/d/1uAu-ziYoHi9n7K3_YyxMgEiw23HuvOvDv1zRlhTRlp8/edit

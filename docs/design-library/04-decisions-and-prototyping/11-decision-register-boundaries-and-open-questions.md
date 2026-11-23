@@ -365,3 +365,27 @@ D-092 The Irreverents root contains a document titled 'changelog'. From now on, 
 Changelog: https://docs.google.com/document/d/17R7aKkqDxQwRk-cmywQbvQ_CcEzz4UqHz37YYYRnADs/edit
 
 Audit & asset curation: https://docs.google.com/document/d/1W09Tzw4sRLsy9zCQJGj9vPoiI8F01sjSCLyVpF54Xzs/edit
+
+OWNER-CONFIRMED PLATFORM AND DELIVERY WORKFLOW — 22 NOV 2026
+
+D-093 IRREVERENTS IS PRIMARILY AN IPHONE BROWSER / WEBAPP GAME. Desktop COMPUTER BROWSER play is a secondary possible target. This overrides any console-only or native iOS app-only assumption. Mobile touch ergonomics, legible pixels and actual phone performance are top-level requirements.
+
+D-094 CLAUDE WRITES THE GAME CODE IN GITHUB. The project owner will configure a GITHUB→RAILWAY connection so committed/pushed code on the selected deployment branch automatically deploys on Railway to a playable WEB URL. This is the explicitly chosen INTENDED DELIVERY PIPELINE, not proof an active GitHub repository, Railway deployment or public URL already exists.
+
+D-095 Exact engine, rendering API, repo URL, branch, Railway app/domain, networking, save backend, orientation, touch controls and desktop key mappings are OPEN until owner/implementation tests decide them. Railway itself is not a substitute for engine/network code. Any team member editing material Drive design files should add a dated routed entry to the shared 'changelog'; GitHub/Railway history is a separate technical change log.
+
+Canonical platform/deployment document: https://docs.google.com/document/d/1uAu-ziYoHi9n7K3_YyxMgEiw23HuvOvDv1zRlhTRlp8/edit
+
+OWNER-CONFIRMED DEFAULT USE AND CROSS-ASSISTANT ASSET ROUTING — 22 NOV 2026
+
+D-096 All new creative assets, design proposals and prototype implementation decisions are APPROVED FOR IMMEDIATE USE BY DEFAULT. Claude and other builders should implement first and refine/replace later. Explicit owner sign-off is not required between asset-plan gates; previous wait-for-owner review instructions are SUPERSEDED. 'Ready to try' does not certify a file as a production-grade tile, sprite, code asset or final lore. Do not revive previously rejected/superseded images by bulk copying.
+
+D-097 A Drive-native asset request handoff connects Claude with ChatGPT. Claude writes a new Google Doc titled REQ per requested asset into https://drive.google.com/drive/folders/1m2vTlbSVoPJg5TwESbcWH4xoCcSOIKCp. ChatGPT checks requests, completes feasible assets using available tools, uploads files to the Irreverents art area, updates request status, moves delivered docs, and adds an Eastern timestamp + direct links to root changelog. Requests needing input move to NEEDS CLARIFICATION. Avoid duplicate requests and inventing deliverables.
+
+D-098 An HOURLY AUTOMATION has been ACTIVATED to check the Drive inbox, attempt feasible delivery, and log actual results. It is not instant; tools available during each automated run determine which requests can actually be fulfilled. If no requests, it takes no action. The queue may also be checked at the start of normal Irreverents sessions.
+
+Collaboration hub: https://drive.google.com/drive/folders/1W_H99UY0Xne85PWK8Lb4QcKK2q2tSncu
+
+Protocol: https://docs.google.com/document/d/1oBpJKI2P7v7rwoMku-TbcFuVQe2iajddK6v2i5Ro0G0/edit
+
+Existing S00-01 use-now references: https://drive.google.com/drive/folders/1BCT_Sao2sZNCygUCv0qSQcECtIlsmc2j

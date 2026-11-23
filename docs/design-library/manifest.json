@@ -52,14 +52,14 @@
    "id": "1sE-ZkWFxqP-_UckkA5c7Pf0xbDTfN2kQUDMt6mUDgPk",
    "drive_path": "/02 Gameplay Systems/05 — Characters, Roster, Parties and Acquired Powers",
    "repo_path": "02-gameplay-systems/05-characters-roster-parties-and-acquired-powers.md",
-   "sha256": "19716356878bd9a00d836af31b9fe05c92bfd2217e87784081a905b2dac1f1fc"
+   "sha256": "0b9710486a4b54a72b31dd7d47b67dc452e37c06915916336351269f220085ce"
   },
   {
    "kind": "doc",
    "id": "1QPSj4HcnjuEF0r9y2ghg4PgAwUdv_nCvweIgQ_H-M0Q",
    "drive_path": "/02 Gameplay Systems/06 — Online Co-op and Creative Combination Rules",
    "repo_path": "02-gameplay-systems/06-online-co-op-and-creative-combination-rules.md",
-   "sha256": "44b1f005c022e727bab2778d3b158f1079ad1ca1109396aa6b538cdb2ff2a7cf"
+   "sha256": "8c2aaee6ddc4036536694d8f8728f93cc86d7b96a21db07e0d1435e574124a4b"
   },
   {
    "kind": "doc",
@@ -101,7 +101,7 @@
    "id": "1WdIyj6OrTzMhXD842nIJ4iIlQYlFuQQiwxNj2ygIyYM",
    "drive_path": "/02 Gameplay Systems/24 — Feasible Game Architecture: Making Irreverents Playable",
    "repo_path": "02-gameplay-systems/24-feasible-game-architecture-making-irreverents-playable.md",
-   "sha256": "fdf5a15b033fe23cc2bb021e1e3b3553884ae50b3f5703ba38a038c024341328"
+   "sha256": "2c5343ddcabdb63620c0df35c2285fbbb70a8a6f93b9fd20af83acd5b557cc46"
   },
   {
    "kind": "doc",
@@ -122,7 +122,14 @@
    "id": "1r7D8pXDPNtablfb9r8BOWWrxO6czv0hqHqLjsD8kRKU",
    "drive_path": "/02 Gameplay Systems/31 — Cantina: Party Roster Hub and Endless Brawl",
    "repo_path": "02-gameplay-systems/31-cantina-party-roster-hub-and-endless-brawl.md",
-   "sha256": "18d1f3eac3e2ea2489c1510fb40cafd43ea11ba39d8b9fee9ee0046405fa52c5"
+   "sha256": "e37425862b5a8bc3b7c081d385e2be0bba952348b5ac4ee8c8d055924213834f"
+  },
+  {
+   "kind": "doc",
+   "id": "1uAu-ziYoHi9n7K3_YyxMgEiw23HuvOvDv1zRlhTRlp8",
+   "drive_path": "/02 Gameplay Systems/33 — iPhone Browser Platform and GitHub-to-Railway Delivery",
+   "repo_path": "02-gameplay-systems/33-iphone-browser-platform-and-github-to-railway-delivery.md",
+   "sha256": "a1bcd5189fe073ec10f5f28fe888c320075c431c95226ebd47cccc8305947311"
   },
   {
    "kind": "folder",
@@ -139,14 +146,14 @@
    "id": "1reKfubHb_S6mSyn89kTSm8T2bSRd67E2MptsL24skL8",
    "drive_path": "/03 Visual Direction and Assets/00 Asset Production Plan and Style Lock/13 — Art Asset Production Plan — Ordered Generation Backlog",
    "repo_path": "03-visual-direction-and-assets/00-asset-production-plan-and-style-lock/13-art-asset-production-plan-ordered-generation-backlog.md",
-   "sha256": "0781562e6b9dd95afec3522e69fcbfca62a2d6f312a036eee748640a13b8d122"
+   "sha256": "4a55adaa2114226af7f24be565a4f3c2b378007f1289a878fb1f82ec77058cb3"
   },
   {
    "kind": "doc",
    "id": "1TYZcSUJ6pRxWCp76f2mrvwAAz90PRCYVRAWiejmJFFI",
    "drive_path": "/03 Visual Direction and Assets/00 Asset Production Plan and Style Lock/14 — Visual Style Lock — Amazing Mirror-Era Pixel-Art Contract",
    "repo_path": "03-visual-direction-and-assets/00-asset-production-plan-and-style-lock/14-visual-style-lock-amazing-mirror-era-pixel-art-contract.md",
-   "sha256": "655169e7d48abe0a229e6b186ee7c052e95aa685f3b23385cc5da23a2cb7fc60"
+   "sha256": "5797c68eb69276cab1a388344af65dbd3218f993e0cd9672c529ce9e17a49c35"
   },
   {
    "kind": "folder",
@@ -262,6 +269,67 @@
    "sha256": "166b2caeb8f22b692a6470badd361d343179f27cc5fdc311b3b1858539008530"
   },
   {
+   "kind": "folder",
+   "id": "1BCT_Sao2sZNCygUCv0qSQcECtIlsmc2j",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/S00-01 — Gameplay References (USE NOW, REVISE LATER)"
+  },
+  {
+   "kind": "file",
+   "id": "1WDZ0AZmEyIJq6eTK10AWAc44zHH2rYMe",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/S00-01 — Gameplay References (USE NOW, REVISE LATER)/ARCHIVE_old_manifest_pre_default_approval.json",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/s00-01-gameplay-references-use-now-revise-later/archive-old-manifest-pre-default-approval.json",
+   "sha256": "6058da4eb4218b091a8c9d4d9b75bc68fa75b8400d877253e39e9c39ccd845ab"
+  },
+  {
+   "kind": "file",
+   "id": "1iffaXkKFwkkyLigzMKu9xEn8aGonkm4n",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/S00-01 — Gameplay References (USE NOW, REVISE LATER)/ARCHIVE_old_README_pre_default_approval.txt",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/s00-01-gameplay-references-use-now-revise-later/archive-old-readme-pre-default-approval.txt",
+   "sha256": "9c5b07b2fee98cafd3620186385d85b0e112e3f2a9f393ad8519f5736b79b719"
+  },
+  {
+   "kind": "file",
+   "id": "1SJuOlkgKVYfdqLDV-X72TCrvk9AtiYJw",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/S00-01 — Gameplay References (USE NOW, REVISE LATER)/S00-01_manifest.json",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/s00-01-gameplay-references-use-now-revise-later/s00-01-manifest.json",
+   "sha256": "997f4f836a4012b98db593b91bdcbcfba12bb9bee5f49d139437c64301374066"
+  },
+  {
+   "kind": "file",
+   "id": "1t9r6PBDPRvqHjIZFDpcKqW10Ou1hNlQw",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/S00-01 — Gameplay References (USE NOW, REVISE LATER)/S00-01_README_for_Claude.txt",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/s00-01-gameplay-references-use-now-revise-later/s00-01-readme-for-claude.txt",
+   "sha256": "ab1ce321eb308d7838efc6667fb63b236ea5f383f25024b458ffb00335e41567"
+  },
+  {
+   "kind": "file",
+   "id": "1xrGI83dMCoGEXeIptFqU6_N-rSpWttYt",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/S00-01 — Gameplay References (USE NOW, REVISE LATER)/S00-01A_grass_ruins_upper_ledge_candidate.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/s00-01-gameplay-references-use-now-revise-later/s00-01a-grass-ruins-upper-ledge-candidate.png",
+   "sha256": "812662b005abfe84121cfd5fbcfc168747399af9ab9cc23ef156d36c5ac53fd0"
+  },
+  {
+   "kind": "file",
+   "id": "1Me4BCxwLb_dP412KRNTN7BgkKx1U8T1y",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/S00-01 — Gameplay References (USE NOW, REVISE LATER)/S00-01A_grass_ruins_upper_ledge_phone_320x180_preview.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/s00-01-gameplay-references-use-now-revise-later/s00-01a-grass-ruins-upper-ledge-phone-320x180-preview.png",
+   "sha256": "c4311d3c319c9b659bb0d1bb66ef5cee802b44568581e74c3a4a0d4b1436f696"
+  },
+  {
+   "kind": "file",
+   "id": "1-nt2daRplwxdd1QuuY8MGCGhaHZdWeGQ",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/S00-01 — Gameplay References (USE NOW, REVISE LATER)/S00-01B_grass_ruins_quiet_route_candidate.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/s00-01-gameplay-references-use-now-revise-later/s00-01b-grass-ruins-quiet-route-candidate.png",
+   "sha256": "28014f47d997869e6362e56edce13598193509c157a5d806bae7048f692f8109"
+  },
+  {
+   "kind": "file",
+   "id": "1zaOazCAtXxenmiUPhCseD6U1ThGXh5cY",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/S00-01 — Gameplay References (USE NOW, REVISE LATER)/S00-01B_grass_ruins_quiet_route_phone_320x180_preview.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/s00-01-gameplay-references-use-now-revise-later/s00-01b-grass-ruins-quiet-route-phone-320x180-preview.png",
+   "sha256": "f38a1029b63fc5a84b24e38af1629b78e55b81be2c9ecca3a6bedb180eba22c8"
+  },
+  {
    "kind": "file",
    "id": "1_Kf9A99HzHi7BH-jt_H_nQz2K5F5OhJ1",
    "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/Character roster — pixel art exploration.png",
@@ -334,7 +402,7 @@
    "id": "1VJOvGqbT3wcqgD8-PaXpftODBr42ChGmqdBYHvx7_i0",
    "drive_path": "/03 Visual Direction and Assets/10 — Visual Direction, Asset Index and Art Brief",
    "repo_path": "03-visual-direction-and-assets/10-visual-direction-asset-index-and-art-brief.md",
-   "sha256": "9fdb3019e1fdae075b3660e0962e42d58fd7a358bc45bda22be2456bb1118ab0"
+   "sha256": "e1fcb791cd98263152b0ca8d10b0527cdfd2e7835dc31fe44af28bb7698b5900"
   },
   {
    "kind": "folder",
@@ -346,7 +414,7 @@
    "id": "1vlwf5VZgwT0E0cKqYF4o0EI5LhuR4iiZxCyVUUreytU",
    "drive_path": "/04 Decisions and Prototyping/11 — Decision Register, Boundaries and Open Questions",
    "repo_path": "04-decisions-and-prototyping/11-decision-register-boundaries-and-open-questions.md",
-   "sha256": "933c3554e014dee8aa985a72e315db60b7fa306e29528d00c4def38ecc05d98d"
+   "sha256": "b142690f2ed82916b37895522b8ef170cbcb64bec944aadaaecb93ef1964f15e"
   },
   {
    "kind": "doc",
@@ -367,7 +435,7 @@
    "id": "1W09Tzw4sRLsy9zCQJGj9vPoiI8F01sjSCLyVpF54Xzs",
    "drive_path": "/04 Decisions and Prototyping/32 — Verified Drive Audit and Art Curation Gate",
    "repo_path": "04-decisions-and-prototyping/32-verified-drive-audit-and-art-curation-gate.md",
-   "sha256": "c7d21f2770fbcc1b9c103cb746fd6103544233868d6c57dcee6c1070fa461128"
+   "sha256": "4e0d938c51286546a93a9804d34578b6f56801ac31f48124c2738ca4dd8977e5"
   },
   {
    "kind": "folder",
@@ -445,18 +513,45 @@
    "sha256": "a4d555cd8e53011443dbfcb824c8b48a05c1ca7f438edb6a83d086d4acf29bc3"
   },
   {
+   "kind": "folder",
+   "id": "1W_H99UY0Xne85PWK8Lb4QcKK2q2tSncu",
+   "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT"
+  },
+  {
+   "kind": "folder",
+   "id": "1m2vTlbSVoPJg5TwESbcWH4xoCcSOIKCp",
+   "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/01 REQUESTS — Claude to ChatGPT"
+  },
+  {
+   "kind": "folder",
+   "id": "15X6uq3YK-NdKbQQt0FqaXY46msSW38Jm",
+   "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/02 DELIVERED — ChatGPT to Claude"
+  },
+  {
+   "kind": "folder",
+   "id": "1qQW5tJo27wjAwZMHi8mGEJa8HRa7xoLz",
+   "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/03 NEEDS CLARIFICATION"
+  },
+  {
+   "kind": "doc",
+   "id": "1oBpJKI2P7v7rwoMku-TbcFuVQe2iajddK6v2i5Ro0G0",
+   "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/00 START HERE — Claude ↔ ChatGPT Asset Request Protocol",
+   "repo_path": "06-asset-collaboration-claude-chatgpt/00-start-here-claude-chatgpt-asset-request-protocol.md",
+   "sha256": "34a4a80cb089e009994ff867ebe65a7e2e6e039ae9fd72f0f913945ad370f725"
+  },
+  {
    "kind": "doc",
    "id": "1-ASnTbCLAXSi_WCOl_7KNuUgelLXLmiZFKiN6APao2s",
    "drive_path": "/00 START HERE — Irreverents",
    "repo_path": "00-start-here-irreverents.md",
-   "sha256": "2b10eca3b00072837b7dc954a3f9a789d9c4b3d736f01ee71f7aa59d29e3f45f"
+   "sha256": "02ce3ec649c2e8dd7e2b375c13223c201810b689d6f42b660c7d2ec45f4b8a5b"
   },
   {
    "kind": "doc",
    "id": "17R7aKkqDxQwRk-cmywQbvQ_CcEzz4UqHz37YYYRnADs",
    "drive_path": "/changelog",
    "repo_path": "changelog.md",
-   "sha256": "e037f1cdc9ad2b9b356fd18d80f772ac4bfa3c467a03ee0afa14cabd6e412062"
+   "sha256": "35f7178bc82b3a07e23487acb31e758b9091916390f4f0c86acba2ca672f3216"
   }
  ]
 }

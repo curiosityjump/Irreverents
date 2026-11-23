@@ -26,7 +26,57 @@ For EVERY MATERIAL CHANGE in this project folder, AFTER the changed Drive files 
 
 • Keep this changelog in the project ROOT, and keep a link on “00 START HERE.” Other collaborating assistants should use it as a routing index, but updating it is not automatic: the writer making a change must add an entry.
 
-# Changes (newest first)
+## Changes (newest first)
+
+## 
+
+## 2026-11-22 · 10:47 PM EST · ChatGPT — S00-01 pixel-art style candidates for Claude (UNAPPROVED)
+
+## Generated two focused side-view grassy-ruins game-screen concepts, made 320×180 phone-scale previews, and uploaded six files including a status/asset manifest and Claude handoff note. Kept them in an explicitly UNAPPROVED style-candidate folder; no bad/rejected old boards were imported. Variant B is a recommended test; neither image is a production-ready sprite/tilemap, and the owner style gate remains open.
+
+## Changed / routing:
+
+## - New S00-01 candidate folder: https://drive.google.com/drive/folders/1BCT_Sao2sZNCygUCv0qSQcECtIlsmc2j
+
+## - S00-01A full-size: https://drive.google.com/file/d/1xrGI83dMCoGEXeIptFqU6_N-rSpWttYt/view
+
+## - S00-01B full-size: https://drive.google.com/file/d/1-nt2daRplwxdd1QuuY8MGCGhaHZdWeGQ/view
+
+## - S00-01 README for Claude: https://drive.google.com/file/d/1iffaXkKFwkkyLigzMKu9xEn8aGonkm4n/view
+
+## - 10 Visual Direction / Asset Index: https://docs.google.com/document/d/1VJOvGqbT3wcqgD8-PaXpftODBr42ChGmqdBYHvx7_i0/edit
+
+## - 13 Asset Production Plan: https://docs.google.com/document/d/1reKfubHb_S6mSyn89kTSm8T2bSRd67E2MptsL24skL8/edit
+
+## - 14 Style Lock: https://docs.google.com/document/d/1TYZcSUJ6pRxWCp76f2mrvwAAz90PRCYVRAWiejmJFFI/edit
+
+## - 00 START HERE: https://docs.google.com/document/d/1-ASnTbCLAXSi_WCOl_7KNuUgelLXLmiZFKiN6APao2s/edit
+
+## 
+
+## 2026-11-22 · 10:38 PM EST · ChatGPT — CONFIRMED platform and deployment plan
+
+## Irreverents is primarily an iPhone BROWSER/WEBAPP game, with computer browser support possible. The owner will connect a GitHub repo to Railway; Claude writes the game code in GitHub and changes should auto-deploy to a playable Railway URL once setup succeeds. Added explicit touch-first, phone rendering/performance, online co-op and cantina interaction requirements. Repository, deployment, engine and live URL remain UNVERIFIED/OPEN; no production deployment was made by this edit.
+
+## Changed / routing:
+
+## - 33 — iPhone browser + GitHub-to-Railway delivery: https://docs.google.com/document/d/1uAu-ziYoHi9n7K3_YyxMgEiw23HuvOvDv1zRlhTRlp8/edit
+
+## - 00 START HERE: https://docs.google.com/document/d/1-ASnTbCLAXSi_WCOl_7KNuUgelLXLmiZFKiN6APao2s/edit
+
+## - 11 Decision Register: https://docs.google.com/document/d/1vlwf5VZgwT0E0cKqYF4o0EI5LhuR4iiZxCyVUUreytU/edit
+
+## - 24 Feasible Architecture: https://docs.google.com/document/d/1WdIyj6OrTzMhXD842nIJ4iIlQYlFuQQiwxNj2ygIyYM/edit
+
+## - 06 Online Co-op: https://docs.google.com/document/d/1QPSj4HcnjuEF0r9y2ghg4PgAwUdv_nCvweIgQ_H-M0Q/edit
+
+## - 05 Roster / Powers: https://docs.google.com/document/d/1sE-ZkWFxqP-\_UckkA5c7Pf0xbDTfN2kQUDMt6mUDgPk/edit
+
+## - 31 Cantina / Party Tap: https://docs.google.com/document/d/1r7D8pXDPNtablfb9r8BOWWrxO6czv0hqHqLjsD8kRKU/edit
+
+## - 10 Visual Direction / Assets: https://docs.google.com/document/d/1VJOvGqbT3wcqgD8-PaXpftODBr42ChGmqdBYHvx7_i0/edit
+
+## 
 
 ## 2026-11-22 · 10:31 PM EST · ChatGPT — Shared changelog established; asset audit indexed
 

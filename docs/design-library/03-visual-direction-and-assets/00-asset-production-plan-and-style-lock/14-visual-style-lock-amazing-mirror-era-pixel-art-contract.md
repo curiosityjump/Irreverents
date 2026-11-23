@@ -2,6 +2,10 @@
 
 ---
 
+CURRENT OWNER OVERRIDE — NO OWNER SIGN-OFF GATE (22 NOV 2026)
+
+Art can be USED immediately by Claude/other builders as a provisional choice, and improved/replaced later. Previous 'owner explicitly approves before next stage' instructions are superseded. The 0–20 style review score is an INTERNAL QC tool only, not permission gating. Continue character, environment, animation and UI batches as needed. Technically flattened concept images remain reference/placeholder assets unless rebuilt into layers and aligned tiles. Rejected styles, IP copying and iPhone unreadability remain warnings. Shared Claude→ChatGPT asset request protocol: https://docs.google.com/document/d/1oBpJKI2P7v7rwoMku-TbcFuVQe2iajddK6v2i5Ro0G0/edit.
+
 IRREVERENTS — VISUAL STYLE LOCK
 
 Production-facing visual direction and generation rules \| Proposed until owner signs off on test images \| 22 November 2026
@@ -130,7 +134,7 @@ R9 Scene is original: not traced or directly copying Kirby-specific character/ma
 
 R10 Team can identify what should become layers, tiles, objects and state changes.
 
-Total possible 20; proposed gate is at least 17/20 AND owner explicitly says the visual direction is right. No numeric score overrides owner judgment.
+Total possible 20; use this as a helpful internal evaluation score, not an owner-approval prerequisite. Claude may use and improve art immediately.
 
 # What to generate first and what NOT to generate
 
@@ -138,7 +142,7 @@ First: S00-01 gameplay screenshot; then style revision; then S00-02 tiny charact
 
 Not first: full cinematic map paintings, poster illustration, narrative montage, giant fight scene, villain portraits, mass character lineup, merch/logo, 20 biomes or marketing art.
 
-After style approval, build reusable tiles and interactive objects before expensive animation and dynamic spectacle.
+Build reusable tiles and interactive objects immediately as needed; iteratively refine the visual direction during implementation.
 
 # Quality and provenance notes
 
@@ -151,3 +155,7 @@ The owner found the newer restrained pixel-style tests decent but noted that Kir
 Five calmer environment exploratory assets: https://drive.google.com/drive/folders/11Wli0oy1WAtgIHT4ZUPX5Nprs0nM3RBD
 
 Next refinement: compare quiet environment against actual Kirby & the Amazing Mirror screenshots at native game resolution for foreground/background contrast, sprite-to-scene ratio, relative empty area, and subtlety of detail. Avoid defaulting to greater detail and luminous ornament whenever another image is generated.
+
+OWNER REVIEW CANDIDATES S00-01 — 22 NOV 2026
+
+Two narrow gameplay-scale grassy-ruins IMAGE PROOFS and phone-sized 320x180 previews are available at https://drive.google.com/drive/folders/1BCT_Sao2sZNCygUCv0qSQcECtIlsmc2j. They are authorized for immediate prototype use, but remain flattened illustrations rather than validated tile-grid atlases or separate sprites. Prefer a review of candidate B for the calmer screen, but the owner remains final authority. The owner has authorized use by default; there is no owner-approval gate. Continue with the next asset stages while recording technical limitations.
