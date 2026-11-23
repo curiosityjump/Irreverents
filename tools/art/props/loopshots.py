@@ -100,7 +100,32 @@ def treasure():
     return scene
 
 
-SCENES = {'rides': rides, 'powers': powers, 'treasure': treasure}
+def hall():
+    """the hall: banners, plaques and frames hung on the back wall, lights between; statues and keepsakes on the
+    floor, the doors and portals on the ledge above"""
+    img, L = looks('hall')
+    scene, floors = shelves(3, sky=NIGHT)
+    x = 4
+    for k in ('hall-door', 'hall-door-double', 'hall-window', 'hall-portal-gold', 'hall-portal-blue', 'hall-niche',
+              'hall-niche-lit', 'hall-niche-statue', 'hall-niche-laurel', 'hall-lantern'):
+        pic = frame(img, L[k]); place(scene, pic, x + pic.width // 2, floors[0]); x += pic.width + 6
+    x = 4
+    for k in ('hall-banner-tower', 'hall-banner', 'hall-banner-laurel', 'hall-drape', 'hall-shield', 'hall-plaque',
+              'hall-plaque-lines', 'hall-plaque-laurel', 'hall-plaque-wide', 'hall-frame', 'hall-frame-star'):
+        pic = frame(img, L[k]); scene.alpha_composite(pic, (x, floors[0] + 6)); x += pic.width + 4
+    x = 4
+    for k in ('hall-torch', 'hall-brazier', 'hall-brazier-blue', 'hall-plinth', 'hall-plinth-tall', 'hall-plinth-star'):
+        pic = frame(img, L[k]); place(scene, pic, x + pic.width // 2, floors[1]); x += pic.width + 8
+    for k in ('hall-urn', 'hall-column-broken'):
+        pic = frame(img, L[k]); place(scene, pic, x + pic.width // 2, floors[1]); x += pic.width + 8
+    x = 4
+    for k in ('hall-statue-robed', 'hall-statue-knight', 'hall-statue-griffin', 'hall-trophy', 'hall-tablet',
+              'hall-case-sword', 'hall-case-crown', 'hall-shrine-banner', 'hall-bust'):
+        pic = frame(img, L[k]); place(scene, pic, x + pic.width // 2, floors[2]); x += pic.width + 4
+    return scene
+
+
+SCENES = {'rides': rides, 'powers': powers, 'treasure': treasure, 'hall': hall}
 
 if __name__ == '__main__':
     os.makedirs(OUT, exist_ok=True)

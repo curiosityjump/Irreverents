@@ -180,6 +180,15 @@ bottom-centred over an entrance; `level-pie-0`..`4` 12x12 (none, a quarter, half
   `gold-sack`; `gold-pile` (P04 tavern coin heap: P05's vault heap sits on the cave floor and does not cut clean);
   `gem` (P04 crystal), `gem-pedestal` (P07); `hoard` / `hoard-taken` 32x16 for Step 16's depot-hoard (the sack on the
   heap; a few coins left); `vault-cave` 64x30, the P05 cave whole (lantern, crystals, gold), a back-layer picture.
+- **Hall of Legends** (group `hall`, `assets/props/hall.png`, P04 hall-of-legends atlas, registered as `hall`): 38
+  pieces at scale 0.2, each trimmed to itself (`loops.HALL` lists id and box): `hall-plinth{,-tall,-star}`,
+  `hall-niche{,-lit,-statue,-laurel}`, `hall-plaque{,-lines,-laurel,-wide}`, `hall-shield`,
+  `hall-banner{,-tower,-laurel}`, `hall-drape`, `hall-lantern`, `hall-torch`, `hall-brazier{,-blue}`,
+  `hall-door{,-double}`, `hall-window`, `hall-portal-{gold,blue}`, `hall-statue-{robed,knight,griffin}`,
+  `hall-trophy`, `hall-tablet`, `hall-case-{sword,crown}`, `hall-shrine-banner`, `hall-bust`, `hall-column-broken`,
+  `hall-urn`, `hall-frame{,-star}`. The plate's banner mauve needs the pink ramp (cloth pieces only: on stone, pink
+  speckles). The wood doors lose their pale stone arch to the ground key. The walls, floors and arches are the ground
+  lane's tiles, not these.
 - **No approved source:** an empty machine or an empty saddle: every cell has the same goggled rider baked in, so a
   hero cannot be drawn riding one without that rider showing (for the Drive's missing-assets list).
 - **Not verified in the game:** no code draws a ride yet; seen in the mock scene only.

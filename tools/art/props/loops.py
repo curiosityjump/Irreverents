@@ -7,6 +7,7 @@ Groups (content/looks/<group>.json):
 - powers: P05 rare-powers-pickups ('powers'): power orbs, loose pieces, fixtures, the pickup glow and get, the
   "lost" pop, a cloud poof.
 - treasure: chests, doors (shut, open, locked, barred), a key, gold, gems, the hoard, the vault cave.
+- hall: P04 hall-of-legends-tile-atlas ('hall'): plinths, niches, plaques, banners, lights, doors, statues, frames.
 """
 from PIL import Image
 
@@ -233,3 +234,49 @@ def hoard(taken):
     paste(out, sack, 23 - sack.width // 2, 16 - sack.height)
     return out
 
+
+# ---- Hall of Legends: P04 hall-of-legends-tile-atlas ('hall'), painted on an opaque pale ground with drawn cell
+# lines (grid=True), like P03 grassy ruins. Boxes are the plate's cells; scale 0.2 (a statue about a hero's height
+# plus its plinth). DRAFT: the hall's walls, floors and arches are the ground lane's tiles (asset-coverage
+# tiles:castle); these are the things that stand in it.
+HALLKEY = (247, 247, 247)
+HALLR = ramps('stone', 'castle', 'gold', 'wood', 'red', 'blue', 'sky', 'purple', 'metal', 'foliage', 'grass',
+              'orange', 'night', 'cloud')
+HALL = {
+    # plinths and niches (row y 395-495)
+    'hall-plinth': (38, 398, 112, 495), 'hall-plinth-tall': (118, 398, 192, 495),
+    'hall-plinth-star': (198, 398, 272, 495),
+    'hall-niche': (610, 395, 690, 497), 'hall-niche-lit': (692, 395, 772, 497),
+    'hall-niche-statue': (775, 395, 855, 497), 'hall-niche-laurel': (1015, 395, 1095, 497),
+    # plaques, shield and banners (row y 512-608)
+    'hall-plaque': (38, 512, 125, 580), 'hall-plaque-lines': (140, 512, 255, 580),
+    'hall-plaque-laurel': (270, 510, 360, 580), 'hall-plaque-wide': (375, 510, 500, 582),
+    'hall-shield': (700, 510, 770, 580), 'hall-banner-tower': (782, 510, 880, 608),
+    'hall-banner': (892, 510, 980, 604), 'hall-banner-laurel': (986, 510, 1070, 604),
+    'hall-drape': (1176, 510, 1320, 604),
+    # lights (row y 600-684)
+    'hall-lantern': (40, 598, 105, 684), 'hall-torch': (205, 600, 265, 684), 'hall-brazier': (365, 600, 435, 684),
+    'hall-brazier-blue': (535, 600, 610, 684),
+    # doors and windows (row y 692-808)
+    'hall-door': (30, 692, 130, 808), 'hall-door-double': (336, 692, 440, 808),
+    'hall-window': (446, 692, 526, 808), 'hall-portal-gold': (876, 692, 1000, 808),
+    'hall-portal-blue': (1005, 692, 1125, 808),
+    # statues and keepsakes (row y 885-1062)
+    'hall-statue-robed': (35, 885, 112, 1062), 'hall-statue-knight': (114, 885, 205, 1062),
+    'hall-statue-griffin': (210, 885, 325, 1062), 'hall-trophy': (326, 925, 420, 1062),
+    'hall-tablet': (425, 885, 612, 1062), 'hall-case-sword': (628, 900, 728, 1062),
+    'hall-case-crown': (740, 925, 845, 1062), 'hall-shrine-banner': (855, 885, 1025, 1062),
+    'hall-bust': (1030, 925, 1140, 1062), 'hall-column-broken': (1220, 915, 1315, 1062),
+    'hall-urn': (1320, 925, 1420, 1062),
+    # the gold-edged panels (row y 115-190): a frame for a hall picture (the picture inside stays drawn from data)
+    'hall-frame': (362, 114, 430, 192), 'hall-frame-star': (445, 114, 517, 192),
+}
+
+
+# the plate's banner cloth is a mauve that snaps to grey stone without the pink ramp; on stone, pink speckles
+CLOTH = ('hall-banner-tower', 'hall-banner', 'hall-banner-laurel', 'hall-drape', 'hall-shrine-banner', 'hall-case-crown')
+
+
+def hall(which):
+    pal = HALLR + ramps('pink') if which in CLOTH else HALLR
+    return grab('hall', HALL[which], 0.2, pal, key=HALLKEY, grid=True)

@@ -150,6 +150,11 @@ def looks_sheets():
     s.newrow()
     s.add('hoard', lo.hoard(False)); s.add('hoard-taken', lo.hoard(True)); s.add('vault-cave', lo.vault_cave())
     out.append(('treasure', 'props/treasure.png', s))
+    # ---- the core loops' Hall of Legends pieces (loops.py: P04 hall-of-legends atlas)
+    s = Sheet(256)
+    for which in lo.HALL:
+        s.add(which, lo.hall(which))
+    out.append(('hall', 'props/hall.png', s))
     # ---- people
     s = Sheet(96)
     # round 3: moods bold enough for any hat or plume (a white '?' and a sweat drop; a red mark rimmed white)

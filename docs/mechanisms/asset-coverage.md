@@ -26,13 +26,13 @@ Rows go stale as the look3 lanes push: re-check a row against the current file b
 | Bodies (things you lift, hit or stand by) | 7 | 1 | 4 | 2 |
 | Ground tiles (16 px) | 6 | 2 | 4 | 0 |
 | Backdrops | 14 | 0 | 14 | 0 |
-| Interactive looks (props) | 25 | 16 | 8 | 0 |
+| Interactive looks (props) | 26 | 17 | 7 | 0 |
 | Decor | 43 | 12 | 25 | 6 |
 | Effects | 9 | 5 | 4 | 0 |
 | UI and HUD | 42 | 6 | 31 | 5 |
 | Sound effects | 42 | 29 | 7 | 6 |
 | Music | 8 | 0 | 0 | 8 |
-| **All** | **213** | **84** | **101** | **27** |
+| **All** | **214** | **85** | **100** | **27** |
 
 ## Path keys
 
@@ -125,7 +125,7 @@ All cut from P03/P07 plates by tools/art/cast/cut3.py. Every cast body still owe
 | `sprite:dummy-heavy` | no-approved-source | MA-24 | look3-cast once delivered (graybox-hall only). |
 | `sprite:throne` | approved-source-not-used | `EQ/e-q01-quiet-throne-hall-clear-playable-platforms.png` throne (750,290)-(903,483), extract/redraw at 24x32 (~0.16); hurt = a small tilt. | look3-cast, the things push (throne.json is in its file list). |
 | `sprite:signal-post` | uses-approved | `P03/pixel-villain-sprite-sheet.png` row 4 horn post (100,812)-(300,1032), horns removed (cut3.py signal_post()). | - |
-| `sprite:pedestal` | approved-source-not-used | `P04/hall-of-legends-tile-atlas.png` plinth row (40,400)-(593,493); plain plinth ~(40,400)-(110,493). | handoff-prompts/loop-art-cutouts.md item 4, once Step 7 adds content/characters/pedestal.json; the cast lane if that brief does not take it. |
+| `sprite:pedestal` | approved-source-not-used | `P04/hall-of-legends-tile-atlas.png` plinth row (40,400)-(593,493); plain plinth ~(40,400)-(110,493). | The looks are cut: `hall-plinth`, `hall-plinth-tall`, `hall-plinth-star` (group `hall`); point content/characters/pedestal.json at one once Step 7 adds it. |
 
 ## Ground tiles (16 px)
 
@@ -185,13 +185,14 @@ Cuts live in tools/art/props/drive.py, round3.py and looks_parts.py.
 | `look:shop-goods` | uses-approved | `P04/cantina-tavern-hub-tileset.png` green bottle (1208,535)-(1258,602). | optional: `P03/pixel-art-vfx-and-pickup-atlas.png` corked flask (450,765)-(530,875), recoloured teal, is closer to the 'corked flask'. |
 | `look:toll-post` | approved-source-not-used | Composition of approved pieces: `P04/chibi-pixel-interactables-sprite-sheet.png` bar gate (open (1270,175)-(1410,310), closed (1070,175)-(1240,310)) + `P07/pixel-art-platformer-tileset-atlas.png` notice board (920,867)-(1024,944) or signpost (820,867)-(893,944). New look id (DRAFT: toll-post). | look3-props draws the look; the Step 16 slice 2 owner switches road-toll from 'counter'. |
 | `look:hoard` | uses-approved | `P07/vibrant-platformer-interactables-sprite-sheet.png` coin sack (787,980)-(867,1067), glowing (893,975)-(990,1067), open chest (380,40)-(500,200), empty chest (553,100)-(667,200) = taken; `P04/cantina-tavern-hub-tileset.png` coin heap (566,1040)-(643,1075); `P05/p05-secrets-doors-breakables-source.png` gold pile (657,429)-(746,471). | Cut (group `treasure`, loopshots `loops-treasure-4x.png`): Step 16 points depot-hoard at `hoard` instead of 'goods'. |
-| `look:hall-picture` | approved-source-not-used | Frame: `H07/h07-02-memorial-frames-importable-prototype/` (small_left, grand_center, small_right) or `P04/hall-of-legends-tile-atlas.png` gold-edged panels (367,119)-(424,186), (450,119)-(512,186). Contents stay drawn from data (INTENT: never stored pixels); bodies can use sprite frames. | loop-art-cutouts item 4 cuts a hall-frame look; look3-actors (src/client/draw/hall.ts) draws it. |
+| `look:hall-picture` | uses-approved | Frame: `H07/h07-02-memorial-frames-importable-prototype/` (small_left, grand_center, small_right) or `P04/hall-of-legends-tile-atlas.png` gold-edged panels (367,119)-(424,186), (450,119)-(512,186). Contents stay drawn from data (INTENT: never stored pixels); bodies can use sprite frames. | Cut: `hall-frame`, `hall-frame-star` (group `hall`); look3-actors (src/client/draw/hall.ts) draws it. |
 | `look:level-entry` | uses-approved | `P05/p05-secrets-doors-breakables-source.png` top row: arch (203,68)-(308,172), gem door (313,66)-(418,172), portal (528,68)-(632,172), mine (638,72)-(756,172). | - |
 | `look:level-sign` | uses-approved | `P07/pixel-art-platformer-tileset-atlas.png` two-arrow signpost (815,860)-(895,958). | - |
 | `look:level-pie` | approved-source-not-used | `P05/p05-d-ui-powers-exploration-preferred-sheet.png` rings: empty (138,463)-(205,532), quarter (208,463)-(276,532), three-quarters (276,463)-(344,532), full (342,463)-(410,532) (leave out the rays above). Half = empty + right half of full. | look3-props or loop-art-cutouts: point drive.level_pie() at P05 D (register it in srcimport.SHEETS) and delete the drawn redefinition. |
 | `look:ride` | uses-approved | `P04/chibi-vehicle-and-mount-sprite-sheet.png`, the plate's 5x4 cells (cols x 49-257, 299-542, 565-824, 856-1133, 1154-1404; rows plane y 36-234, cart 309-493, wagon 566-744, mount 816-1036): idle, moving x2, crash, wrecked (loops.ride(), group `rides`). | Every cell has the goggled rider baked in: an empty machine and an empty saddle are on no plate (MA, missing list). No game code draws a ride yet. |
 | `look:powers` | uses-approved | `P05/p05-rare-powers-pickups-source.png` (opaque pale ground, key (247,245,243)): row 1 fixtures y 8-134, row 2 orbs y 140-219, row 3 lost sequence y 223-326 (spark (146,225)-(192,290), stars (196,224)-(296,262), orb on its swoosh (353,223)-(452,326)), row 4 loose pieces y 338-426, row 5 pickup sequence and cloud poof y 426-512 (x boxes in loops.py). Group `powers`: pickup-*, item-*, power-fixture-*, fx-pickup-glow/-get, fx-power-lost, fx-poof. | The plate's row 5 runs off its bottom edge (the column and burst are cut at y 512). item-spring is mush at 16 px. No game code draws them yet. |
 | `look:treasure` | uses-approved | `P07/vibrant-platformer-interactables-sprite-sheet.png` row 1 chests (wood closed (195,95)-(330,215), open (370,70)-(505,215), empty (545,95)-(670,215); iron the same at x 800-1290), row 2 doors (ring door shut (35,240)-(212,415), open (212,240)-(390,415), portcullis down (410,240)-(595,415), raised (600,240)-(785,415)), key (30,980)-(130,1065), coins (1005,985)-(1165,1065), sack (780,960)-(875,1075), gem on post (610,795)-(745,935); `P05/p05-secrets-doors-breakables-source.png` padlocked door (102,68)-(200,172), barred door (424,68)-(524,172), vault cave (526,372)-(758,482); `P04/chibi-pixel-interactables-sprite-sheet.png` crystal (240,380)-(320,470); `P04/cantina-tavern-hub-tileset.png` coin heap (566,1040)-(643,1075). Group `treasure` (loops.py). | `hoard`/`hoard-taken` (32x16: the sack on the heap; a few coins) are ready for depot-hoard, whose placement still says `goods` (Step 16's to repoint). P05's own vault gold pile sits on the cave floor and does not cut clean. |
+| `look:hall` | uses-approved | `P04/hall-of-legends-tile-atlas.png` (opaque pale ground with drawn cell lines: key (247,247,247), grid=True), scale 0.2: plinths (38-272, 398-495), niches (610-1095, 395-497), plaques/shield/banners/drape (38-1320, 510-608), lantern/torch/braziers (40-610, 598-684), doors/window/portals (30-1125, 692-808), statues and keepsakes (35-1420, 885-1062), gold-edged frames (362-517, 114-192); per-piece boxes in loops.HALL. Group `hall`. | The wood doors lose their pale stone arch to the ground key (wood and gold rim only). Statues are thin at 0.2. hall-frame/-frame-star are about 14x16: small for a hall picture; scale up if the picture needs it. No game code draws them yet. |
 
 ## Decor
 
