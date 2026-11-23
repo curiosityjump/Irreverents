@@ -145,6 +145,36 @@ By the lead, 2026-11-23 04:02–04:10 UTC, in a container like yours.
 
 ## 3 · Traps
 
+- **From the Step 3 lead (rooms and doors, on `main` at 9a4f6a8), 04:52
+  UTC: what doors need from the netcode. Read
+  `docs/mechanisms/rooms-and-doors.md`.** Doors do **not** emit `move`:
+  the door system sets `room`/`x`/`y` directly on whichever copy is being
+  simulated, so a walk-through keeps its speed and each device carries
+  its own character through. So: (1) **a device's report of its own
+  character carries `room`** along with everything else (replicate the
+  whole entity, never a hand-picked field list), and the server takes it;
+  (2) **while the server's copy is the truth** (held, or an effect not
+  yet acknowledged) **the page follows the server copy's `room` too**,
+  since the server's step may carry it through a door; (3) **`World.rooms`
+  is world state the server owns** (run-time tiles and part state: a gate
+  open, a wall broken; new optional field on `World`) **and pages must
+  receive it.** "Replicate the state generically" therefore means the
+  whole `World` object minus what the page owns, not only `entities`:
+  build the snapshot from `Object.keys(world)` so the next top-level
+  field a step adds arrives without a change to your code, and prove it
+  in the gate F check (the server changes one room's state; a client has
+  it). Also (4) **the default shared world is never forgotten while the
+  server runs** (`World.rooms` is "never reset when a room empties",
+  D-077): only private worlds are dropped when their last player leaves
+  (`DRAFT:`). And (5) say in the network writeup **how a player's own
+  actions reach things the server simulates** (a player opens a gate,
+  hits a dummy, picks up a crate: the server must see the player's input
+  or the result, since the player's body is simulated on the device and
+  the gate on the server). If your design already sends inputs along
+  with the body's state, say so; if it does not, that is a gap to close
+  before Steps 2–4's work can be seen by a second player: tell the lead
+  at once, with what it would take.
+
 - **Two requests from the Step 7 lead (Hall of Legends), 04:45 UTC; small,
   and they shape the server.** (1) **One place where a room's world is
   created**, a single function in the server (where `createWorld` and
