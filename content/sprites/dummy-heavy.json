@@ -1,0 +1,16 @@
+{
+  "//": "DRAFT: stand-in drawn by tools/art/cast/make.py; a delivered sheet replaces it by editing this file.",
+  "id": "dummy-heavy",
+  "image": "sprites/cast/dummy-heavy.png",
+  "cell": {"w": 48, "h": 48},
+  "anchor": {"x": 14, "y": 18},
+  "fps": 8,
+  "frames": {
+    "idle": [0],
+    "run": [0],
+    "air": [8, 9],
+    "hurt": [16, 17, 18],
+    "down": [24]
+  },
+  "fpsBy": {"hurt": 10, "air": 8}
+}

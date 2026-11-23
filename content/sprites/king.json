@@ -1,0 +1,24 @@
+{
+  "//": "DRAFT: stand-in drawn by tools/art/cast/make.py; a delivered sheet replaces it by editing this file.",
+  "id": "king",
+  "image": "sprites/cast/king.png",
+  "cell": {"w": 48, "h": 48},
+  "anchor": {"x": 14, "y": 18},
+  "fps": 8,
+  "frames": {
+    "idle": [0, 1, 2, 3, 4, 5, 6, 7],
+    "run": [8, 9, 10, 11, 12, 13],
+    "air": [16, 17],
+    "hurt": [24, 25, 26],
+    "down": [32, 33],
+    "held": [40, 41, 42, 43],
+    "talk": [48, 49, 50, 51, 52, 53, 54, 55],
+    "jump": [16],
+    "fall": [17]
+  },
+  "fpsBy": {"idle": 6, "run": 12, "hurt": 10, "down": 2, "held": 10, "talk": 9, "air": 8},
+  "moods": {
+    "2": {"idle": [56, 57, 58, 59, 60, 61, 62, 63], "run": [64, 65, 66, 67, 68, 69], "talk": [72, 73, 74, 75, 76, 77, 78, 79]},
+    "3": {"idle": [80, 81, 82, 83, 84, 85, 86, 87], "run": [88, 89, 90, 91, 92, 93], "talk": [96, 97, 98, 99, 100, 101, 102, 103]}
+  }
+}

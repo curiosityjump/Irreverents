@@ -1,0 +1,15 @@
+{
+  "//": "DRAFT: stand-in drawn by tools/art/cast/make.py; a delivered sheet replaces it by editing this file.",
+  "id": "crate",
+  "image": "sprites/cast/crate.png",
+  "cell": {"w": 32, "h": 32},
+  "anchor": {"x": 9, "y": 18},
+  "fps": 8,
+  "frames": {
+    "idle": [0],
+    "run": [0],
+    "air": [8, 9, 10, 11],
+    "hurt": [16, 17]
+  },
+  "fpsBy": {"hurt": 10, "air": 8}
+}
