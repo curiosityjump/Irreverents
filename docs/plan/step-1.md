@@ -298,9 +298,9 @@ changed without touching code; don't grade the feel yourself.
 
 - `handoff-prompts/step-1-gate-1-skeleton.md` — Gate 1: skeleton, sim
   core, scenarios, architecture doc. Worker `session_017WiGzHGmyESjXPtM3zXt19`, launched 04:04 UTC.
-- Gate 2 (browser client, touch, netcode, `e2e`, `check:live`): drafted
-  by the lead, held until Gate 1 is reviewed because it builds on Gate
-  1's layout; it is launched from `handoff-prompts/` at that review.
+- `handoff-prompts/step-1-gate-2-together.md` — Gate 2: browser client,
+  touch, netcode, rejoin after a restart, `e2e`, `check:live`, gate F.
+  Launched 04:24 UTC after the Gate 1 review below.
 
 ## Open with the owner
 
@@ -315,3 +315,22 @@ changed without touching code; don't grade the feel yourself.
   Gate 1 by re-running it from a fresh clone with a failing control, tell
   the orchestrator (`session_017WiGzFWfLir1ATiSP7c5E5`) the moment it is
   on `main`, launch Gate 2. A backstop wake is armed for 04:41 UTC.
+
+- **Lead `session_017WiGzEwLs3ng2ZPpRZgctn`, 04:24 UTC: Gate 1 reviewed at
+  234d1b4 (deliverables 1–8).** Re-run by the lead from a fresh clone:
+  `npm ci`, `npm run build`, `npm run check` exit 0 (three scenarios);
+  `npm run gates` prints six "no scenario yet"; `e2e` and `check:live`
+  exit 1 as stubs. Lead's own control: gravity set to 1 in
+  `content/tuning.json` → `check: FAILED` naming the facts (a character
+  in the air at tick 180), restored → passes. Built server started with
+  `npm start`: `/healthz` reported the commit it was given; the page in a
+  phone-sized headless browser drew the room and character, ran and
+  jumped on keys with no page errors (screenshot read). Live `/healthz`
+  reported 234d1b4. **Not verified by the lead:** `npm run dev`; the
+  worker's listed controls beyond the one above; anything on a real
+  iPhone. **Still to land from the Gate 1 worker** (added to its brief
+  mid-flight): `railway.json` watch patterns and health check, `npm run
+  check:deployed`, the storage field in `/healthz`. Kept the worker's
+  self-registering files and declaration merging: they are what lets
+  Steps 2–4 add verbs, systems and content kinds without editing a
+  common file. The live page is keyboard-only until Gate 2.
