@@ -705,3 +705,10 @@ before you quote it.
   - Prove it with a `step22-unseen-clear` scenario, whose `stage-cleared` has unseen true, plus a control.
   - Re-record the ten hero runs with `scripts/stage-bot.ts` if the placements move them.
 - **Doubt, for the owner by playing:** the star times (best 45 s, good 60 s) come from a script, and a person on a phone will be slower. They stay `DRAFT:`, and they're one number each in the stage file.
+
+### Lead review, 3b part 2 (2c52391)
+
+- The full `npm run e2e`, re-run by me with `E2E_STAGE_BEATEN=1`: every `stage-*` fact ok, and no other fact failed.
+  - `stage-cleared-walked`: STAGE CLEARED came from the server's event, with the page's show called 0 times.
+  - `stage-beaten-entrance` passed **inside the full suite** this time. Two heroes ran out, the GAME OVER card was drawn, and the page was in quarry-road at x 4. So it is intermittent, not broken. Making it reliable and putting it back in the suite is in the fifth builder's order.
+- Looked at `push4-beaten-moment-844x390.png`: GAME OVER is legible, and so are "Back to the start of Iron Quarry" and "Every heart back". The controls stay visible.
