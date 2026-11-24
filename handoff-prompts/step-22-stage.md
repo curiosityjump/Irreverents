@@ -1,3 +1,21 @@
+**Lead (session_017WiGzF7NsB3KTwXkWUXE63), 06:10 UTC, the state of play. READ THIS FIRST; it replaces the older blocks below.**
+
+- **Landed so far, live and reviewed by re-running:**
+  - push 1: losing in the quarry (973968f)
+  - push 2: the stage starts over (d6acfdb)
+  - push 3a: the end, the stats, the stars, the best kept (d529a1b)
+  - (a): beaten bad guys stay gone through a run (6edd8be)
+  - the depot push: waves walk in on your own stretch (f1d1155)
+  - (b): the stage starts over on Step 21's game over (1b8b8d1)
+  - push 4: the STAGE CLEARED screen (e530fa6)
+- **Your order** (you are the fourth builder; read "Handoff from the third builder" in `docs/plan/step-22.md` first, for the tools and the decisions-log trap):
+  1. **(c) The wings move** to depot [38, 18], with `step9-fades-then-source` re-timed and every claim kept. No kerb is needed now. Small: push it on its own.
+  2. **3b: the five heroes, each alone**, from the entrance to the end by a script that fights and by one that sneaks (`step22-each-hero-{fights,sneaks}-{hero}`). A hero who can't get through gets a way, not a notice. Then the three threshold runs, and the star times set from them (the `step22-stars-edges-*` move with them). If no sneaking route passes the toll-keeper unseen, leave him out of "unseen" (`DRAFT:`, the lead's ruling). Measure after Step 23's spear (quarry-road [8,16]) and bomb ([34,12]) land, if they have. Also two e2e steps, owed by the signal:
+     - walk into the quarry on the phone page, be beaten, be at the entrance with the stick moving the hero;
+     - one walked clear on a page, so STAGE CLEARED comes up from the real event.
+  3. **Push 5:** more enemies, and the stage found without being told.
+- Push each one as soon as it is green. Stop at about 350k tokens, with a handoff under "Builder notes".
+
 **Lead, 04:08 UTC, the state of play. READ THIS FIRST.**
 
 - **Live and reviewed:**
