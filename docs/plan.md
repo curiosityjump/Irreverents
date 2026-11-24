@@ -423,6 +423,6 @@ Full text: `docs/plan/step-22.md`
 
 ## Step 23 — Weapons: things you pick up, swing, throw, lose and steal
 
-**Status: open, claimed by orchestrator session_017WiGzJzo6aZqH4kYxxJsiV (builders: BUILDERID), 2026-11-24.** (Opened 01:40 UTC from the owner's "Weapons assets uploaded" and his verdict's "no power/item stealing"; brief `handoff-prompts/weapons-pick-up-and-swing.md`.)
+**Status: open, claimed by orchestrator session_017WiGzJzo6aZqH4kYxxJsiV (builders: session_017WiGzF7puSFWh2BBeii8WZ), 2026-11-24.** (Opened 01:40 UTC from the owner's "Weapons assets uploaded" and his verdict's "no power/item stealing"; brief `handoff-prompts/weapons-pick-up-and-swing.md`.)
 
 Full text: `docs/plan/step-23.md`
