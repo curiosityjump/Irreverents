@@ -360,3 +360,10 @@ document as a decision of theirs.
 - **Instead of asking:** "Where should the first ranged enemy stand, and may it be in your Hall?"
 - **Why this way:** your gaps list's top unowned row is enemy variety (no enemy fights from range; the castle's rooms have nobody hostile). The Hall's balcony is the one room nobody is building in tonight, he guards the climb out and a hidden piece there, and you wrote "Do not ... protect the Hall of Legends from gameplay". He is scripted: a fixed arc, shown as dots before every throw, never aimed; a hit launches you, never a number; what he throws stays to be thrown back.
 - **To change it:** his place is one line in `content/placements/hall-gallery.json`; everything about how he throws is data in his own file (`DRAFT:` throughout, `docs/plan/step-24.md`).
+
+### 2026-11-24 · The wings now wait in the hidden place under the depot's strongroom, not on the main way through it
+- **Decided by:** Step 22 builder (the fourth), on the Step 16 lead's tile and the orchestrator's ask, `session_017WiGzEWjmrpsPDvpwxZXir`
+- **Instead of asking:** "Where in the depot should the wings stand, now that every hero crossing the strongroom picks them up?"
+- **Why this way:** the Step 16 lead's answer: the wings are the pay-off of a hidden place, at [38, 18] on the floor under the strongroom. You get there by throwing the cellar's heavy rock through the cracked wall; climbing the shaft's ledges is the way back up. Nothing else about the wings changed: same flaps, same fade, same pedestal that lights again once they are lost, and the place it stands is still remembered as found.
+- **To change it:** the tile is one entry in `content/powers/flight.json` (`sources`); the Step 16 lead said to move it east within columns 38-43 if a route breaks. Two Step 9 scenarios walk the cellar route to it (`step9-fades-then-source`, `step9-second-power-replaces` and its control).
+- **Where:** `docs/mechanisms/powers.md`, "Sources"; `docs/plan/step-22.md`, "Builder notes".

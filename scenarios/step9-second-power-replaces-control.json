@@ -8,27 +8,41 @@
     {
       "id": "a",
       "character": "grappler",
-      "spawn": 1,
+      "spawn": 3,
       "power": "flight"
     }
   ],
   "inputs": [
     {
       "player": "a",
-      "from": 0,
-      "to": 100,
-      "x": -1
+      "from": 5,
+      "to": 8,
+      "hold": [
+        "grab"
+      ]
     },
     {
       "player": "a",
-      "from": 38,
-      "to": 52,
+      "from": 20,
+      "to": 320,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 330,
+      "to": 333,
       "hold": [
-        "jump"
+        "attack"
       ]
+    },
+    {
+      "player": "a",
+      "from": 360,
+      "to": 485,
+      "x": 1
     }
   ],
-  "ticks": 300,
+  "ticks": 600,
   "expect": [
     {
       "fact": "power",
@@ -42,7 +56,7 @@
       "player": "a",
       "between": [
         0,
-        300
+        600
       ],
       "count": [
         0,
@@ -55,7 +69,7 @@
       "player": "a",
       "between": [
         0,
-        300
+        600
       ],
       "count": [
         0,
@@ -65,9 +79,19 @@
     {
       "fact": "power",
       "player": "a",
-      "at": 300,
+      "at": 600,
       "is": "flight"
     }
   ],
-  "//": "DRAFT (Step 9): the control of step9-second-power-replaces. The same walk over the depot's pedestal, the grappler holding flight (given, not from this pedestal, so it stands lit): a hero holding the same power walks through it, nothing pops out."
+  "//": "DRAFT (Step 9): the control of step9-second-power-replaces. The same walk over the depot's pedestal, the grappler holding flight (given, not from this pedestal, so it stands lit): a hero holding the same power walks through it, nothing pops out. Re-routed by Step 22 when the wings moved to the hidden area under the strongroom ([38, 18]): the walk is step9-fades-then-source's, from the cellar, the rock thrown through the cracked wall, then east over the pedestal.",
+  "entities": [
+    {
+      "id": "rock",
+      "character": "crate-heavy",
+      "tile": [
+        5,
+        18
+      ]
+    }
+  ]
 }

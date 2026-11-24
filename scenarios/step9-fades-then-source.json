@@ -1,63 +1,79 @@
 {
   "id": "step9-fades-then-source",
   "gate": null,
-  "proves": "a hero takes the rare power from its pedestal (which goes dark and is found), loses it to a hard hit, and once the orb fades the pedestal is lit again",
+  "proves": "a hero takes the rare power from its pedestal in the hidden place under the depot's strongroom (which goes dark and is found), loses it to a hard hit, and once the orb fades the pedestal is lit again",
   "room": "quarry-depot",
   "placements": true,
   "players": [
     {
       "id": "a",
       "character": "grappler",
-      "spawn": 1
+      "spawn": 3
     }
   ],
   "entities": [
     {
+      "id": "rock",
+      "character": "crate-heavy",
+      "tile": [
+        5,
+        18
+      ]
+    },
+    {
       "id": "heavy",
       "character": "heavy-fighter",
       "tile": [
-        49,
-        13
+        38,
+        18
       ]
     }
   ],
   "inputs": [
     {
       "player": "a",
-      "from": 0,
-      "to": 100,
-      "x": -1
-    },
-    {
-      "player": "a",
-      "from": 38,
-      "to": 52,
+      "from": 5,
+      "to": 8,
       "hold": [
-        "jump"
+        "grab"
       ]
     },
     {
-      "entity": "heavy",
-      "from": 100,
-      "to": 101,
-      "x": -1
+      "player": "a",
+      "from": 20,
+      "to": 320,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 330,
+      "to": 333,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 360,
+      "to": 470,
+      "x": 1
     },
     {
       "entity": "heavy",
-      "from": 101,
-      "to": 160,
-      "x": -1
+      "from": 440,
+      "to": 441,
+      "x": 1
     },
     {
       "entity": "heavy",
-      "from": 150,
-      "to": 153,
+      "from": 450,
+      "to": 453,
       "hold": [
         "attack"
       ]
     }
   ],
-  "ticks": 600,
+  "ticks": 900,
   "expect": [
     {
       "fact": "source",
@@ -75,8 +91,8 @@
         "src": "depot-strongroom"
       },
       "between": [
-        80,
-        130
+        420,
+        470
       ],
       "count": [
         1,
@@ -86,7 +102,7 @@
     {
       "fact": "source",
       "id": "depot-strongroom",
-      "at": 150,
+      "at": 480,
       "lit": false,
       "found": true
     },
@@ -98,8 +114,8 @@
         "power": "flight"
       },
       "between": [
-        150,
-        200
+        470,
+        520
       ],
       "count": [
         1,
@@ -109,13 +125,13 @@
     {
       "fact": "power",
       "player": "a",
-      "at": 200,
+      "at": 520,
       "is": null
     },
     {
       "fact": "source",
       "id": "depot-strongroom",
-      "at": 400,
+      "at": 700,
       "lit": false
     },
     {
@@ -125,8 +141,8 @@
         "power": "flight"
       },
       "between": [
-        450,
-        500
+        750,
+        800
       ],
       "count": [
         1,
@@ -136,10 +152,10 @@
     {
       "fact": "source",
       "id": "depot-strongroom",
-      "at": 600,
+      "at": 900,
       "lit": true,
       "found": true
     }
   ],
-  "//": "DRAFT (Step 9; D-080, D-081, D-082): the rare power's whole loop in the real depot (its own people placed). The grappler walks west into the strongroom and over the pedestal (column 46): it holds flight, the pedestal goes dark and the depot's source is found. A quarry heavy then hits it hard; flight pops out as an orb, and left alone the orb fades after 5 s. Nobody holds flight and no orb of it lies loose, so the pedestal is lit again, and the source stays found. Control, watched to fail: flight's fade raised past the scenario's end (the pedestal stays dark)."
+  "//": "DRAFT (Step 9; D-080, D-081, D-082): the rare power's whole loop in the real depot (its own people placed). Re-routed by Step 22 (the wings moved from the strongroom floor [46, 13] to the hidden area under it [38, 18], the Step 16 lead's tile; Step 9's builder agreed it may be re-timed with every claim kept): the grappler starts in the cellar, carries a heavy rock east and throws it at the cracked wall (as step16-secret-cellar-wall-grappler), walks through into the hidden area and over the pedestal: it holds flight, the pedestal goes dark and the depot's source is found. A heavy waiting there hits it hard east; flight pops out as an orb, which comes to rest on the low ledge west of the hero, and left alone it fades after 5 s. Nobody holds flight and no orb of it lies loose, so the pedestal is lit again, and the source stays found. Control, watched to fail: flight's fade raised past the scenario's end (the pedestal stays dark)."
 }

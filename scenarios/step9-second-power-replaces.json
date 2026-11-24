@@ -8,39 +8,53 @@
     {
       "id": "a",
       "character": "grappler",
-      "spawn": 1,
+      "spawn": 3,
       "power": "boost"
     }
   ],
   "inputs": [
     {
       "player": "a",
-      "from": 0,
-      "to": 100,
-      "x": -1
-    },
-    {
-      "player": "a",
-      "from": 38,
-      "to": 52,
+      "from": 5,
+      "to": 8,
       "hold": [
-        "jump"
+        "grab"
       ]
     },
     {
       "player": "a",
-      "from": 180,
-      "to": 200,
+      "from": 20,
+      "to": 320,
       "x": 1
     },
     {
       "player": "a",
-      "from": 220,
-      "to": 300,
+      "from": 330,
+      "to": 333,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 360,
+      "to": 485,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 540,
+      "to": 550,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 560,
+      "to": 620,
       "x": -1
     }
   ],
-  "ticks": 420,
+  "ticks": 700,
   "expect": [
     {
       "fact": "power",
@@ -57,8 +71,8 @@
         "src": "depot-strongroom"
       },
       "between": [
-        80,
-        130
+        420,
+        470
       ],
       "count": [
         1,
@@ -73,8 +87,8 @@
         "power": "boost"
       },
       "between": [
-        80,
-        130
+        420,
+        470
       ],
       "count": [
         1,
@@ -84,7 +98,7 @@
     {
       "fact": "power",
       "player": "a",
-      "at": 180,
+      "at": 530,
       "is": "flight"
     },
     {
@@ -95,8 +109,8 @@
         "power": "boost"
       },
       "between": [
-        200,
-        320
+        560,
+        640
       ],
       "count": [
         1,
@@ -111,8 +125,8 @@
         "power": "flight"
       },
       "between": [
-        200,
-        320
+        560,
+        640
       ],
       "count": [
         1,
@@ -122,9 +136,19 @@
     {
       "fact": "power",
       "player": "a",
-      "at": 420,
+      "at": 700,
       "is": "boost"
     }
   ],
-  "//": "DRAFT (Step 9, the owner 2026-11-24: 'Similar to kirby - cant have multiple powers at once'): the walk of step9-fades-then-source, the grappler holding the boost. Walking over the depot's pedestal takes flight, and the boost pops out of them as an orb (tick 101) that slides west and rests. They stand a while (still flight at 180), step east, then walk back west over the boost's orb: they take it, and flight pops out in turn (from an orb, power-take; from the pedestal, power-sources). The control is step9-second-power-replaces-control: the grappler holds flight already and walks through the pedestal's flight (no swap). Watched to fail on the code before the swap (a hero holding a power walked through: no power-taken). Not watched to fail: the swappedBy guard (the hero who swapped a power out does not take it back until stepped off it); here the orb slides out from under them before powerRetakeTime, so the run is the same without it."
+  "//": "DRAFT (Step 9, the owner 2026-11-24: 'Similar to kirby - cant have multiple powers at once'): the walk of step9-fades-then-source, the grappler holding the boost. Walking over the depot's pedestal takes flight, and the boost pops out of them as an orb (tick 447) that falls behind them and rests. They walk on a step and stand a while (still flight at 530), step east, then walk back west over the boost's orb: they take it, and flight pops out in turn (from an orb, power-take; from the pedestal, power-sources). The control is step9-second-power-replaces-control: the grappler holds flight already and walks through the pedestal's flight (no swap). Watched to fail on the code before the swap (a hero holding a power walked through: no power-taken). Not watched to fail: the swappedBy guard (the hero who swapped a power out does not take it back until stepped off it); here the orb slides out from under them before powerRetakeTime, so the run is the same without it. Re-routed by Step 22 when the wings moved to the hidden area under the strongroom ([38, 18]): the walk is step9-fades-then-source's, from the cellar, the rock thrown through the cracked wall, then east over the pedestal.",
+  "entities": [
+    {
+      "id": "rock",
+      "character": "crate-heavy",
+      "tile": [
+        5,
+        18
+      ]
+    }
+  ]
 }

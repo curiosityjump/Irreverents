@@ -338,7 +338,7 @@ this plan:
   which raised the alert, and a Step 4 tier scenario went red.
 - **A hard hit** is being laid flat, or a blow of 180 px/s or more. The power
   is not lost in the cantina (`DRAFT:`).
-- **Wings** (`flight`) stand on a pedestal at quarry-depot [46, 13]. They
+- **Wings** (`flight`) stand on a pedestal at quarry-depot [38, 18], the hidden place under the strongroom (moved there from [46, 13] by Step 22). They
   give six flaps; four is the measured least to reach the pit's ledge.
 - **The menu row** shows each found source's icon.
 - Signals: every scenario named above and its committed control are green,

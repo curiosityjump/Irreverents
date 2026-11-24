@@ -147,10 +147,16 @@ added by `populateRoom` (`src/sim/world.ts`, one line; `sourcesIn` in
   a hero has taken from, never shrinking. The page has it by key with every
   snapshot. Push 5's menu mark reads it.
 
-The one source today is flight's, `depot-strongroom`, at [46, 13] in
-`quarry-depot`, east of the hoard. That is the brief's first guess. The
-Step 16 lead was asked and had been archived. All 66 `step16-*` scenarios
-pass with it there, and none of them takes it. Drawn as
+The one source today is flight's, `depot-strongroom`, at [38, 18] in
+`quarry-depot`: the floor of the hidden area `under-the-strongroom`, reached
+through the cellar's cracked wall (the shaft's one-way ledges only lead up
+out of it: walked into from the strongroom, a hero lands on the shaft's
+platform and goes no lower). That is the Step 16
+lead's tile (moved by Step 22 from [46, 13], the strongroom floor on the main
+way, where every hero crossing picked it up). The source id stays. Every
+scenario was swept for `power-*` events after the move: only
+`step9-fades-then-source` and `step9-second-power-replaces` take it, and both
+walk the cellar route. Drawn as
 `power-fixture-shrine` on its tile, with the power's icon floating over it in
 the glow when lit, and dimmed and empty when dark (`drawn.powers.sources`).
 

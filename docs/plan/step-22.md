@@ -464,6 +464,34 @@ For the next builder, all measured on `main` at 6edd8be:
   `git update-index --no-skip-worktree docs/decisions-log.md` before you
   commit it.
 
+### (c) The wings move (fourth builder, `session_017WiGzEWjmrpsPDvpwxZXir`)
+
+- The source `depot-strongroom` is now at [38, 18], the floor of the hidden
+  area under the strongroom. The id is kept. No kerb.
+- **Measured: the shaft is no way in from above.** Walking west into it from
+  the strongroom floor, the grappler lands on the shaft's one-way platform
+  (row 15, columns 42-44) and is walled in at column 41. Physics has no
+  drop-through, and the crawl (row 15) is one tile high, which no hero fits.
+  So the only way in is the cellar's cracked wall.
+- **Re-routed, every claim kept, windows moved:**
+  - `step9-fades-then-source`: the walk is `step16-secret-cellar-wall-grappler`'s,
+    from cellar spawn 3: grab the rock, throw it at the wall at 330 (it breaks
+    at 340), walk east. Flight is taken at 447. A heavy standing on the
+    pedestal (bodies pass through each other) hits her east at 471, and the
+    orb comes to rest on the low ledge west of her. It fades at 770, and the
+    pedestal is lit at 900.
+  - Struck west, she was thrown back onto the orb by the rock and took it
+    again.
+  - `step9-second-power-replaces` (and its control) also walked to [46, 13],
+    and both would have passed or failed for the wrong reason. They now take
+    the same route. Flight is taken at 447 and the boost pops out. She walks
+    on a step and is still flight at 530, then walks back west over the
+    boost's orb at 575.
+  - The control holds flight over the same walk: no take and no drop in
+    0-600.
+- **Sweep:** I ran every scenario, looking for `power-*` events of flight or
+  `depot-strongroom`. Only those two take it.
+
 ### Lead review, owed item (a) (6edd8be), re-run at 002607b
 
 `npm run build` and `npm run check` are ok: all ten `step22-*` scenarios
