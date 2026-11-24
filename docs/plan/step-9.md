@@ -141,3 +141,12 @@ back feels like a scramble worth having.
   punched it across the street, and after a rebase onto Step 4's town tiers
   a shopkeeper's swing on it raised the alert and one tier scenario failed). The boost's icon became `pickup-bolt`,
   because the star could not be told from the hit star.
+- Pushes 3 to 5: a knock-out was the first try at the network check's hard
+  hit, and it could not tell the effect from the server's copy (a `flatten`
+  makes the page take the whole copy), so the check lands a blow instead.
+  Wings are proven by script only (the holder's own page flaps in the
+  two-connection check). No phone e2e takes them by touch: the route past
+  the depot's guards is long. A fact could reuse `scripts/e2e/quarry.ts`'s
+  route to the depot. Screenshots of the pedestal and the menu were taken
+  by moving a page's own character there from the page's devtools: looks
+  only, never a check.

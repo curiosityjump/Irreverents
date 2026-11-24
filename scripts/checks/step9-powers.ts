@@ -28,7 +28,7 @@ const check: ScriptCheck = {
   id: 'step9-powers',
   gate: null,
   proves:
-    "a power over the real network: an orb popped in the server's world at player a's feet is taken by a, after which a's own page holds the power (so its own verbs use it) and b's page sees it on a; after b's hard blow on the server, a's own page holds none, b's page sees none on a, and an orb lies in the server's world; given flight the same way, a's own page flaps on a second Jump press in the air (control: the same presses before, no flap); control: the server writing the power onto b's copy without the effect leaves b's own page without it",
+    "a power over the real network: an orb popped in the server's world at player a's feet is taken by a, after which a's own page holds the power (so its own verbs use it) and b's page sees it on a; after b's hard blow on the server, a's own page holds none, b's page sees none on a, and an orb lies in the server's world; given flight the same way, a's own page flaps on a second Jump press in the air (control: the same presses before, no flap); standing on the depot's pedestal, a's own page holds flight from it, the pedestal is dark and both pages' worlds list the source as found; control: the server writing the power onto b's copy without the effect leaves b's own page without it",
   async run(content: Content): Promise<string[]> {
     const failures: string[] = [];
     const power = content.powers?.[POWER];
@@ -202,6 +202,34 @@ const check: ScriptCheck = {
         if (held(b.me()) !== 'none') failures.push(`control: with no effect sent, b's own page holds ${held(b.me())}, expected none (the check could not tell the effect from a copy of c)`);
       } finally {
         systems.splice(systems.indexOf(direct), 1);
+      }
+
+      // 5. A source over the network: a's own page stands a over the depot's pedestal (a page owns its
+      // character's motion); the server's world takes it there, a's own page holds flight from it,
+      // and both pages' worlds list the source as found (world.sources, a top-level field by key).
+      const source = Object.values(content.powers).flatMap((p) => p.sources.map((s) => ({ ...s, power: p.id })))[0];
+      if (source) {
+        const clear = once('throwaway-clear-a', (ctx) => {
+          emitEffect(ctx, ctx.world.entities.find((e) => e.id === aId)!, { kind: 'power', power: null });
+        });
+        systems.push(clear);
+        try {
+          await until("a's own page holds nothing before the pedestal", () => held(a.me()) === 'none', () => `a's page holds ${held(a.me())}`);
+        } finally {
+          systems.splice(systems.indexOf(clear), 1);
+        }
+        const room = content.rooms[source.room]!;
+        const box = content.characters[a.me().kind]!.box;
+        const me = a.me();
+        me.room = source.room;
+        me.x = source.tile[0] * room.tile + (room.tile - box.w) / 2;
+        me.y = (source.tile[1] + 1) * room.tile - box.h;
+        me.vx = 0;
+        me.vy = 0;
+        await until(`a's own page holds ${source.power} from the pedestal`, () => held(a.me()) === source.power && a.me().c.power?.src === source.id, () => `a's page holds ${held(a.me())} from ${a.me().c.power?.src ?? 'nowhere'}`);
+        await until("both pages' worlds list the source as found", () => !!a.world.sources?.includes(source.id) && !!b.world.sources?.includes(source.id), () => `a ${JSON.stringify(a.world.sources ?? null)}, b ${JSON.stringify(b.world.sources ?? null)}`);
+        const ped = gw.world.entities.find((e) => e.c.source?.id === source.id);
+        if (ped?.c.source?.lit !== false) failures.push(`the pedestal is ${ped ? (ped.c.source!.lit ? 'lit' : 'dark') : 'not in the server world'} while a holds its power, expected dark`);
       }
 
       a.leave();

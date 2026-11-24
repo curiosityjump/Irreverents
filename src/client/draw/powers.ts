@@ -175,3 +175,11 @@ export function drawPowers(g: CanvasRenderingContext2D, world: World, content: C
   }
   drawn = now;
 }
+
+/** Step 9: the icons of the power sources found in this world (`world.sources`) that stand in one of `rooms`, for a level's menu row (src/client/start.ts). */
+export function foundSourceIcons(world: World, content: Content, rooms: string[]): string[] {
+  const found = world.sources ?? [];
+  const out: string[] = [];
+  for (const p of Object.values(content.powers ?? {})) for (const s of p.sources) if (found.includes(s.id) && rooms.includes(s.room)) out.push(p.icon);
+  return out;
+}

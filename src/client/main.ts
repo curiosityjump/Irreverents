@@ -26,7 +26,7 @@ import { drawnAlarms, watchAlarmEvents } from './draw/alarm-banner.ts';
 import { drawnHall, watchHallEvents } from './draw/hall.ts';
 import { drawnRecruits, noteRecruits } from './draw/recruits.ts';
 import { drawnParts, setHeardRooms } from './draw/room-parts.ts';
-import { drawnPowers } from './draw/powers.ts';
+import { drawnPowers, foundSourceIcons } from './draw/powers.ts';
 import { levelProgress } from '../sim/levels.ts';
 import { setUpMenu, showGone, showStart } from './start.ts';
 import type { StartRecord } from './start.ts';
@@ -353,7 +353,9 @@ function play(worldName: string): void {
       const p = levelProgress(net.world, content, l.id);
       // Step 14 slice B: and its pieces, grey with the found ones gold.
       const pieces = levelPieces(net.world, content, l.id);
-      return p.discovered ? [{ id: l.id, name: l.name, quarters: p.quarters, ...(pieces ? { pieces } : {}) }] : [];
+      // Step 9: a lit mark (the power's icon) per power source found in this level (world.sources).
+      const sources = foundSourceIcons(net.world, content, l.rooms);
+      return p.discovered ? [{ id: l.id, name: l.name, quarters: p.quarters, ...(pieces ? { pieces } : {}), ...(sources.length ? { sources } : {}) }] : [];
     }),
   });
 }

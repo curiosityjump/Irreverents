@@ -172,6 +172,43 @@ function piecesImage(content: Content, pieces: boolean[], cssPerPixel: number): 
   return span;
 }
 
+/**
+ * Step 9 (D-082: knowing where a source is stays valuable;
+ * docs/mechanisms/powers.md): one lit mark per power source found in this
+ * level, the power's own icon (look ids, from `world.sources`), for a menu row.
+ * INTENT: icons, never a digit; nothing about a source not yet found.
+ */
+function sourcesImage(content: Content, icons: string[], cssPerPixel: number): HTMLElement {
+  const span = document.createElement('span');
+  span.className = 'st-sources';
+  span.setAttribute('role', 'img');
+  span.setAttribute('aria-label', 'a power source found here');
+  span.dataset.sources = icons.join(' ');
+  const draw = (): boolean => {
+    const ls = icons.map((id) => look(content, id));
+    if (ls.some((l) => !l)) return false;
+    const dpr = window.devicePixelRatio || 1;
+    const k = Math.max(1, Math.round(cssPerPixel * dpr));
+    const size = 10;
+    const c = document.createElement('canvas');
+    c.width = (icons.length * (size + 2) - 2) * k;
+    c.height = size * k;
+    c.style.width = `${c.width / dpr}px`;
+    c.style.height = `${c.height / dpr}px`;
+    const g = c.getContext('2d');
+    if (!g) return false;
+    g.imageSmoothingEnabled = false;
+    ls.forEach((l, i) => g.drawImage(l!.img, l!.x, l!.y, l!.w, l!.h, i * (size + 2) * k, 0, size * k, size * k));
+    span.replaceChildren(c);
+    return true;
+  };
+  if (!draw()) {
+    const t = setInterval(() => draw() && clearInterval(t), 100);
+    setTimeout(() => clearInterval(t), 20000);
+  }
+  return span;
+}
+
 // ---- The title picture ---------------------------------------------------
 
 /** DRAFT: the owner's title screen (content/looks/title.json); the whole picture, and the wordmark's box inside it. */
@@ -319,6 +356,7 @@ const CSS = `
 #game-menu .st-levels { display: flex; flex-direction: column; gap: 6px; }
 #game-menu .st-level { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding: 4px 10px; min-height: 32px; border-radius: 6px; background: rgba(34, 31, 68, .85); }
 #game-menu .st-level .st-pieces { flex-basis: 100%; display: flex; padding-bottom: 2px; }
+#game-menu .st-level .st-sources { display: inline-flex; align-items: center; margin-left: 4px; }
 #game-menu .st-pie { display: inline-flex; width: 24px; height: 24px; border-radius: 50%; }
 #game-menu .st-col { display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 330px; align-items: stretch; }
 #game-menu .st-code { align-self: center; margin: 4px 0 8px; }
@@ -536,7 +574,7 @@ export interface MenuOptions {
   /** Leaving on purpose, before the page goes to the start screen. */
   leave(): void;
   /** Step 14 slice A (additive): the levels discovered in this world, read each time the panel opens. */
-  levels?(): { id: string; name: string; quarters: number; pieces?: boolean[] }[];
+  levels?(): { id: string; name: string; quarters: number; pieces?: boolean[]; sources?: string[] }[];
 }
 
 /**
@@ -607,7 +645,7 @@ export function setUpMenu(opts: MenuOptions): void {
     const found = opts.levels?.() ?? [];
     places.replaceChildren(
       ...(found.length ? [el('div', { class: 'st-label' }, words(content, 'Places found', 2))] : []),
-      ...found.map((l) => el('div', { class: 'st-level', 'data-level': l.id, 'data-quarters': String(l.quarters) }, words(content, l.name, 2), pieImage(content, l.quarters, 2), ...(l.pieces ? [piecesImage(content, l.pieces, 2)] : []))),
+      ...found.map((l) => el('div', { class: 'st-level', 'data-level': l.id, 'data-quarters': String(l.quarters) }, words(content, l.name, 2), pieImage(content, l.quarters, 2), ...(l.pieces ? [piecesImage(content, l.pieces, 2)] : []), ...(l.sources?.length ? [sourcesImage(content, l.sources, 2)] : []))),
     );
   };
   col.append(places, say, back, close);

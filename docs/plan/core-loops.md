@@ -327,14 +327,24 @@ an effect, and the overlay is applied at all four read sites. The pedestal's
 tile is agreed with the Step 16 lead and every `step16-*` scenario stays
 green. The first carrier is decided by measuring against Step 18's villain.
 
-**Step:** 9. **Signal:** scenarios (the grappler with the orb lifts the
-throne, control without; a struck body breaks a cracked wall, control without;
-a hard hit knocks it loose and it is grabbed back, control a light hit;
-left alone it fades and the source is lit again); a real-server check with two
-connections that the holder's own world has the power after the take and not
-after a hard hit; phone e2e: a non-flyer page that took wings rises on a
-second Jump press, control the same press without. **Status: briefed,
-`handoff-prompts/loop-powers.md`.**
+**Step:** 9. **Status: landed 2026-11-23/24** (64bd1fe, b2216dc, 44a5153,
+1aeea46, and push 5; `docs/mechanisms/powers.md`). What landed against
+this plan:
+- **The first carrier is the street's villain** (measured: two grappler hits
+  from the spawn, about 5 s). The orb pops up and away from you, and nobody
+  takes it for 0.6 s, so it is seen.
+- **The orb is no body.** As one it was struck by a shopkeeper's swing,
+  which raised the alert, and a Step 4 tier scenario went red.
+- **A hard hit** is being laid flat, or a blow of 180 px/s or more. The power
+  is not lost in the cantina (`DRAFT:`).
+- **Wings** (`flight`) stand on a pedestal at quarry-depot [46, 13]. They
+  give six flaps; four is the measured least to reach the pit's ledge.
+- **The menu row** shows each found source's icon.
+- Signals: every scenario named above and its committed control are green,
+  and the two-connection check (`scripts/checks/step9-powers.ts`) covers the
+  take, the hard blow, wings flapping on the holder's own page, and the
+  pedestal over the network. The e2e fact `power-carrier-drawn` is green.
+  **Wings by touch on a phone are not proven**: script only.
 
 ## 4 · Characters to unlock
 

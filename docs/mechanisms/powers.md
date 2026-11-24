@@ -143,6 +143,18 @@ pass with it there, and none of them takes it. Drawn as
 `power-fixture-shrine` on its tile, with the power's icon floating over it in
 the glow when lit, and dimmed and empty when dark (`drawn.powers.sources`).
 
+## Where to go back (push 5; D-082)
+
+The menu's row for a level (`src/client/start.ts`, Step 14's rows) shows one
+lit mark per power source found in that level: the power's own icon,
+from `world.sources` (`foundSourceIcons` in `draw/powers.ts`, fed through
+`main.ts`'s `levels()`). Never a digit, and nothing about a source not yet
+found. The row's element carries `data-sources` (the icons) for checks. The
+two-connection check stands a page's character on the depot's pedestal (a
+page owns its own motion). The server takes it there, the page holds flight
+from it, and both pages' worlds list the source. Watched to fail with
+`world.sources` never written. Screenshot: `*-6-menu-source-found.png`.
+
 ## What a player sees (`src/client/draw/powers.ts`)
 
 One line in `render.ts`, after the bodies. A carrier's orb over its head
