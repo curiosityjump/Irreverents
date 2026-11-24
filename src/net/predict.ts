@@ -6,6 +6,7 @@ import { heldBy } from '../sim/effects.ts';
 import { systems } from '../sim/registry.ts';
 import type { Entity, Input, SimEvent, StepContext, World } from '../sim/types.ts';
 import { throwCarried, ticksOf } from '../sim/body-state.ts';
+import { numbersOf } from '../sim/powers.ts';
 import { strikeTick } from '../sim/verbs/attack.ts';
 import { clone } from './protocol.ts';
 
@@ -113,7 +114,8 @@ export function createPredictor(content: Content, myId: string) {
       const a = me.c.attack;
       if (!a || a.tick !== tick) return;
       const kind0 = content.characters[me.kind];
-      const t0 = kind0 ? (content.tuning.characters[kind0.tuning] ?? {}) : {};
+      // Step 23: through numbersOf, as the verb reads them (a held power's or weapon's numbers; src/sim/powers.ts).
+      const t0 = kind0 ? numbersOf(content, me) : {};
       if ((a.phase ?? 'ready') === 'ready') throwing = false;
       // The verb took a press on this tick (it set the cooldown, attack.ts). While a drawn body is held by
       // this player's character, the server throws it now (attack.ts: "a throw stays immediate").
@@ -149,7 +151,7 @@ export function createPredictor(content: Content, myId: string) {
       if (a.swung !== swing.swung) swing = { swung: a.swung, struck: [] };
       const kind = content.characters[me.kind];
       if (!kind?.verbs.includes('attack')) return;
-      const t = content.tuning.characters[kind.tuning] ?? {};
+      const t = numbersOf(content, me);
       const shown = shownNow().filter((e) => e.room === me.room && e.id !== me.id);
       // A press while carrying is a throw on the server, not a swing; this page never learns it carries
       // (docs/mechanisms/network.md, "Known limits"), so it looks for a body held by its own character, as drawing does.

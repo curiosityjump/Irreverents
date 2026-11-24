@@ -1,0 +1,78 @@
+{
+  "//": "DRAFT (Step 23): the control of step23-pick-up-and-swing: the same walk and swing without the Use. The sword still lies on its tile, the hero holds none, and the same swing sends the dummy at 350 px/s, not 490.",
+  "id": "step23-pick-up-and-swing-control",
+  "gate": null,
+  "proves": "without a Use at the street's sword the hero holds nothing, the sword stays on its tile, and the same swing sends the dummy off at its bare-handed speed",
+  "room": "castle-street",
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "entities": [
+    {
+      "id": "dummy-1",
+      "character": "dummy",
+      "tile": [
+        16,
+        10
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 95,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 110,
+      "to": 170,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 180,
+      "to": 182,
+      "hold": [
+        "attack"
+      ]
+    }
+  ],
+  "ticks": 300,
+  "expect": [
+    {
+      "fact": "weapon",
+      "player": "a",
+      "at": 102,
+      "is": null
+    },
+    {
+      "fact": "weapon",
+      "at": 300,
+      "loose": [
+        1,
+        1
+      ],
+      "room": "castle-street",
+      "weapon": "sword",
+      "x": [
+        160,
+        176
+      ]
+    },
+    {
+      "fact": "velocity",
+      "entity": "dummy-1",
+      "at": 197,
+      "vx": [
+        300,
+        400
+      ]
+    }
+  ]
+}

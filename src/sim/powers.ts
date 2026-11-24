@@ -7,6 +7,7 @@
 import type { Content } from '../content/types.ts';
 import type { Power } from '../content/kinds/powers.ts';
 import type { Entity } from './types.ts';
+import { weaponOver } from './weapons.ts';
 
 declare module './types.ts' {
   interface Components {
@@ -39,11 +40,12 @@ export function numbersOf(content: Content, e: Entity): Record<string, number> {
   const kind = content.characters[e.kind];
   const set = (kind && content.tuning.characters[kind.tuning]) || NONE;
   const p = powerOf(content, e);
-  if (!p) return set;
+  // Step 23: a held weapon is laid over after the power (src/sim/weapons.ts); with none, weaponOver returns what it is given.
+  if (!p) return weaponOver(content, e, set);
   const out = { ...set };
   for (const [k, v] of Object.entries(p.times)) if (out[k] !== undefined) out[k] *= v;
   for (const [k, v] of Object.entries(p.atLeast)) out[k] = Math.max(out[k] ?? v, v);
-  return out;
+  return weaponOver(content, e, out);
 }
 
 /** The verbs a body may do: its character kind's, plus any its power lends. With no power it is the kind's own list. */

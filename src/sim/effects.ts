@@ -26,7 +26,9 @@ export type Effect =
   /** Step 11: becomes character `to`, standing at `x`,`y` (top-left of the new box), still (a cantina swap; docs/mechanisms/cantina.md). */
   | { kind: 'become'; to: string; x: number; y: number }
   /** Step 9: now holds power `power` (content/powers/), or none (null); `src`, the source it was taken from (docs/mechanisms/powers.md). */
-  | { kind: 'power'; power: string | null; src?: string };
+  | { kind: 'power'; power: string | null; src?: string }
+  /** Step 23: now holds weapon `weapon` (content/weapons/), or none (null); `src`, the source it came off; `uses` left, when it wears out (docs/mechanisms/weapons.md). */
+  | { kind: 'weapon'; weapon: string | null; src?: string; uses?: number };
 
 declare module './types.ts' {
   interface Components {
@@ -74,6 +76,9 @@ export function applyEffect(e: Entity, effect: Effect): void {
   } else if (effect.kind === 'power') {
     if (effect.power === null) delete e.c.power;
     else e.c.power = { id: effect.power, ...(effect.src ? { src: effect.src } : {}) };
+  } else if (effect.kind === 'weapon') {
+    if (effect.weapon === null) delete e.c.weapon;
+    else e.c.weapon = { id: effect.weapon, ...(effect.src ? { src: effect.src } : {}), ...(effect.uses !== undefined ? { uses: effect.uses } : {}) };
   }
 }
 

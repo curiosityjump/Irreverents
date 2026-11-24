@@ -5,6 +5,7 @@
     "thing": { "take": "Take", "buy": "Buy", "break": "Break" },
     "bell": { "ring": "Ring" },
     "free": { "free": "Free", "swap": "Swap in" },
-    "get-in": { "get-in": "Get in" }
+    "get-in": { "get-in": "Get in" },
+    "weapon": { "pick-up": "Pick up", "swap": "Swap" }
   }
 }

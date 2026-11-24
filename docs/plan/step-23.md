@@ -232,8 +232,6 @@ outpost, machine or stage slices beyond those lines.
 
 - `handoff-prompts/weapons-pick-up-and-swing.md`, five pushes, one builder (drafted for the orchestrator 2026-11-24 01:35 UTC against 8413d16; nothing in it was run).
 
-## Builder notes
-
 ## The owner, 2026-11-24 ~01:50 UTC, first-hand to the orchestrator: no inventory
 
 > No inventory. Only one weapon at a time. Similar to kirby - cant have multiple powers at once
@@ -254,3 +252,13 @@ Decided from it (this overrides anything above that says otherwise):
   different things on different buttons). The other reading of his words is
   one thing in all, weapon or power: keep it one data switch and say so in
   the notes; the orchestrator has asked him.
+
+## Builder notes
+
+**Push 1 (the street's sword: pick up, swing; `session_017WiGzF7puSFWh2BBeii8WZ`, 2026-11-24).**
+
+- **A page's world before its first snapshot is not `isPageWorld`.** `world.taken` is written only with a snapshot (`src/net/client.ts:208`), so a page's own world runs some ticks with no `taken`. A first try that skipped only `isPageWorld` stood a sword in the page's own world there and turned `step11-cantina`'s "page's own world holds only its own character" red. The weapon systems instead ask `weaponWorld` (`src/sim/weapons.ts`): no `taken`, and some body nobody plays (the server's and every scenario with a body or placements). Doubt logged, not patched: `isPageWorld`'s other users (machines) may have the same few-tick gap; `world.taken = []` at the page world's creation would close it for all (`src/net/client.ts` is not this step's).
+- **Measured:** the sword's swing launches a 40-weight dummy at 490 px/s from a grappler (350 bare-handed); the predicted-hit facts (`hit-*`, `scripts/e2e/hit-lands.ts`) stayed green unloosened after `predict.ts` read through `numbersOf` (star after 118 ms, limit 150). e2e run at push 1: 99 ok, `h1` (reconnect) failed, one of the known flaky facts.
+- **Watched to fail:** the `numbersOf` overlay removed: `step23-pick-up-and-swing` (dummy at 346 px/s) and three `-any-hero-holds-it-*` (the bare reach misses the dummy) go red; the control stays green. e2e `weapon-word` and `weapon-held` fail with the sword's `sources` emptied.
+- **What the looks lack** (props builder's, not cut here): no `pickup` and no `icon` look for any weapon (the glow is `fx-pickup-glow` under the `ground` look). The sword lying at column 10 is drawn beside the shopkeeper (column 11), so a hero standing at it overlaps him on screen (`step-23-shots/held-*.png`).
+- `src/sim/loose-fall.ts` holds the orb's fall, lifted unchanged out of `power-take.ts` in push 1 (not push 2), because a swapped weapon is laid at the hero's feet and must fall like an orb; every `step9-*` stayed green.

@@ -1,0 +1,17 @@
+{
+  "//": "DRAFT (Step 23): where each character's hand is, pixels from its box's top-left, facing right, read by eye off the cut sprites; a weapon (content/weapons/) is drawn there by its grip. A kind with no row holds at `default`, a share of its box [across, down].",
+  "default": [0.8, 0.55],
+  "kinds": {
+    "grappler": [15, 17],
+    "infiltrator": [8, 7],
+    "flyer": [12, 12],
+    "brawler": [15, 16],
+    "skirmisher": [10, 10],
+    "guard": [12, 16],
+    "villain": [12, 16],
+    "outpost-fighter": [12, 16],
+    "shopkeeper": [10, 14],
+    "heavy-fighter": [17, 16],
+    "brute": [22, 18]
+  }
+}

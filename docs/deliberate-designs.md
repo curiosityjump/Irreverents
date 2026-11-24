@@ -86,6 +86,11 @@ words.
 
 **Beaten in the Iron Quarry stage, the whole quarry is put back as it began: its people at their posts, the horn whole, broken things mended.**
 → Intended, and only there. The owner (2026-11-24 ~00:30 UTC) asked for "one level ... a real way to lose/die, which pushes you back to the entrance to start over": his own exception, for a stage he asked for by name, to D-077 (a room's state is never reset when it empties) and D-019. Everywhere outside a stage (`content/stages/`) nothing is put back; inside one, only being beaten starts it over, and only once no friend is still inside. What you found for good (the level's pieces, a power source, a recruit) stays found.
+**A weapon lying on the ground is not a body: a swing passes through it, Grab will not lift it, a flying body does not hit it, and a person does not notice it struck.**
+→ Intended (Step 23, 2026-11-24), for the same reasons as a power's orb (above in `src/sim/powers.ts`, `ORB_KIND`): as a body, a power's orb was struck by a shopkeeper's swing, raised the street's alert and wore down the villain it hit. A loose weapon is the kind `~weapon` and moves by the orb's own small fall (`src/sim/loose-fall.ts`). Use picks it up. `INTENT:` at `WEAPON_KIND` in `src/sim/weapons.ts`; `docs/mechanisms/weapons.md`.
+
+**Weapons stand, are picked up and fall only on the server (and in a scenario), never in the page's own world.**
+→ Intended (Step 23, 2026-11-24). A page's own world holds only its own character (`src/net/client.ts`); the hero's page learns the weapon in hand by the `weapon` effect and everyone else's by the snapshot. A page whose world stood its own sword would hold a second one nobody else sees. `INTENT:` at `weaponWorld` users in `src/sim/systems/weapon-*.ts`.
 
 ---
 

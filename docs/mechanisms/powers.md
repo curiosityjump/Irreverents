@@ -37,7 +37,10 @@ A held power is `entity.c.power = { id, src? }`. `numbersOf(content, e)` and
 `verbsOf(content, e)` (`src/sim/powers.ts`) give a body's numbers and verbs
 with it laid over them: first `times`, then `atLeast`. With no power they
 return the kind's own tuning set and verb list, the same objects as before
-Step 9, so a world with no power in it runs exactly as it did. **Every place
+Step 9, so a world with no power in it runs exactly as it did. Step 23 lays a
+held weapon's `hit` over after the power, in the same function
+(`weaponOver`, `src/sim/weapons.ts`; `docs/mechanisms/weapons.md`), so
+every read site below gets it too. **Every place
 a character's numbers or verbs are read for the simulation asks this file**:
 
 - `src/sim/systems/verbs.ts`: the numbers handed to every verb, and which
@@ -74,8 +77,10 @@ rooms (`scripts/lib/room-controls.ts`).
   first version) a shopkeeper's swing struck it, the street's alert rose for
   it, and a struck orb wore down the villain it flew into, which turned a
   Step 4 town-tier scenario red. It falls, bounces and slides by its own
-  small physics against the room's tiles (`moveOrb` in
-  `systems/power-take.ts`, order 545; `powerOrbBounce`, `powerOrbFriction`).
+  small physics against the room's tiles (`moveLoose` in
+  `src/sim/loose-fall.ts`, called by `systems/power-take.ts`, order 545; lifted
+  out of it unchanged by Step 23, whose loose weapons fall the same way;
+  `powerOrbBounce`, `powerOrbFriction`).
   It is 10 px square (`ORB_SIZE`).
 - **An orb** fades after its power's `fade`
   (`power-faded`), and is taken by the first played hero who touches it

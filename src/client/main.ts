@@ -28,6 +28,7 @@ import { drawnHall, watchHallEvents } from './draw/hall.ts';
 import { drawnRecruits, noteRecruits } from './draw/recruits.ts';
 import { drawnParts, setHeardRooms } from './draw/room-parts.ts';
 import { drawnPowers, foundSourceIcons } from './draw/powers.ts';
+import { drawnWeapons } from './draw/weapons.ts';
 import { levelProgress } from '../sim/levels.ts';
 import { setUpMenu, showGone, showStart } from './start.ts';
 import type { StartRecord } from './start.ts';
@@ -145,6 +146,8 @@ const debug = {
     hud: null as ReturnType<typeof drawnHud>,
     /** Step 9: the carriers drawn with their orb, the loose orbs and the glowing holders this frame (src/client/draw/powers.ts). */
     powers: { carriers: [], orbs: [], holders: [], sources: [] } as ReturnType<typeof drawnPowers>,
+    /** Step 23: the loose weapons (and which glows) and the weapons in hand this frame (src/client/draw/weapons.ts). */
+    weapons: { loose: [], held: [] } as ReturnType<typeof drawnWeapons>,
     banner: null as ReturnType<typeof drawnBanner>,
     /** Step 19: each person's sight band this frame drew (facing, box, lit cells) and the unseen marks up (src/client/draw/sight.ts). */
     sight: null as ReturnType<typeof drawnSight> | null,
@@ -326,6 +329,7 @@ function play(worldName: string): void {
     d.completion = drawnCompletion();
     d.hud = drawnHud();
     d.powers = drawnPowers();
+    d.weapons = drawnWeapons();
     d.banner = drawnBanner();
     d.sight = drawnSight();
     d.heist = drawnHeist();

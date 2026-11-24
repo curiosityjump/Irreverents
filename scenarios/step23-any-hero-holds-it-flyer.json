@@ -1,0 +1,85 @@
+{
+  "//": "DRAFT (Step 23): any hero holds the same sword (the owner's P12 contract: one library, any hand). The flyer walks east from the street's first spawn to the sword lying at column 10, presses Use, walks on to a dummy and swings it: the swing lands and the sword is still in hand. One file per roster hero; the timings are measured walks.",
+  "id": "step23-any-hero-holds-it-flyer",
+  "gate": null,
+  "proves": "the flyer picks up the street's sword with Use and swings it at a dummy",
+  "room": "castle-street",
+  "players": [
+    {
+      "id": "a",
+      "character": "flyer",
+      "spawn": 0
+    }
+  ],
+  "entities": [
+    {
+      "id": "dummy-1",
+      "character": "dummy",
+      "tile": [
+        20,
+        10
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 70,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 110,
+      "to": 112,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 120,
+      "to": 211,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 231,
+      "to": 233,
+      "hold": [
+        "attack"
+      ]
+    }
+  ],
+  "ticks": 291,
+  "expect": [
+    {
+      "fact": "weapon",
+      "player": "a",
+      "at": 112,
+      "is": "sword"
+    },
+    {
+      "fact": "event",
+      "event": "hit",
+      "player": "a",
+      "where": {
+        "target": "dummy-1"
+      },
+      "between": [
+        231,
+        261
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "weapon",
+      "player": "a",
+      "at": 291,
+      "is": "sword"
+    }
+  ]
+}

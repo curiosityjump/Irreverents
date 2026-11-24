@@ -394,6 +394,8 @@ async function main(): Promise<void> {
       await (await import('./e2e/plates.ts')).plateFacts({ browser, devices, base, out, fact, errors, shots: path.join(out, 'plates') });
       // Step 9's facts (power-*): the villain drawn carrying his power, seen by a phone walking into the street by touch (docs/mechanisms/powers.md).
       await (await import('./e2e/powers.ts')).powerFacts({ browser, devices, base, out, fact, errors, shots: path.join(out, 'powers') });
+      // Step 23's facts (weapon-*): the street's sword, Use says Pick up and it glows; a tap and it is drawn in hand (docs/mechanisms/weapons.md).
+      await (await import('./e2e/weapons.ts')).weaponFacts({ browser, devices, base, out, fact, errors, shots: path.join(root, 'docs/plan/step-23-shots') });
       // Step 16's facts (quarry-*): into the quarry by touch, and across its road onto the ridge (docs/plan/step-16.md, signal 7).
       await (await import('./e2e/quarry.ts')).quarryFacts({ browser, devices, base, out, fact, errors });
       // Step 11's facts (cantina-*): into the cantina by touch, the party row, the swap and the brawl's counter on two phones (docs/mechanisms/cantina.md, signal 8).

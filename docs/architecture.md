@@ -433,6 +433,7 @@ scenario and is lost between two devices.**
 | `flatten` | `ticks`, `by` | knocks it out: sets `entity.c.flattened`, so it cannot act until it recovers | toughness worn to nothing (Step 2) |
 | `become` | `to` (a character kind), `x`, `y` (top-left of the new box) | the body becomes that character there, standing still (the field is `to` because `kind` names the effect) | a cantina swap of your own party member (Step 11) |
 | `power` | `power` (a power id, or `null`), optional `src` (the source it came from) | sets or clears `entity.c.power`, the power the body holds; its numbers and lent verbs apply from the next tick (`src/sim/powers.ts`) | taking a power, a hard hit knocking it loose (Step 9, `docs/mechanisms/powers.md`) |
+| `weapon` | `weapon` (a weapon id, or `null`), optional `src` (the source it came off), optional `uses` | sets or clears `entity.c.weapon`, the weapon in the body's hand; its `hit` numbers are laid over the holder's from the next tick (`src/sim/weapons.ts`, through `numbersOf`) | picking one up with Use, swapping (Step 23, `docs/mechanisms/weapons.md`) |
 
 - The event: `effect: { entity, player, effect }`. `heldBy(entity)` reads
   who holds a body, or null.

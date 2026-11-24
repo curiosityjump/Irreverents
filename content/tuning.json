@@ -67,7 +67,9 @@
     "powerOrbFriction": 400,
     "powerRetakeTime": 0.6,
     "powerHardHitSpeed": 180,
-    "powerLostInCantina": 0
+    "powerLostInCantina": 0,
+    "//": "DRAFT (Step 23, weapons; decisions-log \"Step 23\"): weaponPickupReach, how far past its box a hero still touches a loose weapon to pick it up with Use.",
+    "weaponPickupReach": 6
   },
   "characters": {
     "shopkeeper": {

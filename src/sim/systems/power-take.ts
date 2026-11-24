@@ -1,16 +1,14 @@
-import { TILE } from '../../content/kinds/rooms.ts';
 import { overlaps } from '../body-state.ts';
 import { emitEffect, heldBy } from '../effects.ts';
 import { ORB_SIZE, isOrb } from '../powers.ts';
-import { tileAt } from '../room-state.ts';
-import { DT } from '../types.ts';
+import { moveLoose } from '../loose-fall.ts';
 import type { Entity, StepContext, System } from '../types.ts';
 import { removeEntity } from '../world.ts';
 
 /**
  * Orbs (Step 9; docs/mechanisms/powers.md): a power lying loose (no body:
  * src/sim/powers.ts, ORB_KIND) falls, bounces and slides to rest by the
- * small physics below, fades after its power's `fade`, and is taken by the first played hero
+ * small physics of src/sim/loose-fall.ts, fades after its power's `fade`, and is taken by the first played hero
  * who touches it (or picks it up) holding no power. The take is the effect
  * `{ kind: 'power' }`, so it reaches the hero's own page, and the event
  * `power-taken`.
@@ -36,7 +34,7 @@ const system: System = {
     for (const orb of world.entities) {
       const o = orb.c.orb;
       if (!o) continue;
-      moveOrb(ctx, orb);
+      moveLoose(ctx, orb, ORB_SIZE, ORB_SIZE);
       if (o.left > 0 && --o.left === 0) {
         gone.push(orb);
         ctx.emit('power-faded', { orb: orb.id, power: o.power, room: orb.room });
@@ -51,62 +49,6 @@ const system: System = {
     for (const orb of gone) removeEntity(world, orb.id);
   },
 };
-
-/**
- * An orb's own fall, bounce and slide against the room's tiles (solid, and
- * one-way from above), like physics.ts for a box of ORB_SIZE. DRAFT: the
- * bounce share and the slide are powerOrbBounce and powerOrbFriction.
- */
-function moveOrb(ctx: StepContext, orb: Entity): void {
-  const room = ctx.content.rooms[orb.room];
-  if (!room) return;
-  const t = ctx.content.tuning.world;
-  const T = room.tile;
-  const S = ORB_SIZE;
-  const EPS = 1e-6;
-  const solid = (tx: number, ty: number): boolean => tileAt(ctx.world, room, tx, ty) === TILE.solid;
-  orb.vy = Math.min(orb.vy + (t.gravity ?? 900) * DT, t.maxFallSpeed ?? 360);
-  if (orb.onGround) {
-    const slow = (t.powerOrbFriction ?? 400) * DT;
-    orb.vx = Math.abs(orb.vx) <= slow ? 0 : orb.vx - Math.sign(orb.vx) * slow;
-  }
-  orb.x += orb.vx * DT;
-  if (orb.vx !== 0) {
-    const tx = orb.vx > 0 ? Math.floor((orb.x + S - EPS) / T) : Math.floor(orb.x / T);
-    for (let ty = Math.floor(orb.y / T); ty <= Math.floor((orb.y + S - EPS) / T); ty++) {
-      if (!solid(tx, ty)) continue;
-      orb.x = orb.vx > 0 ? tx * T - S : (tx + 1) * T;
-      orb.vx = -orb.vx * 0.5;
-      break;
-    }
-  }
-  const feetBefore = orb.y + S;
-  const falling = orb.vy;
-  orb.y += orb.vy * DT;
-  orb.onGround = false;
-  const left = Math.floor(orb.x / T);
-  const right = Math.floor((orb.x + S - EPS) / T);
-  if (orb.vy > 0) {
-    const ty = Math.floor((orb.y + S - EPS) / T);
-    for (let tx = left; tx <= right; tx++) {
-      const cell = tileAt(ctx.world, room, tx, ty);
-      if (cell !== TILE.solid && !(cell === TILE.oneway && feetBefore <= ty * T + EPS)) continue;
-      orb.y = ty * T - S;
-      // A hard landing bounces up with a share of its speed; a soft one stops.
-      orb.vy = falling > 60 ? -falling * (t.powerOrbBounce ?? 0.5) : 0;
-      orb.onGround = orb.vy === 0;
-      break;
-    }
-  } else if (orb.vy < 0) {
-    const ty = Math.floor(orb.y / T);
-    for (let tx = left; tx <= right; tx++) {
-      if (!solid(tx, ty)) continue;
-      orb.y = (ty + 1) * T;
-      orb.vy = 0;
-      break;
-    }
-  }
-}
 
 /** Who takes this orb now: the first played hero touching it who holds no power and can act. */
 function takerOf(entities: Entity[], orb: Entity, tick: number, content: StepContext['content']): Entity | null {

@@ -102,7 +102,9 @@ player" (`src/sim/effects.ts`: `emitEffect`, kinds `push`, `hold`,
 where it stands, a cantina swap; the page takes the server's copy, kind
 included, like any non-push effect; and Step 9's `power`: the power the
 character holds, which travels this way because the page never gets the
-server's `c` for its own character, `docs/mechanisms/powers.md`). How the layer delivers one:
+server's `c` for its own character, `docs/mechanisms/powers.md`; and Step 23's
+`weapon`, the weapon in hand, the same way for the same reason,
+`docs/mechanisms/weapons.md`). How the layer delivers one:
 
 - A character a page owns is a **puppet** on the server: its state there
   is the page's latest report, put back after every tick. The server
@@ -182,6 +184,10 @@ of 8 ticks held for 9).
   adding to the trip; one look-ahead alone still missed it. Each swing hits each
   body once, as in the verb. A press while a drawn body is held by the hero is a throw on the
   server, so nothing is predicted then.
+- **Its numbers** are the hero's through `numbersOf` (`src/sim/powers.ts`), as
+  the verb reads them (Step 23): a held weapon's reach and strength, and a
+  held power's, are predicted too. Before Step 23 it read the plain tuning
+  set, so a held power's hit was not predicted.
 - **The loan.** A struck body is lent to the page: a copy carrying the
   verb's own stamps on the page's clock (`c.lastHit`, `c.beat`,
   `c.impact`; `c.stunned`, `c.flying`). Every local tick it is stepped by
