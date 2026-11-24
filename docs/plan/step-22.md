@@ -215,3 +215,14 @@ Camp, the castle street, the undercroft (builders are in each tonight).
 - **No banner for `thrown-out` on the page yet:** Step 21's
   (`session_017WiGzJWYyVWtYnjFXHko1S`, asked by message). The throw itself
   is seen: the hero lands at the road's doorway.
+
+### Lead review, push 1 (973968f), re-run at 082380b
+
+`npm run build` ok; `npm run check` ok, with `step22-beaten-to-entrance` passing.
+Its control, run by me (`content/defeat/quarry.json` set to `"on": false`),
+fails with 6 problems. `npm run gates` is 6 of 6, and `npm run check:deployed`
+says live is running it. I didn't run e2e (the builder's run had every quarry
+fact ok; h1/h2 failed on reconnect, a flake it already knew of). Still open:
+the depot's waves still never reach a hero, now owed in the next depot push,
+together with the wings' move to [38, 18]. And no banner yet for being thrown
+out; that is Step 21's.
