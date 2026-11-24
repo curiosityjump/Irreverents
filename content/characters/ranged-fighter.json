@@ -1,0 +1,9 @@
+{
+  "//": "DRAFT (Step 24 slice 1): the body of a bad guy who throws things from where he stands (docs/mechanisms/ranged.md). Light and fragile (D-021: heroes outpower him): weight 30, toughness 50, so two of the grappler's punches floor him. It lists `attack` because a thrown thing needs hands (canHold, src/sim/weapons.ts); up close it swings weakly. Who the person is, and what he throws, lives in content/npcs/ranged-fighter.json.",
+  "id": "ranged-fighter",
+  "name": "Slinger",
+  "box": { "w": 14, "h": 26 },
+  "color": "#6a3f7a",
+  "verbs": ["move", "attack", "body"],
+  "tuning": "ranged-fighter"
+}

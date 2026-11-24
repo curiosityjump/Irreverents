@@ -1,0 +1,64 @@
+{
+  "id": "step24-throws-from-range",
+  "gate": null,
+  "proves": "A thrower on his ledge aims at a hero standing in his band seven tiles off, throws, and his shot strikes the hero, who flies away from him",
+  "//": "DRAFT (Step 24 slice 1): the grappler stands at column 12, seven tiles east of the thrower on his ledge (test-ranged), who faces east. He aims at once (tick 0), throws at tick 36 (aim 0.6 s) and the shot strikes the grappler at tick 56; 12000 / 60 = 200 px/s east, away from him. Control (-control): the same grappler at column 2, behind him: never aimed at, never struck.",
+  "room": "test-ranged",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 2
+    }
+  ],
+  "inputs": [],
+  "ticks": 200,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "ranged-aim",
+      "where": {
+        "entity": "tr-thrower",
+        "weapon": "thrown-shot",
+        "dir": 1,
+        "at": "p:a"
+      },
+      "between": [
+        0,
+        0
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "weapon-struck",
+      "where": {
+        "loose": "weapon:36:0",
+        "weapon": "thrown-shot",
+        "by": "tr-thrower",
+        "target": "p:a"
+      },
+      "between": [
+        37,
+        80
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "velocity",
+      "player": "a",
+      "at": 64,
+      "vx": [
+        150,
+        250
+      ]
+    }
+  ]
+}

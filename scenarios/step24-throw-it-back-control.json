@@ -1,0 +1,90 @@
+{
+  "id": "step24-throw-it-back-control",
+  "gate": null,
+  "proves": "Control: the picked-up shot thrown the other way never strikes the thrower",
+  "//": "DRAFT (Step 24 slice 1): step24-throw-it-back with the stick held east as Hit throws.",
+  "room": "test-ranged-floor",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 2
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 95,
+      "to": 150,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 155,
+      "to": 157,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 165,
+      "to": 167,
+      "x": 1,
+      "hold": [
+        "attack"
+      ]
+    }
+  ],
+  "ticks": 220,
+  "expect": [
+    {
+      "fact": "event",
+      "event": "weapon-taken",
+      "between": [
+        155,
+        155
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "player": "a"
+    },
+    {
+      "fact": "event",
+      "event": "weapon-dropped",
+      "between": [
+        165,
+        165
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "player": "a",
+      "where": {
+        "how": "thrown"
+      }
+    },
+    {
+      "fact": "event-where",
+      "event": "weapon-struck",
+      "where": {
+        "loose": "weapon:165:0",
+        "weapon": "thrown-shot",
+        "by": "p:a",
+        "target": "trf-thrower"
+      },
+      "between": [
+        166,
+        220
+      ],
+      "count": [
+        0,
+        0
+      ]
+    }
+  ]
+}

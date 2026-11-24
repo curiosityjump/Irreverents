@@ -1,0 +1,22 @@
+{
+  "//": "DRAFT (Step 24 slice 1): the one-file proof's room (scenarios/step24-one-file.json): a second kind of thrower, written as one file (content/npcs/bomb-thrower.json), on a camp fighter's body on the floor at column 6 facing east. Spawns (row 6): 0 at column 2, behind him; 1 at column 13. No player reaches it.",
+  "id": "test-ranged-bomb",
+  "name": "Test: ranged, bomb",
+  "tile": 16,
+  "legend": {
+    "#": "solid",
+    ".": "empty",
+    "=": "oneway",
+    "1": "spawn"
+  },
+  "rows": [
+    "################################",
+    "#..............................#",
+    "#..............................#",
+    "#..............................#",
+    "#..............................#",
+    "#..............................#",
+    "#.1..........1.................#",
+    "################################"
+  ]
+}

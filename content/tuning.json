@@ -390,6 +390,23 @@
       "//": "DRAFT (Step 20): the ram wagon's body. Weight 200: a ram at 340 px/s sends a camp fighter (40) off at the launch cap and a heavy (120) at about 380; nobody on the roster can lift it (the grappler lifts 150); a body thrown into it barely moves it. Toughness 0: it is never knocked out, it wears to a wreck by its own count of crashes (content/machines/ram-wagon.json).",
       "weight": 200,
       "toughness": 0
+    },
+    "ranged-fighter": {
+      "//": "DRAFT (Step 24 slice 1): the thrower. Walks like the camp lookout (he never walks after a hero: systems/ranged-throw.ts), a weak swing up close (6000: a 40-weight body off at 150 px/s), the camp fighter's timings; weight 30 and toughness 50, light and fragile (D-021): two of the grappler's punches floor him.",
+      "runSpeed": 56,
+      "runAccel": 500,
+      "runDecel": 700,
+      "airAccel": 200,
+      "airDecel": 100,
+      "attackStrength": 6000,
+      "attackReach": 10,
+      "attackTime": 0.8,
+      "attackWear": 12,
+      "attackWindup": 0.25,
+      "attackStrikeTime": 0.067,
+      "attackRecovery": 0.2,
+      "weight": 30,
+      "toughness": 50
     }
   }
 }

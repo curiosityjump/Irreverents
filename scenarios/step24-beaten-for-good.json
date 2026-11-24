@@ -1,0 +1,96 @@
+{
+  "id": "step24-beaten-for-good",
+  "gate": null,
+  "proves": "Knocked out twice by the players, the thrower is defeated for good",
+  "//": "DRAFT (Step 24 slice 1): the grappler comes up behind the floor thrower and punches him (toughness 50: one punch and the landing floor him, knock 1); he gets up far east; the grappler walks there and punches him again from behind (knock 2): defeated (how worn: the room is 80 tiles wide so neither flight slams a wall), and he goes in a poof. Control (-control): only the first punch: no defeat.",
+  "room": "test-ranged-floor",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 34,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 40,
+      "to": 42,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 100,
+      "to": 482,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 490,
+      "to": 492,
+      "hold": [
+        "attack"
+      ]
+    }
+  ],
+  "ticks": 700,
+  "expect": [
+    {
+      "fact": "event",
+      "event": "flattened",
+      "between": [
+        80,
+        100
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "where": {
+        "target": "trf-thrower"
+      }
+    },
+    {
+      "fact": "event-where",
+      "event": "defeated",
+      "where": {
+        "target": "trf-thrower",
+        "by": "p:a",
+        "player": "a",
+        "how": "worn"
+      },
+      "between": [
+        500,
+        600
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "defeated-gone",
+      "between": [
+        600,
+        700
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "where": {
+        "target": "trf-thrower"
+      }
+    }
+  ]
+}

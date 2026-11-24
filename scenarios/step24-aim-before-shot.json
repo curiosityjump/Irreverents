@@ -1,0 +1,76 @@
+{
+  "id": "step24-aim-before-shot",
+  "gate": null,
+  "proves": "The thrower's shot leaves exactly his aim time after he starts to aim, never before",
+  "//": "DRAFT (Step 24 slice 1): aim 0.6 s is 36 ticks: aimed at tick 0, nothing thrown on ticks 0-35, thrown on tick 36, and held in hand the whole aim (the telegraph's INTENT). Control (-control): a hero he sees beyond his range (column 18: 192 px, his sight 208, his range 176) is never aimed at or thrown at.",
+  "room": "test-ranged",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 2
+    }
+  ],
+  "inputs": [],
+  "ticks": 60,
+  "expect": [
+    {
+      "fact": "event",
+      "event": "ranged-aim",
+      "between": [
+        0,
+        0
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "entity": "tr-thrower"
+    },
+    {
+      "fact": "event-where",
+      "event": "weapon-dropped",
+      "where": {
+        "entity": "tr-thrower",
+        "player": null,
+        "weapon": "thrown-shot",
+        "loose": "weapon:36:0",
+        "how": "thrown"
+      },
+      "between": [
+        36,
+        36
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "weapon-dropped",
+      "between": [
+        0,
+        35
+      ],
+      "count": [
+        0,
+        0
+      ],
+      "entity": "tr-thrower"
+    },
+    {
+      "fact": "weapon",
+      "entity": "tr-thrower",
+      "at": 36,
+      "is": "thrown-shot"
+    },
+    {
+      "fact": "weapon",
+      "entity": "tr-thrower",
+      "at": 37,
+      "is": null
+    }
+  ]
+}

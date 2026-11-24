@@ -1,0 +1,22 @@
+{
+  "//": "DRAFT (Step 24 slice 1): the controls' room: the floor room's shape with a camp fighter where the thrower stands (column 6, facing east; content/placements/test-ranged-camp.json), to show what a body that lists attack does without `ranged` (scenarios/step24-holds-his-post-control.json, step24-one-file-control.json). Spawns (row 6): 0 at column 2; 1 at column 8; 2 at column 13; 3 at column 18, seen by the thrower but beyond his range. No player reaches it.",
+  "id": "test-ranged-camp",
+  "name": "Test: ranged, camp fighter",
+  "tile": 16,
+  "legend": {
+    "#": "solid",
+    ".": "empty",
+    "=": "oneway",
+    "1": "spawn"
+  },
+  "rows": [
+    "################################",
+    "#..............................#",
+    "#..............................#",
+    "#..............................#",
+    "#..............................#",
+    "#..............................#",
+    "#.1.....1....1....1............#",
+    "################################"
+  ]
+}

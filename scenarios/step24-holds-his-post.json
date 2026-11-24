@@ -1,0 +1,40 @@
+{
+  "id": "step24-holds-his-post",
+  "gate": null,
+  "proves": "A thrower who sees a hero beyond his range does not walk at them: he holds his post",
+  "//": "DRAFT (Step 24 slice 1): the grappler at column 18 of the floor room, 192 px off (inside his sight, beyond his range), for ten seconds: outpost-fight (58) would walk him at a hero he sees; ranged-throw (64) keeps him standing. Control (-control): a camp fighter on the same tile in the same-shaped room (test-ranged-camp) walks at a hero he sees.",
+  "room": "test-ranged-floor",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 3
+    }
+  ],
+  "inputs": [],
+  "ticks": 600,
+  "expect": [
+    {
+      "fact": "position",
+      "entity": "trf-thrower",
+      "at": 600,
+      "x": [
+        102,
+        106
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "ranged-aim",
+      "between": [
+        0,
+        600
+      ],
+      "count": [
+        0,
+        0
+      ]
+    }
+  ]
+}

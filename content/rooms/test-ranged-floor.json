@@ -1,0 +1,22 @@
+{
+  "//": "DRAFT (Step 24 slice 1): a plain doorless check room with a thrower standing on the floor at column 6 facing east (content/placements/test-ranged-floor.json), to be reached and punched. Spawns (row 6): 0 at column 2, behind him; 1 at column 8, two tiles in front; 2 at column 13; 3 at column 18, seen by the thrower but beyond his range. 80 tiles wide, so a body punched east flies clear of the far wall. No player reaches it.",
+  "id": "test-ranged-floor",
+  "name": "Test: ranged, floor",
+  "tile": 16,
+  "legend": {
+    "#": "solid",
+    ".": "empty",
+    "=": "oneway",
+    "1": "spawn"
+  },
+  "rows": [
+    "################################################################################",
+    "#..............................................................................#",
+    "#..............................................................................#",
+    "#..............................................................................#",
+    "#..............................................................................#",
+    "#..............................................................................#",
+    "#.1.....1....1....1............................................................#",
+    "################################################################################"
+  ]
+}

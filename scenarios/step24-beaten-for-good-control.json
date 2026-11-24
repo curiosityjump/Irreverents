@@ -1,0 +1,67 @@
+{
+  "id": "step24-beaten-for-good-control",
+  "gate": null,
+  "proves": "Control: knocked out once, the thrower is not defeated",
+  "//": "DRAFT (Step 24 slice 1): step24-beaten-for-good with only the first punch.",
+  "room": "test-ranged-floor",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 34,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 40,
+      "to": 42,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 100,
+      "to": 482,
+      "x": 1
+    }
+  ],
+  "ticks": 700,
+  "expect": [
+    {
+      "fact": "event",
+      "event": "flattened",
+      "between": [
+        80,
+        100
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "where": {
+        "target": "trf-thrower"
+      }
+    },
+    {
+      "fact": "event",
+      "event": "defeated",
+      "between": [
+        0,
+        700
+      ],
+      "count": [
+        0,
+        0
+      ]
+    }
+  ]
+}

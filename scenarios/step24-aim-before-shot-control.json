@@ -1,0 +1,49 @@
+{
+  "id": "step24-aim-before-shot-control",
+  "gate": null,
+  "proves": "Control: a hero seen beyond the thrower's range is never aimed at or thrown at",
+  "//": "DRAFT (Step 24 slice 1): the grappler at column 18 (192 px off: inside his sight of 208, beyond his range of 176) for five seconds: no aim, no shot, nothing in his hand.",
+  "room": "test-ranged",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 3
+    }
+  ],
+  "inputs": [],
+  "ticks": 300,
+  "expect": [
+    {
+      "fact": "event",
+      "event": "ranged-aim",
+      "between": [
+        0,
+        300
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "weapon-dropped",
+      "between": [
+        0,
+        300
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "weapon",
+      "entity": "tr-thrower",
+      "at": 300,
+      "is": null
+    }
+  ]
+}

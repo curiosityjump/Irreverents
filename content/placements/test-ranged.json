@@ -1,0 +1,24 @@
+{
+  "//": "DRAFT (Step 24 slice 1): one thrower on the ledge, facing east.",
+  "id": "test-ranged",
+  "room": "test-ranged",
+  "place": [
+    {
+      "id": "tr-thrower",
+      "character": "ranged-fighter",
+      "tile": [
+        6,
+        5
+      ],
+      "npc": "ranged-fighter",
+      "routine": [
+        {
+          "face": "right"
+        },
+        {
+          "wait": 5
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "id": "step24-costs-a-heart-control",
+  "gate": null,
+  "proves": "Control: one of the thrower's shots thrown by a friend strikes the infiltrator and costs no heart",
+  "//": "DRAFT (Step 24 slice 1): on the floor, the thrower's first shot strikes the grappler (b) and lies; b takes it with Use, the infiltrator (a) arrives beside b, and b throws it at her with Hit at tick 166: it strikes her (by p:b), and a friend's blow neither launches nor wears (friendAttackLaunch, friendAttackWear 0): she is not floored and loses no heart.",
+  "room": "test-ranged-floor",
+  "placements": true,
+  "players": [
+    {
+      "id": "b",
+      "character": "grappler",
+      "spawn": 2
+    },
+    {
+      "id": "a",
+      "character": "infiltrator",
+      "spawn": 2,
+      "joins": 158
+    }
+  ],
+  "inputs": [
+    {
+      "player": "b",
+      "from": 95,
+      "to": 150,
+      "x": -1
+    },
+    {
+      "player": "b",
+      "from": 155,
+      "to": 157,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "b",
+      "from": 160,
+      "to": 161,
+      "x": 1
+    },
+    {
+      "player": "b",
+      "from": 166,
+      "to": 168,
+      "hold": [
+        "attack"
+      ]
+    }
+  ],
+  "ticks": 260,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "weapon-struck",
+      "where": {
+        "loose": "weapon:166:0",
+        "weapon": "thrown-shot",
+        "by": "p:b",
+        "target": "p:a"
+      },
+      "between": [
+        166,
+        200
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "flattened",
+      "between": [
+        158,
+        260
+      ],
+      "count": [
+        0,
+        0
+      ],
+      "player": "a"
+    },
+    {
+      "fact": "event",
+      "event": "heart-lost",
+      "between": [
+        0,
+        260
+      ],
+      "count": [
+        0,
+        0
+      ]
+    }
+  ]
+}

@@ -402,3 +402,10 @@ document as a decision of theirs.
 - **Why this way:** the lead's ruling allowed leaving the toll-keeper out of "unseen" if no route passes him. But the road's fighters see you on the main way too, so for now a sneak is getting from the entrance to the end without a punch and without a horn call completed. The victory screen's "unseen" still means what it says, and none of the ten scripted clears earns it.
 - **To change it:** the claims in `scenarios/step22-each-hero-sneaks-*.json`. A quiet route for the whole stage is placement work (Step 22 push 5).
 - **Where:** `docs/mechanisms/stages.md`, "Checking it".
+
+### 2026-11-24 · Step 24: the thrower sees a little farther than he throws, never leaves his spot, and his fourth shot makes his oldest vanish
+- **Decided by:** Step 24 slice 1 builder (`handoff-prompts/ranged-enemy.md`), `session_017WiGzEb3ESHBHGr3vhpB3k`
+- **Instead of asking:** "When you come into a thrower's view, should he throw at once, or let you see him first? Does he ever step after you? When are his old shots cleaned up?"
+- **Why this way:** "readable enemies" (`docs/vision.md:74`) and D-055's fixed behaviour. His sight band reaches 13 tiles and his throw 11, so his band touches you a step before he can throw at you: you see him look your way, then raise the shot with its arc drawn for 0.6 s, then it flies where it was aimed (you can step or jump out of it). He never walks, not after a hero and not after a guard; he still turns and swings weakly at anyone right up against him. Knocked hard while aiming, his shot drops for anyone and that throw is lost; a light tap only interrupts the aim. At most three of his shots lie about (the one in the air counts); a fourth makes the oldest vanish in a poof. A shot in anyone's hand never vanishes.
+- **To change it:** `sight` and `ranged` in `content/npcs/ranged-fighter.json` (`range`, `aim`, `every`, `speed`, `lift`, `out`); never walking is one rule in `src/sim/systems/ranged-throw.ts` (the input it keeps).
+- **Where:** `docs/plan/step-24.md`, "Builder notes"; `src/sim/systems/ranged-throw.ts`.

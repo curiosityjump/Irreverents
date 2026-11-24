@@ -1,0 +1,99 @@
+{
+  "id": "step24-throw-it-back",
+  "gate": null,
+  "proves": "A shot that landed is picked up with Use and thrown back with Hit; it strikes the thrower, who flies",
+  "//": "DRAFT (Step 24 slice 1): on the floor (test-ranged-floor) the first shot strikes the grappler at tick 61 and lies at about x 190; the grappler walks back to it, Use takes it at 155 (the ranged tag stays on it), and Hit at 165 throws it west: it strikes him during his next aim (by p:a) and he flies west, his aim lost. Control (-control): the same, Hit with the stick held east: thrown away from him, he is never struck.",
+  "room": "test-ranged-floor",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 2
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 95,
+      "to": 150,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 155,
+      "to": 157,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 165,
+      "to": 167,
+      "hold": [
+        "attack"
+      ]
+    }
+  ],
+  "ticks": 220,
+  "expect": [
+    {
+      "fact": "event",
+      "event": "weapon-taken",
+      "between": [
+        155,
+        155
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "player": "a",
+      "where": {
+        "weapon": "thrown-shot",
+        "src": "~ranged:trf-thrower"
+      }
+    },
+    {
+      "fact": "event-where",
+      "event": "weapon-struck",
+      "where": {
+        "loose": "weapon:165:0",
+        "weapon": "thrown-shot",
+        "by": "p:a",
+        "target": "trf-thrower"
+      },
+      "between": [
+        166,
+        200
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "velocity",
+      "entity": "trf-thrower",
+      "at": 192,
+      "vx": [
+        -520,
+        -200
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "ranged-lost",
+      "between": [
+        166,
+        200
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "entity": "trf-thrower"
+    }
+  ]
+}

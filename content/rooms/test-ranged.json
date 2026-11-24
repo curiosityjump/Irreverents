@@ -1,0 +1,23 @@
+{
+  "//": "DRAFT (Step 24 slice 1): a plain doorless check room for the thrower (content/placements/test-ranged.json): he stands on the one-way ledge (row 6, columns 4-8) facing east. Spawns (row 7): 0 at column 2, behind him; 1 at column 9, under his ledge's east end; 2 at column 12, in his range; 3 at column 18, seen but beyond his range. No player reaches it.",
+  "id": "test-ranged",
+  "name": "Test: ranged",
+  "tile": 16,
+  "legend": {
+    "#": "solid",
+    ".": "empty",
+    "=": "oneway",
+    "1": "spawn"
+  },
+  "rows": [
+    "################################",
+    "#..............................#",
+    "#..............................#",
+    "#..............................#",
+    "#..............................#",
+    "#..............................#",
+    "#...=====......................#",
+    "#.1......1..1.....1............#",
+    "################################"
+  ]
+}

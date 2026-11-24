@@ -1,0 +1,109 @@
+{
+  "id": "step24-hit-during-aim",
+  "gate": null,
+  "proves": "Punched while he aims, the thrower tumbles, his throw is lost, and his shot lies loose by him",
+  "//": "DRAFT (Step 24 slice 1): the grappler two tiles in front of the floor thrower (test-ranged-floor) steps in and punches at tick 8; the blow lands at 14 (14000 / 30: a hard hit), which knocks the held shot loose (weapon-loose) and sends him flying: the aim ends (ranged-lost) and nothing is thrown. Control (-control): the same grappler not punching: thrown at tick 36.",
+  "room": "test-ranged-floor",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 1
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 6,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 8,
+      "to": 10,
+      "hold": [
+        "attack"
+      ]
+    }
+  ],
+  "ticks": 90,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "hit",
+      "where": {
+        "by": "p:a",
+        "target": "trf-thrower",
+        "player": "a"
+      },
+      "between": [
+        10,
+        20
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "ranged-lost",
+      "between": [
+        14,
+        20
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "entity": "trf-thrower"
+    },
+    {
+      "fact": "event-where",
+      "event": "weapon-dropped",
+      "where": {
+        "entity": "trf-thrower",
+        "player": null,
+        "weapon": "thrown-shot",
+        "loose": "weapon:14:0",
+        "how": "knocked"
+      },
+      "between": [
+        14,
+        14
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "ranged-threw",
+      "between": [
+        0,
+        90
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "weapon",
+      "at": 90,
+      "loose": [
+        1,
+        1
+      ],
+      "room": "test-ranged-floor",
+      "weapon": "thrown-shot",
+      "x": [
+        40,
+        140
+      ]
+    }
+  ]
+}

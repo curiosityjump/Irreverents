@@ -1,0 +1,24 @@
+{
+  "//": "DRAFT (Step 24 slice 1): one camp fighter on the floor, facing east, on the tile where the floor room's thrower stands.",
+  "id": "test-ranged-camp",
+  "room": "test-ranged-camp",
+  "place": [
+    {
+      "id": "trc-fighter",
+      "character": "outpost-fighter",
+      "tile": [
+        6,
+        6
+      ],
+      "npc": "outpost-fighter",
+      "routine": [
+        {
+          "face": "right"
+        },
+        {
+          "wait": 5
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "id": "step24-shots-capped",
+  "gate": null,
+  "proves": "After five throws at most three of the thrower's shots lie in the room: each further throw makes the oldest go",
+  "//": "DRAFT (Step 24 slice 1): the infiltrator (12 px tall) stands under the ledge's east end (column 9), where his arc passes over her: he throws every 2.6 s (aim 0.6 + every 2) and the shots land east and lie. The fourth throw (tick 504) and the fifth (660) each make the oldest go (ranged-shot-gone, `out` 3). Control (-control): after three throws, three lie and none has gone.",
+  "room": "test-ranged",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "infiltrator",
+      "spawn": 1
+    }
+  ],
+  "inputs": [],
+  "ticks": 800,
+  "expect": [
+    {
+      "fact": "event",
+      "event": "ranged-threw",
+      "between": [
+        0,
+        700
+      ],
+      "count": [
+        5,
+        5
+      ],
+      "entity": "tr-thrower"
+    },
+    {
+      "fact": "event",
+      "event": "ranged-shot-gone",
+      "between": [
+        0,
+        800
+      ],
+      "count": [
+        2,
+        2
+      ]
+    },
+    {
+      "fact": "weapon",
+      "at": 800,
+      "loose": [
+        3,
+        3
+      ],
+      "room": "test-ranged",
+      "weapon": "thrown-shot"
+    }
+  ]
+}

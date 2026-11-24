@@ -1,0 +1,48 @@
+{
+  "id": "step24-jump-dodges-control",
+  "gate": null,
+  "proves": "Control: the same hero not jumping is struck by the same shot",
+  "//": "DRAFT (Step 24 slice 1): step24-jump-dodges with no jump.",
+  "room": "test-ranged",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 2
+    }
+  ],
+  "inputs": [],
+  "ticks": 160,
+  "expect": [
+    {
+      "fact": "event",
+      "event": "ranged-threw",
+      "between": [
+        36,
+        36
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "entity": "tr-thrower"
+    },
+    {
+      "fact": "event",
+      "event": "weapon-struck",
+      "between": [
+        37,
+        80
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "where": {
+        "by": "tr-thrower",
+        "target": "p:a"
+      }
+    }
+  ]
+}

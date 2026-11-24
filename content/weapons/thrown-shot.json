@@ -1,0 +1,15 @@
+{
+  "//": "DRAFT (Step 24 slice 1): what the thrower (content/npcs/ranged-fighter.json) throws. A weapon like any other, so a hero who picks one up with Use throws it back with Hit (use 'throw', systems/weapon-toss.ts). No sources and no carriers: only a thrower's `ranged` hands one out (systems/ranged-throw.ts). DRAFT: the boomerang's cut looks stand in (content/looks/weapons.json; orange, distinct from the dark bomb); it does not come back. Strength 12000 launches the grappler (60) at 200 px/s, the infiltrator (26) at 461, the flyer (30) at 400; wear 30 floors the grappler on the sixth shot, the others on the third (docs/plan/step-24.md).",
+  "id": "thrown-shot",
+  "name": "Boomerang",
+  "looks": {
+    "ground": "weapon-boomerang-ground",
+    "held": "weapon-boomerang-held",
+    "swing": "weapon-boomerang-swing",
+    "impact": "weapon-boomerang-impact"
+  },
+  "grip": [14, 16],
+  "box": [10, 10],
+  "use": "throw",
+  "thrown": { "speed": 280, "strength": 12000, "wear": 30 }
+}

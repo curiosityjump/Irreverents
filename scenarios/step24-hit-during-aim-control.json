@@ -1,0 +1,44 @@
+{
+  "id": "step24-hit-during-aim-control",
+  "gate": null,
+  "proves": "Control: not punched, the thrower throws when his aim is up",
+  "//": "DRAFT (Step 24 slice 1): step24-hit-during-aim with the grappler standing still: thrown at tick 36.",
+  "room": "test-ranged-floor",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 1
+    }
+  ],
+  "inputs": [],
+  "ticks": 90,
+  "expect": [
+    {
+      "fact": "event",
+      "event": "ranged-threw",
+      "between": [
+        36,
+        36
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "entity": "trf-thrower"
+    },
+    {
+      "fact": "event",
+      "event": "ranged-lost",
+      "between": [
+        0,
+        90
+      ],
+      "count": [
+        0,
+        0
+      ]
+    }
+  ]
+}

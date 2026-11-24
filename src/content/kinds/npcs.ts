@@ -60,6 +60,18 @@ export interface NpcKind {
    * out, world.knockedOutTime. Ignored for a `bad` person.
    */
   knockedOut?: number;
+  /**
+   * Step 24 (docs/mechanisms/ranged.md): a `bad` person who fights from range
+   * (src/sim/systems/ranged-throw.ts). `weapon`: the weapon id he throws (its
+   * `use` is `throw`); `range`: pixels across within which a hero he sees is
+   * thrown at; `aim`: seconds he holds it up, its arc drawn, before it
+   * leaves; `every`: seconds from one throw to the next aim; `speed`, `lift`:
+   * the fixed arc, pixels per second forward and that share of it up (D-055,
+   * D-062: never aimed at where a hero will be); `out`: at most this many of
+   * his thrown things lie in the room (a further one makes the oldest go).
+   * His body must list `attack` (hands, canHold). DRAFT numbers.
+   */
+  ranged?: { weapon: string; range: number; aim: number; every: number; speed: number; lift: number; out: number };
 }
 
 export const FIGHTS = ['on-sight', 'when-struck'] as const;
@@ -101,7 +113,7 @@ const kind: ContentKind = {
   parse(raw, read) {
     const o = read.object(raw, '');
     if (!o) return null;
-    read.only(o, ['id', 'role', 'side', 'moods', 'barks', 'fights', 'sight', 'search', 'beaten', 'knockedOut'], '');
+    read.only(o, ['id', 'role', 'side', 'moods', 'barks', 'fights', 'sight', 'search', 'beaten', 'knockedOut', 'ranged'], '');
     const out: NpcKind = {
       id: read.string(o, 'id', ''),
       role: read.string(o, 'role', ''),
@@ -126,6 +138,15 @@ const kind: ContentKind = {
       if (v) {
         read.only(v, ['on', 'time', 'turn'], 'search');
         out.search = { on: read.number(v, 'on', 'search', { min: 0, max: 2000 }), time: read.number(v, 'time', 'search', { min: 0, max: 60 }), turn: read.number(v, 'turn', 'search', { min: 0.1, max: 60 }) };
+      }
+    }
+    if (o.ranged !== undefined) {
+      const v = read.object(o.ranged, 'ranged');
+      if (v) {
+        read.only(v, ['weapon', 'range', 'aim', 'every', 'speed', 'lift', 'out'], 'ranged');
+        const n = (k: string, min: number, max: number): number => read.number(v, k, 'ranged', { min, max });
+        out.ranged = { weapon: read.string(v, 'weapon', 'ranged'), range: n('range', 0, 2000), aim: n('aim', 0.1, 10), every: n('every', 0.1, 60), speed: n('speed', 0, 900), lift: n('lift', 0, 4), out: n('out', 1, 20) };
+        if (!Number.isInteger(out.ranged.out)) read.fail('ranged.out', `must be a whole number, but is ${describe(v.out)}`);
       }
     }
     if (o.beaten === false) out.beaten = false;
@@ -174,6 +195,29 @@ const kind: ContentKind = {
       }
     }
     return out;
+  },
+  check(content, fail) {
+    // Step 24: a thrower's weapon is a `throw` weapon, and every body placed with his kind has hands for it.
+    // A content with no weapons at all is the room controls' own map (scripts/lib/room-controls.ts leaves the
+    // weapons and placements out): nothing to check against there; the game's content always has its weapons.
+    if (Object.keys(content.weapons ?? {}).length === 0) return;
+    for (const k of Object.values(content.npcs).sort((a, b) => (a.id < b.id ? -1 : 1))) {
+      const r = k.ranged;
+      if (!r) continue;
+      const file = `content/npcs/${k.id}.json`;
+      const w = content.weapons?.[r.weapon];
+      if (!w) fail(file, 'ranged.weapon', `no weapon "${r.weapon}" (weapons: ${Object.keys(content.weapons ?? {}).sort().join(', ')})`);
+      else if (w.use !== 'throw') fail(file, 'ranged.weapon', `weapon "${r.weapon}" is not thrown with Hit: its "use" is "${w.use}", and a thrower's must be "throw"`);
+      if (k.side !== 'bad') fail(file, 'ranged', 'only a "bad" person throws at heroes');
+      for (const p of Object.values(content.placements ?? {})) {
+        for (const q of p.place) {
+          if (q.npc !== k.id) continue;
+          if (!(content.characters[q.character]?.verbs.includes('attack') ?? true)) {
+            fail(`content/placements/${p.id}.json`, q.id, `body "${q.character}" has no hands for ${k.id}'s "${r.weapon}": it does not list the verb "attack"`);
+          }
+        }
+      }
+    }
   },
 };
 export default kind;

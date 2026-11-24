@@ -1,0 +1,10 @@
+{
+  "//": "DRAFT (Step 24 slice 1): the one-file proof (scenarios/step24-one-file.json): a second kind of thrower written as this one file, on a camp fighter's body (content/placements/test-ranged-bomb.json). No code names it. He throws the bomb (its burst is lit by the throw). Placed only in the test room.",
+  "id": "bomb-thrower",
+  "role": "bomb-thrower",
+  "side": "bad",
+  "moods": { "1": "routine", "2": "plead", "3": "charge" },
+  "barks": { "distress": "Huh?", "rage": "Duck!" },
+  "sight": { "range": 208, "height": 40 },
+  "ranged": { "weapon": "bomb", "range": 176, "aim": 0.6, "every": 3, "speed": 160, "lift": 0.5, "out": 2 }
+}

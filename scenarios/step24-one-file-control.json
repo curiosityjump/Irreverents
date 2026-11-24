@@ -1,0 +1,59 @@
+{
+  "id": "step24-one-file-control",
+  "gate": null,
+  "proves": "Control: the camp fighter's body with the camp fighter's kind walks up to the hero and swings; nothing is thrown",
+  "//": "DRAFT (Step 24 slice 1): test-ranged-camp, the same body on the same tile, kind outpost-fighter, the grappler at column 13: he walks up and his swing lands (hit by him); no ranged-aim.",
+  "room": "test-ranged-camp",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 2
+    }
+  ],
+  "inputs": [],
+  "ticks": 300,
+  "expect": [
+    {
+      "fact": "event",
+      "event": "hit",
+      "between": [
+        0,
+        300
+      ],
+      "count": [
+        1,
+        99
+      ],
+      "where": {
+        "by": "trc-fighter",
+        "target": "p:a"
+      }
+    },
+    {
+      "fact": "event",
+      "event": "ranged-aim",
+      "between": [
+        0,
+        300
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "weapon-dropped",
+      "between": [
+        0,
+        300
+      ],
+      "count": [
+        0,
+        0
+      ]
+    }
+  ]
+}

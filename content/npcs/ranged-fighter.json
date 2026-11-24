@@ -1,0 +1,14 @@
+{
+  "//": "DRAFT (Step 24 slice 1): a bad guy who fights from range (docs/mechanisms/ranged.md). Fighting heroes is business as usual (D-060), so his mood stays 1. He never walks after a hero and never searches (no `search`): he turns, aims and throws (src/sim/systems/ranged-throw.ts). `ranged`: the weapon he throws and the throw's fixed numbers (D-055, D-062: a fixed arc the way he faces, never aimed at where a hero will be). Every number is a first guess (decisions-log 'Step 24'). Barks are placeholders (D-057).",
+  "id": "ranged-fighter",
+  "role": "ranged-fighter",
+  "side": "bad",
+  "moods": { "1": "routine", "2": "plead", "3": "charge" },
+  "barks": {
+    "distress": "Huh?",
+    "rage": "Take this!"
+  },
+  "sight": { "range": 208, "height": 136 },
+  "beaten": { "after": 2 },
+  "ranged": { "weapon": "thrown-shot", "range": 176, "aim": 0.6, "every": 2, "speed": 200, "lift": 0.6, "out": 3 }
+}

@@ -1,0 +1,67 @@
+{
+  "id": "step24-jump-dodges",
+  "gate": null,
+  "proves": "A hero who jumps as the shot leaves is not struck; the shot lands behind them and lies there",
+  "//": "DRAFT (Step 24 slice 1): the grappler at column 12 jumps at tick 36, as the shot leaves (its arc was drawn from tick 0): it passes under them, lands east of them and slides to rest about x 300. Control (-control): the same with no jump: struck.",
+  "room": "test-ranged",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 2
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 36,
+      "to": 56,
+      "hold": [
+        "jump"
+      ]
+    }
+  ],
+  "ticks": 160,
+  "expect": [
+    {
+      "fact": "event",
+      "event": "ranged-threw",
+      "between": [
+        36,
+        36
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "entity": "tr-thrower"
+    },
+    {
+      "fact": "event",
+      "event": "weapon-struck",
+      "between": [
+        0,
+        160
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "weapon",
+      "at": 160,
+      "loose": [
+        1,
+        1
+      ],
+      "room": "test-ranged",
+      "weapon": "thrown-shot",
+      "x": [
+        230,
+        420
+      ]
+    }
+  ]
+}

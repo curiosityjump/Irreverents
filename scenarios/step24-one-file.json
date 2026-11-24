@@ -1,0 +1,83 @@
+{
+  "id": "step24-one-file",
+  "gate": null,
+  "proves": "A second thrower written as one file (content/npcs/bomb-thrower.json, on a camp fighter's body) throws a bomb that bursts by the hero, who flies",
+  "//": "DRAFT (Step 24 slice 1): `grep -rn bomb-thrower src` prints nothing: the kind is data only. He aims at the grappler at column 13, throws the bomb at tick 36 (lit by the throw, as `burst` says), it rolls to the grappler's feet and bursts on its fuse (tick 108): the grappler flies east. Control (-control): the same body with the camp fighter's kind (test-ranged-camp) walks up and swings instead.",
+  "room": "test-ranged-bomb",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 1
+    }
+  ],
+  "inputs": [],
+  "ticks": 160,
+  "expect": [
+    {
+      "fact": "event",
+      "event": "ranged-aim",
+      "between": [
+        0,
+        0
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "entity": "trb-thrower",
+      "where": {
+        "weapon": "bomb"
+      }
+    },
+    {
+      "fact": "event",
+      "event": "ranged-threw",
+      "between": [
+        36,
+        36
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "entity": "trb-thrower",
+      "where": {
+        "weapon": "bomb"
+      }
+    },
+    {
+      "fact": "event-where",
+      "event": "weapon-burst",
+      "where": {
+        "loose": "weapon:36:0",
+        "weapon": "bomb",
+        "by": "trb-thrower",
+        "room": "test-ranged-bomb",
+        "x": 205.33333333333323,
+        "y": 107,
+        "struck": [
+          "p:a"
+        ]
+      },
+      "between": [
+        90,
+        130
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "velocity",
+      "player": "a",
+      "at": 125,
+      "vx": [
+        300,
+        600
+      ]
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "id": "step24-costs-a-heart",
+  "gate": null,
+  "proves": "The thrower's shot floors the infiltrator and costs her a heart, by him",
+  "//": "DRAFT (Step 24 slice 1): the infiltrator (weight 26) at column 12 is struck at tick 60 and launched at 461 px/s into the east wall, where she is floored (the flight's `by` is the thrower): heart-lost names him. No new code: heart-lose reads `by`. Control (-control): a shot of his thrown by a friend (player b, who picked it up) strikes her and costs nothing.",
+  "room": "test-ranged",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "infiltrator",
+      "spawn": 2
+    }
+  ],
+  "inputs": [],
+  "ticks": 180,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "weapon-struck",
+      "where": {
+        "loose": "weapon:36:0",
+        "weapon": "thrown-shot",
+        "by": "tr-thrower",
+        "target": "p:a"
+      },
+      "between": [
+        37,
+        80
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "flattened",
+      "between": [
+        60,
+        180
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "where": {
+        "target": "p:a",
+        "by": "tr-thrower"
+      }
+    },
+    {
+      "fact": "event",
+      "event": "heart-lost",
+      "between": [
+        60,
+        180
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "player": "a",
+      "where": {
+        "by": "tr-thrower"
+      }
+    }
+  ]
+}

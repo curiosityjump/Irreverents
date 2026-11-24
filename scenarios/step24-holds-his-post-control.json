@@ -1,0 +1,28 @@
+{
+  "id": "step24-holds-his-post-control",
+  "gate": null,
+  "proves": "Control: a camp fighter on the thrower's tile walks at the hero he sees",
+  "//": "DRAFT (Step 24 slice 1): test-ranged-camp, the floor room's shape with a camp fighter (no `ranged`) on the thrower's tile, and the grappler at column 13 (his sight is the world's 112 px, so column 18 is not seen): he walks at them, more than 16 px by tick 300.",
+  "room": "test-ranged-camp",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 2
+    }
+  ],
+  "inputs": [],
+  "ticks": 300,
+  "expect": [
+    {
+      "fact": "position",
+      "entity": "trc-fighter",
+      "at": 300,
+      "x": [
+        122,
+        400
+      ]
+    }
+  ]
+}

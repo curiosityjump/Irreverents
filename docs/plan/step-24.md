@@ -395,3 +395,42 @@ outpost, hall, defeat, heart or stage systems.
   was run).
 
 - 2026-11-24 06:41 UTC: `handoff-prompts/ranged-enemy.md` (slice 1) spawned to builder `session_017WiGzEb3ESHBHGr3vhpB3k` by orchestrator `session_017WiGzHhT2apmWHT61rQ65G`.
+
+## Builder notes
+
+Newest last. Slice 1's builder, `session_017WiGzEb3ESHBHGr3vhpB3k`.
+
+- **Push 1 (the sim, test rooms only).** Built as the brief says, with
+  these departures, each `DRAFT:` and logged ("Step 24: the thrower sees a
+  little farther than he throws"):
+  - **Sight 208, range 176**, not 176 and 176: with the two equal no hero
+    can be "seen beyond range", which scenarios 2 and 7 need, and the band
+    reaching a step past the throw reads as a warning. Push 3 retunes both.
+  - **He keeps any input that does not walk** (outpost-fight's swing and
+    turn in reach of a hero, clash-fight's in reach of a guard, his
+    routine's `face`), not only the hero swing: he still swings weakly at a
+    guard against him. Attack is stripped while the shot is in hand.
+  - **The cap counts a shot in the air**: a fourth throw makes the oldest go
+    on the tick it leaves (`ranged-shot-gone`, for the page's poof in push 2).
+  - **Four test rooms**, not one: `test-ranged` (the ledge), `test-ranged-floor`
+    (80 tiles wide, so the twice-knocked-out scenario's flights never slam a
+    wall and he is defeated by wear, not by slam), `test-ranged-bomb` (the
+    one-file kind) and `test-ranged-camp` (a camp fighter on the thrower's
+    tile, for the two controls that need a body without `ranged`).
+  - **Scenario 6's control** is a friend's throw of one of his shots
+    (player b picks it up and throws it at the infiltrator on the floor):
+    struck, not floored, no heart. Scenario 7's control stands its hero at
+    13 tiles, not 18, because a camp fighter sees only the world's 112 px.
+  - `src/content/kinds/npcs.ts`'s check skips the weapon cross-check in a
+    content with no weapons at all: the room controls build such a map
+    (`scripts/lib/room-controls.ts` drops `weapons/`), and refused every
+    control for it otherwise.
+- **Not shown by any scenario:** the `met: [him]` trap (his shot leaves in
+  front of his box, so with `met: []` it still never meets him: the
+  control did not fail) and the attack strip (no scenario has a hero in
+  reach while he holds a shot: the control did not fail). Both kept as the
+  brief asks; a scenario for the second would put a hero against him
+  mid-aim.
+- **Owed:** a sound for the aim (the sound lane); the cap's poof drawn
+  (push 2). A shot whose thrower is gone before it lands costs no heart
+  (`heart-lose.ts` finds no enemy): left as it is.
