@@ -174,7 +174,12 @@
       "grabReach": 10,
       "attackWindup": 0.1,
       "attackStrikeTime": 0.067,
-      "attackRecovery": 0.133
+      "attackRecovery": 0.133,
+      "suplexTime": 0.3,
+      "suplexSpeed": 500,
+      "suplexWear": 100,
+      "suplexSplashReach": 28,
+      "suplexSplashStrength": 16000
     },
     "infiltrator": {
       "//": "DRAFT: quick and twitchy, with a lower jump. Feel (2026-11-23): full speed and a stop in 3 ticks, a small hang at the top, the lightest (weight 26), a two-frame wind-up.",
@@ -202,7 +207,12 @@
       "grabReach": 8,
       "attackWindup": 0.033,
       "attackStrikeTime": 0.05,
-      "attackRecovery": 0.067
+      "attackRecovery": 0.067,
+      "suplexTime": 0.25,
+      "suplexSpeed": 300,
+      "suplexWear": 100,
+      "suplexSplashReach": 12,
+      "suplexSplashStrength": 8000
     },
     "flyer": {
       "//": "DRAFT: light: a weak jump from the ground, good steering in the air. Feel (2026-11-23): floats (apexGravity 0.45, fallGravity 0.6, fallSpeed 170).",
@@ -232,7 +242,12 @@
       "grabReach": 8,
       "attackWindup": 0.05,
       "attackStrikeTime": 0.05,
-      "attackRecovery": 0.1
+      "attackRecovery": 0.1,
+      "suplexTime": 0.25,
+      "suplexSpeed": 300,
+      "suplexWear": 100,
+      "suplexSplashReach": 12,
+      "suplexSplashStrength": 9000
     },
     "crate": {
       "weight": 20,
@@ -321,7 +336,12 @@
       "grabReach": 10,
       "attackWindup": 0.15,
       "attackStrikeTime": 0.067,
-      "attackRecovery": 0.2
+      "attackRecovery": 0.2,
+      "suplexTime": 0.35,
+      "suplexSpeed": 460,
+      "suplexWear": 100,
+      "suplexSplashReach": 24,
+      "suplexSplashStrength": 14000
     },
     "skirmisher": {
       "//": "DRAFT (Step 11): light and quick: fast on its feet, quick jabs that barely push, easy to send flying. First guesses beside the infiltrator's.",
@@ -351,7 +371,12 @@
       "grabReach": 8,
       "attackWindup": 0.033,
       "attackStrikeTime": 0.05,
-      "attackRecovery": 0.067
+      "attackRecovery": 0.067,
+      "suplexTime": 0.25,
+      "suplexSpeed": 300,
+      "suplexWear": 100,
+      "suplexSplashReach": 12,
+      "suplexSplashStrength": 7000
     },
     "heavy-fighter": {
       "//": "DRAFT (Step 16 slice 2): a heavy bad guy. Weight 120, three times a fighter's (world default 40): the grappler's punch launches it at about 117 px/s against a fighter's 350. Toughness 240: eight of the grappler's punches (34 wear each) drop it. A slam wears by speed (impactWear), and a grappler's throw of it only reaches about 217 px/s, so a throw wears less than a punch: no throw drops it alone (docs/decisions-log.md).",

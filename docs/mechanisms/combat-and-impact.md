@@ -203,6 +203,65 @@ The owner, playing: "enemies collapse but never die". `src/sim/beaten.ts`
   `step5-slam-defeats`, `step5-beaten-come-back`, `step5-shopkeeper-robbed`; e2e `beaten-gone`
   (`scripts/e2e/beaten.ts`).
 
+## The suplex (Step 25, 2026-11-24)
+
+D-020 names suplexes first. `docs/plan/step-25.md` holds the why and the
+`DRAFT:` choices; `docs/decisions-log.md`, "Step 25: the suplex", what the
+builder chose.
+
+- **The press.** While a played hero whose verbs include `suplex` holds a
+  body whose toughness is above 0 (never a crate), the Use arbiter's last
+  entry, `src/sim/use/suplex.ts` (order 300), answers `suplex`, and the
+  button says SUPLEX (`content/prompts.json`). It finds the body by its
+  `heldBy`, never by `c.carrying`: a page never gets its own character's
+  `c`, but it sees who holds whom. `systems/suplex-press.ts` (order 58)
+  notes a fresh Use press with that answer in `c.suplex.pressed`.
+  `INTENT:` it asks before npc-interact (60), recruit-free (61) and
+  weapon-take (62) spend the press; asked later, one press beside the
+  shop's goods took the goods and suplexed.
+- **The heave.** `verbs/suplex.ts` (order 45, inside `verbs` at 100)
+  starts it: `c.suplex` keeps `target`, `left` (ticks, from `suplexTime`),
+  `dir` (the way the carrier faced) and `at` (the press tick). The body is
+  still held the whole time, so carry-ride (600) keeps it overhead and
+  carry-hold (200) keeps the way out. `INTENT:` a heave whose body is no
+  longer in these hands (broke free with Jump, let go, thrown with Hit, set
+  down with Grab) is lost, and so is one whose carrier could not act (a
+  verb that did not run last tick), like a cut-off swing. The carrier can
+  still walk during it (`DRAFT:`).
+- **The slam**, all in the verb so this tick's beaten-mark (530) and
+  npc-witness (600) see it: the body is released just behind the carrier
+  on the carrier's floor (against a wall: half under, then at the feet),
+  launched with a held beat for `suplexSpeed` and a floor bounce after it,
+  `markImpact`, then the events `suplexed` and `impact` (`other` null, speed
+  `suplexSpeed`), and wear `suplexWear` (a friend's share by `friendly()`,
+  `friendThrowWear` 0, or `c.brawl`'s). Recorded here because the floor's
+  own test never gets there: a fall is capped at `maxFallSpeed` 360, under
+  the slam sound's 420 and `beatenSlam` 400. `c.suplex.slam` is the tick.
+- **The splash.** Every other body in the room within `suplexSplashReach`
+  pixels of the slammed body's box (not held, not flattened) is launched
+  away from the landing by `suplexSplashStrength` over its weight (capped),
+  with an `impact` (`other`: the slammed body), a hit's beat and
+  `impactWear`. A friend gets `friendAttackLaunch` (0). The splash is judged
+  like any impact: a bad guy knocked away at his slam speed is defeated
+  (`DRAFT:`). From there impact-bodies and impact-walls carry it on.
+- **A person's reaction** is the deed `hit`, by one row in
+  `content/rules/expectations.json` (`suplexed`). The `hit` event is not
+  emitted: seven systems read it, and the slam reaches them as `flattened`,
+  `impact` and `defeated`, as a throw's does.
+- **Numbers** (`content/tuning.json`, each hero's set; declared by the verb):
+
+  | | grappler | brawler | infiltrator, flyer, skirmisher |
+  |---|---|---|---|
+  | `suplexTime` | 0.3 | 0.35 | 0.25 |
+  | `suplexSpeed` | 500 | 460 | 300 |
+  | `suplexWear` | 100 | 100 | 100 |
+  | `suplexSplashReach` | 28 | 24 | 12 |
+  | `suplexSplashStrength` | 16000 | 14000 | each one's `attackStrength` |
+
+- **Checked by** `scenarios/step25-suplex-*.json` (gate A): `-defeats`,
+  `-light`, `-throw-stays` (+ `-control`), `-not-a-crate` (+ `-control`),
+  `-splash`, `-witness`, `-friend` and `-friend-breaks-free`.
+
 ## Movement feel (Step 2, 2026-11-23)
 
 Numbers are each character's (with any held power laid over them, Step 9:

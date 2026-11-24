@@ -11,7 +11,8 @@
     "flap",
     "body",
     "attack",
-    "grab"
+    "grab",
+    "suplex"
   ],
   "tuning": "flyer"
 }

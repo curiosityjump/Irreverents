@@ -1,0 +1,87 @@
+{
+  "room": "graybox-hall",
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 5,
+      "to": 8,
+      "hold": [
+        "grab"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 20,
+      "to": 23,
+      "hold": [
+        "interact"
+      ]
+    }
+  ],
+  "ticks": 80,
+  "id": "step25-suplex-not-a-crate",
+  "gate": "A",
+  "proves": "Step 25: a crate cannot be knocked out (toughness 0), so it cannot be suplexed: carrying it, Use does nothing: no `suplexed`, and the crate is still carried a second later. Control step25-suplex-not-a-crate-control: the same walk with a dummy, which is suplexed",
+  "entities": [
+    {
+      "id": "crate-1",
+      "character": "crate",
+      "tile": [
+        3,
+        9
+      ]
+    }
+  ],
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "grabbed",
+      "where": {
+        "target": "crate-1"
+      },
+      "between": [
+        5,
+        5
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "suplexed",
+      "between": [
+        0,
+        80
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "body-state",
+      "player": "a",
+      "at": 80,
+      "is": [
+        "carrying"
+      ]
+    },
+    {
+      "fact": "body-state",
+      "entity": "crate-1",
+      "at": 80,
+      "is": [
+        "held"
+      ]
+    }
+  ]
+}

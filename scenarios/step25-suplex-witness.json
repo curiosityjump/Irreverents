@@ -1,0 +1,105 @@
+{
+  "id": "step25-suplex-witness",
+  "gate": "A",
+  "proves": "Step 25 (D-055, D-062): a suplex reaches people through the event table in content/rules/ (suplexed -> the deed 'hit'), as any blow: the grappler grabs the shopkeeper, steps aside from her counter and the goods (where Use would buy or take first) and suplexes her: a `deed` hit by p:a on the shopkeeper, with witnesses, on the slam's tick. Control, watched once: the `suplexed` row out of content/rules/expectations.json, and that deed is gone",
+  "room": "test-shop",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 10,
+      "to": 70,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 100,
+      "to": 104,
+      "hold": [
+        "grab"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 105,
+      "to": 122,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 130,
+      "to": 134,
+      "hold": [
+        "interact"
+      ]
+    }
+  ],
+  "ticks": 190,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "suplexed",
+      "where": {
+        "by": "p:a",
+        "target": "shopkeeper-1"
+      },
+      "between": [
+        148,
+        148
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "deed",
+      "where": {
+        "deed": "hit",
+        "by": "p:a",
+        "target": "shopkeeper-1"
+      },
+      "between": [
+        148,
+        148
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "deed",
+      "where": {
+        "deed": "hit",
+        "by": "p:a",
+        "player": "a",
+        "target": "shopkeeper-1",
+        "thing": null,
+        "room": "test-shop",
+        "x": 48.09999999999973,
+        "y": 145,
+        "witnesses": [
+          "villain-1"
+        ]
+      },
+      "between": [
+        148,
+        148
+      ],
+      "count": [
+        1,
+        1
+      ]
+    }
+  ]
+}

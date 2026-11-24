@@ -1,0 +1,126 @@
+{
+  "id": "step25-suplex-splash",
+  "gate": "A",
+  "proves": "Step 25: the suplex's landing knocks away what stands near it: the grappler suplexes a dummy down beside a crate and another dummy; each gets an `impact` from the slammed body and leaves moving away from the landing (left, the side the dummy landed on). Control, watched once: suplexSplashReach 0, and neither moves",
+  "room": "graybox-hall",
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 1
+    }
+  ],
+  "entities": [
+    {
+      "id": "dummy-1",
+      "character": "dummy",
+      "tile": [
+        6,
+        9
+      ]
+    },
+    {
+      "id": "crate-1",
+      "character": "crate",
+      "tile": [
+        3,
+        9
+      ]
+    },
+    {
+      "id": "dummy-2",
+      "character": "dummy",
+      "tile": [
+        2,
+        9
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 5,
+      "to": 8,
+      "hold": [
+        "grab"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 20,
+      "to": 23,
+      "hold": [
+        "interact"
+      ]
+    }
+  ],
+  "ticks": 80,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "suplexed",
+      "where": {
+        "by": "p:a",
+        "target": "dummy-1"
+      },
+      "between": [
+        20,
+        40
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "impact",
+      "where": {
+        "entity": "crate-1",
+        "other": "dummy-1"
+      },
+      "between": [
+        20,
+        40
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "impact",
+      "where": {
+        "entity": "dummy-2",
+        "other": "dummy-1"
+      },
+      "between": [
+        20,
+        40
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "velocity",
+      "entity": "crate-1",
+      "at": 48,
+      "vx": [
+        -520,
+        -100
+      ]
+    },
+    {
+      "fact": "velocity",
+      "entity": "dummy-2",
+      "at": 48,
+      "vx": [
+        -520,
+        -100
+      ]
+    }
+  ]
+}

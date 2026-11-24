@@ -1,0 +1,185 @@
+{
+  "id": "step25-suplex-throw-stays",
+  "gate": "A",
+  "proves": "Step 25 takes nothing from a carrier's other buttons: carrying, Hit throws (`thrown`), stick down + Hit spikes (`thrown`, the dummy going down), Grab sets down (`released`, set-down), and no `suplexed` at all. Control step25-suplex-throw-stays-control: the same walk with Use for the first Hit: `suplexed` once and one `thrown` fewer",
+  "room": "graybox-hall",
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "entities": [
+    {
+      "id": "dummy-1",
+      "character": "dummy",
+      "tile": [
+        3,
+        9
+      ]
+    },
+    {
+      "id": "dummy-2",
+      "character": "dummy",
+      "tile": [
+        1,
+        9
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 5,
+      "to": 8,
+      "hold": [
+        "grab"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 20,
+      "to": 23,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 30,
+      "to": 33,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 40,
+      "to": 43,
+      "hold": [
+        "grab"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 55,
+      "to": 58,
+      "y": 1,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 100,
+      "to": 116,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 120,
+      "to": 123,
+      "hold": [
+        "grab"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 135,
+      "to": 138,
+      "hold": [
+        "grab"
+      ]
+    }
+  ],
+  "ticks": 160,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "thrown",
+      "where": {
+        "by": "p:a",
+        "target": "dummy-1"
+      },
+      "between": [
+        20,
+        20
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "thrown",
+      "where": {
+        "by": "p:a",
+        "target": "dummy-2"
+      },
+      "between": [
+        55,
+        55
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "impact",
+      "where": {
+        "entity": "dummy-2",
+        "other": null
+      },
+      "between": [
+        55,
+        58
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "released",
+      "where": {
+        "target": "dummy-2",
+        "how": "set-down"
+      },
+      "between": [
+        135,
+        135
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "thrown",
+      "between": [
+        0,
+        160
+      ],
+      "count": [
+        2,
+        2
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "suplexed",
+      "between": [
+        0,
+        160
+      ],
+      "count": [
+        0,
+        0
+      ]
+    }
+  ]
+}

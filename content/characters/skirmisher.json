@@ -11,7 +11,8 @@
     "body",
     "attack",
     "grab",
-    "flap"
+    "flap",
+    "suplex"
   ],
   "tuning": "skirmisher"
 }

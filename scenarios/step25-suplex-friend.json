@@ -1,0 +1,107 @@
+{
+  "room": "test-hit",
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    },
+    {
+      "id": "b",
+      "character": "infiltrator",
+      "spawn": 1
+    }
+  ],
+  "entities": [],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 14,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 20,
+      "to": 23,
+      "hold": [
+        "grab"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 40,
+      "to": 43,
+      "hold": [
+        "interact"
+      ]
+    }
+  ],
+  "ticks": 150,
+  "id": "step25-suplex-friend",
+  "gate": "A",
+  "proves": "Step 25: a friend can be suplexed and is not hurt: the grappler carries the infiltrator's player and taps Use: `suplexed`, the slam's impact on p:b (other null), never laid flat and worn by nothing (world.friendThrowWear 0). Each is the other's control: step25-suplex-friend-breaks-free, where p:b presses Jump during the heave and no `suplexed` comes",
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "suplexed",
+      "where": {
+        "by": "p:a",
+        "target": "p:b"
+      },
+      "between": [
+        40,
+        62
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "impact",
+      "where": {
+        "entity": "p:b",
+        "other": null,
+        "speed": 500
+      },
+      "between": [
+        40,
+        62
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "flattened",
+      "between": [
+        0,
+        150
+      ],
+      "where": {
+        "target": "p:b"
+      },
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "body-state",
+      "player": "b",
+      "at": 150,
+      "not": [
+        "flattened",
+        "held"
+      ],
+      "worn": [
+        0,
+        0
+      ]
+    }
+  ]
+}

@@ -6,6 +6,7 @@
     "bell": { "ring": "Ring" },
     "free": { "free": "Free", "swap": "Swap in" },
     "get-in": { "get-in": "Get in" },
-    "weapon": { "pick-up": "Pick up", "swap": "Swap" }
+    "weapon": { "pick-up": "Pick up", "swap": "Swap" },
+    "suplex": { "suplex": "Suplex" }
   }
 }

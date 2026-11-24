@@ -22,6 +22,7 @@
   "events": [
     { "//": "Step 2's events (docs/architecture.md, 'Bodies').", "event": "hit", "deed": "hit", "by": "by", "target": "target" },
     { "event": "grabbed", "deed": "grab", "by": "by", "target": "target" },
-    { "event": "thrown", "deed": "throw", "by": "by", "target": "target" }
+    { "event": "thrown", "deed": "throw", "by": "by", "target": "target" },
+    { "//": "Step 25: a suplex is an attack.", "event": "suplexed", "deed": "hit", "by": "by", "target": "target" }
   ]
 }

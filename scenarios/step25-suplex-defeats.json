@@ -1,0 +1,125 @@
+{
+  "id": "step25-suplex-defeats",
+  "gate": "A",
+  "proves": "Step 25 (D-020): the grappler grabs the camp fighter and taps Use: one `suplexed`, the slam recorded as an impact on the floor (other null) at the grappler's suplexSpeed 500 (over the slam sound's 420 and beatenSlam's 400) within suplexTime + 2 ticks of the press, the fighter defeated by the slam (how slam, player a), lying on the side of the grappler away from the way they face. Control: `suplex` out of the grappler's verbs, and none of it",
+  "room": "test-fight",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 92,
+      "to": 95,
+      "hold": [
+        "grab"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 104,
+      "to": 107,
+      "hold": [
+        "interact"
+      ]
+    }
+  ],
+  "ticks": 200,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "suplexed",
+      "where": {
+        "by": "p:a",
+        "target": "tf-fighter"
+      },
+      "between": [
+        104,
+        124
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "suplexed",
+      "where": {
+        "by": "p:a",
+        "target": "tf-fighter"
+      },
+      "between": [
+        0,
+        200
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "impact",
+      "where": {
+        "entity": "tf-fighter",
+        "other": null,
+        "speed": 500
+      },
+      "between": [
+        104,
+        124
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "defeated",
+      "where": {
+        "target": "tf-fighter",
+        "how": "slam",
+        "player": "a"
+      },
+      "between": [
+        104,
+        124
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "flattened",
+      "where": {
+        "target": "tf-fighter"
+      },
+      "between": [
+        0,
+        200
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "position",
+      "entity": "tf-fighter",
+      "at": 200,
+      "x": [
+        0,
+        62
+      ]
+    }
+  ]
+}

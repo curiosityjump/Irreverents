@@ -1,0 +1,107 @@
+{
+  "id": "step25-suplex-light",
+  "gate": "A",
+  "proves": "Step 25: a light hero's suplex floors without finishing: the infiltrator suplexes the camp fighter: `suplexed`, the slam's impact at its suplexSpeed 300 (under beatenSlam 400), laid flat once (wear 100, his whole toughness) and never `defeated`. Control: step25-suplex-defeats, the grappler finishes him",
+  "room": "test-fight",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "infiltrator",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 92,
+      "to": 95,
+      "hold": [
+        "grab"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 104,
+      "to": 107,
+      "hold": [
+        "interact"
+      ]
+    }
+  ],
+  "ticks": 200,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "suplexed",
+      "where": {
+        "by": "p:a",
+        "target": "tf-fighter"
+      },
+      "between": [
+        104,
+        124
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "impact",
+      "where": {
+        "entity": "tf-fighter",
+        "other": null,
+        "speed": 300
+      },
+      "between": [
+        104,
+        124
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "flattened",
+      "where": {
+        "target": "tf-fighter"
+      },
+      "between": [
+        104,
+        124
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "defeated",
+      "where": {
+        "target": "tf-fighter"
+      },
+      "between": [
+        0,
+        200
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "position",
+      "entity": "tf-fighter",
+      "at": 200,
+      "x": [
+        0,
+        62
+      ]
+    }
+  ]
+}

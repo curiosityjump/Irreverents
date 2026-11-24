@@ -274,3 +274,25 @@ camera or HUD file.
 ## Builder notes
 
 (newest last; each names the session and date)
+
+- **2026-11-24, the suplex builder (brief `handoff-prompts/suplex.md`), push 1.**
+  Final numbers: the table in `docs/mechanisms/combat-and-impact.md`, "The
+  suplex"; the step file's, except `suplexWear` 100 for the light three (at
+  40 the infiltrator's suplex did not floor the camp fighter, toughness
+  100). Traced: the grappler's slam lands 18 ticks after the press, impact
+  500, the fighter flattened and defeated (`slam`) on that tick, lying at
+  feet x 52 behind a grappler at 72; the infiltrator's 15 ticks, 300,
+  flattened, not defeated. The slammed body bounces after the beat
+  (`floorBounce` 0.45: up at 225 px/s, a second floor impact at 225 about
+  40 ticks later). A splash from the grappler sends a crate at 520 and a
+  dummy at 400; both carry on into walls and each other through the
+  existing impact systems (push 3's chain is already there: in the shop the
+  splashed villain flew on into the guard at 393).
+  **Found and fixed while building:** asked from the verb (order 100), one
+  Use press beside the shop's goods took the goods (npc-interact, 60) and
+  then suplexed, because the arbiter's answer had changed by then. A
+  system, `suplex-press` (58), now asks first. **Flag, not mine:** carrying
+  the shopkeeper beside her counter, Use buys from her (the counter's
+  keeper "attends" it from over the hero's head): existing `thing` entry
+  behaviour, left as it is.
+  **Not verified in push 1:** anything on a phone (push 2).

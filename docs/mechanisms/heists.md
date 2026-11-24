@@ -24,6 +24,7 @@ one the page shows on the button.
   | 100 | `thing` (`use/thing.ts`) | the nearest untaken thing in the room within `npcInteractReach`, its keeper attending it; never while the body is out cold. Word: the thing's deed | `npc-interact` (60) does the deed |
   | 150 | `free` (`use/free.ts`, Step 13) | at a captive's shut cage; at the open cage, the freer, for a few seconds (`swap`) | `recruit-free` (61) holds, frees, swaps (`docs/mechanisms/recruits.md`) |
   | 200 | `bell` (`use/bell.ts`) | the body is by a cantina's bell (`byBell`) | `cantina-brawl` (640) rings it, ending a brawl |
+  | 300 | `suplex` (`use/suplex.ts`, Step 25) | a played hero whose verbs include `suplex` holds a body (found by its `heldBy`, so a page sees it) whose toughness is above 0. Word: `suplex` | `suplex-press` (58) notes the press; `verbs/suplex.ts` heaves and slams (`docs/mechanisms/combat-and-impact.md`, "The suplex") |
 
 - **An answer** is `{ entry, word, target?, at }`: `word` keys the button's
   words, `target` is the thing's entity id, `at` the pixel spot a mark

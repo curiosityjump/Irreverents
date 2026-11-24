@@ -1,0 +1,67 @@
+{
+  "room": "graybox-hall",
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 5,
+      "to": 8,
+      "hold": [
+        "grab"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 20,
+      "to": 23,
+      "hold": [
+        "interact"
+      ]
+    }
+  ],
+  "ticks": 80,
+  "id": "step25-suplex-not-a-crate-control",
+  "gate": "A",
+  "proves": "Control for step25-suplex-not-a-crate: the same walk carrying a dummy (toughness 100): Use suplexes it, and the grappler carries nothing after",
+  "entities": [
+    {
+      "id": "dummy-1",
+      "character": "dummy",
+      "tile": [
+        3,
+        9
+      ]
+    }
+  ],
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "suplexed",
+      "where": {
+        "target": "dummy-1"
+      },
+      "between": [
+        20,
+        40
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "body-state",
+      "player": "a",
+      "at": 80,
+      "not": [
+        "carrying"
+      ]
+    }
+  ]
+}
