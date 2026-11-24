@@ -465,3 +465,7 @@ Builder `session_017WiGzHxAKbURW5YnQt6bDN`, 2026-11-24. **Push 0: today's `main`
 6. The title upright puts the choices under the picture, as low as keeps the code field in the upper half (Step 17's `start-shown`: the keyboard covers the lower half; at 390×664 the field starts at 322 px, the picture's last strip of ground under New game) (`title-390x664`); the menu button has a dark disc.
 
 **Not verified:** on a real iPhone; a held hammer or spear on the plate (not reached by the shot walk); the dimmed Switch with a full party (`switch-refused` drives the refusal, not the look).
+
+### Second look, 2026-11-24 09:05 UTC (a subagent of the orchestrator; all 26 before and after pairs under `docs/plan/step-8-shots/hud/`)
+
+Fixed: button words on a pressable pill and no bare "^"; STAGE CLEARED's filled and hollow stars; GAME OVER in the pixel lettering; the menu disc; one banner at a time. Partly: thumb-sized upright, small-looking sideways (about 30 px drawn on 52 px targets); friends' hearts are hearts but run as one row outside the street; pips still balloon-like; the title upright. New or still wrong: a pink heart blob over the portrait on GAME OVER; two shots mislabelled 844x390 that are 750x340; the hint under STAGE CLEARED; the room's sign clipped beside the card; sans text on the hint and the GET IN pill. What is left is in `handoff-prompts/phone-hud-legibility.md`, "Landed so far".

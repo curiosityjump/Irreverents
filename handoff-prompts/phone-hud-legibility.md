@@ -11,6 +11,16 @@ plate, first.
 `docs/questions-for-the-owner.md`, after each push, with the before and
 after screenshot paths. **Notes:** `docs/plan/step-8.md`, "Phone HUD".
 
+**Landed so far (2026-11-24 09:10 UTC), by `session_017WiGzHxAKbURW5YnQt6bDN`, which stopped at about 385k tokens:** push 0 (27 before shots, ce73c7d), items 1-4 and 6 with the e2e fact `hud-targets-*` and `scripts/hud-shots.ts` (8a9c8b6), item 5 the stars (d2cb96c). Read `docs/plan/step-8.md`, "Phone HUD". **A second look, by a subagent of the orchestrator over all 26 before and after pairs, found items 2, 5 and the GAME OVER lettering fixed and the rest partly. You are a fresh builder; what is left, one push each, a before and after shot each, re-shooting with `scripts/hud-shots.ts`:**
+1. **Whose hearts are whose.** Friends' hearts are real hearts now, but only the street shots show a gap between friends; in the camp, the courtyard, stage-done, defeat-hurt and game-over they run as one unbroken row (`after/camp-wagon-get-in-390x664`). Each face's hearts must sit under that face in every room and size.
+2. **The pips still read as balloons**: red round "!" drops behind a warning sign (`after/street-fight-partial-844x390`). Make an alert level look like an alert level, not a count of things you own (shape and colour unlike a heart; `DRAFT:`).
+3. **GAME OVER:** a large pink heart blob covers the player's portrait and pokes past the plate's left edge (`after/hearts-game-over-844x390`). Find what it is (a heart-loss pop caught mid-play, or a draw fault) and fix it if it is a fault. That file and `defeat-hurt-844x390` are really 750x340 captures in both folders: shoot the real 844x390 and upright ones.
+4. **Sideways the buttons look small**: drawn at about 30 CSS px on 52 px targets (`after/street-plain-750x340`, `after/courtyard-go-in-844x390`). Draw the art nearer its target's size where the play area allows; say what you measured about how much of the play area the controls then cover.
+5. **Words in the game's lettering:** the "PLAYS EITHER WAY UP" hint and the "GET IN" pill are smooth sans text; the doorway glyph on "GO IN" reads as an "n". Sideways the pill nearly touches the bottom edge where an iPhone's home bar sits: keep it inside the safe area (`env(safe-area-inset-bottom)`).
+6. **Leftovers:** the hint and its close button still show under STAGE CLEARED upright; the room's sign pokes out clipped beside the STAGE CLEARED card ("Our astrono…"); "Bandit Camp" plus the "Psst!" box still cover much of the play area together; the title upright leaves its bottom third empty and "New game" overlaps the art's bottom edge by a few pixels, and its sound button is nearly invisible sideways (`after/title-750x340`).
+7. **Shots nobody has:** a held hammer and a held spear on the plate, the town's whistle gauge, a dimmed Switch with a full party, a row arriving with its banner, a lost heart in play.
+Switch stays dimmed, not hidden (`switch-refused` needs the tap; `docs/plan/step-5.md`). A real star sprite is on Vision Partner's missing list: keep the stand-in.
+
 ## The task, and the measure
 
 The owner: "iPhone first" (D-093: a few context-sensitive controls, legible
