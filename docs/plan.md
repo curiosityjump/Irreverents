@@ -320,7 +320,7 @@ Full text: `docs/plan/step-8.md`
 
 ## Step 9 — Powers you pick up, and can lose
 
-**Status: open, claimed by orchestrator session_017WiGzJzo6aZqH4kYxxJsiV (builders: session_017WiGzF16bBpnLmeWErGynR), 2026-11-23.** (Step 2 closed 17:30 UTC. Brief `handoff-prompts/loop-powers.md`.)
+**Status: open, unclaimed.** (The first playable is live and reviewed, 2026-11-24 01:45 UTC at 082380b: a power is data; the street's villain carries the boost, knocked flat it pops out and a touch takes it; a hard hit knocks it loose; wings on a pedestal in the depot; found sources marked on the menu; brief deleted, builder archived. Left: the wings' pedestal moves to the depot's hidden area (Step 22's next depot push); a phone fact that takes wings by touch.)
 
 Full text: `docs/plan/step-9.md`
 
@@ -405,7 +405,7 @@ Full text: `docs/plan/step-19.md`
 
 ## Step 20 — A machine to steal, and things to crash it through
 
-**Status: open, claimed by orchestrator session_017WiGzJzo6aZqH4kYxxJsiV (builders: A session_017WiGzK3BxWQHTRLZHSmnYK, B session_017WiGzEvHsdz7Z8fr6XuECe), 2026-11-23.** (Briefs `handoff-prompts/loop-vehicles-a.md`, the machine in a test room, started 22:00 UTC; `loop-vehicles-b.md`, the camp run, released and started 23:19 UTC.)
+**Status: open, claimed by orchestrator session_017WiGzJzo6aZqH4kYxxJsiV (builders: B session_017WiGzEvHsdz7Z8fr6XuECe), 2026-11-23.** (Briefs `handoff-prompts/loop-vehicles-a.md`, the machine in a test room, done and reviewed at 082380b (three pushes, brief deleted, builders archived); `loop-vehicles-b.md`, the camp run, released and started 23:19 UTC.)
 
 Full text: `docs/plan/step-20.md`
 
