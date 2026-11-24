@@ -287,46 +287,16 @@ strength that come in from the sides."* Optional fields in
   way out"; with every entry that close, all are kept). It reads where the
   heroes are, as the bound reads who is in the room; where a wave walks to is
   still the caller's sighting (D-065). Left out: no rule. The camp's is 2.
-- `sendNoneNearer` (2026-11-24, `DRAFT:`): tiles. `clearOfHeroes()` leaves
-  out every entry nearer than that to any hero in the room (a hero may have
-  moved on from the caller's sighting into the pocket an entry stands in),
-  so that half comes from the other side; with every entry that near, all
-  are kept. Below `entryAway` on purpose: an entry 8-11 tiles off, at the
-  screen's edge, is still used. Left out: no rule. The camp's is 8 (9 moved
-  the west's rows for heroes at columns 14-16, turning the hearts scenarios
-  red). With 8 it also keeps column 6 clear of any hero `doorClear` covers.
-- `breakThrough: { time, upTo }` (2026-11-24, `DRAFT:`, the orchestrator's
-  ruling): `outpost-break-through` (order 60, after `outpost-fight` set his
-  walk) makes a wave's person, walking at his `outpostFight` place and
-  blocked by an unbroken breakable piece in the tile column just ahead,
-  hold attack for `time` seconds (`c.outpostWave.breaking` counts it) and
-  then break it through `breakPartAt()` (the piece's own broken stage and
-  `part-broken`, `room-parts.ts`), if the piece's `breakSpeed` is at most
-  `upTo`. A tougher piece stops him and stays cover. Only wave people, never
-  placed ones, a driver in a seat or one walking off (`going`). Left out: off
-  (the depot, the test rooms). The camp's: 0.5 s, 200 (the fence 200 and the
-  stalls 150 break; the barricade 300 holds: the wagon's job). The wind-up is
-  shorter than `outpost-fight`'s 45-tick give-up.
 
-Proven in `test-sides` by `sides-wave-both-sides` (control: no `entries`). The door rule by `camp-entries-door-kept-clear` (the infiltrator at column 12.7 when the second call completes: both of its people walk in east of it, then it walks out; control: no `doorClear` and no `sendNoneNearer`, one walks in at column 6).
+Proven in `test-sides` by `sides-wave-both-sides` (control: no `entries`). The door rule by `camp-entries-door-kept-clear` (the infiltrator at column 12.7 when the second call completes: both of its people walk in east of it, then it walks out; control: no `doorClear`, one walks in at column 6).
 **Switched on in the quarry's depot** ("The depot", above) **and in the Bandit Camp** (2026-11-24): entries
 `[[6,7],[24,10],[30,10],[36,10],[41,10]]`, `entryAway` 12, five rows (1
 fighter; 2; fighter and heavy; 2 fighters and a heavy, the first of them at
 the reins of a ram wagon since Step 20 push 3, "Here comes a wagon!"; a heavy
-and the brute, repeating), a banner per row. Since 2026-11-24 also
-`[50,10]`, `[62,10]`, `[74,10]`, one in each pocket of the east half (the
-fence 47, the stalls 55-56 and 64-65, the barricade 75), with
-`sendNoneNearer` 8 and `breakThrough` 0.5 s / 200. Measured (sim, a hero
-standing at columns 44-74, rows 0-3): every row reaches him in 3-11 s,
-breaking what is between; a hero in the cache (76-83) gets rows from the
-west only, stopped at the barricade (no entry there: one on the cache's step
-would walk in beside him). A hero at 63-65 still gets `[74,10]` at 9-11
-tiles, at the screen's edge. Proven by `camp-entries-east-break-through`
-(control: no `breakThrough`). `step23-thrown-out-leaves-it` and
-`step23-game-over-sword-back-to-carrier` were re-timed for it (the first row
-now walks in at column 62, not at 41 beside the hero), and
-`step12-walk-out-ends-it` and `camp-entries-door-kept-clear` for
-`sendNoneNearer`. The quarry's other rooms are Step 22's to place: the road and the ridge have their own callers since Step 22 push 5 part 2 (above).
+and the brute, repeating), a banner per row. No entries east of column 41 yet (the camp's
+Step 20 run): a hero there gets every row from the west; adding `[58,10]` and
+`[70,10]` was measured to turn `step23-thrown-out-leaves-it` red, so it waits
+for the weapons builder. The quarry's other rooms are Step 22's to place: the road and the ridge have their own callers since Step 22 push 5 part 2 (above).
 With `doorClear` (2026-11-24) `step7-last-stand-camp` was re-timed again (east only, out at 2700; waves 4, felled 5). Scenarios re-timed for it: `step7-caller-tries-again`,
 `step7-last-stand-camp` (the hero now strikes west and east by turns),
 `step7-same-again-hangs-nothing`, `step12-walk-out-ends-it`, and the six

@@ -82,22 +82,6 @@ export interface Outpost {
    * the door and the door.
    */
   doorClear: number | null;
-  /**
-   * DRAFT, optional (left out: 0, no rule; camp-entries brief, docs/decisions-log.md "The
-   * camp's rows break through"): tiles. No wave walks in at an entry nearer than this to any
-   * hero in the room; that half comes from the other side (with every entry that near, all are
-   * kept). So a row never walks in a few tiles from a hero, even one who has moved on from the
-   * caller's sighting. Below `entryAway`, so an entry near the screen's edge is still used.
-   */
-  sendNoneNearer: number;
-  /**
-   * DRAFT, optional (left out: null; camp-entries brief, the orchestrator's ruling,
-   * docs/decisions-log.md "The camp's rows break through"): a wave's person blocked by a
-   * breakable piece between him and the place he is walking at breaks it, after `time`
-   * seconds of wind-up, if the piece breaks at `upTo` px/s or less; a tougher piece stops him
-   * and stays cover (src/sim/systems/outpost-break-through.ts).
-   */
-  breakThrough: { time: number; upTo: number } | null;
 }
 
 declare module '../types.ts' {
@@ -112,7 +96,7 @@ const kind: ContentKind = {
   parse(raw, read) {
     const o = read.object(raw, '');
     if (!o) return null;
-    read.only(o, ['id', 'room', 'signaler', 'callers', 'entry', 'bound', 'callTime', 'callAgain', 'breakHits', 'breakSpeed', 'waves', 'tryAgain', 'leaveCold', 'leaveIdle', 'entries', 'entryAway', 'announce', 'doorClear', 'sendNoneNearer', 'breakThrough'], '');
+    read.only(o, ['id', 'room', 'signaler', 'callers', 'entry', 'bound', 'callTime', 'callAgain', 'breakHits', 'breakSpeed', 'waves', 'tryAgain', 'leaveCold', 'leaveIdle', 'entries', 'entryAway', 'announce', 'doorClear'], '');
     const out: Outpost = {
       id: read.string(o, 'id', ''),
       room: read.string(o, 'room', ''),
@@ -132,16 +116,7 @@ const kind: ContentKind = {
       entryAway: 0,
       announce: [],
       doorClear: o.doorClear === undefined ? null : read.number(o, 'doorClear', '', { min: 0, max: 1000, integer: true }),
-      sendNoneNearer: o.sendNoneNearer === undefined ? 0 : read.number(o, 'sendNoneNearer', '', { min: 0, max: 200 }),
-      breakThrough: null,
     };
-    if (o.breakThrough !== undefined) {
-      const b = read.object(o.breakThrough, 'breakThrough');
-      if (b) {
-        read.only(b, ['time', 'upTo'], 'breakThrough');
-        out.breakThrough = { time: read.number(b, 'time', 'breakThrough', { min: 0.05, max: 10 }), upTo: read.number(b, 'upTo', 'breakThrough', { min: 0, max: 2000 }) };
-      }
-    }
     if (o.tryAgain !== undefined && typeof o.tryAgain !== 'boolean') read.fail('tryAgain', `must be true or false, but is ${describe(o.tryAgain)}`);
     const e = o.entry;
     if (Array.isArray(e) && e.length === 2 && e.every((n) => Number.isInteger(n))) out.entry = [e[0] as number, e[1] as number];
