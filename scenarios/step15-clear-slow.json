@@ -1,0 +1,233 @@
+{
+ "id": "step15-clear-slow",
+ "proves": "Step 15 push 3 (DRAFT, docs/decisions-log.md 'The forest's star times'): the star times' slow run. The grappler alone, by a script that only walks (no punch), goes from the stage's entrance (the road, just inside the doorway from the courtyard) along the road, up the boughs at the trail's start, over the root mound under the thrower, east along the trail past the light fighters, the heavy, the brute and the guarded spot's lookout, down the shaft and west along the deep level into the deepest pocket (the stage's end), with every bad guy of the trail placed. The trail's people knock it about and the lookout's call finishes (an alarm, one wave), but it reaches the end at tick 3365 (56.1 s), first try: 2 stars (over good, 52 s, but no start-over; not 3: an alarm finished and it is over best, 40 s), no game over. Recorded by tools/scenario-bots/walkbot.ts (run east, jump at a wall or a gap, jump on the spot under the boughs); re-record when the trail changes, the claims are what must hold. Control (watched to fail): content/stages/bramble-forest.json's stars set to good 60 s and best 58 s, and the same clear gets 3 stars",
+ "room": "forest-road",
+ "placements": true,
+ "placedRooms": [
+  "forest-trail"
+ ],
+ "players": [
+  {
+   "id": "a",
+   "character": "grappler",
+   "spawn": 1
+  }
+ ],
+ "inputs": [
+  {
+   "player": "a",
+   "from": 0,
+   "to": 442,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 443,
+   "to": 533,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 534,
+   "to": 552,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 567,
+   "to": 585,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 600,
+   "to": 618,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 633,
+   "to": 651,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 666,
+   "to": 684,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 699,
+   "to": 824,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 699,
+   "to": 717,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 825,
+   "to": 2494,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 825,
+   "to": 843,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 935,
+   "to": 953,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1438,
+   "to": 1456,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1479,
+   "to": 1497,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1520,
+   "to": 1538,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1561,
+   "to": 1579,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1886,
+   "to": 1904,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1927,
+   "to": 1945,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1968,
+   "to": 1986,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 2467,
+   "to": 2485,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 2499,
+   "to": 2521,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 2528,
+   "to": 2536,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 2537,
+   "to": 3422,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 2540,
+   "to": 2558,
+   "hold": [
+    "jump"
+   ]
+  }
+ ],
+ "ticks": 3405,
+ "expect": [
+  {
+   "fact": "event-where",
+   "event": "stage-cleared",
+   "where": {
+    "stage": "bramble-forest",
+    "player": "a",
+    "ticks": 3365,
+    "alarms": 1,
+    "tries": 0,
+    "defeated": 0,
+    "stars": 2
+   },
+   "between": [
+    3355,
+    3375
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "event-where",
+   "event": "game-over",
+   "where": {},
+   "between": [
+    0,
+    3405
+   ],
+   "count": [
+    0,
+    0
+   ]
+  }
+ ]
+}

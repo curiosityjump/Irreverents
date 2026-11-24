@@ -1,0 +1,158 @@
+{
+ "id": "step15-caught-both-sides",
+ "proves": "Step 15 push 3 (DRAFT, docs/decisions-log.md 'The forest's guarded spot'), the owner's 'Alarms should spawn more enemies of increasing strength that come in from the sides' (2026-11-24) in the forest: the flyer climbs out of the stone hollow in front of the guarded spot's lookout and stays about, not fighting. The first finished call (tick 265) brings one light fighter, from the east (column 95, the shaft's top bough: between the hero and the way on to the stage's end); the second (tick 1087) brings two, one on each side of where the lookout last saw the hero, never in the middle: stronger, and from both sides. Recorded by tools/scenario-bots/walkbot.ts. Control (watched to fail): content/outposts/forest-trail.json with no `entries`, and every wave walks in at its one `entry` (column 80, west)",
+ "room": "forest-trail",
+ "placements": true,
+ "players": [
+  {
+   "id": "a",
+   "character": "flyer",
+   "spawn": 4
+  }
+ ],
+ "inputs": [
+  {
+   "player": "a",
+   "from": 0,
+   "to": 64,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 65,
+   "to": 83,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 104,
+   "to": 122,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 143,
+   "to": 167,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 143,
+   "to": 161,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 172,
+   "to": 182,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 190,
+   "to": 194,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 195,
+   "to": 197,
+   "x": 1
+  }
+ ],
+ "ticks": 1100,
+ "expect": [
+  {
+   "fact": "event-where",
+   "event": "outpost-wave",
+   "where": {
+    "outpost": "forest-trail",
+    "wave": 0,
+    "row": 0
+   },
+   "between": [
+    260,
+    270
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "people-at",
+   "room": "forest-trail",
+   "at": 267,
+   "ids": "forest-trail:w0:",
+   "x": [
+    1500,
+    1560
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "event-where",
+   "event": "outpost-wave",
+   "where": {
+    "outpost": "forest-trail",
+    "wave": 1,
+    "row": 1
+   },
+   "between": [
+    1080,
+    1095
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "people-at",
+   "room": "forest-trail",
+   "at": 1095,
+   "ids": "forest-trail:w1:",
+   "x": [
+    1500,
+    1560
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "people-at",
+   "room": "forest-trail",
+   "at": 1095,
+   "ids": "forest-trail:w1:",
+   "x": [
+    500,
+    1350
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "people-at",
+   "room": "forest-trail",
+   "at": 1095,
+   "ids": "forest-trail:w1:",
+   "count": [
+    2,
+    2
+   ]
+  }
+ ]
+}

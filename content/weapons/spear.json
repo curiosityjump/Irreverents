@@ -1,5 +1,5 @@
 {
-  "//": "DRAFT (Step 23): the third weapon, written last and with no code (the measure of 'one more weapon is one file'). The longest reach (+18), a little harder (x1.2), the holder's own wind-up; thrown fast (420 px/s) so it flies flatter and further than the sword. It lies on the quarry road just inside the entrance from the courtyard (column 8, before the first rock), seen on entering, and in the weapon test room for the scenarios. Every number is a first guess (decisions-log 'Step 23').",
+  "//": "DRAFT (Step 23): the third weapon, written last and with no code (the measure of 'one more weapon is one file'). The longest reach (+18), a little harder (x1.2), the holder's own wind-up; thrown fast (420 px/s) so it flies flatter and further than the sword. It lies on the quarry road just inside the entrance from the courtyard (column 8, before the first rock), seen on entering, on the Bramble Trail's floor by the way in from the road (column 6, Step 15 push 3, DRAFT), and in the weapon test room for the scenarios. Every number is a first guess (decisions-log 'Step 23').",
   "id": "spear",
   "name": "Spear",
   "looks": {
@@ -38,6 +38,15 @@
       "tile": [
         8,
         16
+      ],
+      "restock": 30
+    },
+    {
+      "id": "forest-trail-spear",
+      "room": "forest-trail",
+      "tile": [
+        6,
+        18
       ],
       "restock": 30
     },

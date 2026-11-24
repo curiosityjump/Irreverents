@@ -18,7 +18,7 @@ result. The engine knows stages, not the quarry: a second stage is one file.
 `docs/plan/step-15.md`): the forest's stage, defeat and completion files
 copy the quarry's shape and needed no `src/` edit. Its entrance is the
 forest road by the doorway from the courtyard (`content/defeat/forest.json`
-`gameOver` lands there); its end is the trail's deepest pocket.
+`gameOver` lands there); its end is the trail's deepest pocket. Its star times (good 52 s, best 40 s) are set from scripted clears with the trail's people placed (`step15-cleared`, `-clear-best`, `-clear-slow`, recorded by `tools/scenario-bots/walkbot.ts`, not `scripts/stage-bot.ts`, which stays the quarry's).
 
 ## The pieces
 
