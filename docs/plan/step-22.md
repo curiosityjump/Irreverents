@@ -805,4 +805,9 @@ before you quote it.
   - The road's high walk (row 11) emptied: no unseen clear, because the road's lookout calls.
   - The ridge's way over (rows 3 and 5) emptied: the grappler's and the brawler's sneaks fail, with the ridge's calls completed.
 - **Tool:** `scripts/scenario-trace.ts <id> [every]` prints where a scenario's body goes, tick by tick.
-- **Not done:** `stage-beaten-entrance` made reliable inside the full e2e (item 2). Still opt-in.
+- **Live:** part 2 at 614f9ee (check:deployed ok; check:live 21 ok).
+- **Item 2, `stage-beaten-entrance` made reliable: not done. Measured, for the next builder:**
+  - The old stand hops to the road's toll flat (column 39), where only the watcher swings: too few falls for the party's 11 hearts. It also only walks back when knocked west of column 36. Knocked east, or up onto the scaffold, the hero waits for ever (defeat.ts's camp stand had the same stall and fixed it with a band and walk-backs).
+  - **New risk since part 2:** its hop east (a jump every 0.7 s) can land on the road's high walk (rows 13 and 11) and carry the hero over the toll on the scaffold. That has not been run since part 2; the step is opt-in.
+  - **Tried and reverted:** after walking into the road by touch, the page stood its own hero on the depot's west stretch (column 6, in the lookout's sight), with walk-backs. Run alone: 270 s, only one hero out, no card. A blow carried the hero over the stack to column 21, outside the walk-back rule.
+  - **What would make it reliable:** seed the party's hearts low (`world.heartsLost`; a page cannot today, so it needs a server hook for check worlds, asked of Step 21's owner), or a stand with a band and walk-backs both ways, as in defeat.ts, among more swingers.
