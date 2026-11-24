@@ -186,7 +186,24 @@ don't grade them.
 
 ## Measure
 
+*(Lead `session_017WiGzHD8gtSGTegd3n8W4G`, 2026-11-24 ~09:15 UTC, at 1ae9c19; two read-only reads of the library and of the quarry's files.)*
+
+**The draft against the library.** Every D-number it cites exists in doc 11 (`docs/design-library/04-decisions-and-prototyping/11-decision-register-boundaries-and-open-questions.md`) and the D-003, D-005 and doc 04 quotes are verbatim. Corrections, read these in place of the text above:
+- D-006 (l.33) is about creative, consistent ability use. "Never a name check" is doc 04's "Puzzle design ethos" (`02-gameplay-systems/04-world-structure-secrets-and-revisiting.md:39`: "Avoid doors which only work because the game checks for a rigid icon match").
+- D-015 (l.53) is about co-op challenges and does not say the trail is open to one hero alone; that stays `DRAFT:`, ours.
+- D-057 (l.251) is about dialogue and allows "simple icons"; "no sign, arrow or text" is doc 04 "Player awareness and map" (l.51).
+- The doc 04 quote is library prose, not an owner decision; doc 04:73 calls its forest "an illustration of revisitation value, not locked content".
+- G-03 (doc 12 l.33-37) is quoted as Setup "…" Pass; its Experience line, dropped above, is "long after first arrival, newly recruited character unlocks a deep secret and a shortcut". It names a recruit, not a power; doc 04:19 allows either.
+- D-079 is OWNER-FAVORED / STRONG DIRECTION, not CONFIRMED. The register uses the id D-096 three times (l.381, 393, 401); here it means l.381, default use.
+- No CONFIRMED decision is contradicted.
+
+**The place: a forest** (`DRAFT:`, `docs/decisions-log.md`, "Step 15: the second place is a forest"). The owner has named no place; the forest has unused owner art (BKG-01 `forest_waterfall`, P10 TRN-01 and TRN-10) and is doc 04's and G-03's own shape.
+
+**A stage is data** (`docs/mechanisms/stages.md`): stage, level, defeat and completion files, no `src/` edit; quarry ids are hard-coded only in `scripts/stage-bot.ts` and `scripts/checks/step14-levels.ts`. The courtyard (30×9) has free floor at columns 6-13 of rows 6-7 for a three-wide enter door, the quarry's `qqq` beside it at 17-19. The later thing defaults to a boulder only the boost lifts (grappler 150, boost 420), pending a measure that a boost survives the walk. Full derivation: the brief.
+
 ## Briefs
+
+- `handoff-prompts/step-15-forest.md` (09:20 UTC): four pushes, road and trail as a stage → the insides → the guarded spot and the clear → on the phone.
 
 ## Open with the owner
 
