@@ -250,9 +250,10 @@ the plate's own blue arc kept; impact = the plate's starburst; broken = every pi
   brightest thing in the passage. `DRAFT:` the joinery (mirror and repeat) is this lane's, not the plate's.
 - `part:undercroft:stone-plate:down`: the same cut, its lit tones one ramp step darker. Not pre-lowered: the renderer
   translates the look down by the load's sink and clips it to the plate's tiles.
-- `part:undercroft:grate` (32x16): P04 chibi-interactables row 2, the riveted vent (three bars in a frame), squashed
-  2.4x to the two floor tiles. `part:undercroft:grate:open`: P04 row 3, the riveted hatch round a dark shaft, the same
-  frame. Neither plate shows a floor grate seen from the side; a true one is wanted (for the Drive's missing list).
+- `part:undercroft:grate` (32x16): P07 pixel-art-platformer, bottom row, the small barred grate (upright bars in a
+  stone frame). The first push (7635af0) cut P04's riveted vent squashed 2.4x, having missed this cell; re-cut in
+  ask 2's push. `part:undercroft:grate:open`: P04 interactables row 3, the riveted hatch round a dark shaft (no plate
+  shows the barred grate open: a matching open state is wanted for the missing list).
 - **Decor off a part's tiles:** already held by `selfcheck.py` (back and front layers overlap no part); nothing moved.
 - **The bare-patch doubt (8120d92), looked at:** `loops-undercroft-4x.png` (the passage at 320x180, plate up and grate
   shut over plate down and grate open) and the whole room. The items that went were three barrels (columns 8, 12,
@@ -264,6 +265,25 @@ the plate's own blue arc kept; impact = the plate's starburst; broken = every pi
   ground lane's tiles are in, re-seed the barrel hash in `place.py` and look again.
 - `preview.py` draws a plate's or gate's own look when one exists (`pressed=True`: down and open), and `loopshots.py
   undercroft` writes the scene. `shots.mjs ... round3` adds `undercroft-grate` and `undercroft-on-plate`.
+
+**Ask 2, the camp run (Step 20 builder B, `content/rooms/outpost.json` columns 44-87).** Generic breakable looks
+in group `parts` (appended; earlier looks pixel-identical), drawn whole and bottom-centred by `room-parts.ts`, so any
+later room reuses them:
+
+- `fence-1x2` (16x32, the light barrier): P08 colorful-retro-fantasy row 1, the diagonal-braced timber frame, drawn
+  two tiles tall. Two frames stacked read as a pile of crates (crates are things you lift), so it is one, stretched.
+- `stall-2x2` (32x27 in 32x32): P08 row 5, the red-striped market stall (fruit crate and barrel).
+- `barricade-1x4` (16x64, the wagon's): P08 row 1, the plank wall (vertical planks under a capping board), its
+  planks run on to four tiles at the plate's resolution (`drive._stack`, cap and foot once).
+- `fence-broken-1x2`, `stall-broken-2x2`, `barricade-broken-1x4`: P07 vibrant row 3, the smashed crate's plank pile
+  (16, 30 and two piled 16 wide), on the floor of the same box.
+- **Not used:** a crate stack for the barricade (the throwable crate is cut from the same P07 crate) and P07's
+  ladder (reads as climbable). No plate shows a timber barricade or a palisade wall as such (MA-04 is the palisade).
+- **Decor, columns 44-87** (`place.outpost`): a blue tent at 50, flags at 59 and 73, the rack at 61, a striped tent
+  at 69, on the back layer, only where the cells are plain floor; the cache (79) and the step (84-86) clear; no decor
+  crates out there. The far palisade already ran the room's length.
+- Scene: `loops-camp-4x.png` (columns 44-64 and 64-84, whole above, broken below). `preview.py` now stands a named
+  breakable in the open, as the game does (`solidLook`), and skips placed things it has no look for.
 
 ## Deviations from the contract
 

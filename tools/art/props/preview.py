@@ -91,7 +91,7 @@ def room_scene(rid, R, sheets, looks, all_rooms, glows=True, pressed=False):
             return 'oneway'
         if isinstance(v, dict) and 'part' in v:
             p = parts[v['part']]
-            if p['kind'] == 'false-wall' or (p['kind'] == 'breakable' and (p.get('params') or {}).get('look') != 'window'):
+            if p['kind'] == 'false-wall' or (p['kind'] == 'breakable' and (p.get('params') or {}).get('look') in (None, 'wall')):
                 return 'solid'
         if isinstance(v, dict) and 'door' in v and doors[v['door']].get('hidden'):
             return 'solid'  # the renderer paints a hidden walk door as wall
@@ -157,6 +157,12 @@ def room_scene(rid, R, sheets, looks, all_rooms, glows=True, pressed=False):
                 im.alpha_composite(look('gate-closed'), (tx * 16, (ty + j) * 16))
         elif p['kind'] == 'hide':
             im.alpha_composite(own or look('hide-%dx%d' % (w, h)), (tx * 16, ty * 16))
+        elif p['kind'] == 'breakable' and (p.get('params') or {}).get('look') not in (None, 'window'):
+            # a named breakable look (props-asks-2: fence, stall, barricade), whole and bottom-centred; pressed: broken
+            lk = p['params']['look']
+            pic = look('part:%s:%s%s' % (rid, p['id'], ':broken' if pressed else '')) or look('%s-%s%dx%d' % (lk, 'broken-' if pressed else '', w, h))
+            if pic is not None:
+                im.alpha_composite(pic, (tx * 16 + (w * 16 - pic.width) // 2, (ty + h) * 16 - pic.height))
         elif p['kind'] == 'breakable':
             if (p.get('params') or {}).get('look') == 'window':
                 im.alpha_composite(own or look('window-%dx%d' % (w, h)), (tx * 16, ty * 16))
@@ -173,8 +179,10 @@ def room_scene(rid, R, sheets, looks, all_rooms, glows=True, pressed=False):
     if os.path.exists(pl):
         pj = json.load(open(pl))
         for t in pj.get('things') or []:
-            nm = {'bell': 'bell', 'counter': 'shop-counter', 'goods': 'shop-goods'}[t.get('look', 'goods')]
-            pic = look(nm)
+            nm = {'bell': 'bell', 'counter': 'shop-counter', 'goods': 'shop-goods'}.get(t.get('look', 'goods'))
+            pic = look(nm) if nm else None
+            if pic is None:
+                continue  # a thing this lane has no look for (another lane's sprite)
             tx, ty = t['tile']
             im.alpha_composite(pic, (tx * 16 + (16 - pic.width) // 2, (ty + 1) * 16 - pic.height))
         for b in pj.get('place') or []:

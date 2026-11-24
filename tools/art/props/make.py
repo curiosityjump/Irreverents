@@ -99,6 +99,11 @@ def looks_sheets():
     s.newrow()
     s.add('part:undercroft:stone-plate', dv.stone_plate()); s.add('part:undercroft:stone-plate:down', dv.stone_plate(True))
     s.add('part:undercroft:grate', dv.floor_grate()); s.add('part:undercroft:grate:open', dv.floor_grate(True))
+    # Step 20's camp run (props-asks-2, ask 2): generic breakable looks, so any later room reuses them; appended
+    s.newrow()
+    s.add('fence-1x2', dv.fence()); s.add('fence-broken-1x2', dv.fence(True))
+    s.add('stall-2x2', dv.stall()); s.add('stall-broken-2x2', dv.stall(True))
+    s.add('barricade-1x4', dv.barricade()); s.add('barricade-broken-1x4', dv.barricade(True))
     out = [('parts', 'props/parts.png', s)]
     # ---- round 3: the horn on the camp's post (src/client/draw/outpost.ts draws it bottom-centre over 2x3 tiles)
     s = Sheet(160)

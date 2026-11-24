@@ -218,8 +218,25 @@ def undercroft():
 
 
 
+
+def camp():
+    """props-asks-2, ask 2: the Bandit Camp's run east (columns 44-64 and 64-84 as two 320x180 cameras, the room's
+    last 180 px) with its decor; the left pair whole, the right pair broken. Plain stand-in ground."""
+    import make, preview
+    from place import place_all
+    from sizes import rooms
+    lk, sh, rs = make.looks_sheets(), make.decor_sheets(), rooms()
+    R = place_all()['outpost']
+    out = Image.new('RGBA', (640, 360))
+    for i, pressed in enumerate((False, True)):
+        im = preview.room_scene('outpost', R, sh, lk, rs, pressed=pressed)
+        for j, x0 in enumerate((44 * 16, 64 * 16)):
+            out.paste(im.crop((x0, im.height - 180, x0 + 320, im.height)), (j * 320, i * 180))
+    return out
+
+
 SCENES = {'weapons': weapons, 'rides': rides, 'powers': powers, 'treasure': treasure, 'hall': hall, 'asks': asks, 'heist': heist,
-          'cage': cage, 'undercroft': undercroft}
+          'cage': cage, 'undercroft': undercroft, 'camp': camp}
 
 if __name__ == '__main__':
     os.makedirs(OUT, exist_ok=True)

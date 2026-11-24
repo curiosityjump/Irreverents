@@ -49,6 +49,9 @@ const ROUND3 = [
   // props-asks-2: the undercroft's stone plate and floor grate (beside the grate; on the plate)
   ['undercroft-grate', 'undercroft', 12, 12],
   ['undercroft-on-plate', 'undercroft', 18, 12],
+  // props-asks-2 ask 2: the camp run (the fence and a stall; the barricade and the cache)
+  ['camp-run-west', 'outpost', 52, 10],
+  ['camp-run-east', 'outpost', 72, 10],
 ];
 
 async function sound(page) {

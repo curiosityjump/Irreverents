@@ -358,8 +358,69 @@ def stone_plate(down=False):
 
 
 def floor_grate(open_=False):
-    """Shut: P04 interactables, row 2's riveted vent (three bars in a frame). Open: P04 row 3's riveted hatch,
-    the same frame round a dark shaft. Both squashed to the grate's two floor tiles (32 x 16)."""
+    """Shut: P07 pixel-art-platformer, bottom row's small barred grate (upright bars in a stone frame; first cut
+    from P04's riveted vent, which had to be squashed 2.4x). Open: P04 interactables row 3's riveted hatch round a
+    dark shaft, squashed to the two floor tiles (32 x 16): no plate shows the barred grate open."""
     if open_:
         return grab('interact', (20, 640, 190, 770), 0, GRATEPAL, size=(32, 16))
-    return grab('interact', (1270, 415, 1430, 550), 0, GRATEPAL, size=(32, 16))
+    return grab('platformer', (100, 878, 175, 935), 0, GRATEPAL, size=(32, 16))
+
+
+# ---- Step 20's camp run (props-asks-2, ask 2): breakable parts, drawn whole and bottom-centred over their tiles by
+# room-parts.ts (`<look>-<w>x<h>`, `<look>-broken-<w>x<h>`). DRAFT: boxes, sizes and the stacking are first passes.
+CAMPPAL = ramps('wood', 'earth', 'stone', 'castle', 'red', 'pink', 'orange', 'gold', 'foliage', 'night')
+
+
+def _stack(name, box, cap, n, foot=0):
+    """A tall piece from a short one at the plate's own resolution: the piece's top `cap` rows, then its body
+    (between the cap and the bottom `foot` rows) repeated n times, then the foot once, for a majority shrink over
+    real source pixels."""
+    import srcimport
+    from srcimport import sheet
+    src = sheet(name).crop(box)
+    src = src.crop(src.getchannel('A').point(lambda a: 255 if a >= 150 else 0).getbbox())  # no gap between copies
+    w, h = src.size
+    body = src.crop((0, cap, w, h - foot))
+    out = Image.new('RGBA', (w, cap + body.height * n + foot), (0, 0, 0, 0))
+    out.paste(src.crop((0, 0, w, cap)), (0, 0))
+    for i in range(n):
+        out.paste(body, (0, cap + i * body.height))
+    if foot:
+        out.paste(src.crop((0, h - foot, w, h)), (0, cap + body.height * n))
+    tag = '_%s-%d-%d-%d' % (name, box[0], box[1], n)
+    srcimport._cache[tag] = out
+    return tag, (0, 0) + out.size
+
+
+def splinters(w, h):
+    """P07 vibrant interactables row 3, the smashed crate's plank pile (puffs dropped by the largest-blob cut)."""
+    return grab('vibrant', (865, 490, 1005, 600), 0, CAMPPAL, size=(w, h))
+
+
+def fence(broken=False):
+    """1x2, a light timber barrier: P08 colorful-retro-fantasy row 1's diagonal-braced timber frame, drawn two tiles
+    tall (stacked twice it read as a pile of crates, and crates are things you lift). Broken: the plank pile."""
+    if broken:
+        return fit(splinters(16, 9), 16, 32)
+    return grab('fantasy', (1092, 15, 1178, 110), 0, CAMPPAL, size=(16, 32))
+
+
+def stall(broken=False):
+    """2x2: P08 colorful-retro-fantasy row 5's red-striped market stall (fruit in a crate, a barrel). Broken: the
+    plank pile at stall width."""
+    if broken:
+        return fit(splinters(30, 13), 32, 32)
+    return fit(grab('fantasy', (340, 405, 470, 515), 0, CAMPPAL, size=(32, 27)), 32, 32)
+
+
+def barricade(broken=False):
+    """1x4, the timber barricade only the wagon breaks: P08 colorful-retro-fantasy row 1's plank wall (vertical
+    planks under a capping board), its planks run on (no seam) to four tiles. Broken: two plank piles, one on the
+    other."""
+    if broken:
+        im = new(16, 64)
+        paste(im, splinters(16, 9), 0, 55)
+        paste(im, splinters(14, 8), 1, 48)
+        return im
+    tag, box = _stack('fantasy', (245, 15, 335, 110), 22, 3, foot=8)
+    return grab(tag, box, 0, CAMPPAL, size=(16, 64))

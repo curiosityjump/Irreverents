@@ -283,6 +283,14 @@ def outpost(R):
     R.add('camp', 'tent-blue', 32, 10, dx=2)
     R.add('camp', 'tent', 35, 10, dx=2, flip=True)
     R.add('camp', 'crate', 38, 10, dx=4)
+    # DRAFT (props-asks-2, ask 2): the run east of the old camp (columns 44-87, Step 20 builder B): tents, a flag
+    # and the rack between the breakables (the fence at 47, stalls at 55-56 and 64-65, the barricade at 75), the
+    # cache (79) and the step (84-86) left clear. No decor crates out here: loose crates on that floor are things
+    # you throw. Only where it fits (a part's tiles stay clear: selfcheck), so a later layout change drops, not clashes.
+    for name, tx, dx, flip in (('tent-blue', 50, 2, False), ('flag', 59, -2, False), ('rack', 61, 4, False),
+                               ('tent', 69, 2, True), ('flag', 73, 0, False)):
+        if R.w > tx + 2 and R.plain(tx, 10) and R.floor(tx, 10):
+            R.add('camp', name, tx, 10, dx=dx, flip=flip)
 
 
 def quarry(R):
