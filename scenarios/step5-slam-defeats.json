@@ -1,0 +1,121 @@
+{
+ "id": "step5-slam-defeats",
+ "proves": "Step 5, impact over numbers (D-020): one hard slam ends a bad guy sooner than wearing him out: the grappler grabs the camp fighter as he walks up and throws him into the wall behind them (about 516 px/s, over world.beatenSlam 400): he is laid flat once (one `flattened`, so the Hall counts him once), defeated by the slam on that tick, never gets up and is gone within 5 s. Control: beatenSlam 0 (no slam defeats), and he gets up",
+ "room": "test-fight",
+ "placements": true,
+ "players": [
+  {
+   "id": "a",
+   "character": "grappler",
+   "spawn": 0
+  }
+ ],
+ "inputs": [
+  {
+   "player": "a",
+   "from": 92,
+   "to": 95,
+   "hold": [
+    "grab"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 104,
+   "to": 107,
+   "x": -1,
+   "hold": [
+    "attack"
+   ]
+  }
+ ],
+ "ticks": 400,
+ "expect": [
+  {
+   "fact": "event-where",
+   "event": "thrown",
+   "where": {
+    "target": "tf-fighter"
+   },
+   "between": [
+    104,
+    104
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "event-where",
+   "event": "defeated",
+   "where": {
+    "target": "tf-fighter",
+    "how": "slam",
+    "player": "a"
+   },
+   "between": [
+    104,
+    120
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "event-where",
+   "event": "flattened",
+   "where": {
+    "target": "tf-fighter"
+   },
+   "between": [
+    0,
+    400
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "event-where",
+   "event": "recovered",
+   "where": {
+    "target": "tf-fighter"
+   },
+   "between": [
+    0,
+    400
+   ],
+   "count": [
+    0,
+    0
+   ]
+  },
+  {
+   "fact": "event-where",
+   "event": "defeated-gone",
+   "where": {
+    "target": "tf-fighter"
+   },
+   "between": [
+    150,
+    300
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "people",
+   "room": "test-fight",
+   "at": 400,
+   "count": [
+    0,
+    0
+   ]
+  }
+ ]
+}

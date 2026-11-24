@@ -18,6 +18,7 @@ import { drawCompletion, drawCompletionRow } from './draw/completion.ts';
 import { drawNpcs } from './draw/npcs.ts';
 import { drawPowers } from './draw/powers.ts';
 import { drawWeapons } from './draw/weapons.ts';
+import { drawBeaten } from './draw/beaten.ts';
 import { drawSignalers } from './draw/outpost.ts';
 import { backdropOf, decorOf, drawDoors, drawRoom, roomOrigin } from './draw/room.ts';
 import { drawRoomParts } from './draw/room-parts.ts';
@@ -94,6 +95,7 @@ export function render(g: CanvasRenderingContext2D, world: World, content: Conte
   drawAway(g, world, content, roomId, ox, oy, pv);
   drawPowers(g, world, content, roomId, ox, oy, pv); // Step 9: carriers' orbs, loose orbs, holders' glow
   drawWeapons(g, world, content, roomId, ox, oy, pv); // Step 23: loose weapons, the one Use would take glowing, weapons in hand
+  drawBeaten(g, world, content, roomId, ox, oy, pv); // Step 5: a defeated bad guy's poof, the daze one knock-out before (draw/beaten.ts)
   // Round 2: backdrop layers marked `front` (foreground foliage along the bottom or top edge).
   if (backdrop) drawFrontLayers(g, backdrop, room, -ox, -oy, W, H);
   // DRAFT: front decoration before the impact pass, not after the effects: drawImpact shakes the

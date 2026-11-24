@@ -490,6 +490,20 @@ effect(s) to a"), passed 4 of 4 run alone and once on `main` without this change
 `test-machine`, has no false wall, so `rest-out-of-false-wall` never acts there: it reads as
 load-sensitive timing. For its owner (Step 20).
 
+**Part 2, beaten enemies stay beaten** (builder `session_017WiGzEhbdYJQcUhtD2bSLL`, 2026-11-24):
+built as `docs/mechanisms/combat-and-impact.md`, "Beaten for good". Measured against all
+scenarios: `beatenAfter` 2 green, 1 turns `step12-caller-stopped-no-wave`,
+`step21-camp-thrown-out`, `step7-caller-tries-again` red, so 3. `beatenSlam` 400 green, 320 turns
+the same three red. Townspeople staying down longer: `knockedOutTime` 4 s already turns
+`step18-jump-over-is-a-way-out` and `step4-tier-cap-holds` red (as do 20 s), so it ships at 3 s
+(unchanged) and the list went to the orchestrator. Not measured: whether a guard knocked out for
+longer breaks "stop the caller and no help comes" in play, and whether a long-out shopkeeper leaves
+a room without what he gives (reading `use/thing.ts`: an unattended good can be taken, so a
+knocked-out keeper gives *more*, not less). The phone fact `beaten-gone` (150 ms each way, by
+touch, the Bandit Camp) passed once at ~50 s of fighting. Its control (no `defeat` call) failed
+with the time limit cut to 70 s. Its screenshot comes just after the poof, so the poof frame was
+not looked at, and no upright screenshot was taken.
+
 ### Flakes (brief `handoff-prompts/step-5-e2e-flakes.md`)
 
 **Measured** by the builder `session_017WiGzJujVWWDboh12zWhNR`,

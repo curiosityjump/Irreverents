@@ -147,7 +147,9 @@ the server.
   bounces up with `floorBounce` of its falling speed, so each bounce is
   lower until it lands too slowly and the flight ends as before.
 - A flattened body lies where it fell for `flattenTime` and gets up
-  there, fresh. Things with toughness 0 (crates) are never flattened.
+  there, fresh, except as "Beaten for good" below says (a bad guy can be
+  defeated; a good person stays down `knockedOutTime`). Things with
+  toughness 0 (crates) are never flattened.
 - Breaking free hops the body up (`breakFreeHop`); because a held body
   ran no verbs, the same press usually also counts as a jump on the
   next tick. Left in: it reads as jumping out of the hands.
@@ -155,6 +157,46 @@ the server.
   carried (it is not collided); when let go there, physics pushes it
   back out sideways. Not yet handled: letting go under a low ceiling
   with no free spot leaves the body where it is.
+
+## Beaten for good (Step 5, the owner's report, 2026-11-24)
+
+The owner, playing: "enemies collapse but never die". `src/sim/beaten.ts`
+(the shared rules and records) and three systems:
+
+- **`beaten-mark` (530)**: a `bad` person (a body nobody plays with
+  `c.npc` whose `content/npcs/` kind is `side: "bad"` and does not say
+  `"beaten": false`) is **defeated** when the players have knocked him
+  out his kind's `beaten.after` times (else `world.beatenAfter`, 3; the
+  count is `c.knocks`, hidden), or at once by an impact (wall, floor or
+  body) at his `beaten.slam` speed or more (else `world.beatenSlam`,
+  400 px/s: a grappler's throw into a wall or into another body).
+  Only a knock-out or a flight credited to a player's character counts
+  (`by` is one). A slam on a standing body lays it flat with one
+  `flattened`, so the Hall counts it once. Emits `defeated`, credits the
+  player on the bodiless `~defeats` record. A `good` person knocked out
+  stays down `world.knockedOutTime` instead (DRAFT: 3 s, as
+  `flattenTime`, until the orchestrator decides; longer turns
+  `step18-jump-over-is-a-way-out` and `step4-tier-cap-holds` red).
+- **`beaten-gone` (535)**: a defeated body (`c.beaten`) never gets up; it
+  lies `beatenLieTime` once it has stopped flying, drops what it carries,
+  is removed, and `defeated-gone` (its middle) is emitted. A placed one
+  leaves a bodiless `~beaten:<id>` record (`c.beatenGone`); a wave's or a
+  dispatch row's arrival leaves nothing.
+- **`beaten-return` (9)**: a record's person is put back at his
+  placement, fresh, once no player has been in his room `beatenReturnTime`
+  (90 s) in a row. Never while anyone is there. A kept game's load places
+  every placement again; the record then just goes.
+- **For Step 22**: `defeatsBy(world, player)` and `restorePeople(world,
+  content, room?)`.
+- **Drawing** (`src/client/draw/beaten.ts`): the cut `fx-poof` where he
+  lay, on `defeated-gone`; `fx-dizzy` over a standing bad guy one
+  knock-out from defeat (`oneMoreDefeats`). No number, no bar.
+  `drawn.beaten` records poofs, gone ids and dazed ids.
+- Who is excluded: the villain (`"beaten": false`: he carries the power
+  and loops his robbery), cantina regulars (no `c.npc`), heroes, things.
+- Signal: scenarios `step5-fighter-beaten`, `step5-fighter-two-knocks-gets-up`,
+  `step5-slam-defeats`, `step5-beaten-come-back`; e2e `beaten-gone`
+  (`scripts/e2e/beaten.ts`).
 
 ## Movement feel (Step 2, 2026-11-23)
 

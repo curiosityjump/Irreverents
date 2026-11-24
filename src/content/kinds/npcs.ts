@@ -45,6 +45,15 @@ export interface NpcKind {
    * seconds; then he walks back to his post. DRAFT numbers.
    */
   search?: { on: number; time: number; turn: number };
+  /**
+   * Step 5 (the owner's report, "enemies collapse but never die"; src/sim/beaten.ts):
+   * for a `bad` person, how he is defeated for good: knocked out `after` times by
+   * the players, or flung into a wall or a body at `slam` pixels per second or
+   * more. Left out, world.beatenAfter and world.beatenSlam. `false`: never
+   * defeated, knocked out and up again as before (the villain, for now).
+   * Ignored for a `good` person, who is knocked out, never defeated.
+   */
+  beaten?: { after?: number; slam?: number } | false;
 }
 
 export const FIGHTS = ['on-sight', 'when-struck'] as const;
@@ -86,7 +95,7 @@ const kind: ContentKind = {
   parse(raw, read) {
     const o = read.object(raw, '');
     if (!o) return null;
-    read.only(o, ['id', 'role', 'side', 'moods', 'barks', 'fights', 'sight', 'search'], '');
+    read.only(o, ['id', 'role', 'side', 'moods', 'barks', 'fights', 'sight', 'search', 'beaten'], '');
     const out: NpcKind = {
       id: read.string(o, 'id', ''),
       role: read.string(o, 'role', ''),
@@ -111,6 +120,23 @@ const kind: ContentKind = {
       if (v) {
         read.only(v, ['on', 'time', 'turn'], 'search');
         out.search = { on: read.number(v, 'on', 'search', { min: 0, max: 2000 }), time: read.number(v, 'time', 'search', { min: 0, max: 60 }), turn: read.number(v, 'turn', 'search', { min: 0.1, max: 60 }) };
+      }
+    }
+    if (o.beaten === false) out.beaten = false;
+    else if (o.beaten !== undefined) {
+      const b = read.object(o.beaten, 'beaten');
+      if (b) {
+        read.only(b, ['after', 'slam'], 'beaten');
+        const rule: { after?: number; slam?: number } = {};
+        if (b.after !== undefined) {
+          if (typeof b.after === 'number' && Number.isInteger(b.after) && b.after >= 1 && b.after <= 100) rule.after = b.after;
+          else read.fail('beaten.after', `must be a whole number from 1 to 100 (how many knock-outs defeat him), but is ${describe(b.after)}`);
+        }
+        if (b.slam !== undefined) {
+          if (typeof b.slam === 'number' && b.slam > 0 && b.slam <= 2000) rule.slam = b.slam;
+          else read.fail('beaten.slam', `must be a speed above 0 and at most 2000 pixels per second, but is ${describe(b.slam)}`);
+        }
+        out.beaten = rule;
       }
     }
     if (out.role === HERO_ROLE) read.fail('role', `"${HERO_ROLE}" is the role of the players' characters; a person needs another`);

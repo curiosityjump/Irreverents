@@ -1178,6 +1178,14 @@ document as a decision of theirs.
 - **To change it:** numbers and letters in `content/rooms/outpost.json` (the parts' `breakSpeed`, where they stand), `content/placements/outpost.json` (crates, the cache), `content/heists/camp.json` (what the cache is). The other answer (a machine through walk doors) is real work.
 - **Where:** `docs/mechanisms/outposts.md`, "Step 20: the camp's run"; `docs/plan/step-20.md`, "Builder notes".
 
+### 2026-11-24 · Bad guys can be beaten for good: three knock-outs, or one big slam, and they go in a poof
+- **Decided by:** Step 5 builder (brief `owner-knocked-out-flies-off.md`, Part 2), `session_017WiGzEhbdYJQcUhtD2bSLL`, on the orchestrator's decisions in that brief
+- **Instead of asking:** "How many knock-outs before a bad guy stays down? Does a hard throw end him at once? Does he come back?"
+- **Why this way:** your words, "enemies collapse but never die", and doc 08's "…or is defeated". A camp fighter, a lookout, a wave's arrival or the toll keeper knocked out by the players 3 times does not get up. A heavy takes 4, the brute 5. One slam into a wall or another body at 400 px/s ends him at once (impact over numbers, D-020: a grappler's throw does it). He lies a moment, then goes in a poof. Only what a player does counts, so the camp's people flattening each other do not empty the camp. A placed bad guy is back at his place once nobody has been in his room for 90 s. A wave's arrival never comes back. One knock-out before the end he is drawn dazed: no numbers, no bar. 3 is one more than any existing scenario needs (2 stays green, 1 does not).
+- **Not done:** the villain is left as he was (`"beaten": false`). Townspeople and guards staying down much longer is built but set to today's 3 s (`knockedOutTime`), because any longer turns two scenarios red. That is the orchestrator's call, asked.
+- **To change it:** `content/tuning.json` world `beatenAfter`, `beatenSlam` (0 = no slam), `beatenLieTime`, `beatenReturnTime`, `knockedOutTime`; per kind `"beaten": { "after", "slam" }` or `false` in `content/npcs/`. To undo it, revert the commit.
+- **Where:** `docs/mechanisms/combat-and-impact.md`, "Beaten for good"; `docs/plan/step-5.md`. `DRAFT:`
+
 ### 2026-11-24 · A knocked-out enemy is drawn flying from the blow and lies down where it lands
 - **Decided by:** Step 5 builder (brief `owner-knocked-out-flies-off.md`), `session_017WiGzJC6UCvT2PtVr2dn8v`
 - **Instead of asking:** "The blow that knocks someone out also knocks them back about 200 px, like any blow. Should a knocked-out body fly less, or just look like it is flying?"

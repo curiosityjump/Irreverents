@@ -12,5 +12,6 @@
     "distress": "Hrm?",
     "rage": "SMASH!"
   },
-  "search": { "on": 48, "time": 4, "turn": 1 }
+  "search": { "on": 48, "time": 4, "turn": 1 },
+  "beaten": {"after": 5}
 }

@@ -9,5 +9,6 @@
     "distress": "...What?",
     "rage": "DESTROY THEM!",
     "reassured": "Hah! Typical."
-  }
+  },
+  "beaten": false
 }

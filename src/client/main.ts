@@ -29,6 +29,7 @@ import { drawnRecruits, noteRecruits } from './draw/recruits.ts';
 import { drawnParts, setHeardRooms } from './draw/room-parts.ts';
 import { drawnPowers, foundSourceIcons } from './draw/powers.ts';
 import { drawnWeapons } from './draw/weapons.ts';
+import { drawnBeaten, watchBeatenEvents } from './draw/beaten.ts';
 import { levelProgress } from '../sim/levels.ts';
 import { setUpMenu, showGone, showStart } from './start.ts';
 import type { StartRecord } from './start.ts';
@@ -148,6 +149,8 @@ const debug = {
     powers: { carriers: [], orbs: [], holders: [], sources: [] } as ReturnType<typeof drawnPowers>,
     /** Step 23: the loose weapons (and which glows) and the weapons in hand this frame (src/client/draw/weapons.ts). */
     weapons: { loose: [], held: [] } as ReturnType<typeof drawnWeapons>,
+    /** Step 5: defeated bad guys' poofs this frame, every one this page was told went, and who is drawn dazed (src/client/draw/beaten.ts). */
+    beaten: { poofs: [], gone: [], dazed: [] } as ReturnType<typeof drawnBeaten>,
     banner: null as ReturnType<typeof drawnBanner>,
     /** Step 19: each person's sight band this frame drew (facing, box, lit cells) and the unseen marks up (src/client/draw/sight.ts). */
     sight: null as ReturnType<typeof drawnSight> | null,
@@ -285,6 +288,7 @@ function play(worldName: string): void {
     watchAlarmEvents(content, net.latest(), me.room); // the owner's 2026-11-24 report: a finished horn and what it brings are announced (draw/alarm-banner.ts)
     setViewerCopy(net.serverMe(), net.latest().tick); // Step 21: the condition slot reads the server's copy (draw/condition.ts)
     watchDefeatEvents(content, me.id, net.latest()); // Step 21: thrown out, a prize back (draw/condition.ts)
+    watchBeatenEvents(net.latest(), frameNo); // Step 5: a defeated bad guy's poof (draw/beaten.ts)
     watchHallEvents(net.latest()); // Step 7: a new legend's banner, wherever this page is (draw/hall.ts)
     setHeardRooms(net.heardRooms()); // Step 3: plates drawn from the server's copy too (draw/room-parts.ts, plateAsDrawn)
     const camera = render(g, shown, content, me.room, { me: me.id, frame: frameNo, drawn: seen });
@@ -330,6 +334,7 @@ function play(worldName: string): void {
     d.hud = drawnHud();
     d.powers = drawnPowers();
     d.weapons = drawnWeapons();
+    d.beaten = drawnBeaten();
     d.banner = drawnBanner();
     d.sight = drawnSight();
     d.heist = drawnHeist();
