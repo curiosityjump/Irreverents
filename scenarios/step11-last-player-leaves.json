@@ -2,6 +2,15 @@
   "id": "step11-last-player-leaves",
   "proves": "the last player walking out of the cantina ends its brawl that tick (cantina-brawl-end, why empty); out in the street they carry no c.brawl and their attack on a friend is harmless again (Step 2's rule), and no regular follows them out",
   "room": "cantina",
+  "world": {
+    "roster": [
+      "grappler",
+      "infiltrator",
+      "flyer",
+      "brawler",
+      "skirmisher"
+    ]
+  },
   "placements": true,
   "players": [
     {

@@ -1,0 +1,116 @@
+{
+  "id": "step13-hauler-cave-put-back-freed",
+  "proves": "Step 13, the hidden recruit (push 1), the other half of step13-hauler-cave-put-back: freed, none comes back. With a new game's roster the grappler on its last heart frees the hauler in the cave (Use held 2.2 s; not swapped in), walks into the pit and is knocked flat there: the game over puts it on the road and the stage starts over (tries 1). The cage stays open, the hauler stays unlocked (the roster is kept for good, D-082), and no second captive appears. Control (watched to fail): restoreStage made to shut every recruit's cage in the stage's rooms: after the start-over the cage is shut again",
+  "room": "quarry-cave",
+  "placements": true,
+  "placedRooms": [
+    "quarry-pit"
+  ],
+  "world": {
+    "roster": [
+      "grappler",
+      "infiltrator",
+      "flyer",
+      "brawler"
+    ],
+    "heartsLost": {
+      "grappler": 4,
+      "infiltrator": 3,
+      "flyer": 3
+    }
+  },
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 50,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 70,
+      "to": 210,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 230,
+      "to": 700,
+      "x": 1
+    }
+  ],
+  "ticks": 1200,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "recruited",
+      "where": {
+        "recruit": "cave-captive",
+        "character": "hauler",
+        "added": true
+      },
+      "between": [
+        195,
+        205
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "stage-restarted",
+      "where": {
+        "stage": "iron-quarry",
+        "tries": 1
+      },
+      "between": [
+        1000,
+        1200
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "in-room",
+      "player": "a",
+      "at": 1200,
+      "room": "quarry-road"
+    },
+    {
+      "fact": "recruit",
+      "id": "cave-captive",
+      "between": [
+        205,
+        1200
+      ],
+      "present": true,
+      "open": true,
+      "unlocked": true
+    },
+    {
+      "fact": "event",
+      "event": "recruited",
+      "between": [
+        0,
+        1200
+      ],
+      "count": [
+        1,
+        1
+      ]
+    }
+  ]
+}

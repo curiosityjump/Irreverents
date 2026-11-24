@@ -1,0 +1,17 @@
+{
+  "//": "DRAFT (Step 13, the hidden recruit): the hauler, caged in the Iron Quarry's hidden cave (quarry-cave), reached only through the pit's painted west wall. Cage columns 7-8, row 12, on the cave floor (row 13 solid), clear of the hide cave-dark (column 10) and the step at columns 1-5. The cave is its own room, so her cage and her call are drawn only inside it: nothing on screen points at the secret. Hold 2.2 s, the camp's number for sameness (nobody watches here). The id is permanent once pushed (the entity recruit:cave-captive is a contract kept games hold).",
+  "id": "cave-captive",
+  "character": "hauler",
+  "room": "quarry-cave",
+  "tile": [
+    7,
+    12
+  ],
+  "w": 2,
+  "look": "cage-shut",
+  "openLook": "cage-open",
+  "hold": 2.2,
+  "call": "Hello? Is someone there? Lift this, would you?",
+  "callEvery": 6,
+  "callFor": 2.5
+}

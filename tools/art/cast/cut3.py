@@ -201,6 +201,39 @@ def skirmisher():
     return dict(cell=(56, 48), box=(12, 18), S=S, M2=M2, M3=M3, carryAt=(28, 22))
 
 
+def hauler():
+    # P04 cantina sheet, row 1: the barkeep in a head-cloth and apron (the hidden recruit, Step 13).
+    # DRAFT: cells read by eye off the 1448x1086 sheet; the effect marks over the heads are cut off
+    # by starting each rectangle below them (floating islands are dropped as for every cut).
+    P = _poses('cantina', 0.15, {
+        'idle': ((68, 105, 228, 272),),
+        'talk': ((283, 105, 470, 272), {'erase': ((408, 95, 475, 175),)}),
+        'cheer': ((497, 110, 690, 272),),
+        'worry': ((735, 112, 885, 272),),
+        'charge': ((955, 100, 1145, 272), {'erase': ((955, 100, 990, 272), (955, 220, 1010, 272), (1040, 100, 1100, 127))}),
+        'ko': ((1160, 185, 1385, 272),),
+    })
+    i, t, c, w, h, k = P['idle'], P['talk'], P['cheer'], P['worry'], P['charge'], P['ko']
+    run = [lean(i, 2), lift(lean(i, 2)), lean(h, 1), lean(h, 1), lift(lean(h, 1)), lean(i, 2)]
+    S = {
+        'idle': [i, i, breathe(i), breathe(i)],
+        'run': run,
+        'air': [lift(c, 0), w],
+        'attack': [lean(w, -1), h, h, i],
+        'hurt': [lean(w, -2), w, w],
+        'down': [k, breathe(k, 0.4)],
+        'held': [w, lean(w, 2), w, lean(w, -2)],
+        'talk': [i, t],
+        'grab': [lean(h, 1)],
+        'carry': [c, breathe(c)],
+        'carryRun': [lean(c, 1), lift(lean(c, 1)), lean(c, 1), lift(lean(c, 1))],
+        'throw': [lean(w, -1), h, h],
+    }
+    M2 = {'idle': [w, w, breathe(w), breathe(w)], 'talk': [w, breathe(w)]}
+    M3 = {'idle': [flush(h), flush(h), breathe(flush(h)), breathe(flush(h))], 'talk': [flush(h), flush(t)]}
+    return dict(cell=(56, 48), box=(16, 24), S=S, M2=M2, M3=M3, carryAt=(28, 20))
+
+
 def outpost_fighter():
     # P07 enemy sheet, row 1: the red-hooded bandit with a dagger.
     P = _poses('p07enemy', 0.32, {
@@ -277,6 +310,7 @@ def signal_post():
 ROUND3 = {
     'brawler': brawler,
     'skirmisher': skirmisher,
+    'hauler': hauler,
     'outpost-fighter': outpost_fighter,
     'outpost-lookout': outpost_lookout,
     'signal-post': signal_post,

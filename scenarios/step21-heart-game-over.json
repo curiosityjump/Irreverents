@@ -15,6 +15,7 @@
     }
   ],
   "world": {
+    "roster": ["grappler", "infiltrator", "flyer", "brawler", "skirmisher"],
     "heartsLost": {
       "grappler": 4,
       "infiltrator": 3,

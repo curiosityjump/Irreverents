@@ -1,0 +1,135 @@
+{
+ "id": "step13-hauler-lifts-the-boulder",
+ "proves": "Step 13, the hidden recruit (push 1): her strength pays at once in the next place over, with no forest file touched. The hauler alone, with no power (liftStrength 500), does step15-later-boost's presses (re-timed for her slower run): she lifts the forest's boulder (300; until now only the Brawn power lifted it), sets it down on the heavy plate (needs 260) and the stone slab opens; she walks on and drops into the hollow (found: forest-trail/stone-hollow) and forest-4 is found. Control (watched to fail): her liftStrength 150 (the grappler's and the brawler's): no grab, the slab shut, nothing found",
+ "room": "forest-trail",
+ "players": [
+  {
+   "id": "a",
+   "character": "hauler",
+   "spawn": 1
+  }
+ ],
+ "entities": [
+  {
+   "id": "boulder",
+   "character": "forest-boulder",
+   "tile": [
+    74,
+    8
+   ]
+  }
+ ],
+ "inputs": [
+  {
+   "player": "a",
+   "from": 0,
+   "to": 233,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 238,
+   "to": 241,
+   "hold": [
+    "grab"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 252,
+   "to": 299,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 300,
+   "to": 303,
+   "hold": [
+    "grab"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 324,
+   "to": 421,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 405,
+   "to": 424,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 426,
+   "to": 449,
+   "x": -1
+  }
+ ],
+ "ticks": 520,
+ "expect": [
+  {
+   "fact": "event-where",
+   "event": "grabbed",
+   "where": {
+    "target": "boulder"
+   },
+   "between": [
+    0,
+    324
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "part",
+   "room": "forest-trail",
+   "part": "stone-door",
+   "at": 324,
+   "is": {
+    "open": true
+   }
+  },
+  {
+   "fact": "position",
+   "player": "a",
+   "at": 520,
+   "x": [
+    1280,
+    1440
+   ],
+   "y": [
+    208,
+    208
+   ]
+  },
+  {
+   "fact": "event-where",
+   "event": "place-found",
+   "where": {
+    "place": "forest-trail/stone-hollow"
+   },
+   "between": [
+    0,
+    520
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "found",
+   "level": "bramble-forest",
+   "at": 520,
+   "pieces": [
+    "forest-4"
+   ]
+  }
+ ]
+}

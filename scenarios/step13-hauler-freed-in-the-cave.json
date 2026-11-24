@@ -1,0 +1,127 @@
+{
+  "id": "step13-hauler-freed-in-the-cave",
+  "proves": "Step 13, the hidden recruit (push 1): with a new game's roster (the four), the grappler from the quarry pit's spawn 0 walks west through the pit's painted west wall into the hidden cave (found: quarry-cave) and on to the cage on the cave floor (columns 7-8); Use held there 2.2 s frees the hauler: the cage opens for good, `recruited` with character hauler and `added` true, the deed `free` seen by nobody; a fresh press of Use at the open cage within the offer swaps her in on the spot. Control (watched to fail): the hold let go at 2.0 s: nobody recruited, the cage shut, no swap",
+  "room": "quarry-pit",
+  "placements": true,
+  "world": {
+    "roster": [
+      "grappler",
+      "infiltrator",
+      "flyer",
+      "brawler"
+    ]
+  },
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 262,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 290,
+      "to": 430,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 440,
+      "to": 443,
+      "hold": [
+        "interact"
+      ]
+    }
+  ],
+  "ticks": 480,
+  "expect": [
+    {
+      "fact": "in-room",
+      "player": "a",
+      "at": 40,
+      "room": "quarry-cave"
+    },
+    {
+      "fact": "recruit",
+      "id": "cave-captive",
+      "between": [
+        0,
+        419
+      ],
+      "present": true,
+      "open": false,
+      "unlocked": false
+    },
+    {
+      "fact": "event-where",
+      "event": "recruited",
+      "where": {
+        "recruit": "cave-captive",
+        "character": "hauler",
+        "by": "p:a",
+        "player": "a",
+        "added": true
+      },
+      "between": [
+        418,
+        424
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "recruit",
+      "id": "cave-captive",
+      "between": [
+        423,
+        480
+      ],
+      "present": true,
+      "open": true,
+      "unlocked": true
+    },
+    {
+      "fact": "event-where",
+      "event": "deed",
+      "where": {
+        "deed": "free",
+        "by": "p:a",
+        "witnesses": []
+      },
+      "between": [
+        0,
+        480
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "character",
+      "player": "a",
+      "at": 439,
+      "is": "grappler"
+    },
+    {
+      "fact": "character",
+      "player": "a",
+      "at": 445,
+      "is": "hauler"
+    }
+  ],
+  "placedRooms": [
+    "quarry-cave"
+  ]
+}

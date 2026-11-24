@@ -13,7 +13,7 @@ need, by path and nothing else (never search or sync the mirror):
 `docs/design-library/03-visual-direction-and-assets/current-pixel-art-explorations/p04-cantina-props-vehicles-hall-visual-source-sheets/cantina-npc-sprite-sheet.png`
 (the art; git fetches it when a command opens it).
 
-**Landed so far:** nothing yet.
+**Landed so far:** push 1 (the hauler in the cave), commit to follow in the report.
 
 **Reports:** `send_message` to the session on the Orchestrator line of
 `docs/questions-for-the-owner.md`, after each push, with the commit and

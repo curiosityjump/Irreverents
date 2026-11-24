@@ -2,6 +2,15 @@
   "id": "step11-bell-ends-brawl",
   "proves": "the owner's bell stops the fight (Q-008): a player in a brawl walks to the bell in the middle of the cantina and presses Use, and the brawl ends that tick (cantina-brawl-end, why bell); nobody carries c.brawl, the regulars stop fighting and go back to wandering, and nothing raises an alert",
   "room": "cantina",
+  "world": {
+    "roster": [
+      "grappler",
+      "infiltrator",
+      "flyer",
+      "brawler",
+      "skirmisher"
+    ]
+  },
   "placements": true,
   "players": [
     {

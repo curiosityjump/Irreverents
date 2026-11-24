@@ -2,6 +2,15 @@
   "id": "step11-brawl-starts",
   "proves": "a player's hit landing on a regular starts the brawl (cantina-brawl-start, every body in the room carries c.brawl) and a regular hits the player back",
   "room": "cantina",
+  "world": {
+    "roster": [
+      "grappler",
+      "infiltrator",
+      "flyer",
+      "brawler",
+      "skirmisher"
+    ]
+  },
   "placements": true,
   "players": [
     {

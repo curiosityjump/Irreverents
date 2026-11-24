@@ -2,6 +2,15 @@
   "id": "step11-swap-self",
   "proves": "D-084, your own member: a player taps a wandering hero outside the party (the skirmisher), then their own slot: the party slot becomes the skirmisher and the player becomes the skirmisher through the become effect, feet where they stood; the grappler they were starts wandering as a regular, and the skirmisher's regular is gone",
   "room": "cantina",
+  "world": {
+    "roster": [
+      "grappler",
+      "infiltrator",
+      "flyer",
+      "brawler",
+      "skirmisher"
+    ]
+  },
   "placements": true,
   "players": [
     {

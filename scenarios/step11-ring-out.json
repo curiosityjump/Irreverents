@@ -2,6 +2,15 @@
   "id": "step11-ring-out",
   "proves": "in a brawl, a player launched past the cantina's edge is out: cantina-out credits whoever sent it, it counts a fall for the body and a knock-out for the sender, and the body is back on a pad at once, standing still and no longer flying; the same player three times running",
   "room": "cantina",
+  "world": {
+    "roster": [
+      "grappler",
+      "infiltrator",
+      "flyer",
+      "brawler",
+      "skirmisher"
+    ]
+  },
   "placements": true,
   "players": [
     {

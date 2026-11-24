@@ -147,3 +147,12 @@ ids never change.
   the castle street's high ledges at columns 25-27 (rows 3 and 7), and the
   quarry tower's shaft at column 4 (ledges every four rows, 7 to 23). Also
   the camp's ledge from the floor, which the rescue's way out uses.
+
+## The hidden recruit (handoff-prompts/hidden-recruit.md, 2026-11-24)
+
+- **The hauler** (`content/characters/hauler.json`, a `hauler` tuning section, P04 cantina sheet row 1 cut by `hauler()` in `tools/art/cast/cut3.py`): a strong mover whose one difference is `liftStrength` 500, above every hero and above Brawn's 420. `DRAFT:` the rest near the grappler's. In `roster.characters`, not in `start`; a cantina pattern and 5 hearts.
+- **Where:** `content/recruits/cave-captive.json`, caged at the quarry cave's [7, 12]. The cave is its own (hidden) room, so the cage and the call are drawn only inside it: nothing in the pit points at the secret (e2e `hidden-recruit-not-shown`). Reached by walking west through the pit's painted wall. Freed and swapped exactly as the camp's captive (FREE above).
+- **The stage:** the quarry is a stage, and `restoreStage` leaves `recruit:*` entities alone: beaten there, a shut cage stays one shut cage, an opened one stays open (`step13-hauler-cave-put-back`, `-freed`).
+- **Pays at once:** she lifts the forest's boulder (300) with no power (`step13-hauler-lifts-the-boulder`).
+- **The trap:** a sixth roster hero is a sixth cantina regular in any world with no roster seeded; a cantina scenario that counts regulars seeds `"world": { "roster": [...] }` (11 were seeded with the five when she landed).
+- **Proven by:** `step13-hauler-freed-in-the-cave`, `step13-hauler-lifts-the-boulder`, `step13-hauler-cave-put-back`, `step13-hauler-cave-put-back-freed`, e2e `hidden-recruit-not-shown`, `hidden-recruit-cave` (`scripts/e2e/hidden-recruit.ts`).

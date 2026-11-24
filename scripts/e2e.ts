@@ -466,6 +466,8 @@ async function main(): Promise<void> {
       await (await import('./e2e/powers.ts')).powerFacts({ browser, devices, base, out, fact, errors, shots: path.join(out, 'powers') });
       // Step 16's facts (quarry-*): into the quarry by touch, and across its road onto the ridge (docs/plan/step-16.md, signal 7).
       await (await import('./e2e/quarry.ts')).quarryFacts({ browser, devices, base, out, fact, errors });
+      // Step 13's hidden recruit (hidden-recruit-*): by touch into the quarry pit, nothing of the cave drawn there; through the pit's painted wall, the cave's cage drawn shut with the hauler (docs/mechanisms/recruits.md, "The hidden recruit").
+      await (await import('./e2e/hidden-recruit.ts')).hiddenRecruitFacts({ browser, devices, base, out, fact, errors, shots: keptShots('step-13-shots') });
       // Step 15's facts (forest-*): through the courtyard's forest doorway by touch, across the road onto the trail, switch to the infiltrator, up the boughs and into the gap (docs/plan/step-15.md, signal 6).
       await (await import('./e2e/forest.ts')).forestFacts({ browser, devices, base, out, fact, errors });
       // Step 11's facts (cantina-*): into the cantina by touch, the party row, the swap and the brawl's counter on two phones (docs/mechanisms/cantina.md, signal 8).

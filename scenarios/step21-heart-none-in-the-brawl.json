@@ -2,6 +2,15 @@
  "id": "step21-heart-none-in-the-brawl",
  "proves": "Step 21, hearts (DRAFT, docs/decisions-log.md 'Step 21: hearts'; D-086, doc 31): in the cantina's brawl the grappler's punches put the infiltrator, a friend, on the floor three times (85, 124, 231), and a regular puts it on the floor once more (375): none of the four costs a heart (a friend's fall never does; nothing in the cantina's brawl does), and the infiltrator has all three at the end. Control (watched to fail, 2026-11-24): heart-lose's enemy test cut to 'anyone nobody plays' (the cantina line and the person test taken out), and the regulars' falls at 375 and 396 cost a heart each while the friend's three still cost none",
  "room": "cantina",
+ "world": {
+  "roster": [
+   "grappler",
+   "infiltrator",
+   "flyer",
+   "brawler",
+   "skirmisher"
+  ]
+ },
  "placements": true,
  "players": [
   {

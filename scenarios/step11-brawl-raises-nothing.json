@@ -2,6 +2,15 @@
   "id": "step11-brawl-raises-nothing",
   "proves": "a whole brawl, players launched out three times and regulars knocked about, raises nothing: every deed has no witness, nobody's mood changes, nobody calls, and the cantina's alert stays at 0 (the same hit on a person in the street upsets them: step4-hero-hits-shopkeeper)",
   "room": "cantina",
+  "world": {
+    "roster": [
+      "grappler",
+      "infiltrator",
+      "flyer",
+      "brawler",
+      "skirmisher"
+    ]
+  },
   "placements": true,
   "players": [
     {

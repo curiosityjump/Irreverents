@@ -2,6 +2,15 @@
   "id": "step11-join-after-swap",
   "proves": "a friend arriving after a swap is given the world's party: a swaps the brawler into the infiltrator's slot, and b, joining later with no character named, gets the first member nobody plays in the world's party (the brawler), not content's (the infiltrator)",
   "room": "cantina",
+  "world": {
+    "roster": [
+      "grappler",
+      "infiltrator",
+      "flyer",
+      "brawler",
+      "skirmisher"
+    ]
+  },
   "placements": true,
   "players": [
     {

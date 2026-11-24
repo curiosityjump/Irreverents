@@ -2,6 +2,15 @@
   "id": "step11-regulars-wander",
   "proves": "each roster character nobody plays has exactly one body in the cantina (cantina:<kind>), walking its loop and never leaving the edge; the one a player plays has none, and when the player switches to another character that one's regular goes and the old one's comes back",
   "room": "cantina",
+  "world": {
+    "roster": [
+      "grappler",
+      "infiltrator",
+      "flyer",
+      "brawler",
+      "skirmisher"
+    ]
+  },
   "placements": true,
   "players": [
     {
