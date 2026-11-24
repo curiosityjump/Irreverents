@@ -313,3 +313,15 @@ after the other is beaten, and how a restore looks on the page (push 4's e2e).
 - **Owed still:** (a) `restorePeople`/`holdReturns` and (b) the
   `game-over` event are not on `main` at 85cbd35; (c) the kerb and the
   wings' move are not done.
+
+### Lead review, push 3a (d529a1b), re-run at e5f6383+
+
+- `npm run build` and `npm run check` are ok: all nine `step22-*` scenarios pass, including the cleared-stats run and five star edges.
+- Control, run by me with the stage set to `"on": false`: `step22-cleared-stats` fails, as it should. No `stage-cleared` event, and the state is null.
+- `npm run gates` is 6 of 6.
+- Looked at both screenshots:
+  - the sign shows the quarry's best stars, 2 of 3 lit, inside the sign board;
+  - the menu row shows the stars and 1:15 on the upright phone.
+- Open, and now the builder's to settle:
+  - The star times are placeholders until push 3b's hero runs.
+  - "Unseen" counts the toll-keeper. If no sneaking route can pass him unseen, leave him out (`DRAFT:`). An unseen clear has to be possible: it is the owner's "zero-alarm infiltration".
