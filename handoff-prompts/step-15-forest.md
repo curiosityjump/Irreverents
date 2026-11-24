@@ -1,3 +1,5 @@
+**Lead, 14:50 UTC: push 5 is option (a)** from the third builder's handoff: one-way boughs at row 5 from the hatch (36-37) east over the guards to the shaft, and a 2-tile root stump at column 39. Re-record the crossings, `step15-cleared` and the star times (a forest copy of `scripts/stage-quiet.ts` is fine). Prove it with `step15-unseen-clear` (the infiltrator, `stage-cleared` with `unseen` true) and a control (one bough removed and the run is seen). Logged in `docs/decisions-log.md`. Order: 4c first, then 5.
+
 **Lead, 14:40 UTC, push 4c (from the orchestrator's look, end of `docs/plan/step-15.md`), before push 5:** retake `deep-pocket` at 844x390 and 750x340 (both show only STAGE CLEARED); retake `canopy-390x664` (the hero is behind the party plate); darken and cool the earth further (it still reads warm mid-brown); a mossy-stone sprite for the boulder if an approved plate has one, otherwise say so. Say whether the thin orange lines in `trail-gap-750` and `root-tunnel-390` are sight bands.
 
 **Lead, 12:50 UTC, for the third builder. READ THIS FIRST; it replaces the blocks below where they differ.**
