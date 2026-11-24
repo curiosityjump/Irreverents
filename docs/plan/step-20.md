@@ -140,6 +140,7 @@ Nothing is reachable by a player until builder B's push 2. Notes:
   `handoff-prompts/step-5-e2e-flakes.md`). build, check, check:deployed and
   check:live green at a2bee99.
 
+<<<<<<< HEAD
 **Builder A, push 2 (the seat).** Landed: `c.seat`, `machine-seat`,
 `machine-driven`, the Use entry `get-in` (order 120, "Get in"), the
 `memberTaken` read, `World.machines` rider fields, events `machine-taken`,
@@ -170,3 +171,34 @@ Nothing is reachable by a player until builder B's push 2. Notes:
   `step20-ram-snaps-the-post`, `-barricade-breaks-and-rolls-on`,
   `-wears-to-a-wreck` (it counts 8), `-jump-out-at-speed` and the post
   control (`speed.rider` 290 becomes any number under 450 closing speed).
+=======
+**Builder B, push 1 (the camp's run).** The Bandit Camp runs on east to
+column 87 (`docs/mechanisms/outposts.md`, "Step 20: the camp's run"). No
+wagon is placed yet (push 2, after A's seat). Notes:
+- **A's numbers vs. the run** (asked A by message, A's call): the camp's
+  post breaks at impact 450 and the wagon meets it at about 280 (it cannot
+  stand west of the step, 12 tiles from the post), so the post never snaps
+  to the wagon; and with `crashes` 8 a wagon driven through the real camp
+  (lookout, post, fighter 1 twice, fighter 2, crate, two stalls) is a wreck
+  at stall 2, before the barricade (probe: step's tiles cleared, the
+  player as the wagon). `step20-camp-run-breaks-through` therefore runs
+  without the camp's people.
+- **A flung body bounces back into the wagon** and knocks it flying (A's
+  noted interaction): it then slides to a stop. Three crates stopped it
+  short of the barricade; one does not.
+- **The waves' entry (41) is mid-room now**, under the second ledge: a
+  wave appears there from nowhere. Left as it is (their timings pin it).
+- **The captive's call bubble** (rescue slice) covers the cache chest on
+  an upright phone (`step-20-shots/run-cache-390x664.png`). Not changed.
+- **Two prizes, one hand:** `world.cargo` holds one prize per hero; taking
+  the cache while carrying the strongbox overwrites it (the strongbox then
+  counts as banked, quietly). Not changed.
+- The decor (`content/decor/outpost.json`, place.py) covers only columns
+  0-43, and the timber pieces are code-drawn planks: both asked of the art
+  builder `session_017WiGzEN1QbSnHzXNqV4XSt` (look ids `stall-2x2`,
+  `fence-1x2`, `barricade-1x4` and `-broken-`).
+- e2e, three runs: h1+h2, h1, h1 (the known flakes; the third on main after the rebase onto ebfd824).
+- Screenshots: `docs/plan/step-20-shots/run-*.png` (the page's own hero
+  moved east by the debug world: a look, not a route).
+
+>>>>>>> 571fcef (Step 20 builder B push 1: the Bandit Camp runs on east two screens, things to smash and a cache behind a timber barricade)

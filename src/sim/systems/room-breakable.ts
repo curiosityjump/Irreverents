@@ -6,13 +6,17 @@ import type { System } from '../types.ts';
 
 const EPS = 1e-6;
 
+/** What a breakable may look like: drawing only (src/client/draw/room-parts.ts). Add, never take away: rooms name them. */
+export const BREAKABLE_LOOKS = ['wall', 'window', 'fence', 'stall', 'barricade'];
+
 /**
  * Walls (and windows) that break (docs/mechanisms/rooms-and-doors.md, "The
  * kinds of part"). Solid until a body is about to run into one sideways at
  * or above `params.breakSpeed` (default: world.wallBreakSpeed); then its
  * tiles are open for good, it emits `part-broken` (src/sim/room-parts.ts)
  * and the body carries on through with its speed. `params.look` ("wall" by
- * default, or "window") only changes how it is drawn. Another system
+ * default, "window", or Step 20's timber pieces standing in the open:
+ * "fence", "stall", "barricade") only changes how it is drawn. Another system
  * breaks one with breakPartAt() from src/sim/room-parts.ts.
  *
  * INTENT: impact over numbers (D-020). The wall has no health: one hard
@@ -37,7 +41,8 @@ const system: System = {
       blocks: true,
       check(part, _room, fail) {
         const look = part.params.look;
-        if (look !== undefined && look !== 'wall' && look !== 'window') fail('params.look: must be "wall" or "window"');
+        // DRAFT (Step 20): fence, stall and barricade are the camp's run (content/rooms/outpost.json); drawing only.
+        if (look !== undefined && !BREAKABLE_LOOKS.includes(look as string)) fail(`params.look: must be one of ${BREAKABLE_LOOKS.map((l) => `"${l}"`).join(', ')}`);
         const speed = part.params.breakSpeed;
         if (speed !== undefined && (typeof speed !== 'number' || !(speed >= 1) || speed > 900)) fail('params.breakSpeed: must be pixels per second from 1 to 900');
       },

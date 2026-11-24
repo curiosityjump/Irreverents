@@ -16,6 +16,10 @@ const PANE_LIGHT = '#d5e4ee';
 const FRAME = '#3d4254';
 const HIDE = '#6b3f4f';
 const HIDE_FOLD = '#4f2d3a';
+const WOOD = '#9b6b3f';
+const WOOD_DARK = '#5e3d22';
+const AWNING = '#c0473a';
+const AWNING_LIGHT = '#e8d9b0';
 
 /**
  * Which tiles *look* solid (docs/mechanisms/art-pipeline.md, "Ground"): the
@@ -53,7 +57,8 @@ export function solidLook(room: Room, world: World): SolidLook {
   const grid = new Uint8Array(room.w * room.h);
   for (let i = 0; i < grid.length; i++) grid[i] = room.cells[i] === TILE.solid ? 1 : 0;
   for (const part of room.parts) {
-    const asWall = part.kind === 'false-wall' || (part.kind === 'breakable' && part.params.look !== 'window' && !memory[part.id]?.broken);
+    // A breakable is ground only with the wall look (the default): a window and Step 20's timber pieces stand in the open.
+    const asWall = part.kind === 'false-wall' || (part.kind === 'breakable' && (part.params.look === undefined || part.params.look === 'wall') && !memory[part.id]?.broken);
     if (asWall) for (const t of part.tiles) grid[t.ty * room.w + t.tx] = 1;
   }
   for (const d of room.doors) {
@@ -204,9 +209,15 @@ export function drawRoomParts(g: CanvasRenderingContext2D, world: World, room: R
       drawGate(g, part, open, T, ox, oy);
     } else if (part.kind === 'breakable') {
       const broken = s.broken === true;
-      if (part.params.look === 'window') {
+      const kind = part.params.look;
+      if (kind === 'window' || kind === 'fence' || kind === 'stall' || kind === 'barricade') {
+        // Its own picture, then the generic one for its look and size (`stall-2x2`, `barricade-broken-1x4`), then the plain shape.
         const size = `${b.w}x${b.h}`;
-        if (whole(broken ? [`${own}:broken`, `window-broken-${size}`] : [own, `window-${size}`])) continue;
+        if (whole(broken ? [`${own}:broken`, `${kind}-broken-${size}`] : [own, `${kind}-${size}`])) continue;
+        if (kind !== 'window') {
+          drawTimber(g, part, kind, broken, T, ox, oy);
+          continue;
+        }
       } else if (broken) {
         if (whole([`${own}:broken`]) || each(() => ['rubble'], (t) => t.ty === b.ty + b.h - 1)) continue;
       } else {
@@ -382,6 +393,53 @@ function drawBreakable(g: CanvasRenderingContext2D, part: Part, broken: boolean,
       g.fillStyle = SOLID;
       g.fillRect(x + 1, y + T - 3, 4, 3);
       g.fillRect(x + 9, y + T - 2, 5, 2);
+    }
+  }
+}
+
+/**
+ * DRAFT (Step 20): the camp's timber pieces until their pictures come
+ * (the art lane, P04/P07): planks for a fence, a striped awning on posts
+ * for a stall, crossed beams for the barricade; broken, splinters on the
+ * floor. Wood, never a grey box.
+ */
+function drawTimber(g: CanvasRenderingContext2D, part: Part, kind: string, broken: boolean, T: number, ox: number, oy: number): void {
+  const top = Math.min(...part.tiles.map((q) => q.ty));
+  const bottom = Math.max(...part.tiles.map((q) => q.ty));
+  for (const t of part.tiles) {
+    const x = ox + t.tx * T;
+    const y = oy + t.ty * T;
+    if (broken) {
+      if (t.ty !== bottom) continue;
+      g.fillStyle = WOOD_DARK;
+      g.fillRect(x + 1, y + T - 3, 6, 3);
+      g.fillStyle = WOOD;
+      g.fillRect(x + 8, y + T - 2, 6, 2);
+      g.fillRect(x + 4, y + T - 5, 3, 2);
+      continue;
+    }
+    if (kind === 'stall') {
+      g.fillStyle = WOOD_DARK;
+      g.fillRect(x + 1, y, 2, T);
+      g.fillRect(x + T - 3, y, 2, T);
+      if (t.ty === top) {
+        for (let s = 0; s < T; s += 4) {
+          g.fillStyle = (s / 4) % 2 === 0 ? AWNING : AWNING_LIGHT;
+          g.fillRect(x + s, y, 4, 5);
+        }
+      } else {
+        g.fillStyle = WOOD;
+        g.fillRect(x, y + 2, T, 5);
+      }
+      continue;
+    }
+    g.fillStyle = WOOD;
+    g.fillRect(x + 2, y, T - 4, T);
+    g.fillStyle = WOOD_DARK;
+    for (let s = 4; s < T; s += 5) g.fillRect(x + 2, y + s, T - 4, 1);
+    if (kind === 'barricade') {
+      g.fillRect(x, y + 3, T, 2);
+      g.fillRect(x, y + T - 5, T, 2);
     }
   }
 }

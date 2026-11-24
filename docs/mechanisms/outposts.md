@@ -113,7 +113,7 @@ present (`docs/mechanisms/art-pipeline.md`). The page's debug record has
 
 ## The rooms
 
-- **`outpost`** (the "Bandit Camp", reached by the `to-outpost` enter
+- **`outpost`** (the "Bandit Camp", 88 columns since Step 20 (its run east, the section below), reached by the `to-outpost` enter
   doorway in the courtyard, ground row 7, column 23): the doorway at
   column 2, a step three tiles high (columns 5-7) every way in crosses,
   and a hop from it to a one-way ledge at row 6, columns 9-38, the high way
@@ -219,6 +219,29 @@ counts a room's people by id prefix and span of feet. Re-timed:
 `step12-waves-never-pass-bound` (a one-tile block on the floor keeps the
 waves off the hero's platform) and `step12-walk-out-ends-it` (the walk
 out is during the second call).
+
+## Step 20: the camp's run (`DRAFT:`, docs/decisions-log.md "Step 20: the camp's run")
+
+`content/rooms/outpost.json` is 88 columns now (was 44); nothing west of the
+old east wall (column 43) moved, and every `step12-*`, `step13-*`,
+`step19-*` and `step7-*` scenario passed with no re-time. East of it, on the
+floor: the light barrier `camp-light-barrier` (column 47, 2 tall,
+`breakSpeed` 200, look `fence`), the crate `camp-crate-1` (51), stalls
+`camp-stall-1` (55-56) and `camp-stall-2` (64-65) (2 tall, 150, `stall`),
+the timber barricade `camp-barricade` (75, 4 tall: no hero jumps it; 300,
+`barricade`), the cache `camp-cache` (79, a second prize of
+`content/heists/camp.json`), and a 3-tall step at 84-86 against the east
+wall. A second one-way ledge on row 6, columns 41-82, starts two tiles past
+the first one's end (39-40 is a hop): the quiet way runs along it and off
+its east end onto the step, down into the cache, and back out up the step
+and a hop onto the ledge (the entrance's shape mirrored). The camp's
+fighters cannot jump, so the 2-tall pieces stop a chase that a hero hops.
+Waves still walk in at column 41, now mid-room (flagged in the step's notes).
+Scenarios: `step20-camp-run-breaks-through` (a wagon at speed through it
+all; control: the barricade's `breakSpeed` 400, it holds) and
+`step20-camp-quiet-way` (infiltrator), `-grappler`, `-flyer` (no call, no
+barrier broken, the cache taken unseen, out by the doorway, a clean
+getaway; control: the floor way, a call starts).
 
 ## Not built yet
 

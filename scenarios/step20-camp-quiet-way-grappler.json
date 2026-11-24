@@ -1,0 +1,195 @@
+{
+  "id": "step20-camp-quiet-way-grappler",
+  "proves": "the quiet way to the camp's cache, for the grappler: in from the doorway, up the step onto the high ledge, a hop over the gap at columns 39-40 onto the second ledge (content/rooms/outpost.json, Step 20), along it over the light barrier, the stalls and the timber barricade, off its east end onto the cache's step and down into the cache; the cache taken with no witness; then out on foot the way they came (the step, a hop up onto the ledge's east end, back along both ledges, down by the doorway's step) and through the doorway: banked, a clean getaway. No call ever starts and no barrier is broken, so the loud way is a choice and a hero in the cache with the barricade whole is never trapped (D-061; there is always a way out). Control: the same inputs with the two hops onto the step and the ledge taken out (the floor way), the lookout sees them and a call starts; and with the gap hop taken out, the hero drops to the floor east of the camp and the clean getaway fails",
+  "room": "outpost",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 960,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 20,
+      "to": 40,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 60,
+      "to": 80,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 430,
+      "to": 450,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 960,
+      "to": 1033,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 1040,
+      "to": 1050,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 1050,
+      "to": 1160,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 1094,
+      "to": 1114,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 1160,
+      "to": 2122,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 1166,
+      "to": 1186,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 1674,
+      "to": 1694,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 2140,
+      "to": 2150,
+      "hold": [
+        "interact"
+      ]
+    }
+  ],
+  "ticks": 2170,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "outpost-call-started",
+      "where": {},
+      "between": [
+        0,
+        2170
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "part-broken",
+      "where": {
+        "room": "outpost"
+      },
+      "between": [
+        0,
+        2170
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "prize-taken",
+      "where": {
+        "thing": "camp-cache",
+        "by": "p:a"
+      },
+      "between": [
+        1035,
+        1045
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "position",
+      "player": "a",
+      "at": 1040,
+      "x": [
+        1230,
+        1320
+      ],
+      "y": [
+        175,
+        177
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "changed-room",
+      "where": {
+        "entity": "p:a",
+        "toRoom": "courtyard"
+      },
+      "between": [
+        2135,
+        2145
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "clean-getaway",
+      "where": {
+        "thing": "camp-cache",
+        "by": "p:a"
+      },
+      "between": [
+        2135,
+        2145
+      ],
+      "count": [
+        1,
+        1
+      ]
+    }
+  ]
+}

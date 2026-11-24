@@ -1,5 +1,5 @@
 {
-  "//": "DRAFT (Step 12): the hostile camp east of the courtyard; every column is a first pass, the id and the door id are permanent. In from the courtyard at the west doorway (column 2); a step three tiles high (columns 5-7) and from it a hop up to a long one-way ledge (row 6, columns 9-38), five tiles above the floor: up there a hero is far more than a lookout's 40 px of sight above them, so sneaking across is a real choice, and dropping off it into the camp is another. Under the ledge, the camp (content/placements/outpost.json): a lookout at column 18 watching west, the horn post at 20, two fighters at 25 and 28. Waves walk in at column 41 (content/outposts/outpost.json), clear of the post and the camp.",
+  "//": "DRAFT (Step 12): the hostile camp east of the courtyard; every column is a first pass, the id and the door id are permanent. In from the courtyard at the west doorway (column 2); a step three tiles high (columns 5-7) and from it a hop up to a long one-way ledge (row 6, columns 9-38), five tiles above the floor: up there a hero is far more than a lookout's 40 px of sight above them, so sneaking across is a real choice, and dropping off it into the camp is another. Under the ledge, the camp (content/placements/outpost.json): a lookout at column 18 watching west, the horn post at 20, two fighters at 25 and 28. Waves walk in at column 41 (content/outposts/outpost.json), clear of the post and the camp. Step 20 (vehicles, builder B; DRAFT, docs/decisions-log.md 'Step 20: the camp\\'s run'): the camp runs on east past its old wall at column 43, to column 87, about two phone screens for the ram wagon (content/machines/ram-wagon.json) to plough through. Nothing west of column 39 moved. On the floor, east-bound: a light barrier at 47 (two tiles tall, a hop for any hero, a wall to the camp's fighters, who cannot jump), market stalls at 55-56 and 64-65, loose crates between (content/placements/outpost.json), then a timber barricade at 75, four tiles tall (no hero jumps it), and the cache behind it (76-83). A second one-way ledge on row 6, columns 41-82, two tiles past the first one's end (a hop), runs over all of it: the quiet way, walking off its east end into the cache. Out of the cache on foot: the step at 84-86 and a hop back up to the ledge, the entrance's own shape mirrored.",
   "id": "outpost",
   "name": "Bandit Camp",
   "tile": 16,
@@ -10,21 +10,33 @@
     "1": "spawn",
     "o": {
       "door": "to-courtyard"
+    },
+    "f": {
+      "part": "camp-light-barrier"
+    },
+    "a": {
+      "part": "camp-stall-1"
+    },
+    "b": {
+      "part": "camp-stall-2"
+    },
+    "B": {
+      "part": "camp-barricade"
     }
   },
   "rows": [
-    "############################################",
-    "#..........................................#",
-    "#..........................................#",
-    "#..........................................#",
-    "#..........................................#",
-    "#..........................................#",
-    "#........==============================....#",
-    "#..........................................#",
-    "#....###...................................#",
-    "#.o..###...................................#",
-    "#.o1.###...................................#",
-    "############################################"
+    "########################################################################################",
+    "#......................................................................................#",
+    "#......................................................................................#",
+    "#......................................................................................#",
+    "#......................................................................................#",
+    "#......................................................................................#",
+    "#........==============================..==========================================....#",
+    "#..........................................................................B...........#",
+    "#....###...................................................................B........####",
+    "#.o..###.......................................f.......aa.......bb.........B........####",
+    "#.o1.###.......................................f.......aa.......bb.........B........####",
+    "########################################################################################"
   ],
   "doors": [
     {
@@ -34,6 +46,44 @@
       "to": {
         "room": "courtyard",
         "door": "to-outpost"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "//": "DRAFT (Step 20): the light barrier: a thrown crate (520) or a hard-knocked body opens it; a running hero (128 at most) does not.",
+      "id": "camp-light-barrier",
+      "kind": "breakable",
+      "params": {
+        "breakSpeed": 200,
+        "look": "fence"
+      }
+    },
+    {
+      "//": "DRAFT (Step 20): a market stall, burst by anything at 150 or more (a running hero is under it).",
+      "id": "camp-stall-1",
+      "kind": "breakable",
+      "params": {
+        "breakSpeed": 150,
+        "look": "stall"
+      }
+    },
+    {
+      "//": "DRAFT (Step 20): a market stall, as camp-stall-1.",
+      "id": "camp-stall-2",
+      "kind": "breakable",
+      "params": {
+        "breakSpeed": 150,
+        "look": "stall"
+      }
+    },
+    {
+      "//": "DRAFT (Step 20): the timber barricade before the cache. 300: the wagon at speed (340) bursts it; no hero runs that fast. A body thrown at it (up to 520) breaks it too: the wagon's top speed is under the throw cap, so it cannot be the wagon's alone (docs/decisions-log.md, 'Step 20: the camp\\'s run'). INTENT (nothing resets): broken, it stays broken in a kept game, as every breakable.",
+      "id": "camp-barricade",
+      "kind": "breakable",
+      "params": {
+        "breakSpeed": 300,
+        "look": "barricade"
       }
     }
   ]

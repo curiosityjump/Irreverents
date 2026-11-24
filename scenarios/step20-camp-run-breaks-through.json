@@ -1,0 +1,220 @@
+{
+  "id": "step20-camp-run-breaks-through",
+  "proves": "the camp's new run (content/rooms/outpost.json, Step 20) with nobody of the camp in it: the ram wagon driven flat out east from the doorway (the step's tiles cleared so a wagon can start there, as the seat that puts a hero in one in the camp is not built yet) bursts the light barrier (47) itself, sends the market's crate flying ahead, bursts the first stall (55), the flung crate bursts the second (64), and the wagon bursts the timber barricade (75) at its top speed and is still rolling at speed in the cache behind it, before it crashes into the cache's step (84). Control: the barricade's breakSpeed set to 400, above the wagon's top speed (340): it holds, the wagon stops dead at it and never reaches the cache",
+  "room": "outpost",
+  "placements": false,
+  "players": [
+    {
+      "id": "a",
+      "character": "ram-wagon",
+      "spawn": 0
+    }
+  ],
+  "entities": [
+    {
+      "id": "crate",
+      "character": "crate",
+      "tile": [
+        51,
+        10
+      ]
+    }
+  ],
+  "ticks": 320,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "part-broken",
+      "where": {
+        "part": "camp-light-barrier",
+        "by": "p:a"
+      },
+      "between": [
+        155,
+        175
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "machine-crash",
+      "where": {
+        "machine": "p:a",
+        "target": "crate"
+      },
+      "between": [
+        165,
+        190
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "part-broken",
+      "where": {
+        "part": "camp-stall-1",
+        "by": "p:a"
+      },
+      "between": [
+        180,
+        200
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "part-broken",
+      "where": {
+        "part": "camp-stall-2"
+      },
+      "between": [
+        195,
+        225
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "part-broken",
+      "where": {
+        "part": "camp-barricade",
+        "by": "p:a"
+      },
+      "between": [
+        235,
+        255
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "velocity",
+      "player": "a",
+      "at": 260,
+      "vx": [
+        300,
+        345
+      ]
+    },
+    {
+      "fact": "position",
+      "player": "a",
+      "at": 262,
+      "x": [
+        1230,
+        1340
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "machine-wrecked",
+      "where": {
+        "machine": "p:a"
+      },
+      "between": [
+        0,
+        320
+      ],
+      "count": [
+        0,
+        0
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 320,
+      "x": 1
+    }
+  ],
+  "tiles": [
+    {
+      "room": "outpost",
+      "tile": [
+        5,
+        8
+      ],
+      "is": "empty"
+    },
+    {
+      "room": "outpost",
+      "tile": [
+        5,
+        9
+      ],
+      "is": "empty"
+    },
+    {
+      "room": "outpost",
+      "tile": [
+        5,
+        10
+      ],
+      "is": "empty"
+    },
+    {
+      "room": "outpost",
+      "tile": [
+        6,
+        8
+      ],
+      "is": "empty"
+    },
+    {
+      "room": "outpost",
+      "tile": [
+        6,
+        9
+      ],
+      "is": "empty"
+    },
+    {
+      "room": "outpost",
+      "tile": [
+        6,
+        10
+      ],
+      "is": "empty"
+    },
+    {
+      "room": "outpost",
+      "tile": [
+        7,
+        8
+      ],
+      "is": "empty"
+    },
+    {
+      "room": "outpost",
+      "tile": [
+        7,
+        9
+      ],
+      "is": "empty"
+    },
+    {
+      "room": "outpost",
+      "tile": [
+        7,
+        10
+      ],
+      "is": "empty"
+    }
+  ]
+}
