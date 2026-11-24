@@ -526,3 +526,13 @@ before you quote it.
 - Control, run by me (`stage-run.ts` as it was before 1b8b8d1, scenario kept): `step22-restart-on-game-over` fails, as it should, with no `stage-restarted` event and tries 0.
 - `npm run gates` is 6 of 6.
 - Open: both the throw and the game over now start the stage over. The throw goes when the hearts builder switches it off by data, and three `step22-*` scenarios rely on it then.
+
+### Lead review, push 4 (e530fa6), re-run by the successor lead
+
+- `npm run build`, `npm run check` ok; `npm run gates` 6 of 6.
+- `npm run e2e`: every `stage-*` fact ok. At all three phone sizes the panel and Continue are inside the view and reachable. `stage-held` is the control: with the screen up, the stick moves the hero 0 px; after Continue, 49.9 px. In `stage-two`, A dismissing does not dismiss B.
+- Looked at all four shots myself:
+  - STAGE CLEARED is large and legible, the statistics are aligned and Continue sits under the right thumb.
+  - Sideways, the panel covers the middle of the screen and leaves the hearts plate visible.
+  - **Doubt:** `hall-frame-star` reads as a framed tile, not a star (a `DRAFT:`, and a missing-list item for Vision Partner).
+- **Still owed by this step's signal:** the e2e's "walk in, be beaten, be at the entrance with the stick moving the hero". Fold it into 3b, which walks the quarry anyway, together with one walked clear that raises the screen from the real event.
