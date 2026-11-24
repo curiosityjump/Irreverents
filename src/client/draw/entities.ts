@@ -188,6 +188,7 @@ export function drawEntities(g: CanvasRenderingContext2D, world: World, content:
   const front = (e: Entity): boolean => !!e.c.beat || (!!e.c.flying && !!e.c.impact && world.tick - e.c.impact.tick < 30) || predictedLook(world, e.id) !== null;
   // Step 20 push 3: a person at the reins of a machine drawn from its looks is the cells' baked rider (DRAFT, draw/machines.ts).
   const order = world.entities.filter((e) => e.room === roomId && content.characters[e.kind] && !seatedInDrawnMachine(world, content, e));
+  drawSlams(g, world, content, roomId, ox, oy, 'dust');
   for (const e of [...order.filter((e) => !front(e)), ...order.filter(front)]) {
     const carrier = heldBy.get(e.id);
     if (carrier && byId.get(carrier)?.room === roomId) continue;

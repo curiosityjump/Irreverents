@@ -368,3 +368,25 @@ By a subagent reading the six shots in `docs/plan/step-25-shots/` at phone size,
   `handoff-prompts/suplex.md`, "Landed so far, push 4"): head-down 180
   degrees from the star's tick and held for the beat; a smaller star at the
   head with the dust behind; the body a few px further clear of the hero.
+
+- **2026-11-24, the push-5 builder (`handoff-prompts/suplex.md`, "Landed so far, push 4").**
+  Drawn only, no sim number. (1) Head-down from the slam's first frame:
+  `CATCH` gone, the rest of the arc is skipped. (2) The slam's star is its
+  own, 0.75 of `fx-hit`, at the head on the floor; `draw/impact.ts` got one
+  additive hook (`drawnElsewhere`, by body id and tick within 4: an exact
+  tick-and-pixel key missed) that stands down its star and puffs for the
+  slammed body and, same tick, the bodies the splash knocks (the throne
+  room's crates start at the head: their 1.25 stars and puffs were what hid
+  it), keeping the shake. The slam's floor dust is now drawn before the
+  bodies, so the turned king's crown shows. (3) `GAP` 18 to 24. Shots
+  `*-3-*` (both orientations): the king upside down, crown on the floor
+  under the small star, feet up, clear of the hero. By touch at 150 ms each
+  way, suplex facts all ok: presser moves at ~15 ms, head-down and the
+  impact drawn on the same frame (~916-933 ms); friend moves ~614 ms,
+  head-down ~934 ms. **Flag, not fixed (not in the brief, `sprites.ts` not
+  mine):** `after-*` still stands the king on end: during the bounce the
+  body is drawn with its tumble frames, which are already turned, and the
+  flop's turn adds to it. Fix by having the flop pick a lying frame (or no
+  extra turn when the state is `tumble`), in `sprites.ts`. **Not done:** no
+  scripted fact for "head-down on the star's tick" beyond `suplex-felt`'s
+  120 ms; judged from the shots.

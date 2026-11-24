@@ -60,6 +60,23 @@ const swings = new Map<string, { swung: number; struck: Set<string> }>();
 /** Impact keys first seen while a prediction for that body was waiting: drawn by the prediction. */
 const covered = new Set<string>();
 const seenKeys = new Set<string>();
+/**
+ * Step 25 push 5: impacts whose star and dust another drawing draws itself (the suplex's own floor
+ * dust and smaller star at the slammed head, draw/suplex.ts). The shake stays this file's.
+ * DRAFT: one additive hook, so a move can own its look; nothing else claims one.
+ */
+// By body id, the impact tick claimed: matched within a few ticks, as a page's copy of an impact can
+// shift by a tick or a pixel between snapshots (an exact key missed it in push 5's first shots).
+const starElsewhere = new Map<string, number>();
+const CLAIM_SLACK = 4;
+export function drawnElsewhere(id: string, hit: { tick: number }): void {
+  starElsewhere.set(id, hit.tick);
+  if (starElsewhere.size > 64) starElsewhere.delete(starElsewhere.keys().next().value!);
+}
+function claimed(id: string, tick: number): boolean {
+  const t = starElsewhere.get(id);
+  return t !== undefined && Math.abs(t - tick) <= CLAIM_SLACK;
+}
 /** DRAFT: how long a prediction waits for the server's word (ms), and the nudge along the push (px). */
 const PREDICT_MS = 500;
 const NUDGE = 2;
@@ -215,7 +232,7 @@ export function drawImpact(g: CanvasRenderingContext2D, world: World, roomId: st
     const dust = look('fx-dust');
     const star = look('fx-hit');
     if (dust || star) {
-      if (dust && age < DUST_TICKS) {
+      if (dust && age < DUST_TICKS && !claimed(e.id, hit.tick)) {
         const f = frameOf(dust, age, false);
         if (f >= 0) {
           const spreadL = (3 + 10 * size) * Math.min(1, age / 8);
@@ -227,7 +244,7 @@ export function drawImpact(g: CanvasRenderingContext2D, world: World, roomId: st
           }
         }
       }
-      if (star) {
+      if (star && !claimed(e.id, hit.tick)) {
         const f = frameOf(star, starAge, false);
         // Round 2: sized by the impact, in quarter steps: soft 3/4, full speed 5/4; an attack's hit
         // (c.lastHit on this tick) never smaller than the look itself.
@@ -239,7 +256,7 @@ export function drawImpact(g: CanvasRenderingContext2D, world: World, roomId: st
       }
       continue;
     }
-    if (age >= DUST_TICKS) continue;
+    if (age >= DUST_TICKS || claimed(e.id, hit.tick)) continue;
     const spread = (4 + 14 * size) * (age / DUST_TICKS);
     const side = Math.max(1, Math.round((2 + 3 * size) * (1 - age / DUST_TICKS)));
     g.globalAlpha = 0.85 * (1 - age / DUST_TICKS);
@@ -248,7 +265,7 @@ export function drawImpact(g: CanvasRenderingContext2D, world: World, roomId: st
       g.fillRect(ox + Math.round(hit.x + dx * spread) - (side >> 1), oy + Math.round(hit.y + dy * spread) - (side >> 1), side, side);
     }
     // The first frames of an impact get a bright star at the point of contact.
-    if (age < 4) {
+    if (age < 4 && !claimed(e.id, hit.tick)) {
       const r = Math.round((3 + 5 * size) * (1 - age / 4));
       g.globalAlpha = 0.9;
       g.fillStyle = '#ffffff';

@@ -268,8 +268,9 @@ builder chose.
     e2e counts heave frames whose body is neither above the head nor behind
     the back: 0.
   - **The slam**: when the server's slam reaches the page (the body let go
-    with a new `c.impact`), the arc finishes in `CATCH` ticks if it had not,
-    then the body is drawn head-down at the floor `GAP` px further behind
+    with a new `c.impact`), the body is drawn head-down on that same frame
+    (`INTENT:`, push 5: what is left of the arc is skipped, so the head is
+    down from the star's first tick), at the floor `GAP` px further behind
     than the simulation puts it (sprite pictures are wider than boxes: no
     overlap with the carrier), held for the slam's beat (at least
     `HOLD_MIN`), then flops on over (legs away from the carrier) to lying
@@ -278,9 +279,14 @@ builder chose.
     into it from mid-heave until the flop: the bridge, until the grappler's
     frames (C02-05) come.
   - **Weight**: `draw/slam-dust.ts`, a burst along the floor about twice
-    the body's width at once and three and a half at its widest, beside the
-    impact's own star (1.25 size) and full shake (500 is over `FULL_SPEED`
-    450) and the `slam` sound (over 420).
+    the body's width at once and three and a half at its widest, drawn
+    behind the bodies (`drawSlams(..., 'dust')` before them in
+    `entities.ts`, so the head shows), and in front the slam's own star,
+    `STAR` (0.75) of the `fx-hit` look, at the head on the floor, held
+    through the beat. `draw/impact.ts` stands its own star and puffs down
+    for that impact and for the splashed bodies' impacts of the same tick
+    (`drawnElsewhere`, push 5), and keeps the full shake (500 is over
+    `FULL_SPEED` 450); the `slam` sound (over 420).
   - **Timing** (`INTENT:`, ruling 4): drawn from the press on the presser's
     page (it never learns its hero heaves), stretched to `suplexTime` plus
     the page's lag (seeded from the round trip, report and snapshot

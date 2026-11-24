@@ -52,7 +52,10 @@ the items below to their homes.
   as `rider`). `docs/mechanisms/machines.md`, "The look" and "On the
   courtyard's run".
 - **`impact.ts`**: `fx-dust` puffs (three, or two for a soft impact) and an
-  `fx-hit` star at the point of impact; the shake is unchanged.
+  `fx-hit` star at the point of impact; the shake is unchanged. An impact
+  another drawing claims with `drawnElsewhere` (by body id and tick; only
+  the suplex's slam and its splash, `draw/suplex.ts`) gets no star or puffs
+  here, its shake as before.
 - **`npcs.ts`**: `mood-2` / `mood-3` marks; a bark in the `bark` nine-slice
   with `bark-tail` under it at the speaker; `shop-counter` / `shop-goods`;
   the red veil only for a person with no sprite sheet.

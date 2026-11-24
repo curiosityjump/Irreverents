@@ -190,7 +190,7 @@ export async function suplexFacts(kit: Kit & { shots: string }): Promise<void> {
       await sleep(400);
     }
     fs.mkdirSync(kit.shots, { recursive: true });
-    await ph.page.screenshot({ path: path.join(kit.shots, 'carrying-2-sideways.png') });
+    await ph.page.screenshot({ path: path.join(kit.shots, 'carrying-3-sideways.png') });
 
     // Push 4: two suplexes, the first shot sideways, the second upright (the king gets up first), each
     // watched on the presser's page and on a friend's page at the same delay.
@@ -206,7 +206,7 @@ export async function suplexFacts(kit: Kit & { shots: string }): Promise<void> {
           if (r && ok(r)) break;
           await sleep(8);
         }
-        await ph.page.screenshot({ path: path.join(kit.shots, `${name}-2-${view}.png`) });
+        await ph.page.screenshot({ path: path.join(kit.shots, `${name}-3-${view}.png`) });
       };
       await shotAt('heave', (r) => r.phase === 'heave' && r.p >= 0.3);
       await shotAt('overhead', (r) => r.phase === 'heave' && r.p >= 0.6);
@@ -253,7 +253,7 @@ export async function suplexFacts(kit: Kit & { shots: string }): Promise<void> {
       await sleep(300);
       await tap(ph, 'grab');
       await sleep(900);
-      await ph.page.screenshot({ path: path.join(kit.shots, 'carrying-2-upright.png') });
+      await ph.page.screenshot({ path: path.join(kit.shots, 'carrying-3-upright.png') });
       if ((await useState(ph)) === 'suplex') second = await round('upright');
     }
     fact('suplex-again', !!second && second.mine.impact !== null,

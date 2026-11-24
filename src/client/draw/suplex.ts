@@ -3,6 +3,8 @@ import { ticksOf } from '../../sim/body-state.ts';
 import { numbersOf } from '../../sim/powers.ts';
 import type { Entity, World } from '../../sim/types.ts';
 import { useHere } from '../../sim/use.ts';
+import { drawFrame, frameOf, look } from './fx.ts';
+import { drawnElsewhere } from './impact.ts';
 import { drawSlamDust } from './slam-dust.ts';
 
 /**
@@ -17,12 +19,15 @@ import { drawSlamDust } from './slam-dust.ts';
  *    over and behind him on an arc about his feet, turning head-down as it
  *    comes over (`turnForHeave`, while it is still held).
  * 2. The slam: once the server's slam arrives (the body is let go with a new
- *    impact), the body finishes the arc, is drawn head-down at the floor
- *    behind the carrier, and that picture is held for the slam's beat, then
+ *    impact), the body is drawn head-down at the floor behind the carrier on
+ *    that same frame (push 5: no finishing the arc first, so the head is down
+ *    from the star's first tick), and that picture is held for the slam's beat, then
  *    flops over flat (`poseFor`, the body drawn free). The carrier leans back
  *    into it: the bridge.
  * 3. A dust burst along the floor wider than the body (draw/slam-dust.ts),
- *    beside the impact's own star and shake (draw/impact.ts).
+ *    drawn behind the bodies, and the slam's own star, smaller, in front at
+ *    the head (push 5; the impact's own star and puffs are stood down for it,
+ *    its shake stays: draw/impact.ts).
  *
  * INTENT: drawn from the press. A player's own page never learns its hero
  * carries or heaves (the server does both; docs/mechanisms/network.md), so
@@ -41,10 +46,10 @@ import { drawSlamDust } from './slam-dust.ts';
 const LEAN = 0.15;
 /** DRAFT: how much higher than the carry the body rises at the top of the arc (px). */
 const LIFT = 8;
-/** DRAFT: the drawn gap between carrier and slammed body, beyond the simulation's 1 px (sprite pictures are wider than their boxes). */
-const GAP = 18;
-/** DRAFT: ticks to finish the arc when the slam arrives before the drawn body reaches the floor. */
-const CATCH = 3;
+/** DRAFT: the drawn gap between carrier and slammed body, beyond the simulation's 1 px (sprite pictures are wider than their boxes; push 5 widened 18 to 24). */
+const GAP = 24;
+/** DRAFT (push 5): the slam's star at the head, as a share of the `fx-hit` look (impact.ts draws a 500 impact at 1.25). */
+const STAR = 0.75;
 /** DRAFT: ticks the head-down picture is held at least (the slam's own beat is used when longer). */
 const HOLD_MIN = 9;
 /** DRAFT: ticks the head-down body takes to flop flat. */
@@ -71,6 +76,9 @@ interface Heave {
   /** The slam's beat, ticks. */
   beat: number;
 }
+// INTENT (push 5, the orchestrator's look at the *-2-* shots): head-down from the tick the star
+// appears. The arc is not finished on screen after the slam arrives (push 4's 3-tick catch drew
+// the body sideways under the star); whatever is left of it is skipped.
 /** By carried body. */
 const heaves = new Map<string, Heave>();
 /** Per carrier: whether its Use was down, and the last `c.suplex.at` seen. */
@@ -267,7 +275,7 @@ function leanOf(world: World, h: Heave): number {
     return p < 0.4 ? 0 : Math.min(1, (p - 0.4) / 0.5);
   }
   const since = world.tick - h.slamAt;
-  const flopAt = CATCH + h.beat;
+  const flopAt = h.beat;
   if (since < flopAt) return 1;
   return Math.max(0, 1 - (since - flopAt) / FLOP);
 }
@@ -288,6 +296,11 @@ function slammed(g: CanvasRenderingContext2D, world: World, content: Content, h:
     const share = Math.max(0, Math.min(1, hit.speed / (w.maxLaunchSpeed ?? 500)));
     h.beat = Math.max(HOLD_MIN, ticksOf((w.beatTime ?? 0) + ((w.beatMaxTime ?? 0) - (w.beatTime ?? 0)) * share));
     record.slamTick = world.tick;
+    // DRAFT (push 5): the slam's one star is the small one at the head and its dust is slam-dust's. The
+    // bodies its splash knocks away on the same tick start from the landing too, and their full stars
+    // and puffs hid the head in the first *-3-* shots: theirs are stood down as well (the shake stays;
+    // their later impacts, into walls and each other, keep theirs).
+    for (const o of world.entities) if (o.room === body.room && o.id !== h.carrier && o.c.impact && Math.abs(o.c.impact.tick - hit.tick) <= 1) drawnElsewhere(o.id, o.c.impact);
     if (h.pressed) {
       const measured = world.tick - h.start - (h.length - pressLag(content));
       lag = Math.max(0, Math.min(90, lag === null ? measured : Math.round((lag + measured) / 2)));
@@ -297,27 +310,14 @@ function slammed(g: CanvasRenderingContext2D, world: World, content: Content, h:
   const end = h.end;
   // INTENT: after the flop it stays drawn lying flat until it is back on the floor (the slam's bounce,
   // world.floorBounce), so it never stands up mid-bounce; LIE_MAX ticks at most.
-  const lying = since > CATCH + h.beat + FLOP;
-  if (!end || since < 0 || (lying && (since > CATCH + h.beat + FLOP + LIE_MAX || (body.onGround && !body.c.flying)))) {
+  const lying = since > h.beat + FLOP;
+  if (!end || since < 0 || (lying && (since > h.beat + FLOP + LIE_MAX || (body.onGround && !body.c.flying)))) {
     heaves.delete(body.id);
     return false;
   }
   const from = { x: at.x + tb.w / 2, y: at.y + tb.h / 2 };
   const endScreen = { x: ox + end.x, y: oy + end.y };
-  // Finishing the arc when the slam came before the drawn body reached the floor.
-  if (since < CATCH && h.pAtSlam < 1 && carrier) {
-    const cb = boxOf(content, carrier);
-    if (cb) {
-      const feet = { x: ox + carrier.x + cb.w / 2, y: oy + carrier.y + cb.h };
-      const hands = { x: feet.x, y: feet.y - cb.h - tb.h / 2 };
-      const p = h.pAtSlam + ((1 - h.pAtSlam) * (since + 1)) / CATCH;
-      const pose = arc(h, Math.min(1, p), feet, hands, endScreen);
-      note(world, 'catch', p, pose.angle, h.length);
-      turnAbout(g, from, pose, pose.angle);
-      return true;
-    }
-  }
-  const held = since - CATCH;
+  const held = since;
   if (held < h.beat) {
     // INTENT (push 4, ruling 2): head-down at the floor behind, held for the slam's beat.
     if (carrier) record.slamDx = Math.round(end.x - (carrier.x + (boxOf(content, carrier)?.w ?? 0) / 2));
@@ -335,15 +335,33 @@ function slammed(g: CanvasRenderingContext2D, world: World, content: Content, h:
   return true;
 }
 
-/** The dust of every slam this page has seen land, along the floor. Call once a frame, after the bodies. */
-export function drawSlams(g: CanvasRenderingContext2D, world: World, content: Content, roomId: string, ox: number, oy: number): void {
+/**
+ * The dust and star of every slam this page has seen land. Call once a frame with `layer` 'dust' before
+ * the bodies and 'star' after them. INTENT (push 5): the dust behind the bodies, so it never hides the
+ * slammed head (the crown of a turned king sat under it in the first *-3-* shots); the star in front, at the head.
+ */
+export function drawSlams(g: CanvasRenderingContext2D, world: World, content: Content, roomId: string, ox: number, oy: number, layer: 'dust' | 'star' = 'star'): void {
   for (const h of heaves.values()) {
     if (h.slamAt === null || !h.end) continue;
     const body = world.entities.find((o) => o.id === h.body);
     const tb = body && boxOf(content, body);
     if (!body || !tb || body.room !== roomId) continue;
-    drawSlamDust(g, world.tick - h.slamAt, ox + h.end.x, oy + h.end.y + tb.h / 2, tb.w);
+    const age = world.tick - h.slamAt;
+    const floor = oy + h.end.y + tb.h / 2;
+    if (layer === 'dust') {
+      drawSlamDust(g, age, ox + h.end.x, floor, tb.w);
+      continue;
+    }
+    // The slam's star, over the dust, at the head on the floor: held on its first frame through the beat, then played on.
+    const star = look('fx-hit');
+    if (!star) continue;
+    const f = frameOf(star, age < h.beat ? 0 : age - h.beat, false);
+    if (f < 0) continue;
+    const w = Math.round(star.w * STAR);
+    const sh = Math.round(star.h * STAR);
+    drawFrame(g, star, f, Math.round(ox + h.end.x - w / 2), Math.round(floor - 3 - sh / 2), { w, h: sh });
   }
+  if (layer === 'dust') return;
   // The page's drawn record is made afresh each frame: the last suplex drawn stays on it.
   const drawn = debug()?.drawn;
   if (drawn && record.heaveTick !== null && !drawn.suplex) drawn.suplex = { ...record, tick: world.tick };
