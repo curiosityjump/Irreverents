@@ -410,3 +410,13 @@ game over is on `main` (`step21-heart-game-over-quarry` passes, and
 `gameOver` is set in `content/defeat/quarry.json`), but `stage-run.ts:101`
 still restarts only on `thrown-out`. The stage must also start over on the
 quarry's `game-over`; tell the hearts builder once it does.
+
+### Lead review, depot push (d) (f1d1155)
+
+- `npm run build` and `npm run check` are ok, including `step22-wave-reaches-hero` and the re-routed `step16-caught-fight`.
+- Control, run by me with `entries`/`entryAway` taken out of `content/outposts/quarry-depot.json`: `step22-wave-reaches-hero` fails, as it should.
+- `npm run gates` is 6 of 6.
+- Left open:
+  - `step16-caught-escape`'s description still says the first wave walks in at the far east end. Its checks pass; the wording is a fix for later.
+  - No kerb.
+  - The wings have not moved yet.
