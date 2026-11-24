@@ -1,0 +1,47 @@
+{
+  "id": "step24-gallery-seen-on-the-floor-control",
+  "gate": null,
+  "proves": "Control: a hero who stays west of the thrower, behind him, is never aimed at",
+  "//": "DRAFT (Step 24 slice 1): the grappler walks east from the door to column 7 and stands there for ten seconds: behind the thrower (he faces east), never seen, never aimed at.",
+  "room": "hall-gallery",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 50,
+      "x": 1
+    }
+  ],
+  "ticks": 600,
+  "expect": [
+    {
+      "fact": "position",
+      "player": "a",
+      "at": 600,
+      "x": [
+        100,
+        136
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "ranged-aim",
+      "between": [
+        0,
+        600
+      ],
+      "count": [
+        0,
+        0
+      ]
+    }
+  ]
+}

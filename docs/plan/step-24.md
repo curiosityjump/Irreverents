@@ -434,3 +434,24 @@ Newest last. Slice 1's builder, `session_017WiGzEb3ESHBHGr3vhpB3k`.
 - **Owed:** a sound for the aim (the sound lane); the cap's poof drawn
   (push 2). A shot whose thrower is gone before it lands costs no heart
   (`heart-lose.ts` finds no enemy): left as it is.
+- **Pushes 2 and 3 (the telegraph; the gallery).** The brief's numbers kept
+  (decisions-log "the balcony thrower lobs over the floor"). Departures and
+  flags:
+  - **`ranged-telegraph`'s bound is `aim` − `interpDelayMs` − one snapshot
+    (450 ms), not `aim` − 100 ms.** Measured 480-496 ms on four runs: the
+    page draws a body it has `interpDelayMs` (100) in the past, but a new
+    loose shot at its first sample (`src/net/smooth.ts`, not mine). The same
+    cause means for ~100 ms the shot is drawn both in his hand and in the
+    air. Worth a look by whoever owns the smoother; nothing changed there.
+  - **Sideways (844×390) the camera keeps the floor in view, so a hero on
+    the gallery floor does not see him or most of the arc, only the landing
+    cross** (`docs/plan/step-24-shots/aim-and-arc-sideways.png`). Upright
+    shows all of it. The camera is not this brief's; flagged, not changed.
+  - **Owed:** the cap's poof is not drawn (the event is there for it); the
+    aim's sound (the sound lane). The way-out scenarios are timed to his
+    throws: a change to `every`, `aim`, `speed` or `lift` re-times them.
+  - `hero-struck-*.png` is taken a beat after the blow (the hero back on
+    the floor, shots lying), not mid-flight: the e2e waits for the drawn
+    hero to move 12 px, then the page and the screenshot lag behind it.
+  - The e2e's "wanted" pick-up is printed, not a fact: it worked on two of
+    four runs (a shot lying under a bounce or on a step on the others).

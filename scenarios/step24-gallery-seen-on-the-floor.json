@@ -1,0 +1,114 @@
+{
+  "id": "step24-gallery-seen-on-the-floor",
+  "gate": null,
+  "proves": "In the real gallery a hero walking east on the floor past the thrower is aimed at and thrown at, and climbing the steps without timing it they are struck",
+  "//": "DRAFT (Step 24 slice 1): the real room with its placements. The grappler walks east on the floor from the door: once past column 9 (in front of him, below his balcony) he aims (tick 83) and throws (119); that shot sails over the near floor, lands on the middle step and bounces down onto the floor east of column 17, where it strikes the grappler (194). Then the grappler climbs without waiting for a shot to pass and is struck on the middle step (tick 458). Control (-control): a hero who stays west of column 9, behind him, is never aimed at.",
+  "room": "hall-gallery",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 195,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 355,
+      "to": 362,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 370,
+      "to": 390,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 415,
+      "to": 435,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 440,
+      "to": 475,
+      "x": -1
+    }
+  ],
+  "ticks": 520,
+  "expect": [
+    {
+      "fact": "event",
+      "event": "ranged-aim",
+      "entity": "gallery-thrower-1",
+      "between": [
+        60,
+        110
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "ranged-threw",
+      "entity": "gallery-thrower-1",
+      "between": [
+        100,
+        140
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "weapon-struck",
+      "where": {
+        "loose": "weapon:119:0",
+        "weapon": "thrown-shot",
+        "by": "gallery-thrower-1",
+        "target": "p:a"
+      },
+      "between": [
+        150,
+        220
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "weapon-struck",
+      "between": [
+        440,
+        475
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "where": {
+        "by": "gallery-thrower-1",
+        "target": "p:a"
+      }
+    }
+  ]
+}

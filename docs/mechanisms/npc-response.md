@@ -27,7 +27,7 @@ mood 1 and happily fights back.
 | Piece | Where | What it is |
 |---|---|---|
 | A person's body | `content/characters/<id>.json` | An ordinary character kind (Step 2's): box, colour, verbs (`move`), a tuning set. |
-| A kind of person | `content/npcs/<id>.json` | `role`, `side` (`good` / `bad`), `moods` (`"1"`, `"2"`, `"3"` → a behaviour id), `barks` (cue → at most three words, D-057). |
+| A kind of person | `content/npcs/<id>.json` | `role`, `side` (`good` / `bad`), `moods` (`"1"`, `"2"`, `"3"` → a behaviour id), `barks` (cue → at most three words, D-057); optional `sight`, `search`, `beaten`, `fights`, `knockedOut`, and (Step 24) `ranged` (`docs/mechanisms/ranged.md`). |
 | Where one stands | `content/placements/<room>.json`, `place[]` | Step 2's entry plus optional `npc` (an NPC kind id) and `routine`. |
 | Things to use | the same file, `things[]` | Bodiless: `id`, `tile`, `deed`, optional `keeper` (a placed person), `once`, `look` (`counter` / `goods` / `bell`), and for a bell `side` (who rings it; `good` if left out). |
 | The tables | `content/rules/*.json` | `deeds`, `expect`, `reactions`, `events`. Every file is read; rows are taken in file-name order. |

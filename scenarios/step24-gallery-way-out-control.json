@@ -1,0 +1,64 @@
+{
+  "id": "step24-gallery-way-out-control",
+  "gate": null,
+  "proves": "Control: the gallery climb really is under fire: the grappler stopped on the middle step, in the thrower's arc, is struck within the same bound",
+  "//": "DRAFT (Step 24 slice 1): step24-gallery-way-out-grappler's inputs up to the second jump (onto the middle step at column 17), then standing there: his next shot strikes them (by him) well inside 800 ticks.",
+  "room": "hall-gallery",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 165,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 340,
+      "to": 360,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 372,
+      "to": 392,
+      "hold": [
+        "jump"
+      ]
+    }
+  ],
+  "ticks": 800,
+  "expect": [
+    {
+      "fact": "event",
+      "event": "weapon-struck",
+      "between": [
+        392,
+        800
+      ],
+      "count": [
+        1,
+        9
+      ],
+      "where": {
+        "by": "gallery-thrower-1",
+        "target": "p:a"
+      }
+    },
+    {
+      "fact": "in-room",
+      "player": "a",
+      "at": 800,
+      "room": "hall-gallery"
+    }
+  ]
+}

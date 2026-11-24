@@ -1,0 +1,115 @@
+{
+  "id": "step24-gallery-way-out-grappler",
+  "gate": null,
+  "proves": "The grappler alone climbs the gallery's steps under the thrower's lobs and leaves over the roofs within 800 ticks",
+  "//": "DRAFT (Step 24 slice 1): the real room with its placements (the thrower on the balcony at [9, 2], facing east). The grappler walks east on the floor (seen past column 9: aimed at, his shot sails over and bounces down the steps), stops by the bottom step, and climbs between his throws: each jump up is made just after a shot has passed, and each wait is where the arc passes overhead (column 14 of the middle step, the top step). On the balcony they pass him (within his reach he does not throw; once behind him he does not see them) and walk out by the roofs' door: in castle-street at tick 751 (the bound: 800). The steps' INTENT holds (content/rooms/hall-gallery.json: 'every party member can climb those steps by jumping on the spot; they are the gallery's way out'). Control: step24-gallery-way-out-control (the same climb stopped on the middle step, in his arc: struck).",
+  "room": "hall-gallery",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 165,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 340,
+      "to": 360,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 372,
+      "to": 392,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 400,
+      "to": 440,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 465,
+      "to": 485,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 495,
+      "to": 530,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 597,
+      "to": 617,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 625,
+      "to": 900,
+      "x": -1
+    }
+  ],
+  "ticks": 800,
+  "expect": [
+    {
+      "fact": "in-room",
+      "player": "a",
+      "at": 800,
+      "room": "castle-street"
+    },
+    {
+      "fact": "event-where",
+      "event": "changed-room",
+      "between": [
+        600,
+        800
+      ],
+      "count": [
+        1,
+        1
+      ],
+      "where": {
+        "entity": "p:a",
+        "player": "a",
+        "fromRoom": "hall-gallery",
+        "fromDoor": "from-the-roofs",
+        "toRoom": "castle-street",
+        "toDoor": "over-the-roofs"
+      }
+    },
+    {
+      "fact": "event",
+      "event": "ranged-threw",
+      "entity": "gallery-thrower-1",
+      "between": [
+        0,
+        800
+      ],
+      "count": [
+        3,
+        5
+      ]
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "//": "DRAFT (Step 24 slice 1; docs/plan/step-24.md, 'Slice 1'): one thrower on the gallery's balcony, beside the hidden piece, facing east over the steps: the gallery's way out when the courtyard gate is shut is now a climb under his lobs, a sneak up behind him from the roofs, or knocking him off. INTENT (content/rooms/hall-gallery.json): nothing placed on the floor (row 10, kept clear for the pedestals) or on the steps; he never walks, so he never blocks them. The id is permanent.",
+  "id": "hall-gallery",
+  "room": "hall-gallery",
+  "place": [
+    { "id": "gallery-thrower-1", "character": "ranged-fighter", "tile": [9, 2], "npc": "ranged-fighter", "routine": [{ "face": "right" }, { "wait": 5 }] }
+  ]
+}
