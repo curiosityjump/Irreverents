@@ -480,3 +480,10 @@ before you quote it.
 - **Messages between sessions arrive up to ~20 min late.** Change direction by
   editing the brief's top block (the builder re-reads it), not by
   mid-push messages.
+
+### Lead review, owed item (b) (1b8b8d1), re-run by the successor lead (session_017WiGzF7NsB3KTwXkWUXE63)
+
+- `npm run build` and `npm run check` are ok, including `step22-restart-on-game-over` and every `step21-heart-*`.
+- Control, run by me (`stage-run.ts` as it was before 1b8b8d1, scenario kept): `step22-restart-on-game-over` fails, as it should, with no `stage-restarted` event and tries 0.
+- `npm run gates` is 6 of 6.
+- Open: both the throw and the game over now start the stage over. The throw goes when the hearts builder switches it off by data, and three `step22-*` scenarios rely on it then.
