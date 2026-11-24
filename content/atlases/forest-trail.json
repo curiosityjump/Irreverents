@@ -1,0 +1,210 @@
+{
+  "//": "DRAFT: stand-in drawn by tools/art/tiles/make.py (Step 15 reuses it). The quarry's sheet (cut from P03's cobbled earth under a lime grass cap) until a forest sheet from P10's TRN-01 and TRN-10 rows exists: those plates are not in the mirror (the design library holds only their tag-index), so a tiles/forest.png waits on a design-library sync (docs/mechanisms/design-library-sync.md). Edit 'image' here when it lands.",
+  "id": "forest-trail",
+  "image": "tiles/quarry.png",
+  "tile": 16,
+  "cells": {
+    "solid": [
+      3,
+      3
+    ],
+    "solidTop": [
+      2,
+      3
+    ],
+    "oneway": [
+      1,
+      5
+    ]
+  },
+  "autotile": {
+    "origin": [
+      0,
+      0
+    ],
+    "innerCorners": {
+      "nw": [
+        4,
+        0
+      ],
+      "ne": [
+        5,
+        0
+      ],
+      "sw": [
+        4,
+        1
+      ],
+      "se": [
+        5,
+        1
+      ]
+    },
+    "fill": [
+      [
+        3,
+        3
+      ],
+      [
+        3,
+        3
+      ],
+      [
+        6,
+        0
+      ],
+      [
+        6,
+        1
+      ],
+      [
+        6,
+        0
+      ],
+      [
+        7,
+        0
+      ],
+      [
+        7,
+        1
+      ],
+      [
+        6,
+        3
+      ],
+      [
+        7,
+        3
+      ],
+      [
+        0,
+        4
+      ],
+      [
+        1,
+        4
+      ],
+      [
+        3,
+        3
+      ],
+      [
+        6,
+        1
+      ]
+    ],
+    "top": [
+      [
+        4,
+        2
+      ],
+      [
+        5,
+        2
+      ],
+      [
+        6,
+        2
+      ],
+      [
+        4,
+        2
+      ],
+      [
+        7,
+        2
+      ],
+      [
+        6,
+        2
+      ],
+      [
+        -1,
+        -1
+      ],
+      [
+        -1,
+        -1
+      ],
+      [
+        -1,
+        -1
+      ],
+      [
+        -1,
+        -1
+      ],
+      [
+        -1,
+        -1
+      ]
+    ],
+    "under": [
+      [
+        4,
+        3
+      ],
+      [
+        5,
+        3
+      ],
+      [
+        -1,
+        -1
+      ],
+      [
+        -1,
+        -1
+      ],
+      [
+        -1,
+        -1
+      ],
+      [
+        -1,
+        -1
+      ],
+      [
+        -1,
+        -1
+      ]
+    ],
+    "oneway": {
+      "left": [
+        0,
+        5
+      ],
+      "mid": [
+        1,
+        5
+      ],
+      "right": [
+        2,
+        5
+      ],
+      "single": [
+        3,
+        5
+      ]
+    },
+    "deep": [
+      [
+        2,
+        4
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        4
+      ],
+      [
+        5,
+        4
+      ]
+    ]
+  }
+}

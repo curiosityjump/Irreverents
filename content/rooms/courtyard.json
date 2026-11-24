@@ -1,5 +1,5 @@
 {
-  "//": "DRAFT: the layout is a first pass; the id, the door ids and the part ids are permanent. From the west opening a flat run of 13 tiles (columns 1-13: kept clear for Step 7's machine and its roadblock; place nothing there), then two floor plates six tiles apart (columns 16 and 22), so one body cannot press both, then the gate they hold open (column 25) and beyond it the east opening to the Hall gallery. INTENT: any two bodies open the gate, two friends or one hero and a heavy thing (solo is never locked out by headcount); nothing here counts players. The gallery has another way in and out, over the roofs, so nobody is ever shut in behind the gate. DRAFT: the undercroft's doorway still comes up in the street; it is meant to come up here, west of the gate (column 15 is left free for it). DRAFT (Step 16): an enter doorway between the plates (columns 17-19, rows 6-7, door to-quarry) leads up the road out of the kingdom into the quarry; nothing stands between it and a player alone.",
+  "//": "DRAFT: the layout is a first pass; the id, the door ids and the part ids are permanent. From the west opening a flat run of 13 tiles (columns 1-13: kept clear for Step 7's machine and its roadblock; place nothing there), then two floor plates six tiles apart (columns 16 and 22), so one body cannot press both, then the gate they hold open (column 25) and beyond it the east opening to the Hall gallery. INTENT: any two bodies open the gate, two friends or one hero and a heavy thing (solo is never locked out by headcount); nothing here counts players. The gallery has another way in and out, over the roofs, so nobody is ever shut in behind the gate. DRAFT: the undercroft's doorway still comes up in the street; it is meant to come up here, west of the gate (column 15 is left free for it). DRAFT (Step 16): an enter doorway between the plates (columns 17-19, rows 6-7, door to-quarry) leads up the road out of the kingdom into the quarry; nothing stands between it and a player alone. DRAFT (Step 15): a second enter doorway, in that flat run (columns 8-10, rows 6-7, door to-forest), leads along the road to the Bramble Forest; a doorway is empty floor to anything that rolls or walks across it, so the run stays clear for a machine.",
   "id": "courtyard",
   "name": "Courtyard",
   "tile": 16,
@@ -31,6 +31,9 @@
     },
     "q": {
       "door": "to-quarry"
+    },
+    "f": {
+      "door": "to-forest"
     }
   },
   "rows": [
@@ -40,8 +43,8 @@
     "#........................#...#",
     "#........................G...#",
     "#........................G...#",
-    "W................qqq.....G...E",
-    "W..1.2........3.Pqqq4.Qo.G...E",
+    "W.......fff......qqq.....G...E",
+    "W..1.2..fff...3.Pqqq4.Qo.G...E",
     "##############################"
   ],
   "doors": [
@@ -75,6 +78,15 @@
       "use": "enter",
       "to": {
         "room": "quarry-road",
+        "door": "to-courtyard"
+      }
+    },
+    {
+      "//": "DRAFT (Step 15): the enter doorway (columns 8-10, rows 6-7, west of the quarry's) out along the road to the Bramble Forest (content/rooms/forest-road.json); nothing stands between it and a player alone.",
+      "id": "to-forest",
+      "use": "enter",
+      "to": {
+        "room": "forest-road",
         "door": "to-courtyard"
       }
     }

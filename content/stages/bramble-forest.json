@@ -1,0 +1,9 @@
+{
+  "//": "DRAFT (Step 15, docs/decisions-log.md 'Step 15: the second place is a forest'; docs/mechanisms/stages.md): the Bramble Forest played as a stage, as the Iron Quarry is. It starts on the road just inside the doorway from the courtyard (where content/defeat/forest.json sends the party on a game over) and ends in the deepest pocket at the deep level's west end (columns 15-24, rows 15-18 of the trail), right behind the start. The star times are first guesses until push 3 sets them from scripted clears.",
+  "id": "bramble-forest",
+  "on": true,
+  "level": "bramble-forest",
+  "entrance": { "room": "forest-road", "door": "to-courtyard" },
+  "end": { "room": "forest-trail", "from": [15, 15], "to": [24, 18] },
+  "stars": { "good": 120, "best": 80 }
+}

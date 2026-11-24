@@ -1,0 +1,15 @@
+{
+  "//": "DRAFT (Step 15, as content/defeat/quarry.json, whose choice it copies; O-006 is OPEN): out of hearts anywhere in the Bramble Forest, the whole party is sent back to the start of the forest (the road, just inside the doorway from the courtyard) and the stage starts over. The throw is off ('on': false), as the quarry's, the camp's and the street's are: losing is hearts and the game over. 'gameOver' is the one field read.",
+  "id": "forest",
+  "on": false,
+  "rooms": ["forest-road", "forest-trail"],
+  "seizers": ["outpost-fighter", "heavy-fighter", "brute"],
+  "reach": 24,
+  "downs": 3,
+  "window": 60,
+  "beat": 1,
+  "lands": { "room": "forest-road", "door": "to-courtyard" },
+  "follow": true,
+  "gameOver": { "room": "forest-road", "door": "to-courtyard" },
+  "words": { "thrownOut": "Beaten. Back to the start of the forest", "prizeReturned": "The prize is back where it was" }
+}

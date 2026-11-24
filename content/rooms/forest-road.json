@@ -1,0 +1,61 @@
+{
+  "//": "DRAFT (Step 15 push 1, docs/decisions-log.md 'Step 15: the second place is a forest'): the layout is a first pass; the id, the door ids, the part ids and the area ids are permanent. The road out of the kingdom to the Bramble Forest: the enter doorway back to the courtyard at the west end (columns 2-4), then about two screens of flat floor east to the opening onto the trail (column 47, rows 7-9). INTENT: flat, so a body that only walks (a pursuer: a chase follows through doors, D-077) crosses it; the climbing starts in the forest. DRAFT: the road's one hiding place (D-077: hiding places a pursuer cannot get to are rare between levels): `road-bush` (columns 24-25), a hide part on the open floor; a pursuer who walks up to it still finds you if he saw you go in (Step 4's rules for seeing). No sign, arrow or text (doc 04, 'Player awareness and map').",
+  "id": "forest-road",
+  "name": "Forest Road",
+  "tile": 16,
+  "hidden": false,
+  "legend": {
+    "#": "solid",
+    ".": "empty",
+    "1": "spawn",
+    "2": "spawn",
+    "3": "spawn",
+    "c": {
+      "door": "to-courtyard"
+    },
+    "T": {
+      "door": "to-trail"
+    },
+    "H": {
+      "part": "road-bush"
+    }
+  },
+  "rows": [
+    "################################################",
+    "#..............................................#",
+    "#..............................................#",
+    "#..............................................#",
+    "#..............................................#",
+    "#..............................................#",
+    "#..............................................#",
+    "#..............................................T",
+    "#.ccc..........................................T",
+    "#.ccc.1...2.............HH.3...................T",
+    "################################################",
+    "################################################"
+  ],
+  "doors": [
+    {
+      "id": "to-courtyard",
+      "use": "enter",
+      "to": {
+        "room": "courtyard",
+        "door": "to-forest"
+      }
+    },
+    {
+      "id": "to-trail",
+      "use": "walk",
+      "to": {
+        "room": "forest-trail",
+        "door": "to-road"
+      }
+    }
+  ],
+  "parts": [
+    {
+      "id": "road-bush",
+      "kind": "hide"
+    }
+  ]
+}

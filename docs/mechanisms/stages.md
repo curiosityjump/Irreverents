@@ -14,6 +14,12 @@ a star rating and some stats."* Everything else in the game is a place that
 remembers (D-077); a stage is the one run with a start, a loss, an end and a
 result. The engine knows stages, not the quarry: a second stage is one file.
 
+**Two stages tonight:** `iron-quarry` and `bramble-forest` (Step 15,
+`docs/plan/step-15.md`): the forest's stage, defeat and completion files
+copy the quarry's shape and needed no `src/` edit. Its entrance is the
+forest road by the doorway from the courtyard (`content/defeat/forest.json`
+`gameOver` lands there); its end is the trail's deepest pocket.
+
 ## The pieces
 
 | Piece | Where | What |

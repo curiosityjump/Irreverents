@@ -1,0 +1,100 @@
+{
+ "id": "step15-stage-game-over",
+ "proves": "Step 15 signal (game over in the forest): the party's last heart is lost on the Bramble Trail (a stage room, so a run is under way from tick 0) to the first light fighter past the root tunnel (tick 591); a second later (651); the game over puts the player at the forest's entrance (the road, by the doorway from the courtyard, content/defeat/forest.json `gameOver`), not the cantina, and on that tick the forest stage starts over (`stage-restarted`, tries 1). Control (watched to fail): content/defeat/forest.json without `gameOver`, and the game over lands in the cantina and starts nothing over",
+ "room": "forest-trail",
+ "placements": true,
+ "players": [
+  {
+   "id": "a",
+   "character": "grappler",
+   "spawn": 0
+  }
+ ],
+ "inputs": [
+  {
+   "player": "a",
+   "from": 0,
+   "to": 260,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 40,
+   "to": 58,
+   "hold": [
+    "jump"
+   ]
+  }
+ ],
+ "ticks": 800,
+ "expect": [
+  {
+   "fact": "event-where",
+   "event": "game-over",
+   "where": {
+    "place": "forest",
+    "room": "forest-road",
+    "players": [
+     "a"
+    ]
+   },
+   "between": [
+    651,
+    651
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "event-where",
+   "event": "stage-restarted",
+   "where": {
+    "stage": "bramble-forest",
+    "tries": 1
+   },
+   "between": [
+    651,
+    651
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "event-where",
+   "event": "stage-restarted",
+   "where": {},
+   "between": [
+    0,
+    800
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "in-room",
+   "player": "a",
+   "at": 652,
+   "room": "forest-road"
+  },
+  {
+   "fact": "stage",
+   "stage": "bramble-forest",
+   "at": 652,
+   "state": "running",
+   "tries": 1
+  }
+ ],
+ "world": {
+  "heartsLost": {
+   "grappler": 4,
+   "infiltrator": 3,
+   "flyer": 3
+  }
+ }
+}

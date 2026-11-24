@@ -42,7 +42,7 @@ and how much of it, as a pie, never as a list or a count of places left.
 
 Tonight: `castle-town` (throne room, street, courtyard, undercroft,
 gallery: 13 places), `bandit-camp` (outpost, 1), `iron-quarry` (six
-quarry rooms, 13), `cantina` (1).
+quarry rooms, 13), `cantina` (1), `bramble-forest` (Step 15: the forest road and the trail, with the trail's five hidden areas).
 
 ## The record (`world.levels`)
 

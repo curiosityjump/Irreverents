@@ -1,0 +1,11 @@
+{
+  "//": "DRAFT: stand-in (Step 15): the back is the delivered BKG-01 pack's forest_waterfall preview, copied as is (its start and centre views, 320x180 each, side by side, from docs/design-library/03-visual-direction-and-assets/bkg-01-runtime-biome-panoramas-1024x180/), pinned to the screen and never repeated sideways (BKG-01's rule: its edges are not seamless; the panorama's 32 px between the two views is missing, a visible step at x 320); the full 1024x180 panorama is asked of Vision Partner. In front, tools/art/tiles/backdrops.py's tree crowns (the courtyard's) pinned to the room's top and its foliage strip under the floor line.",
+  "id": "forest-trail",
+  "sky": ["#2f6f8f", "#7fc3c9"],
+  "layers": [
+    { "image": "backdrops/forest-waterfall.png", "parallax": 0, "y": "top", "offsetY": 0, "repeatX": false },
+    { "image": "backdrops/tree-crowns.png", "parallax": 1, "y": "top", "offsetY": -104, "repeatX": true, "pin": "room" },
+    { "image": "backdrops/front-foliage.png", "parallax": 1, "y": "bottom", "offsetY": 16, "repeatX": true, "pin": "room", "front": true }
+  ],
+  "outside": { "above": "sky", "below": "deep" }
+}

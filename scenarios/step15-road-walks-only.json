@@ -1,0 +1,11 @@
+{
+ "id": "step15-road-walks-only",
+ "proves": "Step 15 signal 2: a body that only walks (no jump: a pursuer's way, D-077) crosses the forest road from the courtyard's doorway to the trail. Control (watched to fail): a one-tile step on the road (column 20, row 9 solid), and the same walk never reaches the trail",
+ "room": "forest-road",
+ "players": [{ "id": "a", "character": "grappler", "spawn": 0 }],
+ "inputs": [{ "player": "a", "from": 0, "to": 600, "x": 1 }],
+ "ticks": 600,
+ "expect": [
+  { "fact": "in-room", "player": "a", "at": 600, "room": "forest-trail" }
+ ]
+}

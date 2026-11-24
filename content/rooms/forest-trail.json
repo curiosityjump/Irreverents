@@ -1,0 +1,165 @@
+{
+  "//": "DRAFT (Step 15, docs/decisions-log.md 'Step 15: the second place is a forest'): the layout is a first pass; the id, the door ids, the part ids and the area ids are permanent. In from the road at the bottom of the west end (column 0, rows 16-18). The climb up to the trail: one-way boughs two tiles apart (columns 10-13, rows 17 to 9), jumped up on the spot. The trail runs east on row 9 past three things in view: a root mound (columns 24-32) with a crawl exactly one tile high at its foot (row 8, columns 24-29) that drops into the root tunnel under the trail (area `root-tunnel`): only a body at most a tile tall fits; a bough six tiles over the floor with nothing to climb (columns 46-52, area `canopy` above it): only flapping, or a throw, reaches it; a plate (columns 57-58) that holds a hatch in the floor eight tiles east (`hatch`, columns 66-67, `stayOpen` 0) over a chamber (area `gate-chamber`): one body cannot stand on the plate and reach the hatch, the heavy crate beside the plate holds it, and only the grappler lifts that. Further east a heavy plate (`heavy-plate`, columns 77-78, needs 260) holds a stone slab in the floor six tiles east (`stone-door`, columns 84-85, `stayOpen` 0) over a hollow (area `stone-hollow`): no hero and the heaviest crate together weigh 260 (the brawler and the heavy crate are 190), the boulder beside it does (300), and only a boost lifts that (420). At the east end the trail drops down a shaft (columns 96-98) into the deep level (rows 15-18), which runs back west under it to the deepest pocket (area `deep-pocket`, columns 15-24) right behind the start; the boughs beside the shaft (columns 94-95, rows 17 to 9) climb back up. INTENT (there is always a way out): every pocket has a way out any body can take, the biggest hero started inside gets out: the root tunnel and the gate chamber by a one-way bough and a one-way patch of the trail's floor above it (columns 36-37; 71-72), from above they are floor, so they are not a way in; the hollow the same way (columns 88-89); the deep pocket by the deep level and the shaft's boughs. Do not close them. DRAFT (G-03's shortcut): between the deepest pocket and the start a cracked wall (`shortcut-wall`, column 14, rows 16-18): a crate thrown into it from the pocket breaks it, and from then on the start walks straight into the deep; from the start side nothing lying about breaks it (the heavy crate thrown by the grappler arrives near the break speed, so a retune shows here). No sign, arrow or text (doc 04, 'Player awareness and map').",
+  "id": "forest-trail",
+  "name": "Bramble Trail",
+  "tile": 16,
+  "hidden": false,
+  "legend": {
+    "#": "solid",
+    "=": "oneway",
+    ".": "empty",
+    "1": "spawn",
+    "2": "spawn",
+    "3": "spawn",
+    "W": {
+      "door": "to-road"
+    },
+    "P": {
+      "part": "hatch-plate"
+    },
+    "G": {
+      "part": "hatch"
+    },
+    "S": {
+      "part": "heavy-plate"
+    },
+    "D": {
+      "part": "stone-door"
+    },
+    "B": {
+      "part": "shortcut-wall"
+    }
+  },
+  "rows": [
+    "####################################################################################################",
+    "#..................................................................................................#",
+    "#..................................................................................................#",
+    "#.............................................#######..............................................#",
+    "#..................................................................................................#",
+    "#..................................................................................................#",
+    "#..................................................................................................#",
+    "#.......................#########..................................................................#",
+    "#...................2.........###........................PP..................SS....................#",
+    "#.........====##############..######==############################GG###==###########DD##==####==...#",
+    "#.............############.............#######################............######..........####.....#",
+    "#.........====############..........==.#######################.........==.######........==####==...#",
+    "#.............############.............#######################............######..........####.....#",
+    "#.........====################################################################################==...#",
+    "#.............################################################################################.....#",
+    "#.........====#...............................................................................==...#",
+    "W.............B....................................................................................#",
+    "W.........====B...............................................................................==...#",
+    "W..1..........B.....3..............................................................................#",
+    "####################################################################################################",
+    "####################################################################################################"
+  ],
+  "doors": [
+    {
+      "id": "to-road",
+      "use": "walk",
+      "to": {
+        "room": "forest-road",
+        "door": "to-trail"
+      }
+    }
+  ],
+  "areas": [
+    {
+      "id": "root-tunnel",
+      "hidden": true,
+      "at": [
+        26,
+        10
+      ],
+      "size": [
+        13,
+        3
+      ]
+    },
+    {
+      "id": "canopy",
+      "hidden": true,
+      "at": [
+        46,
+        1
+      ],
+      "size": [
+        7,
+        2
+      ]
+    },
+    {
+      "id": "gate-chamber",
+      "hidden": true,
+      "at": [
+        62,
+        10
+      ],
+      "size": [
+        12,
+        3
+      ]
+    },
+    {
+      "id": "stone-hollow",
+      "hidden": true,
+      "at": [
+        80,
+        10
+      ],
+      "size": [
+        10,
+        3
+      ]
+    },
+    {
+      "id": "deep-pocket",
+      "hidden": true,
+      "at": [
+        15,
+        15
+      ],
+      "size": [
+        10,
+        4
+      ]
+    }
+  ],
+  "parts": [
+    {
+      "id": "hatch-plate",
+      "kind": "plate"
+    },
+    {
+      "id": "hatch",
+      "kind": "gate",
+      "params": {
+        "plates": [
+          "hatch-plate"
+        ],
+        "stayOpen": 0
+      }
+    },
+    {
+      "id": "heavy-plate",
+      "kind": "plate",
+      "params": {
+        "needs": 260
+      }
+    },
+    {
+      "id": "stone-door",
+      "kind": "gate",
+      "params": {
+        "plates": [
+          "heavy-plate"
+        ],
+        "stayOpen": 0
+      }
+    },
+    {
+      "id": "shortcut-wall",
+      "kind": "breakable"
+    }
+  ]
+}

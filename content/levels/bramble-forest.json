@@ -1,0 +1,8 @@
+{
+  "//": "DRAFT (Step 15, docs/decisions-log.md 'Step 15: the second place is a forest'): the forest past the courtyard's doorway at columns 8-10, along the road. 'Bramble Forest' is a stand-in name (data only, never in an id). The glowing open arch from P05.",
+  "id": "bramble-forest",
+  "name": "Bramble Forest",
+  "rooms": ["forest-road", "forest-trail"],
+  "entries": [{ "room": "courtyard", "door": "to-forest" }],
+  "look": "arch"
+}

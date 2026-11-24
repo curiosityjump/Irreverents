@@ -209,6 +209,44 @@ don't grade them.
 
 ## Handoff notes
 
+## Builder notes
+
+*(Builder `session_017WiGzJeF58oqWdt3WEH722`, brief `handoff-prompts/step-15-forest.md`.)*
+
+**Push 1 (road and trail joined, as a stage).** Rooms `forest-road` (48x12,
+flat: `step15-road-walks-only`) and `forest-trail` (100x21: the start at the
+bottom west, a climb of one-way boughs, the upper trail on row 9, the deep
+level rows 15-18 back west to the deepest pocket). The insides are built in
+this push too (they are pockets of the one room, not rooms of their own), so
+the way-out check plays them now: the root tunnel, the canopy, the gate
+chamber, the stone hollow and the deep pocket each get out by a body's own
+moves. Level, stage (`end` the deepest pocket; star times are guesses until
+push 3), defeat (`gameOver` at the road's doorway), atlas and backdrop files;
+the trail's people (two light fighters, a heavy, the brute) and two crates.
+Scenarios: `step15-joined`, `step15-each-hero-crosses-{grappler,infiltrator,flyer}`
+(recorded by a scratch waypoint walker: courtyard → deepest pocket → courtyard),
+`step15-road-walks-only`, `step15-stage-game-over`; controls in each `proves`.
+
+Flags:
+- **The lead's decisions-log entry "Step 15: the second place is a forest" is
+  not in `docs/decisions-log.md`** (grep at 551684c and after): the brief
+  cites it. Mine are the three entries of 2026-11-24 headed "The Bramble
+  Forest…", "…short way back…", "…stand-in pictures…".
+- **P10's TRN-01 / TRN-10 images are not in the mirror** (only
+  `tag-index.csv`, `manifest.json`, the readme): no `tiles/forest.png` can be
+  cut. The atlases reuse `tiles/quarry.png`, `DRAFT:`. The backdrop is BKG-01's
+  `forest_waterfall` start preview (320x180), screen-pinned, not repeated;
+  on a view wider than 320 the sky colour shows to its right.
+- **The courtyard's note says columns 1-13 stay clear for Step 7's machine**;
+  the brief puts the door at 8-10. A doorway is empty floor to collision, so I
+  followed the brief and said so in the room's note; the camp builder and
+  Step 22's lead were messaged the diff.
+- The infiltrator walking east on the trail walks straight into the crawl (its
+  box fits under the mound): the secret finds the small hero. The crossing
+  scenario hops onto the mound.
+- Full run of a crossing with the grappler is about 90 s of game time: the
+  walker waits at each two-tile wall before jumping. A person is faster.
+
 ## Released to a lead, 2026-11-24 08:40 UTC (orchestrator `session_017WiGzHhT2apmWHT61rQ65G`)
 
 Why now: `docs/vision-gaps.md` (refreshed at 9dbd705) ranks row 2 first: "one level is not a world: a second region". The eight core loops of the owner's ~18:30 verdict are all built and live, and the last two full re-runs with nothing red were at 6400b44 and f434f2e. So the heading above ("nothing here is briefed") no longer holds the step back.

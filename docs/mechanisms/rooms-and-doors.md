@@ -53,6 +53,21 @@ that could trap someone.
   crawl pocket has a hole into the pit, so anyone who lands there can
   leave; do not close it.
 
+- **The forest** (Step 15, `DRAFT:` layouts, permanent ids; each room's
+  `//` says what is where; `docs/plan/step-15.md`). The courtyard's enter
+  doorway `to-forest` (columns 8-10, rows 6-7, west of the quarry's) and the
+  road's `to-courtyard` (columns 2-4). The road is flat (`INTENT:` a body that
+  only walks crosses it, so a chase follows: `step15-road-walks-only`) to the
+  trail's bottom-west opening. The trail is climbed by one-way boughs at its
+  start, runs east past the root mound's crawl (the infiltrator), the canopy
+  bough six tiles up (flapping), the hatch held by a plate eight tiles west of
+  it with `stayOpen` 0 (the heavy crate, the grappler) and the stone slab held
+  by a plate that needs 260 (the boulder, a boost), then down a shaft into a
+  deep level that runs back west to the deepest pocket behind the start. Each
+  pocket under the floor gets out by a one-way bough and a one-way patch of the
+  floor above it (`INTENT:`). The cracked wall `shortcut-wall` (column 14)
+  joins the deepest pocket to the start once broken (G-03's shortcut).
+
 - **The outpost** (Step 12, `DRAFT:` layout): the courtyard's enter
   doorway `to-outpost` (ground row 7, column 23, beside the east plate) and the camp's
   `to-courtyard` (column 2), both enter doorways so no body of the camp

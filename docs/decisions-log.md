@@ -443,3 +443,24 @@ document as a decision of theirs.
 - **Why this way:** the step's "found without being told: the entrance sign says it is a stage". Three empty stars under the name read as a rating to earn, with no word or digit added to the picture (no pixel font for new words, no digits on signs). A clear fills them as before.
 - **To change it:** one line in `src/client/draw/levels.ts` (the `stage` row); a word such as "STAGE" could be added once there is lettering for it.
 - **Where:** `docs/mechanisms/stages.md`, "Shown"; `docs/plan/step-22-shots/push5-sign-stage-*.png`.
+
+### 2026-11-24 · The Bramble Forest: a flat road from a new doorway in the courtyard, then a trail you climb into, with a deep way back under it
+- **Decided by:** Step 15 builder (brief `step-15-forest.md`), `session_017WiGzJeF58oqWdt3WEH722`
+- **Instead of asking:** "How should the forest be laid out, and how do you get in and out?"
+- **Why this way:** your rule that the world between places is walked (D-003) and that a chase follows you through doors (D-077). The new doorway is in the courtyard, just west of the quarry's. The road is flat on purpose, so a guard chasing you on foot can follow you all the way. The climbing starts in the forest: you come in at the bottom and jump up a stack of boughs onto the trail. The trail shows you a low gap, a high bough and a hatch in the floor on your first walk. At its far end you drop down a shaft and walk back west under it to the deepest spot, which is right behind where you came in. The road has one bush to hide in. Walking there and back with each hero takes one to one and a half minutes.
+- **To change it:** the rooms are `content/rooms/forest-road.json` and `forest-trail.json`: any layout change is editing their rows. Hills on the road would stop guards following, which is a single row.
+- **Where:** `docs/plan/step-15.md`, "Builder notes"; the rooms' own notes. `DRAFT:`
+
+### 2026-11-24 · The forest's short way back is a cracked wall you break from inside with a crate
+- **Decided by:** Step 15 builder, `session_017WiGzJeF58oqWdt3WEH722`
+- **Instead of asking:** "What opens the short way back from the deepest spot, and does it stay open?"
+- **Why this way:** the library's forest example (G-03): reaching the deep spot "opens a shortcut". Between the deepest pocket and the trail's start there is a cracked wall. Throw the crate lying in the pocket at it and it breaks for good. After that, coming in from the road you walk straight into the deep. From the start side nothing lying about breaks it, so the first time you have to go the long way round. A friend thrown hard at it from outside also breaks it, which is the game working.
+- **To change it:** move or remove the crate in `content/placements/forest-trail.json`, or give the wall a different `breakSpeed` in the trail's room file.
+- **Where:** `content/rooms/forest-trail.json` (`shortcut-wall`). `DRAFT:`
+
+### 2026-11-24 · The forest uses stand-in pictures: the quarry's grassy ground and a still forest view behind
+- **Decided by:** Step 15 builder, `session_017WiGzJeF58oqWdt3WEH722`
+- **Instead of asking:** "Which pictures should the forest use before forest tiles exist?"
+- **Why this way:** the brief allowed no new art tonight. The forest-tile rows you chose (TRN-01 grass and dirt, TRN-10 mushroom hollows) are not in the copy of the library here, only their index, so they cannot be cut yet. The ground borrows the quarry's grass-capped earth. Behind it is the start view of your forest-and-waterfall panorama (BKG-01), held still on the screen and never repeated sideways (its edges don't join), with the courtyard's tree crowns along the top and its bushes along the bottom.
+- **To change it:** one line in `content/atlases/forest-*.json` (the tile sheet) and `content/backdrops/forest-*.json` (the back). The full 1024-wide panorama has been asked for.
+- **Where:** those files. `DRAFT:`

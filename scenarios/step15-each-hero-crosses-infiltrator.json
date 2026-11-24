@@ -1,0 +1,252 @@
+{
+ "id": "step15-each-hero-crosses-infiltrator",
+ "proves": "Step 15 signal 2: the infiltrator alone goes from the courtyard through its new doorway (columns 8-10), along the forest road, up the boughs at the trail's start, east along the trail past the gap, the canopy, the hatch and the stone slab, down the shaft at its east end and west along the deep level to the deepest pocket; then back up the shaft's boughs, west along the trail, down off its west end, out along the road and through the doorway into the courtyard. Recorded by a scripted walker (run right or left, jump at a wall or a gap, jump on the spot under the boughs). Control (watched to fail): a one-tile step on the road (column 20, row 9 solid), and the same recorded inputs never reach the trail",
+ "room": "courtyard",
+ "players": [
+  {
+   "id": "a",
+   "character": "infiltrator",
+   "spawn": 2
+  }
+ ],
+ "inputs": [
+  {
+   "player": "a",
+   "from": 0,
+   "to": 38,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 39,
+   "to": 43,
+   "y": -1
+  },
+  {
+   "player": "a",
+   "from": 43,
+   "to": 387,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 388,
+   "to": 447,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 448,
+   "to": 466,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 483,
+   "to": 501,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 518,
+   "to": 536,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 553,
+   "to": 571,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 588,
+   "to": 606,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 623,
+   "to": 707,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 623,
+   "to": 641,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 708,
+   "to": 1270,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 708,
+   "to": 726,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1254,
+   "to": 1272,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1273,
+   "to": 1282,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 1287,
+   "to": 1293,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 1321,
+   "to": 1900,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 1326,
+   "to": 1344,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1911,
+   "to": 2473,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 2474,
+   "to": 2492,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 2509,
+   "to": 2527,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 2544,
+   "to": 2562,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 2579,
+   "to": 2597,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 2614,
+   "to": 2632,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 2649,
+   "to": 3690,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 2649,
+   "to": 2667,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 3114,
+   "to": 3132,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 3294,
+   "to": 3312,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 3701,
+   "to": 3705,
+   "y": -1
+  }
+ ],
+ "ticks": 3735,
+ "expect": [
+  {
+   "fact": "in-room",
+   "player": "a",
+   "at": 388,
+   "room": "forest-trail"
+  },
+  {
+   "fact": "in-room",
+   "player": "a",
+   "at": 1911,
+   "room": "forest-trail"
+  },
+  {
+   "fact": "standing-on-tile",
+   "player": "a",
+   "at": 1911,
+   "tile": [
+    20,
+    19
+   ]
+  },
+  {
+   "fact": "in-room",
+   "player": "a",
+   "at": 3735,
+   "room": "courtyard"
+  }
+ ]
+}
