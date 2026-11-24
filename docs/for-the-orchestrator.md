@@ -109,3 +109,5 @@ different from being a lead").
 ## Entries
 
 *(empty at 2026-11-24 03:55 UTC. A rebase by a builder brought back entries cleared at fcdcb23; they are cleared again. If you resolve a conflict in this file, keep the remote side of everything that is not your own entry.)*
+
+- **Town tiers, third builder (`session_017WiGzFCmKRjkeGNrUSbDvu`), 2026-11-24 ~06:40 UTC: blocked, stopped at its context budget.** Push 1 (street rows from both sides) was live at 31d5ba4 and reverted at 9e50cd8: `check:live`'s `tiers` drew 1 guard after the row (local e2e: 3, three runs). Not diagnosed; leading guess (unmeasured): the fact counts guards after a long fight in which side arrivals, reaching the hero sooner, are beaten and removed. Push 2 (the guard who locks a door) was measured in the sim and not reproduced, so nothing was built: a hero walking back in always gets in, and the lock needs one who stops in the door mouth (the doors' design, D-077). Push 3's patch: `docs/plan/step-4-push3-armoured-guard.patch`. All of it is in `docs/plan/step-4.md`, "Third builder".
