@@ -563,3 +563,15 @@ Sent to the thrower's builder as part of its brief's next push; nothing here is 
   sets 844×390 before its first shot (the look found `at-rest-sideways` at
   750×340). "Spent shots read as pickups" is slice 1's design (a landed shot
   is picked up with Use and thrown back): not changed.
+- **Owed (the orchestrator's 14:35 message, which reached this builder only
+  at 17:35, after push 3):** (a) each new thrower clear of the party plate
+  and top edge sideways: the undercroft's is
+  (`docs/plan/step-24-shots/2/stone-plate-down-sideways.png`, him at the
+  right, clear); the balcony's stays as it is (camera and plate). (b) **Not
+  done:** a spent shot lying on the floor still reads as a pickup (it is
+  one: Use takes it and Hit throws it back). The orchestrator asks it be
+  faded or darkened, `DRAFT:`: a `rest` look on the weapon kind (a tint
+  while loose and not flying, the pick-up glow unchanged) in
+  `draw/weapons.ts` is the small way. (c) **Not checked:** whether a struck
+  hero visibly reacts in `hero-struck-*` (the shot is taken a beat after the
+  blow; see slice 1's notes).
