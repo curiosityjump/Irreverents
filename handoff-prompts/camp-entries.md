@@ -1,0 +1,77 @@
+# The Bandit Camp's rows: never seal the door, reach the east half, and be seen arriving (Step 4 / Step 20)
+
+Brief for one builder, three small pushes. Written 2026-11-24 07:35 UTC by
+the orchestrator (`session_017WiGzHhT2apmWHT61rQ65G`). Read first:
+`docs/plan/step-4.md`, "Push 3" and "Push 4" (the both-sides engine and its
+switch-on in the camp); `docs/plan/step-20.md`, "Builder notes", push 3 (the
+wave's wagon); `docs/mechanisms/outposts.md`.
+
+**Reports:** `send_message` to the session on the Orchestrator line of
+`docs/questions-for-the-owner.md`, after each push. **Notes:**
+`docs/plan/step-4.md`, a "Camp entries" section.
+
+## The task, and the measure
+
+The owner, ~01:05 UTC on 2026-11-24, first-hand: "Alarms should spawn more
+enemies of increasing strength that come in from the sides". It is live in
+the Bandit Camp (4154e15; the fourth call brings a driven wagon, ff0d9ad).
+Three leftovers, handed on twice by builders at their context budgets. Moves
+no row of the plan's table; it finishes a thing the owner named.
+
+## Measured (read at ff0d9ad, not run)
+
+`content/outposts/outpost.json`: `entries` [[6,7],[24,10],[30,10],[36,10],[41,10]],
+`entryAway` 12, five `announce` lines ("Here they come!", "Two more!", "Here
+comes a heavy!", "Here comes a wagon!", "Here comes the brute!"). The camp
+is 88 columns wide and has one door, at its west end; the entry [6,7] stands
+beside it. The alarms builder reported: "the west entry [6,7] sits beside
+the only door so the brute can come in between you and the way out"; and
+that entries at [58,10] and [70,10] for the east half (cols 44-87) turned
+`step23-thrown-out-leaves-it` red. That scenario has since been re-pointed
+(ef08490: the camp no longer throws a hero out). No phone screenshot shows a
+row arriving at both screen edges: only the horn's banner.
+
+## Do, each its own push
+
+1. **A hero at the door is never sealed in by an arriving row** (CLAUDE.md,
+   "There is always a way out": waiting may be a cost, being stuck may not).
+   Measure first: a scenario with a hero standing at the door when each of
+   the five calls completes; where does the west half arrive, and can the
+   hero still walk out? Then move the west entry, or hold that half back
+   while a hero stands within `entryAway` of the door, whichever keeps "from
+   both sides" true for a hero in the middle of the camp. Mark the choice
+   `INTENT:` at the data and add the line to `docs/deliberate-designs.md`.
+   A scenario and its control.
+2. **Entries for the east half**, so a hero seen at column 60 gets a row on
+   both sides of them, not two screens away. Count reds before re-timing
+   anything; a red in another step's scenario goes to that step's builder by
+   message (weapons: nobody running, yours with the claim kept; hearts:
+   `session_017WiGzFDViUtdwKrLFTvhrd`), with the list in your report first.
+3. **A phone screenshot** (sideways, phone-sized, by touch) of a row walking
+   in at both screen edges with its banner up, into
+   `docs/plan/step-4-shots/`, and an e2e fact that the page draws a
+   newcomer on each side of the hero within a few seconds of the banner.
+
+## Paths, traps, scope
+
+Yours: `content/outposts/outpost.json`, `content/placements/outpost*.json`
+if an entry needs a tile cleared, `scenarios/` for the camp (the `step7-*`,
+`step12-*`, `sides-*`, `step20-camp-*` ones were re-timed at 4154e15 and
+ff0d9ad: keep every claim, watch every control fail), `scripts/e2e/` camp
+facts, `src/sim/systems/outpost-wave.ts` and `outpost-fight.ts` only if the
+door rule cannot be data. `step7-last-stand-camp` and `step7-hall` carry
+build gate E: `npm run gates` must read 6 of 6. `hearts-game-over` fails
+some runs on `main` and is another builder's: not yours, but tell it if
+your entries change where the last hero stands. The quarry and the town are
+not yours. Stop at about 300k tokens wherever you are, with notes.
+
+## Decided vs. open
+
+Decided: rows from both sides; never sealed at the door. Open, yours,
+`DRAFT:` with a `docs/decisions-log.md` entry: which of the two door rules.
+Nothing for the owner.
+
+## Verify
+
+Build, check, gates 6 of 6, `npm run e2e`; pushed to `main`;
+`npm run check:deployed` and `npm run check:live` ok after each push.
