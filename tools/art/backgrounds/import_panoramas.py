@@ -60,7 +60,7 @@ HAZE = {'bkg01-iron-quarry-evening': 0.35}
 # so a view taller than 180 never shows a flat band with a hard line. Raising a share here and
 # re-running is the whole change; a panorama not named here gets no -far cut.
 FAR = {
-    'bkg01-forest-waterfall': 0.45,
+    'bkg01-forest-waterfall': 0.0,  # third pass: 45% went muddy; forest-trail's caps are hazed locally (LOCAL)
     'bkg01-iron-quarry-evening': 0.5,
     'bkg01-ruins-day': 0.3,
     'bkg02-forest-ruins-day': 0.3,
@@ -68,6 +68,17 @@ FAR = {
 }
 FADE = 180
 STEP = 4
+
+# DRAFT (the orchestrator's third-pass rulings, 2026-11-24 17:21 UTC): a copy of a "-far" cut for one
+# room, hazed toward its sky only inside soft ellipses (centre x, centre y, radius x, radius y in the
+# 960x180 cut; full strength inside half the radius, easing to none at the edge, so no box shows), so
+# one painted thing that sits beside a real one of the same shape reads as background while the rest
+# keeps full colour. Forest-trail's real mushroom caps stand beside the panorama's two painted mushroom
+# groups; forest-road, which has no caps to confuse, keeps them red. The room file names the cut;
+# dropping an ellipse here and re-running is the undo.
+LOCAL = {
+    'bkg01-forest-waterfall-far-caps-hazed': ('bkg01-forest-waterfall', 0.45, [(156, 96, 70, 66), (904, 112, 84, 80)]),
+}
 
 
 def blur_row(row, r):
@@ -104,6 +115,23 @@ def far_cut(cut, sky, haze):
                 out.putpixel((x, y), c)
     return out
 
+def local_haze(far, sky, haze, ellipses):
+    out = far.copy()
+    hazed = Image.blend(far, Image.new('RGB', far.size, sky), haze)
+    px, hz = out.load(), hazed.load()
+    for (cx, cy, rx, ry) in ellipses:
+        for y in range(max(0, cy - ry), min(180, cy + ry + 1)):
+            for x in range(max(0, cx - rx), min(far.width, cx + rx + 1)):
+                d = ((x - cx) / rx) ** 2 + ((y - cy) / ry) ** 2
+                if d >= 1:
+                    continue
+                t = min(1.0, max(0.0, (1 - d ** 0.5) / 0.5))
+                k = t * t * (3 - 2 * t)
+                a, b = px[x, y + FADE], hz[x, y + FADE]
+                px[x, y + FADE] = tuple(round(a[i] + (b[i] - a[i]) * k) for i in range(3))
+    return out
+
+
 def load(rel):
     path = os.path.join(ROOT, rel)
     if os.path.exists(path):
@@ -132,6 +160,10 @@ def main():
         if name in FAR:
             far_cut(cut, avg, FAR[name]).save(os.path.join(out_dir, name + '-far.png'), optimize=True)
             print(f'{name}-far.png  ({round(FAR[name] * 100)}% haze, {FADE} px fade on top)')
+            for out_name, (src, k, boxes) in LOCAL.items():
+                if src == name:
+                    local_haze(far_cut(cut, avg, FAR[name]), avg, k, boxes).save(os.path.join(out_dir, out_name + '.png'), optimize=True)
+                    print(f'{out_name}.png  ({round(k * 100)}% haze in {len(boxes)} soft ellipses)')
 
 
 if __name__ == '__main__':

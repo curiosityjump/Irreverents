@@ -1,5 +1,5 @@
 {
-  "//": "DRAFT: stand-in drawn by tools/art/tiles/make.py (theme \"quarry\", round 2); a delivered tile sheet replaces it by editing this file. Notes: tools/art/tiles/README.md.",
+  "//": "DRAFT: stand-in drawn by tools/art/tiles/make.py (theme \"quarry\", round 2); a delivered tile sheet replaces it by editing this file. Notes: tools/art/tiles/README.md. DRAFT: its one-way planks are row 6 of the sheet, drawn by tools/art/backgrounds/planks_pop.py from row 5 (a cream top edge, deeper wood, a darker underside), the same as the open quarry rooms' so a plank looks the same everywhere in the quarry (docs/decisions-log.md, \"Painted ledges moved off the play rows...\"); row 5 is the plain plank, one edit back.",
   "id": "quarry-cave",
   "image": "tiles/quarry.png",
   "tile": 16,
@@ -14,7 +14,7 @@
     ],
     "oneway": [
       1,
-      5
+      6
     ]
   },
   "autotile": {
@@ -113,19 +113,19 @@
     "oneway": {
       "left": [
         0,
-        5
+        6
       ],
       "mid": [
         1,
-        5
+        6
       ],
       "right": [
         2,
-        5
+        6
       ],
       "single": [
         3,
-        5
+        6
       ]
     },
     "deep": [

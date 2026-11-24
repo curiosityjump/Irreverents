@@ -43,6 +43,7 @@ drawing code is gone (git history, ebcf79e).
 | `[2..5, 4]` | `deep` (outdoor sheets) |
 | `[4..7, 2]`, `[4,3] [5,3]` | top pieces, under pieces |
 | `[0..3, 5]`, `[0..3, 6]` | one-way `left mid right single`; back-wall cells (indoor) |
+| `quarry.png` `[0..3, 6]` | not make.py's: the quarry's standing-out planks, drawn from row 5 by `tools/art/backgrounds/planks_pop.py` (biome backgrounds, third pass); `quarry-road`, `-ridge`, `-depot`, `-cave`, `-tower` point `oneway` at them. Re-running make.py drops the row and rewrites those atlases to row 5; re-run planks_pop.py and re-point them after it. |
 | region i: `[0..3, 8+4i .. 11+4i]`, fills `[4..7, 8+4i]` `[4,11+4i] [5,11+4i]`, tops `[4..7, 9+4i]`, unders `[4..7, 10+4i]` | regions (`grass-ruins`: 0 canopy; `town`: 0 street, 1 red roof, 2 blue roof, 3 eave) |
 
 ## Round 3 (2026-11-23, `handoff-prompts/look3-ground.md`)
