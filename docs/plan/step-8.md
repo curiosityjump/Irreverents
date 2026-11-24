@@ -419,3 +419,23 @@ Round 3 reviews (orchestrator session_017WiGzHhke4tkAThPgw6EXs): **heroes push 1
 - A jump cue at the quarry tower's climb (phone walk at b0a7d5e).
 - The depot's hoard seen from the yard: `depot-hoard` at [45,13] is out of view until you are inside the strongroom, and moving it broke all three take routes; a glint, a window or a look over the strongroom's front would do.
 - Stale pointers to the archived `docs/plan/step-16.md` remain in `scripts/e2e.ts:383`, `scripts/e2e/quarry.ts:4,186` and `docs/plan/step-18.md:153`; fix with the next code push that touches those files (`docs/plan-archive.md`, "Step 16" has the text).
+
+## Look pass, 2026-11-24 07:45 UTC (a subagent of the orchestrator, 25 screenshots; nobody but builders had looked before)
+
+Read from the shots under `docs/plan/*-shots/` on `origin/main`, not from the live game. **A shot may predate a later push** (the Step 21 defeat shots predate hearts on the plate, 002607b; the Step 23 shots were taken on scratch builds before the buttons push, 1809a34): re-shoot before fixing anything a later push may have fixed. The translucent orange bands are Step 19's sight bands, drawn on purpose: not a fault, though the pass could not tell what they meant.
+
+Findings, worst first, as the pass gave them:
+1. `step-20-shots/bandit-upright.png`: a grey-box room (flat slabs, a black void). Likely the test room `test-machine`; check that no player reaches it.
+2. Two control looks in the shots: round blue buttons (star, sword, boot) in `step-23-shots/*`, teal octagons (compass, burst, arrow) in Steps 20 and 21. Probably old against new; confirm on live that one set shows.
+3. Button labels: "TAKE" and "GET IN" sit over a greyed hand that reads as disabled; "GO IN" floats with no button outline; a bare "^" above the arrows means nothing untold (`step-5` buttons `upright-390x664`, `step-20-shots/camp-wagon-get-in-390x664`).
+4. Seven to eight touch buttons upright (`step-21-shots/defeat-courtyard-390x664`); sideways the icons are about 20 px at 750x340 (`step-22` `push3-sign-best-sideways`): too small for thumbs.
+5. Friends' hearts ("vvv" under the other faces) unreadable at phone size (`step-23-shots/held-sideways`, `step-22` `push4-stage-cleared-upright`).
+6. The town's pips under the plate read as hearts or balloons, unlabeled (`step-4` `tiers-street`).
+7. Overlays stack over half the play area: legend banner, portrait card and the place label together; a stray up-arrow overlaps the label's frame; the label has an empty second line with a lone gem (`step-21-shots/defeat-landed-844x390`).
+8. The bomb's burst is about a hero's size, no screen effect (`step-23-shots/bomb-burst-*`): short of "OHHHHH".
+9. STAGE CLEARED's stars are chest icons, the third only dimmed; mid-count one scales over its neighbours; a dialog box behind the card is clipped (`step-22` `push4-*`).
+10. Title, upright: buttons cover the art, the bottom half is empty dark, "Join a friend" is a loose label, mute nearly invisible sideways (`step-17` `title/start-upright-390x664`).
+11. The menu icon has no backing and blends into the scene (`step-3` `stone-plate-part-sunk-upright`).
+12. The wagon and the hero merge into one blob; "Psst!" covers the ground; no barricade visible in `camp-wagon-through-the-barricade-844x390`.
+
+Right: pixel scaling crisp in every shot; the title art; the town, castle and undercroft clean and GBA-like; no damage number anywhere; the STAGE CLEARED card and the places menu read; the guard-vehicle sheet on style; a held sword reads. No screenshot exists of: the GAME OVER card, a held hammer or spear in play, the camp's alarm banners, the town's whistle gauge.
