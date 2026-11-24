@@ -29,6 +29,7 @@ import { drawnCondition, setViewerCopy, watchDefeatEvents } from './draw/conditi
 import { drawnHall, watchHallEvents } from './draw/hall.ts';
 import { drawnRecruits, noteRecruits } from './draw/recruits.ts';
 import { drawnGameOver, skipGameOver, watchGameOver } from './draw/game-over.ts';
+import { dismissStage, drawnStage, showStageCleared, stageScreenUp, takeStageSounds, watchStageEvents } from './draw/stage.ts';
 import { drawnHearts } from './draw/hearts.ts';
 import { drawnParts, setHeardRooms } from './draw/room-parts.ts';
 import { drawnPowers, foundSourceIcons } from './draw/powers.ts';
@@ -171,6 +172,8 @@ const debug = {
     recruits: { cages: [], calls: [], flash: null } as ReturnType<typeof drawnRecruits>,
     /** Step 21, hearts: the GAME OVER card, while one is up (src/client/draw/game-over.ts). */
     gameOver: null as ReturnType<typeof drawnGameOver>,
+    /** Step 22 push 4: STAGE CLEARED, while it is up (src/client/draw/stage.ts). */
+    stage: null as ReturnType<typeof drawnStage>,
     /** Step 21, hearts: the plate's heart rows by hero kind, and how many hearts are popping (src/client/draw/hearts.ts). */
     hearts: { rows: {}, pops: 0 } as ReturnType<typeof drawnHearts>,
     /** Step 3 (the stone plate): the plates and gates this frame drew in this room, down/open and how far a weighted plate sank (src/client/draw/room-parts.ts). */
@@ -225,6 +228,27 @@ function play(worldName: string): void {
   // and the touch still does what it would have (nothing here stops or claims it).
   window.addEventListener('pointerdown', () => skipGameOver(), { capture: true, passive: true });
   window.addEventListener('keydown', () => skipGameOver(), { capture: true, passive: true });
+  // Step 22 push 4: the victory screen's Continue (src/client/index.html #stage-continue).
+  // INTENT (there is always a way out): it is on the screen from its first frame, a tap or click
+  // takes the screen down, and so do Enter, Space and Escape; only this page's screen goes.
+  const cont = document.getElementById('stage-continue') as HTMLButtonElement;
+  const onContinue = (): void => {
+    dismissStage();
+    cont.hidden = true;
+    touchHost.classList.remove('stage-up');
+  };
+  cont.addEventListener('click', onContinue);
+  cont.addEventListener('touchend', (e) => {
+    e.preventDefault();
+    onContinue();
+  });
+  window.addEventListener('keydown', (e) => {
+    if (stageScreenUp() && (e.key === 'Enter' || e.key === ' ' || e.key === 'Escape')) onContinue();
+  });
+  (debug as unknown as { stage: unknown }).stage = {
+    /** For the e2e and screenshots: puts the screen up for a clear as the server sends it (this page only). */
+    show: (ev: Parameters<typeof showStageCleared>[1]) => showStageCleared(content, ev, frameNo, { player, room: net.me().room }),
+  };
   // Step 2: the feel dials, only with ?tune in the address (src/client/tune.ts).
   if (tuneAtLoad) setUpTune({ content, net, canvas, touchHost });
 
@@ -252,6 +276,8 @@ function play(worldName: string): void {
   function readInput(): Input {
     const k = keys();
     const t = touch();
+    // Step 22 push 4: while STAGE CLEARED is up the stick and buttons rest; Continue gives them back (draw/stage.ts).
+    if (stageScreenUp()) return { x: 0, y: 0, held: [] };
     const input: Input = {
       x: Math.max(-1, Math.min(1, k.x + t.x)),
       y: Math.max(-1, Math.min(1, k.y + t.y)),
@@ -304,6 +330,11 @@ function play(worldName: string): void {
     watchDefeatEvents(content, me.id, net.latest()); // Step 21: thrown out, a prize back (draw/condition.ts)
     watchBeatenEvents(net.latest(), frameNo); // Step 5: a defeated bad guy's poof (draw/beaten.ts)
     watchHallEvents(net.latest()); // Step 7: a new legend's banner, wherever this page is (draw/hall.ts)
+    watchStageEvents(content, net.latest(), frameNo, { player, room: me.room }); // Step 22 push 4: STAGE CLEARED (draw/stage.ts)
+    if (stageScreenUp() === cont.hidden) {
+      cont.hidden = !stageScreenUp();
+      touchHost.classList.toggle('stage-up', stageScreenUp());
+    }
     watchGameOver(net.latest(), frameNo, (room) => `the start of ${Object.values(content.levels ?? {}).find((l) => l.rooms.includes(room))?.name ?? 'the level'}`); // Step 21: the GAME OVER card (draw/game-over.ts)
     setHeardRooms(net.heardRooms()); // Step 3: plates drawn from the server's copy too (draw/room-parts.ts, plateAsDrawn)
     const camera = render(g, shown, content, me.room, { me: me.id, frame: frameNo, drawn: seen });
@@ -312,6 +343,7 @@ function play(worldName: string): void {
     const usePrompted = usePrompt(content, shown, me);
     showUsePrompt(touchHost, usePrompted); // Step 19: the Use button names what a press does here (use-prompt.ts)
     showIdle(touchHost, idleActions(content, shown, me, usePrompted !== null)); // a button that would do nothing is dimmed (button-idle.ts)
+    for (const id of takeStageSounds()) audio.cue(id); // Step 22 push 4: a star's sound
     audio.frame(simEvents, net.latest(), me, net.others()); // audio hook (Step 8)
     noteRecruits(content, net.latest().events, frameNo); // Step 13: a rescue anywhere in this world: a banner and the new face
 
@@ -361,6 +393,7 @@ function play(worldName: string): void {
     d.hall = drawnHall();
     d.recruits = drawnRecruits();
     d.gameOver = drawnGameOver();
+    d.stage = drawnStage();
     d.hearts = drawnHearts();
     d.parts = drawnParts();
     d.words = takeWords();

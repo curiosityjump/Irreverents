@@ -74,6 +74,10 @@
 
   #hint { position: absolute; left: 0; right: 0; top: var(--hint-top, 200px); padding: 0 16px; display: flex; align-items: center; justify-content: flex-start; gap: 8px; text-transform: uppercase; letter-spacing: .12em; text-align: center; color: rgba(210, 207, 224, .8); }
   #hint[hidden] { display: none; }
+  /* Step 22 push 4: STAGE CLEARED's Continue, under the right thumb, inside the safe area; the controls rest while it is up (main.ts). DRAFT: every size. */
+  #stage-continue { position: fixed; z-index: 5; right: max(16px, calc(env(safe-area-inset-right) + 8px)); bottom: max(16px, calc(env(safe-area-inset-bottom) + 8px)); min-width: 136px; height: 56px; padding: 0 22px; border: 0; border-radius: 28px; background: radial-gradient(circle at 50% 38%, var(--night3), var(--night2) 70%); box-shadow: inset 0 0 0 2px #e09a1e, 0 3px 0 2px rgba(20, 18, 40, .7); color: var(--cream); font: 700 16px/1 ui-rounded, "SF Pro Rounded", "Nunito", system-ui, -apple-system, sans-serif; letter-spacing: .1em; text-transform: uppercase; touch-action: manipulation; -webkit-appearance: none; appearance: none; }
+  #stage-continue[hidden] { display: none; }
+  #touch.stage-up { visibility: hidden; }
   #hint button { pointer-events: auto; touch-action: manipulation; width: 28px; height: 28px; flex: none; border: 1px solid rgba(210, 207, 224, .45); border-radius: 50%; background: var(--night1); color: var(--pale); font: 600 14px/1 ui-rounded, system-ui, sans-serif; padding: 0; }
 </style>
 </head>
@@ -84,6 +88,8 @@
 <!-- DRAFT: the one dismissible line shown upright. It used to advise turning the phone ("Better sideways"); the owner, 2026-11-23: "It should play well in portrait too", so it no longer does. Left-aligned so it never crowds the top button of the arc. -->
 <div id="hint" hidden><span>Plays either way up</span><button type="button" aria-label="Dismiss">&times;</button></div>
 <div id="safe"></div>
+<!-- Step 22 push 4 (src/client/draw/stage.ts): the victory screen's way out. INTENT (there is always a way out): shown with the screen from its first frame, under the right thumb, inside the safe area; it takes the screen down for this page only. DRAFT: the word, the size, the place. -->
+<button id="stage-continue" type="button" hidden>Continue</button>
 <!-- INTENT: this script comes first and stands alone, in syntax every iPhone Safari reads, so that it still works when game.js fails to load or to parse (an older iOS), which is exactly when nobody could otherwise tell us what happened. It sends what went wrong to the server (GET /debug/errors lists it; src/server/errors.ts): the error, this page's build, the screen, the user-agent. INTENT: no personal data: never the player id, a name, or the room (anything after a "?" is cut from every string, since the room is in the address). DRAFT: at most 20 reports per page load. -->
 <script>
 (function () {

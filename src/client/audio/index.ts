@@ -133,6 +133,10 @@ export function createAudio(content: Content, player: string) {
   };
 
   return {
+    /** Step 22 push 4: plays a sound of content/sounds/ by id on the next frame, as this page's own (the victory screen's stars). */
+    cue(id: string): void {
+      pending.push(id);
+    },
     /** Every frame, after the world has been stepped and drawn. */
     frame(local: SimEvent[], latest: { tick: number; events: SimEvent[] }, me: Entity, others: Entity[]): void {
       const found = moments.update({ local, latest, me, others });

@@ -416,6 +416,26 @@ For the next builder, all measured on `main` at 6edd8be:
   wave "walks in at the far east end". Since the depot push it comes in at
   column 13, but its claims all pass.
 
+### Push 4: the victory screen (builder `session_017WiGzEsUx1mHyijtCDT1gt`)
+
+- `src/client/draw/stage.ts`, plus additive edits to `main.ts`, `render.ts`,
+  `index.html` (`#stage-continue`) and `audio/index.ts` (`cue`). The writeup
+  is in `docs/mechanisms/stages.md`, "The victory screen".
+- **Lead, please look at:** `step-22-shots/push4-stage-cleared-{upright-390x664,sideways-667x375,sideways-844x340}.png`
+  and `push4-stage-mid-count-upright.png`.
+- **Not verified, owed:**
+  - The e2e shows the screen page-side (`irreverents.stage.show`, the same
+    function the server's event reaches). Nothing walks the whole quarry to
+    a real clear on a page. "Both pages get the event" rests on `game.ts`
+    sending every event in every snapshot; it is not observed.
+  - The e2e's step 1 ("walk in and be beaten: at the entrance, the stick
+    moves you") is not written. No beaten-moment shot.
+  - Playwright's phones report safe-area insets of 0, so "inside the safe
+    area" is checked against the CSS env() rule, not against a real notch.
+  - The star is `hall-frame-star` (a framed diamond, not a star): a real
+    star is a missing-list item for Vision Partner.
+  - Hearts left is not a statistic yet: `stage-cleared` has no such field.
+
 ### Lead review, owed item (a) (6edd8be), re-run at 002607b
 
 `npm run build` and `npm run check` are ok: all ten `step22-*` scenarios

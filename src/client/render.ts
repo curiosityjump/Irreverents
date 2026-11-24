@@ -28,6 +28,7 @@ import { drawUseHint } from './draw/use-hint.ts';
 import { drawSight, drawUnseenMarks } from './draw/sight.ts';
 import { drawPrizeStands } from './draw/heist.ts';
 import { drawGameOver } from './draw/game-over.ts';
+import { drawStage } from './draw/stage.ts';
 import { useHere } from '../sim/use.ts';
 
 /** DRAFT: the internal resolution the art on order assumes (docs/plan/step-1.md). */
@@ -124,5 +125,7 @@ export function render(g: CanvasRenderingContext2D, world: World, content: Conte
   if (pv) drawRecruitFlash(g, content, pv.frame);
   // Step 21, hearts: the GAME OVER card over everything; it takes no input (draw/game-over.ts).
   if (pv) drawGameOver(g, W, H, pv.frame);
+  // Step 22 push 4: STAGE CLEARED over everything; Continue is a DOM button (draw/stage.ts).
+  if (pv) drawStage(g, content, W, H, pv.frame);
   return { x: -ox, y: -oy };
 }

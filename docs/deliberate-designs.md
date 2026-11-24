@@ -86,6 +86,9 @@ words.
 
 **Beaten in the Iron Quarry stage, the whole quarry is put back as it began: its people at their posts, the horn whole, broken things mended.**
 → Intended, and only there. The owner (2026-11-24 ~00:30 UTC) asked for "one level ... a real way to lose/die, which pushes you back to the entrance to start over": his own exception, for a stage he asked for by name, to D-077 (a room's state is never reset when it empties) and D-019. Everywhere outside a stage (`content/stages/`) nothing is put back; inside one, only being beaten starts it over, and only once no friend is still inside. What you found for good (the level's pieces, a power source, a recruit) stays found.
+**STAGE CLEARED stays up until you tap Continue, and while it is up your stick does nothing; the world goes on underneath, and your friend's screen is theirs.**
+→ Intended (Step 22 push 4, 2026-11-24). The owner asked for "a satisfying victory screen at the end. Stage cleared, with a star rating and some stats". It is a moment to look at, so it waits for you. "There is always a way out" (`CLAUDE.md`): Continue is on it from its first frame, under the right thumb (also Enter, Space or Escape), and nothing else holds you. It never pauses the world, and each page dismisses only its own. The only numbers in the game picture are here (D-020: a result screen, never over anyone's head). `INTENT:` in `src/client/draw/stage.ts` and at the Continue wiring in `src/client/main.ts`; `docs/mechanisms/stages.md`, "The victory screen".
+
 **A weapon lying on the ground is not a body: a swing passes through it, Grab will not lift it, a flying body does not hit it, and a person does not notice it struck.**
 → Intended (Step 23, 2026-11-24), for the same reasons as a power's orb (above in `src/sim/powers.ts`, `ORB_KIND`): as a body, a power's orb was struck by a shopkeeper's swing, raised the street's alert and wore down the villain it hit. A loose weapon is the kind `~weapon` and moves by the orb's own small fall (`src/sim/loose-fall.ts`). Use picks it up. `INTENT:` at `WEAPON_KIND` in `src/sim/weapons.ts`; `docs/mechanisms/weapons.md`.
 
@@ -110,6 +113,7 @@ Keep this table in step with the entries:
 | Beaten, you are thrown out (the throw is the way out) | `src/sim/systems/defeat-throw.ts` |
 | Game over is the cantina at once, never a reload, the card holds nobody | `src/sim/systems/heart-game-over.ts`; `src/client/draw/game-over.ts` |
 | Beaten in a stage, the stage is put back as it began | `src/sim/stage.ts` (`restoreStage`) |
+| STAGE CLEARED waits for Continue; the stick rests; each page its own | `src/client/draw/stage.ts`; `src/client/main.ts` (`#stage-continue`) |
 | People can be outrun and jumped over | `src/sim/npc/behaviours.ts` (`charge`); `content/tuning.json` (`characters.guard`, `.shopkeeper`, `.toll-keeper` `"//"`) |
 
 **Still unmarked:** list entries that have no `INTENT:` at their site yet.

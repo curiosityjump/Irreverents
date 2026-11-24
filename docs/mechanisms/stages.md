@@ -97,7 +97,32 @@ power sources, the roster.
   the game picture (`t-no-numbers`). `drawn.levels.entrances[].best`.
 - **The menu row** (`src/client/start.ts`, `.st-stars`, `data-stars`): the
   same stars and the best time as m:ss (`stageClock`), in HTML.
-- The victory screen is push 4.
+
+### The victory screen (push 4, `DRAFT:`)
+
+`src/client/draw/stage.ts`, called from `main.ts` (`watchStageEvents`) and
+`render.ts` (`drawStage`, last, over the GAME OVER card).
+- A `stage-cleared` puts it up on a page whose own hero is in the stage's
+  level or who cleared it (every snapshot carries every event,
+  `src/server/game.ts`).
+- On the game canvas, in the pixel font (`light`): the level's name,
+  STAGE CLEARED at 2x when it fits, then three `hall-frame-star`. The
+  earned ones light one at a time (frame 30, then every 50), each with the
+  sound `secret-found` (`audio.cue`).
+- Then the statistics count up in turn: time to clear (m:ss), enemies
+  defeated, alarms raised, game overs (the run's `tries`); "Nobody saw
+  you" when unseen; "The hoard, carried out" when it was.
+- `INTENT:` the one place numbers are drawn in the game picture (D-020).
+- **Continue** is the DOM button `#stage-continue` (`index.html`), bottom
+  right inside the safe area, 136x56 or more. It is shown with the screen.
+  While the screen is up, `readInput` sends nothing and `#touch` is hidden
+  (`.stage-up`). A tap, click, Enter, Space or Escape dismisses this page's
+  screen only.
+- `INTENT:` there is always a way out, and the world never pauses.
+- `drawn.stage` holds the lines as drawn, the stars lit, the plate's box
+  and the view. `irreverents.stage.show(ev)` puts one up page-side, for the
+  e2e and screenshots.
+- Not shown: hearts left (the event has no such field yet).
 
 ## Checking it
 
@@ -112,12 +137,17 @@ with the run seeded through `world.stages` so its time lands one tick either
 side of each threshold; each pair is the other's control: move `started` when
 the thresholds are re-measured). The fact `tile` (Step 22) reads a room's tile
 as the world has it; the fact `stage` (push 3) reads `world.stages[id]`'s
-state, tries and best.
+state, tries and best. `step22-restart-on-game-over.json` (item (b)). The
+e2e's `stage-*` facts (`scripts/e2e/stage.ts`): the screen at three phone
+sizes inside the view, Continue in the safe area and reachable, the stick
+resting while it is up (`stage-held`, the control), Continue giving it
+back, and two pages each dismissing their own. Shots in
+`docs/plan/step-22-shots/push4-*`.
 
 ## Not built yet
 
 The home copy still restores the people who were only knocked flat, moved
 or angered; `restorePeople` covers only the gone. Push 3's hero runs (each roster hero from the entrance to the end, fighting
-and sneaking) and the thresholds they measure. Push 4: the victory screen. Push 5: more enemies, the
+and sneaking) and the thresholds they measure. Push 5: more enemies, the
 waves from the sides. `beaten.ts`'s `restorePeople` (another builder's, not
 on `main` at push 2) now brings back the gone; the home copy keeps the rest.
