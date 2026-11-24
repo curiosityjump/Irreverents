@@ -356,3 +356,15 @@ By a subagent reading the six shots in `docs/plan/step-25-shots/` at phone size,
   carry arms-up frame through the slam (frames C02-05 will fix); the lag is
   learned per page load, so the very first suplex on a fresh page is timed
   from the round trip alone (within ~60 ms here). Not run on a real phone.
+
+- **Look at push 4's shots (the orchestrator, by a blind subagent shown the
+  ten `*-2-*` shots, recorded here by the push-4 builder, 2026-11-24 ~20:30
+  UTC).** Its sentence: "The goggled hero grabs the king, hoists him up
+  overhead, flings him over and smashes him into the floor behind him in a
+  burst of stars." Passes as a throw over the head, with weight. **Does not
+  come through: head-first.** In `slam-2-*` the body is a jumble under the
+  stars, merged with the hero's back; in `after-2-*` it lies upright or
+  slumped. Asked for, not done (the builder stopped at its token budget;
+  `handoff-prompts/suplex.md`, "Landed so far, push 4"): head-down 180
+  degrees from the star's tick and held for the beat; a smaller star at the
+  head with the dust behind; the body a few px further clear of the hero.
