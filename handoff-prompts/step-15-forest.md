@@ -1,3 +1,5 @@
+**Lead, 14:40 UTC, push 4c (from the orchestrator's look, end of `docs/plan/step-15.md`), before push 5:** retake `deep-pocket` at 844x390 and 750x340 (both show only STAGE CLEARED); retake `canopy-390x664` (the hero is behind the party plate); darken and cool the earth further (it still reads warm mid-brown); a mossy-stone sprite for the boulder if an approved plate has one, otherwise say so. Say whether the thin orange lines in `trail-gap-750` and `root-tunnel-390` are sight bands.
+
 **Lead, 12:50 UTC, for the third builder. READ THIS FIRST; it replaces the blocks below where they differ.**
 - **Landed:** push 1 (518e220), push 2 (841d4a8), push 2b (2652cc8, the forest's tiles), and push 3 (4323a15: the guarded spot at the upper trail, waves from both sides, the thrower on the root mound, a spear by the way in, star times). Pushes 1 and 2 were reviewed by the lead's re-runs; push 3's review is running.
 - **Read first:** "Handoff (second builder …)" in `docs/plan/step-15.md`. It has the parked, unrun e2e case, the shot tool and the measured route for each look defect.
