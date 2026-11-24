@@ -233,3 +233,24 @@ outpost, machine or stage slices beyond those lines.
 - `handoff-prompts/weapons-pick-up-and-swing.md`, five pushes, one builder (drafted for the orchestrator 2026-11-24 01:35 UTC against 8413d16; nothing in it was run).
 
 ## Builder notes
+
+## The owner, 2026-11-24 ~01:50 UTC, first-hand to the orchestrator: no inventory
+
+> No inventory. Only one weapon at a time. Similar to kirby - cant have multiple powers at once
+
+Decided from it (this overrides anything above that says otherwise):
+
+- **A hero holds one weapon, or none.** There is no inventory, no bag, no
+  second slot, no list, and no inventory icon (the P12 contract's request for
+  one is not used). Picking up a weapon with one in hand swaps: the old one
+  drops where you stand. The HUD shows the one weapon you hold, nothing more.
+- **Per hero, not per party:** each party member holds their own one weapon
+  (`DRAFT:` it stays with that hero through a switch, as the brief had it).
+- **Powers the same:** one power at a time per hero, as Kirby (D-009, D-080):
+  taking a second replaces the first, which pops out as an orb. Check what
+  Step 9 built does exactly that (`src/sim/systems/power-take.ts`) and tell
+  its builder if it does not.
+- `DRAFT:` a hero may hold one weapon and one power at once (they are
+  different things on different buttons). The other reading of his words is
+  one thing in all, weapon or power: keep it one data switch and say so in
+  the notes; the orchestrator has asked him.
