@@ -1,5 +1,3 @@
-// DRAFT, NOT RUN (Step 15 push 4, second builder): written, never executed. Move to scripts/e2e/forest.ts and add its call line after quarryFacts in scripts/e2e.ts:
-//   await (await import('./e2e/forest.ts')).forestFacts({ browser, devices, base, out, fact, errors });
 // Step 15's facts inside `npm run e2e` (one call line in scripts/e2e.ts), signal 6
 // (docs/plan/step-15.md): a phone-sized page, by touch only, walks from the
 // start room to the courtyard, up through its forest doorway into the forest
@@ -17,7 +15,7 @@
 // DRAFT: every limit below is a first pass with room to spare.
 import fs from 'node:fs';
 import path from 'node:path';
-import { me, phone, pointOn, settle, standAt, tap } from '../lib/e2e-touch.ts'; // DRAFT: move this file to scripts/e2e/forest.ts before running it
+import { me, phone, pointOn, settle, standAt, tap } from '../lib/e2e-touch.ts';
 import type { Kit, Phone } from '../lib/e2e-touch.ts';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
