@@ -1,0 +1,7 @@
+{
+  "//": "DRAFT (Step 21, hearts; the owner, 2026-11-24: 'Heros should have hearts which can be lost. Once all heros in the party are out of hearts, that's a game over (back to cantina)'; docs/decisions-log.md 'Step 21: hearts'). How many hearts each hero has (`heroes`, by character kind; one left out has `default`). `per`: what costs one, 'fall' (an enemy puts the hero on the floor: the unit, D-020) or 'blow' (each blow an enemy lands; the other answer, kept one switch away). A friend, a wall, a fall and the cantina's brawl never cost one. 'on': false is the game before hearts.",
+  "on": true,
+  "default": 3,
+  "heroes": { "grappler": 3, "infiltrator": 3, "flyer": 3, "brawler": 3, "skirmisher": 3 },
+  "per": "fall"
+}

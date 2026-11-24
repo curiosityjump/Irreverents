@@ -3,7 +3,9 @@
 **Reference.** Open before touching `content/defeat/**`,
 `src/content/kinds/defeat.ts`, `src/sim/defeat.ts` or
 `src/sim/systems/defeat-*.ts`, or any scenario where a hero is knocked flat
-in the Bandit Camp or the alerted castle street.
+in the Bandit Camp or the alerted castle street. Hearts (below): also
+`content/hearts.json`, `src/content/kinds/hearts.ts`, `src/sim/hearts.ts`,
+`src/sim/systems/heart-*.ts`.
 
 ## Why it exists
 
@@ -82,3 +84,36 @@ or into a dip out of every seizer's reach (the road's heavy, the ridge's
 brute, the depot's far yard), so a hero is thrown out mostly where the floor
 is flat around them.
 Held, not yet run: `docs/plan/step-21-held/`.
+
+## Hearts (the owner, 2026-11-24: this is what losing becomes)
+
+The owner, playing: "Heros should have hearts which can be lost. Once all
+heros in the party are out of hearts, that's a game over (back to cantina)".
+The decision is `docs/plan/step-21.md`, "Hearts"; it is built in pushes
+(`handoff-prompts/hearts.md`). Landed so far:
+
+- **`content/hearts.json`** (kind `src/content/kinds/hearts.ts`): `on`
+  (false: nobody loses one), `default` and `heroes` (hearts by character
+  kind; `DRAFT:` 3 each), `per`: `fall` (an enemy puts the hero on the
+  floor, the unit, D-020) or `blow` (each `hit` an enemy lands: the other
+  answer, one switch away).
+- **`World.heartsLost`** (`src/sim/hearts.ts`): hearts lost by hero kind,
+  the party's, shared by everyone playing (D-012, D-013). Absent or a kind
+  left out: none lost. A top-level field, so a kept game keeps it and every
+  page takes it with each snapshot. Helpers: `maxHearts`, `heartsLeft`,
+  `heartsOut`, `loseHeart`, `refillHearts` (sets `{}`, never deletes).
+- **`heart-lose`** (order 580, after every way of being flattened and
+  before `defeat-seize`): a played hero `flattened` by an enemy loses one
+  (`heart-lost` {entity, player, hero, by, left}). An enemy is a person
+  nobody plays who has `c.npc` and is in this world; `by` is the one who
+  struck, threw or slammed them (a flight's `by`). Never: a friend (no
+  friend can floor you outside the brawl anyway, `friendAttackWear` 0), a
+  wall or fall with nobody behind it (`by` null), anything in a cantina room
+  (a guard who follows you in; the regulars are not `c.npc`).
+  `INTENT:` the enemy is never in a page's world, so a page never writes
+  the field.
+
+Checked by `step21-heart-lost-to-a-bandit` (control: `on` false),
+`step21-heart-none-in-the-brawl` (control: the enemy test cut to "anyone
+nobody plays") and `scripts/checks/step21-hearts.ts` (two connections and a
+kept game; control: no heart taken, it fails).

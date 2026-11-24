@@ -1,0 +1,194 @@
+{
+ "id": "step21-heart-none-in-the-brawl",
+ "proves": "Step 21, hearts (DRAFT, docs/decisions-log.md 'Step 21: hearts'; D-086, doc 31): in the cantina's brawl the grappler's punches put the infiltrator, a friend, on the floor three times (85, 124, 231), and a regular puts it on the floor once more (375): none of the four costs a heart (a friend's fall never does; nothing in the cantina's brawl does), and the infiltrator has all three at the end. Control (watched to fail, 2026-11-24): heart-lose's enemy test cut to 'anyone nobody plays' (the cantina line and the person test taken out), and the regulars' falls at 375 and 396 cost a heart each while the friend's three still cost none",
+ "room": "cantina",
+ "placements": true,
+ "players": [
+  {
+   "id": "a",
+   "character": "grappler",
+   "spawn": 0
+  },
+  {
+   "id": "b",
+   "character": "infiltrator",
+   "spawn": 0
+  }
+ ],
+ "inputs": [
+  {
+   "player": "a",
+   "from": 2,
+   "to": 6,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 32,
+   "to": 36,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 62,
+   "to": 66,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 92,
+   "to": 96,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 122,
+   "to": 126,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 152,
+   "to": 156,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 182,
+   "to": 186,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 212,
+   "to": 216,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 242,
+   "to": 246,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 272,
+   "to": 276,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 302,
+   "to": 306,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 332,
+   "to": 336,
+   "hold": [
+    "attack"
+   ]
+  }
+ ],
+ "ticks": 420,
+ "expect": [
+  {
+   "fact": "event",
+   "event": "cantina-brawl-start",
+   "between": [
+    0,
+    420
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "event-where",
+   "event": "flattened",
+   "where": {
+    "target": "p:b",
+    "by": "p:a"
+   },
+   "between": [
+    0,
+    300
+   ],
+   "count": [
+    3,
+    3
+   ]
+  },
+  {
+   "fact": "event-where",
+   "event": "flattened",
+   "where": {
+    "target": "p:b",
+    "by": "cantina:skirmisher"
+   },
+   "between": [
+    375,
+    375
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "event",
+   "event": "heart-lost",
+   "between": [
+    0,
+    420
+   ],
+   "count": [
+    0,
+    0
+   ]
+  },
+  {
+   "fact": "hearts",
+   "hero": "infiltrator",
+   "between": [
+    0,
+    420
+   ],
+   "left": 3
+  },
+  {
+   "fact": "hearts",
+   "hero": "grappler",
+   "between": [
+    0,
+    420
+   ],
+   "left": 3
+  }
+ ],
+ "gate": null
+}

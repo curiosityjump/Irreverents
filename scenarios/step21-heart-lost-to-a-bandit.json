@@ -1,0 +1,224 @@
+{
+ "id": "step21-heart-lost-to-a-bandit",
+ "gate": null,
+ "proves": "Step 21, hearts (the owner, 2026-11-24: 'Heros should have hearts which can be lost'; DRAFT, docs/decisions-log.md 'Step 21: hearts'): in the real Bandit Camp the grappler stands among the camp's fighters and is put on the floor by one of them at 1009. That fall costs the grappler one of the party's hearts (3 to 2, a 'heart-lost' event naming the bandit) and nothing else: the other heroes keep all theirs and the grappler gets up where it lies. Control (watched to fail): \"on\": false in content/hearts.json, no heart is lost",
+ "room": "outpost",
+ "placements": true,
+ "players": [
+  {
+   "id": "a",
+   "character": "grappler",
+   "spawn": 0
+  }
+ ],
+ "inputs": [
+  {
+   "player": "a",
+   "from": 0,
+   "to": 135,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 20,
+   "to": 45,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 340,
+   "to": 414,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 400,
+   "to": 404,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 424,
+   "to": 428,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 448,
+   "to": 452,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 472,
+   "to": 476,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 496,
+   "to": 500,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 520,
+   "to": 524,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 544,
+   "to": 548,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 568,
+   "to": 572,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 592,
+   "to": 596,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 616,
+   "to": 620,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 640,
+   "to": 644,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 664,
+   "to": 668,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 688,
+   "to": 692,
+   "hold": [
+    "attack"
+   ]
+  }
+ ],
+ "ticks": 1100,
+ "expect": [
+  {
+   "fact": "hearts",
+   "hero": "grappler",
+   "between": [
+    0,
+    1009
+   ],
+   "left": 3
+  },
+  {
+   "fact": "event-where",
+   "event": "flattened",
+   "where": {
+    "target": "p:a"
+   },
+   "between": [
+    1009,
+    1009
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "event-where",
+   "event": "heart-lost",
+   "where": {
+    "entity": "p:a",
+    "hero": "grappler",
+    "left": 2
+   },
+   "between": [
+    1009,
+    1009
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "event-where",
+   "event": "heart-lost",
+   "where": {},
+   "between": [
+    0,
+    1100
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "hearts",
+   "hero": "grappler",
+   "between": [
+    1010,
+    1100
+   ],
+   "left": 2
+  },
+  {
+   "fact": "hearts",
+   "hero": "infiltrator",
+   "at": 1100,
+   "left": 3
+  },
+  {
+   "fact": "hearts",
+   "hero": "flyer",
+   "at": 1100,
+   "left": 3
+  },
+  {
+   "fact": "in-room",
+   "player": "a",
+   "at": 1100,
+   "room": "outpost"
+  }
+ ]
+}

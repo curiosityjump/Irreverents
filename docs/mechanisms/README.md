@@ -13,7 +13,7 @@ This is the hub `CLAUDE.md` points at. It lives here rather than in
 specific mechanism, not on every decision. `CLAUDE.md`'s budget is spent on
 things that shape every decision instead.
 
-- **Defeat (Step 21)**: beaten N times in a bad guys' place with one of them in reach, you are stood over for a beat and thrown out, what you carried put back — `defeat.md`
+- **Defeat (Step 21)**: beaten N times in a bad guys' place with one of them in reach, you are stood over for a beat and thrown out, what you carried put back; hearts (`content/hearts.json`, `World.heartsLost`, system `heart-lose`): the party's, a fall to an enemy costs one — `defeat.md`
 
 ## Adding to this file
 

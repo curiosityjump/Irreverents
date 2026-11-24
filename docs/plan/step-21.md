@@ -341,3 +341,17 @@ logged in `docs/decisions-log.md` by the builder who makes it):
   two connections: both pages draw the same hearts and both get the game
   over. Phone e2e by touch: hearts drawn inside the safe area, one lost, then
   game over and the stick moves the hero in the cantina.
+
+## Builder notes: Hearts (`handoff-prompts/hearts.md`)
+
+### Push 1: hearts in the sim, and they are lost
+
+`content/hearts.json` (3 each, `per` "fall"), `World.heartsLost`,
+`heart-lose` (580), fact `hearts`, scenarios `step21-heart-lost-to-a-bandit`
+and `step21-heart-none-in-the-brawl`, check `step21-hearts` (two
+connections, a kept game). No other step's scenario changed colour (nothing
+acts on hearts yet). Found while building: the cantina's regulars carry no
+`c.npc`, so they are no enemy by the person test alone; the cantina line in
+the test is for a guard who follows a hero in. Not yet measured: how long
+each hero lasts at wave 3 and alert 3 (the brief's open "brawler and
+grappler may take more"); 3 each stands until that measurement.

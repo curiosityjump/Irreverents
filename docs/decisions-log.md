@@ -1227,3 +1227,10 @@ document as a decision of theirs.
 - **To change it:** delete `src/sim/systems/rest-out-of-false-wall.ts` to go back (he will lie in the wall again); `LOOK` at its top is how far it looks for room.
 - **Where:** `docs/mechanisms/rooms-and-doors.md`, the parts table. `DRAFT:`
 
+
+### 2026-11-24 · Step 21: every hero has three hearts; a bandit (or a guard you provoked) putting you on the floor costs one
+- **Decided by:** hearts builder, push 1, `session_017WiGzG7mhviEaxroo5GvBv`, on the orchestrator's brief (`handoff-prompts/hearts.md`)
+- **Instead of asking:** "How many hearts, and what exactly takes one?"
+- **Why this way:** the owner, playing: "Heros should have hearts which can be lost." The fall is the unit, so knockback and throws still carry the fight and nothing counts single blows (D-020); three each to start (the orchestrator's pick). The hearts belong to the party everyone shares, by hero. A friend, a wall, a fall with nobody behind it and anything in the cantina's brawl never cost one. Nothing yet happens at none: being out and the game over are the next pushes; nothing is drawn yet.
+- **To change it:** `content/hearts.json`: `heroes` (per hero), `default`, `per` ("blow": every blow an enemy lands costs one instead), `"on": false` turns hearts off.
+- **Where:** `docs/mechanisms/defeat.md`, "Hearts"; `docs/plan/step-21.md`, "Builder notes", "Hearts". `DRAFT:`
