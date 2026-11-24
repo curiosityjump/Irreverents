@@ -39,6 +39,18 @@ shape are built engine-wide by `session_017WiGzF31gfYgeWNMA7rnEL`
 points and rows in the quarry's rooms, and fixes the depot's floor-gap fall.
 The data shape is agreed by message before either side writes it.
 
+**The owner, ~01:20 UTC, playing (relayed by the orchestrator):**
+
+> Heros should have hearts which can be lost. Once all heros in the party are out of hearts, that's a game over (back to cantina)
+
+This is decided in `docs/plan/step-21.md`, "Hearts" (Step 21's builder builds
+it). For this stage, dying means the party running out of hearts. Until the
+owner answers the orchestrator's question, the stage sets its own game-over
+place (`DRAFT:`): its entrance, hearts full, the stage started over. "Tries" on
+the victory screen become game overs, and hearts left is a statistic and a star
+condition. Push 1's defeat file (thrown to the road's entrance) still lands
+tonight, so the quarry can be lost at all before hearts arrive.
+
 ## Goal
 
 A player walks into one outpost level and knows it is a stage: where it

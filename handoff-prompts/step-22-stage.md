@@ -1,5 +1,11 @@
 **Lead, 00:25 UTC, read this first:** the owner, ~01:05 UTC: *"Alarms should spawn more enemies of increasing strength that come in from the sides"* (quoted in `docs/plan/step-22.md`). That rule and its data shape are built engine-wide by `session_017WiGzF31gfYgeWNMA7rnEL` (`handoff-prompts/owner-enemies-chase-alarms.md`). **Before push 1's wave fix, message it and agree the data shape** (entry points on both sides of the player, rows that get stronger, the last one repeating). Then the quarry's entry points and rows are yours (push 1 for the depot, push 5 for every room), written in that shape. Don't write a rule of your own.
 
+**Lead, 00:27 UTC, also first: hearts.** The owner, ~01:20 UTC: *"Heros should have hearts which can be lost. Once all heros in the party are out of hearts, that's a game over (back to cantina)"*. It is decided in `docs/plan/step-21.md`, "Hearts" (read it); Step 21's builder, `session_017WiGzJWYyVWtYnjFXHko1S`, builds hearts and game over, and their place is data per place. What changes for you:
+
+- **Push 1 is unchanged.** Land it tonight, so the quarry can be lost at all.
+- **From push 2, the stage starts over on a game over inside it.** The stage's game-over place is its entrance (`DRAFT:` until the owner answers), with hearts full. Hang the restart off one trigger. Until Step 21's game-over event is on `main`, a `thrown-out` inside the stage is that trigger. Switch to the game-over event when it lands, and agree with that builder by message how a place names its game-over spot. **Never build a second heart or downs counter.**
+- **On the victory screen, "tries" become game overs.** Add *hearts left* (the party's, at the end) as a statistic. Three stars may require that no hero ran out (`DRAFT:`).
+
 # Step 22: one stage to clear (the quarry): lose and start over, reach the end, STAGE CLEARED
 
 Brief for one builder, reused for every push below. Written 2026-11-24 by
