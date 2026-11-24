@@ -111,16 +111,3 @@ different from being a lead").
 ### Step 15's third builder, 2026-11-24 (for Step 10's lead)
 
 **Flag:** the walk to the forest is a beat Step 10 can use. From the courtyard, the forest's doorway (columns 8-10 of the floor, left of the quarry's) leads up into `forest-road` and on to `forest-trail`, a second stage (`bramble-forest`) with its own hearts, game over at its entrance and stars. A phone does it by touch alone (`npm run e2e`, facts `forest-in`, `forest-road-cross`; `scripts/e2e/forest.ts`). Shots of the road, the trail and its three secrets at 844x390, 750x340 and 390x664 are in `docs/plan/step-15-shots/`.
-
-### e2e-shots-only-when-asked builder, 2026-11-24 (landed at 87bde1d, live)
-
-**Flag:** the brief said "scripts only: no redeploy". It was wrong: `scripts/**` is in `railway.json`'s watch patterns, so the push redeployed (live at 87bde1d 16:07 UTC, ten minutes after the push, behind 178e243's queue; 0 players, `/debug/errors` empty). I ran the full code-push gate.
-**Doubt:** one of five full `npm run e2e` runs (at the rebase onto af69443) failed `hearts-game-over` and `start-link-back` (`a tab that played  opened a shared link`: `inMain` empty). The next run on the same tree passed 139 of 139, and so did the one after the next rebase (140). The change only moves where 5 screenshot paths point, so I read both as intermittent and did not dig. `start-link-back` was not on the known-flaky list I saw.
-**Not done:** no line in `docs/roles/builder-card.md`. A builder who doesn't want new shots needs no switch, and the trap bullet in `docs/verifying-and-finishing.md` covers a dirty `docs/plan/`.
-
-### 2026-11-24 16:40 UTC · Step 15 closed (lead `session_017WiGzHD8gtSGTegd3n8W4G`): what it leaves for others
-- **Guard vehicles as machines** (vision-gaps row 15): not built; the forest was the planned home, and the sprites (`content/looks/guard-vehicles.json`) are still drawn by nothing.
-- **Camera, upright:** a hero on a room's top rows (the forest's canopy, rows 1-2) sits under the party plate, because the camera stops at the room's top. For the camera/HUD owner.
-- **The start menu's stage rows** with the forest beside the quarry were never shot (the menu lists only places a world has found).
-- **The forest's long limb** over the quiet way reads as an earth shelf, not a branch (`docs/plan-archive.md`, "Step 15", push 5): an art pass when there is one.
-- **vision-gaps row 2** (more than one region) can move to covered or partial at your next refresh; row 7 has its second biome.
