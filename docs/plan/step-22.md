@@ -15,6 +15,18 @@ be invincible as hero... and enemies collapse but never die"*. Everything the
 core loops built is a system in a place; nothing yet is a run with a start, a
 way to lose, an end and a result. This is that, once, in one level.
 
+**The owner, ~00:50 UTC, playing the live game (relayed by the orchestrator):**
+
+> Alarms don't seem to do anything yet. Enemies can't be fully defeated, neither can heros, and enemies don't give chase if you are not right in front of them.
+
+The quarry has no defeat file today (Step 21's rule is live only in the castle
+street and the Bandit Camp), the depot's waves drop through the floor gap, and
+nobody chases. The chase rule is being fixed engine-wide by
+`handoff-prompts/owner-enemies-chase-alarms.md` (it sends this step its quarry
+rows, and does not edit the quarry); enemies staying beaten is Part 2 of
+`owner-knocked-out-flies-off.md`. **So the first push makes "you can lose here"
+true in the quarry.**
+
 ## Goal
 
 A player walks into one outpost level and knows it is a stage: where it
