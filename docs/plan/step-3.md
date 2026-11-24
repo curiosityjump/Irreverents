@@ -689,3 +689,49 @@ but that he did not find (the pit's "up to the ridge" doorway needs the
 stick pushed up). The menu's way back (push 1) covers all of them.
 Scenario players may now carry `tile` (`src/scenarios/run.ts`), to put a
 hero where a trap was.
+
+**Live check, the second builder (`session_017WiGzJ8c7VmFamHF5cuNPW`),
+21:42 UTC.** 70b2361 and a1f6101 went live with 89f1ff8 (pushed ~21:33,
+live by 21:42: queued, not stuck). `check:live` ok; the menu facts of
+`scripts/e2e/menu-way-back.ts` run against the live address in a private
+world, all eight green ("Back to the entrance" from the depot put the hero
+at the road's entrance, and the stick moved him).
+
+**The menu button's look (push 3 of this brief, after the orchestrator's
+look at 3dc7ef7).** An opaque night plate (`#1b1838`), a cream rim, solid
+cream bars, 44 px, same id and place; its touch area reaches 8 px past the
+drawn edge (`#menu-btn::after`), and the plate keeps 8 screen px clear
+(`MENU_CLEAR`, `draw/hud.ts`). Measured before: the plate 4 px from the
+button at all three sizes, the button's fill transparent. Shots, before and
+after, undercroft (dark brick), courtyard (leaves) and the quarry's depot at
+390x664, 844x390, 750x340: `docs/plan/step-3-shots/menu-button/`. Fact
+`menu-reach-<size>`; control (the pre-change client): red at all three
+sizes (plate 3.3-6.7 px, the corner tap missed).
+
+**Push 3, a place reached only with a power that faded.** Measured by
+reading, then shown: the way-out check plays every standable tile joined to
+a door with the bare hero (`c: {}`, now `INTENT:`), and neither power
+changes a body's size (`content/powers/boost.json` raises strengths,
+`flight.json` lends flap), so every place a powered hero can come to rest
+is already held to a way out without the power. Shown on the one place
+built for a power, the pit's out-of-reach ledge: the brawler, no power,
+walks off its east end to the pit's floor (`way-out-faded-wings-pit-ledge`;
+control, the end walled by the scenario's `tiles`: he stays on the ledge,
+feet at 128, red).
+
+**What else could have held him in the quarry** (the orchestrator's list;
+the menu's way back now gets a player out of every one of them):
+- *Put back somewhere odd after a hero is out:* the next hero becomes the
+  body where it stood if it fits, else the room's first spawn
+  (`docs/mechanisms/defeat.md`, "Out"). Both are standable tiles, and the
+  check plays every roster hero on every standable tile: covered, measured
+  by the check, not by a separate run.
+- *A body in a one-tile way:* the check plays an empty room (people and
+  crates left out). Not measured per tile here. A person at a post can be
+  fought and thrown, a crate pushed or thrown, so a body is a fight, not a
+  wall; a beaten hero's body is not left behind (the next hero is that body).
+- *The pit's "up to the ridge" doorway, hard to see:* the way out exists
+  (columns 30-31, push the stick up) but may not read as a door; the
+  owner's "jump up through, but not back down" fits a player in the pit
+  who never found it. Logged for the owner's eye, not changed (a look
+  question, `docs/questions-inbox.md` if he says so).

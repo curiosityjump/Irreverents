@@ -14,6 +14,11 @@
 //   stage's entrance (the road, by the door from the courtyard), and the
 //   stick then moves the hero.
 // - menu-way-back-cantina: from the courtyard, "Back to the cantina".
+// - menu-reach-<size> (the orchestrator's look at 3dc7ef7: weak on dark
+//   backdrops, the plate 4 px from it): the button is drawn opaque, the plate
+//   starts at least 6 px right of it, and a tap 7 px outside it (right, below,
+//   the corner) opens the menu. Control: the pre-change client (git stash)
+//   measured the plate 4 px away and taps 7 px outside missed.
 // Control: E2E_NO_WAY_BACK=1 takes the way-back row off the page, and both
 // menu-way-back facts must fail (the hero stays where it was).
 import { me, phone, pointOn, settle } from '../lib/e2e-touch.ts';
@@ -111,6 +116,39 @@ export async function menuWayBackFacts(kit: Kit): Promise<void> {
       m = await openMenu(ph);
       fact(`menu-opens-after-sleep-${tag}`, m.under && m.open, `after the page slept 2.5 s and woke: the button is under its middle (${m.under}); a tap opens the menu (${m.open})`);
       await shut(ph);
+    } finally {
+      await ph.ctx.close();
+    }
+  }
+
+  for (const size of [{ width: 390, height: 664 }, { width: 844, height: 390 }, { width: 750, height: 340 }]) {
+    const ph = await phone(kit, `${kit.base}/?room=e2e-reach-${Math.random().toString(36).slice(2, 8)}`, `menu reach ${size.width}`);
+    try {
+      await ph.page.setViewportSize(size);
+      await standIn(ph, 'courtyard', 11, 8);
+      await ph.page.waitForFunction(() => (window as any).irreverents.drawn.room === 'courtyard' && (window as any).irreverents.drawn.hud, null, { polling: 'raf', timeout: 4000 }).catch(() => undefined);
+      await sleep(1200);
+      const m = (await ph.page.evaluate(() => {
+        const btn = document.getElementById('menu-btn')!;
+        const b = btn.getBoundingClientRect();
+        const cv = document.querySelector('canvas')!;
+        const c = cv.getBoundingClientRect();
+        const hud = (window as any).irreverents.drawn.hud;
+        const plateLeft = hud ? c.left + (hud.box.x * c.width) / cv.width : -1;
+        const bg = getComputedStyle(btn).backgroundColor;
+        const alpha = /rgba\([^)]*,\s*([\d.]+)\)/.exec(bg)?.[1];
+        return { gap: plateLeft - b.right, opaque: !alpha || Number(alpha) === 1, bg, pts: ([[b.right + 7, b.top + b.height / 2], [b.left + b.width / 2, b.bottom + 7], [b.right + 7, b.bottom + 7]] as [number, number][]).map(([x, y]) => ({ x: Math.round(x), y: Math.round(y) })) };
+      })) as { gap: number; opaque: boolean; bg: string; pts: { x: number; y: number }[] };
+      const opened: boolean[] = [];
+      for (const p of m.pts) {
+        await touchAt(ph, p);
+        opened.push(await ph.page.evaluate(() => !document.getElementById('game-menu')!.hidden));
+        await shut(ph);
+      }
+      const tag = `${size.width}x${size.height}`;
+      fact(`menu-reach-${tag}`, m.opaque && m.gap >= 6 && opened.every(Boolean),
+        `the button's fill ${m.bg} (opaque ${m.opaque}); the plate starts ${m.gap.toFixed(1)} px right of it (want 6 or more); a tap 7 px outside it right, below and at the corner opened the menu: ${opened.join(', ')}`);
+      if (process.env.E2E_SHOTS === '1') await ph.page.screenshot({ path: `${kit.out}/menu-reach-${tag}.png`, clip: { x: 0, y: 0, width: 300, height: 110 } });
     } finally {
       await ph.ctx.close();
     }

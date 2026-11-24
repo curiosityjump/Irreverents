@@ -149,7 +149,14 @@ export function noteAimMarks(marks: AimMark[]): void {
   if (drawn) drawn.aimMarks = marks;
 }
 
-/** Where the menu button ends, in game pixels across the view; looked up every so often, not every frame. */
+/**
+ * Where the plate may start right of the menu button, in game pixels across
+ * the view; looked up every so often, not every frame. DRAFT (brief
+ * owner-stuck-in-the-quarry, the orchestrator: "the plate never within 6 px
+ * of it"): MENU_CLEAR screen px past the button's drawn edge, so its 8 px of
+ * extra touch area (start.ts, #menu-btn::after) lies over the view, not the plate.
+ */
+const MENU_CLEAR = 8;
 let menuRight = 0;
 let menuLooked = -1;
 function clearOfMenu(g: CanvasRenderingContext2D, frame: number): number {
@@ -166,7 +173,7 @@ function clearOfMenu(g: CanvasRenderingContext2D, frame: number): number {
   const sx = c.width / r.width;
   // Only when the button is over the plate's rows (the top of the view).
   if (b.top > r.top + 30 / sx) return 0;
-  menuRight = Math.max(0, Math.ceil((b.right - r.left) * sx));
+  menuRight = Math.max(0, Math.ceil((b.right + MENU_CLEAR - r.left) * sx));
   return menuRight;
 }
 
@@ -192,7 +199,7 @@ export function drawHud(g: CanvasRenderingContext2D, world: World, content: Cont
   if (hearts) noteHearts(world, content, [mine, ...others], frame);
   const w = PAD + FACE + GAP + HUD_SLOTS.length * (SLOT + 1) + (others.length > 0 ? GAP + others.reduce((n, k) => n + col(k) + FRIEND_GAP, 0) - FRIEND_GAP + 1 : 0) + PAD - 1;
   const h = PAD + FACE + (hearts ? Math.max(1 + heartSize(true).h, 2 + friendLines * small.step - 1) : 0) + PAD;
-  const x = Math.max(3 + safeView.left, clearOfMenu(g, frame) + 2);
+  const x = Math.max(3 + safeView.left, clearOfMenu(g, frame));
   const y = 3 + safeView.top;
   // Brief plate-clear-of-bodies: faded while a body is drawn under it; never under a full-screen card.
   const under = scene && !plateFadeOff() ? bodiesUnder(world, content, scene, { x, y, w, h }) : [];

@@ -169,7 +169,9 @@ into the shared documents.
   when a friend plays it (`memberTaken`, which reads `world.taken` on a
   page), dimmed when free. It moves right of the menu button (the way
   out, `#menu-btn`) when the button sits over the view's corner, looked
-  up every 30 frames, and inside `safeView`. The record: `drawn.hud`
+  up every 30 frames, at least `MENU_CLEAR` (8) screen px past its drawn
+  edge, where the button's extra 8 px of touch area ends (`start.ts`,
+  `#menu-btn::after`; fact `menu-reach-*`), and inside `safeView`. The record: `drawn.hud`
   (`faces`, `slots`, `box`, `fade`, `under`, `aimMarks`). `DRAFT:` all of it.
   **It gives way at a room's top** (brief plate-clear-of-bodies; the camera
   cannot go above a room's top): while any person (a player's body, a

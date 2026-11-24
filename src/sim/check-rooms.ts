@@ -271,6 +271,8 @@ function checkWaysOut(content: Content, systems: System[], problems: Problem[]):
         vy: 0,
         facing: 1,
         onGround: true,
+        // INTENT (brief owner-stuck-in-the-quarry, push 3): played bare, no power held, so a place reached only with a power
+        // that then faded (the wings' ledge in the quarry pit) must have a way out without it (scenario way-out-faded-wings-pit-ledge).
         c: {},
       };
       const world: World = { tick: 0, entities: [body] };

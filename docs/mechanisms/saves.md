@@ -248,7 +248,7 @@ watched to fail on push C's client:
   load (`start-tune`; control: no Tune button after New game).
 - **Nothing covers the menu button**: on a `?tune` page the Tune button
   sits at the view's top-left, so the menu moves just right of it when they
-  overlap (`INTENT:`; `start-tune` taps the centre of each; control: the
+  overlap (10 px right, past the menu's 8 px of extra touch area) (`INTENT:`; `start-tune` taps the centre of each; control: the
   menu could not be tapped).
 - **Two columns from 568 px wide** (each 250 to 330 px): `start-sideways`
   measures 750×340 (Playwright's iPhone 14 sideways) and 667×330 (an iPhone

@@ -353,6 +353,13 @@ build` refuse:
 Each message names the room file, the tile and the character; neighbouring
 tiles are reported once ("and 9 more tile(s) beside it").
 
+**Powers are left out on purpose** (`INTENT:` at the played body's `c: {}`):
+every place is played with the bare hero, so a place reached only with a
+power that has since faded (the wings, the boost: neither changes a body's
+size) is held to a way out without it. Shown on the one place built for a
+power, the pit's out-of-reach ledge: `way-out-faded-wings-pit-ledge`
+(control: the ledge's east end walled by the scenario's own `tiles`).
+
 **How it knows (`DRAFT:` the model).**
 
 - *Where a body could be* is **over-estimated**: every tile a body could

@@ -418,12 +418,17 @@ const CSS = `
 .st-join .st-btn { width: 108px; flex: none; }
 .st-say { min-height: 22px; color: var(--cream); text-align: center; }
 .st-say:empty { display: none; }
+/* DRAFT (brief owner-stuck-in-the-quarry, the orchestrator's look at 3dc7ef7: "a smudge more than a button" on dark brick and busy leaves):
+   an opaque night plate with a light rim and solid cream bars, 44 px, the same id and place. Earlier passes: a translucent disc (brief phone-hud-legibility), before that no backing. */
 #menu-btn { position: fixed; z-index: 15; left: max(6px, env(safe-area-inset-left)); top: max(6px, env(safe-area-inset-top)); width: 44px; height: 44px; margin: 0; padding: 0; border: 0;
-  border-radius: 10px; background: radial-gradient(circle, rgba(15, 15, 28, .5) 15.5px, transparent 16.5px); touch-action: manipulation; -webkit-appearance: none; appearance: none; }
-/* Quiet over the view (docs/plan/step-5.md, "Controls never hide the game"): three faint bars in a 44 px touch area, on a dark disc like the sound button's (DRAFT, brief phone-hud-legibility: with no backing it blended into the scene). */
-#menu-btn i { position: absolute; left: 13px; width: 18px; height: 2px; background: rgba(244, 241, 222, .7); box-shadow: 0 0 0 1px rgba(15, 15, 28, .55); }
-#menu-btn i:nth-child(1) { top: 15px; } #menu-btn i:nth-child(2) { top: 21px; } #menu-btn i:nth-child(3) { top: 27px; }
-#menu-btn:active { background: rgba(244, 241, 222, .2); }
+  border-radius: 10px; background: #1b1838; box-shadow: inset 0 0 0 2px rgba(244, 241, 222, .9), 0 0 0 2px rgba(11, 10, 24, .85), 0 2px 0 2px rgba(11, 10, 24, .6);
+  touch-action: manipulation; -webkit-appearance: none; appearance: none; }
+/* INTENT (the owner, 2026-11-24: "The menu in the too left corner didn't seem to be working"): the menu is the way out, so a tap a little off it still opens it:
+   the touch area reaches 8 px past the drawn button on every side (the screen's edge clips it). The plate keeps clear of that (draw/hud.ts, clearOfMenu). */
+#menu-btn::after { content: ''; position: absolute; inset: -8px; }
+#menu-btn i { position: absolute; left: 12px; width: 20px; height: 3px; border-radius: 1px; background: #f4f1de; }
+#menu-btn i:nth-child(1) { top: 13px; } #menu-btn i:nth-child(2) { top: 20px; } #menu-btn i:nth-child(3) { top: 27px; }
+#menu-btn:active { background: #3a3570; }
 /* DRAFT (title screen): the owner's picture behind the choices, inside the safe area (clear of the notch and the home bar), on the night ground. */
 #start .st-back { position: fixed; z-index: -1; pointer-events: none; display: flex; justify-content: center; align-items: flex-start;
   top: env(safe-area-inset-top); right: env(safe-area-inset-right); bottom: env(safe-area-inset-bottom); left: env(safe-area-inset-left); }
@@ -792,7 +797,7 @@ export function setUpMenu(opts: MenuOptions): void {
     if (!other) return;
     const a = btn.getBoundingClientRect();
     const b = other.getBoundingClientRect();
-    if (a.right > b.left && a.left < b.right && a.bottom > b.top && a.top < b.bottom) btn.style.left = `${Math.ceil(b.right + 6)}px`;
+    if (a.right > b.left && a.left < b.right && a.bottom > b.top && a.top < b.bottom) btn.style.left = `${Math.ceil(b.right + 10)}px`; // past the menu's 8 px of touch area (CSS #menu-btn::after)
   };
   clear();
   window.addEventListener('resize', () => requestAnimationFrame(clear));

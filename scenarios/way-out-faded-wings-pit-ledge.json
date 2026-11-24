@@ -1,0 +1,15 @@
+{
+ "id": "way-out-faded-wings-pit-ledge",
+ "proves": "There is always a way out, after a power fades too (brief owner-stuck-in-the-quarry, push 3): the quarry pit's out-of-reach ledge (area `out-of-reach`, row 8, columns 4-8) is reached only with the wings (content/powers/flight.json), which fade. The brawler, the lowest jump of the roster, put on the ledge with no power at all, walks east off it and lands on the pit's floor (row 18), where the pit's ways out are. The general case is the way-out check itself (src/sim/check-rooms.ts plays every standable tile with a bare hero, `c: {}`); this is that case shown on the one place built for a power. Control (watched to fail): the tile east of the ledge's end ([9, 7]) made solid by this scenario's own `tiles`, and the brawler stays up",
+ "room": "quarry-pit",
+ "players": [
+  { "id": "a", "character": "brawler", "tile": [6, 7] }
+ ],
+ "inputs": [
+  { "player": "a", "from": 0, "to": 60, "x": 1 }
+ ],
+ "ticks": 180,
+ "expect": [
+  { "fact": "position", "player": "a", "at": 180, "y": [300, 308] }
+ ]
+}
