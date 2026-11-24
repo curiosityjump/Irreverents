@@ -761,3 +761,9 @@ before you quote it.
 - **Then:** re-record the ten runs (`stage-bot`, the commands in each scenario's `//`). Re-record `step22-unseen-clear` with `scripts/stage-quiet.ts`, adding the road's high-walk segments before "step row 11". Re-measure the star times (the unseen clear is now the fastest run, at 33.5 s). Commit phone shots of the first screen and of the wings' pedestal at depot [38,18].
 - **Still owed:** the e2e `stage-beaten-entrance` made reliable inside the full suite (the brief's top block, item 2). Not started.
 - **`check:live` after part 1 (b749ec7):** 20 ok and 1 FAIL, `tiers` (the castle street's whistle gauge under live delay). That is the town lane's known flaky fact, being fixed now (59fa3b0). Part 1 touches nothing of the street, so I did not revert.
+
+### Lead review, push 5 part 2a, the sign's empty stars (ffc4585)
+
+- `npm run check` ok, `npm run gates` 6 of 6, re-run by me.
+- Looked at `push5-sign-stage-upright-390x664.png`: "Iron Quarry" with three empty stars under its pieces row, legible on the sign board.
+- No control: a drawing with no check of its own. It is accepted on the shot.
