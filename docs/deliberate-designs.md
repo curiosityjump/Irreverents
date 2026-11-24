@@ -97,6 +97,9 @@ words.
 ## Where these live in the code
 
 Each entry above should also carry an `INTENT:` comment at its code site.
+**When the whole party is out of hearts it is GAME OVER, and you are simply back in the cantina, at once, with every heart.**
+→ Intended: the owner, 2026-11-24, "Once all heros in the party are out of hearts, that's a game over (back to cantina)". It is never a reload and never holds anyone: the beat before it (1 s) is shorter than the fall it shows, everyone is free the tick they arrive, and the page's GAME OVER card takes no input and goes at any touch. Nothing found for good is lost. Hearts builder, 2026-11-24, `DRAFT:` numbers and words; `INTENT:` in `src/sim/systems/heart-game-over.ts` and `src/client/draw/game-over.ts`; `docs/mechanisms/defeat.md`, "Hearts".
+
 Keep this table in step with the entries:
 
 | Entry | Site |
@@ -105,6 +108,7 @@ Keep this table in step with the entries:
 | The store never throws; an unreadable file is set aside | `src/server/store.ts` (`openStore`, `load`) |
 | The pedestal's card has no button | `src/client/draw/hall.ts` (`drawHall`) |
 | Beaten, you are thrown out (the throw is the way out) | `src/sim/systems/defeat-throw.ts` |
+| Game over is the cantina at once, never a reload, the card holds nobody | `src/sim/systems/heart-game-over.ts`; `src/client/draw/game-over.ts` |
 | Beaten in a stage, the stage is put back as it began | `src/sim/stage.ts` (`restoreStage`) |
 | People can be outrun and jumped over | `src/sim/npc/behaviours.ts` (`charge`); `content/tuning.json` (`characters.guard`, `.shopkeeper`, `.toll-keeper` `"//"`) |
 

@@ -144,6 +144,37 @@ The decision is `docs/plan/step-21.md`, "Hearts"; it is built in pushes
 - **Never switched to, never given:** `switch` skips a member with no
   hearts; `firstFreeMember` (a new player's seat) skips them too.
 
+- **Game over** (`heart-game-over`, order 588, server's world only): when
+  every member of the party as it stands has no hearts, `World.gameOver`
+  {ticks, place} holds a beat (`gameOver.beat` in `content/hearts.json`,
+  `DRAFT:` 1 s, checked below `flattenTime`), event `game-over-coming`
+  {place, room, beat}; any seize is dropped (the game over is what losing
+  is). After the beat, for every player: let go of what it carries or holds
+  it, a carried prize back (`returnPrize`, `prize-returned`), a held power
+  (an orb, `popOrb`) and a held weapon (`makeLoose`, Step 23) left where it
+  stood; a `move` effect to the game over's room and a 1-tick `flatten` if
+  it lay flat (up the next tick). Then every heart back (`refillHearts`),
+  every alert lowered to 0 (`lowerAlert`), every wave walking off
+  (`outpostWave.going`, `signaler.queued` 0, callers idle), and
+  `game-over` {place, room, players}. `World.gameOver` back to null.
+  **Where to** is data: the place file (`content/defeat/<id>.json`,
+  optional `gameOver` {room, door | tile}, read whether or not its throw is
+  on) whose `rooms` hold the room the last heart was lost in; else
+  `content/hearts.json`'s (`cantina`: its pads in turn, from the brawl's
+  next pad; a room with neither door nor tile: its spawns in turn). The
+  quarry's is its road, just inside the doorway from the courtyard.
+  **The hook for a stage** (Step 22): a system after 588 acting on
+  `game-over` with its `place`.
+- **The cantina refills** (`DRAFT:`, the brief's open question, in the same
+  system): a played hero in a cantina room gives the party back every heart
+  (`hearts-refilled`), an out hero included.
+- **The page's card** (`src/client/draw/game-over.ts`, from `render.ts`
+  last): on `game-over-coming`, GAME OVER and "Back to the cantina" (or
+  "Back to the start of <level>"), "Every heart back", fitted to the view's
+  width, about 3 s; `INTENT:` it takes no input and any touch, click or key
+  takes it down (`main.ts`, window listeners in the capture phase, passive).
+  `drawn.gameOver`.
+
 Checked by `step21-heart-lost-to-a-bandit` (control: `on` false),
 `step21-heart-none-in-the-brawl` (control: the enemy test cut to "anyone
 nobody plays") and `scripts/checks/step21-hearts.ts` (two connections and a
@@ -152,4 +183,11 @@ kept game; control: no heart taken, it fails); `step21-heart-out-next-member`
 the "nobody else plays it" test taken out), `step21-heart-switch-skips-out`
 (control: the switch's hearts test taken out) and
 `scripts/checks/step21-out-spot.ts` (the way in from a crawlspace; control:
-no way in, the player stays the out infiltrator).
+no way in, the player stays the out infiltrator); `step21-heart-game-over`
+(control: the system doing nothing), `step21-heart-game-over-quarry`
+(control: the quarry's `gameOver` taken out, it is the cantina),
+`step21-heart-refill-in-cantina` (control: the refill taken out),
+`scripts/checks/step21-game-over-drops.ts` (prize, power, weapon, alert;
+control: nothing dropped) and `scripts/checks/step21-game-over-two.ts` (two
+connections on a real server, both in the cantina with every heart and
+walking; control: the move made without its effect, neither page moves).

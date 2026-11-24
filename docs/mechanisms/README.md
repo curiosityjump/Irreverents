@@ -13,7 +13,7 @@ This is the hub `CLAUDE.md` points at. It lives here rather than in
 specific mechanism, not on every decision. `CLAUDE.md`'s budget is spent on
 things that shape every decision instead.
 
-- **Defeat (Step 21)**: beaten N times in a bad guys' place with one of them in reach, you are stood over for a beat and thrown out, what you carried put back; hearts (`content/hearts.json`, `World.heartsLost`, system `heart-lose`): the party's, a fall to an enemy costs one — `defeat.md`
+- **Defeat (Step 21)**: beaten N times in a bad guys' place with one of them in reach, you are stood over for a beat and thrown out, what you carried put back; hearts (`content/hearts.json`, `World.heartsLost`, system `heart-lose`): the party's, a fall to an enemy costs one, a hero with none is out (`heart-out`), all out is GAME OVER back to the cantina or the place's `gameOver` (`heart-game-over`, event `game-over`; `src/client/draw/game-over.ts`) — `defeat.md`
 - **Stages (Step 22)**: one level played as a run (`content/stages/`): entering starts it, being beaten inside starts it over with everything put back once nobody else is inside, reaching its end clears it — `stages.md`
 
 ## Adding to this file

@@ -27,6 +27,7 @@ import { drawnAlarms, watchAlarmEvents } from './draw/alarm-banner.ts';
 import { drawnCondition, setViewerCopy, watchDefeatEvents } from './draw/condition.ts';
 import { drawnHall, watchHallEvents } from './draw/hall.ts';
 import { drawnRecruits, noteRecruits } from './draw/recruits.ts';
+import { drawnGameOver, skipGameOver, watchGameOver } from './draw/game-over.ts';
 import { drawnParts, setHeardRooms } from './draw/room-parts.ts';
 import { drawnPowers, foundSourceIcons } from './draw/powers.ts';
 import { drawnWeapons } from './draw/weapons.ts';
@@ -165,6 +166,8 @@ const debug = {
     hall: null as ReturnType<typeof drawnHall> | null,
     /** Step 13: the cages this frame drew in this room and the captives' calls (src/client/draw/recruits.ts). */
     recruits: { cages: [], calls: [], flash: null } as ReturnType<typeof drawnRecruits>,
+    /** Step 21, hearts: the GAME OVER card, while one is up (src/client/draw/game-over.ts). */
+    gameOver: null as ReturnType<typeof drawnGameOver>,
     /** Step 3 (the stone plate): the plates and gates this frame drew in this room, down/open and how far a weighted plate sank (src/client/draw/room-parts.ts). */
     parts: [] as ReturnType<typeof drawnParts>,
     cantina: null as { row: { kind: string; slot: number; x: number; y: number; w: number; h: number; taken: boolean }[] | null; counter: { player: string; ko: number; falls: number }[] | null } | null,
@@ -213,6 +216,10 @@ function play(worldName: string): void {
   // The touch controls appear on a touch screen, or at the first touch on anything else.
   if (isTouchDevice()) touchHost.hidden = false;
   window.addEventListener('touchstart', () => (touchHost.hidden = false), { passive: true });
+  // Step 21, hearts. INTENT: the GAME OVER card never holds a player: any touch, click or key takes it down,
+  // and the touch still does what it would have (nothing here stops or claims it).
+  window.addEventListener('pointerdown', () => skipGameOver(), { capture: true, passive: true });
+  window.addEventListener('keydown', () => skipGameOver(), { capture: true, passive: true });
   // Step 2: the feel dials, only with ?tune in the address (src/client/tune.ts).
   if (tuneAtLoad) setUpTune({ content, net, canvas, touchHost });
 
@@ -292,6 +299,7 @@ function play(worldName: string): void {
     watchDefeatEvents(content, me.id, net.latest()); // Step 21: thrown out, a prize back (draw/condition.ts)
     watchBeatenEvents(net.latest(), frameNo); // Step 5: a defeated bad guy's poof (draw/beaten.ts)
     watchHallEvents(net.latest()); // Step 7: a new legend's banner, wherever this page is (draw/hall.ts)
+    watchGameOver(net.latest(), frameNo, (room) => `the start of ${Object.values(content.levels ?? {}).find((l) => l.rooms.includes(room))?.name ?? 'the level'}`); // Step 21: the GAME OVER card (draw/game-over.ts)
     setHeardRooms(net.heardRooms()); // Step 3: plates drawn from the server's copy too (draw/room-parts.ts, plateAsDrawn)
     const camera = render(g, shown, content, me.room, { me: me.id, frame: frameNo, drawn: seen });
     const result = { camera, drawn: seen };
@@ -346,6 +354,7 @@ function play(worldName: string): void {
     d.condition = drawnCondition();
     d.hall = drawnHall();
     d.recruits = drawnRecruits();
+    d.gameOver = drawnGameOver();
     d.parts = drawnParts();
     d.words = takeWords();
     // Step 5 (docs/mechanisms/network.md, "Predicted hits"): each impact this frame drew from, on this page's clock.

@@ -1,0 +1,129 @@
+{
+ "id": "step21-heart-game-over-quarry",
+ "proves": "Step 21, hearts, where a game over sends you is data per place (content/defeat/quarry.json `gameOver`; DRAFT until the owner says which he wants for the stage): step22-beaten-to-entrance's run in the quarry's depot, with the party one heart from out (the grappler's last). The first fall to depot-fighter-2 at 463 is the game over: 'game-over-coming' names the place 'quarry' and the room 'quarry-road', and at 523 'game-over' puts the player on the road just inside its doorway from the courtyard, the stage's own start (Step 22's start-over hangs off this event), hearts full. Control (watched to fail): the quarry file's `gameOver` taken out, and the game over sends the player to the cantina",
+ "room": "quarry-depot",
+ "placements": true,
+ "tiles": [
+  {
+   "room": "quarry-depot",
+   "tile": [
+    51,
+    14
+   ],
+   "is": "solid"
+  },
+  {
+   "room": "quarry-depot",
+   "tile": [
+    52,
+    14
+   ],
+   "is": "solid"
+  }
+ ],
+ "players": [
+  {
+   "id": "a",
+   "character": "grappler",
+   "spawn": 2
+  }
+ ],
+ "inputs": [
+  {
+   "player": "a",
+   "from": 0,
+   "to": 1,
+   "x": 0
+  }
+ ],
+ "ticks": 700,
+ "expect": [
+  {
+   "fact": "event-where",
+   "event": "heart-lost",
+   "where": {
+    "entity": "p:a",
+    "left": 0
+   },
+   "between": [
+    463,
+    463
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "event-where",
+   "event": "game-over-coming",
+   "where": {
+    "place": "quarry",
+    "room": "quarry-road"
+   },
+   "between": [
+    463,
+    463
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "event-where",
+   "event": "game-over",
+   "where": {
+    "place": "quarry",
+    "room": "quarry-road",
+    "players": [
+     "a"
+    ]
+   },
+   "between": [
+    523,
+    523
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "in-room",
+   "player": "a",
+   "at": 524,
+   "room": "quarry-road"
+  },
+  {
+   "fact": "position",
+   "player": "a",
+   "at": 700,
+   "x": [
+    32,
+    80
+   ]
+  },
+  {
+   "fact": "hearts",
+   "hero": "grappler",
+   "at": 524,
+   "left": 5
+  },
+  {
+   "fact": "clear-of-solid",
+   "player": "a",
+   "between": [
+    0,
+    700
+   ]
+  }
+ ],
+ "world": {
+  "heartsLost": {
+   "grappler": 4,
+   "infiltrator": 3,
+   "flyer": 3
+  }
+ }
+}

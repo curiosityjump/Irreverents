@@ -1,5 +1,7 @@
 import { describe, known } from '../reader.ts';
 import type { ContentKind } from '../types.ts';
+import { checkGameOverTo, readGameOverTo } from './hearts.ts';
+import type { GameOverTo } from './hearts.ts';
 
 /**
  * content/defeat/<place>.json (Step 21, risk; docs/mechanisms/defeat.md):
@@ -53,6 +55,14 @@ export interface Defeat {
   follow: boolean;
   /** The banners (no digits): on being thrown out, and on a carried prize going back. */
   words: { thrownOut: string; prizeReturned: string };
+  /**
+   * Step 21, hearts: where a game over that comes from one of these rooms
+   * sends everyone (content/hearts.json `gameOver`'s shape, without `beat`).
+   * Left out: hearts.json's (the cantina). The hook a stage uses for its own
+   * start (Step 22), with the world event `game-over`. Read whether or not
+   * the throw is `on`.
+   */
+  gameOver?: GameOverTo;
 }
 
 declare module '../types.ts' {
@@ -67,7 +77,7 @@ const kind: ContentKind = {
   parse(raw, read) {
     const o = read.object(raw, '');
     if (!o) return null;
-    read.only(o, ['id', 'on', 'rooms', 'seizers', 'reach', 'downs', 'window', 'beat', 'alertAbove', 'lands', 'follow', 'words'], '');
+    read.only(o, ['id', 'on', 'rooms', 'seizers', 'reach', 'downs', 'window', 'beat', 'alertAbove', 'lands', 'follow', 'words', 'gameOver'], '');
     if (typeof o.on !== 'boolean') read.fail('on', `must be true or false, but is ${describe(o.on)}`);
     if (o.follow !== undefined && typeof o.follow !== 'boolean') read.fail('follow', `must be true or false, but is ${describe(o.follow)}`);
     const out: Defeat = {
@@ -98,6 +108,10 @@ const kind: ContentKind = {
       }
       if ((out.lands.door === null) === (out.lands.tile === null)) read.fail('lands', 'give exactly one of "door" or "tile"');
     }
+    if (o.gameOver !== undefined) {
+      const g = readGameOverTo(read, o.gameOver, 'gameOver');
+      if (g) out.gameOver = g;
+    }
     const w = read.object(o.words, 'words');
     if (w) {
       read.only(w, ['thrownOut', 'prizeReturned'], 'words');
@@ -111,6 +125,7 @@ const kind: ContentKind = {
     const flatten = content.tuning.world.flattenTime ?? 3;
     for (const d of Object.values(content.defeat ?? {})) {
       const file = `content/defeat/${d.id}.json`;
+      if (d.gameOver) checkGameOverTo(content, d.gameOver, file, 'gameOver', fail);
       d.rooms.forEach((r, i) => {
         if (!(r in content.rooms)) fail(file, `rooms[${i}]`, `no room "${r}" (rooms: ${known(content.rooms)})`);
         if (content.cantina?.[r]) fail(file, `rooms[${i}]`, `"${r}" is a cantina: its brawl has its own rules (D-086), nobody is thrown out of it`);

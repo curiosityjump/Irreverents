@@ -392,3 +392,14 @@ I started): `step21-throw-is-no-escape`, its thrown-out tick to 2089 (2944 befor
 Its flyer's third fall (1601) is its last heart, so its player goes on as
 the grappler, whose fall at 2030 is the camp's fourth. Control re-watched:
 hall-detect's thrown-out test removed, the legend hangs at 2089.
+
+### Push 3: game over
+
+`heart-game-over` (588), `World.gameOver`, `gameOver` in hearts.json and
+(optional) in a place file (the quarry's: its road), the cantina refill,
+the page's card (`src/client/draw/game-over.ts`; screenshots looked at, 390
+by 664 and 844 by 390: the subtitle first overflowed the upright view, now
+fitted). Signal: `step21-heart-game-over`, `-game-over-quarry`,
+`-refill-in-cantina`, checks `step21-game-over-drops` and
+`step21-game-over-two`, each with a control watched failing. Not shown by
+touch yet (push 4's phone e2e): a page's own GAME OVER after real falls.

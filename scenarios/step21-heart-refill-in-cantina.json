@@ -1,0 +1,76 @@
+{
+ "id": "step21-heart-refill-in-cantina",
+ "gate": null,
+ "proves": "Step 21, hearts (DRAFT, the brief's open question: walking into the cantina refills every heart): a player who walks into the cantina with hearts lost (the world starts with two of the grappler's and all of the flyer's gone) gives the whole party back every heart at once ('hearts-refilled'), the flyer, who was out, included. Control (watched to fail): the refill taken out of heart-game-over, and the hearts stay lost",
+ "room": "cantina",
+ "placements": true,
+ "players": [
+  {
+   "id": "a",
+   "character": "grappler",
+   "spawn": 0
+  }
+ ],
+ "world": {
+  "heartsLost": {
+   "grappler": 2,
+   "flyer": 3
+  }
+ },
+ "inputs": [],
+ "ticks": 30,
+ "expect": [
+  {
+   "fact": "hearts",
+   "hero": "grappler",
+   "at": 0,
+   "left": 3
+  },
+  {
+   "fact": "event-where",
+   "event": "hearts-refilled",
+   "where": {
+    "entity": "p:a",
+    "room": "cantina"
+   },
+   "between": [
+    0,
+    0
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "event",
+   "event": "hearts-refilled",
+   "between": [
+    0,
+    30
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "hearts",
+   "hero": "grappler",
+   "between": [
+    1,
+    30
+   ],
+   "left": 5
+  },
+  {
+   "fact": "hearts",
+   "hero": "flyer",
+   "between": [
+    1,
+    30
+   ],
+   "left": 3
+  }
+ ]
+}

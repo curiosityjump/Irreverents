@@ -1338,3 +1338,12 @@ document as a decision of theirs.
 - **Why this way:** the step file: "A hammer found in the Bandit Camp swings slow and sends a fighter across the room and through a cracked wall"; doc 08, "hammer slams". The hammer adds a third of a second to the wind-up and more than doubles the launch; its swing breaks a cracked wall, a fence or a stall it reaches, not the camp's barricade (the wagon's). It lies just past the camp's entrance block. The spear has the longest reach and was added as one data file with no code, the owner's "content is data". The plate shows the one weapon in hand in its own slot (no inventory).
 - **To change it:** `content/weapons/hammer.json` and `spear.json` (`hit`, `breaks`, `sources`); the slot is one entry in `src/client/draw/hud.ts`.
 - **Where:** `docs/mechanisms/weapons.md`.
+
+
+
+### 2026-11-24 · Step 21: GAME OVER: a second's pause on the last fall, then everyone is in the cantina with every heart; walking into the cantina also gives every heart back
+- **Decided by:** hearts builder, push 3, `session_017WiGzG7mhviEaxroo5GvBv`
+- **Instead of asking:** "What exactly happens at a game over, how long does it take, and is the cantina where hearts come back?"
+- **Why this way:** your words: "Once all heros in the party are out of hearts, that's a game over (back to cantina)", and "never a reload, never held" (D-019, "there is always a way out"). The last fall is seen for a second, then everyone playing is on the cantina's pads, on their feet at once; GAME OVER, "Back to the cantina", "Every heart back" across the middle of the screen for about three seconds, gone at any touch, and the controls work through it. A prize you were carrying goes back on its stand; a power or a weapon you held lies where you stood; alarms end and waves walk off; nothing you found is lost. In the quarry the game over is its own start (the road), as you asked for the stage, until you say otherwise. Walking into the cantina at any time also gives the party every heart back (the brief's open question; the other answer is a heart for an out hero only).
+- **To change it:** `gameOver` in `content/hearts.json` (where, `beat`), `gameOver` in `content/defeat/<place>.json` (per place); the refill is one block in `src/sim/systems/heart-game-over.ts`; the words at the top of `src/client/draw/game-over.ts`.
+- **Where:** `docs/mechanisms/defeat.md`, "Hearts". `DRAFT:`

@@ -55,6 +55,9 @@ export function runRoomControls(content: Content): { problems: string[]; count: 
     if (raw.game !== undefined) {
       for (const rel of Object.keys(files)) if (/^(rooms|placements|outposts|dispatch|cantina|levels|completion|heists|atlases|backdrops|decor|looks|powers|recruits|hall|defeat|stages|weapons)\//.test(rel)) delete files[rel];
       files['game.json'] = raw.game;
+      // Step 21, hearts: content/hearts.json's game over names a real room (the cantina); in a map of its own it is that map's start room.
+      const hearts = files['hearts.json'];
+      if (isRecord(hearts) && isRecord(raw.game) && typeof raw.game.startRoom === 'string') files['hearts.json'] = { ...hearts, gameOver: { room: raw.game.startRoom, beat: isRecord(hearts.gameOver) ? hearts.gameOver.beat : 1 } };
     }
     for (const [id, room] of Object.entries(raw.rooms)) files[`rooms/${id}.json`] = room;
     const assembled = assembleContent(files);

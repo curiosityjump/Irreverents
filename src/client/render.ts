@@ -27,6 +27,7 @@ import { drawHud } from './draw/hud.ts';
 import { drawUseHint } from './draw/use-hint.ts';
 import { drawSight, drawUnseenMarks } from './draw/sight.ts';
 import { drawPrizeStands } from './draw/heist.ts';
+import { drawGameOver } from './draw/game-over.ts';
 import { useHere } from '../sim/use.ts';
 
 /** DRAFT: the internal resolution the art on order assumes (docs/plan/step-1.md). */
@@ -121,5 +122,7 @@ export function render(g: CanvasRenderingContext2D, world: World, content: Conte
   if (pv) drawLegendPicture(g, content, W, plate); // Step 7 push 3: a new legend's picture under its banner (draw/hall.ts)
   // Step 13: a freed hero's face flashing beside the plate (draw/recruits.ts).
   if (pv) drawRecruitFlash(g, content, pv.frame);
+  // Step 21, hearts: the GAME OVER card over everything; it takes no input (draw/game-over.ts).
+  if (pv) drawGameOver(g, W, H, pv.frame);
   return { x: -ox, y: -oy };
 }
