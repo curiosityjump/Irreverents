@@ -12,6 +12,22 @@ import { applyChange, applyTuningDiff } from '../sim/tuning-rules.ts';
 import type { TuningChange } from '../sim/tuning-rules.ts';
 import { clone, looksLikeEntity, playerEntityId } from './protocol.ts';
 import type { ClientMessage, ServerMessage } from './protocol.ts';
+
+/**
+ * How long a socket that has not opened yet is given before the page gives
+ * it up and tries again; once open, `silenceMs` applies (content/net.json).
+ * INTENT (Step 5, the reconnect flake, docs/mechanisms/network.md "Coming
+ * back"): after many failed tries (a server down through a deploy) Chromium
+ * holds each new WebSocket back before even dialling, by a growing delay
+ * that reaches about 1-5 s. Giving a try only `silenceMs` (3 s) killed it
+ * while the browser was still holding it, so a page whose server was back
+ * could stay "Reconnecting…" try after try. A try must outlast the
+ * browser's hold. DRAFT: 10 s is a first guess, above that hold with room;
+ * it belongs in content/net.json (`connectMs`) when that file is next
+ * touched. A dead network is not waited out here: the `online` event and a
+ * tab shown again retry at once (kick).
+ */
+const CONNECT_MS = 10000;
 import { createPredictor } from './predict.ts';
 import { createSmoother } from './smooth.ts';
 
@@ -307,7 +323,7 @@ export function createNetClient(opts: NetClientOptions) {
       if (left) return events;
       if (!transport) {
         if (t >= nextAttemptAt) connect();
-      } else if (t - lastHeard > net.silenceMs) {
+      } else if (t - lastHeard > (open ? net.silenceMs : CONNECT_MS)) {
         drop();
       } else if (open && status === 'online') {
         if (t - lastReport >= 1000 / net.reportRate - 1) {

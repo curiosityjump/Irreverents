@@ -538,3 +538,35 @@ fault fixed):
   but not a full throw. The earlier notes (above) saw 5-30 px. Next: log B's
   path on both pages, the events the server emitted at the throw, and the
   bodies between B and the wall.
+
+**`h1`/`h2`: a game fault, fixed** (builder `session_017WiGzJ2rqEpKFJmGDriwjQ`,
+2026-11-23/24). A socket trace added to the check (`socketTrace` in
+`scripts/e2e.ts`, on pages A and B, printed when `h1`/`h2` fail) caught it in
+2 of 3 runs at 3 parallel e2e runs (load 10-12 on 4 cores): the page never
+stopped trying (a new socket every ~4 s), but after each failed try Chromium
+held the next one back longer before dialling (18, 34, 75, 160, 247, 380 ms,
+1 s, ... up to about 5 s; its per-process WebSocket throttle), and the
+client's `silenceMs` (3 s), counted from the moment a socket was made, closed
+it while the browser still held it: every try after the server came back
+ended at exactly 3.0 s, `/healthz` answering 200 meanwhile. So a page whose
+server was back could stay "Reconnecting…" try after try; Chrome on a
+friend's Android phone or laptop would do the same after a deploy (WebKit on
+an iPhone: not measured, no iPhone here). **Fix** (`src/net/client.ts`,
+`CONNECT_MS`): a socket not yet open gets 10 s (`DRAFT:`); an open one keeps
+`silenceMs`. **Control** (a scratch script: the built server, 4 pages, server
+down 150 s so the throttle saturates; two runs each): before, 5 of 8 pages had
+a try killed at 3.0 s after the server returned and came back in 9-12 s
+(`h1` allows 10); after, 8 of 8 back within 4.9 s, with tries the browser held
+up to 4.8 s now opening. **Rates:** before, `h1` failed 1 of 10 quiet (the
+table above) and 2 of 3 under load; after, `h1` and `h2` passed **20 of 20**
+full `npm run e2e` runs, run two at a time (load 4-6). 75 s down (`h1`)
+saturates less than 150 s, which is why it failed only sometimes.
+
+**What else failed in those 20 runs (two at a time, so under load; after
+the fix, which touches nothing they use):** `cantina-row` 2, `cantina-swap`
+and `cantina-switch` 3 (the same tap on a walking brawler; see below),
+`door-go-in` and `door-use` 2 (the Use button's state read "" everywhere:
+only seen under parallel runs, not in the quiet 10), `s-throw-friend` 1 (B's
+page drew B move 23 px, 31 in a quarter second; A's page drew 31/52, a pass:
+a short throw, not none). No `t-grab-friend` or `s-break-free` failure in 30
+runs today.

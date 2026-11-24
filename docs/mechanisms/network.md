@@ -256,7 +256,13 @@ Changing content room is the one jump allowed.
 "There is always a way out; waiting may be a cost, being stuck may not."
 Whatever ends the socket, the page retries by itself for ever (250 ms,
 doubling to 4 s), through the minute or so of errors a deploy causes; the
-player keeps moving locally and the screen says "Reconnecting…". A socket silent for `silenceMs` counts as dead. A tab
+player keeps moving locally and the screen says "Reconnecting…". An open socket silent for `silenceMs` counts as dead; a socket
+not yet open is given `CONNECT_MS` (10 s, `DRAFT:`, in `src/net/client.ts`)
+instead, because after many failed tries Chromium holds each new WebSocket
+back before dialling, by a delay that grows to about 1-5 s; at 3 s the page
+killed its own tries while the browser held them and could stay
+"Reconnecting…" with the server back (the Step 5 `h1`/`h2` flake,
+`docs/plan/step-5.md`, "Flakes"). A tab
 shown again after being hidden that long, the `online` event and a
 restore from the back/forward cache all drop the socket and retry at
 once.
@@ -377,7 +383,11 @@ it back. **Checks assert on `drawn`, never on server state.**
   (`scripts/lib/e2e-touch.ts`: two more phone pages, touch only). The desktop page's socket is routed through
   the script (`page.routeWebSocket`), which is how 150 ms is added each
   way (and measured from the page's own round trip) and how the socket is
-  cut. Screenshots in `e2e-out/`.
+  cut. Screenshots in `e2e-out/`. Both pages carry `socketTrace` (an init
+  script recording each socket's made/open/first message/closed times);
+  `h1` and `h2` print it, with `/healthz` probed from the script, when they
+  fail, so a failure says whether the page stopped trying or its tries went
+  unanswered.
   `scripts/e2e/phone.ts` (called from `e2e.ts`; not in `scripts/checks/`,
   whose files `npm run check` loads without a browser) adds one fact per
   16:9 iPhone size, `i-667x375` and `i-736x414`: every action and the

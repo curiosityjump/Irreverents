@@ -153,6 +153,45 @@ const controlsOf = (page: Page): Promise<any> =>
       vh: innerHeight,
     };
   });
+/**
+ * Step 5 (flakes): an init script for a page whose reconnecting a fact
+ * watches. It records, on the page's own clock, the life of each socket the
+ * page opens (made, open, the first message, closed and how), the newest 40,
+ * so a fact that says "it did not come back" can say whether the page
+ * stopped trying or its tries were not answered. Read by `trace` below; the
+ * game never reads it. The page's sockets behave exactly as before.
+ */
+const socketTrace = (): void => {
+  const Native = window.WebSocket;
+  const log: string[] = [];
+  (window as any).__socketTrace = log;
+  let n = 0;
+  const note = (id: number, what: string): void => {
+    log.push(`${Math.round(performance.now())}:#${id} ${what}`);
+    if (log.length > 40) log.shift();
+  };
+  (window as any).WebSocket = class extends Native {
+    constructor(url: string | URL, protocols?: string | string[]) {
+      super(url, protocols);
+      const id = ++n;
+      let heard = false;
+      note(id, 'made');
+      this.addEventListener('open', () => note(id, 'open'));
+      this.addEventListener('error', () => note(id, 'error'));
+      this.addEventListener('close', (e) => note(id, `closed ${e.code}`));
+      this.addEventListener('message', (e) => {
+        if (!heard) note(id, `first ${String(e.data).slice(0, 14)}`);
+        heard = true;
+      });
+    }
+  };
+};
+/** What a page with `socketTrace` saw of its sockets, its state now, and whether the server answers /healthz from here. */
+async function trace(page: Page, base: string): Promise<string> {
+  const s = await page.evaluate(() => ({ now: Math.round(performance.now()), log: (window as any).__socketTrace ?? [], status: (window as any).irreverents.drawn.status, frame: (window as any).irreverents.drawn.frame, connects: (window as any).irreverents.net.connects, hidden: document.hidden }));
+  const health = await fetch(`${base}/healthz`).then((r) => r.status, (e: Error) => e.message);
+  return `[page now ${s.now} ms, ${s.status}, frame ${s.frame}, connects ${s.connects}, hidden ${s.hidden}; /healthz ${health}; sockets: ${s.log.join(' | ')}]`;
+}
 const online = (page: Page, ms = 10000): Promise<unknown> =>
   page.waitForFunction(() => (window as any).irreverents?.drawn.status === 'online' && (window as any).irreverents.drawn.me, null, { timeout: ms });
 
@@ -185,6 +224,7 @@ async function main(): Promise<void> {
     // A: a desktop page, driven by keys. Its socket is routed through this
     // script, so frames can be delayed (fact d) and the socket cut (fact e).
     const ctxA = await browser.newContext({ viewport: { width: 1280, height: 720 } });
+    await ctxA.addInitScript(socketTrace);
     const A = await ctxA.newPage();
     let delayMs = 0;
     const routes: any[] = [];
@@ -205,6 +245,7 @@ async function main(): Promise<void> {
 
     // B: Playwright's iPhone 14 held sideways, driven by touch, on a real socket.
     const ctxB = await browser.newContext({ ...devices['iPhone 14 landscape'] });
+    await ctxB.addInitScript(socketTrace);
     const B = await ctxB.newPage();
     B.on('pageerror', (e: Error) => errors.push(`B: ${e.message}`));
     const cdpB = await ctxB.newCDPSession(B);
@@ -487,8 +528,10 @@ async function main(): Promise<void> {
       } catch {
         rejoined = false;
       }
-      fact('h1', rejoined && loadsA === loads0 && offline !== '' && stillTrying !== '' && movedOffline,
-        `the server was down for ${Math.round(DOWN_MS / 1000)} s under both pages: the desktop page said "${offline}" (and still "${stillTrying}" at the end), its player could still move: ${movedOffline}; ${rejoined ? `${Date.now() - upAt} ms after the server returned it was back in the world and drawing both players` : 'it did NOT come back within 10 s of the server returning'}; reloads: ${loadsA - loads0} (same commit, so none expected)`);
+      const h1ok = rejoined && loadsA === loads0 && offline !== '' && stillTrying !== '' && movedOffline;
+      const h1why = h1ok ? '' : ` ${await trace(A, base)} the desktop page draws ${players(await drawn(A)).length} players; the phone page ${await trace(B, base)}`;
+      fact('h1', h1ok,
+        `the server was down for ${Math.round(DOWN_MS / 1000)} s under both pages: the desktop page said "${offline}" (and still "${stillTrying}" at the end), its player could still move: ${movedOffline}; ${rejoined ? `${Date.now() - upAt} ms after the server returned it was back in the world and drawing both players` : 'it did NOT come back within 10 s of the server returning'}; reloads: ${loadsA - loads0} (same commit, so none expected)${h1why}`);
 
       // ...and restarted as a different commit: the page reloads itself exactly once.
       const loads1 = loadsA;
@@ -503,8 +546,9 @@ async function main(): Promise<void> {
       }
       await sleep(3000);
       const after = await drawn(A);
-      fact('h2', onNew && loadsA - loads1 === 1 && after.status === 'online',
-        `the server was restarted as a different commit: the desktop page reloaded ${loadsA - loads1} time(s) (exactly 1 expected), ${onNew ? 'now runs the new build' : 'did NOT pick up the new build'} and is ${after.status}`);
+      const h2ok = onNew && loadsA - loads1 === 1 && after.status === 'online';
+      fact('h2', h2ok,
+        `the server was restarted as a different commit: the desktop page reloaded ${loadsA - loads1} time(s) (exactly 1 expected), ${onNew ? 'now runs the new build' : 'did NOT pick up the new build'} and is ${after.status}${h2ok ? '' : ` ${await trace(A, base)}`}`);
     }
 
     await phoneFacts({ browser, devices, base, out, tag: LIVE ? 'check' : 'e2e', fact, errors });
