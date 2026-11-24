@@ -27,6 +27,18 @@ rows, and does not edit the quarry); enemies staying beaten is Part 2 of
 `owner-knocked-out-flies-off.md`. **So the first push makes "you can lose here"
 true in the quarry.**
 
+**The owner, ~01:05 UTC, playing (relayed by the orchestrator):**
+
+> Alarms should spawn more enemies of increasing strength that come in from the sides
+
+In the stage, each finished alarm brings a row in at both sides of the player.
+Each row is stronger than the last (more bodies, then tougher kinds), is
+announced, stays under the cap, and the last row repeats. The rule and its data
+shape are built engine-wide by `session_017WiGzF31gfYgeWNMA7rnEL`
+(`handoff-prompts/owner-enemies-chase-alarms.md`). This step places the entry
+points and rows in the quarry's rooms, and fixes the depot's floor-gap fall.
+The data shape is agreed by message before either side writes it.
+
 ## Goal
 
 A player walks into one outpost level and knows it is a stage: where it

@@ -1,3 +1,5 @@
+**Lead, 00:25 UTC, read this first:** the owner, ~01:05 UTC: *"Alarms should spawn more enemies of increasing strength that come in from the sides"* (quoted in `docs/plan/step-22.md`). That rule and its data shape are built engine-wide by `session_017WiGzF31gfYgeWNMA7rnEL` (`handoff-prompts/owner-enemies-chase-alarms.md`). **Before push 1's wave fix, message it and agree the data shape** (entry points on both sides of the player, rows that get stronger, the last one repeating). Then the quarry's entry points and rows are yours (push 1 for the depot, push 5 for every room), written in that shape. Don't write a rule of your own.
+
 # Step 22: one stage to clear (the quarry): lose and start over, reach the end, STAGE CLEARED
 
 Brief for one builder, reused for every push below. Written 2026-11-24 by
