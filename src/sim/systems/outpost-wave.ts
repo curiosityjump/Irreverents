@@ -12,21 +12,40 @@ import type { Content } from '../../content/types.ts';
  * there); people alternate sides, wave by wave starting on the other side;
  * with entries on one side only, everyone comes from there.
  */
-function entryFor(op: Outpost, tile: number, seenX: number | null, n: number, i: number): [number, number] {
-  if (op.entries.length < 2 || seenX === null) return op.entries[0]!;
+function entryFor(op: Outpost, tile: number, seenX: number | null, n: number, i: number, heroCols: number[] = []): [number, number] {
+  const entries = doorSafe(op, heroCols);
+  if (entries.length < 2 || seenX === null) return entries[0]!;
   const col = seenX / tile;
   const pick = (side: [number, number][]): [number, number] | undefined => {
     if (side.length === 0) return undefined;
     const far = [...side].sort((a, b) => Math.abs(a[0] + 0.5 - col) - Math.abs(b[0] + 0.5 - col));
     return far.find((t) => Math.abs(t[0] + 0.5 - col) >= op.entryAway) ?? far[far.length - 1];
   };
-  const left = pick(op.entries.filter((t) => t[0] + 0.5 < col));
-  const right = pick(op.entries.filter((t) => t[0] + 0.5 >= col));
+  const left = pick(entries.filter((t) => t[0] + 0.5 < col));
+  const right = pick(entries.filter((t) => t[0] + 0.5 >= col));
   if (!left) return right!;
   if (!right) return left;
   return (i + n) % 2 === 0 ? right : left;
 }
 import { findEntity, spawnBody } from '../world.ts';
+
+/**
+ * INTENT (There is always a way out, CLAUDE.md; docs/deliberate-designs.md): with `doorClear`
+ * (the column of the room's way out), while any hero in the room stands within `entryAway`
+ * tiles of it, the entries that close to it are left out, so no row walks in between a hero
+ * near the door and the door; that half comes from the other side. Far from the door, every
+ * entry is used, so a hero in the middle of the camp still gets a row from both sides.
+ * DRAFT (camp-entries brief, docs/decisions-log.md "The camp's door is kept clear"): sent
+ * from the other side rather than held back; with every entry near the door, all are kept.
+ * It reads where the heroes are, as the bound reads who is in the room; where a wave walks
+ * to is still only its caller's sighting (D-065).
+ */
+function doorSafe(op: Outpost, heroCols: number[]): [number, number][] {
+  const door = op.doorClear;
+  if (door === null || !heroCols.some((c) => Math.abs(c - (door + 0.5)) < op.entryAway)) return op.entries;
+  const far = op.entries.filter((t) => Math.abs(t[0] - door) >= op.entryAway);
+  return far.length > 0 ? far : op.entries;
+}
 
 /**
  * Step 20 push 3 (DRAFT; the alarms builder's ask, 2026-11-24): a person who
@@ -94,7 +113,8 @@ const system: System = {
           // Step 20 (DRAFT, vehicles B): a person who `rides` walks in at the reins: the machine is put down first, on the same tile,
           // and machine-seat (order 120, this tick) seats him, since he has c.npc by then. machine-driven drives it from there.
           const ride = p.rides !== undefined ? content.machines?.[p.rides] : undefined;
-          const first = entryFor(op, tile, seenX, sig.sent, i);
+          const heroCols = heroesIn(world, op.room).map((h) => (h.x + (content.characters[h.kind]?.box.w ?? 0) / 2) / tile);
+          const first = entryFor(op, tile, seenX, sig.sent, i, heroCols);
           const at = ride ? rideEntry(world, content, op, first, content.characters[ride.character]?.box.w ?? tile, tile, seenX) : first;
           const m = ride && !findEntity(world, `${id}:ride`) ? spawnBody(world, content, { id: `${id}:ride`, character: ride.character, room: op.room, tile: at }) : undefined;
           const e = spawnBody(world, content, { id, character: p.character, room: op.room, tile: at });

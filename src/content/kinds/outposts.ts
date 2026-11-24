@@ -74,6 +74,14 @@ export interface Outpost {
   entryAway: number;
   /** DRAFT, optional: the banner per row (index as `waves`; the last repeats), at most a few words, no digits. Left out: "Here they come!". */
   announce: string[];
+  /**
+   * DRAFT, optional (left out: no rule): the column of the room's way out. While any hero in
+   * the room stands within `entryAway` tiles of it, no wave walks in at an entry that close to
+   * it; that half comes from the other side (src/sim/systems/outpost-wave.ts, `doorSafe`).
+   * INTENT (There is always a way out, CLAUDE.md): a row never walks in between a hero near
+   * the door and the door.
+   */
+  doorClear: number | null;
 }
 
 declare module '../types.ts' {
@@ -88,7 +96,7 @@ const kind: ContentKind = {
   parse(raw, read) {
     const o = read.object(raw, '');
     if (!o) return null;
-    read.only(o, ['id', 'room', 'signaler', 'callers', 'entry', 'bound', 'callTime', 'callAgain', 'breakHits', 'breakSpeed', 'waves', 'tryAgain', 'leaveCold', 'leaveIdle', 'entries', 'entryAway', 'announce'], '');
+    read.only(o, ['id', 'room', 'signaler', 'callers', 'entry', 'bound', 'callTime', 'callAgain', 'breakHits', 'breakSpeed', 'waves', 'tryAgain', 'leaveCold', 'leaveIdle', 'entries', 'entryAway', 'announce', 'doorClear'], '');
     const out: Outpost = {
       id: read.string(o, 'id', ''),
       room: read.string(o, 'room', ''),
@@ -107,6 +115,7 @@ const kind: ContentKind = {
       entries: [],
       entryAway: 0,
       announce: [],
+      doorClear: o.doorClear === undefined ? null : read.number(o, 'doorClear', '', { min: 0, max: 1000, integer: true }),
     };
     if (o.tryAgain !== undefined && typeof o.tryAgain !== 'boolean') read.fail('tryAgain', `must be true or false, but is ${describe(o.tryAgain)}`);
     const e = o.entry;
@@ -166,6 +175,7 @@ const kind: ContentKind = {
       op.entries.forEach(([cx, cy], i) => {
         if (cx < 0 || cy < 0 || cx >= room.w || cy >= room.h) fail(file, `entries[${i}]`, `[${cx}, ${cy}] is outside room "${room.id}", which is ${room.w} by ${room.h} tiles`);
       });
+      if (op.doorClear !== null && op.doorClear >= room.w) fail(file, 'doorClear', `column ${op.doorClear} is outside room "${room.id}", which is ${room.w} tiles wide`);
       op.waves.forEach((row, i) =>
         row.forEach((p, k) => {
           if (!(p.character in content.characters)) fail(file, `waves[${i}][${k}].character`, `no character "${p.character}" (characters: ${known(content.characters)})`);

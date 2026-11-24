@@ -278,8 +278,15 @@ strength that come in from the sides."* Optional fields in
   in at the screen's edges.
 - `announce`: the banner per row (`src/client/draw/alarm-banner.ts`), the
   last repeating; no digits. Every wave also plays the alarm sound.
+- `doorClear` (2026-11-24, `INTENT:`): the column of the room's way out. While
+  any hero in the room stands within `entryAway` tiles of it, `doorSafe()`
+  leaves out the entries that close to it, so that half of the row walks in
+  from the other side, never between a hero and the door ("There is always a
+  way out"; with every entry that close, all are kept). It reads where the
+  heroes are, as the bound reads who is in the room; where a wave walks to is
+  still the caller's sighting (D-065). Left out: no rule. The camp's is 2.
 
-Proven in `test-sides` by `sides-wave-both-sides` (control: no `entries`).
+Proven in `test-sides` by `sides-wave-both-sides` (control: no `entries`). The door rule by `camp-entries-door-kept-clear` (the infiltrator at column 12.7 when the second call completes: both of its people walk in east of it, then it walks out; control: no `doorClear`, one walks in at column 6).
 **Switched on in the quarry's depot** ("The depot", above) **and in the Bandit Camp** (2026-11-24): entries
 `[[6,7],[24,10],[30,10],[36,10],[41,10]]`, `entryAway` 12, five rows (1
 fighter; 2; fighter and heavy; 2 fighters and a heavy, the first of them at
@@ -288,7 +295,7 @@ and the brute, repeating), a banner per row. No entries east of column 41 yet (t
 Step 20 run): a hero there gets every row from the west; adding `[58,10]` and
 `[70,10]` was measured to turn `step23-thrown-out-leaves-it` red, so it waits
 for the weapons builder. The quarry's other rooms are Step 22's to place.
-Scenarios re-timed for it: `step7-caller-tries-again`,
+With `doorClear` (2026-11-24) `step7-last-stand-camp` was re-timed again (east only, out at 2700; waves 4, felled 5). Scenarios re-timed for it: `step7-caller-tries-again`,
 `step7-last-stand-camp` (the hero now strikes west and east by turns),
 `step7-same-again-hangs-nothing`, `step12-walk-out-ends-it`, and the six
 `step21-*` camp ones (`docs/plan/step-4.md`, "Alarms and the chase, as

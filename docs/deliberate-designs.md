@@ -84,6 +84,9 @@ words.
 **Every hero can walk back out of the Bandit Camp: a one-way tile half-way up the entry step's east face (column 8, row 9).**
 → Intended (2026-11-24). There is always a way out (`CLAUDE.md`): the camp no longer throws a hero out (ef08490), so every hero must be able to leave on foot. Measured: the brawler's jump peaks at 47.5 px and the step is 48 px tall, so without the tile it could get in (the one-way tile at column 4 on the west face) but never back out. Do not empty or move the tile without another way out for the slowest jumper. Decided by the camp-entries builder on the orchestrator's go; the owner may overrule. `INTENT:` in the `"//"` of `content/rooms/outpost.json`. Proven by `scenarios/camp-entries-every-hero-walks-out.json`.
 
+**A hero near the Bandit Camp's doorway gets no row walking in on the doorway's side (the entry on the step beside it is skipped).**
+→ Intended (2026-11-24). There is always a way out (`CLAUDE.md`): rows come in from both sides of where the hero was seen, but while any hero in the camp stands within `entryAway` (12) tiles of the doorway (`doorClear`), the entries that close to it are skipped and that half walks in from the other side, so a heavy or the brute never arrives between a hero and the way out. Farther in, both sides as before. Decided by the camp-entries builder (`docs/decisions-log.md`, "The camp's door is kept clear"); the owner may overrule. `INTENT:` at `doorSafe` in `src/sim/systems/outpost-wave.ts` and at `doorClear` in `src/content/kinds/outposts.ts`. Proven by `scenarios/camp-entries-door-kept-clear.json`.
+
 **Beaten in the Bandit Camp or the alerted street, you are thrown bodily out into the courtyard, and anything you carried is taken back.**
 → Intended, and it is the way out, not a trap. "There is always a way out" (`CLAUDE.md`) and D-019 ("battles, last stands and narrow escapes, NOT an automatic-reload punishment loop"): the throw is the exit. You are free the moment you get up (never held longer than the beat plus `flattenTime`), the place keeps its state, and you can walk straight back in. A place with no landing spot throws nobody. (Since hearts, 2026-11-24, the throw is off in the camp and the street by data: losing there is hearts and the game over; it is still on in the quarry.) Step 21 builder, 2026-11-23, `DRAFT:` numbers; `INTENT:` in `src/sim/systems/defeat-throw.ts`; `docs/mechanisms/defeat.md`.
 
@@ -122,6 +125,7 @@ Keep this table in step with the entries:
 | STAGE CLEARED waits for Continue; the stick rests; each page its own | `src/client/draw/stage.ts`; `src/client/main.ts` (`#stage-continue`) |
 | People can be outrun and jumped over | `src/sim/npc/behaviours.ts` (`charge`); `content/tuning.json` (`characters.guard`, `.shopkeeper`, `.toll-keeper` `"//"`) |
 | Every hero can walk back out of the Bandit Camp | `content/rooms/outpost.json` (`"//"`, the tile at column 8, row 9) |
+| A hero near the camp's doorway gets no row on the doorway's side | `src/sim/systems/outpost-wave.ts` (`doorSafe`); `content/outposts/outpost.json` (`doorClear`, its `"//"`) |
 
 **Still unmarked:** list entries that have no `INTENT:` at their site yet.
 Add the marker when you next touch one.

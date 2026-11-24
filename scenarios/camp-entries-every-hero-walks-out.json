@@ -36,728 +36,108 @@
     }
   ],
   "inputs": [
-    {
-      "player": "a",
-      "from": 0,
-      "to": 120,
-      "x": 1
-    },
-    {
-      "player": "a",
-      "from": 10,
-      "to": 20,
-      "hold": [
-        "jump"
-      ]
-    },
-    {
-      "player": "a",
-      "from": 35,
-      "to": 55,
-      "hold": [
-        "jump"
-      ]
-    },
-    {
-      "player": "a",
-      "from": 130,
-      "to": 330,
-      "x": -1
-    },
-    {
-      "player": "a",
-      "from": 335,
-      "to": 350,
-      "x": 1
-    },
-    {
-      "player": "a",
-      "from": 160,
-      "to": 180,
-      "hold": [
-        "jump"
-      ]
-    },
-    {
-      "player": "a",
-      "from": 200,
-      "to": 220,
-      "hold": [
-        "jump"
-      ]
-    },
-    {
-      "player": "a",
-      "from": 240,
-      "to": 260,
-      "hold": [
-        "jump"
-      ]
-    },
-    {
-      "player": "a",
-      "from": 335,
-      "to": 337,
-      "y": -1
-    },
-    {
-      "player": "a",
-      "from": 339,
-      "to": 341,
-      "y": -1
-    },
-    {
-      "player": "a",
-      "from": 343,
-      "to": 345,
-      "y": -1
-    },
-    {
-      "player": "a",
-      "from": 347,
-      "to": 349,
-      "y": -1
-    },
-    {
-      "player": "a",
-      "from": 351,
-      "to": 353,
-      "y": -1
-    },
-    {
-      "player": "a",
-      "from": 355,
-      "to": 357,
-      "y": -1
-    },
-    {
-      "player": "a",
-      "from": 359,
-      "to": 361,
-      "y": -1
-    },
-    {
-      "player": "a",
-      "from": 363,
-      "to": 365,
-      "y": -1
-    },
-    {
-      "player": "a",
-      "from": 367,
-      "to": 369,
-      "y": -1
-    },
-    {
-      "player": "a",
-      "from": 371,
-      "to": 373,
-      "y": -1
-    },
-    {
-      "player": "b",
-      "from": 400,
-      "to": 520,
-      "x": 1
-    },
-    {
-      "player": "b",
-      "from": 410,
-      "to": 420,
-      "hold": [
-        "jump"
-      ]
-    },
-    {
-      "player": "b",
-      "from": 435,
-      "to": 455,
-      "hold": [
-        "jump"
-      ]
-    },
-    {
-      "player": "b",
-      "from": 530,
-      "to": 730,
-      "x": -1
-    },
-    {
-      "player": "b",
-      "from": 735,
-      "to": 750,
-      "x": 1
-    },
-    {
-      "player": "b",
-      "from": 560,
-      "to": 580,
-      "hold": [
-        "jump"
-      ]
-    },
-    {
-      "player": "b",
-      "from": 600,
-      "to": 620,
-      "hold": [
-        "jump"
-      ]
-    },
-    {
-      "player": "b",
-      "from": 640,
-      "to": 660,
-      "hold": [
-        "jump"
-      ]
-    },
-    {
-      "player": "b",
-      "from": 735,
-      "to": 737,
-      "y": -1
-    },
-    {
-      "player": "b",
-      "from": 739,
-      "to": 741,
-      "y": -1
-    },
-    {
-      "player": "b",
-      "from": 743,
-      "to": 745,
-      "y": -1
-    },
-    {
-      "player": "b",
-      "from": 747,
-      "to": 749,
-      "y": -1
-    },
-    {
-      "player": "b",
-      "from": 751,
-      "to": 753,
-      "y": -1
-    },
-    {
-      "player": "b",
-      "from": 755,
-      "to": 757,
-      "y": -1
-    },
-    {
-      "player": "b",
-      "from": 759,
-      "to": 761,
-      "y": -1
-    },
-    {
-      "player": "b",
-      "from": 763,
-      "to": 765,
-      "y": -1
-    },
-    {
-      "player": "b",
-      "from": 767,
-      "to": 769,
-      "y": -1
-    },
-    {
-      "player": "b",
-      "from": 771,
-      "to": 773,
-      "y": -1
-    },
-    {
-      "player": "c",
-      "from": 800,
-      "to": 920,
-      "x": 1
-    },
-    {
-      "player": "c",
-      "from": 810,
-      "to": 820,
-      "hold": [
-        "jump"
-      ]
-    },
-    {
-      "player": "c",
-      "from": 835,
-      "to": 855,
-      "hold": [
-        "jump"
-      ]
-    },
-    {
-      "player": "c",
-      "from": 930,
-      "to": 1130,
-      "x": -1
-    },
-    {
-      "player": "c",
-      "from": 1135,
-      "to": 1150,
-      "x": 1
-    },
-    {
-      "player": "c",
-      "from": 960,
-      "to": 980,
-      "hold": [
-        "jump"
-      ]
-    },
-    {
-      "player": "c",
-      "from": 1000,
-      "to": 1020,
-      "hold": [
-        "jump"
-      ]
-    },
-    {
-      "player": "c",
-      "from": 1040,
-      "to": 1060,
-      "hold": [
-        "jump"
-      ]
-    },
-    {
-      "player": "c",
-      "from": 1135,
-      "to": 1137,
-      "y": -1
-    },
-    {
-      "player": "c",
-      "from": 1139,
-      "to": 1141,
-      "y": -1
-    },
-    {
-      "player": "c",
-      "from": 1143,
-      "to": 1145,
-      "y": -1
-    },
-    {
-      "player": "c",
-      "from": 1147,
-      "to": 1149,
-      "y": -1
-    },
-    {
-      "player": "c",
-      "from": 1151,
-      "to": 1153,
-      "y": -1
-    },
-    {
-      "player": "c",
-      "from": 1155,
-      "to": 1157,
-      "y": -1
-    },
-    {
-      "player": "c",
-      "from": 1159,
-      "to": 1161,
-      "y": -1
-    },
-    {
-      "player": "c",
-      "from": 1163,
-      "to": 1165,
-      "y": -1
-    },
-    {
-      "player": "c",
-      "from": 1167,
-      "to": 1169,
-      "y": -1
-    },
-    {
-      "player": "c",
-      "from": 1171,
-      "to": 1173,
-      "y": -1
-    },
-    {
-      "player": "d",
-      "from": 1200,
-      "to": 1320,
-      "x": 1
-    },
-    {
-      "player": "d",
-      "from": 1210,
-      "to": 1220,
-      "hold": [
-        "jump"
-      ]
-    },
-    {
-      "player": "d",
-      "from": 1235,
-      "to": 1255,
-      "hold": [
-        "jump"
-      ]
-    },
-    {
-      "player": "d",
-      "from": 1330,
-      "to": 1530,
-      "x": -1
-    },
-    {
-      "player": "d",
-      "from": 1535,
-      "to": 1550,
-      "x": 1
-    },
-    {
-      "player": "d",
-      "from": 1360,
-      "to": 1380,
-      "hold": [
-        "jump"
-      ]
-    },
-    {
-      "player": "d",
-      "from": 1400,
-      "to": 1420,
-      "hold": [
-        "jump"
-      ]
-    },
-    {
-      "player": "d",
-      "from": 1440,
-      "to": 1460,
-      "hold": [
-        "jump"
-      ]
-    },
-    {
-      "player": "d",
-      "from": 1535,
-      "to": 1537,
-      "y": -1
-    },
-    {
-      "player": "d",
-      "from": 1539,
-      "to": 1541,
-      "y": -1
-    },
-    {
-      "player": "d",
-      "from": 1543,
-      "to": 1545,
-      "y": -1
-    },
-    {
-      "player": "d",
-      "from": 1547,
-      "to": 1549,
-      "y": -1
-    },
-    {
-      "player": "d",
-      "from": 1551,
-      "to": 1553,
-      "y": -1
-    },
-    {
-      "player": "d",
-      "from": 1555,
-      "to": 1557,
-      "y": -1
-    },
-    {
-      "player": "d",
-      "from": 1559,
-      "to": 1561,
-      "y": -1
-    },
-    {
-      "player": "d",
-      "from": 1563,
-      "to": 1565,
-      "y": -1
-    },
-    {
-      "player": "d",
-      "from": 1567,
-      "to": 1569,
-      "y": -1
-    },
-    {
-      "player": "d",
-      "from": 1571,
-      "to": 1573,
-      "y": -1
-    },
-    {
-      "player": "e",
-      "from": 1600,
-      "to": 1720,
-      "x": 1
-    },
-    {
-      "player": "e",
-      "from": 1610,
-      "to": 1620,
-      "hold": [
-        "jump"
-      ]
-    },
-    {
-      "player": "e",
-      "from": 1635,
-      "to": 1655,
-      "hold": [
-        "jump"
-      ]
-    },
-    {
-      "player": "e",
-      "from": 1730,
-      "to": 1930,
-      "x": -1
-    },
-    {
-      "player": "e",
-      "from": 1935,
-      "to": 1950,
-      "x": 1
-    },
-    {
-      "player": "e",
-      "from": 1760,
-      "to": 1780,
-      "hold": [
-        "jump"
-      ]
-    },
-    {
-      "player": "e",
-      "from": 1800,
-      "to": 1820,
-      "hold": [
-        "jump"
-      ]
-    },
-    {
-      "player": "e",
-      "from": 1840,
-      "to": 1860,
-      "hold": [
-        "jump"
-      ]
-    },
-    {
-      "player": "e",
-      "from": 1935,
-      "to": 1937,
-      "y": -1
-    },
-    {
-      "player": "e",
-      "from": 1939,
-      "to": 1941,
-      "y": -1
-    },
-    {
-      "player": "e",
-      "from": 1943,
-      "to": 1945,
-      "y": -1
-    },
-    {
-      "player": "e",
-      "from": 1947,
-      "to": 1949,
-      "y": -1
-    },
-    {
-      "player": "e",
-      "from": 1951,
-      "to": 1953,
-      "y": -1
-    },
-    {
-      "player": "e",
-      "from": 1955,
-      "to": 1957,
-      "y": -1
-    },
-    {
-      "player": "e",
-      "from": 1959,
-      "to": 1961,
-      "y": -1
-    },
-    {
-      "player": "e",
-      "from": 1963,
-      "to": 1965,
-      "y": -1
-    },
-    {
-      "player": "e",
-      "from": 1967,
-      "to": 1969,
-      "y": -1
-    },
-    {
-      "player": "e",
-      "from": 1971,
-      "to": 1973,
-      "y": -1
-    }
+    {"player": "a", "from": 0, "to": 120, "x": 1},
+    {"player": "a", "from": 10, "to": 20, "hold": ["jump"]},
+    {"player": "a", "from": 35, "to": 55, "hold": ["jump"]},
+    {"player": "a", "from": 130, "to": 330, "x": -1},
+    {"player": "a", "from": 335, "to": 350, "x": 1},
+    {"player": "a", "from": 160, "to": 180, "hold": ["jump"]},
+    {"player": "a", "from": 200, "to": 220, "hold": ["jump"]},
+    {"player": "a", "from": 240, "to": 260, "hold": ["jump"]},
+    {"player": "a", "from": 335, "to": 337, "y": -1},
+    {"player": "a", "from": 339, "to": 341, "y": -1},
+    {"player": "a", "from": 343, "to": 345, "y": -1},
+    {"player": "a", "from": 347, "to": 349, "y": -1},
+    {"player": "a", "from": 351, "to": 353, "y": -1},
+    {"player": "a", "from": 355, "to": 357, "y": -1},
+    {"player": "a", "from": 359, "to": 361, "y": -1},
+    {"player": "a", "from": 363, "to": 365, "y": -1},
+    {"player": "a", "from": 367, "to": 369, "y": -1},
+    {"player": "a", "from": 371, "to": 373, "y": -1},
+    {"player": "b", "from": 400, "to": 520, "x": 1},
+    {"player": "b", "from": 410, "to": 420, "hold": ["jump"]},
+    {"player": "b", "from": 435, "to": 455, "hold": ["jump"]},
+    {"player": "b", "from": 530, "to": 730, "x": -1},
+    {"player": "b", "from": 735, "to": 750, "x": 1},
+    {"player": "b", "from": 560, "to": 580, "hold": ["jump"]},
+    {"player": "b", "from": 600, "to": 620, "hold": ["jump"]},
+    {"player": "b", "from": 640, "to": 660, "hold": ["jump"]},
+    {"player": "b", "from": 735, "to": 737, "y": -1},
+    {"player": "b", "from": 739, "to": 741, "y": -1},
+    {"player": "b", "from": 743, "to": 745, "y": -1},
+    {"player": "b", "from": 747, "to": 749, "y": -1},
+    {"player": "b", "from": 751, "to": 753, "y": -1},
+    {"player": "b", "from": 755, "to": 757, "y": -1},
+    {"player": "b", "from": 759, "to": 761, "y": -1},
+    {"player": "b", "from": 763, "to": 765, "y": -1},
+    {"player": "b", "from": 767, "to": 769, "y": -1},
+    {"player": "b", "from": 771, "to": 773, "y": -1},
+    {"player": "c", "from": 800, "to": 920, "x": 1},
+    {"player": "c", "from": 810, "to": 820, "hold": ["jump"]},
+    {"player": "c", "from": 835, "to": 855, "hold": ["jump"]},
+    {"player": "c", "from": 930, "to": 1130, "x": -1},
+    {"player": "c", "from": 1135, "to": 1150, "x": 1},
+    {"player": "c", "from": 960, "to": 980, "hold": ["jump"]},
+    {"player": "c", "from": 1000, "to": 1020, "hold": ["jump"]},
+    {"player": "c", "from": 1040, "to": 1060, "hold": ["jump"]},
+    {"player": "c", "from": 1135, "to": 1137, "y": -1},
+    {"player": "c", "from": 1139, "to": 1141, "y": -1},
+    {"player": "c", "from": 1143, "to": 1145, "y": -1},
+    {"player": "c", "from": 1147, "to": 1149, "y": -1},
+    {"player": "c", "from": 1151, "to": 1153, "y": -1},
+    {"player": "c", "from": 1155, "to": 1157, "y": -1},
+    {"player": "c", "from": 1159, "to": 1161, "y": -1},
+    {"player": "c", "from": 1163, "to": 1165, "y": -1},
+    {"player": "c", "from": 1167, "to": 1169, "y": -1},
+    {"player": "c", "from": 1171, "to": 1173, "y": -1},
+    {"player": "d", "from": 1200, "to": 1320, "x": 1},
+    {"player": "d", "from": 1210, "to": 1220, "hold": ["jump"]},
+    {"player": "d", "from": 1235, "to": 1255, "hold": ["jump"]},
+    {"player": "d", "from": 1330, "to": 1530, "x": -1},
+    {"player": "d", "from": 1535, "to": 1550, "x": 1},
+    {"player": "d", "from": 1360, "to": 1380, "hold": ["jump"]},
+    {"player": "d", "from": 1400, "to": 1420, "hold": ["jump"]},
+    {"player": "d", "from": 1440, "to": 1460, "hold": ["jump"]},
+    {"player": "d", "from": 1535, "to": 1537, "y": -1},
+    {"player": "d", "from": 1539, "to": 1541, "y": -1},
+    {"player": "d", "from": 1543, "to": 1545, "y": -1},
+    {"player": "d", "from": 1547, "to": 1549, "y": -1},
+    {"player": "d", "from": 1551, "to": 1553, "y": -1},
+    {"player": "d", "from": 1555, "to": 1557, "y": -1},
+    {"player": "d", "from": 1559, "to": 1561, "y": -1},
+    {"player": "d", "from": 1563, "to": 1565, "y": -1},
+    {"player": "d", "from": 1567, "to": 1569, "y": -1},
+    {"player": "d", "from": 1571, "to": 1573, "y": -1},
+    {"player": "e", "from": 1600, "to": 1720, "x": 1},
+    {"player": "e", "from": 1610, "to": 1620, "hold": ["jump"]},
+    {"player": "e", "from": 1635, "to": 1655, "hold": ["jump"]},
+    {"player": "e", "from": 1730, "to": 1930, "x": -1},
+    {"player": "e", "from": 1935, "to": 1950, "x": 1},
+    {"player": "e", "from": 1760, "to": 1780, "hold": ["jump"]},
+    {"player": "e", "from": 1800, "to": 1820, "hold": ["jump"]},
+    {"player": "e", "from": 1840, "to": 1860, "hold": ["jump"]},
+    {"player": "e", "from": 1935, "to": 1937, "y": -1},
+    {"player": "e", "from": 1939, "to": 1941, "y": -1},
+    {"player": "e", "from": 1943, "to": 1945, "y": -1},
+    {"player": "e", "from": 1947, "to": 1949, "y": -1},
+    {"player": "e", "from": 1951, "to": 1953, "y": -1},
+    {"player": "e", "from": 1955, "to": 1957, "y": -1},
+    {"player": "e", "from": 1959, "to": 1961, "y": -1},
+    {"player": "e", "from": 1963, "to": 1965, "y": -1},
+    {"player": "e", "from": 1967, "to": 1969, "y": -1},
+    {"player": "e", "from": 1971, "to": 1973, "y": -1}
   ],
   "ticks": 2000,
   "expect": [
-    {
-      "fact": "position",
-      "player": "a",
-      "at": 125,
-      "x": [
-        150,
-        1400
-      ]
-    },
-    {
-      "fact": "event-where",
-      "event": "changed-room",
-      "where": {
-        "player": "a",
-        "fromRoom": "outpost",
-        "toRoom": "courtyard"
-      },
-      "between": [
-        130,
-        399
-      ],
-      "count": [
-        1,
-        99
-      ]
-    },
-    {
-      "fact": "position",
-      "player": "b",
-      "at": 525,
-      "x": [
-        150,
-        1400
-      ]
-    },
-    {
-      "fact": "event-where",
-      "event": "changed-room",
-      "where": {
-        "player": "b",
-        "fromRoom": "outpost",
-        "toRoom": "courtyard"
-      },
-      "between": [
-        530,
-        799
-      ],
-      "count": [
-        1,
-        99
-      ]
-    },
-    {
-      "fact": "position",
-      "player": "c",
-      "at": 925,
-      "x": [
-        150,
-        1400
-      ]
-    },
-    {
-      "fact": "event-where",
-      "event": "changed-room",
-      "where": {
-        "player": "c",
-        "fromRoom": "outpost",
-        "toRoom": "courtyard"
-      },
-      "between": [
-        930,
-        1199
-      ],
-      "count": [
-        1,
-        99
-      ]
-    },
-    {
-      "fact": "position",
-      "player": "d",
-      "at": 1325,
-      "x": [
-        150,
-        1400
-      ]
-    },
-    {
-      "fact": "event-where",
-      "event": "changed-room",
-      "where": {
-        "player": "d",
-        "fromRoom": "outpost",
-        "toRoom": "courtyard"
-      },
-      "between": [
-        1330,
-        1599
-      ],
-      "count": [
-        1,
-        99
-      ]
-    },
-    {
-      "fact": "position",
-      "player": "e",
-      "at": 1725,
-      "x": [
-        150,
-        1400
-      ]
-    },
-    {
-      "fact": "event-where",
-      "event": "changed-room",
-      "where": {
-        "player": "e",
-        "fromRoom": "outpost",
-        "toRoom": "courtyard"
-      },
-      "between": [
-        1730,
-        1999
-      ],
-      "count": [
-        1,
-        99
-      ]
-    }
+    {"fact": "position", "player": "a", "at": 125, "x": [150, 1400]},
+    {"fact": "event-where", "event": "changed-room", "where": {"player": "a", "fromRoom": "outpost", "toRoom": "courtyard"}, "between": [130, 399], "count": [1, 99]},
+    {"fact": "position", "player": "b", "at": 525, "x": [150, 1400]},
+    {"fact": "event-where", "event": "changed-room", "where": {"player": "b", "fromRoom": "outpost", "toRoom": "courtyard"}, "between": [530, 799], "count": [1, 99]},
+    {"fact": "position", "player": "c", "at": 925, "x": [150, 1400]},
+    {"fact": "event-where", "event": "changed-room", "where": {"player": "c", "fromRoom": "outpost", "toRoom": "courtyard"}, "between": [930, 1199], "count": [1, 99]},
+    {"fact": "position", "player": "d", "at": 1325, "x": [150, 1400]},
+    {"fact": "event-where", "event": "changed-room", "where": {"player": "d", "fromRoom": "outpost", "toRoom": "courtyard"}, "between": [1330, 1599], "count": [1, 99]},
+    {"fact": "position", "player": "e", "at": 1725, "x": [150, 1400]},
+    {"fact": "event-where", "event": "changed-room", "where": {"player": "e", "fromRoom": "outpost", "toRoom": "courtyard"}, "between": [1730, 1999], "count": [1, 99]}
   ]
 }
