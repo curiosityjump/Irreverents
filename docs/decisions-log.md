@@ -436,3 +436,10 @@ document as a decision of theirs.
 - **Why this way:** the brief's first numbers (200 px/s, lift 0.6, range 11 tiles, sight 13) traced well in the real room, so they stay: his arc sails over the floor just in front of him, comes down on the middle step near its east end and bounces onto the floor past it. So the climb out (the steps' INTENT: "the gallery's way out") is under fire, but each hero alone gets out by jumping up just after a shot passes and waiting where the dots pass overhead; all three were measured doing it in under 14 s. Standing behind him, or under the near floor, is safe: you learn where it lands.
 - **To change it:** `speed`, `lift`, `range` and `sight` in `content/npcs/ranged-fighter.json` (the step24-gallery scenarios then need re-timing); his place is the one line in `content/placements/hall-gallery.json`.
 - **Where:** `docs/mechanisms/ranged.md`, "Where one stands".
+
+### 2026-11-24 · The quarry's sign shows three empty stars before anyone has cleared it
+- **Decided by:** Step 22 builder (the fifth), push 5, `session_017WiGzGTsScxtYSPbqs97N3`
+- **Instead of asking:** how does the entrance sign say "this is a stage" before there is a best?
+- **Why this way:** the step's "found without being told: the entrance sign says it is a stage". Three empty stars under the name read as a rating to earn, with no word or digit added to the picture (no pixel font for new words, no digits on signs). A clear fills them as before.
+- **To change it:** one line in `src/client/draw/levels.ts` (the `stage` row); a word such as "STAGE" could be added once there is lettering for it.
+- **Where:** `docs/mechanisms/stages.md`, "Shown"; `docs/plan/step-22-shots/push5-sign-stage-*.png`.

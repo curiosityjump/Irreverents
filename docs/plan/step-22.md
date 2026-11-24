@@ -737,3 +737,27 @@ before you quote it.
 - Control, run by me: `content/rooms/quarry-road.json` as it was before b749ec7, with no scaffold. `step22-unseen-clear` fails, with no unseen `stage-cleared`.
 - The owner's zero-alarm infiltration now exists in the quarry: the infiltrator, unseen, 3 stars, the toll-keeper included in "unseen".
 - No phone shot yet of the scaffold or the gantry. Part 2's shots should include them, with the first screen, the sign and the wings.
+
+### Push 5, part 2a, and a handoff from the fifth builder (`session_017WiGzGTsScxtYSPbqs97N3`)
+
+- **Live:** part 1, the quiet way (b749ec7). Part 2a is in the push after it: the quarry's sign shows three empty stars as soon as the level is named, so it says it is a stage before anyone clears it. Shots: `step-22-shots/push5-sign-stage-*.png` (I looked at both; legible).
+- **Part 2 was built in a scratch tree and run, not shipped.** These are the measurements, so a fresh builder doesn't re-derive them:
+  - **The road's caller** (the first screen's bad guy and signal). A lookout at [18,14] on the first ledge (looks east 3 s, west 4 s) with a post at [19,14] is in view from the doorway and too far to see the spawn. Outpost `quarry-road`: entries [[14,14],[26,14],[33,12],[41,12],[46,12]], entryAway 6, bound 6, waves F, FF, FH.
+    - A high walk takes the quiet way over him: one-way row 13 at columns 13-14, then row 11 at columns 15-30, joining the scaffold's row-11 step. On it every hero is out of his band (dy 57 or more). Climb onto it while he looks east.
+    - With him placed, all five `sneaks` runs complete his call at ticks 290-355: `stage-bot` walks the floor in his view. It needs a walks-mode rule: wait at column 10 or less until `road-lookout` faces east, then go up the ledge, the step and onto the high walk.
+    - `step16-no-waves-on-the-road` starts at spawn 1 (column 48), so he never sees that hero.
+  - **The ridge's caller:** a lookout at [52,7] (looks west 4 s, east 3 s), post [53,7]. Outpost `quarry-ridge`: entries [[49,7],[56,8],[64,9],[70,9],[77,9]], bound 9, waves FH, FFH, BF. **The blocker:** he sees the ridge's main way (columns 46-59), and nobody can pass a turning lookout on his own level: crossing his column is always in front of him. The ten `sneaks` claims ("no horn completed") then fail for every hero on the main way. Two ways out:
+    - a way over him, like the road's high walk;
+    - the lead changes what `sneaks` means.
+    The quiet way is not affected: he can't see the chasm at 28.
+  - **The depot:** any bad guy in the far yard moves four checks. I tried a brute at 58 facing west and a heavy at 49 facing east.
+    - `step21-heart-game-over-quarry` (Step 21's): the first fall comes at 225, not 463.
+    - `step22-restart-on-game-over`: 270, not 567.
+    - `step22-cleared-stats`.
+    - `step16-caught-escape`: 8 people where it expects 6, and the depot's bound of 8 then leaves room for only two wave bodies.
+    West of the strongroom, every spot is on a Step 16 quiet way. Choose one: leave the depot at 4 placed and grow its waves (a brute row), or re-time those four and tell Step 21's owner about theirs.
+  - **The pit:** a brute at [5,18] facing east hits the grappler in `step16-mood-heavy-hit`. Facing west at [6,18], toward the hidden cave's wall, it would be behind that walk. Not measured.
+  - **The tower** (a heavy at [14,12] facing west, a fighter at [5,18] turning): nothing else broke. It wasn't measured on its own, since the ten runs failed on the road first.
+- **Then:** re-record the ten runs (`stage-bot`, the commands in each scenario's `//`). Re-record `step22-unseen-clear` with `scripts/stage-quiet.ts`, adding the road's high-walk segments before "step row 11". Re-measure the star times (the unseen clear is now the fastest run, at 33.5 s). Commit phone shots of the first screen and of the wings' pedestal at depot [38,18].
+- **Still owed:** the e2e `stage-beaten-entrance` made reliable inside the full suite (the brief's top block, item 2). Not started.
+- **`check:live` after part 1 (b749ec7):** 20 ok and 1 FAIL, `tiers` (the castle street's whistle gauge under live delay). That is the town lane's known flaky fact, being fixed now (59fa3b0). Part 1 touches nothing of the street, so I did not revert.

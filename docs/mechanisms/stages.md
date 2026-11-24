@@ -93,10 +93,14 @@ power sources, the roster.
 
 ## Shown
 
-- **The level's sign** (`src/client/draw/levels.ts`, `drawLevelSigns`): once
-  there is a best, a row of three stars under the name and the
-  pieces (`src/client/draw/stars.ts`), the earned ones filled, the rest empty. No time: `INTENT:` no digit in
-  the game picture (`t-no-numbers`). `drawn.levels.entrances[].best`.
+- **The level's sign** (`src/client/draw/levels.ts`, `drawLevelSigns`): a
+  row of three stars under the name and the pieces (`src/client/draw/stars.ts`),
+  the earned ones filled, the rest empty. No time: `INTENT:` no digit in
+  the game picture (`t-no-numbers`). `drawn.levels.entrances[].best`. Since
+  push 5 (`DRAFT:`, "found without being told") the row is there from the
+  moment the level is named, all three empty until a first clear, so the sign
+  says it is a stage before anyone has a result (`entrances[].stage` true;
+  `step-22-shots/push5-sign-stage-*.png`).
 - **The menu row** (`src/client/start.ts`, `.st-stars`, `data-stars`): the
   same stars and the best time as m:ss (`stageClock`), in HTML.
 

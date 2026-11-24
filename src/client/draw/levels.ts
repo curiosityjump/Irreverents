@@ -50,6 +50,8 @@ export interface DrawnEntrance {
   pieces?: boolean[];
   /** Step 22 push 3 (additive): the stage's best clear, its stars drawn under the name (its time only in the menu: no digit in the picture); absent when there is none. */
   best?: { stars: number; ticks: number };
+  /** Step 22 push 5 (additive): true when the level is a stage that is on; its sign then shows three stars, empty until a best fills them. Absent otherwise. */
+  stage?: boolean;
 }
 
 let entrances: DrawnEntrance[] = [];
@@ -97,8 +99,10 @@ export function drawLevelEntrances(g: CanvasRenderingContext2D, world: World, co
       // DRAFT: 12 px above the art, clear of the doorway's bobbing Go-in arrow (draw/door-hint.ts, 10 px up).
       // Step 22 push 3: a stage's best clear, stars and time, in a row under the pieces.
       const best = name ? stageBest(world, content, level.id) : null;
-      signs.push({ name, quarters: name ? p.quarters : 0, mid: x + Math.floor(aw / 2), bottom: y - GAP, pieces, best });
-      entrances.push({ level: level.id, room: roomId, door: door.id, look: art ? id : '', discovered: p.discovered, name, quarters: name ? p.quarters : 0, ...(pieces ? { pieces } : {}), ...(best ? { best } : {}) });
+      // DRAFT (Step 22 push 5, "found without being told": the entrance sign says it is a stage): a named level that is a stage shows its row of three stars even before a best, all empty, so the sign reads as a challenge with a rating before anyone has cleared it.
+      const stage = !!name && Object.values(content.stages ?? {}).some((st) => st.on && st.level === level.id);
+      signs.push({ name, quarters: name ? p.quarters : 0, mid: x + Math.floor(aw / 2), bottom: y - GAP, pieces, best: best ?? (stage ? { stars: 0 } : null) });
+      entrances.push({ level: level.id, room: roomId, door: door.id, look: art ? id : '', discovered: p.discovered, name, quarters: name ? p.quarters : 0, ...(pieces ? { pieces } : {}), ...(best ? { best } : {}), ...(stage ? { stage } : {}) });
     }
   }
 }
