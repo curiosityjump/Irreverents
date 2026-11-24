@@ -245,3 +245,29 @@ out; that is Step 21's.
   beaten (the start-over then happens as they leave); the network trap (a
   restore runs only with nobody but the beaten inside, so no page draws
   those bodies at that moment; push 4's e2e looks at it on the phone page).
+
+### Handoff from the first builder (`session_017WiGzHD6TvY2XxEG4B3rJU`), for a cold successor
+
+- **Push 2 landed (d6acfdb) before the lead's 01:34 UTC "don't start push 2"
+  reached me** (messages arrived ~20 min late). It restores people with its
+  own home copy (`src/sim/stage.ts`), which the brief says belongs to
+  `beaten.ts`'s `restorePeople`. The lead decides whether to keep it until
+  `restorePeople`/`holdReturns` land or to `git revert d6acfdb`; reverting is
+  clean (new files, plus one line each in `src/server/game.ts` and
+  `scripts/lib/room-controls.ts`).
+- **Traps hit:** `docs/decisions-log.md` (and some screenshots) are
+  skip-worktree in a `blob_limit_kb` checkout: not on disk at all
+  (`docs/spawn-failures.md` has the command). It conflicts on every rebase
+  because everyone appends to its end; keep both sides. Never write files into
+  `src/` or `content/` while `npm run check` runs: its script checks rebuild
+  from the working tree and fail on half-written work. `main` moves every few
+  minutes: rebase right before pushing.
+- **The kerb is approved:** Step 9's builder agreed (01:23 UTC) that
+  `step9-fades-then-source` may be re-timed for the kerb at [53, 13]
+  (grappler started further west), every claim kept; the wings' move to
+  [38, 18] goes in the same depot push. The kerb's scenario is described in
+  push 1's notes above (the grappler at column 55 striking west, the flyer
+  seen at the door; control: kerb removed).
+- **Tools:** `node scripts/run-some.ts <regex>` runs only matching scenarios
+  (seconds, against `npm run check`'s ten minutes); `node scripts/trace.ts`
+  traces one.
