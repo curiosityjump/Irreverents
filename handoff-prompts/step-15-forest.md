@@ -1,3 +1,8 @@
+**Lead, 10:10 UTC (from the orchestrator). Read this first:**
+- **Forest tiles:** the forest must not reuse the quarry's tile sheet. P10's pack is listed in `docs/design-library/manifest.json`, not mirrored. Fetch it by Drive id into a scratch folder (`docs/mechanisms/asset-requests.md`, "Listed, not mirrored"), cut the TRN-01 and TRN-10 rows into `tiles/forest.png` (`DRAFT:`) in push 2 or 3, and raise the mirror's rule for that file. Ask Vision Partner only if the rows aren't there.
+- **Push 4 shots:** the forest sideways at 844x390 and 750x340, and upright.
+- `docs/roles/builder-card.md` section 6 now checks for skip-worktree files: pull.
+
 **Lead, 08:41 UTC, added after Step 22's lead answered. Read this first:**
 - Before every push, run every `step22-*` and `step16-*` scenario as well.
 - Check that the courtyard's quarry sign and its start-menu row still read right beside the forest's door (screenshot).
