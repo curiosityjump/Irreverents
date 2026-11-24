@@ -1,6 +1,6 @@
 {
  "id": "step21-throw-is-no-escape",
- "proves": "Step 21 with Step 7's Hall: in the real Bandit Camp the flyer stands among the fighters through three waves and is thrown out on its fourth fall (tick 1927, into the courtyard; re-timed 2026-11-24 by the chase builder: bandits who lost the hero now search and come back, so the fourth fall comes sooner): being thrown out is not leaving on your own feet, so no 'narrow escape' legend is hung for it. Control (watched to fail): the thrown-out test removed from src/sim/systems/hall-detect.ts, and 'Out of Bandit Camp by a hair' hangs on that tick",
+ "proves": "Step 21 with Step 7's Hall: in the real Bandit Camp the flyer stands among the fighters through three waves and is thrown out on its fourth fall (tick 2089, into the courtyard; re-timed 2026-11-24 by the chase builder, bandits who lost the hero now search and come back, so the fourth fall comes sooner: 1927; then by the hearts builder, push 2: the flyer's third fall at 1601 is its last heart, its player goes on as the grappler, whose fall at 2030 is the camp's fourth): being thrown out is not leaving on your own feet, so no 'narrow escape' legend is hung for it. Control (watched to fail): the thrown-out test removed from src/sim/systems/hall-detect.ts, and 'Out of Bandit Camp by a hair' hangs on that tick",
  "room": "outpost",
  "placements": true,
  "players": [
@@ -37,8 +37,8 @@
     "to": "courtyard"
    },
    "between": [
-    1927,
-    1927
+    2089,
+    2089
    ],
    "count": [
     1,

@@ -1,4 +1,5 @@
 import { canAct } from '../body-state.ts';
+import { heartsOut } from '../hearts.ts';
 import { boxInSolid, memberTaken } from '../party.ts';
 import type { Verb } from '../types.ts';
 
@@ -59,6 +60,8 @@ const verb: Verb = {
       // INTENT: nobody is moved off their character, and no member is played
       // twice by a switch (library docs 05, 06: "without involuntary takeovers").
       if (memberTaken(ctx.world, to, e.id)) continue;
+      // Step 21, hearts: a hero with no hearts is out; nobody switches to them (docs/mechanisms/defeat.md, "Hearts").
+      if (heartsOut(ctx.world, ctx.content, to)) continue;
       anyFree = true;
 
       // Feet and middle stay where they are; physics measures from the top-left.

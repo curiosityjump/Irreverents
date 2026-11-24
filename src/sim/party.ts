@@ -4,6 +4,7 @@
 import { TILE } from '../content/kinds/rooms.ts';
 import type { Room } from '../content/kinds/rooms.ts';
 import type { Content } from '../content/types.ts';
+import { heartsOut } from './hearts.ts';
 import { tileAt } from './room-state.ts';
 import { cellAt } from './systems/physics.ts';
 import type { World } from './types.ts';
@@ -49,5 +50,7 @@ export function memberTaken(world: World, member: string, exceptEntity?: string)
 export function firstFreeMember(world: World, content: Content): string | undefined {
   // Step 11: the world's own party once a cantina swap has changed it (docs/mechanisms/cantina.md).
   const members = world.party ?? content.party.members;
-  return members.find((m) => !memberTaken(world, m)) ?? members[0];
+  // Step 21, hearts: a member with no hearts is out and is never given (docs/mechanisms/defeat.md, "Hearts").
+  const live = members.filter((m) => !heartsOut(world, content, m));
+  return live.find((m) => !memberTaken(world, m)) ?? live[0] ?? members[0];
 }

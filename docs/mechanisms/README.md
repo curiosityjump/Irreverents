@@ -74,7 +74,7 @@ groups) whenever you add one — never update the number from memory.
 - `railway.json` + `scripts/lib/deploy-paths.ts` — only pushes that change the listed code paths redeploy, so documents-only pushes do not restart the live game; `/healthz` reports the running commit and whether a storage volume is mounted; `npm run check:deployed` is M1 (Step 1).
 
 **The party** (`docs/mechanisms/party-and-switching.md`)
-- `content/party.json` + `src/sim/party.ts` + verbs `switch`, `flap` — the shared party's members, who a new player becomes, switching in place to a member nobody is playing (refused when the body would not fit), and the flyer's limited flaps (Step 2).
+- `content/party.json` + `src/sim/party.ts` + verbs `switch`, `flap` — the shared party's members, who a new player becomes, switching in place to a member nobody is playing (refused when the body would not fit, or the member is out of hearts: Step 21), and the flyer's limited flaps (Step 2).
 
 **NPC response logic** (`docs/mechanisms/npc-response.md`)
 - `entity.c.npc` + `content/npcs/`, `content/rules/` + the `npc-*` systems — scripted people with exactly three moods who witness deeds and react by role/deed tables in data; never AI (Step 4).

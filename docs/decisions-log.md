@@ -1285,3 +1285,10 @@ document as a decision of theirs.
 - **To change it:** `CONNECT_MS` in `src/net/client.ts` (it belongs in `content/net.json` as `connectMs` when that file is next touched).
 - **Where:** `docs/mechanisms/network.md`, "Coming back"; `docs/plan/step-5.md`, "Builder notes > Flakes".
 
+
+### 2026-11-24 · Step 21: the grappler and the brawler have five hearts; a hero with none is out and you carry on as the next one
+- **Decided by:** hearts builder, push 2, `session_017WiGzG7mhviEaxroo5GvBv`
+- **Instead of asking:** "Should the sturdy heroes have more hearts? And when a hero runs out, who do you become, and where?"
+- **Why this way:** the owner: "Once all heros in the party are out of hearts, that's a game over", so a hero with none is out until then, and you are not. Five for the grappler and the brawler because they are the sturdy ones (push 1's measurement: a grappler who fights badly in the camp's third wave goes down about seven times in 90 s, the light heroes as often in half the time), and it keeps the camp scenarios of other steps exactly as they were (their grappler falls four times). When yours is out you become the next hero in the party with hearts that nobody else is playing, right where you got up; if that hero would not fit there (a crawlspace), at the room's way in. Nobody can switch to an out hero, and a friend joining is never given one.
+- **To change it:** `heroes` in `content/hearts.json`; the way in is the room's first spawn (`src/sim/systems/heart-out.ts`, `spotFor`).
+- **Where:** `docs/mechanisms/defeat.md`, "Hearts". `DRAFT:`

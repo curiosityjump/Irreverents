@@ -1,0 +1,245 @@
+{
+ "id": "step21-heart-out-next-member",
+ "gate": null,
+ "proves": "Step 21, hearts (the owner, 2026-11-24; DRAFT, docs/decisions-log.md 'Step 21: hearts'): the grappler comes into the Bandit Camp with one heart left (the world starts with four of its five lost) and is put on the floor by a bandit at 1009: its last heart. It lies its three seconds, and the moment it would get up its player is the next party member with hearts, the infiltrator, where it lay (it fits there): 'hero-out', in charge of its body. Nobody can switch back to the grappler: the switch skips it. Control (watched to fail): heart-out's system made to do nothing, and the player is still the grappler, up and playing",
+ "room": "outpost",
+ "placements": true,
+ "players": [
+  {
+   "id": "a",
+   "character": "grappler",
+   "spawn": 0
+  }
+ ],
+ "world": {
+  "heartsLost": {
+   "grappler": 4
+  }
+ },
+ "inputs": [
+  {
+   "player": "a",
+   "from": 0,
+   "to": 135,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 20,
+   "to": 45,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 340,
+   "to": 414,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 400,
+   "to": 404,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 424,
+   "to": 428,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 448,
+   "to": 452,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 472,
+   "to": 476,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 496,
+   "to": 500,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 520,
+   "to": 524,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 544,
+   "to": 548,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 568,
+   "to": 572,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 592,
+   "to": 596,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 616,
+   "to": 620,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 640,
+   "to": 644,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 664,
+   "to": 668,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 688,
+   "to": 692,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1250,
+   "to": 1254,
+   "hold": [
+    "switch"
+   ]
+  }
+ ],
+ "ticks": 1300,
+ "expect": [
+  {
+   "fact": "hearts",
+   "hero": "grappler",
+   "at": 1009,
+   "left": 1
+  },
+  {
+   "fact": "event-where",
+   "event": "heart-lost",
+   "where": {
+    "entity": "p:a",
+    "hero": "grappler",
+    "left": 0
+   },
+   "between": [
+    1009,
+    1009
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "character",
+   "player": "a",
+   "at": 1100,
+   "is": "grappler"
+  },
+  {
+   "fact": "event-where",
+   "event": "hero-out",
+   "where": {
+    "entity": "p:a",
+    "from": "grappler",
+    "to": "infiltrator",
+    "where": "here"
+   },
+   "between": [
+    1009,
+    1300
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "character",
+   "player": "a",
+   "at": 1240,
+   "is": "infiltrator"
+  },
+  {
+   "fact": "in-room",
+   "player": "a",
+   "at": 1240,
+   "room": "outpost"
+  },
+  {
+   "fact": "clear-of-solid",
+   "player": "a",
+   "between": [
+    0,
+    1300
+   ]
+  },
+  {
+   "fact": "event-where",
+   "event": "switched",
+   "where": {
+    "entity": "p:a",
+    "to": "grappler"
+   },
+   "between": [
+    0,
+    1300
+   ],
+   "count": [
+    0,
+    0
+   ]
+  },
+  {
+   "fact": "hearts",
+   "hero": "grappler",
+   "at": 1300,
+   "left": 0
+  }
+ ]
+}

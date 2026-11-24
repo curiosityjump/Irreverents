@@ -1,0 +1,78 @@
+{
+ "id": "step21-heart-switch-skips-out",
+ "gate": null,
+ "proves": "Step 21, hearts: a hero with no hearts is out and nobody switches to them. The infiltrator, with the flyer out of hearts (the world starts with all three lost), walks out of the crawlspace into the chamber and presses switch: it becomes the grappler, the member after the flyer, never the flyer. Control (watched to fail): the hearts test taken out of the switch verb, and it becomes the flyer (step2-body-switch-refused-in-gap's own answer), whom heart-out moves off again at once: two switches that tick",
+ "room": "test-body",
+ "players": [
+  {
+   "id": "a",
+   "character": "infiltrator",
+   "spawn": 0
+  }
+ ],
+ "world": {
+  "heartsLost": {
+   "flyer": 3
+  }
+ },
+ "inputs": [
+  {
+   "player": "a",
+   "from": 0,
+   "to": 28,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 50,
+   "to": 54,
+   "hold": [
+    "switch"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 60,
+   "to": 110,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 130,
+   "to": 134,
+   "hold": [
+    "switch"
+   ]
+  }
+ ],
+ "ticks": 150,
+ "expect": [
+  {
+   "fact": "event",
+   "event": "switched",
+   "player": "a",
+   "between": [
+    130,
+    130
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "character",
+   "player": "a",
+   "at": 150,
+   "is": "grappler"
+  },
+  {
+   "fact": "clear-of-solid",
+   "player": "a",
+   "between": [
+    0,
+    150
+   ]
+  }
+ ]
+}

@@ -112,7 +112,7 @@ The decision is `docs/plan/step-21.md`, "Hearts"; it is built in pushes
 
 - **`content/hearts.json`** (kind `src/content/kinds/hearts.ts`): `on`
   (false: nobody loses one), `default` and `heroes` (hearts by character
-  kind; `DRAFT:` 3 each), `per`: `fall` (an enemy puts the hero on the
+  kind; `DRAFT:` 5 for the grappler and the brawler, 3 for the rest), `per`: `fall` (an enemy puts the hero on the
   floor, the unit, D-020) or `blow` (each `hit` an enemy lands: the other
   answer, one switch away).
 - **`World.heartsLost`** (`src/sim/hearts.ts`): hearts lost by hero kind,
@@ -131,7 +131,25 @@ The decision is `docs/plan/step-21.md`, "Hearts"; it is built in pushes
   `INTENT:` the enemy is never in a page's world, so a page never writes
   the field.
 
+- **Out** (`heart-out`, order 582, server's world only: it does nothing
+  where `World.taken` is set, a page's): a played hero whose kind has no
+  hearts, once it could act again (not flattened, held, flying, in a beat or
+  seized), becomes the next party member with hearts nobody else plays
+  (party order after its own; all taken by friends: the first with hearts,
+  the fourth friend's rule), by a `become` effect: where it stands if that
+  body fits (the switch's feet-and-middle rule and its slide), else at the
+  room's way in (its first spawn, `DRAFT:`), never in a wall (`INTENT:`).
+  Events `hero-out` {entity, player, from, to, where: `here`|`way-in`} and
+  `switched`. No member with hearts: nothing here (the game over).
+- **Never switched to, never given:** `switch` skips a member with no
+  hearts; `firstFreeMember` (a new player's seat) skips them too.
+
 Checked by `step21-heart-lost-to-a-bandit` (control: `on` false),
 `step21-heart-none-in-the-brawl` (control: the enemy test cut to "anyone
 nobody plays") and `scripts/checks/step21-hearts.ts` (two connections and a
-kept game; control: no heart taken, it fails).
+kept game; control: no heart taken, it fails); `step21-heart-out-next-member`
+(control: heart-out doing nothing), `step21-heart-out-two-players` (control:
+the "nobody else plays it" test taken out), `step21-heart-switch-skips-out`
+(control: the switch's hearts test taken out) and
+`scripts/checks/step21-out-spot.ts` (the way in from a crawlspace; control:
+no way in, the player stays the out infiltrator).

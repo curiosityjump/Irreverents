@@ -374,3 +374,21 @@ acts on hearts yet). Found while building: the cantina's regulars carry no
 the test is for a guard who follows a hero in. Not yet measured: how long
 each hero lasts at wave 3 and alert 3 (the brief's open "brawler and
 grappler may take more"); 3 each stands until that measurement.
+
+### Push 2: out, and the next member
+
+`heart-out` (582, server's world only), `switch` and `firstFreeMember`
+skip an out member. Counted reds before choosing the numbers: with 3
+hearts each, two scenarios turned red, `step7-waves-reach-the-hero` (Step
+7's) and `step21-camp-thrown-out` (mine): in both the grappler falls
+exactly four times (1167, 1801, 2187, 2531; 1009, 1579, 1994, 2374), so at
+three it is out and the rest of the run is someone else. The brief's open
+"the brawler and the grappler may take more" answered from push 1's table:
+both 5, the rest 3, and every scenario is green with no re-time. Signal:
+`step21-heart-out-next-member`, `-two-players`, `-switch-skips-out`, check
+`step21-out-spot`, each with a control watched failing.
+Re-timed (mine to, a `step21-*` scenario; written by the risk builder after
+I started): `step21-throw-is-no-escape`, its thrown-out tick to 2089 (2944 before hearts and the chase change; the chase builder made it 1927).
+Its flyer's third fall (1601) is its last heart, so its player goes on as
+the grappler, whose fall at 2030 is the camp's fourth. Control re-watched:
+hall-detect's thrown-out test removed, the legend hangs at 2089.

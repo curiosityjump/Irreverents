@@ -51,6 +51,11 @@ art can change), switching in place, and what only each can do.
   member is tried; if none fits, `switch-refused` with reason `no-fit`
   and nothing changes. This is "there is always a way out": the
   infiltrator inside a crawlspace stays the infiltrator.
+- **Step 21, hearts: a member with no hearts is out** (`World.heartsLost`,
+  `docs/mechanisms/defeat.md`, "Hearts"): `switch` skips them,
+  `firstFreeMember` never gives them, and system `heart-out` moves a player
+  off one (a forced switch by `become`, at the room's way in when the next
+  body would not fit where they stand).
 - **A switch never lands on a member another player is playing and never
   changes another player's entity.** With every other member taken it is
   refused with reason `none-free`.

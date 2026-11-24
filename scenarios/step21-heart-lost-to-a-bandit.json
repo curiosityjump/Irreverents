@@ -1,7 +1,7 @@
 {
  "id": "step21-heart-lost-to-a-bandit",
  "gate": null,
- "proves": "Step 21, hearts (the owner, 2026-11-24: 'Heros should have hearts which can be lost'; DRAFT, docs/decisions-log.md 'Step 21: hearts'): in the real Bandit Camp the grappler stands among the camp's fighters and is put on the floor by one of them at 1009. That fall costs the grappler one of the party's hearts (3 to 2, a 'heart-lost' event naming the bandit) and nothing else: the other heroes keep all theirs and the grappler gets up where it lies. Control (watched to fail): \"on\": false in content/hearts.json, no heart is lost",
+ "proves": "Step 21, hearts (the owner, 2026-11-24: 'Heros should have hearts which can be lost'; DRAFT, docs/decisions-log.md 'Step 21: hearts'): in the real Bandit Camp the grappler stands among the camp's fighters and is put on the floor by one of them at 1009. That fall costs the grappler one of the party's hearts (5 to 4, a 'heart-lost' event naming the bandit) and nothing else: the other heroes keep all theirs and the grappler gets up where it lies. Control (watched to fail): \"on\": false in content/hearts.json, no heart is lost",
  "room": "outpost",
  "placements": true,
  "players": [
@@ -146,7 +146,7 @@
     0,
     1009
    ],
-   "left": 3
+   "left": 5
   },
   {
    "fact": "event-where",
@@ -169,7 +169,7 @@
    "where": {
     "entity": "p:a",
     "hero": "grappler",
-    "left": 2
+    "left": 4
    },
    "between": [
     1009,
@@ -200,7 +200,7 @@
     1010,
     1100
    ],
-   "left": 2
+   "left": 4
   },
   {
    "fact": "hearts",
