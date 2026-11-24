@@ -1,0 +1,94 @@
+{
+  "id": "step20-wave-wagon-skips-a-standing-machine",
+  "gate": null,
+  "proves": "Step 20 push 3 (DRAFT; the alarms builder's ask): a person who rides a machine skips an entry where a standing machine already is (the camp's parked wagon stands on its west entry). A ram wagon is parked on the test outpost's east entry (45); the wave's wagon walks in at the other entry (24) instead, so it never lands on the parked one, and is driven east at the place the lookout saw the brawler, shoving a crate at 27 at its bandit speed. Control (watched to fail): rideEntry returning the entry it was given: the wave's wagon is put down on the parked one and crashes into it as it starts",
+  "room": "test-wave-wagon",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "brawler",
+      "spawn": 0
+    }
+  ],
+  "entities": [
+    {
+      "id": "twag-parked",
+      "character": "ram-wagon",
+      "tile": [
+        45,
+        8
+      ]
+    },
+    {
+      "id": "twag-crate",
+      "character": "crate",
+      "tile": [
+        27,
+        8
+      ]
+    }
+  ],
+  "inputs": [],
+  "ticks": 500,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "outpost-wave",
+      "where": {
+        "outpost": "test-wave-wagon",
+        "wave": 0
+      },
+      "between": [
+        195,
+        215
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "machine-crash",
+      "where": {
+        "machine": "test-wave-wagon:w0:0:ride",
+        "target": "twag-parked"
+      },
+      "between": [
+        0,
+        500
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "machine-crash",
+      "where": {
+        "machine": "test-wave-wagon:w0:0:ride",
+        "target": "twag-crate",
+        "speed": 60
+      },
+      "between": [
+        205,
+        420
+      ],
+      "count": [
+        1,
+        9
+      ]
+    },
+    {
+      "fact": "position",
+      "entity": "twag-parked",
+      "at": 500,
+      "x": [
+        700,
+        740
+      ]
+    }
+  ]
+}

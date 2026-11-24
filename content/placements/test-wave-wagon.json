@@ -1,0 +1,32 @@
+{
+  "//": "DRAFT (Step 20, vehicles B push 3): the lookout watches west over the low platform from a second one (out of a wave machine's path); the post with the horn two tiles east of them. Nobody else: the wave is the test.",
+  "id": "test-wave-wagon",
+  "room": "test-wave-wagon",
+  "place": [
+    {
+      "id": "twag-lookout",
+      "character": "outpost-lookout",
+      "tile": [
+        38,
+        6
+      ],
+      "npc": "outpost-lookout",
+      "routine": [
+        {
+          "face": "left"
+        },
+        {
+          "wait": 5
+        }
+      ]
+    },
+    {
+      "id": "twag-post",
+      "character": "signal-post",
+      "tile": [
+        40,
+        6
+      ]
+    }
+  ]
+}

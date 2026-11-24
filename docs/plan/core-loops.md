@@ -549,6 +549,8 @@ slice.
 
 **Landed (builder B push 2): where the owner finds it.** Go into the Bandit Camp from the courtyard: the wagon stands empty on the step just inside the doorway. Climb up beside it and Use reads GET IN. Drive east through the lookout, the fighters, a light fence, two market stalls and a timber barricade into the cache; Jump gets out. No driver in it yet: a bandit at the reins comes with a wave (push 3).
 
+**Landed (builder B push 3): where the owner finds it.** Stay in the Bandit Camp through the waves. The fourth horn call ("Here comes a wagon!") sends a bandit driving a second ram wagon in from a side, at where the lookout saw you, slower than any hero walks. Get behind it, Grab him out of the seat, Use (GET IN) and drive it into the wave. Shown in the check room `test-wave-wagon`; no scenario has yet survived to the fourth call in the camp itself.
+
 **Step:** 20 (new). **Signal:** in `docs/plan/step-20.md`. **Status: building** (builders A and B).
 
 ## 7 · Risk

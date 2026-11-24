@@ -309,3 +309,42 @@ teleport) puts one there; server-stepped bodies behave as before. **After: 0
 of 20.** Control: the old file, the same check: failed again (1 of 12 in that
 sample). `npm run check` green; `npm run e2e` (its machine facts) at the push.
 The check itself was right and is unchanged.
+
+**Builder B, push 3 (the wave's wagon)** (`session_017WiGzJfeRQoKZSky3npQv6`). Landed: the optional
+`rides` field on a wave person (`src/content/kinds/outposts.ts`), a few lines in `outpost-wave.ts`
+(agreed with the alarms builder by message, 05:25 UTC: yes to the field, the row and the banner; it then stopped, brief 6400b44), and the camp's fourth row
+riding in at the reins of a ram wagon (decisions-log "Step 20: the wave's wagon";
+`docs/mechanisms/machines.md`). There's a new check room, `test-wave-wagon` (room, placements,
+outpost), and three scenarios: `step20-wave-wagon-outrun`, `-taken`, `-skips-a-standing-machine`.
+- **Left for the next builder (brief 6400b44):** the west entry [6,7] beside the only door (a row arriving between a hero and the way out) and entries for the east half; not started here (context budget). Notes:
+- **The wave's wagon is told the sighting.** `machine-driven` drives only at a hero
+  the driver sees, and waves walk in 12 or more tiles off (`entryAway`), past the
+  112 px sight range, so a wave wagon stood at its entry. It now gets `c.chase`,
+  the same caller's sighting its people get (D-065).
+- **No real-camp scenario reaches the fourth call.** Measured: a hero standing in
+  the lookout's view is beaten, or the callers are, before the fourth call (the
+  flyer's last stand stops at three calls; on a perch the scenario adds with `tiles`,
+  row 9, columns 13-17, the camp's fighters still reach the brawler). A perch
+  higher than that is out of the lookout's sight height. So the camp's row is proven
+  only by the content check and by the same rule in `test-wave-wagon`. **Not
+  verified: the fourth row in the camp, on a page.**
+- **Row 2 was tried first and dropped:** it turned `step7-waves-reach-the-hero`
+  (the row-2 fighter must hit the hero) and `step7-same-again-hangs-nothing` red.
+- **Friendly fire:** a wave fighter on foot swinging at a hero above hits his
+  own driver out of the seat (and the driver can fly into the hero). That's the
+  camp's existing rule, not changed. In the test room the wagon comes alone for that reason.
+- **The camp's west entry [6,7] is the step where `camp-wagon` stands.** A rider
+  skips an entry with a standing machine within his machine's width (`rideEntry`
+  in `outpost-wave.ts`, read from the world, not a listed tile, so the entry can
+  move: the alarms builder's ask): the next on that side, else the other side.
+  `step20-wave-wagon-skips-a-standing-machine` (control: the rule off, the wave's
+  wagon lands on the parked one and crashes into it).
+- **For tools:** `scripts/trace.ts`-style probes that pass a scenario to
+  `simulate` directly skip the loader, so a `tiles` entry's `is` must be the
+  number (`2` one-way, `1` solid), not the name; the name silently does nothing.
+- Re-timed: none.
+- **e2e at the push:** one full run, one failure: `hearts-game-over` (the
+  phone in the camp ended with hearts left, the GAME OVER card never drawn).
+  It was already red on `main` without this push (1573906, review at 9dbd705:
+  "the last hero unbeaten"; the hearts brief owns it). The defeat facts alone,
+  three runs on this commit: all green.

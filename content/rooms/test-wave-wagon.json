@@ -1,0 +1,25 @@
+{
+  "//": "DRAFT (Step 20, vehicles B push 3): the check room for a wave that brings a driven machine (content/outposts/test-wave-wagon.json; scenarios/step20-wave-wagon-*.json). No doors, so no player reaches it. A hero starts on the low one-way platform at columns 30-33 (two tiles up: in the lookout's sight, out of a fighter's reach) or on the floor at column 2; the floor west of the platform is a long run to walk away along. The lookout at column 38 faces west and the horn post stands at 40, both up on a second low platform (columns 37-41, a three-tile gap from the first), so a wave's machine passes under them rather than ramming its own post; the wave walks in at column 45.",
+  "id": "test-wave-wagon",
+  "name": "Test: wave wagon",
+  "tile": 16,
+  "legend": {
+    "#": "solid",
+    "=": "oneway",
+    ".": "empty",
+    "1": "spawn",
+    "2": "spawn"
+  },
+  "rows": [
+    "################################################",
+    "#..............................................#",
+    "#..............................................#",
+    "#..............................................#",
+    "#..............................................#",
+    "#..............................................#",
+    "#...............................2..............#",
+    "#.............................====...=====.....#",
+    "#.1............................................#",
+    "################################################"
+  ]
+}

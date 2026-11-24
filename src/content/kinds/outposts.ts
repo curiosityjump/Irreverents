@@ -35,8 +35,15 @@ export interface Outpost {
    * of one wave: a body (content/characters/) and an NPC kind (content/npcs/).
    * INTENT (doc 24: "the system must never impose an arbitrary maximum wave
    * count"): after the last row, the last row comes again, for ever.
+   * Step 20 (DRAFT, optional): `rides`, a machine id (content/machines/):
+   * this person walks in at the reins of one (outpost-wave puts the machine
+   * down under them; machine-seat seats them). The machine is not a person
+   * and does not count toward `bound`; its driver does.
+   * INTENT (the brief, D-023: a wagon sent at you is yours to take): it is
+   * driven at the machine's `speed.driver`, which the machines check keeps
+   * below every roster hero's run, so the slowest hero can walk away from it.
    */
-  waves: { character: string; npc: string }[][];
+  waves: { character: string; npc: string; rides?: string }[][];
   /**
    * Step 7 (DRAFT, optional, default false): a caller stopped mid-call by a
    * knock-out or a grab tries again once up (after `callAgain`), instead of
@@ -119,8 +126,10 @@ const kind: ContentKind = {
       row.forEach((item: unknown, k: number) => {
         const p = read.object(item, `${w}[${k}]`);
         if (!p) return;
-        read.only(p, ['character', 'npc'], `${w}[${k}]`);
-        people.push({ character: read.string(p, 'character', `${w}[${k}]`), npc: read.string(p, 'npc', `${w}[${k}]`) });
+        read.only(p, ['character', 'npc', 'rides'], `${w}[${k}]`);
+        const person: Outpost['waves'][number][number] = { character: read.string(p, 'character', `${w}[${k}]`), npc: read.string(p, 'npc', `${w}[${k}]`) };
+        if (p.rides !== undefined) person.rides = read.string(p, 'rides', `${w}[${k}]`);
+        people.push(person);
       });
       if (people.length > out.bound) read.fail(w, `has ${people.length} people, more than the bound (${out.bound}): this wave could never walk in`);
       out.waves.push(people);
@@ -161,6 +170,7 @@ const kind: ContentKind = {
         row.forEach((p, k) => {
           if (!(p.character in content.characters)) fail(file, `waves[${i}][${k}].character`, `no character "${p.character}" (characters: ${known(content.characters)})`);
           if (!(p.npc in content.npcs)) fail(file, `waves[${i}][${k}].npc`, `no NPC kind "${p.npc}" (kinds: ${known(content.npcs)})`);
+          if (p.rides !== undefined && !(p.rides in (content.machines ?? {}))) fail(file, `waves[${i}][${k}].rides`, `no machine "${p.rides}" (machines: ${known(content.machines ?? {})})`);
         }),
       );
     }

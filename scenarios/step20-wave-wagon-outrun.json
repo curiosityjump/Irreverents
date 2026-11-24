@@ -1,0 +1,96 @@
+{
+  "id": "step20-wave-wagon-outrun",
+  "gate": null,
+  "proves": "Step 20 push 3 (DRAFT, docs/decisions-log.md 'Step 20: the wave's wagon'): a wave row whose person `rides` a machine (content/outposts/test-wave-wagon.json) walks him in at the reins of a ram wagon: the lookout sees the brawler (the slowest hero, 76 px/s) on the low platform and sounds the horn; the wagon is put down at the entry with him seated and is driven at where the lookout saw the hero, at the wagon's bandit speed (60), shoving a crate before it at exactly that speed. The brawler drops off the platform and walks west clear of it: the driver loses sight of him and stops; the wagon never reaches him. Controls (watched to fail): `rides` left out of the row (no wagon comes, no crate is shoved); speed.driver raised to 200 in content/machines/ram-wagon.json (with the content check's floor lifted for the run): the wagon catches and rams him",
+  "room": "test-wave-wagon",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "brawler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 210,
+      "to": 800,
+      "x": -1
+    }
+  ],
+  "ticks": 1000,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "outpost-wave",
+      "where": {
+        "outpost": "test-wave-wagon",
+        "wave": 0,
+        "people": [
+          "test-wave-wagon:w0:0"
+        ]
+      },
+      "between": [
+        195,
+        215
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "machine-crash",
+      "where": {
+        "machine": "test-wave-wagon:w0:0:ride",
+        "target": "twag-crate",
+        "speed": 60
+      },
+      "between": [
+        205,
+        330
+      ],
+      "count": [
+        1,
+        9
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "machine-crash",
+      "where": {
+        "machine": "test-wave-wagon:w0:0:ride",
+        "target": "p:a"
+      },
+      "between": [
+        0,
+        1000
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "position",
+      "player": "a",
+      "at": 800,
+      "x": [
+        10,
+        40
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "id": "twag-crate",
+      "character": "crate",
+      "tile": [
+        41,
+        8
+      ]
+    }
+  ]
+}

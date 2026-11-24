@@ -1,0 +1,37 @@
+{
+  "//": "DRAFT (Step 20, vehicles B push 3): the check outpost for a wave row with a driven machine (`rides`): each call brings one fighter at the reins of the ram wagon. callAgain long, so one call is all a scenario sees. breakSpeed above any launch, as in test-outpost. Two entries, column 45 and column 24, so a rider has another way in when a machine stands on the first (step20-wave-wagon-skips-a-standing-machine); with one person a wave walks in on the right of the place reported, at 45.",
+  "id": "test-wave-wagon",
+  "room": "test-wave-wagon",
+  "signaler": "twag-post",
+  "callers": [
+    "twag-lookout"
+  ],
+  "entry": [
+    45,
+    8
+  ],
+  "bound": 8,
+  "callTime": 3,
+  "callAgain": 120,
+  "breakHits": 3,
+  "breakSpeed": 2000,
+  "waves": [
+    [
+      {
+        "character": "outpost-fighter",
+        "npc": "outpost-fighter",
+        "rides": "ram-wagon"
+      }
+    ]
+  ],
+  "entries": [
+    [
+      45,
+      8
+    ],
+    [
+      24,
+      8
+    ]
+  ]
+}

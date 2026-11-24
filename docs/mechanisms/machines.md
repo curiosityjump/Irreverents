@@ -52,14 +52,23 @@ check room `test-machine` until builder B puts it in the Bandit Camp.
   The driver's routine `face` is the way the parked wagon stands; he sits at
   its rear, so "facing away" from the camp's entrance means facing east.
   `content/placements/test-machine.json` does exactly this twice.
-- **A wave row** (`{ character, npc }`, `src/content/kinds/outposts.ts`)
-  cannot put a machine down today: the machine is not a person and has no
-  NPC kind. Seating needs only the driver standing on the machine on the
-  tick the machine is first seen, so the smallest change is an optional
-  field on a wave person, e.g. `{ "character": "outpost-fighter", "npc":
-  "outpost-fighter", "rides": "ram-wagon" }`, with the waves system adding
-  a machine body of that kind under the person at the entry. That file is
-  the waves slice's, so it was not changed here.
+- **A wave row** (Step 20 push 3, builder B): a wave person may carry
+  `"rides": "<machine id>"` (`src/content/kinds/outposts.ts`, checked
+  against `content/machines/`). `outpost-wave` puts a machine body of that
+  machine's character down first, id `<person id>:ride`, on the person's
+  entry tile and facing, and tells it the caller's sighting (`c.chase`, the
+  same place the wave's people are sent, D-065); `machine-seat` seats the
+  person the same tick (he has `c.npc` by then) and `machine-driven` drives
+  it at that place at `speed.driver`, then at any hero he sees. The machine
+  is not a person and does not count toward `bound`; its driver does, and
+  keeps `c.outpostWave` (pulled out and beaten, he walks off like anyone).
+  A rider skips an entry where a standing machine is (within his machine's
+  width): the next on that side, else the other (`rideEntry`).
+  Proven in the check room `test-wave-wagon` by `step20-wave-wagon-outrun`
+  (the brawler walks clear; controls: no `rides`, `speed.driver` 200) and
+  `step20-wave-wagon-taken` (grabbed out from above, thrown, GET IN, the
+  wagon flattens its own driver, Jump out; control: no grab) and
+  `step20-wave-wagon-skips-a-standing-machine` (control: the rule off).
 
 **Rules that are deliberate (the seat):** there is always a way out
 (`INTENT:` in `machine-seat.ts`): Jump is never refused while riding, a
@@ -192,6 +201,17 @@ back west (closing speed 450; met at about 456 after the run, which is also
 the sixteenth crash: the wreck puts the rider out on foot). Jump in the
 cache, still rolling, puts a hero out standing (`step20-camp-solo-infiltrator`).
 
-## Still to come (builder B)
+## The wave's wagon in the Bandit Camp (Step 20, builder B, push 3)
 
-Push 3, a wave's wagon with a bandit at the reins: `handoff-prompts/loop-vehicles-b.md`.
+The camp's fourth row (`content/outposts/outpost.json`, `waves[3]`, banner
+"Here comes a wagon!") is a fighter at the reins of a ram wagon, a fighter
+and a heavy: the fourth finished call drives a second wagon at where the
+caller saw the hero, slow enough to walk away from (60 against the
+brawler's 76; `INTENT:` in `src/content/kinds/machines.ts`), and its driver
+can be pulled out and the wagon turned on the wave (D-023). `DRAFT:`
+(decisions-log "Step 20: the wave's wagon"): row 3 because it comes once
+(the last row repeats; wagons are not people, so a repeating row would pile
+them up) and because no row-2 scenario survives a wagon (it turned
+`step7-waves-reach-the-hero` and `step7-same-again-hangs-nothing` red).
+Seen so far only in `test-wave-wagon`: no camp scenario reaches a fourth
+call (`docs/plan/step-20.md`, "Builder notes", push 3).

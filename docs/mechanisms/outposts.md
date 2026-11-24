@@ -23,7 +23,7 @@ is edited.
 
 | Piece | Where | What it is |
 |---|---|---|
-| An outpost | `content/outposts/<id>.json` | `room`, `signaler` (the placed id of the horn post), `callers` (placed people who may sound it), `entry` ([column, row] where waves walk in; not a door), `bound` (most people in the room at once), `callTime`, `callAgain` (seconds), `breakHits`, `breakSpeed` (px/s), `waves` (rows of `{ character, npc }`); optional (Step 7, left out = as before): `tryAgain` (true/false), `leaveCold`, `leaveIdle` (seconds; 0 = never). The validator names file and field; the cross-check refuses a room, post, caller or kind that does not exist. |
+| An outpost | `content/outposts/<id>.json` | `room`, `signaler` (the placed id of the horn post), `callers` (placed people who may sound it), `entry` ([column, row] where waves walk in; not a door), `bound` (most people in the room at once), `callTime`, `callAgain` (seconds), `breakHits`, `breakSpeed` (px/s), `waves` (rows of `{ character, npc }`, and optionally `rides`, a machine id: Step 20, that person walks in at the reins of one, `docs/mechanisms/machines.md`); optional (Step 7, left out = as before): `tryAgain` (true/false), `leaveCold`, `leaveIdle` (seconds; 0 = never). The validator names file and field; the cross-check refuses a room, post, caller or kind that does not exist. |
 | The horn post | a placed body, e.g. `signal-post` | Verbs `["body"]`, weight 1000 (the most a body may be: a hit barely moves it), toughness 0 (never knocked out). A body, not a `things` entry, because only bodies can be hit or have things thrown into them. |
 | The camp's people | `content/characters/outpost-*.json`, `content/npcs/outpost-*.json` | Step 4's people: side `bad`, three moods. The fighter's body lists `attack`; the lookout's lists `body` with toughness 30, so one good blow stops a call. |
 | The numbers | `content/tuning.json` `world` | `outpostCallReach` (12 px), and three switches for the scenarios' controls, `outpostZoneEndOn`, `outpostBoundOn`, `outpostSendOn` (all 1). |
@@ -282,8 +282,9 @@ strength that come in from the sides."* Optional fields in
 Proven in `test-sides` by `sides-wave-both-sides` (control: no `entries`).
 **Switched on in the quarry's depot** ("The depot", above) **and in the Bandit Camp** (2026-11-24): entries
 `[[6,7],[24,10],[30,10],[36,10],[41,10]]`, `entryAway` 12, five rows (1
-fighter; 2; fighter and heavy; 2 fighters and a heavy; a heavy and the brute,
-repeating), a banner per row. No entries east of column 41 yet (the camp's
+fighter; 2; fighter and heavy; 2 fighters and a heavy, the first of them at
+the reins of a ram wagon since Step 20 push 3, "Here comes a wagon!"; a heavy
+and the brute, repeating), a banner per row. No entries east of column 41 yet (the camp's
 Step 20 run): a hero there gets every row from the west; adding `[58,10]` and
 `[70,10]` was measured to turn `step23-thrown-out-leaves-it` red, so it waits
 for the weapons builder. The quarry's other rooms are Step 22's to place.
