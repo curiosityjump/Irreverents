@@ -59,14 +59,17 @@
   .art > .icon { display: block; }
   .on > .icon { background-position: 100% 0; opacity: 1; }
   /* DRAFT (brief owner-better-buttons): a button a press would do nothing with right now is dimmed (src/client/button-idle.ts); it still takes the press, and lights when pressed. */
-  #actions button.idle:not(.on) > .icon { opacity: .4; filter: grayscale(.7); }
+  /* DRAFT (brief phone-hud-legibility, third pass: a dimmed Switch at 40% vanished against the street's red roof): dimmed by colour, not see-through; the picture keeps a dark disc behind it, the backing the lit buttons' art carries. */
+  #actions button.idle:not(.on) > .icon { opacity: .9; filter: grayscale(.85) brightness(.75); }
+  #actions button.idle.art:not(.on)::before { content: ""; position: absolute; left: calc(var(--icon-off, 0px) + var(--icon, 48px) * .12); top: calc(var(--icon-off, 0px) + var(--icon, 48px) * .12); width: calc(var(--icon, 48px) * .76); height: calc(var(--icon, 48px) * .76); border-radius: 50%; background: rgba(20, 18, 40, .75); pointer-events: none; }
   #actions button.idle:not(.on):not(.art) { opacity: .5; }
   /* DRAFT (brief phone-hud-legibility, 2026-11-24; was Step 19's dimmed picture under the word, and "Go in" with no picture): when the Use button says what a press will do here (touch.ts, showUseWord: Take, Get in, Go in, Buy, Break, Ring), its picture stays lit, as pressable as any button, and the word sits on a small dark pill across its foot, a gold rim saying "now". "Go in" adds a small arched door. Same button, same place, same touch area. */
   #actions button .go { display: none; }
   #actions button.go-in, #actions button.says { color: transparent; text-shadow: none; overflow: visible; }
   #actions button.go-in > .icon, #actions button.says > .icon { display: block; opacity: 1; filter: none; }
   #actions button.go-in > .go, #actions button.says > .go { display: flex; position: absolute; left: 50%; bottom: -2px; transform: translateX(-50%); align-items: center; gap: 3px; padding: 3px 6px 2px; border-radius: 8px; background: rgba(20, 18, 40, .92); box-shadow: 0 0 0 1px #e09a1e, 0 1px 0 1px rgba(15, 15, 28, .7); color: var(--cream); font-size: 10px; letter-spacing: .06em; white-space: nowrap; text-shadow: none; pointer-events: none; }
-  #touch.over #actions button.go-in > .go, #touch.over #actions button.says > .go { bottom: 0; font-size: 9px; padding: 2px 5px 1px; }
+  /* DRAFT (brief phone-hud-legibility, third pass): sideways the pill keeps 2 px above its button's foot, which shell.ts puts on the safe area's bottom edge (env(safe-area-inset-bottom)), so it never meets the home bar. */
+  #touch.over #actions button.go-in > .go, #touch.over #actions button.says > .go { bottom: 2px; font-size: 9px; padding: 2px 5px 1px; }
   /* The words and Go in's door are drawn in the pixel font (src/client/pixel-words.ts); the plain words show only until the font loads. */
 
   #hint { position: absolute; left: 0; right: 0; top: var(--hint-top, 200px); padding: 0 16px; display: flex; align-items: center; justify-content: flex-start; gap: 8px; text-transform: uppercase; letter-spacing: .12em; text-align: center; color: rgba(210, 207, 224, .8); }

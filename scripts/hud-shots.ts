@@ -219,8 +219,96 @@ try {
     await ph.ctx.close();
   }
   if (only.includes('defeat')) {
+    // Third pass: defeat.ts shoots at its own viewport (750x340) under an 844x390 name. The walk is left alone; only its
+    // GAME OVER and hurt shots are taken again at the three sizes, the viewport put back after (resizing mid-walk broke it).
     const { defeatFacts } = await import('./e2e/defeat.ts');
-    await defeatFacts({ ...kit, fact: (id: string, ok: boolean, t: string) => console.log(ok ? 'ok' : 'FAIL', id, t.slice(0, 160)), shots: out });
+    const wrapPage = (page: any): any => {
+      const raw = page.screenshot.bind(page);
+      page.screenshot = async (o: { path: string }): Promise<unknown> => {
+        const base = path.basename(o.path).replace(/-844x390\.png$/, '');
+        if (base !== 'hearts-game-over' && base !== 'defeat-hurt') return raw(o);
+        const back = page.viewportSize();
+        for (const sz of SIZES) {
+          await page.setViewportSize({ width: sz.w, height: sz.h });
+          await sleep(120);
+          await raw({ path: path.join(out, `${base}-${sz.w}x${sz.h}.png`) });
+        }
+        await page.setViewportSize(back);
+        return undefined;
+      };
+      return page;
+    };
+    const wrapped = {
+      newContext: async (o: unknown) => {
+        const ctx = await browser.newContext(o);
+        const np = ctx.newPage.bind(ctx);
+        ctx.newPage = async () => wrapPage(await np());
+        return ctx;
+      },
+    };
+    await defeatFacts({ ...kit, browser: wrapped as any, fact: (id: string, ok: boolean, t: string) => console.log(ok ? 'ok' : 'FAIL', id, t.slice(0, 160)), shots: out });
+  }
+  if (only.includes('held')) {
+    // Third pass: a weapon in hand on the plate. The street's sword, by touch (as scripts/e2e/weapons.ts).
+    const ph = await phone(kit, `${base}/?room=hud-held-${Math.random().toString(36).slice(2, 8)}`, 'held');
+    await walkInto(ph, 1, 'castle-street');
+    const lying = await ph.page
+      .waitForFunction(() => ((window as any).irreverents.drawn.weapons?.loose ?? []).find((l: any) => l.weapon === 'sword') ?? null, null, { polling: 'raf', timeout: 3000 })
+      .then((h: any) => h.jsonValue(), () => null);
+    if (lying) {
+      const w = await ph.page.evaluate(() => (window as any).irreverents.content.characters[(window as any).irreverents.drawn.me.kind].box.w);
+      await standAt(ph, lying.x - w / 2, 1);
+      await sleep(200);
+      await tap(ph, 'interact');
+      await sleep(800);
+    }
+    const held = await ph.page.evaluate(() => (window as any).irreverents.drawn.hud?.slots?.weapon ?? null);
+    console.log('held', held);
+    await three(ph, `held-${held ? 'sword' : 'none'}`);
+    await ph.ctx.close();
+  }
+  if (only.includes('full')) {
+    // Third pass: Switch dimmed with the whole party taken (three pages in one game, as scripts/e2e/switch.ts).
+    const url = `${base}/?room=hud-full-${Math.random().toString(36).slice(2, 8)}`;
+    const A = await phone(kit, url, 'full A');
+    const B = await phone(kit, url, 'full B');
+    const C = await phone(kit, url, 'full C');
+    await sleep(1500);
+    const idle = await A.page.evaluate(() => document.querySelector<HTMLElement>('#actions [data-action="switch"]')?.className ?? '');
+    console.log('switch', idle);
+    await three(A, 'switch-full-party');
+    for (const p of [A, B, C]) await p.ctx.close();
+  }
+  if (only.includes('inset')) {
+    // Third pass: the Go in pill sideways with an iPhone 14's notch and home bar simulated (as scripts/e2e/phone.ts).
+    const ph = await phone(kit, `${base}/?room=hud-inset-${Math.random().toString(36).slice(2, 8)}`, 'inset');
+    await walkInto(ph, 1, 'castle-street');
+    await walkInto(ph, 1, 'courtyard');
+    const c = await ph.page.evaluate(() => {
+      const irr = (window as any).irreverents;
+      const door = irr.content.rooms.courtyard.doors.find((d: any) => d.id === 'to-outpost');
+      return { doorX: door.tx * irr.content.rooms.courtyard.tile, tile: irr.content.rooms.courtyard.tile, w: irr.content.characters[irr.drawn.me.kind].box.w };
+    });
+    await standAt(ph, c.doorX + (c.tile - c.w) / 2, 1);
+    for (const sz of [{ w: 844, h: 390 }, { w: 750, h: 340 }]) {
+      await ph.page.setViewportSize({ width: sz.w, height: sz.h });
+      await ph.cdp.send('Emulation.setSafeAreaInsetsOverride', { insets: { top: 0, left: 47, right: 47, bottom: 21 } }).catch(() => undefined);
+      // Where the override is not honoured, the page's own inset probe is padded by hand (as phone.ts does).
+      await ph.page.evaluate(() => {
+        const s = document.getElementById('safe')!;
+        if (!parseFloat(getComputedStyle(s).paddingBottom)) s.style.padding = '0 47px 21px 47px';
+        dispatchEvent(new Event('resize'));
+      });
+      await sleep(500);
+      const pill = await ph.page.evaluate(() => {
+        const g = document.querySelector('#actions [data-action="interact"] .go')?.getBoundingClientRect();
+        return g ? { bottom: Math.round(g.bottom), screen: innerHeight } : null;
+      });
+      console.log('inset', sz, pill);
+      record[`go-in-inset-${sz.w}x${sz.h}.png`] = { pill, inset: 21 };
+      await ph.page.screenshot({ path: path.join(out, `go-in-inset-${sz.w}x${sz.h}.png`) });
+    }
+    await ph.ctx.close();
   }
   if (only.includes('stage')) {
     const ph = await phone(kit, `${base}/?room=hud-stage-${Math.random().toString(36).slice(2, 8)}`, 'stage');

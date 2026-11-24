@@ -10,10 +10,15 @@ import { look } from './draw/fx.ts';
 // The words never go into the game picture's drawn record (no noteWords):
 // they are page text, as before.
 
-/** A small arched door with a knob, 5 by 8 font pixels ('#' cream, 'k' the knob): "Go in"'s mark. DRAFT: a stand-in. */
-const DOOR = ['.###.', '#...#', '#...#', '#...#', '#..k#', '#...#', '#...#', '#...#'];
+/**
+ * "Go in"'s mark, 7 by 8 font pixels: a solid amber door ('d') in its frame
+ * ('#'), planks ('p'), a cream knob ('k'). DRAFT: a stand-in. Third pass of
+ * the brief: the outlined arch read as the letter "n" ("nGO IN"); a filled
+ * shape in another colour than the words cannot be read as a letter.
+ */
+const DOOR = ['..###..', '.#ddd#.', '#ddpdd#', '#ddpdd#', '#ddpdk#', '#ddpdd#', '#ddpdd#', '#######'];
+const DOOR_COLOURS: Record<string, string> = { '#': '#7a4a22', d: '#e09a1e', p: '#a8641c', k: '#f4f1de' };
 const CREAM = '#f4f1de';
-const KNOB = '#e09a1e';
 
 /**
  * Draws `text` into `el` in the pixel font, about `cssH` CSS px tall
@@ -55,7 +60,7 @@ export function pixelWords(el: HTMLElement, text: string, cssH: number, door = f
     DOOR.forEach((row, r) => {
       for (let i = 0; i < row.length; i++) {
         if (row[i] === '.') continue;
-        g.fillStyle = row[i] === 'k' ? KNOB : CREAM;
+        g.fillStyle = DOOR_COLOURS[row[i]!] ?? CREAM;
         g.fillRect((1 + i) * k, (1 + r) * k, k, k);
       }
     });

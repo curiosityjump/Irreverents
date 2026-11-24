@@ -61,7 +61,8 @@ function makeButton(muted: boolean, onToggle: () => void): HTMLButtonElement {
     'margin:0',
     'border:0',
     'border-radius:50%',
-    'background:radial-gradient(circle, rgba(15,15,28,.5) 15.5px, transparent 16.5px)',
+    // DRAFT (brief phone-hud-legibility, third pass: sideways on the title it was a bare glyph on the night): a pale rim round the dark disc, so it reads as a button on any ground.
+    'background:radial-gradient(circle, rgba(15,15,28,.62) 14.5px, rgba(210,207,224,.5) 15px, rgba(210,207,224,.5) 16px, transparent 16.5px)',
     'color:rgba(244,241,222,.8)',
     'display:flex',
     'align-items:center',

@@ -67,7 +67,10 @@ into their homes.
   shows while pushed (since the phone-HUD brief, 2026-11-24, not at rest: a bare "^" said nothing untold).
 - **Use's word** (`showUseWord`, `.says`/`.go-in`; phone-HUD brief, `DRAFT:`): when Use names what a press does here,
   its picture stays lit and the word sits on a gold-rimmed dark pill across the button's foot ("Go in" with a small
-  arch). Same button, same touch area. A dimmed button (`.idle`, `button-idle.ts`) is still only one that would do nothing.
+  solid amber door, since the third pass: an outlined arch read as the letter "n"); sideways the pill keeps 2 px above the
+  button's foot, which sits on the safe area's bottom edge. Same button, same touch area. A dimmed button (`.idle`,
+  `button-idle.ts`) is still only one that would do nothing; since the third pass it dims by colour (grey, darker) over a
+  dark disc, not by transparency, so it never vanishes against a bright scene.
   Switch stays and dims when nobody is free: a tap there must still say why (`switch-refused`, Step 21).
 - **Every control is at least 44 CSS px** each way at 390×664, 844×390 and 750×340, on the start screen and in play
   (`scripts/e2e/hud.ts`, `hud-targets-*`): the sound button (`audio/index.ts`) and the hint's × paint a 32 px and a

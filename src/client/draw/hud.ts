@@ -45,8 +45,11 @@ const GAP = 2;
 const WELL = 'rgba(15, 15, 28, 0.55)';
 /** DRAFT (brief phone-hud-legibility): game px between friends' columns, a divider line in the middle, so two friends' hearts never run together. */
 const FRIEND_GAP = 5;
-/** DRAFT (brief phone-hud-legibility, second pass: a 5-heart friend's row ran under the next face): a friend's hearts wrap at this many a line, so every heart sits under its own face. */
-const FRIEND_LINE = 3;
+/**
+ * DRAFT (brief phone-hud-legibility, second pass: a 5-heart friend's row ran under the next face): a friend's hearts wrap at this many a line, and the column is as wide as its line, so every heart sits under its own face.
+ * Third pass: at 3 a five-heart friend wrapped 3+2 and looked lumpy; 5 keeps every hero tonight (3 or 5 hearts) on one line.
+ */
+const FRIEND_LINE = 5;
 const DIVIDER = 'rgba(224, 154, 30, 0.45)';
 
 export interface DrawnHud {
@@ -171,7 +174,8 @@ function fit(g: CanvasRenderingContext2D, content: Content, id: string, x: numbe
 
 function face(g: CanvasRenderingContext2D, content: Content, kind: string, x: number, y: number, size: number, alpha: number, out = false): void {
   const before = g.globalAlpha;
-  g.globalAlpha = before * (out ? Math.min(alpha, 0.5) : alpha);
+  // DRAFT (brief phone-hud-legibility, third pass: on GAME OVER every face is out, and at half strength under a dark shade they were almost invisible): an out face keeps at least 0.8 of its strength and goes grey, still recognisable.
+  g.globalAlpha = before * (out ? Math.max(alpha, 0.8) : alpha);
   if (!drawLook(g, content, `hud-face-${kind}`, x, y, { w: size, h: size })) {
     g.fillStyle = '#0f0f1c';
     g.fillRect(x, y, size, size);
@@ -181,7 +185,16 @@ function face(g: CanvasRenderingContext2D, content: Content, kind: string, x: nu
   g.globalAlpha = before;
   // Step 21, hearts: a hero with no hearts is out; its face is greyed over (DRAFT: the shade).
   if (out) {
-    g.fillStyle = 'rgba(70, 70, 80, 0.65)';
+    g.save();
+    g.beginPath();
+    g.rect(x, y, size, size);
+    g.clip();
+    g.globalCompositeOperation = 'saturation';
+    g.fillStyle = '#808080';
     g.fillRect(x, y, size, size);
+    g.globalCompositeOperation = 'source-over';
+    g.fillStyle = 'rgba(40, 40, 56, 0.3)';
+    g.fillRect(x, y, size, size);
+    g.restore();
   }
 }

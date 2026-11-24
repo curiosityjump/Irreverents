@@ -279,26 +279,65 @@ function titlePicture(content: Content): { back: HTMLElement; spacer: HTMLElemen
     const r = back.getBoundingClientRect();
     const [, , w, h] = whole.src;
     const tall = r.height > r.width * 1.2;
-    // DRAFT (brief phone-hud-legibility, second pass: upright, New game overlapped the picture's foot by a few px):
-    // on a tall screen the picture is as wide as lets the choices start under it with the code field still in the upper half.
-    const s = Math.min(r.width / w, r.height / h, tall ? Math.max(0, window.innerHeight * 0.32 - 8 - r.top) / h : Infinity);
-    if (!(s > 0)) return false;
-    // Keep every choice below the wordmark: the spacer ends where the box does on screen.
+    const l = look(content, TITLE_LOOK);
+    if (!l) return false;
+    const dpr = window.devicePixelRatio || 1;
     spacer.style.height = '0px';
     const parent = spacer.parentElement;
     const scrolled = parent ? parent.scrollTop : 0;
     const startsAt = spacer.getBoundingClientRect().top + scrolled;
-    // DRAFT (brief phone-hud-legibility, 2026-11-24: upright, the choices covered the art and the bottom half
-    // was empty): on a tall screen the choices start below the whole picture where that leaves the code field
-    // in the upper half, else as low as it allows; sideways, below the wordmark.
-    // INTENT (Step 17, e2e start-shown): the code field stays in the upper half (the keyboard covers the
-    // lower), so the choices start no lower than about a third of the screen, never above the wordmark.
+    if (tall && mark && r.width > 0 && r.height > 0) {
+      // DRAFT (brief phone-hud-legibility, third pass: upright the picture spanned the width and left the
+      // bottom third bare, and the sound button sat over its corner): upright, the wordmark (its box on the
+      // picture) sits at the top between margins the sound and menu buttons keep; the choices follow on the
+      // night ground; under the last of them the picture's scene below the wordmark fills the screen's
+      // foot, its middle scaled to that space and its sides cropped. Sideways is unchanged (the whole picture).
+      // INTENT (Step 17, e2e start-shown): the choices still start just under the wordmark, so the code
+      // field stays in the upper half (the keyboard covers the lower).
+      const [mx, my, mw, mh] = mark.src;
+      const margin = 48;
+      const sw = Math.max(0.5, Math.min((r.width - 2 * margin) / mw, (r.height * 0.2) / mh));
+      const top = 6;
+      const band = top + mh * sw + 6;
+      spacer.style.height = `${Math.max(0, Math.ceil(r.top + band + 4 - startsAt))}px`;
+      // Where the last choice ends, now the spacer is set (screen px, from the picture's top).
+      let last = band;
+      for (const k of Array.from(parent?.children ?? [])) if (k !== back && k !== spacer) last = Math.max(last, k.getBoundingClientRect().bottom - r.top);
+      c.width = Math.round(r.width * dpr);
+      c.height = Math.round(r.height * dpr);
+      c.style.width = `${c.width / dpr}px`;
+      c.style.height = `${c.height / dpr}px`;
+      const g = c.getContext('2d');
+      if (!g) return false;
+      g.imageSmoothingEnabled = false;
+      g.clearRect(0, 0, c.width, c.height);
+      const sceneTop = Math.round(last + 10);
+      const room = r.height - sceneTop;
+      if (room > 40) {
+        const below = clearTo; // the picture's rows under the wordmark
+        const sc = Math.max(r.width / w, room / (h - below));
+        const srcW = Math.min(w, r.width / sc);
+        const srcH = Math.min(h - below, room / sc);
+        // Bottom-aligned: the path and flowers at the screen's foot.
+        g.drawImage(l.img, l.x + Math.round((w - srcW) / 2), l.y + h - srcH, srcW, srcH, 0, Math.round(sceneTop * dpr), c.width, c.height - Math.round(sceneTop * dpr));
+        // Its top edge fades into the night ground.
+        const fade = Math.round(18 * dpr);
+        const grad = g.createLinearGradient(0, sceneTop * dpr, 0, sceneTop * dpr + fade);
+        grad.addColorStop(0, 'rgba(20, 18, 40, 1)');
+        grad.addColorStop(1, 'rgba(20, 18, 40, 0)');
+        g.fillStyle = grad;
+        g.fillRect(0, Math.round(sceneTop * dpr), c.width, fade);
+      }
+      const wx = Math.round(((r.width - mw * sw) / 2) * dpr);
+      g.drawImage(l.img, l.x + mx - whole.src[0], l.y + my - whole.src[1], mw, mh, wx, Math.round(top * dpr), Math.round(mw * sw * dpr), Math.round(mh * sw * dpr));
+      return true;
+    }
+    // Sideways (and a squarish screen): the whole picture fitted inside the safe area, the choices below the wordmark.
+    const s = Math.min(r.width / w, r.height / h, tall ? Math.max(0, window.innerHeight * 0.32 - 8 - r.top) / h : Infinity);
+    if (!(s > 0)) return false;
     const under = (to: number): number => r.top + to * s + 4;
     const end = tall ? Math.max(under(clearTo), Math.min(under(h), window.innerHeight * 0.32)) : under(clearTo);
     spacer.style.height = `${Math.max(0, Math.ceil(end - startsAt))}px`;
-    const l = look(content, TITLE_LOOK);
-    if (!l) return false;
-    const dpr = window.devicePixelRatio || 1;
     const cw = Math.round(w * s * dpr);
     const ch = Math.round(h * s * dpr);
     c.width = cw;

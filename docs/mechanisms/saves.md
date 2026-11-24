@@ -220,9 +220,13 @@ file, no "exists", the part state and the body's place gone).
   bare address) and **Close**. A `?room=` world has only Back and Close.
 - **The title** is the owner's picture (`content/looks/title.json`, looks
   `start-title-screen` and `start-title-wordmark`), drawn behind the start
-  screen and the link page inside the safe area: whole and against the top,
-  nearest-neighbour at device pixels. A spacer keeps every choice below the
-  wordmark's box; on screens under 420 px high the choices pack to 44 px.
+  screen and the link page inside the safe area, nearest-neighbour at
+  device pixels. Sideways (and squarish): whole and against the top, a spacer
+  keeping every choice below the wordmark's box. Upright (since the phone-HUD
+  third pass): the wordmark's box alone at the top, between 48 px margins the
+  sound and menu buttons keep, the choices under it on the night ground, and
+  the picture's scene under the wordmark filling the screen's foot below the
+  last choice (cropped at the sides, its top fading into the night); on screens under 420 px high the choices pack to 44 px.
   Without the file, the pixel-font title is drawn instead
   (`docs/plan/step-17.md`, "Title screen").
 - Words are the game's pixel font (`content/looks/font.json`,

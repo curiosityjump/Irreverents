@@ -131,8 +131,9 @@ into the shared documents.
   found, a hero freed); `render()` draws the queue last. One at a time, in
   the order queued, two seconds each by default (`BANNER_FRAMES`); a key
   already waiting or up is ignored; at most four wait. Centred across the
-  top, never over the controls; it drops below the party plate when the
-  two would overlap (an upright phone). `INTENT:` it takes no input and
+  top, never over the controls; when it would overlap the party plate it moves
+  beside it on the top row if it still ends short of the view's last 16% (`RIGHT_KEEP`: Switch and sound sit there),
+  else it drops below the plate (an upright phone). `INTENT:` it takes no input and
   stops nothing; it goes by itself. The page's record:
   `drawn.banner` (`{ key, text }`), and `drawn.levels.banner` stays the
   level's name while a `level:` banner is up. The level's name moved here
@@ -153,13 +154,14 @@ into the shared documents.
   Step 21, hearts (`src/client/draw/hearts.ts`, called from `hud.ts`): with
   `content/hearts.json` on, a row of hearts under each face: the viewer's
   the cut `hud-heart-full`/`hud-heart-empty` (9×8, the props builder's), a
-  friend's 5×5 drawn in their colours, wrapped three to a line and centred
+  friend's 5×5 drawn in their colours, wrapped five to a line (every hero
+  tonight has 3 or 5: one line) and centred
   under that friend's face, a faint gold divider between friends (`FRIEND_LINE`,
   `FRIEND_GAP` in `hud.ts`); the plate grows by the taller of the viewer's
   row and the friends' lines. A heart lost since the last frame pops
   (swells to half again its size and fades, 22 frames, clipped to the
-  plate: GAME OVER comes with the last heart); an out hero's face is greyed
-  (`faces[].out`). No digits. The record: `drawn.hearts` (`rows` by kind:
+  plate: GAME OVER comes with the last heart); an out hero's face is greyed: drawn at
+  least 0.8 strong, its colour taken out, a light shade (`faces[].out`; on GAME OVER every face is out and still reads). No digits. The record: `drawn.hearts` (`rows` by kind:
   `left`, `max`; `pops`).
 
 ## Deviations from the contract
@@ -193,7 +195,7 @@ into the shared documents.
 - **Alert pips**: at level 0 nothing is drawn (as before); at 1–3, on a
   strip under the party plate led by a brass warning sign, a rising meter
   of three bars (4, 7, 10 px tall, amber to red when lit, dark sockets
-  when not; the newest flashes as it lights). `PIP_LOOKS` in
+  with a pale rim when not; the newest flashes as it lights). `PIP_LOOKS` in
   `draw/alert.ts` (false since brief phone-hud-legibility's second pass:
   the round red looks read as balloons or hearts) puts back the
   `alert-pip`/`alert-pip-off` looks, 10×10, 12 px apart.

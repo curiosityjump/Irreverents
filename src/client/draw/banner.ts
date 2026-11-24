@@ -19,6 +19,8 @@ const LIGHT = '#fff1a0';
 export const BANNER_FRAMES = 120;
 /** DRAFT: at most this many wait; a flood of the same moment drops the oldest waiting. */
 const MAX_WAITING = 4;
+/** DRAFT (brief phone-hud-legibility, third pass): the share of the view's width, at its right, a banner beside the plate keeps clear of (the Switch and sound buttons sit over it). */
+const RIGHT_KEEP = 0.16;
 
 export interface Banner {
   /** Unique while queued or showing: the same key queued again is ignored. Prefix it with your slice ("level:", "heist:"). */
@@ -64,9 +66,16 @@ export function drawBanners(g: CanvasRenderingContext2D, viewW: number, frame: n
   const tw = textWidth(g, text, 'light');
   const w = tw + 16;
   const h = 16;
-  const x = Math.round((viewW - w) / 2);
   let y = 6 + safeView.top;
-  if (clearOf && x < clearOf.x + clearOf.w && x + w > clearOf.x && y < clearOf.y + clearOf.h) y = clearOf.y + clearOf.h + 3;
+  let x = Math.round((viewW - w) / 2);
+  if (clearOf && x < clearOf.x + clearOf.w && x + w > clearOf.x && y < clearOf.y + clearOf.h) {
+    // DRAFT (brief phone-hud-legibility, third pass: a wider plate pushed "Bandit Camp" down into the play area's sky):
+    // first beside the plate, on the top row, while it ends short of the top-right buttons (Switch, sound: the last
+    // RIGHT_KEEP of the view); only where it does not fit there, below the plate.
+    const beside = clearOf.x + clearOf.w + 4;
+    if (beside + w <= viewW * (1 - RIGHT_KEEP)) x = beside;
+    else y = clearOf.y + clearOf.h + 3;
+  }
   g.fillStyle = INK;
   g.fillRect(x - 1, y, w + 2, h);
   g.fillRect(x, y - 1, w, h + 2);

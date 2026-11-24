@@ -60,7 +60,9 @@ function drawPipStrip(g: CanvasRenderingContext2D, x: number, y: number, slots: 
  */
 const PIP_LOOKS = false;
 const METER = ['#ffd166', '#f78c2a', '#ef233c'];
-const SOCKET = '#3a3566';
+const SOCKET = '#2b2750';
+/** DRAFT (brief phone-hud-legibility, third pass: the unlit sockets were nearly invisible on the strip): an unlit bar has a pale rim, so the meter shows how far it can still climb. */
+const SOCKET_RIM = '#7d77b8';
 
 /** The rising meter: bar i is 4 + 3i px tall (to 10), 8 wide, 12 apart; the newest lit bar flashes white as it lights. */
 function drawMeter(g: CanvasRenderingContext2D, x: number, y: number, level: number, age: number): void {
@@ -70,11 +72,11 @@ function drawMeter(g: CanvasRenderingContext2D, x: number, y: number, level: num
     const bx = x + i * 12;
     const by = y + 10 - h;
     const lit = i < level;
-    g.fillStyle = INK;
+    g.fillStyle = lit ? INK : SOCKET_RIM;
     g.fillRect(bx, by, 8, h);
     const flash = lit && i === level - 1 && age >= 0 && age < GLOW_TICKS && Math.floor(age / 5) % 2 === 0;
     g.fillStyle = flash ? PAPER : lit ? METER[Math.min(METER.length - 1, i)]! : SOCKET;
-    g.fillRect(bx + 1, by + 1, 6, h - 1);
+    g.fillRect(bx + 1, by + 1, 6, lit ? h - 1 : h - 2);
     if (lit && !flash) {
       // A lit bar's top edge catches the light.
       g.fillStyle = 'rgba(255, 255, 255, 0.45)';
