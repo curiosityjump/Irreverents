@@ -55,7 +55,15 @@ declare module '../types.ts' {
      * `cold`: ticks lain out cold so far; `idle`: ticks in a row with nobody to fight;
      * `going`: walking back off to the entry, where they are gone.
      */
-    outpostWave?: { outpost: string; cold: number; idle: number; going: boolean; from?: [number, number] };
+    outpostWave?: {
+      outpost: string;
+      cold: number;
+      idle: number;
+      going: boolean;
+      from?: [number, number];
+      /** DRAFT (outposts with `breakThrough`): ticks wound up so far against a breakable piece ahead of him (outpost-break-through). Read with a default. */
+      breaking?: number;
+    };
     /** On a person of an outpost while fighting: where a hero was last seen. */
     outpostFight?: { x: number; y: number } | null;
   }

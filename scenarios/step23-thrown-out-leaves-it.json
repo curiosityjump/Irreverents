@@ -2,7 +2,7 @@
  "//": "DRAFT (Step 23): beaten in the camp with a weapon in hand, it lies inside. The grappler steals camp-fighter-2's sword (as step23-steal-from-a-carrier) and stands among the camp's fighters. The first fall to them knocks the sword out of its hand inside the camp (laid flat by someone: a hard hit); more falls and it is thrown out into the courtyard (Step 21's rule as it stands, hearts push 2 included: measured at tick 2648): the sword still lies in the camp. No defeat file changes.",
  "id": "step23-thrown-out-leaves-it",
  "gate": null,
- "proves": "beaten in the Bandit Camp holding a weapon, the hero loses it at the first fall (1265) and it lies inside the camp after the hero is out (re-pointed 2026-11-24 by the hearts builder with the orchestrator's go: the camp no longer throws a beaten hero out; what ends the fight now is the grappler's last heart at 3107, its player going on as the infiltrator at 3287, still in the camp, empty-handed, the sword still loose there). Control (watched to fail): content/hearts.json \"on\": false, and nobody runs out of hearts",
+ "proves": "beaten in the Bandit Camp holding a weapon, the hero loses it at the first fall (1407) and it lies inside the camp after the hero is out (re-pointed 2026-11-24 by the hearts builder with the orchestrator's go: the camp no longer throws a beaten hero out; what ends the fight now is the grappler's last heart at 3272, its player going on as the infiltrator at 3452; re-timed 2026-11-24 by the camp-entries builder: the camp's first row now walks in at column 62, off screen, not at 41 beside the hero, so the falls come later, still in the camp, empty-handed, the sword still loose there). Control (watched to fail): content/hearts.json \"on\": false, and nobody runs out of hearts",
  "room": "outpost",
  "players": [
   {
@@ -168,7 +168,7 @@
    ]
   }
  ],
- "ticks": 3300,
+ "ticks": 3500,
  "expect": [
   {
    "fact": "weapon",
@@ -201,10 +201,7 @@
     "hero": "grappler",
     "left": 0
    },
-   "between": [
-    2000,
-    3300
-   ],
+   "between": [2000, 3500],
    "count": [
     1,
     1
@@ -217,10 +214,7 @@
     "entity": "p:a",
     "from": "grappler"
    },
-   "between": [
-    2000,
-    3300
-   ],
+   "between": [2000, 3500],
    "count": [
     1,
     1
@@ -229,18 +223,18 @@
   {
    "fact": "in-room",
    "player": "a",
-   "at": 3300,
+   "at": 3500,
    "room": "outpost"
   },
   {
    "fact": "weapon",
    "player": "a",
-   "at": 3300,
+   "at": 3500,
    "is": null
   },
   {
    "fact": "weapon",
-   "at": 3300,
+   "at": 3500,
    "loose": [
     1,
     1
