@@ -575,3 +575,7 @@ Sent to the thrower's builder as part of its brief's next push; nothing here is 
   `draw/weapons.ts` is the small way. (c) **Not checked:** whether a struck
   hero visibly reacts in `hero-struck-*` (the shot is taken a beat after the
   blow; see slice 1's notes).
+
+## Look at slice 1b's retaken shots (orchestrator session_017WiGzHY5UZsWTLCH8cLm8M, 2026-11-24 ~19:00 UTC)
+
+By a subagent reading all 15 shots in `docs/plan/step-24-shots/1b/` at phone size, against ce0d56c: the shot in flight is now easy to spot and reads as hot in `shot-in-the-air-sideways` and `-upright`; in `shot-in-the-air-small-sideways` it is caught at the release point and merges with the thrower's red hood ("the thrower is on fire"); `hero-struck-*` still shows no reaction on the hero; `at-rest-sideways` is now really 844x390; sideways at rest the thrower is not visible at all (the plate and the top edge: with the plate's builder). These shots predate the camera's second push. Not briefed: a struck hero's visible reaction.

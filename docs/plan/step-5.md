@@ -903,3 +903,13 @@ Builder `session_017WiGzGHrgYYzH2iGQXcGaG`, 2026-11-24, brief
     and `hearts-game-over` 5 of 5 alone with the lean on and 5 of 5 with it
     off (`cameraLean.off` set by an init script on every page): not the
     camera.
+
+## Look at the camera's second push (orchestrator session_017WiGzHY5UZsWTLCH8cLm8M, 2026-11-24 ~19:00 UTC)
+
+By a subagent reading all 13 shots in `docs/plan/step-5-shots/camera/` at phone size; not by playing. Against 778ab9d (re-run all green at that commit, e2e 142 of 142):
+
+- **Holds:** while aiming, the hero is whole and his feet sit about 10 px above the button row at all three sizes; the hero is never under the plate.
+- **Fails sideways: the thrower himself.** In `after/aim-844x390` and `aim-750x340` all that shows of him is a scrap at the top edge beside the plate; the dotted arc is the only sign someone is throwing. Upright is fine. Sent to the plate's builder (`handoff-prompts/plate-clear-of-bodies.md`, its item 2, the mark at the screen's edge).
+- **Held Up, partly:** `after/look-up-844x390` shows the thrower whole, but the hero's feet sit on the bottom edge between the arrows and the buttons and the spent shot is under a button (the builder calls this deliberate). In the depot yard the lift is about 50 px and the beams were already in view; two allies sit under the left-arrow button.
+- **A jump does not move the picture:** no shot pair shows it; the fact `camera-jump-still` is the evidence.
+- The two depot files are 750x340 at 3x, not the 844x390 in their names.
