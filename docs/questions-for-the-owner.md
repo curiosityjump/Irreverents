@@ -16,7 +16,7 @@ the record; `docs/answers-archive.md` holds receipts up to 2026-11-23).
   orchestrator; Vision Partner's doorbell goes only here.
 - **Questions per message the owner wants:** 3 (the default; record the
   owner's own number here, quoted, if they set one).
-- **Next id:** Q-017
+- **Next id:** Q-019
 
 ## How to feed this file
 
@@ -75,7 +75,25 @@ entries group them; they are not entries.
 
 ---
 
-## Open (2)
+## Open (4)
+
+### Q-017 · Stuck in the quarry: which hero, and where?
+- **Asked by:** orchestrator, `session_017WiGzHY5UZsWTLCH8cLm8M`, 2026-11-24 ~19:30 UTC
+- **Question:** You said: "My little guy died and then i got stuck in the quarry. There are platforms you can jump up through, but not back down through, which can close paths." A builder is fixing it now. Two details would help it find the exact spot: which hero you had when you got stuck (the little one, the flyer, or one of the others after he went down), and roughly where in the quarry you were (the road in, the tower, the depot yard, the strongroom, the cave). A few words is plenty, e.g. "flyer, by the tower".
+- **Unblocks:** the stuck-in-the-quarry fix (`handoff-prompts/owner-stuck-in-the-quarry.md`) finds the spot faster; it does not wait on this.
+- **Recommendation:** (Vision Partner's) answer in a few words if you remember; "drop" if not, and the builder checks every one-way platform in the quarry.
+- **Answer goes to:** `handoff-prompts/owner-stuck-in-the-quarry.md`
+- **Source:** `docs/current-directive.md`, "Owed next", item 0
+- **Blocking:** no
+
+### Q-018 · The menu button in the top-left corner: what happened?
+- **Asked by:** orchestrator, `session_017WiGzHY5UZsWTLCH8cLm8M`, 2026-11-24 ~19:30 UTC
+- **Question:** You said: "The menu in the too left corner didn't seem to be working either". When you tapped it, did nothing happen at all, or did the menu open but its choices did nothing when tapped?
+- **Unblocks:** the same fix; it does not wait on this.
+- **Recommendation:** (Vision Partner's) answer "1" (nothing happened) or "2" (opened, choices dead); "drop" if you don't remember.
+- **Answer goes to:** `handoff-prompts/owner-stuck-in-the-quarry.md`
+- **Source:** `docs/current-directive.md`, "Owed next", item 0
+- **Blocking:** no
 
 ### Q-014 · In the outpost stage, where does a game over send you?
 - **Asked by:** orchestrator, `session_017WiGzHhT2apmWHT61rQ65G`, 2026-11-24 UTC (first asked in chat by `session_017WiGzJzo6aZqH4kYxxJsiV`, unanswered)

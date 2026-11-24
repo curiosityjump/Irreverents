@@ -255,6 +255,15 @@ library (impact first; levels you can find, with completion shown), not
 new direction. Being fixed: instant hit on the hitter's screen; Step 14's
 level entrances with discovered indicators.
 
+**Owner, 2026-11-24 ~19:30 UTC, after playing on his phone, to the orchestrator, first-hand (relayed to Vision Partner):**
+> My little guy died and then i got stuck in the quarry. There are platforms you can jump up through, but not back down through, which can close paths. Not a bad thing l, just needs accounted for. The menu in the too left corner didn't seem to be working either
+
+*(Framing, Vision Partner's reading, not yet confirmed:)* keep platforms you
+jump up through, but every path they close needs another way back, so no
+room becomes a dead end (it is also "There is always a way out" in
+`CLAUDE.md`). The stuck run and the menu are bugs, being fixed
+(`handoff-prompts/owner-stuck-in-the-quarry.md`).
+
 Detail: docs 04, 29; level proposals 25, 28 (not canon).
 
 ### Stages: the outpost run
