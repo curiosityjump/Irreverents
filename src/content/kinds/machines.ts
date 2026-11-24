@@ -1,4 +1,5 @@
 import { known } from '../reader.ts';
+import { lookTable } from './looks.ts';
 import type { ContentKind } from '../types.ts';
 
 /**
@@ -47,6 +48,15 @@ export interface Machine {
    * machine. Left out: no blow throws a rider.
    */
   throwRider?: number;
+  /**
+   * Step 20 push 3: the stem of the machine's looks (content/looks/): the
+   * page draws `<look>-idle`, `-moving`, `-crash`, `-wrecked`, and
+   * `-empty` for a standing machine with nobody at the reins when that cut
+   * exists (src/client/draw/machines.ts). Left out, or a look not yet
+   * cut: the body's plain box, as before.
+   * DRAFT: the stems and which cell shows when (docs/decisions-log.md, "Step 20: the look").
+   */
+  look?: string;
 }
 
 declare module '../types.ts' {
@@ -61,7 +71,7 @@ const kind: ContentKind = {
   parse(raw, read) {
     const o = read.object(raw, '');
     if (!o) return null;
-    read.only(o, ['id', 'character', 'speed', 'accel', 'coast', 'brake', 'ramSpeed', 'crashes', 'driverRamSpeed', 'throwRider'], '');
+    read.only(o, ['id', 'character', 'speed', 'accel', 'coast', 'brake', 'ramSpeed', 'crashes', 'driverRamSpeed', 'throwRider', 'look'], '');
     const speed = read.object(o.speed, 'speed');
     if (speed) read.only(speed, ['rider', 'driver'], 'speed');
     const out: Machine = {
@@ -78,6 +88,7 @@ const kind: ContentKind = {
       crashes: read.number(o, 'crashes', '', { min: 1, max: 1000, integer: true }),
       ...(o.driverRamSpeed === undefined ? {} : { driverRamSpeed: read.number(o, 'driverRamSpeed', '', { min: 1, max: 900 }) }),
       ...(o.throwRider === undefined ? {} : { throwRider: read.number(o, 'throwRider', '', { min: 0, max: 1000000 }) }),
+      ...(o.look === undefined ? {} : { look: read.string(o, 'look', '') }),
     };
     return out;
   },
@@ -94,6 +105,8 @@ const kind: ContentKind = {
       const other = by.get(m.character);
       if (other) fail(file, 'character', `"${m.character}" is already the machine of content/machines/${other}.json: one file per character`);
       by.set(m.character, m.id);
+      // Only where looks are loaded at all (the room controls load rooms alone).
+      if (m.look !== undefined && Object.keys(content.looks ?? {}).length > 0 && !lookTable(content).has(`${m.look}-idle`)) fail(file, 'look', `no look "${m.look}-idle" in content/looks/ (the stem's idle cell is the one every state falls back to)`);
       // INTENT: people can be outrun (Step 20, "What's decided"): a person at the reins is slower than every roster hero.
       let slowest: { id: string; speed: number } | undefined;
       for (const id of content.roster?.characters ?? []) {

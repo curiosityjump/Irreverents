@@ -100,7 +100,7 @@ groups) whenever you add one — never update the number from memory.
 - `content/placements/<room id>.json` + `populateRoom` — who and what stands in a room, as bodies nobody plays; scenarios get them with `"placements": true` or their own `entities` (Step 2; Step 4 owns the kind from here).
 
 **Machines** (`docs/mechanisms/machines.md`)
-- `content/machines/<id>.json` + verb `drive` + system `machine-ram` + `ram()` in `src/sim/machines.ts` + `World.machines` — a machine body the stick drives (slow to build, rolls on); at its ramSpeed it shoves bodies by weight (the one ram rule, shared with Step 18), and each crash wears it to a wreck for good (Step 20).
+- `content/machines/<id>.json` + verb `drive` + system `machine-ram` + `ram()` in `src/sim/machines.ts` + `World.machines` — a machine body the stick drives (slow to build, rolls on); at its ramSpeed it shoves bodies by weight (the one ram rule, shared with Step 18), and each crash wears it to a wreck for good (Step 20). Push 2 the seat (Grab the driver, Use gets in, Jump out); push 3 the look (`src/client/draw/machines.ts`, the cells by state).
 - `c.seat` + `src/sim/use/get-in.ts` + systems `machine-seat`, `machine-driven` — a person at the reins (Grab pulls him out), Use gets in (the hero's body becomes the machine by `become`), Jump, a heavy blow or the wreck gets you out as the hero you went in as; a bandit drives at a hero he sees, slower than any hero (Step 20).
 
 **Powers** (`docs/mechanisms/powers.md`)

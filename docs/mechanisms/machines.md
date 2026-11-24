@@ -3,7 +3,8 @@
 **Reference.** Open before touching `content/machines/**`,
 `src/content/kinds/machines.ts`, `src/sim/machines.ts`, `src/sim/verbs/drive.ts`,
 `src/sim/systems/` files named `machine-*`, the `ram-wagon` character or its
-tuning set, `content/rooms/test-machine.json` or `scenarios/step20-*.json`.
+tuning set, `content/rooms/test-machine.json`, `scenarios/step20-*.json` or
+`src/client/draw/machines.ts`.
 
 ## Why it exists
 
@@ -126,7 +127,9 @@ second slam rule. Nothing of that slice is built.
 (push 1's commit lists them): `step20-ram-launches-by-weight` (control:
 `ramSpeed` 400), `step20-ram-snaps-the-post` (control: `speed.rider` 290),
 `step20-barricade-breaks-and-rolls-on` (control: the barrier's `breakSpeed`
-400), `step20-wears-to-a-wreck` (control: `crashes` 100). Push 2:
+600, above the top speed), `step20-wears-to-a-wreck` (control: `crashes`
+100). Push 3 re-timed these and `step20-jump-out-at-speed` for 560 px/s,
+`accel` 300 and 16 crashes, and watched each control fail again. Push 2:
 `step20-pull-driver-get-in-grappler` and `-infiltrator` (control: the grab
 and throw left out), `step20-jump-out-at-speed` (control: no Jump),
 `step20-hit-throws-rider` (control: `throwRider` 13000) with its companion
@@ -136,7 +139,22 @@ and throw left out), `step20-jump-out-at-speed` (control: no Jump),
 real-server check `step20-machine` (controls: the machine not stood again
 for a rider gone; an effect sent to the rider while driving).
 
-## Still to come (builder A push 3, then builder B)
+## The look (Step 20, builder A, push 3)
 
-The look (`src/client/draw/machines.ts`: the cells, the rider's face on the
-plate) and the camp.
+| Piece | What it does |
+|---|---|
+| `look` in `content/machines/<id>.json` | the stem of the machine's cells in `content/looks/` (`ride-wagon`); the check refuses a stem with no `-idle` cell. Left out: the plain box |
+| `src/client/draw/machines.ts` | `drawMachineBody`, asked first by `draw/entities.ts` for every body: `-wrecked` once worn through; `-crash` for 15 ticks after any `c.impact` (a ram, a wall, a blow), jolted back a pixel for 4; `-moving` (2 frames) while rolling; `-empty` for a standing machine whose `c.seat.driver` is null, falling back to `-idle` until that cell is cut; else `-idle`. Bottom-centred on the box (the 48 by 44 cell over the 32 by 26 box), mirrored when facing left (the cells face right). `drawnMachines()` is what the last frame drew |
+| the seated driver | a person at the reins of a machine drawn from its cells is not drawn, nor his shadow: the cells' baked rider stands for him (`seatedInDrawnMachine`) |
+| a rider | their body is the machine's kind, so it is drawn by the same cells, with the player's own mark over it as for any player |
+| the plate (`draw/hud.ts`) | a rider's own face is the hero they went in as (`World.machines[..].hero`), and that hero is not listed again among the others |
+
+**Stand-ins, `DRAFT:`** (`docs/decisions-log.md`, "Step 20: the look"): the
+baked goggled rider reads as whoever drives, bandit or hero; an empty wagon
+shows a rider too until `ride-wagon-empty` (asked of the art builder) is cut;
+wear shows only as the wreck, never a number. Shots of each:
+`docs/plan/step-20-shots/`.
+
+## Still to come (builder B)
+
+The camp: `docs/plan/step-20.md` and `handoff-prompts/loop-vehicles-b.md`.

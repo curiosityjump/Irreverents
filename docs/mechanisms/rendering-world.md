@@ -104,7 +104,8 @@ into the shared documents.
   from `draw/levels.ts` (Step 14 slice A's own drawing, now a queued entry).
 - **The party plate** (Step 19, `src/client/draw/hud.ts`): top-left, the
   `hud-plate` nine-slice; the viewer's own face first, lit
-  (`hud-face-<kind>`, else a square in the kind's colour); then three
+  (`hud-face-<kind>`, else a square in the kind's colour; a rider's
+  face is the hero they went in as, from `World.machines`, Step 20); then three
   slots beside it, `power`, `cargo`, `condition`, each a dark well until a
   slice fills it with `fillHudSlot(slot, (world, content, me) => lookId)`
   from its own draw file (the look is fitted into 12×12); then the rest of

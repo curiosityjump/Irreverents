@@ -85,7 +85,9 @@ export function drawHud(g: CanvasRenderingContext2D, world: World, content: Cont
   drawn = null;
   if (!me) return undefined;
   const members = world.party ?? content.party.members;
-  const others = members.filter((k) => k !== me.kind);
+  // Step 20 push 3: a rider's body is the machine's kind; the plate shows the hero they went in as (docs/mechanisms/machines.md).
+  const mine = riddenHero(world, me) ?? me.kind;
+  const others = members.filter((k) => k !== mine);
   const slots = {} as Record<HudSlot, string | null>;
   for (const s of HUD_SLOTS) slots[s] = fillers[s]?.(world, content, me) ?? null;
 
@@ -100,7 +102,7 @@ export function drawHud(g: CanvasRenderingContext2D, world: World, content: Cont
     g.fillRect(x + 1, y + 1, w - 2, h - 2);
   }
   // The viewer's own face, lit.
-  face(g, content, me.kind, x + PAD, y + PAD, FACE, 1);
+  face(g, content, mine, x + PAD, y + PAD, FACE, 1);
   let cx = x + PAD + FACE + GAP;
   // The slots, beside it: an empty slot is a dark well.
   for (const s of HUD_SLOTS) {
@@ -112,7 +114,7 @@ export function drawHud(g: CanvasRenderingContext2D, world: World, content: Cont
     cx += SLOT + 1;
   }
   cx += GAP;
-  const faces: DrawnHud['faces'] = [{ kind: me.kind, me: true, played: true }];
+  const faces: DrawnHud['faces'] = [{ kind: mine, me: true, played: true }];
   for (const k of others) {
     const played = memberTaken(world, k, me.id);
     face(g, content, k, cx, y + PAD + (FACE - SMALL), SMALL, played ? 0.9 : 0.35);
@@ -121,6 +123,12 @@ export function drawHud(g: CanvasRenderingContext2D, world: World, content: Cont
   }
   drawn = { faces, slots, box: { x, y, w, h } };
   return drawn.box;
+}
+
+/** The hero a rider went in as (World.machines, Step 20), or undefined for a body that rides nothing. */
+function riddenHero(world: World, me: Entity): string | undefined {
+  for (const s of Object.values(world.machines ?? {})) if (s.rider === me.id && s.hero) return s.hero;
+  return undefined;
 }
 
 /** A look fitted into a size×size square, keeping its shape, centred. */

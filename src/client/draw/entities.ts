@@ -8,6 +8,7 @@ import { drawLookIn } from './room-parts.ts';
 import { predictedLook, predictHits } from './impact.ts';
 import { carriedBy, drawSprite, drawsOwnRage, forget, lyingOut, rageFlash, remember, swingWasThrow } from './sprites.ts';
 import type { Drew } from './sprites.ts';
+import { beginMachines, drawMachineBody, seatedInDrawnMachine } from './machines.ts';
 
 /** One thing the renderer put on screen this frame, in room pixels. Part of the debug object (docs/mechanisms/network.md). */
 export interface Drawn {
@@ -48,13 +49,14 @@ export interface PlayerView {
 export function drawEntities(g: CanvasRenderingContext2D, world: World, content: Content, roomId: string, ox: number, oy: number, view?: PlayerView): void {
   useContent(content);
   forget(world);
+  beginMachines(); // Step 20 push 3 (draw/machines.ts)
   const room = content.rooms[roomId];
   // Shadows first, under every body (the contract's draw order), only once the looks exist.
   if (room) {
     for (const e of world.entities) {
       if (e.room !== roomId) continue;
       const kind = content.characters[e.kind];
-      if (!kind) continue;
+      if (!kind || seatedInDrawnMachine(world, content, e)) continue;
       remember(world, e);
       drawShadow(g, world, room, kind.box, e, ox, oy);
     }
@@ -138,7 +140,8 @@ export function drawEntities(g: CanvasRenderingContext2D, world: World, content:
     if (rec && dot) rec.marked = hiddenMark;
     const pose = hit?.waiting && !e.c.flying ? { state: 'hurt' as const, since: hit.since } : undefined;
     if (fast(e)) drawTrail(g, world, e, x, y, kind.box);
-    const drew = drawSprite(g, world, content, e, x, y, { alpha: away ? AWAY_ALPHA : 1, tint, pose, flash: hit?.flash });
+    // Step 20 push 3: a machine is drawn from its looks (draw/machines.ts); else the sheet, as before.
+    const drew = drawMachineBody(g, world, content, e, x, y, away ? AWAY_ALPHA : 1) ?? drawSprite(g, world, content, e, x, y, { alpha: away ? AWAY_ALPHA : 1, tint, pose, flash: hit?.flash });
     if (rec) rec.state = drew?.state ?? (lyingOut(e) ? 'down' : undefined);
     if (drew) {
       tops.set(e.id, drew.head);
@@ -178,7 +181,8 @@ export function drawEntities(g: CanvasRenderingContext2D, world: World, content:
   // Round 3 (gap 4): a body in its beat, hurt, launched or predicted hit is drawn after the
   // rest (in front of whoever hit it), for the beat's length.
   const front = (e: Entity): boolean => !!e.c.beat || (!!e.c.flying && !!e.c.impact && world.tick - e.c.impact.tick < 30) || predictedLook(world, e.id) !== null;
-  const order = world.entities.filter((e) => e.room === roomId && content.characters[e.kind]);
+  // Step 20 push 3: a person at the reins of a machine drawn from its looks is the cells' baked rider (DRAFT, draw/machines.ts).
+  const order = world.entities.filter((e) => e.room === roomId && content.characters[e.kind] && !seatedInDrawnMachine(world, content, e));
   for (const e of [...order.filter((e) => !front(e)), ...order.filter(front)]) {
     const carrier = heldBy.get(e.id);
     if (carrier && byId.get(carrier)?.room === roomId) continue;

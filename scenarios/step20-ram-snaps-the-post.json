@@ -1,14 +1,66 @@
 {
   "id": "step20-ram-snaps-the-post",
-  "proves": "a hero driving the wagon flat out (340 px/s, above the outpost's breakSpeed of 300) into the horn post snaps it at once, by the post's own rule, and rolls on past it (control: the wagon's rider top speed set to 290, under the post's breakSpeed: it rams the post and the post stands)",
+  "proves": "a hero driving the wagon flat out (560 px/s, above the test post's breakSpeed of 300) into the horn post snaps it at once, by the post's own rule, and rolls on past it (control: the wagon's rider top speed set to 290, under the post's breakSpeed: it rams the post and the post stands). Re-timed for push 3's numbers (speed.rider 560, accel 300): the post snaps at tick 116; the run stops before the parked wagon at column 54",
   "room": "test-machine",
   "placements": true,
-  "players": [{ "id": "a", "character": "ram-wagon", "spawn": 0 }],
-  "inputs": [{ "player": "a", "from": 0, "to": 200, "x": 1 }],
-  "ticks": 200,
+  "players": [
+    {
+      "id": "a",
+      "character": "ram-wagon",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 160,
+      "x": 1
+    }
+  ],
+  "ticks": 160,
   "expect": [
-    { "fact": "event-where", "event": "machine-crash", "where": { "machine": "p:a", "target": "tm-post" }, "between": [130, 160], "count": [1, 1] },
-    { "fact": "event-where", "event": "signaler-broken", "where": { "outpost": "test-machine", "signaler": "tm-post", "by": "p:a" }, "between": [130, 160], "count": [1, 1] },
-    { "fact": "position", "player": "a", "at": 200, "x": [720, 820] }
+    {
+      "fact": "event-where",
+      "event": "machine-crash",
+      "where": {
+        "machine": "p:a",
+        "target": "tm-post"
+      },
+      "between": [
+        105,
+        125
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "signaler-broken",
+      "where": {
+        "outpost": "test-machine",
+        "signaler": "tm-post",
+        "by": "p:a"
+      },
+      "between": [
+        105,
+        125
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "position",
+      "player": "a",
+      "at": 160,
+      "x": [
+        740,
+        820
+      ]
+    }
   ]
 }

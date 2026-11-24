@@ -1,6 +1,6 @@
 {
   "id": "step20-jump-out-at-speed",
-  "proves": "Jump gets a rider out at any speed: the grappler gets in an empty wagon, drives it flat out (340 px/s), and a fresh press of Jump puts them on their feet beside it as the grappler, free to walk; the empty wagon rolls on by itself at speed and bursts the barrier with nobody in it (doc 08: 'bail out at the last moment'). Control (watched to fail): the Jump left out, and the grappler is still the wagon",
+  "proves": "Jump gets a rider out at any speed: the grappler gets in an empty wagon, drives it flat out (560 px/s), and a fresh press of Jump puts them on their feet beside it as the grappler, free to walk; the empty wagon rolls on by itself at speed and bursts the barrier with nobody in it (doc 08: 'bail out at the last moment'). Control (watched to fail): the Jump left out, and the grappler is still the wagon. Re-timed for push 3's numbers (speed.rider 560, accel 300): out at tick 150, the empty wagon bursts the barrier at 175",
   "room": "test-machine",
   "players": [
     {
@@ -79,17 +79,17 @@
       "player": "a",
       "at": 210,
       "x": [
-        550,
-        610
+        700,
+        790
       ]
     },
     {
       "fact": "velocity",
       "entity": "w",
-      "at": 200,
+      "at": 170,
       "vx": [
-        280,
-        340
+        500,
+        560
       ]
     },
     {
@@ -100,8 +100,8 @@
         "by": "w"
       },
       "between": [
-        200,
-        240
+        165,
+        185
       ],
       "count": [
         1,

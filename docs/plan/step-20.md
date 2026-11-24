@@ -140,7 +140,6 @@ Nothing is reachable by a player until builder B's push 2. Notes:
   `handoff-prompts/step-5-e2e-flakes.md`). build, check, check:deployed and
   check:live green at a2bee99.
 
-<<<<<<< HEAD
 **Builder A, push 2 (the seat).** Landed: `c.seat`, `machine-seat`,
 `machine-driven`, the Use entry `get-in` (order 120, "Get in"), the
 `memberTaken` read, `World.machines` rider fields, events `machine-taken`,
@@ -171,7 +170,6 @@ Nothing is reachable by a player until builder B's push 2. Notes:
   `step20-ram-snaps-the-post`, `-barricade-breaks-and-rolls-on`,
   `-wears-to-a-wreck` (it counts 8), `-jump-out-at-speed` and the post
   control (`speed.rider` 290 becomes any number under 450 closing speed).
-=======
 **Builder B, push 1 (the camp's run).** The Bandit Camp runs on east to
 column 87 (`docs/mechanisms/outposts.md`, "Step 20: the camp's run"). No
 wagon is placed yet (push 2, after A's seat). Notes:
@@ -201,4 +199,47 @@ wagon is placed yet (push 2, after A's seat). Notes:
 - Screenshots: `docs/plan/step-20-shots/run-*.png` (the page's own hero
   moved east by the debug world: a look, not a route).
 
->>>>>>> 571fcef (Step 20 builder B push 1: the Bandit Camp runs on east two screens, things to smash and a cache behind a timber barricade)
+
+**Builder A, push 3 (the look, and B's two asks)** (`session_017WiGzK3BxWQHTRLZHSmnYK`). Landed:
+`src/client/draw/machines.ts` (asked first by `draw/entities.ts`; the
+brief said one line in `render.ts`, but drawing the machine in the bodies'
+own pass keeps shadows, the player's mark and `drawn` as for any body), an
+optional `look` on a machine file, the rider's hero face on the plate
+(`draw/hud.ts`), and `speed.rider` 560, `accel` 300, `crashes` 16. Notes:
+- **B's numbers:** B's push 1 (the camp's run, 116c5d8) landed while this
+  push was in its gate; its scenarios pass with them (`npm run check`), but
+  the run with the camp's people in it was not driven here (asked B by
+  message to run it and say). B's push left merge markers in this file;
+  resolved here keeping every builder's notes.
+- **Re-timed B's `step20-camp-run-breaks-through`** (B's file; the new
+  numbers moved it, and `main` must stay green): the same events, earlier
+  (barrier 128, crate 135, stall 1 142, stall 2 157 now burst by the wagon
+  itself, barricade 176, the cache's step 192); control now `breakSpeed`
+  600 on the barricade, watched to fail. Told B. The barricade's note in
+  `content/rooms/outpost.json` still says the wagon runs at 340 (B's). Re-timed
+  `step20-ram-snaps-the-post` (snaps at 116), `-barricade-breaks-and-rolls-on`
+  (bursts at 150; the reverse now starts at 175, short of the east wall),
+  `-wears-to-a-wreck` (there and back twice; the 16th crash, the east wall,
+  at 984) and `-jump-out-at-speed`; every control watched to fail again
+  (the barricade's control is now `breakSpeed` 600).
+- **An empty wagon shows a rider:** `ride-wagon-empty` is asked of the art
+  builder (`session_017WiGzEN1QbSnHzXNqV4XSt`); the code draws it as soon as
+  the cut is in `content/looks/rides.json`.
+- A person at the reins is not drawn (the cells' baked rider is him), so
+  his sight band (`draw/sight.ts`) shows from an unseen body; his mood marks
+  still draw over his box.
+- The `rides` wave field: offered to B by message (default: B makes it,
+  beside the camp's rows). Not changed here.
+- Seen on a real page (a local server, one phone-sized page by keys, shots
+  in `docs/plan/step-20-shots/`): the bandit in it, pulled out and thrown,
+  GET IN, riding (plate shows the grappler), rolling, a ram (crash cell,
+  stars), Jump out. **Not seen:** the wreck cell on a page (the scenario
+  proves the wreck; the cell is chosen by the same `machineLook`); two
+  pages at once (the `step20-machine` check covers two connections).
+- The plate's face, with a failing control: the same page run on the
+  pre-change `hud.ts` lists `ram-wagon` first while riding (a square); with
+  it, `grappler`.
+- Push 3's e2e: 2 runs, both failed on known flakes only
+  (`handoff-prompts/step-5-e2e-flakes.md`): run 1 `t-throw-friend`,
+  `s-throw-friend`, `s-after` (the same throw); run 2 `h1`. build and check
+  green. Run 3, after rebasing onto 035498e: e2e green.

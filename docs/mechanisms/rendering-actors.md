@@ -37,6 +37,12 @@ the items below to their homes.
   every 24 ticks out of step per body, raised over anything carried.
   `fx-slash` for a swing: placed from the body's middle forward, mirrored
   by facing, scaled in quarter steps by `attackReach + box.w / 2`.
+- **`machines.ts`** (Step 20): a machine body (a kind with a
+  `content/machines/` file that names a `look`) is drawn from its cells
+  instead of a sheet; `entities.ts` asks it first, so shadows, the
+  player's mark and `PlayerView.drawn` are as for any body. A person at
+  the reins of such a machine is not drawn (the cells' baked rider is
+  him). `docs/mechanisms/machines.md`, "The look".
 - **`impact.ts`**: `fx-dust` puffs (three, or two for a soft impact) and an
   `fx-hit` star at the point of impact; the shake is unchanged.
 - **`npcs.ts`**: `mood-2` / `mood-3` marks; a bark in the `bark` nine-slice

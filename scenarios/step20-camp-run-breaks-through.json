@@ -1,6 +1,6 @@
 {
   "id": "step20-camp-run-breaks-through",
-  "proves": "the camp's new run (content/rooms/outpost.json, Step 20) with nobody of the camp in it: the ram wagon driven flat out east from the doorway (the step's tiles cleared so a wagon can start there, as the seat that puts a hero in one in the camp is not built yet) bursts the light barrier (47) itself, sends the market's crate flying ahead, bursts the first stall (55), the flung crate bursts the second (64), and the wagon bursts the timber barricade (75) at its top speed and is still rolling at speed in the cache behind it, before it crashes into the cache's step (84). Control: the barricade's breakSpeed set to 400, above the wagon's top speed (340): it holds, the wagon stops dead at it and never reaches the cache",
+  "proves": "the camp's new run (content/rooms/outpost.json, Step 20) with nobody of the camp in it: the ram wagon driven flat out east from the doorway (the step's tiles cleared so a wagon can start there, as the seat that puts a hero in one in the camp is not built yet) bursts the light barrier (47) itself, sends the market's crate flying ahead, bursts the first stall (55), the second (64) bursts (by the wagon at 560 px/s; by the flung crate at the old 340), and the wagon bursts the timber barricade (75) at its top speed and is still rolling at speed in the cache behind it, before it crashes into the cache's step (84). Control: the barricade's breakSpeed set to 400, above the wagon's top speed (560: 600): it holds, the wagon stops dead at it and never reaches the cache. Re-timed by builder A push 3 for speed.rider 560, accel 300 (builder B's ask): barrier 128, crate 135, stall 1 142, stall 2 157, barricade 176, the cache's step 192",
   "room": "outpost",
   "placements": false,
   "players": [
@@ -30,8 +30,8 @@
         "by": "p:a"
       },
       "between": [
-        155,
-        175
+        120,
+        135
       ],
       "count": [
         1,
@@ -46,8 +46,8 @@
         "target": "crate"
       },
       "between": [
-        165,
-        190
+        128,
+        145
       ],
       "count": [
         1,
@@ -62,8 +62,8 @@
         "by": "p:a"
       },
       "between": [
-        180,
-        200
+        135,
+        150
       ],
       "count": [
         1,
@@ -77,8 +77,8 @@
         "part": "camp-stall-2"
       },
       "between": [
-        195,
-        225
+        150,
+        165
       ],
       "count": [
         1,
@@ -93,8 +93,8 @@
         "by": "p:a"
       },
       "between": [
-        235,
-        255
+        170,
+        185
       ],
       "count": [
         1,
@@ -104,16 +104,16 @@
     {
       "fact": "velocity",
       "player": "a",
-      "at": 260,
+      "at": 182,
       "vx": [
-        300,
-        345
+        500,
+        560
       ]
     },
     {
       "fact": "position",
       "player": "a",
-      "at": 262,
+      "at": 184,
       "x": [
         1230,
         1340
