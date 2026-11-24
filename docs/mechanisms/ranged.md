@@ -63,7 +63,7 @@ While `c.rangedAim` is on him: a dotted arc from his hand, stepped by the
 sim's own fall (`shotArc`: `moveLoose` on a scratch entity) to its first
 landing, filling in over the aim, and a cross where it comes down. The held
 shot is draw/weapons.ts's, on his `content/grips.json` row.
-`window.irreverents.drawn.ranged.aims` for the checks. On the page a body is
+`window.irreverents.drawn.ranged.aims` for the checks (each with `top`, the arc's highest room y, added for Step 5's camera fact). Sideways, the camera leans up to show him and his arc (`rendering-world.md`, "The camera leans up"). On the page a body is
 drawn `interpDelayMs` in the past but a new loose shot at its first sample, so
 the drawn lead is about `aim` − 100 ms.
 

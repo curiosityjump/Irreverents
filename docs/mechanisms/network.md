@@ -372,7 +372,7 @@ start screen shows, `src/client/start.ts`; absent in a `?room=` world),
 which the frame loop fills each frame with what it just put on screen:
 `entities` (`id`, `player`, `kind`, `x`,`y` as read, `px`,`py` the pixel
 drawn, `color`, `mine`; Step 5 added `state`, the animation state it was
-drawn in, and `out`, knocked out as the page has it: `scripts/e2e/knocked-out.ts`), `me`, `room`, `camera`, `scale`, `status`,
+drawn in, and `out`, knocked out as the page has it: `scripts/e2e/knocked-out.ts`), `me`, `room`, `camera` (Step 5: after the lean; `lean` says how far and why, `rendering-world.md`), `scale`, `status`,
 `statusText`, `touchControls`, `upright`, `hint`. Nothing in the game reads
 it back. **Checks assert on `drawn`, never on server state.**
 

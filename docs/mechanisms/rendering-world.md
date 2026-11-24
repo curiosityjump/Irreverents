@@ -79,6 +79,41 @@ into the shared documents.
   room, 57% room, nothing below (before 21/57/21); castle street 24/76/0
   (before 12/76/12). Whether "above" is sky or wall is the ground lane's
   `outside.above` per room.
+  That is where the camera **rests**; Step 5's lean (next) moves it up
+  from there for a while.
+- **The camera leans up** (Step 5, `src/client/camera.ts`, numbers in
+  `content/camera.json`; `DRAFT:`, decisions-log 2026-11-24, "Sideways,
+  the camera looks up at what is aimed at you"). Each page's own camera,
+  drawing only, after `roomOrigin`, in a room taller than the view:
+  - **An aim:** while a thrower in the room has `c.rangedAim` (and
+    `aimHold` s after), the view's top eases up to `aimAbove` px over his
+    head and `aimMargin` over his arc's highest point. The hero's feet may
+    then go into the controls' band, `aimGround` px above the view's
+    bottom, only where no touch control in the lower half is beside them
+    (the boxes are read from the page's `[data-stick]`/`[data-action]`
+    layout, twice a second or on a resize); else above that control's top.
+    If the party plate (the last frame's `drawHud` box) would cover him,
+    the view's left is scanned up to his width plus the plate's either
+    way, the hero kept `heroSide` px inside, for the most of him shown.
+  - **Looking up:** the stick held up (< −0.5) while standing for
+    `lookStickAfter` s, or rising faster than `riseSpeed`, leans it up
+    (for `lookHold` s after) until the feet sit `lookGround` px above the
+    controls' band.
+  - It eases (`easeRate`, at most `maxSpeed` px/s) and is drawn on whole
+    pixels; a hero falling while it leans is followed at once; a new room
+    starts unleant. `drawn.lean` gives `{ x, y, lift, shift, why }`;
+    `window.irreverents.cameraLean.off` is the e2e control.
+  - Measured (sideways, the gallery floor at column 15 in front of the
+    thrower): at rest the view's top was room y 50 at 844×390 and 51 at
+    750×340, with him at y 22–48: wholly off the top. Leant: y 12 / 10,
+    he, his raised shot and the whole arc in view, ≤ 6% of him under the
+    plate. The depot's yard, stick up: rows 6–13 instead of 11–18 (the
+    roof route in view); the tower's floor gains one row. Upright the
+    gallery is shorter than the view: no change.
+  - Not built: a thrower beside the picture is not brought into it; the
+    lean is only upward and sideways only for the plate.
+  - e2e fact `camera-aim-in-picture` (`scripts/e2e/camera.ts`); shots
+    `docs/plan/step-5-shots/camera/` (`before/`, `after/`).
 - **Looks** for doors (`door-enter-<w>x<h>`), parts (`part:<room>:<part>`
   with `:down`/`:open`/`:broken`, then `plate-up`/`plate-down`,
   `gate-closed`/`gate-open`, `crack-1`/`crack-2`, `rubble`,

@@ -441,6 +441,8 @@ async function main(): Promise<void> {
       await (await import('./e2e/plates.ts')).plateFacts({ browser, devices, base, out, fact, errors, shots: path.join(out, 'plates') });
       // Step 24's fact (ranged-telegraph): through the opened gate into the Hall gallery, the thrower's aim and arc drawn a full aim before his shot leaves (docs/mechanisms/ranged.md).
       await (await import('./e2e/ranged.ts')).rangedFacts({ browser, devices, base, out, fact, errors, shots: path.join(root, 'docs/plan/step-24-shots') });
+      // Step 5's camera fact (camera-aim-in-picture): sideways, the camera leans up and the thrower's wind-up and arc are drawn inside the picture (docs/mechanisms/rendering-world.md, "The camera leans up").
+      await (await import('./e2e/camera.ts')).cameraFacts({ browser, devices, base, out, fact, errors, shots: path.join(root, 'docs/plan/step-5-shots/camera') });
       // Step 9's facts (power-*): the villain drawn carrying his power, seen by a phone walking into the street by touch (docs/mechanisms/powers.md).
       await (await import('./e2e/powers.ts')).powerFacts({ browser, devices, base, out, fact, errors, shots: path.join(out, 'powers') });
       // Step 16's facts (quarry-*): into the quarry by touch, and across its road onto the ridge (docs/plan/step-16.md, signal 7).

@@ -22,8 +22,8 @@ const EVERY = 3;
 
 /** What the page drew for throwers this frame, for the checks (window.irreverents.drawn.ranged). */
 export interface DrawnRanged {
-  /** Each aiming thrower: his entity id, the tick his aim began, and where the arc ends (room px, the shot's middle). */
-  aims: { id: string; at: number; x: number; y: number; dots: number }[];
+  /** Each aiming thrower: his entity id, the tick his aim began, and where the arc ends (room px, the shot's middle); `top` (additive, Step 5's camera fact): the arc's highest point, room y. */
+  aims: { id: string; at: number; x: number; y: number; dots: number; top: number }[];
 }
 let drawn: DrawnRanged = { aims: [] };
 export function drawnRanged(): DrawnRanged {
@@ -61,7 +61,7 @@ export function drawRanged(g: CanvasRenderingContext2D, world: World, content: C
     g.fillStyle = DOT;
     g.fillRect(x - 3, y, 7, 1);
     g.fillRect(x, y - 3, 1, 7);
-    now.aims.push({ id: e.id, at: aim.at, x: end.x, y: end.y, dots: shown - 1 });
+    now.aims.push({ id: e.id, at: aim.at, x: end.x, y: end.y, dots: shown - 1, top: Math.min(...pts.map((p) => p.y)) });
   }
   drawn = now;
 }

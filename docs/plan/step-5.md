@@ -686,3 +686,58 @@ tries missed, 10 of 10 green. The 8-12 px is the game as tuned, not a
 finding: the infiltrator reaches its 128 px/s in 49 ms (`runAccel` 2600) and
 stops in 2 px (`runDecel` 3600), about 7 px for a 60 ms touch, plus a frame or
 two of the touch's end reaching the page.
+
+## Camera
+
+Builder `session_017WiGzGHrgYYzH2iGQXcGaG`, 2026-11-24, brief
+`handoff-prompts/camera-looks-at-what-matters.md`. Answers the first line of
+"Carried here" above and the Step 24 builder's flag (27490b6).
+
+- **Measured before** (built `main` at 010354d, two phone pages by touch
+  through the courtyard gate, A on the gallery floor at column 15 while the
+  thrower aims; shots `docs/plan/step-5-shots/camera/before/`): sideways
+  844×390 (view 361×167, reserve 25) the view's top was room y 50, 750×340
+  (375×170, reserve 29) y 51; the thrower stands at y 22–48 and his arc peaks
+  above that: **he and his raised shot are wholly off the top, the arc's
+  upper dots too; only the descent and the landing cross show.** Upright
+  (234×252) the gallery (192 px) fits: all drawn. The quarry tower and the
+  depot were measured from their room data with the real `roomOrigin` (not
+  walked to by a page): tower floor, view rows 22–29, the next three ledges
+  (rows 23–27) in view; depot yard, rows 11–18 (the camera shows the tunnel
+  below), the roof route (rows 8–9) and its chimney (row 7) off the top.
+- **Built:** `src/client/camera.ts` + `content/camera.json`
+  (`docs/mechanisms/rendering-world.md`, "The camera leans up").
+- **After** (`docs/plan/step-5-shots/camera/after/`): the gallery's view
+  top y 12 (844×390) / 10 (750×340), with the view's left slid to 0 so the
+  plate covers at most 6% of him; the thrower, his shot held up, the whole
+  arc and the cross drawn; A's hero whole, its feet at the picture's
+  bottom between the move pad and the grab button, under none. Depot yard,
+  stick held up: rows 6–13, the roof route in. Tower floor: one more row.
+- **Proof:** e2e fact `camera-aim-in-picture` (`scripts/e2e/camera.ts`).
+  Green 3 of 3 alone after the move to column 14; the full `npm run e2e`
+  before it: 133 ok, 1 FAIL (this fact, the case above). Control
+  `E2E_CAMERA_OLD=1` (the lean off) watched to fail: thrower drawn
+  at y −29, arc top at −23. The camera's largest one-frame move in the
+  gallery was 5 px over 310 frames (bound 12).
+- **Weakest / not verified:** never on a real iPhone; whether the feet at
+  the picture's very bottom during an aim feels wrong is the owner's to say
+  (`aimGround`); the rising lean also fires on every jump in a room taller
+  than the view (castle street, gallery), easing up and back after
+  `lookHold`; that may read as bobbing: watch for it on the phone. The
+  climb in the tower was not walked by a page (the scenario harness has no
+  camera). Sideways the plate still hides part of a thrower standing right
+  under it when the room's edge stops the slide, and **at 750×340 a hero at
+  column 15 a few px east stands beside the grab button once the view slides
+  left, so the camera keeps the hero clear and leaves the thrower about a
+  third under the plate** (seen once in the full e2e run: 36%); the fact
+  stands at column 14 for that reason. The plate's place is the HUD's,
+  not this brief's.
+- **Full e2e after rebasing onto 0201fea:** 132 ok, 2 FAIL, neither this
+  brief's: `t-throw-friend` (B thrown toward a heavy crate 27 px away, the
+  open cause listed above) and `beaten-gone` (310 taps in 150 s, nobody
+  defeated). `beaten-gone` passed in the run before the rebase and twice
+  alone on this build (22 and 49 taps); it reads no screen positions. For
+  their owners; not re-timed.
+- **Rebased again onto b86dbcd (the HUD's second pass, bigger buttons
+  sideways):** build, check ok; full `npm run e2e` 134 of 134 green, this
+  fact included (thrower 0% under the plate).

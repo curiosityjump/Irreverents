@@ -36,6 +36,7 @@ import { drawnParts, setHeardRooms } from './draw/room-parts.ts';
 import { drawnPowers, foundSourceIcons } from './draw/powers.ts';
 import { drawnWeapons } from './draw/weapons.ts';
 import { drawnRanged } from './draw/ranged.ts';
+import { lastLean, leanControl } from './camera.ts';
 import { drawnBeaten, watchBeatenEvents } from './draw/beaten.ts';
 import { levelProgress } from '../sim/levels.ts';
 import { stageBest } from '../sim/stage.ts';
@@ -124,6 +125,8 @@ const debug = {
   net: null as unknown as NetClient['stats'],
   /** Step 17: what the start screen shows (src/client/start.ts); absent in a `?room=` world. */
   start: undefined as StartRecord | undefined,
+  /** Step 5's camera lean (camera.ts): the camera fact's control sets `off` to draw the camera as before it. */
+  cameraLean: leanControl,
   /** The view (render.ts): scripted checks read it, and the clearance fact's control sets `reserve` to 0 to watch it fail. */
   view,
   /** The switch gap: this page's own refused switches so far, and the last reason ("none-free", "no-fit"), from its local step's `switch-refused` events. */
@@ -159,6 +162,8 @@ const debug = {
     weapons: { loose: [], held: [] } as ReturnType<typeof drawnWeapons>,
     /** Step 24: each aiming thrower this frame drew an arc for, and where it ends (src/client/draw/ranged.ts). */
     ranged: { aims: [] } as ReturnType<typeof drawnRanged>,
+    /** Step 5: how the camera leaned this frame (camera.ts): the view's top, how far above where it rests, and why. */
+    lean: { x: 0, y: 0, lift: 0, shift: 0, why: 'none' } as ReturnType<typeof lastLean>,
     /** Step 5: defeated bad guys' poofs this frame, every one this page was told went, and who is drawn dazed (src/client/draw/beaten.ts). */
     beaten: { poofs: [], gone: [], dazed: [] } as ReturnType<typeof drawnBeaten>,
     banner: null as ReturnType<typeof drawnBanner>,
@@ -344,7 +349,8 @@ function play(worldName: string): void {
   let offlineReported = false;
   let frameNo = 0;
   function frame(): void {
-    const simEvents = net.update(readInput()); // audio hook (Step 8)
+    const input = readInput();
+    const simEvents = net.update(input); // audio hook (Step 8)
     for (const ev of simEvents) if (ev.type === 'switch-refused') debug.switchRefused = { count: debug.switchRefused.count + 1, reason: ev.reason };
     const me = net.me();
     // What this player sees: everyone else as received, their own character
@@ -368,7 +374,7 @@ function play(worldName: string): void {
     }
     watchGameOver(net.latest(), frameNo, (room) => `the start of ${Object.values(content.levels ?? {}).find((l) => l.rooms.includes(room))?.name ?? 'the level'}`); // Step 21: the GAME OVER card (draw/game-over.ts)
     setHeardRooms(net.heardRooms()); // Step 3: plates drawn from the server's copy too (draw/room-parts.ts, plateAsDrawn)
-    const camera = render(g, shown, content, me.room, { me: me.id, frame: frameNo, drawn: seen });
+    const camera = render(g, shown, content, me.room, { me: me.id, frame: frameNo, drawn: seen }, input.y); // the stick: the camera looks up (camera.ts)
     const result = { camera, drawn: seen };
     lastCamera = camera;
     const usePrompted = usePrompt(content, shown, me);
@@ -415,6 +421,7 @@ function play(worldName: string): void {
     d.powers = drawnPowers();
     d.weapons = drawnWeapons();
     d.ranged = drawnRanged();
+    d.lean = lastLean();
     d.beaten = drawnBeaten();
     d.banner = drawnBanner();
     d.alert = drawnAlert();

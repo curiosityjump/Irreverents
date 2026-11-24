@@ -31,6 +31,7 @@ import { drawPrizeStands } from './draw/heist.ts';
 import { drawGameOver } from './draw/game-over.ts';
 import { drawStage, stageScreenUp } from './draw/stage.ts';
 import { useHere } from '../sim/use.ts';
+import { aimsIn, controlBoxes, lean } from './camera.ts';
 
 /** DRAFT: the internal resolution the art on order assumes (docs/plan/step-1.md). */
 export const VIEW_W = 320;
@@ -42,6 +43,8 @@ export const VIEW_H = 180;
  */
 export const view = { w: VIEW_W, h: VIEW_H, reserve: 0 };
 const SKY = '#1b1b2f';
+/** The party plate as last drawn (game px of the view): the camera reads it (camera.ts). */
+let plateBox: { x: number; y: number; w: number; h: number } | undefined;
 
 /**
  * One frame: the room, then everything in it. Each layer is its own file in draw/.
@@ -56,7 +59,7 @@ const SKY = '#1b1b2f';
  * doors and working parts, back decoration, bodies, effects, front
  * decoration, marks over heads and speech, screen furniture.
  */
-export function render(g: CanvasRenderingContext2D, world: World, content: Content, roomId: string, pv?: PlayerView): { x: number; y: number } {
+export function render(g: CanvasRenderingContext2D, world: World, content: Content, roomId: string, pv?: PlayerView, stickY = 0): { x: number; y: number } {
   const W = view.w;
   const H = view.h;
   watchWords(g); // every string drawn into the picture is recorded (draw/fx.ts, takeWords)
@@ -70,7 +73,33 @@ export function render(g: CanvasRenderingContext2D, world: World, content: Conte
   const box = mine ? content.characters[mine.kind]?.box : undefined;
   const focus = mine ? { x: mine.x + (box?.w ?? 0) / 2, y: mine.y + (box?.h ?? 0) / 2 } : undefined;
   const feet = mine && box ? mine.y + box.h : undefined;
-  const { ox, oy } = roomOrigin(room, W, H, focus, view.reserve, feet);
+  const rest = roomOrigin(room, W, H, focus, view.reserve, feet);
+  let ox = rest.ox;
+  let oy = rest.oy;
+  // Step 5: the page's own camera leans upward from there, easing, toward a thrower's aim, or
+  // above a hero climbing or holding the stick up (camera.ts; DRAFT, numbers in content/camera.json).
+  if (mine && box && mine.room === roomId) {
+    const now = performance.now() / 1000;
+    const leant = lean({
+      cfg: content.camera,
+      room: roomId,
+      roomH: room.h * room.tile,
+      viewW: W,
+      viewH: H,
+      reserve: view.reserve,
+      roomW: room.w * room.tile,
+      baseY: -rest.oy,
+      baseX: -rest.ox,
+      hero: { x: mine.x, w: box.w, top: mine.y, feet: mine.y + box.h, vy: mine.vy, onGround: mine.onGround },
+      stickY,
+      aims: aimsIn(world, content, roomId),
+      controls: controlBoxes(W, H, now),
+      covers: plateBox ? [plateBox] : [],
+      now,
+    });
+    ox = -leant.x;
+    oy = -leant.y;
+  }
   const backdrop = backdropOf(room, content);
   if (backdrop) drawBackdrop(g, backdrop, room, -ox, -oy, W, H, SKY);
   else {
@@ -122,6 +151,7 @@ export function render(g: CanvasRenderingContext2D, world: World, content: Conte
   drawCompletionRow(g, world, content, W, pv);
   // Step 19: the party plate, then the one banner queue (draw/banner.ts), clear of it; last, as screen furniture.
   const plate = pv ? drawHud(g, world, content, mine, pv.frame) : undefined;
+  plateBox = plate; // the camera keeps a thrower out from under it next frame (camera.ts)
   if (pv) drawBanners(g, W, pv.frame, plate);
   if (pv) drawLegendPicture(g, content, W, plate); // Step 7 push 3: a new legend's picture under its banner (draw/hall.ts)
   // Step 13: a freed hero's face flashing beside the plate (draw/recruits.ts).
