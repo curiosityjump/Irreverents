@@ -835,3 +835,11 @@ before you quote it.
 - **Every other scenario passes on its old inputs**, the skirmisher's and the flyer's quiet sneaks too (they stay on row 8, out of his band at dy 43 and 44). Star times unchanged: the fastest run is still the skirmisher's 1735.
 - **Shots:** `step-22-shots/push5-road-top-plank-{sideways-844x390,upright-390x664}.png`, looked at: the plank reads as a second timber plank above the walk, over the heavy and his band.
 - **Doubt, not changed:** by arithmetic, not run: the flyer's ledge looks reachable today from the west end of row 8 by a skirmisher's jump (48 px up; it rose 56 in the traced run). Its room note says only flapping reaches it. That was already true before this change; logged, not fixed.
+
+### Lead review, item 1, the road's top plank (f6a6ee8)
+
+- `npm run build` is ok, and all 130 `step16/21/22/23-*` scenarios pass.
+- Control, run by me (`quarry-road.json` without the top plank): `step22-unseen-clear` fails, with no unseen clear.
+- The window, swept by me (`QSWEEP=8 node scripts/stage-quiet.ts scripts/stage-routes/quiet-infiltrator.json`): 84 of the waits pass, 312 to 395 in a row, about 1.4 s. The pass over the heavy is now one a person can make.
+- Looked at `push5-road-top-plank-sideways-844x390.png`: the hero is on the top plank, over the heavy, under the flyer's ledge.
+- The builder's change to my ruling, a plank at row 7 instead of moving all of row 8, is accepted. It is measured, and it keeps the small heroes' sneaks.
