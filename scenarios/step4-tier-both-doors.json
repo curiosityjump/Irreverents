@@ -1,6 +1,6 @@
 {
   "id": "step4-tier-both-doors",
-  "proves": "Step 4's town tiers: help comes from both sides (the owner, 2026-11-24: 'Alarms should spawn more enemies ... that come in from the sides'). In the castle street the guard's whistle brings level 2's row (two: one each side of the place reported, here the shop at column 14, each at the nearest entry at least 12 tiles off it: the west door's column 1 and column 26) and the shopkeeper's next bell call brings level 3's (three, alternating sides, starting on the other side: west, east, west, the second at the west entry a tile nearer); each stands at its entry, inside the room, as it walks in. Control (watched to fail): the dispatch file lists only the entries east of the shop, and every arrival comes in east of it",
+  "proves": "Step 4's town tiers: help comes by both street doors. In the castle street the guard's whistle brings level 2's row (two: one by the west door, one by the east) and the shopkeeper's next bell call brings level 3's (three, in turn: west, east, west, the second by the west door a tile further in); each stands beside its door, inside the room, as it walks in. Control (watched to fail): the dispatch file lists only the west door, and every arrival comes in by it",
   "room": "castle-street",
   "placements": true,
   "players": [
@@ -74,14 +74,13 @@
       "room": "castle-street",
       "at": 2918,
       "x": [
-        408,
-        448
+        728,
+        752
       ],
       "count": [
         1,
         1
-      ],
-      "arrivals": true
+      ]
     },
     {
       "fact": "event-where",
@@ -119,13 +118,12 @@
       ],
       "x": [
         16,
-        48
+        56
       ],
       "count": [
         2,
         2
-      ],
-      "arrivals": true
+      ]
     },
     {
       "fact": "people",
@@ -135,14 +133,13 @@
         3345
       ],
       "x": [
-        408,
-        448
+        712,
+        752
       ],
       "count": [
         1,
         1
-      ],
-      "arrivals": true
+      ]
     }
   ]
 }

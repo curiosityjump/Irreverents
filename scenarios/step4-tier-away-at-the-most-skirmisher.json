@@ -1,6 +1,6 @@
 {
   "id": "step4-tier-away-at-the-most-skirmisher",
-  "proves": "Step 4's town tiers, there is always a way out (CLAUDE.md; D-019): solo, the skirmisher takes goods in the shopkeeper's view, the bell brings the guard, the skirmisher hits him and the fight brings the alert to 3, level 3's row walks in from both sides (the owner's 'from the sides': here one by the west door, between the hero and the way out) and the street at its cap of 8 (counting arrivals who followed a hero out); then the skirmisher runs west, jumping, past the west arrivals, and gets out of the street by the west door; no blow lands on them from tick 3483 on, nobody keeps them in view, the alert cools to 0 and every guard the rows brought walks out and is gone. Control (watched to fail): the guards' runSpeed (the arrivals' body) above the skirmisher's",
+  "proves": "Step 4's town tiers, there is always a way out (CLAUDE.md; D-019): solo, the skirmisher takes goods in the shopkeeper's view, the bell brings the guard, the skirmisher hits him and the fight brings the alert to 3, level 3's row walks in and the street at its cap of 8; then the skirmisher runs west, jumping, and gets out of the street by the west door; no blow lands on them from tick 3605 on, nobody keeps them in view, the alert cools to 0 and every guard the rows brought walks out and is gone. Control (watched to fail): the guards' runSpeed (the arrivals' body) above the skirmisher's",
   "room": "castle-street",
   "placements": true,
   "players": [
@@ -137,17 +137,8 @@
       "room": "castle-street",
       "at": 3277,
       "count": [
-        7,
+        8,
         8
-      ]
-    },
-    {
-      "fact": "people",
-      "arrivals": true,
-      "at": 3277,
-      "count": [
-        5,
-        5
       ]
     },
     {
@@ -159,8 +150,8 @@
         "fromDoor": "to-throne-room"
       },
       "between": [
-        3483,
-        3483
+        3605,
+        3605
       ],
       "count": [
         1,
@@ -174,7 +165,7 @@
         "target": "p:a"
       },
       "between": [
-        3483,
+        3605,
         10700
       ],
       "count": [

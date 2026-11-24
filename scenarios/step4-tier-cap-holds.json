@@ -1,6 +1,6 @@
 {
   "id": "step4-tier-cap-holds",
-  "proves": "Step 4's town tiers (doc 24, bounded crowds): a dispatch row waits while it would take the street past its cap. In the castle street the hero fights on for ninety seconds (a step east or west before each swing, so the rows from both sides do not simply shove them out by the west door) and the whistles and the bell are let finish: after level 3's row (8 people: 3 placed and 5 arrived) calls keep completing (four by 5200, the alert at 3 to 6600), but no further row walks in and the street never holds more than 8. Control (watched to fail): the cap off (npcDispatchCapOn 0), and the last row walks in again past it",
+  "proves": "Step 4's town tiers (doc 24, bounded crowds): a dispatch row waits while it would take the street past its cap. In the castle street the hero fights on for ninety seconds and the whistles and the bell are let finish: after level 3's row (8 people: 3 placed and 5 arrived) calls keep completing, but no further row walks in and the street never holds more than 8. Control (watched to fail): the cap off (npcDispatchCapOn 0), and the last row walks in again past it",
   "room": "castle-street",
   "placements": true,
   "players": [
@@ -35,23 +35,11 @@
     },
     {
       "player": "a",
-      "from": 3370,
-      "to": 3394,
-      "x": 1
-    },
-    {
-      "player": "a",
       "from": 3400,
       "to": 3404,
       "hold": [
         "attack"
       ]
-    },
-    {
-      "player": "a",
-      "from": 3490,
-      "to": 3514,
-      "x": -1
     },
     {
       "player": "a",
@@ -63,23 +51,11 @@
     },
     {
       "player": "a",
-      "from": 3610,
-      "to": 3634,
-      "x": 1
-    },
-    {
-      "player": "a",
       "from": 3640,
       "to": 3644,
       "hold": [
         "attack"
       ]
-    },
-    {
-      "player": "a",
-      "from": 3730,
-      "to": 3754,
-      "x": -1
     },
     {
       "player": "a",
@@ -91,23 +67,11 @@
     },
     {
       "player": "a",
-      "from": 3850,
-      "to": 3874,
-      "x": 1
-    },
-    {
-      "player": "a",
       "from": 3880,
       "to": 3884,
       "hold": [
         "attack"
       ]
-    },
-    {
-      "player": "a",
-      "from": 3970,
-      "to": 3994,
-      "x": -1
     },
     {
       "player": "a",
@@ -119,23 +83,11 @@
     },
     {
       "player": "a",
-      "from": 4090,
-      "to": 4114,
-      "x": 1
-    },
-    {
-      "player": "a",
       "from": 4120,
       "to": 4124,
       "hold": [
         "attack"
       ]
-    },
-    {
-      "player": "a",
-      "from": 4210,
-      "to": 4234,
-      "x": -1
     },
     {
       "player": "a",
@@ -147,23 +99,11 @@
     },
     {
       "player": "a",
-      "from": 4330,
-      "to": 4354,
-      "x": 1
-    },
-    {
-      "player": "a",
       "from": 4360,
       "to": 4364,
       "hold": [
         "attack"
       ]
-    },
-    {
-      "player": "a",
-      "from": 4450,
-      "to": 4474,
-      "x": -1
     },
     {
       "player": "a",
@@ -175,23 +115,11 @@
     },
     {
       "player": "a",
-      "from": 4570,
-      "to": 4594,
-      "x": 1
-    },
-    {
-      "player": "a",
       "from": 4600,
       "to": 4604,
       "hold": [
         "attack"
       ]
-    },
-    {
-      "player": "a",
-      "from": 4690,
-      "to": 4714,
-      "x": -1
     },
     {
       "player": "a",
@@ -203,23 +131,11 @@
     },
     {
       "player": "a",
-      "from": 4810,
-      "to": 4834,
-      "x": 1
-    },
-    {
-      "player": "a",
       "from": 4840,
       "to": 4844,
       "hold": [
         "attack"
       ]
-    },
-    {
-      "player": "a",
-      "from": 4930,
-      "to": 4954,
-      "x": -1
     },
     {
       "player": "a",
@@ -231,23 +147,11 @@
     },
     {
       "player": "a",
-      "from": 5050,
-      "to": 5074,
-      "x": 1
-    },
-    {
-      "player": "a",
       "from": 5080,
       "to": 5084,
       "hold": [
         "attack"
       ]
-    },
-    {
-      "player": "a",
-      "from": 5170,
-      "to": 5194,
-      "x": -1
     },
     {
       "player": "a",
@@ -259,23 +163,11 @@
     },
     {
       "player": "a",
-      "from": 5290,
-      "to": 5314,
-      "x": 1
-    },
-    {
-      "player": "a",
       "from": 5320,
       "to": 5324,
       "hold": [
         "attack"
       ]
-    },
-    {
-      "player": "a",
-      "from": 5410,
-      "to": 5434,
-      "x": -1
     },
     {
       "player": "a",
@@ -287,23 +179,11 @@
     },
     {
       "player": "a",
-      "from": 5530,
-      "to": 5554,
-      "x": 1
-    },
-    {
-      "player": "a",
       "from": 5560,
       "to": 5564,
       "hold": [
         "attack"
       ]
-    },
-    {
-      "player": "a",
-      "from": 5650,
-      "to": 5674,
-      "x": -1
     },
     {
       "player": "a",
@@ -315,23 +195,11 @@
     },
     {
       "player": "a",
-      "from": 5770,
-      "to": 5794,
-      "x": 1
-    },
-    {
-      "player": "a",
       "from": 5800,
       "to": 5804,
       "hold": [
         "attack"
       ]
-    },
-    {
-      "player": "a",
-      "from": 5890,
-      "to": 5914,
-      "x": -1
     },
     {
       "player": "a",
@@ -343,23 +211,11 @@
     },
     {
       "player": "a",
-      "from": 6010,
-      "to": 6034,
-      "x": 1
-    },
-    {
-      "player": "a",
       "from": 6040,
       "to": 6044,
       "hold": [
         "attack"
       ]
-    },
-    {
-      "player": "a",
-      "from": 6130,
-      "to": 6154,
-      "x": -1
     },
     {
       "player": "a",
@@ -371,23 +227,11 @@
     },
     {
       "player": "a",
-      "from": 6250,
-      "to": 6274,
-      "x": 1
-    },
-    {
-      "player": "a",
       "from": 6280,
       "to": 6284,
       "hold": [
         "attack"
       ]
-    },
-    {
-      "player": "a",
-      "from": 6370,
-      "to": 6394,
-      "x": -1
     },
     {
       "player": "a",
@@ -399,23 +243,11 @@
     },
     {
       "player": "a",
-      "from": 6490,
-      "to": 6514,
-      "x": 1
-    },
-    {
-      "player": "a",
       "from": 6520,
       "to": 6524,
       "hold": [
         "attack"
       ]
-    },
-    {
-      "player": "a",
-      "from": 6610,
-      "to": 6634,
-      "x": -1
     },
     {
       "player": "a",
@@ -427,23 +259,11 @@
     },
     {
       "player": "a",
-      "from": 6730,
-      "to": 6754,
-      "x": 1
-    },
-    {
-      "player": "a",
       "from": 6760,
       "to": 6764,
       "hold": [
         "attack"
       ]
-    },
-    {
-      "player": "a",
-      "from": 6850,
-      "to": 6874,
-      "x": -1
     },
     {
       "player": "a",
@@ -455,23 +275,11 @@
     },
     {
       "player": "a",
-      "from": 6970,
-      "to": 6994,
-      "x": 1
-    },
-    {
-      "player": "a",
       "from": 7000,
       "to": 7004,
       "hold": [
         "attack"
       ]
-    },
-    {
-      "player": "a",
-      "from": 7090,
-      "to": 7114,
-      "x": -1
     },
     {
       "player": "a",
@@ -483,23 +291,11 @@
     },
     {
       "player": "a",
-      "from": 7210,
-      "to": 7234,
-      "x": 1
-    },
-    {
-      "player": "a",
       "from": 7240,
       "to": 7244,
       "hold": [
         "attack"
       ]
-    },
-    {
-      "player": "a",
-      "from": 7330,
-      "to": 7354,
-      "x": -1
     },
     {
       "player": "a",
@@ -511,23 +307,11 @@
     },
     {
       "player": "a",
-      "from": 7450,
-      "to": 7474,
-      "x": 1
-    },
-    {
-      "player": "a",
       "from": 7480,
       "to": 7484,
       "hold": [
         "attack"
       ]
-    },
-    {
-      "player": "a",
-      "from": 7570,
-      "to": 7594,
-      "x": -1
     },
     {
       "player": "a",
@@ -539,23 +323,11 @@
     },
     {
       "player": "a",
-      "from": 7690,
-      "to": 7714,
-      "x": 1
-    },
-    {
-      "player": "a",
       "from": 7720,
       "to": 7724,
       "hold": [
         "attack"
       ]
-    },
-    {
-      "player": "a",
-      "from": 7810,
-      "to": 7834,
-      "x": -1
     },
     {
       "player": "a",
@@ -567,23 +339,11 @@
     },
     {
       "player": "a",
-      "from": 7930,
-      "to": 7954,
-      "x": 1
-    },
-    {
-      "player": "a",
       "from": 7960,
       "to": 7964,
       "hold": [
         "attack"
       ]
-    },
-    {
-      "player": "a",
-      "from": 8050,
-      "to": 8074,
-      "x": -1
     },
     {
       "player": "a",
@@ -595,23 +355,11 @@
     },
     {
       "player": "a",
-      "from": 8170,
-      "to": 8194,
-      "x": 1
-    },
-    {
-      "player": "a",
       "from": 8200,
       "to": 8204,
       "hold": [
         "attack"
       ]
-    },
-    {
-      "player": "a",
-      "from": 8290,
-      "to": 8314,
-      "x": -1
     },
     {
       "player": "a",
@@ -623,12 +371,6 @@
     },
     {
       "player": "a",
-      "from": 8410,
-      "to": 8434,
-      "x": 1
-    },
-    {
-      "player": "a",
       "from": 8440,
       "to": 8444,
       "hold": [
@@ -637,23 +379,11 @@
     },
     {
       "player": "a",
-      "from": 8530,
-      "to": 8554,
-      "x": -1
-    },
-    {
-      "player": "a",
       "from": 8560,
       "to": 8564,
       "hold": [
         "attack"
       ]
-    },
-    {
-      "player": "a",
-      "from": 8650,
-      "to": 8674,
-      "x": 1
     },
     {
       "player": "a",
@@ -692,7 +422,7 @@
       "area": "castle-street",
       "between": [
         3340,
-        6600
+        8800
       ],
       "is": 3
     },

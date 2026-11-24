@@ -67,7 +67,7 @@ in a `World` field or a module variable.
 | 55 | `npc-call` | An upset good person pleads, walks to a bell and rings it; overlays the input `npc-act` wrote. A completed call is the only thing that raises the alert. |
 | 56 | `alert-respond` | Guards answer a completed call: go to the reported place, search, chase a hero they see, go back at alert 0. Overlays input too. |
 | 57 | `alert-whistle` | A guard on duty who sees a hero do something more blows his whistle; finished, it is a completed call (the town's tiers, below). Overlays input. |
-| 58 | `alert-dispatch` | Each time an area's alert goes up, walks that level's row of its dispatch table in at both sides of the place reported (or by its doors), under its cap; at alert 0 walks them out and removes them. |
+| 58 | `alert-dispatch` | Each time an area's alert goes up, walks that level's row of its dispatch table in by its doors, under its cap; at alert 0 walks them out and removes them. |
 | 60 | `npc-interact` | A player's fresh press of `interact` uses the nearest thing within `npcInteractReach`: emits `did` with the thing's deed; a `once` thing is marked taken. A thing with a `keeper` works only while the keeper stands within `npcKeeperReach` of it. Which thing, and whether, is the Use arbiter's (`useHere`, `src/sim/use.ts`; its `thing` entry, `src/sim/use/thing.ts`); this system does the deed. A body standing in an enter doorway gets nothing here: the arbiter's door entry asks first. |
 | 100 | `verbs` (Step 2) | Bodies act on their input. |
 | 500 | `physics` | |
@@ -424,24 +424,11 @@ home area has a dispatch file:
   when nothing is queued (`DRAFT:` no banked flood). At alert 0 the queue
   is dropped.
 - A queued row walks in while the room's people (bodies with `c.npc`,
-  out cold or not), plus the area's arrivals who followed a hero into
-  another room, plus the row fit under `cap` (`npcDispatchCapOn`, a
-  control switch). An empty row sends nobody.
-- **From the sides** (the owner, 2026-11-24, `DRAFT:`): with `entries`
-  (floor tiles `[column, row]`, validated: open, on a floor, not in a walk
-  door), person i walks in at the outposts' `entryFor` rule, copied in
-  `alert-dispatch.ts`: split left and right of the place reported (the
-  alert entity's `x`, D-065), on each side the nearest entry at least
-  `entryAway` tiles off, else the farthest there; sides alternate, each
-  row starting on the other side; a second at one entry stands a tile
-  nearer the place reported. He faces the place reported, and his
-  `c.arrival.door` is the table door nearest his entry (the one he leaves
-  by). `announce[row]` (the last repeating) is the banner words when the
-  row walks in (`src/client/draw/alarm-banner.ts`; default "The guard is
-  here!").
-- With no `entries`: person i comes by `doors[i % doors.length]`, a walk
-  door on the west or east edge, on the tile beside it inside the room (a
-  later one by the same door one tile further in), facing in. Ids are
+  out cold or not) plus the row fit under `cap`
+  (`npcDispatchCapOn`, a control switch). An empty row sends nobody.
+- Person i comes by `doors[i % doors.length]`, a walk door on the west or
+  east edge, on the tile beside it inside the room (a later one by the
+  same door one tile further in), facing in. Ids are
   `<area>:help<n>:<i>`, n counting rows walked in (on `c.dispatch.sent`
   of the alert entity; deterministic). Each gets `c.npc` (home the area),
   `c.arrival { area, door }`, `c.respond` heading to the alert entity's
@@ -473,9 +460,7 @@ page's first frame). `drawn.alert` `{ level, whistle }` is the record the
 checks read.
 
 **The castle street's table:** doors `to-throne-room` and `to-courtyard`,
-cap 8, rows: level 1 nobody, level 2 two guards, level 3 three; entries at
-columns 1, 18, 22, 26, 30, 36, 44 and 46 of the floor, `entryAway` 12
-(about half a phone screen: the edges of the view).
+cap 8, rows: level 1 nobody, level 2 two guards, level 3 three.
 
 **Checks** (`scenarios/step4-tier-*.json`, all in the real street):
 `-whistle-brings-row`, `-whistle-stopped`, `-no-whistle-unprovoked`,

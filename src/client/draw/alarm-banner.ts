@@ -39,11 +39,7 @@ export function watchAlarmEvents(content: Content, latest: { tick: number; event
       const said = content.outposts[String(ev.outpost)]!.announce ?? [];
       text = said.length > 0 ? said[Math.min(Number(ev.row) || 0, said.length - 1)]! : WAVE;
     }
-    else if (ev.type === 'dispatch-arrived' && ev.area === room) {
-      // DRAFT (Step 4, town tiers): a street row can name itself too (content/dispatch/ `announce`, the last repeating).
-      const said = content.dispatch?.[room]?.announce ?? [];
-      text = said.length > 0 ? said[Math.min(Number(ev.row) || 0, said.length - 1)]! : ROW;
-    }
+    else if (ev.type === 'dispatch-arrived' && ev.area === room) text = ROW;
     if (!text) continue;
     queueBanner({ key: `alarm:${ev.type}:${ev.tick}`, text, frames: FRAMES, color: RED });
     shown = [...shown, text].slice(-8);
