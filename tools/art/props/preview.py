@@ -71,7 +71,8 @@ def add_light(im, pic, x0, y0):
                 im.putpixel((x0 + x, y0 + y), (min(255, R_ + r * a // 255), min(255, G_ + g * a // 255), min(255, B_ + b * a // 255), A_))
 
 
-def room_scene(rid, R, sheets, looks, all_rooms, glows=True):
+def room_scene(rid, R, sheets, looks, all_rooms, glows=True, pressed=False):
+    """pressed: plates drawn down (their own look sunk 4 px, as room-parts.ts does) and gates open."""
     r = all_rooms[rid]
     rows = r['rows']; W, H = len(rows[0]) * 16, len(rows) * 16
     sky, wall, body, lip = THEME[rid]
@@ -143,7 +144,13 @@ def room_scene(rid, R, sheets, looks, all_rooms, glows=True):
     for p in r.get('parts') or []:
         tx, ty, w, h = rect(r, 'part', p['id'])
         own = look('part:%s:%s' % (rid, p['id']))
-        if p['kind'] == 'plate':
+        if p['kind'] in ('plate', 'gate') and own is not None:
+            # a part's own look (props-asks-2): bottom-centred on its tiles; a pressed plate sinks 4 px, clipped
+            pic = look('part:%s:%s:%s' % (rid, p['id'], 'down' if p['kind'] == 'plate' else 'open')) if pressed else own
+            sink = 4 if pressed and p['kind'] == 'plate' else 0
+            pic = pic.crop((0, 0, pic.width, pic.height - sink))
+            im.alpha_composite(pic, (tx * 16 + (w * 16 - pic.width) // 2, (ty + h) * 16 - pic.height))
+        elif p['kind'] == 'plate':
             im.alpha_composite(look('plate-up'), (tx * 16, ty * 16))
         elif p['kind'] == 'gate':
             for j in range(h):

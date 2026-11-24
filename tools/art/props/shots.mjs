@@ -46,6 +46,9 @@ const ROUND3 = [
   ['courtyard', 'courtyard', 14, 7],
   ['street-bell', 'castle-street', 21, 10],
   ['courtyard-gate', 'courtyard', 21, 7],
+  // props-asks-2: the undercroft's stone plate and floor grate (beside the grate; on the plate)
+  ['undercroft-grate', 'undercroft', 12, 12],
+  ['undercroft-on-plate', 'undercroft', 18, 12],
 ];
 
 async function sound(page) {

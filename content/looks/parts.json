@@ -30,6 +30,10 @@
     "crack-2": {"src": [80, 160, 16, 16]},
     "rubble": {"src": [96, 160, 16, 16]},
     "shop-counter": {"src": [112, 160, 16, 16]},
-    "shop-goods": {"src": [128, 160, 8, 8]}
+    "shop-goods": {"src": [128, 160, 8, 8]},
+    "part:undercroft:stone-plate": {"src": [0, 176, 64, 16]},
+    "part:undercroft:stone-plate:down": {"src": [64, 176, 64, 16]},
+    "part:undercroft:grate": {"src": [128, 176, 32, 16]},
+    "part:undercroft:grate:open": {"src": [0, 192, 32, 16]}
   }
 }

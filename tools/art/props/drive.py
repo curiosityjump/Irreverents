@@ -315,3 +315,51 @@ def level_pie(n):  # noqa: F811 (replaces the cut above: the plate's rings run o
                     c = col('gold', 2) if dx + dy < 0 else col('gold', 1)
             put(im, x, y, c)
     return im
+
+
+# ---- Step 3's undercroft plate and grate (handoff-prompts/props-asks-2.md, ask 1). DRAFT: boxes and sizes are
+# first passes. src/client/draw/room-parts.ts draws `part:undercroft:stone-plate` (and `:down`) bottom-centred on
+# the plate's 4x1 tiles, translated down by how far the load has sunk it and clipped to those tiles; so `:down` is
+# the same slab, shaded, not drawn pre-lowered. The grate fills its 2x1 floor tiles.
+STONEPAL = ramps('stone', 'castle', 'night')
+GRATEPAL = ramps('stone', 'castle', 'metal', 'gold', 'night', 'purple')
+
+
+def stone_plate(down=False):
+    """P05 secrets-doors-breakables, bottom row, the plain stone slab (the plate cuts it off at its left edge).
+    Its right end is mirrored to close the left, and a 2 px column of its middle is repeated between, at the
+    plate's own resolution, so the 64 x 7 shrink is a majority over real source pixels, not a stretch of a tiny
+    cut. Down: the slab's lit top faces one ramp step darker, the weight pressing it into shadow."""
+    import srcimport
+    from PIL import ImageOps
+    from srcimport import sheet
+    src = sheet('secrets').crop((0, 424, 56, 474))
+    right, mid = src.crop((22, 0, 56, 50)), src.crop((20, 0, 22, 50))
+    W = 64 * 46 // 7
+    comp = Image.new('RGBA', (W, 50), P05PALE + (255,))
+    comp.paste(ImageOps.mirror(right), (0, 0))
+    for x in range(34, W - 34, 2):
+        comp.paste(mid, (x, 0))
+    comp.paste(right, (W - 34, 0))
+    srcimport._cache['_stone-plate'] = comp
+    slab = grab('_stone-plate', (0, 0, W, 50), 0, STONEPAL, key=P05PALE, size=(64, 7))
+    if down:
+        from px import col
+        darker = {}
+        for ramp in ('stone', 'castle'):
+            for i in range(1, 4):
+                darker[col(ramp, i)] = col(ramp, i - 1)
+        for y in range(slab.height):
+            for x in range(slab.width):
+                c = slab.getpixel((x, y))
+                if c in darker:
+                    slab.putpixel((x, y), darker[c])
+    return fit(slab, 64, 16)
+
+
+def floor_grate(open_=False):
+    """Shut: P04 interactables, row 2's riveted vent (three bars in a frame). Open: P04 row 3's riveted hatch,
+    the same frame round a dark shaft. Both squashed to the grate's two floor tiles (32 x 16)."""
+    if open_:
+        return grab('interact', (20, 640, 190, 770), 0, GRATEPAL, size=(32, 16))
+    return grab('interact', (1270, 415, 1430, 550), 0, GRATEPAL, size=(32, 16))

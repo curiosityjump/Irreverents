@@ -199,8 +199,27 @@ def weapons():
     return scene
 
 
+
+def undercroft():
+    """props-asks-2, ask 1: the undercroft's passage as a 320x180 camera (columns 4-23, the room's last 180 px,
+    the pocket under the floor included) with the room's own decor, plate up and grate shut; below it the same
+    view with the plate down (sunk 4 px, as room-parts.ts draws it) and the grate open. Ground is preview.py's
+    plain stand-in, not the ground lane's tiles."""
+    import make, preview
+    from place import place_all
+    from sizes import rooms
+    lk, sh, rs = make.looks_sheets(), make.decor_sheets(), rooms()
+    R = place_all()['undercroft']
+    out = Image.new('RGBA', (320, 360))
+    for i, pressed in enumerate((False, True)):
+        im = preview.room_scene('undercroft', R, sh, lk, rs, pressed=pressed)
+        out.paste(im.crop((64, im.height - 180, 384, im.height)), (0, i * 180))
+    return out
+
+
+
 SCENES = {'weapons': weapons, 'rides': rides, 'powers': powers, 'treasure': treasure, 'hall': hall, 'asks': asks, 'heist': heist,
-          'cage': cage}
+          'cage': cage, 'undercroft': undercroft}
 
 if __name__ == '__main__':
     os.makedirs(OUT, exist_ok=True)

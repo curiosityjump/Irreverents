@@ -95,6 +95,10 @@ def looks_sheets():
     s.add('gate-closed', dv.gate(False)); s.add('gate-open', dv.gate(True))
     s.add('crack-1', lp.crack(0)); s.add('crack-2', lp.crack(1)); s.add('rubble', dv.rubble())
     s.add('shop-counter', dv.shop_counter()); s.add('shop-goods', dv.shop_goods())
+    # Step 3's undercroft plate and grate (props-asks-2, ask 1): appended, so every look above keeps its rectangle
+    s.newrow()
+    s.add('part:undercroft:stone-plate', dv.stone_plate()); s.add('part:undercroft:stone-plate:down', dv.stone_plate(True))
+    s.add('part:undercroft:grate', dv.floor_grate()); s.add('part:undercroft:grate:open', dv.floor_grate(True))
     out = [('parts', 'props/parts.png', s)]
     # ---- round 3: the horn on the camp's post (src/client/draw/outpost.ts draws it bottom-centre over 2x3 tiles)
     s = Sheet(160)

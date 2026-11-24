@@ -237,6 +237,34 @@ the plate's own blue arc kept; impact = the plate's starburst; broken = every pi
   the weapon itself); a closed parasol; an unlit torch lying down (state 3 is lit; states 1-2 are unlit).
 - **Not verified in the game:** nothing draws a weapon yet.
 
+## Second builder (`handoff-prompts/props-asks-2.md`)
+
+**Ask 1, the undercroft's plate and grate (for Step 3's puzzles).** Group `parts`, appended on a new row of
+`parts.png`, so every earlier look keeps its rectangle and pixels (compared, all 28 identical). Ids are the ones
+`src/client/draw/room-parts.ts` already asks for:
+
+- `part:undercroft:stone-plate` (64x16): P05 secrets-doors-breakables, bottom row, the plain stone slab. The plate
+  cuts that slab off at its left edge, so `drive.stone_plate()` mirrors its right end to close the left and repeats
+  a 2 px column of its middle between them at the plate's own resolution, then shrinks by majority to 64x7, bottom
+  of the 16 px cell. Snapped to stone, castle and night only: with the metal ramp its top came out near-white, the
+  brightest thing in the passage. `DRAFT:` the joinery (mirror and repeat) is this lane's, not the plate's.
+- `part:undercroft:stone-plate:down`: the same cut, its lit tones one ramp step darker. Not pre-lowered: the renderer
+  translates the look down by the load's sink and clips it to the plate's tiles.
+- `part:undercroft:grate` (32x16): P04 chibi-interactables row 2, the riveted vent (three bars in a frame), squashed
+  2.4x to the two floor tiles. `part:undercroft:grate:open`: P04 row 3, the riveted hatch round a dark shaft, the same
+  frame. Neither plate shows a floor grate seen from the side; a true one is wanted (for the Drive's missing list).
+- **Decor off a part's tiles:** already held by `selfcheck.py` (back and front layers overlap no part); nothing moved.
+- **The bare-patch doubt (8120d92), looked at:** `loops-undercroft-4x.png` (the passage at 320x180, plate up and grate
+  shut over plate down and grate open) and the whole room. The items that went were three barrels (columns 8, 12,
+  18) and the lantern posts at 9 and 19, all on the passage floor; nothing else on that floor survived either, so the
+  whole lower floor from the vault wall to the east doors is now bare of standing decor, evenly. There is no bare
+  patch among furnished floor to point at the pocket: what a player sees is a plain floor with torches every six
+  columns, the grate and the plate. Not changed. A barrel stands in the pocket itself (column 15, row 15), placed
+  by the same hash; the pocket's cavity shows anyway, so it adds nothing. If the floor reads too empty once the
+  ground lane's tiles are in, re-seed the barrel hash in `place.py` and look again.
+- `preview.py` draws a plate's or gate's own look when one exists (`pressed=True`: down and open), and `loopshots.py
+  undercroft` writes the scene. `shots.mjs ... round3` adds `undercroft-grate` and `undercroft-on-plate`.
+
 ## Deviations from the contract
 
 - `ui-use`'s `src` is the whole 48×24 picture (normal then pressed), with no `frames`: that is how
