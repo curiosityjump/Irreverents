@@ -1,5 +1,5 @@
 {
-  "//": "DRAFT (Step 24 slice 1): what the thrower (content/npcs/ranged-fighter.json) throws. A weapon like any other, so a hero who picks one up with Use throws it back with Hit (use 'throw', systems/weapon-toss.ts). No sources and no carriers: only a thrower's `ranged` hands one out (systems/ranged-throw.ts). DRAFT: the boomerang's cut looks stand in (content/looks/weapons.json; orange, distinct from the dark bomb); it does not come back. DRAFT (slice 1b): in the air it spins three turns a second, tinted red-hot, with a trail of four fading copies (`flight`, draw/weapons.ts), so a throw coming at you cannot be taken for the same boomerang lying still to pick up. Strength 12000 launches the grappler (60) at 200 px/s, the infiltrator (26) at 461, the flyer (30) at 400; wear 30 floors the grappler on the sixth shot, the others on the third (docs/plan/step-24.md).",
+  "//": "DRAFT (Step 24 slice 1): what the thrower (content/npcs/ranged-fighter.json) throws. A weapon like any other, so a hero who picks one up with Use throws it back with Hit (use 'throw', systems/weapon-toss.ts). No sources and no carriers: only a thrower's `ranged` hands one out (systems/ranged-throw.ts). DRAFT: the boomerang's cut looks stand in (content/looks/weapons.json; orange, distinct from the dark bomb); it does not come back. DRAFT (slice 1b): in the air it spins three turns a second, tinted red-hot, half as big again, with a dark rim and a trail of four fading copies (`flight`, draw/weapons.ts), so a throw coming at you cannot be taken for the same boomerang lying still to pick up. Strength 12000 launches the grappler (60) at 200 px/s, the infiltrator (26) at 461, the flyer (30) at 400; wear 30 floors the grappler on the sixth shot, the others on the third (docs/plan/step-24.md).",
   "id": "thrown-shot",
   "name": "Boomerang",
   "looks": {
@@ -11,6 +11,6 @@
   "grip": [14, 16],
   "box": [10, 10],
   "use": "throw",
-  "flight": { "spin": 3, "trail": 4, "tint": "#ff3b30", "tintAmount": 0.45 },
+  "flight": { "spin": 3, "trail": 4, "tint": "#ff3b30", "tintAmount": 0.6, "outline": "#1b1020", "scale": 1.5 },
   "thrown": { "speed": 280, "strength": 12000, "wear": 30 }
 }

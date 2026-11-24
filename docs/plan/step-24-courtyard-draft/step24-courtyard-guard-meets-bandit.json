@@ -1,0 +1,99 @@
+{
+  "id": "step24-courtyard-guard-meets-bandit",
+  "gate": null,
+  "proves": "Step 24 slice 2, push 3 (D-069's three-sided fight in a real room; docs/vision-gaps.md row 1, nobody bad in the courtyard): the courtyard's bandit (courtyard-fighter-1, between the east plate and the gate) meets a chase. In the castle street a hero takes goods, the street's guard comes and hits them and follows them, as in step12-guard-follows-into-camp, out to the courtyard; there the bandit, seeing the hero, comes and hits them, and then hits the town guard too. Control (watched to fail): step24-courtyard-guard-meets-bandit-control, the same chase with the courtyard's placements left out: nobody hits the guard in the courtyard.",
+  "room": "castle-street",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "hero",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 60,
+      "to": 140,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 1450,
+      "to": 1475,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 1500,
+      "to": 1505,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 2800,
+      "to": 4076,
+      "x": 0.42
+    }
+  ],
+  "ticks": 4600,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "changed-room",
+      "where": {
+        "entity": "street-guard",
+        "fromRoom": "castle-street",
+        "fromDoor": "to-courtyard",
+        "toRoom": "courtyard"
+      },
+      "between": [
+        3544,
+        3738
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "hit",
+      "where": {
+        "by": "courtyard-fighter-1",
+        "target": "p:a"
+      },
+      "between": [
+        3990,
+        4040
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "hit",
+      "where": {
+        "by": "courtyard-fighter-1",
+        "target": "street-guard"
+      },
+      "between": [
+        4150,
+        4600
+      ],
+      "count": [
+        1,
+        99
+      ]
+    }
+  ],
+  "placedRooms": [
+    "courtyard"
+  ],
+  "//": "DRAFT (Step 24 slice 2): ticks traced (node scripts/trace.ts step24-courtyard-guard-meets-bandit); the inputs are step12-guard-follows-into-camp's up to the courtyard, the hero stopping short of the camp's doorway."
+}

@@ -51,6 +51,9 @@ const xOn = (ph: Phone, tx: number): Promise<number> =>
 /** Slice 1b: each shot at the three phone sizes the brief names, sideways first (the moment itself). */
 async function shots(ph: Phone, dir: string, name: string): Promise<void> {
   fs.mkdirSync(dir, { recursive: true });
+  // The look at 1b found at-rest-sideways taken at 750x340: set the size, never assume it.
+  await ph.page.setViewportSize({ width: 844, height: 390 });
+  await sleep(250);
   await ph.page.screenshot({ path: path.join(dir, `${name}-sideways.png`) });
   await ph.page.setViewportSize({ width: 750, height: 340 });
   await sleep(250);

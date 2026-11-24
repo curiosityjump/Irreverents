@@ -87,11 +87,13 @@ export interface Weapon {
    * only, the simulation never reads it), so a thing flying at you cannot be
    * taken for the same thing lying still to pick up: `spin` turns a second,
    * `trail` fading copies behind it along its flight, `tint` a colour laid
-   * over it (#rrggbb, at `tintAmount` 0..1). Its picture is `looks.flying`
-   * when cut, else `looks.ground`. Absent: drawn as it lies (the sword, the
-   * bomb). DRAFT: the fields; additive, so any thrown weapon can say them.
+   * over it (#rrggbb, at `tintAmount` 0..1), `outline` a one-pixel rim in
+   * that colour round it (so it reads on any wall), `scale` its size against
+   * the look's own (1 to 3). Its picture is `looks.flying` when cut, else
+   * `looks.ground`. Absent: drawn as it lies (the sword, the bomb). DRAFT:
+   * the fields; additive, so any thrown weapon can say them.
    */
-  flight?: { spin: number; trail: number; tint?: string; tintAmount: number };
+  flight?: { spin: number; trail: number; tint?: string; tintAmount: number; outline?: string; scale: number };
   /** Who starts holding one: placed entity ids (content/placements/) or character kinds, bodies nobody plays (systems/weapon-carriers.ts). */
   carriers: string[];
 }
@@ -183,17 +185,23 @@ const kind: ContentKind = {
     if (o.flight !== undefined) {
       const f = read.object(o.flight, 'flight');
       if (f) {
-        read.only(f, ['spin', 'trail', 'tint', 'tintAmount'], 'flight');
+        read.only(f, ['spin', 'trail', 'tint', 'tintAmount', 'outline', 'scale'], 'flight');
         out.flight = {
           spin: f.spin === undefined ? 0 : read.number(f, 'spin', 'flight', { min: -8, max: 8 }),
           trail: f.trail === undefined ? 0 : read.number(f, 'trail', 'flight', { min: 0, max: 8 }),
           tintAmount: f.tintAmount === undefined ? 0.5 : read.number(f, 'tintAmount', 'flight', { min: 0, max: 1 }),
+          scale: f.scale === undefined ? 1 : read.number(f, 'scale', 'flight', { min: 1, max: 3 }),
         };
         if (!Number.isInteger(out.flight.trail)) read.fail('flight.trail', `must be a whole number of copies, but is ${describe(f.trail)}`);
         if (f.tint !== undefined) {
           const tint = read.string(f, 'tint', 'flight');
           if (/^#[0-9a-fA-F]{6}$/.test(tint)) out.flight.tint = tint;
           else read.fail('flight.tint', `must be a colour "#rrggbb", but is ${describe(f.tint)}`);
+        }
+        if (f.outline !== undefined) {
+          const ink = read.string(f, 'outline', 'flight');
+          if (/^#[0-9a-fA-F]{6}$/.test(ink)) out.flight.outline = ink;
+          else read.fail('flight.outline', `must be a colour "#rrggbb", but is ${describe(f.outline)}`);
         }
       }
     }

@@ -1,0 +1,79 @@
+{
+  "id": "step24-courtyard-guard-meets-bandit-control",
+  "gate": null,
+  "proves": "Control of step24-courtyard-guard-meets-bandit (watched to fail there): the same chase into the courtyard with the courtyard's placements left out: the guard follows in, and nobody hits the guard there.",
+  "room": "castle-street",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "hero",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 60,
+      "to": 140,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 1450,
+      "to": 1475,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 1500,
+      "to": 1505,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 2800,
+      "to": 4076,
+      "x": 0.42
+    }
+  ],
+  "ticks": 4600,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "changed-room",
+      "where": {
+        "entity": "street-guard",
+        "fromRoom": "castle-street",
+        "fromDoor": "to-courtyard",
+        "toRoom": "courtyard"
+      },
+      "between": [
+        3544,
+        3738
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "hit",
+      "where": {
+        "target": "street-guard"
+      },
+      "between": [
+        3544,
+        4600
+      ],
+      "count": [
+        0,
+        0
+      ]
+    }
+  ],
+  "//": "DRAFT (Step 24 slice 2): no placedRooms, so the courtyard is empty of its bandit."
+}

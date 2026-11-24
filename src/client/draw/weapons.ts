@@ -64,12 +64,16 @@ function drawInFlight(g: CanvasRenderingContext2D, w: Weapon, id: string, x: num
   while (past.length > f.trail * TRAIL_STEP + 1) past.shift();
   trails.set(id, past);
   const source = art && f.tint ? tinted(art, f.tint, 'paint', f.tintAmount) : undefined;
+  const rim = art && f.outline ? tinted(art, f.outline, 'paint', 1) : undefined;
   const turn = (frame / 60) * f.spin * Math.PI * 2;
-  const one = (px: number, py: number, alpha: number, angle: number) => {
+  const one = (px: number, py: number, alpha: number, angle: number, solid = false) => {
     g.save();
     g.globalAlpha *= alpha;
     g.translate(ox + Math.round(px), oy + Math.round(py));
     g.rotate(angle);
+    g.scale(f.scale, f.scale);
+    // The rim: the picture in the outline's colour a pixel out each way, under it (the thing itself only, not its trail).
+    if (art && rim && solid) for (const [dx, dy] of [[-1, 0], [1, 0], [0, -1], [0, 1]] as const) drawFrame(g, art, 0, -art.w / 2 + dx, -art.h / 2 + dy, { source: rim });
     if (art) drawFrame(g, art, 0, -art.w / 2, -art.h / 2, source ? { source } : {});
     else {
       g.fillStyle = f.tint ?? '#c8ccd8';
@@ -80,9 +84,9 @@ function drawInFlight(g: CanvasRenderingContext2D, w: Weapon, id: string, x: num
   // The copies, every TRAIL_STEP frames back, the oldest faintest, each turned as it was then.
   for (let k = f.trail; k >= 1; k--) {
     const p = past[past.length - 1 - k * TRAIL_STEP];
-    if (p) one(p.x, p.y, (0.5 * (f.trail + 1 - k)) / (f.trail + 1), turn - k * TRAIL_STEP * (f.spin * Math.PI * 2) / 60);
+    if (p) one(p.x, p.y, (0.7 * (f.trail + 1 - k)) / (f.trail + 1), turn - k * TRAIL_STEP * (f.spin * Math.PI * 2) / 60);
   }
-  one(x, y, 1, turn);
+  one(x, y, 1, turn, true);
 }
 
 /** Impact looks playing: which look, where (room px, centre), on which frame they began. */

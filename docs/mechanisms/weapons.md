@@ -166,9 +166,10 @@ glow. Held: the look's `grip` on the holder's hand point
 `swing` look's first frame; recover: its last; a blow by a weapon in hand
 plays its `impact` look where it landed. No digits anywhere.
 In the air (`loose.flying`), a weapon whose file has a `flight` (`spin` turns
-a second, `trail` fading copies, `tint` `#rrggbb` at `tintAmount`; Step 24
-slice 1b, draw only, the sim never reads it) is drawn spun about its middle,
-tinted, with copies where this page drew it a few frames back, from
+a second, `trail` fading copies, `tint` `#rrggbb` at `tintAmount`, `outline` a
+one-pixel rim colour, `scale` 1 to 3; Step 24 slice 1b, draw only, the sim
+never reads it) is drawn spun about its middle,
+scaled, rimmed, tinted, with copies where this page drew it a few frames back, from
 `looks.flying` when cut, else `ground`: a throw at you is never drawn like the
 same thing lying still. Only `thrown-shot` says one (`DRAFT:`).
 `window.irreverents.drawn.weapons` = `{ loose, held }` for the checks (a loose

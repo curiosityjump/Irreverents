@@ -528,3 +528,33 @@ Sent to the thrower's builder as part of its brief's next push; nothing here is 
     (seen in a first trace with the hero spawned in the undercroft). Players
     come down the cellar stair later, behind him. A placement `facing`, or
     `ranged-throw` waiting for the routine's first turn, would fix it.
+- **Push 3 (the courtyard): measured, not placed.** One `outpost-fighter`
+  (`courtyard-fighter-1`) at tile [24, 7], between the east plate and the
+  gate, facing west then east: `npm run check` 0 reds, and the new scenario
+  `step24-courtyard-guard-meets-bandit` (with `-control`) shows D-069's
+  three-sided fight in the real room: the street guard chases a hero into
+  the courtyard, the bandit hits the hero (4013) and then the guard (4199).
+  **But the full e2e went red on another builder's fact,**
+  `plates-friend-held` (`scripts/e2e/plates.ts`: the pages on the two plates
+  are knocked off; the plate drawn up on A in 91 of 91 frames), and on
+  `door-use`; 138 ok otherwise. `door-use` (with `door-go-in`) then failed
+  once more in a full run *without* him and passed alone three times and in
+  the next full run (140 of 140), so it is a full-run flake, not his; the
+  plates fact passed in both runs without him. So it is not pushed. Measured reasoning: the courtyard west of the gate is 11 tiles
+  (14-24) holding two plates, two doorways and the spawn; any bad guy who
+  walks at a hero there meets the pages those facts stand. Kept, ready to
+  land: `docs/plan/step-24-courtyard-draft/` (`courtyard.json` for
+  `content/placements/`, the two scenarios for `scenarios/`). Ways on, for
+  the orchestrator to choose (each a fact owner's say): (a) the two facts'
+  owners (Step 3's plates, the doors fact) move their pages' room to a
+  private test world or a placement-free run; (b) the bandit stands east of
+  the gate (columns 26-28; the plates and ranged e2e walk through there, so
+  measure again); (c) a bad guy who does not walk at heroes (a lookout, a
+  thrower facing west at column 14 over the street door) and measure again.
+- **Also in push 3:** the in-flight look strengthened after the 14:45 look
+  ("small orange crescent with a faint trail, low in contrast on the tan
+  wall"): `flight` gains `outline` (a 1 px dark rim) and `scale` (1.5×);
+  tint 0.6, trail copies brighter. `shots()` in `scripts/e2e/ranged.ts` now
+  sets 844×390 before its first shot (the look found `at-rest-sideways` at
+  750×340). "Spent shots read as pickups" is slice 1's design (a landed shot
+  is picked up with Use and thrown back): not changed.

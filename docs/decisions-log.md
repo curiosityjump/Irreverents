@@ -618,3 +618,10 @@ document as a decision of theirs.
 - **Why this way:** the owner's words stay "make use of those", and the phone's legible pixels come first. So the pictures are used whole and only pushed back: each is softened toward its own sky (the quarry by half, the forest a little under half, the street, courtyard and camp by under a third: lighter and plainer with distance, as the art contract asks), and above it its own top edge carries on upward, fading softly into its sky, so a tall view never shows a line. Real platforms are bright and outlined; painted ones are pale. The undercroft is underground and none of the unplaced backgrounds is an underground room without a sky (the ice caverns and forges all open onto mountains, a volcano or the moon), so it has its drawn cellar wall back.
 - **To change it:** the softening per background is one number in `FAR` in `tools/art/backgrounds/import_panoramas.py`, then re-run it; the fade's height is `FADE`. A room draws the original unsoftened picture by dropping `-far` from its first layer's image.
 - **Where:** `docs/plan/step-8.md`, "Biome backgrounds"; `content/backdrops/*.json`.
+
+### 2026-11-24 · Step 24: the thrower's shot in the air is bigger and has a dark rim
+- **Decided by:** Step 24 slice 1b builder, `session_017WiGzJR2qgU7SXbKtxZpYP`, after the orchestrator's look at the shots
+- **Instead of asking:** "Is the thrown shot easy enough to see coming?"
+- **Why this way:** the look found it "a small orange crescent with a faint trail, low in contrast on the gallery's tan wall"; your "readable enemies" and "legible pixels" (D-093). In the air it is now half as big again, redder, with a one-pixel dark rim and a brighter trail, so it stands out on any wall. Lying on the floor it is unchanged, because a landed shot is meant to be picked up and thrown back.
+- **To change it:** `outline`, `scale`, `tintAmount` in the `flight` line of `content/weapons/thrown-shot.json`.
+- **Where:** `docs/mechanisms/weapons.md`, "What a player sees"; shots in `docs/plan/step-24-shots/1b/`. `DRAFT:`

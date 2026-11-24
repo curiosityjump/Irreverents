@@ -1,0 +1,8 @@
+{
+  "//": "DRAFT (Step 24 slice 2, push 3; docs/plan/step-24.md 'Builder notes'): the courtyard's bad guys, west of the gate on the far side from the street (between the east plate and the gate), so the town's guards who follow a hero through meet them (D-069). INTENT (content/rooms/courtyard.json): nothing on the flat run (columns 1-13, kept clear for Step 7's machine) or by the forest doorway (columns 8-10). Ids permanent; tiles first guesses.",
+  "id": "courtyard",
+  "room": "courtyard",
+  "place": [
+    { "id": "courtyard-fighter-1", "character": "outpost-fighter", "tile": [24, 7], "npc": "outpost-fighter", "routine": [{ "face": "left" }, { "wait": 6 }, { "face": "right" }, { "wait": 2 }] }
+  ]
+}
