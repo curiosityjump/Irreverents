@@ -741,3 +741,31 @@ Builder `session_017WiGzGHrgYYzH2iGQXcGaG`, 2026-11-24, brief
 - **Rebased again onto b86dbcd (the HUD's second pass, bigger buttons
   sideways):** build, check ok; full `npm run e2e` 134 of 134 green, this
   fact included (thrower 0% under the plate).
+- **The orchestrator's look at the after shots (12:25 UTC), not yet acted
+  on (this builder stopped at its context budget); for the next camera
+  push, with what was measured:**
+  1. *Floor gone while leaning to an aim; the floor's boomerang under the
+     Grab button.* Measured: the aim lean lets the feet sit `aimGround` (3)
+     px above the picture's bottom wherever no control is beside the hero
+     (`heroLimit` in `src/client/camera.ts`); nothing keeps the ground or
+     things lying on it clear. To do: keep at least a band of ground under
+     the feet, and the controls' band itself clear of the hero's floor,
+     leaning less if it must: i.e. make the aim's ground the controls'
+     `reserve` plus a band (as the look-up already does), accepting that
+     in the gallery the thrower is then only partly in the picture, or
+     find his head-room another way.
+  2. *The plate is not free picture.* Measured: 0–36% of him under it
+     (36% once at 750x340). To do: treat `covers` like the top of the room
+     in `wantY` (lean up no further than keeps him below the plate, or
+     count the plate's rows as lost picture), not only as a reason to
+     slide.
+  3. *Holding up shows almost nothing.* Measured in the gallery at column
+     5, 844x390: rest y 50, held up y 36 (14 px), because the look-up keeps
+     the feet above the controls' band plus 2 and the hero already stands
+     there at rest. To do: a held Up should lift by a set amount (say a
+     third to half the picture) as long as the hero stays on it, not just
+     to "feet above the controls".
+  4. *No lean on an ordinary jump.* The rising rule (`vy < -riseSpeed`,
+     held `lookHold`) fires on every jump. To do: lean only on a held Up,
+     on a climb that keeps rising past a beat (e.g. rising, or landing
+     higher than before, over ~0.5 s), and for an aim.
