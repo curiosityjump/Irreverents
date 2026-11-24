@@ -1258,3 +1258,9 @@ document as a decision of theirs.
 - **Why this way:** the owner, playing: "i seem to be invincible as hero" and "neither can heros [be fully defeated]"; no digits, no bars (D-020); the HUD sheet's own shield ladder, cut for this. Gold after any blow or fall, red when flat or one fall from being thrown out (or nearly worn through), so the throw is seen coming.
 - **To change it:** `HURT_SHARE`, `EDGE_SHARE` and `conditionOf` in `src/client/draw/condition.ts`; the shields in `content/looks/ui.json`.
 - **Where:** `docs/mechanisms/defeat.md`, "On screen". `DRAFT:`
+
+### 2026-11-24 · Step 22: the stage's own restore of people is kept for now (lead)
+
+- **What:** push 2 (d6acfdb) puts the quarry's people back from its own copy of where they started (`world.stageHome`, `src/sim/stage.ts`), not from `beaten.ts`'s `restorePeople`, which isn't on `main` yet. It stays.
+- **Why:** it is live and green, and it is the start-over the owner asked for ("pushes you back to the entrance to start over"). Reverting it would leave the quarry with no restart until `restorePeople` lands.
+- **Undo / follow-up (`DRAFT:`):** once `restorePeople` and `holdReturns` are on `main`, the next Step 22 push calls them and keeps `stageHome` only for what they don't cover (wave bodies, things, room state). Or revert d6acfdb, which comes out cleanly.

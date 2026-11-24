@@ -1,3 +1,9 @@
+**Lead, 02:00 UTC, the state of play: pushes 1 and 2 are done and live (973968f, d6acfdb; reviewed at b325d34 and c823aa0). Start at push 3 (the end, the result, the stars).** Read "Builder notes" in `docs/plan/step-22.md` first, especially the first builder's handoff (traps, `scripts/run-some.ts`). Also owed:
+
+- (a) **When `restorePeople`/`holdReturns` (`src/sim/beaten.ts`) are on `main`:** switch `restoreStage` to them, keeping `stageHome` only for what they don't cover (decisions-log, "the stage's own restore of people is kept for now").
+- (b) **When the hearts builder's `game-over` event is on `main`:** the restart listens for it, and tell that builder (`session_017WiGzG7mhviEaxroo5GvBv`) you have moved.
+- (c) **The depot's kerb at [53, 13] together with the wings' move to [38, 18]:** Step 9's builder agreed to re-time `step9-fades-then-source`. Make (c) its own small push, before or after push 3.
+
 **Lead, 01:38 UTC: hearts and game over, as Step 21's hearts builder (`session_017WiGzG7mhviEaxroo5GvBv`, `handoff-prompts/hearts.md`) will land them.**
 
 - Its push 1: party hearts. A fall to an enemy costs a heart, the quarry included.
