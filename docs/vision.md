@@ -282,6 +282,16 @@ defeated and are gone; townspeople stay knocked out as a body to be found
 
 Detail: docs 08, 09.
 
+**Hearts and game over.** **Owner, 2026-11-24 ~01:20 UTC, playing (relayed by the orchestrator):**
+> Heros should have hearts which can be lost. Once all heros in the party are out of hearts, that's a game over (back to cantina)
+
+*(Framing:)* a later owner decision, so it wins over the earlier rules where
+they conflict (Q-005: "Later decisions trump earlier ones"). Getting caught
+still opens a fight or escape; it is losing every heart, party-wide, that ends
+the run, and it ends in the cantina, not a reload screen. Hearts are counted
+per knockdown, so impact still carries combat, not damage numbers. Working
+detail: `docs/plan/step-21.md` "Hearts".
+
 ### Visual direction
 **Owner, 2026-11-22 (Drive, doc 00):**
 > Visual priority per owner: achieve Kirby & the Amazing Mirror's restraint and legibility, not merely its colorfulness.
