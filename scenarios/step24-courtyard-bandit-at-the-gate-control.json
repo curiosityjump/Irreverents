@@ -1,0 +1,59 @@
+{
+  "id": "step24-courtyard-bandit-at-the-gate-control",
+  "gate": null,
+  "proves": "Control of step24-courtyard-bandit-at-the-gate (watched to fail there): the same walk out of the gallery with the courtyard's placements left out: the hero comes into the courtyard and nobody hits them.",
+  "room": "hall-gallery",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "hero",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 30,
+      "to": 200,
+      "x": -1
+    }
+  ],
+  "ticks": 400,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "changed-room",
+      "where": {
+        "entity": "p:a",
+        "fromRoom": "hall-gallery",
+        "toRoom": "courtyard"
+      },
+      "between": [
+        50,
+        65
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "hit",
+      "where": {
+        "by": "courtyard-fighter-1",
+        "target": "p:a"
+      },
+      "between": [
+        0,
+        400
+      ],
+      "count": [
+        0,
+        0
+      ]
+    }
+  ],
+  "//": "DRAFT (Step 24 slice 2): no placedRooms, so the courtyard is empty of its bandit."
+}

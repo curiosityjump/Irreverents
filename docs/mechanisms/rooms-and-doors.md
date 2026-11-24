@@ -102,7 +102,12 @@ that could trap someone.
   each one column under the next, climbed by jumping on the spot) are its
   way out over the roofs when the gate is shut; the way-out check plays
   them for every party member. Columns 1-13 of the courtyard and the
-  gallery's ground floor are left empty for Step 7.
+  gallery's ground floor are left empty for Step 7. Past the gate
+  (Step 24, `DRAFT:`) the bandit `courtyard-fighter-1` stands at column
+  27 facing east only, at the gallery's doorway: `INTENT:` a look west
+  would reach the east plate and he would walk onto whoever holds it, so
+  heroes who open the gate come up behind him
+  (`content/placements/courtyard.json`, `step24-courtyard-bandit-at-the-gate`).
 - **A hidden walk door is painted as wall** on the side where it is
   marked `hidden` (`draw/room-parts.ts`): a gap in a room's edge is a
   sign. The far end of each hidden connection (the undercroft, the

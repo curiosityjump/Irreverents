@@ -575,6 +575,33 @@ Sent to the thrower's builder as part of its brief's next push; nothing here is 
   `draw/weapons.ts` is the small way. (c) **Not checked:** whether a struck
   hero visibly reacts in `hero-struck-*` (the shot is taken a beat after the
   blow; see slice 1's notes).
+- **Push 4 (the courtyard's bandit, way (b)),** `session_017WiGzJuWboLaxkDAsBMpaS`.
+  `courtyard-fighter-1` (`outpost-fighter`) at tile [27, 7], east of the
+  gate, routine `face: right` only (`INTENT:` in the placements file: a
+  look west from column 27 reaches column 20, the east plate included, and
+  he would walk at the page on it once the gate opened). So heroes who open
+  the gate come up behind him; one who comes in from the gallery, or walks
+  on past him, meets him face on, and his blows knock them east out into
+  the gallery. Decisions-log "the courtyard's bandit stands past the gate".
+  - **Measured with him placed:** `npm run check` ok; `plates.ts`, `ranged.ts`
+    and `camera.ts` (all three walk past column 26) alone three runs each,
+    every fact 3 of 3; the full `npm run e2e` three times, 140 ok and 0 FAIL
+    each time.
+  - New: `step24-courtyard-bandit-at-the-gate` (a hero walks west out of
+    the gallery: in at 57, his first blow at 77) and `-control` (no
+    `placedRooms`: no blow). Failing control watched: with
+    `content/placements/courtyard.json` moved aside, the scenario's blow
+    fact goes red.
+  - Shots `docs/plan/step-24-shots/courtyard/`: `gate-open-him-beyond-*`
+    (two pages on the plates, the gate open, him in red past it) and
+    `hero-meets-him-*` (a page walked through, his swing on it, the alert
+    bar up), 844x390 and 390x664. Taken by a scratch script, not the e2e.
+  - **Not done:** the draft's guard-chase scenario
+    (`docs/plan/step-24-courtyard-draft/`, way (a)): the street guard stops
+    west of the shut gate and never meets him east of it. That folder is
+    superseded; left for its reviewer to delete. The optional placement
+    `facing` field: not built (budget kept for the gate). He faces east
+    already (the default), so he needs none.
 
 ## Look at slice 1b's retaken shots (orchestrator session_017WiGzHY5UZsWTLCH8cLm8M, 2026-11-24 ~19:00 UTC)
 

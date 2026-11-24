@@ -1,0 +1,62 @@
+{
+  "id": "step24-courtyard-bandit-at-the-gate",
+  "gate": null,
+  "proves": "Step 24 slice 2, push 3 (docs/vision-gaps.md row 1, nobody bad in the courtyard; the orchestrator's ruling, way (b)): the courtyard's bandit (courtyard-fighter-1, east of the gate at column 27, facing east) meets a hero who comes in from the Hall gallery: the hero walks west out of the gallery into the courtyard, and he hits them. Control (watched to fail): step24-courtyard-bandit-at-the-gate-control, the same walk with the courtyard's placements left out: nobody hits the hero.",
+  "room": "hall-gallery",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "hero",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 30,
+      "to": 200,
+      "x": -1
+    }
+  ],
+  "ticks": 400,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "changed-room",
+      "where": {
+        "entity": "p:a",
+        "fromRoom": "hall-gallery",
+        "toRoom": "courtyard"
+      },
+      "between": [
+        50,
+        65
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "hit",
+      "where": {
+        "by": "courtyard-fighter-1",
+        "target": "p:a"
+      },
+      "between": [
+        70,
+        90
+      ],
+      "count": [
+        1,
+        1
+      ]
+    }
+  ],
+  "placedRooms": [
+    "courtyard"
+  ],
+  "//": "DRAFT (Step 24 slice 2): ticks traced (node scripts/trace.ts step24-courtyard-bandit-at-the-gate): in at 57, his first blow at 77 (he hits again every 48 ticks, and by 376 has knocked the hero back out into the gallery)."
+}
