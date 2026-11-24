@@ -539,6 +539,13 @@ Builder `session_017WiGzFxZZnM2VcdqhXnrNu`. Push 1 (the sim), 2026-11-23.
 - **Not verified:** anything on a page (push 2 draws the gauge and pips);
   `check:live` exercises nothing of this push.
 
+Push 2 (the page), 2026-11-23:
+- **Controls watched to fail:** `-pips-cross-a-door` and `scripts/checks/step4-tiers.ts`: `world.alerts` never written (the shown alert 0; A's page shows the street at 1). `-raging-guard-whistles`: the raging-guard branch off (no whistle). The e2e fact `tiers`: its control is the level read before the gauge (one pip fewer); not run with code broken.
+- **Found by tracing the phone:** in the usual fight the guard rings the bell himself and is never a responder, so push 1's whistle never came; widened (decisions-log, "Step 4: pips"). A grappler's later blows flatten a worn guard, and a flattening blow is never perceived (slice 1), so those give him no new cause; lighter hits do.
+- **Screenshots:** `docs/plan/step-4-shots/tiers-*-750x340.png` (the e2e phone, iPhone 14 sideways): pips under the plate in the street and in the throne room. **Not taken:** 390×664 upright, a frame with the gauge up, a row arriving at each door.
+- **Flag (not mine to change):** the level banner draws over the king's speech box in the throne room (banner.ts and the speech drawer, other slices').
+- `npm run e2e`'s `tiers` takes about 70 s (a 45 s wait while the guard goes to ring).
+
 Push 2, outcome (2026-11-23 ~23:55 UTC): pushed at b441908, live, then **reverted at
 0457923**: the new `check:live` fact `tiers` failed on live (alert drawn at 1 after
 14.7 s, then 12 taps and the gauge never drawn; every other live fact passed, game
@@ -551,6 +558,14 @@ fact that holds over live latency, e.g. a phone character that does not flatten 
 (the skirmisher), or `closeIn` waiting for the guard to stand. Push 3 (the armoured
 guard) not started. The builder stopped here at its context budget.
 - **The armoured guard's sprite (for push 3):** the art cut-outs builder will not cut `armoured-guard`: sprites belong to the cast lane, so it has asked the orchestrator to brief a cast builder (source: P08 chibi-enemy-animation row 4). Until that sprite exists, push 3 ships on the `guard` sprite, as the brief planned.
+
+Push 2, re-land (builder `session_017WiGzHTLU6WYfsfoEFK4si`, 2026-11-24):
+- **How it was decided, game or check.** `tiers` replayed against a local server in-process (so its world could be read every 15 ms), the phone's socket routed with delay. Live's round trip measured 105 ms, but its input queue lands a swing ~300 ms after the page shows it (`network.md`), so 300 ms in, 60 ms out, 40 ms jitter. b441908's fact at that setting: **2 of 4 failed** in live's shape (alert 1 in 12–14 s, 12 tries, no gauge); at 150 ms each way 1 of 1 and at 0 ms 2 of 2 passed (why local and the first builder's runs were green). The server's world at the failing moments: the phone's swings missed (the page draws its own hero early and the guard late: 17 px short; overlapping, it faced away; a flying guard is drawn ~50 px behind), and the fight drifted to the courtyard door. **In 17 blows the guard perceived on duty, 13 brought his whistle within 10 s**; of the other 4, 1 sent him out of the street with the same blow and 3 found him not yet raging (D-044's first fluke). So mostly the fact; one part the game's.
+- **The game's part, fixed:** a blow that sends the guard who rang the bell out of the street left him in the courtyard until the alert cooled (5 runs of ~40). Now he walks back (`alert-whistle.ts`, decisions-log "Step 4: whistle (the re-land)"). Check `scripts/checks/step4-out-and-back.ts`; control (the branch off): he stays in the courtyard, fails.
+- **The fact's part, fixed without loosening it** (same claims, same numbers): after fight-back's moves it meets the guard as a friend would, standing still, turned to him, west of the middle (`meet()`, its `INTENT:`), and walks back in by the right door. Runs at 300/60/40: 6 of 6 with both fixes (earlier fact versions without the game fix: 3/3, 4/6, 5/6). Control: b441908's fact, 2 of 4 failed (above).
+- **`-away-at-the-most-*` controls, what each proves now** (not re-run): the control (arrivals' `runSpeed` 140) fails all five, but on the tick-pinned facts (the leaving tick, the row's tick), so it proves the inputs are pinned to this world, not that speed is the way out. What the five scenarios themselves prove: at the cap, each hero has a way out (west door, jumping); for the infiltrator and others that way is height and doors, not speed.
+- **Seen, not mine** (flagged in `docs/for-the-orchestrator.md`): a guard standing just inside the courtyard door pushes an arriving hero back out (seen 4 times); after the bell, a perceived blow can send the guard back to the bell rather than whistling (seen once, k4).
+- **Not verified:** `check:live` before the push (it runs on the push); a real iPhone.
 
 ## Alarms and the chase, as played (`owner-enemies-chase-alarms.md`)
 

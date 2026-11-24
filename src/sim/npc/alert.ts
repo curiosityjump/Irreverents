@@ -5,6 +5,18 @@ import { addEntity, findEntity } from '../world.ts';
 import { THING_KIND } from './state.ts';
 
 declare module '../types.ts' {
+  interface World {
+    /**
+     * Step 4, the town's tiers: by area, its alert level, for the page to
+     * draw the pips wherever the party is (a page is sent only its own
+     * room's entities, so the area's `~alert:` entity does not follow you).
+     * Written only where an alert changes (raiseAlert, lowerAlert), never
+     * deleted (a page takes top-level fields by key); read with a default
+     * (a kept game may predate it). Only the display travels: nobody in
+     * another room learns anything from it (D-065).
+     */
+    alerts?: Record<string, number>;
+  }
   interface Components {
     /**
      * On one bodiless entity per area ("~alert:<room>"), made by the first
@@ -103,6 +115,11 @@ export function alertLevel(world: World, area: string): number {
   return alertOf(world, area)?.c.alert?.level ?? 0;
 }
 
+/** Copies an area's new level into world.alerts (for the page's pips; see World.alerts). */
+function showAlert(world: World, area: string, level: number): void {
+  (world.alerts ??= {})[area] = level;
+}
+
 /**
  * A completed call raises its area's alert by one.
  * INTENT (D-063, D-075; the one invariant of slice 2): this function holds
@@ -124,6 +141,7 @@ function raiseAlert(ctx: StepContext, area: string): void {
   if (a.level >= MAX_ALERT) return;
   const from = a.level;
   a.level = from + 1; // The single raise.
+  showAlert(ctx.world, area, a.level);
   ctx.emit('alert-changed', { area, from, to: a.level });
 }
 
@@ -134,6 +152,7 @@ export function lowerAlert(ctx: StepContext, area: string): void {
   const from = a.level;
   a.level = from - 1;
   a.quiet = 0;
+  showAlert(ctx.world, area, a.level);
   ctx.emit('alert-changed', { area, from, to: a.level });
 }
 

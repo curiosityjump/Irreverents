@@ -1072,6 +1072,13 @@ document as a decision of theirs.
 - **To change it:** `npcWhistleTime` and `npcWhistleAgain` in `content/tuning.json`; what stops a whistle is `cannotBlow()` in `src/sim/systems/alert-whistle.ts`; an area whistles only if it has a `content/dispatch/` file (delete it and the street behaves as before).
 - **Where:** `docs/mechanisms/npc-response.md`, "The town's tiers".
 
+### 2026-11-24 · Step 4: whistle (the re-land) — a guard knocked out of his street while it is on alert walks back in
+- **Decided by:** town-tiers builder (push 2's re-land), `session_017WiGzHTLU6WYfsfoEFK4si`
+- **Instead of asking:** "If you punch the guard out of his street, should he come back?"
+- **Why this way:** measured, not guessed. Push 2's phone check failed on live; replayed against a local server with live's delay added, the failures were the check's aim (a page swinging at a moving guard misses over the delay), but one was the game's: a blow that sent the guard who rang the bell out by the courtyard door left him there, seeing nobody, until the alert cooled, so the street stopped escalating (5 of about 40 runs). D-067/D-068 (pursuit is hard to reverse), D-077 ("a level transition never automatically resets pursuit"), and your "no escalating combats or chases". Now, while the street's alert is up, a raging guard put out of it who sees none of the heroes who upset him walks back by the door toward home, and calls again when he sees something new. A guard answering a call is unchanged (he searches where the chase led, D-077).
+- **To change it:** the branch under "Put out of his area" in `src/sim/systems/alert-whistle.ts` (delete it and he stays where he lands, as before).
+- **Where:** `docs/mechanisms/npc-response.md`, "The town's tiers"; the check `scripts/checks/step4-out-and-back.ts`.
+
 ### 2026-11-23 · Step 4: dispatch — each level of the street's alert brings a row of guards in by both doors, up to eight people in the street, and they go home when it is over
 - **Decided by:** town-tiers builder, `session_017WiGzFxZZnM2VcdqhXnrNu`
 - **Instead of asking:** "What does the town send at each level, from where, and how many is too many?"
@@ -1347,3 +1354,11 @@ document as a decision of theirs.
 - **Why this way:** your words: "Once all heros in the party are out of hearts, that's a game over (back to cantina)", and "never a reload, never held" (D-019, "there is always a way out"). The last fall is seen for a second, then everyone playing is on the cantina's pads, on their feet at once; GAME OVER, "Back to the cantina", "Every heart back" across the middle of the screen for about three seconds, gone at any touch, and the controls work through it. A prize you were carrying goes back on its stand; a power or a weapon you held lies where you stood; alarms end and waves walk off; nothing you found is lost. In the quarry the game over is its own start (the road), as you asked for the stage, until you say otherwise. Walking into the cantina at any time also gives the party every heart back (the brief's open question; the other answer is a heart for an out hero only).
 - **To change it:** `gameOver` in `content/hearts.json` (where, `beat`), `gameOver` in `content/defeat/<place>.json` (per place); the refill is one block in `src/sim/systems/heart-game-over.ts`; the words at the top of `src/client/draw/game-over.ts`.
 - **Where:** `docs/mechanisms/defeat.md`, "Hearts". `DRAFT:`
+
+
+### 2026-11-23 · Step 4: pips — the street's alert follows you into every room, under your party's faces, with a banner when it rises
+- **Decided by:** town-tiers builder, `session_017WiGzFxZZnM2VcdqhXnrNu`
+- **Instead of asking:** "Where do the alert marks sit now the party plate is in that corner, and do they follow you out of the street?"
+- **Why this way:** D-067/D-077 (pursuit is hard to reverse; a level transition never resets it), doc 26's "cross-zone wanted carryover" (left open there, so `DRAFT:`). The pips show the highest alert of any area wherever the party is, just under the party plate so the two never overlap. Only the picture travels: guards elsewhere still know nothing. Each new pip shows a two-second banner with words from the dispatch file ("The watch is called", "More of the watch", "The whole watch is out"; no digits). Also: **the guard who rang the bell himself whistles too.** Traced on a phone: the usual fight (punch him until he is furious) makes him the caller, never a responder, so the whistle would never have come; a furious guard while his street's alert is up now counts as after you.
+- **To change it:** the pips' place is `PX`/`PY` in `src/client/draw/alert.ts`; the words are `banners` in `content/dispatch/castle-street.json`; the furious guard is the `raging` line in `src/sim/systems/alert-whistle.ts`.
+- **Where:** `docs/mechanisms/npc-response.md`, "The town's tiers".

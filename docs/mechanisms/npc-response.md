@@ -367,10 +367,8 @@ looks `bell`, `bell-ringing`, `bell-broken`, `alert-pip` and
 `alert-pip-off` replace the plain shapes when present
 (`docs/mechanisms/art-pipeline.md`).
 
-**Not built yet:** the pips following the party from room to room and
-the whistle's gauge on screen (the town's tiers, push 2); a follower
-whistling in another room; the armoured guard (push 3); finding a
-knocked-out person; the villain's horn (D-070).
+**Not built yet:** the armoured guard (the town's tiers, push 3);
+finding a knocked-out person; the villain's horn (D-070).
 
 ## The town's tiers: the whistle and the dispatch rows
 
@@ -384,15 +382,26 @@ dispatch"). Brief `loop-town-tiers.md`.
 built them.
 
 **The whistle (`alert-whistle`, 57).** On a good person answering a call
-(`c.respond`) whose home area has a dispatch file, in his home room:
+(`c.respond`), or a guard in mood 3 while his home area's alert is above 0
+(the guard who rang the bell himself is the caller, not a responder, yet
+just as much after you: the usual fight, `-raging-guard-whistles`), whose
+home area has a dispatch file:
 - He comes on duty with `c.whistle.reported` set to his dissonance then
   (what he had witnessed is already reported by whoever called him).
-- In the `chase` phase (a hero in sight), standing, with
+- Chasing (a responder in the `chase` phase; a raging guard with a hero
+  among his offenders in sight), standing, with
   `dissonance > reported` and no wait left, he starts: `call-started`.
   Seeing adds no dissonance, so standing in view never starts one (D-063).
 - He blows for `npcWhistleTime` (2.5 s): `c.whistle.progress` counts up
   on his own entity (so every page in the room is sent it), and he stands
   still (`drive` idle, overlaying alert-respond's chase and swing).
+- **Put out of his area** (a blow, a throw) while its alert is up, a
+  raging guard who sees none of his offenders walks back by the door toward
+  home (`doorToward()`), where he can see the hero and call again. Only the
+  one who rang the bell himself: a responder stays alert-respond's (D-077,
+  he searches where the chase led). Before this, a blow that sent him out
+  by the courtyard door left him there until the alert cooled
+  (`scripts/checks/step4-out-and-back.ts`).
 - Anything that leaves him unable to act stops it (`cannotBlow()`): out
   cold (`knocked-out`), held (`grabbed`), flying or in a hit's beat
   (`knocked-down`); also going off duty (`stood-down`). `call-stopped`
@@ -401,6 +410,10 @@ built them.
 - Finished: `completeCall()`, exactly as the bell's (`call-completed`
   with `x, y` his `lastSeen`, one level, the place reported on the alert
   entity), then the same wait.
+- **Away from home:** a follower in another room whistles too, if
+  `doorToward()` finds a way home; it raises his home area's alert, and
+  the place reported is the home room's door toward where he is: help
+  learns which way, not where (D-065).
 - `alert-respond` (56) reads `call-completed` before the whistle (57)
   runs, so a whistle calls no other placed guard on its own tick; the
   rows it brings get their own heading (`DRAFT:`).
@@ -429,15 +442,41 @@ built them.
   would carry him to the next room). One not in his area, or stuck for
   45 ticks, is removed where he stands.
 
+**The pips follow you (`world.alerts`).** `raiseAlert` and `lowerAlert`
+copy the area's new level into the top-level `world.alerts[area]` (never
+deleted; read with a default). A page is sent only its room's entities,
+but every snapshot carries top-level fields by key, so a page anywhere
+draws the highest level of any area. Written only where an alert changes,
+so a page's own world never overwrites the server's with a stale value
+(the trap at `cantina-chase.ts`). Only the display travels: nobody in
+another room learns anything from it.
+
+**On screen (`src/client/draw/alert.ts`):** over a guard whose
+`c.whistle.progress` is above 0, the `bell-gauge` look (else a bar)
+fills; the pips sit just under the party plate (`drawnHud()?.box`), at
+the top-left only when no plate is drawn; a new pip queues one banner
+(`alert:<level>`, the dispatch file's `banners[level-1]`, none on the
+page's first frame). `drawn.alert` `{ level, whistle }` is the record the
+checks read.
+
 **The castle street's table:** doors `to-throne-room` and `to-courtyard`,
 cap 8, rows: level 1 nobody, level 2 two guards, level 3 three.
 
 **Checks** (`scenarios/step4-tier-*.json`, all in the real street):
 `-whistle-brings-row`, `-whistle-stopped`, `-no-whistle-unprovoked`,
-`-both-doors`, `-cap-holds`, `-cools-and-leaves`, and
+`-both-doors`, `-cap-holds`, `-cools-and-leaves`, `-raging-guard-whistles`,
+`-pips-cross-a-door` (the `alert` fact's `"shown": true` reads
+`world.alerts`), and
 `-away-at-the-most-<hero>` once per roster hero (solo, the street at its
 cap: out by the west door, no blow after, cooled to 0, every arrival
-gone). The `people` fact counts people in a room (optionally within an
+gone). The real-server check `scripts/checks/step4-tiers.ts` (two
+connections: A in the courtyard still shows the street at 2, B in the
+street has the arrivals), `scripts/checks/step4-out-and-back.ts` (a raging
+guard put in the courtyard walks back and whistles) and the phone e2e fact
+`tiers` (`scripts/e2e/tiers.ts`, also in `check:live`: after fight-back's
+moves it meets the guard standing still, turned toward him, west of the
+street's middle, because a page swinging at a moving guard misses over
+live's latency; its `INTENT:` has the measurements). The `people` fact counts people in a room (optionally within an
 `x` range, or only `arrivals`). Their controls, watched to fail, are in
 `docs/plan/step-4.md`, "Builder notes".
 
