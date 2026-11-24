@@ -36,6 +36,8 @@ slices share" (with "Files with one owner at a time") and section 6. Read
 and fully checked.** If you pass about 300k tokens after push 2, report and
 stop: the orchestrator re-briefs the rest.
 
+**Landed so far (2026-11-24 03:50 UTC):** push 1 by the first B builder; push 2 at 3a8a30a by `session_017WiGzGehKBFBBGaoRu2awP`, which stopped at about 340k tokens: the ram wagon stands empty on the Bandit Camp's entry step (not column 10: heroes knocked west landed against it), GET IN, drive east into the cache, Jump out. `outpost-fight.ts` already skips a seated driver (a5fbd53). **Left, for a fresh builder: push 3, the wave's driven wagon** (the wave row's `rides` field is unbuilt; a driver pulled from the seat is an ordinary bad guy with hearts and the beaten-for-good rule). **Held until the alarms builder (`session_017WiGzHgbh9PtsdzXnTDvqz`) has switched the both-sides rows on in the camp** (`handoff-prompts/owner-enemies-chase-alarms.md`): it is re-timing the same camp scenarios and owns `content/outposts/` meanwhile. Notes: `docs/plan/step-20.md`, "Builder notes"; `docs/mechanisms/machines.md`, "In the Bandit Camp". The barrier a fast wagon's reports step over is `handoff-prompts/step-20-machine-check-fails.md`.
+
 ## The task, and why
 
 The owner, 2026-11-23 ~18:30 UTC, first-hand, after playing on a phone
