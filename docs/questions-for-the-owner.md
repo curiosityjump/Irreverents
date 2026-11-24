@@ -16,7 +16,7 @@ the record; `docs/answers-archive.md` holds receipts up to 2026-11-23).
   orchestrator; Vision Partner's doorbell goes only here.
 - **Questions per message the owner wants:** 3 (the default; record the
   owner's own number here, quoted, if they set one).
-- **Next id:** Q-014
+- **Next id:** Q-017
 
 ## How to feed this file
 
@@ -75,9 +75,25 @@ entries group them; they are not entries.
 
 ---
 
-## Open (0)
+## Open (2)
 
-*(empty)*
+### Q-014 · In the outpost stage, where does a game over send you?
+- **Asked by:** orchestrator, `session_017WiGzHhT2apmWHT61rQ65G`, 2026-11-24 UTC (first asked in chat by `session_017WiGzJzo6aZqH4kYxxJsiV`, unanswered)
+- **Question:** You said two things. For hearts: "Once all heros in the party are out of hearts, that's a game over (back to cantina)". For the outpost stage: "a real way to lose/die, which pushes you back to the entrance to start over". Inside the stage, when the whole party is out of hearts, do you restart at the stage's entrance (quick retry, the stage resets) or go back to the cantina (a longer walk back)? Built now: the stage's entrance inside the stage, the cantina everywhere else.
+- **Unblocks:** Steps 21 and 22; nothing waits, the other answer is one setting.
+- **Recommendation:** keep it as built: the entrance inside the stage, the cantina elsewhere.
+- **Answer goes to:** `docs/plan/step-22.md` and `docs/plan/step-21.md`, "Hearts"
+- **Source:** this entry
+- **Blocking:** no
+
+### Q-015 · One weapon and one power together, or one thing in all?
+- **Asked by:** orchestrator, `session_017WiGzHhT2apmWHT61rQ65G`, 2026-11-24 UTC (first asked in chat by `session_017WiGzJzo6aZqH4kYxxJsiV`, unanswered)
+- **Question:** You said: "No inventory. Only one weapon at a time. Similar to kirby - cant have multiple powers at once". May a hero hold one weapon (the sword) and one stolen power (the strength boost, the wings) at the same time, or does picking up either one drop the other, so a hero only ever has one thing? Built now: one weapon and one power together; a new weapon replaces the old weapon, a new power replaces the old power.
+- **Unblocks:** Step 23 and Step 9; nothing waits.
+- **Recommendation:** keep one weapon plus one power.
+- **Answer goes to:** `docs/plan/step-23.md`
+- **Source:** this entry
+- **Blocking:** no
 
 ## Parked by you (0)
 

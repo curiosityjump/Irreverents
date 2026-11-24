@@ -50,29 +50,4 @@ wording when it rewrites an entry.
 
 ## Entries
 
-### Q-? · In the outpost stage, where does a game over send you?
-- **Asked by:** orchestrator, `session_017WiGzHhT2apmWHT61rQ65G`, 2026-11-24 UTC (first asked in chat by `session_017WiGzJzo6aZqH4kYxxJsiV`, unanswered)
-- **Question:** You said two things. For hearts: "Once all heros in the party are out of hearts, that's a game over (back to cantina)". For the outpost stage: "a real way to lose/die, which pushes you back to the entrance to start over". Inside the stage, when the whole party is out of hearts, do you restart at the stage's entrance (quick retry, the stage resets) or go back to the cantina (a longer walk back)? Built now: the stage's entrance inside the stage, the cantina everywhere else.
-- **Unblocks:** Steps 21 and 22; nothing waits, the other answer is one setting.
-- **Recommendation:** keep it as built: the entrance inside the stage, the cantina elsewhere.
-- **Answer goes to:** `docs/plan/step-22.md` and `docs/plan/step-21.md`, "Hearts"
-- **Source:** this entry
-- **Blocking:** no
-
-### Q-? · One weapon and one power together, or one thing in all?
-- **Asked by:** orchestrator, `session_017WiGzHhT2apmWHT61rQ65G`, 2026-11-24 UTC (first asked in chat by `session_017WiGzJzo6aZqH4kYxxJsiV`, unanswered)
-- **Question:** You said: "No inventory. Only one weapon at a time. Similar to kirby - cant have multiple powers at once". May a hero hold one weapon (the sword) and one stolen power (the strength boost, the wings) at the same time, or does picking up either one drop the other, so a hero only ever has one thing? Built now: one weapon and one power together; a new weapon replaces the old weapon, a new power replaces the old power.
-- **Unblocks:** Step 23 and Step 9; nothing waits.
-- **Recommendation:** keep one weapon plus one power.
-- **Answer goes to:** `docs/plan/step-23.md`
-- **Source:** this entry
-- **Blocking:** no
-
-### Q-? · Should raw music stems and unused source packs stay out of the game's repository?
-- **Asked by:** orchestrator, `session_017WiGzHhT2apmWHT61rQ65G`, 2026-11-24 UTC (first raised by `session_017WiGzJzo6aZqH4kYxxJsiV`)
-- **Question:** The copy of your Drive design library inside the project grew to 334 MB (raw `.wav` music stems and source packs the game does not load). Every new helper session downloads the project and every deploy uploads it. Nothing would be deleted from your Drive; those big files would simply be listed by name in the project instead of copied in, and fetched when something needs them.
-- **Unblocks:** faster session starts and deploys; nothing waits.
-- **Recommendation:** yes, list them instead of copying them.
-- **Answer goes to:** `docs/mechanisms/asset-requests.md` and `tools/drive_sync.py`'s skip list
-- **Source:** this entry
-- **Blocking:** no
+*(empty)*
