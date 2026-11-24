@@ -31,9 +31,3 @@ entry: "first vision written; no plan exists yet", naming the sections.
 ## Entries
 
 *(empty)*
-
-### Q-016 · Should raw music stems and unused source packs stay out of the game's repository?
-- **Answer:** already answered by the owner's standing words, not asked again: "Do whatever gets us the game I want as soon and efficiently as possible. That's all i care about" (2026-11-23 ~14:45 UTC) and "if things can be done more efficiently to get much more resukts for less tokens, the team has full license to do that". Nothing is deleted from Drive; list the big files by name instead of mirroring them.
-- **Recorded in:** `docs/vision.md` "Principles that decide most questions" (the build-first principle and its confirmation)
-- **Action for:** orchestrator (process): go ahead; update `tools/drive_sync.py`'s skip list and `docs/mechanisms/asset-requests.md`.
-
