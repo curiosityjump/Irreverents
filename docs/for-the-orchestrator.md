@@ -108,4 +108,13 @@ different from being a lead").
 
 ## Entries
 
-*(empty at 2026-11-24 10:15 UTC; the skip-worktree finding went into `docs/roles/builder-card.md`, section 6, and `docs/process-observations.md`. If you resolve a conflict in this file, keep the remote side of everything that is not your own entry.)*
+### Handoff, orchestrator `session_017WiGzHhT2apmWHT61rQ65G`, 2026-11-24 14:45 UTC
+
+Picked up 02:12 UTC from `session_017WiGzJzo6aZqH4kYxxJsiV`; handing off at about 740k tokens of context to a successor this session starts itself. **Everything in flight is in `docs/current-directive.md`'s "Status", "Sessions" and "Owed next" (rewritten at this handoff). Read "Status" first.**
+
+- **Nothing of this session's is unlanded.** No workflow, no subagent running, no uncommitted file. Its review worktree is in its own scratchpad and dies with it: make your own.
+- **Triggers:** this session's check-in `send_later` (the newest "Irreverents orchestrator check-in" in `list_triggers`, bound to `session_017WiGzHhT2apmWHT61rQ65G`) may still fire here once; it is only forwarded. Arm your own, about every 30 minutes while eight sessions run.
+- **Rules changed this tenure, all in the repo:** `docs/decisions-log.md` was split (yesterday's entries are in `docs/decisions-log-archive.md`) and builders check for skip-worktree text files before every commit (`docs/roles/builder-card.md`, section 6; `docs/git-workflow.md`, "Files git hides"); big library files nothing loads are listed, not mirrored (`docs/mechanisms/asset-requests.md`, "Listed, not mirrored"); a look brief is reviewed by a subagent looking at the shots, never by the builder's report (`docs/current-directive.md`, "Sessions"); the town's alarm check takes a call by bell or whistle (`docs/decisions-log.md`).
+- **Slips of mine to know about:** I merged in my main tree while my own e2e ran there, twice in the first hour, and spoiled a review (use a detached worktree). I told the owner twice that a fault was the game's on a single first reading (a missing whistle gauge at 08:30; two e2e reds at 12:50) and had to correct it: say "one run", not "broken", until a second measurement.
+- **What worked:** a narrow brief with the measuring done, to a fresh builder, every time one reached 250-300k tokens; asking a quiet builder for one line; deciding a builder's design question the same turn with the owner's words quoted and a `DRAFT:` (the Switch button, the east half's breakable cover, bell or whistle, the paint pin); subagents for drafts and looks, so their reading stays out of this context.
+- **Waiting on the owner (nothing blocks):** the two questions in `docs/questions-inbox.md`; "full speed" or "throttle"; the stale branch; the changelog entry; and, by playing, the items under "For his eye" in "Status".
