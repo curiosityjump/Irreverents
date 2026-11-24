@@ -369,6 +369,64 @@ button art is in the library mirror, not in `assets/`.
 
 ## Builder notes
 
+### Buttons (brief `handoff-prompts/owner-better-buttons.md`)
+
+Builder `session_017WiGzJ23ionY6B1PB5Nmme`, 2026-11-24. The owner asked:
+"Can we get better player buttons? Do we need new assets for those or do we
+have them already somewhere unused?" **Answer: mostly we had them, unused.**
+P07's UI atlas has a matching family (round lilac plates with a dark rim,
+a d-pad, arrow keys) that nobody had cut; three of seven controls have a
+glyph there, the rest have none.
+
+**Every control the phone shows, before this brief** (all 48×24 strips, normal then pressed):
+
+| Control | Drawn from (before) | Approved, unused source? (what I saw) | Now |
+|---|---|---|---|
+| Stick left / right | U08 `left.png`, `right.png` (grey-green octagon, blue arrow) | **Yes**: P07 d-pad left/right keys (24,918)-(104,1002), (180,918)-(260,1002); also P07 arrow keys (956..1138, 915..1008) | P07 d-pad keys |
+| Jump | U08 `jump.png` (chevron) | **Yes**: P07 round button, winged boot, centre (352,965) r 80 | P07 boot button |
+| Hit (attack) | U08 `attack.png` (orange burst) | **Yes**: P07 round button, sword, centre (510,963) | P07 sword button |
+| Grab | U08 `grab.png` (purple hand) | **Plate yes, glyph no**: no hand anywhere in P07, P05 or the A00 comps | P07 plate (re-authored, below) + U08's hand |
+| Use | `assets/ui/use.png` (props lane's DRAFT hand on the U08 plate; MA-01) | **Plate yes, glyph no** (MA-01 stands) | P07 plate + the same DRAFT hand; its words unchanged |
+| Switch | U08 `special.png` (gold sparkle) | **Partly**: P07 round star button (666,963) reads "special", as today; P05's swap arrows (353,284,431,344) and party-swap glyph (584,24,768,145) are the only swap pictures and read as a gold blob at 24 px | P07 star button |
+| Pressed looks | U08's own pressed halves | **No**: P07 shows no pressed state | derived: plate darkened to 70% and sunk 1 px, glyph kept (DRAFT) |
+| "Would do nothing" (dimmed) | none | **No** source; it is a style | CSS: picture at 40%, 70% grey (DRAFT) |
+| Stick-up chevron, "Go in" arch, the words | CSS | P07 up-arrow key (770,919,855,1004) exists (asset-coverage `ui:use-go-in`); not this brief's | unchanged |
+
+Looked at myself: P07 `irreverents-pixel-ui-atlas.png` (whole), P05
+`p05-ui-hero-party-hud-source.png` and `p05-d-…-preferred-sheet.png`
+(whole), A00-01 and A00-03 (no touch controls in either; A00-02/04/05/06
+not opened). **The clean plate** has no single source (every P07 round
+button has a glyph): it is re-authored from the three, per pixel the mean
+of the samples no glyph covers. The cutter is `tools/art/touch/cut.py`
+(deterministic); `tools/art/touch/shots.mjs` takes the contact sheet.
+
+**Missing (sent to Vision Partner for the Drive's list):** a grab/throw
+glyph in P07's style; the Use glyph (MA-01, already listed); a swap/switch
+glyph that reads at 24 px; pressed and disabled frames for the round
+plates and the d-pad.
+
+**Contact sheet** (`step-5-shots/buttons/`): `upright-390x664.png`,
+`sideways-667x375.png`, `sideways-844x340.png` (each (a) today, (b) P07
+with arrow-key stick, (c) P07 with d-pad stick; Jump held down in all), and
+`cuts-a-today-b-keys-c-dpad.png` (the strips at 4×, swap arrows last).
+**What reads, by my own look:** upright (64 pt buttons) everything reads,
+both sticks. Sideways over the view (34 pt pictures): d-pad triangles,
+boot, sword and both hands read; the star is the smallest glyph and reads
+as a star, not as "switch" (it never did); the arrow keys' shafts thin to
+a pixel and read less well than the triangles. The P05 swap arrows do not
+read at any size here. **Chose (c).** No glyph fails at 44 px, so no
+layout number changed.
+
+**Measured** (1 run each, local server, Chromium emulation): `npm run e2e`
+all 91 ok; paint over the view 667×375 2.54% (was 2.79%), 736×414 1.65%,
+844×340 1.96%, 750×340 1.74% (limit 3%). A real touch on Jump shows the
+pressed half on touchstart and the normal half on release; with
+`assets/ui/touch/p07/` refused (404), every control falls back to today's
+picture (the control run); at the start spot Use is dimmed and nothing
+else is. **Not verified:** on a real iPhone; Switch's dimming with a full
+party (rule mirrors `verbs/switch.ts`, not driven).
+
+
 ### Flakes (brief `handoff-prompts/step-5-e2e-flakes.md`)
 
 **Measured** by the builder `session_017WiGzJujVWWDboh12zWhNR`,
