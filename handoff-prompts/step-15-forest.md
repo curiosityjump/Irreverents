@@ -1,3 +1,10 @@
+**Lead, 11:35 UTC, for the second builder. READ THIS FIRST; it replaces the blocks below where they differ.**
+- **Landed and reviewed:** push 1 (518e220: road and trail, joined as the stage `bramble-forest`), push 2 (841d4a8: the insides, the boulder only a boost lifts, the shortcut, five pieces), push 2b (2652cc8: the forest's own tiles, `assets/tiles/forest.png`; looked at by the lead).
+- **Read first:** "Handoff" in `docs/plan/step-15.md` (the first builder's measured layout for the guarded spot, the thrower's tile, the spear's source, the star-time numbers) and `tools/scenario-bots/README.md` (the walker that records scenario inputs).
+- **Your order:** push 3 (below), then push 4 (below). Push each as soon as it is green.
+- **Also owed:** the boulder is a grey box. If a cut from the approved plates fits (a mossy stone, P10 or P03), give it a sprite (`DRAFT:`); if not, leave it and say so.
+- Stop at about 300k tokens with a handoff under "Builder notes".
+
 **Lead, 10:10 UTC (from the orchestrator). Read this first:**
 - **Forest tiles:** the forest must not reuse the quarry's tile sheet. P10's pack is listed in `docs/design-library/manifest.json`, not mirrored. Fetch it by Drive id into a scratch folder (`docs/mechanisms/asset-requests.md`, "Listed, not mirrored"), cut the TRN-01 and TRN-10 rows into `tiles/forest.png` (`DRAFT:`) in push 2 or 3, and raise the mirror's rule for that file. Ask Vision Partner only if the rows aren't there.
 - **Push 4 shots:** the forest sideways at 844x390 and 750x340, and upright.
