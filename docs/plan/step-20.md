@@ -348,3 +348,46 @@ outpost), and three scenarios: `step20-wave-wagon-outrun`, `-taken`, `-skips-a-s
   It was already red on `main` without this push (1573906, review at 9dbd705:
   "the last hero unbeaten"; the hearts brief owns it). The defeat facts alone,
   three runs on this commit: all green.
+
+## Guard vehicle on the courtyard's run (opened 2026-11-24 by orchestrator session_017WiGzHY5UZsWTLCH8cLm8M)
+
+**The owner, 2026-11-23 ~18:30 UTC, first-hand, after playing on a phone**
+(`docs/current-directive.md:132`, `docs/vision.md:137`): "... no vehicle
+hijacking ...". D-017, D-020 ("roadblock crashes"), D-023 ("hijacking the
+enemy machine sent to stop the party"); `docs/vision-gaps.md` row 15, "What
+would close it: One machine on the courtyard's flat run to board, drive and
+crash".
+
+**Goal.** On the castle courtyard's flat run (columns 1-13,
+`content/rooms/courtyard.json:2`) the town guards' patrol trike stands
+empty: get in, drive it east and crash it through the guards' roadblock,
+launching the pieces and anyone standing at it, and jump out at any moment.
+Taking it in a guard's view is the deed `take` and ramming a guard is
+`hit`, so the watch reacts by its existing NPC response logic; with budget,
+the town's top row brings a guard driving one at you, to be taken off him.
+
+**Signal.** Scenarios `step20-courtyard-trike-through-the-roadblock`,
+`-trike-solo-infiltrator`, `-trike-stalled-jump-out`,
+`step20-courtyard-theft-seen`, `step20-courtyard-ram-a-guard` (push 3:
+`step20-street-watch-trike-taken`, `-outrun`), each with a control watched
+failing; the e2e facts `guard-machine-get-in`, `-drive`, `-out`
+(`scripts/e2e/guard-machine.ts`, a phone-sized page by touch); shots at
+844x390 and 390x664 in `step-20-shots/courtyard-*`.
+
+**Stopping condition.** Pushes 1 and 2 of the brief live on `main`, the
+signal green there and `npm run check:live` ok; push 3 only if one
+builder's budget allows, else its measurements left in the notes.
+
+**Decided** (orchestrator, `DRAFT:`): the trike (the only guard vehicle
+whose painted width fits a box of at most 32), parked empty at [1, 7]; the
+roadblock as `crate`/`crate-heavy` bodies at columns 11-13, not a solid
+part (a wall there stops the 16 courtyard scenarios that walk through those
+columns and the town's guards, who cannot jump); stealing maps
+`machine-taken` to the existing deed `take`; no guard placed in the
+courtyard (he would clash with Step 24's thrower on sight). **Open**
+(builder's, logged): the trike's numbers, the names of the additive fields
+(look per state; cells with nobody in them; head row; the doer on
+`machine-crash`; `rides` on a dispatch person). For the owner, by playing:
+does the crash earn the "OHH!"; should a guard ever patrol on it.
+
+**Briefs:** `handoff-prompts/guard-vehicle-courtyard.md`.
