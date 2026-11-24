@@ -108,7 +108,10 @@ different from being a lead").
 
 ## Entries
 
-<<<<<<< HEAD
+### Step 15's third builder, 2026-11-24 (for Step 10's lead)
+
+**Flag:** the walk to the forest is a beat Step 10 can use. From the courtyard, the forest's doorway (columns 8-10 of the floor, left of the quarry's) leads up into `forest-road` and on to `forest-trail`, a second stage (`bramble-forest`) with its own hearts, game over at its entrance and stars. A phone does it by touch alone (`npm run e2e`, facts `forest-in`, `forest-road-cross`; `scripts/e2e/forest.ts`). Shots of the road, the trail and its three secrets at 844x390, 750x340 and 390x664 are in `docs/plan/step-15-shots/`.
+
 ### Handoff, orchestrator `session_017WiGzHhT2apmWHT61rQ65G`, 2026-11-24 14:45 UTC
 
 Picked up 02:12 UTC from `session_017WiGzJzo6aZqH4kYxxJsiV`; handing off at about 740k tokens of context to a successor this session starts itself. **Everything in flight is in `docs/current-directive.md`'s "Status", "Sessions" and "Owed next" (rewritten at this handoff). Read "Status" first.**
@@ -119,10 +122,3 @@ Picked up 02:12 UTC from `session_017WiGzJzo6aZqH4kYxxJsiV`; handing off at abou
 - **Slips of mine to know about:** I merged in my main tree while my own e2e ran there, twice in the first hour, and spoiled a review (use a detached worktree). I told the owner twice that a fault was the game's on a single first reading (a missing whistle gauge at 08:30; two e2e reds at 12:50) and had to correct it: say "one run", not "broken", until a second measurement.
 - **What worked:** a narrow brief with the measuring done, to a fresh builder, every time one reached 250-300k tokens; asking a quiet builder for one line; deciding a builder's design question the same turn with the owner's words quoted and a `DRAFT:` (the Switch button, the east half's breakable cover, bell or whistle, the paint pin); subagents for drafts and looks, so their reading stays out of this context.
 - **Waiting on the owner (nothing blocks):** the two questions in `docs/questions-inbox.md`; "full speed" or "throttle"; the stale branch; the changelog entry; and, by playing, the items under "For his eye" in "Status".
-=======
-*(empty at 2026-11-24 10:15 UTC; the skip-worktree finding went into `docs/roles/builder-card.md`, section 6, and `docs/process-observations.md`. If you resolve a conflict in this file, keep the remote side of everything that is not your own entry.)*
-
-### Step 15's third builder, 2026-11-24 (for Step 10's lead)
-
-**Flag:** the walk to the forest is a beat Step 10 can use. From the courtyard, the forest's doorway (columns 8-10 of the floor, left of the quarry's) leads up into `forest-road` and on to `forest-trail`, a second stage (`bramble-forest`) with its own hearts, game over at its entrance and stars. A phone does it by touch alone (`npm run e2e`, facts `forest-in`, `forest-road-cross`; `scripts/e2e/forest.ts`). Shots of the road, the trail and its three secrets at 844x390, 750x340 and 390x664 are in `docs/plan/step-15-shots/`.
->>>>>>> origin/main
