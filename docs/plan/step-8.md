@@ -439,3 +439,19 @@ Findings, worst first, as the pass gave them:
 12. The wagon and the hero merge into one blob; "Psst!" covers the ground; no barricade visible in `camp-wagon-through-the-barricade-844x390`.
 
 Right: pixel scaling crisp in every shot; the title art; the town, castle and undercroft clean and GBA-like; no damage number anywhere; the STAGE CLEARED card and the places menu read; the guard-vehicle sheet on style; a held sword reads. No screenshot exists of: the GAME OVER card, a held hammer or spear in play, the camp's alarm banners, the town's whistle gauge.
+
+## Phone HUD (brief `handoff-prompts/phone-hud-legibility.md`)
+
+Builder `session_017WiGzHxAKbURW5YnQt6bDN`, 2026-11-24. **Push 0: today's `main` shot on a local build** (at 3680029, by touch, Chromium's iPhone 14 emulation resized to upright 390×664 and sideways 844×390 and 750×340), in `step-8-shots/hud/before/`, with every control's box in `controls.json`. The tool is `scripts/hud-shots.ts` (lands with push 1) (`node scripts/hud-shots.ts <dir> [title,street,camp,defeat,stage]`; it builds and serves its own copy). Shot: the title; the castle street plain and after punching the guard (pips up; no heart was lost there in 60 s, so `street-fight-partial`); the courtyard at the camp's doorway (Go in); the camp's doorway and beside the wagon (Get in); the camp's horn banner and GAME OVER (844×390 only, from `scripts/e2e/defeat.ts`'s walk); STAGE CLEARED mid-count and done (put up page-side, as `stage.ts` does). **Not shot:** a held hammer or spear (the walk east passed the camp's hammer without Use offering it), a row arriving with its own banner, the town's whistle gauge.
+
+**The pass's list against today's game** (numbers are the pass's):
+- ~~2. Two button looks~~: one set shows everywhere (P07's round plates); the octagons were old shots. **Struck.**
+- ~~4. icons about 20 px sideways~~: at 750×340 the pictures are 32 CSS px and every game button's touch area is 52 (upright 64), the stick 136×52. **Struck as stated; what holds:** the sound button's touch area is 32 px and the upright hint's × is 28. **Buttons at once:** 9 upright (the stick, Jump, Hit, Grab, Use, Switch, the hint's ×, sound, menu), 8 sideways (no ×); on STAGE CLEARED 3–4 (Continue, sound, menu, ×); the title 4. Use is dimmed whenever it would do nothing; Switch never dimmed in these shots (one player, free members).
+- 3. Holds: "GET IN" over a greyed hand (`camp-wagon-get-in-*`), "GO IN" with no button (`courtyard-go-in-390x664`), a bare "^" above the stick upright.
+- 5. Holds: a friend's hearts are 3-pixel "vvv" (every in-play shot).
+- 6. Holds: the pips under the plate read as hearts or balloons (`street-fight-partial-*`).
+- 7. Partly: one banner at a time already (the shared queue); what holds is the level sign's near-empty second line holding one grey piece (`camp-wagon-*`, the courtyard). New: **GAME OVER's words are the browser's monospace, smoothed** (`hearts-game-over-844x390`), not the pixel font.
+- 9. Holds: STAGE CLEARED's stars read as chests; unearned is the same look dimmed (`stage-mid-count-*`). The clipped box behind the card is the room's own sign under the shade.
+- 10. Holds: upright, the title's choices cover the art and the bottom half is empty (`title-390x664`).
+- 11. Holds: the menu icon has no backing (`street-plain-844x390`).
+- 1, 8, 12: not this brief's (a room, the bomb's feel, the wagon's look).
