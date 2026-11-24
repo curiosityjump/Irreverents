@@ -107,6 +107,8 @@ reads the first by id). docs/decisions-log.md, "Step 7: legends".
   different people felled. Score: felled x 100 + waves.
 - **A narrow escape:** not a last stand, at least 2 waves, they left the
   room, and someone of a wave was standing. Score: the waves outlasted.
+  Not when the tick they left holds a `thrown-out` from that room (Step 21:
+  being thrown out is not leaving on your own feet; `step21-throw-is-no-escape`).
 - **A theft nobody noticed:** Step 19's `clean-getaway`; credited, everyone
   in the taker's room then; place, the heist's room. Score 1.
 - **Relative (S-001):** a feat hangs only if it scores more than the best

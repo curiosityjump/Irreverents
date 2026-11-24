@@ -87,6 +87,7 @@ export function createNetClient(opts: NetClientOptions) {
   /** Step 17: the server said this world is gone; no reconnecting to it, not even on kick(). */
   let gone = false;
   let latest: { tick: number; events: SimEvent[] } = { tick: 0, events: [] };
+  let serverMe: Entity | null = null;
   let heardRooms: World['rooms'] = undefined;
   /** The newest effect applied; effect ids only ever grow, so a resent copy is recognised. */
   let lastFx = 0;
@@ -185,6 +186,7 @@ export function createNetClient(opts: NetClientOptions) {
       const t = now();
       for (const e of m.w.entities) {
         if (e.id === myId) {
+          serverMe = e; // Step 21: the server's copy of this character, for what only it knows (wear, falls).
           // While held, whoever holds this character moves it, and that
           // is simulated on the server: follow the server's copy.
           if (heldBy(me())) adopt(e);
@@ -271,6 +273,8 @@ export function createNetClient(opts: NetClientOptions) {
     status: (): NetStatus => status,
     /** The newest server tick heard, and the simulation events that came with it. */
     latest: () => latest,
+    /** Step 21: the server's copy of this player's character from the newest snapshot (its `c` is the server's: wear, falls), or null before one. Read only. */
+    serverMe: (): Entity | null => serverMe,
     /** Step 3: the room state (`World.rooms`) of the newest snapshot, as sent, untouched by this page's own step; undefined before one. */
     heardRooms: (): World['rooms'] => heardRooms,
     /**

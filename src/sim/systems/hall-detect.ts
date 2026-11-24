@@ -90,7 +90,9 @@ const system: System = {
       // Left on their own feet with someone of a wave still standing.
       // DRAFT: an escape scores the waves it outlasted, so getting out after as many again hangs nothing.
       const waveStanding = world.entities.some((e) => e.room === op.room && e.id.startsWith(`${op.id}:w`) && !isOut(e));
-      if (gone && escape && ep.waves >= escape.minWaves && ep.felled.length >= escape.minFelled && waveStanding) {
+      // Step 21 (the orchestrator's go, 2026-11-23): being thrown out is not leaving on your own feet.
+      const thrown = ctx.events.some((ev) => ev.type === 'thrown-out' && ev.from === op.room);
+      if (gone && !thrown && escape && ep.waves >= escape.minWaves && ep.felled.length >= escape.minFelled && waveStanding) {
         hang(ctx, { kind: 'narrow-escape', place: op.room, ticks, who: ep.who, stats, score: ep.waves, frame: ep.snap.length ? ep.snap : frame });
       }
     }

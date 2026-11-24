@@ -384,6 +384,8 @@ async function main(): Promise<void> {
       await (await import('./e2e/doors.ts')).doorFacts({ browser, devices, base, out, fact, errors, shots: path.join(out, 'doors') });
       // Step 19's facts (heist-*): the Use button's word at the shop, and the party plate (docs/mechanisms/heists.md).
       await (await import('./e2e/heist.ts')).heistFacts({ browser, devices, base, out, fact, errors, shots: path.join(out, 'heist') });
+      // Step 21's facts (defeat-*): beaten in the camp by touch, the condition slot fine, hurt, down, thrown out to the courtyard and free (docs/mechanisms/defeat.md).
+      await (await import('./e2e/defeat.ts')).defeatFacts({ browser, devices, base, out, fact, errors, shots: path.join(out, 'defeat') });
       // Step 14 slice A's facts (level-*): the quarry's entrance drawn, found by touch, its name and pie; the menu's rows (docs/mechanisms/levels.md).
       await (await import('./e2e/levels.ts')).levelFacts({ browser, devices, base, out, fact, errors, shots: path.join(out, 'levels') });
       // Step 14 slice B's facts (glint-*): the piece over the awning glints, a held Jump by touch finds it, the row shows it gold (docs/mechanisms/levels.md, "Pieces").

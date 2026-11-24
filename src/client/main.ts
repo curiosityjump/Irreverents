@@ -23,6 +23,7 @@ import { drawnHud } from './draw/hud.ts';
 import { drawnSight, watchSightEvents } from './draw/sight.ts';
 import { drawnHeist, watchHeistEvents } from './draw/heist.ts';
 import { drawnAlarms, watchAlarmEvents } from './draw/alarm-banner.ts';
+import { drawnCondition, setViewerCopy, watchDefeatEvents } from './draw/condition.ts';
 import { drawnHall, watchHallEvents } from './draw/hall.ts';
 import { drawnRecruits, noteRecruits } from './draw/recruits.ts';
 import { drawnParts, setHeardRooms } from './draw/room-parts.ts';
@@ -151,6 +152,7 @@ const debug = {
     heist: null as ReturnType<typeof drawnHeist> | null,
     /** The alarm banners this page queued (src/client/draw/alarm-banner.ts). */
     alarms: [] as string[],
+    condition: null as ReturnType<typeof drawnCondition> | null,
     /** Step 7: the legends this page has announced by banner (src/client/draw/hall.ts). */
     hall: null as ReturnType<typeof drawnHall> | null,
     /** Step 13: the cages this frame drew in this room and the captives' calls (src/client/draw/recruits.ts). */
@@ -278,6 +280,8 @@ function play(worldName: string): void {
     watchSightEvents(net.latest(), frameNo); // Step 19: an unseen deed's mark (draw/sight.ts)
     watchHeistEvents(net.latest()); // Step 19: a clean getaway's banner (draw/heist.ts)
     watchAlarmEvents(content, net.latest(), me.room); // the owner's 2026-11-24 report: a finished horn and what it brings are announced (draw/alarm-banner.ts)
+    setViewerCopy(net.serverMe(), net.latest().tick); // Step 21: the condition slot reads the server's copy (draw/condition.ts)
+    watchDefeatEvents(content, me.id, net.latest()); // Step 21: thrown out, a prize back (draw/condition.ts)
     watchHallEvents(net.latest()); // Step 7: a new legend's banner, wherever this page is (draw/hall.ts)
     setHeardRooms(net.heardRooms()); // Step 3: plates drawn from the server's copy too (draw/room-parts.ts, plateAsDrawn)
     const camera = render(g, shown, content, me.room, { me: me.id, frame: frameNo, drawn: seen });
@@ -326,6 +330,7 @@ function play(worldName: string): void {
     d.sight = drawnSight();
     d.heist = drawnHeist();
     d.alarms = drawnAlarms();
+    d.condition = drawnCondition();
     d.hall = drawnHall();
     d.recruits = drawnRecruits();
     d.parts = drawnParts();

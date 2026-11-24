@@ -1,0 +1,61 @@
+{
+ "id": "step21-throw-is-no-escape",
+ "proves": "Step 21 with Step 7's Hall: in the real Bandit Camp the flyer stands among the fighters through three waves and is thrown out on its fourth fall (tick 2944, into the courtyard): being thrown out is not leaving on your own feet, so no 'narrow escape' legend is hung for it. Control (watched to fail): the thrown-out test removed from src/sim/systems/hall-detect.ts, and 'Out of Bandit Camp by a hair' hangs on that tick",
+ "room": "outpost",
+ "placements": true,
+ "players": [
+  {
+   "id": "a",
+   "character": "flyer",
+   "spawn": 0
+  }
+ ],
+ "inputs": [
+  {
+   "player": "a",
+   "from": 0,
+   "to": 135,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 20,
+   "to": 45,
+   "hold": [
+    "jump"
+   ]
+  }
+ ],
+ "ticks": 3600,
+ "expect": [
+  {
+   "fact": "event-where",
+   "event": "thrown-out",
+   "where": {
+    "entity": "p:a",
+    "from": "outpost",
+    "to": "courtyard"
+   },
+   "between": [
+    2944,
+    2944
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "event",
+   "event": "hall-legend",
+   "between": [
+    0,
+    3600
+   ],
+   "count": [
+    0,
+    0
+   ]
+  }
+ ]
+}

@@ -342,6 +342,25 @@ logged in `docs/decisions-log.md` by the builder who makes it):
   over. Phone e2e by touch: hearts drawn inside the safe area, one lost, then
   game over and the stick moves the hero in the cantina.
 
+### Push 3: the face shows each fall
+
+Built and landed while the hearts decision above was being written: the
+shields are the interim it allows ("the cut `hud-condition-*` marks may
+serve"); the hearts builder replaces `conditionOf` with the hero's hearts.
+
+`src/client/draw/condition.ts` fills the plate's condition slot with the
+cut shields (fine, hurt, down) from the server's copy of the viewer, and
+queues the place's banners. `scripts/e2e/defeat.ts`: by touch the slot went
+fine > hurt > down, the page was thrown to the courtyard and its stick moved
+the hero. Seen in its screenshots and fixed: the Hall hung "Out of Bandit
+Camp by a hair" on the throw, over the throw's own banner (`hall-detect`,
+the orchestrator's go; `step21-throw-is-no-escape`). **Left for the next
+builder:** the stagger and stars at the edge; `step21-friend-stops-it`
+(held), `-prize-goes-back`, `-friend-keeps-playing`, `-town-thrown-out`,
+`-cantina-no-throw`, `step21-nobody-is-held-*`; the two-connection
+`scripts/checks/step21-defeat.ts`; `check:live` for the e2e facts; the power
+scenarios once powers push 3 lands.
+
 ## Builder notes: Hearts (`handoff-prompts/hearts.md`)
 
 ### Push 1: hearts in the sim, and they are lost

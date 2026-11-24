@@ -52,6 +52,24 @@ start of the quarry, `follow`).
 **The place keeps its state.** Nothing resets: the post, the waves, the
 alert, found pieces, the roster; a friend inside is untouched.
 
+## On screen (push 3, `src/client/draw/condition.ts`)
+
+- **The condition slot** beside the viewer's face on the party plate
+  (`fillHudSlot('condition')`): `hud-condition-fine` (grey shield),
+  `-hurt` (gold: any wear, or any fall here in the window), `-down` (red:
+  flat, one fall from being thrown out, or worn past 75% of toughness).
+  `drawn.condition` records it. A page never gets the server's `c` for its
+  own character, so the slot reads the snapshot's copy: `serverMe()` in
+  `src/net/client.ts`, handed in each frame by `src/client/main.ts`
+  (`setViewerCopy`). `DRAFT:` the shares and the three states.
+- **Banners** (`queueBanner`, keys `risk:*`): the place's `words.thrownOut`
+  on your own `thrown-out`, and `words.prizeReturned` on a `prize-returned`
+  of yours. No digits.
+- **Not done:** the stagger and stars on the hero at the edge.
+- **The Hall:** `hall-detect` hangs no "narrow escape" on a tick with a
+  `thrown-out` from that room (being thrown is not leaving on your own feet;
+  `step21-throw-is-no-escape`).
+
 ## Rules that are deliberate
 
 - **The throw is the way out** (`INTENT:` in `defeat-throw.ts`;
@@ -77,7 +95,7 @@ there is out in about 20 to 35 s.
 
 ## How it is checked
 
-`scenarios/step21-camp-thrown-out.json` (controls: `on` false; `downs` 1).
+`scenarios/step21-camp-thrown-out.json` (controls: `on` false; `downs` 1); `step21-throw-is-no-escape` (control: the Hall's test removed). `npm run e2e`'s `defeat-*` facts (`scripts/e2e/defeat.ts`): by touch, into the camp past column 20, standing: the slot draws fine, hurt, down; then the page is in the courtyard and its stick moves the hero (the `move` effect's first run across rooms through a browser page). Screenshots: `docs/plan/step-21-shots/`.
 `scenarios/step22-beaten-to-entrance.json` (the quarry; control: `on`
 false). Measured there: a blow in the quarry often knocks a hero off a ledge
 or into a dip out of every seizer's reach (the road's heavy, the ridge's

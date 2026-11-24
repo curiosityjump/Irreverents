@@ -1248,3 +1248,13 @@ document as a decision of theirs.
 - **Why this way:** the owner: "real way to lose/die, which pushes you back to the entrance to start over"; the step's decided reading: with friends, a beaten player is back at the entrance at once and the stage starts over only when nobody else is left inside (solo: at once). A friend walking out without being beaten does not start it over. The world never pauses, so the clock does not stop for the menu; a friend joining mid-run shares its clock and counts. What you found for good stays found.
 - **To change it:** `"on": false` in `content/stages/iron-quarry.json` turns the stage off (the quarry then keeps its state like everywhere else); the rule is `src/sim/systems/stage-run.ts`, what is put back `restoreStage` in `src/sim/stage.ts`.
 - **Where:** `docs/mechanisms/stages.md`; `docs/plan/step-22.md`, "Builder notes". `DRAFT:`
+
+
+
+
+### 2026-11-24 · Step 21: a shield beside your face goes grey, gold, then red as you are beaten, and red means one more fall throws you out
+- **Decided by:** Step 21 builder (risk), push 3, `session_017WiGzJWYyVWtYnjFXHko1S`
+- **Instead of asking:** "How should a player see they are losing: hearts, a bar, a face?"
+- **Why this way:** the owner, playing: "i seem to be invincible as hero" and "neither can heros [be fully defeated]"; no digits, no bars (D-020); the HUD sheet's own shield ladder, cut for this. Gold after any blow or fall, red when flat or one fall from being thrown out (or nearly worn through), so the throw is seen coming.
+- **To change it:** `HURT_SHARE`, `EDGE_SHARE` and `conditionOf` in `src/client/draw/condition.ts`; the shields in `content/looks/ui.json`.
+- **Where:** `docs/mechanisms/defeat.md`, "On screen". `DRAFT:`
