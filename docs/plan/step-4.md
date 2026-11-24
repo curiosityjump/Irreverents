@@ -728,6 +728,7 @@ step23-thrown-out-leaves-it red; left for the weapons builder.
 - Old fact (control): 3 of 3 on `main`; **1 of 3 with the rows** (one run 8 more taps, then the whistle of the 2 → 3 rise, and the walk out failed; one 320 s run failed).
 - The new fact with the bell ignored (control, `bell = 0` in the record): 3 of 3 with the rows still passed, but only by tapping on 2–3 more times until a whistle came (once the 2 → 3 rise). So that is not a red control; what it shows is that the bell's record is what the new fact's 10 passes counted. A red control for the drawn record itself was not found (with the bell dropped, the fact falls back to the fourth builder's 3 of 5).
 - Not run: `main` with the bell ignored (stopped for time).
+- **Landed at 3ed74d0** (code: `alert.ts`'s record and the fact). `check:live` green, `tiers` included: answered by the bell, 1 → 2 pips, guards drawn 1 → 3, 2 pips in the throne room. `check:deployed` timed out once at three minutes (live was on 614f9ee, healthy); live took 3ed74d0 at 12:04 UTC without a revert, as the brief's trap says. Seen in e2e, not mine: `t-throw-friend` failed once (B drawn moving 22 px) and passed on the next two runs. Also: every `npm run e2e` rewrites screenshots under `docs/plan/step-22-shots`, `step-23-shots` and `step-24-shots` (restored each time, never committed). Next: task 2, the rows.
 
 ## Camp entries (`handoff-prompts/camp-entries.md`)
 
