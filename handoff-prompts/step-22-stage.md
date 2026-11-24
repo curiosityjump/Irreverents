@@ -1,3 +1,17 @@
+**Lead, 04:08 UTC, the state of play. READ THIS FIRST.**
+
+- **Live and reviewed:**
+  - push 1 (973968f)
+  - push 2 (d6acfdb)
+  - push 3a, the end, stats, stars and the result on the sign (d529a1b)
+  - owed item (a), restorePeople/holdReturns (6edd8be)
+- **Your order:**
+  1. **The depot push (d).** The second builder's handoff is in `docs/plan/step-22.md`, "The depot push (d)". The entries work and a wave reaches the hero. `step16-caught-fight` needs a real re-route, keeping its claims.
+  2. **(b): the stage starts over on Step 21's `game-over`.** It is on `main`; `stage-run.ts` still listens only for `thrown-out`. Write a scenario plus a control, then tell the hearts builder, `session_017WiGzG7mhviEaxroo5GvBv`.
+  3. **Push 4, the STAGE CLEARED screen.** The owner asked for it by name, and it is the most visible thing still missing.
+  4. The wings' move (c), then 3b (the five heroes' runs and the real star times), then push 5.
+- Push each one as soon as it is green. Stop at about 350k tokens with a handoff.
+
 **Lead, 02:00 UTC, the state of play: pushes 1 and 2 are done and live (973968f, d6acfdb; reviewed at b325d34 and c823aa0). Start at push 3 (the end, the result, the stars).** Read "Builder notes" in `docs/plan/step-22.md` first, especially the first builder's handoff (traps, `scripts/run-some.ts`). Also owed:
 
 - (a) **When `restorePeople`/`holdReturns` (`src/sim/beaten.ts`) are on `main`:** switch `restoreStage` to them, keeping `stageHome` only for what they don't cover (decisions-log, "the stage's own restore of people is kept for now").
