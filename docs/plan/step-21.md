@@ -278,3 +278,66 @@ after the first, is seized and thrown at 2433). `step21-friend-stops-it`
 still waits in `docs/plan/step-21-held/`: with `downs` 4 its timing has to be
 found again (next push), as do the other signal scenarios and the Hall's
 narrow-escape edit the orchestrator allowed.
+
+## Hearts (the owner, 2026-11-24 ~01:20 UTC): this replaces "N knock-downs, then thrown out"
+
+**The owner, first-hand to the orchestrator, playing:**
+
+> Heros should have hearts which can be lost. Once all heros in the party are out of hearts, that's a game over (back to cantina)
+
+Decided by the orchestrator from those words (`DRAFT:` where marked; each
+logged in `docs/decisions-log.md` by the builder who makes it):
+
+- **Every hero in the party has hearts**, drawn on the party plate beside
+  that hero's face (the HUD `condition` slot and the plate are where they
+  go; the cut `hud-condition-*` marks may serve until a heart is cut from an
+  approved sheet: ask the props builders; a heart with no source is a
+  `DRAFT:` stand-in and a missing-list item). How many is data per hero
+  kind (`DRAFT:` 3).
+- **A heart is lost when an enemy puts the hero on the floor** (worn out and
+  flattened by a bad guy's or a provoked guard's blows, or by their throw or
+  slam): the fall is the unit, so impact still carries combat and nothing
+  counts single blows (D-020). `DRAFT:` the other answer is a heart per blow
+  landed; keep it one data switch. A friend's hit, a fall, a wall, the
+  cantina's brawl (D-086, doc 31: no loss there) cost nothing.
+- **A hero with no hearts is out**: they cannot get up as that hero and
+  nobody can switch to them; the player is moved to the next party member
+  who has hearts (the existing switch, forced), where they stand if that is
+  safe, else at the room's way in (`DRAFT:` measure which never traps
+  anyone). The plate shows them out.
+- **When every hero in the party is out of hearts it is game over**: a GAME
+  OVER moment the page draws (the banner queue; a held beat, `INTENT:` it
+  never holds a player longer than the beat and one tap skips it), then
+  every player of that game is in the cantina with the whole party's hearts
+  full. What was found for good stays found (pieces, discovered levels and
+  power sources, recruits, the Hall's legends); a carried prize goes back to
+  its stand (`returnPrize`), a held power stays where it fell, alerts and
+  waves end. The party is shared by everyone playing (D-012, D-013), so
+  hearts and game over are the party's, not one player's: with two players
+  each playing one hero, a hero out leaves that player on the next member
+  with hearts, and game over comes only when none is left.
+- **Where a game over sends you is data per place** (`DRAFT:`): the cantina
+  by default, as he said. Step 22's stage sets its own (his words for that
+  stage, an hour earlier: "pushes you back to the entrance to start over"):
+  the orchestrator has asked him which he wants there; until he answers the
+  stage restarts at its entrance with hearts full.
+- **Hearts come back** in the cantina (walk in: full) and at a game over.
+  `DRAFT:` nothing else restores one yet (a pickup is a later data kind).
+- **What this does to the rule already live** (`content/defeat/`, ebfd824:
+  thrown out after 2 knock-downs in a minute in the street, 4 in the camp):
+  the count of falls becomes hearts on the hero, everywhere a bad guy can
+  floor you, not per place and not per minute; the seize-and-throw to the
+  doorway is no longer what losing is. Keep the code that is right (the
+  fall detection, `returnPrize`, the cross-room `move`), retire the place
+  files' `downs` and `window` by leaving them read but unused (never remove
+  a shipped field), and say in the notes what was kept. The five other
+  steps' scenarios that flatten a hero must stay green or be listed to the
+  orchestrator before any re-time.
+- **Signal:** `step21-heart-*` scenarios, each with a control: a fall to an
+  enemy costs one heart and a fall to a friend costs none; the last heart
+  moves the player to the next member; the last member's last heart is game
+  over, everyone is in the cantina with full hearts, the prize is back on its
+  stand; a kept game keeps hearts across a server rebuilt on the same store;
+  two connections: both pages draw the same hearts and both get the game
+  over. Phone e2e by touch: hearts drawn inside the safe area, one lost, then
+  game over and the stick moves the hero in the cantina.
