@@ -554,7 +554,6 @@ async function main(): Promise<void> {
     await phoneFacts({ browser, devices, base, out, tag: LIVE ? 'check' : 'e2e', fact, errors });
     // Step 18's fact (fight-back): a guard hit until he rages hits the phone's character back, by touch, here and on live (docs/plan/step-18.md, signal 5).
     await (await import('./e2e/fight.ts')).fightFacts({ browser, devices, base, out, tag: LIVE ? 'check' : 'e2e', fact, errors });
-    await (await import('./e2e/tiers.ts')).tierFacts({ browser, devices, base, out, tag: LIVE ? 'check' : 'e2e', fact, errors });
     await awayFacts({ browser, base, out, tag: LIVE ? 'check' : 'e2e', fact, errors, wholeWait: !LIVE });
     // Step 23's facts (weapon-*), here and on live in a private world: the street's sword, Use says Pick up and it glows; a tap and it is in hand; its hit predicted; Grab throws it (docs/mechanisms/weapons.md).
     await (await import('./e2e/weapons.ts')).weaponFacts({ browser, devices, base, out, fact, errors, shots: LIVE ? path.join(out, 'weapons-live') : path.join(root, 'docs/plan/step-23-shots') });

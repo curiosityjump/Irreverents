@@ -1,12 +1,6 @@
 import { heldBy } from '../effects.ts';
-import { alertLevel, completeCall } from '../npc/alert.ts';
-import { canSee } from '../npc/sight.ts';
-import { findEntity } from '../world.ts';
+import { completeCall } from '../npc/alert.ts';
 import { centre, drive, isOut, npcKind, seconds } from '../npc/state.ts';
-import { doorToward } from '../room-routes.ts';
-import { askForDoor } from './room-doors.ts';
-import type { Content } from '../../content/types.ts';
-import type { Door } from '../../content/kinds/rooms.ts';
 import type { Entity, StepContext, System } from '../types.ts';
 
 /**
@@ -16,8 +10,7 @@ import type { Entity, StepContext, System } from '../types.ts';
  *
  * Fixed states, no choosing (D-055: NPC response logic):
  * - **Who, when:** a good person answering a call (`c.respond`), in its
- *   `chase` phase (a hero in sight), or a guard in a rage while his area's
- *   alert is up with a hero who offended him in sight; whose home area has a dispatch file
+ *   `chase` phase (a hero in sight), whose home area has a dispatch file
  *   (content/dispatch/), who is standing on his feet, and whose dissonance
  *   is above what he last reported: the same rule as the bell's
  *   (npc-call.ts, "one call per thing witnessed"), for someone on duty.
@@ -37,8 +30,8 @@ import type { Entity, StepContext, System } from '../types.ts';
  * DRAFT (docs/decisions-log.md, "Step 4: whistle"): doc 27's whistle is "a
  * suggested reconciliation, not a new owner-approved implementation"; that a
  * guard whistles at all, what stops it and every number are first guesses.
- * A follower who blows in another room raises his home area's alert; the
- * place reported is the home room's door toward where he is.
+ * DRAFT: push 1 whistles only in his own area; a follower who blows in
+ * another room is push 2's.
  */
 function stop(ctx: StepContext, e: Entity, why: string): void {
   const w = e.c.whistle;
@@ -55,12 +48,6 @@ function cannotBlow(e: Entity): string | null {
   if (heldBy(e) !== null) return 'grabbed';
   if (e.c.flying || e.c.beat) return 'knocked-down';
   return null;
-}
-
-/** The middle of a door of a room, in that room's pixels (feet height). */
-function doorPlace(content: Content, roomId: string, door: Door): { x: number; y: number } {
-  const T = content.rooms[roomId]?.tile ?? 16;
-  return { x: (door.tx + door.w / 2) * T, y: (door.ty + door.h) * T - 14 };
 }
 
 const system: System = {
@@ -86,31 +73,7 @@ const system: System = {
       if (w && w.wait > 0) w.wait--;
       const kind = npcKind(content, e);
       // The alert over (alert-respond has taken them off duty), or not one who whistles: nothing.
-      // A follower away from home whistles too, if there is a way home to report (below).
-      const wayHome = e.room === n.home ? null : doorToward(content, n.home, e.room);
-      // On duty: answering a call (`c.respond`), or a guard in a rage while his area's alert is up (the one
-      // who rang the bell himself is no responder, but he is just as much after you).
-      // DRAFT (docs/decisions-log.md, "Step 4: whistle"): the second half, found by tracing e2e's fight-back.
-      const raging = !r && kind?.role === 'guard' && n.mood === 3 && alertLevel(world, n.home) > 0;
-      // A raging guard put out of his area (a blow, a throw) while its alert is up, with nobody who offended
-      // him in sight: back by the door toward home, where he can see the hero and call again.
-      // DRAFT (docs/decisions-log.md, "Step 4: whistle", the re-land): measured on a phone script, a blow that sent
-      // him out by the courtyard door left him there until the alert cooled, so the street never escalated.
-      // A responder is alert-respond's (D-077: he searches where the chase led); this is only the one who called.
-      if (raging && e.room !== n.home && kind?.side === 'good' && content.dispatch?.[n.home]) {
-        const seesOffender = n.offenders.some((id) => { const h = findEntity(world, id); return h?.player != null && canSee(content, e, h); });
-        const home = doorToward(content, e.room, n.home);
-        const room = content.rooms[e.room];
-        if (!seesOffender && home && room) {
-          if (w) stop(ctx, e, 'stood-down');
-          const T = room.tile;
-          const dx = (home.tx + home.w / 2) * T - centre(content, e).x;
-          drive(e, { x: dx > 0 ? 1 : -1, y: 0, held: [] });
-          if (home.use === 'enter' && Math.abs(dx) <= (home.w * T) / 2) askForDoor(e);
-          continue;
-        }
-      }
-      if ((!r && !raging) || !kind || kind.side !== 'good' || !content.dispatch?.[n.home] || (e.room !== n.home && !wayHome)) {
+      if (!r || !kind || kind.side !== 'good' || !content.dispatch?.[n.home] || e.room !== n.home) {
         if (w) {
           stop(ctx, e, 'stood-down');
           w.reported = n.dissonance;
@@ -123,9 +86,7 @@ const system: System = {
         continue;
       }
       if (w.progress === 0) {
-        // Chasing: a responder in his chase phase, or a raging guard with a hero who offended him in sight.
-        const chasing = r ? r.phase === 'chase' : n.offenders.some((id) => { const h = findEntity(world, id); return h?.player != null && canSee(content, e, h); });
-        if (!chasing || w.wait > 0 || n.dissonance <= w.reported) continue;
+        if (r.phase !== 'chase' || w.wait > 0 || n.dissonance <= w.reported) continue;
         ctx.emit('call-started', { by: e.id });
       }
       const blow = w;
@@ -133,11 +94,8 @@ const system: System = {
       blow.progress++;
       blow.of = need;
       if (blow.progress < need) continue;
-      // Sent. The place reported is where he last saw what upset him; from another room, the
-      // home room's door toward that room.
-      // DRAFT (docs/decisions-log.md, "Step 4: whistle"): help from home comes to the door the chase
-      // went out by and searches there; it learns which way, not where (D-065).
-      const at = wayHome ? doorPlace(content, n.home, wayHome) : (n.lastSeen ?? centre(content, e));
+      // Sent. The place reported is where he last saw what upset him.
+      const at = n.lastSeen ?? centre(content, e);
       blow.progress = 0;
       blow.reported = n.dissonance;
       blow.wait = seconds(content.tuning.world.npcWhistleAgain!);
