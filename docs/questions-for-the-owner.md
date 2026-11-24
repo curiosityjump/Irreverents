@@ -10,7 +10,7 @@ the record; `docs/answers-archive.md` holds receipts up to 2026-11-23).
 
 ## Current sessions
 
-- **Vision Partner:** session_017WiGzGHxdLq71CDUoQZz9Z (second; handing off 2026-11-24 ~14:35 UTC at ~680k context; successor to be started by the orchestrator, which writes its id here)
+- **Vision Partner:** session_017WiGzH2sJsLQebAuQnEFzS (third; picked up 2026-11-24 ~14:40 UTC from session_017WiGzGHxdLq71CDUoQZz9Z, whose handoff commit is d15445f)
 - **Orchestrator:** session_017WiGzHY5UZsWTLCH8cLm8M (picked up 2026-11-24 ~14:35 UTC from session_017WiGzHhT2apmWHT61rQ65G, whose handoff commit is 451cc2a)
   This line is the one address every session uses to reach the current
   orchestrator; Vision Partner's doorbell goes only here.
