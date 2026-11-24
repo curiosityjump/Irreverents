@@ -150,3 +150,36 @@ Step 17 builder `session_017WiGzGw7XaQ6tZNddFaa8s`, 2026-11-23.
 - Open (DRAFT): a part that moved in an edited room starts again in old
   saves; a component field a later build adds to a body still needs its
   system to default it, or that game is set aside (contained, but not run).
+
+## Title screen
+
+Builder `session_017WiGzH3PZe5UkjdEEaAN75`, 2026-11-24, on
+`handoff-prompts/owner-title-screen.md` (the owner: "Title screen asset
+added to the drive").
+
+- **The asset.** Drive `/03 Visual Direction and Assets/Current Pixel-Art
+  Explorations/Irreverents_Title_Screen_Concept_2026-11-23.png` (1672×941,
+  2.9 MB, no doc beside it; named a concept, used as it is, D-096). It
+  shows the gold "IRREVERENTS" wordmark on a stone plaque with a compass
+  star and red ribbons, a sunset sky with floating islands, ruins left, a
+  castle and waterfalls right, a town and aqueduct between. Mirrored by the
+  sync at 8cb79ac.
+- **On screen.** `tools/art/title/make.py` re-authors it to 320×180 (each
+  cell the average of the source pixels under it, then 64 flat colours, no
+  dither; nearest-neighbour was tried and speckled the lettering) as
+  `assets/ui/title-screen.png`, with `content/looks/title.json` naming the
+  whole picture and the wordmark's box. `src/client/start.ts` draws it
+  behind the start screen and the link page (decisions-log, 2026-11-24).
+  Without the content file the old pixel-font title comes back (checked).
+- **Shots** (`docs/plan/step-17-shots/title/`, local server, Playwright at
+  2×): upright 390×664, the whole picture across the top, title clear,
+  every choice below it, the field's top at 201 px; sideways 667×375, the
+  picture fills the screen; sideways 844×340, the whole picture with night
+  bars left and right, nothing cropped; desktop 1280×720, the picture fills
+  at 4×. Each size with and without three games to continue: every choice
+  on screen and 44 px or taller, no scrolling. Fixed after looking: the
+  empty Continue column pushed the choices off centre (it now takes no
+  room), and the link page's "Start screen" button had no backing over the
+  picture.
+- Not verified: a real iPhone (the notch inset: the picture sits inside the
+  safe area, measured only in emulation, where the inset is 0).

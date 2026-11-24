@@ -29,10 +29,10 @@ Rows go stale as the look3 lanes push: re-check a row against the current file b
 | Interactive looks (props) | 28 | 19 | 7 | 0 |
 | Decor | 43 | 12 | 25 | 6 |
 | Effects | 9 | 5 | 4 | 0 |
-| UI and HUD | 44 | 8 | 31 | 5 |
+| UI and HUD | 44 | 9 | 31 | 4 |
 | Sound effects | 42 | 29 | 7 | 6 |
 | Music | 8 | 0 | 0 | 8 |
-| **All** | **218** | **89** | **100** | **27** |
+| **All** | **218** | **90** | **100** | **26** |
 
 ## Path keys
 
@@ -77,7 +77,7 @@ Rows go stale as the look3 lanes push: re-check a row against the current file b
 | MA-19 | `sfx:flap` | Flyer wing flap | BACKLOG | AUD-008 (new row: flyer flap/glide sounds) |
 | MA-20 | `ui:sound-button` | Sound on/off button | BACKLOG | UI-013 (audio mute) |
 | MA-21 | `ui:page-surround` | Page ground tile + thin game frame | BACKLOG | UI-016 (new row: page ground and game frame) |
-| MA-22 | `ui:start-title` | 'Irreverents' title wordmark (DRAFT until the owner picks it) | BACKLOG | UI-015 (new row: start-screen title wordmark) |
+| MA-22 | `ui:start-title` | 'Irreverents' title wordmark (DRAFT until the owner picks it) | DELIVERED 2026-11-24 (the owner's title screen; in the game) | UI-015 (new row: start-screen title wordmark) |
 | MA-23 | `sprite:dummy` | Training dummy (light) | BACKLOG | INT-017 (new row: training dummies, light and heavy) |
 | MA-24 | `sprite:dummy-heavy` | Training dummy (heavy) | BACKLOG | INT-017 (new row, with MA-23) |
 | MA-25 | `decor:portraits` | Framed portraits (throne room, Hall gallery) | BACKLOG | INT-010 (royal room prop set) |
@@ -304,7 +304,7 @@ U08-01 buttons are delivered and byte-identical in assets/ui/touch/. Everything 
 | `ui:cantina-party-row` | approved-source-not-used | Chips: P07 UI portraits (27,69,177,216), (190,69,343,216), (353,69,507,216) and the P04 cantina heads; taken: P07 locked slot (295,724,405,834) or red X; own: P07 selected slot (175,724,285,834); swap: P05 HUD glyph (584,24,768,145); layout: A00-03 party panel (410,470,805,665). | look3-props cuts party-chip looks; Step 11 (cantina.ts drawRow) draws them. |
 | `ui:hall-card` | approved-source-not-used | `P04/hall-of-legends-tile-atlas.png` big plaque (380,520,497,585) as the nine-slice; rank: laurel plaque (276,519,356,573), P05 D laurels (340,860,408,935), (508,860,592,935), (604,850,697,945); picture border: P07 selected slot. | look3-props cuts 'hall-card' and rank looks; actors (hall.ts drawPanel) draw them. |
 | `ui:hall-banner` | approved-source-not-used | `P04/hall-of-legends-tile-atlas.png` laurel banner (991,516,1061,597) or drape (1184,516,1314,583); P05 D crown ribbon (604,850,697,945). | look3-props cuts 'hall-banner'; actors (hall.ts) draw it. |
-| `ui:start-title` | no-approved-source | MA-22 | Step 17 (start.ts), once delivered. |
+| `ui:start-title` | uses-approved | The owner's title screen, Drive `Current Pixel-Art Explorations/Irreverents_Title_Screen_Concept_2026-11-23.png` (a concept), whole, re-authored to 320×180 by `tools/art/title/make.py` (`assets/ui/title-screen.png`, `content/looks/title.json`); it also gives `ui:start-panel` its backdrop. | Step 17 (start.ts, `titlePicture`). MA-22 delivered 2026-11-24. |
 | `ui:start-buttons` | approved-source-not-used | `P07/irreverents-pixel-ui-atlas.png` menu row: play (585,729,790,829), list/gear/bag plates (805,729,1250,829), back (1265,729,1410,829), plain slot (60,724,165,834); pressed derived (DRAFT). Layout: A00-05 menu panel (355,835,700,1015). | Step 17 (start.ts .st-btn); look3-props cuts the nine-slices into assets/ui/. |
 | `ui:start-code-field` | approved-source-not-used | `P07/irreverents-pixel-ui-atlas.png` plain slot (60,724,165,834); focus = selected slot (175,724,285,834). | Step 17; look3-props cuts the frames. |
 | `ui:start-panel` | approved-source-not-used | `A00/a00-03-...` top banner composition (0,0,1160,185); BKG-01 panorama (Drive folder 1pw3aCojPx3vvDGWHRt2f_ons-Rammisv) dimmed under a P07 slot-frame panel; A00-05 menu panel (355,835,700,1015). | Step 17 (start.ts #start, #game-menu); the ground lane's BKG-01 import supplies the panorama. |

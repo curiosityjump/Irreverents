@@ -218,6 +218,13 @@ file, no "exists", the part state and the body's place gone).
   levels found with their pies (Step 14, `docs/mechanisms/levels.md`), then **Back to
   the start screen** (`INTENT:` the way out; it says `bye` and loads the
   bare address) and **Close**. A `?room=` world has only Back and Close.
+- **The title** is the owner's picture (`content/looks/title.json`, looks
+  `start-title-screen` and `start-title-wordmark`), drawn behind the start
+  screen and the link page inside the safe area: whole and against the top,
+  nearest-neighbour at device pixels. A spacer keeps every choice below the
+  wordmark's box; on screens under 420 px high the choices pack to 44 px.
+  Without the file, the pixel-font title is drawn instead
+  (`docs/plan/step-17.md`, "Title screen").
 - Words are the game's pixel font (`content/looks/font.json`,
   `font-light`), drawn on small canvases at whole device pixels per font
   pixel; plain text until the font loads. The code field is 24 px (under
@@ -260,4 +267,5 @@ menu's code, Close, the link's one tap, sound unlocked by it, each page
 draws the other), `start-back` (back, Continue lists the game first, the
 friend's page stops drawing them), `start-room` (`?room=` never shows it,
 its menu has only Back and Close). Screenshot:
-`docs/plan/step-17-shots/start-screen-390x664.png`.
+`docs/plan/step-17-shots/start-screen-390x664.png`; the title at every
+size in `docs/plan/step-17-shots/title/`.

@@ -9,6 +9,7 @@
 import type { Content } from '../content/types.ts';
 import { cleanGameCode, codeFromText, GAME_CODE_LENGTH, GAME_PREFIX, gameCode, isGameCode, makeGameCode } from '../net/game-code.ts';
 import { DEFAULT_WORLD } from '../net/protocol.ts';
+import { lookTable } from '../content/kinds/looks.ts';
 import { look } from './draw/looks.ts';
 
 /** A key-value store that never throws (main.ts's `storage`: phone storage, else memory). */
@@ -171,6 +172,92 @@ function piecesImage(content: Content, pieces: boolean[], cssPerPixel: number): 
   return span;
 }
 
+// ---- The title picture ---------------------------------------------------
+
+/** DRAFT: the owner's title screen (content/looks/title.json); the whole picture, and the wordmark's box inside it. */
+const TITLE_LOOK = 'start-title-screen';
+const WORDMARK_LOOK = 'start-title-wordmark';
+
+/**
+ * The owner's title screen behind the start screen (docs/plan/step-17.md,
+ * "Title screen"). The whole picture is fitted inside the safe area,
+ * nearest-neighbour at device pixels, centred and against the top: sideways
+ * it fills the height, upright it spans the width with the night ground
+ * below. A spacer keeps every choice below the wordmark's box, so no button
+ * covers the title. Null when content has no title picture: the caller
+ * draws the old pixel-font title instead (art is data).
+ */
+function titlePicture(content: Content): { back: HTMLElement; spacer: HTMLElement; stop(): void } | null {
+  const table = lookTable(content);
+  const whole = table.get(TITLE_LOOK);
+  const mark = table.get(WORDMARK_LOOK);
+  if (!whole) return null;
+  const back = el('div', { class: 'st-back' });
+  const c = el('canvas', { role: 'img', 'aria-label': 'Irreverents' });
+  back.append(c);
+  const spacer = el('div', { class: 'st-spacer' });
+  // The wordmark's bottom edge on the picture (the whole picture when the file names no box).
+  const clearTo = mark ? mark.src[1] + mark.src[3] - whole.src[1] : whole.src[3];
+  const layout = (): boolean => {
+    const r = back.getBoundingClientRect();
+    const [, , w, h] = whole.src;
+    const s = Math.min(r.width / w, r.height / h);
+    if (!(s > 0)) return false;
+    // Keep every choice below the wordmark: the spacer ends where the box does on screen.
+    spacer.style.height = '0px';
+    const parent = spacer.parentElement;
+    const scrolled = parent ? parent.scrollTop : 0;
+    const startsAt = spacer.getBoundingClientRect().top + scrolled;
+    spacer.style.height = `${Math.max(0, Math.ceil(r.top + clearTo * s + 4 - startsAt))}px`;
+    const l = look(content, TITLE_LOOK);
+    if (!l) return false;
+    const dpr = window.devicePixelRatio || 1;
+    const cw = Math.round(w * s * dpr);
+    const ch = Math.round(h * s * dpr);
+    c.width = cw;
+    c.height = ch;
+    c.style.width = `${cw / dpr}px`;
+    c.style.height = `${ch / dpr}px`;
+    const g = c.getContext('2d');
+    if (!g) return false;
+    g.imageSmoothingEnabled = false;
+    g.drawImage(l.img, l.x, l.y, l.w, l.h, 0, 0, cw, ch);
+    return true;
+  };
+  let t = 0;
+  const retry = (): void => {
+    clearInterval(t);
+    if (layout()) return;
+    t = window.setInterval(() => layout() && clearInterval(t), 100);
+    setTimeout(() => clearInterval(t), 20000);
+  };
+  window.addEventListener('resize', retry);
+  window.addEventListener('orientationchange', retry);
+  requestAnimationFrame(retry);
+  return {
+    back,
+    spacer,
+    stop: () => {
+      clearInterval(t);
+      window.removeEventListener('resize', retry);
+      window.removeEventListener('orientationchange', retry);
+    },
+  };
+}
+
+/** The top of the start screen: the owner's title picture when content has it, else the pixel-font title. */
+function titleTop(content: Content, root: HTMLElement): (() => void) | null {
+  const pic = titlePicture(content);
+  if (!pic) {
+    root.append(el('div', { class: 'st-title' }, words(content, 'Irreverents', 4)));
+    return null;
+  }
+  root.classList.add('pictured');
+  // INTENT: the picture's own lettering is the title; the old text title is not also drawn (the brief).
+  root.append(pic.back, pic.spacer);
+  return pic.stop;
+}
+
 // ---- Look ----------------------------------------------------------------
 
 const CSS = `
@@ -206,6 +293,25 @@ const CSS = `
 #menu-btn i { position: absolute; left: 13px; width: 18px; height: 2px; background: rgba(244, 241, 222, .7); box-shadow: 0 0 0 1px rgba(15, 15, 28, .55); }
 #menu-btn i:nth-child(1) { top: 15px; } #menu-btn i:nth-child(2) { top: 21px; } #menu-btn i:nth-child(3) { top: 27px; }
 #menu-btn:active { background: rgba(244, 241, 222, .2); }
+/* DRAFT (title screen): the owner's picture behind the choices, inside the safe area (clear of the notch and the home bar), on the night ground. */
+#start .st-back { position: fixed; z-index: -1; pointer-events: none; display: flex; justify-content: center; align-items: flex-start;
+  top: env(safe-area-inset-top); right: env(safe-area-inset-right); bottom: env(safe-area-inset-bottom); left: env(safe-area-inset-left); }
+#start .st-back canvas { display: block; }
+#start .st-spacer { flex: none; width: 100%; }
+/* No games to continue: the empty column takes no room, so the choices sit centred under the title. */
+#start .st-col:empty { display: none; }
+/* Words with no button of their own sit on a dark plate, so they read over the picture. */
+#start.pictured .st-label, #start.pictured .st-say:not(:empty) { align-self: flex-start; padding: 3px 8px; border-radius: 6px; background: rgba(20, 18, 40, .82); }
+#start.pictured .st-say:not(:empty) { align-self: stretch; }
+#start.pictured .st-btn.quiet { background: rgba(20, 18, 40, .82); }
+/* Short screens (a phone sideways): every choice still 44 px, packed closer, so all fit below the wordmark. */
+@media (max-height: 420px) {
+  #start.pictured .st-col { gap: 8px; }
+  #start.pictured .st-btn { min-height: 44px; }
+  #start.pictured .st-btn.big { min-height: 64px; }
+  #start.pictured .st-join input { height: 44px; }
+  #start.pictured .st-label { margin-top: 0; }
+}
 #game-menu, #gone { justify-content: center; }
 #gone .st-col { display: flex; flex-direction: column; gap: 14px; width: 100%; max-width: 330px; }
 #gone .st-say { font-size: 16px; line-height: 1.4; }
@@ -276,6 +382,7 @@ export function showStart(opts: StartOptions): StartRecord {
     return parts.length > 0 ? `?${parts.join('&')}` : location.pathname;
   };
   let done = false;
+  let stopTitle: (() => void) | null = null;
   const go = (world: string): void => {
     if (done) return;
     done = true;
@@ -289,6 +396,7 @@ export function showStart(opts: StartOptions): StartRecord {
       // an address that cannot be changed changes nothing else
     }
     root.remove();
+    stopTitle?.();
     record.shown = 'none';
     opts.play(world);
   };
@@ -330,7 +438,8 @@ export function showStart(opts: StartOptions): StartRecord {
       location.href = location.pathname + (tune ? '?tune' : '');
     });
     const col = el('div', { class: 'st-col' }, join, back);
-    root.append(el('div', { class: 'st-title' }, words(content, 'Irreverents', 4)), col);
+    stopTitle = titleTop(content, root);
+    root.append(col);
     document.body.append(root);
     return record;
   }
@@ -412,7 +521,8 @@ export function showStart(opts: StartOptions): StartRecord {
     }
   }
 
-  root.append(el('div', { class: 'st-title' }, words(content, 'Irreverents', 4)), el('div', { class: 'st-cols' }, left, right));
+  stopTitle = titleTop(content, root);
+  root.append(el('div', { class: 'st-cols' }, left, right));
   document.body.append(root);
   return record;
 }

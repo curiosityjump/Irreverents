@@ -1,0 +1,23 @@
+{
+  "//": "DRAFT: the owner's title screen (Drive: Current Pixel-Art Explorations/Irreverents_Title_Screen_Concept_2026-11-23.png, a concept), re-authored to 320x180 by tools/art/title/make.py. start-title-screen is the whole picture; start-title-wordmark is the box the start screen keeps clear. With this file gone the start screen draws its old pixel-font title.",
+  "id": "title",
+  "image": "ui/title-screen.png",
+  "looks": {
+    "start-title-screen": {
+      "src": [
+        0,
+        0,
+        320,
+        180
+      ]
+    },
+    "start-title-wordmark": {
+      "src": [
+        52,
+        4,
+        212,
+        68
+      ]
+    }
+  }
+}
