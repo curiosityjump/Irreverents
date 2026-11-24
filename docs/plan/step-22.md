@@ -271,3 +271,17 @@ out; that is Step 21's.
 - **Tools:** `node scripts/run-some.ts <regex>` runs only matching scenarios
   (seconds, against `npm run check`'s ten minutes); `node scripts/trace.ts`
   traces one.
+
+### Lead review, push 2 (d6acfdb), re-run at fba6980
+
+`npm run build` and `npm run check` are ok: all three `step22-*` scenarios
+pass. The control (`content/stages/iron-quarry.json` set to `"on": false`)
+fails `step22-restart-restores` with 4 problems, as it should. `npm run gates`
+is 6 of 6. **Kept, although it puts people back with its own copy of where
+they started, `stageHome`**, which the brief ruled out. The push is live and
+green, and it is the start-over the owner asked for. Reverting it would take
+that away while `restorePeople` isn't on `main`. `DRAFT:` it is owed a switch
+to `beaten.ts`'s `restorePeople` and `holdReturns` once they land, keeping
+`stageHome` only for what `restorePeople` doesn't cover. A cold builder does
+this, in the next push after they land. Not checked: a friend walking out
+after the other is beaten, and how a restore looks on the page (push 4's e2e).
