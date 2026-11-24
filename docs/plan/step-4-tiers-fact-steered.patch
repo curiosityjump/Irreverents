@@ -1,0 +1,273 @@
+diff --git a/scripts/e2e/tiers.ts b/scripts/e2e/tiers.ts
+index fe5487d..81125aa 100644
+--- a/scripts/e2e/tiers.ts
++++ b/scripts/e2e/tiers.ts
+@@ -4,8 +4,12 @@
+ // fight-back's moves (walk into the castle street, punch the guard until he
+ // rages), waits while he rings the bell, punches him once more when he is
+ // back, then touches nothing: the page draws his whistle's gauge filling,
+-// then one more pip and more guards in the street than before, and, after
+-// walking out by the west door, the same pip count in the throne room.
++// then one more pip, the row's banner and, as it shows, more guards in the
++// street than just before the gauge; and, after walking out by the west
++// door, the same pip count in the throne room. The page records what it
++// draws from the first frame (record(), judge()), so a whistle answered
++// while the fact was walking still counts, and the row is counted where it
++// arrives, not after the fight it starts.
+ //
+ // Every number is read from what the page drew (`window.irreverents.drawn`,
+ // its `alert` record), never from server state. The helpers below are copies
+@@ -109,7 +113,7 @@ async function nudge(ph: Phone, dir: number): Promise<void> {
+   await ph.cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+ }
+ 
+-type Near = { mx: number; mw: number; face: number; gx: number; gw: number };
++type Near = { mx: number; mw: number; face: number; gx: number; gw: number; gface: number };
+ const near = (ph: Phone): Promise<Near | null> =>
+   ph.page.evaluate((id: string) => {
+     const irr = (window as any).irreverents;
+@@ -117,7 +121,8 @@ const near = (ph: Phone): Promise<Near | null> =>
+     const m = irr.drawn.me;
+     const mine = irr.world?.entities.find((e: any) => e.player === irr.player);
+     const box = (k: string): any => irr.content.characters[k].box;
+-    return g && m && mine ? { mx: m.x, mw: box(m.kind).w, face: mine.facing, gx: g.x, gw: box(g.kind).w } : null;
++    const band = irr.drawn.sight?.bands.find((b: any) => b.id === id);
++    return g && m && mine ? { mx: m.x, mw: box(m.kind).w, face: mine.facing, gx: g.x, gw: box(g.kind).w, gface: band?.facing ?? 0 } : null;
+   }, GUARD) as Promise<Near | null>;
+ 
+ /**
+@@ -184,7 +189,10 @@ async function meet(ph: Phone): Promise<boolean> {
+       last = null;
+       continue;
+     }
+-    if (moved < 3 && gap <= MEET_REACH) return true;
++    // INTENT: and he faces the hero (his drawn sight band). A raging guard whistles only with his offender in
++    // sight (alert-whistle.ts); struck out of sight he goes back to the bell instead, by design. Under live's
++    // delay that is what the old fact met in most runs (docs/plan/step-4.md, "Fourth builder", "Correction").
++    if (moved < 3 && gap <= MEET_REACH && w.gface === -dir) return true;
+     // He stands off (as he does by a wall): step up to him. He is still, so where the page draws him is where he is.
+     still = moved < 0.5 ? still + 1 : 0;
+     if (still >= 6) {
+@@ -253,6 +261,90 @@ async function backIn(ph: Phone): Promise<void> {
+   if (room !== 'castle-street') await walkInto(ph, room === 'throne-room' ? 1 : -1, 'castle-street', 10000);
+ }
+ 
++/**
++ * From the first frame on, the page records what it draws whenever that changes: the room, the pips, the
++ * whistle's gauge (its progress, 0 when none), the guards drawn, and each alarm banner queued (the row's own
++ * banner, `drawn.alarms`, draw/alarm-banner.ts). Read back by `judge()`.
++ *
++ * INTENT: the fact reads the whole run, not windows. Replayed against a local server with live's delay
++ * (300 ms in, 60 out, 40 jitter; docs/plan/step-4.md, "Fourth builder"), the old windowed fact missed the
++ * whistle in most runs: it completed while the fact was inside meet() or backIn(), so the gauge was "never
++ * drawn" though the page drew it, and the fact went on fighting; and it counted guards 2.5 s after a long
++ * fight, when the rows from the sides had reached the hero and been beaten and removed (live's run of
++ * 31d5ba4: 1 guard). So the row is counted where it arrives: in the frames after its banner.
++ */
++const record = (ph: Phone): Promise<void> =>
++  ph.page.evaluate(() => {
++    const w = window as any;
++    if (w.__tiers) return;
++    const t0 = performance.now();
++    const rec = { t0, frames: [] as [number, string, number, number, number][], banners: [] as [number, string, string][] };
++    w.__tiers = rec;
++    let prev = '';
++    let alarms: unknown = null;
++    const frame = (): void => {
++      const d = w.irreverents.drawn;
++      const t = Math.round(performance.now() - t0);
++      const f: [number, string, number, number, number] = [t, d.room, d.alert?.level ?? 0, d.alert?.whistle ?? 0, d.entities.filter((e: any) => e.kind === 'guard').length];
++      const k = f.slice(1).join('|');
++      if (k !== prev) rec.frames.push(f);
++      prev = k;
++      if (d.alarms !== alarms) {
++        if (alarms !== null && d.alarms.length > 0) rec.banners.push([t, d.room, d.alarms[d.alarms.length - 1]]);
++        alarms = d.alarms;
++      }
++      requestAnimationFrame(frame);
++    };
++    requestAnimationFrame(frame);
++  });
++
++const STREET = 'castle-street';
++/** A whistle is answered (the pip) within this of the gauge first drawn (ms): its 2 s, with room for live's delay. */
++const UP_WITHIN = 8000;
++/** The row's banner comes with the pip (the same tick on the server); allowed this late after it (ms). */
++const BANNER_WITHIN = 2500;
++/** The row is counted over this long from its banner (ms). */
++const ROW_WINDOW = 1500;
++
++type Episode = { at: number; from: number; to: number; upMs: number | null; banner: string | null; before: number; row: number; ok: boolean };
++/**
++ * Each gauge the page drew in the street, from the moment it first showed: the pips then (`from`), the
++ * guards drawn in the street just before it (`before`), the first frame within UP_WITHIN drawing at least one
++ * pip more (`to`, `upMs`), the first alarm banner in the street from the gauge to BANNER_WITHIN after that
++ * pip, and the most guards drawn in the street over ROW_WINDOW from that banner (`row`). `ok`: all of them,
++ * and the row more than before. `pending`: a gauge drawn under UP_WITHIN ago with no pip yet (a tap now could
++ * stop it, D-066).
++ */
++const judge = async (ph: Phone): Promise<{ episodes: Episode[]; pending: boolean; now: number }> => {
++  const [rec, t] = (await ph.page.evaluate(() => {
++    const r = (window as any).__tiers;
++    return [r, Math.round(performance.now() - r.t0)];
++  })) as [any, number];
++  const frames = rec.frames as [number, string, number, number, number][];
++  const banners = rec.banners as [number, string, string][];
++  const episodes: Episode[] = [];
++  let pending = false;
++  let before = 0;
++  for (let i = 0; i < frames.length; i++) {
++    const [at, room, level, whistle, guards] = frames[i]!;
++    const was = i > 0 ? frames[i - 1]![3] : 0;
++    if (room === STREET && !(whistle > 0)) before = guards;
++    if (room !== STREET || !(whistle > 0) || was > 0 || level < 1) continue;
++    const up = frames.find((f) => f[0] > at && f[0] <= at + UP_WITHIN && f[2] >= level + 1);
++    const upMs = up ? up[0] - at : null;
++    const b = up ? banners.find((x) => x[1] === STREET && x[0] >= at && x[0] <= up[0] + BANNER_WITHIN) : undefined;
++    let row = 0;
++    // Every frame drawn in that window: those recorded in it, and the one already showing when it opened.
++    if (b) frames.forEach((f, j) => {
++      const until = frames[j + 1]?.[0] ?? t;
++      if (f[1] === STREET && f[0] <= b[0] + ROW_WINDOW && until > b[0]) row = Math.max(row, f[4]);
++    });
++    if (!up && t - at < UP_WITHIN) pending = true;
++    episodes.push({ at, from: level, to: up ? up[2] : level, upMs, banner: b ? b[2] : null, before, row, ok: !!up && !!b && row > before });
++  }
++  return { episodes, pending, now: t };
++};
++
+ type Seen = { level: number; whistle: number | null; guards: number; room: string };
+ const look = (ph: Phone): Promise<Seen> =>
+   ph.page.evaluate(() => {
+@@ -260,34 +352,13 @@ const look = (ph: Phone): Promise<Seen> =>
+     return { level: d.alert?.level ?? 0, whistle: d.alert?.whistle ?? null, guards: d.entities.filter((e: any) => e.kind === 'guard').length, room: d.room };
+   });
+ 
+-/** Watches the drawn record for `ms`, or until `done` holds; returns the most whistle progress, the last level and the most guards drawn. */
+-const watch = (ph: Phone, ms: number, until: 'whistle' | 'level-up', from: number): Promise<{ whistle: number; level: number; guards: number; ms: number }> =>
+-  ph.page.evaluate(
+-    ([dur, what, base]: [number, string, number]) =>
+-      new Promise<any>((resolve) => {
+-        const t0 = performance.now();
+-        let whistle = 0;
+-        let guards = 0;
+-        const tick = (): void => {
+-          const d = (window as any).irreverents.drawn;
+-          const t = performance.now() - t0;
+-          whistle = Math.max(whistle, d.alert?.whistle ?? 0);
+-          guards = Math.max(guards, d.entities.filter((e: any) => e.kind === 'guard').length);
+-          const level = d.alert?.level ?? 0;
+-          if ((what === 'whistle' && whistle > 0) || (what === 'level-up' && level > base) || t > dur) return resolve({ whistle, level, guards, ms: Math.round(t) });
+-          requestAnimationFrame(tick);
+-        };
+-        requestAnimationFrame(tick);
+-      }),
+-    [ms, until, from] as [number, string, number],
+-  );
+-
+ export async function tierFacts(kit: Kit & { tag: string }): Promise<void> {
+   const { fact } = kit;
+   const url = `${kit.base}/?room=${kit.tag}-tiers-${Math.random().toString(36).slice(2, 10)}`;
+   const ph = await phone(kit, url, 'tiers');
+   const notes: string[] = [];
+   try {
++    await record(ph);
+     const kind = (await me(ph))?.kind as string;
+     const inStreet = await walkInto(ph, 1, 'castle-street');
+     if (inStreet) await passGuard(ph);
+@@ -305,57 +376,57 @@ export async function tierFacts(kit: Kit & { tag: string }): Promise<void> {
+       before = await look(ph);
+     }
+     notes.push(`${taps} taps, the alert drawn at ${before.level} after ${((Date.now() - t0) / 1000).toFixed(1)} s`);
+-    // Once more at him, until the page draws his gauge (each try: meet him, tap, watch 6 s).
+-    let gauge = { whistle: 0, level: 0, guards: 0, ms: 0 };
++    // Once more at him, until a gauge the page draws is answered by a pip and the row walking in (judge(), from
++    // the record). A tap while he blows, or while his gauge may yet be answered, would stop the very whistle we
++    // wait for (D-066): each try waits that out first.
++    let j = await judge(ph);
++    const done = (): boolean => j.episodes.some((e) => e.ok);
++    const settled = async (ms: number): Promise<void> => {
++      const end = Date.now() + ms;
++      for (;;) {
++        j = await judge(ph);
++        if (done() || (!j.pending && Date.now() >= end)) return;
++        await sleep(100);
++      }
++    };
+     let tries = 0;
+-    while (inStreet && before.level >= 1 && gauge.whistle === 0 && tries < 12) {
++    while (inStreet && before.level >= 1 && !done() && tries < 12) {
+       // A blow can carry the phone's character out by either door: walk back in first.
+       await backIn(ph);
+-      // A tap while he blows would stop the very whistle we wait for (D-066): look first.
+-      gauge = await watch(ph, 300, 'whistle', 0);
+-      if (gauge.whistle > 0) break;
+-      await meet(ph);
+-      gauge = await watch(ph, 100, 'whistle', 0);
+-      if (gauge.whistle > 0) break;
++      await settled(300);
++      if (done()) break;
++      const met = await meet(ph);
++      await settled(100);
++      if (done()) break;
++      tries += met ? 0 : 1;
++      // Never at him unmet: struck out of his sight he rings the bell, not the whistle this fact is about.
++      if (!met) continue;
+       await tap(ph, 'attack');
+       tries++;
+-      gauge = await watch(ph, 6000, 'whistle', 0);
++      await settled(6000);
+     }
+-    const mid = await look(ph);
+-    // Touch nothing: the gauge fills, the pip lights, the row walks in.
+-    const up = gauge.whistle > 0 ? await watch(ph, 8000, 'level-up', before.level) : { whistle: 0, level: mid.level, guards: mid.guards, ms: 0 };
+-    // The most guards the page draws in the street over the next 2.5 s (the arrivals' blows can carry the
+-    // phone's character out of it meanwhile; a count read in another room says nothing of the street).
+-    const most = (await ph.page.evaluate(
+-      (ms: number) =>
+-        new Promise<number>((resolve) => {
+-          const t0 = performance.now();
+-          let n = 0;
+-          const tick = (): void => {
+-            const d = (window as any).irreverents.drawn;
+-            if (d.room === 'castle-street') n = Math.max(n, d.entities.filter((e: any) => e.kind === 'guard').length);
+-            if (performance.now() - t0 > ms) return resolve(n);
+-            requestAnimationFrame(tick);
+-          };
+-          requestAnimationFrame(tick);
+-        }),
+-      2500,
+-    )) as number;
+-    const after = { ...(await look(ph)), guards: most };
++    // Touch nothing while the row's frames are drawn, then read the whole record.
++    await sleep(ROW_WINDOW);
++    j = await judge(ph);
++    const ep = j.episodes.find((e) => e.ok) ?? j.episodes[j.episodes.length - 1] ?? null;
+     await ph.page.screenshot({ path: path.join(kit.out, `${kit.tag === 'check' ? 'live-' : ''}tiers-street.png`) });
+     const out = await walkInto(ph, -1, 'throne-room', 30000);
+     const away = await look(ph);
+     await ph.page.screenshot({ path: path.join(kit.out, `${kit.tag === 'check' ? 'live-' : ''}tiers-away.png`) });
+-    // The whistle's call, and often more calls after it (another whistle, the shopkeeper's bell), may land before
+-    // the page is read again: what must hold is one pip more than before the gauge, more guards than before it, and
+-    // pips still drawn (not fewer than that) in the next room. Read before the gauge, the level is the control.
+-    const ok = inStreet && gauge.whistle > 0 && up.level >= before.level + 1 && after.guards > before.guards && out && away.level >= before.level + 1;
++    // More calls may follow the whistle's (another whistle, the shopkeeper's bell): what must hold is one pip more
++    // than when the gauge showed, more guards drawn as the row's banner shows than just before the gauge, and pips
++    // still drawn (not fewer than that) in the next room. Read before the gauge, the level is the control.
++    const from = ep?.from ?? before.level;
++    const ok = inStreet && !!ep?.ok && out && away.level >= from + 1;
++    const said = ep
++      ? `the gauge first drawn at ${(ep.at / 1000).toFixed(1)} s with ${ep.from} pip(s); touching nothing, ${ep.upMs === null ? `no more pips within ${UP_WITHIN / 1000} s` : `${ep.to} pip(s) drawn ${(ep.upMs / 1000).toFixed(1)} s later`}, ` +
++        `the row's banner ${ep.banner === null ? 'never drawn in the street' : `"${ep.banner}"`}; guards drawn in the street ${ep.before} just before the gauge and ${ep.row} as the row's banner showed`
++      : 'the page never drew the gauge in the street';
+     fact(
+       'tiers',
+       ok,
+-      `by touch, a phone's ${kind} in the castle street (${inStreet}): ${notes.join('; ')}; ${tries} more tap(s) until the page drew the guard's whistle gauge (most progress drawn ${gauge.whistle.toFixed(2)}); ` +
+-        `then, touching nothing, the pips drawn went from ${before.level} (before the gauge) to ${up.level} in ${(up.ms / 1000).toFixed(1)} s, guards drawn in the street ${before.guards} before the gauge, ${mid.guards} as it showed and ${after.guards} after; ` +
+-        `out by the west door (${out}) the throne room draws ${away.level} pip(s) (expected ${before.level + 1} or more)`,
++      `by touch, a phone's ${kind} in the castle street (${inStreet}): ${notes.join('; ')}; ${tries} more tap(s), ${j.episodes.length} gauge(s) drawn; ${said}; ` +
++        `out by the west door (${out}) the throne room draws ${away.level} pip(s) (expected ${from + 1} or more)`,
+     );
+   } finally {
+     await ph.ctx.close();
