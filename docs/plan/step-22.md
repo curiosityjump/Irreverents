@@ -380,6 +380,27 @@ For the next builder, all measured on `main` at 6edd8be:
   hearts builder (`session_017WiGzG7mhviEaxroo5GvBv`) so it can switch the
   quarry's throw off.
 - **Then 3b:** the ten hero runs and the measured star times.
+### The depot push (d), shipped (builder `session_017WiGzEsUx1mHyijtCDT1gt`)
+
+- The previous builder's entries, as measured: `entries` on every stretch,
+  `entryAway` 6, and an `announce` row (`DRAFT:` words). The kerb at
+  [53, 13] is not placed.
+- `step22-wave-reaches-hero` (the flyer at column 5, swinging every 24
+  ticks): wave 0 at 381 from column 13, a wave body within x 40-150 at 560,
+  her swing lands on `quarry-depot:w0:0`. Control watched failing (no
+  `entries`: nobody near her, no hit).
+- **`step16-caught-fight` re-routed, every claim and window kept:** holding
+  patrol 1, the grappler hops onto the low ledge (columns 3-4, row 12) and
+  up to the high one (columns 5-6, row 10). The wave can't reach her there
+  (it mills about below and punches itself), and the lookout can't see her.
+  At 715-750 she walks off the ledge's east end into its view; its second
+  call starts at 756, and the throw at 761 knocks it out at 764 and breaks
+  the post at 773. Walk-off ends from 746 to 755 all pass. The low ledge
+  alone doesn't work: a wave fighter knocked into her there dropped the
+  patrol into the tower door. Control re-run: without the throw the call is
+  stopped only at 920, by the scuffle, and the post stands.
+- `npm run check` green, gates 6 of 6.
+
 ### Lead review, owed item (a) (6edd8be), re-run at 002607b
 
 `npm run build` and `npm run check` are ok: all ten `step22-*` scenarios

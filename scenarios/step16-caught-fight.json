@@ -1,6 +1,6 @@
 {
  "id": "step16-caught-fight",
- "proves": "Step 16 signal 6 (a), caught then fight: the grappler walks in from the tower door, past it to column 5, and the lookout (column 11) sees them when it turns west; the grappler grabs patrol 1 when it comes swinging and holds it while the call is sounded to the end, and the first wave (two fighters) walks in at the far east end; when the lookout starts its second call the grappler throws patrol 1 at it: the lookout is knocked out mid-call (it never calls again) and the thrown body goes on into the horn post just behind it (column 12) and breaks it, and no call starts or completes in the 20 s after. Nothing reloads. Control (watched to fail): without the throw, the second call completes",
+ "proves": "Step 16 signal 6 (a), caught then fight: the grappler walks in from the tower door, past it to column 5, and the lookout (column 11) sees them when it turns west; the grappler grabs patrol 1 when it comes swinging and holds it while the call is sounded to the end, and the first wave (two fighters) walks in. Step 22 depot push (d), re-routed, every claim kept: the wave now walks in at the yard entry nearest the sighting (column 13) and comes for the grappler, so, still holding patrol 1, they hop onto the low ledge (columns 3-4) and up to the high one (columns 5-6, row 10), out of the wave's reach (the wave mills about below; it does not jump) and out of the lookout's sight; when the lookout's wait is over the grappler walks east off the ledge into its view, it starts its second call, and the grappler throws patrol 1 at it as they land: the lookout is knocked out mid-call (it never calls again) and the thrown body goes on into the horn post just behind it (column 12) and breaks it, and no call starts or completes in the 20 s after. Nothing reloads. Control (watched to fail): without the throw, the lookout is not knocked out mid-call in 761-800 and the post is not broken (re-run for the re-route: the call is stopped only at 920, by the scuffle that follows)",
  "room": "quarry-depot",
  "placements": true,
  "players": [
@@ -30,6 +30,40 @@
    "hold": [
     "grab"
    ]
+  },
+  {
+   "player": "a",
+   "from": 400,
+   "to": 412,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 404,
+   "to": 414,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 440,
+   "to": 458,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 441,
+   "to": 452,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 715,
+   "to": 750,
+   "x": 1
   },
   {
    "player": "a",

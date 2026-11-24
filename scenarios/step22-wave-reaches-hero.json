@@ -1,0 +1,305 @@
+{
+ "id": "step22-wave-reaches-hero",
+ "gate": null,
+ "proves": "Step 22 depot push (d): the owner's 'Alarms don't seem to do anything yet' and 'come in from the sides'. The flyer walks in from the west door into the lookout's view (column 5) and stands her ground there, swinging every 24 ticks; the lookout sounds the horn and the first wave walks in at the nearest yard entry at least six tiles from where she was seen (column 13, on her side of the stack), not at the far east end behind the floor's dip, so both wave fighters come to her and her swings land on them. Control (watched to fail): with `entries` left out of content/outposts/quarry-depot.json the wave walks in at column 61, drops into the dip, and no wave body comes near her",
+ "room": "quarry-depot",
+ "placements": true,
+ "players": [
+  {
+   "id": "a",
+   "character": "flyer",
+   "spawn": 0
+  }
+ ],
+ "inputs": [
+  {
+   "player": "a",
+   "from": 0,
+   "to": 3,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 181,
+   "to": 201,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 205,
+   "to": 207,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 229,
+   "to": 231,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 253,
+   "to": 255,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 277,
+   "to": 279,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 301,
+   "to": 303,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 325,
+   "to": 327,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 349,
+   "to": 351,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 373,
+   "to": 375,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 397,
+   "to": 399,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 421,
+   "to": 423,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 445,
+   "to": 447,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 469,
+   "to": 471,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 493,
+   "to": 495,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 517,
+   "to": 519,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 541,
+   "to": 543,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 565,
+   "to": 567,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 589,
+   "to": 591,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 613,
+   "to": 615,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 637,
+   "to": 639,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 661,
+   "to": 663,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 685,
+   "to": 687,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 709,
+   "to": 711,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 733,
+   "to": 735,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 757,
+   "to": 759,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 781,
+   "to": 783,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 805,
+   "to": 807,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 829,
+   "to": 831,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 853,
+   "to": 855,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 877,
+   "to": 879,
+   "hold": [
+    "attack"
+   ]
+  }
+ ],
+ "ticks": 900,
+ "expect": [
+  {
+   "fact": "event-where",
+   "event": "outpost-wave",
+   "where": {
+    "wave": 0,
+    "row": 0
+   },
+   "between": [
+    381,
+    381
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "people-at",
+   "room": "quarry-depot",
+   "at": 560,
+   "ids": "quarry-depot:w0:",
+   "x": [
+    40,
+    150
+   ],
+   "count": [
+    1,
+    2
+   ]
+  },
+  {
+   "fact": "event-where",
+   "event": "hit",
+   "where": {
+    "by": "p:a",
+    "target": "quarry-depot:w0:0"
+   },
+   "between": [
+    381,
+    900
+   ]
+  }
+ ]
+}

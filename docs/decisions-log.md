@@ -295,3 +295,10 @@ document as a decision of theirs.
 - **Why this way:** the brief: "a carried weapon at a game over goes back where it was found". The camp's hammer is back on its spot at once, and a sword you stole from a camp fighter is back in his hand, so the place is as you first found it. A weapon you lost earlier in the fight and left lying stays where it lies.
 - **To change it:** delete `src/sim/systems/weapon-game-over.ts` and the weapon lies where you fell, as before.
 - **Where:** `docs/mechanisms/weapons.md`, "Carriers"; `docs/mechanisms/defeat.md`, game over.
+
+### 2026-11-24 · Step 22: in the quarry's depot, a called wave now walks in on your own stretch of the yard and comes for you, with a banner ("Here they come!")
+- **Decided by:** Step 22 builder, `session_017WiGzEsUx1mHyijtCDT1gt`
+- **Instead of asking:** where in the depot a wave should walk in, so that the owner's "Alarms don't seem to do anything yet" stops being true there
+- **Why this way:** the owner, playing: "Alarms should spawn more enemies of increasing strength that come in from the sides". Before, every wave walked in at the far east end and dropped into the pocket under the floor's dip, so it never reached anyone west of it. Now each stretch of the yard has entry tiles, and a wave comes in at the nearest one at least six tiles from where the lookout saw you (`entryAway` 6), on both sides when there is room. None by the west door (a wave walked straight out of it); the kerb over the dip is not placed (not needed). The banner words are a `DRAFT:` ("Here they come!", "More of them!", "Here comes a heavy!").
+- **To change it:** `entries`, `entryAway` and `announce` in `content/outposts/quarry-depot.json`; taking `entries` out puts every wave back at the far east end.
+- **Where:** `docs/mechanisms/outposts.md`, "The depot"; `docs/plan/step-22.md`, Builder notes. `step16-caught-fight` was re-routed (the grappler waits out the wave on the high ledge), every claim kept.

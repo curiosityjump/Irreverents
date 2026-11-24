@@ -210,18 +210,22 @@ strikes is knocked flat in about 20 s. Where a wave comes to rest is
 wherever the hero was seen (and, after 10 s with nobody to fight, the
 entry, where it is gone), never a fixed spot.
 
-**The depot (`quarry-depot`).** Its waves walk west from the entry and
-drop through the floor's gap at columns 51-52 into the pocket below
-(`step7-waves-reach-the-hero-depot` pins only that they leave the entry).
-Step 22 push 1 gave the depot the camp's `leaveCold` 5 and `leaveIdle` 10,
-so a wave with nobody to fight walks off (one in the pocket makes no headway
-and is removed where it stands) and the next fit under the bound. A kerb on
-the gap's east lip (row 13, column 53) stops walkers on the far yard and was
-measured green against every `step16-*`/`step7-*`, but it delays Step 9's
-`step9-fades-then-source` grappler by its hop and was left out; waves that
-reach the hero come with the chase-and-alarms rule's entries on both sides of
-the player (`handoff-prompts/owner-enemies-chase-alarms.md`), placed in the
-quarry by Step 22 push 5.
+**The depot (`quarry-depot`).** Step 22 push 1 gave it the camp's
+`leaveCold` 5 and `leaveIdle` 10, so a wave with nobody to fight walks off
+and the next fit under the bound. Since the Step 22 depot push (`DRAFT:`,
+docs/decisions-log.md "Step 22: the depot's waves come in from the sides")
+it has `entries` on every stretch of the yard, `[[13,13], [20,13], [33,13],
+[40,13], [49,13], [55,13], [61,13]]`, `entryAway` 6 and an `announce` row:
+the yard is cut by the stack (14-17), the shaft (42-44) and the dip (51-52),
+and no person jumps, so a wave walks in on the hero's own stretch and never
+has to cross a gap (before, every wave walked in at column 61 and dropped
+into the pocket under the dip). There is no entry by the west door: at
+[2, 13] a wave fighter walked out through the tower door, and at [4, 13] one
+landed on a hero seen at column 5. The kerb at [53, 13] (Step 7's third fix)
+is not needed with these entries and is not placed. Proven by
+`step22-wave-reaches-hero` (control: no `entries`, no wave body comes near
+the flyer); `step16-caught-fight` was re-routed for it (the grappler waits
+out the wave on the high ledge at columns 5-6, every claim kept).
 
 Scenarios: `step7-waves-reach-the-hero`, `step7-waves-reach-the-hero-depot`,
 `step7-caller-tries-again`, `step7-post-ends-it`; the `people-at` fact
@@ -276,10 +280,10 @@ strength that come in from the sides."* Optional fields in
   last repeating; no digits. Every wave also plays the alarm sound.
 
 Proven in `test-sides` by `sides-wave-both-sides` (control: no `entries`).
-**Not yet switched on in a real place:** the camp's entries and stronger
-rows turn seven camp scenarios red (step7-*, step12-walk-out-ends-it,
-step21-*; `docs/plan/step-4.md`, "Alarms and the chase, as played"); the
-quarry's are Step 22's to place.
+**Switched on in the quarry's depot** ("The depot", above). Not yet at the camp:
+its entries and stronger rows turn seven camp scenarios red (step7-*,
+step12-walk-out-ends-it, step21-*; `docs/plan/step-4.md`, "Alarms and the
+chase, as played").
 
 ## Not built yet
 
