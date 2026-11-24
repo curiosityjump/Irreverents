@@ -1,3 +1,5 @@
+**Lead, 12:20 UTC (the orchestrator's look at the first shots), for push 4:** the earth and wall below the grass are the quarry's orange cobble; give the forest its own (P10 rows, or tint and vary in `tools/art/tiles/forest.py`, `DRAFT:`). Fix the backdrop's hard vertical seam (trail-start, x about 1700-2000 of 2250) and the rectangular backdrop hole in the dirt (trail-gap). The "844x390" shots were 750x340 captures: re-shoot at true sizes.
+
 **Lead, 11:35 UTC, for the second builder. READ THIS FIRST; it replaces the blocks below where they differ.**
 - **Landed and reviewed:** push 1 (518e220: road and trail, joined as the stage `bramble-forest`), push 2 (841d4a8: the insides, the boulder only a boost lifts, the shortcut, five pieces), push 2b (2652cc8: the forest's own tiles, `assets/tiles/forest.png`; looked at by the lead).
 - **Read first:** "Handoff" in `docs/plan/step-15.md` (the first builder's measured layout for the guarded spot, the thrower's tile, the spear's source, the star-time numbers) and `tools/scenario-bots/README.md` (the walker that records scenario inputs).
