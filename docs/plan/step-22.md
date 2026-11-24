@@ -373,3 +373,12 @@ For the next builder, all measured on `main` at 6edd8be:
   [53, 13] looks unneeded with these entries, since no wave walks west
   across the dip unless the hero is seen in the far yard.
 - **Then 3b:** the ten hero runs and the measured star times.
+### Lead review, owed item (a) (6edd8be), re-run at 002607b
+
+`npm run build` and `npm run check` are ok: all ten `step22-*` scenarios
+pass, including `step22-beaten-stay-beaten-in-a-run` (its control was watched
+failing by the builder). `npm run gates` is 6 of 6. **Now owed (b):** Step 21's
+game over is on `main` (`step21-heart-game-over-quarry` passes, and
+`gameOver` is set in `content/defeat/quarry.json`), but `stage-run.ts:101`
+still restarts only on `thrown-out`. The stage must also start over on the
+quarry's `game-over`; tell the hearts builder once it does.
