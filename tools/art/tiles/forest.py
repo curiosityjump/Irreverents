@@ -286,6 +286,62 @@ def mushroom_cap():
 QUARRY_SHEET = Image.open(os.path.join(ASSETS, 'tiles', 'quarry.png')).convert('RGBA')
 
 
+# DRAFT: (Step 15 push 4, the lead's look pass of 12:20 UTC) the forest's own earth: TRN-01's cobbles
+# were mapped to the quarry's orange earth ramp; the forest takes the same cobbles two tones down, a
+# dark loam (earth's lit tones become wood's and earth's shadows, the shadows go to ink), so the trail
+# no longer reads as the quarry's ground. Applied to every ground cell (rows 0-4: the block, inner
+# corners, fills, unders, deep), never to grass, rubble or ink. To undo: drop forest_earth() from main.
+LOAM = {E[3][:3]: C['wood'][1], E[2][:3]: E[0], E[1][:3]: C['wood'][0], E[0][:3]: C['ink'][1]}
+# DRAFT: a little moss in the loam (one fleck in about 40 earth pixels, by a position hash): the
+# forest floor is damp. Foliage's darkest, so it sits back.
+MOSS = C['foliage'][0]
+
+
+def forest_earth(sheet):
+    for y in range(0, 5 * T):
+        for x in range(sheet.width):
+            c = sheet.getpixel((x, y))
+            if c[3] and c[:3] in LOAM:
+                n = LOAM[c[:3]]
+                if c[:3] in (E[3][:3], E[2][:3]) and (x * 7919 + y * 104729) % 41 == 0:
+                    n = MOSS
+                sheet.putpixel((x, y), n)
+
+
+# DRAFT: the back of a pocket underground (crawl, tunnel, chamber, hollow, the deep level): the deep
+# cells' loam two more steps down, toward night, so a hollow reads as dark earth behind, not as the
+# sky. Placed as `far` decor over each pocket (content/decor/forest-trail.json, written by
+# tools/art/tiles/forest_decor.py), in the indoor back-wall slots [0..3, 6] the forest does not use.
+CAVE = {C['wood'][1][:3]: C['night'][3], E[0][:3]: C['night'][2], C['wood'][0][:3]: C['night'][1],
+        C['ink'][1][:3]: C['night'][0], C['ink'][0][:3]: C['night'][0], MOSS[:3]: C['night'][2]}
+
+
+def cave_back(sheet):
+    out = []
+    for cx, cy in M.DEEP_CELLS:
+        img = sheet.crop((cx * T, cy * T, (cx + 1) * T, (cy + 1) * T)).convert('RGBA')
+        for y in range(T):
+            for x in range(T):
+                c = img.getpixel((x, y))
+                img.putpixel((x, y), CAVE.get(c[:3], C['night'][1]) if c[3] else C['night'][1])
+        out.append(img)
+    return out
+
+
+# DRAFT: the backdrop without its seam. forest-waterfall.png is the BKG-01 preview's two 320-wide
+# views side by side, with a hard step at x 320 (the panorama's middle is missing). The glade is its
+# first view and that view mirrored, so x 320 joins pixel for pixel; a sideways phone shows about
+# 375 px of it, so the mirrored half is mostly off screen. Swap back to forest-waterfall.png (or to
+# the full panorama, asked of Vision Partner) in content/backdrops/forest-*.json.
+def glade_backdrop():
+    src = Image.open(os.path.join(ASSETS, 'backdrops', 'forest-waterfall.png')).convert('RGBA')
+    left = src.crop((0, 0, 320, src.height))
+    out = Image.new('RGBA', (640, src.height), CLEAR)
+    out.paste(left, (0, 0))
+    out.paste(left.transpose(Image.FLIP_LEFT_RIGHT), (320, 0))
+    return out
+
+
 def main():
     """quarry.png, with the cells the forest re-cuts pasted over it (in build_sheet's order)."""
     f = Forest()
@@ -303,7 +359,11 @@ def main():
         place(f.oneway(kind), cell)
     for img, cell in zip(f.deep(), M.DEEP_CELLS):
         place(img, cell)
+    forest_earth(sheet)
+    for i, img in enumerate(cave_back(sheet)):
+        place(img, [i, 6])
     M.save(sheet, 'tiles/forest.png')
+    M.save(glade_backdrop(), 'backdrops/forest-glade.png')
 
 
 if __name__ == '__main__':
