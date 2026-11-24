@@ -84,7 +84,9 @@ function drawMeter(g: CanvasRenderingContext2D, x: number, y: number, level: num
 }
 
 /** Step 4, the town's tiers: what was drawn last frame, for the page's drawn record (drawn.alert). */
-let shown: { level: number; whistle: number | null } = { level: 0, whistle: null };
+// `bell` (additive, the fifth town-tiers builder): a ringing bell's bar in this room, its progress 0..1, or null;
+// a call for help is a bell or a whistle (D-063), and the checks read either (docs/decisions-log.md, the tiers fact).
+let shown: { level: number; whistle: number | null; bell?: number | null } = { level: 0, whistle: null, bell: null };
 /** No banner for the level a page finds when it first draws (joining a game mid-alert is not the moment). */
 let drawnOnce = false;
 
@@ -96,7 +98,7 @@ function shownLevel(world: World, roomId: string): { level: number; area: string
 }
 
 /** The pips and the whistle's gauge drawn on the last frame: `level` (0 to 3) and `whistle`, a whistling guard's progress 0..1 in this room, or null. */
-export function drawnAlert(): { level: number; whistle: number | null } {
+export function drawnAlert(): { level: number; whistle: number | null; bell?: number | null } {
   return shown;
 }
 
@@ -169,9 +171,11 @@ export function drawBells(g: CanvasRenderingContext2D, world: World, content: Co
 export function drawAlert(g: CanvasRenderingContext2D, world: World, content: Content, roomId: string, ox: number, oy: number): void {
   const room = content.rooms[roomId];
   if (!room) return;
+  let bell: number | null = null;
   for (const e of bells(world, content, roomId)) {
     const ring = e.c.ringing;
     if (!ring || e.c.thing?.takenBy !== null) continue;
+    bell = Math.max(bell ?? 0, Math.min(1, ring.ticks / Math.max(1, ring.of)));
     const cx = ox + e.x + room.tile / 2;
     const base = oy + e.y + room.tile;
     // Round 3 (gap 11): with the looks, a `bell-gauge` over the bell filling frame by frame
@@ -214,7 +218,7 @@ export function drawAlert(g: CanvasRenderingContext2D, world: World, content: Co
   }
   drawnOnce = true;
   lastLevel = level;
-  shown = { level, whistle };
+  shown = { level, whistle, bell };
   if (level <= 0) return;
   // DRAFT (brief phone-hud-legibility, 2026-11-24: the pips under the plate read as hearts or balloons):
   // they sit on their own dark strip led by a warning sign, so they read as "the watch is after you".

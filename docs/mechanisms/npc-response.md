@@ -459,8 +459,8 @@ the top-left only when no plate is drawn, on their own dark strip led by a
 brass warning sign (`drawPipStrip`; phone-HUD brief, `DRAFT:`: alone they
 read as hearts); a new pip queues one banner
 (`alert:<level>`, the dispatch file's `banners[level-1]`, none on the
-page's first frame). `drawn.alert` `{ level, whistle }` is the record the
-checks read.
+page's first frame). `drawn.alert` `{ level, whistle, bell }` is the record the
+checks read (`bell`: a ringing bell's bar in the room, 0..1, or null).
 
 **The castle street's table:** doors `to-throne-room` and `to-courtyard`,
 cap 8, rows: level 1 nobody, level 2 two guards, level 3 three.
@@ -479,7 +479,10 @@ guard put in the courtyard walks back and whistles) and the phone e2e fact
 `tiers` (`scripts/e2e/tiers.ts`, also in `check:live`: after fight-back's
 moves it meets the guard standing still, turned toward him, west of the
 street's middle, because a page swinging at a moving guard misses over
-live's latency; its `INTENT:` has the measurements). The `people` fact counts people in a room (optionally within an
+live's latency; its `INTENT:` has the measurements; the page records
+what it draws from the first frame, a call filling counts by whistle or
+bell, since under delay the guard often goes back to the bell, and the
+row is counted in the 1.5 s from its banner). The `people` fact counts people in a room (optionally within an
 `x` range, or only `arrivals`). Their controls, watched to fail, are in
 `docs/plan/step-4.md`, "Builder notes".
 

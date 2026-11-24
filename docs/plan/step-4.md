@@ -718,6 +718,17 @@ step23-thrown-out-leaves-it red; left for the weapons builder.
 **For whoever comes next (the orchestrator's line):** under delay a raging guard struck out of his sight returns to the bell instead of whistling, by design (`alert-whistle.ts`: he whistles only with his offender in sight), and that is what read as "gauge never drawn".
 
 **Steering tried, (b), not pushed (~09:30 UTC):** `docs/plan/step-4-tiers-fact-steered.patch` (whole file against `main`; it contains the recorded fact): `meet()` also waits for the guard's drawn sight band (`drawn.sight.bands[].facing`) to face the hero, and a try whose meet fails is not tapped. Under 300/60/40: **4 of 5 on main, 2 of 5 with the rows** (both sets run at once, two browsers, which may have disturbed timing). Failures: 2 rows runs drew no gauge in 12 tries; 1 main and 1 rows run first drew a gauge at 3 pips (the 1→2 and 2→3 rises were bells again, so something other than the guard's own facing at the strike still decides). Not looked into: whether the guard stays raging-with-offender long enough to whistle, and what the shopkeeper's bell does to this. The harness (`step-4-replay-tiers.ts.txt`) now also logs the server's `c.whistle` on/off per body (`SRV whistle`), which is how bell and whistle are told apart. Tasks 2-4 not started; live unchanged.
+
+### Fifth builder (`session_017WiGzFsP2hhQR5q7wSEpiB`), 2026-11-24: task 1, the fact counts a call by bell or whistle
+
+**Built.** `drawn.alert.bell` (additive, `src/client/draw/alert.ts`: a ringing bell's bar in the room, 0..1, or null, beside `whistle`), and the fourth builder's recorded fact (`step-4-tiers-fact-recorded.patch`, applied) taking the fuller of the two as "a call filling", noting which. Same claims otherwise: a pip within 8 s of the call first drawn, the row's banner, more guards drawn in the 1.5 s from it than just before the call, the pips carried into the throne room.
+
+**Measured** (the replay harness `step-4-replay-tiers.ts.txt`, 300/60/40 delay, runs one at a time; "rows" = `main` + `git revert 9e50cd8`):
+- New fact: **5 of 5 on `main`, 5 of 5 with the rows.** All 10 were answered by the first call after the alert reached 1, and that call was **the bell** (1 → 2 pips, the bar first drawn at 39–44 s, guards drawn 1 → 3), with 1 tap after phase 1.
+- Old fact (control): 3 of 3 on `main`; **1 of 3 with the rows** (one run 8 more taps, then the whistle of the 2 → 3 rise, and the walk out failed; one 320 s run failed).
+- The new fact with the bell ignored (control, `bell = 0` in the record): 3 of 3 with the rows still passed, but only by tapping on 2–3 more times until a whistle came (once the 2 → 3 rise). So that is not a red control; what it shows is that the bell's record is what the new fact's 10 passes counted. A red control for the drawn record itself was not found (with the bell dropped, the fact falls back to the fourth builder's 3 of 5).
+- Not run: `main` with the bell ignored (stopped for time).
+
 ## Camp entries (`handoff-prompts/camp-entries.md`)
 
 Builder `session_017WiGzGkuNQcsBDa2oWh23s`, 2026-11-24.
