@@ -1,0 +1,19 @@
+{
+  "id": "chase-lost-goes-back",
+  "proves": "The owner's report 2026-11-24: a camp fighter who saw the brawler comes for him; the brawler runs back west and climbs onto the high ledge (out of his 40 px of sight, where no person can climb). The fighter walks to where he last saw him, stops at the step instead of pushing it for ever, searches there, then walks back to his post at column 16 and watches west again. The brawler is never hit. Control (watched to fail): with no `search` in content/npcs/outpost-fighter.json he pushes the step and is still at column 6 at tick 1200",
+  "room": "test-chase",
+  "placements": true,
+  "players": [{ "id": "a", "character": "brawler", "spawn": 0 }],
+  "inputs": [
+    { "player": "a", "from": 30, "to": 200, "x": -1 },
+    { "player": "a", "from": 60, "to": 78, "hold": ["jump"] },
+    { "player": "a", "from": 110, "to": 128, "hold": ["jump"] }
+  ],
+  "ticks": 1260,
+  "expect": [
+    { "fact": "position", "entity": "tc-fighter", "at": 240, "x": [80, 120] },
+    { "fact": "position", "player": "a", "at": 300, "x": [8, 32], "y": [80, 96] },
+    { "fact": "position", "entity": "tc-fighter", "at": 1200, "x": [256, 272] },
+    { "fact": "event-where", "event": "hit", "where": { "target": "p:a" }, "between": [0, 1260], "count": [0, 0] }
+  ]
+}

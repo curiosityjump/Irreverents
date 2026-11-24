@@ -2,8 +2,11 @@
 // enemies don't give chase if you are not right in front of them"), inside
 // `npm run e2e` (one call line in scripts/e2e.ts): a phone-sized page, by
 // touch only, in the Bandit Camp.
-// - alarm-reads: standing in the lookout's view, the page announces the horn
-//   and the wave it brings on the banner queue (draw/alarm-banner.ts).
+// - chase-comes / chase-goes-back: walking up to camp fighter 1, he comes for
+//   the hero; once the hero is out of his sight (thrown out of the camp, and
+//   back in), he has searched and walked back to his post.
+// - alarm-reads: the walk crossed the lookout's view, and the page announces
+//   the horn and the wave it brings on the banner queue (draw/alarm-banner.ts).
 // docs/plan/step-4.md, "Alarms and the chase, as played".
 // DRAFT: every limit below is a first pass with room to spare.
 import path from 'node:path';
@@ -14,6 +17,7 @@ import { pushUp, walkInto } from './outpost.ts';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
 const T = 16;
+const drawnX = (ph: Phone, id: string): Promise<number | null> => ph.page.evaluate((i: string) => (window as any).irreverents.drawn.entities.find((e: any) => e.id === i)?.x ?? null, id);
 
 /** The stick held one way with the jump button tapped every half second, until `done` or the time runs out. */
 async function hopUntil(ph: Phone, dir: number, done: () => Promise<boolean>, ms = 8000): Promise<boolean> {
@@ -56,9 +60,59 @@ export async function chaseFacts(kit: Kit): Promise<void> {
     }
     // Over the step by the doorway (columns 5-7) and down the far side.
     await hopUntil(ph, 1, async () => (await me(ph)).x > 9 * T);
-    // Into the lookout's view (column 18, watching west first), and stand.
-    await standAt(ph, 12 * T, 1);
-    // The page announces the horn and the wave.
+    // The chase: walk east until camp fighter 1 (placed at column 25) is drawn coming west, at most to column 21.
+    const post = 25 * T + 2;
+    const st = await pointOn(ph, '[data-stick]', 0.75);
+    let came = false;
+    if (st) {
+      await ph.cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ ...st, id: 1 }] });
+      let held = true;
+      // He watches west 8 s, then east 3 s: wait for him there, standing, for up to 12 s.
+      for (let i = 0; i < 160 && !came; i++) {
+        await sleep(100);
+        const fx = await drawnX(ph, 'camp-fighter-1');
+        came = fx !== null && fx < post - T;
+        if (held && (await me(ph)).x > 19 * T) {
+          await ph.cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+          held = false;
+        }
+      }
+      if (held) await ph.cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+    }
+    const cameTo = await drawnX(ph, 'camp-fighter-1');
+    await ph.page.screenshot({ path: path.join(kit.out, 'e2e-chase-comes.png') });
+    fact('chase-comes', came, `by touch, walking up to camp fighter 1 (post x ${post}), the page drew him coming for the hero: at x ${Math.round(cameTo ?? -1)} (expected west of ${post - T}), the hero at x ${Math.round((await me(ph)).x)}`);
+
+    // Out of sight: the hero stays and is beaten, until the camp throws them out into the courtyard
+    // (Step 21's way out), then walks back in. Every fighter who saw the hero has lost them; fighter 1
+    // searched and walked back to his post (before this change he stood where he last saw them for ever).
+    // DRAFT: getting back up on the step under blows was tried first and is not reliable by touch.
+    const roomNow = (): Promise<string> => ph.page.evaluate(() => (window as any).irreverents.drawn.room);
+    let lowest = cameTo ?? Infinity;
+    for (let i = 0; i < 240 && (await roomNow()) === 'outpost'; i++) {
+      await sleep(250);
+      const x = await drawnX(ph, 'camp-fighter-1');
+      if (x !== null) lowest = Math.min(lowest, x);
+    }
+    const out = (await roomNow()) === 'courtyard';
+    await sleep(6000);
+    for (let i = 0; i < 3 && (await roomNow()) !== 'outpost'; i++) {
+      const w = (await ph.page.evaluate(() => { const irr = (window as any).irreverents; return irr.content.characters[irr.drawn.me.kind].box.w; })) as number;
+      await standAt(ph, doorX + (T - w) / 2 - 4, 1);
+      await pushUp(ph);
+      await sleep(1000);
+    }
+    let back = false;
+    let fx: number | null = null;
+    for (let i = 0; i < 40 && !back; i++) {
+      await sleep(250);
+      fx = await drawnX(ph, 'camp-fighter-1');
+      back = fx !== null && Math.abs(fx - post) <= T && lowest < post - T;
+    }
+    await ph.page.screenshot({ path: path.join(kit.out, 'e2e-chase-back.png') });
+    fact('chase-goes-back', out && back, `by touch, the hero was beaten and thrown out of the camp (${out}) and walked back in; camp fighter 1 had come as far west as x ${Math.round(lowest)} and is drawn at x ${Math.round(fx ?? -1)} (expected back within a tile of his post, x ${post})`);
+
+    // Alarm: the walk up to fighter 1 crossed the lookout's view (column 18): by now, or soon, the page has announced the horn and the wave.
     let alarms: string[] = [];
     for (let i = 0; i < 80 && !(alarms.includes('The horn sounds!') && alarms.includes('Here they come!')); i++) {
       await sleep(250);

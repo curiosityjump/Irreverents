@@ -1,6 +1,6 @@
 {
  "id": "step21-camp-thrown-out",
- "proves": "Step 21 (DRAFT, docs/decisions-log.md 'Step 21'; D-019; the orchestrator's (c), 2026-11-23): in the real Bandit Camp the grappler breaks the horn post, then stands among the camp's fighters. Its first three falls are part of the fight: it gets up where it lies, inside, each one a 'fall' event counting up. The fourth within 60 s (the camp's 'downs': 4) comes with camp-fighter-1 in reach: he stands over the hero for the beat (1 s), then the hero is thrown out into the courtyard's camp doorway, flat, and up 3 s later, free. The camp keeps its state: the post is still broken and the wave's fighter is still inside as the hero lands. Controls (watched to fail): \"on\": false in content/defeat/outpost.json, the hero is still in the camp; \"downs\": 1, the first fall at 1009 throws",
+ "proves": "Step 21 (DRAFT, docs/decisions-log.md 'Step 21'; D-019; the orchestrator's (c), 2026-11-23): in the real Bandit Camp the grappler breaks the horn post, then stands among the camp's fighters. Its first three falls are part of the fight: it gets up where it lies, inside, each one a 'fall' event counting up. The fourth within 60 s (the camp's 'downs': 4) comes with the first wave's fighter (outpost:w0:0) in reach: he stands over the hero for the beat (1 s), then the hero is thrown out into the courtyard's camp doorway, flat, and up 3 s later, free. The camp keeps its state: the post is still broken and the wave's fighter is still inside as the hero lands. Controls (watched to fail): \"on\": false in content/defeat/outpost.json, the hero is still in the camp; \"downs\": 1, the first fall at 1009 throws Re-timed 2026-11-24 by the chase builder (camp fighters now search and walk back to their post instead of standing where they lost the hero): the fourth fall comes 15 ticks earlier, with the first wave's fighter in reach, not camp-fighter-1.",
  "room": "outpost",
  "placements": true,
  "players": [
@@ -170,7 +170,7 @@
    },
    "between": [
     0,
-    2373
+    2358
    ],
    "count": [
     0,
@@ -191,8 +191,8 @@
     "falls": 4
    },
    "between": [
-    2374,
-    2374
+    2359,
+    2359
    ],
    "count": [
     1,
@@ -204,12 +204,12 @@
    "event": "seized",
    "where": {
     "entity": "p:a",
-    "by": "camp-fighter-1",
+    "by": "outpost:w0:0",
     "place": "outpost"
    },
    "between": [
-    2374,
-    2374
+    2359,
+    2359
    ],
    "count": [
     1,
@@ -225,8 +225,8 @@
     "to": "courtyard"
    },
    "between": [
-    2433,
-    2433
+    2418,
+    2418
    ],
    "count": [
     1,
@@ -236,13 +236,13 @@
   {
    "fact": "in-room",
    "player": "a",
-   "at": 2434,
+   "at": 2419,
    "room": "courtyard"
   },
   {
    "fact": "body-state",
    "player": "a",
-   "at": 2434,
+   "at": 2419,
    "is": [
     "flattened"
    ],
@@ -258,8 +258,8 @@
     "target": "p:a"
    },
    "between": [
-    2613,
-    2613
+    2598,
+    2598
    ],
    "count": [
     1,
@@ -269,7 +269,7 @@
   {
    "fact": "body-state",
    "player": "a",
-   "at": 2614,
+   "at": 2599,
    "not": [
     "flattened",
     "seized",
@@ -293,7 +293,7 @@
    "fact": "people-at",
    "room": "outpost",
    "ids": "outpost:w0",
-   "at": 2434,
+   "at": 2419,
    "count": [
     1,
     1

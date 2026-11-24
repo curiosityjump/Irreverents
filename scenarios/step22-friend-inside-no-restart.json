@@ -1,6 +1,6 @@
 {
  "id": "step22-friend-inside-no-restart",
- "proves": "Step 22 push 2 (DRAFT, docs/decisions-log.md 'Step 22': with friends the stage starts over only when nobody else is left inside): the same depot run as step22-restart-restores, while a friend (the flyer) stands in the quarry's ridge the whole time. The grappler is thrown back to the road, but the stage is not started over: the post stays broken and the changed tile stays solid. Control (watched to fail): the friend's room set to \"courtyard\" (outside the stage), the stage starts over at once",
+ "proves": "Step 22 push 2 (DRAFT, docs/decisions-log.md 'Step 22': with friends the stage starts over only when nobody else is left inside): the same depot run as step22-restart-restores, while a friend (the flyer) stands in the quarry's ridge the whole time. The grappler is thrown back to the road, but the stage is not started over: the post stays broken and the changed tile stays solid. Control (watched to fail): the friend's room set to \"courtyard\" (outside the stage), the stage starts over at once Re-timed 2026-11-24 by the chase builder (bandits who lost the hero now search and walk back to their post, so the third fall comes about 5 s sooner).",
  "room": "quarry-depot",
  "placements": true,
  "tiles": [
@@ -48,7 +48,7 @@
  ],
  "ticks": 2000,
  "expect": [
-  {"fact": "event", "event": "thrown-out", "player": "a", "between": [1900, 2000], "count": [1, 1]},
+  {"fact": "event", "event": "thrown-out", "player": "a", "between": [1600, 1700], "count": [1, 1]},
   {"fact": "event", "event": "stage-restarted", "between": [0, 2000], "count": [0, 0]},
   {"fact": "signaler", "outpost": "quarry-depot", "at": 1990, "broken": true},
   {"fact": "tile", "room": "quarry-depot", "tile": [30, 4], "at": 1990, "is": "solid"},

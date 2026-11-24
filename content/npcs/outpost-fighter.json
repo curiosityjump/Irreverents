@@ -7,5 +7,6 @@
   "barks": {
     "distress": "Huh?",
     "rage": "GET THEM!"
-  }
+  },
+  "search": { "on": 48, "time": 4, "turn": 1 }
 }

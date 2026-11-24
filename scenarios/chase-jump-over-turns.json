@@ -1,0 +1,17 @@
+{
+  "id": "chase-jump-over-turns",
+  "proves": "The owner's report 2026-11-24 ('enemies don't give chase if you are not right in front of them'): a camp fighter watching west sees the brawler (the slowest hero) six tiles in front; the brawler runs at him, jumps over him and runs on east. The fighter turns and comes after him across the room (past column 24 by tick 360), and the brawler still gains on him (more than four tiles ahead at tick 300: every person walks slower than every hero runs). Control (watched to fail): with no `search` in content/npcs/outpost-fighter.json the fighter never turns and is still west of column 17 at tick 360",
+  "room": "test-chase",
+  "placements": true,
+  "players": [{ "id": "a", "character": "brawler", "spawn": 0 }],
+  "inputs": [
+    { "player": "a", "from": 30, "to": 360, "x": 1 },
+    { "player": "a", "from": 100, "to": 118, "hold": ["jump"] }
+  ],
+  "ticks": 420,
+  "expect": [
+    { "fact": "position", "entity": "tc-fighter", "at": 360, "x": [384, 576] },
+    { "fact": "position", "entity": "tc-fighter", "at": 300, "x": [320, 432] },
+    { "fact": "position", "player": "a", "at": 300, "x": [490, 576] }
+  ]
+}

@@ -1,6 +1,6 @@
 {
  "id": "step22-restart-restores",
- "proves": "Step 22 push 2 (DRAFT, docs/decisions-log.md 'Step 22'; INTENT: the stage is the owner's own exception to D-077, 'pushes you back to the entrance to start over'): alone in the Iron Quarry's depot, with one of its tiles changed before the start (row 4, column 30 made solid, standing in for a working part), the grappler breaks the horn post, knocks patrol 1 flat twice, then is knocked flat three times by him and thrown back to the road. Nobody else is inside, so the stage starts over at once (tries 1): the post is whole, patrol 1 is back at his post on his feet, the lookout too, and the tile is as the room file has it. Control (watched to fail): \"on\": false in content/stages/iron-quarry.json, the post stays broken, the tile solid, patrol 1 where he was",
+ "proves": "Step 22 push 2 (DRAFT, docs/decisions-log.md 'Step 22'; INTENT: the stage is the owner's own exception to D-077, 'pushes you back to the entrance to start over'): alone in the Iron Quarry's depot, with one of its tiles changed before the start (row 4, column 30 made solid, standing in for a working part), the grappler breaks the horn post, knocks patrol 1 flat twice, then is knocked flat three times by him and thrown back to the road. Nobody else is inside, so the stage starts over at once (tries 1): the post is whole, patrol 1 is back at his post on his feet, the lookout too, and the tile is as the room file has it. Control (watched to fail): \"on\": false in content/stages/iron-quarry.json, the post stays broken, the tile solid, patrol 1 where he was Re-timed 2026-11-24 by the chase builder (bandits who lost the hero now search and walk back to their post, so the third fall comes about 5 s sooner).",
  "room": "quarry-depot",
  "placements": true,
  "tiles": [
@@ -47,14 +47,14 @@
  ],
  "ticks": 2000,
  "expect": [
-  {"fact": "event-where", "event": "stage-restarted", "where": {"stage": "iron-quarry", "tries": 1}, "between": [1900, 2000], "count": [1, 1]},
-  {"fact": "signaler", "outpost": "quarry-depot", "at": 1900, "broken": true},
-  {"fact": "signaler", "outpost": "quarry-depot", "at": 1960, "broken": false},
-  {"fact": "tile", "room": "quarry-depot", "tile": [30, 4], "at": 1900, "is": "solid"},
-  {"fact": "tile", "room": "quarry-depot", "tile": [30, 4], "at": 1960, "is": "empty"},
-  {"fact": "position", "entity": "depot-fighter-1", "at": 1960, "x": [212, 220], "y": [223, 225]},
-  {"fact": "body-state", "entity": "depot-fighter-1", "at": 1960, "not": ["flattened", "flying", "beat"]},
-  {"fact": "body-state", "entity": "depot-lookout", "at": 1960, "not": ["flattened", "flying"]},
-  {"fact": "in-room", "player": "a", "at": 1960, "room": "quarry-road"}
+  {"fact": "event-where", "event": "stage-restarted", "where": {"stage": "iron-quarry", "tries": 1}, "between": [1600, 1700], "count": [1, 1]},
+  {"fact": "signaler", "outpost": "quarry-depot", "at": 1600, "broken": true},
+  {"fact": "signaler", "outpost": "quarry-depot", "at": 1622, "broken": false},
+  {"fact": "tile", "room": "quarry-depot", "tile": [30, 4], "at": 1600, "is": "solid"},
+  {"fact": "tile", "room": "quarry-depot", "tile": [30, 4], "at": 1622, "is": "empty"},
+  {"fact": "position", "entity": "depot-fighter-1", "at": 1622, "x": [212, 220], "y": [223, 225]},
+  {"fact": "body-state", "entity": "depot-fighter-1", "at": 1622, "not": ["flattened", "flying", "beat"]},
+  {"fact": "body-state", "entity": "depot-lookout", "at": 1622, "not": ["flattened", "flying"]},
+  {"fact": "in-room", "player": "a", "at": 1622, "room": "quarry-road"}
  ]
 }

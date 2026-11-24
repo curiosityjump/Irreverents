@@ -11,5 +11,6 @@
   "barks": {
     "distress": "Eh?",
     "rage": "ENOUGH!"
-  }
+  },
+  "search": { "on": 48, "time": 4, "turn": 1 }
 }

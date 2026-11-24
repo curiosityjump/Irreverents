@@ -584,6 +584,29 @@ the old way, then hands him back to a routine that faces one way for ever.
 Second: 7 tiles is under a third of a phone screen, so "seen" reads as
 "right in front of him".
 
+**After the fixes** (same ways of measuring):
+
+- **Alarms (push at `cbcf273`):** the camp's and the depot's horn are heard
+  (the bell's wind-up while blown, the alarm when it finishes) and announced
+  in their room: "The horn sounds!", then "Here they come!" as the wave walks
+  in; a street row walking in: "The guard is here!". Camp (c) is now **W**.
+  The depot's wave still drops into the pocket (Step 22's lead's, told).
+- **The chase (push 2):** a fighter, heavy or brute who loses a hero walks
+  to where he last saw them, on 3 tiles the way they were going, turns about
+  for 4 s, then walks back to his post. Jumped over: he now turns and
+  follows 11-19 tiles (was 0) and goes back. A step he cannot climb stops
+  him in under a second and he searches there. Camp, quarry (b): from **N**
+  past him to **W**. Sight is unchanged (7 tiles, forward): seeing farther
+  per kind is built (`sight` in `content/npcs/`) but set on nobody, because
+  it turns fifteen scenarios red, the quiet routes among them (the
+  orchestrator decides).
+- **The way out, measured margin after:** unchanged speeds. Fighter 48,
+  lookout 56, heavy 36, brute 28 px/s; heroes run brawler 76, grappler 84,
+  flyer 92, skirmisher 120, infiltrator 128. Against the fastest person (the
+  lookout): brawler +20, grappler +28, flyer +36, skirmisher +64,
+  infiltrator +72 px/s; against a fighter add 8. `chase-jump-over-turns`:
+  the brawler is over four tiles ahead of a turned fighter after 3 s.
+
 ## Carried here by the orchestrator, 2026-11-24 (from the Step 16 lead's phone walk to the depot at b0a7d5e)
 
 - A sight mark or a bark before a call, so a player sees they were spotted before the horn. Step 19's heist slice draws sight bands; check on a phone whether that covers it before briefing anything.

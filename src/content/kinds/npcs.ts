@@ -29,6 +29,22 @@ export interface NpcKind {
    * buy-politely loop stays; recognising a threat is OPEN (D-062, D-070).
    */
   fights: Fights;
+  /**
+   * Owner's report 2026-11-24 ("enemies don't give chase if you are not right
+   * in front of them"). Left out: the world's npcSightRange / npcSightHeight.
+   * DRAFT: per kind, so a fighter can see farther than a lookout while the
+   * quiet routes past lookouts stay as they were (docs/decisions-log.md,
+   * "The chase"). canSee and sightBox both read it: the band is drawn as seen.
+   */
+  sight?: { range: number; height: number };
+  /**
+   * Same report: what a `bad` fighter does after losing sight of a hero
+   * (src/sim/systems/outpost-fight.ts). Left out: as before, he stands at the
+   * last place seen. `on`: pixels he walks on past it, the way the hero was
+   * seen going; `time`: seconds he searches there, turning every `turn`
+   * seconds; then he walks back to his post. DRAFT numbers.
+   */
+  search?: { on: number; time: number; turn: number };
 }
 
 export const FIGHTS = ['on-sight', 'when-struck'] as const;
@@ -70,7 +86,7 @@ const kind: ContentKind = {
   parse(raw, read) {
     const o = read.object(raw, '');
     if (!o) return null;
-    read.only(o, ['id', 'role', 'side', 'moods', 'barks', 'fights'], '');
+    read.only(o, ['id', 'role', 'side', 'moods', 'barks', 'fights', 'sight', 'search'], '');
     const out: NpcKind = {
       id: read.string(o, 'id', ''),
       role: read.string(o, 'role', ''),
@@ -82,6 +98,20 @@ const kind: ContentKind = {
     if (o.fights !== undefined) {
       if (FIGHTS.includes(o.fights as Fights)) out.fights = o.fights as Fights;
       else read.fail('fights', `must be one of ${FIGHTS.join(', ')}, or left out (on-sight), but is ${describe(o.fights)}`);
+    }
+    if (o.sight !== undefined) {
+      const v = read.object(o.sight, 'sight');
+      if (v) {
+        read.only(v, ['range', 'height'], 'sight');
+        out.sight = { range: read.number(v, 'range', 'sight', { min: 0, max: 2000 }), height: read.number(v, 'height', 'sight', { min: 0, max: 2000 }) };
+      }
+    }
+    if (o.search !== undefined) {
+      const v = read.object(o.search, 'search');
+      if (v) {
+        read.only(v, ['on', 'time', 'turn'], 'search');
+        out.search = { on: read.number(v, 'on', 'search', { min: 0, max: 2000 }), time: read.number(v, 'time', 'search', { min: 0, max: 60 }), turn: read.number(v, 'turn', 'search', { min: 0.1, max: 60 }) };
+      }
     }
     if (out.role === HERO_ROLE) read.fail('role', `"${HERO_ROLE}" is the role of the players' characters; a person needs another`);
     if (SIDES.includes(o.side as Side)) out.side = o.side as Side;

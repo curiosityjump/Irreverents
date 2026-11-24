@@ -2,7 +2,7 @@ import { TILE } from '../../content/kinds/rooms.ts';
 import type { Room } from '../../content/kinds/rooms.ts';
 import type { Content } from '../../content/types.ts';
 import type { Entity } from '../types.ts';
-import { centre, isOut } from './state.ts';
+import { centre, isOut, npcKind } from './state.ts';
 
 /** How far apart, in pixels, the points checked along a line of sight are. Under half a tile. */
 const SAMPLE = 4;
@@ -24,6 +24,17 @@ export function lineClear(room: Room, a: { x: number; y: number }, b: { x: numbe
 }
 
 /**
+ * How far across and up or down `watcher` sees: their NPC kind's `sight`
+ * when it has one (DRAFT, the chase, 2026-11-24), else the world's numbers.
+ * canSee and sightBox both read it, so the drawn band stays canSee's twin.
+ */
+export function sightOf(content: Content, watcher: Entity): { range: number; height: number } {
+  const own = npcKind(content, watcher)?.sight;
+  if (own) return own;
+  return { range: content.tuning.world.npcSightRange!, height: content.tuning.world.npcSightHeight! };
+}
+
+/**
  * Whether `watcher` sees `target` right now.
  * DRAFT (the Step 4 lead's call, in docs/decisions-log.md): the simplest
  * thing that makes sneaking a choice. Same room; the target is in front,
@@ -38,12 +49,12 @@ export function canSee(content: Content, watcher: Entity, target: Entity): boole
   if (target.c.roomHide) return false;
   const room = content.rooms[watcher.room];
   if (!room) return false;
-  const { npcSightRange, npcSightHeight } = content.tuning.world;
+  const { range: npcSightRange, height: npcSightHeight } = sightOf(content, watcher);
   const a = centre(content, watcher);
   const b = centre(content, target);
   const dx = b.x - a.x;
   if (dx * watcher.facing < 0) return false;
-  if (Math.abs(dx) > npcSightRange! || Math.abs(b.y - a.y) > npcSightHeight!) return false;
+  if (Math.abs(dx) > npcSightRange || Math.abs(b.y - a.y) > npcSightHeight) return false;
   return lineClear(room, a, b);
 }
 
@@ -59,11 +70,10 @@ export function canSee(content: Content, watcher: Entity, target: Entity): boole
  */
 export function sightBox(content: Content, watcher: Entity): { eye: { x: number; y: number }; x0: number; x1: number; y0: number; y1: number } | undefined {
   if (isOut(watcher) || !content.rooms[watcher.room]) return undefined;
-  const { npcSightRange, npcSightHeight } = content.tuning.world;
+  const { range: reach, height: npcSightHeight } = sightOf(content, watcher);
   const eye = centre(content, watcher);
-  const reach = npcSightRange!;
   // dx * facing >= 0 and |dx| <= range: from the eye forward, the eye's own column included.
   const x0 = watcher.facing < 0 ? eye.x - reach : eye.x;
   const x1 = watcher.facing < 0 ? eye.x : eye.x + reach;
-  return { eye, x0, x1, y0: eye.y - npcSightHeight!, y1: eye.y + npcSightHeight! };
+  return { eye, x0, x1, y0: eye.y - npcSightHeight, y1: eye.y + npcSightHeight };
 }

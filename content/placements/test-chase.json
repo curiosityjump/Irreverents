@@ -1,0 +1,8 @@
+{
+  "//": "DRAFT (the chase, owner's report 2026-11-24): one camp fighter at column 16 watching west, six tiles from the spawn. scenarios/chase-*.json pin these columns.",
+  "id": "test-chase",
+  "room": "test-chase",
+  "place": [
+    { "id": "tc-fighter", "character": "outpost-fighter", "tile": [16, 9], "npc": "outpost-fighter", "routine": [{ "face": "left" }, { "wait": 5 }] }
+  ]
+}

@@ -105,7 +105,10 @@ someone when: same room; the someone is in front (the way the person
 faces); within `npcSightRange` (112 px, 7 tiles) across and
 `npcSightHeight` (40 px) up or down, between the middles of the two
 bodies; and no **solid** tile on the straight line between them
-(one-way platforms do not block). **The one a deed is done to always
+(one-way platforms do not block). An NPC kind may carry its own
+`sight` `{ range, height }` (2026-11-24, `DRAFT:`, set on nobody yet);
+`sightOf()` gives canSee and sightBox the same numbers, so the drawn band
+follows. **The one a deed is done to always
 perceives it**, facing or not. Someone out cold (`c.flattened`, Step
 2's) sees nothing. **Nobody sees a body that is hiding**
 (`c.roomHide`, Step 3's: standing still, doing nothing, inside a `hide`
