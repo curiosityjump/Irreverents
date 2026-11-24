@@ -1,0 +1,15 @@
+{
+  "//": "DRAFT: Step 15 push 4c: the forest's boulder, cut by tools/art/tiles/forest_boulder.py from the owner's approved P10 TRN-02 row (its large round rock) with a cap of moss; laid out as the crates' sheets. A delivered sheet replaces it by editing this file.",
+  "id": "forest-boulder",
+  "image": "sprites/cast/forest-boulder.png",
+  "cell": {"w": 32, "h": 32},
+  "anchor": {"x": 4, "y": 10},
+  "fps": 8,
+  "frames": {
+    "idle": [0],
+    "run": [0],
+    "air": [8, 9, 10, 11],
+    "hurt": [16, 17]
+  },
+  "fpsBy": {"hurt": 10, "air": 8}
+}

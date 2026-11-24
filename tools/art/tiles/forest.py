@@ -291,7 +291,10 @@ QUARRY_SHEET = Image.open(os.path.join(ASSETS, 'tiles', 'quarry.png')).convert('
 # dark loam (earth's lit tones become wood's and earth's shadows, the shadows go to ink), so the trail
 # no longer reads as the quarry's ground. Applied to every ground cell (rows 0-4: the block, inner
 # corners, fills, unders, deep), never to grass, rubble or ink. To undo: drop forest_earth() from main.
-LOAM = {E[3][:3]: C['wood'][1], E[2][:3]: E[0], E[1][:3]: C['wood'][0], E[0][:3]: C['ink'][1]}
+# Push 4c (the orchestrator's look at the shots: "still reads as a warm mid-brown cobble"): one more
+# step down and cooler: the lit face is earth's darkest, the body wood's darkest, the shadows the
+# cool ink ramp.
+LOAM = {E[3][:3]: E[0], E[2][:3]: C['wood'][0], E[1][:3]: C['ink'][1], E[0][:3]: C['ink'][0]}
 # DRAFT: a little moss in the loam (one fleck in about 40 earth pixels, by a position hash): the
 # forest floor is damp. Foliage's darkest, so it sits back.
 MOSS = C['foliage'][0]
@@ -312,8 +315,8 @@ def forest_earth(sheet):
 # cells' loam two more steps down, toward night, so a hollow reads as dark earth behind, not as the
 # sky. Placed as `far` decor over each pocket (content/decor/forest-trail.json, written by
 # tools/art/tiles/forest_decor.py), in the indoor back-wall slots [0..3, 6] the forest does not use.
-CAVE = {C['wood'][1][:3]: C['night'][3], E[0][:3]: C['night'][2], C['wood'][0][:3]: C['night'][1],
-        C['ink'][1][:3]: C['night'][0], C['ink'][0][:3]: C['night'][0], MOSS[:3]: C['night'][2]}
+CAVE = {E[0][:3]: C['night'][3], C['wood'][0][:3]: C['night'][2], C['ink'][1][:3]: C['night'][1],
+        C['ink'][0][:3]: C['night'][0], MOSS[:3]: C['night'][2]}
 
 
 def cave_back(sheet):
