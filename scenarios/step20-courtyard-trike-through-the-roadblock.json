@@ -1,0 +1,225 @@
+{
+  "id": "step20-courtyard-trike-through-the-roadblock",
+  "proves": "Step 20, the courtyard's run (DRAFT; docs/decisions-log.md 'Step 20: the guards' trike'): in the real courtyard with its placements, the grappler at spawn 1 (standing on the trike) taps Use beside the guards' empty patrol trike and is in it (riding as the trike, the hero it went in as kept); the stick held east builds speed over the 128 px of flat run and it rams the guards' roadblock at speed: the light crate, the heavy crate and the last light crate each launched east, and the brawler, a friend standing at the roadblock, launched too (shoved, never worn). A Jump just past the roadblock, still rolling, puts the grappler out as itself, on its feet, and the trike is never wrecked. Control (watched to fail): the trike's ramSpeed set to 500, above any speed the run reaches: nothing is rammed and every crate stays where it stood",
+  "room": "courtyard",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 1
+    },
+    {
+      "id": "b",
+      "character": "brawler",
+      "spawn": 2
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 2,
+      "to": 4,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 10,
+      "to": 200,
+      "x": 1
+    },
+    {
+      "player": "b",
+      "from": 0,
+      "to": 30,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 72,
+      "to": 74,
+      "hold": [
+        "jump"
+      ]
+    }
+  ],
+  "ticks": 240,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "machine-taken",
+      "where": {
+        "machine": "courtyard-trike",
+        "by": "p:a",
+        "hero": "grappler"
+      },
+      "between": [
+        0,
+        8
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "character",
+      "player": "a",
+      "at": 20,
+      "is": "guard-trike"
+    },
+    {
+      "fact": "event-where",
+      "event": "machine-crash",
+      "where": {
+        "machine": "courtyard-trike",
+        "target": "courtyard-roadblock-1",
+        "player": "a"
+      },
+      "between": [
+        30,
+        60
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "machine-crash",
+      "where": {
+        "machine": "courtyard-trike",
+        "target": "courtyard-roadblock-2",
+        "player": "a"
+      },
+      "between": [
+        30,
+        60
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "machine-crash",
+      "where": {
+        "machine": "courtyard-trike",
+        "target": "courtyard-roadblock-3",
+        "player": "a"
+      },
+      "between": [
+        30,
+        60
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "machine-crash",
+      "where": {
+        "machine": "courtyard-trike",
+        "target": "p:b",
+        "player": "a"
+      },
+      "between": [
+        30,
+        70
+      ],
+      "count": [
+        1,
+        2
+      ]
+    },
+    {
+      "fact": "position",
+      "at": 120,
+      "entity": "courtyard-roadblock-1",
+      "x": [
+        215,
+        480
+      ]
+    },
+    {
+      "fact": "position",
+      "at": 120,
+      "entity": "courtyard-roadblock-2",
+      "x": [
+        260,
+        480
+      ]
+    },
+    {
+      "fact": "position",
+      "at": 120,
+      "entity": "courtyard-roadblock-3",
+      "x": [
+        260,
+        480
+      ]
+    },
+    {
+      "fact": "position",
+      "at": 120,
+      "player": "b",
+      "x": [
+        250,
+        480
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "machine-left",
+      "where": {
+        "machine": "courtyard-trike",
+        "by": "p:a",
+        "how": "jumped"
+      },
+      "between": [
+        70,
+        78
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "character",
+      "player": "a",
+      "at": 120,
+      "is": "grappler"
+    },
+    {
+      "fact": "position",
+      "at": 120,
+      "player": "a",
+      "y": [
+        127,
+        129
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "machine-wrecked",
+      "where": {
+        "machine": "courtyard-trike"
+      },
+      "between": [
+        0,
+        240
+      ],
+      "count": [
+        0,
+        0
+      ]
+    }
+  ]
+}

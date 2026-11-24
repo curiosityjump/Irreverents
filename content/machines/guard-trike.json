@@ -1,0 +1,27 @@
+{
+  "//": "DRAFT (Step 20, the courtyard's run; docs/decisions-log.md 'Step 20: the guards' trike'): the town guards' patrol trike, light and quick beside the ram wagon. A hero at the reins builds to 420 px/s at 700 px/s² (the courtyard's 72 px from where it stands to the roadblock reach about 317); a guard would drive it at 70, below the slowest hero (the brawler, 76). With the stick let go it slows at 400 px/s² (from top speed it stops in about a second) (the wagon's 30 nearly holds its speed): a light machine, and an empty one stops in a few tiles instead of rolling on through the gate and out by the gallery's walk door (measured with 30). It rams at 160 or faster; twelve crashes make it a wreck. A blow as hard as the armoured guard's (11000) throws its rider out; a guard's (9000) does not. Its cells are the guards' GV-01 trike, cut empty (no crew drawn): `looks` names the cell per state, `crew` false draws the rider as themself on the saddle (`riderAt`, the cell pixel their feet sit on), and `headRow` is the cells' first painted row (src/client/draw/machines.ts).",
+  "id": "guard-trike",
+  "character": "guard-trike",
+  "speed": {
+    "rider": 420,
+    "driver": 70
+  },
+  "accel": 700,
+  "coast": 400,
+  "brake": 700,
+  "ramSpeed": 160,
+  "crashes": 12,
+  "driverRamSpeed": 50,
+  "throwRider": 11000,
+  "look": "guard-trike",
+  "looks": {
+    "idle": "guard-trike-parked",
+    "empty": "guard-trike-parked",
+    "moving": "guard-trike-moving",
+    "crash": "guard-trike-damaged",
+    "wrecked": "guard-trike-damaged"
+  },
+  "crew": false,
+  "headRow": 6,
+  "riderAt": [26, 22]
+}

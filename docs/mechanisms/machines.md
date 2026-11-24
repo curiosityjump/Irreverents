@@ -215,3 +215,39 @@ them up) and because no row-2 scenario survives a wagon (it turned
 `step7-waves-reach-the-hero` and `step7-same-again-hangs-nothing` red).
 Seen so far only in `test-wave-wagon`: no camp scenario reaches a fourth
 call (`docs/plan/step-20.md`, "Builder notes", push 3).
+
+## On the courtyard's run (the guards' trike, push 1)
+
+Brief `handoff-prompts/guard-vehicle-courtyard.md`; the owner's "no vehicle
+hijacking" and `docs/vision-gaps.md` row 15. `DRAFT:` (decisions-log "Step
+20: the guards' trike").
+
+| Piece | What it does |
+|---|---|
+| `content/machines/guard-trike.json`, `content/characters/guard-trike.json`, tuning set `guard-trike` | the town guards' patrol trike: box 32 by 24, weight 180, top speed 420 for a hero (700 px/s² to build), 70 for a guard, rams from 160, slows at 400 px/s² with the stick let go (the wagon nearly holds its speed: an empty trike rolling on at 30 left the courtyard by the gallery's walk door), 12 crashes, thrown out by 11000 |
+| `content/placements/courtyard.json` | `courtyard-trike` parked empty at [5, 7] facing east (spawn 1 stands on it). Not at columns 1-2: a hero coming in from the street stops with their middle near x 50, where Use must read nothing (e2e `door-go-in` went red with it there); not east of 5, or Use in the forest's doorway would read GET IN; the roadblock `courtyard-roadblock-1..3`, a crate, a heavy crate and a crate at columns 11-13. Bodies, not a wall: anyone on foot passes through them |
+| `looks` (machine file) | the cell's look id per state (`idle`, `moving`, `crash`, `wrecked`, `empty`), for a sheet with its own names (the GV-01 cells are `guard-trike-parked`, `-moving`, `-damaged`, written by `tools/art/props/make.py`, so they are named here, not added there). Left out: `<look>-<state>`. The check refuses an id not in `content/looks/` |
+| `crew` false | the cells show nobody aboard: a person at the reins is drawn as himself, and a rider is drawn as the hero they went in as (`World.machines[id].hero`), standing on the saddle at `riderAt` (cell pixels, facing right; mirrored), over the cells, by `drawSprite`. Left out: the wagon's baked rider stands for whoever drives |
+| `headRow` | the cells' first painted row (marks, the plate pointer); left out 9, the wagon's. The trike's is 6; with a rider, the higher of the two heads |
+
+**A run, as measured** (`step20-courtyard-trike-through-the-roadblock`): from
+a standing start at column 5 the trike meets the first crate at 315 px/s (tick 36),
+the heavy one at 233-319, the last at 210-250; each is launched east, a friend
+standing at the roadblock too. Driven on, it meets the shut gate at 420 (a
+wall crash, one wear) and stalls there; Jump puts the rider out beside it.
+Flung crates can come to rest on the plates and so open the gate (any body
+presses a plate: the plates' own rule). With the gate open, a fast body can
+leave by the gallery's walk door (column 29): a crate did, and so can the empty
+trike after a Jump (seen with coast 30, and once with 400 in an upright shot run:
+the machine then stands in the gallery; nothing is lost).
+
+**Doors, as tried:** a rider driven west into the street's walk door (column
+0) stops against the room's edge (a wall crash) and stays in the courtyard;
+Use and a push up while riding in the forest's doorway took nobody through
+(the Use button reads GO IN there while riding). Not tried: every doorway.
+
+Checked by `step20-courtyard-trike-through-the-roadblock` (control: `ramSpeed`
+500), `-solo-infiltrator` and `-stalled-jump-out` (control: no Jump), and e2e
+`guard-machine-get-in`, `-drive`, `-out` (`scripts/e2e/guard-machine.ts`;
+control `E2E_TOUCH_BREAK=interact`). Shots:
+`docs/plan/step-20-shots/courtyard-*`.

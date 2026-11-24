@@ -1,0 +1,9 @@
+{
+  "//": "DRAFT (Step 20, the courtyard's run): the body of the town guards' patrol trike (content/machines/guard-trike.json). Its box is inside 32 by 32 (src/content/kinds/characters.ts, an INTENT); the 56 by 40 cells (about 42 by 33 painted, empty: no crew drawn) are drawn bottom-centred over it. No jump, no switch, no attack: the stick drives it (src/sim/verbs/drive.ts). The id is the function; the name is data.",
+  "id": "guard-trike",
+  "name": "Patrol Trike",
+  "box": { "w": 32, "h": 24 },
+  "color": "#3a5a8c",
+  "verbs": ["drive", "body"],
+  "tuning": "guard-trike"
+}

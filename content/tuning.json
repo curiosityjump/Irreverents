@@ -417,6 +417,11 @@
       "weight": 200,
       "toughness": 0
     },
+    "guard-trike": {
+      "//": "DRAFT (Step 20, the courtyard's run): the patrol trike's body. Weight 180: nobody on the roster lifts it (the grappler lifts 150); it keeps 60% of its speed past the roadblock's heavy crate (120) and 90% past each light one (20). Toughness 0: it wears to a wreck by its own count of crashes (content/machines/guard-trike.json).",
+      "weight": 180,
+      "toughness": 0
+    },
     "ranged-fighter": {
       "//": "DRAFT (Step 24 slice 1): the thrower. Walks like the camp lookout (he never walks after a hero: systems/ranged-throw.ts), a weak swing up close (6000: a 40-weight body off at 150 px/s), the camp fighter's timings; weight 30 and toughness 50, light and fragile (D-021): two of the grappler's punches floor him.",
       "runSpeed": 56,

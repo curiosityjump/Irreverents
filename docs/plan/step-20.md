@@ -391,3 +391,36 @@ courtyard (he would clash with Step 24's thrower on sight). **Open**
 does the crash earn the "OHH!"; should a guard ever patrol on it.
 
 **Briefs:** `handoff-prompts/guard-vehicle-courtyard.md`.
+
+### Guard vehicle, courtyard (builder `session_017WiGzExJuPKipKbx51rTeL`)
+
+**Push 1 (the trike and the roadblock).** `docs/mechanisms/machines.md`, "On
+the courtyard's run"; decisions-log "The town guards' patrol trike". Notes:
+- **Re-timed: none.** The full `npm run check` was green with the trike and
+  the three crates in the courtyard before any scenario of mine existed: no
+  scenario that loads the courtyard's placements changed (re-run at column 5
+  before the push).
+- **Not as briefed: coast 400, not the wagon's 30.** With 30, the empty trike
+  after a Jump rolled on through the gate (opened by crates landing on the
+  plates) and out by the gallery's walk door, and the e2e's "beside it" failed.
+  It still can, after a fast Jump with the gate open (an upright shot run).
+- **Not as briefed: the trike at column 5, not 1.** At [1, 7] the full e2e's
+  `door-go-in` went red: a hero coming in from the street stops beside it, and
+  Use read GET IN where that fact wants nothing. Column 5 clears that spot and
+  the forest's doorway by a few pixels (`get-in.ts`: 16 px across). The run to
+  the roadblock is 72 px, so `accel` went 500 → 700 to ram all three crates.
+- **The e2e's drive is 0.6 s**: held 1.2 s, the crates it flung opened the gate
+  and the trike left by the gallery's door, so its x was read in another room.
+- **Machines and doors:** a crate flung from the roadblock left by the
+  gallery's walk door in one run (any body does). A rider driven into the
+  street's walk door stays (a wall crash). Use and up in the forest's doorway
+  while riding took nobody through, though Use reads GO IN there. Not tried:
+  the quarry's and the camp's doorways.
+- **An empty rolling trike rams at 50** (`driverRamSpeed`, read for any body
+  nobody plays): after a Jump it can shove the hero who just left it (seen in
+  the solo run, tick 104). The wagon's existing rule; left.
+- **The rider is drawn standing on the saddle**, the hero's idle frame (no
+  sitting frame exists); `riderAt` [26, 22] is a first guess from the cells.
+- Shots (local server, by keys): `step-20-shots/courtyard-{parked,get-in,riding,roadblock-flying,out}-{sideways,upright}.png`.
+- Not verified: two phones at once on the courtyard's run.
+

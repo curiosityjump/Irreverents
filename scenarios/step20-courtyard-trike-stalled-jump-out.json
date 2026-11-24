@@ -1,0 +1,125 @@
+{
+  "id": "step20-courtyard-trike-stalled-jump-out",
+  "proves": "Step 20, the courtyard's run (DRAFT; there is always a way out): the grappler gets in the empty trike, drives east through the roadblock and on into the shut gate (column 25) at full speed: a wall crash, one wear, and the trike stands stalled against it with the stick still held. A Jump there puts the grappler out as itself, standing beside the trike. Control (watched to fail): the Jump press left out, and the grappler is still the trike at the end",
+  "room": "courtyard",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 1
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 2,
+      "to": 4,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 10,
+      "to": 140,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 150,
+      "to": 152,
+      "hold": [
+        "jump"
+      ]
+    }
+  ],
+  "ticks": 240,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "machine-taken",
+      "where": {
+        "machine": "courtyard-trike",
+        "by": "p:a",
+        "hero": "grappler"
+      },
+      "between": [
+        0,
+        8
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "machine-crash",
+      "where": {
+        "machine": "courtyard-trike",
+        "target": null,
+        "player": "a"
+      },
+      "between": [
+        65,
+        90
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "velocity",
+      "player": "a",
+      "at": 140,
+      "vx": [
+        -1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "machine-left",
+      "where": {
+        "machine": "courtyard-trike",
+        "by": "p:a",
+        "how": "jumped"
+      },
+      "between": [
+        148,
+        156
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "character",
+      "player": "a",
+      "at": 200,
+      "is": "grappler"
+    },
+    {
+      "fact": "position",
+      "at": 200,
+      "player": "a",
+      "x": [
+        320,
+        400
+      ],
+      "y": [
+        127,
+        129
+      ]
+    },
+    {
+      "fact": "character",
+      "player": "a",
+      "at": 240,
+      "is": "grappler"
+    }
+  ]
+}

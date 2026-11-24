@@ -9,7 +9,7 @@ import { predictedLook, predictHits } from './impact.ts';
 import { carriedBy, drawSprite, drawsOwnRage, forget, lyingOut, rageFlash, remember, swingWasThrow } from './sprites.ts';
 import type { Drew } from './sprites.ts';
 import { drawSlams, poseFor, turnForHeave } from './suplex.ts';
-import { beginMachines, drawMachineBody, seatedInDrawnMachine } from './machines.ts';
+import { beginMachines, drawMachineBody, drawnRiders, seatedInDrawnMachine } from './machines.ts';
 
 /** One thing the renderer put on screen this frame, in room pixels. Part of the debug object (docs/mechanisms/network.md). */
 export interface Drawn {
@@ -37,6 +37,8 @@ export interface Drawn {
   state?: string;
   /** Step 5: knocked out (`c.flattened`) as this page has it, however it is drawn (taking the blow, flying, or lying). */
   out?: boolean;
+  /** Step 20, the courtyard's trike: on a ridden machine whose cells show nobody aboard, the hero drawn on its saddle (draw/machines.ts). */
+  rider?: string;
 }
 
 /** Whose view this is, and where to record what was drawn. */
@@ -144,6 +146,8 @@ export function drawEntities(g: CanvasRenderingContext2D, world: World, content:
     // Step 20 push 3: a machine is drawn from its looks (draw/machines.ts); else the sheet, as before.
     const drew = drawMachineBody(g, world, content, e, x, y, away ? AWAY_ALPHA : 1) ?? drawSprite(g, world, content, e, x, y, { alpha: away ? AWAY_ALPHA : 1, tint, pose, flash: hit?.flash });
     if (rec) rec.state = drew?.state ?? (lyingOut(e) ? 'down' : undefined);
+    const rider = rec && drawnRiders().find((r) => r.id === e.id)?.hero;
+    if (rec && rider) rec.rider = rider;
     if (drew) {
       tops.set(e.id, drew.head);
       const head = heads.find((h) => h.e === e);

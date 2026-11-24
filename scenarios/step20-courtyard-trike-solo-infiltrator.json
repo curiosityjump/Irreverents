@@ -1,0 +1,146 @@
+{
+  "id": "step20-courtyard-trike-solo-infiltrator",
+  "proves": "Step 20, the courtyard's run (DRAFT; solo is never locked out by headcount): the lightest hero, the infiltrator, alone in the real courtyard: Use beside the empty trike gets in, the stick east rams all three crates of the roadblock at speed, and Jump just past it puts the infiltrator out as itself, standing. Control (watched to fail): the Jump press left out, and the infiltrator is still the trike at the end",
+  "room": "courtyard",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "infiltrator",
+      "spawn": 1
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 2,
+      "to": 4,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 10,
+      "to": 200,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 74,
+      "to": 76,
+      "hold": [
+        "jump"
+      ]
+    }
+  ],
+  "ticks": 240,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "machine-taken",
+      "where": {
+        "machine": "courtyard-trike",
+        "by": "p:a",
+        "hero": "infiltrator"
+      },
+      "between": [
+        0,
+        8
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "machine-crash",
+      "where": {
+        "machine": "courtyard-trike",
+        "target": "courtyard-roadblock-1",
+        "player": "a"
+      },
+      "between": [
+        30,
+        60
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "machine-crash",
+      "where": {
+        "machine": "courtyard-trike",
+        "target": "courtyard-roadblock-2",
+        "player": "a"
+      },
+      "between": [
+        30,
+        60
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "machine-crash",
+      "where": {
+        "machine": "courtyard-trike",
+        "target": "courtyard-roadblock-3",
+        "player": "a"
+      },
+      "between": [
+        30,
+        60
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "machine-left",
+      "where": {
+        "machine": "courtyard-trike",
+        "by": "p:a",
+        "how": "jumped"
+      },
+      "between": [
+        72,
+        80
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "character",
+      "player": "a",
+      "at": 160,
+      "is": "infiltrator"
+    },
+    {
+      "fact": "position",
+      "at": 160,
+      "player": "a",
+      "y": [
+        127,
+        129
+      ]
+    },
+    {
+      "fact": "character",
+      "player": "a",
+      "at": 240,
+      "is": "infiltrator"
+    }
+  ]
+}

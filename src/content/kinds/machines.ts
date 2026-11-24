@@ -57,6 +57,38 @@ export interface Machine {
    * DRAFT: the stems and which cell shows when (docs/decisions-log.md, "Step 20: the look").
    */
   look?: string;
+  /**
+   * The courtyard's trike: the look id of each state's cell, by state
+   * (`idle`, `moving`, `crash`, `wrecked`, `empty`), for cells whose names
+   * are not `<look>-<state>` (a sheet cut by its own names, as the guards'
+   * GV-01 vehicles are: `tools/art/props/make.py` writes those keys, so they
+   * are named here rather than added there). A state left out: `<look>-<state>`
+   * as before, then the idle cell. Each id named must exist in content/looks/.
+   * DRAFT: the field's name (docs/decisions-log.md, "Step 20: the guards' trike").
+   */
+  looks?: Partial<Record<MachineLookState, string>>;
+  /**
+   * The courtyard's trike: false when the cells show nobody aboard (no crew
+   * drawn). The page then draws a person at the reins as himself, and a
+   * rider as the hero they went in as, on the saddle at `riderAt`, over the
+   * cells. Left out (true): the cells' baked rider stands for whoever
+   * drives, as the ram wagon's do.
+   */
+  crew?: boolean;
+  /** The cell pixel (from its top-left, facing right) where a drawn rider's feet sit. Used when `crew` is false; left out, the cell's middle. */
+  riderAt?: [number, number];
+  /** The cells' first painted row (marks and the plate pointer sit on it). Left out: 9, the ram wagon's. */
+  headRow?: number;
+}
+
+/** The states a machine's look shows (src/client/draw/machines.ts). */
+export const MACHINE_LOOK_STATES = ['idle', 'moving', 'crash', 'wrecked', 'empty'] as const;
+export type MachineLookState = (typeof MACHINE_LOOK_STATES)[number];
+
+/** The look id a machine shows for a state, before any fallback: its `looks` entry, else `<look>-<state>`. */
+export function machineLookId(m: Machine, state: MachineLookState): string | undefined {
+  if (m.looks?.[state]) return m.looks[state];
+  return m.look === undefined ? undefined : `${m.look}-${state}`;
 }
 
 declare module '../types.ts' {
@@ -71,7 +103,7 @@ const kind: ContentKind = {
   parse(raw, read) {
     const o = read.object(raw, '');
     if (!o) return null;
-    read.only(o, ['id', 'character', 'speed', 'accel', 'coast', 'brake', 'ramSpeed', 'crashes', 'driverRamSpeed', 'throwRider', 'look'], '');
+    read.only(o, ['id', 'character', 'speed', 'accel', 'coast', 'brake', 'ramSpeed', 'crashes', 'driverRamSpeed', 'throwRider', 'look', 'looks', 'crew', 'riderAt', 'headRow'], '');
     const speed = read.object(o.speed, 'speed');
     if (speed) read.only(speed, ['rider', 'driver'], 'speed');
     const out: Machine = {
@@ -90,6 +122,25 @@ const kind: ContentKind = {
       ...(o.throwRider === undefined ? {} : { throwRider: read.number(o, 'throwRider', '', { min: 0, max: 1000000 }) }),
       ...(o.look === undefined ? {} : { look: read.string(o, 'look', '') }),
     };
+    if (o.looks !== undefined) {
+      const ls = read.object(o.looks, 'looks');
+      if (ls) {
+        read.only(ls, [...MACHINE_LOOK_STATES], 'looks');
+        const looks: Partial<Record<MachineLookState, string>> = {};
+        for (const st of MACHINE_LOOK_STATES) if (ls[st] !== undefined) looks[st] = read.string(ls, st, 'looks');
+        out.looks = looks;
+      }
+    }
+    if (o.crew !== undefined) {
+      if (typeof o.crew === 'boolean') out.crew = o.crew;
+      else read.fail('crew', 'must be true or false');
+    }
+    if (o.riderAt !== undefined) {
+      const at = Array.isArray(o.riderAt) && o.riderAt.length === 2 && o.riderAt.every((n) => Number.isInteger(n) && (n as number) >= 0 && (n as number) <= 256) ? (o.riderAt as [number, number]) : null;
+      if (at) out.riderAt = [at[0], at[1]];
+      else read.fail('riderAt', 'must be two whole numbers [x, y], each 0 to 256');
+    }
+    if (o.headRow !== undefined) out.headRow = read.number(o, 'headRow', '', { min: 0, max: 256, integer: true });
     return out;
   },
   check(content, fail) {
@@ -106,7 +157,12 @@ const kind: ContentKind = {
       if (other) fail(file, 'character', `"${m.character}" is already the machine of content/machines/${other}.json: one file per character`);
       by.set(m.character, m.id);
       // Only where looks are loaded at all (the room controls load rooms alone).
-      if (m.look !== undefined && Object.keys(content.looks ?? {}).length > 0 && !lookTable(content).has(`${m.look}-idle`)) fail(file, 'look', `no look "${m.look}-idle" in content/looks/ (the stem's idle cell is the one every state falls back to)`);
+      if (Object.keys(content.looks ?? {}).length > 0) {
+        const idle = machineLookId(m, 'idle');
+        if (idle !== undefined && !lookTable(content).has(idle)) fail(file, m.looks?.idle ? 'looks.idle' : 'look', `no look "${idle}" in content/looks/ (the idle cell is the one every state falls back to)`);
+        for (const [st, id] of Object.entries(m.looks ?? {})) if (!lookTable(content).has(id)) fail(file, `looks.${st}`, `no look "${id}" in content/looks/`);
+        if (m.looks && m.look === undefined) fail(file, 'looks', 'names cells but the machine has no `look`, so nothing draws them');
+      }
       // INTENT: people can be outrun (Step 20, "What's decided"): a person at the reins is slower than every roster hero.
       let slowest: { id: string; speed: number } | undefined;
       for (const id of content.roster?.characters ?? []) {

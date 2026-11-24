@@ -46,7 +46,11 @@ the items below to their homes.
   instead of a sheet; `entities.ts` asks it first, so shadows, the
   player's mark and `PlayerView.drawn` are as for any body. A person at
   the reins of such a machine is not drawn (the cells' baked rider is
-  him). `docs/mechanisms/machines.md`, "The look".
+  him), unless its file says the cells show nobody (`crew` false, the
+  guards' trike): then he is drawn as himself, and a rider is drawn as the
+  hero they went in as on the saddle, over the cells (`drawn` records it
+  as `rider`). `docs/mechanisms/machines.md`, "The look" and "On the
+  courtyard's run".
 - **`impact.ts`**: `fx-dust` puffs (three, or two for a soft impact) and an
   `fx-hit` star at the point of impact; the shake is unchanged.
 - **`npcs.ts`**: `mood-2` / `mood-3` marks; a bark in the `bark` nine-slice
