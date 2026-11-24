@@ -2,6 +2,38 @@
 
 ---
 
+CLAUDE — DIRECT BKG-02 BACKGROUND HANDOFF (2026-11-24)
+
+BKG-02 — SIX ADDITIONAL GAME-IMPORTABLE STATIC BIOME BACKGROUNDS — 2026-11-24
+
+CANONICAL FOLDER: https://drive.google.com/drive/folders/1UhebIUjcAYnAnBRMezfeXM3hpgylXECS
+
+Six separate 1024×180 PNG backdrops and six matching lossless WebPs, each fitting a 320×180 logical game camera with 704px horizontal scroll room. Biomes: forest ruins, market town, ice cavern, volcanic forge, moonlit stronghold, sky isles.
+
+FILES (direct PNG):
+
+Forest ruins/day: https://drive.google.com/file/d/1l13yiUh4p9ryMmavd77acf-Rsjy4BITW/view
+
+Market town/day: https://drive.google.com/file/d/1lt0gJtGu6zBeLWifpGsOxBBE9FgK03Tx/view
+
+Ice cavern/ruins: https://drive.google.com/file/d/14UO1D1TlJseaJm6onT5zYu5dCjwC-9Gy/view
+
+Volcanic forge/sunset: https://drive.google.com/file/d/1Q8Mmx-1D9EEXfHpXMiC6-Er82pWZ8XBe/view
+
+Moonlit stronghold: https://drive.google.com/file/d/12B3idDJCVsvVdVb1znGDhU9rFQEDvw6-/view
+
+Sky isles/day: https://drive.google.com/file/d/1Mnh7hrtDZb8mRiuKOL2mSe60Lz9mFzyB/view
+
+Searchable CSV tags https://drive.google.com/file/d/1ARMLOOSLBdm-ansyHyFS7rakVS_ehKXM/view
+
+Per-biome JSON manifest (native size, crop coordinates, preview paths, tags, source provenance) https://drive.google.com/file/d/1hW4uCGvLdCe8oO8BlqKZ8PtS7MLSZuRU/view
+
+Contact review image https://drive.google.com/file/d/1JhFCDQ1ikBfW4PlEczJ7oImsbwHvYbCR/view
+
+ZIP (includes all original 2172×724 artworks, 1024×341 full-composition versions, all runtime PNG/WebPs, 320×180 left/center/right viewport checks, CSV, JSON and local camera demo): https://drive.google.com/file/d/1TPoMzt62BpRUZF7Ooa7id45Ytv3x4TUl/view
+
+STATUS: READY-TO-IMPORT SINGLE-LAYER STATIC SCENERY. No collision, no separately composited parallax, no seamless repeating edges, no claimed iPhone gameplay test; foreground-looking platforms are baked visual details only and require separate collision objects if used interactively. Claude: import image as static scrolling background, camera offset 0..704 at 320px viewport, preserve separate collision/platform layers; do not mark ENV-004/005/014 3-layer parallax complete. Master Board BKG-002 = Prototype usable; ENV-004/005/014 updated with this source. Once imported to GitHub, add actual repo path to Board.
+
 NEW DIRECT CLAUDE WEAPON HANDOFF — P12 (2026-11-23)
 
 Read first: https://docs.google.com/document/d/1sS6Dhg80ZlRDxeM7n1iJs7w1kdjKo7afYAy1iuvIA3A/edit

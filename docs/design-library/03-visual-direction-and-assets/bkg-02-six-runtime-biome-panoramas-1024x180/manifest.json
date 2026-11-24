@@ -1,0 +1,263 @@
+{
+  "pack_id": "BKG-02",
+  "title": "Irreverents \u2014 Six Game-Importable Single-Layer Biome Backgrounds",
+  "created_utc_date": "2026-11-24",
+  "version": "v1",
+  "game_viewport_px": [
+    320,
+    180
+  ],
+  "runtime_panorama_px": [
+    1024,
+    180
+  ],
+  "full_composition_px": [
+    1024,
+    341
+  ],
+  "original_source_px": [
+    2172,
+    724
+  ],
+  "strict_visual_status": "Runtime-size static backgrounds, not seamless horizontally tileable and not independent parallax layers. Foreground details shown within flattened illustration are BACKGROUND ONLY and have no collision.",
+  "scaling": "Source downsampled preserving aspect ratio to width 1024 (height 341), then framed by 180px vertical crop at documented y. Never stretch aspect.",
+  "horizontal_scroll_range_px": 704,
+  "frames": [
+    {
+      "id": "BKG02-01",
+      "biome": "forest_ruins_day",
+      "description": "bright woodland ruins with distant waterfall and crystal gate",
+      "tags": [
+        "forest",
+        "ruins",
+        "grass",
+        "waterfalls",
+        "crystal-shrine",
+        "day"
+      ],
+      "source_filename": "floating_crystal_shrine_meadow.png",
+      "source_image_dimensions_px": [
+        2172,
+        724
+      ],
+      "source_sha256": "131782e0f9c692744730cda4353f1f22164b13975f4290560324eca710fb1d2f",
+      "runtime_png": "backgrounds/forest_ruins_day_1024x180.png",
+      "runtime_webp_lossless": "backgrounds/forest_ruins_day_1024x180.webp",
+      "full_composition_png": "full_composition/forest_ruins_day_1024x341.png",
+      "viewport_previews": {
+        "left": "previews/forest_ruins_day_left_320x180.png",
+        "center": "previews/forest_ruins_day_center_320x180.png",
+        "right": "previews/forest_ruins_day_right_320x180.png"
+      },
+      "viewport_y_crop_in_1024x341": [
+        0,
+        56,
+        1024,
+        236
+      ],
+      "integrate_as": "nonrepeating static camera-scrolling background; DO NOT use as platform collision or seamlessly repeating panorama",
+      "verified_dimensions_px": [
+        1024,
+        180
+      ],
+      "approved_playable_geometry": "none\u2014background painting only",
+      "status": "READY_TO_IMPORT_BACKDROP; NOT_LIVE_TESTED"
+    },
+    {
+      "id": "BKG02-02",
+      "biome": "market_town_day",
+      "description": "bright town marketplace and distant fantasy bridges",
+      "tags": [
+        "market",
+        "town",
+        "village",
+        "shopfronts",
+        "castle",
+        "day"
+      ],
+      "source_filename": "pixel_market_town_panorama.png",
+      "source_image_dimensions_px": [
+        2172,
+        724
+      ],
+      "source_sha256": "ce69ad31ab6d9077752294cff6a1e54c03cee6232c67c4720bebedea61556764",
+      "runtime_png": "backgrounds/market_town_day_1024x180.png",
+      "runtime_webp_lossless": "backgrounds/market_town_day_1024x180.webp",
+      "full_composition_png": "full_composition/market_town_day_1024x341.png",
+      "viewport_previews": {
+        "left": "previews/market_town_day_left_320x180.png",
+        "center": "previews/market_town_day_center_320x180.png",
+        "right": "previews/market_town_day_right_320x180.png"
+      },
+      "viewport_y_crop_in_1024x341": [
+        0,
+        65,
+        1024,
+        245
+      ],
+      "integrate_as": "nonrepeating static camera-scrolling background; DO NOT use as platform collision or seamlessly repeating panorama",
+      "verified_dimensions_px": [
+        1024,
+        180
+      ],
+      "approved_playable_geometry": "none\u2014background painting only",
+      "status": "READY_TO_IMPORT_BACKDROP; NOT_LIVE_TESTED"
+    },
+    {
+      "id": "BKG02-03",
+      "biome": "ice_cavern_ruins",
+      "description": "blue crystal cave with frosted arches",
+      "tags": [
+        "ice",
+        "cavern",
+        "crystal",
+        "ruins",
+        "snow"
+      ],
+      "source_filename": "crystal_archway_in_the_ice_caverns.png",
+      "source_image_dimensions_px": [
+        2172,
+        724
+      ],
+      "source_sha256": "bad445bd179ffff28bae896cdedcc2e7a55bd3adda3e877b28c65d8f5a356561",
+      "runtime_png": "backgrounds/ice_cavern_ruins_1024x180.png",
+      "runtime_webp_lossless": "backgrounds/ice_cavern_ruins_1024x180.webp",
+      "full_composition_png": "full_composition/ice_cavern_ruins_1024x341.png",
+      "viewport_previews": {
+        "left": "previews/ice_cavern_ruins_left_320x180.png",
+        "center": "previews/ice_cavern_ruins_center_320x180.png",
+        "right": "previews/ice_cavern_ruins_right_320x180.png"
+      },
+      "viewport_y_crop_in_1024x341": [
+        0,
+        56,
+        1024,
+        236
+      ],
+      "integrate_as": "nonrepeating static camera-scrolling background; DO NOT use as platform collision or seamlessly repeating panorama",
+      "verified_dimensions_px": [
+        1024,
+        180
+      ],
+      "approved_playable_geometry": "none\u2014background painting only",
+      "status": "READY_TO_IMPORT_BACKDROP; NOT_LIVE_TESTED"
+    },
+    {
+      "id": "BKG02-04",
+      "biome": "volcanic_forge_sunset",
+      "description": "volcanic forge and lavafalls at sunset",
+      "tags": [
+        "volcano",
+        "lava",
+        "forge",
+        "industrial",
+        "twilight"
+      ],
+      "source_filename": "pixel_art_volcanic_forge_panorama.png",
+      "source_image_dimensions_px": [
+        2172,
+        724
+      ],
+      "source_sha256": "f01d38c5c318f29ddbe99e7ff7425cf6be8a93842f6f3e30786a505cf892d4b5",
+      "runtime_png": "backgrounds/volcanic_forge_sunset_1024x180.png",
+      "runtime_webp_lossless": "backgrounds/volcanic_forge_sunset_1024x180.webp",
+      "full_composition_png": "full_composition/volcanic_forge_sunset_1024x341.png",
+      "viewport_previews": {
+        "left": "previews/volcanic_forge_sunset_left_320x180.png",
+        "center": "previews/volcanic_forge_sunset_center_320x180.png",
+        "right": "previews/volcanic_forge_sunset_right_320x180.png"
+      },
+      "viewport_y_crop_in_1024x341": [
+        0,
+        45,
+        1024,
+        225
+      ],
+      "integrate_as": "nonrepeating static camera-scrolling background; DO NOT use as platform collision or seamlessly repeating panorama",
+      "verified_dimensions_px": [
+        1024,
+        180
+      ],
+      "approved_playable_geometry": "none\u2014background painting only",
+      "status": "READY_TO_IMPORT_BACKDROP; NOT_LIVE_TESTED"
+    },
+    {
+      "id": "BKG02-05",
+      "biome": "moonlit_stronghold",
+      "description": "moonlit castle approach and overgrown ruins",
+      "tags": [
+        "castle",
+        "stronghold",
+        "ruins",
+        "night",
+        "moonlit"
+      ],
+      "source_filename": "moonlit_haunted_stronghold_panorama.png",
+      "source_image_dimensions_px": [
+        2172,
+        724
+      ],
+      "source_sha256": "d75cf3e21008b40f6e73332dc7b86abb12a1e0f7a72c5ddd0763be2489670b97",
+      "runtime_png": "backgrounds/moonlit_stronghold_1024x180.png",
+      "runtime_webp_lossless": "backgrounds/moonlit_stronghold_1024x180.webp",
+      "full_composition_png": "full_composition/moonlit_stronghold_1024x341.png",
+      "viewport_previews": {
+        "left": "previews/moonlit_stronghold_left_320x180.png",
+        "center": "previews/moonlit_stronghold_center_320x180.png",
+        "right": "previews/moonlit_stronghold_right_320x180.png"
+      },
+      "viewport_y_crop_in_1024x341": [
+        0,
+        64,
+        1024,
+        244
+      ],
+      "integrate_as": "nonrepeating static camera-scrolling background; DO NOT use as platform collision or seamlessly repeating panorama",
+      "verified_dimensions_px": [
+        1024,
+        180
+      ],
+      "approved_playable_geometry": "none\u2014background painting only",
+      "status": "READY_TO_IMPORT_BACKDROP; NOT_LIVE_TESTED"
+    },
+    {
+      "id": "BKG02-06",
+      "biome": "sky_isles_day",
+      "description": "crystal temple amid floating islands and clouds",
+      "tags": [
+        "sky-isles",
+        "floating-islands",
+        "temple",
+        "clouds",
+        "day"
+      ],
+      "source_filename": "crystal_temple_above_the_clouds.png",
+      "source_image_dimensions_px": [
+        2172,
+        724
+      ],
+      "source_sha256": "f4935e32452cc4058e2ae4f513424834afdf6038b215da2144fd6703629822ce",
+      "runtime_png": "backgrounds/sky_isles_day_1024x180.png",
+      "runtime_webp_lossless": "backgrounds/sky_isles_day_1024x180.webp",
+      "full_composition_png": "full_composition/sky_isles_day_1024x341.png",
+      "viewport_previews": {
+        "left": "previews/sky_isles_day_left_320x180.png",
+        "center": "previews/sky_isles_day_center_320x180.png",
+        "right": "previews/sky_isles_day_right_320x180.png"
+      },
+      "viewport_y_crop_in_1024x341": [
+        0,
+        42,
+        1024,
+        222
+      ],
+      "integrate_as": "nonrepeating static camera-scrolling background; DO NOT use as platform collision or seamlessly repeating panorama",
+      "verified_dimensions_px": [
+        1024,
+        180
+      ],
+      "approved_playable_geometry": "none\u2014background painting only",
+      "status": "READY_TO_IMPORT_BACKDROP; NOT_LIVE_TESTED"
+    }
+  ]
+}

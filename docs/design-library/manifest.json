@@ -590,6 +590,288 @@
   },
   {
    "kind": "folder",
+   "id": "1UhebIUjcAYnAnBRMezfeXM3hpgylXECS",
+   "drive_path": "/03 Visual Direction and Assets/BKG-02 — Six Runtime Biome Panoramas 1024x180"
+  },
+  {
+   "kind": "folder",
+   "id": "1KRes9dtAt8yh-AFCShR89QwxptKQFacl",
+   "drive_path": "/03 Visual Direction and Assets/BKG-02 — Six Runtime Biome Panoramas 1024x180/backgrounds"
+  },
+  {
+   "kind": "file",
+   "id": "1l13yiUh4p9ryMmavd77acf-Rsjy4BITW",
+   "drive_path": "/03 Visual Direction and Assets/BKG-02 — Six Runtime Biome Panoramas 1024x180/backgrounds/forest_ruins_day_1024x180.png",
+   "repo_path": "03-visual-direction-and-assets/bkg-02-six-runtime-biome-panoramas-1024x180/backgrounds/forest-ruins-day-1024x180.png",
+   "sha256": "b7f9a158a81d038bbf8539d019668711d51a771a52c00b56a6e252a562bd1395"
+  },
+  {
+   "kind": "file",
+   "id": "1eZHDbslN4t_k1obuiYep7aDdxtr9oe4h",
+   "drive_path": "/03 Visual Direction and Assets/BKG-02 — Six Runtime Biome Panoramas 1024x180/backgrounds/forest_ruins_day_1024x180.webp",
+   "repo_path": "03-visual-direction-and-assets/bkg-02-six-runtime-biome-panoramas-1024x180/backgrounds/forest-ruins-day-1024x180.webp",
+   "sha256": "d7c23fce5f9bd98cbcc89275f4970a9f389908a33be705a4f90fb8206209cbc3"
+  },
+  {
+   "kind": "file",
+   "id": "14UO1D1TlJseaJm6onT5zYu5dCjwC-9Gy",
+   "drive_path": "/03 Visual Direction and Assets/BKG-02 — Six Runtime Biome Panoramas 1024x180/backgrounds/ice_cavern_ruins_1024x180.png",
+   "repo_path": "03-visual-direction-and-assets/bkg-02-six-runtime-biome-panoramas-1024x180/backgrounds/ice-cavern-ruins-1024x180.png",
+   "sha256": "fda798cc6f33d2b4a3cf7bee602f0ec3572a71e5b2cfbe026670f58889882570"
+  },
+  {
+   "kind": "file",
+   "id": "1Tp8YB7ruoZCO2UhK9BBZf9hSAOhoUjwz",
+   "drive_path": "/03 Visual Direction and Assets/BKG-02 — Six Runtime Biome Panoramas 1024x180/backgrounds/ice_cavern_ruins_1024x180.webp",
+   "repo_path": "03-visual-direction-and-assets/bkg-02-six-runtime-biome-panoramas-1024x180/backgrounds/ice-cavern-ruins-1024x180.webp",
+   "sha256": "84a750463217330e08dcc8776e1b6a264966f58d1ba6cc18e963d9083d72c903"
+  },
+  {
+   "kind": "file",
+   "id": "1lt0gJtGu6zBeLWifpGsOxBBE9FgK03Tx",
+   "drive_path": "/03 Visual Direction and Assets/BKG-02 — Six Runtime Biome Panoramas 1024x180/backgrounds/market_town_day_1024x180.png",
+   "repo_path": "03-visual-direction-and-assets/bkg-02-six-runtime-biome-panoramas-1024x180/backgrounds/market-town-day-1024x180.png",
+   "sha256": "e7e82aa1660863b3f607e9432887c3c247c9d2fccd99f5f19a9a9d86911a86f9"
+  },
+  {
+   "kind": "file",
+   "id": "1_Dt19baN6DbJGLcvq2p-jKTEf93-zlIi",
+   "drive_path": "/03 Visual Direction and Assets/BKG-02 — Six Runtime Biome Panoramas 1024x180/backgrounds/market_town_day_1024x180.webp",
+   "repo_path": "03-visual-direction-and-assets/bkg-02-six-runtime-biome-panoramas-1024x180/backgrounds/market-town-day-1024x180.webp",
+   "sha256": "3a8a82bfba02a6aa53e280ce47bf78bb00f9e22083c65a7c07163f09ee1e369e"
+  },
+  {
+   "kind": "file",
+   "id": "12B3idDJCVsvVdVb1znGDhU9rFQEDvw6-",
+   "drive_path": "/03 Visual Direction and Assets/BKG-02 — Six Runtime Biome Panoramas 1024x180/backgrounds/moonlit_stronghold_1024x180.png",
+   "repo_path": "03-visual-direction-and-assets/bkg-02-six-runtime-biome-panoramas-1024x180/backgrounds/moonlit-stronghold-1024x180.png",
+   "sha256": "ee418fe0c08dc27552770616a38bfdb4e75e94693cc3bf7b4c3b9e62c51378ca"
+  },
+  {
+   "kind": "file",
+   "id": "1ynkaVdtVBHAc5n61dZKq2rOvAg1sS9eu",
+   "drive_path": "/03 Visual Direction and Assets/BKG-02 — Six Runtime Biome Panoramas 1024x180/backgrounds/moonlit_stronghold_1024x180.webp",
+   "repo_path": "03-visual-direction-and-assets/bkg-02-six-runtime-biome-panoramas-1024x180/backgrounds/moonlit-stronghold-1024x180.webp",
+   "sha256": "6ea683f5bf6ae04c91ed5a84b45bcc25e4307d32951f984bb2cd28cf3074ce38"
+  },
+  {
+   "kind": "file",
+   "id": "1Mnh7hrtDZb8mRiuKOL2mSe60Lz9mFzyB",
+   "drive_path": "/03 Visual Direction and Assets/BKG-02 — Six Runtime Biome Panoramas 1024x180/backgrounds/sky_isles_day_1024x180.png",
+   "repo_path": "03-visual-direction-and-assets/bkg-02-six-runtime-biome-panoramas-1024x180/backgrounds/sky-isles-day-1024x180.png",
+   "sha256": "663550f1ecc09bd4fcf1532ecb40290b6266ffb0732c7e18e1070343605607e3"
+  },
+  {
+   "kind": "file",
+   "id": "1_yTxJEHDKj6qvftNho9ceGjmN1WrUnoP",
+   "drive_path": "/03 Visual Direction and Assets/BKG-02 — Six Runtime Biome Panoramas 1024x180/backgrounds/sky_isles_day_1024x180.webp",
+   "repo_path": "03-visual-direction-and-assets/bkg-02-six-runtime-biome-panoramas-1024x180/backgrounds/sky-isles-day-1024x180.webp",
+   "sha256": "9f71a2d2a5cf797b446b80bcbbc3b8418b08e72add176c9716fe46fe8d36b42b"
+  },
+  {
+   "kind": "file",
+   "id": "1Q8Mmx-1D9EEXfHpXMiC6-Er82pWZ8XBe",
+   "drive_path": "/03 Visual Direction and Assets/BKG-02 — Six Runtime Biome Panoramas 1024x180/backgrounds/volcanic_forge_sunset_1024x180.png",
+   "repo_path": "03-visual-direction-and-assets/bkg-02-six-runtime-biome-panoramas-1024x180/backgrounds/volcanic-forge-sunset-1024x180.png",
+   "sha256": "ce2d64d919032057d4556db75aa2f439f2f73d953d4f7e44dcdec125da016dd2"
+  },
+  {
+   "kind": "file",
+   "id": "1ZNihKX3vFzPRCiiUWsQd2kOBBiyDRvou",
+   "drive_path": "/03 Visual Direction and Assets/BKG-02 — Six Runtime Biome Panoramas 1024x180/backgrounds/volcanic_forge_sunset_1024x180.webp",
+   "repo_path": "03-visual-direction-and-assets/bkg-02-six-runtime-biome-panoramas-1024x180/backgrounds/volcanic-forge-sunset-1024x180.webp",
+   "sha256": "80b2ef0eec1923354051aece704bc43eab359c25ca2eff646ae4e7a4da5440fc"
+  },
+  {
+   "kind": "folder",
+   "id": "1GwWk_ieu4IWnJ6ZAhequLDqzFOOTiCYM",
+   "drive_path": "/03 Visual Direction and Assets/BKG-02 — Six Runtime Biome Panoramas 1024x180/demo"
+  },
+  {
+   "kind": "file",
+   "id": "1nbsk0qv_EcxMdXlIBHJuba5nKDlT0Twh",
+   "drive_path": "/03 Visual Direction and Assets/BKG-02 — Six Runtime Biome Panoramas 1024x180/demo/index.html",
+   "repo_path": "03-visual-direction-and-assets/bkg-02-six-runtime-biome-panoramas-1024x180/demo/index.html",
+   "sha256": "b587c0e38677341e28e6ff27c024c297132b237a54c9a041cf5937744ded6a0b"
+  },
+  {
+   "kind": "folder",
+   "id": "1X_nyGPirMlzWeoiaRFcjVwRltdmbTIPe",
+   "drive_path": "/03 Visual Direction and Assets/BKG-02 — Six Runtime Biome Panoramas 1024x180/full_composition"
+  },
+  {
+   "kind": "file",
+   "id": "1vTwqH6EDGoHSunWwxSMvLE8CuuAhAwMw",
+   "drive_path": "/03 Visual Direction and Assets/BKG-02 — Six Runtime Biome Panoramas 1024x180/full_composition/forest_ruins_day_1024x341.png",
+   "repo_path": "03-visual-direction-and-assets/bkg-02-six-runtime-biome-panoramas-1024x180/full-composition/forest-ruins-day-1024x341.png",
+   "sha256": "3b6283beca01aaa747c372bb4b10365f4b84786713ebf171d436f2948ff779b5"
+  },
+  {
+   "kind": "file",
+   "id": "1lLSdguOC2NsBBI0mBJU87vgAYZ3dt2hs",
+   "drive_path": "/03 Visual Direction and Assets/BKG-02 — Six Runtime Biome Panoramas 1024x180/full_composition/ice_cavern_ruins_1024x341.png",
+   "repo_path": "03-visual-direction-and-assets/bkg-02-six-runtime-biome-panoramas-1024x180/full-composition/ice-cavern-ruins-1024x341.png",
+   "sha256": "6272b843aa58b10e556cdba2d10b28548662640f4db04ed855992963245fe55b"
+  },
+  {
+   "kind": "file",
+   "id": "1t1bazzT_Tl4hXCSMrNJcFkF0XsnLkdNc",
+   "drive_path": "/03 Visual Direction and Assets/BKG-02 — Six Runtime Biome Panoramas 1024x180/full_composition/market_town_day_1024x341.png",
+   "repo_path": "03-visual-direction-and-assets/bkg-02-six-runtime-biome-panoramas-1024x180/full-composition/market-town-day-1024x341.png",
+   "sha256": "9bc406031c417c8ab070984c14dc1abf938ead6d0b0973ad445b94a593abd46e"
+  },
+  {
+   "kind": "file",
+   "id": "1j_Vg_ZVUV-VETAzxWLc9XPnh8cx490Hv",
+   "drive_path": "/03 Visual Direction and Assets/BKG-02 — Six Runtime Biome Panoramas 1024x180/full_composition/moonlit_stronghold_1024x341.png",
+   "repo_path": "03-visual-direction-and-assets/bkg-02-six-runtime-biome-panoramas-1024x180/full-composition/moonlit-stronghold-1024x341.png",
+   "sha256": "97d28db08420d6d65e8781d814bdd01cf8d8287220366dff3f01ffdbaa25e5c2"
+  },
+  {
+   "kind": "file",
+   "id": "1I-yv8W2r-uj4ArdSeDwq1I-gn1SzsFbl",
+   "drive_path": "/03 Visual Direction and Assets/BKG-02 — Six Runtime Biome Panoramas 1024x180/full_composition/sky_isles_day_1024x341.png",
+   "repo_path": "03-visual-direction-and-assets/bkg-02-six-runtime-biome-panoramas-1024x180/full-composition/sky-isles-day-1024x341.png",
+   "sha256": "85c77564f8995c489e4073c7ba2e0dfc5fc9e1fb58e9811a87bef6e9378d77f4"
+  },
+  {
+   "kind": "file",
+   "id": "1Q4r9V5hCqeWdo4Lkk6c8zZGJtrStm_zK",
+   "drive_path": "/03 Visual Direction and Assets/BKG-02 — Six Runtime Biome Panoramas 1024x180/full_composition/volcanic_forge_sunset_1024x341.png",
+   "repo_path": "03-visual-direction-and-assets/bkg-02-six-runtime-biome-panoramas-1024x180/full-composition/volcanic-forge-sunset-1024x341.png",
+   "sha256": "e12a00bd164140c2e4ef51ee5abb20a76eca06157d7f419bcba53f52c42e0ec3"
+  },
+  {
+   "kind": "folder",
+   "id": "1Y1sAtGIl7ga-RKXhsCJxiO12EkFE2HiP",
+   "drive_path": "/03 Visual Direction and Assets/BKG-02 — Six Runtime Biome Panoramas 1024x180/previews"
+  },
+  {
+   "kind": "file",
+   "id": "1JhFCDQ1ikBfW4PlEczJ7oImsbwHvYbCR",
+   "drive_path": "/03 Visual Direction and Assets/BKG-02 — Six Runtime Biome Panoramas 1024x180/previews/all_6_backgrounds_contact.jpg",
+   "repo_path": "03-visual-direction-and-assets/bkg-02-six-runtime-biome-panoramas-1024x180/previews/all-6-backgrounds-contact.jpg",
+   "sha256": "e90f09a869c8cc8db87b9b20ee764e45184a166ea7d56556814539f1cd91157d"
+  },
+  {
+   "kind": "file",
+   "id": "1RKjgjspcBRiHHO9hx7zVTV85y2HL1n9r",
+   "drive_path": "/03 Visual Direction and Assets/BKG-02 — Six Runtime Biome Panoramas 1024x180/previews/forest_ruins_day_center_320x180.png",
+   "repo_path": "03-visual-direction-and-assets/bkg-02-six-runtime-biome-panoramas-1024x180/previews/forest-ruins-day-center-320x180.png",
+   "sha256": "552d9df38b7fa1862b2eddf0b09a3c6e64d38705a8287ed8496797c96661d36e"
+  },
+  {
+   "kind": "file",
+   "id": "1sEhMLRNKz2uHFTRBGCvHgA9zx-9D8NLD",
+   "drive_path": "/03 Visual Direction and Assets/BKG-02 — Six Runtime Biome Panoramas 1024x180/previews/ice_cavern_ruins_center_320x180.png",
+   "repo_path": "03-visual-direction-and-assets/bkg-02-six-runtime-biome-panoramas-1024x180/previews/ice-cavern-ruins-center-320x180.png",
+   "sha256": "d81348efba5e445c86f31f0a2e7782b2069c25e824d2a9c35c494ef2ffeff7c2"
+  },
+  {
+   "kind": "file",
+   "id": "1RoUoPJRICDPEhXQePySMGUoVnKvcUESo",
+   "drive_path": "/03 Visual Direction and Assets/BKG-02 — Six Runtime Biome Panoramas 1024x180/previews/market_town_day_center_320x180.png",
+   "repo_path": "03-visual-direction-and-assets/bkg-02-six-runtime-biome-panoramas-1024x180/previews/market-town-day-center-320x180.png",
+   "sha256": "90190e5bc3f605b893d5442f2aaab8eeca22c0b761951d2f489de14309129834"
+  },
+  {
+   "kind": "file",
+   "id": "1Lx039EO7As8MH90YIuL7VfKPO5kG3fWX",
+   "drive_path": "/03 Visual Direction and Assets/BKG-02 — Six Runtime Biome Panoramas 1024x180/previews/moonlit_stronghold_center_320x180.png",
+   "repo_path": "03-visual-direction-and-assets/bkg-02-six-runtime-biome-panoramas-1024x180/previews/moonlit-stronghold-center-320x180.png",
+   "sha256": "cbb8d2ff4ed5f20977bd0b3f8311c9002cbfea348ecdc5784441d96e1be96cf2"
+  },
+  {
+   "kind": "file",
+   "id": "11SJDUvzv_PfLEOkp-0aCZ65zsBdgFLBq",
+   "drive_path": "/03 Visual Direction and Assets/BKG-02 — Six Runtime Biome Panoramas 1024x180/previews/sky_isles_day_center_320x180.png",
+   "repo_path": "03-visual-direction-and-assets/bkg-02-six-runtime-biome-panoramas-1024x180/previews/sky-isles-day-center-320x180.png",
+   "sha256": "eadc98d9e5f8cdff0026d8dd6f512b777aa8ab49b8dae7c875181e7d42b73019"
+  },
+  {
+   "kind": "file",
+   "id": "1rHfZyoE_Mrb8y4Cp18Ug0l5qDKcz3ih9",
+   "drive_path": "/03 Visual Direction and Assets/BKG-02 — Six Runtime Biome Panoramas 1024x180/previews/volcanic_forge_sunset_center_320x180.png",
+   "repo_path": "03-visual-direction-and-assets/bkg-02-six-runtime-biome-panoramas-1024x180/previews/volcanic-forge-sunset-center-320x180.png",
+   "sha256": "892a64ab8163e633d18a39fac5b64e59118820e4ae2a42e4f5267cceab39502c"
+  },
+  {
+   "kind": "folder",
+   "id": "1e36wpjkuhzjC7x7xWe3NGSDBbA_Co10g",
+   "drive_path": "/03 Visual Direction and Assets/BKG-02 — Six Runtime Biome Panoramas 1024x180/source"
+  },
+  {
+   "kind": "file",
+   "id": "1ISBbOhf2WgeWauw8Ef6bMiy-wC4ridBD",
+   "drive_path": "/03 Visual Direction and Assets/BKG-02 — Six Runtime Biome Panoramas 1024x180/source/crystal_archway_in_the_ice_caverns.png",
+   "repo_path": "03-visual-direction-and-assets/bkg-02-six-runtime-biome-panoramas-1024x180/source/crystal-archway-in-the-ice-caverns.png",
+   "sha256": "bad445bd179ffff28bae896cdedcc2e7a55bd3adda3e877b28c65d8f5a356561"
+  },
+  {
+   "kind": "file",
+   "id": "1WVC9Qg__j98TR0tNug-bESZnoOtkbdJf",
+   "drive_path": "/03 Visual Direction and Assets/BKG-02 — Six Runtime Biome Panoramas 1024x180/source/crystal_temple_above_the_clouds.png",
+   "repo_path": "03-visual-direction-and-assets/bkg-02-six-runtime-biome-panoramas-1024x180/source/crystal-temple-above-the-clouds.png",
+   "sha256": "f4935e32452cc4058e2ae4f513424834afdf6038b215da2144fd6703629822ce"
+  },
+  {
+   "kind": "file",
+   "id": "1Hg6BiBlbSDyWbpWHgAzWMDefQfPpXzN4",
+   "drive_path": "/03 Visual Direction and Assets/BKG-02 — Six Runtime Biome Panoramas 1024x180/source/floating_crystal_shrine_meadow.png",
+   "repo_path": "03-visual-direction-and-assets/bkg-02-six-runtime-biome-panoramas-1024x180/source/floating-crystal-shrine-meadow.png",
+   "sha256": "131782e0f9c692744730cda4353f1f22164b13975f4290560324eca710fb1d2f"
+  },
+  {
+   "kind": "file",
+   "id": "1l4W0DaIdIDn2N2_OJG-wHOFSS43SzVk2",
+   "drive_path": "/03 Visual Direction and Assets/BKG-02 — Six Runtime Biome Panoramas 1024x180/source/moonlit_haunted_stronghold_panorama.png",
+   "repo_path": "03-visual-direction-and-assets/bkg-02-six-runtime-biome-panoramas-1024x180/source/moonlit-haunted-stronghold-panorama.png",
+   "sha256": "d75cf3e21008b40f6e73332dc7b86abb12a1e0f7a72c5ddd0763be2489670b97"
+  },
+  {
+   "kind": "file",
+   "id": "1QRYuqM8_6ukAr_eVnZfyKOpLSEpVHIzT",
+   "drive_path": "/03 Visual Direction and Assets/BKG-02 — Six Runtime Biome Panoramas 1024x180/source/pixel_art_volcanic_forge_panorama.png",
+   "repo_path": "03-visual-direction-and-assets/bkg-02-six-runtime-biome-panoramas-1024x180/source/pixel-art-volcanic-forge-panorama.png",
+   "sha256": "f01d38c5c318f29ddbe99e7ff7425cf6be8a93842f6f3e30786a505cf892d4b5"
+  },
+  {
+   "kind": "file",
+   "id": "1G6DK5wdd0XPE-60j_woBxzS7CbDNV4qO",
+   "drive_path": "/03 Visual Direction and Assets/BKG-02 — Six Runtime Biome Panoramas 1024x180/source/pixel_market_town_panorama.png",
+   "repo_path": "03-visual-direction-and-assets/bkg-02-six-runtime-biome-panoramas-1024x180/source/pixel-market-town-panorama.png",
+   "sha256": "ce69ad31ab6d9077752294cff6a1e54c03cee6232c67c4720bebedea61556764"
+  },
+  {
+   "kind": "file",
+   "id": "1TPoMzt62BpRUZF7Ooa7id45Ytv3x4TUl",
+   "drive_path": "/03 Visual Direction and Assets/BKG-02 — Six Runtime Biome Panoramas 1024x180/BKG02_COMPLETE_PACKAGE.zip",
+   "repo_path": "03-visual-direction-and-assets/bkg-02-six-runtime-biome-panoramas-1024x180/bkg02-complete-package/",
+   "sha256": "fcd73dc57b8b56779563b4e08eed63de33978b3c497fafd968ddc1786566cab4"
+  },
+  {
+   "kind": "file",
+   "id": "1hW4uCGvLdCe8oO8BlqKZ8PtS7MLSZuRU",
+   "drive_path": "/03 Visual Direction and Assets/BKG-02 — Six Runtime Biome Panoramas 1024x180/manifest.json",
+   "repo_path": "03-visual-direction-and-assets/bkg-02-six-runtime-biome-panoramas-1024x180/manifest.json",
+   "sha256": "22a3a42b221783b14f2ec95f9f4242f7c5ea97c25112d3fa84338ec8e15d3e3f"
+  },
+  {
+   "kind": "file",
+   "id": "14FYI7zfda13Rlclwvt7XgijqcWSYKORT",
+   "drive_path": "/03 Visual Direction and Assets/BKG-02 — Six Runtime Biome Panoramas 1024x180/README_FOR_CLAUDE.md",
+   "repo_path": "03-visual-direction-and-assets/bkg-02-six-runtime-biome-panoramas-1024x180/readme-for-claude.md",
+   "sha256": "111a3d6eb5c5a4953374584bc098f090ead2c228ff9093deaab265c01f9d16a2"
+  },
+  {
+   "kind": "file",
+   "id": "1ARMLOOSLBdm-ansyHyFS7rakVS_ehKXM",
+   "drive_path": "/03 Visual Direction and Assets/BKG-02 — Six Runtime Biome Panoramas 1024x180/tag_index.csv",
+   "repo_path": "03-visual-direction-and-assets/bkg-02-six-runtime-biome-panoramas-1024x180/tag-index.csv",
+   "sha256": "d162932a5d10986bebe4a7b7700b329ccda0d59eb063e9999ac775c8123a78ec"
+  },
+  {
+   "kind": "folder",
    "id": "1czssq_XVJgBYyk1XwqHPuWNXR5tFJzQu",
    "drive_path": "/03 Visual Direction and Assets/C02 — Hero Revision Source Studies"
   },
@@ -3348,6 +3630,13 @@
   },
   {
    "kind": "doc",
+   "id": "1FiPAJ7MPg5CkV9RoP8ghcK7iZU2iNWAZ2wMj_VCOYyU",
+   "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/01 REQUESTS — Claude to ChatGPT/REQ — P08 REVISION — Ranged bandit (\"ranged-fighter\") sprite sheet with throw wind-up; addendum to MISSING-ASSETS master list",
+   "repo_path": "06-asset-collaboration-claude-chatgpt/01-requests-claude-to-chatgpt/req-p08-revision-ranged-bandit-ranged-fighter-sprite-sheet-with-throw-wind-up-addendum-to-missing-assets-master-list.md",
+   "sha256": "da7a64067af68042f02643b847e066e766a745f67af93ca1912dd0246a7cb79a"
+  },
+  {
+   "kind": "doc",
    "id": "1aEuNBG8C_6s3tVa8D9cMjEHsSZqqEzMbtCVWXcvhsFs",
    "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/01 REQUESTS — Claude to ChatGPT/REQ — P12 REVISION — Weapon grip anchors/hitboxes, cannonball, closed parasol, unlit torch; addendum to MISSING-ASSETS master list",
    "repo_path": "06-asset-collaboration-claude-chatgpt/01-requests-claude-to-chatgpt/req-p12-revision-weapon-grip-anchors-hitboxes-cannonball-closed-parasol-unlit-torch-addendum-to-missing-assets-master-list.md",
@@ -3389,7 +3678,7 @@
    "id": "1oBpJKI2P7v7rwoMku-TbcFuVQe2iajddK6v2i5Ro0G0",
    "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/00 START HERE — Claude ↔ ChatGPT Asset Request Protocol",
    "repo_path": "06-asset-collaboration-claude-chatgpt/00-start-here-claude-chatgpt-asset-request-protocol.md",
-   "sha256": "ea8528dafbb58baa2ff872ccb598808d6940baf8a1132120d8e46c9c4c7ed7f9"
+   "sha256": "d794b011dea4a51078cd28d54fbe5440aaf3599b2fed5b236c2cda78e6dc13b9"
   },
   {
    "kind": "doc",
@@ -3438,7 +3727,7 @@
    "id": "1-ASnTbCLAXSi_WCOl_7KNuUgelLXLmiZFKiN6APao2s",
    "drive_path": "/00 START HERE — Irreverents",
    "repo_path": "00-start-here-irreverents.md",
-   "sha256": "c330e13be22aea2bb3e44b7ea43e3691bcb9c38fa81ec663bf9b6a16ed7f0815"
+   "sha256": "e3d7fe4b8c7d8e551c405a911ed2663c32f7ff26c4081004d004b3df77767654"
   },
   {
    "kind": "doc",
@@ -3459,14 +3748,14 @@
    "id": "1bnr7GUgrYBVVY0BMkwx4qRPvW45Nk4grn-Tk6THcoY8",
    "drive_path": "/ASSET LIBRARY — START HERE (Claude)",
    "repo_path": "asset-library-start-here-claude.md",
-   "sha256": "c3dac2c00c3f3c9018658cbd813cee3ac9a859e0ec368a9cd7dae9e700f23522"
+   "sha256": "93caa5e9b52e9f4140d682bd4f147ed54cfab613b6d96fbc5836e98f7174b642"
   },
   {
    "kind": "doc",
    "id": "17R7aKkqDxQwRk-cmywQbvQ_CcEzz4UqHz37YYYRnADs",
    "drive_path": "/changelog",
    "repo_path": "changelog.md",
-   "sha256": "942e3cad7b6a382540855c31bbb2ce6a32f0ba77a970f62dfe3755812c15a549"
+   "sha256": "dc9ec699099d60422046c01a4a13236ed1528d1d963de0dcc3ef482bb7bc706f"
   },
   {
    "kind": "file",

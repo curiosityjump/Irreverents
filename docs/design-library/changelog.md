@@ -2,6 +2,40 @@
 
 ---
 
+2026-11-24 EST — BKG-02 SIX GAME-SIZED BIOME BACKGROUNDS UPLOADED / TAGGED / ROUTED
+
+Uploaded originals and 1024x180 PNG+WebP static scrolling backdrops, six full-view 1024x341 versions, manifest, searchable tag index, per-scene 320x180 camera previews, contact, local demo and ZIP; visually inspected contact, verified runtime dimensions. Created BKG-002 Master Board entry Prototype usable; connected ENV-004, ENV-005, ENV-014. Updated root catalog, START HERE, and Claude request protocol. Genuine parallax/collision/repeat seams not claimed. No repo commit claimed.
+
+BKG-02 — SIX ADDITIONAL GAME-IMPORTABLE STATIC BIOME BACKGROUNDS — 2026-11-24
+
+CANONICAL FOLDER: https://drive.google.com/drive/folders/1UhebIUjcAYnAnBRMezfeXM3hpgylXECS
+
+Six separate 1024×180 PNG backdrops and six matching lossless WebPs, each fitting a 320×180 logical game camera with 704px horizontal scroll room. Biomes: forest ruins, market town, ice cavern, volcanic forge, moonlit stronghold, sky isles.
+
+FILES (direct PNG):
+
+Forest ruins/day: https://drive.google.com/file/d/1l13yiUh4p9ryMmavd77acf-Rsjy4BITW/view
+
+Market town/day: https://drive.google.com/file/d/1lt0gJtGu6zBeLWifpGsOxBBE9FgK03Tx/view
+
+Ice cavern/ruins: https://drive.google.com/file/d/14UO1D1TlJseaJm6onT5zYu5dCjwC-9Gy/view
+
+Volcanic forge/sunset: https://drive.google.com/file/d/1Q8Mmx-1D9EEXfHpXMiC6-Er82pWZ8XBe/view
+
+Moonlit stronghold: https://drive.google.com/file/d/12B3idDJCVsvVdVb1znGDhU9rFQEDvw6-/view
+
+Sky isles/day: https://drive.google.com/file/d/1Mnh7hrtDZb8mRiuKOL2mSe60Lz9mFzyB/view
+
+Searchable CSV tags https://drive.google.com/file/d/1ARMLOOSLBdm-ansyHyFS7rakVS_ehKXM/view
+
+Per-biome JSON manifest (native size, crop coordinates, preview paths, tags, source provenance) https://drive.google.com/file/d/1hW4uCGvLdCe8oO8BlqKZ8PtS7MLSZuRU/view
+
+Contact review image https://drive.google.com/file/d/1JhFCDQ1ikBfW4PlEczJ7oImsbwHvYbCR/view
+
+ZIP (includes all original 2172×724 artworks, 1024×341 full-composition versions, all runtime PNG/WebPs, 320×180 left/center/right viewport checks, CSV, JSON and local camera demo): https://drive.google.com/file/d/1TPoMzt62BpRUZF7Ooa7id45Ytv3x4TUl/view
+
+STATUS: READY-TO-IMPORT SINGLE-LAYER STATIC SCENERY. No collision, no separately composited parallax, no seamless repeating edges, no claimed iPhone gameplay test; foreground-looking platforms are baked visual details only and require separate collision objects if used interactively. Claude: import image as static scrolling background, camera offset 0..704 at 320px viewport, preserve separate collision/platform layers; do not mark ENV-004/005/014 3-layer parallax complete. Master Board BKG-002 = Prototype usable; ENV-004/005/014 updated with this source. Once imported to GitHub, add actual repo path to Board.
+
 2026-11-23 6:51 PM EST — P12 STANDALONE WEAPON SOURCE BATCH UPLOADED, TAGGED, ROUTED
 
 Uploaded/verified THREE untouched original RGBA illustrated weapon configuration sheets plus TWELVE individually named weapon-family source row crops, CSV searchable tag index, machine JSON manifest, labelled 12-family contact preview, README for Claude and complete ZIP. Folder https://drive.google.com/drive/folders/1nJzv1gR9853Fj6GB8yOkqXaTYx-Iim83. Direct category groups: P12-A sword/hammer/spear/shield https://drive.google.com/file/d/1n3C3EFjxeubTsl-NjLjJXT6X205poe_p/view; P12-B bomb/boomerang/grapple hook/cannon https://drive.google.com/file/d/1oSrFmF8aIo5jWGcSmf58ERmc8sasMunj/view; P12-C star wand/torch/parasol/arcane wand https://drive.google.com/file/d/17Yy74EJAa8qfYQGQI83-\_KjZ58cPjHXE/view. Direct per-family URLs and character-independent attachment contract in https://docs.google.com/document/d/1sS6Dhg80ZlRDxeM7n1iJs7w1kdjKo7afYAy1iuvIA3A/edit. User decided weapon assets MUST NEVER contain a baked-in carrier; use one reusable equipment layer across every hero/NPC and separate character hand anchors. Marked P12 SOURCE_ONLY, NOT native per-state runtime sprites; mixed alpha-fringe artifacts / illustrative effects still need processing, 320x180 test and actual game import. Master Production Board row WPN-001 edited in place to P12 preferred source, status Reference ready and Drive delivery path; linked HRO-006/INT-015. Root Asset Library, project 00 START HERE, asset SOP, Claude request protocol all updated. No GitHub/Railway integration claimed.

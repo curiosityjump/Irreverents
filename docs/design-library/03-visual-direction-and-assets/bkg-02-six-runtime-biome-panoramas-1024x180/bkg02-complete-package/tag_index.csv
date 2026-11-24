@@ -1,0 +1,7 @@
+id,biome,tags,runtime_png,runtime_webp,source_png,framed_y_start,status
+BKG02-01,forest_ruins_day,forest;ruins;grass;waterfalls;crystal-shrine;day,backgrounds/forest_ruins_day_1024x180.png,backgrounds/forest_ruins_day_1024x180.webp,floating_crystal_shrine_meadow.png,56,READY_TO_IMPORT_BACKDROP; NOT_LIVE_TESTED
+BKG02-02,market_town_day,market;town;village;shopfronts;castle;day,backgrounds/market_town_day_1024x180.png,backgrounds/market_town_day_1024x180.webp,pixel_market_town_panorama.png,65,READY_TO_IMPORT_BACKDROP; NOT_LIVE_TESTED
+BKG02-03,ice_cavern_ruins,ice;cavern;crystal;ruins;snow,backgrounds/ice_cavern_ruins_1024x180.png,backgrounds/ice_cavern_ruins_1024x180.webp,crystal_archway_in_the_ice_caverns.png,56,READY_TO_IMPORT_BACKDROP; NOT_LIVE_TESTED
+BKG02-04,volcanic_forge_sunset,volcano;lava;forge;industrial;twilight,backgrounds/volcanic_forge_sunset_1024x180.png,backgrounds/volcanic_forge_sunset_1024x180.webp,pixel_art_volcanic_forge_panorama.png,45,READY_TO_IMPORT_BACKDROP; NOT_LIVE_TESTED
+BKG02-05,moonlit_stronghold,castle;stronghold;ruins;night;moonlit,backgrounds/moonlit_stronghold_1024x180.png,backgrounds/moonlit_stronghold_1024x180.webp,moonlit_haunted_stronghold_panorama.png,64,READY_TO_IMPORT_BACKDROP; NOT_LIVE_TESTED
+BKG02-06,sky_isles_day,sky-isles;floating-islands;temple;clouds;day,backgrounds/sky_isles_day_1024x180.png,backgrounds/sky_isles_day_1024x180.webp,crystal_temple_above_the_clouds.png,42,READY_TO_IMPORT_BACKDROP; NOT_LIVE_TESTED

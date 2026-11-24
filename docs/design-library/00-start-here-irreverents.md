@@ -2,6 +2,38 @@
 
 ---
 
+NEW BKG-02 BACKGROUNDS READY TO FIND (2026-11-24)
+
+BKG-02 — SIX ADDITIONAL GAME-IMPORTABLE STATIC BIOME BACKGROUNDS — 2026-11-24
+
+CANONICAL FOLDER: https://drive.google.com/drive/folders/1UhebIUjcAYnAnBRMezfeXM3hpgylXECS
+
+Six separate 1024×180 PNG backdrops and six matching lossless WebPs, each fitting a 320×180 logical game camera with 704px horizontal scroll room. Biomes: forest ruins, market town, ice cavern, volcanic forge, moonlit stronghold, sky isles.
+
+FILES (direct PNG):
+
+Forest ruins/day: https://drive.google.com/file/d/1l13yiUh4p9ryMmavd77acf-Rsjy4BITW/view
+
+Market town/day: https://drive.google.com/file/d/1lt0gJtGu6zBeLWifpGsOxBBE9FgK03Tx/view
+
+Ice cavern/ruins: https://drive.google.com/file/d/14UO1D1TlJseaJm6onT5zYu5dCjwC-9Gy/view
+
+Volcanic forge/sunset: https://drive.google.com/file/d/1Q8Mmx-1D9EEXfHpXMiC6-Er82pWZ8XBe/view
+
+Moonlit stronghold: https://drive.google.com/file/d/12B3idDJCVsvVdVb1znGDhU9rFQEDvw6-/view
+
+Sky isles/day: https://drive.google.com/file/d/1Mnh7hrtDZb8mRiuKOL2mSe60Lz9mFzyB/view
+
+Searchable CSV tags https://drive.google.com/file/d/1ARMLOOSLBdm-ansyHyFS7rakVS_ehKXM/view
+
+Per-biome JSON manifest (native size, crop coordinates, preview paths, tags, source provenance) https://drive.google.com/file/d/1hW4uCGvLdCe8oO8BlqKZ8PtS7MLSZuRU/view
+
+Contact review image https://drive.google.com/file/d/1JhFCDQ1ikBfW4PlEczJ7oImsbwHvYbCR/view
+
+ZIP (includes all original 2172×724 artworks, 1024×341 full-composition versions, all runtime PNG/WebPs, 320×180 left/center/right viewport checks, CSV, JSON and local camera demo): https://drive.google.com/file/d/1TPoMzt62BpRUZF7Ooa7id45Ytv3x4TUl/view
+
+STATUS: READY-TO-IMPORT SINGLE-LAYER STATIC SCENERY. No collision, no separately composited parallax, no seamless repeating edges, no claimed iPhone gameplay test; foreground-looking platforms are baked visual details only and require separate collision objects if used interactively. Claude: import image as static scrolling background, camera offset 0..704 at 320px viewport, preserve separate collision/platform layers; do not mark ENV-004/005/014 3-layer parallax complete. Master Board BKG-002 = Prototype usable; ENV-004/005/014 updated with this source. Once imported to GitHub, add actual repo path to Board.
+
 LATEST EQUIPMENT ART — P12 WEAPONS UPLOADED (2026-11-23)
 
 P12 contains 3 actual illustrated standalone weapon source sheets and 12 searchable family rows: https://drive.google.com/drive/folders/1nJzv1gR9853Fj6GB8yOkqXaTYx-Iim83. Full direct-file handoff for Claude: https://docs.google.com/document/d/1sS6Dhg80ZlRDxeM7n1iJs7w1kdjKo7afYAy1iuvIA3A/edit. Sword/hammer/spear/shield, bomb/boomerang/hook/cannon, star wand/torch/parasol/arcane wand, no characters baked into any. Search the tag CSV https://drive.google.com/file/d/1FB2aXV0lV6G_wmusNgtl5g4HcRniVlRf/view; machine manifest https://drive.google.com/file/d/1Hd3H5-t5e5gFPkU96nlQUT3YyVai6pm-/view. This is owner-controlled preferred weapon design, but source-only pending normalizing individual game-ready state frames, pivots/attachments and 320x180 tests. WPN-001 is now routed to P12 in https://docs.google.com/spreadsheets/d/1rzixv5r4QWs7PKLYJ0e_sreLy0LjTdgua8uXKeTJpSE/edit; HRO-006 and INT-015 also linked. Do not redesign characters or bake weapon art into a particular one.
