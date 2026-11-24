@@ -1,7 +1,7 @@
 {
  "id": "step5-beaten-come-back",
- "proves": "Step 5, a cleared place stays cleared while you are there and is not empty for ever: in the quarry depot the grappler throws fighter 1 into the lookout; the slam defeats both (and breaks the horn post) and both are gone. The hero stays in the room 95 s, longer than world.beatenReturnTime (90 s): neither comes back. They walk out the west door into the tower; 90 s after the room is empty both are back at their places, standing, and nobody saw it. Control: the 'nobody in the room' test off in beaten-return, and they come back at 90 s while the hero stands there",
- "room": "quarry-depot",
+ "proves": "Step 5, a cleared place stays cleared while you are there and is not empty for ever (outside a stage: inside one, the stage holds returns until it starts over, Step 22). In the Bandit Camp the grappler hops the entry step, grabs the lookout and throws him into the horn post (a slam: defeated, and the post breaks), then grabs camp fighter 1 and throws him the same way: both are gone. The hero stays in the room about 93 s after the last of them goes, longer than world.beatenReturnTime (90 s): neither comes back. They walk back over the step and out the doorway into the courtyard; 90 s after the room empties both are back at their places, standing, and nobody saw it. Control: the 'nobody in the room' test off in beaten-return, and they come back at 90 s while the hero stands there",
+ "room": "outpost",
  "placements": true,
  "players": [
   {
@@ -14,21 +14,46 @@
   {
    "player": "a",
    "from": 0,
-   "to": 60,
+   "to": 194,
    "x": 1
   },
   {
    "player": "a",
-   "from": 72,
-   "to": 75,
+   "from": 10,
+   "to": 30,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 192,
+   "to": 195,
    "hold": [
     "grab"
    ]
   },
   {
    "player": "a",
-   "from": 80,
-   "to": 83,
+   "from": 202,
+   "to": 205,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 312,
+   "to": 315,
+   "hold": [
+    "grab"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 322,
+   "to": 325,
+   "x": 1,
    "hold": [
     "attack"
    ]
@@ -36,18 +61,34 @@
   {
    "player": "a",
    "from": 5700,
-   "to": 5800,
+   "to": 5890,
    "x": -1
+  },
+  {
+   "player": "a",
+   "from": 5800,
+   "to": 5825,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 5900,
+   "to": 5905,
+   "hold": [
+    "interact"
+   ]
   }
  ],
- "ticks": 11400,
+ "ticks": 11700,
  "expect": [
   {
    "fact": "event",
    "event": "defeated",
    "between": [
-    75,
-    100
+    195,
+    330
    ],
    "count": [
     2,
@@ -58,11 +99,11 @@
    "fact": "event-where",
    "event": "defeated-gone",
    "where": {
-    "target": "depot-lookout"
+    "target": "camp-lookout"
    },
    "between": [
-    100,
-    300
+    203,
+    500
    ],
    "count": [
     1,
@@ -73,11 +114,11 @@
    "fact": "event-where",
    "event": "defeated-gone",
    "where": {
-    "target": "depot-fighter-1"
+    "target": "camp-fighter-1"
    },
    "between": [
-    100,
-    300
+    323,
+    600
    ],
    "count": [
     1,
@@ -86,9 +127,9 @@
   },
   {
    "fact": "people-at",
-   "room": "quarry-depot",
-   "ids": "depot-lookout",
-   "at": 5700,
+   "room": "outpost",
+   "ids": "camp-lookout",
+   "at": 5880,
    "count": [
     0,
     0
@@ -96,9 +137,9 @@
   },
   {
    "fact": "people-at",
-   "room": "quarry-depot",
-   "ids": "depot-fighter-1",
-   "at": 5700,
+   "room": "outpost",
+   "ids": "camp-fighter-1",
+   "at": 5880,
    "count": [
     0,
     0
@@ -107,20 +148,20 @@
   {
    "fact": "in-room",
    "player": "a",
-   "at": 5700,
-   "room": "quarry-depot"
+   "at": 5880,
+   "room": "outpost"
   },
   {
    "fact": "in-room",
    "player": "a",
    "at": 6000,
-   "room": "quarry-tower"
+   "room": "courtyard"
   },
   {
    "fact": "people-at",
-   "room": "quarry-depot",
-   "ids": "depot-lookout",
-   "at": 11000,
+   "room": "outpost",
+   "ids": "camp-lookout",
+   "at": 11200,
    "count": [
     0,
     0
@@ -130,8 +171,8 @@
    "fact": "event",
    "event": "defeated-back",
    "between": [
-    11000,
-    11400
+    11200,
+    11700
    ],
    "count": [
     2,
@@ -140,9 +181,9 @@
   },
   {
    "fact": "people-at",
-   "room": "quarry-depot",
-   "ids": "depot-lookout",
-   "at": 11400,
+   "room": "outpost",
+   "ids": "camp-lookout",
+   "at": 11700,
    "count": [
     1,
     1
@@ -150,9 +191,9 @@
   },
   {
    "fact": "people-at",
-   "room": "quarry-depot",
-   "ids": "depot-fighter-1",
-   "at": 11400,
+   "room": "outpost",
+   "ids": "camp-fighter-1",
+   "at": 11700,
    "count": [
     1,
     1
@@ -160,8 +201,8 @@
   },
   {
    "fact": "body-state",
-   "entity": "depot-lookout",
-   "at": 11400,
+   "entity": "camp-lookout",
+   "at": 11700,
    "not": [
     "flattened",
     "beaten",

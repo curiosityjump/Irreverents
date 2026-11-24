@@ -503,7 +503,10 @@ the same three red. Townspeople staying down longer: `knockedOutTime` 4 s alread
 (unchanged) and the list went to the orchestrator. The orchestrator: guards stay, shopkeeper only. Per-kind
 `knockedOut`, the shopkeeper 10 s (knock out, empty the shelf, out the west door: 3.9 s with the
 grappler; all scenarios green). `holdReturns` for Step 22, checked by stepping a world only
-(no scenario can call it): held, nobody back at 11400 ticks; `restorePeople` then puts both back. Not measured: whether a guard knocked out for
+(no scenario can call it): held, nobody back at 11400 ticks; `restorePeople` then puts both back. `step5-beaten-come-back` moved
+from the quarry depot to the Bandit Camp (2026-11-24, Step 22's lead): the quarry is a stage, and
+inside a stage run the stage holds returns until it starts over; the camp is not a stage, so coming
+back is the rule there. Same claims; its control (the empty-room test off) still fails. Not measured: whether a guard knocked out for
 longer breaks "stop the caller and no help comes" in play, and whether a long-out shopkeeper leaves
 a room without what he gives (reading `use/thing.ts`: an unattended good can be taken, so a
 knocked-out keeper gives *more*, not less). The phone fact `beaten-gone` (150 ms each way, by
