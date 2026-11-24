@@ -249,6 +249,15 @@ level entrances with discovered indicators.
 
 Detail: docs 04, 29; level proposals 25, 28 (not canon).
 
+### Stages: the outpost run
+**Owner, 2026-11-24 ~00:30 UTC, to the orchestrator, first-hand (relayed to Vision Partner):**
+> Let's get one level where there is a whole outpost you need to navigate though without dying. Lots of enemies, alarms, and real way to lose/die, which pushes you back to the entrance to start over. Needs a satisfying victory screen at the end. Stage cleared, with a star rating and some stats (time to clear, enemies defeated, etc)
+
+*(Framing:)* a stage is the owner's own exception, for a level he asked for
+by name, to "getting caught opens play, never ends it" (D-019): inside it,
+dying sends you back to its entrance. Outside stages the old rule stands.
+Plan Step 22.
+
 ### Combat impact and the Hall of Legends
 **Owner, 2026-11-22 (Drive, doc 11, D-020, D-024, D-026):**
 > Spectacular IMPACT is a top priority: suplexes, launches, heavy collision, knockback into walls/other enemies, and roadblock crashes. …
