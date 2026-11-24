@@ -50,11 +50,4 @@ wording when it rewrites an entry.
 
 ## Entries
 
-### Q-? · Asset need: the grappler's suplex frames
-- **Asked by:** Step 25's suplex builder (brief `handoff-prompts/suplex.md`), 2026-11-24, parent `session_017WiGzHY5UZsWTLCH8cLm8M`
-- **Question:** The suplex is in the game (carry someone, tap Use, which now says SUPLEX). Today the hero holds the body overhead in the carry pose while the game turns the carried body up and over, then slams it behind. Art would make it land: for the grappler (`content/sprites/grappler.json`), a suplex strip on the same cell as the others: wind-up (the body hoisted, knees bent), arch back (the body over the head, going behind), the slam (bridged back, the body head-down at the floor behind), recoil. Four frames, about 0.3 s for the whole heave, faced right (the game mirrors). The art plan already lists it (C02-05: "carry, grab, pivot, suplex wind-up, slam, recoil").
-- **Unblocks:** Step 25's look; no work waits on it (it plays now with the frames there are).
-- **Recommendation:** File it with the grappler's next frames request, SOON, not BLOCKING.
-- **Answer goes to:** `docs/mechanisms/asset-requests.md` "Requests in flight"
-- **Source:** `docs/plan/step-25.md`, "Do" push 2; the art plan's C02-05 line (`docs/design-library/03-visual-direction-and-assets/00-asset-production-plan-and-style-lock/13-art-asset-production-plan-ordered-generation-backlog.md:109`)
-- **Blocking:** no
+*(empty)*

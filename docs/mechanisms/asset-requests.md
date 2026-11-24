@@ -89,6 +89,8 @@ that, not Vision Partner's check, is the real pace).
 - Addenda to the master list are filed as separate REQ docs (listed above); the master list itself, the Master Board rows and the Drive changelog line still need Docs/Sheets editing that no session here has.
 - Open owner questions: Q-014, Q-015 (both defaulted as built). Inbox and outbox empty.
 
+- **2026-11-24 ~18:50 UTC (third Vision Partner, session_017WiGzH2sJsLQebAuQnEFzS), from the orchestrator's message and the inbox:** filed "REQ — C02-05 — Grappler suplex strip (wind-up, arch, slam, recoil)", https://docs.google.com/document/d/12bJY2F8jU0m__53beU-_DuuY0Ghv1xI3p4QX4_NYmh8/edit (Step 25's suplex builder's inbox entry; names the pending C02-02/03 REVISION so it comes with the grappler's next frames; SOON), and "REQ — E01 REVISION — Forest tree-limb platform piece (reads as a branch, not an earth shelf)", https://docs.google.com/document/d/1k_Op08Jt2v-7Cc6MnWs-IliuqfknKBW7ClQ3NtwdSpg/edit (Step 15 push 5's look note; SOON). **Not filed:** the armoured guard's own sheet. An approved source already exists (`P08/chibi-enemy-animation-sprite-atlas.png` row 4, in the mirror, skip-worktree in a size-limited clone), so it is a cut for the cast lane, not new art; asking ChatGPT would duplicate it.
+
 ### Requests in flight
 
 | Filed (UTC) | REQ doc | Priority |
