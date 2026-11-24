@@ -323,3 +323,16 @@ camera or HUD file.
   **Push 3, the chain** (`scenarios/step25-suplex-chain.json`): one slam,
   the splashed fighter into a crate (434), the crate into the wall (475);
   no tuning change needed. Control: splash reach 0, watched to fail.
+
+## Look at the suplex's shots (orchestrator session_017WiGzHY5UZsWTLCH8cLm8M, 2026-11-24 ~19:05 UTC)
+
+By a subagent reading the six shots in `docs/plan/step-25-shots/` at phone size, against 706849a; not by playing.
+
+- **The button:** a gold-outlined pill reading SUPLEX under the hand button, legible at both sizes, nothing over it.
+- **The heave does not read as a suplex.** In `heave-sideways` the king is turned 90 to 120 degrees but sits at the hero's chest height just beside him, not overhead, and nothing draws an arc: "the king is falling over beside the hero". The direction is right (behind the hero).
+- **The slam shows a star but no weight.** In `slam-sideways` the king is drawn upright and sitting, not head-down; the hero and king overlap. `splash-sideways` looks like a hop; two crates move 50 and 70 px with a star; no dust, no visible shake.
+- **After:** the king is a small heap at the dais's edge, partly over the drop; the hero is free.
+- **In the shots' way:** the party plate covers the king's speech box's second line; speech boxes hide a hooded figure.
+- Verdict: "the king fell down next to me with a sparkle". Briefed as a fourth push at the top of `handoff-prompts/suplex.md`.
+
+**Briefs:** `handoff-prompts/suplex.md`, fourth push, to a fresh builder (named in `docs/current-directive.md`, "Sessions").
