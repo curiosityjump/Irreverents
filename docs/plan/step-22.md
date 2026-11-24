@@ -548,9 +548,55 @@ For the next builder, all measured on `main` at 6edd8be:
   -2341/-2342).
 - **Measured after Step 23's spear and bomb landed** (5871f46): they lie on
   the road. The bot never presses grab, so no run uses them.
-- **Owed still (3b part 2):** the two e2e steps (walk in, be beaten, be at
-  the entrance with the stick moving the hero; one walked clear raising
-  STAGE CLEARED from the real event).
+- **3b part 2, the two e2e steps** (`scripts/e2e/stage.ts`):
+  - `stage-beaten-entrance`: by touch from the start room into the quarry
+    road and up to column 39, standing there through three heroes' hearts
+    (about two minutes). Then GAME OVER, the page at x 49 on the road, and
+    the stick moved the hero 64 px. The shot is
+    `step-22-shots/push4-beaten-moment-844x390.png`; I looked at it and the
+    card is legible. **Not watched failing** (a control would take minutes;
+    the scenario `step22-beaten-to-entrance` has one).
+    **Not in the suite yet:** inside the full `npm run e2e` it failed. Only
+    one hero ran out in its 4-minute wait and there was no card: the bad
+    guys are slower to land falls when the machine is loaded. It runs only
+    with `E2E_STAGE_BEATEN=1`. **Owed:** make it reliable. Two ways: wait
+    on the card rather than a fixed loop, or seed the party's hearts
+    low, which a page cannot do today.
+  - `stage-cleared-walked`: the page's own hero is set in the depot six
+    tiles west of the end, then walks east by the stick, and STAGE CLEARED
+    comes from the server's event. Control watched failing: the stick held
+    west, and no screen. **DRAFT:** only the depot's last stretch is
+    walked on the page. The whole quarry is walked in the scenarios.
+
+### Handoff from the fourth builder (`session_017WiGzEWjmrpsPDvpwxZXir`), after 3b
+
+- **Live:** (c) at 9066ffe, (e) at d1ce641, 3b part 1 at cae9717. 3b
+  part 2 (the two e2e steps) is in the push after cae9717.
+- **Next, by the brief: push 5** (more enemies, a second caller on the
+  ridge, the first screen showing a bad guy and a post, the entrance sign
+  saying it is a stage).
+  - Then re-record the ten `step22-each-hero-*` with
+    `scripts/stage-bot.ts` (the command is in each scenario's `//`). A
+    placement change will break them. That is expected: re-record, and keep
+    the claims.
+  - Then re-set the star times if the clears moved.
+  - A hero the bot can't get through is first a bot rule to fix (see "3b,
+    part 1"). Only if the hero truly can't get through, a way: a placement,
+    a ledge or a crate.
+- **Tools:**
+  - `node scripts/stage-bot.ts <hero> fights|walks 9000 out.json` (about 20 s).
+    To turn its output into a scenario, see the shape of any `step22-each-hero-*`.
+  - The bot has a debug watch: `WATCH=<room> WX0=<px> WX1=<px>` prints every
+    tick inside that x range.
+  - To run one e2e fact module alone: a throwaway script that starts
+    `dist/server.cjs` on a port, launches Playwright, and calls the exported
+    function (`beatenAtTheEntrance`, `walkedClear`) with a kit
+    `{browser, devices, base, fact, errors, out}`.
+- **Traps:**
+  - `docs/decisions-log.md` conflicts on every rebase (everyone appends):
+    keep both sides.
+  - `npm run e2e` rewrites shots of other steps; `git checkout` them before
+    committing.
 
 ### Lead review, owed item (a) (6edd8be), re-run at 002607b
 

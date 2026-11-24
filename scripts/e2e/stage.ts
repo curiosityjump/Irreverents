@@ -13,10 +13,25 @@
 // clear is put up page-side (`irreverents.stage.show`, the same function the
 // server's event reaches), not by walking the whole quarry; that the server
 // sends `stage-cleared` to every page is game.ts's (every snap carries every
-// event), and the scenarios prove the event. "Walk in and be beaten" is owed.
+// event), and the scenarios prove the event.
+// Step 22 3b, the two the signal owed:
+// - stage-beaten-entrance (DRAFT, only with E2E_STAGE_BEATEN=1 until it is
+//   reliable in the full run): a phone page, by touch, walks into the quarry and
+//   up to the road's fighters, and stands there until the whole party is out
+//   of hearts: the GAME OVER card is drawn, the page is at the stage's
+//   entrance (the road, just inside the courtyard doorway) and the stick then
+//   moves the hero. Shot: push4-beaten-moment-844x390.png (the card).
+// - stage-cleared-walked: STAGE CLEARED from the server's own `stage-cleared`,
+//   not `irreverents.stage.show`: the page stands its own hero in the depot a
+//   few tiles west of the end (a page owns its character's motion, as
+//   scripts/checks/step9-powers.ts stands one on the pedestal), then walks
+//   east into the end by the stick. DRAFT: the walk is the depot's last
+//   stretch, not the whole quarry; the scenarios step22-each-hero-* walk it all.
 import fs from 'node:fs';
 import path from 'node:path';
-import type { Kit } from '../lib/e2e-touch.ts';
+import { me, phone, pointOn, settle, standAt } from '../lib/e2e-touch.ts';
+import type { Kit, Phone } from '../lib/e2e-touch.ts';
+import { pushUp, walkInto } from './outpost.ts';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
@@ -77,6 +92,10 @@ export async function stageFacts(kit: Kit & { shots?: string }): Promise<void> {
   const { fact, devices } = kit;
   const shots = kit.shots ?? kit.out;
   fs.mkdirSync(shots, { recursive: true });
+  // DRAFT: not in the suite yet. It passed alone (GAME OVER after ~2 min, at the entrance, the stick moved the hero), but inside the full
+  // run it ran out of its 4-minute wait before the party was out of hearts (docs/plan/step-22.md, the fourth builder's handoff).
+  if (process.env.E2E_STAGE_BEATEN === '1') await beatenAtTheEntrance(kit, shots);
+  await walkedClear(kit);
   const sizes: [string, any][] = [
     ['upright-390x664', { ...devices['iPhone 14'] }],
     ['sideways-667x375', { viewport: { width: 667, height: 375 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true }],
@@ -133,5 +152,131 @@ export async function stageFacts(kit: Kit & { shots?: string }): Promise<void> {
   } finally {
     await A.ctx.close();
     await B.ctx.close();
+  }
+}
+
+const roomOf = (ph: Phone): Promise<string> => ph.page.evaluate(() => (window as any).irreverents.drawn.room);
+
+/** Holds the stick east with Jump tapped every 0.7 s until the page draws its hero at or past `x` (room pixels), or `ms` pass. As quarry.ts's hopTo. */
+async function hopTo(ph: Phone, x: number, ms = 30000): Promise<boolean> {
+  const p = await pointOn(ph, '[data-stick]', 0.9);
+  const jump = await pointOn(ph, '[data-action="jump"]');
+  if (!p || !jump) return false;
+  const end = Date.now() + ms;
+  let ok = false;
+  await ph.cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ ...p, id: 1 }] });
+  while (Date.now() < end) {
+    if (((await me(ph))?.x ?? 0) >= x) {
+      ok = true;
+      break;
+    }
+    await ph.cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ ...p, id: 1 }, { ...jump, id: 2 }] });
+    await sleep(300);
+    await ph.cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+    await ph.cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ ...p, id: 1 }] });
+    await sleep(400);
+  }
+  await ph.cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+  await settle(ph);
+  return ok;
+}
+
+/** By touch into the quarry road and up to its fighters (column 39), standing there until the party is out of hearts; then at the entrance, the stick moves the hero. */
+export async function beatenAtTheEntrance(kit: Kit, shots: string): Promise<void> {
+  const { fact } = kit;
+  const ph = await phone(kit, `${kit.base}/?room=e2e-stage-beaten-${Math.random().toString(36).slice(2, 8)}`, 'stage beaten');
+  try {
+    const toCourtyard = (await walkInto(ph, 1, 'castle-street')) && (await walkInto(ph, 1, 'courtyard'));
+    const c = await ph.page.evaluate(() => {
+      const irr = (window as any).irreverents;
+      const cy = irr.content.rooms.courtyard;
+      const door = cy.doors.find((d: any) => d.id === 'to-quarry');
+      const road = irr.content.rooms['quarry-road'];
+      const back = road.doors.find((d: any) => d.id === 'to-courtyard');
+      return { doorX: door.tx * cy.tile, doorW: door.w * cy.tile, w: irr.content.characters[irr.drawn.me.kind].box.w, tile: road.tile, entrance: [back.tx * road.tile, (back.tx + back.w) * road.tile] };
+    });
+    if (toCourtyard) await standAt(ph, c.doorX + (c.doorW - c.w) / 2, 1);
+    await pushUp(ph);
+    const inside = await ph.page.waitForFunction(() => (window as any).irreverents.drawn.room === 'quarry-road', null, { polling: 'raf', timeout: 4000 }).then(() => true, () => false);
+    const reached = inside && (await hopTo(ph, 39 * c.tile, 40000));
+    // Stand among them: back east (hopping) whenever knocked west of column 36, until the GAME OVER card and the entrance.
+    let card = false;
+    let over = false;
+    let falls = 0;
+    let lastKind = '';
+    for (let i = 0; i < 480 && !over; i++) {
+      await sleep(500);
+      const s = (await ph.page.evaluate(() => {
+        const irr = (window as any).irreverents;
+        return { room: irr.drawn.room, x: irr.drawn.me?.x ?? 0, kind: irr.drawn.me?.kind ?? '', card: !!irr.drawn.gameOver, cond: irr.drawn.condition };
+      })) as { room: string; x: number; kind: string; card: boolean; cond: string };
+      if (lastKind && s.kind !== lastKind) falls++;
+      lastKind = s.kind;
+      if (s.card && !card) {
+        card = true;
+        await ph.page.screenshot({ path: path.join(shots, 'push4-beaten-moment-844x390.png') });
+      }
+      if (card && !s.card) over = true;
+      else if (!s.card && s.cond !== 'down' && s.room === 'quarry-road' && s.x < 36 * c.tile) await hopTo(ph, 39 * c.tile, 4000);
+    }
+    await ph.page.waitForFunction(() => (window as any).irreverents.drawn.condition !== 'down', null, { polling: 'raf', timeout: 8000 }).catch(() => undefined);
+    await settle(ph);
+    const at = (await ph.page.evaluate(() => ({ room: (window as any).irreverents.drawn.room, x: (window as any).irreverents.drawn.me?.x ?? -1 }))) as { room: string; x: number };
+    const atEntrance = at.room === 'quarry-road' && at.x >= c.entrance[0] - c.tile && at.x <= c.entrance[1] + 2 * c.tile;
+    let moved = 0;
+    if (atEntrance) {
+      const x0 = at.x;
+      const right = await pointOn(ph, '[data-stick]', 0.9);
+      if (right) {
+        await ph.cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ ...right, id: 1 }] });
+        await sleep(700);
+        await ph.cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+      }
+      await settle(ph);
+      moved = Math.abs(((await me(ph))?.x ?? x0) - x0);
+    }
+    fact('stage-beaten-entrance', reached && card && atEntrance && moved > 8,
+      `by touch into the quarry road (${inside}) and up to its fighters at column 39 (${reached}), standing there: the hero changed ${falls} time(s) as each ran out of hearts, the GAME OVER card was drawn (${card}); after it the page is in ${at.room} at x ${Math.round(at.x)} (the entrance is x ${c.entrance[0]}-${c.entrance[1]}: ${atEntrance}) and the stick moved the hero ${moved.toFixed(1)} px`);
+  } finally {
+    await ph.ctx.close();
+  }
+}
+
+/** The page's own hero stood in the depot six tiles west of the end, then walked east by the stick: STAGE CLEARED from the server's event. */
+export async function walkedClear(kit: Kit): Promise<void> {
+  const { fact } = kit;
+  const ph = await phone(kit, `${kit.base}/?room=e2e-stage-walked-${Math.random().toString(36).slice(2, 8)}`, 'stage walked');
+  try {
+    await ph.page.evaluate(() => {
+      const irr = (window as any).irreverents;
+      irr.e2eShown = [];
+      const realShow = irr.stage.show;
+      irr.stage.show = (ev: any) => {
+        irr.e2eShown.push('show');
+        return realShow(ev);
+      };
+      const stage = irr.content.stages['iron-quarry'];
+      const room = irr.content.rooms[stage.end.room];
+      const mine = irr.world.entities.find((e: any) => e.player === irr.player);
+      const box = irr.content.characters[mine.kind].box;
+      mine.room = stage.end.room;
+      mine.x = (stage.end.from[0] - 6) * room.tile;
+      mine.y = (stage.end.to[1] + 1) * room.tile - box.h;
+      mine.vx = 0;
+      mine.vy = 0;
+    });
+    const there = await ph.page.waitForFunction(() => (window as any).irreverents.drawn.room === 'quarry-depot', null, { polling: 'raf', timeout: 4000 }).then(() => true, () => false);
+    await sleep(800);
+    const before = (await ph.page.evaluate(() => (window as any).irreverents.drawn.stage)) as unknown;
+    const right = await pointOn(ph, '[data-stick]', 0.9);
+    if (right) await ph.cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ ...right, id: 1 }] });
+    const up = await ph.page.waitForFunction(() => (window as any).irreverents.drawn.stage !== null, null, { polling: 'raf', timeout: 8000 }).then(() => true, () => false);
+    await ph.cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+    await sleep(1500);
+    const s = (await ph.page.evaluate(() => ({ stage: (window as any).irreverents.drawn.stage, shown: (window as any).irreverents.e2eShown }))) as { stage: any; shown: string[] };
+    fact('stage-cleared-walked', there && before === null && up && s.stage !== null && s.shown.length === 0,
+      `the page's hero stood in the depot six tiles west of the end (${there}), no screen up before (${before === null}); walked east by the stick: STAGE CLEARED came up (${up}) from the server's event, not the page's show (show called ${s.shown.length} time(s)); stars lit ${s.stage?.lit ?? '?'} of ${s.stage?.stars ?? '?'}, lines ${JSON.stringify(s.stage?.lines ?? null)}`);
+  } finally {
+    await ph.ctx.close();
   }
 }

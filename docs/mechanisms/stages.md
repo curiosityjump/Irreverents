@@ -157,7 +157,15 @@ fighters in their view. The
 e2e's `stage-*` facts (`scripts/e2e/stage.ts`): the screen at three phone
 sizes inside the view, Continue in the safe area and reachable, the stick
 resting while it is up (`stage-held`, the control), Continue giving it
-back, and two pages each dismissing their own. Shots in
+back, and two pages each dismissing their own. Step 22 3b added two: `stage-beaten-entrance` (`DRAFT:`, run only with
+`E2E_STAGE_BEATEN=1`: it passed alone but timed out inside the full run; by touch into the
+quarry road and up to its fighters, standing there until the whole party is
+out of hearts: the GAME OVER card, then the page at the entrance, and the
+stick moves the hero; shot `push4-beaten-moment-844x390.png`) and
+`stage-cleared-walked` (the page stands its own hero in the depot six tiles
+west of the end and walks east by the stick: STAGE CLEARED comes from the
+server's `stage-cleared`, with the page's `show` never called; control,
+watched to fail by hand: the stick held west, and no screen). Shots in
 `docs/plan/step-22-shots/push4-*`.
 
 ## Not built yet
