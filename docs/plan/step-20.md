@@ -437,3 +437,18 @@ By a subagent reading the ten `docs/plan/step-20-shots/courtyard-*` shots blind 
 - **Confusing:** while riding, the hand button reads "GO IN" with a lock (a door's prompt); a white arrow over the hero's head in `roadblock-flying-sideways`; no guard anywhere in the shots.
 
 Sent to the second builder of `handoff-prompts/guard-vehicle-courtyard.md` as part of its push 2.
+
+### Guard vehicle, courtyard, push 2 (builder `session_017WiGzFDp4ULq8khkx23hXS`)
+
+**Push 2 (stealing it is seen).** decisions-log "Stealing the guards' trike is seen". Notes:
+- **The scenarios run in a check room, not the courtyard:** a scenario's own
+  `entities` are bodies with no `c.npc` (only a placement entry's `npc` makes a
+  person, `npc-setup`), so "a guard standing in view" needed a placed guard.
+  `test-trike` (new: `content/{rooms,placements}/test-trike.json`) holds the trike
+  and one town guard. The ids keep the brief's names `step20-courtyard-*`.
+- **Ramming a bandit now calms an enraged or distressed bandit who saw the rider
+  offend** (expected `hit` on a bad person, D-051), as a punch does. No camp
+  scenario changed; noted, not tested in play.
+- **The rammed guard flies far:** at 350 px/s the trike threw him about 330 px
+  east (to the far wall of the check room). His charge after is at a walk (40).
+- Not tried: a guard following a hero into the courtyard and seeing the take there.

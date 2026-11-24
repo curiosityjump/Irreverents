@@ -31,7 +31,7 @@ check room `test-machine` until builder B puts it in the Bandit Camp.
 | `src/sim/machines.ts` | `machineOf`, `machineState`, `crashMachine`, and **`ram()`, the one ram rule** |
 | `src/sim/systems/machine-ram.ts` (order 525) | a machine at `ramSpeed` or faster that overlaps a body rams it, once per pass; a wall that stops it dead at that speed, and a barrier it bursts, are crashes too. Each crash is one wear; at `crashes` it is wrecked |
 | `world.machines` | by the machine's entity id, `{ wear, wrecked }`; absent until the first crash (read with `machineState`, which defaults) |
-| events | `machine-crash` `{ machine, target, speed, player }` (`target` null for a wall or a barrier), `machine-wrecked` `{ machine, player }` |
+| events | `machine-crash` `{ machine, target, speed, player, by }` (`target` null for a wall or a barrier; `by` the moving body's entity id, the rider's own while a hero rides), `machine-wrecked` `{ machine, player }` |
 
 ## The seat (Step 20, builder A, push 2)
 
@@ -245,6 +245,29 @@ the machine then stands in the gallery; nothing is lost).
 0) stops against the room's edge (a wall crash) and stays in the courtyard;
 Use and a push up while riding in the forest's doorway took nobody through
 (the Use button reads GO IN there while riding). Not tried: every doorway.
+
+**Stealing it is seen (push 2).** Two `events` rows in
+`content/rules/expectations.json` make the trike's two acts deeds the NPC
+response logic already reads (`docs/mechanisms/npc-response.md`, "Deeds"):
+`machine-taken` is the deed `take` (`by`, the hero's entity), and
+`machine-crash` is `hit` (`by`, the moving body; `target`). So getting in
+under a town guard's eyes is odd to him (distress, `odd:take`), and ramming
+him is a blow on a good person (a second odd deed: rage, `odd:hit`). Neither
+is new code in the witness pass. What it means elsewhere:
+- **Any machine, the camp's wagon included.** `take` has no row for a bad
+  witness, so getting into the bandits' wagon in their view means nothing
+  to them; ramming a bandit is the expected `hit` on a bad person, which, like
+  a punch, calms a bandit in distress or rage who saw the rider offend (D-051).
+  Every `step20-camp-*` is unchanged.
+- **An empty machine rolling on does no deed**: its body has no role. A wall
+  crash has no target and means nothing.
+- No guard stands in the courtyard (see above), so in play the witnesses are
+  the guards who follow a hero in. The check room `test-trike`
+  (`content/{rooms,placements}/test-trike.json`: the trike at column 30, a town
+  guard at 37 facing it) holds the scenarios:
+  `step20-courtyard-theft-seen` (control: the `machine-taken` row removed) and
+  `step20-courtyard-ram-a-guard` (take, ram, rage, he charges at a walk and
+  the rider drives off; control: `by` left off the event).
 
 Checked by `step20-courtyard-trike-through-the-roadblock` (control: `ramSpeed`
 500), `-solo-infiltrator` and `-stalled-jump-out` (control: no Jump), and e2e

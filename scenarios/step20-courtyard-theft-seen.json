@@ -1,0 +1,20 @@
+{
+  "id": "step20-courtyard-theft-seen",
+  "proves": "Step 20, the guards' trike, push 2 (DRAFT; docs/decisions-log.md 'Step 20: stealing the guards' trike is seen'): getting into the guards' patrol trike in a town guard's view is the deed take, which a good witness finds odd. In test-trike (the courtyard's trike, with a guard four tiles east facing it) the grappler at spawn 1 taps Use and is in it; that same tick the guard perceives the take and goes from business as usual to distress, cause odd:take, never to rage on that one deed (D-044). Control (watched to fail): the events row machine-taken -> take removed from content/rules/expectations.json: no deed, and the guard stays in mood 1",
+  "room": "test-trike",
+  "placements": true,
+  "players": [
+    { "id": "a", "character": "grappler", "spawn": 1 }
+  ],
+  "inputs": [
+    { "player": "a", "from": 2, "to": 4, "hold": ["interact"] }
+  ],
+  "ticks": 120,
+  "expect": [
+    { "fact": "event-where", "event": "machine-taken", "where": { "machine": "tt-trike", "by": "p:a" }, "between": [0, 8], "count": [1, 1] },
+    { "fact": "event-where", "event": "deed", "where": { "deed": "take", "by": "p:a", "witnesses": ["tt-guard"] }, "between": [0, 8], "count": [1, 1] },
+    { "fact": "event-where", "event": "mood-changed", "where": { "entity": "tt-guard", "from": 1, "to": 2, "cause": "odd:take" }, "between": [0, 8], "count": [1, 1] },
+    { "fact": "event-where", "event": "mood-changed", "where": { "entity": "tt-guard", "to": 3 }, "between": [0, 120], "count": [0, 0] },
+    { "fact": "mood", "npc": "tt-guard", "between": [10, 60], "is": 2 }
+  ]
+}

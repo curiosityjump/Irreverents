@@ -1,0 +1,26 @@
+{
+  "//": "DRAFT (Step 20, the guards' trike, push 2): the check room for stealing the town guards' patrol trike in a guard's view: a long flat floor with no doors, so no player reaches it. Spawns at columns 3, 30 (spawn 1, standing on the trike), 50 and 56. With placements: the trike at column 30 facing east, and a town guard at column 37 facing west, looking at it (his eyes reach 112 px: the trike's middle is 103 px from his). Scenarios scenarios/step20-courtyard-theft-seen.json and -ram-a-guard.json pin these columns. Why not the courtyard itself: no guard stands there (one would fight Step 24's bandit on sight, and drive the trike at every hero), and a scenario's own `entities` are bodies, not people.",
+  "id": "test-trike",
+  "name": "Test: trike",
+  "tile": 16,
+  "legend": {
+    "#": "solid",
+    ".": "empty",
+    "1": "spawn",
+    "2": "spawn",
+    "3": "spawn",
+    "4": "spawn"
+  },
+  "rows": [
+    "############################################################",
+    "#..........................................................#",
+    "#..........................................................#",
+    "#..........................................................#",
+    "#..........................................................#",
+    "#..........................................................#",
+    "#..........................................................#",
+    "#..........................................................#",
+    "#..1..........................2...................3.....4..#",
+    "############################################################"
+  ]
+}

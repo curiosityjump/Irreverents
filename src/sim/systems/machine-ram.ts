@@ -48,13 +48,13 @@ const system: System = {
         const speed = Math.abs(r.pvx);
         a.c.impact = { x: ax, y: a.y + ab.h / 2, speed, tick: ctx.world.tick };
         ctx.emit('impact', { entity: a.id, player: a.player, other: null, speed });
-        ctx.emit('machine-crash', { machine: mid, target: null, speed, player: a.player });
+        ctx.emit('machine-crash', { machine: mid, target: null, speed, player: a.player, by: a.id });
         crashMachine(ctx, a, m);
       }
       // A barrier it burst through this tick (room-breakable, order 460, names it as `by`) is a crash too.
       for (const ev of ctx.events) {
         if (ev.type === 'part-broken' && ev.by === a.id) {
-          ctx.emit('machine-crash', { machine: mid, target: null, speed: ev.speed, player: a.player });
+          ctx.emit('machine-crash', { machine: mid, target: null, speed: ev.speed, player: a.player, by: a.id });
           crashMachine(ctx, a, m);
         }
       }
@@ -68,7 +68,7 @@ const system: System = {
           if (!bb || !overlaps(a.x, a.y, ab.w, ab.h, b.x, b.y, bb.w, bb.h)) continue;
           r.met.push(b.id);
           const after = ram(ctx, a, b, a.id);
-          ctx.emit('machine-crash', { machine: mid, target: b.id, speed: after.speed, player: a.player });
+          ctx.emit('machine-crash', { machine: mid, target: b.id, speed: after.speed, player: a.player, by: a.id });
           if (after.vx !== a.vx) emitEffect(ctx, a, { kind: 'push', vx: after.vx, vy: a.vy });
           crashMachine(ctx, a, m);
           if (machineState(ctx.world, mid).wrecked || Math.abs(a.vx) < limit) break;

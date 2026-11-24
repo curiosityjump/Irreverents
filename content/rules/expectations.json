@@ -23,6 +23,8 @@
     { "//": "Step 2's events (docs/architecture.md, 'Bodies').", "event": "hit", "deed": "hit", "by": "by", "target": "target" },
     { "event": "grabbed", "deed": "grab", "by": "by", "target": "target" },
     { "event": "thrown", "deed": "throw", "by": "by", "target": "target" },
-    { "//": "Step 25: a suplex is an attack.", "event": "suplexed", "deed": "hit", "by": "by", "target": "target" }
+    { "//": "Step 25: a suplex is an attack.", "event": "suplexed", "deed": "hit", "by": "by", "target": "target" },
+    { "//": "Step 20, the guards' trike (DRAFT:): getting into a machine is helping yourself to it, the deed take. Only a good witness has a row for a hero's take, so the bandits' wagon in the camp is unchanged.", "event": "machine-taken", "deed": "take", "by": "by" },
+    { "//": "Step 20, the guards' trike (DRAFT:): a machine ramming someone is a blow by whoever rides it. An empty machine's body has no role, so it does no deed; a wall crash has no target and means nothing.", "event": "machine-crash", "deed": "hit", "by": "by", "target": "target" }
   ]
 }

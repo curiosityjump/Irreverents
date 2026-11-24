@@ -1,0 +1,32 @@
+{
+  "//": "DRAFT (Step 20, the guards' trike, push 2): see content/rooms/test-trike.json. The trike parked empty facing east (as the courtyard's), and a town guard four tiles east of it, facing it.",
+  "id": "test-trike",
+  "room": "test-trike",
+  "place": [
+    {
+      "id": "tt-trike",
+      "character": "guard-trike",
+      "tile": [
+        30,
+        8
+      ]
+    },
+    {
+      "id": "tt-guard",
+      "character": "guard",
+      "tile": [
+        37,
+        8
+      ],
+      "npc": "guard",
+      "routine": [
+        {
+          "face": "left"
+        },
+        {
+          "wait": 10
+        }
+      ]
+    }
+  ]
+}

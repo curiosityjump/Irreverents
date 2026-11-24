@@ -92,7 +92,12 @@ A deed is a thing a person can witness someone doing: tonight `buy`,
   "deed": "hit", "by": "by", "target": "target" }` says which event type
   is which deed and which of its fields hold the two entity ids. Rows
   for Step 2's `hit`, `grabbed` and `thrown` are in the file already;
-  no code changes when those events start arriving.
+  no code changes when those events start arriving. Step 25's
+  `suplexed` is `hit`. Step 20's machines (the guards' trike,
+  2026-11-24): `machine-taken` is `take` (getting into a machine is
+  helping yourself to it) and `machine-crash` is `hit` (`by`, the moving
+  body: a ram is its rider's blow; an empty machine has no role and does
+  no deed; `docs/mechanisms/machines.md`, "On the courtyard's run").
 
 For each deed the witness pass emits **`deed`**: `{ deed, by, player,
 target, thing, room, x, y, witnesses }`. Something with no role (a

@@ -1,0 +1,27 @@
+{
+  "id": "step20-courtyard-ram-a-guard",
+  "proves": "Step 20, the guards' trike, push 2 (DRAFT; docs/decisions-log.md 'Step 20: stealing the guards' trike is seen'): a machine ramming someone is a blow by its rider, the deed hit. In test-trike the grappler gets into the trike in the town guard's view (odd:take: distress, D-044), drives east and rams him at speed (machine-crash naming the rider's body as `by`); the hit on a good person is a second odd deed, and persisting makes rage (D-045): mood 3, cause odd:hit. He charges (walking west after the rider, at a person's walk), and the rider, driving west at the trike's speed, is never caught: no blow of his lands on the rider, and at the end the two are more than 400 px apart, the hero still in the trike. Control (watched to fail): the new `by` field left off machine-crash (src/sim/systems/machine-ram.ts): the ram is no deed, and the guard stays in distress",
+  "room": "test-trike",
+  "placements": true,
+  "players": [
+    { "id": "a", "character": "grappler", "spawn": 1 }
+  ],
+  "inputs": [
+    { "player": "a", "from": 2, "to": 4, "hold": ["interact"] },
+    { "player": "a", "from": 10, "to": 40, "x": 1 },
+    { "player": "a", "from": 50, "to": 120, "x": -1 }
+  ],
+  "ticks": 300,
+  "expect": [
+    { "fact": "event-where", "event": "mood-changed", "where": { "entity": "tt-guard", "from": 1, "to": 2, "cause": "odd:take" }, "between": [0, 8], "count": [1, 1] },
+    { "fact": "event-where", "event": "machine-crash", "where": { "machine": "tt-trike", "target": "tt-guard", "by": "p:a", "player": "a" }, "between": [20, 60], "count": [1, 1] },
+    { "fact": "event-where", "event": "deed", "where": { "deed": "hit", "by": "p:a", "target": "tt-guard" }, "between": [20, 60], "count": [1, 1] },
+    { "fact": "event-where", "event": "mood-changed", "where": { "entity": "tt-guard", "from": 2, "to": 3, "cause": "odd:hit" }, "between": [20, 60], "count": [1, 1] },
+    { "fact": "mood", "npc": "tt-guard", "between": [61, 300], "is": 3 },
+    { "fact": "position", "at": 140, "entity": "tt-guard", "x": [880, 944] },
+    { "fact": "position", "at": 300, "entity": "tt-guard", "x": [600, 860] },
+    { "fact": "position", "at": 300, "player": "a", "x": [16, 260] },
+    { "fact": "event-where", "event": "hit", "where": { "by": "tt-guard", "target": "p:a" }, "between": [0, 300], "count": [0, 0] },
+    { "fact": "character", "player": "a", "at": 300, "is": "guard-trike" }
+  ]
+}

@@ -54,8 +54,12 @@ declare module './types.ts' {
     chase?: { x: number } | null;
   }
   interface EventMap {
-    /** A machine rammed `target` (or, with `target` null, crashed into a wall) at `speed`. `player` drives it, if a player does. */
-    'machine-crash': { machine: string; target: string | null; speed: number; player: string | null };
+    /**
+     * A machine rammed `target` (or, with `target` null, crashed into a wall) at `speed`. `player` drives it, if a player does.
+     * `by` (guard vehicle push 2, additive): the entity id of the moving body, the rider's own while a hero rides it, so
+     * content/rules/ can map a ram to the deed `hit` (an empty machine's body has no role and does no deed).
+     */
+    'machine-crash': { machine: string; target: string | null; speed: number; player: string | null; by: string };
     /** A machine wore through: a wreck, for good. */
     'machine-wrecked': { machine: string; player: string | null };
     /** Step 20 push 2: a player got in (`by` is their entity id; `hero` the hero they went in as). */
