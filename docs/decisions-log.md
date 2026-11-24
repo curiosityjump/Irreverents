@@ -1210,3 +1210,10 @@ document as a decision of theirs.
 - **Why this way:** the owner: "Alarms don't seem to do anything yet." Measured: the horn did finish and the wave did come, but nothing said so, there was no sound, and the wave walked in off screen for about seven seconds. Now the horn makes the bell's wind-up sound while it is blown and the alarm sound when it finishes, a banner says "The horn sounds!", and "Here they come!" when the wave walks in; in the street, "The guard is here!" when the help a whistle called walks in. Only players in that room see the banners.
 - **To change it:** the words and colour at the top of `src/client/draw/alarm-banner.ts`; the sounds in `src/client/audio/moments.ts` (`outpost-call-*`). Undo: revert the commit.
 - **Where:** `docs/plan/step-4.md`, "Alarms and the chase, as played". `DRAFT:`
+
+### 2026-11-24 · Step 22: you can lose in the Iron Quarry: three falls in a minute with a bandit in reach and you are thrown back to the quarry's start
+- **Decided by:** Step 22 builder, push 1, `session_017WiGzHD6TvY2XxEG4B3rJU`, on the lead's brief (`handoff-prompts/step-22-stage.md`)
+- **Instead of asking:** "How many falls before the quarry throws you out, who throws you, and where do you land?" 
+- **Why this way:** the owner, playing: "Enemies can't be fully defeated, neither can heros", and for the stage: "real way to lose/die, which pushes you back to the entrance to start over". Step 21's rule is used as it is, with a new place file. 3 falls sits between the street's 2 and the camp's 4; the fighters, the heavy and the brute throw you, the toll-keeper does not (he is a toll); you land on the road just inside the doorway from the courtyard. Waves that find nobody walk off after 10 s, as at the camp.
+- **To change it:** `downs`, `seizers`, `lands` in `content/defeat/quarry.json`, `"on": false` turns it off; `leaveCold`/`leaveIdle` in `content/outposts/quarry-depot.json`.
+- **Where:** `docs/mechanisms/defeat.md`, "The rule"; `docs/mechanisms/outposts.md`, "The depot"; `docs/plan/step-22.md`, "Builder notes". `DRAFT:`

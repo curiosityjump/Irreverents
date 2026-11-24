@@ -1,0 +1,25 @@
+{
+ "id": "step22-beaten-to-entrance",
+ "proves": "Step 22 push 1 (DRAFT, docs/decisions-log.md 'Step 22'; the owner: 'real way to lose/die, which pushes you back to the entrance'): the grappler stands still on the depot's far yard (column 60; the dip west of it closed for this scenario by `tiles`, so the patrol's blows cannot knock it out of his reach into the pocket) and patrol 2 and the strongroom's heavy guard knock it flat three times within a minute; the third fall comes with one of them in reach, he stands over the hero for the beat (1 s), and the hero is thrown back to the start of the quarry, the road just inside the courtyard doorway (columns 2-4), and is up and free there. Control (watched to fail): \"on\": false in content/defeat/quarry.json, the hero is still in the depot",
+ "room": "quarry-depot",
+ "placements": true,
+ "tiles": [
+  {"room": "quarry-depot", "tile": [51, 14], "is": "solid"},
+  {"room": "quarry-depot", "tile": [52, 14], "is": "solid"}
+ ],
+ "players": [
+  {"id": "a", "character": "grappler", "spawn": 2}
+ ],
+ "inputs": [
+  {"player": "a", "from": 0, "to": 1, "x": 0}
+ ],
+ "ticks": 1800,
+ "expect": [
+  {"fact": "event-where", "event": "fall", "where": {"entity": "p:a", "place": "quarry", "falls": 3}, "between": [0, 1800], "count": [1, 1]},
+  {"fact": "event-where", "event": "seized", "where": {"entity": "p:a", "place": "quarry"}, "between": [0, 1800], "count": [1, 1]},
+  {"fact": "event-where", "event": "thrown-out", "where": {"entity": "p:a", "place": "quarry", "from": "quarry-depot", "to": "quarry-road"}, "between": [0, 1800], "count": [1, 1]},
+  {"fact": "in-room", "player": "a", "at": 1800, "room": "quarry-road"},
+  {"fact": "position", "player": "a", "at": 1800, "x": [32, 80]},
+  {"fact": "body-state", "player": "a", "at": 1800, "not": ["flattened", "seized"]}
+ ]
+}

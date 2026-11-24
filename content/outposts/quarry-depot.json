@@ -1,9 +1,11 @@
 {
-  "//": "DRAFT (Step 16 slice 3): the depot's horn. Only the lookout calls (as at the camp): the patrols and the strongroom guard fight whoever they see but cannot reach the post, which stands with the lookout on the yard's west stretch (no person jumps, and the stack at columns 14-17 and the step at 24-25 cut the yard in three). Numbers copied from the camp (3 s, 6 s, 3 hits or 300 px/s); waves grow 2, 3, then 3 fighters and a heavy, the last row coming again for ever; they walk in at the far east end (column 61), away from the two west doors; at most 8 people in the room (4 are placed). docs/decisions-log.md, Step 16 slice 3.",
+  "//": "DRAFT (Step 16 slice 3): the depot's horn. Only the lookout calls (as at the camp): the patrols and the strongroom guard fight whoever they see but cannot reach the post, which stands with the lookout on the yard's west stretch (no person jumps, and the stack at columns 14-17 and the step at 24-25 cut the yard in three). Numbers copied from the camp (3 s, 6 s, 3 hits or 300 px/s); waves grow 2, 3, then 3 fighters and a heavy, the last row coming again for ever; they walk in at the far east end (column 61), away from the two west doors; at most 8 people in the room (4 are placed). docs/decisions-log.md, Step 16 slice 3. DRAFT (Step 22 push 1, docs/decisions-log.md 'Step 22'): waves that find nobody to fight walk off after 10 s (leaveIdle, as at the camp; one stuck in the pocket under the dip is removed where it stands), and beaten ones after 5 s out cold (leaveCold), so the next waves fit under the bound. Waves still drop into the dip at columns 51-52: Step 22 push 5 brings them in from the sides instead.",
   "id": "quarry-depot",
   "room": "quarry-depot",
   "signaler": "depot-horn-post",
   "callers": ["depot-lookout"],
+  "leaveCold": 5,
+  "leaveIdle": 10,
   "entry": [61, 13],
   "bound": 8,
   "callTime": 3,

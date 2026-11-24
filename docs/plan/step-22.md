@@ -189,3 +189,29 @@ Camp, the castle street, the undercroft (builders are in each tonight).
 - `handoff-prompts/step-22-stage.md` (lead, 2026-11-24): five pushes for one builder: lose in the quarry and the waves reach you; a stage and starting over; the end, the result and stars; the victory screen; more enemies and found-without-being-told.
 
 ## Builder notes
+
+### 2026-11-24, Step 22 builder (`session_017WiGzHD6TvY2XxEG4B3rJU`), push 1: you can lose in the quarry
+
+- **The depot's waves: measured, not shipped.** A wave walking west from
+  column 61 drops through the dip (row 14, columns 51-52) and stands in the
+  pocket for ever (traced, tick 600 on); a hero punched west on the far yard
+  lands there too. Of Step 7's three fixes: filling or narrowing the gap takes
+  away the strongroom's crawl (and a fighter is 14 px wide: a one-tile gap
+  still drops it); moving the entry west drops waves into the shaft (columns
+  42-44). A one-tile kerb at row 13, column 53 worked (every `step16-*` and
+  `step7-*` unchanged; scenario and control kept in my scratch as
+  `step22-wave-reaches-hero`), but Step 9's `step9-fades-then-source`
+  (landed during this push) has its grappler walk west over the dip, and the
+  hop over a kerb puts it past its 80-130 tick window; no earlier jump fixes
+  it. So push 1 ships only `leaveCold` 5 / `leaveIdle` 10 (idle waves walk
+  off and the bound frees), and the wave reaches the hero in push 5 with the
+  chase builder's entries on both sides of the player. Asked of the Step 9
+  builder whether it minds a re-timed jump if the kerb is still wanted then.
+- **Being beaten in the quarry is uneven:** the road's heavy, the ridge's
+  brute and the depot's far yard each knock a still hero off a ledge or into
+  a dip out of reach after one fall, so the throw-out comes mostly where the
+  floor is flat (the depot's yard sections, the tower). Push 5's placements
+  should put seizers where the floor holds the fight.
+- **No banner for `thrown-out` on the page yet:** Step 21's
+  (`session_017WiGzJWYyVWtYnjFXHko1S`, asked by message). The throw itself
+  is seen: the hero lands at the road's doorway.

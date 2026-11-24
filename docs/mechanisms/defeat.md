@@ -23,7 +23,11 @@ left out: always), `lands` (a room one door away at most, and a `door` or a
 `tile` there), `follow`, and `words` (the banners, no digits). `on: false`
 is the game before Step 21. Today: the camp (`downs` 4, lands in the
 courtyard's `to-outpost` doorway) and the castle street under an alert
-(`downs` 2, lands in the open courtyard at [4, 7], `follow`).
+(`downs` 2, lands in the open courtyard at [4, 7], `follow`), and (Step 22
+push 1, `DRAFT:`) the Iron Quarry's six rooms (`content/defeat/quarry.json`:
+`downs` 3, seizers the fighter, the heavy and the brute but not the
+toll-keeper, lands on the road just inside its `to-courtyard` doorway, the
+start of the quarry, `follow`).
 
 1. **A fall** (`defeat-seize`, order 585): a played hero `flattened` in a
    room of a place that is on is a `fall`; `c.falls` keeps the ticks of the
@@ -72,4 +76,9 @@ there is out in about 20 to 35 s.
 ## How it is checked
 
 `scenarios/step21-camp-thrown-out.json` (controls: `on` false; `downs` 1).
+`scenarios/step22-beaten-to-entrance.json` (the quarry; control: `on`
+false). Measured there: a blow in the quarry often knocks a hero off a ledge
+or into a dip out of every seizer's reach (the road's heavy, the ridge's
+brute, the depot's far yard), so a hero is thrown out mostly where the floor
+is flat around them.
 Held, not yet run: `docs/plan/step-21-held/`.

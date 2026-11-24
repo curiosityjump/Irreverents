@@ -208,10 +208,18 @@ strikes is knocked flat in about 20 s. Where a wave comes to rest is
 wherever the hero was seen (and, after 10 s with nobody to fight, the
 entry, where it is gone), never a fixed spot.
 
-**The depot (`quarry-depot`) is not changed, but its waves now walk west
-from the entry and drop through the floor's gap at columns 51-52 into the
-pocket below, where they stay** (`step7-waves-reach-the-hero-depot` pins
-only that they leave the entry). Flagged for its owner.
+**The depot (`quarry-depot`).** Its waves walk west from the entry and
+drop through the floor's gap at columns 51-52 into the pocket below
+(`step7-waves-reach-the-hero-depot` pins only that they leave the entry).
+Step 22 push 1 gave the depot the camp's `leaveCold` 5 and `leaveIdle` 10,
+so a wave with nobody to fight walks off (one in the pocket makes no headway
+and is removed where it stands) and the next fit under the bound. A kerb on
+the gap's east lip (row 13, column 53) stops walkers on the far yard and was
+measured green against every `step16-*`/`step7-*`, but it delays Step 9's
+`step9-fades-then-source` grappler by its hop and was left out; waves that
+reach the hero come with the chase-and-alarms rule's entries on both sides of
+the player (`handoff-prompts/owner-enemies-chase-alarms.md`), placed in the
+quarry by Step 22 push 5.
 
 Scenarios: `step7-waves-reach-the-hero`, `step7-waves-reach-the-hero-depot`,
 `step7-caller-tries-again`, `step7-post-ends-it`; the `people-at` fact

@@ -134,7 +134,20 @@ never replied, a manual check>
 needed>
 ```
 
-*(No entries yet.)*
+### 2026-11-24, Step 22 builder (`session_017WiGzHD6TvY2XxEG4B3rJU`)
+
+**What happened:** spawned with `blob_limit_kb: 150`, the checkout left
+`docs/decisions-log.md` (174 KB) out as a skip-worktree file: not on disk at
+all, so opening it said "No such file", rather than git fetching it on open
+as `docs/lead-session.md` says. Every builder must append to that file.
+
+**How caught:** `ls docs/decisions-log.md` failed; `git ls-files -t` shows
+`S` for it (and for some screenshots under `docs/plan/`).
+
+**Recovery:** `git update-index --no-skip-worktree docs/decisions-log.md &&
+git checkout -- docs/decisions-log.md` (fetches it). A lower-cost fix for
+everyone: keep that file under 150 KB (archive old entries) or say this
+command in the builder card.
 
 ---
 
