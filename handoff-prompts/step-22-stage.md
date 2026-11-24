@@ -6,6 +6,14 @@
 - **From push 2, the stage starts over on a game over inside it.** The stage's game-over place is its entrance (`DRAFT:` until the owner answers), with hearts full. Hang the restart off one trigger. Until Step 21's game-over event is on `main`, a `thrown-out` inside the stage is that trigger. Switch to the game-over event when it lands, and agree with that builder by message how a place names its game-over spot. **Never build a second heart or downs counter.**
 - **On the victory screen, "tries" become game overs.** Add *hearts left* (the party's, at the end) as a statistic. Three stars may require that no hero ran out (`DRAFT:`).
 
+**Lead, 01:12 UTC: "beaten for good" is landing** (builder `session_017WiGzEhbdYJQcUhtD2bSLL`, `src/sim/beaten.ts`; check it is on `main` before you rely on it). It provides:
+
+- `defeatsBy(world, playerId)`: the bad guys this player has ever been credited with defeating, kept across saves. *Enemies defeated* for a run is the difference from the run's start.
+- `restorePeople(world, content, room?)`: puts every defeated *placed* bad guy back at his post, fresh, and returns the ids. Arrivals from a wave are never put back. Push 2's restore uses it; don't write a second restore for people.
+- Events: `defeated` {target, by, player, how}, `defeated-gone` and `defeated-back` (a placed bad guy comes back by himself after 90 s with nobody in his room).
+
+If you need another shape, ask that builder; changes are additive only.
+
 # Step 22: one stage to clear (the quarry): lose and start over, reach the end, STAGE CLEARED
 
 Brief for one builder, reused for every push below. Written 2026-11-24 by
