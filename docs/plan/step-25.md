@@ -336,3 +336,23 @@ By a subagent reading the six shots in `docs/plan/step-25-shots/` at phone size,
 - Verdict: "the king fell down next to me with a sparkle". Briefed as a fourth push at the top of `handoff-prompts/suplex.md`.
 
 **Briefs:** `handoff-prompts/suplex.md`, fourth push, to a fresh builder (named in `docs/current-directive.md`, "Sessions").
+
+- **2026-11-24, the push-4 builder (`handoff-prompts/suplex.md`, fourth push).**
+  Drawn only (`src/client/draw/suplex.ts`, new `draw/slam-dust.ts`, three
+  hooks in `draw/entities.ts`); no sim number changed. The heave goes over
+  the head on an arc about the carrier's feet and turns head-down; the slam
+  is drawn head-down at the floor 18 px further behind than the sim puts it,
+  held for the beat, flops flat and stays flat through the bounce; the hero
+  leans back 0.15 rad; a floor dust burst wider than the body. Measured by
+  touch at 150 ms each way (round trip ~310 ms), two runs alike: presser
+  first movement ~15 ms, head-down ~965 ms, server impact drawn ~915 ms;
+  friend first movement ~615 ms, head-down ~965 ms, impact ~915 ms. The
+  e2e now carries the king off the dais and sends the friend's hero to the
+  far right before shooting. New facts `suplex-over`, `suplex-felt`,
+  `suplex-again`; control `E2E_SUPLEX_SKIP=1`. Shots `*-2-*` in
+  `docs/plan/step-25-shots/`; the push-2 shots stay as the before.
+  **Weak:** head-down shows ~50 ms after the star (the `CATCH` finish of the
+  arc), the star half covers the head on the slam frame; the hero keeps the
+  carry arms-up frame through the slam (frames C02-05 will fix); the lag is
+  learned per page load, so the very first suplex on a fresh page is timed
+  from the round trip alone (within ~60 ms here). Not run on a real phone.

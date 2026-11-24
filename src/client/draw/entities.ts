@@ -8,7 +8,7 @@ import { drawLookIn } from './room-parts.ts';
 import { predictedLook, predictHits } from './impact.ts';
 import { carriedBy, drawSprite, drawsOwnRage, forget, lyingOut, rageFlash, remember, swingWasThrow } from './sprites.ts';
 import type { Drew } from './sprites.ts';
-import { turnForHeave } from './suplex.ts';
+import { drawSlams, poseFor, turnForHeave } from './suplex.ts';
 import { beginMachines, drawMachineBody, seatedInDrawnMachine } from './machines.ts';
 
 /** One thing the renderer put on screen this frame, in room pixels. Part of the debug object (docs/mechanisms/network.md). */
@@ -188,7 +188,11 @@ export function drawEntities(g: CanvasRenderingContext2D, world: World, content:
     const carrier = heldBy.get(e.id);
     if (carrier && byId.get(carrier)?.room === roomId) continue;
     const easing = released(world, e, ox, oy);
+    // Step 25 push 4: a slammed body head-down at the floor, a carrier leaning into the throw (draw/suplex.ts).
+    g.save();
+    poseFor(g, world, content, e, ox, oy, easing ?? undefined);
     const drew = body(e, easing ?? undefined);
+    g.restore();
     const held = [...heldBy].find(([, by]) => by === e.id)?.[0];
     const h = held ? byId.get(held) : undefined;
     if (!h || h.room !== roomId || !content.characters[h.kind]) continue;
@@ -201,12 +205,13 @@ export function drawEntities(g: CanvasRenderingContext2D, world: World, content:
       at = { x: ox + h.x + (at.x - ox - h.x) * k, y: oy + h.y + (at.y - oy - h.y) * k };
     }
     if (at) holds.set(h.id, { x: at.x - ox, y: at.y - oy, tick: world.tick });
-    // Step 25 push 2: mid-heave, the carried body is turned up and over behind the carrier (draw/suplex.ts).
+    // Step 25: mid-heave, the carried body goes up over the carrier's head and behind him (draw/suplex.ts).
     g.save();
-    turnForHeave(g, world, content, e, h, ox, oy);
+    turnForHeave(g, world, content, e, h, ox, oy, at);
     body(h, at);
     g.restore();
   }
+  drawSlams(g, world, content, roomId, ox, oy);
   // Effects over bodies: landing dust.
   const land = look('fx-land');
   if (land) {

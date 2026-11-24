@@ -258,15 +258,41 @@ builder chose.
   | `suplexSplashReach` | 28 | 24 | 12 |
   | `suplexSplashStrength` | 16000 | 14000 | each one's `attackStrength` |
 
-- **Drawn** (push 2) by `src/client/draw/suplex.ts`, asked by
-  `draw/entities.ts` as it draws a carried body: turned about the
-  carrier's shoulders, up and over to behind, head first, over
-  `suplexTime`. `INTENT:` from the press: the presser's own page starts it
-  the frame its Use goes down while the arbiter says `suplex` (it never
-  learns its hero heaves); another page takes `c.suplex.at`. The slam's
-  dust, shake and sound are the impact's own (500 is over the slam sound's
-  420). Not predicted: the slam shows about a round trip after the heave
-  would end on the presser's phone.
+- **Drawn** (push 4 redrew push 2's turn) by `src/client/draw/suplex.ts`,
+  asked by `draw/entities.ts` in three places: `turnForHeave` as it draws a
+  carried body, `poseFor` as it draws any free body, `drawSlams` after the
+  bodies. All cosmetic, nothing moves in the simulation.
+  - **The heave**: the body's middle travels on an arc about the carrier's
+    feet from the hands up (rising `LIFT` px) and over to behind his back,
+    turning to head-down as it comes over (the turn leads the travel). The
+    e2e counts heave frames whose body is neither above the head nor behind
+    the back: 0.
+  - **The slam**: when the server's slam reaches the page (the body let go
+    with a new `c.impact`), the arc finishes in `CATCH` ticks if it had not,
+    then the body is drawn head-down at the floor `GAP` px further behind
+    than the simulation puts it (sprite pictures are wider than boxes: no
+    overlap with the carrier), held for the slam's beat (at least
+    `HOLD_MIN`), then flops on over (legs away from the carrier) to lying
+    flat, eased onto its real place, and stays drawn lying through its
+    bounce (`INTENT:`; at most `LIE_MAX`). The carrier leans back `LEAN`
+    into it from mid-heave until the flop: the bridge, until the grappler's
+    frames (C02-05) come.
+  - **Weight**: `draw/slam-dust.ts`, a burst along the floor about twice
+    the body's width at once and three and a half at its widest, beside the
+    impact's own star (1.25 size) and full shake (500 is over `FULL_SPEED`
+    450) and the `slam` sound (over 420).
+  - **Timing** (`INTENT:`, ruling 4): drawn from the press on the presser's
+    page (it never learns its hero heaves), stretched to `suplexTime` plus
+    the page's lag (seeded from the round trip, report and snapshot
+    intervals and `interpDelayMs`, then learned from each slam it sees), so
+    the body reaches the floor as the slam does: no frozen body overhead,
+    no snap back. Late slams slow the last tenth near the floor; a heave the
+    server never slams is dropped after `GIVE_UP` (the way out). Another
+    page starts it when `c.suplex.at` first arrives, at `suplexTime`.
+    Measured at 150 ms each way (round trip about 310 ms): the presser's
+    page moves 15 ms after the press, draws head-down at about 965 ms, the
+    impact at about 915 ms; a friend's page moves at about 615 ms, head-down
+    at about 965 ms.
 - **By touch**: `scripts/e2e/suplex.ts` (`suplex-*`; control
   `E2E_SUPLEX_SKIP=1`). Shots in `docs/plan/step-25-shots/` (with
   `E2E_SHOTS=1`).
