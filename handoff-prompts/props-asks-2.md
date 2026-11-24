@@ -53,3 +53,27 @@ Each push: `npm run build`, `npm run check` green (`npm run e2e` if a look the
 game already draws changed; the reconnect facts `h1`/`h2`, `cantina-row` and
 the friend-throw facts fail some runs on `main` and are being fixed elsewhere:
 re-run and report, never loosen); pushed; live.
+
+## Added 2026-11-24 02:00 UTC: the owner's guard vehicles (do the report as soon as the files are there)
+
+**The owner, first-hand to the orchestrator, ~01:55 UTC:**
+
+> Guard vehicle assets being uploaded now
+
+"Being uploaded": they may not all be there yet. After your current push,
+run `python3 -I tools/drive_sync.py --check` (it lists what changed on the
+Drive and writes nothing; give it several minutes); when new files with
+guard vehicles show, mirror them (the sync tool, committing only what is
+new, naming them) and **send a report before cutting anything**, to the
+orchestrator: each file's Drive path and size, any doc beside it and what it
+decides (labels are literal), and a plain list of what each sheet shows
+(every vehicle, its states and frames, with or without a rider, wrecked or
+not, any projectile or effect). If nothing new shows after two checks ten
+minutes apart, say so and carry on with your other asks; check again after
+each push. Then cut them as a look group (clear ids by what the thing is,
+never a proposed proper name), the way the rides were cut
+(`tools/art/props/README.md`, "Core loops"), each seen in a mock scene.
+The vehicles builders (`session_017WiGzK3BxWQHTRLZHSmnYK`, the wagon's look;
+`session_017WiGzEvHsdz7Z8fr6XuECe`, the camp run) and the town-tiers builder
+(`session_017WiGzHTLU6WYfsfoEFK4si`: a guard vehicle is a natural later row
+for the town's alarm) get the look ids by message.
