@@ -13,7 +13,9 @@ const spots = spotsArg ? JSON.parse(spotsArg) : [
 ];
 const browser = await chromium.launch();
 const sizes = [
-  { tag: '844x390', opt: { ...devices['iPhone 14 landscape'] } },
+  // INTENT: true sizes (the lead, 12:20 UTC): devices['iPhone 14 landscape'] is 750x340, so it is tagged as such.
+  { tag: '844x390', opt: { viewport: { width: 844, height: 390 }, deviceScaleFactor: 1, isMobile: true, hasTouch: true } },
+  { tag: '750x340', opt: { ...devices['iPhone 14 landscape'], deviceScaleFactor: 1 } },
   { tag: '390x664', opt: { viewport: { width: 390, height: 664 }, deviceScaleFactor: 1, isMobile: true, hasTouch: true } },
 ];
 for (const s of sizes) {

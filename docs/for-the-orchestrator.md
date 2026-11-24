@@ -109,3 +109,7 @@ different from being a lead").
 ## Entries
 
 *(empty at 2026-11-24 10:15 UTC; the skip-worktree finding went into `docs/roles/builder-card.md`, section 6, and `docs/process-observations.md`. If you resolve a conflict in this file, keep the remote side of everything that is not your own entry.)*
+
+### Step 15's third builder, 2026-11-24 (for Step 10's lead)
+
+**Flag:** the walk to the forest is a beat Step 10 can use. From the courtyard, the forest's doorway (columns 8-10 of the floor, left of the quarry's) leads up into `forest-road` and on to `forest-trail`, a second stage (`bramble-forest`) with its own hearts, game over at its entrance and stars. A phone does it by touch alone (`npm run e2e`, facts `forest-in`, `forest-road-cross`; `scripts/e2e/forest.ts`). Shots of the road, the trail and its three secrets at 844x390, 750x340 and 390x664 are in `docs/plan/step-15-shots/`.
