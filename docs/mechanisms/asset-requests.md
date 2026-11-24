@@ -81,6 +81,8 @@ that, not Vision Partner's check, is the real pace).
 
 - **Addenda to the master list** go in as their own REQ docs in 01 REQUESTS (the desk can create, not edit), each naming the master list: 2026-11-23 19:33 UTC "REQ — P04 REVISION — Empty vehicles and mounts (no rider baked in)", https://docs.google.com/document/d/1sNHjO0YygTu-AQ2byoBWIN-IURhh02ujo-8A2MXAE1c/edit (from 68b2e1d: every P04 vehicle/mount cell has the rider baked in). 2026-11-24 00:21 UTC "REQ — P07 REVISION — Touch-button glyphs and pressed/disabled plates", https://docs.google.com/document/d/1Jw63yDBOo1v5jPHuTuJHZTRJjYHQi2jHhhpX1bSZ5Uw/edit (grab/throw, Use = MA-01, switch-hero glyphs; pressed and disabled frames; from docs/plan/step-5.md "Buttons"). 2026-11-24 00:26 UTC "REQ — P12 REVISION — Weapon grip anchors/hitboxes, cannonball, closed parasol, unlit torch", https://docs.google.com/document/d/1aEuNBG8C_6s3tVa8D9cMjEHsSZqqEzMbtCVWXcvhsFs/edit (from the props builder, owner-weapons-art).
 
+- **Master-list edits owed (no Docs editing here; whoever can edit the Drive list applies them):** MA-22 "Irreverents" title wordmark → DELIVERED (owner's Irreverents_Title_Screen_Concept_2026-11-23.png, live as the start screen title at 2781572; `docs/mechanisms/asset-coverage.md`).
+
 ### Requests in flight
 
 | Filed (UTC) | REQ doc | Priority |
