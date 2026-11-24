@@ -1,27 +1,55 @@
 {
- "//": "DRAFT (Step 22 push 5): the quiet way, for node scripts/stage-quiet.ts: the segments the infiltrator plays to clear the Iron Quarry with no bad guy seeing it (scenarios/step22-unseen-clear.json). Re-record with `node scripts/stage-quiet.ts scripts/stage-routes/quiet-infiltrator.json out.json` when the quarry changes.",
+ "//": "DRAFT (Step 22 push 5): the quiet way, for node scripts/stage-quiet.ts: the segments the infiltrator plays to clear the Iron Quarry with no bad guy seeing it (scenarios/step22-unseen-clear.json). Re-record with `node scripts/stage-quiet.ts scripts/stage-routes/quiet-infiltrator.json out.json` when the quarry changes. DRAFT (Step 22 push 5 part 2): the road now starts by the door: wait there until the road's lookout has turned east, then up the first ledge behind him, the step (row 13) and the high walk (row 11) over him to the scaffold.",
  "hero": "infiltrator",
  "segments": [
   {
-   "note": "road to the block",
+   "note": "road to the door's last tiles",
    "do": "walk",
    "gaps": true,
    "until": {
     "room": "quarry-road",
-    "xMin": 30.6,
-    "feetMax": 13.01,
+    "xMin": 9.3,
     "ground": true
    }
   },
   {
-   "note": "step row 11",
+   "note": "up the first ledge, behind the road's lookout",
    "do": "steer",
-   "to": 32.2,
+   "to": 13.5,
+   "wait": 480,
+   "until": {
+    "feetMax": 15.01,
+    "ground": true
+   },
+   "max": 120
+  },
+  {
+   "note": "high walk's step row 13",
+   "do": "steer",
+   "to": 13.8,
+   "until": {
+    "feetMax": 13.01,
+    "ground": true
+   },
+   "max": 120
+  },
+  {
+   "note": "onto the high walk row 11",
+   "do": "steer",
+   "to": 16.5,
    "until": {
     "feetMax": 11.01,
     "ground": true
    },
    "max": 120
+  },
+  {
+   "note": "high walk to the scaffold's row-11 step",
+   "do": "walk",
+   "until": {
+    "xMin": 32.2
+   },
+   "max": 600
   },
   {
    "note": "step row 9",
@@ -58,7 +86,8 @@
    "until": {
     "xMin": 67,
     "ground": true
-   }
+   },
+   "waitStep": 1
   },
   {
    "note": "to the ridge",

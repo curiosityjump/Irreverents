@@ -22,7 +22,7 @@
   {
    "player": "a",
    "from": 0,
-   "to": 1240,
+   "to": 72,
    "x": 1
   },
   {
@@ -35,382 +35,392 @@
   },
   {
    "player": "a",
-   "from": 128,
-   "to": 146,
+   "from": 72,
+   "to": 84,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 84,
+   "to": 102,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 196,
-   "to": 214,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 272,
-   "to": 274,
-   "hold": [
-    "attack"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 279,
-   "to": 297,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 296,
-   "to": 300,
-   "hold": [
-    "attack"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 320,
-   "to": 324,
-   "hold": [
-    "attack"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 354,
-   "to": 372,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 370,
-   "to": 374,
-   "hold": [
-    "attack"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 377,
-   "to": 395,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 445,
-   "to": 449,
-   "hold": [
-    "attack"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 527,
-   "to": 545,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 595,
-   "to": 613,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 755,
-   "to": 773,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 823,
-   "to": 841,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 886,
-   "to": 904,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 933,
-   "to": 937,
-   "hold": [
-    "attack"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 957,
-   "to": 961,
-   "hold": [
-    "attack"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 981,
-   "to": 985,
-   "hold": [
-    "attack"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 1130,
-   "to": 1134,
-   "hold": [
-    "attack"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 1154,
-   "to": 1155,
-   "hold": [
-    "attack"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 1240,
-   "to": 1258,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 1274,
-   "to": 1292,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 1308,
-   "to": 1326,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 1342,
-   "to": 1360,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 1376,
-   "to": 1394,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 1410,
-   "to": 1428,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 1444,
-   "to": 1462,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 1478,
-   "to": 1496,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 1512,
-   "to": 1530,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 1546,
-   "to": 1564,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 1580,
-   "to": 1598,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 1614,
-   "to": 1632,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 1622,
-   "to": 2318,
+   "from": 89,
+   "to": 92,
    "x": 1
   },
   {
    "player": "a",
-   "from": 1625,
-   "to": 1629,
-   "hold": [
-    "attack"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 1649,
-   "to": 1653,
-   "hold": [
-    "attack"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 1673,
-   "to": 1677,
-   "hold": [
-    "attack"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 1733,
-   "to": 1751,
+   "from": 118,
+   "to": 136,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 1774,
-   "to": 1792,
-   "hold": [
-    "jump"
-   ]
+   "from": 119,
+   "to": 1370,
+   "x": 1
   },
   {
    "player": "a",
-   "from": 1815,
-   "to": 1833,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 1864,
-   "to": 1868,
+   "from": 307,
+   "to": 309,
    "hold": [
     "attack"
    ]
   },
   {
    "player": "a",
-   "from": 1888,
-   "to": 1892,
-   "hold": [
-    "attack"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 1912,
-   "to": 1916,
-   "hold": [
-    "attack"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 1923,
-   "to": 1941,
+   "from": 314,
+   "to": 332,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 1998,
-   "to": 2016,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 2066,
-   "to": 2070,
+   "from": 331,
+   "to": 335,
    "hold": [
     "attack"
    ]
   },
   {
    "player": "a",
-   "from": 2163,
-   "to": 2181,
+   "from": 348,
+   "to": 366,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 2238,
-   "to": 2242,
+   "from": 355,
+   "to": 356,
    "hold": [
     "attack"
    ]
   },
   {
    "player": "a",
-   "from": 2247,
-   "to": 2265,
+   "from": 389,
+   "to": 407,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 454,
+   "to": 472,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 457,
+   "to": 461,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 515,
+   "to": 533,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 592,
+   "to": 610,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 752,
+   "to": 770,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 820,
+   "to": 838,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 883,
+   "to": 901,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 928,
+   "to": 946,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 930,
+   "to": 934,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 963,
+   "to": 967,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 969,
+   "to": 987,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1017,
+   "to": 1021,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1034,
+   "to": 1052,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1041,
+   "to": 1045,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1065,
+   "to": 1069,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1257,
+   "to": 1275,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1260,
+   "to": 1264,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1370,
+   "to": 1388,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1404,
+   "to": 1422,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1438,
+   "to": 1456,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1472,
+   "to": 1490,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1506,
+   "to": 1524,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1540,
+   "to": 1558,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1574,
+   "to": 1592,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1608,
+   "to": 1626,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1642,
+   "to": 1660,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1676,
+   "to": 1694,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1710,
+   "to": 1728,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1744,
+   "to": 1762,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1752,
+   "to": 2333,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 1755,
+   "to": 1759,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1779,
+   "to": 1783,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1803,
+   "to": 1807,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1805,
+   "to": 1823,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1905,
+   "to": 1923,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1908,
+   "to": 1912,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 2001,
+   "to": 2019,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 2037,
+   "to": 2055,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 2136,
+   "to": 2154,
    "hold": [
     "jump"
    ]
@@ -418,21 +428,13 @@
   {
    "player": "a",
    "from": 2292,
-   "to": 2296,
+   "to": 2310,
    "hold": [
-    "attack"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 2316,
-   "to": 2318,
-   "hold": [
-    "attack"
+    "jump"
    ]
   }
  ],
- "ticks": 2378,
+ "ticks": 2393,
  "expect": [
   {
    "fact": "event-where",
@@ -444,7 +446,7 @@
    },
    "between": [
     1,
-    2378
+    2393
    ],
    "count": [
     1,
@@ -459,7 +461,7 @@
    },
    "between": [
     0,
-    2378
+    2393
    ],
    "count": [
     0,
@@ -472,7 +474,7 @@
    "where": {},
    "between": [
     0,
-    2378
+    2393
    ],
    "count": [
     0,
@@ -487,7 +489,7 @@
    },
    "between": [
     0,
-    2378
+    2393
    ],
    "count": [
     2,
@@ -495,5 +497,5 @@
    ]
   }
  ],
- "//": "DRAFT (Step 22 3b): the inputs were recorded by `FIGHT_ON_THE_MOVE=1 node scripts/stage-bot.ts infiltrator fights` (a simple scripted player deciding each tick from the world: walk east, jump at a wall, a hole or a deep drop, walk off a step or a one-way ledge, climb the tower by jumping under its floors, punch a bad guy in front). Re-record with the same command when the quarry changes; the claims are what must hold. 'Sneaks' means no punch and no alarm: nobody of the stage stays unaware (unseen is false in every run: the main way passes the toll-keeper and the road's fighters in their view). Control (watched to fail, all ten): content/stages/iron-quarry.json's end box moved up out of reach (rows 1-2), and no stage-cleared (docs/plan/step-22.md)."
+ "//": "DRAFT (Step 22 3b): the inputs were recorded by `FIGHT_ON_THE_MOVE=1 HOP=1 HOP_AT=30 node scripts/stage-bot.ts infiltrator fights` (a simple scripted player deciding each tick from the world: walk east, jump at a wall, a hole or a deep drop, walk off a step or a one-way ledge, climb the tower by jumping under its floors, punch a bad guy in front). Re-record with the same command when the quarry changes; the claims are what must hold. 'Sneaks' means no punch and no alarm: nobody of the stage stays unaware (unseen is false in every run: the main way passes the toll-keeper and the road's fighters in their view). Control (watched to fail, all ten): content/stages/iron-quarry.json's end box moved up out of reach (rows 1-2), and no stage-cleared (docs/plan/step-22.md)."
 }

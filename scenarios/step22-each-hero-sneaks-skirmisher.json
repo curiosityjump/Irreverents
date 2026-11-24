@@ -1,7 +1,7 @@
 {
  "id": "step22-each-hero-sneaks-skirmisher",
  "gate": null,
- "proves": "Step 22 3b (DRAFT, docs/plan/step-22.md 'Builder notes'): the skirmisher alone, by a script that sneaks (never throws a punch, gets past rather than through), goes from the stage's entrance (the road just inside the doorway from the courtyard) through the road, the ridge, the tower and the depot to the stage's end, with every bad guy of the quarry placed, and clears the stage on its first try with no alarm raised (no horn call completed), as the skirmisher, with no game over",
+ "proves": "Step 22 3b (DRAFT, docs/plan/step-22.md 'Builder notes'): the skirmisher alone, by a script that sneaks (never throws a punch, gets past rather than through), goes from the stage's entrance (the road just inside the doorway from the courtyard) through the road, the ridge, the pit (down the chasm) and the depot (up through its cellar) to the stage's end, with every bad guy of the quarry placed, and clears the stage on its first try with no alarm raised (no horn call completed), as the skirmisher, with no game over",
  "room": "quarry-road",
  "placements": true,
  "placedRooms": [
@@ -22,295 +22,241 @@
   {
    "player": "a",
    "from": 0,
-   "to": 1385,
+   "to": 57,
    "x": 1
   },
   {
    "player": "a",
-   "from": 40,
-   "to": 58,
+   "from": 24,
+   "to": 41,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 137,
-   "to": 155,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 209,
-   "to": 227,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 278,
-   "to": 296,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 321,
-   "to": 339,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 364,
-   "to": 382,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 427,
-   "to": 445,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 525,
-   "to": 543,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 597,
-   "to": 615,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 767,
-   "to": 785,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 839,
-   "to": 857,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 906,
-   "to": 924,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 949,
-   "to": 967,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 992,
-   "to": 1010,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 1257,
-   "to": 1275,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 1385,
-   "to": 1403,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 1391,
-   "to": 1396,
+   "from": 59,
+   "to": 60,
    "x": -1
   },
   {
    "player": "a",
-   "from": 1421,
-   "to": 1439,
+   "from": 60,
+   "to": 77,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 1457,
-   "to": 1475,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 1493,
-   "to": 1511,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 1529,
-   "to": 1547,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 1565,
-   "to": 1583,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 1601,
-   "to": 1619,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 1637,
-   "to": 1655,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 1673,
-   "to": 1691,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 1709,
-   "to": 1727,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 1745,
-   "to": 1763,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 1781,
-   "to": 1799,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 1788,
-   "to": 2359,
+   "from": 96,
+   "to": 118,
    "x": 1
   },
   {
    "player": "a",
-   "from": 1843,
-   "to": 1861,
+   "from": 96,
+   "to": 113,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 1895,
-   "to": 1913,
+   "from": 120,
+   "to": 131,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 132,
+   "to": 288,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 262,
+   "to": 279,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 1938,
-   "to": 1956,
+   "from": 290,
+   "to": 298,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 298,
+   "to": 325,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 298,
+   "to": 315,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 2030,
-   "to": 2048,
+   "from": 327,
+   "to": 338,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 338,
+   "to": 1288,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 529,
+   "to": 546,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 2094,
-   "to": 2112,
+   "from": 618,
+   "to": 635,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 2207,
-   "to": 2225,
+   "from": 788,
+   "to": 805,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 2274,
-   "to": 2292,
+   "from": 860,
+   "to": 877,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1285,
+   "to": 1302,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1291,
+   "to": 1302,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 1305,
+   "to": 1312,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 1313,
+   "to": 1327,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1327,
+   "to": 1338,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 1340,
+   "to": 1369,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 1340,
+   "to": 1357,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1371,
+   "to": 1395,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 1371,
+   "to": 1388,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1397,
+   "to": 1407,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 1407,
+   "to": 1428,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 1407,
+   "to": 1424,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1431,
+   "to": 1442,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 1445,
+   "to": 1736,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 1533,
+   "to": 1550,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1693,
+   "to": 1710,
    "hold": [
     "jump"
    ]
   }
  ],
- "ticks": 2419,
+ "ticks": 1796,
  "expect": [
   {
    "fact": "event-where",
@@ -322,7 +268,7 @@
    },
    "between": [
     1,
-    2419
+    1796
    ],
    "count": [
     1,
@@ -337,7 +283,7 @@
    },
    "between": [
     0,
-    2419
+    1796
    ],
    "count": [
     0,
@@ -350,7 +296,7 @@
    "where": {},
    "between": [
     0,
-    2419
+    1796
    ],
    "count": [
     0,
@@ -365,7 +311,7 @@
    },
    "between": [
     0,
-    2419
+    1796
    ],
    "count": [
     0,
@@ -378,7 +324,7 @@
    "where": {},
    "between": [
     0,
-    2419
+    1796
    ],
    "count": [
     0,
@@ -386,5 +332,5 @@
    ]
   }
  ],
- "//": "DRAFT (Step 22 3b): the inputs were recorded by `HOP=1 HOP_AT=45 node scripts/stage-bot.ts skirmisher walks` (a simple scripted player deciding each tick from the world: walk east, jump at a wall, a hole or a deep drop, walk off a step or a one-way ledge, climb the tower by jumping under its floors, hop over a bad guy just ahead). Re-record with the same command when the quarry changes; the claims are what must hold. 'Sneaks' means no punch and no alarm: nobody of the stage stays unaware (unseen is false in every run: the main way passes the toll-keeper and the road's fighters in their view). Control (watched to fail, all ten): content/stages/iron-quarry.json's end box moved up out of reach (rows 1-2), and no stage-cleared (docs/plan/step-22.md)."
+ "//": "DRAFT (Step 22 3b): the inputs were recorded by `node scripts/stage-quiet.ts scripts/stage-routes/quiet-skirmisher.json` (Step 22 push 5 part 2: a small hero sneaks by the quarry's quiet way, the one scenarios/step22-unseen-clear.json takes: on the main way the tower top's two fighters knock a small hero through the depot door in front of its lookout; the run is unseen too, though only 'no punch and no alarm' is claimed). Re-record with the same command when the quarry changes; the claims are what must hold. 'Sneaks' means no punch and no alarm: nobody of the stage stays unaware (unseen is false in every run: the main way passes the toll-keeper and the road's fighters in their view). Control (watched to fail, all ten): content/stages/iron-quarry.json's end box moved up out of reach (rows 1-2), and no stage-cleared (docs/plan/step-22.md)."
 }

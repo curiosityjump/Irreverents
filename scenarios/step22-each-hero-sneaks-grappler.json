@@ -22,7 +22,7 @@
   {
    "player": "a",
    "from": 0,
-   "to": 1873,
+   "to": 89,
    "x": 1
   },
   {
@@ -35,296 +35,312 @@
   },
   {
    "player": "a",
-   "from": 189,
-   "to": 207,
+   "from": 89,
+   "to": 107,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 291,
-   "to": 309,
-   "hold": [
-    "jump"
-   ]
+   "from": 90,
+   "to": 97,
+   "x": 1
   },
   {
    "player": "a",
-   "from": 413,
-   "to": 431,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 537,
-   "to": 555,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 743,
-   "to": 761,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 845,
-   "to": 863,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 1082,
-   "to": 1100,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 1184,
-   "to": 1202,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 1281,
-   "to": 1299,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 1874,
-   "to": 2013,
+   "from": 100,
+   "to": 121,
    "x": -1
   },
   {
    "player": "a",
-   "from": 2013,
-   "to": 2031,
+   "from": 121,
+   "to": 139,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 2018,
-   "to": 2036,
+   "from": 122,
+   "to": 1444,
    "x": 1
   },
   {
    "player": "a",
-   "from": 2045,
-   "to": 2063,
+   "from": 418,
+   "to": 436,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 2077,
-   "to": 2095,
+   "from": 542,
+   "to": 560,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 2109,
-   "to": 2127,
+   "from": 748,
+   "to": 766,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 2141,
-   "to": 2159,
+   "from": 850,
+   "to": 868,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 2173,
-   "to": 2191,
+   "from": 1087,
+   "to": 1105,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 2205,
-   "to": 2223,
+   "from": 1189,
+   "to": 1207,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 2237,
-   "to": 2255,
+   "from": 1286,
+   "to": 1304,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 2269,
-   "to": 2287,
+   "from": 1444,
+   "to": 1462,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 2301,
-   "to": 2319,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 2333,
-   "to": 2351,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 2365,
-   "to": 2383,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 2373,
-   "to": 3724,
+   "from": 1445,
+   "to": 1448,
    "x": 1
   },
   {
    "player": "a",
-   "from": 2467,
-   "to": 2485,
+   "from": 1451,
+   "to": 1475,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 1476,
+   "to": 1494,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 2508,
-   "to": 2526,
+   "from": 1477,
+   "to": 1500,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 1500,
+   "to": 1518,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 2549,
-   "to": 2567,
+   "from": 1501,
+   "to": 2162,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 2006,
+   "to": 2024,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 2771,
-   "to": 2789,
+   "from": 2030,
+   "to": 2048,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 2882,
-   "to": 2900,
+   "from": 2093,
+   "to": 2111,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 2922,
-   "to": 2940,
+   "from": 2162,
+   "to": 2180,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 3034,
-   "to": 3052,
+   "from": 2184,
+   "to": 2202,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 3284,
-   "to": 3302,
+   "from": 2206,
+   "to": 2224,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 3344,
-   "to": 3362,
+   "from": 2228,
+   "to": 2246,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 3385,
-   "to": 3403,
+   "from": 2250,
+   "to": 2268,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 3426,
-   "to": 3444,
+   "from": 2272,
+   "to": 2290,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 3503,
-   "to": 3521,
+   "from": 2294,
+   "to": 2312,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 3615,
-   "to": 3633,
+   "from": 2316,
+   "to": 2334,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 2349,
+   "to": 2367,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 2350,
+   "to": 2377,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 2380,
+   "to": 2381,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 2381,
+   "to": 2399,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 2382,
+   "to": 2411,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 2413,
+   "to": 3051,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 2522,
+   "to": 2540,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 2574,
+   "to": 2592,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 2625,
+   "to": 2643,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 2772,
+   "to": 2790,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 3013,
+   "to": 3031,
    "hold": [
     "jump"
    ]
   }
  ],
- "ticks": 3784,
+ "ticks": 3111,
  "expect": [
   {
    "fact": "event-where",
@@ -336,7 +352,7 @@
    },
    "between": [
     1,
-    3784
+    3111
    ],
    "count": [
     1,
@@ -351,7 +367,7 @@
    },
    "between": [
     0,
-    3784
+    3111
    ],
    "count": [
     0,
@@ -364,7 +380,7 @@
    "where": {},
    "between": [
     0,
-    3784
+    3111
    ],
    "count": [
     0,
@@ -379,7 +395,7 @@
    },
    "between": [
     0,
-    3784
+    3111
    ],
    "count": [
     0,
@@ -392,7 +408,7 @@
    "where": {},
    "between": [
     0,
-    3784
+    3111
    ],
    "count": [
     0,

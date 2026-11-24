@@ -1,0 +1,223 @@
+{
+ "//": "DRAFT (Step 22 push 5): the quiet way, for node scripts/stage-quiet.ts: the segments the skirmisher plays to clear the Iron Quarry with no bad guy seeing it (scenarios/step22-each-hero-sneaks-skirmisher.json). Re-record with `node scripts/stage-quiet.ts scripts/stage-routes/quiet-skirmisher.json out.json` when the quarry changes. DRAFT (Step 22 push 5 part 2): the road now starts by the door: wait there until the road's lookout has turned east, then up the first ledge behind him, the step (row 13) and the high walk (row 11) over him to the scaffold. DRAFT (Step 22 push 5 part 2): a copy of quiet-infiltrator.json for the skirmisher, which also fits the depot's one-tile hole: its sneaking run (scenarios/step22-each-hero-sneaks-skirmisher.json) takes the quiet way, since on the main way the tower top's fighters knock a small hero through the depot door in front of its lookout.",
+ "hero": "skirmisher",
+ "segments": [
+  {
+   "note": "road to the door's last tiles",
+   "do": "walk",
+   "gaps": true,
+   "until": {
+    "room": "quarry-road",
+    "xMin": 9.3,
+    "ground": true
+   }
+  },
+  {
+   "note": "up the first ledge, behind the road's lookout",
+   "do": "steer",
+   "to": 13.5,
+   "wait": 480,
+   "until": {
+    "feetMax": 15.01,
+    "ground": true
+   },
+   "max": 120
+  },
+  {
+   "note": "high walk's step row 13",
+   "do": "steer",
+   "to": 13.8,
+   "until": {
+    "feetMax": 13.01,
+    "ground": true
+   },
+   "max": 120
+  },
+  {
+   "note": "onto the high walk row 11",
+   "do": "steer",
+   "to": 16.5,
+   "until": {
+    "feetMax": 11.01,
+    "ground": true
+   },
+   "max": 120
+  },
+  {
+   "note": "high walk to the scaffold's row-11 step",
+   "do": "walk",
+   "until": {
+    "xMin": 32.2
+   },
+   "max": 600
+  },
+  {
+   "note": "step row 9",
+   "do": "steer",
+   "to": 35.5,
+   "until": {
+    "feetMax": 9.01,
+    "ground": true
+   },
+   "max": 120
+  },
+  {
+   "note": "scaffold row 8",
+   "do": "steer",
+   "to": 38.8,
+   "until": {
+    "feetMax": 8.01,
+    "ground": true
+   },
+   "max": 120
+  },
+  {
+   "note": "scaffold to col 49",
+   "do": "walk",
+   "until": {
+    "xMin": 49
+   }
+  },
+  {
+   "note": "past the heavy, off the scaffold, over the gap",
+   "do": "walk",
+   "gaps": true,
+   "wait": 600,
+   "until": {
+    "xMin": 67,
+    "ground": true
+   },
+   "waitStep": 1
+  },
+  {
+   "note": "to the ridge",
+   "do": "walk",
+   "gaps": true,
+   "wait": 300,
+   "until": {
+    "room": "quarry-ridge"
+   }
+  },
+  {
+   "note": "ridge to the chasm",
+   "do": "walk",
+   "wait": 300,
+   "until": {
+    "room": "quarry-pit"
+   }
+  },
+  {
+   "note": "pit to the cellar",
+   "do": "walk",
+   "wait": 600,
+   "until": {
+    "room": "quarry-depot"
+   }
+  },
+  {
+   "note": "cellar to the hole",
+   "do": "walk",
+   "until": {
+    "xMin": 23.0,
+    "ground": true
+   }
+  },
+  {
+   "note": "onto the cellar step",
+   "do": "steer",
+   "to": 23.5,
+   "until": {
+    "feetMax": 17.01,
+    "ground": true
+   },
+   "max": 120
+  },
+  {
+   "note": "settle under the hole",
+   "do": "steer",
+   "to": 23.5,
+   "nohop": true,
+   "until": {
+    "xMin": 23.38,
+    "xMax": 23.62,
+    "ground": true
+   },
+   "max": 60
+  },
+  {
+   "note": "stand",
+   "do": "idle",
+   "until": {},
+   "max": 1
+  },
+  {
+   "note": "up the hole",
+   "do": "hop",
+   "dir": 0,
+   "until": {
+    "feetMax": 13.9
+   },
+   "max": 60
+  },
+  {
+   "note": "out of the hole",
+   "do": "steer",
+   "to": 22.3,
+   "until": {
+    "feetMax": 14.01,
+    "ground": true
+   },
+   "max": 60
+  },
+  {
+   "note": "onto the yard step",
+   "do": "steer",
+   "to": 24.7,
+   "wait": 300,
+   "until": {
+    "feetMax": 13.01,
+    "ground": true
+   },
+   "max": 120
+  },
+  {
+   "note": "step row 11",
+   "do": "steer",
+   "to": 25.9,
+   "until": {
+    "feetMax": 11.01,
+    "ground": true
+   },
+   "max": 120
+  },
+  {
+   "note": "step row 9",
+   "do": "steer",
+   "to": 27.9,
+   "until": {
+    "feetMax": 9.01,
+    "ground": true
+   },
+   "max": 120
+  },
+  {
+   "note": "plank row 8",
+   "do": "steer",
+   "to": 30.0,
+   "until": {
+    "feetMax": 8.01,
+    "ground": true
+   },
+   "max": 120
+  },
+  {
+   "note": "roof, gantry, the end",
+   "do": "walk",
+   "gaps": true,
+   "wait": 600,
+   "until": {
+    "cleared": true
+   }
+  }
+ ]
+}

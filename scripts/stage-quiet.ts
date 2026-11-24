@@ -29,7 +29,7 @@ for (const r of ROOMS) populateRoom(world, content, r);
 const hero = (w: any): any => w.entities.find((e: any) => e.id === 'p:a');
 
 type Press = { x: number; jump: boolean; attack: boolean; use: boolean };
-type Seg = { do: 'walk' | 'hop' | 'steer' | 'idle'; dir?: number; to?: number; until: any; wait?: number; max?: number; gaps?: boolean; jumpHold?: number; use?: boolean; note?: string; nohop?: boolean };
+type Seg = { do: 'walk' | 'hop' | 'steer' | 'idle'; dir?: number; to?: number; until: any; wait?: number; max?: number; gaps?: boolean; jumpHold?: number; use?: boolean; note?: string; nohop?: boolean; waitStep?: number; flap?: boolean };
 
 function untilHolds(w: any, u: any): boolean {
   const me = hero(w);
@@ -94,6 +94,8 @@ function makeCtl(seg: Seg) {
         still = 0;
       }
     }
+    // DRAFT (Step 22 push 5 part 2): `flap`: in the air, a fresh press of jump every 10 ticks (the flyer's flap).
+    if (seg.flap && !me.onGround && jumpLeft === 0) jump = t % 10 < 5;
     lastX = me.x;
     return { x, jump, attack: false, use: !!seg.use && t < 4 };
   };
@@ -144,10 +146,11 @@ for (const [i, seg] of (route.segments as Seg[]).entries()) {
   let found = -1;
   let last: any;
   const maxWait = seg.wait ?? 0;
-  for (let wt = 0; wt <= maxWait; wt += 6) {
+  for (let wt = 0; wt <= maxWait; wt += seg.waitStep ?? 6) {
     const trial = structuredClone(world);
     const r = run(trial, seg, wt, null);
     last = r;
+    if (process.env.QDEBUG) console.error(`  seg ${i} wait ${wt}: ${r.ok ? 'ok' : r.why}`);
     if (r.ok) {
       found = wt;
       break;

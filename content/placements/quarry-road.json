@@ -1,5 +1,5 @@
 {
-  "//": "DRAFT (Step 16 slices 1-2): loose rocks on the road to pick up and throw, clear of the doorway (columns 2-4) and the spawn (column 6); and the bad guys' toll post on the flat at columns 40-46: a counter (column 42) kept by a toll keeper who cannot swing (column 43, facing west, towards whoever comes up the road), with a second fighter (column 40, facing east) watching the counter. Paying the toll is the one deed that troubles a bad guy (content/rules/quarry.json). A heavy (column 58) further up. DRAFT (Step 22 push 5): the heavy now looks up the road for 2 s after every 5 s looking down it, the window in which a hero on the scaffold over him gets past unseen (docs/decisions-log.md 'The quarry has a quiet way'). Every column is a first guess; the ids are permanent.",
+  "//": "DRAFT (Step 16 slices 1-2): loose rocks on the road to pick up and throw, clear of the doorway (columns 2-4) and the spawn (column 6); and the bad guys' toll post on the flat at columns 40-46: a counter (column 42) kept by a toll keeper who cannot swing (column 43, facing west, towards whoever comes up the road), with a second fighter (column 40, facing east) watching the counter. Paying the toll is the one deed that troubles a bad guy (content/rules/quarry.json). A heavy (column 58) further up. DRAFT (Step 22 push 5): the heavy now looks up the road for 2 s after every 5 s looking down it, the window in which a hero on the scaffold over him gets past unseen (docs/decisions-log.md 'The quarry has a quiet way'). Every column is a first guess; the ids are permanent. DRAFT (Step 22 push 5 part 2, docs/decisions-log.md 'The road and the ridge have callers'): the road's caller, a lookout on the first ledge (column 18, looking east 3 s then west 4 s) with its horn post beside it (column 19): the first screen shows a bad guy and a signal post, and from the doorway he is too far to see you. Wait by the door while he looks west, then climb onto the high walk over him while he looks east.",
   "id": "quarry-road",
   "room": "quarry-road",
   "place": [
@@ -74,6 +74,37 @@
         {
           "wait": 2
         }
+      ]
+    },
+    {
+      "id": "road-lookout",
+      "character": "outpost-lookout",
+      "tile": [
+        18,
+        14
+      ],
+      "npc": "outpost-lookout",
+      "routine": [
+        {
+          "face": "right"
+        },
+        {
+          "wait": 3
+        },
+        {
+          "face": "left"
+        },
+        {
+          "wait": 4
+        }
+      ]
+    },
+    {
+      "id": "road-horn-post",
+      "character": "signal-post",
+      "tile": [
+        19,
+        14
       ]
     }
   ],

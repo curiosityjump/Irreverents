@@ -1,0 +1,76 @@
+{
+ "//": "DRAFT (Step 22 push 5 part 2, docs/decisions-log.md 'The road and the ridge have callers'): the road's horn. Only the lookout on the first ledge calls. Waves walk in from the sides at the entry tiles along the road's ledges (none in the doorway at columns 2-4), the nearest at least 6 tiles from where he saw the hero; a fighter, two, then a fighter and a heavy, the last row coming again for ever; at most 6 people in the room (6 are placed, so a wave fits only once some are beaten or gone). Numbers copied from the depot.",
+ "id": "quarry-road",
+ "room": "quarry-road",
+ "signaler": "road-horn-post",
+ "callers": [
+  "road-lookout"
+ ],
+ "leaveCold": 5,
+ "leaveIdle": 10,
+ "entry": [
+  46,
+  12
+ ],
+ "entries": [
+  [
+   14,
+   14
+  ],
+  [
+   26,
+   14
+  ],
+  [
+   33,
+   12
+  ],
+  [
+   41,
+   12
+  ],
+  [
+   46,
+   12
+  ]
+ ],
+ "entryAway": 6,
+ "bound": 6,
+ "callTime": 3,
+ "callAgain": 6,
+ "breakHits": 3,
+ "breakSpeed": 300,
+ "waves": [
+  [
+   {
+    "character": "outpost-fighter",
+    "npc": "outpost-fighter"
+   }
+  ],
+  [
+   {
+    "character": "outpost-fighter",
+    "npc": "outpost-fighter"
+   },
+   {
+    "character": "outpost-fighter",
+    "npc": "outpost-fighter"
+   }
+  ],
+  [
+   {
+    "character": "outpost-fighter",
+    "npc": "outpost-fighter"
+   },
+   {
+    "character": "heavy-fighter",
+    "npc": "heavy-fighter"
+   }
+  ]
+ ],
+ "announce": [
+  "Here they come!",
+  "Two more!",
+  "Here comes a heavy!"
+ ]
+}

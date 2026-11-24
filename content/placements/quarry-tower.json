@@ -1,5 +1,5 @@
 {
-  "//": "DRAFT (Step 16 slice 2): two fighters on the tower's top floor (columns 13 and 15), waiting for whoever climbs up. Columns are first guesses; ids are permanent.",
+  "//": "DRAFT (Step 16 slice 2): two fighters on the tower's top floor (columns 13 and 15), waiting for whoever climbs up. Columns are first guesses; ids are permanent. DRAFT (Step 22 push 5 part 2): a heavy on a ledge halfway up (column 14, row 13's ledge, facing the climb) and a fighter lower down (column 5, row 19's ledge, turning every 3 s), so the climb is a fight on the way up.",
   "id": "quarry-tower",
   "room": "quarry-tower",
   "place": [
@@ -34,6 +34,46 @@
         },
         {
           "wait": 5
+        }
+      ]
+    },
+    {
+      "id": "tower-heavy",
+      "character": "heavy-fighter",
+      "tile": [
+        14,
+        12
+      ],
+      "npc": "heavy-fighter",
+      "routine": [
+        {
+          "face": "left"
+        },
+        {
+          "wait": 5
+        }
+      ]
+    },
+    {
+      "id": "tower-fighter-3",
+      "character": "outpost-fighter",
+      "tile": [
+        5,
+        18
+      ],
+      "npc": "outpost-fighter",
+      "routine": [
+        {
+          "face": "right"
+        },
+        {
+          "wait": 3
+        },
+        {
+          "face": "left"
+        },
+        {
+          "wait": 3
         }
       ]
     }

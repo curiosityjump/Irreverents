@@ -1,5 +1,5 @@
 {
-  "//": "DRAFT (Step 16 slice 2): two fighters on the flat past the chasm (columns 36 and 40), and the brute alone on the ridge's east stretch (column 75), between the doorway down to the pit and the opening into the tower. Columns are first guesses; ids are permanent.",
+  "//": "DRAFT (Step 16 slice 2): two fighters on the flat past the chasm (columns 36 and 40), and the brute alone on the ridge's east stretch (column 75), between the doorway down to the pit and the opening into the tower. Columns are first guesses; ids are permanent. DRAFT (Step 22 push 5 part 2, docs/decisions-log.md 'The road and the ridge have callers'): the ridge's caller, a lookout on the bump past the dip (column 52, looking west 4 s then east 3 s) with its horn post beside it (column 53); its waves come from the tower side. Nobody passes a turning lookout on his own level, so a one-way walk runs high over him (content/rooms/quarry-ridge.json).",
   "id": "quarry-ridge",
   "room": "quarry-ridge",
   "place": [
@@ -52,6 +52,37 @@
         {
           "wait": 5
         }
+      ]
+    },
+    {
+      "id": "ridge-lookout",
+      "character": "outpost-lookout",
+      "tile": [
+        52,
+        7
+      ],
+      "npc": "outpost-lookout",
+      "routine": [
+        {
+          "face": "left"
+        },
+        {
+          "wait": 4
+        },
+        {
+          "face": "right"
+        },
+        {
+          "wait": 3
+        }
+      ]
+    },
+    {
+      "id": "ridge-horn-post",
+      "character": "signal-post",
+      "tile": [
+        53,
+        7
       ]
     }
   ]

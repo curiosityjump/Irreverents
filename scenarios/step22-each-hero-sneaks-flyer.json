@@ -1,7 +1,7 @@
 {
  "id": "step22-each-hero-sneaks-flyer",
  "gate": null,
- "proves": "Step 22 3b (DRAFT, docs/plan/step-22.md 'Builder notes'): the flyer alone, by a script that sneaks (never throws a punch, gets past rather than through), goes from the stage's entrance (the road just inside the doorway from the courtyard) through the road, the ridge, the tower and the depot to the stage's end, with every bad guy of the quarry placed, and clears the stage on its first try with no alarm raised (no horn call completed), as the flyer, with no game over",
+ "proves": "Step 22 3b (DRAFT, docs/plan/step-22.md 'Builder notes'): the flyer alone, by a script that sneaks (never throws a punch, gets past rather than through), goes from the stage's entrance (the road just inside the doorway from the courtyard) through the road, the ridge, the pit (down the chasm) and the depot (up through its cellar) to the stage's end, with every bad guy of the quarry placed, and clears the stage on its first try with no alarm raised (no horn call completed), as the flyer, with no game over",
  "room": "quarry-road",
  "placements": true,
  "placedRooms": [
@@ -22,132 +22,256 @@
   {
    "player": "a",
    "from": 0,
-   "to": 1814,
+   "to": 78,
    "x": 1
   },
   {
    "player": "a",
-   "from": 52,
-   "to": 70,
+   "from": 33,
+   "to": 50,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 178,
-   "to": 196,
+   "from": 70,
+   "to": 87,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 270,
-   "to": 288,
+   "from": 82,
+   "to": 93,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 98,
+   "to": 106,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 107,
+   "to": 135,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 107,
+   "to": 124,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 386,
-   "to": 404,
+   "from": 138,
+   "to": 144,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 144,
+   "to": 341,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 308,
+   "to": 325,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 424,
-   "to": 442,
+   "from": 344,
+   "to": 345,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 345,
+   "to": 376,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 345,
+   "to": 362,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 488,
-   "to": 506,
+   "from": 379,
+   "to": 388,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 388,
+   "to": 1164,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 635,
+   "to": 652,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 573,
-   "to": 591,
+   "from": 751,
+   "to": 768,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 698,
-   "to": 716,
+   "from": 972,
+   "to": 989,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 790,
-   "to": 808,
+   "from": 1064,
+   "to": 1081,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 1011,
-   "to": 1029,
+   "from": 1168,
+   "to": 1179,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 1184,
+   "to": 1185,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 1222,
+   "to": 1648,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 1644,
+   "to": 1661,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 1103,
-   "to": 1121,
+   "from": 1652,
+   "to": 1663,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 1668,
+   "to": 1676,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 1676,
+   "to": 1692,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 1189,
-   "to": 1207,
+   "from": 1695,
+   "to": 1696,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 1246,
-   "to": 1264,
+   "from": 1696,
+   "to": 1711,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 1714,
+   "to": 1725,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 1730,
+   "to": 1735,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 1735,
+   "to": 1762,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 1735,
+   "to": 1752,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 1296,
-   "to": 1314,
+   "from": 1765,
+   "to": 1776,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 1778,
+   "to": 1798,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 1778,
+   "to": 1795,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 1653,
-   "to": 1671,
-   "hold": [
-    "jump"
-   ]
+   "from": 1801,
+   "to": 1812,
+   "x": -1
   },
   {
    "player": "a",
-   "from": 1814,
+   "from": 1815,
+   "to": 1843,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 1815,
    "to": 1832,
    "hold": [
     "jump"
@@ -155,202 +279,54 @@
   },
   {
    "player": "a",
-   "from": 1819,
-   "to": 1826,
+   "from": 1847,
+   "to": 1852,
    "x": -1
   },
   {
    "player": "a",
    "from": 1852,
-   "to": 1870,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 1890,
-   "to": 1908,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 1928,
-   "to": 1946,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 1966,
-   "to": 1984,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 2004,
-   "to": 2022,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 2042,
-   "to": 2060,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 2080,
-   "to": 2098,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 2118,
-   "to": 2136,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 2156,
-   "to": 2174,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 2194,
-   "to": 2212,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 2232,
-   "to": 2250,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 2240,
-   "to": 3154,
+   "to": 1872,
    "x": 1
   },
   {
    "player": "a",
-   "from": 2439,
-   "to": 2457,
+   "from": 1852,
+   "to": 1869,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 2461,
-   "to": 2479,
+   "from": 1875,
+   "to": 1886,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 1892,
+   "to": 2263,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 2006,
+   "to": 2023,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 2483,
-   "to": 2501,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 2505,
-   "to": 2523,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 2534,
-   "to": 2552,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 2556,
-   "to": 2574,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 2597,
-   "to": 2615,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 2713,
-   "to": 2731,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 2802,
-   "to": 2820,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 2944,
-   "to": 2962,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 3058,
-   "to": 3076,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 3135,
-   "to": 3153,
+   "from": 2214,
+   "to": 2231,
    "hold": [
     "jump"
    ]
   }
  ],
- "ticks": 3214,
+ "ticks": 2323,
  "expect": [
   {
    "fact": "event-where",
@@ -362,7 +338,7 @@
    },
    "between": [
     1,
-    3214
+    2323
    ],
    "count": [
     1,
@@ -377,7 +353,7 @@
    },
    "between": [
     0,
-    3214
+    2323
    ],
    "count": [
     0,
@@ -390,7 +366,7 @@
    "where": {},
    "between": [
     0,
-    3214
+    2323
    ],
    "count": [
     0,
@@ -405,7 +381,7 @@
    },
    "between": [
     0,
-    3214
+    2323
    ],
    "count": [
     0,
@@ -418,7 +394,7 @@
    "where": {},
    "between": [
     0,
-    3214
+    2323
    ],
    "count": [
     0,
@@ -426,5 +402,5 @@
    ]
   }
  ],
- "//": "DRAFT (Step 22 3b): the inputs were recorded by `HOP=1 HOP_AT=30 node scripts/stage-bot.ts flyer walks` (a simple scripted player deciding each tick from the world: walk east, jump at a wall, a hole or a deep drop, walk off a step or a one-way ledge, climb the tower by jumping under its floors, hop over a bad guy just ahead). Re-record with the same command when the quarry changes; the claims are what must hold. 'Sneaks' means no punch and no alarm: nobody of the stage stays unaware (unseen is false in every run: the main way passes the toll-keeper and the road's fighters in their view). Control (watched to fail, all ten): content/stages/iron-quarry.json's end box moved up out of reach (rows 1-2), and no stage-cleared (docs/plan/step-22.md)."
+ "//": "DRAFT (Step 22 3b): the inputs were recorded by `node scripts/stage-quiet.ts scripts/stage-routes/quiet-flyer.json` (Step 22 push 5 part 2: a small hero sneaks by the quarry's quiet way, the one scenarios/step22-unseen-clear.json takes: on the main way the tower top's two fighters knock a small hero through the depot door in front of its lookout; the run is unseen too, though only 'no punch and no alarm' is claimed). Re-record with the same command when the quarry changes; the claims are what must hold. 'Sneaks' means no punch and no alarm: nobody of the stage stays unaware (unseen is false in every run: the main way passes the toll-keeper and the road's fighters in their view). Control (watched to fail, all ten): content/stages/iron-quarry.json's end box moved up out of reach (rows 1-2), and no stage-cleared (docs/plan/step-22.md)."
 }

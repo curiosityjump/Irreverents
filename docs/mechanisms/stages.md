@@ -151,7 +151,7 @@ with the run seeded through `world.stages` so its time lands one tick either
 side of each threshold; each pair is the other's control: move `started` when
 the thresholds are re-measured). The fact `tile` (Step 22) reads a room's tile
 as the world has it; the fact `stage` (push 3) reads `world.stages[id]`'s
-state, tries and best. `step22-restart-on-game-over.json` (item (b)). `step22-unseen-clear.json` (push 5): the infiltrator clears with `unseen` true by the quiet way (the road's scaffold over the toll, the ridge's chasm, the pit, the depot's cellar and hole, the plank to the strongroom's roof and the gantry into the end; `docs/decisions-log.md`, "The quarry has a quiet way"); control: the scaffold's walk taken out by a tiles override, and no unseen clear. Its inputs come from `scripts/stage-quiet.ts`, a measuring tool like `stage-bot.ts`: it plays a list of segments (`scripts/stage-routes/quiet-infiltrator.json`: walk, hop, steer, idle, each until a condition on room, column or feet row) and before each segment tries waits of 0, 6, 12... ticks, keeping the first after which the segment ends with the stage's `seen` still false and no heart lost. `step22-each-hero-{fights,sneaks}-{hero}.json` (3b): each of the five
+state, tries and best. `step22-restart-on-game-over.json` (item (b)). `step22-unseen-clear.json` (push 5): the infiltrator clears with `unseen` true by the quiet way (the road's scaffold over the toll, the ridge's chasm, the pit, the depot's cellar and hole, the plank to the strongroom's roof and the gantry into the end; `docs/decisions-log.md`, "The quarry has a quiet way"); control: the scaffold's walk taken out by a tiles override, and no unseen clear. Its inputs come from `scripts/stage-quiet.ts`, a measuring tool like `stage-bot.ts`: it plays a list of segments (`scripts/stage-routes/quiet-infiltrator.json`: walk, hop, steer, idle, each until a condition on room, column or feet row) and before each segment tries waits of 0, 6, 12... ticks, keeping the first after which the segment ends with the stage's `seen` still false and no heart lost. A segment may set `waitStep` (the step between waits tried; the road heavy's turn needs 1) and `flap` (a fresh jump press every 10 ticks in the air: the flyer up the depot's hole). `step22-each-hero-{fights,sneaks}-{hero}.json` (3b): each of the five
 roster heroes alone, from the entrance to the end with every bad guy
 placed, by a script that fights (two or more knocked flat) and by one that
 sneaks (no punch, no horn call completed); each clears on its first try as
@@ -160,12 +160,24 @@ reach). Their inputs were recorded by `scripts/stage-bot.ts`, a measuring
 tool and not a check: a simple scripted player who decides each tick from
 the world (walk east, jump at a wall, a hole or a deep drop, walk off a
 step or a one-way ledge, climb the tower under its floors; optionally punch
-who is in front or hop over who is just ahead). The command that made each
-is in its `//`; re-record when the quarry changes. **The star times come
-from these runs** (`DRAFT:`): best 45 s and good 60 s, between the fastest
-(38.6 s), a good (51.6 s) and a slow (62.0 s) scripted clear. Nobody is
-unseen in any of the ten: the main way passes the road's toll-keeper and
-fighters in their view. The
+who is in front or hop over who is just ahead). Since Step 22 push 5 part
+2 it also waits by the road's door until the road's lookout has just turned
+east and climbs the high walk over him (both modes), and, walking, climbs
+the ridge's way over its lookout, hops the tower top's two fighters, and
+waits inside the depot's door for its lookout to turn east before climbing
+the steps by the door onto the high ledge (`STAIRS` in the script). The
+three small heroes' `sneaks` runs (infiltrator, skirmisher, flyer) are
+instead recorded by `scripts/stage-quiet.ts` on the quiet way
+(`scripts/stage-routes/quiet-<hero>.json`): on the main way the tower top's
+fighters knock a small hero through the depot door in front of its
+lookout. The command that made each is in its `//`; re-record when the
+quarry changes. **The star times come from these runs** (`DRAFT:`): best
+45 s and good 56 s (Step 22 push 5 part 2; good was 60 s), between the
+fastest (28.9 s, the skirmisher by the quiet way), a good (53.1 s, the
+flyer fighting) and a slow (58.6 s, the brawler fighting) scripted clear.
+The three small heroes' sneaks are unseen (the quiet way); the other seven
+are not: the main way passes the road's toll-keeper and fighters in their
+view. The
 e2e's `stage-*` facts (`scripts/e2e/stage.ts`): the screen at three phone
 sizes inside the view, Continue in the safe area and reachable, the stick
 resting while it is up (`stage-held`, the control), Continue giving it

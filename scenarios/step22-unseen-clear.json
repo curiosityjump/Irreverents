@@ -1,7 +1,7 @@
 {
  "id": "step22-unseen-clear",
  "gate": null,
- "proves": "Step 22 push 5 (DRAFT, docs/plan/step-22.md 'Builder notes'; the lead's ruling that an unseen clear must exist): the infiltrator alone, with every bad guy of the quarry placed, clears the stage from its entrance with nobody of the stage ever seeing it (stage-cleared with unseen true), on its first try, with no punch thrown, no heart lost and no horn call even started. The quiet way: up the road's ledges onto the scaffold over the toll (rows 11, 9 and 8), along it over the toll-keeper and his watcher, then, once the road's heavy has turned to look up the road, off its east end behind him and on to the ridge; along the ridge to the chasm and down it into the pit, past the pit's two (who look at each other, west of the landing) and through the east door into the depot's cellar; up the one-tile step under the hole at column 23 and through it into the yard's middle stretch (hidden from all); up the yard step and the two one-way steps (columns 25-28) onto the plank to the strongroom's roof, over the roof's hole and down onto the gantry (row 9) above the far yard and its patrol, and off its east end into the end. Control (watched to fail, docs/plan/step-22.md): the scaffold's row 8 (columns 38-62) made empty by a tiles override, the same inputs, and no unseen clear.",
+ "proves": "Step 22 push 5 (DRAFT, docs/plan/step-22.md 'Builder notes'; the lead's ruling that an unseen clear must exist): the infiltrator alone, with every bad guy of the quarry placed, clears the stage from its entrance with nobody of the stage ever seeing it (stage-cleared with unseen true), on its first try, with no punch thrown, no heart lost and no horn call even started. The quiet way: from the road's door, up the first ledge behind the road's lookout while he looks east, the step and the high walk over him (rows 13 and 11), onto the scaffold over the toll (rows 11, 9 and 8), along it over the toll-keeper and his watcher, then, once the road's heavy has turned to look up the road, off its east end behind him and on to the ridge; along the ridge to the chasm and down it into the pit, past the pit's two (who look at each other, west of the landing) and through the east door into the depot's cellar; up the one-tile step under the hole at column 23 and through it into the yard's middle stretch (hidden from all); up the yard step and the two one-way steps (columns 25-28) onto the plank to the strongroom's roof, over the roof's hole and down onto the gantry (row 9) above the far yard and its patrol, and off its east end into the end. Control (watched to fail, docs/plan/step-22.md): the scaffold's row 8 (columns 38-62) made empty by a tiles override, the same inputs, and no unseen clear.",
  "room": "quarry-road",
  "placements": true,
  "placedRooms": [
@@ -22,103 +22,89 @@
   {
    "player": "a",
    "from": 0,
-   "to": 229,
+   "to": 53,
    "x": 1
   },
   {
    "player": "a",
-   "from": 38,
-   "to": 55,
+   "from": 22,
+   "to": 39,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 128,
-   "to": 145,
+   "from": 55,
+   "to": 72,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 196,
-   "to": 213,
+   "from": 88,
+   "to": 108,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 88,
+   "to": 105,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 229,
-   "to": 241,
+   "from": 111,
+   "to": 120,
    "x": -1
   },
   {
    "player": "a",
-   "from": 229,
-   "to": 246,
-   "hold": [
-    "jump"
-   ]
+   "from": 121,
+   "to": 267,
+   "x": 1
   },
   {
    "player": "a",
    "from": 243,
-   "to": 253,
-   "x": 1
-  },
-  {
-   "player": "a",
-   "from": 255,
-   "to": 262,
-   "x": -1
-  },
-  {
-   "player": "a",
-   "from": 262,
-   "to": 288,
-   "x": 1
-  },
-  {
-   "player": "a",
-   "from": 262,
-   "to": 279,
+   "to": 260,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 290,
-   "to": 295,
+   "from": 269,
+   "to": 276,
    "x": -1
   },
   {
    "player": "a",
-   "from": 295,
-   "to": 318,
+   "from": 276,
+   "to": 301,
    "x": 1
   },
   {
    "player": "a",
-   "from": 295,
+   "from": 276,
+   "to": 293,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 303,
    "to": 312,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 320,
-   "to": 329,
    "x": -1
   },
   {
    "player": "a",
-   "from": 332,
-   "to": 413,
+   "from": 313,
+   "to": 393,
    "x": 1
   },
   {
@@ -358,5 +344,5 @@
    ]
   }
  ],
- "//": "DRAFT (Step 22 push 5): the inputs were recorded by `node scripts/stage-quiet.ts scripts/stage-routes/quiet-infiltrator.json` (segments of walking, hopping and steering, each preceded where needed by the shortest wait after which nobody sees the hero: 6 s on the scaffold for the road heavy to turn). Re-record with the same command when the quarry changes; the claims are what must hold."
+ "//": "DRAFT (Step 22 push 5): the inputs were recorded by `node scripts/stage-quiet.ts scripts/stage-routes/quiet-infiltrator.json` (segments of walking, hopping and steering, each preceded where needed by the shortest wait after which nobody sees the hero: none by the road's door, where its lookout was already looking east; 6.3 s on the scaffold for the road heavy to turn, searched tick by tick). Re-record with the same command when the quarry changes; the claims are what must hold."
 }

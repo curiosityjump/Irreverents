@@ -767,3 +767,42 @@ before you quote it.
 - `npm run check` ok, `npm run gates` 6 of 6, re-run by me.
 - Looked at `push5-sign-stage-upright-390x664.png`: "Iron Quarry" with three empty stars under its pieces row, legible on the sign board.
 - No control: a drawing with no check of its own. It is accepted on the shot.
+
+### Push 5, part 2: the callers, more bad guys, the runs re-recorded (sixth builder, `session_017WiGzFCTDPbq1AGbnZ5Gqx`)
+
+- **Placed** (`docs/decisions-log.md`, "The road and the ridge have callers"):
+  - **road:** `road-lookout` [18,14] (east 3 s, west 4 s) and `road-horn-post` [19,14]; outpost `quarry-road` as the fifth builder measured. The high walk: one-way row 13 (13-14) and row 11 (15-30).
+  - **ridge:** `ridge-lookout` [52,7] (west 4 s, east 3 s) and `ridge-horn-post` [53,7]; outpost `quarry-ridge` (waves FH, FFH, BF from the tower side, bound 9). **The way over him:** a one-way step at row 5 (41-43) and a walk at row 3 (44-62) to the shelf and the tower-top opening. Row 4 was tried first; a jump from the flat (row 7) lands on it and sent `step16-room-ridge-*` out through the shelf. The walk stops a tile short of the shelf. Even so, `step16-back-grappler`'s jump off the shelf lands on it and it reaches the road door about 40 ticks early. **Re-timed:** its walk west now ends at 1994 (was 2011); it passes at 1990-1998, and every claim is unchanged.
+  - **tower:** `tower-heavy` [14,12] facing west and `tower-fighter-3` [5,18] turning every 3 s.
+  - **depot:** 4 placed, as before; its second wave is now two fighters and a brute.
+  - **pit:** the brute at [6,18] facing west broke `step16-mood-heavy-hit` (it fights the grappler), so I left it out, as ruled.
+  - Bad guys now: road 4, ridge 4, tower 4, depot 4 + waves, pit 2.
+- **The ten runs, re-recorded** (clear in ticks; all first try, no hero out, no game over):
+
+| hero | fights | sneaks |
+|---|---|---|
+| grappler | 3248 | 3050 (main way, up the depot's ledge) |
+| infiltrator | 2332 (now `HOP=1 HOP_AT=30`) | 2011, the quiet way, unseen |
+| flyer | 3186 | 2262, the quiet way, unseen |
+| brawler | 3518 (one call completed; fights may) | 3469 (main way) |
+| skirmisher | 3049 | 1735, the quiet way, unseen |
+
+- **What the bot learned** (`scripts/stage-bot.ts`, `STAIRS`):
+  - Wait by the road door for its lookout to turn east, then climb the high walk (both modes).
+  - Walking only: over the ridge's lookout; hop the tower top's two fighters; wait inside the depot door for its lookout to turn east, then climb the door steps onto the high ledge (`step16-zero-alarm-ledge`'s way).
+  - The old sneak runs crossed the depot lookout's floor by luck of timing.
+- **Small heroes sneak by the quiet way:** on the main way the tower top's fighters punch them through the depot door in front of its lookout, and a hero runs out of hearts.
+  - They now run `scripts/stage-quiet.ts scripts/stage-routes/quiet-{infiltrator,skirmisher,flyer}.json`, and every claim is kept.
+  - The flyer's route drops straight down the chasm (it floats into the ridge fighters' view otherwise) and flaps up the hole (the new `flap` segment option).
+- **`step22-unseen-clear`** re-recorded: 2011 ticks, unseen, 3 stars. **Doubt, for the owner by playing:** the infiltrator's pass over the road heavy is a window of under 6 ticks (`waitStep` 1 found it). He sees the scaffold at exactly his 40 px band edge, whichever way he faces. A wider window would need the scaffold a pixel higher, or the heavy's sight shorter.
+- **Star times:** best 45 s (kept), good 56 s (was 60). The `step22-stars-edges-{good,good-over,tries}` moved with them (started -2101/-2102).
+  - The threshold runs: fastest 1735 ticks (skirmisher sneaks, 28.9 s), good 3186 (flyer fights, 53.1 s), slow 3518 (brawler fights, 58.6 s).
+- **Shots** (`step-22-shots/push5-*`, all looked at, legible): the first screen sideways (the lookout, his horn and his sight band, the hero out of it), the road's and the ridge's high walks, and the wings' pedestal at depot [38,18] sideways and upright.
+  - **Doubt:** upright (about 12 tiles wide) the road's lookout is not on the first screen, even three tiles in (`push5-first-steps-caller-upright-390x664.png`). To be, he would stand where his sight reaches the door. Sideways he is.
+- **Controls, watched failing:**
+  - The end box moved out of reach: all ten runs and the unseen clear fail.
+  - The scaffold's row 8 emptied by a tiles override: no unseen clear.
+  - The road's high walk (row 11) emptied: no unseen clear, because the road's lookout calls.
+  - The ridge's way over (rows 3 and 5) emptied: the grappler's and the brawler's sneaks fail, with the ridge's calls completed.
+- **Tool:** `scripts/scenario-trace.ts <id> [every]` prints where a scenario's body goes, tick by tick.
+- **Not done:** `stage-beaten-entrance` made reliable inside the full e2e (item 2). Still opt-in.

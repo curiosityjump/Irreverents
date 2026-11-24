@@ -1,0 +1,84 @@
+{
+ "//": "DRAFT (Step 22 push 5 part 2, docs/decisions-log.md 'The road and the ridge have callers'): the ridge's horn. Only the lookout on the bump (column 52) calls. Waves walk in from the tower side: the entry tiles from the bump east to the tower's opening, the nearest at least 6 tiles from where he saw the hero; a fighter and a heavy, two fighters and a heavy, then a brute and a fighter, the last row coming again for ever; at most 9 people in the room (4 are placed). Other numbers copied from the depot.",
+ "id": "quarry-ridge",
+ "room": "quarry-ridge",
+ "signaler": "ridge-horn-post",
+ "callers": [
+  "ridge-lookout"
+ ],
+ "leaveCold": 5,
+ "leaveIdle": 10,
+ "entry": [
+  77,
+  9
+ ],
+ "entries": [
+  [
+   49,
+   7
+  ],
+  [
+   56,
+   8
+  ],
+  [
+   64,
+   9
+  ],
+  [
+   70,
+   9
+  ],
+  [
+   77,
+   9
+  ]
+ ],
+ "entryAway": 6,
+ "bound": 9,
+ "callTime": 3,
+ "callAgain": 6,
+ "breakHits": 3,
+ "breakSpeed": 300,
+ "waves": [
+  [
+   {
+    "character": "outpost-fighter",
+    "npc": "outpost-fighter"
+   },
+   {
+    "character": "heavy-fighter",
+    "npc": "heavy-fighter"
+   }
+  ],
+  [
+   {
+    "character": "outpost-fighter",
+    "npc": "outpost-fighter"
+   },
+   {
+    "character": "outpost-fighter",
+    "npc": "outpost-fighter"
+   },
+   {
+    "character": "heavy-fighter",
+    "npc": "heavy-fighter"
+   }
+  ],
+  [
+   {
+    "character": "brute",
+    "npc": "brute"
+   },
+   {
+    "character": "outpost-fighter",
+    "npc": "outpost-fighter"
+   }
+  ]
+ ],
+ "announce": [
+  "Here they come!",
+  "More of them!",
+  "Here comes a brute!"
+ ]
+}

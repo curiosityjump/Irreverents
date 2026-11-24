@@ -49,7 +49,7 @@ that could trap someone.
   (`step16-hidden-cave-*`). The heroes' secrets: the flyer's ledge on the
   road, the infiltrator's crawl on the ridge, the grappler's rock and the
   depot cellar's cracked wall (`step16-secret-*`); the pit's ledge eleven
-  tiles up is a "not yet" (`step16-not-yet-*`). `INTENT:` the ridge's
+  tiles up is a "not yet" (`step16-not-yet-*`). Since Step 22 push 5 part 2 (`DRAFT:`) the road and the ridge each have a lookout who calls, and a one-way way over him: the road's high walk (row 13 at columns 13-14, row 11 at 15-30, joining the scaffold over the toll) and the ridge's (a step at row 5, 41-43, then a walk at row 3, 44-62: a tile above the shelf so a jump from the flat cannot reach it, and a tile short of it so a hero walking west off the shelf drops to the floor as before, though a jump there lands on it, `step16-back-grappler` re-timed); the ridge's walk goes on along the shelf and through the tower-top opening onto the tower's top floor. `INTENT:` the ridge's
   crawl pocket has a hole into the pit, so anyone who lands there can
   leave; do not close it.
 

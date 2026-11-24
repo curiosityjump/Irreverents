@@ -1,6 +1,7 @@
 {
   "id": "step16-back-grappler",
   "proves": "Step 16 signals 2 and 3: the grappler alone goes back another way: from the top of the tower west through the hidden opening (marked hidden in the tower) onto the ridge's shelf, down, west over the ridge and down the road, and through the doorway into the courtyard",
+  "//": "Re-timed (Step 22 push 5 part 2): the ridge's new high walk over its lookout (row 3, columns 44-62) catches this run's jump off the shelf's west end, so the grappler crosses the ridge on it and reaches the road's doorway about 40 ticks sooner; the walk west now ends at tick 1994 (was 2011), at the doorway, so the press up still goes through it. Every claim is as it was; passes with 1990-1998.",
   "room": "quarry-tower",
   "players": [
     {
@@ -13,7 +14,7 @@
     {
       "player": "a",
       "from": 0,
-      "to": 2011,
+      "to": 1994,
       "x": -1
     },
     {
