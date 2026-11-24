@@ -18,25 +18,40 @@ import { report } from './report.ts';
 const STICK_ICONS = { l: 'ui/touch/left.png', r: 'ui/touch/right.png' };
 
 /**
+ * DRAFT: the button set drawn first (brief owner-better-buttons, 2026-11-24):
+ * the controls re-cut from the approved P07 UI atlas as one family
+ * (tools/art/touch/cut.py). For a picture `ui/.../<name>.png` the set's
+ * `<SET><name>.png` is tried first; if it is not there, the picture the
+ * content names (today's U08 buttons) is used, so removing the folder, or
+ * setting this to '', brings today's buttons back with no other change.
+ */
+const SET = 'ui/touch/p07/';
+
+/**
  * Puts a picture on a control once it has loaded: a 48x24 strip, normal
- * then pressed (index.html `.icon`). Until then, and for good if it never
+ * then pressed (index.html `.icon`). Until then, and for good if none
  * loads, the control keeps what it showed before (a label, or the arrow).
  * The picture is a background on a child that takes no touches: a
  * pointerdown on an <img> starts a drag or a long-press menu on iPhone Safari.
  */
 function addIcon(el: HTMLElement, file: string): void {
-  const url = `assets/${file}`;
   const icon = document.createElement('span');
   icon.className = 'icon';
   el.append(icon);
-  const probe = new Image();
-  probe.onload = () => {
-    icon.style.backgroundImage = `url("${url}")`;
-    el.classList.add('art');
+  const base = file.slice(file.lastIndexOf('/') + 1);
+  const tries = SET ? [`${SET}${base}`, file] : [file];
+  const next = (i: number): void => {
+    const url = `assets/${tries[i]}`;
+    const probe = new Image();
+    probe.onload = () => {
+      icon.style.backgroundImage = `url("${url}")`;
+      el.classList.add('art');
+    };
+    // Not in the page, so its failure reaches no listener: say so here, once the last one fails.
+    probe.onerror = () => (i + 1 < tries.length ? next(i + 1) : report('load', `img failed to load: ${url}`));
+    probe.src = url;
   };
-  // Not in the page, so its failure reaches no listener: say so here.
-  probe.onerror = () => report('load', `img failed to load: ${url}`);
-  probe.src = url;
+  next(0);
 }
 
 /**

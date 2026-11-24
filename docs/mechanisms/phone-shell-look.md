@@ -65,7 +65,20 @@ into their homes.
   "Doorways by Use" a tap of Use does it too, and the Use button reads
   "Go in" there: `showGoIn`, `.go-in`) or attack or throw upwards. A small chevron above the pad (not over the view) shows
   it and lights while pushed.
-- **A button with no picture** (today: Use) is a round night-coloured plate
+- **The pictures (2026-11-24, brief owner-better-buttons):** one family
+  cut from P07's UI atlas (`tools/art/touch/cut.py`): round lilac plates
+  (boot for Jump, sword for Hit, star for Switch; Grab and Use carry
+  today's hands on a plate with its glyph re-authored away) and the d-pad's
+  keys for the stick. `touch.ts` tries `assets/ui/touch/p07/<name>.png`
+  first and the content's own picture after (`SET`): delete the folder and
+  the U08 buttons are back. **A press shows the pressed half at once**
+  (`.on` on pointerdown, before any answer from the server). **A button a
+  press would do nothing with is dimmed** (`.idle`, `src/client/button-idle.ts`,
+  `DRAFT:`): Use when the Use arbiter has no answer and you ride nothing;
+  Switch when no member is free or you cannot act. Jump, Hit and Grab never
+  dim. Contact sheet: `docs/plan/step-5-shots/buttons/`. Paint over the
+  view fell (667×375: 2.79% → 2.54%).
+- **A button with no picture** (none today: Use has one since 2026-11-24) is a round night-coloured plate
   with a pale rim and its word, except over the view, where only the faint
   word is painted (the paint limit in `scripts/e2e/phone.ts`).
 - **The surround** is the art contract's night ramp: a dark gradient with a

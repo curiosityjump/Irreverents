@@ -423,7 +423,11 @@ all 91 ok; paint over the view 667×375 2.54% (was 2.79%), 736×414 1.65%,
 pressed half on touchstart and the normal half on release; with
 `assets/ui/touch/p07/` refused (404), every control falls back to today's
 picture (the control run); at the start spot Use is dimmed and nothing
-else is. **Not verified:** on a real iPhone; Switch's dimming with a full
+else is. **Flake seen:** at 2974564 (rebased on d2949ae) `plates-stone`,
+`plates-stone-held`, `plates-pocket` failed in 1 of 3 e2e runs (page B
+stood at x 124, the cellar doorway at 115, and three Use taps never went
+down) with `cantina-row`; the other two runs were all ok, and d2949ae alone
+passed them once. Not loosened; logged for the flakes brief. **Not verified:** on a real iPhone; Switch's dimming with a full
 party (rule mirrors `verbs/switch.ts`, not driven).
 
 

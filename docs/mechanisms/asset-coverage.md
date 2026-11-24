@@ -29,10 +29,10 @@ Rows go stale as the look3 lanes push: re-check a row against the current file b
 | Interactive looks (props) | 29 | 20 | 7 | 0 |
 | Decor | 43 | 12 | 25 | 6 |
 | Effects | 9 | 5 | 4 | 0 |
-| UI and HUD | 44 | 9 | 31 | 4 |
+| UI and HUD | 44 | 10 | 30 | 4 |
 | Sound effects | 42 | 29 | 7 | 6 |
 | Music | 8 | 0 | 0 | 8 |
-| **All** | **229** | **95** | **98** | **30** |
+| **All** | **229** | **96** | **97** | **30** |
 
 ## Path keys
 
@@ -276,17 +276,17 @@ Boxes are (x0,y0,x1,y1) sheet px. Cuts live in tools/art/props/drive.py; make.py
 
 ## UI and HUD
 
-U08-01 buttons are delivered and byte-identical in assets/ui/touch/. Everything else is a cut from P07's UI atlas, P05's HUD boards, A00-02/03/05 and P04's hall atlas.
+U08-01 buttons are delivered and byte-identical in assets/ui/touch/; since 2026-11-24 the phone draws the P07 re-cut in assets/ui/touch/p07/ first (tools/art/touch/cut.py) and falls back to them. Everything else is a cut from P07's UI atlas, P05's HUD boards, A00-02/03/05 and P04's hall atlas.
 
 | Asset id | Status | Approved source (path + region) or missing-list id | Lane to switch it |
 |---|---|---|---|
-| `ui:touch-left` | uses-approved | `U08/left-states-48x24.png` (normal 0-24, pressed 24-48). | - |
-| `ui:touch-right` | uses-approved | `U08/right-states-48x24.png`. | - |
-| `ui:touch-jump` | uses-approved | `U08/jump-states-48x24.png`. | - |
-| `ui:touch-attack` | uses-approved | `U08/attack-states-48x24.png`. | - |
-| `ui:touch-grab` | uses-approved | `U08/grab-throw-states-48x24.png` (purple open hand). | - |
-| `ui:touch-special` | uses-approved | `U08/special-states-48x24.png` (used for Switch hero). | - (optional: `P05/p05-ui-hero-party-hud-source.png` party-swap glyph (584,24,768,145) if Switch should read as a swap) |
-| `look:ui-use` | no-approved-source | MA-01 (the plate is U08's; the glyph has no approved source) | look3-props / the touch code's owner, once delivered (assets/ui/use.png). |
+| `ui:touch-left` | uses-approved | `P07/irreverents-pixel-ui-atlas.png` d-pad left key (24,918,104,1002) → `assets/ui/touch/p07/left.png`; pressed derived (DRAFT). Fallback: `U08/left-states-48x24.png` (normal 0-24, pressed 24-48). Alt: P07 arrow key (956,915,1045,1008). | - |
+| `ui:touch-right` | uses-approved | P07 d-pad right key (180,918,260,1002) → `p07/right.png`. Fallback: `U08/right-states-48x24.png`. | - |
+| `ui:touch-jump` | uses-approved | P07 round boot button, centre (352,965) r 80 → `p07/jump.png`. Fallback: `U08/jump-states-48x24.png`. | - |
+| `ui:touch-attack` | uses-approved | P07 round sword button, centre (510,963) r 80 → `p07/attack.png`. Fallback: `U08/attack-states-48x24.png`. | - |
+| `ui:touch-grab` | uses-approved | P07 round plate (re-authored from the three round buttons, glyphs removed) + U08's purple hand → `p07/grab.png`. No P07-style grab glyph: to the missing list (sent to Vision Partner 2026-11-24). Fallback: `U08/grab-throw-states-48x24.png`. | - |
+| `ui:touch-special` | uses-approved | P07 round star button, centre (666,963) r 80 → `p07/special.png` (Switch hero). Fallback: `U08/special-states-48x24.png`. P05's swap arrows (353,284,431,344) and party-swap glyph (584,24,768,145) do not read at 24 px (step-5-shots/buttons/): a readable swap glyph is on the missing list (sent 2026-11-24). | - |
+| `look:ui-use` | no-approved-source | MA-01 (the glyph has no approved source; on the phone it now sits on the P07 plate, `assets/ui/touch/p07/use.png`, cut from `assets/ui/use.png`'s hand) | look3-props / the touch code's owner, once delivered (assets/ui/use.png). |
 | `ui:use-go-in` | approved-source-not-used | `P04/hall-of-legends-tile-atlas.png` lit arch with gold up-arrow (880,696,997,808) or blue twin (1010,696,1125,808), ~16x18 on the U08 plate; alt `P07/irreverents-pixel-ui-atlas.png` up-arrow key (770,919,855,1004). | look3-props draws 'ui-use-go-in' (assets/ui/hud.png, content/looks/ui.json); then the touch code's owner (index.html .go-in, touch.ts showGoIn) shows it. |
 | `ui:door-hint` | approved-source-not-used | `P07/irreverents-pixel-ui-atlas.png` up-arrow glyph (770,919,855,1004) to ~7x8 without its plate; or `A00/a00-03-co-op-adventure-world-map-hud-and-gameplay-moments.jpeg` cue arrows (1285,950,1375,992); or the P04 lit-arch arrow (925,730,956,788). | look3-props: add a 'door-hint' look; no code change (door-hint.ts already uses it when present). |
 | `ui:door-refused-sign` | approved-source-not-used | `P07/irreverents-pixel-ui-atlas.png` red X (1338,612,1398,668), keyed off its slate pill; alt padlock (295,724,405,834). | look3-props cuts 'door-refused'; Step 11 (cantina.ts drawDoorRefused) draws it. |
@@ -321,7 +321,7 @@ U08-01 buttons are delivered and byte-identical in assets/ui/touch/. Everything 
 | `ui:page-surround` | no-approved-source | MA-21 | Step 17 (index.html), once delivered. |
 | `ui:status-pill` | approved-source-not-used | `P05/p05-ui-hero-party-hud-source.png` progress rings (141,456,397,506) as a 4-frame spinner; pill = P07 KO pill (1026,604,1158,674) with letters cleared, left cap mirrored. | Step 17 (index.html #status, main.ts); look3-props cuts. |
 | `ui:orientation-hint` | approved-source-not-used | `P05/p05-ui-hero-party-hud-source.png` swap arrows (353,284,431,344); P07 red X (1338,612,1398,668); P07 KO pill (1026,604,1158,674) cleared. | Step 17 / actors push 3 (shell.ts, #hint); look3-props cuts. |
-| `ui:touch-fallback-chrome` | approved-source-not-used | `P07/irreverents-pixel-ui-atlas.png` d-pad up key (95,854,185,934); round-button plate with its glyph cleared (275,884,425,1039). | Step 17 (index.html #pad, #actions). assets/ui/touch/ has no look3 owner: the orchestrator names who cuts it. |
+| `ui:touch-fallback-chrome` | uses-approved | `P07/irreverents-pixel-ui-atlas.png` round plate, glyph cleared by re-authoring from the three round buttons (tools/art/touch/cut.py `clean_plate`), under Grab, Use and (spare) any glyph; d-pad keys for the stick. Pressed and dimmed frames have no source (derived, DRAFT; on the missing list). | - (re-run tools/art/touch/cut.py) |
 | `ui:tune-panel` | approved-source-not-used | `P07/irreverents-pixel-ui-atlas.png` gear (955,729,1095,829); attention meter (570,469,885,514) + marker (735,454,775,479) as slider; plain slot (60,724,165,834) as panel. | Step 2's owner tool (tune.ts); BACKLOG, no look3 lane. |
 
 ## Sound effects

@@ -308,7 +308,9 @@ watched to fail: the server never marking anyone away.
   everywhere: its picture, or with no picture a faint label (the stick:
   two arrows); a press lights it under the thumb. The pictures are the
   delivered U08-01 art, copied to `assets/ui/touch/` as 48×24 strips
-  (normal, pressed). Which action shows which is data: the optional
+  (normal, pressed); since 2026-11-24 a same-named strip in
+  `assets/ui/touch/p07/` (the P07 re-cut) is drawn first when it exists
+  (`SET` in `touch.ts`; `docs/mechanisms/phone-shell-look.md`). Which action shows which is data: the optional
   `icon` on the action file; the stick's two are named in `touch.ts`. A
   picture is drawn at a whole number of device pixels per art pixel
   (`INTENT:` in `shell.ts`), as a background on a child that takes no
