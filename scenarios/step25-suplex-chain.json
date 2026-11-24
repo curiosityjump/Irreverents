@@ -1,0 +1,124 @@
+{
+  "id": "step25-suplex-chain",
+  "gate": "A",
+  "proves": "Step 25 push 3, a suplex into a crowd (D-020: 'knockback into walls/other enemies'): the grappler suplexes a dummy down beside a camp fighter; the splash knocks the fighter away (impact from the dummy), he flies into a crate (an impact for each, through impact-bodies), and the crate goes on into the hall's west wall (impact-walls): a chain of three from one slam, with no change to those systems. Control, watched once: the grappler's suplexSplashReach 0, and the fighter, the crate and the wall take nothing",
+  "room": "graybox-hall",
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 1
+    }
+  ],
+  "entities": [
+    {
+      "id": "dummy-1",
+      "character": "dummy",
+      "tile": [
+        6,
+        9
+      ]
+    },
+    {
+      "id": "fighter-1",
+      "character": "outpost-fighter",
+      "tile": [
+        3,
+        9
+      ]
+    },
+    {
+      "id": "crate-1",
+      "character": "crate",
+      "tile": [
+        1,
+        9
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 5,
+      "to": 8,
+      "hold": [
+        "grab"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 20,
+      "to": 23,
+      "hold": [
+        "interact"
+      ]
+    }
+  ],
+  "ticks": 120,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "suplexed",
+      "where": {
+        "by": "p:a",
+        "target": "dummy-1"
+      },
+      "between": [
+        20,
+        40
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "impact",
+      "where": {
+        "entity": "fighter-1",
+        "other": "dummy-1"
+      },
+      "between": [
+        20,
+        40
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "impact",
+      "where": {
+        "entity": "fighter-1",
+        "other": "crate-1"
+      },
+      "between": [
+        40,
+        70
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "impact",
+      "where": {
+        "entity": "crate-1",
+        "other": null
+      },
+      "between": [
+        40,
+        70
+      ],
+      "count": [
+        1,
+        1
+      ]
+    }
+  ]
+}
