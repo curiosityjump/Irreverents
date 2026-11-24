@@ -354,3 +354,9 @@ document as a decision of theirs.
 - **Why this way:** the step file: "a spear and a bomb in the quarry (Step 22's stage), each seen on screen before it is reached". The spear lies two steps from where you come in from the courtyard, so it is the first thing you see; the bomb lies on the ledge just before the toll-keeper and his watcher, so the first thing you can do with it is throw it into them. When the stage starts over (you lost), both lie where they began again at once, as the stage puts its people back. A weapon in your own hand is kept through the start-over.
 - **To change it:** the `sources` rows in `content/weapons/spear.json` and `content/weapons/bomb.json` (room and tile); for a start-over that also takes the weapon out of your hand, `restoreRoomWeapons` in `src/sim/weapons.ts`.
 - **Where:** `docs/mechanisms/weapons.md`, "A stage starting over".
+
+### 2026-11-24 · Step 24: the first enemy who throws things stands on the balcony of the Hall of Legends
+- **Decided by:** orchestrator `session_017WiGzHhT2apmWHT61rQ65G`, from a subagent's draft
+- **Instead of asking:** "Where should the first ranged enemy stand, and may it be in your Hall?"
+- **Why this way:** your gaps list's top unowned row is enemy variety (no enemy fights from range; the castle's rooms have nobody hostile). The Hall's balcony is the one room nobody is building in tonight, he guards the climb out and a hidden piece there, and you wrote "Do not ... protect the Hall of Legends from gameplay". He is scripted: a fixed arc, shown as dots before every throw, never aimed; a hit launches you, never a number; what he throws stays to be thrown back.
+- **To change it:** his place is one line in `content/placements/hall-gallery.json`; everything about how he throws is data in his own file (`DRAFT:` throughout, `docs/plan/step-24.md`).

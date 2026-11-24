@@ -426,3 +426,9 @@ Full text: `docs/plan/step-22.md`
 **Status: open, claimed by orchestrator session_017WiGzHhT2apmWHT61rQ65G (builders: session_017WiGzF7puSFWh2BBeii8WZ), 2026-11-24.** (Opened 01:40 UTC from the owner's "Weapons assets uploaded" and his verdict's "no power/item stealing"; brief `handoff-prompts/weapons-pick-up-and-swing.md`.)
 
 Full text: `docs/plan/step-23.md`
+
+## Step 24 — An enemy who fights from range
+
+**Status: open, claimed by orchestrator session_017WiGzHhT2apmWHT61rQ65G (builders: named in the step file's "Briefs"), 2026-11-24.** (Opened 06:45 UTC from `docs/vision-gaps.md` row 1, the top gap nothing covered: no ranged kind, nobody hostile in the castle's rooms. Slice 1, `handoff-prompts/ranged-enemy.md`: one thrower as data on the Hall gallery's balcony, a telegraphed arc, his shot yours to throw back. Drafted by a subagent from the library and the code; nothing in it was run.)
+
+Full text: `docs/plan/step-24.md`
