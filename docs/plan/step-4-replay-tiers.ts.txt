@@ -1,0 +1,130 @@
+// Replay scripts/e2e/tiers.ts against an in-process server with live-like
+// delay on the phone's socket (300 ms in, 60 out, 40 jitter, order kept),
+// logging the server's world every 15 ms: per guard in the street, the tick it
+// enters, where, and when it leaves (to which room) or is gone, plus the call
+// and dispatch events. Usage (from the repo root, after npm run build):
+//   NODE_PATH=/opt/node-tools/node_modules node <this> <runs> <label> [factFile]
+import fs from 'node:fs';
+import http from 'node:http';
+import path from 'node:path';
+import { createRequire } from 'node:module';
+import type { AddressInfo } from 'node:net';
+
+const root = process.cwd();
+const imp = (p: string): Promise<any> => import(path.join(root, p));
+const { loadContent } = await imp('scripts/lib/content-files.ts');
+const { attachGame } = await imp('src/server/game.ts');
+const runs = Number(process.argv[2] ?? 1);
+const label = process.argv[3] ?? 'run';
+const factFile = process.argv[4] ?? 'scripts/e2e/tiers.ts';
+const { tierFacts } = await import(path.isAbsolute(factFile) ? factFile : path.join(root, factFile));
+const { chromium, devices } = createRequire(import.meta.url)('playwright') as any;
+
+const IN = Number(process.env.D_IN ?? 300), OUT = Number(process.env.D_OUT ?? 60), JIT = Number(process.env.D_JIT ?? 40);
+const content = loadContent().content;
+const pub = path.join(root, 'dist/public');
+const MIME: Record<string, string> = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.png': 'image/png', '.wav': 'audio/wav', '.mp3': 'audio/mpeg', '.ogg': 'audio/ogg', '.svg': 'image/svg+xml' };
+const server = http.createServer((req, res) => {
+  const u = new URL(req.url ?? '/', 'http://x');
+  if (u.pathname === '/healthz') { res.end(JSON.stringify({ ok: true, commit: 'replay' })); return; }
+  const rel = u.pathname === '/' ? 'index.html' : u.pathname.slice(1);
+  const f = path.join(pub, rel);
+  if (!f.startsWith(pub) || !fs.existsSync(f) || fs.statSync(f).isDirectory()) { res.writeHead(404); res.end(); return; }
+  res.writeHead(200, { 'content-type': MIME[path.extname(f)] ?? 'application/octet-stream' });
+  res.end(fs.readFileSync(f));
+});
+const game = attachGame(server, { content, commit: 'replay', startedAt: new Date().toISOString() });
+await new Promise<void>((r) => server.listen(0, '127.0.0.1', r));
+const base = `http://127.0.0.1:${(server.address() as AddressInfo).port}`;
+
+const recorder = (): void => {
+  const tl: any[] = [];
+  (window as any).__tl = tl;
+  let prev = '';
+  const t0 = performance.now();
+  const tick = (): void => {
+    const irr = (window as any).irreverents;
+    const d = irr?.drawn;
+    if (d) {
+      const guards = (d.entities ?? []).filter((e: any) => e.kind === 'guard').map((e: any) => e.id).sort().join(',');
+      const s = `${d.room}|${d.alert?.level ?? 0}|${d.alert?.whistle != null ? 'W' : '-'}|${guards}|${(d.alarms ?? []).length}`;
+      const g = irr.world?.entities?.find((e: any) => e.id === 'street-guard');
+      const gw = g ? JSON.stringify(g.c?.whistle ?? null) + '|' + (g.c?.respond?.phase ?? '-') + '|' + (g.c?.flying ? 'F' : '') + (g.c?.beat ? 'B' : '') : 'none';
+      if (gw !== (window as any).__gw) { (window as any).__gw = gw; console.log('PG ' + irr.world?.tick + ' ' + Math.round(g?.x ?? 0) + ' ' + gw + ' drawnW=' + (d.alert?.whistle ?? null) + ' room=' + d.room); }
+      if (s !== prev) { tl.push({ t: Math.round(performance.now() - t0), tick: irr.world?.tick, s, alarms: (d.alarms ?? []).slice(-1)[0] ?? null }); prev = s; }
+    }
+    requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+};
+
+const results: any[] = [];
+for (let r = 0; r < runs; r++) {
+  const browser = await chromium.launch();
+  const log: string[] = [];
+  const say = (s: string): void => { log.push(s); };
+  let ctxs: any[] = [];
+  const kitBrowser = {
+    newContext: async (o: any) => {
+      const ctx = await browser.newContext(o);
+      ctxs.push(ctx);
+      ctx.on('page', (pg: any) => pg.on('console', (m: any) => { const t = m.text(); if (t.startsWith('PG ')) say(t); }));
+      await ctx.addInitScript(recorder);
+      await ctx.routeWebSocket(/\/ws$/, (ws: any) => {
+        const up = ws.connectToServer();
+        let dueIn = 0, dueOut = 0;
+        ws.onMessage((m: string) => { const now = Date.now(); dueIn = Math.max(dueIn, now + IN + Math.random() * JIT); setTimeout(() => { try { up.send(m); } catch {} }, dueIn - now); });
+        up.onMessage((m: string) => { const now = Date.now(); dueOut = Math.max(dueOut, now + OUT + Math.random() * JIT); setTimeout(() => { try { ws.send(m); } catch {} }, dueOut - now); });
+      });
+      return ctx;
+    },
+  };
+  // Server sampler.
+  const old = new Set(game.worlds.keys());
+  const seen = new Map<string, { room: string; x: number }>();
+  const evSeen = new Set<string>();
+  const sampler = setInterval(() => {
+    for (const gw of game.worlds.values()) {
+      if (!gw.name.includes('tiers') || old.has(gw.name)) continue;
+      const w = gw.world;
+      const now = new Map<string, { room: string; x: number }>();
+      for (const e of w.entities) if (e.kind === 'guard') now.set(e.id, { room: e.room, x: Math.round(e.x) });
+      for (const [id, g] of now) {
+        const was = seen.get(id);
+        if (g.room === 'castle-street' && (!was || was.room !== 'castle-street')) say(`${w.tick} ENTER ${id} x=${g.x}${was ? ` from ${was.room}` : ' (new)'}`);
+        if (was && was.room === 'castle-street' && g.room !== 'castle-street') say(`${w.tick} LEAVE ${id} -> ${g.room} (was x=${was.x})`);
+      }
+      for (const [id, was] of seen) if (!now.has(id)) say(`${w.tick} GONE ${id} (last ${was.room} x=${was.x})`);
+      seen.clear();
+      for (const [k, v] of now) seen.set(k, v);
+      const hero = w.entities.find((e: any) => e.player);
+      for (const ev of gw.events as any[]) {
+        if (!/call-|dispatch|beaten|alert-changed|whistle|knocked|flatten/.test(ev.type)) continue;
+        const k = `${ev.tick}:${ev.type}:${JSON.stringify(ev).length}`;
+        if (evSeen.has(k)) continue;
+        evSeen.add(k);
+        const { type, tick, ...rest } = ev;
+        say(`${ev.tick ?? w.tick} EV ${type} ${JSON.stringify(rest).slice(0, 160)} hero=${hero?.room}@${Math.round(hero?.x ?? 0)}`);
+      }
+    }
+  }, 15);
+  let factLine = '';
+  const errors: string[] = [];
+  const t0 = Date.now();
+  try {
+    await tierFacts({ browser: kitBrowser, devices, base, out: path.join(root, 'e2e-out'), tag: 'e2e', errors, fact: (id: string, ok: boolean, text: string) => { factLine += `${ok ? 'ok  ' : 'FAIL'} (${id}) ${text}\n`; } });
+  } catch (e) { factLine += `THREW ${(e as Error).stack}\n`; }
+  clearInterval(sampler);
+  await browser.close();
+  const pass = factLine.split('\n').filter(Boolean).every((l) => l.startsWith('ok'));
+  results.push(pass);
+  const txt = `=== ${label} run ${r + 1}: ${pass ? 'PASS' : 'FAIL'} (${((Date.now() - t0) / 1000).toFixed(0)} s)\n${factLine}${log.join('\n')}\n`;
+  fs.appendFileSync(path.join(process.env.OUTDIR ?? '.', `${label}.log`), txt);
+  console.log(txt.split('\n').slice(0, 3).join('\n'));
+  ctxs = [];
+}
+console.log(`${label}: ${results.filter(Boolean).length} of ${results.length} passed`);
+game.close?.();
+server.closeAllConnections();
+server.close();
+process.exit(0);
