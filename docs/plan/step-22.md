@@ -313,6 +313,19 @@ after the other is beaten, and how a restore looks on the page (push 4's e2e).
 - **Owed still:** (a) `restorePeople`/`holdReturns` and (b) the
   `game-over` event are not on `main` at 85cbd35; (c) the kerb and the
   wings' move are not done.
+- **(a) done in the next push:** `defeated` (beaten for good) now counts,
+  not knock-downs (cleared-stats re-scripted: three knock-outs at 208,
+  568, 928, clear at 1259; star edges moved with it); `restoreStage` calls
+  `restorePeople` first and keeps `stageHome` for the rest. **Not
+  scenario-checked:** a gone bandit put back by a start-over (no script
+  gets a hero beaten after a defeat for good yet; 3b's fight runs will).
+  **The hold is held back:** `holdReturns` on the stage's rooms while a run
+  is on breaks `step5-beaten-come-back` (the beaten builder's: its depot
+  bandits come back 90 s after the hero walks into the tower, also a stage
+  room). Settled the same hour: the beaten builder moved it to the camp
+  (400d8ca) and the lead ruled "hold all the stage's rooms"; the hold and
+  `step22-beaten-stay-beaten-in-a-run` (control watched failing: stage off,
+  `defeated-back` at 6532) land in the same push.
 
 ### Lead review, push 3a (d529a1b), re-run at e5f6383+
 

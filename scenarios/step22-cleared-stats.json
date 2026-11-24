@@ -1,6 +1,6 @@
 {
  "id": "step22-cleared-stats",
- "proves": "Step 22 push 3 (DRAFT, docs/decisions-log.md 'Step 22 push 3'): alone in the Iron Quarry's depot (the run starts as she is inside, tick 0), the grappler stands in the far yard, punches patrol 2 flat (one bad guy defeated; he saw her first, so not unseen), sounds no horn, and walks east into the stage's end (columns 61-62): one stage-cleared at tick 359 whose statistics are what she did (359 ticks, 1 defeated, 0 alarms, 0 tries, seen, no hoard) and 3 stars (no start-over; no alarm finished), kept as the stage's best; she stays in the end and no second clear comes. Control (watched to fail): the end box moved off the yard (content/stages/iron-quarry.json end.from/to [1, 1]-[2, 2]) and no clear comes, the best stays null",
+ "proves": "Step 22 push 3 (DRAFT, docs/decisions-log.md 'Step 22 push 3'): alone in the Iron Quarry's depot (the run starts as she is inside, tick 0), the grappler stands in the far yard, knocks patrol 2 out three times, which beats him for good (src/sim/beaten.ts: one bad guy defeated; he saw her first, so not unseen), sounds no horn, and walks east into the stage's end (columns 61-62): one stage-cleared at tick 1259 whose statistics are what she did (1259 ticks, 1 defeated, 0 alarms, 0 tries, seen, no hoard) and 3 stars (no start-over; no alarm finished), kept as the stage's best; she stays in the end and no second clear comes. Controls (watched to fail): one knock-out only is not a defeat (defeated 0); the end box moved off the yard (content/stages/iron-quarry.json end.from/to [1, 1]-[2, 2]) and no clear comes, the best stays null",
  "room": "quarry-depot",
  "placements": true,
  "players": [
@@ -123,12 +123,308 @@
   },
   {
    "player": "a",
-   "from": 300,
-   "to": 420,
+   "from": 322,
+   "to": 326,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 346,
+   "to": 350,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 370,
+   "to": 374,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 394,
+   "to": 398,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 418,
+   "to": 422,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 442,
+   "to": 446,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 466,
+   "to": 470,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 490,
+   "to": 494,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 514,
+   "to": 518,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 538,
+   "to": 542,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 562,
+   "to": 566,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 586,
+   "to": 590,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 610,
+   "to": 614,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 634,
+   "to": 638,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 658,
+   "to": 662,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 682,
+   "to": 686,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 706,
+   "to": 710,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 730,
+   "to": 734,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 754,
+   "to": 758,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 778,
+   "to": 782,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 802,
+   "to": 806,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 826,
+   "to": 830,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 850,
+   "to": 854,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 874,
+   "to": 878,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 898,
+   "to": 902,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 922,
+   "to": 926,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 946,
+   "to": 950,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 970,
+   "to": 974,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 994,
+   "to": 998,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1018,
+   "to": 1022,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1042,
+   "to": 1046,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1066,
+   "to": 1070,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1090,
+   "to": 1094,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1114,
+   "to": 1118,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1138,
+   "to": 1142,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1162,
+   "to": 1166,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1186,
+   "to": 1190,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1200,
+   "to": 1320,
    "x": 1
   }
  ],
- "ticks": 600,
+ "ticks": 1500,
  "expect": [
   {
    "fact": "event-where",
@@ -136,7 +432,7 @@
    "where": {
     "stage": "iron-quarry",
     "player": "a",
-    "ticks": 359,
+    "ticks": 1259,
     "defeated": 1,
     "alarms": 0,
     "tries": 0,
@@ -146,8 +442,8 @@
     "best": true
    },
    "between": [
-    350,
-    370
+    1250,
+    1270
    ],
    "count": [
     1,
@@ -159,7 +455,7 @@
    "event": "stage-cleared",
    "between": [
     0,
-    600
+    1500
    ],
    "count": [
     1,
@@ -169,25 +465,25 @@
   {
    "fact": "stage",
    "stage": "iron-quarry",
-   "at": 340,
+   "at": 1240,
    "state": "running",
    "best": null
   },
   {
    "fact": "stage",
    "stage": "iron-quarry",
-   "at": 600,
+   "at": 1500,
    "state": "cleared",
    "tries": 0,
    "best": {
     "stars": 3,
-    "ticks": 359
+    "ticks": 1259
    }
   },
   {
    "fact": "in-room",
    "player": "a",
-   "at": 600,
+   "at": 1500,
    "room": "quarry-depot"
   }
  ]

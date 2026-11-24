@@ -1,0 +1,465 @@
+{
+ "id": "step22-beaten-stay-beaten-in-a-run",
+ "proves": "Step 22 (owed item a; src/sim/beaten.ts holdReturns, beaten builder's 7b30a89): alone at the top of the Iron Quarry's tower, the grappler's first punch slams the two tower fighters into each other and beats both for good (defeated, then gone); she walks out into the depot and waits there. Outside a stage a beaten bad guy is back at his post once nobody has been in his room for 90 s (beaten-return); inside a running stage its rooms are held, so neither comes back through tick 8000 (more than 90 s after she left at 1132), and the run still counts both as defeated. Control (watched to fail): \"on\": false in content/stages/iron-quarry.json, and defeated-back comes",
+ "room": "quarry-tower",
+ "placements": true,
+ "players": [
+  {
+   "id": "a",
+   "character": "grappler",
+   "spawn": 0
+  }
+ ],
+ "inputs": [
+  {
+   "player": "a",
+   "from": 0,
+   "to": 2,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 10,
+   "to": 14,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 34,
+   "to": 38,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 58,
+   "to": 62,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 82,
+   "to": 86,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 106,
+   "to": 110,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 130,
+   "to": 134,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 154,
+   "to": 158,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 178,
+   "to": 182,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 202,
+   "to": 206,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 226,
+   "to": 230,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 250,
+   "to": 254,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 274,
+   "to": 278,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 298,
+   "to": 302,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 322,
+   "to": 326,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 346,
+   "to": 350,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 370,
+   "to": 374,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 394,
+   "to": 398,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 418,
+   "to": 422,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 442,
+   "to": 446,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 466,
+   "to": 470,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 490,
+   "to": 494,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 514,
+   "to": 518,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 538,
+   "to": 542,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 562,
+   "to": 566,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 586,
+   "to": 590,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 610,
+   "to": 614,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 634,
+   "to": 638,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 658,
+   "to": 662,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 682,
+   "to": 686,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 706,
+   "to": 710,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 730,
+   "to": 734,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 754,
+   "to": 758,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 778,
+   "to": 782,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 802,
+   "to": 806,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 826,
+   "to": 830,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 850,
+   "to": 854,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 874,
+   "to": 878,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 898,
+   "to": 902,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 922,
+   "to": 926,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 946,
+   "to": 950,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 970,
+   "to": 974,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 994,
+   "to": 998,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1018,
+   "to": 1022,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1042,
+   "to": 1046,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1066,
+   "to": 1070,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1090,
+   "to": 1094,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1100,
+   "to": 1300,
+   "x": 1
+  }
+ ],
+ "ticks": 8000,
+ "expect": [
+  {
+   "fact": "event-where",
+   "event": "defeated",
+   "where": {
+    "target": "tower-fighter-2",
+    "player": "a"
+   },
+   "between": [
+    0,
+    200
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "event-where",
+   "event": "defeated",
+   "where": {
+    "target": "tower-fighter-1",
+    "player": "a"
+   },
+   "between": [
+    0,
+    200
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "event",
+   "event": "changed-room",
+   "player": "a",
+   "where": {
+    "toRoom": "quarry-depot"
+   },
+   "between": [
+    1100,
+    1200
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "event",
+   "event": "defeated-back",
+   "between": [
+    0,
+    8000
+   ],
+   "count": [
+    0,
+    0
+   ]
+  },
+  {
+   "fact": "stage",
+   "stage": "iron-quarry",
+   "at": 8000,
+   "state": "running",
+   "tries": 0
+  }
+ ]
+}

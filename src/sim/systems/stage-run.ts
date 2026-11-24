@@ -1,3 +1,4 @@
+import { holdReturns, returnsHeld } from '../beaten.ts';
 import { canSee } from '../npc/sight.ts';
 import { npcKind } from '../npc/state.ts';
 import { atStageEnd, freshCounts, homeOf, restoreStage, stageOfRoom, stageRooms, stageStars, type StageRun } from '../stage.ts';
@@ -17,9 +18,9 @@ import { findEntity } from '../world.ts';
  * - once every player still inside the stage is one of those waiting (solo:
  *   at once), the stage is put back as it began (`restoreStage`), the try
  *   counted, the clock and counts at zero (`stage-restarted`);
- * - while it runs, the try's statistics gather (`counts`): bad guys knocked
- *   flat by a played hero (the Hall detector's rule, hall-detect.ts, copied:
- *   a `flattened` whose `by` is a played body), calls finished in its rooms,
+ * - while it runs, the try's statistics gather (`counts`): bad guys beaten
+ *   for good and credited to a player (beaten.ts's `defeated`), calls
+ *   finished in its rooms,
  *   whether any bad guy of it had a played hero in sight (canSee, the test
  *   heist-cargo uses for a clean getaway), and a prize of its rooms banked;
  * - a played hero reaching its end (Step 22 push 3) clears it once:
@@ -73,12 +74,12 @@ const system: System = {
       if (run.state === 'running' && counts && shared) {
         const heists = Object.values(content.heists ?? {}).filter((h) => rooms.has(h.room)).map((h) => h.id);
         for (const ev of ctx.events) {
-          if (ev.type === 'flattened' && ev.by !== null) {
+          if (ev.type === 'defeated' && ev.player !== null) {
+            // Beaten for good (src/sim/beaten.ts) and credited to a player, in the stage's rooms.
             const target = findEntity(world, ev.target);
-            const by = findEntity(world, ev.by);
-            if (!target || target.player !== null || !target.c.npc || !rooms.has(target.room)) continue;
-            if (!by || by.player === null) continue;
-            if (!counts.defeated.includes(target.id)) counts.defeated.push(target.id);
+            if (target && !rooms.has(target.room)) continue;
+            if (!target && !inside.some((e) => e.player === ev.player)) continue;
+            if (!counts.defeated.includes(ev.target)) counts.defeated.push(ev.target);
           } else if (ev.type === 'outpost-call-completed') {
             if (rooms.has(content.outposts?.[ev.outpost]?.room ?? '')) counts.alarms++;
           } else if (ev.type === 'call-completed') {
@@ -110,6 +111,11 @@ const system: System = {
         run.counts = freshCounts();
         ctx.emit('stage-restarted', { stage: s.id, tries: run.tries });
       }
+
+      // While a run is under way, nobody beaten in its rooms comes back by himself (beaten.ts):
+      // only a start-over puts them back. Off again once it is cleared or left. DRAFT (the
+      // lead's ruling): every room of the stage, whoever is in it.
+      if (shared && (run.state === 'running') !== returnsHeld(world, s.entrance.room)) holdReturns(world, [...rooms], run.state === 'running');
 
       if (run.state === 'running' && counts && shared) {
         const there = inside.find((e) => !run.pending.includes(e.player!) && atStageEnd(content, s, e));

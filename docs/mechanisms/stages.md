@@ -33,8 +33,8 @@ result. The engine knows stages, not the quarry: a second stage is one file.
    runs, `tries` goes up, the clock and counts restart (`stage-restarted`).
 4. While a run is under way (push 3), its try's statistics gather on the
    shared world only (`world.taken` unset, like the Hall detector): a
-   `flattened` of a person of its rooms whose `by` is a played body adds to
-   `defeated` (distinct ids; the Hall's rule, copied); each
+   `defeated` (beaten for good, `src/sim/beaten.ts`) credited to a player, of
+   a person in its rooms, adds to `defeated` (distinct ids); each
    `outpost-call-completed` of an outpost in its rooms, and each town
    `call-completed` whose area is one of them, is an alarm; `seen` turns true
    the first tick a bad guy (npc kind `side: "bad"`, placed or a wave's) in
@@ -53,8 +53,14 @@ result. The engine knows stages, not the quarry: a second stage is one file.
    starts a fresh one over the stage as it was left (only being beaten puts
    it back).
 
-`restoreStage` (`src/sim/stage.ts`, `INTENT:`): every placed body of the
-stage back from the home copy, `c` empty (npc-setup makes it a person again
+While a run is `running`, the stage holds all its rooms (`holdReturns`,
+`src/sim/beaten.ts`; the lead's ruling, `DRAFT:`): nobody beaten for good
+there comes back by himself mid-run, even in a room nobody is in; cleared
+or left, the hold is let go and beaten-return's 90 s applies as anywhere.
+
+`restoreStage` (`src/sim/stage.ts`, `INTENT:`): first `restorePeople` for
+each of its rooms (the beaten-for-good come back through their own rule);
+then every other placed body of the stage back from the home copy, `c` empty (npc-setup makes it a person again
 next tick: whole, at its post, mood 1, nothing seized or carried); wave
 bodies (`<outpost>:w*`) and alerts (`~alert:<room>`) of its rooms removed;
 its things removed so npc-setup puts them back untaken (a banked prize stays
@@ -92,7 +98,9 @@ power sources, the roster.
 `scenarios/step22-restart-restores.json` (control: the stage `on` false),
 `step22-friend-inside-no-restart.json` (control: the friend outside the
 stage), `step22-beaten-to-entrance.json` (the defeat file),
-`step22-cleared-stats.json` (control: the end box moved away),
+`step22-cleared-stats.json` (controls: one knock-out only is no defeat; the
+end box moved away), `step22-beaten-stay-beaten-in-a-run.json` (the hold;
+control: the stage `on` false), 
 `step22-stars-edges-{good,good-over,best,best-over,tries}.json` (the same clear
 with the run seeded through `world.stages` so its time lands one tick either
 side of each threshold; each pair is the other's control: move `started` when
@@ -102,8 +110,8 @@ state, tries and best.
 
 ## Not built yet
 
-Push 3's hero runs (each roster hero from the entrance to the end, fighting
+The home copy still restores the people who were only knocked flat, moved
+or angered; `restorePeople` covers only the gone. Push 3's hero runs (each roster hero from the entrance to the end, fighting
 and sneaking) and the thresholds they measure. Push 4: the victory screen. Push 5: more enemies, the
 waves from the sides. `beaten.ts`'s `restorePeople` (another builder's, not
-on `main` at push 2) is to replace the people part of `restoreStage` when it
-lands.
+on `main` at push 2) now brings back the gone; the home copy keeps the rest.

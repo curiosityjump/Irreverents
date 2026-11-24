@@ -3,6 +3,7 @@
 // registry file, like defeat.ts: the systems are src/sim/systems/stage-*.ts.
 import type { Content } from '../content/types.ts';
 import type { Stage } from '../content/kinds/stages.ts';
+import { restorePeople } from './beaten.ts';
 import { alertId } from './npc/alert.ts';
 import { THING_KIND } from './npc/state.ts';
 import { TICK_RATE, type Entity, type World } from './types.ts';
@@ -30,7 +31,7 @@ export interface StageRun {
 
 /** Step 22 push 3: one try's statistics, gathered while it runs. */
 export interface StageCounts {
-  /** Bad guys of the stage knocked flat by a played hero this try (distinct ids). DRAFT: until beaten-for-good lands. */
+  /** Bad guys of the stage beaten for good (`defeated`, src/sim/beaten.ts) credited to a player this try (distinct ids). */
   defeated: string[];
   /** Calls finished in the stage's rooms (an outpost's horn, a town call). */
   alarms: number;
@@ -126,6 +127,11 @@ const clone = <T>(v: T): T => JSON.parse(JSON.stringify(v)) as T;
  */
 export function restoreStage(world: World, content: Content, s: Stage): void {
   const rooms = new Set(stageRooms(content, s));
+  // Beaten for good (src/sim/beaten.ts, docs/mechanisms/combat-and-impact.md): the people
+  // defeated and gone come back through its own rule; the home copy below then puts back
+  // everyone else (knocked flat, moved, angry), as before.
+  const back = new Set<string>();
+  for (const r of [...rooms].sort()) for (const id of restorePeople(world, content, r)) back.add(id);
   const home = world.stageHome?.[s.id] ?? homeOf(content, s);
   const homeIds = new Set(home.map((e) => e.id));
   const waves = Object.values(content.outposts ?? {}).filter((o) => rooms.has(o.room)).map((o) => `${o.id}:w`);
@@ -148,13 +154,13 @@ export function restoreStage(world: World, content: Content, s: Stage): void {
   for (const e of [...world.entities]) {
     if (e.player !== null || kept.has(e.id)) continue;
     const gone =
-      homeIds.has(e.id) ||
+      (homeIds.has(e.id) && !back.has(e.id)) ||
       alerts.has(e.id) ||
       (things.has(e.id) && e.kind === THING_KIND && !banked.has(e.id)) ||
       (rooms.has(e.room) && waves.some((w) => e.id.startsWith(w)));
     if (gone) removeEntity(world, e.id);
   }
-  for (const e of home) if (!kept.has(e.id)) addEntity(world, clone(e));
+  for (const e of home) if (!kept.has(e.id) && !back.has(e.id)) addEntity(world, clone(e));
   if (world.cargo) {
     for (const [hero, thing] of Object.entries(world.cargo)) if (things.has(thing)) delete world.cargo[hero];
   }
