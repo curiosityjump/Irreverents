@@ -132,3 +132,49 @@ spot), push 4 (the second jump). Writeup: `docs/mechanisms/recruits.md`.
   quarry tower's shaft at column 4.
 - **A second recruit** needs a sixth hero from the approved P04 cantina
   sheet (out of scope).
+
+## A hidden recruit, and a secret only they open (opened 2026-11-24 by orchestrator session_017WiGzHY5UZsWTLCH8cLm8M)
+
+**The owner's words.** 2026-11-23 ~18:30 UTC, first-hand, after playing on a
+phone (`docs/current-directive.md:133`, `docs/vision.md:137`): "... no hidden
+places to explore, no characters to unlock ...". Library: D-007, D-005,
+D-010; `docs/vision-gaps.md` row 12's close: "one recruit hidden in a secret,
+and a secret only they open".
+
+**Goal.** A sixth hero, a strong mover who lifts and throws what nobody else
+can (`liftStrength` 500, above Brawn's 420), is caged in the Iron Quarry's
+hidden cave and found only by walking through the pit's painted wall. Coming
+back with her pays twice: the forest's boulder is hers to lift, and a stone
+nobody else can lift lies in the castle's undercroft; carried up the hall's
+stair onto a plate, it opens a hidden pocket with a new piece (`town-8`).
+
+**The signal.** Scenarios `step13-hauler-freed-in-the-cave`,
+`step13-hauler-lifts-the-boulder`, `step13-hauler-cave-put-back`,
+`step13-stone-only-she`, `step13-stone-brawn-cannot`,
+`step13-stone-throne-near-miss`, `step13-free-while-caught`, each with a
+control watched failing; e2e facts `hidden-recruit-not-shown`,
+`hidden-recruit-cave`, `hidden-recruit-stone` (`scripts/e2e/hidden-recruit.ts`,
+a phone-sized page by touch).
+
+**Stopping condition.** The signal passes on `main` and live
+(`check:deployed`, `check:live`). Then gap 12's stated close is met; the step
+stays open for the owner's verdict after playing.
+
+**Decided** (the orchestrator, `DRAFT:`): who (id `hauler`, the P04 cantina
+sheet's barkeep, row 1; shown name is data); where she is hidden (the cave,
+cage at [7,12]: a recruit file only, no quarry file touched); the secret
+(`stone-heavy` 480 at the undercroft's [25,12], `heavy-plate` needs 480 on the
+stair's top step, `heavy-hatch` in the hall floor at columns 30-31,
+`heavy-pocket` rows 14-15, columns 23-31, with a way out any body takes);
+"only she" means no other hero alone with Brawn and any one thing; a pile (a
+Brawn holder carrying the throne and the king up the stair, 510) also opens
+it, by the plate's own rule and doc 05's creative substitutes, logged and
+kept. **Open** (for the owner, by playing; nothing waits on them): is a
+strong hero the right second find; is the cave the right place; is the pile
+an acceptable other way in, or should the stone be hers alone. Measured but
+not run: the forest's boulder looks punchable onto its plate (about 5 px a
+grappler punch); the builder measures and notes it, and changes nothing there.
+
+**Briefs.** `handoff-prompts/hidden-recruit.md` (written 2026-11-24 by the
+orchestrator; three pushes: the hauler in the cave, the stone only she lifts,
+`step13-free-while-caught`).
