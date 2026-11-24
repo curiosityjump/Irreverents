@@ -151,3 +151,7 @@ with what you found before assuming it is safe to discard. **Never delete
 anything on the actual remote** — a branch, a tag, a ref — and never
 force-push, without the owner's explicit authorization, the same as any other
 destructive action on shared state.
+
+## Files git hides in a session spawned with a size limit
+
+A session spawned with `blob_limit_kb: 150` gets every file over 150 KB with git's skip-worktree flag (`git ls-files -v | grep ^S`; 336 files on 2026-11-24, pictures and the design library mostly). An edit to such a file does not show in `git status` and is not committed by `git add -A` or `git commit -a`. Keep every document sessions write to under 150 KB (`docs/decisions-log.md` was 212 KB and was split at this commit). If you must edit a flagged file: `git update-index --no-skip-worktree <path>` first. Found by the vehicles B builder.
