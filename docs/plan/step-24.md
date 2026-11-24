@@ -393,3 +393,5 @@ outpost, hall, defeat, heart or stage systems.
 - `handoff-prompts/ranged-enemy.md`: slice 1, three pushes, one builder
   (drafted for the orchestrator 2026-11-24 against `9dbd705`; nothing in it
   was run).
+
+- 2026-11-24 06:41 UTC: `handoff-prompts/ranged-enemy.md` (slice 1) spawned to builder `session_017WiGzEb3ESHBHGr3vhpB3k` by orchestrator `session_017WiGzHhT2apmWHT61rQ65G`.
