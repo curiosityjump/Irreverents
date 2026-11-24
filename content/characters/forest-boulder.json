@@ -1,0 +1,9 @@
+{
+  "//": "DRAFT (Step 15): the boulder beside the forest's stone slab. A plain body: too heavy for any hero (300 against the grappler's 150, content/tuning.json), light enough for the boost (420). Set down on the heavy plate (needs 260) it holds the slab open alone. Drawn as a grey box until a sprite exists (no new art tonight).",
+  "id": "forest-boulder",
+  "name": "Boulder",
+  "box": { "w": 24, "h": 22 },
+  "color": "#7d7a86",
+  "verbs": ["body"],
+  "tuning": "forest-boulder"
+}

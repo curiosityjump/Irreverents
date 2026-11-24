@@ -407,6 +407,11 @@
       "attackRecovery": 0.2,
       "weight": 30,
       "toughness": 50
+    },
+    "forest-boulder": {
+      "//": "DRAFT (Step 15): heavier than every hero lifts (the grappler and the brawler lift 150) and than the heaviest hero with the heavy crate on a plate (the brawler 70 and the heavy crate 120: 190), under the boost's 420. Set down on the trail's heavy plate (needs 260) it holds the stone slab open. It cannot be knocked out.",
+      "weight": 300,
+      "toughness": 0
     }
   }
 }

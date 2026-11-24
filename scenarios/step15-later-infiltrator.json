@@ -1,0 +1,94 @@
+{
+ "id": "step15-later-infiltrator",
+ "proves": "Step 15 signal 4, the later thing: the infiltrator alone tries to lift the boulder (300: nobody lifts it without a power; the grappler lifts 150), stands on the heavy plate (needs 260; it reads only the infiltrator's own weight) and walks on over the stone slab: it stays shut and the infiltrator never gets into the hollow",
+ "room": "forest-trail",
+ "players": [
+  {
+   "id": "a",
+   "character": "infiltrator",
+   "spawn": 1
+  }
+ ],
+ "entities": [
+  {
+   "id": "boulder",
+   "character": "forest-boulder",
+   "tile": [
+    74,
+    8
+   ]
+  }
+ ],
+ "inputs": [
+  {
+   "player": "a",
+   "from": 0,
+   "to": 143,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 144,
+   "to": 146,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 146,
+   "to": 149,
+   "hold": [
+    "grab"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 159,
+   "to": 194,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 225,
+   "to": 293,
+   "x": 1
+  }
+ ],
+ "ticks": 324,
+ "expect": [
+  {
+   "fact": "event",
+   "event": "grabbed",
+   "player": "a",
+   "between": [
+    0,
+    324
+   ],
+   "count": [
+    0,
+    0
+   ]
+  },
+  {
+   "fact": "part",
+   "room": "forest-trail",
+   "part": "stone-door",
+   "at": 225,
+   "is": {
+    "open": false
+   }
+  },
+  {
+   "fact": "position",
+   "player": "a",
+   "at": 324,
+   "x": [
+    1344,
+    1408
+   ],
+   "y": [
+    144,
+    144
+   ]
+  }
+ ]
+}

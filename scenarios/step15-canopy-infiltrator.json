@@ -1,0 +1,92 @@
+{
+ "id": "step15-canopy-infiltrator",
+ "proves": "Step 15 signal 3, the canopy (height): from the trail beside the bough six tiles up (columns 46-52), with nothing to climb, a jump and three flaps while moving west. The infiltrator cannot flap and never lands up there (the flyer with the same presses does: step15-canopy-flyer)",
+ "room": "forest-trail",
+ "players": [
+  {
+   "id": "a",
+   "character": "infiltrator",
+   "spawn": 1
+  }
+ ],
+ "inputs": [
+  {
+   "player": "a",
+   "from": 0,
+   "to": 12,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 13,
+   "to": 15,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 25,
+   "to": 41,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 47,
+   "to": 55,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 63,
+   "to": 71,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 79,
+   "to": 87,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 45,
+   "to": 85,
+   "x": -1
+  }
+ ],
+ "ticks": 225,
+ "expect": [
+  {
+   "fact": "event",
+   "event": "landed",
+   "player": "a",
+   "between": [
+    0,
+    225
+   ],
+   "count": [
+    0,
+    0
+   ],
+   "where": {
+    "ty": 3
+   }
+  },
+  {
+   "fact": "position",
+   "player": "a",
+   "at": 225,
+   "y": [
+    144,
+    144
+   ]
+  }
+ ]
+}

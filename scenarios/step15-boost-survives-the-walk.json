@@ -1,0 +1,48 @@
+{
+ "id": "step15-boost-survives-the-walk",
+ "proves": "Step 15, the measure the brief asked for before choosing the later thing: a power held does not fade with time or with doors (only an orb on the ground fades, docs/mechanisms/powers.md). The grappler holding the boost (as if taken from the street villain) walks from the courtyard through its new doorway, along the forest road and into the trail (about 10 s) and still holds it there, so a boost taken in the town reaches the boulder. Control (watched to fail): the same fact asking for no power at the end",
+ "room": "courtyard",
+ "players": [
+  {
+   "id": "a",
+   "character": "grappler",
+   "spawn": 2,
+   "power": "boost"
+  }
+ ],
+ "inputs": [
+  {
+   "player": "a",
+   "from": 0,
+   "to": 59,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 60,
+   "to": 64,
+   "y": -1
+  },
+  {
+   "player": "a",
+   "from": 64,
+   "to": 586,
+   "x": 1
+  }
+ ],
+ "ticks": 597,
+ "expect": [
+  {
+   "fact": "in-room",
+   "player": "a",
+   "at": 597,
+   "room": "forest-trail"
+  },
+  {
+   "fact": "power",
+   "player": "a",
+   "at": 597,
+   "is": "boost"
+  }
+ ]
+}

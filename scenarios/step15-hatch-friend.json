@@ -1,0 +1,18 @@
+{
+ "id": "step15-hatch-friend",
+ "proves": "Step 15 signal 3, another way in (a friend): two light heroes, neither able to lift the heavy crate. The infiltrator walks onto the hatch's plate and stays; the flyer walks on east and drops through the open hatch into the chamber. The world closes it, never a name: any body on the plate holds it. Control (watched to fail): the infiltrator stopping short of the plate, and the flyer walks over the shut hatch",
+ "room": "forest-trail",
+ "players": [
+  { "id": "a", "character": "flyer", "spawn": 1 },
+  { "id": "b", "character": "infiltrator", "spawn": 1 }
+ ],
+ "inputs": [
+  { "player": "b", "from": 0, "to": 32, "x": 1 },
+  { "player": "a", "from": 80, "to": 260, "x": 1 }
+ ],
+ "ticks": 320,
+ "expect": [
+  { "fact": "part", "room": "forest-trail", "part": "hatch", "between": [80, 320], "is": { "open": true } },
+  { "fact": "position", "player": "a", "at": 320, "x": [992, 1184], "y": [208, 208] }
+ ]
+}

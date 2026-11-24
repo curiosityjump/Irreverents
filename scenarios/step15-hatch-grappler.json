@@ -1,0 +1,126 @@
+{
+ "id": "step15-hatch-grappler",
+ "proves": "Step 15 signal 3, the hatch (weight): the grappler lifts the heavy crate beside the plate (120 against 150), sets it down on the plate (columns 57-58), and the hatch eight tiles east opens and stays open while it rests there; the grappler walks on and drops through into the chamber under the trail. Control (watched to fail): the same run without the crate (the plate comes up as he steps off, stayOpen 0, and the hatch is shut when he reaches it). The piece there (forest-3) is found",
+ "room": "forest-trail",
+ "players": [
+  {
+   "id": "a",
+   "character": "grappler",
+   "spawn": 1
+  }
+ ],
+ "entities": [
+  {
+   "id": "crate",
+   "character": "crate-heavy",
+   "tile": [
+    55,
+    8
+   ]
+  }
+ ],
+ "inputs": [
+  {
+   "player": "a",
+   "from": 0,
+   "to": 14,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 15,
+   "to": 17,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 17,
+   "to": 20,
+   "hold": [
+    "grab"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 30,
+   "to": 51,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 52,
+   "to": 55,
+   "hold": [
+    "grab"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 75,
+   "to": 191,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 175,
+   "to": 193,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 195,
+   "to": 218,
+   "x": -1
+  }
+ ],
+ "ticks": 284,
+ "expect": [
+  {
+   "fact": "event-where",
+   "event": "grabbed",
+   "where": {
+    "target": "crate"
+   },
+   "between": [
+    0,
+    75
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "part",
+   "room": "forest-trail",
+   "part": "hatch",
+   "at": 75,
+   "is": {
+    "open": true
+   }
+  },
+  {
+   "fact": "position",
+   "player": "a",
+   "at": 284,
+   "x": [
+    992,
+    1184
+   ],
+   "y": [
+    208,
+    208
+   ]
+  },
+  {
+   "fact": "found",
+   "level": "bramble-forest",
+   "at": 284,
+   "pieces": [
+    "forest-3"
+   ]
+  }
+ ]
+}

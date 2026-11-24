@@ -1,5 +1,5 @@
 {
- "//": "DRAFT (Step 15, docs/decisions-log.md 'Step 15: the second place is a forest'): the trail's things and people. The heavy crate (`hatch-crate`, column 55) beside the hatch's plate (columns 57-58): only the grappler lifts it (120 against 150; the infiltrator and the flyer lift 60). INTENT: no light crate on the trail's upper floor, so the hatch is the grappler's alone (or a friend's on the plate: the other way in). A light crate (`pocket-crate`, column 22) in the deepest pocket, to throw at the cracked wall behind the start (G-03's shortcut); none on the start's side. Two light fighters on the flat past the root tunnel (columns 41 and 43), a heavy guarding the canopy's foot (column 49), and the brute between the hatch's plate and the hatch (column 62). Columns are first guesses; ids are permanent.",
+ "//": "DRAFT (Step 15, docs/decisions-log.md 'Step 15: the second place is a forest'): the trail's things and people. The heavy crate (`hatch-crate`, column 55) beside the hatch's plate (columns 57-58): only the grappler lifts it (120 against 150; the infiltrator and the flyer lift 60). INTENT: no light crate on the trail's upper floor, so the hatch is the grappler's alone (or a friend's on the plate: the other way in). A light crate (`pocket-crate`, column 22) in the deepest pocket, to throw at the cracked wall behind the start (G-03's shortcut); none on the start's side. Two light fighters on the flat past the root tunnel (columns 41 and 43), a heavy guarding the canopy's foot (column 49), and the brute between the hatch's plate and the hatch (column 62). Columns are first guesses; ids are permanent. The boulder (`slab-boulder`, column 74) beside the heavy plate (columns 77-78): weight 300, which only a hero holding the boost lifts (420); set down on the plate it holds the stone slab open (DRAFT, docs/decisions-log.md 'The forest's later thing').",
  "id": "forest-trail",
  "room": "forest-trail",
  "place": [
@@ -17,6 +17,14 @@
    "tile": [
     22,
     18
+   ]
+  },
+  {
+   "id": "slab-boulder",
+   "character": "forest-boulder",
+   "tile": [
+    74,
+    8
    ]
   },
   {

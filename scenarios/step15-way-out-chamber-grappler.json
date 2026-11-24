@@ -1,0 +1,48 @@
+{
+ "id": "step15-way-out-chamber-grappler",
+ "proves": "Step 15 signal 5, always a way out: the grappler (the biggest hero, 18 by 30) started inside the chamber under the trail walks to its one-way bough (columns 71-72) and jumps up twice on the spot, through the bough and through the one-way patch of the trail's floor above it, and stands on the trail. Control (watched to fail): that patch of floor made solid (row 9, columns 71-72), and the same presses leave him inside",
+ "room": "forest-trail",
+ "players": [
+  {
+   "id": "a",
+   "character": "grappler",
+   "spawn": 3
+  }
+ ],
+ "inputs": [
+  {
+   "player": "a",
+   "from": 0,
+   "to": 82,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 83,
+   "to": 101,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 116,
+   "to": 134,
+   "hold": [
+    "jump"
+   ]
+  }
+ ],
+ "ticks": 169,
+ "expect": [
+  {
+   "fact": "position",
+   "player": "a",
+   "at": 169,
+   "y": [
+    144,
+    144
+   ]
+  }
+ ]
+}

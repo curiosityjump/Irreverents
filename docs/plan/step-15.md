@@ -247,6 +247,28 @@ Flags:
 - Full run of a crossing with the grappler is about 90 s of game time: the
   walker waits at each two-tile wall before jumping. A person is faster.
 
+**Push 2 (the insides).** Spawns added inside the three under-floor
+pockets and by the hatch (spawn order: 0 the trail by the mound, 1 by the
+hatch, 2 tunnel, 3 chamber, 4 hollow, 5 the start, 6 the deep pocket). The
+boulder (`content/characters/forest-boulder.json`, weight 300 in
+`content/tuning.json`, placed `slab-boulder` at column 74). Pieces
+`forest-1`..`forest-5` (`content/completion/bramble-forest.json`).
+Scenarios, recorded with the scratch walker: `step15-gap-*`,
+`step15-canopy-*`, `step15-hatch-*` and `step15-hatch-friend` (the other way
+in), `step15-later-*` and `step15-later-boost`,
+`step15-way-out-{tunnel,chamber,hollow}-grappler`, `step15-shortcut-shut`,
+`step15-shortcut-opened`, `step15-boost-survives-the-walk` (the measure: a
+held power does not fade; only a dropped orb does). Controls named in each
+`proves`, watched to fail in one batch. The canopy has no way-out scenario:
+it is a bough you walk off. The deep pocket's way out is the crossing
+scenarios' climb back up the shaft.
+
+Flags:
+- The boulder is a grey box (`color`), no sprite: no new art tonight.
+- `step14-all-found-opens-cantina` seeds every level's set complete; the forest's five pieces were added to its seed (as town-7 was), or it went red.
+- "One by a throw or a stack": the one proven is a friend on the plate
+  (`step15-hatch-friend`); a throw onto the canopy is not scripted.
+
 ## Released to a lead, 2026-11-24 08:40 UTC (orchestrator `session_017WiGzHhT2apmWHT61rQ65G`)
 
 Why now: `docs/vision-gaps.md` (refreshed at 9dbd705) ranks row 2 first: "one level is not a world: a second region". The eight core loops of the owner's ~18:30 verdict are all built and live, and the last two full re-runs with nothing red were at 6400b44 and f434f2e. So the heading above ("nothing here is briefed") no longer holds the step back.

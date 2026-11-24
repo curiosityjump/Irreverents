@@ -1,0 +1,94 @@
+{
+ "id": "step15-later-grappler",
+ "proves": "Step 15 signal 4, the later thing: the grappler alone tries to lift the boulder (300: nobody lifts it without a power; the grappler lifts 150), stands on the heavy plate (needs 260; it reads only the grappler's own weight) and walks on over the stone slab: it stays shut and the grappler never gets into the hollow",
+ "room": "forest-trail",
+ "players": [
+  {
+   "id": "a",
+   "character": "grappler",
+   "spawn": 1
+  }
+ ],
+ "entities": [
+  {
+   "id": "boulder",
+   "character": "forest-boulder",
+   "tile": [
+    74,
+    8
+   ]
+  }
+ ],
+ "inputs": [
+  {
+   "player": "a",
+   "from": 0,
+   "to": 219,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 220,
+   "to": 222,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 222,
+   "to": 225,
+   "hold": [
+    "grab"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 235,
+   "to": 291,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 322,
+   "to": 426,
+   "x": 1
+  }
+ ],
+ "ticks": 457,
+ "expect": [
+  {
+   "fact": "event",
+   "event": "grabbed",
+   "player": "a",
+   "between": [
+    0,
+    457
+   ],
+   "count": [
+    0,
+    0
+   ]
+  },
+  {
+   "fact": "part",
+   "room": "forest-trail",
+   "part": "stone-door",
+   "at": 322,
+   "is": {
+    "open": false
+   }
+  },
+  {
+   "fact": "position",
+   "player": "a",
+   "at": 457,
+   "x": [
+    1344,
+    1408
+   ],
+   "y": [
+    144,
+    144
+   ]
+  }
+ ]
+}

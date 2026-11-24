@@ -1,0 +1,94 @@
+{
+ "id": "step15-later-flyer",
+ "proves": "Step 15 signal 4, the later thing: the flyer alone tries to lift the boulder (300: nobody lifts it without a power; the grappler lifts 150), stands on the heavy plate (needs 260; it reads only the flyer's own weight) and walks on over the stone slab: it stays shut and the flyer never gets into the hollow",
+ "room": "forest-trail",
+ "players": [
+  {
+   "id": "a",
+   "character": "flyer",
+   "spawn": 1
+  }
+ ],
+ "entities": [
+  {
+   "id": "boulder",
+   "character": "forest-boulder",
+   "tile": [
+    74,
+    8
+   ]
+  }
+ ],
+ "inputs": [
+  {
+   "player": "a",
+   "from": 0,
+   "to": 200,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 201,
+   "to": 203,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 203,
+   "to": 206,
+   "hold": [
+    "grab"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 216,
+   "to": 267,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 298,
+   "to": 393,
+   "x": 1
+  }
+ ],
+ "ticks": 424,
+ "expect": [
+  {
+   "fact": "event",
+   "event": "grabbed",
+   "player": "a",
+   "between": [
+    0,
+    424
+   ],
+   "count": [
+    0,
+    0
+   ]
+  },
+  {
+   "fact": "part",
+   "room": "forest-trail",
+   "part": "stone-door",
+   "at": 298,
+   "is": {
+    "open": false
+   }
+  },
+  {
+   "fact": "position",
+   "player": "a",
+   "at": 424,
+   "x": [
+    1344,
+    1408
+   ],
+   "y": [
+    144,
+    144
+   ]
+  }
+ ]
+}

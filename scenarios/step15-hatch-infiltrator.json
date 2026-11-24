@@ -1,0 +1,94 @@
+{
+ "id": "step15-hatch-infiltrator",
+ "proves": "Step 15 signal 3, the hatch: the infiltrator tries to lift the heavy crate (nothing: it lifts 60), stands on the plate (the hatch opens), then walks east to the hatch: with nobody on the plate it shut the tick it came up (stayOpen 0), so the infiltrator walks over it and never gets into the chamber",
+ "room": "forest-trail",
+ "players": [
+  {
+   "id": "a",
+   "character": "infiltrator",
+   "spawn": 1
+  }
+ ],
+ "entities": [
+  {
+   "id": "crate",
+   "character": "crate-heavy",
+   "tile": [
+    55,
+    8
+   ]
+  }
+ ],
+ "inputs": [
+  {
+   "player": "a",
+   "from": 0,
+   "to": 8,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 9,
+   "to": 11,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 11,
+   "to": 14,
+   "hold": [
+    "grab"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 24,
+   "to": 52,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 83,
+   "to": 173,
+   "x": 1
+  }
+ ],
+ "ticks": 204,
+ "expect": [
+  {
+   "fact": "event",
+   "event": "grabbed",
+   "player": "a",
+   "between": [
+    0,
+    204
+   ],
+   "count": [
+    0,
+    0
+   ]
+  },
+  {
+   "fact": "part",
+   "room": "forest-trail",
+   "part": "hatch",
+   "at": 83,
+   "is": {
+    "open": true
+   }
+  },
+  {
+   "fact": "position",
+   "player": "a",
+   "at": 204,
+   "x": [
+    1088,
+    1152
+   ],
+   "y": [
+    144,
+    144
+   ]
+  }
+ ]
+}

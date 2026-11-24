@@ -187,7 +187,7 @@ them. `content/completion/<level id>.json` (`src/content/kinds/completion.ts`):
   over the drop), `quarry-3` the pit's out-of-reach ledge (wings only),
   `quarry-4` the hidden cave's west step, `quarry-5` the depot's hoard
   once banked. The Bandit Camp's one, `camp-1`, is its strongbox once
-  banked (`content/completion/bandit-camp.json`). Reached in scripted runs: `town-3` by
+  banked (`content/completion/bandit-camp.json`). The Bramble Forest's five (Step 15, `content/completion/bramble-forest.json`, no set build yet): `forest-1` in the root tunnel (the infiltrator's crawl), `forest-2` on the canopy bough (flaps), `forest-3` in the chamber under the hatch (the heavy crate on its plate), `forest-4` in the hollow under the stone slab (the boulder, by a boost), `forest-5` in the deepest pocket; each is found in a `step15-*` scenario. Reached in scripted runs: `town-3` by
   `step3-plates-one-and-a-weight`, `town-5` by `step3-secret-by-size`,
   `town-6` by `step3-over-the-roofs`, `quarry-1` by
   `step16-secret-ledge-flyer` (their own scenarios, which do not assert

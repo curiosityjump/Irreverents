@@ -1,0 +1,125 @@
+{
+ "id": "step15-shortcut-opened",
+ "proves": "Step 15 signal 5, the shortcut used: the infiltrator in the deepest pocket picks up the crate lying there and throws it west into the cracked wall (column 14); it breaks for good; the infiltrator walks west through it to the trail's start, and then back east from the start straight into the pocket. Control (watched to fail): the same presses with no crate in the pocket, and the wall stands. The piece there (forest-5) is found",
+ "room": "forest-trail",
+ "players": [
+  {
+   "id": "a",
+   "character": "infiltrator",
+   "spawn": 6
+  }
+ ],
+ "entities": [
+  {
+   "id": "crate",
+   "character": "crate",
+   "tile": [
+    22,
+    18
+   ]
+  }
+ ],
+ "inputs": [
+  {
+   "player": "a",
+   "from": 0,
+   "to": 23,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 24,
+   "to": 26,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 26,
+   "to": 29,
+   "hold": [
+    "grab"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 39,
+   "to": 42,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 102,
+   "to": 238,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 102,
+   "to": 120,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 239,
+   "to": 353,
+   "x": 1
+  }
+ ],
+ "ticks": 364,
+ "expect": [
+  {
+   "fact": "event-where",
+   "event": "part-broken",
+   "where": {
+    "room": "forest-trail",
+    "part": "shortcut-wall"
+   },
+   "between": [
+    0,
+    102
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "position",
+   "player": "a",
+   "at": 239,
+   "x": [
+    0,
+    128
+   ],
+   "y": [
+    304,
+    304
+   ]
+  },
+  {
+   "fact": "position",
+   "player": "a",
+   "at": 364,
+   "x": [
+    304,
+    352
+   ],
+   "y": [
+    304,
+    304
+   ]
+  },
+  {
+   "fact": "found",
+   "level": "bramble-forest",
+   "at": 364,
+   "pieces": [
+    "forest-5"
+   ]
+  }
+ ]
+}

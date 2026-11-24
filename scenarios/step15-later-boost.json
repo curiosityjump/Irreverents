@@ -1,0 +1,142 @@
+{
+ "id": "step15-later-boost",
+ "proves": "Step 15 signal 4, the later thing opened by a power: the grappler holding the boost (Step 9; lifts 420) lifts the boulder (300), sets it down on the heavy plate (needs 260) and the stone slab six tiles east opens and stays open; he walks on and drops into the hollow (found: forest-trail/stone-hollow). Control (watched to fail): the same presses without the power (step15-later-grappler is that run's shape: no grab, the slab shut). The piece there (forest-4) is found",
+ "room": "forest-trail",
+ "players": [
+  {
+   "id": "a",
+   "character": "grappler",
+   "spawn": 1,
+   "power": "boost"
+  }
+ ],
+ "entities": [
+  {
+   "id": "boulder",
+   "character": "forest-boulder",
+   "tile": [
+    74,
+    8
+   ]
+  }
+ ],
+ "inputs": [
+  {
+   "player": "a",
+   "from": 0,
+   "to": 219,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 220,
+   "to": 222,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 222,
+   "to": 225,
+   "hold": [
+    "grab"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 235,
+   "to": 280,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 281,
+   "to": 284,
+   "hold": [
+    "grab"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 304,
+   "to": 396,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 381,
+   "to": 399,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 401,
+   "to": 423,
+   "x": -1
+  }
+ ],
+ "ticks": 490,
+ "expect": [
+  {
+   "fact": "event-where",
+   "event": "grabbed",
+   "where": {
+    "target": "boulder"
+   },
+   "between": [
+    0,
+    304
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "part",
+   "room": "forest-trail",
+   "part": "stone-door",
+   "at": 304,
+   "is": {
+    "open": true
+   }
+  },
+  {
+   "fact": "position",
+   "player": "a",
+   "at": 490,
+   "x": [
+    1280,
+    1440
+   ],
+   "y": [
+    208,
+    208
+   ]
+  },
+  {
+   "fact": "event-where",
+   "event": "place-found",
+   "where": {
+    "place": "forest-trail/stone-hollow"
+   },
+   "between": [
+    0,
+    490
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "found",
+   "level": "bramble-forest",
+   "at": 490,
+   "pieces": [
+    "forest-4"
+   ]
+  }
+ ]
+}

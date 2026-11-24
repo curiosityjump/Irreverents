@@ -1,0 +1,44 @@
+{
+ "id": "step15-gap-infiltrator",
+ "proves": "Step 15 signal 3, the gap: the infiltrator, from the trail's west end, walks east into the root mound's foot without jumping. The crawl is exactly one tile high and the infiltrator (12 px) fits: it runs through and drops into the root tunnel under the trail (area root-tunnel). Control (watched to fail): the crawl made solid (row 8, columns 24-29), and it never gets in. The piece there (forest-1) is found",
+ "room": "forest-trail",
+ "players": [
+  {
+   "id": "a",
+   "character": "infiltrator",
+   "spawn": 0
+  }
+ ],
+ "inputs": [
+  {
+   "player": "a",
+   "from": 0,
+   "to": 240,
+   "x": 1
+  }
+ ],
+ "ticks": 240,
+ "expect": [
+  {
+   "fact": "position",
+   "player": "a",
+   "at": 240,
+   "x": [
+    416,
+    624
+   ],
+   "y": [
+    208,
+    208
+   ]
+  },
+  {
+   "fact": "found",
+   "level": "bramble-forest",
+   "at": 240,
+   "pieces": [
+    "forest-1"
+   ]
+  }
+ ]
+}

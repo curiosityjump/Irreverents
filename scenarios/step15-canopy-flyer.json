@@ -1,0 +1,88 @@
+{
+ "id": "step15-canopy-flyer",
+ "proves": "Step 15 signal 3, the canopy (height): from the trail beside the bough six tiles up (columns 46-52), with nothing to climb, a jump and three flaps while moving west. The flyer lands on the bough and stands there. Control (watched to fail): the grappler and the infiltrator with the same presses (step15-canopy-grappler, -infiltrator). The piece there (forest-2) is found",
+ "room": "forest-trail",
+ "players": [
+  {
+   "id": "a",
+   "character": "flyer",
+   "spawn": 1
+  }
+ ],
+ "inputs": [
+  {
+   "player": "a",
+   "from": 0,
+   "to": 12,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 13,
+   "to": 15,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 25,
+   "to": 41,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 47,
+   "to": 55,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 63,
+   "to": 71,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 79,
+   "to": 87,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 45,
+   "to": 85,
+   "x": -1
+  }
+ ],
+ "ticks": 225,
+ "expect": [
+  {
+   "fact": "position",
+   "player": "a",
+   "at": 225,
+   "x": [
+    736,
+    848
+   ],
+   "y": [
+    48,
+    48
+   ]
+  },
+  {
+   "fact": "found",
+   "level": "bramble-forest",
+   "at": 225,
+   "pieces": [
+    "forest-2"
+   ]
+  }
+ ]
+}

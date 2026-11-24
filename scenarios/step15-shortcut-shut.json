@@ -1,0 +1,48 @@
+{
+ "id": "step15-shortcut-shut",
+ "proves": "Step 15 signal 5, the shortcut before it is used: the grappler walks east from the trail's start along the bottom: the cracked wall (column 14) stops him (a run at 96 px/s is under its break speed of 200) and he never gets into the deepest pocket behind it",
+ "room": "forest-trail",
+ "players": [
+  {
+   "id": "a",
+   "character": "grappler",
+   "spawn": 5
+  }
+ ],
+ "inputs": [
+  {
+   "player": "a",
+   "from": 0,
+   "to": 240,
+   "x": 1
+  }
+ ],
+ "ticks": 240,
+ "expect": [
+  {
+   "fact": "position",
+   "player": "a",
+   "at": 240,
+   "x": [
+    0,
+    224
+   ],
+   "y": [
+    304,
+    304
+   ]
+  },
+  {
+   "fact": "event",
+   "event": "part-broken",
+   "between": [
+    0,
+    240
+   ],
+   "count": [
+    0,
+    0
+   ]
+  }
+ ]
+}
