@@ -497,3 +497,13 @@ Slice 1b and slice 2's builder, `session_017WiGzJR2qgU7SXbKtxZpYP` (`handoff-pro
   - Not a scripted fact: the flight look is checked by eye in the shots, and
     by `drawn.weapons.loose[].flying`, which only the new code sets (slice 1's
     `shot-in-the-air-sideways.png` is the before).
+
+## Look at slice 1b's shots (orchestrator session_017WiGzHY5UZsWTLCH8cLm8M, 2026-11-24 ~14:45 UTC)
+
+By a subagent reading 8 of the 12 shots in `docs/plan/step-24-shots/1b/` at phone size (the PNGs are 3x); not by playing, not by the orchestrator's own eye. Against 8a3fafc's claims:
+
+- **Reads as an enemy: partly.** Upright he stands clear in a red hood and cloak. In every sideways shot the balcony is at the top-left under the party plate: half of him or more is behind the HUD or off the top edge (`winding-up-sideways`, `shot-in-the-air-small-sideways`, `hero-struck-small-sideways`: a red sliver). On a phone held sideways the player mostly cannot see who is throwing. A camera and plate matter, not the sprite.
+- **The shot reads as a threat: partly.** In flight it is a small orange crescent with a faint trail, low in contrast on the gallery's tan wall; in `shot-in-the-air-small-sideways` it could not be found at all. The dotted arc and landing cross read well. Spent shots on the floor are gold-and-purple crescents that look like pickups. `hero-struck-*` shows no hit effect on the hero.
+- `at-rest-sideways.png` is 2250x1020, the 750x340 size, not 844x390 as its name implies.
+
+Sent to the thrower's builder as part of its brief's next push; nothing here is re-measured yet.

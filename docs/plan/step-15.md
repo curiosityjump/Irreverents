@@ -358,3 +358,15 @@ For the lead, before any brief:
 - **Push 2 (841d4a8), reviewed at 155913d, 11:25 UTC, by the lead in a detached worktree:** build 0, `npm run check` ok (all 26 `step15-*` files on disk ok, every other scenario ok, including the edited `step14-all-found-opens-cantina`), gates 6 of 6. Control re-watched: the boulder's weight set to 140 (under the grappler's 150) makes `step15-later-grappler` fail (he grabs it at tick 222); restored, all four `step15-later-*` pass. Noted, not a fault: push 2 edits another step's scenario (`step14-all-found-opens-cantina` gains the forest's five pieces in its seed, as town-7 was added), which is additive and keeps its claim. Still owed: the forest's own tiles (P10 pack, push 3), a throw or stack onto the canopy (only the friend way is scripted), and the boulder is a grey box (push 4 shots will show it).
 - **Push 3 (4323a15; first pushed as 13499e1, reverted at b2f3e99 when live did not move for 8 minutes, re-pushed as the same tree), reviewed at c2a3172, 13:05 UTC, by the lead in a detached worktree:** build 0, `npm run check` ok (all 31 `step15-*` files on disk ok, every other scenario ok), gates 6 of 6. Control re-watched: `callers` emptied in `content/outposts/forest-trail.json` makes `step15-caught-both-sides` fail (no wave, nobody in the room); restored, both `step15-caught-*` pass. Live at 4323a15 per `/healthz`. Open, given to the third builder (`session_017WiGzGVGmfNTRtDB8nX3Np`): push 4 (the look defects, the phone case, the shots, the docs) and a quiet way past the lookout (no scripted clear is unseen today).
 - **Push 4a (5779ebc, live 13:30 UTC), re-run by the lead at 7d1d395:** build 0, check ok (31 `step15-*` ok), gates 6 of 6. Art and decor data only (`assets/tiles/forest.png`, `assets/backdrops/forest-glade.png`, `content/decor/forest-trail.json`); no control applies. Its look is judged from push 4b's shots.
+
+## Look at the forest's shots, from the orchestrator (session_017WiGzHY5UZsWTLCH8cLm8M, 2026-11-24 ~14:45 UTC)
+
+By a subagent reading 13 of the 30 shots in `docs/plan/step-15-shots/` at phone size; not by playing. For the lead to weigh, not re-measured:
+
+- **Holds:** no seam behind; dark earth behind every pocket; the road, the trail's start and the courtyard's doors are clean at all three sizes; the banner reads.
+- **"Dark loam": partly.** The ground still reads as a warm mid-brown cobble with a bright grass top, not dark.
+- **`deep-pocket-844x390` and `-750x340` show only the STAGE CLEARED screen**, so that secret is not shown at either sideways size: retake them.
+- **`canopy-390x664`: the hero on the canopy is behind the party plate**, only legs showing.
+- **The boulder is a plain grey rectangle** (`boulder-390x664`).
+- Seen and left alone, likely the watchers' sight bands (deliberate, Step 19): translucent orange boxes in `canopy-844` and `guarded-spot-844`; thin orange vertical lines in `trail-gap-750` and `root-tunnel-390`. Say in one line if they are something else.
+- `trail-gap-750`: a hooded enemy sits under the star and sound buttons, top right.
