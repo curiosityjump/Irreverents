@@ -1,0 +1,79 @@
+{
+  "id": "step13-heavy-pocket-way-out-grappler",
+  "proves": "INTENT (the undercroft's room note; handoff-prompts/hidden-recruit.md): the heavy pocket under the undercroft's hall has a way out any body takes with the hatch shut (no stone on the heavy plate here): the grappler, in the pocket's east end, walks west to its west wall, jumps on the spot up through the one-way ledge (columns 23-24, row 14) and the one-way tiles in the hall floor (row 13) and stands on the hall floor, then walks east along it over the shut hatch. The way-out check does not see this pocket (sealed off but for these tiles it is the check's known blind spot: docs/mechanisms/rooms-and-doors.md, 'The stone plate's pocket'), so these scenarios are its proof. Control (watched to fail): the one-way tiles made solid by this scenario's own tiles override, and the grappler stays in the pocket",
+  "room": "undercroft",
+  "players": [
+    {
+      "id": "a",
+      "spawn": 3
+    }
+  ],
+  "entities": [
+    {
+      "id": "climber",
+      "character": "grappler",
+      "tile": [
+        30,
+        15
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "entity": "climber",
+      "from": 0,
+      "to": 90,
+      "x": -1
+    },
+    {
+      "entity": "climber",
+      "from": 100,
+      "to": 115,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "entity": "climber",
+      "from": 150,
+      "to": 165,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "entity": "climber",
+      "from": 210,
+      "to": 250,
+      "x": 1
+    }
+  ],
+  "ticks": 280,
+  "expect": [
+    {
+      "fact": "part",
+      "room": "undercroft",
+      "part": "heavy-hatch",
+      "between": [
+        0,
+        280
+      ],
+      "is": {
+        "open": false
+      }
+    },
+    {
+      "fact": "position",
+      "entity": "climber",
+      "at": 280,
+      "x": [
+        390,
+        470
+      ],
+      "y": [
+        207,
+        209
+      ]
+    }
+  ]
+}

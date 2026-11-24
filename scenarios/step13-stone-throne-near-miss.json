@@ -1,0 +1,67 @@
+{
+  "id": "step13-stone-throne-near-miss",
+  "proves": "Step 13, the hidden recruit (push 2): the heaviest single thing anyone else can bring, the brawler (70) with the throne (400, which only Brawn lifts), comes to 470 on the heavy plate (needs 480): it stays up and the hatch shut. Set here as both resting on the plate's step (the plate reads weight only, never who or how: src/sim/systems/room-plate.ts; a carrier counts what it carries the same way); the hauler stands on the hall floor doing nothing. Control (watched to fail): a light crate (20) added to the plate, 490: the plate goes down and the hatch opens, which is the logged pile (decisions-log: a pile opens it too, by the plate's own rule and doc 05's creative substitutes)",
+  "room": "undercroft",
+  "players": [
+    {
+      "id": "a",
+      "character": "hauler",
+      "spawn": 3
+    }
+  ],
+  "entities": [
+    {
+      "id": "throne",
+      "character": "throne",
+      "tile": [
+        18,
+        6
+      ]
+    },
+    {
+      "id": "brawler",
+      "character": "brawler",
+      "tile": [
+        19,
+        6
+      ]
+    }
+  ],
+  "inputs": [],
+  "ticks": 120,
+  "expect": [
+    {
+      "fact": "part",
+      "room": "undercroft",
+      "part": "heavy-plate",
+      "at": 60,
+      "is": {
+        "load": 470
+      }
+    },
+    {
+      "fact": "part",
+      "room": "undercroft",
+      "part": "heavy-plate",
+      "between": [
+        0,
+        120
+      ],
+      "is": {
+        "down": false
+      }
+    },
+    {
+      "fact": "part",
+      "room": "undercroft",
+      "part": "heavy-hatch",
+      "between": [
+        0,
+        120
+      ],
+      "is": {
+        "open": false
+      }
+    }
+  ]
+}

@@ -1,9 +1,10 @@
 {
-  "//": "DRAFT (Step 14 slice B, push 2): one light crate in the passage near the stair up to the street (cellar-up, column 27), well away from the cracked wall (column 4): before it, nothing in the undercroft could be thrown at the wall, so the vault (and the piece in it) needed a body carried down from the street, which a door lets go of. The id is permanent; the column is a first guess. DRAFT (Step 24 slice 2, docs/plan/step-24.md 'Builder notes'): a thrower (`undercroft-thrower`) on the middle step of the stair beside the stone plate (row 9, columns 20-22), facing west over the plate: his lobs pass over whoever stands on the plate and come down by the grate (columns 14-15), so opening it and dropping in is done under fire; the steps up to him (rows 11, 9) let any hero reach him and knock him off. He never walks.",
+  "//": "DRAFT (Step 14 slice B, push 2): one light crate in the passage near the stair up to the street (cellar-up, column 27), well away from the cracked wall (column 4): before it, nothing in the undercroft could be thrown at the wall, so the vault (and the piece in it) needed a body carried down from the street, which a door lets go of. The id is permanent; the column is a first guess. DRAFT (Step 24 slice 2, docs/plan/step-24.md 'Builder notes'): a thrower (`undercroft-thrower`) on the middle step of the stair beside the stone plate (row 9, columns 20-22), facing west over the plate: his lobs pass over whoever stands on the plate and come down by the grate (columns 14-15), so opening it and dropping in is done under fire; the steps up to him (rows 11, 9) let any hero reach him and knock him off. He never walks. DRAFT (Step 13, the hidden recruit, push 2): undercroft-stone (stone-heavy, 480, only the hauler lifts it) on the stair's lowest step (row 11, columns 22-23): on the hall floor it blocked bodies thrown in through the window.",
   "id": "undercroft",
   "room": "undercroft",
   "place": [
     { "id": "undercroft-crate", "character": "crate", "tile": [24, 12] },
-    { "id": "undercroft-thrower", "character": "ranged-fighter", "tile": [21, 8], "npc": "ranged-fighter", "routine": [{ "face": "left" }, { "wait": 5 }] }
+    { "id": "undercroft-thrower", "character": "ranged-fighter", "tile": [21, 8], "npc": "ranged-fighter", "routine": [{ "face": "left" }, { "wait": 5 }] },
+    { "id": "undercroft-stone", "character": "stone-heavy", "tile": [22, 10] }
   ]
 }

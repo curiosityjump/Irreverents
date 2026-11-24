@@ -1,5 +1,5 @@
 {
-  "//": "DRAFT: the layout is a first pass; the id, the door ids and the part ids are permanent. A hidden room under the castle. East: the opening behind the throne, five tiles tall (a body thrown through the throne room's window arrives high and drops to the floor; a walker arrives at floor level), and a doorway that comes up in the castle street for now (it is meant to come up in the courtyard). West along the passage: steps of one-way platforms up to a ledge (columns 16-17) at the mouth of a crawl exactly one tile high and five long (row 4, columns 11-15), which only a body at most a tile tall fits. It leads to the secret chamber (columns 5-10). INTENT: the chamber has a second way out that any body can take, a hole in its floor (columns 6-7, two tiles wide so the widest body fits) dropping eight tiles into the passage (the flyer's jump and three flaps reach about six and a half), too far to come back up by jumping or flapping: nobody who gets in is ever stuck, and no place here is leavable by one party member only. Getting in some other way (thrown up the drop by a friend) must keep working; do not close it. At the west end a cracked wall (column 4) seals a small vault. The opening back to the throne room is not marked hidden on this side, so it shows as an opening here; in the throne room the same connection is hidden and painted as wall. DRAFT (Step 3, the stone plate; docs/decisions-log.md 'Step 3: the stone plate'): three rows under the passage's floor (rows 14-16, appended so no coordinate above moved) hold a small hidden pocket, columns 9-17, rows 14-15. INTENT: the pocket's way out, which any body can take whatever else is shut: at its west end one-way platforms in the passage floor (columns 9-12, row 13) over a one-way ledge (the same columns, row 14): a jump on the spot from the pocket floor lands on the ledge, a second lands on the passage floor. From above they are floor, so it is not a way in. Do not close it. The stone plate (columns 17-20, row 12, needs 83 of weight, DRAFT) holds the grate in the floor over the pocket (columns 14-15, row 13): while it is open a body drops through. The piece behind it is in the pocket's east end.",
+  "//": "DRAFT: the layout is a first pass; the id, the door ids and the part ids are permanent. A hidden room under the castle. East: the opening behind the throne, five tiles tall (a body thrown through the throne room's window arrives high and drops to the floor; a walker arrives at floor level), and a doorway that comes up in the castle street for now (it is meant to come up in the courtyard). West along the passage: steps of one-way platforms up to a ledge (columns 16-17) at the mouth of a crawl exactly one tile high and five long (row 4, columns 11-15), which only a body at most a tile tall fits. It leads to the secret chamber (columns 5-10). INTENT: the chamber has a second way out that any body can take, a hole in its floor (columns 6-7, two tiles wide so the widest body fits) dropping eight tiles into the passage (the flyer's jump and three flaps reach about six and a half), too far to come back up by jumping or flapping: nobody who gets in is ever stuck, and no place here is leavable by one party member only. Getting in some other way (thrown up the drop by a friend) must keep working; do not close it. At the west end a cracked wall (column 4) seals a small vault. The opening back to the throne room is not marked hidden on this side, so it shows as an opening here; in the throne room the same connection is hidden and painted as wall. DRAFT (Step 3, the stone plate; docs/decisions-log.md 'Step 3: the stone plate'): three rows under the passage's floor (rows 14-16, appended so no coordinate above moved) hold a small hidden pocket, columns 9-17, rows 14-15. INTENT: the pocket's way out, which any body can take whatever else is shut: at its west end one-way platforms in the passage floor (columns 9-12, row 13) over a one-way ledge (the same columns, row 14): a jump on the spot from the pocket floor lands on the ledge, a second lands on the passage floor. From above they are floor, so it is not a way in. Do not close it. The stone plate (columns 17-20, row 12, needs 83 of weight, DRAFT) holds the grate in the floor over the pocket (columns 14-15, row 13): while it is open a body drops through. The piece behind it is in the pocket's east end. DRAFT (Step 13, the hidden recruit, push 2; handoff-prompts/hidden-recruit.md): a stone only the hauler lifts (undercroft-stone, 480, on the stair's lowest step, row 11, columns 22-23, content/placements/undercroft.json) and a plate that needs it, heavy-plate (needs 480), on the stair's top step (row 6, columns 18-19, over the row 7 one-way). It holds heavy-hatch, a gate in the hall floor (row 13, columns 30-31), over a hidden pocket (area heavy-pocket, rows 14-15, columns 23-31) with the town's eighth piece. The stone lies a floor below its plate on purpose: punches slide it along a floor but cannot lift it a step. INTENT: the pocket's way out that any body takes with the hatch shut, as plate-pocket's: one-way tiles at columns 23-24 in row 14 (a ledge) and row 13 (the hall floor), climbed by two jumps on the spot; from above they are floor. Do not close it.",
   "id": "undercroft",
   "name": "Undercroft",
   "tile": 16,
@@ -26,6 +26,12 @@
     },
     "G": {
       "part": "grate"
+    },
+    "h": {
+      "part": "heavy-plate"
+    },
+    "K": {
+      "part": "heavy-hatch"
     }
   },
   "rows": [
@@ -35,16 +41,16 @@
     "#####......#####.................#",
     "#####...1........2...............#",
     "######..##########...............#",
-    "#####............................#",
+    "#####.............hh.............#",
     "#####.............===............#",
     "#####............................T",
     "#####...............===..........T",
     "#...#............................T",
     "#...B.................===..c.....T",
     "#...B.3..........SSSS......c.4...T",
-    "#########====#GG##################",
-    "#########====.....################",
-    "#########.........################",
+    "#########====#GG#######==#####KK##",
+    "#########====.....#####==.......##",
+    "#########.........#####.........##",
     "##################################"
   ],
   "doors": [
@@ -86,6 +92,22 @@
           "stone-plate"
         ]
       }
+    },
+    {
+      "id": "heavy-plate",
+      "kind": "plate",
+      "params": {
+        "needs": 480
+      }
+    },
+    {
+      "id": "heavy-hatch",
+      "kind": "gate",
+      "params": {
+        "plates": [
+          "heavy-plate"
+        ]
+      }
     }
   ],
   "areas": [
@@ -118,6 +140,18 @@
       "hidden": true,
       "at": [
         9,
+        14
+      ],
+      "size": [
+        9,
+        2
+      ]
+    },
+    {
+      "id": "heavy-pocket",
+      "hidden": true,
+      "at": [
+        23,
         14
       ],
       "size": [

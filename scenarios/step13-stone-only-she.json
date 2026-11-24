@@ -1,0 +1,213 @@
+{
+  "id": "step13-stone-only-she",
+  "proves": "Step 13, the hidden recruit (push 2): the secret only she opens. The hauler from spawn 3 walks west, jumps onto the stair's lowest step where the stone lies (480; placed at the same tile as content/placements/undercroft.json's undercroft-stone, here as an entity so the stair's thrower is not in the run), grabs it (her liftStrength 500), climbs the two steps above carrying it, and on the top step throws it nearly straight up (the stick up): it lands on the heavy plate's tiles and stays, the plate goes down (needs 480) and the floor hatch over the heavy pocket stays open. She walks east off the stair to the hatch and drops in (found: undercroft/heavy-pocket), walks west and takes town-8, and gets out by the one-way tiles at columns 23-24 with one jump on the spot. Control (watched to fail): her liftStrength 470: no grab, the plate never down, the hatch never opens, nothing found",
+  "room": "undercroft",
+  "players": [
+    {
+      "id": "a",
+      "character": "hauler",
+      "spawn": 3
+    }
+  ],
+  "entities": [
+    {
+      "id": "stone",
+      "character": "stone-heavy",
+      "tile": [
+        22,
+        10
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 56,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 38,
+      "to": 56,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 85,
+      "to": 88,
+      "hold": [
+        "grab"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 100,
+      "to": 118,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 100,
+      "to": 118,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 150,
+      "to": 166,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 150,
+      "to": 168,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 200,
+      "to": 212,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 235,
+      "to": 245,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 236,
+      "to": 239,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 290,
+      "to": 438,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 445,
+      "to": 533,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 555,
+      "to": 575,
+      "hold": [
+        "jump"
+      ]
+    }
+  ],
+  "ticks": 620,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "grabbed",
+      "where": {
+        "by": "p:a",
+        "target": "stone"
+      },
+      "between": [
+        80,
+        90
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "thrown",
+      "where": {
+        "by": "p:a",
+        "target": "stone"
+      },
+      "between": [
+        230,
+        240
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "part",
+      "room": "undercroft",
+      "part": "heavy-plate",
+      "at": 300,
+      "is": {
+        "down": true
+      }
+    },
+    {
+      "fact": "part",
+      "room": "undercroft",
+      "part": "heavy-hatch",
+      "at": 420,
+      "is": {
+        "open": true
+      }
+    },
+    {
+      "fact": "position",
+      "entity": "stone",
+      "at": 620,
+      "x": [
+        300,
+        325
+      ],
+      "y": [
+        112,
+        112
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "place-found",
+      "where": {
+        "place": "undercroft/heavy-pocket",
+        "by": "p:a"
+      },
+      "between": [
+        0,
+        620
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "found",
+      "level": "castle-town",
+      "at": 620,
+      "pieces": [
+        "town-8"
+      ]
+    },
+    {
+      "fact": "position",
+      "player": "a",
+      "at": 620,
+      "y": [
+        208,
+        208
+      ]
+    }
+  ]
+}

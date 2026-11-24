@@ -126,6 +126,23 @@ that could trap someone.
   (`step3-secret-another-way`): do not close it, and do not let the
   chamber become leavable by one party member only (a player who crawls
   in and switches character must still get out).
+- **The heavy pocket** (Step 13, the hidden recruit, `DRAFT:`;
+  `handoff-prompts/hidden-recruit.md`). A stone only the hauler lifts
+  (`undercroft-stone`, kind `stone-heavy`, 480) lies on the hall stair's
+  lowest step (row 11, columns 22-24: things thrown in through the window
+  slide under it; on the hall floor it blocked them, `step3-weight-king`).
+  The **heavy plate** (`heavy-plate`, `needs` 480) is on the top step (row
+  6, columns 18-19, over the row 7 one-way); it holds the **heavy hatch**
+  (`heavy-hatch`, a `gate` in the hall floor, row 13, columns 30-31) over
+  the hidden area `heavy-pocket` (rows 14-15, columns 23-31), where
+  `town-8` lies. `INTENT:` its way out with the hatch shut, as the stone
+  plate's pocket: one-way tiles at columns 23-24 in rows 14 and 13
+  (`step13-heavy-pocket-way-out-*`, the three party members and the
+  hauler; the way-out check does not see this pocket, the same blind
+  spot). Only she lifts the stone (`step13-stone-only-she`,
+  `-brawn-cannot`); 470 (the brawler and the throne) leaves it shut and a
+  pile of 490 opens it (`step13-stone-throne-near-miss`), the plate's own
+  rule, kept.
 - **The stone plate's pocket** (Step 3, the puzzles slice, `DRAFT:`).
   Three rows appended under the undercroft's floor (rows 14-16; nothing
   above moved) hold a small hidden pocket, columns 9-17, rows 14-15.

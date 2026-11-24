@@ -13,7 +13,7 @@ need, by path and nothing else (never search or sync the mirror):
 `docs/design-library/03-visual-direction-and-assets/current-pixel-art-explorations/p04-cantina-props-vehicles-hall-visual-source-sheets/cantina-npc-sprite-sheet.png`
 (the art; git fetches it when a command opens it).
 
-**Landed so far:** push 1 (the hauler in the cave), commit to follow in the report.
+**Landed so far:** push 1 (the hauler in the cave) at ce3f8bf; push 2 (the stone only she lifts) in the commit after it. Push 3 (`step13-free-while-caught`) not started.
 
 **Reports:** `send_message` to the session on the Orchestrator line of
 `docs/questions-for-the-owner.md`, after each push, with the commit and

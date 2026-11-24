@@ -61,6 +61,15 @@
         15
       ],
       "look": "item-ring"
+    },
+    {
+      "id": "town-8",
+      "room": "undercroft",
+      "tile": [
+        27,
+        15
+      ],
+      "look": "item-crystal"
     }
   ],
   "builds": {

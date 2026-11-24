@@ -18,7 +18,7 @@
 // DRAFT: every limit below is a first pass with room to spare.
 import fs from 'node:fs';
 import path from 'node:path';
-import { me, phone, pointOn, settle, standAt } from '../lib/e2e-touch.ts';
+import { me, phone, pointOn, settle, standAt, tap } from '../lib/e2e-touch.ts';
 import type { Kit, Phone } from '../lib/e2e-touch.ts';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -186,6 +186,91 @@ export async function hiddenRecruitFacts(kit: Kit & { shots?: string }): Promise
       'hidden-recruit-cave',
       inCave && !!seen && seen.open === false && seen.character === 'hauler',
       `by touch, the phone walked west through the pit's painted wall into the cave (${inCave}; now in ${await room(ph)}); its page drew the cave's cage ${seen ? `with the ${seen.character}, ${seen.open ? 'OPEN' : 'shut'}` : 'NOT AT ALL'}`,
+    );
+  } finally {
+    await ph.ctx.close();
+  }
+}
+
+/**
+ * Push 2's fact (hidden-recruit-stone): down the castle street's cellar doorway by Use (as
+ * scripts/e2e/glints.ts) into the undercroft, whose page draws the heavy stone on the stair's
+ * lowest step and the heavy plate on its top step; the start hero hops onto that step beside the
+ * stone and taps Grab, and the page never draws the stone lifted (too heavy for anyone but the
+ * hauler). Control: E2E_TOUCH_BREAK=interact (never down the doorway) or =jump (never onto the step).
+ */
+export async function hiddenStoneFacts(kit: Kit & { shots?: string }): Promise<void> {
+  const { fact } = kit;
+  const dir = kit.shots ?? '';
+  if (dir) fs.mkdirSync(dir, { recursive: true });
+  const url = `${kit.base}/?room=e2e-stone-${Math.random().toString(36).slice(2, 10)}`;
+  const ph = await phone(kit, url, 'hidden-stone');
+  try {
+    const toStreet = await walkInto(ph, 1, 'castle-street');
+    const doorX = await ph.page.evaluate(() => {
+      const irr = (window as any).irreverents;
+      const c = irr.content;
+      const d = c.rooms['castle-street'].doors.find((q: any) => q.id === 'cellar-doorway');
+      return d.tx * 16 + (d.w * 16 - c.characters[irr.drawn.me.kind].box.w) / 2;
+    });
+    if (toStreet) await standAt(ph, doorX, 0);
+    const used = toStreet && (await tap(ph, 'interact'));
+    let down = false;
+    try {
+      await ph.page.waitForFunction(() => (window as any).irreverents.drawn.room === 'undercroft', null, { polling: 'raf', timeout: 4000 });
+      down = true;
+    } catch {
+      // reported below
+    }
+    const look = async (): Promise<{ stone: any; plate: any; me: any; w: number; h: number }> =>
+      ph.page.evaluate(() => {
+        const irr = (window as any).irreverents;
+        const d = irr.drawn;
+        const stone = d.entities.find((e: any) => e.kind === 'stone-heavy') ?? null;
+        const plate = (d.parts ?? []).find((p: any) => p.part === 'heavy-plate') ?? null;
+        const box = irr.content.characters[d.me.kind].box;
+        return { stone, plate, me: d.me, w: box.w, h: box.h };
+      });
+    let seen = down ? await look() : null;
+    let onStep = false;
+    let lifted = false;
+    if (seen?.stone) {
+      await sleep(500);
+      await shots(ph, dir, 'hidden-stone-hall');
+      // Onto the stair's lowest step (row 11, columns 22-24; its top at y 176) east of the stone: a running hop west.
+      await standAt(ph, 26 * 16 + 4, -1);
+      await honourBreak(ph);
+      const p = await pointOn(ph, '[data-stick]', 0.1);
+      const jump = await pointOn(ph, '[data-action="jump"]');
+      if (p && jump) {
+        await ph.cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ ...p, id: 1 }] });
+        await sleep(60);
+        await ph.cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ ...p, id: 1 }, { ...jump, id: 2 }] });
+        await sleep(260);
+        await ph.cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ ...p, id: 1 }] });
+        await sleep(120);
+        await ph.cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+        await settle(ph);
+      }
+      seen = await look();
+      onStep = Math.abs(seen.me.y + seen.h - 176) <= 1;
+      if (onStep) {
+        await standAt(ph, seen.stone.x + 24 + 2, -1);
+        await sleep(200);
+        await tap(ph, 'grab');
+        const end = Date.now() + 1500;
+        while (Date.now() < end) {
+          const l = await look();
+          if (l.stone && l.stone.y < l.me.y - 4) lifted = true;
+          await sleep(50);
+        }
+        await shots(ph, dir, 'hidden-stone-refused');
+      }
+    }
+    fact(
+      'hidden-recruit-stone',
+      down && !!seen?.stone && !!seen?.plate && onStep && !lifted,
+      `by touch, down the cellar doorway by Use (${used ? 'tapped' : 'NOT tapped'}; in the undercroft: ${down}); the page draws the stone (${seen?.stone ? `at x ${Math.round(seen.stone.x)}` : 'NOT'}) and the heavy plate (${seen?.plate ? 'yes' : 'NO'}); the ${seen?.me?.kind ?? 'hero'} hopped onto the low step beside it (${onStep}) and tapped Grab: the stone ${lifted ? 'WAS drawn lifted' : 'stayed where it lay'}`,
     );
   } finally {
     await ph.ctx.close();

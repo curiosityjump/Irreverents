@@ -709,3 +709,10 @@ document as a decision of theirs.
 - **Why this way:** all three, drawn only. The body is drawn head-down at the floor on the very frame the slam shows (before, it spent three frames finishing its arc sideways under the star). The game's usual star and puffs for an impact that hard (a large star at the body's middle) are replaced, for the slam alone, by a smaller star at the head on the floor; the slam's own floor dust is drawn behind the bodies so the head shows; the bodies the splash knocks away lose their first star and puffs too (they started at the head), keeping them for whatever they hit next. The shake stays as it was. The body lands 6 px further from the hero.
 - **To change it:** `GAP` and `STAR` at the top of `src/client/draw/suplex.ts`; to give back the usual star and puffs, drop the `drawnElsewhere` loop there (the hook in `src/client/draw/impact.ts` then does nothing); the dust back in front: drop the `'dust'` call of `drawSlams` in `src/client/draw/entities.ts`.
 - **Where:** `docs/mechanisms/combat-and-impact.md`, "The suplex"; `docs/plan/step-25.md`, builder notes; shots `docs/plan/step-25-shots/*-3-*`. `DRAFT:`
+
+### 2026-11-24 · The undercroft's heavy stone lies on the stair's lowest step, not on the hall floor
+- **Decided by:** hidden-recruit builder, push 2, `session_017WiGzHY1WcaqcrdTRbZwcZ`
+- **Instead of asking:** "Where in the undercroft does the stone only she lifts lie?"
+- **Why this way:** on the hall floor it stood in the path of things thrown in through the throne room's window and broke two older puzzles (the king and the heavy crate onto the stone plate). On the stair's lowest step it is out of their way and still two floors below its plate, so punching it never gets it up; only carrying does. Her pocket has a way out by jumps like the older one, and a pile of 490 on the plate opens it too (the plate reads only weight, kept).
+- **To change it:** the stone's tile in `content/placements/undercroft.json`; the plate, hatch and pocket in `content/rooms/undercroft.json`.
+- **Where:** `docs/mechanisms/rooms-and-doors.md`, "The heavy pocket"; `docs/plan/step-13.md`, Hidden recruit notes. `DRAFT:`

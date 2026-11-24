@@ -1,0 +1,14 @@
+{
+  "//": "DRAFT (Step 13, the hidden recruit, push 2): a stone in the undercroft's hall that only the hauler lifts (weight 480 against her liftStrength 500; Brawn lifts 420, every other hero 150 or less: content/tuning.json). Carried up the hall's stair and left on the heavy plate on its top step it holds the floor hatch over a hidden pocket open alone. It lies a floor below that plate on purpose: punches slide it along a floor but cannot lift it up a step. A plain body; it cannot be knocked out. Drawn for now with the forest boulder's picture (content/sprites/stone-heavy.json).",
+  "id": "stone-heavy",
+  "name": "Stone",
+  "box": {
+    "w": 24,
+    "h": 22
+  },
+  "color": "#6b6878",
+  "verbs": [
+    "body"
+  ],
+  "tuning": "stone-heavy"
+}

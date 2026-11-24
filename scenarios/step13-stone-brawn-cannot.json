@@ -1,0 +1,107 @@
+{
+  "id": "step13-stone-brawn-cannot",
+  "proves": "Step 13, the hidden recruit (push 2): only she lifts the stone. The grappler holding Brawn (the boost: lifts 420, the most anything but the hauler lifts) does the hauler's first presses of step13-stone-only-she: onto the stair's lowest step beside the stone (480) and Grab: refused, too heavy; the stone stays on its step, the heavy plate never goes down and the hatch never opens. Control (watched to fail): Brawn's liftStrength raised to 500 in content/powers/boost.json: the grab lifts it",
+  "room": "undercroft",
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 3,
+      "power": "boost"
+    }
+  ],
+  "entities": [
+    {
+      "id": "stone",
+      "character": "stone-heavy",
+      "tile": [
+        22,
+        10
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 56,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 38,
+      "to": 56,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 85,
+      "to": 88,
+      "hold": [
+        "grab"
+      ]
+    }
+  ],
+  "ticks": 200,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "grab-refused",
+      "where": {
+        "by": "p:a",
+        "target": "stone",
+        "reason": "too-heavy"
+      },
+      "between": [
+        80,
+        90
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "grabbed",
+      "where": {
+        "target": "stone"
+      },
+      "between": [
+        0,
+        200
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "position",
+      "entity": "stone",
+      "at": 200,
+      "x": [
+        355,
+        365
+      ],
+      "y": [
+        176,
+        176
+      ]
+    },
+    {
+      "fact": "part",
+      "room": "undercroft",
+      "part": "heavy-hatch",
+      "between": [
+        0,
+        200
+      ],
+      "is": {
+        "open": false
+      }
+    }
+  ]
+}

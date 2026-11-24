@@ -470,6 +470,7 @@ async function main(): Promise<void> {
       await (await import('./e2e/quarry.ts')).quarryFacts({ browser, devices, base, out, fact, errors });
       // Step 13's hidden recruit (hidden-recruit-*): by touch into the quarry pit, nothing of the cave drawn there; through the pit's painted wall, the cave's cage drawn shut with the hauler (docs/mechanisms/recruits.md, "The hidden recruit").
       await (await import('./e2e/hidden-recruit.ts')).hiddenRecruitFacts({ browser, devices, base, out, fact, errors, shots: keptShots('step-13-shots') });
+      await (await import('./e2e/hidden-recruit.ts')).hiddenStoneFacts({ browser, devices, base, out, fact, errors, shots: keptShots('step-13-shots') });
       // Brief owner-stuck-in-the-quarry: the menu opens by touch in the quarry's states, and its way back works (scripts/e2e/menu-way-back.ts).
       await (await import('./e2e/menu-way-back.ts')).menuWayBackFacts({ browser, devices, base, out, fact, errors });
       // Step 15's facts (forest-*): through the courtyard's forest doorway by touch, across the road onto the trail, switch to the infiltrator, up the boughs and into the gap (docs/plan/step-15.md, signal 6).
