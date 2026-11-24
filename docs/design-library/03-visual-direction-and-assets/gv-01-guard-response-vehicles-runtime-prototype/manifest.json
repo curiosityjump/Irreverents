@@ -1,0 +1,757 @@
+{
+  "pack_id": "GV-01",
+  "name": "Royal Guard Response Vehicles",
+  "date": "2026-11-23",
+  "status": "IMPORTABLE STATIC SPRITES \u2014 NOT FULLY ANIMATED OR INTEGRATED",
+  "style": "Owner-endorsed Irreverents bright GBA-like fantasy pixel art, blue/gold guard insignia",
+  "device_target": "320x180 internally rendered iPhone landscape, integer upscale",
+  "vehicle_count": 4,
+  "sprite_state_count": 16,
+  "transparent_rgba": true,
+  "native_grid_alignment_px": 16,
+  "character_agnostic": "Each asset is an empty vehicle body, with no pilot, rider or guard embedded. Crew rendered separately.",
+  "source": "source/guard_vehicles_four_families_SOURCE.png",
+  "source_dimensions_px": [
+    1536,
+    1024
+  ],
+  "source_sha256": "f593bb413b8a857c07076bbca6d41279a8dc3fd0aa9c7f959329e004e9de35a4",
+  "asset_grid_columns": 4,
+  "asset_grid_rows": 4,
+  "atlas": "runtime/atlas/guard_vehicles_4x4_160x96.png",
+  "atlas_cell_px": [
+    160,
+    96
+  ],
+  "collision_note": "Physics colliders are suggestions, should be tuned to level movement and room transitions; the art is not collision geometry.",
+  "behavior_note": "These are candidate vehicle types, not owner-confirmed canon or a promise that all four are implemented. Travel, speed, alarm escalation, mount/exit, knockback and faction collisions need explicit deterministic logic, no NPC AI.",
+  "variants": [
+    {
+      "vehicle_id": "patrol_trike",
+      "state": "parked_right",
+      "file": "runtime/vehicles/patrol_trike_parked_right_112x80.png",
+      "native_size_px": [
+        112,
+        80
+      ],
+      "rendered_object_size_px": [
+        83,
+        65
+      ],
+      "rendered_at": [
+        14,
+        11
+      ],
+      "pivot_px": [
+        56,
+        75
+      ],
+      "collision_suggestion_xywh": [
+        20,
+        30,
+        72,
+        44
+      ],
+      "facing": "right",
+      "source_crop_xyxy": [
+        82,
+        19,
+        346,
+        226
+      ],
+      "body_connected_component_pixels": 28100,
+      "original_foreground_pixels": 28100,
+      "source_components": 1,
+      "driver_anchor_px": [
+        62,
+        41
+      ],
+      "status": "importable_static_keyframe",
+      "notes": "No baked-in guard. Decorative visual states, not mechanically complete animation."
+    },
+    {
+      "vehicle_id": "patrol_trike",
+      "state": "moving_right",
+      "file": "runtime/vehicles/patrol_trike_moving_right_112x80.png",
+      "native_size_px": [
+        112,
+        80
+      ],
+      "rendered_object_size_px": [
+        104,
+        62
+      ],
+      "rendered_at": [
+        4,
+        14
+      ],
+      "pivot_px": [
+        56,
+        75
+      ],
+      "collision_suggestion_xywh": [
+        20,
+        30,
+        72,
+        44
+      ],
+      "facing": "right",
+      "source_crop_xyxy": [
+        414,
+        17,
+        745,
+        213
+      ],
+      "body_connected_component_pixels": 32109,
+      "original_foreground_pixels": 32480,
+      "source_components": 4,
+      "driver_anchor_px": [
+        62,
+        41
+      ],
+      "status": "importable_static_keyframe",
+      "notes": "No baked-in guard. Decorative visual states, not mechanically complete animation."
+    },
+    {
+      "vehicle_id": "patrol_trike",
+      "state": "parked_left",
+      "file": "runtime/vehicles/patrol_trike_parked_left_112x80.png",
+      "native_size_px": [
+        112,
+        80
+      ],
+      "rendered_object_size_px": [
+        83,
+        65
+      ],
+      "rendered_at": [
+        14,
+        11
+      ],
+      "pivot_px": [
+        56,
+        75
+      ],
+      "collision_suggestion_xywh": [
+        20,
+        30,
+        72,
+        44
+      ],
+      "facing": "left",
+      "source_crop_xyxy": [
+        825,
+        19,
+        1090,
+        226
+      ],
+      "body_connected_component_pixels": 28163,
+      "original_foreground_pixels": 28163,
+      "source_components": 1,
+      "driver_anchor_px": [
+        62,
+        41
+      ],
+      "status": "importable_static_keyframe",
+      "notes": "No baked-in guard. Decorative visual states, not mechanically complete animation."
+    },
+    {
+      "vehicle_id": "patrol_trike",
+      "state": "damaged",
+      "file": "runtime/vehicles/patrol_trike_damaged_112x80.png",
+      "native_size_px": [
+        112,
+        80
+      ],
+      "rendered_object_size_px": [
+        81,
+        66
+      ],
+      "rendered_at": [
+        15,
+        10
+      ],
+      "pivot_px": [
+        56,
+        75
+      ],
+      "collision_suggestion_xywh": [
+        20,
+        30,
+        72,
+        44
+      ],
+      "facing": "right",
+      "source_crop_xyxy": [
+        1177,
+        14,
+        1435,
+        225
+      ],
+      "body_connected_component_pixels": 27518,
+      "original_foreground_pixels": 31534,
+      "source_components": 8,
+      "driver_anchor_px": [
+        62,
+        41
+      ],
+      "status": "importable_static_keyframe",
+      "notes": "No baked-in guard. Decorative visual states, not mechanically complete animation."
+    },
+    {
+      "vehicle_id": "transport_wagon",
+      "state": "closed_right",
+      "file": "runtime/vehicles/transport_wagon_closed_right_144x96.png",
+      "native_size_px": [
+        144,
+        96
+      ],
+      "rendered_object_size_px": [
+        120,
+        82
+      ],
+      "rendered_at": [
+        12,
+        10
+      ],
+      "pivot_px": [
+        72,
+        91
+      ],
+      "collision_suggestion_xywh": [
+        19,
+        37,
+        106,
+        53
+      ],
+      "facing": "right",
+      "source_crop_xyxy": [
+        23,
+        267,
+        346,
+        488
+      ],
+      "body_connected_component_pixels": 53163,
+      "original_foreground_pixels": 53163,
+      "source_components": 1,
+      "driver_anchor_px": [
+        110,
+        38
+      ],
+      "status": "importable_static_keyframe",
+      "notes": "No baked-in guard. Decorative visual states, not mechanically complete animation."
+    },
+    {
+      "vehicle_id": "transport_wagon",
+      "state": "door_open_right",
+      "file": "runtime/vehicles/transport_wagon_door_open_right_144x96.png",
+      "native_size_px": [
+        144,
+        96
+      ],
+      "rendered_object_size_px": [
+        126,
+        84
+      ],
+      "rendered_at": [
+        9,
+        8
+      ],
+      "pivot_px": [
+        72,
+        91
+      ],
+      "collision_suggestion_xywh": [
+        19,
+        37,
+        106,
+        53
+      ],
+      "facing": "right",
+      "source_crop_xyxy": [
+        386,
+        264,
+        723,
+        488
+      ],
+      "body_connected_component_pixels": 56480,
+      "original_foreground_pixels": 56874,
+      "source_components": 4,
+      "driver_anchor_px": [
+        110,
+        38
+      ],
+      "status": "importable_static_keyframe",
+      "notes": "No baked-in guard. Decorative visual states, not mechanically complete animation."
+    },
+    {
+      "vehicle_id": "transport_wagon",
+      "state": "moving_right",
+      "file": "runtime/vehicles/transport_wagon_moving_right_144x96.png",
+      "native_size_px": [
+        144,
+        96
+      ],
+      "rendered_object_size_px": [
+        132,
+        82
+      ],
+      "rendered_at": [
+        6,
+        10
+      ],
+      "pivot_px": [
+        72,
+        91
+      ],
+      "collision_suggestion_xywh": [
+        19,
+        37,
+        106,
+        53
+      ],
+      "facing": "right",
+      "source_crop_xyxy": [
+        768,
+        269,
+        1121,
+        488
+      ],
+      "body_connected_component_pixels": 57614,
+      "original_foreground_pixels": 57614,
+      "source_components": 1,
+      "driver_anchor_px": [
+        110,
+        38
+      ],
+      "status": "importable_static_keyframe",
+      "notes": "No baked-in guard. Decorative visual states, not mechanically complete animation."
+    },
+    {
+      "vehicle_id": "transport_wagon",
+      "state": "damaged_right",
+      "file": "runtime/vehicles/transport_wagon_damaged_right_144x96.png",
+      "native_size_px": [
+        144,
+        96
+      ],
+      "rendered_object_size_px": [
+        124,
+        88
+      ],
+      "rendered_at": [
+        10,
+        4
+      ],
+      "pivot_px": [
+        72,
+        91
+      ],
+      "collision_suggestion_xywh": [
+        19,
+        37,
+        106,
+        53
+      ],
+      "facing": "right",
+      "source_crop_xyxy": [
+        1168,
+        254,
+        1500,
+        490
+      ],
+      "body_connected_component_pixels": 57849,
+      "original_foreground_pixels": 58752,
+      "source_components": 5,
+      "driver_anchor_px": [
+        110,
+        38
+      ],
+      "status": "importable_static_keyframe",
+      "notes": "No baked-in guard. Decorative visual states, not mechanically complete animation."
+    },
+    {
+      "vehicle_id": "siege_roller",
+      "state": "ready_right",
+      "file": "runtime/vehicles/siege_roller_ready_right_160x96.png",
+      "native_size_px": [
+        160,
+        96
+      ],
+      "rendered_object_size_px": [
+        130,
+        83
+      ],
+      "rendered_at": [
+        15,
+        9
+      ],
+      "pivot_px": [
+        80,
+        91
+      ],
+      "collision_suggestion_xywh": [
+        21,
+        37,
+        118,
+        53
+      ],
+      "facing": "right",
+      "source_crop_xyxy": [
+        28,
+        524,
+        368,
+        741
+      ],
+      "body_connected_component_pixels": 49599,
+      "original_foreground_pixels": 49786,
+      "source_components": 5,
+      "driver_anchor_px": [
+        107,
+        43
+      ],
+      "status": "importable_static_keyframe",
+      "notes": "No baked-in guard. Decorative visual states, not mechanically complete animation."
+    },
+    {
+      "vehicle_id": "siege_roller",
+      "state": "rolling_right",
+      "file": "runtime/vehicles/siege_roller_rolling_right_160x96.png",
+      "native_size_px": [
+        160,
+        96
+      ],
+      "rendered_object_size_px": [
+        134,
+        83
+      ],
+      "rendered_at": [
+        13,
+        9
+      ],
+      "pivot_px": [
+        80,
+        91
+      ],
+      "collision_suggestion_xywh": [
+        21,
+        37,
+        118,
+        53
+      ],
+      "facing": "right",
+      "source_crop_xyxy": [
+        384,
+        524,
+        735,
+        741
+      ],
+      "body_connected_component_pixels": 51149,
+      "original_foreground_pixels": 51571,
+      "source_components": 4,
+      "driver_anchor_px": [
+        107,
+        43
+      ],
+      "status": "importable_static_keyframe",
+      "notes": "No baked-in guard. Decorative visual states, not mechanically complete animation."
+    },
+    {
+      "vehicle_id": "siege_roller",
+      "state": "ready_left",
+      "file": "runtime/vehicles/siege_roller_ready_left_160x96.png",
+      "native_size_px": [
+        160,
+        96
+      ],
+      "rendered_object_size_px": [
+        132,
+        83
+      ],
+      "rendered_at": [
+        14,
+        9
+      ],
+      "pivot_px": [
+        80,
+        91
+      ],
+      "collision_suggestion_xywh": [
+        21,
+        37,
+        118,
+        53
+      ],
+      "facing": "left",
+      "source_crop_xyxy": [
+        768,
+        524,
+        1112,
+        741
+      ],
+      "body_connected_component_pixels": 50105,
+      "original_foreground_pixels": 50154,
+      "source_components": 3,
+      "driver_anchor_px": [
+        107,
+        43
+      ],
+      "status": "importable_static_keyframe",
+      "notes": "No baked-in guard. Decorative visual states, not mechanically complete animation."
+    },
+    {
+      "vehicle_id": "siege_roller",
+      "state": "damaged_right",
+      "file": "runtime/vehicles/siege_roller_damaged_right_160x96.png",
+      "native_size_px": [
+        160,
+        96
+      ],
+      "rendered_object_size_px": [
+        139,
+        88
+      ],
+      "rendered_at": [
+        10,
+        4
+      ],
+      "pivot_px": [
+        80,
+        91
+      ],
+      "collision_suggestion_xywh": [
+        21,
+        37,
+        118,
+        53
+      ],
+      "facing": "right",
+      "source_crop_xyxy": [
+        1152,
+        511,
+        1514,
+        741
+      ],
+      "body_connected_component_pixels": 55774,
+      "original_foreground_pixels": 56782,
+      "source_components": 5,
+      "driver_anchor_px": [
+        107,
+        43
+      ],
+      "status": "importable_static_keyframe",
+      "notes": "No baked-in guard. Decorative visual states, not mechanically complete animation."
+    },
+    {
+      "vehicle_id": "guard_rotorcraft",
+      "state": "idle_right",
+      "file": "runtime/vehicles/guard_rotorcraft_idle_right_128x96.png",
+      "native_size_px": [
+        128,
+        96
+      ],
+      "rendered_object_size_px": [
+        107,
+        73
+      ],
+      "rendered_at": [
+        10,
+        11
+      ],
+      "pivot_px": [
+        64,
+        48
+      ],
+      "collision_suggestion_xywh": [
+        17,
+        25,
+        94,
+        46
+      ],
+      "facing": "right",
+      "source_crop_xyxy": [
+        25,
+        784,
+        330,
+        994
+      ],
+      "body_connected_component_pixels": 36338,
+      "original_foreground_pixels": 36338,
+      "source_components": 1,
+      "driver_anchor_px": [
+        66,
+        48
+      ],
+      "status": "importable_static_keyframe",
+      "notes": "No baked-in guard. Decorative visual states, not mechanically complete animation."
+    },
+    {
+      "vehicle_id": "guard_rotorcraft",
+      "state": "flying_right",
+      "file": "runtime/vehicles/guard_rotorcraft_flying_right_128x96.png",
+      "native_size_px": [
+        128,
+        96
+      ],
+      "rendered_object_size_px": [
+        110,
+        74
+      ],
+      "rendered_at": [
+        9,
+        11
+      ],
+      "pivot_px": [
+        64,
+        48
+      ],
+      "collision_suggestion_xywh": [
+        17,
+        25,
+        94,
+        46
+      ],
+      "facing": "right",
+      "source_crop_xyxy": [
+        391,
+        766,
+        705,
+        977
+      ],
+      "body_connected_component_pixels": 35714,
+      "original_foreground_pixels": 36372,
+      "source_components": 5,
+      "driver_anchor_px": [
+        66,
+        48
+      ],
+      "status": "importable_static_keyframe",
+      "notes": "No baked-in guard. Decorative visual states, not mechanically complete animation."
+    },
+    {
+      "vehicle_id": "guard_rotorcraft",
+      "state": "idle_left",
+      "file": "runtime/vehicles/guard_rotorcraft_idle_left_128x96.png",
+      "native_size_px": [
+        128,
+        96
+      ],
+      "rendered_object_size_px": [
+        106,
+        73
+      ],
+      "rendered_at": [
+        11,
+        11
+      ],
+      "pivot_px": [
+        64,
+        48
+      ],
+      "collision_suggestion_xywh": [
+        17,
+        25,
+        94,
+        46
+      ],
+      "facing": "left",
+      "source_crop_xyxy": [
+        795,
+        784,
+        1099,
+        994
+      ],
+      "body_connected_component_pixels": 36786,
+      "original_foreground_pixels": 36955,
+      "source_components": 3,
+      "driver_anchor_px": [
+        66,
+        48
+      ],
+      "status": "importable_static_keyframe",
+      "notes": "No baked-in guard. Decorative visual states, not mechanically complete animation."
+    },
+    {
+      "vehicle_id": "guard_rotorcraft",
+      "state": "damaged_right",
+      "file": "runtime/vehicles/guard_rotorcraft_damaged_right_128x96.png",
+      "native_size_px": [
+        128,
+        96
+      ],
+      "rendered_object_size_px": [
+        120,
+        80
+      ],
+      "rendered_at": [
+        4,
+        8
+      ],
+      "pivot_px": [
+        64,
+        48
+      ],
+      "collision_suggestion_xywh": [
+        17,
+        25,
+        94,
+        46
+      ],
+      "facing": "right",
+      "source_crop_xyxy": [
+        1152,
+        766,
+        1495,
+        994
+      ],
+      "body_connected_component_pixels": 42248,
+      "original_foreground_pixels": 42248,
+      "source_components": 1,
+      "driver_anchor_px": [
+        66,
+        48
+      ],
+      "status": "importable_static_keyframe",
+      "notes": "No baked-in guard. Decorative visual states, not mechanically complete animation."
+    }
+  ],
+  "states_by_vehicle": {
+    "patrol_trike": [
+      "parked_right",
+      "moving_right",
+      "parked_left",
+      "damaged"
+    ],
+    "transport_wagon": [
+      "closed_right",
+      "door_open_right",
+      "moving_right",
+      "damaged_right"
+    ],
+    "siege_roller": [
+      "ready_right",
+      "rolling_right",
+      "ready_left",
+      "damaged_right"
+    ],
+    "guard_rotorcraft": [
+      "idle_right",
+      "flying_right",
+      "idle_left",
+      "damaged_right"
+    ]
+  },
+  "limitations": [
+    "Smoke/dust from source states has been stripped where detached; some baked-in effects still overlap the vehicle silhouette.",
+    "The frames are resized from illustrated source art; close-up sprites can have antialiasing in the color even with binary alpha.",
+    "There are only four static key states per vehicle, not functional wheel/rotor cycles or independently layered parts.",
+    "Guard pilot anchors are approximate, require actual 320x180 gameplay integration QA."
+  ],
+  "implementation_direction": [
+    "Create each vehicle as independent physics actor with specified hitbox/pivot; separate driver guard character layer.",
+    "Use vehicle right and left keys as orientation references; no automatic flip for asymmetric insignias until QA.",
+    "For full animations, add independent wheel/rotor overlays and damage/dust VFX layers; source itself does not supply cycle.",
+    "Guard response/wanted escalation still requires existing successful reporting/signal paths. Do not spawn vehicles on unreported sight alone.",
+    "While in pursuit, vehicles may chase across authored connected areas where geometry supports it and faction collisions are allowed."
+  ]
+}

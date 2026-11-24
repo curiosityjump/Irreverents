@@ -2446,6 +2446,211 @@
   },
   {
    "kind": "folder",
+   "id": "1Wt5I3wI-Za8refkFvsfCd_YH4BQMOczU",
+   "drive_path": "/03 Visual Direction and Assets/GV-01 — Guard Response Vehicles — Runtime Prototype"
+  },
+  {
+   "kind": "folder",
+   "id": "14IjSpjbGCbitZpdy6TTz-j9PyLhgAdDJ",
+   "drive_path": "/03 Visual Direction and Assets/GV-01 — Guard Response Vehicles — Runtime Prototype/previews"
+  },
+  {
+   "kind": "file",
+   "id": "1J9SBmmvZaKK6cHNkKCElaQ63iuCqAkOO",
+   "drive_path": "/03 Visual Direction and Assets/GV-01 — Guard Response Vehicles — Runtime Prototype/previews/all_16_states_contact.png",
+   "repo_path": "03-visual-direction-and-assets/gv-01-guard-response-vehicles-runtime-prototype/previews/all-16-states-contact.png",
+   "sha256": "dc9ff450b54980561b5c7fb1263f496f1d4bfe2e481d87a4bd01d42014314a6c"
+  },
+  {
+   "kind": "file",
+   "id": "1EhAFZzNfJV1BNP6xoC6dB2TauhEr3OEW",
+   "drive_path": "/03 Visual Direction and Assets/GV-01 — Guard Response Vehicles — Runtime Prototype/previews/gameplay_320x180_four_vehicles.png",
+   "repo_path": "03-visual-direction-and-assets/gv-01-guard-response-vehicles-runtime-prototype/previews/gameplay-320x180-four-vehicles.png",
+   "sha256": "58656adf4d96884c64acc8867f23162c1268be587d7de2c765f5f367252b3261"
+  },
+  {
+   "kind": "file",
+   "id": "1zXrJOSTcWXlJ-M4uFN5AqIM3tmoN8PjE",
+   "drive_path": "/03 Visual Direction and Assets/GV-01 — Guard Response Vehicles — Runtime Prototype/previews/gameplay_4x_nearest.png",
+   "repo_path": "03-visual-direction-and-assets/gv-01-guard-response-vehicles-runtime-prototype/previews/gameplay-4x-nearest.png",
+   "sha256": "1bedcd36651a5c4366fd47c0ec123b1de180768e1d96c30c6914f1215ea7d278"
+  },
+  {
+   "kind": "folder",
+   "id": "14_1cZH15vHE5n9nXFV7Wk6dzEfZNP82L",
+   "drive_path": "/03 Visual Direction and Assets/GV-01 — Guard Response Vehicles — Runtime Prototype/runtime"
+  },
+  {
+   "kind": "folder",
+   "id": "1j1wGvaexj4Zbk_xCj02mEomyOVmsAdNS",
+   "drive_path": "/03 Visual Direction and Assets/GV-01 — Guard Response Vehicles — Runtime Prototype/runtime/atlas"
+  },
+  {
+   "kind": "file",
+   "id": "1PgJmmQO93v4GwOhZv9Bt_f433MjEHPGv",
+   "drive_path": "/03 Visual Direction and Assets/GV-01 — Guard Response Vehicles — Runtime Prototype/runtime/atlas/guard_vehicles_4x4_160x96.png",
+   "repo_path": "03-visual-direction-and-assets/gv-01-guard-response-vehicles-runtime-prototype/runtime/atlas/guard-vehicles-4x4-160x96.png",
+   "sha256": "5732e97c73c9b335291e62f29efdac99a387f548309240289085f86148a98c3f"
+  },
+  {
+   "kind": "folder",
+   "id": "1DH9lmfU-I2zgSAr5Ck1L-QnpSRj3LpEk",
+   "drive_path": "/03 Visual Direction and Assets/GV-01 — Guard Response Vehicles — Runtime Prototype/runtime/vehicles"
+  },
+  {
+   "kind": "file",
+   "id": "19yATvLzUNwSjSuJ9djW_t7EpHEJ4MZo8",
+   "drive_path": "/03 Visual Direction and Assets/GV-01 — Guard Response Vehicles — Runtime Prototype/runtime/vehicles/guard_rotorcraft_damaged_right_128x96.png",
+   "repo_path": "03-visual-direction-and-assets/gv-01-guard-response-vehicles-runtime-prototype/runtime/vehicles/guard-rotorcraft-damaged-right-128x96.png",
+   "sha256": "5cdcf46f34b86b17fc5741a90580de46a28708e1aa7dba2402e118817c42e858"
+  },
+  {
+   "kind": "file",
+   "id": "1OSCzW8xOGEEolicYzMtDPKvME-lRhR1Z",
+   "drive_path": "/03 Visual Direction and Assets/GV-01 — Guard Response Vehicles — Runtime Prototype/runtime/vehicles/guard_rotorcraft_flying_right_128x96.png",
+   "repo_path": "03-visual-direction-and-assets/gv-01-guard-response-vehicles-runtime-prototype/runtime/vehicles/guard-rotorcraft-flying-right-128x96.png",
+   "sha256": "b6439f0c1a626abc96accbc12f748366aecaad6940d16954774dcaf5805f8228"
+  },
+  {
+   "kind": "file",
+   "id": "1RfnVqd1QpoFPLL6592-f6euHIxWvrwpv",
+   "drive_path": "/03 Visual Direction and Assets/GV-01 — Guard Response Vehicles — Runtime Prototype/runtime/vehicles/guard_rotorcraft_idle_left_128x96.png",
+   "repo_path": "03-visual-direction-and-assets/gv-01-guard-response-vehicles-runtime-prototype/runtime/vehicles/guard-rotorcraft-idle-left-128x96.png",
+   "sha256": "5dfbbe9beb800b04cba1d1813c7760441a85c3adb9fa823121cd06b9468bbbaf"
+  },
+  {
+   "kind": "file",
+   "id": "1ZTihZMmiYU0Ntd9HRsfCrmkxCrWds-Rw",
+   "drive_path": "/03 Visual Direction and Assets/GV-01 — Guard Response Vehicles — Runtime Prototype/runtime/vehicles/guard_rotorcraft_idle_right_128x96.png",
+   "repo_path": "03-visual-direction-and-assets/gv-01-guard-response-vehicles-runtime-prototype/runtime/vehicles/guard-rotorcraft-idle-right-128x96.png",
+   "sha256": "256cd3cf212320156f552188eb3002538978ebe3a1934dee436f8b1bc457c5db"
+  },
+  {
+   "kind": "file",
+   "id": "1lqxmkW69dGPUZn9znkhGUPbjrXbQUj3b",
+   "drive_path": "/03 Visual Direction and Assets/GV-01 — Guard Response Vehicles — Runtime Prototype/runtime/vehicles/patrol_trike_damaged_112x80.png",
+   "repo_path": "03-visual-direction-and-assets/gv-01-guard-response-vehicles-runtime-prototype/runtime/vehicles/patrol-trike-damaged-112x80.png",
+   "sha256": "7cdd2a4a220d7fd93e3282b74d2b42e895250537e496962c1175c8451ab92d48"
+  },
+  {
+   "kind": "file",
+   "id": "1ZfZ5f3iJoOJKqg8R_9ctSNU6tYpsgL8u",
+   "drive_path": "/03 Visual Direction and Assets/GV-01 — Guard Response Vehicles — Runtime Prototype/runtime/vehicles/patrol_trike_moving_right_112x80.png",
+   "repo_path": "03-visual-direction-and-assets/gv-01-guard-response-vehicles-runtime-prototype/runtime/vehicles/patrol-trike-moving-right-112x80.png",
+   "sha256": "50abfd7f472b79c715b6c99c0d6085fd5b650a33300829365f6f061a4fa8cb06"
+  },
+  {
+   "kind": "file",
+   "id": "1ui8c6aIOyH0lJFZ9SztiG5ousFQEbsc4",
+   "drive_path": "/03 Visual Direction and Assets/GV-01 — Guard Response Vehicles — Runtime Prototype/runtime/vehicles/patrol_trike_parked_left_112x80.png",
+   "repo_path": "03-visual-direction-and-assets/gv-01-guard-response-vehicles-runtime-prototype/runtime/vehicles/patrol-trike-parked-left-112x80.png",
+   "sha256": "a3eaca32fcaebcb390b8d112561ffe3f5c8d04393a67a8ee8319f4f8ee2ddb6a"
+  },
+  {
+   "kind": "file",
+   "id": "11mveu7hi3HzKQJoaNgGn8OhB5zTZQqHc",
+   "drive_path": "/03 Visual Direction and Assets/GV-01 — Guard Response Vehicles — Runtime Prototype/runtime/vehicles/patrol_trike_parked_right_112x80.png",
+   "repo_path": "03-visual-direction-and-assets/gv-01-guard-response-vehicles-runtime-prototype/runtime/vehicles/patrol-trike-parked-right-112x80.png",
+   "sha256": "1b20f9284e180e3abbd686bc22c7d704cf15c8b051ee4b8fe20224608825df5b"
+  },
+  {
+   "kind": "file",
+   "id": "1HNF7YEBypS9KjcRh-zcHUnB9pTm2_WCN",
+   "drive_path": "/03 Visual Direction and Assets/GV-01 — Guard Response Vehicles — Runtime Prototype/runtime/vehicles/siege_roller_damaged_right_160x96.png",
+   "repo_path": "03-visual-direction-and-assets/gv-01-guard-response-vehicles-runtime-prototype/runtime/vehicles/siege-roller-damaged-right-160x96.png",
+   "sha256": "d021fb2469da03b3a2f0ab85e7fa53bc5346be44a7b17fc0e9ac3f678a10bddf"
+  },
+  {
+   "kind": "file",
+   "id": "1Bl2QveIPZ76UCEkKbDrL9jZ73I-EQm20",
+   "drive_path": "/03 Visual Direction and Assets/GV-01 — Guard Response Vehicles — Runtime Prototype/runtime/vehicles/siege_roller_ready_left_160x96.png",
+   "repo_path": "03-visual-direction-and-assets/gv-01-guard-response-vehicles-runtime-prototype/runtime/vehicles/siege-roller-ready-left-160x96.png",
+   "sha256": "ad3c09da76a186212c8c7448de93f1f55792bc04259181a1884da446de676c0b"
+  },
+  {
+   "kind": "file",
+   "id": "1i1P7w6jqEqsdlW5WsX9lpAlfN2LfraLb",
+   "drive_path": "/03 Visual Direction and Assets/GV-01 — Guard Response Vehicles — Runtime Prototype/runtime/vehicles/siege_roller_ready_right_160x96.png",
+   "repo_path": "03-visual-direction-and-assets/gv-01-guard-response-vehicles-runtime-prototype/runtime/vehicles/siege-roller-ready-right-160x96.png",
+   "sha256": "b7dac8135ea93655741f924eed0abe6c7f0deaf3570f254a316246137bdfb5e0"
+  },
+  {
+   "kind": "file",
+   "id": "17-rTpH-WZnPn4hF6BrKsVdWr9H2wF6Gp",
+   "drive_path": "/03 Visual Direction and Assets/GV-01 — Guard Response Vehicles — Runtime Prototype/runtime/vehicles/siege_roller_rolling_right_160x96.png",
+   "repo_path": "03-visual-direction-and-assets/gv-01-guard-response-vehicles-runtime-prototype/runtime/vehicles/siege-roller-rolling-right-160x96.png",
+   "sha256": "2c61cc7f52f1728f19586340829e4d83eb720634ad6e8097abf9b59c8f85e233"
+  },
+  {
+   "kind": "file",
+   "id": "1YyrmrOlBUuKTwHMbfiqjdjnGe-fjJMD6",
+   "drive_path": "/03 Visual Direction and Assets/GV-01 — Guard Response Vehicles — Runtime Prototype/runtime/vehicles/transport_wagon_closed_right_144x96.png",
+   "repo_path": "03-visual-direction-and-assets/gv-01-guard-response-vehicles-runtime-prototype/runtime/vehicles/transport-wagon-closed-right-144x96.png",
+   "sha256": "31ebacfb055db23093b3488796cde4997e2d920b07e28ce46fcca6ea7c71e7b3"
+  },
+  {
+   "kind": "file",
+   "id": "1JEASJDGex5WvevDG5FuyiLGQXAxJ63Pi",
+   "drive_path": "/03 Visual Direction and Assets/GV-01 — Guard Response Vehicles — Runtime Prototype/runtime/vehicles/transport_wagon_damaged_right_144x96.png",
+   "repo_path": "03-visual-direction-and-assets/gv-01-guard-response-vehicles-runtime-prototype/runtime/vehicles/transport-wagon-damaged-right-144x96.png",
+   "sha256": "7c42e3060d723d279eaf898e871e09c9fa9584e446819ea6657301beb48dc78d"
+  },
+  {
+   "kind": "file",
+   "id": "1EsH_iXT_fIgJWZPoxdueXzbkM9FJH_kp",
+   "drive_path": "/03 Visual Direction and Assets/GV-01 — Guard Response Vehicles — Runtime Prototype/runtime/vehicles/transport_wagon_door_open_right_144x96.png",
+   "repo_path": "03-visual-direction-and-assets/gv-01-guard-response-vehicles-runtime-prototype/runtime/vehicles/transport-wagon-door-open-right-144x96.png",
+   "sha256": "692d7dc72cc4c560ad8f2f24480afdae7b4fdb3c5de62a3998c0e0a395eac7c3"
+  },
+  {
+   "kind": "file",
+   "id": "1ORS_J2qDK_hjOxaYeqABia6RSygbulw1",
+   "drive_path": "/03 Visual Direction and Assets/GV-01 — Guard Response Vehicles — Runtime Prototype/runtime/vehicles/transport_wagon_moving_right_144x96.png",
+   "repo_path": "03-visual-direction-and-assets/gv-01-guard-response-vehicles-runtime-prototype/runtime/vehicles/transport-wagon-moving-right-144x96.png",
+   "sha256": "29826e7cb5aefe6c7d6f8d9268f89574d74dd480526c395e7244bfaa5c91575e"
+  },
+  {
+   "kind": "folder",
+   "id": "1XkCRDr88oHaqMQs7Y__RhYXhx74jkgv2",
+   "drive_path": "/03 Visual Direction and Assets/GV-01 — Guard Response Vehicles — Runtime Prototype/source"
+  },
+  {
+   "kind": "file",
+   "id": "1ENW1Hs3P1Nb3vh0rvJyYXDK6l9bg662T",
+   "drive_path": "/03 Visual Direction and Assets/GV-01 — Guard Response Vehicles — Runtime Prototype/source/guard_vehicles_four_families_SOURCE.png",
+   "repo_path": "03-visual-direction-and-assets/gv-01-guard-response-vehicles-runtime-prototype/source/guard-vehicles-four-families-source.png",
+   "sha256": "c2c66047c0358824120091298b2abb729d8731b77febb6c2686d48a0e289d244"
+  },
+  {
+   "kind": "file",
+   "id": "1zKzcGsm3fkEuvwKAQ7rEZFeFJd-BfDt1",
+   "drive_path": "/03 Visual Direction and Assets/GV-01 — Guard Response Vehicles — Runtime Prototype/GV-01_COMPLETE_RUNTIME_PACK.zip",
+   "repo_path": "03-visual-direction-and-assets/gv-01-guard-response-vehicles-runtime-prototype/gv-01-complete-runtime-pack/",
+   "sha256": "4af665a3ca3be6aa7a12103b651c9bab84d7d718fbdeb64e6ce01b19367ca53d"
+  },
+  {
+   "kind": "file",
+   "id": "1C1sQy2cXHD9MQvNokWXz18JkV7HXslk8",
+   "drive_path": "/03 Visual Direction and Assets/GV-01 — Guard Response Vehicles — Runtime Prototype/manifest.json",
+   "repo_path": "03-visual-direction-and-assets/gv-01-guard-response-vehicles-runtime-prototype/manifest.json",
+   "sha256": "56073b9ec0f8bbd75ee15b63df13ae17911e9ef24d94973cb507ef23875b7b82"
+  },
+  {
+   "kind": "file",
+   "id": "1YE-aP7QXMgpWYieh9dvesMvf1yZbZk8w",
+   "drive_path": "/03 Visual Direction and Assets/GV-01 — Guard Response Vehicles — Runtime Prototype/README_FOR_CLAUDE.md",
+   "repo_path": "03-visual-direction-and-assets/gv-01-guard-response-vehicles-runtime-prototype/readme-for-claude.md",
+   "sha256": "a61a73822e3ea3396788a94a98daa28fc0baf37dac6414fd67b430b3680f005a"
+  },
+  {
+   "kind": "file",
+   "id": "1jFkECw9Bw_AFZDEuqpyBT7JYlwsBL6hn",
+   "drive_path": "/03 Visual Direction and Assets/GV-01 — Guard Response Vehicles — Runtime Prototype/tag_index.csv",
+   "repo_path": "03-visual-direction-and-assets/gv-01-guard-response-vehicles-runtime-prototype/tag-index.csv",
+   "sha256": "1c8716d3253848db705414a04b4b66ef5bbbcce5bd93c11656d5e2dfe6c7d644"
+  },
+  {
+   "kind": "folder",
    "id": "1ziNuvVtP8yvDr-_7Yg4-g7xc-FcxpPfr",
    "drive_path": "/03 Visual Direction and Assets/H07 — Hall of Legends Concept Studies"
   },
@@ -3078,6 +3283,20 @@
    "sha256": "40cbed13ae852224b9b0206736ae111d34538c35ffebc8a5cffe987549477c5d"
   },
   {
+   "kind": "doc",
+   "id": "1Jw63yDBOo1v5jPHuTuJHZTRJjYHQi2jHhhpX1bSZ5Uw",
+   "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/01 REQUESTS — Claude to ChatGPT/REQ — P07 REVISION — Touch-button glyphs and pressed/disabled plates; addendum to MISSING-ASSETS master list",
+   "repo_path": "06-asset-collaboration-claude-chatgpt/01-requests-claude-to-chatgpt/req-p07-revision-touch-button-glyphs-and-pressed-disabled-plates-addendum-to-missing-assets-master-list.md",
+   "sha256": "a43e7c871fd52754388ff39c401ad2d8e32e1ea7f929e9218814b2842247520f"
+  },
+  {
+   "kind": "doc",
+   "id": "1aEuNBG8C_6s3tVa8D9cMjEHsSZqqEzMbtCVWXcvhsFs",
+   "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/01 REQUESTS — Claude to ChatGPT/REQ — P12 REVISION — Weapon grip anchors/hitboxes, cannonball, closed parasol, unlit torch; addendum to MISSING-ASSETS master list",
+   "repo_path": "06-asset-collaboration-claude-chatgpt/01-requests-claude-to-chatgpt/req-p12-revision-weapon-grip-anchors-hitboxes-cannonball-closed-parasol-unlit-torch-addendum-to-missing-assets-master-list.md",
+   "sha256": "29c527dec4be51750131a510eb6b75b6522dff9fe1d56b6214ae65334a2e88d7"
+  },
+  {
    "kind": "folder",
    "id": "15X6uq3YK-NdKbQQt0FqaXY46msSW38Jm",
    "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/02 DELIVERED — ChatGPT to Claude"
@@ -3128,6 +3347,13 @@
    "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/02 VISUAL QUALITY GATE — Art-first asset production and acceptance",
    "repo_path": "06-asset-collaboration-claude-chatgpt/02-visual-quality-gate-art-first-asset-production-and-acceptance.md",
    "sha256": "8060008f49409a149d4de61559e15eee46df8a8c46ce987348b409128a3ef98b"
+  },
+  {
+   "kind": "doc",
+   "id": "1VZq34tYYGYbd7VAUR9pYJuNttPQximxuGEYQ_2Un3ko",
+   "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/HANDOFF — GV-01 Guard Response Vehicles — 16 Native Transparent Sprite States",
+   "repo_path": "06-asset-collaboration-claude-chatgpt/handoff-gv-01-guard-response-vehicles-16-native-transparent-sprite-states.md",
+   "sha256": "a2309f16521957c5f5d15ddcbec78274c3a7417dd2f7d9f583ec9513921cca5a"
   },
   {
    "kind": "doc",
