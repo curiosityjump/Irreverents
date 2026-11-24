@@ -582,7 +582,7 @@ By a subagent reading all 18 shots in `docs/plan/step-8-shots/plate/` and the 4 
 
 ## The armoured guard's look (brief `handoff-prompts/armoured-guard-look.md`)
 
-Builder `session_017WiGzKY1frRk8KpKhnGkDP`, 2026-11-24. `DRAFT:` all of it.
+Builder `session_017WiGzK19frRk8KpKhnGkDP`, 2026-11-24 (landed at 3d4ff70; its commit's session trailer has a typo, `…KY1fr…`). `DRAFT:` all of it.
 
 - **Cut, not drawn:** P08 enemy atlas row 4 (`tools/art/cast/cut3.py`,
   `armoured_guard`; `make.py` writes `assets/sprites/cast/armoured-guard.png`
@@ -617,3 +617,24 @@ Builder `session_017WiGzKY1frRk8KpKhnGkDP`, 2026-11-24. `DRAFT:` all of it.
 - **Not verified:** a real iPhone (Chromium emulation only); his attack,
   hurt and down frames in the running game (seen on the sheet only: the
   shots catch him walking in).
+- **The brief's "Also": a struck hero shows nothing.** Read from the code,
+  not measured in a running page (no fix: it is netcode). On the struck
+  player's own page: the thrower's shot `launch`es the hero with a hit beat
+  (`src/sim/systems/weapon-move.ts:62-64`), and `strike`
+  (`src/sim/body-state.ts:154-156`) sends that page a `push` of speed 0 with
+  `fly`, so `applyEffect` (`src/sim/effects.ts:51-55`) sets `c.flying` on a
+  body still on the ground: `hurt` (`src/client/draw/sprites.ts:241`) for
+  about a tick. When the beat ends, `combat-clock`
+  (`src/sim/systems/combat-clock.ts:30-34`) sends the real speed as a second
+  `push` **without** `fly`, so the hop is drawn in the `jump`/`fall` frames,
+  not `hurt`. The white flash (`sprites.ts:447-450`) needs `c.impact`, which
+  `markImpact` sets only on the server's copy, so the page never flashes its
+  own hero; and for the grappler the shot's speed (12000 / weight 60 = 200
+  px/s) is under `FLASH_SPEED` 250 anyway (infiltrator 461, flyer 400).
+  Other pages draw that hero from the server's copy (beat, flying, impact),
+  so a friend sees the hit; the struck player does not. The heroes' sheets
+  all have `hurt` frames (64, 65): no missing frame choice. A fix is
+  netcode's: carry `fly` (and the impact) on the beat's closing push for a
+  player's own body, or flash on a `hit` event naming the page's own
+  character. `hero-struck-*` is shot after the page has moved 12 px plus
+  120 ms (`scripts/e2e/ranged.ts:170-175`), when even that tick is over.

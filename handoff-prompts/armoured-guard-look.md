@@ -1,7 +1,6 @@
 # The armoured guard looks like an armoured guard: his own cut from the owner's enemy sheet, and a first look at him on a phone
 
-**Landed so far:** nothing yet. (A builder stopping at its budget writes
-its commits here, one line, before it stops.)
+**Landed so far:** 3d4ff70 (the cut, the `armoured-look` fact, the shots; live). The "Also" is written up, not fixed (netcode): `docs/plan/step-8.md`, "The armoured guard's look", last bullet.
 
 Brief for one builder, one push (a second only for the shots listed
 under "Also"). Written 2026-11-24 19:00 UTC by the orchestrator
