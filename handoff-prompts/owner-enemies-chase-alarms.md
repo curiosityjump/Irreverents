@@ -107,3 +107,55 @@ Must not touch: the quarry's rooms and scenarios (Step 22), `defeat-*`
 and are being fixed elsewhere: re-run and report, never loosen); pushed; live
 (`npm run check:deployed`, `npm run check:live`); the table updated to what a
 player sees after; one line for the owner in plain words.
+
+## Added 2026-11-24 01:10 UTC: what an alarm does, in the owner's words
+
+**The owner, first-hand to the orchestrator, ~01:05 UTC, still playing:**
+
+> Alarms should spawn more enemies of increasing strength that come in from the sides
+
+This is now what "alarms that are seen to do something" (task 2) means, and
+it comes before the chase (task 3) once your audit table is sent:
+
+- **A finished alarm brings more enemies.** Every alarm in the game: the
+  camp's and depot's horn, the town's bell and whistle. (Still only a
+  finished call: D-063 is the owner's, and stopping the caller still stops
+  it.) Today: the camp's horn walks rows in by its one entry
+  (`outpost-wave.ts`, `content/outposts/`), the town's whistle walks rows in
+  by both street doors (`alert-dispatch.ts`, `content/dispatch/`), the bell
+  sends one guard, the depot's wave falls through the floor.
+- **From the sides.** They come in from both sides of where the player is,
+  left and right, so a player in the middle of a room sees them arrive at
+  both edges of the screen and is caught between them: not from one door at
+  the far end of a long room, and not appearing in view. `DRAFT:` your
+  reading to measure and log: each row splits between the nearest way in on
+  the player's left and on their right (a door, the room's edge, a marked
+  entry point: add entry points as data per room where a room has one way
+  in); where a room truly has one side, say so and choose with the room's
+  owner. A hero must still be able to get out with both sides coming (the
+  town-tiers builder measured that for the street; measure it again for
+  each place you change, each roster hero, solo).
+- **Of increasing strength.** Each finished alarm in a place brings a
+  stronger row than the last: more of them, then tougher kinds (light
+  fighters, then heavies, then the brute; guards, then the armoured guard,
+  which has no sprite yet and ships on `guard`), as data rows per place; the
+  last row repeats (doc 24: never an arbitrary maximum wave count) under the
+  on-screen cap. The player can read which row is coming (the camp's bar,
+  the town's pips: the town-tiers builder draws those; give the camp and the
+  depot the same language, agreeing with it by message).
+- **Announced.** A banner and a sound per row through the shared queue, so
+  nobody wonders whether the alarm did anything.
+
+Files: `outpost-wave.ts` and `content/outposts/` were the waves slice's
+(finished, builders archived): they are yours now. `alert-dispatch.ts` and
+`content/dispatch/` are the town-tiers builder's
+(`session_017WiGzHTLU6WYfsfoEFK4si`): agree the "from the sides" rule with it
+by message and let it make the town's edit, or take the file by agreement.
+The depot and the quarry's rooms are Step 22's lead's
+(`session_017WiGzFrf7N7ZgaqUyjs4Sz`): give it the rule and the data shape;
+it places the entry points and rows there. The vehicles B builder
+(`session_017WiGzEvHsdz7Z8fr6XuECe`) holds the camp's room file and wants a
+wagon in a later row: agree with it before changing the camp's rows.
+Scenarios with a control each: a finished call brings a row at both sides of
+the hero; the second call's row is stronger than the first's; a stopped call
+brings nobody; every roster hero gets out, solo, with the last row in.
