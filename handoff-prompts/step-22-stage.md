@@ -14,6 +14,8 @@
 
 If you need another shape, ask that builder; changes are additive only.
 
+**Lead, 01:24 UTC: the wings move (from the orchestrator).** The wings (power `flight`) stand on a pedestal at `quarry-depot` [46, 13], on the main way, so anyone crossing picks them up. The tile the Step 16 lead meant was [38, 18], in the hidden area under the strongroom: the wings are the pay-off of a hidden place. The steps are in `docs/plan/step-9.md`, "Builder notes" (195a4a4): change one tile, and re-route `step9-fades-then-source`. Its builder (archived) agreed you may re-time that scenario, kerb at [53, 13] included, as long as every claim stays. **Fold this into the next push that touches the depot**, so the kerb can come back then too, and say in your report that the wings moved.
+
 # Step 22: one stage to clear (the quarry): lose and start over, reach the end, STAGE CLEARED
 
 Brief for one builder, reused for every push below. Written 2026-11-24 by
