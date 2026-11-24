@@ -484,6 +484,12 @@ end at x 24) and e2e `king-wall` (control: rests at 40, 27, 14 inside the wall).
 behaviour is unchanged: he never walks back to the throne today (he is a plain body, `verbs: body`),
 and nothing here gives him that.
 
+**Flake seen on the way (not fixed, not mine):** `npm run check`'s `step20-machine` failed in 2
+of 4 full runs on this tree ("b's page never heard the barrier break"; "the server sent 9
+effect(s) to a"), passed 4 of 4 run alone and once on `main` without this change. Its room,
+`test-machine`, has no false wall, so `rest-out-of-false-wall` never acts there: it reads as
+load-sensitive timing. For its owner (Step 20).
+
 ### Flakes (brief `handoff-prompts/step-5-e2e-flakes.md`)
 
 **Measured** by the builder `session_017WiGzJujVWWDboh12zWhNR`,
