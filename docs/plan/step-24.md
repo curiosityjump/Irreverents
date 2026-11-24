@@ -455,3 +455,11 @@ Newest last. Slice 1's builder, `session_017WiGzEb3ESHBHGr3vhpB3k`.
     hero to move 12 px, then the page and the screenshot lag behind it.
   - The e2e's "wanted" pick-up is printed, not a fact: it worked on two of
     four runs (a shot lying under a bounce or on a step on the others).
+
+## Looked at, 2026-11-24 12:25 UTC (a subagent of the orchestrator; the 8 shots in `docs/plan/step-24-shots/`)
+
+Slice 1 is live (27490b6) and green in the orchestrator's full re-runs. By eye it is poor in three ways, for the next slice's brief:
+- **He does not read as an enemy.** A purple-hooded kid drawn the same cute way as the heroes (the stand-in sheet, `DRAFT:`), with nothing that says bad guy.
+- **His shot in the air is the same banana-boomerang sprite as the one lying on the floor to pick up** (`shot-in-the-air-sideways`, `hero-struck-sideways`): an incoming throw cannot be told from loot. A thing flying at you must look like one (a trail, a spin, a tint, a different cut).
+- **No shot shows his sight band**, and in the upright shots he is clipped at the left edge.
+Right: the arc's dots read clearly on the gallery wall; the landing cross is small but readable. The camera's lean (ad51322) now shows him and the whole arc sideways.
