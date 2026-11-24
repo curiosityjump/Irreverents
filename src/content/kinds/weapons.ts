@@ -39,6 +39,14 @@ export interface Weapon {
    * carried out of the room, another stands there.
    */
   sources: { id: string; room: string; tile: [number, number]; restock: number }[];
+  /**
+   * Thrown with Grab (systems/weapon-throw.ts): it leaves the hand at
+   * `speed` (px/s) and launches the first body it meets by `strength`
+   * against that body's weight (as a swing does), wearing it by `wear`.
+   */
+  thrown: { speed: number; strength: number; wear: number };
+  /** Who starts holding one: placed entity ids (content/placements/) or character kinds, bodies nobody plays (systems/weapon-carriers.ts). */
+  carriers: string[];
 }
 
 declare module '../types.ts' {
@@ -78,7 +86,7 @@ const kind: ContentKind = {
   parse(raw, read) {
     const o = read.object(raw, '');
     if (!o) return null;
-    read.only(o, ['id', 'name', 'looks', 'grip', 'box', 'hit', 'use', 'sources'], '');
+    read.only(o, ['id', 'name', 'looks', 'grip', 'box', 'hit', 'use', 'sources', 'thrown', 'carriers'], '');
     const looks: Weapon['looks'] = { ground: '', held: '' };
     const lo = read.object(o.looks, 'looks');
     if (lo) {
@@ -116,7 +124,20 @@ const kind: ContentKind = {
       hit,
       use,
       sources: [],
+      // DRAFT: a weapon that says nothing about its throw flies like the sword.
+      thrown: { speed: 320, strength: 12000, wear: 20 },
+      carriers: o.carriers === undefined ? [] : read.stringList(o, 'carriers', ''),
     };
+    if (o.thrown !== undefined) {
+      const t = read.object(o.thrown, 'thrown');
+      if (t) {
+        read.only(t, ['speed', 'strength', 'wear'], 'thrown');
+        // Under a tile a tick (16 px at 60 ticks): the flight tests one step ahead, as physics does.
+        if (t.speed !== undefined) out.thrown.speed = read.number(t, 'speed', 'thrown', { min: 0, max: 900 });
+        if (t.strength !== undefined) out.thrown.strength = read.number(t, 'strength', 'thrown', { min: 0, max: 1000000 });
+        if (t.wear !== undefined) out.thrown.wear = read.number(t, 'wear', 'thrown', { min: 0, max: 100000 });
+      }
+    }
     if (/\d/.test(out.name)) read.fail('name', `"${out.name}" has a digit: the game shows no numbers`);
     if (o.sources !== undefined) {
       if (!Array.isArray(o.sources)) read.fail('sources', `must be a list of { "id", "room", "tile", "restock" }, but is ${describe(o.sources)}`);
@@ -145,8 +166,14 @@ const kind: ContentKind = {
     // A number some character's tuning set has is one a verb reads (src/sim/check-content.ts refuses an unread one).
     const readNumbers = new Set<string>();
     for (const set of Object.values(content.tuning.characters)) for (const k of Object.keys(set)) readNumbers.add(k);
+    const placed = new Set<string>();
+    for (const p of Object.values(content.placements ?? {})) for (const q of p.place) placed.add(q.id);
     for (const w of Object.values(content.weapons).sort((a, b) => (a.id < b.id ? -1 : 1))) {
       const file = `content/weapons/${w.id}.json`;
+      w.carriers.forEach((c, i) => {
+        if (!placed.has(c) && !(c in content.characters)) fail(file, `carriers[${i}]`, `"${c}" is neither a placed entity id (content/placements/) nor a character kind (characters: ${known(content.characters)})`);
+        else if (c in content.characters && !content.characters[c]!.verbs.includes('attack')) fail(file, `carriers[${i}]`, `character "${c}" has no hands for it: it does not list the verb "attack"`);
+      });
       for (const s of LOOK_STATES) {
         const id = w.looks[s];
         if (id !== undefined && !looks.has(id)) fail(file, `looks.${s}`, `no look "${id}" (content/looks/; the cut ones for weapons are in content/looks/weapons.json)`);

@@ -46,7 +46,7 @@ const system: System = {
         const dropped = makeLoose(ctx, old, e.room, e.x + (box?.w ?? 0) / 2, e.y + (box?.h ?? 0), { from: e.id, ...(src ? { src } : {}) });
         ctx.emit('weapon-dropped', { entity: e.id, player: e.player, weapon: old.id, loose: dropped.id, how: 'swap' });
       }
-      emitEffect(ctx, e, { kind: 'weapon', weapon: w.id, ...(l.src ? { src: l.src } : {}) });
+      emitEffect(ctx, e, { kind: 'weapon', weapon: w.id, by: e.kind, ...(l.src ? { src: l.src } : {}) });
       ctx.emit('weapon-taken', { entity: e.id, player: e.player, weapon: w.id, loose: loose.id, ...(l.src ? { src: l.src } : {}) });
       removeEntity(world, loose.id);
     }

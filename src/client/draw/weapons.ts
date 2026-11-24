@@ -2,7 +2,7 @@ import type { Content } from '../../content/types.ts';
 import type { Weapon } from '../../content/kinds/weapons.ts';
 import type { Entity, World } from '../../sim/types.ts';
 import { useHere } from '../../sim/use.ts';
-import { looseBox } from '../../sim/weapons.ts';
+import { looseBox, weaponOf } from '../../sim/weapons.ts';
 import { drawnOffset } from './entities.ts';
 import type { PlayerView } from './entities.ts';
 import { drawFrame, frameOf, lengthOf, look } from './fx.ts';
@@ -92,9 +92,8 @@ export function drawWeapons(g: CanvasRenderingContext2D, world: World, content: 
       }
       continue;
     }
-    const held = e.c.weapon;
-    if (!held) continue;
-    const w = weapons[held.id];
+    // Through weaponOf: a weapon kept for another party member is not drawn on this one (systems/weapon-hands.ts).
+    const w = weaponOf(content, e);
     const hand = w && handOf(content, e);
     if (!w || !hand) continue;
     const off = drawnOffset(e.id);
@@ -117,7 +116,7 @@ export function drawWeapons(g: CanvasRenderingContext2D, world: World, content: 
     if (!imp || by === undefined || o.room !== roomId || seenImpacts.get(o.id) === imp.tick) continue;
     if (o.c.lastHit!.tick !== imp.tick) continue;
     const holder = world.entities.find((h) => h.id === by);
-    const w = holder?.c.weapon && weapons[holder.c.weapon.id];
+    const w = holder && weaponOf(content, holder);
     seenImpacts.set(o.id, imp.tick);
     if (w && w.looks.impact) playing.push({ id: w.looks.impact, x: imp.x, y: imp.y, at: frame });
   }

@@ -1,0 +1,155 @@
+{
+  "gate": null,
+  "room": "castle-street",
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "entities": [
+    {
+      "id": "dummy-1",
+      "character": "dummy",
+      "tile": [
+        19,
+        10
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 95,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 100,
+      "to": 102,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 110,
+      "to": 150,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 170,
+      "to": 172,
+      "hold": [
+        "grab"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 220,
+      "to": 238,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 250,
+      "to": 252,
+      "hold": [
+        "interact"
+      ]
+    }
+  ],
+  "ticks": 300,
+  "expect": [
+    {
+      "fact": "event",
+      "event": "weapon-dropped",
+      "player": "a",
+      "where": {
+        "weapon": "sword",
+        "how": "thrown"
+      },
+      "between": [
+        170,
+        171
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "weapon",
+      "player": "a",
+      "at": 172,
+      "is": null
+    },
+    {
+      "fact": "event",
+      "event": "hit",
+      "player": "a",
+      "where": {
+        "target": "dummy-1"
+      },
+      "between": [
+        171,
+        190
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "velocity",
+      "entity": "dummy-1",
+      "at": 190,
+      "vx": [
+        300,
+        400
+      ]
+    },
+    {
+      "fact": "weapon",
+      "at": 215,
+      "loose": [
+        1,
+        1
+      ],
+      "room": "castle-street",
+      "weapon": "sword",
+      "x": [
+        260,
+        300
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "weapon-taken",
+      "player": "a",
+      "where": {
+        "weapon": "sword"
+      },
+      "between": [
+        250,
+        252
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "weapon",
+      "player": "a",
+      "at": 300,
+      "is": "sword"
+    }
+  ],
+  "id": "step23-thrown-knocks-down",
+  "proves": "Grab throws a held weapon; the first body it meets flies; the weapon lies where it stopped and Use picks it up again",
+  "//": "DRAFT (Step 23): Grab throws the weapon in hand. The grappler picks up the street's sword, walks on, and with the stick at rest taps Grab facing a dummy: the sword leaves the hand at the sword's thrown speed, meets the dummy and launches it (14000 / 40 = 350 px/s, a hit by the thrower), then drops and lies at about x 279. The grappler walks to it and Use takes it again. Control (-control): the same, thrown with the stick to the left, away from the dummy: the dummy is never hit."
+}

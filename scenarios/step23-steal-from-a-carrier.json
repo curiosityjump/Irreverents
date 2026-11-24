@@ -1,0 +1,231 @@
+{
+  "//": "DRAFT (Step 23): stealing (D-009, 'weapons can be acquired from enemies'). In the real Bandit Camp, camp-fighter-2 carries the sword (content/weapons/sword.json, carriers) from tick 1 (not camp-fighter-1: measured, his sword moved step21-throw-is-no-escape's throw by 2 ticks). The grappler jumps the camp's wall, lays the lookout flat, strikes the horn post, knocks camp-fighter-1 flying into camp-fighter-2 and walks on, swinging: a hard blow on camp-fighter-2 (at powerHardHitSpeed or over) sends the sword out of his hand to lie at about x 665. The grappler steps up to it and Use takes it. Control (-control): the same walk with no swing at all: he keeps it. Watched to fail with sword's carriers emptied, and with powerHardHitSpeed 900.",
+  "id": "step23-steal-from-a-carrier",
+  "gate": null,
+  "proves": "a bad guy who starts holding a weapon has it knocked loose by a hard hit, and the hero who hit him picks it up and holds it",
+  "room": "outpost",
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "placements": true,
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 135,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 20,
+      "to": 45,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 160,
+      "to": 520,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 200,
+      "to": 202,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 224,
+      "to": 226,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 248,
+      "to": 250,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 272,
+      "to": 274,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 296,
+      "to": 298,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 320,
+      "to": 322,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 344,
+      "to": 346,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 368,
+      "to": 370,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 392,
+      "to": 394,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 416,
+      "to": 418,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 440,
+      "to": 442,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 464,
+      "to": 466,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 488,
+      "to": 490,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 512,
+      "to": 514,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 560,
+      "to": 584,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 600,
+      "to": 602,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 610,
+      "to": 612,
+      "hold": [
+        "interact"
+      ]
+    }
+  ],
+  "ticks": 660,
+  "expect": [
+    {
+      "fact": "weapon",
+      "entity": "camp-fighter-2",
+      "at": 1,
+      "is": "sword"
+    },
+    {
+      "fact": "event",
+      "event": "weapon-dropped",
+      "entity": "camp-fighter-2",
+      "where": {
+        "weapon": "sword",
+        "how": "knocked"
+      },
+      "between": [
+        500,
+        530
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "weapon",
+      "entity": "camp-fighter-2",
+      "at": 540,
+      "is": null
+    },
+    {
+      "fact": "event",
+      "event": "weapon-taken",
+      "player": "a",
+      "where": {
+        "weapon": "sword"
+      },
+      "between": [
+        600,
+        612
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "weapon",
+      "player": "a",
+      "at": 660,
+      "is": "sword"
+    },
+    {
+      "fact": "weapon",
+      "entity": "camp-fighter-2",
+      "at": 660,
+      "is": null
+    }
+  ]
+}

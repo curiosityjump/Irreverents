@@ -1,5 +1,5 @@
 {
-  "//": "DRAFT (Step 23): the first weapon, from the owner's P12 upload (looks cut by the props builder, content/looks/weapons.json). Quick: it adds reach and a harder launch and keeps the holder's own wind-up. It lies on the castle street at column 10, on the first screen a player has on entering it, 32 px from the counter (the nearest thing) and clear of the cellar doorway at column 7. Every number is a first guess (decisions-log 'Step 23').",
+  "//": "DRAFT (Step 23): the first weapon, from the owner's P12 upload (looks cut by the props builder, content/looks/weapons.json). Quick: it adds reach and a harder launch and keeps the holder's own wind-up. It lies on the castle street at column 10, on the first screen a player has on entering it, 32 px from the counter (the nearest thing) and clear of the cellar doorway at column 7. camp-fighter-2 carries one (not camp-fighter-1: measured, his sword moved a Step 21 scenario's throw by 2 ticks). Every number is a first guess (decisions-log 'Step 23').",
   "id": "sword",
   "name": "Sword",
   "looks": {
@@ -9,9 +9,40 @@
     "impact": "weapon-sword-impact",
     "broken": "weapon-sword-broken"
   },
-  "grip": [9, 19],
-  "box": [16, 8],
-  "hit": { "add": { "attackReach": 10 }, "times": { "attackStrength": 1.4 } },
+  "grip": [
+    9,
+    19
+  ],
+  "box": [
+    16,
+    8
+  ],
+  "hit": {
+    "add": {
+      "attackReach": 10
+    },
+    "times": {
+      "attackStrength": 1.4
+    }
+  },
   "use": "swing",
-  "sources": [{ "id": "street-sword", "room": "castle-street", "tile": [10, 10], "restock": 30 }]
+  "sources": [
+    {
+      "id": "street-sword",
+      "room": "castle-street",
+      "tile": [
+        10,
+        10
+      ],
+      "restock": 30
+    }
+  ],
+  "thrown": {
+    "speed": 320,
+    "strength": 14000,
+    "wear": 24
+  },
+  "carriers": [
+    "camp-fighter-2"
+  ]
 }

@@ -1,6 +1,7 @@
 import { bodyNumbers, inputOf, overlaps, release, ticksOf } from '../body-state.ts';
 import { emitEffect, heldBy } from '../effects.ts';
 import type { Entity, Verb } from '../types.ts';
+import { weaponOf } from '../weapons.ts';
 
 declare module '../types.ts' {
   interface Components {
@@ -38,6 +39,7 @@ const verb: Verb = {
     const fresh = down && !g.held;
     g.held = down;
     if (!fresh) return;
+    if (weaponOf(ctx.content, e)) return; // Step 23: with a weapon in hand Grab throws it (systems/weapon-throw.ts) and lifts nobody.
     const box = ctx.content.characters[e.kind]?.box;
     if (!box) return;
 

@@ -1,0 +1,86 @@
+{
+  "//": "DRAFT (Step 23): the control of step23-steal-from-a-carrier: the same walk and the same Use presses with no swing: camp-fighter-2 is never hit by the hero and keeps the sword, and the hero holds none.",
+  "id": "step23-steal-from-a-carrier-control",
+  "gate": null,
+  "proves": "a carrier nobody hits keeps his weapon, and Use beside nothing picks nothing up",
+  "room": "outpost",
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "placements": true,
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 135,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 20,
+      "to": 45,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 160,
+      "to": 520,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 560,
+      "to": 584,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 600,
+      "to": 602,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 610,
+      "to": 612,
+      "hold": [
+        "interact"
+      ]
+    }
+  ],
+  "ticks": 660,
+  "expect": [
+    {
+      "fact": "weapon",
+      "entity": "camp-fighter-2",
+      "at": 660,
+      "is": "sword"
+    },
+    {
+      "fact": "weapon",
+      "player": "a",
+      "at": 660,
+      "is": null
+    },
+    {
+      "fact": "event",
+      "event": "weapon-dropped",
+      "between": [
+        0,
+        660
+      ],
+      "count": [
+        0,
+        0
+      ]
+    }
+  ]
+}

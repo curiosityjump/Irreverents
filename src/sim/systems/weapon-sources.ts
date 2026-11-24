@@ -33,6 +33,8 @@ const system: System = {
       if (loose !== undefined) out.add(loose);
       const held = e.c.weapon?.src;
       if (held !== undefined && room.get(held) === e.room) out.add(held);
+      // A weapon kept for another party member (systems/weapon-hands.ts) is carried as one in hand is.
+      for (const k of Object.values(e.c.weaponKept ?? {})) if (k.src !== undefined && room.get(k.src) === e.room) out.add(k.src);
     }
     for (const w of [...weapons].sort((a, b) => (a.id < b.id ? -1 : 1))) {
       for (const s of w.sources) {

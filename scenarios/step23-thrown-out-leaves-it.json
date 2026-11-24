@@ -1,0 +1,228 @@
+{
+  "//": "DRAFT (Step 23): beaten in the camp with a weapon in hand, it lies inside. The grappler steals camp-fighter-2's sword (as step23-steal-from-a-carrier) and stands among the camp's fighters. The first fall to them knocks the sword out of its hand inside the camp (laid flat by someone: a hard hit); more falls and it is thrown out into the courtyard (Step 21's rule as it stands, hearts push 2 included: measured at tick 2648): the sword still lies in the camp. No defeat file changes.",
+  "id": "step23-thrown-out-leaves-it",
+  "gate": null,
+  "proves": "beaten in the Bandit Camp holding a weapon, the hero loses it at the first fall and it lies inside the camp after the hero is thrown out",
+  "room": "outpost",
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "placements": true,
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 135,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 20,
+      "to": 45,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 160,
+      "to": 520,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 200,
+      "to": 202,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 224,
+      "to": 226,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 248,
+      "to": 250,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 272,
+      "to": 274,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 296,
+      "to": 298,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 320,
+      "to": 322,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 344,
+      "to": 346,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 368,
+      "to": 370,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 392,
+      "to": 394,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 416,
+      "to": 418,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 440,
+      "to": 442,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 464,
+      "to": 466,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 488,
+      "to": 490,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 512,
+      "to": 514,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 560,
+      "to": 584,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 600,
+      "to": 602,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 610,
+      "to": 612,
+      "hold": [
+        "interact"
+      ]
+    }
+  ],
+  "ticks": 3300,
+  "expect": [
+    {
+      "fact": "weapon",
+      "player": "a",
+      "at": 660,
+      "is": "sword"
+    },
+    {
+      "fact": "event",
+      "event": "weapon-dropped",
+      "player": "a",
+      "where": {
+        "weapon": "sword",
+        "how": "knocked"
+      },
+      "between": [
+        660,
+        2648
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "thrown-out",
+      "player": "a",
+      "between": [
+        2000,
+        3300
+      ]
+    },
+    {
+      "fact": "in-room",
+      "player": "a",
+      "at": 3300,
+      "room": "courtyard"
+    },
+    {
+      "fact": "weapon",
+      "player": "a",
+      "at": 3300,
+      "is": null
+    },
+    {
+      "fact": "weapon",
+      "at": 3300,
+      "loose": [
+        1,
+        1
+      ],
+      "room": "outpost",
+      "weapon": "sword"
+    }
+  ]
+}

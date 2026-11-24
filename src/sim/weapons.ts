@@ -6,6 +6,8 @@
 import type { Content } from '../content/types.ts';
 import type { Weapon } from '../content/kinds/weapons.ts';
 import type { Entity, StepContext, World } from './types.ts';
+import { ticksOf } from './body-state.ts';
+import { emitEffect } from './effects.ts';
 import { addEntity, findEntity } from './world.ts';
 
 declare module './types.ts' {
@@ -17,13 +19,24 @@ declare module './types.ts' {
      * was taken from, if it came off one (so the source knows it is out).
      * DRAFT: one weapon in hand, beside one power (doc 05 leaves slots OPEN).
      */
-    weapon?: { id: string; src?: string; uses?: number };
+    weapon?: { id: string; src?: string; uses?: number; by?: string };
+    /**
+     * Step 23 (the owner: "No inventory. Only one weapon at a time"; per hero,
+     * not per party): the weapon each other party member of this player holds,
+     * by character kind, while that member is not the one played
+     * (systems/weapon-hands.ts). One each, never a bag.
+     */
+    weaponKept?: Record<string, { id: string; src?: string; uses?: number }>;
+    /** On a carrier (a weapon's `carriers`): it has been handed its weapon once in this world (systems/weapon-carriers.ts). */
+    weaponCarrier?: { at: number };
+    /** Each played body's own memory of the Grab button for the weapon throw (systems/weapon-throw.ts). */
+    weaponGrab?: { held: boolean };
     /**
      * Present on a loose weapon: a weapon lying in a room, to be picked up
      * with Use (src/sim/use/weapon.ts). `src`: the source it came from.
      * Nobody can pick it up before tick `until`. `from`: the body it left.
      */
-    loose?: { weapon: string; src?: string; until: number; from: string | null };
+    loose?: { weapon: string; src?: string; until: number; from: string | null; flying?: { by: string; met: string[] } };
     /** Each body's own memory of the Use button for the weapon systems (systems/weapon-take.ts), to see a fresh press. */
     weaponUse?: { held: boolean };
   }
@@ -40,7 +53,9 @@ declare module './types.ts' {
     /** `entity` picked up `weapon` (loose weapon `loose`; `src` its source, if any). */
     'weapon-taken': { entity: string; player: string | null; weapon: string; loose: string; src?: string };
     /** `weapon` left `entity`'s hand and lies loose as `loose` (`how`: swapped for another). */
-    'weapon-dropped': { entity: string; player: string | null; weapon: string; loose: string; how: 'swap' };
+    'weapon-dropped': { entity: string; player: string | null; weapon: string; loose: string; how: 'swap' | 'knocked' | 'set-down' | 'thrown' };
+    /** Thrown loose weapon `loose` struck `target` (a `hit` by the thrower is emitted too). */
+    'weapon-struck': { loose: string; weapon: string; by: string; target: string };
     /** Source `src` stood a fresh `weapon` as `loose`. */
     'weapon-stood': { src: string; weapon: string; loose: string; room: string };
   }
@@ -57,11 +72,18 @@ declare module './types.ts' {
  */
 export const WEAPON_KIND = '~weapon';
 
-/** The weapon a body holds, or null. Reads with a default: a body saved before Step 23 has no `c.weapon`. */
+/**
+ * The weapon a body holds, or null. Reads with a default: a body saved before
+ * Step 23 has no `c.weapon`. A weapon taken by another party member (`by`, a
+ * character kind) is not this body's while it is someone else (a switch is
+ * decided on the page first; systems/weapon-hands.ts puts it away on the
+ * server), unless world.weaponStaysWithHero is 0.
+ */
 export function weaponOf(content: Content, e: Entity): Weapon | null {
-  const id = e.c.weapon?.id;
-  if (id === undefined) return null;
-  return content.weapons?.[id] ?? null;
+  const held = e.c.weapon;
+  if (held === undefined) return null;
+  if (held.by !== undefined && held.by !== e.kind && (content.tuning.world.weaponStaysWithHero ?? 1) !== 0) return null;
+  return content.weapons?.[held.id] ?? null;
 }
 
 /** The weapon a loose weapon is, or null. */
@@ -120,7 +142,7 @@ export function makeLoose(
   room: string,
   x: number,
   feet: number,
-  opts: { src?: string; from?: string | null; vx?: number; vy?: number; until?: number } = {},
+  opts: { src?: string; from?: string | null; vx?: number; vy?: number; until?: number; flying?: { by: string; met: string[] } } = {},
 ): Entity {
   const { world } = ctx;
   let n = 0;
@@ -139,6 +161,32 @@ export function makeLoose(
     vy,
     facing: vx < 0 ? -1 : 1,
     onGround: vx === 0 && vy === 0,
-    c: { loose: { weapon: w.id, until: opts.until ?? world.tick, from: opts.from ?? null, ...(opts.src ? { src: opts.src } : {}) } },
+    c: { loose: { weapon: w.id, until: opts.until ?? world.tick, from: opts.from ?? null, ...(opts.src ? { src: opts.src } : {}), ...(opts.flying ? { flying: opts.flying } : {}) } },
   });
+}
+
+/**
+ * Knocks the weapon in `from`'s hand out of it (a hard hit, D-081): it
+ * leaves the hand (the effect, so a player's own page loses it too) and pops
+ * up out of the body and a little away from `away`, as a power's orb does
+ * (the orb's numbers: powerOrbPop, powerOrbSpread, powerRetakeTime).
+ */
+export function knockLoose(ctx: StepContext, from: Entity, away: Entity | null): Entity | null {
+  const w = weaponOf(ctx.content, from);
+  const box = ctx.content.characters[from.kind]?.box;
+  if (!w || !box) return null;
+  const t = ctx.content.tuning.world;
+  const mid = from.x + box.w / 2;
+  const dir = away ? (away.x + (ctx.content.characters[away.kind]?.box.w ?? 0) / 2 < mid ? 1 : -1) : -from.facing;
+  const src = from.c.weapon?.src;
+  emitEffect(ctx, from, { kind: 'weapon', weapon: null });
+  const loose = makeLoose(ctx, w, from.room, mid, from.y + Math.max(w.box[1], box.h / 2 + w.box[1] / 2), {
+    from: from.id,
+    vx: dir * (t.powerOrbSpread ?? 60),
+    vy: -(t.powerOrbPop ?? 240),
+    until: ctx.world.tick + ticksOf(t.powerRetakeTime ?? 0.6),
+    ...(src ? { src } : {}),
+  });
+  ctx.emit('weapon-dropped', { entity: from.id, player: from.player, weapon: w.id, loose: loose.id, how: 'knocked' });
+  return loose;
 }
