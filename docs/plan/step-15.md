@@ -191,3 +191,14 @@ don't grade them.
 ## Open with the owner
 
 ## Handoff notes
+
+## Released to a lead, 2026-11-24 08:40 UTC (orchestrator `session_017WiGzHhT2apmWHT61rQ65G`)
+
+Why now: `docs/vision-gaps.md` (refreshed at 9dbd705) ranks row 2 first: "one level is not a world: a second region". The eight core loops of the owner's ~18:30 verdict are all built and live, and the last two full re-runs with nothing red were at 6400b44 and f434f2e. So the heading above ("nothing here is briefed") no longer holds the step back.
+
+For the lead, before any brief:
+- **Check this file's D-numbers and its "What's decided" against the library** (the draft's independent review never ran). The library's labels are literal: the atlas regions and the ten level designs are proposals (docs 15, 25, 28); which place to build is yours to choose by default (D-096, `DRAFT:`, a `docs/decisions-log.md` entry in the owner's terms), from what the owner has named or drawn art for. Say in your first report which place and why.
+- **Build it out of what exists**, not beside it: hearts and game over (Step 21), a stage that can be lost, cleared and rated (Step 22: the Iron Quarry is the model, and a second place should be a second stage on the menu), alarms whose rows come in from both sides (`content/outposts/` `entries`), bad guys beaten for good, the chase, weapons lying about (Step 23), a machine to hijack (Step 20; guard-vehicle sprites are cut as group `guard-vehicles`, df67f5d, and nothing draws them yet: a second region is where they belong), the thrower of Step 24 once its slice 1 lands, hidden pieces and an explored share (Step 14). A new region that needs engine changes is a sign a primitive is missing: say which.
+- **Art:** nothing new is available tonight; use what is cut from the owner's approved plates (`docs/plan/step-8.md`), mark stand-ins `DRAFT:`, and send real needs to Vision Partner (`docs/mechanisms/asset-requests.md`). The look pass of 07:45 UTC (`docs/plan/step-8.md`, "Look pass") counts a grey-box room against you.
+- **Who else is in the tree tonight:** the camp (`session_017WiGzGkuNQcsBDa2oWh23s`), the town and the page's drawing under delay (`session_017WiGzHqA8GMgCCLsfWzdzm`), the phone's HUD (`session_017WiGzHxAKbURW5YnQt6bDN`), the Hall gallery's thrower (`session_017WiGzEb3ESHBHGr3vhpB3k`), Step 22's lead (`session_017WiGzF7NsB3KTwXkWUXE63`). A new region's own rooms collide with none of them; its doorway into the kingdom is one shared edit: agree it by message.
+- Spawns: model `claude-opus-5-5`, `blob_limit_kb: 150`, one builder at a time unless paths cannot overlap; a builder stops at about 300k tokens. Report to the session on the Orchestrator line of `docs/questions-for-the-owner.md`.

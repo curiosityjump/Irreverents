@@ -354,7 +354,7 @@ Full text: `docs/plan/step-14.md`
 
 ## Step 15 — A second place, worth coming back to
 
-**Status: open, unclaimed — queued behind Step 3.** (Drafted from the library by an agent; its independent review did not run before the usage limit stopped it at 04:58 UTC. 3 of its 3 quoted pieces were found verbatim by script. Check its D-numbers and its "What's decided" against the library before briefing from it.)
+**Status: open, unclaimed.** (Released to a lead 2026-11-24 08:40 UTC by orchestrator session_017WiGzHhT2apmWHT61rQ65G: `docs/vision-gaps.md` row 2, "more than one region", is the top gap, and the eight core loops of `docs/plan/core-loops.md` are all built. The lead's first act is the check this line always asked for. Drafted from the library by an agent; its independent review did not run before the usage limit stopped it at 04:58 UTC. 3 of its 3 quoted pieces were found verbatim by script. Check its D-numbers and its "What's decided" against the library before briefing from it.)
 
 Full text: `docs/plan/step-15.md`
 
