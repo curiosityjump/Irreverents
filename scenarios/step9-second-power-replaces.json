@@ -1,0 +1,130 @@
+{
+  "id": "step9-second-power-replaces",
+  "gate": null,
+  "proves": "a hero holding one power who takes another (the depot's pedestal, then an orb) takes the new one, and the old one pops out of them as an orb",
+  "room": "quarry-depot",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 1,
+      "power": "boost"
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 100,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 38,
+      "to": 52,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 180,
+      "to": 200,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 220,
+      "to": 300,
+      "x": -1
+    }
+  ],
+  "ticks": 420,
+  "expect": [
+    {
+      "fact": "power",
+      "player": "a",
+      "at": 0,
+      "is": "boost"
+    },
+    {
+      "fact": "event",
+      "event": "power-taken",
+      "player": "a",
+      "where": {
+        "power": "flight",
+        "src": "depot-strongroom"
+      },
+      "between": [
+        80,
+        130
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "power-dropped",
+      "player": "a",
+      "where": {
+        "power": "boost"
+      },
+      "between": [
+        80,
+        130
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "power",
+      "player": "a",
+      "at": 180,
+      "is": "flight"
+    },
+    {
+      "fact": "event",
+      "event": "power-taken",
+      "player": "a",
+      "where": {
+        "power": "boost"
+      },
+      "between": [
+        200,
+        320
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "power-dropped",
+      "player": "a",
+      "where": {
+        "power": "flight"
+      },
+      "between": [
+        200,
+        320
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "power",
+      "player": "a",
+      "at": 420,
+      "is": "boost"
+    }
+  ],
+  "//": "DRAFT (Step 9, the owner 2026-11-24: 'Similar to kirby - cant have multiple powers at once'): the walk of step9-fades-then-source, the grappler holding the boost. Walking over the depot's pedestal takes flight, and the boost pops out of them as an orb (tick 101) that slides west and rests. They stand a while (still flight at 180), step east, then walk back west over the boost's orb: they take it, and flight pops out in turn (from an orb, power-take; from the pedestal, power-sources). The control is step9-second-power-replaces-control: the grappler holds flight already and walks through the pedestal's flight (no swap). Watched to fail on the code before the swap (a hero holding a power walked through: no power-taken). Not watched to fail: the swappedBy guard (the hero who swapped a power out does not take it back until stepped off it); here the orb slides out from under them before powerRetakeTime, so the run is the same without it."
+}

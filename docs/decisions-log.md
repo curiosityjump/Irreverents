@@ -267,3 +267,10 @@ document as a decision of theirs.
 - **Why this way:** "Heros should have hearts which can be lost": you have to see them go. Your own hero's hearts are the pink hearts the props builder cut from the approved UI atlas, under your face; each friend's (or free hero's) hearts are tiny ones in the same colours under their face; a lost heart swells and fades with a low "hurt" sound everyone hears; a hero with none left has a greyed face. The GAME OVER card has a slowed warble. No numbers anywhere.
 - **To change it:** sizes and colours at the top of `src/client/draw/hearts.ts`; the sounds in `content/sounds/heart-lost.json` and `game-over.json`.
 - **Where:** `docs/mechanisms/rendering-world.md`, "The party plate". `DRAFT:`
+
+### 2026-11-24 · A second power replaces the first: the old one pops out of you as an orb
+- **Decided by:** Step 23 builder (`handoff-prompts/weapons-pick-up-and-swing.md`), `session_017WiGzJahGCHPU26omeZQNq`
+- **Instead of asking:** what happens when a hero holding a power walks into another one (before: they walked through it).
+- **Why this way:** the owner, 2026-11-24: "Similar to kirby - cant have multiple powers at once". Touching a second power's orb, or a lit pedestal, takes it; the one you held pops out where you stand, as a knocked-loose one does, and lies there for anyone (or fades). You do not take it back while still standing on it, so standing still never swaps back and forth; step off and walk back over it to swap again. A power you already hold is walked through. A weapon and a power together still stay (asked of the owner in the inbox).
+- **To change it:** `swapOut` in `src/sim/power-orbs.ts`, called from the two places a power is taken; removing the two calls and the two `h.c.power?.id === ...` tests brings back walking through.
+- **Where:** `docs/mechanisms/powers.md`, "Carriers and orbs".

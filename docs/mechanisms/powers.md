@@ -84,7 +84,12 @@ rooms (`scripts/lib/room-controls.ts`).
   It is 10 px square (`ORB_SIZE`).
 - **An orb** fades after its power's `fade`
   (`power-faded`), and is taken by the first played hero who touches it
-  holding no power: the effect `power` and the event `power-taken`. **Nobody
+  not holding that same power: the effect `power` and the event `power-taken`.
+  **One power per hero, Kirby's way** (the owner, 2026-11-24: "Similar to
+  kirby - cant have multiple powers at once"): a hero holding another power
+  swaps, and the old one pops out of them as an orb (`swapOut`,
+  `src/sim/power-orbs.ts`), marked `swappedBy` them so they do not take it
+  back until they have stepped off it (`DRAFT:`; `step9-second-power-replaces`). **Nobody
   can take it for `powerRetakeTime` (0.6 s) after it pops**, so it is seen
   to pop and the hitter steps over the body to grab it. (When the hitter
   could take it at once it was gone the frame it appeared.)
@@ -133,7 +138,8 @@ added by `populateRoom` (`src/sim/world.ts`, one line; `sourcesIn` in
 - **Lit** while no entity holds its power taken from it (`c.power.src`) and no
   orb of it lies loose (`c.orb.src`). Dark while someone holds it, lit again
   once it is gone: knocked loose and faded, or the holder left the game.
-- **Taken by touch:** a played hero holding no power whose **middle** is
+- **Taken by touch:** a played hero not holding that power (one holding
+  another swaps, as at an orb) whose **middle** is
   over the source's tile (`DRAFT:`: the middle, so a hero at the hoard one
   tile west, whose box reaches a pixel into it, does not take it). It gets
   the effect `power` with `src`, and the event `power-taken` with `src`.

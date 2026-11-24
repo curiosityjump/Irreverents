@@ -75,8 +75,10 @@ declare module './types.ts' {
      * touch (systems/power-take.ts). `left`: ticks until it fades (-1 never).
      * `from`: the body it came out of. Nobody can take it before tick
      * `until`. `src`: the source it was first taken from, if any.
+     * `swappedBy`: the hero who swapped it out for another power; they do not
+     * take it back until they have stepped off it (systems/power-take.ts).
      */
-    orb?: { power: string; left: number; from: string | null; until: number; src?: string };
+    orb?: { power: string; left: number; from: string | null; until: number; src?: string; swappedBy?: string };
     /** Present on a carrier whose power has been knocked out of it, until it has it again (systems/power-carriers.ts). */
     powerSpent?: { at: number };
   }

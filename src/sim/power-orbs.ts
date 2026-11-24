@@ -3,7 +3,7 @@
 // not in a registry directory.
 import type { Power } from '../content/kinds/powers.ts';
 import { ticksOf } from './body-state.ts';
-import { ORB_KIND, ORB_SIZE } from './powers.ts';
+import { ORB_KIND, ORB_SIZE, powerOf } from './powers.ts';
 import type { Entity, StepContext } from './types.ts';
 import { addEntity, findEntity } from './world.ts';
 
@@ -42,4 +42,20 @@ export function popOrb(ctx: StepContext, p: Power, from: Entity, away: Entity | 
   });
   ctx.emit('power-dropped', { entity: from.id, player: from.player, power: p.id, orb: id });
   return orb;
+}
+
+/**
+ * One power per hero, Kirby's way (the owner, 2026-11-24: "Similar to kirby -
+ * cant have multiple powers at once"): a hero taking a second power (an orb,
+ * systems/power-take.ts, or a source, systems/power-sources.ts) first has the
+ * one they hold pop out of them as an orb, as a knocked-loose one does. The
+ * caller then sends the new power's effect, which replaces the old in
+ * `c.power`. The orb is marked `swappedBy` the hero, so they do not take it
+ * back until they have stepped off it. Does nothing for a hero holding none.
+ */
+export function swapOut(ctx: StepContext, hero: Entity): void {
+  const old = powerOf(ctx.content, hero);
+  if (!old) return;
+  const orb = popOrb(ctx, old, hero, null, hero.c.power?.src);
+  if (orb?.c.orb) orb.c.orb.swappedBy = hero.id;
 }

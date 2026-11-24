@@ -1,0 +1,73 @@
+{
+  "id": "step9-second-power-replaces-control",
+  "gate": null,
+  "proves": "the control: a hero already holding flight walks over the depot's lit pedestal of flight and nothing swaps (no power taken, none dropped)",
+  "room": "quarry-depot",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 1,
+      "power": "flight"
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 100,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 38,
+      "to": 52,
+      "hold": [
+        "jump"
+      ]
+    }
+  ],
+  "ticks": 300,
+  "expect": [
+    {
+      "fact": "power",
+      "player": "a",
+      "at": 0,
+      "is": "flight"
+    },
+    {
+      "fact": "event",
+      "event": "power-taken",
+      "player": "a",
+      "between": [
+        0,
+        300
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "power-dropped",
+      "player": "a",
+      "between": [
+        0,
+        300
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "power",
+      "player": "a",
+      "at": 300,
+      "is": "flight"
+    }
+  ],
+  "//": "DRAFT (Step 9): the control of step9-second-power-replaces. The same walk over the depot's pedestal, the grappler holding flight (given, not from this pedestal, so it stands lit): a hero holding the same power walks through it, nothing pops out."
+}

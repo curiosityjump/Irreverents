@@ -1,4 +1,5 @@
 import { emitEffect, heldBy } from '../effects.ts';
+import { swapOut } from '../power-orbs.ts';
 import type { System } from '../types.ts';
 
 /**
@@ -6,8 +7,9 @@ import type { System } from '../types.ts';
  * you can return to; docs/mechanisms/powers.md). A source is a bodiless
  * entity (`~source:<id>`, src/sim/powers.ts) standing on its tile. It is lit
  * while nobody holds its power taken from it and no orb of it lies loose. A
- * played hero holding no power whose middle stands over the lit source's
- * tile takes it: the effect `power` (with `src`), the event `power-taken`,
+ * played hero whose middle stands over the lit source's tile takes it (one
+ * holding another power swaps: the old one pops out of them as an orb,
+ * `swapOut` in src/sim/power-orbs.ts): the effect `power` (with `src`), the event `power-taken`,
  * and the source's id joins `world.sources` (found, for good: D-082).
  * DRAFT: touch to take, the middle over the tile (so a hero walking past at
  * the next tile does not take it by a pixel), and it lights again as soon as
@@ -30,11 +32,12 @@ const system: System = {
       if (!room) continue;
       const T = room.tile;
       for (const h of world.entities) {
-        if (h.player === null || h.room !== src.room || h.c.power || h.c.flattened || heldBy(h) !== null) continue;
+        if (h.player === null || h.room !== src.room || h.c.power?.id === s.power || h.c.flattened || heldBy(h) !== null) continue;
         const box = content.characters[h.kind]?.box;
         if (!box) continue;
         const mid = h.x + box.w / 2;
         if (mid < src.x || mid >= src.x + T || h.y + box.h <= src.y || h.y >= src.y + T) continue;
+        swapOut(ctx, h);
         emitEffect(ctx, h, { kind: 'power', power: s.power, src: s.id });
         ctx.emit('power-taken', { entity: h.id, player: h.player, power: s.power, from: null, src: s.id });
         const found = world.sources ?? [];

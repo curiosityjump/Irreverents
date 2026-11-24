@@ -1,6 +1,7 @@
 import { overlaps } from '../body-state.ts';
 import { emitEffect, heldBy } from '../effects.ts';
 import { ORB_SIZE, isOrb } from '../powers.ts';
+import { swapOut } from '../power-orbs.ts';
 import { moveLoose } from '../loose-fall.ts';
 import type { Entity, StepContext, System } from '../types.ts';
 import { removeEntity } from '../world.ts';
@@ -9,12 +10,18 @@ import { removeEntity } from '../world.ts';
  * Orbs (Step 9; docs/mechanisms/powers.md): a power lying loose (no body:
  * src/sim/powers.ts, ORB_KIND) falls, bounces and slides to rest by the
  * small physics of src/sim/loose-fall.ts, fades after its power's `fade`, and is taken by the first played hero
- * who touches it (or picks it up) holding no power. The take is the effect
+ * who touches it. A hero already holding another power swaps: the old one
+ * pops out of them as an orb (src/sim/power-orbs.ts, as a knocked-loose one
+ * does). The take is the effect
  * `{ kind: 'power' }`, so it reaches the hero's own page, and the event
  * `power-taken`.
  * INTENT: decided here, in the world that has the orb: the server's, or a
  * scenario's. A page's own world has no orbs, so a page never takes one.
- * DRAFT: one power per hero (a hero holding one walks through an orb); nobody takes it for powerRetakeTime
+ * One power per hero, Kirby's way (the owner, 2026-11-24: "Similar to kirby -
+ * cant have multiple powers at once"): the second replaces the first.
+ * DRAFT: a hero holding the same power walks through its orb; the orb a swap
+ * pops out (`swappedBy`) is not taken back by that hero until they have
+ * stepped off it, so standing still does not swap back and forth; nobody takes it for powerRetakeTime
  * after it pops, so it is seen to pop; how it bounces and slides.
  * Runs after the carriers (540), so an orb popped this tick takes its first step now.
  */
@@ -42,6 +49,7 @@ const system: System = {
       }
       const taker = takerOf(ctx.world.entities, orb, world.tick, content);
       if (!taker) continue;
+      swapOut(ctx, taker);
       emitEffect(ctx, taker, { kind: 'power', power: o.power, ...(o.src ? { src: o.src } : {}) });
       ctx.emit('power-taken', { entity: taker.id, player: taker.player, power: o.power, from: o.from, ...(o.src ? { src: o.src } : {}) });
       gone.push(orb);
@@ -50,15 +58,27 @@ const system: System = {
   },
 };
 
-/** Who takes this orb now: the first played hero touching it who holds no power and can act. */
+/**
+ * Who takes this orb now: the first played hero touching it who can act and
+ * does not hold this same power. The hero a swap popped it out of
+ * (`swappedBy`) is passed over while still touching it, and once they are
+ * not, it is cleared.
+ */
 function takerOf(entities: Entity[], orb: Entity, tick: number, content: StepContext['content']): Entity | null {
   const o = orb.c.orb!;
-  if (tick < o.until) return null;
-  const free = (h: Entity): boolean => h.player !== null && !h.c.power && !isOrb(h) && !h.c.flattened;
-  for (const h of entities) {
-    if (h.room !== orb.room || !free(h) || heldBy(h) !== null) continue;
+  const touching = (h: Entity): boolean => {
     const hb = content.characters[h.kind]?.box;
-    if (hb && overlaps(h.x, h.y, hb.w, hb.h, orb.x, orb.y, ORB_SIZE, ORB_SIZE)) return h;
+    return !!hb && h.room === orb.room && overlaps(h.x, h.y, hb.w, hb.h, orb.x, orb.y, ORB_SIZE, ORB_SIZE);
+  };
+  if (o.swappedBy !== undefined) {
+    const was = entities.find((h) => h.id === o.swappedBy);
+    if (!was || !touching(was)) delete o.swappedBy;
+  }
+  if (tick < o.until) return null;
+  const free = (h: Entity): boolean => h.player !== null && h.c.power?.id !== o.power && !isOrb(h) && !h.c.flattened && h.id !== o.swappedBy;
+  for (const h of entities) {
+    if (!free(h) || heldBy(h) !== null) continue;
+    if (touching(h)) return h;
   }
   return null;
 }
