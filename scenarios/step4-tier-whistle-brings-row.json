@@ -1,6 +1,6 @@
 {
   "id": "step4-tier-whistle-brings-row",
-  "proves": "Step 4's town tiers: in the castle street at alert 1 (the shopkeeper's bell, the guard come to the place reported and swinging at the hero), the hero hits the guard once in his view; once up, he blows his whistle for two seconds and it completes: the street's alert is 2, and the dispatch table's level-2 row walks in, one guard by each street door, both walking toward the place reported. Control (watched to fail): with no dispatch file for the street, no whistle, the alert stays 1 and nobody comes",
+  "proves": "Step 4's town tiers: in the castle street at alert 1 (the shopkeeper's bell, the guard come to the place reported and swinging at the hero), the hero hits the guard once in his view; once up, he blows his whistle for two seconds and it completes: the street's alert is 2, and the dispatch table's level-2 row walks in, one guard on each side of the place reported (the owner: 'come in from the sides'; at least 12 tiles off it, here by the west door and at column 26), both walking toward the place reported. Control (watched to fail): with no dispatch file for the street, no whistle, the alert stays 1 and nobody comes",
   "room": "castle-street",
   "placements": true,
   "players": [
@@ -148,26 +148,28 @@
       "room": "castle-street",
       "at": 3000,
       "x": [
-        640,
-        720
+        350,
+        390
       ],
       "count": [
         1,
         1
-      ]
+      ],
+      "arrivals": true
     },
     {
       "fact": "people",
       "room": "castle-street",
       "at": 3100,
       "x": [
-        580,
-        660
+        285,
+        325
       ],
       "count": [
         1,
         1
-      ]
+      ],
+      "arrivals": true
     }
   ]
 }

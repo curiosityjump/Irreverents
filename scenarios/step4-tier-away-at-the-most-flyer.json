@@ -1,6 +1,6 @@
 {
   "id": "step4-tier-away-at-the-most-flyer",
-  "proves": "Step 4's town tiers, there is always a way out (CLAUDE.md; D-019): solo, the flyer takes goods in the shopkeeper's view, the bell brings the guard, the flyer hits him and the fight brings the alert to 3, level 3's row walks in and the street one short of its cap (an arrival was knocked out through the west door before the row came); then the flyer runs west, jumping, and gets out of the street by the west door; no blow lands on them from tick 3610 on, nobody keeps them in view, the alert cools to 0 and every guard the rows brought walks out and is gone. Control (watched to fail): the guards' runSpeed (the arrivals' body) above the flyer's",
+  "proves": "Step 4's town tiers, there is always a way out (CLAUDE.md; D-019): solo, the flyer takes goods in the shopkeeper's view, the bell brings the guard, the flyer hits him and the fight brings the alert to 3, level 3's row walks in and the street one short of its cap (an arrival was knocked out through the west door before the row came); then the flyer runs west, jumping, past the west arrivals, and gets out of the street by the west door; no blow lands on them from tick 3684 on, nobody keeps them in view, the alert cools to 0 and every guard the rows brought walks out and is gone. Control (watched to fail): the guards' runSpeed (the arrivals' body) above the flyer's",
   "room": "castle-street",
   "placements": true,
   "players": [
@@ -224,7 +224,7 @@
       ]
     }
   ],
-  "ticks": 8200,
+  "ticks": 9200,
   "expect": [
     {
       "fact": "event",
@@ -262,8 +262,8 @@
         "fromDoor": "to-throne-room"
       },
       "between": [
-        3610,
-        3610
+        3684,
+        3684
       ],
       "count": [
         1,
@@ -277,8 +277,8 @@
         "target": "p:a"
       },
       "between": [
-        3610,
-        8200
+        3684,
+        9200
       ],
       "count": [
         0,
@@ -288,15 +288,15 @@
     {
       "fact": "alert",
       "area": "castle-street",
-      "at": 8200,
+      "at": 9200,
       "is": 0
     },
     {
       "fact": "people",
       "arrivals": true,
       "between": [
-        8100,
-        8200
+        9100,
+        9200
       ],
       "count": [
         0,

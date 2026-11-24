@@ -338,3 +338,9 @@ document as a decision of theirs.
 - **Why this way:** your rule replaces it (hearts, then game over in the cantina). A hero who just stands among the camp's fighters loses the whole party's hearts in about a minute and a half and is back in the cantina. Only the Iron Quarry still throws you back to its start, until its stage builder has moved to the game over.
 - **To change it:** `"on": true` in `content/defeat/outpost.json` brings the camp's throw back.
 - **Where:** `docs/mechanisms/defeat.md`, "Hearts". `DRAFT:`
+### 2026-11-24 · Step 4: rows from the sides: the town's help walks in at both edges of your screen, not at the far street doors
+- **Decided by:** town tiers builder, `session_017WiGzFCmKRjkeGNrUSbDvu`
+- **Instead of asking:** "In the castle street, where should the guards a whistle or a bell brings walk in?"
+- **Why this way:** the owner, 2026-11-24: "Alarms should spawn more enemies of increasing strength that come in from the sides." A row now walks in on the street floor on both sides of where they were told you are (never where you actually are: escalation is not omniscient), about half a phone screen off, so they appear at the edges of the view and close in; one each side, alternating. The words "The watch closes in from both sides!" and "The whole watch is upon you!" are shown as rows walk in. When it is over they leave by the nearer street door. Measured: every hero still gets out of the street at the top level, running west past the arrivals (one scenario per hero); for the brawler it takes about 1.3 s longer than before.
+- **To change it:** `entries` and `entryAway` in `content/dispatch/castle-street.json` (left out: back to the doors); `announce` for the words.
+- **Where:** `docs/mechanisms/npc-response.md`, "The dispatch"; `src/sim/systems/alert-dispatch.ts`. `DRAFT:`

@@ -35,6 +35,38 @@ function besideDoor(room: Room, door: Door, nth: number): [number, number] {
   return [Math.max(0, Math.min(room.w - 1, col)), door.ty + door.h - 1];
 }
 
+/**
+ * DRAFT (the owner, 2026-11-24: "come in from the sides"): the entry tile the
+ * `i`th of a row walks in at, for a table with `entries`. The outposts' rule
+ * (outpost-wave.ts `entryFor`, docs/mechanisms/outposts.md, "From the
+ * sides"), for the town: split between the left and the right of the place
+ * reported (`seenX`, pixels; D-065: the report, never a hero), on each side
+ * the nearest entry at least `entryAway` tiles off, else the farthest there;
+ * people alternate sides, each row starting on the other side (`n`, the rows
+ * sent so far). Entries on one side only: all from there.
+ * DRAFT: a copy of the outposts' rule rather than a shared helper, because
+ * outpost-wave.ts is another slice's; one shared helper is a fine later tidy.
+ */
+function entryFor(entries: [number, number][], away: number, tile: number, seenX: number, n: number, i: number): [number, number] {
+  const col = seenX / tile;
+  const pick = (side: [number, number][]): [number, number] | undefined => {
+    if (side.length === 0) return undefined;
+    const near = [...side].sort((a, b) => Math.abs(a[0] + 0.5 - col) - Math.abs(b[0] + 0.5 - col));
+    return near.find((t) => Math.abs(t[0] + 0.5 - col) >= away) ?? near[near.length - 1];
+  };
+  const left = pick(entries.filter((t) => t[0] + 0.5 < col));
+  const right = pick(entries.filter((t) => t[0] + 0.5 >= col));
+  if (!left) return right!;
+  if (!right) return left;
+  return (i + n) % 2 === 0 ? right : left;
+}
+
+/** Of a table's doors, the one nearest across to a tile: the door someone who walked in at an entry leaves by. */
+function nearestDoor(room: Room, doors: string[], col: number): Door {
+  const list = doors.map((id) => room.doors.find((d) => d.id === id)!);
+  return list.reduce((best, d) => (Math.abs(d.tx + d.w / 2 - col) < Math.abs(best.tx + best.w / 2 - col) ? d : best));
+}
+
 /** Where, across, someone leaving by a walk door stops and is gone: just short of it, so the door never carries them. */
 function doorEdge(room: Room, door: Door): number {
   return door.side === 'west' ? (door.tx + door.w) * room.tile + ARRIVED + 1 : door.tx * room.tile - ARRIVED - 1;
@@ -107,7 +139,9 @@ const system: System = {
       while (st.queue.length > 0) {
         const index = st.queue[0]!;
         const row = table.rows[index] ?? [];
-        if (capOn && peopleIn(world, content, area).length + row.length > table.cap) break;
+        // DRAFT: arrivals of this area who followed a hero out still count, or they walk back in over the cap.
+        const away = world.entities.filter((e) => e.c.arrival?.area === area && e.room !== area).length;
+        if (capOn && peopleIn(world, content, area).length + away + row.length > table.cap) break;
         st.queue.shift();
         if (row.length === 0) continue;
         const ids: string[] = [];
@@ -115,14 +149,29 @@ const system: System = {
           // Deterministic ids (no randomness, no clock): every machine makes the same ones.
           const id = `${area}:help${st.sent}:${i}`;
           if (findEntity(world, id)) return;
-          const doorId = table.doors[i % table.doors.length]!;
-          const door = room.doors.find((d) => d.id === doorId)!;
-          const e = spawnBody(world, content, { id, character: p.character, room: area, tile: besideDoor(room, door, Math.floor(i / table.doors.length)) });
-          e.facing = door.side === 'west' ? 1 : -1;
+          // From the sides (table.entries) or, with none, beside the doors in turn, as before.
+          // An entry's door, the one he leaves by when it is over, is the nearest of the table's.
+          let tile: [number, number];
+          let door: Door;
+          if (table.entries.length > 0) {
+            const at = entryFor(table.entries, table.entryAway, room.tile, alert.x, st.sent, i);
+            // A second of the row at the same entry stands a tile nearer the place reported, so no two start on one tile.
+            const before = row.slice(0, i).filter((_, k) => entryFor(table.entries, table.entryAway, room.tile, alert.x, st.sent, k) === at).length;
+            const toward = alert.x >= (at[0] + 0.5) * room.tile ? 1 : -1;
+            tile = [Math.max(0, Math.min(room.w - 1, at[0] + toward * before)), at[1]];
+            door = nearestDoor(room, table.doors, tile[0]);
+          } else {
+            door = room.doors.find((d) => d.id === table.doors[i % table.doors.length])!;
+            tile = besideDoor(room, door, Math.floor(i / table.doors.length));
+          }
+          const doorId = door.id;
+          const e = spawnBody(world, content, { id, character: p.character, room: area, tile });
+          const dir: 1 | -1 = table.entries.length > 0 ? (alert.x >= (tile[0] + 0.5) * room.tile ? 1 : -1) : door.side === 'west' ? 1 : -1;
+          e.facing = dir;
           // People get c.npc from a placement entry (npc-setup); an arrival has none, so it is given here.
           e.c.npc = { kind: p.npc, home: area, mood: 1, dissonance: 0, offenders: [], quiet: 0, cool: 0, lastSeen: null, step: 0, stepTicks: 0, stall: 0, bark: null };
           e.c.arrival = { area, door: doorId, stall: 0 };
-          e.c.respond = { phase: 'go', x: alert.x, dir: door.side === 'west' ? 1 : -1, stall: 0 };
+          e.c.respond = { phase: 'go', x: alert.x, dir, stall: 0 };
           setMood(ctx, e, 2, 'called');
           ids.push(id);
         });
