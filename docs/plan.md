@@ -405,7 +405,7 @@ Full text: `docs/plan/step-19.md`
 
 ## Step 20 — A machine to steal, and things to crash it through
 
-**Status: open, claimed by orchestrator session_017WiGzJzo6aZqH4kYxxJsiV (builders: B BUILDERID), 2026-11-23.** (Briefs `handoff-prompts/loop-vehicles-a.md`, the machine in a test room, done and reviewed at 082380b (three pushes, brief deleted, builders archived); `loop-vehicles-b.md`, the camp run, released and started 23:19 UTC.)
+**Status: open, claimed by orchestrator session_017WiGzJzo6aZqH4kYxxJsiV (builders: B session_017WiGzGehKBFBBGaoRu2awP), 2026-11-23.** (Briefs `handoff-prompts/loop-vehicles-a.md`, the machine in a test room, done and reviewed at 082380b (three pushes, brief deleted, builders archived); `loop-vehicles-b.md`, the camp run, released and started 23:19 UTC.)
 
 Full text: `docs/plan/step-20.md`
 
