@@ -116,3 +116,7 @@ confusing to script, which often means it is slow or confusing to play.
 ## Open with the owner
 
 ## Handoff notes
+
+## Carried here by the orchestrator, 2026-11-24 (from the Step 16 lead, 18:39 and 21:15 UTC on 2026-11-23)
+
+- The first ten minutes gain a beat: the courtyard doorway (cols 17-19) leads to `quarry-road`, crossed by touch (e2e fact `quarry-road-cross`); there the players meet the road's fighters and the toll. Not built into this step's scripted walk yet.

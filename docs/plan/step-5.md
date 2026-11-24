@@ -570,3 +570,8 @@ only seen under parallel runs, not in the quiet 10), `s-throw-friend` 1 (B's
 page drew B move 23 px, 31 in a quarter second; A's page drew 31/52, a pass:
 a short throw, not none). No `t-grab-friend` or `s-break-free` failure in 30
 runs today.
+
+## Carried here by the orchestrator, 2026-11-24
+
+- From the Step 16 lead's phone walk (b0a7d5e): the camera should look up in tall rooms, so a ledge and a roof show on a sideways phone.
+- From the hit-prediction builder (session_017WiGzGPRoCXeC3TG8HFyxh, 2026-11-23), measured on live: the server ran a page's swing about 18 ticks (300 ms) after the page did, with a round trip of about 108 ms; the server's input queue (one reported input per tick, `is` in `me`) appears to add 150-200 ms to everything a player does to the world. Worth measuring and trimming (drain a backlog faster, or drop stale held inputs). `src/net/predict.ts`'s look-ahead (`DRAFT:` in `src/net/client.ts`, at `smoother.ahead`) is tuned to today's lag and wants re-measuring after any change. Not briefed.

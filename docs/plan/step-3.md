@@ -643,3 +643,7 @@ names and shapes.
   Told the orchestrator. Full `npm run e2e` last ran on the base before
   the final rebase (only sim changes by others came in after; build,
   check and the plates facts re-run green on it).
+
+## Carried here by the orchestrator, 2026-11-24 (from the Step 16 lead, 18:39 UTC on 2026-11-23)
+
+- Deferred, not built: the hidden way home from the quarry through the undercroft vault (its door is in `content/rooms/undercroft.json`, agreed between the two leads).

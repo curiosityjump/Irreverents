@@ -413,3 +413,9 @@ Round 3 reviews (orchestrator session_017WiGzHhke4tkAThPgw6EXs): **heroes push 1
 - Q-006 answered (2026-11-23, via Vision Partner): *"Many of the visuals are there to establish direction. Chat has been organizing the drive to be usable. Just review it's documentation."* The boards stay as direction. Judge what is usable from ChatGPT's own asset-library docs (`docs/design-library/asset-library-start-here-claude.md` and `06-asset-collaboration-claude-chatgpt/`), not from the boards. Later decisions trump earlier ones (Q-005).
 
 ## Handoff notes
+
+## Carried here by the orchestrator, 2026-11-24 (from the Step 16 lead)
+
+- A jump cue at the quarry tower's climb (phone walk at b0a7d5e).
+- The depot's hoard seen from the yard: `depot-hoard` at [45,13] is out of view until you are inside the strongroom, and moving it broke all three take routes; a glint, a window or a look over the strongroom's front would do.
+- Stale pointers to the archived `docs/plan/step-16.md` remain in `scripts/e2e.ts:383`, `scripts/e2e/quarry.ts:4,186` and `docs/plan/step-18.md:153`; fix with the next code push that touches those files (`docs/plan-archive.md`, "Step 16" has the text).

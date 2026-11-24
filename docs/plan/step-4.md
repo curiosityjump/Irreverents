@@ -583,3 +583,7 @@ again, and `outpost-fight` stands the fighter at the last place seen facing
 the old way, then hands him back to a routine that faces one way for ever.
 Second: 7 tiles is under a third of a phone screen, so "seen" reads as
 "right in front of him".
+
+## Carried here by the orchestrator, 2026-11-24 (from the Step 16 lead's phone walk to the depot at b0a7d5e)
+
+- A sight mark or a bark before a call, so a player sees they were spotted before the horn. Step 19's heist slice draws sight bands; check on a phone whether that covers it before briefing anything.
