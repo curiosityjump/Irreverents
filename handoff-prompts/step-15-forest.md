@@ -1,3 +1,14 @@
+**Lead, 15:00 UTC, for the fourth builder. READ THIS FIRST; it replaces the blocks below where they differ.**
+- **Landed:** pushes 1, 2, 2b, 3, 4a, 4b and 4c (90d1887): the whole forest stage, its own look, the phone e2e case (`scripts/e2e/forest.ts`), 30 true-size shots. Reviewed by the lead's re-runs up to 4b; 4c is art and content only.
+- **Your one job: push 5, the quiet way (option (a), `docs/decisions-log.md`, "the forest's quiet way").** One-way boughs at row 5 from the root tunnel's hatch (36-37) east over the trail's guards (fighters 41 and 43, heavy 49, brute 62, lookout 91) to the shaft (94-98), with a 2-tile root stump at column 39 that hides the climb out of the hatch. Only the infiltrator fits under the canopy's slab at 46-52.
+  - Prove it with `step15-unseen-clear`: the infiltrator gets from the entrance to the end with `stage-cleared` `unseen` true. Control: one bough removed, and the run is seen.
+  - Re-record anything the boughs break: the crossings (`tools/scenario-bots/mk_cross.py`), `step15-cleared`, the clears and the star times. A forest copy of `scripts/stage-quiet.ts` is fine; the quarry's stays untouched.
+  - Run every `step15-*`, `step16-*` and `step22-*`, the full `npm run e2e` (the forest facts must stay green), and gates.
+- **Read first:** "Handoff (third builder …)" in `docs/plan/step-15.md` (measured sight: 112 px across, 40 px up or down).
+- **Out of scope:** the canopy-upright camera limit (a hero on the canopy sits under the party plate, because the camera stops at the room's top). It's reported to the orchestrator. Also `content/backdrops/forest-*.json`, which the biome-backgrounds builder owns now.
+- **Deploys:** after the push, `npm run check:deployed`. If live has not moved in 8 minutes, push the same tree once more before reverting.
+- Stop at about 300k tokens with a handoff under "Builder notes".
+
 **Lead, 14:50 UTC: push 5 is option (a)** from the third builder's handoff: one-way boughs at row 5 from the hatch (36-37) east over the guards to the shaft, and a 2-tile root stump at column 39. Re-record the crossings, `step15-cleared` and the star times (a forest copy of `scripts/stage-quiet.ts` is fine). Prove it with `step15-unseen-clear` (the infiltrator, `stage-cleared` with `unseen` true) and a control (one bough removed and the run is seen). Logged in `docs/decisions-log.md`. Order: 4c first, then 5.
 
 **Lead, 14:40 UTC, push 4c (from the orchestrator's look, end of `docs/plan/step-15.md`), before push 5:** retake `deep-pocket` at 844x390 and 750x340 (both show only STAGE CLEARED); retake `canopy-390x664` (the hero is behind the party plate); darken and cool the earth further (it still reads warm mid-brown); a mossy-stone sprite for the boulder if an approved plate has one, otherwise say so. Say whether the thin orange lines in `trail-gap-750` and `root-tunnel-390` are sight bands.
