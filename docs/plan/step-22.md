@@ -730,3 +730,10 @@ before you quote it.
 - **Kept:** every `step16-*`, `step7-*`, `step9-*`, `step14-*`, `step21-*` and `step22-*` passes. The first plank (row 8 from column 20) broke `step16-caught-escape-cave`, because the flyer's glide off the roof landed on it, and so did a two-wide cellar step (the flyer's head was in the cellar ceiling). The shapes above are the ones that keep it.
 - **Re-recorded:** only `step22-each-hero-fights-skirmisher`, which stopped clearing (2445 ticks now). The other nine still clear with their old inputs.
 - **Not yet:** more enemies, the second caller, the first screen, the entrance sign (push 5, part 2). Not looked at on a phone yet.
+
+### Lead review, push 5 part 1, the quiet way (b749ec7)
+
+- `npm run build` is ok, and all 132 `step7/9/14/16/21/22-*` scenarios pass.
+- Control, run by me: `content/rooms/quarry-road.json` as it was before b749ec7, with no scaffold. `step22-unseen-clear` fails, with no unseen `stage-cleared`.
+- The owner's zero-alarm infiltration now exists in the quarry: the infiltrator, unseen, 3 stars, the toll-keeper included in "unseen".
+- No phone shot yet of the scaffold or the gantry. Part 2's shots should include them, with the first screen, the sign and the wings.
