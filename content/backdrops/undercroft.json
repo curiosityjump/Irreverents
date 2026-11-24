@@ -1,18 +1,16 @@
 {
-  "//": "DRAFT: stand-in drawn by tools/art/tiles/make.py (round 2). Notes: tools/art/tiles/README.md. DRAFT: no \"wall\" here on purpose: the one layer is the back wall itself, with vaults and piers, moving slower than the room; add \"wall\" (cells [0,6]..[3,6] of tiles/cellar.png) to go back to a flat wall that moves with the room.",
+  "//": "DRAFT: biome backgrounds (handoff-prompts/biome-backgrounds.md; docs/decisions-log.md 2026-11-24 'The owner's biome backgrounds go behind the places they fit'): the back is the owner's bkg01-moonlit-castle panorama, cut to 960x180 by tools/art/backgrounds/import_panoramas.py (whole pixels), pinned to the screen's bottom (the room's, in a view taller than the room), parallax 0.35, never repeated (its edges are not seamless); the sky above it is the panorama's top-row colour. It replaces backdrops/cellar-vault.png; to go back, put those layers back in place of the first one (git history). Swapping the picture is the first layer's image. Before: DRAFT: stand-in drawn by tools/art/tiles/make.py (round 2). Notes: tools/art/tiles/README.md. DRAFT: no \"wall\" here on purpose: the one layer is the back wall itself, with vaults and piers, moving slower than the room; add \"wall\" (cells [0,6]..[3,6] of tiles/cellar.png) to go back to a flat wall that moves with the room.",
   "id": "undercroft",
   "sky": [
-    "#1c1a39",
-    "#1c1a39"
+    "#333182"
   ],
   "layers": [
     {
-      "image": "backdrops/cellar-vault.png",
-      "parallax": 0.75,
-      "y": "top",
-      "offsetY": -12,
-      "repeatX": true,
-      "parallaxY": 0.75
+      "image": "backdrops/bkg01-moonlit-castle.png",
+      "parallax": 0.35,
+      "y": "bottom",
+      "offsetY": 0,
+      "repeatX": false
     }
   ]
 }

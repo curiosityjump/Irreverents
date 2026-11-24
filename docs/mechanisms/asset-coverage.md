@@ -146,7 +146,7 @@ Quarry and Cantina are already cut through tools/art/tiles/plates.py (ae6147e); 
 
 ## Backdrops
 
-All program-drawn today by tools/art/tiles/backdrops.py. Keep every file name so no content file changes. BKG-01 panoramas (Drive folder BKG-01, not in the mirror) need a design-library sync first; take crops from them, never repeat a panorama sideways (BKG-01's rule).
+**2026-11-24 (biome-backgrounds brief):** the owner's BKG-01 and BKG-02 panoramas are mirrored and cut whole (960x180) to `assets/backdrops/bkg0N-*.png` by `tools/art/backgrounds/import_panoramas.py`; castle-street, courtyard, undercroft, outpost, forest-road, forest-trail, quarry-road, quarry-ridge and quarry-depot now draw one as their back layer (uses-approved), so the rows below for `sky`, `sky-clouds`, `far-castle`, `town-mid`, `far-hills`, `castle-mid`, `cellar-vault` and `quarry-outdoor` describe pictures no room draws any more (files kept for a revert); which went where: `docs/plan/step-8.md`, "Biome backgrounds". Otherwise program-drawn by tools/art/tiles/backdrops.py. Keep every file name so no content file changes; never repeat a panorama sideways (the packs' rule).
 
 | Asset id | Status | Approved source (path + region) or missing-list id | Lane to switch it |
 |---|---|---|---|

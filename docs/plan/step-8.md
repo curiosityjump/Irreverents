@@ -501,3 +501,32 @@ Before is `step-8-shots/hud/after2/`; after is `step-8-shots/hud/after3/`, shot 
 ### Fourth look, 2026-11-24 13:35 UTC (a subagent of the orchestrator; `hud/after2/` against `hud/after3/`, 36d070e): the HUD brief is closed
 
 "Mostly yes" to whether a friend could read the screen untold; nothing made worse, nothing blurred. Fixed: the door glyph (a solid amber door, no longer a letter), the pill clear of a simulated home bar, GAME OVER's hearts on one line with out faces greyed but visible (844 and upright), the camp's sign back on the top row, the meter's unlit sockets, a dimmed Switch reading as off. **Left, small, for whoever next touches the HUD (not briefed):** the glyphs are tiny (the door on the pill at 844, the held-item icon on the plate): "the single thing most in the way"; the upright title's wordmark is a hard-edged rectangle cut from the painting and reads as a cut-out, not a logo (a taste call for the owner; a real logo cut is an asset ask); no shot shows a lost heart (`defeat-hurt` shows five full) or the out-face look at 750x340, a held hammer or spear, or the whistle gauge; the speech bubble touches the right edge at 750 (`after3/defeat-hurt-750x340`); Switch still dims and nine buttons show upright (`switch-refused` needs the tap: a design choice left open).
+
+## Biome backgrounds (brief `handoff-prompts/biome-backgrounds.md`)
+
+The owner, 2026-11-24 ~14:50 UTC: "Some new biome backgrounds getting added to the drive." Builder `session_017WiGzGQptGtgXJLtKXBbKC`.
+
+**What arrived:** BKG-02, six 1024x180 panoramas (forest ruins day, ice cavern ruins, market town day, moonlit stronghold, sky isles day, volcanic forge sunset), synced to `docs/design-library/03-visual-direction-and-assets/bkg-02-six-runtime-biome-panoramas-1024x180/` (642b89a; full sync ~8 min). BKG-01's eight were already mirrored, but a sparse clone (`blob_limit_kb`) leaves those PNGs off disk under skip-worktree, so they looked missing (`git show HEAD:<path>` reads them; `tools/art/backgrounds/import_panoramas.py` does).
+
+**How they go in:** `tools/art/backgrounds/import_panoramas.py` cuts all 14 to the centre 960x180 (whole pixels; a layer must be a multiple of 320 wide, `scripts/lib/art-images.ts`) as `assets/backdrops/bkg0N-<biome>.png` (lazy-loaded: an unused one costs nothing). Each placed one is the room's first layer: screen-pinned, `y: "bottom"`, parallax 0.35, `repeatX: false`; the sky is the panorama's top-row colour. Pinned to the screen's bottom (the room's, when the room is shorter than the view), so a lean of the camera never shows its bottom edge; parallax 0.35 never runs off its right edge for any room up to ~1940 px wide at a 430-wide view (forest-trail, the widest, is 1600).
+
+| Room | Before | Now (`DRAFT:`) |
+|---|---|---|
+| castle-street | drawn sky, far castle, town band | BKG-02 market town day (street-upper and front strip kept) |
+| courtyard | drawn sky, hills, castle wall | BKG-01 ruins day (tree crowns, front strip kept) |
+| undercroft | drawn cellar vault | BKG-01 moonlit castle (its barred cells and chains are a dungeon) |
+| outpost (Bandit Camp) | drawn sky, hills, castle wall | BKG-02 forest ruins day |
+| forest-road, forest-trail | a 320-wide cut of BKG-01 forest waterfall, fixed | the whole BKG-01 forest waterfall, scrolling (crowns, front strip kept) |
+| quarry-road, -ridge, -depot | drawn sky, cliffs, quarry band | BKG-01 iron quarry evening, hazed 35% toward its sky (cave strip, front strip kept) |
+| quarry-cave, -pit, -tower | drawn rock / cut-stone back wall | unchanged: underground, no panorama fits |
+| throne-room, hall-gallery, cantina | drawn back walls | unchanged: indoor walls; a panorama would read as outdoors |
+
+**Not placed, for Step 15's lead and the next region:** BKG-01 ice cavern, sky islands sunset, volcanic forge, market town day (the street took BKG-02's); BKG-02 ice cavern ruins, moonlit stronghold (a night castle exterior: a night heist), sky isles day, volcanic forge sunset. Each is already cut in `assets/backdrops/`; placing one is one layer line.
+
+**The quarry's planks (Step 22 lead's check):** at full colour the panorama's painted scaffolds and crane beams are the same wood as the quiet way's thin one-way planks (road rows 7-11, ridge rows 3-5, the depot's gantries), so its cut is hazed 35% toward its sky (`HAZE` in the tool); against it the planks read as things to stand on (`planks-*-844x390.png`). The other places are not hazed.
+
+**Weakest (looked at, not fixed):** upright, in a room taller than the panorama's 180 px (forest-trail, the quarry's open rooms, the camp), a flat band of sky colour sits above the panorama with a visible line where its painted top starts (`*-390x664` shots); the forest's is a flat green, since its top row is canopy. The panoramas are full-saturation paintings with painted ground at their foot; they read behind the real floor in every shot, but nothing dims them (the engine has no layer tint), and the market street is busy behind its own foreground houses. The old drawn layers (`sky-tall`, `far-hills`, `castle-mid`, `far-castle`, `town-mid`, `far-cliffs`, `quarry-mid`, `cellar-vault`, `forest-glade`) are no longer drawn anywhere and are kept for a revert.
+
+**Sync flag (not mine to change, `tools/drive_sync.py`):** BKG-02's complete-package ZIP was unpacked (21 MB) because 15 left/right previews exist only in it, so its every other file is now mirrored twice; and the six 1.7-2.5 MB `source/` originals are mirrored, since the 1 MB rule covers ZIP contents only. 33 MB in history nothing loads.
+
+Shots: `docs/plan/step-8-shots/backgrounds/<room>-1-<before|after>-<size>.png` at 390x664, 844x390, 750x340, and `<room>-2-...-844x390.png` at the room's other end (256-colour, taken with `tools/art/backgrounds/shots.mjs`; the before shots are today's `main` without this change).

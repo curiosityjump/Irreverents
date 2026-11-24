@@ -1,40 +1,16 @@
 {
-  "//": "DRAFT: stand-in drawn by tools/art/tiles/make.py (round 2). Notes: tools/art/tiles/README.md. Round 3: the sky is one tall picture pinned to the screen (no flat bands); cliffs and scaffolds are pinned to the room so they stay behind it at any height; the front strip sits in the ground under the lowest floor.",
+  "//": "DRAFT: biome backgrounds (handoff-prompts/biome-backgrounds.md; docs/decisions-log.md 2026-11-24 'The owner's biome backgrounds go behind the places they fit'): the back is the owner's bkg01-iron-quarry-evening panorama, hazed 35% toward its sky so the quiet way's thin planks read in front of its painted scaffolds (HAZE in the tool; the un-hazed cut is bkg01-iron-quarry-evening.png), cut to 960x180 by tools/art/backgrounds/import_panoramas.py (whole pixels), pinned to the screen's bottom (the room's, in a view taller than the room), parallax 0.35, never repeated (its edges are not seamless); the sky above it is the panorama's top-row colour. It replaces backdrops/sky-tall.png, backdrops/sky-clouds.png, backdrops/far-cliffs.png, backdrops/quarry-mid.png; to go back, put those layers back in place of the first one (git history). Swapping the picture is the first layer's image. Before: DRAFT: stand-in drawn by tools/art/tiles/make.py (round 2). Notes: tools/art/tiles/README.md. Round 3: the sky is one tall picture pinned to the screen (no flat bands); cliffs and scaffolds are pinned to the room so they stay behind it at any height; the front strip sits in the ground under the lowest floor.",
   "id": "quarry-depot",
   "sky": [
-    "#5fb4f0",
-    "#c4e9ff"
+    "#9b93e5"
   ],
   "layers": [
     {
-      "image": "backdrops/sky-tall.png",
-      "parallax": 0,
-      "y": "top",
+      "image": "backdrops/bkg01-iron-quarry-evening-haze.png",
+      "parallax": 0.35,
+      "y": "bottom",
       "offsetY": 0,
-      "repeatX": true
-    },
-    {
-      "image": "backdrops/sky-clouds.png",
-      "parallax": 0.1,
-      "y": "top",
-      "offsetY": 4,
-      "repeatX": true
-    },
-    {
-      "image": "backdrops/far-cliffs.png",
-      "parallax": 0.25,
-      "y": "bottom",
-      "offsetY": -96,
-      "repeatX": true,
-      "pin": "room"
-    },
-    {
-      "image": "backdrops/quarry-mid.png",
-      "parallax": 0.5,
-      "y": "bottom",
-      "offsetY": -88,
-      "repeatX": true,
-      "pin": "room"
+      "repeatX": false
     },
     {
       "image": "backdrops/cave-strip.png",
