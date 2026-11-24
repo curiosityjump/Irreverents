@@ -482,3 +482,7 @@ Before is `step-8-shots/hud/after/` (the first pass); after is `step-8-shots/hud
 7. **Shots nobody has, still not had:** the camp walk stood stuck on the wagon's ledge (no hammer, no banner, no lost heart in that walk); a spear, the whistle gauge, a dimmed Switch with a full party and a row arriving with its banner need a scripted world this tool does not build. A lost heart in play is in `street-fight-*` (one grey heart).
 
 **Weakest:** the title upright still leaves its bottom third as empty dotted ground (the code field rule keeps the choices up); the sound button now sits over the title picture's top-right corner.
+
+### Third look, 2026-11-24 10:55 UTC (a subagent of the orchestrator; `hud/after/` against `hud/after2/`, cc06a73)
+
+Fixed: the pips (a three-bar meter), the GAME OVER blob, pixel lettering on the hint and GET IN, the hint under STAGE CLEARED, the clipped sign, "Psst!" waiting its turn. Partly: hearts sit under each face with a divider but GAME OVER's five wrap 3+2; sideways discs about 35 px drawn on 52 px targets (kept: the 3% paint pin stands); the doorway glyph still reads "nGO IN"; the title upright. Regressions: the camp's sign moved into the play area's sky; the star button faint on the red roof; faces nearly invisible on GAME OVER. Verdict: "mostly readable without being told". What is left is in `handoff-prompts/phone-hud-legibility.md`.
