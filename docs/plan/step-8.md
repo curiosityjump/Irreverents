@@ -579,3 +579,41 @@ By a subagent reading all 18 shots in `docs/plan/step-8-shots/plate/` and the 4 
 - **The fade:** only `gallery-aim` sideways has a body under the plate; he shows through as a ghost, not readable. Faded, the first hero's hearts read, the second's lose contrast on the stained glass and the faces turn to mush: the hearts go unreadable exactly in a fight with a thrower overhead. `before/canopy-844` has the plate faded with nothing under it and `after/canopy-844` solid (the shots may be swapped). Upright on the canopy the banner covers the body the fade uncovers.
 - **The edge arrow:** a cream up-triangle about 10-15 px across at the top edge, drawn over the thrower's burst and legs: it reads as part of that sprite, not as a warning. None in `pocket-aim` though the thrower's head is cut off.
 - **The courtyard's bandit:** visible past the open gate, nothing over him, but he reads as an idle bandit; in `hero-meets-him` the hero's sprite fully overlaps his: one blob with a sword, not a fight.
+
+## The armoured guard's look (brief `handoff-prompts/armoured-guard-look.md`)
+
+Builder `session_017WiGzKY1frRk8KpKhnGkDP`, 2026-11-24. `DRAFT:` all of it.
+
+- **Cut, not drawn:** P08 enemy atlas row 4 (`tools/art/cast/cut3.py`,
+  `armoured_guard`; `make.py` writes `assets/sprites/cast/armoured-guard.png`
+  and `content/sprites/armoured-guard.json`). Every pose is his own row's;
+  none is the guard's.
+- **Bigger and heavier without text:** about 35 px tall and 34 wide over
+  his 16x28 box, against the guard's 33 (with the plume) and 25. So he is
+  about as tall as a guard and a third again as broad: the weight reads
+  from width and the round armour, not height. Scaling was even (one scale
+  for every pose). Shots, before (the guard's sheet) and after, at 844x390,
+  750x340 and 390x664 (the first upright shots of a town row):
+  `docs/plan/step-8-shots/armoured-guard/`. In each he walks in at the west
+  edge while his row's two guards come from the east.
+- **Poses the row lacks:** getting up (the contract has no such state;
+  `down` goes to `idle`); carried/held is his hurt pose curled (as for every
+  cut person); `air` is his alert pose (the row has no jump). No
+  grab/carry/throw rows (he cannot grab).
+- **Mood 3** is his own hammer-shouldered pose for idle and talk, the
+  normal frames elsewhere: the usual red-face edit recolours skin tones,
+  which on him are the gold armour, and blotched him (seen on the first
+  cut). The red rage flash the renderer adds (`src/client/draw/sprites.ts`)
+  still shows for a moment as he turns.
+- **He looks like the quarry's `heavy-fighter`** (P07 row 3, the same
+  design smaller, with a red plume): fine while they never meet; worth the
+  owner's eye if both ever share a room.
+- **The fact** `armoured-look` (`scripts/e2e/armoured-look.ts`, local e2e
+  only, not `check:live`: it stages the street's top row in a game of its
+  own through the sim's `completeCall`) reads the game canvas over his drawn
+  box: 103 px of his purple, 2 of the guard's blue. Control, watched red:
+  his sprite file put back to the guard's sheet (178e243), built: 0 purple,
+  40 blue.
+- **Not verified:** a real iPhone (Chromium emulation only); his attack,
+  hurt and down frames in the running game (seen on the sheet only: the
+  shots catch him walking in).

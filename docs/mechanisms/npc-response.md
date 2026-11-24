@@ -368,8 +368,7 @@ shapes when present (`alert-pip`/`alert-pip-off` only with `PIP_LOOKS`,
 `docs/mechanisms/rendering-world.md`)
 (`docs/mechanisms/art-pipeline.md`).
 
-**Not built yet:** the armoured guard (the town's tiers, push 3);
-finding a knocked-out person; the villain's horn (D-070).
+**Not built yet:** finding a knocked-out person; the villain's horn (D-070).
 
 ## The town's tiers: the whistle and the dispatch rows
 
@@ -478,7 +477,8 @@ checks read (`bell`: a ringing bell's bar in the room, 0..1, or null).
 **The castle street's table:** doors `to-throne-room` and `to-courtyard`,
 cap 8, rows: level 1 nobody, level 2 two guards, level 3 three (the middle
 one the `armoured-guard`: slower, twice the weight, toughness 180; drawn
-with the guard's sheet until his own is cut); entries at
+from his own sheet, P08 row 4, `DRAFT:`; the e2e fact `armoured-look`,
+`scripts/e2e/armoured-look.ts`, reads his colours off the page); entries at
 columns 1, 18, 22, 26, 30, 36, 44 and 46 of the floor, `entryAway` 12
 (about half a phone screen: the edges of the view).
 

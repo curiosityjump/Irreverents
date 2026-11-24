@@ -181,6 +181,23 @@ height, faces 10-14 px wide.
   `down` is P07's purple-hooded signaller lying flat. Seen at
   `quarry-road` (41, 12).
 
+### The armoured guard (2026-11-24, `handoff-prompts/armoured-guard-look.md`)
+
+- `armoured-guard`: P08 enemy atlas row 4, the purple-and-gold visored
+  knight with the stone hammer (the plate's own idle, walk, alert, hammer
+  shouldered, overhead, swing, hit, hurt, dizzy, two KOs). Scale 0.37,
+  about 35 px tall and 34 wide over his 16x28 box (the guard is about 33 px
+  with his plume, 25 wide), so he is the broadest man in the street's top
+  row; cell 64x56 (the overhead hammer is 47 px). Stone and metal barred so
+  the armour stays purple. Mood 3 is his own hammer-shouldered pose for
+  idle and talk and his normal frames elsewhere (`NO_FLUSH`): the red-face
+  edit recolours skin tones, which are his gold armour, and blotched it.
+- He and `heavy-fighter` (P07 row 3) are the same design at two sizes; the
+  heavy keeps the red plume and is smaller (0.25), so the two read apart.
+- `shots-armoured.ts` takes the street's top row at 844x390, 750x340 and
+  390x664 (`docs/plan/step-8-shots/armoured-guard/`), staged by
+  `scripts/e2e/armoured-look.ts`.
+
 New ids for the contract's cast list: `brawler`, `skirmisher`,
 `outpost-fighter`, `outpost-lookout`, `signal-post`, `heavy-fighter`,
 `brute`, `toll-keeper` (sprite files and `assets/sprites/cast/<id>.png`).

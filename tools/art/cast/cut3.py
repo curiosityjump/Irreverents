@@ -632,6 +632,54 @@ def toll_keeper():
 
 ROUND3['toll-keeper'] = toll_keeper
 
+
+# A recolour table that matches no colour: flush() then changes nothing (a non-empty dict, so it is not SKIN).
+NO_FLUSH = {(-1, -1, -1): (0, 0, 0)}
+
+
+def armoured_guard():
+    # DRAFT: P08 enemy atlas, row 4: the purple-and-gold knight with the visor and the stone hammer
+    # (Vision Partner, 2026-11-24: an approved source; handoff-prompts/armoured-guard-look.md). The castle
+    # street's top alarm row. Scale 0.37, about 35 px tall and 34 wide over his 16x28 box, so he stands
+    # a head broader than the guards beside him (the guard is about 33 px with his plume, 25 wide).
+    # Every pose is his own row's; none is borrowed from the guard, so he never flickers between two men.
+    P = _poses('p08enemy', 0.37, {
+        'i0': ((14, 352, 110, 487),),
+        'i1': ((123, 352, 216, 487),),
+        'w0': ((231, 352, 324, 487),),
+        'w1': ((330, 352, 428, 487), {'erase': ((330, 455, 372, 490),)}),
+        'alert': ((443, 352, 556, 487),),
+        'raise': ((556, 352, 652, 490),),
+        'up': ((662, 345, 756, 490),),
+        'slam': ((785, 345, 961, 490), {'erase': ((905, 345, 961, 490), (876, 440, 961, 490))}),
+        'hit': ((966, 352, 1044, 487),),
+        'hurt': ((1060, 352, 1148, 487),),
+        'dizzy': ((1169, 352, 1251, 487),),
+        'ko0': ((1267, 352, 1342, 487),),
+        'ko1': ((1342, 352, 1441, 487),),
+    }, drop=('stone', 'metal'))
+    i0, i1, w0, w1 = P['i0'], P['i1'], P['w0'], P['w1']
+    S = {
+        'idle': [i0, i0, i1, i1],
+        'run': [w0, lift(w0), w1, w1, lift(w1), w0],
+        'air': [lift(P['alert'], 0), lean(P['alert'], -1)],
+        # wind-up (hammer shouldered, then overhead), the hit, the recovery
+        'attack': [P['raise'], P['up'], P['slam'], i0],
+        'hurt': [lean(P['hit'], -2), P['hurt'], P['dizzy']],
+        'down': [P['ko0'], P['ko1']],
+        'held': [P['hurt'], lean(P['hurt'], 2), P['hurt'], lean(P['hurt'], -2)],
+        'talk': [i0, P['alert']],
+    }
+    M2 = {'idle': [P['alert'], P['alert'], breathe(P['alert']), breathe(P['alert'])], 'talk': [P['alert'], i0]}
+    # Mood 3: he has no skin to flush (the visor is gold, and the red-face edit blotched his gold armour), so
+    # enraged he shoulders the hammer at rest, and every other state keeps his own frames, unedited.
+    ready = P['raise']
+    M3 = {'idle': [ready, ready, breathe(ready), breathe(ready)], 'talk': [ready, P['alert']]}
+    return dict(cell=(64, 56), box=(16, 28), S=S, M2=M2, M3=M3, flush=NO_FLUSH)
+
+
+ROUND3['armoured-guard'] = armoured_guard
+
 PERSON_STATES = ['idle', 'run', 'air', 'attack', 'hurt', 'down', 'held', 'talk', 'grab', 'carry', 'carryRun', 'throw', 'tumble']
 MOOD_STATES = ['idle', 'run', 'air', 'attack', 'hurt', 'held', 'talk', 'tumble']
 

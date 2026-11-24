@@ -474,6 +474,8 @@ async function main(): Promise<void> {
       await (await import('./e2e/hud.ts')).hudFacts({ browser, devices, base, out, fact, errors });
       // Step 8's look facts (look-*): the three moods differ as drawn, and a hidden friend has no mark on another page (docs/mechanisms/rendering-actors.md, "Round 3").
       await lookFacts({ browser, devices, base, out, fact, errors });
+      // The armoured guard's own look (armoured-look): the street's top row, staged in a game of its own, drawn in his armour, not the guard's.
+      await (await import('./e2e/armoured-look.ts')).armouredLookFacts({ browser, devices, base, out, fact, errors });
       // (f) another world does not see them.
       const ctxC = await browser.newContext({ viewport: { width: 800, height: 450 } });
       const C = await ctxC.newPage();
