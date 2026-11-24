@@ -417,6 +417,6 @@ Full text: `docs/plan/step-21.md`
 
 ## Step 22 — One stage to clear: an outpost you get through without dying, and a victory screen
 
-**Status: open, claimed by session_017WiGzFrf7N7ZgaqUyjs4Sz, 2026-11-24.** (Opened 2026-11-24 00:40 UTC by orchestrator session_017WiGzJzo6aZqH4kYxxJsiV from the owner's words of ~00:30 UTC; a lead's step: many slices and judgement by looking at a phone.)
+**Status: open, claimed by session_017WiGzFrf7N7ZgaqUyjs4Sz, 2026-11-24 (builder: session_017WiGzHD6TvY2XxEG4B3rJU, `handoff-prompts/step-22-stage.md`).** (Opened 2026-11-24 00:40 UTC by orchestrator session_017WiGzJzo6aZqH4kYxxJsiV from the owner's words of ~00:30 UTC; a lead's step: many slices and judgement by looking at a phone.)
 
 Full text: `docs/plan/step-22.md`
