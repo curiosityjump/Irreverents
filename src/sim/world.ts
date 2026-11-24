@@ -1,6 +1,7 @@
 import type { Content } from '../content/types.ts';
 import { cantinaEntity, cantinaId } from './cantina.ts';
 import { firstFreeMember } from './party.ts';
+import { sourcesIn } from './powers.ts';
 import { placeRecruits } from './recruits.ts';
 import type { Entity, Input, World } from './types.ts';
 
@@ -107,6 +108,8 @@ export function populateRoom(world: World, content: Content, roomId: string): vo
   if (content.cantina?.[roomId] && !findEntity(world, cantinaId(roomId))) addEntity(world, cantinaEntity(roomId));
   // Step 13: a captive hero in their cage (src/sim/recruits.ts), bodiless like the cantina's.
   placeRecruits(world, content, roomId);
+  // Step 9: a power's source (a pedestal), bodiless (src/sim/powers.ts).
+  for (const s of sourcesIn(content, roomId)) if (!findEntity(world, s.id)) addEntity(world, s);
   const placed = content.placements?.[roomId];
   if (!placed) return;
   for (const p of placed.place) {

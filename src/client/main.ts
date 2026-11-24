@@ -142,7 +142,7 @@ const debug = {
     /** Step 19: the party plate (faces, the viewer's slots) and the banner up, if any (src/client/draw/hud.ts, banner.ts). */
     hud: null as ReturnType<typeof drawnHud>,
     /** Step 9: the carriers drawn with their orb, the loose orbs and the glowing holders this frame (src/client/draw/powers.ts). */
-    powers: { carriers: [], orbs: [], holders: [] } as ReturnType<typeof drawnPowers>,
+    powers: { carriers: [], orbs: [], holders: [], sources: [] } as ReturnType<typeof drawnPowers>,
     banner: null as ReturnType<typeof drawnBanner>,
     /** Step 19: each person's sight band this frame drew (facing, box, lit cells) and the unseen marks up (src/client/draw/sight.ts). */
     sight: null as ReturnType<typeof drawnSight> | null,

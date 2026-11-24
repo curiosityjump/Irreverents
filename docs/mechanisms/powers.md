@@ -29,7 +29,7 @@ it gets up). Adding a power is one file and no code.
 | Id | Shown | Does | Why these numbers |
 |---|---|---|---|
 | `boost` | Brawn | at least 30000 hit, 420 lift, 60000 throw; carried by the street's villain | Above every hero's own numbers, the grappler's included. Player one is given the grappler, who already lifts 150 and throws up to `maxLaunchSpeed`, so a plain strength power would change nothing for them. 420 lifts the throne (400). |
-| `flight` | Wings | lends `flap`, at least 6 flaps of 260 | Any hero reaches the quarry pit's out-of-reach ledge from its floor. |
+| `flight` | Wings | lends `flap`, at least 6 flaps of 260; one source, the depot's strongroom | Any hero reaches the quarry pit's out-of-reach ledge from its floor. Measured: four flaps are the fewest that reach it from the floor west of the ledge (three fall short), for the grappler and the infiltrator; six leave room for a clumsy thumb. |
 
 ## The overlay, and the four read sites
 
@@ -117,6 +117,32 @@ without taking the server's copy, so without the `power` effect the page
 would keep a power the server says is gone. A knock-out is a `flatten`,
 after which the page takes the server's whole copy anyway.
 
+## Sources: the rare one's pedestal (push 4; D-080, D-082)
+
+A power's `sources` (`{ id, room, tile }`) each become a bodiless entity
+`~source:<id>` (kind `~power-source`, `c.source = { id, power, lit }`),
+added by `populateRoom` (`src/sim/world.ts`, one line; `sourcesIn` in
+`src/sim/powers.ts`), so a kept game built from a save gets it too.
+`systems/power-sources.ts` (order 546):
+
+- **Lit** while no entity holds its power taken from it (`c.power.src`) and no
+  orb of it lies loose (`c.orb.src`). Dark while someone holds it, lit again
+  once it is gone: knocked loose and faded, or the holder left the game.
+- **Taken by touch:** a played hero holding no power whose **middle** is
+  over the source's tile (`DRAFT:`: the middle, so a hero at the hoard one
+  tile west, whose box reaches a pixel into it, does not take it). It gets
+  the effect `power` with `src`, and the event `power-taken` with `src`.
+- **`world.sources`** (top-level, additive, read with `?? []`): the source ids
+  a hero has taken from, never shrinking. The page has it by key with every
+  snapshot. Push 5's menu mark reads it.
+
+The one source today is flight's, `depot-strongroom`, at [46, 13] in
+`quarry-depot`, east of the hoard. That is the brief's first guess. The
+Step 16 lead was asked and had been archived. All 66 `step16-*` scenarios
+pass with it there, and none of them takes it. Drawn as
+`power-fixture-shrine` on its tile, with the power's icon floating over it in
+the glow when lit, and dimmed and empty when dark (`drawn.powers.sources`).
+
 ## What a player sees (`src/client/draw/powers.ts`)
 
 One line in `render.ts`, after the bodies. A carrier's orb over its head
@@ -178,5 +204,20 @@ acknowledges it.
   fail with the drop clearing `c.power` instead of sending the effect. A
   knock-out (the first try at the check) passed that control too, because a
   `flatten` makes the page take the server's whole copy.
+- `step9-wings-reach-the-ledge` and `-infiltrator`: a grappler or an
+  infiltrator holding flight walks west on the pit floor, jumps, flaps six
+  times and lands on the out-of-reach ledge. Their committed controls
+  (`-control`) are the same hero and presses without flight, still on the
+  floor. Watched to fail with `verbsOf` ignoring lent verbs.
+- `step9-fades-then-source` (the real depot, its people placed): the grappler
+  walks over the pedestal and holds flight (dark, found), a heavy knocks it
+  loose, the orb fades, and the pedestal is lit again (still found). Watched
+  to fail with flight's `fade` at 20.
+- The two-connection check also gives a flight, and **a's own page flaps on
+  a second Jump press in the air**; the same presses before it held flight
+  flapped none (the control). Watched to fail with `verbsOf` ignoring lent
+  verbs. **Wings are proven by script only:** no phone page in `npm run e2e`
+  takes wings by touch yet. A phone would have to walk past the depot's
+  lookout and patrols to the strongroom.
 - `npm run e2e`, fact `power-carrier-drawn` (`scripts/e2e/powers.ts`): a phone
   walks by touch into the street and its page draws the villain carrying.

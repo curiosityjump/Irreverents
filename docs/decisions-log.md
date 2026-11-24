@@ -1185,3 +1185,9 @@ document as a decision of theirs.
 - **To change it:** to make a knock-out also stop the body where it was hit, that is one rule in the simulation (the launch in `src/sim/verbs/attack.ts` on a blow that flattens); the picture's rule is one line, `lyingOut` in `src/client/draw/sprites.ts`.
 - **Where:** `docs/plan/step-5.md`, "Knocked-out enemies fly off". `DRAFT:`
 
+### 2026-11-23 · Step 9: wings stand on a pedestal in the depot's strongroom; stand on it to take them, and it lights again when they are lost
+- **Decided by:** Step 9 builder, `session_017WiGzF16bBpnLmeWErGynR`
+- **Instead of asking:** "Where does the rare power live, how is it taken, and when can it be taken again?" (the Step 16 lead was asked about the tile and had been archived)
+- **Why this way:** D-080: rare powers live in one or a few spots you can return to. D-082: possession ends, but knowing where the source is stays valuable. The pedestal is just east of the hoard, where a quiet route already ends, so wings are a second prize of the infiltration. With them any hero can flap six times and reach the quarry pit's high ledge (four is the measured least). You take them by standing on the pedestal, not by brushing past. It goes dark while someone has them and lights again once they are lost, and the game remembers that you found it.
+- **To change it:** the tile is one entry in `content/powers/flight.json` (`sources`); the flaps are its `atLeast`.
+- **Where:** `docs/mechanisms/powers.md`, "Sources".

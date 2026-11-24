@@ -26,6 +26,8 @@ const FLICKER_TICKS = 90;
 /** DRAFT: the carrier's orb is drawn at this size over its head (the icon is 20 by 20). */
 const OVER_HEAD = 12;
 const GLOW_HOLDER = '#fff1a0';
+/** DRAFT: the pedestal a source stands on (a cut fixture of content/looks/powers.json). */
+const PEDESTAL = 'power-fixture-shrine';
 
 /** Short effects playing: which look, where (room pixels, centre), on which frame they began. */
 const playing: { id: string; x: number; y: number; at: number }[] = [];
@@ -48,15 +50,17 @@ export interface DrawnPowers {
   orbs: { id: string; power: string; x: number; y: number }[];
   /** Heroes drawn glowing: entity id and power. */
   holders: { id: string; power: string }[];
+  /** Power sources (pedestals) in the room: source id, power, and whether drawn lit. */
+  sources: { id: string; power: string; lit: boolean }[];
 }
-let drawn: DrawnPowers = { carriers: [], orbs: [], holders: [] };
+let drawn: DrawnPowers = { carriers: [], orbs: [], holders: [], sources: [] };
 export function drawnPowers(): DrawnPowers {
   return drawn;
 }
 
 /** Draws every carrier's orb, every loose orb and every holder's glow in this room, after the bodies. */
 export function drawPowers(g: CanvasRenderingContext2D, world: World, content: Content, roomId: string, ox: number, oy: number, view?: PlayerView): void {
-  const now: DrawnPowers = { carriers: [], orbs: [], holders: [] };
+  const now: DrawnPowers = { carriers: [], orbs: [], holders: [], sources: [] };
   const frame = view?.frame ?? world.tick;
   const glow = look('fx-pickup-glow');
   const centre = (e: Entity): { x: number; y: number; w: number; h: number } | null => {
@@ -72,6 +76,30 @@ export function drawPowers(g: CanvasRenderingContext2D, world: World, content: C
   for (const e of world.entities) {
     if (e.room !== roomId) continue;
     // A loose orb (no body: src/sim/powers.ts): its icon in a glow; flickering when about to fade.
+    // A power source (D-080): its pedestal on the tile; lit, the power's icon floats over it in a glow; dark, dimmed and empty.
+    if (e.c.source) {
+      const s = e.c.source;
+      now.sources.push({ id: s.id, power: s.power, lit: s.lit });
+      const T = content.rooms[e.room]?.tile ?? 16;
+      const mid = ox + Math.round(e.x) + T / 2;
+      const floor = oy + Math.round(e.y) + T;
+      const stand = look(PEDESTAL);
+      g.save();
+      if (!s.lit) g.globalAlpha = 0.45;
+      if (stand) drawFrame(g, stand, 0, mid - stand.w / 2, floor - stand.h);
+      else {
+        g.fillStyle = '#6b5b95';
+        g.fillRect(mid - 6, floor - 10, 12, 10);
+      }
+      g.restore();
+      if (s.lit) {
+        const icon = iconOf(content, s.power);
+        const top = floor - (stand?.h ?? 10) - 4 - (Math.floor(frame / 20) % 2);
+        if (glow) drawFrame(g, glow, frameOf(glow, frame, true), mid - glow.w / 2, top - glow.h / 2 - 2);
+        if (icon) drawFrame(g, icon, 0, mid - OVER_HEAD / 2, top - OVER_HEAD, { w: OVER_HEAD, h: OVER_HEAD });
+      }
+      continue;
+    }
     if (isOrb(e)) {
       const o = e.c.orb!;
       const at = { x: ox + Math.round(e.x) + ORB_SIZE / 2, y: oy + Math.round(e.y) + ORB_SIZE / 2 };

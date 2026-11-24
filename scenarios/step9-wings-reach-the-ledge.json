@@ -1,0 +1,114 @@
+{
+  "id": "step9-wings-reach-the-ledge",
+  "gate": null,
+  "proves": "a grappler (no flap of its own) holding flight reaches the quarry pit's out-of-reach ledge from the floor",
+  "room": "quarry-pit",
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 1,
+      "power": "flight"
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 70,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 80,
+      "to": 92,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 104,
+      "to": 108,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 120,
+      "to": 124,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 136,
+      "to": 140,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 152,
+      "to": 156,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 168,
+      "to": 172,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 184,
+      "to": 188,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 150,
+      "to": 205,
+      "x": -1
+    }
+  ],
+  "ticks": 320,
+  "expect": [
+    {
+      "fact": "event",
+      "event": "flapped",
+      "player": "a",
+      "between": [
+        100,
+        200
+      ],
+      "count": [
+        6,
+        6
+      ]
+    },
+    {
+      "fact": "position",
+      "player": "a",
+      "at": 320,
+      "x": [
+        64,
+        144
+      ],
+      "y": [
+        127,
+        129
+      ]
+    }
+  ],
+  "//": "DRAFT (Step 9; D-080): the rare power's payoff. A grappler holding flight walks west on the quarry pit's floor, jumps and flaps six times, and steers onto the out-of-reach ledge (row 8, columns 4-8; its area is rows 6-7), 176 px over the floor, which no hero reaches without it. Measured: four flaps are the fewest that reach it on this route (three fall short); flight gives six. The control is step9-wings-reach-the-ledge-control: the same grappler, the same presses, without the power, and it is still on the floor."
+}

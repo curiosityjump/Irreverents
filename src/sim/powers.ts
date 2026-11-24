@@ -106,3 +106,36 @@ export function carriedPowerOf(content: Content, e: Entity): Power | null {
 export function isOrb(e: Entity): boolean {
   return e.c.orb !== undefined;
 }
+
+/** The kind of a power source's entity: bodiless, like ORB_KIND (no swing, grab or physics touches it). */
+export const SOURCE_KIND = '~power-source';
+
+declare module './types.ts' {
+  interface Components {
+    /** Present on a power source (D-080: a rare power's spot you can return to). `lit`: it can be taken now (nobody holds its power and no orb of it lies loose). */
+    source?: { id: string; power: string; lit: boolean };
+  }
+  interface World {
+    /**
+     * Step 9 (D-082: knowing where a source is stays valuable): the power
+     * source ids a hero has taken from in this world, oldest first. Written
+     * only where the source is (the server's world); a page takes it by key.
+     * Never shrinks. Read with a default: older worlds have none.
+     */
+    sources?: string[];
+  }
+}
+
+/** The sources standing in a room, as bodiless entities (src/sim/world.ts, populateRoom), lit to start with. */
+export function sourcesIn(content: Content, roomId: string): Entity[] {
+  const room = content.rooms[roomId];
+  if (!room) return [];
+  const out: Entity[] = [];
+  for (const id of Object.keys(content.powers ?? {}).sort()) {
+    for (const s of content.powers[id]!.sources) {
+      if (s.room !== roomId) continue;
+      out.push({ id: `~source:${s.id}`, kind: SOURCE_KIND, player: null, room: roomId, x: s.tile[0] * room.tile, y: s.tile[1] * room.tile, vx: 0, vy: 0, facing: 1, onGround: true, c: { source: { id: s.id, power: id, lit: true } } });
+    }
+  }
+  return out;
+}

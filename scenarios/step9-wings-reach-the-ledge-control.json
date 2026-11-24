@@ -1,0 +1,108 @@
+{
+  "id": "step9-wings-reach-the-ledge-control",
+  "gate": null,
+  "proves": "without flight the same grappler's same presses never reach the out-of-reach ledge",
+  "room": "quarry-pit",
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 1
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 70,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 80,
+      "to": 92,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 104,
+      "to": 108,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 120,
+      "to": 124,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 136,
+      "to": 140,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 152,
+      "to": 156,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 168,
+      "to": 172,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 184,
+      "to": 188,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 150,
+      "to": 205,
+      "x": -1
+    }
+  ],
+  "ticks": 320,
+  "expect": [
+    {
+      "fact": "event",
+      "event": "flapped",
+      "between": [
+        0,
+        320
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "position",
+      "player": "a",
+      "at": 320,
+      "y": [
+        250,
+        310
+      ]
+    }
+  ],
+  "//": "DRAFT (Step 9): the control of step9-wings-reach-the-ledge: the same grappler and the same presses without flight. It has no flap, so it never leaves the floor's reach."
+}

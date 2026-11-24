@@ -16,6 +16,7 @@ import type { NetClient } from '../../src/net/client.ts';
 import { playerEntityId } from '../../src/net/protocol.ts';
 import { attachGame } from '../../src/server/game.ts';
 import { launch, markImpact } from '../../src/sim/body-state.ts';
+import { emitEffect } from '../../src/sim/effects.ts';
 import { popOrb } from '../../src/sim/power-orbs.ts';
 import { systems } from '../../src/sim/registry.ts';
 import type { Entity, StepContext, System } from '../../src/sim/types.ts';
@@ -27,7 +28,7 @@ const check: ScriptCheck = {
   id: 'step9-powers',
   gate: null,
   proves:
-    "a power over the real network: an orb popped in the server's world at player a's feet is taken by a, after which a's own page holds the power (so its own verbs use it) and b's page sees it on a; after b's hard blow on the server, a's own page holds none, b's page sees none on a, and an orb lies in the server's world; control: the server writing the power onto b's copy without the effect leaves b's own page without it",
+    "a power over the real network: an orb popped in the server's world at player a's feet is taken by a, after which a's own page holds the power (so its own verbs use it) and b's page sees it on a; after b's hard blow on the server, a's own page holds none, b's page sees none on a, and an orb lies in the server's world; given flight the same way, a's own page flaps on a second Jump press in the air (control: the same presses before, no flap); control: the server writing the power onto b's copy without the effect leaves b's own page without it",
   async run(content: Content): Promise<string[]> {
     const failures: string[] = [];
     const power = content.powers?.[POWER];
@@ -58,8 +59,11 @@ const check: ScriptCheck = {
     const a = make('a');
     const b = make('b');
     const still = { x: 0, y: 0, held: [] };
+    // a's own input, and the flaps a's own page simulated (its own step's events).
+    let inputA: { x: number; y: number; held: string[] } = still;
+    let flapsOnA = 0;
     const frames = setInterval(() => {
-      a.update(still);
+      for (const ev of a.update(inputA)) if (ev.type === 'flapped') flapsOnA++;
       b.update(still);
     }, 1000 / 60);
 
@@ -142,7 +146,50 @@ const check: ScriptCheck = {
         systems.splice(systems.indexOf(knock), 1);
       }
 
-      // 3. Control: the server writes the power onto b's copy directly, no effect.
+      // 3. Wings on a's own page: a jump, then a second Jump press in the air flaps there (the
+      // hero's own motion is simulated on its page, so the lent verb must be on the page).
+      // The same presses before a holds flight are the control: no flap.
+      const wings = content.powers?.flight;
+      if (!wings) failures.push('there is no power "flight" (content/powers/) to check');
+      else {
+        const jumpTwice = async (): Promise<number> => {
+          flapsOnA = 0;
+          inputA = { x: 0, y: 0, held: ['jump'] };
+          await sleep(120);
+          inputA = still;
+          await sleep(120);
+          inputA = { x: 0, y: 0, held: ['jump'] };
+          await sleep(120);
+          inputA = still;
+          await sleep(900);
+          return flapsOnA;
+        };
+        const before = await jumpTwice();
+        if (before !== 0) failures.push(`control: without flight, a second Jump press in the air flapped ${before} time(s) on a's own page, expected 0`);
+        const popWings = once('throwaway-pop-wings', (ctx) => {
+          const at = ctx.world.entities.find((e) => e.id === aId)!;
+          // a may have walked back into the boost's orb: clear it, and any orb still lying loose.
+          emitEffect(ctx, at, { kind: 'power', power: null });
+          ctx.world.entities = ctx.world.entities.filter((e) => !e.c.orb);
+          const orb = popOrb(ctx, wings, at, null);
+          if (orb) {
+            orb.c.orb!.until = 0;
+            orb.vx = 0;
+            orb.vy = 0;
+          }
+        });
+        systems.push(popWings);
+        try {
+          await until("a's own page holds flight", () => held(a.me()) === 'flight', () => `a's page holds ${held(a.me())}`);
+        } finally {
+          systems.splice(systems.indexOf(popWings), 1);
+        }
+        await sleep(200);
+        const after = await jumpTwice();
+        if (after < 1) failures.push(`holding flight, a second Jump press in the air flapped ${after} time(s) on a's own page, expected 1 (the lent verb is not on the page)`);
+      }
+
+      // 4. Control: the server writes the power onto b's copy directly, no effect.
       // The server's own copy (and so a's view of b) has it; b's own page never does.
       const direct = once('throwaway-direct-power', (ctx) => {
         const e = ctx.world.entities.find((x) => x.id === bId)!;

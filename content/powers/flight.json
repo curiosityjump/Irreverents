@@ -1,12 +1,12 @@
 {
-  "//": "DRAFT (Step 9; O-005 is OPEN; D-080): the rare power. It lends flap, with enough flaps that any hero reaches the quarry pit's out-of-reach ledge from the pit's floor. The flyer keeps its own flap and gets the higher numbers. The id says what it does; the shown name is data. docs/mechanisms/powers.md.",
+  "//": "DRAFT (Step 9; O-005 is OPEN; D-080): the rare power. It lends flap, with enough flaps that any hero reaches the quarry pit's out-of-reach ledge from the pit's floor. The flyer keeps its own flap and gets the higher numbers. Its one source stands in the quarry depot's strongroom, east of the hoard ([46, 13]; the Step 16 lead was asked and had been archived; every step16-* scenario runs with it there). The id says what it does; the shown name is data. docs/mechanisms/powers.md.",
   "id": "flight",
   "name": "Wings",
   "icon": "pickup-wing",
   "atLeast": { "flapSpeed": 260, "flaps": 6 },
   "lends": ["flap"],
   "carriers": [],
-  "sources": [],
+  "sources": [{ "id": "depot-strongroom", "room": "quarry-depot", "tile": [46, 13] }],
   "fade": 5,
   "regain": true
 }
