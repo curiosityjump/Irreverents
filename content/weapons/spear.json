@@ -50,5 +50,6 @@
       ],
       "restock": 30
     }
-  ]
+  ],
+  "takenByBadGuys": true
 }

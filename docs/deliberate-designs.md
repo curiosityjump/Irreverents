@@ -95,6 +95,9 @@ words.
 **Weapons stand, are picked up and fall only on the server (and in a scenario), never in the page's own world.**
 → Intended (Step 23, 2026-11-24). A page's own world holds only its own character (`src/net/client.ts`); the hero's page learns the weapon in hand by the `weapon` effect and everyone else's by the snapshot. A page whose world stood its own sword would hold a second one nobody else sees. `INTENT:` at `weaponWorld` users in `src/sim/systems/weapon-*.ts`.
 
+**A bad guy takes a weapon only when he is already standing on it: he never walks to one lying nearby.**
+→ Intended (Step 23, 2026-11-24). The owner: NPCs are scripted, never AI (`CLAUDE.md`); the step file: "he does not go looking for one" (bad guys fetching a weapon is in its "Open", for the owner by playing). The rule is by touch only, writes no input and moves nobody. `INTENT:` at the top of `src/sim/systems/weapon-npc-take.ts`; `docs/mechanisms/weapons.md`.
+
 ---
 
 ## Where these live in the code

@@ -31,8 +31,8 @@ fillHudSlot('weapon', (_world, content, me) => {
 
 /** What the page drew for weapons this frame, for the checks (window.irreverents.drawn.weapons). */
 export interface DrawnWeapons {
-  /** Loose weapons: entity id, weapon, the middle of its box (room px), and whether it glows (this page's Use would take it); `lit` a thrown bomb, `burst` one bursting. */
-  loose: { id: string; weapon: string; x: number; y: number; glow: boolean; lit?: boolean; burst?: boolean }[];
+  /** Loose weapons: entity id, weapon, the middle of its box (room px), and whether it glows (this page's Use would take it); `lit` a thrown bomb, `burst` one bursting, `broken` one worn out (its broken look playing). */
+  loose: { id: string; weapon: string; x: number; y: number; glow: boolean; lit?: boolean; burst?: boolean; broken?: boolean }[];
   /** Held weapons: the holder's entity id, the weapon, the look drawn, and the hand point (room px). */
   held: { id: string; weapon: string; look: string; x: number; y: number }[];
 }
@@ -91,12 +91,14 @@ export function drawWeapons(g: CanvasRenderingContext2D, world: World, content: 
       const cx = e.x + b.w / 2;
       const feet = e.y + b.h;
       const lit = e.id === target;
-      now.loose.push({ id: e.id, weapon: w.id, x: cx, y: e.y + b.h / 2, glow: lit, ...(l.lit ? { lit: true } : {}), ...(l.ending ? { burst: true } : {}) });
+      now.loose.push({ id: e.id, weapon: w.id, x: cx, y: e.y + b.h / 2, glow: lit, ...(l.lit ? { lit: true } : {}), ...(l.ending ? (l.ending.broken ? { broken: true } : { burst: true }) : {}) });
       // A bomb that has burst: its burst look, centred where it burst, played once from the tick it burst (weapon-burst).
+      // A weapon worn out (weapon-wear): its broken look where the hand was, in the same way.
       if (l.ending) {
-        const boom = w.looks.burst ? look(w.looks.burst) : undefined;
+        const endLook = l.ending.broken ? w.looks.broken : w.looks.burst;
+        const boom = endLook ? look(endLook) : undefined;
         if (boom) drawFrame(g, boom, Math.max(0, frameOf(boom, world.tick - l.ending.at, false)), ox + Math.round(cx - boom.w / 2), oy + Math.round(e.y + b.h / 2 - boom.h / 2));
-        else {
+        else if (!l.ending.broken) {
           g.fillStyle = '#ffb040';
           g.fillRect(ox + Math.round(cx - 12), oy + Math.round(e.y + b.h / 2 - 12), 24, 24);
         }

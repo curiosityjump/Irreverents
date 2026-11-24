@@ -1,0 +1,35 @@
+{
+  "//": "DRAFT (Step 23 push 5): a bad guy takes a weapon by touch (systems/weapon-npc-take.ts).",
+  "id": "step23-bad-guy-takes-it-control",
+  "gate": null,
+  "proves": "control for step23-bad-guy-takes-it (the same run): the camp fighter standing on the bomb (column 14), whose file leaves takenByBadGuys off, keeps his hands empty and the bomb still lies there",
+  "room": "test-weapons",
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [],
+  "ticks": 60,
+  "expect": [
+    {
+      "fact": "weapon",
+      "entity": "tw-fighter-bomb",
+      "at": 50,
+      "is": null
+    },
+    {
+      "fact": "weapon",
+      "loose": [
+        1,
+        1
+      ],
+      "room": "test-weapons",
+      "weapon": "bomb",
+      "at": 50
+    }
+  ],
+  "placements": true
+}

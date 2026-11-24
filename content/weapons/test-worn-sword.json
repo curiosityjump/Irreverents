@@ -1,0 +1,45 @@
+{
+  "//": "DRAFT (Step 23, test only): a sword that wears out after three swings, so `uses` (systems/weapon-wear.ts) has a weapon to be checked on. It lies only in the weapon test room, which is not on the map: no weapon a player finds wears out (the step file: the sword, hammer and spear do not; the bomb is spent by its burst). The sword's looks; its broken look plays when it breaks.",
+  "id": "test-worn-sword",
+  "name": "Old Sword",
+  "looks": {
+    "ground": "weapon-sword-ground",
+    "held": "weapon-sword-held",
+    "swing": "weapon-sword-swing",
+    "impact": "weapon-sword-impact",
+    "broken": "weapon-sword-broken"
+  },
+  "uses": 3,
+  "sources": [
+    {
+      "id": "test-weapons-worn-sword",
+      "room": "test-weapons",
+      "tile": [
+        16,
+        6
+      ],
+      "restock": 30
+    }
+  ],
+  "grip": [
+    9,
+    19
+  ],
+  "box": [
+    16,
+    8
+  ],
+  "hit": {
+    "add": {
+      "attackReach": 10
+    },
+    "times": {
+      "attackStrength": 1.4
+    }
+  },
+  "thrown": {
+    "speed": 320,
+    "strength": 14000,
+    "wear": 24
+  }
+}

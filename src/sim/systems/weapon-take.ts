@@ -43,10 +43,11 @@ const system: System = {
         // A swap: the old one lies at the hero's feet, at once free to pick up again.
         const box = content.characters[e.kind]?.box;
         const src = e.c.weapon?.src;
-        const dropped = makeLoose(ctx, old, e.room, e.x + (box?.w ?? 0) / 2, e.y + (box?.h ?? 0), { from: e.id, ...(src ? { src } : {}) });
+        const uses = e.c.weapon?.uses;
+        const dropped = makeLoose(ctx, old, e.room, e.x + (box?.w ?? 0) / 2, e.y + (box?.h ?? 0), { from: e.id, ...(src ? { src } : {}), ...(uses !== undefined ? { uses } : {}) });
         ctx.emit('weapon-dropped', { entity: e.id, player: e.player, weapon: old.id, loose: dropped.id, how: 'swap' });
       }
-      emitEffect(ctx, e, { kind: 'weapon', weapon: w.id, by: e.kind, ...(l.src ? { src: l.src } : {}) });
+      emitEffect(ctx, e, { kind: 'weapon', weapon: w.id, by: e.kind, ...(l.src ? { src: l.src } : {}), ...(l.uses !== undefined ? { uses: l.uses } : {}) });
       ctx.emit('weapon-taken', { entity: e.id, player: e.player, weapon: w.id, loose: loose.id, ...(l.src ? { src: l.src } : {}) });
       removeEntity(world, loose.id);
     }

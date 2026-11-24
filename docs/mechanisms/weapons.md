@@ -29,7 +29,9 @@ states); `grip` (where the hand holds its `held`/`swing` look, facing right);
 `strength`, `wear`); `carriers` (placed ids or kinds); `breaks` (what its
 swing breaks: `weapon-break`, 106, on `attacked`, every breakable part with
 a tile in reach in front whose own breakSpeed, or `wallBreakSpeed`, is at
-most this). The check refuses a
+most this); `uses` (swings before it wears out, `weapon-wear`; absent:
+never; a weapon with a `burst` may only say 1); `takenByBadGuys` (a bad guy
+standing on it takes it, `weapon-npc-take`; absent: false). The check refuses a
 look that is not cut, a `hit` number no character has, a source outside its
 room, a carrier that is nothing or has no hands. `content/grips.json`: each
 kind's hand point (pixels from the box's top-left, facing right), and a
@@ -40,6 +42,7 @@ kind's hand point (pixels from the box's top-left, facing right), and a
 | `sword` | +10 reach, x1.4 strength, own wind-up; thrown at 320 px/s, strength 14000 | Quick: a grappler's swing sends a 40-weight dummy at 490 px/s, 350 bare-handed. Lies on the castle street at column 10, seen on the first screen; `camp-fighter-2` carries one. |
 | `hammer` | +6 reach, +0.35 s wind-up, x2.2 strength; `breaks` 250 | Slow and huge: a grappler's 30800 sends a 70-weight camp fighter off at the cap. Breaks a cracked wall (200), a fence (200) or a stall (150) in reach, not the camp's barricade (300). Lies in the Bandit Camp at column 10, just past the entrance block. |
 | `bomb` | `use: throw`; thrown at 240 px/s; burst after 1.2 s or on the first body it meets: radius 40, strength 36000, wear 40, breaks 250 | Hit (or Grab) throws it; the burst launches a 40-weight dummy at the cap and the grappler standing two tiles from it the other way (the thrower is not spared: doc 08). Gone after its burst; its source stands another 20 s later. Lies on the quarry road's ledge at column 34, west of the toll-keeper and his watcher (and in the test room). |
+| `test-worn-sword` | the sword's numbers and looks; `uses` 3 | Test only: lies only in the test room, so `uses` has a weapon to be checked on (`step23-wears-out`). No weapon a player finds wears out. |
 | `spear` | +18 reach, x1.2 strength, own wind-up; thrown at 420 px/s | The longest reach. Written last, as data only: no code names it (`step23-one-file`). Lies on the quarry road two tiles past where a hero comes in from the courtyard, column 8 (`step23-quarry-spear-found`; and in the test room). |
 
 ## One weapon in hand, one per hero
@@ -121,6 +124,24 @@ reasons). It falls, bounces and slides by the orb's physics
   `step23-game-over-hammer-back-to-source`,
   `step23-game-over-sword-back-to-carrier`).
 
+- **Wearing out** (`weapon-wear`, 107, after `weapon-break`): each
+  `attacked` by the holder of a `swing` weapon with `uses` spends one (the
+  effect sets `c.weapon.uses`, so the holder's page has it; a loose one
+  carries `loose.uses`, so it is kept through a knock, throw, swap or theft).
+  With none left it breaks once that strike is over: out of the hand, its
+  `broken` look plays where the hand was (`loose.ending.broken`, gone after
+  `weaponBurstShow`), `weapon-worn-out`; its source restocks. Nothing is
+  drawn of the count (D-020).
+- **Bad guys take one by touch** (`weapon-npc-take`, 548): a body nobody
+  plays, side `bad`, with hands, empty-handed, on its feet and able to act,
+  overlapping a loose weapon at rest whose file says `takenByBadGuys`, takes
+  it (`weapon-taken` with player null). `INTENT:` touch only: it writes no
+  input and moves nobody (NPC response logic stays scripted); he never goes
+  looking for one. Only the spear says true (`DRAFT:`, measured: with the
+  hammer on, bandits walking into the camp take it and five scenarios of
+  Steps 7, 12 and 21 go red; with the sword on, `camp-fighter-2` takes his
+  knocked-loose sword back and two of Step 23's own do). The bomb does not.
+  `step23-bad-guy-takes-it` (placements in `content/placements/test-weapons.json`).
 - **A stage starting over** (`weapon-stage-restart`, 613, after Step 22's
   `stage-run`, 612): on `stage-restarted`, `restoreRoomWeapons(world,
   content, rooms)` (`src/sim/weapons.ts`, exported for a stage to call
@@ -158,7 +179,7 @@ wall and the hammer, sword and spear's test sources.
   `-pick-up-and-swing`, `-any-hero-holds-it-<hero>`,
   `-hard-hit-knocks-it-loose`, `-steal-from-a-carrier`, `-thrown-knocks-down`,
   `-thrown-out-leaves-it`, `-each-hero-keeps-their-own`, `-returned-carrier-unarmed`, `-game-over-hammer-back-to-source`, `-game-over-sword-back-to-carrier`, `-bomb-bursts`,
-  `-hammer-breaks-the-wall`, `-one-file`, `-source-stands-another`, `-quarry-spear-found`, `-stage-restart-stands-them`. Fact `weapon`
+  `-hammer-breaks-the-wall`, `-one-file`, `-source-stands-another`, `-quarry-spear-found`, `-stage-restart-stands-them`, `-wears-out`, `-bad-guy-takes-it`. Fact `weapon`
   (`src/scenarios/facts/weapon.ts`): what a body holds at a tick, or how
   many lie loose in a room.
 - `npm run e2e`, `weapon-word` and `weapon-held` (`scripts/e2e/weapons.ts`):

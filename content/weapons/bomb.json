@@ -18,6 +18,7 @@
     10
   ],
   "use": "throw",
+  "uses": 1,
   "thrown": {
     "speed": 240,
     "strength": 0,

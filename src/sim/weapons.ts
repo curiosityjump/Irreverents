@@ -39,13 +39,15 @@ declare module './types.ts' {
     loose?: {
       weapon: string;
       src?: string;
+      /** Swings left, for a weapon that wears out (`uses`), when some are spent; absent: all of them. */
+      uses?: number;
       until: number;
       from: string | null;
       flying?: { by: string; met: string[] };
       /** A bursting weapon thrown (systems/weapon-burst.ts): lit at tick `at` by `by`; `now`: it met a body and bursts this tick. Nobody picks it up. */
       lit?: { at: number; by: string; now?: boolean };
-      /** It has burst at tick `at`: its `burst` look plays where it was, then it is gone. Nobody picks it up; it does not move. */
-      ending?: { at: number };
+      /** It has burst (or, `broken`, worn out: systems/weapon-wear.ts) at tick `at`: its `burst` (or `broken`) look plays where it was, then it is gone. Nobody picks it up; it does not move. */
+      ending?: { at: number; broken?: boolean };
     };
     /** Each body's own memory of the Use button for the weapon systems (systems/weapon-take.ts), to see a fresh press. */
     weaponUse?: { held: boolean };
@@ -68,6 +70,8 @@ declare module './types.ts' {
     'weapon-burst': { loose: string; weapon: string; by: string; room: string; x: number; y: number; struck: string[] };
     /** Thrown loose weapon `loose` struck `target` (a `hit` by the thrower is emitted too). */
     'weapon-struck': { loose: string; weapon: string; by: string; target: string };
+    /** `entity`'s `weapon` wore out with its last swing and broke in the hand; `loose` shows its broken look where it was (systems/weapon-wear.ts). */
+    'weapon-worn-out': { entity: string; player: string | null; weapon: string; loose: string };
     /** Source `src` stood a fresh `weapon` as `loose`. */
     'weapon-stood': { src: string; weapon: string; loose: string; room: string };
   }
@@ -164,7 +168,7 @@ export function makeLoose(
   room: string,
   x: number,
   feet: number,
-  opts: { src?: string; from?: string | null; vx?: number; vy?: number; until?: number; flying?: { by: string; met: string[] }; lit?: { at: number; by: string } } = {},
+  opts: { src?: string; from?: string | null; vx?: number; vy?: number; until?: number; flying?: { by: string; met: string[] }; lit?: { at: number; by: string }; uses?: number; ending?: { at: number; broken?: boolean } } = {},
 ): Entity {
   const { world } = ctx;
   let n = 0;
@@ -183,7 +187,7 @@ export function makeLoose(
     vy,
     facing: vx < 0 ? -1 : 1,
     onGround: vx === 0 && vy === 0,
-    c: { loose: { weapon: w.id, until: opts.until ?? world.tick, from: opts.from ?? null, ...(opts.src ? { src: opts.src } : {}), ...(opts.flying ? { flying: opts.flying } : {}), ...(opts.lit ? { lit: opts.lit } : {}) } },
+    c: { loose: { weapon: w.id, until: opts.until ?? world.tick, from: opts.from ?? null, ...(opts.src ? { src: opts.src } : {}), ...(opts.flying ? { flying: opts.flying } : {}), ...(opts.lit ? { lit: opts.lit } : {}), ...(opts.uses !== undefined ? { uses: opts.uses } : {}), ...(opts.ending ? { ending: opts.ending } : {}) } },
   });
 }
 
@@ -201,6 +205,7 @@ export function knockLoose(ctx: StepContext, from: Entity, away: Entity | null):
   const mid = from.x + box.w / 2;
   const dir = away ? (away.x + (ctx.content.characters[away.kind]?.box.w ?? 0) / 2 < mid ? 1 : -1) : -from.facing;
   const src = from.c.weapon?.src;
+  const uses = from.c.weapon?.uses;
   emitEffect(ctx, from, { kind: 'weapon', weapon: null });
   const loose = makeLoose(ctx, w, from.room, mid, from.y + Math.max(w.box[1], box.h / 2 + w.box[1] / 2), {
     from: from.id,
@@ -208,6 +213,7 @@ export function knockLoose(ctx: StepContext, from: Entity, away: Entity | null):
     vy: -(t.powerOrbPop ?? 240),
     until: ctx.world.tick + ticksOf(t.powerRetakeTime ?? 0.6),
     ...(src ? { src } : {}),
+    ...(uses !== undefined ? { uses } : {}),
   });
   ctx.emit('weapon-dropped', { entity: from.id, player: from.player, weapon: w.id, loose: loose.id, how: 'knocked' });
   return loose;
@@ -226,10 +232,11 @@ export function throwWeapon(ctx: StepContext, e: Entity, w: Weapon, input: { x: 
   const box = content.characters[e.kind]?.box;
   if (!box) return;
   const src = e.c.weapon?.src;
+  const uses = e.c.weapon?.uses !== undefined ? { uses: e.c.weapon.uses } : {};
   emitEffect(ctx, e, { kind: 'weapon', weapon: null });
   const mid = e.x + box.w / 2;
   if (input.y > 0.5) {
-    const loose = makeLoose(ctx, w, e.room, mid, e.y + box.h, { from: e.id, ...(src ? { src } : {}) });
+    const loose = makeLoose(ctx, w, e.room, mid, e.y + box.h, { from: e.id, ...uses, ...(src ? { src } : {}) });
     ctx.emit('weapon-dropped', { entity: e.id, player: e.player, weapon: w.id, loose: loose.id, how: 'set-down' });
     return;
   }
@@ -242,7 +249,7 @@ export function throwWeapon(ctx: StepContext, e: Entity, w: Weapon, input: { x: 
   const x = up ? mid : dir > 0 ? e.x + box.w + w.box[0] / 2 : e.x - w.box[0] / 2;
   const feet = e.y + box.h / 2 + w.box[1] / 2;
   const lit = w.burst ? { lit: { at: ctx.world.tick, by: e.id } } : {};
-  const loose = makeLoose(ctx, w, e.room, x, feet, { from: e.id, vx, vy, flying: { by: e.id, met: [e.id] }, ...lit, ...(src ? { src } : {}) });
+  const loose = makeLoose(ctx, w, e.room, x, feet, { from: e.id, vx, vy, flying: { by: e.id, met: [e.id] }, ...lit, ...uses, ...(src ? { src } : {}) });
   ctx.emit('weapon-dropped', { entity: e.id, player: e.player, weapon: w.id, loose: loose.id, how: 'thrown' });
 }
 

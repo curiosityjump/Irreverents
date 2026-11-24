@@ -1,0 +1,9 @@
+{
+  "//": "DRAFT (Step 23 push 5): two camp fighters (side bad) for step23-bad-guy-takes-it, used only by scenarios that ask for placements: one standing on the spear's test source (column 12), one on the bomb's (column 14, whose file leaves takenByBadGuys off). Facing west and waiting; they never walk. The weapon test room is not on the map.",
+  "id": "test-weapons",
+  "room": "test-weapons",
+  "place": [
+    { "id": "tw-fighter-spear", "character": "outpost-fighter", "tile": [12, 6], "npc": "outpost-fighter", "routine": [{ "face": "left" }, { "wait": 5 }] },
+    { "id": "tw-fighter-bomb", "character": "outpost-fighter", "tile": [14, 6], "npc": "outpost-fighter", "routine": [{ "face": "left" }, { "wait": 5 }] }
+  ]
+}

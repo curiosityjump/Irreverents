@@ -1,0 +1,52 @@
+{
+  "//": "DRAFT (Step 23 push 5): a bad guy takes a weapon by touch (systems/weapon-npc-take.ts).",
+  "id": "step23-bad-guy-takes-it",
+  "gate": null,
+  "proves": "a bad guy with empty hands standing where a weapon lies takes it (the spear's takenByBadGuys): in the weapon test room a camp fighter (outpost-fighter, side bad; content/placements/test-weapons.json) stands on the spear's tile (column 12); the spear stands there and he holds it within a moment, without being moved or told to (no input; weapon-taken with player null), and no spear lies there any more. Control (-control, the same run): the other fighter, on the bomb's tile (column 14): the bomb's file leaves takenByBadGuys off, and it still lies there with his hands empty. Watched to fail: weapon-npc-take.ts removed",
+  "room": "test-weapons",
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [],
+  "ticks": 60,
+  "expect": [
+    {
+      "fact": "weapon",
+      "entity": "tw-fighter-spear",
+      "at": 30,
+      "is": "spear"
+    },
+    {
+      "fact": "event-where",
+      "event": "weapon-taken",
+      "where": {
+        "entity": "tw-fighter-spear",
+        "player": null,
+        "weapon": "spear"
+      },
+      "between": [
+        0,
+        30
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "weapon",
+      "loose": [
+        0,
+        0
+      ],
+      "room": "test-weapons",
+      "weapon": "spear",
+      "at": 30
+    }
+  ],
+  "placements": true
+}

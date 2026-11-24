@@ -66,6 +66,22 @@ export interface Weapon {
    * (what it launches can still break a wall by flying into it).
    */
   breaks: number;
+  /**
+   * How many swings it has before it wears out (systems/weapon-wear.ts):
+   * each strike of a holder's swing (`attacked`) spends one; when the strike
+   * that spends the last is over, it breaks in the hand (its `broken` look
+   * plays where it was) and is gone, so its source stands another after its
+   * restock. Absent: it never wears out (the sword, hammer, spear: the P12
+   * readme, no broken state for an indestructible thing). A weapon with a
+   * `burst` is spent whole by its one burst: its `uses` may only be 1.
+   */
+  uses?: number;
+  /**
+   * Whether a bad guy with empty hands who stands on it lying loose takes it
+   * (systems/weapon-npc-take.ts; a scripted rule by touch: he never goes
+   * looking for one). Absent: false.
+   */
+  takenByBadGuys: boolean;
   /** Who starts holding one: placed entity ids (content/placements/) or character kinds, bodies nobody plays (systems/weapon-carriers.ts). */
   carriers: string[];
 }
@@ -107,7 +123,7 @@ const kind: ContentKind = {
   parse(raw, read) {
     const o = read.object(raw, '');
     if (!o) return null;
-    read.only(o, ['id', 'name', 'looks', 'grip', 'box', 'hit', 'use', 'sources', 'thrown', 'carriers', 'breaks', 'burst'], '');
+    read.only(o, ['id', 'name', 'looks', 'grip', 'box', 'hit', 'use', 'sources', 'thrown', 'carriers', 'breaks', 'burst', 'uses', 'takenByBadGuys'], '');
     const looks: Weapon['looks'] = { ground: '', held: '' };
     const lo = read.object(o.looks, 'looks');
     if (lo) {
@@ -148,7 +164,12 @@ const kind: ContentKind = {
       thrown: { speed: 320, strength: 12000, wear: 20 },
       carriers: o.carriers === undefined ? [] : read.stringList(o, 'carriers', ''),
       breaks: o.breaks === undefined ? 0 : read.number(o, 'breaks', '', { min: 0, max: 900 }),
+      takenByBadGuys: false,
     };
+    if (o.takenByBadGuys !== undefined) {
+      if (typeof o.takenByBadGuys === 'boolean') out.takenByBadGuys = o.takenByBadGuys;
+      else read.fail('takenByBadGuys', `must be true or false, but is ${describe(o.takenByBadGuys)}`);
+    }
     if (o.thrown !== undefined) {
       const t = read.object(o.thrown, 'thrown');
       if (t) {
@@ -173,6 +194,12 @@ const kind: ContentKind = {
         };
       }
     }
+    if (o.uses !== undefined) {
+      const n = read.number(o, 'uses', '', { min: 1, max: 999 });
+      if (!Number.isInteger(n)) read.fail('uses', `must be a whole number of swings, but is ${describe(o.uses)}`);
+      else out.uses = n;
+    }
+    if (out.burst && out.uses !== undefined && out.uses !== 1) read.fail('uses', `a weapon with a burst is spent whole by its one burst: its uses may only be 1, but is ${out.uses}`);
     if (/\d/.test(out.name)) read.fail('name', `"${out.name}" has a digit: the game shows no numbers`);
     if (o.sources !== undefined) {
       if (!Array.isArray(o.sources)) read.fail('sources', `must be a list of { "id", "room", "tile", "restock" }, but is ${describe(o.sources)}`);

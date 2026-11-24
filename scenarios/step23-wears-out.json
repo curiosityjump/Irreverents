@@ -1,0 +1,23 @@
+{
+  "//": "DRAFT (Step 23): `uses`, on the test room's sword that wears out (content/weapons/test-worn-sword.json, three swings).",
+  "id": "step23-wears-out",
+  "gate": null,
+  "proves": "a weapon with `uses` wears out: in the weapon test room the grappler picks up the old sword (three swings) and swings three times at the air; after the second it is still in hand, and once the third strike is over it breaks in the hand (weapon-worn-out once, its broken look playing where it was) and the hand is empty. Control (-control): two swings, and the sword is still held at the end",
+  "room": "test-weapons",
+  "players": [{ "id": "a", "character": "grappler", "spawn": 0 }],
+  "entities": [{ "id": "dummy-1", "character": "dummy", "tile": [27, 6] }],
+  "inputs": [
+    { "player": "a", "from": 0, "to": 150, "x": 1 },
+    { "player": "a", "from": 170, "to": 172, "hold": ["interact"] },
+    { "player": "a", "from": 200, "to": 202, "hold": ["attack"] },
+    { "player": "a", "from": 260, "to": 262, "hold": ["attack"] },
+    { "player": "a", "from": 320, "to": 322, "hold": ["attack"] }
+  ],
+  "ticks": 420,
+  "expect": [
+    { "fact": "weapon", "player": "a", "at": 180, "is": "test-worn-sword" },
+    { "fact": "weapon", "player": "a", "at": 310, "is": "test-worn-sword" },
+    { "fact": "event-where", "event": "weapon-worn-out", "where": { "weapon": "test-worn-sword" }, "between": [320, 360], "count": [1, 1] },
+    { "fact": "weapon", "player": "a", "at": 400, "is": null }
+  ]
+}
