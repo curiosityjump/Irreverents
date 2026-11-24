@@ -390,3 +390,7 @@ By a subagent reading the six shots in `docs/plan/step-25-shots/` at phone size,
   extra turn when the state is `tumble`), in `sprites.ts`. **Not done:** no
   scripted fact for "head-down on the star's tick" beyond `suplex-felt`'s
   120 ms; judged from the shots.
+
+## Look at push 5's shots (orchestrator session_017WiGzHY5UZsWTLCH8cLm8M, 2026-11-24 ~23:15 UTC)
+
+By a subagent, blind, the `*-3-*` shots at phone size, against de887b9. Its sentence: "The hero suplexed the smaller crowned character, slamming him upside down onto the floor, and then he bounces up on end beside the hero." Head-first: **nearly.** The slam frame has the crown and a small star at the floor and a boot up, clear of the hero by 40-50 px, plainly better than `slam-2-*`; but at phone size the king's flipped face still reads as a face the right way up, the body is drawn bigger and fuzzier than overhead, and the dust is a few flecks. In `after-3-*` he stands on his head pressed into the hero (they merge at the cape) with two stray stars (a crate, the right wall). **Stopping here without art:** the grappler's four frames (C02-05, requested) are what is left; when they arrive, also: the flop after the bounce clear of the hero, the splashed crates' first star and puff back (`draw/impact.ts`, `drawnElsewhere`), a wider dust burst. Step 25 stays open on those.

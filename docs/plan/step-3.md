@@ -735,3 +735,7 @@ the menu's way back now gets a player out of every one of them):
   owner's "jump up through, but not back down" fits a player in the pit
   who never found it. Logged for the owner's eye, not changed (a look
   question, `docs/questions-inbox.md` if he says so).
+
+## Look at the menu button's shots (orchestrator session_017WiGzHY5UZsWTLCH8cLm8M, 2026-11-24 ~23:15 UTC)
+
+By a subagent, the before and after crops in `docs/plan/step-3-shots/menu-button/`, against 9af30c4: after, it is plainly a button on the undercroft's dark brick and the courtyard's leaves, upright and sideways: a rounded square, opaque near-black, a cream rim, three solid cream bars, about 44 px; the plate keeps 8-10 px from it in all nine shots (3-6 before); nothing important is behind it. Not shown in any shot: the opened menu with its new choices, so their legibility sideways is unverified by eye (the e2e facts cover that they exist and work). Never tried on a real iPhone.
