@@ -2,7 +2,7 @@ import type { Content } from '../../content/types.ts';
 import '../../sim/stage.ts';
 import type { SimEvent } from '../../sim/types.ts';
 import { drawText, safeView, textWidth } from './fx.ts';
-import { drawLook } from './looks.ts';
+import { drawRatingStar, STAR_ART } from './stars.ts';
 
 // Step 22 push 4 (docs/mechanisms/stages.md, "The victory screen"; the owner,
 // 2026-11-24: "Needs a satisfying victory screen at the end. Stage cleared,
@@ -218,16 +218,14 @@ export function drawStage(g: CanvasRenderingContext2D, content: Content, W: numb
       starsSounded = i + 1;
       sounds.push(STAR_SOUND);
     }
-    const grow = on && age - due < 10 ? 1 + (10 - (age - due)) / 12 : 1;
-    const size = Math.round(starPx * grow);
-    const px = Math.round(sx + i * (starPx + 4) + (starPx - size) / 2);
-    const py = Math.round(cy + (starPx - size) / 2);
-    g.globalAlpha = on ? 1 : 0.28;
-    if (!drawLook(g, content, 'hall-frame-star', px, py, { w: size, h: size })) {
-      g.fillStyle = on ? GOLD : '#5a5470';
-      g.fillRect(px + size / 4, py + size / 4, size / 2, size / 2);
-    }
-    g.globalAlpha = 1;
+    // DRAFT (brief phone-hud-legibility, item 5, agreed with Step 22's lead): earned is a filled star and unearned
+    // an empty one (draw/stars.ts), never a dimmed look; a star lighting flashes pale for a moment and never
+    // grows, so it cannot cover its neighbour.
+    const k = Math.max(1, Math.floor(starPx / STAR_ART));
+    const sz = k * STAR_ART;
+    const px = Math.round(sx + i * (starPx + 4) + (starPx - sz) / 2);
+    const py = Math.round(cy + (starPx - sz) / 2);
+    drawRatingStar(g, px, py, k, on, on && age - due < 6);
   }
   cy += starPx + 8;
 

@@ -6,6 +6,7 @@ import type { PlayerView } from './entities.ts';
 import { drawText, textWidth, useContent } from './fx.ts';
 import { drawLook, look } from './looks.ts';
 import { drawnBanner, queueBanner } from './banner.ts';
+import { drawRatingStar } from './stars.ts';
 import { drawPieces, levelPieces, piecesWidth } from './completion.ts';
 import { stageBest } from '../../sim/stage.ts';
 
@@ -153,21 +154,15 @@ export function drawLevelSigns(g: CanvasRenderingContext2D, content: Content): v
 
 /**
  * Step 22 push 3: a stage's best clear as three stars, lit as earned and the
- * rest dim (the `hall-frame-star` look, P04's Hall atlas).
+ * rest empty (draw/stars.ts; it was the `hall-frame-star` look, P04's Hall atlas, dimmed).
  * INTENT (t-no-numbers; this file's header): no digit in the game picture, so
  * the best time is not on the sign; the menu row (HTML, src/client/start.ts)
- * shows it. DRAFT (docs/decisions-log.md, "Step 22 push 3"): dim is the same
- * star at a third opacity.
+ * shows it. DRAFT (docs/decisions-log.md, "Step 22 push 3"; the phone HUD's
+ * entry): an unearned star is the same star empty, not dimmed.
  */
-function drawBest(g: CanvasRenderingContext2D, content: Content, stars: number, x: number, y: number): void {
-  for (let i = 0; i < 3; i++) {
-    g.globalAlpha = i < stars ? 1 : 0.3;
-    if (!drawLook(g, content, 'hall-frame-star', x + i * (STAR + 1), y)) {
-      g.fillStyle = i < stars ? '#ffd23f' : '#5a5470';
-      g.fillRect(x + i * (STAR + 1) + 3, y + 3, STAR - 6, STAR - 6);
-    }
-  }
-  g.globalAlpha = 1;
+function drawBest(g: CanvasRenderingContext2D, _content: Content, stars: number, x: number, y: number): void {
+  // DRAFT (brief phone-hud-legibility, item 5): earned filled, unearned empty (draw/stars.ts), as STAGE CLEARED.
+  for (let i = 0; i < 3; i++) drawRatingStar(g, x + i * (STAR + 1), y, 1, i < stars);
 }
 
 /** The name and the pie on one dark plate. */
