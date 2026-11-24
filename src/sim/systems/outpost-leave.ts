@@ -55,7 +55,8 @@ const system: System = {
           w.idle = 0;
         }
         if (!canAct(e)) continue; // held, flying or in a beat: whatever has them carries them.
-        const dx = entryX - centre(content, e).x;
+        // The entry this person walked in at (the owner's "from the sides", 2026-11-24); older ones, the outpost's entry.
+        const dx = (w.from ? (w.from[0] + 0.5) * tile : entryX) - centre(content, e).x;
         if (Math.abs(dx) <= THERE) {
           gone.push(e.id);
           continue;

@@ -175,6 +175,12 @@ export function createMoments(content: Content, myPlayer: string, myId: string) 
             out.push({ moment: 'alarm-rising', room, x: null, y: null, key: hash(ev.tick, 'horn', String(ev.outpost)), tick: ev.tick, mine, delay: 0 });
             return;
           }
+          case 'outpost-wave': {
+            // A sound per row walking in (the owner, 2026-11-24). DRAFT: the alarm sound again.
+            const room = content.outposts?.[String(ev.outpost)]?.room ?? '';
+            out.push({ moment: 'alarm-rising', room, x: null, y: null, key: hash(ev.tick, 'wave', String(ev.outpost)), tick: ev.tick, mine, delay: 0 });
+            return;
+          }
           case 'alert-changed':
             if (Number(ev.to) > Number(ev.from)) out.push({ moment: 'alarm-rising', room: String(ev.area), x: null, y: null, key: hash(ev.tick, 'alarm'), tick: ev.tick, mine, delay: 0 });
             return;

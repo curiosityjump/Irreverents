@@ -1,0 +1,21 @@
+{
+  "//": "DRAFT (the owner, 2026-11-24: 'Alarms should spawn more enemies of increasing strength that come in from the sides'): the check outpost for `entries`, `entryAway` and `announce`. Entries at both ends and in between; a wave's people split between the nearest entry at least 12 tiles left and right of where the lookout saw the hero. Rows grow: one fighter, two, then a fighter and a heavy for ever.",
+  "id": "test-sides",
+  "room": "test-sides",
+  "signaler": "tsd-post",
+  "callers": ["tsd-lookout"],
+  "entry": [47, 5],
+  "entries": [[2, 5], [5, 5], [33, 5], [40, 5], [47, 5]],
+  "entryAway": 12,
+  "bound": 8,
+  "callTime": 3,
+  "callAgain": 2,
+  "breakHits": 3,
+  "breakSpeed": 600,
+  "waves": [
+    [{ "character": "outpost-fighter", "npc": "outpost-fighter" }],
+    [{ "character": "outpost-fighter", "npc": "outpost-fighter" }, { "character": "outpost-fighter", "npc": "outpost-fighter" }],
+    [{ "character": "outpost-fighter", "npc": "outpost-fighter" }, { "character": "heavy-fighter", "npc": "heavy-fighter" }]
+  ],
+  "announce": ["Here they come!", "Two more!", "Here comes a heavy!"]
+}

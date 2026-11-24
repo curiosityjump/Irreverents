@@ -1,0 +1,9 @@
+{
+  "//": "DRAFT (the owner's 'from the sides', 2026-11-24): a lookout at column 22 watching west, its horn at column 23; scenarios/sides-*.json pin these columns.",
+  "id": "test-sides",
+  "room": "test-sides",
+  "place": [
+    { "id": "tsd-lookout", "character": "outpost-lookout", "tile": [22, 5], "npc": "outpost-lookout", "routine": [{ "face": "left" }, { "wait": 5 }] },
+    { "id": "tsd-post", "character": "signal-post", "tile": [23, 5] }
+  ]
+}

@@ -53,6 +53,20 @@ export interface Outpost {
   leaveCold: number;
   /** Step 7 (DRAFT, optional, default 0 = never): seconds in a row a wave's person may stand with nobody to fight before they walk off. */
   leaveIdle: number;
+  /**
+   * The owner, 2026-11-24: "Alarms should spawn more enemies of increasing
+   * strength that come in from the sides." DRAFT, optional (left out: [entry]):
+   * the tiles [column, row] a wave may walk in at. A wave is split between the
+   * left and the right of where its caller saw a hero (src/sim/systems/
+   * outpost-wave.ts): on each side the nearest entry at least `entryAway`
+   * tiles from that place, else the farthest on that side; with entries on
+   * one side only, all come from there.
+   */
+  entries: [number, number][];
+  /** DRAFT, optional (default 0): tiles from the place reported that a side's entry should be at least, so a wave walks in at the screen's edge rather than in view. */
+  entryAway: number;
+  /** DRAFT, optional: the banner per row (index as `waves`; the last repeats), at most a few words, no digits. Left out: "Here they come!". */
+  announce: string[];
 }
 
 declare module '../types.ts' {
@@ -67,7 +81,7 @@ const kind: ContentKind = {
   parse(raw, read) {
     const o = read.object(raw, '');
     if (!o) return null;
-    read.only(o, ['id', 'room', 'signaler', 'callers', 'entry', 'bound', 'callTime', 'callAgain', 'breakHits', 'breakSpeed', 'waves', 'tryAgain', 'leaveCold', 'leaveIdle'], '');
+    read.only(o, ['id', 'room', 'signaler', 'callers', 'entry', 'bound', 'callTime', 'callAgain', 'breakHits', 'breakSpeed', 'waves', 'tryAgain', 'leaveCold', 'leaveIdle', 'entries', 'entryAway', 'announce'], '');
     const out: Outpost = {
       id: read.string(o, 'id', ''),
       room: read.string(o, 'room', ''),
@@ -83,6 +97,9 @@ const kind: ContentKind = {
       tryAgain: o.tryAgain === true,
       leaveCold: o.leaveCold === undefined ? 0 : read.number(o, 'leaveCold', '', { min: 0, max: 600 }),
       leaveIdle: o.leaveIdle === undefined ? 0 : read.number(o, 'leaveIdle', '', { min: 0, max: 600 }),
+      entries: [],
+      entryAway: 0,
+      announce: [],
     };
     if (o.tryAgain !== undefined && typeof o.tryAgain !== 'boolean') read.fail('tryAgain', `must be true or false, but is ${describe(o.tryAgain)}`);
     const e = o.entry;
@@ -108,6 +125,17 @@ const kind: ContentKind = {
       if (people.length > out.bound) read.fail(w, `has ${people.length} people, more than the bound (${out.bound}): this wave could never walk in`);
       out.waves.push(people);
     });
+    out.entries = [out.entry];
+    if (o.entries !== undefined) {
+      if (Array.isArray(o.entries) && o.entries.length > 0 && o.entries.every((t: unknown) => Array.isArray(t) && t.length === 2 && t.every((n) => Number.isInteger(n)))) out.entries = (o.entries as [number, number][]).map(([c, r]) => [c, r]);
+      else read.fail('entries', `must be a list of at least one [column, row], or left out, but is ${describe(o.entries)}`);
+    }
+    out.entryAway = o.entryAway === undefined ? 0 : read.number(o, 'entryAway', '', { min: 0, max: 200 });
+    out.announce = [];
+    if (o.announce !== undefined) {
+      if (Array.isArray(o.announce) && o.announce.every((t) => typeof t === 'string' && t.trim() !== '' && !/[0-9]/.test(t))) out.announce = o.announce as string[];
+      else read.fail('announce', `must be a list of words with no digits, one per row, or left out, but is ${describe(o.announce)}`);
+    }
     return out;
   },
   check(content, fail) {
@@ -126,6 +154,9 @@ const kind: ContentKind = {
       });
       const [tx, ty] = op.entry;
       if (tx < 0 || ty < 0 || tx >= room.w || ty >= room.h) fail(file, 'entry', `[${tx}, ${ty}] is outside room "${room.id}", which is ${room.w} by ${room.h} tiles`);
+      op.entries.forEach(([cx, cy], i) => {
+        if (cx < 0 || cy < 0 || cx >= room.w || cy >= room.h) fail(file, `entries[${i}]`, `[${cx}, ${cy}] is outside room "${room.id}", which is ${room.w} by ${room.h} tiles`);
+      });
       op.waves.forEach((row, i) =>
         row.forEach((p, k) => {
           if (!(p.character in content.characters)) fail(file, `waves[${i}][${k}].character`, `no character "${p.character}" (characters: ${known(content.characters)})`);

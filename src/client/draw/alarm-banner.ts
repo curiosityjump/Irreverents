@@ -34,7 +34,11 @@ export function watchAlarmEvents(content: Content, latest: { tick: number; event
     const ev = raw as SimEvent & Record<string, unknown>;
     let text = '';
     if (ev.type === 'outpost-call-completed' && content.outposts?.[String(ev.outpost)]?.room === room) text = CALL;
-    else if (ev.type === 'outpost-wave' && content.outposts?.[String(ev.outpost)]?.room === room) text = WAVE;
+    else if (ev.type === 'outpost-wave' && content.outposts?.[String(ev.outpost)]?.room === room) {
+      // The owner, 2026-11-24 ("more enemies of increasing strength"): each row can name itself (content/outposts/ `announce`, the last repeating).
+      const said = content.outposts[String(ev.outpost)]!.announce ?? [];
+      text = said.length > 0 ? said[Math.min(Number(ev.row) || 0, said.length - 1)]! : WAVE;
+    }
     else if (ev.type === 'dispatch-arrived' && ev.area === room) text = ROW;
     if (!text) continue;
     queueBanner({ key: `alarm:${ev.type}:${ev.tick}`, text, frames: FRAMES, color: RED });

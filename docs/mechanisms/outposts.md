@@ -252,6 +252,32 @@ all; control: the barricade's `breakSpeed` 400, it holds) and
 barrier broken, the cache taken unseen, out by the doorway, a clean
 getaway; control: the floor way, a call starts).
 
+## From the sides, stronger each time (2026-11-24, `DRAFT:`)
+
+The owner, playing: *"Alarms should spawn more enemies of increasing
+strength that come in from the sides."* Optional fields in
+`content/outposts/<id>.json` (left out, an outpost behaves as before):
+
+- `entries`: `[[column, row], ...]`, the tiles a wave may walk in at (left
+  out: `[entry]`). `outpost-wave`'s `entryFor()` splits each wave between the
+  left and the right of the place reported (the caller's sighting, D-065):
+  on each side the nearest entry at least `entryAway` tiles off, else the
+  farthest there; people alternate sides, each wave starting on the other
+  side; with entries on one side only, all come from there. With entries on
+  both sides a wave's person faces the place reported. A wave's person keeps
+  the entry it came in at (`c.outpostWave.from`) and `outpost-leave` walks
+  him back off there.
+- `entryAway`: tiles (default 0). 12 is about half a phone screen: they walk
+  in at the screen's edges.
+- `announce`: the banner per row (`src/client/draw/alarm-banner.ts`), the
+  last repeating; no digits. Every wave also plays the alarm sound.
+
+Proven in `test-sides` by `sides-wave-both-sides` (control: no `entries`).
+**Not yet switched on in a real place:** the camp's entries and stronger
+rows turn seven camp scenarios red (step7-*, step12-walk-out-ends-it,
+step21-*; `docs/plan/step-4.md`, "Alarms and the chase, as played"); the
+quarry's are Step 22's to place.
+
 ## Not built yet
 
 A guard's own swing (Step 18). Saving a broken horn (Step 7's store).

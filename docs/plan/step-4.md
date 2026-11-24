@@ -610,3 +610,20 @@ Second: 7 tiles is under a third of a phone screen, so "seen" reads as
 ## Carried here by the orchestrator, 2026-11-24 (from the Step 16 lead's phone walk to the depot at b0a7d5e)
 
 - A sight mark or a bark before a call, so a player sees they were spotted before the horn. Step 19's heist slice draws sight bands; check on a phone whether that covers it before briefing anything.
+
+**Push 3 (the owner's ~01:05 rule): the engine, switched on only in a
+check room.** `entries` / `entryAway` / `announce` in `content/outposts/`
+(see `docs/mechanisms/outposts.md`, "From the sides"). Measured switching it
+on in the Bandit Camp (entries `[[6,7],[24,10],[30,10],[36,10],[41,10]]`,
+`entryAway` 12, rows 4 `[fighter, fighter, heavy]` and 5 `[heavy, brute]`,
+announce per row): waves reach a hero at column 12 in ~5 s instead of ~9 s,
+and seven scenarios go red with real behaviour changes, not tick shifts:
+step7-caller-tries-again, step7-last-stand-camp, step7-same-again-hangs-nothing,
+step12-walk-out-ends-it, step21-camp-thrown-out, step21-heart-lost-to-a-bandit,
+step21-throw-is-no-escape (e.g. the post no longer broken by 600, the
+lookout knocked out by the hero's own swings as the first wave reaches him
+from the east before his second call, so no second call). The camp's switch
+is left for a builder with the room to re-time those with their owners
+(Step 21's hearts builder is reshaping its camp scenarios now); the vehicles
+B builder wants a wagon in a later camp row. `check step20-machine` failed
+twice and passed on re-runs at this push (the flake noted at bbb9702).

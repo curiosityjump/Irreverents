@@ -1,0 +1,96 @@
+{
+  "id": "sides-wave-both-sides",
+  "proves": "The owner, 2026-11-24: 'Alarms should spawn more enemies of increasing strength that come in from the sides'. In test-sides the skirmisher stands in front of the lookout (column 18); each finished horn call brings a wave, and the second wave's two fighters walk in one on each side of where the hero was seen, each at the nearest entry at least 12 tiles off where the lookout last saw the hero (left, columns 2-5; right, column 33), never in the middle; the first wave was one fighter (from the right, column 33), the second is two: stronger. Control (watched to fail): `entries` taken out of content/outposts/test-sides.json, and both walk in at the one entry (column 47)",
+  "room": "test-sides",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "skirmisher",
+      "spawn": 0
+    }
+  ],
+  "inputs": [],
+  "ticks": 520,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "outpost-wave",
+      "where": {
+        "outpost": "test-sides",
+        "wave": 1,
+        "row": 1
+      },
+      "between": [
+        488,
+        488
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "people-at",
+      "room": "test-sides",
+      "at": 489,
+      "ids": "test-sides:w1:",
+      "x": [
+        24,
+        104
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "people-at",
+      "room": "test-sides",
+      "at": 489,
+      "ids": "test-sides:w1:",
+      "x": [
+        520,
+        552
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "people-at",
+      "room": "test-sides",
+      "at": 189,
+      "ids": "test-sides:w0:",
+      "x": [
+        520,
+        552
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "people-at",
+      "room": "test-sides",
+      "at": 489,
+      "ids": "test-sides:w1:",
+      "count": [
+        2,
+        2
+      ]
+    },
+    {
+      "fact": "people-at",
+      "room": "test-sides",
+      "at": 189,
+      "ids": "test-sides:w0:",
+      "count": [
+        1,
+        1
+      ]
+    }
+  ]
+}

@@ -1,5 +1,30 @@
 import { heroesIn, outposts, peopleIn, postOf } from '../outpost/state.ts';
+import type { Outpost } from '../../content/kinds/outposts.ts';
 import type { System } from '../types.ts';
+
+/**
+ * The owner, 2026-11-24: "Alarms should spawn more enemies of increasing
+ * strength that come in from the sides." DRAFT: where person `i` of wave `n`
+ * walks in. The place reported is the caller's sighting (D-065: the only
+ * place a wave is told), or the old entry when there is none. On each side
+ * of it, the nearest entry at least `entryAway` tiles off (else the farthest
+ * there); people alternate sides, wave by wave starting on the other side;
+ * with entries on one side only, everyone comes from there.
+ */
+function entryFor(op: Outpost, tile: number, seenX: number | null, n: number, i: number): [number, number] {
+  if (op.entries.length < 2 || seenX === null) return op.entries[0]!;
+  const col = seenX / tile;
+  const pick = (side: [number, number][]): [number, number] | undefined => {
+    if (side.length === 0) return undefined;
+    const far = [...side].sort((a, b) => Math.abs(a[0] + 0.5 - col) - Math.abs(b[0] + 0.5 - col));
+    return far.find((t) => Math.abs(t[0] + 0.5 - col) >= op.entryAway) ?? far[far.length - 1];
+  };
+  const left = pick(op.entries.filter((t) => t[0] + 0.5 < col));
+  const right = pick(op.entries.filter((t) => t[0] + 0.5 >= col));
+  if (!left) return right!;
+  if (!right) return left;
+  return (i + n) % 2 === 0 ? right : left;
+}
 import { findEntity, spawnBody } from '../world.ts';
 
 /**
@@ -41,17 +66,20 @@ const system: System = {
           // Deterministic ids (no randomness, no clock): every machine makes the same ones.
           const id = `${op.id}:w${sig.sent}:${i}`;
           if (findEntity(world, id)) return;
-          const e = spawnBody(world, content, { id, character: p.character, room: op.room, tile: op.entry });
+          const tile = content.rooms[op.room]!.tile;
+          const at = entryFor(op, tile, outpostSendOn! >= 1 ? (sig.seen?.x ?? null) : null, sig.sent, i);
+          const e = spawnBody(world, content, { id, character: p.character, room: op.room, tile: at });
           // People get c.npc from a placement entry (npc-setup); a wave has none, so it is given here.
           // `home` is the outpost room; with no placement entry, mood 1's routine is standing still.
           e.c.npc = { kind: p.npc, home: op.room, mood: 1, dissonance: 0, offenders: [], quiet: 0, cool: 0, lastSeen: null, step: 0, stepTicks: 0, stall: 0, bark: null };
-          e.facing = -1;
+          // With entries on both sides, facing the place reported; one entry faces west, into the room, as it always did.
+          e.facing = op.entries.length > 1 && sig.seen && sig.seen.x > (at[0] + 0.5) * tile ? 1 : -1;
           // Step 7 (DRAFT): the wave walks to where its caller saw a hero.
           // INTENT (D-065, "Escalation is not omniscient"): that sighting, kept with the call, is the
           // only place a wave is told; outpost-fight takes it from there under canSee.
           const seen = sig.seen ?? null;
           if (seen && outpostSendOn! >= 1) e.c.outpostFight = { x: seen.x, y: seen.y };
-          if (op.leaveCold > 0 || op.leaveIdle > 0) e.c.outpostWave = { outpost: op.id, cold: 0, idle: 0, going: false };
+          if (op.leaveCold > 0 || op.leaveIdle > 0) e.c.outpostWave = { outpost: op.id, cold: 0, idle: 0, going: false, from: at };
           ids.push(id);
         });
         ctx.emit('outpost-wave', { outpost: op.id, wave: sig.sent, row, people: ids });
