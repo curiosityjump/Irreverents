@@ -614,3 +614,43 @@ server accepts it if that regular is near the tap within a lag allowance
 (a field added to `tap`, additively), or the page shifts the tap by that
 body's drawn-vs-newest-snapshot offset. A wider `pick.reach` would hide it
 but also catch taps meant for a neighbour.
+
+**`t-throw-friend` / `s-throw-friend`: two causes, both open.** Only the
+grab-and-throw part (`touchAndThrows`) was run 60 times, three at a time,
+with new failure text (`scripts/lib/e2e-touch.ts`: held before the tap, the
+direction, the floor's end, the bodies in between, where each page last
+drew B). 5 of 60 failed:
+- **3 of 60: the two screens disagree when B is thrown into a heavy crate**
+  (the room's crates lie where earlier facts threw them; the spot chosen
+  had a heavy crate 29 px ahead of B). A's page drew B stop and bounce back
+  (18-22 px, last at x 291); B's own page drew B fly on through the crate to
+  x 41-57 (so `s-throw-friend` passed). Why: once the throw's effect is
+  acknowledged, B's page owns B's motion and its local world holds only B
+  (`docs/mechanisms/network.md`, "Known limits"), so B flies through bodies,
+  and the server takes B's reports; A's prediction (4754ec5) steps the
+  flight against the bodies A draws and bounces it, which is what the
+  simulation would do. So this is not a prediction fault: prediction is the
+  one screen that is physically right. It is the known local-world limit,
+  seen by a friend as "my throw bounced you off the crate, but on your phone
+  you sailed through it". Fix, for whoever widens the local world: put the
+  drawn bodies near a flying own character into its page's step (as
+  `predict.ts` does for lent bodies). The check is left as it is.
+- **2 of 60: the grab never took** ("held before the tap: false"): A stood
+  6 px behind B facing it, tapped Grab, and no page drew B carried within
+  1.5 s; then the Hit tap threw nothing (0-5 px) and `s-after` failed too.
+  Not explained yet; next: log A's and B's drawn boxes and A's facing at
+  the grab, and the server's `grab` events.
+
+**Rates, before and after (this brief's end, 2026-11-24):**
+
+| Fact | Before | After | Verdict |
+|---|---|---|---|
+| `h1`, `h2` | 1 of 10 quiet; 2 of 3 under load | 0 of 20 (two runs at a time) | game, fixed (327d9e9) |
+| `cantina-row` (+ `-swap`, `-switch`) | 3 of 10 | 5 of 25 runs; 19 of 40 taps on a walking regular | game, open (Step 11) |
+| `t-throw-friend`, `s-throw-friend` | 1 of 10 | 5 of 60 throw-part runs (3 crate, 2 grab) | game (known limit), and grab: open |
+| `door-go-in`, `door-use` | 0 of 10 | 2 of 20, only with two runs at once | load; not looked into |
+| `t-grab-friend`, `s-break-free` | 0 of 10 | 0 of 20 | none seen |
+
+The open question (separate worlds or serial parts) was not needed: every
+part already makes its own world (`?room=` per run and per part), and no
+failure traced to two parts sharing one.
