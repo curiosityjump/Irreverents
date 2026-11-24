@@ -576,3 +576,10 @@ document as a decision of theirs.
 - **Why this way:** the library's "each response wave should add a new toy" (doc 07) and your "more enemies of increasing strength". The top row's middle guard is now in armour: he walks slower than a guard (no hero is slower than him), a punch moves him about half as far, he takes nearly twice the beating (the grappler drops him in about 6 punches, the skirmisher in 13), and his swing is slower but harder. So at the top of the alarm, running is the better answer than fighting him. He looks like a plain guard for now: his own picture is waiting on the cast's artwork.
 - **To change it:** the `armoured-guard` numbers in the tuning file; which row he is in, in the castle street's dispatch file; his picture, by replacing his sprite file once his sheet is cut.
 - **Where:** `docs/mechanisms/npc-response.md`, "The castle street's table"; `content/characters/armoured-guard.json`. `DRAFT:`
+
+### 2026-11-24 · Step 22 closes: the stage's phone checks run in the full e2e, not against the live address
+- **Decided by:** Step 22's lead, `session_017WiGzF7NsB3KTwXkWUXE63`
+- **Instead of asking:** "Is the stage done if its phone checks pass locally on the commit that's live, but not against the live address itself?"
+- **Why this way:** every stage phone check (beaten at the entrance, a walked clear, STAGE CLEARED at three phone sizes, Continue, two friends) passes in the full `npm run e2e` on the same commit the live address runs (`check:deployed` ok), and `check:live` passes. Adding a stage check to `check:live` would put a private game over into the live server's runs for one fact; not worth holding the step open.
+- **To change it:** add a call to `scripts/e2e/stage.ts`'s `walkedClear` in the live check (`scripts/check-live.ts`), in a private world.
+- **Where:** `docs/plan-archive.md`, "Step 22", the last lead review. `DRAFT:`

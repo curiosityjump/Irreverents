@@ -417,9 +417,7 @@ Full text: `docs/plan/step-21.md`
 
 ## Step 22 — One stage to clear: an outpost you get through without dying, and a victory screen
 
-**Status: open, claimed by session_017WiGzF7NsB3KTwXkWUXE63 (successor lead), 2026-11-24 (builder: session_017WiGzJudo6Zjh95Uh99rkH, `handoff-prompts/step-22-stage.md`; live: lose by hearts, start over, end, stars, STAGE CLEARED, five heroes clear; push 5 left).** (Opened 2026-11-24 00:40 UTC by orchestrator session_017WiGzJzo6aZqH4kYxxJsiV from the owner's words of ~00:30 UTC; a lead's step: many slices and judgement by looking at a phone.)
-
-Full text: `docs/plan/step-22.md`
+**Closed 2026-11-24, ~15:55 UTC.** The Iron Quarry is a stage. You lose by the whole party running out of hearts; a game over puts you back at the entrance with every heart back, and the stage starts over: bad guys at their posts, alarms down, the clock at zero. Lookouts with horns on the road and the ridge call waves that walk in from the sides, each stronger, and every lookout has a way over him. All five heroes can get through alone, fighting or sneaking, and the infiltrator can clear it with nobody seeing (a 1.4 s window over the road's heavy). Reaching the depot's far end brings up STAGE CLEARED: stars lit one by one, then time, enemies defeated, alarms, game overs and the hoard, with Continue under the thumb. The best is kept on the sign and the menu. Open, not blocking: Q-014 (where a game over in the stage sends you; built: the entrance). Logged: the star times are from a script (best 45 s, good 56 s), the toll-keeper counts for "unseen", and `check:live` holds no stage fact (decisions-log "Step 22 closes"). Full text: `docs/plan-archive.md`, "Step 22"; record: `docs/mechanisms/stages.md`.
 
 ## Step 23 — Weapons: things you pick up, swing, throw, lose and steal
 
