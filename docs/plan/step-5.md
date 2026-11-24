@@ -427,7 +427,16 @@ else is. **Flake seen:** at 2974564 (rebased on d2949ae) `plates-stone`,
 `plates-stone-held`, `plates-pocket` failed in 1 of 3 e2e runs (page B
 stood at x 124, the cellar doorway at 115, and three Use taps never went
 down) with `cantina-row`; the other two runs were all ok, and d2949ae alone
-passed them once. Not loosened; logged for the flakes brief. **Not verified:** on a real iPhone; Switch's dimming with a full
+passed them once. After the push (1809a34), the same three failed in 1 of
+2 e2e runs (with `weapon-hit-quick` once at 152 ms against 150, then 137
+ms). Run alone 8 times against 1809a34, the plates facts passed 8 of 8;
+twice page B needed the test's own retry (shoved off the cellar doorway,
+x 124 against 115), so the full-suite failure is that retry running out.
+Not loosened; for the flakes brief. `npm run check`'s `step20-machine` also
+failed 3 of 7 runs here (barrier break not heard), and passed 2 of 2 on
+586cfcf without this commit; that check imports no client code. Also: a
+full `npm run e2e` rewrites the committed `docs/plan/step-23-shots/*.png`
+(restored each time, not committed). **Not verified:** on a real iPhone; Switch's dimming with a full
 party (rule mirrors `verbs/switch.ts`, not driven).
 
 
