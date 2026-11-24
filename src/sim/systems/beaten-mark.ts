@@ -2,6 +2,7 @@ import { emitEffect, heldBy } from '../effects.ts';
 import { ticksOf } from '../body-state.ts';
 import { beatenRule, creditDefeat, knockedOutOnly } from '../beaten.ts';
 import type { Entity, StepContext, System } from '../types.ts';
+import { npcKind } from '../npc/state.ts';
 import { findEntity } from '../world.ts';
 
 /**
@@ -11,7 +12,8 @@ import { findEntity } from '../world.ts';
  * `after` times, or flung into a wall or a body at his `slam` speed or more
  * (impact over numbers, D-020: the big hit ends it sooner), is defeated: he
  * does not get up, and beaten-gone takes him away. A good person knocked out
- * stays down world.knockedOutTime instead of world.flattenTime.
+ * stays down his kind's `knockedOut` (else world.knockedOutTime) instead of
+ * world.flattenTime.
  *
  * DRAFT: only what a player did counts (the knock-out's `by`, or the flight's,
  * is a player's character): the camp's people flatten each other often, and a
@@ -38,7 +40,7 @@ const system: System = {
         if (!t?.c.flattened) continue;
         if (knockedOutOnly(content, t)) {
           // INTENT (D-064, doc 26): a knocked-out townsperson or guard lies there to be found, long.
-          t.c.flattened.ticksLeft = Math.max(t.c.flattened.ticksLeft, ticksOf(content.tuning.world.knockedOutTime));
+          t.c.flattened.ticksLeft = Math.max(t.c.flattened.ticksLeft, ticksOf(npcKind(content, t)?.knockedOut ?? content.tuning.world.knockedOutTime));
           continue;
         }
         const rule = beatenRule(content, t);

@@ -10,5 +10,6 @@
     "reassured": "Yup! As expected!",
     "oppose": "Thief! Begone!",
     "serve": "Thank you!"
-  }
+  },
+  "knockedOut": 10
 }

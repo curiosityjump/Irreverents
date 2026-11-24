@@ -500,7 +500,10 @@ scenarios: `beatenAfter` 2 green, 1 turns `step12-caller-stopped-no-wave`,
 `step21-camp-thrown-out`, `step7-caller-tries-again` red, so 3. `beatenSlam` 400 green, 320 turns
 the same three red. Townspeople staying down longer: `knockedOutTime` 4 s already turns
 `step18-jump-over-is-a-way-out` and `step4-tier-cap-holds` red (as do 20 s), so it ships at 3 s
-(unchanged) and the list went to the orchestrator. Not measured: whether a guard knocked out for
+(unchanged) and the list went to the orchestrator. The orchestrator: guards stay, shopkeeper only. Per-kind
+`knockedOut`, the shopkeeper 10 s (knock out, empty the shelf, out the west door: 3.9 s with the
+grappler; all scenarios green). `holdReturns` for Step 22, checked by stepping a world only
+(no scenario can call it): held, nobody back at 11400 ticks; `restorePeople` then puts both back. Not measured: whether a guard knocked out for
 longer breaks "stop the caller and no help comes" in play, and whether a long-out shopkeeper leaves
 a room without what he gives (reading `use/thing.ts`: an unattended good can be taken, so a
 knocked-out keeper gives *more*, not less). The phone fact `beaten-gone` (150 ms each way, by

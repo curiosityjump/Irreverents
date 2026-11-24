@@ -174,20 +174,25 @@ The owner, playing: "enemies collapse but never die". `src/sim/beaten.ts`
   (`by` is one). A slam on a standing body lays it flat with one
   `flattened`, so the Hall counts it once. Emits `defeated`, credits the
   player on the bodiless `~defeats` record. A `good` person knocked out
-  stays down `world.knockedOutTime` instead (DRAFT: 3 s, as
-  `flattenTime`, until the orchestrator decides; longer turns
-  `step18-jump-over-is-a-way-out` and `step4-tier-cap-holds` red).
+  stays down his kind's `knockedOut` seconds, else `world.knockedOutTime`
+  (3 s, as `flattenTime`: longer for guards turns
+  `step18-jump-over-is-a-way-out` and `step4-tier-cap-holds` red). The
+  shopkeeper says 10 (D-064: knocked out before she reports, the shop is
+  yours: `step5-shopkeeper-robbed`).
 - **`beaten-gone` (535)**: a defeated body (`c.beaten`) never gets up; it
-  lies `beatenLieTime` once it has stopped flying, drops what it carries,
+  lies `beatenLieTime` once it has stopped flying, drops what it carries
+  and any weapon still in hand (Step 23's `knockLoose`; being laid flat
+  usually knocked it loose already),
   is removed, and `defeated-gone` (its middle) is emitted. A placed one
   leaves a bodiless `~beaten:<id>` record (`c.beatenGone`); a wave's or a
   dispatch row's arrival leaves nothing.
 - **`beaten-return` (9)**: a record's person is put back at his
   placement, fresh, once no player has been in his room `beatenReturnTime`
   (90 s) in a row. Never while anyone is there. A kept game's load places
-  every placement again; the record then just goes.
-- **For Step 22**: `defeatsBy(world, player)` and `restorePeople(world,
-  content, room?)`.
+  every placement again; the record then just goes. A room a stage holds
+  (`holdReturns(world, rooms, on)`, kept on `~defeats`) brings nobody back.
+- **For Step 22**: `defeatsBy(world, player)`, `restorePeople(world,
+  content, room?)` and `holdReturns(world, rooms, on)`.
 - **Drawing** (`src/client/draw/beaten.ts`): the cut `fx-poof` where he
   lay, on `defeated-gone`; `fx-dizzy` over a standing bad guy one
   knock-out from defeat (`oneMoreDefeats`). No number, no bar.
@@ -195,7 +200,7 @@ The owner, playing: "enemies collapse but never die". `src/sim/beaten.ts`
 - Who is excluded: the villain (`"beaten": false`: he carries the power
   and loops his robbery), cantina regulars (no `c.npc`), heroes, things.
 - Signal: scenarios `step5-fighter-beaten`, `step5-fighter-two-knocks-gets-up`,
-  `step5-slam-defeats`, `step5-beaten-come-back`; e2e `beaten-gone`
+  `step5-slam-defeats`, `step5-beaten-come-back`, `step5-shopkeeper-robbed`; e2e `beaten-gone`
   (`scripts/e2e/beaten.ts`).
 
 ## Movement feel (Step 2, 2026-11-23)

@@ -3,6 +3,7 @@ import { goneId } from '../beaten.ts';
 import { heldBy } from '../effects.ts';
 import { centre, placementOf, THING_KIND } from '../npc/state.ts';
 import type { System } from '../types.ts';
+import { knockLoose, weaponOf } from '../weapons.ts';
 import { addEntity, findEntity, removeEntity } from '../world.ts';
 
 /**
@@ -12,7 +13,7 @@ import { addEntity, findEntity, removeEntity } from '../world.ts';
  * draws as the cut `fx-poof` (src/client/draw/beaten.ts). A placed one leaves
  * a bodiless `~beaten:<id>` record so beaten-return can put him back; a
  * wave's or a dispatch row's arrival leaves nothing (the next wave is the
- * camp's answer). Whatever he carried is dropped first.
+ * camp's answer). Whatever he carried, and a weapon still in hand, is dropped first.
  * After beaten-mark (530); before the Hall (970), which only reads events.
  */
 const system: System = {
@@ -39,6 +40,8 @@ const system: System = {
       if (!e) continue;
       const carried = e.c.carrying ? findEntity(world, e.c.carrying.id) : undefined;
       if (carried && heldBy(carried) === e.id) release(ctx, carried, 'dropped');
+      // Step 23: a weapon still in hand drops where he lay (being laid flat usually knocked it loose already).
+      if (weaponOf(content, e)) knockLoose(ctx, e, null);
       const at = centre(content, e);
       const placed = !e.c.outpostWave && !e.c.arrival ? placementOf(content, e) : undefined;
       removeEntity(world, id);
