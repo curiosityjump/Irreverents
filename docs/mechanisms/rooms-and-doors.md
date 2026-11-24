@@ -142,7 +142,9 @@ that could trap someone.
   (`step3-weight-undercroft-friends`), not by the two light heroes
   (`-undercroft-light-pair`); alone by the heavy crate thrown through the
   throne room's window (`-heavy-crate-thrown`), by the king
-  (`-king`), or by the boost (`-boost`, in `test-weight`).
+  (`-king`), or by the boost (`-boost`, in `test-weight`). A thrower stands on the
+  stair beside the plate, looking west over it (Step 24 slice 2,
+  `docs/mechanisms/ranged.md`): the drop through the grate is under his lobs.
 - **The vault.** At the undercroft's west end a `breakable`
   (`vault-wall`, column 4) seals a small hidden area. The way-out check
   counts it as wall, so the vault is not a place it worries about; once

@@ -1,0 +1,82 @@
+{
+  "id": "step24-undercroft-under-fire-control",
+  "gate": null,
+  "proves": "Control of step24-undercroft-under-fire (watched to fail there): the same grappler comes down the cellar stair and stops at column 24, behind the thrower, who looks west: he never aims and never throws, and they stay on the passage floor.",
+  "//": "DRAFT (Step 24 slice 2): the walk west cut at tick 100 (feet x 389, column 24).",
+  "room": "castle-street",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 1
+    }
+  ],
+  "entities": [
+    {
+      "id": "plate-load",
+      "character": "crate-heavy",
+      "room": "undercroft",
+      "tile": [
+        18,
+        12
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 22,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 30,
+      "to": 34,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 60,
+      "to": 100,
+      "x": -1
+    }
+  ],
+  "ticks": 700,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "ranged-aim",
+      "where": {
+        "entity": "undercroft-thrower"
+      },
+      "between": [
+        0,
+        700
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "position",
+      "player": "a",
+      "at": 700,
+      "y": [
+        207,
+        209
+      ],
+      "x": [
+        350,
+        420
+      ]
+    }
+  ],
+  "placedRooms": [
+    "undercroft"
+  ]
+}

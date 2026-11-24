@@ -80,6 +80,16 @@ passes over the near floor, comes down on the middle step near column 17 and
 bounces onto the floor east of it; the top step and column 14 of the middle
 step are under it. A kept game gets him on load.
 
+`undercroft-thrower` on the undercroft's stair, the middle step (row 9,
+column 21; tile [21, 8]), facing west over the stone plate (Step 24 slice 2,
+`DRAFT:`): his lobs pass over whoever stands on the plate and come down by
+the grate (columns 14-15), so dropping in is done under fire; anyone climbs
+the steps (rows 11, 9) to knock him off. Solo still gets in
+(`step24-undercroft-under-fire`). A placed body has no starting facing: he
+faces east for the first tick of a fresh world (his routine turns him), so a
+hero standing east of him then is aimed at once; a hero coming down the
+cellar stair later is behind him.
+
 `trail-thrower` on the Bramble Trail's root mound, [32, 6] (Step 15 push 3, `DRAFT:`), facing west over the climb onto the mound, which every hero but the infiltrator (who crawls under it) crosses: he lobs at the climb and is punched off the mound by a hero who reaches him; he does not block the way over (measured, the grappler walks over him).
 
 ## How it is checked
@@ -87,7 +97,7 @@ step are under it. A kept game gets him on load.
 Scenarios `step24-*`, each with its control: `-throws-from-range`,
 `-aim-before-shot`, `-jump-dodges`, `-hit-during-aim`, `-throw-it-back`,
 `-costs-a-heart`, `-holds-his-post`, `-beaten-for-good`, `-shots-capped`,
-`-one-file`, `-gallery-seen-on-the-floor`, `-gallery-way-out-<hero>` (each
+`-one-file`, `-gallery-seen-on-the-floor`, `-undercroft-under-fire` (and `-control`), `-gallery-way-out-<hero>` (each
 hero out over the roofs within 800 ticks) and `-gallery-way-out-control`.
 Test rooms `test-ranged` (ledge), `-floor` (80 wide), `-bomb`, `-camp`.
 `npm run e2e`, fact `ranged-telegraph` (`scripts/e2e/ranged.ts`; control

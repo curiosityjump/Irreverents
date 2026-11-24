@@ -1,0 +1,120 @@
+{
+  "id": "step24-undercroft-under-fire",
+  "gate": null,
+  "proves": "Step 24 slice 2: in the real undercroft the stone plate's puzzle is done under fire, and one player alone still gets in. The heavy crate rests on the stone plate (as if thrown through the throne room's window, step3-weight-heavy-crate-thrown, one of the solo ways), so the grate is open; the grappler alone comes down the cellar stair from the street and walks west under the thrower on the stair's middle step (row 9, column 21, looking west over the plate): in front of him they are aimed at and his shot strikes them at the grate, and they still drop through into the pocket. Control (watched to fail): the same hero stopping behind him (column 24) is never aimed at.",
+  "//": "DRAFT (Step 24 slice 2): traced (node scripts/trace.ts step24-undercroft-under-fire). The grappler comes down the cellar stair from the street (tick 30), walks west under the thrower (behind him: he looks west), and once in front of him is aimed at (143) and thrown at (179); the shot strikes them at the grate (207) and they drop into the pocket all the same (feet on its floor, y 256, by 250). The heavy crate stands in for one thrown through the throne room's window. Control: step24-undercroft-under-fire-control.",
+  "room": "castle-street",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 1
+    }
+  ],
+  "entities": [
+    {
+      "id": "plate-load",
+      "character": "crate-heavy",
+      "room": "undercroft",
+      "tile": [
+        18,
+        12
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 22,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 30,
+      "to": 34,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 60,
+      "to": 500,
+      "x": -1
+    }
+  ],
+  "ticks": 700,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "ranged-aim",
+      "where": {
+        "entity": "undercroft-thrower",
+        "at": "p:a"
+      },
+      "between": [
+        130,
+        160
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "ranged-threw",
+      "where": {
+        "entity": "undercroft-thrower"
+      },
+      "between": [
+        170,
+        190
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "weapon-struck",
+      "where": {
+        "by": "undercroft-thrower",
+        "target": "p:a",
+        "weapon": "thrown-shot"
+      },
+      "between": [
+        195,
+        220
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "position",
+      "player": "a",
+      "at": 290,
+      "y": [
+        255,
+        257
+      ]
+    },
+    {
+      "fact": "position",
+      "player": "a",
+      "at": 700,
+      "y": [
+        255,
+        257
+      ]
+    }
+  ],
+  "placedRooms": [
+    "undercroft"
+  ]
+}

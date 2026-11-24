@@ -507,3 +507,24 @@ By a subagent reading 8 of the 12 shots in `docs/plan/step-24-shots/1b/` at phon
 - `at-rest-sideways.png` is 2250x1020, the 750x340 size, not 844x390 as its name implies.
 
 Sent to the thrower's builder as part of its brief's next push; nothing here is re-measured yet.
+
+- **Push 2, slice 2: the undercroft.** Measured first: with `undercroft-thrower`
+  placed (stair's middle step, tile [21, 8], facing west over the plate),
+  `npm run check` had 0 reds (every scenario, the 8 that load placements
+  touching the undercroft among them) and the full `npm run e2e` 134 ok, 0
+  FAIL, `plates.ts`'s seven facts included (A and B on the plate are under his
+  arc, not in it; his lobs come down by the grate). Nothing re-timed.
+  New: `step24-undercroft-under-fire` (one grappler alone, the heavy crate
+  on the plate as if thrown through the window: down the cellar stair,
+  aimed at 143, struck at the grate 207, in the pocket by 290) and
+  `-control` (stops behind him at column 24: never aimed at). Failing
+  control watched: with his placement taken out, the first scenario's three
+  ranged facts go red. Shots: `docs/plan/step-24-shots/2/` (from the plates
+  walk: `stone-plate-down-sideways.png` has his shot in the air over both
+  pages).
+  - **Flag, slice 1's, not changed:** a placed body has no starting facing,
+    so for the first tick of a fresh world he faces east (default) before his
+    routine turns him; a hero standing east of him then is aimed at once
+    (seen in a first trace with the hero spawned in the undercroft). Players
+    come down the cellar stair later, behind him. A placement `facing`, or
+    `ranged-throw` waiting for the routine's first turn, would fix it.
