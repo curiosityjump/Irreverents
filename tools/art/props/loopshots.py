@@ -174,7 +174,32 @@ def cage():
     return scene
 
 
-SCENES = {'rides': rides, 'powers': powers, 'treasure': treasure, 'hall': hall, 'asks': asks, 'heist': heist,
+def weapons():
+    """every weapon lying on the bottom floor; held beside the grappler on the middle one (at about hand height:
+    a stand-in for the grip anchor); swing frame 2, impact and broken on the top one; the bomb's explosion and
+    the cannon's blast"""
+    img, L = looks('weapons')
+    hero = Image.open(os.path.join(ROOT, 'assets', 'sprites', 'heroes', 'grappler.png')).convert('RGBA').crop((0, 0, 48, 48))
+    scene, floors = shelves(3, sky=NIGHT)
+    ids = ['sword', 'hammer', 'spear', 'shield', 'bomb', 'boomerang', 'hook', 'cannon', 'star-wand', 'torch',
+           'parasol', 'orb-wand']
+    for i, w in enumerate(ids):
+        place(scene, frame(img, L['weapon-%s-ground' % w]), 14 + i * 26, floors[2])
+    for i, w in enumerate(('sword', 'hammer', 'spear', 'torch')):
+        cx = 30 + i * 58
+        place(scene, hero, cx, floors[1])
+        scene.alpha_composite(frame(img, L['weapon-%s-held' % w]), (cx + 2, floors[1] - 30))
+    for i, w in enumerate(('sword', 'hammer', 'shield', 'boomerang')):
+        cx = 18 + i * 66
+        place(scene, frame(img, L['weapon-%s-swing' % w], 1), cx, floors[0])
+        place(scene, frame(img, L['weapon-%s-impact' % w]), cx + 22, floors[0])
+        place(scene, frame(img, L['weapon-%s-broken' % w]), cx + 44, floors[0])
+    place(scene, frame(img, L['weapon-bomb-explosion']), 290, floors[0])
+    place(scene, frame(img, L['weapon-cannon-blast']), 284, floors[1])
+    return scene
+
+
+SCENES = {'weapons': weapons, 'rides': rides, 'powers': powers, 'treasure': treasure, 'hall': hall, 'asks': asks, 'heist': heist,
           'cage': cage}
 
 if __name__ == '__main__':

@@ -159,6 +159,14 @@ def looks_sheets():
     for which in lo.HALL:
         s.add(which, lo.hall(which))
     out.append(('hall', 'props/hall.png', s))
+    # ---- weapons (loops.py: P12 standalone weapon families; handoff-prompts/owner-weapons-art.md)
+    s = Sheet(168)
+    for which in lo.WEAPONS:
+        for suffix, strip, frames in lo.weapon_looks(which):
+            s.add('weapon-%s-%s' % (which, suffix), strip, frames=frames, fps=12 if frames > 1 else None)
+        s.newrow()
+    s.add('weapon-bomb-explosion', lo.weapon_effect('explosion')); s.add('weapon-cannon-blast', lo.weapon_effect('blast'))
+    out.append(('weapons', 'props/weapons.png', s))
     # ---- people
     s = Sheet(96)
     # round 3: moods bold enough for any hat or plume (a white '?' and a sweat drop; a red mark rimmed white)

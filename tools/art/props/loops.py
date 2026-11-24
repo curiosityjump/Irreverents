@@ -350,3 +350,59 @@ def condition(which):
     bars. fine = grey, hurt = gold, down (at the edge: about to be knocked flat) = red. 11 x 12."""
     return grab('hud', CONDITION[which], 0, ramps('gold', 'orange', 'red', 'pink', 'metal', 'stone', 'castle'),
                 key=(245, 245, 244), size=(11, 12))
+
+
+# ---- weapons: P12 standalone weapon families (owner-weapons-art.md). Three 1448x1086 sheets, four weapons a sheet,
+# one per row, every row the same nine states: 0 ground (with a shadow), 1 pickup (rays, floating), 2 lying right,
+# 3 lying left, 4 raised/ready, 5 swing start, 6 full swing (both with a blue arc baked on), 7 impact (a starburst
+# baked on), 8 broken/spent (debris). INTENT: no bearer is drawn into any weapon (the owner's P12 decision): a held
+# weapon is the `ready` look on the holder's hand, never a hero holding it.
+import srcimport as _si
+_P12 = 'p12-standalone-weapons-and-configurations-source/originals/'
+_si.SHEETS.update({'wpn-a': _P12 + 'kirby-style-weapon-atlas-sprite-sheet.png',
+                   'wpn-b': _P12 + 'colorful-pixel-weapon-sprite-sheet.png',
+                   'wpn-c': _P12 + 'arcane-weapon-sprite-atlas.png'})
+WEAPONS = {  # id: (sheet, row); ids say what the thing is
+    'sword': ('wpn-a', 0), 'hammer': ('wpn-a', 1), 'spear': ('wpn-a', 2), 'shield': ('wpn-a', 3),
+    'bomb': ('wpn-b', 0), 'boomerang': ('wpn-b', 1), 'hook': ('wpn-b', 2), 'cannon': ('wpn-b', 3),
+    'star-wand': ('wpn-c', 0), 'torch': ('wpn-c', 1), 'parasol': ('wpn-c', 2), 'orb-wand': ('wpn-c', 3)}
+_WROWS = [(40, 280), (300, 530), (545, 785), (785, 1030)]  # the pack's own tag_index source_crop rows
+_WCOLS = [15, 170, 305, 455, 610, 760, 915, 1090, 1265, 1440]  # cell edges, from the sheets' alpha
+WPN = ramps('metal', 'stone', 'castle', 'gold', 'orange', 'wood', 'red', 'purple', 'blue', 'sky', 'pink', 'night',
+            'cloud')
+WPN_SCALE = 0.15  # DRAFT: a sword about 18 px long beside an 18 x 28 hero
+WPN_CELL = 28
+
+
+def weapon_cut(which, state, largest=True, edge=True):
+    sh, row = WEAPONS[which]
+    y0, y1 = _WROWS[row]
+    from px import INK
+    return grab(sh, (_WCOLS[state], y0, _WCOLS[state + 1], y1), WPN_SCALE, WPN, largest=largest,
+                edge=INK if edge else None)
+
+
+def weapon(which, states, align='middle', cell=WPN_CELL):
+    frames = [weapon_cut(which, s) for s in states]
+    return _row(frames, cell, cell, align=align)
+
+
+def weapon_looks(which):
+    """[(id suffix, strip, frames)]: ground = lying flat (state 2: the shadowless one, as the P12 contract asks),
+    held = raised/ready (4), swing = 5-6 with the plate's own arc, impact = 7, broken = 8 (every piece, not the
+    largest: a snapped blade is two)."""
+    c = WPN_CELL
+    broken = weapon_cut(which, 8, largest=False)
+    return [('ground', _row([weapon_cut(which, 2)], c, c), 1),
+            ('held', weapon(which, [4]), 1),
+            ('swing', weapon(which, [5, 6]), 2),
+            ('impact', weapon(which, [7]), 1),
+            ('broken', _row([broken], c, c), 1)]
+
+
+def weapon_effect(which):
+    """The two effects the sheets draw apart from a swing: the bomb's explosion (B row 1, state 7, every blob) and
+    the cannon's muzzle blast (B row 4, state 6, the barrel with its flame)."""
+    if which == 'explosion':
+        return _row([weapon_cut('bomb', 7, largest=False)], 32, 32)
+    return _row([weapon_cut('cannon', 6)], 40, 28)

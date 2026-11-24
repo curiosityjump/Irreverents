@@ -26,13 +26,13 @@ Rows go stale as the look3 lanes push: re-check a row against the current file b
 | Bodies (things you lift, hit or stand by) | 7 | 1 | 4 | 2 |
 | Ground tiles (16 px) | 6 | 2 | 4 | 0 |
 | Backdrops | 14 | 0 | 14 | 0 |
-| Interactive looks (props) | 28 | 19 | 7 | 0 |
+| Interactive looks (props) | 29 | 20 | 7 | 0 |
 | Decor | 43 | 12 | 25 | 6 |
 | Effects | 9 | 5 | 4 | 0 |
 | UI and HUD | 44 | 9 | 31 | 4 |
 | Sound effects | 42 | 29 | 7 | 6 |
 | Music | 8 | 0 | 0 | 8 |
-| **All** | **218** | **90** | **100** | **26** |
+| **All** | **229** | **95** | **98** | **30** |
 
 ## Path keys
 
@@ -200,6 +200,7 @@ Cuts live in tools/art/props/drive.py, round3.py and looks_parts.py.
 | `look:unseen` | uses-approved | `P07/irreverents-pixel-ui-atlas.png` stealth hood (1218,280)-(1306,364), its slot keyed (190,200,248) = `unseen` 14x12; yellow '!' bubble (1252,928)-(1330,1000) = `seen-mark` 12x12 (group `ui`). | No closed eye on any plate checked (P07 UI): the hood stands in for "unseen". |
 | `look:hud-condition` | uses-approved | `P05/p05-ui-hero-party-hud-source.png` shield badges: grey (482,370)-(558,442) = fine, gold (568,365)-(648,442) = hurt, red (662,365)-(748,442) = down; key (245,245,244), 11x12, group `ui`. | - |
 | `look:cage` | uses-approved | `P04/chibi-pixel-interactables-sprite-sheet.png` row 1 barred gate (1072,172)-(1236,318) = `cage-shut` (the gaps' dark fill cleared so the captive shows), open frame (1265,175)-(1432,318) = `cage-open`; 32x28, group `outpost`. | No plate shows a cage as such: this is the gate standing in. |
+| `look:weapons` | uses-approved | `P12/` (`03-visual-direction-and-assets/current-pixel-art-explorations/p12-standalone-weapons-and-configurations-source/originals/`): A sword/hammer/spear/shield, B bomb/boomerang/hook/cannon, C star wand/torch/parasol/orb wand; rows y 40-280, 300-530, 545-785, 785-1030; nine state cells at x 15/170/305/455/610/760/915/1090/1265/1440 (loops.WEAPONS). Group `weapons`: ground, held, swing x2, impact, broken per weapon; bomb explosion, cannon blast. | No hand-held pose (by design: grip anchor), no grip/hitbox data, no separate projectile, no closed parasol. Nothing in the game draws a weapon yet. |
 
 ## Decor
 

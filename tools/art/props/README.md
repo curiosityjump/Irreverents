@@ -216,6 +216,27 @@ bottom-centred over an entrance; `level-pie-0`..`4` 12x12 (none, a quarter, half
   undercroft's barrels and lantern posts could point at the pocket (`INTENT:` "Nothing points" above). The rule is
   the same everywhere and was not hand-tuned; if it reads as a hint, shift the barrel hash seed in `place.py`.
 
+## Weapons (`handoff-prompts/owner-weapons-art.md`)
+
+Source: P12 standalone weapon families (the owner's "Weapons assets uploaded", 2026-11-24): three 1448x1086 sheets
+(`wpn-a`, `wpn-b`, `wpn-c` in `srcimport.SHEETS`, registered from `loops.py`), four weapons a sheet, one per row, each
+row the same nine states (ground with shadow, pickup with rays, lying right, lying left, raised/ready, swing start,
+full swing, impact, broken/spent). `INTENT:` no bearer is drawn into any weapon (the owner's P12 decision): held is a
+look on the holder's hand, never a hero holding it. P11's weapons are bearer-baked and superseded.
+
+Group `weapons` (`assets/props/weapons.png`), scale 0.15 (a sword about 18 px), every frame 28x28:
+`weapon-<w>-{ground,held,swing,impact,broken}` for w in `sword`, `hammer`, `spear`, `shield`, `bomb`, `boomerang`,
+`hook`, `cannon`, `star-wand`, `torch`, `parasol`, `orb-wand`. ground = lying flat (state 3, the shadowless one,
+as the P12 contract asks; bottom-aligned); held = raised/ready (centred: put its handle on the hand); swing = 2 frames,
+the plate's own blue arc kept; impact = the plate's starburst; broken = every piece (bottom-aligned). Effects:
+`weapon-bomb-explosion` (32x32), `weapon-cannon-blast` (40x28, the barrel with its muzzle flame). Scene:
+`loops-weapons-4x.png`.
+
+- **Not on the sheets** (for the missing-assets list): a hand-held pose of any kind (by design); grip anchors and
+  hitboxes (the contract asks for them as data: not cut); a separate projectile (no cannonball; thrown weapons are
+  the weapon itself); a closed parasol; an unlit torch lying down (state 3 is lit; states 1-2 are unlit).
+- **Not verified in the game:** nothing draws a weapon yet.
+
 ## Deviations from the contract
 
 - `ui-use`'s `src` is the whole 48×24 picture (normal then pressed), with no `frames`: that is how
