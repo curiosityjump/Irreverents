@@ -478,3 +478,23 @@ restart`, `step22-restart-restores` (all expect the throw). Not Step 21's to
 re-time; whoever next holds Step 22 flips `on` in the same push as those
 re-times (every field stays; its `gameOver` is read either way). Until then
 the quarry alone still throws a beaten hero back to its road.
+
+### The flaky game over (`hearts-game-over`), found and fixed in the fact
+
+The orchestrator's red run ended with two heroes out and the flyer at x
+856 (column 53) with all three hearts, nobody fighting. Cause, traced in a
+sim twin of the camp walk (a script that drives `step()` like the fact):
+a run of blows carries the hero east past every fighter's 112 px of sight
+(seen to column 68), or up onto the long one-way ledge (row 6, out of
+their 40 px of sight height); the chasing fighter searches 4 s and walks
+home facing west (the chase, 88a048d, D-065). The fact only walked back
+east from west of column 20, so it then waited unbeaten for ever.
+**The game is right:** a hero out of sight is not fought, the ledge is
+the room's deliberate sneak route, and walking back meets the fight
+again. **The fact was wrong:** it now walks back into columns 20-32 from
+either side, and off the ledge east by its gap (columns 39-40).
+Measured: sim, 10 of 20 stands stalled before, 0 of 30 after (slowest
+game over 94 s, the fact allows 200 s). Real page, the camp walk alone
+(`node scripts/e2e/defeat-alone.ts 10`, new; the e2e has no single-fact
+switch), quiet machine: before 7 of 10 (the three misses ended at columns
+72, 82 and 52, nobody fighting); after 10 of 10.

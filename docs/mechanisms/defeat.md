@@ -215,4 +215,8 @@ connections on a real server, both in the cantina with every heart and
 walking; control: the move made without its effect, neither page moves);
 by touch on a phone, `npm run e2e`'s `hearts-drawn`, `hearts-one-lost` and
 `hearts-game-over` (standing in the camp until the party is out: the card,
-the cantina, the stick moves the hero; `scripts/e2e/defeat.ts`).
+the cantina, the stick moves the hero; `scripts/e2e/defeat.ts`). The stand
+walks back into columns 20-32 from either side and off the one-way ledge by
+its gap, as a player who wants the fight would: blows can carry a hero out
+of every fighter's sight, and the chase then goes home (by design).
+`node scripts/e2e/defeat-alone.ts [runs]` runs that camp walk alone.

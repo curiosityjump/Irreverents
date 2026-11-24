@@ -89,7 +89,15 @@ export async function defeatFacts(kit: Kit & { shots?: string }): Promise<void> 
     }
     await settle(ph);
     const stoodAt = Math.round(((await me(ph))?.x ?? 0) / c.tile);
-    // Stand: walk back east whenever knocked back west of column 20, until the party is out of hearts and the page is in the cantina (Step 21, hearts: the camp throws nobody out now; about 80 s of falls).
+    // Stand among the fighters, as a player who wants the fight would, until the party is out of hearts and the page is in the cantina
+    // (Step 21, hearts: the camp throws nobody out now; about 80 s of falls). Knocked out of columns 20-32 (the posts are 22, 25 and 28),
+    // walk back in from either side; lifted onto the long one-way ledge (row 6, feet five tiles over the floor, out of every fighter's
+    // 40 px of sight by design: the room's comment), walk east off it by its gap at columns 39-40, then back west.
+    // INTENT (handoff-prompts/hearts.md, measured 2026-11-24): a run of blows can blow the hero east past every fighter's 112 px of sight
+    // (the flyer at x 856, column 53, in the orchestrator's red run) or up onto that ledge; the chasing fighter searches 4 s and goes home
+    // (the chase, D-065), and a fact that only walked back east from west of column 20 then waited unbeaten for ever. The game is right
+    // there: walking back meets the fight again. In the sim 10 of 20 such stands stalled before, 0 of 30 after.
+    const ledgeY = 7 * c.tile;
     let shotHurt = false;
     let thrown = false;
     let card = false;
@@ -97,8 +105,8 @@ export async function defeatFacts(kit: Kit & { shots?: string }): Promise<void> 
       await sleep(500);
       const s = (await ph.page.evaluate(() => {
         const irr = (window as any).irreverents;
-        return { room: irr.drawn.room, cond: irr.drawn.condition, x: irr.drawn.me?.x ?? 0, card: !!irr.drawn.gameOver };
-      })) as { room: string; cond: string; x: number; card: boolean };
+        return { room: irr.drawn.room, cond: irr.drawn.condition, x: irr.drawn.me?.x ?? 0, y: irr.drawn.me?.y ?? 999, card: !!irr.drawn.gameOver };
+      })) as { room: string; cond: string; x: number; y: number; card: boolean };
       if (s.card && !card) {
         card = true;
         await ph.page.screenshot({ path: path.join(shots, 'hearts-game-over-844x390.png') });
@@ -107,10 +115,13 @@ export async function defeatFacts(kit: Kit & { shots?: string }): Promise<void> 
       else if (s.cond === 'hurt' && !shotHurt) {
         shotHurt = true;
         await ph.page.screenshot({ path: path.join(shots, 'defeat-hurt-844x390.png') });
-      } else if (s.room === 'outpost' && s.x < 20 * c.tile && stick) {
-        await ph.cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ ...stick, id: 1 }] });
-        await sleep(400);
-        await ph.cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+      } else if (s.room === 'outpost' && stick && (s.y < ledgeY || s.x < 20 * c.tile || s.x > 32 * c.tile)) {
+        const way = s.y >= ledgeY && s.x > 32 * c.tile ? await pointOn(ph, '[data-stick]', 0.1) : stick;
+        if (way) {
+          await ph.cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ ...way, id: 1 }] });
+          await sleep(400);
+          await ph.cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+        }
       }
     }
     await ph.page.screenshot({ path: path.join(shots, 'hearts-cantina-844x390.png') });
