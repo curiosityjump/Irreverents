@@ -92,7 +92,7 @@ into the shared documents.
 
 - **Banners: one queue** (Step 19, `src/client/draw/banner.ts`).
   `queueBanner({ key, text, frames?, color? })` from any draw file (a
-  level discovered, `level:<id>`; a clean getaway, `heist:`; later a piece
+  level discovered, `level:<id>`; a clean getaway, `heist:`; an alarm's horn, wave or row, `alarm:` from `draw/alarm-banner.ts`, 2026-11-24; later a piece
   found, a hero freed); `render()` draws the queue last. One at a time, in
   the order queued, two seconds each by default (`BANNER_FRAMES`); a key
   already waiting or up is ignored; at most four wait. Centred across the

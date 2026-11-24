@@ -167,6 +167,14 @@ export function createMoments(content: Content, myPlayer: string, myId: string) 
           case 'call-completed':
             out.push({ moment: 'bell', room: String(ev.area), x: Number(ev.x), y: Number(ev.y), key: hash(ev.tick, 'bell'), tick: ev.tick, mine, delay: 0 });
             return;
+          // The owner's 2026-11-24 report: the camp's horn made no sound. DRAFT: the bell's sounds until a horn has its own.
+          case 'outpost-call-started':
+            return at(ev.by, ev, 'call-windup', mine);
+          case 'outpost-call-completed': {
+            const room = content.outposts?.[String(ev.outpost)]?.room ?? '';
+            out.push({ moment: 'alarm-rising', room, x: null, y: null, key: hash(ev.tick, 'horn', String(ev.outpost)), tick: ev.tick, mine, delay: 0 });
+            return;
+          }
           case 'alert-changed':
             if (Number(ev.to) > Number(ev.from)) out.push({ moment: 'alarm-rising', room: String(ev.area), x: null, y: null, key: hash(ev.tick, 'alarm'), tick: ev.tick, mine, delay: 0 });
             return;

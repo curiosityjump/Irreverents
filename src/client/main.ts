@@ -22,6 +22,7 @@ import { drawnBanner } from './draw/banner.ts';
 import { drawnHud } from './draw/hud.ts';
 import { drawnSight, watchSightEvents } from './draw/sight.ts';
 import { drawnHeist, watchHeistEvents } from './draw/heist.ts';
+import { drawnAlarms, watchAlarmEvents } from './draw/alarm-banner.ts';
 import { drawnHall, watchHallEvents } from './draw/hall.ts';
 import { drawnRecruits, noteRecruits } from './draw/recruits.ts';
 import { drawnParts, setHeardRooms } from './draw/room-parts.ts';
@@ -148,6 +149,8 @@ const debug = {
     sight: null as ReturnType<typeof drawnSight> | null,
     /** Step 19: the clean getaways this page announced (src/client/draw/heist.ts). */
     heist: null as ReturnType<typeof drawnHeist> | null,
+    /** The alarm banners this page queued (src/client/draw/alarm-banner.ts). */
+    alarms: [] as string[],
     /** Step 7: the legends this page has announced by banner (src/client/draw/hall.ts). */
     hall: null as ReturnType<typeof drawnHall> | null,
     /** Step 13: the cages this frame drew in this room and the captives' calls (src/client/draw/recruits.ts). */
@@ -274,6 +277,7 @@ function play(worldName: string): void {
     const shown = { ...net.world, entities: drawnBodies };
     watchSightEvents(net.latest(), frameNo); // Step 19: an unseen deed's mark (draw/sight.ts)
     watchHeistEvents(net.latest()); // Step 19: a clean getaway's banner (draw/heist.ts)
+    watchAlarmEvents(content, net.latest(), me.room); // the owner's 2026-11-24 report: a finished horn and what it brings are announced (draw/alarm-banner.ts)
     watchHallEvents(net.latest()); // Step 7: a new legend's banner, wherever this page is (draw/hall.ts)
     setHeardRooms(net.heardRooms()); // Step 3: plates drawn from the server's copy too (draw/room-parts.ts, plateAsDrawn)
     const camera = render(g, shown, content, me.room, { me: me.id, frame: frameNo, drawn: seen });
@@ -321,6 +325,7 @@ function play(worldName: string): void {
     d.banner = drawnBanner();
     d.sight = drawnSight();
     d.heist = drawnHeist();
+    d.alarms = drawnAlarms();
     d.hall = drawnHall();
     d.recruits = drawnRecruits();
     d.parts = drawnParts();
