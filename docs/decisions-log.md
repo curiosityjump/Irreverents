@@ -288,3 +288,10 @@ document as a decision of theirs.
 - **Why this way:** your rule replaces it: "Heros should have hearts which can be lost. Once all heros in the party are out of hearts, that's a game over". Switched off by data, nothing deleted. The Bandit Camp and the quarry keep their throw a little longer, until two other builders' checks no longer lean on it.
 - **To change it:** `"on": true` in `content/defeat/castle-street.json` brings the throw back.
 - **Where:** `docs/mechanisms/defeat.md`, "Hearts". `DRAFT:`
+
+### 2026-11-24 · At a game over, the weapon you had goes back where you found it
+- **Decided by:** Step 23 builder (`handoff-prompts/weapons-pick-up-and-swing.md`), `session_017WiGzJahGCHPU26omeZQNq`
+- **Instead of asking:** when the whole party is out of hearts and everyone is back in the cantina, what happens to the sword or hammer you were holding?
+- **Why this way:** the brief: "a carried weapon at a game over goes back where it was found". The camp's hammer is back on its spot at once, and a sword you stole from a camp fighter is back in his hand, so the place is as you first found it. A weapon you lost earlier in the fight and left lying stays where it lies.
+- **To change it:** delete `src/sim/systems/weapon-game-over.ts` and the weapon lies where you fell, as before.
+- **Where:** `docs/mechanisms/weapons.md`, "Carriers"; `docs/mechanisms/defeat.md`, game over.

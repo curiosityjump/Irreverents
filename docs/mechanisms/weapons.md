@@ -91,6 +91,17 @@ reasons). It falls, bounces and slides by the orb's physics
   his id is nowhere in the world (loose, in a hand, or kept for a party
   member), so swords do not pile up in his room
   (`step23-returned-carrier-unarmed`).
+- **At a game over** (`weapon-game-over`, 589, after Step 21's
+  `heart-game-over`, 588): each loose weapon that left a player of the game
+  over within its beat goes back where it was found. That covers the one the
+  last fall knocked loose, and anything the game over itself let go. One
+  from a source is removed and its source stands it again the next tick,
+  with no restock wait. One from a carrier is removed and put back in his
+  hand if he is there with empty hands; if he is beaten and gone, he comes
+  back armed. A weapon with no `src`, or one lost earlier and lying
+  elsewhere, stays where it is (`DRAFT:`; event `weapon-returned`;
+  `step23-game-over-hammer-back-to-source`,
+  `step23-game-over-sword-back-to-carrier`).
 
 `INTENT:` every `weapon-*` system runs only where `weaponWorld` is true
 (the server's world or a scenario's: no `world.taken`, and some body nobody
@@ -119,7 +130,7 @@ wall and the hammer, sword and spear's test sources.
 - Scenarios `step23-*` (each with its control where the step names one):
   `-pick-up-and-swing`, `-any-hero-holds-it-<hero>`,
   `-hard-hit-knocks-it-loose`, `-steal-from-a-carrier`, `-thrown-knocks-down`,
-  `-thrown-out-leaves-it`, `-each-hero-keeps-their-own`, `-returned-carrier-unarmed`,
+  `-thrown-out-leaves-it`, `-each-hero-keeps-their-own`, `-returned-carrier-unarmed`, `-game-over-hammer-back-to-source`, `-game-over-sword-back-to-carrier`,
   `-hammer-breaks-the-wall`, `-one-file`, `-source-stands-another`. Fact `weapon`
   (`src/scenarios/facts/weapon.ts`): what a body holds at a tick, or how
   many lie loose in a room.

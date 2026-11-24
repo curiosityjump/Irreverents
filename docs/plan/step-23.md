@@ -300,3 +300,9 @@ Decided from it (this overrides anything above that says otherwise):
 - A carrier's weapon carries `src: ~carrier:<id>` (`carrierTag`), so it is tracked through every hand and drop the way a source's id is. A carrier back from being beaten for good is armed only if no weapon with his tag is in the world. `step23-returned-carrier-unarmed` (the grappler steals camp-fighter-2's sword, beats him for good with it, leaves for 90 s and comes back: he is back with nothing in his hands), watched to fail on the code before (he was handed a second sword at 6941).
 - **Not scripted:** the other half (his sword gone from the world and he comes back armed). A scenario cannot remove a player, and that is the only way the sword leaves the world today (nothing uses a sword up).
 - `step20-camp` (vehicles, landed at 3a8a30a) failed once in a full `npm run check` and passed 3 of 3 alone on the same tree, a timing flake under load like `step20-machine`.
+
+**Fix 3 (a held weapon at game over goes back).**
+
+- Built on Step 21's `game-over` event (heart-game-over, 588; landed at ecae3ed) with no edit to its files: `weapon-game-over` (589). Measured: the last fall always knocks the weapon loose (weapon-loose) at the start of the beat, so at the game over nothing is in hand. The rule takes back each loose weapon that left a game-over player within the beat (read from its id's tick). Both halves are scripted (source: the camp's hammer; carrier: camp-fighter-2's sword) and both fail with the system removed.
+- `step21-game-over-drops` (the hearts builder's check) stays green: its hero is handed a sword with no `src`, which stays lying. The comment in `heart-game-over.ts` ("a held weapon ... left where their holder stood") is the hearts builder's, and I told them it is now half true.
+- A weapon lost earlier in a fight (a hard hit that was not a fall) and left lying stays where it lies at the game over (`DRAFT:`).

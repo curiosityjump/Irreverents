@@ -1,0 +1,276 @@
+{
+  "//": "DRAFT (Step 23; Step 21's game over): the walk of step23-steal-from-a-carrier with the party on its last heart (the grappler's). The grappler steals camp-fighter-2's sword (tick 600) and stands in the camp; camp-fighter-2 puts them on the floor at 1265, which knocks the sword loose and costs the last heart. At the game over (1325) the sword goes back into camp-fighter-2's hand, and no sword lies in the camp. The source's half is step23-game-over-hammer-back-to-source. Watched to fail with weapon-game-over doing nothing (the sword lies where the grappler fell, and camp-fighter-2's hands are empty).",
+  "id": "step23-game-over-sword-back-to-carrier",
+  "gate": null,
+  "proves": "a weapon a hero stole from a carrier and held at a game over goes back to the carrier: camp-fighter-2 holds his sword again",
+  "room": "outpost",
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "placements": true,
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 135,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 20,
+      "to": 45,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 160,
+      "to": 520,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 200,
+      "to": 202,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 224,
+      "to": 226,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 248,
+      "to": 250,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 272,
+      "to": 274,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 296,
+      "to": 298,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 320,
+      "to": 322,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 344,
+      "to": 346,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 368,
+      "to": 370,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 392,
+      "to": 394,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 416,
+      "to": 418,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 440,
+      "to": 442,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 464,
+      "to": 466,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 488,
+      "to": 490,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 512,
+      "to": 514,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 560,
+      "to": 584,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 600,
+      "to": 602,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 610,
+      "to": 612,
+      "hold": [
+        "interact"
+      ]
+    }
+  ],
+  "ticks": 1330,
+  "expect": [
+    {
+      "fact": "weapon",
+      "entity": "camp-fighter-2",
+      "at": 1,
+      "is": "sword"
+    },
+    {
+      "fact": "event",
+      "event": "weapon-taken",
+      "player": "a",
+      "where": {
+        "weapon": "sword"
+      },
+      "between": [
+        595,
+        612
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "heart-lost",
+      "player": "a",
+      "where": {
+        "left": 0
+      },
+      "between": [
+        1240,
+        1290
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "weapon",
+      "entity": "camp-fighter-2",
+      "at": 1300,
+      "is": null
+    },
+    {
+      "fact": "weapon",
+      "at": 1300,
+      "loose": [
+        1,
+        1
+      ],
+      "room": "outpost",
+      "weapon": "sword"
+    },
+    {
+      "fact": "event",
+      "event": "weapon-returned",
+      "where": {
+        "weapon": "sword",
+        "carrier": "camp-fighter-2"
+      },
+      "between": [
+        1300,
+        1330
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "weapon",
+      "entity": "camp-fighter-2",
+      "at": 1330,
+      "is": "sword"
+    },
+    {
+      "fact": "weapon",
+      "at": 1330,
+      "loose": [
+        0,
+        0
+      ],
+      "room": "outpost",
+      "weapon": "sword"
+    },
+    {
+      "fact": "in-room",
+      "player": "a",
+      "at": 1330,
+      "room": "cantina"
+    }
+  ],
+  "world": {
+    "heartsLost": {
+      "grappler": 4,
+      "infiltrator": 3,
+      "flyer": 3
+    }
+  },
+  "placedRooms": [
+    "cantina"
+  ]
+}

@@ -153,7 +153,8 @@ The decision is `docs/plan/step-21.md`, "Hearts"; it is built in pushes
   is). After the beat, for every player: let go of what it carries or holds
   it, a carried prize back (`returnPrize`, `prize-returned`), a held power
   (an orb, `popOrb`) and a held weapon (`makeLoose`, Step 23) left where it
-  stood; a `move` effect to the game over's room and a 1-tick `flatten` if
+  stood (then Step 23's `weapon-game-over`, 589, sends a weapon from a source
+  or a carrier back where it was found, `docs/mechanisms/weapons.md`); a `move` effect to the game over's room and a 1-tick `flatten` if
   it lay flat (up the next tick). Then every heart back (`refillHearts`),
   every alert lowered to 0 (`lowerAlert`), every wave walking off
   (`outpostWave.going`, `signaler.queued` 0, callers idle), and

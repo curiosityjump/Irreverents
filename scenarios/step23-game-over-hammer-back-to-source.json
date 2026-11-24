@@ -1,0 +1,217 @@
+{
+  "//": "DRAFT (Step 23; Step 21's game over): the party comes into the Bandit Camp with one heart left (the grappler's). The grappler jumps the wall, steps back and picks up the camp's hammer at its source (column 10, tick 142), walks east into the camp and stands, never swinging. camp-fighter-1 puts them on the floor at 619: the fall knocks the hammer loose (D-081) and costs the last heart. At the game over (679) the hammer lying there goes back: it is gone, and the source stands it again on its tile at 680, with no restock wait. Control: step23-game-over-sword-back-to-carrier is the carrier's half; watched to fail with weapon-game-over doing nothing (the hammer lies where the grappler fell and the source waits out its restock).",
+  "id": "step23-game-over-hammer-back-to-source",
+  "gate": null,
+  "proves": "a weapon a hero held at a game over goes back where it was found: the camp's hammer, knocked loose by the last fall, stands on its own spot again the tick after the game over",
+  "room": "outpost",
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "placements": true,
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 118,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 20,
+      "to": 45,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 132,
+      "to": 140,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 142,
+      "to": 144,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 146,
+      "to": 148,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 150,
+      "to": 152,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 154,
+      "to": 156,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 158,
+      "to": 160,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 170,
+      "to": 330,
+      "x": 1
+    }
+  ],
+  "ticks": 720,
+  "expect": [
+    {
+      "fact": "event",
+      "event": "weapon-taken",
+      "player": "a",
+      "where": {
+        "weapon": "hammer",
+        "src": "camp-hammer"
+      },
+      "between": [
+        130,
+        160
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "heart-lost",
+      "player": "a",
+      "where": {
+        "left": 0
+      },
+      "between": [
+        600,
+        640
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "weapon",
+      "at": 678,
+      "loose": [
+        1,
+        1
+      ],
+      "room": "outpost",
+      "weapon": "hammer"
+    },
+    {
+      "fact": "weapon",
+      "at": 678,
+      "loose": [
+        0,
+        0
+      ],
+      "room": "outpost",
+      "weapon": "hammer",
+      "x": [
+        150,
+        190
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "game-over",
+      "between": [
+        660,
+        700
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "weapon-returned",
+      "where": {
+        "weapon": "hammer",
+        "src": "camp-hammer"
+      },
+      "between": [
+        660,
+        700
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "weapon",
+      "at": 681,
+      "loose": [
+        1,
+        1
+      ],
+      "room": "outpost",
+      "weapon": "hammer"
+    },
+    {
+      "fact": "weapon",
+      "at": 681,
+      "loose": [
+        1,
+        1
+      ],
+      "room": "outpost",
+      "weapon": "hammer",
+      "x": [
+        150,
+        190
+      ]
+    },
+    {
+      "fact": "in-room",
+      "player": "a",
+      "at": 720,
+      "room": "cantina"
+    },
+    {
+      "fact": "weapon",
+      "player": "a",
+      "at": 720,
+      "is": null
+    }
+  ],
+  "world": {
+    "heartsLost": {
+      "grappler": 4,
+      "infiltrator": 3,
+      "flyer": 3
+    }
+  },
+  "placedRooms": [
+    "cantina"
+  ]
+}
