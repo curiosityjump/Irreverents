@@ -1,0 +1,26 @@
+{
+  "//": "DRAFT: the guard's own sheet (sprites/cast/guard.png, cut by tools/art/cast/make.py) as a stand-in for the armoured guard (Step 4 town tiers, push 3), until the cast lane cuts P08 chibi-enemy-animation row 4 (docs/mechanisms/asset-coverage.md). A delivered sheet replaces it by editing this file.",
+  "id": "armoured-guard",
+  "image": "sprites/cast/guard.png",
+  "cell": {"w": 56, "h": 48},
+  "anchor": {"x": 21, "y": 20},
+  "fps": 8,
+  "frames": {
+    "idle": [0, 1, 2, 3, 4, 5, 6, 7],
+    "run": [8, 9, 10, 11, 12, 13],
+    "air": [16, 17],
+    "attack": [24, 25, 26, 27],
+    "hurt": [32, 33, 34],
+    "down": [40, 41],
+    "held": [48, 49, 50, 51],
+    "talk": [56, 57, 58, 59],
+    "tumble": [64, 65, 66, 67],
+    "jump": [16],
+    "fall": [17]
+  },
+  "fpsBy": {"idle": 6, "run": 12, "attack": 14, "hurt": 10, "down": 2, "held": 10, "talk": 9, "air": 8, "tumble": 14},
+  "moods": {
+    "2": {"idle": [72, 73, 74, 75], "run": [80, 81, 82, 83, 84, 85], "air": [88, 89], "attack": [96, 97, 98, 99], "hurt": [104, 105, 106], "held": [112, 113, 114, 115], "talk": [120, 121], "tumble": [128, 129, 130, 131], "down": [40, 41]},
+    "3": {"idle": [136, 137, 138, 139], "run": [144, 145, 146, 147, 148, 149], "air": [152, 153], "attack": [160, 161, 162, 163], "hurt": [168, 169, 170], "held": [176, 177, 178, 179], "talk": [184, 185], "tumble": [192, 193, 194, 195], "down": [40, 41]}
+  }
+}

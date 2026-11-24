@@ -1,6 +1,6 @@
 {
   "id": "step4-tier-cap-holds",
-  "proves": "Step 4's town tiers (doc 24, bounded crowds): a dispatch row waits while it would take the street past its cap. In the castle street the hero fights on for ninety seconds (a step east or west before each swing, so the rows from both sides do not simply shove them out by the west door) and the whistles and the bell are let finish: after level 3's row (8 people: 3 placed and 5 arrived) calls keep completing (four by 5200, the alert at 3 to 6600), but no further row walks in and the street never holds more than 8. Control (watched to fail): the cap off (npcDispatchCapOn 0), and the last row walks in again past it",
+  "proves": "Step 4's town tiers (doc 24, bounded crowds): a dispatch row waits while it would take the street past its cap. In the castle street the hero fights on for ninety seconds (a step east or west before each swing, so the rows from both sides do not simply shove them out by the west door) and the whistles and the bell are let finish: after level 3's row (8 people: 3 placed and 5 arrived) calls keep completing (four by 5200, the alert at 3 to 6600), but no further row walks in and the street never holds more than 8. Re-timed (push 3, the armoured guard in level 3's row): with him the fight lasts longer, and by tick 8389 the street is down to 2 people (the others beaten or followed the hero out), so the waiting row walks in under the cap, as designed; the no-further-row count now ends at 8380, after 13 calls had completed with the street full and no row let in. Control (watched to fail): the cap off (npcDispatchCapOn 0), and the last row walks in again past it",
   "room": "castle-street",
   "placements": true,
   "players": [
@@ -716,7 +716,7 @@
       "event": "dispatch-arrived",
       "between": [
         0,
-        8800
+        8380
       ],
       "count": [
         2,

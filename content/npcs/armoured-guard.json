@@ -1,0 +1,16 @@
+{
+  "//": "DRAFT (Step 4, the town's tiers, push 3): a guard of the town's watch in armour; the same fixed moods as the guard (D-055: scripted, never AI). The barks are placeholders (D-057).",
+  "id": "armoured-guard",
+  "role": "guard",
+  "side": "good",
+  "moods": {
+    "1": "routine",
+    "2": "plead",
+    "3": "charge"
+  },
+  "barks": {
+    "distress": "Halt!",
+    "rage": "FOR THE WATCH!!",
+    "reassured": "As you were."
+  }
+}

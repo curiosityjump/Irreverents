@@ -1,0 +1,9 @@
+{
+  "//": "DRAFT (Step 4, the town's tiers, push 3; docs/decisions-log.md, 'Step 4: the armoured guard'): the graybox body of the town's tougher guard, who walks in with the street's top row (doc 07: 'each response wave should add a new toy'). Twice a guard's weight and nearly twice as tough, slower and with a heavier, slower swing: a punch barely moves him and a fight with him is long, so running is the better answer. Who the person is lives in content/npcs/armoured-guard.json. The id is plain; the shown name is data.",
+  "id": "armoured-guard",
+  "name": "Armoured Guard",
+  "box": { "w": 16, "h": 28 },
+  "color": "#3d5a73",
+  "verbs": ["move", "attack", "body"],
+  "tuning": "armoured-guard"
+}

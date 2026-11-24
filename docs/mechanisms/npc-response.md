@@ -476,7 +476,9 @@ page's first frame). `drawn.alert` `{ level, whistle, bell }` is the record the
 checks read (`bell`: a ringing bell's bar in the room, 0..1, or null).
 
 **The castle street's table:** doors `to-throne-room` and `to-courtyard`,
-cap 8, rows: level 1 nobody, level 2 two guards, level 3 three; entries at
+cap 8, rows: level 1 nobody, level 2 two guards, level 3 three (the middle
+one the `armoured-guard`: slower, twice the weight, toughness 180; drawn
+with the guard's sheet until his own is cut); entries at
 columns 1, 18, 22, 26, 30, 36, 44 and 46 of the floor, `entryAway` 12
 (about half a phone screen: the edges of the view).
 

@@ -117,6 +117,7 @@
       "attackStrikeTime": 0.067,
       "attackRecovery": 0.2
     },
+    "armoured-guard": { "//": "DRAFT (Step 4, the town's tiers, push 3): the town's tougher guard, in the street's top row. INTENT (there is always a way out): no jump and slower than the guard (32 px/s against 40; every hero runs 76 or more). Weight 80, twice a guard's: a punch moves him about half as far. Toughness 180 (a guard's is 100): the grappler (34 wear) drops him in 6 punches, the skirmisher (14) in 13. A slower, harder swing.", "runSpeed": 32, "runAccel": 300, "runDecel": 500, "airAccel": 200, "airDecel": 100, "attackStrength": 11000, "attackReach": 12, "attackTime": 1.0, "attackWear": 24, "attackWindup": 0.5, "attackStrikeTime": 0.067, "attackRecovery": 0.25, "weight": 80, "toughness": 180 },
     "villain": {
       "//": "INTENT (Step 18, there is always a way out): no jump, and slower than every hero runs; a person who runs or jumps needs another way out first. DRAFT (Step 18): the guard's attack numbers, a melee swing once struck (docs/plan/step-18.md).",
       "runSpeed": 40,
