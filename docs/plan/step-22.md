@@ -573,3 +573,9 @@ before you quote it.
   - Sideways, the panel covers the middle of the screen and leaves the hearts plate visible.
   - **Doubt:** `hall-frame-star` reads as a framed tile, not a star (a `DRAFT:`, and a missing-list item for Vision Partner).
 - **Still owed by this step's signal:** the e2e's "walk in, be beaten, be at the entrance with the stick moving the hero". Fold it into 3b, which walks the quarry anyway, together with one walked clear that raises the screen from the real event.
+
+### Lead review, (c) the wings (9066ffe)
+
+- `npm run build` is ok, and every `step9-*`, `step16-*` and `step22-*` scenario passes.
+- Control, run by me: the wings' source put back at [46, 13]. `step9-fades-then-source` and `step9-second-power-replaces` both fail, so the re-routed walks really reach the new tile under the strongroom.
+- Not seen: the pedestal on a phone at its new place. Push 5's found-without-being-told shots should include it.
