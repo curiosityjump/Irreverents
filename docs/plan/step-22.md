@@ -603,3 +603,11 @@ before you quote it.
 - `npm run build` is ok, and every `step9-*`, `step16-*` and `step22-*` scenario passes.
 - Control, run by me: the wings' source put back at [46, 13]. `step9-fades-then-source` and `step9-second-power-replaces` both fail, so the re-routed walks really reach the new tile under the strongroom.
 - Not seen: the pedestal on a phone at its new place. Push 5's found-without-being-told shots should include it.
+
+### Lead review, (e) the quarry's throw off (d1ce641)
+
+- `npm run build` is ok, and all 86 `step16-*`, `step21-*` and `step22-*` scenarios pass.
+- Controls, run by me:
+  - The stage set to `on: false`: `step22-restart-restores` and `step22-restart-on-game-over` fail.
+  - The quarry's `gameOver` taken out: `step22-beaten-to-entrance` fails.
+- **Accepted change of meaning:** `step22-friend-inside-no-restart` now proves that one player's hero running out, while a friend still has hearts, starts nothing over. Under the owner's hearts rule a game over moves the whole party, so the brief's old "a friend still inside" case no longer arises. The signal's line is read that way from now on.
