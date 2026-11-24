@@ -712,3 +712,8 @@ before you quote it.
   - `stage-cleared-walked`: STAGE CLEARED came from the server's event, with the page's show called 0 times.
   - `stage-beaten-entrance` passed **inside the full suite** this time. Two heroes ran out, the GAME OVER card was drawn, and the page was in quarry-road at x 4. So it is intermittent, not broken. Making it reliable and putting it back in the suite is in the fifth builder's order.
 - Looked at `push4-beaten-moment-844x390.png`: GAME OVER is legible, and so are "Back to the start of Iron Quarry" and "Every heart back". The controls stay visible.
+
+### Lead look, the phone HUD's stars (d2cb96c, the HUD builder's, agreed by message)
+
+- Looked at the fresh `push4-stage-cleared-sideways-667x375.png`. The stars are now pixel stars: gold and filled when earned, empty with a pale edge when not.
+- That settles push 4's doubt (the frame tile read as a chest). A real star sprite is still asked of Vision Partner, as a `DRAFT:` stand-in.
