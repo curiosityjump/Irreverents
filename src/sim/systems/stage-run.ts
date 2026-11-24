@@ -15,6 +15,8 @@ import { findEntity } from '../world.ts';
  *   (`stage-started`): the clock from now, the counts at zero;
  * - a `thrown-out` (Step 21's throw, the stage's defeat file landing at its
  *   entrance) of a player inside it is a try: the player waits in `pending`;
+ *   so is a `game-over` (Step 21's hearts) that lands inside the stage: every
+ *   player it moved waits, so the stage starts over on that tick;
  * - once every player still inside the stage is one of those waiting (solo:
  *   at once), the stage is put back as it began (`restoreStage`), the try
  *   counted, the clock and counts at zero (`stage-restarted`);
@@ -98,9 +100,16 @@ const system: System = {
       }
 
       for (const ev of ctx.events) {
-        if (ev.type !== 'thrown-out' || ev.player === null || run.state !== 'running') continue;
-        if (stageOfRoom(content, ev.from)?.id !== s.id) continue;
-        if (!run.pending.includes(ev.player)) run.pending.push(ev.player);
+        if (run.state !== 'running') continue;
+        if (ev.type === 'thrown-out' && ev.player !== null) {
+          if (stageOfRoom(content, ev.from)?.id !== s.id) continue;
+          if (!run.pending.includes(ev.player)) run.pending.push(ev.player);
+        } else if (ev.type === 'game-over' && rooms.has(ev.room)) {
+          // Step 22 (b): Step 21's game over landing inside the stage (the place file's `gameOver`,
+          // for the quarry its entrance) moved every player there, hearts full: each of them waits
+          // as a beaten player does, so the stage starts over below, on this tick.
+          for (const p of ev.players) if (!run.pending.includes(p)) run.pending.push(p);
+        }
       }
 
       if (run.pending.length > 0 && inside.every((e) => run.pending.includes(e.player!))) {

@@ -1,0 +1,110 @@
+{
+ "id": "step22-restart-on-game-over",
+ "proves": "Step 22 item (b): the stage starts over on Step 21's game over, not only on the throw. step21-heart-game-over-quarry's set-up with the grappler at column 55 (outside the stage's end, so the run is not cleared at once): the party's last heart, in the quarry's depot (a stage room, so a run is under way from tick 0); the fall to depot-fighter-2 at 507 is the game over, and at 567 `game-over` puts the player at the stage's entrance (quarry-road, by the door from the courtyard). On that tick the stage starts over: `stage-restarted` with tries 1, the run running again from that tick. Control (watched to fail): stage-run.ts listening only for `thrown-out` (the code before this push), and no `stage-restarted` happens; content/stages/iron-quarry.json `on: false`, and neither does it",
+ "room": "quarry-depot",
+ "placements": true,
+ "tiles": [
+  {
+   "room": "quarry-depot",
+   "tile": [
+    51,
+    14
+   ],
+   "is": "solid"
+  },
+  {
+   "room": "quarry-depot",
+   "tile": [
+    52,
+    14
+   ],
+   "is": "solid"
+  }
+ ],
+ "players": [
+  {
+   "id": "a",
+   "character": "grappler",
+   "spawn": 1
+  }
+ ],
+ "inputs": [
+  {
+   "player": "a",
+   "from": 0,
+   "to": 1,
+   "x": 0
+  }
+ ],
+ "ticks": 800,
+ "expect": [
+  {
+   "fact": "event-where",
+   "event": "game-over",
+   "where": {
+    "place": "quarry",
+    "room": "quarry-road",
+    "players": [
+     "a"
+    ]
+   },
+   "between": [
+    567,
+    567
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "event-where",
+   "event": "stage-restarted",
+   "where": {
+    "stage": "iron-quarry",
+    "tries": 1
+   },
+   "between": [
+    567,
+    567
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "event-where",
+   "event": "stage-restarted",
+   "where": {},
+   "between": [
+    0,
+    800
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "stage",
+   "stage": "iron-quarry",
+   "at": 568,
+   "state": "running",
+   "tries": 1
+  },
+  {
+   "fact": "in-room",
+   "player": "a",
+   "at": 568,
+   "room": "quarry-road"
+  }
+ ],
+ "world": {
+  "heartsLost": {
+   "grappler": 4,
+   "infiltrator": 3,
+   "flyer": 3
+  }
+ }
+}

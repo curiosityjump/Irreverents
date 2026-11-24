@@ -19,7 +19,7 @@ result. The engine knows stages, not the quarry: a second stage is one file.
 | Piece | Where | What |
 |---|---|---|
 | A stage | `content/stages/<id>.json` | `on`, `level` (its rooms are the stage's rooms; one stage per room), `entrance` (`room`, `door`: where a beaten hero lands, the same spot as the level's defeat file), `end` (`room`, `from`, `to`: a box of tiles; Step 22 push 3), `stars` (`good`, `best`, seconds; optional `tries`, default 1; push 3). |
-| Losing | `content/defeat/quarry.json` | Step 21's rule (`defeat.md`), landing at the stage's entrance. The stage writes no second rule. |
+| Losing | `content/defeat/quarry.json` | Step 21's rules (`defeat.md`): the throw, and the hearts' game over (`gameOver`), both landing at the stage's entrance. The stage writes no second rule. |
 | The run | `world.stages[id]` | `state` (`idle`, `running`, `cleared`), `started` (tick of this try), `tries` (start-overs), `pending` (players thrown out, waiting for the stage to empty), `counts` (this try's statistics: `defeated` ids, `alarms`, `seen`, `hoard`), `best` (`{stars, ticks}`, the best clear). Small; sent to pages by key. |
 | The home copy | `world.stageHome[id]` | The stage's placed bodies as a fresh world places them, taken the first tick the stage is seen and never re-read from files. Kept with a kept game; **left out of every snapshot** (`src/server/game.ts`): a page never restores. |
 
@@ -28,6 +28,12 @@ result. The engine knows stages, not the quarry: a second stage is one file.
 1. A played hero inside a stage room with no run under way starts one
    (`stage-started`).
 2. A `thrown-out` from a stage room is a try: the player goes in `pending`.
+   So is Step 21's `game-over` (hearts, order 588) when its `room` is a stage
+   room (the quarry's `gameOver` is the stage's entrance): every player it
+   moved goes in `pending`, so the stage starts over on that tick, hearts
+   full (`step22-restart-on-game-over`; controls: the old code, and the
+   stage `on: false`). A game over that lands outside (the cantina) starts
+   nothing over.
 3. When every player still inside the stage is pending (solo: at once, as
    the thrown hero lands at the entrance, which is inside), `restoreStage`
    runs, `tries` goes up, the clock and counts restart (`stage-restarted`).

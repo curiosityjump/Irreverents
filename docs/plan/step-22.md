@@ -401,6 +401,21 @@ For the next builder, all measured on `main` at 6edd8be:
   stopped only at 920, by the scuffle, and the post stands.
 - `npm run check` green, gates 6 of 6.
 
+### Item (b), the stage starts over on the game over (builder `session_017WiGzEsUx1mHyijtCDT1gt`)
+
+- `stage-run.ts` also counts a `game-over` whose `room` is a stage room:
+  every player it moved goes in `pending`, so the stage starts over on that
+  tick. The thrown-out path is kept, so whichever of Step 21's two rules is
+  on, the stage starts over.
+- `step22-restart-on-game-over` uses `step21-heart-game-over-quarry`'s set-up,
+  with the grappler at column 55. At spawn 2 (column 60) the hero stands
+  inside the end box and clears the stage at tick 0. Game over at 567, then
+  `stage-restarted` tries 1 on the same tick. Both controls were watched
+  failing: the pre-change code, and the stage `on: false`.
+- Flag, not edited: `step16-caught-escape`'s `proves` still says the first
+  wave "walks in at the far east end". Since the depot push it comes in at
+  column 13, but its claims all pass.
+
 ### Lead review, owed item (a) (6edd8be), re-run at 002607b
 
 `npm run build` and `npm run check` are ok: all ten `step22-*` scenarios
