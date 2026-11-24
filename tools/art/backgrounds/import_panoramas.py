@@ -53,6 +53,56 @@ WIDTH = 960
 # here; the room file names which cut it draws.
 HAZE = {'bkg01-iron-quarry-evening': 0.35}
 
+# DRAFT (the orchestrator's rulings after the look, 2026-11-24 ~16:50 UTC): what a room draws is the
+# "-far" cut: hazed this share toward its sky (painted ledges, mushrooms and scaffolds must not read
+# as things to stand on beside real ones: lighter and plainer with distance, the contract), and with
+# FADE px added on top that carry its own top rows up into the sky colour, softening in 4-px steps,
+# so a view taller than 180 never shows a flat band with a hard line. Raising a share here and
+# re-running is the whole change; a panorama not named here gets no -far cut.
+FAR = {
+    'bkg01-forest-waterfall': 0.45,
+    'bkg01-iron-quarry-evening': 0.5,
+    'bkg01-ruins-day': 0.3,
+    'bkg02-forest-ruins-day': 0.3,
+    'bkg02-market-town-day': 0.3,
+}
+FADE = 180
+STEP = 4
+
+
+def blur_row(row, r):
+    """A horizontal box blur of one row of (r, g, b), edges clamped."""
+    n = len(row)
+    pre = [(0, 0, 0)]
+    for p in row:
+        q = pre[-1]
+        pre.append((q[0] + p[0], q[1] + p[1], q[2] + p[2]))
+    out = []
+    for x in range(n):
+        a, b = max(0, x - r), min(n, x + r + 1)
+        t = pre[b]; f = pre[a]; c = b - a
+        out.append(((t[0] - f[0]) / c, (t[1] - f[1]) / c, (t[2] - f[2]) / c))
+    return out
+
+
+def far_cut(cut, sky, haze):
+    w, h = cut.size
+    hazed = Image.blend(cut, Image.new('RGB', cut.size, sky), haze)
+    out = Image.new('RGB', (w, h + FADE), sky)
+    out.paste(hazed, (0, FADE))
+    # The top 4 rows of the hazed panorama, averaged into one row, then carried upward.
+    top = [tuple(sum(hazed.getpixel((x, y))[i] for y in range(4)) / 4 for i in range(3)) for x in range(w)]
+    steps = FADE // STEP
+    for k in range(steps):
+        t = (k + 1) / steps
+        t = t * t * (3 - 2 * t)  # eased, so the first steps stay close to the painting
+        row = blur_row(top, 2 + 6 * k)
+        y0 = FADE - (k + 1) * STEP
+        for x in range(w):
+            c = tuple(round(row[x][i] + (sky[i] - row[x][i]) * t) for i in range(3))
+            for y in range(y0, y0 + STEP):
+                out.putpixel((x, y), c)
+    return out
 
 def load(rel):
     path = os.path.join(ROOT, rel)
@@ -79,6 +129,9 @@ def main():
             hazed = Image.blend(cut, Image.new('RGB', cut.size, avg), k)
             hazed.save(os.path.join(out_dir, name + '-haze.png'), optimize=True)
             print(f'{name}-haze.png  ({round(k * 100)}% toward the sky)')
+        if name in FAR:
+            far_cut(cut, avg, FAR[name]).save(os.path.join(out_dir, name + '-far.png'), optimize=True)
+            print(f'{name}-far.png  ({round(FAR[name] * 100)}% haze, {FADE} px fade on top)')
 
 
 if __name__ == '__main__':

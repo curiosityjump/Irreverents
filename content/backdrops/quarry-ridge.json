@@ -1,12 +1,12 @@
 {
-  "//": "DRAFT: biome backgrounds (handoff-prompts/biome-backgrounds.md; docs/decisions-log.md 2026-11-24 'The owner's biome backgrounds go behind the places they fit'): the back is the owner's bkg01-iron-quarry-evening panorama, hazed 35% toward its sky so the quiet way's thin planks read in front of its painted scaffolds (HAZE in the tool; the un-hazed cut is bkg01-iron-quarry-evening.png), cut to 960x180 by tools/art/backgrounds/import_panoramas.py (whole pixels), pinned to the screen's bottom (the room's, in a view taller than the room), parallax 0.35, never repeated (its edges are not seamless); the sky above it is the panorama's top-row colour. It replaces backdrops/sky-tall.png, backdrops/sky-clouds.png, backdrops/far-cliffs.png, backdrops/quarry-mid.png; to go back, put those layers back in place of the first one (git history). Swapping the picture is the first layer's image. Before: DRAFT: stand-in drawn by tools/art/tiles/make.py (round 2). Notes: tools/art/tiles/README.md. Round 3: the sky is one tall picture pinned to the screen (no flat bands); cliffs and scaffolds are pinned to the room so they stay behind it at any height; the front strip sits in the ground under the lowest floor.",
+  "//": "DRAFT: biome backgrounds (handoff-prompts/biome-backgrounds.md; docs/decisions-log.md 2026-11-24 'The owner's biome backgrounds go behind the places they fit'): the back is the owner's bkg01-iron-quarry-evening panorama, cut to 960x180 by tools/art/backgrounds/import_panoramas.py (whole pixels) as its '-far' cut: hazed toward its sky so painted ledges don't read as things to stand on, with 180 px on top that carry its own top rows softly up into the sky colour, so a tall view shows no hard line (FAR in the tool, the orchestrator's rulings after the look), pinned to the screen's bottom (the room's, in a view taller than the room), parallax 0.35, never repeated (its edges are not seamless); the sky above that is the panorama's top-row colour. It replaces backdrops/sky-tall.png, backdrops/sky-clouds.png, backdrops/far-cliffs.png, backdrops/quarry-mid.png; to go back, put those layers back in place of the first one (git history). Swapping the picture is the first layer's image. Before: DRAFT: stand-in drawn by tools/art/tiles/make.py (round 2). Notes: tools/art/tiles/README.md. Round 3: the sky is one tall picture pinned to the screen (no flat bands); cliffs and scaffolds are pinned to the room so they stay behind it at any height; the front strip sits in the ground under the lowest floor.",
   "id": "quarry-ridge",
   "sky": [
     "#9b93e5"
   ],
   "layers": [
     {
-      "image": "backdrops/bkg01-iron-quarry-evening-haze.png",
+      "image": "backdrops/bkg01-iron-quarry-evening-far.png",
       "parallax": 0.35,
       "y": "bottom",
       "offsetY": 0,
