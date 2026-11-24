@@ -294,3 +294,9 @@ Decided from it (this overrides anything above that says otherwise):
 - Both places a power is taken swap: an orb (`power-take`) and a lit pedestal (`power-sources`), through one helper, `swapOut` (`src/sim/power-orbs.ts`). The old power's orb keeps its `src`, so a pedestal's power swapped out keeps that pedestal dark until it fades. `step9-second-power-replaces` (pedestal, then orb) and its control; watched to fail on the old code. Every `step9-*` green.
 - **Not watched to fail:** the `swappedBy` guard (the hero who swapped a power out does not take it back until stepped off it). In every run tried the popped orb slides out from under the hero before `powerRetakeTime`, so the run is the same without it; it is there for an orb that lands against a wall at the hero's feet.
 - "One thing in all, weapon or power" is still not built (the inbox question stands): it would be `swapOut` called from `weapon-take`, and the weapon dropped in `power-take`/`power-sources`.
+
+**Fix 2 (swords do not pile up).**
+
+- A carrier's weapon carries `src: ~carrier:<id>` (`carrierTag`), so it is tracked through every hand and drop the way a source's id is. A carrier back from being beaten for good is armed only if no weapon with his tag is in the world. `step23-returned-carrier-unarmed` (the grappler steals camp-fighter-2's sword, beats him for good with it, leaves for 90 s and comes back: he is back with nothing in his hands), watched to fail on the code before (he was handed a second sword at 6941).
+- **Not scripted:** the other half (his sword gone from the world and he comes back armed). A scenario cannot remove a player, and that is the only way the sword leaves the world today (nothing uses a sword up).
+- `step20-camp` (vehicles, landed at 3a8a30a) failed once in a full `npm run check` and passed 3 of 3 alone on the same tree, a timing flake under load like `step20-machine`.

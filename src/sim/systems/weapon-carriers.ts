@@ -1,6 +1,6 @@
 import { emitEffect } from '../effects.ts';
 import type { System } from '../types.ts';
-import { canHold, weaponWorld } from '../weapons.ts';
+import { canHold, carrierTag, weaponWorld } from '../weapons.ts';
 
 /**
  * Bad guys who come at you with a weapon (Step 23, D-009: "weapons can be
@@ -9,8 +9,14 @@ import { canHold, weaponWorld } from '../weapons.ts';
  * is handed that weapon once, the first tick it is in this world. Knocked
  * loose (systems/weapon-loose.ts), it lies there to be stolen; the carrier
  * is not handed another (`c.weaponCarrier` stays).
+ * A carrier beaten for good comes back a fresh body (Step 5's beaten-return):
+ * he is handed his weapon again only if the one he was handed is not still
+ * in the world, lying loose or in anyone's hand (kept for a party member
+ * too), so swords do not pile up in his room. His weapon carries
+ * `src: carrierTag(id)` for that, wherever it goes.
  * A carrier holding a weapon swings with it: numbersOf serves every body.
- * DRAFT: handed once, never again (a power's carrier regains it on getting up).
+ * DRAFT: handed once per body, never again while that body lives (a power's
+ * carrier regains it on getting up); a returned one only while his own is gone.
  * Runs before the verbs (100).
  */
 const system: System = {
@@ -28,7 +34,11 @@ const system: System = {
       const w = weapons.find((x) => x.carriers.includes(e.id) || x.carriers.includes(e.kind));
       if (!w) continue;
       e.c.weaponCarrier = { at: world.tick };
-      if (!e.c.weapon) emitEffect(ctx, e, { kind: 'weapon', weapon: w.id, by: e.kind });
+      const tag = carrierTag(e.id);
+      const out = world.entities.some(
+        (x) => x.c.weapon?.src === tag || x.c.loose?.src === tag || Object.values(x.c.weaponKept ?? {}).some((k) => k.src === tag),
+      );
+      if (!e.c.weapon && !out) emitEffect(ctx, e, { kind: 'weapon', weapon: w.id, by: e.kind, src: tag });
     }
   },
 };

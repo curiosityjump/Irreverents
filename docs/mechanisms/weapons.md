@@ -84,6 +84,13 @@ reasons). It falls, bounces and slides by the orb's physics
   and `weapon-struck`, spares a friend by the friend shares, and drops.
 - **Carriers** (`weapon-carriers`, 26): a body nobody plays named in a
   weapon's `carriers` is handed it once. Knocked loose, it is there to steal.
+  The weapon carries `src: carrierTag(id)` (`~carrier:<id>`, never a source
+  id: the kind refuses a source id starting with `~`) through every hand and
+  drop. A carrier beaten for good comes back a fresh body (Step 5's
+  `beaten-return`) and is handed his weapon again only if the one tagged with
+  his id is nowhere in the world (loose, in a hand, or kept for a party
+  member), so swords do not pile up in his room
+  (`step23-returned-carrier-unarmed`).
 
 `INTENT:` every `weapon-*` system runs only where `weaponWorld` is true
 (the server's world or a scenario's: no `world.taken`, and some body nobody
@@ -112,7 +119,7 @@ wall and the hammer, sword and spear's test sources.
 - Scenarios `step23-*` (each with its control where the step names one):
   `-pick-up-and-swing`, `-any-hero-holds-it-<hero>`,
   `-hard-hit-knocks-it-loose`, `-steal-from-a-carrier`, `-thrown-knocks-down`,
-  `-thrown-out-leaves-it`, `-each-hero-keeps-their-own`,
+  `-thrown-out-leaves-it`, `-each-hero-keeps-their-own`, `-returned-carrier-unarmed`,
   `-hammer-breaks-the-wall`, `-one-file`, `-source-stands-another`. Fact `weapon`
   (`src/scenarios/facts/weapon.ts`): what a body holds at a tick, or how
   many lie loose in a room.

@@ -274,3 +274,10 @@ document as a decision of theirs.
 - **Why this way:** the owner, 2026-11-24: "Similar to kirby - cant have multiple powers at once". Touching a second power's orb, or a lit pedestal, takes it; the one you held pops out where you stand, as a knocked-loose one does, and lies there for anyone (or fades). You do not take it back while still standing on it, so standing still never swaps back and forth; step off and walk back over it to swap again. A power you already hold is walked through. A weapon and a power together still stay (asked of the owner in the inbox).
 - **To change it:** `swapOut` in `src/sim/power-orbs.ts`, called from the two places a power is taken; removing the two calls and the two `h.c.power?.id === ...` tests brings back walking through.
 - **Where:** `docs/mechanisms/powers.md`, "Carriers and orbs".
+
+### 2026-11-24 · A beaten bad guy who comes back carries his sword again only if his old one is gone
+- **Decided by:** Step 23 builder (`handoff-prompts/weapons-pick-up-and-swing.md`), `session_017WiGzJahGCHPU26omeZQNq`
+- **Instead of asking:** when a camp fighter who carried a sword is beaten for good and walks back in 90 s later, does he have a sword again?
+- **Why this way:** the brief: "Swords must not pile up". He comes back with empty hands while the sword he was handed is still somewhere in the world (lying in the camp, in your hand, or carried by another party member). Once it has left the world (its holder left the game), he comes back armed.
+- **To change it:** `weapon-carriers` (`src/sim/systems/weapon-carriers.ts`): drop the `out` test and he is armed every time, as before.
+- **Where:** `docs/mechanisms/weapons.md`, "Carriers".

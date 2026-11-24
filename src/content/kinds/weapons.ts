@@ -196,6 +196,8 @@ const kind: ContentKind = {
         const other = sourceOwner.get(s.id);
         if (other !== undefined) fail(file, `${where}.id`, `source "${s.id}" is already a source of weapon "${other}": source ids are unique across every weapon`);
         else sourceOwner.set(s.id, w.id);
+        // A carrier's weapon carries a `~carrier:` src (carrierTag, src/sim/weapons.ts): no source id may look like one.
+        if (s.id.startsWith('~')) fail(file, `${where}.id`, `source "${s.id}" starts with "~", which is kept for a carrier's weapon`);
         const room = content.rooms[s.room];
         if (!room) return fail(file, `${where}.room`, `no room "${s.room}" (rooms: ${known(content.rooms)})`);
         const [tx, ty] = s.tile;

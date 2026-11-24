@@ -1,0 +1,482 @@
+{
+  "//": "DRAFT (Step 23; Step 5's beaten for good): the walk of step23-steal-from-a-carrier: the grappler knocks camp-fighter-2's sword loose and takes it (tick 600), then swings it on him until a slam defeats him for good (tick 961; gone at 1049). The grappler walks back west over the wall and out of the camp's doorway into the courtyard; 90 s after the camp is empty camp-fighter-2 is back at his place (tick 6940), and the grappler walks back in. He holds nothing, because the sword he was handed is still in the world, in the grappler's hand. Watched to fail on the code before (he was handed a second sword). Not scripted: the other half (his sword gone from the world, a player who left with it, and he comes back armed) has no way to remove a player in a scenario; it is the same test read the other way.",
+  "id": "step23-returned-carrier-unarmed",
+  "gate": null,
+  "proves": "a carrier beaten for good comes back with empty hands while the weapon he was handed is still in the world (here in the hero's hand), so his weapons do not pile up",
+  "room": "outpost",
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "placements": true,
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 135,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 20,
+      "to": 45,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 160,
+      "to": 520,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 200,
+      "to": 202,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 224,
+      "to": 226,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 248,
+      "to": 250,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 272,
+      "to": 274,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 296,
+      "to": 298,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 320,
+      "to": 322,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 344,
+      "to": 346,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 368,
+      "to": 370,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 392,
+      "to": 394,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 416,
+      "to": 418,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 440,
+      "to": 442,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 464,
+      "to": 466,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 488,
+      "to": 490,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 512,
+      "to": 514,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 560,
+      "to": 584,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 600,
+      "to": 602,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 610,
+      "to": 612,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 640,
+      "to": 642,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 664,
+      "to": 666,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 688,
+      "to": 690,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 712,
+      "to": 714,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 736,
+      "to": 738,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 760,
+      "to": 762,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 784,
+      "to": 786,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 808,
+      "to": 810,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 832,
+      "to": 834,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 856,
+      "to": 858,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 880,
+      "to": 882,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 904,
+      "to": 906,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 928,
+      "to": 930,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 952,
+      "to": 954,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 976,
+      "to": 978,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 1060,
+      "to": 1484,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 1080,
+      "to": 1100,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 1120,
+      "to": 1140,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 1160,
+      "to": 1180,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 1200,
+      "to": 1220,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 1240,
+      "to": 1260,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 1280,
+      "to": 1300,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 1320,
+      "to": 1340,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 1360,
+      "to": 1380,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 1400,
+      "to": 1420,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 1440,
+      "to": 1460,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 1480,
+      "to": 1500,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 1540,
+      "to": 1550,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 7100,
+      "to": 7110,
+      "y": -1
+    }
+  ],
+  "ticks": 7300,
+  "expect": [
+    {
+      "fact": "weapon",
+      "entity": "camp-fighter-2",
+      "at": 1,
+      "is": "sword"
+    },
+    {
+      "fact": "event",
+      "event": "weapon-taken",
+      "player": "a",
+      "where": {
+        "weapon": "sword"
+      },
+      "between": [
+        595,
+        612
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "defeated-gone",
+      "where": {
+        "target": "camp-fighter-2"
+      },
+      "between": [
+        1000,
+        1100
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "in-room",
+      "player": "a",
+      "at": 6000,
+      "room": "courtyard"
+    },
+    {
+      "fact": "event",
+      "event": "defeated-back",
+      "where": {
+        "target": "camp-fighter-2"
+      },
+      "between": [
+        6800,
+        7050
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "weapon",
+      "entity": "camp-fighter-2",
+      "at": 7050,
+      "is": null
+    },
+    {
+      "fact": "weapon",
+      "entity": "camp-fighter-2",
+      "at": 7300,
+      "is": null
+    },
+    {
+      "fact": "in-room",
+      "player": "a",
+      "at": 7300,
+      "room": "outpost"
+    },
+    {
+      "fact": "weapon",
+      "player": "a",
+      "at": 7300,
+      "is": "sword"
+    }
+  ]
+}

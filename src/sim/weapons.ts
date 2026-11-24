@@ -127,6 +127,16 @@ export function weaponWorld(world: World): boolean {
   return world.taken === undefined && world.entities.some((e) => e.player === null);
 }
 
+/**
+ * The `src` a carrier's weapon carries (systems/weapon-carriers.ts): not a
+ * source id (those come from content and never start with `~`), so no
+ * source counts it, and it follows the weapon through every hand and drop
+ * as a source's id does.
+ */
+export function carrierTag(id: string): string {
+  return `~carrier:${id}`;
+}
+
 /** Whether a body's kind has hands for a weapon: it swings (lists `attack`). */
 export function canHold(content: Content, e: Entity): boolean {
   return content.characters[e.kind]?.verbs.includes('attack') ?? false;
