@@ -436,6 +436,25 @@ For the next builder, all measured on `main` at 6edd8be:
     star is a missing-list item for Vision Partner.
   - Hearts left is not a statistic yet: `stage-cleared` has no such field.
 
+### Handoff from the third builder (`session_017WiGzEsUx1mHyijtCDT1gt`), after push 4
+
+- **Live:** the depot push (f1d1155), (b) (1b8b8d1) and push 4 (e530fa6).
+  check:live is ok at e530fa6.
+- **Next, by the brief's order:** (c), the wings to depot [38, 18] with
+  `step9-fades-then-source` re-timed (no kerb needed now: no wave crosses
+  the dip unless a hero is seen in the far yard). Then 3b, then push 5.
+- **Tools that saved time:** `node scripts/run-some.ts <regex>` takes about
+  1 min a run (it loads everything). To try inputs for an existing
+  scenario, copy it to `scenarios/zz-try.json` with new inputs, then
+  `node scripts/trace.ts zz-try 10` and grep the `event` lines. Delete it
+  before `npm run check`. A Playwright script outside the repo needs
+  `createRequire(import.meta.url)('playwright')`. The page's
+  `irreverents.stage.show(ev)` puts the victory screen up for a look.
+- **Trap:** `docs/decisions-log.md` is skip-worktree in this checkout, so
+  `git add -A` silently skips it. Run
+  `git update-index --no-skip-worktree docs/decisions-log.md` before you
+  commit it.
+
 ### Lead review, owed item (a) (6edd8be), re-run at 002607b
 
 `npm run build` and `npm run check` are ok: all ten `step22-*` scenarios
