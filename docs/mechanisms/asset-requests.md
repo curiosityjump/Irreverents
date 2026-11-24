@@ -83,6 +83,12 @@ that, not Vision Partner's check, is the real pace).
 
 - **Master-list edits owed (no Docs editing here; whoever can edit the Drive list applies them):** MA-22 "Irreverents" title wordmark → DELIVERED (owner's Irreverents_Title_Screen_Concept_2026-11-23.png, live as the start screen title at 2781572; `docs/mechanisms/asset-coverage.md`).
 
+### Handoff state (2026-11-24 ~14:35 UTC, second Vision Partner)
+
+- No hourly Drive check is scheduled (the permission check refused it); check Drive when woken.
+- Addenda to the master list are filed as separate REQ docs (listed above); the master list itself, the Master Board rows and the Drive changelog line still need Docs/Sheets editing that no session here has.
+- Open owner questions: Q-014, Q-015 (both defaulted as built). Inbox and outbox empty.
+
 ### Requests in flight
 
 | Filed (UTC) | REQ doc | Priority |
