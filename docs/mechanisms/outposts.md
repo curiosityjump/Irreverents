@@ -65,7 +65,7 @@ routine is standing still). The network copies them with no network code.
 | 58 | `outpost-fight` | Any person of the `bad` side whose body lists `attack`, in any room (`DRAFT:`, widened for Step 16's rooms), who sees a hero walks at where they saw them and swings in `npcChargeReach` (a fresh press every other tick; the attack's own cooldown sets the pace); losing sight, goes to the last place seen and stands. **The chase (2026-11-24, `DRAFT:`):** a kind with `search` in `content/npcs/` (the fighter, the heavy, the brute) instead goes on `c.outpostChase` `{ phase, dir, ticks, from, stall }`: `chasing` (walking at the last place seen; a step or wall that stops him 45 ticks counts as arrived), `searching` (on `search.on` px the way the hero was seen going, never into a walk door, then turning every `search.turn` s until `search.time` is up), `returning` (to his placement's column; a wave's person, with no placement, just stops). Seeing a hero at any step starts `chasing` again. Proven by `chase-jump-over-turns` and `chase-lost-goes-back` in `test-chase`; e2e `chase-comes`, `chase-goes-back`. Callers going to call are left alone. Mood stays 1 (D-060: business as usual). **Who they fight** is the NPC kind's `fights` (Step 18): `on-sight` (left out) is any hero seen; `when-struck` (the villain) keeps only heroes in the person's `c.struck`, written by `fight-struck` (101), and still only one it sees. **A new fighting kind keeps the way out** (`INTENT:`, `docs/deliberate-designs.md`): no `jump` in its body, and a `runSpeed` below the slowest hero's 76. |
 | 59 | `outpost-wave` | Walks queued waves in at `entry` while the room's people plus the wave fit under `bound`; otherwise the wave waits. Each of a wave's people starts walking to where the caller of the last finished call saw a hero (Step 7; `outpostSendOn`). |
 | 61 | `outpost-leave` | Step 7, only for outposts with `leaveCold`/`leaveIdle`: a wave's person who has lain out cold `leaveCold` seconds in all, or stood `leaveIdle` seconds in a row with nobody to fight, walks back to the entry once up and is removed there (`outpost-left { outpost, entity }`); one who makes no headway for 1.5 s is removed where they stand. Placed people never leave. |
-| 540 | `outpost-signaler` | After physics and `impact-bodies` (520): each `hit` on the post counts one; `breakHits` of them, or one `impact` naming the post as `other` at `breakSpeed` or more, breaks it. |
+| 540 | `outpost-signaler` | After physics and `impact-bodies` (520): each `hit` on the post counts one; `breakHits` of them, or one `impact` naming the post as `other` at `breakSpeed` or more, breaks it With the outpost's `ownSpared`, blows by its own side's people do not count (below). |
 
 Events: `outpost-call-started { by, outpost }`, then
 `outpost-call-completed { by, outpost }` or `outpost-call-stopped { by,
@@ -308,6 +308,22 @@ strength that come in from the sides."* Optional fields in
   (the depot, the test rooms). The camp's: 0.5 s, 200 (the fence 200 and the
   stalls 150 break; the barricade 300 holds: the wagon's job). The wind-up is
   shorter than `outpost-fight`'s 45-tick give-up.
+- `ownSpared` (2026-11-24, `DRAFT:`, the orchestrator's reading of D-061,
+  `docs/decisions-log.md` "The camp's own blows leave its horn whole"):
+  `outpost-signaler` leaves out a `hit` on the post, or an `impact` into it,
+  whose doer is of the outpost's own side: a person no player plays whose NPC
+  kind's `side` is the first caller's. The doer of a hit is its `by`; of an
+  impact, whoever sent the striking body flying (`c.flying.by`), else the
+  post's own `c.flying.by` (a ram's driver), else the striking body. So a
+  camp fighter's swing, and a hero he knocked into the post, do not count; a
+  hero's blow, a body or thing a hero threw or knocked, and a ram a hero
+  drives still do. Left out: false (every other outpost). The camp's: true.
+  Measured (sim, each of the four starting heroes standing at column
+  21 for 90 s, 10 starts each): without it 13 breaks in 40 fights, every one
+  by the camp's own (fighters 9, heavies 4), 3 before the second row; with
+  it 0. Proven by `camp-own-blows-spare-horn` (control: false, camp-fighter-1
+  breaks it at 1019); hero breaks in the camp with it on:
+  `step7-post-ends-it`, `step20-camp-hijack-and-crash`.
 
 Proven in `test-sides` by `sides-wave-both-sides` (control: no `entries`). The door rule by `camp-entries-door-kept-clear` (the infiltrator at column 12.7 when the second call completes: both of its people walk in east of it, then it walks out; control: no `doorClear` and no `sendNoneNearer`, one walks in at column 6).
 **Switched on in the quarry's depot** ("The depot", above) **and in the Bandit Camp** (2026-11-24): entries
@@ -328,8 +344,10 @@ tiles, at the screen's edge. Proven by `camp-entries-east-break-through`
 second row's two first drawn 0.1-1.1 tiles inside the left and right screen
 edges, 0-4.5 s after "Two more!" (control: `entries` only `[[41,10]]`, both
 first drawn east); the shot is `docs/plan/step-4-shots/camp-row-both-sides-750x340.png`.
-The fight beside the horn post (column 20) sometimes breaks it before the
-second call (D-061: then no row comes); the fact starts again in a fresh world. `step23-thrown-out-leaves-it` and
+Until `ownSpared` (2026-11-24) the camp's own fight beside the horn post
+(column 20) broke it before the second call in about 1 run in 4 (D-061: then
+no row comes); the fact still starts again in a fresh world if a page draws
+the horn broken before the banner. `step23-thrown-out-leaves-it` and
 `step23-game-over-sword-back-to-carrier` were re-timed for it (the first row
 now walks in at column 62, not at 41 beside the hero), and
 `step12-walk-out-ends-it` and `camp-entries-door-kept-clear` for

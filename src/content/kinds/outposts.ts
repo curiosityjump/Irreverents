@@ -98,6 +98,15 @@ export interface Outpost {
    * and stays cover (src/sim/systems/outpost-break-through.ts).
    */
   breakThrough: { time: number; upTo: number } | null;
+  /**
+   * DRAFT, optional (left out: false; e2e-intermittent-reds brief, the orchestrator's reading of
+   * D-061, docs/decisions-log.md "The camp's own blows leave its horn whole"): a blow whose doer is
+   * one of the outpost's own side (a person who is no player, of the callers' NPC side) does not
+   * count toward breaking the post: his own swing, or a body he knocked into it. A hero's blow, a
+   * body or thing a hero threw or knocked, a ram a hero drives and a suplex's splash still do
+   * (src/sim/systems/outpost-signaler.ts).
+   */
+  ownSpared: boolean;
 }
 
 declare module '../types.ts' {
@@ -112,7 +121,7 @@ const kind: ContentKind = {
   parse(raw, read) {
     const o = read.object(raw, '');
     if (!o) return null;
-    read.only(o, ['id', 'room', 'signaler', 'callers', 'entry', 'bound', 'callTime', 'callAgain', 'breakHits', 'breakSpeed', 'waves', 'tryAgain', 'leaveCold', 'leaveIdle', 'entries', 'entryAway', 'announce', 'doorClear', 'sendNoneNearer', 'breakThrough'], '');
+    read.only(o, ['id', 'room', 'signaler', 'callers', 'entry', 'bound', 'callTime', 'callAgain', 'breakHits', 'breakSpeed', 'waves', 'tryAgain', 'leaveCold', 'leaveIdle', 'entries', 'entryAway', 'announce', 'doorClear', 'sendNoneNearer', 'breakThrough', 'ownSpared'], '');
     const out: Outpost = {
       id: read.string(o, 'id', ''),
       room: read.string(o, 'room', ''),
@@ -134,7 +143,12 @@ const kind: ContentKind = {
       doorClear: o.doorClear === undefined ? null : read.number(o, 'doorClear', '', { min: 0, max: 1000, integer: true }),
       sendNoneNearer: o.sendNoneNearer === undefined ? 0 : read.number(o, 'sendNoneNearer', '', { min: 0, max: 200 }),
       breakThrough: null,
+      ownSpared: false,
     };
+    if (o.ownSpared !== undefined) {
+      if (typeof o.ownSpared !== 'boolean') read.fail('ownSpared', `must be true or false, but is ${describe(o.ownSpared)}`);
+      else out.ownSpared = o.ownSpared;
+    }
     if (o.breakThrough !== undefined) {
       const b = read.object(o.breakThrough, 'breakThrough');
       if (b) {
