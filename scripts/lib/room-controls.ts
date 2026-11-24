@@ -48,12 +48,12 @@ export function runRoomControls(content: Content): { problems: string[]; count: 
     }
     // The real content plus this control's rooms. A control that brings its
     // own `game` is a whole map of its own: the real rooms, what is
-    // placed in them and the outposts in them (Step 12) and the levels made of them and their pieces (Step 14) and the heists in them (Step 19) and the captives in them (Step 13) and their dispatch tables (Step 4, the town's tiers) and their defeat files (Step 21), are left out so only the control's rooms are judged.
+    // placed in them and the outposts in them (Step 12) and the levels made of them and their pieces (Step 14) and the heists in them (Step 19) and the captives in them (Step 13) and their dispatch tables (Step 4, the town's tiers) and their defeat files (Step 21) and the stages made of them (Step 22), are left out so only the control's rooms are judged.
     // The art named after real rooms goes too, and the powers (a source names a real room): neither changes a room's
     // logic (collision never depends on art; docs/mechanisms/art-pipeline.md).
     const files = { ...base };
     if (raw.game !== undefined) {
-      for (const rel of Object.keys(files)) if (/^(rooms|placements|outposts|dispatch|cantina|levels|completion|heists|atlases|backdrops|decor|looks|powers|recruits|hall|defeat)\//.test(rel)) delete files[rel];
+      for (const rel of Object.keys(files)) if (/^(rooms|placements|outposts|dispatch|cantina|levels|completion|heists|atlases|backdrops|decor|looks|powers|recruits|hall|defeat|stages)\//.test(rel)) delete files[rel];
       files['game.json'] = raw.game;
     }
     for (const [id, room] of Object.entries(raw.rooms)) files[`rooms/${id}.json`] = room;

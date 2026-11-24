@@ -226,3 +226,22 @@ fact ok; h1/h2 failed on reconnect, a flake it already knew of). Still open:
 the depot's waves still never reach a hero, now owed in the next depot push,
 together with the wings' move to [38, 18]. And no banner yet for being thrown
 out; that is Step 21's.
+
+### Push 2: a stage, and starting over
+
+- `content/stages/iron-quarry.json`, kind `src/content/kinds/stages.ts`,
+  `src/sim/stage.ts` (`restoreStage`), `src/sim/systems/stage-run.ts`; the
+  home copy is left out of snapshots by one line in `src/server/game.ts`.
+  `docs/mechanisms/stages.md`.
+- **People are restored by my own home copy, not `beaten.ts`'s
+  `restorePeople`:** it was not on `main` when push 2 was built (checked
+  `origin/main` at push 1's landing). Switch when it lands; the brief's
+  "don't write a second restore for people" is owed then.
+- **Old kept games:** the home copy is built from the placements as a fresh
+  world places them, the first tick a stage is seen, so a saved game made
+  before push 2 also restores to the files' first state, not to whatever it
+  held when push 2 arrived.
+- **Not checked by a scenario:** a friend who walks out after the other was
+  beaten (the start-over then happens as they leave); the network trap (a
+  restore runs only with nobody but the beaten inside, so no page draws
+  those bodies at that moment; push 4's e2e looks at it on the phone page).

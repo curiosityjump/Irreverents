@@ -1242,3 +1242,9 @@ document as a decision of theirs.
 - **To change it:** one character in `content/rooms/outpost.json` (row 9, column 4), or the brawler's jump in `content/tuning.json`.
 - **Where:** `content/rooms/outpost.json`; `scenarios/step20-camp-every-hero-gets-in.json`.
 
+### 2026-11-24 · Step 22: beaten in the Iron Quarry, the whole quarry starts over: its people back at their posts, the horn mended, the waves gone; with a friend still inside, it waits for them
+- **Decided by:** Step 22 builder, push 2, `session_017WiGzHD6TvY2XxEG4B3rJU`, on the lead's brief
+- **Instead of asking:** "When friends play the stage together and one is beaten, does it start over at once? Does the clock stop while the menu is open? What does a friend who joins halfway do?"
+- **Why this way:** the owner: "real way to lose/die, which pushes you back to the entrance to start over"; the step's decided reading: with friends, a beaten player is back at the entrance at once and the stage starts over only when nobody else is left inside (solo: at once). A friend walking out without being beaten does not start it over. The world never pauses, so the clock does not stop for the menu; a friend joining mid-run shares its clock and counts. What you found for good stays found.
+- **To change it:** `"on": false` in `content/stages/iron-quarry.json` turns the stage off (the quarry then keeps its state like everywhere else); the rule is `src/sim/systems/stage-run.ts`, what is put back `restoreStage` in `src/sim/stage.ts`.
+- **Where:** `docs/mechanisms/stages.md`; `docs/plan/step-22.md`, "Builder notes". `DRAFT:`

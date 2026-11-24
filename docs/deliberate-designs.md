@@ -84,6 +84,9 @@ words.
 **Beaten in the Bandit Camp or the alerted street, you are thrown bodily out into the courtyard, and anything you carried is taken back.**
 → Intended, and it is the way out, not a trap. "There is always a way out" (`CLAUDE.md`) and D-019 ("battles, last stands and narrow escapes, NOT an automatic-reload punishment loop"): the throw is the exit. You are free the moment you get up (never held longer than the beat plus `flattenTime`), the place keeps its state, and you can walk straight back in. A place with no landing spot throws nobody. Step 21 builder, 2026-11-23, `DRAFT:` numbers; `INTENT:` in `src/sim/systems/defeat-throw.ts`; `docs/mechanisms/defeat.md`.
 
+**Beaten in the Iron Quarry stage, the whole quarry is put back as it began: its people at their posts, the horn whole, broken things mended.**
+→ Intended, and only there. The owner (2026-11-24 ~00:30 UTC) asked for "one level ... a real way to lose/die, which pushes you back to the entrance to start over": his own exception, for a stage he asked for by name, to D-077 (a room's state is never reset when it empties) and D-019. Everywhere outside a stage (`content/stages/`) nothing is put back; inside one, only being beaten starts it over, and only once no friend is still inside. What you found for good (the level's pieces, a power source, a recruit) stays found.
+
 ---
 
 ## Where these live in the code
@@ -97,6 +100,7 @@ Keep this table in step with the entries:
 | The store never throws; an unreadable file is set aside | `src/server/store.ts` (`openStore`, `load`) |
 | The pedestal's card has no button | `src/client/draw/hall.ts` (`drawHall`) |
 | Beaten, you are thrown out (the throw is the way out) | `src/sim/systems/defeat-throw.ts` |
+| Beaten in a stage, the stage is put back as it began | `src/sim/stage.ts` (`restoreStage`) |
 | People can be outrun and jumped over | `src/sim/npc/behaviours.ts` (`charge`); `content/tuning.json` (`characters.guard`, `.shopkeeper`, `.toll-keeper` `"//"`) |
 
 **Still unmarked:** list entries that have no `INTENT:` at their site yet.

@@ -1,0 +1,9 @@
+{
+  "//": "DRAFT (Step 22, docs/decisions-log.md 'Step 22'; docs/mechanisms/stages.md): the Iron Quarry played as a stage, the owner's 'one level where there is a whole outpost you need to navigate though without dying'. It starts on the road just inside the doorway from the courtyard (where content/defeat/quarry.json throws a beaten hero), and ends at the depot's far east end (columns 61-62, above its floor), past the strongroom. The star times are placeholders until Step 22 push 3 measures three scripted clears. 'on': false is the quarry as before Step 22: nothing is put back.",
+  "id": "iron-quarry",
+  "on": true,
+  "level": "iron-quarry",
+  "entrance": { "room": "quarry-road", "door": "to-courtyard" },
+  "end": { "room": "quarry-depot", "from": [61, 9], "to": [62, 13] },
+  "stars": { "good": 600, "best": 300 }
+}

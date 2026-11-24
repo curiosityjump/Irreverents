@@ -532,7 +532,9 @@ export function attachGame(server: http.Server, opts: GameOptions) {
         const room = findEntity(gw.world, playerEntityId(p.id))?.room ?? '';
         let text = byRoom.get(room);
         if (text === undefined) {
-          const w: World = { ...gw.world, entities: gw.world.entities.filter((e) => e.player !== null || e.room === room) };
+          // Step 22: a stage's home copy (World.stageHome, src/sim/stage.ts) is the server's alone: a page never restores.
+          const { stageHome: _home, ...shared } = gw.world;
+          const w: World = { ...shared, entities: gw.world.entities.filter((e) => e.player !== null || e.room === room) };
           byRoom.set(room, (text = JSON.stringify({ t: 'snap', w, stamps, ev: gw.events } satisfies ServerMessage)));
         }
         send(p.sock, text);
