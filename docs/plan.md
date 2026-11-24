@@ -354,9 +354,9 @@ Full text: `docs/plan/step-14.md`
 
 ## Step 15 — A second place, worth coming back to
 
-**Status: open, claimed by session_017WiGzHD8gtSGTegd3n8W4G, 2026-11-24.** (Builder session_017WiGzHUtUjXLziDxPA9ST8 on `handoff-prompts/step-15-forest.md`, push 5, the quiet way; pushes 1-4c live.)
+**Closed 2026-11-24, 16:40 UTC.** The kingdom has a second place: the Bramble Forest (`DRAFT:` name and place, the owner named none), walked to through a doorway on the courtyard floor, left of the quarry's, along a road and onto a forest trail, played as a second stage like the Iron Quarry (hearts, game over at its entrance, STAGE CLEARED with stars). It has its own look from the owner's art: loam and mossy ground from P10, the waterfall-forest panorama, mushroom-cap boughs, dark earth behind its pockets. Three secrets each take a different hero (a one-tile crawl into the root tunnel for the infiltrator, the canopy for the flyer, a held hatch for the grappler with the heavy crate, or a friend); a mossy boulder no hero can lift waits for the Brawn power, which lasts the walk; the deepest pocket opens a short way back. Fighters, a heavy, a brute, a thrower on the root mound and a lookout whose horn brings waves from both sides; a spear by the way in; and a quiet way over the guards under the canopy's long limb that only the infiltrator fits, cleared unseen in 32 s. 32 `step15-*` scenarios and a phone e2e case (`scripts/e2e/forest.ts`), every push re-run by the lead with a control watched failing; no `src/` edit. **Not tried on a real iPhone.** Left for others (`docs/for-the-orchestrator.md`): the guard vehicles as machines (vision-gaps row 15), the camera hiding a hero on the canopy under the party plate when upright, the start menu's two stage rows unshot, the limb reading as an earth shelf. Taste for the owner: whether the trail is fun to run, whether the boulder pulls you back, the forest as the choice. Lead: `session_017WiGzHD8gtSGTegd3n8W4G`.
 
-Full text: `docs/plan/step-15.md`
+Full text: `docs/plan-archive.md`, "Step 15". Durable record: `docs/mechanisms/stages.md`, `docs/architecture.md` ("region").
 
 ## Step 16 — A first real level: many screens, enemies all through it, and a guarded place to get into unseen
 
