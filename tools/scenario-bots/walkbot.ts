@@ -29,12 +29,14 @@ const me: any = spawnPlayer(world, content, { player: 'a', character: plan.hero,
 if (plan.power) me.c.power = { id: plan.power };
 const { populateRoom, spawnBody } = await import(R + '/src/sim/world.ts');
 if (plan.placements) populateRoom(world, content, plan.room);
+for (const r of plan.placedRooms ?? []) populateRoom(world, content, r);
 for (const b of plan.entities ?? []) spawnBody(world, content, b);
 const box = content.characters[me.kind]!.box;
 type P = { x: number; y: number; jump: boolean; grab: boolean; attack: boolean };
 const pressed: P[] = [];
 let leg = 0;
 let sub = 0; // per-leg counter
+let attackAt = -999;
 let jumpLeft = 0, jumpRest = 0, stuckSince = 0, lastX = me.x, lastRoom = me.room;
 const events: any[] = [];
 const marks: Record<string, any> = {};
@@ -89,6 +91,22 @@ for (; t < MAX && leg < plan.legs.length; t++) {
   else if (L.attack) { p.attack = true; if (++sub >= 3) { leg++; sub = 0; } }
   else if (L.face !== undefined) { p.x = L.face; if (++sub >= 2) { leg++; sub = 0; } }
   else if (L.hold) { p.x = L.hold; if (L.jump && sub < 18) p.jump = true; if (++sub >= L.n) { leg++; sub = 0; } }
+  // plan.fight (push 3): punch a bad guy just ahead every 24 ticks without stopping (stage-bot's FIGHT_ON_THE_MOVE rule);
+  // standing (a wait leg), turn to one just behind first.
+  if ((L.fight ?? plan.fight) && (L.toCol !== undefined || L.wait !== undefined) && p) {
+    const feetY = me.y + box.h;
+    const near = (dir: number) => world.entities.find((e: any) => {
+      const npc = content.npcs?.[e.kind];
+      if (!npc || npc.side !== 'bad' || e.room !== me.room || e.c?.flattened || e.c?.gone || e.c?.defeated) return false;
+      const fb = content.characters[e.kind]!.box;
+      const gap = dir > 0 ? e.x - (me.x + box.w) : me.x - (e.x + fb.w);
+      return e.y < feetY && e.y + fb.h > me.y && gap > -fb.w && gap < 22;
+    });
+    const ahead = p.x || me.facing || 1;
+    let foe = near(ahead);
+    if (!foe && L.wait !== undefined && near(-ahead)) { p.x = -ahead; foe = null; }
+    if (foe) { if (t - attackAt >= 24) attackAt = t; p.attack = t - attackAt < 4; }
+  }
   pressed.push(p);
   const held = [...(p.jump ? ['jump'] : []), ...(p.grab ? ['grab'] : []), ...(p.attack ? ['attack'] : [])];
   const ev = step(world, { a: { x: p.x, y: p.y, held } }, content);

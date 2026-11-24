@@ -1,0 +1,23 @@
+{
+  "//": "DRAFT (Step 15 push 3, docs/decisions-log.md 'The forest's guarded spot'): the Bramble Trail's guarded spot, at the upper trail's east end before the shaft down to the deep pocket (the stage's end). Only the lookout calls (`trail-lookout`, column 91; the horn `trail-horn` at 92). Getting caught brings waves from the sides (the owner, 2026-11-24: 'Alarms should spawn more enemies of increasing strength that come in from the sides'): entries on the upper trail west of the spot (columns 44, 60, 80; none on the hatch at 66-67 or the slab at 84-85, which may be open) and east of it (column 95, on the shaft's top bough), the nearest at least 8 tiles from where the lookout saw the hero; a one-person first wave comes from the east, between the hero and the shaft (src/sim/systems/outpost-wave.ts alternates sides wave by wave). `entry` (column 80) is only the fallback for a call with no sighting. Rows grow as at the check outpost: one fighter, two, then a fighter and a heavy for ever. The trail has six placed people, so the bound is 10 (four of a wave's at once); waves with nobody to fight walk off after 10 s, beaten ones after 5 s out cold (as in the quarry's depot), so later waves fit. Numbers copied from the depot (3 s to sound, 6 s between calls, 3 hits or 300 px/s to break the post). Every number is a first guess.",
+  "id": "forest-trail",
+  "room": "forest-trail",
+  "signaler": "trail-horn",
+  "callers": ["trail-lookout"],
+  "leaveCold": 5,
+  "leaveIdle": 10,
+  "entry": [80, 8],
+  "entries": [[44, 8], [60, 8], [80, 8], [95, 8]],
+  "entryAway": 8,
+  "bound": 10,
+  "callTime": 3,
+  "callAgain": 6,
+  "breakHits": 3,
+  "breakSpeed": 300,
+  "waves": [
+    [{ "character": "outpost-fighter", "npc": "outpost-fighter" }],
+    [{ "character": "outpost-fighter", "npc": "outpost-fighter" }, { "character": "outpost-fighter", "npc": "outpost-fighter" }],
+    [{ "character": "outpost-fighter", "npc": "outpost-fighter" }, { "character": "heavy-fighter", "npc": "heavy-fighter" }]
+  ],
+  "announce": ["Here they come!", "Two more!", "Here comes a heavy!"]
+}

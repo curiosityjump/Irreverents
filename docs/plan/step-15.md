@@ -312,6 +312,17 @@ the start is fun or a chore; whether the visible deep pocket behind the
 cracked wall pulls you in; whether the grey boulder says "come back with
 something"; whether the trail is too long for a walker (about 45 s).
 
+### Push 3 (second builder `session_017WiGzG4nNVPXPAo2ztGmx3`): the guarded spot and the clear
+
+The guarded spot is the upper trail's east end (`content/outposts/forest-trail.json`): `trail-lookout` at column 91 (west 4 s, east 3 s), `trail-horn` at 92, entries 44, 60, 80 west and 95 east (`entryAway` 8, `bound` 10: six people are placed on the trail; `leaveCold` 5, `leaveIdle` 10 as the depot), rows 1, 2, then a fighter and a heavy. The thrower `trail-thrower` (a `ranged-fighter`) on the root mound's east end, [32, 6], looking west over the climb onto it; measured, he does not block the way over (the grappler walks over him). The spear's forest source `forest-trail-spear` at [6, 18], the trail's floor by the way in. `scripts/stage-bot.ts` is untouched: the clears were recorded with `tools/scenario-bots/walkbot.ts`, which gained `placedRooms`, `world` and `fight` (punch whoever is just ahead; standing, turn to one behind), and `tools/scenario-bots/run-some.ts` runs a few scenarios by id (a minute, against the check's seven).
+
+Scenarios: `step15-cleared` (the grappler fighting: 47.0 s, 4 defeated, 0 alarms, 3 stars, kept as best), `step15-clear-best` (the infiltrator fighting, 29.5 s, one alarm, 3 stars by time), `step15-clear-slow` (the grappler walking, 56.1 s, one alarm, 2 stars), `step15-caught-fight` (seen climbing out of the hollow; the grappler punches the lookout into his horn and breaks it, then beats the wave's fighter), `step15-caught-both-sides` (the flyer seen and not fighting: wave 1's two people walk in one each side). Star times from those runs: good 52 s, best 40 s (decisions-log "The forest's star times"). Controls watched to fail: the end box moved to rows 1-2 (`step15-cleared`); best 25 s (`-clear-best`); good 60 / best 58 (`-clear-slow`); `entries` removed (both `caught` scenarios). `step15-stage-game-over` was re-recorded (same claims, later ticks): the thrower's lobs knocked the first recording's walk back before the fighters.
+
+Flags:
+- The flyer, walking or fighting by script, is knocked out on the trail (hero-out at about 42 s) and the grappler takes over: the trail's fighters are a lot for the lightest hero. Measured, not tuned.
+- Every scripted clear is `unseen: false`: the lookout faces the only way on. The quiet ways (the flyer over the lookout's 40 px of sight; slipping past while he looks east) are not scripted.
+- Stars: two stars is earned by any first-try clear (`stars.tries` 1, Step 22's rule), so "good" only splits two from one after a start-over.
+
 ## Released to a lead, 2026-11-24 08:40 UTC (orchestrator `session_017WiGzHhT2apmWHT61rQ65G`)
 
 Why now: `docs/vision-gaps.md` (refreshed at 9dbd705) ranks row 2 first: "one level is not a world: a second region". The eight core loops of the owner's ~18:30 verdict are all built and live, and the last two full re-runs with nothing red were at 6400b44 and f434f2e. So the heading above ("nothing here is briefed") no longer holds the step back.
