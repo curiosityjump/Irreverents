@@ -1,0 +1,213 @@
+{
+  "id": "step20-camp-solo-infiltrator",
+  "proves": "Step 20 push 2 (DRAFT; solo is never locked out by headcount): the lightest hero, the infiltrator, alone in the real Bandit Camp with all its people: up the stair onto the entry step, Use beside the empty ram wagon gets in, east through the lookout, the light barrier, both stalls and the timber barricade, and Jump at full speed just past the barricade puts the infiltrator out on its feet as itself, at the cache, the wagon never wrecked. Re-timed for weapons push 2 (8b2fee3). Control (watched to fail): camp-barricade's breakSpeed set to 600: it holds and the wagon never reaches the cache",
+  "room": "outpost",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "infiltrator",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 42,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 10,
+      "to": 30,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 46,
+      "to": 48,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 55,
+      "to": 288,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 285,
+      "to": 288,
+      "hold": [
+        "jump"
+      ]
+    }
+  ],
+  "ticks": 600,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "machine-taken",
+      "where": {
+        "machine": "camp-wagon",
+        "by": "p:a",
+        "hero": "infiltrator"
+      },
+      "between": [
+        40,
+        50
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "character",
+      "player": "a",
+      "at": 60,
+      "is": "ram-wagon"
+    },
+    {
+      "fact": "event-where",
+      "event": "machine-crash",
+      "where": {
+        "machine": "camp-wagon",
+        "target": "camp-lookout",
+        "player": "a"
+      },
+      "between": [
+        120,
+        160
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "part-broken",
+      "where": {
+        "part": "camp-light-barrier"
+      },
+      "between": [
+        200,
+        300
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "part-broken",
+      "where": {
+        "part": "camp-stall-1",
+        "by": "p:a"
+      },
+      "between": [
+        200,
+        330
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "part-broken",
+      "where": {
+        "part": "camp-stall-2",
+        "by": "p:a"
+      },
+      "between": [
+        200,
+        330
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "part-broken",
+      "where": {
+        "part": "camp-barricade",
+        "by": "p:a"
+      },
+      "between": [
+        250,
+        330
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "velocity",
+      "player": "a",
+      "at": 284,
+      "vx": [
+        400,
+        560
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "machine-left",
+      "where": {
+        "machine": "camp-wagon",
+        "by": "p:a",
+        "how": "jumped"
+      },
+      "between": [
+        283,
+        290
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "machine-wrecked",
+      "where": {
+        "machine": "camp-wagon"
+      },
+      "between": [
+        0,
+        600
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "character",
+      "player": "a",
+      "at": 320,
+      "is": "infiltrator"
+    },
+    {
+      "fact": "position",
+      "player": "a",
+      "at": 600,
+      "x": [
+        1190,
+        1340
+      ]
+    }
+  ]
+}

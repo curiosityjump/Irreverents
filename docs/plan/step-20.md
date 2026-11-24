@@ -253,3 +253,30 @@ a tile off the step instead turned ten camp scenarios red. Re-timed:
 released at 3074, not 3200; one more door tap at 3086; the exit tick 3078
 to 3086, waves counted to 3085; control `hallRelativeOn` 0 still fails).
 
+**Builder B, push 2 (the wagon in the camp).** `camp-wagon` stands empty on
+the entry step (decisions-log "Step 20: the wagon in the camp stands empty";
+`docs/mechanisms/machines.md`, "In the Bandit Camp"). Notes:
+- **Not as briefed: no driver.** Seated at column 10 a camp fighter turned 9
+  scenarios red (step7 ×5, step12 ×2, step21 ×2): he swings from the seat
+  (hitting his own wagon, and starting chains where the camp flattens its
+  own), turns the parked wagon on a hero in the lookout's view, and is one
+  more person under bound 8. Empty at column 10, three still failed (heroes
+  knocked west land against it). On the step: none. Asked the orchestrator
+  (who makes the one `outpost-fight` line; whether to seat a driver now).
+- **The barricade stays 300**, not the ~540 the last notes hoped: measured,
+  a run from the step met it at 466-475 (every start time from 50 to 200
+  ticks, stick held), and at 560 after weapons push 2 (8b2fee3) moved the
+  camp's people: a wagon-only number would hang on them. Its note says so.
+- **Re-timed twice for others' pushes** (the chase, 88a048d; weapons push 2,
+  8b2fee3): my two run scenarios pin a chaotic run, so a change to the
+  camp's people moves them. Windows are wide where it was cheap.
+- **"Stays broken" is a scripted check, not a scenario**: scenarios cannot
+  save and load; `step20-camp` does it on a real store.
+- **Re-timed: none.** Every step7/12/13/19/21 camp scenario unchanged.
+- Shots: `step-20-shots/camp-wagon-*.png` (from the doorway and GET IN, both
+  sizes; through the barricade, sideways only; in the cache, both). Taken
+  before `ride-wagon-empty` landed (afea13a), so the empty wagon there still
+  shows the baked rider; on `main` it is drawn empty. The captive's bubble
+  covers part of the sideways view.
+- Not verified: two phones on screen at once in the camp (the check covers
+  two connections, not two drawn pages).

@@ -155,6 +155,39 @@ shows a rider too until `ride-wagon-empty` (asked of the art builder) is cut;
 wear shows only as the wreck, never a number. Shots of each:
 `docs/plan/step-20-shots/`.
 
+## In the Bandit Camp (Step 20, builder B, push 2)
+
+`camp-wagon` (`content/placements/outpost.json`) stands **empty on the entry
+step** (columns 5-7), facing east: the first thing in view from the doorway;
+climbing the stair (4,9) onto the step, Use reads **Get in**. Driven east it
+drops off the step and ploughs the camp (`docs/mechanisms/outposts.md`,
+"Step 20: the camp's run"). `DRAFT:` (decisions-log "Step 20: the wagon in the
+camp stands empty"): no driver, because a seated camp fighter turned seven
+camp fights (below). Checked by `step20-camp-hijack-and-crash` (grappler) and
+`step20-camp-solo-infiltrator` (control: the barricade at 600 holds),
+`scripts/checks/step20-camp.ts` (two connections; a kept game reloads with the
+barricade broken; controls: barricade 600, the store emptied before the
+restart), and e2e `machine-*` (`scripts/e2e/machine.ts`; control
+`E2E_TOUCH_BREAK=interact`).
+
+**Measured with a driver seated in the camp (not shipped):** `outpost-fight`
+still runs a person at the reins: he swings from the seat (his blow hits his
+own wagon), and turning him to face a hero turns the parked wagon
+(`machine-driven`: `if (m.vx === 0) m.facing = d.facing`). One line in
+`outpost-fight` (skip a person who is some machine's `c.seat.driver`) mended
+two of the scenarios it broke; asked of the orchestrator, since push 3's
+driven wave wagon needs it too.
+
+**A run from the step, as measured:** lookout and fighter 1 launched, the
+the light barrier (by the wagon or a fighter it flung), both stalls, the
+barricade (at about 470 when a flung fighter knocked the wagon off its
+wheels; at 560 since weapons push 2 moved the camp's people), rolling on
+into the cache. The run is chaotic: every change to the camp's people
+re-times `step20-camp-hijack-and-crash` and `-solo-infiltrator`. The horn post only snaps on the way
+back west (closing speed 450; met at about 456 after the run, which is also
+the sixteenth crash: the wreck puts the rider out on foot). Jump in the
+cache, still rolling, puts a hero out standing (`step20-camp-solo-infiltrator`).
+
 ## Still to come (builder B)
 
-The camp: `docs/plan/step-20.md` and `handoff-prompts/loop-vehicles-b.md`.
+Push 3, a wave's wagon with a bandit at the reins: `handoff-prompts/loop-vehicles-b.md`.

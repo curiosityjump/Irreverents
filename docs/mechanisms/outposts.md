@@ -232,6 +232,8 @@ out is during the second call).
 
 ## Step 20: the camp's run (`DRAFT:`, docs/decisions-log.md "Step 20: the camp's run")
 
+Since push 2 the ram wagon `camp-wagon` stands empty on the entry step (columns 5-7), facing east (`docs/mechanisms/machines.md`, "In the Bandit Camp"). It is a body nobody plays and not a person: it counts toward no `bound`, and every camp scenario ran unchanged with it there.
+
 `content/rooms/outpost.json` is 88 columns now (was 44); nothing west of the
 old east wall (column 43) moved, and every `step12-*`, `step13-*`,
 `step19-*` and `step7-*` scenario passed with no re-time. East of it, on the

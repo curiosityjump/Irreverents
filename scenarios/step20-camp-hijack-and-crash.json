@@ -1,0 +1,245 @@
+{
+  "id": "step20-camp-hijack-and-crash",
+  "proves": "Step 20 push 2 (DRAFT, docs/decisions-log.md 'Step 20: the wagon in the camp'): in the real Bandit Camp, with all its people, the grappler comes in from the doorway, up the stair onto the entry step where the ram wagon stands empty, and Use there gets in (GET IN). Driven east it drops off the step and ploughs through the camp: the lookout launched by it, the light barrier (47) burst (by the wagon or a body it flung), both market stalls and the timber barricade (75) burst by it at speed, and it rolls on into the cache; the stick then steers it: held west it brakes, turns and drives back through the camp at speed and rams the horn post, which snaps (signaler-broken by the rider). Jump puts the grappler out on its feet, the wagon never worn to a wreck. Re-timed for weapons push 2 (8b2fee3): the camp's people stand differently, the wagon now meets the barricade at its top speed. Control (watched to fail): camp-barricade's breakSpeed set to 600, above the top speed: it holds, the wagon stops at it and never rolls into the cache",
+  "room": "outpost",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 42,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 10,
+      "to": 30,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 46,
+      "to": 48,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 55,
+      "to": 290,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 290,
+      "to": 700,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 760,
+      "to": 763,
+      "hold": [
+        "jump"
+      ]
+    }
+  ],
+  "ticks": 800,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "machine-taken",
+      "where": {
+        "machine": "camp-wagon",
+        "by": "p:a",
+        "hero": "grappler"
+      },
+      "between": [
+        40,
+        50
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "character",
+      "player": "a",
+      "at": 60,
+      "is": "ram-wagon"
+    },
+    {
+      "fact": "event-where",
+      "event": "machine-crash",
+      "where": {
+        "machine": "camp-wagon",
+        "target": "camp-lookout",
+        "player": "a"
+      },
+      "between": [
+        120,
+        160
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "part-broken",
+      "where": {
+        "part": "camp-light-barrier"
+      },
+      "between": [
+        200,
+        300
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "part-broken",
+      "where": {
+        "part": "camp-stall-1",
+        "by": "p:a"
+      },
+      "between": [
+        200,
+        330
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "part-broken",
+      "where": {
+        "part": "camp-stall-2",
+        "by": "p:a"
+      },
+      "between": [
+        200,
+        330
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "part-broken",
+      "where": {
+        "part": "camp-barricade",
+        "by": "p:a"
+      },
+      "between": [
+        250,
+        330
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "velocity",
+      "player": "a",
+      "at": 284,
+      "vx": [
+        400,
+        560
+      ]
+    },
+    {
+      "fact": "position",
+      "player": "a",
+      "at": 290,
+      "x": [
+        1216,
+        1340
+      ]
+    },
+    {
+      "fact": "velocity",
+      "player": "a",
+      "at": 400,
+      "vx": [
+        -560,
+        -100
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "signaler-broken",
+      "where": {
+        "outpost": "outpost",
+        "signaler": "camp-horn-post",
+        "by": "p:a"
+      },
+      "between": [
+        400,
+        700
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "machine-left",
+      "where": {
+        "machine": "camp-wagon",
+        "by": "p:a",
+        "how": "jumped"
+      },
+      "between": [
+        755,
+        765
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "machine-wrecked",
+      "where": {
+        "machine": "camp-wagon"
+      },
+      "between": [
+        0,
+        800
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "character",
+      "player": "a",
+      "at": 800,
+      "is": "grappler"
+    }
+  ]
+}

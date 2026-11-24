@@ -78,7 +78,7 @@
       }
     },
     {
-      "//": "DRAFT (Step 20): the timber barricade before the cache. 300: the wagon at speed (340) bursts it; no hero runs that fast. A body thrown at it (up to 520) breaks it too: the wagon's top speed is under the throw cap, so it cannot be the wagon's alone (docs/decisions-log.md, 'Step 20: the camp\\'s run'). INTENT (nothing resets): broken, it stays broken in a kept game, as every breakable.",
+      "//": "DRAFT (Step 20): the timber barricade before the cache. 300: measured (builder B push 2, step20-camp-hijack-and-crash), the wagon driven from the entry step through the camp's people met it at 466-475 px/s (a fighter flung back into it knocked it off its wheels) until weapons push 2 moved the camp's people, and at its top speed 560 since: a wagon-only number above the throw cap (520) would hang on where the camp's people happen to stand; no hero runs that fast, and a body thrown hard at it (up to 520) breaks it too (docs/decisions-log.md, 'Step 20: the camp\\'s run'). INTENT (nothing resets): broken, it stays broken in a kept game, as every breakable.",
       "id": "camp-barricade",
       "kind": "breakable",
       "params": {

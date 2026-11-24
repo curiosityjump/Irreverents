@@ -417,6 +417,8 @@ async function main(): Promise<void> {
       await (await import('./e2e/tune.ts')).tuneFacts({ browser, devices, base, out, fact, errors });
       // Step 12's facts (outpost-*): into the outpost by touch, and the horn post drawn working, then broken (docs/mechanisms/outposts.md).
       await (await import('./e2e/outpost.ts')).outpostFacts({ browser, devices, base, out, fact, errors });
+      // Step 20 builder B's facts (machine-*): onto the camp's entry step by touch, GET IN beside the wagon, the stick drives it, Jump gets out (docs/mechanisms/machines.md).
+      await (await import('./e2e/machine.ts')).machineFacts({ browser, devices, base, out, fact, errors });
       // The owner's 2026-11-24 report (alarm-reads, chase-*): the camp's horn announced, a fighter comes and, out of sight, goes back (docs/plan/step-4.md).
       await (await import('./e2e/chase.ts')).chaseFacts({ browser, devices, base, out, fact, errors });
       // Step 13's facts (rescue-*): into the camp by touch, the captive's cage and call drawn, the party plate's faces (docs/mechanisms/recruits.md).

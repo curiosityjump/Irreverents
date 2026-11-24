@@ -547,6 +547,8 @@ slice.
 
 **Landed (builder A pushes 1-2):** the wagon drives and rams, its driver is pulled out with Grab, Use gets in, Jump gets out, a heavy's blow throws you out, a bandit drives it by script, in the check room `test-machine` only (`docs/mechanisms/machines.md`); not yet in the camp. **Push 3:** the wagon is drawn from its cut cells (rolling, crash, wreck; an empty seat still shows the baked rider until `ride-wagon-empty` is cut), the seated bandit is the cells' rider, a rider's plate shows their hero's face; the wagon now reaches 560 px/s and takes 16 crashes to wreck (builder B's camp asks). Shots: `docs/plan/step-20-shots/`.
 
+**Landed (builder B push 2): where the owner finds it.** Go into the Bandit Camp from the courtyard: the wagon stands empty on the step just inside the doorway. Climb up beside it and Use reads GET IN. Drive east through the lookout, the fighters, a light fence, two market stalls and a timber barricade into the cache; Jump gets out. No driver in it yet: a bandit at the reins comes with a wave (push 3).
+
 **Step:** 20 (new). **Signal:** in `docs/plan/step-20.md`. **Status: building** (builders A and B).
 
 ## 7 · Risk
