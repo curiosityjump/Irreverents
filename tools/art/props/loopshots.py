@@ -235,8 +235,23 @@ def camp():
     return out
 
 
+def wagon():
+    """props-asks-2, ask 3: the wagon idle (its baked rider), then empty, then empty with the grappler standing by
+    it, by day and by night"""
+    img, L = looks('rides')
+    hero = Image.open(os.path.join(ROOT, 'assets', 'sprites', 'heroes', 'grappler.png')).convert('RGBA').crop((0, 0, 48, 48))
+    scene = ground(90, sky=NIGHT, body=NBODY, lip=NLIP)
+    scene.alpha_composite(ground(180).crop((0, 92, 320, 180)), (0, 92))
+    for floor in (90, 176):
+        place(scene, frame(img, L['ride-wagon-idle']), 60, floor)
+        place(scene, frame(img, L['ride-wagon-empty']), 150, floor)
+        place(scene, frame(img, L['ride-wagon-empty']), 240, floor)
+        place(scene, hero, 280, floor)
+    return scene
+
+
 SCENES = {'weapons': weapons, 'rides': rides, 'powers': powers, 'treasure': treasure, 'hall': hall, 'asks': asks, 'heist': heist,
-          'cage': cage, 'undercroft': undercroft, 'camp': camp}
+          'cage': cage, 'undercroft': undercroft, 'camp': camp, 'wagon': wagon}
 
 if __name__ == '__main__':
     os.makedirs(OUT, exist_ok=True)

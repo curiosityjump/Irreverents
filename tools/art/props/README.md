@@ -285,6 +285,20 @@ later room reuses them:
 - Scene: `loops-camp-4x.png` (columns 44-64 and 64-84, whole above, broken below). `preview.py` now stands a named
   breakable in the open, as the game does (`solidLook`), and skips placed things it has no look for.
 
+**Ask 3, `ride-wagon-empty` (Step 20 builder A, `src/client/draw/machines.ts` draws it for a standing wagon whose
+seat is empty).** `DRAFT:` **an edit of an approved cell, not a cut** (`loops.ride_empty`): every P04 vehicle cell has
+the goggled rider baked in and no plate shows an empty wagon, which is on the Drive's missing-assets list (an empty
+machine or saddle, `docs/mechanisms/asset-coverage.md`, `look:ride`). From `ride-wagon-idle`: the rider's head
+cleared above the body's top edge (right of the flag pole), and the body's right half, under the rider's arm and
+hand, is the left half mirrored about the crest's middle. Group `rides`, appended (every ride cell unmoved,
+compared). Scene: `loops-wagon-4x.png` (idle, empty, empty beside the grappler, night and day).
+- **Not verified in the game:** an empty wagon was not seen drawn. Emptying a wagon's seat on the page's own copy for
+  a screenshot did not change what was drawn (the drawing reads another copy of the world); the look's id is the
+  one `machines.ts` asks for. GV-01's `transport_wagon` is a different vehicle (a guard cage wagon), not a source.
+- **Flake seen during these gates:** `check step20-machine` failed 3 times in 9 runs ("b's page never heard the
+  barrier break"; "a's page was corrected"), passing on re-run each time with nothing of this lane in the
+  simulation; already logged in Step 5's notes (bbb9702).
+
 ## Deviations from the contract
 
 - `ui-use`'s `src` is the whole 48×24 picture (normal then pressed), with no `frames`: that is how

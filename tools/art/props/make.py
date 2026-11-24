@@ -131,6 +131,7 @@ def looks_sheets():
         s.newrow()
         s.add('ride-%s-wrecked' % which, lo.ride(which, 'wrecked'))
         s.newrow()
+    s.add('ride-wagon-empty', lo.ride_empty('wagon'))  # props-asks-2, ask 3: appended, every cell above unmoved
     out.append(('rides', 'props/rides.png', s))
     # ---- the core loops' powers and pickups (loops.py: P05 rare-powers-pickups)
     s = Sheet(216)

@@ -69,6 +69,28 @@ def ride(which, state):
     return _strip([_frame(_cell(which, i)) for i in cells])
 
 
+
+def ride_empty(which):
+    """DRAFT (props-asks-2, ask 3): the machine with nobody aboard, an EDIT of an approved cell, not a cut. Every
+    P04 vehicle cell has the goggled rider baked in and no plate shows an empty one (on the Drive's missing list).
+    From the idle cell: everything above the body's top edge right of the flag pole is cleared (the rider's head),
+    and the body's right half, where the rider's arm and hand cover it, is the left half mirrored about the
+    crest's middle (x 25). Replace it with a cut the day an empty wagon is delivered."""
+    c = ride(which, 'idle')
+    out = c.copy()
+    top, mid2 = 22, 50
+    for y in range(c.height):
+        for x in range(c.width):
+            p = c.getpixel((x, y))
+            if y < top and x >= 23:
+                p = (0, 0, 0, 0)
+            elif y >= top and 2 * x > mid2:
+                xm = mid2 - x
+                p = c.getpixel((xm, y)) if 0 <= xm < c.width else (0, 0, 0, 0)
+            out.putpixel((x, y), p)
+    return out
+
+
 # ---- rare powers and pickups: P05 rare-powers-pickups ('powers'), painted on an opaque pale ground (key=)
 P05KEY = (247, 245, 243)
 POWER = ramps('gold', 'orange', 'red', 'blue', 'sky', 'purple', 'teal', 'metal', 'cloud', 'wood', 'night', 'pink',
