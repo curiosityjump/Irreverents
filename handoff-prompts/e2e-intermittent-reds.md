@@ -1,7 +1,12 @@
 # The two-page test goes red about one full run in three, a different fact each time: measure which are the game's and which are the check's
 
-**Landed so far:** nothing yet. (A builder stopping at its budget writes
-its commits here, one line, before it stops.)
+**Landed so far:** push 1 at 414564f (builder `session_017WiGzH3PZgYkQHanedEq8e`,
+stopped at its budget): `start-link-back` the game's, fixed (`start-title-late`);
+`hearts-game-over` the check's half fixed, the game's half briefed
+(`page-misses-what-happened.md`); doors and plates facts print where the
+heroes stood. Owed: the grab, doors, plates and `row-both-sides` reds
+(unknown; table in `docs/plan/step-5.md`, "The e2e's intermittent reds"),
+runs under load, and the 8 closing full runs.
 
 Brief for one builder. Written 2026-11-24 16:30 UTC by the orchestrator
 (`session_017WiGzHY5UZsWTLCH8cLm8M`). Read first:
