@@ -41,8 +41,8 @@
   #pad i.l::before { border-right-color: rgba(244, 241, 222, .8); margin-right: 9px; }
   #pad i.r::before { border-left-color: rgba(244, 241, 222, .8); margin-left: 9px; }
   #pad i.art::before { display: none; }
-  /* The stick pushes up when the thumb slides up off it (touch.ts): a small chevron above the pad says so, lit while pushed. Not over the view. */
-  #touch:not(.over) #pad::after { content: ""; position: absolute; left: 50%; top: -14px; width: 10px; height: 10px; margin-left: -6px; border: solid rgba(210, 207, 224, .45); border-width: 2px 0 0 2px; transform: rotate(45deg); pointer-events: none; }
+  /* The stick pushes up when the thumb slides up off it (touch.ts): a small chevron above the pad, shown only while pushed (DRAFT, brief phone-hud-legibility: a bare "^" at rest said nothing untold; doorways are Use's "Go in" now). Not over the view. */
+  #touch:not(.over) #pad.up::after { content: ""; position: absolute; left: 50%; top: -14px; width: 10px; height: 10px; margin-left: -6px; border: solid rgba(210, 207, 224, .45); border-width: 2px 0 0 2px; transform: rotate(45deg); pointer-events: none; }
   #touch:not(.over) #pad.up::after { border-color: var(--cream); }
   #pad i.on, #actions button.on { background: rgba(244, 241, 222, .2); color: #fff; }
   #pad i.on::before { opacity: 1; }
@@ -61,16 +61,13 @@
   /* DRAFT (brief owner-better-buttons): a button a press would do nothing with right now is dimmed (src/client/button-idle.ts); it still takes the press, and lights when pressed. */
   #actions button.idle:not(.on) > .icon { opacity: .4; filter: grayscale(.7); }
   #actions button.idle:not(.on):not(.art) { opacity: .5; }
-  /* DRAFT: in an enter doorway the Use button goes through it (touch.ts, showGoIn): its picture gives way to a small arched door with an up arrow and the words "Go in". Same button, same place. */
+  /* DRAFT (brief phone-hud-legibility, 2026-11-24; was Step 19's dimmed picture under the word, and "Go in" with no picture): when the Use button says what a press will do here (touch.ts, showUseWord: Take, Get in, Go in, Buy, Break, Ring), its picture stays lit, as pressable as any button, and the word sits on a small dark pill across its foot, a gold rim saying "now". "Go in" adds a small arched door. Same button, same place, same touch area. */
   #actions button .go { display: none; }
-  #actions button.go-in { color: transparent; text-shadow: none; }
-  #actions button.go-in > .icon { display: none; }
-  #actions button.go-in > .go { display: flex; position: absolute; top: 0; right: 0; bottom: 0; left: 0; flex-direction: column; align-items: center; justify-content: center; gap: 4px; color: var(--cream); text-shadow: 0 0 2px #0f0f1c, 0 1px 1px #0f0f1c; pointer-events: none; }
-  /* DRAFT (Step 19): any other word (Take, Buy, Break, Ring): the picture dims and the word sits over it (touch.ts, showUseWord). */
-  #actions button.says { color: transparent; text-shadow: none; }
-  #actions button.says > .icon { opacity: .3; }
-  #actions button.says > .go { display: flex; position: absolute; top: 0; right: 0; bottom: 0; left: 0; align-items: center; justify-content: center; color: var(--cream); font-size: 12px; text-shadow: 0 0 2px #0f0f1c, 0 1px 1px #0f0f1c, 0 0 4px #0f0f1c; pointer-events: none; }
-  #actions button.go-in > .go::before { content: "\25B2"; display: block; width: 16px; height: 18px; box-sizing: border-box; border: 2px solid var(--cream); border-bottom: 0; border-radius: 8px 8px 0 0; background: rgba(15, 15, 28, .55); font-size: 8px; line-height: 15px; text-align: center; box-shadow: 0 0 2px #0f0f1c; }
+  #actions button.go-in, #actions button.says { color: transparent; text-shadow: none; overflow: visible; }
+  #actions button.go-in > .icon, #actions button.says > .icon { display: block; opacity: 1; filter: none; }
+  #actions button.go-in > .go, #actions button.says > .go { display: flex; position: absolute; left: 50%; bottom: -2px; transform: translateX(-50%); align-items: center; gap: 3px; padding: 3px 6px 2px; border-radius: 8px; background: rgba(20, 18, 40, .92); box-shadow: 0 0 0 1px #e09a1e, 0 1px 0 1px rgba(15, 15, 28, .7); color: var(--cream); font-size: 10px; letter-spacing: .06em; white-space: nowrap; text-shadow: none; pointer-events: none; }
+  #touch.over #actions button.go-in > .go, #touch.over #actions button.says > .go { bottom: 0; font-size: 9px; padding: 2px 5px 1px; }
+  #actions button.go-in > .go::before { content: ""; display: block; width: 7px; height: 8px; box-sizing: border-box; border: 2px solid var(--cream); border-bottom: 0; border-radius: 4px 4px 0 0; }
 
   #hint { position: absolute; left: 0; right: 0; top: var(--hint-top, 200px); padding: 0 16px; display: flex; align-items: center; justify-content: flex-start; gap: 8px; text-transform: uppercase; letter-spacing: .12em; text-align: center; color: rgba(210, 207, 224, .8); }
   #hint[hidden] { display: none; }
@@ -78,7 +75,7 @@
   #stage-continue { position: fixed; z-index: 5; right: max(16px, calc(env(safe-area-inset-right) + 8px)); bottom: max(16px, calc(env(safe-area-inset-bottom) + 8px)); min-width: 136px; height: 56px; padding: 0 22px; border: 0; border-radius: 28px; background: radial-gradient(circle at 50% 38%, var(--night3), var(--night2) 70%); box-shadow: inset 0 0 0 2px #e09a1e, 0 3px 0 2px rgba(20, 18, 40, .7); color: var(--cream); font: 700 16px/1 ui-rounded, "SF Pro Rounded", "Nunito", system-ui, -apple-system, sans-serif; letter-spacing: .1em; text-transform: uppercase; touch-action: manipulation; -webkit-appearance: none; appearance: none; }
   #stage-continue[hidden] { display: none; }
   #touch.stage-up { visibility: hidden; }
-  #hint button { pointer-events: auto; touch-action: manipulation; width: 28px; height: 28px; flex: none; border: 1px solid rgba(210, 207, 224, .45); border-radius: 50%; background: var(--night1); color: var(--pale); font: 600 14px/1 ui-rounded, system-ui, sans-serif; padding: 0; }
+  #hint button { pointer-events: auto; touch-action: manipulation; width: 44px; height: 44px; flex: none; border: 8px solid transparent; background-clip: padding-box; box-shadow: inset 0 0 0 1px rgba(210, 207, 224, .45); border-radius: 50%; background-color: var(--night1); color: var(--pale); font: 600 14px/1 ui-rounded, system-ui, sans-serif; padding: 0; }
 </style>
 </head>
 <body>

@@ -389,7 +389,7 @@ glyph there, the rest have none.
 | Use | `assets/ui/use.png` (props lane's DRAFT hand on the U08 plate; MA-01) | **Plate yes, glyph no** (MA-01 stands) | P07 plate + the same DRAFT hand; its words unchanged |
 | Switch | U08 `special.png` (gold sparkle) | **Partly**: P07 round star button (666,963) reads "special", as today; P05's swap arrows (353,284,431,344) and party-swap glyph (584,24,768,145) are the only swap pictures and read as a gold blob at 24 px | P07 star button |
 | Pressed looks | U08's own pressed halves | **No**: P07 shows no pressed state | derived: plate darkened to 70% and sunk 1 px, glyph kept (DRAFT) |
-| "Would do nothing" (dimmed) | none | **No** source; it is a style | CSS: picture at 40%, 70% grey (DRAFT) |
+| "Would do nothing" (dimmed) | none | **No** source; it is a style | CSS: picture at 40%, 70% grey (DRAFT). The phone-HUD brief (2026-11-24) tried hiding Switch when nobody is free (the orchestrator allowed it) and took it back: Step 21's `switch-refused` fact taps Switch with a full party and the page must say why, so it stays and dims |
 | Stick-up chevron, "Go in" arch, the words | CSS | P07 up-arrow key (770,919,855,1004) exists (asset-coverage `ui:use-go-in`); not this brief's | unchanged |
 
 Looked at myself: P07 `irreverents-pixel-ui-atlas.png` (whole), P05

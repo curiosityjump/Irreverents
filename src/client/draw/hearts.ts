@@ -12,13 +12,14 @@ import { drawLook, look } from './looks.ts';
 // INTENT: no digits (t-no-numbers; D-020): a heart is a picture, never a count.
 // The viewer's row is the cut looks `hud-heart-full` and `hud-heart-empty`
 // (the props builder, 2026-11-24, from the approved P07 UI atlas); a
-// friend's row is 3 by 3 hearts drawn in the same colours (DRAFT: a cut
+// friend's row is 5 by 5 hearts drawn in the same colours (DRAFT: a cut
 // that small is on the missing list). Without the looks, a stand-in of the
 // same shape is drawn.
 
-/** The viewer's hearts (9 by 8 game px, the cut look's size) and a friend's (3 by 3), as rows of pixels: '#' filled; the stand-in when a look is missing. */
+/** The viewer's hearts (9 by 8 game px, the cut look's size) and a friend's (5 by 5), as rows of pixels: '#' filled; the stand-in when a look is missing. */
 const BIG = ['.###.###.', '#########', '#########', '#########', '########.', '.#######.', '..#####..', '....#....'];
-const SMALL = ['#.#', '###', '.#.'];
+// DRAFT (brief phone-hud-legibility, 2026-11-24: a friend's 3 by 3 hearts read as "vvv" on a phone): 5 by 5, a heart's shape at any phone size.
+const SMALL = ['##.##', '#####', '#####', '.###.', '..#..'];
 /** The cut hearts' own colours (assets/ui/hud.png), so a friend's small heart matches the viewer's. */
 const FULL = '#e860a0';
 const EMPTY = '#5c5690';
@@ -27,7 +28,7 @@ const POP_FRAMES = 22;
 
 /** The size of one heart, and the step from one to the next, in game px. */
 export function heartSize(big: boolean): { w: number; h: number; step: number } {
-  return big ? { w: 9, h: 8, step: 9 } : { w: 3, h: 3, step: 4 };
+  return big ? { w: 9, h: 8, step: 9 } : { w: 5, h: 5, step: 6 };
 }
 
 let lastLeft: Record<string, number> = {};
@@ -84,7 +85,7 @@ export function drawHeartRow(g: CanvasRenderingContext2D, world: World, content:
 function heart(g: CanvasRenderingContext2D, content: Content, x: number, y: number, full: boolean, big: boolean): void {
   const s = heartSize(big);
   const id = full ? 'hud-heart-full' : 'hud-heart-empty';
-  // The cut look for the viewer's row; a friend's 3 by 3 heart is too small to scale it down to, so it is drawn in its colours.
+  // The cut look for the viewer's row; a friend's 5 by 5 heart is too small to scale it down to, so it is drawn in its colours.
   if (big && look(content, id) && drawLook(g, content, id, x, y, { w: s.w, h: s.h })) return;
   const rows = big ? BIG : SMALL;
   rows.forEach((row, r) => {

@@ -51,15 +51,17 @@ function makeButton(muted: boolean, onToggle: () => void): HTMLButtonElement {
   b.id = 'sound';
   b.style.cssText = [
     'position:absolute',
-    'top:max(6px, env(safe-area-inset-top))',
-    'right:max(6px, env(safe-area-inset-right))',
-    'width:32px',
-    'height:32px',
+    // DRAFT (brief phone-hud-legibility, 2026-11-24): the touch area is 44 px, the least any
+    // control may be (scripts/e2e/hud.ts); the painted disc stays 32 px where it was.
+    'top:max(0px, calc(env(safe-area-inset-top) - 6px))',
+    'right:max(0px, calc(env(safe-area-inset-right) - 6px))',
+    'width:44px',
+    'height:44px',
     'padding:0',
     'margin:0',
     'border:0',
     'border-radius:50%',
-    'background:rgba(15,15,28,.5)',
+    'background:radial-gradient(circle, rgba(15,15,28,.5) 15.5px, transparent 16.5px)',
     'color:rgba(244,241,222,.8)',
     'display:flex',
     'align-items:center',

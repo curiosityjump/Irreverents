@@ -1,4 +1,5 @@
 import type { SimEvent } from '../../sim/types.ts';
+import { drawText, textWidth } from './fx.ts';
 
 // Step 21, hearts (the owner, 2026-11-24: "Once all heros in the party are
 // out of hearts, that's a game over (back to cantina)"): the page's GAME
@@ -79,6 +80,12 @@ export function drawGameOver(g: CanvasRenderingContext2D, W: number, H: number, 
     g.font = `${weight}${px}px monospace`;
     return px;
   };
+  // DRAFT (brief phone-hud-legibility, 2026-11-24: the card's words were the browser's monospace, smoothed): the
+  // pixel font at a whole scale, the biggest that fits; the monospace below only when the font is missing.
+  if (pixelWords(g, [TITLE, line, HEARTS], W, y, h)) {
+    g.restore();
+    return;
+  }
   g.fillStyle = '#ffd36b';
   const big = fit([TITLE], Math.max(14, Math.min(40, Math.floor(h * 0.42))), 8, 'bold ');
   g.fillText(TITLE, W / 2, y + h * 0.34);
@@ -87,4 +94,41 @@ export function drawGameOver(g: CanvasRenderingContext2D, W: number, H: number, 
   g.fillText(line, W / 2, y + h * 0.34 + big * 0.5 + small * 1.1);
   g.fillText(HEARTS, W / 2, y + h * 0.34 + big * 0.5 + small * 2.3);
   g.restore();
+}
+
+/** Each line once, drawn in the pixel font at 1x and kept (the card draws the same words every frame). */
+const cut = new Map<string, HTMLCanvasElement | null>();
+function line1x(text: string, color: string): HTMLCanvasElement | null {
+  const key = `${color}|${text}`;
+  if (cut.has(key)) return cut.get(key)!;
+  let c: HTMLCanvasElement | null = null;
+  if (typeof document !== 'undefined') {
+    c = document.createElement('canvas');
+    const cg = c.getContext('2d');
+    c.width = Math.max(1, Math.ceil(cg ? textWidth(cg, text, 'light') : 0) + 1);
+    c.height = 10;
+    if (!cg || !drawText(cg, text, 0, 0, 'light', color)) c = null;
+  }
+  if (c) cut.set(key, c);
+  return c;
+}
+
+/** The title and its two lines in the pixel font, each at the biggest whole scale that fits; false when the font is not loaded. */
+function pixelWords(g: CanvasRenderingContext2D, [title, ...rest]: string[], W: number, y: number, h: number): boolean {
+  const t = line1x(title!, '#ffd36b');
+  const r = rest.map((l) => line1x(l, '#f4e9d8'));
+  if (!t || r.some((c) => !c)) return false;
+  const most = (c: HTMLCanvasElement, tall: number): number => Math.max(1, Math.min(Math.floor((W - 8) / c.width), Math.floor(tall / c.height)));
+  const ts = most(t, h * 0.45);
+  const ls = Math.max(1, Math.min(Math.ceil(ts / 2), ...r.map((c) => most(c!, h * 0.2))));
+  const total = t.height * ts + 4 * ls + r.length * (r[0]!.height + 2) * ls;
+  let cy = Math.round(y + (h - total) / 2);
+  g.imageSmoothingEnabled = false;
+  g.drawImage(t, Math.round((W - t.width * ts) / 2), cy, t.width * ts, t.height * ts);
+  cy += t.height * ts + 4 * ls;
+  for (const c of r) {
+    g.drawImage(c!, Math.round((W - c!.width * ls) / 2), cy, c!.width * ls, c!.height * ls);
+    cy += (c!.height + 2) * ls;
+  }
+  return true;
 }

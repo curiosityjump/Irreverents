@@ -22,11 +22,35 @@ let lastLevel = 0;
 /** Round 3 (gap 12): the pips' corner, clear of a notch the picture now runs under. */
 // Step 4, the town's tiers: the pips sit just below the party plate (draw/hud.ts) when it is up, so the two
 // never overlap; the plate's box is last frame's, which is where it is drawn this frame too.
-const PX = (): number => drawnHud()?.box.x ?? 5 + safeView.left;
+const PX = (): number => (drawnHud()?.box.x ?? 5 + safeView.left) + SIGN_W;
 const PY = (): number => {
   const box = drawnHud()?.box;
   return box ? box.y + box.h + 3 : 5 + safeView.top;
 };
+/** The warning sign leading the pips' strip, game px (its width with the gap after it). */
+const SIGN_W = 13;
+/** A warning sign: a brass triangle with an ink "!", 11 by 10 game px. */
+const SIGN = ['.....#.....', '....###....', '....#.#....', '...##.##...', '...##.##...', '..###.###..', '..#######..', '.####.####.', '###########', '###########'];
+
+/** The pips' strip: a dark plate with an orange edge (as the banners), the sign, then room for `slots` pips 12 px apart, from the sign's left at (x0, y). */
+function drawPipStrip(g: CanvasRenderingContext2D, x: number, y: number, slots: number): void {
+  const left = x - SIGN_W - 2;
+  const w = SIGN_W + slots * 12 + 3;
+  g.fillStyle = INK;
+  g.fillRect(left - 1, y - 2, w + 2, 14);
+  g.fillStyle = '#e09a1e';
+  g.fillRect(left, y - 1, w, 12);
+  g.fillStyle = '#221f44';
+  g.fillRect(left + 1, y, w - 2, 10);
+  SIGN.forEach((row, r) => {
+    for (let c = 0; c < row.length; c++) {
+      if (row[c] !== '#') continue;
+      g.fillStyle = BRASS;
+      g.fillRect(left + 2 + c, y + r, 1, 1);
+    }
+  });
+}
+
 /** Step 4, the town's tiers: what was drawn last frame, for the page's drawn record (drawn.alert). */
 let shown: { level: number; whistle: number | null } = { level: 0, whistle: null };
 /** No banner for the level a page finds when it first draws (joining a game mid-alert is not the moment). */
@@ -160,6 +184,10 @@ export function drawAlert(g: CanvasRenderingContext2D, world: World, content: Co
   lastLevel = level;
   shown = { level, whistle };
   if (level <= 0) return;
+  // DRAFT (brief phone-hud-legibility, 2026-11-24: the pips under the plate read as hearts or balloons):
+  // they sit on their own dark strip led by a warning sign, so they read as "the watch is after you".
+  const slotsShown = lookDef(content, 'alert-pip') && lookDef(content, 'alert-pip-off') ? Math.max(level, MAX_ALERT) : level;
+  drawPipStrip(g, PX(), PY(), slotsShown);
   if (lookDef(content, 'alert-pip')) {
     let drawn = true;
     const slots = lookDef(content, 'alert-pip-off') ? Math.max(level, MAX_ALERT) : level;

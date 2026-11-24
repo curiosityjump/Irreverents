@@ -63,8 +63,15 @@ into their homes.
   (down: off its bottom). Before this a touch player could never enter an
   `enter` doorway (that takes a fresh push up, `room-doors.ts`; since
   "Doorways by Use" a tap of Use does it too, and the Use button reads
-  "Go in" there: `showGoIn`, `.go-in`) or attack or throw upwards. A small chevron above the pad (not over the view) shows
-  it and lights while pushed.
+  "Go in" there: `showGoIn`, `.go-in`) or attack or throw upwards. A small chevron above the pad (not over the view)
+  shows while pushed (since the phone-HUD brief, 2026-11-24, not at rest: a bare "^" said nothing untold).
+- **Use's word** (`showUseWord`, `.says`/`.go-in`; phone-HUD brief, `DRAFT:`): when Use names what a press does here,
+  its picture stays lit and the word sits on a gold-rimmed dark pill across the button's foot ("Go in" with a small
+  arch). Same button, same touch area. A dimmed button (`.idle`, `button-idle.ts`) is still only one that would do nothing.
+  Switch stays and dims when nobody is free: a tap there must still say why (`switch-refused`, Step 21).
+- **Every control is at least 44 CSS px** each way at 390×664, 844×390 and 750×340, on the start screen and in play
+  (`scripts/e2e/hud.ts`, `hud-targets-*`): the sound button (`audio/index.ts`) and the hint's × paint a 32 px and a
+  28 px disc inside a 44 px touch area.
 - **The pictures (2026-11-24, brief owner-better-buttons):** one family
   cut from P07's UI atlas (`tools/art/touch/cut.py`): round lilac plates
   (boot for Jump, sword for Hit, star for Switch; Grab and Use carry

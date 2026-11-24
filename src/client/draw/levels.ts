@@ -109,6 +109,8 @@ const STAR = 14;
 
 /** Step 14 slice B: the height the pieces' row adds under a sign's name (12 px pieces and a gap). */
 const ROW_H = 14;
+/** DRAFT: pieces at most this wide (game px, three of them) sit on the name's line. */
+const INLINE_PIECES_W = 38;
 
 /**
  * The signs over this room's entrances (the name and pie, or the empty ring
@@ -120,10 +122,14 @@ const ROW_H = 14;
 export function drawLevelSigns(g: CanvasRenderingContext2D, content: Content): void {
   const placed: { x: number; y: number; w: number; h: number }[] = [];
   for (const s of [...signs].sort((a, b) => a.mid - b.mid)) {
-    const rowPieces = s.name && s.pieces ? ROW_H : 0;
+    // DRAFT (brief phone-hud-legibility, 2026-11-24: a sign's second line held one grey piece and read as empty):
+    // pieces that fit beside the name go on its line, between the name and the pie; a longer set keeps its own row.
+    const nameW = s.name ? textWidth(g, s.name, 'light') : 0;
+    const inline = !!(s.name && s.pieces && s.pieces.length > 0 && piecesWidth(s.pieces.length) <= INLINE_PIECES_W);
+    const rowPieces = s.name && s.pieces && !inline ? ROW_H : 0;
     const bestW = s.name && s.best ? 3 * (STAR + 1) - 1 : 0;
     const extra = rowPieces + (bestW ? BEST_H : 0);
-    const w = s.name ? Math.max(textWidth(g, s.name, 'light') + PIE + 9, rowPieces ? piecesWidth(s.pieces!.length) + 6 : 0, bestW + 6) : PIE;
+    const w = s.name ? Math.max(nameW + PIE + 9 + (inline ? piecesWidth(s.pieces!.length) + 4 : 0), rowPieces ? piecesWidth(s.pieces!.length) + 6 : 0, bestW + 6) : PIE;
     const h = s.name ? PIE + 4 + extra : PIE;
     const x = Math.round(s.mid - w / 2);
     let y = s.bottom - h;
@@ -139,6 +145,7 @@ export function drawLevelSigns(g: CanvasRenderingContext2D, content: Content): v
     placed.push({ x, y, w, h });
     if (s.name) sign(g, content, s.name, s.quarters, x, y, w, h - extra, extra);
     else pie(g, content, 0, x, y);
+    if (inline) drawPieces(g, content, s.pieces!, x + 3 + nameW + 4, y + Math.floor((PIE + 4 - 12) / 2));
     if (s.name && s.pieces && rowPieces) drawPieces(g, content, s.pieces, x + 3, y + PIE + 4 + rowPieces - ROW_H);
     if (s.name && s.best && bestW) drawBest(g, content, s.best.stars, x + 3, y + h - BEST_H);
   }

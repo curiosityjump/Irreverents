@@ -256,8 +256,8 @@ export function setUpShell(canvas: HTMLCanvasElement, touch: HTMLElement, hint: 
       b.style.top = `${snap(H - bottom - p.y * unit() - button / 2)}px`;
     });
     // Over the view, the rest are chips along the top edge, right to left from beside the sound
-    // button (32 px at the top-right, audio/index.ts), clear of the alert pips at the top-left.
-    const chipRight = W - inset.right - 6 - 32 - 8;
+    // button (a 44 px touch area at the top-right, audio/index.ts), clear of the alert pips at the top-left.
+    const chipRight = W - Math.max(0, inset.right - 6) - 44 - 4;
     buttons.slice(low.length).forEach((b, i) => {
       b.style.left = `${snap(chipRight - (i + 1) * button - i * gap)}px`;
       b.style.top = `${snap(Math.max(2, inset.top))}px`;

@@ -43,6 +43,8 @@ const SLOT = 12;
 const PAD = 3;
 const GAP = 2;
 const WELL = 'rgba(15, 15, 28, 0.55)';
+/** DRAFT (brief phone-hud-legibility): game px between friends' columns, so two friends' heart rows never run together. */
+const FRIEND_GAP = 4;
 
 export interface DrawnHud {
   /** In plate order: the viewer's own first. `played`: by the viewer or a friend. `out`: no hearts left (Step 21, drawn greyed). */
@@ -98,7 +100,7 @@ export function drawHud(g: CanvasRenderingContext2D, world: World, content: Cont
   const hearts = content.hearts?.on === true;
   const col = (k: string): number => (hearts ? Math.max(SMALL, maxHearts(content, k) * heartSize(false).step - 1) : SMALL);
   if (hearts) noteHearts(world, content, [mine, ...others], frame);
-  const w = PAD + FACE + GAP + HUD_SLOTS.length * (SLOT + 1) + (others.length > 0 ? GAP + others.reduce((n, k) => n + col(k) + 1, 0) : 0) + PAD - 1;
+  const w = PAD + FACE + GAP + HUD_SLOTS.length * (SLOT + 1) + (others.length > 0 ? GAP + others.reduce((n, k) => n + col(k) + FRIEND_GAP, 0) : 0) + PAD - 1;
   const h = PAD + FACE + (hearts ? 1 + heartSize(true).h : 0) + PAD;
   const x = Math.max(3 + safeView.left, clearOfMenu(g, frame) + 2);
   const y = 3 + safeView.top;
@@ -130,7 +132,7 @@ export function drawHud(g: CanvasRenderingContext2D, world: World, content: Cont
     face(g, content, k, fx, y + PAD + (FACE - SMALL), SMALL, played ? 0.9 : 0.35, out);
     if (hearts) drawHeartRow(g, world, content, k, cx, y + PAD + FACE + 2, false, frame);
     faces.push({ kind: k, me: false, played, out });
-    cx += col(k) + 1;
+    cx += col(k) + FRIEND_GAP;
   }
   drawn = { faces, slots, box: { x, y, w, h } };
   return drawn.box;

@@ -455,3 +455,13 @@ Builder `session_017WiGzHxAKbURW5YnQt6bDN`, 2026-11-24. **Push 0: today's `main`
 - 10. Holds: upright, the title's choices cover the art and the bottom half is empty (`title-390x664`).
 - 11. Holds: the menu icon has no backing (`street-plain-844x390`).
 - 1, 8, 12: not this brief's (a room, the bomb's feel, the wagon's look).
+
+**What changed** (all `DRAFT:`, one decisions-log entry, "The phone's screen furniture made readable"; after shots in `step-8-shots/hud/after/`, same names as `before/`):
+1. Thumbs: the sound button and the upright hint's × take a 44 px touch (same painted disc); the new fact `hud-targets-*` (`scripts/e2e/hud.ts`) checks every control at least 44 px at the three sizes, on the start screen and in play. Control watched: on 3680029 it fails six of six (sound 32, × 28). Hiding Switch when nobody is free (the orchestrator allowed it) was built and taken back: e2e `switch-refused` (Step 21) taps Switch with a full party and the page must say why, so Switch stays and dims; still 9 at once upright, 8 sideways. **Could also be absent without leaving a hole** (asked, not changed): the hint's × goes once dismissed already (remembered per browser); none of the other seven: the stick, Jump, Hit and Grab always act, Use's place anchors the arc, and sound and menu are ways out.
+2. Words: Take, Get in, Go in sit on a gold-rimmed pill across the foot of a lit Use picture (`camp-wagon-get-in-*`, `courtyard-go-in-*`); the "^" over the stick shows only while pushed.
+3. A friend's hearts are 5 px hearts with a gap between friends (`street-plain-390x664`); the pips sit on their own strip led by a brass warning sign (`street-fight-partial-*`).
+4. A sign's pieces (three or fewer) sit on the name's line (`courtyard-go-in-*`); GAME OVER's words are the pixel font at a whole scale (`hearts-game-over-844x390`). Banners were already one at a time.
+5. STAGE CLEARED: filled and empty stars (`draw/stars.ts`, a stand-in), a lighting star flashes and never grows; the sign's best row the same. Agreed with Step 22's lead first. **For Vision Partner's missing list:** a real star sprite in an approved style, earned and unearned (`hall-frame-star` reads as a framed tile; Step 22's lead agrees).
+6. The title upright puts the choices under the picture, as low as keeps the code field in the upper half (Step 17's `start-shown`: the keyboard covers the lower half; at 390×664 the field starts at 322 px, the picture's last strip of ground under New game) (`title-390x664`); the menu button has a dark disc.
+
+**Not verified:** on a real iPhone; a held hammer or spear on the plate (not reached by the shot walk); the dimmed Switch with a full party (`switch-refused` drives the refusal, not the look).

@@ -447,6 +447,8 @@ async function main(): Promise<void> {
       await (await import('./e2e/cantina.ts')).cantinaFacts({ browser, devices, base, out, fact, errors });
       // Step 17's facts (start-*): the start screen, New game, a friend joining by the shared link, and back, by touch (docs/mechanisms/saves.md).
       await (await import('./e2e/start-screen.ts')).startFacts({ browser, devices, base, out, fact, errors, shots: path.join(root, 'docs/plan/step-17-shots') });
+      // The phone HUD's facts (hud-targets-*): every control at least 44 px at three phone sizes (brief phone-hud-legibility).
+      await (await import('./e2e/hud.ts')).hudFacts({ browser, devices, base, out, fact, errors });
       // Step 8's look facts (look-*): the three moods differ as drawn, and a hidden friend has no mark on another page (docs/mechanisms/rendering-actors.md, "Round 3").
       await lookFacts({ browser, devices, base, out, fact, errors });
       // (f) another world does not see them.

@@ -454,7 +454,9 @@ another room learns anything from it.
 **On screen (`src/client/draw/alert.ts`):** over a guard whose
 `c.whistle.progress` is above 0, the `bell-gauge` look (else a bar)
 fills; the pips sit just under the party plate (`drawnHud()?.box`), at
-the top-left only when no plate is drawn; a new pip queues one banner
+the top-left only when no plate is drawn, on their own dark strip led by a
+brass warning sign (`drawPipStrip`; phone-HUD brief, `DRAFT:`: alone they
+read as hearts); a new pip queues one banner
 (`alert:<level>`, the dispatch file's `banners[level-1]`, none on the
 page's first frame). `drawn.alert` `{ level, whistle }` is the record the
 checks read.

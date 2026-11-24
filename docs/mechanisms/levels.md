@@ -84,6 +84,10 @@ still an empty pie; the name on the sign is what says "discovered".
   (`level-pie-<quarters>`) on a dark plate, 12 px above the art (clear of
   the Go-in arrow). `DRAFT:` a sign that would overlap another is lifted
   above it (the courtyard's quarry and camp doorways are five tiles apart).
+  A level's pieces (`drawPieces`) sit on the name's line, between the name
+  and the pie, when they are three or fewer (`INLINE_PIECES_W`; phone-HUD
+  brief, `DRAFT:`: one grey piece alone on a second line read as an empty
+  line); more keep their own row under the name.
 - **The banner**: the first time this page sees the level its own hero is
   in become discovered, the name across the top for two seconds.
   `INTENT:` it takes no input and stops nothing.

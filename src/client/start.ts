@@ -285,7 +285,15 @@ function titlePicture(content: Content): { back: HTMLElement; spacer: HTMLElemen
     const parent = spacer.parentElement;
     const scrolled = parent ? parent.scrollTop : 0;
     const startsAt = spacer.getBoundingClientRect().top + scrolled;
-    spacer.style.height = `${Math.max(0, Math.ceil(r.top + clearTo * s + 4 - startsAt))}px`;
+    // DRAFT (brief phone-hud-legibility, 2026-11-24: upright, the choices covered the art and the bottom half
+    // was empty): on a tall screen the choices start below the whole picture where that leaves the code field
+    // in the upper half, else as low as it allows; sideways, below the wordmark.
+    // INTENT (Step 17, e2e start-shown): the code field stays in the upper half (the keyboard covers the
+    // lower), so the choices start no lower than about a third of the screen, never above the wordmark.
+    const tall = r.height > r.width * 1.2;
+    const under = (to: number): number => r.top + to * s + 4;
+    const end = tall ? Math.max(under(clearTo), Math.min(under(h), window.innerHeight * 0.32)) : under(clearTo);
+    spacer.style.height = `${Math.max(0, Math.ceil(end - startsAt))}px`;
     const l = look(content, TITLE_LOOK);
     if (!l) return false;
     const dpr = window.devicePixelRatio || 1;
@@ -365,8 +373,8 @@ const CSS = `
 .st-say { min-height: 22px; color: var(--cream); text-align: center; }
 .st-say:empty { display: none; }
 #menu-btn { position: fixed; z-index: 15; left: max(6px, env(safe-area-inset-left)); top: max(6px, env(safe-area-inset-top)); width: 44px; height: 44px; margin: 0; padding: 0; border: 0;
-  border-radius: 10px; background: transparent; touch-action: manipulation; -webkit-appearance: none; appearance: none; }
-/* Quiet over the view (docs/plan/step-5.md, "Controls never hide the game"): three faint bars in a 44 px touch area. */
+  border-radius: 10px; background: radial-gradient(circle, rgba(15, 15, 28, .5) 15.5px, transparent 16.5px); touch-action: manipulation; -webkit-appearance: none; appearance: none; }
+/* Quiet over the view (docs/plan/step-5.md, "Controls never hide the game"): three faint bars in a 44 px touch area, on a dark disc like the sound button's (DRAFT, brief phone-hud-legibility: with no backing it blended into the scene). */
 #menu-btn i { position: absolute; left: 13px; width: 18px; height: 2px; background: rgba(244, 241, 222, .7); box-shadow: 0 0 0 1px rgba(15, 15, 28, .55); }
 #menu-btn i:nth-child(1) { top: 15px; } #menu-btn i:nth-child(2) { top: 21px; } #menu-btn i:nth-child(3) { top: 27px; }
 #menu-btn:active { background: rgba(244, 241, 222, .2); }
