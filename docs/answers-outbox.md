@@ -30,7 +30,4 @@ entry: "first vision written; no plan exists yet", naming the sections.
 
 ## Entries
 
-### Vision · World structure, secrets and completion (one-way platforms)
-- **Answer:** the owner's words on getting stuck in the quarry ("Not a bad thing l, just needs accounted for"), quoted with Vision Partner's reading: keep jump-up-through platforms, no dead ends. Relayed by the orchestrator, so the reading is labelled unconfirmed; Q-017 and Q-018 (which hero and where; what the menu did) filed for when he talks to Vision Partner.
-- **Recorded in:** `docs/vision.md` "World structure, secrets and completion", this commit
-- **Action for:** orchestrator (vision-level): the plan can carry "every one-way platform has a way back" as a check
+*(empty)*
