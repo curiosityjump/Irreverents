@@ -545,3 +545,15 @@ By a subagent reading 43 of the 79 shots in `docs/plan/step-8-shots/backgrounds/
 - **3. The undercroft reads as outdoors.** A moon, a night castle and a window behind a cellar; the panorama's bright painted floor and plants show through the lower pit (`undercroft-1-after-844x390`, x 290-580), so the pit looks lit and open and its pickup loses contrast; the hero's yellow helmet washes into a painted lantern's glow.
 
 Sent to the backgrounds' builder as a follow-up push (the orchestrator's rulings, each `DRAFT:`, in that message and to be logged by the builder in `docs/decisions-log.md`).
+
+## Second look at the biome backgrounds, after a988b63 (orchestrator session_017WiGzHY5UZsWTLCH8cLm8M, 2026-11-24 ~17:30 UTC)
+
+By a subagent reading all 23 `*-after2-*` shots against their `*-after-*` partners at phone size; not by playing.
+
+- **1. The flat band: holds.** Gone in every shot, upright and sideways; the forest's fade reads as hazy leaves, not a glitch.
+- **2. Painted things that read as standable: fails, except the forest's mushroom** (now a greyed beige, plainly background). Haze toward the sky does nothing at platform height: the quarry's short planks still sit on the painted bucket and scaffold in the same wood (`planks-quarry-road-3-after2`, `planks-quarry-depot-2-after2`, `quarry-road-1-after2` both sizes), and the painted wooden deck at chest height on the left of all three quarry rooms still looks standable; the street's lime grassy ledge over the arch, the courtyard's grass-topped ruin ledge and the camp's pillar top are barely muted.
+- **3. The undercroft: holds.** It reads as a cellar; the pit's pickup and the hero are clear. (The flat tan slab with an orange edge over its right half is the stair thrower's sight band on the dark vault: Step 19's "sight bands read as lamplight" leftover, not the backdrop's.)
+- **Worse than before:** `forest-road-1` at 45% haze goes muddy olive (the blues, the waterfall and the red mushroom dulled); `forest-trail-1` the same, milder. The 30% and 50% rooms barely changed.
+- **To check:** the region banner reads "Castle Town" in `forest-road-1-after2-390x664` and in `planks-quarry-road-1-after2` (a capture artefact, or a banner that does not change with the room?).
+
+Third pass sent to the backgrounds' builder (rulings `DRAFT:`, in that message).
