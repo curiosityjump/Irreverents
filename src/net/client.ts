@@ -28,6 +28,7 @@ import type { ClientMessage, ServerMessage } from './protocol.ts';
  * tab shown again retry at once (kick).
  */
 const CONNECT_MS = 10000;
+import { meetDrawn } from './flight.ts';
 import { createPredictor } from './predict.ts';
 import { createSmoother } from './smooth.ts';
 
@@ -109,7 +110,39 @@ export function createNetClient(opts: NetClientOptions) {
   let lastFx = 0;
   /** What was held on each local tick since the last report. */
   let ticked: Input[] = [];
-  const stats = { /** Step 5: hits this page predicted, then seen from the server, or eased back unseen (src/net/predict.ts). */ hits: predictor.counts, connects: 0, rttMs: null as number | null, msgsIn: 0, bytesIn: 0, msgsOut: 0, bytesOut: 0, effects: 0, tunesOut: 0, tuningsIn: 0 };
+  /**
+   * Step 5, "Thrown friend": the bodies this page's own flying character met
+   * among those it draws (src/net/flight.ts), until when (ms). The server's
+   * push for the same meeting is then an echo, set aside (see 'fx').
+   */
+  const bounced = new Map<string, number>();
+  /** DRAFT: how long a meeting this page drew itself stands for the server's echo of it, ms. */
+  const ECHO_MS = 2500;
+  /**
+   * A push the server sent for an impact this page already drew on its own
+   * character: no new flight (`fly`), and the last body the server's copy met
+   * on this flight is one this page met itself. INTENT (Step 5, "Thrown
+   * friend"): applying it would bounce the character a second time, a round
+   * trip after the first; a push from anything this page did not meet itself
+   * (a body that flew into it, a hit) is applied as before.
+   */
+  const echoes = (effect: { kind: string; fly?: unknown }, e: Entity, t: number): boolean => {
+    if (effect.kind !== 'push' || effect.fly || bounced.size === 0) return false;
+    const met = e.c.flying?.met;
+    const last = met && met.length > 0 ? met[met.length - 1]! : null;
+    return last !== null && (bounced.get(last) ?? 0) > t;
+  };
+  /**
+   * A push that stops this page's own flying character for a held beat
+   * because the server's copy met a body this page's flight has not met (yet).
+   */
+  const metFirst = (effect: { kind: string; fly?: unknown }, e: Entity): boolean => {
+    const mine = me().c.flying;
+    const met = e.c.flying?.met;
+    if (content.net.predictHitMs <= 0 || effect.kind !== 'push' || effect.fly || !mine || !e.c.beat || !met || met.length === 0 || me().c.beat) return false;
+    return !mine.met.includes(met[met.length - 1]!);
+  };
+  const stats = { /** Step 5: hits this page predicted, then seen from the server, or eased back unseen (src/net/predict.ts). */ hits: predictor.counts, connects: 0, rttMs: null as number | null, msgsIn: 0, bytesIn: 0, msgsOut: 0, bytesOut: 0, effects: 0, /** Step 5, "Thrown friend": server pushes set aside as echoes of an impact this page drew itself. */ echoes: 0, /** Step 5, "Thrown friend": meetings the server saw first, taken with their held beat. */ metFirst: 0, /** Step 5, "Thrown friend": bodies this page's own flying character met among those it draws. */ met: 0, tunesOut: 0, tuningsIn: 0 };
   // INTENT (Step 2, ?tune): the world's tuning numbers are the server's, and
   // this page plays by them: `tuning` messages are laid over the shipped
   // numbers IN PLACE in `content.tuning`, the very object this page's step
@@ -240,8 +273,27 @@ export function createNetClient(opts: NetClientOptions) {
         lastFx = m.id;
         // A push lands on the character where this device has it (no visible
         // jump); for anything else the server's copy is the truth.
-        if (m.effect.kind === 'push' && !heldBy(me())) applyEffect(me(), m.effect);
-        else if (looksLikeEntity(m.e)) adopt(m.e);
+        const t = now();
+        for (const [id, until] of bounced) if (until <= t) bounced.delete(id);
+        if (m.effect.kind === 'push' && !heldBy(me())) {
+          if (looksLikeEntity(m.e) && echoes(m.effect, m.e, t)) stats.echoes++;
+          else if (looksLikeEntity(m.e) && metFirst(m.effect, m.e)) {
+            // DRAFT (Step 5, "Thrown friend"): the server's copy met a body this page has not met yet (its
+            // flight here starts a one-way trip later). Without this the push stopped the character short of
+            // that body, in the air, and the server's bounce came after it had landed: no bounce here. So the
+            // page takes the meeting as the server had it (where, and its held beat) and bounces itself when
+            // the beat ends; the server's push at that moment is then its echo.
+            const mine = me();
+            const met = m.e.c.flying!.met;
+            Object.assign(mine, { x: m.e.x, y: m.e.y, vx: 0, vy: 0 });
+            mine.c.beat = clone(m.e.c.beat!);
+            for (const id of met) if (!mine.c.flying!.met.includes(id)) mine.c.flying!.met.push(id);
+            bounced.set(met[met.length - 1]!, t + ECHO_MS);
+            stats.metFirst++;
+          } else applyEffect(me(), m.effect);
+        } else if (looksLikeEntity(m.e)) adopt(m.e);
+        // A new flight (a throw, a hit) or anything taken from the server starts afresh.
+        if (m.effect.kind !== 'push' || m.effect.fly) bounced.clear();
         stats.effects++;
       }
       send({ t: 'ack', id: m.id });
@@ -310,6 +362,13 @@ export function createNetClient(opts: NetClientOptions) {
         if (heldBy(me()) && status !== 'online') applyEffect(me(), { kind: 'release' });
         if (!heldBy(me())) {
           events.push(...step(world, { [player]: input }, content));
+          // Step 5, "Thrown friend": flying, the page's own character meets the bodies this page draws.
+          if (me().c.flying && content.net.predictHitMs > 0) {
+            const met = meetDrawn(world, me(), predictor.view(smoother.view(t), t), content);
+            events.push(...met.events);
+            for (const id of met.met) bounced.set(id, t + ECHO_MS);
+            stats.met += met.met.length;
+          }
           predictor.afterStep(world, me(), input, () => smoother.view(t), t, (times) =>
             // Where the server should have each body when this swing reaches it (a round trip, a report's wait
             // and, DRAFT, a snapshot's wait: measured short of that), `times` over.

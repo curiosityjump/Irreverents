@@ -143,8 +143,9 @@ Known limits (`DRAFT:`), for whoever builds combat and doors:
   out of the cantina is put back on a pad, acknowledged, and runs from
   there on their own page); not yet in a browser.
 - A page's local world holds **only its own character**. A verb that must
-  see others' bodies *on the page* does not. A hit is the one exception, and only for
-  drawing (below, "Predicted hits"). The server's copy of each verb does see everyone.
+  see others' bodies *on the page* does not. Two exceptions: a hit, only for
+  drawing (below, "Predicted hits"), and the page's own character meeting
+  bodies while it flies (below, "A flying own character"). The server's copy of each verb does see everyone.
   The place to widen is the local world in `src/net/client.ts`. Which
   party members the others play does reach it, as a list: `world.taken`,
   the kinds of every other player in each snapshot, which `memberTaken`
@@ -245,6 +246,60 @@ of 8 ticks held for 9).
 - **Not done:** a grab's lift is still a round trip on the hitter's
   screen (brief item 3), and `interpDelayMs` is untried at 66 (item 4). Not verified: the ease back when the server disagrees, and a
   brawl hit on a friend. Both are only reasoned.
+
+## A flying own character (Step 5, "Thrown friend", `DRAFT:`; `src/net/flight.ts`)
+
+A friend thrown into a crate bounced off it on the thrower's phone (the
+predicted throw steps the flight among the bodies that page draws) and
+sailed through it on their own (whose local world holds only them), when
+the server missed the meeting: it knows the friend's body only from their
+reports, 30 a second, and a body about 10 px wide crossing a crate between
+two of them is never seen overlapping it. Now:
+
+- **The page meets what it draws.** After each local tick in which its own
+  character is flying (and prediction is on, `predictHitMs` > 0),
+  `meetDrawn` runs the simulation's own `impact-bodies` once more, on the
+  character itself and copies of the bodies as this page draws them
+  (`others()`, lent bodies where the page has them). The copies never fly
+  there, so only the own character can be the one that meets (a body
+  flying *into* it stays the server's push, as before), and nothing is
+  worn (the server's copy wears it; a flatten comes as an effect). What
+  happens to the copies is thrown away.
+- **The server meets it too** (`INTENT:` in `meetDrawn`). The simulation
+  stops a body in a held beat (speed 0, the bounce kept in `c.beat`) and
+  nothing reads its speed until the beat ends, so the page keeps the speed
+  it met at through the beat. Its reports then show the character over the
+  crate at that speed for the whole beat, and the server's own
+  `impact-bodies` meets the same crate the same way: the crate is knocked
+  on the server, so on every screen.
+- **The echo is set aside** (`echoes` in `src/net/client.ts`, `INTENT:`).
+  The server's push for that meeting (and its push when its beat ends)
+  would bounce the character a second time, a round trip after the first.
+  A push with no new flight (`fly`) whose server copy last met a body this
+  page met itself in the last 2.5 s (`ECHO_MS`, `DRAFT:`) is acknowledged
+  and not applied. Any other effect, or a push starting a new flight,
+  clears the list.
+- **The server met it first** (`metFirst` in `src/net/client.ts`,
+  `DRAFT:`). A thrown friend's flight is the server's until their page
+  has the throw (an effect, a one-way trip later), so a body close ahead
+  is often met there first. That push stopped the character short of the
+  body, in the air, and the server's bounce came after it had landed: no
+  bounce on its own screen (26 of 60 throws from 29 px). Now a push
+  carrying the server's held beat, for a body this page's flight has not
+  met, is taken whole: where the server had the character, its beat, the
+  body added to its `met`. The page bounces itself when the beat ends, and
+  the server's push then is an echo. The character is drawn a step on
+  (the one-way trip's worth of flight) when it is taken.
+- **Counters:** `window.irreverents.net.met` (bodies met this way),
+  `.metFirst` (meetings taken from the server) and `.echoes` (pushes set
+  aside).
+- **Measured** with `scripts/throw-runs.ts` (B thrown into the throne
+  room's heavy crate, both pages' resting place compared;
+  `docs/plan/step-5.md`, "Thrown friend").
+- **Not done:** a body flying into a player who is not flying is still
+  only the server's push; a wall the server's copy hits after a crate in
+  the same flight is also taken as an echo (the page bounces off walls
+  itself, so that is the same bounce).
 
 ## Smoothing
 
@@ -416,6 +471,14 @@ it back. **Checks assert on `drawn`, never on server state.**
   own process (building first if `dist/` is missing or older than the
   sources), sees `/healthz` answer and two players join. `INTENT:` a
   build that cannot start would leave nothing serving the game.
+- **`scripts/checks/thrown-friend.ts`** (Step 5): two headless players;
+  A throws B into the throne room's heavy crate from 29 px and from 90 px
+  while only every third report of B's reaches the server. B's own page
+  must bounce off the crate (not fly on, not stop short), both pages must
+  then have B in the same place, and the crate must be knocked on the
+  server. Control watched, 2026-11-24: `src/net/client.ts` as before this
+  (B flew 35 and 25 px into the crate before being stopped; in an earlier
+  form of the check, on through it to x 85 with the crate never knocked).
 
 Controls watched to fail, 2026-11-23 (each named the broken fact):
 snapshots not sent (`together`, `built-server`; e2e a, b, e, f, h1, rate
