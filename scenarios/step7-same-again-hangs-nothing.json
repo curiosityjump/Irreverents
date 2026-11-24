@@ -101,7 +101,7 @@
     {"player": "a", "from": 2840, "to": 2843, "hold": ["attack"]},
     {"player": "a", "from": 2864, "to": 2867, "hold": ["attack"]},
     {"player": "a", "from": 2888, "to": 2891, "hold": ["attack"]},
-    {"player": "a", "from": 2900, "to": 3200, "x": -1},
+    {"player": "a", "from": 2900, "to": 3074, "x": -1},
     {"player": "a", "from": 2960, "to": 2980, "hold": ["jump"]},
     {"player": "a", "from": 3000, "to": 3020, "hold": ["jump"]},
     {"player": "a", "from": 2990, "to": 2994, "y": -1},
@@ -115,14 +115,15 @@
     {"player": "a", "from": 3054, "to": 3058, "y": -1},
     {"player": "a", "from": 3062, "to": 3066, "y": -1},
     {"player": "a", "from": 3070, "to": 3074, "y": -1},
-    {"player": "a", "from": 3078, "to": 3082, "y": -1}
+    {"player": "a", "from": 3078, "to": 3082, "y": -1},
+    {"player": "a", "from": 3086, "to": 3090, "y": -1}
   ],
   "ticks": 3400,
   "expect": [
     {"fact": "event-where", "event": "hall-legend", "where": {"n": 1, "kind": "narrow-escape", "place": "outpost", "who": ["a"], "stats": {"waves": 2, "came": 3, "felled": 0, "seconds": 13}}, "between": [1126, 1126], "count": [1, 1]},
     {"fact": "event", "event": "changed-room", "player": "a", "where": {"toRoom": "outpost"}, "between": [1300, 1300], "count": [1, 1]},
-    {"fact": "event-where", "event": "outpost-wave", "where": {}, "between": [1300, 3077], "count": [2, 2]},
-    {"fact": "event", "event": "changed-room", "player": "a", "where": {"toRoom": "courtyard"}, "between": [3078, 3078], "count": [1, 1]},
+    {"fact": "event-where", "event": "outpost-wave", "where": {}, "between": [1300, 3085], "count": [2, 2]},
+    {"fact": "event", "event": "changed-room", "player": "a", "where": {"toRoom": "courtyard"}, "between": [3086, 3086], "count": [1, 1]},
     {"fact": "event-where", "event": "hall-legend", "where": {}, "between": [1127, 3400], "count": [0, 0]}
   ]
 }

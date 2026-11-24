@@ -1,0 +1,49 @@
+{
+  "id": "step20-camp-every-hero-gets-in",
+  "proves": "the Bandit Camp's way in fits every roster hero: the brawler, whose jump does not clear the three-tile step at columns 5-7 (measured: it stopped at column 3.9 and, over 15 jump timings, never past column 4), comes in from the doorway, lands on the one-way tile at column 4, row 9, jumps on to the step and is down in the camp's yard (past column 8) on its own. Measured for the record, not pinned here: the grappler, infiltrator, flyer and skirmisher all got over the step already. Control: the tile emptied (this scenario's own `tiles` set (4,9) to empty), the brawler never gets past column 4",
+  "room": "outpost",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "brawler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 300,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 10,
+      "to": 20,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 35,
+      "to": 55,
+      "hold": [
+        "jump"
+      ]
+    }
+  ],
+  "ticks": 300,
+  "expect": [
+    {
+      "fact": "position",
+      "player": "a",
+      "at": 300,
+      "x": [
+        144,
+        1400
+      ]
+    }
+  ]
+}

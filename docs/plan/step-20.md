@@ -243,3 +243,13 @@ optional `look` on a machine file, the rider's hero face on the plate
   (`handoff-prompts/step-5-e2e-flakes.md`): run 1 `t-throw-friend`,
   `s-throw-friend`, `s-after` (the same throw); run 2 `h1`. build and check
   green. Run 3, after rebasing onto 035498e: e2e green.
+
+**Builder B, the camp's way in (the orchestrator's ask, 2026-11-24).** Over
+the entry step, by 15 jump timings each: grappler, infiltrator, flyer,
+skirmisher get in; the brawler stops at column 4. Fixed with a one-way tile
+at (4,9) (decisions-log "The Bandit Camp's way in fits every hero"). Taking
+a tile off the step instead turned ten camp scenarios red. Re-timed:
+`step7-same-again-hangs-nothing` (the flyer's second walk-out: stick
+released at 3074, not 3200; one more door tap at 3086; the exit tick 3078
+to 3086, waves counted to 3085; control `hallRelativeOn` 0 still fails).
+

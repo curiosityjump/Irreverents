@@ -1234,3 +1234,11 @@ document as a decision of theirs.
 - **Why this way:** the owner, playing: "Heros should have hearts which can be lost." The fall is the unit, so knockback and throws still carry the fight and nothing counts single blows (D-020); three each to start (the orchestrator's pick). The hearts belong to the party everyone shares, by hero. A friend, a wall, a fall with nobody behind it and anything in the cantina's brawl never cost one. Nothing yet happens at none: being out and the game over are the next pushes; nothing is drawn yet.
 - **To change it:** `content/hearts.json`: `heroes` (per hero), `default`, `per` ("blow": every blow an enemy lands costs one instead), `"on": false` turns hearts off.
 - **Where:** `docs/mechanisms/defeat.md`, "Hearts"; `docs/plan/step-21.md`, "Builder notes", "Hearts". `DRAFT:`
+
+### 2026-11-24 · The Bandit Camp's way in fits every hero: a half-height stair onto the entrance step
+- **Decided by:** vehicles builder B (Step 20), `session_017WiGzEvHsdz7Z8fr6XuECe`, on the orchestrator's ask
+- **Instead of asking:** "The brawler, who every new game starts with, can't get past the step just inside the camp's doorway. Was that meant?"
+- **Why this way:** nothing recorded it as intended (the room's note calls every column a first pass), and getting into the camp is the start of most of what the camp offers. Measured: the grappler, infiltrator, flyer and skirmisher all get over the three-tile step; the brawler's jump does not (it stopped at column 3.9, never past column 4 over 15 timings). One one-way tile at column 4, row 9 is a half-height stair: the brawler lands on it and jumps on. Everyone else runs and jumps up through it as before. One older scenario's walk-out was re-timed by eight ticks (the flyer now brushes the tile on the way down). Removing a tile of the step instead would have re-timed ten scenarios across four steps.
+- **To change it:** one character in `content/rooms/outpost.json` (row 9, column 4), or the brawler's jump in `content/tuning.json`.
+- **Where:** `content/rooms/outpost.json`; `scenarios/step20-camp-every-hero-gets-in.json`.
+
