@@ -24,8 +24,9 @@ NPC kinds), `reach` (px), `downs` and `window` (s), `beat` (s, below
 left out: always), `lands` (a room one door away at most, and a `door` or a
 `tile` there), `follow`, and `words` (the banners, no digits). `on: false`
 is the game before Step 21. Today: the camp (`downs` 4, lands in the
-courtyard's `to-outpost` doorway) and the castle street under an alert
-(`downs` 2, lands in the open courtyard at [4, 7], `follow`), and (Step 22
+courtyard's `to-outpost` doorway), the castle street under an alert
+(`downs` 2, lands in the open courtyard at [4, 7], `follow`; **off** since
+hearts push 5: losing there is hearts and the game over), and (Step 22
 push 1, `DRAFT:`) the Iron Quarry's six rooms (`content/defeat/quarry.json`:
 `downs` 3, seizers the fighter, the heavy and the brute but not the
 toll-keeper, lands on the road just inside its `to-courtyard` doorway, the
@@ -175,6 +176,16 @@ The decision is `docs/plan/step-21.md`, "Hearts"; it is built in pushes
   takes it down (`main.ts`, window listeners in the capture phase, passive).
   `drawn.gameOver`.
 
+- **The old throw, retired by data** (push 5): a place file's `"on": false`
+  turns its seize-and-throw off; every field stays and is still read (a
+  place's `gameOver` is read whether or not it is on). Off: the castle
+  street. Still on: the camp (until Step 23's `step23-thrown-out-leaves-it`
+  no longer needs it) and the quarry (until Step 22's start-over listens to
+  `game-over`). Kept and used by hearts: `returnPrize` with
+  `prize-returned`, the cross-room `move` effect, the landing-spot code
+  (`landingSpot`, for a place's `gameOver` door or tile). Dormant where a
+  place is off: `defeat-seize`, `defeat-throw`, `c.falls`, `c.seized`,
+  `thrown-out`, the condition slot's "one fall from thrown out".
 - **On the plate** (push 4): the hearts beside each face, a pop and a sound
   (`heart-lost`) when one is lost, an out hero's face greyed
   (`docs/mechanisms/rendering-world.md`, "The party plate"); the GAME OVER

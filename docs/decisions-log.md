@@ -281,3 +281,10 @@ document as a decision of theirs.
 - **Why this way:** the brief: "Swords must not pile up". He comes back with empty hands while the sword he was handed is still somewhere in the world (lying in the camp, in your hand, or carried by another party member). Once it has left the world (its holder left the game), he comes back armed.
 - **To change it:** `weapon-carriers` (`src/sim/systems/weapon-carriers.ts`): drop the `out` test and he is armed every time, as before.
 - **Where:** `docs/mechanisms/weapons.md`, "Carriers".
+
+### 2026-11-24 · Step 21: in the castle street, being beaten no longer throws you into the courtyard: hearts and the game over are what losing is
+- **Decided by:** hearts builder, push 5, `session_017WiGzG7mhviEaxroo5GvBv`, on the orchestrator's brief
+- **Instead of asking:** "Should the old 'beaten twice, thrown out' rule stay alongside hearts?"
+- **Why this way:** your rule replaces it: "Heros should have hearts which can be lost. Once all heros in the party are out of hearts, that's a game over". Switched off by data, nothing deleted. The Bandit Camp and the quarry keep their throw a little longer, until two other builders' checks no longer lean on it.
+- **To change it:** `"on": true` in `content/defeat/castle-street.json` brings the throw back.
+- **Where:** `docs/mechanisms/defeat.md`, "Hearts". `DRAFT:`

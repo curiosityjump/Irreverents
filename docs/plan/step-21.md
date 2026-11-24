@@ -416,3 +416,15 @@ the infiltrator out). e2e by touch (`scripts/e2e/defeat.ts`):
 over by touch comes with push 5: until the old throw is off, a hero
 standing in the camp is thrown out on its fourth fall before the party is
 out (measured: grappler falls at 1184, 1609, 2041, 2473, thrown 2532).
+
+### Push 5: retire the old rule (in parts)
+
+Reds counted before any change (all scenarios, the throw off by data):
+the street alone, none; the camp too, three: `step21-camp-thrown-out` and
+`step21-throw-is-no-escape` (mine) and `step23-thrown-out-leaves-it`
+(Step 23's: its `thrown-out` and courtyard facts). Sent to the
+orchestrator. Landed: the street off. Kept: `returnPrize`, the `move`,
+`landingSpot` (a place's `gameOver`). Dormant where a place is off:
+`defeat-seize`, `defeat-throw`, `c.falls`, `c.seized`, `thrown-out`.
+Waiting: the camp (Step 23's scenario), the quarry (Step 22's start-over
+on `game-over`).

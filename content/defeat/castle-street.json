@@ -1,7 +1,7 @@
 {
-  "//": "DRAFT (Step 21, risk; docs/decisions-log.md 'Step 21'; O-006 is OPEN): beaten by the watch in the castle street while it is alerted (above 0), a guard stands over you for a second, then you are thrown into the open courtyard, the alert unchanged; the guards who saw it walk out after you by the same door (the existing chase rules: 'follow'). Never a hidden room: being beaten must never end a chase (docs/plan/step-21.md). 'on': false is the game before Step 21.",
+  "//": "DRAFT (Step 21, risk; docs/decisions-log.md 'Step 21'; O-006 is OPEN): beaten by the watch in the castle street while it is alerted (above 0), a guard stands over you for a second, then you are thrown into the open courtyard, the alert unchanged; the guards who saw it walk out after you by the same door (the existing chase rules: 'follow'). Never a hidden room: being beaten must never end a chase (docs/plan/step-21.md). 'on': false is the game before Step 21. Off since 2026-11-24 (hearts, push 5): losing is hearts and the game over now (content/hearts.json); the fields stay, read and unused.",
   "id": "castle-street",
-  "on": true,
+  "on": false,
   "rooms": ["castle-street"],
   "seizers": ["guard"],
   "reach": 24,
