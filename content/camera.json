@@ -1,14 +1,18 @@
 {
-  "//": "DRAFT (Step 5, brief camera-looks-at-what-matters; docs/decisions-log.md, 2026-11-24, \"Sideways, the camera looks up at what is aimed at you\"): how each page's own camera leans upward, in a room taller than the picture, to show a thrower's wind-up and arc, or what is above a hero climbing or holding the stick up. Drawing only: the simulation never reads these. Pixels are game pixels, times are seconds. Every number is a first guess, not tuned on a real phone.",
+  "//": "DRAFT (Step 5, brief camera-looks-at-what-matters; docs/decisions-log.md, 2026-11-24, \"Sideways, the camera looks up at what is aimed at you\"): how each page's own camera leans upward, in a room taller than the picture, to show a thrower's wind-up and arc, or what is above a hero climbing or holding the stick up. Drawing only: the simulation never reads these. Pixels are game pixels, times are seconds. Every number is a first guess, not tuned on a real phone. Second push (the orchestrator's look at the after shots): while leaning to an aim the floor stays above the touch controls (aimGround is now the floor kept above them, across the picture); a held Up lifts by lookLift of the picture; a jump on the spot moves nothing (the camera rests on the ground last stood on; a landing climbStep higher is a climb, lifted for climbHold); riseSpeed is read only by the jump fact's control.",
   "aimAbove": 12,
   "aimMargin": 3,
   "aimHold": 2.5,
-  "aimGround": 3,
+  "aimGround": 4,
   "lookGround": 2,
   "lookStickAfter": 0.25,
   "lookHold": 0.8,
   "heroSide": 24,
   "riseSpeed": 60,
   "easeRate": 8,
-  "maxSpeed": 260
+  "maxSpeed": 260,
+  "lookLift": 0.4,
+  "climbStep": 12,
+  "climbHold": 1.2,
+  "airTop": 6
 }

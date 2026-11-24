@@ -83,36 +83,55 @@ into the shared documents.
   from there for a while.
 - **The camera leans up** (Step 5, `src/client/camera.ts`, numbers in
   `content/camera.json`; `DRAFT:`, decisions-log 2026-11-24, "Sideways,
-  the camera looks up at what is aimed at you"). Each page's own camera,
+  the camera looks up at what is aimed at you" and "The camera keeps the
+  floor, lifts on a held Up, and does not bob"). Each page's own camera,
   drawing only, after `roomOrigin`, in a room taller than the view:
+  - **It rests on the ground last stood on.** `render()` passes
+    `roomOrigin` the feet from `steadyFeet`: where the hero last stood
+    while they are in the air above it, the live feet once they fall below
+    it. A jump on the spot moves the picture by nothing; the head is kept
+    `airTop` px inside the top (followed at once past that). A landing at
+    least `climbStep` higher than the last is a climb: the picture lifts
+    as for a held Up for `climbHold` s. Every change of where it rests
+    eases; a new room starts where it rests.
   - **An aim:** while a thrower in the room has `c.rangedAim` (and
-    `aimHold` s after), the view's top eases up to `aimAbove` px over his
-    head and `aimMargin` over his arc's highest point. The hero's feet may
-    then go into the controls' band, `aimGround` px above the view's
-    bottom, only where no touch control in the lower half is beside them
-    (the boxes are read from the page's `[data-stick]`/`[data-action]`
-    layout, twice a second or on a resize); else above that control's top.
-    If the party plate (the last frame's `drawHud` box) would cover him,
-    the view's left is scanned up to his width plus the plate's either
-    way, the hero kept `heroSide` px inside, for the most of him shown.
+    `aimHold` s after), the view's top eases up toward `aimAbove` px over
+    his head (and, over his columns, below the party plate: the plate's
+    rows are not free picture) and `aimMargin` over his arc's top, **but
+    no further than keeps the hero's feet `aimGround` px above the
+    controls' band and above every control's top across the picture**
+    (the control boxes are read from the page's
+    `[data-stick]`/`[data-action]` layout, twice a second or on a resize).
+    So the floor and what lies on it are never under a button; in a room
+    where that cannot show all of him, it shows what fits. Then the view's
+    left is scanned up to his width plus the plate's either way, the hero
+    kept `heroSide` px inside, for the most of him shown clear of the
+    plate.
   - **Looking up:** the stick held up (< −0.5) while standing for
-    `lookStickAfter` s, or rising faster than `riseSpeed`, leans it up
-    (for `lookHold` s after) until the feet sit `lookGround` px above the
-    controls' band.
+    `lookStickAfter` s (held `lookHold` s after), or a climb, lifts the
+    view by `lookLift` of its height, as far as the hero stays whole on
+    the picture, `lookGround` px above its bottom and above a control
+    beside them.
   - It eases (`easeRate`, at most `maxSpeed` px/s) and is drawn on whole
-    pixels; a hero falling while it leans is followed at once; a new room
-    starts unleant. `drawn.lean` gives `{ x, y, lift, shift, why }`;
-    `window.irreverents.cameraLean.off` is the e2e control.
-  - Measured (sideways, the gallery floor at column 15 in front of the
-    thrower): at rest the view's top was room y 50 at 844×390 and 51 at
-    750×340, with him at y 22–48: wholly off the top. Leant: y 12 / 10,
-    he, his raised shot and the whole arc in view, ≤ 6% of him under the
-    plate. The depot's yard, stick up: rows 6–13 instead of 11–18 (the
-    roof route in view); the tower's floor gains one row. Upright the
-    gallery is shorter than the view: no change.
+    pixels. `drawn.lean` gives `{ x, y, lift, shift, why }`;
+    `window.irreverents.cameraLean.off` (the camera as before Step 5) and
+    `.jumpOld` (the first push's live-feet rest and lean on every rise,
+    `riseSpeed`) are the e2e controls; nothing in the game sets them.
+  - Measured sideways (second push): the Hall gallery floor at column 14,
+    the thrower aiming: view top y 39 (lift 12), 9 px of his 26 drawn (his
+    feet and hand), 0% of that under the plate, the arc's descent and its
+    landing drawn, the hero's feet 4 px above the highest button's top. At
+    rest the view's top is y 50 and none of him shows. Column 5, stick
+    held up: y 11 (lift 39), the hero and the thrower both whole (the first
+    push lifted 14). A jump on the castle street: the window moved 0 px
+    (the first push: 49). The depot's yard, stick held up: lift 68, the
+    roof route's beams in view. Upright the gallery is shorter than the
+    view: no change.
   - Not built: a thrower beside the picture is not brought into it; the
-    lean is only upward and sideways only for the plate.
-  - e2e fact `camera-aim-in-picture` (`scripts/e2e/camera.ts`); shots
+    lean is only upward and sideways only for the plate; nothing marks a
+    thrower who is off the top.
+  - e2e facts `camera-jump-still`, `camera-aim-in-picture`,
+    `camera-look-up` (`scripts/e2e/camera.ts`); shots
     `docs/plan/step-5-shots/camera/` (`before/`, `after/`; `after/` rewritten only by `E2E_SHOTS=1`).
 - **Looks** for doors (`door-enter-<w>x<h>`), parts (`part:<room>:<part>`
   with `:down`/`:open`/`:broken`, then `plate-up`/`plate-down`,

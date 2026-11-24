@@ -452,7 +452,7 @@ async function main(): Promise<void> {
       await (await import('./e2e/plates.ts')).plateFacts({ browser, devices, base, out, fact, errors, shots: path.join(out, 'plates') });
       // Step 24's fact (ranged-telegraph): through the opened gate into the Hall gallery, the thrower's aim and arc drawn a full aim before his shot leaves (docs/mechanisms/ranged.md).
       await (await import('./e2e/ranged.ts')).rangedFacts({ browser, devices, base, out, fact, errors, shots: keptShots('step-24-shots') });
-      // Step 5's camera fact (camera-aim-in-picture): sideways, the camera leans up and the thrower's wind-up and arc are drawn inside the picture (docs/mechanisms/rendering-world.md, "The camera leans up").
+      // Step 5's camera facts (camera-jump-still, camera-aim-in-picture, camera-look-up): sideways, a jump does not move the picture, the camera leans up toward a thrower's aim as far as the floor allows, a held Up lifts it (docs/mechanisms/rendering-world.md, "The camera leans up").
       await (await import('./e2e/camera.ts')).cameraFacts({ browser, devices, base, out, fact, errors, shots: keptShots('step-5-shots/camera') });
       // Step 9's facts (power-*): the villain drawn carrying his power, seen by a phone walking into the street by touch (docs/mechanisms/powers.md).
       await (await import('./e2e/powers.ts')).powerFacts({ browser, devices, base, out, fact, errors, shots: path.join(out, 'powers') });

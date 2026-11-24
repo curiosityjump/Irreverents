@@ -848,3 +848,58 @@ Builder `session_017WiGzGHrgYYzH2iGQXcGaG`, 2026-11-24, brief
      held `lookHold`) fires on every jump. To do: lean only on a held Up,
      on a climb that keeps rising past a beat (e.g. rising, or landing
      higher than before, over ~0.5 s), and for an aim.
+- **Second push** (builder `session_017WiGzG1qWbjnes8nG1FuzM`, the orchestrator's
+  four findings plus the walk; decisions-log 2026-11-24, "The camera keeps
+  the floor, lifts on a held Up, and does not bob"). Shots: `before/push1-*`
+  (the first push's after shots, and its depot yard), `after/`.
+  1. *Floor:* while leaning to an aim the feet stay `aimGround` (4) px above
+     the controls' band and every button's top, across the picture
+     (`floorLimit`). Gallery, column 14, 750x340: view top y 39 (the first
+     push: 10), the floor and the boomerang on it above the buttons.
+  2. *Plate:* over his columns his head wants to be below the plate, and the
+     sideways scan counts what is under it as not shown: 0% of what is drawn
+     of him under it. **But only 9 px of his 26 are drawn** (feet, hand),
+     plus the arc's descent and the landing cross: the floor rule leaves no
+     more room in the gallery sideways. Not built: a mark at the top edge for
+     a thrower above the picture; that is the next lever if his wind-up
+     must read there.
+  3. *Holding Up:* lifts by `lookLift` (0.4) of the picture as far as the
+     hero stays whole and clear of a control beside him: column 5, lift 39
+     (was 14), the thrower whole; the depot yard, lift 68, the roof beams in.
+     While held, the hero's feet may sit low between the buttons and the
+     floor goes into the band: deliberate (you asked to look up), released
+     at once.
+  4. *Jump:* the camera rests on the ground last stood on (`steadyFeet`):
+     castle street, one jump, the window moved 0 px (the first push 49,
+     part of it `roomOrigin` following the live position, not only the
+     lean). A landing 12 px or more higher lifts it for 1.2 s (a climb).
+  5. *Walk:* the quarry fact's walk enters the tower at its top floor, so
+     the climb is never walked by a page; instead the depot's yard was
+     walked by touch sideways (the quarry walk, a scratch copy holding the
+     stick up there): `after/depot-yard-up-844x390.png`. The tower climb
+     itself is still not walked.
+  - Facts: `camera-jump-still`, `camera-aim-in-picture` (now: ≥ 6 px of him,
+    ≤ 25% of that under the plate, the landing in the picture, the hero whole
+    and the floor above the buttons; it no longer asks for him whole, which
+    item 1 rules out), `camera-look-up` (was a printed "wanted"). Controls
+    watched to fail: `E2E_CAMERA_OLD=1` fails all three (aim: 0 px of him;
+    look: lift 0; jump: 16 px), `E2E_CAMERA_OLD_JUMP=1` fails the jump (49 px).
+  - Not verified: a real iPhone; whether the climb lift feels right in the
+    tower.
+  - Full `npm run e2e`: the first run was 135 ok, 1 FAIL, `i-clear`'s control
+    (reserve forced to 0) finding no overlap: this push's hard clamp had
+    lifted the camera above where it rests to keep the hero off a control,
+    which is `roomOrigin`'s reserve's job. Capped at the rest place, as the
+    first push had it; the rerun: 136 of 136.
+  - Rebased five times onto a busy `main`; a full `npm run e2e` on each base:
+    142 of 142 once (at ca0ea22); otherwise one or two reds per run, none a
+    camera fact and each green 3 of 3 run alone on the same build:
+    `hearts-game-over`, `start-link-back`, `door-go-in` + `door-use`,
+    `quarry-depot-in` (the climb reads room positions and taps Jump by its
+    page position; the camera does not feed it). On the last base (dd77925)
+    the orchestrator's ruling: build, check, and the camera facts twice, no
+    further full run (its own clean re-run follows the landing).
+  - Asked first, at ad51322 (the orchestrator's two reds): `outpost-break`
+    and `hearts-game-over` 5 of 5 alone with the lean on and 5 of 5 with it
+    off (`cameraLean.off` set by an init script on every page): not the
+    camera.

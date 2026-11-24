@@ -31,7 +31,7 @@ import { drawPrizeStands } from './draw/heist.ts';
 import { drawGameOver } from './draw/game-over.ts';
 import { drawStage, stageScreenUp } from './draw/stage.ts';
 import { useHere } from '../sim/use.ts';
-import { aimsIn, controlBoxes, lean } from './camera.ts';
+import { aimsIn, controlBoxes, lean, steadyFeet } from './camera.ts';
 
 /** DRAFT: the internal resolution the art on order assumes (docs/plan/step-1.md). */
 export const VIEW_W = 320;
@@ -71,8 +71,9 @@ export function render(g: CanvasRenderingContext2D, world: World, content: Conte
   }
   const mine = pv ? world.entities.find((e) => e.id === pv.me) : undefined;
   const box = mine ? content.characters[mine.kind]?.box : undefined;
-  const focus = mine ? { x: mine.x + (box?.w ?? 0) / 2, y: mine.y + (box?.h ?? 0) / 2 } : undefined;
-  const feet = mine && box ? mine.y + box.h : undefined;
+  // Step 5: the camera rests on the ground the hero last stood on, not where a jump carries them (camera.ts, steadyFeet).
+  const feet = mine && box ? steadyFeet(content.camera, roomId, mine.id, mine.y + box.h, mine.onGround, performance.now() / 1000) : undefined;
+  const focus = mine ? { x: mine.x + (box?.w ?? 0) / 2, y: (feet ?? mine.y + (box?.h ?? 0)) - (box?.h ?? 0) / 2 } : undefined;
   const rest = roomOrigin(room, W, H, focus, view.reserve, feet);
   let ox = rest.ox;
   let oy = rest.oy;

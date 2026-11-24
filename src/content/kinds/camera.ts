@@ -14,7 +14,7 @@ export interface Camera {
   aimHold: number;
   /** Room above the highest point of his arc, px. */
   aimMargin: number;
-  /** While something is aimed, the ground kept under the hero's feet when no touch control is beside them, px (else the controls' height is kept). */
+  /** While something is aimed, the floor kept under the hero's feet above the touch controls (the band and every button's top, across the picture), px. */
   aimGround: number;
   /** Looking up: the ground kept under the feet above the touch controls' band, px. */
   lookGround: number;
@@ -24,12 +24,20 @@ export interface Camera {
   lookHold: number;
   /** Leaning sideways to clear a thrower from the plate, the hero is kept at least this far inside the picture's sides, px. */
   heroSide: number;
-  /** Rising faster than this (px/s upward) counts as climbing. */
+  /** Read only by the jump fact's control (leanControl.jumpOld): the first push leant on every rise faster than this, px/s. */
   riseSpeed: number;
   /** How quickly the camera eases toward where it wants to be: the share of the way covered is 1 − e^(−rate·seconds). */
   easeRate: number;
   /** The fastest it eases, px/s. */
   maxSpeed: number;
+  /** A held Up (or a climb) lifts the picture by this share of its height, as far as the hero stays whole on it. */
+  lookLift: number;
+  /** A landing at least this much higher than the last counts as a climb, px. */
+  climbStep: number;
+  /** How long the picture stays lifted after a climb's landing, s. */
+  climbHold: number;
+  /** In a jump, the camera follows only once the hero's head comes within this of the picture's top, px. */
+  airTop: number;
 }
 
 declare module '../types.ts' {
@@ -38,7 +46,7 @@ declare module '../types.ts' {
   }
 }
 
-const FIELDS = ['aimAbove', 'aimMargin', 'aimHold', 'aimGround', 'lookGround', 'lookStickAfter', 'lookHold', 'heroSide', 'riseSpeed', 'easeRate', 'maxSpeed'] as const;
+const FIELDS = ['aimAbove', 'aimMargin', 'aimHold', 'aimGround', 'lookGround', 'lookStickAfter', 'lookHold', 'heroSide', 'riseSpeed', 'easeRate', 'maxSpeed', 'lookLift', 'climbStep', 'climbHold', 'airTop'] as const;
 
 const kind: ContentKind = {
   id: 'camera',
@@ -58,6 +66,10 @@ const kind: ContentKind = {
       riseSpeed: read.number(o, 'riseSpeed', '', { min: 0, max: 2000 }),
       easeRate: read.number(o, 'easeRate', '', { min: 0.1, max: 100 }),
       maxSpeed: read.number(o, 'maxSpeed', '', { min: 1, max: 10000 }),
+      lookLift: read.number(o, 'lookLift', '', { min: 0, max: 1 }),
+      climbStep: read.number(o, 'climbStep', '', { min: 1, max: 200 }),
+      climbHold: read.number(o, 'climbHold', '', { min: 0, max: 10 }),
+      airTop: read.number(o, 'airTop', '', { min: 0, max: 100 }),
     } satisfies Camera;
   },
 };

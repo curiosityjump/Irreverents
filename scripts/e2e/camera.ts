@@ -9,31 +9,50 @@
 // it rather than lean, leaving the thrower partly under the plate
 // (docs/plan/step-5.md, "Camera", weakest).
 // Fact `camera-aim-in-picture`: on the last frame page A draws his aim before
-// his shot leaves, the page draws him whole inside the picture and at most a
-// quarter of him under the party plate, the top of his arc and where it comes
-// down inside the picture, and A's own hero whole inside it with no touch
-// control over him; and the camera never jumped more than LEAP_MAX px in one
-// frame on the way (easing, never snapping).
+// his shot leaves, the page draws at least AIM_SEEN px of his height inside
+// the picture and at most a quarter of what it draws of him under the party
+// plate, where his arc comes down inside the picture, and A's own hero whole
+// inside it with no touch control over him and the floor under the feet above
+// every control's top (the second push: the floor is never given up to the
+// lean, so in the gallery sideways he is only partly in; INTENT, the
+// orchestrator's look at the first after shots, docs/plan/step-5.md
+// "Camera"); and the camera never jumped more than LEAP_MAX px in one frame
+// on the way (easing, never snapping).
 // Control, watched to fail: E2E_CAMERA_OLD=1 sets
 // `window.irreverents.cameraLean.off` on page A, the camera as before (it
 // keeps the floor: the thrower is off the top of the picture).
-// Wanted, not required (printed): standing behind him (column 5, no aim),
-// the stick held up leans the camera up (`drawn.lean.why` "look").
+// Fact `camera-jump-still`: on the castle street (taller than the picture
+// sideways), standing, one tap of Jump: the hero rises at least JUMP_RISE px
+// and the camera's window moves by nothing. Control E2E_CAMERA_OLD_JUMP=1 sets
+// `cameraLean.jumpOld` (the first push: the camera on the hero's live
+// position, a lean on every rise): the window moves.
+// Fact `camera-look-up`: behind him (column 5, no aim), the stick held up by
+// touch lifts the window at least LOOK_MIN px, the hero whole in the picture
+// and the thrower (on the balcony above) whole in it too. E2E_CAMERA_OLD=1
+// fails it (no lift).
 // Shots: docs/plan/step-5-shots/camera/after/ with E2E_SHOTS=1 (else e2e-out/kept/), sideways at 844x390 and
 // 750x340, and upright 390x664.
 // DRAFT: every wait and bound is a first pass with room to spare.
-import fs from 'node:fs';
-import path from 'node:path';
-import { phone, pointOn, settle, standAt } from '../lib/e2e-touch.ts';
-import type { Kit, Phone } from '../lib/e2e-touch.ts';
-import { walkInto } from './outpost.ts';
+import fs from "node:fs";
+import path from "node:path";
+import { phone, pointOn, settle, standAt, tap } from "../lib/e2e-touch.ts";
+import type { Kit, Phone } from "../lib/e2e-touch.ts";
+import { walkInto } from "./outpost.ts";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
-const OLD = process.env.E2E_CAMERA_OLD === '1';
-const THROWER = 'gallery-thrower-1';
+const sleep = (ms: number): Promise<void> =>
+  new Promise((r) => setTimeout(r, ms));
+const OLD = process.env.E2E_CAMERA_OLD === "1";
+const THROWER = "gallery-thrower-1";
 /** DRAFT: the most the camera may move in one frame, px (its whole lean here is about 40). */
 const LEAP_MAX = 12;
+/** DRAFT: the least of the thrower's height (26) the gallery's aim must draw, px: his legs and the shot's start. */
+const AIM_SEEN = 6;
+/** DRAFT: a tap of Jump rises about 55 px; this is well inside it. */
+const JUMP_RISE = 25;
+/** DRAFT: the first push lifted 14 px on a held Up; the floor's rest view leaves about 40 (the hero stays whole). */
+const LOOK_MIN = 30;
+const OLD_JUMP = process.env.E2E_CAMERA_OLD_JUMP === "1";
 
 const xOn = (ph: Phone, tx: number): Promise<number> =>
   ph.page.evaluate((c: number) => {
@@ -51,7 +70,7 @@ interface Seen {
 /** Every frame until his shot leaves (or `ms`): the picture on the last frame drawing his aim, and the camera's largest one-frame move. */
 const watch = (ph: Phone, ms: number): Promise<Seen> =>
   ph.page.evaluate(
-    ([id, dur]: [string, number]) =>
+    ([id, dur, seenMin]: [string, number, number]) =>
       new Promise<Seen>((resolve) => {
         const irr = (window as any).irreverents;
         const t0 = performance.now();
@@ -59,7 +78,11 @@ const watch = (ph: Phone, ms: number): Promise<Seen> =>
         let frames = 0;
         let prev: { x: number; y: number } | null = null;
         let lastAim: any = null;
-        const before = new Set<string>((irr.drawn.weapons.loose as any[]).filter((l) => l.weapon === 'thrown-shot').map((l) => l.id));
+        const before = new Set<string>(
+          (irr.drawn.weapons.loose as any[])
+            .filter((l) => l.weapon === "thrown-shot")
+            .map((l) => l.id),
+        );
         const look = (): any => {
           const d = irr.drawn;
           const cam = d.camera;
@@ -71,22 +94,69 @@ const watch = (ph: Phone, ms: number): Promise<Seen> =>
           const tb = irr.content.characters[t.kind].box;
           const mb = irr.content.characters[d.me.kind].box;
           const him = { x: t.px - cam.x, y: t.py - cam.y, w: tb.w, h: tb.h };
-          const me = { x: d.me.px - cam.x, y: d.me.py - cam.y, w: mb.w, h: mb.h };
+          const me = {
+            x: d.me.px - cam.x,
+            y: d.me.py - cam.y,
+            w: mb.w,
+            h: mb.h,
+          };
           const plate = d.hud?.box ?? { x: 0, y: 0, w: 0, h: 0 };
-          const ow = Math.max(0, Math.min(him.x + him.w, plate.x + plate.w) - Math.max(him.x, plate.x));
-          const oh = Math.max(0, Math.min(him.y + him.h, plate.y + plate.h) - Math.max(him.y, plate.y));
-          const canvas = document.getElementById('game')!.getBoundingClientRect();
+          const ow = Math.max(
+            0,
+            Math.min(him.x + him.w, plate.x + plate.w) -
+              Math.max(him.x, plate.x),
+          );
+          const oh = Math.max(
+            0,
+            Math.min(him.y + him.h, plate.y + plate.h) -
+              Math.max(him.y, plate.y),
+          );
+          const canvas = document
+            .getElementById("game")!
+            .getBoundingClientRect();
           const sx = W / canvas.width;
           const sy = H / canvas.height;
           let overMe = 0;
-          for (const el of document.querySelectorAll<HTMLElement>('[data-stick], [data-action]')) {
+          let floorTop = H;
+          for (const el of document.querySelectorAll<HTMLElement>(
+            "[data-stick], [data-action]",
+          )) {
             const b = el.getBoundingClientRect();
             if (b.width <= 0) continue;
-            const c = { x: (b.left - canvas.left) * sx, y: (b.top - canvas.top) * sy, w: b.width * sx, h: b.height * sy };
-            const w = Math.max(0, Math.min(me.x + me.w, c.x + c.w) - Math.max(me.x, c.x));
-            const h = Math.max(0, Math.min(me.y + me.h, c.y + c.h) - Math.max(me.y, c.y));
+            const c = {
+              x: (b.left - canvas.left) * sx,
+              y: (b.top - canvas.top) * sy,
+              w: b.width * sx,
+              h: b.height * sy,
+            };
+            const w = Math.max(
+              0,
+              Math.min(me.x + me.w, c.x + c.w) - Math.max(me.x, c.x),
+            );
+            const h = Math.max(
+              0,
+              Math.min(me.y + me.h, c.y + c.h) - Math.max(me.y, c.y),
+            );
             overMe = Math.max(overMe, w * h);
+            if (c.y > H / 2) floorTop = Math.min(floorTop, c.y);
           }
+          const seenTop = Math.max(0, him.y);
+          const seenBottom = Math.min(H, him.y + him.h);
+          const seenH = Math.max(0, seenBottom - seenTop);
+          const seenW = Math.max(
+            0,
+            Math.min(W, him.x + him.w) - Math.max(0, him.x),
+          );
+          const uw = Math.max(
+            0,
+            Math.min(him.x + him.w, plate.x + plate.w, W) -
+              Math.max(him.x, plate.x, 0),
+          );
+          const uh = Math.max(
+            0,
+            Math.min(seenBottom, plate.y + plate.h) -
+              Math.max(seenTop, plate.y),
+          );
           return {
             W,
             H,
@@ -94,6 +164,9 @@ const watch = (ph: Phone, ms: number): Promise<Seen> =>
             him,
             me,
             under: (ow * oh) / (him.w * him.h),
+            seenH: seenW > 0 ? seenH : 0,
+            underSeen: seenH * seenW > 0 ? (uw * uh) / (seenH * seenW) : 0,
+            floorGap: floorTop - (me.y + me.h),
             arcTop: a.top - cam.y,
             end: { x: a.x - cam.x, y: a.y - cam.y },
             overMe,
@@ -103,32 +176,97 @@ const watch = (ph: Phone, ms: number): Promise<Seen> =>
         const tick = (): void => {
           const d = irr.drawn;
           frames++;
-          if (prev && d.room === 'hall-gallery') leap = Math.max(leap, Math.abs(d.camera.x - prev.x), Math.abs(d.camera.y - prev.y));
+          if (prev && d.room === "hall-gallery")
+            leap = Math.max(
+              leap,
+              Math.abs(d.camera.x - prev.x),
+              Math.abs(d.camera.y - prev.y),
+            );
           prev = { x: d.camera.x, y: d.camera.y };
           const now = look();
           if (now) lastAim = now;
-          const loose = (d.weapons.loose as any[]).some((x) => x.weapon === 'thrown-shot' && !before.has(x.id));
+          const loose = (d.weapons.loose as any[]).some(
+            (x) => x.weapon === "thrown-shot" && !before.has(x.id),
+          );
           if ((loose && lastAim) || performance.now() - t0 > dur) {
             const s = lastAim;
-            if (!s) return resolve({ ok: false, text: 'no aim drawn', leap, frames });
-            const inside = (b: any): boolean => b.x >= 0 && b.y >= 0 && b.x + b.w <= s.W && b.y + b.h <= s.H;
-            const ok = inside(s.him) && s.under <= 0.25 && s.arcTop >= 0 && s.end.x >= 0 && s.end.x <= s.W && s.end.y >= 0 && s.end.y <= s.H && inside(s.me) && s.overMe === 0;
+            if (!s)
+              return resolve({ ok: false, text: "no aim drawn", leap, frames });
+            const inside = (b: any): boolean =>
+              b.x >= 0 && b.y >= 0 && b.x + b.w <= s.W && b.y + b.h <= s.H;
+            const ok =
+              s.seenH >= seenMin &&
+              s.underSeen <= 0.25 &&
+              s.end.x >= 0 &&
+              s.end.x <= s.W &&
+              s.end.y >= 0 &&
+              s.end.y <= s.H &&
+              inside(s.me) &&
+              s.overMe === 0 &&
+              s.floorGap >= 0;
             const r = (v: number): number => Math.round(v);
-            const text = `picture ${s.W}x${s.H}, camera at ${r(s.cam.x)}, ${r(s.cam.y)} (lean ${JSON.stringify(s.lean)}): the thrower drawn at ${r(s.him.x)}, ${r(s.him.y)} (${s.him.w}x${s.him.h}, ${Math.round(s.under * 100)}% under the plate), his arc's top at y ${r(s.arcTop)}, where it comes down at ${r(s.end.x)}, ${r(s.end.y)}; A's hero at ${r(s.me.x)}, ${r(s.me.y)} (${s.me.w}x${s.me.h}; ${r(s.overMe)} px² under a control)`;
+            const text = `picture ${s.W}x${s.H}, camera at ${r(s.cam.x)}, ${r(s.cam.y)} (lean ${JSON.stringify(s.lean)}): the thrower drawn at ${r(s.him.x)}, ${r(s.him.y)} (${s.him.w}x${s.him.h}; ${r(s.seenH)} px of his height in the picture, ${Math.round(s.underSeen * 100)}% of that under the plate), his arc's top at y ${r(s.arcTop)}, where it comes down at ${r(s.end.x)}, ${r(s.end.y)}; A's hero at ${r(s.me.x)}, ${r(s.me.y)} (${s.me.w}x${s.me.h}; ${r(s.overMe)} px² under a control; its feet ${r(s.floorGap)} px above the highest control's top)`;
             return resolve({ ok, text, leap, frames });
           }
           requestAnimationFrame(tick);
         };
         requestAnimationFrame(tick);
       }),
-    [THROWER, ms] as [string, number],
+    [THROWER, ms, AIM_SEEN] as [string, number, number],
   );
 
-async function shot(ph: Phone, dir: string, w: number, h: number): Promise<void> {
+/** One tap of Jump, standing: the hero's highest rise and the camera's widest move over the next 1.4 s, as the page drew them. */
+async function jumpOnce(
+  ph: Phone,
+): Promise<{ rise: number; moved: number; lean: string }> {
+  const watching = ph.page.evaluate(
+    () =>
+      new Promise<{ rise: number; moved: number; lean: string }>((resolve) => {
+        const irr = (window as any).irreverents;
+        const y0 = irr.drawn.me.py;
+        const c0 = { ...irr.drawn.camera };
+        let rise = 0;
+        let moved = 0;
+        const leans = new Set<string>();
+        const t0 = performance.now();
+        const tick = (): void => {
+          const d = irr.drawn;
+          rise = Math.max(rise, y0 - d.me.py);
+          moved = Math.max(
+            moved,
+            Math.abs(d.camera.x - c0.x),
+            Math.abs(d.camera.y - c0.y),
+          );
+          leans.add(d.lean?.why ?? "?");
+          if (performance.now() - t0 > 1400)
+            return resolve({ rise, moved, lean: [...leans].join("/") });
+          requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      }),
+  );
+  await sleep(60);
+  await tap(ph, "jump", 200);
+  return watching;
+}
+
+async function shot(
+  ph: Phone,
+  dir: string,
+  w: number,
+  h: number,
+): Promise<void> {
   await ph.page.setViewportSize({ width: w, height: h });
   await sleep(300);
   try {
-    await ph.page.waitForFunction((id: string) => ((window as any).irreverents.drawn.ranged?.aims ?? []).some((a: any) => a.id === id), THROWER, { polling: 'raf', timeout: 6000 });
+    await ph.page.waitForFunction(
+      (id: string) =>
+        ((window as any).irreverents.drawn.ranged?.aims ?? []).some(
+          (a: any) => a.id === id,
+        ),
+      THROWER,
+      { polling: "raf", timeout: 6000 },
+    );
     await sleep(350);
   } catch {
     // shot anyway
@@ -139,16 +277,50 @@ async function shot(ph: Phone, dir: string, w: number, h: number): Promise<void>
 export async function cameraFacts(kit: Kit & { shots: string }): Promise<void> {
   const { fact } = kit;
   const url = `${kit.base}/?room=e2e-camera-${Math.random().toString(36).slice(2, 10)}`;
-  const A = await phone(kit, url, 'camera A');
-  const B = await phone(kit, url, 'camera B');
+  const A = await phone(kit, url, "camera A");
+  const B = await phone(kit, url, "camera B");
   try {
-    if (OLD) await A.page.evaluate(() => ((window as any).irreverents.cameraLean.off = true));
+    if (OLD)
+      await A.page.evaluate(
+        () => ((window as any).irreverents.cameraLean.off = true),
+      );
+    if (OLD_JUMP)
+      await A.page.evaluate(
+        () => ((window as any).irreverents.cameraLean.jumpOld = true),
+      );
     await sleep(600);
-    const there = (await walkInto(A, 1, 'castle-street')) && (await walkInto(A, 1, 'courtyard')) && (await walkInto(B, 1, 'castle-street')) && (await walkInto(B, 1, 'courtyard'));
+    const onStreet = await walkInto(A, 1, "castle-street");
+    // The jump fact: on the street, standing at column 4 (open above it to the ceiling; column 8 is under a ledge), one tap of Jump.
+    if (onStreet) await standAt(A, await xOn(A, 4), 1);
+    await sleep(700);
+    const j = onStreet
+      ? await jumpOnce(A)
+      : { rise: 0, moved: -1, lean: "not on the street" };
+    const viewH = await A.page.evaluate(
+      () => (window as any).irreverents.view.h,
+    );
+    fact(
+      "camera-jump-still",
+      onStreet && j.rise >= JUMP_RISE && j.moved === 0,
+      `page A held sideways, standing on the castle street (192 px tall; the picture ${viewH}), tapped Jump once${OLD_JUMP ? " (CONTROL: the first push's camera)" : ""}: rose ${Math.round(j.rise)} px (at least ${JUMP_RISE}); the camera's window moved by ${Math.round(j.moved)} px (must be 0; lean ${j.lean})`,
+    );
+    if (OLD_JUMP) return;
+    const there =
+      onStreet &&
+      (await walkInto(A, 1, "courtyard")) &&
+      (await walkInto(B, 1, "castle-street")) &&
+      (await walkInto(B, 1, "courtyard"));
     await standAt(A, await xOn(A, 16), 1);
     await standAt(B, await xOn(B, 22), -1);
     try {
-      await A.page.waitForFunction(() => (window as any).irreverents.drawn.parts.find((q: any) => q.part === 'plate-gate')?.on === true, null, { polling: 'raf', timeout: 4000 });
+      await A.page.waitForFunction(
+        () =>
+          (window as any).irreverents.drawn.parts.find(
+            (q: any) => q.part === "plate-gate",
+          )?.on === true,
+        null,
+        { polling: "raf", timeout: 4000 },
+      );
     } catch {
       // reported below
     }
@@ -159,8 +331,12 @@ export async function cameraFacts(kit: Kit & { shots: string }): Promise<void> {
       let prev: any = null;
       const tick = (): void => {
         const d = irr.drawn;
-        if (prev && prev.room === 'hall-gallery' && d.room === 'hall-gallery') {
-          t.max = Math.max(t.max, Math.abs(d.camera.x - prev.x), Math.abs(d.camera.y - prev.y));
+        if (prev && prev.room === "hall-gallery" && d.room === "hall-gallery") {
+          t.max = Math.max(
+            t.max,
+            Math.abs(d.camera.x - prev.x),
+            Math.abs(d.camera.y - prev.y),
+          );
           t.frames++;
         }
         prev = { room: d.room, x: d.camera.x, y: d.camera.y };
@@ -168,15 +344,24 @@ export async function cameraFacts(kit: Kit & { shots: string }): Promise<void> {
       };
       requestAnimationFrame(tick);
     });
-    const inGallery = there && (await walkInto(A, 1, 'hall-gallery', 12000));
+    const inGallery = there && (await walkInto(A, 1, "hall-gallery", 12000));
     if (inGallery) await standAt(A, await xOn(A, 14), 1);
     // His next whole aim: wait for one to end first if he is mid-aim, so the watch sees it from its start.
     try {
-      await A.page.waitForFunction((id: string) => !((window as any).irreverents.drawn.ranged?.aims ?? []).some((a: any) => a.id === id), THROWER, { polling: 'raf', timeout: 4000 });
+      await A.page.waitForFunction(
+        (id: string) =>
+          !((window as any).irreverents.drawn.ranged?.aims ?? []).some(
+            (a: any) => a.id === id,
+          ),
+        THROWER,
+        { polling: "raf", timeout: 4000 },
+      );
     } catch {
       // watched anyway
     }
-    const w = inGallery ? await watch(A, 9000) : { ok: false, text: 'not in the gallery', leap: 0, frames: 0 };
+    const w = inGallery
+      ? await watch(A, 9000)
+      : { ok: false, text: "not in the gallery", leap: 0, frames: 0 };
     const leapWatch = await A.page.evaluate(() => {
       const t = (window as any).irreverents.leapWatch;
       t.stop = true;
@@ -185,38 +370,79 @@ export async function cameraFacts(kit: Kit & { shots: string }): Promise<void> {
     w.leap = Math.max(w.leap, leapWatch.max);
     w.frames = leapWatch.frames;
     fact(
-      'camera-aim-in-picture',
+      "camera-aim-in-picture",
       inGallery && w.ok && w.leap <= LEAP_MAX,
-      `page A held sideways walked by touch into the Hall gallery (${inGallery}) to column 14${OLD ? ' (CONTROL: the camera as before)' : ''}; on the last frame drawing the thrower's aim: ${w.text}; the camera's largest one-frame move ${w.leap} px (at most ${LEAP_MAX}) over ${w.frames} frames in the gallery`,
+      `page A held sideways walked by touch into the Hall gallery (${inGallery}) to column 14${OLD ? " (CONTROL: the camera as before)" : ""}; on the last frame drawing the thrower's aim: ${w.text}; the camera's largest one-frame move ${w.leap} px (at most ${LEAP_MAX}) over ${w.frames} frames in the gallery`,
     );
-    if (OLD || !inGallery) return;
-    const dir = path.join(kit.shots, 'after');
+    if (!inGallery) return;
+    const dir = path.join(kit.shots, "after");
     fs.mkdirSync(dir, { recursive: true });
-    for (const [vw, vh] of [
-      [844, 390],
-      [750, 340],
-      [390, 664],
-    ] as const)
-      await shot(A, dir, vw, vh);
+    if (!OLD)
+      for (const [vw, vh] of [
+        [844, 390],
+        [750, 340],
+        [390, 664],
+      ] as const)
+        await shot(A, dir, vw, vh);
     await A.page.setViewportSize({ width: 844, height: 390 });
     await sleep(300);
-    // Wanted, not required: behind him (no aim), the stick held up looks up.
+    // Behind him (no aim), the stick held up looks up (camera-look-up).
     await standAt(A, await xOn(A, 5), -1);
     await sleep(2800); // past aimHold, so a lean left from his aims has eased off
-    const rest = await A.page.evaluate(() => ({ ...(window as any).irreverents.drawn.lean }));
-    const p = await pointOn(A, '[data-stick]', 0.5);
+    const rest = await A.page.evaluate(() => ({
+      ...(window as any).irreverents.drawn.lean,
+    }));
+    const p = await pointOn(A, "[data-stick]", 0.5);
     let up: any = null;
+    const wholeNow = (): Promise<{ me: boolean; him: boolean }> =>
+      A.page.evaluate((id: string) => {
+        const irr = (window as any).irreverents;
+        const d = irr.drawn;
+        const W = irr.view.w;
+        const H = irr.view.h;
+        const box = (e: any): any => {
+          const b = irr.content.characters[e.kind].box;
+          return { x: e.px - d.camera.x, y: e.py - d.camera.y, w: b.w, h: b.h };
+        };
+        const t = (d.entities as any[]).find((e) => e.id === id);
+        const inside = (b: any): boolean =>
+          b.x >= 0 && b.y >= 0 && b.x + b.w <= W && b.y + b.h <= H;
+        return { me: inside(box(d.me)), him: t ? inside(box(t)) : false };
+      }, THROWER);
+    let whole = { me: false, him: false };
     if (p) {
-      const top = await A.page.evaluate(() => document.querySelector('[data-stick]')!.getBoundingClientRect().top);
-      await A.cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ ...p, id: 1 }] });
-      await A.cdp.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x: p.x, y: Math.max(0, top - 30), id: 1 }] });
+      const top = await A.page.evaluate(
+        () =>
+          document.querySelector("[data-stick]")!.getBoundingClientRect().top,
+      );
+      await A.cdp.send("Input.dispatchTouchEvent", {
+        type: "touchStart",
+        touchPoints: [{ ...p, id: 1 }],
+      });
+      await A.cdp.send("Input.dispatchTouchEvent", {
+        type: "touchMove",
+        touchPoints: [{ x: p.x, y: Math.max(0, top - 30), id: 1 }],
+      });
       await sleep(900);
-      up = await A.page.evaluate(() => ({ ...(window as any).irreverents.drawn.lean }));
-      await A.page.screenshot({ path: path.join(dir, 'look-up-844x390.png') });
-      await A.cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+      up = await A.page.evaluate(() => ({
+        ...(window as any).irreverents.drawn.lean,
+      }));
+      whole = await wholeNow();
+      if (!OLD)
+        await A.page.screenshot({
+          path: path.join(dir, "look-up-844x390.png"),
+        });
+      await A.cdp.send("Input.dispatchTouchEvent", {
+        type: "touchEnd",
+        touchPoints: [],
+      });
       await settle(A);
     }
-    console.log(`      (camera) behind him, at rest ${JSON.stringify(rest)}; the stick held up ${JSON.stringify(up)} (not a fact)`);
+    fact(
+      "camera-look-up",
+      up !== null && up.lift >= LOOK_MIN && whole.me && whole.him,
+      `page A held sideways behind the thrower (column 5, no aim), at rest ${JSON.stringify(rest)}; the stick held up by touch: ${JSON.stringify(up)} (a lift of at least ${LOOK_MIN}); A's hero whole in the picture (${whole.me}); the thrower on the balcony whole in it (${whole.him})`,
+    );
   } finally {
     await A.ctx.close();
     await B.ctx.close();
