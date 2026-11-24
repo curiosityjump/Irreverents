@@ -647,3 +647,15 @@ before you quote it.
   - The stage set to `on: false`: `step22-restart-restores` and `step22-restart-on-game-over` fail.
   - The quarry's `gameOver` taken out: `step22-beaten-to-entrance` fails.
 - **Accepted change of meaning:** `step22-friend-inside-no-restart` now proves that one player's hero running out, while a friend still has hearts, starts nothing over. Under the owner's hearts rule a game over moves the whole party, so the brief's old "a friend still inside" case no longer arises. The signal's line is read that way from now on.
+
+### Lead review, 3b part 1 (cae9717)
+
+- `npm run build` is ok, and all 22 `step22-*` scenarios pass.
+- Control, run by me: the end box moved up out of reach (rows 1-2). All ten `step22-each-hero-*` fail.
+- All five heroes clear alone, fighting and sneaking, and nobody needed a way made.
+- **Ruling, for push 5: an unseen clear must exist.** No run is unseen today: the road's toll-keeper and fighters see the main way. The owner's standard is "the satisfaction of a zero-alarm infiltration", and the step says quiet routes are worth more.
+  - Push 5's placements give at least one route that passes the whole quarry with no bad guy seeing a hero.
+  - Leave the toll-keeper out of "unseen" if that is the only way (`DRAFT:`).
+  - Prove it with a `step22-unseen-clear` scenario, whose `stage-cleared` has unseen true, plus a control.
+  - Re-record the ten hero runs with `scripts/stage-bot.ts` if the placements move them.
+- **Doubt, for the owner by playing:** the star times (best 45 s, good 60 s) come from a script, and a person on a phone will be slower. They stay `DRAFT:`, and they're one number each in the stage file.

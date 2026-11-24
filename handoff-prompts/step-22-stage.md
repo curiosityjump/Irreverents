@@ -14,7 +14,7 @@
   3. **3b: the five heroes, each alone**, from the entrance to the end by a script that fights and by one that sneaks (`step22-each-hero-{fights,sneaks}-{hero}`). A hero who can't get through gets a way, not a notice. Then the three threshold runs, and the star times set from them (the `step22-stars-edges-*` move with them). If no sneaking route passes the toll-keeper unseen, leave him out of "unseen" (`DRAFT:`, the lead's ruling). Measure after Step 23's spear (quarry-road [8,16]) and bomb ([34,12]) land, if they have. Also two e2e steps, owed by the signal:
      - walk into the quarry on the phone page, be beaten, be at the entrance with the stick moving the hero;
      - one walked clear on a page, so STAGE CLEARED comes up from the real event.
-  4. **Push 5:** more enemies, and the stage found without being told.
+  4. **Push 5** (lead, 07:35 UTC: it must include an unseen clear, as in the lead review of 3b part 1 in `docs/plan/step-22.md`): more enemies, and the stage found without being told.
 - Push each one as soon as it is green. Stop at about 350k tokens, with a handoff under "Builder notes".
 
 **Lead, 04:08 UTC, the state of play. READ THIS FIRST.**
