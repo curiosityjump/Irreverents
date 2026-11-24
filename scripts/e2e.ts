@@ -420,6 +420,8 @@ async function main(): Promise<void> {
       await (await import('./e2e/hit-lands.ts')).hitLandsFacts({ browser, devices, base, out, fact, errors });
       // Two snapshots in one frame (snaps-one-frame): every snapshot's events reach the page's watchers once (docs/mechanisms/network.md, "Two snapshots in one frame").
       await (await import('./e2e/snaps-one-frame.ts')).snapsOneFrameFacts({ browser, devices, base, out, fact, errors });
+      // A blow on your own hero (struck-own): the struck page draws it hurt, with its flash, within a round trip (docs/mechanisms/network.md, "A blow on your own hero").
+      await (await import('./e2e/struck-own.ts')).struckOwnFacts({ browser, devices, base, out, fact, errors, shots: keptShots('step-5-shots/struck') });
       // Step 5, the owner's report (ko-*): a knocked-out enemy is drawn flying from the blow and lying where he lands, never lying while he slides (docs/mechanisms/rendering-actors.md).
       await (await import('./e2e/knocked-out.ts')).knockedOutFacts({ browser, devices, base, out, fact, errors });
       // Step 5, part 3 (king-wall): by touch, the king punched west from the dais comes to rest outside the false wall behind the throne (docs/mechanisms/rooms-and-doors.md).

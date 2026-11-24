@@ -983,3 +983,43 @@ Builder session `session_017WiGzJrwonyg1a3d9hvyg4`, 2026-11-24.
 - **Not verified:** a real iPhone. Whether watchers that rely on seeing
   one snapshot's events per object (none found: every one loops over
   `events`) mind a merged list.
+
+### Push 2: a blow on your own hero shows on your own phone
+
+- **Cause, confirmed in a running page:** on the struck page the impact push
+  set `c.flying` on a hero already at rest (gone the next tick, before any
+  frame drew it); the beat's closing push carries no `fly`, so the hop drew
+  `jump`/`fall`; no impact was ever drawn on the own hero. Control below:
+  never drawn hurt, never an impact.
+- **Fix, no new field:** every `fx` message already carries the server's
+  copy of the hero (`m.e`). `feel` (`src/net/client.ts`) copies only the
+  beat's ticks (no speed: the server's closing push still brings it, so
+  nothing hops twice), the flight when the closing push finds this page's
+  already over, and a new `c.impact` restamped to this page's tick. A blow
+  on a hero already flying takes the "met first" branch (Thrown friend);
+  `feel` runs there too, or its impact was missed (seen 1 run in 5).
+  `DRAFT:` every blow on a hero flashes (`sprites.ts`, `strong`;
+  `docs/decisions-log.md`). `docs/mechanisms/network.md`, "A blow on your
+  own hero".
+- **Fact `struck-own`** (`scripts/e2e/struck-own.ts`): a phone page, 150 ms
+  added each way, by touch into the cantina and a brawl; the regulars'
+  blows. From the server's push for each blow (heard by the script before
+  the delay), hurt and the impact drawn after about 155-170 ms each (limit:
+  round trip plus a frame, about 320 ms). Since the met-first fix: 15 of
+  16 alone (8 of 8, then on the rebased tree 1 of 2 and 5 of 5; the one
+  red's line was not kept, so its cause is unknown; 4 of 5 before the
+  fix), green in the full run; control (the
+  pre-change `client.ts` and `sprites.ts`, rebuilt) red 3 of 3: never.
+  One rare case seen once in 5 before the met-first fix and not since: a
+  blow drawn `run/down/idle` with its impact; the fact now prints each
+  undrawn blow's push (fly, beat, flying, held) if it comes back.
+- **Full `npm run e2e`** (on 3314c47 plus this push): 167 ok, 1 red,
+  `suplex-again` ("not reached": the king did not come up), not on the
+  known list; alone 3 of 3 green on the same build.
+- **Shots:** `docs/plan/step-5-shots/struck/hero-mid-hit-844x390.png` and
+  `-390x664.png`, the hero under its marker with the burst on it. Weak: in
+  a brawl's pile-up the hurt pose itself is hard to pick out; the burst
+  carries it.
+- **Changed for the player:** during a blow's beat and the knock the own
+  hero cannot steer (the server already held it so). Not verified: a real
+  iPhone; how it feels.

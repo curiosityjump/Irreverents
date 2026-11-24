@@ -1,7 +1,6 @@
 # A phone sometimes never draws what just happened: a GAME OVER card, a banner, a sound; and a hero who is hit looks untouched on their own phone
 
-**Landed so far:** nothing yet. (A builder stopping at its budget writes
-its commits here, one line, before it stops.)
+**Landed so far:** push 1 at 3314c47 (live); push 2 in the commit after it.
 
 Brief for one builder, two small pushes. Written 2026-11-24 20:35 UTC by
 the orchestrator (`session_017WiGzHY5UZsWTLCH8cLm8M`). Read first:

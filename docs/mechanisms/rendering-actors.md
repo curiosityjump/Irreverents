@@ -111,7 +111,9 @@ is this one (see the flag below).
   impact is in its beat (`c.beat`) and plays on when it lets go; it is
   drawn 5/4 size at ≥ 85% of full impact speed, 3/4 below 35% unless it
   was an attack's hit (`c.lastHit` on that tick), else its own size. The
-  white flash is 2 ticks and only for impacts ≥ 250 px/s.
+  white flash is 2 ticks and only for impacts ≥ 250 px/s, except on a
+  hero, where every blow flashes (`DRAFT:`, brief
+  page-misses-what-happened; `docs/decisions-log.md`, 2026-11-24).
 - **Stamped states** (Step 2's feel push) replace the page's own timing
   where present and newer: `c.landing.tick`, `c.airborne.since` (rising
   only), `c.grab.at` (while carrying), `c.lastThrow.tick`, `c.flap.at`;

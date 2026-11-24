@@ -156,6 +156,9 @@ Known limits (`DRAFT:`), for whoever builds combat and doors:
   (what this player is carrying, say) is not on the player's own entity
   on their own page; read it from the other entity involved, which does
   arrive. `kind` is the page's: a `switch` is decided on the page.
+  A blow is the exception that proves it: `feel` copies just the beat,
+  the flight and the impact from the push's server copy ("A blow on your
+  own hero", below).
 - A change made to a player's entity **without** `emitEffect` is undone
   by the puppet rule on the next tick.
 - The server's events for puppets (`landed` and such) are the server's
@@ -324,6 +327,37 @@ is wrapped hands two snapshots over in one task, the first carrying GAME
 OVER and a clean getaway; the card, the banner and both sounds are drawn,
 a resent copy is announced once, and after a cut the page draws a new
 pair once. Its control is the pre-change client: nothing drawn.
+
+## A blow on your own hero (`INTENT:` in `src/net/client.ts`, `feel`)
+
+A blow on a player's character is a `push` effect (`fx`), and every `fx`
+message carries the server's copy of the character (`m.e`), with its `c`.
+The page still never takes that `c` whole ("A page does not get the
+server's `c`"); `feel` copies the three things the drawing needs, only
+on a push this page applies (or takes as "met first"):
+
+- **the held beat**, its ticks only (`c.beat` with no speed): the hero
+  holds still and is drawn `hurt` at once, and its flight lasts through
+  the beat as on the server (`combat-rest` skips a body in its beat). With
+  no speed the beat ends here with no push of its own; the server's closing
+  push brings the speed, as before, so nothing hops twice.
+- **the flight**, when the closing push (which carries no `fly`) finds this
+  page's flight already over: the server's copy is still flying, so the
+  hop is drawn `hurt` or tumbling, not jumping and falling.
+- **the blow's impact** (`c.impact`), when newer than the last one felt,
+  stamped with this page's tick and moved to where this page has the hero:
+  the flash, the dust and the shake are drawn on it. `DRAFT:` every blow on
+  a hero flashes, however light (`src/client/draw/sprites.ts`, `strong`).
+
+Before, on the struck player's own page the impact push set `c.flying` on
+a body already at rest (gone the next tick, before any frame drew it), the
+beat's closing push drew the hop in the jump and fall frames, and no
+impact was ever drawn. Fact `struck-own` (`scripts/e2e/struck-own.ts`): a
+phone page with 150 ms added each way, struck in a cantina brawl; from the
+server's push for each blow (heard by the script before the delay), the
+page drew its hero hurt and the impact within one round trip plus a frame
+(measured about 155 ms each). Control: the pre-change client: never.
+During the beat and the hop the hero cannot steer, as on the server.
 
 ## Smoothing
 

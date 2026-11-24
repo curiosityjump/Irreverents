@@ -159,6 +159,38 @@ export function createNetClient(opts: NetClientOptions) {
     if (content.net.predictHitMs <= 0 || effect.kind !== 'push' || effect.fly || !mine || !e.c.beat || !met || met.length === 0 || me().c.beat) return false;
     return !mine.met.includes(met[met.length - 1]!);
   };
+  /** The server tick of the last blow `feel` took from the server's copy, so a resent or later push does not flash it again. */
+  let felt = -Infinity;
+  /**
+   * INTENT (brief page-misses-what-happened, push 2; the owner's rule, impact
+   * over numbers, D-020: being hit must show): a blow on this page's own hero
+   * is drawn here as on every other page, from the server's copy of the hero
+   * that comes with each push (`m.e`), never from the server's whole `c`
+   * ("A page does not get the server's `c`"). Three things, each only what
+   * the drawing needs:
+   * - the held beat (`c.beat`, its ticks only): the hero holds still and is
+   *   drawn `hurt` at once, and its flight lasts through the beat as on the
+   *   server (combat-rest skips a body in its beat). No speed is copied, so
+   *   the beat ends here with no push of its own: the server's closing push
+   *   brings the speed, as before.
+   * - the closing push carries no `fly`; if this page's flight already came to
+   *   rest, the server's still-flying copy gives it back, so the hop is drawn
+   *   `hurt` (or tumbling), not jumping and falling.
+   * - the blow's `c.impact`, new since the last one felt, stamped with this
+   *   page's tick and moved to where this page has the hero: the flash, dust
+   *   and shake are drawn on it (draw/sprites.ts flashes every hero's blow).
+   */
+  const feel = (effect: { kind: string; fly?: unknown }, e: Entity): void => {
+    if (effect.kind !== 'push') return;
+    const mine = me();
+    const imp = e.c.impact;
+    if (imp && imp.tick > felt && imp.tick >= latest.tick - 30) {
+      felt = imp.tick;
+      mine.c.impact = { x: imp.x + mine.x - e.x, y: imp.y + mine.y - e.y, speed: imp.speed, tick: world.tick };
+    }
+    if (e.c.beat && e.c.beat.ticks > 0 && !mine.c.beat) mine.c.beat = { ticks: e.c.beat.ticks };
+    if (!effect.fly && !e.c.beat && e.c.flying && !mine.c.flying) mine.c.flying = clone(e.c.flying);
+  };
   const stats = { /** Step 5: hits this page predicted, then seen from the server, or eased back unseen (src/net/predict.ts). */ hits: predictor.counts, connects: 0, rttMs: null as number | null, msgsIn: 0, bytesIn: 0, msgsOut: 0, bytesOut: 0, effects: 0, /** Step 5, "Thrown friend": server pushes set aside as echoes of an impact this page drew itself. */ echoes: 0, /** Step 5, "Thrown friend": meetings the server saw first, taken with their held beat. */ metFirst: 0, /** Step 5, "Thrown friend": bodies this page's own flying character met among those it draws. */ met: 0, tunesOut: 0, tuningsIn: 0 };
   // INTENT (Step 2, ?tune): the world's tuning numbers are the server's, and
   // this page plays by them: `tuning` messages are laid over the shipped
@@ -240,6 +272,7 @@ export function createNetClient(opts: NetClientOptions) {
       smoother.clear();
       predictor.clear();
       lastSnapTick = -Infinity;
+      felt = -Infinity;
       // A server that restarted has forgotten every dial; if this world is
       // still tuned, its `tuning` follows this message.
       applyTuningDiff(content.tuning, shipped, {});
@@ -313,7 +346,12 @@ export function createNetClient(opts: NetClientOptions) {
             for (const id of met) if (!mine.c.flying!.met.includes(id)) mine.c.flying!.met.push(id);
             bounced.set(met[met.length - 1]!, t + ECHO_MS);
             stats.metFirst++;
-          } else applyEffect(me(), m.effect);
+            // A blow on a hero already flying (a second regular's punch) comes this way too: its impact still shows.
+            feel(m.effect, m.e);
+          } else {
+            applyEffect(me(), m.effect);
+            if (looksLikeEntity(m.e)) feel(m.effect, m.e);
+          }
         } else if (looksLikeEntity(m.e)) adopt(m.e);
         // A new flight (a throw, a hit) or anything taken from the server starts afresh.
         if (m.effect.kind !== 'push' || m.effect.fly) bounced.clear();

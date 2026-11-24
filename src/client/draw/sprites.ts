@@ -446,7 +446,9 @@ export function drawSprite(g: CanvasRenderingContext2D, world: World, content: C
 
   // A white flash on the ticks right after a strong hit; else the tint asked for.
   const hitAge = e.c.impact ? t - e.c.impact.tick : 1e9;
-  const strong = (e.c.impact?.speed ?? 0) >= FLASH_SPEED;
+  // DRAFT (brief page-misses-what-happened, push 2; docs/decisions-log.md): every landed blow on a hero
+  // flashes, however light (a grappler's shot is 200 px/s, under FLASH_SPEED): being hit must show (D-020).
+  const strong = (e.c.impact?.speed ?? 0) >= FLASH_SPEED || (e.player !== null && !!e.c.impact);
   const tint = look.flash || (strong && hitAge >= 0 && hitAge < FLASH_TICKS) ? { color: '#ffffff', amount: 1 } : look.tint;
   const src: CanvasImageSource = tint ? tintedFrame(img, sx, sy, cw, ch, tint.color, tint.amount) : img;
   const ox = tint ? 0 : sx;
