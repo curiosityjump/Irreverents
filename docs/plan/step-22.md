@@ -811,3 +811,15 @@ before you quote it.
   - **New risk since part 2:** its hop east (a jump every 0.7 s) can land on the road's high walk (rows 13 and 11) and carry the hero over the toll on the scaffold. That has not been run since part 2; the step is opt-in.
   - **Tried and reverted:** after walking into the road by touch, the page stood its own hero on the depot's west stretch (column 6, in the lookout's sight), with walk-backs. Run alone: 270 s, only one hero out, no card. A blow carried the hero over the stack to column 21, outside the walk-back rule.
   - **What would make it reliable:** seed the party's hearts low (`world.heartsLost`; a page cannot today, so it needs a server hook for check worlds, asked of Step 21's owner), or a stand with a band and walk-backs both ways, as in defeat.ts, among more swingers.
+
+### Lead review, push 5 part 2, the callers and more enemies (614f9ee)
+
+- `npm run build` is ok, and all 171 `step5/7/9/14/16/21/22/23-*` scenarios pass.
+- Control, run by me: `content/rooms/quarry-ridge.json` as it was before 614f9ee, with no way over the ridge's caller.
+  - `step22-each-hero-sneaks-brawler` and `-grappler` fail; they sneak the main way.
+  - The flyer, the infiltrator and the skirmisher pass; they now take the quiet way, as the builder notes.
+- Looked at the shots:
+  - The first screen sideways shows the road's lookout with his horn on the ledge, the spear and the high walk, all seen from the doorway.
+  - The wings' pedestal is in the hidden place under the strongroom, with a heavy patrolling above.
+  - Upright, the first screen shows the spear but not the lookout (the builder's weak point 1). It is accepted: the lookout is a few steps on, and sideways is how the game is mostly played.
+- **Owed, after the e2e item:** the infiltrator's unseen pass over the road heavy is a window of a few ticks. A person on a phone won't hit that. Widen it (the heavy's glance rhythm or the walk's height) until the window is at least about half a second, and re-record `step22-unseen-clear`.
