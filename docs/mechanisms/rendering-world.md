@@ -128,8 +128,9 @@ into the shared documents.
     roof route's beams in view. Upright the gallery is shorter than the
     view: no change.
   - Not built: a thrower beside the picture is not brought into it; the
-    lean is only upward and sideways only for the plate; nothing marks a
-    thrower who is off the top.
+    lean is only upward and sideways only for the plate. (A thrower aiming
+    at you from off the top is now marked by an arrow at the edge: "The
+    party plate", below.)
   - e2e facts `camera-jump-still`, `camera-aim-in-picture`,
     `camera-look-up` (`scripts/e2e/camera.ts`); shots
     `docs/plan/step-5-shots/camera/` (`before/`, `after/`; `after/` rewritten only by `E2E_SHOTS=1`).
@@ -169,7 +170,30 @@ into the shared documents.
   page), dimmed when free. It moves right of the menu button (the way
   out, `#menu-btn`) when the button sits over the view's corner, looked
   up every 30 frames, and inside `safeView`. The record: `drawn.hud`
-  (`faces`, `slots`, `box`). `DRAFT:` all of it.
+  (`faces`, `slots`, `box`, `fade`, `under`, `aimMarks`). `DRAFT:` all of it.
+  **It gives way at a room's top** (brief plate-clear-of-bodies; the camera
+  cannot go above a room's top): while any person (a player's body, a
+  townsperson, anyone who moves; not a crate) in the room is drawn over its
+  rectangle (their sprite's top counted), it fades over 6 frames to
+  `FADED_BACK` (the backing) and `FADED_INSIDE` (faces, slots, hearts), and
+  comes back over 18 frames once nobody has been under it for 20
+  (`drawn.hud.fade` 0..1, `drawn.hud.under` ids). Never while GAME OVER or
+  STAGE CLEARED is up. `render()` passes `drawHud` the room and the camera
+  for this. And `draw/aim-edge.ts`, drawn just after the plate: while a
+  thrower in the viewer's room aims toward the viewer's hero
+  (`c.rangedAim.dir`) and part of him is past the picture's top, left or
+  right edge, a 9-wide arrowhead in the arc's colours sits at that edge
+  beside him (on his throwing side), pointing at him, pulsing, never over
+  the plate (`drawn.hud.aimMarks`: `{ id, x, y, dir }`). `INTENT:` only for
+  a body aiming at you, not an off-screen radar. Control for the e2e:
+  `window.irreverents.plateFade.off` (neither, as before); nothing in the
+  game sets it. Measured: the canopy upright, the hero 84-288 px² under the
+  plate (by kind), faded within 6 frames; the gallery thrower aiming, 9-10
+  of his 26 px in the picture sideways, his arrow on every such frame. The
+  undercroft's stair thrower is cut by the top edge in the pocket (182 of
+  364 px² at 750x340) but never aims into it, so nothing points at him. e2e
+  facts `plate-fade-under`, `plate-aim-mark-gallery`
+  (`scripts/e2e/plate-clear.ts`); shots `docs/plan/step-8-shots/plate/`.
   Step 21, hearts (`src/client/draw/hearts.ts`, called from `hud.ts`): with
   `content/hearts.json` on, a row of hearts under each face: the viewer's
   the cut `hud-heart-full`/`hud-heart-empty` (9×8, the props builder's), a

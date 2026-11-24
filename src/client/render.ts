@@ -24,7 +24,8 @@ import { drawSignalers } from './draw/outpost.ts';
 import { backdropOf, decorOf, drawDoors, drawRoom, roomOrigin } from './draw/room.ts';
 import { drawRoomParts } from './draw/room-parts.ts';
 import { drawBanners } from './draw/banner.ts';
-import { drawHud } from './draw/hud.ts';
+import { drawHud, noteAimMarks } from './draw/hud.ts';
+import { drawAimEdges } from './draw/aim-edge.ts';
 import { drawUseHint } from './draw/use-hint.ts';
 import { drawSight, drawUnseenMarks } from './draw/sight.ts';
 import { drawPrizeStands } from './draw/heist.ts';
@@ -151,8 +152,10 @@ export function render(g: CanvasRenderingContext2D, world: World, content: Conte
   drawLevelBanner(g, world, content, roomId, W, pv);
   drawCompletionRow(g, world, content, W, pv);
   // Step 19: the party plate, then the one banner queue (draw/banner.ts), clear of it; last, as screen furniture.
-  const plate = pv ? drawHud(g, world, content, mine, pv.frame) : undefined;
+  const plate = pv ? drawHud(g, world, content, mine, pv.frame, { room: roomId, ox, oy }) : undefined; // the plate fades over a body under it
   plateBox = plate; // the camera keeps a thrower out from under it next frame (camera.ts)
+  // An arrow at the picture's edge for a thrower aiming at you from outside it (draw/aim-edge.ts).
+  if (pv) noteAimMarks(drawAimEdges(g, world, content, roomId, ox, oy, W, H, mine, plate, pv.frame));
   if (pv) drawBanners(g, W, pv.frame, plate);
   if (pv) drawLegendPicture(g, content, W, plate); // Step 7 push 3: a new legend's picture under its banner (draw/hall.ts)
   // Step 13: a freed hero's face flashing beside the plate (draw/recruits.ts).

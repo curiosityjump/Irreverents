@@ -5,6 +5,10 @@ import { safeView } from './fx.ts';
 import { drawHeartRow, heartSize, isOut, noteHearts } from './hearts.ts';
 import { maxHearts } from '../../sim/hearts.ts';
 import { drawLook, drawNine, look } from './looks.ts';
+import { drawnOffset, drawnTop } from './entities.ts';
+import { drawnGameOver } from './game-over.ts';
+import type { AimMark } from './aim-edge.ts';
+import { stageScreenUp } from './stage.ts';
 
 // Step 19 push 2 (docs/mechanisms/rendering-world.md, "The party plate"):
 // the top-left plate. The viewer's own face first and lit, then three small
@@ -59,12 +63,90 @@ export interface DrawnHud {
   slots: Record<HudSlot, string | null>;
   /** The plate, in game pixels of the view. */
   box: { x: number; y: number; w: number; h: number };
+  /** Brief plate-clear-of-bodies: how faded the plate is this frame (0 solid, 1 fully faded), and the bodies drawn under it. */
+  fade: number;
+  under: string[];
+  /** Brief plate-clear-of-bodies, part 2: the arrows at the picture's edge pointing at a thrower aiming at the viewer from outside it (draw/aim-edge.ts). */
+  aimMarks: AimMark[];
 }
 let drawn: DrawnHud | null = null;
 
 /** What the last frame drew, for `window.irreverents.drawn.hud`; null with no plate. */
 export function drawnHud(): DrawnHud | null {
   return drawn;
+}
+
+/**
+ * Brief plate-clear-of-bodies (docs/mechanisms/rendering-world.md, "The party
+ * plate"): the camera cannot go above a room's top, so a hero on a canopy or a
+ * thrower on a balcony at the top of a room is drawn under the plate. While any
+ * body (a hero, a friend, a bad guy, a townsperson) is drawn under its
+ * rectangle the plate fades, its faces and hearts still readable, and comes
+ * back a moment after nobody is under it. Never while GAME OVER or STAGE
+ * CLEARED is up. The plate takes no input, so nothing under it stops working.
+ * DRAFT: every strength and time below (decisions-log 2026-11-24, "The party
+ * plate fades when a body is under it").
+ */
+export interface PlateScene {
+  room: string;
+  /** The camera: room pixels to screen (what render() adds). */
+  ox: number;
+  oy: number;
+}
+/** DRAFT: the plate's backing at full fade, and its faces, slots and hearts. */
+const FADED_BACK = 0.25;
+const FADED_INSIDE = 0.6;
+/** DRAFT: frames to fade out, and to come back once nobody is under it (slower, so a hero hopping in and out does not flicker it). */
+const FADE_IN_FRAMES = 6;
+const FADE_BACK_FRAMES = 18;
+/** DRAFT: frames nobody must be under it before it starts coming back. */
+const FADE_LINGER = 20;
+let fade = 0;
+let fadeFrame = -1;
+let clearSince = 0;
+
+/** A person, not a crate or a stand: a player's body, a townsperson or anyone who moves by themselves. */
+function isPerson(e: Entity, content: Content): boolean {
+  return e.player !== null || e.c.npc !== undefined || (content.characters[e.kind]?.verbs ?? []).includes('move');
+}
+
+/** The ids of the people in the scene's room drawn over the box this frame (screen px; their picture's top where a sprite draws higher than the box). */
+function bodiesUnder(world: World, content: Content, scene: PlateScene, box: { x: number; y: number; w: number; h: number }): string[] {
+  const out: string[] = [];
+  for (const e of world.entities) {
+    if (e.room !== scene.room || e.c.roomHide) continue;
+    const kind = content.characters[e.kind];
+    if (!kind || !isPerson(e, content)) continue;
+    const off = drawnOffset(e.id);
+    const x = scene.ox + Math.round(e.x) + off.x;
+    const y = scene.oy + Math.round(e.y) + off.y;
+    const top = Math.min(y, drawnTop(e.id) ?? y);
+    const bottom = y + kind.box.h;
+    if (x < box.x + box.w && x + kind.box.w > box.x && top < box.y + box.h && bottom > box.y) out.push(e.id);
+  }
+  return out;
+}
+
+/** INTENT (e2e control only, scripts/e2e/plate-clear.ts): `window.irreverents.plateFade.off` draws the plate as before; nothing in the game sets it. */
+export function plateFadeOff(): boolean {
+  return (globalThis as { irreverents?: { plateFade?: { off?: boolean } } }).irreverents?.plateFade?.off === true;
+}
+
+/** Eases the fade one page frame toward under (1) or clear (0). */
+function stepFade(under: boolean, frame: number): number {
+  if (frame === fadeFrame) return fade;
+  const n = fadeFrame < 0 ? 1 : Math.max(1, Math.min(10, frame - fadeFrame));
+  fadeFrame = frame;
+  if (under) {
+    clearSince = frame;
+    fade = Math.min(1, fade + n / FADE_IN_FRAMES);
+  } else if (frame - clearSince >= FADE_LINGER) fade = Math.max(0, fade - n / FADE_BACK_FRAMES);
+  return fade;
+}
+
+/** The edge arrows render() drew after the plate this frame (draw/aim-edge.ts), kept on the plate's record. */
+export function noteAimMarks(marks: AimMark[]): void {
+  if (drawn) drawn.aimMarks = marks;
 }
 
 /** Where the menu button ends, in game pixels across the view; looked up every so often, not every frame. */
@@ -92,7 +174,7 @@ function clearOfMenu(g: CanvasRenderingContext2D, frame: number): number {
  * Draws the plate for the viewer `me` (this page's own character), and
  * returns its box (the banners keep clear of it), or undefined.
  */
-export function drawHud(g: CanvasRenderingContext2D, world: World, content: Content, me: Entity | undefined, frame: number): DrawnHud['box'] | undefined {
+export function drawHud(g: CanvasRenderingContext2D, world: World, content: Content, me: Entity | undefined, frame: number, scene?: PlateScene): DrawnHud['box'] | undefined {
   drawn = null;
   if (!me) return undefined;
   const members = world.party ?? content.party.members;
@@ -112,12 +194,20 @@ export function drawHud(g: CanvasRenderingContext2D, world: World, content: Cont
   const h = PAD + FACE + (hearts ? Math.max(1 + heartSize(true).h, 2 + friendLines * small.step - 1) : 0) + PAD;
   const x = Math.max(3 + safeView.left, clearOfMenu(g, frame) + 2);
   const y = 3 + safeView.top;
+  // Brief plate-clear-of-bodies: faded while a body is drawn under it; never under a full-screen card.
+  const under = scene && !plateFadeOff() ? bodiesUnder(world, content, scene, { x, y, w, h }) : [];
+  const card = drawnGameOver() !== null || stageScreenUp();
+  const f = card ? 0 : stepFade(under.length > 0, frame);
+  if (card) fade = 0;
+  const before = g.globalAlpha;
+  g.globalAlpha = before * (1 - f * (1 - FADED_BACK));
   if (!drawNine(g, content, 'hud-plate', x, y, w, h)) {
     g.fillStyle = '#e09a1e';
     g.fillRect(x, y, w, h);
     g.fillStyle = '#221f44';
     g.fillRect(x + 1, y + 1, w - 2, h - 2);
   }
+  g.globalAlpha = before * (1 - f * (1 - FADED_INSIDE));
   // A heart's pop stays on the plate (draw/hearts.ts).
   g.save();
   g.beginPath();
@@ -152,7 +242,8 @@ export function drawHud(g: CanvasRenderingContext2D, world: World, content: Cont
     cx += col(k) + FRIEND_GAP;
   });
   g.restore();
-  drawn = { faces, slots, box: { x, y, w, h } };
+  g.globalAlpha = before;
+  drawn = { faces, slots, box: { x, y, w, h }, fade: Math.round(f * 100) / 100, under, aimMarks: [] };
   return drawn.box;
 }
 

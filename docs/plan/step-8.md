@@ -557,3 +557,16 @@ By a subagent reading all 23 `*-after2-*` shots against their `*-after-*` partne
 - **To check:** the region banner reads "Castle Town" in `forest-road-1-after2-390x664` and in `planks-quarry-road-1-after2` (a capture artefact, or a banner that does not change with the room?).
 
 Third pass sent to the backgrounds' builder (rulings `DRAFT:`, in that message).
+
+## The plate clear of bodies (brief `handoff-prompts/plate-clear-of-bodies.md`)
+
+Builder, 2026-11-24. **Measured first** (my facts with the control `E2E_PLATE_OLD=1`, the plate as before, on a local build at 5d4ff8e plus this push):
+- **The canopy upright (390x664):** the page's own hero on `forest-trail` column 50 row 2 (page-side placement, as `tools/scenario-bots/shots.mjs`): 288 of the grappler's 540 px², 84 of the infiltrator's 280, drawn under the plate.
+- **The Hall gallery sideways, column 14, while the thrower aims:** none of him under the plate (the camera keeps him clear of it); 10 of his 26 px of height in the picture at 844x390 (224 of 364 px² outside it), 9 at 750x340. So **fading does not help him**: he is off the top, not behind the plate. Part 2 was built.
+- **The undercroft:** by the stone plate (column 17), where he aims, he is whole in the picture. In the pocket under the grate (where `step-24-shots/2/pocket-*` were taken) he is cut by the top edge (at 844x390 his top at y 0, at 750x340 182 of 364 px² outside) but **he never aims into the pocket** (0 frames of aim in 5 s at each size). The brief keeps the arrow for a body aiming at you, so nothing points at him there. Not changed; for the orchestrator: if a thrower who is only standing there, cut off, should also be marked, that is a general off-screen mark the brief ruled out.
+
+**Built** (`DRAFT:`, decisions-log 2026-11-24, "The party plate fades when someone is under it…"): 1, the plate fades while a person is drawn under it (`src/client/draw/hud.ts`); 2, an arrow at the picture's edge for a thrower aiming at you with part of him outside it (`src/client/draw/aim-edge.ts`). `src/client/render.ts` changed in two lines (the plate gets the room and camera; the arrow's call): outside the brief's paths, the smallest way in.
+
+**Checked:** `plate-fade-under` and `plate-aim-mark-gallery` (`scripts/e2e/plate-clear.ts`), green, red under the control. Shots `step-8-shots/plate/before/` (the same moment, plate as before) and `after/`: `canopy-*`, `gallery-aim-*`, `pocket-aim-*` at 390x664, 844x390, 750x340.
+
+**Not verified:** the plate staying solid under GAME OVER or STAGE CLEARED (read in code only: `drawnGameOver()`/`stageScreenUp()` reset the fade); nobody has tried it on a real iPhone. A friend's or a townsperson's body under the plate fades it too (same code path; only the viewer's own hero was driven there).

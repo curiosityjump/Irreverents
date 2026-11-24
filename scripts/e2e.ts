@@ -458,6 +458,8 @@ async function main(): Promise<void> {
       await (await import('./e2e/ranged.ts')).rangedFacts({ browser, devices, base, out, fact, errors, shots: keptShots('step-24-shots') });
       // Step 5's camera facts (camera-jump-still, camera-aim-in-picture, camera-look-up): sideways, a jump does not move the picture, the camera leans up toward a thrower's aim as far as the floor allows, a held Up lifts it (docs/mechanisms/rendering-world.md, "The camera leans up").
       await (await import('./e2e/camera.ts')).cameraFacts({ browser, devices, base, out, fact, errors, shots: keptShots('step-5-shots/camera') });
+      // Brief plate-clear-of-bodies: the party plate fades over a body under it; an arrow points at a thrower aiming from off the picture (scripts/e2e/plate-clear.ts).
+      await (await import('./e2e/plate-clear.ts')).plateClearFacts({ browser, devices, base, out, fact, errors, shots: keptShots('step-8-shots/plate') });
       // Step 9's facts (power-*): the villain drawn carrying his power, seen by a phone walking into the street by touch (docs/mechanisms/powers.md).
       await (await import('./e2e/powers.ts')).powerFacts({ browser, devices, base, out, fact, errors, shots: path.join(out, 'powers') });
       // Step 16's facts (quarry-*): into the quarry by touch, and across its road onto the ridge (docs/plan/step-16.md, signal 7).
