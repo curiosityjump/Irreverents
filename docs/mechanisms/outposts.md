@@ -322,7 +322,13 @@ breaking what is between; a hero in the cache (76-83) gets rows from the
 west only, stopped at the barricade (no entry there: one on the cache's step
 would walk in beside him). A hero at 63-65 still gets `[74,10]` at 9-11
 tiles, at the screen's edge. Proven by `camp-entries-east-break-through`
-(control: no `breakThrough`). `step23-thrown-out-leaves-it` and
+(control: no `breakThrough`). On a phone (e2e `row-both-sides`,
+`scripts/e2e/camp-row.ts`): sideways, a hero standing at column 21 sees the
+second row's two first drawn 0.1-1.1 tiles inside the left and right screen
+edges, 0-4.5 s after "Two more!" (control: `entries` only `[[41,10]]`, both
+first drawn east); the shot is `docs/plan/step-4-shots/camp-row-both-sides-750x340.png`.
+The fight beside the horn post (column 20) sometimes breaks it before the
+second call (D-061: then no row comes); the fact starts again in a fresh world. `step23-thrown-out-leaves-it` and
 `step23-game-over-sword-back-to-carrier` were re-timed for it (the first row
 now walks in at column 62, not at 41 beside the hero), and
 `step12-walk-out-ends-it` and `camp-entries-door-kept-clear` for

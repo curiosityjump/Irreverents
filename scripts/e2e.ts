@@ -432,6 +432,8 @@ async function main(): Promise<void> {
       await (await import('./e2e/machine.ts')).machineFacts({ browser, devices, base, out, fact, errors });
       // The owner's 2026-11-24 report (alarm-reads, chase-*): the camp's horn announced, a fighter comes and, out of sight, goes back (docs/plan/step-4.md).
       await (await import('./e2e/chase.ts')).chaseFacts({ browser, devices, base, out, fact, errors });
+      // The owner's 'come in from the sides' (row-both-sides): sideways, by touch, the camp's second row is drawn on screen west and east of the hero within 8 s of its banner (docs/plan/step-4.md, "Camp entries").
+      await (await import('./e2e/camp-row.ts')).campRowFacts({ browser, devices, base, out, fact, errors, shots: keptShots('step-4-shots') });
       // Step 13's facts (rescue-*): into the camp by touch, the captive's cage and call drawn, the party plate's faces (docs/mechanisms/recruits.md).
       await (await import('./e2e/rescue.ts')).rescueFacts({ browser, devices, base, out, fact, errors });
       // The switch gap (switch-refused): three pages hold the whole party and a Switch tap changes nothing (docs/mechanisms/party-and-switching.md).
