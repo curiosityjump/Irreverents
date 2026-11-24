@@ -540,7 +540,12 @@ Sent to the thrower's builder as part of its brief's next push; nothing here is 
   `door-use`; 138 ok otherwise. `door-use` (with `door-go-in`) then failed
   once more in a full run *without* him and passed alone three times and in
   the next full run (140 of 140), so it is a full-run flake, not his; the
-  plates fact passed in both runs without him. So it is not pushed. Measured reasoning: the courtyard west of the gate is 11 tiles
+  plates fact passed in both runs without him. So it is not pushed. **But**
+  the orchestrator's re-run at c34aec7 saw `plates-friend-held` go red once
+  on main with no courtyard bad guy (brief `e2e-intermittent-reds.md`), so
+  one red with him is not proof it is his: whoever lands this should run
+  the full e2e three times with him (and `plates.ts` alone three times)
+  before deciding. Measured reasoning: the courtyard west of the gate is 11 tiles
   (14-24) holding two plates, two doorways and the spawn; any bad guy who
   walks at a hero there meets the pages those facts stand. Kept, ready to
   land: `docs/plan/step-24-courtyard-draft/` (`courtyard.json` for
