@@ -224,6 +224,14 @@ game. **Owner, ~16:20 UTC:** "Of course they need to be able to fight. If
 you didn't get that, you need to read the documents again." The
 orchestrator made it plan Step 18.
 
+**Owner, 2026-11-24 ~00:50–01:05 UTC, playing (relayed by the orchestrator):**
+> Alarms don't seem to do anything yet. Enemies can't be fully defeated, neither can heros, and enemies don't give chase if you are not right in front of them.
+> Alarms should spawn more enemies of increasing strength that come in from the sides
+
+*(Framing:)* an alarm brings escalating reinforcements that enter from the
+screen's sides; pursuers chase beyond line of sight. Matches the library's
+scaling reinforcements on a completed signal (doc 27).
+
 ### Heroes, roster, powers and co-op
 **Owner, 2026-11-22 (Drive, doc 11, D-007, D-010, D-012–D-013):**
 > Unlockable and permanently expanding roster … Only a LIMITED selection of roster members is carried/switchable during an expedition. … Online co-op is a required mode. … A SINGLE SHARED PARTY is used for cooperative play.
