@@ -372,6 +372,13 @@ For the next builder, all measured on `main` at 6edd8be:
   `step9-fades-then-source` re-routed (Step 9's notes). The kerb at
   [53, 13] looks unneeded with these entries, since no wave walks west
   across the dip unless the hero is seen in the far yard.
+- **Item (b), unblocked (lead, 04:06 UTC):** Step 21's game over is on
+  `main` (`gameOver` in `content/defeat/quarry.json`,
+  `step21-heart-game-over-quarry`). `stage-run.ts` still listens only for
+  `thrown-out`: also start the stage over on the quarry's `game-over` event
+  (hearts back full), with a `step22-*` scenario and control; then tell the
+  hearts builder (`session_017WiGzG7mhviEaxroo5GvBv`) so it can switch the
+  quarry's throw off.
 - **Then 3b:** the ten hero runs and the measured star times.
 ### Lead review, owed item (a) (6edd8be), re-run at 002607b
 
