@@ -5,20 +5,42 @@ import type { Content } from '../content/types.ts';
 import type { Stage } from '../content/kinds/stages.ts';
 import { alertId } from './npc/alert.ts';
 import { THING_KIND } from './npc/state.ts';
-import type { Entity, World } from './types.ts';
+import { TICK_RATE, type Entity, type World } from './types.ts';
 import { addEntity, createWorld, removeEntity, spawnBody } from './world.ts';
 
 /** One run of a stage, as the world keeps it (`world.stages[id]`). */
 export interface StageRun {
-  /** `idle`: nobody has started it (or it was cleared and nobody is back in); `running`: under way. */
-  state: 'idle' | 'running';
+  /**
+   * `idle`: nobody has started it (or it was cleared and everyone has left);
+   * `running`: under way; `cleared` (Step 22 push 3): its end was reached and
+   * somebody is still inside: no new run starts until the stage is empty.
+   */
+  state: 'idle' | 'running' | 'cleared';
   /** The tick the run (or its latest try) started. */
   started: number;
   /** How many times the run was started over (a player thrown out inside the stage). */
   tries: number;
   /** Players thrown out since the last start-over, waiting for the stage to empty of everyone else. */
   pending: string[];
+  /** Step 22 push 3: what this try of the run has done so far (the victory screen's statistics). Zeroed at each start and start-over. */
+  counts?: StageCounts;
+  /** Step 22 push 3: the best clear yet (most stars, then the fastest): shown on the level's sign and menu row. Kept with a kept game. */
+  best?: { stars: number; ticks: number };
 }
+
+/** Step 22 push 3: one try's statistics, gathered while it runs. */
+export interface StageCounts {
+  /** Bad guys of the stage knocked flat by a played hero this try (distinct ids). DRAFT: until beaten-for-good lands. */
+  defeated: string[];
+  /** Calls finished in the stage's rooms (an outpost's horn, a town call). */
+  alarms: number;
+  /** Whether a bad guy of the stage has had a played hero in sight (npc/sight.ts canSee, the test the band draws). */
+  seen: boolean;
+  /** Whether a prize of a heist in the stage's rooms was carried out (banked) this try. */
+  hoard: boolean;
+}
+
+export const freshCounts = (): StageCounts => ({ defeated: [], alarms: 0, seen: false, hoard: false });
 
 declare module './types.ts' {
   interface World {
@@ -44,6 +66,15 @@ declare module './types.ts' {
     'stage-started': { stage: string; player: string | null };
     /** Step 22: the stage was put back as it began, the run's clock and counts at zero; `tries` counts this one. */
     'stage-restarted': { stage: string; tries: number };
+    /**
+     * Step 22 push 3: a played hero reached the stage's end. Once per run.
+     * `ticks` from the start of this try; `defeated` bad guys knocked flat by
+     * a hero; `alarms` calls finished; `tries` start-overs; `unseen` nobody of
+     * the stage had a hero in sight; `hoard` a prize carried out (or in a
+     * hero's hands at the end); `stars` 1 to 3 (stageStars); `best` whether it
+     * is the stage's new best.
+     */
+    'stage-cleared': { stage: string; player: string | null; ticks: number; defeated: number; alarms: number; tries: number; unseen: boolean; hoard: boolean; stars: number; best: boolean };
   }
 }
 
@@ -128,4 +159,45 @@ export function restoreStage(world: World, content: Content, s: Stage): void {
     for (const [hero, thing] of Object.entries(world.cargo)) if (things.has(thing)) delete world.cargo[hero];
   }
   if (world.rooms) for (const r of rooms) delete world.rooms[r];
+}
+
+/**
+ * Step 22 push 3: the stars a clear earns (DRAFT, docs/decisions-log.md,
+ * "Step 22 push 3"; the thresholds are the stage file's, measured by scripted
+ * runs, docs/plan/step-22.md "Builder notes"). One for finishing; two for a
+ * time at or under `good` seconds, or at most `tries` start-overs (default 1);
+ * three for two and any of: nobody saw you, no alarm finished, a time at or
+ * under `best` seconds.
+ */
+export function stageStars(s: Stage, r: { ticks: number; tries: number; unseen: boolean; alarms: number }): 1 | 2 | 3 {
+  const two = r.ticks <= s.stars.good * TICK_RATE || r.tries <= (s.stars.tries ?? 1);
+  if (!two) return 1;
+  return r.unseen || r.alarms === 0 || r.ticks <= s.stars.best * TICK_RATE ? 3 : 2;
+}
+
+/** Whether `e`'s box overlaps the stage's end box (tiles, inclusive) in its end room. */
+export function atStageEnd(content: Content, s: Stage, e: Entity): boolean {
+  if (e.room !== s.end.room) return false;
+  const room = content.rooms[s.end.room];
+  const box = content.characters[e.kind]?.box;
+  if (!room || !box) return false;
+  const T = room.tile;
+  const [x0, y0] = s.end.from;
+  const [x1, y1] = s.end.to;
+  return e.x < (x1 + 1) * T && e.x + box.w > x0 * T && e.y < (y1 + 1) * T && e.y + box.h > y0 * T;
+}
+
+/** Step 22 push 3: the best clear kept for the stage (on) played on level `levelId`, if any: the sign and the menu row show it. */
+export function stageBest(world: World, content: Content, levelId: string): { stars: number; ticks: number } | null {
+  for (const id of Object.keys(content.stages ?? {}).sort()) {
+    const s = content.stages[id]!;
+    if (s.on && s.level === levelId) return world.stages?.[s.id]?.best ?? null;
+  }
+  return null;
+}
+
+/** Step 22 push 3: ticks as m:ss (60 ticks a second), the time a sign, a menu row and the victory screen show. */
+export function stageClock(ticks: number): string {
+  const sec = Math.floor(Math.max(0, ticks) / TICK_RATE);
+  return `${Math.floor(sec / 60)}:${String(sec % 60).padStart(2, '0')}`;
 }

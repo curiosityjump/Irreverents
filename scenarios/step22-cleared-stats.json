@@ -1,0 +1,194 @@
+{
+ "id": "step22-cleared-stats",
+ "proves": "Step 22 push 3 (DRAFT, docs/decisions-log.md 'Step 22 push 3'): alone in the Iron Quarry's depot (the run starts as she is inside, tick 0), the grappler stands in the far yard, punches patrol 2 flat (one bad guy defeated; he saw her first, so not unseen), sounds no horn, and walks east into the stage's end (columns 61-62): one stage-cleared at tick 359 whose statistics are what she did (359 ticks, 1 defeated, 0 alarms, 0 tries, seen, no hoard) and 3 stars (no start-over; no alarm finished), kept as the stage's best; she stays in the end and no second clear comes. Control (watched to fail): the end box moved off the yard (content/stages/iron-quarry.json end.from/to [1, 1]-[2, 2]) and no clear comes, the best stays null",
+ "room": "quarry-depot",
+ "placements": true,
+ "players": [
+  {
+   "id": "a",
+   "character": "grappler",
+   "spawn": 1
+  }
+ ],
+ "inputs": [
+  {
+   "player": "a",
+   "from": 0,
+   "to": 2,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 10,
+   "to": 14,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 34,
+   "to": 38,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 58,
+   "to": 62,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 82,
+   "to": 86,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 106,
+   "to": 110,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 130,
+   "to": 134,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 154,
+   "to": 158,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 178,
+   "to": 182,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 202,
+   "to": 206,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 226,
+   "to": 230,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 250,
+   "to": 254,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 274,
+   "to": 278,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 298,
+   "to": 302,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 300,
+   "to": 420,
+   "x": 1
+  }
+ ],
+ "ticks": 600,
+ "expect": [
+  {
+   "fact": "event-where",
+   "event": "stage-cleared",
+   "where": {
+    "stage": "iron-quarry",
+    "player": "a",
+    "ticks": 359,
+    "defeated": 1,
+    "alarms": 0,
+    "tries": 0,
+    "unseen": false,
+    "hoard": false,
+    "stars": 3,
+    "best": true
+   },
+   "between": [
+    350,
+    370
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "event",
+   "event": "stage-cleared",
+   "between": [
+    0,
+    600
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "stage",
+   "stage": "iron-quarry",
+   "at": 340,
+   "state": "running",
+   "best": null
+  },
+  {
+   "fact": "stage",
+   "stage": "iron-quarry",
+   "at": 600,
+   "state": "cleared",
+   "tries": 0,
+   "best": {
+    "stars": 3,
+    "ticks": 359
+   }
+  },
+  {
+   "fact": "in-room",
+   "player": "a",
+   "at": 600,
+   "room": "quarry-depot"
+  }
+ ]
+}

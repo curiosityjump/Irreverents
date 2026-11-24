@@ -30,9 +30,11 @@ export interface Stage {
   /**
    * The star thresholds, in seconds (DRAFT, measured by scripted runs:
    * docs/plan/step-22.md, "Builder notes"): `good` is the time under which a
-   * clear earns the second star, `best` a faster time shown as the target.
+   * clear earns the second star, `best` a faster time that earns the third
+   * by itself; `tries` (optional, default 1, Step 22 push 3) the most
+   * start-overs that still earn the second (src/sim/stage.ts stageStars).
    */
-  stars: { good: number; best: number };
+  stars: { good: number; best: number; tries?: number };
 }
 
 declare module '../types.ts' {
@@ -76,8 +78,9 @@ const kind: ContentKind = {
     }
     const st = read.object(o.stars, 'stars');
     if (st) {
-      read.only(st, ['good', 'best'], 'stars');
+      read.only(st, ['good', 'best', 'tries'], 'stars');
       out.stars = { good: read.number(st, 'good', 'stars', { min: 1, max: 36000 }), best: read.number(st, 'best', 'stars', { min: 1, max: 36000 }) };
+      if (st.tries !== undefined) out.stars.tries = read.number(st, 'tries', 'stars', { min: 0, max: 99 });
       if (out.stars.best > out.stars.good) read.fail('stars', `"best" (${out.stars.best} s) must not be slower than "good" (${out.stars.good} s)`);
     }
     return out;

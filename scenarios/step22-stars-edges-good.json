@@ -1,0 +1,183 @@
+{
+ "id": "step22-stars-edges-good",
+ "proves": "Step 22 push 3 (DRAFT, docs/decisions-log.md 'Step 22 push 3'; src/sim/stage.ts stageStars): step22-cleared-stats' clear at tick 359, with the run already under way before tick 0 (world.stages seeded: started -35641, tries 2, a finished alarm, seen) so it clears in 36000 ticks: exactly the good time with 2 start-overs, seen and one alarm finished: 2 stars. The thresholds are content/stages/iron-quarry.json's (good 600 s, best 300 s); when they are re-measured, move 'started' with them. Control (watched to fail): the clear one tick the other side, stars differ",
+ "room": "quarry-depot",
+ "placements": true,
+ "players": [
+  {
+   "id": "a",
+   "character": "grappler",
+   "spawn": 1
+  }
+ ],
+ "inputs": [
+  {
+   "player": "a",
+   "from": 0,
+   "to": 2,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 10,
+   "to": 14,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 34,
+   "to": 38,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 58,
+   "to": 62,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 82,
+   "to": 86,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 106,
+   "to": 110,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 130,
+   "to": 134,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 154,
+   "to": 158,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 178,
+   "to": 182,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 202,
+   "to": 206,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 226,
+   "to": 230,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 250,
+   "to": 254,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 274,
+   "to": 278,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 298,
+   "to": 302,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 300,
+   "to": 420,
+   "x": 1
+  }
+ ],
+ "ticks": 600,
+ "expect": [
+  {
+   "fact": "event-where",
+   "event": "stage-cleared",
+   "where": {
+    "stage": "iron-quarry",
+    "player": "a",
+    "ticks": 36000,
+    "defeated": 1,
+    "alarms": 1,
+    "tries": 2,
+    "unseen": false,
+    "hoard": false,
+    "stars": 2,
+    "best": true
+   },
+   "between": [
+    350,
+    370
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "stage",
+   "stage": "iron-quarry",
+   "at": 600,
+   "best": {
+    "stars": 2,
+    "ticks": 36000
+   }
+  }
+ ],
+ "world": {
+  "stages": {
+   "iron-quarry": {
+    "state": "running",
+    "started": -35641,
+    "tries": 2,
+    "pending": [],
+    "counts": {
+     "defeated": [],
+     "alarms": 1,
+     "seen": true,
+     "hoard": false
+    }
+   }
+  }
+ }
+}

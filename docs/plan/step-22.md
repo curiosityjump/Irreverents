@@ -285,3 +285,31 @@ to `beaten.ts`'s `restorePeople` and `holdReturns` once they land, keeping
 `stageHome` only for what `restorePeople` doesn't cover. A cold builder does
 this, in the next push after they land. Not checked: a friend walking out
 after the other is beaten, and how a restore looks on the page (push 4's e2e).
+
+### Push 3a: the end, the result, the stars (builder `session_017WiGzJb4az7buiHeYEH77B`)
+
+- **Split in two.** 3a (this): `stage-cleared` with its statistics, the
+  stars, the best kept and shown. 3b (next): the ten hero runs
+  (`step22-each-hero-{fights,sneaks}-{hero}`) and the three threshold runs;
+  the star times stay at the push-2 placeholders (good 600 s, best 300 s)
+  until 3b measures them, and `step22-stars-edges-*` move with them (their
+  seeded `started`).
+- **Statistics' sources, as logged:** defeated = distinct people of the
+  stage flattened with `by` a played body (the Hall's rule); alarms =
+  `outpost-call-completed` of its outposts + town `call-completed` in its
+  rooms; unseen = no npc of `side: "bad"` in its rooms ever `canSee` a
+  played hero (heist-cargo's test). **Doubt for 3b:** the road's toll-keeper
+  is `side: "bad"` and stands on the main way; if every route is seen by
+  him, unseen never happens in the quarry. Then either a route past him
+  or leaving tolls out of "unseen" (a `DRAFT:` either way).
+- **Not on the sign: the time.** `levels.md`'s `INTENT:` "no digit
+  anywhere (`t-no-numbers`)" covers the game picture; the sign shows the
+  best stars only and the menu row (HTML) the stars and m:ss. Logged.
+- **Shots** (a seeded best, page-side, for the picture only):
+  `step-22-shots/push3-sign-best-sideways.png`,
+  `push3-menu-best-upright.png`. Upright, the courtyard's camera cuts the
+  quarry's sign at the left edge: as before this push (the sign is as wide
+  as its name).
+- **Owed still:** (a) `restorePeople`/`holdReturns` and (b) the
+  `game-over` event are not on `main` at 85cbd35; (c) the kerb and the
+  wings' move are not done.

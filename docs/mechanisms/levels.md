@@ -89,11 +89,14 @@ still an empty pie; the name on the sign is what says "discovered".
   `INTENT:` it takes no input and stops nothing.
 - **The menu** (`setUpMenu`, `levels` option from `main.ts`): "Places
   found", a row per discovered level with its pie, read when it opens.
+- **A stage's best** (Step 22 push 3, `docs/mechanisms/stages.md`, "Shown"):
+  three stars under the sign's name, and on the menu row the stars and the
+  best time (HTML, not the picture).
 - `INTENT:` no digit anywhere (`t-no-numbers`), no list or count of what
   is missing (D-079). This is the one sign a door may carry; the check
   refuses a hidden door as an entry.
 - `window.irreverents.drawn.levels`: `{ entrances: [{ level, room, door,
-  look, discovered, name, quarters }], banner }`.
+  look, discovered, name, quarters, pieces?, best? }], banner }`.
 
 ## Pieces (Step 14 slice B, `DRAFT:` throughout)
 

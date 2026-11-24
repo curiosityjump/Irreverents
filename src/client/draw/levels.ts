@@ -7,6 +7,7 @@ import { drawText, textWidth, useContent } from './fx.ts';
 import { drawLook, look } from './looks.ts';
 import { drawnBanner, queueBanner } from './banner.ts';
 import { drawPieces, levelPieces, piecesWidth } from './completion.ts';
+import { stageBest } from '../../sim/stage.ts';
 
 // Step 14 slice A (docs/mechanisms/levels.md): the owner, playing, "Not
 // finding clear 'level entries' with discovered indicators etc" (D-078,
@@ -46,6 +47,8 @@ export interface DrawnEntrance {
   quarters: number;
   /** Step 14 slice B (additive): the level's pieces drawn under the name, true when found; absent when none are drawn (not discovered, or no set). */
   pieces?: boolean[];
+  /** Step 22 push 3 (additive): the stage's best clear, its stars drawn under the name (its time only in the menu: no digit in the picture); absent when there is none. */
+  best?: { stars: number; ticks: number };
 }
 
 let entrances: DrawnEntrance[] = [];
@@ -91,13 +94,19 @@ export function drawLevelEntrances(g: CanvasRenderingContext2D, world: World, co
       // Step 14 slice B: once discovered, the level's pieces in a row under its name, grey with the found ones gold (no digit).
       const pieces = name ? levelPieces(world, content, level.id) : null;
       // DRAFT: 12 px above the art, clear of the doorway's bobbing Go-in arrow (draw/door-hint.ts, 10 px up).
-      signs.push({ name, quarters: name ? p.quarters : 0, mid: x + Math.floor(aw / 2), bottom: y - GAP, pieces });
-      entrances.push({ level: level.id, room: roomId, door: door.id, look: art ? id : '', discovered: p.discovered, name, quarters: name ? p.quarters : 0, ...(pieces ? { pieces } : {}) });
+      // Step 22 push 3: a stage's best clear, stars and time, in a row under the pieces.
+      const best = name ? stageBest(world, content, level.id) : null;
+      signs.push({ name, quarters: name ? p.quarters : 0, mid: x + Math.floor(aw / 2), bottom: y - GAP, pieces, best });
+      entrances.push({ level: level.id, room: roomId, door: door.id, look: art ? id : '', discovered: p.discovered, name, quarters: name ? p.quarters : 0, ...(pieces ? { pieces } : {}), ...(best ? { best } : {}) });
     }
   }
 }
 
-let signs: { name: string | null; quarters: number; mid: number; bottom: number; pieces: boolean[] | null }[] = [];
+let signs: { name: string | null; quarters: number; mid: number; bottom: number; pieces: boolean[] | null; best: { stars: number } | null }[] = [];
+/** Step 22 push 3: the height the best clear's row (14 px stars) adds under a sign's name and pieces. */
+const BEST_H = 16;
+const STAR = 14;
+
 /** Step 14 slice B: the height the pieces' row adds under a sign's name (12 px pieces and a gap). */
 const ROW_H = 14;
 
@@ -111,8 +120,10 @@ const ROW_H = 14;
 export function drawLevelSigns(g: CanvasRenderingContext2D, content: Content): void {
   const placed: { x: number; y: number; w: number; h: number }[] = [];
   for (const s of [...signs].sort((a, b) => a.mid - b.mid)) {
-    const extra = s.name && s.pieces ? ROW_H : 0;
-    const w = s.name ? Math.max(textWidth(g, s.name, 'light') + PIE + 9, extra ? piecesWidth(s.pieces!.length) + 6 : 0) : PIE;
+    const rowPieces = s.name && s.pieces ? ROW_H : 0;
+    const bestW = s.name && s.best ? 3 * (STAR + 1) - 1 : 0;
+    const extra = rowPieces + (bestW ? BEST_H : 0);
+    const w = s.name ? Math.max(textWidth(g, s.name, 'light') + PIE + 9, rowPieces ? piecesWidth(s.pieces!.length) + 6 : 0, bestW + 6) : PIE;
     const h = s.name ? PIE + 4 + extra : PIE;
     const x = Math.round(s.mid - w / 2);
     let y = s.bottom - h;
@@ -128,8 +139,28 @@ export function drawLevelSigns(g: CanvasRenderingContext2D, content: Content): v
     placed.push({ x, y, w, h });
     if (s.name) sign(g, content, s.name, s.quarters, x, y, w, h - extra, extra);
     else pie(g, content, 0, x, y);
-    if (s.name && s.pieces && extra) drawPieces(g, content, s.pieces, x + 3, y + h - ROW_H);
+    if (s.name && s.pieces && rowPieces) drawPieces(g, content, s.pieces, x + 3, y + PIE + 4 + rowPieces - ROW_H);
+    if (s.name && s.best && bestW) drawBest(g, content, s.best.stars, x + 3, y + h - BEST_H);
   }
+}
+
+/**
+ * Step 22 push 3: a stage's best clear as three stars, lit as earned and the
+ * rest dim (the `hall-frame-star` look, P04's Hall atlas).
+ * INTENT (t-no-numbers; this file's header): no digit in the game picture, so
+ * the best time is not on the sign; the menu row (HTML, src/client/start.ts)
+ * shows it. DRAFT (docs/decisions-log.md, "Step 22 push 3"): dim is the same
+ * star at a third opacity.
+ */
+function drawBest(g: CanvasRenderingContext2D, content: Content, stars: number, x: number, y: number): void {
+  for (let i = 0; i < 3; i++) {
+    g.globalAlpha = i < stars ? 1 : 0.3;
+    if (!drawLook(g, content, 'hall-frame-star', x + i * (STAR + 1), y)) {
+      g.fillStyle = i < stars ? '#ffd23f' : '#5a5470';
+      g.fillRect(x + i * (STAR + 1) + 3, y + 3, STAR - 6, STAR - 6);
+    }
+  }
+  g.globalAlpha = 1;
 }
 
 /** The name and the pie on one dark plate. */

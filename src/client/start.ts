@@ -11,6 +11,7 @@ import { cleanGameCode, codeFromText, GAME_CODE_LENGTH, GAME_PREFIX, gameCode, i
 import { DEFAULT_WORLD } from '../net/protocol.ts';
 import { lookTable } from '../content/kinds/looks.ts';
 import { look } from './draw/looks.ts';
+import { stageClock } from '../sim/stage.ts';
 
 /** A key-value store that never throws (main.ts's `storage`: phone storage, else memory). */
 export interface Kept {
@@ -162,6 +163,45 @@ function piecesImage(content: Content, pieces: boolean[], cssPerPixel: number): 
       const p = on ? gold : grey;
       g.drawImage(p.img, p.x, p.y, p.w, p.h, i * step * k, 0, p.w * k, p.h * k);
     });
+    span.replaceChildren(c);
+    return true;
+  };
+  if (!draw()) {
+    const t = setInterval(() => draw() && clearInterval(t), 100);
+    setTimeout(() => clearInterval(t), 20000);
+  }
+  return span;
+}
+
+/**
+ * Step 22 push 3 (docs/mechanisms/stages.md): a stage's best clear for a menu
+ * row, three stars (the `hall-frame-star` look, P04's Hall atlas), the earned
+ * ones lit and the rest dim. DRAFT: dim is the same star at a third opacity.
+ */
+function starsImage(content: Content, stars: number, cssPerPixel: number): HTMLElement {
+  const span = document.createElement('span');
+  span.className = 'st-stars';
+  span.setAttribute('role', 'img');
+  span.setAttribute('aria-label', `best: ${stars} of 3 stars`);
+  span.dataset.stars = String(stars);
+  const draw = (): boolean => {
+    const st = look(content, 'hall-frame-star');
+    if (!st) return false;
+    const dpr = window.devicePixelRatio || 1;
+    const k = Math.max(1, Math.round(cssPerPixel * dpr));
+    const step = st.w + 1;
+    const c = document.createElement('canvas');
+    c.width = (3 * step - 1) * k;
+    c.height = st.h * k;
+    c.style.width = `${c.width / dpr}px`;
+    c.style.height = `${c.height / dpr}px`;
+    const g = c.getContext('2d');
+    if (!g) return false;
+    g.imageSmoothingEnabled = false;
+    for (let i = 0; i < 3; i++) {
+      g.globalAlpha = i < stars ? 1 : 0.3;
+      g.drawImage(st.img, st.x, st.y, st.w, st.h, i * step * k, 0, st.w * k, st.h * k);
+    }
     span.replaceChildren(c);
     return true;
   };
@@ -574,7 +614,7 @@ export interface MenuOptions {
   /** Leaving on purpose, before the page goes to the start screen. */
   leave(): void;
   /** Step 14 slice A (additive): the levels discovered in this world, read each time the panel opens. */
-  levels?(): { id: string; name: string; quarters: number; pieces?: boolean[]; sources?: string[] }[];
+  levels?(): { id: string; name: string; quarters: number; pieces?: boolean[]; sources?: string[]; best?: { stars: number; ticks: number } }[];
 }
 
 /**
@@ -645,7 +685,7 @@ export function setUpMenu(opts: MenuOptions): void {
     const found = opts.levels?.() ?? [];
     places.replaceChildren(
       ...(found.length ? [el('div', { class: 'st-label' }, words(content, 'Places found', 2))] : []),
-      ...found.map((l) => el('div', { class: 'st-level', 'data-level': l.id, 'data-quarters': String(l.quarters) }, words(content, l.name, 2), pieImage(content, l.quarters, 2), ...(l.pieces ? [piecesImage(content, l.pieces, 2)] : []), ...(l.sources?.length ? [sourcesImage(content, l.sources, 2)] : []))),
+      ...found.map((l) => el('div', { class: 'st-level', 'data-level': l.id, 'data-quarters': String(l.quarters) }, words(content, l.name, 2), pieImage(content, l.quarters, 2), ...(l.pieces ? [piecesImage(content, l.pieces, 2)] : []), ...(l.sources?.length ? [sourcesImage(content, l.sources, 2)] : []), ...(l.best ? [starsImage(content, l.best.stars, 2), words(content, stageClock(l.best.ticks), 2)] : []))),
     );
   };
   col.append(places, say, back, close);

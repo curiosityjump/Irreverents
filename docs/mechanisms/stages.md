@@ -18,9 +18,9 @@ result. The engine knows stages, not the quarry: a second stage is one file.
 
 | Piece | Where | What |
 |---|---|---|
-| A stage | `content/stages/<id>.json` | `on`, `level` (its rooms are the stage's rooms; one stage per room), `entrance` (`room`, `door`: where a beaten hero lands, the same spot as the level's defeat file), `end` (`room`, `from`, `to`: a box of tiles; Step 22 push 3), `stars` (`good`, `best`, seconds; push 3). |
+| A stage | `content/stages/<id>.json` | `on`, `level` (its rooms are the stage's rooms; one stage per room), `entrance` (`room`, `door`: where a beaten hero lands, the same spot as the level's defeat file), `end` (`room`, `from`, `to`: a box of tiles; Step 22 push 3), `stars` (`good`, `best`, seconds; optional `tries`, default 1; push 3). |
 | Losing | `content/defeat/quarry.json` | Step 21's rule (`defeat.md`), landing at the stage's entrance. The stage writes no second rule. |
-| The run | `world.stages[id]` | `state` (`idle`, `running`), `started` (tick), `tries` (start-overs), `pending` (players thrown out, waiting for the stage to empty). Small; sent to pages by key. |
+| The run | `world.stages[id]` | `state` (`idle`, `running`, `cleared`), `started` (tick of this try), `tries` (start-overs), `pending` (players thrown out, waiting for the stage to empty), `counts` (this try's statistics: `defeated` ids, `alarms`, `seen`, `hoard`), `best` (`{stars, ticks}`, the best clear). Small; sent to pages by key. |
 | The home copy | `world.stageHome[id]` | The stage's placed bodies as a fresh world places them, taken the first tick the stage is seen and never re-read from files. Kept with a kept game; **left out of every snapshot** (`src/server/game.ts`): a page never restores. |
 
 ## The rule (`stage-run`, order 612, after the throw at 590)
@@ -30,7 +30,28 @@ result. The engine knows stages, not the quarry: a second stage is one file.
 2. A `thrown-out` from a stage room is a try: the player goes in `pending`.
 3. When every player still inside the stage is pending (solo: at once, as
    the thrown hero lands at the entrance, which is inside), `restoreStage`
-   runs, `tries` goes up, the clock restarts (`stage-restarted`).
+   runs, `tries` goes up, the clock and counts restart (`stage-restarted`).
+4. While a run is under way (push 3), its try's statistics gather on the
+   shared world only (`world.taken` unset, like the Hall detector): a
+   `flattened` of a person of its rooms whose `by` is a played body adds to
+   `defeated` (distinct ids; the Hall's rule, copied); each
+   `outpost-call-completed` of an outpost in its rooms, and each town
+   `call-completed` whose area is one of them, is an alarm; `seen` turns true
+   the first tick a bad guy (npc kind `side: "bad"`, placed or a wave's) in
+   its rooms can see a played hero (`canSee`, `npc/sight.ts`: the test
+   heist-cargo uses for a clean getaway and the band draws); a `prize-banked`
+   of a heist in its rooms is the hoard.
+5. A played hero (not pending) whose box overlaps the end box clears it, once
+   per run (`stage-cleared {stage, player, ticks, defeated, alarms, tries,
+   unseen, hoard, stars, best}`; a prize still in a hero's hands there counts
+   as the hoard, since the end is inside the stage). `stageStars`: one for
+   finishing; two for `ticks` at or under `good` seconds or at most
+   `stars.tries` start-overs; three for two and (unseen, or no alarm, or at
+   or under `best` seconds). `best` is kept when the stars are more, or the
+   same and faster. The run is then `cleared` until nobody is inside, so
+   standing in the end does not start a new run; a walk back in after that
+   starts a fresh one over the stage as it was left (only being beaten puts
+   it back).
 
 `restoreStage` (`src/sim/stage.ts`, `INTENT:`): every placed body of the
 stage back from the home copy, `c` empty (npc-setup makes it a person again
@@ -56,17 +77,33 @@ power sources, the roster.
   body jump home; when a player walks back in, the page's smoother starts
   those bodies fresh.
 
+## Shown
+
+- **The level's sign** (`src/client/draw/levels.ts`, `drawLevelSigns`): once
+  there is a best, a row of three `hall-frame-star` under the name and the
+  pieces, the earned ones lit, the rest dim. No time: `INTENT:` no digit in
+  the game picture (`t-no-numbers`). `drawn.levels.entrances[].best`.
+- **The menu row** (`src/client/start.ts`, `.st-stars`, `data-stars`): the
+  same stars and the best time as m:ss (`stageClock`), in HTML.
+- The victory screen is push 4.
+
 ## Checking it
 
 `scenarios/step22-restart-restores.json` (control: the stage `on` false),
 `step22-friend-inside-no-restart.json` (control: the friend outside the
-stage), `step22-beaten-to-entrance.json` (the defeat file). The fact `tile`
-(Step 22) reads a room's tile as the world has it.
+stage), `step22-beaten-to-entrance.json` (the defeat file),
+`step22-cleared-stats.json` (control: the end box moved away),
+`step22-stars-edges-{good,good-over,best,best-over,tries}.json` (the same clear
+with the run seeded through `world.stages` so its time lands one tick either
+side of each threshold; each pair is the other's control: move `started` when
+the thresholds are re-measured). The fact `tile` (Step 22) reads a room's tile
+as the world has it; the fact `stage` (push 3) reads `world.stages[id]`'s
+state, tries and best.
 
 ## Not built yet
 
-Push 3: the end, `stage-cleared` and its statistics, stars, the best kept and
-shown on the sign. Push 4: the victory screen. Push 5: more enemies, the
+Push 3's hero runs (each roster hero from the entrance to the end, fighting
+and sneaking) and the thresholds they measure. Push 4: the victory screen. Push 5: more enemies, the
 waves from the sides. `beaten.ts`'s `restorePeople` (another builder's, not
 on `main` at push 2) is to replace the people part of `restoreStage` when it
 lands.

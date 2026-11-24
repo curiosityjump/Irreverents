@@ -32,6 +32,7 @@ import { drawnPowers, foundSourceIcons } from './draw/powers.ts';
 import { drawnWeapons } from './draw/weapons.ts';
 import { drawnBeaten, watchBeatenEvents } from './draw/beaten.ts';
 import { levelProgress } from '../sim/levels.ts';
+import { stageBest } from '../sim/stage.ts';
 import { setUpMenu, showGone, showStart } from './start.ts';
 import type { StartRecord } from './start.ts';
 
@@ -372,7 +373,9 @@ function play(worldName: string): void {
       const pieces = levelPieces(net.world, content, l.id);
       // Step 9: a lit mark (the power's icon) per power source found in this level (world.sources).
       const sources = foundSourceIcons(net.world, content, l.rooms);
-      return p.discovered ? [{ id: l.id, name: l.name, quarters: p.quarters, ...(pieces ? { pieces } : {}), ...(sources.length ? { sources } : {}) }] : [];
+      // Step 22 push 3: a stage's best clear (stars and time), once there is one.
+      const best = stageBest(net.world, content, l.id);
+      return p.discovered ? [{ id: l.id, name: l.name, quarters: p.quarters, ...(pieces ? { pieces } : {}), ...(sources.length ? { sources } : {}), ...(best ? { best } : {}) }] : [];
     }),
   });
 }
