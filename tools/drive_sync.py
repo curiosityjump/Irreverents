@@ -32,6 +32,18 @@ MANIFEST = os.path.join(LIB, "manifest.json")
 # they would be ~12 MB of the repo with no use for the work. Drive keeps them.
 SKIP_DOWNLOAD = ["Superseded Style Explorations"]
 
+# INTENT (the owner's standing words, answering outbox Q-016: "Do whatever gets us the game I want as soon and
+# efficiently as possible", "the team has full license to do that"; handoff-prompts/library-mirror-lean.md):
+# big files nothing loads are listed in the manifest, with their Drive id, not copied into the repository.
+# Two rules, both by measurement, never by guess:
+# - a ZIP pack over LEAN_BYTES whose every file is already mirrored byte for byte elsewhere (the P03-P12
+#   "ALL SOURCES" packs repeat their sheets) is downloaded and compared, then not unpacked;
+# - inside a ZIP that is unpacked, a .wav over LEAN_BYTES (a raw music stem; the game's music is synthesised
+#   and its sounds are the small A01 effects) is not written; the entry's "not_unpacked" lists it.
+# A ZIP at or under LEAN_BYTES is always unpacked (tools/art/props/import_p01.py reads P01's unpacked pack).
+# How to fetch one back: docs/mechanisms/asset-requests.md, "Listed, not mirrored". Nothing on the Drive changes.
+LEAN_BYTES = 1024 * 1024
+
 
 def curl(url, out=None):
     args = ["curl", "-sSL", "--fail", "--retry", "3"]
@@ -97,8 +109,10 @@ def main():
     crawl(ROOT_FOLDER, "", "", entries)
     tmp = os.path.join(REPO, ".drive_sync_tmp")
     os.makedirs(tmp, exist_ok=True)
-    report = {"added": [], "changed": [], "unchanged": 0, "removed": [], "skipped": []}
-    for e in entries:
+    report = {"added": [], "changed": [], "unchanged": 0, "removed": [], "skipped": [], "listed": []}
+    # ZIPs last, so the plain files' hashes are all known when a pack is compared with them.
+    known = {o["sha256"] for o in old.values() if o.get("sha256") and not o.get("repo_path", "").endswith("/")}
+    for e in sorted(entries, key=lambda e: e.get("repo_path", "").endswith(".zip")):
         if e["kind"] == "folder":
             continue
         if any(s in e["drive_path"] for s in SKIP_DOWNLOAD):
@@ -123,6 +137,8 @@ def main():
                 continue
             data = open(t, "rb").read()
         e["sha256"] = hashlib.sha256(data).hexdigest()
+        if not e["repo_path"].endswith(".zip"):
+            known.add(e["sha256"])
         prev = old.get(e["id"])
         if not prev or "sha256" not in prev:
             report["added"].append(e["drive_path"])
@@ -142,11 +158,20 @@ def main():
                 xdir = dest[:-4]
                 subprocess.run(["rm", "-rf", xdir])
                 with zipfile.ZipFile(__import__("io").BytesIO(data)) as z:
-                    for n in z.namelist():
-                        if n.endswith("/") or ".." in n or n.startswith("/"):
+                    names = [n for n in z.namelist() if not (n.endswith("/") or ".." in n or n.startswith("/"))]
+                    if len(data) > LEAN_BYTES and names and all(
+                            hashlib.sha256(z.read(n)).hexdigest() in known for n in names):
+                        e["status"] = "not unpacked (every file is mirrored beside it)"
+                        report["listed"].append(e["drive_path"])
+                        continue
+                    for n in names:
+                        if n.lower().endswith(".wav") and z.getinfo(n).file_size > LEAN_BYTES:
+                            e.setdefault("not_unpacked", []).append({"name": n, "bytes": z.getinfo(n).file_size})
                             continue
                         os.makedirs(os.path.dirname(os.path.join(xdir, n)) or xdir, exist_ok=True)
                         open(os.path.join(xdir, n), "wb").write(z.read(n))
+                    if e.get("not_unpacked"):
+                        report["listed"].append(f"{e['drive_path']}: {len(e['not_unpacked'])} .wav not unpacked")
             else:
                 with open(dest, "wb") as f:
                     f.write((head.encode() + data) if e["kind"] == "doc" else data)
@@ -161,7 +186,7 @@ def main():
                    "last_sync_utc": today, "entries": entries},
                   open(MANIFEST, "w"), indent=1, ensure_ascii=False)
     subprocess.run(["rm", "-rf", tmp])
-    for k in ("added", "changed", "removed", "skipped", "failed"):
+    for k in ("added", "changed", "removed", "skipped", "listed", "failed"):
         print(f"{k}: {len(report.get(k, []))}")
         for p in report.get(k, []):
             print(f"  {p}")

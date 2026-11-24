@@ -243,7 +243,25 @@
    "id": "10HjntGcgYRRY201BggQ3pfZDxrSO82JA",
    "drive_path": "/03 Visual Direction and Assets/Audio/MA06 Outdoors Theme Prototype/MA06_outdoors_theme_v01.zip",
    "repo_path": "03-visual-direction-and-assets/audio/ma06-outdoors-theme-prototype/ma06-outdoors-theme-v01/",
-   "sha256": "72118a671ad992c83261c994a0ec32bced2dfa632388ccb7b231260b766a86c1"
+   "sha256": "72118a671ad992c83261c994a0ec32bced2dfa632388ccb7b231260b766a86c1",
+   "not_unpacked": [
+    {
+     "name": "outdoors_bass.wav",
+     "bytes": 10752044
+    },
+    {
+     "name": "outdoors_high_counter_line.wav",
+     "bytes": 10752044
+    },
+    {
+     "name": "outdoors_drums.wav",
+     "bytes": 10752044
+    },
+    {
+     "name": "outdoors_melody.wav",
+     "bytes": 10752044
+    }
+   ]
   },
   {
    "kind": "file",
@@ -262,7 +280,29 @@
    "id": "1A6BMPW_QTwI2PSJR9MVlo9ZJ11mdB5UM",
    "drive_path": "/03 Visual Direction and Assets/Audio/MA07 Castle Interior/MA07_castle_interior_v01.zip",
    "repo_path": "03-visual-direction-and-assets/audio/ma07-castle-interior/ma07-castle-interior-v01/",
-   "sha256": "e0078e9b79b8bca520b1c9ddd30f10f8c1235863191c877c07319749961a61c5"
+   "sha256": "e0078e9b79b8bca520b1c9ddd30f10f8c1235863191c877c07319749961a61c5",
+   "not_unpacked": [
+    {
+     "name": "castle_melody.wav",
+     "bytes": 11289644
+    },
+    {
+     "name": "castle_organ.wav",
+     "bytes": 11289644
+    },
+    {
+     "name": "castle_bass.wav",
+     "bytes": 11289644
+    },
+    {
+     "name": "castle_full_mix.wav",
+     "bytes": 11289644
+    },
+    {
+     "name": "castle_percussion.wav",
+     "bytes": 11289644
+    }
+   ]
   },
   {
    "kind": "folder",
@@ -1475,7 +1515,8 @@
    "id": "16kpIaGnWflxb4w2hVyWm8ytIOEJbJndc",
    "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P03 — Core Heroes NPCs Terrain and VFX — VISUAL SOURCE SHEETS/P03_ALL_SOURCES.zip",
    "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p03-core-heroes-npcs-terrain-and-vfx-visual-source-sheets/p03-all-sources/",
-   "sha256": "2e0049519f9ba4286ccda79b37391b2a3297107f1ced62ecd75cb6c50ce24a27"
+   "sha256": "2e0049519f9ba4286ccda79b37391b2a3297107f1ced62ecd75cb6c50ce24a27",
+   "status": "not unpacked (every file is mirrored beside it)"
   },
   {
    "kind": "file",
@@ -1564,7 +1605,8 @@
    "id": "1G9UKD-HAqeYWaHqA9tTjpm3q_5TA8l69",
    "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P04 — Cantina Props Vehicles Hall — VISUAL SOURCE SHEETS/P04_ALL_SOURCES.zip",
    "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p04-cantina-props-vehicles-hall-visual-source-sheets/p04-all-sources/",
-   "sha256": "444282fb6e242e0a0e6135f84da279423d8e0bec045c87526304a523ed247fe7"
+   "sha256": "444282fb6e242e0a0e6135f84da279423d8e0bec045c87526304a523ed247fe7",
+   "status": "not unpacked (every file is mirrored beside it)"
   },
   {
    "kind": "file",
@@ -1597,7 +1639,8 @@
    "id": "1Avb0oVF6IV2uWf60_B88Oss2fW0OzAe7",
    "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P05 — HUD Powers Cantina Brawl and Secrets — VISUAL SOURCE SHEETS/P05_ALL_SOURCES.zip",
    "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p05-hud-powers-cantina-brawl-and-secrets-visual-source-sheets/p05-all-sources/",
-   "sha256": "a14db91bc23c5d5ae44e65988a8ecf9b2f95b83657a7aae75268588116c01aee"
+   "sha256": "a14db91bc23c5d5ae44e65988a8ecf9b2f95b83657a7aae75268588116c01aee",
+   "status": "not unpacked (every file is mirrored beside it)"
   },
   {
    "kind": "file",
@@ -1693,7 +1736,8 @@
    "id": "1ZzuqKI9lHWHNRsgbxjTEesrsPXEJx2b7",
    "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P07 — First Playable NPC Enemies Mechanisms Terrain HUD — SOURCE/P07_ALL_SOURCE_SHEETS.zip",
    "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p07-first-playable-npc-enemies-mechanisms-terrain-hud-source/p07-all-source-sheets/",
-   "sha256": "4f933de1c53ba60cb1921e868db0fd87be38010c6a6f2e93995bd972e02795d9"
+   "sha256": "4f933de1c53ba60cb1921e868db0fd87be38010c6a6f2e93995bd972e02795d9",
+   "status": "not unpacked (every file is mirrored beside it)"
   },
   {
    "kind": "file",
@@ -1754,7 +1798,8 @@
    "id": "1sbQfLmesPMGBHPpYp-P56M3O8wRpv-Ml",
    "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P08 — Additional Townsfolk Enemies Building Blocks Biomes — SOURCE/P08_ALL_SOURCE_SHEETS.zip",
    "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p08-additional-townsfolk-enemies-building-blocks-biomes-source/p08-all-source-sheets/",
-   "sha256": "8355f150af0cd3b50983d8d03aa177ccf931d8f8032554f63abe01f177780139"
+   "sha256": "8355f150af0cd3b50983d8d03aa177ccf931d8f8032554f63abe01f177780139",
+   "status": "not unpacked (every file is mirrored beside it)"
   },
   {
    "kind": "file",
@@ -1963,7 +2008,8 @@
    "id": "1qAqSW2JCp6DI53RMJZ3p2hDLYLHSOq01",
    "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P10 — Owner-Selected Tagged Terrain and Interactables/P10_FULL_TAGGED_SOURCE_PACK.zip",
    "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p10-owner-selected-tagged-terrain-and-interactables/p10-full-tagged-source-pack/",
-   "sha256": "d55376febf0e2ff1ac530b8373b5afb52b0e8b5d98396e710c05bc68308cae95"
+   "sha256": "d55376febf0e2ff1ac530b8373b5afb52b0e8b5d98396e710c05bc68308cae95",
+   "status": "not unpacked (every file is mirrored beside it)"
   },
   {
    "kind": "file",
@@ -2017,7 +2063,8 @@
    "id": "13qLEAWNK9pay2oP5XXzVJ9RRcpm27gC2",
    "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P11 — Copy-Power Enemies Weapons and Items — SOURCE/P11_SOURCE_COMPLETE.zip",
    "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p11-copy-power-enemies-weapons-and-items-source/p11-source-complete/",
-   "sha256": "b357742395a9dd32500b9b185c838d6a8a94968383d4eb39178da7280fe42d51"
+   "sha256": "b357742395a9dd32500b9b185c838d6a8a94968383d4eb39178da7280fe42d51",
+   "status": "not unpacked (every file is mirrored beside it)"
   },
   {
    "kind": "file",
@@ -2184,7 +2231,8 @@
    "id": "1-WokzduDHyu9j_5KzWxbOJIidFV7aDJS",
    "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P12 — Standalone Weapons and Configurations — SOURCE/P12_COMPLETE_SOURCE_PACK.zip",
    "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p12-standalone-weapons-and-configurations-source/p12-complete-source-pack/",
-   "sha256": "3e3e32ce76f4815a4373e822cc74854c0aa3b082ac98e0f890a708ed391973de"
+   "sha256": "3e3e32ce76f4815a4373e822cc74854c0aa3b082ac98e0f890a708ed391973de",
+   "status": "not unpacked (every file is mirrored beside it)"
   },
   {
    "kind": "file",
@@ -2626,7 +2674,8 @@
    "id": "1zKzcGsm3fkEuvwKAQ7rEZFeFJd-BfDt1",
    "drive_path": "/03 Visual Direction and Assets/GV-01 — Guard Response Vehicles — Runtime Prototype/GV-01_COMPLETE_RUNTIME_PACK.zip",
    "repo_path": "03-visual-direction-and-assets/gv-01-guard-response-vehicles-runtime-prototype/gv-01-complete-runtime-pack/",
-   "sha256": "4af665a3ca3be6aa7a12103b651c9bab84d7d718fbdeb64e6ce01b19367ca53d"
+   "sha256": "4af665a3ca3be6aa7a12103b651c9bab84d7d718fbdeb64e6ce01b19367ca53d",
+   "status": "not unpacked (every file is mirrored beside it)"
   },
   {
    "kind": "file",
@@ -2981,7 +3030,8 @@
    "id": "1nEicDwFpWc1eIreBIAJcfwk6JIyP8aDv",
    "drive_path": "/03 Visual Direction and Assets/MA02–MA05 — Pixel Font and Bandit Camp Native Sprites v1/MA02-05_COMPLETE_NATIVE_PACK.zip",
    "repo_path": "03-visual-direction-and-assets/ma02ma05-pixel-font-and-bandit-camp-native-sprites-v1/ma02-05-complete-native-pack/",
-   "sha256": "8aaa5be2a608d49f2c2accfee0ef893be3c20160c0fa714882b9cf18d993079d"
+   "sha256": "8aaa5be2a608d49f2c2accfee0ef893be3c20160c0fa714882b9cf18d993079d",
+   "status": "not unpacked (every file is mirrored beside it)"
   },
   {
    "kind": "file",
@@ -3291,10 +3341,17 @@
   },
   {
    "kind": "doc",
+   "id": "18ayAKvnNmX8bcUrEsvkfccOoKoswR8LnEFhgoJtN_hA",
+   "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/01 REQUESTS — Claude to ChatGPT/REQ — P07/P08 REVISION — Open floor grate, timber barricade, light wooden barrier; addendum to MISSING-ASSETS master list",
+   "repo_path": "06-asset-collaboration-claude-chatgpt/01-requests-claude-to-chatgpt/req-p07-p08-revision-open-floor-grate-timber-barricade-light-wooden-barrier-addendum-to-missing-assets-master-list.md",
+   "sha256": "a16cdf30341d34955415049ec73ad128057b086f8ee17005371834abc8d41816"
+  },
+  {
+   "kind": "doc",
    "id": "1aEuNBG8C_6s3tVa8D9cMjEHsSZqqEzMbtCVWXcvhsFs",
    "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/01 REQUESTS — Claude to ChatGPT/REQ — P12 REVISION — Weapon grip anchors/hitboxes, cannonball, closed parasol, unlit torch; addendum to MISSING-ASSETS master list",
    "repo_path": "06-asset-collaboration-claude-chatgpt/01-requests-claude-to-chatgpt/req-p12-revision-weapon-grip-anchors-hitboxes-cannonball-closed-parasol-unlit-torch-addendum-to-missing-assets-master-list.md",
-   "sha256": "29c527dec4be51750131a510eb6b75b6522dff9fe1d56b6214ae65334a2e88d7"
+   "sha256": "8007378f42bcf73efcaf5a3c899c6ba59bb5d93cdcccc3c96b0a92745185de02"
   },
   {
    "kind": "folder",

@@ -2,6 +2,10 @@
 
 ---
 
+ART DESK → CLAUDE — ACTION REQUESTED — 2026-11-23 evening EST
+
+Please upload the exact currently integrated P12 runtime weapon atlas (or individual PNGs) and its frame manifest to the shared Irreverents Drive, and paste the direct links here. Include weapon/state identifiers, atlas rectangles, native dimensions, trim offsets, facing/flip conventions, existing hand-anchor coordinate convention, and current collision/attack-box schema or relevant code excerpt. Grip anchors and hitboxes must be measured against the actual runtime pixels, not the 1448×1086 source sheets. Please also share the current cannon, parasol and torch frames so the missing states can match their scale and palette. No need to stop implementation; stand-ins may remain. Status: REQUESTED; metadata portion awaiting runtime reference. No assets delivered by this update.
+
 STATUS: REQUESTED
 
 TITLE: P12 REVISION — weapons: missing data and four missing states

@@ -100,6 +100,20 @@ All assume 320×180 internal resolution and a 16 px tile grid (doc 14
 option B; S00-01's phone previews). A build that chooses otherwise tells
 Vision Partner, who files a REVISION.
 
+## Listed, not mirrored: fetching a big file the mirror leaves out
+
+Big files nothing in the game or the tools loads are named in `docs/design-library/manifest.json`, not copied into
+the repository (`docs/mechanisms/design-library-sync.md`, "Listed, not mirrored"; the owner's "Do whatever gets us
+the game I want as soon and efficiently as possible"). To use one, find its entry (search the manifest for the
+Drive path: a pack's entry has `"status": "not unpacked ..."`; a music stem is named in a pack's `not_unpacked`),
+take its `id`, and fetch it into a scratch folder, not the repository:
+
+    curl -sSL --fail -o pack.zip "https://drive.usercontent.google.com/download?id=<id>&export=download&confirm=t"
+    unzip pack.zip 'outdoors_bass.wav'
+
+A file a tool will read for good belongs in the mirror: raise `LEAN_BYTES` for it or name it in
+`tools/drive_sync.py`, and say why there, rather than committing a hand copy.
+
 ## The catch: writing to Drive
 
 Writing needs the claude.ai **Google Drive connector**. The owner connected

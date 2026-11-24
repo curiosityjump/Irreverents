@@ -42,6 +42,12 @@ change is vision-level, tell Vision Partner (`docs/questions-inbox.md`).
 - **Skipped on purpose:** anything under "Superseded Style Explorations"
   (`SKIP_DOWNLOAD`, marked `INTENT:`), per the library's own rule against
   bulk-importing discarded images.
+- **Listed, not mirrored (big files nothing loads; `LEAN_BYTES`, marked `INTENT:`):** a ZIP over 1 MB whose
+  every file is already mirrored byte for byte elsewhere is not unpacked (its manifest entry says "not unpacked
+  (every file is mirrored beside it)"), and inside a ZIP that is unpacked a `.wav` over 1 MB (a raw music stem)
+  is not written (the entry's `not_unpacked` names each, with its size). A ZIP of 1 MB or less is always
+  unpacked: `tools/art/props/import_p01.py` reads P01's. How to get one back:
+  `docs/mechanisms/asset-requests.md`, "Listed, not mirrored".
 - **Header:** every mirrored Doc opens with a one-paragraph "Reference —
   imported, do not edit here" line linking its Drive original.
 
