@@ -234,6 +234,7 @@ def looks_sheets():
     s.add('unseen', lo.unseen()); s.add('seen-mark', lo.seen_mark())  # the heists builder's asks (P07 UI atlas)
     for which in lo.CONDITION:  # the risk builder's condition marks (P05 HUD shields)
         s.add('hud-condition-' + which, lo.condition(which))
+    s.add('hud-heart-full', dv.hud_heart(True)); s.add('hud-heart-empty', dv.hud_heart(False))  # the hearts builder (P07 UI atlas)
     out.append(('ui', 'ui/hud.png', s))
     return out
 

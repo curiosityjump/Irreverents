@@ -424,3 +424,14 @@ def barricade(broken=False):
         return im
     tag, box = _stack('fantasy', (245, 15, 335, 110), 22, 3, foot=8)
     return grab(tag, box, 0, CAMPPAL, size=(16, 64))
+
+
+# ---- the hearts builder's ask (Step 21 push 4): a HUD heart, full and empty, for the party plate
+HEARTPAL = ramps('pink', 'red', 'castle', 'stone', 'night', 'cloud')
+HEARTS = {True: (895, 110, 986, 190), False: (1075, 110, 1166, 190)}
+
+
+def hud_heart(full):
+    """P07 irreverents-pixel-ui-atlas, top row: the pink heart (full) and the grey heart (empty). 9 x 8, the smallest
+    that keeps the heart's notch and point (7 x 6 lost the notch); the plate's renderer fits it into its box."""
+    return grab('ui', HEARTS[full], 0, HEARTPAL, size=(9, 8))

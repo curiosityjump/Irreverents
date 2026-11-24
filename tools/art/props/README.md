@@ -313,6 +313,12 @@ mirrors and are not cut (the renderer flips). Scene: `loops-guard-4x.png` (the g
   smoke are baked into the moving and damaged states; no wrecked state beyond damaged.
 - **Not verified in the game:** nothing draws a guard vehicle yet.
 
+**The hearts builder's ask (Step 21 push 4):** `hud-heart-full`, `hud-heart-empty` in group `ui` (`assets/ui/hud.png`,
+appended; every earlier `ui` look pixel-identical), 9x8 each: P07 irreverents-pixel-ui-atlas top row, the pink heart
+and the grey heart (`drive.hud_heart`). 9x8 is the smallest that keeps the notch and the point (7x6 lost the notch);
+the plate's renderer fits it into its 5x4 (viewer) or 3x3 (friend) box, which this lane did not see. Scene:
+`loops-hearts-4x.png`.
+
 ## Deviations from the contract
 
 - `ui-use`'s `src` is the whole 48×24 picture (normal then pressed), with no `frames`: that is how
