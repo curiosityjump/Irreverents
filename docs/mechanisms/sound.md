@@ -32,7 +32,7 @@ jump, flap (jump, higher), land, footstep, swing, hit, hurt (a hit on you), impa
 
 ## Deviations from the contract
 
-- The brief said other players' sounds come "from changes in the received world". Most come from the server's events (`snap.ev`), which the page already receives and nothing read (`docs/mechanisms/network.md`, "nothing reads them yet" is now false). Footsteps, the king's voice and barks do come from world changes. Reading events is the only way to hear a swing, a landing or a mood change exactly once. A snapshot that arrives in the same frame as another loses the first one's events (`net.latest()` keeps only the newest); in practice that is rare.
+- The brief said other players' sounds come "from changes in the received world". Most come from the server's events (`snap.ev`), which the page already receives and nothing read (`docs/mechanisms/network.md`, "nothing reads them yet" is now false). Footsteps, the king's voice and barks do come from world changes. Reading events is the only way to hear a swing, a landing or a mood change exactly once. Two snapshots arriving in one frame both reach it: `net.latest()` keeps every unread snapshot's events (`docs/mechanisms/network.md`, "Two snapshots in one frame").
 - The preparation script lives at `src/client/audio/prepare-pack.py`: no `tools/` path was given to this lane.
 - The check that a tune's rooms exist is in `scripts/checks/sound.ts`, not in the kind's own `check`: the room checks' controls assemble maps without the real rooms, and refusing there broke them.
 

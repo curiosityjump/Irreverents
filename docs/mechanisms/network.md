@@ -301,6 +301,30 @@ two of them is never seen overlapping it. Now:
   the same flight is also taken as an echo (the page bounces off walls
   itself, so that is the same bounce).
 
+## Two snapshots in one frame (`INTENT:` in `src/net/client.ts`, `latestRead`)
+
+The page's watchers (the GAME OVER card, STAGE CLEARED, banners, poofs,
+sounds: `src/client/main.ts`'s frame) read `net.latest()` once a frame
+and tell a new snapshot by the object's identity. Two snapshots can land
+inside one frame; when `latest` was simply replaced, the first one's
+events were never seen (measured 2026-11-24: 1 run of 20 of
+`hearts-game-over` alone, the socket heard `game-over-coming`, no frame
+drew the card). Now a snapshot arriving while the last is unread adds its
+events after that one's, in a new object; `latest()` marks it read. So
+every snapshot's events reach every watcher once, in order. Exactly once:
+the server sends each tick's events in one snapshot only (`stepAndSend`
+empties `gw.events`), a reconnect brings only snapshots made after it,
+and a snapshot whose tick is not newer than the last one's (a resent
+copy) adds nothing; a `welcome` forgets that tick, since a restarted
+server counts from 0. `DRAFT:` unread events more than 60 server ticks
+older than the newest snapshot are let go, so a tab whose frames stopped
+(hidden) does not come back to a burst of old news. Fact
+`snaps-one-frame` (`scripts/e2e/snaps-one-frame.ts`): a page whose socket
+is wrapped hands two snapshots over in one task, the first carrying GAME
+OVER and a clean getaway; the card, the banner and both sounds are drawn,
+a resent copy is announced once, and after a cut the page draws a new
+pair once. Its control is the pre-change client: nothing drawn.
+
 ## Smoothing
 
 Remote entities are drawn `interpDelayMs` (100) in the past, between two

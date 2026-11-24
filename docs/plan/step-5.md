@@ -935,3 +935,51 @@ own full runs meanwhile: 140 of 140 at 50e5121 and 142 of 142 at 778ab9d; one re
 | `plates-friend-held` | 0 of 8 | unknown | Not reproduced. The fact now prints each hero's columns and every plate as each page draws it, before and after its 1.5 s watch: the suspect is the same last nudge carrying the friend off the plate while the gate stays open its 6 s. |
 | `outpost-break`, `start-continue-gone` | 0 of 8 | unknown | Not reproduced. |
 | `row-both-sides` | (orchestrator: 1, its builder about 1 in 20) | not looked at | Out of budget. |
+
+## A page misses what happened (brief `handoff-prompts/page-misses-what-happened.md`)
+
+Builder session `session_017WiGzJrwonyg1a3d9hvyg4`, 2026-11-24.
+
+### Push 1: two snapshots in one frame
+
+- **Cause, confirmed:** `src/net/client.ts` replaced `latest` per snapshot,
+  and every watcher (GAME OVER, STAGE CLEARED, banners, poofs, sounds) reads
+  `net.latest()` once a frame by identity, so the first of two snapshots
+  landing inside one frame never reached any of them. The server sends each
+  tick's events in exactly one snapshot (`stepAndSend` empties `gw.events`)
+  and never resends one.
+- **Fix:** a snapshot arriving while the last is unread adds its events after
+  that one's, in a new object; `latest()` marks it read. A snapshot whose
+  tick is not newer than the last is a resent copy and adds none; a
+  `welcome` forgets the last tick (a restarted server counts from 0).
+  `DRAFT:` unread events more than 60 server ticks behind the newest are
+  let go (a hidden tab's frames stop). `docs/mechanisms/network.md`, "Two
+  snapshots in one frame".
+- **Reproduced deterministically:** fact `snaps-one-frame`
+  (`scripts/e2e/snaps-one-frame.ts`). An init script wraps the page's
+  socket `onmessage`; when armed it adds events to the next real snapshot,
+  holds it, and hands it over just before the next snapshot in the same
+  task (no frame between). The first carries `game-over-coming` and a
+  `clean-getaway`. Then exactly once: the held copy handed over twice (a
+  resent snapshot) is announced once; the socket cut, the page back by
+  itself, a new pair is drawn once and nothing before it again.
+  - Control, the pre-change `client.ts` rebuilt: **red 3 of 3** (cards 0,
+    banners [], sounds []).
+  - With the fix: **green 5 of 5** alone (card 1, banner once, sounds
+    `game-over` and `clean-getaway` played; sound state `running` after a
+    tap).
+- **`hearts-game-over` alone, 20 times:** 20 of 20 green (with the rest of
+  `scripts/e2e/defeat.ts`, all green in every run), on a local server.
+  The red was 1 in 20 before, so 20 greens alone are weak evidence on
+  their own; `snaps-one-frame` is the deterministic proof.
+- **Full `npm run e2e`** (push 1 alone, in a worktree, while the 20 runs
+  above ran beside it on the same 4 cores): 152 ok, 1 red, `start-tune`
+  (the Tune button missing after New game), not on the brief's known
+  list; alone on the same build 3 of 3 green. Read as load, not this push
+  (nothing in it touches the start screen or the address).
+- **How "exactly once" is known:** by the fact's resent and reconnect
+  cases, and by reading the server: one snapshot per tick's events, none
+  resent over a socket; a new socket gets only snapshots made after it.
+- **Not verified:** a real iPhone. Whether watchers that rely on seeing
+  one snapshot's events per object (none found: every one loops over
+  `events`) mind a merged list.

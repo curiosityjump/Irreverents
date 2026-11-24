@@ -418,6 +418,8 @@ async function main(): Promise<void> {
       await (await import('./lib/e2e-touch.ts')).touchAndThrows({ browser, devices, base, out, fact, errors });
       // Step 5's facts (hit-*): the hitter's own page draws its hit at once on a delayed connection; the other page as before (docs/mechanisms/network.md, "Predicted hits").
       await (await import('./e2e/hit-lands.ts')).hitLandsFacts({ browser, devices, base, out, fact, errors });
+      // Two snapshots in one frame (snaps-one-frame): every snapshot's events reach the page's watchers once (docs/mechanisms/network.md, "Two snapshots in one frame").
+      await (await import('./e2e/snaps-one-frame.ts')).snapsOneFrameFacts({ browser, devices, base, out, fact, errors });
       // Step 5, the owner's report (ko-*): a knocked-out enemy is drawn flying from the blow and lying where he lands, never lying while he slides (docs/mechanisms/rendering-actors.md).
       await (await import('./e2e/knocked-out.ts')).knockedOutFacts({ browser, devices, base, out, fact, errors });
       // Step 5, part 3 (king-wall): by touch, the king punched west from the dais comes to rest outside the false wall behind the throne (docs/mechanisms/rooms-and-doors.md).

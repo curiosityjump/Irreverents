@@ -104,6 +104,23 @@ export function createNetClient(opts: NetClientOptions) {
   /** Step 17: the server said this world is gone; no reconnecting to it, not even on kick(). */
   let gone = false;
   let latest: { tick: number; events: SimEvent[] } = { tick: 0, events: [] };
+  /**
+   * INTENT (brief page-misses-what-happened, measured 2026-11-24: 1 run of 20,
+   * the socket heard game-over-coming and no frame drew the card): the page's
+   * watchers read `latest()` once a frame, and two snapshots can arrive inside
+   * one frame. So a snapshot's events are kept until a frame has read them: one
+   * that arrives while the last is unread adds its events after that one's, in
+   * a new object (watchers tell new from old by identity). Every snapshot's
+   * events reach every watcher once, in order, however frames and snapshots
+   * interleave. A snapshot whose tick is not newer than the last one's is a
+   * resent copy and adds none; a welcome forgets the last tick (a restarted
+   * server counts from 0). The server sends each tick's events in one snapshot
+   * only (src/server/game.ts, stepAndSend), so nothing else repeats them.
+   */
+  let latestRead = true;
+  let lastSnapTick = -Infinity;
+  /** DRAFT: unread events older than this many server ticks are let go (a hidden tab's frames stop; its return is not a burst of old news). */
+  const UNREAD_TICKS = 60;
   let serverMe: Entity | null = null;
   let heardRooms: World['rooms'] = undefined;
   /** The newest effect applied; effect ids only ever grow, so a resent copy is recognised. */
@@ -222,6 +239,7 @@ export function createNetClient(opts: NetClientOptions) {
       if (typeof m.tick === 'number' && Math.abs(world.tick - m.tick) > 20) world.tick = m.tick;
       smoother.clear();
       predictor.clear();
+      lastSnapTick = -Infinity;
       // A server that restarted has forgotten every dial; if this world is
       // still tuned, its `tuning` follows this message.
       applyTuningDiff(content.tuning, shipped, {});
@@ -258,7 +276,12 @@ export function createNetClient(opts: NetClientOptions) {
       // Their bodies stay out of this world: only the server simulates them.
       world.taken = m.w.entities.filter((e) => e.player !== null && e.id !== myId).map((e) => e.kind);
       if (Math.abs(world.tick - m.w.tick) > 60) world.tick = m.w.tick;
-      latest = { tick: m.w.tick, events: m.ev };
+      if (m.w.tick > lastSnapTick) {
+        lastSnapTick = m.w.tick;
+        const unread = latestRead ? [] : latest.events.filter((e) => e.tick >= m.w.tick - UNREAD_TICKS);
+        latest = { tick: m.w.tick, events: unread.length > 0 ? [...unread, ...(m.ev ?? [])] : (m.ev ?? []) };
+        latestRead = false;
+      }
       // Step 3 (the stone plate): the room state as the server sent it, kept apart from the
       // local step, which sees only this page's own body (a plate a friend stands on reads up
       // there every tick). The drawing reads plates from both (src/client/draw/room-parts.ts).
@@ -339,8 +362,16 @@ export function createNetClient(opts: NetClientOptions) {
     me,
     stats,
     status: (): NetStatus => status,
-    /** The newest server tick heard, and the simulation events that came with it. */
-    latest: () => latest,
+    /**
+     * The newest server tick heard, and the simulation events no frame has read
+     * yet: those of every snapshot since the last call, in order (see
+     * `latestRead`). Call it once a frame; the same object comes back until a
+     * new snapshot arrives.
+     */
+    latest: () => {
+      latestRead = true;
+      return latest;
+    },
     /** Step 21: the server's copy of this player's character from the newest snapshot (its `c` is the server's: wear, falls), or null before one. Read only. */
     serverMe: (): Entity | null => serverMe,
     /** Step 3: the room state (`World.rooms`) of the newest snapshot, as sent, untouched by this page's own step; undefined before one. */
