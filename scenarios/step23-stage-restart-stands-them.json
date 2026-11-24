@@ -1,0 +1,106 @@
+{
+ "id": "step23-stage-restart-stands-them",
+ "proves": "Step 23 push 5 for Step 22 (systems/weapon-stage-restart.ts): the quarry's spear (quarry-road column 8) and bomb (column 34) lie where they began on every try. step22-restart-on-game-over's run (the party's last heart lost in the depot; at 567 the game over puts the grappler at the stage's entrance and the stage starts over), with both road sources' bookkeeping seeded as just taken (their weapons out of the world, a restock of 30 s and 20 s still to wait): before the start-over the road has no loose weapon; on the start-over both stand again at once, the spear at column 8 and the bomb at column 34. Control (watched to fail, 2026-11-24): weapon-stage-restart.ts removed, and the road still has no weapon at 570.",
+ "room": "quarry-depot",
+ "placements": true,
+ "tiles": [
+  {
+   "room": "quarry-depot",
+   "tile": [
+    51,
+    14
+   ],
+   "is": "solid"
+  },
+  {
+   "room": "quarry-depot",
+   "tile": [
+    52,
+    14
+   ],
+   "is": "solid"
+  }
+ ],
+ "players": [
+  {
+   "id": "a",
+   "character": "grappler",
+   "spawn": 1
+  }
+ ],
+ "inputs": [
+  {
+   "player": "a",
+   "from": 0,
+   "to": 1,
+   "x": 0
+  }
+ ],
+ "ticks": 700,
+ "expect": [
+  {
+   "fact": "event-where",
+   "event": "stage-restarted",
+   "where": {
+    "stage": "iron-quarry",
+    "tries": 1
+   },
+   "between": [
+    567,
+    567
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "weapon",
+   "loose": [
+    0,
+    0
+   ],
+   "room": "quarry-road",
+   "at": 566
+  },
+  {
+   "fact": "weapon",
+   "loose": [
+    1,
+    1
+   ],
+   "room": "quarry-road",
+   "weapon": "spear",
+   "x": [
+    128,
+    144
+   ],
+   "at": 570
+  },
+  {
+   "fact": "weapon",
+   "loose": [
+    1,
+    1
+   ],
+   "room": "quarry-road",
+   "weapon": "bomb",
+   "x": [
+    544,
+    560
+   ],
+   "at": 570
+  }
+ ],
+ "world": {
+  "heartsLost": {
+   "grappler": 4,
+   "infiltrator": 3,
+   "flyer": 3
+  },
+  "weaponSources": {
+   "quarry-road-spear": {},
+   "quarry-road-bomb": {}
+  }
+ }
+}

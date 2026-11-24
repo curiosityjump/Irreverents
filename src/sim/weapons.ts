@@ -8,7 +8,7 @@ import type { Weapon } from '../content/kinds/weapons.ts';
 import type { Entity, StepContext, World } from './types.ts';
 import { ticksOf } from './body-state.ts';
 import { emitEffect } from './effects.ts';
-import { addEntity, findEntity } from './world.ts';
+import { addEntity, findEntity, removeEntity } from './world.ts';
 
 declare module './types.ts' {
   interface Components {
@@ -244,4 +244,28 @@ export function throwWeapon(ctx: StepContext, e: Entity, w: Weapon, input: { x: 
   const lit = w.burst ? { lit: { at: ctx.world.tick, by: e.id } } : {};
   const loose = makeLoose(ctx, w, e.room, x, feet, { from: e.id, vx, vy, flying: { by: e.id, met: [e.id] }, ...lit, ...(src ? { src } : {}) });
   ctx.emit('weapon-dropped', { entity: e.id, player: e.player, weapon: w.id, loose: loose.id, how: 'thrown' });
+}
+
+/**
+ * Puts the weapons of `rooms` back as they began (Step 23 for Step 22's
+ * stage starting over, src/sim/stage.ts): every weapon lying loose in them
+ * (thrown, lit or bursting too) is gone, and every source standing in them
+ * forgets its bookkeeping, so it stands its weapon again on the next run of
+ * weapon-sources (unless the one from it is still out: held by a player in
+ * its room, as weapon-sources counts it). A carrier there put back fresh by
+ * the stage is handed his weapon again by weapon-carriers (his is nowhere
+ * now). A weapon in a player's hand stays in it. Returns the loose ones
+ * removed. Called on `stage-restarted` by systems/weapon-stage-restart.ts;
+ * exported so a stage can call it itself.
+ * DRAFT: a player's held weapon is kept through a start-over (the start-over
+ * puts back the world, not the heroes).
+ */
+export function restoreRoomWeapons(world: World, content: Content, rooms: readonly string[]): string[] {
+  const set = new Set(rooms);
+  const gone = world.entities.filter((e) => e.c.loose !== undefined && set.has(e.room)).map((e) => e.id);
+  for (const id of gone) removeEntity(world, id);
+  if (world.weaponSources) {
+    for (const w of Object.values(content.weapons ?? {})) for (const s of w.sources) if (set.has(s.room)) delete world.weaponSources[s.id];
+  }
+  return gone;
 }

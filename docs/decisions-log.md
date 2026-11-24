@@ -338,3 +338,19 @@ document as a decision of theirs.
 - **Why this way:** your rule replaces it (hearts, then game over in the cantina). A hero who just stands among the camp's fighters loses the whole party's hearts in about a minute and a half and is back in the cantina. Only the Iron Quarry still throws you back to its start, until its stage builder has moved to the game over.
 - **To change it:** `"on": true` in `content/defeat/outpost.json` brings the camp's throw back.
 - **Where:** `docs/mechanisms/defeat.md`, "Hearts". `DRAFT:`
+
+
+### 2026-11-24 · Step 4: rows from the sides: the town's help walks in at both edges of your screen, not at the far street doors
+- **Decided by:** town tiers builder, `session_017WiGzFCmKRjkeGNrUSbDvu`
+- **Instead of asking:** "In the castle street, where should the guards a whistle or a bell brings walk in?"
+- **Why this way:** the owner, 2026-11-24: "Alarms should spawn more enemies of increasing strength that come in from the sides." A row now walks in on the street floor on both sides of where they were told you are (never where you actually are: escalation is not omniscient), about half a phone screen off, so they appear at the edges of the view and close in; one each side, alternating. The words "The watch closes in from both sides!" and "The whole watch is upon you!" are shown as rows walk in. When it is over they leave by the nearer street door. Measured: every hero still gets out of the street at the top level, running west past the arrivals (one scenario per hero); for the brawler it takes about 1.3 s longer than before.
+- **To change it:** `entries` and `entryAway` in `content/dispatch/castle-street.json` (left out: back to the doors); `announce` for the words.
+- **Where:** `docs/mechanisms/npc-response.md`, "The dispatch"; `src/sim/systems/alert-dispatch.ts`. `DRAFT:`
+
+
+### 2026-11-24 · Step 23: the spear and the bomb lie on the quarry road, and come back each time the stage starts over
+- **Decided by:** Step 23 builder (`handoff-prompts/weapons-pick-up-and-swing.md`), `session_017WiGzGmHC7ngNDZecPb15v`; the tiles proposed to Step 22's lead (`session_017WiGzF7NsB3KTwXkWUXE63`) by message; they agreed (05:54 UTC).
+- **Instead of asking:** where in the game a player first finds the spear and the bomb, and what happens to them when the quarry starts over.
+- **Why this way:** the step file: "a spear and a bomb in the quarry (Step 22's stage), each seen on screen before it is reached". The spear lies two steps from where you come in from the courtyard, so it is the first thing you see; the bomb lies on the ledge just before the toll-keeper and his watcher, so the first thing you can do with it is throw it into them. When the stage starts over (you lost), both lie where they began again at once, as the stage puts its people back. A weapon in your own hand is kept through the start-over.
+- **To change it:** the `sources` rows in `content/weapons/spear.json` and `content/weapons/bomb.json` (room and tile); for a start-over that also takes the weapon out of your hand, `restoreRoomWeapons` in `src/sim/weapons.ts`.
+- **Where:** `docs/mechanisms/weapons.md`, "A stage starting over".

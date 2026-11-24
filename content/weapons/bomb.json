@@ -1,5 +1,5 @@
 {
-  "//": "DRAFT (Step 23 push 4): the bomb, from the owner's P12 upload (looks cut by the props builder, content/looks/weapons.json; its burst is weapon-bomb-explosion). Hit throws it (use 'throw', systems/weapon-toss.ts), and so does Grab; thrown, it is lit and bursts after its fuse or on the first body it meets: everything near flies, the thrower too (doc 08: 'recklessly, carelessly destructive action including self-destructive stunts'), and a cracked wall in the radius breaks. Then it is gone; its source stands another after the restock. It lies only in the weapon test room until its quarry tile is agreed with Step 22's lead (push 5). Every number is a first guess (decisions-log 'Step 23').",
+  "//": "DRAFT (Step 23 push 4): the bomb, from the owner's P12 upload (looks cut by the props builder, content/looks/weapons.json; its burst is weapon-bomb-explosion). Hit throws it (use 'throw', systems/weapon-toss.ts), and so does Grab; thrown, it is lit and bursts after its fuse or on the first body it meets: everything near flies, the thrower too (doc 08: 'recklessly, carelessly destructive action including self-destructive stunts'), and a cracked wall in the radius breaks. Then it is gone; its source stands another after the restock. It lies on the quarry road's ledge at column 34, west of the toll-keeper and his watcher (seen before them: thrown into them), and in the weapon test room for the scenarios; a stage start-over stands it again (systems/weapon-stage-restart.ts). Every number is a first guess (decisions-log 'Step 23').",
   "id": "bomb",
   "name": "Bomb",
   "looks": {
@@ -9,12 +9,45 @@
     "broken": "weapon-bomb-broken",
     "burst": "weapon-bomb-explosion"
   },
-  "grip": [14, 16],
-  "box": [10, 10],
+  "grip": [
+    14,
+    16
+  ],
+  "box": [
+    10,
+    10
+  ],
   "use": "throw",
-  "thrown": { "speed": 240, "strength": 0, "wear": 0 },
-  "burst": { "fuse": 1.2, "radius": 40, "strength": 36000, "wear": 40, "breaks": 250 },
+  "thrown": {
+    "speed": 240,
+    "strength": 0,
+    "wear": 0
+  },
+  "burst": {
+    "fuse": 1.2,
+    "radius": 40,
+    "strength": 36000,
+    "wear": 40,
+    "breaks": 250
+  },
   "sources": [
-    { "id": "test-weapons-bomb", "room": "test-weapons", "tile": [14, 6], "restock": 20 }
+    {
+      "id": "quarry-road-bomb",
+      "room": "quarry-road",
+      "tile": [
+        34,
+        12
+      ],
+      "restock": 20
+    },
+    {
+      "id": "test-weapons-bomb",
+      "room": "test-weapons",
+      "tile": [
+        14,
+        6
+      ],
+      "restock": 20
+    }
   ]
 }

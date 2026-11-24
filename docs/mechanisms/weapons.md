@@ -39,8 +39,8 @@ kind's hand point (pixels from the box's top-left, facing right), and a
 |---|---|---|
 | `sword` | +10 reach, x1.4 strength, own wind-up; thrown at 320 px/s, strength 14000 | Quick: a grappler's swing sends a 40-weight dummy at 490 px/s, 350 bare-handed. Lies on the castle street at column 10, seen on the first screen; `camp-fighter-2` carries one. |
 | `hammer` | +6 reach, +0.35 s wind-up, x2.2 strength; `breaks` 250 | Slow and huge: a grappler's 30800 sends a 70-weight camp fighter off at the cap. Breaks a cracked wall (200), a fence (200) or a stall (150) in reach, not the camp's barricade (300). Lies in the Bandit Camp at column 10, just past the entrance block. |
-| `bomb` | `use: throw`; thrown at 240 px/s; burst after 1.2 s or on the first body it meets: radius 40, strength 36000, wear 40, breaks 250 | Hit (or Grab) throws it; the burst launches a 40-weight dummy at the cap and the grappler standing two tiles from it the other way (the thrower is not spared: doc 08). Gone after its burst; its source stands another 20 s later. In the test room until its quarry spot is agreed with Step 22. |
-| `spear` | +18 reach, x1.2 strength, own wind-up; thrown at 420 px/s | The longest reach. Written last, as data only: no code names it (`step23-one-file`). In the test room until its quarry spot is agreed with Step 22. |
+| `bomb` | `use: throw`; thrown at 240 px/s; burst after 1.2 s or on the first body it meets: radius 40, strength 36000, wear 40, breaks 250 | Hit (or Grab) throws it; the burst launches a 40-weight dummy at the cap and the grappler standing two tiles from it the other way (the thrower is not spared: doc 08). Gone after its burst; its source stands another 20 s later. Lies on the quarry road's ledge at column 34, west of the toll-keeper and his watcher (and in the test room). |
+| `spear` | +18 reach, x1.2 strength, own wind-up; thrown at 420 px/s | The longest reach. Written last, as data only: no code names it (`step23-one-file`). Lies on the quarry road two tiles past where a hero comes in from the courtyard, column 8 (`step23-quarry-spear-found`; and in the test room). |
 
 ## One weapon in hand, one per hero
 
@@ -121,6 +121,15 @@ reasons). It falls, bounces and slides by the orb's physics
   `step23-game-over-hammer-back-to-source`,
   `step23-game-over-sword-back-to-carrier`).
 
+- **A stage starting over** (`weapon-stage-restart`, 613, after Step 22's
+  `stage-run`, 612): on `stage-restarted`, `restoreRoomWeapons(world,
+  content, rooms)` (`src/sim/weapons.ts`, exported for a stage to call
+  itself) removes every loose weapon in the stage's rooms and clears their
+  sources' bookkeeping, so each stands its weapon again at once (unless a
+  player holds the one from it in its room). A weapon in a player's hand is
+  kept (`DRAFT:`). A carrier the stage puts back fresh is re-armed by
+  `weapon-carriers`. `step23-stage-restart-stands-them`.
+
 `INTENT:` every `weapon-*` system runs only where `weaponWorld` is true
 (the server's world or a scenario's: no `world.taken`, and some body nobody
 plays). A page's world, even before its first snapshot, holds only its
@@ -149,7 +158,7 @@ wall and the hammer, sword and spear's test sources.
   `-pick-up-and-swing`, `-any-hero-holds-it-<hero>`,
   `-hard-hit-knocks-it-loose`, `-steal-from-a-carrier`, `-thrown-knocks-down`,
   `-thrown-out-leaves-it`, `-each-hero-keeps-their-own`, `-returned-carrier-unarmed`, `-game-over-hammer-back-to-source`, `-game-over-sword-back-to-carrier`, `-bomb-bursts`,
-  `-hammer-breaks-the-wall`, `-one-file`, `-source-stands-another`. Fact `weapon`
+  `-hammer-breaks-the-wall`, `-one-file`, `-source-stands-another`, `-quarry-spear-found`, `-stage-restart-stands-them`. Fact `weapon`
   (`src/scenarios/facts/weapon.ts`): what a body holds at a tick, or how
   many lie loose in a room.
 - `npm run e2e`, `weapon-word` and `weapon-held` (`scripts/e2e/weapons.ts`):

@@ -1,5 +1,5 @@
 {
-  "//": "DRAFT (Step 23): the third weapon, written last and with no code (the measure of 'one more weapon is one file'). The longest reach (+18), a little harder (x1.2), the holder's own wind-up; thrown fast (420 px/s) so it flies flatter and further than the sword. It lies in the weapon test room only until its quarry spot is agreed with Step 22 (push 5). Every number is a first guess (decisions-log 'Step 23').",
+  "//": "DRAFT (Step 23): the third weapon, written last and with no code (the measure of 'one more weapon is one file'). The longest reach (+18), a little harder (x1.2), the holder's own wind-up; thrown fast (420 px/s) so it flies flatter and further than the sword. It lies on the quarry road just inside the entrance from the courtyard (column 8, before the first rock), seen on entering, and in the weapon test room for the scenarios. Every number is a first guess (decisions-log 'Step 23').",
   "id": "spear",
   "name": "Spear",
   "looks": {
@@ -32,6 +32,15 @@
     "wear": 24
   },
   "sources": [
+    {
+      "id": "quarry-road-spear",
+      "room": "quarry-road",
+      "tile": [
+        8,
+        16
+      ],
+      "restock": 30
+    },
     {
       "id": "test-weapons-spear",
       "room": "test-weapons",

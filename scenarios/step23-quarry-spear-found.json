@@ -1,0 +1,19 @@
+{
+  "//": "DRAFT (Step 23): the quarry's spear is found without being told: it lies on the road two tiles east of where a hero comes in from the courtyard (spawn 2, column 6; the spear at column 8, before the first rock at column 10).",
+  "id": "step23-quarry-spear-found",
+  "gate": null,
+  "proves": "a hero entering the Iron Quarry's road sees the spear lying a step ahead: the grappler walks a little east, Use picks it up, and it is in hand. Control (-control): the same walk and no Use, and the hand stays empty while the spear still lies there",
+  "room": "quarry-road",
+  "placements": true,
+  "players": [{ "id": "a", "character": "grappler", "spawn": 2 }],
+  "inputs": [
+    { "player": "a", "from": 10, "to": 30, "x": 1 },
+    { "player": "a", "from": 60, "to": 62, "hold": ["interact"] }
+  ],
+  "ticks": 90,
+  "expect": [
+    { "fact": "weapon", "loose": [1, 1], "room": "quarry-road", "weapon": "spear", "x": [128, 144], "at": 5 },
+    { "fact": "weapon", "player": "a", "at": 80, "is": "spear" },
+    { "fact": "weapon", "loose": [0, 0], "room": "quarry-road", "weapon": "spear", "at": 80 }
+  ]
+}
