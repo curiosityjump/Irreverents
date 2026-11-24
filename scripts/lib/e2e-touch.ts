@@ -158,7 +158,7 @@ export async function steer(ph: Phone, dir: number, untilX: number, ms = 6000): 
   }
   await ph.cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
 }
-/** Walks by the stick to within a few pixels of x, and ends facing `face` (1 right, -1 left). */
+/** Walks by the stick to within a few pixels of x, and ends facing `face` (1 right, -1 left; 0: as it walked, with no last touch). */
 export async function standAt(ph: Phone, goal: number, face = 1): Promise<void> {
   for (let i = 0; i < 5; i++) {
     const x = (await me(ph)).x as number;
@@ -166,8 +166,10 @@ export async function standAt(ph: Phone, goal: number, face = 1): Promise<void> 
     await steer(ph, x < goal ? 1 : -1, x < goal ? goal - 3 : goal + 3);
     await settle(ph);
   }
-  // A touch of the stick: the character faces that way and barely moves.
-  const p = await pointOn(ph, '[data-stick]', face > 0 ? 0.75 : 0.25);
+  // A touch of the stick: the character faces that way and moves a little (8-12 px for the infiltrator,
+  // which reaches full speed in 49 ms; more under load). INTENT (Step 5 flakes, the cellar
+  // doorway): face 0 skips it, for a goal narrower than that drift (a one-column doorway).
+  const p = face !== 0 ? await pointOn(ph, '[data-stick]', face > 0 ? 0.75 : 0.25) : null;
   if (p) {
     await ph.cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ ...p, id: 1 }] });
     await sleep(60);

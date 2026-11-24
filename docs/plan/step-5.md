@@ -669,3 +669,20 @@ drew B). 5 of 60 failed:
 The open question (separate worlds or serial parts) was not needed: every
 part already makes its own world (`?room=` per run and per part), and no
 failure traced to two parts sharing one.
+
+**`plates-stone`, `plates-stone-held`, `plates-pocket`: the check, fixed**
+(brief `handoff-prompts/e2e-plates-walk-margin.md`, builder
+`session_017WiGzJ2rqEpKFJmGDriwjQ`, 2026-11-24). As the brief traced: the
+walk to the one-column cellar doorway ended with `standAt`'s 60 ms "face
+east" touch, which carried the hero 8-12 px on (more under load), past
+column 7 onto the hide curtain. `standAt(ph, x, 0)` now skips that touch
+(`scripts/lib/e2e-touch.ts`); `down()` in `scripts/e2e/plates.ts` and the
+cellar walk in `scripts/e2e/glints.ts` (the same east nudge into the same
+doorway) use it. The other 43 `standAt(` calls pass 1 or -1 and run exactly
+as before (45 in all, none passed 0 before). **Under four busy loops (load
+~4.5), the plates facts alone, 10 runs each:** the old call missed the
+doorway on 2 tries (B at x 124 and 126; retries saved both); the new call 0
+tries missed, 10 of 10 green. The 8-12 px is the game as tuned, not a
+finding: the infiltrator reaches its 128 px/s in 49 ms (`runAccel` 2600) and
+stops in 2 px (`runDecel` 3600), about 7 px for a 60 ms touch, plus a frame or
+two of the touch's end reaching the page.

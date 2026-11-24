@@ -117,7 +117,8 @@ async function down(ph: Phone): Promise<boolean> {
   // DRAFT: up to three tries: the street has a guard and a villain who may shove a hero off the
   // doorway while it walks there (seen once in four runs, page B, after the rebase onto 49b9d07).
   for (let i = 0; i < 3; i++) {
-    await standAt(ph, doorX, 1);
+    // Face 0: no last nudge of the stick, which carried the hero 8-12 px on, off the one-column doorway (column 7) onto the hide curtain.
+    await standAt(ph, doorX, 0);
     if (!(await tap(ph, 'interact'))) return false;
     try {
       await ph.page.waitForFunction(() => (window as any).irreverents.drawn.room === 'undercroft', null, { polling: 'raf', timeout: 4000 });

@@ -107,7 +107,8 @@ export async function glintFacts(kit: Kit & { shots: string }): Promise<void> {
     // The held Jump left the hero standing on the awning (one-way tiles, columns 7-9; building 1's
     // wall closes its east end): walk off its west end to the street floor, then back under it.
     await standAt(ph, 4 * 16, -1);
-    await standAt(ph, doorX, 1);
+    // Face 0: no last nudge east, which could carry the hero off the one-column doorway (scripts/e2e/plates.ts, down()).
+    await standAt(ph, doorX, 0);
     const onFloor = await ph.page.evaluate(() => (window as any).irreverents.drawn.me.y);
     const used = await tap(ph, 'interact');
     let place: any = null;
