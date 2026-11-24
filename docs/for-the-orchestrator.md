@@ -129,3 +129,20 @@ Closed and archived (`docs/plan.md` summary, `docs/plan-archive.md` "Step 16"); 
 **Flag:** the e2e reconnect fact `h1` (scripts/e2e.ts: the server down 75 s, the desktop page "did NOT come back within 10 s of the server returning") failed in 5 of 7 full `npm run e2e` runs in this session, once on origin/main at c881c17 with none of Step 13's work in it, and passed on the other two (both at Step 13 push 1). Not Step 13's; not diagnosed. Step 13's own notes (the missing `step13-free-while-caught`, the cage moved off Step 19's strongbox): `docs/plan/step-13.md`, "Builder notes".
 
 - 2026-11-24 00:45 UTC, orchestrator session_017WiGzJzo6aZqH4kYxxJsiV, a doubt, nothing changed: the title-screen builder's full Drive sync (8cb79ac) mirrored the Drive's whole backlog: 348 new files, `docs/design-library` is now 334 MB (stems of music as `.wav`, 15 files over 3 MB; `.git` 214 MB). Every new session clones it and Railway uploads the repo. `tools/drive_sync.py` has a `SKIP_DOWNLOAD` list with an `INTENT:` for exactly this (superseded studies are listed, not downloaded). Decide whether raw audio stems and source packs nobody imports should be listed-not-downloaded too; do not delete mirrored files on a hunch (the library is the owner's, mirrored read-only).
+
+### Handoff, orchestrator `session_017WiGzJzo6aZqH4kYxxJsiV`, 2026-11-24 02:20 UTC
+
+Picked up 19:13 UTC on 2026-11-23; handing off at about 700k tokens of context to a successor this
+session starts itself. **Everything in flight is in `docs/current-directive.md`'s "Status",
+"Sessions" and "Owed next" (rewritten 02:20 UTC). Read "Status" first: the owner played all
+evening and his words there order the work: hearts and game over, one stage to clear with a
+victory screen, alarms that bring stronger rows from both sides, enemies that chase and stay
+beaten, weapons one at a time.**
+
+- **Nothing of this session's is unlanded.** No workflow, no subagent, no uncommitted file.
+- **Triggers:** one, `trig_01EYsDtkSpMZvUsjGPYGMsY9` (02:26 UTC, a check-in into this session): delete it or let it fire here; I only forward. Arm your own, about every 30 minutes while eleven sessions run.
+- **Rules changed this tenure, all in the repo:** every spawn carries `blob_limit_kb: 150` and briefs name library files by path (`docs/lead-session.md`, `docs/briefs.md`; the owner's words); a builder at about 300-400k tokens stops and its brief gets a "Landed so far" line for a fresh one (done nine times tonight; it works); never `git pull` in the tree while your own e2e runs: push documents from a scratch worktree instead (`git worktree add --detach <scratchpad>/wt origin/main`, commit, `git push origin HEAD:main`, remove).
+- **A slip of mine to know about:** a chained command stopped early and the next statement committed a placeholder builder id into `docs/plan.md` (724c7e4, fixed at b768cb7). After any `a && b` chain followed by a commit, check the diff before pushing.
+- **Messages cross and arrive late** between sessions (one took five hours; two of my answers to builders were not seen and had to be sent again). When a builder says it is waiting on you, answer again.
+- **Reviews:** "reviewed" in `docs/plan/core-loops.md` means build, check and e2e re-run on `main` by me, diffs not read, screenshots not looked at. Nobody but builders has looked at the title screen, the buttons, the weapon looks or the Hall's picture.
+- **Waiting on the owner (nothing blocks):** the three questions in "Status"; "full speed" or "throttle"; the stale branch; the changelog entry.
