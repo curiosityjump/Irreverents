@@ -331,3 +331,10 @@ document as a decision of theirs.
 - **To change it:** `pick.lag` in `content/cantina/cantina.json` (0 puts back the old rule).
 - **Where:** `docs/mechanisms/cantina.md`, "A tap on a walking regular".
 
+
+### 2026-11-24 · Step 21: in the Bandit Camp too, being beaten costs hearts and no longer throws you out; stand there long enough and it is GAME OVER
+- **Decided by:** hearts builder, push 5b, `session_017WiGzG7mhviEaxroo5GvBv`, with the orchestrator's go
+- **Instead of asking:** "Should the camp still throw a beaten hero into the courtyard now that there are hearts?"
+- **Why this way:** your rule replaces it (hearts, then game over in the cantina). A hero who just stands among the camp's fighters loses the whole party's hearts in about a minute and a half and is back in the cantina. Only the Iron Quarry still throws you back to its start, until its stage builder has moved to the game over.
+- **To change it:** `"on": true` in `content/defeat/outpost.json` brings the camp's throw back.
+- **Where:** `docs/mechanisms/defeat.md`, "Hearts". `DRAFT:`

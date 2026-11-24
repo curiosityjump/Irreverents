@@ -448,3 +448,23 @@ on `game-over`).
   regenerated screenshots (`docs/plan/step-23-shots/`); caught on rebase,
   never pushed. Once a local e2e server was stopped with `pkill -f`
   instead of by its pid (no other server was running here).
+
+### Push 5b: the camp's throw off (the orchestrator's go)
+
+The camp off by data; `step23-thrown-out-leaves-it` re-pointed by me with
+the orchestrator's go (its claim kept: the weapon stays loose inside the
+camp; now the grappler's last heart at 3107 and `hero-out` at 3287 instead
+of the throw; control: hearts off, it fails). `step21-camp-thrown-out` and
+`step21-throw-is-no-escape` moved to `docs/plan/step-21-held/`. The e2e's
+camp walk now ends in the game over: `hearts-game-over` (card, cantina,
+stick) replaces `defeat-thrown-out`. Measured in the sim: a hero standing
+among the camp's fighters is at game over at tick 4920 (82 s).
+`chase-goes-back` (`scripts/e2e/chase.ts`, the chase's; changed by me with
+the orchestrator's go): the hero now leaves fighter 1's sight by walking
+west over the block by the doorway and out by the camp's door, not by
+being thrown out; the fact's claim is kept (he searches, then walks back
+to his post). Run alone four times against a local build: four passes.
+On top of the alarms builder's camp waves (4154e15): every scenario green;
+`hearts-game-over` passed 5 of 6 runs (3 alone, 2 full e2e); the one miss
+was in a full run before the fact said where the page ended (it now
+does). A game over by standing in the new camp takes about 75 s (sim).
