@@ -6,6 +6,7 @@ import { looseBox, weaponOf } from '../../sim/weapons.ts';
 import { drawnOffset } from './entities.ts';
 import type { PlayerView } from './entities.ts';
 import { drawFrame, frameOf, lengthOf, look } from './fx.ts';
+import { tinted } from './looks.ts';
 import { fillHudSlot } from './hud.ts';
 
 // Step 23 (docs/mechanisms/weapons.md): what a weapon looks like. A loose
@@ -32,13 +33,56 @@ fillHudSlot('weapon', (_world, content, me) => {
 /** What the page drew for weapons this frame, for the checks (window.irreverents.drawn.weapons). */
 export interface DrawnWeapons {
   /** Loose weapons: entity id, weapon, the middle of its box (room px), and whether it glows (this page's Use would take it); `lit` a thrown bomb, `burst` one bursting, `broken` one worn out (its broken look playing). */
-  loose: { id: string; weapon: string; x: number; y: number; glow: boolean; lit?: boolean; burst?: boolean; broken?: boolean }[];
+  loose: { id: string; weapon: string; x: number; y: number; glow: boolean; lit?: boolean; burst?: boolean; broken?: boolean; flying?: boolean }[];
   /** Held weapons: the holder's entity id, the weapon, the look drawn, and the hand point (room px). */
   held: { id: string; weapon: string; look: string; x: number; y: number }[];
 }
 let drawn: DrawnWeapons = { loose: [], held: [] };
 export function drawnWeapons(): DrawnWeapons {
   return drawn;
+}
+
+/** Where each weapon in flight was drawn on this page's recent frames (room px, its middle), newest last: its trail. */
+const trails = new Map<string, { x: number; y: number }[]>();
+/** DRAFT: frames between two copies in a trail. */
+const TRAIL_STEP = 2;
+
+/**
+ * Step 24 slice 1b: a weapon in the air with a `flight` look (content/weapons/,
+ * the kind's `flight`), so a thing flying at you cannot be taken for the same
+ * thing lying still to pick up: `trail` fading, tinted copies where it was
+ * drawn a few frames ago, then the picture itself, spun `spin` turns a second
+ * about its middle and tinted. Read from the page's own frames, so it follows
+ * what is drawn, not the simulation. DRAFT: the look; the trail's spacing.
+ */
+function drawInFlight(g: CanvasRenderingContext2D, w: Weapon, id: string, x: number, y: number, ox: number, oy: number, frame: number): void {
+  const f = w.flight!;
+  const art = look(w.looks.flying ?? w.looks.ground);
+  const past = trails.get(id) ?? [];
+  if (trails.size > 64) trails.clear();
+  past.push({ x, y });
+  while (past.length > f.trail * TRAIL_STEP + 1) past.shift();
+  trails.set(id, past);
+  const source = art && f.tint ? tinted(art, f.tint, 'paint', f.tintAmount) : undefined;
+  const turn = (frame / 60) * f.spin * Math.PI * 2;
+  const one = (px: number, py: number, alpha: number, angle: number) => {
+    g.save();
+    g.globalAlpha *= alpha;
+    g.translate(ox + Math.round(px), oy + Math.round(py));
+    g.rotate(angle);
+    if (art) drawFrame(g, art, 0, -art.w / 2, -art.h / 2, source ? { source } : {});
+    else {
+      g.fillStyle = f.tint ?? '#c8ccd8';
+      g.fillRect(-4, -4, 8, 8);
+    }
+    g.restore();
+  };
+  // The copies, every TRAIL_STEP frames back, the oldest faintest, each turned as it was then.
+  for (let k = f.trail; k >= 1; k--) {
+    const p = past[past.length - 1 - k * TRAIL_STEP];
+    if (p) one(p.x, p.y, (0.5 * (f.trail + 1 - k)) / (f.trail + 1), turn - k * TRAIL_STEP * (f.spin * Math.PI * 2) / 60);
+  }
+  one(x, y, 1, turn);
 }
 
 /** Impact looks playing: which look, where (room px, centre), on which frame they began. */
@@ -91,7 +135,13 @@ export function drawWeapons(g: CanvasRenderingContext2D, world: World, content: 
       const cx = e.x + b.w / 2;
       const feet = e.y + b.h;
       const lit = e.id === target;
-      now.loose.push({ id: e.id, weapon: w.id, x: cx, y: e.y + b.h / 2, glow: lit, ...(l.lit ? { lit: true } : {}), ...(l.ending ? (l.ending.broken ? { broken: true } : { burst: true }) : {}) });
+      const inFlight = !!(l.flying && w.flight && !l.ending);
+      now.loose.push({ id: e.id, weapon: w.id, x: cx, y: e.y + b.h / 2, glow: lit, ...(l.lit ? { lit: true } : {}), ...(l.ending ? (l.ending.broken ? { broken: true } : { burst: true }) : {}), ...(inFlight ? { flying: true } : {}) });
+      if (inFlight) {
+        drawInFlight(g, w, e.id, cx, e.y + b.h / 2, ox, oy, frame);
+        continue;
+      }
+      trails.delete(e.id);
       // A bomb that has burst: its burst look, centred where it burst, played once from the tick it burst (weapon-burst).
       // A weapon worn out (weapon-wear): its broken look where the hand was, in the same way.
       if (l.ending) {

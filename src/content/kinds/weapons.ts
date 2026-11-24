@@ -24,7 +24,7 @@ export interface Weapon {
    * and a weapon with no swing or broken look is valid (the readme: no
    * bogus states). `pickup` falls back to `ground` in a glow.
    */
-  looks: { ground: string; held: string; pickup?: string; swing?: string; impact?: string; broken?: string; icon?: string; burst?: string };
+  looks: { ground: string; held: string; pickup?: string; swing?: string; impact?: string; broken?: string; icon?: string; burst?: string; flying?: string };
   /** Where the hand holds it in its `held` and `swing` looks, pixels from the look's top-left, drawn facing right (the contract's grip_anchor). */
   grip: [number, number];
   /** Its box lying loose or flying, pixels [w, h] (the contract's hitbox): what a hero touches to pick it up. */
@@ -82,6 +82,16 @@ export interface Weapon {
    * looking for one). Absent: false.
    */
   takenByBadGuys: boolean;
+  /**
+   * How it looks while thrown and in the air (Step 24 slice 1b; draw/weapons.ts
+   * only, the simulation never reads it), so a thing flying at you cannot be
+   * taken for the same thing lying still to pick up: `spin` turns a second,
+   * `trail` fading copies behind it along its flight, `tint` a colour laid
+   * over it (#rrggbb, at `tintAmount` 0..1). Its picture is `looks.flying`
+   * when cut, else `looks.ground`. Absent: drawn as it lies (the sword, the
+   * bomb). DRAFT: the fields; additive, so any thrown weapon can say them.
+   */
+  flight?: { spin: number; trail: number; tint?: string; tintAmount: number };
   /** Who starts holding one: placed entity ids (content/placements/) or character kinds, bodies nobody plays (systems/weapon-carriers.ts). */
   carriers: string[];
 }
@@ -92,7 +102,7 @@ declare module '../types.ts' {
   }
 }
 
-const LOOK_STATES = ['ground', 'held', 'pickup', 'swing', 'impact', 'broken', 'icon', 'burst'] as const;
+const LOOK_STATES = ['ground', 'held', 'pickup', 'swing', 'impact', 'broken', 'icon', 'burst', 'flying'] as const;
 
 function numbers(read: Reader, value: unknown, where: string): Record<string, number> {
   const out: Record<string, number> = {};
@@ -123,7 +133,7 @@ const kind: ContentKind = {
   parse(raw, read) {
     const o = read.object(raw, '');
     if (!o) return null;
-    read.only(o, ['id', 'name', 'looks', 'grip', 'box', 'hit', 'use', 'sources', 'thrown', 'carriers', 'breaks', 'burst', 'uses', 'takenByBadGuys'], '');
+    read.only(o, ['id', 'name', 'looks', 'grip', 'box', 'hit', 'use', 'sources', 'thrown', 'carriers', 'breaks', 'burst', 'uses', 'takenByBadGuys', 'flight'], '');
     const looks: Weapon['looks'] = { ground: '', held: '' };
     const lo = read.object(o.looks, 'looks');
     if (lo) {
@@ -169,6 +179,23 @@ const kind: ContentKind = {
     if (o.takenByBadGuys !== undefined) {
       if (typeof o.takenByBadGuys === 'boolean') out.takenByBadGuys = o.takenByBadGuys;
       else read.fail('takenByBadGuys', `must be true or false, but is ${describe(o.takenByBadGuys)}`);
+    }
+    if (o.flight !== undefined) {
+      const f = read.object(o.flight, 'flight');
+      if (f) {
+        read.only(f, ['spin', 'trail', 'tint', 'tintAmount'], 'flight');
+        out.flight = {
+          spin: f.spin === undefined ? 0 : read.number(f, 'spin', 'flight', { min: -8, max: 8 }),
+          trail: f.trail === undefined ? 0 : read.number(f, 'trail', 'flight', { min: 0, max: 8 }),
+          tintAmount: f.tintAmount === undefined ? 0.5 : read.number(f, 'tintAmount', 'flight', { min: 0, max: 1 }),
+        };
+        if (!Number.isInteger(out.flight.trail)) read.fail('flight.trail', `must be a whole number of copies, but is ${describe(f.trail)}`);
+        if (f.tint !== undefined) {
+          const tint = read.string(f, 'tint', 'flight');
+          if (/^#[0-9a-fA-F]{6}$/.test(tint)) out.flight.tint = tint;
+          else read.fail('flight.tint', `must be a colour "#rrggbb", but is ${describe(f.tint)}`);
+        }
+      }
     }
     if (o.thrown !== undefined) {
       const t = read.object(o.thrown, 'thrown');

@@ -1,7 +1,7 @@
 {
-  "//": "DRAFT: the toll keeper's stand-in, cut from the art desk's source sheets by tools/art/cast/make.py, reused (Step 24 slice 1) as a stand-in for the ranged poses on P08's enemy sheet (not yet cut): the toll keeper's cut sheet, which stands only on the quarry road, so the two rarely share a screen. When the art desk cuts the ranged poses, this file is pointed at them; nothing else changes (D-097: placeholders labelled).",
+  "//": "DRAFT: stand-in made by tools/art/cast/ranged-fighter-recolor.py (slice 1b): the image is the toll keeper's sheet with his purple ramp swapped for the bandits' red (the outpost fighter's hood), so he carries the camp's colour, the bad guys' mark (tools/art/cast/ranged-fighter-recolor.py, decisions-log 'Step 24: the thrower wears the bandits' red'). Before: the toll keeper's stand-in, cut from the art desk's source sheets by tools/art/cast/make.py, reused (Step 24 slice 1) as a stand-in for the ranged poses on P08's enemy sheet (not yet cut): the toll keeper's cut sheet, which stands only on the quarry road, so the two rarely share a screen. When the art desk cuts the ranged poses, this file is pointed at them; nothing else changes (D-097: placeholders labelled).",
   "id": "ranged-fighter",
-  "image": "sprites/cast/toll-keeper.png",
+  "image": "sprites/cast/ranged-fighter.png",
   "cell": {
     "w": 56,
     "h": 48

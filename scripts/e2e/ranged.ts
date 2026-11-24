@@ -48,15 +48,36 @@ const xOn = (ph: Phone, tx: number): Promise<number> =>
     return (c + 0.5) * 16 - irr.content.characters[irr.drawn.me.kind].box.w / 2;
   }, tx);
 
+/** Slice 1b: each shot at the three phone sizes the brief names, sideways first (the moment itself). */
 async function shots(ph: Phone, dir: string, name: string): Promise<void> {
   fs.mkdirSync(dir, { recursive: true });
   await ph.page.screenshot({ path: path.join(dir, `${name}-sideways.png`) });
+  await ph.page.setViewportSize({ width: 750, height: 340 });
+  await sleep(250);
+  await ph.page.screenshot({ path: path.join(dir, `${name}-small-sideways.png`) });
   await ph.page.setViewportSize({ width: 390, height: 664 });
   await sleep(250);
   await ph.page.screenshot({ path: path.join(dir, `${name}-upright.png`) });
   await ph.page.setViewportSize({ width: 844, height: 390 });
   await sleep(250);
 }
+
+/** Slice 1b: at each size, the next frame on which `when` holds (he throws every 2 s, so a moment comes round), else whatever is drawn after `ms`. */
+async function shotsWhen(ph: Phone, dir: string, name: string, when: string, ms = 4500): Promise<void> {
+  fs.mkdirSync(dir, { recursive: true });
+  for (const [w, h, tag] of [[750, 340, 'small-sideways'], [390, 664, 'upright'], [844, 390, 'sideways']] as const) {
+    await ph.page.setViewportSize({ width: w, height: h });
+    await sleep(150);
+    try {
+      await ph.page.waitForFunction(when, null, { polling: 'raf', timeout: ms });
+    } catch {
+      console.log(`      (ranged) ${name} at ${tag}: the moment was not drawn within ${ms} ms; shot as it stands`);
+    }
+    await ph.page.screenshot({ path: path.join(dir, `${name}-${tag}.png`) });
+  }
+}
+const FLYING = `(window.irreverents.drawn.weapons.loose || []).some((l) => l.weapon === 'thrown-shot' && l.flying)`;
+const AIMING = `(window.irreverents.drawn.ranged?.aims || []).some((a) => a.id === '${'gallery-thrower-1'}' && a.dots > 6)`;
 
 /**
  * Every frame for up to `ms`: the page time of the first frame drawing the
@@ -90,7 +111,9 @@ const watchThrow = (ph: Phone, ms: number): Promise<{ aim: number | null; loose:
     [THROWER, ms] as [string, number],
   );
 
-export async function rangedFacts(kit: Kit & { shots: string }): Promise<void> {
+export async function rangedFacts(kit0: Kit & { shots: string }): Promise<void> {
+  // Slice 1b: this lane's shots go in their own folder, beside slice 1's.
+  const kit = { ...kit0, shots: path.join(kit0.shots, '1b') };
   const { fact } = kit;
   const url = `${kit.base}/?room=e2e-ranged-${Math.random().toString(36).slice(2, 10)}`;
   const A = await phone(kit, url, 'ranged A');
@@ -107,6 +130,11 @@ export async function rangedFacts(kit: Kit & { shots: string }): Promise<void> {
       // reported below
     }
     const inGallery = there && (await walkInto(A, 1, 'hall-gallery', 12000));
+    // Slice 1b: him at rest, his band drawn, from behind him (where a hero comes in).
+    if (inGallery && !BEHIND) {
+      await sleep(300);
+      await shots(A, kit.shots, 'at-rest');
+    }
     const aimSec = await A.page.evaluate(() => (window as any).irreverents.content.npcs['ranged-fighter'].ranged.aim as number);
     // INTENT (the control): behind him (column 7) he never sees A; in front, column 15 is where his arc passes overhead.
     const watch = watchThrow(A, 9000);
@@ -114,7 +142,7 @@ export async function rangedFacts(kit: Kit & { shots: string }): Promise<void> {
     // The aim and its arc, drawn: the shot first.
     try {
       await A.page.waitForFunction((id: string) => ((window as any).irreverents.drawn.ranged?.aims ?? []).some((a: any) => a.id === id), THROWER, { polling: 'raf', timeout: BEHIND ? 3000 : 6000 });
-      await shots(A, kit.shots, 'aim-and-arc');
+      // (slice 1b: the winding-up shots are taken after the fact, at each size on a throw of its own)
     } catch {
       // no aim drawn: the fact below says so
     }
@@ -132,9 +160,9 @@ export async function rangedFacts(kit: Kit & { shots: string }): Promise<void> {
       `page A walked by touch through the opened gate into the gallery (${inGallery}) and stood at x ${Math.round(m?.x ?? -1)}${BEHIND ? ' (CONTROL: behind him, column 7)' : ''}: the thrower's aim drawn at ${w.aim === null ? 'never' : `${Math.round(w.aim)} ms`}, his shot drawn loose at ${w.loose === null ? 'never' : `${Math.round(w.loose)} ms`} (${lead === null ? 'no lead' : `${Math.round(lead)} ms after the aim`}; needed at least ${need} ms), the arc ending at ${w.end ? `${Math.round(w.end.x)}, ${Math.round(w.end.y)}` : 'none'} over ${w.frames} frames`,
     );
     if (BEHIND || !inGallery) return;
-    // The shot in the air.
-    await sleep(250);
-    await shots(A, kit.shots, 'shot-in-the-air');
+    // Slice 1b: winding up and the shot in the air, each caught at each size on one of his next throws.
+    await shotsWhen(A, kit.shots, 'winding-up', AIMING);
+    await shotsWhen(A, kit.shots, 'shot-in-the-air', FLYING);
     // A hero struck: east onto the floor past column 18, where the shots come down off the steps.
     await standAt(A, await xOn(A, 19), 1);
     const x0 = (await me(A)).x as number;

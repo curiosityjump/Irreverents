@@ -63,6 +63,11 @@ While `c.rangedAim` is on him: a dotted arc from his hand, stepped by the
 sim's own fall (`shotArc`: `moveLoose` on a scratch entity) to its first
 landing, filling in over the aim, and a cross where it comes down. The held
 shot is draw/weapons.ts's, on his `content/grips.json` row.
+His shot in the air spins, red-hot, with a trail (its weapon file's `flight`,
+draw/weapons.ts), unlike one lying to pick up. He is drawn from
+`assets/sprites/cast/ranged-fighter.png`, the toll keeper's sheet with the
+purple swapped for the bandits' red (`tools/art/cast/ranged-fighter-recolor.py`,
+`DRAFT:`; a real sheet is on the asset desk's list).
 `window.irreverents.drawn.ranged.aims` for the checks (each with `top`, the arc's highest room y, added for Step 5's camera fact). Sideways, the camera leans up to show him and his arc (`rendering-world.md`, "The camera leans up"). On the page a body is
 drawn `interpDelayMs` in the past but a new loose shot at its first sample, so
 the drawn lead is about `aim` − 100 ms.
@@ -86,4 +91,6 @@ Scenarios `step24-*`, each with its control: `-throws-from-range`,
 hero out over the roofs within 800 ticks) and `-gallery-way-out-control`.
 Test rooms `test-ranged` (ledge), `-floor` (80 wide), `-bomb`, `-camp`.
 `npm run e2e`, fact `ranged-telegraph` (`scripts/e2e/ranged.ts`; control
-`E2E_RANGED_BEHIND=1`). Shots: `docs/plan/step-24-shots/`.
+`E2E_RANGED_BEHIND=1`). Shots: `docs/plan/step-24-shots/` (slice 1), `1b/`
+(slice 1b, at 844×390, 750×340 and 390×664: at rest, winding up, in the air,
+a hero struck).

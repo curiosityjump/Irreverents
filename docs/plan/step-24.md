@@ -463,3 +463,37 @@ Slice 1 is live (27490b6) and green in the orchestrator's full re-runs. By eye i
 - **His shot in the air is the same banana-boomerang sprite as the one lying on the floor to pick up** (`shot-in-the-air-sideways`, `hero-struck-sideways`): an incoming throw cannot be told from loot. A thing flying at you must look like one (a trail, a spin, a tint, a different cut).
 - **No shot shows his sight band**, and in the upright shots he is clipped at the left edge.
 Right: the arc's dots read clearly on the gallery wall; the landing cross is small but readable. The camera's lean (ad51322) now shows him and the whole arc sideways.
+
+Slice 1b and slice 2's builder, `session_017WiGzJR2qgU7SXbKtxZpYP` (`handoff-prompts/ranged-enemy-2.md`).
+
+- **Push 1, slice 1b (readable).** Shots: `docs/plan/step-24-shots/1b/`
+  (`at-rest`, `winding-up`, `shot-in-the-air`, `hero-struck`, each
+  `-sideways` 844×390, `-small-sideways` 750×340, `-upright` 390×664), taken
+  by `scripts/e2e/ranged.ts`, which now catches winding-up and the shot in
+  the air at each size on a throw of their own (`shotsWhen`).
+  - **How the camp's people are told from townsfolk, measured:** nothing in
+    the code (`grep "'bad'" src/client` prints nothing); only their pictures.
+    All cast sheets share one palette; what the bad guys share is the
+    bandits' red ramp (`#f0596a`, `#c8324a`, `#8a1c3a`: the fighter's hood,
+    the lookout's scarf). The mark chosen: that red, swapped for the toll
+    keeper's purple ramp in a copy of his sheet
+    (`tools/art/cast/ranged-fighter-recolor.py` →
+    `assets/sprites/cast/ranged-fighter.png`). No new drawing. The real sheet
+    is asked of Vision Partner (asset desk), with a wind-up pose.
+  - **In flight:** an additive `flight` on the weapon kind (`spin`, `trail`,
+    `tint`, `tintAmount`; and a `flying` look state), drawn by
+    `draw/weapons.ts` only. `thrown-shot` spins 3 turns/s, red-hot (#ff3b30
+    painted at 0.45), 4 fading copies 2 frames apart. The trail is the
+    page's own drawn positions, not the sim's velocity.
+  - **His band is drawn** in every shot (the warm wash from his feet east to
+    the orange rim past the steps): it was drawn in slice 1's shots too, but
+    at 208×136 px it covers most of the screen and reads as lamplight, not
+    as his sight. That is Step 19's band look (`draw/sight.ts`, not mine):
+    flagged, not changed.
+  - **Clipped:** upright he is whole in all three upright shots. Sideways the
+    party plate (the HUD) covers him on the balcony at 844×390 and 750×340
+    (`shot-in-the-air-sideways`, `winding-up-small-sideways`): the camera's
+    and HUD's, not mine; flagged for the camera builder.
+  - Not a scripted fact: the flight look is checked by eye in the shots, and
+    by `drawn.weapons.loose[].flying`, which only the new code sets (slice 1's
+    `shot-in-the-air-sideways.png` is the before).
