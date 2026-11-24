@@ -338,3 +338,38 @@ after the other is beaten, and how a restore looks on the page (push 4's e2e).
 - Open, and now the builder's to settle:
   - The star times are placeholders until push 3b's hero runs.
   - "Unseen" counts the toll-keeper. If no sneaking route can pass him unseen, leave him out (`DRAFT:`). An unseen clear has to be possible: it is the owner's "zero-alarm infiltration".
+
+### The depot push (d): measured, not shipped (builder `session_017WiGzJb4az7buiHeYEH77B`, stopped at ~320k tokens)
+
+For the next builder, all measured on `main` at 6edd8be:
+- **Entries that work.** In `content/outposts/quarry-depot.json`, after
+  `"entry"`: `"entries": [[13, 13], [20, 13], [33, 13], [40, 13], [49, 13], [55, 13], [61, 13]], "entryAway": 6`
+  and an `announce` row. Each stretch of the yard has entries, cut by the
+  stack (14-17), the shaft (42-44) and the dip (51-52), so no wave has to
+  cross a gap. **No entry on the west stretch's door side:** at [2, 13] a
+  wave fighter walked out through the tower door; at [4, 13] one landed on
+  top of a hero seen at column 5 (`entryFor` falls back to the farthest
+  entry when none is `entryAway` off).
+- **Scenario `step22-wave-reaches-hero` (draft).** `step7-waves-reach-the-hero-depot`'s
+  flyer and its walk-in (inputs 0-3 and 181-201, x 1). Then she attacks
+  every 24 ticks from 205 to 900, standing her ground against patrol 1.
+  Result: wave 0 at tick 381 from column 13; both wave fighters near her by
+  about 530 (x 105 and 123: widen the `people-at` x to about [54, 130]);
+  her hits land on both at 520.
+  Control watched failing: with `entries` removed there is no wave body
+  near her and no hit.
+- **The blocker: `step16-caught-fight`.** The first wave now reaches the
+  grappler at about 551 and knocks patrol 1 out of her grip. The second
+  call starts around 743, so the 761 throw into the mid-call lookout no
+  longer happens. Every other `step7-`, `step16-`, `step22-`, `step9-`,
+  `step14-`, `step5-` and `step19-` scenario passed with the entries. Tried
+  and failed: throwing patrol 1 at the wave (520-540) and grabbing again
+  (690-730) before the 761 throw. The claims need a real re-route, for
+  example knocking the wave down first or another body to throw. Never
+  weaken them: the scenario's premise (waves never reach you) is what the
+  owner asked to change.
+- **Not started:** the wings' move to [38, 18], with
+  `step9-fades-then-source` re-routed (Step 9's notes). The kerb at
+  [53, 13] looks unneeded with these entries, since no wave walks west
+  across the dip unless the hero is seen in the far yard.
+- **Then 3b:** the ten hero runs and the measured star times.
