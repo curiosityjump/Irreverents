@@ -420,3 +420,48 @@ quarry's `game-over`; tell the hearts builder once it does.
   - `step16-caught-escape`'s description still says the first wave walks in at the far east end. Its checks pass; the wording is a fix for later.
   - No kerb.
   - The wings have not moved yet.
+
+### Lead handoff (session_017WiGzFrf7N7ZgaqUyjs4Sz → its successor), 2026-11-24 ~05:05 UTC
+
+Written for a cold successor lead. Everything below is on `main`; re-measure
+before you quote it.
+
+- **Live and reviewed by re-running:**
+  - push 1, losing in the quarry (973968f)
+  - push 2, the stage starts over (d6acfdb)
+  - push 3a, the end, stats, stars and the result on the sign and menu (d529a1b)
+  - owed item (a), beaten bad guys stay gone through a run (6edd8be)
+  - the depot push, waves walk in on your stretch (f1d1155)
+
+  Each review is above, with its control.
+- **Builder now:** `session_017WiGzEsUx1mHyijtCDT1gt`, the third. The first two
+  were archived at their token limits. Its order is at the top of
+  `handoff-prompts/step-22-stage.md`:
+  1. (b): restart on Step 21's `game-over`, which is on `main`. `stage-run.ts`
+     still listens only for `thrown-out`.
+  2. Push 4, the STAGE CLEARED screen. **Look at its phone screenshots
+     yourself before calling it done.**
+  3. (c): the wings move to depot [38, 18], and `step9-fades-then-source` may
+     be re-timed.
+  4. 3b: the five heroes, fighting and sneaking, and the real star times. If
+     no route passes the toll-keeper unseen, leave him out of "unseen"
+     (`DRAFT:`, my ruling).
+  5. Push 5: more enemies, and found without being told.
+- **Other builders this step touches:**
+  - hearts and game over: `session_017WiGzG7mhviEaxroo5GvBv`. It keeps
+    `content/defeat/quarry.json`'s throw on until Step 22 says it has moved to
+    `game-over`.
+  - beaten for good: `session_017WiGzEhbdYJQcUhtD2bSLL`.
+  - chase and alarms: `session_017WiGzF31gfYgeWNMA7rnEL`.
+- **Decisions made here** (logged in `docs/decisions-log.md` or above):
+  - Push 2's own restore of people was kept; it later switched to
+    `restorePeople`.
+  - A run holds **all** of the stage's rooms, so nobody comes back mid-run;
+    the beaten builder's scenario moved to the camp.
+  - Push 4 was moved ahead of the wings and 3b.
+- **Account:** the weekly limit reads `allowed_warning`. The orchestrator
+  (`session_017WiGzHhT2apmWHT61rQ65G`) said the owner's priorities go ahead,
+  one builder at a time.
+- **Messages between sessions arrive up to ~20 min late.** Change direction by
+  editing the brief's top block (the builder re-reads it), not by
+  mid-push messages.
