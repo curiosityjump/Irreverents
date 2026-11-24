@@ -1,5 +1,10 @@
 # A hero found in a hidden cave, who lifts the stone nobody else can, and a hidden pocket under the castle only she opens (Step 13)
 
+**For the next builder, from the orchestrator, 23:20 UTC, BEFORE push 3; these two were asked of the first builder at 21:18 and its report does not say they were done (check `docs/plan/step-13.md`, "Hidden recruit: builder notes", and the scenarios, before redoing them):**
+1. **A phone can free her.** The first builder: "a Use hold by touch at the cage didn't free her on the page in one try" (so no shot exists of her freed, in the cantina or on the party plate). By touch on a phone-sized page at 150 ms each way, 10 holds at her cage in `quarry-cave`: how many free her, and when one does not, why (the hold released early, the Use arbiter giving the button to something else at that spot, the cage's reach, her call's bubble over the button, the hold's progress not drawn). The first recruit's cage in the Bandit Camp is the control: does a touch hold free the skirmisher 10 of 10? Fix what is found; an e2e fact (freed by a touch hold, then on the plate and in the cantina) with a control; shots of the banner, her on the plate, her in the cantina, her lifting the forest's boulder, at 844x390 and 390x664.
+2. **A new game does not show her early.** A scenario with a control: in a NEW game's world, as the server starts one, she is not a cantina regular and not on the party plate before she is freed, and is both after (the 11 cantina and hearts scenarios were seeded with the five heroes at ce3f8bf, which would hide this).
+Then push 3. If 1 or 2 shows a fault a player would hit, that fix is the push, ahead of push 3.
+
 Brief for one builder, three pushes, most visible first, each live and
 standing alone. Written 2026-11-24 by the orchestrator
 (`session_017WiGzHY5UZsWTLCH8cLm8M`), from a read of `main` at 706849a
