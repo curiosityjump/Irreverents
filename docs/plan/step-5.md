@@ -575,3 +575,24 @@ runs today.
 
 - From the Step 16 lead's phone walk (b0a7d5e): the camera should look up in tall rooms, so a ledge and a roof show on a sideways phone.
 - From the hit-prediction builder (session_017WiGzGPRoCXeC3TG8HFyxh, 2026-11-23), measured on live: the server ran a page's swing about 18 ticks (300 ms) after the page did, with a round trip of about 108 ms; the server's input queue (one reported input per tick, `is` in `me`) appears to add 150-200 ms to everything a player does to the world. Worth measuring and trimming (drain a backlog faster, or drop stale held inputs). `src/net/predict.ts`'s look-ahead (`DRAFT:` in `src/net/client.ts`, at `smoother.ahead`) is tuned to today's lag and wants re-measuring after any change. Not briefed.
+
+**`cantina-row` / `cantina-swap` / `cantina-switch`: a game fault, open (not
+in this brief's paths).** A scratch experiment (the built server, one phone
+page by touch into the cantina, the check's own `outsider`/`touchAt`, then
+tap a regular outside the party again and again; quiet machine, local
+socket, no added delay): **taps on a regular walking at 50 px/s or more
+missed 19 of 40; taps on a standing regular missed 0 of 40** (and 0 of 19 in
+a mixed run that missed 1 of 11 walking). So a friend tapping a wandering
+regular misses about half the time, more on a phone over cellular. Why: the
+page draws others about `interpDelayMs` (100 ms) plus a snapshot's age behind
+the server, and the server tests the tap (`src/sim/systems/cantina-swap.ts`)
+against where *it* has the regular at the tick the tap arrives, the box grown
+by `pick.reach` (8 px): 17 px either side of the middle for the brawler (76
+px/s), which is about 220 ms of walking. The check is honest (it taps the
+middle of what the page drew) and is left failing. **Fix, for the cantina's
+owner (Step 11):** judge the tap where the tapper's page drew things, e.g.
+the page sends the id of the regular under the finger as drawn and the
+server accepts it if that regular is near the tap within a lag allowance
+(a field added to `tap`, additively), or the page shifts the tap by that
+body's drawn-vs-newest-snapshot offset. A wider `pick.reach` would hide it
+but also catch taps meant for a neighbour.
