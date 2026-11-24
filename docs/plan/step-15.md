@@ -203,7 +203,7 @@ don't grade them.
 
 ## Briefs
 
-- `handoff-prompts/step-15-forest.md` (09:20 UTC): four pushes, road and trail as a stage → the insides → the guarded spot and the clear → on the phone.
+- `handoff-prompts/step-15-forest.md` (09:20 UTC; builder `session_017WiGzJeF58oqWdt3WEH722`): four pushes, road and trail as a stage → the insides → the guarded spot and the clear → on the phone.
 
 ## Open with the owner
 

@@ -354,7 +354,7 @@ Full text: `docs/plan/step-14.md`
 
 ## Step 15 — A second place, worth coming back to
 
-**Status: open, claimed by session_017WiGzHD8gtSGTegd3n8W4G, 2026-11-24.** (Released by the orchestrator 08:40 UTC; the release note is in the step file.)
+**Status: open, claimed by session_017WiGzHD8gtSGTegd3n8W4G, 2026-11-24.** (Builder session_017WiGzJeF58oqWdt3WEH722 on `handoff-prompts/step-15-forest.md`.)
 
 Full text: `docs/plan/step-15.md`
 
