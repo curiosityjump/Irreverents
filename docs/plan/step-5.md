@@ -427,6 +427,45 @@ else is. **Not verified:** on a real iPhone; Switch's dimming with a full
 party (rule mirrors `verbs/switch.ts`, not driven).
 
 
+### Knocked-out enemies fly off (brief `handoff-prompts/owner-knocked-out-flies-off.md`)
+
+Builder `session_017WiGzJC6UCvT2PtVr2dn8v`, 2026-11-24, at a324575.
+
+**The cause.** The blow that knocks a body out also launches it (`verbs/attack.ts`: `launch`, then
+`wear` reaches toughness, on the same hit), as any blow does. The page drew a flattened body `down`
+before anything else (`stateOf`, `src/client/draw/sprites.ts`), so the blow's beat and whole
+flight were drawn lying flat: a collapse, then a body sliding off the screen with nothing seen to
+push it. **Shown:** a phone page (150 ms each way) in the castle street knocking out the villain
+(not predicted, so the server's blow): drawn lying beside the hero for the beat, then 209 px
+leftwards lying down, out of the 375 px view; the server's copy matches frame for frame, so it is
+the drawing, not the smoothing. **Fixed** in the client only (`lyingOut`): hurt and tumbling until
+the flight is over, then down where it lands. Fact `ko-still-*` (`scripts/e2e/knocked-out.ts`);
+its control (the old rule) fails on the watcher's page, 65 px drawn lying against 8 px.
+
+**The table** (the simulation, `src/sim` stepped directly, a grappler or a flyer mashing attack beside
+each placed enemy; distance the body moved while flattened; every one lay out its 3 s and got up
+where it lay, then walked its routine; none was removed):
+
+| Room | Enemy | Grappler | Flyer |
+|---|---|---|---|
+| quarry road | toll keeper / watcher (fighter) / heavy | 8 / 50 / 12 px | 22 / 19 / 5 px |
+| outpost | lookout / fighter 1 / fighter 2 | 93 / 220 / 56 px | 39 / 119 / 23 px |
+| quarry depot | lookout / fighter 1 / fighter 2 / guard (heavy) | 97 / 71 / 43 / 15 px | 32 / 12 / 30 / 19 px |
+| castle street | shopkeeper / villain / guard | 219 / 250 / 48 px | 121 / 176 / 32 px |
+
+In the browser (phone, 150 ms each way): the street guard and the villain, drawn against the
+server's copy every frame: the drawn body follows the server's within the smoothing delay, no stray
+movement, none after getting up. The guard punched from his left flies through the courtyard door
+(already noted in `scripts/e2e/fight.ts`).
+
+**Not measured** (no browser run): a wave's arrivals, a dispatch row's guards, a cantina regular.
+Doubts, logged not fixed: in a cantina brawl a body knocked flat is put on the next pad at once
+(`cantina-out.ts`, D-085), which a remote page draws as a glide at `remoteMaxSpeed` across the room,
+not a jump; a removed wave member (`outpost-leave.ts`) vanishes where it stands (ids are never
+reused: `<outpost>:w<n>:<i>`). The KO slide itself (up to about 270 px: 520 px/s at the cap,
+500 px/s² friction) is the same as any blow's knockback; shortening it is one simulation rule, left
+for the owner after playing (`docs/decisions-log.md`, 2026-11-24).
+
 ### Flakes (brief `handoff-prompts/step-5-e2e-flakes.md`)
 
 **Measured** by the builder `session_017WiGzJujVWWDboh12zWhNR`,

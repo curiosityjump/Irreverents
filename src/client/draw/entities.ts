@@ -6,7 +6,7 @@ import type { Entity, World } from '../../sim/types.ts';
 import { drawFrame, frameOf, look, tinted, useContent } from './fx.ts';
 import { drawLookIn } from './room-parts.ts';
 import { predictedLook, predictHits } from './impact.ts';
-import { carriedBy, drawSprite, drawsOwnRage, forget, rageFlash, remember, swingWasThrow } from './sprites.ts';
+import { carriedBy, drawSprite, drawsOwnRage, forget, lyingOut, rageFlash, remember, swingWasThrow } from './sprites.ts';
 import type { Drew } from './sprites.ts';
 
 /** One thing the renderer put on screen this frame, in room pixels. Part of the debug object (docs/mechanisms/network.md). */
@@ -31,6 +31,10 @@ export interface Drawn {
   hidden?: boolean;
   /** Round 3 (look): for a player's character, whether this page drew a mark over it (and how faint: 1 full). 0 = none. */
   marked?: number;
+  /** Step 5 (scripts/e2e/knocked-out.ts): the animation state it was drawn in (`stateOf`, draw/sprites.ts); a box body: `down` while drawn lying, else absent. */
+  state?: string;
+  /** Step 5: knocked out (`c.flattened`) as this page has it, however it is drawn (taking the blow, flying, or lying). */
+  out?: boolean;
 }
 
 /** Whose view this is, and where to record what was drawn. */
@@ -78,6 +82,7 @@ export function drawEntities(g: CanvasRenderingContext2D, world: World, content:
       const rec: Drawn = { id: e.id, player: e.player, kind: e.kind, x: e.x, y: e.y, px: Math.round(e.x), py: Math.round(e.y), color: dotOf(e) ?? kind.color, mine: e.id === view.me };
       if (e.c.npc) rec.mood = e.c.npc.mood;
       if (e.c.roomHide) rec.hidden = true;
+      if (e.c.flattened) rec.out = true;
       if (e.c.net) rec.marked = 0;
       view.drawn.push(rec);
     }
@@ -134,6 +139,7 @@ export function drawEntities(g: CanvasRenderingContext2D, world: World, content:
     const pose = hit?.waiting && !e.c.flying ? { state: 'hurt' as const, since: hit.since } : undefined;
     if (fast(e)) drawTrail(g, world, e, x, y, kind.box);
     const drew = drawSprite(g, world, content, e, x, y, { alpha: away ? AWAY_ALPHA : 1, tint, pose, flash: hit?.flash });
+    if (rec) rec.state = drew?.state ?? (lyingOut(e) ? 'down' : undefined);
     if (drew) {
       tops.set(e.id, drew.head);
       const head = heads.find((h) => h.e === e);
@@ -144,7 +150,7 @@ export function drawEntities(g: CanvasRenderingContext2D, world: World, content:
       return drew;
     }
     const { w, h } = kind.box;
-    if (e.c.flattened) {
+    if (lyingOut(e)) {
       // DRAFT: knocked out reads as lying down: the same box on its side at
       // the body's feet, dimmed, eye shut. No bar, no number, no countdown.
       const lx = x + Math.round((w - h) / 2);

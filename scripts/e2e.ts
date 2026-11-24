@@ -366,6 +366,8 @@ async function main(): Promise<void> {
       await (await import('./lib/e2e-touch.ts')).touchAndThrows({ browser, devices, base, out, fact, errors });
       // Step 5's facts (hit-*): the hitter's own page draws its hit at once on a delayed connection; the other page as before (docs/mechanisms/network.md, "Predicted hits").
       await (await import('./e2e/hit-lands.ts')).hitLandsFacts({ browser, devices, base, out, fact, errors });
+      // Step 5, the owner's report (ko-*): a knocked-out enemy is drawn flying from the blow and lying where he lands, never lying while he slides (docs/mechanisms/rendering-actors.md).
+      await (await import('./e2e/knocked-out.ts')).knockedOutFacts({ browser, devices, base, out, fact, errors });
       // Step 2's ?tune facts (tune-*): the feel dials by touch, and play following them on two pages (docs/mechanisms/tuning-panel.md).
       await (await import('./e2e/tune.ts')).tuneFacts({ browser, devices, base, out, fact, errors });
       // Step 12's facts (outpost-*): into the outpost by touch, and the horn post drawn working, then broken (docs/mechanisms/outposts.md).

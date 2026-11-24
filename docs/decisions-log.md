@@ -1178,3 +1178,10 @@ document as a decision of theirs.
 - **To change it:** numbers and letters in `content/rooms/outpost.json` (the parts' `breakSpeed`, where they stand), `content/placements/outpost.json` (crates, the cache), `content/heists/camp.json` (what the cache is). The other answer (a machine through walk doors) is real work.
 - **Where:** `docs/mechanisms/outposts.md`, "Step 20: the camp's run"; `docs/plan/step-20.md`, "Builder notes".
 
+### 2026-11-24 · A knocked-out enemy is drawn flying from the blow and lies down where it lands
+- **Decided by:** Step 5 builder (brief `owner-knocked-out-flies-off.md`), `session_017WiGzJC6UCvT2PtVr2dn8v`
+- **Instead of asking:** "The blow that knocks someone out also knocks them back about 200 px, like any blow. Should a knocked-out body fly less, or just look like it is flying?"
+- **Why this way:** your report ("they collapse, then randomly fly off the screen") was the drawing: the body was shown lying flat from the instant of the blow, so its knockback looked like a collapsed body sliding off for no reason. Knockback is the game (D-020, "impact over numbers"), so the push stays and only the picture changed: hit, fly (hurt, tumbling), land, lie there, get up there.
+- **To change it:** to make a knock-out also stop the body where it was hit, that is one rule in the simulation (the launch in `src/sim/verbs/attack.ts` on a blow that flattens); the picture's rule is one line, `lyingOut` in `src/client/draw/sprites.ts`.
+- **Where:** `docs/plan/step-5.md`, "Knocked-out enemies fly off". `DRAFT:`
+

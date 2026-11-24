@@ -218,6 +218,11 @@ export function forget(world: World): void {
   for (const [id, m] of memory) if (world.tick - m.tick > 600) memory.delete(id);
 }
 
+/** Out cold and drawn lying: flattened, and no longer in the held beat or the flight of the blow that did it. */
+export function lyingOut(e: Entity): boolean {
+  return !!e.c.flattened && !e.c.flying && !e.c.beat;
+}
+
 /**
  * Which state a body is in, and the world tick it began (for play-once
  * states; loops use 0). The table of which fact selects which state is in
@@ -225,7 +230,12 @@ export function forget(world: World): void {
  */
 export function stateOf(world: World, e: Entity, m: Memory, onceTicks: (s: AnimState) => number): { state: AnimState; since: number } {
   const t = world.tick;
-  if (e.c.flattened) return { state: 'down', since: 0 };
+  // INTENT (Step 5, the owner playing: "When an enemy gets knocked out, they collapse, then randomly
+  // fly off the screen. Very weird"): the blow that knocks a body out also launches it (verbs/attack.ts:
+  // wear and launch on one hit), so it is drawn taking the blow (its beat) and flying (hurt, tumble)
+  // like any other hit, and lies `down` only once the flight is over. Drawn `down` from the blow, the
+  // knockback read as a collapsed body sliding off the screen for no reason.
+  if (lyingOut(e)) return { state: 'down', since: 0 };
   if (e.c.effect?.heldBy) return { state: 'held', since: 0 };
   if (e.c.flying && !e.c.beat && Math.hypot(e.vx, e.vy) > TUMBLE_SPEED) return { state: 'tumble', since: e.c.impact && t - e.c.impact.tick < 120 ? e.c.impact.tick : m.tick };
   if (e.c.flying || e.c.beat || e.c.stunned) return { state: 'hurt', since: e.c.impact && t - e.c.impact.tick < 120 ? e.c.impact.tick : m.tick };

@@ -55,7 +55,7 @@ the items below to their homes.
 
 | State | When | Timed from |
 |---|---|---|
-| `down` | `c.flattened` | loops |
+| `down` | `c.flattened`, once out of the beat and flight of the blow (`lyingOut`; Step 5, the owner: knocked-out enemies "collapse, then randomly fly off the screen": the knock-out blow also launches, so until it lands the rows below draw it hurt or tumbling) | loops |
 | `held` | `c.effect.heldBy` | loops |
 | `tumble` | round 3: `c.flying`, not in its beat, faster than 220 px/s | `c.impact.tick` |
 | `hurt` | `c.flying`, `c.beat` or `c.stunned` | `c.impact.tick` (else when first seen) |
