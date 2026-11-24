@@ -187,7 +187,7 @@ Camp, the castle street, the undercroft (builders are in each tonight).
 ## Briefs
 
 - `handoff-prompts/step-22-stage.md` (lead, 2026-11-24): five pushes for one builder: lose in the quarry and the waves reach you; a stage and starting over; the end, the result and stars; the victory screen; more enemies and found-without-being-told.
-  Holders: builders 1-5 archived at their limits; the sixth from 09:40 UTC (see the brief's top block).
+  Holders: builders 1-6 archived at their limits; the seventh from 12:05 UTC (see the brief's top block).
 
 ## Builder notes
 

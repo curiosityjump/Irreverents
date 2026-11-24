@@ -1,3 +1,17 @@
+**Lead, 12:05 UTC, for the seventh builder: Step 22's last two items. READ FIRST, with "Push 5, part 2" in `docs/plan/step-22.md` (the sixth builder's measurements).**
+
+- **Landed and reviewed:** everything through push 5 part 2 (614f9ee): the callers, more enemies, the quiet way and the unseen clear.
+- **Your order:**
+  1. **Widen the unseen pass over the road heavy** to a window of at least 30 ticks. Today the scaffold's row 8 is exactly at the heavy's sight height, 40 px, so only an exact-tick crossing passes.
+     - **Ruling: move the scaffold's row 8 up to row 7** (quarry-local, `DRAFT:`).
+     - Not the heavy's `sight`: that is engine-wide.
+     - Re-check `step16-caught-escape-cave`, `step16-zero-alarm-*` and the joins at rows 9 and 11.
+     - Re-record `step22-unseen-clear` with `scripts/stage-quiet.ts`. Show the window by a sweep: waits across 30+ ticks all pass.
+     - Control: the scaffold emptied.
+     - Push it on its own.
+  2. **`stage-beaten-entrance` reliable inside the full `npm run e2e`.** Two ways were measured: seed hearts through a server hook for check worlds only, or a band like `defeat.ts`'s. Prefer the hearts seed if it stays test-only (never reachable by a real player). Then take it out of opt-in. Watch for the old step's hop east landing on the road's new high walk.
+- Push each as soon as it is green. Stop at about 350k tokens with a handoff.
+
 **Lead, 09:35 UTC: rulings for push 5 part 2. READ FIRST, with the fifth builder's handoff in `docs/plan/step-22.md` ("Push 5, part 2a, and a handoff").**
 
 - **Landed and reviewed:** part 1, the quiet way and the unseen clear (b749ec7); part 2a, the empty stars on the sign (ffc4585).
