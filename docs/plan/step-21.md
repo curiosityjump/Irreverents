@@ -428,3 +428,23 @@ orchestrator. Landed: the street off. Kept: `returnPrize`, the `move`,
 `defeat-seize`, `defeat-throw`, `c.falls`, `c.seized`, `thrown-out`.
 Waiting: the camp (Step 23's scenario), the quarry (Step 22's start-over
 on `game-over`).
+
+### Hearts: flags and what was not verified
+
+- `check:live` after push 5a: one failure, Step 23's `weapon-hit-quick`
+  (the star drawn 154 ms after the tap, limit 150), a live-latency timing
+  fact; not hearts. `check step20-machine` fails about one run in four
+  with hearts off too (seen three times here).
+- Not watched: a failing control for the e2e facts `hearts-drawn` and
+  `hearts-one-lost` (each control is a full e2e run).
+- Not yet by touch: a game over on a phone. It needs the camp's throw off
+  (waiting on `step23-thrown-out-leaves-it`); then `scripts/e2e/defeat.ts`'s
+  `defeat-thrown-out` becomes the game over in the cantina, and the two
+  held `step21-*` throw scenarios move to `docs/plan/step-21-held/`.
+- Step 23's brief says a carried weapon goes back where it was found at a
+  game over; `heart-game-over` lays it loose where its holder stood, so
+  Step 23 can return it on `game-over` (told the old Step 23 builder).
+- Process: twice `git add -A` after an e2e run swept up other steps'
+  regenerated screenshots (`docs/plan/step-23-shots/`); caught on rebase,
+  never pushed. Once a local e2e server was stopped with `pkill -f`
+  instead of by its pid (no other server was running here).
