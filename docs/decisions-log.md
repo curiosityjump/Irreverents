@@ -583,3 +583,10 @@ document as a decision of theirs.
 - **Why this way:** every stage phone check (beaten at the entrance, a walked clear, STAGE CLEARED at three phone sizes, Continue, two friends) passes in the full `npm run e2e` on the same commit the live address runs (`check:deployed` ok), and `check:live` passes. Adding a stage check to `check:live` would put a private game over into the live server's runs for one fact; not worth holding the step open.
 - **To change it:** add a call to `scripts/e2e/stage.ts`'s `walkedClear` in the live check (`scripts/check-live.ts`), in a private world.
 - **Where:** `docs/plan-archive.md`, "Step 22", the last lead review. `DRAFT:`
+
+### 2026-11-24 · Step 25: the suplex is Use while carrying a body, and every hero has one
+- **Decided by:** orchestrator, `session_017WiGzHY5UZsWTLCH8cLm8M` (drafted by its agent from the code)
+- **Instead of asking:** "You named suplexes first when you described spectacular impact, and the game has none. How should one be done on a phone, and by whom?"
+- **Why this way:** D-020 ("Spectacular IMPACT is a top priority: suplexes, launches, ...") is confirmed; the library's suplex details are proposals. While you carry a body (anyone who can be knocked out, never a crate) the Use button reads SUPLEX: up, over, slammed head-first behind you, and whatever is near the landing is knocked away. Use, because every stick-plus-Hit while carrying is already a throw and Grab already sets the body down, so nothing a player has now is taken away. All five heroes can; the grappler and brawler slam hard enough to finish a bad guy at once, the three light heroes floor him without finishing him. A carried friend can still jump free mid-heave.
+- **To change it:** the `suplex` numbers in the tuning file; who has it, by the `suplex` entry in each hero's verb list (three edits to take it from the light heroes); the button, by the Use entry's order or by moving it to another input.
+- **Where:** `docs/plan/step-25.md`, "`DRAFT:` choices"; `handoff-prompts/suplex.md`. `DRAFT:`

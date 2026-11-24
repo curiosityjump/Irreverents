@@ -430,3 +430,9 @@ Full text: `docs/plan/step-23.md`
 **Status: open, claimed by orchestrator session_017WiGzHY5UZsWTLCH8cLm8M (builders: named in the step file's "Briefs"), 2026-11-24.** (Opened 06:45 UTC from `docs/vision-gaps.md` row 1, the top gap nothing covered: no ranged kind, nobody hostile in the castle's rooms. Slice 1, `handoff-prompts/ranged-enemy.md`: one thrower as data on the Hall gallery's balcony, a telegraphed arc, his shot yours to throw back. Drafted by a subagent from the library and the code; nothing in it was run.)
 
 Full text: `docs/plan/step-24.md`
+
+## Step 25 — The suplex
+
+**Status: open, claimed by orchestrator session_017WiGzHY5UZsWTLCH8cLm8M (builders: named in the step file's "Briefs"), 2026-11-24.** (Opened 16:25 UTC from `docs/vision-gaps.md` row 6: no suplex. Carry a body, Use says SUPLEX; brief `handoff-prompts/suplex.md`.)
+
+Full text: `docs/plan/step-25.md`
