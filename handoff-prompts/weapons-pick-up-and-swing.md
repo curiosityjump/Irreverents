@@ -26,6 +26,13 @@ not run `tools/drive_sync.py`, and open no other sheet:**
 **Small pushes, each standing alone, green and live.** If you pass about 300k
 tokens after push 3, report and stop: the orchestrator re-briefs the rest.
 
+**Landed so far (2026-11-24 03:20 UTC), by `session_017WiGzF7puSFWh2BBeii8WZ`, which stopped at its context line:** push 1, the sword on the castle street (69c12b4); push 2, a hard hit knocks a weapon loose, Grab throws it, `camp-fighter-2` starts with a sword (8b2fee3); push 3, the hammer in the Bandit Camp, the spear as one data file, the weapon on the party plate (fae2b34). **You are a fresh builder: read `docs/plan/step-23.md`, "Builder notes" and "Where this builder stopped", then do, in this order, each its own push:**
+1. **A second power replaces the first** (the owner, ~01:50 UTC: "Similar to kirby - cant have multiple powers at once"). Today a hero holding a power walks through a second orb. The old power pops out as an orb where the hero stands, as a knocked-loose one does (`docs/mechanisms/` on powers; Step 9's files are yours for this one fix). One weapon and one power together stays (`DRAFT:`, asked of the owner in `docs/questions-inbox.md`).
+2. **Swords must not pile up**: a beaten carrier drops his sword and returns armed. Make a returned carrier come back armed only if his sword is not lying or held somewhere in the world.
+3. **A held weapon at game over** goes back where it was found: ask the hearts builder (`session_017WiGzG7mhviEaxroo5GvBv`) by message for its game-over event; if it has not landed, leave this and say so.
+4. The brief's pushes 4 (the bomb, `uses`) and 5 (bad guys take a weapon, the quarry's spear and bomb, the stage-restart function Step 22 asked for).
+Owed screenshots: three heroes and one bad guy holding the same sword. An open ask to the buttons builder (a Throw look on Grab) stands. `npm run e2e`'s `plates-stone` fails on `main` since about 5e9e6cb and is being traced by the orchestrator: not yours. The check `step20-machine` is being fixed by another builder (`node scripts/lib/run-check.ts` runs one check alone).
+
 ## The task, and why
 
 The owner, 2026-11-24 ~00:10 UTC, first-hand: "Weapons assets uploaded". On
