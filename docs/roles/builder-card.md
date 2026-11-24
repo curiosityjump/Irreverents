@@ -100,6 +100,12 @@ tool, your final message carries it.
 
 1. `npm run build && npm run check`, plus `npm run e2e` when the client
    or the network changed. Judge by exit code, not scrollback.
+   Before every commit, once: `git ls-files -v | grep '^S' | grep -v -E '\.(png|jpg|webp|ogg|mp3|wav|zip)$'`
+   must print nothing. A session cloned with a size limit can carry git's
+   skip-worktree flag on a text file (`docs/decisions-log.md`, twice on
+   2026-11-24), and `git add -A` then leaves your edit to it out of the
+   commit without a word. Clear it with `git update-index
+   --no-skip-worktree <file>` (`docs/git-workflow.md`, "Files git hides").
 2. Before a code push: `curl -s
    https://irreverents-production.up.railway.app/debug/errors` (a deploy
    empties it; anything there goes in your report), and look at

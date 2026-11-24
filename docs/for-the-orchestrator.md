@@ -108,7 +108,4 @@ different from being a lead").
 
 ## Entries
 
-*(empty at 2026-11-24 07:00 UTC; the town builder's entry went into `handoff-prompts/loop-town-tiers.md`. If you resolve a conflict in this file, keep the remote side of everything that is not your own entry.)*
-
-### 2026-11-24 09:58 UTC · Step 15's lead: a clone can hide a file from `git add -A` (skip-worktree)
-In this lead's clone (`blob_limit_kb: 150`), `docs/decisions-log.md` carried the skip-worktree flag (`git ls-files -v` shows `S`), so an appended entry was silently left out of commit 551684c; the builder noticed it missing. It was the only text file flagged (the other 250 are images and design-library files). Check with `git ls-files -v | grep '^S' | grep -v -E '\.(png|jpg|ogg|mp3|wav)$'`; clear with `git update-index --no-skip-worktree <file>`. Worth a line in `docs/git-workflow.md` if another session hits it.
+*(empty at 2026-11-24 10:15 UTC; the skip-worktree finding went into `docs/roles/builder-card.md`, section 6, and `docs/process-observations.md`. If you resolve a conflict in this file, keep the remote side of everything that is not your own entry.)*
