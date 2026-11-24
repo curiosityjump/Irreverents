@@ -1,5 +1,5 @@
 {
- "//": "DRAFT (Step 15, docs/decisions-log.md 'Step 15: the second place is a forest'): the trail's things and people. The heavy crate (`hatch-crate`, column 55) beside the hatch's plate (columns 57-58): only the grappler lifts it (120 against 150; the infiltrator and the flyer lift 60). INTENT: no light crate on the trail's upper floor, so the hatch is the grappler's alone (or a friend's on the plate: the other way in). A light crate (`pocket-crate`, column 22) in the deepest pocket, to throw at the cracked wall behind the start (G-03's shortcut); none on the start's side. Two light fighters on the flat past the root tunnel (columns 41 and 43), a heavy guarding the canopy's foot (column 49), and the brute between the hatch's plate and the hatch (column 62). Columns are first guesses; ids are permanent. The boulder (`slab-boulder`, column 74) beside the heavy plate (columns 77-78): weight 300, which only a hero holding the boost lifts (420); set down on the plate it holds the stone slab open (DRAFT, docs/decisions-log.md 'The forest's later thing'). DRAFT (Step 15 push 3, docs/decisions-log.md 'The forest's guarded spot'): the guarded spot at the upper trail's east end, the last stretch before the shaft down to the deep pocket (the stage's end): a lookout (`trail-lookout`, column 91) looking west 4 s, then east 3 s, with its horn post just behind it (`trail-horn`, column 92), the only caller (content/outposts/forest-trail.json); getting caught brings waves from both sides. The thrower (`trail-thrower`, a ranged-fighter) on the root mound's east end (column 32, rows 6), the high spot every hero but the infiltrator climbs over, looking west at the climb.",
+ "//": "DRAFT (Step 15, docs/decisions-log.md 'Step 15: the second place is a forest'): the trail's things and people. The heavy crate (`hatch-crate`, column 55) beside the hatch's plate (columns 57-58): only the grappler lifts it (120 against 150; the infiltrator and the flyer lift 60). INTENT: no light crate on the trail's upper floor, so the hatch is the grappler's alone (or a friend's on the plate: the other way in). A light crate (`pocket-crate`, column 22) in the deepest pocket, to throw at the cracked wall behind the start (G-03's shortcut); none on the start's side. Two light fighters on the flat past the root tunnel (columns 41 and 43), a heavy guarding the canopy's foot (column 49), and the brute between the hatch's plate and the hatch (column 62). Columns are first guesses; ids are permanent. The boulder (`slab-boulder`, column 74) beside the heavy plate (columns 77-78): weight 300, which only a hero holding the boost lifts (420); set down on the plate it holds the stone slab open (DRAFT, docs/decisions-log.md 'The forest's later thing').",
  "id": "forest-trail",
  "room": "forest-trail",
  "place": [
@@ -93,54 +93,6 @@
     {
      "wait": 5
     }
-   ]
-  },
-  {
-   "id": "trail-thrower",
-   "character": "ranged-fighter",
-   "tile": [
-    32,
-    6
-   ],
-   "npc": "ranged-fighter",
-   "routine": [
-    {
-     "face": "left"
-    },
-    {
-     "wait": 5
-    }
-   ]
-  },
-  {
-   "id": "trail-lookout",
-   "character": "outpost-lookout",
-   "tile": [
-    91,
-    8
-   ],
-   "npc": "outpost-lookout",
-   "routine": [
-    {
-     "face": "left"
-    },
-    {
-     "wait": 4
-    },
-    {
-     "face": "right"
-    },
-    {
-     "wait": 3
-    }
-   ]
-  },
-  {
-   "id": "trail-horn",
-   "character": "signal-post",
-   "tile": [
-    92,
-    8
    ]
   }
  ]

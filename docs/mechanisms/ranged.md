@@ -75,8 +75,6 @@ passes over the near floor, comes down on the middle step near column 17 and
 bounces onto the floor east of it; the top step and column 14 of the middle
 step are under it. A kept game gets him on load.
 
-`trail-thrower` on the Bramble Trail's root mound, [32, 6] (Step 15 push 3, `DRAFT:`), facing west over the climb onto the mound, which every hero but the infiltrator (who crawls under it) crosses: he lobs at the climb and is punched off the mound by a hero who reaches him; he does not block the way over (measured, the grappler walks over him).
-
 ## How it is checked
 
 Scenarios `step24-*`, each with its control: `-throws-from-range`,
