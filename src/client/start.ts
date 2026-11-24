@@ -456,6 +456,17 @@ const CSS = `
 #game-menu .st-pie { display: inline-flex; width: 24px; height: 24px; border-radius: 50%; }
 #game-menu .st-col { display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 330px; align-items: stretch; }
 #game-menu .st-code { align-self: center; margin: 4px 0 8px; }
+#game-menu .st-way-back { display: flex; flex-direction: column; } #game-menu .st-way-back:empty { display: none; }
+/* DRAFT (brief owner-stuck-in-the-quarry): with the way back the menu has three buttons, and on a phone held sideways (340 px tall)
+   the column ran past the screen's foot, Close off it. Sideways it is two columns as the start screen is: the places found on the
+   left, the buttons on the right, 44 px tall (still at least 44); and a column too tall still scrolls from its top (safe). */
+#game-menu { justify-content: safe center; }
+@media (min-width: 568px) and (max-height: 500px) {
+  #game-menu .st-col { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); max-width: 680px; column-gap: 16px; row-gap: 8px; align-items: start; align-content: center; }
+  #game-menu .st-col > * { grid-column: 2; }
+  #game-menu .st-col > .st-levels { grid-column: 1; grid-row: 1 / span 8; }
+  #game-menu .st-col .st-btn { min-height: 44px; }
+}
 `;
 
 function el<K extends keyof HTMLElementTagNameMap>(tag: K, attrs: Record<string, string> = {}, ...kids: (Node | string)[]): HTMLElementTagNameMap[K] {
@@ -671,6 +682,10 @@ export interface MenuOptions {
   leave(): void;
   /** Step 14 slice A (additive): the levels discovered in this world, read each time the panel opens. */
   levels?(): { id: string; name: string; quarters: number; pieces?: boolean[]; sources?: string[]; best?: { stars: number; ticks: number } }[];
+  /** The way back's words where the hero is now ("Back to the entrance", "Back to the cantina"), or null for none; read each time the panel opens. */
+  backTo?(): string | null;
+  /** Sends the way back (src/sim/systems/menu-back.ts). */
+  goBack?(): void;
 }
 
 /**
@@ -718,6 +733,22 @@ export function setUpMenu(opts: MenuOptions): void {
   } else if (opts.worldName === DEFAULT_WORLD) {
     col.append(el('div', { class: 'st-label' }, words(content, "Everyone's kingdom", 2)));
   }
+  // INTENT (CLAUDE.md, "There is always a way out"; the owner, 2026-11-24: "My little guy died and then
+  // i got stuck in the quarry ... The menu in the too left corner didn't seem to be working either"):
+  // the way out of a place, not only of the world. Inside a stage, "Back to the entrance" (a start-over,
+  // as being beaten is); elsewhere "Back to the cantina"; none in the cantina or over a card with its
+  // own way on. Never remove it. DRAFT: the orchestrator's ruling (docs/decisions-log.md, "The menu's way back").
+  const wayBack = el('div', { class: 'st-way-back' });
+  const fillWayBack = (): void => {
+    const words = opts.backTo?.() ?? null;
+    if (!words || !opts.goBack) return void wayBack.replaceChildren();
+    const b = button(words, 'way-back');
+    b.addEventListener('click', () => {
+      opts.goBack!();
+      shut();
+    });
+    wayBack.replaceChildren(b);
+  };
   const back = button('Back to the start screen', 'back');
   back.addEventListener('click', () => {
     opts.leave();
@@ -744,10 +775,11 @@ export function setUpMenu(opts: MenuOptions): void {
       ...found.map((l) => el('div', { class: 'st-level', 'data-level': l.id, 'data-quarters': String(l.quarters) }, words(content, l.name, 2), pieImage(content, l.quarters, 2), ...(l.pieces ? [piecesImage(content, l.pieces, 2)] : []), ...(l.sources?.length ? [sourcesImage(content, l.sources, 2)] : []), ...(l.best ? [starsImage(content, l.best.stars, 2), words(content, stageClock(l.best.ticks), 2)] : []))),
     );
   };
-  col.append(places, say, back, close);
+  col.append(places, say, wayBack, back, close);
   panel.append(col);
   btn.addEventListener('click', () => {
     fillLevels();
+    fillWayBack();
     panel.hidden = false;
   });
   document.body.append(btn, panel);

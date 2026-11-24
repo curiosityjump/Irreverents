@@ -1,0 +1,86 @@
+{
+ "id": "menu-back-quarry-entrance",
+ "proves": "The owner stuck in the quarry (brief owner-stuck-in-the-quarry, push 1): the menu's 'Back to the entrance' (Input.back, src/sim/systems/menu-back.ts) moves a hero from deep in the Iron Quarry (the depot, a stage room) to the stage's entrance (the road, by the door from the courtyard) on the tick it is pressed, once however many ticks carry the press, and the stage counts it as a try and starts over (solo: nobody else inside). Control (watched to fail): the back input taken out, and the hero stays in the depot with no start-over",
+ "room": "quarry-depot",
+ "placements": true,
+ "players": [
+  {
+   "id": "a",
+   "character": "grappler",
+   "spawn": 1
+  }
+ ],
+ "inputs": [
+  {
+   "player": "a",
+   "from": 30,
+   "to": 48,
+   "back": {
+    "n": 7
+   }
+  }
+ ],
+ "ticks": 90,
+ "expect": [
+  {
+   "fact": "event-where",
+   "event": "menu-back",
+   "where": {
+    "player": "a",
+    "from": "quarry-depot",
+    "room": "quarry-road",
+    "stage": "iron-quarry"
+   },
+   "between": [
+    30,
+    30
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "event-where",
+   "event": "menu-back",
+   "where": {},
+   "between": [
+    0,
+    90
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "in-room",
+   "player": "a",
+   "at": 40,
+   "room": "quarry-road"
+  },
+  {
+   "fact": "event-where",
+   "event": "stage-restarted",
+   "where": {
+    "stage": "iron-quarry",
+    "tries": 1
+   },
+   "between": [
+    30,
+    30
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "stage",
+   "stage": "iron-quarry",
+   "at": 40,
+   "state": "running",
+   "tries": 1
+  }
+ ]
+}

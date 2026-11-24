@@ -97,6 +97,9 @@ function cleanInput(raw: unknown): Input {
     // The regular the page drew under the finger: an id, judged by the server (cantina-swap.ts), never trusted for more.
     if (typeof t.id === 'string' && t.id.length > 0 && t.id.length <= 64) out.tap.id = t.id;
   }
+  // The menu's way back (src/sim/systems/menu-back.ts): a press count, a finite number or nothing.
+  const b = i.back as Record<string, unknown> | undefined;
+  if (b && typeof b === 'object' && num(b.n)) out.back = { n: b.n };
   return out;
 }
 

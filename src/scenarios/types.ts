@@ -17,6 +17,8 @@ export interface InputSpan {
   hold?: string[];
   /** Step 11: a tap on the game view (Input.tap): `at` an entity id (its middle, each tick), or `x`,`y` room pixels, or `slot`. */
   tap?: { n: number; at?: string; x?: number; y?: number; slot?: number; id?: string; dx?: number };
+  /** The menu's way back (Input.back, src/sim/systems/menu-back.ts): a new `n` per press. */
+  back?: { n: number };
 }
 
 export interface Scenario {
@@ -30,7 +32,8 @@ export interface Scenario {
   /** `room`: where this player starts; left out, the scenario's `room` (Step 3). */
   /** `joins`: the tick this player is put in the world (Step 11); left out, before tick 0. */
   /** `power` (Step 9): the player starts holding this power (content/powers/), as if taken before tick 0. */
-  players: { id: string; character?: string; spawn: number; room?: string; joins?: number; power?: string }[];
+  /** `tile` (brief owner-stuck-in-the-quarry): the player starts with its feet on that tile's floor, centred, instead of at the spawn. */
+  players: { id: string; character?: string; spawn: number; room?: string; joins?: number; power?: string; tile?: [number, number] }[];
   /** Bodies nobody plays, put in the room before tick 0. Their entity id is `id`. */
   /** `room`: which room the body is put in; left out, the scenario's `room` (Step 3). */
   entities?: { id: string; character: string; tile: [number, number]; vx?: number; vy?: number; room?: string }[];

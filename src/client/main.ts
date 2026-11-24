@@ -40,6 +40,7 @@ import { lastLean, leanControl } from './camera.ts';
 import { drawnBeaten, watchBeatenEvents } from './draw/beaten.ts';
 import { levelProgress } from '../sim/levels.ts';
 import { stageBest } from '../sim/stage.ts';
+import { backWords, menuBackTo } from '../sim/menu-back.ts';
 import { setUpMenu, showGone, showStart } from './start.ts';
 import type { StartRecord } from './start.ts';
 
@@ -273,6 +274,9 @@ function play(worldName: string): void {
   let tapN = Math.floor(Math.random() * 1e6);
   let tap: { at: number; tap: NonNullable<Input['tap']> } | null = null;
   let lastCamera = { x: 0, y: 0 };
+  // The menu's way back (brief owner-stuck-in-the-quarry): the newest press, counted like a tap.
+  let backN = Math.floor(Math.random() * 1e6);
+  let back: { at: number; n: number } | null = null;
   canvas.addEventListener('pointerdown', (e) => {
     const r = canvas.getBoundingClientRect();
     if (r.width < 1 || r.height < 1) return;
@@ -319,6 +323,9 @@ function play(worldName: string): void {
     };
     if (tap && performance.now() - tap.at > TAP_MS) tap = null;
     if (tap) input.tap = tap.tap;
+    // The menu's way back (src/sim/systems/menu-back.ts): carried like a tap, numbered, acted on once.
+    if (back && performance.now() - back.at > TAP_MS) back = null;
+    if (back) input.back = { n: back.n };
     return input;
   }
 
@@ -454,6 +461,15 @@ function play(worldName: string): void {
     worldName,
     tab: stored,
     leave: () => net.leave(),
+    // The way back (src/sim/menu-back.ts): offered where the page's own hero is, never over a card that has its own way on.
+    backTo: () => {
+      if (stageScreenUp() || drawnGameOver()) return null;
+      const to = menuBackTo(content, net.me().room);
+      return to ? backWords(to) : null;
+    },
+    goBack: () => {
+      back = { at: performance.now(), n: ++backN };
+    },
     // Step 14 slice A: a row per discovered level in the menu (src/client/start.ts).
     levels: () => Object.values(content.levels ?? {}).flatMap((l) => {
       const p = levelProgress(net.world, content, l.id);

@@ -1,0 +1,92 @@
+{
+ "id": "menu-back-cantina",
+ "proves": "The menu's way back outside a stage (brief owner-stuck-in-the-quarry, push 1): 'Back to the cantina' moves a hero from the courtyard to the cantina on the tick it is pressed; a second press (a new n) in the cantina is refused there ('none-here': the cantina is where it leads) and moves nobody. Control (watched to fail): the first back input taken out, and the hero stays in the courtyard",
+ "room": "courtyard",
+ "players": [
+  {
+   "id": "a",
+   "character": "infiltrator",
+   "spawn": 0
+  }
+ ],
+ "inputs": [
+  {
+   "player": "a",
+   "from": 20,
+   "to": 30,
+   "back": {
+    "n": 1
+   }
+  },
+  {
+   "player": "a",
+   "from": 60,
+   "to": 70,
+   "back": {
+    "n": 2
+   }
+  }
+ ],
+ "ticks": 90,
+ "expect": [
+  {
+   "fact": "event-where",
+   "event": "menu-back",
+   "where": {
+    "player": "a",
+    "from": "courtyard",
+    "room": "cantina",
+    "stage": null
+   },
+   "between": [
+    20,
+    20
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "in-room",
+   "player": "a",
+   "at": 40,
+   "room": "cantina"
+  },
+  {
+   "fact": "event-where",
+   "event": "menu-back-refused",
+   "where": {
+    "player": "a",
+    "why": "none-here"
+   },
+   "between": [
+    60,
+    60
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "event-where",
+   "event": "menu-back",
+   "where": {},
+   "between": [
+    0,
+    90
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "in-room",
+   "player": "a",
+   "at": 90,
+   "room": "cantina"
+  }
+ ]
+}

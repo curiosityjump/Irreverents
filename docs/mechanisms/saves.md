@@ -273,6 +273,7 @@ screen), `start-join` (the
 menu's code, Close, the link's one tap, sound unlocked by it, each page
 draws the other), `start-back` (back, Continue lists the game first, the
 friend's page stops drawing them), `start-room` (`?room=` never shows it,
-its menu has only Back and Close). Screenshot:
+its menu has only the ways back and Close: since brief
+owner-stuck-in-the-quarry also "Back to the cantina", `src/sim/menu-back.ts`). Screenshot:
 `docs/plan/step-17-shots/start-screen-390x664.png`; the title at every
 size in `docs/plan/step-17-shots/title/`.

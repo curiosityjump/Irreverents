@@ -148,6 +148,7 @@ export async function startFacts(run: { browser: any; devices: any; base: string
       `Back to the start screen: the ${back.shown} screen, no world joined, address "${back.address}"; Continue lists [${back.continues.join(', ')}] (this game first: ${back.continues[0] === code}) with a button ${cont ? 'on screen' : 'MISSING'}; the friend's page stopped drawing them: ${gone}`);
 
     // 6. A ?room= page never sees the start screen, and has the way back.
+    // (Brief owner-stuck-in-the-quarry: its hero starts outside the cantina, so the menu also offers "Back to the cantina".)
     const C = await ctxB.newPage();
     C.on('pageerror', (e: Error) => errors.push(`start C: ${e.message}`));
     await C.goto(`${base}/?room=e2e-start-${Math.random().toString(36).slice(2, 10)}`);
@@ -157,8 +158,8 @@ export async function startFacts(run: { browser: any; devices: any; base: string
     await sleep(150);
     const roomMenu = await C.evaluate(() => [...document.querySelectorAll('#game-menu [data-menu]')].map((e) => (e as HTMLElement).dataset.menu));
     await C.screenshot({ path: path.join(out, 'start-room-menu.png') });
-    fact('start-room', !!inC && !c.start && c.record === undefined && c.menu && roomMenu.join() === 'back,close',
-      `a ?room= page: ${inC ? 'in play at once' : 'NOT in play'}, start screen ${c.start ? 'SHOWN' : 'never shown'}; its menu has [${roomMenu.join(', ')}] (only the way back, and Close)`);
+    fact('start-room', !!inC && !c.start && c.record === undefined && c.menu && roomMenu.join() === 'way-back,back,close',
+      `a ?room= page: ${inC ? 'in play at once' : 'NOT in play'}, start screen ${c.start ? 'SHOWN' : 'never shown'}; its menu has [${roomMenu.join(', ')}] (only the ways back, to the cantina and to the start screen, and Close: no code, no Share)`);
     await C.close();
 
     // 7. The review of the start screen (hardening push D), one page each.

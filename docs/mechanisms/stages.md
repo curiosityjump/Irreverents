@@ -42,6 +42,18 @@ forest road by the doorway from the courtyard (`content/defeat/forest.json`
    nothing over. The `thrown-out` path is kept but dormant while the
    quarry's throw is off (Step 22 (e)); a stage whose place keeps its throw
    would still use it.
+   So is the menu's **Back to the entrance** (`menu-back`, order 589,
+   `src/sim/systems/menu-back.ts`, brief owner-stuck-in-the-quarry, `DRAFT:`):
+   a fresh `Input.back` press from inside a stage moves that player alone to
+   the stage's entrance, holding nothing (the game over's `dropEverything`),
+   and its event puts the player in `pending`, so a solo player's stage
+   starts over on that tick (`menu-back-quarry-entrance`; control: the
+   press taken out, or this line of stage-run taken out). Outside a stage
+   the same press goes to the cantina (`menu-back-cantina`); in the
+   cantina, or while a game over is coming or a brawl is on, it is refused
+   (`menu-back-refused`). Hearts are not touched. The page offers it in the
+   menu (`src/client/start.ts`, `backTo`), never over STAGE CLEARED or the
+   GAME OVER card.
 3. When every player still inside the stage is pending (solo: at once, as
    the thrown hero lands at the entrance, which is inside), `restoreStage`
    runs, `tries` goes up, the clock and counts restart (`stage-restarted`).

@@ -56,7 +56,14 @@ export function parseScenario(raw: unknown, file: string, stem: string, content:
       if (p.joins !== undefined && (typeof p.joins !== 'number' || !Number.isInteger(p.joins) || p.joins < 0)) fail(`${w}.joins`, `must be a whole tick from 0, but is ${JSON.stringify(p.joins)}`);
       // Step 9: a player who starts holding a power (content/powers/), as if they had taken it before tick 0.
       if (p.power !== undefined && (typeof p.power !== 'string' || !(p.power in (content.powers ?? {})))) fail(`${w}.power`, `no power ${JSON.stringify(p.power)} (powers: ${known(content.powers ?? {})})`);
-      players.push({ id: String(p.id), character: p.character === undefined ? undefined : String(p.character), spawn: Number(spawn), ...(typeof p.room === 'string' ? { room: p.room } : {}), ...(typeof p.joins === 'number' && p.joins > 0 ? { joins: p.joins } : {}), ...(typeof p.power === 'string' ? { power: p.power } : {}) });
+      // Brief owner-stuck-in-the-quarry: a player put on a tile (feet on its floor, centred), as a trap's scenario needs; left out, the spawn.
+      let tile: [number, number] | undefined;
+      if (p.tile !== undefined) {
+        const t = p.tile as unknown;
+        if (!Array.isArray(t) || t.length !== 2 || !t.every((n) => Number.isInteger(n))) fail(`${w}.tile`, `must be [column, row], but is ${JSON.stringify(t)}`);
+        else tile = [t[0] as number, t[1] as number];
+      }
+      players.push({ id: String(p.id), character: p.character === undefined ? undefined : String(p.character), spawn: Number(spawn), ...(typeof p.room === 'string' ? { room: p.room } : {}), ...(typeof p.joins === 'number' && p.joins > 0 ? { joins: p.joins } : {}), ...(typeof p.power === 'string' ? { power: p.power } : {}), ...(tile ? { tile } : {}) });
     });
   }
 
@@ -146,7 +153,7 @@ export function parseScenario(raw: unknown, file: string, stem: string, content:
       const w = `inputs[${i}]`;
       if (!isRecord(s)) return fail(w, `must be an object, but is ${describe(s)}`);
       for (const key of Object.keys(s)) {
-        if (!['player', 'entity', 'from', 'to', 'x', 'y', 'hold', 'tap', '//'].includes(key)) fail(`${w}.${key}`, 'unknown field (known fields: player, entity, from, to, x, y, hold, tap)');
+        if (!['player', 'entity', 'from', 'to', 'x', 'y', 'hold', 'tap', 'back', '//'].includes(key)) fail(`${w}.${key}`, 'unknown field (known fields: player, entity, from, to, x, y, hold, tap, back)');
       }
       if (s.entity !== undefined) {
         if (s.player !== undefined) fail(`${w}.player`, 'give player or entity, not both');
@@ -187,7 +194,13 @@ export function parseScenario(raw: unknown, file: string, stem: string, content:
           tap = { n: t.n as number, ...(typeof t.at === 'string' ? { at: t.at } : {}), ...(n(t.x) && n(t.y) ? { x: t.x as number, y: t.y as number } : {}), ...(Number.isInteger(t.slot) ? { slot: t.slot as number } : {}), ...(typeof t.id === 'string' ? { id: t.id } : {}), ...(n(t.dx) ? { dx: t.dx as number } : {}) };
         }
       }
-      inputs.push({ player: s.entity === undefined ? String(s.player) : '', entity: s.entity as string | undefined, from: Number(s.from), to: Number(s.to), x: s.x as number | undefined, y: s.y as number | undefined, hold: Array.isArray(hold) ? (hold as string[]) : [], ...(tap ? { tap } : {}) });
+      // The menu's way back (Input.back, src/sim/systems/menu-back.ts): `{ "n": whole number }`, a new `n` per press.
+      let back: InputSpan['back'];
+      if (s.back !== undefined) {
+        if (!isRecord(s.back) || !Number.isInteger(s.back.n) || Object.keys(s.back).some((k) => k !== 'n' && k !== '//')) fail(`${w}.back`, `must be { "n": whole number }, but is ${describe(s.back)}`);
+        else back = { n: s.back.n as number };
+      }
+      inputs.push({ player: s.entity === undefined ? String(s.player) : '', entity: s.entity as string | undefined, from: Number(s.from), to: Number(s.to), x: s.x as number | undefined, y: s.y as number | undefined, hold: Array.isArray(hold) ? (hold as string[]) : [], ...(tap ? { tap } : {}), ...(back ? { back } : {}) });
     });
   }
 
@@ -239,6 +252,7 @@ export function inputsAt(scenario: Scenario, tick: number, world?: World, conten
       const at = body && box ? { x: body.x + box.w / 2 + (s.tap.dx ?? 0), y: body.y + box.h / 2 } : { x: s.tap.x ?? -9999, y: s.tap.y ?? -9999 };
       input.tap = { ...at, n: s.tap.n, ...(s.tap.slot !== undefined ? { slot: s.tap.slot } : {}), ...(s.tap.id !== undefined ? { id: s.tap.id } : {}) };
     }
+    if (s.back) input.back = { n: s.back.n };
   }
   return out;
 }
@@ -268,6 +282,12 @@ export function simulate(scenario: Scenario, content: Content): Recording {
     if (p.joins) continue;
     const e = spawnPlayer(world, content, { player: p.id, character: p.character, room: p.room ?? scenario.room, spawn: p.spawn });
     if (p.power) e.c.power = { id: p.power };
+    if (p.tile) {
+      const room = content.rooms[e.room]!;
+      const box = content.characters[e.kind]!.box;
+      e.x = (p.tile[0] + 0.5) * room.tile - box.w / 2;
+      e.y = (p.tile[1] + 1) * room.tile - box.h;
+    }
   }
   if (scenario.placements) populateRoom(world, content, scenario.room);
   for (const r of scenario.placedRooms ?? []) populateRoom(world, content, r);

@@ -54,6 +54,9 @@ a file, edit no list. The first is `together` (gate F,
 - An input span holds the stick (`x`, `y` from -1 to 1) and/or actions
   (`hold`, ids from `content/actions/`) from tick `from` up to but not
   including `to`. Overlapping spans merge.
+- A player may carry `"tile": [col, row]` (brief owner-stuck-in-the-quarry):
+  it starts with its feet on that tile's floor, centred, instead of at its
+  spawn, to put a hero where a trap was.
 - A player or an entity may carry `"room": "<room id>"` to start in
   another room than the scenario's (Step 3; a scenario's `placements`
   still means the scenario's own room). `tiles` is optional: `[{ "room",
@@ -72,6 +75,9 @@ a file, edit no list. The first is `together` (gate F,
   `at`, `"dx"` moves the tap sideways (room pixels); `"id"` names the
   regular the page drew under the finger (`Input.tap.id`, cantina.md, "A
   tap on a walking regular").
+- A player's span may carry **`back`**: `{ "n": 1 }`, a press of the menu's
+  way back (`Input.back`, `src/sim/systems/menu-back.ts`; brief
+  owner-stuck-in-the-quarry). A new press needs a new `n`.
 - `"placedRooms": ["cantina"]` (optional, Step 11): more rooms whose own
   placements are put in the world too, as the server's world has every
   room's (the street's door reads the chase list the cantina's systems write).

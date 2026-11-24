@@ -129,13 +129,13 @@ function placeOf(ctx: StepContext, room: string): string | null {
 }
 
 /** Where a game over from `place` sends everyone. */
-function target(ctx: StepContext, place: string | null): { room: string; door: string | null; tile: [number, number] | null } {
+export function target(ctx: StepContext, place: string | null): { room: string; door: string | null; tile: [number, number] | null } {
   const g = (place ? ctx.content.defeat?.[place]?.gameOver : undefined) ?? ctx.content.hearts.gameOver;
   return { room: g.room, door: g.door ?? null, tile: g.tile ?? null };
 }
 
 /** The `i`-th player's spot: a cantina's pads in turn, else the door or tile given (as a thrown-out hero lands), else the room's spawns in turn. */
-function spotIn(ctx: StepContext, to: ReturnType<typeof target>, e: Entity, i: number): { room: string; x: number; y: number } | undefined {
+export function spotIn(ctx: StepContext, to: ReturnType<typeof target>, e: Entity, i: number): { room: string; x: number; y: number } | undefined {
   const { content, world } = ctx;
   const room = content.rooms[to.room];
   if (!room) return undefined;
@@ -154,7 +154,7 @@ function spotIn(ctx: StepContext, to: ReturnType<typeof target>, e: Entity, i: n
 }
 
 /** Lets go of everything: what it carries or what holds it, a prize (back on its stand), a power and a weapon (left where it stands). */
-function dropEverything(ctx: StepContext, e: Entity): void {
+export function dropEverything(ctx: StepContext, e: Entity): void {
   const { world, content } = ctx;
   const carried = e.c.carrying ? findEntity(world, e.c.carrying.id) : undefined;
   if (carried && heldBy(carried) === e.id) release(ctx, carried, 'dropped');

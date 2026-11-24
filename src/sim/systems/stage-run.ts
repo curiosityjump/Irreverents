@@ -109,6 +109,10 @@ const system: System = {
           // for the quarry its entrance) moved every player there, hearts full: each of them waits
           // as a beaten player does, so the stage starts over below, on this tick.
           for (const p of ev.players) if (!run.pending.includes(p)) run.pending.push(p);
+        } else if (ev.type === 'menu-back' && ev.stage === s.id) {
+          // The menu's "Back to the entrance" (menu-back.ts, brief owner-stuck-in-the-quarry): a try, as a
+          // beaten player's: the player waits at the entrance, and the stage starts over once nobody else is inside.
+          if (!run.pending.includes(ev.player)) run.pending.push(ev.player);
         }
       }
 

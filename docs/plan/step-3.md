@@ -647,3 +647,45 @@ names and shapes.
 ## Carried here by the orchestrator, 2026-11-24 (from the Step 16 lead, 18:39 UTC on 2026-11-23)
 
 - Deferred, not built: the hidden way home from the quarry through the undercroft vault (its door is in `content/rooms/undercroft.json`, agreed between the two leads).
+
+## The owner stuck in the quarry
+
+Brief `handoff-prompts/owner-stuck-in-the-quarry.md` (the owner, from
+playing, 2026-11-24 ~19:30 UTC). Notes by its builder,
+`session_017WiGzJ3bzMxXHEzb35AHfR`.
+
+**Push 1, the menu.** Measured first, at 844x390, 750x340 and 390x664 by
+touch (CDP touch events at the button's middle), against a local server:
+the button is the element under its own middle and a tap opens the menu in
+every state reached: walking in the start room and in the quarry road, with
+the GAME OVER card up (a party on its last heart, beaten by the road's
+waves), after the card, with STAGE CLEARED up, after the page slept 3 s and
+woke, with the server killed under the page (status `reconnecting`) and
+after it came back. **No dead tap reproduced in headless Chromium.** What
+did fail: the menu's only choice was "Back to the start screen", and
+Continue there puts the hero back where it was stuck. So the fault fixed is
+"a choice that gets a stuck player out": "Back to the entrance" in a stage,
+"Back to the cantina" elsewhere (`docs/decisions-log.md`, "The menu's way
+back"). Not reproduced and not verifiable here: a real iPhone's Safari
+(safe-area insets, the notch side, a real deploy's restart); if the owner
+still finds the button dead, what he tapped (the button, or the party plate
+beside it, which is drawn on the game picture and takes no tap) is the next
+question.
+
+**Push 2, the traps.** The way-out check (`src/sim/check-rooms.ts`) already
+played every room for "every character a player can be", but read that as
+the party's three (`content/party.json`), not the roster's five: the
+brawler (jump 47.5 px, the lowest) and the skirmisher were never played. It
+now plays all five (`wayOutCharacters`). `scripts/way-out-audit.ts` prints
+the same per hero. Its first run found one trap: the brawler in the Bandit
+Camp's cache, fixed in content (`outpost.json`, a one-way tile at column 83,
+row 9; `way-out-camp-cache-brawler`, control: that tile emptied).
+**No trap in the six quarry rooms for any hero**, measured, so the owner's
+quarry trap is not a fixed-tile trap in an empty room. Not ruled out (and
+not measured here): being walled in by people who do not move (the
+quarry's toll-keeper and lookouts stand at posts), a place reached only
+with a power that then faded (push 3, not built), or a way out that exists
+but that he did not find (the pit's "up to the ridge" doorway needs the
+stick pushed up). The menu's way back (push 1) covers all of them.
+Scenario players may now carry `tile` (`src/scenarios/run.ts`), to put a
+hero where a trap was.
