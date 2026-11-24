@@ -1,0 +1,312 @@
+{
+  "schema_version": "1.0.0",
+  "pack_id": "BKG-01",
+  "title": "Irreverents eight scrolling biome panorama backgrounds",
+  "created_date": "2026-11-23",
+  "status": "GAME-USABLE STATIC PANORAMA \u2014 NOT true layered parallax or collision/tiles",
+  "logical_viewport_px": [
+    320,
+    180
+  ],
+  "panorama_px": [
+    1024,
+    180
+  ],
+  "scroll_range_x_px": [
+    0,
+    704
+  ],
+  "formats": [
+    "image/png",
+    "image/webp"
+  ],
+  "rendering": "Canvas: ctx.imageSmoothingEnabled=false. Draw at natural 1024x180 logical resolution; scroll x between 0 and 704. Scale whole 320x180 canvas to physical phone CSS size; do NOT stretch the image independently to a phone viewport.",
+  "limitations": [
+    "These are flattened wide scene illustrations, not independently editable parallax layers.",
+    "Visible foreground ground, ledges, water and bridges are painted imagery only, NOT collision geometry. Draw real interactive tiles/actors on top or match collision to illustrated ground.",
+    "Left/right edges were NOT made horizontally seamless. Pan/clamp rather than repeat.",
+    "Anti-aliased illustrative source was reduced to the runtime logical pixel grid; not a hand-authored 16px tileset."
+  ],
+  "biomes": [
+    {
+      "id": "BKG-001",
+      "slug": "ruins_day",
+      "name": "Sunlit Ruins",
+      "runtime_png": "backgrounds/ruins_day_1024x180.png",
+      "runtime_webp_lossless": "backgrounds/ruins_day_1024x180.webp",
+      "source_crop": "source_crops/ruins_day_source_crop.png",
+      "previews": [
+        "previews/ruins_day_viewport_start_320x180.png",
+        "previews/ruins_day_viewport_center_320x180.png",
+        "previews/ruins_day_viewport_end_320x180.png"
+      ],
+      "source_sheet": "four_part_pixel_art_landscape_atlas.png",
+      "source_crop_xyxy": [
+        12,
+        16,
+        1404,
+        261
+      ],
+      "source_dimensions": [
+        1392,
+        245
+      ],
+      "runtime_dimensions": [
+        1024,
+        180
+      ],
+      "opaque": true,
+      "horizontal_wrap": false,
+      "repeatable_x": false,
+      "max_camera_x": 704,
+      "suggested_parallax_factor": 0.35,
+      "note": "Parallax factor is ONLY for this single flattened panel, not a multi-layer parallax set.",
+      "sha256_png": "835c4139a17bec8cd9ce3ed7f3a62ed8516b52a9646063c89704c80c269da7a3"
+    },
+    {
+      "id": "BKG-002",
+      "slug": "forest_waterfall",
+      "name": "Forest Waterfall",
+      "runtime_png": "backgrounds/forest_waterfall_1024x180.png",
+      "runtime_webp_lossless": "backgrounds/forest_waterfall_1024x180.webp",
+      "source_crop": "source_crops/forest_waterfall_source_crop.png",
+      "previews": [
+        "previews/forest_waterfall_viewport_start_320x180.png",
+        "previews/forest_waterfall_viewport_center_320x180.png",
+        "previews/forest_waterfall_viewport_end_320x180.png"
+      ],
+      "source_sheet": "four_part_pixel_art_landscape_atlas.png",
+      "source_crop_xyxy": [
+        12,
+        281,
+        1404,
+        526
+      ],
+      "source_dimensions": [
+        1392,
+        245
+      ],
+      "runtime_dimensions": [
+        1024,
+        180
+      ],
+      "opaque": true,
+      "horizontal_wrap": false,
+      "repeatable_x": false,
+      "max_camera_x": 704,
+      "suggested_parallax_factor": 0.35,
+      "note": "Parallax factor is ONLY for this single flattened panel, not a multi-layer parallax set.",
+      "sha256_png": "576512ed84513302c7865e68a7c43bc1d02e0457061bf4f66afc2877a2d09708"
+    },
+    {
+      "id": "BKG-003",
+      "slug": "ice_cavern",
+      "name": "Ice Cavern",
+      "runtime_png": "backgrounds/ice_cavern_1024x180.png",
+      "runtime_webp_lossless": "backgrounds/ice_cavern_1024x180.webp",
+      "source_crop": "source_crops/ice_cavern_source_crop.png",
+      "previews": [
+        "previews/ice_cavern_viewport_start_320x180.png",
+        "previews/ice_cavern_viewport_center_320x180.png",
+        "previews/ice_cavern_viewport_end_320x180.png"
+      ],
+      "source_sheet": "four_part_pixel_art_landscape_atlas.png",
+      "source_crop_xyxy": [
+        12,
+        549,
+        1404,
+        794
+      ],
+      "source_dimensions": [
+        1392,
+        245
+      ],
+      "runtime_dimensions": [
+        1024,
+        180
+      ],
+      "opaque": true,
+      "horizontal_wrap": false,
+      "repeatable_x": false,
+      "max_camera_x": 704,
+      "suggested_parallax_factor": 0.35,
+      "note": "Parallax factor is ONLY for this single flattened panel, not a multi-layer parallax set.",
+      "sha256_png": "7e2c1e0f9d79b8b6839b7198becc6207dac8070798739c158890401c330450d1"
+    },
+    {
+      "id": "BKG-004",
+      "slug": "sky_islands_sunset",
+      "name": "Sky Islands at Sunset",
+      "runtime_png": "backgrounds/sky_islands_sunset_1024x180.png",
+      "runtime_webp_lossless": "backgrounds/sky_islands_sunset_1024x180.webp",
+      "source_crop": "source_crops/sky_islands_sunset_source_crop.png",
+      "previews": [
+        "previews/sky_islands_sunset_viewport_start_320x180.png",
+        "previews/sky_islands_sunset_viewport_center_320x180.png",
+        "previews/sky_islands_sunset_viewport_end_320x180.png"
+      ],
+      "source_sheet": "four_part_pixel_art_landscape_atlas.png",
+      "source_crop_xyxy": [
+        12,
+        829,
+        1404,
+        1074
+      ],
+      "source_dimensions": [
+        1392,
+        245
+      ],
+      "runtime_dimensions": [
+        1024,
+        180
+      ],
+      "opaque": true,
+      "horizontal_wrap": false,
+      "repeatable_x": false,
+      "max_camera_x": 704,
+      "suggested_parallax_factor": 0.35,
+      "note": "Parallax factor is ONLY for this single flattened panel, not a multi-layer parallax set.",
+      "sha256_png": "80e4883bc830e1360bad050ad3f3e93f54b6ca274ade441aef4dc5c64f5812dd"
+    },
+    {
+      "id": "BKG-005",
+      "slug": "moonlit_castle",
+      "name": "Moonlit Castle",
+      "runtime_png": "backgrounds/moonlit_castle_1024x180.png",
+      "runtime_webp_lossless": "backgrounds/moonlit_castle_1024x180.webp",
+      "source_crop": "source_crops/moonlit_castle_source_crop.png",
+      "previews": [
+        "previews/moonlit_castle_viewport_start_320x180.png",
+        "previews/moonlit_castle_viewport_center_320x180.png",
+        "previews/moonlit_castle_viewport_end_320x180.png"
+      ],
+      "source_sheet": "four_layer_pixel_art_worlds.png",
+      "source_crop_xyxy": [
+        12,
+        18,
+        1404,
+        263
+      ],
+      "source_dimensions": [
+        1392,
+        245
+      ],
+      "runtime_dimensions": [
+        1024,
+        180
+      ],
+      "opaque": true,
+      "horizontal_wrap": false,
+      "repeatable_x": false,
+      "max_camera_x": 704,
+      "suggested_parallax_factor": 0.35,
+      "note": "Parallax factor is ONLY for this single flattened panel, not a multi-layer parallax set.",
+      "sha256_png": "b82b071329aae650b38255aec96ee0af835516ca505c165b4b0d7b8f875b27dd"
+    },
+    {
+      "id": "BKG-006",
+      "slug": "volcanic_forge",
+      "name": "Volcanic Forge",
+      "runtime_png": "backgrounds/volcanic_forge_1024x180.png",
+      "runtime_webp_lossless": "backgrounds/volcanic_forge_1024x180.webp",
+      "source_crop": "source_crops/volcanic_forge_source_crop.png",
+      "previews": [
+        "previews/volcanic_forge_viewport_start_320x180.png",
+        "previews/volcanic_forge_viewport_center_320x180.png",
+        "previews/volcanic_forge_viewport_end_320x180.png"
+      ],
+      "source_sheet": "four_layer_pixel_art_worlds.png",
+      "source_crop_xyxy": [
+        12,
+        281,
+        1404,
+        526
+      ],
+      "source_dimensions": [
+        1392,
+        245
+      ],
+      "runtime_dimensions": [
+        1024,
+        180
+      ],
+      "opaque": true,
+      "horizontal_wrap": false,
+      "repeatable_x": false,
+      "max_camera_x": 704,
+      "suggested_parallax_factor": 0.35,
+      "note": "Parallax factor is ONLY for this single flattened panel, not a multi-layer parallax set.",
+      "sha256_png": "72d5eece0d9d0bded7dcbac46cf05d6a5802495a63fbca1da4d9959bc022a3f3"
+    },
+    {
+      "id": "BKG-007",
+      "slug": "market_town_day",
+      "name": "Market Town",
+      "runtime_png": "backgrounds/market_town_day_1024x180.png",
+      "runtime_webp_lossless": "backgrounds/market_town_day_1024x180.webp",
+      "source_crop": "source_crops/market_town_day_source_crop.png",
+      "previews": [
+        "previews/market_town_day_viewport_start_320x180.png",
+        "previews/market_town_day_viewport_center_320x180.png",
+        "previews/market_town_day_viewport_end_320x180.png"
+      ],
+      "source_sheet": "four_layer_pixel_art_worlds.png",
+      "source_crop_xyxy": [
+        12,
+        554,
+        1404,
+        799
+      ],
+      "source_dimensions": [
+        1392,
+        245
+      ],
+      "runtime_dimensions": [
+        1024,
+        180
+      ],
+      "opaque": true,
+      "horizontal_wrap": false,
+      "repeatable_x": false,
+      "max_camera_x": 704,
+      "suggested_parallax_factor": 0.35,
+      "note": "Parallax factor is ONLY for this single flattened panel, not a multi-layer parallax set.",
+      "sha256_png": "63ae99bfc66768e7d2611cd1fa2b32b2307f7d4214cc5e9e103924343698897d"
+    },
+    {
+      "id": "BKG-008",
+      "slug": "iron_quarry_evening",
+      "name": "Iron Quarry",
+      "runtime_png": "backgrounds/iron_quarry_evening_1024x180.png",
+      "runtime_webp_lossless": "backgrounds/iron_quarry_evening_1024x180.webp",
+      "source_crop": "source_crops/iron_quarry_evening_source_crop.png",
+      "previews": [
+        "previews/iron_quarry_evening_viewport_start_320x180.png",
+        "previews/iron_quarry_evening_viewport_center_320x180.png",
+        "previews/iron_quarry_evening_viewport_end_320x180.png"
+      ],
+      "source_sheet": "four_layer_pixel_art_worlds.png",
+      "source_crop_xyxy": [
+        12,
+        823,
+        1404,
+        1068
+      ],
+      "source_dimensions": [
+        1392,
+        245
+      ],
+      "runtime_dimensions": [
+        1024,
+        180
+      ],
+      "opaque": true,
+      "horizontal_wrap": false,
+      "repeatable_x": false,
+      "max_camera_x": 704,
+      "suggested_parallax_factor": 0.35,
+      "note": "Parallax factor is ONLY for this single flattened panel, not a multi-layer parallax set.",
+      "sha256_png": "9d9a714c42228fdd8f731df676c3ee5fffa1ff005d0e5b9f3bc950f4980df758"
+    }
+  ]
+}

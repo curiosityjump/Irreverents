@@ -1,0 +1,1 @@
+P10 TRN-01 owner-source-derived grass/dirt prefabs. 13 individual transparent RGBA PNGs on 16px-aligned canvases. These are NOT seamless 16x16 tiles and NOT production-ready. White-matte alpha repair is approximate; native-size gameplay preview and contact sheet included. Source originals unchanged. No collision assigned. Do not auto-tile.

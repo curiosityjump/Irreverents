@@ -2,6 +2,12 @@
 
 ---
 
+P09 — P07 NPC STATIC EXTRACTION / 2026-11-23 11:55 AM EST
+
+SOURCE P07 civilian/NPC/guard/king board: https://drive.google.com/file/d/1rnkPeLOL4fwcwNnvHH-C2uwiHblLnlz7/view . Created 12 distinct transparent 48×48 PNGs (2 source idle variants each of green civilian, blue civilian, spear guard, shield guard, king, cat), manifest JSON with pivots/source crops, 320×180 native-size QA preview and 2× contact sheet. ZIP https://drive.google.com/file/d/1-QaHnPNyvYTCmSdcufYbOL5L-vYWsf19/view ; preview https://drive.google.com/file/d/1VDOKogKcjbr3ePHBdfZxFX9PAc8a3FOJ/view ; folder https://drive.google.com/drive/folders/1LUm-MBHQhccNDRQBtTRnrmYRFxmKXQI3. STATUS: IMPORTABLE STATIC IDLE PROTOTYPE ONLY; no complete walk/mood/attack animation, no verified 32px compatibility, native reduction loses fine detail. NOT PRODUCTION READY; do not close NPC REQ or overwrite existing working assets. No canonical heroes altered.
+
+King only partial idle extraction; flyer/villain still pending.
+
 2026-11-23 11:29 AM EST — FLYER CANON SOURCE PARTIAL
 
 Owner-locked pink-winged aviator flyer has six individually extracted 48×48 RGBA source poses in partial package https://drive.google.com/file/d/185sart4aSJmoVq2ZHEhjLV7t8ypa04lK/view ; preview https://drive.google.com/file/d/1RU3plFJKyXEkj1rH0C7gsLvQZgMVUM1W/view . Not a finished 32×32 flyer animation sheet: 6-phase run, 4-frame flap, attack/grab/hurt/KO and native scale QA remain open. STATUS: REQUESTED / IN PROGRESS; do not mark flyer or king/villain delivered. Canon reference https://drive.google.com/file/d/17Ulupi-WbcsqVWqS5m-bz1TmIjzx6VcM/view controls identity.

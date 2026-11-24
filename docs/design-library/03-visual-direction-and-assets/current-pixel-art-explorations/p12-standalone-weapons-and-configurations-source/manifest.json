@@ -1,0 +1,529 @@
+{
+  "pack_id": "P12",
+  "name": "Standalone Character-Agnostic Weapon Sources",
+  "created_local_date": "2026-11-23",
+  "version": "1.0-source",
+  "owner_direction": "Weapons appear in all necessary configurations without any character baked into the asset, so each can be used by any playable hero or NPC.",
+  "canonical_grip_policy": "Weapon image layer is independent. Characters supply optional pose/attachment anchors, but character sprites must not be embedded in weapon sprites.",
+  "source_status": "SOURCE_ONLY: sheet and row crops are NOT cleaned individual native-size per-state sprites.",
+  "game_viewport_px": [
+    320,
+    180
+  ],
+  "tile_grid_px": 16,
+  "source_sheets": [
+    {
+      "file": "originals/kirby_style_weapon_atlas_sprite_sheet.png",
+      "source_dimensions_px": [
+        1448,
+        1086
+      ],
+      "source_mode": "RGBA",
+      "sha256": "353abf801954415c95e0d65eb834b577b8b80bdf986a61fb41bb8366415941b7",
+      "status": "VISUAL_SOURCE_ONLY",
+      "notes": "Unrepaired alpha gradients/edge artifacts remain; rows are illustrative layouts, not fixed native sprite cells."
+    },
+    {
+      "file": "originals/colorful_pixel_weapon_sprite_sheet.png",
+      "source_dimensions_px": [
+        1448,
+        1086
+      ],
+      "source_mode": "RGBA",
+      "sha256": "167a1c6cc00f0abf3886bd0ad97d580b7907fade95c2a0c7b2762bb8b18f858a",
+      "status": "VISUAL_SOURCE_ONLY",
+      "notes": "Unrepaired alpha gradients/edge artifacts remain; rows are illustrative layouts, not fixed native sprite cells."
+    },
+    {
+      "file": "originals/arcane_weapon_sprite_atlas.png",
+      "source_dimensions_px": [
+        1448,
+        1086
+      ],
+      "source_mode": "RGBA",
+      "sha256": "b0c7841d23d4a0e51f482a7ac3cbdfef89e562b2ef9a2085703fc060f99eb8d3",
+      "status": "VISUAL_SOURCE_ONLY",
+      "notes": "Unrepaired alpha gradients/edge artifacts remain; rows are illustrative layouts, not fixed native sprite cells."
+    }
+  ],
+  "weapon_families": [
+    {
+      "asset_id": "P12-A-01",
+      "weapon_family": "sword",
+      "category": "melee",
+      "source_sheet": "originals/kirby_style_weapon_atlas_sprite_sheet.png",
+      "source_row": 1,
+      "row_crop": "family_rows/P12-A-01_sword_source_row.png",
+      "source_crop_xyxy": [
+        0,
+        40,
+        1448,
+        280
+      ],
+      "tags": [
+        "irreverents",
+        "standalone-weapon",
+        "no-character",
+        "source-sheet",
+        "melee",
+        "sword",
+        "ground",
+        "highlighted",
+        "orientation",
+        "attack",
+        "effects",
+        "damaged",
+        "pickup",
+        "inventory",
+        "reusable-across-roster"
+      ],
+      "illustrated_states": "resting, highlighted/pickup, horizontal orientations, raised/readied, activated, movement/attack effect, impact, disabled/broken/spent (per-row variation; inspect visually)",
+      "status": "SOURCE_ONLY",
+      "use_case": "World object / held attachment / attack overlay / projectile / inventory variant, where applicable",
+      "required_next_work": "Isolate each actual object, remove effects/shadows where inappropriate, alpha repair, create grip/hitbox anchor metadata, normalize native dimensions and verify at 320x180."
+    },
+    {
+      "asset_id": "P12-A-02",
+      "weapon_family": "hammer",
+      "category": "melee",
+      "source_sheet": "originals/kirby_style_weapon_atlas_sprite_sheet.png",
+      "source_row": 2,
+      "row_crop": "family_rows/P12-A-02_hammer_source_row.png",
+      "source_crop_xyxy": [
+        0,
+        300,
+        1448,
+        530
+      ],
+      "tags": [
+        "irreverents",
+        "standalone-weapon",
+        "no-character",
+        "source-sheet",
+        "melee",
+        "hammer",
+        "ground",
+        "highlighted",
+        "orientation",
+        "attack",
+        "effects",
+        "damaged",
+        "pickup",
+        "inventory",
+        "reusable-across-roster"
+      ],
+      "illustrated_states": "resting, highlighted/pickup, horizontal orientations, raised/readied, activated, movement/attack effect, impact, disabled/broken/spent (per-row variation; inspect visually)",
+      "status": "SOURCE_ONLY",
+      "use_case": "World object / held attachment / attack overlay / projectile / inventory variant, where applicable",
+      "required_next_work": "Isolate each actual object, remove effects/shadows where inappropriate, alpha repair, create grip/hitbox anchor metadata, normalize native dimensions and verify at 320x180."
+    },
+    {
+      "asset_id": "P12-A-03",
+      "weapon_family": "spear",
+      "category": "melee",
+      "source_sheet": "originals/kirby_style_weapon_atlas_sprite_sheet.png",
+      "source_row": 3,
+      "row_crop": "family_rows/P12-A-03_spear_source_row.png",
+      "source_crop_xyxy": [
+        0,
+        545,
+        1448,
+        785
+      ],
+      "tags": [
+        "irreverents",
+        "standalone-weapon",
+        "no-character",
+        "source-sheet",
+        "melee",
+        "spear",
+        "ground",
+        "highlighted",
+        "orientation",
+        "attack",
+        "effects",
+        "damaged",
+        "pickup",
+        "inventory",
+        "reusable-across-roster",
+        "thrown",
+        "projectile"
+      ],
+      "illustrated_states": "resting, highlighted/pickup, horizontal orientations, raised/readied, activated, movement/attack effect, impact, disabled/broken/spent (per-row variation; inspect visually)",
+      "status": "SOURCE_ONLY",
+      "use_case": "World object / held attachment / attack overlay / projectile / inventory variant, where applicable",
+      "required_next_work": "Isolate each actual object, remove effects/shadows where inappropriate, alpha repair, create grip/hitbox anchor metadata, normalize native dimensions and verify at 320x180."
+    },
+    {
+      "asset_id": "P12-A-04",
+      "weapon_family": "shield",
+      "category": "defense",
+      "source_sheet": "originals/kirby_style_weapon_atlas_sprite_sheet.png",
+      "source_row": 4,
+      "row_crop": "family_rows/P12-A-04_shield_source_row.png",
+      "source_crop_xyxy": [
+        0,
+        785,
+        1448,
+        1030
+      ],
+      "tags": [
+        "irreverents",
+        "standalone-weapon",
+        "no-character",
+        "source-sheet",
+        "defense",
+        "shield",
+        "ground",
+        "highlighted",
+        "orientation",
+        "attack",
+        "effects",
+        "damaged",
+        "pickup",
+        "inventory",
+        "reusable-across-roster"
+      ],
+      "illustrated_states": "resting, highlighted/pickup, horizontal orientations, raised/readied, activated, movement/attack effect, impact, disabled/broken/spent (per-row variation; inspect visually)",
+      "status": "SOURCE_ONLY",
+      "use_case": "World object / held attachment / attack overlay / projectile / inventory variant, where applicable",
+      "required_next_work": "Isolate each actual object, remove effects/shadows where inappropriate, alpha repair, create grip/hitbox anchor metadata, normalize native dimensions and verify at 320x180."
+    },
+    {
+      "asset_id": "P12-B-01",
+      "weapon_family": "bomb",
+      "category": "explosive",
+      "source_sheet": "originals/colorful_pixel_weapon_sprite_sheet.png",
+      "source_row": 1,
+      "row_crop": "family_rows/P12-B-01_bomb_source_row.png",
+      "source_crop_xyxy": [
+        0,
+        40,
+        1448,
+        280
+      ],
+      "tags": [
+        "irreverents",
+        "standalone-weapon",
+        "no-character",
+        "source-sheet",
+        "explosive",
+        "bomb",
+        "ground",
+        "highlighted",
+        "orientation",
+        "attack",
+        "effects",
+        "damaged",
+        "pickup",
+        "inventory",
+        "reusable-across-roster",
+        "thrown",
+        "projectile"
+      ],
+      "illustrated_states": "resting, highlighted/pickup, horizontal orientations, raised/readied, activated, movement/attack effect, impact, disabled/broken/spent (per-row variation; inspect visually)",
+      "status": "SOURCE_ONLY",
+      "use_case": "World object / held attachment / attack overlay / projectile / inventory variant, where applicable",
+      "required_next_work": "Isolate each actual object, remove effects/shadows where inappropriate, alpha repair, create grip/hitbox anchor metadata, normalize native dimensions and verify at 320x180."
+    },
+    {
+      "asset_id": "P12-B-02",
+      "weapon_family": "boomerang",
+      "category": "thrown",
+      "source_sheet": "originals/colorful_pixel_weapon_sprite_sheet.png",
+      "source_row": 2,
+      "row_crop": "family_rows/P12-B-02_boomerang_source_row.png",
+      "source_crop_xyxy": [
+        0,
+        300,
+        1448,
+        530
+      ],
+      "tags": [
+        "irreverents",
+        "standalone-weapon",
+        "no-character",
+        "source-sheet",
+        "thrown",
+        "boomerang",
+        "ground",
+        "highlighted",
+        "orientation",
+        "attack",
+        "effects",
+        "damaged",
+        "pickup",
+        "inventory",
+        "reusable-across-roster",
+        "thrown",
+        "projectile"
+      ],
+      "illustrated_states": "resting, highlighted/pickup, horizontal orientations, raised/readied, activated, movement/attack effect, impact, disabled/broken/spent (per-row variation; inspect visually)",
+      "status": "SOURCE_ONLY",
+      "use_case": "World object / held attachment / attack overlay / projectile / inventory variant, where applicable",
+      "required_next_work": "Isolate each actual object, remove effects/shadows where inappropriate, alpha repair, create grip/hitbox anchor metadata, normalize native dimensions and verify at 320x180."
+    },
+    {
+      "asset_id": "P12-B-03",
+      "weapon_family": "hook_grappler",
+      "category": "utility",
+      "source_sheet": "originals/colorful_pixel_weapon_sprite_sheet.png",
+      "source_row": 3,
+      "row_crop": "family_rows/P12-B-03_hook_grappler_source_row.png",
+      "source_crop_xyxy": [
+        0,
+        545,
+        1448,
+        785
+      ],
+      "tags": [
+        "irreverents",
+        "standalone-weapon",
+        "no-character",
+        "source-sheet",
+        "utility",
+        "hook-grappler",
+        "ground",
+        "highlighted",
+        "orientation",
+        "attack",
+        "effects",
+        "damaged",
+        "pickup",
+        "inventory",
+        "reusable-across-roster",
+        "grapple",
+        "rope",
+        "extension"
+      ],
+      "illustrated_states": "resting, highlighted/pickup, horizontal orientations, raised/readied, activated, movement/attack effect, impact, disabled/broken/spent (per-row variation; inspect visually)",
+      "status": "SOURCE_ONLY",
+      "use_case": "World object / held attachment / attack overlay / projectile / inventory variant, where applicable",
+      "required_next_work": "Isolate each actual object, remove effects/shadows where inappropriate, alpha repair, create grip/hitbox anchor metadata, normalize native dimensions and verify at 320x180."
+    },
+    {
+      "asset_id": "P12-B-04",
+      "weapon_family": "cannon",
+      "category": "ranged",
+      "source_sheet": "originals/colorful_pixel_weapon_sprite_sheet.png",
+      "source_row": 4,
+      "row_crop": "family_rows/P12-B-04_cannon_source_row.png",
+      "source_crop_xyxy": [
+        0,
+        785,
+        1448,
+        1030
+      ],
+      "tags": [
+        "irreverents",
+        "standalone-weapon",
+        "no-character",
+        "source-sheet",
+        "ranged",
+        "cannon",
+        "ground",
+        "highlighted",
+        "orientation",
+        "attack",
+        "effects",
+        "damaged",
+        "pickup",
+        "inventory",
+        "reusable-across-roster"
+      ],
+      "illustrated_states": "resting, highlighted/pickup, horizontal orientations, raised/readied, activated, movement/attack effect, impact, disabled/broken/spent (per-row variation; inspect visually)",
+      "status": "SOURCE_ONLY",
+      "use_case": "World object / held attachment / attack overlay / projectile / inventory variant, where applicable",
+      "required_next_work": "Isolate each actual object, remove effects/shadows where inappropriate, alpha repair, create grip/hitbox anchor metadata, normalize native dimensions and verify at 320x180."
+    },
+    {
+      "asset_id": "P12-C-01",
+      "weapon_family": "star_wand",
+      "category": "magic",
+      "source_sheet": "originals/arcane_weapon_sprite_atlas.png",
+      "source_row": 1,
+      "row_crop": "family_rows/P12-C-01_star_wand_source_row.png",
+      "source_crop_xyxy": [
+        0,
+        40,
+        1448,
+        280
+      ],
+      "tags": [
+        "irreverents",
+        "standalone-weapon",
+        "no-character",
+        "source-sheet",
+        "magic",
+        "star-wand",
+        "ground",
+        "highlighted",
+        "orientation",
+        "attack",
+        "effects",
+        "damaged",
+        "pickup",
+        "inventory",
+        "reusable-across-roster",
+        "spell",
+        "charged"
+      ],
+      "illustrated_states": "resting, highlighted/pickup, horizontal orientations, raised/readied, activated, movement/attack effect, impact, disabled/broken/spent (per-row variation; inspect visually)",
+      "status": "SOURCE_ONLY",
+      "use_case": "World object / held attachment / attack overlay / projectile / inventory variant, where applicable",
+      "required_next_work": "Isolate each actual object, remove effects/shadows where inappropriate, alpha repair, create grip/hitbox anchor metadata, normalize native dimensions and verify at 320x180."
+    },
+    {
+      "asset_id": "P12-C-02",
+      "weapon_family": "torch",
+      "category": "utility",
+      "source_sheet": "originals/arcane_weapon_sprite_atlas.png",
+      "source_row": 2,
+      "row_crop": "family_rows/P12-C-02_torch_source_row.png",
+      "source_crop_xyxy": [
+        0,
+        300,
+        1448,
+        530
+      ],
+      "tags": [
+        "irreverents",
+        "standalone-weapon",
+        "no-character",
+        "source-sheet",
+        "utility",
+        "torch",
+        "ground",
+        "highlighted",
+        "orientation",
+        "attack",
+        "effects",
+        "damaged",
+        "pickup",
+        "inventory",
+        "reusable-across-roster",
+        "lit",
+        "unlit",
+        "fire"
+      ],
+      "illustrated_states": "resting, highlighted/pickup, horizontal orientations, raised/readied, activated, movement/attack effect, impact, disabled/broken/spent (per-row variation; inspect visually)",
+      "status": "SOURCE_ONLY",
+      "use_case": "World object / held attachment / attack overlay / projectile / inventory variant, where applicable",
+      "required_next_work": "Isolate each actual object, remove effects/shadows where inappropriate, alpha repair, create grip/hitbox anchor metadata, normalize native dimensions and verify at 320x180."
+    },
+    {
+      "asset_id": "P12-C-03",
+      "weapon_family": "parasol",
+      "category": "utility",
+      "source_sheet": "originals/arcane_weapon_sprite_atlas.png",
+      "source_row": 3,
+      "row_crop": "family_rows/P12-C-03_parasol_source_row.png",
+      "source_crop_xyxy": [
+        0,
+        545,
+        1448,
+        785
+      ],
+      "tags": [
+        "irreverents",
+        "standalone-weapon",
+        "no-character",
+        "source-sheet",
+        "utility",
+        "parasol",
+        "ground",
+        "highlighted",
+        "orientation",
+        "attack",
+        "effects",
+        "damaged",
+        "pickup",
+        "inventory",
+        "reusable-across-roster",
+        "open",
+        "closed",
+        "glide"
+      ],
+      "illustrated_states": "resting, highlighted/pickup, horizontal orientations, raised/readied, activated, movement/attack effect, impact, disabled/broken/spent (per-row variation; inspect visually)",
+      "status": "SOURCE_ONLY",
+      "use_case": "World object / held attachment / attack overlay / projectile / inventory variant, where applicable",
+      "required_next_work": "Isolate each actual object, remove effects/shadows where inappropriate, alpha repair, create grip/hitbox anchor metadata, normalize native dimensions and verify at 320x180."
+    },
+    {
+      "asset_id": "P12-C-04",
+      "weapon_family": "arcane_wand",
+      "category": "magic",
+      "source_sheet": "originals/arcane_weapon_sprite_atlas.png",
+      "source_row": 4,
+      "row_crop": "family_rows/P12-C-04_arcane_wand_source_row.png",
+      "source_crop_xyxy": [
+        0,
+        785,
+        1448,
+        1030
+      ],
+      "tags": [
+        "irreverents",
+        "standalone-weapon",
+        "no-character",
+        "source-sheet",
+        "magic",
+        "arcane-wand",
+        "ground",
+        "highlighted",
+        "orientation",
+        "attack",
+        "effects",
+        "damaged",
+        "pickup",
+        "inventory",
+        "reusable-across-roster",
+        "spell",
+        "charged"
+      ],
+      "illustrated_states": "resting, highlighted/pickup, horizontal orientations, raised/readied, activated, movement/attack effect, impact, disabled/broken/spent (per-row variation; inspect visually)",
+      "status": "SOURCE_ONLY",
+      "use_case": "World object / held attachment / attack overlay / projectile / inventory variant, where applicable",
+      "required_next_work": "Isolate each actual object, remove effects/shadows where inappropriate, alpha repair, create grip/hitbox anchor metadata, normalize native dimensions and verify at 320x180."
+    }
+  ],
+  "shared_gameplay_state_contract": {
+    "world_states": [
+      "ground_rest",
+      "drop_airborne",
+      "bounce_or_settle",
+      "pickup_highlight"
+    ],
+    "carrier_states": [
+      "grip_ready_right",
+      "grip_ready_left",
+      "raised",
+      "swing_start",
+      "swing_followthrough",
+      "thrust_or_fire_if_applicable",
+      "recoil"
+    ],
+    "projectile_states": [
+      "flight_right",
+      "flight_left",
+      "spin_or_arc",
+      "impact",
+      "recover_or_spent"
+    ],
+    "ui_states": [
+      "inventory",
+      "equipped",
+      "unavailable"
+    ],
+    "note": "This is a desired state contract, NOT a claim that all these states exist in the art sheets. Match states to actual weapon behavior."
+  },
+  "attachment_contract": {
+    "unit": "native game pixels",
+    "weapon_anchor": "grip_anchor (x,y) per frame",
+    "character_anchor": "hand_anchor (x,y) per hero pose",
+    "render_order": "equipment behind/front of character according to pose",
+    "mirroring": "flip horizontal when appropriate; verify asymmetrical attachments and directional attacks",
+    "collision": "weapon effect hitboxes separate from actor collision"
+  },
+  "tags_index": "tag_index.csv"
+}

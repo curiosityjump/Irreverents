@@ -2,6 +2,148 @@
 
 ---
 
+TOP CURRENT WEAPONS ROUTE — P12 STANDALONE CHARACTER-AGNOSTIC LIBRARY (2026-11-23 6:51 PM EST)
+
+PREFERRED ALL-WEAPONS SOURCE: https://drive.google.com/drive/folders/1nJzv1gR9853Fj6GB8yOkqXaTYx-Iim83
+
+EXACT CLAUDE HANDOFF WITH 12 DIRECT PER-WEAPON ROW LINKS, TAGS AND ENGINE RULE: https://docs.google.com/document/d/1sS6Dhg80ZlRDxeM7n1iJs7w1kdjKo7afYAy1iuvIA3A/edit
+
+P12-A sword/hammer/spear/shield: https://drive.google.com/file/d/1n3C3EFjxeubTsl-NjLjJXT6X205poe_p/view
+
+P12-B bomb/boomerang/hook/cannon: https://drive.google.com/file/d/1oSrFmF8aIo5jWGcSmf58ERmc8sasMunj/view
+
+P12-C star wand/torch/parasol/arcane wand: https://drive.google.com/file/d/17Yy74EJAa8qfYQGQI83-\_KjZ58cPjHXE/view
+
+Searchable tag_index.csv: https://drive.google.com/file/d/1FB2aXV0lV6G_wmusNgtl5g4HcRniVlRf/view; machine manifest https://drive.google.com/file/d/1Hd3H5-t5e5gFPkU96nlQUT3YyVai6pm-/view; full ZIP https://drive.google.com/file/d/1-WokzduDHyu9j_5KzWxbOJIidFV7aDJS/view.
+
+Owner rule: weapons are their own objects, never baked into any hero/NPC; one asset reusable by every character. A future native pack needs ground, ready right/left, attack/use, throw/projectile/impact/spent where applicable and inventory icons; grip/pivot/hitbox metadata. The 3 originals and 12 weapon-family crops NOW EXIST and are VISUAL SOURCES; NOT native independently extracted fixed-size runtime frames. P12 supersedes P11 carrier-embedded weapons as the preferred source; retain P11 as background art. WPN-001 Board updated to P12 / Reference ready, with link in actual delivery column P. HRO-006 and INT-015 cross-linked. No GitHub deployment claimed.
+
+MA-07 / AUD-002 — Castle Interior Theme — TECHNICAL PROTOTYPE, NOT PRODUCTION READY. 64s, 120 BPM, 4 stems + mix WAV/OGG 44.1kHz stereo; manifest. ZIP https://drive.google.com/file/d/1A6BMPW_QTwI2PSJR9MVlo9ZJ11mdB5UM/view ; folder https://drive.google.com/drive/folders/1nASUXxOYM0RK0vz17lRoMbElC415Ev_1 . Source REQ https://docs.google.com/document/d/1d94gDFA54-xtJJsDMhvo6Y8YJizC_TbDRfMyLkRCtCQ/edit . iPhone playback/loop quality untested. No GitHub integration. 2026-11-23 4:23 PM EST.
+
+ASSET LIBRARY -- START HERE
+
+RECENT DRIVE GAPS CLOSED — THREE CANON HERO BIBLES AND P11 ENEMY/WEAPON/ITEM SOURCES (2026-11-23, AFTERNOON EST)
+
+ACTUALLY CREATED: CANON HERO DIRECTORY https://drive.google.com/drive/folders/1rb8Oqfi-9HGI4Lwc_vIUBmAhaghkp6Zy
+
+HERO-01 Grappler https://drive.google.com/drive/folders/1XwlIZkX5E5nWDgVPSJBn5ONW8xSkPCym
+
+HERO-02 Rogue https://drive.google.com/drive/folders/1xPnAikN8FBl0U0Qrsv1tbh-FSI0W7js1
+
+HERO-03 Flyer https://drive.google.com/drive/folders/1XFpZiyFszqAbo9nN4K0McWT2cIv0H21G
+
+Each new hero folder has an unchanged copy of the controlling P03 three-row canon image, correct hero crop and pose row, 4x facial/costume reference, HERO_RULES.md, PROMPT_ANCHOR.txt, README_START_HERE.md, categorized working subfolders and 07 SOURCE REQUESTS/NEXT_REQUESTS.md. Use the actual visual PNG as source when generating new poses. No redesign of the three locked playable heroes. Their new pose animations are NOT complete merely because these folders now exist.
+
+ACTUALLY UPLOADED: P11 COPY-POWER ENEMIES AND ITEMS https://drive.google.com/drive/folders/1UfckIYSdob8h6090tYzqoUxnJQda4dGg
+
+P11-01 elemental fire/ice/spark/water/leaf/wind enemies: https://drive.google.com/file/d/1PXmBKicMBxg9m3cJBgOmMqALyJxGv6o0/view
+
+P11-02 bomb/cutter/stone/beam/wheel/shadow power enemies: https://drive.google.com/file/d/1lBGj-bhDDcJwc56WjUrgIwZKTEjwtWmC/view
+
+P11-03 weapons and gear in different visual contexts: https://drive.google.com/file/d/1SYzrVvO0L8OQrcAuTAtb0_bFsd4q7Hid/view
+
+P11-04 twelve utility/pickup item families: https://drive.google.com/file/d/1Atp1gz3LNHMtgTT9Z_UU5kmS5mTFb0sa/view
+
+SEARCH TAGS https://drive.google.com/file/d/1Q1BqlONG_4eWk9Ij5Gwqv1pkbtY12sS0/view
+
+MACHINE MANIFEST https://drive.google.com/file/d/1w3Hsj2A11B9t0jAB4WlnkSDsoAqQT9bH/view
+
+COMPLETE ZIP https://drive.google.com/file/d/13qLEAWNK9pay2oP5XXzVJ9RRcpm27gC2/view
+
+P11 STATUS: SOURCE ONLY, NOT ENGINE-READY NATIVE ANIMATION FRAMES. Alpha cleanup, named state extraction, fixed grid/pivots, item drop/held/attack variants, and 320x180 browser QA still needed. No GitHub/Railway deployment claim. Master Board links updated for 16 existing HRO/NPC/PWR/INT/UI rows; added ENM-001 ENM-002 WPN-001 ITM-001 new rows with status REFERENCE READY, not delivered.
+
+This completes the prior unperformed Drive routing, not the remaining requested game-art implementation.
+
+2026-11-23 2:51 PM EST — MA-06 / A02-01 ITEM 1 OUTDOORS THEME — AUDIO TECHNICAL PROTOTYPE
+
+Original 126 BPM, 32-bar (~60.952 s), 44.1kHz stereo WAV+OGG chiptune, 4 synchronized stems (melody/bass/drums/high_counter_line), plus stumble and snap_back short stings. Source-generated and ZIP integrity produced; NOT owner-approved, not phone auditioned, OGG browser loop-gap and musical quality unverified. STATUS: PROTOTYPE USABLE FOR CLAUDE INTEGRATION TEST — REQUESTED/NOT DELIVERED. ZIP https://drive.google.com/file/d/10HjntGcgYRRY201BggQ3pfZDxrSO82JA/view ; folder https://drive.google.com/drive/folders/1FqXjgUONOEoOW2d_GQUGk742U4RqcUnC ; manifest https://drive.google.com/file/d/1czmNFx_lYr1kA1H8MAAlNjx-Xd15CC5h/view . No GitHub commit. Next: listen to loop and variants on iPhone, check stem sync, adjust composition before promotion. MA-07+ untouched; MA-02 to MA-05 not duplicated.
+
+NEW GAME-IMPORTABLE CANDIDATES — MA-02/03/04/05 (2026-11-23)
+
+MA-02 TWO NATIVE PNG PIXEL FONT ATLASES, 95 ASCII glyphs 10×14 cells. MA-03 2 native 96×80 bandit tents plus decor; MA-04 5 palisade 64×48 prefabs; MA-05 two 96×64 weapons racks and supplies. 14 separated true RGBA prop PNGs, alpha 0/255, grid-aligned dimensions, manifest and actual 320×180 preview. These are candidate working assets in a coherent camp visual style, not flattened source sheets. Import test still pending, palisade variants not proven seamless autotiles.
+
+PRIMARY FOLDER: https://drive.google.com/drive/folders/19K9iDArd0wMXFucEZglrjIvLM6axcSga
+
+COMPLETE SOURCE/SPRITES/JSON ZIP https://drive.google.com/file/d/1nEicDwFpWc1eIreBIAJcfwk6JIyP8aDv/view
+
+QA GAME SCENE https://drive.google.com/file/d/1x0Xc8BPX3F43qB6Ijv0hIEZWb5qLWJmb/view
+
+FONT LIGHT https://drive.google.com/file/d/1aXk2j6xFJtcVPC_80XCPpPTrRhOkMIDj/view
+
+FONT DARK https://drive.google.com/file/d/1Z3Yd-n0NCiS5KyT31jeBhKVzOD-m94fo/view
+
+MANIFEST https://drive.google.com/file/d/1nxymOEcfd8k4qO3hwwSdGoM0tdrYjmdt/view
+
+Master Board production IDs UI-014 / INT-016. Source REQ: https://docs.google.com/document/d/1d94gDFA54-xtJJsDMhvo6Y8YJizC_TbDRfMyLkRCtCQ/edit . Recommended implementation: put native individual PNGs into app now, use 9px advance font glyph metadata, treat camp meshes as decorative until collision set; upgrade status only after real iPhone live QA. No previous owner-canon heroes changed.
+
+MA-01 / UI-001 — USE TOUCH BUTTON — 2026-11-23 2:24 PM EST
+
+STATUS: IMPORTABLE PROTOTYPE; NOT DELIVERED (iPhone semantic-readability test pending). Built a new 24×24 normal/pressed switch glyph from the EXISTING U08-01 original atlas, preserving all six earlier buttons byte-for-byte. Native RGBA, two individual PNGs, 48×24 strip, 168×48 extended atlas, manifest, 320×180 QA preview, and 6× nearest-neighbor contact. Uses illuminated door-mounted pushbutton to distinguish from purple Grab hand. Native alpha/dimensions checked; human legibility and actual phone browser integration not verified. ZIP https://drive.google.com/file/d/1l6rcxj36TqlVnUYXpXc7bhwxwNjbTjM6/view ; atlas https://drive.google.com/file/d/18GZG6bV--144CTbzlkQUrEk5SjhWQ5Zu/view ; manifest https://drive.google.com/file/d/1MAZ0ffowhAvdcPbqEzCMT78Kk7vrLXiz/view ; gameplay QA https://drive.google.com/file/d/1XQaHWB621X811RZAbpvYeT09oOxbUWeN/view. No GitHub integration claimed; MA-01 stays REQUESTED pending semantic acceptance.
+
+P10-TRN01-PREFAB-01 — SOURCE-DERIVED GRASS/DIRT PREFABS — 2026-11-23 1:31 PM EST
+
+13 distinct RGBA prefabs extracted from owner P10 TRN-01 row, 16px-aligned variable-size canvases, JSON manifest, 320×180 QA preview. NOT seamless 16×16 tile atlas, collision unassigned, white-matte repair approximate; source-only technical conversion, NOT full E01 delivery. ZIP https://drive.google.com/file/d/1dBDuUkQnYfX55mv7FZYRQui0y2yLt-la/view ; folder https://drive.google.com/drive/folders/1xAQaIl2x5XhpSeoj6bB_4_i5UOtktZ2t ; contact https://drive.google.com/file/d/15j_AtGdfTNsKIhPEA6nmDYcmXAt7tvMd/view. Original source: https://drive.google.com/drive/folders/12lQHr2RzLIP_uAAONlo1xekOYvUT3dcq . E01 REQ: https://docs.google.com/document/d/1KlKA9opw3zNbzDKwTOuOfM0BfJMjLDzxSQH4k2cV-GU/edit . Do not supersede approved terrain art or native P01 kit.
+
+P10 — OWNER-SUPPLIED CLEAN TERRAIN & INTERACTABLE SOURCE SHEETS; TAGGED LIBRARY (2026-11-23)
+
+SOURCE STATUS: user-supplied 1448×1086 WHITE-BACKED JPGs; not prematted/engine-ready transparent sprites or true 16×16 seamless tiles. Original images preserved. 20 original-resolution ROW CROPS in the Drive folder with stable IDs TRN-01–TRN-11 and INT-01–INT-09; \`tag_index.csv\` identifies content per row for searching, and \`manifest.json\` gives exact source bounding regions and tags.
+
+P10 FOLDER: https://drive.google.com/drive/folders/12lQHr2RzLIP_uAAONlo1xekOYvUT3dcq
+
+Terrain FULL source: https://drive.google.com/file/d/1N5ETaUgRQhQfZEzrpy2O7iVj3Db8myBR/view
+
+Mechanisms FULL source: https://drive.google.com/file/d/1WPKWdmGc0lTJd7FPKbEPDLwRbDqwhzvJ/view
+
+Tagged master CSV: https://drive.google.com/file/d/1Nd2DL2bhzRWEsSaJ6vXHTelbF0Z_qbnZ/view \| JSON metadata: https://drive.google.com/file/d/1FGdS63R_csalDLCXTJY57p3aF9FPeMaR/view
+
+20-group contact preview: https://drive.google.com/file/d/1aC6znP3NEpHVP7FD_a_WGgpETjcx8AYg/view \| Claude README: https://drive.google.com/file/d/1QDNHidElgr1ZfSQ8Z6ZwS-7y5bp9y_pp/view \| complete ZIP: https://drive.google.com/file/d/1qAqSW2JCp6DI53RMJZ3p2hDLYLHSOq01/view
+
+TERRAIN / BUILDING: TRN-01 grass/dirt; TRN-02 stone; TRN-03 ruins/cave arches; TRN-04 wood bridges/ladder; TRN-05 castle walls; TRN-06 sandstone ancient ruins; TRN-07 town roofs/storefronts; TRN-08 ice/snow; TRN-09 lava/fire; TRN-10 mushroom bounce; TRN-11 clouds/sky islands.
+
+INTERACTABLES: INT-01 chests/loot; INT-02 doors/gates/levers/pressure plates; INT-03 bells/horns/alarms/breakables; INT-04 ladders/winches/gears; INT-05 overhead hooks/minecart/moving platforms; INT-06 vents/secret walls/power stations; INT-07 rare power pedestals/teleport; INT-08 traps/spikes/beams/keys; INT-09 ability/elemental icons/pickups.
+
+CLAUDE ROUTING: Search the CSV by gameplay feature, open the corresponding row crop in P10, then extract/crop single asset, repair JPEG white matte and preserve highlights, create separate RGBA frames and state maps, test scale (320×180) and tile adjacency before changing status to game-ready. Do not silently replace owner's visually endorsed source with basic rectangles. If any row is used in the game, register derived asset ID and GitHub path separately; P10 source remains immutable.
+
+BKG-01 — EIGHT VERIFIED RUNTIME BIOME PANORAMAS (2026-11-23)
+
+STATUS: GAME-USABLE STATIC SCROLLING BACKGROUNDS; NOT LAYERED PARALLAX, NOT COLLISION OR TILESET. The eight original wide scene rows were cleaned/cropped without white gutters and exported as separate OPAQUE 1024×180 PNGs + lossless WebP, ready to draw into a 320×180 logical iPhone canvas with 0–704px scene offset. Tested PNG/WebP dimensions, opacity, 24 native 320×180 viewport samples, all-in-one ZIP integrity, manifest and browser QA demo. Does NOT change playable characters or levels. DO NOT regenerate a conceptual board in place of these runtime files.
+
+Production folder: https://drive.google.com/drive/folders/1pw3aCojPx3vvDGWHRt2f_ons-Rammisv
+
+Complete runtime ZIP: https://drive.google.com/file/d/1NOm8mss5MU0Jflp76dOQoz93lBLkiW22/view
+
+JSON metadata: https://drive.google.com/file/d/1SRy7UP9QdyE2zD9V7V3UWm9zXYINyNmJ/view
+
+Claude integration README: https://drive.google.com/file/d/1fnfm7SwW_IWDMUtR3x_107NI80Iv-S9W/view
+
+All eight 320×180 center previews: https://drive.google.com/file/d/1hjnLV2qv6b2DI8obuNn_Hs_Mjx7mdsbs/view
+
+Browser demo: https://drive.google.com/file/d/1tvpWeKLE5YmCFYWV3sjFnswvaAKQv1Sn/view
+
+Each directly importable PNG:
+
+1. Sunlit ruins: https://drive.google.com/file/d/1vEcoeP_Hv1_fvI0e1pFGwVVFzJoJVvJk/view
+
+2. Forest waterfall: https://drive.google.com/file/d/1QBksZpQXXWLveeM5zvnQ2qzTYl5paSNe/view
+
+3. Ice cavern: https://drive.google.com/file/d/1tbmhFd86J0axFPmfr5i4W9vxo9yJ1Ujk/view
+
+4. Sunset sky islands: https://drive.google.com/file/d/1Y-RPmdpm0RlCKQVzZY91UZ60kAnNl3oi/view
+
+5. Moonlit castle: https://drive.google.com/file/d/1LTBQgypN2M3U3g_FyDtlb-KbVU9da4BN/view
+
+6. Volcanic forge: https://drive.google.com/file/d/16E9xMQ6q94QuXUI3x5PTXcoa3lQJ3UBa/view
+
+7. Market town: https://drive.google.com/file/d/1FV1mLbP8iNIIBD9s1L4tDshD_URJunjH/view
+
+8. Evening iron quarry: https://drive.google.com/file/d/1xRgKo3YsFROa3ZioILTr6plW_qyHL-KH/view
+
+Integration: import one PNG/WebP at natural 1024×180, draw at x = -clamp(cameraX \* parallax,0,704) into a 320×180 logical canvas, disable image smoothing, and scale whole canvas with CSS pixelated rendering. DO NOT shrink panorama to 320px width. Clamp rather than horizontally repeat (edges are not seamless). Painted ledges/ground are NOT physical tiles; world collision and decorative sprites require separate layers. Source_crops folder preserves full-size original panels. Production sheet must route BKG-01 in relevant background/parallax/biome work rows without pretending three-layer parallax is completed.
+
+P09 — P07 NPC STATIC EXTRACTION / 2026-11-23 11:55 AM EST
+
+SOURCE P07 civilian/NPC/guard/king board: https://drive.google.com/file/d/1rnkPeLOL4fwcwNnvHH-C2uwiHblLnlz7/view . Created 12 distinct transparent 48×48 PNGs (2 source idle variants each of green civilian, blue civilian, spear guard, shield guard, king, cat), manifest JSON with pivots/source crops, 320×180 native-size QA preview and 2× contact sheet. ZIP https://drive.google.com/file/d/1-QaHnPNyvYTCmSdcufYbOL5L-vYWsf19/view ; preview https://drive.google.com/file/d/1VDOKogKcjbr3ePHBdfZxFX9PAc8a3FOJ/view ; folder https://drive.google.com/drive/folders/1LUm-MBHQhccNDRQBtTRnrmYRFxmKXQI3. STATUS: IMPORTABLE STATIC IDLE PROTOTYPE ONLY; no complete walk/mood/attack animation, no verified 32px compatibility, native reduction loses fine detail. NOT PRODUCTION READY; do not close NPC REQ or overwrite existing working assets. No canonical heroes altered.
+
 LATEST ASSET LIBRARY ROUTING — P07 & P08 (2026-11-23)
 
 Two additional full original source batches uploaded/verified. Handoff with 9 DIRECT PNG URLs, two manifests, README notes and ZIPs: https://docs.google.com/document/d/16-SUnXVRVz9Yu-ySxdD8FrdsFgz6POt-5BI4cyEk5Tc/edit

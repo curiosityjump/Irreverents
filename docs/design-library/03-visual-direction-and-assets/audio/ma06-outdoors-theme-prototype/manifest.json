@@ -1,0 +1,22 @@
+{
+  "asset_id": "MA-06 / A02-01 item 1",
+  "status": "TECHNICAL PROTOTYPE \u2014 NOT PHONE LISTENING APPROVED",
+  "sample_rate": 44100,
+  "channels": 2,
+  "bpm": 126,
+  "bars": 32,
+  "loop_seconds": 60.95238095238095,
+  "loop_samples": 2688000,
+  "stems": [
+    "outdoors_melody",
+    "outdoors_bass",
+    "outdoors_drums",
+    "outdoors_high_counter_line"
+  ],
+  "one_shots": [
+    "stumble",
+    "snap_back"
+  ],
+  "integration": "Start all four stems at identical sample offset; loop at sample N. OGG decoder gaplessness must be tested in actual browser. WAV is PCM reference.",
+  "qa": "Programmatic sample rate/duration and WAV file integrity verified; musical judgment and iPhone/browser loop listening pending."
+}

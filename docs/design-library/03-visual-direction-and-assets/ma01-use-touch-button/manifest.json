@@ -1,0 +1,37 @@
+{
+  "id": "MA-01",
+  "source": "U08-01",
+  "source_url": "https://drive.google.com/file/d/1TV9iop2_wZHgKDXaEbr7yjPMTVA8wIiF/view",
+  "version": "1.0",
+  "status": "importable prototype; semantic legibility requires live iPhone test",
+  "cell_size": [
+    24,
+    24
+  ],
+  "atlas": "u08_extended_atlas_168x48.png",
+  "glyph": "door-mounted pushbutton (not grab hand)",
+  "states": {
+    "normal": {
+      "x": 144,
+      "y": 0,
+      "w": 24,
+      "h": 24
+    },
+    "pressed": {
+      "x": 144,
+      "y": 24,
+      "w": 24,
+      "h": 24
+    }
+  },
+  "original_six_unchanged": true,
+  "qa": {
+    "alpha_values": "original U08 palette plus drawn opaque pixels",
+    "native_size": true,
+    "dimensions": [
+      168,
+      48
+    ],
+    "semantic_test": "pending human iPhone test"
+  }
+}

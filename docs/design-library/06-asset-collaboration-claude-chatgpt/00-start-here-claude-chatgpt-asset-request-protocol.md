@@ -2,6 +2,58 @@
 
 ---
 
+NEW DIRECT CLAUDE WEAPON HANDOFF — P12 (2026-11-23)
+
+Read first: https://docs.google.com/document/d/1sS6Dhg80ZlRDxeM7n1iJs7w1kdjKo7afYAy1iuvIA3A/edit
+
+Source folder https://drive.google.com/drive/folders/1nJzv1gR9853Fj6GB8yOkqXaTYx-Iim83; tags https://drive.google.com/file/d/1FB2aXV0lV6G_wmusNgtl5g4HcRniVlRf/view; machine manifest https://drive.google.com/file/d/1Hd3H5-t5e5gFPkU96nlQUT3YyVai6pm-/view. Twelve weapon families with separate unheld object drawings in 3 PNGs; use P12 instead of older carrier-embedded P11 weapon studies. Mandatory: each weapon is a reusable layer independent of H01/H02/H03 or NPC bodies. For actual integration, extract a separate RGBA image per applicable ground, held/right/left, windup/active/impact, thrown/spent and inventory state, with grip anchors, flips, pivots/hitboxes and hero hand-anchors. DO NOT call existing illustrative source rows native game-ready sprites or mark WPN-001 Production ready. Board WPN-001 currently Reference ready; no GitHub commit claimed. Update Board/Asset Library/request/changelog after validated native conversion.
+
+CLAUDE ART REQUEST ROUTING UPDATE
+
+RECENT DRIVE GAPS CLOSED — THREE CANON HERO BIBLES AND P11 ENEMY/WEAPON/ITEM SOURCES (2026-11-23, AFTERNOON EST)
+
+ACTUALLY CREATED: CANON HERO DIRECTORY https://drive.google.com/drive/folders/1rb8Oqfi-9HGI4Lwc_vIUBmAhaghkp6Zy
+
+HERO-01 Grappler https://drive.google.com/drive/folders/1XwlIZkX5E5nWDgVPSJBn5ONW8xSkPCym
+
+HERO-02 Rogue https://drive.google.com/drive/folders/1xPnAikN8FBl0U0Qrsv1tbh-FSI0W7js1
+
+HERO-03 Flyer https://drive.google.com/drive/folders/1XFpZiyFszqAbo9nN4K0McWT2cIv0H21G
+
+Each new hero folder has an unchanged copy of the controlling P03 three-row canon image, correct hero crop and pose row, 4x facial/costume reference, HERO_RULES.md, PROMPT_ANCHOR.txt, README_START_HERE.md, categorized working subfolders and 07 SOURCE REQUESTS/NEXT_REQUESTS.md. Use the actual visual PNG as source when generating new poses. No redesign of the three locked playable heroes. Their new pose animations are NOT complete merely because these folders now exist.
+
+ACTUALLY UPLOADED: P11 COPY-POWER ENEMIES AND ITEMS https://drive.google.com/drive/folders/1UfckIYSdob8h6090tYzqoUxnJQda4dGg
+
+P11-01 elemental fire/ice/spark/water/leaf/wind enemies: https://drive.google.com/file/d/1PXmBKicMBxg9m3cJBgOmMqALyJxGv6o0/view
+
+P11-02 bomb/cutter/stone/beam/wheel/shadow power enemies: https://drive.google.com/file/d/1lBGj-bhDDcJwc56WjUrgIwZKTEjwtWmC/view
+
+P11-03 weapons and gear in different visual contexts: https://drive.google.com/file/d/1SYzrVvO0L8OQrcAuTAtb0_bFsd4q7Hid/view
+
+P11-04 twelve utility/pickup item families: https://drive.google.com/file/d/1Atp1gz3LNHMtgTT9Z_UU5kmS5mTFb0sa/view
+
+SEARCH TAGS https://drive.google.com/file/d/1Q1BqlONG_4eWk9Ij5Gwqv1pkbtY12sS0/view
+
+MACHINE MANIFEST https://drive.google.com/file/d/1w3Hsj2A11B9t0jAB4WlnkSDsoAqQT9bH/view
+
+COMPLETE ZIP https://drive.google.com/file/d/13qLEAWNK9pay2oP5XXzVJ9RRcpm27gC2/view
+
+P11 STATUS: SOURCE ONLY, NOT ENGINE-READY NATIVE ANIMATION FRAMES. Alpha cleanup, named state extraction, fixed grid/pivots, item drop/held/attack variants, and 320x180 browser QA still needed. No GitHub/Railway deployment claim. Master Board links updated for 16 existing HRO/NPC/PWR/INT/UI rows; added ENM-001 ENM-002 WPN-001 ITM-001 new rows with status REFERENCE READY, not delivered.
+
+This completes the prior unperformed Drive routing, not the remaining requested game-art implementation.
+
+LATEST LIVE HANDOFF — MA-02/MA-03/MA-04/MA-05 (2026-11-23)
+
+https://drive.google.com/drive/folders/19K9iDArd0wMXFucEZglrjIvLM6axcSga
+
+Actual native font atlases + 14 individual camp decor sprites are now present. Read manifest https://drive.google.com/file/d/1nxymOEcfd8k4qO3hwwSdGoM0tdrYjmdt/view, view QA https://drive.google.com/file/d/1x0Xc8BPX3F43qB6Ijv0hIEZWb5qLWJmb/view, download ZIP https://drive.google.com/file/d/1nEicDwFpWc1eIreBIAJcfwk6JIyP8aDv/view; see request details https://docs.google.com/document/d/1d94gDFA54-xtJJsDMhvo6Y8YJizC_TbDRfMyLkRCtCQ/edit . Production Board UI-014 and INT-016 tagged PROTOTYPE USABLE; Claude is expected to integrate + test at 320×180 and then update status/repo path. Do not mark master REQ fully delivered. Source-derived artwork replaces a rejected low-quality procedural art attempt.\n\nCLAUDE — FIND OWNER'S TERRAIN & MECHANISM PICKS (P10, 2026-11-23)
+
+https://drive.google.com/drive/folders/12lQHr2RzLIP_uAAONlo1xekOYvUT3dcq . Two EXACT owner-supplied white-background source sheets https://drive.google.com/file/d/1N5ETaUgRQhQfZEzrpy2O7iVj3Db8myBR/view / https://drive.google.com/file/d/1WPKWdmGc0lTJd7FPKbEPDLwRbDqwhzvJ/view; 20 tagged row PNGs, searchable CSV https://drive.google.com/file/d/1Nd2DL2bhzRWEsSaJ6vXHTelbF0Z_qbnZ/view, source-crop metadata https://drive.google.com/file/d/1FGdS63R_csalDLCXTJY57p3aF9FPeMaR/view and README https://drive.google.com/file/d/1QDNHidElgr1ZfSQ8Z6ZwS-7y5bp9y_pp/view. Search by functional TAG (castle/ruins/ice/lava/mushroom/sky, door/gate, alarm, crate/barrel, minecart, rare-power, spikes, etc.). Use as the strongest SOURCE ART for relevant asset requests. These are NOT machine-ready alpha PNGs or tiled grid atlases until extraction, matte repair, state validation and 320×180 integration. Board source link updated on relevant rows. Do not duplicate production or ask for lower-quality replacements.
+
+CLAUDE: READY STATIC BIOME BACKGROUNDS BKG-01 (2026-11-23)
+
+Eight real 1024×180 runtime panoramic PNGs + WebPs, true 320×180 QA previews, high-res source crops, manifest, sample responsive browser viewer. Folder https://drive.google.com/drive/folders/1pw3aCojPx3vvDGWHRt2f_ons-Rammisv; ZIP https://drive.google.com/file/d/1NOm8mss5MU0Jflp76dOQoz93lBLkiW22/view; exact names and usage https://drive.google.com/file/d/1SRy7UP9QdyE2zD9V7V3UWm9zXYINyNmJ/view; README https://drive.google.com/file/d/1fnfm7SwW_IWDMUtR3x_107NI80Iv-S9W/view. Use immediately, and request separate genuine parallax layers if needed. Foreground painted platforms are NOT collision objects. Max scroll 704px; clamp; avoid horizontal repeat. Production Board should show BKG-01 as source for ENV-004/005/014 and applicable region work, but it does not fulfill 3-layer parallax requirement.
+
 NEW DELIVERIES P07/P08 — CHECK BEFORE REQUESTING MORE (2026-11-23)
 
 P07: https://drive.google.com/drive/folders/1PQO3UB9JbT8R5LPs6u66Nzz1JHgAHXB-

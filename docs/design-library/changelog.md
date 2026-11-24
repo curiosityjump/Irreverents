@@ -2,6 +2,110 @@
 
 ---
 
+2026-11-23 6:51 PM EST — P12 STANDALONE WEAPON SOURCE BATCH UPLOADED, TAGGED, ROUTED
+
+Uploaded/verified THREE untouched original RGBA illustrated weapon configuration sheets plus TWELVE individually named weapon-family source row crops, CSV searchable tag index, machine JSON manifest, labelled 12-family contact preview, README for Claude and complete ZIP. Folder https://drive.google.com/drive/folders/1nJzv1gR9853Fj6GB8yOkqXaTYx-Iim83. Direct category groups: P12-A sword/hammer/spear/shield https://drive.google.com/file/d/1n3C3EFjxeubTsl-NjLjJXT6X205poe_p/view; P12-B bomb/boomerang/grapple hook/cannon https://drive.google.com/file/d/1oSrFmF8aIo5jWGcSmf58ERmc8sasMunj/view; P12-C star wand/torch/parasol/arcane wand https://drive.google.com/file/d/17Yy74EJAa8qfYQGQI83-\_KjZ58cPjHXE/view. Direct per-family URLs and character-independent attachment contract in https://docs.google.com/document/d/1sS6Dhg80ZlRDxeM7n1iJs7w1kdjKo7afYAy1iuvIA3A/edit. User decided weapon assets MUST NEVER contain a baked-in carrier; use one reusable equipment layer across every hero/NPC and separate character hand anchors. Marked P12 SOURCE_ONLY, NOT native per-state runtime sprites; mixed alpha-fringe artifacts / illustrative effects still need processing, 320x180 test and actual game import. Master Production Board row WPN-001 edited in place to P12 preferred source, status Reference ready and Drive delivery path; linked HRO-006/INT-015. Root Asset Library, project 00 START HERE, asset SOP, Claude request protocol all updated. No GitHub/Railway integration claimed.
+
+2026-11-23 4:23 PM EST — MA-07 CASTLE INTERIOR THEME — NEW AUDIO TECHNICAL PROTOTYPE (NOT DELIVERED)
+
+Created original 64-second, 120 BPM ceremonial/clockwork castle theme with 4 synchronized stems (melody, bass, organ, percussion), full mix, WAV+OGG, manifest. All WAV files verified 44.1kHz stereo, exactly 2,822,400 samples (64s), with zero endpoint discontinuity in PCM; ZIP created and uploaded. Auditory quality, OGG browser seamlessness and real iPhone integration UNTESTED; this is NOT owner-approved or production-ready. No GitHub/Railway integration. ZIP https://drive.google.com/file/d/1A6BMPW_QTwI2PSJR9MVlo9ZJ11mdB5UM/view ; folder https://drive.google.com/drive/folders/1nASUXxOYM0RK0vz17lRoMbElC415Ev_1. MA-01 through MA-06 remain unchanged; MA-08+ still pending. Request stays OPEN.
+
+CHANGELOG 2026-11-23 AFTERNOON EST: Three hero-specific canon folders created with complete source crops, rules and prompt anchors; four P11 previously missing power-enemy/weapon/item sheets uploaded, indexed and tagged; 16 source links + 4 tracking rows added to production board. See catalog and direct paths.
+
+RECENT DRIVE GAPS CLOSED — THREE CANON HERO BIBLES AND P11 ENEMY/WEAPON/ITEM SOURCES (2026-11-23, AFTERNOON EST)
+
+ACTUALLY CREATED: CANON HERO DIRECTORY https://drive.google.com/drive/folders/1rb8Oqfi-9HGI4Lwc_vIUBmAhaghkp6Zy
+
+HERO-01 Grappler https://drive.google.com/drive/folders/1XwlIZkX5E5nWDgVPSJBn5ONW8xSkPCym
+
+HERO-02 Rogue https://drive.google.com/drive/folders/1xPnAikN8FBl0U0Qrsv1tbh-FSI0W7js1
+
+HERO-03 Flyer https://drive.google.com/drive/folders/1XFpZiyFszqAbo9nN4K0McWT2cIv0H21G
+
+Each new hero folder has an unchanged copy of the controlling P03 three-row canon image, correct hero crop and pose row, 4x facial/costume reference, HERO_RULES.md, PROMPT_ANCHOR.txt, README_START_HERE.md, categorized working subfolders and 07 SOURCE REQUESTS/NEXT_REQUESTS.md. Use the actual visual PNG as source when generating new poses. No redesign of the three locked playable heroes. Their new pose animations are NOT complete merely because these folders now exist.
+
+ACTUALLY UPLOADED: P11 COPY-POWER ENEMIES AND ITEMS https://drive.google.com/drive/folders/1UfckIYSdob8h6090tYzqoUxnJQda4dGg
+
+P11-01 elemental fire/ice/spark/water/leaf/wind enemies: https://drive.google.com/file/d/1PXmBKicMBxg9m3cJBgOmMqALyJxGv6o0/view
+
+P11-02 bomb/cutter/stone/beam/wheel/shadow power enemies: https://drive.google.com/file/d/1lBGj-bhDDcJwc56WjUrgIwZKTEjwtWmC/view
+
+P11-03 weapons and gear in different visual contexts: https://drive.google.com/file/d/1SYzrVvO0L8OQrcAuTAtb0_bFsd4q7Hid/view
+
+P11-04 twelve utility/pickup item families: https://drive.google.com/file/d/1Atp1gz3LNHMtgTT9Z_UU5kmS5mTFb0sa/view
+
+SEARCH TAGS https://drive.google.com/file/d/1Q1BqlONG_4eWk9Ij5Gwqv1pkbtY12sS0/view
+
+MACHINE MANIFEST https://drive.google.com/file/d/1w3Hsj2A11B9t0jAB4WlnkSDsoAqQT9bH/view
+
+COMPLETE ZIP https://drive.google.com/file/d/13qLEAWNK9pay2oP5XXzVJ9RRcpm27gC2/view
+
+P11 STATUS: SOURCE ONLY, NOT ENGINE-READY NATIVE ANIMATION FRAMES. Alpha cleanup, named state extraction, fixed grid/pivots, item drop/held/attack variants, and 320x180 browser QA still needed. No GitHub/Railway deployment claim. Master Board links updated for 16 existing HRO/NPC/PWR/INT/UI rows; added ENM-001 ENM-002 WPN-001 ITM-001 new rows with status REFERENCE READY, not delivered.
+
+This completes the prior unperformed Drive routing, not the remaining requested game-art implementation.
+
+2026-11-23 2:51 PM EST — MA-06 / A02-01 ITEM 1 OUTDOORS THEME — AUDIO TECHNICAL PROTOTYPE
+
+Original 126 BPM, 32-bar (~60.952 s), 44.1kHz stereo WAV+OGG chiptune, 4 synchronized stems (melody/bass/drums/high_counter_line), plus stumble and snap_back short stings. Source-generated and ZIP integrity produced; NOT owner-approved, not phone auditioned, OGG browser loop-gap and musical quality unverified. STATUS: PROTOTYPE USABLE FOR CLAUDE INTEGRATION TEST — REQUESTED/NOT DELIVERED. ZIP https://drive.google.com/file/d/10HjntGcgYRRY201BggQ3pfZDxrSO82JA/view ; folder https://drive.google.com/drive/folders/1FqXjgUONOEoOW2d_GQUGk742U4RqcUnC ; manifest https://drive.google.com/file/d/1czmNFx_lYr1kA1H8MAAlNjx-Xd15CC5h/view . No GitHub commit. Next: listen to loop and variants on iPhone, check stem sync, adjust composition before promotion. MA-07+ untouched; MA-02 to MA-05 not duplicated.
+
+2026-11-23 · Afternoon EST — MA-02/03/04/05 FIRST NATIVE MISSING-ASSETS DELIVERY (PROTOTYPE USABLE)
+
+Claude requested 27 missing assets. Produced and uploaded 2 pixel-game bitmap font atlases (ASCII 32–126) and 14 original visual-source-derived bandit-camp props: red tents, palisades and weapon racks plus related environment furnishings; actual RGBA PNGs with hard alpha and grid-aligned dimensions, manifest, ZIP, 320×180 QA preview. Rejected the initial blocky procedural prop draft and substituted source-derived approved-style artwork. Added Master Board UI-014 + INT-016 rows, flagged Prototype usable pending Claude's actual phone/gameplay quality check. Updated root Asset Library, missing-assets request, and project start page. MA-01 still pending iPhone semantic test, MA-06+ remain requested. No live GitHub integration claimed.
+
+Folder: https://drive.google.com/drive/folders/19K9iDArd0wMXFucEZglrjIvLM6axcSga
+
+ZIP https://drive.google.com/file/d/1nEicDwFpWc1eIreBIAJcfwk6JIyP8aDv/view
+
+Preview https://drive.google.com/file/d/1x0Xc8BPX3F43qB6Ijv0hIEZWb5qLWJmb/view
+
+Manifest https://drive.google.com/file/d/1nxymOEcfd8k4qO3hwwSdGoM0tdrYjmdt/view
+
+MA request https://docs.google.com/document/d/1d94gDFA54-xtJJsDMhvo6Y8YJizC_TbDRfMyLkRCtCQ/edit
+
+Board https://docs.google.com/spreadsheets/d/1rzixv5r4QWs7PKLYJ0e_sreLy0LjTdgua8uXKeTJpSE/edit
+
+MA-01 / UI-001 — USE TOUCH BUTTON — 2026-11-23 2:24 PM EST
+
+STATUS: IMPORTABLE PROTOTYPE; NOT DELIVERED (iPhone semantic-readability test pending). Built a new 24×24 normal/pressed switch glyph from the EXISTING U08-01 original atlas, preserving all six earlier buttons byte-for-byte. Native RGBA, two individual PNGs, 48×24 strip, 168×48 extended atlas, manifest, 320×180 QA preview, and 6× nearest-neighbor contact. Uses illuminated door-mounted pushbutton to distinguish from purple Grab hand. Native alpha/dimensions checked; human legibility and actual phone browser integration not verified. ZIP https://drive.google.com/file/d/1l6rcxj36TqlVnUYXpXc7bhwxwNjbTjM6/view ; atlas https://drive.google.com/file/d/18GZG6bV--144CTbzlkQUrEk5SjhWQ5Zu/view ; manifest https://drive.google.com/file/d/1MAZ0ffowhAvdcPbqEzCMT78Kk7vrLXiz/view ; gameplay QA https://drive.google.com/file/d/1XQaHWB621X811RZAbpvYeT09oOxbUWeN/view. No GitHub integration claimed; MA-01 stays REQUESTED pending semantic acceptance.
+
+2026-11-23 1:31 PM EST — P10 TRN-01 OWNER ART CONVERSION
+
+Created 13 separate transparent source-derived grassy terrain prefabs from owner P10 TRN-01, plus 16px-aligned canvases, JSON manifest and 320×180 QA preview. Uploaded ZIP and previews. Status PARTIAL TECHNICAL PROTOTYPE, not seamless native tiles or E01 completion. Request/catalog updated; original P10 source unchanged. https://drive.google.com/drive/folders/1xAQaIl2x5XhpSeoj6bB_4_i5UOtktZ2t
+
+2026-11-23 · EST — P10 OWNER-SUPPLIED TERRAIN & INTERACTABLE SOURCE LIBRARY
+
+Preserved user's two exact white-background 1448×1086 source JPGs. Cropped them losslessly into 11 terrain/biome source groups (TRN-01…11) and 9 interactable/hazard/loot source groups (INT-01…09), created full searchable tag_index.csv and manifest.json with bounding regions, complete ZIP, contact preview and README. Uploaded 20 individual row crops and original sheets to the functional art folder; added exact source links to root catalog/start, request protocol, and Master Production Board. Technical status SOURCE_ONLY: per-item alpha/matte and grid/interaction QA still required.
+
+P10 https://drive.google.com/drive/folders/12lQHr2RzLIP_uAAONlo1xekOYvUT3dcq
+
+Terrain source https://drive.google.com/file/d/1N5ETaUgRQhQfZEzrpy2O7iVj3Db8myBR/view
+
+Interactables source https://drive.google.com/file/d/1WPKWdmGc0lTJd7FPKbEPDLwRbDqwhzvJ/view
+
+Search tags https://drive.google.com/file/d/1Nd2DL2bhzRWEsSaJ6vXHTelbF0Z_qbnZ/view
+
+Manifest https://drive.google.com/file/d/1FGdS63R_csalDLCXTJY57p3aF9FPeMaR/view
+
+2026-11-23 · Eastern time — BKG-01 EIGHT RUNTIME BIOME BACKGROUNDS DELIVERED
+
+Converted two four-panel illustrated biome sheets into EIGHT named, independently importable 1024×180 opaque RGBA PNGs and lossless WebPs, plus 8 high-res source crops, 24 original 320×180 viewport QA crops, responsive 320×180 browser demo, JSON manifest and complete ZIP. Verified exported dimensions/opacity, sample previews, ZIP integrity; uploaded into proper art-root BKG-01 production folder. Usable flat scrolling scenes; NOT colliding tiles or separately authored three-layer parallax. Root catalog and project start updated; relevant production-board rows routed without false status promotion. No GitHub or Railway changes made.
+
+Folder: https://drive.google.com/drive/folders/1pw3aCojPx3vvDGWHRt2f_ons-Rammisv
+
+Complete ZIP: https://drive.google.com/file/d/1NOm8mss5MU0Jflp76dOQoz93lBLkiW22/view
+
+Manifest: https://drive.google.com/file/d/1SRy7UP9QdyE2zD9V7V3UWm9zXYINyNmJ/view
+
+QA mosaic: https://drive.google.com/file/d/1hjnLV2qv6b2DI8obuNn_Hs_Mjx7mdsbs/view
+
+Art catalog: https://docs.google.com/document/d/1bnr7GUgrYBVVY0BMkwx4qRPvW45Nk4grn-Tk6THcoY8/edit
+
+Board: https://docs.google.com/spreadsheets/d/1rzixv5r4QWs7PKLYJ0e_sreLy0LjTdgua8uXKeTJpSE/edit
+
+2026-11-23 11:55 AM EST — P09 PARTIAL NATIVE NPC EXTRACTION
+
+Converted P07 compact NPC sheet into 12 separate transparent 48px idle prototype frames and validated six types in 320×180 composite. Uploaded https://drive.google.com/file/d/1-QaHnPNyvYTCmSdcufYbOL5L-vYWsf19/view and https://drive.google.com/file/d/1VDOKogKcjbr3ePHBdfZxFX9PAc8a3FOJ/view; indexed in catalog and relevant open REQs. No request marked delivered; 3 moods and complete animations remain missing.
+
 2026-11-23 · 11:30 AM EST — P07 AND P08 ADDITIONAL ART SOURCE BATCHES UPLOADED
 
 Uploaded/verified all nine original RGBA source sheets (5 P07: NPCs, enemies, interactables, terrain, HUD; 4 P08: townspeople, enemies, town/castle building blocks, ice/lava/ruins/dungeon) plus complete ZIPs, manifests and Claude READMEs in the correct Visual Direction and Assets / Current Pixel-Art Explorations folders. Files remain source-art/prototyping plates, NOT validated native seamless 16px tile or engine sprite frame atlases. Linked into root catalog and updated relevant production backlog work IDs; existing game-ready requests remain open.

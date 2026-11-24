@@ -1,6 +1,6 @@
 {
  "root_folder": "https://drive.google.com/drive/folders/1UEVhtK6SA8-8AkWD4w768ZLzx1UjO8DD",
- "last_sync_utc": "2026-11-23",
+ "last_sync_utc": "2026-11-24",
  "entries": [
   {
    "kind": "folder",
@@ -235,8 +235,638 @@
   },
   {
    "kind": "folder",
+   "id": "1FqXjgUONOEoOW2d_GQUGk742U4RqcUnC",
+   "drive_path": "/03 Visual Direction and Assets/Audio/MA06 Outdoors Theme Prototype"
+  },
+  {
+   "kind": "file",
+   "id": "10HjntGcgYRRY201BggQ3pfZDxrSO82JA",
+   "drive_path": "/03 Visual Direction and Assets/Audio/MA06 Outdoors Theme Prototype/MA06_outdoors_theme_v01.zip",
+   "repo_path": "03-visual-direction-and-assets/audio/ma06-outdoors-theme-prototype/ma06-outdoors-theme-v01/",
+   "sha256": "72118a671ad992c83261c994a0ec32bced2dfa632388ccb7b231260b766a86c1"
+  },
+  {
+   "kind": "file",
+   "id": "1czmNFx_lYr1kA1H8MAAlNjx-Xd15CC5h",
+   "drive_path": "/03 Visual Direction and Assets/Audio/MA06 Outdoors Theme Prototype/manifest.json",
+   "repo_path": "03-visual-direction-and-assets/audio/ma06-outdoors-theme-prototype/manifest.json",
+   "sha256": "a32dd70c1bc1dab119dcd21e500b5742f0d869ebfee04d2fb7b774b0d42ac286"
+  },
+  {
+   "kind": "folder",
+   "id": "1nASUXxOYM0RK0vz17lRoMbElC415Ev_1",
+   "drive_path": "/03 Visual Direction and Assets/Audio/MA07 Castle Interior"
+  },
+  {
+   "kind": "file",
+   "id": "1A6BMPW_QTwI2PSJR9MVlo9ZJ11mdB5UM",
+   "drive_path": "/03 Visual Direction and Assets/Audio/MA07 Castle Interior/MA07_castle_interior_v01.zip",
+   "repo_path": "03-visual-direction-and-assets/audio/ma07-castle-interior/ma07-castle-interior-v01/",
+   "sha256": "e0078e9b79b8bca520b1c9ddd30f10f8c1235863191c877c07319749961a61c5"
+  },
+  {
+   "kind": "folder",
+   "id": "1pw3aCojPx3vvDGWHRt2f_ons-Rammisv",
+   "drive_path": "/03 Visual Direction and Assets/BKG-01 — Runtime Biome Panoramas 1024x180"
+  },
+  {
+   "kind": "folder",
+   "id": "1eY9mXbLYYPydJoXbIGBGpsYK_xQNiqCa",
+   "drive_path": "/03 Visual Direction and Assets/BKG-01 — Runtime Biome Panoramas 1024x180/backgrounds"
+  },
+  {
+   "kind": "file",
+   "id": "1QBksZpQXXWLveeM5zvnQ2qzTYl5paSNe",
+   "drive_path": "/03 Visual Direction and Assets/BKG-01 — Runtime Biome Panoramas 1024x180/backgrounds/forest_waterfall_1024x180.png",
+   "repo_path": "03-visual-direction-and-assets/bkg-01-runtime-biome-panoramas-1024x180/backgrounds/forest-waterfall-1024x180.png",
+   "sha256": "576512ed84513302c7865e68a7c43bc1d02e0457061bf4f66afc2877a2d09708"
+  },
+  {
+   "kind": "file",
+   "id": "18nzwlH9kncLiEh0b_Vido-BGjnQh11tw",
+   "drive_path": "/03 Visual Direction and Assets/BKG-01 — Runtime Biome Panoramas 1024x180/backgrounds/forest_waterfall_1024x180.webp",
+   "repo_path": "03-visual-direction-and-assets/bkg-01-runtime-biome-panoramas-1024x180/backgrounds/forest-waterfall-1024x180.webp",
+   "sha256": "84047885babdad23c0978eb3cf2e3f93ea13ed4d054b5e33833b9910c9112214"
+  },
+  {
+   "kind": "file",
+   "id": "1tbmhFd86J0axFPmfr5i4W9vxo9yJ1Ujk",
+   "drive_path": "/03 Visual Direction and Assets/BKG-01 — Runtime Biome Panoramas 1024x180/backgrounds/ice_cavern_1024x180.png",
+   "repo_path": "03-visual-direction-and-assets/bkg-01-runtime-biome-panoramas-1024x180/backgrounds/ice-cavern-1024x180.png",
+   "sha256": "7e2c1e0f9d79b8b6839b7198becc6207dac8070798739c158890401c330450d1"
+  },
+  {
+   "kind": "file",
+   "id": "1Ny2amCd5ErSaIPRG8YI7hmcJVmowXmfO",
+   "drive_path": "/03 Visual Direction and Assets/BKG-01 — Runtime Biome Panoramas 1024x180/backgrounds/ice_cavern_1024x180.webp",
+   "repo_path": "03-visual-direction-and-assets/bkg-01-runtime-biome-panoramas-1024x180/backgrounds/ice-cavern-1024x180.webp",
+   "sha256": "5efde278f4398f20094b130f98f156425fd34c7f9ef326e0c20d6438a7fd86ff"
+  },
+  {
+   "kind": "file",
+   "id": "1xRgKo3YsFROa3ZioILTr6plW_qyHL-KH",
+   "drive_path": "/03 Visual Direction and Assets/BKG-01 — Runtime Biome Panoramas 1024x180/backgrounds/iron_quarry_evening_1024x180.png",
+   "repo_path": "03-visual-direction-and-assets/bkg-01-runtime-biome-panoramas-1024x180/backgrounds/iron-quarry-evening-1024x180.png",
+   "sha256": "9d9a714c42228fdd8f731df676c3ee5fffa1ff005d0e5b9f3bc950f4980df758"
+  },
+  {
+   "kind": "file",
+   "id": "1JGgYdNaAe8lj0pX-xPJwkIgsAk9l53jj",
+   "drive_path": "/03 Visual Direction and Assets/BKG-01 — Runtime Biome Panoramas 1024x180/backgrounds/iron_quarry_evening_1024x180.webp",
+   "repo_path": "03-visual-direction-and-assets/bkg-01-runtime-biome-panoramas-1024x180/backgrounds/iron-quarry-evening-1024x180.webp",
+   "sha256": "713ba4f40e17b2f28efc675252b416fdfb0767b116803eeaae9803c38af4df48"
+  },
+  {
+   "kind": "file",
+   "id": "1FV1mLbP8iNIIBD9s1L4tDshD_URJunjH",
+   "drive_path": "/03 Visual Direction and Assets/BKG-01 — Runtime Biome Panoramas 1024x180/backgrounds/market_town_day_1024x180.png",
+   "repo_path": "03-visual-direction-and-assets/bkg-01-runtime-biome-panoramas-1024x180/backgrounds/market-town-day-1024x180.png",
+   "sha256": "63ae99bfc66768e7d2611cd1fa2b32b2307f7d4214cc5e9e103924343698897d"
+  },
+  {
+   "kind": "file",
+   "id": "1XvcXpVbWLj-U53yj-h4i3_8pFJL6IYur",
+   "drive_path": "/03 Visual Direction and Assets/BKG-01 — Runtime Biome Panoramas 1024x180/backgrounds/market_town_day_1024x180.webp",
+   "repo_path": "03-visual-direction-and-assets/bkg-01-runtime-biome-panoramas-1024x180/backgrounds/market-town-day-1024x180.webp",
+   "sha256": "8c826b2bff2b64c612fb4b95c7a63f6692deee1e8f531643d2b8747f2445989d"
+  },
+  {
+   "kind": "file",
+   "id": "1LTBQgypN2M3U3g_FyDtlb-KbVU9da4BN",
+   "drive_path": "/03 Visual Direction and Assets/BKG-01 — Runtime Biome Panoramas 1024x180/backgrounds/moonlit_castle_1024x180.png",
+   "repo_path": "03-visual-direction-and-assets/bkg-01-runtime-biome-panoramas-1024x180/backgrounds/moonlit-castle-1024x180.png",
+   "sha256": "b82b071329aae650b38255aec96ee0af835516ca505c165b4b0d7b8f875b27dd"
+  },
+  {
+   "kind": "file",
+   "id": "1EvlGmMSjtuuA5j1Cq1K2x_h-z43A7Ah8",
+   "drive_path": "/03 Visual Direction and Assets/BKG-01 — Runtime Biome Panoramas 1024x180/backgrounds/moonlit_castle_1024x180.webp",
+   "repo_path": "03-visual-direction-and-assets/bkg-01-runtime-biome-panoramas-1024x180/backgrounds/moonlit-castle-1024x180.webp",
+   "sha256": "738e686f2c7e25736db4289f8ad463690c53dca85b126af561c7547d914e85bb"
+  },
+  {
+   "kind": "file",
+   "id": "1vEcoeP_Hv1_fvI0e1pFGwVVFzJoJVvJk",
+   "drive_path": "/03 Visual Direction and Assets/BKG-01 — Runtime Biome Panoramas 1024x180/backgrounds/ruins_day_1024x180.png",
+   "repo_path": "03-visual-direction-and-assets/bkg-01-runtime-biome-panoramas-1024x180/backgrounds/ruins-day-1024x180.png",
+   "sha256": "835c4139a17bec8cd9ce3ed7f3a62ed8516b52a9646063c89704c80c269da7a3"
+  },
+  {
+   "kind": "file",
+   "id": "1VzkFdtUsCrGUxxOIhO1Em9Fy0dayXb9A",
+   "drive_path": "/03 Visual Direction and Assets/BKG-01 — Runtime Biome Panoramas 1024x180/backgrounds/ruins_day_1024x180.webp",
+   "repo_path": "03-visual-direction-and-assets/bkg-01-runtime-biome-panoramas-1024x180/backgrounds/ruins-day-1024x180.webp",
+   "sha256": "a76a3c87a9000339a47e7d776543506d2af175b120519a37b0c652b6ec970b3d"
+  },
+  {
+   "kind": "file",
+   "id": "1Y-RPmdpm0RlCKQVzZY91UZ60kAnNl3oi",
+   "drive_path": "/03 Visual Direction and Assets/BKG-01 — Runtime Biome Panoramas 1024x180/backgrounds/sky_islands_sunset_1024x180.png",
+   "repo_path": "03-visual-direction-and-assets/bkg-01-runtime-biome-panoramas-1024x180/backgrounds/sky-islands-sunset-1024x180.png",
+   "sha256": "80e4883bc830e1360bad050ad3f3e93f54b6ca274ade441aef4dc5c64f5812dd"
+  },
+  {
+   "kind": "file",
+   "id": "11eERGkZEaDcN3gbPtAIU2g5ei_MYknrm",
+   "drive_path": "/03 Visual Direction and Assets/BKG-01 — Runtime Biome Panoramas 1024x180/backgrounds/sky_islands_sunset_1024x180.webp",
+   "repo_path": "03-visual-direction-and-assets/bkg-01-runtime-biome-panoramas-1024x180/backgrounds/sky-islands-sunset-1024x180.webp",
+   "sha256": "67d26f992fdf404b1cfd6c7b67a7648124b29b661c08c962df3933888ef4f1cc"
+  },
+  {
+   "kind": "file",
+   "id": "16E9xMQ6q94QuXUI3x5PTXcoa3lQJ3UBa",
+   "drive_path": "/03 Visual Direction and Assets/BKG-01 — Runtime Biome Panoramas 1024x180/backgrounds/volcanic_forge_1024x180.png",
+   "repo_path": "03-visual-direction-and-assets/bkg-01-runtime-biome-panoramas-1024x180/backgrounds/volcanic-forge-1024x180.png",
+   "sha256": "72d5eece0d9d0bded7dcbac46cf05d6a5802495a63fbca1da4d9959bc022a3f3"
+  },
+  {
+   "kind": "file",
+   "id": "18y7xLpXwB1TCAWrGszJADWbqobBklxbk",
+   "drive_path": "/03 Visual Direction and Assets/BKG-01 — Runtime Biome Panoramas 1024x180/backgrounds/volcanic_forge_1024x180.webp",
+   "repo_path": "03-visual-direction-and-assets/bkg-01-runtime-biome-panoramas-1024x180/backgrounds/volcanic-forge-1024x180.webp",
+   "sha256": "015ef7ab92b847a266e4611dd37bb5c77c5926c096205cdea9e6e2757e7159c8"
+  },
+  {
+   "kind": "folder",
+   "id": "1M3sqE3EizIqyuZqvveNXdTJNFYs8QQzW",
+   "drive_path": "/03 Visual Direction and Assets/BKG-01 — Runtime Biome Panoramas 1024x180/demo"
+  },
+  {
+   "kind": "file",
+   "id": "1tvpWeKLE5YmCFYWV3sjFnswvaAKQv1Sn",
+   "drive_path": "/03 Visual Direction and Assets/BKG-01 — Runtime Biome Panoramas 1024x180/demo/index.html",
+   "repo_path": "03-visual-direction-and-assets/bkg-01-runtime-biome-panoramas-1024x180/demo/index.html",
+   "sha256": "de8bd8c8604e14c1eb479a02b5d3efcf180ace8b121ac18ee729134a6677d569"
+  },
+  {
+   "kind": "folder",
+   "id": "1WAbu-HgrEO7Jw0efr_qbOJuMDvFkLcR3",
+   "drive_path": "/03 Visual Direction and Assets/BKG-01 — Runtime Biome Panoramas 1024x180/previews"
+  },
+  {
+   "kind": "file",
+   "id": "1hjnLV2qv6b2DI8obuNn_Hs_Mjx7mdsbs",
+   "drive_path": "/03 Visual Direction and Assets/BKG-01 — Runtime Biome Panoramas 1024x180/previews/all_8_center_320x180.png",
+   "repo_path": "03-visual-direction-and-assets/bkg-01-runtime-biome-panoramas-1024x180/previews/all-8-center-320x180.png",
+   "sha256": "5e474aa54f7040b6186c5bc80535705b2567a9996071ca99b1efd8795fd83099"
+  },
+  {
+   "kind": "file",
+   "id": "1UDBk41xJ0xYrNX6x_NUxsuVRYWIGx8L2",
+   "drive_path": "/03 Visual Direction and Assets/BKG-01 — Runtime Biome Panoramas 1024x180/previews/forest_waterfall_viewport_center_320x180.png",
+   "repo_path": "03-visual-direction-and-assets/bkg-01-runtime-biome-panoramas-1024x180/previews/forest-waterfall-viewport-center-320x180.png",
+   "sha256": "d11950a84ab5177896008bf3f656bbf9eaf54f2fdd695a90a0f024e4f9024434"
+  },
+  {
+   "kind": "file",
+   "id": "1Y6seLGUSONDE9yoLttkUh2KftjMqTsum",
+   "drive_path": "/03 Visual Direction and Assets/BKG-01 — Runtime Biome Panoramas 1024x180/previews/ice_cavern_viewport_center_320x180.png",
+   "repo_path": "03-visual-direction-and-assets/bkg-01-runtime-biome-panoramas-1024x180/previews/ice-cavern-viewport-center-320x180.png",
+   "sha256": "ed5970f4fcd854dbcb18132de91a81e5ca7e0343551d589e5f4487f7d860c693"
+  },
+  {
+   "kind": "file",
+   "id": "1m_Uqf1CaL3m3al26mS7zmJz7tWQ2I4lh",
+   "drive_path": "/03 Visual Direction and Assets/BKG-01 — Runtime Biome Panoramas 1024x180/previews/iron_quarry_evening_viewport_center_320x180.png",
+   "repo_path": "03-visual-direction-and-assets/bkg-01-runtime-biome-panoramas-1024x180/previews/iron-quarry-evening-viewport-center-320x180.png",
+   "sha256": "50c6f8cce4e42e9124c4aa19a18d0ab85cca31aee81d7177f405aa7792aff20c"
+  },
+  {
+   "kind": "file",
+   "id": "1_J2NsKfAbrq-o2z3qNTp62ZIfD5u1saV",
+   "drive_path": "/03 Visual Direction and Assets/BKG-01 — Runtime Biome Panoramas 1024x180/previews/market_town_day_viewport_center_320x180.png",
+   "repo_path": "03-visual-direction-and-assets/bkg-01-runtime-biome-panoramas-1024x180/previews/market-town-day-viewport-center-320x180.png",
+   "sha256": "87b0c12b44fff30c5bfd51504bb41432f2e42585100d644bc6e7acba7c2eea66"
+  },
+  {
+   "kind": "file",
+   "id": "1SqW-2Ze52s-O4ZbKnbSBh6zQ5BD_dYRH",
+   "drive_path": "/03 Visual Direction and Assets/BKG-01 — Runtime Biome Panoramas 1024x180/previews/moonlit_castle_viewport_center_320x180.png",
+   "repo_path": "03-visual-direction-and-assets/bkg-01-runtime-biome-panoramas-1024x180/previews/moonlit-castle-viewport-center-320x180.png",
+   "sha256": "7432eaae9fa31b95da3b5ceec8bcfc27940a7b16116560de74528e62ff11ec51"
+  },
+  {
+   "kind": "file",
+   "id": "1ykSN3tHmR3VISI-TZFlWkoHwTK58fMHs",
+   "drive_path": "/03 Visual Direction and Assets/BKG-01 — Runtime Biome Panoramas 1024x180/previews/ruins_day_viewport_center_320x180.png",
+   "repo_path": "03-visual-direction-and-assets/bkg-01-runtime-biome-panoramas-1024x180/previews/ruins-day-viewport-center-320x180.png",
+   "sha256": "f58bc9ed66c2b66eb9742e1fa8c89360c13642b31b025a8038804a366121cbe3"
+  },
+  {
+   "kind": "file",
+   "id": "1Ef_9lp_A5x-f3h5z7lROK20SnwZx2PlM",
+   "drive_path": "/03 Visual Direction and Assets/BKG-01 — Runtime Biome Panoramas 1024x180/previews/sky_islands_sunset_viewport_center_320x180.png",
+   "repo_path": "03-visual-direction-and-assets/bkg-01-runtime-biome-panoramas-1024x180/previews/sky-islands-sunset-viewport-center-320x180.png",
+   "sha256": "1b9e2e484bffece3f37788589871fd09a34abef6a873b5981cc0b49190744b68"
+  },
+  {
+   "kind": "file",
+   "id": "1-Iptm_0O7y4P27Et8ppmENi_Jdf6TOfE",
+   "drive_path": "/03 Visual Direction and Assets/BKG-01 — Runtime Biome Panoramas 1024x180/previews/volcanic_forge_viewport_center_320x180.png",
+   "repo_path": "03-visual-direction-and-assets/bkg-01-runtime-biome-panoramas-1024x180/previews/volcanic-forge-viewport-center-320x180.png",
+   "sha256": "e855f5888929ed8f9a73003887b921e10758e0a1ad23292e9b9bd2e5633a48ae"
+  },
+  {
+   "kind": "folder",
+   "id": "1Kox5NY2dR-W3eRj1DqXKB3yZulVUntQD",
+   "drive_path": "/03 Visual Direction and Assets/BKG-01 — Runtime Biome Panoramas 1024x180/source_crops"
+  },
+  {
+   "kind": "file",
+   "id": "1yJ0KBQFcxzZdDYPtsvA9gDuLy5fYF5GF",
+   "drive_path": "/03 Visual Direction and Assets/BKG-01 — Runtime Biome Panoramas 1024x180/source_crops/forest_waterfall_source_crop.png",
+   "repo_path": "03-visual-direction-and-assets/bkg-01-runtime-biome-panoramas-1024x180/source-crops/forest-waterfall-source-crop.png",
+   "sha256": "9d40ee31cda47b7daccde6ab5cf29904c8f702222d8587ed1321b1e1cdb74582"
+  },
+  {
+   "kind": "file",
+   "id": "1bas594Khc0ziC_yTgpjyxHo-g6HUc6c2",
+   "drive_path": "/03 Visual Direction and Assets/BKG-01 — Runtime Biome Panoramas 1024x180/source_crops/ice_cavern_source_crop.png",
+   "repo_path": "03-visual-direction-and-assets/bkg-01-runtime-biome-panoramas-1024x180/source-crops/ice-cavern-source-crop.png",
+   "sha256": "248a74e3e584bb63b11d61d12a21219422bb7a498b376068dcf454fdc2e37ea9"
+  },
+  {
+   "kind": "file",
+   "id": "1Q3-GLLAFdZHU4cLCjozbnvY0-27AcwPJ",
+   "drive_path": "/03 Visual Direction and Assets/BKG-01 — Runtime Biome Panoramas 1024x180/source_crops/iron_quarry_evening_source_crop.png",
+   "repo_path": "03-visual-direction-and-assets/bkg-01-runtime-biome-panoramas-1024x180/source-crops/iron-quarry-evening-source-crop.png",
+   "sha256": "0ac60ed40baf75ddbeecca0a136996edbd9143e4c9780905e73702d2a423939f"
+  },
+  {
+   "kind": "file",
+   "id": "1vResq44Ohcijyw3SggeCwWosZ78BV7Z2",
+   "drive_path": "/03 Visual Direction and Assets/BKG-01 — Runtime Biome Panoramas 1024x180/source_crops/market_town_day_source_crop.png",
+   "repo_path": "03-visual-direction-and-assets/bkg-01-runtime-biome-panoramas-1024x180/source-crops/market-town-day-source-crop.png",
+   "sha256": "28c2e7dc22f6e12cbbe88d6544da471fbe4542a904299056f478fc829d2c28c9"
+  },
+  {
+   "kind": "file",
+   "id": "1SOTThDyU41r9DOWKH04C6u1XlDYUprKF",
+   "drive_path": "/03 Visual Direction and Assets/BKG-01 — Runtime Biome Panoramas 1024x180/source_crops/moonlit_castle_source_crop.png",
+   "repo_path": "03-visual-direction-and-assets/bkg-01-runtime-biome-panoramas-1024x180/source-crops/moonlit-castle-source-crop.png",
+   "sha256": "0388aa22c7f16c05c342afb004af9f63dc6389a226c3e4a79417d400771e6d42"
+  },
+  {
+   "kind": "file",
+   "id": "10AX-tbnHUmCdqNTXCRjNq5ln8FGHyw5e",
+   "drive_path": "/03 Visual Direction and Assets/BKG-01 — Runtime Biome Panoramas 1024x180/source_crops/ruins_day_source_crop.png",
+   "repo_path": "03-visual-direction-and-assets/bkg-01-runtime-biome-panoramas-1024x180/source-crops/ruins-day-source-crop.png",
+   "sha256": "73bc081ab163d037e2c7b8fb77fbc0eabcea20c6c57617b27a4ecbab869aa0be"
+  },
+  {
+   "kind": "file",
+   "id": "11HHc9sq4UP_lFaeDVciUjkCJxprG-852",
+   "drive_path": "/03 Visual Direction and Assets/BKG-01 — Runtime Biome Panoramas 1024x180/source_crops/sky_islands_sunset_source_crop.png",
+   "repo_path": "03-visual-direction-and-assets/bkg-01-runtime-biome-panoramas-1024x180/source-crops/sky-islands-sunset-source-crop.png",
+   "sha256": "d96c6bb80f66115ebff675e216b68da3bfe9b8a536c9137821fe51cbeb348190"
+  },
+  {
+   "kind": "file",
+   "id": "1X2pRWHwnURF4c1pEiI0MnvVgNn-Cdjno",
+   "drive_path": "/03 Visual Direction and Assets/BKG-01 — Runtime Biome Panoramas 1024x180/source_crops/volcanic_forge_source_crop.png",
+   "repo_path": "03-visual-direction-and-assets/bkg-01-runtime-biome-panoramas-1024x180/source-crops/volcanic-forge-source-crop.png",
+   "sha256": "cce0f9f1e1ddfe702d6cf253e312cccdadf40b944f452f8e682580f9bc78c5d8"
+  },
+  {
+   "kind": "file",
+   "id": "1NOm8mss5MU0Jflp76dOQoz93lBLkiW22",
+   "drive_path": "/03 Visual Direction and Assets/BKG-01 — Runtime Biome Panoramas 1024x180/BKG-01_COMPLETE_RUNTIME_PACK.zip",
+   "repo_path": "03-visual-direction-and-assets/bkg-01-runtime-biome-panoramas-1024x180/bkg-01-complete-runtime-pack/",
+   "sha256": "08c4d52b56f13895c156bac9fba3d2bb3d401cf0238eea9ad57c7c1753640d84"
+  },
+  {
+   "kind": "file",
+   "id": "1SRy7UP9QdyE2zD9V7V3UWm9zXYINyNmJ",
+   "drive_path": "/03 Visual Direction and Assets/BKG-01 — Runtime Biome Panoramas 1024x180/manifest.json",
+   "repo_path": "03-visual-direction-and-assets/bkg-01-runtime-biome-panoramas-1024x180/manifest.json",
+   "sha256": "1f95350ef688b1a785cf38db9b122691fb454cd5e8336826f09d479887bce8f7"
+  },
+  {
+   "kind": "file",
+   "id": "1fnfm7SwW_IWDMUtR3x_107NI80Iv-S9W",
+   "drive_path": "/03 Visual Direction and Assets/BKG-01 — Runtime Biome Panoramas 1024x180/README_FOR_CLAUDE.md",
+   "repo_path": "03-visual-direction-and-assets/bkg-01-runtime-biome-panoramas-1024x180/readme-for-claude.md",
+   "sha256": "29ac6c4dc8a4b3ea6cf900c6f2809ff684e838c6e04f8eb7159141ec0974cab3"
+  },
+  {
+   "kind": "folder",
    "id": "1czssq_XVJgBYyk1XwqHPuWNXR5tFJzQu",
    "drive_path": "/03 Visual Direction and Assets/C02 — Hero Revision Source Studies"
+  },
+  {
+   "kind": "folder",
+   "id": "1rb8Oqfi-9HGI4Lwc_vIUBmAhaghkp6Zy",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked"
+  },
+  {
+   "kind": "folder",
+   "id": "1XwlIZkX5E5nWDgVPSJBn5ONW8xSkPCym",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-01 Grappler (Canon)"
+  },
+  {
+   "kind": "folder",
+   "id": "1qOHRJt2Dxfzb9KbabPJvXjfoXSlzFC4I",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-01 Grappler (Canon)/00 CANON LOCK"
+  },
+  {
+   "kind": "file",
+   "id": "1JvnFgNHWxFQRtMK7FvYprYSdAvysH3kI",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-01 Grappler (Canon)/00 CANON LOCK/CANON_FACE_AND_COSTUME_4X.png",
+   "repo_path": "03-visual-direction-and-assets/canon-heroes-identity-locked/hero-01-grappler-canon/00-canon-lock/canon-face-and-costume-4x.png",
+   "sha256": "569a15a14d85fd56aeef7190a4b36623c2e505f5892105e0cd11f22b59645e11"
+  },
+  {
+   "kind": "file",
+   "id": "1LMeUX2GrVNdhpIkPBGt-ynMlHim6p8hU",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-01 Grappler (Canon)/00 CANON LOCK/CANON_FULL_THREE_HERO_SOURCE.png",
+   "repo_path": "03-visual-direction-and-assets/canon-heroes-identity-locked/hero-01-grappler-canon/00-canon-lock/canon-full-three-hero-source.png",
+   "sha256": "015aedef16e820cbc7c34d7f15c058a150118c16b28f5c7320d7114cefd81201"
+  },
+  {
+   "kind": "file",
+   "id": "1b9tLbWvDlIE-52ueDsfc4jAKHj1CqqA4",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-01 Grappler (Canon)/00 CANON LOCK/CANON_POSE_ROW.png",
+   "repo_path": "03-visual-direction-and-assets/canon-heroes-identity-locked/hero-01-grappler-canon/00-canon-lock/canon-pose-row.png",
+   "sha256": "e03eab21c2ebf97b7448e23164788c0e7c213af8bd3f5ca15db925aeffd4e2d9"
+  },
+  {
+   "kind": "file",
+   "id": "1uo0RN27uksfcjsJFdcpsWbIwOyXkb68z",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-01 Grappler (Canon)/00 CANON LOCK/CANON_SINGLE_POSE.png",
+   "repo_path": "03-visual-direction-and-assets/canon-heroes-identity-locked/hero-01-grappler-canon/00-canon-lock/canon-single-pose.png",
+   "sha256": "8125dafd07c413df19e1aafb95fcd0bd4dc1b06e40b6d002d189fb6a615ecfdf"
+  },
+  {
+   "kind": "file",
+   "id": "18vcwoTqmbDOPxZVB2Eow15htdWVXiqmc",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-01 Grappler (Canon)/00 CANON LOCK/HERO_RULES.md",
+   "repo_path": "03-visual-direction-and-assets/canon-heroes-identity-locked/hero-01-grappler-canon/00-canon-lock/hero-rules.md",
+   "sha256": "852b6ce8cb68bb2d1e8e9bd3286320840d9668b5b531c10303530120eaf38e4a"
+  },
+  {
+   "kind": "file",
+   "id": "19cMeA8EFW9WmhnRLksNAibrBy3jhrh9u",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-01 Grappler (Canon)/00 CANON LOCK/PROMPT_ANCHOR.txt",
+   "repo_path": "03-visual-direction-and-assets/canon-heroes-identity-locked/hero-01-grappler-canon/00-canon-lock/prompt-anchor.txt",
+   "sha256": "a50f60c90a5b9765ac67e81f529d11406d71c367a5d6b597d200ebccc438afce"
+  },
+  {
+   "kind": "folder",
+   "id": "1yBueFwr2ltI52tBCFi9XJptf-dj6weud",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-01 Grappler (Canon)/01 IDENTITY REFERENCE"
+  },
+  {
+   "kind": "folder",
+   "id": "1mF24QFgiqmmAHioe--MHzsMcX0f6dDZg",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-01 Grappler (Canon)/02 EXPRESSIONS"
+  },
+  {
+   "kind": "folder",
+   "id": "1fDkWu3DuZNSl4Zg4XgcctgMy-ow372dS",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-01 Grappler (Canon)/03 MOVEMENT"
+  },
+  {
+   "kind": "folder",
+   "id": "127wogyO6Vbac9lHx5g0fOngS2CyxKJIQ",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-01 Grappler (Canon)/04 COMBAT & ABILITIES"
+  },
+  {
+   "kind": "folder",
+   "id": "1e9ZZaQQ8RpqetVfrMtGPzLgJ2I5Pg7z6",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-01 Grappler (Canon)/05 INTERACTION STATES"
+  },
+  {
+   "kind": "folder",
+   "id": "1WBjkO6dreE1lcjevW1-fwsNTuPchb01q",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-01 Grappler (Canon)/06 PARTY & UI"
+  },
+  {
+   "kind": "folder",
+   "id": "1lGN8Aw8reZMquu78wBKk8U--c8lstJXx",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-01 Grappler (Canon)/07 SOURCE REQUESTS"
+  },
+  {
+   "kind": "file",
+   "id": "13c56or40fY2PDl_oKZth2n0JjHVEAFO_",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-01 Grappler (Canon)/07 SOURCE REQUESTS/NEXT_REQUESTS.md",
+   "repo_path": "03-visual-direction-and-assets/canon-heroes-identity-locked/hero-01-grappler-canon/07-source-requests/next-requests.md",
+   "sha256": "3ed7f8ac7dc0a7fca3373a3185d5b17776af54c4d47932ef86b5a19e0c1afe6f"
+  },
+  {
+   "kind": "file",
+   "id": "1W5JFRi3J8evY-GnYV0Avsm8idSK5kn1-",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-01 Grappler (Canon)/README_START_HERE.md",
+   "repo_path": "03-visual-direction-and-assets/canon-heroes-identity-locked/hero-01-grappler-canon/readme-start-here.md",
+   "sha256": "f6dd6532e6a41d707f947c46f94f1c911a0afe6852d2e8b17d6356b8221cc13c"
+  },
+  {
+   "kind": "folder",
+   "id": "1xPnAikN8FBl0U0Qrsv1tbh-FSI0W7js1",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-02 Rogue (Canon)"
+  },
+  {
+   "kind": "folder",
+   "id": "1uS31H9V3MGlo8F6psJec93gFmR-V4uhc",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-02 Rogue (Canon)/00 CANON LOCK"
+  },
+  {
+   "kind": "file",
+   "id": "1SajMK5enzs7VpoJmAzphsC3Fd1qS5I0I",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-02 Rogue (Canon)/00 CANON LOCK/CANON_FACE_AND_COSTUME_4X.png",
+   "repo_path": "03-visual-direction-and-assets/canon-heroes-identity-locked/hero-02-rogue-canon/00-canon-lock/canon-face-and-costume-4x.png",
+   "sha256": "8a2099826a8f6dd523e4b06e46f18180e24e75ad4447d6f4361b02b7d2f2e877"
+  },
+  {
+   "kind": "file",
+   "id": "1_fSzQMfOBybcrpxXE2F8KMHZfj8i3pzc",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-02 Rogue (Canon)/00 CANON LOCK/CANON_FULL_THREE_HERO_SOURCE.png",
+   "repo_path": "03-visual-direction-and-assets/canon-heroes-identity-locked/hero-02-rogue-canon/00-canon-lock/canon-full-three-hero-source.png",
+   "sha256": "015aedef16e820cbc7c34d7f15c058a150118c16b28f5c7320d7114cefd81201"
+  },
+  {
+   "kind": "file",
+   "id": "1oTcPb3YdVRuCU2OrRzURyu2fVjrEqqri",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-02 Rogue (Canon)/00 CANON LOCK/CANON_POSE_ROW.png",
+   "repo_path": "03-visual-direction-and-assets/canon-heroes-identity-locked/hero-02-rogue-canon/00-canon-lock/canon-pose-row.png",
+   "sha256": "21bf2bc94d1b19e4b53d5e1f825a4f470942a03b3991b52010c50c02df169ef5"
+  },
+  {
+   "kind": "file",
+   "id": "1qUaHBbDmxiy86O58K4gbHm7MGIGzqjIK",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-02 Rogue (Canon)/00 CANON LOCK/CANON_SINGLE_POSE.png",
+   "repo_path": "03-visual-direction-and-assets/canon-heroes-identity-locked/hero-02-rogue-canon/00-canon-lock/canon-single-pose.png",
+   "sha256": "0ee6e8908897c66eca1ec82478eda7c5ef549ae2f27b7cc2d189c3c4923999fe"
+  },
+  {
+   "kind": "file",
+   "id": "1GDGDrjxmjQPn4LYh4WLmJRVebqH-LQ17",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-02 Rogue (Canon)/00 CANON LOCK/HERO_RULES.md",
+   "repo_path": "03-visual-direction-and-assets/canon-heroes-identity-locked/hero-02-rogue-canon/00-canon-lock/hero-rules.md",
+   "sha256": "159f1979f6639128f4cc2552a85d6de242f7440a1c554192e52c22ffaa3dfbd8"
+  },
+  {
+   "kind": "file",
+   "id": "1_uVVRtp1aSThH2ogiyE2VwCzNvoJk9hm",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-02 Rogue (Canon)/00 CANON LOCK/PROMPT_ANCHOR.txt",
+   "repo_path": "03-visual-direction-and-assets/canon-heroes-identity-locked/hero-02-rogue-canon/00-canon-lock/prompt-anchor.txt",
+   "sha256": "0fa21e8fe613fe0351512a85ad4a3305609767048d2b6876697e69c23d95ad42"
+  },
+  {
+   "kind": "folder",
+   "id": "15Q48bz4JPzKkldNYocoaFJfEyj0H4UzY",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-02 Rogue (Canon)/01 IDENTITY REFERENCE"
+  },
+  {
+   "kind": "folder",
+   "id": "1n9MhDF0pZiZawAfWt7F5ZmMOBnO-Z0kP",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-02 Rogue (Canon)/02 EXPRESSIONS"
+  },
+  {
+   "kind": "folder",
+   "id": "1vkz9kVapwr8fn_Cyd6Kh_BO-rwmpgTsx",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-02 Rogue (Canon)/03 MOVEMENT"
+  },
+  {
+   "kind": "folder",
+   "id": "1kHEG7l3UIife9q4hP1YJzObl7WhHpV5m",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-02 Rogue (Canon)/04 COMBAT & ABILITIES"
+  },
+  {
+   "kind": "folder",
+   "id": "1HFlsiHMUzF1W5DkLXpkpMlQvPjmGBu8B",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-02 Rogue (Canon)/05 INTERACTION STATES"
+  },
+  {
+   "kind": "folder",
+   "id": "1WUk0shN6MzQm4OkESItVfGtHvyevoKvC",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-02 Rogue (Canon)/06 PARTY & UI"
+  },
+  {
+   "kind": "folder",
+   "id": "16fv07gtIX7slVzGJwkhotS7-PohSouaG",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-02 Rogue (Canon)/07 SOURCE REQUESTS"
+  },
+  {
+   "kind": "file",
+   "id": "13Z1ptooRRvfHi_g-Y9MqopcQnHHTgxai",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-02 Rogue (Canon)/07 SOURCE REQUESTS/NEXT_REQUESTS.md",
+   "repo_path": "03-visual-direction-and-assets/canon-heroes-identity-locked/hero-02-rogue-canon/07-source-requests/next-requests.md",
+   "sha256": "5a4367f071b2203a3a7da600650b7cbe8dec6bf431dd58451d5be7bac70a786a"
+  },
+  {
+   "kind": "file",
+   "id": "1jwrnsdx-WG5nOolwfZ3I6LjoHxp4VGiH",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-02 Rogue (Canon)/README_START_HERE.md",
+   "repo_path": "03-visual-direction-and-assets/canon-heroes-identity-locked/hero-02-rogue-canon/readme-start-here.md",
+   "sha256": "dfd4970830aba9bc8fa8067de5ef3127302612c82f937952bafd6b11e954dcb9"
+  },
+  {
+   "kind": "folder",
+   "id": "1XFpZiyFszqAbo9nN4K0McWT2cIv0H21G",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-03 Flyer (Canon)"
+  },
+  {
+   "kind": "folder",
+   "id": "1wE-EkIPq5qtEFpqON1qrjkghg1oRgOFq",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-03 Flyer (Canon)/00 CANON LOCK"
+  },
+  {
+   "kind": "file",
+   "id": "17xKGApiHH9JKYvwrP31q4n0jkmzZiTPA",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-03 Flyer (Canon)/00 CANON LOCK/CANON_FACE_AND_COSTUME_4X.png",
+   "repo_path": "03-visual-direction-and-assets/canon-heroes-identity-locked/hero-03-flyer-canon/00-canon-lock/canon-face-and-costume-4x.png",
+   "sha256": "91f2aac226c7e2230c2ea4b8378eac025ded541b19a84c513e41ea521cbb6205"
+  },
+  {
+   "kind": "file",
+   "id": "16Pr5lbuYX6RNnRQ61a5GY2RuOGiSLCaJ",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-03 Flyer (Canon)/00 CANON LOCK/CANON_FULL_THREE_HERO_SOURCE.png",
+   "repo_path": "03-visual-direction-and-assets/canon-heroes-identity-locked/hero-03-flyer-canon/00-canon-lock/canon-full-three-hero-source.png",
+   "sha256": "015aedef16e820cbc7c34d7f15c058a150118c16b28f5c7320d7114cefd81201"
+  },
+  {
+   "kind": "file",
+   "id": "1oIHNmSIhmpbB9_CdJyxGoJN7nzwDAeoT",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-03 Flyer (Canon)/00 CANON LOCK/CANON_POSE_ROW.png",
+   "repo_path": "03-visual-direction-and-assets/canon-heroes-identity-locked/hero-03-flyer-canon/00-canon-lock/canon-pose-row.png",
+   "sha256": "da33d180ecec8f1fc83967721fbad08beb7d3ac7d6748786b8937e1e06aacc39"
+  },
+  {
+   "kind": "file",
+   "id": "1NjuGgc8Tx-EeRxeldrQ9gUhGRceKDyjy",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-03 Flyer (Canon)/00 CANON LOCK/CANON_SINGLE_POSE.png",
+   "repo_path": "03-visual-direction-and-assets/canon-heroes-identity-locked/hero-03-flyer-canon/00-canon-lock/canon-single-pose.png",
+   "sha256": "d7a56ae30e798ea17e4d88365238f74af15124c534f5c0890a4b26d05b45efeb"
+  },
+  {
+   "kind": "file",
+   "id": "1fQySKljBdZn9Po_INi-Sakbt7ufRQUh9",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-03 Flyer (Canon)/00 CANON LOCK/HERO_RULES.md",
+   "repo_path": "03-visual-direction-and-assets/canon-heroes-identity-locked/hero-03-flyer-canon/00-canon-lock/hero-rules.md",
+   "sha256": "62dc62527525b950f1c12241073b7306286327570337474dddd6e0d6886a8355"
+  },
+  {
+   "kind": "file",
+   "id": "1MBYrXoN2Z21FbFZg-Y_bXFJ2Ah0aJpsA",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-03 Flyer (Canon)/00 CANON LOCK/PROMPT_ANCHOR.txt",
+   "repo_path": "03-visual-direction-and-assets/canon-heroes-identity-locked/hero-03-flyer-canon/00-canon-lock/prompt-anchor.txt",
+   "sha256": "11ceef2af4b9c00b2084cb159a2e0098b01fc9580b76e91c15293067ea53e5a7"
+  },
+  {
+   "kind": "folder",
+   "id": "1zsr292HlTpI1lhGELP6By5-Z2Ipb_l6w",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-03 Flyer (Canon)/01 IDENTITY REFERENCE"
+  },
+  {
+   "kind": "folder",
+   "id": "1JaBLUQytteF4k1h4vSLRJ8tAaEID00oH",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-03 Flyer (Canon)/02 EXPRESSIONS"
+  },
+  {
+   "kind": "folder",
+   "id": "1SmiOqI2CJsq1eMR6FUrp1zzvPO17z2Nh",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-03 Flyer (Canon)/03 MOVEMENT"
+  },
+  {
+   "kind": "folder",
+   "id": "182HIEIj2NuluOIvV4i5fcC2FEbGARLjH",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-03 Flyer (Canon)/04 COMBAT & ABILITIES"
+  },
+  {
+   "kind": "folder",
+   "id": "1ZLaeSmUfaZHNeuukx9Z-g9vqVttcD3_E",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-03 Flyer (Canon)/05 INTERACTION STATES"
+  },
+  {
+   "kind": "folder",
+   "id": "1n_hg_o6fb4BEHWWDdjwRgg7T6ME9oON-",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-03 Flyer (Canon)/06 PARTY & UI"
+  },
+  {
+   "kind": "folder",
+   "id": "1GRiAmD70FbgiwhPHo8niMzlCLa09eSoS",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-03 Flyer (Canon)/07 SOURCE REQUESTS"
+  },
+  {
+   "kind": "file",
+   "id": "195z0wRev7b9ZhVmQbJ9X-BnBKK1a678Q",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-03 Flyer (Canon)/07 SOURCE REQUESTS/NEXT_REQUESTS.md",
+   "repo_path": "03-visual-direction-and-assets/canon-heroes-identity-locked/hero-03-flyer-canon/07-source-requests/next-requests.md",
+   "sha256": "a18582ef4c7bf9c8b4a1348748194877444b2da1764612c03385a8b98923a221"
+  },
+  {
+   "kind": "file",
+   "id": "1pFxXPLvWev8Tor9H7JTBn_6VohhQPZyv",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/HERO-03 Flyer (Canon)/README_START_HERE.md",
+   "repo_path": "03-visual-direction-and-assets/canon-heroes-identity-locked/hero-03-flyer-canon/readme-start-here.md",
+   "sha256": "1589dc1b023aee1ebb5fc70bf0a7ef724b66ab7aaa04f5f995de521ab57d5fe2"
+  },
+  {
+   "kind": "file",
+   "id": "1JTFTY9tnfHCL_iTO2PPAaRfPfkOm0mxh",
+   "drive_path": "/03 Visual Direction and Assets/Canon Heroes — Identity Locked/00_READ_FIRST — Canon Hero Routing.md",
+   "repo_path": "03-visual-direction-and-assets/canon-heroes-identity-locked/00-read-first-canon-hero-routing.md",
+   "sha256": "a4616185d450bb2e64ed1470557fc9cccc5cb382477c99aa5473028a90458010"
   },
   {
    "kind": "folder",
@@ -1142,6 +1772,436 @@
   },
   {
    "kind": "folder",
+   "id": "12lQHr2RzLIP_uAAONlo1xekOYvUT3dcq",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P10 — Owner-Selected Tagged Terrain and Interactables"
+  },
+  {
+   "kind": "folder",
+   "id": "1GiyrCfOUPga-UnpvoadoXddIGwWQ5nfc",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P10 — Owner-Selected Tagged Terrain and Interactables/preview"
+  },
+  {
+   "kind": "file",
+   "id": "1aC6znP3NEpHVP7FD_a_WGgpETjcx8AYg",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P10 — Owner-Selected Tagged Terrain and Interactables/preview/all_20_tagged_source_rows.jpg",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p10-owner-selected-tagged-terrain-and-interactables/preview/all-20-tagged-source-rows.jpg",
+   "sha256": "3ad858f386037f220c596af1c1b8669d8ce2d1e76c7892b718a4de41c00435ec"
+  },
+  {
+   "kind": "folder",
+   "id": "1mosPJW00FozYwr2sCwbZwuUFpDNLrbGt",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P10 — Owner-Selected Tagged Terrain and Interactables/row_crops"
+  },
+  {
+   "kind": "file",
+   "id": "14UWBXH7P-m1rno0-Gx2sFA6eTwPvGrTr",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P10 — Owner-Selected Tagged Terrain and Interactables/row_crops/INT-01_chests_loot_currency.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p10-owner-selected-tagged-terrain-and-interactables/row-crops/int-01-chests-loot-currency.png",
+   "sha256": "b5363f17c21c4776ebfa63d26d2834313f684d40fca61e9579839010e6050bbc"
+  },
+  {
+   "kind": "file",
+   "id": "1o5jYb7eFK_x3eX5AtcPbGeIOrPhcuzIh",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P10 — Owner-Selected Tagged Terrain and Interactables/row_crops/INT-02_doors_gates_levers_plates.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p10-owner-selected-tagged-terrain-and-interactables/row-crops/int-02-doors-gates-levers-plates.png",
+   "sha256": "08ec2f679a02394aaf89739db4be5e3e3ff3cfe44db1d5dd0ce6de5dcf832fda"
+  },
+  {
+   "kind": "file",
+   "id": "1_jsS04xf8H8KR1k8jc8qBP37xAYasCsV",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P10 — Owner-Selected Tagged Terrain and Interactables/row_crops/INT-03_alarms_breakables_barrels.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p10-owner-selected-tagged-terrain-and-interactables/row-crops/int-03-alarms-breakables-barrels.png",
+   "sha256": "d4f4d5ab9f710b6611b46e08bbabbf6154bb84e36802686ae7919e3dab425d9f"
+  },
+  {
+   "kind": "file",
+   "id": "10vc6lGcf--Q57IPR59uVs94aN513d2uT",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P10 — Owner-Selected Tagged Terrain and Interactables/row_crops/INT-04_ladders_winches_gears.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p10-owner-selected-tagged-terrain-and-interactables/row-crops/int-04-ladders-winches-gears.png",
+   "sha256": "fca1c5245c1d8f00f63884d95129deeae63a95f747f5c945d5a2f324da0954c5"
+  },
+  {
+   "kind": "file",
+   "id": "1gO1x2YlNb1L3EzQWLLRGQcUjqb6nR9pn",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P10 — Owner-Selected Tagged Terrain and Interactables/row_crops/INT-05_overhead_grabs_minecarts_platforms.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p10-owner-selected-tagged-terrain-and-interactables/row-crops/int-05-overhead-grabs-minecarts-platforms.png",
+   "sha256": "103f8f8d6cc66d0c497007eeb62c5741bd0b1d754113bc4de96fd85d6be10452"
+  },
+  {
+   "kind": "file",
+   "id": "1Uzufb_fKwxxK422o7SpTgPHDjlqUSb4z",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P10 — Owner-Selected Tagged Terrain and Interactables/row_crops/INT-06_vents_secret_walls_ability_sources.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p10-owner-selected-tagged-terrain-and-interactables/row-crops/int-06-vents-secret-walls-ability-sources.png",
+   "sha256": "8c0ff673aa194004926a690dd342a7c0c7da702f0e4229cd38c95e101f2c7951"
+  },
+  {
+   "kind": "file",
+   "id": "1S-PB0NlGm6IuMHxQrr7T6bgp4Fz4nMp6",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P10 — Owner-Selected Tagged Terrain and Interactables/row_crops/INT-07_rare_power_altar_teleport_pedestals.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p10-owner-selected-tagged-terrain-and-interactables/row-crops/int-07-rare-power-altar-teleport-pedestals.png",
+   "sha256": "72c9cb06c1a02bb8d4cc025e211d6e1ebc9f50f6f1e0766022f4014f0486a7df"
+  },
+  {
+   "kind": "file",
+   "id": "1mL4LxVGWRbl5aGXDCA2S7nQ-DBRLSVlD",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P10 — Owner-Selected Tagged Terrain and Interactables/row_crops/INT-08_traps_hazards_puzzle_beams.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p10-owner-selected-tagged-terrain-and-interactables/row-crops/int-08-traps-hazards-puzzle-beams.png",
+   "sha256": "a1782360badbf8f9d318bd774f85afb0ebd177dc0a8da1b87e660fa8225c3732"
+  },
+  {
+   "kind": "file",
+   "id": "1kXQjLs5tRTl2qI_Se2QA6MyetcBil4Ow",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P10 — Owner-Selected Tagged Terrain and Interactables/row_crops/INT-09_power_collectible_icon_row.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p10-owner-selected-tagged-terrain-and-interactables/row-crops/int-09-power-collectible-icon-row.png",
+   "sha256": "99ed8502f620c07d2cd568bf0b89798c0cb9de60abfeb88b12f36943cee33238"
+  },
+  {
+   "kind": "file",
+   "id": "1wXifQWF-XrT-i4iu6V3ZR_5iARc4OlNh",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P10 — Owner-Selected Tagged Terrain and Interactables/row_crops/TRN-01_grass_dirt_platforms.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p10-owner-selected-tagged-terrain-and-interactables/row-crops/trn-01-grass-dirt-platforms.png",
+   "sha256": "3a6272fd842e7d118c679d6974b9d9c17c8b63b34d8bb2d314542bb6a7352492"
+  },
+  {
+   "kind": "file",
+   "id": "1wO1zpHC9vxtjBZ0h9q9Gxc2uRjQve9cZ",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P10 — Owner-Selected Tagged Terrain and Interactables/row_crops/TRN-02_stone_walls_rocks_stairs.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p10-owner-selected-tagged-terrain-and-interactables/row-crops/trn-02-stone-walls-rocks-stairs.png",
+   "sha256": "0928a8943a82541715cf5d25d0ceabdb8e02598ba433f4995636537ec832d963"
+  },
+  {
+   "kind": "file",
+   "id": "1v5UQ__PbJsuN3Lg8hmIj2JEpaLQlM2r_",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P10 — Owner-Selected Tagged Terrain and Interactables/row_crops/TRN-03_ruin_arches_columns_caves.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p10-owner-selected-tagged-terrain-and-interactables/row-crops/trn-03-ruin-arches-columns-caves.png",
+   "sha256": "e71dcb07c9eca4c06c90444c21a4d3f8d9f47eb46f917625e754703e92f1d861"
+  },
+  {
+   "kind": "file",
+   "id": "1jjYPnMw-sBfJ-Zu7tbKbmFZKjlkqJhOC",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P10 — Owner-Selected Tagged Terrain and Interactables/row_crops/TRN-04_wooden_bridges_fences_ladder.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p10-owner-selected-tagged-terrain-and-interactables/row-crops/trn-04-wooden-bridges-fences-ladder.png",
+   "sha256": "4434bc5ebbc3e84e06378a7806b945235836df2476b8c81a462dd416d4318c12"
+  },
+  {
+   "kind": "file",
+   "id": "1nSjjdsFLAkpe79V8Ib_oG1SWOtthnJTg",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P10 — Owner-Selected Tagged Terrain and Interactables/row_crops/TRN-05_castle_cobble_battlements.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p10-owner-selected-tagged-terrain-and-interactables/row-crops/trn-05-castle-cobble-battlements.png",
+   "sha256": "860f901d0ca56018768e34945ac5636b7f151e2d21473d4677470d825bf63959"
+  },
+  {
+   "kind": "file",
+   "id": "1O2PU2y4dV0JcYDNIjn2vp2rFqlqpmqbH",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P10 — Owner-Selected Tagged Terrain and Interactables/row_crops/TRN-06_sandstone_ancient_ruins.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p10-owner-selected-tagged-terrain-and-interactables/row-crops/trn-06-sandstone-ancient-ruins.png",
+   "sha256": "213ce7e4ff4989d27af21d948871b12643ba03b599c60cd7dd194a4384d9bc9a"
+  },
+  {
+   "kind": "file",
+   "id": "1MaFLMBETcxam9IDr3GCdzfyHDKlW3EY2",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P10 — Owner-Selected Tagged Terrain and Interactables/row_crops/TRN-07_town_storefronts_roofs.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p10-owner-selected-tagged-terrain-and-interactables/row-crops/trn-07-town-storefronts-roofs.png",
+   "sha256": "5945ffa7a2a57bb8db65b3b6f7fdc6381d4aae654a862b04f062411dde095040"
+  },
+  {
+   "kind": "file",
+   "id": "1mV64bcQD3aHoQGCWpGwEy_qt4FqDfj8A",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P10 — Owner-Selected Tagged Terrain and Interactables/row_crops/TRN-08_ice_cavern_blocks_arches.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p10-owner-selected-tagged-terrain-and-interactables/row-crops/trn-08-ice-cavern-blocks-arches.png",
+   "sha256": "48eb5c6f484201aca983a19eca02c7153ff6bc717bd28a271507eb4a0675cc61"
+  },
+  {
+   "kind": "file",
+   "id": "11ZeU9FlL3QON4WVW_LTMILinbuPozsg7",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P10 — Owner-Selected Tagged Terrain and Interactables/row_crops/TRN-09_lava_volcano_rocks_spikes.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p10-owner-selected-tagged-terrain-and-interactables/row-crops/trn-09-lava-volcano-rocks-spikes.png",
+   "sha256": "91858692f7f0264af0abb093d6612440651e0798034de77b2c43d7f5d5204a5e"
+  },
+  {
+   "kind": "file",
+   "id": "1B6hp44C8NtGjJfpCv4JtzfKI2nDJBpG2",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P10 — Owner-Selected Tagged Terrain and Interactables/row_crops/TRN-10_mushroom_hollows_bounce_platforms.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p10-owner-selected-tagged-terrain-and-interactables/row-crops/trn-10-mushroom-hollows-bounce-platforms.png",
+   "sha256": "a68d36b769d2987c30e828ed976bf8b8f8444b93a9e4329f01d6d10d43273b45"
+  },
+  {
+   "kind": "file",
+   "id": "19JVsbYmZFCTKYmM9QSwER9dcMxSrsSdL",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P10 — Owner-Selected Tagged Terrain and Interactables/row_crops/TRN-11_cloud_platforms_sky_islands.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p10-owner-selected-tagged-terrain-and-interactables/row-crops/trn-11-cloud-platforms-sky-islands.png",
+   "sha256": "0322dc96a4f3fac8a8e6069d431666856419b6d9da153551b2ca268314a06136"
+  },
+  {
+   "kind": "folder",
+   "id": "1LJnpQpTa013yMdZKhC8yjmeL6SRrgxDt",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P10 — Owner-Selected Tagged Terrain and Interactables/source"
+  },
+  {
+   "kind": "file",
+   "id": "1WPKWdmGc0lTJd7FPKbEPDLwRbDqwhzvJ",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P10 — Owner-Selected Tagged Terrain and Interactables/source/interactables_mechanisms_pickups_FULL_SOURCE.jpg",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p10-owner-selected-tagged-terrain-and-interactables/source/interactables-mechanisms-pickups-full-source.jpg",
+   "sha256": "fe6d912e12d8629b0cee9a51229485a8691fc3147dc4d2c69e3527b96e4582ad"
+  },
+  {
+   "kind": "file",
+   "id": "1N5ETaUgRQhQfZEzrpy2O7iVj3Db8myBR",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P10 — Owner-Selected Tagged Terrain and Interactables/source/terrain_platform_building_blocks_FULL_SOURCE.jpg",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p10-owner-selected-tagged-terrain-and-interactables/source/terrain-platform-building-blocks-full-source.jpg",
+   "sha256": "103a8590ea80f6530cb32b01d60d9a5c334702f76f51a25ffccd684cc19a3ba1"
+  },
+  {
+   "kind": "file",
+   "id": "1FGdS63R_csalDLCXTJY57p3aF9FPeMaR",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P10 — Owner-Selected Tagged Terrain and Interactables/manifest.json",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p10-owner-selected-tagged-terrain-and-interactables/manifest.json",
+   "sha256": "aeaea4c12522645514775a6bbc5f14801db6ac82c430e9ecb8a8b478ecd06581"
+  },
+  {
+   "kind": "file",
+   "id": "1qAqSW2JCp6DI53RMJZ3p2hDLYLHSOq01",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P10 — Owner-Selected Tagged Terrain and Interactables/P10_FULL_TAGGED_SOURCE_PACK.zip",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p10-owner-selected-tagged-terrain-and-interactables/p10-full-tagged-source-pack/",
+   "sha256": "d55376febf0e2ff1ac530b8373b5afb52b0e8b5d98396e710c05bc68308cae95"
+  },
+  {
+   "kind": "file",
+   "id": "1QDNHidElgr1ZfSQ8Z6ZwS-7y5bp9y_pp",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P10 — Owner-Selected Tagged Terrain and Interactables/README_FOR_CLAUDE.md",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p10-owner-selected-tagged-terrain-and-interactables/readme-for-claude.md",
+   "sha256": "240a49b2a9aabc0a677b5d2f2b9a516a427340a364f2370a11893f067b352d3a"
+  },
+  {
+   "kind": "file",
+   "id": "1Nd2DL2bhzRWEsSaJ6vXHTelbF0Z_qbnZ",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P10 — Owner-Selected Tagged Terrain and Interactables/tag_index.csv",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p10-owner-selected-tagged-terrain-and-interactables/tag-index.csv",
+   "sha256": "1bcfc42084caff3e4c67dd9d05d17327909b3ecedf86c1afdac989ab5e4c56b3"
+  },
+  {
+   "kind": "folder",
+   "id": "1UfckIYSdob8h6090tYzqoUxnJQda4dGg",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P11 — Copy-Power Enemies Weapons and Items — SOURCE"
+  },
+  {
+   "kind": "file",
+   "id": "1PXmBKicMBxg9m3cJBgOmMqALyJxGv6o0",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P11 — Copy-Power Enemies Weapons and Items — SOURCE/chibi_elemental_enemy_sprite_atlas.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p11-copy-power-enemies-weapons-and-items-source/chibi-elemental-enemy-sprite-atlas.png",
+   "sha256": "a8c0d0f48ed5571cd417f1b28eff14d0a1a5d969aef28a2a50b83e73e0bfabf1"
+  },
+  {
+   "kind": "file",
+   "id": "1lBGj-bhDDcJwc56WjUrgIwZKTEjwtWmC",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P11 — Copy-Power Enemies Weapons and Items — SOURCE/chibi_enemy_sprite_atlas_sheet.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p11-copy-power-enemies-weapons-and-items-source/chibi-enemy-sprite-atlas-sheet.png",
+   "sha256": "8a56ab8fe6f517f66d741ead20ee40b2d654e7c5eaed892e035da2933332b0ec"
+  },
+  {
+   "kind": "file",
+   "id": "1SYzrVvO0L8OQrcAuTAtb0_bFsd4q7Hid",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P11 — Copy-Power Enemies Weapons and Items — SOURCE/flame_knight_weapon_sprite_atlas.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p11-copy-power-enemies-weapons-and-items-source/flame-knight-weapon-sprite-atlas.png",
+   "sha256": "b3ed841d81f03e356a4d289b023af524d5317b4fcb6422504c39b3ff3b0b2df8"
+  },
+  {
+   "kind": "file",
+   "id": "1w3Hsj2A11B9t0jAB4WlnkSDsoAqQT9bH",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P11 — Copy-Power Enemies Weapons and Items — SOURCE/manifest.json",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p11-copy-power-enemies-weapons-and-items-source/manifest.json",
+   "sha256": "76b6be4f96ac35824b24ffb3454d5a10623c97017a6afe0b775322bee93425fb"
+  },
+  {
+   "kind": "file",
+   "id": "13qLEAWNK9pay2oP5XXzVJ9RRcpm27gC2",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P11 — Copy-Power Enemies Weapons and Items — SOURCE/P11_SOURCE_COMPLETE.zip",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p11-copy-power-enemies-weapons-and-items-source/p11-source-complete/",
+   "sha256": "b357742395a9dd32500b9b185c838d6a8a94968383d4eb39178da7280fe42d51"
+  },
+  {
+   "kind": "file",
+   "id": "17goGmi0HU0ktNbTELQeFEzv6QQ5DnxMm",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P11 — Copy-Power Enemies Weapons and Items — SOURCE/README_FOR_CLAUDE.md",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p11-copy-power-enemies-weapons-and-items-source/readme-for-claude.md",
+   "sha256": "ebaabf1516836e09824256fb0688d1d1f10a52338903d4c09e40b50f9572586a"
+  },
+  {
+   "kind": "file",
+   "id": "1Q1BqlONG_4eWk9Ij5Gwqv1pkbtY12sS0",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P11 — Copy-Power Enemies Weapons and Items — SOURCE/tag_index.csv",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p11-copy-power-enemies-weapons-and-items-source/tag-index.csv",
+   "sha256": "53ef38f3754e2cb8833a02a54358bad8f16bf25e28d6522ee8f24e65932ae71c"
+  },
+  {
+   "kind": "file",
+   "id": "1Atp1gz3LNHMtgTT9Z_UU5kmS5mTFb0sa",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P11 — Copy-Power Enemies Weapons and Items — SOURCE/twelve_row_pixel_art_item_sprite_sheet.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p11-copy-power-enemies-weapons-and-items-source/twelve-row-pixel-art-item-sprite-sheet.png",
+   "sha256": "4b4547258a406021550d7d7cbef0a66566c33b27187c2aca0d87ebeb5c2cf894"
+  },
+  {
+   "kind": "folder",
+   "id": "1nJzv1gR9853Fj6GB8yOkqXaTYx-Iim83",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P12 — Standalone Weapons and Configurations — SOURCE"
+  },
+  {
+   "kind": "folder",
+   "id": "1OeWaZFkr9ZaC4PLsJtvkckgyc_HEMr0B",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P12 — Standalone Weapons and Configurations — SOURCE/family_rows"
+  },
+  {
+   "kind": "file",
+   "id": "1ZAgkN_bs2qwweP1fIkSE0U3SP_G-1y5x",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P12 — Standalone Weapons and Configurations — SOURCE/family_rows/P12-A-01_sword_source_row.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p12-standalone-weapons-and-configurations-source/family-rows/p12-a-01-sword-source-row.png",
+   "sha256": "a0188f36f7761e11de380b8a56cd36d8d6d8545c6a94be1d3baeb7ad8bd14694"
+  },
+  {
+   "kind": "file",
+   "id": "1Xw6AlLu6JaiKxEcuUN85-W_g4gRI3kU5",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P12 — Standalone Weapons and Configurations — SOURCE/family_rows/P12-A-02_hammer_source_row.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p12-standalone-weapons-and-configurations-source/family-rows/p12-a-02-hammer-source-row.png",
+   "sha256": "9f4cb34242b594643a3bbc052bdd10b3c8dab0a655e5bd35dfa85d0431d53b71"
+  },
+  {
+   "kind": "file",
+   "id": "1WJr7oSmSwu3F24N784MWY6c7f9Rr5yuk",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P12 — Standalone Weapons and Configurations — SOURCE/family_rows/P12-A-03_spear_source_row.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p12-standalone-weapons-and-configurations-source/family-rows/p12-a-03-spear-source-row.png",
+   "sha256": "77feb114b1411fd34d2c6df7a3d1c5a726748e15f6d239bc078ce9a5a71b78fa"
+  },
+  {
+   "kind": "file",
+   "id": "1WlfrEgpK-1iu1fCsxzgGIh1dsiR07WWP",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P12 — Standalone Weapons and Configurations — SOURCE/family_rows/P12-A-04_shield_source_row.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p12-standalone-weapons-and-configurations-source/family-rows/p12-a-04-shield-source-row.png",
+   "sha256": "9b82c330bab8d6a1641a0918a6c97b023b726e970b05029f7ae52a09dc59ee2f"
+  },
+  {
+   "kind": "file",
+   "id": "1mUIZRwW4RJMFNiWFJu5Gh7KDgOkfU04v",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P12 — Standalone Weapons and Configurations — SOURCE/family_rows/P12-B-01_bomb_source_row.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p12-standalone-weapons-and-configurations-source/family-rows/p12-b-01-bomb-source-row.png",
+   "sha256": "88ece1886cb9249d8813bdfb5124575033f4a2442224c27f4d940271004c3551"
+  },
+  {
+   "kind": "file",
+   "id": "1PokmNWMuDS-_xSxezEB2KnAUzO3nnDnS",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P12 — Standalone Weapons and Configurations — SOURCE/family_rows/P12-B-02_boomerang_source_row.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p12-standalone-weapons-and-configurations-source/family-rows/p12-b-02-boomerang-source-row.png",
+   "sha256": "477f51dd8bfa951182d243872de0b463e3140d97b3e4a99ca0f57075efc68c47"
+  },
+  {
+   "kind": "file",
+   "id": "1dUL4HrUw_Lkgy3-7wDloXfLjNj6WJUdL",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P12 — Standalone Weapons and Configurations — SOURCE/family_rows/P12-B-03_hook_grappler_source_row.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p12-standalone-weapons-and-configurations-source/family-rows/p12-b-03-hook-grappler-source-row.png",
+   "sha256": "7969ebdd1fe7d4ba32bf9840f7bf747db3451fc7bc023671465e58d1bf27ffb6"
+  },
+  {
+   "kind": "file",
+   "id": "1SH6wUaqCAjknqzUdHUuvzJ-0Ki3VJ5iN",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P12 — Standalone Weapons and Configurations — SOURCE/family_rows/P12-B-04_cannon_source_row.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p12-standalone-weapons-and-configurations-source/family-rows/p12-b-04-cannon-source-row.png",
+   "sha256": "e913fe564cc877a78d63c815f6307de2aa637a0dbe10d50b46fd43626addc9d3"
+  },
+  {
+   "kind": "file",
+   "id": "1k78RWO70FH4q0r5Fer1GMbUfDkW1iZ_C",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P12 — Standalone Weapons and Configurations — SOURCE/family_rows/P12-C-01_star_wand_source_row.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p12-standalone-weapons-and-configurations-source/family-rows/p12-c-01-star-wand-source-row.png",
+   "sha256": "a77bb3b2a26317fb1b773ef88fcef103eb28f24c63e57f20757c11e5958121a2"
+  },
+  {
+   "kind": "file",
+   "id": "1AzRXizeVn865aydaIea-8A2kcpldiRHu",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P12 — Standalone Weapons and Configurations — SOURCE/family_rows/P12-C-02_torch_source_row.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p12-standalone-weapons-and-configurations-source/family-rows/p12-c-02-torch-source-row.png",
+   "sha256": "338fcbbe4d4826479e3a0d8c7dd047dfaab917ea680134f85bc9c3697f494e14"
+  },
+  {
+   "kind": "file",
+   "id": "1C-ls-j9X63JeZjDgeYxsksgNQgoijRqO",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P12 — Standalone Weapons and Configurations — SOURCE/family_rows/P12-C-03_parasol_source_row.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p12-standalone-weapons-and-configurations-source/family-rows/p12-c-03-parasol-source-row.png",
+   "sha256": "70b77955e444932a5776b9e733e390800d171dea3f75adafb835d4414cb1f5d2"
+  },
+  {
+   "kind": "file",
+   "id": "1vzUemUA9IJmO8-nUXkYoQWoIGCc5d1ss",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P12 — Standalone Weapons and Configurations — SOURCE/family_rows/P12-C-04_arcane_wand_source_row.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p12-standalone-weapons-and-configurations-source/family-rows/p12-c-04-arcane-wand-source-row.png",
+   "sha256": "4d8b8aae8f72dd08192bfb353e712d869f0a59e0366839ef0020d54492d54bee"
+  },
+  {
+   "kind": "folder",
+   "id": "1XjnL1_YyO50qF2CparLj7-eqcUVX6qmP",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P12 — Standalone Weapons and Configurations — SOURCE/originals"
+  },
+  {
+   "kind": "file",
+   "id": "17Yy74EJAa8qfYQGQI83-_KjZ58cPjHXE",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P12 — Standalone Weapons and Configurations — SOURCE/originals/arcane_weapon_sprite_atlas.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p12-standalone-weapons-and-configurations-source/originals/arcane-weapon-sprite-atlas.png",
+   "sha256": "b0c7841d23d4a0e51f482a7ac3cbdfef89e562b2ef9a2085703fc060f99eb8d3"
+  },
+  {
+   "kind": "file",
+   "id": "1oSrFmF8aIo5jWGcSmf58ERmc8sasMunj",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P12 — Standalone Weapons and Configurations — SOURCE/originals/colorful_pixel_weapon_sprite_sheet.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p12-standalone-weapons-and-configurations-source/originals/colorful-pixel-weapon-sprite-sheet.png",
+   "sha256": "167a1c6cc00f0abf3886bd0ad97d580b7907fade95c2a0c7b2762bb8b18f858a"
+  },
+  {
+   "kind": "file",
+   "id": "1n3C3EFjxeubTsl-NjLjJXT6X205poe_p",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P12 — Standalone Weapons and Configurations — SOURCE/originals/kirby_style_weapon_atlas_sprite_sheet.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p12-standalone-weapons-and-configurations-source/originals/kirby-style-weapon-atlas-sprite-sheet.png",
+   "sha256": "353abf801954415c95e0d65eb834b577b8b80bdf986a61fb41bb8366415941b7"
+  },
+  {
+   "kind": "folder",
+   "id": "1iGgSWn4K8czaeZQSN_NeHSaMY7IwncNz",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P12 — Standalone Weapons and Configurations — SOURCE/previews"
+  },
+  {
+   "kind": "file",
+   "id": "1TBGqQQhTY17uiZm2bOdvPmAoo5OUdj58",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P12 — Standalone Weapons and Configurations — SOURCE/previews/all_12_weapon_families.jpg",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p12-standalone-weapons-and-configurations-source/previews/all-12-weapon-families.jpg",
+   "sha256": "b88081929f8705e46fe50e69f25081722ec6af0cdc70d8187a145b307b83955e"
+  },
+  {
+   "kind": "file",
+   "id": "1Hd3H5-t5e5gFPkU96nlQUT3YyVai6pm-",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P12 — Standalone Weapons and Configurations — SOURCE/manifest.json",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p12-standalone-weapons-and-configurations-source/manifest.json",
+   "sha256": "7a8c2d73ef724fde2055e412a770bd3b04635e4058e107572c2fdec7e6dff32b"
+  },
+  {
+   "kind": "file",
+   "id": "1-WokzduDHyu9j_5KzWxbOJIidFV7aDJS",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P12 — Standalone Weapons and Configurations — SOURCE/P12_COMPLETE_SOURCE_PACK.zip",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p12-standalone-weapons-and-configurations-source/p12-complete-source-pack/",
+   "sha256": "3e3e32ce76f4815a4373e822cc74854c0aa3b082ac98e0f890a708ed391973de"
+  },
+  {
+   "kind": "file",
+   "id": "1aw0RaWtOjecTKlDog_waKP2VKw8JKo-q",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P12 — Standalone Weapons and Configurations — SOURCE/README_FOR_CLAUDE.md",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p12-standalone-weapons-and-configurations-source/readme-for-claude.md",
+   "sha256": "03d0801bf143cee2c9238cdaab4f717834aa988986c814b434422dee830f2e4a"
+  },
+  {
+   "kind": "file",
+   "id": "1FB2aXV0lV6G_wmusNgtl5g4HcRniVlRf",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/P12 — Standalone Weapons and Configurations — SOURCE/tag_index.csv",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/p12-standalone-weapons-and-configurations-source/tag-index.csv",
+   "sha256": "d73879ff7bc2e228c95140860e9282a3ebfa7e4d02de75b1be69cc8449ccaf0f"
+  },
+  {
+   "kind": "folder",
    "id": "11Wli0oy1WAtgIHT4ZUPX5Nprs0nM3RBD",
    "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/Quiet pixel-art environment studies — reduced visual noise"
   },
@@ -1365,6 +2425,13 @@
   },
   {
    "kind": "file",
+   "id": "1AR_S2czlpUQaPl2HpLbWbqUOv7svasrf",
+   "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/Irreverents_Title_Screen_Concept_2026-11-23.png",
+   "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/irreverents-title-screen-concept-2026-11-23.png",
+   "sha256": "a49ef73da98b1e9edeca6f26d9e25cada16c706ec72233f63bf26a019aef8790"
+  },
+  {
+   "kind": "file",
    "id": "1s2xzQtWfZw_KJwf7xkuHA8cu1RqFs5kq",
    "drive_path": "/03 Visual Direction and Assets/Current Pixel-Art Explorations/Pixel aesthetic reference — approved direction.png",
    "repo_path": "03-visual-direction-and-assets/current-pixel-art-explorations/pixel-aesthetic-reference-approved-direction.png",
@@ -1454,6 +2521,279 @@
   },
   {
    "kind": "folder",
+   "id": "1gJcT6n81ecEpqqAFM_AN4ncFd67_2KQh",
+   "drive_path": "/03 Visual Direction and Assets/MA01 — Use Touch Button"
+  },
+  {
+   "kind": "file",
+   "id": "1-UfZjAE14Hu0_IZ-HO8jy-J3N2sqp_hI",
+   "drive_path": "/03 Visual Direction and Assets/MA01 — Use Touch Button/contact_6x.png",
+   "repo_path": "03-visual-direction-and-assets/ma01-use-touch-button/contact-6x.png",
+   "sha256": "e83f7cdacfd99abd5e998cc094e8002344b87109310afc2f588910fa43ab899e"
+  },
+  {
+   "kind": "file",
+   "id": "1l6rcxj36TqlVnUYXpXc7bhwxwNjbTjM6",
+   "drive_path": "/03 Visual Direction and Assets/MA01 — Use Touch Button/MA01_use_button_v1.zip",
+   "repo_path": "03-visual-direction-and-assets/ma01-use-touch-button/ma01-use-button-v1/",
+   "sha256": "302b83e1a25e9e29fa1505bdeac18a262bf09719cac3fbbfe4b82d694743f019"
+  },
+  {
+   "kind": "file",
+   "id": "1MAZ0ffowhAvdcPbqEzCMT78Kk7vrLXiz",
+   "drive_path": "/03 Visual Direction and Assets/MA01 — Use Touch Button/manifest.json",
+   "repo_path": "03-visual-direction-and-assets/ma01-use-touch-button/manifest.json",
+   "sha256": "60c01cc3edad6243df8290697c15d6d6cc0f5246c3d5ebaceea2af4b216ed6e0"
+  },
+  {
+   "kind": "file",
+   "id": "1XQaHWB621X811RZAbpvYeT09oOxbUWeN",
+   "drive_path": "/03 Visual Direction and Assets/MA01 — Use Touch Button/qa_320x180.png",
+   "repo_path": "03-visual-direction-and-assets/ma01-use-touch-button/qa-320x180.png",
+   "sha256": "9e64d380dd0076450a478df9e07fef616eab5ed9b00c95c073773c0469dd44c4"
+  },
+  {
+   "kind": "file",
+   "id": "1K86gt6-EJsD7HRZL6nHs4MGcdHVZAron",
+   "drive_path": "/03 Visual Direction and Assets/MA01 — Use Touch Button/README.txt",
+   "repo_path": "03-visual-direction-and-assets/ma01-use-touch-button/readme.txt",
+   "sha256": "8a733105223cf7b62222d14c04744b94a13844b3664775813bb48c868389c632"
+  },
+  {
+   "kind": "file",
+   "id": "18GZG6bV--144CTbzlkQUrEk5SjhWQ5Zu",
+   "drive_path": "/03 Visual Direction and Assets/MA01 — Use Touch Button/u08_extended_atlas_168x48.png",
+   "repo_path": "03-visual-direction-and-assets/ma01-use-touch-button/u08-extended-atlas-168x48.png",
+   "sha256": "bcbe1a57ff7b016f7c591b2ea33038883366ee626c8cb09da96fc046b62e18f3"
+  },
+  {
+   "kind": "file",
+   "id": "1lPq3sgV1ttB8lW8pcMof1-UJlnIEL5QU",
+   "drive_path": "/03 Visual Direction and Assets/MA01 — Use Touch Button/use-states-48x24.png",
+   "repo_path": "03-visual-direction-and-assets/ma01-use-touch-button/use-states-48x24.png",
+   "sha256": "c6f79163cd74fce836e9d2801780da330f4bef1c8f9786f11c58645005dd9e3b"
+  },
+  {
+   "kind": "file",
+   "id": "1lBW4ALCGKfgdeWDHugTitafeX51EXOJj",
+   "drive_path": "/03 Visual Direction and Assets/MA01 — Use Touch Button/use_normal.png",
+   "repo_path": "03-visual-direction-and-assets/ma01-use-touch-button/use-normal.png",
+   "sha256": "72b9b61bc61ce81ddac6f453cbfc0967c029bb58cd22c923950ec048c41b29f6"
+  },
+  {
+   "kind": "file",
+   "id": "1Lepjm2Ph43Rc7-Bij2dqHo1h80GpUZgz",
+   "drive_path": "/03 Visual Direction and Assets/MA01 — Use Touch Button/use_pressed.png",
+   "repo_path": "03-visual-direction-and-assets/ma01-use-touch-button/use-pressed.png",
+   "sha256": "4f9f3bece4e9e78e13d261ce2a319bb3213e0b416a80276434a9357a010b5c16"
+  },
+  {
+   "kind": "folder",
+   "id": "19K9iDArd0wMXFucEZglrjIvLM6axcSga",
+   "drive_path": "/03 Visual Direction and Assets/MA02–MA05 — Pixel Font and Bandit Camp Native Sprites v1"
+  },
+  {
+   "kind": "folder",
+   "id": "1nokFwZl_bsaBwkpFvmS72yff_ZMdRmRE",
+   "drive_path": "/03 Visual Direction and Assets/MA02–MA05 — Pixel Font and Bandit Camp Native Sprites v1/demo"
+  },
+  {
+   "kind": "file",
+   "id": "11G-Pfgn-fISjnfVy6gLF_J2e6uQOpWN9",
+   "drive_path": "/03 Visual Direction and Assets/MA02–MA05 — Pixel Font and Bandit Camp Native Sprites v1/demo/index.html",
+   "repo_path": "03-visual-direction-and-assets/ma02ma05-pixel-font-and-bandit-camp-native-sprites-v1/demo/index.html",
+   "sha256": "87f270d38655f6aa5ef31057f4a464a29b54e995b1e7b7504f0180974b4cd4e1"
+  },
+  {
+   "kind": "folder",
+   "id": "1Koclc_s9H4aFigWulzPLTXMRJqyJqbqh",
+   "drive_path": "/03 Visual Direction and Assets/MA02–MA05 — Pixel Font and Bandit Camp Native Sprites v1/font"
+  },
+  {
+   "kind": "file",
+   "id": "1Z3Yd-n0NCiS5KyT31jeBhKVzOD-m94fo",
+   "drive_path": "/03 Visual Direction and Assets/MA02–MA05 — Pixel Font and Bandit Camp Native Sprites v1/font/irreverents_pixel_dark_160x84.png",
+   "repo_path": "03-visual-direction-and-assets/ma02ma05-pixel-font-and-bandit-camp-native-sprites-v1/font/irreverents-pixel-dark-160x84.png",
+   "sha256": "ff9e3403f1b17c8362b7a9f45fa70531d5ee56e7652ea9964b39c9b12f8fdccd"
+  },
+  {
+   "kind": "file",
+   "id": "1aXk2j6xFJtcVPC_80XCPpPTrRhOkMIDj",
+   "drive_path": "/03 Visual Direction and Assets/MA02–MA05 — Pixel Font and Bandit Camp Native Sprites v1/font/irreverents_pixel_light_160x84.png",
+   "repo_path": "03-visual-direction-and-assets/ma02ma05-pixel-font-and-bandit-camp-native-sprites-v1/font/irreverents-pixel-light-160x84.png",
+   "sha256": "3bbfd4c7d682d11ab2becfc2cda1e9ed787e6f469151aa446857e4d3851bc976"
+  },
+  {
+   "kind": "folder",
+   "id": "1xtLdidLcoT0BVpSKw-33SFWhW9W36YG7",
+   "drive_path": "/03 Visual Direction and Assets/MA02–MA05 — Pixel Font and Bandit Camp Native Sprites v1/preview"
+  },
+  {
+   "kind": "file",
+   "id": "1iTd-fvFz-yUfyvIZORKVGDTbc9tVAP6Q",
+   "drive_path": "/03 Visual Direction and Assets/MA02–MA05 — Pixel Font and Bandit Camp Native Sprites v1/preview/font_characters_2x.png",
+   "repo_path": "03-visual-direction-and-assets/ma02ma05-pixel-font-and-bandit-camp-native-sprites-v1/preview/font-characters-2x.png",
+   "sha256": "cd8f6f09c9c14341168ee4aec1034678e1e94fcb416bd1ddd5636b3783314269"
+  },
+  {
+   "kind": "file",
+   "id": "1FnlkEZip5jZxR5NetfnqSOXXSHP41iIz",
+   "drive_path": "/03 Visual Direction and Assets/MA02–MA05 — Pixel Font and Bandit Camp Native Sprites v1/preview/gameplay_4x_nearest.png",
+   "repo_path": "03-visual-direction-and-assets/ma02ma05-pixel-font-and-bandit-camp-native-sprites-v1/preview/gameplay-4x-nearest.png",
+   "sha256": "eabdccac553f8381b0c29bb7cf88e83c879a232804bf153985b1c3fa806699ea"
+  },
+  {
+   "kind": "file",
+   "id": "1x0Xc8BPX3F43qB6Ijv0hIEZWb5qLWJmb",
+   "drive_path": "/03 Visual Direction and Assets/MA02–MA05 — Pixel Font and Bandit Camp Native Sprites v1/preview/native_gameplay_320x180.png",
+   "repo_path": "03-visual-direction-and-assets/ma02ma05-pixel-font-and-bandit-camp-native-sprites-v1/preview/native-gameplay-320x180.png",
+   "sha256": "eab235384bb3218d630e503d11080d3c6b6df5dfe92d30901a07912270fc9b14"
+  },
+  {
+   "kind": "file",
+   "id": "1sh_cRc60CbJoQKNWpvygLi9YCVOTfHb_",
+   "drive_path": "/03 Visual Direction and Assets/MA02–MA05 — Pixel Font and Bandit Camp Native Sprites v1/preview/prop_contact_1x.png",
+   "repo_path": "03-visual-direction-and-assets/ma02ma05-pixel-font-and-bandit-camp-native-sprites-v1/preview/prop-contact-1x.png",
+   "sha256": "e19c454db609b01096694b8a786bb99b739621185bc90d7a87acb3cf40706641"
+  },
+  {
+   "kind": "folder",
+   "id": "1oTuliOE5YnnlUd8kvJrnEbrl9CL3dkGq",
+   "drive_path": "/03 Visual Direction and Assets/MA02–MA05 — Pixel Font and Bandit Camp Native Sprites v1/props"
+  },
+  {
+   "kind": "file",
+   "id": "1p2Wamnn_O8Rv-3E2sn-mNuvf1L4DN6G4",
+   "drive_path": "/03 Visual Direction and Assets/MA02–MA05 — Pixel Font and Bandit Camp Native Sprites v1/props/arrow_barrel_32x48.png",
+   "repo_path": "03-visual-direction-and-assets/ma02ma05-pixel-font-and-bandit-camp-native-sprites-v1/props/arrow-barrel-32x48.png",
+   "sha256": "ba252c67e05bd97869cfc6dc3b984fd624650cc55c839234542b262384225653"
+  },
+  {
+   "kind": "file",
+   "id": "1xfX1QlG-bNZebXqDv0NkzAIeRRbZgrjx",
+   "drive_path": "/03 Visual Direction and Assets/MA02–MA05 — Pixel Font and Bandit Camp Native Sprites v1/props/bandit_banner_48x64.png",
+   "repo_path": "03-visual-direction-and-assets/ma02ma05-pixel-font-and-bandit-camp-native-sprites-v1/props/bandit-banner-48x64.png",
+   "sha256": "05f00bc9515e9d1ba91b2f906703fefe684a1a075bf174f985aeef23dd950c52"
+  },
+  {
+   "kind": "file",
+   "id": "188CjJs6CSl9hIzPT371atYPAIRhZXhJs",
+   "drive_path": "/03 Visual Direction and Assets/MA02–MA05 — Pixel Font and Bandit Camp Native Sprites v1/props/bandit_flag_32x64.png",
+   "repo_path": "03-visual-direction-and-assets/ma02ma05-pixel-font-and-bandit-camp-native-sprites-v1/props/bandit-flag-32x64.png",
+   "sha256": "2b4a2ceee167878eee068000e0b9a086a57860fc9e6ad9adb63d76554b636c60"
+  },
+  {
+   "kind": "file",
+   "id": "1bFK730d5ln2C7nfIqv733HRDBrE5Jf3g",
+   "drive_path": "/03 Visual Direction and Assets/MA02–MA05 — Pixel Font and Bandit Camp Native Sprites v1/props/bandit_tent_closed_red_96x80.png",
+   "repo_path": "03-visual-direction-and-assets/ma02ma05-pixel-font-and-bandit-camp-native-sprites-v1/props/bandit-tent-closed-red-96x80.png",
+   "sha256": "32dc1d538ff20ba00b8e91a0e8715f873fa372f1d6f4cd12d65f19119dce8228"
+  },
+  {
+   "kind": "file",
+   "id": "1po5AyIomGgpTbR4HPES2GSLKxwwWS93C",
+   "drive_path": "/03 Visual Direction and Assets/MA02–MA05 — Pixel Font and Bandit Camp Native Sprites v1/props/bandit_tent_open_lantern_96x80.png",
+   "repo_path": "03-visual-direction-and-assets/ma02ma05-pixel-font-and-bandit-camp-native-sprites-v1/props/bandit-tent-open-lantern-96x80.png",
+   "sha256": "19cc3bad75a09ca0c9cad9c9d2893b81c39b96c82a2aae084a896342f452455d"
+  },
+  {
+   "kind": "file",
+   "id": "1KmW8bHlQrvFQqF6CBTgCmwjSh7jIis4T",
+   "drive_path": "/03 Visual Direction and Assets/MA02–MA05 — Pixel Font and Bandit Camp Native Sprites v1/props/camp_crate_and_sack_64x48.png",
+   "repo_path": "03-visual-direction-and-assets/ma02ma05-pixel-font-and-bandit-camp-native-sprites-v1/props/camp-crate-and-sack-64x48.png",
+   "sha256": "63d37ae8c9e303e3a3446e7aa18d5d949fac10357612e27f0f0bc284666c1339"
+  },
+  {
+   "kind": "file",
+   "id": "1myyAof_IdKO87tL-E_tCSDcCU4rsoT1F",
+   "drive_path": "/03 Visual Direction and Assets/MA02–MA05 — Pixel Font and Bandit Camp Native Sprites v1/props/camp_torch_32x48.png",
+   "repo_path": "03-visual-direction-and-assets/ma02ma05-pixel-font-and-bandit-camp-native-sprites-v1/props/camp-torch-32x48.png",
+   "sha256": "e65e2f96b6b278b3aff247812214191159d67b09a14c8b7b4d3df05b7e1ca646"
+  },
+  {
+   "kind": "file",
+   "id": "1DxmYt1d5iHH4ejxmVRmkXNzLo3i2A43-",
+   "drive_path": "/03 Visual Direction and Assets/MA02–MA05 — Pixel Font and Bandit Camp Native Sprites v1/props/palisade_left_end_64x48.png",
+   "repo_path": "03-visual-direction-and-assets/ma02ma05-pixel-font-and-bandit-camp-native-sprites-v1/props/palisade-left-end-64x48.png",
+   "sha256": "6bdc35fe4d01d0377ce8105c113529800b7526d87e8c8fc275843b741d8adf48"
+  },
+  {
+   "kind": "file",
+   "id": "1ELraUCC6aCfsEsyxTPMMChUAJzkK87KY",
+   "drive_path": "/03 Visual Direction and Assets/MA02–MA05 — Pixel Font and Bandit Camp Native Sprites v1/props/palisade_right_end_64x48.png",
+   "repo_path": "03-visual-direction-and-assets/ma02ma05-pixel-font-and-bandit-camp-native-sprites-v1/props/palisade-right-end-64x48.png",
+   "sha256": "405a4375bcb36882ddc22190767ea4e68b2f388a97b987fe170dfb8c513f23f3"
+  },
+  {
+   "kind": "file",
+   "id": "1NC6Sn2_SpfcTW2ruFFGqJlOKgNdWqy_z",
+   "drive_path": "/03 Visual Direction and Assets/MA02–MA05 — Pixel Font and Bandit Camp Native Sprites v1/props/palisade_segment_A_64x48.png",
+   "repo_path": "03-visual-direction-and-assets/ma02ma05-pixel-font-and-bandit-camp-native-sprites-v1/props/palisade-segment-a-64x48.png",
+   "sha256": "aaec0a7f2996d7eaf3430f191a59db9a5c58fff4b03bf13b737c4423ded46b86"
+  },
+  {
+   "kind": "file",
+   "id": "14Ws5Fpkmhekik9QH7mIBVkujm-fkHmBG",
+   "drive_path": "/03 Visual Direction and Assets/MA02–MA05 — Pixel Font and Bandit Camp Native Sprites v1/props/palisade_segment_B_64x48.png",
+   "repo_path": "03-visual-direction-and-assets/ma02ma05-pixel-font-and-bandit-camp-native-sprites-v1/props/palisade-segment-b-64x48.png",
+   "sha256": "eb91a7df7b00d58b70a612e275c95acfac232b7e935a2535e9a7ce0a177e3c9e"
+  },
+  {
+   "kind": "file",
+   "id": "1C5I5IqydHl6tNUbDDH6WVNZnhhoqLQcu",
+   "drive_path": "/03 Visual Direction and Assets/MA02–MA05 — Pixel Font and Bandit Camp Native Sprites v1/props/palisade_segment_C_64x48.png",
+   "repo_path": "03-visual-direction-and-assets/ma02ma05-pixel-font-and-bandit-camp-native-sprites-v1/props/palisade-segment-c-64x48.png",
+   "sha256": "5232cf0636295cacf3b9be1dfaf90be976af27f49cf8b5e734f25a42dcf741e8"
+  },
+  {
+   "kind": "file",
+   "id": "12nHzy9PuWZ9mmFC9JxiezhG9NMGrCsCn",
+   "drive_path": "/03 Visual Direction and Assets/MA02–MA05 — Pixel Font and Bandit Camp Native Sprites v1/props/weapon_rack_axes_swords_96x64.png",
+   "repo_path": "03-visual-direction-and-assets/ma02ma05-pixel-font-and-bandit-camp-native-sprites-v1/props/weapon-rack-axes-swords-96x64.png",
+   "sha256": "4419dfe5658a56a42e53475752278871047e58cab967ef830824e4d6d28f6f87"
+  },
+  {
+   "kind": "file",
+   "id": "1C8YLOYbWorckmOdU23KqUBgSPxCCwNMm",
+   "drive_path": "/03 Visual Direction and Assets/MA02–MA05 — Pixel Font and Bandit Camp Native Sprites v1/props/weapon_rack_shields_spears_96x64.png",
+   "repo_path": "03-visual-direction-and-assets/ma02ma05-pixel-font-and-bandit-camp-native-sprites-v1/props/weapon-rack-shields-spears-96x64.png",
+   "sha256": "bde31f9dff2908682ec7628288a60113d886e9db46db26c65662e388cd335a28"
+  },
+  {
+   "kind": "folder",
+   "id": "12WMBlv14mPmSGqaU3c21iJVQ9Avzv65q",
+   "drive_path": "/03 Visual Direction and Assets/MA02–MA05 — Pixel Font and Bandit Camp Native Sprites v1/source"
+  },
+  {
+   "kind": "file",
+   "id": "1MzSE4Q7Fcz5I34QatEUcxVLfVj2olfhY",
+   "drive_path": "/03 Visual Direction and Assets/MA02–MA05 — Pixel Font and Bandit Camp Native Sprites v1/source/bandit_camp_concept_source.png",
+   "repo_path": "03-visual-direction-and-assets/ma02ma05-pixel-font-and-bandit-camp-native-sprites-v1/source/bandit-camp-concept-source.png",
+   "sha256": "00faceba7c5c07d676c30e52d4eb133f8642b23b2399f3bb9cd241d6b46c6093"
+  },
+  {
+   "kind": "file",
+   "id": "1nEicDwFpWc1eIreBIAJcfwk6JIyP8aDv",
+   "drive_path": "/03 Visual Direction and Assets/MA02–MA05 — Pixel Font and Bandit Camp Native Sprites v1/MA02-05_COMPLETE_NATIVE_PACK.zip",
+   "repo_path": "03-visual-direction-and-assets/ma02ma05-pixel-font-and-bandit-camp-native-sprites-v1/ma02-05-complete-native-pack/",
+   "sha256": "8aaa5be2a608d49f2c2accfee0ef893be3c20160c0fa714882b9cf18d993079d"
+  },
+  {
+   "kind": "file",
+   "id": "1nxymOEcfd8k4qO3hwwSdGoM0tdrYjmdt",
+   "drive_path": "/03 Visual Direction and Assets/MA02–MA05 — Pixel Font and Bandit Camp Native Sprites v1/manifest.json",
+   "repo_path": "03-visual-direction-and-assets/ma02ma05-pixel-font-and-bandit-camp-native-sprites-v1/manifest.json",
+   "sha256": "21f03f3dd3be96b0298e7c6205d73005632bf432185aed3fd1272153b63751cb"
+  },
+  {
+   "kind": "file",
+   "id": "1-aoIsXnxo-ZNBhWylFUd5EnBEcdMwJWj",
+   "drive_path": "/03 Visual Direction and Assets/MA02–MA05 — Pixel Font and Bandit Camp Native Sprites v1/README_FOR_CLAUDE.md",
+   "repo_path": "03-visual-direction-and-assets/ma02ma05-pixel-font-and-bandit-camp-native-sprites-v1/readme-for-claude.md",
+   "sha256": "e64808a564974d6df8a253cdafaf133b8ec66f66058886e4bf2b7907eb8ecf8b"
+  },
+  {
+   "kind": "folder",
    "id": "1hZmcVkUTPlGZAnw74baDEVCNVSo-Y-4k",
    "drive_path": "/03 Visual Direction and Assets/P03 Canon Hero Extraction — Partial"
   },
@@ -1470,6 +2810,58 @@
    "drive_path": "/03 Visual Direction and Assets/P03 Canon Hero Extraction — Partial/Canon_Hero_18_Poses_QA_preview.png",
    "repo_path": "03-visual-direction-and-assets/p03-canon-hero-extraction-partial/canon-hero-18-poses-qa-preview.png",
    "sha256": "a7364b5f3a5a1ab81fb9dd211a021c9057314e2a2af59d0c7342c466c0f0cb92"
+  },
+  {
+   "kind": "folder",
+   "id": "1LUm-MBHQhccNDRQBtTRnrmYRFxmKXQI3",
+   "drive_path": "/03 Visual Direction and Assets/P09 — P07 Native NPC Extraction Prototype"
+  },
+  {
+   "kind": "file",
+   "id": "1VDOKogKcjbr3ePHBdfZxFX9PAc8a3FOJ",
+   "drive_path": "/03 Visual Direction and Assets/P09 — P07 Native NPC Extraction Prototype/P09_320x180_QA.png",
+   "repo_path": "03-visual-direction-and-assets/p09-p07-native-npc-extraction-prototype/p09-320x180-qa.png",
+   "sha256": "6a3f97e240ec824c9c64fd28348dce6cedbdb2b07e9f5ea0575b2ed70ee2ea1d"
+  },
+  {
+   "kind": "file",
+   "id": "1CS9izj1rjFDAdi5-cW_oaLhx60cW-LR6",
+   "drive_path": "/03 Visual Direction and Assets/P09 — P07 Native NPC Extraction Prototype/P09_contact_2x.png",
+   "repo_path": "03-visual-direction-and-assets/p09-p07-native-npc-extraction-prototype/p09-contact-2x.png",
+   "sha256": "0f1e255858396ae60bec347aa19e9026f6868ed1e6b5af241d24e38ee211cf4a"
+  },
+  {
+   "kind": "file",
+   "id": "1-QaHnPNyvYTCmSdcufYbOL5L-vYWsf19",
+   "drive_path": "/03 Visual Direction and Assets/P09 — P07 Native NPC Extraction Prototype/P09_NPC_12_idle_frames_PROTOTYPE.zip",
+   "repo_path": "03-visual-direction-and-assets/p09-p07-native-npc-extraction-prototype/p09-npc-12-idle-frames-prototype/",
+   "sha256": "794ff9892f4857d1a386c0ab2e51b6c92afe30e705b9dd81ca3c275f259c5665"
+  },
+  {
+   "kind": "folder",
+   "id": "1xAQaIl2x5XhpSeoj6bB_4_i5UOtktZ2t",
+   "drive_path": "/03 Visual Direction and Assets/P10-TRN01 — Grass Prefab Conversion Prototype"
+  },
+  {
+   "kind": "file",
+   "id": "1ATjGUzbJ0L95KqJMhBgdGQ3PRRaXLnQr",
+   "drive_path": "/03 Visual Direction and Assets/P10-TRN01 — Grass Prefab Conversion Prototype/320x180_QA.png",
+   "repo_path": "03-visual-direction-and-assets/p10-trn01-grass-prefab-conversion-prototype/320x180-qa.png",
+   "sha256": "eedb149cf5bf6dc38bcaa80dbc384cb36ef573c7c626754f26c7acf84bb6d449"
+  },
+  {
+   "kind": "file",
+   "id": "15j_AtGdfTNsKIhPEA6nmDYcmXAt7tvMd",
+   "drive_path": "/03 Visual Direction and Assets/P10-TRN01 — Grass Prefab Conversion Prototype/contact.png",
+   "repo_path": "03-visual-direction-and-assets/p10-trn01-grass-prefab-conversion-prototype/contact.png",
+   "sha256": "4b26cf2a2ee6065e95397c8df4f9ac0089e5b89b832a90b44a9f9850acc5abdf"
+  },
+  {
+   "kind": "file",
+   "id": "1dBDuUkQnYfX55mv7FZYRQui0y2yLt-la",
+   "drive_path": "/03 Visual Direction and Assets/P10-TRN01 — Grass Prefab Conversion Prototype/P10_TRN01_prefab_conversion.zip",
+   "repo_path": "03-visual-direction-and-assets/p10-trn01-grass-prefab-conversion-prototype/p10-trn01-prefab-conversion/",
+   "sha256": "e28a53136ea1579d4d6245ee3267bd15898e9bff7ee6d948884a50e6117bb8a2"
   },
   {
    "kind": "folder",
@@ -1516,7 +2908,7 @@
    "id": "1p_kXnoB_9gClFaR47U6-ige5I-9hs1Ta9s-thwSwF9g",
    "drive_path": "/03 Visual Direction and Assets/36 — CANON PLAYABLE CHARACTER DESIGNS — Preserve These Three",
    "repo_path": "03-visual-direction-and-assets/36-canon-playable-character-designs-preserve-these-three.md",
-   "sha256": "765085e0021dca1be54fc71618693ad55c1cb26cfd31125ec12e1f30c8e7bad7"
+   "sha256": "99b0cbcb691013c2fdd78ce8c4278f380922a5b1f01c9a4a4e168b095c205f9e"
   },
   {
    "kind": "folder",
@@ -1641,7 +3033,7 @@
    "id": "1cvf_rCrdY7rSDc78_tA75-ZL-Xm9QlVRPWmNiLSKrLY",
    "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/01 REQUESTS — Claude to ChatGPT/REQ — A02-01 — Music: GBA chiptune with each game's influence (replaces earlier A02-01)",
    "repo_path": "06-asset-collaboration-claude-chatgpt/01-requests-claude-to-chatgpt/req-a02-01-music-gba-chiptune-with-each-game-s-influence-replaces-earlier-a02-01.md",
-   "sha256": "90e38b2edaf5a8033636def282b82265cb42f1220bf5e57aeb427ac198f096cd"
+   "sha256": "45a45b67f0799fe34958ba6138bebb4b3fb4d82948ae45027f764e146414fbd2"
   },
   {
    "kind": "doc",
@@ -1655,21 +3047,35 @@
    "id": "1fNd5TuX7J6ANSNDyUqPXZlo-2wu35OPzvkgFxLhfnA4",
    "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/01 REQUESTS — Claude to ChatGPT/REQ — C02-04 + N03-05/N03-06 — Third hero (flyer), the king and the villain; plus priority order for everything pending",
    "repo_path": "06-asset-collaboration-claude-chatgpt/01-requests-claude-to-chatgpt/req-c02-04-n03-05-n03-06-third-hero-flyer-the-king-and-the-villain-plus-priority-order-for-everything-pending.md",
-   "sha256": "cce48af82c2a2027b8c960d5ae61313f9820a0ce9c8493be81f63bbf73052aa5"
+   "sha256": "a13165db64ec262427b0fcfb1cd76b6bdb3b69be7ff69e9e6f9c0ea8cb048ba8"
   },
   {
    "kind": "doc",
    "id": "1KlKA9opw3zNbzDKwTOuOfM0BfJMjLDzxSQH4k2cV-GU",
    "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/01 REQUESTS — Claude to ChatGPT/REQ — E01-02/E01-03 — Production 16px tilesets: grassy ruins, castle, town street",
    "repo_path": "06-asset-collaboration-claude-chatgpt/01-requests-claude-to-chatgpt/req-e01-02-e01-03-production-16px-tilesets-grassy-ruins-castle-town-street.md",
-   "sha256": "36821d32636400a59d672185f79b591bc7e1d9cc30bb70e0ecde6faf4b592126"
+   "sha256": "b9746135e601269d068f0bea54684802c8885caa7c9165d06c8863befc98cb76"
+  },
+  {
+   "kind": "doc",
+   "id": "1d94gDFA54-xtJJsDMhvo6Y8YJizC_TbDRfMyLkRCtCQ",
+   "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/01 REQUESTS — Claude to ChatGPT/REQ — MISSING-ASSETS — Game needs with no approved asset yet (master list)",
+   "repo_path": "06-asset-collaboration-claude-chatgpt/01-requests-claude-to-chatgpt/req-missing-assets-game-needs-with-no-approved-asset-yet-master-list.md",
+   "sha256": "a86b8650fe43dae5f2a7d4a5a46899f674e4a62ac40a7c88d2ca607b29ba3736"
   },
   {
    "kind": "doc",
    "id": "1uI3eVhW39udTZZLcQws9A5rF4T44MyQ2MhGdETzodrY",
    "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/01 REQUESTS — Claude to ChatGPT/REQ — N03-01/N03-02/N03-04 — Town NPCs with 3 modes, guard, two basic enemies",
    "repo_path": "06-asset-collaboration-claude-chatgpt/01-requests-claude-to-chatgpt/req-n03-01-n03-02-n03-04-town-npcs-with-3-modes-guard-two-basic-enemies.md",
-   "sha256": "abd99d71c8a70a741b40387b7c03faa2d95a529358af4fa0f91f3cf4a44f478c"
+   "sha256": "c1b9e0d543c57379197d15538a9ec48dc8bb40da3b05fe140157bf51a1092592"
+  },
+  {
+   "kind": "doc",
+   "id": "1sNHjO0YygTu-AQ2byoBWIN-IURhh02ujo-8A2MXAE1c",
+   "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/01 REQUESTS — Claude to ChatGPT/REQ — P04 REVISION — Empty vehicles and mounts (no rider baked in); addendum to MISSING-ASSETS master list",
+   "repo_path": "06-asset-collaboration-claude-chatgpt/01-requests-claude-to-chatgpt/req-p04-revision-empty-vehicles-and-mounts-no-rider-baked-in-addendum-to-missing-assets-master-list.md",
+   "sha256": "40cbed13ae852224b9b0206736ae111d34538c35ffebc8a5cffe987549477c5d"
   },
   {
    "kind": "folder",
@@ -1707,7 +3113,7 @@
    "id": "1oBpJKI2P7v7rwoMku-TbcFuVQe2iajddK6v2i5Ro0G0",
    "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/00 START HERE — Claude ↔ ChatGPT Asset Request Protocol",
    "repo_path": "06-asset-collaboration-claude-chatgpt/00-start-here-claude-chatgpt-asset-request-protocol.md",
-   "sha256": "ff5583b105be78acb99a1fc59badf26135c0bbf7d48d984bf8f03256345705b4"
+   "sha256": "ea8528dafbb58baa2ff872ccb598808d6940baf8a1132120d8e46c9c4c7ed7f9"
   },
   {
    "kind": "doc",
@@ -1739,17 +3145,24 @@
   },
   {
    "kind": "doc",
+   "id": "1sS6Dhg80ZlRDxeM7n1iJs7w1kdjKo7afYAy1iuvIA3A",
+   "drive_path": "/06 Asset Collaboration — Claude ⇄ ChatGPT/P12 — Standalone Weapon Families: Direct File Index and Integration Contract",
+   "repo_path": "06-asset-collaboration-claude-chatgpt/p12-standalone-weapon-families-direct-file-index-and-integration-contract.md",
+   "sha256": "cfde592e9cae3e2898d9cf5fcebc68e846803f80745f440f274aaec839abb2ce"
+  },
+  {
+   "kind": "doc",
    "id": "1-ASnTbCLAXSi_WCOl_7KNuUgelLXLmiZFKiN6APao2s",
    "drive_path": "/00 START HERE — Irreverents",
    "repo_path": "00-start-here-irreverents.md",
-   "sha256": "6fb2935d412c88ba011052002e349bdf7fd223e709a63811e5338dcd0ca6c62b"
+   "sha256": "c330e13be22aea2bb3e44b7ea43e3691bcb9c38fa81ec663bf9b6a16ed7f0815"
   },
   {
    "kind": "doc",
    "id": "1SinRhkiHFGlbZfsvYziXlSlVxerQG7J2vSgl3KxlWVo",
    "drive_path": "/34 — Art Production SOP — Reproduce the Owner-Endorsed Pixel Look",
    "repo_path": "34-art-production-sop-reproduce-the-owner-endorsed-pixel-look.md",
-   "sha256": "aee9ef4bbd8cbfdebbcf34a81963165e1025d68efb2e7db577b1454305997689"
+   "sha256": "47d12f48dbf93754a8ab650908897c17002fe97bb010b8ce0bdc1261090b2065"
   },
   {
    "kind": "doc",
@@ -1763,14 +3176,14 @@
    "id": "1bnr7GUgrYBVVY0BMkwx4qRPvW45Nk4grn-Tk6THcoY8",
    "drive_path": "/ASSET LIBRARY — START HERE (Claude)",
    "repo_path": "asset-library-start-here-claude.md",
-   "sha256": "8fdc5c0de1605974d0825d92032ea296607c4cc3d9aa29fdbdc909367adcb179"
+   "sha256": "c3dac2c00c3f3c9018658cbd813cee3ac9a859e0ec368a9cd7dae9e700f23522"
   },
   {
    "kind": "doc",
    "id": "17R7aKkqDxQwRk-cmywQbvQ_CcEzz4UqHz37YYYRnADs",
    "drive_path": "/changelog",
    "repo_path": "changelog.md",
-   "sha256": "4cbaa6e5faf3cb3b92145c0223493a66c03449e0c21a7057a22d4590a4e05c84"
+   "sha256": "942e3cad7b6a382540855c31bbb2ce6a32f0ba77a970f62dfe3755812c15a549"
   },
   {
    "kind": "file",

@@ -2,6 +2,12 @@
 
 ---
 
+P09 — P07 NPC STATIC EXTRACTION / 2026-11-23 11:55 AM EST
+
+SOURCE P07 civilian/NPC/guard/king board: https://drive.google.com/file/d/1rnkPeLOL4fwcwNnvHH-C2uwiHblLnlz7/view . Created 12 distinct transparent 48×48 PNGs (2 source idle variants each of green civilian, blue civilian, spear guard, shield guard, king, cat), manifest JSON with pivots/source crops, 320×180 native-size QA preview and 2× contact sheet. ZIP https://drive.google.com/file/d/1-QaHnPNyvYTCmSdcufYbOL5L-vYWsf19/view ; preview https://drive.google.com/file/d/1VDOKogKcjbr3ePHBdfZxFX9PAc8a3FOJ/view ; folder https://drive.google.com/drive/folders/1LUm-MBHQhccNDRQBtTRnrmYRFxmKXQI3. STATUS: IMPORTABLE STATIC IDLE PROTOTYPE ONLY; no complete walk/mood/attack animation, no verified 32px compatibility, native reduction loses fine detail. NOT PRODUCTION READY; do not close NPC REQ or overwrite existing working assets. No canonical heroes altered.
+
+STATUS remains REQUESTED / IN PROGRESS — partial static frames only.
+
 STATUS: REQUESTED
 
 TITLE: N03-01 / N03-02 / N03-04 — First NPC and enemy set

@@ -2,6 +2,14 @@
 
 ---
 
+2026-11-23 4:23 PM EST — MA-07 CASTLE INTERIOR THEME — NEW AUDIO TECHNICAL PROTOTYPE (NOT DELIVERED)
+
+Created original 64-second, 120 BPM ceremonial/clockwork castle theme with 4 synchronized stems (melody, bass, organ, percussion), full mix, WAV+OGG, manifest. All WAV files verified 44.1kHz stereo, exactly 2,822,400 samples (64s), with zero endpoint discontinuity in PCM; ZIP created and uploaded. Auditory quality, OGG browser seamlessness and real iPhone integration UNTESTED; this is NOT owner-approved or production-ready. No GitHub/Railway integration. ZIP https://drive.google.com/file/d/1A6BMPW_QTwI2PSJR9MVlo9ZJ11mdB5UM/view ; folder https://drive.google.com/drive/folders/1nASUXxOYM0RK0vz17lRoMbElC415Ev_1. MA-01 through MA-06 remain unchanged; MA-08+ still pending. Request stays OPEN.
+
+2026-11-23 2:51 PM EST — MA-06 / A02-01 ITEM 1 OUTDOORS THEME — AUDIO TECHNICAL PROTOTYPE
+
+Original 126 BPM, 32-bar (~60.952 s), 44.1kHz stereo WAV+OGG chiptune, 4 synchronized stems (melody/bass/drums/high_counter_line), plus stumble and snap_back short stings. Source-generated and ZIP integrity produced; NOT owner-approved, not phone auditioned, OGG browser loop-gap and musical quality unverified. STATUS: PROTOTYPE USABLE FOR CLAUDE INTEGRATION TEST — REQUESTED/NOT DELIVERED. ZIP https://drive.google.com/file/d/10HjntGcgYRRY201BggQ3pfZDxrSO82JA/view ; folder https://drive.google.com/drive/folders/1FqXjgUONOEoOW2d_GQUGk742U4RqcUnC ; manifest https://drive.google.com/file/d/1czmNFx_lYr1kA1H8MAAlNjx-Xd15CC5h/view . No GitHub commit. Next: listen to loop and variants on iPhone, check stem sync, adjust composition before promotion. MA-07+ untouched; MA-02 to MA-05 not duplicated.
+
 STATUS: REQUESTED
 
 TITLE: A02-01 — First music set (this replaces the earlier A02-01 request, which was trashed before processing)

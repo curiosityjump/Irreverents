@@ -1,0 +1,1 @@
+MA-01 / UI-001 USE touch button. Extends original U08 six-button atlas without changing its 144x48 pixels. 7th column is a door-mounted illuminated press-switch, visually distinct from purple Grab hand. Use two 24x24 PNGs or 168x48 atlas. PROTOTYPE: native PNG alpha and geometry validated; no browser/iPhone semantic test.

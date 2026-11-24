@@ -2,6 +2,52 @@
 
 ---
 
+LATEST EQUIPMENT ART — P12 WEAPONS UPLOADED (2026-11-23)
+
+P12 contains 3 actual illustrated standalone weapon source sheets and 12 searchable family rows: https://drive.google.com/drive/folders/1nJzv1gR9853Fj6GB8yOkqXaTYx-Iim83. Full direct-file handoff for Claude: https://docs.google.com/document/d/1sS6Dhg80ZlRDxeM7n1iJs7w1kdjKo7afYAy1iuvIA3A/edit. Sword/hammer/spear/shield, bomb/boomerang/hook/cannon, star wand/torch/parasol/arcane wand, no characters baked into any. Search the tag CSV https://drive.google.com/file/d/1FB2aXV0lV6G_wmusNgtl5g4HcRniVlRf/view; machine manifest https://drive.google.com/file/d/1Hd3H5-t5e5gFPkU96nlQUT3YyVai6pm-/view. This is owner-controlled preferred weapon design, but source-only pending normalizing individual game-ready state frames, pivots/attachments and 320x180 tests. WPN-001 is now routed to P12 in https://docs.google.com/spreadsheets/d/1rzixv5r4QWs7PKLYJ0e_sreLy0LjTdgua8uXKeTJpSE/edit; HRO-006 and INT-015 also linked. Do not redesign characters or bake weapon art into a particular one.
+
+LATEST SHARED DRIVE ROUTING
+
+RECENT DRIVE GAPS CLOSED — THREE CANON HERO BIBLES AND P11 ENEMY/WEAPON/ITEM SOURCES (2026-11-23, AFTERNOON EST)
+
+ACTUALLY CREATED: CANON HERO DIRECTORY https://drive.google.com/drive/folders/1rb8Oqfi-9HGI4Lwc_vIUBmAhaghkp6Zy
+
+HERO-01 Grappler https://drive.google.com/drive/folders/1XwlIZkX5E5nWDgVPSJBn5ONW8xSkPCym
+
+HERO-02 Rogue https://drive.google.com/drive/folders/1xPnAikN8FBl0U0Qrsv1tbh-FSI0W7js1
+
+HERO-03 Flyer https://drive.google.com/drive/folders/1XFpZiyFszqAbo9nN4K0McWT2cIv0H21G
+
+Each new hero folder has an unchanged copy of the controlling P03 three-row canon image, correct hero crop and pose row, 4x facial/costume reference, HERO_RULES.md, PROMPT_ANCHOR.txt, README_START_HERE.md, categorized working subfolders and 07 SOURCE REQUESTS/NEXT_REQUESTS.md. Use the actual visual PNG as source when generating new poses. No redesign of the three locked playable heroes. Their new pose animations are NOT complete merely because these folders now exist.
+
+ACTUALLY UPLOADED: P11 COPY-POWER ENEMIES AND ITEMS https://drive.google.com/drive/folders/1UfckIYSdob8h6090tYzqoUxnJQda4dGg
+
+P11-01 elemental fire/ice/spark/water/leaf/wind enemies: https://drive.google.com/file/d/1PXmBKicMBxg9m3cJBgOmMqALyJxGv6o0/view
+
+P11-02 bomb/cutter/stone/beam/wheel/shadow power enemies: https://drive.google.com/file/d/1lBGj-bhDDcJwc56WjUrgIwZKTEjwtWmC/view
+
+P11-03 weapons and gear in different visual contexts: https://drive.google.com/file/d/1SYzrVvO0L8OQrcAuTAtb0_bFsd4q7Hid/view
+
+P11-04 twelve utility/pickup item families: https://drive.google.com/file/d/1Atp1gz3LNHMtgTT9Z_UU5kmS5mTFb0sa/view
+
+SEARCH TAGS https://drive.google.com/file/d/1Q1BqlONG_4eWk9Ij5Gwqv1pkbtY12sS0/view
+
+MACHINE MANIFEST https://drive.google.com/file/d/1w3Hsj2A11B9t0jAB4WlnkSDsoAqQT9bH/view
+
+COMPLETE ZIP https://drive.google.com/file/d/13qLEAWNK9pay2oP5XXzVJ9RRcpm27gC2/view
+
+P11 STATUS: SOURCE ONLY, NOT ENGINE-READY NATIVE ANIMATION FRAMES. Alpha cleanup, named state extraction, fixed grid/pivots, item drop/held/attack variants, and 320x180 browser QA still needed. No GitHub/Railway deployment claim. Master Board links updated for 16 existing HRO/NPC/PWR/INT/UI rows; added ENM-001 ENM-002 WPN-001 ITM-001 new rows with status REFERENCE READY, not delivered.
+
+This completes the prior unperformed Drive routing, not the remaining requested game-art implementation.
+
+LATEST CLAUDE MISSING-ASSET DELIVERY: MA-02 / MA-03 / MA-04 / MA-05 — https://drive.google.com/drive/folders/19K9iDArd0wMXFucEZglrjIvLM6axcSga . Native bitmap font + 14 original source-derived bandit camp sprites, manifest, ZIP, QA preview. STATUS PROTOTYPE USABLE (phone readability / play-tested collision and palisade joins pending), NOT full 27-item closure. Master Board UI-014 / INT-016 and root catalog updated. Claude's original request and its remaining priorities stay active.\n\nLATEST SOURCE ASSET LIBRARY — P10 (2026-11-23)
+
+Two exact owner-supplied 1448×1086 terrain / interactables sheets were uploaded unmodified, with 20 labeled category row crops and a searchable tag CSV. For Claude: https://drive.google.com/drive/folders/12lQHr2RzLIP_uAAONlo1xekOYvUT3dcq . Exact originals: terrain https://drive.google.com/file/d/1N5ETaUgRQhQfZEzrpy2O7iVj3Db8myBR/view ; interactables https://drive.google.com/file/d/1WPKWdmGc0lTJd7FPKbEPDLwRbDqwhzvJ/view . Tags + source bounding boxes https://drive.google.com/file/d/1FGdS63R_csalDLCXTJY57p3aF9FPeMaR/view ; searchable taxonomy https://drive.google.com/file/d/1Nd2DL2bhzRWEsSaJ6vXHTelbF0Z_qbnZ/view ; preview https://drive.google.com/file/d/1aC6znP3NEpHVP7FD_a_WGgpETjcx8AYg/view . These sources complement already-usable BKG-01 background scenes; do not confuse source white JPGs with engine-ready native transparent sprites/tiles. The Root Asset Library and Master Production Board route by group IDs TRN-01..11 and INT-01..09.
+
+NEW RUNTIME SCENE BACKGROUNDS — BKG-01 (2026-11-23)
+
+Eight separate tested 1024×180 PNG panoramas for sunlit ruins, waterfall forest, ice cavern, sky islands, moonlit castle, volcano, market town, and evening quarry; lossless WebPs, source crops, true 320×180 previews, valid manifest and browser demo. Production folder https://drive.google.com/drive/folders/1pw3aCojPx3vvDGWHRt2f_ons-Rammisv ; complete ZIP https://drive.google.com/file/d/1NOm8mss5MU0Jflp76dOQoz93lBLkiW22/view ; runtime manifest https://drive.google.com/file/d/1SRy7UP9QdyE2zD9V7V3UWm9zXYINyNmJ/view ; all per-file links in ROOT ART CATALOG https://docs.google.com/document/d/1bnr7GUgrYBVVY0BMkwx4qRPvW45Nk4grn-Tk6THcoY8/edit . Import as static scrolling backdrops, max x offset 704; NOT three-layer parallax or world collision. Claude can use immediately.
+
 LATEST ART UPLOAD 2026-11-23 — P07/P08 FILES READY TO FIND
 
 P07 (five sheets: NPCs, enemies, mechanisms, terrain, HUD) https://drive.google.com/drive/folders/1PQO3UB9JbT8R5LPs6u66Nzz1JHgAHXB-

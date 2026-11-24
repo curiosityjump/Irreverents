@@ -1,0 +1,243 @@
+{
+  "id": "P10-TRN01-PREFAB-01",
+  "status": "source-derived nonseamless prefab prototype",
+  "source": "P10 row_crops/TRN-01_grass_dirt_platforms.png",
+  "cell_size": 16,
+  "collision": "NOT VERIFIED: level designer must assign per prefab",
+  "sprites": [
+    {
+      "name": "ground_wide",
+      "path": "sprites/ground_wide.png",
+      "size": [
+        80,
+        32
+      ],
+      "pivot": [
+        40,
+        32
+      ],
+      "source_x": [
+        8,
+        220
+      ],
+      "seamless": false,
+      "collision": "unassigned"
+    },
+    {
+      "name": "ground_narrow",
+      "path": "sprites/ground_narrow.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "source_x": [
+        236,
+        314
+      ],
+      "seamless": false,
+      "collision": "unassigned"
+    },
+    {
+      "name": "overhang_left",
+      "path": "sprites/overhang_left.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "source_x": [
+        326,
+        421
+      ],
+      "seamless": false,
+      "collision": "unassigned"
+    },
+    {
+      "name": "overhang_right",
+      "path": "sprites/overhang_right.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "source_x": [
+        428,
+        524
+      ],
+      "seamless": false,
+      "collision": "unassigned"
+    },
+    {
+      "name": "corner_left",
+      "path": "sprites/corner_left.png",
+      "size": [
+        48,
+        32
+      ],
+      "pivot": [
+        24,
+        32
+      ],
+      "source_x": [
+        530,
+        633
+      ],
+      "seamless": false,
+      "collision": "unassigned"
+    },
+    {
+      "name": "corner_right",
+      "path": "sprites/corner_right.png",
+      "size": [
+        48,
+        32
+      ],
+      "pivot": [
+        24,
+        32
+      ],
+      "source_x": [
+        636,
+        736
+      ],
+      "seamless": false,
+      "collision": "unassigned"
+    },
+    {
+      "name": "slope",
+      "path": "sprites/slope.png",
+      "size": [
+        48,
+        32
+      ],
+      "pivot": [
+        24,
+        32
+      ],
+      "source_x": [
+        740,
+        851
+      ],
+      "seamless": false,
+      "collision": "unassigned"
+    },
+    {
+      "name": "steps_low",
+      "path": "sprites/steps_low.png",
+      "size": [
+        48,
+        32
+      ],
+      "pivot": [
+        24,
+        32
+      ],
+      "source_x": [
+        861,
+        972
+      ],
+      "seamless": false,
+      "collision": "unassigned"
+    },
+    {
+      "name": "steps_high",
+      "path": "sprites/steps_high.png",
+      "size": [
+        48,
+        32
+      ],
+      "pivot": [
+        24,
+        32
+      ],
+      "source_x": [
+        979,
+        1084
+      ],
+      "seamless": false,
+      "collision": "unassigned"
+    },
+    {
+      "name": "floating_wide",
+      "path": "sprites/floating_wide.png",
+      "size": [
+        48,
+        32
+      ],
+      "pivot": [
+        24,
+        32
+      ],
+      "source_x": [
+        1091,
+        1205
+      ],
+      "seamless": false,
+      "collision": "unassigned"
+    },
+    {
+      "name": "floating_mid",
+      "path": "sprites/floating_mid.png",
+      "size": [
+        48,
+        32
+      ],
+      "pivot": [
+        24,
+        32
+      ],
+      "source_x": [
+        1212,
+        1331
+      ],
+      "seamless": false,
+      "collision": "unassigned"
+    },
+    {
+      "name": "floating_small",
+      "path": "sprites/floating_small.png",
+      "size": [
+        32,
+        32
+      ],
+      "pivot": [
+        16,
+        32
+      ],
+      "source_x": [
+        1338,
+        1397
+      ],
+      "seamless": false,
+      "collision": "unassigned"
+    },
+    {
+      "name": "floating_tiny",
+      "path": "sprites/floating_tiny.png",
+      "size": [
+        16,
+        16
+      ],
+      "pivot": [
+        8,
+        16
+      ],
+      "source_x": [
+        1400,
+        1447
+      ],
+      "seamless": false,
+      "collision": "unassigned"
+    }
+  ]
+}

@@ -2,6 +2,40 @@
 
 ---
 
+CANON HERO DOC 36 -- PHYSICAL HERO FOLDERS NOW EXIST
+
+RECENT DRIVE GAPS CLOSED — THREE CANON HERO BIBLES AND P11 ENEMY/WEAPON/ITEM SOURCES (2026-11-23, AFTERNOON EST)
+
+ACTUALLY CREATED: CANON HERO DIRECTORY https://drive.google.com/drive/folders/1rb8Oqfi-9HGI4Lwc_vIUBmAhaghkp6Zy
+
+HERO-01 Grappler https://drive.google.com/drive/folders/1XwlIZkX5E5nWDgVPSJBn5ONW8xSkPCym
+
+HERO-02 Rogue https://drive.google.com/drive/folders/1xPnAikN8FBl0U0Qrsv1tbh-FSI0W7js1
+
+HERO-03 Flyer https://drive.google.com/drive/folders/1XFpZiyFszqAbo9nN4K0McWT2cIv0H21G
+
+Each new hero folder has an unchanged copy of the controlling P03 three-row canon image, correct hero crop and pose row, 4x facial/costume reference, HERO_RULES.md, PROMPT_ANCHOR.txt, README_START_HERE.md, categorized working subfolders and 07 SOURCE REQUESTS/NEXT_REQUESTS.md. Use the actual visual PNG as source when generating new poses. No redesign of the three locked playable heroes. Their new pose animations are NOT complete merely because these folders now exist.
+
+ACTUALLY UPLOADED: P11 COPY-POWER ENEMIES AND ITEMS https://drive.google.com/drive/folders/1UfckIYSdob8h6090tYzqoUxnJQda4dGg
+
+P11-01 elemental fire/ice/spark/water/leaf/wind enemies: https://drive.google.com/file/d/1PXmBKicMBxg9m3cJBgOmMqALyJxGv6o0/view
+
+P11-02 bomb/cutter/stone/beam/wheel/shadow power enemies: https://drive.google.com/file/d/1lBGj-bhDDcJwc56WjUrgIwZKTEjwtWmC/view
+
+P11-03 weapons and gear in different visual contexts: https://drive.google.com/file/d/1SYzrVvO0L8OQrcAuTAtb0_bFsd4q7Hid/view
+
+P11-04 twelve utility/pickup item families: https://drive.google.com/file/d/1Atp1gz3LNHMtgTT9Z_UU5kmS5mTFb0sa/view
+
+SEARCH TAGS https://drive.google.com/file/d/1Q1BqlONG_4eWk9Ij5Gwqv1pkbtY12sS0/view
+
+MACHINE MANIFEST https://drive.google.com/file/d/1w3Hsj2A11B9t0jAB4WlnkSDsoAqQT9bH/view
+
+COMPLETE ZIP https://drive.google.com/file/d/13qLEAWNK9pay2oP5XXzVJ9RRcpm27gC2/view
+
+P11 STATUS: SOURCE ONLY, NOT ENGINE-READY NATIVE ANIMATION FRAMES. Alpha cleanup, named state extraction, fixed grid/pivots, item drop/held/attack variants, and 320x180 browser QA still needed. No GitHub/Railway deployment claim. Master Board links updated for 16 existing HRO/NPC/PWR/INT/UI rows; added ENM-001 ENM-002 WPN-001 ITM-001 new rows with status REFERENCE READY, not delivered.
+
+This completes the prior unperformed Drive routing, not the remaining requested game-art implementation.
+
 CANON PLAYABLE CHARACTER DESIGNS — PRESERVE THESE THREE
 
 Irreverents \| OWNER RECONFIRMED 2026-11-23 \| TOP PRIORITY VISUAL AUTHORITY

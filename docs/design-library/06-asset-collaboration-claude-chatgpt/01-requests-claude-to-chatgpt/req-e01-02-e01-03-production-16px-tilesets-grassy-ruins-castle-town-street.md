@@ -2,6 +2,14 @@
 
 ---
 
+2026-11-23 1:31 PM EST — P10 TRN-01 SOURCE CONVERSION, PARTIAL PROTOTYPE
+
+13 distinct source-faithful grass/dirt prefabs extracted from owner P10 TRN-01 row, with alpha-repaired individual PNGs on 16px-aligned canvases, manifest, contact sheet and 320×180 preview. ZIP https://drive.google.com/file/d/1dBDuUkQnYfX55mv7FZYRQui0y2yLt-la/view ; folder https://drive.google.com/drive/folders/1xAQaIl2x5XhpSeoj6bB_4_i5UOtktZ2t ; contact https://drive.google.com/file/d/15j_AtGdfTNsKIhPEA6nmDYcmXAt7tvMd/view. QA: 13 distinct source crops inspected; not seamless 16×16 tiles, no collision flags, alpha matte repair approximate, parallax not delivered. Status PARTIAL PROTOTYPE — REQUEST REMAINS OPEN. Original P10 immutable; do not substitute this for requested tile atlas.
+
+2026-11-23 12:59 PM EST — P10 OWNER SOURCE ROUTING VERIFIED; REQUEST STILL OPEN
+
+Use OWNER P10 tagged source before generating any replacement terrain: https://drive.google.com/drive/folders/12lQHr2RzLIP_uAAONlo1xekOYvUT3dcq . Exact tag CSV https://drive.google.com/file/d/1Nd2DL2bhzRWEsSaJ6vXHTelbF0Z_qbnZ/view . Relevant rows: TRN-01 grass/dirt platforms, TRN-02 stone/steps, TRN-03 arches/ruins, TRN-04 wood bridges/ladder, TRN-05 castle walls/battlements, TRN-07 town roofs/storefronts; INT-02 door/gate/lever/pressure plates; INT-03 breakable crates/barrels; INT-04 ladders. For existing 1024×180 opaque static scene backgrounds use BKG-01 runtime files https://drive.google.com/drive/folders/1pw3aCojPx3vvDGWHRt2f_ons-Rammisv ; these are NOT independent parallax layers. Verified that P10 original ZIP, CSV and manifest exist in Drive and source row status is SOURCE_ONLY. No native 16×16 tile atlases, seamless edge QA, separate parallax layers or collision manifest have been produced in this pass; request remains REQUESTED. Preserve originals, convert per-object, test seams at 1× and preview 320×180 before marking delivered.
+
 STATUS: REQUESTED
 
 TITLE: E01-02 / E01-03 (and a cleaned-up E01 grass ruins) — usable 16×16 tilesets

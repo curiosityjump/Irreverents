@@ -1,0 +1,698 @@
+{
+  "package_id": "P10",
+  "title": "Owner-selected tagged terrain and interactive object source library",
+  "created_date": "2026-11-23",
+  "source_status": "OWNER-SUPPLIED SOURCE SHEETS; original white JPEGs",
+  "technical_status": "SOURCE_ONLY — not native seamless tile maps, validated hitboxes, clean transparent sprites, or complete state animation",
+  "pixel_space": "original 1448x1086 pixels in source sheets; crops preserve 1:1 source pixels",
+  "production_instructions": "Preserve full source; choose tagged category; isolate original objects and clean white JPEG matte; produce transparent RGBA sprite; normalize pixel density, cell sizes, collision bounds, pivot and state names; seam-test and preview at 320x180 before game-ready declaration",
+  "groups": [
+    {
+      "group_id": "TRN",
+      "label": "Terrain & biome platform building blocks",
+      "source_file": "source/terrain_platform_building_blocks_FULL_SOURCE.jpg",
+      "original_size": [
+        1448,
+        1086
+      ],
+      "row_groups": [
+        {
+          "asset_group_id": "TRN-01",
+          "label": "Grass Dirt Platforms",
+          "tags": [
+            "grass",
+            "dirt",
+            "forest",
+            "ruins",
+            "platform",
+            "slope",
+            "corner",
+            "floating-island",
+            "ground",
+            "collision"
+          ],
+          "contents_examples": [
+            "flat-grass",
+            "narrow-grass",
+            "inside-corner",
+            "outside-corner",
+            "grass-slope",
+            "floating-ground"
+          ],
+          "source_crop_bbox_xyxy": [
+            0,
+            16,
+            1448,
+            113
+          ],
+          "source_file": "source/terrain_platform_building_blocks_FULL_SOURCE.jpg",
+          "source_row_crop": "row_crops/TRN-01_grass_dirt_platforms.png",
+          "intended_use": "art source for building game objects, not runtime-native sprite",
+          "status": "SOURCE_ONLY"
+        },
+        {
+          "asset_group_id": "TRN-02",
+          "label": "Stone Walls Rocks Stairs",
+          "tags": [
+            "stone",
+            "lavender-stone",
+            "rock",
+            "stairs",
+            "slope",
+            "castle",
+            "ruins",
+            "platform",
+            "collision"
+          ],
+          "contents_examples": [
+            "stone-wall",
+            "stone-block",
+            "stairs",
+            "grass-slope",
+            "rocks",
+            "ivy-wall"
+          ],
+          "source_crop_bbox_xyxy": [
+            0,
+            116,
+            1448,
+            214
+          ],
+          "source_file": "source/terrain_platform_building_blocks_FULL_SOURCE.jpg",
+          "source_row_crop": "row_crops/TRN-02_stone_walls_rocks_stairs.png",
+          "intended_use": "art source for building game objects, not runtime-native sprite",
+          "status": "SOURCE_ONLY"
+        },
+        {
+          "asset_group_id": "TRN-03",
+          "label": "Ruin Arches Columns Caves",
+          "tags": [
+            "arch",
+            "column",
+            "ruins",
+            "tunnel",
+            "cave-entrance",
+            "pillar",
+            "moss",
+            "secret-passage",
+            "stone"
+          ],
+          "contents_examples": [
+            "grass-tunnel",
+            "ruin-arch",
+            "broken-column",
+            "doorway"
+          ],
+          "source_crop_bbox_xyxy": [
+            0,
+            217,
+            1448,
+            345
+          ],
+          "source_file": "source/terrain_platform_building_blocks_FULL_SOURCE.jpg",
+          "source_row_crop": "row_crops/TRN-03_ruin_arches_columns_caves.png",
+          "intended_use": "art source for building game objects, not runtime-native sprite",
+          "status": "SOURCE_ONLY"
+        },
+        {
+          "asset_group_id": "TRN-04",
+          "label": "Wooden Bridges Fences Ladder",
+          "tags": [
+            "bridge",
+            "wood",
+            "fence",
+            "railing",
+            "ladder",
+            "posts",
+            "platform",
+            "collision"
+          ],
+          "contents_examples": [
+            "wood-platform",
+            "fence-section",
+            "bridge-support",
+            "ladder"
+          ],
+          "source_crop_bbox_xyxy": [
+            0,
+            348,
+            1448,
+            454
+          ],
+          "source_file": "source/terrain_platform_building_blocks_FULL_SOURCE.jpg",
+          "source_row_crop": "row_crops/TRN-04_wooden_bridges_fences_ladder.png",
+          "intended_use": "art source for building game objects, not runtime-native sprite",
+          "status": "SOURCE_ONLY"
+        },
+        {
+          "asset_group_id": "TRN-05",
+          "label": "Castle Cobble Battlements",
+          "tags": [
+            "castle",
+            "battlement",
+            "stone-bricks",
+            "wall",
+            "stairs",
+            "castle-window",
+            "columns",
+            "collision"
+          ],
+          "contents_examples": [
+            "castle-parapet",
+            "stone-wall",
+            "castle-stairs",
+            "twin-arches"
+          ],
+          "source_crop_bbox_xyxy": [
+            0,
+            455,
+            1448,
+            565
+          ],
+          "source_file": "source/terrain_platform_building_blocks_FULL_SOURCE.jpg",
+          "source_row_crop": "row_crops/TRN-05_castle_cobble_battlements.png",
+          "intended_use": "art source for building game objects, not runtime-native sprite",
+          "status": "SOURCE_ONLY"
+        },
+        {
+          "asset_group_id": "TRN-06",
+          "label": "Sandstone Ancient Ruins",
+          "tags": [
+            "sandstone",
+            "ancient-ruins",
+            "column",
+            "arch",
+            "carved-bricks",
+            "flowered-stone",
+            "desert",
+            "garden"
+          ],
+          "contents_examples": [
+            "cream-stone",
+            "engraved-stone",
+            "flowered-arch",
+            "sandstone-stairs"
+          ],
+          "source_crop_bbox_xyxy": [
+            0,
+            566,
+            1448,
+            654
+          ],
+          "source_file": "source/terrain_platform_building_blocks_FULL_SOURCE.jpg",
+          "source_row_crop": "row_crops/TRN-06_sandstone_ancient_ruins.png",
+          "intended_use": "art source for building game objects, not runtime-native sprite",
+          "status": "SOURCE_ONLY"
+        },
+        {
+          "asset_group_id": "TRN-07",
+          "label": "Town Storefronts Roofs",
+          "tags": [
+            "town",
+            "storefront",
+            "red-roof",
+            "market",
+            "awning",
+            "window",
+            "building",
+            "wooden-support",
+            "roof",
+            "shop"
+          ],
+          "contents_examples": [
+            "shop-stall",
+            "flower-window",
+            "red-roof",
+            "timber-support"
+          ],
+          "source_crop_bbox_xyxy": [
+            0,
+            655,
+            1448,
+            766
+          ],
+          "source_file": "source/terrain_platform_building_blocks_FULL_SOURCE.jpg",
+          "source_row_crop": "row_crops/TRN-07_town_storefronts_roofs.png",
+          "intended_use": "art source for building game objects, not runtime-native sprite",
+          "status": "SOURCE_ONLY"
+        },
+        {
+          "asset_group_id": "TRN-08",
+          "label": "Ice Cavern Blocks Arches",
+          "tags": [
+            "ice",
+            "snow",
+            "icicle",
+            "cavern",
+            "ice-crystal",
+            "frost",
+            "platform",
+            "slippery",
+            "collision"
+          ],
+          "contents_examples": [
+            "snow-brick",
+            "icy-arch",
+            "icicles",
+            "ice-block",
+            "crystal-spike"
+          ],
+          "source_crop_bbox_xyxy": [
+            0,
+            767,
+            1448,
+            847
+          ],
+          "source_file": "source/terrain_platform_building_blocks_FULL_SOURCE.jpg",
+          "source_row_crop": "row_crops/TRN-08_ice_cavern_blocks_arches.png",
+          "intended_use": "art source for building game objects, not runtime-native sprite",
+          "status": "SOURCE_ONLY"
+        },
+        {
+          "asset_group_id": "TRN-09",
+          "label": "Lava Volcano Rocks Spikes",
+          "tags": [
+            "lava",
+            "volcano",
+            "magma",
+            "obsidian",
+            "fire",
+            "hazard",
+            "spikes",
+            "platform",
+            "collision"
+          ],
+          "contents_examples": [
+            "lava-ground",
+            "lava-slope",
+            "magma-stone",
+            "lava-arch",
+            "fire-spikes"
+          ],
+          "source_crop_bbox_xyxy": [
+            0,
+            848,
+            1448,
+            927
+          ],
+          "source_file": "source/terrain_platform_building_blocks_FULL_SOURCE.jpg",
+          "source_row_crop": "row_crops/TRN-09_lava_volcano_rocks_spikes.png",
+          "intended_use": "art source for building game objects, not runtime-native sprite",
+          "status": "SOURCE_ONLY"
+        },
+        {
+          "asset_group_id": "TRN-10",
+          "label": "Mushroom Hollows Bounce Platforms",
+          "tags": [
+            "mushroom",
+            "fungus",
+            "forest",
+            "cavern",
+            "spring",
+            "bounce",
+            "platform",
+            "collision"
+          ],
+          "contents_examples": [
+            "large-mushroom-cap",
+            "short-mushroom",
+            "mushroom-arch",
+            "fungus-cluster"
+          ],
+          "source_crop_bbox_xyxy": [
+            0,
+            928,
+            1448,
+            1005
+          ],
+          "source_file": "source/terrain_platform_building_blocks_FULL_SOURCE.jpg",
+          "source_row_crop": "row_crops/TRN-10_mushroom_hollows_bounce_platforms.png",
+          "intended_use": "art source for building game objects, not runtime-native sprite",
+          "status": "SOURCE_ONLY"
+        },
+        {
+          "asset_group_id": "TRN-11",
+          "label": "Cloud Platforms Sky Islands",
+          "tags": [
+            "cloud",
+            "sky-islands",
+            "air",
+            "floating-island",
+            "sky-platform",
+            "column",
+            "collision"
+          ],
+          "contents_examples": [
+            "cloud-floor",
+            "cloud-arch",
+            "cloud-stairs",
+            "small-floating-island"
+          ],
+          "source_crop_bbox_xyxy": [
+            0,
+            1006,
+            1448,
+            1085
+          ],
+          "source_file": "source/terrain_platform_building_blocks_FULL_SOURCE.jpg",
+          "source_row_crop": "row_crops/TRN-11_cloud_platforms_sky_islands.png",
+          "intended_use": "art source for building game objects, not runtime-native sprite",
+          "status": "SOURCE_ONLY"
+        }
+      ]
+    },
+    {
+      "group_id": "INT",
+      "label": "Interactive mechanisms, pickups and hazards",
+      "source_file": "source/interactables_mechanisms_pickups_FULL_SOURCE.jpg",
+      "original_size": [
+        1448,
+        1086
+      ],
+      "row_groups": [
+        {
+          "asset_group_id": "INT-01",
+          "label": "Chests Loot Currency",
+          "tags": [
+            "chest",
+            "treasure",
+            "loot",
+            "locked",
+            "open",
+            "empty",
+            "crystal",
+            "currency",
+            "collectible",
+            "star",
+            "bag"
+          ],
+          "contents_examples": [
+            "chest-closed",
+            "chest-open",
+            "chest-empty",
+            "crystal-chest",
+            "coin",
+            "star",
+            "loot-bag"
+          ],
+          "source_crop_bbox_xyxy": [
+            0,
+            0,
+            1448,
+            154
+          ],
+          "source_file": "source/interactables_mechanisms_pickups_FULL_SOURCE.jpg",
+          "source_row_crop": "row_crops/INT-01_chests_loot_currency.png",
+          "intended_use": "art source for building game objects, not runtime-native sprite",
+          "status": "SOURCE_ONLY"
+        },
+        {
+          "asset_group_id": "INT-02",
+          "label": "Doors Gates Levers Plates",
+          "tags": [
+            "door",
+            "gate",
+            "keyhole",
+            "locked",
+            "open",
+            "portcullis",
+            "lever",
+            "pressure-plate",
+            "switch",
+            "stateful"
+          ],
+          "contents_examples": [
+            "door-closed",
+            "door-open",
+            "door-locked",
+            "gate-closed",
+            "gate-open",
+            "lever-off",
+            "lever-on",
+            "plate-up",
+            "plate-pressed"
+          ],
+          "source_crop_bbox_xyxy": [
+            0,
+            155,
+            1448,
+            307
+          ],
+          "source_file": "source/interactables_mechanisms_pickups_FULL_SOURCE.jpg",
+          "source_row_crop": "row_crops/INT-02_doors_gates_levers_plates.png",
+          "intended_use": "art source for building game objects, not runtime-native sprite",
+          "status": "SOURCE_ONLY"
+        },
+        {
+          "asset_group_id": "INT-03",
+          "label": "Alarms Breakables Barrels",
+          "tags": [
+            "bell",
+            "horn",
+            "alarm",
+            "signaler",
+            "reporting",
+            "crate",
+            "breakable",
+            "barrel",
+            "locked-barrel",
+            "bomb",
+            "stateful"
+          ],
+          "contents_examples": [
+            "alarm-bell",
+            "alarm-horn",
+            "crate-intact",
+            "crate-cracked",
+            "crate-broken",
+            "barrel-intact",
+            "barrel-broken",
+            "bomb"
+          ],
+          "source_crop_bbox_xyxy": [
+            0,
+            308,
+            1448,
+            447
+          ],
+          "source_file": "source/interactables_mechanisms_pickups_FULL_SOURCE.jpg",
+          "source_row_crop": "row_crops/INT-03_alarms_breakables_barrels.png",
+          "intended_use": "art source for building game objects, not runtime-native sprite",
+          "status": "SOURCE_ONLY"
+        },
+        {
+          "asset_group_id": "INT-04",
+          "label": "Ladders Winches Gears",
+          "tags": [
+            "ladder",
+            "winch",
+            "rope",
+            "hook",
+            "pulley",
+            "gear",
+            "moving-mechanism",
+            "grapple"
+          ],
+          "contents_examples": [
+            "ladder-full",
+            "ladder-short",
+            "winch-small",
+            "winch-large",
+            "hanging-hook",
+            "gear"
+          ],
+          "source_crop_bbox_xyxy": [
+            0,
+            448,
+            1448,
+            586
+          ],
+          "source_file": "source/interactables_mechanisms_pickups_FULL_SOURCE.jpg",
+          "source_row_crop": "row_crops/INT-04_ladders_winches_gears.png",
+          "intended_use": "art source for building game objects, not runtime-native sprite",
+          "status": "SOURCE_ONLY"
+        },
+        {
+          "asset_group_id": "INT-05",
+          "label": "Overhead Grabs Minecarts Platforms",
+          "tags": [
+            "grapple-hook",
+            "overhead-rail",
+            "rail",
+            "minecart",
+            "trolley",
+            "moving-platform",
+            "piston",
+            "motor",
+            "cooperative-puzzle"
+          ],
+          "contents_examples": [
+            "overhead-hooks",
+            "sliding-rail",
+            "minecart",
+            "moving-platform",
+            "mechanical-linkage"
+          ],
+          "source_crop_bbox_xyxy": [
+            0,
+            587,
+            1448,
+            679
+          ],
+          "source_file": "source/interactables_mechanisms_pickups_FULL_SOURCE.jpg",
+          "source_row_crop": "row_crops/INT-05_overhead_grabs_minecarts_platforms.png",
+          "intended_use": "art source for building game objects, not runtime-native sprite",
+          "status": "SOURCE_ONLY"
+        },
+        {
+          "asset_group_id": "INT-06",
+          "label": "Vents Secret Walls Ability Sources",
+          "tags": [
+            "vent",
+            "crawlspace",
+            "secret",
+            "hidden-door",
+            "breakable-wall",
+            "pressure-switch",
+            "ability-source",
+            "energy",
+            "puzzle"
+          ],
+          "contents_examples": [
+            "vent-open",
+            "vent-closed",
+            "secret-wall",
+            "wall-switch",
+            "ability-pedestal",
+            "power-terminal"
+          ],
+          "source_crop_bbox_xyxy": [
+            0,
+            680,
+            1448,
+            779
+          ],
+          "source_file": "source/interactables_mechanisms_pickups_FULL_SOURCE.jpg",
+          "source_row_crop": "row_crops/INT-06_vents_secret_walls_ability_sources.png",
+          "intended_use": "art source for building game objects, not runtime-native sprite",
+          "status": "SOURCE_ONLY"
+        },
+        {
+          "asset_group_id": "INT-07",
+          "label": "Rare Power Altar Teleport Pedestals",
+          "tags": [
+            "rare-power",
+            "ability",
+            "source-fixture",
+            "teleporter",
+            "checkpoint",
+            "portal",
+            "crystal",
+            "locked-source",
+            "mystery-component"
+          ],
+          "contents_examples": [
+            "fire-pedestal",
+            "ice-pedestal",
+            "crystal-altar",
+            "portal",
+            "energy-source",
+            "locked-pedestal"
+          ],
+          "source_crop_bbox_xyxy": [
+            0,
+            780,
+            1448,
+            902
+          ],
+          "source_file": "source/interactables_mechanisms_pickups_FULL_SOURCE.jpg",
+          "source_row_crop": "row_crops/INT-07_rare_power_altar_teleport_pedestals.png",
+          "intended_use": "art source for building game objects, not runtime-native sprite",
+          "status": "SOURCE_ONLY"
+        },
+        {
+          "asset_group_id": "INT-08",
+          "label": "Traps Hazards Puzzle Beams",
+          "tags": [
+            "spikes",
+            "trap",
+            "saw",
+            "mace",
+            "fire-trap",
+            "ice-trap",
+            "electric",
+            "beam",
+            "hazard",
+            "key",
+            "puzzle-piece"
+          ],
+          "contents_examples": [
+            "spike-trap",
+            "rolling-mace",
+            "circular-saw",
+            "flame-jet",
+            "ice-spikes",
+            "energy-beam",
+            "key",
+            "gear",
+            "puzzle-fragment"
+          ],
+          "source_crop_bbox_xyxy": [
+            0,
+            903,
+            1448,
+            999
+          ],
+          "source_file": "source/interactables_mechanisms_pickups_FULL_SOURCE.jpg",
+          "source_row_crop": "row_crops/INT-08_traps_hazards_puzzle_beams.png",
+          "intended_use": "art source for building game objects, not runtime-native sprite",
+          "status": "SOURCE_ONLY"
+        },
+        {
+          "asset_group_id": "INT-09",
+          "label": "Power Collectible Icon Row",
+          "tags": [
+            "copy-power",
+            "fire",
+            "ice",
+            "wind",
+            "wing",
+            "bomb",
+            "coin",
+            "heart",
+            "lightning",
+            "water",
+            "gear",
+            "element",
+            "space",
+            "rare-pickup"
+          ],
+          "contents_examples": [
+            "ability-token",
+            "wing-token",
+            "fire-token",
+            "ice-token",
+            "bomb-token",
+            "star-token",
+            "leaf-token",
+            "heart-token",
+            "lightning-token",
+            "water-token",
+            "gear-token",
+            "block-token"
+          ],
+          "source_crop_bbox_xyxy": [
+            0,
+            999,
+            1448,
+            1085
+          ],
+          "source_file": "source/interactables_mechanisms_pickups_FULL_SOURCE.jpg",
+          "source_row_crop": "row_crops/INT-09_power_collectible_icon_row.png",
+          "intended_use": "art source for building game objects, not runtime-native sprite",
+          "status": "SOURCE_ONLY"
+        }
+      ]
+    }
+  ]
+}

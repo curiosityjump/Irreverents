@@ -1,0 +1,256 @@
+{
+  "source": "P07 compact civilian/NPC/guard/king source sheet",
+  "source_url": "https://drive.google.com/file/d/1rnkPeLOL4fwcwNnvHH-C2uwiHblLnlz7/view",
+  "status": "extracted static prototype, NOT animation or production-ready",
+  "frame_size": [
+    48,
+    48
+  ],
+  "frames": {
+    "civilian_green_idle_01": {
+      "file": "frames/civilian_green_idle_01.png",
+      "pivot": [
+        24,
+        46
+      ],
+      "source_crop": [
+        0,
+        35,
+        145,
+        205
+      ],
+      "alpha_bbox": [
+        7,
+        4,
+        42,
+        46
+      ],
+      "state": "idle variation; not validated motion"
+    },
+    "civilian_green_idle_02": {
+      "file": "frames/civilian_green_idle_02.png",
+      "pivot": [
+        24,
+        46
+      ],
+      "source_crop": [
+        145,
+        35,
+        265,
+        205
+      ],
+      "alpha_bbox": [
+        7,
+        4,
+        41,
+        46
+      ],
+      "state": "idle variation; not validated motion"
+    },
+    "civilian_blue_idle_01": {
+      "file": "frames/civilian_blue_idle_01.png",
+      "pivot": [
+        24,
+        46
+      ],
+      "source_crop": [
+        0,
+        215,
+        145,
+        375
+      ],
+      "alpha_bbox": [
+        4,
+        2,
+        44,
+        46
+      ],
+      "state": "idle variation; not validated motion"
+    },
+    "civilian_blue_idle_02": {
+      "file": "frames/civilian_blue_idle_02.png",
+      "pivot": [
+        24,
+        46
+      ],
+      "source_crop": [
+        145,
+        215,
+        265,
+        375
+      ],
+      "alpha_bbox": [
+        7,
+        2,
+        40,
+        46
+      ],
+      "state": "idle variation; not validated motion"
+    },
+    "guard_spear_idle_01": {
+      "file": "frames/guard_spear_idle_01.png",
+      "pivot": [
+        24,
+        46
+      ],
+      "source_crop": [
+        0,
+        390,
+        145,
+        540
+      ],
+      "alpha_bbox": [
+        6,
+        2,
+        42,
+        46
+      ],
+      "state": "idle variation; not validated motion"
+    },
+    "guard_spear_idle_02": {
+      "file": "frames/guard_spear_idle_02.png",
+      "pivot": [
+        24,
+        46
+      ],
+      "source_crop": [
+        145,
+        390,
+        265,
+        540
+      ],
+      "alpha_bbox": [
+        6,
+        2,
+        41,
+        46
+      ],
+      "state": "idle variation; not validated motion"
+    },
+    "guard_shield_idle_01": {
+      "file": "frames/guard_shield_idle_01.png",
+      "pivot": [
+        24,
+        46
+      ],
+      "source_crop": [
+        0,
+        545,
+        145,
+        705
+      ],
+      "alpha_bbox": [
+        6,
+        5,
+        44,
+        46
+      ],
+      "state": "idle variation; not validated motion"
+    },
+    "guard_shield_idle_02": {
+      "file": "frames/guard_shield_idle_02.png",
+      "pivot": [
+        24,
+        46
+      ],
+      "source_crop": [
+        145,
+        545,
+        265,
+        705
+      ],
+      "alpha_bbox": [
+        7,
+        4,
+        40,
+        46
+      ],
+      "state": "idle variation; not validated motion"
+    },
+    "king_idle_01": {
+      "file": "frames/king_idle_01.png",
+      "pivot": [
+        24,
+        46
+      ],
+      "source_crop": [
+        0,
+        710,
+        145,
+        875
+      ],
+      "alpha_bbox": [
+        6,
+        2,
+        41,
+        46
+      ],
+      "state": "idle variation; not validated motion"
+    },
+    "king_idle_02": {
+      "file": "frames/king_idle_02.png",
+      "pivot": [
+        24,
+        46
+      ],
+      "source_crop": [
+        145,
+        710,
+        265,
+        875
+      ],
+      "alpha_bbox": [
+        8,
+        2,
+        40,
+        46
+      ],
+      "state": "idle variation; not validated motion"
+    },
+    "cat_idle_01": {
+      "file": "frames/cat_idle_01.png",
+      "pivot": [
+        24,
+        46
+      ],
+      "source_crop": [
+        0,
+        880,
+        145,
+        1045
+      ],
+      "alpha_bbox": [
+        4,
+        18,
+        43,
+        45
+      ],
+      "state": "idle variation; not validated motion"
+    },
+    "cat_idle_02": {
+      "file": "frames/cat_idle_02.png",
+      "pivot": [
+        24,
+        46
+      ],
+      "source_crop": [
+        145,
+        880,
+        265,
+        1045
+      ],
+      "alpha_bbox": [
+        7,
+        10,
+        40,
+        46
+      ],
+      "state": "idle variation; not validated motion"
+    }
+  },
+  "warnings": [
+    "Native 48px reduction loses some small facial details",
+    "No verified animation continuity",
+    "Illustrated source pixels and antialiasing preserved; not strict pixel-grid redraw"
+  ]
+}

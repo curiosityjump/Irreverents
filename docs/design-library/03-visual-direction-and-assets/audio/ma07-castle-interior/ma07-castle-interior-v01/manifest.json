@@ -1,0 +1,43 @@
+{
+  "id": "MA-07",
+  "name": "Castle interior \u2014 ceremonial clockwork",
+  "status": "TECHNICAL PROTOTYPE, NOT OWNER APPROVED",
+  "bpm": 120,
+  "bars": 32,
+  "duration_seconds": 64.0,
+  "sample_rate": 44100,
+  "loop_start_seconds": 0,
+  "loop_end_seconds": 64.0,
+  "stems": [
+    {
+      "id": "castle_melody",
+      "wav": "castle_melody.wav",
+      "ogg": "castle_melody.ogg",
+      "gain_default": 1
+    },
+    {
+      "id": "castle_bass",
+      "wav": "castle_bass.wav",
+      "ogg": "castle_bass.ogg",
+      "gain_default": 1
+    },
+    {
+      "id": "castle_organ",
+      "wav": "castle_organ.wav",
+      "ogg": "castle_organ.ogg",
+      "gain_default": 1
+    },
+    {
+      "id": "castle_percussion",
+      "wav": "castle_percussion.wav",
+      "ogg": "castle_percussion.ogg",
+      "gain_default": 1
+    }
+  ],
+  "qa": {
+    "sample_rate": "verified by ffprobe",
+    "loop_seam": "requires auditory assessment",
+    "iphone_browser": "not tested",
+    "musical_quality": "not owner-reviewed"
+  }
+}

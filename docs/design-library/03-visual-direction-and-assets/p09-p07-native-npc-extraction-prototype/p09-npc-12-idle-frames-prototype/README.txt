@@ -1,0 +1,1 @@
+P07 static idle extraction QA prototype. 12 separate transparent RGBA 48x48 PNGs, six character types, two poses each. Not an animation set, no verified 32x32 target, no seam/atlas claims. Source may contain stylized antialiasing. Compare at 320x180 and refine before gameplay replacement.
