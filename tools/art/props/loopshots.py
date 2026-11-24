@@ -250,8 +250,30 @@ def wagon():
     return scene
 
 
+def guard():
+    """props-asks-2, GV-01: every guard vehicle state on 320x180, the grappler beside each first state for scale;
+    the trike and the wagon on the top shelf, the roller and the rotorcraft (raised: it flies) on the bottom"""
+    img, L = looks('guard-vehicles')
+    hero = Image.open(os.path.join(ROOT, 'assets', 'sprites', 'heroes', 'grappler.png')).convert('RGBA').crop((0, 0, 48, 48))
+    hero = hero.crop(hero.getbbox())
+    scene, floors = shelves(2)
+    x = 4
+    for lid in ('guard-trike-parked', 'guard-trike-moving', 'guard-trike-damaged'):
+        place(scene, frame(img, L[lid]), x + 28, floors[0]); x += 50
+    place(scene, hero, x + 6, floors[0]); x += 16
+    for lid in ('guard-wagon-closed', 'guard-wagon-door-open'):
+        place(scene, frame(img, L[lid]), x + 36, floors[0]); x += 64
+    x = 4
+    for lid in ('guard-roller-ready', 'guard-roller-damaged'):
+        place(scene, frame(img, L[lid]), x + 36, floors[1]); x += 72
+    place(scene, hero, x + 4, floors[1]); x += 14
+    for lid in ('guard-rotorcraft-idle', 'guard-rotorcraft-flying'):
+        place(scene, frame(img, L[lid]), x + 32, floors[1] - (20 if lid.endswith('flying') else 0)); x += 60
+    return scene
+
+
 SCENES = {'weapons': weapons, 'rides': rides, 'powers': powers, 'treasure': treasure, 'hall': hall, 'asks': asks, 'heist': heist,
-          'cage': cage, 'undercroft': undercroft, 'camp': camp, 'wagon': wagon}
+          'cage': cage, 'undercroft': undercroft, 'camp': camp, 'wagon': wagon, 'guard': guard}
 
 if __name__ == '__main__':
     os.makedirs(OUT, exist_ok=True)

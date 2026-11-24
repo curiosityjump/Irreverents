@@ -299,6 +299,20 @@ compared). Scene: `loops-wagon-4x.png` (idle, empty, empty beside the grappler, 
   barrier break"; "a's page was corrected"), passing on re-run each time with nothing of this lane in the
   simulation; already logged in Step 5's notes (bbb9702).
 
+**The owner's guard vehicles (GV-01, mirrored at 93caafb; report sent before cutting).** Group `guard-vehicles`
+(`content/looks/guard-vehicles.json`, `assets/props/guard-vehicles.png`), `loops.guard_vehicle()`: each of the
+pack's right-facing state PNGs (`runtime/vehicles/`) shrunk by one `GV_SCALE` (0.5, `DRAFT:`) and put back at its
+shrunk offset on half its canvas, so a vehicle's states line up and the four keep their sizes to each other; snapped to
+the master palette by majority. Cells: trike 56x40, wagon 72x48, roller 80x48, rotorcraft 64x48; draw bottom-centred.
+Ids by what the thing is: `guard-trike-{parked,moving,damaged}`, `guard-wagon-{closed,door-open,moving,damaged}`,
+`guard-roller-{ready,rolling,damaged}`, `guard-rotorcraft-{idle,flying,damaged}`. The pack's `_left` states are
+mirrors and are not cut (the renderer flips). Scene: `loops-guard-4x.png` (the grappler beside them for scale).
+- **The pack's labels, literally:** "PROTOTYPE-USABLE STATIC SPRITES", "candidate vehicle types, not compulsory
+  owner-confirmed gameplay roster; use by default and iterate". Every vehicle is empty (crew drawn separately at the
+  manifest's `driver_anchor`, which halves with the scale). One image per state: no wheel or rotor frames; dust and
+  smoke are baked into the moving and damaged states; no wrecked state beyond damaged.
+- **Not verified in the game:** nothing draws a guard vehicle yet.
+
 ## Deviations from the contract
 
 - `ui-use`'s `src` is the whole 48×24 picture (normal then pressed), with no `frames`: that is how

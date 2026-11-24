@@ -133,6 +133,13 @@ def looks_sheets():
         s.newrow()
     s.add('ride-wagon-empty', lo.ride_empty('wagon'))  # props-asks-2, ask 3: appended, every cell above unmoved
     out.append(('rides', 'props/rides.png', s))
+    # ---- GV-01 guard response vehicles (loops.py; props-asks-2, the owner's guard vehicles): one row a vehicle
+    s = Sheet(320)
+    for i, lid in enumerate(lo.GUARD):
+        if i and lid.split('-')[1] != list(lo.GUARD)[i - 1].split('-')[1]:
+            s.newrow()
+        s.add(lid, lo.guard_vehicle(lid))
+    out.append(('guard-vehicles', 'props/guard-vehicles.png', s))
     # ---- the core loops' powers and pickups (loops.py: P05 rare-powers-pickups)
     s = Sheet(216)
     for which in lo.ORBS:

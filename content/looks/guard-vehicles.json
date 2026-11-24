@@ -1,0 +1,20 @@
+{
+  "//": "DRAFT: stand-in drawn by tools/art/props/make.py; a delivered sheet replaces it by editing this file.",
+  "id": "guard-vehicles",
+  "image": "props/guard-vehicles.png",
+  "looks": {
+    "guard-trike-parked": {"src": [0, 0, 56, 40]},
+    "guard-trike-moving": {"src": [56, 0, 56, 40]},
+    "guard-trike-damaged": {"src": [112, 0, 56, 40]},
+    "guard-wagon-closed": {"src": [0, 40, 72, 48]},
+    "guard-wagon-door-open": {"src": [72, 40, 72, 48]},
+    "guard-wagon-moving": {"src": [144, 40, 72, 48]},
+    "guard-wagon-damaged": {"src": [216, 40, 72, 48]},
+    "guard-roller-ready": {"src": [0, 88, 80, 48]},
+    "guard-roller-rolling": {"src": [80, 88, 80, 48]},
+    "guard-roller-damaged": {"src": [160, 88, 80, 48]},
+    "guard-rotorcraft-idle": {"src": [0, 136, 64, 48]},
+    "guard-rotorcraft-flying": {"src": [64, 136, 64, 48]},
+    "guard-rotorcraft-damaged": {"src": [128, 136, 64, 48]}
+  }
+}

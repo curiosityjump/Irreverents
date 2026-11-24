@@ -9,7 +9,11 @@ Groups (content/looks/<group>.json):
 - treasure: chests, doors (shut, open, locked, barred), a key, gold, gems, the hoard, the vault cave.
 - hall: P04 hall-of-legends-tile-atlas ('hall'): plinths, niches, plaques, banners, lights, doors, statues, frames.
 """
+import os
+
 from PIL import Image
+
+from sizes import ROOT
 
 from px import new, paste
 from srcimport import grab, ramps
@@ -428,3 +432,43 @@ def weapon_effect(which):
     if which == 'explosion':
         return _row([weapon_cut('bomb', 7, largest=False)], 32, 32)
     return _row([weapon_cut('cannon', 6)], 40, 28)
+
+
+# ---- GV-01 guard response vehicles (props-asks-2, "the owner's guard vehicles"). The pack's own labels: PROTOTYPE-
+# USABLE STATIC SPRITES, candidate vehicle types, empty (no crew drawn in). Each state is its own transparent PNG on a
+# per-vehicle canvas, already aligned on the vehicle's pivot; every state is shrunk by the same GV_SCALE and put back
+# at its shrunk offset, so the states of one vehicle line up and the four keep their sizes to each other.
+# DRAFT: GV_SCALE 0.5 (a trike about 42x33, the wagon about 60x41: beside the P04 rides' 48x44 and a ~30 px hero).
+# Right-facing states only (the plate's _left cells are its mirrors; the renderer flips).
+GV_DIR = os.path.join(ROOT, 'docs', 'design-library', '03-visual-direction-and-assets',
+                      'gv-01-guard-response-vehicles-runtime-prototype', 'runtime', 'vehicles')
+GV_SCALE = 0.5
+GVPAL = ramps('blue', 'gold', 'metal', 'night', 'red', 'orange', 'wood', 'stone', 'castle', 'cloud', 'earth', 'sky')
+# look id -> source file stem; canvases (w, h) per vehicle
+GUARD = {
+    'guard-trike-parked': 'patrol-trike-parked-right-112x80', 'guard-trike-moving': 'patrol-trike-moving-right-112x80',
+    'guard-trike-damaged': 'patrol-trike-damaged-112x80',
+    'guard-wagon-closed': 'transport-wagon-closed-right-144x96',
+    'guard-wagon-door-open': 'transport-wagon-door-open-right-144x96',
+    'guard-wagon-moving': 'transport-wagon-moving-right-144x96',
+    'guard-wagon-damaged': 'transport-wagon-damaged-right-144x96',
+    'guard-roller-ready': 'siege-roller-ready-right-160x96', 'guard-roller-rolling': 'siege-roller-rolling-right-160x96',
+    'guard-roller-damaged': 'siege-roller-damaged-right-160x96',
+    'guard-rotorcraft-idle': 'guard-rotorcraft-idle-right-128x96',
+    'guard-rotorcraft-flying': 'guard-rotorcraft-flying-right-128x96',
+    'guard-rotorcraft-damaged': 'guard-rotorcraft-damaged-right-128x96',
+}
+
+
+def guard_vehicle(look_id):
+    import srcimport
+    stem = GUARD[look_id]
+    src = Image.open(os.path.join(GV_DIR, stem + '.png')).convert('RGBA')
+    W, H = src.size
+    srcimport._cache['_gv-' + stem] = src
+    x0, y0, x1, y1 = src.getchannel('A').point(lambda a: 255 if a >= 150 else 0).getbbox()
+    size = (max(1, round((x1 - x0) * GV_SCALE)), max(1, round((y1 - y0) * GV_SCALE)))
+    piece = grab('_gv-' + stem, (0, 0, W, H), 0, GVPAL, largest=False, size=size)
+    out = new(round(W * GV_SCALE), round(H * GV_SCALE))
+    paste(out, piece, round(x0 * GV_SCALE), round(H * GV_SCALE) - size[1] - round((H - y1) * GV_SCALE))
+    return out
