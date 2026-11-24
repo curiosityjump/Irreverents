@@ -466,6 +466,24 @@ reused: `<outpost>:w<n>:<i>`). The KO slide itself (up to about 270 px: 520 px/s
 500 px/s² friction) is the same as any blow's knockback; shortening it is one simulation rule, left
 for the owner after playing (`docs/decisions-log.md`, 2026-11-24).
 
+**Part 3, the king stuck in the wall.** Not the fly-off: no body was ever left inside a *solid*
+tile (a sweep of 144 throws and set-downs of the king, 18 spots, forward, up and down each way).
+**How he gets in:** blows from the east (every hero enters from the street door, east) walk him
+west off his spot by the throne and into the **false wall** behind it (columns 1-2, rows 9-13:
+drawn as wall, never solid, `room-false-wall.ts`). He has no legs, so he stays, drawn over the wall
+(parts are drawn behind bodies). Measured in the simulation: infiltrator 5 blows or flyer 3 put
+him 2 to 6 cells deep; on a phone by touch (flyer, 150 ms each way) his west edge rested at 40, 27,
+14, then he went on through the hidden door into the undercroft. Any body nobody plays can be put
+there the same way (crates, a thrown guard); heroes stand in it by design. **Fixed:**
+`src/sim/systems/rest-out-of-false-wall.ts` (new; `room-false-wall.ts` untouched): a body nobody
+plays found at rest in a false wall (still, on the ground; a person who can walk and act is left
+alone, so a guard can follow a hero through it, `step4-guard-follows-seen`) is moved (not
+launched) the same tick to the nearest place along its row clear of it, east first. Flights through it are unchanged (the window throw into the
+undercroft). Scenario `step5-king-not-left-in-the-false-wall` (control: without the system his feet
+end at x 24) and e2e `king-wall` (control: rests at 40, 27, 14 inside the wall). The king's own
+behaviour is unchanged: he never walks back to the throne today (he is a plain body, `verbs: body`),
+and nothing here gives him that.
+
 ### Flakes (brief `handoff-prompts/step-5-e2e-flakes.md`)
 
 **Measured** by the builder `session_017WiGzJujVWWDboh12zWhNR`,

@@ -1217,3 +1217,13 @@ document as a decision of theirs.
 - **Why this way:** the owner, playing: "Enemies can't be fully defeated, neither can heros", and for the stage: "real way to lose/die, which pushes you back to the entrance to start over". Step 21's rule is used as it is, with a new place file. 3 falls sits between the street's 2 and the camp's 4; the fighters, the heavy and the brute throw you, the toll-keeper does not (he is a toll); you land on the road just inside the doorway from the courtyard. Waves that find nobody walk off after 10 s, as at the camp.
 - **To change it:** `downs`, `seizers`, `lands` in `content/defeat/quarry.json`, `"on": false` turns it off; `leaveCold`/`leaveIdle` in `content/outposts/quarry-depot.json`.
 - **Where:** `docs/mechanisms/defeat.md`, "The rule"; `docs/mechanisms/outposts.md`, "The depot"; `docs/plan/step-22.md`, "Builder notes". `DRAFT:`
+
+
+
+### 2026-11-24 · The king (or a crate, or anyone nobody plays) never ends up lying inside the false wall behind the throne
+- **Decided by:** Step 5 builder (brief `owner-knocked-out-flies-off.md`, part 3), `session_017WiGzJC6UCvT2PtVr2dn8v`
+- **Instead of asking:** "The wall behind the throne is fake: anyone can walk through it to find the hidden way down. Punching the king from the street side knocks him into it, where he sits drawn inside the wall for good. Should the fake wall stop him, or should he be put back out?"
+- **Why this way:** your words, "The king keeps getting stuck in the wall". The fake wall stays a secret only heroes find (Step 3's "a way nothing points at"), and the king can still be thrown through the window into the cellar (that flight passes through it). Only a body that comes to rest in it is put back out onto the dais, the same instant, not thrown.
+- **To change it:** delete `src/sim/systems/rest-out-of-false-wall.ts` to go back (he will lie in the wall again); `LOOK` at its top is how far it looks for room.
+- **Where:** `docs/mechanisms/rooms-and-doors.md`, the parts table. `DRAFT:`
+

@@ -1,0 +1,148 @@
+{
+  "id": "step5-king-not-left-in-the-false-wall",
+  "proves": "Step 5, the owner: \"The king keeps getting stuck in the wall too\". A flyer comes up onto the dais from the east, as every hero does, and punches the king west six times, stepping after him: he is knocked off his place by the throne and toward the false wall behind it, which is drawn as wall and stops nobody (room-false-wall.ts), but he never comes to rest in it: he ends with his box's west edge at the false wall's edge (feet x 58), on the dais, in the throne room (src/sim/systems/rest-out-of-false-wall.ts). Control: without that system the same blows leave his feet at x 24, his box 2 tiles deep in the wall",
+  "room": "throne-room",
+  "players": [
+    {
+      "id": "a",
+      "character": "flyer",
+      "spawn": 0
+    }
+  ],
+  "placements": true,
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 40,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 0,
+      "to": 3,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 60,
+      "to": 63,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 90,
+      "to": 96,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 120,
+      "to": 123,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 150,
+      "to": 156,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 180,
+      "to": 183,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 210,
+      "to": 216,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 240,
+      "to": 243,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 270,
+      "to": 276,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 300,
+      "to": 303,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 330,
+      "to": 336,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 360,
+      "to": 363,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 390,
+      "to": 396,
+      "x": -1
+    }
+  ],
+  "ticks": 600,
+  "expect": [
+    {
+      "fact": "position",
+      "entity": "king",
+      "at": 180,
+      "x": [
+        55,
+        70
+      ],
+      "y": [
+        223,
+        225
+      ]
+    },
+    {
+      "fact": "position",
+      "entity": "king",
+      "at": 600,
+      "x": [
+        57,
+        70
+      ],
+      "y": [
+        223,
+        225
+      ]
+    },
+    {
+      "fact": "in-room",
+      "entity": "king",
+      "at": 600,
+      "room": "throne-room"
+    }
+  ]
+}
