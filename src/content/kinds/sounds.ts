@@ -106,6 +106,8 @@ export const MOMENTS: Record<string, string> = {
   'clean-getaway': 'Step 19: a prize carried out of its place with nobody of the place ever having seen the heroes (heard everywhere)',
   'secret-found': 'a hidden place entered for the first time, or a piece of a set found (place-found, piece-found; Step 14 slice B)',
   recruited: 'a captive hero was freed, anywhere in this world (recruited): the fanfare (Step 13)',
+  'heart-lost': 'Step 21: a hero of the party lost a heart, anywhere in this world (heart-lost)',
+  'game-over': 'Step 21: every hero of the party is out of hearts: GAME OVER, back to the cantina (game-over-coming)',
 };
 
 const NOTE = /^([A-G])(#|b)?([0-8])$/;

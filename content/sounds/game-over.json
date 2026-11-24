@@ -1,0 +1,13 @@
+{
+  "//": "DRAFT (Step 21, hearts): GAME OVER, heard by everyone playing: the confused warble, slowed, until a game over has a sound of its own.",
+  "id": "game-over",
+  "files": [
+    "audio/mode2_confused_warble.wav"
+  ],
+  "volume": 0.9,
+  "rate": 0.6,
+  "pitch": 0,
+  "gapMs": 2000,
+  "distance": false,
+  "otherRooms": true
+}

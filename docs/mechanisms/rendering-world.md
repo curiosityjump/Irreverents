@@ -115,6 +115,14 @@ into the shared documents.
   out, `#menu-btn`) when the button sits over the view's corner, looked
   up every 30 frames, and inside `safeView`. The record: `drawn.hud`
   (`faces`, `slots`, `box`). `DRAFT:` all of it.
+  Step 21, hearts (`src/client/draw/hearts.ts`, called from `hud.ts`): with
+  `content/hearts.json` on, a row of hearts under each face: the viewer's
+  the cut `hud-heart-full`/`hud-heart-empty` (9×8, the props builder's), a
+  friend's 3×3 drawn in their colours, its column as wide as its row; the
+  plate grows by the viewer's row. A heart lost since the last frame pops
+  (swells and fades, 22 frames); an out hero's face is greyed
+  (`faces[].out`). No digits. The record: `drawn.hearts` (`rows` by kind:
+  `left`, `max`; `pops`).
 
 ## Deviations from the contract
 

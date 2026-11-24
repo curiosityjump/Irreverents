@@ -175,6 +175,11 @@ The decision is `docs/plan/step-21.md`, "Hearts"; it is built in pushes
   takes it down (`main.ts`, window listeners in the capture phase, passive).
   `drawn.gameOver`.
 
+- **On the plate** (push 4): the hearts beside each face, a pop and a sound
+  (`heart-lost`) when one is lost, an out hero's face greyed
+  (`docs/mechanisms/rendering-world.md`, "The party plate"); the GAME OVER
+  card has a sound too (`game-over`).
+
 Checked by `step21-heart-lost-to-a-bandit` (control: `on` false),
 `step21-heart-none-in-the-brawl` (control: the enemy test cut to "anyone
 nobody plays") and `scripts/checks/step21-hearts.ts` (two connections and a
@@ -190,4 +195,6 @@ no way in, the player stays the out infiltrator); `step21-heart-game-over`
 `scripts/checks/step21-game-over-drops.ts` (prize, power, weapon, alert;
 control: nothing dropped) and `scripts/checks/step21-game-over-two.ts` (two
 connections on a real server, both in the cantina with every heart and
-walking; control: the move made without its effect, neither page moves).
+walking; control: the move made without its effect, neither page moves);
+by touch on a phone, `npm run e2e`'s `hearts-drawn` and `hearts-one-lost`
+(`scripts/e2e/defeat.ts`).

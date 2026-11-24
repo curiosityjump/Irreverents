@@ -28,6 +28,7 @@ import { drawnCondition, setViewerCopy, watchDefeatEvents } from './draw/conditi
 import { drawnHall, watchHallEvents } from './draw/hall.ts';
 import { drawnRecruits, noteRecruits } from './draw/recruits.ts';
 import { drawnGameOver, skipGameOver, watchGameOver } from './draw/game-over.ts';
+import { drawnHearts } from './draw/hearts.ts';
 import { drawnParts, setHeardRooms } from './draw/room-parts.ts';
 import { drawnPowers, foundSourceIcons } from './draw/powers.ts';
 import { drawnWeapons } from './draw/weapons.ts';
@@ -168,6 +169,8 @@ const debug = {
     recruits: { cages: [], calls: [], flash: null } as ReturnType<typeof drawnRecruits>,
     /** Step 21, hearts: the GAME OVER card, while one is up (src/client/draw/game-over.ts). */
     gameOver: null as ReturnType<typeof drawnGameOver>,
+    /** Step 21, hearts: the plate's heart rows by hero kind, and how many hearts are popping (src/client/draw/hearts.ts). */
+    hearts: { rows: {}, pops: 0 } as ReturnType<typeof drawnHearts>,
     /** Step 3 (the stone plate): the plates and gates this frame drew in this room, down/open and how far a weighted plate sank (src/client/draw/room-parts.ts). */
     parts: [] as ReturnType<typeof drawnParts>,
     cantina: null as { row: { kind: string; slot: number; x: number; y: number; w: number; h: number; taken: boolean }[] | null; counter: { player: string; ko: number; falls: number }[] | null } | null,
@@ -355,6 +358,7 @@ function play(worldName: string): void {
     d.hall = drawnHall();
     d.recruits = drawnRecruits();
     d.gameOver = drawnGameOver();
+    d.hearts = drawnHearts();
     d.parts = drawnParts();
     d.words = takeWords();
     // Step 5 (docs/mechanisms/network.md, "Predicted hits"): each impact this frame drew from, on this page's clock.

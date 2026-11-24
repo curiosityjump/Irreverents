@@ -403,3 +403,16 @@ fitted). Signal: `step21-heart-game-over`, `-game-over-quarry`,
 `-refill-in-cantina`, checks `step21-game-over-drops` and
 `step21-game-over-two`, each with a control watched failing. Not shown by
 touch yet (push 4's phone e2e): a page's own GAME OVER after real falls.
+
+### Push 4: seen on a phone
+
+`src/client/draw/hearts.ts` (rows under each face, the pop, the greyed
+out face), the cut hearts from the props builder (asked; it had already
+cut `hud-heart-full`/`-empty`, 9×8), sounds `heart-lost` and `game-over`.
+Screenshots looked at (390×664, 844×390: two of the grappler's five lost,
+the infiltrator out). e2e by touch (`scripts/e2e/defeat.ts`):
+`hearts-drawn` (every face's row full, the plate inside the view) and
+`hearts-one-lost` (the viewer's row goes down and a heart pops). The game
+over by touch comes with push 5: until the old throw is off, a hero
+standing in the camp is thrown out on its fourth fall before the party is
+out (measured: grappler falls at 1184, 1609, 2041, 2473, thrown 2532).

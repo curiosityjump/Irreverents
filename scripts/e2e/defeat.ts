@@ -45,6 +45,28 @@ export async function defeatFacts(kit: Kit & { shots?: string }): Promise<void> 
       };
       requestAnimationFrame(tick);
     });
+    // Step 21, hearts: every face on the plate has its row of hearts, full, and the plate is inside the view.
+    const plate = (await ph.page.evaluate(() => {
+      const irr = (window as any).irreverents;
+      const c = document.querySelector('canvas') as HTMLCanvasElement;
+      return { hud: irr.drawn.hud, hearts: irr.drawn.hearts, w: c.width, h: c.height, me: irr.drawn.me?.kind };
+    })) as { hud: { faces: { kind: string }[]; box: { x: number; y: number; w: number; h: number } } | null; hearts: { rows: Record<string, { left: number; max: number }> }; w: number; h: number; me: string };
+    const rows = plate.hud?.faces.map((f) => ({ kind: f.kind, ...plate.hearts.rows[f.kind] })) ?? [];
+    const inView = !!plate.hud && plate.hud.box.x >= 0 && plate.hud.box.y >= 0 && plate.hud.box.x + plate.hud.box.w <= plate.w && plate.hud.box.y + plate.hud.box.h <= plate.h;
+    fact('hearts-drawn', rows.length >= 2 && rows.every((r) => (r.max ?? 0) > 0 && r.left === r.max) && inView, `the plate draws a row of hearts under each face: ${rows.map((r) => `${r.kind} ${r.left ?? '?'} of ${r.max ?? '?'}`).join(', ')}; the plate ${JSON.stringify(plate.hud?.box)} is inside the ${plate.w} by ${plate.h} view: ${inView}`);
+    // The viewer's hearts, frame by frame, and the most hearts seen popping at once.
+    await ph.page.evaluate((mine: string) => {
+      const irr = (window as any).irreverents;
+      irr.e2eHearts = { least: 99, pops: 0, out: false };
+      const tick = (): void => {
+        const h = irr.drawn.hearts;
+        const r = h?.rows?.[mine];
+        if (r) irr.e2eHearts.least = Math.min(irr.e2eHearts.least, r.left);
+        irr.e2eHearts.pops = Math.max(irr.e2eHearts.pops, h?.pops ?? 0);
+        requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    }, plate.me);
     const before = (await ph.page.evaluate(() => (window as any).irreverents.drawn.condition)) as string;
     fact('defeat-before', before === 'fine', `inside the camp before any blow the condition slot draws "${before}" (expected fine)`);
     // Over the entrance block and east past column 20, by the stick and Jump.
@@ -86,6 +108,9 @@ export async function defeatFacts(kit: Kit & { shots?: string }): Promise<void> 
       }
     }
     await ph.page.screenshot({ path: path.join(shots, 'defeat-landed-844x390.png') });
+    const lost = (await ph.page.evaluate(() => (window as any).irreverents.e2eHearts)) as { least: number; pops: number };
+    const max = plate.hearts.rows[plate.me]?.max ?? 0;
+    fact('hearts-one-lost', max > 0 && lost.least < max && lost.pops > 0, `standing among the camp's fighters the ${plate.me}'s row went from ${max} hearts down to ${lost.least} at the least, and a lost heart popped (the most popping at once: ${lost.pops})`);
     const seen = (await ph.page.evaluate(() => (window as any).irreverents.e2eCond)) as string[];
     const order = ['fine', 'hurt', 'down'].every((k) => seen.includes(k)) && seen.indexOf('fine') < seen.indexOf('hurt') && seen.indexOf('hurt') < seen.lastIndexOf('down');
     fact('defeat-condition', inside && order, `by touch, into the camp (${inside}) and standing among its fighters (column ${stoodAt}): the condition slot drew ${seen.join(' > ')} (expected fine, then hurt, then down)`);

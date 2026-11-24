@@ -1,0 +1,13 @@
+{
+  "//": "DRAFT (Step 21, hearts): a heart lost, heard by everyone playing (the party's hearts are everyone's): the hurt sound, lower and longer, until a heart has a sound of its own.",
+  "id": "heart-lost",
+  "files": [
+    "audio/hurt.wav"
+  ],
+  "volume": 0.8,
+  "rate": 0.7,
+  "pitch": 0,
+  "gapMs": 200,
+  "distance": false,
+  "otherRooms": true
+}

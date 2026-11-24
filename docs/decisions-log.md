@@ -260,3 +260,10 @@ document as a decision of theirs.
 - **Why this way:** the owner: "Enemies can't be fully defeated"; beaten-for-good is his rule now, so the victory screen's "enemies defeated" counts bandits beaten for good (three knock-outs or one big slam), not knock-downs. Being beaten puts every one of them back (the stage's start-over). While a run is on, the whole quarry holds them gone, even in rooms nobody is in (the lead's ruling), so the 90 s return never undoes your work mid-run; once you clear it or leave, they come back as anywhere else.
 - **To change it:** the count is the `defeated` branch in `src/sim/systems/stage-run.ts`; the hold is its `holdReturns` line.
 - **Where:** `docs/mechanisms/stages.md`; `scenarios/step22-beaten-stay-beaten-in-a-run.json`. `DRAFT:`
+
+### 2026-11-24 · Step 21: hearts on the party plate: a row under each face, a pop and a sound when one is lost, an out hero's face greyed
+- **Decided by:** hearts builder, push 4, `session_017WiGzG7mhviEaxroo5GvBv`
+- **Instead of asking:** "Where and how should the hearts show on a phone?"
+- **Why this way:** "Heros should have hearts which can be lost": you have to see them go. Your own hero's hearts are the pink hearts the props builder cut from the approved UI atlas, under your face; each friend's (or free hero's) hearts are tiny ones in the same colours under their face; a lost heart swells and fades with a low "hurt" sound everyone hears; a hero with none left has a greyed face. The GAME OVER card has a slowed warble. No numbers anywhere.
+- **To change it:** sizes and colours at the top of `src/client/draw/hearts.ts`; the sounds in `content/sounds/heart-lost.json` and `game-over.json`.
+- **Where:** `docs/mechanisms/rendering-world.md`, "The party plate". `DRAFT:`

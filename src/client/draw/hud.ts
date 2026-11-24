@@ -2,6 +2,8 @@ import type { Content } from '../../content/types.ts';
 import { memberTaken } from '../../sim/party.ts';
 import type { Entity, World } from '../../sim/types.ts';
 import { safeView } from './fx.ts';
+import { drawHeartRow, heartSize, isOut, noteHearts } from './hearts.ts';
+import { maxHearts } from '../../sim/hearts.ts';
 import { drawLook, drawNine, look } from './looks.ts';
 
 // Step 19 push 2 (docs/mechanisms/rendering-world.md, "The party plate"):
@@ -43,8 +45,8 @@ const GAP = 2;
 const WELL = 'rgba(15, 15, 28, 0.55)';
 
 export interface DrawnHud {
-  /** In plate order: the viewer's own first. `played`: by the viewer or a friend. */
-  faces: { kind: string; me: boolean; played: boolean }[];
+  /** In plate order: the viewer's own first. `played`: by the viewer or a friend. `out`: no hearts left (Step 21, drawn greyed). */
+  faces: { kind: string; me: boolean; played: boolean; out: boolean }[];
   /** What each of the viewer's slots shows (a look id), or null. */
   slots: Record<HudSlot, string | null>;
   /** The plate, in game pixels of the view. */
@@ -92,8 +94,12 @@ export function drawHud(g: CanvasRenderingContext2D, world: World, content: Cont
   const slots = {} as Record<HudSlot, string | null>;
   for (const s of HUD_SLOTS) slots[s] = fillers[s]?.(world, content, me) ?? null;
 
-  const w = PAD + FACE + GAP + HUD_SLOTS.length * (SLOT + 1) + (others.length > 0 ? GAP + others.length * (SMALL + 1) : 0) + PAD - 1;
-  const h = PAD + FACE + PAD;
+  // Step 21, hearts (draw/hearts.ts): a row of hearts under each face; a friend's column is as wide as its row.
+  const hearts = content.hearts?.on === true;
+  const col = (k: string): number => (hearts ? Math.max(SMALL, maxHearts(content, k) * heartSize(false).step - 1) : SMALL);
+  if (hearts) noteHearts(world, content, [mine, ...others], frame);
+  const w = PAD + FACE + GAP + HUD_SLOTS.length * (SLOT + 1) + (others.length > 0 ? GAP + others.reduce((n, k) => n + col(k) + 1, 0) : 0) + PAD - 1;
+  const h = PAD + FACE + (hearts ? 1 + heartSize(true).h : 0) + PAD;
   const x = Math.max(3 + safeView.left, clearOfMenu(g, frame) + 2);
   const y = 3 + safeView.top;
   if (!drawNine(g, content, 'hud-plate', x, y, w, h)) {
@@ -103,7 +109,8 @@ export function drawHud(g: CanvasRenderingContext2D, world: World, content: Cont
     g.fillRect(x + 1, y + 1, w - 2, h - 2);
   }
   // The viewer's own face, lit.
-  face(g, content, mine, x + PAD, y + PAD, FACE, 1);
+  face(g, content, mine, x + PAD, y + PAD, FACE, 1, hearts && isOut(world, content, mine));
+  if (hearts) drawHeartRow(g, world, content, mine, x + PAD, y + PAD + FACE + 1, true, frame);
   let cx = x + PAD + FACE + GAP;
   // The slots, beside it: an empty slot is a dark well.
   for (const s of HUD_SLOTS) {
@@ -115,12 +122,15 @@ export function drawHud(g: CanvasRenderingContext2D, world: World, content: Cont
     cx += SLOT + 1;
   }
   cx += GAP;
-  const faces: DrawnHud['faces'] = [{ kind: mine, me: true, played: true }];
+  const faces: DrawnHud['faces'] = [{ kind: mine, me: true, played: true, out: hearts && isOut(world, content, mine) }];
   for (const k of others) {
     const played = memberTaken(world, k, me.id);
-    face(g, content, k, cx, y + PAD + (FACE - SMALL), SMALL, played ? 0.9 : 0.35);
-    faces.push({ kind: k, me: false, played });
-    cx += SMALL + 1;
+    const out = hearts && isOut(world, content, k);
+    const fx = cx + Math.floor((col(k) - SMALL) / 2);
+    face(g, content, k, fx, y + PAD + (FACE - SMALL), SMALL, played ? 0.9 : 0.35, out);
+    if (hearts) drawHeartRow(g, world, content, k, cx, y + PAD + FACE + 2, false, frame);
+    faces.push({ kind: k, me: false, played, out });
+    cx += col(k) + 1;
   }
   drawn = { faces, slots, box: { x, y, w, h } };
   return drawn.box;
@@ -142,9 +152,9 @@ function fit(g: CanvasRenderingContext2D, content: Content, id: string, x: numbe
   drawLook(g, content, id, x + Math.floor((size - w) / 2), y + Math.floor((size - h) / 2), { w, h });
 }
 
-function face(g: CanvasRenderingContext2D, content: Content, kind: string, x: number, y: number, size: number, alpha: number): void {
+function face(g: CanvasRenderingContext2D, content: Content, kind: string, x: number, y: number, size: number, alpha: number, out = false): void {
   const before = g.globalAlpha;
-  g.globalAlpha = before * alpha;
+  g.globalAlpha = before * (out ? Math.min(alpha, 0.5) : alpha);
   if (!drawLook(g, content, `hud-face-${kind}`, x, y, { w: size, h: size })) {
     g.fillStyle = '#0f0f1c';
     g.fillRect(x, y, size, size);
@@ -152,4 +162,9 @@ function face(g: CanvasRenderingContext2D, content: Content, kind: string, x: nu
     g.fillRect(x + 1, y + 1, size - 2, size - 2);
   }
   g.globalAlpha = before;
+  // Step 21, hearts: a hero with no hearts is out; its face is greyed over (DRAFT: the shade).
+  if (out) {
+    g.fillStyle = 'rgba(70, 70, 80, 0.65)';
+    g.fillRect(x, y, size, size);
+  }
 }

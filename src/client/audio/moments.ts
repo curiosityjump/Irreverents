@@ -158,6 +158,14 @@ export function createMoments(content: Content, myPlayer: string, myId: string) 
             // Step 19: nobody noticed; heard by everyone in the game, wherever they are (DRAFT: the jingle, louder).
             out.push({ moment: 'clean-getaway', room: '', x: null, y: null, key: hash(ev.tick, 'clean-getaway', String(ev.thing)), tick: ev.tick, mine, delay: 0 });
             return;
+          case 'heart-lost':
+            // Step 21, hearts: the party's hearts are everyone's: heard by everyone in this world, wherever they are.
+            out.push({ moment: 'heart-lost', room: me.room, x: null, y: null, key: hash(ev.tick, 'heart-lost', String(ev.entity)), tick: ev.tick, mine, delay: 0 });
+            return;
+          case 'game-over-coming':
+            // Step 21, hearts: the GAME OVER card's sound, on every page (draw/game-over.ts).
+            out.push({ moment: 'game-over', room: me.room, x: null, y: null, key: hash(ev.tick, 'game-over'), tick: ev.tick, mine, delay: 0 });
+            return;
           case 'recruited':
             // Step 13: heard by everyone in this world, wherever they are (distance false, otherRooms true).
             out.push({ moment: 'recruited', room: me.room, x: null, y: null, key: hash(ev.tick, 'recruited', String(ev.recruit)), tick: ev.tick, mine, delay: 0 });
