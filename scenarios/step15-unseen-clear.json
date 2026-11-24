@@ -1,0 +1,220 @@
+{
+ "id": "step15-unseen-clear",
+ "proves": "Step 15 push 5 (DRAFT, docs/decisions-log.md 'the forest's quiet way'): the zero-alarm infiltration (docs/vision.md). The infiltrator alone, with every bad guy of the trail placed, goes from the stage's entrance (the road, just inside the doorway from the courtyard) along the road, up the boughs at the trail's start, into the crawl under the root mound and along the root tunnel, up out of its hatch (columns 36-37), west behind the root stump (column 39 hides the floor from the light fighters at 41 and 43) to column 33, beyond their 112 px of sight, up onto the perch beside the mound and onto the high line of one-way boughs (row 5) under the canopy's long limb, east along it over both light fighters, the heavy, the brute and the lookout (56 px over their middles, more than the 40 px anyone sees up), waits at its end until the lookout looks west, and drops down the shaft and west along the deep level into the deepest pocket (the stage's end). Nobody ever sees it: one stage-cleared at tick 1920 (32.0 s) with unseen true, no alarm, nobody beaten, 3 stars, and no call is ever started. Recorded by scripts/stage-quiet-forest.ts with scripts/stage-routes/forest-quiet-infiltrator.json (it keeps only waits after which nobody sees the hero); re-record when the trail changes, the claims are what must hold. Control (watched to fail): one bough of the high line removed (row 5, column 60, over the brute), and the infiltrator falls through onto the trail in front of the brute and walks on along the trail: seen (unseen false), and the lookout starts a call (tick 1275)",
+ "room": "forest-road",
+ "placements": true,
+ "placedRooms": [
+  "forest-trail"
+ ],
+ "players": [
+  {
+   "id": "a",
+   "character": "infiltrator",
+   "spawn": 1
+  }
+ ],
+ "inputs": [
+  {
+   "player": "a",
+   "from": 0,
+   "to": 351,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 350,
+   "to": 367,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 353,
+   "to": 363,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 365,
+   "to": 374,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 377,
+   "to": 384,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 383,
+   "to": 400,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 387,
+   "to": 394,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 398,
+   "to": 403,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 416,
+   "to": 433,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 449,
+   "to": 466,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 482,
+   "to": 499,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 515,
+   "to": 710,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 710,
+   "to": 727,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 716,
+   "to": 719,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 743,
+   "to": 760,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 776,
+   "to": 800,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 800,
+   "to": 817,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 804,
+   "to": 807,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 833,
+   "to": 850,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 850,
+   "to": 1369,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 1369,
+   "to": 1921,
+   "x": -1
+  }
+ ],
+ "ticks": 1960,
+ "expect": [
+  {
+   "fact": "event-where",
+   "event": "stage-cleared",
+   "where": {
+    "stage": "bramble-forest",
+    "player": "a",
+    "ticks": 1920,
+    "defeated": 0,
+    "alarms": 0,
+    "tries": 0,
+    "unseen": true,
+    "stars": 3
+   },
+   "between": [
+    1910,
+    1930
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "event-where",
+   "event": "outpost-call-started",
+   "where": {},
+   "between": [
+    0,
+    1960
+   ],
+   "count": [
+    0,
+    0
+   ]
+  },
+  {
+   "fact": "event-where",
+   "event": "game-over",
+   "where": {},
+   "between": [
+    0,
+    1960
+   ],
+   "count": [
+    0,
+    0
+   ]
+  },
+  {
+   "fact": "stage",
+   "stage": "bramble-forest",
+   "at": 1960,
+   "state": "cleared",
+   "tries": 0
+  }
+ ]
+}

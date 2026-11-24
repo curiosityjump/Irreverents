@@ -1,6 +1,6 @@
 {
  "id": "step15-clear-slow",
- "proves": "Step 15 push 3 (DRAFT, docs/decisions-log.md 'The forest's star times'): the star times' slow run. The grappler alone, by a script that only walks (no punch), goes from the stage's entrance (the road, just inside the doorway from the courtyard) along the road, up the boughs at the trail's start, over the root mound under the thrower, east along the trail past the light fighters, the heavy, the brute and the guarded spot's lookout, down the shaft and west along the deep level into the deepest pocket (the stage's end), with every bad guy of the trail placed. The trail's people knock it about and the lookout's call finishes (an alarm, one wave), but it reaches the end at tick 3365 (56.1 s), first try: 2 stars (over good, 52 s, but no start-over; not 3: an alarm finished and it is over best, 40 s), no game over. Recorded by tools/scenario-bots/walkbot.ts (run east, jump at a wall or a gap, jump on the spot under the boughs); re-record when the trail changes, the claims are what must hold. Control (watched to fail): content/stages/bramble-forest.json's stars set to good 60 s and best 58 s, and the same clear gets 3 stars",
+ "proves": "Step 15 push 3 (DRAFT, docs/decisions-log.md 'The forest's star times'): the star times' slow run. The grappler alone, by a script that only walks (no punch), goes from the stage's entrance (the road, just inside the doorway from the courtyard) along the road, up the boughs at the trail's start, over the root mound under the thrower, over the root stump (column 39, push 5), east along the trail past the light fighters, the heavy, the brute and the guarded spot's lookout, down the shaft and west along the deep level into the deepest pocket (the stage's end), with every bad guy of the trail placed. The trail's people knock it about and the lookout's call finishes (an alarm, one wave), but it reaches the end at tick 2954 (49.2 s), first try: 2 stars (over good, 48 s, but no start-over; not 3: an alarm finished and it is over best, 40 s), no game over. Recorded by tools/scenario-bots/walkbot.ts (run east, jump at a wall or a gap, jump on the spot under the boughs); re-record when the trail changes, the claims are what must hold. Re-recorded in push 5 (the quiet way's stump and limb changed the trail), with tools/scenario-bots/mk_clears.py. Control (watched to fail): content/stages/bramble-forest.json's stars set to good 60 s and best 58 s, and the same clear gets 3 stars",
  "room": "forest-road",
  "placements": true,
  "placedRooms": [
@@ -83,7 +83,7 @@
   {
    "player": "a",
    "from": 825,
-   "to": 2494,
+   "to": 2101,
    "x": 1
   },
   {
@@ -104,96 +104,66 @@
   },
   {
    "player": "a",
-   "from": 1438,
-   "to": 1456,
+   "from": 1246,
+   "to": 1264,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 1479,
-   "to": 1497,
+   "from": 1449,
+   "to": 1467,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 1520,
-   "to": 1538,
+   "from": 1490,
+   "to": 1508,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 1561,
-   "to": 1579,
+   "from": 1531,
+   "to": 1549,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 1886,
-   "to": 1904,
+   "from": 1572,
+   "to": 1590,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 1927,
-   "to": 1945,
+   "from": 2074,
+   "to": 2092,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 1968,
-   "to": 1986,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 2467,
-   "to": 2485,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 2499,
-   "to": 2521,
+   "from": 2105,
+   "to": 2128,
    "x": -1
   },
   {
    "player": "a",
-   "from": 2528,
-   "to": 2536,
-   "x": 1
-  },
-  {
-   "player": "a",
-   "from": 2537,
-   "to": 3422,
+   "from": 2133,
+   "to": 3011,
    "x": -1
-  },
-  {
-   "player": "a",
-   "from": 2540,
-   "to": 2558,
-   "hold": [
-    "jump"
-   ]
   }
  ],
- "ticks": 3405,
+ "ticks": 3062,
  "expect": [
   {
    "fact": "event-where",
@@ -201,15 +171,15 @@
    "where": {
     "stage": "bramble-forest",
     "player": "a",
-    "ticks": 3365,
+    "ticks": 2954,
     "alarms": 1,
     "tries": 0,
     "defeated": 0,
     "stars": 2
    },
    "between": [
-    3355,
-    3375
+    2944,
+    2964
    ],
    "count": [
     1,
@@ -222,7 +192,7 @@
    "where": {},
    "between": [
     0,
-    3405
+    3062
    ],
    "count": [
     0,

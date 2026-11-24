@@ -1,6 +1,6 @@
 {
  "id": "step15-each-hero-crosses-flyer",
- "proves": "Step 15 signal 2: the flyer alone goes from the courtyard through its new doorway (columns 8-10), along the forest road, up the boughs at the trail's start, east along the trail past the gap, the canopy, the hatch and the stone slab, down the shaft at its east end and west along the deep level to the deepest pocket; then back up the shaft's boughs, west along the trail, down off its west end, out along the road and through the doorway into the courtyard. Recorded by a scripted walker (run right or left, jump at a wall or a gap, jump on the spot under the boughs). Control (watched to fail): a one-tile step on the road (column 20, row 9 solid), and the same recorded inputs never reach the trail",
+ "proves": "Step 15 signal 2: the flyer alone goes from the courtyard through its new doorway (columns 8-10), along the forest road, up the boughs at the trail's start, east along the trail past the gap, the canopy, the hatch and the stone slab, down the shaft at its east end and west along the deep level to the deepest pocket; then back up the shaft's boughs, west along the trail, down off its west end, out along the road and through the doorway into the courtyard. Recorded by a scripted walker (run right or left, jump at a wall or a gap, jump on the spot under the boughs). Control (watched to fail): a one-tile step made two tiles higher on the road (column 30, row 7 solid), and the walker's same inputs never reach the trail",
  "room": "courtyard",
  "players": [
   {
@@ -91,7 +91,7 @@
   {
    "player": "a",
    "from": 931,
-   "to": 1713,
+   "to": 1722,
    "x": 1
   },
   {
@@ -104,116 +104,138 @@
   },
   {
    "player": "a",
-   "from": 1689,
-   "to": 1707,
+   "from": 1096,
+   "to": 1114,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 1717,
-   "to": 1727,
-   "x": -1
-  },
-  {
-   "player": "a",
-   "from": 1796,
-   "to": 2599,
-   "x": -1
-  },
-  {
-   "player": "a",
-   "from": 1796,
-   "to": 1814,
+   "from": 1698,
+   "to": 1716,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 2610,
-   "to": 3394,
+   "from": 1726,
+   "to": 1737,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 1743,
+   "to": 1750,
    "x": 1
   },
   {
    "player": "a",
-   "from": 3395,
-   "to": 3413,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 3434,
-   "to": 3452,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 3473,
-   "to": 3491,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 3512,
-   "to": 3530,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 3551,
-   "to": 3569,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 3590,
-   "to": 5038,
+   "from": 1805,
+   "to": 2611,
    "x": -1
   },
   {
    "player": "a",
-   "from": 3590,
-   "to": 3608,
+   "from": 1805,
+   "to": 1823,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 4239,
-   "to": 4257,
+   "from": 2622,
+   "to": 3407,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 3408,
+   "to": 3426,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 4486,
-   "to": 4504,
+   "from": 3447,
+   "to": 3465,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 5049,
-   "to": 5053,
+   "from": 3486,
+   "to": 3504,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 3525,
+   "to": 3543,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 3564,
+   "to": 3582,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 3603,
+   "to": 5061,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 3603,
+   "to": 3621,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 4180,
+   "to": 4198,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 4262,
+   "to": 4280,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 4509,
+   "to": 4527,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 5072,
+   "to": 5076,
    "y": -1
   }
  ],
- "ticks": 5083,
+ "ticks": 5106,
  "expect": [
   {
    "fact": "in-room",
@@ -224,13 +246,13 @@
   {
    "fact": "in-room",
    "player": "a",
-   "at": 2610,
+   "at": 2622,
    "room": "forest-trail"
   },
   {
    "fact": "standing-on-tile",
    "player": "a",
-   "at": 2610,
+   "at": 2622,
    "tile": [
     20,
     19
@@ -239,7 +261,7 @@
   {
    "fact": "in-room",
    "player": "a",
-   "at": 5083,
+   "at": 5106,
    "room": "courtyard"
   }
  ]

@@ -1,6 +1,6 @@
 {
  "id": "step15-stage-game-over",
- "proves": "Step 15 signal (game over in the forest): the party's last heart is lost on the Bramble Trail (a stage room, so a run is under way from tick 0) to the second light fighter past the root tunnel (tick 661), after the climb over the root mound under the thrower's lobs (re-recorded in push 3, when the thrower was placed there: walked east to column 40 and stood); a second later (721); the game over puts the player at the forest's entrance (the road, by the doorway from the courtyard, content/defeat/forest.json `gameOver`), not the cantina, and on that tick the forest stage starts over (`stage-restarted`, tries 1). Control (watched to fail): content/defeat/forest.json without `gameOver`, and the game over lands in the cantina and starts nothing over",
+ "proves": "Step 15 signal (game over in the forest): the party's last heart is lost on the Bramble Trail (a stage room, so a run is under way from tick 0) to the first light fighter, just past the root stump (tick 675), after the climb over the root mound under the thrower's lobs (re-recorded in push 3, when the thrower was placed there: walked east to column 40 and stood; re-recorded in push 5, when the root stump at column 39 was added: walked east to column 41, jumping at walls, and stood); a second later (735); the game over puts the player at the forest's entrance (the road, by the doorway from the courtyard, content/defeat/forest.json `gameOver`), not the cantina, and on that tick the forest stage starts over (`stage-restarted`, tries 1). Control (watched to fail): content/defeat/forest.json without `gameOver`, and the game over lands in the cantina and starts nothing over",
  "room": "forest-trail",
  "placements": true,
  "players": [
@@ -14,7 +14,7 @@
   {
    "player": "a",
    "from": 0,
-   "to": 487,
+   "to": 510,
    "x": 1
   },
   {
@@ -32,6 +32,20 @@
    "hold": [
     "jump"
    ]
+  },
+  {
+   "player": "a",
+   "from": 458,
+   "to": 476,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 512,
+   "to": 615,
+   "x": -1
   }
  ],
  "ticks": 900,
@@ -47,8 +61,8 @@
     ]
    },
    "between": [
-    721,
-    721
+    735,
+    735
    ],
    "count": [
     1,
@@ -63,8 +77,8 @@
     "tries": 1
    },
    "between": [
-    721,
-    721
+    735,
+    735
    ],
    "count": [
     1,
@@ -87,13 +101,13 @@
   {
    "fact": "in-room",
    "player": "a",
-   "at": 722,
+   "at": 736,
    "room": "forest-road"
   },
   {
    "fact": "stage",
    "stage": "bramble-forest",
-   "at": 722,
+   "at": 736,
    "state": "running",
    "tries": 1
   }

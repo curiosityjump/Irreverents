@@ -64,7 +64,11 @@ for hero in ('infiltrator', 'grappler', 'flyer'):
     )
 
 # ---- the canopy: the flyer flaps up; the others with the same presses do not
-canopy_legs = [{"room": FT, "toCol": 54}, {"face": -1}, {"wait": 10}, {"mark": "start"}]
+# DRAFT (push 5): the canopy's limb now roofs the trail from column 32 east (the quiet way's boughs run under it),
+# so the way up is the open sky over the root mound: from the mound's top (column 29) a jump and three flaps east,
+# onto the limb's top, then a walk east along it onto the canopy. CANOPY_WALK is the walk's length in ticks.
+canopy_legs = [{"room": FT, "toCol": 29}, {"face": 1}, {"wait": 10}, {"mark": "start"}]
+CANOPY_WALK = int(__import__('os').environ.get('CANOPY_WALK', '190'))
 
 
 def canopy(hero):
@@ -77,18 +81,20 @@ def canopy(hero):
         {"player": "a", "from": t0 + 22, "to": t0 + 30, "hold": ["jump"]},
         {"player": "a", "from": t0 + 38, "to": t0 + 46, "hold": ["jump"]},
         {"player": "a", "from": t0 + 54, "to": t0 + 62, "hold": ["jump"]},
-        {"player": "a", "from": t0 + 20, "to": t0 + 60, "x": -1},
+        {"player": "a", "from": t0 + 20, "to": t0 + 60, "x": 1},
+        {"player": "a", "from": t0 + 80, "to": t0 + 80 + CANOPY_WALK, "x": 1},
     ]
-    t = t0 + 200
+    t = t0 + 120 + CANOPY_WALK
     fits = hero == 'flyer'
     sc = {"id": f'step15-canopy-{hero}',
-          "proves": f"Step 15 signal 3, the canopy (height): from the trail beside the bough six tiles up (columns 46-52), with nothing to climb, a jump and three flaps while moving west. " + (
-              "The flyer lands on the bough and stands there. Control (watched to fail): the grappler and the infiltrator with the same presses (step15-canopy-grappler, -infiltrator)" if fits else
-              f"The {hero} cannot flap and never lands up there (the flyer with the same presses does: step15-canopy-flyer)"),
+          "proves": f"Step 15 signal 3, the canopy (height): from the top of the root mound (column 29, nothing higher to climb), a jump and three flaps while moving east, then a walk east: the canopy (columns 46-52, six tiles over the trail) is the top of a long limb that roofs the trail from column 32 east, and the only way onto it is the open sky over the mound. " + (
+              "The flyer lands on the limb, walks along it and stands on the canopy. Control (watched to fail): the grappler and the infiltrator with the same presses (step15-canopy-grappler, -infiltrator)" if fits else
+              f"The {hero} cannot flap and never lands up there (the flyer with the same presses does: step15-canopy-flyer); the infiltrator may land on the quiet way's boughs under the limb (row 5), never on it"),
           "room": FT, "players": [{"id": "a", "character": hero, "spawn": 1}], "inputs": ins, "ticks": t,
-          "expect": ([{"fact": "position", "player": "a", "at": t, "x": [46 * 16, 53 * 16], "y": [3 * 16, 3 * 16]}] if fits else
+          "expect": ([{"fact": "position", "player": "a", "at": t, "x": [46 * 16, 53 * 16], "y": [3 * 16, 3 * 16]},
+                      {"fact": "found", "level": "bramble-forest", "at": t, "pieces": ["forest-2"]}] if fits else
                      [{"fact": "event", "event": "landed", "player": "a", "between": [0, t], "count": [0, 0], "where": {"ty": 3}},
-                      {"fact": "position", "player": "a", "at": t, "y": [UPPER_Y, UPPER_Y]}])}
+                      {"fact": "position", "player": "a", "at": t, "y": [5 * 16, UPPER_Y]}])}
     write(sc)
 
 

@@ -1,0 +1,179 @@
+{
+ "//": "DRAFT (Step 15 push 5, docs/decisions-log.md 'the forest's quiet way'): the infiltrator's quiet way through the Bramble Forest, for node scripts/stage-quiet-forest.ts (scenarios/step15-unseen-clear.json). Along the road, up the start's boughs, east into the crawl under the root mound and along the root tunnel, up out of its hatch, west behind the root stump (column 39 hides the floor from the light fighters) to column 33, beyond their sight, onto the perch beside the mound and the high line of boughs under the canopy's long limb, east along it over every guard, wait at its end until the lookout looks west, then down the shaft and west along the deep level into the deepest pocket.",
+ "hero": "infiltrator",
+ "segments": [
+  {
+   "note": "the road",
+   "do": "walk",
+   "gaps": true,
+   "until": {
+    "room": "forest-trail"
+   }
+  },
+  {
+   "note": "to the boughs",
+   "do": "steer",
+   "to": 11.5,
+   "nohop": true,
+   "until": {
+    "room": "forest-trail",
+    "xMin": 11.3,
+    "xMax": 11.7,
+    "ground": true
+   }
+  },
+  {
+   "note": "bough 17",
+   "do": "steer",
+   "to": 11.5,
+   "until": {
+    "feetMax": 17.01,
+    "ground": true
+   },
+   "max": 90
+  },
+  {
+   "note": "bough 15",
+   "do": "steer",
+   "to": 11.5,
+   "until": {
+    "feetMax": 15.01,
+    "ground": true
+   },
+   "max": 90
+  },
+  {
+   "note": "bough 13",
+   "do": "steer",
+   "to": 11.5,
+   "until": {
+    "feetMax": 13.01,
+    "ground": true
+   },
+   "max": 90
+  },
+  {
+   "note": "bough 11",
+   "do": "steer",
+   "to": 11.5,
+   "until": {
+    "feetMax": 11.01,
+    "ground": true
+   },
+   "max": 90
+  },
+  {
+   "note": "trail row 9",
+   "do": "steer",
+   "to": 11.5,
+   "until": {
+    "feetMax": 9.01,
+    "ground": true
+   },
+   "max": 90
+  },
+  {
+   "note": "into the crawl and down into the root tunnel",
+   "do": "walk",
+   "until": {
+    "feetMin": 12.99,
+    "ground": true
+   },
+   "max": 400
+  },
+  {
+   "note": "under the hatch's bough",
+   "do": "steer",
+   "to": 36.6,
+   "nohop": true,
+   "until": {
+    "xMin": 36.4,
+    "xMax": 36.8,
+    "ground": true
+   },
+   "max": 200
+  },
+  {
+   "note": "up onto the tunnel's bough",
+   "do": "steer",
+   "to": 36.6,
+   "until": {
+    "feetMax": 11.01,
+    "ground": true
+   },
+   "max": 90
+  },
+  {
+   "note": "up through the hatch",
+   "do": "steer",
+   "to": 36.6,
+   "until": {
+    "feetMax": 9.01,
+    "ground": true
+   },
+   "max": 90
+  },
+  {
+   "note": "west from the hatch, out of the fighters' reach, the stump hiding the floor",
+   "do": "steer",
+   "to": 33.5,
+   "nohop": true,
+   "until": {
+    "xMin": 33.35,
+    "xMax": 33.65,
+    "ground": true
+   },
+   "max": 120
+  },
+  {
+   "note": "onto the perch beside the mound",
+   "do": "steer",
+   "to": 33.5,
+   "until": {
+    "feetMax": 7.01,
+    "ground": true
+   },
+   "max": 90
+  },
+  {
+   "note": "onto the high line",
+   "do": "steer",
+   "to": 33.5,
+   "until": {
+    "feetMax": 5.01,
+    "ground": true
+   },
+   "max": 90
+  },
+  {
+   "note": "east along the high line",
+   "do": "walk",
+   "until": {
+    "xMin": 95.0,
+    "feetMax": 5.01,
+    "ground": true
+   },
+   "max": 900
+  },
+  {
+   "note": "down the shaft while the lookout looks west",
+   "do": "walk",
+   "wait": 480,
+   "waitStep": 6,
+   "until": {
+    "feetMin": 18.99,
+    "ground": true
+   },
+   "max": 200
+  },
+  {
+   "note": "west along the deep level into the deepest pocket",
+   "do": "walk",
+   "dir": -1,
+   "until": {
+    "cleared": true
+   },
+   "max": 900
+  }
+ ]
+}

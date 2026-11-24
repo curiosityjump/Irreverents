@@ -1,6 +1,6 @@
 {
  "id": "step15-clear-best",
- "proves": "Step 15 push 3 (DRAFT, docs/decisions-log.md 'The forest's star times'): the star times' best run. The infiltrator alone, by a script that fights, goes from the stage's entrance (the road, just inside the doorway from the courtyard) along the road, up the boughs at the trail's start, over the root mound under the thrower, east along the trail past the light fighters, the heavy, the brute and the guarded spot's lookout, down the shaft and west along the deep level into the deepest pocket (the stage's end), with every bad guy of the trail placed. It knocks the two light fighters flat and runs on; the lookout sees it and one call finishes (an alarm, one wave). It clears the stage at tick 1768 (29.5 s), first try: 3 stars although an alarm finished, because it is under best (40 s). Recorded by tools/scenario-bots/walkbot.ts (run east, jump at a wall or a gap, jump on the spot under the boughs, punch a bad guy just ahead); re-record when the trail changes, the claims are what must hold. Control (watched to fail): content/stages/bramble-forest.json's best set to 25 s, and the same clear gets 2 stars",
+ "proves": "Step 15 push 3 (DRAFT, docs/decisions-log.md 'The forest's star times'): the star times' best run. The infiltrator alone, by a script that fights, goes from the stage's entrance (the road, just inside the doorway from the courtyard) along the road, up the boughs at the trail's start, over the root mound under the thrower, over the root stump (column 39, push 5), east along the trail past the light fighters, the heavy, the brute and the guarded spot's lookout, down the shaft and west along the deep level into the deepest pocket (the stage's end), with every bad guy of the trail placed. It runs on through the trail's people; the lookout sees it and one call finishes (an alarm, one wave). It clears the stage at tick 1807 (30.1 s), first try: 3 stars although an alarm finished, because it is under best (40 s). Recorded by tools/scenario-bots/walkbot.ts (run east, jump at a wall or a gap, jump on the spot under the boughs, punch a bad guy just ahead); re-record when the trail changes, the claims are what must hold. Re-recorded in push 5 (the quiet way's stump and limb changed the trail), with tools/scenario-bots/mk_clears.py. Control (watched to fail): content/stages/bramble-forest.json's best set to 25 s, and the same clear gets 2 stars",
  "room": "forest-road",
  "placements": true,
  "placedRooms": [
@@ -83,7 +83,7 @@
   {
    "player": "a",
    "from": 612,
-   "to": 1174,
+   "to": 1215,
    "x": 1
   },
   {
@@ -104,88 +104,102 @@
   },
   {
    "player": "a",
-   "from": 730,
-   "to": 734,
-   "hold": [
-    "attack"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 754,
-   "to": 758,
-   "hold": [
-    "attack"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 778,
-   "to": 782,
-   "hold": [
-    "attack"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 802,
-   "to": 806,
-   "hold": [
-    "attack"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 888,
-   "to": 892,
-   "hold": [
-    "attack"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 1118,
-   "to": 1122,
-   "hold": [
-    "attack"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 1158,
-   "to": 1176,
+   "from": 731,
+   "to": 749,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 1177,
-   "to": 1186,
+   "from": 766,
+   "to": 770,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 798,
+   "to": 802,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 822,
+   "to": 826,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 846,
+   "to": 850,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 930,
+   "to": 934,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1156,
+   "to": 1160,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1199,
+   "to": 1217,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1218,
+   "to": 1227,
    "x": -1
   },
   {
    "player": "a",
-   "from": 1191,
-   "to": 1197,
+   "from": 1231,
+   "to": 1238,
    "x": 1
   },
   {
    "player": "a",
-   "from": 1225,
-   "to": 1804,
+   "from": 1243,
+   "to": 1248,
    "x": -1
   },
   {
    "player": "a",
-   "from": 1230,
-   "to": 1248,
+   "from": 1266,
+   "to": 1843,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 1266,
+   "to": 1284,
    "hold": [
     "jump"
    ]
   }
  ],
- "ticks": 1808,
+ "ticks": 1894,
  "expect": [
   {
    "fact": "event-where",
@@ -193,14 +207,14 @@
    "where": {
     "stage": "bramble-forest",
     "player": "a",
-    "ticks": 1768,
+    "ticks": 1807,
     "alarms": 1,
     "tries": 0,
     "stars": 3
    },
    "between": [
-    1758,
-    1778
+    1797,
+    1817
    ],
    "count": [
     1,
@@ -213,7 +227,7 @@
    "where": {},
    "between": [
     0,
-    1808
+    1894
    ],
    "count": [
     0,
@@ -228,7 +242,7 @@
    },
    "between": [
     0,
-    1768
+    1807
    ],
    "count": [
     1,

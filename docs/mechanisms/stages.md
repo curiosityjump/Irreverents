@@ -18,7 +18,7 @@ result. The engine knows stages, not the quarry: a second stage is one file.
 `docs/plan/step-15.md`): the forest's stage, defeat and completion files
 copy the quarry's shape and needed no `src/` edit. Its entrance is the
 forest road by the doorway from the courtyard (`content/defeat/forest.json`
-`gameOver` lands there); its end is the trail's deepest pocket. Its star times (good 52 s, best 40 s) are set from scripted clears with the trail's people placed (`step15-cleared`, `-clear-best`, `-clear-slow`, recorded by `tools/scenario-bots/walkbot.ts`, not `scripts/stage-bot.ts`, which stays the quarry's).
+`gameOver` lands there); its end is the trail's deepest pocket. Its star times (good 48 s, best 40 s; good was 52 s before push 5) are set from scripted clears with the trail's people placed (`step15-cleared`, `-clear-best`, `-clear-slow`, recorded by `tools/scenario-bots/walkbot.ts` through `tools/scenario-bots/mk_clears.py`, not `scripts/stage-bot.ts`, which stays the quarry's). Its quiet way (push 5): `step15-unseen-clear`, the infiltrator under the canopy's limb on a high line of boughs, recorded by `scripts/stage-quiet-forest.ts` (a copy of `scripts/stage-quiet.ts` set to the forest's rooms and stage) with `scripts/stage-routes/forest-quiet-infiltrator.json`.
 
 ## The pieces
 
