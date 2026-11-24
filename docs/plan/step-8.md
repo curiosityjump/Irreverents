@@ -529,4 +529,6 @@ The owner, 2026-11-24 ~14:50 UTC: "Some new biome backgrounds getting added to t
 
 **Sync flag (not mine to change, `tools/drive_sync.py`):** BKG-02's complete-package ZIP was unpacked (21 MB) because 15 left/right previews exist only in it, so its every other file is now mirrored twice; and the six 1.7-2.5 MB `source/` originals are mirrored, since the 1 MB rule covers ZIP contents only. 33 MB in history nothing loads.
 
+Live at 137bcaa (`check:deployed` ok, `/debug/errors` empty after it; check re-run on the pushed commit, ok; e2e 140 ok on the base before the last two rebases, which brought only Step 15's forest rows and docs). The Step 15 lead's asks: no seam across the trail at 0.35 (the whole panorama has no mirrored half), `content/decor/forest-trail.json` untouched, and `docs/plan/step-15-shots/` road, trail-start, trail-gap and guarded-spot retaken with `tools/scenario-bots/shots.mjs` after the push.
+
 Shots: `docs/plan/step-8-shots/backgrounds/<room>-1-<before|after>-<size>.png` at 390x664, 844x390, 750x340, and `<room>-2-...-844x390.png` at the room's other end (256-colour, taken with `tools/art/backgrounds/shots.mjs`; the before shots are today's `main` without this change).
