@@ -83,6 +83,8 @@ function cleanInput(raw: unknown): Input {
   if (t && typeof t === 'object' && num(t.x) && num(t.y) && num(t.n)) {
     out.tap = { x: t.x, y: t.y, n: t.n };
     if (Number.isInteger(t.slot) && (t.slot as number) >= 0 && (t.slot as number) < 16) out.tap.slot = t.slot as number;
+    // The regular the page drew under the finger: an id, judged by the server (cantina-swap.ts), never trusted for more.
+    if (typeof t.id === 'string' && t.id.length > 0 && t.id.length <= 64) out.tap.id = t.id;
   }
   return out;
 }

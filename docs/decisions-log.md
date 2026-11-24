@@ -323,3 +323,11 @@ document as a decision of theirs.
 - **Why this way:** the step file: "a bomb is thrown and everything near where it bursts flies"; doc 08: "recklessly, carelessly destructive action including self-destructive stunts". Hit throws it (Grab does too; stick down sets it down unlit). It goes off on the first body it meets, or 1.2 s after it lands, launching everything within about two and a half tiles (you as well) and breaking a cracked wall near it. A lit bomb blinks and can't be picked up. It is gone after it bursts, and its spot has another 20 s later. For now it lies only in the test room; its place in the quarry comes with Step 22's lead.
 - **To change it:** `content/weapons/bomb.json` (`burst`, `thrown`, `use`); the burst look's time is `weaponBurstShow` in `content/tuning.json`.
 - **Where:** `docs/mechanisms/weapons.md`.
+
+### 2026-11-24 · In the cantina, a tap on a regular counts where your own screen showed them, within a little over a body's width
+- **Decided by:** cantina tap builder (brief `cantina-tap-a-walking-regular.md`), `session_017WiGzJ2rqEpKFJmGDriwjQ`
+- **Instead of asking:** "How far from where the server has a walking regular may a tap land and still pick them?"
+- **Why this way:** D-083/D-084 ("tap one, the party shows across the screen") and touch first (D-093). Your phone draws other people a little behind the game's truth, so a tap on a regular who was walking missed about half the time. Your phone now says which regular it showed under your finger, and that one is taken if the tap is within 40 pixels more than the old reach: how far the fastest regular walks in about a third of a second. A tap that far from anyone still opens nothing, and a finger is not made wider for regulars standing side by side.
+- **To change it:** `pick.lag` in `content/cantina/cantina.json` (0 puts back the old rule).
+- **Where:** `docs/mechanisms/cantina.md`, "A tap on a walking regular".
+

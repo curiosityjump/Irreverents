@@ -4,6 +4,7 @@
 import { createNetClient } from '../net/client.ts';
 import type { NetClient, Transport, TransportHandlers } from '../net/client.ts';
 import type { Input } from '../sim/types.ts';
+import { isRegular } from '../sim/cantina.ts';
 import { watchKeyboard } from './keyboard.ts';
 import { render, VIEW_H, VIEW_W, view } from './render.ts';
 import { report } from './report.ts';
@@ -270,8 +271,32 @@ function play(worldName: string): void {
     const gy = ((e.clientY - r.top) * canvas.height) / r.height;
     const chip = drawnCantina().row?.find((c) => gx >= c.x && gx < c.x + c.w && gy >= c.y && gy < c.y + c.h);
     tapN++;
-    tap = { at: performance.now(), tap: chip ? { x: 0, y: 0, n: tapN, slot: chip.slot } : { x: gx + lastCamera.x, y: gy + lastCamera.y, n: tapN } };
+    const x = gx + lastCamera.x;
+    const y = gy + lastCamera.y;
+    const id = chip ? undefined : regularDrawnAt(x, y);
+    tap = { at: performance.now(), tap: chip ? { x: 0, y: 0, n: tapN, slot: chip.slot } : { x, y, n: tapN, ...(id ? { id } : {}) } };
   });
+
+  /**
+   * Step 11 (a tap on a walking regular): the regular this page draws under the finger now, by the
+   * same rule the server uses (its box grown by the room's `pick.reach`; nearest middle), so the
+   * server can judge the tap where this page drew them (src/sim/systems/cantina-swap.ts).
+   */
+  function regularDrawnAt(x: number, y: number): string | undefined {
+    const room = net.me().room;
+    const file = Object.values(content.cantina ?? {}).find((f) => f.room === room);
+    if (!file) return undefined;
+    const m = file.pick.reach;
+    let best: { id: string; d: number } | undefined;
+    for (const r of net.others()) {
+      const box = content.characters[r.kind]?.box;
+      if (!box || r.room !== room || !isRegular(r)) continue;
+      if (x < r.x - m || x > r.x + box.w + m || y < r.y - m || y > r.y + box.h + m) continue;
+      const d = Math.abs(x - (r.x + box.w / 2)) + Math.abs(y - (r.y + box.h / 2));
+      if (!best || d < best.d) best = { id: r.id, d };
+    }
+    return best?.id;
+  }
 
   function readInput(): Input {
     const k = keys();

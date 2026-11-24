@@ -68,7 +68,10 @@ a file, edit no list. The first is `together` (gate F,
   the game view): `{ "n": 1, "at": "<entity id>" }` taps that body's
   middle as it stands on each tick of the span (authoring sugar: a page
   sends room pixels), or `{ "n", "x", "y" }` room pixels, or
-  `{ "n", "slot" }` the party row's chip. A new tap needs a new `n`.
+  `{ "n", "slot" }` the party row's chip. A new tap needs a new `n`. With
+  `at`, `"dx"` moves the tap sideways (room pixels); `"id"` names the
+  regular the page drew under the finger (`Input.tap.id`, cantina.md, "A
+  tap on a walking regular").
 - `"placedRooms": ["cantina"]` (optional, Step 11): more rooms whose own
   placements are put in the world too, as the server's world has every
   room's (the street's door reads the chase list the cantina's systems write).

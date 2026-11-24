@@ -32,9 +32,12 @@ export interface Cantina {
   /**
    * Step 11 slice B, the party swap (D-084): a tap within `reach` pixels of a
    * regular's box (room pixels, for a finger) opens the party row; it closes
-   * by itself after `seconds`. Optional; DRAFT defaults 8 and 6.
+   * by itself after `seconds`. Optional; DRAFT defaults 8 and 6. `lag`
+   * (additive, DRAFT default 40): more pixels allowed around the regular
+   * the page says it drew under the finger, for how far behind the server
+   * a page draws others (docs/mechanisms/cantina.md, "A tap on a walking regular").
    */
-  pick: { reach: number; seconds: number };
+  pick: { reach: number; seconds: number; lag: number };
   /**
    * Step 11 slice B (D-088; doc 31: the cantina is "NOT a shortcut for
    * breaking line of sight"): seconds a player stays on the chased list after
@@ -112,7 +115,7 @@ const kind: ContentKind = {
       bell: { tile: [0, 0], reach: 16 },
       friend: { attackLaunch: 0, attackWear: 0, throwWear: 0 },
       patterns: {},
-      pick: { reach: 8, seconds: 6 },
+      pick: { reach: 8, seconds: 6, lag: 40 },
       chaseHold: o.chaseHold === undefined ? 1 : read.number(o, 'chaseHold', '', { min: 0, max: 30 }),
     };
     if (out.room !== out.id) read.fail('room', `must be the room this file is named after ("${out.id}"), but is ${describe(o.room)}`);
@@ -139,8 +142,12 @@ const kind: ContentKind = {
     if (o.pick !== undefined) {
       const pick = read.object(o.pick, 'pick');
       if (pick) {
-        read.only(pick, ['reach', 'seconds'], 'pick');
-        out.pick = { reach: read.number(pick, 'reach', 'pick', { min: 0, max: 64 }), seconds: read.number(pick, 'seconds', 'pick', { min: 0.5, max: 60 }) };
+        read.only(pick, ['reach', 'seconds', 'lag'], 'pick');
+        out.pick = {
+          reach: read.number(pick, 'reach', 'pick', { min: 0, max: 64 }),
+          seconds: read.number(pick, 'seconds', 'pick', { min: 0.5, max: 60 }),
+          lag: pick.lag === undefined ? 40 : read.number(pick, 'lag', 'pick', { min: 0, max: 200 }),
+        };
       }
     }
     const patterns = read.object(o.patterns, 'patterns');

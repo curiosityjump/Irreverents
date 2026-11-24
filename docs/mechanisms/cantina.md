@@ -120,8 +120,24 @@ middle of the cantina player can use to stop fights."*
   crossed, your own with a notch under it; chips 34 game pixels (about
   57-68 CSS px on an iPhone). `drawn.cantina = { row, counter }`, the row
   in CSS pixels of the page.
+- **A tap on a walking regular** (2026-11-24, `INTENT:` in
+  `cantina-swap.ts`, `DRAFT:` `pick.lag` 40): a page draws others about
+  100-200 ms behind the server, so a regular walking at 76-128 px/s is drawn
+  up to ~25 px from where the server has them, and a tap on one missed about
+  half the time (19 of 40 by touch at f0389d8; 40 of 40 at b10e21f; 0 of 40
+  standing). The page now names the regular it drew under the finger
+  (`tap.id`, by the same reach rule, `regularDrawnAt` in `src/client/main.ts`);
+  the server takes that regular when the tap is within `pick.reach` +
+  `pick.lag` of where it has them, and otherwise judges by reach alone, as an
+  older page with no name is. After: 0 of 40 walking taps missed. `pick.lag`
+  is the fastest regular (the infiltrator, 128 px/s) walking 300 ms, rounded
+  up. A wider `pick.reach` was not used: it would catch taps meant for a
+  neighbour. Scenarios `step11-tap-names-regular` (a tap 30 px off opens
+  only when named) and `step11-tap-far-name-refused` (named but 120 px off:
+  nothing), each watched failing with its rule taken out.
 - **Scenarios** may tap: an input span's `tap: { n, at: <entity id> }`
-  (that body's middle each tick), `{ n, x, y }` or `{ n, slot }`; a
+  (that body's middle each tick; `dx` moves it sideways, room pixels; `id`
+  names a regular as the page would), `{ n, x, y }` or `{ n, slot }`; a
   player's `joins: <tick>` puts them in later (`docs/mechanisms/scenarios.md`).
 
 ## The chase lock (slice B, D-088)

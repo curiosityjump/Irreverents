@@ -26,8 +26,11 @@ export interface Input {
    * if any: `x`,`y` in room pixels, or `slot` (a party index) when it
    * landed on the cantina's party row. `n` grows by one per tap, so a tap
    * repeated across several ticks' inputs is acted on once. DRAFT.
+   * `id` (additive): the regular the page drew under the finger; the
+   * server takes it within `pick.lag` of where it has that regular, since
+   * the page draws others a little behind the server (cantina-swap.ts).
    */
-  tap?: { x: number; y: number; n: number; slot?: number };
+  tap?: { x: number; y: number; n: number; slot?: number; id?: string };
 }
 
 /**

@@ -1,0 +1,71 @@
+{
+  "id": "step11-tap-names-regular",
+  "proves": "a tap 30 px beside the brawler's middle (outside pick.reach, as a page draws a walking regular behind the server) opens nothing when the page names no regular, and opens the party row for the brawler when the page names them (tap.id, within reach plus pick.lag); DRAFT, docs/mechanisms/cantina.md, \"A tap on a walking regular\"",
+  "room": "cantina",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 10,
+      "to": 12,
+      "tap": {
+        "n": 1,
+        "at": "cantina:brawler",
+        "dx": 30
+      }
+    },
+    {
+      "player": "a",
+      "from": 20,
+      "to": 22,
+      "tap": {
+        "n": 2,
+        "at": "cantina:brawler",
+        "dx": 30,
+        "id": "cantina:brawler"
+      }
+    }
+  ],
+  "ticks": 60,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "cantina-row-open",
+      "where": {
+        "entity": "p:a",
+        "kind": "brawler"
+      },
+      "between": [
+        10,
+        19
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "cantina-row-open",
+      "where": {
+        "entity": "p:a",
+        "kind": "brawler"
+      },
+      "between": [
+        20,
+        22
+      ],
+      "count": [
+        1,
+        1
+      ]
+    }
+  ]
+}

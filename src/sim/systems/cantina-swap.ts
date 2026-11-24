@@ -69,16 +69,13 @@ const system: System = {
         if (!fresh || tap.slot !== undefined || state.on || !idle || e.room !== room) continue;
         const party = partyOf(world, content);
         // The regular under the finger: its box grown by pick.reach; nearest middle wins, ties by id.
-        let best: { e: Entity; d: number } | null = null;
-        for (const r of world.entities) {
-          if (!isRegular(r) || r.room !== room || party.includes(r.kind)) continue;
-          const box = content.characters[r.kind]?.box;
-          if (!box) continue;
-          const m = file.pick.reach;
-          if (tap.x < r.x - m || tap.x > r.x + box.w + m || tap.y < r.y - m || tap.y > r.y + box.h + m) continue;
-          const d = Math.abs(tap.x - (r.x + box.w / 2)) + Math.abs(tap.y - (r.y + box.h / 2));
-          if (!best || d < best.d) best = { e: r, d };
-        }
+        // INTENT (Step 11, a tap on a walking regular, docs/mechanisms/cantina.md): the page draws others
+        // about 100-200 ms behind the server, so a regular walking at 76-128 px/s is drawn up to ~25 px
+        // from where the server has them, and half such taps missed. A page names the regular it drew
+        // under the finger (`tap.id`); that one is taken within reach plus `pick.lag` of the tap. A
+        // named regular farther than that, or no name (an older page), is judged by reach alone, as before.
+        const named = tap.id === undefined ? undefined : world.entities.find((r) => r.id === tap.id);
+        const best = (named && regularUnder(ctx, named, room, party, tap, file.pick.reach + file.pick.lag) ? { e: named } : null) ?? regularUnderTap(ctx, room, party, tap, file.pick.reach);
         if (!best) continue;
         (state.pick ??= {})[e.id] = { kind: best.e.kind, until: world.tick + ticksOf(file.pick.seconds) };
         ctx.emit('cantina-row-open', { ...base, kind: best.e.kind });
@@ -87,6 +84,26 @@ const system: System = {
   },
 };
 export default system;
+
+/** Whether `r` is a regular outside the party in `room` whose box, grown by `m` pixels, holds the tap. */
+function regularUnder(ctx: StepContext, r: Entity, room: string, party: string[], tap: { x: number; y: number }, m: number): boolean {
+  if (!isRegular(r) || r.room !== room || party.includes(r.kind)) return false;
+  const box = ctx.content.characters[r.kind]?.box;
+  if (!box) return false;
+  return tap.x >= r.x - m && tap.x <= r.x + box.w + m && tap.y >= r.y - m && tap.y <= r.y + box.h + m;
+}
+
+/** The regular under the finger by reach alone: nearest middle wins, ties by id (the world's order). */
+function regularUnderTap(ctx: StepContext, room: string, party: string[], tap: { x: number; y: number }, m: number): { e: Entity } | null {
+  let best: { e: Entity; d: number } | null = null;
+  for (const r of ctx.world.entities) {
+    if (!regularUnder(ctx, r, room, party, tap, m)) continue;
+    const box = ctx.content.characters[r.kind]!.box;
+    const d = Math.abs(tap.x - (r.x + box.w / 2)) + Math.abs(tap.y - (r.y + box.h / 2));
+    if (!best || d < best.d) best = { e: r, d };
+  }
+  return best;
+}
 
 /**
  * A tap on party slot `slot` with the row open to bring in `to`. True when the party changed.

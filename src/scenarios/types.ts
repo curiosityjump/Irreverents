@@ -16,7 +16,7 @@ export interface InputSpan {
   y?: number;
   hold?: string[];
   /** Step 11: a tap on the game view (Input.tap): `at` an entity id (its middle, each tick), or `x`,`y` room pixels, or `slot`. */
-  tap?: { n: number; at?: string; x?: number; y?: number; slot?: number };
+  tap?: { n: number; at?: string; x?: number; y?: number; slot?: number; id?: string; dx?: number };
 }
 
 export interface Scenario {

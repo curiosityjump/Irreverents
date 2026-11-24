@@ -8,7 +8,7 @@
   "bell": { "tile": [13, 9], "reach": 18 },
   "friend": { "attackLaunch": 1, "attackWear": 1, "throwWear": 1 },
   "chaseHold": 1,
-  "pick": { "//": "DRAFT (Step 11 slice B): reach, pixels around a regular's box a tap still counts (a finger is wider than a pixel); seconds, how long the party row stays open by itself.", "reach": 8, "seconds": 6 },
+  "pick": { "//": "DRAFT (Step 11 slice B): reach, pixels around a regular's box a tap still counts (a finger is wider than a pixel); seconds, how long the party row stays open by itself. lag (2026-11-24): more pixels allowed around the regular the tapping page says it drew under the finger, since a page draws others about 100-200 ms behind the server: the fastest regular (the infiltrator, 128 px/s) walks 38 px in 300 ms.", "lag": 40, "reach": 8, "seconds": 6 },
   "patterns": {
     "grappler": {
       "walk": [{ "walk-to": 9 }, { "wait": 2 }, { "walk-to": 14 }, { "wait": 1.5 }],

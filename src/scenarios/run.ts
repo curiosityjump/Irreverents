@@ -175,13 +175,16 @@ export function parseScenario(raw: unknown, file: string, stem: string, content:
         const n = (v: unknown): boolean => typeof v === 'number' && Number.isFinite(v);
         if (!isRecord(t) || !Number.isInteger(t.n)) fail(`${w}.tap`, `must be { "n": whole number, and "at": entity id, or "x" and "y" room pixels, or "slot" }, but is ${describe(t)}`);
         else {
-          for (const key of Object.keys(t)) if (!['n', 'at', 'x', 'y', 'slot', '//'].includes(key)) fail(`${w}.tap.${key}`, 'unknown field (known fields: n, at, x, y, slot)');
+          for (const key of Object.keys(t)) if (!['n', 'at', 'x', 'y', 'slot', 'id', 'dx', '//'].includes(key)) fail(`${w}.tap.${key}`, 'unknown field (known fields: n, at, x, y, slot, id, dx)');
+          // Step 11 (a tap on a walking regular): `id` is the regular the page names as drawn under the finger; `dx` moves an `at` tap sideways, room pixels.
+          if (t.id !== undefined && typeof t.id !== 'string') fail(`${w}.tap.id`, 'must be an entity id');
+          if (t.dx !== undefined && (!n(t.dx) || t.at === undefined)) fail(`${w}.tap.dx`, 'must be a number, with "at"');
           const ways = [t.at !== undefined, t.x !== undefined || t.y !== undefined, t.slot !== undefined].filter(Boolean).length;
           if (ways !== 1) fail(`${w}.tap`, 'give one of "at", "x" and "y", or "slot"');
           if (t.at !== undefined && typeof t.at !== 'string') fail(`${w}.tap.at`, 'must be an entity id');
           if ((t.x !== undefined || t.y !== undefined) && (!n(t.x) || !n(t.y))) fail(`${w}.tap`, '"x" and "y" must both be numbers');
           if (t.slot !== undefined && (!Number.isInteger(t.slot) || (t.slot as number) < 0)) fail(`${w}.tap.slot`, 'must be a whole number from 0');
-          tap = { n: t.n as number, ...(typeof t.at === 'string' ? { at: t.at } : {}), ...(n(t.x) && n(t.y) ? { x: t.x as number, y: t.y as number } : {}), ...(Number.isInteger(t.slot) ? { slot: t.slot as number } : {}) };
+          tap = { n: t.n as number, ...(typeof t.at === 'string' ? { at: t.at } : {}), ...(n(t.x) && n(t.y) ? { x: t.x as number, y: t.y as number } : {}), ...(Number.isInteger(t.slot) ? { slot: t.slot as number } : {}), ...(typeof t.id === 'string' ? { id: t.id } : {}), ...(n(t.dx) ? { dx: t.dx as number } : {}) };
         }
       }
       inputs.push({ player: s.entity === undefined ? String(s.player) : '', entity: s.entity as string | undefined, from: Number(s.from), to: Number(s.to), x: s.x as number | undefined, y: s.y as number | undefined, hold: Array.isArray(hold) ? (hold as string[]) : [], ...(tap ? { tap } : {}) });
@@ -233,8 +236,8 @@ export function inputsAt(scenario: Scenario, tick: number, world?: World, conten
       // Step 11: `at` resolves to that body's middle as it stands now (nowhere it is not in the world).
       const body = s.tap.at !== undefined ? world?.entities.find((e) => e.id === s.tap!.at) : undefined;
       const box = body ? content?.characters[body.kind]?.box : undefined;
-      const at = body && box ? { x: body.x + box.w / 2, y: body.y + box.h / 2 } : { x: s.tap.x ?? -9999, y: s.tap.y ?? -9999 };
-      input.tap = { ...at, n: s.tap.n, ...(s.tap.slot !== undefined ? { slot: s.tap.slot } : {}) };
+      const at = body && box ? { x: body.x + box.w / 2 + (s.tap.dx ?? 0), y: body.y + box.h / 2 } : { x: s.tap.x ?? -9999, y: s.tap.y ?? -9999 };
+      input.tap = { ...at, n: s.tap.n, ...(s.tap.slot !== undefined ? { slot: s.tap.slot } : {}), ...(s.tap.id !== undefined ? { id: s.tap.id } : {}) };
     }
   }
   return out;
