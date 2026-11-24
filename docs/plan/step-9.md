@@ -150,3 +150,26 @@ back feels like a scramble worth having.
   route to the depot. Screenshots of the pedestal and the menu were taken
   by moving a page's own character there from the page's devtools: looks
   only, never a check.
+- **Owed: move the wings pedestal (for a fresh builder).** The Step 16
+  lead's answer to the tile question (sent 2026-11-23 19:59 UTC, delivered
+  here only at 01:10 UTC, after push 4 landed at [46, 13]): both of my
+  guesses conflict. The strongroom floor is on the main way:
+  `step16-across-*` walk in at its front (column 36) and out its back
+  (column 47), so [46, 13] hands flap to every hero crossing. No scenario
+  takes it, but a player walking across would. The shelf (row 11, columns
+  37-39) is where `step16-zero-alarm-ledge`'s grappler waits. **The lead's
+  tile is [38, 18]**: the floor of the hidden area `under-the-strongroom`
+  (columns 36-44, rows 16-18), reached only by the cellar secret or the
+  shaft, so wings become the payoff of a hidden place. "If one [step16
+  scenario] breaks, move the tile east within 38-43 rather than changing a
+  scenario." To do: one tile in `content/powers/flight.json`; re-route
+  `step9-fades-then-source` to reach it (today it walks west along the
+  strongroom floor from column 55); run every `step16-*` scenario and
+  repeat the "no other scenario takes it" sweep (run every scenario, looking
+  for `power-*` events); update `docs/mechanisms/powers.md` ("Sources") and
+  the decisions-log entry. `scripts/checks/step9-powers.ts` reads the
+  tile from content and needs no change.
+- Step 22's builder (`session_017WiGzHD6TvY2XxEG4B3rJU`) wants a kerb at
+  quarry-depot [53, 13]. It breaks today's `step9-fades-then-source` (the
+  walk west from column 55). The re-route above ends that conflict. Until
+  then they may re-time the scenario, keeping every one of its claims.
