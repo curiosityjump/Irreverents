@@ -409,3 +409,10 @@ document as a decision of theirs.
 - **Why this way:** "readable enemies" (`docs/vision.md:74`) and D-055's fixed behaviour. His sight band reaches 13 tiles and his throw 11, so his band touches you a step before he can throw at you: you see him look your way, then raise the shot with its arc drawn for 0.6 s, then it flies where it was aimed (you can step or jump out of it). He never walks, not after a hero and not after a guard; he still turns and swings weakly at anyone right up against him. Knocked hard while aiming, his shot drops for anyone and that throw is lost; a light tap only interrupts the aim. At most three of his shots lie about (the one in the air counts); a fourth makes the oldest vanish in a poof. A shot in anyone's hand never vanishes.
 - **To change it:** `sight` and `ranged` in `content/npcs/ranged-fighter.json` (`range`, `aim`, `every`, `speed`, `lift`, `out`); never walking is one rule in `src/sim/systems/ranged-throw.ts` (the input it keeps).
 - **Where:** `docs/plan/step-24.md`, "Builder notes"; `src/sim/systems/ranged-throw.ts`.
+
+### 2026-11-24 · The town's alarm check accepts a guard calling by bell or by whistle
+- **Decided by:** orchestrator `session_017WiGzHhT2apmWHT61rQ65G`
+- **Instead of asking:** "When you hit a furious guard, should he always blow his whistle, or may he run back to ring the bell?"
+- **Why this way:** four builders lost most of their time to one test that insisted on the whistle. Measured with the server's own log: on a real connection the guard often rings the bell again instead, and the bell's bar is drawn and brings the row just the same. What you need on your phone is to see a call filling and the row arriving, whichever he uses, so the test now checks that. The game's rule for which he picks is unchanged.
+- **To change it:** say the guard should always whistle when struck; that is a rule in the guard's call logic, and the test tightens back in one line.
+
