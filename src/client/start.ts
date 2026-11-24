@@ -279,8 +279,11 @@ function titlePicture(content: Content): { back: HTMLElement; spacer: HTMLElemen
     const r = back.getBoundingClientRect();
     const [, , w, h] = whole.src;
     const tall = r.height > r.width * 1.2;
+    // INTENT (Step 5, the e2e's intermittent reds): the spacer is set from the content's numbers before the
+    // picture has loaded, and only the drawing waits for it. Set only once the picture had loaded, every
+    // choice jumped 99-128 px down under a finger when it arrived: a tap on "Start screen" landed on the big
+    // Join above it (e2e start-link-back, red at b7ed6e9). A friend on a slow connection would do the same.
     const l = look(content, TITLE_LOOK);
-    if (!l) return false;
     const dpr = window.devicePixelRatio || 1;
     spacer.style.height = '0px';
     const parent = spacer.parentElement;
@@ -300,6 +303,7 @@ function titlePicture(content: Content): { back: HTMLElement; spacer: HTMLElemen
       const top = 6;
       const band = top + mh * sw + 6;
       spacer.style.height = `${Math.max(0, Math.ceil(r.top + band + 4 - startsAt))}px`;
+      if (!l) return false;
       // Where the last choice ends, now the spacer is set (screen px, from the picture's top).
       let last = band;
       for (const k of Array.from(parent?.children ?? [])) if (k !== back && k !== spacer) last = Math.max(last, k.getBoundingClientRect().bottom - r.top);
@@ -338,6 +342,7 @@ function titlePicture(content: Content): { back: HTMLElement; spacer: HTMLElemen
     const under = (to: number): number => r.top + to * s + 4;
     const end = tall ? Math.max(under(clearTo), Math.min(under(h), window.innerHeight * 0.32)) : under(clearTo);
     spacer.style.height = `${Math.max(0, Math.ceil(end - startsAt))}px`;
+    if (!l) return false;
     const cw = Math.round(w * s * dpr);
     const ch = Math.round(h * s * dpr);
     c.width = cw;

@@ -220,6 +220,47 @@ export async function startFacts(run: { browser: any; devices: any; base: string
     const lost = await D.evaluate(() => ({ message: (window as any).irreverents.start.message, world: (window as any).irreverents.worldName, button: !!document.querySelector('#start [data-start="continue-ZZZZ"]'), kept: localStorage.getItem('irreverents.games') }));
     fact('start-continue-gone', lost.message === 'That game is gone' && lost.world === '' && !lost.button && lost.kept === '[]', `Continue on a game with no save: says "${lost.message}", world ${JSON.stringify(lost.world)}, its button ${lost.button ? 'STILL there' : 'gone'}, this phone's list now ${lost.kept}`);
     await D.context().close();
+
+    //    (16) Step 5, the e2e's intermittent reds: the title picture arriving late moves no choice under a finger.
+    //    It is held back 1.5 s (a slow connection); every frame, where each choice sits. A tap aimed 0.3 s after the
+    //    screen showed must still land on the same choice once the picture is in. Before the fix every choice jumped
+    //    99-128 px down when it arrived, and a tap on Start screen landed on Join (start-link-back, red at b7ed6e9).
+    //    Control: the spacer set only once the picture has loaded (src/client/start.ts, titlePicture's layout).
+    const late: string[] = [];
+    for (const dev of ['iPhone 14', 'iPhone 14 landscape']) {
+      for (const where of ['/', `/?game=${code}`]) {
+        const ctxL = await browser.newContext({ ...devices[dev] });
+        let held = 0;
+        await ctxL.route(/title-screen\.png/, async (route: any) => {
+          held++;
+          await sleep(1500);
+          await route.continue().catch(() => undefined);
+        });
+        await ctxL.addInitScript(() => {
+          const log: { t: number; tops: Record<string, number> }[] = [];
+          (window as any).__startTops = log;
+          const t0 = performance.now();
+          const tick = (): void => {
+            const tops = Object.fromEntries([...document.querySelectorAll('#start [data-start]')].map((b) => [(b as HTMLElement).dataset.start, Math.round(b.getBoundingClientRect().top)]));
+            if (Object.keys(tops).length > 0) log.push({ t: Math.round(performance.now() - t0), tops });
+            if (performance.now() - t0 < 3500) requestAnimationFrame(tick);
+          };
+          requestAnimationFrame(tick);
+        });
+        const L = await ctxL.newPage();
+        L.on('pageerror', (e: Error) => errors.push(`start late: ${e.message}`));
+        await L.goto(`${base}${where}`);
+        await sleep(3800);
+        const log = (await L.evaluate(() => (window as any).__startTops)) as { t: number; tops: Record<string, number> }[];
+        const first = log[0]?.t ?? 0;
+        const aim = log.find((e) => e.t >= first + 300);
+        const end = log[log.length - 1];
+        const moved = aim && end ? Object.keys(end.tops).filter((k) => aim.tops[k] !== end.tops[k]).map((k) => `${k} ${aim.tops[k]} to ${end.tops[k]}`) : ['nothing drawn'];
+        late.push(`${dev.replace('iPhone 14', 'upright').replace('upright landscape', 'sideways')} ${where === '/' ? 'start' : 'link'}: ${held ? '' : 'picture NOT held, '}${moved.length ? `moved ${moved.join(', ')}` : 'still'}`);
+        await ctxL.close();
+      }
+    }
+    fact('start-title-late', late.every((l) => l.endsWith('still')), `the title picture held back 1.5 s: from 0.3 s after the screen showed to after it arrived, ${late.join('; ')} (expected every choice still)`);
   } finally {
     await ctxA.close();
     await ctxB.close();

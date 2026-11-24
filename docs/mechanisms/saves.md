@@ -227,6 +227,9 @@ file, no "exists", the part state and the body's place gone).
   sound and menu buttons keep, the choices under it on the night ground, and
   the picture's scene under the wordmark filling the screen's foot below the
   last choice (cropped at the sides, its top fading into the night); on screens under 420 px high the choices pack to 44 px.
+  The spacer is set from the looks' numbers before the picture has loaded
+  (`INTENT:`; e2e `start-title-late`): set only once it loaded, every choice
+  jumped about 100 px down under a finger when it arrived.
   Without the file, the pixel-font title is drawn instead
   (`docs/plan/step-17.md`, "Title screen").
 - Words are the game's pixel font (`content/looks/font.json`,

@@ -98,6 +98,37 @@ export async function defeatFacts(kit: Kit & { shots?: string }): Promise<void> 
     // (the chase, D-065), and a fact that only walked back east from west of column 20 then waited unbeaten for ever. The game is right
     // there: walking back meets the fight again. In the sim 10 of 20 such stands stalled before, 0 of 30 after.
     const ledgeY = 7 * c.tile;
+    // Step 5 (the e2e's intermittent reds): what the page drew of the card in EVERY frame, and when the
+    // server's game-over-coming reached the page's socket (CDP, on the page's own clock), so a red says
+    // whether the card was never drawn or drawn between two of the loop's 500 ms looks.
+    const heard: number[] = [];
+    const touches: number[] = [];
+    await ph.cdp.send('Network.enable');
+    ph.cdp.on('Network.webSocketFrameReceived', (f: any) => {
+      if (String(f.response?.payloadData ?? '').includes('"game-over-coming"')) heard.push(Date.now());
+    });
+    await ph.page.evaluate(() => {
+      const irr = (window as any).irreverents;
+      irr.e2eCard = { frames: 0, first: null as number | null, last: null as number | null, skipped: 0, gaps: 0, worst: 0 };
+      let prev = performance.now();
+      const tick = (): void => {
+        const t = performance.now();
+        const gap = t - prev;
+        prev = t;
+        const k = irr.e2eCard;
+        if (gap > 100) k.gaps++;
+        k.worst = Math.max(k.worst, Math.round(gap));
+        const g = irr.drawn.gameOver;
+        if (g) {
+          k.frames++;
+          k.first ??= Date.now();
+          k.last = Date.now();
+          k.skipped = g.skipped;
+        }
+        requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    });
     let shotHurt = false;
     let thrown = false;
     let card = false;
@@ -118,6 +149,7 @@ export async function defeatFacts(kit: Kit & { shots?: string }): Promise<void> 
       } else if (s.room === 'outpost' && stick && (s.y < ledgeY || s.x < 20 * c.tile || s.x > 32 * c.tile)) {
         const way = s.y >= ledgeY && s.x > 32 * c.tile ? await pointOn(ph, '[data-stick]', 0.1) : stick;
         if (way) {
+          touches.push(Date.now());
           await ph.cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ ...way, id: 1 }] });
           await sleep(400);
           await ph.cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
@@ -147,7 +179,13 @@ export async function defeatFacts(kit: Kit & { shots?: string }): Promise<void> 
       await settle(ph);
       moved = Math.abs(((await me(ph))?.x ?? x0) - x0) > 8;
     }
-    fact('hearts-game-over', thrown && card && moved && (await ph.page.evaluate(() => (window as any).irreverents.drawn.room)) === 'cantina', `by touch, standing among the camp's fighters until the whole party was out of hearts: the GAME OVER card was drawn (${card}), the page is in the cantina (${thrown}) and its stick then moved the hero (${moved}, from x ${Math.round(x0)}); at the end: ${JSON.stringify(await ph.page.evaluate(() => { const irr = (window as any).irreverents; return { room: irr.drawn.room, me: irr.drawn.me?.kind, x: Math.round(irr.drawn.me?.x ?? -1), rows: irr.drawn.hearts?.rows }; }))}`);
+    const rec = (await ph.page.evaluate(() => (window as any).irreverents.e2eCard)) as { frames: number; first: number | null; last: number | null; skipped: number; gaps: number; worst: number };
+    // INTENT (Step 5, the e2e's intermittent reds, measured): any touch takes the card down at once (draw/game-over.ts),
+    // and this loop's own stick touches did, 7 of 20 times within 35 ms of the card going, between two of its 500 ms
+    // looks. So the card counts as drawn if any frame drew it: the claim (the page drew GAME OVER) is unchanged.
+    card ||= rec.frames > 0;
+    const cardText = `[every frame: the card drawn in ${rec.frames} frames${rec.first === null ? '' : ` from ${rec.first} to ${rec.last}`}, skipped ${rec.skipped}; frames over 100 ms apart ${rec.gaps}, the longest ${rec.worst} ms; the socket heard game-over-coming at ${heard.join(', ') || 'never'}; the loop's last stick touches at ${touches.slice(-3).join(', ') || 'none'}]`;
+    fact('hearts-game-over', thrown && card && moved && (await ph.page.evaluate(() => (window as any).irreverents.drawn.room)) === 'cantina', `by touch, standing among the camp's fighters until the whole party was out of hearts: the GAME OVER card was drawn (${card}), the page is in the cantina (${thrown}) and its stick then moved the hero (${moved}, from x ${Math.round(x0)}); at the end: ${JSON.stringify(await ph.page.evaluate(() => { const irr = (window as any).irreverents; return { room: irr.drawn.room, me: irr.drawn.me?.kind, x: Math.round(irr.drawn.me?.x ?? -1), rows: irr.drawn.hearts?.rows }; }))} ${cardText}`);
     await ph.page.setViewportSize({ width: 390, height: 664 });
     await sleep(400);
     await ph.page.screenshot({ path: path.join(shots, 'hearts-cantina-390x664.png') });

@@ -55,7 +55,9 @@ export async function doorFacts(kit: Kit & { shots: string }): Promise<void> {
     if (toCourtyard) await standAt(ph, doorX + (tile - w) / 2, 1);
     await sleep(150);
     const inDoor = await useState(ph);
-    fact('door-go-in', toCourtyard && away === '' && inDoor === 'go-in', `by touch, a phone walked to the courtyard (${toCourtyard}); away from a doorway the Use button's state was "${away}" (expected none), standing in the outpost's doorway it is "${inDoor}" (expected go-in)`);
+    // Step 5 (the e2e's intermittent reds): where the page drew its hero against the doorway's column, for a red's text.
+    const stood = await ph.page.evaluate(() => { const d = (window as any).irreverents.drawn; return { x: Math.round(d.me?.x ?? -1), room: d.room, kind: d.me?.kind }; });
+    fact('door-go-in', toCourtyard && away === '' && inDoor === 'go-in', `by touch, a phone walked to the courtyard (${toCourtyard}); away from a doorway the Use button's state was "${away}" (expected none), standing in the outpost's doorway it is "${inDoor}" (expected go-in) [the ${stood.kind} drawn at x ${stood.x} in ${stood.room}; the doorway is x ${doorX}-${doorX + tile}, the hero ${w} px wide]`);
 
     // The pictures, standing in the doorway: sideways, then upright (iPhone size), then sideways again.
     fs.mkdirSync(kit.shots, { recursive: true });

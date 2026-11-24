@@ -913,3 +913,25 @@ By a subagent reading all 13 shots in `docs/plan/step-5-shots/camera/` at phone 
 - **Held Up, partly:** `after/look-up-844x390` shows the thrower whole, but the hero's feet sit on the bottom edge between the arrows and the buttons and the spent shot is under a button (the builder calls this deliberate). In the depot yard the lift is about 50 px and the beams were already in view; two allies sit under the left-arrow button.
 - **A jump does not move the picture:** no shot pair shows it; the fact `camera-jump-still` is the evidence.
 - The two depot files are 750x340 at 3x, not the 844x390 in their names.
+
+## The e2e's intermittent reds
+
+Builder `session_017WiGzH3PZgYkQHanedEq8e`, 2026-11-24, brief
+`handoff-prompts/e2e-intermittent-reds.md`. Logs were kept in the builder's scratchpad (not committed).
+
+**Count before** (8 full `npm run e2e` at c34aec7, a clean detached worktree, one run at a time,
+nothing else on the machine, 4 cores, about 18 min a run): 6 of 8 green. Reds of 8: `t-grab-friend`
+and `s-break-free` 1 (one run), `door-go-in` and `door-use` 1 (one run), `hearts-game-over` 1;
+`plates-friend-held`, `outpost-break`, `start-link-back`, `start-continue-gone` 0. The orchestrator's
+own full runs meanwhile: 140 of 140 at 50e5121 and 142 of 142 at 778ab9d; one red each at b7ed6e9
+(`start-link-back`) and 4881e33 (`row-both-sides`, the camp row's new fact).
+
+| Fact | Count | Verdict | Evidence |
+|---|---|---|---|
+| `start-link-back` (and very likely its empty-`inMain` form) | 0 of 8 here; 1 at b7ed6e9, 1 at af69443 | **game, fixed** | Until the title picture loads, the start screen's spacer was 0 px; when it arrived every choice jumped 99-128 px down (picture held back 1.5 s, measured every frame, both screens, upright and sideways). Upright on a shared link, Start screen sat at y 118 and the big Join ended up at 111-207: a tap aimed at Start screen just before the picture landed went into the game, the b7ed6e9 red exactly ("the none screen, world game-DEXG"). Fix: `src/client/start.ts`, the spacer set from the content's numbers before the picture loads (`INTENT:`). New fact `start-title-late`: fails on the old code (every choice moved), passes on the new. |
+| `hearts-game-over` | 1 of 8 full; 1 of 20 alone | **two causes: the check's (fixed) and the game's (open, `src/net/`)** | A recorder of every frame and CDP's view of the socket, 20 runs alone: in 19 the card was drawn (15-117 frames); in 7 of those it went within 35 ms of the check's own stick touch, which takes it down by design (`draw/game-over.ts`, `INTENT:`), so a 500 ms sample could miss it. The fact now counts any drawn frame (control: `drawnGameOver` made to return null, the fact fails). **In 1 of 20 the socket heard `game-over-coming` and the card was drawn in 0 frames**, no frame more than 41 ms apart, the last touch 136 ms before the event (and a touch can only take down a card already drawn). Reading the code: `src/net/client.ts` replaces `latest` on every snapshot and every watcher in `main.ts` reads the newest once a frame, so when two snapshots land between two frames the first one's events are never seen: the GAME OVER card, STAGE CLEARED, the poof, banners and sounds alike. A friend whose phone hitches for a frame would miss them. **Fix, for `src/net/`'s owner** (not this brief's path): keep the events of snapshots no frame has read yet (append to `latest.events` until `latest()` has been called), additively. Not proven by a control: the next step is a page whose frames are stalled on purpose. Briefed by the orchestrator at 92a059e. |
+| `t-grab-friend`, `s-break-free` | 1 of 8 | unknown | The grab-never-took case the flakes brief saw 2 of 60 ("A's page did NOT draw B lifted"); `scripts/lib/e2e-touch.ts`, not this brief's path. Not run alone. |
+| `door-go-in`, `door-use` | 1 of 8 (quiet; the flakes brief saw it only under load) | unknown | Use button's state "" in the doorway. Suspected the stick's last nudge carrying the hero off the one-tile doorway (as the cellar doorway's was); the fact now prints where the hero stood against the doorway. Not reproduced alone. |
+| `plates-friend-held` | 0 of 8 | unknown | Not reproduced. The fact now prints each hero's columns and every plate as each page draws it, before and after its 1.5 s watch: the suspect is the same last nudge carrying the friend off the plate while the gate stays open its 6 s. |
+| `outpost-break`, `start-continue-gone` | 0 of 8 | unknown | Not reproduced. |
+| `row-both-sides` | (orchestrator: 1, its builder about 1 in 20) | not looked at | Out of budget. |

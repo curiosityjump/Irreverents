@@ -214,7 +214,7 @@ control: nothing dropped) and `scripts/checks/step21-game-over-two.ts` (two
 connections on a real server, both in the cantina with every heart and
 walking; control: the move made without its effect, neither page moves);
 by touch on a phone, `npm run e2e`'s `hearts-drawn`, `hearts-one-lost` and
-`hearts-game-over` (standing in the camp until the party is out: the card,
+`hearts-game-over` (standing in the camp until the party is out: the card in any frame, since its own stick touch takes it down by design,
 the cantina, the stick moves the hero; `scripts/e2e/defeat.ts`). The stand
 walks back into columns 20-32 from either side and off the one-way ledge by
 its gap, as a player who wants the fight would: blows can carry a hero out

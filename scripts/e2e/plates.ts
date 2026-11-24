@@ -94,6 +94,24 @@ async function until(ph: Phone, id: string, on: boolean, ms = 3000): Promise<boo
   }
 }
 
+/**
+ * Step 5 (the e2e's intermittent reds): where each hero is, as its own page and the other page draw it,
+ * in columns, and the courtyard's plates as each page draws them, for a red's text.
+ */
+async function where(A: Phone, B: Phone): Promise<string> {
+  const read = (ph: Phone): Promise<any> =>
+    ph.page.evaluate(() => {
+      const irr = (window as any).irreverents;
+      const d = irr.drawn;
+      const w = irr.content.characters[d.me.kind].box.w;
+      const col = (x: number): string => `${(x / 16).toFixed(2)}-${((x + w) / 16).toFixed(2)}`;
+      const other = d.entities.find((e: any) => e.player !== null && e.player !== irr.player);
+      return { me: `${col(d.me.x)}${d.me.onGround === false ? ' in the air' : ''}`, other: other ? col(other.x) : 'not drawn', parts: d.parts.map((p: any) => `${p.part} ${p.on ? 'on' : 'off'}`).join(', ') };
+    });
+  const [a, b] = await Promise.all([read(A), read(B)]);
+  return `A's page: A at columns ${a.me}, B drawn at ${a.other}, ${a.parts}; B's page: B at ${b.me}, A drawn at ${b.other}, ${b.parts}`;
+}
+
 async function shots(ph: Phone, dir: string, name: string): Promise<void> {
   fs.mkdirSync(dir, { recursive: true });
   await ph.page.screenshot({ path: path.join(dir, `${name}-sideways.png`) });
@@ -151,9 +169,11 @@ export async function plateFacts(kit: Kit & { shots: string }): Promise<void> {
     const openA = await until(A, 'plate-gate', true);
     const openB = await until(B, 'plate-gate', true);
     // While both stand there: every frame, on each page, the plate under the *other* player.
+    const posBefore = await where(A, B);
     const [heldA, heldB, gateA, gateB] = await Promise.all([watchOff(A, 'plate-east', 1500), watchOff(B, 'plate-west', 1500), watchOff(A, 'plate-gate', 1500), watchOff(B, 'plate-gate', 1500)]);
+    const posAfter = await where(A, B);
     fact('plates-courtyard', there && openA && openB && gateA.off === 0 && gateB.off === 0, `two phone pages (${kinds.join(', ')}) walked by touch to the courtyard (${there}), one on each plate${ALONE ? ' (CONTROL: the second kept off)' : ''}: the gate drawn open on page A (${openA}, shut in ${gateA.off} of ${gateA.frames} frames after) and on page B (${openB}, shut in ${gateB.off} of ${gateB.frames})`);
-    fact('plates-friend-held', heldA.frames > 30 && heldB.frames > 30 && heldA.off === 0 && heldB.off === 0, `over 1.5 s, the plate under the friend drawn up on page A in ${heldA.off} of ${heldA.frames} frames, on page B in ${heldB.off} of ${heldB.frames} (expected none)`);
+    fact('plates-friend-held', heldA.frames > 30 && heldB.frames > 30 && heldA.off === 0 && heldB.off === 0, `over 1.5 s, the plate under the friend drawn up on page A in ${heldA.off} of ${heldA.frames} frames, on page B in ${heldB.off} of ${heldB.frames} (expected none) [before: ${posBefore}; after: ${posAfter}]`);
     await shots(B, kit.shots, 'courtyard-gate-open');
     // Both walk through, east past the gate (column 25).
     await Promise.all([steer(A, 1, 26.5 * 16, 6000), steer(B, 1, 26.5 * 16, 6000)]);
