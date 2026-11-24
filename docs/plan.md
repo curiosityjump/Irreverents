@@ -354,7 +354,7 @@ Full text: `docs/plan/step-14.md`
 
 ## Step 15 — A second place, worth coming back to
 
-**Status: open, claimed by session_017WiGzHD8gtSGTegd3n8W4G, 2026-11-24.** (Builder session_017WiGzG4nNVPXPAo2ztGmx3 on `handoff-prompts/step-15-forest.md`, pushes 3-4; pushes 1-2b live.)
+**Status: open, claimed by session_017WiGzHD8gtSGTegd3n8W4G, 2026-11-24.** (Builder session_017WiGzGVGmfNTRtDB8nX3Np on `handoff-prompts/step-15-forest.md`, push 4 and a quiet way; pushes 1-3 live.)
 
 Full text: `docs/plan/step-15.md`
 
