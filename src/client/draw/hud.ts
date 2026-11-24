@@ -43,8 +43,11 @@ const SLOT = 12;
 const PAD = 3;
 const GAP = 2;
 const WELL = 'rgba(15, 15, 28, 0.55)';
-/** DRAFT (brief phone-hud-legibility): game px between friends' columns, so two friends' heart rows never run together. */
-const FRIEND_GAP = 4;
+/** DRAFT (brief phone-hud-legibility): game px between friends' columns, a divider line in the middle, so two friends' hearts never run together. */
+const FRIEND_GAP = 5;
+/** DRAFT (brief phone-hud-legibility, second pass: a 5-heart friend's row ran under the next face): a friend's hearts wrap at this many a line, so every heart sits under its own face. */
+const FRIEND_LINE = 3;
+const DIVIDER = 'rgba(224, 154, 30, 0.45)';
 
 export interface DrawnHud {
   /** In plate order: the viewer's own first. `played`: by the viewer or a friend. `out`: no hearts left (Step 21, drawn greyed). */
@@ -96,12 +99,14 @@ export function drawHud(g: CanvasRenderingContext2D, world: World, content: Cont
   const slots = {} as Record<HudSlot, string | null>;
   for (const s of HUD_SLOTS) slots[s] = fillers[s]?.(world, content, me) ?? null;
 
-  // Step 21, hearts (draw/hearts.ts): a row of hearts under each face; a friend's column is as wide as its row.
+  // Step 21, hearts (draw/hearts.ts): hearts under each face; a friend's wrap FRIEND_LINE to a line, centred under its face.
   const hearts = content.hearts?.on === true;
-  const col = (k: string): number => (hearts ? Math.max(SMALL, maxHearts(content, k) * heartSize(false).step - 1) : SMALL);
+  const small = heartSize(false);
+  const col = (k: string): number => (hearts ? Math.max(SMALL, Math.min(FRIEND_LINE, maxHearts(content, k)) * small.step - 1) : SMALL);
+  const friendLines = hearts ? Math.max(0, ...others.map((k) => Math.ceil(maxHearts(content, k) / FRIEND_LINE))) : 0;
   if (hearts) noteHearts(world, content, [mine, ...others], frame);
-  const w = PAD + FACE + GAP + HUD_SLOTS.length * (SLOT + 1) + (others.length > 0 ? GAP + others.reduce((n, k) => n + col(k) + FRIEND_GAP, 0) : 0) + PAD - 1;
-  const h = PAD + FACE + (hearts ? 1 + heartSize(true).h : 0) + PAD;
+  const w = PAD + FACE + GAP + HUD_SLOTS.length * (SLOT + 1) + (others.length > 0 ? GAP + others.reduce((n, k) => n + col(k) + FRIEND_GAP, 0) - FRIEND_GAP + 1 : 0) + PAD - 1;
+  const h = PAD + FACE + (hearts ? Math.max(1 + heartSize(true).h, 2 + friendLines * small.step - 1) : 0) + PAD;
   const x = Math.max(3 + safeView.left, clearOfMenu(g, frame) + 2);
   const y = 3 + safeView.top;
   if (!drawNine(g, content, 'hud-plate', x, y, w, h)) {
@@ -110,6 +115,11 @@ export function drawHud(g: CanvasRenderingContext2D, world: World, content: Cont
     g.fillStyle = '#221f44';
     g.fillRect(x + 1, y + 1, w - 2, h - 2);
   }
+  // A heart's pop stays on the plate (draw/hearts.ts).
+  g.save();
+  g.beginPath();
+  g.rect(x, y, w, h);
+  g.clip();
   // The viewer's own face, lit.
   face(g, content, mine, x + PAD, y + PAD, FACE, 1, hearts && isOut(world, content, mine));
   if (hearts) drawHeartRow(g, world, content, mine, x + PAD, y + PAD + FACE + 1, true, frame);
@@ -125,15 +135,20 @@ export function drawHud(g: CanvasRenderingContext2D, world: World, content: Cont
   }
   cx += GAP;
   const faces: DrawnHud['faces'] = [{ kind: mine, me: true, played: true, out: hearts && isOut(world, content, mine) }];
-  for (const k of others) {
+  others.forEach((k, i) => {
+    if (i > 0) {
+      g.fillStyle = DIVIDER;
+      g.fillRect(cx - Math.ceil(FRIEND_GAP / 2), y + PAD + 1, 1, h - 2 * PAD - 2);
+    }
     const played = memberTaken(world, k, me.id);
     const out = hearts && isOut(world, content, k);
     const fx = cx + Math.floor((col(k) - SMALL) / 2);
     face(g, content, k, fx, y + PAD + (FACE - SMALL), SMALL, played ? 0.9 : 0.35, out);
-    if (hearts) drawHeartRow(g, world, content, k, cx, y + PAD + FACE + 2, false, frame);
+    if (hearts) drawHeartRow(g, world, content, k, cx, y + PAD + FACE + 2, false, frame, FRIEND_LINE, col(k));
     faces.push({ kind: k, me: false, played, out });
     cx += col(k) + FRIEND_GAP;
-  }
+  });
+  g.restore();
   drawn = { faces, slots, box: { x, y, w, h } };
   return drawn.box;
 }

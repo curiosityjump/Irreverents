@@ -2,7 +2,7 @@ import type { Content } from '../../content/types.ts';
 import { recruitsOf } from '../../sim/recruits.ts';
 import type { Entity, SimEvent, World } from '../../sim/types.ts';
 import type { PlayerView } from './entities.ts';
-import { BANNER_FRAMES, queueBanner } from './banner.ts';
+import { BANNER_FRAMES, drawnBanner, queueBanner } from './banner.ts';
 import { drawnHud } from './hud.ts';
 import { drawLook, look } from './looks.ts';
 import { bubble, edgeBark, label } from './npcs.ts';
@@ -127,6 +127,9 @@ export function drawRecruitCalls(g: CanvasRenderingContext2D, world: World, cont
     const cx = ox + e.x + (r.w * T) / 2;
     const top = oy + Math.round(hero.y) - 2;
     if (cx < 0 || cx > g.canvas.width) {
+      // DRAFT (brief phone-hud-legibility, second pass: "Bandit Camp" and the "Psst!" box covered much of the play
+      // area together): a call from off screen waits while a banner is up; the next call comes callEvery later.
+      if (drawnBanner()) continue;
       edgeBark(g, content, hero, r.call, cx < 0 ? -1 : 1, Math.max(2, top));
       last.calls.push({ id: r.id, at: 'edge' });
     } else {

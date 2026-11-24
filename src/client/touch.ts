@@ -1,4 +1,5 @@
 import type { Content } from '../content/types.ts';
+import { pixelWords } from './pixel-words.ts';
 import type { Input } from '../sim/types.ts';
 import { report } from './report.ts';
 
@@ -76,7 +77,8 @@ export function showUseWord(host: HTMLElement, state: string | null, word: strin
     go.className = 'go';
     b.append(go);
   }
-  go.textContent = word;
+  // DRAFT (brief phone-hud-legibility, second pass): the word in the game's pixel font; Go in with a pixel door.
+  pixelWords(go, word.toUpperCase(), 10, state === 'go-in');
   b.classList.toggle('go-in', state === 'go-in');
   b.classList.toggle('says', state !== null && state !== 'go-in');
   if (state !== null) b.dataset.state = state;

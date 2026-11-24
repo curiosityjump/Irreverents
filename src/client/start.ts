@@ -278,7 +278,10 @@ function titlePicture(content: Content): { back: HTMLElement; spacer: HTMLElemen
   const layout = (): boolean => {
     const r = back.getBoundingClientRect();
     const [, , w, h] = whole.src;
-    const s = Math.min(r.width / w, r.height / h);
+    const tall = r.height > r.width * 1.2;
+    // DRAFT (brief phone-hud-legibility, second pass: upright, New game overlapped the picture's foot by a few px):
+    // on a tall screen the picture is as wide as lets the choices start under it with the code field still in the upper half.
+    const s = Math.min(r.width / w, r.height / h, tall ? Math.max(0, window.innerHeight * 0.32 - 8 - r.top) / h : Infinity);
     if (!(s > 0)) return false;
     // Keep every choice below the wordmark: the spacer ends where the box does on screen.
     spacer.style.height = '0px';
@@ -290,7 +293,6 @@ function titlePicture(content: Content): { back: HTMLElement; spacer: HTMLElemen
     // in the upper half, else as low as it allows; sideways, below the wordmark.
     // INTENT (Step 17, e2e start-shown): the code field stays in the upper half (the keyboard covers the
     // lower), so the choices start no lower than about a third of the screen, never above the wordmark.
-    const tall = r.height > r.width * 1.2;
     const under = (to: number): number => r.top + to * s + 4;
     const end = tall ? Math.max(under(clearTo), Math.min(under(h), window.innerHeight * 0.32)) : under(clearTo);
     spacer.style.height = `${Math.max(0, Math.ceil(end - startsAt))}px`;
@@ -382,6 +384,8 @@ const CSS = `
 #start .st-back { position: fixed; z-index: -1; pointer-events: none; display: flex; justify-content: center; align-items: flex-start;
   top: env(safe-area-inset-top); right: env(safe-area-inset-right); bottom: env(safe-area-inset-bottom); left: env(safe-area-inset-left); }
 #start .st-back canvas { display: block; }
+/* DRAFT (brief phone-hud-legibility, second pass): upright the ground under the choices is the game's dotted night, as under the controls in play, not a flat void. */
+#start.pictured { background-image: radial-gradient(rgba(76, 72, 144, .22) 1px, transparent 1.5px); background-size: 8px 8px; }
 #start .st-spacer { flex: none; width: 100%; }
 /* No games to continue: the empty column takes no room, so the choices sit centred under the title. */
 #start .st-col:empty { display: none; }

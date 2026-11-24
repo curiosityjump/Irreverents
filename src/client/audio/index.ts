@@ -66,7 +66,8 @@ function makeButton(muted: boolean, onToggle: () => void): HTMLButtonElement {
     'display:flex',
     'align-items:center',
     'justify-content:center',
-    'z-index:5',
+    // DRAFT (brief phone-hud-legibility, second pass): above the start screen and the menu (z-index 20), where it sat dimmed under their shade and took no taps.
+    'z-index:21',
     'pointer-events:auto',
     'touch-action:manipulation',
     '-webkit-appearance:none',

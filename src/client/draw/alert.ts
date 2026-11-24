@@ -51,6 +51,38 @@ function drawPipStrip(g: CanvasRenderingContext2D, x: number, y: number, slots: 
   });
 }
 
+/**
+ * DRAFT (brief phone-hud-legibility, second pass, 2026-11-24: the round red
+ * `alert-pip` looks still read as balloons, or as hearts, beside the plate):
+ * the level is a rising meter, MAX_ALERT bars climbing left to right, the
+ * lit ones amber to red, the rest dark sockets, so it reads as how loud the
+ * alarm is, not as a count of things you own. true puts the pip looks back.
+ */
+const PIP_LOOKS = false;
+const METER = ['#ffd166', '#f78c2a', '#ef233c'];
+const SOCKET = '#3a3566';
+
+/** The rising meter: bar i is 4 + 3i px tall (to 10), 8 wide, 12 apart; the newest lit bar flashes white as it lights. */
+function drawMeter(g: CanvasRenderingContext2D, x: number, y: number, level: number, age: number): void {
+  const bars = Math.max(level, MAX_ALERT);
+  for (let i = 0; i < bars; i++) {
+    const h = Math.min(10, 4 + 3 * i);
+    const bx = x + i * 12;
+    const by = y + 10 - h;
+    const lit = i < level;
+    g.fillStyle = INK;
+    g.fillRect(bx, by, 8, h);
+    const flash = lit && i === level - 1 && age >= 0 && age < GLOW_TICKS && Math.floor(age / 5) % 2 === 0;
+    g.fillStyle = flash ? PAPER : lit ? METER[Math.min(METER.length - 1, i)]! : SOCKET;
+    g.fillRect(bx + 1, by + 1, 6, h - 1);
+    if (lit && !flash) {
+      // A lit bar's top edge catches the light.
+      g.fillStyle = 'rgba(255, 255, 255, 0.45)';
+      g.fillRect(bx + 1, by + 1, 6, 1);
+    }
+  }
+}
+
 /** Step 4, the town's tiers: what was drawn last frame, for the page's drawn record (drawn.alert). */
 let shown: { level: number; whistle: number | null } = { level: 0, whistle: null };
 /** No banner for the level a page finds when it first draws (joining a game mid-alert is not the moment). */
@@ -187,7 +219,11 @@ export function drawAlert(g: CanvasRenderingContext2D, world: World, content: Co
   // DRAFT (brief phone-hud-legibility, 2026-11-24: the pips under the plate read as hearts or balloons):
   // they sit on their own dark strip led by a warning sign, so they read as "the watch is after you".
   const slotsShown = lookDef(content, 'alert-pip') && lookDef(content, 'alert-pip-off') ? Math.max(level, MAX_ALERT) : level;
-  drawPipStrip(g, PX(), PY(), slotsShown);
+  drawPipStrip(g, PX(), PY(), PIP_LOOKS ? slotsShown : Math.max(level, MAX_ALERT));
+  if (!PIP_LOOKS) {
+    drawMeter(g, PX(), PY(), level, world.tick - litAt);
+    return;
+  }
   if (lookDef(content, 'alert-pip')) {
     let drawn = true;
     const slots = lookDef(content, 'alert-pip-off') ? Math.max(level, MAX_ALERT) : level;

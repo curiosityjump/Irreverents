@@ -2,6 +2,7 @@
 // the touch controls sit sideways and upright, and switching off what an
 // iPhone browser does to a page by default.
 import { safeView } from './draw/fx.ts';
+import { pixelWords } from './pixel-words.ts';
 import { VIEW_H, VIEW_W, view } from './render.ts';
 
 export const isTouchDevice = (): boolean => navigator.maxTouchPoints > 0 || 'ontouchstart' in window;
@@ -29,6 +30,10 @@ const SIDEWAYS = { wMin: 280, wMax: 450, hMin: 160, hMax: VIEW_H };
 const LOW_ROW = 4;
 /** DRAFT: a control over the view, CSS pixels: the touch area (what is painted is smaller). */
 const OVER_BUTTON = 52;
+/** DRAFT: the CSS px the button pictures aim for over the view (was 34); see the layout's `aim`. */
+const OVER_AIM = 40;
+/** DRAFT: the stick's arrows over the view, as before the second pass. */
+const OVER_PAD_AIM = 34;
 /** DRAFT: a sideways bar beside the view that holds two columns of buttons, CSS pixels (not counting a notch). */
 const BAR = 128;
 /** DRAFT: the smallest button anywhere but over the view, CSS pixels (the brief asks 56; the scripted checks 44). */
@@ -268,15 +273,22 @@ export function setUpShell(canvas: HTMLCanvasElement, touch: HTMLElement, hint: 
     // pixel, for the same reason as the canvas: nothing blurred. DRAFT: the
     // sizes aimed for (about 34 CSS px over the view, 48 in a bar, the
     // whole button upright).
-    const aim = mode === 'over' ? 34 : mode === 'upright' ? button : 48;
-    let k = Math.max(1, Math.round((aim * dpr) / 24));
-    while (k > 1 && (24 * k) / dpr > Math.min(button, ph, lz.width / 2)) k--;
-    const icon = (24 * k) / dpr;
+    // DRAFT (brief phone-hud-legibility, second pass: sideways the pictures looked small, ~30 px on 52 px
+    // targets): OVER_AIM for the action buttons over the view; the stick's two arrows keep OVER_PAD_AIM,
+    // so the whole set stays under the see-through paint pin (scripts/e2e/phone.ts PAINT_LIMIT, 3%).
+    const sized = (aim: number): number => {
+      let k = Math.max(1, Math.round((aim * dpr) / 24));
+      while (k > 1 && (24 * k) / dpr > Math.min(button, ph, lz.width / 2)) k--;
+      return (24 * k) / dpr;
+    };
+    const icon = sized(mode === 'over' ? OVER_AIM : mode === 'upright' ? button : 48);
+    const padIcon = mode === 'over' ? sized(OVER_PAD_AIM) : icon;
     const set = (name: string, px: number): void => touch.style.setProperty(name, `${px}px`);
     set('--icon', icon);
+    set('--pad-icon', padIcon);
     set('--icon-off', snap((button - icon) / 2));
-    set('--pad-icon-x', snap((lz.width / 2 - icon) / 2));
-    set('--pad-icon-y', snap((ph - icon) / 2));
+    set('--pad-icon-x', snap((lz.width / 2 - padIcon) / 2));
+    set('--pad-icon-y', snap((ph - padIcon) / 2));
     set('--lz-left', snap(lz.left));
     set('--lz-width', lz.width);
     set('--btn', button);
@@ -291,6 +303,9 @@ export function setUpShell(canvas: HTMLCanvasElement, touch: HTMLElement, hint: 
     }
     hint.style.setProperty('--hint-top', `${top + ch + 10}px`);
     hint.hidden = !upright || hint.dataset.dismissed === '1' || hintDismissed();
+    const words = hint.querySelector<HTMLElement>('span');
+    // DRAFT (brief phone-hud-legibility, second pass): the hint in the game's pixel font.
+    if (words && !hint.hidden) pixelWords(words, (words.dataset.word ?? words.textContent ?? '').toUpperCase(), 10);
     current = { scale, upright };
   };
   layout();

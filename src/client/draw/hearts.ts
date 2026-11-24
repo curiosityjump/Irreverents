@@ -57,22 +57,34 @@ export function isOut(world: World, content: Content, kind: string): boolean {
   return content.hearts?.on === true && heartsLeft(world, content, kind) === 0;
 }
 
-/** Draws a hero's row of hearts with its first heart's top-left at (x, y). */
-export function drawHeartRow(g: CanvasRenderingContext2D, world: World, content: Content, kind: string, x: number, y: number, big: boolean, frame: number): void {
+/**
+ * Draws a hero's hearts with the block's top-left at (x, y): one row, or
+ * with `perLine`, wrapped that many to a line, each line centred in `width`
+ * (a friend's column, so every heart sits under its own face).
+ */
+export function drawHeartRow(g: CanvasRenderingContext2D, world: World, content: Content, kind: string, x: number, y: number, big: boolean, frame: number, perLine = 0, width = 0): void {
   if (!content.hearts?.on) return;
   const max = maxHearts(content, kind);
   const left = heartsLeft(world, content, kind);
   drawnRows[kind] = { left, max };
   const s = heartSize(big);
-  for (let i = 0; i < max; i++) heart(g, content, x + i * s.step, y, i < left, big);
+  const per = perLine > 0 ? perLine : Math.max(1, max);
+  const at = (i: number): { x: number; y: number } => {
+    const line = Math.floor(i / per);
+    const inLine = Math.min(per, max - line * per);
+    const lx = width > 0 ? Math.floor((width - (inLine * s.step - 1)) / 2) : 0;
+    return { x: x + lx + (i - line * per) * s.step, y: y + line * s.step };
+  };
+  for (let i = 0; i < max; i++) heart(g, content, at(i).x, at(i).y, i < left, big);
   for (const p of pops) {
     if (p.kind !== kind) continue;
     const age = frame - p.frame;
-    const k = 1 + age / 7;
+    // DRAFT (brief phone-hud-legibility: at 4x a pop covered the portrait and poked past the plate on GAME OVER, which comes with the last heart): at most half again its size; the plate clips it (draw/hud.ts).
+    const k = 1 + (0.5 * age) / POP_FRAMES;
     const before = g.globalAlpha;
     g.globalAlpha = before * Math.max(0, 1 - age / POP_FRAMES);
-    const cx = x + p.index * s.step + s.w / 2;
-    const cy = y + s.h / 2 - age / 3;
+    const cx = at(p.index).x + s.w / 2;
+    const cy = at(p.index).y + s.h / 2 - age / 6;
     g.save();
     g.translate(cx, cy);
     g.scale(k, k);

@@ -240,6 +240,7 @@ function play(worldName: string): void {
     dismissStage();
     cont.hidden = true;
     touchHost.classList.remove('stage-up');
+    document.getElementById('hint')?.classList.remove('stage-up');
   };
   cont.addEventListener('click', onContinue);
   cont.addEventListener('touchend', (e) => {
@@ -362,6 +363,8 @@ function play(worldName: string): void {
     if (stageScreenUp() === cont.hidden) {
       cont.hidden = !stageScreenUp();
       touchHost.classList.toggle('stage-up', stageScreenUp());
+      // DRAFT (brief phone-hud-legibility, second pass): the upright hint and its close button rest under STAGE CLEARED too.
+      document.getElementById('hint')?.classList.toggle('stage-up', stageScreenUp());
     }
     watchGameOver(net.latest(), frameNo, (room) => `the start of ${Object.values(content.levels ?? {}).find((l) => l.rooms.includes(room))?.name ?? 'the level'}`); // Step 21: the GAME OVER card (draw/game-over.ts)
     setHeardRooms(net.heardRooms()); // Step 3: plates drawn from the server's copy too (draw/room-parts.ts, plateAsDrawn)
@@ -399,7 +402,7 @@ function play(worldName: string): void {
     d.camera = result.camera;
     d.scale = shell.layout().scale;
     d.upright = shell.layout().upright;
-    d.hint = hint.hidden ? '' : (hint.querySelector('span')?.textContent ?? '');
+    d.hint = hint.hidden ? '' : (hint.querySelector('span')?.dataset.word ?? hint.querySelector('span')?.textContent ?? '');
     d.status = status;
     d.statusText = text;
     d.touchControls = !touchHost.hidden;

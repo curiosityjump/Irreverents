@@ -84,7 +84,7 @@ into the shared documents.
   `gate-closed`/`gate-open`, `crack-1`/`crack-2`, `rubble`,
   `window-<w>x<h>`/`window-broken-<w>x<h>`, `hide-<w>x<h>`), the bell
   (`bell`, `bell-ringing` strip, `bell-broken`) and the alert
-  (`alert-pip`, `alert-pip-off`). Each falls back to its old plain shape.
+  (`alert-pip`, `alert-pip-off`, unused while `PIP_LOOKS` is false). Each falls back to its old plain shape.
 - **No art files → exactly as before.** Measured: the old and new
   renderers drew byte-identical frames for all eleven rooms (test rooms
   included) at three camera positions each, plus broken window, broken
@@ -118,9 +118,12 @@ into the shared documents.
   Step 21, hearts (`src/client/draw/hearts.ts`, called from `hud.ts`): with
   `content/hearts.json` on, a row of hearts under each face: the viewer's
   the cut `hud-heart-full`/`hud-heart-empty` (9×8, the props builder's), a
-  friend's 3×3 drawn in their colours, its column as wide as its row; the
-  plate grows by the viewer's row. A heart lost since the last frame pops
-  (swells and fades, 22 frames); an out hero's face is greyed
+  friend's 5×5 drawn in their colours, wrapped three to a line and centred
+  under that friend's face, a faint gold divider between friends (`FRIEND_LINE`,
+  `FRIEND_GAP` in `hud.ts`); the plate grows by the taller of the viewer's
+  row and the friends' lines. A heart lost since the last frame pops
+  (swells to half again its size and fades, 22 frames, clipped to the
+  plate: GAME OVER comes with the last heart); an out hero's face is greyed
   (`faces[].out`). No digits. The record: `drawn.hearts` (`rows` by kind:
   `left`, `max`; `pops`).
 
@@ -152,9 +155,13 @@ into the shared documents.
   drawn with the marks, not with the bell.
 - **Sky with fewer than 8 colours** is spread over 8 bands of even mixes
   between neighbouring colours; 8 or more are used as the bands.
-- **Alert pips**: at level 0 nothing is drawn (as before); at 1–3, that
-  many `alert-pip` followed by `alert-pip-off` up to three (only when
-  `alert-pip-off` exists), 10×10, 12 px apart from (5, 5).
+- **Alert pips**: at level 0 nothing is drawn (as before); at 1–3, on a
+  strip under the party plate led by a brass warning sign, a rising meter
+  of three bars (4, 7, 10 px tall, amber to red when lit, dark sockets
+  when not; the newest flashes as it lights). `PIP_LOOKS` in
+  `draw/alert.ts` (false since brief phone-hud-legibility's second pass:
+  the round red looks read as balloons or hearts) puts back the
+  `alert-pip`/`alert-pip-off` looks, 10×10, 12 px apart.
 - **Generic looks are bottom-centred** on the part's or door's rectangle
   (identical to "over the rectangle" when the sizes match).
 - **Looks are asked for through `drawLookIn`** (`draw/room-parts.ts`): the

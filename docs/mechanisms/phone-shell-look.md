@@ -106,6 +106,15 @@ into their homes.
   (watched to fail).
 - **The upright line** now says "Plays either way up", left-aligned under
   the view, still dismissible (`INTENT:` a way out; fact g taps it away).
+  Since brief phone-hud-legibility's second pass it, and the Use button's
+  pill words (Take, Get in, Go in with a pixel door), are drawn in the
+  game's pixel font on a small canvas (`src/client/pixel-words.ts`; the
+  words stay in `data-word` and the aria-label), and the line rests under
+  STAGE CLEARED. Over the view the action pictures aim for 40 CSS px
+  (`OVER_AIM`, `shell.ts`), the stick's arrows 34 (`OVER_PAD_AIM`), the
+  most under the 3% paint pin (`scripts/e2e/phone.ts`): measured 2.54%
+  at 667×375, 2.28% at 736×414, 2.71% at 750×340, 2.41% at 844×340
+  (40 px on the stick too: 3.06% at 750×340, over the pin).
 
 - **Look round 3 (actors lane, push 3; gap 12):**
   - Sideways, the view grows to the screen's height after the scale is

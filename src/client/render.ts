@@ -29,7 +29,7 @@ import { drawUseHint } from './draw/use-hint.ts';
 import { drawSight, drawUnseenMarks } from './draw/sight.ts';
 import { drawPrizeStands } from './draw/heist.ts';
 import { drawGameOver } from './draw/game-over.ts';
-import { drawStage } from './draw/stage.ts';
+import { drawStage, stageScreenUp } from './draw/stage.ts';
 import { useHere } from '../sim/use.ts';
 
 /** DRAFT: the internal resolution the art on order assumes (docs/plan/step-1.md). */
@@ -113,7 +113,8 @@ export function render(g: CanvasRenderingContext2D, world: World, content: Conte
   drawUnseenMarks(g, roomId, ox, oy);
   drawRecruitCalls(g, world, content, roomId, ox, oy);
   drawAlert(g, world, content, roomId, ox, oy);
-  drawAudience(g, world, content, roomId, ox, oy);
+  // DRAFT (brief phone-hud-legibility, second pass): the audience's caption box poked out clipped beside STAGE CLEARED; it rests while the card is up.
+  if (!stageScreenUp()) drawAudience(g, world, content, roomId, ox, oy);
   drawHall(g, world, content, roomId, ox, oy);
   drawDoorRefused(g, world, content, roomId, ox, oy, pv?.me);
   drawCantina(g, world, content, roomId, pv?.me);

@@ -362,9 +362,10 @@ unseen.
 post, drawn with the working parts behind bodies (`drawBells`); while rung
 it swings and a bar over it fills (the time left to stop the call),
 drawn with the marks (`drawAlert`); broken, a grey stump. The area's
-alert is up to three red marks in the top-left corner; nothing at 0. The
-looks `bell`, `bell-ringing`, `bell-broken`, `alert-pip` and
-`alert-pip-off` replace the plain shapes when present
+alert is a rising meter of up to three bars under the party plate; nothing
+at 0. The looks `bell`, `bell-ringing` and `bell-broken` replace the plain
+shapes when present (`alert-pip`/`alert-pip-off` only with `PIP_LOOKS`,
+`docs/mechanisms/rendering-world.md`)
 (`docs/mechanisms/art-pipeline.md`).
 
 **Not built yet:** the armoured guard (the town's tiers, push 3);
