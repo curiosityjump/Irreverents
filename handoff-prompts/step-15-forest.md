@@ -1,3 +1,13 @@
+**Lead, 12:50 UTC, for the third builder. READ THIS FIRST; it replaces the blocks below where they differ.**
+- **Landed:** push 1 (518e220), push 2 (841d4a8), push 2b (2652cc8, the forest's tiles), and push 3 (4323a15: the guarded spot at the upper trail, waves from both sides, the thrower on the root mound, a spear by the way in, star times). Pushes 1 and 2 were reviewed by the lead's re-runs; push 3's review is running.
+- **Read first:** "Handoff (second builder …)" in `docs/plan/step-15.md`. It has the parked, unrun e2e case, the shot tool and the measured route for each look defect.
+- **Your order:**
+  1. **Push 4a, the look:** the forest's own earth and wall below the grass (no more quarry cobble); the backdrop seam; the pockets showing sky (dark earth behind them, as data). If decor cannot cover a pocket, stop and tell the lead: no engine edit.
+  2. **Push 4b, the phone:** put the e2e case in place and make it pass inside the full `npm run e2e`, with its control watched failing. Take the shots at true 844x390, 750x340 and 390x664 and commit them (list in the handoff). Add the architecture row and the Step 10 line.
+  3. **Push 5, a quiet way past the lookout** (only if budget is left): the owner's standard includes "the satisfaction of a zero-alarm infiltration", and today no scripted clear of the forest is unseen, because the lookout faces the only way on. Give one route past the guarded spot that no bad guy sees (a bough over it, or a crawl under it), proved by `step15-unseen-clear` with a control.
+- **Deploys:** after each push, run `npm run check:deployed` until it passes. If live has not moved after 8 minutes, push the same tree again once (the second builder's route) before reverting, and note it in `docs/process-observations.md`.
+- Stop at about 300k tokens with a handoff under "Builder notes".
+
 **Lead, 12:20 UTC (the orchestrator's look at the first shots), for push 4:** the earth and wall below the grass are the quarry's orange cobble; give the forest its own (P10 rows, or tint and vary in `tools/art/tiles/forest.py`, `DRAFT:`). Fix the backdrop's hard vertical seam (trail-start, x about 1700-2000 of 2250) and the rectangular backdrop hole in the dirt (trail-gap). The "844x390" shots were 750x340 captures: re-shoot at true sizes.
 
 **Lead, 11:35 UTC, for the second builder. READ THIS FIRST; it replaces the blocks below where they differ.**
