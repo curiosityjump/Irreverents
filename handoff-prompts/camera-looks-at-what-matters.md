@@ -7,6 +7,13 @@ orchestrator (`session_017WiGzHhT2apmWHT61rQ65G`).
 `docs/questions-for-the-owner.md`. **Notes:** `docs/plan/step-5.md`, a
 "Camera" section.
 
+**Landed so far (2026-11-24 12:30 UTC), by `session_017WiGzGHrgYYzH2iGQXcGaG`, which stopped at 258k tokens:** the camera's lean (ad51322, live; full e2e 134 of 134 on its base): sideways the thrower, his whole arc and the landing cross are in the picture and clear of the buttons. **You are a fresh builder, one follow-up push. Read `docs/plan/step-5.md`, "Camera" (e412ef8: what the first builder measured for each finding and what it would change). A subagent of the orchestrator looked at the before and after shots; fix these, with before and after shots of your own:**
+1. **The floor is nearly gone when the view leans:** the hero's feet sit on the bottom edge and a thing lying on the floor is drawn over the Grab button (`after/aim-844x390`, `after/aim-750x340`). The hero and the ground they stand on stay clear of the bottom edge and of the controls; lean less if it must.
+2. **The party plate's box is not free picture:** the thrower ends against or under it (measured once at 36% under, at 750x340). Treat the plate like the controls when choosing the window.
+3. **Holding Up barely lifts the view** (`after/look-up-844x390`: he is cut to his legs). Holding Up should show what is above.
+4. **No lean on an ordinary jump.** The rising lean fires on every jump in a room taller than the view, which bobs. Lean on a held Up, on a climb that keeps rising past a beat, and for something aimed at the hero; an e2e fact that a single jump in a tall room moves the window by nothing, with a control.
+5. The tower climb and the depot's roof route were computed from room data, not walked by a page: walk one of them by touch, sideways, and shoot it.
+
 ## The task, and the measure
 
 Two builders flagged the same thing. The Step 16 lead's phone walk
