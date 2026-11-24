@@ -74,7 +74,7 @@ Push 4 only. A star is already cut: `hall-frame-star` (group `hall`,
 `docs/mechanisms/asset-coverage.md` row `look:hall-picture`). Use it before
 drawing one.
 
-**Reports:** `send_message` to the lead, `session_017WiGzFrf7N7ZgaqUyjs4Sz`,
+**Reports:** `send_message` to the lead, `session_017WiGzF7NsB3KTwXkWUXE63` (successor lead from 05:05 UTC),
 after each push, with the commit and one line on what a player can now do.
 Notes and doubts go under "Builder notes" in `docs/plan/step-22.md`. A blocking
 question goes to the lead in the moment. If nobody answers in about ten minutes,
