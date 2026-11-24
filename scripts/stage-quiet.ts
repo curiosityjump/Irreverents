@@ -29,7 +29,7 @@ for (const r of ROOMS) populateRoom(world, content, r);
 const hero = (w: any): any => w.entities.find((e: any) => e.id === 'p:a');
 
 type Press = { x: number; jump: boolean; attack: boolean; use: boolean };
-type Seg = { do: 'walk' | 'hop' | 'steer' | 'idle'; dir?: number; to?: number; until: any; wait?: number; max?: number; gaps?: boolean; jumpHold?: number; use?: boolean; note?: string; nohop?: boolean; waitStep?: number; flap?: boolean; hopAt?: number };
+type Seg = { do: 'walk' | 'hop' | 'steer' | 'idle'; dir?: number; to?: number; until: any; wait?: number; max?: number; gaps?: boolean; jumpHold?: number; use?: boolean; note?: string; nohop?: boolean; waitStep?: number; flap?: boolean };
 
 function untilHolds(w: any, u: any): boolean {
   const me = hero(w);
@@ -53,7 +53,6 @@ function makeCtl(seg: Seg) {
   let lastX = -1;
   let still = 0;
   let t = 0;
-  let hopped = false;
   return (w: any): Press => {
     t++;
     const me = hero(w);
@@ -83,11 +82,6 @@ function makeCtl(seg: Seg) {
           let depth = 1;
           while (depth <= 4 && tileAt(w, room, next, feetRow + depth) !== TILE.solid && tileAt(w, room, next, feetRow + depth) !== TILE.oneway) depth++;
           if (depth > 3) want = true;
-        }
-        // DRAFT (Step 22, the seventh builder): `hopAt`: one jump once the hero's middle has reached this column (onto the road's top plank over its heavy).
-        if (seg.hopAt !== undefined && !hopped && (me.x + box.w / 2) / T >= seg.hopAt) {
-          want = true;
-          hopped = true;
         }
         if (Math.abs(me.x - lastX) < 0.2) still++;
         else still = 0;
@@ -152,12 +146,6 @@ for (const [i, seg] of (route.segments as Seg[]).entries()) {
   let found = -1;
   let last: any;
   const maxWait = seg.wait ?? 0;
-  // DRAFT (Step 22, the seventh builder): QSWEEP=<segment index> prints, for that segment, every wait from 0 to its `wait` that passes and every one that fails, to show how wide a window is.
-  if (process.env.QSWEEP === String(i)) {
-    const oks: number[] = [];
-    for (let wt = 0; wt <= maxWait; wt++) if (run(structuredClone(world), seg, wt, null).ok) oks.push(wt);
-    console.error(`sweep seg ${i}: ${oks.length} of ${maxWait + 1} waits pass: ${oks.join(',')}`);
-  }
   for (let wt = 0; wt <= maxWait; wt += seg.waitStep ?? 6) {
     const trial = structuredClone(world);
     const r = run(trial, seg, wt, null);

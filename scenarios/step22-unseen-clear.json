@@ -1,7 +1,7 @@
 {
  "id": "step22-unseen-clear",
  "gate": null,
- "proves": "Step 22 push 5 (DRAFT, docs/plan/step-22.md 'Builder notes'; the lead's ruling that an unseen clear must exist): the infiltrator alone, with every bad guy of the quarry placed, clears the stage from its entrance with nobody of the stage ever seeing it (stage-cleared with unseen true), on its first try, with no punch thrown, no heart lost and no horn call even started. The quiet way: from the road's door, up the first ledge behind the road's lookout while he looks east, the step and the high walk over him (rows 13 and 11), onto the scaffold over the toll (rows 11, 9 and 8), along it over the toll-keeper and his watcher to column 51, then, while the road's heavy looks up the road, under the flyer's ledge and up onto the top plank over him (row 7, columns 56-62, out of his sight band whichever way he faces), off its east end and on to the ridge; along the ridge to the chasm and down it into the pit, past the pit's two (who look at each other, west of the landing) and through the east door into the depot's cellar; up the one-tile step under the hole at column 23 and through it into the yard's middle stretch (hidden from all); up the yard step and the two one-way steps (columns 25-28) onto the plank to the strongroom's roof, over the roof's hole and down onto the gantry (row 9) above the far yard and its patrol, and off its east end into the end. Control (watched to fail, docs/plan/step-22.md): the scaffold's rows 8 and 7 (columns 38-62) made empty by a tiles override, the same inputs, and no unseen clear. The pass over the heavy is a window: from the tick he turns to look up the road, every wait over 84 ticks passes (QSWEEP=8, the seventh builder's sweep).",
+ "proves": "Step 22 push 5 (DRAFT, docs/plan/step-22.md 'Builder notes'; the lead's ruling that an unseen clear must exist): the infiltrator alone, with every bad guy of the quarry placed, clears the stage from its entrance with nobody of the stage ever seeing it (stage-cleared with unseen true), on its first try, with no punch thrown, no heart lost and no horn call even started. The quiet way: from the road's door, up the first ledge behind the road's lookout while he looks east, the step and the high walk over him (rows 13 and 11), onto the scaffold over the toll (rows 11, 9 and 8), along it over the toll-keeper and his watcher, then, once the road's heavy has turned to look up the road, off its east end behind him and on to the ridge; along the ridge to the chasm and down it into the pit, past the pit's two (who look at each other, west of the landing) and through the east door into the depot's cellar; up the one-tile step under the hole at column 23 and through it into the yard's middle stretch (hidden from all); up the yard step and the two one-way steps (columns 25-28) onto the plank to the strongroom's roof, over the roof's hole and down onto the gantry (row 9) above the far yard and its patrol, and off its east end into the end. Control (watched to fail, docs/plan/step-22.md): the scaffold's row 8 (columns 38-62) made empty by a tiles override, the same inputs, and no unseen clear.",
  "room": "quarry-road",
  "placements": true,
  "placedRooms": [
@@ -104,43 +104,27 @@
   {
    "player": "a",
    "from": 313,
-   "to": 408,
+   "to": 393,
    "x": 1
   },
   {
    "player": "a",
-   "from": 720,
-   "to": 1518,
+   "from": 773,
+   "to": 1586,
    "x": 1
   },
   {
    "player": "a",
-   "from": 761,
-   "to": 778,
+   "from": 872,
+   "to": 889,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 804,
-   "to": 821,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 888,
-   "to": 905,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 1048,
-   "to": 1065,
+   "from": 956,
+   "to": 973,
    "hold": [
     "jump"
    ]
@@ -155,128 +139,136 @@
   },
   {
    "player": "a",
-   "from": 1515,
-   "to": 1532,
+   "from": 1184,
+   "to": 1201,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 1520,
-   "to": 1530,
-   "x": -1
-  },
-  {
-   "player": "a",
-   "from": 1532,
-   "to": 1541,
-   "x": 1
-  },
-  {
-   "player": "a",
-   "from": 1544,
-   "to": 1550,
-   "x": -1
-  },
-  {
-   "player": "a",
-   "from": 1551,
-   "to": 1568,
+   "from": 1583,
+   "to": 1600,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 1569,
-   "to": 1576,
+   "from": 1588,
+   "to": 1598,
    "x": -1
   },
   {
    "player": "a",
-   "from": 1576,
-   "to": 1597,
+   "from": 1600,
+   "to": 1609,
    "x": 1
   },
   {
    "player": "a",
-   "from": 1576,
-   "to": 1593,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 1599,
-   "to": 1601,
-   "x": -1
-  },
-  {
-   "player": "a",
-   "from": 1601,
-   "to": 1622,
-   "x": 1
-  },
-  {
-   "player": "a",
-   "from": 1601,
+   "from": 1612,
    "to": 1618,
-   "hold": [
-    "jump"
-   ]
-  },
-  {
-   "player": "a",
-   "from": 1624,
-   "to": 1633,
    "x": -1
   },
   {
    "player": "a",
-   "from": 1634,
-   "to": 1655,
-   "x": 1
-  },
-  {
-   "player": "a",
-   "from": 1634,
-   "to": 1651,
+   "from": 1619,
+   "to": 1636,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 1657,
-   "to": 1667,
+   "from": 1637,
+   "to": 1644,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 1644,
+   "to": 1665,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 1644,
+   "to": 1661,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1667,
+   "to": 1669,
    "x": -1
   },
   {
    "player": "a",
    "from": 1669,
-   "to": 1944,
+   "to": 1690,
    "x": 1
   },
   {
    "player": "a",
-   "from": 1753,
-   "to": 1770,
+   "from": 1669,
+   "to": 1686,
    "hold": [
     "jump"
    ]
   },
   {
    "player": "a",
-   "from": 1903,
-   "to": 1920,
+   "from": 1692,
+   "to": 1701,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 1702,
+   "to": 1723,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 1702,
+   "to": 1719,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1725,
+   "to": 1735,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 1737,
+   "to": 2012,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 1821,
+   "to": 1838,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1971,
+   "to": 1988,
    "hold": [
     "jump"
    ]
   }
  ],
- "ticks": 2004,
+ "ticks": 2072,
  "expect": [
   {
    "fact": "event-where",
@@ -290,7 +282,7 @@
    },
    "between": [
     1,
-    2004
+    2072
    ],
    "count": [
     1,
@@ -303,7 +295,7 @@
    "where": {},
    "between": [
     0,
-    2004
+    2072
    ],
    "count": [
     0,
@@ -318,7 +310,7 @@
    },
    "between": [
     0,
-    2004
+    2072
    ],
    "count": [
     0,
@@ -331,7 +323,7 @@
    "where": {},
    "between": [
     0,
-    2004
+    2072
    ],
    "count": [
     0,
@@ -344,7 +336,7 @@
    "where": {},
    "between": [
     0,
-    2004
+    2072
    ],
    "count": [
     0,
@@ -352,5 +344,5 @@
    ]
   }
  ],
- "//": "DRAFT (Step 22 push 5): the inputs were recorded by `node scripts/stage-quiet.ts scripts/stage-routes/quiet-infiltrator.json` (segments of walking, hopping and steering, each preceded where needed by the shortest wait after which nobody sees the hero: none by the road's door, where its lookout was already looking east; 5.2 s at column 51 on the scaffold for the road heavy to turn, searched tick by tick; QSWEEP=8 prints the whole window). Re-record with the same command when the quarry changes; the claims are what must hold."
+ "//": "DRAFT (Step 22 push 5): the inputs were recorded by `node scripts/stage-quiet.ts scripts/stage-routes/quiet-infiltrator.json` (segments of walking, hopping and steering, each preceded where needed by the shortest wait after which nobody sees the hero: none by the road's door, where its lookout was already looking east; 6.3 s on the scaffold for the road heavy to turn, searched tick by tick). Re-record with the same command when the quarry changes; the claims are what must hold."
 }
