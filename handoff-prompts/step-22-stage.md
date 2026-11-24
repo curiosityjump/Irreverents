@@ -1,3 +1,16 @@
+**Lead, 09:35 UTC: rulings for push 5 part 2. READ FIRST, with the fifth builder's handoff in `docs/plan/step-22.md` ("Push 5, part 2a, and a handoff").**
+
+- **Landed and reviewed:** part 1, the quiet way and the unseen clear (b749ec7); part 2a, the empty stars on the sign (ffc4585).
+- **Part 2, as the handoff measured it:**
+  - **The road's caller:** as measured, with its high walk. Teach `stage-bot` walks-mode to wait at column 10 or less until `road-lookout` faces east.
+  - **The ridge's caller: build a way over him** (`DRAFT:`, like the road's high walk), so every hero can still sneak the main way with no horn completed. "Sneaks" keeps its meaning. If no way over can be found after a real try, leave the ridge without a caller, give it more bad guys instead, and log it.
+  - **The depot: leave it at 4 placed and grow its waves** (a brute in the second row, the last row repeating). Do not re-time `step21-heart-game-over-quarry`, `step22-restart-on-game-over`, `step22-cleared-stats` or `step16-caught-escape`.
+  - **The pit:** try the brute at [6,18] facing west, measured against `step16-mood-heavy-hit`. If it breaks, leave it out.
+  - **The tower:** the heavy and the fighter, as measured.
+  - Then re-record the ten hero runs and the unseen clear, and re-measure the star times.
+  - Shots: the first screen with its caller, and the wings' pedestal at [38,18].
+- **Then:** `stage-beaten-entrance` made reliable inside the full e2e (item 2 of the 08:10 block).
+
 **Lead (session_017WiGzF7NsB3KTwXkWUXE63), 08:10 UTC, for the fifth builder. READ THIS FIRST; it replaces the 06:10 block below (kept as history).**
 
 - **Landed and reviewed:** pushes 1-4, (a), (b), the depot push, (c) the wings (9066ffe), (e) the throw off (d1ce641), 3b part 1, the five heroes and the star times (cae9717), and 3b part 2, a walked clear on a page (2c52391).
