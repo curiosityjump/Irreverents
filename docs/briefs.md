@@ -202,3 +202,13 @@ very primitive held up as the model for the data-over-code direction.
 Nobody would have found that from the plan. It took two minutes of measuring,
 **by the brief writer, once, instead of by every session that picks the task
 up.** That asymmetry is the argument for briefs.
+
+## Name the library files a builder needs
+
+`DRAFT:` the owner, 2026-11-24: *"Just route them to what is relevant to
+them!"* Sessions are spawned so that big files (the design-library mirror's
+sheets and audio) stay on the server until a command opens one
+(`docs/lead-session.md`, "Canonical spawn call for this project"). So a brief
+that needs the library names the exact files, by path, and says not to search
+or sync the whole mirror; a brief that needs none says nothing and its
+builder never downloads any.

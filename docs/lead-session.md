@@ -387,12 +387,29 @@ Spinning one up directly doesn't relax anything else in this file:
       source_url:      "https://github.com/curiosityjump/Irreverents",   # this exact spelling
       source_revision: "main",
       clone_depth:     50,          # explicit, so the checkout is fresh
+      blob_limit_kb:   150,         # big files stay on the server until a command reads them (see below)
       outcome_branch:  "main",      # the child's own instructions then name main, not an auto-generated claude/... branch
       tags:            ["irreverents"],   # tells Irreverents sessions apart from the owner's other projects on this account
       title:           "<the role, and the step or brief once known>",
       prompt:          "<the bare prime, or: work handoff-prompts/<file>.md>"
     )
     ```
+
+    **`blob_limit_kb: 150` on every spawn** (`DRAFT:` the owner, 2026-11-24
+    ~01:00 UTC, first-hand to the orchestrator: *"Why the hell does every
+    builder download the whole library. Just route them to what is relevant
+    to them!"*). The design-library mirror was 334 MB of the checkout after
+    a full Drive sync (8cb79ac), 330 MB of it in 250 files over 150 KB;
+    nothing the game builds or checks reads it (`scripts/build.ts:61`), and
+    outside it only a dozen screenshots are that big. With the limit, a
+    session's checkout leaves those files on the server and git fetches one
+    the moment a command opens it. So **a brief names the library files its
+    builder needs, by path** (the sheet to cut, the doc to quote), and a
+    builder opens only those: never `grep -r` or `find` across
+    `docs/design-library` for its bytes (list names with `git ls-files`),
+    never a full `tools/drive_sync.py` run unless the brief is the sync.
+    Measured on the first spawn that used it: see `docs/spawn-failures.md`
+    if it misbehaved.
 
     Leave the environment, model and permission mode unset (inherited from
     the spawner) and don't set an effort level. To see only this project's
