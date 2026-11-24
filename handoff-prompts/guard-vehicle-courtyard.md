@@ -7,7 +7,7 @@ read of `main` at e68b907 (nothing was run). Read first:
 ("Builder notes", and "Guard vehicle on the courtyard's run" at its end),
 `docs/mechanisms/npc-response.md`, "Deeds" and "The castle street's table".
 
-**Landed so far:** nothing yet.
+**Landed so far (2026-11-24 ~20:50 UTC), by `session_017WiGzExJuPKipKbx51rTeL`, which stopped at its budget:** push 1 at 186b8da (the trike, the roadblock, primitives 1-3, three scenarios, e2e `guard-machine-*`, shots `docs/plan/step-20-shots/courtyard-*`). Not as briefed: the trike stands at [5, 7], not [1, 7] (at 1 the e2e `door-go-in` went red), `accel` 700, `coast` 400; why in `docs/plan/step-20.md`, "Guard vehicle, courtyard". The courtyard's placements now also hold Step 24's bandit at column 27, past the gate: the trike can reach him when flung crates open the gate. **Left: push 2 (stealing it is seen) and push 3**; scenarios that use the trike should start at spawn 1 (column 5, standing on it).
 
 **Reports:** `send_message` to the session on the Orchestrator line of
 `docs/questions-for-the-owner.md`, after each push, with shot paths.
