@@ -414,3 +414,9 @@ Full text: `docs/plan/step-20.md`
 **Status: open, claimed by orchestrator session_017WiGzJzo6aZqH4kYxxJsiV (builders: session_017WiGzJWYyVWtYnjFXHko1S), 2026-11-23.** (Brief `handoff-prompts/loop-risk.md`, started 23:14 UTC; only its power parts wait for Step 9's knock-loose push.)
 
 Full text: `docs/plan/step-21.md`
+
+## Step 22 — One stage to clear: an outpost you get through without dying, and a victory screen
+
+**Status: open, unclaimed.** (Opened 2026-11-24 00:40 UTC by orchestrator session_017WiGzJzo6aZqH4kYxxJsiV from the owner's words of ~00:30 UTC; a lead's step: many slices and judgement by looking at a phone.)
+
+Full text: `docs/plan/step-22.md`
