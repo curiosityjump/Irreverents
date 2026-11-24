@@ -1,0 +1,75 @@
+{
+ "id": "way-out-camp-cache-brawler",
+ "proves": "There is always a way out (CLAUDE.md; brief owner-stuck-in-the-quarry, push 2, the way-out check played for every roster hero): the brawler, put in the Bandit Camp's cache behind the unbroken barricade (column 80, as one who walked off the quiet ledge's east end lands), climbs out east: up the one-way tile at column 83, row 9 (a half-height stair on the cache's step, the mirror of the entry step's at column 8), onto the step's top (columns 84-86) and up onto the quiet ledge (row 6), the way back to the doorway. Its jump peaks at 47.5 px and the step is 48 px. Control (watched to fail): the tile emptied by this scenario's own `tiles`, and the brawler never leaves the cache's floor",
+ "room": "outpost",
+ "players": [
+  {
+   "id": "a",
+   "character": "brawler",
+   "tile": [
+    80,
+    10
+   ]
+  }
+ ],
+ "inputs": [
+  {
+   "player": "a",
+   "from": 0,
+   "to": 70,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 30,
+   "to": 60,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 75,
+   "to": 105,
+   "hold": [
+    "jump"
+   ],
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 125,
+   "to": 200,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 129,
+   "to": 165,
+   "hold": [
+    "jump"
+   ]
+  }
+ ],
+ "ticks": 240,
+ "expect": [
+  {
+   "fact": "position",
+   "player": "a",
+   "at": 240,
+   "y": [
+    90,
+    100
+   ]
+  },
+  {
+   "fact": "position",
+   "player": "a",
+   "at": 240,
+   "x": [
+    600,
+    1330
+   ]
+  }
+ ]
+}

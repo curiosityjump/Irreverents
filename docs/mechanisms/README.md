@@ -87,6 +87,7 @@ groups) whenever you add one — never update the number from memory.
 - `chase-cap` + `content/hostility.json` + `clash-fight` — a chase follows a hero into the camp, the nearest two at most; guards and bad-side people fight on sight, moods unchanged (Step 12, slice B; "Chase and clash").
 
 **Rooms and doors** (`docs/mechanisms/rooms-and-doors.md`)
+- `scripts/way-out-audit.ts` — the way-out check played one roster hero at a time, printing every (room, hero, tile) with no way to a door or back to the start (brief owner-stuck-in-the-quarry, 2026-11-24).
 - `content/rooms/*.json` doors, areas and parts + `src/sim/systems/room-doors.ts` — rooms joined by walk and enter doors that carry any body, tiles that change while the game runs (`src/sim/room-state.ts`), working-part kinds declared by their system (`plate`, `gate`, `breakable`, `false-wall`, `hide`: `src/sim/systems/room-<kind>.ts`, shared helpers in `src/sim/room-parts.ts`, drawn by `src/client/draw/room-parts.ts`), and the checks and controls (`controls/rooms/`) that refuse a broken map (Step 3).
 
 **Levels** (`docs/mechanisms/levels.md`)

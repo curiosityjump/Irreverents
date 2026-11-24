@@ -1,5 +1,9 @@
 {
-  "//": "NOT a broken room: the sealed-pit control's pit, one tile shallower and two tiles wide. Every party member can get out, so the check must ACCEPT it. It proves sealed-pit is refused for its depth, not because pits are refused.",
+  "//": "A broken room since 2026-11-24 (brief owner-stuck-in-the-quarry): the sealed-pit control's pit, one tile shallower (48 px) and two tiles wide. Until then the way-out check played only the party's three, who all jump out of it, and this control said it must be ACCEPTED (it is pit-two-deep-is-accepted now). Played for every roster hero, the brawler (jump 47.5 px) can never leave it, so the check must refuse it for the brawler.",
+  "expect": [
+    "no way out",
+    "the brawler"
+  ],
   "rooms": {
     "control-a": {
       "id": "control-a",
@@ -72,6 +76,5 @@
   "game": {
     "startRoom": "control-a",
     "playerCharacter": "hero"
-  },
-  "accept": true
+  }
 }

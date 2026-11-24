@@ -337,7 +337,10 @@ on a name. The spawn and row rules still apply to it.
 ## The way-out check: "there is always a way out", measured
 
 For every room that has doors, and **for every character a player can
-be** (the members in `content/party.json`), `npm run check` and `npm run
+be** (`wayOutCharacters`: the members in `content/party.json` and every
+hero in `content/roster.json`; until 2026-11-24 the party's three only, so
+the brawler, the lowest jump, was never played and was shut in the Bandit
+Camp's cache, brief owner-stuck-in-the-quarry), `npm run check` and `npm run
 build` refuse:
 
 - **no way out**: a tile a body could stand on from which it can never
@@ -438,8 +441,11 @@ tiles deep, no door), `one-way-drop-no-way-back`,
 `one-way-drop-into-a-loop` (a door is reachable, the start never again),
 `room-not-reachable-from-start`, `start-room-has-no-doors`. A control
 with `"accept": true` instead of `expect` must *pass*:
-`pit-three-deep-is-accepted` is the sealed pit one tile shallower, and
-pins that rule from the allowed side. A control that starts
+`pit-two-deep-is-accepted` is the sealed pit two tiles shallower, and
+pins that rule from the allowed side (until 2026-11-24 it was
+`pit-three-deep-is-accepted`; played for every roster hero, that pit traps
+the brawler, and it is now the refused control
+`pit-three-deep-traps-the-brawler`). A control that starts
 passing, or fails for another reason, fails the check. They are never
 files in `content/rooms/`. The same section checks `doorToward` against
 the real map. Add a control whenever you add a rule.
@@ -478,3 +484,20 @@ plugs in: `docs/mechanisms/rendering-world.md`.
   so entering a doorway with it also fires `jumped`; the arrival zeroes
   the speed, so nothing is seen. Touch has no such overlap.
 - `doorToward` treats every door as usable from anywhere in its room.
+
+## The way-out audit (`scripts/way-out-audit.ts`)
+
+`node scripts/way-out-audit.ts [hero ...]` plays the same check one roster
+hero at a time and prints one line per (room, hero, tile) patch with no way
+out or no way back, and how long each hero took (15-40 s each, about 2.5
+minutes for all five on a loaded machine); it exits non-zero when it prints
+any. Written for brief owner-stuck-in-the-quarry (the owner: "platforms
+you can jump up through, but not back down through, which can close
+paths"). Its first run, 2026-11-24, found one trap: the brawler in the
+Bandit Camp's cache (`outpost.json`, columns 76-83), fixed by a one-way
+tile at column 83, row 9 (`way-out-camp-cache-brawler`). **It found none
+in the six quarry rooms, for any of the five heroes**, so the owner's
+quarry trap is not one this model sees (an empty room, no people, every
+part that can block counted as wall): see `docs/plan/step-3.md`, "The
+owner stuck in the quarry". With no powers only: a place reached with
+wings or the boost that has since faded is not played (push 3, not built).

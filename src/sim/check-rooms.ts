@@ -209,7 +209,7 @@ function checkWaysOut(content: Content, systems: System[], problems: Problem[]):
     return;
   }
 
-  for (const kind of playableCharacters(content)) {
+  for (const kind of wayOutCharacters(content)) {
     // Every place this character could stand, in every joined room.
     const nodes: Node[] = [];
     const index = new Map<string, number>();
@@ -412,6 +412,25 @@ function checkWaysOut(content: Content, systems: System[], problems: Problem[]):
       );
     }
   }
+}
+
+/**
+ * Every character the way-out check plays: the party's members and every
+ * roster hero (content/roster.json), in that order, each once.
+ * INTENT (brief owner-stuck-in-the-quarry; the owner, 2026-11-24: "i got
+ * stuck in the quarry ... platforms you can jump up through, but not back
+ * down through, which can close paths"): a player can be any roster hero
+ * (the cantina's swap, a recruit, the next hero when one is out of hearts),
+ * not only the party's first three. Played for the three alone, the check
+ * never saw the brawler (the lowest jump) shut in the Bandit Camp's cache.
+ */
+export function wayOutCharacters(content: Content): CharacterKind[] {
+  const out = playableCharacters(content);
+  for (const id of content.roster?.characters ?? []) {
+    const c = content.characters[id];
+    if (c && !out.some((k) => k.id === id)) out.push(c);
+  }
+  return out;
 }
 
 /**
