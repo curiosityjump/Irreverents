@@ -30,7 +30,8 @@ hearts push 5: losing there is hearts and the game over), and (Step 22
 push 1, `DRAFT:`) the Iron Quarry's six rooms (`content/defeat/quarry.json`:
 `downs` 3, seizers the fighter, the heavy and the brute but not the
 toll-keeper, lands on the road just inside its `to-courtyard` doorway, the
-start of the quarry, `follow`).
+start of the quarry, `follow`; **off** since Step 22 (e): its `gameOver`, the
+same doorway, is what losing there is).
 
 1. **A fall** (`defeat-seize`, order 585): a played hero `flattened` in a
    room of a place that is on is a `fall`; `c.falls` keeps the ticks of the
@@ -180,8 +181,10 @@ The decision is `docs/plan/step-21.md`, "Hearts"; it is built in pushes
 - **The old throw, retired by data** (push 5): a place file's `"on": false`
   turns its seize-and-throw off; every field stays and is still read (a
   place's `gameOver` is read whether or not it is on). Off: the castle
-  street and the camp. Still on: the quarry (until Step 22's start-over
-  listens to `game-over`). The scenarios that proved the throw in the camp
+  street, the camp and (Step 22 (e)) the quarry, whose stage now starts over
+  on `game-over`. Step 22's three throw scenarios were re-routed onto the
+  game over, not held (`step22-beaten-to-entrance`, `-restart-restores`,
+  `-friend-inside-no-restart`). The scenarios that proved the throw in the camp
   wait in `docs/plan/step-21-held/` (`step21-camp-thrown-out`,
   `step21-throw-is-no-escape`; Step 7's Hall exception for a throw stays in
   `hall-detect`, dormant). Kept and used by hearts: `returnPrize` with

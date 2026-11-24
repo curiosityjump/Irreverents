@@ -367,3 +367,10 @@ document as a decision of theirs.
 - **Why this way:** the Step 16 lead's answer: the wings are the pay-off of a hidden place, at [38, 18] on the floor under the strongroom. You get there by throwing the cellar's heavy rock through the cracked wall; climbing the shaft's ledges is the way back up. Nothing else about the wings changed: same flaps, same fade, same pedestal that lights again once they are lost, and the place it stands is still remembered as found.
 - **To change it:** the tile is one entry in `content/powers/flight.json` (`sources`); the Step 16 lead said to move it east within columns 38-43 if a route breaks. Two Step 9 scenarios walk the cellar route to it (`step9-fades-then-source`, `step9-second-power-replaces` and its control).
 - **Where:** `docs/mechanisms/powers.md`, "Sources"; `docs/plan/step-22.md`, "Builder notes".
+
+### 2026-11-24 · In the quarry you are no longer thrown out: running out of hearts is how you lose, and it starts the stage over
+- **Decided by:** Step 22 builder (the fourth), on the lead's order (e), `session_017WiGzEWjmrpsPDvpwxZXir`
+- **Instead of asking:** "Now that hearts are the way to lose, should the quarry still throw a beaten hero back to its start on top of that?"
+- **Why this way:** your rule: "Once all heros in the party are out of hearts, that's a game over". The camp and the street already dropped the throw. In the quarry the game over lands where the throw did, at the road just inside the doorway, and the stage starts over then. One consequence: with a friend, one of you losing a hero no longer sends anyone back. You play on as the next hero, and the stage starts over only when the whole party is out, which sends everyone back together.
+- **To change it:** `"on": true` in `content/defeat/quarry.json` brings the throw back. Its fields are kept, and the stage still listens for it.
+- **Where:** `docs/mechanisms/defeat.md`; `docs/mechanisms/stages.md`, "The rule"; `docs/plan/step-22.md`, "Builder notes".

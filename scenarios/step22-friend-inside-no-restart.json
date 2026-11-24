@@ -1,58 +1,381 @@
 {
- "id": "step22-friend-inside-no-restart",
- "proves": "Step 22 push 2 (DRAFT, docs/decisions-log.md 'Step 22': with friends the stage starts over only when nobody else is left inside): the same depot run as step22-restart-restores, while a friend (the flyer) stands in the quarry's ridge the whole time. The grappler is thrown back to the road, but the stage is not started over: the post stays broken and the changed tile stays solid. Control (watched to fail): the friend's room set to \"courtyard\" (outside the stage), the stage starts over at once Re-timed 2026-11-24 by the chase builder (bandits who lost the hero now search and walk back to their post, so the third fall comes about 5 s sooner).",
- "room": "quarry-depot",
- "placements": true,
- "tiles": [
-  {"room": "quarry-depot", "tile": [30, 4], "is": "solid"}
- ],
- "players": [
-  {"id": "a", "character": "grappler", "spawn": 0},
-  {"id": "b", "character": "flyer", "spawn": 0, "room": "quarry-ridge"}
- ],
- "inputs": [
-  {"player": "a", "from": 0, "to": 100, "x": 1},
-  {"player": "a", "from": 100, "to": 104, "hold": ["attack"]},
-  {"player": "a", "from": 124, "to": 128, "hold": ["attack"]},
-  {"player": "a", "from": 148, "to": 152, "hold": ["attack"]},
-  {"player": "a", "from": 172, "to": 176, "hold": ["attack"]},
-  {"player": "a", "from": 196, "to": 200, "hold": ["attack"]},
-  {"player": "a", "from": 220, "to": 224, "hold": ["attack"]},
-  {"player": "a", "from": 244, "to": 248, "hold": ["attack"]},
-  {"player": "a", "from": 268, "to": 272, "hold": ["attack"]},
-  {"player": "a", "from": 292, "to": 296, "hold": ["attack"]},
-  {"player": "a", "from": 316, "to": 320, "hold": ["attack"]},
-  {"player": "a", "from": 340, "to": 344, "hold": ["attack"]},
-  {"player": "a", "from": 364, "to": 368, "hold": ["attack"]},
-  {"player": "a", "from": 388, "to": 392, "hold": ["attack"]},
-  {"player": "a", "from": 412, "to": 416, "hold": ["attack"]},
-  {"player": "a", "from": 436, "to": 440, "hold": ["attack"]},
-  {"player": "a", "from": 460, "to": 464, "hold": ["attack"]},
-  {"player": "a", "from": 484, "to": 488, "hold": ["attack"]},
-  {"player": "a", "from": 508, "to": 512, "hold": ["attack"]},
-  {"player": "a", "from": 532, "to": 536, "hold": ["attack"]},
-  {"player": "a", "from": 556, "to": 560, "hold": ["attack"]},
-  {"player": "a", "from": 580, "to": 584, "hold": ["attack"]},
-  {"player": "a", "from": 604, "to": 608, "hold": ["attack"]},
-  {"player": "a", "from": 628, "to": 632, "hold": ["attack"]},
-  {"player": "a", "from": 652, "to": 656, "hold": ["attack"]},
-  {"player": "a", "from": 676, "to": 680, "hold": ["attack"]},
-  {"player": "a", "from": 900, "to": 940, "x": 1},
-  {"player": "a", "from": 1050, "to": 1090, "x": 1},
-  {"player": "a", "from": 1200, "to": 1240, "x": 1},
-  {"player": "a", "from": 1350, "to": 1390, "x": 1},
-  {"player": "a", "from": 1500, "to": 1540, "x": 1},
-  {"player": "a", "from": 1650, "to": 1690, "x": 1},
-  {"player": "a", "from": 1800, "to": 1840, "x": 1},
-  {"player": "a", "from": 1950, "to": 1990, "x": 1}
- ],
- "ticks": 2000,
- "expect": [
-  {"fact": "event", "event": "thrown-out", "player": "a", "between": [1600, 1700], "count": [1, 1]},
-  {"fact": "event", "event": "stage-restarted", "between": [0, 2000], "count": [0, 0]},
-  {"fact": "signaler", "outpost": "quarry-depot", "at": 1990, "broken": true},
-  {"fact": "tile", "room": "quarry-depot", "tile": [30, 4], "at": 1990, "is": "solid"},
-  {"fact": "in-room", "player": "a", "at": 1990, "room": "quarry-road"},
-  {"fact": "in-room", "player": "b", "at": 1990, "room": "quarry-ridge"}
- ]
+  "id": "step22-friend-inside-no-restart",
+  "proves": "Step 22 push 2 (DRAFT, docs/decisions-log.md 'Step 22': with friends the stage starts over only when the whole party is out, and a friend still playing keeps it going): the same depot run as step22-restart-restores, while a friend (the flyer, three hearts) stands in the quarry's ridge the whole time. The grappler loses its last heart; the party is not out (the friend's flyer has hearts), so there is no game over: the grappler's player plays on as the next member with hearts, where it lay (the flyer too: every member with hearts is a friend's, so the first one again), still in the depot. The stage is not started over: the post stays broken and the changed tile stays solid. Control (watched to fail): the friend's flyer out of hearts as well (`heartsLost` flyer 3), and the game over puts both on the road and the stage starts over",
+  "room": "quarry-depot",
+  "placements": true,
+  "tiles": [
+    {
+      "room": "quarry-depot",
+      "tile": [
+        30,
+        4
+      ],
+      "is": "solid"
+    }
+  ],
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    },
+    {
+      "id": "b",
+      "character": "flyer",
+      "spawn": 0,
+      "room": "quarry-ridge"
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 100,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 100,
+      "to": 104,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 124,
+      "to": 128,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 148,
+      "to": 152,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 172,
+      "to": 176,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 196,
+      "to": 200,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 220,
+      "to": 224,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 244,
+      "to": 248,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 268,
+      "to": 272,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 292,
+      "to": 296,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 316,
+      "to": 320,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 340,
+      "to": 344,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 364,
+      "to": 368,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 388,
+      "to": 392,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 412,
+      "to": 416,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 436,
+      "to": 440,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 460,
+      "to": 464,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 484,
+      "to": 488,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 508,
+      "to": 512,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 532,
+      "to": 536,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 556,
+      "to": 560,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 580,
+      "to": 584,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 604,
+      "to": 608,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 628,
+      "to": 632,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 652,
+      "to": 656,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 676,
+      "to": 680,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 900,
+      "to": 940,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 1050,
+      "to": 1090,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 1200,
+      "to": 1240,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 1350,
+      "to": 1390,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 1500,
+      "to": 1540,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 1650,
+      "to": 1690,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 1800,
+      "to": 1840,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 1950,
+      "to": 1990,
+      "x": 1
+    }
+  ],
+  "ticks": 2000,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "heart-lost",
+      "where": {
+        "entity": "p:a",
+        "hero": "grappler",
+        "left": 0
+      },
+      "between": [
+        1500,
+        1650
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "hero-out",
+      "where": {
+        "entity": "p:a",
+        "from": "grappler"
+      },
+      "between": [
+        1650,
+        1800
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "game-over",
+      "where": {},
+      "between": [
+        0,
+        2000
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "stage-restarted",
+      "between": [
+        0,
+        2000
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "signaler",
+      "outpost": "quarry-depot",
+      "at": 1990,
+      "broken": true
+    },
+    {
+      "fact": "tile",
+      "room": "quarry-depot",
+      "tile": [
+        30,
+        4
+      ],
+      "at": 1990,
+      "is": "solid"
+    },
+    {
+      "fact": "in-room",
+      "player": "a",
+      "at": 1990,
+      "room": "quarry-depot"
+    },
+    {
+      "fact": "in-room",
+      "player": "b",
+      "at": 1990,
+      "room": "quarry-ridge"
+    }
+  ],
+  "world": {
+    "heartsLost": {
+      "grappler": 2,
+      "infiltrator": 3
+    }
+  },
+  "//": "Re-routed 2026-11-24 by Step 22 (e), when the quarry's throw was switched off (hearts and the game over are the only way to lose there). Was: the grappler thrown back to the road (thrown-out 1600-1700, in the road at 1990) and no start-over. Under hearts one player is never sent back alone: a game over moves every player at once, so a friend can never be left inside by one. What this keeps: one player losing their hero while a friend still plays starts nothing over (no stage-restarted, the post broken and the tile solid at the end, the friend still in the ridge); the grappler's player stays in the depot as the next member. The world starts with the grappler's three hearts left and the infiltrator's none."
 }

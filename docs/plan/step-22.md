@@ -492,6 +492,30 @@ For the next builder, all measured on `main` at 6edd8be:
 - **Sweep:** I ran every scenario, looking for `power-*` events of flight or
   `depot-strongroom`. Only those two take it.
 
+### (e) The quarry's throw is off (fourth builder)
+
+- `content/defeat/quarry.json` is `on: false`, as the camp's is. Its
+  `gameOver` (the road doorway) is read anyway.
+- **Re-routed onto hearts:** each scenario now seeds `world.heartsLost` (the
+  grappler 3 left, the infiltrator and the flyer none), so three falls end
+  the party.
+  - `step22-beaten-to-entrance`: falls, seized and thrown-out become 3
+    hearts lost, `game-over-coming` and `game-over` to the road (1299), plus
+    no `thrown-out`. The end place and state are the same. Control: the
+    quarry's `gameOver` taken out, and the hero is in the cantina.
+  - `step22-restart-restores`: game over at 1621, restarted the same tick.
+    The 1600/1622 claims are unchanged. Control: the stage `on: false`.
+- **`step22-friend-inside-no-restart` could not keep "a in the road at
+  1990".** A game over moves every player, so one player is never sent back
+  alone. What it proves now: a's grappler loses its last heart (1561) while
+  b's flyer still has hearts. There is no game over; a plays on as the next
+  member in the depot (the flyer: the "first one again" rule, since b plays
+  it). Nothing restarts. Control: b's flyer out too, and the game over moves
+  both to the road and restarts the stage.
+- **Doubt, logged and not acted on:** a plays the same hero as b there
+  (heart-out's "first with hearts again"). That is Step 21's rule
+  (`heart-out.ts`), not a bug of this step.
+
 ### Lead review, owed item (a) (6edd8be), re-run at 002607b
 
 `npm run build` and `npm run check` are ok: all ten `step22-*` scenarios
