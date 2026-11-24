@@ -551,3 +551,35 @@ fact that holds over live latency, e.g. a phone character that does not flatten 
 (the skirmisher), or `closeIn` waiting for the guard to stand. Push 3 (the armoured
 guard) not started. The builder stopped here at its context budget.
 - **The armoured guard's sprite (for push 3):** the art cut-outs builder will not cut `armoured-guard`: sprites belong to the cast lane, so it has asked the orchestrator to brief a cast builder (source: P08 chibi-enemy-animation row 4). Until that sprite exists, push 3 ships on the `guard` sprite, as the brief planned.
+
+## Alarms and the chase, as played (`owner-enemies-chase-alarms.md`)
+
+Builder `session_017WiGzF31gfYgeWNMA7rnEL`, 2026-11-24, at `11b020a`. **The
+audit, before any fix.** Taken two ways: a phone-sized page (iPhone 14
+sideways, by touch, a local server, 80 ms added each way on the socket;
+screenshots in the builder's scratchpad, the camp's strip every 0.8 s) for
+what is drawn, and the sim (probe scripts driving `step()` in the real
+rooms with placements) for the numbers. The phone view is about 24 tiles
+across, so 7 tiles of sight is under a third of the screen.
+
+Marks: **W** works and reads; **T** works but a player cannot tell; **N**
+does nothing.
+
+| Place | (a) stand in a band, do nothing | (b) how far he comes / follows | (c) the alarm | (d) beaten | (e) beat one |
+|---|---|---|---|---|---|
+| Castle street | W: nobody of the good side acts on a hero standing (by design: only a deed upsets them); the band is drawn | W for guards on duty (search, chase, through doors, two per door: scenarios `step4-*`, `step12-guard-follows-into-camp`) | Bell: bar over it while rung, `call-windup` sound, pips top-left, whistle gauge (town-tiers builder's): W. Rows walk in at the street's doors with **no banner**: T. On the phone 4 punches at the shopkeeper raised no call (he left the drawn list): doubt, not chased here | W: thrown into the courtyard (Step 21) | Step 21 / fly-off builder's |
+| Bandit Camp | W: lookout turns and goes to the horn in 0.3-0.4 s; fighters in front come in 0.4 s | **N past him**: only 7 tiles, only forward (`canSee`). Run away in front: he follows while you are within 7 tiles, then stands where he last saw you **and stays there** (13-16 tiles from his post, never goes back). Jump over him: he moves **0 tiles** after you, never turns | Horn: shaking horn and a thin bar over the post, **no sound, no banner**: T. Finishes in 3 s; the wave appears at column 41, **off screen** (the view is ~24 tiles), walks ~7 s before it is seen, reaches a hero at column 12 about 9 s after the call: works, T | W: thrown out to the courtyard after ~21 hits, ~38 s standing still | Step 21 / fly-off builder's |
+| Quarry road | toll-watcher faces right only, 0.4 s if in front | as the camp: within 7 tiles in front; **behind: never** (every quarry routine is `face left/right, wait 5`: one way for ever). Followed 6 tiles, then stood | none | **N**: no defeat file (Step 21's) | as above |
+| Quarry ridge | fighters face left only; brute too | as the road; followed 16 tiles, then stood there | none | N (no defeat file) | as above |
+| Quarry pit | heavy faces right, fighter left | as the road; followed 19 tiles, then stood there | none | N | as above |
+| Quarry tower | both face left | as the road | none | N | as above |
+| Depot | lookout turns every 3-4 s; heavy guard and patrols see in front | as the road; the heavy followed 7 tiles | Horn as the camp (T), finishes in 3 s; **the wave drops through the gap at columns 51-52 and stays in the pocket, never reaches you**: N (Step 22's lead's; not edited) | N (no defeat file) | as above |
+
+**What convicts the chase** (brief step 3, measured): not "they see but do
+not move" (they move at once) and not pathing (they walk off ledges; they
+never jump, by design). It is **sight forward only and no memory past the
+last spot**: a hero who gets behind (a jump over, a walk past) is never seen
+again, and `outpost-fight` stands the fighter at the last place seen facing
+the old way, then hands him back to a routine that faces one way for ever.
+Second: 7 tiles is under a third of a phone screen, so "seen" reads as
+"right in front of him".
