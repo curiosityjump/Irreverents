@@ -92,7 +92,9 @@ const system: System = {
       const waveStanding = world.entities.some((e) => e.room === op.room && e.id.startsWith(`${op.id}:w`) && !isOut(e));
       // Step 21 (the orchestrator's go, 2026-11-23): being thrown out is not leaving on your own feet.
       const thrown = ctx.events.some((ev) => ev.type === 'thrown-out' && ev.from === op.room);
-      if (gone && !thrown && escape && ep.waves >= escape.minWaves && ep.felled.length >= escape.minFelled && waveStanding) {
+      // INTENT (the orchestrator's go, 2026-11-24): a party wiped out (the game over sends everyone to the cantina) did not get away either.
+      const wiped = ctx.events.some((ev) => ev.type === 'game-over');
+      if (gone && !thrown && !wiped && escape && ep.waves >= escape.minWaves && ep.felled.length >= escape.minFelled && waveStanding) {
         hang(ctx, { kind: 'narrow-escape', place: op.room, ticks, who: ep.who, stats, score: ep.waves, frame: ep.snap.length ? ep.snap : frame });
       }
     }

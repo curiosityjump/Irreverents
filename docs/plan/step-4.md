@@ -647,3 +647,43 @@ twice and passed on re-runs at this push (the flake noted at bbb9702).
 - **Outcome, 2026-11-24 ~03:40 UTC:** pushed at 7f148ea; `check:live` failed in **phase 1** (fight-back's moves, unchanged from b441908): 12 taps, the alert never drawn above 0 in 60 s. Reverted at 88b7824. My earlier probe of live with the old code had the same shape (12 taps, 2 landed), so phase 1 was flaky on live all along (b441908's live run passed it). Fixed: phase 1 strikes only once the page draws the guard standing still (he waits 4 s at each end of his beat), from just east of him (`atRest()`, its `INTENT:`). Measured: local replay 6 of 6 from 50 to 400 ms; **against live itself**, with this page's `game.js` swapped in by a Playwright route, phase 1 raised the alert in 2–3 taps in 3 of 3 runs (the rest of the fact needs push 2's server). Also: the fact's "guards after" is now the most drawn in the street over the 2.5 s (one replay run's hero was knocked into the courtyard and counted 0 there; same claim).
 - **Landed at a9b2db8 (2026-11-24 04:42 UTC):** `check:live` green, `tiers` included (3 taps to alert 1, the gauge drawn, pips 1 → 3, 6 guards drawn, 3 pips in the throne room); `/debug/errors` holds only the check's own deliberate three. Push 3 (the armoured guard) not started: this builder stopped at its context budget.
 - **For the fresh builder (push 3, and the street's rows from the sides):** nothing to re-apply: push 2 (01e7994, 7f148ea and the phase-1 fix) is on `main` and live since a9b2db8. The orchestrator's stop message (04:18 UTC) reached this session only after that push. The chase/alarms builder (`session_017WiGzF31gfYgeWNMA7rnEL`, 03:08 UTC) hands the street's part of the owner's "alarms should spawn more enemies of increasing strength that come in from the sides" to this lane: rows nearer the player's screen edges rather than the two street doors, the bell bringing a row too, and per-row words (mirror the outposts' `announce`, `entries`, `entryAway` from 8ac4812, `docs/mechanisms/outposts.md`, "From the sides") in `content/dispatch/` and `alert-dispatch.ts`. The client already shows "The guard is here!" on `dispatch-arrived` (`src/client/draw/alarm-banner.ts`). The props builder cut the guard vehicles (`guard-vehicles` look group, df67f5d), suggested as a later row.
+
+
+**Push 4: switched on in the Bandit Camp** (builder
+`session_017WiGzHgbh9PtsdzXnTDvqz`, on main at 4d97807). The data above, as
+measured. Nine camp scenarios went red (the seven above, plus
+step21-heart-out-next-member and -two-players, new since); after the rebase
+onto hearts push 3, step21-heart-game-over too. Each re-timed keeping its
+claim, each control watched to fail:
+
+| Scenario | What moved | Control |
+|---|---|---|
+| step7-caller-tries-again | the hero backs west 400 ticks (was 300) after the knock-out, out of the wave's melee, so the lookout gets up and calls again (1472) | tryAgain false: fails 2 |
+| step7-last-stand-camp (gate E) | the flyer strikes west and east by turns from tick 900 (rows come from both sides); flaps out over the heavy; legend at 2750: waves 3, came 5, felled 6, 41 s | walk out at 400: no legend |
+| step7-same-again-hangs-nothing | second visit strikes both ways and flaps out at 3290 | hallRelativeOn 0: fails 1 |
+| step12-walk-out-ends-it | the hero stands 2 tiles nearer the post; the second call is camp-fighter-1's at 922; walk out during it (1096) | outpostZoneEndOn 0: fails 4 |
+| step21-heart-lost-to-a-bandit, -heart-out-next-member, -heart-out-two-players, -heart-game-over | same inputs; the fall is at 1206 (the first wave's fighter), not 1009: every tick from 1009 on +197 | (the hearts builder's, unchanged) |
+| step21-throw-is-no-escape | thrown out at 2202 (was 2089) | hall-detect thrown test removed: fails 1 |
+| step21-camp-thrown-out | the grappler steps 3 tiles east at 600 and breaks the post at 671; falls 1091/1591/2002/2416, the fourth with camp-fighter-1 in reach; the first wave's fighter has walked off by the throw, so "the camp keeps its state" is camp-fighter-1 still inside | on false: fails 8; downs 1: fails 8 |
+
+**Found and fixed (the orchestrator's go):** a party wiped out in the camp
+after two rows hung a "narrow escape" legend (`hall-detect.ts` counted only
+`thrown-out` as not leaving on your own feet). Now a `game-over` that tick
+hangs none either (`wiped`, its `INTENT:`). step21-heart-game-over caught it
+once two rows came before the fall; its second control (the `wiped` test
+removed) hangs the legend at the game over.
+
+**Not measured: "every hero gets out with the last row in".** A probe drove
+each roster hero tick by tick (walk in, wait for the row, run for the door,
+jumping bodies and the step): only the flyer got out, but the same probe with
+the old single far-east entry also failed for the others (they are drawn into
+fights while waiting), so it does not tell the layouts apart. What it did
+show: the west entry `[6,7]` stands on the step beside the camp's only door,
+so the brute (row 5) can come in between a hero and the way out. Being thrown
+out after four falls still always ends with the hero outside. Owed: a fair
+escape scenario per hero, and the owner's or the room owner's word on
+keeping a way in at the door's side.
+
+**The camp's east half** (columns 44-87, Step 20) has no entries: a hero there
+gets every row from the west. `[58,10]` and `[70,10]` measured: turns
+step23-thrown-out-leaves-it red; left for the weapons builder.

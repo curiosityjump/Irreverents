@@ -280,10 +280,18 @@ strength that come in from the sides."* Optional fields in
   last repeating; no digits. Every wave also plays the alarm sound.
 
 Proven in `test-sides` by `sides-wave-both-sides` (control: no `entries`).
-**Switched on in the quarry's depot** ("The depot", above). Not yet at the camp:
-its entries and stronger rows turn seven camp scenarios red (step7-*,
-step12-walk-out-ends-it, step21-*; `docs/plan/step-4.md`, "Alarms and the
-chase, as played").
+**Switched on in the quarry's depot** ("The depot", above) **and in the Bandit Camp** (2026-11-24): entries
+`[[6,7],[24,10],[30,10],[36,10],[41,10]]`, `entryAway` 12, five rows (1
+fighter; 2; fighter and heavy; 2 fighters and a heavy; a heavy and the brute,
+repeating), a banner per row. No entries east of column 41 yet (the camp's
+Step 20 run): a hero there gets every row from the west; adding `[58,10]` and
+`[70,10]` was measured to turn `step23-thrown-out-leaves-it` red, so it waits
+for the weapons builder. The quarry's other rooms are Step 22's to place.
+Scenarios re-timed for it: `step7-caller-tries-again`,
+`step7-last-stand-camp` (the hero now strikes west and east by turns),
+`step7-same-again-hangs-nothing`, `step12-walk-out-ends-it`, and the six
+`step21-*` camp ones (`docs/plan/step-4.md`, "Alarms and the chase, as
+played", push 4).
 
 ## Not built yet
 

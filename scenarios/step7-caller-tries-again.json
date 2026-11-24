@@ -12,7 +12,7 @@
     {"player": "a", "from": 20, "to": 45, "hold": ["jump"]},
     {"player": "a", "from": 160, "to": 240, "x": 1},
     {"player": "a", "from": 240, "to": 243, "hold": ["attack"]},
-    {"player": "a", "from": 250, "to": 300, "x": -1}
+    {"player": "a", "from": 250, "to": 400, "x": -1}
   ],
   "ticks": 3600,
   "expect": [
