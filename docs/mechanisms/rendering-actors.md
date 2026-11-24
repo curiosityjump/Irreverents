@@ -37,6 +37,9 @@ the items below to their homes.
   every 24 ticks out of step per body, raised over anything carried.
   `fx-slash` for a swing: placed from the body's middle forward, mirrored
   by facing, scaled in quarter steps by `attackReach + box.w / 2`.
+  A carried body mid-suplex is drawn turned about the carrier's shoulders
+  by `draw/suplex.ts` (`turnForHeave`, Step 25; `combat-and-impact.md`,
+  "The suplex").
 - **`machines.ts`** (Step 20): a machine body (a kind with a
   `content/machines/` file that names a `look`) is drawn from its cells
   instead of a sheet; `entities.ts` asks it first, so shadows, the

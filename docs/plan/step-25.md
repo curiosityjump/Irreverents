@@ -296,3 +296,30 @@ camera or HUD file.
   keeper "attends" it from over the hero's head): existing `thing` entry
   behaviour, left as it is.
   **Not verified in push 1:** anything on a phone (push 2).
+
+- **2026-11-24, the suplex builder, pushes 2 and 3.** The heave drawn by
+  `src/client/draw/suplex.ts`, hooked in `draw/entities.ts` (four lines
+  around the carried body's draw: a file the "Owns" list did not name; the
+  carried body is drawn there, not in `render.ts`, so that is where a turn
+  can go). It stays fully turned past `suplexTime` while the body is still
+  held (up to 45 ticks), because the presser's page waits about a round
+  trip for the server's slam; without that the body snapped back overhead.
+  **By touch** (e2e `suplex-*`, full `npm run e2e` green): the grappler in
+  the throne room hops onto the dais, grabs the king, the Use button reads
+  `suplex`, and the page draws the impact on the king behind the hero
+  **about 900-950 ms after the press** (150 ms added each way; round trip
+  about 306 ms; the heave 300 ms; the rest is the snapshot and the beat).
+  Mid-heave the page drew the king turned 54 degrees, 40 ms after the
+  tap's 130 ms. Control `E2E_SUPLEX_SKIP=1` (Grab for Use): `suplex-slam`
+  FAIL, watched. The sound: not checked by script; the slam's impact is
+  500, over `slam`'s 420, through the same path every impact takes.
+  **Shots** (`docs/plan/step-25-shots/`): what I would point at is
+  `heave-sideways.png` (the king going over head first) and
+  `after-upright.png` (the king laid out behind, the star). Weak: the king
+  bounces back up off the floor (`floorBounce`) before he lies down; the
+  hero has no suplex pose (frames asked for in `docs/questions-inbox.md`).
+  Not looked at: a friend's page watching the heave (drawn from
+  `c.suplex.at` in snapshots; not measured across two phones).
+  **Push 3, the chain** (`scenarios/step25-suplex-chain.json`): one slam,
+  the splashed fighter into a crate (434), the crate into the wall (475);
+  no tuning change needed. Control: splash reach 0, watched to fail.

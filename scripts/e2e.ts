@@ -440,6 +440,8 @@ async function main(): Promise<void> {
       await (await import('./e2e/switch.ts')).switchFacts({ browser, devices, base, out, fact, errors });
       // Doorways by Use (door-*): the Use button says "Go in" in a doorway and a tap of it goes through (docs/mechanisms/rooms-and-doors.md).
       await (await import('./e2e/doors.ts')).doorFacts({ browser, devices, base, out, fact, errors, shots: path.join(out, 'doors') });
+      // Step 25's facts (suplex-*): carrying a body by touch, Use says SUPLEX, and the slam is drawn behind the hero (docs/mechanisms/combat-and-impact.md, "The suplex").
+      await (await import('./e2e/suplex.ts')).suplexFacts({ browser, devices, base, out, fact, errors, shots: keptShots('step-25-shots') });
       // Step 19's facts (heist-*): the Use button's word at the shop, and the party plate (docs/mechanisms/heists.md).
       await (await import('./e2e/heist.ts')).heistFacts({ browser, devices, base, out, fact, errors, shots: path.join(out, 'heist') });
       // Step 21's facts (defeat-*): beaten in the camp by touch, the condition slot fine, hurt, down, thrown out to the courtyard and free (docs/mechanisms/defeat.md).

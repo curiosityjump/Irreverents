@@ -8,6 +8,7 @@ import { drawLookIn } from './room-parts.ts';
 import { predictedLook, predictHits } from './impact.ts';
 import { carriedBy, drawSprite, drawsOwnRage, forget, lyingOut, rageFlash, remember, swingWasThrow } from './sprites.ts';
 import type { Drew } from './sprites.ts';
+import { turnForHeave } from './suplex.ts';
 import { beginMachines, drawMachineBody, seatedInDrawnMachine } from './machines.ts';
 
 /** One thing the renderer put on screen this frame, in room pixels. Part of the debug object (docs/mechanisms/network.md). */
@@ -200,7 +201,11 @@ export function drawEntities(g: CanvasRenderingContext2D, world: World, content:
       at = { x: ox + h.x + (at.x - ox - h.x) * k, y: oy + h.y + (at.y - oy - h.y) * k };
     }
     if (at) holds.set(h.id, { x: at.x - ox, y: at.y - oy, tick: world.tick });
+    // Step 25 push 2: mid-heave, the carried body is turned up and over behind the carrier (draw/suplex.ts).
+    g.save();
+    turnForHeave(g, world, content, e, h, ox, oy);
     body(h, at);
+    g.restore();
   }
   // Effects over bodies: landing dust.
   const land = look('fx-land');

@@ -258,9 +258,23 @@ builder chose.
   | `suplexSplashReach` | 28 | 24 | 12 |
   | `suplexSplashStrength` | 16000 | 14000 | each one's `attackStrength` |
 
+- **Drawn** (push 2) by `src/client/draw/suplex.ts`, asked by
+  `draw/entities.ts` as it draws a carried body: turned about the
+  carrier's shoulders, up and over to behind, head first, over
+  `suplexTime`. `INTENT:` from the press: the presser's own page starts it
+  the frame its Use goes down while the arbiter says `suplex` (it never
+  learns its hero heaves); another page takes `c.suplex.at`. The slam's
+  dust, shake and sound are the impact's own (500 is over the slam sound's
+  420). Not predicted: the slam shows about a round trip after the heave
+  would end on the presser's phone.
+- **By touch**: `scripts/e2e/suplex.ts` (`suplex-*`; control
+  `E2E_SUPLEX_SKIP=1`). Shots in `docs/plan/step-25-shots/` (with
+  `E2E_SHOTS=1`).
 - **Checked by** `scenarios/step25-suplex-*.json` (gate A): `-defeats`,
   `-light`, `-throw-stays` (+ `-control`), `-not-a-crate` (+ `-control`),
-  `-splash`, `-witness`, `-friend` and `-friend-breaks-free`.
+  `-splash`, `-witness`, `-friend` and `-friend-breaks-free`; push 3's
+  `-chain` (a slam, a splashed fighter, a crate, the wall: the existing
+  impact systems carry the splash on, nothing changed in them).
 
 ## Movement feel (Step 2, 2026-11-23)
 
