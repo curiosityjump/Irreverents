@@ -468,3 +468,13 @@ On top of the alarms builder's camp waves (4154e15): every scenario green;
 `hearts-game-over` passed 5 of 6 runs (3 alone, 2 full e2e); the one miss
 was in a full run before the fact said where the page ended (it now
 does). A game over by standing in the new camp takes about 75 s (sim).
+
+### Push 5c: the quarry (handed over, not landed)
+
+Step 22 moved its start-over to `game-over` (1b8b8d1) and said the quarry's
+throw may go off. Reds counted with `content/defeat/quarry.json` `"on":
+false` at ef08490: `step22-beaten-to-entrance`, `step22-friend-inside-no-
+restart`, `step22-restart-restores` (all expect the throw). Not Step 21's to
+re-time; whoever next holds Step 22 flips `on` in the same push as those
+re-times (every field stays; its `gameOver` is read either way). Until then
+the quarry alone still throws a beaten hero back to its road.
