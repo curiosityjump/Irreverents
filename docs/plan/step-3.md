@@ -636,3 +636,10 @@ names and shapes.
   9 px off; the street's guard or villain is the likely shove, not
   proven). `down()` now tries the doorway up to three times and logs
   each miss; then four plates-only runs: 28 of 28, one logged miss.
+- **Live (2026-11-24 00:25 UTC):** pushes 4-5 at 5f9cb57 are live inside
+  f7bb02f (`/debug/errors` empty). `npm run check:live` was not run: it
+  refused because live was not main; the newer push 2781572 (the title
+  screen, another builder's) had not gone live after about ten minutes.
+  Told the orchestrator. Full `npm run e2e` last ran on the base before
+  the final rebase (only sim changes by others came in after; build,
+  check and the plates facts re-run green on it).
