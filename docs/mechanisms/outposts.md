@@ -115,7 +115,7 @@ present (`docs/mechanisms/art-pipeline.md`). The page's debug record has
 
 - **`outpost`** (the "Bandit Camp", 88 columns since Step 20 (its run east, the section below), reached by the `to-outpost` enter
   doorway in the courtyard, ground row 7, column 23): the doorway at
-  column 2, a step three tiles high (columns 5-7) every way in crosses (with a one-way tile at column 4, row 9 since Step 20, a half-height stair for the brawler, whose jump does not clear it: `step20-camp-every-hero-gets-in`),
+  column 2, a step three tiles high (columns 5-7) every way in crosses (with a one-way tile at column 4, row 9 since Step 20, a half-height stair for the brawler, whose jump does not clear it: `step20-camp-every-hero-gets-in`; and its mirror at column 8, row 9 since 2026-11-24, so every hero walks back out, `INTENT:`: `camp-entries-every-hero-walks-out`),
   and a hop from it to a one-way ledge at row 6, columns 9-38, the high way
   across (five tiles up: out of the lookout's 40 px of sight). Under it
   the lookout at column 18 (watching west, glancing back), the post at 20,

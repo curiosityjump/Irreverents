@@ -81,6 +81,9 @@ words.
 **People can be outrun and jumped over.**
 → Intended. There is always a way out (`CLAUDE.md`): now that guards and shopkeepers swing at heroes (Step 18), no person's body lists `jump`, and every person walks slower than the slowest hero runs (people 40–56 px/s; the brawler, the slowest hero, runs at 76). A hero who jumps over a swinging person and runs gets away. A person who runs or jumps needs another way out first. Decided by the Step 18 builder for the orchestrator, 2026-11-23 (`docs/plan/step-18.md`, "`DRAFT:` choices"); the owner may overrule. `INTENT:` at `charge()` in `src/sim/npc/behaviours.ts` and in the people's `"//"` in `content/tuning.json`. Proven by `scenarios/step18-jump-over-is-a-way-out.json`.
 
+**Every hero can walk back out of the Bandit Camp: a one-way tile half-way up the entry step's east face (column 8, row 9).**
+→ Intended (2026-11-24). There is always a way out (`CLAUDE.md`): the camp no longer throws a hero out (ef08490), so every hero must be able to leave on foot. Measured: the brawler's jump peaks at 47.5 px and the step is 48 px tall, so without the tile it could get in (the one-way tile at column 4 on the west face) but never back out. Do not empty or move the tile without another way out for the slowest jumper. Decided by the camp-entries builder on the orchestrator's go; the owner may overrule. `INTENT:` in the `"//"` of `content/rooms/outpost.json`. Proven by `scenarios/camp-entries-every-hero-walks-out.json`.
+
 **Beaten in the Bandit Camp or the alerted street, you are thrown bodily out into the courtyard, and anything you carried is taken back.**
 → Intended, and it is the way out, not a trap. "There is always a way out" (`CLAUDE.md`) and D-019 ("battles, last stands and narrow escapes, NOT an automatic-reload punishment loop"): the throw is the exit. You are free the moment you get up (never held longer than the beat plus `flattenTime`), the place keeps its state, and you can walk straight back in. A place with no landing spot throws nobody. (Since hearts, 2026-11-24, the throw is off in the camp and the street by data: losing there is hearts and the game over; it is still on in the quarry.) Step 21 builder, 2026-11-23, `DRAFT:` numbers; `INTENT:` in `src/sim/systems/defeat-throw.ts`; `docs/mechanisms/defeat.md`.
 
@@ -118,6 +121,7 @@ Keep this table in step with the entries:
 | Beaten in a stage, the stage is put back as it began | `src/sim/stage.ts` (`restoreStage`) |
 | STAGE CLEARED waits for Continue; the stick rests; each page its own | `src/client/draw/stage.ts`; `src/client/main.ts` (`#stage-continue`) |
 | People can be outrun and jumped over | `src/sim/npc/behaviours.ts` (`charge`); `content/tuning.json` (`characters.guard`, `.shopkeeper`, `.toll-keeper` `"//"`) |
+| Every hero can walk back out of the Bandit Camp | `content/rooms/outpost.json` (`"//"`, the tile at column 8, row 9) |
 
 **Still unmarked:** list entries that have no `INTENT:` at their site yet.
 Add the marker when you next touch one.
