@@ -72,22 +72,33 @@
    "max": 120
   },
   {
-   "note": "scaffold to col 49",
+   "note": "scaffold to col 51, out of the road heavy's reach",
    "do": "walk",
    "until": {
-    "xMin": 49
+    "xMin": 51
    }
   },
   {
-   "note": "past the heavy, off the scaffold, over the gap",
+   "note": "while the heavy looks up the road: under the flyer's ledge, up onto the top plank (row 7) over him",
+   "do": "walk",
+   "hopAt": 56.4,
+   "wait": 600,
+   "waitStep": 1,
+   "until": {
+    "xMin": 57,
+    "feetMax": 7.01,
+    "ground": true
+   },
+   "max": 200
+  },
+  {
+   "note": "along the top plank, off its east end, over the gap",
    "do": "walk",
    "gaps": true,
-   "wait": 600,
    "until": {
     "xMin": 67,
     "ground": true
-   },
-   "waitStep": 1
+   }
   },
   {
    "note": "to the ridge",

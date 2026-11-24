@@ -519,3 +519,10 @@ document as a decision of theirs.
 - **Why this way:** set the way the quarry's were, from scripted clears with every bad guy placed: the best run 29.5 s (the small hero, fighting through, one alarm), a good one 47.0 s (the strong hero, fighting, no alarm), a slow one 56.1 s (the strong hero, only walking, one alarm). Three stars is at or under 40 s (between the best and the good run), or no alarm, or not seen; two is at or under 52 s or not having started over. A person on a phone is slower than a script: tune by playing.
 - **To change it:** `stars` in `content/stages/bramble-forest.json`.
 - **Where:** `scenarios/step15-cleared.json`, `step15-clear-best.json`, `step15-clear-slow.json`. `DRAFT:`
+
+### 2026-11-24 · The scaffold has a top plank over the road heavy, so slipping past him is a moment you can hit, not a single frame
+- **Decided by:** Step 22 builder (the seventh), `session_017WiGzJudo6Zjh95Uh99rkH`, on the lead's ruling to raise the scaffold
+- **Instead of asking:** how wide should the gap be for a small hero to slip over the road's heavy unseen?
+- **Why this way:** the lead's review: "A person on a phone won't hit that", a window of a few frames. The lead ruled the scaffold's walk up a row. Raised all along, the walk would run under the flyer's secret ledge with too little headroom for any hero but the infiltrator, and the others would only get by on the secret ledge. So the walk stays, and a short plank one row higher sits east of the ledge, over the heavy. The hero waits at the toll end of the walk, goes the moment he turns to look up the road, and steps up onto the plank: about 1.4 s to do it in. Up there no hero is in his sight.
+- **To change it:** row 7 of `content/rooms/quarry-road.json` (columns 56-62); then re-record `step22-unseen-clear` with `scripts/stage-quiet.ts`.
+- **Where:** `docs/plan/step-22.md`, "Builder notes", the seventh builder; `docs/mechanisms/stages.md`, "Checking it".
