@@ -181,10 +181,12 @@ view. The
 e2e's `stage-*` facts (`scripts/e2e/stage.ts`): the screen at three phone
 sizes inside the view, Continue in the safe area and reachable, the stick
 resting while it is up (`stage-held`, the control), Continue giving it
-back, and two pages each dismissing their own. Step 22 3b added two: `stage-beaten-entrance` (`DRAFT:`, run only with
-`E2E_STAGE_BEATEN=1`: it passed alone but timed out inside the full run; by touch into the
-quarry road and up to its fighters, standing there until the whole party is
-out of hearts: the GAME OVER card, then the page at the entrance, and the
+back, and two pages each dismissing their own. Step 22 3b added two: `stage-beaten-entrance` (`DRAFT:`, in the full run since the seventh
+builder: its world is `e2e-hearts-low-…`, so the check's own server starts
+the party on its last heart, `docs/mechanisms/network.md`; by touch into the
+quarry road, then stood by the page in the road lookout's sight, column 23,
+until his called waves put the party out of hearts (35-63 s; control, a
+server without the hook: one hero out in 4 minutes and no card): the GAME OVER card, then the page at the entrance, and the
 stick moves the hero; shot `push4-beaten-moment-844x390.png`) and
 `stage-cleared-walked` (the page stands its own hero in the depot six tiles
 west of the end and walks east by the stick: STAGE CLEARED comes from the

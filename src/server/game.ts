@@ -7,6 +7,7 @@ import type { Content } from '../content/types.ts';
 import { clone, DEFAULT_WORLD, looksLikeEntity, playerEntityId } from '../net/protocol.ts';
 import type { ClientMessage, ServerMessage } from '../net/protocol.ts';
 import { applyEffect, heldBy } from '../sim/effects.ts';
+import { maxHearts } from '../sim/hearts.ts';
 import type { Effect } from '../sim/effects.ts';
 import { boxInSolid, firstFreeMember, memberTaken } from '../sim/party.ts';
 import { step } from '../sim/step.ts';
@@ -71,7 +72,17 @@ export interface GameOptions {
   problem?: (message: string) => void;
   /** Step 17: how often a game is saved while anyone is in it (ms); SAVE_EVERY_MS unless a check says otherwise. */
   saveEveryMs?: number;
+  /**
+   * Step 22 (additive, the seventh builder): worlds made for a local check
+   * may start part-played (`makeWorld`). Set only by scripts/e2e.ts's own
+   * server (IRREVERENTS_CHECK_HOOKS=1, read in src/server/main.ts); absent
+   * everywhere else, the live address included.
+   */
+  checkHooks?: boolean;
 }
+
+/** A world named so by a check starts with the whole party down to its last heart (`checkHooks` only). */
+export const HEARTS_LOW_PREFIX = 'e2e-hearts-low-';
 
 function cleanInput(raw: unknown): Input {
   const i = (raw ?? {}) as Partial<Input>;
@@ -172,6 +183,15 @@ export function attachGame(server: http.Server, opts: GameOptions) {
       if (name === DEFAULT_WORLD || code) gw.world.roster = [...content.roster.start];
       // Whatever content/placements/ puts in each room (crates, dummies, people).
       for (const roomId of Object.keys(content.rooms)) populateRoom(gw.world, content, roomId);
+      // INTENT (Step 22, the seventh builder; the lead: "seed hearts through a server hook for check worlds
+      // only ... never reachable by a real player"): a local check's world named HEARTS_LOW_PREFIX… starts with
+      // the party's first member on one heart and every other member out, so one fall is the game over
+      // (scripts/e2e/stage.ts, stage-beaten-entrance). Only with `checkHooks`, which only scripts/e2e.ts's
+      // own server sets: on the live address the prefix is an ordinary private world.
+      if (opts.checkHooks && name.startsWith(HEARTS_LOW_PREFIX)) {
+        const members = gw.world.party ?? content.party.members;
+        gw.world.heartsLost = Object.fromEntries(members.map((m, i) => [m, maxHearts(content, m) - (i === 0 ? 1 : 0)]));
+      }
     }
     return gw;
   };

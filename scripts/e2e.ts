@@ -55,7 +55,8 @@ function freePort(): Promise<number> {
 }
 function startServer(port: number, commit?: string): Promise<void> {
   return new Promise((resolve, reject) => {
-    const env: NodeJS.ProcessEnv = { ...process.env, PORT: String(port) };
+    // Step 22: check hooks on (src/server/game.ts GameOptions.checkHooks): this server is the check's own.
+    const env: NodeJS.ProcessEnv = { ...process.env, PORT: String(port), IRREVERENTS_CHECK_HOOKS: '1' };
     delete env.RAILWAY_GIT_COMMIT_SHA;
     if (commit) env.RAILWAY_GIT_COMMIT_SHA = commit;
     const child = spawn(process.execPath, [path.join(root, 'dist/server.cjs')], { env, stdio: ['ignore', 'pipe', 'inherit'] });

@@ -33,7 +33,11 @@ with a throwaway entity kind on every `npm run check`).
   created (`createWorld` + `populateRoom`), and **`onEvents`** the one
   place the server receives each tick's events from `step()`: add to
   those two for anything a new world must start with or the server must
-  do about an event (Step 7's stored records).
+  do about an event (Step 7's stored records). Check hooks (Step 22,
+  `DRAFT:`): with `GameOptions.checkHooks` (`IRREVERENTS_CHECK_HOOKS=1`,
+  set only by `scripts/e2e.ts`'s own server, never on Railway) a world named
+  `e2e-hearts-low-…` starts with the party on its last heart; anywhere else
+  that name is an ordinary private world.
 - **`content/net.json`** (`src/content/kinds/net.ts`): every rate and
   timeout, and the graybox player colours. All `DRAFT:`.
 - **Messages** (JSON text over one WebSocket at `/ws`; `DRAFT:`):

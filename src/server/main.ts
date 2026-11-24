@@ -171,7 +171,8 @@ const server = http.createServer((req, res) => {
 
 // The network layer (docs/mechanisms/network.md). /healthz adds its counts
 // (worlds, players) beside the fields above; additive.
-game = attachGame(server, { content: __CONTENT__, commit, startedAt, store, problem: (m) => errorLog.note(m) });
+// Step 22 (additive): IRREVERENTS_CHECK_HOOKS is set only by scripts/e2e.ts's own server, never on Railway (GameOptions.checkHooks).
+game = attachGame(server, { content: __CONTENT__, commit, startedAt, store, problem: (m) => errorLog.note(m), checkHooks: process.env.IRREVERENTS_CHECK_HOOKS === '1' });
 
 // Step 17: a deploy stops this process (SIGTERM) before the new one starts:
 // every game being played is saved first, so nothing since the last

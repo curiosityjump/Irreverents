@@ -843,3 +843,12 @@ before you quote it.
 - The window, swept by me (`QSWEEP=8 node scripts/stage-quiet.ts scripts/stage-routes/quiet-infiltrator.json`): 84 of the waits pass, 312 to 395 in a row, about 1.4 s. The pass over the heavy is now one a person can make.
 - Looked at `push5-road-top-plank-sideways-844x390.png`: the hero is on the top plank, over the heavy, under the flyer's ledge.
 - The builder's change to my ruling, a plank at row 7 instead of moving all of row 8, is accepted. It is measured, and it keeps the small heroes' sneaks.
+
+### Item 2: `stage-beaten-entrance` in the full e2e (seventh builder)
+
+- **The hearts seed, test-only** (the lead's preferred way): `GameOptions.checkHooks` in `src/server/game.ts` (additive; set by `src/server/main.ts` from `IRREVERENTS_CHECK_HOOKS=1`, which only `scripts/e2e.ts`'s own server passes). A world named `e2e-hearts-low-…` then starts with the party's first member on one heart and the others out. On Railway the variable is never set, so the name is an ordinary private world, and `check:live` doesn't run the stage facts.
+- **Measured first:** stood on the toll flat (column 41) with one heart, the hero was never hit in 4 minutes. The toll's watcher and keeper don't swing without a call; the old walk got its falls because it passed the road's lookout, who called. So the page now walks in by touch and stands its own hero in the lookout's sight (first ledge, column 23), and again whenever a blow carries it off. His waves do the beating. No more hop east, so it can't land on the high walk.
+- **Runs:** alone, 4 of 4 green (35-63 s). The full `npm run e2e`: `e2e: ok`, this fact included. Out of opt-in (`E2E_STAGE_BEATEN` is gone).
+- **Control, watched failing:** the same step against a server without the hook (11 hearts): one hero out in 4 minutes, no card.
+- **Shot:** `push4-beaten-moment-844x390.png` re-taken by the run, looked at: the GAME OVER card, legible.
+- **Measuring trap:** a page's `irreverents.world` holds only its own simulation's bodies, not the bad guys it draws (the snapshot had all seven road bodies; the page's world showed only `road-toll`). Look at the snapshot or a screenshot, not that list.
