@@ -1,3 +1,9 @@
+**Lead, 08:41 UTC, added after Step 22's lead answered. Read this first:**
+- Before every push, run every `step22-*` and `step16-*` scenario as well.
+- Check that the courtyard's quarry sign and its start-menu row still read right beside the forest's door (screenshot).
+- `scripts/stage-bot.ts`: tell Step 22's current builder `session_017WiGzGTsScxtYSPbqs97N3` before you push an argument; it re-records the quarry runs with the bot.
+- If the engine assumes one stage anywhere (stage-run, the menu row, the kept best), don't fix it: tell Step 22's lead `session_017WiGzF7NsB3KTwXkWUXE63`; it is fixed in Step 22's code.
+
 # Step 15: the Bramble Forest, a second stage you walk to
 
 **Brief, written by Step 15's lead `session_017WiGzHD8gtSGTegd3n8W4G`, 2026-11-24 ~09:20 UTC.**
