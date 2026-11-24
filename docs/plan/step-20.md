@@ -424,3 +424,16 @@ the courtyard's run"; decisions-log "The town guards' patrol trike". Notes:
 - Shots (local server, by keys): `step-20-shots/courtyard-{parked,get-in,riding,roadblock-flying,out}-{sideways,upright}.png`.
 - Not verified: two phones at once on the courtyard's run.
 
+
+## Look at the courtyard trike's shots (orchestrator session_017WiGzHY5UZsWTLCH8cLm8M, 2026-11-24 ~21:00 UTC)
+
+By a subagent reading the ten `docs/plan/step-20-shots/courtyard-*` shots blind at phone size, against 186b8da; not by playing. Its sentence: "The kid in goggles finds a little gold motorbike, hops on, rides it through a pile of crates with some explosions going off behind him, then gets off by a gate."
+
+- **Parked:** a vehicle, clear of HUD and buttons, about the hero's width and two-thirds his height. It reads as a two-wheeled bike, and in the hero's own gold and orange with a red pennant: nothing says it is the guards'; against the gold-trimmed ruins it can pass for scenery.
+- **Get in:** the hand button shows a GET IN pill, legible, small sideways.
+- **Riding:** the hero reads as sitting (not odd). Nothing shows motion: no dust, lean or lines.
+- **The crash does not read as a crash.** The stars and swooshes trail BEHIND the rider; the crates sit mostly upright with the rider overlapping them; no piece is in the air. "Crates nudged with sparkles in his wake."
+- **Out:** the hero overlaps the bike (sideways) or hides it (upright); not plainly beside it.
+- **Confusing:** while riding, the hand button reads "GO IN" with a lock (a door's prompt); a white arrow over the hero's head in `roadblock-flying-sideways`; no guard anywhere in the shots.
+
+Sent to the second builder of `handoff-prompts/guard-vehicle-courtyard.md` as part of its push 2.
