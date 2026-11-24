@@ -239,7 +239,7 @@ const said = (pts: Pt[]): string => {
 };
 
 /** Waits until a page draws `top` riding above `under` (carried overhead), or not. Resolves to how long it took, or null. */
-async function whenCarried(ph: Phone, top: Key, under: Key, carried: boolean, ms: number): Promise<number | null> {
+export async function whenCarried(ph: Phone, top: Key, under: Key, carried: boolean, ms: number): Promise<number | null> {
   const t0 = Date.now();
   try {
     await ph.page.waitForFunction(
@@ -453,7 +453,12 @@ export async function touchAndThrows(kit: Kit): Promise<void> {
         await standAt(A, doorSide > 0 ? o.x - 12 : o.x + o.w + 2, doorSide);
         await tap(A, 'grab');
         if ((await whenCarried(A, k, keyA, true, 1200)) === null) continue;
-        await standAt(A, doorSide > 0 ? f2.right - 30 : f2.left + 12, doorSide);
+        // Step 5 ("Thrown friend", the grab that never took): from 30 px short of the east door a
+        // heavy crate's throw left from overhead (the spot in front lay past the room's edge), hit the
+        // wall above the door and bounced back onto the spot where A then stood behind B, and A's grab
+        // lifted it (the nearest body in reach) instead of B. 44 px short (about 34 with the facing
+        // touch's drift), the throw leaves from in front, low, into the door.
+        await standAt(A, doorSide > 0 ? f2.right - 44 : f2.left + 12, doorSide);
         await tap(A, 'attack');
         await sleep(800);
       }
@@ -492,9 +497,12 @@ export async function touchAndThrows(kit: Kit): Promise<void> {
     const [bOnB, bOnA] = await Promise.all([meFlyB, meFlyA]);
     const x0 = bOnA[0]?.x ?? (await me(B)).x;
     const wall = dir > 0 ? f3.right : f3.left;
+    // Step 5 ("Thrown friend"): what B's page did about the bodies it met, said when a throw falls short.
+    const said2 = (): Promise<string> =>
+      B.page.evaluate(() => { const s = (window as any).irreverents.net; return `B's page met ${s.met} body itself, took ${s.metFirst} the server met first, set aside ${s.echoes} push(es)`; });
     const ahead = f3.bodies.filter((o) => (dir > 0 ? o.x > x0 && o.x < wall : o.x + o.w < x0 + 20 && o.x + o.w > wall)).map((o) => `${o.kind} at ${n(o.x)}`);
     const short = held2 === null || !flew(bOnA) || !flew(bOnB)
-      ? ` [held before the tap: ${held2 !== null}; thrown ${dir > 0 ? 'right' : 'left'} from x ${n(x0)} toward the wall at ${n(wall)}; in between: ${ahead.join(', ') || 'nothing'}; B last drawn at x ${n(bOnA[bOnA.length - 1]?.x)} on A's page, ${n(bOnB[bOnB.length - 1]?.x)} on B's]`
+      ? ` [held before the tap: ${held2 !== null}; thrown ${dir > 0 ? 'right' : 'left'} from x ${n(x0)} toward the wall at ${n(wall)}; in between: ${ahead.join(', ') || 'nothing'}; B last drawn at x ${n(bOnA[bOnA.length - 1]?.x)} on A's page, ${n(bOnB[bOnB.length - 1]?.x)} on B's; ${await said2()}]`
       : '';
     fact('t-throw-friend', held2 !== null && flew(bOnA), `A grabs B again and taps Hit: A's page drew B ${flew(bOnA) ? 'fly' : 'NOT fly'}: ${said(bOnA)}${short}`);
     fact('s-throw-friend', held2 !== null && flew(bOnB), `B's own page drew its own character ${flew(bOnB) ? 'fly' : 'NOT fly'}: ${said(bOnB)}${short}`);

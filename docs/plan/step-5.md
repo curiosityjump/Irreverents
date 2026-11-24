@@ -604,6 +604,85 @@ page drew B move 23 px, 31 in a quarter second; A's page drew 31/52, a pass:
 a short throw, not none). No `t-grab-friend` or `s-break-free` failure in 30
 runs today.
 
+### Thrown friend (brief `handoff-prompts/thrown-friend-through-a-crate.md`)
+
+Builder `session_017WiGzGN2CWKhMJmqAAKFXy`, 2026-11-24. The runner is
+`scripts/throw-runs.ts` (its header says how; one throw at a time, each in a
+private world, one server process per run; delay, thinned reports and a
+copy of an older `dist/` are options). Its own throw: A throws B west into
+the throne room's heavy crate (x 156-180) from about 39 px east (`GAP=29`
+plus the stick's drift), after A first throws the light crate out of the
+way; it compares where each page drew B furthest west and at rest.
+
+**1. Re-measured on 884a1a9, one run at a time (quiet).** The grab-and-throw
+part (`MODE=touch`, the same `touchAndThrows`): 58 of 60 passed; both
+failures were the grab that never took (B at x 274-276, thrown west), no
+crate disagreement. Three at once was itself a load, so not repeated as the
+measure. The runner's own throw, old build: three runners at once with the
+gap swept from 20 to 76 px, 56 throws, no B flying through; quiet at 29 px,
+**8 of 30** drawn the same on both pages: on **17** B's own page drew B
+stop 6-7 px short of the crate, in the air, and never bounce (A's page drew
+the bounce, then eased B back to where B's page had it). With only every
+third report of B's reaching the server (`THIN=3`, a loaded phone's
+bunched reports), **4 of 12 flew through the crate on both pages** (A's
+page drew the bounce first, then eased to x 87-93) with the crate never
+knocked, and 4 more went 10-25 px into it before being stopped.
+
+**Two causes, both the local world holding only the page's own character:**
+- *The server missed the meeting.* It knows a friend's body only from
+  their reports; a 10 px body crossing a 24 px crate between two of them is
+  never seen over it. B's page, with nothing in its world, flew on, and the
+  server took its reports: the brief's 3 of 60.
+- *The server met it first.* A thrown friend's flight is the server's until
+  their page has the throw, a one-way trip later, so a crate close ahead is
+  met there first; its push stopped B's page short of the crate and its
+  bounce came after B had landed.
+
+**2. The fix** (`docs/mechanisms/network.md`, "A flying own character";
+`docs/decisions-log.md`, this date): the page's own flying character meets
+the bodies the page draws, through the simulation's own `impact-bodies`
+(`src/net/flight.ts`), keeping the speed it met at through the held beat so
+the server's own step meets the same crate from its reports; the server's
+push for that meeting is set aside as an echo; a meeting the server saw
+first is taken whole, with its beat. Chosen over stepping the flight on the
+server because B's flight stays B's page's own (the first decision in
+`docs/decisions-log-archive.md`): measured, B's page first drew B move
+131 ms after A's tap (median of 60, quiet; old build 158 ms over 30), and
+632 ms under 300/60/40 ms delay (old 629 ms over 19): no later than before.
+A's page 45-47 ms throughout.
+
+After, `dist/` with the fix (all one at a time):
+- **quiet, 29 px: 60 of 60** drawn the same on both pages, B bounced on
+  both, the crate knocked every time (old: 8 of 30).
+- **300/60/40 ms delay: 28 of 28** (old: 6 of 19; the other 13 had B's page
+  stop short before bouncing). 2 of 30 grabs were not drawn within the
+  runner's 1.5 s (one drawn on A's page; old: 1 of 20). Not traced.
+- **thinned reports (`THIN=3`): 60 of 60**, the crate knocked every time (old: 4 of 12, and 4 through it).
+- An earlier form of the fix without the server-met-first part: quiet
+  32 of 60 (B's page stopping short 26 times), `THIN=3` 60 of 60; that is
+  the control for the second part.
+- `scripts/checks/thrown-friend.ts` in `npm run check` (two headless
+  players, thinned reports, 29 and 90 px): passes; with `src/net/client.ts`
+  as before it fails (B 35 and 25 px into the crate).
+
+**3. The grab that never took: the check's own crate.** With the grab
+logged on the server (a temporary line, not kept): A's press at x 280
+facing west *did* grab, the heavy crate, lifted overhead. The check had
+thrown it at the east door from 30 px short of it; from there the spot in
+front lay past the room's edge, so it left from overhead, hit the wall
+above the door, and bounced back to x ~277, where A then stood behind B.
+The grab takes the nearest body in reach, centre to centre, and the crate
+was nearer (0 px against 8). The game is right; the check now throws from
+44 px short (`scripts/lib/e2e-touch.ts`), from in front, low, into the
+door. After: **60 of 60** `touchAndThrows` runs passed, 300 of 300 Grab
+presses grabbed (before: 58 of 60). The failure text now also says what B's
+page met and set aside.
+
+**4. Not done:** the narrow body past a thin wall (the brief's item 4).
+
+Not verified: a real iPhone; under load on the live server (`check:live`
+does not run the throw facts).
+
 ## Carried here by the orchestrator, 2026-11-24
 
 - From the Step 16 lead's phone walk (b0a7d5e): the camera should look up in tall rooms, so a ledge and a roof show on a sideways phone.
@@ -630,7 +709,8 @@ server accepts it if that regular is near the tap within a lag allowance
 body's drawn-vs-newest-snapshot offset. A wider `pick.reach` would hide it
 but also catch taps meant for a neighbour.
 
-**`t-throw-friend` / `s-throw-friend`: two causes, both open.** Only the
+**`t-throw-friend` / `s-throw-friend`: two causes, both fixed since** (below,
+"Thrown friend"; the account here is as it was found). Only the
 grab-and-throw part (`touchAndThrows`) was run 60 times, three at a time,
 with new failure text (`scripts/lib/e2e-touch.ts`: held before the tap, the
 direction, the floor's end, the bodies in between, where each page last
@@ -647,14 +727,13 @@ drew B). 5 of 60 failed:
   simulation would do. So this is not a prediction fault: prediction is the
   one screen that is physically right. It is the known local-world limit,
   seen by a friend as "my throw bounced you off the crate, but on your phone
-  you sailed through it". Fix, for whoever widens the local world: put the
-  drawn bodies near a flying own character into its page's step (as
-  `predict.ts` does for lent bodies). The check is left as it is.
+  you sailed through it". Fixed by putting the drawn bodies near a flying
+  own character into its page's step ("Thrown friend", below).
 - **2 of 60: the grab never took** ("held before the tap: false"): A stood
   6 px behind B facing it, tapped Grab, and no page drew B carried within
   1.5 s; then the Hit tap threw nothing (0-5 px) and `s-after` failed too.
-  Not explained yet; next: log A's and B's drawn boxes and A's facing at
-  the grab, and the server's `grab` events.
+  Found since: the check's own heavy crate, left lying where A then stood
+  ("Thrown friend", below).
 
 **Rates, before and after (this brief's end, 2026-11-24):**
 
@@ -662,7 +741,7 @@ drew B). 5 of 60 failed:
 |---|---|---|---|
 | `h1`, `h2` | 1 of 10 quiet; 2 of 3 under load | 0 of 20 (two runs at a time) | game, fixed (327d9e9) |
 | `cantina-row` (+ `-swap`, `-switch`) | 3 of 10 | 5 of 25 runs; 19 of 40 taps on a walking regular | game, open (Step 11) |
-| `t-throw-friend`, `s-throw-friend` | 1 of 10 | 5 of 60 throw-part runs (3 crate, 2 grab) | game (known limit), and grab: open |
+| `t-throw-friend`, `s-throw-friend` | 1 of 10 | 5 of 60 throw-part runs (3 crate, 2 grab) | game (known limit), and grab: open; both fixed since ("Thrown friend": 0 of 60) |
 | `door-go-in`, `door-use` | 0 of 10 | 2 of 20, only with two runs at once | load; not looked into |
 | `t-grab-friend`, `s-break-free` | 0 of 10 | 0 of 20 | none seen |
 
