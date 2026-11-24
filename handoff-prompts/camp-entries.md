@@ -10,6 +10,11 @@ wave's wagon); `docs/mechanisms/outposts.md`.
 `docs/questions-for-the-owner.md`, after each push. **Notes:**
 `docs/plan/step-4.md`, a "Camp entries" section.
 
+**Landed so far (2026-11-24 10:30 UTC), by `session_017WiGzGkuNQcsBDa2oWh23s`, which stopped at its budget:** push 0, a find outside the brief: the brawler could not walk out of the camp; a one-way tile at (8,9), all five heroes in and out (0949f2c); push 1 of "Do", the door kept clear: `doorClear` on the outpost (4f56b7a; `step7-last-stand-camp` re-timed, waves 4, felled 5; measured gap: a hero 13-16 tiles in who turns for the door still meets the west half at the step, 2 of 100 in its probe). **You are a fresh builder. Read `docs/plan/step-4.md`, "Camp entries" (its handoff at e262190: the east half's measurements, the entry choices worked on paper with their one in-view case, and a drafted, unrun breaker system at `docs/plan/step-4-break-through.ts.txt`). What is left:**
+- **"Do" item 2, changed by the orchestrator's ruling at 08:45 UTC (`DRAFT:`, one `docs/decisions-log.md` entry):** the east half (cols 44-87) is cut into pockets by pieces the camp's fighters cannot climb (47, 55-56, 64-65, 75). A row must not appear in plain view a few tiles from a hero ("come in from the sides"): keep the east entries off-screen, and make the row able to reach you: a wave's bandit blocked by a **breakable** piece between him and the hero he is coming for breaks it, a short wind-up then the piece's own broken stage, as an optional flag on the outpost (additive; off for the depot and the test rooms), through the breakables' existing break path. A piece that is not breakable still stops him and stays cover. If `room-breakable.ts` cannot take an NPC breaker without more than a small change, stop and say what it needs, and ship the off-screen entries alone.
+- **"Do" item 3** as written: the phone screenshot of a row at both screen edges with its banner, and the e2e fact.
+- If budget remains: the 2-in-100 case at the door.
+
 ## The task, and the measure
 
 The owner, ~01:05 UTC on 2026-11-24, first-hand: "Alarms should spawn more
