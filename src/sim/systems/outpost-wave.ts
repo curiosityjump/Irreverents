@@ -13,7 +13,7 @@ import type { Content } from '../../content/types.ts';
  * with entries on one side only, everyone comes from there.
  */
 function entryFor(op: Outpost, tile: number, seenX: number | null, n: number, i: number, heroCols: number[] = []): [number, number] {
-  const entries = clearOfHeroes(op, doorSafe(op, heroCols), heroCols);
+  const entries = doorSafe(op, heroCols);
   if (entries.length < 2 || seenX === null) return entries[0]!;
   const col = seenX / tile;
   const pick = (side: [number, number][]): [number, number] | undefined => {
@@ -45,20 +45,6 @@ function doorSafe(op: Outpost, heroCols: number[]): [number, number][] {
   if (door === null || !heroCols.some((c) => Math.abs(c - (door + 0.5)) < op.entryAway)) return op.entries;
   const far = op.entries.filter((t) => Math.abs(t[0] - door) >= op.entryAway);
   return far.length > 0 ? far : op.entries;
-}
-
-/**
- * DRAFT (camp-entries brief, the orchestrator's ruling: never a row popping in a few tiles
- * from a hero; docs/decisions-log.md "The camp's rows break through"): with `sendNoneNearer`,
- * entries nearer than that many tiles to any hero in the room are left out, so that half of a
- * row walks in from the other side (a hero may have moved on from the caller's sighting, D-065,
- * into the pocket an entry stands in). With every entry that near, all are kept. It reads where
- * the heroes are, as doorSafe does; where the wave walks to is still the sighting.
- */
-function clearOfHeroes(op: Outpost, entries: [number, number][], heroCols: number[]): [number, number][] {
-  if (op.sendNoneNearer <= 0) return entries;
-  const far = entries.filter((t) => heroCols.every((c) => Math.abs(t[0] + 0.5 - c) >= op.sendNoneNearer));
-  return far.length > 0 ? far : entries;
 }
 
 /**

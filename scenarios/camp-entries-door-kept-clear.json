@@ -1,7 +1,7 @@
 {
   "id": "camp-entries-door-kept-clear",
   "gate": null,
-  "proves": "There is always a way out (CLAUDE.md), with the owner's 'come in from the sides': in the real Bandit Camp the infiltrator walks into the lookout's view and stands at column 15 when the first call completes, is knocked about, and walks back to column 12-13 just before the second call completes, within 12 tiles (entryAway) of the doorway (content/outposts/outpost.json `doorClear` 2). The second call (camp fighter 1's) completes at 1537 and its row of two would split, one walking in at the entry on the step beside the door, column 6. Instead both walk in east of the hero (none of wave 1 west of x 232, both east of it), and the hero then walks back over the step and out by the doorway. Measured farther in (columns 15-17), that row still sends one in at column 6: from both sides as before. Control (watched to fail): `doorClear` and `sendNoneNearer` removed from the camp's data (since sendNoneNearer 8 the two each keep column 6 clear of a hero this near the door, so the control removes both), and wave 1's first person walks in at column 6, between the hero and the door (expect[2] and [3] fail) Re-timed 2026-11-24 by the next camp-entries builder (sendNoneNearer 8: the first row no longer walks in at column 24, 7.6 tiles from a hero at 16.4, so the hero now stops a tile sooner, at 15.4, and the old fight replays later); claims kept.",
+  "proves": "There is always a way out (CLAUDE.md), with the owner's 'come in from the sides': in the real Bandit Camp the infiltrator walks into the lookout's view and stands at column 12-13, within 12 tiles (entryAway) of the doorway (content/outposts/outpost.json `doorClear` 2). The second call completes at 1125 and its row of two would split, one walking in at the entry on the step beside the door, column 6. Instead both walk in east of the hero (none of wave 1 west of x 232, both east of it), and the hero then walks back over the step and out by the doorway. Measured farther in (columns 15-17), that row still sends one in at column 6: from both sides as before. Control (watched to fail): `doorClear` removed from the camp's data, and wave 1's first person walks in at x 97, between the hero and the door (expect[2] and [3] fail)",
   "room": "outpost",
   "placements": true,
   "players": [
@@ -12,194 +12,30 @@
     }
   ],
   "inputs": [
-    {
-      "player": "a",
-      "from": 0,
-      "to": 120,
-      "x": 1
-    },
-    {
-      "player": "a",
-      "from": 20,
-      "to": 45,
-      "hold": [
-        "jump"
-      ]
-    },
-    {
-      "player": "a",
-      "from": 1480,
-      "to": 1530,
-      "x": -1
-    },
-    {
-      "player": "a",
-      "from": 1542,
-      "to": 1742,
-      "x": -1
-    },
-    {
-      "player": "a",
-      "from": 1747,
-      "to": 1762,
-      "x": 1
-    },
-    {
-      "player": "a",
-      "from": 1562,
-      "to": 1582,
-      "hold": [
-        "jump"
-      ]
-    },
-    {
-      "player": "a",
-      "from": 1602,
-      "to": 1622,
-      "hold": [
-        "jump"
-      ]
-    },
-    {
-      "player": "a",
-      "from": 1642,
-      "to": 1662,
-      "hold": [
-        "jump"
-      ]
-    },
-    {
-      "player": "a",
-      "from": 1747,
-      "to": 1749,
-      "y": -1
-    },
-    {
-      "player": "a",
-      "from": 1751,
-      "to": 1753,
-      "y": -1
-    },
-    {
-      "player": "a",
-      "from": 1755,
-      "to": 1757,
-      "y": -1
-    },
-    {
-      "player": "a",
-      "from": 1759,
-      "to": 1761,
-      "y": -1
-    },
-    {
-      "player": "a",
-      "from": 1763,
-      "to": 1765,
-      "y": -1
-    },
-    {
-      "player": "a",
-      "from": 1767,
-      "to": 1769,
-      "y": -1
-    },
-    {
-      "player": "a",
-      "from": 1771,
-      "to": 1773,
-      "y": -1
-    },
-    {
-      "player": "a",
-      "from": 1775,
-      "to": 1777,
-      "y": -1
-    },
-    {
-      "player": "a",
-      "from": 1779,
-      "to": 1781,
-      "y": -1
-    },
-    {
-      "player": "a",
-      "from": 1783,
-      "to": 1785,
-      "y": -1
-    }
+    {"player": "a", "from": 0, "to": 128, "x": 1},
+    {"player": "a", "from": 20, "to": 45, "hold": ["jump"]},
+    {"player": "a", "from": 1130, "to": 1330, "x": -1},
+    {"player": "a", "from": 1335, "to": 1350, "x": 1},
+    {"player": "a", "from": 1150, "to": 1170, "hold": ["jump"]},
+    {"player": "a", "from": 1190, "to": 1210, "hold": ["jump"]},
+    {"player": "a", "from": 1230, "to": 1250, "hold": ["jump"]},
+    {"player": "a", "from": 1335, "to": 1337, "y": -1},
+    {"player": "a", "from": 1339, "to": 1341, "y": -1},
+    {"player": "a", "from": 1343, "to": 1345, "y": -1},
+    {"player": "a", "from": 1347, "to": 1349, "y": -1},
+    {"player": "a", "from": 1351, "to": 1353, "y": -1},
+    {"player": "a", "from": 1355, "to": 1357, "y": -1},
+    {"player": "a", "from": 1359, "to": 1361, "y": -1},
+    {"player": "a", "from": 1363, "to": 1365, "y": -1},
+    {"player": "a", "from": 1367, "to": 1369, "y": -1},
+    {"player": "a", "from": 1371, "to": 1373, "y": -1}
   ],
-  "ticks": 1912,
+  "ticks": 1500,
   "expect": [
-    {
-      "fact": "event-where",
-      "event": "outpost-wave",
-      "where": {
-        "wave": 1,
-        "row": 1
-      },
-      "between": [
-        1537,
-        1537
-      ],
-      "count": [
-        1,
-        1
-      ]
-    },
-    {
-      "fact": "position",
-      "player": "a",
-      "at": 1537,
-      "x": [
-        150,
-        232
-      ]
-    },
-    {
-      "fact": "people-at",
-      "room": "outpost",
-      "at": 1538,
-      "ids": "outpost:w1:",
-      "x": [
-        0,
-        232
-      ],
-      "count": [
-        0,
-        0
-      ]
-    },
-    {
-      "fact": "people-at",
-      "room": "outpost",
-      "at": 1538,
-      "ids": "outpost:w1:",
-      "x": [
-        232,
-        1408
-      ],
-      "count": [
-        2,
-        2
-      ]
-    },
-    {
-      "fact": "event-where",
-      "event": "changed-room",
-      "where": {
-        "player": "a",
-        "fromRoom": "outpost",
-        "toRoom": "courtyard"
-      },
-      "between": [
-        1542,
-        1911
-      ],
-      "count": [
-        1,
-        99
-      ]
-    }
+    {"fact": "event-where", "event": "outpost-wave", "where": {"wave": 1, "row": 1}, "between": [1125, 1125], "count": [1, 1]},
+    {"fact": "position", "player": "a", "at": 1125, "x": [150, 232]},
+    {"fact": "people-at", "room": "outpost", "at": 1126, "ids": "outpost:w1:", "x": [0, 232], "count": [0, 0]},
+    {"fact": "people-at", "room": "outpost", "at": 1126, "ids": "outpost:w1:", "x": [232, 1408], "count": [2, 2]},
+    {"fact": "event-where", "event": "changed-room", "where": {"player": "a", "fromRoom": "outpost", "toRoom": "courtyard"}, "between": [1130, 1499], "count": [1, 99]}
   ]
 }
