@@ -1,0 +1,194 @@
+{
+ "//": "DRAFT (Step 22 push 5): the quiet way, for node scripts/stage-quiet.ts: the segments the infiltrator plays to clear the Iron Quarry with no bad guy seeing it (scenarios/step22-unseen-clear.json). Re-record with `node scripts/stage-quiet.ts scripts/stage-routes/quiet-infiltrator.json out.json` when the quarry changes.",
+ "hero": "infiltrator",
+ "segments": [
+  {
+   "note": "road to the block",
+   "do": "walk",
+   "gaps": true,
+   "until": {
+    "room": "quarry-road",
+    "xMin": 30.6,
+    "feetMax": 13.01,
+    "ground": true
+   }
+  },
+  {
+   "note": "step row 11",
+   "do": "steer",
+   "to": 32.2,
+   "until": {
+    "feetMax": 11.01,
+    "ground": true
+   },
+   "max": 120
+  },
+  {
+   "note": "step row 9",
+   "do": "steer",
+   "to": 35.5,
+   "until": {
+    "feetMax": 9.01,
+    "ground": true
+   },
+   "max": 120
+  },
+  {
+   "note": "scaffold row 8",
+   "do": "steer",
+   "to": 38.8,
+   "until": {
+    "feetMax": 8.01,
+    "ground": true
+   },
+   "max": 120
+  },
+  {
+   "note": "scaffold to col 49",
+   "do": "walk",
+   "until": {
+    "xMin": 49
+   }
+  },
+  {
+   "note": "past the heavy, off the scaffold, over the gap",
+   "do": "walk",
+   "gaps": true,
+   "wait": 600,
+   "until": {
+    "xMin": 67,
+    "ground": true
+   }
+  },
+  {
+   "note": "to the ridge",
+   "do": "walk",
+   "gaps": true,
+   "wait": 300,
+   "until": {
+    "room": "quarry-ridge"
+   }
+  },
+  {
+   "note": "ridge to the chasm",
+   "do": "walk",
+   "wait": 300,
+   "until": {
+    "room": "quarry-pit"
+   }
+  },
+  {
+   "note": "pit to the cellar",
+   "do": "walk",
+   "wait": 600,
+   "until": {
+    "room": "quarry-depot"
+   }
+  },
+  {
+   "note": "cellar to the hole",
+   "do": "walk",
+   "until": {
+    "xMin": 23.0,
+    "ground": true
+   }
+  },
+  {
+   "note": "onto the cellar step",
+   "do": "steer",
+   "to": 23.5,
+   "until": {
+    "feetMax": 17.01,
+    "ground": true
+   },
+   "max": 120
+  },
+  {
+   "note": "settle under the hole",
+   "do": "steer",
+   "to": 23.5,
+   "nohop": true,
+   "until": {
+    "xMin": 23.38,
+    "xMax": 23.62,
+    "ground": true
+   },
+   "max": 60
+  },
+  {
+   "note": "stand",
+   "do": "idle",
+   "until": {},
+   "max": 1
+  },
+  {
+   "note": "up the hole",
+   "do": "hop",
+   "dir": 0,
+   "until": {
+    "feetMax": 13.9
+   },
+   "max": 60
+  },
+  {
+   "note": "out of the hole",
+   "do": "steer",
+   "to": 22.3,
+   "until": {
+    "feetMax": 14.01,
+    "ground": true
+   },
+   "max": 60
+  },
+  {
+   "note": "onto the yard step",
+   "do": "steer",
+   "to": 24.7,
+   "wait": 300,
+   "until": {
+    "feetMax": 13.01,
+    "ground": true
+   },
+   "max": 120
+  },
+  {
+   "note": "step row 11",
+   "do": "steer",
+   "to": 25.9,
+   "until": {
+    "feetMax": 11.01,
+    "ground": true
+   },
+   "max": 120
+  },
+  {
+   "note": "step row 9",
+   "do": "steer",
+   "to": 27.9,
+   "until": {
+    "feetMax": 9.01,
+    "ground": true
+   },
+   "max": 120
+  },
+  {
+   "note": "plank row 8",
+   "do": "steer",
+   "to": 30.0,
+   "until": {
+    "feetMax": 8.01,
+    "ground": true
+   },
+   "max": 120
+  },
+  {
+   "note": "roof, gantry, the end",
+   "do": "walk",
+   "gaps": true,
+   "wait": 600,
+   "until": {
+    "cleared": true
+   }
+  }
+ ]
+}

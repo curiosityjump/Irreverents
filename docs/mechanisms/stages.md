@@ -141,7 +141,7 @@ with the run seeded through `world.stages` so its time lands one tick either
 side of each threshold; each pair is the other's control: move `started` when
 the thresholds are re-measured). The fact `tile` (Step 22) reads a room's tile
 as the world has it; the fact `stage` (push 3) reads `world.stages[id]`'s
-state, tries and best. `step22-restart-on-game-over.json` (item (b)). `step22-each-hero-{fights,sneaks}-{hero}.json` (3b): each of the five
+state, tries and best. `step22-restart-on-game-over.json` (item (b)). `step22-unseen-clear.json` (push 5): the infiltrator clears with `unseen` true by the quiet way (the road's scaffold over the toll, the ridge's chasm, the pit, the depot's cellar and hole, the plank to the strongroom's roof and the gantry into the end; `docs/decisions-log.md`, "The quarry has a quiet way"); control: the scaffold's walk taken out by a tiles override, and no unseen clear. Its inputs come from `scripts/stage-quiet.ts`, a measuring tool like `stage-bot.ts`: it plays a list of segments (`scripts/stage-routes/quiet-infiltrator.json`: walk, hop, steer, idle, each until a condition on room, column or feet row) and before each segment tries waits of 0, 6, 12... ticks, keeping the first after which the segment ends with the stage's `seen` still false and no heart lost. `step22-each-hero-{fights,sneaks}-{hero}.json` (3b): each of the five
 roster heroes alone, from the entrance to the end with every bad guy
 placed, by a script that fights (two or more knocked flat) and by one that
 sneaks (no punch, no horn call completed); each clears on its first try as

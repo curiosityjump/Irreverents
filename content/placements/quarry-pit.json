@@ -1,5 +1,5 @@
 {
-  "//": "DRAFT (Step 16 slice 2): a heavy (column 10) and a fighter (column 26) on the pit's floor, clear of where a fall from the ridge lands (columns 20-21). Columns are first guesses; ids are permanent.",
+  "//": "DRAFT (Step 16 slice 2): a heavy (column 10) and a fighter (column 26) on the pit's floor, clear of where a fall from the ridge lands (columns 20-21). Columns are first guesses; ids are permanent. DRAFT (Step 22 push 5, docs/decisions-log.md 'The quarry has a quiet way'): the fighter moved from column 26 to 16, facing the heavy: both stand west of where a fall from the chasm lands (20-21), so the pit's east half, from the landing to the cellar door, is the quiet way's.",
   "id": "quarry-pit",
   "room": "quarry-pit",
   "place": [
@@ -24,7 +24,7 @@
       "id": "pit-fighter",
       "character": "outpost-fighter",
       "tile": [
-        26,
+        16,
         18
       ],
       "npc": "outpost-fighter",

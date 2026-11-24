@@ -1,5 +1,5 @@
 {
-  "//": "DRAFT (Step 16 slices 1-2): loose rocks on the road to pick up and throw, clear of the doorway (columns 2-4) and the spawn (column 6); and the bad guys' toll post on the flat at columns 40-46: a counter (column 42) kept by a toll keeper who cannot swing (column 43, facing west, towards whoever comes up the road), with a second fighter (column 40, facing east) watching the counter. Paying the toll is the one deed that troubles a bad guy (content/rules/quarry.json). A heavy (column 58) further up. Every column is a first guess; the ids are permanent.",
+  "//": "DRAFT (Step 16 slices 1-2): loose rocks on the road to pick up and throw, clear of the doorway (columns 2-4) and the spawn (column 6); and the bad guys' toll post on the flat at columns 40-46: a counter (column 42) kept by a toll keeper who cannot swing (column 43, facing west, towards whoever comes up the road), with a second fighter (column 40, facing east) watching the counter. Paying the toll is the one deed that troubles a bad guy (content/rules/quarry.json). A heavy (column 58) further up. DRAFT (Step 22 push 5): the heavy now looks up the road for 2 s after every 5 s looking down it, the window in which a hero on the scaffold over him gets past unseen (docs/decisions-log.md 'The quarry has a quiet way'). Every column is a first guess; the ids are permanent.",
   "id": "quarry-road",
   "room": "quarry-road",
   "place": [
@@ -67,6 +67,12 @@
         },
         {
           "wait": 5
+        },
+        {
+          "face": "right"
+        },
+        {
+          "wait": 2
         }
       ]
     }

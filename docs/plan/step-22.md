@@ -717,3 +717,16 @@ before you quote it.
 
 - Looked at the fresh `push4-stage-cleared-sideways-667x375.png`. The stars are now pixel stars: gold and filled when earned, empty with a pale edge when not.
 - That settles push 4's doubt (the frame tile read as a chest). A real star sprite is still asked of Vision Partner, as a `DRAFT:` stand-in.
+
+### Push 5, part 1: the quiet way, and an unseen clear (fifth builder, `session_017WiGzGTsScxtYSPbqs97N3`)
+
+- **`step22-unseen-clear`:** the infiltrator clears in 2011 ticks (33.5 s) with `unseen` true, 3 stars, no punch, no heart lost, no call even started. Control, watched failing: the scaffold's row 8 emptied by a tiles override, and no clear (the toll's watcher beats it, five hearts lost).
+- **The way** (`docs/decisions-log.md`, "The quarry has a quiet way"):
+  - road: a one-way scaffold over the toll (rows 11, 9, 8; columns 31-62). The road heavy now looks up the road 2 s in every 7, and the hero waits on the scaffold (6 s) for that turn.
+  - ridge: walk to the chasm and drop. The ridge's fighters (36, 40) don't reach column 28.
+  - pit: `pit-fighter` moved from column 26 to 16, facing the heavy, both west of the landing.
+  - depot: a one-tile step under the hole (row 17, column 23, hole foot widened), steps at columns 25-28, a plank to the roof (row 8, 29-35), and a gantry over the far yard (row 9, 48-60) that drops into the end.
+- **Tool:** `scripts/stage-quiet.ts` plays `scripts/stage-routes/quiet-infiltrator.json` and finds the waits itself (about 30 s).
+- **Kept:** every `step16-*`, `step7-*`, `step9-*`, `step14-*`, `step21-*` and `step22-*` passes. The first plank (row 8 from column 20) broke `step16-caught-escape-cave`, because the flyer's glide off the roof landed on it, and so did a two-wide cellar step (the flyer's head was in the cellar ceiling). The shapes above are the ones that keep it.
+- **Re-recorded:** only `step22-each-hero-fights-skirmisher`, which stopped clearing (2445 ticks now). The other nine still clear with their old inputs.
+- **Not yet:** more enemies, the second caller, the first screen, the entrance sign (push 5, part 2). Not looked at on a phone yet.
