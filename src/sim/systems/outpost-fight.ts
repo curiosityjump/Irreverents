@@ -93,8 +93,13 @@ const system: System = {
         }
         // A driver in a machine's seat is the machine's (machine-driven, Step 20): he never searches or turns about.
         const seated = world.entities.some((m) => (m.c as { seat?: { driver: string | null } }).seat?.driver === e.id);
-        if (seated) delete e.c.outpostChase;
-        const search = seated ? undefined : npcKind(content, e)?.search;
+        // Vehicles B (Step 20), 2026-11-24: nor does he fight from the seat; driving and ramming are machine-driven's.
+        // Pulled out, he is no longer the seat's driver and fights like anyone.
+        if (seated) {
+          delete e.c.outpostChase;
+          continue;
+        }
+        const search = npcKind(content, e)?.search;
         if (seen) {
           e.c.outpostFight = seen;
           if (search) {
