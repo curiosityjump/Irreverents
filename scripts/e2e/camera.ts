@@ -19,7 +19,7 @@
 // keeps the floor: the thrower is off the top of the picture).
 // Wanted, not required (printed): standing behind him (column 5, no aim),
 // the stick held up leans the camera up (`drawn.lean.why` "look").
-// Shots: docs/plan/step-5-shots/camera/after/, sideways at 844x390 and
+// Shots: docs/plan/step-5-shots/camera/after/ with E2E_SHOTS=1 (else e2e-out/kept/), sideways at 844x390 and
 // 750x340, and upright 390x664.
 // DRAFT: every wait and bound is a first pass with room to spare.
 import fs from 'node:fs';

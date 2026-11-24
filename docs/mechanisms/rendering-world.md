@@ -113,7 +113,7 @@ into the shared documents.
   - Not built: a thrower beside the picture is not brought into it; the
     lean is only upward and sideways only for the plate.
   - e2e fact `camera-aim-in-picture` (`scripts/e2e/camera.ts`); shots
-    `docs/plan/step-5-shots/camera/` (`before/`, `after/`).
+    `docs/plan/step-5-shots/camera/` (`before/`, `after/`; `after/` rewritten only by `E2E_SHOTS=1`).
 - **Looks** for doors (`door-enter-<w>x<h>`), parts (`part:<room>:<part>`
   with `:down`/`:open`/`:broken`, then `plate-up`/`plate-down`,
   `gate-closed`/`gate-open`, `crack-1`/`crack-2`, `rubble`,

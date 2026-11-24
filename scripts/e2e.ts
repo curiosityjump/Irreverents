@@ -32,6 +32,16 @@ const LIVE_URL = 'https://irreverents-production.up.railway.app';
 const DOWN_MS = Number(process.env.E2E_DOWN_MS) || 75000;
 const out = path.join(root, 'e2e-out');
 fs.mkdirSync(out, { recursive: true });
+// INTENT: a plain run writes nothing under docs/. The shots kept in docs/plan/ are rewritten only with
+// E2E_SHOTS=1; otherwise the same files land in e2e-out/kept/ (git-ignored). A screenshot's bytes differ
+// run to run, so writing them every run left every builder's tree dirty, and 18 were committed by
+// mistake at 36d070e (brief e2e-shots-only-when-asked; docs/verifying-and-finishing.md, "Traps").
+const KEEP_SHOTS = process.env.E2E_SHOTS === '1';
+const keptShots = (rel: string): string => {
+  const dir = path.join(KEEP_SHOTS ? path.join(root, 'docs/plan') : path.join(out, 'kept'), rel);
+  fs.mkdirSync(dir, { recursive: true });
+  return dir;
+};
 
 let failed = 0;
 const fact = (id: string, ok: boolean, text: string): void => {
@@ -433,7 +443,7 @@ async function main(): Promise<void> {
       // Step 21's facts (defeat-*): beaten in the camp by touch, the condition slot fine, hurt, down, thrown out to the courtyard and free (docs/mechanisms/defeat.md).
       await (await import('./e2e/defeat.ts')).defeatFacts({ browser, devices, base, out, fact, errors, shots: path.join(out, 'defeat') });
       // Step 22 push 4's facts (stage-*): STAGE CLEARED at three phone sizes, Continue by touch gives the stick back, two pages dismiss their own (docs/mechanisms/stages.md).
-      await (await import('./e2e/stage.ts')).stageFacts({ browser, devices, base, out, fact, errors, shots: path.join(root, 'docs/plan/step-22-shots') });
+      await (await import('./e2e/stage.ts')).stageFacts({ browser, devices, base, out, fact, errors, shots: keptShots('step-22-shots') });
       // Step 14 slice A's facts (level-*): the quarry's entrance drawn, found by touch, its name and pie; the menu's rows (docs/mechanisms/levels.md).
       await (await import('./e2e/levels.ts')).levelFacts({ browser, devices, base, out, fact, errors, shots: path.join(out, 'levels') });
       // Step 14 slice B's facts (glint-*): the piece over the awning glints, a held Jump by touch finds it, the row shows it gold (docs/mechanisms/levels.md, "Pieces").
@@ -441,9 +451,9 @@ async function main(): Promise<void> {
       // Step 3's two-page proof (plates-*): one page on each courtyard plate opens the gate on both, the friend's plate never drawn up; the stone plate under the castle part-sunk under one, down under two (docs/mechanisms/rooms-and-doors.md).
       await (await import('./e2e/plates.ts')).plateFacts({ browser, devices, base, out, fact, errors, shots: path.join(out, 'plates') });
       // Step 24's fact (ranged-telegraph): through the opened gate into the Hall gallery, the thrower's aim and arc drawn a full aim before his shot leaves (docs/mechanisms/ranged.md).
-      await (await import('./e2e/ranged.ts')).rangedFacts({ browser, devices, base, out, fact, errors, shots: path.join(root, 'docs/plan/step-24-shots') });
+      await (await import('./e2e/ranged.ts')).rangedFacts({ browser, devices, base, out, fact, errors, shots: keptShots('step-24-shots') });
       // Step 5's camera fact (camera-aim-in-picture): sideways, the camera leans up and the thrower's wind-up and arc are drawn inside the picture (docs/mechanisms/rendering-world.md, "The camera leans up").
-      await (await import('./e2e/camera.ts')).cameraFacts({ browser, devices, base, out, fact, errors, shots: path.join(root, 'docs/plan/step-5-shots/camera') });
+      await (await import('./e2e/camera.ts')).cameraFacts({ browser, devices, base, out, fact, errors, shots: keptShots('step-5-shots/camera') });
       // Step 9's facts (power-*): the villain drawn carrying his power, seen by a phone walking into the street by touch (docs/mechanisms/powers.md).
       await (await import('./e2e/powers.ts')).powerFacts({ browser, devices, base, out, fact, errors, shots: path.join(out, 'powers') });
       // Step 16's facts (quarry-*): into the quarry by touch, and across its road onto the ridge (docs/plan/step-16.md, signal 7).
@@ -453,7 +463,7 @@ async function main(): Promise<void> {
       // Step 11's facts (cantina-*): into the cantina by touch, the party row, the swap and the brawl's counter on two phones (docs/mechanisms/cantina.md, signal 8).
       await (await import('./e2e/cantina.ts')).cantinaFacts({ browser, devices, base, out, fact, errors });
       // Step 17's facts (start-*): the start screen, New game, a friend joining by the shared link, and back, by touch (docs/mechanisms/saves.md).
-      await (await import('./e2e/start-screen.ts')).startFacts({ browser, devices, base, out, fact, errors, shots: path.join(root, 'docs/plan/step-17-shots') });
+      await (await import('./e2e/start-screen.ts')).startFacts({ browser, devices, base, out, fact, errors, shots: keptShots('step-17-shots') });
       // The phone HUD's facts (hud-targets-*): every control at least 44 px at three phone sizes (brief phone-hud-legibility).
       await (await import('./e2e/hud.ts')).hudFacts({ browser, devices, base, out, fact, errors });
       // Step 8's look facts (look-*): the three moods differ as drawn, and a hidden friend has no mark on another page (docs/mechanisms/rendering-actors.md, "Round 3").
@@ -570,7 +580,7 @@ async function main(): Promise<void> {
     await (await import('./e2e/tiers.ts')).tierFacts({ browser, devices, base, out, tag: LIVE ? 'check' : 'e2e', fact, errors });
     await awayFacts({ browser, base, out, tag: LIVE ? 'check' : 'e2e', fact, errors, wholeWait: !LIVE });
     // Step 23's facts (weapon-*), here and on live in a private world: the street's sword, Use says Pick up and it glows; a tap and it is in hand; its hit predicted; Grab throws it (docs/mechanisms/weapons.md).
-    await (await import('./e2e/weapons.ts')).weaponFacts({ browser, devices, base, out, fact, errors, shots: LIVE ? path.join(out, 'weapons-live') : path.join(root, 'docs/plan/step-23-shots') });
+    await (await import('./e2e/weapons.ts')).weaponFacts({ browser, devices, base, out, fact, errors, shots: LIVE ? path.join(out, 'weapons-live') : keptShots('step-23-shots') });
 
     fact('errors', errors.length === 0, errors.length ? `page errors: ${errors.join(' | ')}` : 'no page raised an error');
     // After the fact above: this one raises errors in a page of its own, on purpose.

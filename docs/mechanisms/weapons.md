@@ -192,4 +192,4 @@ wall and the hammer, sword and spear's test sources.
 - `npm run e2e`, `weapon-word` and `weapon-held` (`scripts/e2e/weapons.ts`):
   a phone walks into the street by touch, the Use button's `data-state` is
   `pick-up` and the sword glows; a tap and it is drawn in hand.
-  Screenshots: `docs/plan/step-23-shots/`.
+  Screenshots: `docs/plan/step-23-shots/`, rewritten only by `E2E_SHOTS=1 npm run e2e`.

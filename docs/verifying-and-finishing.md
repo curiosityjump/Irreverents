@@ -51,7 +51,11 @@ gates, start and dev were run end to end from a fresh clone at 04:17 UTC
   a deliberate outage; it builds first): headless Chromium against the built server on a free port, a
   desktop page driven by keys and Playwright's `iPhone 14 landscape`
   driven by touch. One fact per line, exit 1 on any failure, screenshots
-  in `e2e-out/` (git-ignored): **open them**, that is rung 5. What each
+  in `e2e-out/` (git-ignored): **open them**, that is rung 5. A plain run
+  writes nothing under `docs/`: the shots kept in `docs/plan/step-5-shots/camera/`,
+  `step-17-shots/`, `step-22-shots/`, `step-23-shots/` and `step-24-shots/`
+  go to `e2e-out/kept/<same path>` instead, and are rewritten in `docs/plan/`
+  only by `E2E_SHOTS=1 npm run e2e`, when you mean to commit new ones. What each
   fact reads and the controls watched: `docs/mechanisms/network.md`.
 - **The live site:** `npm run check:live`: `check:deployed` first, then
   the same two-player walk (facts a–c, e, rate) against the live address
@@ -263,6 +267,12 @@ and the kinds of project-specific ones worth documenting:
   missing. You can "verify" a change that way and have tested **nothing**. If
   your project has one, name it here, name the fallback text, and say: set a
   key or don't claim it works.
+- **A dirty `docs/plan/*-shots/` after `npm run e2e` is not yours.** A
+  screenshot's bytes differ run to run, so a run that writes them always
+  reads as changed; before 2026-11-24 every run did, and `git add -A`
+  committed 18 by mistake at 36d070e. A plain run now writes none
+  (`E2E_SHOTS=1` to keep new ones); if any show as modified, someone ran
+  with the switch: `git checkout -- docs/plan` unless you meant to.
 - **`npm run check` passing says nothing about the screen.** The
   scenarios drive the simulation headlessly; a broken page or renderer
   passes them. Anything a player sees still needs rung 5.

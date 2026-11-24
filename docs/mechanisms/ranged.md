@@ -103,4 +103,4 @@ Test rooms `test-ranged` (ledge), `-floor` (80 wide), `-bomb`, `-camp`.
 `npm run e2e`, fact `ranged-telegraph` (`scripts/e2e/ranged.ts`; control
 `E2E_RANGED_BEHIND=1`). Shots: `docs/plan/step-24-shots/` (slice 1), `1b/`
 (slice 1b, at 844×390, 750×340 and 390×664: at rest, winding up, in the air,
-a hero struck).
+a hero struck); `npm run e2e` rewrites them only with `E2E_SHOTS=1`.
