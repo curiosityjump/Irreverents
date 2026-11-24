@@ -1,5 +1,19 @@
 # The owner's new biome backgrounds: bring them in and put them behind the places they fit
 
+
+## Landed so far, and what is next (builder `session_017WiGzGQptGtgXJLtKXBbKC`, stopped at ~312k tokens, 2026-11-24 17:25 UTC)
+
+Landed: 642b89a (BKG-02 mirrored), 137bcaa (panoramas behind nine rooms), 63addca (forest shots retaken),
+a988b63 (the `-far` cuts: a 180-px fade on top, haze per panorama in `FAR` of
+`tools/art/backgrounds/import_panoramas.py`; undercroft's cellar back). Notes, table, shots:
+`docs/plan/step-8.md`, "Biome backgrounds" and the two looks after it.
+
+**Third pass, the orchestrator's rulings (17:21 UTC), each `DRAFT:`, one `docs/decisions-log.md` entry:**
+1. Bring the forest's haze back down (`FAR`, 0.45 now) until forest-road's blues, waterfall and red mushroom read as painted; keep forest-trail's painted mushroom plainly background by other means (shift the panorama, or a local treatment as data).
+2. Make the REAL thing pop instead of fading the painting: the quarry's standable planks (short ones above all) get a dark underside/outline, a lighter top edge or their own colour, as data on the plank's look; and/or shift each panorama per room (an `offsetY` on its first layer is data already) so painted decks, ledges and pillar tops do not sit on the play rows beside a real platform (the quarry's left deck at chest height, the street's lime ledge over the arch, the courtyard's ruin ledge, the camp's pillar under the real beam). Smallest thing that passes; one consistent mechanism. Haze toward the sky was measured not to help at play height.
+3. Say in one line whether the region banner reads "Castle Town" in forest-road and quarry-road in play. The builder's guess, not checked: an artefact of `tools/art/backgrounds/shots.mjs`, which moves the player by setting `room` directly instead of walking through a door, so no new place is entered.
+
+Pass = a new player would not try to stand on the painted thing in planks-quarry-road-3, planks-quarry-depot-2, quarry-road-1 (both sizes), castle-street-1, courtyard-1, outpost-1; forest-road-1 no duller than its first `-after-` shot. Shots `*-after3-*` (`node tools/art/backgrounds/shots.mjs <url> after3 <dir> [rooms]`; `BKG_SPOTS` for the plank spots, listed in step-8.md). Traps met: a sparse clone hides the mirror's PNGs (the tool reads them from git); local `main` may be stale (check `git status` says on a branch); e2e takes ~20 min and its shots land under `docs/plan/`; the busy `main` makes decisions-log conflicts on every rebase (both sides are appends: keep both).
 Brief for one builder. Written 2026-11-24 15:00 UTC by the outgoing
 orchestrator (`session_017WiGzHhT2apmWHT61rQ65G`), at the owner's word.
 
