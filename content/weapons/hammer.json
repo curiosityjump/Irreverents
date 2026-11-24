@@ -1,0 +1,56 @@
+{
+  "//": "DRAFT (Step 23): the second weapon, from the owner's P12 upload. Slow and heavy: a long wind-up (+0.35 s), a much harder launch (x2.2, 30800 from a grappler: a 70-weight camp fighter goes off at the cap), a little more reach; its swing breaks a cracked wall, a fence or a stall in reach (breaks 250: not the camp's barricade, 300). It lies in the Bandit Camp at column 10, on the first screen past the entrance block, and in the weapon test room. Every number is a first guess (decisions-log 'Step 23').",
+  "id": "hammer",
+  "name": "Hammer",
+  "looks": {
+    "ground": "weapon-hammer-ground",
+    "held": "weapon-hammer-held",
+    "swing": "weapon-hammer-swing",
+    "impact": "weapon-hammer-impact",
+    "broken": "weapon-hammer-broken"
+  },
+  "grip": [
+    9,
+    21
+  ],
+  "box": [
+    16,
+    10
+  ],
+  "hit": {
+    "add": {
+      "attackReach": 6,
+      "attackWindup": 0.35
+    },
+    "times": {
+      "attackStrength": 2.2
+    }
+  },
+  "use": "swing",
+  "breaks": 250,
+  "thrown": {
+    "speed": 240,
+    "strength": 24000,
+    "wear": 40
+  },
+  "sources": [
+    {
+      "id": "camp-hammer",
+      "room": "outpost",
+      "tile": [
+        10,
+        10
+      ],
+      "restock": 45
+    },
+    {
+      "id": "test-weapons-hammer",
+      "room": "test-weapons",
+      "tile": [
+        6,
+        6
+      ],
+      "restock": 30
+    }
+  ]
+}

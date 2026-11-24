@@ -35,6 +35,15 @@
         10
       ],
       "restock": 30
+    },
+    {
+      "id": "test-weapons-sword",
+      "room": "test-weapons",
+      "tile": [
+        8,
+        6
+      ],
+      "restock": 30
     }
   ],
   "thrown": {

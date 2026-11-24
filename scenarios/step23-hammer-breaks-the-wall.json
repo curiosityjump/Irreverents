@@ -1,0 +1,92 @@
+{
+  "//": "DRAFT (Step 23): the hammer breaks what it is swung at. In the weapon test room the grappler picks up the hammer (column 6), walks up against the cracked wall at column 20 and swings: the hammer's slow wind-up (0.1 + 0.35 s) and then the strike breaks the wall (its breaks 250 against the wall's 200). Control (-control): the same with the sword (column 8, breaks 0): the strike starts at once and the wall stands. The dummy stands far off only so the room has a body nobody plays (weaponWorld). Watched to fail with the hammer's breaks at 100.",
+  "id": "step23-hammer-breaks-the-wall",
+  "gate": null,
+  "proves": "a hammer swung at a cracked wall in reach breaks it, after its slow wind-up",
+  "room": "test-weapons",
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "entities": [
+    {
+      "id": "dummy-1",
+      "character": "dummy",
+      "tile": [
+        27,
+        6
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 40,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 50,
+      "to": 52,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 60,
+      "to": 260,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 270,
+      "to": 272,
+      "hold": [
+        "attack"
+      ]
+    }
+  ],
+  "ticks": 370,
+  "expect": [
+    {
+      "fact": "weapon",
+      "player": "a",
+      "at": 60,
+      "is": "hammer"
+    },
+    {
+      "fact": "event",
+      "event": "attacked",
+      "player": "a",
+      "between": [
+        296,
+        298
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "part-broken",
+      "where": {
+        "part": "test-cracked-wall",
+        "by": "p:a"
+      },
+      "between": [
+        296,
+        298
+      ],
+      "count": [
+        1,
+        1
+      ]
+    }
+  ]
+}

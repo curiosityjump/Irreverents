@@ -6,6 +6,7 @@ import { looseBox, weaponOf } from '../../sim/weapons.ts';
 import { drawnOffset } from './entities.ts';
 import type { PlayerView } from './entities.ts';
 import { drawFrame, frameOf, lengthOf, look } from './fx.ts';
+import { fillHudSlot } from './hud.ts';
 
 // Step 23 (docs/mechanisms/weapons.md): what a weapon looks like. A loose
 // weapon lies as its `ground` look; the one this page's Use would pick up
@@ -17,6 +18,16 @@ import { drawFrame, frameOf, lengthOf, look } from './fx.ts';
 // frames), and its `impact` look where it lands. One library, any hand: no
 // bearer is in any picture (the owner's P12 contract). No digits anywhere.
 // DRAFT: every size, place and time below.
+
+/**
+ * The viewer's one weapon in the party plate's weapon slot (draw/hud.ts): its
+ * `icon` look when one is cut, else its `held` look fitted to the slot. No
+ * inventory: one slot, the weapon in hand (the owner: "Only one weapon at a time").
+ */
+fillHudSlot('weapon', (_world, content, me) => {
+  const w = weaponOf(content, me);
+  return w ? (w.looks.icon ?? w.looks.held) : undefined;
+});
 
 /** What the page drew for weapons this frame, for the checks (window.irreverents.drawn.weapons). */
 export interface DrawnWeapons {

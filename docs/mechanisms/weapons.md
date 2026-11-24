@@ -24,7 +24,10 @@ states); `grip` (where the hand holds its `held`/`swing` look, facing right);
 `box` (its size lying loose or flying); `hit` (`times`, then `add`, then
 `atLeast`, over the holder's numbers, after a power's); `use` (`swing`);
 `sources` (`id`, `room`, `tile`, `restock` s); `thrown` (`speed`,
-`strength`, `wear`); `carriers` (placed ids or kinds). The check refuses a
+`strength`, `wear`); `carriers` (placed ids or kinds); `breaks` (what its
+swing breaks: `weapon-break`, 106, on `attacked`, every breakable part with
+a tile in reach in front whose own breakSpeed, or `wallBreakSpeed`, is at
+most this). The check refuses a
 look that is not cut, a `hit` number no character has, a source outside its
 room, a carrier that is nothing or has no hands. `content/grips.json`: each
 kind's hand point (pixels from the box's top-left, facing right), and a
@@ -33,6 +36,8 @@ kind's hand point (pixels from the box's top-left, facing right), and a
 | Id | Does | Why these numbers |
 |---|---|---|
 | `sword` | +10 reach, x1.4 strength, own wind-up; thrown at 320 px/s, strength 14000 | Quick: a grappler's swing sends a 40-weight dummy at 490 px/s, 350 bare-handed. Lies on the castle street at column 10, seen on the first screen; `camp-fighter-2` carries one. |
+| `hammer` | +6 reach, +0.35 s wind-up, x2.2 strength; `breaks` 250 | Slow and huge: a grappler's 30800 sends a 70-weight camp fighter off at the cap. Breaks a cracked wall (200), a fence (200) or a stall (150) in reach, not the camp's barricade (300). Lies in the Bandit Camp at column 10, just past the entrance block. |
+| `spear` | +18 reach, x1.2 strength, own wind-up; thrown at 420 px/s | The longest reach. Written last, as data only: no code names it (`step23-one-file`). In the test room until its quarry spot is agreed with Step 22. |
 
 ## One weapon in hand, one per hero
 
@@ -95,12 +100,20 @@ glow. Held: the look's `grip` on the holder's hand point
 `swing` look's first frame; recover: its last; a blow by a weapon in hand
 plays its `impact` look where it landed. No digits anywhere.
 `window.irreverents.drawn.weapons` = `{ loose, held }` for the checks.
+The party plate has a `weapon` slot (`draw/hud.ts`, between power and
+cargo): the viewer's one weapon (its `icon` look when cut, else `held`).
+One slot, no inventory (the owner).
+
+`content/rooms/test-weapons.json` is a test room (not on the map): a cracked
+wall and the hammer, sword and spear's test sources.
 
 ## How it is checked
 
 - Scenarios `step23-*` (each with its control where the step names one):
   `-pick-up-and-swing`, `-any-hero-holds-it-<hero>`,
-  `-hard-hit-knocks-it-loose`, `-steal-from-a-carrier`. Fact `weapon`
+  `-hard-hit-knocks-it-loose`, `-steal-from-a-carrier`, `-thrown-knocks-down`,
+  `-thrown-out-leaves-it`, `-each-hero-keeps-their-own`,
+  `-hammer-breaks-the-wall`, `-one-file`, `-source-stands-another`. Fact `weapon`
   (`src/scenarios/facts/weapon.ts`): what a body holds at a tick, or how
   many lie loose in a room.
 - `npm run e2e`, `weapon-word` and `weapon-held` (`scripts/e2e/weapons.ts`):

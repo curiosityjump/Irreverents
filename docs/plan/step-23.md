@@ -272,3 +272,19 @@ Decided from it (this overrides anything above that says otherwise):
 - **Fights struck by a thrown weapon** are not counted by `fight-struck` (101, before the throw's hit): a villain struck by a thrown sword does not "hit back once struck". Same as a thrown body today (its own `DRAFT:`).
 - `scripts/checks/step23-weapons.ts` watched to fail with the pick-up writing `c.weapon` instead of sending the effect (a's own page never holds it).
 - `step20-machine` (not mine) fails 2 of 4 runs alone on `main` without Step 23, as on my tree: logged by Step 5's session at bbb9702.
+
+**Push 3 (the hammer and the spear as data; `breaks`; the plate's weapon slot).**
+
+- **The spear took no code.** `grep -rn spear src scripts --include=*.ts` finds 0 lines; it is `content/weapons/spear.json` and its scenarios. The hammer needed one new rule, `breaks` (`systems/weapon-break.ts`), written before its file.
+- **`uses` (wearing out) is not built yet.** None of the sword, hammer or spear wears out (the readme: no broken state for an indestructible thing), so nothing would read it; it arrives with the bomb (push 4), whose one burst uses it up. The `broken` look is drawn by nothing yet.
+- **The spear lies only in the test room** (`test-weapons`) until its quarry tile is agreed with Step 22's lead (push 5). A player cannot find it in the game yet.
+- **A scenario world needs a body nobody plays** for weapons to stand (`weaponWorld`); the test-room scenarios place a dummy for that.
+- **The plate's `weapon` slot** stays: with it e2e ran 113 of 113 (`heist-plate` and every phone fact unchanged).
+
+**Where this builder stopped (after push 3, at the brief's context line), for the next brief:**
+
+- **Push 4 (the bomb) and push 5 (bad guys take one; the quarry's spear and bomb) are not started.** `uses` (push 4) is not built; `use: "throw"` is refused by the kind until it is.
+- **Owed screenshots:** three heroes and one bad guy holding the same sword (the P12 readme's own test), and the hammer, the throw and the burst. Taken so far: `step-23-shots/` pick-up, held, thrown (the e2e writes them on every local run). `camp-fighter-2` holds the sword from the first tick in the camp; the hero must jump the entrance block to see him.
+- **Asked, no answer yet:** the hearts builder (`session_017WiGzG7mhviEaxroo5GvBv`) for its game-over event, so a held weapon goes back where it was found at a game over (the brief's ask; nothing built; a fall to an enemy already knocks a held weapon loose where you fell). The buttons builder (`session_017WiGzJ23ionY6B1PB5Nmme`) whether Grab should show a "Throw" look with a weapon in hand (its re-skin, 1809a34, dims only Use and Switch: Use stays lit at a weapon because the Use entry answers there; Grab never dims).
+- **A beaten carrier comes back armed:** Step 5's "beaten for good" (322232e) returns a placed bad guy fresh when nobody is in his room (`beaten-return`); `weapon-carriers` hands the fresh body its sword again, while the one knocked out of him may still lie there, so swords can pile up in the camp. `DRAFT:`; the other answer is to hand a carrier his weapon once per world (a world field instead of `c.weaponCarrier`).
+- **Step 22's quarry is a stage that starts over** (d6acfdb): when spears and bombs go there (push 5), a function in `src/sim/weapons.ts` that puts a list of rooms' weapons back as they began is owed to its lead (`session_017WiGzFrf7N7ZgaqUyjs4Sz`); not written.

@@ -1,0 +1,73 @@
+{
+  "//": "DRAFT (Step 23): one more weapon is one file. The spear (content/weapons/spear.json) was added with no line of code naming it: in the weapon test room the grappler walks to it at column 12, picks it up, and swings at a dummy standing 29 px in front of it (past the grappler's own 14 and the sword's 24 of reach, inside the spear's 32): the dummy is hit. Control (-control): the same walk and swing without the Use: bare-handed it does not reach.",
+  "id": "step23-one-file",
+  "gate": null,
+  "proves": "a weapon added as one data file and no code is picked up and swung like the others: the spear's reach hits a dummy the sword cannot",
+  "room": "test-weapons",
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "entities": [
+    {
+      "id": "dummy-1",
+      "character": "dummy",
+      "tile": [
+        14,
+        6
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 107,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 120,
+      "to": 122,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 140,
+      "to": 142,
+      "hold": [
+        "attack"
+      ]
+    }
+  ],
+  "ticks": 220,
+  "expect": [
+    {
+      "fact": "weapon",
+      "player": "a",
+      "at": 125,
+      "is": "spear"
+    },
+    {
+      "fact": "event",
+      "event": "hit",
+      "player": "a",
+      "where": {
+        "target": "dummy-1"
+      },
+      "between": [
+        140,
+        160
+      ],
+      "count": [
+        1,
+        1
+      ]
+    }
+  ]
+}

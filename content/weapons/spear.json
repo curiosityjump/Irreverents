@@ -1,0 +1,45 @@
+{
+  "//": "DRAFT (Step 23): the third weapon, written last and with no code (the measure of 'one more weapon is one file'). The longest reach (+18), a little harder (x1.2), the holder's own wind-up; thrown fast (420 px/s) so it flies flatter and further than the sword. It lies in the weapon test room only until its quarry spot is agreed with Step 22 (push 5). Every number is a first guess (decisions-log 'Step 23').",
+  "id": "spear",
+  "name": "Spear",
+  "looks": {
+    "ground": "weapon-spear-ground",
+    "held": "weapon-spear-held",
+    "swing": "weapon-spear-swing",
+    "impact": "weapon-spear-impact",
+    "broken": "weapon-spear-broken"
+  },
+  "grip": [
+    10,
+    16
+  ],
+  "box": [
+    20,
+    6
+  ],
+  "hit": {
+    "add": {
+      "attackReach": 18
+    },
+    "times": {
+      "attackStrength": 1.2
+    }
+  },
+  "use": "swing",
+  "thrown": {
+    "speed": 420,
+    "strength": 16000,
+    "wear": 24
+  },
+  "sources": [
+    {
+      "id": "test-weapons-spear",
+      "room": "test-weapons",
+      "tile": [
+        12,
+        6
+      ],
+      "restock": 30
+    }
+  ]
+}

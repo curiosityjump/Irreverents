@@ -18,8 +18,9 @@ import { drawLook, drawNine, look } from './looks.ts';
 // DRAFT: every size, place and strength below; whether the plate should
 // show a friend's slots too.
 
-export type HudSlot = 'power' | 'cargo' | 'condition';
-export const HUD_SLOTS: readonly HudSlot[] = ['power', 'cargo', 'condition'];
+// Step 23: 'weapon', the one weapon in the viewer's hand (src/client/draw/weapons.ts fills it).
+export type HudSlot = 'power' | 'weapon' | 'cargo' | 'condition';
+export const HUD_SLOTS: readonly HudSlot[] = ['power', 'weapon', 'cargo', 'condition'];
 
 /** What a slot shows for this viewer now: a look id, or undefined for empty. */
 export type SlotFiller = (world: World, content: Content, me: Entity) => string | undefined;

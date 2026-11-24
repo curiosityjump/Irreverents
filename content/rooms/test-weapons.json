@@ -1,0 +1,31 @@
+{
+  "//": "DRAFT (Step 23): a flat test room for the weapon scenarios (step23-*): a floor, a cracked wall at column 20 (breakable at world.wallBreakSpeed), and weapon sources named in content/weapons/ (the hammer at column 6, the sword at column 8). Not part of the game's map.",
+  "id": "test-weapons",
+  "name": "Weapon Test Room",
+  "tile": 16,
+  "legend": {
+    "#": "solid",
+    ".": "empty",
+    "1": "spawn",
+    "2": "spawn",
+    "w": {
+      "part": "test-cracked-wall"
+    }
+  },
+  "rows": [
+    "##############################",
+    "#............................#",
+    "#............................#",
+    "#............................#",
+    "#............................#",
+    "#...................w........#",
+    "#.1.2...............w........#",
+    "##############################"
+  ],
+  "parts": [
+    {
+      "id": "test-cracked-wall",
+      "kind": "breakable"
+    }
+  ]
+}

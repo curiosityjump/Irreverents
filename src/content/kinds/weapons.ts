@@ -45,6 +45,13 @@ export interface Weapon {
    * against that body's weight (as a swing does), wearing it by `wear`.
    */
   thrown: { speed: number; strength: number; wear: number };
+  /**
+   * What its swing breaks (systems/weapon-break.ts): a breakable part in
+   * reach in front, whose own breakSpeed (or world.wallBreakSpeed) is at
+   * most this, breaks when the strike starts. 0: it breaks nothing by itself
+   * (what it launches can still break a wall by flying into it).
+   */
+  breaks: number;
   /** Who starts holding one: placed entity ids (content/placements/) or character kinds, bodies nobody plays (systems/weapon-carriers.ts). */
   carriers: string[];
 }
@@ -86,7 +93,7 @@ const kind: ContentKind = {
   parse(raw, read) {
     const o = read.object(raw, '');
     if (!o) return null;
-    read.only(o, ['id', 'name', 'looks', 'grip', 'box', 'hit', 'use', 'sources', 'thrown', 'carriers'], '');
+    read.only(o, ['id', 'name', 'looks', 'grip', 'box', 'hit', 'use', 'sources', 'thrown', 'carriers', 'breaks'], '');
     const looks: Weapon['looks'] = { ground: '', held: '' };
     const lo = read.object(o.looks, 'looks');
     if (lo) {
@@ -127,6 +134,7 @@ const kind: ContentKind = {
       // DRAFT: a weapon that says nothing about its throw flies like the sword.
       thrown: { speed: 320, strength: 12000, wear: 20 },
       carriers: o.carriers === undefined ? [] : read.stringList(o, 'carriers', ''),
+      breaks: o.breaks === undefined ? 0 : read.number(o, 'breaks', '', { min: 0, max: 900 }),
     };
     if (o.thrown !== undefined) {
       const t = read.object(o.thrown, 'thrown');
