@@ -1178,11 +1178,18 @@ document as a decision of theirs.
 - **To change it:** numbers and letters in `content/rooms/outpost.json` (the parts' `breakSpeed`, where they stand), `content/placements/outpost.json` (crates, the cache), `content/heists/camp.json` (what the cache is). The other answer (a machine through walk doors) is real work.
 - **Where:** `docs/mechanisms/outposts.md`, "Step 20: the camp's run"; `docs/plan/step-20.md`, "Builder notes".
 
+### 2026-11-24 · A knocked-out shopkeeper stays down 10 s, long enough to empty her shelf and walk out
+- **Decided by:** Step 5 builder (`session_017WiGzEhbdYJQcUhtD2bSLL`), on the orchestrator's direction (shopkeeper only, guards unchanged)
+- **Instead of asking:** "How long should a knocked-out townsperson stay down?"
+- **Why this way:** D-064, a shopkeeper knocked out before she reports lets you rob the shop. Measured with the slowest hero (the grappler, 84 px/s): knock her out, take all four goods and walk out the west door takes about 3.9 s. Today she was up at 3 s, before you were out. 10 s gives room to spare. Guards stay at 3 s: both scenarios that go red with longer are about guards getting back up.
+- **To change it:** `"knockedOut"` in `content/npcs/shopkeeper.json` (any good kind can have one; left out = world `knockedOutTime`, 3 s).
+- **Where:** `docs/mechanisms/combat-and-impact.md`, "Beaten for good"; scenario `step5-shopkeeper-robbed`. `DRAFT:`
+
 ### 2026-11-24 · Bad guys can be beaten for good: three knock-outs, or one big slam, and they go in a poof
 - **Decided by:** Step 5 builder (brief `owner-knocked-out-flies-off.md`, Part 2), `session_017WiGzEhbdYJQcUhtD2bSLL`, on the orchestrator's decisions in that brief
 - **Instead of asking:** "How many knock-outs before a bad guy stays down? Does a hard throw end him at once? Does he come back?"
 - **Why this way:** your words, "enemies collapse but never die", and doc 08's "…or is defeated". A camp fighter, a lookout, a wave's arrival or the toll keeper knocked out by the players 3 times does not get up. A heavy takes 4, the brute 5. One slam into a wall or another body at 400 px/s ends him at once (impact over numbers, D-020: a grappler's throw does it). He lies a moment, then goes in a poof. Only what a player does counts, so the camp's people flattening each other do not empty the camp. A placed bad guy is back at his place once nobody has been in his room for 90 s. A wave's arrival never comes back. One knock-out before the end he is drawn dazed: no numbers, no bar. 3 is one more than any existing scenario needs (2 stays green, 1 does not).
-- **Not done:** the villain is left as he was (`"beaten": false`). Townspeople and guards staying down much longer is built but set to today's 3 s (`knockedOutTime`), because any longer turns two scenarios red. That is the orchestrator's call, asked.
+- **Not done:** the villain is left as he was (`"beaten": false`). Guards still get up after 3 s: any longer turns two scenarios red. The shopkeeper's longer knock-out is the entry above.
 - **To change it:** `content/tuning.json` world `beatenAfter`, `beatenSlam` (0 = no slam), `beatenLieTime`, `beatenReturnTime`, `knockedOutTime`; per kind `"beaten": { "after", "slam" }` or `false` in `content/npcs/`. To undo it, revert the commit.
 - **Where:** `docs/mechanisms/combat-and-impact.md`, "Beaten for good"; `docs/plan/step-5.md`. `DRAFT:`
 
@@ -1306,3 +1313,9 @@ document as a decision of theirs.
 - **Why this way:** D-081 and Step 9's own threshold, for anyone (a bad guy too, which is how you steal: D-009); no second threshold. The owner: "No inventory. Only one weapon at a time", read by the orchestrator as one weapon per hero, not per party: switch away and the next member's hands are empty; switch back and it is in hand. Grab is the hands button: with a weapon in hand it throws it (stick down: sets it at your feet) and lifts nobody. A thrown sword sends what it meets flying like a swing and lies where it stops. `camp-fighter-2` carries a sword: measured, with `camp-fighter-1` (the first choice) a Step 21 scenario's throw moved by 2 ticks, so the second fighter; with him every other step's scenario stays green (310 of 310 besides my own). Beaten in the camp, the first fall knocks it out of your hand and it lies inside. A loose weapon never fades.
 - **To change it:** `weaponStaysWithHero` 0 in `content/tuning.json` (the weapon follows the player through a switch); `carriers` and `thrown` in `content/weapons/sword.json`; the threshold is Step 9's `powerHardHitSpeed`. Hit to throw instead of Grab is a branch in `src/sim/systems/weapon-throw.ts` and the attack verb.
 - **Where:** `docs/mechanisms/weapons.md`; `docs/plan/step-23.md`, "Builder notes".
+### 2026-11-24 · The phone's buttons are now one family from the approved UI sheet, show a press at once, and grey out when a press would do nothing
+- **Decided by:** builder, brief owner-better-buttons, `session_017WiGzJ23ionY6B1PB5Nmme`
+- **Instead of asking:** "What is wrong with the buttons: the look, the size, the place, or how they answer a press?" (asked; no answer yet)
+- **Why this way:** you asked "Can we get better player buttons? Do we need new assets for those or do we have them already somewhere unused?" They were mostly there, unused: the P07 UI sheet's round buttons (boot, sword, star) and d-pad. Grab and Use keep their hands on the same round plate, since no approved sheet draws a grab or Use glyph; those are on the missing list. Use and Switch go grey when pressing them would do nothing, so a press that does nothing is never a surprise. Sizes and places did not move, because every picture reads at its size.
+- **To change it:** delete `assets/ui/touch/p07/` (today's buttons come back), or re-cut with `tools/art/touch/cut.py` (the arrow-key stick is one word: `keys`); the grey-out rule is `src/client/button-idle.ts`.
+- **Where:** `docs/plan/step-5.md`, "Buttons"; `docs/mechanisms/phone-shell-look.md`.

@@ -11,6 +11,7 @@ import type { Drawn } from './draw/entities.ts';
 import { isTouchDevice, setUpShell } from './shell.ts';
 import { watchTouch } from './touch.ts';
 import { showUsePrompt, usePrompt } from './use-prompt.ts';
+import { idleActions, showIdle } from './button-idle.ts';
 import { createAudio } from './audio/index.ts'; // audio hook (Step 8)
 import { setUpTune, tuneWanted } from './tune.ts';
 import { takeWords } from './draw/fx.ts';
@@ -294,7 +295,9 @@ function play(worldName: string): void {
     const camera = render(g, shown, content, me.room, { me: me.id, frame: frameNo, drawn: seen });
     const result = { camera, drawn: seen };
     lastCamera = camera;
-    showUsePrompt(touchHost, usePrompt(content, shown, me)); // Step 19: the Use button names what a press does here (use-prompt.ts)
+    const usePrompted = usePrompt(content, shown, me);
+    showUsePrompt(touchHost, usePrompted); // Step 19: the Use button names what a press does here (use-prompt.ts)
+    showIdle(touchHost, idleActions(content, shown, me, usePrompted !== null)); // a button that would do nothing is dimmed (button-idle.ts)
     audio.frame(simEvents, net.latest(), me, net.others()); // audio hook (Step 8)
     noteRecruits(content, net.latest().events, frameNo); // Step 13: a rescue anywhere in this world: a banner and the new face
 

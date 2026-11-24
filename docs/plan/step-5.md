@@ -423,7 +423,11 @@ all 91 ok; paint over the view 667×375 2.54% (was 2.79%), 736×414 1.65%,
 pressed half on touchstart and the normal half on release; with
 `assets/ui/touch/p07/` refused (404), every control falls back to today's
 picture (the control run); at the start spot Use is dimmed and nothing
-else is. **Not verified:** on a real iPhone; Switch's dimming with a full
+else is. **Flake seen:** at 2974564 (rebased on d2949ae) `plates-stone`,
+`plates-stone-held`, `plates-pocket` failed in 1 of 3 e2e runs (page B
+stood at x 124, the cellar doorway at 115, and three Use taps never went
+down) with `cantina-row`; the other two runs were all ok, and d2949ae alone
+passed them once. Not loosened; logged for the flakes brief. **Not verified:** on a real iPhone; Switch's dimming with a full
 party (rule mirrors `verbs/switch.ts`, not driven).
 
 
@@ -496,7 +500,10 @@ scenarios: `beatenAfter` 2 green, 1 turns `step12-caller-stopped-no-wave`,
 `step21-camp-thrown-out`, `step7-caller-tries-again` red, so 3. `beatenSlam` 400 green, 320 turns
 the same three red. Townspeople staying down longer: `knockedOutTime` 4 s already turns
 `step18-jump-over-is-a-way-out` and `step4-tier-cap-holds` red (as do 20 s), so it ships at 3 s
-(unchanged) and the list went to the orchestrator. Not measured: whether a guard knocked out for
+(unchanged) and the list went to the orchestrator. The orchestrator: guards stay, shopkeeper only. Per-kind
+`knockedOut`, the shopkeeper 10 s (knock out, empty the shelf, out the west door: 3.9 s with the
+grappler; all scenarios green). `holdReturns` for Step 22, checked by stepping a world only
+(no scenario can call it): held, nobody back at 11400 ticks; `restorePeople` then puts both back. Not measured: whether a guard knocked out for
 longer breaks "stop the caller and no help comes" in play, and whether a long-out shopkeeper leaves
 a room without what he gives (reading `use/thing.ts`: an unattended good can be taken, so a
 knocked-out keeper gives *more*, not less). The phone fact `beaten-gone` (150 ms each way, by
@@ -610,3 +617,43 @@ server accepts it if that regular is near the tap within a lag allowance
 (a field added to `tap`, additively), or the page shifts the tap by that
 body's drawn-vs-newest-snapshot offset. A wider `pick.reach` would hide it
 but also catch taps meant for a neighbour.
+
+**`t-throw-friend` / `s-throw-friend`: two causes, both open.** Only the
+grab-and-throw part (`touchAndThrows`) was run 60 times, three at a time,
+with new failure text (`scripts/lib/e2e-touch.ts`: held before the tap, the
+direction, the floor's end, the bodies in between, where each page last
+drew B). 5 of 60 failed:
+- **3 of 60: the two screens disagree when B is thrown into a heavy crate**
+  (the room's crates lie where earlier facts threw them; the spot chosen
+  had a heavy crate 29 px ahead of B). A's page drew B stop and bounce back
+  (18-22 px, last at x 291); B's own page drew B fly on through the crate to
+  x 41-57 (so `s-throw-friend` passed). Why: once the throw's effect is
+  acknowledged, B's page owns B's motion and its local world holds only B
+  (`docs/mechanisms/network.md`, "Known limits"), so B flies through bodies,
+  and the server takes B's reports; A's prediction (4754ec5) steps the
+  flight against the bodies A draws and bounces it, which is what the
+  simulation would do. So this is not a prediction fault: prediction is the
+  one screen that is physically right. It is the known local-world limit,
+  seen by a friend as "my throw bounced you off the crate, but on your phone
+  you sailed through it". Fix, for whoever widens the local world: put the
+  drawn bodies near a flying own character into its page's step (as
+  `predict.ts` does for lent bodies). The check is left as it is.
+- **2 of 60: the grab never took** ("held before the tap: false"): A stood
+  6 px behind B facing it, tapped Grab, and no page drew B carried within
+  1.5 s; then the Hit tap threw nothing (0-5 px) and `s-after` failed too.
+  Not explained yet; next: log A's and B's drawn boxes and A's facing at
+  the grab, and the server's `grab` events.
+
+**Rates, before and after (this brief's end, 2026-11-24):**
+
+| Fact | Before | After | Verdict |
+|---|---|---|---|
+| `h1`, `h2` | 1 of 10 quiet; 2 of 3 under load | 0 of 20 (two runs at a time) | game, fixed (327d9e9) |
+| `cantina-row` (+ `-swap`, `-switch`) | 3 of 10 | 5 of 25 runs; 19 of 40 taps on a walking regular | game, open (Step 11) |
+| `t-throw-friend`, `s-throw-friend` | 1 of 10 | 5 of 60 throw-part runs (3 crate, 2 grab) | game (known limit), and grab: open |
+| `door-go-in`, `door-use` | 0 of 10 | 2 of 20, only with two runs at once | load; not looked into |
+| `t-grab-friend`, `s-break-free` | 0 of 10 | 0 of 20 | none seen |
+
+The open question (separate worlds or serial parts) was not needed: every
+part already makes its own world (`?room=` per run and per part), and no
+failure traced to two parts sharing one.

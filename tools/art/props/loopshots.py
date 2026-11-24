@@ -272,8 +272,24 @@ def guard():
     return scene
 
 
+def hearts():
+    """the hearts builder's ask: the HUD plate with a face, three hearts under it (two full, one empty), by day and by
+    night; the plate's renderer fits the 9x8 cut into its own box, so this shows the cut, not the final size"""
+    ui, U = looks('ui')
+    scene = ground(90, sky=NIGHT, body=NBODY, lip=NLIP)
+    scene.alpha_composite(ground(180).crop((0, 92, 320, 180)), (0, 92))
+    for top in (6, 96):
+        for i, who in enumerate(('grappler', 'infiltrator', 'flyer')):
+            x = 6 + i * 48
+            scene.alpha_composite(frame(ui, U['hud-plate']), (x, top))
+            scene.alpha_composite(frame(ui, U['hud-face-' + who]), (x + 2, top + 2))
+            for k in range(3):
+                scene.alpha_composite(frame(ui, U['hud-heart-full' if k < 2 - i % 2 else 'hud-heart-empty']), (x + 2 + k * 10, top + 22))
+    return scene
+
+
 SCENES = {'weapons': weapons, 'rides': rides, 'powers': powers, 'treasure': treasure, 'hall': hall, 'asks': asks, 'heist': heist,
-          'cage': cage, 'undercroft': undercroft, 'camp': camp, 'wagon': wagon, 'guard': guard}
+          'cage': cage, 'undercroft': undercroft, 'camp': camp, 'wagon': wagon, 'guard': guard, 'hearts': hearts}
 
 if __name__ == '__main__':
     os.makedirs(OUT, exist_ok=True)

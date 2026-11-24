@@ -54,6 +54,12 @@ export interface NpcKind {
    * Ignored for a `good` person, who is knocked out, never defeated.
    */
   beaten?: { after?: number; slam?: number } | false;
+  /**
+   * Step 5 (D-064: a shopkeeper knocked out before reporting lets you rob the
+   * shop): for a `good` person, seconds he stays down when knocked out. Left
+   * out, world.knockedOutTime. Ignored for a `bad` person.
+   */
+  knockedOut?: number;
 }
 
 export const FIGHTS = ['on-sight', 'when-struck'] as const;
@@ -95,7 +101,7 @@ const kind: ContentKind = {
   parse(raw, read) {
     const o = read.object(raw, '');
     if (!o) return null;
-    read.only(o, ['id', 'role', 'side', 'moods', 'barks', 'fights', 'sight', 'search', 'beaten'], '');
+    read.only(o, ['id', 'role', 'side', 'moods', 'barks', 'fights', 'sight', 'search', 'beaten', 'knockedOut'], '');
     const out: NpcKind = {
       id: read.string(o, 'id', ''),
       role: read.string(o, 'role', ''),
@@ -138,6 +144,10 @@ const kind: ContentKind = {
         }
         out.beaten = rule;
       }
+    }
+    if (o.knockedOut !== undefined) {
+      if (typeof o.knockedOut === 'number' && o.knockedOut >= 0.1 && o.knockedOut <= 600) out.knockedOut = o.knockedOut;
+      else read.fail('knockedOut', `must be seconds from 0.1 to 600, but is ${describe(o.knockedOut)}`);
     }
     if (out.role === HERO_ROLE) read.fail('role', `"${HERO_ROLE}" is the role of the players' characters; a person needs another`);
     if (SIDES.includes(o.side as Side)) out.side = o.side as Side;

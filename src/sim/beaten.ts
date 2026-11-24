@@ -24,6 +24,8 @@ declare module './types.ts' {
     beatenGone?: { id: string; room: string; empty: number };
     /** On the one bodiless `~defeats` record: bad guys defeated, by the player id credited with each. */
     defeats?: Record<string, number>;
+    /** On the `~defeats` record: rooms where beaten-return brings nobody back (Step 22's stage holds its rooms during a run). */
+    holdReturns?: string[];
   }
   interface EventMap {
     /** A bad guy was defeated: he will not get up. `by`: the body that did it; `player`: the player credited (null: none). */
@@ -67,8 +69,7 @@ export function oneMoreDefeats(content: Content, e: Entity): boolean {
 
 /** Credits a defeat to a player. */
 export function creditDefeat(world: World, room: string, player: string): void {
-  let rec = findEntity(world, DEFEATS_ID);
-  rec ??= addEntity(world, { id: DEFEATS_ID, kind: THING_KIND, player: null, room, x: 0, y: 0, vx: 0, vy: 0, facing: 1, onGround: true, c: {} });
+  const rec = defeatsRecord(world, room);
   const d = (rec.c.defeats ??= {});
   d[player] = (d[player] ?? 0) + 1;
 }
@@ -80,6 +81,32 @@ export function creditDefeat(world: World, room: string, player: string): void {
  */
 export function defeatsBy(world: World, player: string): number {
   return findEntity(world, DEFEATS_ID)?.c.defeats?.[player] ?? 0;
+}
+
+function defeatsRecord(world: World, room: string): Entity {
+  return findEntity(world, DEFEATS_ID) ?? addEntity(world, { id: DEFEATS_ID, kind: THING_KIND, player: null, room, x: 0, y: 0, vx: 0, vy: 0, facing: 1, onGround: true, c: {} });
+}
+
+/**
+ * For Step 22's stage: while `on`, nobody defeated in these rooms comes back
+ * by himself (beaten-return skips them); off again, they come back as usual.
+ * restorePeople still puts them back at once. Kept in the world, so it
+ * survives a save.
+ */
+export function holdReturns(world: World, rooms: string[], on: boolean): void {
+  if (rooms.length === 0) return;
+  const rec = defeatsRecord(world, rooms[0]!);
+  const held = new Set(rec.c.holdReturns ?? []);
+  for (const r of rooms) {
+    if (on) held.add(r);
+    else held.delete(r);
+  }
+  rec.c.holdReturns = [...held].sort();
+}
+
+/** Whether returns are held in this room (holdReturns). */
+export function returnsHeld(world: World, room: string): boolean {
+  return findEntity(world, DEFEATS_ID)?.c.holdReturns?.includes(room) ?? false;
 }
 
 /** Every placed bad guy who was defeated and is gone, in id order: [record, placed id, room]. */

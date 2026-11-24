@@ -482,12 +482,20 @@ export async function touchAndThrows(kit: Kit): Promise<void> {
     await standAt(A, ((await me(B)).x as number) - dir * 6, dir);
     await tap(A, 'grab');
     const held2 = await whenCarried(B, keyB, keyA, true, 1500);
+    // Step 5 (flakes): what lay ahead of B at the throw, said when a throw falls short.
+    const f3 = await floor(A);
     const meFlyB = track(B, keyB, 1500);
     const meFlyA = track(A, keyB, 1500);
     await tap(A, 'attack');
     const [bOnB, bOnA] = await Promise.all([meFlyB, meFlyA]);
-    fact('t-throw-friend', held2 !== null && flew(bOnA), `A grabs B again and taps Hit: A's page drew B ${flew(bOnA) ? 'fly' : 'NOT fly'}: ${said(bOnA)}`);
-    fact('s-throw-friend', held2 !== null && flew(bOnB), `B's own page drew its own character ${flew(bOnB) ? 'fly' : 'NOT fly'}: ${said(bOnB)}`);
+    const x0 = bOnA[0]?.x ?? (await me(B)).x;
+    const wall = dir > 0 ? f3.right : f3.left;
+    const ahead = f3.bodies.filter((o) => (dir > 0 ? o.x > x0 && o.x < wall : o.x + o.w < x0 + 20 && o.x + o.w > wall)).map((o) => `${o.kind} at ${n(o.x)}`);
+    const short = held2 === null || !flew(bOnA) || !flew(bOnB)
+      ? ` [held before the tap: ${held2 !== null}; thrown ${dir > 0 ? 'right' : 'left'} from x ${n(x0)} toward the wall at ${n(wall)}; in between: ${ahead.join(', ') || 'nothing'}; B last drawn at x ${n(bOnA[bOnA.length - 1]?.x)} on A's page, ${n(bOnB[bOnB.length - 1]?.x)} on B's]`
+      : '';
+    fact('t-throw-friend', held2 !== null && flew(bOnA), `A grabs B again and taps Hit: A's page drew B ${flew(bOnA) ? 'fly' : 'NOT fly'}: ${said(bOnA)}${short}`);
+    fact('s-throw-friend', held2 !== null && flew(bOnB), `B's own page drew its own character ${flew(bOnB) ? 'fly' : 'NOT fly'}: ${said(bOnB)}${short}`);
 
     // B is its own again afterwards: there is always a way out of a flight.
     await sleep(1500);

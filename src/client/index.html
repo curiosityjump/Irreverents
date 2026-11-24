@@ -58,6 +58,9 @@
   #pad .icon { left: var(--pad-icon-x, 0); top: var(--pad-icon-y, 0); }
   .art > .icon { display: block; }
   .on > .icon { background-position: 100% 0; opacity: 1; }
+  /* DRAFT (brief owner-better-buttons): a button a press would do nothing with right now is dimmed (src/client/button-idle.ts); it still takes the press, and lights when pressed. */
+  #actions button.idle:not(.on) > .icon { opacity: .4; filter: grayscale(.7); }
+  #actions button.idle:not(.on):not(.art) { opacity: .5; }
   /* DRAFT: in an enter doorway the Use button goes through it (touch.ts, showGoIn): its picture gives way to a small arched door with an up arrow and the words "Go in". Same button, same place. */
   #actions button .go { display: none; }
   #actions button.go-in { color: transparent; text-shadow: none; }
