@@ -285,3 +285,8 @@ worse for it.
   667x375 shots were taken, not studied.
 - Which fill or tuft lands where differs between the preview and the game (different hash salts).
 - The cellar's back wall and the castle's windows were not compared against the bar at 4x.
+
+## Step 15 forest sheet
+
+`forest.py` (`python3 -I tools/art/tiles/forest.py`, same bytes every run) writes `assets/tiles/forest.png` (128x256) in quarry.png's layout: the 4x4 block, fills and deep from P10 TRN-01's cobbles (the native prefab `ground_wide.png`, each 10x8 cobble resampled to 8x8, four to a seamless cell) under its grass cap, and the four one-way cells from TRN-10's long mushroom cap (measured ~2.6 source px per art pixel), all mapped to the master palette.
+Kept from quarry.png: inner corners, tops, unders, the marks on the last three fills, and rows 8-15 (unused by the forest atlases); the TRN-10 crop is read from outside the repo (`FOREST_TRN10`), and without it quarry's one-way cells stay.

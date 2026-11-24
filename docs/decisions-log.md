@@ -461,7 +461,7 @@ document as a decision of theirs.
 ### 2026-11-24 · The forest uses stand-in pictures: the quarry's grassy ground and a still forest view behind
 - **Decided by:** Step 15 builder, `session_017WiGzJeF58oqWdt3WEH722`
 - **Instead of asking:** "Which pictures should the forest use before forest tiles exist?"
-- **Why this way:** the brief allowed no new art tonight. The forest-tile rows you chose (TRN-01 grass and dirt, TRN-10 mushroom hollows) are not in the copy of the library here, only their index, so they cannot be cut yet. The ground borrows the quarry's grass-capped earth. Behind it is the start view of your forest-and-waterfall panorama (BKG-01), held still on the screen and never repeated sideways (its edges don't join), with the courtyard's tree crowns along the top and its bushes along the bottom.
+- **Why this way:** the brief allowed no new art tonight. The ground first borrowed the quarry's grass-capped earth; since push 2b it is cut from your TRN-01 grass and dirt, and the ledges you jump up are TRN-10's red mushroom caps. Behind it is the start view of your forest-and-waterfall panorama (BKG-01), held still on the screen and never repeated sideways (its edges don't join), with the courtyard's tree crowns along the top and its bushes along the bottom.
 - **To change it:** one line in `content/atlases/forest-*.json` (the tile sheet) and `content/backdrops/forest-*.json` (the back). The full 1024-wide panorama has been asked for.
 - **Where:** those files. `DRAFT:`
 

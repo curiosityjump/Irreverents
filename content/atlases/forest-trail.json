@@ -1,7 +1,7 @@
 {
-  "//": "DRAFT: stand-in drawn by tools/art/tiles/make.py (Step 15 reuses it). The quarry's sheet (cut from P03's cobbled earth under a lime grass cap) until a forest sheet from P10's TRN-01 and TRN-10 rows exists: those plates are not in the mirror (the design library holds only their tag-index), so a tiles/forest.png waits on a design-library sync (docs/mechanisms/design-library-sync.md). Edit 'image' here when it lands.",
+  "//": "DRAFT: stand-in drawn by tools/art/tiles/forest.py (Step 15), cut from the owner's approved P10 rows: TRN-01 grass/dirt (the native-density prefab ground_wide.png: its cobbles, resampled 10x8 to 8x8 so four make a seamless earth cell, for the 4x4 block, fills and deep; its grass cap for the lip) and TRN-10 mushroom ledges (the first long cap, downsampled at the measured ~2.6 source px per art pixel, for the four one-way cells). Kept from tiles/quarry.png, same layout so these cells stay valid: the inner corners, the tops (P03 bushes and rubble), the unders, the marks on the last three fills, and rows 8-15 (the quarry's regions, unused here).",
   "id": "forest-trail",
-  "image": "tiles/quarry.png",
+  "image": "tiles/forest.png",
   "tile": 16,
   "cells": {
     "solid": [

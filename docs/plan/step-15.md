@@ -269,6 +269,49 @@ Flags:
 - "One by a throw or a stack": the one proven is a friend on the plate
   (`step15-hatch-friend`); a throw onto the canopy is not scripted.
 
+**Push 2b (the forest's own tiles).** `assets/tiles/forest.png` drawn by
+`tools/art/tiles/forest.py` (deterministic; same 128x256 layout as
+`quarry.png`, so the atlases' cells are unchanged): grass cap and cobbled
+earth cut from P10 TRN-01 (the prefab conversion's `ground_wide.png`), the
+one-way ledges are TRN-10's long mushroom cap. Kept from `quarry.png`: inner
+corners, tops, unders, the cave/cut-stone regions. TRN-10's crop is in the
+repository but skip-worktree in a blob-limited clone: `forest.py` reads it
+with `git show`. Measured density about 2.6 source px per art pixel, not
+5.6. Shots: `docs/plan/step-15-shots/`.
+
+### Handoff (builder `session_017WiGzJeF58oqWdt3WEH722`, stopped at its budget)
+
+Live: push 1 (518e220), push 2 (841d4a8), and the forest tile sheet (this
+commit). **Not built: push 3 and push 4.** What the next builder needs:
+- **The walker:** `tools/scenario-bots/` (README there) records a scenario's
+  inputs from waypoints in half a second; every `step15-*` was made with it.
+  `scripts/stage-bot.ts` is untouched (no stage argument yet).
+- **Push 3 plan, measured layout:** the upper trail (row 9 floor) has free
+  floor at columns 86-93 (between the hollow's way-out patch 88-89 and the
+  shaft 94-98: 90-93 solid floor) for the guarded spot: a lookout facing west
+  at about column 91 with its horn at 92, `entries` on both sides (row 8:
+  e.g. 44, 62, 80 west; 93 east; the deep level row 18 is another side).
+  The thrower (`ranged-fighter`) on the root mound's top (tile [31, 6]) is a
+  high spot in view of the trail. The spear's `sources` gets one forest entry
+  (`content/weapons/spear.json`, e.g. trail start floor [6, 18]).
+  `step15-cleared`: the stage end is the deep pocket box (15-24, 15-18):
+  the crossing scenarios already reach [20, 19], so a stage-cleared fact on
+  them is close to free. Star times (`good` 120, `best` 80) are guesses: the
+  scripted crossings reach the end at 31.9 s (infiltrator), 43.5 s (flyer),
+  46.1 s (grappler) from the courtyard, walking only, no enemies.
+- **Push 4:** `scripts/e2e/forest.ts` not written. Shots wanted (brief,
+  10:10): sideways 844x390 and 750x340, and upright, of the road, the trail
+  and each of the three things; three are in `docs/plan/step-15-shots/`.
+  `docs/architecture.md` "I need to add… a region" row and the Step 10 beat
+  line in `docs/for-the-orchestrator.md` not written.
+- `npm run e2e` was run at push 1 (ok, 126); not since (pushes 2 and 2b are
+  content and art only).
+
+Taste for the owner (not graded): whether the climb of mushroom boughs at
+the start is fun or a chore; whether the visible deep pocket behind the
+cracked wall pulls you in; whether the grey boulder says "come back with
+something"; whether the trail is too long for a walker (about 45 s).
+
 ## Released to a lead, 2026-11-24 08:40 UTC (orchestrator `session_017WiGzHhT2apmWHT61rQ65G`)
 
 Why now: `docs/vision-gaps.md` (refreshed at 9dbd705) ranks row 2 first: "one level is not a world: a second region". The eight core loops of the owner's ~18:30 verdict are all built and live, and the last two full re-runs with nothing red were at 6400b44 and f434f2e. So the heading above ("nothing here is briefed") no longer holds the step back.
