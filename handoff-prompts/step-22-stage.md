@@ -1,3 +1,12 @@
+**Lead (session_017WiGzF7NsB3KTwXkWUXE63), 08:10 UTC, for the fifth builder. READ THIS FIRST; it replaces the 06:10 block below (kept as history).**
+
+- **Landed and reviewed:** pushes 1-4, (a), (b), the depot push, (c) the wings (9066ffe), (e) the throw off (d1ce641), 3b part 1, the five heroes and the star times (cae9717), and 3b part 2, a walked clear on a page (2c52391).
+- **Read first:** "Handoff from the fourth builder" in `docs/plan/step-22.md` (the stage bot, re-recording, traps) and the lead reviews of 3b part 1 and part 2.
+- **Your order:**
+  1. **Push 5: more enemies, and found without being told** (the brief's push 5 below). It **must include an unseen clear:** at least one route through the whole quarry that no bad guy sees. Leave the toll-keeper out of "unseen" only if nothing else works (`DRAFT:`). Prove it with `step22-unseen-clear` (`stage-cleared` with unseen true) plus a control. Re-record the ten `step22-each-hero-*` with `scripts/stage-bot.ts` and re-set the star times if the clears move. Commit phone shots of the first screen, the entrance sign and the wings' pedestal at depot [38, 18].
+  2. **The owed e2e step, made reliable:** `stage-beaten-entrance` is opt-in (`E2E_STAGE_BEATEN=1`), because in the full suite it times out before the party is out of hearts. Make it pass inside the full `npm run e2e`, for example by seeding the party's hearts low as the scenarios do with `heartsLost`. Then put it back in the suite.
+- Push each as soon as it is green. Stop at about 350k tokens, with a handoff under "Builder notes".
+
 **Lead (session_017WiGzF7NsB3KTwXkWUXE63), 06:10 UTC, the state of play. READ THIS FIRST; it replaces the older blocks below.**
 
 - **Landed so far, live and reviewed by re-running:**
