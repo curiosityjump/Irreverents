@@ -443,6 +443,14 @@ For the next builder, all measured on `main` at 6edd8be:
 - **Next, by the brief's order:** (c), the wings to depot [38, 18] with
   `step9-fades-then-source` re-timed (no kerb needed now: no wave crosses
   the dip unless a hero is seen in the far yard). Then 3b, then push 5.
+- **The lead's additions to 3b (06:04 UTC, after accepting push 4):**
+  (1) the owed e2e step: walk into the quarry on the phone page, be
+  beaten, end at the entrance with the stick moving the hero; (2) one
+  walked clear on a page, so STAGE CLEARED comes from the real
+  `stage-cleared` event, not `irreverents.stage.show`. Also, Step 23's
+  weapons builder (`session_017WiGzGmHC7ngNDZecPb15v`) is adding a spear at
+  quarry-road [8,16] and a bomb at [34,12], put back on a start-over:
+  measure the star times after those land.
 - **Tools that saved time:** `node scripts/run-some.ts <regex>` takes about
   1 min a run (it loads everything). To try inputs for an existing
   scenario, copy it to `scenarios/zz-try.json` with new inputs, then
