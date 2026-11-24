@@ -35,6 +35,7 @@ import { drawnHearts } from './draw/hearts.ts';
 import { drawnParts, setHeardRooms } from './draw/room-parts.ts';
 import { drawnPowers, foundSourceIcons } from './draw/powers.ts';
 import { drawnWeapons } from './draw/weapons.ts';
+import { drawnRanged } from './draw/ranged.ts';
 import { drawnBeaten, watchBeatenEvents } from './draw/beaten.ts';
 import { levelProgress } from '../sim/levels.ts';
 import { stageBest } from '../sim/stage.ts';
@@ -156,6 +157,8 @@ const debug = {
     powers: { carriers: [], orbs: [], holders: [], sources: [] } as ReturnType<typeof drawnPowers>,
     /** Step 23: the loose weapons (and which glows) and the weapons in hand this frame (src/client/draw/weapons.ts). */
     weapons: { loose: [], held: [] } as ReturnType<typeof drawnWeapons>,
+    /** Step 24: each aiming thrower this frame drew an arc for, and where it ends (src/client/draw/ranged.ts). */
+    ranged: { aims: [] } as ReturnType<typeof drawnRanged>,
     /** Step 5: defeated bad guys' poofs this frame, every one this page was told went, and who is drawn dazed (src/client/draw/beaten.ts). */
     beaten: { poofs: [], gone: [], dazed: [] } as ReturnType<typeof drawnBeaten>,
     banner: null as ReturnType<typeof drawnBanner>,
@@ -408,6 +411,7 @@ function play(worldName: string): void {
     d.hud = drawnHud();
     d.powers = drawnPowers();
     d.weapons = drawnWeapons();
+    d.ranged = drawnRanged();
     d.beaten = drawnBeaten();
     d.banner = drawnBanner();
     d.alert = drawnAlert();

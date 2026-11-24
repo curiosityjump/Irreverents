@@ -18,6 +18,7 @@ import { drawCompletion, drawCompletionRow } from './draw/completion.ts';
 import { drawNpcs } from './draw/npcs.ts';
 import { drawPowers } from './draw/powers.ts';
 import { drawWeapons } from './draw/weapons.ts';
+import { drawRanged } from './draw/ranged.ts';
 import { drawBeaten } from './draw/beaten.ts';
 import { drawSignalers } from './draw/outpost.ts';
 import { backdropOf, decorOf, drawDoors, drawRoom, roomOrigin } from './draw/room.ts';
@@ -97,6 +98,7 @@ export function render(g: CanvasRenderingContext2D, world: World, content: Conte
   drawAway(g, world, content, roomId, ox, oy, pv);
   drawPowers(g, world, content, roomId, ox, oy, pv); // Step 9: carriers' orbs, loose orbs, holders' glow
   drawWeapons(g, world, content, roomId, ox, oy, pv); // Step 23: loose weapons, the one Use would take glowing, weapons in hand
+  drawRanged(g, world, content, roomId, ox, oy); // Step 24: an aiming thrower's arc and where it lands (INTENT: draw/ranged.ts)
   drawBeaten(g, world, content, roomId, ox, oy, pv); // Step 5: a defeated bad guy's poof, the daze one knock-out before (draw/beaten.ts)
   // Round 2: backdrop layers marked `front` (foreground foliage along the bottom or top edge).
   if (backdrop) drawFrontLayers(g, backdrop, room, -ox, -oy, W, H);

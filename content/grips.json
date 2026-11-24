@@ -12,6 +12,7 @@
     "outpost-fighter": [12, 16],
     "shopkeeper": [10, 14],
     "heavy-fighter": [17, 16],
-    "brute": [22, 18]
+    "brute": [22, 18],
+    "ranged-fighter": [10, 3]
   }
 }
