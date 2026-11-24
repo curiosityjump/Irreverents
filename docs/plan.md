@@ -417,7 +417,7 @@ Full text: `docs/plan/step-21.md`
 
 ## Step 22 — One stage to clear: an outpost you get through without dying, and a victory screen
 
-**Status: open, claimed by session_017WiGzF7NsB3KTwXkWUXE63 (successor lead), 2026-11-24 (builder: session_017WiGzGTsScxtYSPbqs97N3, `handoff-prompts/step-22-stage.md`; live: lose by hearts, start over, end, stars, STAGE CLEARED, five heroes clear; push 5 left).** (Opened 2026-11-24 00:40 UTC by orchestrator session_017WiGzJzo6aZqH4kYxxJsiV from the owner's words of ~00:30 UTC; a lead's step: many slices and judgement by looking at a phone.)
+**Status: open, claimed by session_017WiGzF7NsB3KTwXkWUXE63 (successor lead), 2026-11-24 (builder: (sixth, see step-22.md Briefs), `handoff-prompts/step-22-stage.md`; live: lose by hearts, start over, end, stars, STAGE CLEARED, five heroes clear; push 5 left).** (Opened 2026-11-24 00:40 UTC by orchestrator session_017WiGzJzo6aZqH4kYxxJsiV from the owner's words of ~00:30 UTC; a lead's step: many slices and judgement by looking at a phone.)
 
 Full text: `docs/plan/step-22.md`
 
