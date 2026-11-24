@@ -67,7 +67,18 @@ const system: System = {
         const tx = e.vx > 0 ? Math.floor((x + box.w - EPS) / T) : Math.floor(x / T);
         const top = Math.floor(e.y / T);
         const bottom = Math.floor((e.y + box.h - EPS) / T);
-        if (!part.tiles.some((t) => t.tx === tx && t.ty >= top && t.ty <= bottom)) continue;
+        // INTENT (Step 20, the machine check that failed 1 run in 4): a body
+        // its own page moves (a player, a driven wagon) is not stepped on the
+        // server between reports, and a fast one's reports land 2-3 ticks
+        // apart, so it can arrive already inside the wall's tiles, or skip the
+        // one tick it was "about to" enter them. Physics never leaves a body
+        // inside a solid tile, so a body found overlapping one at speed got
+        // there by a report: it arrived at speed, and the wall breaks as if
+        // it had been caught a tick earlier. Server-stepped bodies are untouched.
+        const c0 = Math.floor(e.x / T);
+        const c1 = Math.floor((e.x + box.w - EPS) / T);
+        const into = (t: { tx: number; ty: number }): boolean => t.ty >= top && t.ty <= bottom && (t.tx === tx || (t.tx >= c0 && t.tx <= c1));
+        if (!part.tiles.some(into)) continue;
         breakPart(ctx, room, part, e, Math.abs(e.vx));
         break;
       }

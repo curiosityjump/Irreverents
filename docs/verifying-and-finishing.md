@@ -139,6 +139,12 @@ real escape it would have caught.
 **If you changed something a static check covers and didn't run it, you
 haven't checked your work.**
 
+To run part of it, many times (a rate needs many runs of one thing, not of the
+whole gate): `node scripts/run-some.ts <regex>` runs the matching scenarios
+once; `node scripts/lib/run-check.ts <regex> [times]` runs the matching
+scripted checks (`scripts/checks/`) `times` times and prints a tally ("failed
+2 of 20"). Neither changes what `npm run check` runs.
+
 ### 3. It behaves — drive the real thing
 
 Exercise the change through the same interface a user does: the HTTP API with

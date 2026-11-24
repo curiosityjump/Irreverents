@@ -280,3 +280,32 @@ the entry step (decisions-log "Step 20: the wagon in the camp stands empty";
   covers part of the sideways view.
 - Not verified: two phones on screen at once in the camp (the check covers
   two connections, not two drawn pages).
+
+### The check that fails some runs (brief `handoff-prompts/step-20-machine-check-fails.md`)
+
+Builder `session_017WiGzJ2rqEpKFJmGDriwjQ`, 2026-11-24. **Rate before: 5 of
+20** runs of `step20-machine` alone, quiet machine, `origin/main` at e8af461
+(`node scripts/lib/run-check.ts '^step20-machine$' 20`, new: runs scripted
+checks alone, `times` over; `docs/verifying-and-finishing.md`, rung 2). Every
+failure had both problems: the barrier never heard broken, and 7-12 effects
+to a.
+
+**Cause: the game.** A scratch copy of the check, tracing the server's copy
+of a every tick near the barrier (column 60, x 960-976): the server does not
+step a page-moved body between reports, and the driven wagon's reports land
+2-3 ticks apart (15-23 px at 440-480 px/s). `room-breakable` broke a wall only
+when a body was *one tick* (vx·DT, ~7.7 px) from entering its column. Passing
+runs had a report at 979.5 or 971.8 (inside the window); failing runs had
+987.2 then 963.9: the window skipped, the server's barrier still standing, the
+wagon past it. The effects were the wagon then ramming the standing wagon and
+its driver at ~860 (`machine-ram`, `push`): a consequence of the missed
+burst, not hearts and not a second fault. A friend driving on a phone would
+see the barrier stand while their wagon went through it (and then be shoved).
+
+**Fix** (`src/sim/systems/room-breakable.ts`, `INTENT:`): a body at
+`breakSpeed` or faster found already overlapping the part's tiles breaks it
+too. Physics never leaves a body inside a solid tile, so only a report (or a
+teleport) puts one there; server-stepped bodies behave as before. **After: 0
+of 20.** Control: the old file, the same check: failed again (1 of 12 in that
+sample). `npm run check` green; `npm run e2e` (its machine facts) at the push.
+The check itself was right and is unchanged.

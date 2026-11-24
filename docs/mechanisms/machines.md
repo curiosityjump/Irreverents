@@ -101,7 +101,11 @@ second slam rule. Nothing of that slice is built.
   carried body, a body lying flattened, or one already in a held beat.
 - **A barrier needs no new rule.** A `breakable` part opens to any body
   arriving at its `breakSpeed` (`room-breakable.ts`), and the body carries on
-  with its speed; the ram system only counts the burst as a crash.
+  with its speed; the ram system only counts the burst as a crash. A driven
+  wagon is its page's, so on the server it moves only by reports, 2-3 ticks
+  apart at speed: the wall also breaks for a body at speed already inside
+  its tiles (2026-11-24; before, the server missed the burst about 1 drive
+  in 4 and the wagon went through a wall that stayed standing).
 - **A wreck is for good** (`INTENT:` nothing resets): `wrecked` is never
   cleared.
 - **Wear is never shown as a number** (D-020; `t-no-numbers`): the look will
