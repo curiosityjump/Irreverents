@@ -1,0 +1,169 @@
+{
+  "id": "step23-bomb-bursts",
+  "gate": null,
+  "proves": "Hit throws a bomb; it bursts on the body it meets, and the bodies near it fly, the thrower too",
+  "room": "test-weapons",
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    }
+  ],
+  "entities": [
+    {
+      "id": "dummy-1",
+      "character": "dummy",
+      "tile": [
+        17,
+        6
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 138,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 130,
+      "to": 132,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 160,
+      "to": 162,
+      "hold": [
+        "attack"
+      ]
+    }
+  ],
+  "ticks": 260,
+  "expect": [
+    {
+      "fact": "weapon",
+      "player": "a",
+      "at": 140,
+      "is": "bomb"
+    },
+    {
+      "fact": "event",
+      "event": "attacked",
+      "player": "a",
+      "between": [
+        150,
+        200
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "weapon-dropped",
+      "player": "a",
+      "where": {
+        "weapon": "bomb",
+        "how": "thrown"
+      },
+      "between": [
+        160,
+        162
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "weapon",
+      "player": "a",
+      "at": 162,
+      "is": null
+    },
+    {
+      "fact": "event",
+      "event": "weapon-burst",
+      "where": {
+        "weapon": "bomb",
+        "by": "p:a"
+      },
+      "between": [
+        162,
+        170
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "hit",
+      "where": {
+        "by": "p:a",
+        "target": "dummy-1"
+      },
+      "between": [
+        162,
+        170
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "hit",
+      "where": {
+        "by": "p:a",
+        "target": "p:a"
+      },
+      "between": [
+        162,
+        170
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "position",
+      "entity": "dummy-1",
+      "at": 200,
+      "x": [
+        400,
+        480
+      ]
+    },
+    {
+      "fact": "position",
+      "player": "a",
+      "at": 200,
+      "x": [
+        0,
+        120
+      ]
+    },
+    {
+      "fact": "weapon",
+      "at": 200,
+      "loose": [
+        0,
+        0
+      ],
+      "room": "test-weapons",
+      "weapon": "bomb"
+    }
+  ],
+  "//": "DRAFT (Step 23 push 4): the bomb. In the weapon test room the grappler walks to the bomb's source (column 14) and Use takes it, then Hit throws it east (no swing starts: no 'attacked'). It meets the dummy at column 17 and bursts there: the dummy flies east (out through the cracked wall at column 20, by its own flight) and the grappler, inside the radius, flies west: the thrower is not spared. Control (-control): the dummy stands behind the grappler (column 4): the bomb lands, bursts after its fuse with nobody in reach, and nobody moves. Watched to fail with weapon-burst doing nothing."
+}

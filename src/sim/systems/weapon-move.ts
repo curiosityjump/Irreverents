@@ -13,7 +13,9 @@ import { looseBox, weaponWorld } from '../weapons.ts';
  * body it meets by its weapon's `thrown` numbers against that body's weight,
  * as a swing does (verbs/attack.ts: launch, markImpact, wear, a `hit` by the
  * thrower), sparing a friend by friendAttackLaunch and friendAttackWear, then
- * drops; it stops flying when it lands. It is no body itself: what it meets
+ * drops; it stops flying when it lands. A lit one (a bomb) bursts on the
+ * first body it meets instead (systems/weapon-burst.ts); one that has burst
+ * (`ending`) does not move. It is no body itself: what it meets
  * is a body; nothing meets it.
  * The server's world and a scenario's only (weaponWorld).
  * Runs after the impacts (510, 520) and before power-drop (542) and
@@ -30,7 +32,7 @@ const system: System = {
     const t = content.tuning.world;
     for (const e of world.entities) {
       const l = e.c.loose;
-      if (!l) continue;
+      if (!l || l.ending) continue;
       const b = looseBox(content, e);
       moveLoose(ctx, e, b.w, b.h);
       const fly = l.flying;
@@ -47,6 +49,11 @@ const system: System = {
         const ob = content.characters[o.kind]?.box;
         if (!ob || !overlaps(e.x, e.y, b.w, b.h, o.x, o.y, ob.w, ob.h)) continue;
         fly.met.push(o.id);
+        // A lit weapon (a bomb) bursts on what it meets instead of striking it (systems/weapon-burst.ts, next).
+        if (l.lit) {
+          l.lit.now = true;
+          break;
+        }
         const dir = e.vx < 0 ? -1 : 1;
         const friend = thrower !== undefined && thrower.player !== null && o.player !== null;
         o.c.lastHit = { tick: world.tick, by: fly.by };

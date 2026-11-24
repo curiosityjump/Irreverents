@@ -73,9 +73,10 @@
     "powerRetakeTime": 0.6,
     "powerHardHitSpeed": 180,
     "powerLostInCantina": 0,
-    "//": "DRAFT (Step 23, weapons; decisions-log \"Step 23\"): weaponPickupReach, how far past its box a hero still touches a loose weapon to pick it up with Use. weaponStaysWithHero (the owner, 2026-11-24: one weapon per hero, not per party): 1, a weapon stays with the party member who picked it up through a switch; 0, it follows the player.",
+    "//": "DRAFT (Step 23, weapons; decisions-log \"Step 23\"): weaponPickupReach, how far past its box a hero still touches a loose weapon to pick it up with Use. weaponStaysWithHero (the owner, 2026-11-24: one weapon per hero, not per party): 1, a weapon stays with the party member who picked it up through a switch; 0, it follows the player. weaponBurstShow (push 4): seconds a burst bomb shows its burst look where it burst before it is gone.",
     "weaponPickupReach": 6,
-    "weaponStaysWithHero": 1
+    "weaponStaysWithHero": 1,
+    "weaponBurstShow": 0.4
   },
   "characters": {
     "shopkeeper": {

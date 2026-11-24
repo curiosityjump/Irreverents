@@ -1,15 +1,12 @@
 import { canAct, inputOf } from '../body-state.ts';
-import { emitEffect } from '../effects.ts';
 import type { System } from '../types.ts';
-import { makeLoose, weaponOf, weaponWorld } from '../weapons.ts';
+import { throwWeapon, weaponOf, weaponWorld } from '../weapons.ts';
 
 /**
  * Grab throws the weapon in hand (Step 23; docs/mechanisms/weapons.md): a
- * fresh press of `grab` by a body holding a weapon. The stick held down sets
- * it at the feet; otherwise it leaves the hand at the weapon's
- * `thrown.speed`, aimed by the stick as a carried body is thrown
- * (`throwCarried`, src/sim/body-state.ts): forward in a flat arc lifted by
- * world.throwLift, or up. In flight it launches the first body it meets
+ * fresh press of `grab` by a body holding a weapon (`throwWeapon`,
+ * src/sim/weapons.ts: the stick held down sets it at the feet; a bomb is
+ * lit). In flight it launches the first body it meets
  * (systems/weapon-move.ts) and then lies where it stops. A body holding a
  * weapon grabs nothing (the guard line in src/sim/verbs/grab.ts), so the
  * press is the throw's alone.
@@ -33,26 +30,8 @@ const system: System = {
       state.held = down;
       if (!fresh || !canAct(e)) continue;
       const w = weaponOf(content, e);
-      const box = content.characters[e.kind]?.box;
-      if (!w || !box) continue;
-      const src = e.c.weapon?.src;
-      emitEffect(ctx, e, { kind: 'weapon', weapon: null });
-      const mid = e.x + box.w / 2;
-      if (input.y > 0.5) {
-        const loose = makeLoose(ctx, w, e.room, mid, e.y + box.h, { from: e.id, ...(src ? { src } : {}) });
-        ctx.emit('weapon-dropped', { entity: e.id, player: e.player, weapon: w.id, loose: loose.id, how: 'set-down' });
-        continue;
-      }
-      const dir = input.x > 0 ? 1 : input.x < 0 ? -1 : e.facing;
-      const speed = w.thrown.speed;
-      const up = input.y < -0.5;
-      const vx = dir * speed * (up ? 0.2 : 1);
-      const vy = -speed * (up ? 1 : (content.tuning.world.throwLift ?? 0.4));
-      // From in front of the hand at chest height, as a forward throw of a body leaves (throwCarried).
-      const x = up ? mid : dir > 0 ? e.x + box.w + w.box[0] / 2 : e.x - w.box[0] / 2;
-      const feet = e.y + box.h / 2 + w.box[1] / 2;
-      const loose = makeLoose(ctx, w, e.room, x, feet, { from: e.id, vx, vy, flying: { by: e.id, met: [e.id] }, ...(src ? { src } : {}) });
-      ctx.emit('weapon-dropped', { entity: e.id, player: e.player, weapon: w.id, loose: loose.id, how: 'thrown' });
+      if (!w || !content.characters[e.kind]?.box) continue;
+      throwWeapon(ctx, e, w, input);
     }
   },
 };

@@ -25,7 +25,7 @@ const entry: UseEntry = {
     let bestGap = Infinity;
     for (const o of world.entities) {
       const l = o.c.loose;
-      if (!l || o.room !== e.room || world.tick < l.until || !content.weapons?.[l.weapon]) continue;
+      if (!l || l.lit || l.ending || o.room !== e.room || world.tick < l.until || !content.weapons?.[l.weapon]) continue;
       const b = looseBox(content, o);
       if (!overlaps(e.x, e.y, box.w, box.h, o.x - reach, o.y - reach, b.w + 2 * reach, b.h + 2 * reach)) continue;
       // Entities are in id order, so between two equally near weapons the lower id wins on every device.

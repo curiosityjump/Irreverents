@@ -31,8 +31,8 @@ fillHudSlot('weapon', (_world, content, me) => {
 
 /** What the page drew for weapons this frame, for the checks (window.irreverents.drawn.weapons). */
 export interface DrawnWeapons {
-  /** Loose weapons: entity id, weapon, the middle of its box (room px), and whether it glows (this page's Use would take it). */
-  loose: { id: string; weapon: string; x: number; y: number; glow: boolean }[];
+  /** Loose weapons: entity id, weapon, the middle of its box (room px), and whether it glows (this page's Use would take it); `lit` a thrown bomb, `burst` one bursting. */
+  loose: { id: string; weapon: string; x: number; y: number; glow: boolean; lit?: boolean; burst?: boolean }[];
   /** Held weapons: the holder's entity id, the weapon, the look drawn, and the hand point (room px). */
   held: { id: string; weapon: string; look: string; x: number; y: number }[];
 }
@@ -91,7 +91,19 @@ export function drawWeapons(g: CanvasRenderingContext2D, world: World, content: 
       const cx = e.x + b.w / 2;
       const feet = e.y + b.h;
       const lit = e.id === target;
-      now.loose.push({ id: e.id, weapon: w.id, x: cx, y: e.y + b.h / 2, glow: lit });
+      now.loose.push({ id: e.id, weapon: w.id, x: cx, y: e.y + b.h / 2, glow: lit, ...(l.lit ? { lit: true } : {}), ...(l.ending ? { burst: true } : {}) });
+      // A bomb that has burst: its burst look, centred where it burst, played once from the tick it burst (weapon-burst).
+      if (l.ending) {
+        const boom = w.looks.burst ? look(w.looks.burst) : undefined;
+        if (boom) drawFrame(g, boom, Math.max(0, frameOf(boom, world.tick - l.ending.at, false)), ox + Math.round(cx - boom.w / 2), oy + Math.round(e.y + b.h / 2 - boom.h / 2));
+        else {
+          g.fillStyle = '#ffb040';
+          g.fillRect(ox + Math.round(cx - 12), oy + Math.round(e.y + b.h / 2 - 12), 24, 24);
+        }
+        continue;
+      }
+      // DRAFT: a lit bomb blinks (hidden 4 frames in every 12) so it reads as about to go.
+      if (l.lit && frame % 12 < 4) continue;
       if (lit && glow) drawFrame(g, glow, frameOf(glow, frame, true), ox + cx - glow.w / 2, oy + feet - glow.h / 2 - b.h / 2);
       const id = (lit && w.looks.pickup) || w.looks.ground;
       const art = look(id);

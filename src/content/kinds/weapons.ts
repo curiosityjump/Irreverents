@@ -24,15 +24,29 @@ export interface Weapon {
    * and a weapon with no swing or broken look is valid (the readme: no
    * bogus states). `pickup` falls back to `ground` in a glow.
    */
-  looks: { ground: string; held: string; pickup?: string; swing?: string; impact?: string; broken?: string; icon?: string };
+  looks: { ground: string; held: string; pickup?: string; swing?: string; impact?: string; broken?: string; icon?: string; burst?: string };
   /** Where the hand holds it in its `held` and `swing` looks, pixels from the look's top-left, drawn facing right (the contract's grip_anchor). */
   grip: [number, number];
   /** Its box lying loose or flying, pixels [w, h] (the contract's hitbox): what a hero touches to pick it up. */
   box: [number, number];
   /** Its holder's character numbers, changed: first `times`, then `add`, then `atLeast`, over the holder's own (after a power's). */
   hit: { add: Record<string, number>; times: Record<string, number>; atLeast: Record<string, number> };
-  /** What Hit does with it: `swing` it (the holder's own swing, with `hit` laid over). */
-  use: 'swing';
+  /**
+   * What Hit does with it: `swing` it (the holder's own swing, with `hit`
+   * laid over), or `throw` it (systems/weapon-toss.ts: the press throws it
+   * as Grab does, and no swing starts).
+   */
+  use: 'swing' | 'throw';
+  /**
+   * A weapon that bursts (the bomb; systems/weapon-burst.ts): thrown (by Hit
+   * or Grab) it is lit, and after `fuse` seconds, or on meeting a body in
+   * flight, it bursts. Every body within `radius` px of its middle, the
+   * thrower too, is launched away by `strength` against its weight and worn
+   * by `wear` (a friend by the friend shares); every breakable part in the
+   * radius whose breakSpeed is at most `breaks` breaks. Then it is gone (its
+   * source stands another after its restock). Absent: it never bursts.
+   */
+  burst?: { fuse: number; radius: number; strength: number; wear: number; breaks: number };
   /**
    * Where it stands (D-080: return to a known source for another): a room and
    * a tile, and `restock` seconds after the one from here is used up or
@@ -62,7 +76,7 @@ declare module '../types.ts' {
   }
 }
 
-const LOOK_STATES = ['ground', 'held', 'pickup', 'swing', 'impact', 'broken', 'icon'] as const;
+const LOOK_STATES = ['ground', 'held', 'pickup', 'swing', 'impact', 'broken', 'icon', 'burst'] as const;
 
 function numbers(read: Reader, value: unknown, where: string): Record<string, number> {
   const out: Record<string, number> = {};
@@ -93,7 +107,7 @@ const kind: ContentKind = {
   parse(raw, read) {
     const o = read.object(raw, '');
     if (!o) return null;
-    read.only(o, ['id', 'name', 'looks', 'grip', 'box', 'hit', 'use', 'sources', 'thrown', 'carriers', 'breaks'], '');
+    read.only(o, ['id', 'name', 'looks', 'grip', 'box', 'hit', 'use', 'sources', 'thrown', 'carriers', 'breaks', 'burst'], '');
     const looks: Weapon['looks'] = { ground: '', held: '' };
     const lo = read.object(o.looks, 'looks');
     if (lo) {
@@ -117,9 +131,8 @@ const kind: ContentKind = {
     }
     let use: Weapon['use'] = 'swing';
     if (o.use !== undefined) {
-      // DRAFT: "throw" (the bomb's) arrives with the rule that throws it (Step 23 push 4).
-      if (o.use === 'swing') use = o.use;
-      else read.fail('use', `must be "swing", but is ${describe(o.use)}`);
+      if (o.use === 'swing' || o.use === 'throw') use = o.use;
+      else read.fail('use', `must be "swing" or "throw", but is ${describe(o.use)}`);
     }
     const out: Weapon = {
       id: read.string(o, 'id', ''),
@@ -144,6 +157,20 @@ const kind: ContentKind = {
         if (t.speed !== undefined) out.thrown.speed = read.number(t, 'speed', 'thrown', { min: 0, max: 900 });
         if (t.strength !== undefined) out.thrown.strength = read.number(t, 'strength', 'thrown', { min: 0, max: 1000000 });
         if (t.wear !== undefined) out.thrown.wear = read.number(t, 'wear', 'thrown', { min: 0, max: 100000 });
+      }
+    }
+    if (o.burst !== undefined) {
+      const b = read.object(o.burst, 'burst');
+      if (b) {
+        read.only(b, ['fuse', 'radius', 'strength', 'wear', 'breaks'], 'burst');
+        // DRAFT: a burst that says nothing flies like the bomb's first numbers.
+        out.burst = {
+          fuse: b.fuse === undefined ? 1.2 : read.number(b, 'fuse', 'burst', { min: 0, max: 10 }),
+          radius: b.radius === undefined ? 40 : read.number(b, 'radius', 'burst', { min: 0, max: 160 }),
+          strength: b.strength === undefined ? 36000 : read.number(b, 'strength', 'burst', { min: 0, max: 1000000 }),
+          wear: b.wear === undefined ? 40 : read.number(b, 'wear', 'burst', { min: 0, max: 100000 }),
+          breaks: b.breaks === undefined ? 0 : read.number(b, 'breaks', 'burst', { min: 0, max: 900 }),
+        };
       }
     }
     if (/\d/.test(out.name)) read.fail('name', `"${out.name}" has a digit: the game shows no numbers`);

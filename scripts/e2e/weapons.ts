@@ -58,7 +58,9 @@ async function timedTap(ph: Phone, action: string, cond: string, arg: unknown, m
       }),
     [cond, arg, ms] as [string, unknown, number],
   );
-  await ph.page.evaluate(() => ((window as any).__tapAt = performance.now()));
+  // The clock starts when the press reaches the page (its touchstart), as scripts/e2e/hit-lands.ts times it:
+  // started before the tap was sent, the test's own tap delivery (about 30 ms) was counted as the game's.
+  await ph.page.evaluate(() => addEventListener('touchstart', () => { if ((window as any).__tapAt === null) (window as any).__tapAt = performance.now(); }, { capture: true, once: true }));
   await tap(ph, action);
   return watch;
 }

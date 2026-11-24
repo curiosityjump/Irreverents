@@ -19,10 +19,12 @@ D-020, D-080, D-081 (`docs/plan/step-23.md`, "Why").
 
 `content/weapons/<id>.json` (`src/content/kinds/weapons.ts`): `name` (shown,
 never in an id); `looks` by state (`ground` and `held` needed; `pickup`,
-`swing`, `impact`, `broken`, `icon` when cut: the contract lists no fixed
+`swing`, `impact`, `broken`, `icon`, `burst` when cut: the contract lists no fixed
 states); `grip` (where the hand holds its `held`/`swing` look, facing right);
 `box` (its size lying loose or flying); `hit` (`times`, then `add`, then
-`atLeast`, over the holder's numbers, after a power's); `use` (`swing`);
+`atLeast`, over the holder's numbers, after a power's); `use` (`swing`, or
+`throw`: Hit throws it, `weapon-toss`, 95); `burst` (`fuse`, `radius`,
+`strength`, `wear`, `breaks`: a thrown one is lit and bursts, `weapon-burst`);
 `sources` (`id`, `room`, `tile`, `restock` s); `thrown` (`speed`,
 `strength`, `wear`); `carriers` (placed ids or kinds); `breaks` (what its
 swing breaks: `weapon-break`, 106, on `attacked`, every breakable part with
@@ -37,6 +39,7 @@ kind's hand point (pixels from the box's top-left, facing right), and a
 |---|---|---|
 | `sword` | +10 reach, x1.4 strength, own wind-up; thrown at 320 px/s, strength 14000 | Quick: a grappler's swing sends a 40-weight dummy at 490 px/s, 350 bare-handed. Lies on the castle street at column 10, seen on the first screen; `camp-fighter-2` carries one. |
 | `hammer` | +6 reach, +0.35 s wind-up, x2.2 strength; `breaks` 250 | Slow and huge: a grappler's 30800 sends a 70-weight camp fighter off at the cap. Breaks a cracked wall (200), a fence (200) or a stall (150) in reach, not the camp's barricade (300). Lies in the Bandit Camp at column 10, just past the entrance block. |
+| `bomb` | `use: throw`; thrown at 240 px/s; burst after 1.2 s or on the first body it meets: radius 40, strength 36000, wear 40, breaks 250 | Hit (or Grab) throws it; the burst launches a 40-weight dummy at the cap and the grappler standing two tiles from it the other way (the thrower is not spared: doc 08). Gone after its burst; its source stands another 20 s later. In the test room until its quarry spot is agreed with Step 22. |
 | `spear` | +18 reach, x1.2 strength, own wind-up; thrown at 420 px/s | The longest reach. Written last, as data only: no code names it (`step23-one-file`). In the test room until its quarry spot is agreed with Step 22. |
 
 ## One weapon in hand, one per hero
@@ -91,6 +94,21 @@ reasons). It falls, bounces and slides by the orb's physics
   his id is nowhere in the world (loose, in a hand, or kept for a party
   member), so swords do not pile up in his room
   (`step23-returned-carrier-unarmed`).
+- **Hit throws a bomb** (`weapon-toss`, 95, before the verbs): a fresh
+  `attack` press by a body holding a `use: throw` weapon whose swing is
+  ready throws it as Grab does (`throwWeapon`, `src/sim/weapons.ts`, shared
+  with `weapon-throw`). `INTENT:` it marks the attack verb's own
+  `c.attack.held` as down so no swing starts. That part runs on the page
+  too, so the page predicts no swing; the throw itself is the server's.
+- **A lit weapon bursts** (`weapon-burst`, 531): a thrown weapon with a
+  `burst` is `loose.lit`. After its fuse, or when `weapon-move` finds it
+  meeting a body (`lit.now`, instead of the thrown strike), every body
+  within the radius (to its box's nearest point), not held, is launched
+  away from the middle by weight and worn, with a `hit` by the thrower.
+  The thrower is not spared; a friend gets the friend shares. Breakable
+  parts with a tile centre in the radius break by `breaks`. Then it is
+  `loose.ending` for `weaponBurstShow` s (its `burst` look is drawn, nobody
+  picks it up, it does not move) and is gone. Event `weapon-burst`.
 - **At a game over** (`weapon-game-over`, 589, after Step 21's
   `heart-game-over`, 588): each loose weapon that left a player of the game
   over within its beat goes back where it was found. That covers the one the
@@ -130,7 +148,7 @@ wall and the hammer, sword and spear's test sources.
 - Scenarios `step23-*` (each with its control where the step names one):
   `-pick-up-and-swing`, `-any-hero-holds-it-<hero>`,
   `-hard-hit-knocks-it-loose`, `-steal-from-a-carrier`, `-thrown-knocks-down`,
-  `-thrown-out-leaves-it`, `-each-hero-keeps-their-own`, `-returned-carrier-unarmed`, `-game-over-hammer-back-to-source`, `-game-over-sword-back-to-carrier`,
+  `-thrown-out-leaves-it`, `-each-hero-keeps-their-own`, `-returned-carrier-unarmed`, `-game-over-hammer-back-to-source`, `-game-over-sword-back-to-carrier`, `-bomb-bursts`,
   `-hammer-breaks-the-wall`, `-one-file`, `-source-stands-another`. Fact `weapon`
   (`src/scenarios/facts/weapon.ts`): what a body holds at a tick, or how
   many lie loose in a room.

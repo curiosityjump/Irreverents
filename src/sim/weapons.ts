@@ -36,7 +36,17 @@ declare module './types.ts' {
      * with Use (src/sim/use/weapon.ts). `src`: the source it came from.
      * Nobody can pick it up before tick `until`. `from`: the body it left.
      */
-    loose?: { weapon: string; src?: string; until: number; from: string | null; flying?: { by: string; met: string[] } };
+    loose?: {
+      weapon: string;
+      src?: string;
+      until: number;
+      from: string | null;
+      flying?: { by: string; met: string[] };
+      /** A bursting weapon thrown (systems/weapon-burst.ts): lit at tick `at` by `by`; `now`: it met a body and bursts this tick. Nobody picks it up. */
+      lit?: { at: number; by: string; now?: boolean };
+      /** It has burst at tick `at`: its `burst` look plays where it was, then it is gone. Nobody picks it up; it does not move. */
+      ending?: { at: number };
+    };
     /** Each body's own memory of the Use button for the weapon systems (systems/weapon-take.ts), to see a fresh press. */
     weaponUse?: { held: boolean };
   }
@@ -54,6 +64,8 @@ declare module './types.ts' {
     'weapon-taken': { entity: string; player: string | null; weapon: string; loose: string; src?: string };
     /** `weapon` left `entity`'s hand and lies loose as `loose` (`how`: swapped for another). */
     'weapon-dropped': { entity: string; player: string | null; weapon: string; loose: string; how: 'swap' | 'knocked' | 'set-down' | 'thrown' };
+    /** Lit weapon `loose` (`weapon`, thrown by `by`) burst at (`x`, `y`) in `room`, launching `struck`. */
+    'weapon-burst': { loose: string; weapon: string; by: string; room: string; x: number; y: number; struck: string[] };
     /** Thrown loose weapon `loose` struck `target` (a `hit` by the thrower is emitted too). */
     'weapon-struck': { loose: string; weapon: string; by: string; target: string };
     /** Source `src` stood a fresh `weapon` as `loose`. */
@@ -152,7 +164,7 @@ export function makeLoose(
   room: string,
   x: number,
   feet: number,
-  opts: { src?: string; from?: string | null; vx?: number; vy?: number; until?: number; flying?: { by: string; met: string[] } } = {},
+  opts: { src?: string; from?: string | null; vx?: number; vy?: number; until?: number; flying?: { by: string; met: string[] }; lit?: { at: number; by: string } } = {},
 ): Entity {
   const { world } = ctx;
   let n = 0;
@@ -171,7 +183,7 @@ export function makeLoose(
     vy,
     facing: vx < 0 ? -1 : 1,
     onGround: vx === 0 && vy === 0,
-    c: { loose: { weapon: w.id, until: opts.until ?? world.tick, from: opts.from ?? null, ...(opts.src ? { src: opts.src } : {}), ...(opts.flying ? { flying: opts.flying } : {}) } },
+    c: { loose: { weapon: w.id, until: opts.until ?? world.tick, from: opts.from ?? null, ...(opts.src ? { src: opts.src } : {}), ...(opts.flying ? { flying: opts.flying } : {}), ...(opts.lit ? { lit: opts.lit } : {}) } },
   });
 }
 
@@ -199,4 +211,37 @@ export function knockLoose(ctx: StepContext, from: Entity, away: Entity | null):
   });
   ctx.emit('weapon-dropped', { entity: from.id, player: from.player, weapon: w.id, loose: loose.id, how: 'knocked' });
   return loose;
+}
+
+/**
+ * `e` throws the weapon `w` in its hand (Grab, systems/weapon-throw.ts; or
+ * Hit for a `throw` weapon, systems/weapon-toss.ts): it leaves the hand at
+ * `thrown.speed`, aimed by the stick as a carried body is thrown
+ * (`throwCarried`, src/sim/body-state.ts): forward in a flat arc lifted by
+ * world.throwLift, or up. The stick held down sets it at the feet instead.
+ * A weapon with a `burst` is lit by a throw (never by setting it down).
+ */
+export function throwWeapon(ctx: StepContext, e: Entity, w: Weapon, input: { x: number; y: number }): void {
+  const { content } = ctx;
+  const box = content.characters[e.kind]?.box;
+  if (!box) return;
+  const src = e.c.weapon?.src;
+  emitEffect(ctx, e, { kind: 'weapon', weapon: null });
+  const mid = e.x + box.w / 2;
+  if (input.y > 0.5) {
+    const loose = makeLoose(ctx, w, e.room, mid, e.y + box.h, { from: e.id, ...(src ? { src } : {}) });
+    ctx.emit('weapon-dropped', { entity: e.id, player: e.player, weapon: w.id, loose: loose.id, how: 'set-down' });
+    return;
+  }
+  const dir = input.x > 0 ? 1 : input.x < 0 ? -1 : e.facing;
+  const speed = w.thrown.speed;
+  const up = input.y < -0.5;
+  const vx = dir * speed * (up ? 0.2 : 1);
+  const vy = -speed * (up ? 1 : (content.tuning.world.throwLift ?? 0.4));
+  // From in front of the hand at chest height, as a forward throw of a body leaves (throwCarried).
+  const x = up ? mid : dir > 0 ? e.x + box.w + w.box[0] / 2 : e.x - w.box[0] / 2;
+  const feet = e.y + box.h / 2 + w.box[1] / 2;
+  const lit = w.burst ? { lit: { at: ctx.world.tick, by: e.id } } : {};
+  const loose = makeLoose(ctx, w, e.room, x, feet, { from: e.id, vx, vy, flying: { by: e.id, met: [e.id] }, ...lit, ...(src ? { src } : {}) });
+  ctx.emit('weapon-dropped', { entity: e.id, player: e.player, weapon: w.id, loose: loose.id, how: 'thrown' });
 }
