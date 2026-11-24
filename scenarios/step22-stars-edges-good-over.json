@@ -1,6 +1,6 @@
 {
  "id": "step22-stars-edges-good-over",
- "proves": "Step 22 push 3 (DRAFT, docs/decisions-log.md 'Step 22 push 3'; src/sim/stage.ts stageStars): step22-cleared-stats' clear at tick 1259, with the run already under way before tick 0 (world.stages seeded: started -34742, tries 2, a finished alarm, seen) so it clears in 36001 ticks: one tick over the good time, 2 start-overs, seen and one alarm: 1 star. The thresholds are content/stages/iron-quarry.json's (good 600 s, best 300 s); when they are re-measured, move 'started' with them. Control (watched to fail): the clear one tick the other side, stars differ",
+ "proves": "Step 22 push 3 (DRAFT, docs/decisions-log.md 'Step 22 push 3'; src/sim/stage.ts stageStars): step22-cleared-stats' clear at tick 1259, with the run already under way before tick 0 (world.stages seeded: started -2342, tries 2, a finished alarm, seen) so it clears in 3601 ticks: one tick over the good time, 2 start-overs, seen and one alarm: 1 star. The thresholds are content/stages/iron-quarry.json's (good 60 s, best 45 s since Step 22 3b; were 600 and 300); when they are re-measured, move 'started' with them. Control (watched to fail): the clear one tick the other side, stars differ",
  "room": "quarry-depot",
  "placements": true,
  "players": [
@@ -432,7 +432,7 @@
    "where": {
     "stage": "iron-quarry",
     "player": "a",
-    "ticks": 36001,
+    "ticks": 3601,
     "defeated": 1,
     "alarms": 1,
     "tries": 2,
@@ -456,7 +456,7 @@
    "at": 1500,
    "best": {
     "stars": 1,
-    "ticks": 36001
+    "ticks": 3601
    }
   }
  ],
@@ -464,7 +464,7 @@
   "stages": {
    "iron-quarry": {
     "state": "running",
-    "started": -34742,
+    "started": -2342,
     "tries": 2,
     "pending": [],
     "counts": {

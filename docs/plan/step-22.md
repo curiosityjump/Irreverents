@@ -516,6 +516,42 @@ For the next builder, all measured on `main` at 6edd8be:
   (heart-out's "first with hearts again"). That is Step 21's rule
   (`heart-out.ts`), not a bug of this step.
 
+### 3b, part 1: the five heroes, each alone, and the star times (fourth builder)
+
+- **`scripts/stage-bot.ts`**, a measuring tool, not a check. It is a simple
+  scripted player that decides each tick from the world and writes its
+  presses as a scenario's `inputs`. Usage:
+  `node scripts/stage-bot.ts <hero> <fights|walks> [maxTicks] [out.json]`.
+  Env `FIGHT_ON_THE_MOVE=1` makes it punch without stopping; `HOP=1 HOP_AT=<px>`
+  makes it jump over a bad guy just ahead. A run takes about 20 s. The ten
+  `step22-each-hero-*` say in their `//` which command made them.
+- **The ten runs** (every placed bad guy, the stage's entrance, spawn 2 on
+  the road; all clear on the first try as that hero, with no game over and
+  no horn call completed; unseen false in all):
+
+| hero | fights: clear s, knocked flat, defeated, hearts lost | sneaks: clear s, hearts lost |
+|---|---|---|
+| grappler | 54.0, 12, 3, 0 | 62.0, 2 |
+| infiltrator | 38.6, 2, 0, 1 | 41.2, 2 |
+| flyer | 51.6, 5, 1, 1 | 52.6, 1 |
+| brawler | 58.0, 7, 5, 0 | 60.8, 1 |
+| skirmisher | 40.5, 2, 0, 1 | 39.3, 0 |
+
+- **Nobody needed a way made.** The bot's first failures were its own: it
+  jumped off ledges into the depot's one-tile cellar hole at column 23, and
+  walked into bad guys it could have hopped. Every hero fits the main way.
+  The brawler's camp block does not apply here.
+- **The star times:** best 45 s, good 60 s (were 600 and 300 placeholders).
+  The three threshold runs: best = infiltrator fights 38.6 s, good = flyer
+  fights 51.6 s, slow = grappler sneaks 62.0 s (2317, 3094 and 3723 ticks).
+  The `step22-stars-edges-*` moved with them (started -1441/-1442 and
+  -2341/-2342).
+- **Measured after Step 23's spear and bomb landed** (5871f46): they lie on
+  the road. The bot never presses grab, so no run uses them.
+- **Owed still (3b part 2):** the two e2e steps (walk in, be beaten, be at
+  the entrance with the stick moving the hero; one walked clear raising
+  STAGE CLEARED from the real event).
+
 ### Lead review, owed item (a) (6edd8be), re-run at 002607b
 
 `npm run build` and `npm run check` are ok: all ten `step22-*` scenarios

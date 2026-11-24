@@ -1,0 +1,575 @@
+{
+ "id": "step22-each-hero-fights-grappler",
+ "gate": null,
+ "proves": "Step 22 3b (DRAFT, docs/plan/step-22.md 'Builder notes'): the grappler alone, by a script that fights, goes from the stage's entrance (the road just inside the doorway from the courtyard) through the road, the ridge, the tower and the depot to the stage's end, with every bad guy of the quarry placed: it punches whoever stands in front of it (knocking at least two flat) and clears the stage on its first try, as the grappler (it never runs out of hearts, so no other member takes over), with no game over",
+ "room": "quarry-road",
+ "placements": true,
+ "placedRooms": [
+  "quarry-ridge",
+  "quarry-tower",
+  "quarry-depot",
+  "quarry-pit",
+  "quarry-cave"
+ ],
+ "players": [
+  {
+   "id": "a",
+   "character": "grappler",
+   "spawn": 2
+  }
+ ],
+ "inputs": [
+  {
+   "player": "a",
+   "from": 0,
+   "to": 1987,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 56,
+   "to": 74,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 189,
+   "to": 207,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 291,
+   "to": 309,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 405,
+   "to": 409,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 413,
+   "to": 431,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 429,
+   "to": 433,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 453,
+   "to": 457,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 497,
+   "to": 501,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 521,
+   "to": 525,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 540,
+   "to": 558,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 638,
+   "to": 642,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 662,
+   "to": 666,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 686,
+   "to": 690,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 710,
+   "to": 714,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 734,
+   "to": 738,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 758,
+   "to": 762,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 765,
+   "to": 783,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 782,
+   "to": 786,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 806,
+   "to": 810,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 867,
+   "to": 885,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1104,
+   "to": 1122,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1206,
+   "to": 1224,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1303,
+   "to": 1321,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1367,
+   "to": 1371,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1416,
+   "to": 1420,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1590,
+   "to": 1594,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1811,
+   "to": 1815,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1835,
+   "to": 1839,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1859,
+   "to": 1860,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1987,
+   "to": 2005,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1992,
+   "to": 1995,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 1993,
+   "to": 2011,
+   "x": -1
+  },
+  {
+   "player": "a",
+   "from": 2019,
+   "to": 2025,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 2025,
+   "to": 2043,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 2057,
+   "to": 2075,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 2089,
+   "to": 2107,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 2121,
+   "to": 2139,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 2153,
+   "to": 2171,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 2185,
+   "to": 2203,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 2217,
+   "to": 2235,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 2249,
+   "to": 2267,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 2281,
+   "to": 2299,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 2313,
+   "to": 2331,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 2345,
+   "to": 2363,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 2353,
+   "to": 3243,
+   "x": 1
+  },
+  {
+   "player": "a",
+   "from": 2357,
+   "to": 2361,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 2578,
+   "to": 2582,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 2602,
+   "to": 2605,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 2660,
+   "to": 2678,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 2772,
+   "to": 2790,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 2873,
+   "to": 2877,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 2897,
+   "to": 2901,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 2921,
+   "to": 2925,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 2945,
+   "to": 2949,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 2969,
+   "to": 2973,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 2993,
+   "to": 2997,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 3017,
+   "to": 3021,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 3025,
+   "to": 3043,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 3137,
+   "to": 3155,
+   "hold": [
+    "jump"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 3195,
+   "to": 3199,
+   "hold": [
+    "attack"
+   ]
+  },
+  {
+   "player": "a",
+   "from": 3234,
+   "to": 3238,
+   "hold": [
+    "attack"
+   ]
+  }
+ ],
+ "ticks": 3303,
+ "expect": [
+  {
+   "fact": "event-where",
+   "event": "stage-cleared",
+   "where": {
+    "stage": "iron-quarry",
+    "player": "a",
+    "tries": 0
+   },
+   "between": [
+    1,
+    3303
+   ],
+   "count": [
+    1,
+    1
+   ]
+  },
+  {
+   "fact": "event-where",
+   "event": "hero-out",
+   "where": {
+    "entity": "p:a"
+   },
+   "between": [
+    0,
+    3303
+   ],
+   "count": [
+    0,
+    0
+   ]
+  },
+  {
+   "fact": "event-where",
+   "event": "game-over",
+   "where": {},
+   "between": [
+    0,
+    3303
+   ],
+   "count": [
+    0,
+    0
+   ]
+  },
+  {
+   "fact": "event-where",
+   "event": "flattened",
+   "where": {
+    "by": "p:a"
+   },
+   "between": [
+    0,
+    3303
+   ],
+   "count": [
+    2,
+    999
+   ]
+  }
+ ],
+ "//": "DRAFT (Step 22 3b): the inputs were recorded by `FIGHT_ON_THE_MOVE=1 node scripts/stage-bot.ts grappler fights` (a simple scripted player deciding each tick from the world: walk east, jump at a wall, a hole or a deep drop, walk off a step or a one-way ledge, climb the tower by jumping under its floors, punch a bad guy in front). Re-record with the same command when the quarry changes; the claims are what must hold. 'Sneaks' means no punch and no alarm: nobody of the stage stays unaware (unseen is false in every run: the main way passes the toll-keeper and the road's fighters in their view). Control (watched to fail, all ten): content/stages/iron-quarry.json's end box moved up out of reach (rows 1-2), and no stage-cleared (docs/plan/step-22.md)."
+}

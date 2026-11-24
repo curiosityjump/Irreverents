@@ -129,8 +129,8 @@ power sources, the roster.
 ## Checking it
 
 `scenarios/step22-restart-restores.json` (control: the stage `on` false),
-`step22-friend-inside-no-restart.json` (control: the friend outside the
-stage), `step22-beaten-to-entrance.json` (the defeat file),
+`step22-friend-inside-no-restart.json` (control: the friend's hearts out
+too, so the game over moves both and the stage starts over), `step22-beaten-to-entrance.json` (the defeat file),
 `step22-cleared-stats.json` (controls: one knock-out only is no defeat; the
 end box moved away), `step22-beaten-stay-beaten-in-a-run.json` (the hold;
 control: the stage `on` false), 
@@ -139,7 +139,21 @@ with the run seeded through `world.stages` so its time lands one tick either
 side of each threshold; each pair is the other's control: move `started` when
 the thresholds are re-measured). The fact `tile` (Step 22) reads a room's tile
 as the world has it; the fact `stage` (push 3) reads `world.stages[id]`'s
-state, tries and best. `step22-restart-on-game-over.json` (item (b)). The
+state, tries and best. `step22-restart-on-game-over.json` (item (b)). `step22-each-hero-{fights,sneaks}-{hero}.json` (3b): each of the five
+roster heroes alone, from the entrance to the end with every bad guy
+placed, by a script that fights (two or more knocked flat) and by one that
+sneaks (no punch, no horn call completed); each clears on its first try as
+that hero with no game over (control, all ten: the end box moved up out of
+reach). Their inputs were recorded by `scripts/stage-bot.ts`, a measuring
+tool and not a check: a simple scripted player who decides each tick from
+the world (walk east, jump at a wall, a hole or a deep drop, walk off a
+step or a one-way ledge, climb the tower under its floors; optionally punch
+who is in front or hop over who is just ahead). The command that made each
+is in its `//`; re-record when the quarry changes. **The star times come
+from these runs** (`DRAFT:`): best 45 s and good 60 s, between the fastest
+(38.6 s), a good (51.6 s) and a slow (62.0 s) scripted clear. Nobody is
+unseen in any of the ten: the main way passes the road's toll-keeper and
+fighters in their view. The
 e2e's `stage-*` facts (`scripts/e2e/stage.ts`): the screen at three phone
 sizes inside the view, Continue in the safe area and reachable, the stick
 resting while it is up (`stage-held`, the control), Continue giving it
@@ -149,7 +163,7 @@ back, and two pages each dismissing their own. Shots in
 ## Not built yet
 
 The home copy still restores the people who were only knocked flat, moved
-or angered; `restorePeople` covers only the gone. Push 3's hero runs (each roster hero from the entrance to the end, fighting
-and sneaking) and the thresholds they measure. Push 5: more enemies, the
+or angered; `restorePeople` covers only the gone. A route that passes the
+whole stage unseen (none of the ten scripted runs does). Push 5: more enemies, the
 waves from the sides. `beaten.ts`'s `restorePeople` (another builder's, not
 on `main` at push 2) now brings back the gone; the home copy keeps the rest.

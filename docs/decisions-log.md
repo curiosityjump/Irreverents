@@ -388,3 +388,17 @@ document as a decision of theirs.
 - **Why this way:** the owner: "no vehicle hijacking", and "Alarms should spawn more enemies of increasing strength that come in from the sides". D-023 says the machine sent to stop you can be turned on the pursuers. The fourth row ("Here comes a wagon!") is two fighters and a heavy, and the first fighter now rides in at the reins of a ram wagon, from a side like the rest. The wagon is driven at the place the lookout saw you, at the wagon's bandit speed (60; the slowest hero, the brawler, runs at 76), so you can walk away, Grab him out of the seat and drive it into the wave. It's the fourth row because it comes once: the last row repeats forever, and since wagons don't count toward the camp's cap on people they would pile up. And as measured, a wagon in the third row breaks two of the camp's wave scenarios.
 - **To change it:** move `"rides": "ram-wagon"` to another person in `waves` in `content/outposts/outpost.json` (any row), or take it out. The rule is `rides` in `src/content/kinds/outposts.ts` and a few lines in `src/sim/systems/outpost-wave.ts`. Undo: revert the commit.
 - **Where:** `docs/mechanisms/machines.md`, "Getting a person's machine into a room" and "The wave's wagon in the Bandit Camp"; `docs/plan/step-20.md`, "Builder notes". `DRAFT:`
+
+### 2026-11-24 · The quarry's star times: under 45 s for the fast star, under 60 s for the good one
+- **Decided by:** Step 22 builder (the fourth), 3b, `session_017WiGzEWjmrpsPDvpwxZXir`
+- **Instead of asking:** "How fast should you have to clear the quarry for each star?"
+- **Why this way:** the brief: set the times from scripted clears (a slow, a good and a best run). Ten scripted clears were run, each of the five heroes alone, fighting and sneaking. The fastest took 38.6 s, a good one 51.6 s and a slow one 62.0 s, and the two times sit between them. The times only matter after a game over: a clear on your first try is two stars whatever the time, and three if no alarm was raised. A script never hesitates, so on a phone these will feel tight.
+- **To change it:** `stars.good` and `stars.best` in `content/stages/iron-quarry.json` (seconds). The five `step22-stars-edges-*` scenarios move with them (their seeded `started`).
+- **Where:** `docs/mechanisms/stages.md`, "Checking it"; `docs/plan/step-22.md`, "Builder notes".
+
+### 2026-11-24 · "Sneaking through" the quarry means no punch and no alarm, not unseen
+- **Decided by:** Step 22 builder (the fourth), 3b, `session_017WiGzEWjmrpsPDvpwxZXir`
+- **Instead of asking:** "What must a sneaking run through the quarry achieve, when the main way walks past the toll-keeper and the road's fighters in plain view?"
+- **Why this way:** the lead's ruling allowed leaving the toll-keeper out of "unseen" if no route passes him. But the road's fighters see you on the main way too, so for now a sneak is getting from the entrance to the end without a punch and without a horn call completed. The victory screen's "unseen" still means what it says, and none of the ten scripted clears earns it.
+- **To change it:** the claims in `scenarios/step22-each-hero-sneaks-*.json`. A quiet route for the whole stage is placement work (Step 22 push 5).
+- **Where:** `docs/mechanisms/stages.md`, "Checking it".
