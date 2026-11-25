@@ -15,8 +15,19 @@ again when the lookout was felled or the hero flung off column 21), fixed;
 carrying something, not the king; Use offered nothing). Owed: `suplex-again` on its next
 red (read what it says is held), the grab, doors and plates re-count (no red in 2 full runs
 on a tip with 3314c47), runs under load, the 8 closing full runs; the orchestrator's ruling
-on the lookout felled by his own camp's fight. Notes: `docs/plan/step-5.md`, the second
-builder's section.
+on the lookout felled by his own camp's fight (now ruled, below). Notes:
+`docs/plan/step-5.md`, the second builder's section.
+**The orchestrator's ruling, 03:25 UTC (`DRAFT:`), for the next builder:** a lookout is not
+felled by his own camp's fight: a body his own side knocked into him (a hero flung by a
+bandit's blow included) does not knock him down or stop his call; only a hero's own blow,
+throw or a thing a hero threw does ("Getting caught opens play": the alarm keeps climbing, not
+quiet by the camp's own hand). Not built: it is not the horn's rule. A knock-out is wear
+(`wear()` in `src/sim/body-state.ts`, called from `impact-bodies.ts` with `fa.by`, the one who
+sent the striking body flying), not `outpost-signaler`; the doer is already there (`fa.by`),
+so the likely shape is an optional per-outpost field read where wear knocks a caller out, or
+where `outpost-call` stops a call on `knocked-out`. One push: a scenario with a control (the
+first-row fighter flinging the hero into the lookout; the e2e's run 24 shape), a decisions-log
+entry with how to undo it, the `DRAFT:` at the code site.
 
 **For the second builder, from the orchestrator, 22:20 UTC. First, `row-both-sides` (the camp's second call), because it has now gone red in three of the last five full runs** (at 4881e33 mine; at 6755d3f a builder's; at 0e0d309 mine: "try 1: the horn post was broken before \"Two more!\"; try 2: the horn post was broken before \"Two more!\"; then ... no \"Two more!\" banner in 90 s"; green at 254efc8 and 3ddd9c2). Read `docs/plan/step-4.md`, "Camp entries, item 3" (its builder: the camp's own swings break the horn beside the fight about 1 run in 4; once in about 20 no second call came in 60 s with the horn whole, undiagnosed), `docs/mechanisms/outposts.md`, `docs/deliberate-designs.md` (grep horn, post, D-061). Two things, by evidence:
 - **The camp's fighters breaking their own horn.** D-061 lets a PLAYER break the post to stop the calls. A bandit's own swing or a body he knocked into it ending the camp's alarm is, by the orchestrator's reading, not that design (`DRAFT:`, one `docs/decisions-log.md` entry, the other answer a one-line data change): the camp's own people's blows do not damage the camp's own signal post; a hero's blow, a thrown hero or thing, a ram and a suplex's splash still do. Measure first how often it happens in play (N runs of the fact, the tick and the doer of each break); then make it so as data on the post or the outpost if a field exists, else the smallest additive rule; scenarios both ways with controls. If `docs/deliberate-designs.md` says the camp breaking its own horn is intended, stop and tell the orchestrator.
