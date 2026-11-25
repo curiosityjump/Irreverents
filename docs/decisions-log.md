@@ -778,3 +778,11 @@ document as a decision of theirs.
 - **Why this way:** the brief's decision 4 ("pips drop one at a time with a banner") and doc 26's ways a response ends (CONFIRMED); "the bell ringing on" is drawn only: the bell swinging raises nothing (D-063, only a completed call does). The words are first guesses, as data.
 - **To change it:** the words are `calm` in each `content/dispatch/<room>.json` (index 0 is the alarm over); leave `calm` out and a drop shows no banner, as before. The bell is one line in `src/client/draw/alert.ts` (`allOut`). No sound for the bell ringing on: the sounds are the audio lane's (`src/client/audio/moments.ts`).
 - **Where:** `docs/plan/step-4.md`, "The escalating guard response"; `src/client/draw/alert.ts`; `src/content/kinds/dispatch.ts` (`calm`).
+
+### 2026-11-25 · Capacity: with the weekly limit at warning and no word from the owner, one builder at a time carries on down the held list
+- **Decided by:** orchestrator `session_017WiGzJYBCYJ85Bj95B7ZLw`, 08:55 UTC
+- **Instead of asking:** "full speed or throttle?" (asked by the predecessor on the 24th about 18:20 UTC; not answered; the limit reads `seven_day` `allowed_warning`, resets 2026-11-30 about 13:00 UTC).
+- **Why this way:** the owner, 2026-11-23: "I don't want anything being bottlenecked by permissions issues or design decisions from me", and "Realize as much of the vision as possible. Don't stop until you have realized as much as you can." Everything he named is live, so stopping all work for five days is the bottleneck he ruled out; several builders at once is what spends the week. `DRAFT:` one builder at a time, the cheapest real player faults first, review runs kept to one per landed brief.
+- **To change it:** "full speed" (several builders, the directive's Owed next 4 in parallel) or "stop" (archive the running builder after its push); either is one message.
+- **Where:** `docs/current-directive.md`, "Sessions" and "Rules in force now".
+
