@@ -266,7 +266,7 @@ for later, as the step suggests.
 
 ## Briefs
 
-- `handoff-prompts/alert-starts-at-a-level.md` (written 2026-11-25 by orchestrator `session_017WiGzGgiMLCwNj9zptZqBz`): a scenario field that starts an area's alarm at a level (a seed, never a second raise), then the courtyard's trike row, a way out at 5 for the five heroes without one, the ending's phone shots and level 4 re-taken, the undercroft's report if cheap. Decided there; the hero in a pile is left for a later brief.
+- `handoff-prompts/alert-starts-at-a-level.md` (written 2026-11-25 by orchestrator `session_017WiGzGgiMLCwNj9zptZqBz`): a scenario field that starts an area's alarm at a level (a seed, never a second raise), then the courtyard's trike row, a way out at 5 for the five heroes without one, the ending's phone shots and level 4 re-taken, the undercroft's report if cheap. Decided there; the hero in a pile is left for a later brief. Spawned 15:30 UTC: builder `session_017WiGzH9pG4jH1CRRZkj8RJ`.
 
 - `escalating-guard-response.md`: done as briefed, three pushes (e940b12 five levels in the castle street; a4f9885 the alarm is the whole castle town's; 7929998 the ending). Reviewed by orchestrator `session_017WiGzJYBCYJ85Bj95B7ZLw` by a full re-run at 18bf07b (build, check, gates 6 of 6 green; e2e 183 ok, one red, `clash-street`, not this brief's) and two blind looks (`docs/plan/step-8.md`, last section; "Second blind look" below). Brief deleted 2026-11-25 by orchestrator `session_017WiGzGgiMLCwNj9zptZqBz`. Its leftovers are in `docs/current-directive.md`, "Owed next" 3b.
 

@@ -290,7 +290,7 @@ Full text: `docs/plan/step-3.md`
 
 ## Step 4 — People who react
 
-**Status: open, claimed by orchestrator session_017WiGzGgiMLCwNj9zptZqBz (builders: session_017WiGzHTLU6WYfsfoEFK4si), 2026-11-23.** (Reopened 2026-11-23 19:40 UTC by the core-loops re-plan: its next slice is the town's tiers, brief `handoff-prompts/loop-town-tiers.md`, `docs/plan/core-loops.md` section 5. A fresh lead starts from the step file's handoff notes.)
+**Status: open, claimed by orchestrator session_017WiGzGgiMLCwNj9zptZqBz (builders: session_017WiGzH9pG4jH1CRRZkj8RJ), 2026-11-23.** (Reopened 2026-11-23 19:40 UTC by the core-loops re-plan: its next slice is the town's tiers, brief `handoff-prompts/loop-town-tiers.md`, `docs/plan/core-loops.md` section 5. A fresh lead starts from the step file's handoff notes.)
 
 Full text: `docs/plan/step-4.md`
 
