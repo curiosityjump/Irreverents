@@ -1,0 +1,75 @@
+{
+  "id": "step4-clash-answer-ahead-of-hero",
+  "gate": null,
+  "proves": "a person answers a blow ahead of a hero (Step 4, guards meet bandits; content/hostility.json answers): in test-clash a hero stands inside the town guard, in sight of both him and the camp fighter, and never moves; the fighter goes for the hero (a hero in sight comes first for him) and his swings clip the guard too; the guard, struck by the bad side, hits the fighter back although the hero stands in his sight, and nobody calls. The camp fighter's wind-up (0.25 s) beats the guard's (0.4 s), so he wins most exchanges: the claim is that the guard answers at all. Control: answers emptied, the guard never hits the fighter",
+  "room": "test-clash",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "hero",
+      "spawn": 0,
+      "tile": [
+        8,
+        5
+      ]
+    }
+  ],
+  "inputs": [],
+  "ticks": 2400,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "hit",
+      "where": {
+        "by": "tcl-fighter",
+        "target": "tcl-guard"
+      },
+      "between": [
+        0,
+        900
+      ],
+      "count": [
+        1,
+        99
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "hit",
+      "where": {
+        "by": "tcl-guard",
+        "target": "tcl-fighter"
+      },
+      "between": [
+        0,
+        2400
+      ],
+      "count": [
+        1,
+        99
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "call-started",
+      "between": [
+        0,
+        2400
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "mood",
+      "npc": "tcl-guard",
+      "between": [
+        1,
+        2400
+      ],
+      "is": 1
+    }
+  ]
+}

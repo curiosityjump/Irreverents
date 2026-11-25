@@ -1,5 +1,6 @@
-import { hostile } from '../../content/kinds/hostility.ts';
-import { canAct } from '../body-state.ts';
+import { answered, hostile } from '../../content/kinds/hostility.ts';
+import { canAct, ticksOf } from '../body-state.ts';
+import { findEntity } from '../world.ts';
 import { canSee } from '../npc/sight.ts';
 import { centre, drive, isOut, npcKind } from '../npc/state.ts';
 import type { Entity, System } from '../types.ts';
@@ -20,22 +21,45 @@ import type { Entity, System } from '../types.ts';
  * a meeting the one who closes first swings first, not the lower id.
  * INTENT (D-061, D-065): only what the person sees, on this tick; nothing
  * here asks for a door, so the camp's people stay in their room.
+ *
+ * INTENT (D-069, the owner's "no escalating combats or chases", Step 4's
+ * "Guards meet bandits"; docs/deliberate-designs.md, "a person answers a
+ * blow ahead of a hero"): a person struck by a person of a set they answer
+ * (content/hostility.json `answers`) takes that striker as their foe for
+ * `npcAnswerMemory`, AHEAD of a hero in sight, with no sight needed (he
+ * felt the blow), so a hero who leads a guard into a bad guy can slip away
+ * while the two fight. Each new blow renews it (Step 2's attack writes
+ * `lastHit` on whoever it hits). Moods, calls and alerts are untouched
+ * (D-060): a blow between people is no deed. DRAFT: the memory (6 s: at 3 s and 5 s the knockback parted them before the second answer, measured in the street), and
+ * that a hero's own blow on the person (a newer `lastHit`) ends the answer.
  */
 const system: System = {
   id: 'clash-fight',
   order: 59,
+  tuning: {
+    npcAnswerMemory: { min: 0, max: 60, what: 'how long, in seconds, a person struck by a person of a side they answer (content/hostility.json answers) keeps fighting that striker ahead of a hero' },
+  },
   run(ctx) {
     const { world, content } = ctx;
     const reach = content.tuning.world.npcChargeReach!;
+    const memory = ticksOf(content.tuning.world.npcAnswerMemory ?? 6);
     const people = world.entities.filter((e) => e.c.npc && !isOut(e));
+    // The one who last struck e, while that blow is fresh, if e answers him.
+    const answering = (e: Entity): Entity | null => {
+      const last = e.c.lastHit;
+      if (!last || world.tick - last.tick > memory) return null;
+      const by = findEntity(world, last.by);
+      if (!by || by.player !== null || !by.c.npc || by.room !== e.room || isOut(by)) return null;
+      return answered(content.hostility, npcKind(content, e), npcKind(content, by)) ? by : null;
+    };
     for (const e of people) {
       if (!canAct(e) || !content.characters[e.kind]?.verbs.includes('attack')) continue;
       if (e.c.outpostCall?.phase === 'going' || e.c.outpostCall?.phase === 'sounding' || e.c.call) continue;
-      if (world.entities.some((h) => h.player !== null && canSee(content, e, h))) continue;
       const me = centre(content, e);
-      let foe: Entity | null = null;
+      let foe: Entity | null = answering(e);
       let best = Infinity;
-      for (const o of people) {
+      if (!foe && world.entities.some((h) => h.player !== null && canSee(content, e, h))) continue;
+      if (!foe) for (const o of people) {
         if (o === e || o.room !== e.room || !hostile(content.hostility, npcKind(content, e), npcKind(content, o))) continue;
         if (!canSee(content, e, o)) continue;
         const d = Math.abs(centre(content, o).x - me.x);

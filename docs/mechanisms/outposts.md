@@ -171,11 +171,12 @@ calling and sees no hero (a hero comes first), walks at the nearest hostile
 person it sees and presses attack the first tick in reach and every other
 tick after (whoever closes first swings first). Moods never change: a hit
 between two people has no row in the rules, so no witness is troubled and
-nobody calls; the alert rises only by a finished call. Nothing here asks
-for a door, so the camp stays in its room. A guard's body does not list
-`attack` yet (Step 18: three `step4-*` scenarios are pinned to guards
-that cannot hit), so tonight a guard who meets a fighter stands and is hit
-(`step12-guards-and-camp-clash`, control: no pairs).
+nobody calls; the alert rises only by a finished call. A person struck by
+the other side (`answers`, the same file) fights the striker first, even
+with a hero in sight, for `npcAnswerMemory`: Step 4's "guards meet
+bandits", `docs/mechanisms/npc-response.md`, "Who fights". Nothing here asks
+for a door, so the camp stays in its room. Since Step 18 a guard's body lists `attack`; `step12-guards-and-camp-clash`
+(control: no pairs) asserts only the fighter's blows on the guard.
 
 **Hitting in a guard's view keeps a hero wanted** with no code of this
 step: `alert-cool` holds the wait at 0 while any conscious person of the

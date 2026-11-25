@@ -837,3 +837,14 @@ the owner is playing and pushes are paused).**
   forth through the throne-room door by the watch (5363, 5857, 6131): push
   3's way-out work (`doorClear`) should look at it. (3) Not tried on a real
   iPhone; whether it feels like risk is the owner's to judge.
+
+### Guards meet bandits, push 1 (builder, 2026-11-25)
+
+- **The rule:** `answers` in `content/hostility.json` (good side against bad side), `npcAnswerMemory` 6 s in `content/tuning.json`, read first in `clash-fight` ahead of the hero-first skip. Scenarios `step4-clash-street-guard-and-villain`, `-answer-ahead-of-hero`, `-same-side-no-answer`, `-way-out-brawler` and `-way-out-brawler-cantina` (the brief's "second run", its own file), each control watched failing.
+- **The memory is 6 s, not the brief's 3:** measured in the street, 3 s and 5 s gave one villain blow then nothing (each blow knocks the other ~6 tiles, the walk back outlasts the memory); 6 s gives villain 2, guard 5, and the brawl runs ~13 s; 8 s a little longer.
+- **The guard mostly wins in the street and mostly loses in test-clash.** The camp fighter's wind-up (0.25 s) beats the guard's (0.4 s): in `-answer-ahead-of-hero` the guard lands one blow in 40 s and is knocked out repeatedly. Numbers left alone; for the owner by playing.
+- **The classic chase is not a brawl:** `step12-guard-follows-into-camp` stayed green. Its guard walks ~4.5 tiles behind the hero past the villain and swings at nobody there, so nothing is clipped. The hero must stand in the villain while a guard swings.
+- **After the brawl:** the guard never follows the hero out of the street (he was answering when the hero left: the slip away), searches, and walks back to his beat; with a hero still standing in the street he comes back for him (the way-out control). No `call-started` in any brawl.
+- **The brief says weapons set no `lastHit`; they do** (`weapon-move.ts:59`, `weapon-burst.ts:70`). So a shot thrown by a bad-side person (the undercroft's thrower) that hits a guard also makes him answer. Left as is; no scenario covers it.
+- **Not checked:** the trike's ram (`machine-crash`) writes no `lastHit`, so a guard on a trike is untouched, as the brief expects.
+- **One red, re-timed: `step4-tier-away-at-the-most-skirmisher`** (Step 4's own). Not a brawl calling: the shopkeeper, raging at the hero since tick 2964, hit the villain before this change too (who never hit back); now the villain answers and knocks him out four times between 4483 and 8857, so the shopkeeper's own rage call (4771 before) comes at 9970, after the alert had cooled to 0, and the alert read at 10700 was 1. Read at 10000 instead, claims kept. **For the owner by playing:** a raging shopkeeper and the villain now feud for ~90 s in that run, the villain winning; the full suite had no other red (476 scenarios).

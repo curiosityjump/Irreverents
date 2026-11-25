@@ -84,7 +84,7 @@ groups) whenever you add one — never update the number from memory.
 
 **Hostile outposts** (`docs/mechanisms/outposts.md`)
 - `content/outposts/` + `src/sim/outpost/state.ts` + the `outpost-*` systems + `src/client/draw/outpost.ts` — a camp's lookout who sees a hero runs to a horn post and sounds it; each finished call brings a wave (rows of a table, the last repeating for ever, capped by a bound on bodies); stopped by staying unseen, knocking out or grabbing the caller, breaking the post with hits or a throw, or walking out (Step 12, slice A).
-- `chase-cap` + `content/hostility.json` + `clash-fight` — a chase follows a hero into the camp, the nearest two at most; guards and bad-side people fight on sight, moods unchanged (Step 12, slice B; "Chase and clash").
+- `chase-cap` + `content/hostility.json` + `clash-fight` — a chase follows a hero into the camp, the nearest two at most; guards and bad-side people fight on sight, moods unchanged (Step 12, slice B; "Chase and clash"); a person struck by the other side answers the striker first, even with a hero in sight (`answers`; Step 4, npc-response.md "Who fights").
 
 **Rooms and doors** (`docs/mechanisms/rooms-and-doors.md`)
 - `scripts/way-out-audit.ts` — the way-out check played one roster hero at a time, printing every (room, hero, tile) with no way to a door or back to the start (brief owner-stuck-in-the-quarry, 2026-11-24).

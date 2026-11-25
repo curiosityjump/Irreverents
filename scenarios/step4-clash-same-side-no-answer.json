@@ -1,0 +1,89 @@
+{
+  "id": "step4-clash-same-side-no-answer",
+  "gate": null,
+  "proves": "same side never answers (Step 4, guards meet bandits; friendly fire stays): in the castle street a hero takes goods and stands in the shopkeeper's place while the called guard comes for them; the guard's swing clips the shopkeeper too, and the shopkeeper (good side, like the guard) does not hit the guard back. Control: a pair { role guard } / { role shopkeeper } added to answers in content/hostility.json, the shopkeeper hits the guard",
+  "room": "castle-street",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "hero",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 60,
+      "to": 140,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 1450,
+      "to": 1475,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 1500,
+      "to": 1505,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 1520,
+      "to": 1555,
+      "x": -1
+    }
+  ],
+  "ticks": 3400,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "hit",
+      "where": {
+        "by": "street-guard",
+        "target": "street-shopkeeper"
+      },
+      "between": [
+        2700,
+        3000
+      ],
+      "count": [
+        1,
+        99
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "hit",
+      "where": {
+        "by": "street-shopkeeper",
+        "target": "street-guard"
+      },
+      "between": [
+        0,
+        3400
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "call-started",
+      "between": [
+        2200,
+        3400
+      ],
+      "count": [
+        0,
+        0
+      ]
+    }
+  ]
+}

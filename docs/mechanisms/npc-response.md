@@ -242,6 +242,28 @@ too."* Built by Step 18 slice A (`docs/plan/step-18.md`).
   needs another way out first.
 - **Friendly fire stays** (`DRAFT:`): a swing hits every body in reach,
   whatever its side, so a guard can flatten the shopkeeper.
+- **A person answers a blow ahead of a hero** (Step 4, guards meet
+  bandits; `INTENT:` in `src/sim/systems/clash-fight.ts`;
+  `docs/deliberate-designs.md`). A person whose body lists `attack`,
+  whose `c.lastHit` (Step 2's attack writes it on whatever it hits, as do
+  thrown weapons) is younger than `npcAnswerMemory` (6 s, `DRAFT:`) and
+  names a person in the same room, not out cold, whom they answer
+  (`answers` in `content/hostility.json`, the shape of `pairs`, either
+  way round; tonight good side against bad side), walks at that striker
+  and swings on the pulse, ahead of a hero in sight and without needing
+  to see him. Each new blow renews it; a hero's own blow on the person
+  replaces `lastHit` and ends it. The skips stay: cannot act, no
+  `attack`, calling or going to call. Moods, calls and alerts are
+  untouched (D-060). So in the castle street a guard's swing at a hero
+  standing in the villain starts a brawl and the hero walks off
+  (`step4-clash-street-guard-and-villain`); the guard goes back to
+  searching and his beat, or to a hero still standing there once the
+  answer runs out (`step4-clash-way-out-brawler`'s control). A guard
+  answering instead of walking to a door misses that chase: the slip
+  away. Same side never answers (`step4-clash-same-side-no-answer`); a
+  guard struck by a camp fighter answers with a hero in sight
+  (`step4-clash-answer-ahead-of-hero`). The villain stays out of `pairs`:
+  only a blow starts it, never the sight of him.
 - **Checks:** `step18-rage-keeps-swinging`, `step18-guard-swings-again`,
   `step18-jump-over-is-a-way-out`, and `npm run e2e`'s `fight-back`
   (`scripts/e2e/fight.ts`, also in `check:live`).

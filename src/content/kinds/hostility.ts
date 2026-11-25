@@ -15,6 +15,13 @@ export interface PeopleSet {
 }
 export interface Hostility {
   pairs: { a: PeopleSet; b: PeopleSet }[];
+  /**
+   * Step 4 (guards meet bandits): pairs of sets, either way round, whose
+   * people answer a blow from each other (src/sim/systems/clash-fight.ts).
+   * Optional and additive: left out, it is empty and nobody answers.
+   * DRAFT: the name and the pairs.
+   */
+  answers: { a: PeopleSet; b: PeopleSet }[];
 }
 
 declare module '../types.ts' {
@@ -33,16 +40,23 @@ export function hostile(h: Hostility | undefined, a: NpcKind | undefined, b: Npc
   return h.pairs.some((p) => (inSet(p.a, a) && inSet(p.b, b)) || (inSet(p.a, b) && inSet(p.b, a)));
 }
 
+/** True when a person of kind a, struck by a person of kind b, answers the blow (either way round). */
+export function answered(h: Hostility | undefined, a: NpcKind | undefined, b: NpcKind | undefined): boolean {
+  if (!h || !a || !b) return false;
+  return h.answers.some((p) => (inSet(p.a, a) && inSet(p.b, b)) || (inSet(p.a, b) && inSet(p.b, a)));
+}
+
 const kind: ContentKind = {
   id: 'hostility',
   source: { file: 'hostility.json' },
   parse(raw, read) {
     const o = read.object(raw, '') ?? {};
-    read.only(o, ['pairs', '//'], '');
+    read.only(o, ['pairs', 'answers', '//'], '');
     const pairs: Hostility['pairs'] = [];
+    const answers: Hostility['answers'] = [];
     if (!Array.isArray(o.pairs)) {
       read.fail('pairs', 'must be a list of { "a": set, "b": set }');
-      return { pairs };
+      return { pairs, answers };
     }
     const set = (v: unknown, where: string): PeopleSet | null => {
       if (!v || typeof v !== 'object' || Array.isArray(v)) {
@@ -60,23 +74,29 @@ const kind: ContentKind = {
       if (s.notRoles !== undefined && !Array.isArray(s.notRoles)) read.fail(`${where}.notRoles`, 'must be a list of roles');
       return { role, side, notRoles };
     };
-    o.pairs.forEach((p: unknown, i: number) => {
-      const r = (p && typeof p === 'object' ? p : {}) as Record<string, unknown>;
-      const a = set(r.a, `pairs[${i}].a`);
-      const b = set(r.b, `pairs[${i}].b`);
-      if (a && b) pairs.push({ a, b });
-    });
-    return { pairs };
+    const list = (field: 'pairs' | 'answers', raw: unknown[], into: Hostility['pairs']) =>
+      raw.forEach((p: unknown, i: number) => {
+        const r = (p && typeof p === 'object' ? p : {}) as Record<string, unknown>;
+        const a = set(r.a, `${field}[${i}].a`);
+        const b = set(r.b, `${field}[${i}].b`);
+        if (a && b) into.push({ a, b });
+      });
+    list('pairs', o.pairs, pairs);
+    if (o.answers !== undefined && !Array.isArray(o.answers)) read.fail('answers', 'must be a list of { "a": set, "b": set }');
+    else if (Array.isArray(o.answers)) list('answers', o.answers, answers);
+    return { pairs, answers };
   },
   check(content, fail) {
     const roles = new Set<string>(Object.values(content.npcs).map((k) => k.role));
     const sides = new Set<string>(Object.values(content.npcs).map((k) => k.side));
-    content.hostility.pairs.forEach((p, i) => {
-      for (const [name, s] of [['a', p.a], ['b', p.b]] as const) {
-        if (s.role !== undefined && !roles.has(s.role)) fail('hostility.json', `pairs[${i}].${name}.role`, `no content/npcs/ file has role "${s.role}"`);
-        if (s.side !== undefined && !sides.has(s.side)) fail('hostility.json', `pairs[${i}].${name}.side`, `no content/npcs/ file has side "${s.side}"`);
-      }
-    });
+    for (const field of ['pairs', 'answers'] as const) {
+      content.hostility[field].forEach((p, i) => {
+        for (const [name, s] of [['a', p.a], ['b', p.b]] as const) {
+          if (s.role !== undefined && !roles.has(s.role)) fail('hostility.json', `${field}[${i}].${name}.role`, `no content/npcs/ file has role "${s.role}"`);
+          if (s.side !== undefined && !sides.has(s.side)) fail('hostility.json', `${field}[${i}].${name}.side`, `no content/npcs/ file has side "${s.side}"`);
+        }
+      });
+    }
   },
 };
 export default kind;

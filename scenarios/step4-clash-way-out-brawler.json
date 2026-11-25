@@ -1,0 +1,99 @@
+{
+  "id": "step4-clash-way-out-brawler",
+  "gate": null,
+  "proves": "there is always a way out of a brawl (Step 4, guards meet bandits; the INTENT in docs/mechanisms/npc-response.md, \"The way out\"): the slowest hero (the brawler, runs 76) takes goods, stands in the villain at column 20-21 while the called guard swings at him, so the guard and the villain come to blows; from the edge of the brawl at column 14 he walks west out to the throne room inside 10 s and is not hit again. Control: no walk west, the guard comes back for him once the answer runs out and hits him again (from about tick 3290)",
+  "room": "castle-street",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "brawler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 60,
+      "to": 165,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 1450,
+      "to": 1482,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 1500,
+      "to": 1505,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 1520,
+      "to": 1605,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 2700,
+      "to": 3300,
+      "x": -1
+    }
+  ],
+  "ticks": 3600,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "hit",
+      "where": {
+        "by": "street-villain",
+        "target": "street-guard"
+      },
+      "between": [
+        2580,
+        2700
+      ],
+      "count": [
+        1,
+        99
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "changed-room",
+      "where": {
+        "entity": "p:a",
+        "fromRoom": "castle-street",
+        "toRoom": "throne-room"
+      },
+      "between": [
+        2700,
+        3300
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "hit",
+      "where": {
+        "target": "p:a"
+      },
+      "between": [
+        2700,
+        3600
+      ],
+      "count": [
+        0,
+        0
+      ]
+    }
+  ]
+}

@@ -112,6 +112,9 @@ words.
 
 ---
 
+**A guard chasing you stops and fights the villain instead, though you are right there in front of him.**
+→ Intended: a person answers a blow ahead of a hero. Struck by someone of the other side (`answers` in `content/hostility.json`: good against bad), a person fights that striker first for `npcAnswerMemory` (6 s, renewed by each blow), whether or not a hero is in sight, then goes back to what they were doing. It is how a hero leads the watch into a bad guy and slips away (D-069; the owner, 2026-11-23: "no escalating combats or chases"). Same side never answers: a guard clipping the shopkeeper starts nothing. Moods, calls and alerts are untouched (D-060). Guards-meet-bandits builder, 2026-11-25, `DRAFT:` numbers; `INTENT:` in `src/sim/systems/clash-fight.ts`; `docs/mechanisms/npc-response.md`, "Who fights".
+
 ## Where these live in the code
 
 Each entry above should also carry an `INTENT:` comment at its code site.
@@ -123,6 +126,7 @@ Keep this table in step with the entries:
 | Entry | Site |
 |---|---|
 | Switch refused or skips a member in a tight space | `src/sim/verbs/switch.ts` |
+| A person answers a blow ahead of a hero | `src/sim/systems/clash-fight.ts` |
 | The store never throws; an unreadable file is set aside | `src/server/store.ts` (`openStore`, `load`) |
 | The pedestal's card has no button | `src/client/draw/hall.ts` (`drawHall`) |
 | Beaten, you are thrown out (the throw is the way out) | `src/sim/systems/defeat-throw.ts` |

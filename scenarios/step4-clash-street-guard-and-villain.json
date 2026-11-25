@@ -1,0 +1,135 @@
+{
+  "id": "step4-clash-street-guard-and-villain",
+  "gate": null,
+  "proves": "guards meet bad guys (D-069; the owner, 2026-11-23: \"no escalating combats or chases\"; content/hostility.json answers): in the castle street a hero takes goods, the call completes and the street's guard comes for them; the hero stands in the robbing villain at column 21, so the guard's swing clips him too; the villain answers the guard and the guard answers the villain, at least two blows each way, while the hero walks west out to the throne room and is not hit again; nobody new calls and the villain's mood stays 1 (D-060). Control: answers emptied in content/hostility.json, the villain never hits the guard",
+  "room": "castle-street",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "hero",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 60,
+      "to": 140,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 1450,
+      "to": 1475,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 1500,
+      "to": 1505,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 1520,
+      "to": 1588,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 2700,
+      "to": 3100,
+      "x": -1
+    }
+  ],
+  "ticks": 4800,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "hit",
+      "where": {
+        "by": "street-guard",
+        "target": "street-villain"
+      },
+      "between": [
+        2500,
+        4800
+      ],
+      "count": [
+        2,
+        99
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "hit",
+      "where": {
+        "by": "street-villain",
+        "target": "street-guard"
+      },
+      "between": [
+        2500,
+        4800
+      ],
+      "count": [
+        2,
+        99
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "hit",
+      "where": {
+        "target": "p:a"
+      },
+      "between": [
+        2620,
+        4800
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "changed-room",
+      "where": {
+        "entity": "p:a",
+        "toRoom": "throne-room"
+      },
+      "between": [
+        2700,
+        3000
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "call-started",
+      "between": [
+        2200,
+        4800
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "mood",
+      "npc": "street-villain",
+      "between": [
+        1,
+        4800
+      ],
+      "is": 1
+    }
+  ]
+}
