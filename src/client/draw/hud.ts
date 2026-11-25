@@ -68,6 +68,8 @@ export interface DrawnHud {
   under: string[];
   /** Brief plate-clear-of-bodies, part 2: the arrows at the picture's edge pointing at a thrower aiming at the viewer from outside it (draw/aim-edge.ts). */
   aimMarks: AimMark[];
+  /** Brief phone-legibility-pass: each face's heart rows, as one block each (screen game px). */
+  heartRows: { x: number; y: number; w: number; h: number }[];
 }
 let drawn: DrawnHud | null = null;
 
@@ -93,9 +95,18 @@ export interface PlateScene {
   ox: number;
   oy: number;
 }
-/** DRAFT: the plate's backing at full fade, and its faces, slots and hearts. */
-const FADED_BACK = 0.25;
-const FADED_INSIDE = 0.6;
+/**
+ * DRAFT: the plate's backing at full fade, and its slots and other faces.
+ * Brief phone-legibility-pass (the look at 1ef40fb: faded, the hearts lost
+ * contrast exactly when a thrower is overhead, and the body under it showed
+ * as a ghost): the panel and frame go fainter (0.25 to 0.12, the wells and
+ * the others' faces 0.6 to 0.35), and the hearts and the viewer's own face
+ * never fade: drawn at full strength with a dark outline (STRONG_RIM).
+ */
+const FADED_BACK = 0.12;
+const FADED_INSIDE = 0.35;
+/** DRAFT: the outline round the hearts and own face while the plate is faded (the plate's own dark). */
+const STRONG_RIM = '#0f0f1c';
 /** DRAFT: frames to fade out, and to come back once nobody is under it (slower, so a hero hopping in and out does not flicker it). */
 const FADE_IN_FRAMES = 6;
 const FADE_BACK_FRAMES = 18;
@@ -132,6 +143,67 @@ export function plateFadeOff(): boolean {
   return (globalThis as { irreverents?: { plateFade?: { off?: boolean } } }).irreverents?.plateFade?.off === true;
 }
 
+/** INTENT (e2e control only, scripts/e2e/plate-legible.ts): `window.irreverents.plateFade.oldFade` fades the plate as before brief phone-legibility-pass (backing 0.25, inside and hearts 0.6, no rim); nothing in the game sets it. */
+function oldFade(): boolean {
+  return (globalThis as { irreverents?: { plateFade?: { oldFade?: boolean } } }).irreverents?.plateFade?.oldFade === true;
+}
+
+/** Two scratch canvases for the outlined layer: what is drawn, then it with its rim. */
+let layer: HTMLCanvasElement | null = null;
+let inked: HTMLCanvasElement | null = null;
+/** The last outlined layer (its top-left at the plate's, less 1), for the e2e's contrast fact; null while the plate is solid. */
+let lastLayer: { canvas: HTMLCanvasElement; x: number; y: number } | null = null;
+
+/**
+ * Paints `paint` (in screen game px, clipped to the box) onto a scratch
+ * layer, rims everything it drew with STRONG_RIM one pixel all round, and
+ * draws that onto `g`. With `plain` (the e2e control) draws the layer
+ * without its rim, at `alpha`. False where there is no document.
+ */
+function outlined(g: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, alpha: number, plain: boolean, paint: (c: CanvasRenderingContext2D) => void): boolean {
+  if (typeof document === 'undefined') return false;
+  const W = w + 2;
+  const H = h + 2;
+  layer ??= document.createElement('canvas');
+  inked ??= document.createElement('canvas');
+  for (const c of [layer, inked])
+    if (c.width !== W || c.height !== H) {
+      c.width = W;
+      c.height = H;
+    }
+  const a = layer.getContext('2d');
+  const b = inked.getContext('2d');
+  if (!a || !b) return false;
+  a.setTransform(1, 0, 0, 1, 0, 0);
+  a.clearRect(0, 0, W, H);
+  a.imageSmoothingEnabled = false;
+  a.save();
+  a.beginPath();
+  a.rect(1, 1, w, h);
+  a.clip();
+  a.translate(1 - x, 1 - y);
+  paint(a);
+  a.restore();
+  b.setTransform(1, 0, 0, 1, 0, 0);
+  b.globalCompositeOperation = 'source-over';
+  b.clearRect(0, 0, W, H);
+  b.imageSmoothingEnabled = false;
+  if (!plain) {
+    for (const [dx, dy] of [[-1, -1], [0, -1], [1, -1], [-1, 0], [1, 0], [-1, 1], [0, 1], [1, 1]] as const) b.drawImage(layer, dx, dy);
+    b.globalCompositeOperation = 'source-in';
+    b.fillStyle = STRONG_RIM;
+    b.fillRect(0, 0, W, H);
+    b.globalCompositeOperation = 'source-over';
+  }
+  b.drawImage(layer, 0, 0);
+  const before = g.globalAlpha;
+  g.globalAlpha = alpha;
+  g.drawImage(inked, x - 1, y - 1);
+  g.globalAlpha = before;
+  lastLayer = { canvas: layer, x: x - 1, y: y - 1 };
+  return true;
+}
+
 /** Eases the fade one page frame toward under (1) or clear (0). */
 function stepFade(under: boolean, frame: number): number {
   if (frame === fadeFrame) return fade;
@@ -159,10 +231,16 @@ export function noteAimMarks(marks: AimMark[]): void {
 const MENU_CLEAR = 8;
 let menuRight = 0;
 let menuLooked = -1;
+/** The menu button's drawn box in game px of the view (brief phone-legibility-pass: the edge arrow keeps clear of it), or null. */
+let menuAt: { x: number; y: number; w: number; h: number } | null = null;
+export function menuBox(): { x: number; y: number; w: number; h: number } | null {
+  return menuAt;
+}
 function clearOfMenu(g: CanvasRenderingContext2D, frame: number): number {
   if (menuLooked >= 0 && frame - menuLooked < 30) return menuRight;
   menuLooked = frame;
   menuRight = 0;
+  menuAt = null;
   if (typeof document === 'undefined') return 0;
   const btn = document.getElementById('menu-btn');
   const c = g.canvas as HTMLCanvasElement;
@@ -171,6 +249,7 @@ function clearOfMenu(g: CanvasRenderingContext2D, frame: number): number {
   const r = c.getBoundingClientRect();
   if (r.width <= 0 || b.width <= 0) return 0;
   const sx = c.width / r.width;
+  menuAt = { x: Math.floor((b.left - r.left) * sx), y: Math.floor((b.top - r.top) * sx), w: Math.ceil(b.width * sx), h: Math.ceil(b.height * sx) };
   // Only when the button is over the plate's rows (the top of the view).
   if (b.top > r.top + 30 / sx) return 0;
   menuRight = Math.max(0, Math.ceil((b.right + MENU_CLEAR - r.left) * sx));
@@ -207,22 +286,31 @@ export function drawHud(g: CanvasRenderingContext2D, world: World, content: Cont
   const f = card ? 0 : stepFade(under.length > 0, frame);
   if (card) fade = 0;
   const before = g.globalAlpha;
-  g.globalAlpha = before * (1 - f * (1 - FADED_BACK));
+  const old = oldFade();
+  g.globalAlpha = before * (1 - f * (1 - (old ? 0.25 : FADED_BACK)));
   if (!drawNine(g, content, 'hud-plate', x, y, w, h)) {
     g.fillStyle = '#e09a1e';
     g.fillRect(x, y, w, h);
     g.fillStyle = '#221f44';
     g.fillRect(x + 1, y + 1, w - 2, h - 2);
   }
-  g.globalAlpha = before * (1 - f * (1 - FADED_INSIDE));
+  const inside = before * (1 - f * (1 - (old ? 0.6 : FADED_INSIDE)));
+  g.globalAlpha = inside;
+  // Brief phone-legibility-pass: the hearts and the viewer's own face are kept aside and drawn after, never faded.
+  const strong: ((c: CanvasRenderingContext2D) => void)[] = [];
+  const heartRows: DrawnHud['heartRows'] = [];
   // A heart's pop stays on the plate (draw/hearts.ts).
   g.save();
   g.beginPath();
   g.rect(x, y, w, h);
   g.clip();
   // The viewer's own face, lit.
-  face(g, content, mine, x + PAD, y + PAD, FACE, 1, hearts && isOut(world, content, mine));
-  if (hearts) drawHeartRow(g, world, content, mine, x + PAD, y + PAD + FACE + 1, true, frame);
+  const mineOut = hearts && isOut(world, content, mine);
+  strong.push((c) => face(c, content, mine, x + PAD, y + PAD, FACE, 1, mineOut));
+  if (hearts) {
+    strong.push((c) => drawHeartRow(c, world, content, mine, x + PAD, y + PAD + FACE + 1, true, frame));
+    heartRows.push({ x: x + PAD, y: y + PAD + FACE + 1, w: maxHearts(content, mine) * heartSize(true).step, h: heartSize(true).h });
+  }
   let cx = x + PAD + FACE + GAP;
   // The slots, beside it: an empty slot is a dark well.
   for (const s of HUD_SLOTS) {
@@ -234,7 +322,7 @@ export function drawHud(g: CanvasRenderingContext2D, world: World, content: Cont
     cx += SLOT + 1;
   }
   cx += GAP;
-  const faces: DrawnHud['faces'] = [{ kind: mine, me: true, played: true, out: hearts && isOut(world, content, mine) }];
+  const faces: DrawnHud['faces'] = [{ kind: mine, me: true, played: true, out: mineOut }];
   others.forEach((k, i) => {
     if (i > 0) {
       g.fillStyle = DIVIDER;
@@ -244,13 +332,23 @@ export function drawHud(g: CanvasRenderingContext2D, world: World, content: Cont
     const out = hearts && isOut(world, content, k);
     const fx = cx + Math.floor((col(k) - SMALL) / 2);
     face(g, content, k, fx, y + PAD + (FACE - SMALL), SMALL, played ? 0.9 : 0.35, out);
-    if (hearts) drawHeartRow(g, world, content, k, cx, y + PAD + FACE + 2, false, frame, FRIEND_LINE, col(k));
+    if (hearts) {
+      const hx = cx;
+      const cw = col(k);
+      strong.push((c) => drawHeartRow(c, world, content, k, hx, y + PAD + FACE + 2, false, frame, FRIEND_LINE, cw));
+      heartRows.push({ x: hx, y: y + PAD + FACE + 2, w: cw, h: Math.ceil(maxHearts(content, k) / FRIEND_LINE) * small.step });
+    }
     faces.push({ kind: k, me: false, played, out });
     cx += col(k) + FRIEND_GAP;
   });
+  // Solid: as always, in the plate. Faded: full strength with a dark rim (the e2e's control: unrimmed at the old 0.6 of the fade, as before).
+  lastLayer = null;
+  if (f === 0 || !outlined(g, x, y, w, h, old ? inside : before, old, (c) => strong.forEach((p) => p(c)))) for (const p of strong) p(g);
   g.restore();
   g.globalAlpha = before;
-  drawn = { faces, slots, box: { x, y, w, h }, fade: Math.round(f * 100) / 100, under, aimMarks: [] };
+  drawn = { faces, slots, box: { x, y, w, h }, fade: Math.round(f * 100) / 100, under, aimMarks: [], heartRows };
+  // For the e2e's contrast fact only (not enumerable: nothing serialises a canvas).
+  Object.defineProperty(drawn, 'layer', { value: lastLayer, enumerable: false });
   return drawn.box;
 }
 

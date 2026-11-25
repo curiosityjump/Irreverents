@@ -172,12 +172,18 @@ into the shared documents.
   up every 30 frames, at least `MENU_CLEAR` (8) screen px past its drawn
   edge, where the button's extra 8 px of touch area ends (`start.ts`,
   `#menu-btn::after`; fact `menu-reach-*`), and inside `safeView`. The record: `drawn.hud`
-  (`faces`, `slots`, `box`, `fade`, `under`, `aimMarks`). `DRAFT:` all of it.
+  (`faces`, `slots`, `box`, `fade`, `under`, `aimMarks`, `heartRows`). `DRAFT:` all of it.
   **It gives way at a room's top** (brief plate-clear-of-bodies; the camera
   cannot go above a room's top): while any person (a player's body, a
   townsperson, anyone who moves; not a crate) in the room is drawn over its
   rectangle (their sprite's top counted), it fades over 6 frames to
-  `FADED_BACK` (the backing) and `FADED_INSIDE` (faces, slots, hearts), and
+  `FADED_BACK` 0.12 (the backing and frame) and `FADED_INSIDE` 0.35 (slots,
+  the others' faces); the hearts and the viewer's own face never fade: while
+  faded they are drawn on a scratch layer and put down at full strength with
+  a 1-px `STRONG_RIM` outline (brief phone-legibility-pass; fact
+  `plate-hearts-legible`, `scripts/e2e/plate-legible.ts`: their median WCAG
+  contrast against their neighbours at least 3, measured 5.98 against 1.03
+  for the old fade, control `plateFade.oldFade`), and
   comes back over 18 frames once nobody has been under it for 20
   (`drawn.hud.fade` 0..1, `drawn.hud.under` ids). Never while GAME OVER or
   STAGE CLEARED is up. `render()` passes `drawHud` the room and the camera

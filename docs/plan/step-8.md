@@ -663,3 +663,9 @@ By a subagent reading all 67 `*-after3-*` shots against their first `-after-` pa
 - The undercroft was not reshot; its cellar reads flat.
 
 **Left for a fourth, small pass (not briefed at 20:50):** forest-trail's top (painted canopy carried up, not a glow); quarry-road's left deck.
+
+## Phone legibility pass (brief `handoff-prompts/phone-legibility-pass.md`)
+
+Builder, 2026-11-25. One `docs/decisions-log.md` entry for the lot ("Four things a phone showed badly…").
+
+- **1. The faded plate keeps its hearts.** Faded, the panel and frame go to 0.12 (was 0.25), the slots and the others' faces to 0.35 (was 0.6); the hearts and the viewer's own face are drawn at full strength with a 1-px dark rim (`src/client/draw/hud.ts`). Fact `plate-hearts-legible` (`scripts/e2e/plate-legible.ts`): the full hearts' median WCAG contrast against the pixels round them at least 3 (SC 1.4.11's floor for a mark that must be seen) on every faded frame, in the Hall gallery sideways (the balcony thrower under the plate) and on the canopy upright: 5.98 in both; control `E2E_LEGIBLE_OLD=1` (the old fade) 1.03 on the canopy, red. Green twice. To get the thrower under the plate the fact opens two idle pages first, so page C plays the flyer (the third hero), as in the earlier `after/gallery-aim-844x390`; with the first hero the plate is narrower and he is beside it, not under it. Shots `step-8-shots/plate/before2/` (the old fade, same moment) and `after2/`, `gallery-aim` and `canopy` at 390x664, 844x390, 750x340. The others' faces, at 0.35, still lie over the thrower in `after2/gallery-aim-844x390`: he reads as a body, a little veiled.
