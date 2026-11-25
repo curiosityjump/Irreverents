@@ -7,6 +7,16 @@ stopped at its budget): `start-link-back` the game's, fixed (`start-title-late`)
 heroes stood. Owed: the grab, doors, plates and `row-both-sides` reds
 (unknown; table in `docs/plan/step-5.md`, "The e2e's intermittent reds"),
 runs under load, and the 8 closing full runs.
+Pushes 2-4 at 8e2807d (second builder `session_017WiGzFFLrDf959S3iaSd8L`, stopped at its
+budget; live in a154c88, check:deployed and check:live ok): `row-both-sides` the game's
+(the camp's own blows broke its horn: `ownSpared`, `DRAFT:`) and the check's (a try starts
+again when the lookout was felled or the hero flung off column 21), fixed;
+`suplex-again` now prints where it stops (red in my full run at 67d83a8: the hero drawn
+carrying something, not the king; Use offered nothing). Owed: `suplex-again` on its next
+red (read what it says is held), the grab, doors and plates re-count (no red in 2 full runs
+on a tip with 3314c47), runs under load, the 8 closing full runs; the orchestrator's ruling
+on the lookout felled by his own camp's fight. Notes: `docs/plan/step-5.md`, the second
+builder's section.
 
 **For the second builder, from the orchestrator, 22:20 UTC. First, `row-both-sides` (the camp's second call), because it has now gone red in three of the last five full runs** (at 4881e33 mine; at 6755d3f a builder's; at 0e0d309 mine: "try 1: the horn post was broken before \"Two more!\"; try 2: the horn post was broken before \"Two more!\"; then ... no \"Two more!\" banner in 90 s"; green at 254efc8 and 3ddd9c2). Read `docs/plan/step-4.md`, "Camp entries, item 3" (its builder: the camp's own swings break the horn beside the fight about 1 run in 4; once in about 20 no second call came in 60 s with the horn whole, undiagnosed), `docs/mechanisms/outposts.md`, `docs/deliberate-designs.md` (grep horn, post, D-061). Two things, by evidence:
 - **The camp's fighters breaking their own horn.** D-061 lets a PLAYER break the post to stop the calls. A bandit's own swing or a body he knocked into it ending the camp's alarm is, by the orchestrator's reading, not that design (`DRAFT:`, one `docs/decisions-log.md` entry, the other answer a one-line data change): the camp's own people's blows do not damage the camp's own signal post; a hero's blow, a thrown hero or thing, a ram and a suplex's splash still do. Measure first how often it happens in play (N runs of the fact, the tick and the doer of each break); then make it so as data on the post or the outpost if a field exists, else the smallest additive rule; scenarios both ways with controls. If `docs/deliberate-designs.md` says the camp breaking its own horn is intended, stop and tell the orchestrator.

@@ -976,6 +976,29 @@ snapshots off the socket each second (hero, lookout, fighter 1, the post's `c.si
     try. The changed fact (before the look-back), 20 alone: 19 green, 1 red (the look-back case);
     5 of the 20 needed a second try (3 flung, 2 no call with the lookout felled).
 
+- **Full runs** (one at a time, nothing else on the machine): at b02bfb5's tree **172 of
+  172**; at 67d83a8 **171 ok, 2 red**: `suplex-again` and `struck-own`; at 177786d a third run
+  cut off at 117 facts by a container restart, `struck-own` red in it. Fewer than the brief's 8:
+  the play pause and a restart took the time. Grab, doors, plates, `outpost-break` and the start
+  screen's facts: no red in these 2.5 runs (after 3314c47).
+- **`suplex-again` (the orchestrator's addition; red in nearly every full run tonight, green
+  alone):** its "not reached" text now says which step stopped it. At 67d83a8: the king drawn up
+  within 8 s, on the floor at x 209 (floor 128-304); after Grab the hero drawn at x 231 in state
+  `carry`, the king beside him at y 210 in state `talk` (not lifted); Use said nothing. So the
+  hero's Grab took something other than the king. The fact now also names every body drawn
+  `held`: the next red says what was picked up, and so whether the fact stands the hero where
+  another body is nearer (the fact's) or Grab prefers something over a knocked-down-then-risen
+  king (the game's). Not run again since that line was added.
+- **`struck-own`** (a5a830b's fact, `scripts/e2e/` but another brief's claim): red in 2 of the
+  2.5 full runs; in one, 1 blow of 24 drawn hurt after 882 ms (the limit 323 ms); in the other
+  the last blow never drawn. Not looked into.
+- **`step20-camp`** (a server check in `npm run check`): red once ("the timber barricade ... not
+  within 12000 ms", a's page stopped at x 1168, short of the barricade at column 75); 5 of 5
+  alone on the same tip, and green in the three full checks after. Not this push's (the wagon's
+  driver is a hero, whose ram still counts on the post); not diagnosed.
+- **Open for the orchestrator:** the camp's own fight felling its own lookout (the hero knocked
+  into him) is the horn's shape again; not ruled, not changed.
+
 ## A page misses what happened (brief `handoff-prompts/page-misses-what-happened.md`)
 
 Builder session `session_017WiGzJrwonyg1a3d9hvyg4`, 2026-11-24.
