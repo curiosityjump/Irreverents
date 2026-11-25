@@ -1,6 +1,6 @@
 # Four things a phone shows badly, found by today's looks: the faded plate's hearts, the arrow at a thrower above you, the forest trail's sky, the quarry road's painted deck
 
-**Landed so far:** nothing yet. (A builder stopping at its budget writes
+**Landed so far:** push 1 at 711c341 (live). Pushes 2-4 committed locally at 008667b (arrow), 1dee293 (backdrops above), 4aeab19 (quarry deck), held for the owner's play (00:25 UTC pause); pushed once the orchestrator says "pushes are open". (A builder stopping at its budget writes
 its commits here, one line, before it stops.)
 
 Brief for one builder, up to four small pushes, each standing alone, in
