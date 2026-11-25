@@ -31,10 +31,10 @@ const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms
 const LEVELS: { level: number; scenario: string; tick: number; code: string; town?: boolean }[] = [
   { level: 4, scenario: 'step4-tier-level4-elite-row', tick: 4440, code: 'FRKW' },
   { level: 5, scenario: 'step4-tier-level5-keeps-coming', tick: 5140, code: 'FRKX' },
-  // The escalating guard response, push 2 ("the pips crossing doors"): the courtyard at 4 (a report there), the street
-  // at 3; a page in the street draws the town's 4, a level reached in a room it is not in. Control E2E_ESCALATION_TOWN=off
-  // takes the courtyard out of the saved world.alerts: the page then draws the street's own 3.
-  { level: 4, scenario: 'step4-tier-town-courtyard', tick: 5500, code: 'FRKY', town: true },
+  // The escalating guard response, push 2 ("the pips crossing doors"): the courtyard at 5 (a report there), the street
+  // at 4; a page in the street draws the town's 5, a level reached in a room it is not in. Control E2E_ESCALATION_TOWN=off
+  // takes the courtyard out of the saved world.alerts: the page then draws the street's own 4.
+  { level: 5, scenario: 'step4-tier-town-courtyard', tick: 6600, code: 'FRKY', town: true },
 ];
 
 /** Saves each level's world into a new store directory on its own device (a tmpfs, as the server's volume rule asks). */
@@ -144,7 +144,7 @@ export async function escalationFacts(kit: EscalationKit): Promise<void> {
         await sleep(100);
       }
       if (l.town) {
-        kit.fact('escalation-town', inStreet && best.level === l.level, `in the street (${inStreet}), its own alert 3, with the courtyard at 4 by a report there, the page drew ${best.level} pip(s) lit (expected the town's ${l.level})`);
+        kit.fact('escalation-town', inStreet && best.level === l.level, `in the street (${inStreet}), its own alert 4, with the courtyard at 5 by a report there, the page drew ${best.level} pip(s) lit (expected the town's ${l.level})`);
         await ph.ctx.close();
         continue;
       }

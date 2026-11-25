@@ -871,8 +871,8 @@ the owner is playing and pushes are paused).**
   followers: hence the town-wide relieve (`mine()` in `relieveFor`). The
   courtyard's level-4 row (the trike's driver) is no longer reached by any
   scenario: it walked in and rammed in the first version. Phone fact `escalation-town`
-  (`scripts/e2e/escalation.ts`: the courtyard at 4, the street at 3, a page in
-  the street draws 4): green twice; control `E2E_ESCALATION_TOWN=off` fails.
+  (`scripts/e2e/escalation.ts`: the courtyard at 5, the street at 4, a page in
+  the street draws 5): green twice; control `E2E_ESCALATION_TOWN=off` fails.
 - **Not done:** a scenario that reports in the undercroft. Tried four ways
   (by the cellar doorway twice, through the throne room's false wall twice):
   the crowd shoves the hero back through the throne room's door, or he gets
