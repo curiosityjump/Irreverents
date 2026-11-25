@@ -6,14 +6,31 @@
 // drew (`drawn.recruits`) never lists the cave's cage or its call: nothing
 // drawn points at the secret (hidden-recruit-not-shown). Then west along the
 // pit's floor through its painted west wall into the cave, where the page
-// draws the cage shut with the hauler in it (hidden-recruit-cave). The timed
-// hold is left to the scenarios (step13-hauler-freed-in-the-cave), as
-// scripts/e2e/rescue.ts left it. Walkers copied in shape from
-// scripts/e2e/quarry.ts (not imported: that file is another lane's).
+// draws the cage shut with the hauler in it (hidden-recruit-cave). Then, in
+// the same new game, a second phone walks into the cantina: while she is
+// caged it never draws her there and neither page's party plate has her
+// (hidden-recruit-not-early). The first phone, standing in the cage's middle,
+// holds Use by touch: its page draws the cage open and the banner
+// (hidden-recruit-freed); the second phone's cantina then draws her
+// wandering (hidden-recruit-cantina); a tap of Use at the open cage swaps her
+// in, and both plates list her (hidden-recruit-plate). Walkers copied in
+// shape from scripts/e2e/quarry.ts (not imported: that file is another
+// lane's).
+//
+// INTENT (orchestrator, 23:20 UTC: "a new game does not show her early"):
+// these run in a new kept game made by a tap on the start screen's New game,
+// not a `?room=` world, because a `?room=` world has no roster of its own
+// (everyone, src/sim/roster.ts) and would show her in the cantina from the
+// start. Where to stand: the cage's middle. The first builder held at its
+// east edge (the body's middle 157 px, the cage's reach ends at 150,
+// src/sim/use/free.ts) and the button never said FREE: that, not the touch,
+// is why "a Use hold by touch didn't free her".
 //
 // Control: E2E_TOUCH_BREAK=jump takes the jump button off the page, as the
 // other files' control does: the road and the ridge are hops, so the page
-// never reaches the pit and both facts fail.
+// never reaches the pit and every fact but not-early fails.
+// E2E_TOUCH_BREAK=interact takes the Use button off: freed, cantina and
+// plate fail.
 //
 // DRAFT: every limit below is a first pass with room to spare.
 import fs from 'node:fs';
@@ -108,12 +125,79 @@ async function shots(ph: Phone, dir: string, name: string): Promise<void> {
   await sleep(400);
 }
 
+/** A phone opening the address with no world named: the start screen; New game by a tap. As scripts/e2e/start-screen.ts. */
+async function newGame(kit: Kit, name: string): Promise<{ ph: Phone; code: string } | null> {
+  const ctx = await kit.browser.newContext({ ...kit.devices['iPhone 14 landscape'] });
+  const page = await ctx.newPage();
+  page.on('pageerror', (e: Error) => kit.errors.push(`${name}: ${e.message}`));
+  const cdp = await ctx.newCDPSession(page);
+  try {
+    await page.goto(kit.base);
+    await page.waitForSelector('#start [data-start="new"]', { timeout: 8000 });
+    await page.tap('#start [data-start="new"]');
+    await page.waitForFunction(() => (window as any).irreverents?.drawn.status === 'online' && (window as any).irreverents.drawn.me, null, { timeout: 10000 });
+  } catch {
+    await ctx.close();
+    return null;
+  }
+  const { id, world } = (await page.evaluate(() => ({ id: (window as any).irreverents.player, world: (window as any).irreverents.worldName }))) as { id: string; world: string };
+  const code = /^game-([A-Z]{4})$/.exec(world)?.[1] ?? '';
+  return { ph: { name, ctx, page, cdp, id }, code };
+}
+
+/** A friend's phone opening the game's shared link and joining by one tap. As scripts/e2e/start-screen.ts. */
+async function joinGame(kit: Kit, code: string, name: string): Promise<Phone | null> {
+  const ctx = await kit.browser.newContext({ ...kit.devices['iPhone 14 landscape'] });
+  const page = await ctx.newPage();
+  page.on('pageerror', (e: Error) => kit.errors.push(`${name}: ${e.message}`));
+  const cdp = await ctx.newCDPSession(page);
+  try {
+    await page.goto(`${kit.base}/?game=${code}`);
+    await page.waitForSelector('#start [data-start="join-link"]', { timeout: 8000 });
+    await page.tap('#start [data-start="join-link"]');
+    await page.waitForFunction(() => (window as any).irreverents?.drawn.status === 'online' && (window as any).irreverents.drawn.me, null, { timeout: 10000 });
+  } catch {
+    await ctx.close();
+    return null;
+  }
+  const id = (await page.evaluate(() => (window as any).irreverents.player)) as string;
+  return { name, ctx, page, cdp, id };
+}
+
+/** By touch: the start room, the castle street, up through the cantina's doorway. As scripts/e2e/cantina.ts's intoCantina. */
+async function intoCantina(ph: Phone): Promise<boolean> {
+  if (!(await walkInto(ph, 1, 'castle-street'))) return false;
+  const x = await ph.page.evaluate(() => {
+    const irr = (window as any).irreverents;
+    const c = irr.content;
+    const door = c.rooms['castle-street'].doors.find((d: any) => d.id === 'to-cantina');
+    return (door.tx + door.w / 2) * c.rooms['castle-street'].tile - c.characters[irr.drawn.me.kind].box.w / 2;
+  });
+  for (const nudge of [-4, -10, 2, -16]) {
+    if ((await room(ph)) === 'cantina') break;
+    await standAt(ph, x + nudge, 1);
+    await pushUp(ph);
+    try {
+      await ph.page.waitForFunction(() => (window as any).irreverents.drawn.room === 'cantina', null, { polling: 'raf', timeout: 3000 });
+    } catch {
+      // tried again
+    }
+  }
+  return (await room(ph)) === 'cantina';
+}
+
+/** The kinds on this page's party plate, as it last drew it. */
+const plate = (ph: Phone): Promise<string[]> => ph.page.evaluate(() => ((window as any).irreverents.drawn.hud?.faces ?? []).map((f: any) => f.kind));
+
 export async function hiddenRecruitFacts(kit: Kit & { shots?: string }): Promise<void> {
   const { fact } = kit;
   const dir = kit.shots ?? '';
   if (dir) fs.mkdirSync(dir, { recursive: true });
-  const url = `${kit.base}/?room=e2e-hidden-${Math.random().toString(36).slice(2, 10)}`;
-  const ph = await phone(kit, url, 'hidden-recruit');
+  const made = await newGame(kit, 'hidden-recruit');
+  fact('hidden-recruit-new-game', !!made && made.code !== '', `a tap on the start screen's New game put a phone in a new kept game (${made ? `game ${made.code}` : 'NOT within 10 s'})`);
+  if (!made) return;
+  const { ph, code } = made;
+  let friend: Phone | null = null;
   try {
     // Every frame drawn in the pit, recorded by the page itself: any cage or call of the cave's captive.
     await ph.page.evaluate(() => {
@@ -187,8 +271,125 @@ export async function hiddenRecruitFacts(kit: Kit & { shots?: string }): Promise
       inCave && !!seen && seen.open === false && seen.character === 'hauler',
       `by touch, the phone walked west through the pit's painted wall into the cave (${inCave}; now in ${await room(ph)}); its page drew the cave's cage ${seen ? `with the ${seen.character}, ${seen.open ? 'OPEN' : 'shut'}` : 'NOT AT ALL'}`,
     );
+
+    // A friend joins the same game and walks into the cantina; their page records every frame drawn there.
+    friend = await joinGame(kit, code, 'hidden-recruit-friend');
+    const inCantina = !!friend && (await intoCantina(friend));
+    if (friend) {
+      await friend.page.evaluate(() => {
+        const w = window as any;
+        w.__cantina = { phase: 'caged', caged: 0, cagedHer: 0, cagedPlate: 0, freedHer: 0 };
+        const look = (): void => {
+          const d = w.irreverents.drawn;
+          const r = w.__cantina;
+          if (d.room === 'cantina') {
+            const her = d.entities.some((e: any) => e.id === 'cantina:hauler');
+            const onPlate = (d.hud?.faces ?? []).some((f: any) => f.kind === 'hauler');
+            if (r.phase === 'caged') {
+              r.caged++;
+              if (her) r.cagedHer++;
+              if (onPlate) r.cagedPlate++;
+            } else if (her) r.freedHer++;
+          }
+          requestAnimationFrame(look);
+        };
+        requestAnimationFrame(look);
+      });
+      await sleep(2000);
+    }
+    const early = friend ? ((await friend.page.evaluate(() => (window as any).__cantina)) as { caged: number; cagedHer: number; cagedPlate: number }) : null;
+    const plateA0 = await plate(ph);
+    const rosterA = (await ph.page.evaluate(() => (window as any).irreverents.world.roster ?? null)) as string[] | null;
+    fact(
+      'hidden-recruit-not-early',
+      inCantina && !!early && early.caged > 60 && early.cagedHer === 0 && early.cagedPlate === 0 && !plateA0.includes('hauler') && !!rosterA && !rosterA.includes('hauler'),
+      `in the new game (roster ${JSON.stringify(rosterA)}), a friend's phone walked into the cantina (${inCantina}); of ${early?.caged ?? 0} frames drawn there while she is caged, ${early?.cagedHer ?? '?'} drew the hauler wandering and ${early?.cagedPlate ?? '?'} had her on the plate (none should); the first phone's plate: ${plateA0.join(', ')}`,
+    );
+
+    // Free her by touch: stand in the cage's middle, hold Use past the cage's 2.2 s.
+    let freed = false;
+    let state: string | null = null;
+    let banner: string | null = null;
+    let gauge = 0;
+    if (inCave) {
+      const w = await ph.page.evaluate(() => (window as any).irreverents.content.characters[(window as any).irreverents.drawn.me.kind].box.w);
+      await standAt(ph, 8 * 16 - w / 2, -1);
+      await sleep(300);
+      if (process.env.E2E_TOUCH_BREAK === 'interact') await ph.page.addStyleTag({ content: '[data-action="interact"] { display: none !important; }' });
+      state = await ph.page.evaluate(() => (document.querySelector('#actions [data-action="interact"]') as HTMLElement | null)?.dataset.state ?? null);
+      await ph.page.evaluate(() => {
+        const w = window as any;
+        w.__free = { gauge: 0, banner: null };
+        const look = (): void => {
+          const d = w.irreverents.drawn;
+          const c = (d.recruits?.cages ?? []).find((x: any) => x.id === 'cave-captive');
+          if (c?.gauge) w.__free.gauge = Math.max(w.__free.gauge, c.gauge);
+          if (d.banner && !w.__free.banner) w.__free.banner = d.banner.text;
+          requestAnimationFrame(look);
+        };
+        requestAnimationFrame(look);
+      });
+      const use = await pointOn(ph, '[data-action="interact"]');
+      if (use) {
+        await ph.cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ ...use, id: 2 }] });
+        try {
+          await ph.page.waitForFunction(() => ((window as any).irreverents.drawn.recruits?.cages ?? []).some((x: any) => x.id === 'cave-captive' && x.open), null, { polling: 'raf', timeout: 4000 });
+          freed = true;
+        } catch {
+          // reported below
+        }
+        await ph.cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+      }
+      await sleep(250);
+      const f = (await ph.page.evaluate(() => (window as any).__free)) as { gauge: number; banner: string | null };
+      gauge = f.gauge;
+      banner = f.banner ?? ((await ph.page.evaluate(() => (window as any).irreverents.drawn.banner?.text ?? null)) as string | null);
+      if (freed) await shots(ph, dir, 'hidden-freed');
+    }
+    fact(
+      'hidden-recruit-freed',
+      freed && state === 'free' && !!banner,
+      `standing in the cage's middle the Use button said ${JSON.stringify(state)} (expected "free"); a touch held on it filled the hold to ${Math.round(gauge * 100)}% and the page drew the cage ${freed ? 'open' : 'STILL SHUT after 4 s'} with the banner ${JSON.stringify(banner)}`,
+    );
+
+    // The friend's cantina now draws her wandering (nobody plays her yet).
+    let wandering = false;
+    if (freed && friend) {
+      await friend.page.evaluate(() => ((window as any).__cantina.phase = 'freed'));
+      try {
+        await friend.page.waitForFunction(() => (window as any).irreverents.drawn.entities.some((e: any) => e.id === 'cantina:hauler'), null, { polling: 'raf', timeout: 2500 });
+        wandering = true;
+      } catch {
+        // reported below
+      }
+      // The look, before the swap takes her out of the cantina (inside the cage's 5 s offer).
+      if (wandering) await shots(friend, dir, 'hidden-cantina');
+    }
+    fact('hidden-recruit-cantina', wandering, `once she was freed, the friend's page in the cantina ${wandering ? 'drew the hauler wandering there' : 'NEVER drew her there within 2.5 s'}`);
+
+    // A tap of Use at the open cage (within its offer) swaps her in on the first phone's slot.
+    let swapped = false;
+    if (freed) {
+      await tap(ph, 'interact');
+      try {
+        await ph.page.waitForFunction(() => (window as any).irreverents.drawn.me.kind === 'hauler', null, { polling: 'raf', timeout: 3000 });
+        swapped = true;
+      } catch {
+        // reported below
+      }
+      await sleep(800);
+    }
+    const plateA = await plate(ph);
+    const plateB = friend ? await plate(friend) : [];
+    fact(
+      'hidden-recruit-plate',
+      swapped && plateA[0] === 'hauler' && plateB.includes('hauler'),
+      `a tap of Use at the open cage ${swapped ? 'swapped the hauler in' : 'did NOT swap her in'}: the first phone's plate lists ${plateA.join(', ')} (her first: it plays her), the friend's ${plateB.join(', ') || 'nothing'}`,
+    );
+    if (swapped) await shots(ph, dir, 'hidden-plate');
   } finally {
-    await ph.ctx.close();
+    await ph.ctx.close().catch(() => {});
+    await friend?.ctx.close().catch(() => {});
   }
 }
 

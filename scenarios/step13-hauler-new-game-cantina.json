@@ -1,0 +1,141 @@
+{
+  "id": "step13-hauler-new-game-cantina",
+  "proves": "a new game's world does not show the hidden recruit early: with the roster a new kept game and everyone's kingdom start with (content/roster.json `start`, the four, which src/server/game.ts makeWorld gives them and scripts/checks/step13-roster.ts measures on a real server), and every room's placements put in as the server's new world has them (the cantina's included), the hauler is not a cantina regular and not in the party (the party plate's faces) while she is caged; the grappler walks from the quarry pit into the hidden cave and holds Use at her cage: from the next tick she wanders the cantina, and when he swaps her in on the spot she is in the party (on the plate) and her regular goes, the grappler's comes. Control (watched to fail): the hold let go at 2.0 s: she never appears in the cantina or the party",
+  "room": "cantina",
+  "placements": true,
+  "placedRooms": [
+    "castle-street",
+    "courtyard",
+    "forest-road",
+    "forest-trail",
+    "graybox-hall",
+    "hall-gallery",
+    "outpost",
+    "quarry-cave",
+    "quarry-depot",
+    "quarry-pit",
+    "quarry-ridge",
+    "quarry-road",
+    "quarry-tower",
+    "test-body",
+    "test-chase",
+    "test-clash",
+    "test-fight",
+    "test-hit",
+    "test-machine",
+    "test-outpost",
+    "test-parts",
+    "test-ranged",
+    "test-ranged-bomb",
+    "test-ranged-camp",
+    "test-ranged-floor",
+    "test-shop",
+    "test-sides",
+    "test-street",
+    "test-trike",
+    "test-wave-wagon",
+    "test-weapons",
+    "test-weight",
+    "throne-room",
+    "undercroft"
+  ],
+  "world": {
+    "roster": [
+      "grappler",
+      "infiltrator",
+      "flyer",
+      "brawler"
+    ]
+  },
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0,
+      "room": "quarry-pit"
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 262,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 290,
+      "to": 430,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 440,
+      "to": 443,
+      "hold": [
+        "interact"
+      ]
+    }
+  ],
+  "ticks": 480,
+  "expect": [
+    {
+      "fact": "cantina",
+      "room": "cantina",
+      "between": [
+        1,
+        417
+      ],
+      "regulars": [
+        "infiltrator",
+        "flyer",
+        "brawler"
+      ],
+      "party": [
+        "grappler",
+        "infiltrator",
+        "flyer"
+      ]
+    },
+    {
+      "fact": "cantina",
+      "room": "cantina",
+      "between": [
+        426,
+        438
+      ],
+      "regulars": [
+        "infiltrator",
+        "flyer",
+        "brawler",
+        "hauler"
+      ],
+      "party": [
+        "grappler",
+        "infiltrator",
+        "flyer"
+      ]
+    },
+    {
+      "fact": "cantina",
+      "room": "cantina",
+      "between": [
+        446,
+        480
+      ],
+      "regulars": [
+        "grappler",
+        "infiltrator",
+        "flyer",
+        "brawler"
+      ],
+      "party": [
+        "hauler",
+        "infiltrator",
+        "flyer"
+      ]
+    }
+  ]
+}
