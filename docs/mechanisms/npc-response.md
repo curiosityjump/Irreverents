@@ -262,7 +262,8 @@ taking it is a piece) is drawn from the cut `gem` look until a
 The owner's rules, each marked `INTENT:` with its D-number at its site:
 
 1. **Mood and alert are two things (D-065).** Mood is per person; the
-   alert is one number per area (a room, tonight), 0 to 3. Three furious
+   alert is one number per area (a room, tonight), 0 to 3, or 0 to 5 where
+   the area's dispatch table has five rows (`maxAlert()`; the castle street). Three furious
    witnesses and an alert of 0 is a normal state of the world.
 2. **Only a completed call raises the alert (D-063, D-075).** The number
    has **exactly one line that raises it**, in `raiseAlert()`
@@ -314,7 +315,8 @@ why }` (`knocked-out`, `bell-broken`, `calmed`, `left-the-bell`). Having
 sent a call, a person calls again only after witnessing something more
 (`dissonance` above `c.call.reported`).
 
-**The alert.** Each completed call adds 1, to a most of 3, and restarts
+**The alert.** Each completed call adds 1, to a most of 3 (`MAX_ALERT`), or
+the area's dispatch table's row count (`maxAlert()`: 5 in the castle street), and restarts
 the wait. Every change emits `alert-changed { area, from, to }` (also
 Step 7's).
 
@@ -367,7 +369,8 @@ unseen.
 post, drawn with the working parts behind bodies (`drawBells`); while rung
 it swings and a bar over it fills (the time left to stop the call),
 drawn with the marks (`drawAlert`); broken, a grey stump. The area's
-alert is a rising meter of up to three bars under the party plate; nothing
+alert is a rising meter of three bars (five where the area's table has five
+rows; at the top they flicker, all-out) under the party plate; nothing
 at 0. The looks `bell`, `bell-ringing` and `bell-broken` replace the plain
 shapes when present (`alert-pip`/`alert-pip-off` only with `PIP_LOOKS`,
 `docs/mechanisms/rendering-world.md`)
@@ -427,7 +430,36 @@ home area has a dispatch file:
 - An `alert-changed` up to level k queues `rows[k-1]`; a completed call
   with the alert already at its most queues the last row again, only
   when nothing is queued (`DRAFT:` no banked flood). At alert 0 the queue
-  is dropped.
+  is dropped, and a waiting row above the current level is dropped when the
+  alert cools below it. Every queued row emits `dispatch-queued { area, row,
+  why }` (`why`: `call` or `timer`).
+- **All-out (`keepComing`, seconds, the escalating guard response,
+  `DRAFT:`):** with the alert at its most, while any responder of the area
+  sees a hero (`c.respond.sight`, this tick), the last row is queued again
+  every `keepComing` seconds (one waiting at a time). It never raises the
+  alert (D-063); out of every responder's sight the clock restarts.
+  `c.dispatch.seen` on the alert entity counts it.
+- **The stronger relieve the weaker (`relieve`, the orchestrator's ruling,
+  `DRAFT:`):** when a row is due and the room is past its cap, arrivals of
+  an EARLIER row (`c.arrival.row`) whose character is listed in `relieve`
+  are stood down, farthest from any hero first, as many as the row needs
+  less those already leaving: `c.arrival.relieved`, `c.respond` and
+  `c.whistle` dropped, mood 1 (`stood-down`), event `dispatch-relieved
+  { area, entity, row }`. He walks out by the table door on the far side
+  from the nearest hero and is removed there or once more than `entryAway`
+  tiles from every hero (off a phone's screen); while walking he still
+  counts against the cap, so the room never holds more than it. One in
+  another room is a candidate only where no hero is (removed at once).
+  `INTENT:` never anyone within `RELIEVE_NEAR` (4) tiles of a hero, at the
+  reins of a machine, out cold, held, carrying, flying, in a beat or
+  mid-swing; the placed guard is no arrival. `alert-respond` never calls a
+  relieved one back.
+- **Riding in (`rides`, a machine id, as the outposts'):** a row person who
+  `rides` is put down at the reins: the machine (`<id>:ride`) first, on
+  his tile, facing the place reported, told to chase it (`c.chase`), and
+  machine-seat seats him. At most one machine the area sent stands at a
+  time (with one standing he walks in). Machines are not people: no cap.
+  It stays where it ends when the alert is over.
 - A queued row walks in while the room's people (bodies with `c.npc`,
   out cold or not), plus the area's arrivals who followed a hero into
   another room, plus the row fit under `cap` (`npcDispatchCapOn`, a
@@ -480,15 +512,26 @@ page's first frame). `drawn.alert` `{ level, whistle, bell }` is the record the
 checks read (`bell`: a ringing bell's bar in the room, 0..1, or null).
 
 **The castle street's table:** doors `to-throne-room` and `to-courtyard`,
-cap 8, rows: level 1 nobody, level 2 two guards, level 3 three (the middle
+cap 8, five rows (the escalating guard response: the alert runs 0 to 5
+here): level 1 nobody, level 2 two guards, level 3 three (the middle
 one the `armoured-guard`: slower, twice the weight, toughness 180; drawn
 from his own sheet, P08 row 4, `DRAFT:`; the e2e fact `armoured-look`,
 `scripts/e2e/armoured-look.ts`, reads his colours off the page); entries at
 columns 1, 18, 22, 26, 30, 36, 44 and 46 of the floor, `entryAway` 12
-(about half a phone screen: the edges of the view).
+(about half a phone screen: the edges of the view). Level 4: a guard riding
+the `guard-trike` and an armoured guard; level 5: two armoured guards, the
+row that repeats, `keepComing` 12, `relieve` `["guard"]`.
 
 **Checks** (`scenarios/step4-tier-*.json`, all in the real street):
 `-whistle-brings-row`, `-whistle-stopped`, `-no-whistle-unprovoked`,
+`-level4-elite-row` (relieved on the level's tick, the row in within 400
+ticks, its trike rams someone), `-level5-keeps-coming` (a timer row with no
+call completed), with the local phone facts `escalation-level4` and `-level5`
+(`scripts/e2e/escalation.ts`: each level's scenario world saved as a kept
+game on a local server, a phone page joins it and walks into the street; it
+counts the pips and the armoured guards and the trike drawn; alone it writes
+the shots, `docs/plan/step-4-shots/escalation/`; control
+`E2E_ESCALATION_ROWS=3`),
 `-both-doors`, `-cap-holds`, `-cools-and-leaves`, `-raging-guard-whistles`,
 `-pips-cross-a-door` (the `alert` fact's `"shown": true` reads
 `world.alerts`), and

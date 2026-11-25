@@ -787,3 +787,53 @@ By a subagent, `docs/plan/step-4-shots/camp-row-both-sides-750x340.png` at phone
 **Decided** (`DRAFT:`): the castle street with the villain first, the courtyard through the opened gate second; the rule as data (`answers` in `content/hostility.json`, good side against bad side); on-sight hostility, moods, calls and the cap unchanged; no room or placement edits. **Open** (the builder's, logged): the field's name, the memory's length, the scenarios' inputs. **For the owner, by playing:** whether the brawl is funny or a chore; whether the shopkeeper should join in; whether guards should ever fight the villain on sight.
 
 **Briefs:** `handoff-prompts/guards-meet-bandits.md`.
+
+## The escalating guard response
+
+Brief `handoff-prompts/escalating-guard-response.md` (the owner, 2026-11-25
+~00:10 UTC: "I want the escalating guard response implemented now"). Builder
+`session_017WiGzJpUjDMF6E6joLnxqr`. Decisions-log "Step 4: five levels".
+
+**Push 1, levels 4 and 5 in the castle street (committed locally, held:
+the owner is playing and pushes are paused).**
+- The alert's most is per area: `maxAlert()` = the dispatch table's row
+  count, else 3. The street's table has five rows; level 4 a guard riding
+  the trike (`rides`, the camp's shape) and an armoured guard, level 5 two
+  armoured guards; `keepComing` 12 s; `relieve` `["guard"]` (the
+  orchestrator's ruling "the stronger relieve the weaker"). Meter: five bars
+  in the castle town, flickering at 5.
+- **Measured before the ruling:** with the cap of 8 and rows of three, the
+  level-4 row walked in at tick 8389 for a level reached at 4101 (about 70 s);
+  with rows of two, 8142. Why: by level 3 the street holds 3 placed + 5 of the
+  watch, and three who followed the hero into the throne room keep searching
+  there and still count against the street's cap. **After the ruling:** level
+  4 at 4101, its row at 4433 (5.5 s); level 5 at 5131, its row the next tick.
+- **Re-timed, claims kept:** `step4-tier-cap-holds` (the alert-3 window now
+  3340–4100; alert 5 at 5200; 5 rows before 8380 instead of 2, by relieving,
+  `dispatch-relieved` at least once; never more than 8 people: the claim.
+  Control `npcDispatchCapOn` 0 still fails: 9 people at 4102, 23 rows),
+  `step4-tier-away-at-the-most-skirmisher` (ticks 10700 → 12000: the alert
+  now cools from 4, so the follower walks out later; the hero's exit re-pinned
+  3483 → 3482).
+- **New scenarios and their controls (each watched failing):**
+  `step4-tier-level4-elite-row` (control `relieve` left out: 3 facts fail;
+  `rides` left out: the trike fact fails), `step4-tier-level5-keeps-coming`
+  (control `keepComing` 0: the timer fact fails; the table cut to 3 rows:
+  alert and arrivals fail).
+- **Phone facts:** `escalation-level4`, `-level5` (`scripts/e2e/escalation.ts`,
+  local only: each level's scenario world saved as a kept game, a phone page
+  walks into it): green twice; control `E2E_ESCALATION_ROWS=3` fails both.
+  Shots `docs/plan/step-4-shots/escalation/level{4,5}-{844x390,390x664}.png`
+  (taken a moment after each row walks in: at 4, four bars lit, two
+  armoured guards and the trike's nose at the left edge; at 5, five bars, a
+  wall of armoured guards). The live fact `tiers` is unchanged (it reaches
+  level 2 by touch); `check:live` not run (pushes paused).
+- **Additive outside the brief's list:** the `alert` scenario fact accepts 0
+  to 5 (`src/scenarios/facts/alert.ts`, one line; `docs/mechanisms/scenarios.md`).
+- **Doubts, not changed:** (1) followers who chase a hero into another room
+  search there until the alert cools and count against their area's cap the
+  whole time (`alert-dispatch.ts`, `away`): push 2's rooms may make this
+  visible. (2) In `-level5-keeps-coming` the passive hero is shoved back and
+  forth through the throne-room door by the watch (5363, 5857, 6131): push
+  3's way-out work (`doorClear`) should look at it. (3) Not tried on a real
+  iPhone; whether it feels like risk is the owner's to judge.

@@ -93,6 +93,8 @@ const system: System = {
       for (const e of world.entities) {
         const kind = npcKind(content, e);
         if (!kind || e.room !== ev.area || e.id === ev.by || kind.role !== RESPONDER_ROLE || kind.side !== callerSide) continue;
+        // The escalating guard response: one stood down to make room (alert-dispatch) is on his way out, not on call.
+        if (e.c.arrival?.relieved) continue;
         // Someone already chasing a hero they have seen keeps their own, fresher, lead.
         if (e.c.respond?.phase === 'chase') continue;
         e.c.respond = { phase: 'go', x: ev.x, dir: 1, stall: 0 };

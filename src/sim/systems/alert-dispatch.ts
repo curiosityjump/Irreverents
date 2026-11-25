@@ -1,5 +1,7 @@
+import type { Dispatch } from '../../content/kinds/dispatch.ts';
 import type { Door, Room } from '../../content/kinds/rooms.ts';
-import { alertLevel, alertOf, MAX_ALERT } from '../npc/alert.ts';
+import type { Content } from '../../content/types.ts';
+import { alertLevel, alertOf, maxAlert } from '../npc/alert.ts';
 import { centre, drive, isOut, npcKind, setMood } from '../npc/state.ts';
 import type { Entity, System, World } from '../types.ts';
 import { findEntity, removeEntity, spawnBody } from '../world.ts';
@@ -11,14 +13,29 @@ declare module '../types.ts' {
      * dispatch file: the rows waiting to walk in (each a row index) and how
      * many rows have walked in so far (for deterministic ids).
      */
-    dispatch?: { queue: number[]; sent: number };
+    dispatch?: {
+      queue: number[];
+      sent: number;
+      /** Ticks, at the alert's most, that a responder of the area has seen a hero since the last row (the table's `keepComing`). Read with a default: a kept game may lack it. */
+      seen?: number;
+    };
   }
   interface EventMap {
     /** A row of a dispatch table walked in: `row` is its index in the table (level - 1), `people` the new entity ids. */
     'dispatch-arrived': { area: string; row: number; people: string[] };
+    /**
+     * A row was queued (the escalating guard response, additive): `why` is `call` (the alert went up, or a call
+     * completed at the top) or `timer` (the table's keepComing, at the top, while the watch sees a hero). It walks
+     * in later, as `dispatch-arrived`, once it fits under the cap.
+     */
+    'dispatch-queued': { area: string; row: number; why: 'call' | 'timer' };
+    /** One of an earlier row was stood down to make room for row `row`'s betters ("the stronger relieve the weaker"). */
+    'dispatch-relieved': { area: string; entity: string; row: number };
   }
 }
 
+/** DRAFT: tiles from the nearest hero inside which nobody is relieved (a fight a player is in is not emptied under him). */
+const RELIEVE_NEAR = 4;
 /** How close, in pixels, counts as having reached the door to leave by. */
 const ARRIVED = 2;
 /** DRAFT: a walk out that has made no headway for this many ticks is ended there (there is always a way out). */
@@ -72,10 +89,72 @@ function doorEdge(room: Room, door: Door): number {
   return door.side === 'west' ? (door.tx + door.w) * room.tile + ARRIVED + 1 : door.tx * room.tile - ARRIVED - 1;
 }
 
+/** The middle of every player's character in a room. */
+function heroesIn(world: World, content: Content, room: string): { x: number; y: number }[] {
+  return world.entities.filter((e) => e.room === room && e.player !== null).map((e) => centre(content, e));
+}
+
+/**
+ * DRAFT (the orchestrator's ruling, 2026-11-25, "the stronger relieve the weaker"; docs/decisions-log.md,
+ * "Step 4: five levels"): row `index` is due and the area is `over` people past its cap. Of the area's
+ * arrivals from an EARLIER row whose character the table lists in `relieve`, stand down up to `over`,
+ * farthest from any hero first: they walk out by their door (the leave path below) and stop counting
+ * against the cap, so the stronger row walks in within moments of its banner and the room never holds
+ * more than the cap of the watch who are still on call. One in another room is gone at once if no hero
+ * is there (nobody sees him go).
+ * INTENT (there is always a way out; the brief): never the placed guard (he is no arrival), nobody out
+ * cold, held, carrying, flying, in a hit's beat or mid-swing, and nobody within RELIEVE_NEAR tiles of a
+ * hero: a fight a player is in is never emptied under him.
+ */
+function relieveFor(ctx: Parameters<System['run']>[0], table: Dispatch, index: number, over: number): void {
+  const { world, content } = ctx;
+  const tile = content.rooms[table.id]!.tile;
+  const busy = (e: Entity): boolean => {
+    const c = e.c as { held?: unknown; carrying?: unknown; flying?: unknown; beat?: unknown; attack?: { phase?: string } };
+    // A person at the reins of a machine (machine-seat's c.seat.driver) drives the row's new toy: never stood down.
+    const driving = world.entities.some((m) => m.c.seat?.driver === e.id);
+    return driving || isOut(e) || c.held !== undefined || c.carrying !== undefined || c.flying !== undefined || c.beat !== undefined || (c.attack?.phase !== undefined && c.attack.phase !== 'ready');
+  };
+  const far = (e: Entity): number => {
+    const me = centre(content, e);
+    const hs = heroesIn(world, content, e.room);
+    return hs.length === 0 ? Infinity : Math.min(...hs.map((h) => Math.abs(h.x - me.x) / tile));
+  };
+  // Those already stood down and still walking out are making room already: only the rest of `over` is new.
+  const going = world.entities.filter((e) => e.c.arrival?.area === table.id && e.c.arrival.relieved).length;
+  const may = world.entities
+    .filter((e) => {
+      const a = e.c.arrival;
+      // In another room, only where no hero is (he is gone at once, unseen); in the area, not near a hero.
+      const near = e.room === table.id ? far(e) < RELIEVE_NEAR : heroesIn(world, content, e.room).length > 0;
+      return a && a.area === table.id && !a.relieved && a.row !== undefined && a.row < index && table.relieve.includes(e.kind) && !busy(e) && !near;
+    })
+    .sort((p, q) => far(q) - far(p) || (p.id < q.id ? -1 : 1));
+  for (const e of may.slice(0, Math.max(0, over - going))) {
+    e.c.arrival!.relieved = true;
+    // He leaves by the table's door on the far side from the nearest hero, so he never walks out through the fight.
+    const room = content.rooms[e.room];
+    const hs = heroesIn(world, content, e.room);
+    if (room && e.room === table.id && hs.length > 0) {
+      const me = centre(content, e).x;
+      const h = hs.reduce((b, p) => (Math.abs(p.x - me) < Math.abs(b.x - me) ? p : b));
+      const doors = table.doors.map((id) => room.doors.find((d) => d.id === id)!).filter((d) => (d.side === 'west' ? -1 : 1) === (me >= h.x ? 1 : -1));
+      if (doors[0]) e.c.arrival!.door = doors[0].id;
+    }
+    e.c.arrival!.stall = 0;
+    delete e.c.respond;
+    delete e.c.whistle;
+    setMood(ctx, e, 1, 'stood-down');
+    ctx.emit('dispatch-relieved', { area: table.id, entity: e.id, row: e.c.arrival!.row! });
+  }
+}
+
 /** People (bodies with an NPC kind) in a room, out cold or not: they are still there. */
 function peopleIn(world: World, content: Parameters<typeof npcKind>[0], room: string): Entity[] {
   return world.entities.filter((e) => e.room === room && e.player === null && e.c.npc && npcKind(content, e));
 }
+
+
 
 /**
  * The town sends help by rows (Step 4, the town's tiers). For an area with a
@@ -121,10 +200,14 @@ const system: System = {
       if (to !== undefined) {
         raisedTo.delete(ev.area);
         st.queue.push(Math.min(to, table.rows.length) - 1);
-      } else if (alertLevel(world, ev.area) >= MAX_ALERT) {
+        ctx.emit('dispatch-queued', { area: ev.area, row: st.queue[st.queue.length - 1]!, why: 'call' });
+      } else if (alertLevel(world, ev.area) >= maxAlert(content, ev.area)) {
         // INTENT (doc 24: "never impose an arbitrary maximum wave count"): at the top, a further call brings the last row again, under the cap.
         // DRAFT: one such row waits at a time; calls finished while it waits add nothing (a full street does not bank a flood for later).
-        if (st.queue.length === 0) st.queue.push(table.rows.length - 1);
+        if (st.queue.length === 0) {
+          st.queue.push(table.rows.length - 1);
+          ctx.emit('dispatch-queued', { area: ev.area, row: table.rows.length - 1, why: 'call' });
+        }
       }
     }
 
@@ -136,12 +219,36 @@ const system: System = {
       if (!room || !alert || !st) continue;
       // The alert is over: nothing more walks in.
       if (alertLevel(world, area) === 0) st.queue = [];
+      // DRAFT (the escalating guard response): cooled below a waiting row's level, it is dropped (the level it answered is gone).
+      st.queue = st.queue.filter((k) => k < alertLevel(world, area));
+      // DRAFT (the escalating guard response, "all-out"; the table's keepComing): at the alert's most, while any
+      // responder of the area sees a hero (alert-respond's `sight`, this tick), the last row comes again on a timer.
+      // INTENT (D-063): this never raises the alert; the level got to its most by completed calls. Out of every
+      // responder's sight, the clock restarts: getting away stops it (D-061), and cooling is alert-cool's as ever.
+      if (table.keepComing > 0 && alertLevel(world, area) >= maxAlert(content, area)) {
+        const seen = world.entities.some((e) => e.c.respond?.sight && !isOut(e) && (e.c.arrival?.area ?? e.c.npc?.home) === area);
+        st.seen = seen ? (st.seen ?? 0) + 1 : 0;
+        if (st.seen >= Math.round(table.keepComing * 60)) {
+          st.seen = 0;
+          if (st.queue.length === 0) {
+            st.queue.push(table.rows.length - 1);
+            ctx.emit('dispatch-queued', { area, row: table.rows.length - 1, why: 'timer' });
+          }
+        }
+      } else st.seen = 0;
       while (st.queue.length > 0) {
         const index = st.queue[0]!;
         const row = table.rows[index] ?? [];
         // DRAFT: arrivals of this area who followed a hero out still count, or they walk back in over the cap.
+        // INTENT (the cap is for a phone's legibility and frame time): everyone in the room counts, one stood down and
+        // walking out too, so the street never holds more than the cap; he is gone once off a phone's screen.
         const away = world.entities.filter((e) => e.c.arrival?.area === area && e.room !== area).length;
-        if (capOn && peopleIn(world, content, area).length + away + row.length > table.cap) break;
+        const over = peopleIn(world, content, area).length + away + row.length - table.cap;
+        if (capOn && over > 0) {
+          // The escalating guard response: a stronger row due makes room by standing down the weaker (DRAFT, relieveFor).
+          if (table.relieve.length > 0) relieveFor(ctx, table, index, over);
+          break;
+        }
         st.queue.shift();
         if (row.length === 0) continue;
         const ids: string[] = [];
@@ -165,12 +272,26 @@ const system: System = {
             tile = besideDoor(room, door, Math.floor(i / table.doors.length));
           }
           const doorId = door.id;
+          // DRAFT (the escalating guard response; the camp's `rides`, outpost-wave.ts): one who `rides` walks in at the
+          // reins: the machine is put down first, on his tile, and machine-seat (order 120, this tick) seats him;
+          // machine-driven drives it at the place reported, then at a hero he sees, at the machine's `speed.driver`
+          // (INTENT: below every hero's run, content check). DRAFT: at most one of the area's sent machines stands at a
+          // time (one taken or wrecked is the player's toy); with one standing, he walks in on foot. Machines are not
+          // people, so they do not count toward the cap; the trike is left where it ends when the alert is over.
+          const ride = p.rides !== undefined ? content.machines?.[p.rides] : undefined;
+          const rideId = `${id}:ride`;
+          const standing = ride && world.entities.some((o) => o.room === area && o.kind === ride.character && o.id.startsWith(`${area}:help`));
+          const m = ride && !standing && !findEntity(world, rideId) ? spawnBody(world, content, { id: rideId, character: ride.character, room: area, tile }) : undefined;
           const e = spawnBody(world, content, { id, character: p.character, room: area, tile });
           const dir: 1 | -1 = table.entries.length > 0 ? (alert.x >= (tile[0] + 0.5) * room.tile ? 1 : -1) : door.side === 'west' ? 1 : -1;
           e.facing = dir;
+          if (m) {
+            m.facing = dir;
+            m.c.chase = { x: alert.x };
+          }
           // People get c.npc from a placement entry (npc-setup); an arrival has none, so it is given here.
           e.c.npc = { kind: p.npc, home: area, mood: 1, dissonance: 0, offenders: [], quiet: 0, cool: 0, lastSeen: null, step: 0, stepTicks: 0, stall: 0, bark: null };
-          e.c.arrival = { area, door: doorId, stall: 0 };
+          e.c.arrival = { area, door: doorId, stall: 0, row: index };
           e.c.respond = { phase: 'go', x: alert.x, dir, stall: 0 };
           setMood(ctx, e, 2, 'called');
           ids.push(id);
@@ -184,13 +305,23 @@ const system: System = {
     for (const e of [...world.entities]) {
       const a = e.c.arrival;
       if (!a || e.c.respond || isOut(e)) continue;
-      if (alertLevel(world, a.area) > 0) continue;
+      if (alertLevel(world, a.area) > 0 && !a.relieved) continue;
       const room = content.rooms[e.room];
       const door = e.room === a.area ? room?.doors.find((d) => d.id === a.door) : undefined;
       // INTENT (there is always a way out, for them too): one who cannot reach his door (or is not in his area) leaves where he stands.
       if (!room || !door) {
         removeEntity(world, e.id);
         continue;
+      }
+      // DRAFT (relieveFor): one stood down is gone once off a phone's screen: more than entryAway tiles from every hero.
+      const table = tables[a.area];
+      if (a.relieved && table) {
+        const me = centre(content, e);
+        const hs = heroesIn(world, content, e.room);
+        if (hs.every((h) => Math.abs(h.x - me.x) / room.tile > table.entryAway)) {
+          removeEntity(world, e.id);
+          continue;
+        }
       }
       const dx = doorEdge(room, door) - centre(content, e).x;
       const there = door.side === 'west' ? dx >= -ARRIVED : dx <= ARRIVED;

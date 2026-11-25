@@ -4,7 +4,7 @@ import type { Fact } from '../types.ts';
 /**
  * { "fact": "alert", "area": "test-street", "at": 900, "is": 1 }
  * { "fact": "alert", "area": "test-street", "between": [0, 600], "is": 0 }
- * An area's alert level (0 to 3) at a tick, or on every tick of a span,
+ * An area's alert level (0 to 5: the castle town's tables have five rows, maxAlert) at a tick, or on every tick of a span,
  * both ends included. An area is a room id tonight; one with no alert
  * entity yet is at 0. With `"shown": true`, the level the world shows the
  * party instead (`world.alerts[area]`, Step 4's town tiers: what a page in
@@ -17,7 +17,7 @@ const fact: Fact = {
     checkOnly(spec, ['area', 'at', 'between', 'is', 'shown'], out);
     if (spec.shown !== undefined && spec.shown !== true) out.push(`shown: must be true or left out, but is ${JSON.stringify(spec.shown)}`);
     if (typeof spec.area !== 'string' || !(spec.area in content.rooms)) out.push(`area: must be a room id, but is ${JSON.stringify(spec.area)}`);
-    if (![0, 1, 2, 3].includes(spec.is as number)) out.push(`is: must be 0, 1, 2 or 3, but is ${JSON.stringify(spec.is)}`);
+    if (![0, 1, 2, 3, 4, 5].includes(spec.is as number)) out.push(`is: must be 0 to 5, but is ${JSON.stringify(spec.is)}`);
     const b = spec.between;
     if ((spec.at === undefined) === (b === undefined)) out.push('at / between: give one or the other');
     else if (spec.at !== undefined && !isTick(spec.at, scenario)) out.push(`at: must be a tick from 0 to ${scenario.ticks}, but is ${JSON.stringify(spec.at)}`);

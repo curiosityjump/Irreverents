@@ -1,5 +1,5 @@
 import type { Content } from '../../content/types.ts';
-import { MAX_ALERT } from '../../sim/npc/alert.ts';
+import { MAX_ALERT, maxAlert } from '../../sim/npc/alert.ts';
 import type { World } from '../../sim/types.ts';
 import { queueBanner } from './banner.ts';
 import { drawFrame, frameOf, look, safeView } from './fx.ts';
@@ -59,23 +59,30 @@ function drawPipStrip(g: CanvasRenderingContext2D, x: number, y: number, slots: 
  * alarm is, not as a count of things you own. true puts the pip looks back.
  */
 const PIP_LOOKS = false;
-const METER = ['#ffd166', '#f78c2a', '#ef233c'];
+// DRAFT (the escalating guard response: five levels in the castle town): two more, deeper reds, the last all-out.
+const METER = ['#ffd166', '#f78c2a', '#ef233c', '#c1121f', '#ff2d6f'];
 const SOCKET = '#2b2750';
 /** DRAFT (brief phone-hud-legibility, third pass: the unlit sockets were nearly invisible on the strip): an unlit bar has a pale rim, so the meter shows how far it can still climb. */
 const SOCKET_RIM = '#7d77b8';
 
-/** The rising meter: bar i is 4 + 3i px tall (to 10), 8 wide, 12 apart; the newest lit bar flashes white as it lights. */
-function drawMeter(g: CanvasRenderingContext2D, x: number, y: number, level: number, age: number): void {
-  const bars = Math.max(level, MAX_ALERT);
+/**
+ * The rising meter: `slots` bars climbing from 4 px to 10 px tall (4, 7, 10 for three; 4, 6, 7, 9, 10 for five),
+ * 8 wide, 12 apart; the newest lit bar flashes white as it lights. DRAFT (the escalating guard response): at the
+ * top level (all-out) every lit bar flickers on and off its colour, so the strip reads as "it will not stop".
+ */
+function drawMeter(g: CanvasRenderingContext2D, x: number, y: number, level: number, age: number, slots: number, tick: number): void {
+  const bars = Math.max(level, slots);
+  const allOut = level >= slots && slots > MAX_ALERT;
   for (let i = 0; i < bars; i++) {
-    const h = Math.min(10, 4 + 3 * i);
+    const h = bars <= 1 ? 10 : Math.min(10, 4 + Math.round((6 * i) / (bars - 1)));
     const bx = x + i * 12;
     const by = y + 10 - h;
     const lit = i < level;
     g.fillStyle = lit ? INK : SOCKET_RIM;
     g.fillRect(bx, by, 8, h);
     const flash = lit && i === level - 1 && age >= 0 && age < GLOW_TICKS && Math.floor(age / 5) % 2 === 0;
-    g.fillStyle = flash ? PAPER : lit ? METER[Math.min(METER.length - 1, i)]! : SOCKET;
+    const flicker = allOut && lit && Math.floor(tick / 15) % 2 === 0;
+    g.fillStyle = flash ? PAPER : flicker ? ALARM : lit ? METER[Math.min(METER.length - 1, i)]! : SOCKET;
     g.fillRect(bx + 1, by + 1, 6, lit ? h - 1 : h - 2);
     if (lit && !flash) {
       // A lit bar's top edge catches the light.
@@ -99,7 +106,7 @@ function shownLevel(world: World, roomId: string): { level: number; area: string
   return best;
 }
 
-/** The pips and the whistle's gauge drawn on the last frame: `level` (0 to 3) and `whistle`, a whistling guard's progress 0..1 in this room, or null. */
+/** The pips and the whistle's gauge drawn on the last frame: `level` (0 to the area's most, maxAlert) and `whistle`, a whistling guard's progress 0..1 in this room, or null. */
 export function drawnAlert(): { level: number; whistle: number | null; bell?: number | null } {
   return shown;
 }
@@ -224,15 +231,17 @@ export function drawAlert(g: CanvasRenderingContext2D, world: World, content: Co
   if (level <= 0) return;
   // DRAFT (brief phone-hud-legibility, 2026-11-24: the pips under the plate read as hearts or balloons):
   // they sit on their own dark strip led by a warning sign, so they read as "the watch is after you".
-  const slotsShown = lookDef(content, 'alert-pip') && lookDef(content, 'alert-pip-off') ? Math.max(level, MAX_ALERT) : level;
-  drawPipStrip(g, PX(), PY(), PIP_LOOKS ? slotsShown : Math.max(level, MAX_ALERT));
+  // The meter's length is the shown area's most (five in the castle town, three elsewhere: maxAlert).
+  const most = area ? maxAlert(content, area) : MAX_ALERT;
+  const slotsShown = lookDef(content, 'alert-pip') && lookDef(content, 'alert-pip-off') ? Math.max(level, most) : level;
+  drawPipStrip(g, PX(), PY(), PIP_LOOKS ? slotsShown : Math.max(level, most));
   if (!PIP_LOOKS) {
-    drawMeter(g, PX(), PY(), level, world.tick - litAt);
+    drawMeter(g, PX(), PY(), level, world.tick - litAt, most, world.tick);
     return;
   }
   if (lookDef(content, 'alert-pip')) {
     let drawn = true;
-    const slots = lookDef(content, 'alert-pip-off') ? Math.max(level, MAX_ALERT) : level;
+    const slots = lookDef(content, 'alert-pip-off') ? Math.max(level, most) : level;
     for (let i = 0; i < slots; i++) {
       drawn = drawLookIn(g, content, [i < level ? 'alert-pip' : 'alert-pip-off'], PX() + i * 12, PY(), 10, 10) && drawn;
       if (!drawn) break;

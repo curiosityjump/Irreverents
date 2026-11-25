@@ -1,0 +1,332 @@
+{
+  "id": "step4-tier-level5-keeps-coming",
+  "proves": "The escalating guard response, level 5 (all-out), in the real castle street: the brawler fights until the alert reaches its most (5, at tick 5131, by a completed call) and then stops doing anything; the level-5 row (two armoured guards) walks in on that tick, making room by standing down plain guards of earlier rows (the stronger relieve the weaker); after the last completed call (5257) no call completes, yet while the watch can see the hero the last row is queued again by the timer (keepComing, 12 s: at 6608) and the street never holds more than its cap of 8. Controls (watched to fail): keepComing 0 (no timer row), and the table cut to three rows (the alert never reaches 5).",
+  "room": "castle-street",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "brawler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 60,
+      "to": 200,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 1500,
+      "to": 1505,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 2700,
+      "to": 2704,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 3370,
+      "to": 3394,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 3400,
+      "to": 3404,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 3490,
+      "to": 3514,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 3520,
+      "to": 3524,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 3610,
+      "to": 3634,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 3640,
+      "to": 3644,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 3730,
+      "to": 3754,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 3760,
+      "to": 3764,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 3850,
+      "to": 3874,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 3880,
+      "to": 3884,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 3970,
+      "to": 3994,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 4000,
+      "to": 4004,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 4090,
+      "to": 4114,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 4120,
+      "to": 4124,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 4210,
+      "to": 4234,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 4240,
+      "to": 4244,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 4330,
+      "to": 4354,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 4360,
+      "to": 4364,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 4450,
+      "to": 4474,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 4480,
+      "to": 4484,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 4570,
+      "to": 4594,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 4600,
+      "to": 4604,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 4690,
+      "to": 4714,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 4720,
+      "to": 4724,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 4810,
+      "to": 4834,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 4840,
+      "to": 4844,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 4930,
+      "to": 4954,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 4960,
+      "to": 4964,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 5050,
+      "to": 5074,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 5080,
+      "to": 5084,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 5170,
+      "to": 5194,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 5200,
+      "to": 5204,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 5290,
+      "to": 5314,
+      "x": 1
+    }
+  ],
+  "ticks": 7600,
+  "expect": [
+    {
+      "fact": "alert",
+      "area": "castle-street",
+      "at": 5300,
+      "is": 5
+    },
+    {
+      "fact": "event-where",
+      "event": "dispatch-arrived",
+      "where": {
+        "area": "castle-street",
+        "row": 4
+      },
+      "between": [
+        5100,
+        7600
+      ],
+      "count": [
+        2,
+        99
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "call-completed",
+      "between": [
+        5300,
+        7600
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "dispatch-queued",
+      "where": {
+        "area": "castle-street",
+        "why": "timer"
+      },
+      "between": [
+        5300,
+        7600
+      ],
+      "count": [
+        1,
+        99
+      ]
+    },
+    {
+      "fact": "people",
+      "room": "castle-street",
+      "between": [
+        0,
+        7600
+      ],
+      "count": [
+        0,
+        8
+      ]
+    }
+  ]
+}

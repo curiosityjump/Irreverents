@@ -243,10 +243,13 @@ into the shared documents.
   drawn with the marks, not with the bell.
 - **Sky with fewer than 8 colours** is spread over 8 bands of even mixes
   between neighbouring colours; 8 or more are used as the bands.
-- **Alert pips**: at level 0 nothing is drawn (as before); at 1–3, on a
+- **Alert pips**: at level 0 nothing is drawn (as before); from 1, on a
   strip under the party plate led by a brass warning sign, a rising meter
-  of three bars (4, 7, 10 px tall, amber to red when lit, dark sockets
-  with a pale rim when not; the newest flashes as it lights). `PIP_LOOKS` in
+  of three bars (4, 7, 10 px tall), or five where the shown area's
+  dispatch table has five rows (4, 6, 7, 9, 10 px: the castle street,
+  `maxAlert()`), amber to red and deeper reds when lit, dark sockets
+  with a pale rim when not; the newest flashes as it lights, and at the
+  top of a five-bar meter (all-out) every lit bar flickers. `PIP_LOOKS` in
   `draw/alert.ts` (false since brief phone-hud-legibility's second pass:
   the round red looks read as balloons or hearts) puts back the
   `alert-pip`/`alert-pip-off` looks, 10×10, 12 px apart.

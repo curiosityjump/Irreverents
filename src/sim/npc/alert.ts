@@ -1,5 +1,6 @@
 // The area alert, the call that raises it and the task of those who answer
 // (Step 4, slice 2). Writeup: docs/mechanisms/npc-response.md, "Calling for help".
+import type { Content } from '../../content/types.ts';
 import type { Entity, StepContext, World } from '../types.ts';
 import { addEntity, findEntity } from '../world.ts';
 import { THING_KIND } from './state.ts';
@@ -25,7 +26,7 @@ declare module '../types.ts' {
      * person's mood. On an entity so the server's replication carries it.
      */
     alert?: {
-      /** 0 to MAX_ALERT. Raised only by raiseAlert(); lowered only by lowerAlert(). */
+      /** 0 to maxAlert() (MAX_ALERT where the area has no dispatch table). Raised only by raiseAlert(); lowered only by lowerAlert(). */
       level: number;
       /** Ticks of hiding and waiting since the last sighting or incident. */
       quiet: number;
@@ -71,6 +72,10 @@ declare module '../types.ts' {
       door: string;
       /** How long the walk out has made no headway (read with a default: a kept game may lack it). */
       stall?: number;
+      /** The row (its index in the table) he walked in with (the escalating guard response; absent on a kept game's: never relieved). */
+      row?: number;
+      /** Stood down to make room for a stronger row (alert-dispatch, "the stronger relieve the weaker"): he walks out now, whatever the alert. */
+      relieved?: boolean;
     };
     /** On a person answering a call. Owned by systems/alert-respond.ts. */
     respond?: {
@@ -101,8 +106,21 @@ declare module '../types.ts' {
   }
 }
 
-/** DRAFT (the Step 4 lead's call, in docs/decisions-log.md): the alert runs 0 to 3. */
+/** DRAFT (the Step 4 lead's call, in docs/decisions-log.md): the alert runs 0 to 3 in an area with no dispatch table. */
 export const MAX_ALERT = 3;
+
+/**
+ * The most an area's alert can reach: its dispatch table's row count (one
+ * level per row: content/dispatch/<area>.json), else MAX_ALERT.
+ * DRAFT (the escalating guard response, 2026-11-25; doc 26's 0-5 ladder is
+ * "an IMPLEMENTATION PROPOSAL", used by default under D-096;
+ * docs/decisions-log.md, "Step 4: five levels"): the castle town's tables
+ * have five rows, so its alert runs 0 to 5. Data, so a sixth level or a
+ * fourth is one row added or taken out.
+ */
+export function maxAlert(content: Content, area: string): number {
+  return content.dispatch?.[area]?.rows.length ?? MAX_ALERT;
+}
 
 /** DRAFT: an area is a room tonight. */
 export const alertId = (area: string): string => `~alert:${area}`;
@@ -138,7 +156,7 @@ function raiseAlert(ctx: StepContext, area: string): void {
   const a = e.c.alert!;
   // INTENT (D-068): a new call restarts the wait even when the number is already at its most.
   a.quiet = 0;
-  if (a.level >= MAX_ALERT) return;
+  if (a.level >= maxAlert(ctx.content, area)) return;
   const from = a.level;
   a.level = from + 1; // The single raise.
   showAlert(ctx.world, area, a.level);

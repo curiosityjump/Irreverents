@@ -27,7 +27,7 @@ export interface Dispatch {
    * nobody: the people already placed answer). A completed call with the
    * alert already at its most sends the last row again, under the cap.
    */
-  rows: { character: string; npc: string }[][];
+  rows: { character: string; npc: string; rides?: string }[][];
   /** Words of the banner when the alert reaches level k + 1 (push 2's page; "" for none). No digits. */
   banners: string[];
   /**
@@ -44,6 +44,24 @@ export interface Dispatch {
   entryAway: number;
   /** Words shown as each row walks in (row k's, the last repeating); empty: the room's default words. No digits. */
   announce: string[];
+  /**
+   * DRAFT (the escalating guard response, 2026-11-25; the brief's "all-out":
+   * "the last row keeps coming on each completed call AND on a timer while
+   * any responder still sees a hero, under the cap"): seconds. With the alert
+   * at its most, while any responder of the area sees a hero, the last row is
+   * queued again every this many seconds (one waiting at a time, as a call's).
+   * It never raises the alert (D-063): the level is already at its most, by
+   * completed calls. 0 (left out): only calls bring rows.
+   */
+  keepComing: number;
+  /**
+   * DRAFT (the orchestrator's ruling, 2026-11-25, "the stronger relieve the weaker": a row that arrives a
+   * minute after its banner is no escalation a player feels, and the cap is there for a phone's legibility
+   * and frame time): characters of an earlier row who may be stood down to make room when a higher row is
+   * due and the area is at its cap. They walk out by their door, and are gone once they reach it or are
+   * more than `entryAway` tiles from every hero (off a phone's screen). Empty (left out): rows wait.
+   */
+  relieve: string[];
 }
 
 declare module '../types.ts' {
@@ -58,7 +76,7 @@ const kind: ContentKind = {
   parse(raw, read) {
     const o = read.object(raw, '');
     if (!o) return null;
-    read.only(o, ['id', 'doors', 'cap', 'rows', 'banners', 'entries', 'entryAway', 'announce'], '');
+    read.only(o, ['id', 'doors', 'cap', 'rows', 'banners', 'entries', 'entryAway', 'announce', 'keepComing', 'relieve'], '');
     const out: Dispatch = {
       id: read.string(o, 'id', ''),
       doors: read.stringList(o, 'doors', ''),
@@ -68,6 +86,8 @@ const kind: ContentKind = {
       entries: [],
       entryAway: o.entryAway === undefined ? 0 : read.number(o, 'entryAway', '', { min: 0, max: 200, integer: true }),
       announce: o.announce === undefined ? [] : read.stringList(o, 'announce', ''),
+      keepComing: o.keepComing === undefined ? 0 : read.number(o, 'keepComing', '', { min: 0, max: 600 }),
+      relieve: o.relieve === undefined ? [] : read.stringList(o, 'relieve', ''),
     };
     if (o.entries !== undefined) {
       if (!Array.isArray(o.entries)) read.fail('entries', `must be a list of [column, row] tiles, but is ${describe(o.entries)}`);
@@ -95,8 +115,11 @@ const kind: ContentKind = {
       row.forEach((item: unknown, k: number) => {
         const p = read.object(item, `${w}[${k}]`);
         if (!p) return;
-        read.only(p, ['character', 'npc'], `${w}[${k}]`);
-        people.push({ character: read.string(p, 'character', `${w}[${k}]`), npc: read.string(p, 'npc', `${w}[${k}]`) });
+        read.only(p, ['character', 'npc', 'rides'], `${w}[${k}]`);
+        const person: Dispatch['rows'][number][number] = { character: read.string(p, 'character', `${w}[${k}]`), npc: read.string(p, 'npc', `${w}[${k}]`) };
+        // DRAFT (the escalating guard response; the outposts' `rides`, content/outposts/): a machine he walks in at the reins of.
+        if (p.rides !== undefined) person.rides = read.string(p, 'rides', `${w}[${k}]`);
+        people.push(person);
       });
       out.rows.push(people);
     });
@@ -123,12 +146,16 @@ const kind: ContentKind = {
         else if (room.cells[row * room.w + col] !== TILE.empty || room.cells[(row + 1) * room.w + col] === TILE.empty) fail(file, `entries[${i}]`, `[${col}, ${row}] must be an open tile standing on solid floor`);
         else if (room.doors.some((x) => x.use === 'walk' && col >= x.tx && col < x.tx + x.w && row >= x.ty && row < x.ty + x.h)) fail(file, `entries[${i}]`, `[${col}, ${row}] is in a walk door: whoever stands there is carried out`);
       });
+      d.relieve.forEach((c, i) => {
+        if (!(c in content.characters)) fail(file, `relieve[${i}]`, `no character "${c}" (characters: ${known(content.characters)})`);
+      });
       const placed = (content.placements[d.id]?.place ?? []).filter((p) => p.npc !== undefined).length;
       d.rows.forEach((row, i) => {
         if (placed + row.length > d.cap) fail(file, `rows[${i}]`, `${row.length} people and the ${placed} placed are more than the cap (${d.cap}): this row could never walk in`);
         row.forEach((p, k) => {
           if (!(p.character in content.characters)) fail(file, `rows[${i}][${k}].character`, `no character "${p.character}" (characters: ${known(content.characters)})`);
           if (!(p.npc in content.npcs)) fail(file, `rows[${i}][${k}].npc`, `no NPC kind "${p.npc}" (kinds: ${known(content.npcs)})`);
+          if (p.rides !== undefined && !(p.rides in (content.machines ?? {}))) fail(file, `rows[${i}][${k}].rides`, `no machine "${p.rides}" (machines: ${known(content.machines ?? {})})`);
         });
       });
     }

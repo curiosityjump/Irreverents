@@ -1,6 +1,6 @@
 {
   "id": "step4-tier-cap-holds",
-  "proves": "Step 4's town tiers (doc 24, bounded crowds): a dispatch row waits while it would take the street past its cap. In the castle street the hero fights on for ninety seconds (a step east or west before each swing, so the rows from both sides do not simply shove them out by the west door) and the whistles and the bell are let finish: after level 3's row (8 people: 3 placed and 5 arrived) calls keep completing (four by 5200, the alert at 3 to 6600), but no further row walks in and the street never holds more than 8. Re-timed (push 3, the armoured guard in level 3's row): with him the fight lasts longer, and by tick 8389 the street is down to 2 people (the others beaten or followed the hero out), so the waiting row walks in under the cap, as designed; the no-further-row count now ends at 8380, after 13 calls had completed with the street full and no row let in. Control (watched to fail): the cap off (npcDispatchCapOn 0), and the last row walks in again past it",
+  "proves": "Step 4's town tiers (doc 24, bounded crowds): a dispatch row waits while it would take the street past its cap. In the castle street the hero fights on for ninety seconds (a step east or west before each swing, so the rows from both sides do not simply shove them out by the west door) and the whistles and the bell are let finish: after level 3's row (8 people: 3 placed and 5 arrived) calls keep completing (four by 5200, the alert at 3 to 6600), but no further row walks in and the street never holds more than 8. Re-timed (push 3, the armoured guard in level 3's row): with him the fight lasts longer, and by tick 8389 the street is down to 2 people (the others beaten or followed the hero out), so the waiting row walks in under the cap, as designed; the no-further-row count now ends at 8380, after 13 calls had completed with the street full and no row let in. Control (watched to fail): the cap off (npcDispatchCapOn 0), and the last row walks in again past it Re-timed (the escalating guard response, 2026-11-25: five levels in the street, and the orchestrator's ruling 'the stronger relieve the weaker'): the alert reaches 4 at 4101 and 5 at 5131 (the alert-3 window ends at 4100); level 4's and 5's rows (and one more of level 5's) walk in by standing down plain guards of earlier rows (dispatch-relieved), so 5 rows walk in before 8380 instead of 2, and still the street never holds more than 8: the claim, that the cap holds, is kept.",
   "room": "castle-street",
   "placements": true,
   "players": [
@@ -692,9 +692,15 @@
       "area": "castle-street",
       "between": [
         3340,
-        6600
+        4100
       ],
       "is": 3
+    },
+    {
+      "fact": "alert",
+      "area": "castle-street",
+      "at": 5200,
+      "is": 5
     },
     {
       "fact": "event-where",
@@ -719,8 +725,23 @@
         8380
       ],
       "count": [
-        2,
-        2
+        5,
+        5
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "dispatch-relieved",
+      "where": {
+        "area": "castle-street"
+      },
+      "between": [
+        4101,
+        8380
+      ],
+      "count": [
+        1,
+        99
       ]
     }
   ]
