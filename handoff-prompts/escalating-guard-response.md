@@ -1,7 +1,6 @@
 # The escalating guard response: the more the town reports you, the more and the stronger the watch that comes, wherever in the castle town you are
 
-**Landed so far:** nothing yet. (A builder stopping at its budget writes
-its commits here, one line, before it stops.)
+**Landed so far (2026-11-25 ~01:45 UTC), by `session_017WiGzJpUjDMF6E6joLnxqr`, which stopped at its budget:** push 1 built and committed as d8f7988 on that session's local main, NOT pushed (the owner was playing; the orchestrator paused all pushes). If d8f7988 is not on `origin/main`, the orchestrator holds it or push 1 must be rebuilt from its notes: `docs/plan/step-4.md`, "The escalating guard response". **The trike already takes a person at the reins:** a dispatch row person with `"rides": "guard-trike"` (`content/dispatch/castle-street.json`, row 4) is spawned standing on a trike spawned on his tile first (`<id>:ride`, in `alert-dispatch.ts`, copied from the camp's `outpost-wave.ts`); `machine-seat` (order 120, the same tick) seats any person with `c.npc` standing on a machine, and `machine-driven` drives it at the place reported (`c.chase`) then at a hero he sees, at `speed.driver`. At most one trike the area sent stands at a time (with one standing, he walks in); a seated driver is never stood down. **Left: push 2 (the other town rooms) and push 3 (the ending made legible, the way-out scenarios at level 5)**; doubts for them are in those notes.
 
 Brief for one builder, three pushes, most visible first, each live and
 standing alone. Written 2026-11-25 00:15 UTC by the orchestrator
