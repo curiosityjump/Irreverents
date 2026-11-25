@@ -190,9 +190,17 @@ into the shared documents.
   for this. And `draw/aim-edge.ts`, drawn just after the plate: while a
   thrower in the viewer's room aims toward the viewer's hero
   (`c.rangedAim.dir`) and part of him is past the picture's top, left or
-  right edge, a 9-wide arrowhead in the arc's colours sits at that edge
-  beside him (on his throwing side), pointing at him, pulsing, never over
-  the plate (`drawn.hud.aimMarks`: `{ id, x, y, dir }`). `INTENT:` only for
+  right edge, an arrowhead points at him from the picture's edge: in the
+  alarm's red (`draw/alert.ts`) with a dark rim, 15 wide and 8 deep, its
+  rim flashing cream faster as his wind-up fills (every 10 frames, then
+  every 3); placed at the first of a few spots (the top edge beside him,
+  away from his throw first; below the plate; under his feet; for a side
+  edge, under or over him) that clears his picture (his box, `REACH` 10 px
+  round it from his sprite's top, `REACH_THROW` 26 on his throwing side: his
+  held shot and its red burst), the plate
+  and the menu button (`menuBox()` in `hud.ts`) (brief phone-legibility-pass;
+  fact `aim-arrow-clear`, `scripts/e2e/plate-legible.ts`, control
+  `plateFade.oldArrow`) (`drawn.hud.aimMarks`: `{ id, x, y, dir, box }`). `INTENT:` only for
   a body aiming at you, not an off-screen radar. Control for the e2e:
   `window.irreverents.plateFade.off` (neither, as before); nothing in the
   game sets it. Measured: the canopy upright, the hero 84-288 px² under the

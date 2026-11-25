@@ -16,6 +16,14 @@
 // Control, watched to fail: E2E_LEGIBLE_OLD=1 sets
 // `window.irreverents.plateFade.oldFade`: the fade as before this brief
 // (backing 0.25, hearts at 0.6, no rim).
+// Fact `aim-arrow-clear` (brief item 2): in the same gallery, at 844x390 and
+// 750x340, on every frame the balcony thrower aims at page C with part of
+// him outside the picture, his arrow is drawn, red at its middle, inside the
+// picture, and its box meets neither his picture (his box and 10 px round it,
+// 26 on his throwing side: his held shot and its burst), nor the plate, nor the
+// menu button. Control, watched to fail: E2E_ARROW_OLD=1 sets
+// `plateFade.oldArrow`, the arrow as before (cream, beside his box).
+// Shots: `arrow/before/` and `arrow/after/gallery-aim-*`.
 // Shots: `before2/` (the same moment with oldFade) and `after2/` in
 // docs/plan/step-8-shots/plate/, `canopy` and `gallery-aim` at 390x664,
 // 844x390 and 750x340, with E2E_SHOTS=1 (else e2e-out/kept/).
@@ -29,6 +37,7 @@ import { walkInto } from './outpost.ts';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
 const OLD = process.env.E2E_LEGIBLE_OLD === '1';
+const OLD_ARROW = process.env.E2E_ARROW_OLD === '1';
 const SIZES = [
   [390, 664],
   [844, 390],
@@ -42,6 +51,83 @@ const setOld = (ph: Phone, old: boolean): Promise<void> =>
     const irr = (window as any).irreverents;
     irr.plateFade = { ...(irr.plateFade ?? {}), oldFade: o };
   }, old);
+const setOldArrow = (ph: Phone, old: boolean): Promise<void> =>
+  ph.page.evaluate((o: boolean) => {
+    const irr = (window as any).irreverents;
+    irr.plateFade = { ...(irr.plateFade ?? {}), oldArrow: o };
+  }, old);
+
+interface ArrowWatch {
+  outFrames: number;
+  marked: number;
+  /** Frames whose arrow met his picture, the plate or the menu button, or left the picture; the first few. */
+  bad: string[];
+  badFrames: number;
+  red: number;
+}
+
+/**
+ * Every frame for `ms` while the thrower `id` is drawn aiming with part of him outside the picture: whether his arrow is
+ * drawn, and whether its box meets his picture (his box, `REACH` px round it, from his sprite's top: his held shot and
+ * its burst), the plate's box or the menu button's (the button's own rect, read from the page), or leaves the picture;
+ * and on how many frames the arrow's middle pixel on the game canvas is red.
+ */
+const watchArrow = (ph: Phone, id: string, ms: number): Promise<ArrowWatch> =>
+  ph.page.evaluate(
+    ([who, dur]: [string, number]) =>
+      new Promise<ArrowWatch>((resolve) => {
+        const irr = (window as any).irreverents;
+        const t0 = performance.now();
+        const r: ArrowWatch = { outFrames: 0, marked: 0, bad: [], badFrames: 0, red: 0 };
+        const meets = (a: any, b: any): boolean => a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
+        const game = document.getElementById('game') as HTMLCanvasElement;
+        const tick = (): void => {
+          const d = irr.drawn;
+          const W = irr.view.w;
+          const H = irr.view.h;
+          const aiming = (d.ranged?.aims ?? []).some((a: any) => a.id === who);
+          const e = (d.entities as any[]).find((q) => q.id === who);
+          if (aiming && e && d.hud) {
+            const b = irr.content.characters[e.kind].box;
+            const x = e.px - d.camera.x;
+            const y = e.py - d.camera.y;
+            if (y < 0 || x < 0 || x + b.w > W) {
+              r.outFrames++;
+              const m = (d.hud.aimMarks ?? []).find((q: any) => q.id === who);
+              if (m) {
+                r.marked++;
+                // His throwing side (toward page C's hero) reaches 26 px: his held shot and its burst.
+                const REACH = 10;
+                const toward = d.me && d.me.px > e.px ? 1 : -1;
+                const lr = toward > 0 ? REACH : 26;
+                const rr = toward > 0 ? 26 : REACH;
+                const top = Math.min(y, e.top ?? y);
+                const him = { x: x - lr, y: top - REACH, w: b.w + lr + rr, h: y + b.h - top + REACH };
+                const cr = game.getBoundingClientRect();
+                const sx = game.width / cr.width;
+                const mb = document.getElementById('menu-btn')!.getBoundingClientRect();
+                const menu = { x: (mb.left - cr.left) * sx, y: (mb.top - cr.top) * sx, w: mb.width * sx, h: mb.height * sx };
+                const a = m.box;
+                const why = [meets(a, him) ? 'him' : '', meets(a, d.hud.box) ? 'plate' : '', meets(a, menu) ? 'menu' : '', a.x < 0 || a.y < 0 || a.x + a.w > W || a.y + a.h > H ? 'outside' : ''].filter(Boolean);
+                if (why.length) {
+                  r.badFrames++;
+                  if (r.bad.length < 3) r.bad.push(`${why.join('+')}: arrow ${JSON.stringify(a)} him ${JSON.stringify(him)} plate ${JSON.stringify(d.hud.box)} menu ${JSON.stringify(menu)}`);
+                }
+                const px = game.getContext('2d')!.getImageData(Math.round(a.x + a.w / 2), Math.round(a.y + a.h / 2), 1, 1).data;
+                if (px[0]! > 180 && px[1]! < 150 && px[2]! < 160 && px[0]! - px[1]! > 60) r.red++;
+              }
+            }
+          }
+          if (performance.now() - t0 > dur) return resolve(r);
+          requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      }),
+    [id, ms] as [string, number],
+  );
+const arrowOk = (w: ArrowWatch): boolean => w.outFrames >= 10 && w.marked >= w.outFrames - 2 && w.badFrames === 0 && w.red >= w.marked - 2;
+const arrowText = (w: ArrowWatch): string =>
+  `${w.outFrames} frames drew him aiming with part of him outside the picture; his arrow on ${w.marked} (all but 2 at most), red at its middle on ${w.red}; frames where it met his picture, the plate or the menu button, or left the picture: ${w.badFrames}${w.bad.length ? ` (${w.bad.join('; ')})` : ''}`;
 
 const xOn = (ph: Phone, tx: number, frac = 0.5): Promise<number> =>
   ph.page.evaluate(
@@ -78,11 +164,23 @@ interface HeartRead {
 }
 
 /** For `ms`, on every frame the plate is faded (at least 0.9): the median contrast of its full hearts against their neighbours on the game canvas. */
-const readHearts = (ph: Phone, ms: number): Promise<HeartRead> =>
+const readHearts = (ph: Phone, ms: number, hold: [string, number, number] | null = null): Promise<HeartRead> =>
   ph.page.evaluate(
-    (dur: number) =>
+    ([dur, at]: [number, [string, number, number] | null]) =>
       new Promise<HeartRead>((resolve) => {
         const irr = (window as any).irreverents;
+        // With `at`, the page's own hero is put back there every frame (the server's copy may pull a page-side placement away).
+        const keep = (): void => {
+          if (!at) return;
+          const mine = irr.world.entities.find((e: any) => e.player === irr.player);
+          const rm = irr.content.rooms[at[0]];
+          const box = irr.content.characters[mine.kind].box;
+          mine.room = at[0];
+          mine.x = at[1] * rm.tile + (rm.tile - box.w) / 2;
+          mine.y = (at[2] + 1) * rm.tile - box.h;
+          mine.vx = 0;
+          mine.vy = 0;
+        };
         const t0 = performance.now();
         const r: HeartRead = { frames: 0, worst: null, pairs: 0, under: [] };
         const lin = (v: number): number => {
@@ -91,6 +189,7 @@ const readHearts = (ph: Phone, ms: number): Promise<HeartRead> =>
         };
         const lum = (d: Uint8ClampedArray, i: number): number => 0.2126 * lin(d[i]!) + 0.7152 * lin(d[i + 1]!) + 0.0722 * lin(d[i + 2]!);
         const tick = (): void => {
+          keep();
           const hud = irr.drawn.hud;
           const L = hud?.layer;
           if (hud && L && hud.fade >= 0.9) {
@@ -128,7 +227,7 @@ const readHearts = (ph: Phone, ms: number): Promise<HeartRead> =>
         };
         requestAnimationFrame(tick);
       }),
-    ms,
+    [ms, hold] as [number, [string, number, number] | null],
   );
 
 const heartsOk = (h: HeartRead): boolean => h.frames >= 10 && h.worst !== null && h.worst >= MIN_CONTRAST;
@@ -157,6 +256,28 @@ async function shotPair(ph: Phone, dir: string, name: string, w: number, h: numb
   await setOld(ph, OLD);
 }
 
+/** Until the page draws an edge arrow for `id` (or `ms`): the shot is taken on that frame's heels, inside the aim. */
+const arrowDrawn = (ph: Phone, id: string, ms: number): Promise<void> =>
+  ph.page
+    .waitForFunction((who: string) => ((window as any).irreverents.drawn.hud?.aimMarks ?? []).some((m: any) => m.id === who), id, { polling: 'raf', timeout: ms })
+    .then(
+      () => undefined,
+      () => undefined,
+    );
+
+/** The arrow's shots: `arrow/before/` (the old arrow, same moment) and `arrow/after/`, named gallery-aim. */
+async function arrowShots(ph: Phone, dir: string, w: number, h: number, when: () => Promise<void>): Promise<void> {
+  await ph.page.setViewportSize({ width: w, height: h });
+  await sleep(400);
+  for (const which of ['before', 'after'] as const) {
+    await setOldArrow(ph, which === 'before');
+    await when();
+    fs.mkdirSync(path.join(dir, 'arrow', which), { recursive: true });
+    await ph.page.screenshot({ path: path.join(dir, 'arrow', which, `gallery-aim-${w}x${h}.png`) });
+  }
+  await setOldArrow(ph, OLD_ARROW);
+}
+
 /** Until the page draws `id` aiming (or `ms`), then a beat. */
 const aimStarts = (ph: Phone, id: string, ms: number): Promise<void> =>
   ph.page
@@ -177,6 +298,7 @@ export async function plateLegibleFacts(kit: Kit & { shots: string }): Promise<v
   try {
     await setOld(C, OLD);
     await setOld(D, OLD);
+    await setOldArrow(C, OLD_ARROW);
     await sleep(600);
     // ---- the gallery, sideways: the balcony thrower under the plate while he aims (as scripts/e2e/plate-clear.ts) ----
     await C.page.setViewportSize({ width: 844, height: 390 });
@@ -192,25 +314,41 @@ export async function plateLegibleFacts(kit: Kit & { shots: string }): Promise<v
     console.log(`      (plate-legible) page C plays ${(await C.page.evaluate(() => (window as any).irreverents.drawn.me.kind))}`);
     const gallery = galleryFaded ? await readHearts(C, 4000) : null;
     const T = 'gallery-thrower-1';
-    if (inGallery && !OLD) for (const [w, h] of SIZES) await shotPair(C, kit.shots, 'gallery-aim', w, h, () => aimStarts(C, T, 6000));
+    // The arrow (brief item 2), at both sideways sizes, from the same spot.
+    const a844 = inGallery ? await watchArrow(C, T, 6000) : null;
+    let a750: ArrowWatch | null = null;
+    if (inGallery) {
+      await C.page.setViewportSize({ width: 750, height: 340 });
+      await sleep(400);
+      a750 = await watchArrow(C, T, 6000);
+      await C.page.setViewportSize({ width: 844, height: 390 });
+      await sleep(400);
+    }
+    fact(
+      'aim-arrow-clear',
+      a844 !== null && a750 !== null && arrowOk(a844) && arrowOk(a750),
+      `${OLD_ARROW ? '(CONTROL: the old arrow) ' : ''}page C by touch in the Hall gallery at column 14 (${inGallery}); over 6 s at 844x390: ${a844 ? arrowText(a844) : '-'}; over 6 s at 750x340: ${a750 ? arrowText(a750) : '-'}`,
+    );
+    if (inGallery && !OLD && !OLD_ARROW) for (const [w, h] of SIZES) await arrowShots(C, kit.shots, w, h, () => arrowDrawn(C, T, 15000));
+    if (inGallery && !OLD && !OLD_ARROW) for (const [w, h] of SIZES) await shotPair(C, kit.shots, 'gallery-aim', w, h, () => aimStarts(C, T, 6000));
 
-    // ---- the canopy, upright: the page's own hero under the plate ----
-    await C.page.setViewportSize({ width: 390, height: 664 });
+    // ---- the canopy, upright: page D's own hero under the plate (page D waited in the courtyard: page C's hero has been shot at in the gallery and may have no full hearts left to read) ----
+    await D.page.setViewportSize({ width: 390, height: 664 });
     await sleep(300);
-    await place(C, 'forest-trail', 50, 2);
-    const canopyFaded = await fadedBy(C, 0.95, 2000);
-    const canopy = canopyFaded ? await readHearts(C, 2000) : null;
+    await place(D, 'forest-trail', 50, 2);
+    const canopyFaded = await fadedBy(D, 0.95, 2000);
+    const canopy = canopyFaded ? await readHearts(D, 2000, ['forest-trail', 50, 2]) : null;
     if (!OLD)
       for (const [w, h] of SIZES)
-        await shotPair(C, kit.shots, 'canopy', w, h, async () => {
-          await place(C, 'forest-trail', 50, 2);
-          await fadedBy(C, 0.95, 1500);
+        await shotPair(D, kit.shots, 'canopy', w, h, async () => {
+          await place(D, 'forest-trail', 50, 2);
+          await fadedBy(D, 0.95, 1500);
           await sleep(250);
         });
     fact(
       'plate-hearts-legible',
       gallery !== null && canopy !== null && heartsOk(gallery) && heartsOk(canopy),
-      `${OLD ? '(CONTROL: the old fade) ' : ''}the Hall gallery at 844x390, page C walked in by touch (${inGallery}), the plate faded (${galleryFaded}): ${gallery ? heartsText(gallery) : '-'}; the canopy upright 390x664, the page's own hero placed under the plate (faded ${canopyFaded}): ${canopy ? heartsText(canopy) : '-'}`,
+      `${OLD ? '(CONTROL: the old fade) ' : ''}the Hall gallery at 844x390, page C walked in by touch (${inGallery}), the plate faded (${galleryFaded}): ${gallery ? heartsText(gallery) : '-'}; the canopy upright 390x664, page D's own hero placed under the plate (faded ${canopyFaded}): ${canopy ? heartsText(canopy) : '-'}`,
     );
   } finally {
     for (const ph of [A, B, C]) await ph.ctx.close().catch(() => undefined);
