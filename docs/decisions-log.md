@@ -800,3 +800,10 @@ document as a decision of theirs.
 - **To change it:** "full speed" (several builders, the directive's Owed next 4 in parallel) or "stop" (archive the running builder after its push); either is one message.
 - **Where:** `docs/current-directive.md`, "Sessions" and "Rules in force now".
 
+
+### 2026-11-25 · Shown names: the six roster characters lose the stand-in word "Graybox"
+- **Decided by:** orchestrator `session_017WiGzGgiMLCwNj9zptZqBz`, 12:35 UTC
+- **Instead of asking:** what a freed character should be called on the "joins!" banner and in the Hall, while nobody has named them.
+- **Why this way:** a blind look read "Graybox Hauler joins!" as a fault a player sees; "Graybox" is a builder's word. `DRAFT:` the role word alone ("Hauler", "Skirmisher", ...): it is not a proposed name (the library's names stay proposals, only the owner promotes one), and a shown name is data, never an id.
+- **To change it:** the `name` field of each `content/characters/<id>.json`; ids are untouched.
+- **Where:** `handoff-prompts/recruit-shown-right.md`; `docs/plan/step-13.md`, "Briefs".
