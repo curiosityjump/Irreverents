@@ -1,0 +1,118 @@
+diff --git a/src/client/draw/entities.ts b/src/client/draw/entities.ts
+index 5a46269..b1bb033 100644
+--- a/src/client/draw/entities.ts
++++ b/src/client/draw/entities.ts
+@@ -37,6 +37,8 @@ export interface Drawn {
+   state?: string;
+   /** Step 5: knocked out (`c.flattened`) as this page has it, however it is drawn (taking the blow, flying, or lying). */
+   out?: boolean;
++  /** Additive (heroes drawn over the crowd): the body's place in this frame's draw order, 0 first; a higher one is drawn over it. Absent: not drawn on its own (carried, or seated in a drawn machine). */
++  z?: number;
+   /** Step 20, the courtyard's trike: on a ridden machine whose cells show nobody aboard, the hero drawn on its saddle (draw/machines.ts). */
+   rider?: string;
+ }
+@@ -189,9 +191,20 @@ export function drawEntities(g: CanvasRenderingContext2D, world: World, content:
+   // Step 20 push 3: a person at the reins of a machine drawn from its looks is the cells' baked rider (DRAFT, draw/machines.ts).
+   const order = world.entities.filter((e) => e.room === roomId && content.characters[e.kind] && !seatedInDrawnMachine(world, content, e));
+   drawSlams(g, world, content, roomId, ox, oy, 'dust');
+-  for (const e of [...order.filter((e) => !front(e)), ...order.filter(front)]) {
++  // DRAFT (the orchestrator, 2026-11-25, after the blind look at the escalation's shots: the hero lost in a pile,
++  // docs/plan/step-8.md, last section; docs/decisions-log.md, "Heroes drawn over the crowd"): heroes are drawn after
++  // every other body, and the page's own hero last of all, so watchmen who walk in later never cover the hero you play.
++  // INTENT (kept): a hidden hero is not raised (nothing points at a hidden body; his fold is drawn with him), and a
++  // carried body is still drawn with its carrier (below). Undo: rank everything 0 or 1 by `front` again.
++  const rank = (e: Entity): number => (e.player === null || e.c.roomHide ? (front(e) ? 1 : 0) : e.id === view?.me ? 3 : 2);
++  let z = 0;
++  const recs = view ? new Map(view.drawn.map((r) => [r.id, r])) : undefined;
++  for (const e of [...order].sort((p, q) => rank(p) - rank(q))) {
+     const carrier = heldBy.get(e.id);
+     if (carrier && byId.get(carrier)?.room === roomId) continue;
++    const rec = recs?.get(e.id);
++    if (rec) rec.z = z;
++    z++;
+     const easing = released(world, e, ox, oy);
+     // Step 25 push 4: a slammed body head-down at the floor, a carrier leaning into the throw (draw/suplex.ts).
+     g.save();
+diff --git a/scripts/e2e/escalation.ts b/scripts/e2e/escalation.ts
+index 49f0869..897c134 100644
+--- a/scripts/e2e/escalation.ts
++++ b/scripts/e2e/escalation.ts
+@@ -32,7 +32,7 @@ import { generateRegistries, root } from '../lib/registries.ts';
+ const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
+ 
+ /** The two levels shown: the scenario, the tick a little after its row walks in, the game code it is saved under. */
+-const LEVELS: { level: number; scenario: string; tick: number; code: string; town?: boolean; calm?: boolean }[] = [
++const LEVELS: { level: number; scenario: string; tick: number; code: string; town?: boolean; calm?: boolean; crowd?: boolean }[] = [
+   { level: 4, scenario: 'step4-tier-level4-elite-row', tick: 4440, code: 'FRKW' },
+   { level: 5, scenario: 'step4-tier-level5-keeps-coming', tick: 5140, code: 'FRKX' },
+   // The escalating guard response, push 2 ("the pips crossing doors"): the courtyard at 5 (a report there), the street
+@@ -43,6 +43,9 @@ const LEVELS: { level: number; scenario: string; tick: number; code: string; tow
+   // few seconds from cooling a level (its quiet clock near npcAlertCoolTime), nobody of the gallery seeing anyone; a page
+   // in the street sees the second bar blink out and the gallery's `calm` words for 1. Control: the pre-change client.
+   { level: 2, scenario: 'step4-tier-level4-elite-row', tick: 0, code: 'FRKZ', calm: true },
++  // Heroes drawn over the crowd: the level-5 street with two armoured guards taken out (room under the cap) and the
++  // all-out timer two seconds from its next row, so a row walks in AFTER the page's hero has joined and closes on him.
++  { level: 5, scenario: 'step4-tier-level5-keeps-coming', tick: 5140, code: 'FRKV', crowd: true },
+ ];
+ 
+ /** Push 3: the words the Hall gallery's table shows as the town drops to level 1 (read from content when saving). */
+@@ -66,6 +69,12 @@ async function saveLevels(rows?: number): Promise<string> {
+     const rec = simulate(s, content);
+     const world = structuredClone(rec.history[l.tick]) as any;
+     if (l.town && process.env.E2E_ESCALATION_TOWN === 'off') delete world.alerts?.courtyard;
++    if (l.crowd) {
++      const gone = world.entities.filter((e: any) => e.room === 'castle-street' && e.kind === 'armoured-guard').slice(0, 2).map((e: any) => e.id);
++      world.entities = world.entities.filter((e: any) => !gone.includes(e.id));
++      const alert = world.entities.find((e: any) => e.id === '~alert:castle-street');
++      alert.c.dispatch = { ...alert.c.dispatch, queue: [], seen: Math.round(content.dispatch['castle-street'].keepComing * 60) - 120 };
++    }
+     if (l.calm) {
+       calmWords = content.dispatch['hall-gallery'].calm?.[l.level - 1] ?? '(no calm words)';
+       // Six seconds (360 ticks) from cooling, time for the page to walk into the street: the quiet clock alert-cool
+@@ -218,6 +227,46 @@ export async function escalationFacts(kit: EscalationKit): Promise<void> {
+         await ph.ctx.close();
+         continue;
+       }
++      if (l.crowd) {
++        // Heroes drawn over the crowd (the orchestrator, after the blind look): the page's hero, standing in the pile at
++        // the west door, overlaps watchmen who walked in AFTER him (later in the world's order, which drawn.entities
++        // keeps: a row the level-5 timer brings once he is there); each must be drawn before him (drawn z). Those already
++        // there when he joined do not count: the old order drew him over them anyway. Control: the old order: red.
++        for (const s of [{ w: 844, h: 390 }, { w: 390, h: 664 }]) {
++          await ph.page.setViewportSize({ width: s.w, height: s.h });
++          await sleep(300);
++          const seen = { frames: 0, overlaps: 0, under: 0, later: 0, closest: 999 };
++          let shot = false;
++          const t2 = Date.now();
++          while (Date.now() - t2 < 25000 && (seen.overlaps < 10 || Date.now() - t2 < 1500)) {
++            const r = await ph.page.evaluate(() => {
++              const d = (window as any).irreverents.drawn;
++              const mine = d.entities.findIndex((e: any) => e.mine);
++              const me = d.entities[mine];
++              if (!me || me.z === undefined) return null;
++              const near = d.entities.filter((e: any, i: number) => i > mine && e.mood !== undefined && e.z !== undefined && Math.abs(e.px - me.px) < 14 && Math.abs(e.py - me.py) < 24);
++              const later = d.entities.filter((e: any, i: number) => i > mine && e.mood !== undefined);
++              return { overlaps: near.length, under: near.filter((e: any) => e.z < me.z).length, later: later.length, closest: Math.min(999, ...later.map((e: any) => Math.abs(e.px - me.px))) };
++            });
++            if (r && r.overlaps > 0 && kit.shots && !shot) {
++              // The shot on the first frame a later arrival overlaps him: the moment the order matters.
++              shot = true;
++              await ph.page.screenshot({ path: path.join(kit.out, `crowd-${s.w}x${s.h}.png`) });
++            }
++            if (r) {
++              seen.frames++;
++              seen.overlaps += r.overlaps;
++              seen.under += r.under;
++              seen.later = Math.max(seen.later, r.later);
++              seen.closest = Math.min(seen.closest, r.closest);
++            }
++            await sleep(50);
++          }
++          kit.fact(`hero-over-crowd-${s.w}x${s.h}`, seen.overlaps > 0 && seen.under === seen.overlaps, `in the level-5 street's pile, over ${seen.frames} read(s), ${seen.overlaps} overlap(s) of the page's own hero by watchmen who came after him, ${seen.under} of them drawn before (under) him (expected all, and at least one overlap); watchmen after him in the world's order: ${seen.later} at most, the nearest ${seen.closest} px across`);
++        }
++        await ph.ctx.close();
++        continue;
++      }
+       if (kit.shots) {
+         for (const s of [{ w: 844, h: 390 }, { w: 390, h: 664 }]) {
+           await ph.page.setViewportSize({ width: s.w, height: s.h });
