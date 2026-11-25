@@ -142,3 +142,17 @@ tokens: stop there with a "Landed so far" block in this file.
 By `send_message` to the session on the Orchestrator line of
 `docs/questions-for-the-owner.md`. Never stall on the owner: decide from
 his words, mark `DRAFT:`, log it in `docs/decisions-log.md`, carry on.
+
+## Follow-up (orchestrator, 2026-11-25 15:22 UTC, after the blind look at 7417324)
+
+Landed so far: 7417324 (her face, the six names, an open cage behind
+bodies, `hidden-recruit-open-cage`), cf388da (gate record). The look
+found the `hidden-*` shots clean. Owed, one small push, same builder
+(`session_017WiGzGffLu42yKrbPuQphJ`): the camp's twin fact in
+`scripts/e2e/rescue.ts` (a body in the open cage's tiles drawn after the
+cage; the banner reads "Skirmisher joins!"; each watched to fail), and
+`rescue-freed` and `rescue-swapped` re-shot at 844x390 and 390x664 from
+that script (the old `rescue-swapped-844x390.png` still reads "Graybox
+Skirmisher joins!" with him under the beam; nothing in the repo writes
+it). Say in the notes what the white and gold shape behind her head in
+`hidden-plate-*` is.
