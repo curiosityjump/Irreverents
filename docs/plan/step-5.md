@@ -999,6 +999,31 @@ snapshots off the socket each second (hero, lookout, fighter 1, the post's `c.si
 - **Open for the orchestrator:** the camp's own fight felling its own lookout (the hero knocked
   into him) is the horn's shape again; not ruled, not changed.
 
+### Third builder (`session_017WiGzJ3ASmAcF3W8txtRbK`): the lookout ruling, Grab beside the king
+
+- **Grab beside the king (`suplex-again`): the game's, fixed at 22c832b.** grabReach is
+  10 px, so the crate the e2e's hero carried was lying at his feet, nearer than the king he
+  faced; Grab took the nearest liftable body. Now a person (toughness above 0) before a prop.
+  Scenario `grab-person-before-prop` reproduces it in the sim (control: the old code grabs
+  the crate at tick 40). The e2e fact itself not re-run: its next full runs say.
+- **The lookout ruling: measured, built, not pushed** (`docs/plan/step-5-patches/lookout-ruling.patch`).
+  Sim probe (the real camp, five heroes standing still at columns 19-24, 90 s, 30 fights):
+  the lookout felled 118 times, **every one by the camp's own** (camp fighters 1 and 2 and
+  the waves). With `sparedByOwn: ["camp-lookout"]`: once, by the bandit-driven wagon's ram
+  (left as it is on the orchestrator's word: a vehicle is not a blow); his finished calls
+  109 -> 133 of all calls in the 30. A narrower shape (never worn by his own, but still
+  shoved unless calling) reddened 7 of the same 8 scenarios, so it was dropped.
+- **Why 8 scenarios go red:** they are tick-exact replays of the camp's fight, and the
+  lookout staying up changes it. 4 are a pure shift (the step21 hearts four: the wave's
+  fighter fells the grappler at 1302, not 1206; same story, re-timed in the patch, green).
+  4 tell a different story now and need new inputs (listed in the brief's "Landed so far"):
+  in `camp-entries-east-break-through` the old run's second call came only because the
+  lookout had been flung east by his own camp; now he stays at column 19.5 and fighter 2
+  (no caller) carries the brawler out of every caller's sight.
+- Measuring tools (scratchpad, not committed; easy to rebuild): a probe looping
+  `simulate()` over heroes x columns counting `flattened` on `camp-lookout` by doer; an
+  events printer and a per-tick tracer of callers' `c.outpostCall` for one scenario.
+
 ## A page misses what happened (brief `handoff-prompts/page-misses-what-happened.md`)
 
 Builder session `session_017WiGzJrwonyg1a3d9hvyg4`, 2026-11-24.

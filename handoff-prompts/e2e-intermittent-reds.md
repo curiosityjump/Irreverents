@@ -2,6 +2,26 @@
 
 **For the third builder (orchestrator `session_017WiGzJYBCYJ85Bj95B7ZLw`, 2026-11-25 08:55 UTC), in this order, each its own small push:** (1) **the lookout ruling**, decided `DRAFT:` and written below under "Landed so far" (c48aee0): a lookout is not felled by his own camp's fight; only a hero's own blow, throw or thrown thing fells him. (2) **`suplex-again`'s real fault**: in the throne room, Grab beside the king takes `throne-crate-1` instead of him (the fact prints it: the hero in state carry, the king in "talk", held: the crate); a player hits this. Decide which body Grab takes when a person and a prop are both in reach (`DRAFT:` a knocked or standing person before a prop; log it), with a scenario and a control. (3) **`clash-street`**: red in 2 of the orchestrator's last 3 full runs (the guard knocked with the hero 61 px off, wants 64), green on repeat; and a blind look found no fight visible in its two shots (`docs/plan/step-8.md`, last section): make the fact hold on what a player sees and re-shoot both sizes with guard and villain in frame. (4) only if budget remains: `beaten-gone` red once in four full runs (313 attack taps in 150 s, nobody defeated). The runs' table: `docs/plan/step-5.md`, last section. No slots: push when green unless a code commit landed on main in the previous 3 minutes; never two pushes within a minute. Report to the session on the Orchestrator line of `docs/questions-for-the-owner.md`.
 
+**Landed so far (third builder `session_017WiGzJ3ASmAcF3W8txtRbK`, stopped at its budget):**
+order (2) at 22c832b, live 09:37 UTC: Grab takes a person (toughness > 0) before a prop,
+nearest within each (`grab-person-before-prop`, control watched to fail); the e2e
+`suplex-again` not re-run since. Order (1), the lookout ruling: **built, not pushed**, held
+whole in `docs/plan/step-5-patches/lookout-ruling.patch` (`git apply` it on a tip near
+22c832b): outpost field `sparedByOwn: ["camp-lookout"]` (fighter 1 left out, as the
+orchestrator said), read in the attack verb and `impact-bodies`; scenario
+`camp-lookout-spared-by-own` (control watched to fail); decisions-log entry; 4 of the 8
+scenarios it reddens re-timed in it (the step21 four: the same fall at 1302, +96). **Owed
+before it can push** (the orchestrator, 09:18: one push, each claim unchanged and re-proved
+against its control, inputs and timings only; stop and report a claim that cannot hold):
+`camp-entries-east-break-through` (the second call never comes: fighter 2, no caller,
+carries the brawler to column 35+, out of both callers' sight; the old run had the lookout
+flung east by his own camp; needs new inputs so a caller sees the hero at columns 30-35,
+where both entries 6 and 50 are the nearest at 12 tiles), `step12-walk-out-ends-it` (the
+call starts at 899 not 898, but +1 is not enough: the hero no longer reaches the door on the
+old walk), `camp-entries-door-kept-clear` (the second row now comes at 1099, not 1537),
+`step7-same-again-hangs-nothing` (two later waves missing in 1300-3289). Then (3)
+`clash-street` and (4) `beaten-gone`, untouched. Notes: `docs/plan/step-5.md`, the third
+builder's section.
 **Landed so far:** push 1 at 414564f (builder `session_017WiGzH3PZgYkQHanedEq8e`,
 stopped at its budget): `start-link-back` the game's, fixed (`start-title-late`);
 `hearts-game-over` the check's half fixed, the game's half briefed
