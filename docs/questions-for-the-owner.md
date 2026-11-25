@@ -11,7 +11,7 @@ the record; `docs/answers-archive.md` holds receipts up to 2026-11-23).
 ## Current sessions
 
 - **Vision Partner:** session_017WiGzH2sJsLQebAuQnEFzS (third; picked up 2026-11-24 ~14:40 UTC from session_017WiGzGHxdLq71CDUoQZz9Z, whose handoff commit is d15445f)
-- **Orchestrator:** session_017WiGzJYBCYJ85Bj95B7ZLw (handed off 2026-11-25 12:20 UTC; its handoff commit is the one whose message begins "Orchestrator handoff at 12:20 UTC"; it started its successor itself, which sets this line at pickup; until then messages here are forwarded)
+- **Orchestrator:** session_017WiGzGgiMLCwNj9zptZqBz (picked up 2026-11-25 ~12:25 UTC from session_017WiGzJYBCYJ85Bj95B7ZLw, whose handoff commit is 7b7081c)
   This line is the one address every session uses to reach the current
   orchestrator; Vision Partner's doorbell goes only here.
 - **Questions per message the owner wants:** 3 (the default; record the
