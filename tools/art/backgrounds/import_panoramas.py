@@ -78,7 +78,69 @@ STEP = 4
 # dropping an ellipse here and re-running is the undo.
 LOCAL = {
     'bkg01-forest-waterfall-far-caps-hazed': ('bkg01-forest-waterfall', 0.45, [(156, 96, 70, 66), (904, 112, 84, 80)]),
+    # DRAFT (brief phone-legibility-pass, item 4): quarry-road's left painted decks (the scaffold's railed deck at
+    # x 0-90, y 55-85, and the lower deck at x 80-170, y 110-145) sat at chest height level with a real plank;
+    # shifting the whole panorama made it worse (the third pass), so here they are washed nearly into the sky
+    # (85%): mist over the scaffold, not a ledge. Only quarry-road draws this cut; ridge and depot keep '-far'.
+    'bkg01-iron-quarry-evening-far-decks-hazed': ('bkg01-iron-quarry-evening', 0.85, [(40, 70, 130, 46), (125, 128, 110, 36)]),
 }
+
+
+# DRAFT (brief phone-legibility-pass, the third look: forest-trail's top was "a smeared, blocky
+# green-yellow glow where the first generation showed painted canopy"; the street's strip under the
+# eave "blocky, upscaled"; the camp's "a blurry dark tree blob"): a "-mirror" cut that carries the
+# painting's own top rows upward unblurred, reflected (row 0 meets row 0, so there is no seam), as
+# many times as it takes, mixed toward `toward` (None: the panorama's sky colour) up to `strength`
+# at its top, eased. `height` px are added on top. The room file names the cut; its own `sky`
+# should be the colour the cut ends in (printed), so nothing above it changes colour. The forest
+# darkens into deeper leaves (so the trail is under a canopy); the street and the camp fade into
+# their sky. `ramp`: px over which the mix reaches `strength` (0: the whole height); `shift`: how far each further reflection slides sideways (tried on the forest: it cut hard seams between bands, so 0). `clone`: spans of the reflected rows replaced by another span (x0, x1, from x). `rows`: how many of the painting's top rows are reflected (the canopy's, not the
+# trunks under it). `caps` (optional): LOCAL's ellipses, hazed the same way.
+MIRROR = {
+    'bkg01-forest-waterfall-mirror-caps-hazed': dict(src='bkg01-forest-waterfall', rows=56, height=320, toward=(24, 52, 38), strength=0.85, ramp=120, clone=[(470, 700, 240)], caps=(0.45, [(156, 96, 70, 66), (904, 112, 84, 80)])),
+    'bkg02-market-town-day-mirror': dict(src='bkg02-market-town-day', rows=8, height=180, toward=None, strength=1.0, haze=0.3, ramp=40),
+    'bkg02-forest-ruins-day-mirror': dict(src='bkg02-forest-ruins-day', rows=16, height=180, toward=None, strength=1.0, haze=0.3, ramp=72),
+}
+
+
+def mirror_cut(cut, sky, rows, height, toward, strength, haze=0.0, shift=0, ramp=0, clone=()):
+    w, h = cut.size
+    painted = Image.blend(cut, Image.new('RGB', cut.size, sky), haze) if haze else cut.copy()
+    # What is reflected: the painting's top rows, with each (x0, x1, from) span replaced by the span starting at `from` (the light ray would zigzag).
+    # Feathered over FEATHER px at each side; in the painting itself it also eases out downward over `rows`, so the ray seems to start under the leaves.
+    FEATHER = 40
+    source = painted.copy()
+    if clone:
+        sp, pp, orig = source.load(), painted.load(), painted.copy().load()
+        for (x0, x1, fx) in clone:
+            for y in range(rows):
+                down = 1 - y / rows
+                down = down * down * (3 - 2 * down)
+                for x in range(x0, x1):
+                    edge = min(1.0, (x - x0 + 1) / FEATHER, (x1 - x) / FEATHER)
+                    a, b = orig[x, y], orig[fx + x - x0, y]
+                    sp[x, y] = tuple(round(a[i] + (b[i] - a[i]) * edge) for i in range(3))
+                    pp[x, y] = tuple(round(a[i] + (b[i] - a[i]) * edge * down) for i in range(3))
+    end = toward if toward is not None else sky
+    out = Image.new('RGB', (w, h + height), end)
+    out.paste(painted, (0, height))
+    src = source.load()
+    dst = out.load()
+    period = 2 * rows
+    for k in range(height):
+        # k = 0 is the row just over the painting: reflect, then run back down, and so on.
+        m = k % period
+        r = m if m < rows else period - 1 - m
+        # Each further reflection is slid sideways by `shift` px (wrapping), so trunks and the light ray do not stack into a pattern.
+        dx = (k // rows) * shift
+        # Eased over `ramp` px (the whole height when 0), then held.
+        t = min(1.0, (k + 1) / (ramp or height))
+        t = t * t * (3 - 2 * t) * strength
+        y = height - 1 - k
+        for x in range(w):
+            c = src[(x + dx) % w, r]
+            dst[x, y] = tuple(round(c[i] + (end[i] - c[i]) * t) for i in range(3))
+    return out
 
 
 def blur_row(row, r):
@@ -115,7 +177,8 @@ def far_cut(cut, sky, haze):
                 out.putpixel((x, y), c)
     return out
 
-def local_haze(far, sky, haze, ellipses):
+def local_haze(far, sky, haze, ellipses, top=None):
+    top = FADE if top is None else top
     out = far.copy()
     hazed = Image.blend(far, Image.new('RGB', far.size, sky), haze)
     px, hz = out.load(), hazed.load()
@@ -127,8 +190,8 @@ def local_haze(far, sky, haze, ellipses):
                     continue
                 t = min(1.0, max(0.0, (1 - d ** 0.5) / 0.5))
                 k = t * t * (3 - 2 * t)
-                a, b = px[x, y + FADE], hz[x, y + FADE]
-                px[x, y + FADE] = tuple(round(a[i] + (b[i] - a[i]) * k) for i in range(3))
+                a, b = px[x, y + top], hz[x, y + top]
+                px[x, y + top] = tuple(round(a[i] + (b[i] - a[i]) * k) for i in range(3))
     return out
 
 
@@ -164,6 +227,17 @@ def main():
                 if src == name:
                     local_haze(far_cut(cut, avg, FAR[name]), avg, k, boxes).save(os.path.join(out_dir, out_name + '.png'), optimize=True)
                     print(f'{out_name}.png  ({round(k * 100)}% haze in {len(boxes)} soft ellipses)')
+        for out_name, m in MIRROR.items():
+            if m['src'] != name:
+                continue
+            im2 = mirror_cut(cut, avg, m['rows'], m['height'], m['toward'], m['strength'], m.get('haze', 0.0), m.get('shift', 0), m.get('ramp', 0), m.get('clone', ()))
+            if m.get('caps'):
+                k, boxes = m['caps']
+                im2 = local_haze(im2, avg, k, boxes, m['height'])
+            im2.save(os.path.join(out_dir, out_name + '.png'), optimize=True)
+            top = [im2.getpixel((x, 0)) for x in range(WIDTH)]
+            end = tuple(round(sum(p[i] for p in top) / len(top)) for i in range(3))
+            print(f'{out_name}.png  ({m["rows"]} top rows carried up {m["height"]} px; its top row averages {"#%02x%02x%02x" % end}: the room\'s sky)')
 
 
 if __name__ == '__main__':
