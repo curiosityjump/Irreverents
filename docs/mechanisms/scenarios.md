@@ -85,6 +85,19 @@ a file, edit no list. The first is `together` (gate F,
   fields set before tick 0, as the server's `makeWorld` starts a world
   with them (`roster` must name roster characters). Never `tick`,
   `entities` or `rooms`.
+- `"alerts": [{ "area": "castle-street", "level": 3, "at": [40, 10] }]`
+  (optional, brief alert-starts-at-a-level; `DRAFT:` the name): an area's
+  alarm standing at `level` before tick 0, `at` the tile reported (its
+  middle is the place help heads to and rows split around). Built by
+  `seedAlert()` (`src/sim/npc/alert.ts`): the `~alert:` entity, its
+  `c.dispatch` and `world.alerts`, all at once. **World construction, not
+  a raise:** it emits nothing and puts nobody on call, so no row walks in
+  and nobody searches until a real call completes, which raises the town
+  one above as ever. To get level N with its row and pursuers, seed N-1
+  and make one call (`step4-tier-courtyard-level4-trike`). `level` runs 1
+  to the area's row count (`maxAlert()`), else the runner refuses it.
+  Seeding `world.alerts` through `world` instead changes only the pips:
+  guards read the entity.
 - A player may carry `"joins": <tick>`: put in the world at the start of
   that tick, as a friend arriving later (Step 11), instead of before tick 0.
 - A player may carry `"power": "<power id>"` (Step 9): they hold that

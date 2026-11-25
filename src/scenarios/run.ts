@@ -1,6 +1,7 @@
 import { describe, isRecord, known } from '../content/reader.ts';
 import type { Content, Problem } from '../content/types.ts';
 import { TILE } from '../content/kinds/rooms.ts';
+import { maxAlert, seedAlert } from '../sim/npc/alert.ts';
 import { setTile } from '../sim/room-state.ts';
 import { step } from '../sim/step.ts';
 import type { Input, SimEvent, World } from '../sim/types.ts';
@@ -21,7 +22,7 @@ export function parseScenario(raw: unknown, file: string, stem: string, content:
     fail('(the whole file)', `must be an object, but is ${describe(raw)}`);
     return null;
   }
-  const fields = ['id', 'gate', 'proves', 'room', 'players', 'entities', 'placements', 'placedRooms', 'tiles', 'world', 'inputs', 'ticks', 'expect'];
+  const fields = ['id', 'gate', 'proves', 'room', 'players', 'entities', 'placements', 'placedRooms', 'tiles', 'world', 'alerts', 'inputs', 'ticks', 'expect'];
   for (const key of Object.keys(raw)) {
     if (key !== '//' && !fields.includes(key)) fail(key, `unknown field (known fields: ${fields.join(', ')})`);
   }
@@ -128,6 +129,27 @@ export function parseScenario(raw: unknown, file: string, stem: string, content:
     }
   }
 
+  // Brief alert-starts-at-a-level: an area's alarm standing at a level before tick 0 (seedAlert: world construction, not a raise).
+  const alerts: NonNullable<Scenario['alerts']> = [];
+  if (raw.alerts !== undefined && !Array.isArray(raw.alerts)) fail('alerts', `must be a list, but is ${describe(raw.alerts)}`);
+  else {
+    ((raw.alerts as unknown[] | undefined) ?? []).forEach((a: unknown, i: number) => {
+      const w = `alerts[${i}]`;
+      if (!isRecord(a)) return fail(w, `must be an object, but is ${describe(a)}`);
+      for (const key of Object.keys(a)) if (!['area', 'level', 'at', '//'].includes(key)) fail(`${w}.${key}`, 'unknown field (known fields: area, level, at)');
+      const room = typeof a.area === 'string' ? content.rooms[a.area] : undefined;
+      if (!room) return fail(`${w}.area`, `no room ${JSON.stringify(a.area)} (rooms: ${known(content.rooms)})`);
+      if (alerts.some((q) => q.area === room.id)) fail(`${w}.area`, `area "${room.id}" is seeded twice`);
+      const most = maxAlert(content, room.id);
+      const table = content.dispatch?.[room.id] ? `its dispatch table has ${most} rows` : `it has no dispatch table, so its alert runs to ${most}`;
+      if (!Number.isInteger(a.level) || (a.level as number) < 1 || (a.level as number) > most) fail(`${w}.level`, `must be a whole number from 1 to ${most} (${table}), but is ${JSON.stringify(a.level)}`);
+      const at = a.at;
+      const atOk = Array.isArray(at) && at.length === 2 && at.every((n) => Number.isInteger(n)) && at[0] >= 0 && at[1] >= 0 && at[0] < room.w && at[1] < room.h;
+      if (!atOk) fail(`${w}.at`, `must be [column, row] inside room "${room.id}" (${room.w} by ${room.h} tiles), the place reported, but is ${JSON.stringify(at)}`);
+      else alerts.push({ area: room.id, level: a.level as number, at: [at[0], at[1]] });
+    });
+  }
+
   // Step 3: tiles changed before the start, standing in for a working part (a closed gate).
   const tiles: NonNullable<Scenario['tiles']> = [];
   if (raw.tiles !== undefined && !Array.isArray(raw.tiles)) fail('tiles', `must be a list, but is ${describe(raw.tiles)}`);
@@ -215,6 +237,7 @@ export function parseScenario(raw: unknown, file: string, stem: string, content:
     ...(placedRooms.length ? { placedRooms } : {}),
     ...(tiles.length ? { tiles } : {}),
     ...(seed ? { world: seed } : {}),
+    ...(alerts.length ? { alerts } : {}),
     inputs,
     ticks: ticksOk ? (ticks as number) : 1,
     expect: [],
@@ -278,6 +301,11 @@ export function simulate(scenario: Scenario, content: Content): Recording {
   const world = createWorld();
   // Step 13: seeded first, as makeWorld sets them before anyone joins.
   if (scenario.world) Object.assign(world, JSON.parse(JSON.stringify(scenario.world)));
+  // Brief alert-starts-at-a-level: before anyone spawns; the place reported is the tile's middle.
+  for (const a of scenario.alerts ?? []) {
+    const tile = content.rooms[a.area]!.tile;
+    seedAlert(world, content, a.area, a.level, { x: (a.at[0] + 0.5) * tile, y: (a.at[1] + 0.5) * tile });
+  }
   for (const p of scenario.players) {
     if (p.joins) continue;
     const e = spawnPlayer(world, content, { player: p.id, character: p.character, room: p.room ?? scenario.room, spawn: p.spawn });

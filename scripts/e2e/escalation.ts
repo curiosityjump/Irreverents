@@ -53,6 +53,7 @@ async function saveLevels(rows?: number): Promise<string> {
   generateRegistries();
   const { loadContent, loadScenarios } = await import('../lib/content-files.ts');
   const { simulate } = await import('../../src/scenarios/run.ts');
+  const { seedAlert } = await import('../../src/sim/npc/alert.ts');
   const { openStore } = await import('../../src/server/store.ts');
   const { createSaves } = await import('../../src/server/saves.ts');
   const loaded = loadContent();
@@ -71,8 +72,8 @@ async function saveLevels(rows?: number): Promise<string> {
       // Six seconds (360 ticks) from cooling, time for the page to walk into the street: the quiet clock alert-cool
       // counts, in ticks, to npcAlertCoolTime seconds.
       const need = Math.round(content.tuning.world.npcAlertCoolTime * 60);
-      world.entities.push({ id: '~alert:hall-gallery', kind: '~thing', player: null, room: 'hall-gallery', x: 0, y: 0, vx: 0, vy: 0, facing: 1, onGround: true, c: { alert: { level: l.level, quiet: need - 360 } } });
-      world.alerts = { ...(world.alerts ?? {}), 'hall-gallery': l.level };
+      // The one world-construction function beside the alarm (seedAlert: not a raise; it emits nothing).
+      seedAlert(world, content, 'hall-gallery', l.level, { x: 0, y: 0 }, need - 360);
     }
     saves.save(l.code, world);
   }

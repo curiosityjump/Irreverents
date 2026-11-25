@@ -49,6 +49,12 @@ export interface Scenario {
    * `entities` or `rooms` (those have their own fields).
    */
   world?: Record<string, unknown>;
+  /**
+   * Brief alert-starts-at-a-level (DRAFT: the name): areas whose alarm stands at `level` before tick 0,
+   * `at` the tile reported (seedAlert in src/sim/npc/alert.ts: world construction, not a raise). Nobody is
+   * on call from a seed: start one below the level wanted and make one real call to get that level's row.
+   */
+  alerts?: { area: string; level: number; at: [number, number] }[];
   inputs: InputSpan[];
   /** How many ticks to run. */
   ticks: number;

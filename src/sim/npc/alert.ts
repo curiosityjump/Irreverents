@@ -213,3 +213,24 @@ export function completeCall(ctx: StepContext, by: string, area: string, at: { x
     alert.y = at.y;
   }
 }
+
+/**
+ * WORLD CONSTRUCTION, NOT A RAISE (brief alert-starts-at-a-level, 2026-11-25): builds an area's alarm as
+ * standing at `level` before anyone acts, the way a scenario or a shot's saved world starts: the `~alert:`
+ * entity (`c.alert`, `x`/`y` the place reported), its `c.dispatch` where the area has a table, and
+ * `world.alerts` for the pips and bells. It emits nothing (no `alert-changed`, no `call-completed`) and
+ * hands nobody `c.respond`: no row walks in and nobody searches until a real call completes, which
+ * raises the town one above, as ever. INTENT (D-063): completeCall() stays the only raise while the
+ * game runs; only world-building code (src/scenarios/run.ts, scripts/e2e/) calls this, never a system.
+ * `quiet` (ticks) left out is 0, a full cooling wait ahead.
+ */
+export function seedAlert(world: World, content: Content, area: string, level: number, at: { x: number; y: number }, quiet = 0): Entity {
+  let e = alertOf(world, area);
+  if (!e) e = addEntity(world, { id: alertId(area), kind: THING_KIND, player: null, room: area, x: 0, y: 0, vx: 0, vy: 0, facing: 1, onGround: true, c: {} });
+  e.c.alert = { level, quiet };
+  e.x = at.x;
+  e.y = at.y;
+  if (content.dispatch?.[area]) e.c.dispatch ??= { queue: [], sent: 0, seen: 0 };
+  showAlert(world, area, level);
+  return e;
+}

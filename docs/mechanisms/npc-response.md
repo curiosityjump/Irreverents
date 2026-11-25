@@ -308,6 +308,11 @@ The owner's rules, each marked `INTENT:` with its D-number at its site:
   `~alert:<room>` (kind `~thing`, no `c.thing`), made by the first
   completed call there; its `x`, `y` are the last place reported. No
   entity means alert 0. Read it with `alertLevel(world, area)`.
+  `seedAlert()` (same file) builds it, with `c.dispatch` and
+  `world.alerts`, as standing at a level before anyone acts: world
+  construction for scenarios (`alerts`) and the e2e's saved worlds, never
+  called by a system; it emits nothing and gives nobody `c.respond`, so
+  it is not a second raise.
 - `c.call` on a person going to call: `plead`, `progress`, `bell`,
   `stall`, `reported`.
 - `c.ringing` `{ ticks, of }` on a bell while it is being rung (for the
