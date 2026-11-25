@@ -266,6 +266,8 @@ for later, as the step suggests.
 
 ## Briefs
 
+- `escalating-guard-response.md`: done as briefed, three pushes (e940b12 five levels in the castle street; a4f9885 the alarm is the whole castle town's; 7929998 the ending). Reviewed by orchestrator `session_017WiGzJYBCYJ85Bj95B7ZLw` by a full re-run at 18bf07b (build, check, gates 6 of 6 green; e2e 183 ok, one red, `clash-street`, not this brief's) and two blind looks (`docs/plan/step-8.md`, last section; "Second blind look" below). Brief deleted 2026-11-25 by orchestrator `session_017WiGzGgiMLCwNj9zptZqBz`. Its leftovers are in `docs/current-directive.md`, "Owed next" 3b.
+
 - **Slice 1, shipped and reviewed** (worker `session_017WiGzFBg5B72dx48zdiZh9`,
   `a501061` + `15cea88`, 04:46 and 04:53 UTC; brief deleted). People
   with three moods, seeing, the rule tables, routines, `interact`, mood
