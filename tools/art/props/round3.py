@@ -625,6 +625,22 @@ FACES = {
         '...kkkkk....',
         '............',
     ],
+    # the hidden recruit (content/characters/hauler.json): a white head-cloth over a gold band, pink at the sides.
+    # DRAFT: the drawn fallback only; the HUD sheet cuts her face from her own sprite (drive.HEAD['hauler']).
+    'hauler': [
+        '...kkkkkk...',
+        '..kWWWWWWk..',
+        '.kWWWWWWWWk.',
+        'kgGGGGGGGGgk',
+        'kpSsssssssSk',
+        'pPSesSSsesSk',
+        'pPSesSSsesSk',
+        'kpSssssssssk',
+        '.kSsshhsssk.',
+        '..kssssssk..',
+        '...kkkkkk...',
+        '............',
+    ],
 }
 
 

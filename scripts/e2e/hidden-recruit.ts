@@ -311,6 +311,7 @@ export async function hiddenRecruitFacts(kit: Kit & { shots?: string }): Promise
     let state: string | null = null;
     let banner: string | null = null;
     let gauge = 0;
+    let flashFace: string | null | undefined;
     if (inCave) {
       const w = await ph.page.evaluate(() => (window as any).irreverents.content.characters[(window as any).irreverents.drawn.me.kind].box.w);
       await standAt(ph, 8 * 16 - w / 2, -1);
@@ -319,12 +320,13 @@ export async function hiddenRecruitFacts(kit: Kit & { shots?: string }): Promise
       state = await ph.page.evaluate(() => (document.querySelector('#actions [data-action="interact"]') as HTMLElement | null)?.dataset.state ?? null);
       await ph.page.evaluate(() => {
         const w = window as any;
-        w.__free = { gauge: 0, banner: null };
+        w.__free = { gauge: 0, banner: null, flashFace: undefined };
         const look = (): void => {
           const d = w.irreverents.drawn;
           const c = (d.recruits?.cages ?? []).find((x: any) => x.id === 'cave-captive');
           if (c?.gauge) w.__free.gauge = Math.max(w.__free.gauge, c.gauge);
           if (d.banner && !w.__free.banner) w.__free.banner = d.banner.text;
+          if (d.recruits?.flash && w.__free.flashFace === undefined) w.__free.flashFace = d.recruits.flashFace ?? null;
           requestAnimationFrame(look);
         };
         requestAnimationFrame(look);
@@ -341,8 +343,9 @@ export async function hiddenRecruitFacts(kit: Kit & { shots?: string }): Promise
         await ph.cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
       }
       await sleep(250);
-      const f = (await ph.page.evaluate(() => (window as any).__free)) as { gauge: number; banner: string | null };
+      const f = (await ph.page.evaluate(() => (window as any).__free)) as { gauge: number; banner: string | null; flashFace?: string | null };
       gauge = f.gauge;
+      flashFace = f.flashFace;
       banner = f.banner ?? ((await ph.page.evaluate(() => (window as any).irreverents.drawn.banner?.text ?? null)) as string | null);
       if (freed) await shots(ph, dir, 'hidden-freed');
     }
@@ -350,6 +353,15 @@ export async function hiddenRecruitFacts(kit: Kit & { shots?: string }): Promise
       'hidden-recruit-freed',
       freed && state === 'free' && !!banner,
       `standing in the cage's middle the Use button said ${JSON.stringify(state)} (expected "free"); a touch held on it filled the hold to ${Math.round(gauge * 100)}% and the page drew the cage ${freed ? 'open' : 'STILL SHUT after 4 s'} with the banner ${JSON.stringify(banner)}`,
+    );
+
+    // Brief recruit-shown-right: the banner's words are her shown name (data) and "joins!", without the builders'
+    // stand-in word; the flash beside the plate is her own cut face, not a colour square.
+    const shownName = (await ph.page.evaluate(() => (window as any).irreverents.content.characters.hauler?.name ?? null)) as string | null;
+    fact(
+      'hidden-recruit-banner',
+      freed && !!shownName && banner === `${shownName} joins!` && !/graybox/i.test(banner ?? '') && flashFace === 'hud-face-hauler',
+      `freed, the banner read ${JSON.stringify(banner)} (expected ${JSON.stringify(`${shownName} joins!`)}, no "Graybox") and the flash beside the plate drew ${flashFace === undefined ? 'NOTHING seen' : flashFace === null ? 'a COLOUR SQUARE (no cut face)' : flashFace}`,
     );
 
     // The friend's cantina now draws her wandering (nobody plays her yet).
@@ -387,6 +399,46 @@ export async function hiddenRecruitFacts(kit: Kit & { shots?: string }): Promise
       `a tap of Use at the open cage ${swapped ? 'swapped the hauler in' : 'did NOT swap her in'}: the first phone's plate lists ${plateA.join(', ')} (her first: it plays her), the friend's ${plateB.join(', ') || 'nothing'}`,
     );
     if (swapped) await shots(ph, dir, 'hidden-plate');
+
+    // Brief recruit-shown-right: every roster hero has a face cut for the plate (so the next recruit without one is
+    // caught here, not by the owner), and the plate drew hers as that cut face.
+    const faces = (await ph.page.evaluate(() => {
+      const irr = (window as any).irreverents;
+      const groups = Object.values(irr.content.looks ?? {}) as any[];
+      const has = (id: string): boolean => groups.some((g) => !!g.looks?.[id]);
+      return {
+        missing: (irr.content.roster?.characters ?? []).filter((k: string) => !has(`hud-face-${k}`)) as string[],
+        plate: (irr.drawn.hud?.faces ?? []).map((f: any) => ({ kind: f.kind, cut: f.cut })) as { kind: string; cut?: boolean }[],
+      };
+    })) as { missing: string[]; plate: { kind: string; cut?: boolean }[] };
+    const herFace = faces.plate.find((f) => f.kind === 'hauler');
+    fact(
+      'hidden-recruit-face',
+      swapped && faces.missing.length === 0 && herFace?.cut === true,
+      `roster heroes without a hud-face look: ${faces.missing.join(', ') || 'none'}; on the plate her face was ${herFace ? (herFace.cut ? 'her cut face' : 'a COLOUR SQUARE') : 'NOT DRAWN'}`,
+    );
+
+    // Brief recruit-shown-right: swapped on the spot, she stands in the open cage's tiles, and the page drew that
+    // cage behind the bodies (never its posts over her).
+    const inCage = swapped
+      ? ((await ph.page.evaluate(() => {
+          const irr = (window as any).irreverents;
+          const d = irr.drawn;
+          const r = irr.content.recruits['cave-captive'];
+          const T = irr.content.rooms[r.room].tile;
+          const box = irr.content.characters[d.me.kind].box;
+          const cage = (d.recruits?.cages ?? []).find((x: any) => x.id === 'cave-captive') ?? null;
+          const x0 = r.tile[0] * T;
+          return { cage, overlaps: d.me.x < x0 + r.w * T && d.me.x + box.w > x0, x: Math.round(d.me.x), x0, x1: x0 + r.w * T };
+        })) as { cage: any; overlaps: boolean; x: number; x0: number; x1: number })
+      : null;
+    fact(
+      'hidden-recruit-open-cage',
+      !!inCage && inCage.overlaps && inCage.cage?.open === true && inCage.cage?.layer === 'behind',
+      inCage
+        ? `swapped in, she stands at x ${inCage.x} (${inCage.overlaps ? 'inside' : 'OUTSIDE'} the cage's ${inCage.x0}-${inCage.x1}); the open cage was drawn ${inCage.cage ? (inCage.cage.layer === 'behind' ? 'behind the bodies' : `in the ${inCage.cage.layer ?? 'FRONT'} layer, OVER her`) : 'NOT AT ALL'}`
+        : 'never swapped in, so never stood in the open cage',
+    );
   } finally {
     await ph.ctx.close().catch(() => {});
     await friend?.ctx.close().catch(() => {});

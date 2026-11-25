@@ -58,7 +58,7 @@ const DIVIDER = 'rgba(224, 154, 30, 0.45)';
 
 export interface DrawnHud {
   /** In plate order: the viewer's own first. `played`: by the viewer or a friend. `out`: no hearts left (Step 21, drawn greyed). */
-  faces: { kind: string; me: boolean; played: boolean; out: boolean }[];
+  faces: { kind: string; me: boolean; played: boolean; out: boolean; cut?: boolean }[];
   /** What each of the viewer's slots shows (a look id), or null. */
   slots: Record<HudSlot, string | null>;
   /** The plate, in game pixels of the view. */
@@ -322,7 +322,8 @@ export function drawHud(g: CanvasRenderingContext2D, world: World, content: Cont
     cx += SLOT + 1;
   }
   cx += GAP;
-  const faces: DrawnHud['faces'] = [{ kind: mine, me: true, played: true, out: mineOut }];
+  // `cut`: the face is its own `hud-face-<kind>` look, not the colour-square fallback (brief recruit-shown-right's e2e reads it).
+  const faces: DrawnHud['faces'] = [{ kind: mine, me: true, played: true, out: mineOut, cut: !!look(content, `hud-face-${mine}`) }];
   others.forEach((k, i) => {
     if (i > 0) {
       g.fillStyle = DIVIDER;
@@ -338,7 +339,7 @@ export function drawHud(g: CanvasRenderingContext2D, world: World, content: Cont
       strong.push((c) => drawHeartRow(c, world, content, k, hx, y + PAD + FACE + 2, false, frame, FRIEND_LINE, cw));
       heartRows.push({ x: hx, y: y + PAD + FACE + 2, w: cw, h: Math.ceil(maxHearts(content, k) / FRIEND_LINE) * small.step });
     }
-    faces.push({ kind: k, me: false, played, out });
+    faces.push({ kind: k, me: false, played, out, cut: !!look(content, `hud-face-${k}`) });
     cx += col(k) + FRIEND_GAP;
   });
   // Solid: as always, in the plate. Faded: full strength with a dark rim (the e2e's control: unrimmed at the old 0.6 of the fade, as before).

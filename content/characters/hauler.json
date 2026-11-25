@@ -1,7 +1,7 @@
 {
   "//": "DRAFT (Step 13, the hidden recruit, handoff-prompts/hidden-recruit.md): a roster character for the 'strong mover' function (library doc 05, Layer A): she lifts and throws what nobody else can (liftStrength 500, above Brawn's 420: content/tuning.json). Found only caged in the Iron Quarry's hidden cave (content/recruits/cave-captive.json). Only moves that exist (D-008). The id is the function; the name and the colour are data. Drawn from the P04 cantina sheet's barkeep (row 1).",
   "id": "hauler",
-  "name": "Graybox Hauler",
+  "name": "Hauler",
   "box": {
     "w": 16,
     "h": 24

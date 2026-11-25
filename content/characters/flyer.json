@@ -1,7 +1,7 @@
 {
   "//": "DRAFT: placeholder for the 'flyer' function (docs/plan/step-2.md): a light body that flaps in the air.",
   "id": "flyer",
-  "name": "Graybox Flyer",
+  "name": "Flyer",
   "box": { "w": 14, "h": 20 },
   "color": "#4cc9f0",
   "verbs": [

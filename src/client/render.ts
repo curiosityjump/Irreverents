@@ -122,9 +122,12 @@ export function render(g: CanvasRenderingContext2D, world: World, content: Conte
   drawPrizeStands(g, world, content, roomId, ox, oy);
   // Step 19: every person's sight, faint, behind the bodies (draw/sight.ts).
   drawSight(g, world, content, roomId, ox, oy);
+  // INTENT (brief recruit-shown-right): an open cage behind the bodies, so whoever stands in it after the swap is
+  // never drawn behind its posts (src/client/draw/recruits.ts).
+  drawRecruits(g, world, content, roomId, ox, oy, pv, 'behind');
   drawEntities(g, world, content, roomId, ox, oy, pv);
-  // Step 13: a captive in a cage, the bars over them (src/client/draw/recruits.ts).
-  drawRecruits(g, world, content, roomId, ox, oy, pv);
+  // Step 13: a shut cage's captive, the bars over them (src/client/draw/recruits.ts).
+  drawRecruits(g, world, content, roomId, ox, oy, pv, 'front');
   drawSignalers(g, world, content, roomId, ox, oy);
   drawAway(g, world, content, roomId, ox, oy, pv);
   drawPowers(g, world, content, roomId, ox, oy, pv); // Step 9: carriers' orbs, loose orbs, holders' glow

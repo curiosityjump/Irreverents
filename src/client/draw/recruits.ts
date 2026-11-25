@@ -23,14 +23,20 @@ const GAUGE_EDGE = '#1b1b2f';
 const GAUGE_WELL = '#4a4560';
 const GAUGE_FILL = '#ffd23f';
 const FLASH_EDGE = '#ffd23f';
+const FACE_WELL = '#0f0f1c';
 
 export interface DrawnRecruits {
-  /** The cages this frame drew in this room: the recruit file, its hero, and whether it stands open. */
-  cages: { id: string; character: string; open: boolean; gauge: number | null }[];
+  /**
+   * The cages this frame drew in this room: the recruit file, its hero, whether it stands open, and the layer it
+   * was drawn in (`behind` the bodies once open, `front` of them while shut: the bars over the captive).
+   */
+  cages: { id: string; character: string; open: boolean; gauge: number | null; layer: 'behind' | 'front' }[];
   /** The captives' calls this frame drew: over the cage, or at the screen's edge. */
   calls: { id: string; at: 'cage' | 'edge' }[];
   /** Step 13 push 3: the face flashing beside the party plate after a rescue, if any. */
   flash: string | null;
+  /** The look the flash drew for that face (`hud-face-<kind>`), or null when it fell back to a colour square. */
+  flashFace?: string | null;
 }
 
 let last: DrawnRecruits = { cages: [], calls: [], flash: null };
@@ -46,19 +52,26 @@ function captiveBody(content: Content, e: Entity, character: string, cageW: numb
   return { id: `${e.id}:hero`, kind: character, player: null, room: e.room, x: e.x + (cageW - box.w) / 2, y: e.y - box.h, vx: 0, vy: 0, facing: -1, onGround: true, c: {} };
 }
 
-/** The cages and the heroes in them, in front of the bodies' layer (the bars over the captive). */
-export function drawRecruits(g: CanvasRenderingContext2D, world: World, content: Content, roomId: string, ox: number, oy: number, view?: PlayerView): void {
-  const out: DrawnRecruits = { cages: [], calls: [], flash: null };
-  last = out;
+/**
+ * The cages and the heroes in them. Called twice a frame by render.ts: `behind` before the bodies (it starts the
+ * frame's read-out) draws every open cage; `front` after them draws every shut cage, its captive and its bars.
+ * INTENT (brief recruit-shown-right, 2026-11-25): an open cage never draws over a living body. The swap on the spot
+ * leaves the new hero standing in the cage's tiles, and a blind look read the posts and lintel over them as a fault;
+ * a shut cage keeps its bars over its captive.
+ */
+export function drawRecruits(g: CanvasRenderingContext2D, world: World, content: Content, roomId: string, ox: number, oy: number, view: PlayerView | undefined, layer: 'behind' | 'front'): void {
+  if (layer === 'behind') last = { cages: [], calls: [], flash: null };
+  const out = last;
   if (!view) return;
   for (const { r, e, state } of recruitsOf(world, content)) {
     if (e.room !== roomId) continue;
+    if ((layer === 'behind') !== state.open) continue;
     const T = content.rooms[roomId]!.tile;
     const cageW = r.w * T;
     const x = ox + Math.round(e.x);
     const y = oy + Math.round(e.y);
     const gauge = state.hold ? Math.min(1, state.hold.ticks / Math.max(1, Math.round(r.hold * 60))) : null;
-    out.cages.push({ id: r.id, character: r.character, open: state.open, gauge });
+    out.cages.push({ id: r.id, character: r.character, open: state.open, gauge, layer });
     const hero = state.open ? null : captiveBody(content, e, r.character, cageW);
     if (hero) {
       // Facing whoever is looking, so the captive reads as calling to them.
@@ -181,8 +194,18 @@ export function drawRecruitFlash(g: CanvasRenderingContext2D, content: Content, 
   const on = Math.floor(frame / 8) % 2 === 0;
   g.fillStyle = on ? FLASH_EDGE : INK;
   g.fillRect(x - 1, y - 1, size + 2, size + 2);
-  if (!drawLook(g, content, `hud-face-${flash.kind}`, x, y, { w: size, h: size })) {
+  const l = look(content, `hud-face-${flash.kind}`);
+  if (l) {
+    // DRAFT (brief recruit-shown-right): the face at a whole multiple of its own pixels, centred on the plate's
+    // dark, so a 16 px face in an 18 px square stays crisp rather than stretched by one uneven row.
+    const k = Math.max(1, Math.floor(size / Math.max(l.w, l.h)));
+    g.fillStyle = FACE_WELL;
+    g.fillRect(x, y, size, size);
+    drawLook(g, content, l.id, x + Math.floor((size - l.w * k) / 2), y + Math.floor((size - l.h * k) / 2), { w: l.w * k, h: l.h * k });
+    last.flashFace = l.id;
+  } else {
     g.fillStyle = content.characters[flash.kind]?.color ?? PAPER;
     g.fillRect(x, y, size, size);
+    last.flashFace = null;
   }
 }

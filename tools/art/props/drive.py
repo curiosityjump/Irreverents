@@ -112,7 +112,9 @@ from sizes import ROOT
 from srcimport import reink
 
 HEAD = {'grappler': (13, 14, 38, 34), 'infiltrator': (19, 22, 35, 38), 'flyer': (15, 19, 37, 37),
-        'brawler': (16, 15, 37, 34), 'skirmisher': (16, 19, 38, 37)}
+        'brawler': (16, 15, 37, 34), 'skirmisher': (16, 19, 38, 37),
+        # DRAFT: the hidden recruit's head-cloth and face (her idle frame; 20 x 16 keeps both eyes at 16 x 16)
+        'hauler': (15, 24, 35, 40)}
 
 
 def _shrink(im, w, h):

@@ -10,6 +10,7 @@
     "hud-face-flyer": {"src": [32, 24, 16, 16]},
     "hud-face-brawler": {"src": [48, 24, 16, 16]},
     "hud-face-skirmisher": {"src": [64, 24, 16, 16]},
+    "hud-face-hauler": {"src": [80, 24, 16, 16]},
     "hud-ko": {"src": [0, 40, 10, 10]},
     "hud-fall": {"src": [10, 40, 10, 10]},
     "alert-pip": {"src": [20, 40, 10, 10]},

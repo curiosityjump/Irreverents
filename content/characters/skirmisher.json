@@ -1,7 +1,7 @@
 {
   "//": "DRAFT (Step 11): a roster character for the 'light and quick' function: small, fast, quick jabs that barely push, easy to send flying. Only moves that exist (D-008). The id is the function; the name and the colour are data. Step 13: found caged in the Bandit Camp; their difference is reach, a second jump in the air (the flyer's flap verb, one flap: content/tuning.json), so the way out of the camp is straight up onto the ledge.",
   "id": "skirmisher",
-  "name": "Graybox Skirmisher",
+  "name": "Skirmisher",
   "box": { "w": 12, "h": 18 },
   "color": "#ffd60a",
   "verbs": [

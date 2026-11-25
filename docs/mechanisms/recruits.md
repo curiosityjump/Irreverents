@@ -83,6 +83,16 @@ ids never change.
   calls }`. The cage is `cage-shut` / `cage-open` (P04's barred gate, cut
   by the core-loop art builder, `content/looks/outpost.json`); a recruit
   file without looks gets plain drawn bars (`drawBars`).
+- **Which layer a cage is drawn in** (brief `recruit-shown-right`,
+  2026-11-25): `render.ts` calls `drawRecruits` twice, `'behind'` just
+  before `drawEntities` (it starts the frame's read-out) and `'front'` just
+  after. **`INTENT:` an open cage is drawn behind the bodies** (the swap on
+  the spot leaves the new hero standing in its tiles, and its posts and
+  lintel over them read as a fault); **a shut cage, its captive and its
+  bars stay in front** (the bars over the captive). Each entry of
+  `drawn.recruits.cages` says its `layer`. Proven by the e2e fact
+  `hidden-recruit-open-cage` (control: one pass after the bodies, as
+  before; fails).
 
 ## FREE (push 3)
 
@@ -113,8 +123,12 @@ ids never change.
 - **On a phone:** the gauge is a bar over the cage (`t-no-numbers`), from
   `c.recruit.hold` on the camp's entity; `recruited` is a world event, so
   every page in the world, any room, queues a banner "<name> joins!"
-  (`draw/banner.ts`), flashes the new face beside the party plate
-  (`drawRecruitFlash`) and plays the fanfare (`content/sounds/recruited.json`,
+  (`draw/banner.ts`; `<name>` is the character file's `name`, data: `DRAFT:`
+  the role word alone, "Hauler joins!", decisions-log 2026-11-25 "Shown
+  names"), flashes the new face beside the party plate
+  (`drawRecruitFlash`: the `hud-face-<kind>` look at a whole multiple of its
+  16 px, centred on a dark square the plate's height; `drawn.recruits.flashFace`
+  names the look drawn, null for the colour-square fallback) and plays the fanfare (`content/sounds/recruited.json`,
   the approved pack's `secret_found_chime.wav`); `World.roster` reaches
   every page by key.
 - **Caught:** the fighter who sees a hero at the cage comes at them; his
@@ -158,3 +172,27 @@ ids never change.
 - **Not shown early:** in a new game's world (the roster's `start`) she is no cantina regular and not in the party while caged; freed, she wanders the cantina from the next tick, and swapped in she is on the plate (`step13-hauler-new-game-cantina`; e2e `hidden-recruit-not-early`, `-cantina`, `-plate`, run in a new kept game made by the start screen's New game, because a `?room=` world has everyone).
 - **Where to stand to free her:** the cage's reach is the body's middle within 22 px of the cage's middle across (src/sim/use/free.ts), so a body flush against the cage's side is just outside it and the Use button says nothing; inside the cage it says FREE. By touch at 150 ms each way, a hold from the cage's middle freed her 10 of 10 (2026-11-25); from its east edge (the body's middle at 157 px), 0.
 - **Proven by:** `step13-hauler-freed-in-the-cave`, `step13-hauler-lifts-the-boulder`, `step13-hauler-cave-put-back`, `step13-hauler-cave-put-back-freed`, `step13-hauler-new-game-cantina`, e2e `hidden-recruit-not-shown`, `hidden-recruit-cave`, `hidden-recruit-not-early`, `hidden-recruit-freed` (a touch hold), `hidden-recruit-cantina`, `hidden-recruit-plate` (`scripts/e2e/hidden-recruit.ts`).
+
+## A recruit's face (brief recruit-shown-right, 2026-11-25)
+
+- **Every roster hero needs a `hud-face-<id>` look**, or the party plate
+  and the "joins!" flash fall back to a square of the character's colour
+  (`src/client/draw/hud.ts`, `face()`; `drawRecruitFlash`). The e2e fact
+  `hidden-recruit-face` fails on any `roster.characters` id without one,
+  so a new recruit without a face is caught by the check
+  (`drawn.hud.faces[].cut` says whether a plate face was its cut look).
+- **How one is made:** cut from the hero's own sheet, the first idle frame,
+  by `tools/art/props/drive.py` `hud_face()`: add the head's box in that
+  frame to `HEAD` (`drive.py`), a key to `FACES`
+  (`tools/art/props/round3.py`, which make.py iterates for the face row;
+  its 12 x 12 drawing is only a fallback), and re-run
+  `python3 -I tools/art/props/make.py`. That rewrites `assets/ui/hud.png`
+  and `content/looks/ui.json` together; compare every existing rectangle's
+  pixels before and after (a sixth face fit the face row's 96 px, so
+  nothing else moved). The make also rewrites `content/decor/*.json`;
+  on 2026-11-25 it re-placed four rooms' decor (the rooms changed after
+  the last decor run), which the recruit's builder reverted as outside
+  the brief. The hauler's box is `(15, 24, 35, 40)`, `DRAFT:`.
+- **The six heroes' shown names** are the role word alone (`DRAFT:`, ids
+  unchanged): proven by `hidden-recruit-banner` (the banner reads
+  `<name> joins!` with no "Graybox"; control: the old names, fails).

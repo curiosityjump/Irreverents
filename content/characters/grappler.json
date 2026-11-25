@@ -1,7 +1,7 @@
 {
   "//": "DRAFT: placeholder for the 'grappler' function (docs/plan/step-2.md): the biggest body, a heavy feel. The id is the function, so the name and art can change without renaming it.",
   "id": "grappler",
-  "name": "Graybox Grappler",
+  "name": "Grappler",
   "box": { "w": 18, "h": 30 },
   "color": "#d95d39",
   "verbs": [
