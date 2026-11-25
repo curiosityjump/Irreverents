@@ -25,6 +25,8 @@ const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms
 const T = 16;
 /** The second row's banner (content/outposts/outpost.json `announce`[1]): the first row is one fighter, so the second, two, is the first that can come from both sides. Its people are `<outpost>:w1:<i>`. */
 const BANNER = 'Two more!';
+/** How far back before the banner is read the hero must already have stood near column 21 (ms): a banner queued behind the horn's 2.5 s one, and room to spare. */
+const LOOK_BACK = 3000;
 
 /** The stick held one way with the jump button tapped every half second, until `done` or the time runs out (copied from chase.ts). */
 async function hopUntil(ph: Phone, dir: number, done: () => Promise<boolean>, ms = 8000): Promise<boolean> {
@@ -57,6 +59,8 @@ interface Seen {
   hero: number;
   /** The page drew the camp's horn post broken. */
   broken: boolean;
+  /** The page drew the camp's lookout lying down (felled) this frame. */
+  lookoutDown: boolean;
   left: string[];
   right: string[];
   /** Per newcomer on screen: tiles inside the nearer screen edge. */
@@ -83,18 +87,30 @@ const look = (ph: Phone): Promise<Seen> =>
       (c < mid ? left : right).push(e.id);
       inset[e.id] = Math.round((Math.min(c - left0, right0 - c) / 16) * 10) / 10;
     }
-    return { banner: d.alarms ?? [], broken: (d.signalers ?? []).some((g: any) => g.state === 'broken'), up: d.banner?.text ?? '', hero: mid, left, right, inset, view: [left0, right0] as [number, number] };
+    const lookout = (d.entities as any[]).find((e) => e.id === 'camp-lookout');
+    return { banner: d.alarms ?? [], lookoutDown: lookout?.state === 'down', broken: (d.signalers ?? []).some((g: any) => g.state === 'broken'), up: d.banner?.text ?? '', hero: mid, left, right, inset, view: [left0, right0] as [number, number] };
   });
 
 export async function campRowFacts(kit: Kit & { shots: string }): Promise<void> {
-  // INTENT: the camp's own swings can break the horn post beside the fight (D-061: a broken post
-  // calls no more), and then no second row comes at all. That is play, not what this fact reads, so
-  // a try whose page draws the horn broken before the banner starts again in a fresh world (3 tries).
+  // INTENT: this fact reads where the second row first walks on screen while the hero stands in the
+  // lookout's view at column 21. A try in which that did not happen is play, not what the fact reads,
+  // and starts again in a fresh world (3 tries; the last is judged whatever happened):
+  // - the horn drawn broken before the banner (D-061: a broken post calls no more; since `ownSpared`
+  //   only a hero's blow breaks it, and the hero here never strikes);
+  // - no banner in 90 s while the page drew the lookout felled (e2e-intermittent-reds, measured: the
+  //   first row's fighter knocking the hero into the lookout over and over, each time restarting his
+  //   6 s wait; the horn whole and nothing stalled);
+  // - the hero flung more than 4 tiles off column 21 from 3 s before the banner was read until both
+  //   sides were seen
+  //   (measured: at column 9 the door is kept clear and both halves come from the east by design,
+  //   `doorClear`; at 31 the view jumped past the west newcomers).
+  // The claim (one first drawn west and one east within 8 s of the banner) is unchanged; the control
+  // (one east entry) fails every try.
   const tries: string[] = [];
   for (let t = 1; t <= 3; t++) {
     const r = await attempt(kit, t === 3);
-    if (r.broken && !r.ok && t < 3) {
-      tries.push(`try ${t}: the horn post was broken before "${BANNER}"`);
+    if (!r.ok && r.why && t < 3) {
+      tries.push(`try ${t}: ${r.why}`);
       continue;
     }
     kit.fact('row-both-sides', r.ok, `${tries.length ? tries.join('; ') + '; then ' : ''}${r.text}`);
@@ -102,7 +118,7 @@ export async function campRowFacts(kit: Kit & { shots: string }): Promise<void> 
   }
 }
 
-async function attempt(kit: Kit & { shots: string }, last: boolean): Promise<{ ok: boolean; broken: boolean; text: string }> {
+async function attempt(kit: Kit & { shots: string }, last: boolean): Promise<{ ok: boolean; why: string; text: string }> {
   const ph = await phone(kit, `${kit.base}/?room=e2e-row-${Math.random().toString(36).slice(2, 10)}`, 'row');
   try {
     const inCamp = (await walkInto(ph, 1, 'castle-street')) && (await walkInto(ph, 1, 'courtyard'));
@@ -130,6 +146,11 @@ async function attempt(kit: Kit & { shots: string }, last: boolean): Promise<{ o
     let bannerAt = 0;
     let restands = 0;
     let lastStand = Date.now();
+    let felled = 0;
+    let wasDown = false;
+    let strayed = NaN;
+    /** Where the hero was drawn over the last few seconds (the page's time, the hero's middle). */
+    const trail: [number, number][] = [];
     const shot = path.join(kit.shots, 'camp-row-both-sides-750x340.png');
     const sides = (): string[] => [...new Set(first.values())];
     const end = Date.now() + 90000;
@@ -139,6 +160,14 @@ async function attempt(kit: Kit & { shots: string }, last: boolean): Promise<{ o
       for (const id of seen.left) if (!first.has(id)) first.set(id, 'west');
       for (const id of seen.right) if (!first.has(id)) first.set(id, 'east');
       if (!bannerAt && seen.banner.includes(BANNER)) bannerAt = Date.now();
+      if (!bannerAt && seen.lookoutDown && !wasDown) felled++;
+      wasDown = seen.lookoutDown;
+      trail.push([Date.now(), seen.hero]);
+      while (trail.length && trail[0]![0] < Date.now() - LOOK_BACK) trail.shift();
+      // From LOOK_BACK before the banner was first read: the row splits when the call completes, and
+      // the page shows "Two more!" up to one queued banner (2.5 s) after that (measured: the hero
+      // flung to column 30 at the split and walked back before the banner showed).
+      if (bannerAt && Number.isNaN(strayed)) strayed = trail.find(([, x]) => Math.abs(x - 21.5 * T) > 4 * T)?.[1] ?? NaN;
       if (bannerAt && sides().length === 2) {
         bothAt = Date.now();
         break;
@@ -155,6 +184,15 @@ async function attempt(kit: Kit & { shots: string }, last: boolean): Promise<{ o
       await sleep(100);
     }
     const ok = bothAt > 0;
+    const why = ok
+      ? ''
+      : !bannerAt && seen.broken
+        ? `the horn post was broken before "${BANNER}"`
+        : !bannerAt && felled > 0
+          ? `no "${BANNER}" in 90 s, the lookout drawn felled ${felled} time(s), the horn whole`
+          : bannerAt && !Number.isNaN(strayed)
+            ? `the hero was flung to x ${Math.round(strayed)} (column ${(strayed / T).toFixed(1)}) about "${BANNER}" (from 3 s before it)`
+            : '';
     // The shot: a frame with the row on both sides and its own banner up (it follows the horn's
     // banner on the queue, 2.5 s each), else the frame the fact was read from.
     let framed = false;
@@ -170,8 +208,8 @@ async function attempt(kit: Kit & { shots: string }, last: boolean): Promise<{ o
     const firstSeen = [...first].map(([id, side]) => `${id} ${side}, ${firstInset.get(id)} tiles inside the edge`).join(', ');
     return {
       ok,
-      broken: !bannerAt && seen.broken,
-      text: `by touch, sideways, standing in the camp lookout's view: ${when}, the row was first drawn on screen [${firstSeen}] of the hero (expected one first seen west and one east within 8 s of the banner; shot with "${BANNER}" up: ${framed}; walked back to column 21 ${restands} time(s); horn drawn broken: ${seen.broken}; hero x ${Math.round(seen.hero)}, view ${Math.round(seen.view[0])}-${Math.round(seen.view[1])}; banners ${JSON.stringify(seen.banner)})`,
+      why,
+      text: `by touch, sideways, standing in the camp lookout's view: ${when}, the row was first drawn on screen [${firstSeen}] of the hero (expected one first seen west and one east within 8 s of the banner; shot with "${BANNER}" up: ${framed}; walked back to column 21 ${restands} time(s); horn drawn broken: ${seen.broken}; lookout drawn felled ${felled} time(s) before the banner; hero first more than 4 tiles off column 21 from 3 s before it: ${Number.isNaN(strayed) ? 'never' : `x ${Math.round(strayed)}`}; hero x ${Math.round(seen.hero)}, view ${Math.round(seen.view[0])}-${Math.round(seen.view[1])}; banners ${JSON.stringify(seen.banner)})`,
     };
   } finally {
     await ph.ctx.close();

@@ -934,7 +934,47 @@ own full runs meanwhile: 140 of 140 at 50e5121 and 142 of 142 at 778ab9d; one re
 | `door-go-in`, `door-use` | 1 of 8 (quiet; the flakes brief saw it only under load) | unknown | Use button's state "" in the doorway. Suspected the stick's last nudge carrying the hero off the one-tile doorway (as the cellar doorway's was); the fact now prints where the hero stood against the doorway. Not reproduced alone. |
 | `plates-friend-held` | 0 of 8 | unknown | Not reproduced. The fact now prints each hero's columns and every plate as each page draws it, before and after its 1.5 s watch: the suspect is the same last nudge carrying the friend off the plate while the gate stays open its 6 s. |
 | `outpost-break`, `start-continue-gone` | 0 of 8 | unknown | Not reproduced. |
-| `row-both-sides` | (orchestrator: 1, its builder about 1 in 20) | not looked at | Out of budget. |
+| `row-both-sides` | (orchestrator: 3 of 5 full runs; alone 3 of 40 after push 2) | **game's (fixed, push 2) and the check's (fixed)** | The camp's own blows broke its horn (all 13 breaks in 40 sim fights); the rest was the fight beside the post: the lookout felled over and over, or the hero flung off column 21 as the row came. Second builder's section below. |
+
+### Second builder (`session_017WiGzFFLrDf959S3iaSd8L`): `row-both-sides`
+
+Logs in the builder's scratchpad (not committed). Measuring tools: a sim probe (hero placed at
+column 21 of the real camp, no input, 90 s, logging every `signaler-broken` and `outpost-wave`)
+and a runner that plays `campRowFacts` alone N times on one local server, reading the server's
+snapshots off the socket each second (hero, lookout, fighter 1, the post's `c.signaler`).
+
+- **The camp breaking its own horn: the game's, fixed (push 2, 64670a9).** Sim, the four starting
+  heroes x 10 starts: 13 breaks in 40 fights, **every one by the camp's own people** (fighters 9,
+  heavies 4; placed and wave alike), 3 before the second row (the grappler, the e2e's hero, 2 of
+  10: the e2e's "1 in 4"). Ruling as briefed (`DRAFT:`, decisions-log "The camp's own blows leave
+  its horn whole"): field `ownSpared` on the outpost, on for the camp. With it: 0 breaks in the
+  same 40, and the second row came in all 40 within 90 s. Scenario `camp-own-blows-spare-horn`
+  (control: false, camp-fighter-1 breaks it at 1019). `docs/deliberate-designs.md` has nothing
+  making the camp's own breaks intended (grep horn, post, D-061).
+- **The call that does not come, horn whole: play, not a stall.** 40 runs of the fact alone on
+  push 2's build: 37 green, 3 red, the horn whole in all 3.
+  - 1 of 40, no "Two more!" in 90 s: **the lookout was felled**, drawn out about 7 times in 75 s
+    while the first row's fighter fought the hero beside him (each knock-out restarts his 6 s
+    `callAgain` wait); he was knocked east to column 32; fighter 1 (the other caller) was knocked
+    out mid-call at tick 1798 and came to rest on a roof (row 4, column 25) and never saw the hero
+    again. Nothing stalled: every wait counted down. That the camp's own fight fells its lookout
+    (the hero flung into him) is the same shape as the horn ruling but not ruled; asked of the
+    orchestrator, nothing changed.
+  - 2 of 40, both newcomers first drawn on one side 8.2 s after the banner: **the hero had been
+    flung off column 21** when the row came: to column 9 (inside `doorClear`'s reach, so both
+    halves come from the east by design) and to column 31 (the view jumped east past the west
+    newcomers, first drawn 4.8 and 9.1 tiles inside the edge). The check's.
+  - Fact changed (`scripts/e2e/camp-row.ts`, `INTENT:`), claim kept: a try also starts again in a
+    fresh world when no banner came in 90 s with the lookout drawn felled, or when the hero was
+    flung more than 4 tiles off column 21 from 3 s before the banner was read until both sides were
+    seen (3 tries; the last is judged whatever happened). Its text now names each try's reason, how
+    many times the lookout was felled and where the hero strayed. The look-back: in 1 of 20 runs of
+    the first version the hero was flung to column 30 just as the row split (tick 2056) and had
+    walked back before the page showed "Two more!", which queues behind the horn's own 2.5 s banner;
+    the newcomers were already on screen (first drawn 2.6 and 10.9 tiles inside), both east.
+  - Control (one east entry, `[[41,10]]`, rebuilt): red 3 of 3, both first drawn east on the judged
+    try. The changed fact (before the look-back), 20 alone: 19 green, 1 red (the look-back case);
+    5 of the 20 needed a second try (3 flung, 2 no call with the lookout felled).
 
 ## A page misses what happened (brief `handoff-prompts/page-misses-what-happened.md`)
 
