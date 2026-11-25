@@ -1,0 +1,558 @@
+{
+  "id": "step4-tier-courtyard-level4-trike",
+  "gate": "D",
+  "proves": "The escalating guard response's courtyard level-4 row, reached by a scenario again (brief alert-starts-at-a-level, push 2): the castle street's alarm is seeded at 3 (the scenario field `alerts`: world construction, which emits nothing and puts nobody on call), and the street's guard stands in the courtyard (its tiles as built; its placed things, the bandit, the roadblock and the parked trike, left out so the fight is his alone). The skirmisher punches him until he rages; raging with his home's alarm up, in a room of the same town with its own table, he whistles there; the call completes (910) and names the courtyard, which goes from 0 to 4, one above the town's highest (the street's seeded 3); level 4's row walks in that tick, a guard at the reins of the watch's trike and an armoured guard, and the trike is driven into the hero (1257). Nothing is raised before the whistle. Controls (watched to fail): the `alerts` seed removed (the raging guard does not whistle: his home's alarm is 0, the courtyard stays 0), and the seed replaced by `world.alerts` alone, the display only (the same: guards read the area's entity, not the pips).",
+  "room": "courtyard",
+  "placements": false,
+  "alerts": [
+    {
+      "area": "castle-street",
+      "level": 3,
+      "at": [
+        40,
+        10
+      ]
+    }
+  ],
+  "players": [
+    {
+      "id": "a",
+      "character": "skirmisher",
+      "tile": [
+        3,
+        7
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "id": "street-guard",
+      "character": "guard",
+      "tile": [
+        4,
+        7
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 1,
+      "to": 5,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 6,
+      "to": 13,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 37,
+      "to": 41,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 42,
+      "to": 49,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 73,
+      "to": 77,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 78,
+      "to": 85,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 109,
+      "to": 113,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 114,
+      "to": 121,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 145,
+      "to": 149,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 150,
+      "to": 157,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 181,
+      "to": 185,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 186,
+      "to": 193,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 217,
+      "to": 221,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 222,
+      "to": 229,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 253,
+      "to": 257,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 258,
+      "to": 265,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 289,
+      "to": 293,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 294,
+      "to": 301,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 325,
+      "to": 329,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 330,
+      "to": 337,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 361,
+      "to": 365,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 366,
+      "to": 373,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 397,
+      "to": 401,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 402,
+      "to": 409,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 433,
+      "to": 437,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 438,
+      "to": 445,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 469,
+      "to": 473,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 474,
+      "to": 481,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 505,
+      "to": 509,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 510,
+      "to": 517,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 541,
+      "to": 545,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 546,
+      "to": 553,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 577,
+      "to": 581,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 582,
+      "to": 589,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 613,
+      "to": 617,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 618,
+      "to": 625,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 649,
+      "to": 653,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 654,
+      "to": 661,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 685,
+      "to": 689,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 690,
+      "to": 697,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 721,
+      "to": 725,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 726,
+      "to": 733,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 757,
+      "to": 761,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 762,
+      "to": 769,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 793,
+      "to": 797,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 798,
+      "to": 805,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 829,
+      "to": 833,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 834,
+      "to": 841,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 865,
+      "to": 869,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 870,
+      "to": 877,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 901,
+      "to": 905,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 906,
+      "to": 913,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 937,
+      "to": 941,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 942,
+      "to": 949,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 973,
+      "to": 977,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 978,
+      "to": 985,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 1009,
+      "to": 1013,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 1014,
+      "to": 1021,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 1045,
+      "to": 1049,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 1050,
+      "to": 1057,
+      "x": 1
+    }
+  ],
+  "ticks": 1500,
+  "expect": [
+    {
+      "fact": "alert",
+      "area": "castle-street",
+      "at": 0,
+      "is": 3
+    },
+    {
+      "fact": "alert",
+      "area": "castle-street",
+      "at": 0,
+      "is": 3,
+      "shown": true
+    },
+    {
+      "fact": "event-where",
+      "event": "alert-changed",
+      "where": {},
+      "between": [
+        0,
+        909
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "call-completed",
+      "where": {
+        "area": "courtyard",
+        "by": "street-guard"
+      },
+      "between": [
+        900,
+        920
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "alert",
+      "area": "courtyard",
+      "at": 909,
+      "is": 0
+    },
+    {
+      "fact": "alert",
+      "area": "courtyard",
+      "between": [
+        911,
+        1500
+      ],
+      "is": 4
+    },
+    {
+      "fact": "alert",
+      "area": "courtyard",
+      "at": 911,
+      "is": 4,
+      "shown": true
+    },
+    {
+      "fact": "event-where",
+      "event": "dispatch-arrived",
+      "where": {
+        "area": "courtyard",
+        "row": 3
+      },
+      "between": [
+        910,
+        920
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "machine-crash",
+      "where": {
+        "machine": "courtyard:help0:0:ride",
+        "target": "p:a"
+      },
+      "between": [
+        911,
+        1500
+      ],
+      "count": [
+        1,
+        99
+      ]
+    }
+  ]
+}
