@@ -1,5 +1,5 @@
 {
-  "//": "DRAFT (the escalating guard response, push 2, 2026-11-25; the owner: 'I want the escalating guard response implemented now'; docs/decisions-log.md, 'Step 4: one town'): The Hall gallery is one of the castle town's rooms (town: castle-town, with the street, the throne room, the courtyard, the Hall gallery and the undercroft). The level is the town's: a completed report here (a guard of the watch who followed you in and blows his whistle; the gallery's thrower is a bad guy, no one's to report to the town) raises this room to one above the town's highest, and that level's row walks in here, by the courtyard door. Rows: 1 a guard, 2 two guards, 3 a guard and the armoured guard, 4 two armoured guards, 5 two armoured guards, again on each further completed call and every keepComing (12) seconds while any of them sees a hero, under the cap (6 people). relieve: plain guards of earlier rows stand down to make room for the stronger. clearOf (3): a row never walks in with a hero within 3 tiles of its door; it waits. Each cools on its own clock (20 s unseen a level); the pips show the town's highest. Every number is a first guess.",
+  "//": "DRAFT (the escalating guard response, push 2, 2026-11-25; the owner: 'I want the escalating guard response implemented now'; docs/decisions-log.md, 'Step 4: one town'): The Hall gallery is one of the castle town's rooms (town: castle-town, with the street, the throne room, the courtyard, the Hall gallery and the undercroft). The level is the town's: a completed report here (a guard of the watch who followed you in and blows his whistle; the gallery's thrower is a bad guy, no one's to report to the town) raises this room to one above the town's highest, and that level's row walks in here, by the courtyard door. Rows: 1 a guard, 2 two guards, 3 a guard and the armoured guard, 4 two armoured guards, 5 two armoured guards, again on each further completed call and every keepComing (12) seconds while any of them sees a hero, under the cap (6 people). relieve: plain guards of earlier rows stand down to make room for the stronger. clearOf (3): a row never walks in with a hero within 3 tiles of its door; it waits. Each cools on its own clock (20 s unseen a level); the pips show the town's highest. Every number is a first guess. DRAFT (the escalating guard response, push 3, 'a player can tell it is ending'; docs/decisions-log.md, 'Step 4: the ending made legible'): calm, the banner's words as the town's level drops TO each level (calm[0]: it is over), one bar at a time as each room cools.",
   "id": "hall-gallery",
   "town": "castle-town",
   "doors": [
@@ -72,5 +72,6 @@
     "The whole watch is upon you!",
     "The elite watch charges in!",
     "They just keep coming!"
-  ]
+  ],
+  "calm": ["The watch gives up the search", "Only the guard still looks", "The watch thins out", "The elite watch stands down", "The town calms a little"]
 }

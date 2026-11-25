@@ -12,6 +12,10 @@
 // tick (the scenario harness runs the same step()); only the hero is left out,
 // as every save does. The fact's control: E2E_ESCALATION_ROWS=3 saves the
 // street with the table cut to three rows (the level never passes 3).
+// Push 3: `escalation-calm`, the town at 2 by the Hall gallery's alert a few
+// seconds from cooling: the page in the street must draw the bar going out
+// (drawn.alert.dropped) and the gallery's `calm` words for 1; its control was
+// the client before push 3 (no blink, no banner: red), watched once.
 //
 // Usage alone (shots): node scripts/e2e/escalation.ts [out-dir]
 import { spawn } from 'node:child_process';
@@ -28,14 +32,21 @@ import { generateRegistries, root } from '../lib/registries.ts';
 const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
 
 /** The two levels shown: the scenario, the tick a little after its row walks in, the game code it is saved under. */
-const LEVELS: { level: number; scenario: string; tick: number; code: string; town?: boolean }[] = [
+const LEVELS: { level: number; scenario: string; tick: number; code: string; town?: boolean; calm?: boolean }[] = [
   { level: 4, scenario: 'step4-tier-level4-elite-row', tick: 4440, code: 'FRKW' },
   { level: 5, scenario: 'step4-tier-level5-keeps-coming', tick: 5140, code: 'FRKX' },
   // The escalating guard response, push 2 ("the pips crossing doors"): the courtyard at 5 (a report there), the street
   // at 4; a page in the street draws the town's 5, a level reached in a room it is not in. Control E2E_ESCALATION_TOWN=off
   // takes the courtyard out of the saved world.alerts: the page then draws the street's own 4.
   { level: 5, scenario: 'step4-tier-town-courtyard', tick: 6600, code: 'FRKY', town: true },
+  // The escalating guard response, push 3 ("the ending made legible"): the town at 2 by the Hall gallery's alert, a
+  // few seconds from cooling a level (its quiet clock near npcAlertCoolTime), nobody of the gallery seeing anyone; a page
+  // in the street sees the second bar blink out and the gallery's `calm` words for 1. Control: the pre-change client.
+  { level: 2, scenario: 'step4-tier-level4-elite-row', tick: 0, code: 'FRKZ', calm: true },
 ];
+
+/** Push 3: the words the Hall gallery's table shows as the town drops to level 1 (read from content when saving). */
+let calmWords = '';
 
 /** Saves each level's world into a new store directory on its own device (a tmpfs, as the server's volume rule asks). */
 async function saveLevels(rows?: number): Promise<string> {
@@ -55,6 +66,14 @@ async function saveLevels(rows?: number): Promise<string> {
     const rec = simulate(s, content);
     const world = structuredClone(rec.history[l.tick]) as any;
     if (l.town && process.env.E2E_ESCALATION_TOWN === 'off') delete world.alerts?.courtyard;
+    if (l.calm) {
+      calmWords = content.dispatch['hall-gallery'].calm?.[l.level - 1] ?? '(no calm words)';
+      // Six seconds (360 ticks) from cooling, time for the page to walk into the street: the quiet clock alert-cool
+      // counts, in ticks, to npcAlertCoolTime seconds.
+      const need = Math.round(content.tuning.world.npcAlertCoolTime * 60);
+      world.entities.push({ id: '~alert:hall-gallery', kind: '~thing', player: null, room: 'hall-gallery', x: 0, y: 0, vx: 0, vy: 0, facing: 1, onGround: true, c: { alert: { level: l.level, quiet: need - 360 } } });
+      world.alerts = { ...(world.alerts ?? {}), 'hall-gallery': l.level };
+    }
     saves.save(l.code, world);
   }
   return dir;
@@ -166,6 +185,33 @@ export async function escalationFacts(kit: EscalationKit): Promise<void> {
           best.trike = Math.max(best.trike, s.trike);
         }
         await sleep(100);
+      }
+      if (l.calm) {
+        // Over 10 s from the street: the most pips drawn, whether the bar that went out blinked (drawn.alert.dropped),
+        // the level after, and the banners drawn.
+        const words = calmWords;
+        const seen = { most: 0, dropped: 0, after: 99, banner: false };
+        const t1 = Date.now();
+        while (Date.now() - t1 < 10000) {
+          const d = await ph.page.evaluate(() => {
+            const r = (window as any).irreverents.drawn;
+            return { level: r.alert?.level ?? 0, dropped: r.alert?.dropped ?? null, banner: r.banner?.text ?? null, room: r.room };
+          });
+          if (d.room === 'castle-street') {
+            seen.most = Math.max(seen.most, d.level);
+            if (d.dropped === l.level) seen.dropped++;
+            if (seen.most === l.level) seen.after = Math.min(seen.after, d.level);
+            if (d.banner === words && !seen.banner) {
+              seen.banner = true;
+              if (kit.shots) await ph.page.screenshot({ path: path.join(kit.out, `calm-${ph.page.viewportSize().width}x${ph.page.viewportSize().height}.png`) });
+            }
+          }
+          await sleep(50);
+        }
+        const ok = inStreet && seen.most === l.level && seen.after === l.level - 1 && seen.dropped > 0 && seen.banner;
+        kit.fact('escalation-calm', ok, `in the street (${inStreet}) the page drew ${seen.most} pip(s) at most (expected ${l.level}), then ${seen.after} (expected ${l.level - 1}); the bar that went out blinked on ${seen.dropped} read(s) (expected 1 or more); the banner "${words}" ${seen.banner ? 'was' : 'was NOT'} drawn`);
+        await ph.ctx.close();
+        continue;
       }
       if (l.town) {
         kit.fact('escalation-town', inStreet && best.level === l.level, `in the street (${inStreet}), its own alert 4, with the courtyard at 5 by a report there, the page drew ${best.level} pip(s) lit (expected the town's ${l.level})`);

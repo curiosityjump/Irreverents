@@ -70,7 +70,7 @@ const SOCKET_RIM = '#7d77b8';
  * 8 wide, 12 apart; the newest lit bar flashes white as it lights. DRAFT (the escalating guard response): at the
  * top level (all-out) every lit bar flickers on and off its colour, so the strip reads as "it will not stop".
  */
-function drawMeter(g: CanvasRenderingContext2D, x: number, y: number, level: number, age: number, slots: number, tick: number): void {
+function drawMeter(g: CanvasRenderingContext2D, x: number, y: number, level: number, age: number, slots: number, tick: number, lost?: { at: number; age: number }): void {
   const bars = Math.max(level, slots);
   const allOut = level >= slots && slots > MAX_ALERT;
   for (let i = 0; i < bars; i++) {
@@ -89,13 +89,19 @@ function drawMeter(g: CanvasRenderingContext2D, x: number, y: number, level: num
       g.fillStyle = 'rgba(255, 255, 255, 0.45)';
       g.fillRect(bx + 1, by + 1, 6, 1);
     }
+    // DRAFT (push 3): the bar that just went out blinks its old colour over its socket, so a drop is seen, not missed.
+    if (!lit && lost && lost.at === i && Math.floor(lost.age / 5) % 2 === 0) {
+      g.fillStyle = METER[Math.min(METER.length - 1, i)]!;
+      g.fillRect(bx + 1, by + 1, 6, h - 2);
+    }
   }
 }
 
 /** Step 4, the town's tiers: what was drawn last frame, for the page's drawn record (drawn.alert). */
 // `bell` (additive, the fifth town-tiers builder): a ringing bell's bar in this room, its progress 0..1, or null;
 // a call for help is a bell or a whistle (D-063), and the checks read either (docs/decisions-log.md, the tiers fact).
-let shown: { level: number; whistle: number | null; bell?: number | null } = { level: 0, whistle: null, bell: null };
+// `dropped` (additive, push 3): the level a drop came from while its bar still blinks, else null (the checks read it).
+let shown: { level: number; whistle: number | null; bell?: number | null; dropped?: number | null } = { level: 0, whistle: null, bell: null };
 /** No banner for the level a page finds when it first draws (joining a game mid-alert is not the moment). */
 let drawnOnce = false;
 
@@ -107,7 +113,7 @@ function shownLevel(world: World, roomId: string): { level: number; area: string
 }
 
 /** The pips and the whistle's gauge drawn on the last frame: `level` (0 to the area's most, maxAlert) and `whistle`, a whistling guard's progress 0..1 in this room, or null. */
-export function drawnAlert(): { level: number; whistle: number | null; bell?: number | null } {
+export function drawnAlert(): { level: number; whistle: number | null; bell?: number | null; dropped?: number | null } {
   return shown;
 }
 
@@ -126,6 +132,18 @@ function drawGauge(g: CanvasRenderingContext2D, progress: number, cx: number, fo
 }
 let litAt = -1e9;
 const GLOW_TICKS = 40;
+/** Push 3: the tick the shown level last dropped and the level it dropped from (the bar that went out blinks). */
+let droppedAt = -1e9;
+let droppedFrom = 0;
+/** The area whose level was last shown above 0 (its `calm` words are the drop's, even at 0). */
+let lastArea: string | null = null;
+
+/** True while the alert shown in this room is at its most in a town of more than the base three levels (all-out). */
+function allOut(world: World, content: Content, roomId: string): boolean {
+  const { level, area } = shownLevel(world, roomId);
+  const most = area ? maxAlert(content, area) : MAX_ALERT;
+  return most > MAX_ALERT && level >= most;
+}
 
 /** The bells of the room, each with the entity it is drawn from. */
 function bells(world: World, content: Content, roomId: string): World['entities'] {
@@ -146,7 +164,9 @@ export function drawBells(g: CanvasRenderingContext2D, world: World, content: Co
     const thing = e.c.thing;
     if (!thing) continue;
     const T = room.tile;
-    const ring = e.c.ringing;
+    // DRAFT (the escalating guard response, push 3: "all-out ... with the bell ringing on"): while the town's alert is at
+    // its most, every working bell of it swings on its own, a call nobody has to make (drawn only: it raises nothing, D-063).
+    const ring = e.c.ringing ?? (allOut(world, content, roomId) ? { ticks: world.tick, of: 1 } : undefined);
     const id = thing.takenBy !== null ? 'bell-broken' : ring ? 'bell-ringing' : 'bell';
     if (drawLookIn(g, content, [id], ox + e.x, oy + e.y, T, T, ring ? ring.ticks : world.tick)) continue;
     const cx = ox + e.x + T / 2;
@@ -219,6 +239,15 @@ export function drawAlert(g: CanvasRenderingContext2D, world: World, content: Co
   }
   // Step 4, the town's tiers: the pips follow the party (world.alerts), the highest area's level.
   const { level, area } = shownLevel(world, roomId);
+  // DRAFT (the escalating guard response, push 3, "a player can tell it is ending"): each bar that goes out blinks
+  // where it was for a moment, and a banner says what the drop means (the dispatch file's `calm`, its words for the
+  // level dropped TO; calm[0]: it is over). Words from the area last shown, since at 0 no area is.
+  if (level < lastLevel) {
+    droppedAt = world.tick;
+    droppedFrom = lastLevel;
+    const words = lastArea ? content.dispatch?.[lastArea]?.calm[level] : undefined;
+    if (drawnOnce && words) queueBanner({ key: `alert-calm:${level}`, text: words });
+  }
   if (level > lastLevel) {
     litAt = world.tick;
     // DRAFT (docs/decisions-log.md, "Step 4: pips"): a new pip queues one banner, the dispatch file's words for that level.
@@ -227,8 +256,17 @@ export function drawAlert(g: CanvasRenderingContext2D, world: World, content: Co
   }
   drawnOnce = true;
   lastLevel = level;
-  shown = { level, whistle, bell };
-  if (level <= 0) return;
+  if (level > 0 && area) lastArea = area;
+  shown = { level, whistle, bell, dropped: world.tick - droppedAt < GLOW_TICKS ? droppedFrom : null };
+  if (level <= 0) {
+    // The last bar going out still blinks on its strip before the strip goes.
+    if (world.tick - droppedAt < GLOW_TICKS && lastArea) {
+      const most = maxAlert(content, lastArea);
+      drawPipStrip(g, PX(), PY(), most);
+      drawMeter(g, PX(), PY(), 0, 1e9, most, world.tick, { at: droppedFrom - 1, age: world.tick - droppedAt });
+    }
+    return;
+  }
   // DRAFT (brief phone-hud-legibility, 2026-11-24: the pips under the plate read as hearts or balloons):
   // they sit on their own dark strip led by a warning sign, so they read as "the watch is after you".
   // The meter's length is the shown area's most (five in the castle town, three elsewhere: maxAlert).
@@ -236,7 +274,7 @@ export function drawAlert(g: CanvasRenderingContext2D, world: World, content: Co
   const slotsShown = lookDef(content, 'alert-pip') && lookDef(content, 'alert-pip-off') ? Math.max(level, most) : level;
   drawPipStrip(g, PX(), PY(), PIP_LOOKS ? slotsShown : Math.max(level, most));
   if (!PIP_LOOKS) {
-    drawMeter(g, PX(), PY(), level, world.tick - litAt, most, world.tick);
+    drawMeter(g, PX(), PY(), level, world.tick - litAt, most, world.tick, world.tick - droppedAt < GLOW_TICKS ? { at: droppedFrom - 1, age: world.tick - droppedAt } : undefined);
     return;
   }
   if (lookDef(content, 'alert-pip')) {

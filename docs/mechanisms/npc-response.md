@@ -533,8 +533,18 @@ the top-left only when no plate is drawn, on their own dark strip led by a
 brass warning sign (`drawPipStrip`; phone-HUD brief, `DRAFT:`: alone they
 read as hearts); a new pip queues one banner
 (`alert:<level>`, the dispatch file's `banners[level-1]`, none on the
-page's first frame). `drawn.alert` `{ level, whistle, bell }` is the record the
-checks read (`bell`: a ringing bell's bar in the room, 0..1, or null).
+page's first frame). As the shown level drops (push 3 of the escalating
+guard response, `DRAFT:`), the bar that went out blinks its old colour for
+40 ticks (the last one too, on the strip, before the strip goes) and one
+banner is queued (`alert-calm:<level>`, the dispatch file's `calm[level]`,
+the words for the level dropped TO; `calm[0]` is "it is over"; from the
+area last shown above 0; no `calm`, no banner). While the shown level is
+at its most in a town of more than three levels (all-out), every working
+bell in view swings as if rung (`allOut`): drawn only, it raises nothing
+(D-063), and it makes no sound (the audio lane's). `drawn.alert`
+`{ level, whistle, bell, dropped }` is the record the checks read (`bell`:
+a ringing bell's bar in the room, 0..1, or null; `dropped`: the level a
+drop came from while its bar blinks, else null).
 
 **One town (the escalating guard response, push 2, `DRAFT:`;
 `docs/decisions-log.md`, "Step 4: one town").** Every castle-town room a

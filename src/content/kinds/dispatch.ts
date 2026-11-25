@@ -77,6 +77,12 @@ export interface Dispatch {
    * is not used; with none left, the row waits. 0 (left out): as before.
    */
   clearOf: number;
+  /**
+   * DRAFT (the escalating guard response, push 3, "a player can tell it is ending"; doc 26's ways the response ends):
+   * words of the banner when the alert drops TO level k (calm[0]: the alert is over; one per level below the most).
+   * No digits. Empty (left out): a drop shows no banner, as before.
+   */
+  calm: string[];
 }
 
 declare module '../types.ts' {
@@ -91,7 +97,7 @@ const kind: ContentKind = {
   parse(raw, read) {
     const o = read.object(raw, '');
     if (!o) return null;
-    read.only(o, ['id', 'doors', 'cap', 'rows', 'banners', 'entries', 'entryAway', 'announce', 'keepComing', 'relieve', 'town', 'clearOf'], '');
+    read.only(o, ['id', 'doors', 'cap', 'rows', 'banners', 'entries', 'entryAway', 'announce', 'keepComing', 'relieve', 'town', 'clearOf', 'calm'], '');
     const out: Dispatch = {
       id: read.string(o, 'id', ''),
       doors: read.stringList(o, 'doors', ''),
@@ -105,6 +111,7 @@ const kind: ContentKind = {
       relieve: o.relieve === undefined ? [] : read.stringList(o, 'relieve', ''),
       town: o.town === undefined ? '' : read.string(o, 'town', ''),
       clearOf: o.clearOf === undefined ? 0 : read.number(o, 'clearOf', '', { min: 0, max: 200, integer: true }),
+      calm: o.calm === undefined ? [] : read.stringList(o, 'calm', ''),
     };
     if (o.entries !== undefined) {
       if (!Array.isArray(o.entries)) read.fail('entries', `must be a list of [column, row] tiles, but is ${describe(o.entries)}`);
@@ -143,6 +150,10 @@ const kind: ContentKind = {
     out.banners.forEach((b, i) => {
       if (/[0-9]/.test(b)) read.fail(`banners[${i}]`, `"${b}" has a digit; nothing drawn shows numbers`);
     });
+    out.calm.forEach((b, i) => {
+      if (/[0-9]/.test(b)) read.fail(`calm[${i}]`, `"${b}" has a digit; nothing drawn shows numbers`);
+    });
+    if (out.calm.length > out.rows.length) read.fail('calm', `has ${out.calm.length} words, but the alert can only drop to ${out.rows.length} levels (0 to ${out.rows.length - 1})`);
     return out;
   },
   check(content, fail) {
