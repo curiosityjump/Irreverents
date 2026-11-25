@@ -109,7 +109,7 @@ entries group them; they are not entries.
 - **Question:** You said two things. For hearts: "Once all heros in the party are out of hearts, that's a game over (back to cantina)". For the outpost stage: "a real way to lose/die, which pushes you back to the entrance to start over". Inside the stage, when the whole party is out of hearts, do you restart at the stage's entrance (quick retry, the stage resets) or go back to the cantina (a longer walk back)? Built now: the stage's entrance inside the stage, the cantina everywhere else.
 - **Unblocks:** Steps 21 and 22; nothing waits, the other answer is one setting.
 - **Recommendation:** keep it as built: the entrance inside the stage, the cantina elsewhere.
-- **Answer goes to:** `content/defeat/quarry.json` (`gameOver`) and `docs/plan/step-21.md`, "Hearts" (Step 22 is closed: `docs/plan-archive.md`, "Step 22")
+- **Answer goes to:** `content/defeat/quarry.json` (`gameOver`) and `docs/mechanisms/defeat.md` "Hearts" (Steps 21 and 22 are closed: `docs/plan-archive.md`, "Step 21 — What being beaten costs" and "Step 22")
 - **Source:** this entry
 - **Blocking:** no
 
