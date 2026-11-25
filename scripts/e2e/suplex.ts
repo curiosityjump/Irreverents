@@ -239,14 +239,18 @@ export async function suplexFacts(kit: Kit & { shots: string }): Promise<void> {
 
     // The second: upright, once the king is up again (flattenTime), carried again from the side with more floor behind.
     await ph.page.setViewportSize({ width: 390, height: 664 });
-    await ph.page.waitForFunction((id: string) => {
+    // e2e-intermittent-reds: "not reached" says which step it stopped at (the orchestrator: the fact's, or the game's).
+    const why2: string[] = [];
+    const kingUp = await ph.page.waitForFunction((id: string) => {
       const e = (window as any).irreverents.drawn.entities.find((d: any) => d.id === id);
       return !!e && !e.flattened && e.state !== 'down';
-    }, body.id, { timeout: 8000 }).catch(() => undefined);
+    }, body.id, { timeout: 8000 }).then(() => true, () => false);
+    why2.push(`the ${body.kind} drawn up within 8 s: ${kingUp}`);
     await sleep(1200);
     const f2 = await floor(ph);
     const b2 = f2.bodies.find((b) => b.id === body.id);
     let second: Round | null = null;
+    why2.push(b2 ? `on the floor at x ${n(b2.x)} (floor ${n(f2.left)}-${n(f2.right)})` : 'not drawn on the hero\'s floor');
     if (b2) {
       const face2 = b2.x - f2.left >= f2.right - (b2.x + b2.w) ? -1 : 1;
       await standAt(ph, face2 > 0 ? b2.x - 22 : b2.x + b2.w + 4, face2);
@@ -254,10 +258,18 @@ export async function suplexFacts(kit: Kit & { shots: string }): Promise<void> {
       await tap(ph, 'grab');
       await sleep(900);
       await ph.page.screenshot({ path: path.join(kit.shots, 'carrying-3-upright.png') });
-      if ((await useState(ph)) === 'suplex') second = await round('upright');
+      const held = await ph.page.evaluate((id: string) => {
+        const d = (window as any).irreverents.drawn;
+        const e = d.entities.find((x: any) => x.id === id);
+        const held = (d.entities as any[]).filter((x) => x.state === 'held').map((x) => `${x.id} (${x.kind}) at ${Math.round(x.x)},${Math.round(x.y)}`);
+        return { me: d.me ? Math.round(d.me.x) : null, state: d.me?.state ?? null, body: e ? { x: Math.round(e.x), y: Math.round(e.y), state: e.state ?? null } : null, held };
+      }, body.id);
+      const use = await useState(ph);
+      why2.push(`after Grab the hero drawn at x ${held.me} in state ${held.state}, the ${body.kind} at ${JSON.stringify(held.body)}; drawn held: [${held.held.join(', ')}]; the Use button said "${use}"`);
+      if (use === 'suplex') second = await round('upright');
     }
     fact('suplex-again', !!second && second.mine.impact !== null,
-      `a second suplex, upright: ${second ? `${line('presser', second.mine)}; ${line('friend', second.friend)} (lag learned ${n(second.rec?.lag)} ticks)` : 'not reached (the king did not come up, or the button did not say suplex)'}`);
+      `a second suplex, upright: ${second ? `${line('presser', second.mine)}; ${line('friend', second.friend)} (lag learned ${n(second.rec?.lag)} ticks)` : `not reached (${why2.join('; ')})`}`);
   } finally {
     await ph.ctx.close();
     await fr.ctx.close();
