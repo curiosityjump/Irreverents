@@ -771,3 +771,19 @@ Builder `session_017WiGzGkuNQcsBDa2oWh23s`, 2026-11-24.
 ## Look at the camp row's shot (orchestrator session_017WiGzHY5UZsWTLCH8cLm8M, 2026-11-24 ~19:00 UTC)
 
 By a subagent, `docs/plan/step-4-shots/camp-row-both-sides-750x340.png` at phone size, against 46cc3e8: a bandit is plainly arriving at the left edge by the flag; at the right there is none at the edge, the only candidate is about 170 px in, mostly behind the captive's cage and under his speech bubble; the banner "Two more!" reads but does not say from where; the hero is clear and no button hides a bandit. So the shot does not show a row at both edges, though the e2e fact `row-both-sides` passes. Not briefed: retake at the moment both are at the edges, and the captive's bubble not drawn over an arriving bandit.
+
+## Guards meet bandits in a real room (opened 2026-11-24 by orchestrator session_017WiGzHY5UZsWTLCH8cLm8M)
+
+**The owner, 2026-11-23 ~18:30 UTC, first-hand, after playing on a phone** (`docs/current-directive.md:135`): "... no escalating combats or chases ...". Library D-069 (doc 11, line 293): "Guards can chase into physically interconnected other game levels, where they may engage the bad guys already present. Resulting three-sided battles arise through scripted faction-hostility and shared collision/combat rules." The last open part of `docs/vision-gaps.md` row 9: guards and bandits fight only in `test-clash`.
+
+**Goal.** A hero with the watch on their tail leads a guard into a bad guy in a room players really visit, and the two come to blows with each other while the hero walks on or joins in. Scripted: a person struck by someone of the other side answers that one first, for a short memory, ahead of a hero in sight.
+
+**Measured (the brief's "Measured" has file:line).** Today nobody turns on a bad guy while a hero is in sight (`src/sim/systems/clash-fight.ts:34`, "a hero in sight comes first", `DRAFT:`), and nobody answers a blow from a person (`fight-struck.ts:40` counts heroes only). The courtyard's bandit (column 27) is behind the shut gate and faces east only, so a chase never reaches him; a second one west of the gate would fight the plates. The guard who follows into the Bandit Camp is held in the doorway pocket under the three-tile step and never sees the camp's people. The castle street's chase already walks past the villain (columns 17-21) with the guard swinging; he is left out of on-sight hostility for gate C (D-049) and is never struck into a fight. So what is missing is a rule (answer a blow), then proof; no placement.
+
+**Signal.** Scenarios `step4-clash-street-guard-and-villain`, `step4-clash-answer-ahead-of-hero`, `step4-clash-same-side-no-answer`, `step4-clash-way-out-brawler` (each with a control watched failing), and with budget `step4-clash-courtyard-gate`; the e2e fact `clash-street` by touch on a phone-sized page; shots `docs/plan/step-4-shots/clash-street-*` at 844x390 and 390x664. `step4-tier-cap-holds`, the way-out check and `npm run gates` (6 of 6) stay green.
+
+**Stopping condition.** The street's brawl is live and seen by touch (pushes 1 and 2), or the builder stops and reports because a gate C or D scenario, or more than five of the 38 street scenarios with placements, go red with a real behaviour change.
+
+**Decided** (`DRAFT:`): the castle street with the villain first, the courtyard through the opened gate second; the rule as data (`answers` in `content/hostility.json`, good side against bad side); on-sight hostility, moods, calls and the cap unchanged; no room or placement edits. **Open** (the builder's, logged): the field's name, the memory's length, the scenarios' inputs. **For the owner, by playing:** whether the brawl is funny or a chore; whether the shopkeeper should join in; whether guards should ever fight the villain on sight.
+
+**Briefs:** `handoff-prompts/guards-meet-bandits.md`.
