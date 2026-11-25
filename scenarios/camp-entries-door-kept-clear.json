@@ -1,7 +1,7 @@
 {
   "id": "camp-entries-door-kept-clear",
   "gate": null,
-  "proves": "There is always a way out (CLAUDE.md), with the owner's 'come in from the sides': in the real Bandit Camp the infiltrator walks into the lookout's view and stands at column 15 when the first call completes, is knocked about, and walks back to column 12-13 just before the second call completes, within 12 tiles (entryAway) of the doorway (content/outposts/outpost.json `doorClear` 2). The second call (camp fighter 1's) completes at 1537 and its row of two would split, one walking in at the entry on the step beside the door, column 6. Instead both walk in east of the hero (none of wave 1 west of x 232, both east of it), and the hero then walks back over the step and out by the doorway. Measured farther in (columns 15-17), that row still sends one in at column 6: from both sides as before. Control (watched to fail): `doorClear` and `sendNoneNearer` removed from the camp's data (since sendNoneNearer 8 the two each keep column 6 clear of a hero this near the door, so the control removes both), and wave 1's first person walks in at column 6, between the hero and the door (expect[2] and [3] fail) Re-timed 2026-11-24 by the next camp-entries builder (sendNoneNearer 8: the first row no longer walks in at column 24, 7.6 tiles from a hero at 16.4, so the hero now stops a tile sooner, at 15.4, and the old fight replays later); claims kept.",
+  "proves": "There is always a way out (CLAUDE.md), with the owner's 'come in from the sides': in the real Bandit Camp the infiltrator walks into the lookout's view and stands at column 15 when the first call completes, is knocked about, and walks back to column 12-13 just before the second call completes, within 12 tiles (entryAway) of the doorway (content/outposts/outpost.json `doorClear` 2). The second call (camp fighter 1's) completes at 1537 and its row of two would split, one walking in at the entry on the step beside the door, column 6. Instead both walk in east of the hero (none of wave 1 west of x 232, both east of it), and the hero then walks back over the step and out by the doorway. Measured farther in (columns 15-17), that row still sends one in at column 6: from both sides as before. Control (watched to fail): `doorClear` and `sendNoneNearer` removed from the camp's data (since sendNoneNearer 8 the two each keep column 6 clear of a hero this near the door, so the control removes both), and wave 1's first person walks in at column 6, between the hero and the door (expect[2] and [3] fail) Re-timed 2026-11-24 by the next camp-entries builder (sendNoneNearer 8: the first row no longer walks in at column 24, 7.6 tiles from a hero at 16.4, so the hero now stops a tile sooner, at 15.4, and the old fight replays later); claims kept. Re-timed 2026-11-25 for the lookout ruling (sparedByOwn, docs/decisions-log.md): the lookout now stays up, so the second call (camp fighter 1's) completes at 1099 and the camp's fight itself has carried the hero back to column 10 (x 160) by then: he does not walk back. Both of the row walk in at column 30, none west of him; he walks for the door from 1350, after the first wave's one has flattened and freed him, over the step and out at 1456. Claims kept (the hero within 12 tiles of the doorway when the row is sent; none of it between him and the door; he gets out).",
   "room": "outpost",
   "placements": true,
   "players": [
@@ -28,108 +28,346 @@
     },
     {
       "player": "a",
+      "from": 1350,
+      "to": 1600,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 1362,
+      "to": 1382,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 1378,
+      "to": 1398,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 1388,
+      "to": 1390,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 1392,
+      "to": 1394,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 1396,
+      "to": 1398,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 1400,
+      "to": 1402,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 1404,
+      "to": 1406,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 1408,
+      "to": 1410,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 1412,
+      "to": 1414,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 1416,
+      "to": 1418,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 1420,
+      "to": 1422,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 1424,
+      "to": 1426,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 1428,
+      "to": 1430,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 1432,
+      "to": 1434,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 1436,
+      "to": 1438,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 1440,
+      "to": 1442,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 1444,
+      "to": 1446,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 1448,
+      "to": 1450,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 1452,
+      "to": 1454,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 1456,
+      "to": 1458,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 1460,
+      "to": 1462,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 1464,
+      "to": 1466,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 1468,
+      "to": 1470,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 1472,
+      "to": 1474,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 1476,
+      "to": 1478,
+      "y": -1
+    },
+    {
+      "player": "a",
       "from": 1480,
+      "to": 1482,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 1484,
+      "to": 1486,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 1488,
+      "to": 1490,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 1492,
+      "to": 1494,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 1496,
+      "to": 1498,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 1500,
+      "to": 1502,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 1504,
+      "to": 1506,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 1508,
+      "to": 1510,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 1512,
+      "to": 1514,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 1516,
+      "to": 1518,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 1520,
+      "to": 1522,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 1524,
+      "to": 1526,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 1528,
       "to": 1530,
-      "x": -1
+      "y": -1
     },
     {
       "player": "a",
-      "from": 1542,
-      "to": 1742,
-      "x": -1
+      "from": 1532,
+      "to": 1534,
+      "y": -1
     },
     {
       "player": "a",
-      "from": 1747,
-      "to": 1762,
-      "x": 1
+      "from": 1536,
+      "to": 1538,
+      "y": -1
     },
     {
       "player": "a",
-      "from": 1562,
+      "from": 1540,
+      "to": 1542,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 1544,
+      "to": 1546,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 1548,
+      "to": 1550,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 1552,
+      "to": 1554,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 1556,
+      "to": 1558,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 1560,
+      "to": 1562,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 1564,
+      "to": 1566,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 1568,
+      "to": 1570,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 1572,
+      "to": 1574,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 1576,
+      "to": 1578,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 1580,
       "to": 1582,
-      "hold": [
-        "jump"
-      ]
-    },
-    {
-      "player": "a",
-      "from": 1602,
-      "to": 1622,
-      "hold": [
-        "jump"
-      ]
-    },
-    {
-      "player": "a",
-      "from": 1642,
-      "to": 1662,
-      "hold": [
-        "jump"
-      ]
-    },
-    {
-      "player": "a",
-      "from": 1747,
-      "to": 1749,
       "y": -1
     },
     {
       "player": "a",
-      "from": 1751,
-      "to": 1753,
+      "from": 1584,
+      "to": 1586,
       "y": -1
     },
     {
       "player": "a",
-      "from": 1755,
-      "to": 1757,
+      "from": 1588,
+      "to": 1590,
       "y": -1
     },
     {
       "player": "a",
-      "from": 1759,
-      "to": 1761,
+      "from": 1592,
+      "to": 1594,
       "y": -1
     },
     {
       "player": "a",
-      "from": 1763,
-      "to": 1765,
-      "y": -1
-    },
-    {
-      "player": "a",
-      "from": 1767,
-      "to": 1769,
-      "y": -1
-    },
-    {
-      "player": "a",
-      "from": 1771,
-      "to": 1773,
-      "y": -1
-    },
-    {
-      "player": "a",
-      "from": 1775,
-      "to": 1777,
-      "y": -1
-    },
-    {
-      "player": "a",
-      "from": 1779,
-      "to": 1781,
-      "y": -1
-    },
-    {
-      "player": "a",
-      "from": 1783,
-      "to": 1785,
+      "from": 1596,
+      "to": 1598,
       "y": -1
     }
   ],
-  "ticks": 1912,
+  "ticks": 1750,
   "expect": [
     {
       "fact": "event-where",
@@ -139,8 +377,8 @@
         "row": 1
       },
       "between": [
-        1537,
-        1537
+        1099,
+        1099
       ],
       "count": [
         1,
@@ -150,7 +388,7 @@
     {
       "fact": "position",
       "player": "a",
-      "at": 1537,
+      "at": 1099,
       "x": [
         150,
         232
@@ -159,7 +397,7 @@
     {
       "fact": "people-at",
       "room": "outpost",
-      "at": 1538,
+      "at": 1100,
       "ids": "outpost:w1:",
       "x": [
         0,
@@ -173,7 +411,7 @@
     {
       "fact": "people-at",
       "room": "outpost",
-      "at": 1538,
+      "at": 1100,
       "ids": "outpost:w1:",
       "x": [
         232,
@@ -193,8 +431,8 @@
         "toRoom": "courtyard"
       },
       "between": [
-        1542,
-        1911
+        1100,
+        1749
       ],
       "count": [
         1,

@@ -1,7 +1,7 @@
 {
   "id": "step12-walk-out-ends-it",
   "gate": null,
-  "proves": "signal 4, second half, in the real room: a hero walks in along the floor and stands in the lookout's view; the first call completes and the first wave (1 fighter) walks in; during the second call the hero walks back over the step and out through the doorway to the courtyard: the call stops (no-hero) before it is sent, and no call starts or completes and no wave comes after; the one who came stays (D-061: escape the zone; the doorway is an enter doorway nobody of the camp uses, so no fight can shut it). Re-timed by Step 7 (waves now walk to where the lookout saw the hero, so by the third call a standing hero has been knocked out of the lookout's view): the walk out is during the second call, 540 ticks earlier. Re-timed again 2026-11-24 for the camp's waves from the sides (owner-enemies-chase-alarms.md): the first wave now walks in from the nearer east entry and knocks a hero standing at the old spot out of the lookout's view, so the hero stands two tiles nearer the post, the second call is camp fighter 1's (a caller since Step 7) at 922, and the walk out is during it. Re-timed again 2026-11-24 by the next camp-entries builder (sendNoneNearer 8: the first wave now walks in at column 30, not at 24, 5 tiles from the hero): camp fighter 1's call starts at 898, and the hero walks for the door from that tick, jumping the step twice and pressing Use at the doorway, out at 1026. The first wave's one walks in at column 30 (expect[9]): column 24 is 5 tiles from the hero (sendNoneNearer 8, content/outposts/outpost.json; control: sendNoneNearer removed, he walks in at column 24). Control: outpostZoneEndOn set to 0 in content/tuning.json, the second call completes",
+  "proves": "signal 4, second half, in the real room: a hero walks in along the floor and stands in the lookout's view; the first call completes and the first wave (1 fighter) walks in; during the second call the hero walks back over the step and out through the doorway to the courtyard: the call stops (no-hero) before it is sent, and no call starts or completes and no wave comes after; the one who came stays (D-061: escape the zone; the doorway is an enter doorway nobody of the camp uses, so no fight can shut it). Re-timed by Step 7 (waves now walk to where the lookout saw the hero, so by the third call a standing hero has been knocked out of the lookout's view): the walk out is during the second call, 540 ticks earlier. Re-timed again 2026-11-24 for the camp's waves from the sides (owner-enemies-chase-alarms.md): the first wave now walks in from the nearer east entry and knocks a hero standing at the old spot out of the lookout's view, so the hero stands two tiles nearer the post, the second call is camp fighter 1's (a caller since Step 7) at 922, and the walk out is during it. Re-timed again 2026-11-24 by the next camp-entries builder (sendNoneNearer 8: the first wave now walks in at column 30, not at 24, 5 tiles from the hero): camp fighter 1's call starts at 898, and the hero walks for the door from that tick, jumping the step twice and pressing Use at the doorway, out at 1026. The first wave's one walks in at column 30 (expect[9]): column 24 is 5 tiles from the hero (sendNoneNearer 8, content/outposts/outpost.json; control: sendNoneNearer removed, he walks in at column 24). Control: outpostZoneEndOn set to 0 in content/tuning.json, the second call completes Re-timed 2026-11-25 for the lookout ruling (sparedByOwn, docs/decisions-log.md): camp fighter 1's call starts at 899; the first wave's one now flattens the hero at column 8.4, against the step (765), so he is up at about 945 and walks for the door from 899, jumping onto the step at 950 and over it at 974, out at 1064, the call stopped at 1065 before it completes (1078 when he stays); claims kept.",
   "room": "outpost",
   "placements": true,
   "players": [
@@ -28,144 +28,162 @@
     },
     {
       "player": "a",
-      "from": 898,
-      "to": 1068,
+      "from": 899,
+      "to": 1076,
       "x": -1
     },
     {
       "player": "a",
-      "from": 938,
-      "to": 958,
+      "from": 950,
+      "to": 970,
       "hold": [
         "jump"
       ]
     },
     {
       "player": "a",
-      "from": 978,
+      "from": 974,
+      "to": 994,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 984,
+      "to": 986,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 988,
+      "to": 990,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 992,
+      "to": 994,
+      "y": -1
+    },
+    {
+      "player": "a",
+      "from": 996,
       "to": 998,
-      "hold": [
-        "jump"
-      ]
-    },
-    {
-      "player": "a",
-      "from": 998,
-      "to": 1000,
       "y": -1
     },
     {
       "player": "a",
-      "from": 1002,
-      "to": 1004,
+      "from": 1000,
+      "to": 1002,
       "y": -1
     },
     {
       "player": "a",
-      "from": 1006,
-      "to": 1008,
+      "from": 1004,
+      "to": 1006,
       "y": -1
     },
     {
       "player": "a",
-      "from": 1010,
-      "to": 1012,
+      "from": 1008,
+      "to": 1010,
       "y": -1
     },
     {
       "player": "a",
-      "from": 1014,
-      "to": 1016,
+      "from": 1012,
+      "to": 1014,
       "y": -1
     },
     {
       "player": "a",
-      "from": 1018,
-      "to": 1020,
+      "from": 1016,
+      "to": 1018,
       "y": -1
     },
     {
       "player": "a",
-      "from": 1022,
-      "to": 1024,
+      "from": 1020,
+      "to": 1022,
       "y": -1
     },
     {
       "player": "a",
-      "from": 1026,
-      "to": 1028,
+      "from": 1024,
+      "to": 1026,
       "y": -1
     },
     {
       "player": "a",
-      "from": 1030,
-      "to": 1032,
+      "from": 1028,
+      "to": 1030,
       "y": -1
     },
     {
       "player": "a",
-      "from": 1034,
-      "to": 1036,
+      "from": 1032,
+      "to": 1034,
       "y": -1
     },
     {
       "player": "a",
-      "from": 1038,
-      "to": 1040,
+      "from": 1036,
+      "to": 1038,
       "y": -1
     },
     {
       "player": "a",
-      "from": 1042,
-      "to": 1044,
+      "from": 1040,
+      "to": 1042,
       "y": -1
     },
     {
       "player": "a",
-      "from": 1046,
-      "to": 1048,
+      "from": 1044,
+      "to": 1046,
       "y": -1
     },
     {
       "player": "a",
-      "from": 1050,
-      "to": 1052,
+      "from": 1048,
+      "to": 1050,
       "y": -1
     },
     {
       "player": "a",
-      "from": 1054,
-      "to": 1056,
+      "from": 1052,
+      "to": 1054,
       "y": -1
     },
     {
       "player": "a",
-      "from": 1058,
-      "to": 1060,
+      "from": 1056,
+      "to": 1058,
       "y": -1
     },
     {
       "player": "a",
-      "from": 1062,
-      "to": 1064,
+      "from": 1060,
+      "to": 1062,
       "y": -1
     },
     {
       "player": "a",
-      "from": 1066,
-      "to": 1068,
+      "from": 1064,
+      "to": 1066,
       "y": -1
     },
     {
       "player": "a",
-      "from": 1070,
-      "to": 1072,
+      "from": 1068,
+      "to": 1070,
       "y": -1
     },
     {
       "player": "a",
-      "from": 1074,
-      "to": 1076,
+      "from": 1072,
+      "to": 1074,
       "y": -1
     }
   ],
@@ -194,8 +212,8 @@
         "by": "camp-fighter-1"
       },
       "between": [
-        898,
-        898
+        899,
+        899
       ],
       "count": [
         1,
@@ -211,8 +229,8 @@
         "toDoor": "to-outpost"
       },
       "between": [
-        1026,
-        1026
+        1064,
+        1064
       ],
       "count": [
         1,
@@ -227,8 +245,8 @@
         "why": "no-hero"
       },
       "between": [
-        1027,
-        1027
+        1065,
+        1065
       ],
       "count": [
         1,
@@ -240,7 +258,7 @@
       "event": "outpost-call-completed",
       "where": {},
       "between": [
-        899,
+        900,
         1800
       ],
       "count": [
@@ -253,7 +271,7 @@
       "event": "outpost-call-started",
       "where": {},
       "between": [
-        899,
+        900,
         1800
       ],
       "count": [
@@ -266,7 +284,7 @@
       "event": "outpost-wave",
       "where": {},
       "between": [
-        899,
+        900,
         1800
       ],
       "count": [

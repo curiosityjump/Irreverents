@@ -1,5 +1,6 @@
 import { beatTicks, bodyNumbers, launch, markImpact, overlaps, throwCarried, ticksOf, wear } from '../body-state.ts';
 import { heldBy } from '../effects.ts';
+import { sparedByOwn } from '../outpost/state.ts';
 import type { Entity, Input, StepContext, Verb } from '../types.ts';
 
 declare module '../types.ts' {
@@ -134,6 +135,9 @@ export function strikeTick(ctx: StepContext, e: Entity, input: Input, t: Record<
     if (o === e || o.room !== e.room || heldBy(o) !== null || o.c.flattened || struck.includes(o.id)) continue;
     const ob = ctx.content.characters[o.kind]?.box;
     if (!ob || !overlaps(x0, e.y - 4, width, box.h + 4, o.x, o.y, ob.w, ob.h)) continue;
+    // DRAFT (the outpost's `sparedByOwn`, docs/decisions-log.md "A lookout is not felled by his own
+    // camp's fight"): his own side's swing passes the lookout by.
+    if (sparedByOwn(ctx.world, ctx.content, o, e.id)) continue;
     struck.push(o.id);
     o.c.lastHit = { tick: ctx.world.tick, by: e.id };
     ctx.emit('hit', { by: e.id, target: o.id, player: e.player });

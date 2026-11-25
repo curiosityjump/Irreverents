@@ -7,6 +7,7 @@
 import type { Outpost } from '../../content/kinds/outposts.ts';
 import type { Content } from '../../content/types.ts';
 import type { Entity, World } from '../types.ts';
+import { npcKind } from '../npc/state.ts';
 import { findEntity } from '../world.ts';
 
 declare module '../types.ts' {
@@ -109,4 +110,35 @@ export function peopleIn(world: World, room: string): Entity[] {
 /** Whether a body is one of this outpost's people: placed in its room, or walked in with a wave. */
 export function ofOutpost(op: Outpost, e: Entity): boolean {
   return e.c.npc?.home === op.room && e.room === op.room && e.player === null;
+}
+
+/**
+ * DRAFT (the outpost's `ownSpared` and `sparedByOwn`): the doer is one of the outpost's own side: a
+ * person no player plays, of the NPC side of the outpost's first caller. A doer gone from the
+ * world, or with none, is not.
+ */
+export function ownSide(world: World, content: Content, callers: string[], by: string | null): boolean {
+  if (by === null) return false;
+  const doer = world.entities.find((x) => x.id === by);
+  if (!doer || doer.player !== null) return false;
+  const caller = world.entities.find((x) => x.id === callers[0]);
+  const side = caller ? npcKind(content, caller)?.side : undefined;
+  return side !== undefined && npcKind(content, doer)?.side === side;
+}
+
+/**
+ * DRAFT (the orchestrator's ruling, 2026-11-25, docs/decisions-log.md "A lookout is not felled by
+ * his own camp's fight"): whether `target` is a caller some outpost lists in `sparedByOwn` and `by`
+ * (the one who swung, or who sent the striking body flying) is of that outpost's own side. Then the
+ * blow or the body passes him by: no wear, no shove, his call goes on. INTENT ("Getting caught opens
+ * play"): the alarm keeps climbing; it is not quieted by the camp's own hand. Read by the attack
+ * verb (strikeTick) and impact-bodies; a hero's blow, throw or thrown thing is never spared.
+ */
+export function sparedByOwn(world: World, content: Content, target: Entity, by: string | null): boolean {
+  if (by === null || target.player !== null) return false;
+  for (const op of outposts(content)) {
+    if (!op.sparedByOwn?.includes(target.id)) continue;
+    if (ownSide(world, content, op.callers, by)) return true;
+  }
+  return false;
 }

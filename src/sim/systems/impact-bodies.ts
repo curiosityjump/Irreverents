@@ -1,5 +1,6 @@
 import { beatTicks, bodyNumbers, markImpact, overlaps, strike, wear } from '../body-state.ts';
 import { heldBy } from '../effects.ts';
+import { sparedByOwn } from '../outpost/state.ts';
 import type { System } from '../types.ts';
 import { friendly } from './impact-walls.ts';
 
@@ -34,6 +35,9 @@ const system: System = {
         if (fa.met.includes(b.id) || b.c.flying?.met.includes(a.id)) continue;
         const bb = ctx.content.characters[b.kind]?.box;
         if (!bb || !overlaps(a.x, a.y, ab.w, ab.h, b.x, b.y, bb.w, bb.h)) continue;
+        // DRAFT (the outpost's `sparedByOwn`, docs/decisions-log.md "A lookout is not felled by his
+        // own camp's fight"): a body the lookout's own side sent flying passes him by.
+        if (sparedByOwn(ctx.world, ctx.content, b, fa.by)) continue;
         const speed = Math.hypot(a.vx - b.vx, a.vy - b.vy);
         if (speed < world.bodyImpactSpeed!) continue;
 

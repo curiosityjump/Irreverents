@@ -64,6 +64,13 @@ document as a decision of theirs.
 - **To change it:** `PROP` in `src/sim/verbs/grab.ts` (drop the `+ PROP` term for nearest-only).
 - **Where:** `src/sim/verbs/grab.ts`; `docs/mechanisms/combat-and-impact.md`; scenario `grab-person-before-prop`. `DRAFT:`
 
+### 2026-11-25 · A lookout is not felled by his own camp's fight: only you can knock the Bandit Camp's lookout off his horn
+- **Decided by:** the orchestrator's ruling (`session_017WiGzJYBCYJ85Bj95B7ZLw`, 2026-11-25 03:25 UTC), built by the third builder of brief e2e-intermittent-reds
+- **Instead of asking:** "When the bandits fight you beside their lookout, their swings (or you, knocked into him by them) knock him down and stop his call. Is that what you want?"
+- **Why this way:** "Getting caught opens play": the alarm should keep climbing, not be quieted by the camp's own hand. Measured in the camp: with a hero standing still beside the horn, the lookout was knocked down 118 times in 30 fights, every one by the camp's own people. Now a bandit's swing, or a body a bandit sent flying (you, flung by his blow, included), passes the lookout by: he isn't knocked down or shoved off the horn, and his call goes on. Your own blow, throw or thrown thing still fells him. Fighter 1 also calls, but he's in the fight, so his own side can still knock him about. Left as it is, on the orchestrator's word: the bandits' ram wagon still fells him (a vehicle is not a blow; once in the 30).
+- **To change it:** one line in the camp's data (`sparedByOwn` in `content/outposts/outpost.json`: remove it for the old rule, add `"camp-fighter-1"` to spare him too); any other outpost can list its callers the same way.
+- **Where:** `docs/mechanisms/outposts.md`, "From the sides" (`sparedByOwn`); `src/sim/outpost/state.ts`; `src/sim/verbs/attack.ts`; `src/sim/systems/impact-bodies.ts`; scenario `camp-lookout-spared-by-own`. `DRAFT:`
+
 ### 2026-11-24 · The start screen shows the owner's title picture: the whole picture sideways, the full width at the top when upright
 - **Decided by:** owner-title-screen builder (Step 17), `session_017WiGzH3PZe5UkjdEEaAN75`
 - **Instead of asking:** "How should the title picture sit on a phone held upright, where a 16:9 picture can't fill the screen, and how should the buttons share it?"

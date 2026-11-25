@@ -112,11 +112,16 @@ the server.
   body nobody plays that attacks a player launches and wears them.
   So a person's blow (Step 18: guards and shopkeepers in a fight,
   `docs/mechanisms/npc-response.md`, "Who fights") lands at full share:
-  the friend rule is player on player only (`attack.ts:139`).
+  the friend rule is player on player only (`attack.ts:147`).
   **In the cantina's brawl** (Step 11) the struck player's `c.brawl`
   shares are read first at the three friend sites (`attack.ts`,
   `impact-walls.ts`, `impact-bodies.ts`), so friends launch and hurt each
   other there; `c.brawl` exists only in a brawl (`docs/mechanisms/cantina.md`).
+- **A caller an outpost lists in `sparedByOwn`** (2026-11-25, `DRAFT:`, the
+  Bandit Camp's lookout) is skipped by his own side's swing in
+  `strikeTick` and passed through by a body his own side sent flying in
+  `impact-bodies`: no hit, shove, impact or wear
+  (`docs/mechanisms/outposts.md`, `sparedByOwn`).
 - **A kind with no `weight` or `toughness`** (an NPC kind with
   `"verbs": []`, or `hero`) gets `defaultWeight` and
   `defaultToughness`, so anything can be hit, grabbed and thrown.

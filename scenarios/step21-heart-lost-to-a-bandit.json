@@ -1,15 +1,11 @@
 {
   "id": "step21-heart-lost-to-a-bandit",
   "gate": null,
-  "proves": "Step 21, hearts (the owner, 2026-11-24: 'Heros should have hearts which can be lost'; DRAFT, docs/decisions-log.md 'Step 21: hearts'): in the real Bandit Camp the grappler stands among the camp's fighters and is put on the floor by one of them at 1206. That fall costs the grappler one of the party's hearts (5 to 4, a 'heart-lost' event naming the bandit) and nothing else: the other heroes keep all theirs and the grappler gets up where it lies. Control (watched to fail): \"on\": false in content/hearts.json, no heart is lost Re-timed 2026-11-24 (owner-enemies-chase-alarms.md): with the camp's waves walking in from both sides of the hero, the fall comes at 1206, from the first wave's fighter, not 1009; every tick from it on moved by 197.",
+  "proves": "Step 21, hearts (the owner, 2026-11-24: 'Heros should have hearts which can be lost'; DRAFT, docs/decisions-log.md 'Step 21: hearts'): in the real Bandit Camp the grappler stands among the camp's fighters and is put on the floor by one of them at 1206. That fall costs the grappler one of the party's hearts (5 to 4, a 'heart-lost' event naming the bandit) and nothing else: the other heroes keep all theirs and the grappler gets up where it lies. Control (watched to fail): \"on\": false in content/hearts.json, no heart is lost Re-timed 2026-11-24 (owner-enemies-chase-alarms.md): with the camp's waves walking in from both sides of the hero, the fall comes at 1206, from the first wave's fighter, not 1009; every tick from it on moved by 197. Re-timed 2026-11-25 (e2e-intermittent-reds, the orchestrator's lookout ruling, docs/decisions-log.md \"A lookout is not felled by his own camp's fight\"): with the lookout no longer felled by his own camp's fight, the first wave's fighter puts the grappler on the floor at 1302, not 1206; every tick from 1206 on moved by 96.",
   "room": "outpost",
   "placements": true,
   "players": [
-    {
-      "id": "a",
-      "character": "grappler",
-      "spawn": 0
-    }
+    {"id": "a", "character": "grappler", "spawn": 0}
   ],
   "inputs": [
     {"player": "a", "from": 0, "to": 135, "x": 1},
@@ -29,15 +25,15 @@
     {"player": "a", "from": 664, "to": 668, "hold": ["attack"]},
     {"player": "a", "from": 688, "to": 692, "hold": ["attack"]}
   ],
-  "ticks": 1297,
+  "ticks": 1393,
   "expect": [
-    {"fact": "hearts", "hero": "grappler", "between": [0, 1206], "left": 5},
-    {"fact": "event-where", "event": "flattened", "where": {"target": "p:a"}, "between": [1206, 1206], "count": [1, 1]},
-    {"fact": "event-where", "event": "heart-lost", "where": {"entity": "p:a", "hero": "grappler", "left": 4}, "between": [1206, 1206], "count": [1, 1]},
-    {"fact": "event-where", "event": "heart-lost", "where": {}, "between": [0, 1297], "count": [1, 1]},
-    {"fact": "hearts", "hero": "grappler", "between": [1207, 1297], "left": 4},
-    {"fact": "hearts", "hero": "infiltrator", "at": 1297, "left": 3},
-    {"fact": "hearts", "hero": "flyer", "at": 1297, "left": 3},
-    {"fact": "in-room", "player": "a", "at": 1297, "room": "outpost"}
+    {"fact": "hearts", "hero": "grappler", "between": [0, 1302], "left": 5},
+    {"fact": "event-where", "event": "flattened", "where": {"target": "p:a"}, "between": [1302, 1302], "count": [1, 1]},
+    {"fact": "event-where", "event": "heart-lost", "where": {"entity": "p:a", "hero": "grappler", "left": 4}, "between": [1302, 1302], "count": [1, 1]},
+    {"fact": "event-where", "event": "heart-lost", "where": {}, "between": [0, 1393], "count": [1, 1]},
+    {"fact": "hearts", "hero": "grappler", "between": [1303, 1393], "left": 4},
+    {"fact": "hearts", "hero": "infiltrator", "at": 1393, "left": 3},
+    {"fact": "hearts", "hero": "flyer", "at": 1393, "left": 3},
+    {"fact": "in-room", "player": "a", "at": 1393, "room": "outpost"}
   ]
 }

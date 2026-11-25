@@ -1,0 +1,16 @@
+{
+  "id": "camp-lookout-spared-by-own",
+  "gate": null,
+  "proves": "DRAFT (e2e-intermittent-reds brief, the orchestrator's ruling of 2026-11-25; docs/decisions-log.md \"A lookout is not felled by his own camp's fight\"): in the real Bandit Camp the skirmisher stands still at column 19, between the lookout (18) and the horn post (20). The camp's fighters fight him there, and their blows fling him west at the lookout, but with the camp's `sparedByOwn` the lookout is passed by: never knocked down, never struck by the flung hero, and his calls finish. Control (watched to fail): `sparedByOwn` removed from content/outposts/outpost.json, camp-fighter-1 fells the lookout at tick 154 (expect[0] and expect[1] fail). A hero's own blow still fells him: step7-caller-tries-again.",
+  "room": "outpost",
+  "players": [{ "id": "a", "character": "skirmisher", "tile": [19, 10] }],
+  "placements": true,
+  "inputs": [],
+  "ticks": 1800,
+  "expect": [
+    { "fact": "event-where", "event": "flattened", "where": { "target": "camp-lookout" }, "between": [0, 1800], "count": [0, 0] },
+    { "fact": "event-where", "event": "impact", "where": { "entity": "p:a", "other": "camp-lookout" }, "between": [0, 1800], "count": [0, 0] },
+    { "fact": "event-where", "event": "hit", "where": { "target": "p:a" }, "between": [0, 1800], "count": [3, 1000] },
+    { "fact": "event-where", "event": "outpost-call-completed", "where": { "by": "camp-lookout" }, "between": [0, 1800], "count": [1, 99] }
+  ]
+}

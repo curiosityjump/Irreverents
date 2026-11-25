@@ -2,6 +2,10 @@
 
 **For the third builder (orchestrator `session_017WiGzJYBCYJ85Bj95B7ZLw`, 2026-11-25 08:55 UTC), in this order, each its own small push:** (1) **the lookout ruling**, decided `DRAFT:` and written below under "Landed so far" (c48aee0): a lookout is not felled by his own camp's fight; only a hero's own blow, throw or thrown thing fells him. (2) **`suplex-again`'s real fault**: in the throne room, Grab beside the king takes `throne-crate-1` instead of him (the fact prints it: the hero in state carry, the king in "talk", held: the crate); a player hits this. Decide which body Grab takes when a person and a prop are both in reach (`DRAFT:` a knocked or standing person before a prop; log it), with a scenario and a control. (3) **`clash-street`**: red in 2 of the orchestrator's last 3 full runs (the guard knocked with the hero 61 px off, wants 64), green on repeat; and a blind look found no fight visible in its two shots (`docs/plan/step-8.md`, last section): make the fact hold on what a player sees and re-shoot both sizes with guard and villain in frame. (4) only if budget remains: `beaten-gone` red once in four full runs (313 attack taps in 150 s, nobody defeated). The runs' table: `docs/plan/step-5.md`, last section. No slots: push when green unless a code commit landed on main in the previous 3 minutes; never two pushes within a minute. Report to the session on the Orchestrator line of `docs/questions-for-the-owner.md`.
 
+**Landed so far (fourth builder `session_017WiGzJPGBR6ALNnE8BaE3G`):** order (1), the lookout
+ruling, pushed whole (the held patch applied, then removed; the four owed scenarios re-proved
+with new inputs, each claim kept and its control watched to fail; how each in
+`docs/plan/step-5.md`, the fourth builder's section). Next: (3) `clash-street`.
 **Landed so far (third builder `session_017WiGzJ3ASmAcF3W8txtRbK`, stopped at its budget):**
 order (2) at 22c832b, live 09:37 UTC: Grab takes a person (toughness > 0) before a prop,
 nearest within each (`grab-person-before-prop`, control watched to fail); the e2e

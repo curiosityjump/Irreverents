@@ -324,8 +324,33 @@ strength that come in from the sides."* Optional fields in
   it 0. Proven by `camp-own-blows-spare-horn` (control: false, camp-fighter-1
   breaks it at 1019); hero breaks in the camp with it on:
   `step7-post-ends-it`, `step20-camp-hijack-and-crash`.
+- `sparedByOwn` (2026-11-25, `DRAFT:`, the orchestrator's ruling,
+  `docs/decisions-log.md` "A lookout is not felled by his own camp's fight"):
+  a list of the outpost's callers (each must be in `callers`) whom their own
+  side's fight passes by. `sparedByOwn()` in `src/sim/outpost/state.ts` (with
+  `ownSide()`, shared with `ownSpared`) is read in two places: the attack verb's
+  `strikeTick` (an own-side swing skips him: no `hit`, no launch, no wear) and
+  `impact-bodies` (a flying body whose `c.flying.by` is own side, a hero flung
+  by a bandit's blow included, passes through him: no shove, no wear, no
+  `impact`). So he is neither knocked down nor knocked off the horn, and his
+  call goes on. A hero's blow, a body or thing a hero threw or knocked, and a
+  suplex still fell him; a ram (`ram()` in `machines.ts`) is not covered (its
+  doer is the wagon, not a person). Left out: none. The camp's:
+  `["camp-lookout"]` (fighter 1 calls too, but he is in the fight). Measured
+  (sim, five heroes standing still at columns 19-24 for 90 s, 30 fights):
+  without it the lookout was felled 118 times, every one by the camp's own
+  (one by the wave's wagon); with it, once, by the wave's wagon (a bandit at
+  the reins), and the lookout's own finished calls rose from 109 to 133 of all
+  calls in the 30. Proven by
+  `camp-lookout-spared-by-own` (control: removed, camp-fighter-1 fells him at
+  154); a hero's blow still does: `step7-caller-tries-again`.
+  Re-timed for it (the camp's fight goes differently with him standing; each
+  claim kept and its control watched to fail, 2026-11-25): the four `step21-*`
+  hearts scenarios (a pure shift), `step12-walk-out-ends-it`,
+  `camp-entries-door-kept-clear`, `step7-same-again-hangs-nothing` and
+  `camp-entries-east-break-through` (new inputs; each says how in its `proves`).
 
-Proven in `test-sides` by `sides-wave-both-sides` (control: no `entries`). The door rule by `camp-entries-door-kept-clear` (the infiltrator at column 12.7 when the second call completes: both of its people walk in east of it, then it walks out; control: no `doorClear` and no `sendNoneNearer`, one walks in at column 6).
+Proven in `test-sides` by `sides-wave-both-sides` (control: no `entries`). The door rule by `camp-entries-door-kept-clear` (the infiltrator carried back to column 10 by the camp's fight when the second call completes: both of its people walk in east of it, then it walks out; control: no `doorClear` and no `sendNoneNearer`, one walks in at column 6).
 **Switched on in the quarry's depot** ("The depot", above) **and in the Bandit Camp** (2026-11-24): entries
 `[[6,7],[24,10],[30,10],[36,10],[41,10]]`, `entryAway` 12, five rows (1
 fighter; 2; fighter and heavy; 2 fighters and a heavy, the first of them at

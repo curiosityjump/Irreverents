@@ -1,21 +1,6 @@
-import { npcKind } from '../npc/state.ts';
-import { outposts, postOf } from '../outpost/state.ts';
+import { outposts, ownSide, postOf } from '../outpost/state.ts';
 import type { Content } from '../../content/types.ts';
 import type { Entity, System, World } from '../types.ts';
-
-/**
- * DRAFT (`ownSpared`, docs/decisions-log.md "The camp's own blows leave its horn whole"): the
- * doer is one of the outpost's own side: a person no player plays, of the NPC side of the
- * outpost's first caller. A doer gone from the world, or with none, is not.
- */
-function ownSide(world: World, content: Content, callers: string[], by: string | null): boolean {
-  if (by === null) return false;
-  const doer = world.entities.find((x) => x.id === by);
-  if (!doer || doer.player !== null) return false;
-  const caller = world.entities.find((x) => x.id === callers[0]);
-  const side = caller ? npcKind(content, caller)?.side : undefined;
-  return side !== undefined && npcKind(content, doer)?.side === side;
-}
 
 /** Who struck with this impact: whoever sent the striking body flying, else the body itself. */
 function impactDoer(world: World, post: Entity, striker: string): string {

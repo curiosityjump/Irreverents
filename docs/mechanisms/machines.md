@@ -213,8 +213,10 @@ can be pulled out and the wagon turned on the wave (D-023). `DRAFT:`
 (the last row repeats; wagons are not people, so a repeating row would pile
 them up) and because no row-2 scenario survives a wagon (it turned
 `step7-waves-reach-the-hero` and `step7-same-again-hangs-nothing` red).
-Seen so far only in `test-wave-wagon`: no camp scenario reaches a fourth
-call (`docs/plan/step-20.md`, "Builder notes", push 3).
+Seen in `test-wave-wagon`, and since the lookout ruling (2026-11-25) in
+`step7-same-again-hangs-nothing`, whose second visit's second row is the
+wagon's (3006; the flyer walks out past it); no camp scenario asserts on the
+wagon itself (`docs/plan/step-20.md`, "Builder notes", push 3).
 
 ## On the courtyard's run (the guards' trike, push 1)
 

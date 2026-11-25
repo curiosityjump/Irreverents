@@ -1,21 +1,13 @@
 {
   "id": "step21-heart-out-next-member",
   "gate": null,
-  "proves": "Step 21, hearts (the owner, 2026-11-24; DRAFT, docs/decisions-log.md 'Step 21: hearts'): the grappler comes into the Bandit Camp with one heart left (the world starts with four of its five lost) and is put on the floor by a bandit at 1206: its last heart. It lies its three seconds, and the moment it would get up its player is the next party member with hearts, the infiltrator, where it lay (it fits there): 'hero-out', in charge of its body. Nobody can switch back to the grappler: the switch skips it. Control (watched to fail): heart-out's system made to do nothing, and the player is still the grappler, up and playing Re-timed 2026-11-24 (owner-enemies-chase-alarms.md): with the camp's waves walking in from both sides of the hero, the fall comes at 1206, from the first wave's fighter, not 1009; every tick from it on moved by 197.",
+  "proves": "Step 21, hearts (the owner, 2026-11-24; DRAFT, docs/decisions-log.md 'Step 21: hearts'): the grappler comes into the Bandit Camp with one heart left (the world starts with four of its five lost) and is put on the floor by a bandit at 1206: its last heart. It lies its three seconds, and the moment it would get up its player is the next party member with hearts, the infiltrator, where it lay (it fits there): 'hero-out', in charge of its body. Nobody can switch back to the grappler: the switch skips it. Control (watched to fail): heart-out's system made to do nothing, and the player is still the grappler, up and playing Re-timed 2026-11-24 (owner-enemies-chase-alarms.md): with the camp's waves walking in from both sides of the hero, the fall comes at 1206, from the first wave's fighter, not 1009; every tick from it on moved by 197. Re-timed 2026-11-25 (e2e-intermittent-reds, the orchestrator's lookout ruling, docs/decisions-log.md \"A lookout is not felled by his own camp's fight\"): with the lookout no longer felled by his own camp's fight, the first wave's fighter puts the grappler on the floor at 1302, not 1206; every tick from 1206 on (inputs included) moved by 96.",
   "room": "outpost",
   "placements": true,
   "players": [
-    {
-      "id": "a",
-      "character": "grappler",
-      "spawn": 0
-    }
+    {"id": "a", "character": "grappler", "spawn": 0}
   ],
-  "world": {
-    "heartsLost": {
-      "grappler": 4
-    }
-  },
+  "world": {"heartsLost": {"grappler": 4}},
   "inputs": [
     {"player": "a", "from": 0, "to": 135, "x": 1},
     {"player": "a", "from": 20, "to": 45, "hold": ["jump"]},
@@ -33,18 +25,18 @@
     {"player": "a", "from": 640, "to": 644, "hold": ["attack"]},
     {"player": "a", "from": 664, "to": 668, "hold": ["attack"]},
     {"player": "a", "from": 688, "to": 692, "hold": ["attack"]},
-    {"player": "a", "from": 1447, "to": 1451, "hold": ["switch"]}
+    {"player": "a", "from": 1543, "to": 1547, "hold": ["switch"]}
   ],
-  "ticks": 1497,
+  "ticks": 1593,
   "expect": [
-    {"fact": "hearts", "hero": "grappler", "at": 1206, "left": 1},
-    {"fact": "event-where", "event": "heart-lost", "where": {"entity": "p:a", "hero": "grappler", "left": 0}, "between": [1206, 1206], "count": [1, 1]},
-    {"fact": "character", "player": "a", "at": 1297, "is": "grappler"},
-    {"fact": "event-where", "event": "hero-out", "where": {"entity": "p:a", "from": "grappler", "to": "infiltrator", "where": "here"}, "between": [1206, 1497], "count": [1, 1]},
-    {"fact": "character", "player": "a", "at": 1437, "is": "infiltrator"},
-    {"fact": "in-room", "player": "a", "at": 1437, "room": "outpost"},
-    {"fact": "clear-of-solid", "player": "a", "between": [0, 1497]},
-    {"fact": "event-where", "event": "switched", "where": {"entity": "p:a", "to": "grappler"}, "between": [0, 1497], "count": [0, 0]},
-    {"fact": "hearts", "hero": "grappler", "at": 1497, "left": 0}
+    {"fact": "hearts", "hero": "grappler", "at": 1302, "left": 1},
+    {"fact": "event-where", "event": "heart-lost", "where": {"entity": "p:a", "hero": "grappler", "left": 0}, "between": [1302, 1302], "count": [1, 1]},
+    {"fact": "character", "player": "a", "at": 1393, "is": "grappler"},
+    {"fact": "event-where", "event": "hero-out", "where": {"entity": "p:a", "from": "grappler", "to": "infiltrator", "where": "here"}, "between": [1302, 1593], "count": [1, 1]},
+    {"fact": "character", "player": "a", "at": 1533, "is": "infiltrator"},
+    {"fact": "in-room", "player": "a", "at": 1533, "room": "outpost"},
+    {"fact": "clear-of-solid", "player": "a", "between": [0, 1593]},
+    {"fact": "event-where", "event": "switched", "where": {"entity": "p:a", "to": "grappler"}, "between": [0, 1593], "count": [0, 0]},
+    {"fact": "hearts", "hero": "grappler", "at": 1593, "left": 0}
   ]
 }

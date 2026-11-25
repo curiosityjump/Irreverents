@@ -1024,6 +1024,36 @@ snapshots off the socket each second (hero, lookout, fighter 1, the post's `c.si
   `simulate()` over heroes x columns counting `flattened` on `camp-lookout` by doer; an
   events printer and a per-tick tracer of callers' `c.outpostCall` for one scenario.
 
+### Fourth builder (`session_017WiGzJPGBR6ALNnE8BaE3G`): the lookout ruling pushed
+
+- **The held patch applied whole** (`lookout-ruling.patch`, on b286ff4; the patch file then
+  removed, its content now in the tree). Its own scenario and the four step21 re-times green.
+- **The other four re-proved, each claim kept, each control watched to fail** (sim tracers in
+  the scratchpad, as the third builder's: a per-tick printer of the hero, the callers' phase,
+  facing, `canSee`, and an input search):
+  - `step12-walk-out-ends-it`: the first wave's one now flattens the grappler against the step
+    (column 8.4, at 765), so he is up only at ~945; new walk out from 899, jumps at 950 and
+    974, out at 1064, call stopped 1065 (it completes at 1078 if he stays). Control
+    `outpostZoneEndOn` 0: expect[3], [4], [6], [8] fail.
+  - `camp-entries-door-kept-clear`: the second call now completes at 1099, and the fight has
+    already carried the infiltrator to column 10 by then, so he no longer walks back; both of
+    the row walk in at column 30; out at 1456 (walk from 1350, after a flatten at 1141 frees
+    him; an exit before 1141 was searched, 400+ variants, none: the wave's one beside him hits
+    at 1091 and 1141). Control (no `doorClear`, no `sendNoneNearer`): one walks in at x 97,
+    expect[2], [3] fail.
+  - `step7-same-again-hangs-nothing`: on the old second visit no caller was left to call (the
+    lookout drawn off his post, `left-the-signaler`; fighter 1 felled by a wave's own man,
+    which the ruling leaves as it is: he is not in `sparedByOwn`). The flyer now walks east to
+    1405, not 1455: waves at 2041 and 3006 (the wagon's row), one long jump over the step at
+    3200, out at 3284. Control `hallRelativeOn` 0: expect[4] fails.
+  - `camp-entries-east-break-through`: callers see 7 tiles (`npcSightRange` 112), facing only;
+    the brawler now walks to 380 with no step back, is knocked about at ~column 32, fighter 1
+    sees him and calls (1511-1690), and he walks two tiles east during the call (1600-1630,
+    x 540, so 41 is within `sendNoneNearer` and skipped): row at x 97 and x 801, the fence
+    broken by `w1:1` at 1764, his hit after. Control (no `breakThrough`): expect[4], [5] fail.
+- **Not verified:** the e2e (`row-both-sides` and the camp facts) on this push; the ruling
+  changes the camp's fight the phone sees, so its next full runs say.
+
 ## A page misses what happened (brief `handoff-prompts/page-misses-what-happened.md`)
 
 Builder session `session_017WiGzJrwonyg1a3d9hvyg4`, 2026-11-24.

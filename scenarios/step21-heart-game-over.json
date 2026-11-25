@@ -1,27 +1,14 @@
 {
   "id": "step21-heart-game-over",
   "gate": null,
-  "proves": "Step 21, hearts (the owner, 2026-11-24: 'Once all heros in the party are out of hearts, that's a game over (back to cantina)'; DRAFT, docs/decisions-log.md 'Step 21: hearts'): the party comes into the Bandit Camp with one heart left between them (the grappler's; the world starts with every other heart lost). A bandit puts the grappler on the floor at 1206: the last heart, so 'game-over-coming' for the cantina; after the beat (1 s, the fall seen) the 'game-over' at 1069 puts the player in the cantina on its first pad, with every heart of the party back; it is up on the next tick and the stick walks it east. No legend is hung for it. Control (watched to fail): heart-game-over made to do nothing, and the player is still in the camp, out of hearts Re-timed 2026-11-24 (owner-enemies-chase-alarms.md): with the camp's waves walking in from both sides of the hero, the fall comes at 1206, from the first wave's fighter, not 1009; every tick from it on moved by 197. A second control (watched to fail, 2026-11-24): the game-over test (`wiped`) removed from src/sim/systems/hall-detect.ts, and with two of the camp's rows in by the fall, 'Out of Bandit Camp by a hair' hangs at the game over.",
+  "proves": "Step 21, hearts (the owner, 2026-11-24: 'Once all heros in the party are out of hearts, that's a game over (back to cantina)'; DRAFT, docs/decisions-log.md 'Step 21: hearts'): the party comes into the Bandit Camp with one heart left between them (the grappler's; the world starts with every other heart lost). A bandit puts the grappler on the floor at 1206: the last heart, so 'game-over-coming' for the cantina; after the beat (1 s, the fall seen) the 'game-over' at 1069 puts the player in the cantina on its first pad, with every heart of the party back; it is up on the next tick and the stick walks it east. No legend is hung for it. Control (watched to fail): heart-game-over made to do nothing, and the player is still in the camp, out of hearts Re-timed 2026-11-24 (owner-enemies-chase-alarms.md): with the camp's waves walking in from both sides of the hero, the fall comes at 1206, from the first wave's fighter, not 1009; every tick from it on moved by 197. A second control (watched to fail, 2026-11-24): the game-over test (`wiped`) removed from src/sim/systems/hall-detect.ts, and with two of the camp's rows in by the fall, 'Out of Bandit Camp by a hair' hangs at the game over. Re-timed 2026-11-25 (e2e-intermittent-reds, the orchestrator's lookout ruling, docs/decisions-log.md \"A lookout is not felled by his own camp's fight\"): with the lookout no longer felled by his own camp's fight, the first wave's fighter puts the grappler on the floor at 1302, not 1206; every tick from 1206 on (inputs included) moved by 96.",
   "room": "outpost",
   "placements": true,
-  "placedRooms": [
-    "cantina"
-  ],
+  "placedRooms": ["cantina"],
   "players": [
-    {
-      "id": "a",
-      "character": "grappler",
-      "spawn": 0
-    }
+    {"id": "a", "character": "grappler", "spawn": 0}
   ],
-  "world": {
-    "roster": ["grappler", "infiltrator", "flyer", "brawler", "skirmisher"],
-    "heartsLost": {
-      "grappler": 4,
-      "infiltrator": 3,
-      "flyer": 3
-    }
-  },
+  "world": {"roster": ["grappler", "infiltrator", "flyer", "brawler", "skirmisher"], "heartsLost": {"grappler": 4, "infiltrator": 3, "flyer": 3}},
   "inputs": [
     {"player": "a", "from": 0, "to": 135, "x": 1},
     {"player": "a", "from": 20, "to": 45, "hold": ["jump"]},
@@ -39,23 +26,23 @@
     {"player": "a", "from": 640, "to": 644, "hold": ["attack"]},
     {"player": "a", "from": 664, "to": 668, "hold": ["attack"]},
     {"player": "a", "from": 688, "to": 692, "hold": ["attack"]},
-    {"player": "a", "from": 1297, "to": 1357, "x": 1}
+    {"player": "a", "from": 1393, "to": 1453, "x": 1}
   ],
-  "ticks": 1397,
+  "ticks": 1493,
   "expect": [
-    {"fact": "hearts", "hero": "grappler", "between": [0, 1206], "left": 1},
-    {"fact": "event-where", "event": "heart-lost", "where": {"entity": "p:a", "hero": "grappler", "left": 0}, "between": [1206, 1206], "count": [1, 1]},
-    {"fact": "event-where", "event": "game-over-coming", "where": {"place": null, "room": "cantina"}, "between": [1206, 1206], "count": [1, 1]},
-    {"fact": "in-room", "player": "a", "at": 1266, "room": "outpost"},
-    {"fact": "event-where", "event": "game-over", "where": {"place": null, "room": "cantina", "players": ["a"]}, "between": [1266, 1266], "count": [1, 1]},
-    {"fact": "event", "event": "game-over", "between": [0, 1397], "count": [1, 1]},
-    {"fact": "in-room", "player": "a", "at": 1267, "room": "cantina"},
-    {"fact": "hearts", "hero": "grappler", "between": [1267, 1397], "left": 5},
-    {"fact": "hearts", "hero": "infiltrator", "at": 1267, "left": 3},
-    {"fact": "hearts", "hero": "flyer", "at": 1267, "left": 3},
-    {"fact": "body-state", "player": "a", "at": 1269, "not": ["flattened", "seized", "flying", "beat"]},
-    {"fact": "position", "player": "a", "at": 1297, "x": [130, 142]},
-    {"fact": "position", "player": "a", "at": 1357, "x": [200, 230]},
-    {"fact": "event", "event": "hall-legend", "between": [0, 1397], "count": [0, 0]}
+    {"fact": "hearts", "hero": "grappler", "between": [0, 1302], "left": 1},
+    {"fact": "event-where", "event": "heart-lost", "where": {"entity": "p:a", "hero": "grappler", "left": 0}, "between": [1302, 1302], "count": [1, 1]},
+    {"fact": "event-where", "event": "game-over-coming", "where": {"place": null, "room": "cantina"}, "between": [1302, 1302], "count": [1, 1]},
+    {"fact": "in-room", "player": "a", "at": 1362, "room": "outpost"},
+    {"fact": "event-where", "event": "game-over", "where": {"place": null, "room": "cantina", "players": ["a"]}, "between": [1362, 1362], "count": [1, 1]},
+    {"fact": "event", "event": "game-over", "between": [0, 1493], "count": [1, 1]},
+    {"fact": "in-room", "player": "a", "at": 1363, "room": "cantina"},
+    {"fact": "hearts", "hero": "grappler", "between": [1363, 1493], "left": 5},
+    {"fact": "hearts", "hero": "infiltrator", "at": 1363, "left": 3},
+    {"fact": "hearts", "hero": "flyer", "at": 1363, "left": 3},
+    {"fact": "body-state", "player": "a", "at": 1365, "not": ["flattened", "seized", "flying", "beat"]},
+    {"fact": "position", "player": "a", "at": 1393, "x": [130, 142]},
+    {"fact": "position", "player": "a", "at": 1453, "x": [200, 230]},
+    {"fact": "event", "event": "hall-legend", "between": [0, 1493], "count": [0, 0]}
   ]
 }

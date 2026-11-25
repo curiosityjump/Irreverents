@@ -107,6 +107,15 @@ export interface Outpost {
    * (src/sim/systems/outpost-signaler.ts).
    */
   ownSpared: boolean;
+  /**
+   * DRAFT, optional (left out: none; e2e-intermittent-reds brief, the orchestrator's ruling of
+   * 2026-11-25, docs/decisions-log.md "A lookout is not felled by his own camp's fight"): callers
+   * (each must be in `callers`) whom their own side's fight passes by: a blow of one of the outpost's
+   * own side, or a body one of them sent flying (a hero flung by a bandit's blow included), neither
+   * knocks them down nor shoves them off the post. A hero's own blow, throw or thrown thing still
+   * does (src/sim/outpost/state.ts, `sparedByOwn`).
+   */
+  sparedByOwn: string[];
 }
 
 declare module '../types.ts' {
@@ -121,7 +130,7 @@ const kind: ContentKind = {
   parse(raw, read) {
     const o = read.object(raw, '');
     if (!o) return null;
-    read.only(o, ['id', 'room', 'signaler', 'callers', 'entry', 'bound', 'callTime', 'callAgain', 'breakHits', 'breakSpeed', 'waves', 'tryAgain', 'leaveCold', 'leaveIdle', 'entries', 'entryAway', 'announce', 'doorClear', 'sendNoneNearer', 'breakThrough', 'ownSpared'], '');
+    read.only(o, ['id', 'room', 'signaler', 'callers', 'entry', 'bound', 'callTime', 'callAgain', 'breakHits', 'breakSpeed', 'waves', 'tryAgain', 'leaveCold', 'leaveIdle', 'entries', 'entryAway', 'announce', 'doorClear', 'sendNoneNearer', 'breakThrough', 'ownSpared', 'sparedByOwn'], '');
     const out: Outpost = {
       id: read.string(o, 'id', ''),
       room: read.string(o, 'room', ''),
@@ -144,7 +153,9 @@ const kind: ContentKind = {
       sendNoneNearer: o.sendNoneNearer === undefined ? 0 : read.number(o, 'sendNoneNearer', '', { min: 0, max: 200 }),
       breakThrough: null,
       ownSpared: false,
+      sparedByOwn: o.sparedByOwn === undefined ? [] : read.stringList(o, 'sparedByOwn', ''),
     };
+    for (const id of out.sparedByOwn) if (!out.callers.includes(id)) read.fail('sparedByOwn', `names ${describe(id)}, who is not one of its callers`);
     if (o.ownSpared !== undefined) {
       if (typeof o.ownSpared !== 'boolean') read.fail('ownSpared', `must be true or false, but is ${describe(o.ownSpared)}`);
       else out.ownSpared = o.ownSpared;
