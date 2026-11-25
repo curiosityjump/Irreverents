@@ -342,7 +342,7 @@ Full text: `docs/plan-archive.md`, "Step 11". Durable record: `docs/mechanisms/c
 
 ## Step 13 — Heroes you find and keep
 
-**Status: open, unclaimed — queued behind Step 7.** (The first playable is live and reviewed, 2026-11-23 22:08 UTC at a01c44c: the skirmisher caged in the Bandit Camp, freed by holding Use, kept on the roster; brief deleted, builder archived. One signal is not built, `step13-free-while-caught`: freeing mid-alarm needs the waves slice's fighting first; then close.)
+**Status: open, claimed by orchestrator session_017WiGzGgiMLCwNj9zptZqBz (builders: session_017WiGzGffLu42yKrbPuQphJ), 2026-11-25.** (Was queued behind Step 7; claimed for `handoff-prompts/recruit-shown-right.md`.) (The first playable is live and reviewed, 2026-11-23 22:08 UTC at a01c44c: the skirmisher caged in the Bandit Camp, freed by holding Use, kept on the roster; brief deleted, builder archived. One signal is not built, `step13-free-while-caught`: freeing mid-alarm needs the waves slice's fighting first; then close.)
 
 Full text: `docs/plan/step-13.md`
 
