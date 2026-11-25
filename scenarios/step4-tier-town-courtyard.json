@@ -1,6 +1,6 @@
 {
   "id": "step4-tier-town-courtyard",
-  "proves": "The escalating guard response, push 2 (one town-wide level; the row comes to the room the report names): in the real castle street the shopkeeper's bell and the guard's whistle bring the street's alert to 2, and a follower's whistle in the street makes it 3 (4889); the brawler walks out east into the courtyard and the street's guard follows him in (4689); there he blows his whistle and finishes (5421): the report names the courtyard, which goes to 4, one above the town's highest (the street's 3), and level 4's row walks in there on that tick from the sides (floor entries west of the gate, never beside the opening: a trike put down there was carried straight out): a guard at the reins of the watch's trike, which rams someone, and an armoured guard. The street stays at 3. Controls (watched to fail): no courtyard dispatch file (he reports home: the street goes to 4 and its row walks into the street), and the raise without the town (src/sim/npc/alert.ts, one up from the courtyard's own 0: one guard comes).",
+  "proves": "The escalating guard response, push 2 (one town-wide level; the row comes to the room the report names; the stronger relieve the weaker, town-wide): in the real castle street the bell and the whistles bring the street's alert to 3 and then 4 (5661), the villain fighting the watch too; the brawler walks out east into the courtyard (5618) and the watch follows him in, filling it; there the street's guard blows his whistle and finishes (6485): the report names the courtyard, which goes to 5, one above the town's highest (the street's 4), and on that tick a street follower in the courtyard is stood down for it, so level 5's row (two armoured guards) walks in from the courtyard's sides the next tick, not about 15 s later; the courtyard never holds more than its 7, and at 5 the row comes again on the timer while the watch sees him. The street stays at 4. Controls (watched to fail): no courtyard dispatch file (he reports home and the street's row comes to the street), the raise without the town (src/sim/npc/alert.ts: the courtyard goes to 1), and relieving only a room's own arrivals (the row waits until 7359).",
   "room": "castle-street",
   "placements": true,
   "players": [
@@ -330,9 +330,289 @@
       "hold": [
         "attack"
       ]
+    },
+    {
+      "player": "a",
+      "from": 5600,
+      "to": 5602,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 5602,
+      "to": 5606,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 5660,
+      "to": 5662,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 5662,
+      "to": 5666,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 5840,
+      "to": 5842,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 5842,
+      "to": 5846,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 5900,
+      "to": 5902,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 5902,
+      "to": 5906,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 6080,
+      "to": 6082,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 6082,
+      "to": 6086,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 6140,
+      "to": 6142,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 6142,
+      "to": 6146,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 6320,
+      "to": 6322,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 6322,
+      "to": 6326,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 6380,
+      "to": 6382,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 6382,
+      "to": 6386,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 6560,
+      "to": 6562,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 6562,
+      "to": 6566,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 6620,
+      "to": 6622,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 6622,
+      "to": 6626,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 6800,
+      "to": 6802,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 6802,
+      "to": 6806,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 6860,
+      "to": 6862,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 6862,
+      "to": 6866,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 7040,
+      "to": 7042,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 7042,
+      "to": 7046,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 7100,
+      "to": 7102,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 7102,
+      "to": 7106,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 7280,
+      "to": 7282,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 7282,
+      "to": 7286,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 7340,
+      "to": 7342,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 7342,
+      "to": 7346,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 7520,
+      "to": 7522,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 7522,
+      "to": 7526,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 7580,
+      "to": 7582,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 7582,
+      "to": 7586,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 7760,
+      "to": 7762,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 7762,
+      "to": 7766,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 7820,
+      "to": 7822,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 7822,
+      "to": 7826,
+      "hold": [
+        "attack"
+      ]
     }
   ],
-  "ticks": 6400,
+  "ticks": 8000,
   "expect": [
     {
       "fact": "event-where",
@@ -343,19 +623,19 @@
         "fromDoor": "to-courtyard"
       },
       "between": [
-        4600,
-        4700
+        5400,
+        5700
       ],
       "count": [
         1,
-        1
+        3
       ]
     },
     {
       "fact": "alert",
       "area": "castle-street",
-      "at": 5000,
-      "is": 3
+      "at": 6400,
+      "is": 4
     },
     {
       "fact": "event-where",
@@ -365,8 +645,8 @@
         "by": "street-guard"
       },
       "between": [
-        5300,
-        5500
+        6400,
+        6550
       ],
       "count": [
         1,
@@ -376,38 +656,53 @@
     {
       "fact": "alert",
       "area": "courtyard",
-      "at": 5420,
+      "at": 6484,
       "is": 0
     },
     {
       "fact": "alert",
       "area": "courtyard",
-      "at": 5422,
-      "is": 4
+      "at": 6487,
+      "is": 5
     },
     {
       "fact": "alert",
       "area": "courtyard",
-      "at": 5422,
-      "is": 4,
+      "at": 6487,
+      "is": 5,
       "shown": true
     },
     {
       "fact": "alert",
       "area": "castle-street",
-      "at": 5422,
-      "is": 3
+      "at": 6487,
+      "is": 4
+    },
+    {
+      "fact": "event-where",
+      "event": "dispatch-relieved",
+      "where": {
+        "area": "courtyard"
+      },
+      "between": [
+        6485,
+        6485
+      ],
+      "count": [
+        1,
+        9
+      ]
     },
     {
       "fact": "event-where",
       "event": "dispatch-arrived",
       "where": {
         "area": "courtyard",
-        "row": 3
+        "row": 4
       },
       "between": [
-        5421,
-        5421
+        6485,
+        6600
       ],
       "count": [
         1,
@@ -417,41 +712,30 @@
     {
       "fact": "people",
       "room": "courtyard",
-      "arrivals": true,
-      "at": 5500,
-      "count": [
-        2,
-        2
-      ]
-    },
-    {
-      "fact": "event-where",
-      "event": "changed-room",
-      "where": {
-        "entity": "courtyard:help0:0"
-      },
       "between": [
-        5421,
-        5600
+        0,
+        8000
       ],
       "count": [
         0,
-        0
+        7
       ]
     },
     {
       "fact": "event-where",
-      "event": "machine-crash",
+      "event": "dispatch-queued",
       "where": {
-        "machine": "courtyard:help0:0:ride"
+        "area": "courtyard",
+        "row": 4,
+        "why": "timer"
       },
       "between": [
-        5421,
-        6400
+        6500,
+        8000
       ],
       "count": [
         1,
-        99
+        9
       ]
     }
   ]

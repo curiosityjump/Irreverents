@@ -555,13 +555,20 @@ an enter doorway); the courtyard from floor entries west of the gate
 carried straight out by it. Rows: 1 a guard, 2 two, 3 a guard and the
 armoured guard, 4 two armoured (the courtyard: the trike's driver and an
 armoured guard), 5 two armoured, `keepComing` 12, `relieve` `["guard"]`,
-caps 6 (7 in the courtyard). Who reports in the throne room when you hit
+caps 6 (7 in the courtyard). The stronger relieve the weaker town-wide:
+a plain guard of another room's earlier row who followed a hero in counts
+against this room's cap, so he may be stood down for this room's row too
+(he walks out by a door of the room he is in; measured: without it the
+courtyard's level-5 row waited about 15 s behind the street's followers).
+Who reports in the throne room when you hit
 the king: nobody of the room (the king has no NPC kind); only the watch,
-once it has followed you in. Checks: `step4-tier-town-throne-room`,
-`-courtyard`, `-hall-gallery` (each: a follower's whistle there names
-that room, it goes to one above the town's highest, that level's row
-walks in there; controls: the room's file removed, and the raise without
-the town). No scenario yet reports in the undercroft (scripting a follower
+once it has followed you in. Checks: `step4-tier-town-throne-room` (0 to 4, the street at 3),
+`-courtyard` (0 to 5, the street at 4, a follower relieved, the timer row),
+`-hall-gallery` (0 to 3 with the street at 2, then 4 and 5 by whistles
+there); each: a follower's whistle there names that room, it goes to one
+above the town's highest, that level's row walks in there; controls: the
+room's file removed, the raise without the town, and (the courtyard)
+relieving only a room's own; the phone fact `escalation-town`. No scenario yet reports in the undercroft (scripting a follower
 through the hidden door failed four ways; the secret is an unseen way out).
 
 **The castle street's table:** doors `to-throne-room` and `to-courtyard`,

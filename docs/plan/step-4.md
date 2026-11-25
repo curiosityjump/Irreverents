@@ -856,12 +856,21 @@ the owner is playing and pushes are paused).**
   carried straight out by it (the trike's driver changed room the next tick),
   so the courtyard's rows come from floor entries west of the gate (3, 14, 21).
 - **Scenarios, controls watched failing:** `step4-tier-town-throne-room`
-  (throne room 0 -> 4 with the street at 3), `-courtyard` (0 -> 4, the trike
-  rams someone), `-hall-gallery` (0 -> 3 with the street at 2; the gate's
-  tiles opened before tick 0, as two bodies on its plates would). Controls for
+  (throne room 0 -> 4 with the street at 3), `-courtyard` (0 -> 5 with the
+  street at 4, a street follower relieved on the tick, the timer row),
+  `-hall-gallery` (0 -> 3 with the street at 2, then 4 and 5 by whistles
+  there; the gate held open by two heavy crates on its plates). Controls for
   each: the room's file removed (the follower reports home, the street climbs
   and its row walks into the street), and the raise without the town (`from +
-  1`: the room goes to 1). Phone fact `escalation-town`
+  1`: the room goes to 1); the courtyard's also relieving only a room's own.
+- **Re-timed after the rebase onto d9fc807 (guards meet bandits) and the
+  trike's 2b:** both the courtyard's and the gallery's first versions went red
+  (the villain now brawls the watch in the street; the gate had only opened
+  because followers happened to stand on both plates). The re-timed courtyard
+  run showed the courtyard's level-5 row waiting about 15 s behind the street's
+  followers: hence the town-wide relieve (`mine()` in `relieveFor`). The
+  courtyard's level-4 row (the trike's driver) is no longer reached by any
+  scenario: it walked in and rammed in the first version. Phone fact `escalation-town`
   (`scripts/e2e/escalation.ts`: the courtyard at 4, the street at 3, a page in
   the street draws 4): green twice; control `E2E_ESCALATION_TOWN=off` fails.
 - **Not done:** a scenario that reports in the undercroft. Tried four ways

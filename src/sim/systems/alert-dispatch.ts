@@ -1,7 +1,7 @@
 import type { Dispatch } from '../../content/kinds/dispatch.ts';
 import type { Door, Room } from '../../content/kinds/rooms.ts';
 import type { Content } from '../../content/types.ts';
-import { alertLevel, alertOf, maxAlert } from '../npc/alert.ts';
+import { alertLevel, alertOf, maxAlert, sameTown } from '../npc/alert.ts';
 import { centre, drive, isOut, npcKind, setMood } from '../npc/state.ts';
 import type { Entity, System, World } from '../types.ts';
 import { findEntity, removeEntity, spawnBody } from '../world.ts';
@@ -121,13 +121,17 @@ function relieveFor(ctx: Parameters<System['run']>[0], table: Dispatch, index: n
     return hs.length === 0 ? Infinity : Math.min(...hs.map((h) => Math.abs(h.x - me.x) / tile));
   };
   // Those already stood down and still walking out are making room already: only the rest of `over` is new.
-  const going = world.entities.filter((e) => e.c.arrival?.area === table.id && e.c.arrival.relieved).length;
+  // DRAFT (push 2, one town): one of the town's other rows who followed a hero into this room counts against its cap
+  // (peopleIn), so he may be stood down for this room's stronger row too; measured: without it, the courtyard's level-5
+  // row waited about 15 s behind the street's followers (step4-tier-town-courtyard).
+  const mine = (e: Entity): boolean => !!e.c.arrival && (e.c.arrival.area === table.id || (e.room === table.id && sameTown(content, e.c.arrival.area, table.id)));
+  const going = world.entities.filter((e) => mine(e) && e.c.arrival!.relieved).length;
   const may = world.entities
     .filter((e) => {
       const a = e.c.arrival;
       // In another room, only where no hero is (he is gone at once, unseen); in the area, not near a hero.
       const near = e.room === table.id ? far(e) < RELIEVE_NEAR : heroesIn(world, content, e.room).length > 0;
-      return a && a.area === table.id && !a.relieved && a.row !== undefined && a.row < index && table.relieve.includes(e.kind) && !busy(e) && !near;
+      return a && mine(e) && !a.relieved && a.row !== undefined && a.row < index && table.relieve.includes(e.kind) && !busy(e) && !near;
     })
     .sort((p, q) => far(q) - far(p) || (p.id < q.id ? -1 : 1));
   for (const e of may.slice(0, Math.max(0, over - going))) {
@@ -139,7 +143,9 @@ function relieveFor(ctx: Parameters<System['run']>[0], table: Dispatch, index: n
       const me = centre(content, e).x;
       const h = hs.reduce((b, p) => (Math.abs(p.x - me) < Math.abs(b.x - me) ? p : b));
       const doors = table.doors.map((id) => room.doors.find((d) => d.id === id)!).filter((d) => (d.side === 'west' ? -1 : 1) === (me >= h.x ? 1 : -1));
-      if (doors[0]) e.c.arrival!.door = doors[0].id;
+      // With no door of the table on the far side, the nearer one (a follower must leave by a door of this room).
+      const out = doors[0] ?? table.doors.map((id) => room.doors.find((d) => d.id === id)!)[0];
+      if (out) e.c.arrival!.door = out.id;
     }
     e.c.arrival!.stall = 0;
     delete e.c.respond;
@@ -315,7 +321,8 @@ const system: System = {
       if (!a || e.c.respond || isOut(e)) continue;
       if (alertLevel(world, a.area) > 0 && !a.relieved) continue;
       const room = content.rooms[e.room];
-      const door = e.room === a.area ? room?.doors.find((d) => d.id === a.door) : undefined;
+      // One stood down in another room of the town walks out by the door of that room relieveFor gave him.
+      const door = e.room === a.area || a.relieved ? room?.doors.find((d) => d.id === a.door) : undefined;
       // INTENT (there is always a way out, for them too): one who cannot reach his door (or is not in his area) leaves where he stands.
       if (!room || !door) {
         removeEntity(world, e.id);

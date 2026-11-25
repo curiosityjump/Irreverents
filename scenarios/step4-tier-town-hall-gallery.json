@@ -1,6 +1,6 @@
 {
   "id": "step4-tier-town-hall-gallery",
-  "proves": "The escalating guard response, push 2 (one town-wide level; the row comes to the room the report names): in the real castle street the bell and the guard's whistle bring the street's alert to 2; the brawler walks out east into the courtyard and on through its gate (held open from the start, as two bodies on its plates would) into the Hall gallery, and one of the watch follows him in (5735); there he blows his whistle and finishes (6221): the report names the gallery, which goes to 3, one above the town's highest (the street's 2), and level 3's row (a guard and the armoured guard) walks in there by its courtyard door on that tick. The street stays at 2. Controls (watched to fail): no gallery dispatch file (he reports home: the street goes to 3), and the raise without the town (the gallery goes to 1).",
+  "proves": "The escalating guard response, push 2 (one town-wide level; the row comes to the room the report names; the gallery climbs to the top): in the real castle street the bell and the guard's whistle bring the street's alert to 2; the brawler walks out east into the courtyard and on through its gate (held open by two heavy crates on its plates, as any two bodies would) into the Hall gallery, and one of the watch follows him in (5909); there he blows his whistle and finishes (6461): the report names the gallery, which goes to 3, one above the town's highest (the street's 2), and level 3's row walks in by the gallery's courtyard door on that tick; two more finished whistles there make it 4 (7213, its row on that tick) and 5 (7230: one of level 3's row stood down for it, level 5's row the next tick). The street stays at 2; the gallery never holds more than its 6. Controls (watched to fail): no gallery dispatch file (he reports home: the street goes to 3), and the raise without the town (the gallery goes to 1).",
   "room": "castle-street",
   "placements": true,
   "players": [
@@ -155,176 +155,480 @@
     },
     {
       "player": "a",
-      "from": 4180,
-      "to": 4210,
+      "from": 4160,
+      "to": 4190,
       "x": 1
+    },
+    {
+      "player": "a",
+      "from": 4250,
+      "to": 4280,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 4340,
+      "to": 4370,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 4430,
+      "to": 4460,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 4520,
+      "to": 4550,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 4610,
+      "to": 4640,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 4700,
+      "to": 4730,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 4790,
+      "to": 4820,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 4880,
+      "to": 4910,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 4970,
+      "to": 5000,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 5060,
+      "to": 5090,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 5150,
+      "to": 5180,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 5240,
+      "to": 5270,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 5330,
+      "to": 5360,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 5420,
+      "to": 5450,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 5510,
+      "to": 5540,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 5600,
+      "to": 5630,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 5690,
+      "to": 5720,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 5780,
+      "to": 5810,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 5870,
+      "to": 5900,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 4160,
+      "to": 4174,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 4200,
+      "to": 4214,
+      "hold": [
+        "jump"
+      ]
     },
     {
       "player": "a",
       "from": 4240,
-      "to": 4270,
-      "x": 1
+      "to": 4254,
+      "hold": [
+        "jump"
+      ]
     },
     {
       "player": "a",
-      "from": 4300,
-      "to": 4330,
-      "x": 1
+      "from": 4280,
+      "to": 4294,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 4320,
+      "to": 4334,
+      "hold": [
+        "jump"
+      ]
     },
     {
       "player": "a",
       "from": 4360,
-      "to": 4390,
-      "x": 1
+      "to": 4374,
+      "hold": [
+        "jump"
+      ]
     },
     {
       "player": "a",
-      "from": 4420,
-      "to": 4450,
-      "x": 1
+      "from": 4400,
+      "to": 4414,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 4440,
+      "to": 4454,
+      "hold": [
+        "jump"
+      ]
     },
     {
       "player": "a",
       "from": 4480,
-      "to": 4510,
-      "x": 1
+      "to": 4494,
+      "hold": [
+        "jump"
+      ]
     },
     {
       "player": "a",
-      "from": 4540,
-      "to": 4570,
-      "x": 1
+      "from": 4520,
+      "to": 4534,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 4560,
+      "to": 4574,
+      "hold": [
+        "jump"
+      ]
     },
     {
       "player": "a",
       "from": 4600,
-      "to": 4630,
-      "x": 1
+      "to": 4614,
+      "hold": [
+        "jump"
+      ]
     },
     {
       "player": "a",
-      "from": 4660,
-      "to": 4690,
-      "x": 1
+      "from": 4640,
+      "to": 4654,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 4680,
+      "to": 4694,
+      "hold": [
+        "jump"
+      ]
     },
     {
       "player": "a",
       "from": 4720,
-      "to": 4750,
-      "x": 1
+      "to": 4734,
+      "hold": [
+        "jump"
+      ]
     },
     {
       "player": "a",
-      "from": 4780,
-      "to": 4810,
-      "x": 1
+      "from": 4760,
+      "to": 4774,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 4800,
+      "to": 4814,
+      "hold": [
+        "jump"
+      ]
     },
     {
       "player": "a",
       "from": 4840,
-      "to": 4870,
-      "x": 1
+      "to": 4854,
+      "hold": [
+        "jump"
+      ]
     },
     {
       "player": "a",
-      "from": 4900,
-      "to": 4930,
-      "x": 1
+      "from": 4880,
+      "to": 4894,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 4920,
+      "to": 4934,
+      "hold": [
+        "jump"
+      ]
     },
     {
       "player": "a",
       "from": 4960,
-      "to": 4990,
-      "x": 1
+      "to": 4974,
+      "hold": [
+        "jump"
+      ]
     },
     {
       "player": "a",
-      "from": 5020,
-      "to": 5050,
-      "x": 1
+      "from": 5000,
+      "to": 5014,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 5040,
+      "to": 5054,
+      "hold": [
+        "jump"
+      ]
     },
     {
       "player": "a",
       "from": 5080,
-      "to": 5110,
-      "x": 1
+      "to": 5094,
+      "hold": [
+        "jump"
+      ]
     },
     {
       "player": "a",
-      "from": 5140,
-      "to": 5170,
-      "x": 1
+      "from": 5120,
+      "to": 5134,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 5160,
+      "to": 5174,
+      "hold": [
+        "jump"
+      ]
     },
     {
       "player": "a",
       "from": 5200,
-      "to": 5230,
-      "x": 1
+      "to": 5214,
+      "hold": [
+        "jump"
+      ]
     },
     {
       "player": "a",
-      "from": 5260,
-      "to": 5290,
-      "x": 1
+      "from": 5240,
+      "to": 5254,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 5280,
+      "to": 5294,
+      "hold": [
+        "jump"
+      ]
     },
     {
       "player": "a",
       "from": 5320,
-      "to": 5350,
-      "x": 1
+      "to": 5334,
+      "hold": [
+        "jump"
+      ]
     },
     {
       "player": "a",
-      "from": 5380,
-      "to": 5410,
-      "x": 1
+      "from": 5360,
+      "to": 5374,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 5400,
+      "to": 5414,
+      "hold": [
+        "jump"
+      ]
     },
     {
       "player": "a",
       "from": 5440,
-      "to": 5470,
-      "x": 1
+      "to": 5454,
+      "hold": [
+        "jump"
+      ]
     },
     {
       "player": "a",
-      "from": 5500,
-      "to": 5530,
-      "x": 1
+      "from": 5480,
+      "to": 5494,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 5520,
+      "to": 5534,
+      "hold": [
+        "jump"
+      ]
     },
     {
       "player": "a",
       "from": 5560,
-      "to": 5590,
-      "x": 1
+      "to": 5574,
+      "hold": [
+        "jump"
+      ]
     },
     {
       "player": "a",
-      "from": 5620,
-      "to": 5650,
-      "x": 1
+      "from": 5600,
+      "to": 5614,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 5640,
+      "to": 5654,
+      "hold": [
+        "jump"
+      ]
     },
     {
       "player": "a",
       "from": 5680,
-      "to": 5710,
-      "x": 1
+      "to": 5694,
+      "hold": [
+        "jump"
+      ]
     },
     {
       "player": "a",
-      "from": 5740,
-      "to": 5770,
-      "x": 1
+      "from": 5720,
+      "to": 5734,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 5760,
+      "to": 5774,
+      "hold": [
+        "jump"
+      ]
     },
     {
       "player": "a",
       "from": 5800,
-      "to": 5830,
-      "x": 1
+      "to": 5814,
+      "hold": [
+        "jump"
+      ]
     },
     {
       "player": "a",
-      "from": 5860,
-      "to": 5890,
+      "from": 5840,
+      "to": 5854,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 5880,
+      "to": 5894,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 5890,
+      "to": 5950,
       "x": 1
     },
     {
@@ -343,14 +647,14 @@
     },
     {
       "player": "a",
-      "from": 6060,
-      "to": 6062,
-      "x": 1
+      "from": 6100,
+      "to": 6102,
+      "x": -1
     },
     {
       "player": "a",
-      "from": 6062,
-      "to": 6066,
+      "from": 6102,
+      "to": 6106,
       "hold": [
         "attack"
       ]
@@ -371,14 +675,14 @@
     },
     {
       "player": "a",
-      "from": 6300,
-      "to": 6302,
-      "x": 1
+      "from": 6340,
+      "to": 6342,
+      "x": -1
     },
     {
       "player": "a",
-      "from": 6302,
-      "to": 6306,
+      "from": 6342,
+      "to": 6346,
       "hold": [
         "attack"
       ]
@@ -399,14 +703,14 @@
     },
     {
       "player": "a",
-      "from": 6540,
-      "to": 6542,
-      "x": 1
+      "from": 6580,
+      "to": 6582,
+      "x": -1
     },
     {
       "player": "a",
-      "from": 6542,
-      "to": 6546,
+      "from": 6582,
+      "to": 6586,
       "hold": [
         "attack"
       ]
@@ -427,14 +731,14 @@
     },
     {
       "player": "a",
-      "from": 6780,
-      "to": 6782,
-      "x": 1
+      "from": 6820,
+      "to": 6822,
+      "x": -1
     },
     {
       "player": "a",
-      "from": 6782,
-      "to": 6786,
+      "from": 6822,
+      "to": 6826,
       "hold": [
         "attack"
       ]
@@ -455,14 +759,14 @@
     },
     {
       "player": "a",
-      "from": 7020,
-      "to": 7022,
-      "x": 1
+      "from": 7060,
+      "to": 7062,
+      "x": -1
     },
     {
       "player": "a",
-      "from": 7022,
-      "to": 7026,
+      "from": 7062,
+      "to": 7066,
       "hold": [
         "attack"
       ]
@@ -483,14 +787,14 @@
     },
     {
       "player": "a",
-      "from": 7260,
-      "to": 7262,
-      "x": 1
+      "from": 7300,
+      "to": 7302,
+      "x": -1
     },
     {
       "player": "a",
-      "from": 7262,
-      "to": 7266,
+      "from": 7302,
+      "to": 7306,
       "hold": [
         "attack"
       ]
@@ -511,54 +815,76 @@
     },
     {
       "player": "a",
-      "from": 7500,
-      "to": 7502,
-      "x": 1
+      "from": 7540,
+      "to": 7542,
+      "x": -1
     },
     {
       "player": "a",
-      "from": 7502,
-      "to": 7506,
+      "from": 7542,
+      "to": 7546,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 7680,
+      "to": 7682,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 7682,
+      "to": 7686,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 7780,
+      "to": 7782,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 7782,
+      "to": 7786,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 7920,
+      "to": 7922,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 7922,
+      "to": 7926,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 8020,
+      "to": 8022,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 8022,
+      "to": 8026,
       "hold": [
         "attack"
       ]
     }
   ],
-  "ticks": 6400,
-  "tiles": [
-    {
-      "room": "courtyard",
-      "tile": [
-        25,
-        4
-      ],
-      "is": "empty"
-    },
-    {
-      "room": "courtyard",
-      "tile": [
-        25,
-        5
-      ],
-      "is": "empty"
-    },
-    {
-      "room": "courtyard",
-      "tile": [
-        25,
-        6
-      ],
-      "is": "empty"
-    },
-    {
-      "room": "courtyard",
-      "tile": [
-        25,
-        7
-      ],
-      "is": "empty"
-    }
-  ],
+  "ticks": 8200,
   "expect": [
     {
       "fact": "event-where",
@@ -569,8 +895,8 @@
         "fromDoor": "to-gallery"
       },
       "between": [
-        5500,
-        5700
+        5800,
+        5950
       ],
       "count": [
         1,
@@ -581,55 +907,41 @@
       "fact": "event-where",
       "event": "call-completed",
       "where": {
-        "area": "hall-gallery"
+        "area": "hall-gallery",
+        "by": "castle-street:help0:1"
       },
       "between": [
-        6100,
-        6300
+        6400,
+        6500
       ],
       "count": [
         1,
         1
-      ]
-    },
-    {
-      "fact": "event-where",
-      "event": "call-completed",
-      "where": {
-        "area": "castle-street"
-      },
-      "between": [
-        3000,
-        6400
-      ],
-      "count": [
-        0,
-        0
       ]
     },
     {
       "fact": "alert",
       "area": "hall-gallery",
-      "at": 6220,
+      "at": 6460,
       "is": 0
     },
     {
       "fact": "alert",
       "area": "hall-gallery",
-      "at": 6222,
+      "at": 6462,
       "is": 3
     },
     {
       "fact": "alert",
       "area": "hall-gallery",
-      "at": 6222,
+      "at": 6462,
       "is": 3,
       "shown": true
     },
     {
       "fact": "alert",
       "area": "castle-street",
-      "at": 6222,
+      "at": 6462,
       "is": 2
     },
     {
@@ -640,8 +952,8 @@
         "row": 2
       },
       "between": [
-        6221,
-        6221
+        6461,
+        6461
       ],
       "count": [
         1,
@@ -649,13 +961,100 @@
       ]
     },
     {
+      "fact": "alert",
+      "area": "hall-gallery",
+      "at": 7220,
+      "is": 4
+    },
+    {
+      "fact": "event-where",
+      "event": "dispatch-arrived",
+      "where": {
+        "area": "hall-gallery",
+        "row": 3
+      },
+      "between": [
+        7213,
+        7213
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "alert",
+      "area": "hall-gallery",
+      "at": 7240,
+      "is": 5
+    },
+    {
+      "fact": "event-where",
+      "event": "dispatch-relieved",
+      "where": {
+        "area": "hall-gallery"
+      },
+      "between": [
+        7230,
+        7230
+      ],
+      "count": [
+        1,
+        9
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "dispatch-arrived",
+      "where": {
+        "area": "hall-gallery",
+        "row": 4
+      },
+      "between": [
+        7230,
+        7300
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "alert",
+      "area": "castle-street",
+      "at": 7240,
+      "is": 2
+    },
+    {
       "fact": "people",
       "room": "hall-gallery",
-      "arrivals": true,
-      "at": 6300,
+      "between": [
+        0,
+        8200
+      ],
       "count": [
-        3,
-        3
+        0,
+        6
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "id": "plate-weight-west",
+      "character": "crate-heavy",
+      "room": "courtyard",
+      "tile": [
+        16,
+        7
+      ]
+    },
+    {
+      "id": "plate-weight-east",
+      "character": "crate-heavy",
+      "room": "courtyard",
+      "tile": [
+        22,
+        7
       ]
     }
   ]
