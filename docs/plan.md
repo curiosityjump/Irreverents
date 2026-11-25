@@ -290,7 +290,7 @@ Full text: `docs/plan/step-3.md`
 
 ## Step 4 — People who react
 
-**Status: open, claimed by orchestrator session_017WiGzHY5UZsWTLCH8cLm8M (builders: session_017WiGzHTLU6WYfsfoEFK4si), 2026-11-23.** (Reopened 2026-11-23 19:40 UTC by the core-loops re-plan: its next slice is the town's tiers, brief `handoff-prompts/loop-town-tiers.md`, `docs/plan/core-loops.md` section 5. A fresh lead starts from the step file's handoff notes.)
+**Status: open, claimed by orchestrator session_017WiGzJYBCYJ85Bj95B7ZLw (builders: session_017WiGzHTLU6WYfsfoEFK4si), 2026-11-23.** (Reopened 2026-11-23 19:40 UTC by the core-loops re-plan: its next slice is the town's tiers, brief `handoff-prompts/loop-town-tiers.md`, `docs/plan/core-loops.md` section 5. A fresh lead starts from the step file's handoff notes.)
 
 Full text: `docs/plan/step-4.md`
 
@@ -314,7 +314,7 @@ Full text: `docs/plan/step-7.md`
 
 ## Step 8 — What you see and hear
 
-**Status: open, claimed by orchestrator session_017WiGzHY5UZsWTLCH8cLm8M (builders: heroes session_017WiGzEv3ESfjNHm7u3Tk8v, cast session_017WiGzFHN8SWsy5GnNkweMt, ground session_017WiGzHwFkUGGSmDqqnoSDY, props session_017WiGzJxBqVvizcghgHk5NG, actors session_017WiGzFsVDWWZc7nVHbv82A), 2026-11-23.** (Round 3's five lanes sent 17:06 UTC. Put first by the owner at 11:11 UTC; re-claimed 15:50 UTC at pickup.)
+**Status: open, claimed by orchestrator session_017WiGzJYBCYJ85Bj95B7ZLw (builders: heroes session_017WiGzEv3ESfjNHm7u3Tk8v, cast session_017WiGzFHN8SWsy5GnNkweMt, ground session_017WiGzHwFkUGGSmDqqnoSDY, props session_017WiGzJxBqVvizcghgHk5NG, actors session_017WiGzFsVDWWZc7nVHbv82A), 2026-11-23.** (Round 3's five lanes sent 17:06 UTC. Put first by the owner at 11:11 UTC; re-claimed 15:50 UTC at pickup.)
 
 Full text: `docs/plan/step-8.md`
 
@@ -387,13 +387,13 @@ Mechanisms: `docs/mechanisms/rooms-and-doors.md` (the map) and
 
 ## Step 17 — A start screen, and saved games a friend can join
 
-**Status: open, claimed by orchestrator session_017WiGzHY5UZsWTLCH8cLm8M (builders: session_017WiGzGw7XaQ6tZNddFaa8s), 2026-11-23.** (Opened 2026-11-23 16:00 UTC from the owner's words of ~15:10 UTC, outbox entry at 4294051.)
+**Status: open, claimed by orchestrator session_017WiGzJYBCYJ85Bj95B7ZLw (builders: session_017WiGzGw7XaQ6tZNddFaa8s), 2026-11-23.** (Opened 2026-11-23 16:00 UTC from the owner's words of ~15:10 UTC, outbox entry at 4294051.)
 
 Full text: `docs/plan/step-17.md`
 
 ## Step 18 — Enemies and provoked good guys fight
 
-**Status: open, claimed by orchestrator session_017WiGzHY5UZsWTLCH8cLm8M (builders: session_017WiGzHwmFZe9AdG3KMHsa4), 2026-11-23.** (Opened 17:35 UTC from the owner's words of ~16:05 and ~16:20 UTC; designed by a workflow from the library and the code, with two adversarial checks.)
+**Status: open, claimed by orchestrator session_017WiGzJYBCYJ85Bj95B7ZLw (builders: session_017WiGzHwmFZe9AdG3KMHsa4), 2026-11-23.** (Opened 17:35 UTC from the owner's words of ~16:05 and ~16:20 UTC; designed by a workflow from the library and the code, with two adversarial checks.)
 
 Full text: `docs/plan/step-18.md`
 
@@ -405,7 +405,7 @@ Full text: `docs/plan/step-19.md`
 
 ## Step 20 — A machine to steal, and things to crash it through
 
-**Status: open, claimed by orchestrator session_017WiGzHY5UZsWTLCH8cLm8M (builders: B session_017WiGzGehKBFBBGaoRu2awP), 2026-11-23.** (Briefs `handoff-prompts/loop-vehicles-a.md`, the machine in a test room, done and reviewed at 082380b (three pushes, brief deleted, builders archived); `loop-vehicles-b.md`, the camp run, released and started 23:19 UTC.)
+**Status: open, claimed by orchestrator session_017WiGzJYBCYJ85Bj95B7ZLw (builders: B session_017WiGzGehKBFBBGaoRu2awP), 2026-11-23.** (Briefs `handoff-prompts/loop-vehicles-a.md`, the machine in a test room, done and reviewed at 082380b (three pushes, brief deleted, builders archived); `loop-vehicles-b.md`, the camp run, released and started 23:19 UTC.)
 
 Full text: `docs/plan/step-20.md`
 
@@ -425,12 +425,12 @@ Full text: `docs/plan/step-23.md`
 
 ## Step 24 — An enemy who fights from range
 
-**Status: open, claimed by orchestrator session_017WiGzHY5UZsWTLCH8cLm8M (builders: named in the step file's "Briefs"), 2026-11-24.** (Opened 06:45 UTC from `docs/vision-gaps.md` row 1, the top gap nothing covered: no ranged kind, nobody hostile in the castle's rooms. Slice 1, `handoff-prompts/ranged-enemy.md`: one thrower as data on the Hall gallery's balcony, a telegraphed arc, his shot yours to throw back. Drafted by a subagent from the library and the code; nothing in it was run.)
+**Status: open, claimed by orchestrator session_017WiGzJYBCYJ85Bj95B7ZLw (builders: named in the step file's "Briefs"), 2026-11-24.** (Opened 06:45 UTC from `docs/vision-gaps.md` row 1, the top gap nothing covered: no ranged kind, nobody hostile in the castle's rooms. Slice 1, `handoff-prompts/ranged-enemy.md`: one thrower as data on the Hall gallery's balcony, a telegraphed arc, his shot yours to throw back. Drafted by a subagent from the library and the code; nothing in it was run.)
 
 Full text: `docs/plan/step-24.md`
 
 ## Step 25 — The suplex
 
-**Status: open, claimed by orchestrator session_017WiGzHY5UZsWTLCH8cLm8M (builders: named in the step file's "Briefs"), 2026-11-24.** (Opened 16:25 UTC from `docs/vision-gaps.md` row 6: no suplex. Carry a body, Use says SUPLEX; brief `handoff-prompts/suplex.md`.)
+**Status: open, claimed by orchestrator session_017WiGzJYBCYJ85Bj95B7ZLw (builders: named in the step file's "Briefs"), 2026-11-24.** (Opened 16:25 UTC from `docs/vision-gaps.md` row 6: no suplex. Carry a body, Use says SUPLEX; brief `handoff-prompts/suplex.md`.)
 
 Full text: `docs/plan/step-25.md`
