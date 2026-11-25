@@ -1051,8 +1051,23 @@ snapshots off the socket each second (hero, lookout, fighter 1, the post's `c.si
     sees him and calls (1511-1690), and he walks two tiles east during the call (1600-1630,
     x 540, so 41 is within `sendNoneNearer` and skipped): row at x 97 and x 801, the fence
     broken by `w1:1` at 1764, his hit after. Control (no `breakThrough`): expect[4], [5] fail.
-- **Not verified:** the e2e (`row-both-sides` and the camp facts) on this push; the ruling
-  changes the camp's fight the phone sees, so its next full runs say.
+- Push 1 live at 7d7f15f; one full e2e on its tree: 184 of 184.
+- **`clash-street` (order 3): the check's.** Measured with the fact alone (a scratch runner
+  calling `clashFacts` against a local server): the brawl's knocks come at fixed times after
+  the guard's blow clips the villain (the guard's ~2 s later, the villain's ~4 s and ~6.5 s),
+  and the guard, answering the call, keeps coming at the hero, so walking off at a time set
+  by the old 300 ms polling put those knocks 61-77 px from the hero, across the 64 px line.
+  Under load (three CPU hogs beside it) 3 of 4 red; alone 3 of 3 green. Walking off on the
+  frame the guard reached the hero left **no brawl at all** (0 knocks, 4 of 4): the hero must
+  still be standing in the villain when the guard swings. Fix: stand in him until the page
+  draws the villain knocked (the clip; up to 3 s), then walk off. Then: alone 4 of 4, under
+  load 4 of 4 green; the guard's knock 107-111 px off, the villain's 109-114 px. Also: knocks
+  count only drawn inside the view (what a player sees), each shot waits until both are drawn
+  in frame and the fact says whether they were (both true in all 8). Control (`answers`
+  emptied, scratch build): red, 0 guard knocks. Shots re-taken: guard and villain in frame at
+  both sizes (my look, not a blind one: sideways the villain mid-swing at the guard, upright
+  stun marks between them; the hero half behind the curtain stall, four tiles off).
+  Weakest: knocks in all is sometimes exactly 4, the floor (1 guard + 3 villain).
 
 ## A page misses what happened (brief `handoff-prompts/page-misses-what-happened.md`)
 

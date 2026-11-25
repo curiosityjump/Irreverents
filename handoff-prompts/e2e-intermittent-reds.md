@@ -5,7 +5,7 @@
 **Landed so far (fourth builder `session_017WiGzJPGBR6ALNnE8BaE3G`):** order (1), the lookout
 ruling, pushed whole (the held patch applied, then removed; the four owed scenarios re-proved
 with new inputs, each claim kept and its control watched to fail; how each in
-`docs/plan/step-5.md`, the fourth builder's section). Next: (3) `clash-street`.
+`docs/plan/step-5.md`, the fourth builder's section), live at 7d7f15f. Order (3) `clash-street`: the check's (it walked off at a polled time; now walks off once the villain is drawn clipped, counts only on-screen knocks, shots re-taken with both in frame), pushed next. Next: (4) `beaten-gone`.
 **Landed so far (third builder `session_017WiGzJ3ASmAcF3W8txtRbK`, stopped at its budget):**
 order (2) at 22c832b, live 09:37 UTC: Grab takes a person (toughness > 0) before a prop,
 nearest within each (`grab-person-before-prop`, control watched to fail); the e2e

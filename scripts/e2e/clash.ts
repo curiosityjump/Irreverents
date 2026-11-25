@@ -3,8 +3,8 @@
 // check:live until it has been green ten runs). A phone-sized page, by touch
 // alone, walks into the castle street, takes goods from the shop until the
 // shopkeeper's call brings the street guard, stands in the villain (who robs
-// at columns 17-21) until the guard is on it, then walks west and stands
-// clear: the page draws the guard and the villain each knocked (a jump of
+// at columns 17-21) until the guard is on it and the page draws the villain
+// knocked by his blow, then walks west and stands clear: the page draws the guard and the villain each knocked (a jump of
 // their drawn x) at least twice within a few seconds of each other while its
 // own character stands at least four tiles from them, having walked away
 // (docs/mechanisms/npc-response.md, "A person answers a blow ahead of a hero").
@@ -41,6 +41,8 @@ const CLEAR_X = 128;
 const AWAY = 64;
 /** A knock: a body's drawn x moves this much within 300 ms (people walk 12 px in 300 ms; a guard's blow carries a person ~100 px). */
 const JUMP = 24;
+/** A knock counts only while the body is drawn inside the view, this far in from its left edge (the drawn x is the left edge). */
+const IN_VIEW_PAD = 4;
 
 /** Holds the stick one way until the page draws its character in `goal` (copied from scripts/e2e/outpost.ts, Step 12's). */
 async function walkInto(ph: Phone, dir: number, goal: string, ms = 20000): Promise<boolean> {
@@ -71,6 +73,27 @@ const leftOver = (ph: Phone, thing: string): Promise<number> =>
 /** Where the page draws a body (its left edge), or null. */
 const xOf = (ph: Phone, id: string): Promise<number | null> =>
   ph.page.evaluate((i: string) => (window as any).irreverents.drawn.entities.find((e: any) => e.id === i)?.x ?? null, id);
+
+/** Waits until the page draws both the guard and the villain inside its view; true if it did within `ms`. */
+async function bothInView(ph: Phone, ms: number): Promise<boolean> {
+  try {
+    await ph.page.waitForFunction(
+      ([ids, pad]: [string[], number]) => {
+        const irr = (window as any).irreverents;
+        const d = irr.drawn;
+        return ids.every((i) => {
+          const x = d.entities.find((e: any) => e.id === i)?.x;
+          return typeof x === 'number' && x >= d.camera.x + pad && x <= d.camera.x + irr.view.w - pad;
+        });
+      },
+      [[GUARD, VILLAIN], IN_VIEW_PAD] as [string[], number],
+      { polling: 'raf', timeout: ms },
+    );
+    return true;
+  } catch {
+    return false;
+  }
+}
 
 export async function clashFacts(kit: Kit & { shots: string }): Promise<void> {
   const { fact } = kit;
@@ -111,6 +134,33 @@ export async function clashFacts(kit: Kit & { shots: string }): Promise<void> {
       met = gx !== null && Math.abs(gx - mx) <= 24;
       if (!met) await sleep(300);
     }
+    // Then keep standing in him until the page draws the villain knocked (the guard's blow at the hero clipping
+    // him, which starts the brawl), up to 3 s. INTENT (e2e-intermittent-reds brief, order 3): walking off sooner
+    // than that blow leaves no brawl at all (measured: 0 knocks drawn in 4 of 4 runs that walked off the frame the
+    // guard was drawn on the hero); walking off at a fixed time before it left the brawl's knocks at 61-77 px from
+    // the hero, across the fact's four tiles.
+    let clipped = false;
+    if (met) {
+      try {
+        await ph.page.waitForFunction(
+          ([id, jump]: [string, number]) => {
+            const w = window as any;
+            const d = w.irreverents.drawn;
+            const x = d.entities.find((e: any) => e.id === id)?.x;
+            const now = performance.now();
+            const h: { t: number; x: number }[] = (w.__clashVillain ??= []);
+            if (typeof x === 'number') h.push({ t: now, x });
+            while (h.length && h[0]!.t < now - 300) h.shift();
+            return h.length > 1 && Math.abs(h[h.length - 1]!.x - h[0]!.x) >= jump;
+          },
+          [VILLAIN, JUMP] as [string, number],
+          { polling: 'raf', timeout: 3000 },
+        );
+        clipped = true;
+      } catch {
+        // the fact says so
+      }
+    }
     const metAt = Date.now() - t0;
 
     // Now record, every frame for 20 s, where the page draws the hero, the guard and the villain, while the
@@ -119,12 +169,13 @@ export async function clashFacts(kit: Kit & { shots: string }): Promise<void> {
       ([ids, dur]: [string[], number]) =>
         new Promise<any>((resolve) => {
           const start = performance.now();
-          const rows: { t: number; me: number; room: string; x: Record<string, number | null> }[] = [];
+          const rows: { t: number; me: number; room: string; x: Record<string, number | null>; cx: number; vw: number }[] = [];
           const tick = (): void => {
-            const d = (window as any).irreverents.drawn;
+            const irr = (window as any).irreverents;
+            const d = irr.drawn;
             const x: Record<string, number | null> = {};
             for (const id of ids) x[id] = d.entities.find((e: any) => e.id === id)?.x ?? null;
-            rows.push({ t: performance.now() - start, me: d.me.x, room: d.room, x });
+            rows.push({ t: performance.now() - start, me: d.me.x, room: d.room, x, cx: d.camera?.x ?? 0, vw: irr.view?.w ?? 0 });
             if (performance.now() - start > dur) return resolve(rows);
             requestAnimationFrame(tick);
           };
@@ -132,6 +183,7 @@ export async function clashFacts(kit: Kit & { shots: string }): Promise<void> {
         }),
       [[GUARD, VILLAIN], 20000],
     );
+    const shotsInFrame: string[] = [];
     if (met) {
       const p = await pointOn(ph, '[data-stick]', 0.25);
       if (p) {
@@ -144,17 +196,19 @@ export async function clashFacts(kit: Kit & { shots: string }): Promise<void> {
         await ph.cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
       }
       // The shots, while the brawl goes on and the hero has walked off (the e2e phone is 750x340).
+      // Each shot waits (up to 4 s) until the page draws both the guard and the villain inside its view, and the
+      // fact says whether each shot got them (shotsInFrame).
       fs.mkdirSync(kit.shots, { recursive: true });
       await sleep(500);
-      await ph.page.setViewportSize({ width: 844, height: 390 });
-      await sleep(300);
-      await ph.page.screenshot({ path: path.join(kit.shots, 'clash-street-844x390.png') });
-      await ph.page.setViewportSize({ width: 390, height: 664 });
-      await sleep(300);
-      await ph.page.screenshot({ path: path.join(kit.shots, 'clash-street-390x664.png') });
+      for (const [w, h] of [[844, 390], [390, 664]] as const) {
+        await ph.page.setViewportSize({ width: w, height: h });
+        await sleep(300);
+        shotsInFrame.push(`${w}x${h} ${await bothInView(ph, 4000)}`);
+        await ph.page.screenshot({ path: path.join(kit.shots, `clash-street-${w}x${h}.png`) });
+      }
       await ph.page.setViewportSize({ width: 750, height: 340 });
     }
-    const rows = (await recording) as { t: number; me: number; room: string; x: Record<string, number | null> }[];
+    const rows = (await recording) as { t: number; me: number; room: string; x: Record<string, number | null>; cx: number; vw: number }[];
 
     // A knock: the body's drawn x moved JUMP px or more within 300 ms, in the street; one per 600 ms.
     // It counts only while the hero is drawn AWAY px or more from that body.
@@ -165,6 +219,7 @@ export async function clashFacts(kit: Kit & { shots: string }): Promise<void> {
         const r = rows[i]!;
         const x = r.x[id];
         if (x === null || x === undefined || r.room !== 'castle-street' || r.t - last < 600) continue;
+        if (r.vw > 0 && (x < r.cx + IN_VIEW_PAD || x > r.cx + r.vw - IN_VIEW_PAD)) continue; // off the screen: no player saw it
         for (let j = i - 1; j >= 0 && rows[j]!.t >= r.t - 300; j--) {
           const y = rows[j]!.x[id];
           if (y !== null && y !== undefined && Math.abs(x - y) >= JUMP) {
@@ -189,7 +244,7 @@ export async function clashFacts(kit: Kit & { shots: string }): Promise<void> {
     fact(
       'clash-street',
       inStreet && met && gAway.length >= 1 && vAway.length >= 2 && g.length + v.length >= 4 && near && walkedOff,
-      `by touch, a phone's ${kind} walked into the castle street (${inStreet}), took ${taken} good(s) (the guard drawn coming: ${guardComing}), stood in the villain until the guard was on it (${met}, after ${(metAt / 1000).toFixed(1)} s), then walked west from x ${Math.round(first?.me ?? NaN)} to ${Math.round(lastRow?.me ?? NaN)} (walked off: ${walkedOff}); ` +
+      `by touch, a phone's ${kind} walked into the castle street (${inStreet}), took ${taken} good(s) (the guard drawn coming: ${guardComing}), stood in the villain until the guard was on it (${met}, after ${(metAt / 1000).toFixed(1)} s) and the villain was drawn knocked by him (${clipped}), then walked west from x ${Math.round(first?.me ?? NaN)} to ${Math.round(lastRow?.me ?? NaN)} (walked off: ${walkedOff}); both drawn in the shots' frames: ${shotsInFrame.join(', ') || 'no shots'}; knocks count only drawn on screen; ` +
         `in 20 s the page drew the guard knocked ${g.length} time(s) (${gAway.length} with the hero ${AWAY} px or more away; at ${g.map((k) => `${(k.at / 1000).toFixed(1)} s, ${k.away} px off`).join('; ') || 'never'}) and the villain ${v.length} (${vAway.length} away; at ${v.map((k) => `${(k.at / 1000).toFixed(1)} s, ${k.away} px off`).join('; ') || 'never'}); expected the guard 1 or more and the villain 2 or more with the hero away, 4 or more in all, a guard's and a villain's within 4 s of each other (${near})`,
     );
   } finally {
