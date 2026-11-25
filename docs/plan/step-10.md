@@ -120,3 +120,7 @@ confusing to script, which often means it is slow or confusing to play.
 ## Carried here by the orchestrator, 2026-11-24 (from the Step 16 lead, 18:39 and 21:15 UTC on 2026-11-23)
 
 - The first ten minutes gain a beat: the courtyard doorway (cols 17-19) leads to `quarry-road`, crossed by touch (e2e fact `quarry-road-cross`); there the players meet the road's fighters and the toll. Not built into this step's scripted walk yet.
+
+## Flag carried from `docs/for-the-orchestrator.md` (2026-11-25)
+
+**Flag:** the walk to the forest is a beat Step 10 can use. From the courtyard, the forest's doorway (columns 8-10 of the floor, left of the quarry's) leads up into `forest-road` and on to `forest-trail`, a second stage (`bramble-forest`) with its own hearts, game over at its entrance and stars. A phone does it by touch alone (`npm run e2e`, facts `forest-in`, `forest-road-cross`; `scripts/e2e/forest.ts`). Shots of the road, the trail and its three secrets at 844x390, 750x340 and 390x664 are in `docs/plan/step-15-shots/`. (From Step 15's third builder, 2026-11-24.)

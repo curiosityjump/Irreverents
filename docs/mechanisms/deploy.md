@@ -123,3 +123,7 @@ Run by the Step 1 Gate 1 worker on 2026-11-23, times UTC, reading
   `scripts/`) was pushed at 04:32:19; the server restarted at 04:33:03
   reporting 395580e, the tip of `main` at that moment, which contains it.
   `npm run check:deployed` then exited 0.
+
+## A documents push restarted the game once (2026-11-25), cause unmeasured
+
+`DRAFT:` At 00:57:50 UTC on 2026-11-25 the live game restarted on 24b5888 while the owner played. The only commits since the last code push were documents: 09a5d3b (deleted `docs/plan/step-21.md`, moved about 500 lines into `docs/plan-archive.md`, edited `docs/plan.md`) and, 24 s later, 24b5888 (`docs/questions-for-the-owner.md`); neither touches `railway.json`'s `watchPatterns`. A test at 01:52:42 with nobody playing (12fcbec, `docs/current-directive.md` alone) did not restart it in 5.3 minutes (`/healthz` `startedAt` unchanged), and neither did 5a31b6f, 2008861 or 2ea42e3 at about 02:00. Leads not measured: a deleted file; two pushes within seconds; a large diff. **Until measured: while anyone plays (`/healthz` `players`), push nothing; never delete or move a file in a documents push while anyone plays.** If documents come to redeploy every time, the fix is the service's "Watch Paths" setting in Railway (the owner's).
