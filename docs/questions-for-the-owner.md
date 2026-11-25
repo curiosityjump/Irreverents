@@ -16,7 +16,7 @@ the record; `docs/answers-archive.md` holds receipts up to 2026-11-23).
   orchestrator; Vision Partner's doorbell goes only here.
 - **Questions per message the owner wants:** 3 (the default; record the
   owner's own number here, quoted, if they set one).
-- **Next id:** Q-019
+- **Next id:** Q-020
 
 ## How to feed this file
 
@@ -75,7 +75,16 @@ entries group them; they are not entries.
 
 ---
 
-## Open (4)
+## Open (5)
+
+### Q-019 · Guard alarm levels: how many, and what each one sends?
+- **Asked by:** orchestrator, `session_017WiGzHY5UZsWTLCH8cLm8M`, 2026-11-25 ~00:10 UTC
+- **Question:** You said "I want the escalating guard response implemented now", and it is being built. Your design (doc 26) leaves open how many levels there are and what each sends. Being built now, across the whole castle town: five levels, each one shown as pips and a banner. **1** the nearby guard comes; **2** two guards, one from each side; **3** three, with an armoured guard; **4** two armoured guards plus a guard driving the patrol trike in (which you can steal); **5** all-out, more keep coming while anyone can still see you. Each completed call (bell, whistle, someone running to a guard) raises it one level. Keep that, or change it (fewer or more levels, different arrivals)?
+- **Unblocks:** replaces the builder's first guesses; nothing waits, every number is one setting.
+- **Recommendation:** keep the five as built; change it after you play it.
+- **Answer goes to:** `handoff-prompts/escalating-guard-response.md` "Decided", and `docs/vision.md` "NPC response"
+- **Source:** `docs/current-directive.md`, "Owed next", item 00
+- **Blocking:** no
 
 ### Q-017 · Stuck in the quarry: which hero, and where?
 - **Asked by:** orchestrator, `session_017WiGzHY5UZsWTLCH8cLm8M`, 2026-11-24 ~19:30 UTC

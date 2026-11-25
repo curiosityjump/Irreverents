@@ -232,6 +232,13 @@ orchestrator made it plan Step 18.
 screen's sides; pursuers chase beyond line of sight. Matches the library's
 scaling reinforcements on a completed signal (doc 27).
 
+**Owner, 2026-11-25 ~00:10 UTC, to the orchestrator, first-hand (relayed to Vision Partner):**
+> I want the escalating guard response implemented now
+
+*(Framing:)* the library's wanted levels (doc 26) are to be built now, not
+later. How many levels and what each sends are not settled by the owner;
+the build uses five, adding a new kind each, as a `DRAFT:` (Q-019).
+
 ### Heroes, roster, powers and co-op
 **Owner, 2026-11-22 (Drive, doc 11, D-007, D-010, D-012–D-013):**
 > Unlockable and permanently expanding roster … Only a LIMITED selection of roster members is carried/switchable during an expedition. … Online co-op is a required mode. … A SINGLE SHARED PARTY is used for cooperative play.
