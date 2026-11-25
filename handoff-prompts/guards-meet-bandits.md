@@ -7,7 +7,7 @@ read of `main` at ed7d97c (nothing was run). Read first:
 door", "The dispatch"), `docs/mechanisms/outposts.md` ("Chase and clash"),
 `docs/plan/step-4.md` ("Guards meet bandits in a real room", at its end).
 
-**Landed so far: nothing yet.**
+**Landed so far:** push 1 at d9fc807 and push 2 at 086d74e, live together at 955d496 (2026-11-25 02:27 UTC; check:deployed and check:live ok). Push 3 (the courtyard gate) not started: the builder stopped at its token budget; a fresh builder takes it from "Push 3" below. Notes: `docs/plan/step-4.md`, "Guards meet bandits, push 1" and "push 2".
 
 **Reports:** `send_message` to the session on the Orchestrator line of
 `docs/questions-for-the-owner.md`, after each push, with shot paths.
