@@ -927,3 +927,13 @@ the owner is playing and pushes are paused).**
 - **Shots:** `docs/plan/step-4-shots/clash-street-390x664.png` shows the guard and the villain together, dazed, the hero far left; `clash-street-844x390.png` shows the villain with the hero walked off, but the guard was knocked off the right edge at that moment: a weak shot, not retaken.
 - Not run: the whole e2e suite (the orchestrator's clean-worktree run covers it).
 
+## Second blind look, the escalation's level 5 and ending (orchestrator `session_017WiGzJYBCYJ85Bj95B7ZLw`, 2026-11-25 07:35 UTC)
+
+One subagent (opus), shots fetched from `origin/main` at 18bf07b, each described before its claim was read. The orchestrator did not look itself. Nothing below is fixed.
+
+- **Level 5, re-taken** (`escalation/level5-*`, 7929998's versions): mostly holds. The hero is findable mid-screen under his marker; five bars lit; the armoured guards look different from plain ones but merge into one purple mass at the left edge, the leftmost cut off; upright, most of them are off-screen and a translucent yellow glow covers the middle.
+- **The ending** (push 3): mostly without evidence. The only new shot is `escalation/calm-750x340.png`: the banner "Only the guard still looks" is readable, clear of the hero and the plate, one bar lit and four outlines. No shot shows a bar blinking, "The watch gives up the search", or the bells; none is at 844x390 or 390x664, so whether the banner fits upright is not known.
+- **Level 4, not re-taken** (`escalation/level4-*`): the first look confirmed. The trike is a fragment at the left edge and no driver can be seen; upright the hero is lost in impact bursts; stun brackets crowd his marker.
+
+Owed to the next builder here, with the unpushed patch (`docs/plan/step-4-patches/heroes-over-crowd.patch`, notes at 18bf07b, "Heroes drawn over the crowd"): the ending's shots at both phone sizes (a blink, the last banner, the bells); level 4 re-taken with the trike and its driver in frame; a way to tell the hero in a pile that is not draw order (the builder found the looked-at pile already drew him last: it was clutter).
+
