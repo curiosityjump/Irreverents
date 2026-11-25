@@ -98,6 +98,30 @@ async function intoStreet(ph: any, ms = 12000): Promise<boolean> {
   return ok;
 }
 
+/** Walks the page's own hero east (the stick held right) until no person the page draws stands within `gap` px of him across, or `ms` passes. */
+async function walkClear(ph: any, gap = 40, ms = 3000): Promise<void> {
+  const clear = (): Promise<boolean> =>
+    ph.page.evaluate((gap: number) => {
+      const d = (window as any).irreverents.drawn;
+      const me = d.entities.find((e: any) => e.mine);
+      if (!me) return true;
+      return d.entities.every((e: any) => e.mine || e.player !== null || e.mood === undefined || Math.abs(e.x - me.x) > gap);
+    }, gap);
+  if (await clear()) return;
+  const stick = await ph.page.evaluate(() => {
+    const el = document.querySelector('[data-stick]');
+    if (!el) return null;
+    const b = el.getBoundingClientRect();
+    return { x: Math.round(b.left + b.width * 0.9), y: Math.round(b.top + b.height / 2) };
+  });
+  if (!stick) return;
+  await ph.cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ ...stick, id: 1 }] });
+  const t0 = Date.now();
+  while (Date.now() - t0 < ms && !(await clear())) await sleep(50);
+  await ph.cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+  await sleep(250);
+}
+
 export interface EscalationKit {
   browser: any;
   devices: any;
@@ -152,6 +176,10 @@ export async function escalationFacts(kit: EscalationKit): Promise<void> {
         for (const s of [{ w: 844, h: 390 }, { w: 390, h: 664 }]) {
           await ph.page.setViewportSize({ width: s.w, height: s.h });
           await sleep(400);
+          // The blind look at push 1's shots (docs/plan/step-8.md, last section): the page's own hero stood inside the
+          // pile at the west door and could not be found. At 5 the shot is taken once he has walked clear of the watch
+          // (at 4, walking lets the live world climb to 5 before the shot, and the trike drives off the view).
+          if (l.level === 5) await walkClear(ph);
           await ph.page.screenshot({ path: path.join(kit.out, `level${l.level}-${s.w}x${s.h}.png`) });
         }
       }
