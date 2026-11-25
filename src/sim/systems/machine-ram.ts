@@ -67,10 +67,13 @@ const system: System = {
           const bb = ctx.content.characters[b.kind]?.box;
           if (!bb || !overlaps(a.x, a.y, ab.w, ab.h, b.x, b.y, bb.w, bb.h)) continue;
           r.met.push(b.id);
+          const met = Math.abs(a.vx);
           const after = ram(ctx, a, b, a.id);
           // Guard vehicle push 2b (DRAFT): a machine with `ramLift` throws what it meets up as well as on,
           // so the pieces arc away where a player sees them; added to the speed its held beat hands back.
-          if (m.ramLift) {
+          // Only a crash at the machine's full `ramSpeed` or faster: a guard driving it nudges people at
+          // his slower `driverRamSpeed`, and that lifts nobody.
+          if (m.ramLift && met >= m.ramSpeed) {
             const cap = ctx.content.tuning.world.maxLaunchSpeed ?? 500;
             // ram() has just set the beat (the guard above narrowed it away for the type checker).
             const beat = (b.c as { beat?: { vy?: number } }).beat;

@@ -459,3 +459,4 @@ Sent to the second builder of `handoff-prompts/guard-vehicle-courtyard.md` as pa
 - **Jump-out stands the hero still** (machine-seat): before, the hero kept the trike's speed, caught it up as it coasted and was rammed by it (the empty trike rams at 50). Every `step20-*` is green with it, the wagon's `jump-out-at-speed` included.
 - **Still seen while riding:** a small white up-arrow over the forest's doorway (the doorway's own marker, not the Use button). Left.
 - The rider hides most of the blue flag while riding; parked and out, it shows.
+- **`ramLift` only at `ramSpeed` or faster** (after the rebase onto the escalation's push 1): its level-4 row puts a guard at the reins of the trike in the street, and his nudges of his own comrades at about 71 px/s lifted them, which slowed the fight and turned `step4-tier-cap-holds` and `-level5-keeps-coming` red. Green again with the threshold; the roadblock crash (at 200-315) is unchanged.

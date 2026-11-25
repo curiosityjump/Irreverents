@@ -89,7 +89,7 @@ export interface Machine {
   livery?: { color: string; region: [number, number, number, number] };
   /** Guard vehicle push 2b (DRAFT): px of clear floor between the machine's box and a rider put out beside it (its cells overhang the box). Left out: 0. */
   outGap?: number;
-  /** Guard vehicle push 2b (DRAFT): extra upward speed (px/s) a ram gives what it meets, so the pieces arc up and away. Left out: 0 (the ram rule's own pop). */
+  /** Guard vehicle push 2b (DRAFT): extra upward speed (px/s) a ram at the machine's full `ramSpeed` or faster gives what it meets, so the pieces arc up and away (a slower driver's nudge lifts nothing). Left out: 0 (the ram rule's own pop). */
   ramLift?: number;
 }
 

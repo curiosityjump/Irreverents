@@ -250,7 +250,8 @@ Use and a push up while riding in the forest's doorway took nobody through
 `DRAFT:`, decisions-log "The guards' trike looks like the guards' and crashes
 like a crash":
 - **The crash:** `ramLift` 220 (machine file) adds upward speed to whatever the
-  trike rams, on top of the speed its held beat hands back, so the roadblock's
+  trike rams at its full `ramSpeed` or faster (a guard driving it nudges people at
+  his slower `driverRamSpeed` and lifts nobody: the escalation's level-4 row), on top of the speed its held beat hands back, so the roadblock's
   pieces arc up and away: the light crates are in the air over the rider
   (`step20-courtyard-trike-through-the-roadblock`, control `ramLift` 0). Not
   done: a held beat on the rider too (the rider's own page drives its body),
