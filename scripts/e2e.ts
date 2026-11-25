@@ -428,6 +428,8 @@ async function main(): Promise<void> {
       await (await import('./e2e/king-wall.ts')).kingWallFacts({ browser, devices, base, out, fact, errors });
       // Step 5, the owner's report (beaten-*): by touch, a bad guy fought in the camp is defeated, goes in a poof and is gone (docs/mechanisms/combat-and-impact.md, "Beaten for good").
       await (await import('./e2e/beaten.ts')).beatenFacts({ browser, devices, base, out, fact, errors });
+      // Step 4, guards meet bandits (clash-street): by touch, the guard the shop's call brings clips the villain and the two brawl while the hero walks off (docs/mechanisms/npc-response.md, "Who fights").
+      await (await import('./e2e/clash.ts')).clashFacts({ browser, devices, base, out, fact, errors, shots: keptShots('step-4-shots') });
       // Step 2's ?tune facts (tune-*): the feel dials by touch, and play following them on two pages (docs/mechanisms/tuning-panel.md).
       await (await import('./e2e/tune.ts')).tuneFacts({ browser, devices, base, out, fact, errors });
       // Step 12's facts (outpost-*): into the outpost by touch, and the horn post drawn working, then broken (docs/mechanisms/outposts.md).
