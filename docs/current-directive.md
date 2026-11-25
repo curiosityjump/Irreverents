@@ -48,12 +48,7 @@ feature.
 
 ## Rules in force now
 
-- **Pushes:** free until the owner says they are playing again: *"Don't worry.
-  I'n not playing that shit right now. Redeploy all you want"* (the owner to
-  Vision Partner, first-hand, ~11:40 UTC; receipt in `docs/answers-archive.md`).
-  Before any code push read `/debug/errors` (a deploy empties it) and
-  `/healthz`'s `players`. Documents push freely: they do not redeploy
-  (`docs/mechanisms/deploy.md`).
+- **Pushes: PAUSED from 00:32 UTC on 2026-11-25. The owner, ~00:25 UTC, first-hand to the orchestrator:** "Have everyone push whatever they can now then pause pushes. About to play and don't want interruption". No push that redeploys (anything outside `docs/` and `handoff-prompts/`: `src`, `content`, `scripts`, `tools`, package files) until the owner says he is done; builders keep building and committing locally and stack their pushes; documents push freely (they do not redeploy, `docs/mechanisms/deploy.md`). Every builder was told at 00:25 with `priority: now`; messages have arrived up to 44 minutes late today, so the orchestrator watches `origin/main` for a code push and `/healthz`'s `startedAt`, and tells the owner if one lands. **When he says he is done:** message each builder "pushes are open", one at a time a few minutes apart so their deploys do not replace each other. Before that rule: pushes were free (*"Don't worry. I'n not playing that shit right now. Redeploy all you want"*, the owner, 2026-11-23 ~11:40 UTC). Before any code push read `/debug/errors` (a deploy empties it) and `/healthz`'s `players`.
 - **The weekly limit is at warning** (seen 18:21 UTC on every session: `rateLimitType` `seven_day`, `allowed_warning`, resets 2026-11-30 about 13:00 UTC). The owner was told and asked how hard to push; until they answer: the owner's named priorities go ahead, review workflows stay small, finished sessions are archived at once, and new builders are spawned with `model: "claude-opus-5-5"` (the orchestrator's own session was switched to Fable by the owner at ~17:45 UTC, and a spawn inherits the caller's model).
 - **Capacity:** the account's five-hour limit is shared with the owner's other
   projects. With about fourteen Irreverents sessions working it reached
