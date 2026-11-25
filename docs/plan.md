@@ -38,7 +38,7 @@ re-measured by the command in `docs/measures.md`, never quoted from here.
 |---|---|---|---|
 | M1 | **Live:** the address serves what is on `main` | the game at 84c1b92 (re-read 10:38 UTC by session_017WiGzHX8g2sXimNRnqp2oZ); `main` ahead by documents only; nobody playing; error log empty | the game, at the tip of `main`, after every push |
 | M2 | **Together:** two players on separate devices share one world at the live address | yes by script (`npm run check:live`: two pages, one phone-sized by touch, reconnect); no real iPhone tried | yes, proven by script (Step 1) |
-| M3 | **Vision playable:** of the design library's six build gates A–F (doc 24), how many have a scripted player-view check passing | 5 of 6 (A, B, C, D, F; `npm run gates`); E (the Hall) not started on the page; none of it played by a person or on a real iPhone | F and A by the owner's morning, then B, C, D, E |
+| M3 | **Vision playable:** of the design library's six build gates A–F (doc 24), how many have a scripted player-view check passing | 6 of 6 (A-F; `npm run gates` at 347ff1d, 2026-11-25); none of it played on a real iPhone except by the owner | F and A by the owner's morning, then B, C, D, E |
 
 **What the measure cannot say.** Whether a gate *feels* right ("joyful",
 "OHH!") is the owner's to judge by playing. A passing script means the
@@ -411,9 +411,7 @@ Full text: `docs/plan/step-20.md`
 
 ## Step 21 — What being beaten costs
 
-**Status: open, claimed by orchestrator session_017WiGzHY5UZsWTLCH8cLm8M (builders: session_017WiGzJWYyVWtYnjFXHko1S), 2026-11-23.** (Brief `handoff-prompts/loop-risk.md`, started 23:14 UTC; only its power parts wait for Step 9's knock-loose push.)
-
-Full text: `docs/plan/step-21.md`
+**Closed 2026-11-25.** Every hero has hearts, drawn in a row under each face on the party plate (3 each, the grappler and the brawler 5): a bad guy or a provoked guard putting you on the floor costs one, with a pop and a sound; a friend, a fall, a wall or the cantina's brawl costs nothing. A hero with none is out, greyed on the plate, and you carry on as the next member who has hearts; with two players the party is shared. When the whole party is out it is GAME OVER: a short card one tap skips, then everyone is in the cantina (a stage's own entrance in a stage) with every heart back, a carried prize back on its stand and a held weapon back where it was found; walking into the cantina refills hearts too. The old thrown-out-of-the-doorway rule is off everywhere by data, its fields kept. `step21-heart-*` scenarios, four real-server checks and the phone e2e by touch (`hearts-drawn`, `hearts-one-lost`, `hearts-game-over`; its intermittent red was traced to two causes, both fixed, 414564f and 3314c47). **Not tried on a real iPhone.** Open, not blocking: Q-014 (where a game over in a stage sends you; built: the entrance). Logged: the heart counts and the rules in decisions-log "Step 21". Full text: `docs/plan-archive.md`, "Step 21"; record: `docs/mechanisms/defeat.md`.
 
 ## Step 22 — One stage to clear: an outpost you get through without dying, and a victory screen
 
@@ -421,7 +419,7 @@ Full text: `docs/plan/step-21.md`
 
 ## Step 23 — Weapons: things you pick up, swing, throw, lose and steal
 
-**Status: open, claimed by orchestrator session_017WiGzHY5UZsWTLCH8cLm8M (builders: session_017WiGzF7puSFWh2BBeii8WZ), 2026-11-24.** (Opened 01:40 UTC from the owner's "Weapons assets uploaded" and his verdict's "no power/item stealing"; brief `handoff-prompts/weapons-pick-up-and-swing.md`.)
+**Status: open, unclaimed.** (Its brief is done, builders archived: sword, hammer, spear and bomb, knocked loose, thrown, taken by bad guys, back at game over. Left: the rest of the twelve as data; bad guys taking the hammer and the sword (owed re-times); Q-015, not blocking.)
 
 Full text: `docs/plan/step-23.md`
 
