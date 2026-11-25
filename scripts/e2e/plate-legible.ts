@@ -298,8 +298,22 @@ export async function plateLegibleFacts(kit: Kit & { shots: string }): Promise<v
   try {
     await setOld(C, OLD);
     await setOld(D, OLD);
+    await setOld(B, OLD);
     await setOldArrow(C, OLD_ARROW);
     await sleep(600);
+    // ---- the canopy, upright, first: idle page B's own hero under the plate, before anyone has been hit (read later, the heroes in the gallery and the courtyard had lost every full heart) ----
+    await B.page.setViewportSize({ width: 390, height: 664 });
+    await sleep(300);
+    await place(B, 'forest-trail', 50, 2);
+    const canopyFaded = await fadedBy(B, 0.95, 2000);
+    const canopy = canopyFaded ? await readHearts(B, 2000, ['forest-trail', 50, 2]) : null;
+    if (!OLD)
+      for (const [w, h] of SIZES)
+        await shotPair(B, kit.shots, 'canopy', w, h, async () => {
+          await place(B, 'forest-trail', 50, 2);
+          await fadedBy(B, 0.95, 1500);
+          await sleep(250);
+        });
     // ---- the gallery, sideways: the balcony thrower under the plate while he aims (as scripts/e2e/plate-clear.ts) ----
     await C.page.setViewportSize({ width: 844, height: 390 });
     const there = (await walkInto(C, 1, 'castle-street')) && (await walkInto(C, 1, 'courtyard')) && (await walkInto(D, 1, 'castle-street')) && (await walkInto(D, 1, 'courtyard'));
@@ -332,23 +346,10 @@ export async function plateLegibleFacts(kit: Kit & { shots: string }): Promise<v
     if (inGallery && !OLD && !OLD_ARROW) for (const [w, h] of SIZES) await arrowShots(C, kit.shots, w, h, () => arrowDrawn(C, T, 15000));
     if (inGallery && !OLD && !OLD_ARROW) for (const [w, h] of SIZES) await shotPair(C, kit.shots, 'gallery-aim', w, h, () => aimStarts(C, T, 6000));
 
-    // ---- the canopy, upright: page D's own hero under the plate (page D waited in the courtyard: page C's hero has been shot at in the gallery and may have no full hearts left to read) ----
-    await D.page.setViewportSize({ width: 390, height: 664 });
-    await sleep(300);
-    await place(D, 'forest-trail', 50, 2);
-    const canopyFaded = await fadedBy(D, 0.95, 2000);
-    const canopy = canopyFaded ? await readHearts(D, 2000, ['forest-trail', 50, 2]) : null;
-    if (!OLD)
-      for (const [w, h] of SIZES)
-        await shotPair(D, kit.shots, 'canopy', w, h, async () => {
-          await place(D, 'forest-trail', 50, 2);
-          await fadedBy(D, 0.95, 1500);
-          await sleep(250);
-        });
     fact(
       'plate-hearts-legible',
       gallery !== null && canopy !== null && heartsOk(gallery) && heartsOk(canopy),
-      `${OLD ? '(CONTROL: the old fade) ' : ''}the Hall gallery at 844x390, page C walked in by touch (${inGallery}), the plate faded (${galleryFaded}): ${gallery ? heartsText(gallery) : '-'}; the canopy upright 390x664, page D's own hero placed under the plate (faded ${canopyFaded}): ${canopy ? heartsText(canopy) : '-'}`,
+      `${OLD ? '(CONTROL: the old fade) ' : ''}the Hall gallery at 844x390, page C walked in by touch (${inGallery}), the plate faded (${galleryFaded}): ${gallery ? heartsText(gallery) : '-'}; the canopy upright 390x664, page B's own hero placed under the plate (faded ${canopyFaded}): ${canopy ? heartsText(canopy) : '-'}`,
     );
   } finally {
     for (const ph of [A, B, C]) await ph.ctx.close().catch(() => undefined);
