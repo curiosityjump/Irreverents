@@ -57,6 +57,13 @@ document as a decision of theirs.
 
 *(Entries of 2026-11-23, the first 168 or so, are in `docs/decisions-log-archive.md`; they still stand. This file must stay under 150 KB: a session spawned with `blob_limit_kb: 150` gets a larger file with git's skip-worktree flag, and its edits never reach a commit. When it nears that, move the oldest day out the same way.)*
 
+### 2026-11-25 · Grab takes the person, not the crate at your feet
+- **Decided by:** the third builder of brief e2e-intermittent-reds, on the orchestrator's order (`session_017WiGzJYBCYJ85Bj95B7ZLw`, 2026-11-25: "a knocked or standing person before a prop")
+- **Instead of asking:** "When you press Grab beside the king and a crate is lying at your feet, which should you pick up?"
+- **Why this way:** you press Grab beside someone to pick *them* up (to suplex the king, to throw a guard). Grab used to take whichever body was nearest, so a crate knocked under your feet in the fight beat the king you were facing (the e2e's `suplex-again` red: the hero carrying `throne-crate-1`, the king standing beside him). Now any person in reach (anyone who can be knocked out: the king, fighters, a friend) is taken before a thing (crates, posts, wagons); nearest first within each. A knocked-out person lying down still can't be grabbed (unchanged).
+- **To change it:** `PROP` in `src/sim/verbs/grab.ts` (drop the `+ PROP` term for nearest-only).
+- **Where:** `src/sim/verbs/grab.ts`; `docs/mechanisms/combat-and-impact.md`; scenario `grab-person-before-prop`. `DRAFT:`
+
 ### 2026-11-24 · The start screen shows the owner's title picture: the whole picture sideways, the full width at the top when upright
 - **Decided by:** owner-title-screen builder (Step 17), `session_017WiGzH3PZe5UkjdEEaAN75`
 - **Instead of asking:** "How should the title picture sit on a phone held upright, where a 16:9 picture can't fill the screen, and how should the buttons share it?"

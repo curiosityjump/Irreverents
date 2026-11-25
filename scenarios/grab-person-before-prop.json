@@ -1,0 +1,20 @@
+{
+  "id": "grab-person-before-prop",
+  "gate": null,
+  "proves": "DRAFT (e2e-intermittent-reds brief, the orchestrator's order; docs/decisions-log.md \"Grab takes the person, not the crate at your feet\"): in the throne room the grappler stands beside the king, facing him, with a crate lying at his own feet, nearer than the king (the e2e fact suplex-again's red: the hero drawn carrying throne-crate-1, the king standing beside him). Grab takes the king: a person before a prop. Control (watched to fail): the person-first rule removed from src/sim/verbs/grab.ts (nearest only), the grab takes the crate (expect[0] fails).",
+  "room": "throne-room",
+  "players": [{ "id": "a", "character": "grappler", "tile": [14, 14] }],
+  "entities": [
+    { "id": "king", "character": "king", "tile": [13, 14] },
+    { "id": "crate-at-feet", "character": "crate", "tile": [14, 14] }
+  ],
+  "inputs": [
+    { "player": "a", "from": 20, "to": 21, "x": -1 },
+    { "player": "a", "from": 40, "to": 42, "hold": ["grab"] }
+  ],
+  "ticks": 90,
+  "expect": [
+    { "fact": "event-where", "event": "grabbed", "where": { "by": "p:a", "target": "king" }, "between": [40, 45], "count": [1, 1] },
+    { "fact": "event-where", "event": "grabbed", "where": { "target": "crate-at-feet" }, "between": [0, 90], "count": [0, 0] }
+  ]
+}

@@ -24,7 +24,7 @@ choice in it, is Step 2's (`docs/plan-archive.md` ("Step 2")); the choices are
 | 100 | `systems/verbs.ts` | runs each body's verbs, **unless `canAct` is false** (flying, held, in a beat, flattened) |
 | | `verbs/body.ts` | does nothing; declares `weight`, `toughness` per kind |
 | | `verbs/attack.ts` | a fresh press: a swing in three phases (wind-up, strike, recovery) that hits what is in reach during the strike, once each; or, while carrying, an immediate throw |
-| | `verbs/grab.ts` | a fresh press: picks up the nearest liftable body, or sets the carried one down |
+| | `verbs/grab.ts` | a fresh press: picks up the nearest liftable body in reach, a person (toughness above 0) before a prop (2026-11-25, `DRAFT:`, `grab-person-before-prop`), or sets the carried one down |
 | 200 | `systems/carry-hold.ts` | drops a carried body whose carrier can no longer hold it; break-free; lets a held player go |
 | 450 | `systems/impact-before.ts` | friction and air drag; remembers each flying body's speed |
 | 500 | `systems/physics.ts` | skips carried bodies and bodies in a beat (`takesNoPhysics`); a body moving itself falls by its own character's arc (below) |

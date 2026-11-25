@@ -16,12 +16,15 @@ declare module '../types.ts' {
 
 /**
  * The grab button: picks up the nearest body in reach that this character
- * is strong enough to lift; while carrying, sets it down in front. The
+ * is strong enough to lift (a person before a prop, below); while carrying, sets it down in front. The
  * throw is the attack button (verbs/attack.ts). Carrying itself is the
  * carry-* systems.
  * DRAFT: a body being carried cannot grab, and a body that is picked up
  * drops what it was carrying, so there are no chains of holds.
  */
+/** Added to a prop's gap so any person in reach ranks first (reach is tens of pixels; this is far past it). */
+const PROP = 1e6;
+
 const verb: Verb = {
   id: 'grab',
   order: 40,
@@ -65,8 +68,15 @@ const verb: Verb = {
       const ob = ctx.content.characters[o.kind]?.box;
       if (!ob || !overlaps(x0, e.y - 2, box.w + reach, box.h + 4, o.x, o.y, ob.w, ob.h)) continue;
       const gap = Math.abs(o.x + ob.w / 2 - mid);
-      if (bodyNumbers(ctx.content, o).weight <= t.liftStrength!) {
-        if (gap < bestGap) [best, bestGap] = [o, gap];
+      const n = bodyNumbers(ctx.content, o);
+      if (n.weight <= t.liftStrength!) {
+        // DRAFT (e2e-intermittent-reds brief, the orchestrator's order; docs/decisions-log.md "Grab
+        // takes the person, not the crate at your feet"): a person in reach is taken before a prop,
+        // however much nearer the prop lies; nearest first within each. A person is a body that can
+        // be knocked out (toughness above 0: the king, a dummy, every fighter, a friend); a prop
+        // never can (crates, posts, wagons). For "nearest only", drop the `+ PROP` term.
+        const rank = gap + (n.toughness > 0 ? 0 : PROP);
+        if (rank < bestGap) [best, bestGap] = [o, rank];
       } else if (gap < heavyGap) [tooHeavy, heavyGap] = [o, gap];
     }
     if (!best) {
