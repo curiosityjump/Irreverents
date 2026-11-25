@@ -1,0 +1,662 @@
+{
+  "id": "step4-tier-town-hall-gallery",
+  "proves": "The escalating guard response, push 2 (one town-wide level; the row comes to the room the report names): in the real castle street the bell and the guard's whistle bring the street's alert to 2; the brawler walks out east into the courtyard and on through its gate (held open from the start, as two bodies on its plates would) into the Hall gallery, and one of the watch follows him in (5735); there he blows his whistle and finishes (6221): the report names the gallery, which goes to 3, one above the town's highest (the street's 2), and level 3's row (a guard and the armoured guard) walks in there by its courtyard door on that tick. The street stays at 2. Controls (watched to fail): no gallery dispatch file (he reports home: the street goes to 3), and the raise without the town (the gallery goes to 1).",
+  "room": "castle-street",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "brawler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 60,
+      "to": 200,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 1500,
+      "to": 1505,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 2700,
+      "to": 2704,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 2930,
+      "to": 2960,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 2990,
+      "to": 3020,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 3050,
+      "to": 3080,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 3110,
+      "to": 3140,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 3170,
+      "to": 3200,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 3230,
+      "to": 3260,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 3290,
+      "to": 3320,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 3350,
+      "to": 3380,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 3410,
+      "to": 3440,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 3470,
+      "to": 3500,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 3530,
+      "to": 3560,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 3590,
+      "to": 3620,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 3650,
+      "to": 3680,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 3710,
+      "to": 3740,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 3770,
+      "to": 3800,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 3830,
+      "to": 3860,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 3890,
+      "to": 3920,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 4000,
+      "to": 4030,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 4060,
+      "to": 4090,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 4120,
+      "to": 4150,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 4180,
+      "to": 4210,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 4240,
+      "to": 4270,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 4300,
+      "to": 4330,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 4360,
+      "to": 4390,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 4420,
+      "to": 4450,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 4480,
+      "to": 4510,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 4540,
+      "to": 4570,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 4600,
+      "to": 4630,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 4660,
+      "to": 4690,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 4720,
+      "to": 4750,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 4780,
+      "to": 4810,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 4840,
+      "to": 4870,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 4900,
+      "to": 4930,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 4960,
+      "to": 4990,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 5020,
+      "to": 5050,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 5080,
+      "to": 5110,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 5140,
+      "to": 5170,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 5200,
+      "to": 5230,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 5260,
+      "to": 5290,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 5320,
+      "to": 5350,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 5380,
+      "to": 5410,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 5440,
+      "to": 5470,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 5500,
+      "to": 5530,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 5560,
+      "to": 5590,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 5620,
+      "to": 5650,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 5680,
+      "to": 5710,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 5740,
+      "to": 5770,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 5800,
+      "to": 5830,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 5860,
+      "to": 5890,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 6000,
+      "to": 6002,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 6002,
+      "to": 6006,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 6060,
+      "to": 6062,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 6062,
+      "to": 6066,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 6240,
+      "to": 6242,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 6242,
+      "to": 6246,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 6300,
+      "to": 6302,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 6302,
+      "to": 6306,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 6480,
+      "to": 6482,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 6482,
+      "to": 6486,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 6540,
+      "to": 6542,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 6542,
+      "to": 6546,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 6720,
+      "to": 6722,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 6722,
+      "to": 6726,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 6780,
+      "to": 6782,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 6782,
+      "to": 6786,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 6960,
+      "to": 6962,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 6962,
+      "to": 6966,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 7020,
+      "to": 7022,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 7022,
+      "to": 7026,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 7200,
+      "to": 7202,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 7202,
+      "to": 7206,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 7260,
+      "to": 7262,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 7262,
+      "to": 7266,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 7440,
+      "to": 7442,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 7442,
+      "to": 7446,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 7500,
+      "to": 7502,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 7502,
+      "to": 7506,
+      "hold": [
+        "attack"
+      ]
+    }
+  ],
+  "ticks": 6400,
+  "tiles": [
+    {
+      "room": "courtyard",
+      "tile": [
+        25,
+        4
+      ],
+      "is": "empty"
+    },
+    {
+      "room": "courtyard",
+      "tile": [
+        25,
+        5
+      ],
+      "is": "empty"
+    },
+    {
+      "room": "courtyard",
+      "tile": [
+        25,
+        6
+      ],
+      "is": "empty"
+    },
+    {
+      "room": "courtyard",
+      "tile": [
+        25,
+        7
+      ],
+      "is": "empty"
+    }
+  ],
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "changed-room",
+      "where": {
+        "entity": "p:a",
+        "fromRoom": "courtyard",
+        "fromDoor": "to-gallery"
+      },
+      "between": [
+        5500,
+        5700
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "call-completed",
+      "where": {
+        "area": "hall-gallery"
+      },
+      "between": [
+        6100,
+        6300
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "call-completed",
+      "where": {
+        "area": "castle-street"
+      },
+      "between": [
+        3000,
+        6400
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "alert",
+      "area": "hall-gallery",
+      "at": 6220,
+      "is": 0
+    },
+    {
+      "fact": "alert",
+      "area": "hall-gallery",
+      "at": 6222,
+      "is": 3
+    },
+    {
+      "fact": "alert",
+      "area": "hall-gallery",
+      "at": 6222,
+      "is": 3,
+      "shown": true
+    },
+    {
+      "fact": "alert",
+      "area": "castle-street",
+      "at": 6222,
+      "is": 2
+    },
+    {
+      "fact": "event-where",
+      "event": "dispatch-arrived",
+      "where": {
+        "area": "hall-gallery",
+        "row": 2
+      },
+      "between": [
+        6221,
+        6221
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "people",
+      "room": "hall-gallery",
+      "arrivals": true,
+      "at": 6300,
+      "count": [
+        3,
+        3
+      ]
+    }
+  ]
+}

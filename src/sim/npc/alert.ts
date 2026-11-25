@@ -122,6 +122,23 @@ export function maxAlert(content: Content, area: string): number {
   return content.dispatch?.[area]?.rows.length ?? MAX_ALERT;
 }
 
+/**
+ * DRAFT (the escalating guard response, push 2): two areas are of one town when both dispatch tables name the same
+ * `town` (content/dispatch/; the castle town's five rooms). An area is always of its own town.
+ */
+export function sameTown(content: Content, a: string, b: string): boolean {
+  if (a === b) return true;
+  const ta = content.dispatch?.[a]?.town;
+  return !!ta && ta === content.dispatch?.[b]?.town;
+}
+
+/** The highest alert of the area's town (its own level, for an area of no town). */
+export function townLevel(world: World, content: Content, area: string): number {
+  let best = alertLevel(world, area);
+  for (const id of Object.keys(content.dispatch ?? {})) if (id !== area && sameTown(content, area, id)) best = Math.max(best, alertLevel(world, id));
+  return best;
+}
+
 /** DRAFT: an area is a room tonight. */
 export const alertId = (area: string): string => `~alert:${area}`;
 
@@ -156,9 +173,13 @@ function raiseAlert(ctx: StepContext, area: string): void {
   const a = e.c.alert!;
   // INTENT (D-068): a new call restarts the wait even when the number is already at its most.
   a.quiet = 0;
-  if (a.level >= maxAlert(ctx.content, area)) return;
+  const most = maxAlert(ctx.content, area);
+  if (a.level >= most) return;
   const from = a.level;
-  a.level = from + 1; // The single raise.
+  // DRAFT (the escalating guard response, push 2, "one town-wide level"; docs/decisions-log.md, "Step 4: one town"):
+  // one above the town's highest, so a report in the courtyard with the street at 3 makes it 4 there and brings the
+  // fourth row there. Of no town, townLevel is the area's own: one up, as ever. Still one call, one raise (D-063).
+  a.level = Math.min(most, townLevel(ctx.world, ctx.content, area) + 1); // The single raise.
   showAlert(ctx.world, area, a.level);
   ctx.emit('alert-changed', { area, from, to: a.level });
 }

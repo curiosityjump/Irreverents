@@ -28,9 +28,13 @@ import { generateRegistries, root } from '../lib/registries.ts';
 const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
 
 /** The two levels shown: the scenario, the tick a little after its row walks in, the game code it is saved under. */
-const LEVELS = [
+const LEVELS: { level: number; scenario: string; tick: number; code: string; town?: boolean }[] = [
   { level: 4, scenario: 'step4-tier-level4-elite-row', tick: 4440, code: 'FRKW' },
   { level: 5, scenario: 'step4-tier-level5-keeps-coming', tick: 5140, code: 'FRKX' },
+  // The escalating guard response, push 2 ("the pips crossing doors"): the courtyard at 4 (a report there), the street
+  // at 3; a page in the street draws the town's 4, a level reached in a room it is not in. Control E2E_ESCALATION_TOWN=off
+  // takes the courtyard out of the saved world.alerts: the page then draws the street's own 3.
+  { level: 4, scenario: 'step4-tier-town-courtyard', tick: 5500, code: 'FRKY', town: true },
 ];
 
 /** Saves each level's world into a new store directory on its own device (a tmpfs, as the server's volume rule asks). */
@@ -50,6 +54,7 @@ async function saveLevels(rows?: number): Promise<string> {
     const s = loadScenarios(content).scenarios.find((x: any) => x.id === l.scenario)!;
     const rec = simulate(s, content);
     const world = structuredClone(rec.history[l.tick]) as any;
+    if (l.town && process.env.E2E_ESCALATION_TOWN === 'off') delete world.alerts?.courtyard;
     saves.save(l.code, world);
   }
   return dir;
@@ -137,6 +142,11 @@ export async function escalationFacts(kit: EscalationKit): Promise<void> {
           best.trike = Math.max(best.trike, s.trike);
         }
         await sleep(100);
+      }
+      if (l.town) {
+        kit.fact('escalation-town', inStreet && best.level === l.level, `in the street (${inStreet}), its own alert 3, with the courtyard at 4 by a report there, the page drew ${best.level} pip(s) lit (expected the town's ${l.level})`);
+        await ph.ctx.close();
+        continue;
       }
       if (kit.shots) {
         for (const s of [{ w: 844, h: 390 }, { w: 390, h: 664 }]) {

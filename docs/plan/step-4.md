@@ -838,6 +838,50 @@ the owner is playing and pushes are paused).**
   3's way-out work (`doorClear`) should look at it. (3) Not tried on a real
   iPhone; whether it feels like risk is the owner's to judge.
 
+**Push 2, the other town rooms (builder 2, `session_017WiGzEyaoW1jEkkGR6iQZ7`).**
+- **One town** (decisions-log "Step 4: one town"): every dispatch file names
+  `town: "castle-town"`; `raiseAlert` raises the area a report names to one
+  above the town's highest (`townLevel()` in `src/sim/npc/alert.ts`); a
+  follower away from home in a room of his town with a table reports that
+  room (`alert-whistle`, `here`). Tables for `throne-room`, `courtyard`,
+  `hall-gallery`, `undercroft` (five rows each; the content check makes a
+  town agree on its row count). `clearOf` (new, 3 in those four, 0 in the
+  street's): a row never walks in with a hero within 3 tiles of its door or
+  entry; it waits.
+- **Who reports when you hit the king, measured:** nobody of the throne room:
+  the king's placement has no NPC kind, so nothing in the room witnesses for
+  the town. Only the watch, once it has followed you in, reports there.
+  (Giving the king a kind is the throne room's cast, Step 6, unclaimed.)
+- **Measured on the way:** a row put down beside the courtyard's opening was
+  carried straight out by it (the trike's driver changed room the next tick),
+  so the courtyard's rows come from floor entries west of the gate (3, 14, 21).
+- **Scenarios, controls watched failing:** `step4-tier-town-throne-room`
+  (throne room 0 -> 4 with the street at 3), `-courtyard` (0 -> 4, the trike
+  rams someone), `-hall-gallery` (0 -> 3 with the street at 2; the gate's
+  tiles opened before tick 0, as two bodies on its plates would). Controls for
+  each: the room's file removed (the follower reports home, the street climbs
+  and its row walks into the street), and the raise without the town (`from +
+  1`: the room goes to 1). Phone fact `escalation-town`
+  (`scripts/e2e/escalation.ts`: the courtyard at 4, the street at 3, a page in
+  the street draws 4): green twice; control `E2E_ESCALATION_TOWN=off` fails.
+- **Not done:** a scenario that reports in the undercroft. Tried four ways
+  (by the cellar doorway twice, through the throne room's false wall twice):
+  the crowd shoves the hero back through the throne room's door, or he gets
+  through the secret unseen and nobody follows (which is the secret working
+  as a way out). Its table is the throne room's, validated by the content
+  check, on the same code path. No new shots: the rooms' rows were not
+  screenshotted.
+- **Doubts, not changed:** (1) the hero and the watch shoved back and forth
+  through the street's throne-room door many times a minute in several runs
+  (push 1's doubt 2, seen again): push 3's way-out work. (2) In the gallery,
+  the row walks in beside the west door and a knock sends one straight back
+  out into the courtyard (6561, 7035 in a trace): entries a few tiles in would
+  fix it, like the courtyard's. (3) Rooms cool separately, so the meter can sit
+  at a room's level while you stand in another one being searched; it drops
+  one bar at a time, but the banner on a drop is push 3's. (4) Street
+  followers count against the street's cap while away (push 1's doubt 1);
+  they also count in the room they are in, so a small room fills quickly.
+
 ### Guards meet bandits, push 1 (builder, 2026-11-25)
 
 - **The rule:** `answers` in `content/hostility.json` (good side against bad side), `npcAnswerMemory` 6 s in `content/tuning.json`, read first in `clash-fight` ahead of the hero-first skip. Scenarios `step4-clash-street-guard-and-villain`, `-answer-ahead-of-hero`, `-same-side-no-answer`, `-way-out-brawler` and `-way-out-brawler-cantina` (the brief's "second run", its own file), each control watched failing.
@@ -855,3 +899,4 @@ the owner is playing and pushes are paused).**
 - **Looser than the brief asked, `DRAFT:` at the site:** the brief wanted each knocked twice with the hero four tiles off. Measured in 5 runs the page draws the villain knocked 3-5 times and the guard 1-2, and the guard's second knock often comes while the hero is still 50 px off. The guard wins: he knocks the villain down and is on him again as he rises, so the villain rarely swings. An 8 s memory did not change that (and moved `step4-tier-away-at-the-most-skirmisher` again), so the memory stays 6 s. The fact asks: the guard knocked at least once and the villain twice with the hero four tiles off, four knocks in all, a guard's and a villain's within 4 s. **For the owner by playing:** a fairer brawl (the knocked one gets a swing in) is combat tuning, not this brief.
 - **Shots:** `docs/plan/step-4-shots/clash-street-390x664.png` shows the guard and the villain together, dazed, the hero far left; `clash-street-844x390.png` shows the villain with the hero walked off, but the guard was knocked off the right edge at that moment: a weak shot, not retaken.
 - Not run: the whole e2e suite (the orchestrator's clean-worktree run covers it).
+

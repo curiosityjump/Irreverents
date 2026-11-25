@@ -249,6 +249,14 @@ const system: System = {
           if (table.relieve.length > 0) relieveFor(ctx, table, index, over);
           break;
         }
+        // DRAFT (the escalating guard response, push 2; there is always a way out: "rows never arrive on top of a
+        // hero"): with the table's clearOf, a door or entry with a hero within clearOf tiles of where someone would walk
+        // in is not used this time; with none left, the row waits (waiting is a cost, never a trap).
+        const heroesHere = table.clearOf > 0 ? heroesIn(world, content, area) : [];
+        const clear = (col: number): boolean => heroesHere.every((h) => Math.abs(h.x / room.tile - (col + 0.5)) > table.clearOf);
+        const entries = table.entries.filter((t) => clear(t[0]));
+        const doorsOpen = table.doors.map((id) => room.doors.find((d) => d.id === id)!).filter((d) => clear(besideDoor(room, d, 0)[0]));
+        if (row.length > 0 && (table.entries.length > 0 ? entries.length === 0 : doorsOpen.length === 0)) break;
         st.queue.shift();
         if (row.length === 0) continue;
         const ids: string[] = [];
@@ -261,15 +269,15 @@ const system: System = {
           let tile: [number, number];
           let door: Door;
           if (table.entries.length > 0) {
-            const at = entryFor(table.entries, table.entryAway, room.tile, alert.x, st.sent, i);
+            const at = entryFor(entries, table.entryAway, room.tile, alert.x, st.sent, i);
             // A second of the row at the same entry stands a tile nearer the place reported, so no two start on one tile.
-            const before = row.slice(0, i).filter((_, k) => entryFor(table.entries, table.entryAway, room.tile, alert.x, st.sent, k) === at).length;
+            const before = row.slice(0, i).filter((_, k) => entryFor(entries, table.entryAway, room.tile, alert.x, st.sent, k) === at).length;
             const toward = alert.x >= (at[0] + 0.5) * room.tile ? 1 : -1;
             tile = [Math.max(0, Math.min(room.w - 1, at[0] + toward * before)), at[1]];
             door = nearestDoor(room, table.doors, tile[0]);
           } else {
-            door = room.doors.find((d) => d.id === table.doors[i % table.doors.length])!;
-            tile = besideDoor(room, door, Math.floor(i / table.doors.length));
+            door = doorsOpen[i % doorsOpen.length]!;
+            tile = besideDoor(room, door, Math.floor(i / doorsOpen.length));
           }
           const doorId = door.id;
           // DRAFT (the escalating guard response; the camp's `rides`, outpost-wave.ts): one who `rides` walks in at the

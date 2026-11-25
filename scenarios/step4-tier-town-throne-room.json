@@ -1,0 +1,225 @@
+{
+  "id": "step4-tier-town-throne-room",
+  "proves": "The escalating guard response, push 2 (one town-wide level; the row comes to the room the report names): in the real castle street the brawler's fight brings the street's alert to 3 (tick 3337); he walks west into the throne room and two of the watch follow him in (3896, 3935); one he hits blows his whistle there and finishes (4670): the report names the throne room, not the street, and the throne room's alert goes to 4, one above the town's highest (the street's 3), so level 4's row (two armoured guards) walks in by the throne room's street door on that tick, while the street stays at 3. Controls (watched to fail): no throne-room dispatch file (the follower reports home: the street goes to 4 and its row walks into the street), and the raise without the town (src/sim/npc/alert.ts, one up from the throne room's own 0: it goes to 1 and one guard comes).",
+  "room": "castle-street",
+  "placements": true,
+  "players": [
+    {
+      "id": "a",
+      "character": "brawler",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 60,
+      "to": 200,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 1500,
+      "to": 1505,
+      "hold": [
+        "interact"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 2700,
+      "to": 2704,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 3370,
+      "to": 3394,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 3400,
+      "to": 3990,
+      "x": -0.5
+    },
+    {
+      "player": "a",
+      "from": 4000,
+      "to": 4002,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 4002,
+      "to": 4006,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 4030,
+      "to": 4050,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 4300,
+      "to": 4302,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 4302,
+      "to": 4306,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 4330,
+      "to": 4350,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 4600,
+      "to": 4602,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 4602,
+      "to": 4606,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 4630,
+      "to": 4650,
+      "x": -1
+    }
+  ],
+  "ticks": 4800,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "changed-room",
+      "where": {
+        "entity": "p:a",
+        "fromRoom": "castle-street",
+        "fromDoor": "to-throne-room"
+      },
+      "between": [
+        3700,
+        3900
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "alert",
+      "area": "castle-street",
+      "at": 3500,
+      "is": 3
+    },
+    {
+      "fact": "alert",
+      "area": "throne-room",
+      "at": 4600,
+      "is": 0
+    },
+    {
+      "fact": "event-where",
+      "event": "call-completed",
+      "where": {
+        "area": "throne-room"
+      },
+      "between": [
+        4600,
+        4700
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "call-completed",
+      "where": {
+        "area": "castle-street"
+      },
+      "between": [
+        3400,
+        4800
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "alert",
+      "area": "throne-room",
+      "at": 4700,
+      "is": 4
+    },
+    {
+      "fact": "alert",
+      "area": "throne-room",
+      "at": 4700,
+      "is": 4,
+      "shown": true
+    },
+    {
+      "fact": "alert",
+      "area": "castle-street",
+      "at": 4700,
+      "is": 3
+    },
+    {
+      "fact": "event-where",
+      "event": "dispatch-arrived",
+      "where": {
+        "area": "throne-room",
+        "row": 3
+      },
+      "between": [
+        4600,
+        4700
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "people",
+      "room": "throne-room",
+      "arrivals": true,
+      "at": 4700,
+      "count": [
+        3,
+        4
+      ]
+    },
+    {
+      "fact": "people",
+      "room": "throne-room",
+      "at": 4700,
+      "count": [
+        4,
+        6
+      ]
+    }
+  ]
+}

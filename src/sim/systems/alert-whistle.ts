@@ -1,5 +1,5 @@
 import { heldBy } from '../effects.ts';
-import { alertLevel, completeCall } from '../npc/alert.ts';
+import { alertLevel, completeCall, sameTown } from '../npc/alert.ts';
 import { canSee } from '../npc/sight.ts';
 import { findEntity } from '../world.ts';
 import { centre, drive, isOut, npcKind, seconds } from '../npc/state.ts';
@@ -38,7 +38,9 @@ import type { Entity, StepContext, System } from '../types.ts';
  * suggested reconciliation, not a new owner-approved implementation"; that a
  * guard whistles at all, what stops it and every number are first guesses.
  * A follower who blows in another room raises his home area's alert; the
- * place reported is the home room's door toward where he is.
+ * place reported is the home room's door toward where he is. In a room of
+ * his home's town with its own table (the castle town's), he reports that
+ * room instead, where he saw it (the escalating guard response, push 2).
  */
 function stop(ctx: StepContext, e: Entity, why: string): void {
   const w = e.c.whistle;
@@ -87,7 +89,10 @@ const system: System = {
       const kind = npcKind(content, e);
       // The alert over (alert-respond has taken them off duty), or not one who whistles: nothing.
       // A follower away from home whistles too, if there is a way home to report (below).
-      const wayHome = e.room === n.home ? null : doorToward(content, n.home, e.room);
+      // DRAFT (the escalating guard response, push 2, "the row comes to the room the report names"): away from home
+      // in a room of the same town with its own table (content/dispatch/, `town`), he reports the room he is in.
+      const here = e.room !== n.home && !!content.dispatch?.[e.room] && sameTown(content, n.home, e.room);
+      const wayHome = e.room === n.home || here ? null : doorToward(content, n.home, e.room);
       // On duty: answering a call (`c.respond`), or a guard in a rage while his area's alert is up (the one
       // who rang the bell himself is no responder, but he is just as much after you).
       // DRAFT (docs/decisions-log.md, "Step 4: whistle"): the second half, found by tracing e2e's fight-back.
@@ -110,7 +115,7 @@ const system: System = {
           continue;
         }
       }
-      if ((!r && !raging) || !kind || kind.side !== 'good' || !content.dispatch?.[n.home] || (e.room !== n.home && !wayHome)) {
+      if ((!r && !raging) || !kind || kind.side !== 'good' || !content.dispatch?.[n.home] || (e.room !== n.home && !wayHome && !here)) {
         if (w) {
           stop(ctx, e, 'stood-down');
           w.reported = n.dissonance;
@@ -137,11 +142,13 @@ const system: System = {
       // home room's door toward that room.
       // DRAFT (docs/decisions-log.md, "Step 4: whistle"): help from home comes to the door the chase
       // went out by and searches there; it learns which way, not where (D-065).
-      const at = wayHome ? doorPlace(content, n.home, wayHome) : (n.lastSeen ?? centre(content, e));
+      // Reporting the room he is in, away from home: where he is chasing (c.respond.x, always this room's: alert-follow
+      // resets it at a door), since his lastSeen may be from the room before.
+      const at = here ? { x: r?.x ?? centre(content, e).x, y: centre(content, e).y } : wayHome ? doorPlace(content, n.home, wayHome) : (n.lastSeen ?? centre(content, e));
       blow.progress = 0;
       blow.reported = n.dissonance;
       blow.wait = seconds(content.tuning.world.npcWhistleAgain!);
-      completeCall(ctx, e.id, n.home, at);
+      completeCall(ctx, e.id, here ? e.room : n.home, at);
     }
   },
 };

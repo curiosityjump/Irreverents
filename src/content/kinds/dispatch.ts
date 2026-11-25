@@ -62,6 +62,21 @@ export interface Dispatch {
    * more than `entryAway` tiles from every hero (off a phone's screen). Empty (left out): rows wait.
    */
   relieve: string[];
+  /**
+   * DRAFT (the escalating guard response, push 2, 2026-11-25; the brief's "One town-wide level"): the areas whose
+   * tables name the same town share one level for raising. A completed call in any of them raises its own area to one
+   * above the town's highest (src/sim/npc/alert.ts, raiseAlert), so the level a player reads is the town's and that
+   * level's row comes to the room the report names. A follower of one of them who blows his whistle in another of
+   * them reports the room he is in (alert-whistle). Each area still cools on its own clock; the pips show the highest.
+   * "" (left out): the area is a town of its own, as before.
+   */
+  town: string;
+  /**
+   * DRAFT (the escalating guard response, push 2; "rows never arrive on top of a hero", there is always a way out):
+   * tiles. A row's door (or entry) where a hero stands within this many tiles of the spot someone would walk in at
+   * is not used; with none left, the row waits. 0 (left out): as before.
+   */
+  clearOf: number;
 }
 
 declare module '../types.ts' {
@@ -76,7 +91,7 @@ const kind: ContentKind = {
   parse(raw, read) {
     const o = read.object(raw, '');
     if (!o) return null;
-    read.only(o, ['id', 'doors', 'cap', 'rows', 'banners', 'entries', 'entryAway', 'announce', 'keepComing', 'relieve'], '');
+    read.only(o, ['id', 'doors', 'cap', 'rows', 'banners', 'entries', 'entryAway', 'announce', 'keepComing', 'relieve', 'town', 'clearOf'], '');
     const out: Dispatch = {
       id: read.string(o, 'id', ''),
       doors: read.stringList(o, 'doors', ''),
@@ -88,6 +103,8 @@ const kind: ContentKind = {
       announce: o.announce === undefined ? [] : read.stringList(o, 'announce', ''),
       keepComing: o.keepComing === undefined ? 0 : read.number(o, 'keepComing', '', { min: 0, max: 600 }),
       relieve: o.relieve === undefined ? [] : read.stringList(o, 'relieve', ''),
+      town: o.town === undefined ? '' : read.string(o, 'town', ''),
+      clearOf: o.clearOf === undefined ? 0 : read.number(o, 'clearOf', '', { min: 0, max: 200, integer: true }),
     };
     if (o.entries !== undefined) {
       if (!Array.isArray(o.entries)) read.fail('entries', `must be a list of [column, row] tiles, but is ${describe(o.entries)}`);
@@ -129,6 +146,12 @@ const kind: ContentKind = {
     return out;
   },
   check(content, fail) {
+    // A town's areas share one level, so they must agree on how many levels there are (one row each).
+    for (const d of Object.values(content.dispatch)) {
+      if (!d.town) continue;
+      const other = Object.values(content.dispatch).find((x) => x.town === d.town && x.rows.length !== d.rows.length);
+      if (other) fail(`content/dispatch/${d.id}.json`, 'rows', `${d.rows.length} rows, but "${other.id}" of the same town ("${d.town}") has ${other.rows.length}: a town's areas share one level, so they need one row per level each`);
+    }
     for (const d of Object.values(content.dispatch)) {
       const file = `content/dispatch/${d.id}.json`;
       const room = content.rooms[d.id];

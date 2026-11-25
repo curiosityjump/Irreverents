@@ -285,7 +285,8 @@ The owner's rules, each marked `INTENT:` with its D-number at its site:
 
 1. **Mood and alert are two things (D-065).** Mood is per person; the
    alert is one number per area (a room, tonight), 0 to 3, or 0 to 5 where
-   the area's dispatch table has five rows (`maxAlert()`; the castle street). Three furious
+   the area's dispatch table has five rows (`maxAlert()`; the castle town's rooms). Areas whose tables
+   name the same `town` share one level for raising (below, "One town"). Three furious
    witnesses and an alert of 0 is a normal state of the world.
 2. **Only a completed call raises the alert (D-063, D-075).** The number
    has **exactly one line that raises it**, in `raiseAlert()`
@@ -440,10 +441,12 @@ home area has a dispatch file:
 - Finished: `completeCall()`, exactly as the bell's (`call-completed`
   with `x, y` his `lastSeen`, one level, the place reported on the alert
   entity), then the same wait.
-- **Away from home:** a follower in another room whistles too, if
-  `doorToward()` finds a way home; it raises his home area's alert, and
-  the place reported is the home room's door toward where he is: help
-  learns which way, not where (D-065).
+- **Away from home:** a follower in another room whistles too. In a room
+  of his home's town that has its own table (the castle town's: "One
+  town", below), he reports that room, at where he is chasing
+  (`c.respond.x`). Elsewhere, if `doorToward()` finds a way home, it raises
+  his home area's alert, and the place reported is the home room's door
+  toward where he is: help learns which way, not where (D-065).
 - `alert-respond` (56) reads `call-completed` before the whistle (57)
   runs, so a whistle calls no other placed guard on its own tick; the
   rows it brings get their own heading (`DRAFT:`).
@@ -532,6 +535,34 @@ read as hearts); a new pip queues one banner
 (`alert:<level>`, the dispatch file's `banners[level-1]`, none on the
 page's first frame). `drawn.alert` `{ level, whistle, bell }` is the record the
 checks read (`bell`: a ringing bell's bar in the room, 0..1, or null).
+
+**One town (the escalating guard response, push 2, `DRAFT:`;
+`docs/decisions-log.md`, "Step 4: one town").** Every castle-town room a
+chase can reach has a table: `castle-street`, `throne-room`, `courtyard`,
+`hall-gallery`, `undercroft` (the cantina has none: its brawl raises
+nothing, `cantina.md`). Each names `town: "castle-town"`, so: `raiseAlert`
+raises the area the report names to one above the town's highest
+(`townLevel()`; the content check makes a town's tables agree on their
+number of rows); that level's row walks into that room; each area still
+cools on its own clock, and the pips (the highest of `world.alerts`) drop
+one bar at a time. `clearOf` (3 in the four new files, 0 in the street's):
+a door or entry with a hero within that many tiles of where someone would
+walk in is not used, and with none left the row waits. The small rooms
+come in by one walk door each (throne room: `to-street`; gallery:
+`to-courtyard`; undercroft: `to-throne-room`, the cellar's doorway being
+an enter doorway); the courtyard from floor entries west of the gate
+(columns 3, 14, 21), because a trike put down beside its opening was
+carried straight out by it. Rows: 1 a guard, 2 two, 3 a guard and the
+armoured guard, 4 two armoured (the courtyard: the trike's driver and an
+armoured guard), 5 two armoured, `keepComing` 12, `relieve` `["guard"]`,
+caps 6 (7 in the courtyard). Who reports in the throne room when you hit
+the king: nobody of the room (the king has no NPC kind); only the watch,
+once it has followed you in. Checks: `step4-tier-town-throne-room`,
+`-courtyard`, `-hall-gallery` (each: a follower's whistle there names
+that room, it goes to one above the town's highest, that level's row
+walks in there; controls: the room's file removed, and the raise without
+the town). No scenario yet reports in the undercroft (scripting a follower
+through the hidden door failed four ways; the secret is an unseen way out).
 
 **The castle street's table:** doors `to-throne-room` and `to-courtyard`,
 cap 8, five rows (the escalating guard response: the alert runs 0 to 5
