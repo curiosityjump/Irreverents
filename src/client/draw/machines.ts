@@ -3,6 +3,7 @@ import { machineLookId } from '../../content/kinds/machines.ts';
 import { machineIdOf, machineOf, machineState } from '../../sim/machines.ts';
 import type { Entity, World } from '../../sim/types.ts';
 import { drawFrame, frameOf, look } from './fx.ts';
+import type { Look } from './fx.ts';
 import { drawSprite } from './sprites.ts';
 import type { Drew } from './sprites.ts';
 
@@ -77,8 +78,12 @@ export function drawMachineBody(g: CanvasRenderingContext2D, world: World, conte
   const top = Math.round(y + box.h - l.h);
   // A crash jolts the picture back a pixel against the way it rolls; the box never moves.
   const jolt = state === 'crash' && world.tick - (e.c.impact?.tick ?? 0) < 4 ? -e.facing : 0;
+  // Guard vehicle push 2b (DRAFT): rolling fast, the picture bobs a pixel on its wheels and kicks up dust behind.
+  const speed = Math.abs(e.vx);
+  const bob = state === 'moving' && speed > BOB_SPEED && Math.floor(world.tick / 4) % 2 === 0 ? -1 : 0;
+  if (state === 'moving' && speed > DUST_SPEED) drawTravelDust(g, world.tick, e.facing < 0 ? left + l.w : left, top + l.h, -e.facing, speed);
   if (alpha < 1) g.globalAlpha = alpha;
-  drawFrame(g, l, f, left + jolt, top, { flip: e.facing < 0 });
+  drawFrame(g, l, f, left + jolt, top + bob, { flip: e.facing < 0, ...(m.livery ? { source: liveried(l, m.livery) } : {}) });
   g.globalAlpha = 1;
   last.push({ id: e.id, look: state, rider: e.player === null ? (e.c.seat?.driver ?? null) : e.id });
   // DRAFT: the picture's top as the cells are cut (the wagon's flag tip, 9 px down its cell;
@@ -92,7 +97,7 @@ export function drawMachineBody(g: CanvasRenderingContext2D, world: World, conte
     if (hero && hb) {
       const [rx, ry] = m.riderAt ?? [Math.round(l.w / 2), Math.round(l.h / 2)];
       const fx = left + jolt + (e.facing < 0 ? l.w - rx : rx);
-      const fy = top + ry;
+      const fy = top + bob + ry;
       // A stand-in body for the drawing only (its own id, so its animation memory is its own): standing still, facing as the machine does.
       const rider: Entity = { ...e, id: `${e.id}~rider`, kind: hero, vx: 0, vy: 0, onGround: true, c: {} };
       const drew = drawSprite(g, world, content, rider, fx - Math.round(hb.w / 2), fy - hb.h, { alpha, tint: null });
@@ -109,6 +114,83 @@ export function drawMachineBody(g: CanvasRenderingContext2D, world: World, conte
   }
   return { state: 'idle', top, head };
 }
+/** DRAFT (guard vehicle push 2b): px/s above which a machine bobs on its wheels, and above which it kicks up dust. */
+const BOB_SPEED = 60;
+const DUST_SPEED = 120;
+const DUST = '#e9e4d4';
+
+/**
+ * Puffs of dust thrown back from a machine's rear wheel while it rolls fast
+ * (`back`: -1 behind a machine facing right). Nothing random: two screens draw
+ * the same. DRAFT: the number, size and reach of the puffs.
+ */
+function drawTravelDust(g: CanvasRenderingContext2D, tick: number, x: number, floor: number, back: number, speed: number): void {
+  const dust = look('fx-dust');
+  const reach = Math.min(1, speed / 400);
+  for (let i = 0; i < 3; i++) {
+    const age = (tick + i * 5) % 15;
+    const k = age / 15;
+    const px = x + back * (4 + k * 22 * reach + i * 2);
+    const rise = Math.round(k * 6);
+    if (dust) {
+      const fr = frameOf(dust, age, false);
+      if (fr < 0) continue;
+      const sc = 0.4 + 0.3 * (1 - k);
+      const dw = Math.round(dust.w * sc);
+      const dh = Math.round(dust.h * sc);
+      drawFrame(g, dust, fr, Math.round(px - dw / 2), Math.round(floor - dh + 1 - rise), { flip: back < 0, w: dw, h: dh });
+    } else {
+      const side = Math.max(1, Math.round(3 * (1 - k)));
+      g.globalAlpha = 0.8 * (1 - k);
+      g.fillStyle = DUST;
+      g.fillRect(Math.round(px) - side, Math.round(floor - side - rise), side * 2, side * 2);
+      g.globalAlpha = 1;
+    }
+  }
+}
+
+const liveries = new Map<string, HTMLCanvasElement>();
+/**
+ * The look's strip with its warm pixels inside the livery's region recoloured
+ * to the livery's colour, keeping each pixel's shading (machine file `livery`;
+ * the guards' trike flies the town guards' blue). Cached per look and livery.
+ */
+function liveried(l: Look, lv: { color: string; region: [number, number, number, number] }): HTMLCanvasElement {
+  const key = `${l.id}|${l.img.src}|${lv.color}|${lv.region.join(',')}`;
+  let c = liveries.get(key);
+  if (c) return c;
+  c = document.createElement('canvas');
+  c.width = l.w * l.frames;
+  c.height = l.h;
+  const t = c.getContext('2d')!;
+  t.imageSmoothingEnabled = false;
+  t.drawImage(l.img, l.x, l.y, c.width, l.h, 0, 0, c.width, l.h);
+  const tr = parseInt(lv.color.slice(1, 3), 16);
+  const tg = parseInt(lv.color.slice(3, 5), 16);
+  const tb = parseInt(lv.color.slice(5, 7), 16);
+  const [rx, ry, rw, rh] = lv.region;
+  for (let f = 0; f < l.frames; f++) {
+    const x0 = f * l.w + rx;
+    const w = Math.min(rw, l.w - rx);
+    const h = Math.min(rh, l.h - ry);
+    if (w <= 0 || h <= 0) continue;
+    const px = t.getImageData(x0, ry, w, h);
+    const d = px.data;
+    for (let i = 0; i < d.length; i += 4) {
+      const r = d[i]!, gg = d[i + 1]!, b = d[i + 2]!;
+      // Warm: red well above blue, and above green (reds and oranges; the gold body is left, being outside the region).
+      if (d[i + 3]! === 0 || r < b + 50 || r < gg + 20) continue;
+      const shade = Math.min(1.5, (0.3 * r + 0.59 * gg + 0.11 * b) / 100);
+      d[i] = Math.min(255, Math.round(tr * shade));
+      d[i + 1] = Math.min(255, Math.round(tg * shade));
+      d[i + 2] = Math.min(255, Math.round(tb * shade));
+    }
+    t.putImageData(px, x0, ry);
+  }
+  liveries.set(key, c);
+  return c;
+}
+
 /** The first painted row of the wagon's cells (tools/art/props, measured 2026-11-24). DRAFT. */
 const HEAD_ROW = 9;
 /** Riders this frame drew as themselves on a crewless machine, for the page's debug record and the e2e. */

@@ -452,3 +452,10 @@ Sent to the second builder of `handoff-prompts/guard-vehicle-courtyard.md` as pa
 - **The rammed guard flies far:** at 350 px/s the trike threw him about 330 px
   east (to the far wall of the check room). His charge after is at a walk (40).
 - Not tried: a guard following a hero into the courtyard and seeing the take there.
+
+**Push 2b (the orchestrator's five look findings).** decisions-log "The guards' trike looks like the guards' and crashes like a crash"; shots `step-20-shots/courtyard-*-2-*` (local server, by touch, 844x390 and 390x664). Notes:
+- **Why the crates looked nudged:** measured, each rammed crate is held for its beat while the trike drives on; then the light one runs into the heavy one, and the trike speeds back up to 420, past all three. `ramLift` 220 throws them up so they are seen in the air (the flying shots); they are still behind the trike within half a second. The stars stay where each crate was met, behind the rider. A held beat on the rider (the real hit-stop) is not done: the rider's page drives its own body, a net change.
+- **Re-timed:** `step20-courtyard-trike-through-the-roadblock` and `-solo-infiltrator` read "on its feet" later (220, 230): the pieces now come down around the hero who jumped out.
+- **Jump-out stands the hero still** (machine-seat): before, the hero kept the trike's speed, caught it up as it coasted and was rammed by it (the empty trike rams at 50). Every `step20-*` is green with it, the wagon's `jump-out-at-speed` included.
+- **Still seen while riding:** a small white up-arrow over the forest's doorway (the doorway's own marker, not the Use button). Left.
+- The rider hides most of the blue flag while riding; parked and out, it shows.

@@ -1,6 +1,6 @@
 {
   "id": "step20-courtyard-trike-solo-infiltrator",
-  "proves": "Step 20, the courtyard's run (DRAFT; solo is never locked out by headcount): the lightest hero, the infiltrator, alone in the real courtyard: Use beside the empty trike gets in, the stick east rams all three crates of the roadblock at speed, and Jump just past it puts the infiltrator out as itself, standing. Control (watched to fail): the Jump press left out, and the infiltrator is still the trike at the end",
+  "proves": "Step 20, the courtyard's run (DRAFT; solo is never locked out by headcount): the lightest hero, the infiltrator, alone in the real courtyard: Use beside the empty trike gets in, the stick east rams all three crates of the roadblock at speed, and Jump just past it puts the infiltrator out as itself, standing. Control (watched to fail): the Jump press left out, and the infiltrator is still the trike at the end Re-timed 2026-11-24 (guard vehicle push 2b, ramLift 220): the rammed pieces now arc up and land around the hero who jumped out, and the empty trike rolling on nudges them, so 'on its feet' is read at tick 230, once the stick is let go; claims kept.",
   "room": "courtyard",
   "placements": true,
   "players": [
@@ -129,7 +129,7 @@
     },
     {
       "fact": "position",
-      "at": 160,
+      "at": 230,
       "player": "a",
       "y": [
         127,

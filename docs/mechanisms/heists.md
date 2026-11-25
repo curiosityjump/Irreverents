@@ -19,7 +19,7 @@ one the page shows on the button.
 
   | order | entry | answer when | the system that acts |
   |---|---|---|---|
-  | 0 | `door` (`use/door.ts`) | the body's middle is in an enter doorway (`enterDoorwayAt`) | `room-doors` (600) takes it through |
+  | 0 | `door` (`use/door.ts`) | the body's middle is in an enter doorway (`enterDoorwayAt`), and the body is not a machine (a rider; DRAFT, guard vehicle push 2b) | `room-doors` (600) takes it through |
   | 90 | `weapon` (`use/weapon.ts`, Step 23) | a played hero with hands, carrying no body, touching a loose weapon (its box widened by `weaponPickupReach`). Word: `pick-up`, or `swap` when the hand is full | `weapon-take` (62) puts it in hand (`docs/mechanisms/weapons.md`) |
   | 100 | `thing` (`use/thing.ts`) | the nearest untaken thing in the room within `npcInteractReach`, its keeper attending it; never while the body is out cold. Word: the thing's deed | `npc-interact` (60) does the deed |
   | 150 | `free` (`use/free.ts`, Step 13) | at a captive's shut cage; at the open cage, the freer, for a few seconds (`swap`) | `recruit-free` (61) holds, frees, swaps (`docs/mechanisms/recruits.md`) |

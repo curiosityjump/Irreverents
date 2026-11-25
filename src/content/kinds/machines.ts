@@ -79,6 +79,18 @@ export interface Machine {
   riderAt?: [number, number];
   /** The cells' first painted row (marks and the plate pointer sit on it). Left out: 9, the ram wagon's. */
   headRow?: number;
+  /**
+   * Guard vehicle push 2b (DRAFT): whose machine it is, painted on. The cells'
+   * warm (red and orange) pixels inside `region` ([x, y, w, h], cell pixels,
+   * facing right) are recoloured to `color`, keeping their shading: the
+   * guards' trike flies the town guards' blue where the art cut it red.
+   * Left out: the cells as cut.
+   */
+  livery?: { color: string; region: [number, number, number, number] };
+  /** Guard vehicle push 2b (DRAFT): px of clear floor between the machine's box and a rider put out beside it (its cells overhang the box). Left out: 0. */
+  outGap?: number;
+  /** Guard vehicle push 2b (DRAFT): extra upward speed (px/s) a ram gives what it meets, so the pieces arc up and away. Left out: 0 (the ram rule's own pop). */
+  ramLift?: number;
 }
 
 /** The states a machine's look shows (src/client/draw/machines.ts). */
@@ -103,7 +115,7 @@ const kind: ContentKind = {
   parse(raw, read) {
     const o = read.object(raw, '');
     if (!o) return null;
-    read.only(o, ['id', 'character', 'speed', 'accel', 'coast', 'brake', 'ramSpeed', 'crashes', 'driverRamSpeed', 'throwRider', 'look', 'looks', 'crew', 'riderAt', 'headRow'], '');
+    read.only(o, ['id', 'character', 'speed', 'accel', 'coast', 'brake', 'ramSpeed', 'crashes', 'driverRamSpeed', 'throwRider', 'look', 'looks', 'crew', 'riderAt', 'headRow', 'livery', 'outGap', 'ramLift'], '');
     const speed = read.object(o.speed, 'speed');
     if (speed) read.only(speed, ['rider', 'driver'], 'speed');
     const out: Machine = {
@@ -141,6 +153,20 @@ const kind: ContentKind = {
       else read.fail('riderAt', 'must be two whole numbers [x, y], each 0 to 256');
     }
     if (o.headRow !== undefined) out.headRow = read.number(o, 'headRow', '', { min: 0, max: 256, integer: true });
+    if (o.livery !== undefined) {
+      const lv = read.object(o.livery, 'livery');
+      if (lv) {
+        read.only(lv, ['color', 'region'], 'livery');
+        const color = read.string(lv, 'color', 'livery');
+        const r = lv.region;
+        const ok = Array.isArray(r) && r.length === 4 && r.every((n) => Number.isInteger(n) && (n as number) >= 0 && (n as number) <= 256);
+        if (!/^#[0-9a-fA-F]{6}$/.test(color)) read.fail('livery.color', `must be a colour "#rrggbb", but is ${JSON.stringify(color)}`);
+        else if (!ok) read.fail('livery.region', 'must be four whole numbers [x, y, w, h], each 0 to 256');
+        else out.livery = { color, region: [r[0], r[1], r[2], r[3]] as [number, number, number, number] };
+      }
+    }
+    if (o.outGap !== undefined) out.outGap = read.number(o, 'outGap', '', { min: 0, max: 64 });
+    if (o.ramLift !== undefined) out.ramLift = read.number(o, 'ramLift', '', { min: 0, max: 1000 });
     return out;
   },
   check(content, fail) {

@@ -1,6 +1,6 @@
 {
   "id": "step20-courtyard-trike-stalled-jump-out",
-  "proves": "Step 20, the courtyard's run (DRAFT; there is always a way out): the grappler gets in the empty trike, drives east through the roadblock and on into the shut gate (column 25) at full speed: a wall crash, one wear, and the trike stands stalled against it with the stick still held. A Jump there puts the grappler out as itself, standing beside the trike. Control (watched to fail): the Jump press left out, and the grappler is still the trike at the end",
+  "proves": "Step 20, the courtyard's run (DRAFT; there is always a way out): the grappler gets in the empty trike, drives east through the roadblock and on into the shut gate (column 25) at full speed: a wall crash, one wear, and the trike stands stalled against it with the stick still held. A Jump there puts the grappler out as itself, standing beside the trike. Control (watched to fail): the Jump press left out, and the grappler is still the trike at the end Push 2b (DRAFT, outGap 14): the hero jumps out standing plainly beside the stalled trike, its box 14 px clear of the trike's (the hero's feet at x 345, the trike's at 384; the cells overhang the box by 5). Control (watched to fail): outGap 0, and the hero's feet are at x 359, touching the trike's overhang.",
   "room": "courtyard",
   "placements": true,
   "players": [
@@ -120,6 +120,24 @@
       "player": "a",
       "at": 240,
       "is": "grappler"
+    },
+    {
+      "fact": "position",
+      "at": 200,
+      "entity": "courtyard-trike",
+      "x": [
+        382,
+        386
+      ]
+    },
+    {
+      "fact": "position",
+      "at": 200,
+      "player": "a",
+      "x": [
+        340,
+        354
+      ]
     }
   ]
 }

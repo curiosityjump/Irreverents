@@ -40,7 +40,7 @@ check room `test-machine` until builder B puts it in the Bandit Camp.
 | `c.seat` on a standing machine | `{ driver }`: a person's entity id, or null for an empty seat. The server's world sets it the first tick it sees the machine: a person (`c.npc`) standing on it is at the reins. He is out of the seat once held, flying, flattened or gone |
 | `src/sim/systems/machine-driven.ts` (605) | keeps the driver in the seat (at the rear, sunk 16 px in: `INTENT:` the 12 px tall infiltrator can Grab him from the ground behind), turns a parked machine the way he faces, and drives by two fixed states: **parked**, or **driving** at a hero he sees (the NPC sight rule), on to where he saw them last, at `speed.driver`. A person's machine rams from `driverRamSpeed` |
 | `src/sim/use/get-in.ts` (order 120) | Use reads **Get in** beside a standing machine with an empty seat that is not a wreck (`content/prompts.json`, `get-in`) |
-| `src/sim/systems/machine-seat.ts` (120) | **in:** the hero's body becomes the machine (a `become` effect, so their own page drives it with no lag); the standing machine leaves the world while ridden. **Out:** a fresh Jump at any moment, a blow at or above `throwRider` from someone nobody plays (thrown, flying), the wreck, or the rider's body gone or no longer the machine (a reconnect, a kept game loaded). Out, they are the hero they went in as, beside it; the machine stands again where it was, rolling on |
+| `src/sim/systems/machine-seat.ts` (120) | **in:** the hero's body becomes the machine (a `become` effect, so their own page drives it with no lag); the standing machine leaves the world while ridden. **Out:** a fresh Jump at any moment, a blow at or above `throwRider` from someone nobody plays (thrown, flying), the wreck, or the rider's body gone or no longer the machine (a reconnect, a kept game loaded). Out, they are the hero they went in as, beside it (`outGap` px clear of its box), standing still unless thrown (push 2b: carrying its speed they ran on into it); the machine stands again where it was, rolling on |
 | `World.machines[id]` `rider`, `hero`, `kind`, `at` | while ridden: the rider's entity id, the hero they went in as, the machine's kind, where it last was |
 | `memberTaken` (`src/sim/party.ts`) | also counts a rider's hero: nobody can switch into it |
 | events | `machine-taken` `{ machine, by, player, hero }`, `machine-left` `{ machine, by, player, how }` (`how`: jumped, thrown, wrecked, gone) |
@@ -245,6 +245,31 @@ the machine then stands in the gallery; nothing is lost).
 0) stops against the room's edge (a wall crash) and stays in the courtyard;
 Use and a push up while riding in the forest's doorway took nobody through
 (the Use button reads GO IN there while riding). Not tried: every doorway.
+
+**How it looks (push 2b, the orchestrator's look at push 1's shots).** All
+`DRAFT:`, decisions-log "The guards' trike looks like the guards' and crashes
+like a crash":
+- **The crash:** `ramLift` 220 (machine file) adds upward speed to whatever the
+  trike rams, on top of the speed its held beat hands back, so the roadblock's
+  pieces arc up and away: the light crates are in the air over the rider
+  (`step20-courtyard-trike-through-the-roadblock`, control `ramLift` 0). Not
+  done: a held beat on the rider too (the rider's own page drives its body),
+  so the impact stars stay where the crate was met and the trike rolls on past
+  them.
+- **The watch's machine:** `livery` repaints the cells' warm pixels in a region
+  (the red flag) in the guards' royal blue (#3c62d0, the blue of their helmets
+  and tabards), shaded by each pixel's own brightness (`liveried()` in
+  `draw/machines.ts`, cached per look).
+- **No GO IN while riding:** the Use arbiter's door entry declines a machine's
+  body (`use/door.ts`), so Use reads nothing under a rider and a rider's Use
+  takes no doorway; the stick up still asks a doorway as for any body.
+- **Moving:** above 120 px/s three puffs of `fx-dust` trail from the rear
+  wheel, and above 60 the picture (and a drawn rider) bobs a pixel every
+  four ticks.
+- **Out:** `outGap` 14 stands the hero clear of the cells' overhang (and of
+  their own sprite's width), and a Jump-out leaves them still
+  (`step20-courtyard-trike-stalled-jump-out`, control `outGap` 0).
+Shots: `docs/plan/step-20-shots/courtyard-*-2-*`.
 
 **Stealing it is seen (push 2).** Two `events` rows in
 `content/rules/expectations.json` make the trike's two acts deeds the NPC

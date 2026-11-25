@@ -1,6 +1,6 @@
 {
   "id": "step20-courtyard-trike-through-the-roadblock",
-  "proves": "Step 20, the courtyard's run (DRAFT; docs/decisions-log.md 'Step 20: the guards' trike'): in the real courtyard with its placements, the grappler at spawn 1 (standing on the trike) taps Use beside the guards' empty patrol trike and is in it (riding as the trike, the hero it went in as kept); the stick held east builds speed over the 128 px of flat run and it rams the guards' roadblock at speed: the light crate, the heavy crate and the last light crate each launched east, and the brawler, a friend standing at the roadblock, launched too (shoved, never worn). A Jump just past the roadblock, still rolling, puts the grappler out as itself, on its feet, and the trike is never wrecked. Control (watched to fail): the trike's ramSpeed set to 500, above any speed the run reaches: nothing is rammed and every crate stays where it stood",
+  "proves": "Step 20, the courtyard's run (DRAFT; docs/decisions-log.md 'Step 20: the guards' trike'): in the real courtyard with its placements, the grappler at spawn 1 (standing on the trike) taps Use beside the guards' empty patrol trike and is in it (riding as the trike, the hero it went in as kept); the stick held east builds speed over the 128 px of flat run and it rams the guards' roadblock at speed: the light crate, the heavy crate and the last light crate each launched east, and the brawler, a friend standing at the roadblock, launched too (shoved, never worn). A Jump just past the roadblock, still rolling, puts the grappler out as itself, on its feet, and the trike is never wrecked. Control (watched to fail): the trike's ramSpeed set to 500, above any speed the run reaches: nothing is rammed and every crate stays where it stood Re-timed 2026-11-24 (guard vehicle push 2b, ramLift 220): the rammed pieces now arc up and land around the hero who jumped out, and the empty trike rolling on nudges them, so 'on its feet' is read at tick 220, once the stick is let go; claims kept. Push 2b (DRAFT, ramLift 220): the rammed pieces arc up as they go: at tick 60 the two light crates are in the air, their feet more than a crate's height over the floor (y 128). Control (watched to fail): ramLift 0, and they skim the floor (feet at y 121 and 126).",
   "room": "courtyard",
   "placements": true,
   "players": [
@@ -199,7 +199,7 @@
     },
     {
       "fact": "position",
-      "at": 120,
+      "at": 220,
       "player": "a",
       "y": [
         127,
@@ -219,6 +219,24 @@
       "count": [
         0,
         0
+      ]
+    },
+    {
+      "fact": "position",
+      "at": 60,
+      "entity": "courtyard-roadblock-1",
+      "y": [
+        0,
+        100
+      ]
+    },
+    {
+      "fact": "position",
+      "at": 60,
+      "entity": "courtyard-roadblock-3",
+      "y": [
+        0,
+        100
       ]
     }
   ]

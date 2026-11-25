@@ -17,11 +17,12 @@ function insertSorted(entities: Entity[], e: Entity): void {
 }
 
 /** Where a hero of box `hb` stands beside machine body `e` (box `mb`): behind it, else in front, else on top, else where the machine is. */
-function besideSpot(ctx: StepContext, e: Entity, mb: { w: number; h: number }, hb: { w: number; h: number }): { x: number; y: number } {
+function besideSpot(ctx: StepContext, e: Entity, mb: { w: number; h: number }, hb: { w: number; h: number }, gap = 0): { x: number; y: number } {
   const room = ctx.content.rooms[e.room];
   const floor = e.y + mb.h - hb.h;
-  const behind = e.facing > 0 ? e.x - hb.w : e.x + mb.w;
-  const ahead = e.facing > 0 ? e.x + mb.w : e.x - hb.w;
+  // Guard vehicle push 2b (DRAFT): `gap` (the machine file's `outGap`) clears cells that overhang the box, so the hero stands plainly beside it.
+  const behind = e.facing > 0 ? e.x - hb.w - gap : e.x + mb.w + gap;
+  const ahead = e.facing > 0 ? e.x + mb.w + gap : e.x - hb.w - gap;
   const tries = [
     { x: behind, y: floor },
     { x: ahead, y: floor },
@@ -178,8 +179,11 @@ const system: System = {
       delete s.rider;
       delete s.hero;
       if (hero && hb) {
-        const spot = besideSpot(ctx, e, mb, hb);
+        const spot = besideSpot(ctx, e, mb, hb, def.outGap ?? 0);
         emitEffect(ctx, e, { kind: 'become', to: hero, x: spot.x, y: spot.y });
+        // DRAFT (guard vehicle push 2b): out by Jump or by the wreck, the hero stands where they were put,
+        // still: carrying the machine's speed, they ran on into it as it coasted and it rammed them.
+        if (how !== 'thrown') emitEffect(ctx, e, { kind: 'push', vx: 0, vy: 0 });
         if (how === 'thrown' && by) {
           const away = e.x + mb.w / 2 >= by.x ? 1 : -1;
           // The blow's own held beat would hand back the blow's (small) speed on the machine's weight when it ends: the throw replaces it.
