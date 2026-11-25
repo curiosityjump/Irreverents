@@ -89,6 +89,8 @@ the camp's three files.
 
 ## Briefs
 
+- `hidden-recruit.md`: ce3f8bf, 09708bd, d11f0a3, ca27ab3; eight `hidden-*` facts green. Reviewed by orchestrator `session_017WiGzJYBCYJ85Bj95B7ZLw`, 2026-11-25 04:35 UTC, by a full re-run in a clean worktree at 8f5827d (build, check, gates 6 of 6 green; e2e 181 ok, one red, `suplex-again`, not this brief's) and one blind look (`docs/plan/step-8.md`, last section); diff not read. Brief deleted. Left by the look: the shown stand-in name "Graybox Hauler", a salmon square for her face with no hearts, drawn caged after joining, not findable in the tavern shot; the forest boulder punched onto its plate by the grappler alone (left as it is).
+
 - `handoff-prompts/loop-rescue.md` (written 2026-11-23 19:40 UTC by the
   core-loops re-plan). **Spawn its builder when the Use arbiter
   (`handoff-prompts/loop-heist.md`, push 1) is on `main`.** Never run it

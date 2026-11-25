@@ -116,6 +116,8 @@ machine.
 
 ## Briefs
 
+- `guard-vehicle-courtyard.md`: 186b8da, c849f6f, 8f5827d (push 2b; its push 3 moved to the escalating response); `guard-machine-get-in`, `-drive`, `-out` green. Reviewed by orchestrator `session_017WiGzJYBCYJ85Bj95B7ZLw`, 2026-11-25 04:35 UTC, by a full re-run in a clean worktree at 8f5827d (build, check, gates 6 of 6 green; e2e 181 ok, one red, `suplex-again`, not this brief's) and one blind look (`docs/plan/step-8.md`, last section); diff not read. Brief deleted. Left by the look: the rider hides the trike, no witness reaction drawn, the doorway arrow on the hero's face, impact stars behind the trike.
+
 None yet. **Waits** for a free slot after `handoff-prompts/loop-heist.md`
 push 1 (the Use list) and `handoff-prompts/loop-waves.md` push 1 (waves that
 arrive). The orchestrator writes its brief from this file and
