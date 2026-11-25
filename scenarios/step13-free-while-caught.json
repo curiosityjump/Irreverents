@@ -1,0 +1,246 @@
+{
+  "id": "step13-free-while-caught",
+  "proves": "Step 13's rescue while caught (docs/plan/step-13.md, the scenario it named and never built), in the real camp with placements and a new game's roster: a friend (b, the infiltrator) walks in at the door into the lookout's view; the lookout's call completes (3 s at the horn) and the first wave's fighter walks in at an entry east of the sighting and makes for b. Meanwhile the grappler (a) takes the long ledge unseen, drops off its east end and walks west to the cage; the second fighter turns, sees a and comes at him; a grabs him as he arrives and throws him west, where he takes the first fighter down with him; a holds Use 2.2 s at the cage, unbroken, while the wave's fighter is still in the camp: `recruited`, the skirmisher unlocked, no blow on a from the grab to the end. Control, its own run (watched to fail the other way): step13-free-while-caught-not-dealt-with, the same without the grab and throw: he hits a, the hold breaks, nobody is freed",
+  "room": "outpost",
+  "placements": true,
+  "world": {
+    "roster": [
+      "grappler",
+      "infiltrator",
+      "flyer",
+      "brawler"
+    ]
+  },
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    },
+    {
+      "id": "b",
+      "character": "infiltrator",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 470,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 20,
+      "to": 40,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 60,
+      "to": 80,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "b",
+      "from": 0,
+      "to": 90,
+      "x": 1
+    },
+    {
+      "player": "b",
+      "from": 20,
+      "to": 40,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 500,
+      "to": 600,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 688,
+      "to": 691,
+      "hold": [
+        "grab"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 700,
+      "to": 703,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 712,
+      "to": 860,
+      "hold": [
+        "interact"
+      ]
+    }
+  ],
+  "ticks": 900,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "outpost-call-completed",
+      "where": {
+        "by": "camp-lookout",
+        "outpost": "outpost"
+      },
+      "between": [
+        0,
+        300
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "outpost-wave",
+      "where": {
+        "wave": 0,
+        "row": 0
+      },
+      "between": [
+        0,
+        300
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "grabbed",
+      "where": {
+        "by": "p:a",
+        "target": "camp-fighter-2"
+      },
+      "between": [
+        680,
+        700
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "thrown",
+      "where": {
+        "by": "p:a",
+        "target": "camp-fighter-2"
+      },
+      "between": [
+        695,
+        710
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "recruit-hold",
+      "where": {
+        "recruit": "camp-captive",
+        "by": "p:a"
+      },
+      "between": [
+        705,
+        720
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "recruit-let-go",
+      "where": {
+        "recruit": "camp-captive"
+      },
+      "between": [
+        0,
+        900
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "hit",
+      "where": {
+        "target": "p:a"
+      },
+      "between": [
+        680,
+        900
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "recruited",
+      "where": {
+        "recruit": "camp-captive",
+        "character": "skirmisher",
+        "by": "p:a",
+        "added": true
+      },
+      "between": [
+        835,
+        850
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "people-at",
+      "room": "outpost",
+      "at": 843,
+      "ids": "outpost:w0:",
+      "x": [
+        0,
+        1408
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "recruit",
+      "id": "camp-captive",
+      "at": 900,
+      "open": true,
+      "unlocked": true
+    }
+  ]
+}

@@ -1,0 +1,164 @@
+{
+  "id": "step13-free-while-caught-not-dealt-with",
+  "proves": "the control for step13-free-while-caught, as its own run: the same call, the same way in and the same hold, but a does nothing about the second fighter who comes at the cage: he hits a, the hold breaks (recruit-let-go) and nobody is freed; caught and ignoring him, the rescue becomes a fight. Watched to fail the other way: with the grab and throw put back, no hit lands and the hold completes",
+  "room": "outpost",
+  "placements": true,
+  "world": {
+    "roster": [
+      "grappler",
+      "infiltrator",
+      "flyer",
+      "brawler"
+    ]
+  },
+  "players": [
+    {
+      "id": "a",
+      "character": "grappler",
+      "spawn": 0
+    },
+    {
+      "id": "b",
+      "character": "infiltrator",
+      "spawn": 0
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 470,
+      "x": 1
+    },
+    {
+      "player": "a",
+      "from": 20,
+      "to": 40,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 60,
+      "to": 80,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "b",
+      "from": 0,
+      "to": 90,
+      "x": 1
+    },
+    {
+      "player": "b",
+      "from": 20,
+      "to": 40,
+      "hold": [
+        "jump"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 500,
+      "to": 600,
+      "x": -1
+    },
+    {
+      "player": "a",
+      "from": 712,
+      "to": 860,
+      "hold": [
+        "interact"
+      ]
+    }
+  ],
+  "ticks": 900,
+  "expect": [
+    {
+      "fact": "event-where",
+      "event": "outpost-call-completed",
+      "where": {
+        "by": "camp-lookout",
+        "outpost": "outpost"
+      },
+      "between": [
+        0,
+        300
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "outpost-wave",
+      "where": {
+        "wave": 0,
+        "row": 0
+      },
+      "between": [
+        0,
+        300
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "hit",
+      "where": {
+        "by": "camp-fighter-2",
+        "target": "p:a"
+      },
+      "between": [
+        680,
+        860
+      ],
+      "count": [
+        1,
+        100
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "recruit-let-go",
+      "where": {
+        "recruit": "camp-captive",
+        "by": "p:a"
+      },
+      "between": [
+        705,
+        860
+      ],
+      "count": [
+        1,
+        100
+      ]
+    },
+    {
+      "fact": "event",
+      "event": "recruited",
+      "between": [
+        0,
+        900
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "recruit",
+      "id": "camp-captive",
+      "at": 900,
+      "open": false,
+      "unlocked": false
+    }
+  ]
+}
