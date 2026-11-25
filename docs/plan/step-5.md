@@ -1086,3 +1086,15 @@ Builder session `session_017WiGzJrwonyg1a3d9hvyg4`, 2026-11-24.
 - **Changed for the player:** during a blow's beat and the knock the own
   hero cannot steer (the server already held it so). Not verified: a real
   iPhone; how it feels.
+
+### Full runs by orchestrator `session_017WiGzJYBCYJ85Bj95B7ZLw`, 2026-11-25 (clean detached worktree, diffs not read)
+
+| At | Build, check, gates | e2e | Red |
+|---|---|---|---|
+| 561c505 | green, 6 of 6 | 176 ok, 1 red | `row-both-sides` (fixed after, 371879d) |
+| 8f5827d | green, 6 of 6 | 181 ok, 1 red | `suplex-again`: after Grab the hero holds `throne-crate-1`, not the king |
+| cf10923 | green, 6 of 6 | 181 ok, 2 red | `beaten-gone` (313 attack taps in 150 s, nobody defeated), `clash-street` (the guard knocked with the hero 61 px off, wants 64) |
+| cf10923, e2e alone again | | 183 ok, 0 red | none |
+
+So `beaten-gone`, `clash-street` and `suplex-again` are each red about one full run in three or four and green on a repeat at the same commit: intermittent, causes not found (`suplex-again`'s names what was held). Not re-run: 7929998 (the escalation's push 3).
+
