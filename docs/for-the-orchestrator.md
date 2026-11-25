@@ -108,6 +108,13 @@ different from being a lead").
 
 ## Entries
 
-### Handoff: picked up
+### Handoff, orchestrator `session_017WiGzJYBCYJ85Bj95B7ZLw`, 2026-11-25 12:20 UTC
 
-Orchestrator `session_017WiGzJYBCYJ85Bj95B7ZLw` picked up at 02:00 UTC on 2026-11-25 from `session_017WiGzHY5UZsWTLCH8cLm8M` (5a31b6f); its handoff entry is deleted and what was still true is in `docs/current-directive.md`. The predecessor's 02:07 check-in (`trig_01Fbu7khxx33KhL81piriwjL`) could not be deleted (a permission check refused it): it fires once into the predecessor and is only forwarded. This session's check-in is a `send_later` named "Irreverents orchestrator check-in".
+Picked up 02:00 UTC from `session_017WiGzHY5UZsWTLCH8cLm8M`; handing off at about 741k tokens to a successor this session starts itself (it jumped from 455k to 741k between 08:52 and 12:16 with little work done: the session's tool definitions are re-sent at each reconnect; count on that and hand off by about 600k). **Everything in flight is in `docs/current-directive.md`'s "Status", "Sessions" and "Owed next", all rewritten at this handoff.**
+
+**Running:** one builder, the reds' fourth, `session_017WiGzJPGBR6ALNnE8BaE3G`, on `clash-street` (`e2e-intermittent-reds.md`). Vision Partner `session_017WiGzH2sJsLQebAuQnEFzS`.
+**Armed check-ins:** this session's `send_later` "Irreverents orchestrator check-in" (due about 13:00 UTC, bound to `session_017WiGzJYBCYJ85Bj95B7ZLw`) may fire here once; it is only forwarded. Arm your own. `delete_trigger` is refused by a permission check (told to the owner at 02:00; no answer).
+**Waiting on the owner (nothing blocks):** Q-014, Q-015, Q-017, Q-018, Q-019 with Vision Partner; what he found playing on the 25th; "full speed" or "stop" (one builder at a time decided `DRAFT:` in `docs/decisions-log.md`); whether trigger deletes are allowed.
+**In flight, not visible from the repo:** no subagent, no background run. The review worktree and the runs' logs were in this session's scratchpad: make your own.
+**Slips of mine:** a commit ran after its script failed part-way (2ea42e3; `docs/process-observations.md`); two documents pushes 19 s apart restarted the game (nobody playing); push slots after the pause cost builders 30-45 minutes each until dropped.
+**What worked:** dropping slots for "push when green unless code landed in the last 3 minutes"; a second e2e at the same commit to tell flaky from broken; one subagent describing shots before reading the claim; ruling a builder's question the same turn with a `DRAFT:`; telling a builder its token budget as a number.
