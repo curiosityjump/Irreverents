@@ -1,0 +1,380 @@
+{
+  "id": "step4-tier-away-at-five-flyer",
+  "gate": "D",
+  "proves": "There is always a way out at level 5, solo, for the flyer (CLAUDE.md: solo is never locked out; getting caught opens play; brief alert-starts-at-a-level, push 3). The castle street's alarm is seeded at 4 (`alerts`: world construction; it raises nothing and puts nobody on call), the street's people placed as built. The flyer punches the street's guard westward until he whistles (a completed call at 539: the street goes 4 to 5 and level 5's row, two armoured guards, walks in on the call); then flies east and leaves by the courtyard door (934). Nobody strikes him after it; the street's alarm cools one level at a time (five drops) and is over (0) by 6844. Nothing is raised before the call. Control (watched to fail): the same with the dash west instead: an armoured guard of row 5 follows him into the throne room and strikes him there 26 times, and the street never cools (5 to the end).",
+  "room": "castle-street",
+  "placements": true,
+  "alerts": [
+    {
+      "area": "castle-street",
+      "level": 4,
+      "at": [
+        40,
+        10
+      ]
+    }
+  ],
+  "players": [
+    {
+      "id": "a",
+      "character": "flyer",
+      "tile": [
+        44,
+        10
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "player": "a",
+      "from": 0,
+      "to": 2,
+      "x": -1.0
+    },
+    {
+      "player": "a",
+      "from": 3,
+      "to": 7,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 8,
+      "to": 33,
+      "x": -1.0
+    },
+    {
+      "player": "a",
+      "from": 51,
+      "to": 55,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 56,
+      "to": 81,
+      "x": -1.0
+    },
+    {
+      "player": "a",
+      "from": 99,
+      "to": 103,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 104,
+      "to": 129,
+      "x": -1.0
+    },
+    {
+      "player": "a",
+      "from": 147,
+      "to": 151,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 152,
+      "to": 177,
+      "x": -1.0
+    },
+    {
+      "player": "a",
+      "from": 195,
+      "to": 199,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 200,
+      "to": 225,
+      "x": -1.0
+    },
+    {
+      "player": "a",
+      "from": 243,
+      "to": 247,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 248,
+      "to": 273,
+      "x": -1.0
+    },
+    {
+      "player": "a",
+      "from": 291,
+      "to": 295,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 296,
+      "to": 321,
+      "x": -1.0
+    },
+    {
+      "player": "a",
+      "from": 339,
+      "to": 343,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 344,
+      "to": 369,
+      "x": -1.0
+    },
+    {
+      "player": "a",
+      "from": 387,
+      "to": 391,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 392,
+      "to": 417,
+      "x": -1.0
+    },
+    {
+      "player": "a",
+      "from": 435,
+      "to": 439,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 440,
+      "to": 465,
+      "x": -1.0
+    },
+    {
+      "player": "a",
+      "from": 483,
+      "to": 487,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 488,
+      "to": 513,
+      "x": -1.0
+    },
+    {
+      "player": "a",
+      "from": 531,
+      "to": 535,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 536,
+      "to": 561,
+      "x": -1.0
+    },
+    {
+      "player": "a",
+      "from": 579,
+      "to": 583,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 584,
+      "to": 609,
+      "x": -1.0
+    },
+    {
+      "player": "a",
+      "from": 627,
+      "to": 631,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 632,
+      "to": 657,
+      "x": -1.0
+    },
+    {
+      "player": "a",
+      "from": 675,
+      "to": 679,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 680,
+      "to": 705,
+      "x": -1.0
+    },
+    {
+      "player": "a",
+      "from": 723,
+      "to": 727,
+      "hold": [
+        "attack"
+      ]
+    },
+    {
+      "player": "a",
+      "from": 728,
+      "to": 753,
+      "x": -1.0
+    },
+    {
+      "player": "a",
+      "from": 599,
+      "to": 6844,
+      "x": 1.0
+    }
+  ],
+  "ticks": 6844,
+  "expect": [
+    {
+      "fact": "alert",
+      "area": "castle-street",
+      "at": 0,
+      "is": 4
+    },
+    {
+      "fact": "event-where",
+      "event": "alert-changed",
+      "where": {
+        "area": "castle-street"
+      },
+      "between": [
+        0,
+        538
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "call-completed",
+      "where": {
+        "area": "castle-street",
+        "by": "street-guard"
+      },
+      "between": [
+        539,
+        539
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "alert",
+      "area": "castle-street",
+      "at": 540,
+      "is": 5
+    },
+    {
+      "fact": "event-where",
+      "event": "dispatch-arrived",
+      "where": {
+        "area": "castle-street",
+        "row": 4
+      },
+      "between": [
+        539,
+        539
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "changed-room",
+      "where": {
+        "entity": "p:a",
+        "fromRoom": "castle-street",
+        "fromDoor": "to-courtyard"
+      },
+      "between": [
+        934,
+        934
+      ],
+      "count": [
+        1,
+        1
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "hit",
+      "where": {
+        "target": "p:a"
+      },
+      "between": [
+        934,
+        6844
+      ],
+      "count": [
+        0,
+        0
+      ]
+    },
+    {
+      "fact": "event-where",
+      "event": "alert-changed",
+      "where": {
+        "area": "castle-street"
+      },
+      "between": [
+        540,
+        6844
+      ],
+      "count": [
+        5,
+        5
+      ]
+    },
+    {
+      "fact": "alert",
+      "area": "castle-street",
+      "at": 6844,
+      "is": 0
+    }
+  ]
+}

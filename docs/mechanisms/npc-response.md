@@ -610,9 +610,14 @@ the shots, `docs/plan/step-4-shots/escalation/`; control
 `-both-doors`, `-cap-holds`, `-cools-and-leaves`, `-raging-guard-whistles`,
 `-pips-cross-a-door` (the `alert` fact's `"shown": true` reads
 `world.alerts`), and
-`-away-at-the-most-<hero>` once per roster hero (solo, the street at its
+`-away-at-the-most-<hero>` for five roster heroes (solo, the street at its
 cap: out by the west door, no blow after, cooled to 0, every arrival
-gone). The real-server check `scripts/checks/step4-tiers.ts` (two
+gone; none yet for the hauler), `-away-at-five-<hero>` for all six (the
+grappler's fights up from 0; the other five start from the street seeded
+at 4 by the scenario field `alerts`, make one real call to reach 5 with
+its row, then leave by a door: no blow after, five drops to 0), and
+`-courtyard-level4-trike` (the street seeded at 3, a whistle in the
+courtyard takes it 0 to 4: the trike and its driver walk in). The real-server check `scripts/checks/step4-tiers.ts` (two
 connections: A in the courtyard still shows the street at 2, B in the
 street has the arrivals), `scripts/checks/step4-out-and-back.ts` (a raging
 guard put in the courtyard walks back and whistles) and the phone e2e fact
