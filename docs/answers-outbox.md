@@ -31,8 +31,3 @@ entry: "first vision written; no plan exists yet", naming the sections.
 ## Entries
 
 *(empty)*
-
-### Vision · NPC response (escalating guard response now)
-- **Answer:** "I want the escalating guard response implemented now" (relayed by the orchestrator, first-hand to it), quoted; tier count and contents left to the owner as Q-019, with the brief's five levels as the recommendation.
-- **Recorded in:** `docs/vision.md` "NPC response: three modes, signals, pursuit", this commit
-- **Action for:** orchestrator (vision-level): none beyond the brief already running
