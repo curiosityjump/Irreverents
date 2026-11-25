@@ -1166,6 +1166,7 @@ Builder session `session_017WiGzJrwonyg1a3d9hvyg4`, 2026-11-24.
 | cf10923 | green, 6 of 6 | 181 ok, 2 red | `beaten-gone` (313 attack taps in 150 s, nobody defeated), `clash-street` (the guard knocked with the hero 61 px off, wants 64) |
 | cf10923, e2e alone again | | 183 ok, 0 red | none |
 | 18bf07b (covers 7929998, the escalation's push 3) | green, 6 of 6 | 183 ok, 1 red | `clash-street` |
+| 1fcb29c (covers 22c832b Grab takes a person, 7d7f15f the lookout ruling, 1fcb29c `clash-street`; orchestrator `session_017WiGzGgiMLCwNj9zptZqBz`, 2026-11-25 13:26-14:10 UTC, clean worktree) | green, 6 of 6 | 183 ok, 1 red | `beaten-gone` (303 attack taps in 150 s, nobody drawn going; the known intermittent, not touched by the fourth builder) |
 
 So `beaten-gone`, `clash-street` and `suplex-again` are each red about one full run in three or four and green on a repeat at the same commit: intermittent, causes not found (`suplex-again`'s names what was held). Not re-run: 7929998 (the escalation's push 3).
 
